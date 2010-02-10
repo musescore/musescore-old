@@ -584,4 +584,53 @@ int transposeTpc(int tpc, int interval, TransposeDirection dir)
       return step2tpc(step, alter);
       }
 
+static int _majorVersion, _minorVersion, _updateVersion;
 
+//---------------------------------------------------------
+//   version
+//---------------------------------------------------------
+
+int version()
+      {
+      QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
+      if (re.indexIn(VERSION) != -1) {
+            QStringList sl = re.capturedTexts();
+            if (sl.size() == 4) {
+                  _majorVersion = sl[1].toInt();
+                  _minorVersion = sl[2].toInt();
+                  _updateVersion = sl[3].toInt();
+                  return _majorVersion * 10000 + _minorVersion * 100 + _updateVersion;
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   majorVersion
+//---------------------------------------------------------
+
+int majorVersion()
+      {
+      version();
+      return _majorVersion;
+      }
+
+//---------------------------------------------------------
+//   minorVersion
+//---------------------------------------------------------
+
+int minorVersion()
+      {
+      version();
+      return _minorVersion;
+      }
+
+//---------------------------------------------------------
+//   updateVersion
+//---------------------------------------------------------
+
+int updateVersion()
+      {
+      version();
+      return _updateVersion;
+      }

@@ -1,9 +1,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id$
+//  $Id:$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,45 +18,26 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SCNOTE_H__
-#define __SCNOTE_H__
-
-class Note;
-class Score;
-typedef Note* NotePtr;
+#ifndef __SCELEMENT_H__
+#define __SCELEMENT_H__
 
 //---------------------------------------------------------
-//   ScNotePrototype
+//   ScElementPrototype
 //---------------------------------------------------------
 
-class ScNotePrototype : public QObject, public QScriptable
+class ScElementPrototype : public QObject, public QScriptable
       {
       Q_OBJECT
-      Q_PROPERTY(QString name   READ name)
-      Q_PROPERTY(int     pitch  READ pitch  WRITE setPitch  SCRIPTABLE true)
-      Q_PROPERTY(double  tuning READ tuning WRITE setTuning SCRIPTABLE true)
-      Q_PROPERTY(QColor  color  READ color  WRITE setColor  SCRIPTABLE true)
-
-      Note* thisNote() const;
+      Q_PROPERTY(bool visible READ visible WRITE setVisible SCRIPTABLE true)
 
    public slots:
-      void setColor(const QColor&);
-      void setTuning(double);
-      void setPitch(int);
-
-      QString name()   const;
-      int     pitch()  const;
-      double  tuning() const;
-      QColor  color()  const;
+      bool visible() const;
+      void setVisible(bool v);
 
    public:
-      ScNotePrototype(QObject *parent = 0) : QObject(parent) {}
-      ~ScNotePrototype() {}
+      ScElementPrototype(QObject *parent = 0) : QObject(parent) {}
+      ~ScElementPrototype() {}
       };
 
-Q_DECLARE_METATYPE(NotePtr)
-Q_DECLARE_METATYPE(NotePtr*)
-
 #endif
-
 

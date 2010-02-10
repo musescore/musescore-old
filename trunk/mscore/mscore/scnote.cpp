@@ -32,26 +32,25 @@
 Note* ScNotePrototype::thisNote() const
       {
       NotePtr* np = qscriptvalue_cast<NotePtr*>(thisObject());
-printf("===========ScNotePrototype::thisNote %p\n", np);
       if (np)
             return *np;
       return 0;
       }
 
 //---------------------------------------------------------
-//   noteName
+//   name
 //---------------------------------------------------------
 
-QString ScNotePrototype::getName() const
+QString ScNotePrototype::name() const
       {
       return pitch2string(thisNote()->pitch());
       }
 
 //---------------------------------------------------------
-//   getPitch
+//   pitch
 //---------------------------------------------------------
 
-int ScNotePrototype::getPitch() const
+int ScNotePrototype::pitch() const
       {
       return thisNote()->pitch();
       }
@@ -69,10 +68,10 @@ printf("ScNotePrototype::setPitch %d\n", v);
       }
 
 //---------------------------------------------------------
-//   getTuning
+//   tuning
 //---------------------------------------------------------
 
-double ScNotePrototype::getTuning() const
+double ScNotePrototype::tuning() const
       {
       return thisNote()->tuning();
       }
@@ -87,10 +86,10 @@ void ScNotePrototype::setTuning(double v)
       }
 
 //---------------------------------------------------------
-//   getColor
+//   color
 //---------------------------------------------------------
 
-QColor ScNotePrototype::getColor() const
+QColor ScNotePrototype::color() const
       {
       return thisNote()->color();
       }
@@ -103,7 +102,6 @@ void ScNotePrototype::setColor(const QColor& c)
       {
       Note* note = thisNote();
       Score* score = note->score();
-printf("Note: setColor score %p %d %d %d\n", score, c.red(), c.green(), c.blue());
       if (score)
             score->undo()->push(new ChangeColor(note, c));
       else

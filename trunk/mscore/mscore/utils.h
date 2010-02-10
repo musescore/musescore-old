@@ -69,5 +69,10 @@ extern Interval intervalList[26];
 extern int searchInterval(int steps, int semitones);
 extern int chromatic2diatonic(int val);
 
+extern int version();
+extern int majorVersion();
+extern int minorVersion();
+extern int updateVersion();
+
 #endif
 
