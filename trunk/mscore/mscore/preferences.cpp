@@ -48,10 +48,10 @@ extern bool useFactorySettings;
  //---------------------------------------------------------
  struct PeriodItem {
        int time;
-       QString text;
-       PeriodItem(const int t, const char* txt) {
+       const char* text;
+       PeriodItem(const int t, const  char* txt) {
              time = t;
-             text = QString::fromUtf8(txt);
+             text = txt;
              }
        };
 
@@ -559,15 +559,12 @@ void PreferenceDialog::updateValues(Preferences* p)
       //Update
       checkUpdateStartup->clear();
       int curPeriodIdx = 0;
-      printf("checkUpdateStartup %d\n",  p->checkUpdateStartup);
 
-      printf("checkUpdateStartup %d\n",  p->checkUpdateStartup);
       for(unsigned i = 0; i < sizeof(updatePeriods)/sizeof(*updatePeriods); ++i) {
-            checkUpdateStartup->addItem(updatePeriods[i].text, i);
+            checkUpdateStartup->addItem(qApp->translate("preferences", updatePeriods[i].text), i);
             if (updatePeriods[i].time == p->checkUpdateStartup)
                   curPeriodIdx = i;
             }
-      printf("curPeriodIdx %d\n",  curPeriodIdx);
       checkUpdateStartup->setCurrentIndex(curPeriodIdx);
 
       if (seq->isRunning()) {
