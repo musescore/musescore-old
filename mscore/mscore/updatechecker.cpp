@@ -34,6 +34,11 @@ UpdateChecker::~UpdateChecker()
 
 void UpdateChecker::onRequestFinished(QNetworkReply* reply)
 {
+    if(reply->error() != QNetworkReply::NoError){
+        printf("Error while checking update [%s]\n", reply->errorString().toAscii().constData());
+        return;
+    }
+        
     QSettings s;
     s.beginGroup("Update");
     s.setValue("lastUpdateDate", QDateTime::currentDateTime());
