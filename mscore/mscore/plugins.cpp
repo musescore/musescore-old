@@ -34,6 +34,7 @@
 #include "scmeasure.h"
 #include "chord.h"
 #include "note.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   registerPlugin
@@ -203,10 +204,10 @@ static QScriptValue chordConstructor(QScriptContext* ctx, QScriptEngine* engine)
 
 static QScriptValue noteConstructor(QScriptContext* ctx, QScriptEngine* engine)
       {
-      QScriptValue v = ctx->argument(0);
-      ScorePtr* sp   = qscriptvalue_cast<ScorePtr*>(v.data());
-      Score* score   = sp ? *sp : 0;
-      NotePtr ptr    = new Note(score);
+      QScriptValue v  = ctx->argument(0);
+      ScorePtr* sp    = qscriptvalue_cast<ScorePtr*>(v.data());
+      Score* score    = sp ? *sp : 0;
+      NotePtr ptr     = new Note(score);
       QScriptValue sv = engine->toScriptValue(ptr);
       return sv;
       }
@@ -241,11 +242,9 @@ ScriptEngine::ScriptEngine()
       QScriptValue qsChordCtor = newFunction(chordConstructor, qsChordProto);
       globalObject().setProperty("Chord", qsChordCtor);
 
-      ScNotePrototype* noteProto = new ScNotePrototype(0);
-      QScriptValue qsNoteProto   = newQObject(noteProto);
+      QScriptValue qsNoteProto   = newQObject(new ScNotePrototype(0));
       setDefaultPrototype(qMetaTypeId<NotePtr>(), qsNoteProto);
-      QScriptValue qsNoteCtor = newFunction(noteConstructor, qsNoteProto);
-      globalObject().setProperty("Note", qsNoteCtor);
+      globalObject().setProperty("Note", newFunction(noteConstructor, qsNoteProto));
 
       ScRest* restClass = new ScRest(this);
       globalObject().setProperty("Rest", restClass->constructor());
@@ -262,8 +261,11 @@ ScriptEngine::ScriptEngine()
       ScPart* partClass = new ScPart(this);
       globalObject().setProperty("Part", partClass->constructor());
 
-      QScriptValue v = newVariant(AL::division);
-      globalObject().setProperty("division", v);
+      globalObject().setProperty("division",            newVariant(AL::division));
+      globalObject().setProperty("mscoreVersion",       newVariant(version()));
+      globalObject().setProperty("mscoreMajorVersion",  newVariant(majorVersion()));
+      globalObject().setProperty("mscoreMinorVersion",  newVariant(minorVersion()));
+      globalObject().setProperty("mscoreUpdateVersion", newVariant(updateVersion()));
       }
 
 //---------------------------------------------------------

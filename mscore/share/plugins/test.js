@@ -47,10 +47,14 @@ function init()
 
 function run()
       {
+      print("version:        ", mscoreVersion);
+      print("major version:  ", mscoreMajorVersion);
+      print("minor version:  ", mscoreMinorVersion);
+      print("update version: ", mscoreUpdateVersion);
+      print("division:       ", division);
       print("plugin path: ", pluginPath);
       print("score name:  ", curScore.name);
       print("staves:      ", curScore.staves);
-      print("division:    ", division);
       mb = new QMessageBox();
       mb.setWindowTitle("MuseScore: Test Plugin");
       mb.text = "Hello MuseScore!";

@@ -102,7 +102,7 @@ Objects
             int parts()                   number of parts
             Part part(int i)              part object at index i
             bool hasLyrics                true if a lyric element is found in the core
-            bool hasHarmonies             true if a valid chordname is found    
+            bool hasHarmonies             true if a valid chordname is found
 
    Cursor
          create:  var a = Cursor(Score score);
@@ -163,11 +163,18 @@ Objects
             color       QColor      notehead color
             tuning      double      note tuning
 
+         Functions:
+            setPitch(integer)
+            setColor(QColor)
+            setTuning(integer)
+            integer pitch()
+            QColor color()
+            integer tuning()
+
    Text
          create:   var a = Text(score);
 
          Properties:
-
             text           string         the displayed text
             defaultFont    QFont
             color          QColor         text foreground color
@@ -193,7 +200,7 @@ Objects
             y           double   y position (ro)
             width       double   width of the bounding box (ro)
             height      double   height of the bounding box (ro)
-            
+
     Part
 
          Properties:
@@ -206,12 +213,16 @@ Objects
 Global Variables
 =====================================
 
-      pluginPath  string      path of current active plugin
-                              This path can be used find additional data associated with this
-                              plugin.
-      curScore    Score       current active Score
-      curCursor   Cursor
-      division    integer     number of midi ticks for 1/4 note
+      pluginPath  string                  path of current active plugin
+                                          This path can be used find additional data associated with this
+                                          plugin.
+      curScore                Score       current active Score
+      curCursor               Cursor
+      division                integer     number of midi ticks for 1/4 note
+      mscoreVersion           integer     complete version number: MMmmuu (major/minor/update)
+      mscoreMajorVersion      integer
+      mscoreMinorVersion      integer
+      mscoreUpdateVersion     integer
 
 =====================================================
       Example "run" scripts
