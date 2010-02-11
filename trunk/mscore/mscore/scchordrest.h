@@ -27,7 +27,6 @@ class Harmony;
 class Note;
 typedef Chord*   ChordPtr;
 typedef Harmony* HarmonyPtr;
-typedef Note*    NotePtr;
 
 //---------------------------------------------------------
 //   ScChordRestPrototype
@@ -43,11 +42,11 @@ class ScChordRestPrototype : public QObject, public QScriptable
    public slots:
       void addHarmony(HarmonyPtr h);
 
-      NotePtr topNote() const;
-      void addNote(NotePtr note);
+      Note* topNote() const;
+      void addNote(Note* note);
       void removeNote(int);
       int notes() const;
-      NotePtr note(int) const;
+      Note* note(int) const;
       int getTickLen() const;
       void setTickLen(int v);
 

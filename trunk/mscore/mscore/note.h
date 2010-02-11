@@ -113,7 +113,7 @@ class Note : public Element {
       virtual void endDrag();
 
    public:
-      Note(Score*);
+      Note(Score* s = 0);
       Note(const Note&);
       Note &operator=(const Note&);
       ~Note();

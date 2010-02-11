@@ -165,7 +165,7 @@ void ScChordRestPrototype::addHarmony(HarmonyPtr h)
 //   topNote
 //---------------------------------------------------------
 
-NotePtr ScChordRestPrototype::topNote() const
+Note* ScChordRestPrototype::topNote() const
       {
       ChordRest* cr = thisChordRest();
       return cr->type() == CHORD ? static_cast<Chord*>(cr)->upNote() : 0;
@@ -175,7 +175,7 @@ NotePtr ScChordRestPrototype::topNote() const
 //   addNote
 //---------------------------------------------------------
 
-void ScChordRestPrototype::addNote(NotePtr note)
+void ScChordRestPrototype::addNote(Note* note)
       {
       ChordRest* cr = thisChordRest();
       if (cr->type() != CHORD)
@@ -207,7 +207,7 @@ void ScChordRestPrototype::removeNote(int idx)
             return;
       Score* score = chord->score();
       if (score) {
-            NotePtr n = note(idx);
+            Note* n = note(idx);
             score->undoRemoveElement(n);
             }
       else {
@@ -240,7 +240,7 @@ int ScChordRestPrototype::notes() const
 //   note
 //---------------------------------------------------------
 
-NotePtr ScChordRestPrototype::note(int idx) const
+Note* ScChordRestPrototype::note(int idx) const
       {
       ChordRest* cr = thisChordRest();
       if (cr->type() != CHORD)

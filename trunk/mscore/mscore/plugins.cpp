@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -19,6 +19,8 @@
 //=============================================================================
 
 #include "mscore.h"
+#include "score.h"
+#include "undo.h"
 #include "globals.h"
 #include "script.h"
 #include "config.h"
@@ -54,21 +56,22 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       if (debugMode)
             printf("Register Plugin <%s>\n", qPrintable(pluginPath));
 
-      ScriptEngine se;
-      QScriptValue val  = se.evaluate(f.readAll(), pluginPath);
-      if (se.hasUncaughtException()) {
-            QScriptValue sv = se.uncaughtException();
+      if (se == 0)
+            se = new ScriptEngine();
+      QScriptValue val  = se->evaluate(f.readAll(), pluginPath);
+      if (se->hasUncaughtException()) {
+            QScriptValue sv = se->uncaughtException();
 #if 0
             printf("Load plugin <%s>: line %d: %s\n",
                qPrintable(pluginPath),
-               se.uncaughtExceptionLineNumber(),
+               se->uncaughtExceptionLineNumber(),
                qPrintable(sv.toString()));
 #endif
             QMessageBox::critical(0, "MuseScore Error",
                QString("Error loading plugin\n"
                   "\"%1\" line %2:\n"
                   "%3").arg(pluginPath)
-                     .arg(se.uncaughtExceptionLineNumber())
+                     .arg(se->uncaughtExceptionLineNumber())
                      .arg(sv.toString())
                );
             return;
@@ -164,6 +167,10 @@ void MuseScore::loadPlugins()
             }
       }
 
+//---------------------------------------------------------
+//   loadPlugin
+//---------------------------------------------------------
+
 bool MuseScore::loadPlugin(const QString& filename)
       {
       bool result = false;
@@ -199,20 +206,6 @@ static QScriptValue chordConstructor(QScriptContext* ctx, QScriptEngine* engine)
       }
 
 //---------------------------------------------------------
-//   noteConstructor
-//---------------------------------------------------------
-
-static QScriptValue noteConstructor(QScriptContext* ctx, QScriptEngine* engine)
-      {
-      QScriptValue v  = ctx->argument(0);
-      ScorePtr* sp    = qscriptvalue_cast<ScorePtr*>(v.data());
-      Score* score    = sp ? *sp : 0;
-      NotePtr ptr     = new Note(score);
-      QScriptValue sv = engine->toScriptValue(ptr);
-      return sv;
-      }
-
-//---------------------------------------------------------
 //   ScriptEngine
 //---------------------------------------------------------
 
@@ -242,9 +235,7 @@ ScriptEngine::ScriptEngine()
       QScriptValue qsChordCtor = newFunction(chordConstructor, qsChordProto);
       globalObject().setProperty("Chord", qsChordCtor);
 
-      QScriptValue qsNoteProto   = newQObject(new ScNotePrototype(0));
-      setDefaultPrototype(qMetaTypeId<NotePtr>(), qsNoteProto);
-      globalObject().setProperty("Note", newFunction(noteConstructor, qsNoteProto));
+      globalObject().setProperty("Note", create_Note_class(this), QScriptValue::SkipInEnumeration);
 
       ScRest* restClass = new ScRest(this);
       globalObject().setProperty("Rest", restClass->constructor());
@@ -286,7 +277,6 @@ void MuseScore::pluginTriggered(int idx)
       if (se == 0) {
             se = new ScriptEngine();
             if (debugMode) {
-                  // > qt4.4 required
                   QStringList lp = qApp->libraryPaths();
                   foreach(const QString& s, lp)
                         printf("lib path <%s>\n", qPrintable(s));

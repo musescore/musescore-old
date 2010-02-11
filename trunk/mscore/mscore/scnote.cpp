@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,90 +24,174 @@
 #include "utils.h"
 #include "scscore.h"
 #include "undo.h"
+#include "script.h"
+
+Q_DECLARE_METATYPE(Note);
+Q_DECLARE_METATYPE(Note*);
+
+static const char* const function_names_note[] = {
+      "name", "pitch", "tuning", "color", "visible", "tpc", "tied", "userAccidental"
+      };
+static const int function_lengths_note[] = {
+      0, 1, 1, 1, 1, 1, 0, 1
+      };
+static const QScriptValue::PropertyFlags flags_note[] = {
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      };
+
+ScriptInterface noteInterface = {
+      8,
+      function_names_note,
+      function_lengths_note,
+      flags_note
+      };
 
 //---------------------------------------------------------
-//   thisNote
+//   prototype_note_call
 //---------------------------------------------------------
 
-Note* ScNotePrototype::thisNote() const
+static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
       {
-      NotePtr* np = qscriptvalue_cast<NotePtr*>(thisObject());
-      if (np)
-            return *np;
-      return 0;
+      Q_ASSERT(context->callee().isFunction());
+      uint _id = context->callee().data().toUInt32();
+      Q_ASSERT((_id & 0xFFFF0000) == 0xBABF0000);
+      _id &= 0xffff;
+
+      Note* note = qscriptvalue_cast<Note*>(context->thisObject());
+      if (!note) {
+            return context->throwError(QScriptContext::TypeError,
+               QString::fromLatin1("Note.%0(): this object is not a Note")
+               .arg(function_names_note[_id]));
+            }
+      switch(_id) {
+            case 0:
+                  return qScriptValueFromValue(context->engine(), pitch2string(note->pitch()));
+            case 1:
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), note->pitch());
+                  else if (context->argumentCount() == 1) {
+                        int pitch = context->argument(0).toInt32();
+                        if (pitch < 0 || pitch > 127)
+                              break;
+                        note->setPitch(pitch);
+                        note->setTpcFromPitch();
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 2:
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), note->tuning());
+                  else if (context->argumentCount() == 1) {
+                        double tuning = context->argument(0).toDouble();
+                        note->setTuning(tuning);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 3:
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), note->color());
+                  else if (context->argumentCount() == 1) {
+                        QColor c = qscriptvalue_cast<QColor>(context->argument(0));
+                        Score* score = note->score();
+                        if (score)
+                              score->undo()->push(new ChangeColor(note, c));
+                        else
+                              note->setColor(c);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 4:
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), note->visible());
+                  else if (context->argumentCount() == 1) {
+                        bool v = context->argument(0).toInt32();
+                        note->setVisible(v);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 5:
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), note->tpc());
+                  else if (context->argumentCount() == 1) {
+                        int v = context->argument(0).toInt32();
+                        if (v < -1 || v > 33)
+                              break;
+                        note->setTpc(v);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 6:
+                  if (context->argumentCount() == 0) {
+                        int tiemode = 0;
+                        if (note->tieBack())
+                              tiemode |= 1;
+                        if (note->tieFor())
+                              tiemode |= 2;
+                        return qScriptValueFromValue(context->engine(), tiemode);
+                        }
+                  break;
+            case 7:
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), note->userAccidental());
+                  else if (context->argumentCount() == 1) {
+                        int v = context->argument(0).toInt32();
+                        note->setUserAccidental(v);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            }
+      return context->throwError(QScriptContext::TypeError,
+         QString::fromLatin1("Note.%0(): bad argument count or value")
+         .arg(function_names_note[_id]));
       }
 
 //---------------------------------------------------------
-//   name
+//   static_Note_call
 //---------------------------------------------------------
 
-QString ScNotePrototype::name() const
+static QScriptValue static_Note_call(QScriptContext* context, QScriptEngine*)
       {
-      return pitch2string(thisNote()->pitch());
+      if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
+            return context->throwError(QString::fromLatin1("Note(): Did you forget to construct with 'new'?"));
+      Note* note = 0;
+      if (context->argumentCount() == 0)
+            note = new Note(0);
+      else if (context->argumentCount() == 1) {
+            Score* score = qscriptvalue_cast<Score*>(context->argument(0));
+            note   = new Note(score);
+            }
+      if (note)
+            return context->engine()->newVariant(context->thisObject(), qVariantFromValue(note));
+      return context->throwError(QString::fromLatin1("Note(): wrong argument count"));
       }
 
 //---------------------------------------------------------
-//   pitch
+//   create_Note_class
 //---------------------------------------------------------
 
-int ScNotePrototype::pitch() const
+QScriptValue create_Note_class(QScriptEngine* engine)
       {
-      return thisNote()->pitch();
+      ScriptInterface* si = &noteInterface;
+
+      engine->setDefaultPrototype(qMetaTypeId<Note*>(), QScriptValue());
+      QScriptValue proto = engine->newVariant(qVariantFromValue((Note*)0));
+
+      for (int i = 0; i < si->n; ++i) {
+            QScriptValue fun = engine->newFunction(prototype_Note_call, function_lengths_note[i]);
+            fun.setData(QScriptValue(engine, uint(0xBABF0000 + i)));
+            proto.setProperty(si->name(i), fun, si->flag(i));
+            }
+
+      engine->setDefaultPrototype(qMetaTypeId<Note*>(), proto);
+      return engine->newFunction(static_Note_call, proto, 1);
       }
-
-//---------------------------------------------------------
-//   setPitch
-//---------------------------------------------------------
-
-void ScNotePrototype::setPitch(int v)
-      {
-printf("ScNotePrototype::setPitch %d\n", v);
-
-      thisNote()->setPitch(v);
-      thisNote()->setTpcFromPitch();
-      }
-
-//---------------------------------------------------------
-//   tuning
-//---------------------------------------------------------
-
-double ScNotePrototype::tuning() const
-      {
-      return thisNote()->tuning();
-      }
-
-//---------------------------------------------------------
-//   setTuning
-//---------------------------------------------------------
-
-void ScNotePrototype::setTuning(double v)
-      {
-      thisNote()->setTuning(v);
-      }
-
-//---------------------------------------------------------
-//   color
-//---------------------------------------------------------
-
-QColor ScNotePrototype::color() const
-      {
-      return thisNote()->color();
-      }
-
-//---------------------------------------------------------
-//   setColor
-//---------------------------------------------------------
-
-void ScNotePrototype::setColor(const QColor& c)
-      {
-      Note* note = thisNote();
-      Score* score = note->score();
-      if (score)
-            score->undo()->push(new ChangeColor(note, c));
-      else
-            note->setColor(c);
-      }
-
 
 
 

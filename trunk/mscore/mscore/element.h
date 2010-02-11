@@ -154,7 +154,7 @@ class Element {
                                   ///< valid after call to layout()
 
    public:
-      Element(Score*);
+      Element(Score* s = 0);
       Element(const Element&);
       virtual ~Element();
       Element &operator=(const Element&);
