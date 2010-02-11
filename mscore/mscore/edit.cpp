@@ -217,16 +217,12 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       newcr->setTuplet(cr->tuplet());
       newcr->setTick(tick);
 
-printf("addClone %s: tick %d, track %d\n", newcr->name(), newcr->tick(), newcr->track());
-
       Segment* seg = cr->measure()->findSegment(Segment::SegChordRest, tick);
       if (seg == 0) {
             seg = cr->measure()->createSegment(Segment::SegChordRest, tick);
-printf("  add segment\n");
             undoAddElement(seg);
             }
       newcr->setParent(seg);
-printf("  add cr\n");
       undoAddElement(newcr);
       return newcr;
       }

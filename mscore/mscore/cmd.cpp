@@ -119,8 +119,10 @@ void Score::endCmd()
             end();
             return;
             }
-      setClean(false);
-      _undo->endMacro(_undo->current()->childCount() <= 1);
+      bool noUndo = _undo->current()->childCount() <= 1;
+
+      setClean(noUndo);
+      _undo->endMacro(noUndo);
       end();
       }
 
@@ -624,17 +626,13 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
                   };
 
             int interval = itable[qAbs(val)];
-printf("val %d -> interval %d\n", val, interval);
 
-printf("note %d %d\n", on->pitch(), on->tpc());
             Note* note = new Note(*on);
             note->setParent(on->chord());
-printf("note %d %d\n", note->pitch(), note->tpc());
             int npitch, ntpc;
             transposeInterval(note->pitch(), note->tpc(), &npitch, &ntpc, interval, val > 0 ? TRANSPOSE_UP : TRANSPOSE_DOWN);
             note->setPitch(npitch, ntpc);
 
-printf("  note %d %d\n", note->pitch(), note->tpc());
             if (val > 8)
                   note->setPitch(note->pitch() + 12, note->tpc());
             else if (val < -8)
@@ -829,7 +827,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
 
 Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
       {
-printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr->tick(), cr->track());
+// printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr->tick(), cr->track());
       int track = cr->track();
       Measure* measure = cr->measure();
       setLayout(measure);
@@ -856,7 +854,7 @@ printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr-
                         t = t->tuplet();
                         }
                   if (tupletEnd) {
-                        printf("makeGap: end of tuplet reached\n");
+//                        printf("makeGap: end of tuplet reached\n");
                         break;
                         }
                   }
@@ -864,7 +862,7 @@ printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr-
 
             Tuplet* ltuplet = cr->tuplet();
             if (cr->tuplet() != tuplet) {
-                  printf("   remove tuplet %d\n", sd >= ltuplet->fraction());
+//                  printf("   remove tuplet %d\n", sd >= ltuplet->fraction());
                   //
                   // Current location points to the start of a (nested)tuplet.
                   // We have to remove the complete tuplet.
@@ -879,7 +877,7 @@ printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr-
                   tuplet = 0;
                   }
             else {
-                  printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
+//                  printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
                   undoRemoveElement(cr);
                   if (seg->isEmpty())
                         undoRemoveElement(seg);
@@ -892,20 +890,20 @@ printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr-
                   akkumulated = _sd;
                   Fraction rd = td - sd;
 
-printf("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominator(), rd.numerator(), rd.denominator());
+// printf("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominator(), rd.numerator(), rd.denominator());
 
                   QList<Duration> dList = toDurationList(rd, false);
                   if (dList.isEmpty())
                         return akkumulated;
                   int ticks = sd.ticks();
-printf("   gap ticks %d+%d\n", cr->tick(), ticks);
+// printf("   gap ticks %d+%d\n", cr->tick(), ticks);
                   for (Tuplet* t = tuplet; t; t = t->tuplet())
                         ticks = ticks * t->ratio().denominator() / t->ratio().numerator();
                   int tick = cr->tick() + ticks;
 
                   if ((tuplet == 0) && (((measure->tick() - tick) % dList[0].ticks()) == 0)) {
                         foreach(Duration d, dList) {
-                              printf("   addClone %d\n", tick);
+//                              printf("   addClone %d\n", tick);
                               tick += addClone(cr, tick, d)->ticks();
                               }
                         }
@@ -913,11 +911,11 @@ printf("   gap ticks %d+%d\n", cr->tick(), ticks);
                         for (int i = dList.size() - 1; i >= 0; --i)
                               tick += addClone(cr, tick, dList[i])->ticks();
                         }
-printf("  return %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
+// printf("  return %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
                   return akkumulated;
                   }
             akkumulated += td;
-printf("  akkumulated %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
+// printf("  akkumulated %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
             sd          -= td;
             if (sd.numerator() == 0)
                   break;
@@ -1055,9 +1053,9 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
       if (f1 > Fraction(0))
             flist.append(f1);
 
-printf("List:\n");
-      foreach (Fraction f, flist)
-            printf("  %d/%d\n", f.numerator(), f.denominator());
+// printf("List:\n");
+//      foreach (Fraction f, flist)
+//            printf("  %d/%d\n", f.numerator(), f.denominator());
 
       int tick       = cr->tick();
       f              = dstF;
@@ -1080,9 +1078,9 @@ printf("List:\n");
                   }
             else {
                   QList<Duration> dList = toDurationList(f2, true);
-printf("   sublist:\n");
-      foreach (Duration d, dList)
-            printf("      %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
+//printf("   sublist:\n");
+//      foreach (Duration d, dList)
+//            printf("      %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
 
                   Measure* measure = tick2measure(tick);
                   if (((tick - measure->tick()) % dList[0].ticks()) == 0) {

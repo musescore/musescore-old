@@ -40,9 +40,8 @@ function addNote(cursor, pitch, duration)
       {
       var chord     = new Chord();
       chord.setTickLen(duration);
-      var note      = new Note();
-      note.setPitch(pitch);
-      // note.pitch = pitch;  // does not work
+      var note      = Note();
+      note.pitch    = pitch;
 
       chord.addNote(note);
       cursor.addChord(chord);

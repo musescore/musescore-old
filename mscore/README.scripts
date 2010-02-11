@@ -105,8 +105,8 @@ Objects
             bool hasHarmonies             true if a valid chordname is found
 
    Cursor
-         create:  var a = Cursor(Score score);
-                  var a = Cursor(Score score, bool expandRepeat);
+         create:  var a = new Cursor(Score score);
+                  var a = new Cursor(Score score, bool expandRepeat);
 
          Properties:
             staff       integer
@@ -125,14 +125,16 @@ Objects
             eos()                   return true if at end of score
             add(Chord)
             add(Rest)
-            measure()               return the current measure
-            next()                  go to next segment
-            nextMeasure()           go to first chord/rest of next measure
-            time()        double    current score time in ms
-            tick()          int       current score tick
+            measure()                     return the current measure
+            next()                        go to next segment
+            nextMeasure()                 go to first chord/rest of next measure
+            time()            double      current score time in ms
+            tick()            integer     current score tick
 
    Chord
-         create:   var a = Chord()
+         create:
+            var a = new Chord()
+            var a = new Chord(Score)
 
          Properties:
             tickLen     integer
@@ -146,7 +148,9 @@ Objects
             addHarmony(Harmony)
 
    Rest
-         create:   var a = Rest()
+         create:
+            var a = new Rest()
+            var a = new Rest(Score)
 
          Properties:
             tickLen     integer
@@ -155,24 +159,24 @@ Objects
             addHarmony(Harmony)
 
    Note
-         create:   var a = Note()
+         create:
+            var a = new Note()
+            var a = new Note(Score)
 
          Properties:
-            pitch       integer     midi pitch value of note
-            name        string      name of note pitch value (read only)
-            color       QColor      notehead color
-            tuning      double      note tuning
+            pitch             integer     midi pitch value of note
+            name              string      name of note pitch value (read only)
+            color             QColor      notehead color
+            tuning            double      note tuning
+            tpc               integer
+            visible           boolean
+            tied              enum        0 no tie, 1 forward, 2 backward, 3 forw.+backw.
+            userAccidental    integer
 
-         Functions:
-            setPitch(integer)
-            setColor(QColor)
-            setTuning(integer)
-            integer pitch()
-            QColor color()
-            integer tuning()
 
    Text
-         create:   var a = Text(score);
+         create:
+            var a = new Text(score);
 
          Properties:
             text           string         the displayed text
@@ -180,7 +184,8 @@ Objects
             color          QColor         text foreground color
 
    Harmony
-         create:    var a = Harmony();
+         create:
+            var a = new Harmony();
 
          Properties:
             id             integer
@@ -195,7 +200,7 @@ Objects
 
          Properties:
             lineBreak   bool     break the system after this measure
-            pageNumber  int      number of the page where the measure is drawn (ro)
+            pageNumber  integer      number of the page where the measure is drawn (ro)
             x           double   x position (ro)
             y           double   y position (ro)
             width       double   width of the bounding box (ro)
@@ -206,8 +211,8 @@ Objects
          Properties:
             longName    string      long name of the part (ro)
             shortName   string      short name of the part (ro)
-            midiProgram int         midi program of the part (ro)
-            midiChannel int         midi channel of the part (ro)
+            midiProgram integer     midi program of the part (ro)
+            midiChannel integer     midi channel of the part (ro)
 
 
 Global Variables
