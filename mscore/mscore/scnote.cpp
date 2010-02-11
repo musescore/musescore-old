@@ -89,7 +89,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), note->tuning());
                   else if (context->argumentCount() == 1) {
-                        double tuning = context->argument(0).toDouble();
+                        double tuning = context->argument(0).toNumber();
                         note->setTuning(tuning);
                         return context->engine()->undefinedValue();
                         }
