@@ -1213,13 +1213,15 @@ class ChangeMStaffProperties : public UndoCommand {
 class ChangeMeasureProperties : public UndoCommand {
       Measure* measure;
       bool breakMM;
+      bool irregular;
       int repeatCount;
       double stretch;
       int noOffset;
 
       void flip();
    public:
-      ChangeMeasureProperties(Measure*, bool breakMM, int repeatCount, double stretch, int noOffset);
+      ChangeMeasureProperties(Measure*, bool breakMM, int repeatCount, double stretch,
+         int noOffset, bool irregular);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

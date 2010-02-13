@@ -171,7 +171,7 @@ void MeasureProperties::apply()
          || layoutStretch->value() != m->userStretch()
          || measureNumberOffset->value() != m->noOffset()) {
             score->undo()->push(new ChangeMeasureProperties(m, breakMultiMeasureRest->isChecked(),
-               repeatCount(), layoutStretch->value(), measureNumberOffset->value()));
+               repeatCount(), layoutStretch->value(), measureNumberOffset->value(), isIrregular()));
             }
 
       score->setDirty();
