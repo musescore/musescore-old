@@ -2271,7 +2271,8 @@ void ChangeMStaffProperties::flip()
 //---------------------------------------------------------
 
 ChangeMeasureProperties::ChangeMeasureProperties(Measure* m, bool _bmm, int rc,
-   double s, int o) : measure(m), breakMM(_bmm), repeatCount(rc), stretch(s), noOffset(o)
+   double s, int o, bool ir) : measure(m), breakMM(_bmm), repeatCount(rc), stretch(s), noOffset(o),
+   irregular(ir)
       {
       }
 
@@ -2285,18 +2286,23 @@ void ChangeMeasureProperties::flip()
       int r    = measure->repeatCount();
       double s = measure->userStretch();
       int o    = measure->noOffset();
+      bool ir  = measure->irregular();
+
       measure->setBreakMultiMeasureRest(breakMM);
       measure->setRepeatCount(repeatCount);
       measure->setUserStretch(stretch);
       Score* score = measure->score();
-      if (measure->noOffset() != noOffset) {
+      if (o != noOffset || ir != irregular) {
             measure->setNoOffset(noOffset);
+            measure->setIrregular(irregular);
             score->renumberMeasures();
             }
+
       breakMM     = a;
       repeatCount = r;
       stretch     = s;
       noOffset    = o;
+      irregular   = ir;
       score->setLayoutAll(true);
       score->setDirty();
       }
