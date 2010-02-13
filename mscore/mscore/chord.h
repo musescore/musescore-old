@@ -165,7 +165,7 @@ class Chord : public ChordRest {
       void addLedgerLines(double x, int move);
 
    public:
-      Chord(Score*);
+      Chord(Score* s = 0);
       Chord(const Chord&);
       ~Chord();
       Chord &operator=(const Chord&);

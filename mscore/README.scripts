@@ -70,7 +70,7 @@ Objects
             subtitle    string            subtitle text on score (ro)
             composer    string            composer text on score (ro)
             poet        string            poet text on score (ro)
-            nstaves     integer           poet text on score (ro)
+            staves     integer            number of staves (ro)
 
          Functions:
             bool saveMscz(string path);

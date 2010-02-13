@@ -5,7 +5,7 @@
 //
 //  Test plugin
 //
-//  Copyright (C)2008 Werner Schweer and others
+//  Copyright (C)2008-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -39,12 +39,12 @@ function init()
 function addNote(cursor, pitch, duration)
       {
       var chord     = new Chord();
-      chord.setTickLen(duration);
-      var note      = Note();
+      chord.tickLen = duration;
+      var note      = new Note();
       note.pitch    = pitch;
 
       chord.addNote(note);
-      cursor.addChord(chord);
+      cursor.add(chord);
       cursor.next();
       };
 

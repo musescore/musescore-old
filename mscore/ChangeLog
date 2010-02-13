@@ -1,6 +1,12 @@
-13.feb (lv)
+13.feb (ws)
+      - overhaul of script bindings
+      (lv)
       - bug #4477: MusicXML: tremolos between two notes not exported/imported
         export implemented according to comments by David Bolton on Thu, 02/11/2010 - 19:29
+12,feb (ws)
+      - undo/redo are now application shortcuts and work even if a palette opened
+        by create is active
+      - export small staves in part always at normal size
 11.feb (ws)
       - update to scripting interface
 8.feb (db)

@@ -23,9 +23,6 @@
 
 #include "score.h"
 
-class ScScore;
-class ScSCursor;
-
 //---------------------------------------------------------
 //   ScriptInterface
 //---------------------------------------------------------
@@ -47,14 +44,20 @@ struct ScriptInterface {
 class ScriptEngine : public QScriptEngine {
       Q_OBJECT
 
-      ScScore* scoreClass;
-      ScSCursor* cursorClass;
-
    public:
       ScriptEngine();
-      ScScore* getScoreClass() const { return scoreClass; }
-      ScSCursor* getCursorClass() const { return cursorClass; }
       };
+
+extern QScriptValue create_Cursor_class(QScriptEngine* engine);
+extern QScriptValue create_Score_class(QScriptEngine* engine);
+extern QScriptValue create_Rest_class(QScriptEngine* engine);
+extern QScriptValue create_Harmony_class(QScriptEngine* engine);
+extern QScriptValue create_Note_class(QScriptEngine* engine);
+extern QScriptValue create_Chord_class(QScriptEngine* engine);
+extern QScriptValue create_Text_class(QScriptEngine* engine);
+extern QScriptValue create_Measure_class(QScriptEngine* engine);
+extern QScriptValue create_Part_class(QScriptEngine* engine);
+
 
 #endif
 

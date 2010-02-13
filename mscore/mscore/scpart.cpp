@@ -19,128 +19,136 @@
 //=============================================================================
 
 #include "mscore.h"
-#include "scpart.h"
 #include "part.h"
 #include "utils.h"
-#include "scscore.h"
 #include "undo.h"
+#include "script.h"
+
+Q_DECLARE_METATYPE(Part*);
+Q_DECLARE_METATYPE(Score*);
+Q_DECLARE_METATYPE(TextC*);
+
+static const char* const function_names_part[] = {
+      "longName", "shortName", "midiProgram", "midiChannel"
+      };
+static const int function_lengths_part[] = {
+      1, 1, 1, 1
+      };
+static const QScriptValue::PropertyFlags flags_part[] = {
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
+      };
+
+ScriptInterface partInterface = {
+      4,
+      function_names_part,
+      function_lengths_part,
+      flags_part
+      };
 
 //---------------------------------------------------------
-//   ScPart
+//   prototype_Part_call
 //---------------------------------------------------------
 
-ScPart::ScPart(QScriptEngine* engine)
-   : QObject(engine), QScriptClass(engine)
+static QScriptValue prototype_Part_call(QScriptContext* context, QScriptEngine*)
       {
-      qScriptRegisterMetaType<PartPtr>(engine, toScriptValue, fromScriptValue);
+      Q_ASSERT(context->callee().isFunction());
+      uint _id = context->callee().data().toUInt32();
+      Q_ASSERT((_id & 0xFFFF0000) == 0xBABF0000);
+      _id &= 0xffff;
 
-      proto = engine->newQObject(new ScPartPrototype(this),
-         QScriptEngine::QtOwnership,
-         QScriptEngine::SkipMethodsInEnumeration
-          | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties
-         );
-      QScriptValue global = engine->globalObject();
-      proto.setPrototype(global.property("Object").property("prototype"));
-
-      ctor = engine->newFunction(construct);
-      ctor.setData(qScriptValueFromValue(engine, this));
+      Part* part = qscriptvalue_cast<Part*>(context->thisObject());
+      if (!part) {
+            return context->throwError(QScriptContext::TypeError,
+               QString::fromLatin1("Part.%0(): this object is not a Part")
+               .arg(function_names_part[_id]));
+            }
+      switch(_id) {
+            case 0:     // "longName",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), part->longName());
+                  else if (context->argumentCount() == 1) {
+                        QString s = qscriptvalue_cast<QString>(context->argument(0));
+                        part->setLongName(s);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 1:     // "shortName",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), part->shortName());
+                  else if (context->argumentCount() == 1) {
+                        QString s = qscriptvalue_cast<QString>(context->argument(0));
+                        part->setShortName(s);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 2:     // "midiProgram",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), part->midiProgram());
+                  else if (context->argumentCount() == 1) {
+                        int v = context->argument(0).toInt32();
+                        if (v >= 0 && v < 128) {
+                              part->setMidiProgram(v);
+                              return context->engine()->undefinedValue();
+                              }
+                        }
+                  break;
+            case 3:     // "midiChannel"
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), part->midiChannel());
+                  else if (context->argumentCount() == 1) {
+                        int v = context->argument(0).toInt32();
+                        if (v >= 0 && v < 16) {
+                              part->setMidiChannel(v);
+                              return context->engine()->undefinedValue();
+                              }
+                        }
+                  break;
+            }
+      return context->throwError(QScriptContext::TypeError,
+         QString::fromLatin1("Note.%0(): bad argument count or value")
+         .arg(function_names_part[_id]));
       }
 
 //---------------------------------------------------------
-//   newInstance
+//   static_Part_call
 //---------------------------------------------------------
 
-QScriptValue ScPart::newInstance(Score* score)
+static QScriptValue static_Part_call(QScriptContext* context, QScriptEngine*)
       {
-      Part* part = new Part(score);
-      return newInstance(part);
-      }
-
-QScriptValue ScPart::newInstance(const PartPtr& part)
-      {
-      QScriptValue data = engine()->newVariant(qVariantFromValue(part));
-      return engine()->newObject(this, data);
-      }
-
-//---------------------------------------------------------
-//   construct
-//---------------------------------------------------------
-
-QScriptValue ScPart::construct(QScriptContext *ctx, QScriptEngine *)
-      {
-      ScPart *cls = qscriptvalue_cast<ScPart*>(ctx->callee().data());
-      if (!cls)
-            return QScriptValue();
-      QScriptValue v = ctx->argument(0);
-      ScorePtr* sp   = qscriptvalue_cast<ScorePtr*>(v.data());
-      return cls->newInstance(sp ? *sp : 0);
-      }
-
-QScriptValue ScPart::toScriptValue(QScriptEngine* eng, const PartPtr& ba)
-      {
-      QScriptValue ctor = eng->globalObject().property("Part");
-      ScPart* cls = qscriptvalue_cast<ScPart*>(ctor.data());
-      if (!cls)
-            return eng->newVariant(qVariantFromValue(ba));
-      return cls->newInstance(ba);
-      }
-
-void ScPart::fromScriptValue(const QScriptValue& obj, PartPtr& ba)
-      {
-      PartPtr* np = qscriptvalue_cast<PartPtr*>(obj.data());
-      ba = np ? *np : 0;
+      if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
+            return context->throwError(QString::fromLatin1("Part(): Did you forget to construct with 'new'?"));
+      Part* part = 0;
+      if (context->argumentCount() == 0)
+            part = new Part(0);
+      else if (context->argumentCount() == 1) {
+            Score* score = qscriptvalue_cast<Score*>(context->argument(0));
+            part   = new Part(score);
+            }
+      if (part)
+            return context->engine()->newVariant(context->thisObject(), qVariantFromValue(part));
+      return context->throwError(QString::fromLatin1("Part(): wrong argument count"));
       }
 
 //---------------------------------------------------------
-//   thisPart
+//   create_Part_class
 //---------------------------------------------------------
 
-Part* ScPartPrototype::thisPart() const
+QScriptValue create_Part_class(QScriptEngine* engine)
       {
-      PartPtr* np = qscriptvalue_cast<PartPtr*>(thisObject().data());
-      if (np)
-            return *np;
-      return 0;
+      ScriptInterface* si = &partInterface;
+
+      engine->setDefaultPrototype(qMetaTypeId<Part*>(), QScriptValue());
+      QScriptValue proto = engine->newVariant(qVariantFromValue((Part*)0));
+
+      for (int i = 0; i < si->n; ++i) {
+            QScriptValue fun = engine->newFunction(prototype_Part_call, function_lengths_part[i]);
+            fun.setData(QScriptValue(engine, uint(0xBABF0000 + i)));
+            proto.setProperty(si->name(i), fun, si->flag(i));
+            }
+
+      engine->setDefaultPrototype(qMetaTypeId<Part*>(), proto);
+      return engine->newFunction(static_Part_call, proto, 1);
       }
-
-//---------------------------------------------------------
-//   longName
-//---------------------------------------------------------
-
-QString ScPartPrototype::getLongName() const
-      {
-      return thisPart()->longName()->getText().toUtf8();
-      }
-
-//---------------------------------------------------------
-//   shortName
-//---------------------------------------------------------
-
-QString ScPartPrototype::getShortName() const
-      {
-      return thisPart()->shortName()->getText().toUtf8();
-      }
-      
-//---------------------------------------------------------
-//   midiProgram
-//---------------------------------------------------------
-
-int ScPartPrototype::getMidiProgram() const
-      {
-      return thisPart()->midiProgram();
-      }
-
-//---------------------------------------------------------
-//   midiChannel
-//---------------------------------------------------------
-
-int ScPartPrototype::getMidiChannel() const
-      {
-      return thisPart()->midiChannel();
-      }
-
-
-
-
-

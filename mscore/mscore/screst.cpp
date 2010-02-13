@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -19,245 +19,128 @@
 //=============================================================================
 
 #include "mscore.h"
-#include "screst.h"
 #include "rest.h"
 #include "chord.h"
 #include "chordrest.h"
 #include "harmony.h"
-#include "scscore.h"
-#include "scchord.h"
 #include "measure.h"
 #include "note.h"
+#include "script.h"
+
+Q_DECLARE_METATYPE(Rest);
+Q_DECLARE_METATYPE(Rest*);
+Q_DECLARE_METATYPE(Harmony*);
+Q_DECLARE_METATYPE(Score*);
+
+static const char* const function_names_rest[] = {
+      "tickLen", "addHarmony"
+      };
+static const int function_lengths_rest[] = {
+      1, 1
+      };
+static const QScriptValue::PropertyFlags flags_rest[] = {
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration
+      };
+
+ScriptInterface restInterface = {
+      2,
+      function_names_rest,
+      function_lengths_rest,
+      flags_rest
+      };
 
 //---------------------------------------------------------
-//   ScRest
+//   prototype_Rest_call
 //---------------------------------------------------------
 
-ScRest::ScRest(QScriptEngine* engine)
-   : QObject(engine), QScriptClass(engine)
+static QScriptValue prototype_Rest_call(QScriptContext* context, QScriptEngine*)
       {
-      qScriptRegisterMetaType<RestPtr>(engine, toScriptValue, fromScriptValue);
+      Q_ASSERT(context->callee().isFunction());
+      uint _id = context->callee().data().toUInt32();
+      Q_ASSERT((_id & 0xFFFF0000) == 0xBABF0000);
+      _id &= 0xffff;
 
-      proto = engine->newQObject(new ScRestPrototype(this),
-         QScriptEngine::QtOwnership, QScriptEngine::SkipMethodsInEnumeration);
-      QScriptValue global = engine->globalObject();
-      proto.setPrototype(global.property("Object").property("prototype"));
-
-      ctor = engine->newFunction(construct);
-      ctor.setData(qScriptValueFromValue(engine, this));
-      }
-
-//---------------------------------------------------------
-//   newInstance
-//---------------------------------------------------------
-
-QScriptValue ScRest::newInstance(Score* score)
-      {
-      Rest* rest = new Rest(score);
-      return newInstance(rest);
-      }
-
-QScriptValue ScRest::newInstance(const RestPtr& cr)
-      {
-      QScriptValue data = engine()->newVariant(qVariantFromValue(cr));
-      return engine()->newObject(this, data);
-      }
-
-//---------------------------------------------------------
-//   construct
-//---------------------------------------------------------
-
-QScriptValue ScRest::construct(QScriptContext *ctx, QScriptEngine *)
-      {
-      ScRest *cls = qscriptvalue_cast<ScRest*>(ctx->callee().data());
-      if (!cls)
-            return QScriptValue();
-      QScriptValue v = ctx->argument(0);
-      ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(v.data());
-      return cls->newInstance(sp ? *sp : 0);
-      }
-
-QScriptValue ScRest::toScriptValue(QScriptEngine* eng, const RestPtr& ba)
-      {
-      QScriptValue ctor = eng->globalObject().property("Rest");
-      ScRest* cls = qscriptvalue_cast<ScRest*>(ctor.data());
-      if (!cls)
-            return eng->newVariant(qVariantFromValue((RestPtr&)ba));
-      return cls->newInstance(ba);
-      }
-
-void ScRest::fromScriptValue(const QScriptValue& obj, RestPtr& ba)
-      {
-      Rest** cp = qscriptvalue_cast<RestPtr*>(obj.data());
-      ba = cp ? *cp : 0;
-      }
-
-//---------------------------------------------------------
-//   thisRest
-//---------------------------------------------------------
-
-Rest* ScRestPrototype::thisRest() const
-      {
-      // Rest** cp = (Rest**)qscriptvalue_cast<RestPtr*>(thisObject().data());
-      Rest** cp = (Rest**)qscriptvalue_cast<RestPtr*>(thisObject());
-      if (cp)
-            return *cp;
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   thisChordRest
-//---------------------------------------------------------
-
-ChordRest* ScChordRestPrototype::thisChordRest() const
-      {
-      Chord** c = qscriptvalue_cast<ChordPtr*>(thisObject());
-      if (c)
-            return static_cast<ChordRest*>(*c);
-      Rest** r = qscriptvalue_cast<RestPtr*>(thisObject());
-      if (r)
-            return static_cast<ChordRest*>(*r);
-      printf("thisChordRest(): null\n");
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   getTickLen
-//---------------------------------------------------------
-
-int ScChordRestPrototype::getTickLen() const
-      {
-      ChordRest* cr = thisChordRest();
-      return cr->tickLen();
-      }
-
-//---------------------------------------------------------
-//   setTickLen
-//---------------------------------------------------------
-
-void ScChordRestPrototype::setTickLen(int v)
-      {
-      ChordRest* cr = thisChordRest();
-      cr->setDurationVal(v);
-      }
-
-//---------------------------------------------------------
-//   addHarmony
-//---------------------------------------------------------
-
-void ScChordRestPrototype::addHarmony(HarmonyPtr h)
-      {
-      ChordRest* cr = thisChordRest();
-
-      h->setParent(cr->measure());
-      h->setTick(cr->tick());
-      Score* score = cr->score();
-      if (score) {
-            h->setScore(score);
-            cr->score()->undoAddElement(h);
+      Rest* rest = qscriptvalue_cast<Rest*>(context->thisObject());
+      if (!rest) {
+            return context->throwError(QScriptContext::TypeError,
+               QString::fromLatin1("Rest.%0(): this object is not a Rest")
+               .arg(function_names_rest[_id]));
             }
-      else
-            cr->measure()->add(h);
-      h->render();
-      }
-
-//---------------------------------------------------------
-//   topNote
-//---------------------------------------------------------
-
-Note* ScChordRestPrototype::topNote() const
-      {
-      ChordRest* cr = thisChordRest();
-      return cr->type() == CHORD ? static_cast<Chord*>(cr)->upNote() : 0;
-      }
-
-//---------------------------------------------------------
-//   addNote
-//---------------------------------------------------------
-
-void ScChordRestPrototype::addNote(Note* note)
-      {
-      ChordRest* cr = thisChordRest();
-      if (cr->type() != CHORD)
-            return;
-      Chord* chord = static_cast<Chord*>(cr);
-      note->setParent(chord);
-      Score* score = chord->score();
-      if (score) {
-            note->setScore(score);
-            chord->score()->undoAddElement(note);
-            }
-      else
-            chord->add(note);
-      }
-
-//---------------------------------------------------------
-//   removeNote
-//---------------------------------------------------------
-
-void ScChordRestPrototype::removeNote(int idx)
-      {
-      ChordRest* cr = thisChordRest();
-      if (cr->type() != CHORD)
-            return;
-      Chord* chord = static_cast<Chord*>(cr);
-
-      NoteList* nl = chord->noteList();
-      if (idx < 0 || idx >= int(nl->size()))
-            return;
-      Score* score = chord->score();
-      if (score) {
-            Note* n = note(idx);
-            score->undoRemoveElement(n);
-            }
-      else {
-            int k = 0;
-            for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                  if (k == idx) {
-                        nl->erase(i);
-                        break;
+      switch(_id) {
+            case 0:
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), rest->tickLen());
+                  else if (context->argumentCount() == 1) {
+                        int ticks = context->argument(0).toInt32();
+                        if (ticks < 1)
+                              break;
+                        rest->setDurationVal(ticks);
+                        return context->engine()->undefinedValue();
                         }
-                  ++k;
-                  }
+                  break;
+            case 1:
+                  if (context->argumentCount() == 1) {
+                        Harmony* h = qscriptvalue_cast<Harmony*>(context->argument(0));
+                        if (!h)
+                              break;
+                        h->setParent(rest->measure());
+                        h->setTick(rest->tick());
+                        Score* score = rest->score();
+                        if (score) {
+                              h->setScore(score);
+                              score->undoAddElement(h);
+                              }
+                        else
+                              rest->measure()->add(h);
+                        h->render();
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
             }
+      return context->throwError(QScriptContext::TypeError,
+         QString::fromLatin1("Note.%0(): bad argument count or value")
+         .arg(function_names_rest[_id]));
       }
 
 //---------------------------------------------------------
-//   notes
+//   static_Rest_call
 //---------------------------------------------------------
 
-int ScChordRestPrototype::notes() const
+static QScriptValue static_Rest_call(QScriptContext* context, QScriptEngine*)
       {
-      ChordRest* cr = thisChordRest();
-      if (cr->type() != CHORD)
-            return 0;
-      Chord* chord = static_cast<Chord*>(cr);
-      const NoteList* nl = chord->noteList();
-      return nl->size();
+      if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
+            return context->throwError(QString::fromLatin1("Rest(): Did you forget to construct with 'new'?"));
+      Rest* rest = 0;
+      if (context->argumentCount() == 0)
+            rest = new Rest(0);
+      else if (context->argumentCount() == 1) {
+            Score* score = qscriptvalue_cast<Score*>(context->argument(0));
+            rest   = new Rest(score);
+            }
+      if (rest)
+            return context->engine()->newVariant(context->thisObject(), qVariantFromValue(rest));
+      return context->throwError(QString::fromLatin1("Rest(): wrong argument count"));
       }
 
 //---------------------------------------------------------
-//   note
+//   create_Rest_class
 //---------------------------------------------------------
 
-Note* ScChordRestPrototype::note(int idx) const
+QScriptValue create_Rest_class(QScriptEngine* engine)
       {
-      ChordRest* cr = thisChordRest();
-      if (cr->type() != CHORD)
-            return 0;
-      Chord* chord = static_cast<Chord*>(cr);
-      const NoteList* nl = chord->noteList();
-      if (idx < 0 || idx >= int(nl->size())) {
-            printf("ScChordRest::note(%d): index out of range\n", idx);
-            return 0;
-            }
-      int k = 0;
-      for (ciNote i = nl->begin(); i != nl->end(); ++i) {
-            if (k == idx)
-                  return i->second;
-            ++k;
-            }
-      return 0;
-      }
+      ScriptInterface* si = &restInterface;
 
+      engine->setDefaultPrototype(qMetaTypeId<Rest*>(), QScriptValue());
+      QScriptValue proto = engine->newVariant(qVariantFromValue((Rest*)0));
+
+      for (int i = 0; i < si->n; ++i) {
+            QScriptValue fun = engine->newFunction(prototype_Rest_call, function_lengths_rest[i]);
+            fun.setData(QScriptValue(engine, uint(0xBABF0000 + i)));
+            proto.setProperty(si->name(i), fun, si->flag(i));
+            }
+
+      engine->setDefaultPrototype(qMetaTypeId<Rest*>(), proto);
+      return engine->newFunction(static_Rest_call, proto, 1);
+      }
 

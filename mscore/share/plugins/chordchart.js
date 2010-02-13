@@ -50,7 +50,7 @@ function addRest(i, score, cursor, duration)
       {
       var rest      = new Rest(score);
       rest.tickLen  = duration;
-      cursor.add(rest);
+      cursor.addRest(rest);
       cursor.next();
 
       var h = new Harmony(score);

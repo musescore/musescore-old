@@ -31,8 +31,6 @@ class ChordRest;
 class Text;
 class Measure;
 
-typedef Rest* RestPtr;
-typedef Chord* ChordPtr;
 typedef Measure* MeasurePtr;
 typedef Text* TextPtr;
 
@@ -72,76 +70,13 @@ class SCursor {
       Score* score() const        { return _score;    }
       ChordRest* cr() const;
       void rewind();
-      };
-
-//---------------------------------------------------------
-//   ScSCursor
-//---------------------------------------------------------
-
-class ScSCursor : public QObject, public QScriptClass {
-      static QScriptValue construct(QScriptContext* ctx, QScriptEngine* eng);
-      static QScriptValue toScriptValue(QScriptEngine *eng, const SCursor&);
-      static void fromScriptValue(const QScriptValue &obj, SCursor&);
-
-      QScriptString cursorStaff, cursorVoice;
-      QScriptValue proto;
-      QScriptValue ctor;
-
-   public:
-      ScSCursor(QScriptEngine* se);
-      ~ScSCursor() {}
-
-      QScriptValue constructor() { return ctor; }
-      QScriptValue newInstance(Score*);
-      QScriptValue newInstance(Score*, bool);
-      QScriptValue newInstance(const SCursor&);
-      QueryFlags queryProperty(const QScriptValue& object,
-         const QScriptString& name, QueryFlags flags, uint* id);
-      QScriptValue property(const QScriptValue& obhect,
-         const QScriptString& name, uint id);
-      virtual void setProperty(QScriptValue& object, const QScriptString& name,
-         uint id, const QScriptValue& value);
-      QScriptValue::PropertyFlags propertyFlags(
-         const QScriptValue& object, const QScriptString& name, uint id);
-      QScriptClassPropertyIterator* newIterator(const QScriptValue& object);
-      QString name() const           { return QLatin1String("Cursor"); }
-      QScriptValue prototype() const { return proto; }
-      };
-
-//---------------------------------------------------------
-//   ScSCursorPrototype
-//---------------------------------------------------------
-
-class ScSCursorPrototype : public QObject, public QScriptable
-      {
-      Q_OBJECT
-      SCursor* thisSCursor() const;
-
-      void add(ChordRest*);
-
-   public:
-      ScSCursorPrototype(QObject *parent = 0) : QObject(parent) {}
-      ~ScSCursorPrototype() {}
-
-   public slots:
-      void rewind();
-      bool eos() const;
-      ChordPtr chord();
-      RestPtr rest();
-      MeasurePtr measure();
       bool next();
       bool nextMeasure();
-      void putStaffText(TextPtr);
-      bool isChord() const;
-      bool isRest() const;
-      void addChord(ChordPtr p) { add((ChordRest*)p); }
-      void addRest(RestPtr p)   { add((ChordRest*)p); }
+      void putStaffText(Text* s);
+      void add(ChordRest* c);
       int tick();
       double time();
       };
 
-Q_DECLARE_METATYPE(SCursor)
-Q_DECLARE_METATYPE(SCursor*)
-Q_DECLARE_METATYPE(ScSCursor*)
 #endif
 

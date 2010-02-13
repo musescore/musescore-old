@@ -24,19 +24,11 @@
 #include "globals.h"
 #include "script.h"
 #include "config.h"
-#include "scscore.h"
-#include "scchord.h"
-#include "screst.h"
-#include "sccursor.h"
-#include "scnote.h"
-#include "scpart.h"
-#include "scharmony.h"
-#include "sctext.h"
-#include "scbytearray.h"
-#include "scmeasure.h"
 #include "chord.h"
 #include "note.h"
 #include "utils.h"
+
+Q_DECLARE_METATYPE(Score*);
 
 //---------------------------------------------------------
 //   registerPlugin
@@ -191,21 +183,6 @@ bool MuseScore::loadPlugin(const QString& filename)
       }
 
 //---------------------------------------------------------
-//   chordConstructor
-//---------------------------------------------------------
-
-static QScriptValue chordConstructor(QScriptContext* ctx, QScriptEngine* engine)
-      {
-      QScriptValue v = ctx->argument(0);
-      ScorePtr* sp   = qscriptvalue_cast<ScorePtr*>(v.data());
-      Score* score   = sp ? *sp : 0;
-      ChordPtr ptr   = new Chord(score);
-      ptr->setDurationVal(480);
-      QScriptValue sv = engine->toScriptValue(ptr);
-      return sv;
-      }
-
-//---------------------------------------------------------
 //   ScriptEngine
 //---------------------------------------------------------
 
@@ -223,34 +200,20 @@ ScriptEngine::ScriptEngine()
                   }
             }
 
-      scoreClass = new ScScore(this);
-      globalObject().setProperty("Score", scoreClass->constructor());
+      //
+      // create MuseScore bindings
+      //
 
-      cursorClass = new ScSCursor(this);
-      globalObject().setProperty("Cursor", cursorClass->constructor());
+      globalObject().setProperty("Cursor",   create_Cursor_class(this),  QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Score",    create_Score_class(this),   QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Note",     create_Note_class(this),    QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Chord",    create_Chord_class(this),   QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Rest",     create_Rest_class(this),    QScriptValue::SkipInEnumeration);
 
-      ScChordPrototype* chordProto = new ScChordPrototype(0);
-      QScriptValue qsChordProto    = newQObject(chordProto);
-      setDefaultPrototype(qMetaTypeId<ChordPtr>(), qsChordProto);
-      QScriptValue qsChordCtor = newFunction(chordConstructor, qsChordProto);
-      globalObject().setProperty("Chord", qsChordCtor);
-
-      globalObject().setProperty("Note", create_Note_class(this), QScriptValue::SkipInEnumeration);
-
-      ScRest* restClass = new ScRest(this);
-      globalObject().setProperty("Rest", restClass->constructor());
-
-      ScHarmony* harmonyClass = new ScHarmony(this);
-      globalObject().setProperty("Harmony", harmonyClass->constructor());
-
-      ScText* textClass = new ScText(this);
-      globalObject().setProperty("Text", textClass->constructor());
-
-      ScMeasure* measureClass = new ScMeasure(this);
-      globalObject().setProperty("Measure", measureClass->constructor());
-
-      ScPart* partClass = new ScPart(this);
-      globalObject().setProperty("Part", partClass->constructor());
+      globalObject().setProperty("Harmony",  create_Harmony_class(this), QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Text",     create_Text_class(this),    QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Measure",  create_Measure_class(this), QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Part",     create_Part_class(this),    QScriptValue::SkipInEnumeration);
 
       globalObject().setProperty("division",            newVariant(AL::division));
       globalObject().setProperty("mscoreVersion",       newVariant(version()));
@@ -300,17 +263,15 @@ void MuseScore::pluginTriggered(int idx)
             debugger->action(QScriptEngineDebugger::InterruptAction)->trigger();
             }
 
-      QScriptValue v = se->getScoreClass()->newInstance(cs);
-      se->globalObject().setProperty("curScore", v);
+      se->globalObject().setProperty("curScore", se->newVariant(qVariantFromValue(cs)));
 
-      SCursor c;
-      v = se->getCursorClass()->newInstance(c);
-      se->globalObject().setProperty("curCursor", v);
+//      SCursor c;
+//      v = se->getCursorClass()->newInstance(c);
+//      se->globalObject().setProperty("curCursor", v);
 
       QFileInfo fi(f);
       pluginPath = fi.absolutePath();
-      v = se->newVariant(pluginPath);
-      se->globalObject().setProperty("pluginPath", v);
+      se->globalObject().setProperty("pluginPath", se->newVariant(pluginPath));
 
       QScriptValue val = se->evaluate(f.readAll(), pp);
       f.close();

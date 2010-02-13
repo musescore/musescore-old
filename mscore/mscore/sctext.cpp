@@ -18,245 +18,121 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "sctext.h"
-#include "scscore.h"
+#include "script.h"
 #include "text.h"
 
-//---------------------------------------------------------
-//   ScTextPropertyIterator
-//---------------------------------------------------------
+Q_DECLARE_METATYPE(Text*);
+Q_DECLARE_METATYPE(Score*);
 
-class ScTextPropertyIterator : public QScriptClassPropertyIterator
-      {
-      int m_index, m_last;
+static const char* const function_names_text[] = {
+      "text", "defaultFont", "color"
+      };
+static const int function_lengths_text[] = {
+      1, 1, 1
+      };
+static const QScriptValue::PropertyFlags flags_text[] = {
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      };
 
-   public:
-      ScTextPropertyIterator(const QScriptValue &object);
-      ~ScTextPropertyIterator() {}
-      bool hasNext() const;
-      void next();
-      bool hasPrevious() const;
-      void previous();
-      void toFront();
-      void toBack();
-      QScriptString name() const { return QScriptString(); }
-      uint id() const            { return m_last; }
+ScriptInterface textInterface = {
+      3,
+      function_names_text,
+      function_lengths_text,
+      flags_text
       };
 
 //---------------------------------------------------------
-//   ScText
+//   prototype_Text_call
 //---------------------------------------------------------
 
-ScText::ScText(QScriptEngine* engine)
-   : QObject(engine), QScriptClass(engine)
+static QScriptValue prototype_Text_call(QScriptContext* context, QScriptEngine*)
       {
-      qScriptRegisterMetaType<TextPtr>(engine, toScriptValue, fromScriptValue);
+      Q_ASSERT(context->callee().isFunction());
+      uint _id = context->callee().data().toUInt32();
+      Q_ASSERT((_id & 0xFFFF0000) == 0xBABF0000);
+      _id &= 0xffff;
 
-      textText = engine->toStringHandle(QLatin1String("text"));
-      textSize = engine->toStringHandle(QLatin1String("size"));
-      textDefaultFont = engine->toStringHandle(QLatin1String("defaultFont"));
-      textColor = engine->toStringHandle(QLatin1String("color"));
-
-
-      proto = engine->newQObject(new ScTextPrototype(this),
-         QScriptEngine::QtOwnership,
-         QScriptEngine::SkipMethodsInEnumeration
-          | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties);
-      QScriptValue global = engine->globalObject();
-      proto.setPrototype(global.property("Object").property("prototype"));
-
-      ctor = engine->newFunction(construct);
-      ctor.setData(qScriptValueFromValue(engine, this));
-      }
-
-//---------------------------------------------------------
-//   queryProperty
-//---------------------------------------------------------
-
-QScriptClass::QueryFlags ScText::queryProperty(const QScriptValue &object,
-   const QScriptString& name, QueryFlags flags, uint* /*id*/)
-      {
-      TextPtr* sp = qscriptvalue_cast<TextPtr*>(object.data());
-      if (!sp)
-            return 0;
-      if (name == textText || name == textSize || name == textDefaultFont
-         || name == textColor)
-            return flags;
-      return 0;   // qscript handles property
-      }
-
-//---------------------------------------------------------
-//   property
-//---------------------------------------------------------
-
-QScriptValue ScText::property(const QScriptValue& object,
-   const QScriptString& name, uint /*id*/)
-      {
-// printf("ScText::property <%s>\n", qPrintable(name.toString()));
-      TextPtr* text = qscriptvalue_cast<TextPtr*>(object.data());
-      if (!text)
-            return QScriptValue();
-      if (name == textText)
-            return QScriptValue(engine(), (*text)->getText());
-      else if (name == textSize)
-            return QScriptValue(engine(), (*text)->defaultFont().pixelSize());
-//      else if (name == textDefaultFont)
-//            return QScriptValue(engine(), (*text)->defaultFont());
-//      else if (name == textColor)
-//            return QScriptValue(engine(), (*text)->color());
-      return QScriptValue();
-      }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-void ScText::setProperty(QScriptValue &object,
-   const QScriptString& name, uint /*id*/, const QScriptValue& value)
-      {
-// printf("ScText::setProperty <%s>\n", qPrintable(name.toString()));
-      TextPtr* text = qscriptvalue_cast<TextPtr*>(object.data());
-      if (!text)
-            return;
-      if (name == textText)
-            (*text)->setText(value.toString());
-      else if (name == textSize) {
-            QFont f = (*text)->defaultFont();
-            double ps = value.toInteger();
-            ps = (ps * DPI)/PPI;
-            f.setPixelSize(lrint(ps));
-            (*text)->setDefaultFont(f);
+      Text* text = qscriptvalue_cast<Text*>(context->thisObject());
+      if (!text) {
+            return context->throwError(QScriptContext::TypeError,
+               QString::fromLatin1("Text.%0(): this object is not a Text")
+               .arg(function_names_text[_id]));
             }
-      else if (name == textDefaultFont) {
-            QFont qf = value.toVariant().value<QFont>();
-            (*text)->setDefaultFont(qf);
+      switch(_id) {
+            case 0:     // "text",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), text->getText());
+                  else if (context->argumentCount() == 1) {
+                        QString t = qscriptvalue_cast<QString>(context->argument(0));
+                        text->setText(t);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 1:     // "defaultFont",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), text->defaultFont());
+                  else if (context->argumentCount() == 1) {
+                        QFont f = qscriptvalue_cast<QFont>(context->argument(0));
+                        text->setDefaultFont(f);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 2:     // "color"
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), text->color());
+                  else if (context->argumentCount() == 1) {
+                        QColor c = qscriptvalue_cast<QColor>(context->argument(0));
+                        text->setColor(c);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
             }
-      else if (name == textColor) {
-            QColor c = value.toVariant().value<QColor>();
-            (*text)->setColor(c);
+      return context->throwError(QScriptContext::TypeError,
+         QString::fromLatin1("Note.%0(): bad argument count or value")
+         .arg(function_names_text[_id]));
+      }
+
+//---------------------------------------------------------
+//   static_Text_call
+//---------------------------------------------------------
+
+static QScriptValue static_Text_call(QScriptContext* context, QScriptEngine*)
+      {
+      if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
+            return context->throwError(QString::fromLatin1("Text(): Did you forget to construct with 'new'?"));
+      Text* text = 0;
+      if (context->argumentCount() == 0)
+            text = new Text(0);
+      else if (context->argumentCount() == 1) {
+            Score* score = qscriptvalue_cast<Score*>(context->argument(0));
+            text   = new Text(score);
             }
+      if (text)
+            return context->engine()->newVariant(context->thisObject(), qVariantFromValue(text));
+      return context->throwError(QString::fromLatin1("Text(): wrong argument count"));
       }
 
 //---------------------------------------------------------
-//   propertyFlags
+//   create_Text_class
 //---------------------------------------------------------
 
-QScriptValue::PropertyFlags ScText::propertyFlags(
-   const QScriptValue &/*object*/, const QScriptString& name, uint /*id*/)
+QScriptValue create_Text_class(QScriptEngine* engine)
       {
-      if (name == textText || name == textSize || name == textDefaultFont)
-            return QScriptValue::Undeletable;
-      return QScriptValue::Undeletable;
+      ScriptInterface* si = &textInterface;
+
+      engine->setDefaultPrototype(qMetaTypeId<Text*>(), QScriptValue());
+      QScriptValue proto = engine->newVariant(qVariantFromValue((Text*)0));
+
+      for (int i = 0; i < si->n; ++i) {
+            QScriptValue fun = engine->newFunction(prototype_Text_call, function_lengths_text[i]);
+            fun.setData(QScriptValue(engine, uint(0xBABF0000 + i)));
+            proto.setProperty(si->name(i), fun, si->flag(i));
+            }
+
+      engine->setDefaultPrototype(qMetaTypeId<Text*>(), proto);
+      return engine->newFunction(static_Text_call, proto, 1);
       }
 
-QScriptClassPropertyIterator *ScText::newIterator(const QScriptValue &object)
-      {
-      return new ScTextPropertyIterator(object);
-      }
 
-//---------------------------------------------------------
-//   newInstance
-//---------------------------------------------------------
-
-QScriptValue ScText::newInstance(Score* score)
-      {
-      Text* text = new Text(score);
-      return newInstance(text);
-      }
-
-QScriptValue ScText::newInstance(const TextPtr& note)
-      {
-      QScriptValue data = engine()->newVariant(qVariantFromValue(note));
-      return engine()->newObject(this, data);
-      }
-
-//---------------------------------------------------------
-//   construct
-//---------------------------------------------------------
-
-QScriptValue ScText::construct(QScriptContext *ctx, QScriptEngine *)
-      {
-      ScText *cls = qscriptvalue_cast<ScText*>(ctx->callee().data());
-      if (!cls)
-            return QScriptValue();
-      QScriptValue v = ctx->argument(0);
-      ScorePtr* sp   = qscriptvalue_cast<ScorePtr*>(v.data());
-      if (sp)
-            return cls->newInstance(*sp);
-      else
-            return QScriptValue();
-      }
-
-QScriptValue ScText::toScriptValue(QScriptEngine* eng, const TextPtr& ba)
-      {
-      QScriptValue ctor = eng->globalObject().property("Text");
-      ScText* cls = qscriptvalue_cast<ScText*>(ctor.data());
-      if (!cls)
-            return eng->newVariant(qVariantFromValue(ba));
-      return cls->newInstance(ba);
-      }
-
-void ScText::fromScriptValue(const QScriptValue& obj, TextPtr& ba)
-      {
-      TextPtr* pba = qscriptvalue_cast<TextPtr*>(obj.data());
-      ba = pba ? *pba : 0;
-      }
-
-//---------------------------------------------------------
-//   ScTextPropertyIterator
-//---------------------------------------------------------
-
-ScTextPropertyIterator::ScTextPropertyIterator(const QScriptValue &object)
-   : QScriptClassPropertyIterator(object)
-      {
-      toFront();
-      }
-
-bool ScTextPropertyIterator::hasNext() const
-      {
-//      Text* ba = qscriptvalue_cast<Text*>(object().data());
-      return m_index < 1;     // TODO ba->size();
-      }
-
-void ScTextPropertyIterator::next()
-      {
-      m_last = m_index;
-      ++m_index;
-      }
-
-bool ScTextPropertyIterator::hasPrevious() const
-      {
-      return (m_index > 0);
-      }
-
-void ScTextPropertyIterator::previous()
-      {
-      --m_index;
-      m_last = m_index;
-      }
-
-void ScTextPropertyIterator::toFront()
-      {
-      m_index = 0;
-      m_last = -1;
-      }
-
-void ScTextPropertyIterator::toBack()
-      {
-//      TextPtr* ba = qscriptvalue_cast<TextPtr*>(object().data());
-      m_index = 0; // ba->size();
-      m_last = -1;
-      }
-
-//---------------------------------------------------------
-//   thisText
-//---------------------------------------------------------
-
-Text* ScTextPrototype::thisText() const
-      {
-      TextPtr* np = qscriptvalue_cast<TextPtr*>(thisObject().data());
-      if (np)
-            return *np;
-      return 0;
-      }

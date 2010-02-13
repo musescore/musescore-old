@@ -18,12 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "sccursor.h"
-#include "scscore.h"
-#include "scnote.h"
-#include "sctext.h"
-#include "scmeasure.h"
-
 #include "chordrest.h"
 #include "chord.h"
 #include "rest.h"
@@ -32,6 +26,8 @@
 #include "text.h"
 #include "measure.h"
 #include "repeatlist.h"
+#include "script.h"
+#include "sccursor.h"
 
 //---------------------------------------------------------
 //   SCursor
@@ -82,11 +78,11 @@ ChordRest* SCursor::cr() const
 void SCursor::rewind()
       {
       _segment   = 0;
-      Measure* m = _score->tick2measure(0);
-      if(_expandRepeat && !_score->repeatList()->isEmpty()){
-        _curRepeatSegment = _score->repeatList()->first();
-        _curRepeatSegmentIndex = 0;
-      }
+      Measure* m = _score->firstMeasure();
+      if (_expandRepeat && !_score->repeatList()->isEmpty()){
+            _curRepeatSegment = _score->repeatList()->first();
+            _curRepeatSegmentIndex = 0;
+            }
       if (m) {
             _segment = m->first();
             if (_staffIdx >= 0) {
@@ -97,326 +93,213 @@ void SCursor::rewind()
             }
       }
 
-//---------------------------------------------------------
-//   ScSCursorPropertyIterator
-//---------------------------------------------------------
+Q_DECLARE_METATYPE(SCursor);
+Q_DECLARE_METATYPE(SCursor*);
+Q_DECLARE_METATYPE(Chord*);
+Q_DECLARE_METATYPE(Rest*);
+Q_DECLARE_METATYPE(Score*);
+Q_DECLARE_METATYPE(Measure*);
+Q_DECLARE_METATYPE(Text*);
 
-class ScSCursorPropertyIterator : public QScriptClassPropertyIterator
-      {
-      int m_index, m_last;
+static const char* const function_names_cursor[] = {
+      "rewind", "eos", "chord", "rest", "measure", "next", "nextMeasure", "putStaffText",  "isChord", "isRest",
+      "add", "tick", "time", "staff", "voice"
+      };
+static const int function_lengths_cursor[] = {
+      0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0
+      };
+static const QScriptValue::PropertyFlags flags_cursor[] = {
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
+      };
 
-   public:
-      ScSCursorPropertyIterator(const QScriptValue &object);
-      ~ScSCursorPropertyIterator() {}
-      bool hasNext() const;
-      void next();
-      bool hasPrevious() const;
-      void previous();
-      void toFront();
-      void toBack();
-      QScriptString name() const { return QScriptString(); }
-      uint id() const            { return m_last; }
+ScriptInterface cursorInterface = {
+      sizeof(function_names_cursor) / sizeof(*function_names_cursor),
+      function_names_cursor,
+      function_lengths_cursor,
+      flags_cursor
       };
 
 //---------------------------------------------------------
-//   ScSCursor
+//   prototype_Cursor_call
 //---------------------------------------------------------
 
-ScSCursor::ScSCursor(QScriptEngine* engine)
-   : QObject(engine), QScriptClass(engine)
+static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine*)
       {
-      qScriptRegisterMetaType<SCursor>(engine, toScriptValue, fromScriptValue);
+      Q_ASSERT(context->callee().isFunction());
+      uint _id = context->callee().data().toUInt32();
+      Q_ASSERT((_id & 0xFFFF0000) == 0xBABF0000);
+      _id &= 0xffff;
 
-      cursorStaff = engine->toStringHandle(QLatin1String("staff"));
-      cursorVoice = engine->toStringHandle(QLatin1String("voice"));
-
-      proto = engine->newQObject(new ScSCursorPrototype(this),
-         QScriptEngine::QtOwnership,
-         QScriptEngine::SkipMethodsInEnumeration
-          | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties);
-      QScriptValue global = engine->globalObject();
-      proto.setPrototype(global.property("Object").property("prototype"));
-
-      ctor = engine->newFunction(construct);
-      ctor.setData(qScriptValueFromValue(engine, this));
-      }
-
-//---------------------------------------------------------
-//   queryProperty
-//---------------------------------------------------------
-
-QScriptClass::QueryFlags ScSCursor::queryProperty(const QScriptValue &object,
-   const QScriptString& name, QueryFlags flags, uint* /*id*/)
-      {
-      SCursor* sp = qscriptvalue_cast<SCursor*>(object.data());
-      if (name == cursorStaff || name == cursorVoice)
-            return flags;
-      if (!sp)
-            return 0;
-      return 0;   // qscript handles property
-      }
-
-//---------------------------------------------------------
-//   property
-//---------------------------------------------------------
-
-QScriptValue ScSCursor::property(const QScriptValue& object,
-   const QScriptString& name, uint /*id*/)
-      {
-      SCursor* cursor = qscriptvalue_cast<SCursor*>(object.data());
-      if (!cursor)
-            return QScriptValue();
-      if (name == cursorStaff)
-            return QScriptValue(engine(), cursor->staffIdx());
-      else if (name == cursorVoice)
-            return QScriptValue(engine(), cursor->voice());
-      return QScriptValue();
-      }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-void ScSCursor::setProperty(QScriptValue &object,
-   const QScriptString& name, uint /*id*/, const QScriptValue& value)
-      {
-      SCursor* cursor = qscriptvalue_cast<SCursor*>(object.data());
-      if (!cursor)
-            return;
-      int val = value.toInt32();
-      if (name == cursorStaff) {
-            if (val < 0)
-                  val = 0;
-            else if (val >= cursor->score()->nstaves())
-                  val = cursor->score()->nstaves() - 1;
-            cursor->setStaffIdx(val);
+      SCursor* cursor = qscriptvalue_cast<SCursor*>(context->thisObject());
+      if (!cursor) {
+            return context->throwError(QScriptContext::TypeError,
+               QString::fromLatin1("Cursor.%0(): this object is not a Cursor")
+               .arg(function_names_cursor[_id]));
             }
-      else if (name == cursorVoice) {
-            if (val < 0)
-                  val = 0;
-            else if (val >= VOICES)
-                  val = VOICES - 1;
-            cursor->setVoice(val);
+      switch(_id) {
+            case 0:     // "rewind",
+                  if (context->argumentCount() == 0) {
+                        cursor->rewind();
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 1:     // "eos",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), cursor->segment() == 0);
+                  break;
+            case 2:     // "chord",
+                  if (context->argumentCount() == 0) {
+                        ChordRest* cr = cursor->cr();
+                        if (cr->type() != CHORD)
+                              cr = 0;
+                        return qScriptValueFromValue(context->engine(), static_cast<Chord*>(cr));
+                        }
+                  break;
+            case 3:     // "rest",
+                  if (context->argumentCount() == 0) {
+                        ChordRest* cr = cursor->cr();
+                        if (cr->type() != REST)
+                              cr = 0;
+                        return qScriptValueFromValue(context->engine(), static_cast<Rest*>(cr));
+                        }
+                  break;
+            case 4:     // "measure",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), cursor->cr()->measure());
+                  break;
+            case 5:     // "next",
+                  if (context->argumentCount() == 0) {
+                        cursor->next();
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 6:     // "nextMeasure",
+                  if (context->argumentCount() == 0) {
+                        cursor->nextMeasure();
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 7:     // "putStaffText",
+                  if (context->argumentCount() == 1) {
+                        Text* t = qscriptvalue_cast<Text*>(context->argument(0));
+                        if (t) {
+                              cursor->putStaffText(t);
+                              return context->engine()->undefinedValue();
+                              }
+                        }
+                  break;
+            case 8:     // "isChord",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), cursor->cr()->type() == CHORD);
+                  break;
+            case 9:     // "isRest",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), cursor->cr()->type() == REST);
+                  break;
+            case 10:    // "add",
+                  if (context->argumentCount() == 1) {
+                        ChordRest* cr = qscriptvalue_cast<Chord*>(context->argument(0));
+                        if (!cr)
+                              cr = qscriptvalue_cast<Rest*>(context->argument(0));
+                        if (cr) {
+                              cursor->add(cr);
+                              return context->engine()->undefinedValue();
+                              }
+                        }
+                  break;
+            case 11:    // "tick",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), cursor->tick());
+                  break;
+            case 12:    // "time"
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), cursor->time());
+                  break;
+            case 13:    // "staff"
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), cursor->staffIdx());
+                  else if (context->argumentCount() == 1) {
+                        int val = context->argument(0).toInt32();
+                        if (val < 0)
+                              val = 0;
+                        else if (val >= cursor->score()->nstaves())
+                              val = cursor->score()->nstaves() - 1;
+                        cursor->setStaffIdx(val);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 14:    // "voice"
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), cursor->voice());
+                  else if (context->argumentCount() == 1) {
+                        int val = context->argument(0).toInt32();
+                        if (val < 0)
+                              val = 0;
+                        else if (val >= VOICES)
+                              val = VOICES - 1;
+                        cursor->setVoice(val);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
             }
+      return context->throwError(QScriptContext::TypeError,
+         QString::fromLatin1("Cursor.%0(): bad argument count or value")
+         .arg(function_names_cursor[_id]));
       }
 
 //---------------------------------------------------------
-//   propertyFlags
+//   static_Cursor_call
 //---------------------------------------------------------
 
-QScriptValue::PropertyFlags ScSCursor::propertyFlags(
-   const QScriptValue &/*object*/, const QScriptString& /*name*/, uint /*id*/)
+static QScriptValue static_Cursor_call(QScriptContext* context, QScriptEngine*)
       {
-      return QScriptValue::Undeletable;
-      }
-
-QScriptClassPropertyIterator* ScSCursor::newIterator(const QScriptValue &object)
-      {
-      return new ScSCursorPropertyIterator(object);
-      }
-
-//---------------------------------------------------------
-//   newInstance
-//---------------------------------------------------------
-
-QScriptValue ScSCursor::newInstance(Score* score)
-      {
-      SCursor* cursor = new SCursor(score);
-      return newInstance(*cursor);
-      }
-
-
-QScriptValue ScSCursor::newInstance(Score* score, bool expandRepeat)
-      {
-      SCursor* cursor = new SCursor(score, expandRepeat);
-      return newInstance(*cursor);
-      }
-
-QScriptValue ScSCursor::newInstance(const SCursor& cursor)
-      {
-      QScriptValue data = engine()->newVariant(qVariantFromValue(cursor));
-      return engine()->newObject(this, data);
-      }
-
-//---------------------------------------------------------
-//   construct
-//---------------------------------------------------------
-
-QScriptValue ScSCursor::construct(QScriptContext *ctx, QScriptEngine *)
-      {
-      ScSCursor *cls = qscriptvalue_cast<ScSCursor*>(ctx->callee().data());
-      if (!cls)
-            return QScriptValue();
-      QScriptValue v = ctx->argument(0);
-      ScorePtr* sp = qscriptvalue_cast<ScorePtr*>(v.data());
-      if (sp){
-            bool expandRepeat = false;
-            if(ctx->argumentCount () > 1){
-              QScriptValue v1 = ctx->argument(1);
-              if(v1.isBoolean()){
-                expandRepeat = v1.toBoolean();
-              }
+      if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
+            return context->throwError(QString::fromLatin1("Cursor(): Did you forget to construct with 'new'?"));
+      SCursor* cursor = 0;
+      if (context->argumentCount() == 0)
+            cursor = new SCursor(0);
+      else if (context->argumentCount() == 1) {
+            Score* score = qscriptvalue_cast<Score*>(context->argument(0));
+            cursor   = new SCursor(score);
             }
-            return cls->newInstance(*sp, expandRepeat);
-      }
-      else
-            return QScriptValue();
+      if (cursor)
+            return context->engine()->newVariant(context->thisObject(), qVariantFromValue(cursor));
+      return context->throwError(QString::fromLatin1("Cursor(): wrong argument count"));
       }
 
-QScriptValue ScSCursor::toScriptValue(QScriptEngine* eng, const SCursor& ba)
+//---------------------------------------------------------
+//   create_Cursor_class
+//---------------------------------------------------------
+
+QScriptValue create_Cursor_class(QScriptEngine* engine)
       {
-      QScriptValue ctor = eng->globalObject().property("Cursor");
-      ScSCursor* cls = qscriptvalue_cast<ScSCursor*>(ctor.data());
-      if (!cls)
-            return eng->newVariant(qVariantFromValue(ba));
-      return cls->newInstance(ba);
-      }
+      ScriptInterface* si = &cursorInterface;
 
-void ScSCursor::fromScriptValue(const QScriptValue& obj, SCursor& ba)
-      {
-      ba = qscriptvalue_cast<SCursor>(obj.data());
-      }
+      engine->setDefaultPrototype(qMetaTypeId<SCursor*>(), QScriptValue());
+      QScriptValue proto = engine->newVariant(qVariantFromValue((SCursor*)0));
 
-//---------------------------------------------------------
-//   ScSCursorPropertyIterator
-//---------------------------------------------------------
+      for (int i = 0; i < si->n; ++i) {
+            QScriptValue fun = engine->newFunction(prototype_Cursor_call, function_lengths_cursor[i]);
+            fun.setData(QScriptValue(engine, uint(0xBABF0000 + i)));
+            proto.setProperty(si->name(i), fun, si->flag(i));
+            }
 
-ScSCursorPropertyIterator::ScSCursorPropertyIterator(const QScriptValue &object)
-   : QScriptClassPropertyIterator(object)
-      {
-      toFront();
-      }
-
-bool ScSCursorPropertyIterator::hasNext() const
-      {
-//      SCursor* ba = qscriptvalue_cast<SCursor*>(object().data());
-      return m_index < 1;     // TODO ba->size();
-      }
-
-void ScSCursorPropertyIterator::next()
-      {
-      m_last = m_index;
-      ++m_index;
-      }
-
-bool ScSCursorPropertyIterator::hasPrevious() const
-      {
-      return (m_index > 0);
-      }
-
-void ScSCursorPropertyIterator::previous()
-      {
-      --m_index;
-      m_last = m_index;
-      }
-
-void ScSCursorPropertyIterator::toFront()
-      {
-      m_index = 0;
-      m_last = -1;
-      }
-
-void ScSCursorPropertyIterator::toBack()
-      {
-//      SCursor* ba = qscriptvalue_cast<SCursor*>(object().data());
-      m_index = 0; // ba->size();
-      m_last = -1;
-      }
-
-//---------------------------------------------------------
-//   thisSCursor
-//---------------------------------------------------------
-
-SCursor* ScSCursorPrototype::thisSCursor() const
-      {
-      return qscriptvalue_cast<SCursor*>(thisObject().data());
-      }
-
-//---------------------------------------------------------
-//   rewind
-//    rewind cursor to start of score
-//---------------------------------------------------------
-
-void ScSCursorPrototype::rewind()
-      {
-      SCursor* cursor = thisSCursor();
-      cursor->rewind();
-      }
-
-//---------------------------------------------------------
-//   eos
-//    return true if cursor is at end of score
-//---------------------------------------------------------
-
-bool ScSCursorPrototype::eos() const
-      {
-      SCursor* cursor = thisSCursor();
-      return cursor->segment() == 0;
-      }
-
-//---------------------------------------------------------
-//   chord
-//    get chord at current position
-//---------------------------------------------------------
-
-ChordPtr ScSCursorPrototype::chord()
-      {
-      SCursor* cursor = thisSCursor();
-      ChordRest* cr = cursor->cr();
-      if (cr == 0 || cr->type() != CHORD)
-            return 0;
-      return static_cast<ChordPtr>(cr);
-      }
-
-//---------------------------------------------------------
-//   rest
-//    get rest at current position
-//---------------------------------------------------------
-
-RestPtr ScSCursorPrototype::rest()
-      {
-      SCursor* cursor = thisSCursor();
-      ChordRest* cr = cursor->cr();
-      if (cr == 0 || cr->type() != REST)
-            return 0;
-      return static_cast<RestPtr>(cr);
-      }
-
-//---------------------------------------------------------
-//   measure
-//    get measure at current position
-//---------------------------------------------------------
-
-MeasurePtr ScSCursorPrototype::measure()
-      {
-      SCursor* cursor = thisSCursor();
-      Measure* m = cursor->cr()->measure();
-      if (m == 0)
-            return 0;
-      return m;
-      }
-
-//---------------------------------------------------------
-//   isChord
-//---------------------------------------------------------
-
-bool ScSCursorPrototype::isChord() const
-      {
-      SCursor* cursor = thisSCursor();
-      ChordRest* cr = cursor->cr();
-      return cr && (cr->type() == CHORD);
-      }
-
-//---------------------------------------------------------
-//   isChord
-//---------------------------------------------------------
-
-bool ScSCursorPrototype::isRest() const
-      {
-      SCursor* cursor = thisSCursor();
-      ChordRest* cr = cursor->cr();
-      return cr && (cr->type() == REST);
+      engine->setDefaultPrototype(qMetaTypeId<SCursor*>(), proto);
+      return engine->newFunction(static_Cursor_call, proto, 1);
       }
 
 //---------------------------------------------------------
@@ -425,41 +308,35 @@ bool ScSCursorPrototype::isRest() const
 //    return false if end of score is reached
 //---------------------------------------------------------
 
-bool ScSCursorPrototype::next()
+bool SCursor::next()
       {
-      SCursor* cursor = thisSCursor();
-      Segment* seg = cursor->segment();;
+      Segment* seg = segment();;
       seg = seg->next1();
-      RepeatSegment* rs = cursor->repeatSegment();
-      if(rs && cursor->expandRepeat()){
-            Score* score = cursor->score();
+      RepeatSegment* rs = repeatSegment();
+      if (rs && expandRepeat()){
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
             if ((seg  && (seg->tick() >= endTick) ) || (!seg) ){
-                int rsIdx = cursor->repeatSegmentIndex();
-                rsIdx ++;
-                if (rsIdx < score->repeatList()->size()){ //there is a next repeat segment
-                    rs = score->repeatList()->at(rsIdx);
-                    cursor->setRepeatSegment(rs);
-                    cursor->setRepeatSegmentIndex(rsIdx);
-                    Measure* m = score->tick2measure(rs->tick);
-                    if(m)
-                      seg = m->first();
-                    else
-                      seg = 0;
-                }else{
-                    seg = 0;
-                }
+                  int rsIdx = repeatSegmentIndex();
+                  rsIdx ++;
+                  if (rsIdx < score()->repeatList()->size()){ //there is a next repeat segment
+                        rs = score()->repeatList()->at(rsIdx);
+                        setRepeatSegment(rs);
+                        setRepeatSegmentIndex(rsIdx);
+                        Measure* m = score()->tick2measure(rs->tick);
+                        seg = m ? m->first() : 0;
+                        }
+                  else
+                        seg = 0;
+                  }
             }
-      }
 
-      int staffIdx = cursor->staffIdx();
-      if (staffIdx >= 0) {
-            int track = staffIdx * VOICES + cursor->voice();
+      if (_staffIdx >= 0) {
+            int track = _staffIdx * VOICES + _voice;
             while (seg && ((seg->subtype() != Segment::SegChordRest) || (seg->element(track) == 0)))
                   seg = seg->next1();
             }
-      cursor->setSegment(seg);
+      _segment = seg;
       return seg != 0;
       }
 
@@ -469,62 +346,57 @@ bool ScSCursorPrototype::next()
 //    return false if end of score is reached
 //---------------------------------------------------------
 
-bool ScSCursorPrototype::nextMeasure()
-{
-      SCursor* cursor = thisSCursor();
-      Measure* m = cursor->segment()->measure();
+bool SCursor::nextMeasure()
+      {
+      Measure* m = segment()->measure();
       m = m->nextMeasure();
-      RepeatSegment* rs = cursor->repeatSegment();
-      if(rs && cursor->expandRepeat()){
-            Score* score = cursor->score();
+      RepeatSegment* rs = repeatSegment();
+      if (rs && expandRepeat()){
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
             if ((m  && (m->tick() + m->tickLen() > endTick) ) || (!m) ){
-                int rsIdx = cursor->repeatSegmentIndex();
-                rsIdx ++;
-                if (rsIdx < score->repeatList()->size()){ //there is a next repeat segment
-                    rs = score->repeatList()->at(rsIdx);
-                    cursor->setRepeatSegment(rs);
-                    cursor->setRepeatSegmentIndex(rsIdx);
-                    m = score->tick2measure(rs->tick);
-                }else{
-                    m = 0;
-                }
+                  int rsIdx = repeatSegmentIndex();
+                  rsIdx ++;
+                  if (rsIdx < score()->repeatList()->size()) {       //there is a next repeat segment
+                        rs = score()->repeatList()->at(rsIdx);
+                        setRepeatSegment(rs);
+                        setRepeatSegmentIndex(rsIdx);
+                        m = score()->tick2measure(rs->tick);
+                        }
+                  else{
+                        m = 0;
+                        }
+                  }
             }
-      }
 
       if (m == 0) {
-            cursor->setSegment(0);
+            setSegment(0);
             return false;
-      }
+            }
       Segment* seg = m->first();
-      int staffIdx = cursor->staffIdx();
-      if (staffIdx >= 0) {
-            int track = staffIdx * VOICES + cursor->voice();
+      if (_staffIdx >= 0) {
+            int track = _staffIdx * VOICES + _voice;
             while (seg && ((seg->subtype() != Segment::SegChordRest) || (seg->element(track) == 0)))
                   seg = seg->next1();
             }
-      cursor->setSegment(seg);
+      _segment = seg;
       return seg != 0;
-
-}
+      }
 
 //---------------------------------------------------------
 //   putStaffText
 //---------------------------------------------------------
 
-void ScSCursorPrototype::putStaffText(TextPtr s)
+void SCursor::putStaffText(Text* s)
       {
-      SCursor* cursor = thisSCursor();
-      ChordRest* cr = cursor->cr();
-      if (!cr || !s)
+      if (!cr() || !s)
             return;
       QFont f = s->defaultFont();
-      s->setTrack(cr->track());
+      s->setTrack(cr()->track());
       s->setSystemFlag(false);
       s->setSubtype(TEXT_STAFF);
-      s->setParent(cr->measure());
-      s->setTick(cr->tick());
+      s->setParent(cr()->measure());
+      s->setTick(cr()->tick());
       s->score()->undoAddElement(s);
       s->score()->setLayoutAll(true);
       }
@@ -533,65 +405,60 @@ void ScSCursorPrototype::putStaffText(TextPtr s)
 //   add
 //---------------------------------------------------------
 
-void ScSCursorPrototype::add(ChordRest* c)
+void SCursor::add(ChordRest* c)
       {
-      SCursor* cursor = thisSCursor();
-      ChordRest* cr   = cursor->cr();
-      int tick        = cr->tick();
-      int staffIdx    = cursor->staffIdx();
-      int voice       = cursor->voice();
-      Score* score    = cursor->score();
-
+      ChordRest* chordRest = cr();
+      if (!chordRest) {
+            printf("SCursor::add: no cr\n");
+            return;
+            }
+      int tick = chordRest->tick();
       Fraction len(c->duration().fraction());
-      int track       = staffIdx * VOICES + voice;
-      Fraction gap    = score->makeGap(cr, len, cr->tuplet());
+      int track       = _staffIdx * VOICES + _voice;
+      Fraction gap    = score()->makeGap(chordRest, len, chordRest->tuplet());
       if (gap < len) {
             printf("cannot make gap\n");
             return;
             }
-      Measure* measure = score->tick2measure(tick);
+      Measure* measure = score()->tick2measure(tick);
       Segment::SegmentType st = Segment::SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);
-            score->undoAddElement(seg);
+            score()->undoAddElement(seg);
             }
-      c->setScore(score);
+      c->setScore(score());
       if (c->type() == CHORD) {
             Chord* chord = static_cast<Chord*>(c);
             NoteList* nl = chord->noteList();
             for (iNote in = nl->begin(); in != nl->end(); ++in)
-                  in->second->setScore(score);
+                  in->second->setScore(score());
             }
 
-      cursor->setSegment(seg);
+      setSegment(seg);
       c->setParent(seg);
       c->setTrack(track);
-      score->undoAddElement(c);
+      score()->undoAddElement(c);
       }
 
 //---------------------------------------------------------
 //   tick
 //---------------------------------------------------------
 
-int ScSCursorPrototype::tick()
+int SCursor::tick()
       {
-      SCursor* cursor = thisSCursor();
-      ChordRest* cr   = cursor->cr();
       int offset = 0;
-      RepeatSegment* rs = cursor->repeatSegment();
-      if (rs && cursor->expandRepeat())
+      RepeatSegment* rs = repeatSegment();
+      if (rs && expandRepeat())
             offset = rs->utick - rs->tick;
-      return cr->tick() + offset;
+      return cr()->tick() + offset;
       }
 
 //---------------------------------------------------------
 //   time
 //---------------------------------------------------------
 
-double ScSCursorPrototype::time()
+double SCursor::time()
       {
-      int tick = this->tick();
-      SCursor* cursor = thisSCursor();
-      return cursor->score()->utick2utime(tick)*1000;
+      return score()->utick2utime(tick()) * 1000;
       }
