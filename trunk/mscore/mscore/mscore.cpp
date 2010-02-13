@@ -1800,7 +1800,9 @@ int main(int argc, char* av[])
                         return 0;
                   }
             else
-                  app->sendMessage("");
+                  if (app->sendMessage("")) {
+                      return 0;
+                      }
             }
 
 /**/
