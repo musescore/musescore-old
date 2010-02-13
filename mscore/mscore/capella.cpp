@@ -115,7 +115,7 @@ void SimpleTextObj::read()
       align  = cap->readByte();
       _font  = cap->readFont();
       _text  = cap->readString();
-printf("read SimpletextObj(%d,%d) len %zd <%s> char0: %02x\n",
+printf("read SimpletextObj(%d,%d) len %d <%s> char0: %02x\n",
       relPos.x(), relPos.y(), strlen(_text), _text, _text[0]);
       }
 
