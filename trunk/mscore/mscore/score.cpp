@@ -2137,9 +2137,12 @@ void Score::setSelection(const Selection& s)
 
 Text* Score::getText(int subtype)
       {
-      foreach(Element* e, *firstMeasure()->el()) {
-            if (e->type() == TEXT && e->subtype() == subtype)
-                  return static_cast<Text*>(e);
+      Measure* m = firstMeasure();
+      if (m) {
+            foreach(Element* e, *m->el()) {
+                  if (e->type() == TEXT && e->subtype() == subtype)
+                        return static_cast<Text*>(e);
+                  }
             }
       return 0;
       }
