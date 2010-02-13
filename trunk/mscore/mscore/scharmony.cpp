@@ -19,269 +19,120 @@
 //=============================================================================
 
 #include "mscore.h"
-#include "scharmony.h"
 #include "harmony.h"
 #include "utils.h"
-#include "scscore.h"
 #include "undo.h"
+#include "script.h"
 
-//---------------------------------------------------------
-//   ScHarmonyPropertyIterator
-//---------------------------------------------------------
+Q_DECLARE_METATYPE(Harmony*);
+Q_DECLARE_METATYPE(Score*);
 
-class ScHarmonyPropertyIterator : public QScriptClassPropertyIterator
-      {
-      int m_index, m_last;
+static const char* const function_names_harmony[] = {
+      "id", "root", "base"
+      };
+static const int function_lengths_harmony[] = {
+      1, 1, 1
+      };
+static const QScriptValue::PropertyFlags flags_harmony[] = {
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      };
 
-   public:
-      ScHarmonyPropertyIterator(const QScriptValue &object);
-      ~ScHarmonyPropertyIterator() {}
-      bool hasNext() const;
-      void next();
-      bool hasPrevious() const;
-      void previous();
-      void toFront();
-      void toBack();
-      QScriptString name() const { return QScriptString(); }
-      uint id() const            { return m_last; }
+ScriptInterface harmonyInterface = {
+      3,
+      function_names_harmony,
+      function_lengths_harmony,
+      flags_harmony
       };
 
 //---------------------------------------------------------
-//   ScHarmony
+//   prototype_Harmony_call
 //---------------------------------------------------------
 
-ScHarmony::ScHarmony(QScriptEngine* engine)
-   : QObject(engine), QScriptClass(engine)
+static QScriptValue prototype_Harmony_call(QScriptContext* context, QScriptEngine*)
       {
-      qScriptRegisterMetaType<HarmonyPtr>(engine, toScriptValue, fromScriptValue);
+      Q_ASSERT(context->callee().isFunction());
+      uint _id = context->callee().data().toUInt32();
+      Q_ASSERT((_id & 0xFFFF0000) == 0xBABF0000);
+      _id &= 0xffff;
 
-      proto = engine->newQObject(new ScHarmonyPrototype(this),
-         QScriptEngine::QtOwnership,
-         QScriptEngine::SkipMethodsInEnumeration
-          | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties);
-      QScriptValue global = engine->globalObject();
-      proto.setPrototype(global.property("Object").property("prototype"));
-
-      ctor = engine->newFunction(construct);
-      ctor.setData(qScriptValueFromValue(engine, this));
+      Harmony* harmony = qscriptvalue_cast<Harmony*>(context->thisObject());
+      if (!harmony) {
+            return context->throwError(QScriptContext::TypeError,
+               QString::fromLatin1("Harmony.%0(): this object is not a Harmony")
+               .arg(function_names_harmony[_id]));
+            }
+      switch(_id) {
+            case 0:     // "id",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), harmony->id());
+                  else if (context->argumentCount() == 1) {
+                        int val = context->argument(0).toInt32();
+                        harmony->setId(val);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 1:     // "root",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), harmony->rootTpc());
+                  else if (context->argumentCount() == 1) {
+                        int val = context->argument(0).toInt32();
+                        harmony->setRootTpc(val);
+                        return context->engine()->undefinedValue();
+                        }
+            case 2:     // "base"
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), harmony->baseTpc());
+                  else if (context->argumentCount() == 1) {
+                        int val = context->argument(0).toInt32();
+                        harmony->setBaseTpc(val);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            }
+      return context->throwError(QScriptContext::TypeError,
+         QString::fromLatin1("Note.%0(): bad argument count or value")
+         .arg(function_names_harmony[_id]));
       }
 
 //---------------------------------------------------------
-//   queryProperty
+//   static_Harmony_call
 //---------------------------------------------------------
 
-QScriptClass::QueryFlags ScHarmony::queryProperty(const QScriptValue &object,
-   const QScriptString& /*name*/, QueryFlags /*flags*/, uint* /*id*/)
+static QScriptValue static_Harmony_call(QScriptContext* context, QScriptEngine*)
       {
-      HarmonyPtr* sp = qscriptvalue_cast<HarmonyPtr*>(object.data());
-      if (!sp)
-            return 0;
-
-      return 0;   // qscript handles property
+      if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
+            return context->throwError(QString::fromLatin1("Harmony(): Did you forget to construct with 'new'?"));
+      Harmony* harmony = 0;
+      if (context->argumentCount() == 0)
+            harmony = new Harmony(0);
+      else if (context->argumentCount() == 1) {
+            Score* score = qscriptvalue_cast<Score*>(context->argument(0));
+            harmony   = new Harmony(score);
+            }
+      if (harmony)
+            return context->engine()->newVariant(context->thisObject(), qVariantFromValue(harmony));
+      return context->throwError(QString::fromLatin1("Harmony(): wrong argument count"));
       }
 
 //---------------------------------------------------------
-//   property
+//   create_Harmony_class
 //---------------------------------------------------------
 
-QScriptValue ScHarmony::property(const QScriptValue& object,
-   const QScriptString& name, uint /*id*/)
+QScriptValue create_Harmony_class(QScriptEngine* engine)
       {
-printf("property <%s>\n", qPrintable(name.toString()));
-      HarmonyPtr* score = qscriptvalue_cast<HarmonyPtr*>(object.data());
-      if (!score)
-            return QScriptValue();
-      return QScriptValue();
+      ScriptInterface* si = &harmonyInterface;
+
+      engine->setDefaultPrototype(qMetaTypeId<Harmony*>(), QScriptValue());
+      QScriptValue proto = engine->newVariant(qVariantFromValue((Harmony*)0));
+
+      for (int i = 0; i < si->n; ++i) {
+            QScriptValue fun = engine->newFunction(prototype_Harmony_call, function_lengths_harmony[i]);
+            fun.setData(QScriptValue(engine, uint(0xBABF0000 + i)));
+            proto.setProperty(si->name(i), fun, si->flag(i));
+            }
+
+      engine->setDefaultPrototype(qMetaTypeId<Harmony*>(), proto);
+      return engine->newFunction(static_Harmony_call, proto, 1);
       }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-void ScHarmony::setProperty(QScriptValue& /*object*/ , const QScriptString& /*s*/, uint /*id*/, const QScriptValue& /*value*/)
-      {
-/*      HarmonyPtr* score = qscriptvalue_cast<HarmonyPtr*>(object.data());
-      if (!score)
-            return;
-      */
-      }
-
-//---------------------------------------------------------
-//   propertyFlags
-//---------------------------------------------------------
-
-QScriptValue::PropertyFlags ScHarmony::propertyFlags(
-   const QScriptValue &/*object*/, const QScriptString& /*name*/, uint /*id*/)
-      {
-#if 0
-      if (name == scoreName)
-            return QScriptValue::Undeletable;
-      else if (name == scoreStaves)
-            return QScriptValue::Undeletable | QScriptValue::ReadOnly;
-#endif
-      return QScriptValue::Undeletable;
-      }
-
-QScriptClassPropertyIterator *ScHarmony::newIterator(const QScriptValue &object)
-      {
-      return new ScHarmonyPropertyIterator(object);
-      }
-
-//---------------------------------------------------------
-//   newInstance
-//---------------------------------------------------------
-
-QScriptValue ScHarmony::newInstance(Score* score)
-      {
-      Harmony* note = new Harmony(score);
-      return newInstance(note);
-      }
-
-QScriptValue ScHarmony::newInstance(const HarmonyPtr& note)
-      {
-      QScriptValue data = engine()->newVariant(qVariantFromValue(note));
-      return engine()->newObject(this, data);
-      }
-
-//---------------------------------------------------------
-//   construct
-//---------------------------------------------------------
-
-QScriptValue ScHarmony::construct(QScriptContext *ctx, QScriptEngine *)
-      {
-      ScHarmony *cls = qscriptvalue_cast<ScHarmony*>(ctx->callee().data());
-      if (!cls)
-            return QScriptValue();
-      QScriptValue v = ctx->argument(0);
-      ScorePtr* sp   = qscriptvalue_cast<ScorePtr*>(v.data());
-      return cls->newInstance(sp ? *sp : 0);
-      }
-
-QScriptValue ScHarmony::toScriptValue(QScriptEngine* eng, const HarmonyPtr& ba)
-      {
-      QScriptValue ctor = eng->globalObject().property("Harmony");
-      ScHarmony* cls = qscriptvalue_cast<ScHarmony*>(ctor.data());
-      if (!cls)
-            return eng->newVariant(qVariantFromValue(ba));
-      return cls->newInstance(ba);
-      }
-
-void ScHarmony::fromScriptValue(const QScriptValue& obj, HarmonyPtr& ba)
-      {
-      HarmonyPtr* np = qscriptvalue_cast<HarmonyPtr*>(obj.data());
-      ba = np ? *np : 0;
-      }
-
-//---------------------------------------------------------
-//   ScHarmonyPropertyIterator
-//---------------------------------------------------------
-
-ScHarmonyPropertyIterator::ScHarmonyPropertyIterator(const QScriptValue &object)
-   : QScriptClassPropertyIterator(object)
-      {
-      toFront();
-      }
-
-bool ScHarmonyPropertyIterator::hasNext() const
-      {
-//      Harmony* ba = qscriptvalue_cast<Harmony*>(object().data());
-      return m_index < 1;     // TODO ba->size();
-      }
-
-void ScHarmonyPropertyIterator::next()
-      {
-      m_last = m_index;
-      ++m_index;
-      }
-
-bool ScHarmonyPropertyIterator::hasPrevious() const
-      {
-      return (m_index > 0);
-      }
-
-void ScHarmonyPropertyIterator::previous()
-      {
-      --m_index;
-      m_last = m_index;
-      }
-
-void ScHarmonyPropertyIterator::toFront()
-      {
-      m_index = 0;
-      m_last = -1;
-      }
-
-void ScHarmonyPropertyIterator::toBack()
-      {
-//      HarmonyPtr* ba = qscriptvalue_cast<HarmonyPtr*>(object().data());
-      m_index = 0; // ba->size();
-      m_last = -1;
-      }
-
-//---------------------------------------------------------
-//   thisHarmony
-//---------------------------------------------------------
-
-Harmony* ScHarmonyPrototype::thisHarmony() const
-      {
-      HarmonyPtr* np = qscriptvalue_cast<HarmonyPtr*>(thisObject().data());
-      if (np)
-            return *np;
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   getId
-//---------------------------------------------------------
-
-int ScHarmonyPrototype::getId() const
-      {
-      return thisHarmony()->id();
-      }
-
-//---------------------------------------------------------
-//   getBase
-//---------------------------------------------------------
-
-int ScHarmonyPrototype::getBase() const
-      {
-      return thisHarmony()->baseTpc();
-      }
-
-//---------------------------------------------------------
-//   getRoot
-//---------------------------------------------------------
-
-int ScHarmonyPrototype::getRoot() const
-      {
-      return thisHarmony()->rootTpc();
-      }
-
-//---------------------------------------------------------
-//   setId
-//---------------------------------------------------------
-
-void ScHarmonyPrototype::setId(int v)
-      {
-      thisHarmony()->setId(v);
-      }
-
-//---------------------------------------------------------
-//   setRoot
-//---------------------------------------------------------
-
-void ScHarmonyPrototype::setRoot(int v)
-      {
-      thisHarmony()->setRootTpc(v);
-      }
-
-//---------------------------------------------------------
-//   setBase
-//---------------------------------------------------------
-
-void ScHarmonyPrototype::setBase(int v)
-      {
-      thisHarmony()->setRootTpc(v);
-      }
-

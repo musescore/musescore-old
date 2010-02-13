@@ -33,6 +33,7 @@ Xml::Xml()
       curTrack      = -1;
       trackDiff     = 0;
       clipboardmode = false;
+      excerptmode   = false;
       tupletId      = 1;
       beamId        = 1;
       }
@@ -44,6 +45,7 @@ Xml::Xml(QIODevice* device)
       curTrack      = -1;
       trackDiff     = 0;
       clipboardmode = false;
+      excerptmode   = false;
       tupletId      = 1;
       beamId        = 1;
       }

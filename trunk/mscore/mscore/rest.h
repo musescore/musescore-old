@@ -49,7 +49,7 @@ class Rest : public ChordRest {
       virtual Space space() const;
 
    public:
-      Rest(Score*);
+      Rest(Score* s = 0);
       Rest(Score*, int tick, const Duration&);
       virtual Rest* clone() const      { return new Rest(*this); }
       virtual ElementType type() const { return REST; }

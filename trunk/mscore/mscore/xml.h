@@ -45,6 +45,7 @@ class Xml : public AL::Xml {
       int curTrack;
       int trackDiff;          // saved track is curTrack-trackDiff
       bool clipboardmode;     // used to modify write() behaviour
+      bool excerptmode;       // true when writing a part
 
       int tupletId;
       int beamId;

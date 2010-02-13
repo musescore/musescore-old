@@ -53,26 +53,28 @@ function init()
 //-------------------------------------------------------------------
 
 function run()
-  {
+      {
       var cursor = new Cursor(curScore);
       for (var staff = 0; staff < curScore.staves; ++staff) {
             cursor.staff = staff;
             for (var v = 0; v < 3; v++) {
-              cursor.voice = v;
-              cursor.rewind();  // set cursor to first chord/rest
+                  cursor.voice = v;
+                  cursor.rewind();  // set cursor to first chord/rest
 
-              while (!cursor.eos()) {
-                    if (cursor.isChord()) {
-                          for (var i = 0; i < cursor.chord().notes(); i++) {
-                                var note = cursor.chord().note(i);
-                                note.color = new QColor(colors[note.pitch % 12]);
-                          }
-                    }
-                    cursor.next();
-              }
+                  while (!cursor.eos()) {
+                        if (cursor.isChord()) {
+                              var chord = cursor.chord();
+                              var n     = chord.notes;
+                              for (var i = 0; i < n; i++) {
+                                    var note   = chord.note(i);
+                                    note.color = new QColor(colors[note.pitch % 12]);
+                                    }
+                              }
+                        cursor.next();
+                        }
+                  }
             }
-       }
-    }
+      }
 
 //---------------------------------------------------------
 //    menu:  defines were the function will be placed

@@ -214,7 +214,7 @@ void Staff::write(Xml& xml) const
       xml.stag("Staff");
       if (lines() != 5)
             xml.tag("lines", lines());
-      if (small())
+      if (small() && !xml.excerptmode)    // switch small staves to normal ones when extracting part
             xml.tag("small", small());
       if (invisible())
             xml.tag("invisible", invisible());

@@ -35,26 +35,27 @@
 //   saveAudio
 //---------------------------------------------------------
 
-bool Score::saveAudio(const QString& name, int format)
+bool Score::saveAudio(const QString& name, int format, QString soundFont)
       {
       static const int sampleRate = 44100;
 
       Synth* synth = new FluidS::Fluid();
       synth->init(sampleRate);
 
-      QString p;
-      if (!preferences.soundFont.isEmpty())
-            p = preferences.soundFont;
-      else
-            p = QString(getenv("DEFAULT_SOUNDFONT"));
-      if (p.isEmpty()) {
-            fprintf(stderr, "MuseScore: error: no soundfont configured\n");
-            delete synth;
-            return false;
+      if (soundFont.isEmpty()) {
+            if (!preferences.soundFont.isEmpty())
+                  soundFont = preferences.soundFont;
+            else
+                  soundFont = QString(getenv("DEFAULT_SOUNDFONT"));
+            if (soundFont.isEmpty()) {
+                  fprintf(stderr, "MuseScore: error: no soundfont configured\n");
+                  delete synth;
+                  return false;
+                  }
             }
-      bool rv = synth->loadSoundFont(p);
+      bool rv = synth->loadSoundFont(soundFont);
       if (!rv) {
-            fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(p));
+            fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
             delete synth;
             return false;
             }
@@ -157,27 +158,27 @@ bool Score::saveAudio(const QString& name, int format)
 //   saveWav
 //---------------------------------------------------------
 
-bool Score::saveWav(const QString& name)
+bool Score::saveWav(const QString& name, QString sf)
       {
-      return saveAudio(name, SF_FORMAT_WAV | SF_FORMAT_PCM_16);
+      return saveAudio(name, SF_FORMAT_WAV | SF_FORMAT_PCM_16, sf);
       }
 
 //---------------------------------------------------------
 //   saveOgg
 //---------------------------------------------------------
 
-bool Score::saveOgg(const QString& name)
+bool Score::saveOgg(const QString& name, QString sf)
       {
-      return saveAudio(name, SF_FORMAT_OGG | SF_FORMAT_VORBIS);
+      return saveAudio(name, SF_FORMAT_OGG | SF_FORMAT_VORBIS, sf);
       }
 
 //---------------------------------------------------------
 //   saveFlac
 //---------------------------------------------------------
 
-bool Score::saveFlac(const QString& name)
+bool Score::saveFlac(const QString& name, QString sf)
       {
-      return saveAudio(name, SF_FORMAT_FLAC | SF_FORMAT_PCM_16);
+      return saveAudio(name, SF_FORMAT_FLAC | SF_FORMAT_PCM_16, sf);
       }
 
 #endif // HAS_AUDIOFILE

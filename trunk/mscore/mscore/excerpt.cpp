@@ -101,6 +101,7 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       QBuffer buffer;
       buffer.open(QIODevice::WriteOnly);
       Xml xml(&buffer);
+      xml.excerptmode = true;
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
       writeExcerpt(excerpt, xml);
@@ -172,12 +173,6 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
       xml.curTrack  = -1;
       xml.trackDiff = 0;
 
-#if 0 // TODO-S
-      if (editObject) {                          // in edit mode?
-            setState(STATE_NORMAL);
-            endCmd();
-            }
-#endif
       _style.save(xml, true);
       for (int i = 0; i < TEXT_STYLES; ++i) {
             if (*_textStyles[i] != defaultTextStyleArray[i])

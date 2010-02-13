@@ -43,10 +43,11 @@ bool useALSA = false, useJACK = false, usePortaudio = false;
 
 extern bool useFactorySettings;
 
- //---------------------------------------------------------
- //   PeriodItem
- //---------------------------------------------------------
- struct PeriodItem {
+//---------------------------------------------------------
+//   PeriodItem
+//---------------------------------------------------------
+
+struct PeriodItem {
        int time;
        const char* text;
        PeriodItem(const int t, const  char* txt) {
@@ -55,7 +56,7 @@ extern bool useFactorySettings;
              }
        };
 
-PeriodItem updatePeriods[] = {
+static PeriodItem updatePeriods[] = {
   PeriodItem(24,      QT_TRANSLATE_NOOP("preferences","Every day")),
   PeriodItem(72,      QT_TRANSLATE_NOOP("preferences","Every 3 days")),
   PeriodItem(7*24,      QT_TRANSLATE_NOOP("preferences","Every week")),

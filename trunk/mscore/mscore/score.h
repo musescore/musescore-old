@@ -94,6 +94,7 @@ class Clef;
 class TextB;
 class Beam;
 class Lyrics;
+class Text;
 
 extern bool showRubberBand;
 
@@ -568,10 +569,10 @@ class Score : public QObject {
       bool saveSvg(const QString& name);
       bool saveLilypond(const QString& name);
 #ifdef HAS_AUDIOFILE
-      bool saveOgg(const QString& name);
-      bool saveFlac(const QString& name);
-      bool saveWav(const QString& name);
-      bool saveAudio(const QString& name, int format);
+      bool saveOgg(const QString& name, QString sf = QString());
+      bool saveFlac(const QString& name, QString sf = QString());
+      bool saveWav(const QString& name, QString sf = QString());
+      bool saveAudio(const QString& name, int format, QString soundFont = QString());
 #endif
       ChordRest* getSelectedChordRest() const;
       void getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const;
@@ -702,6 +703,7 @@ class Score : public QObject {
       void addCreator(MusicXmlCreator* c)            { _creators.append(c);     }
       const MusicXmlCreator* getCreator(int i) const { return _creators.at(i);  }
       int numberOfCreators() const                   { return _creators.size(); }
+      Text* getText(int subtype);
 
       void lassoSelect(const QRectF&);
       void lassoSelectEnd();

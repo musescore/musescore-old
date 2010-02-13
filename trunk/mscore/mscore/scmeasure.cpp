@@ -19,302 +19,135 @@
 //=============================================================================
 
 #include "mscore.h"
-#include "scmeasure.h"
 #include "measure.h"
-#include "scscore.h"
 #include "layoutbreak.h"
 #include "page.h"
+#include "script.h"
+#include "system.h"
 
-//---------------------------------------------------------
-//   ScMeasurePropertyIterator
-//---------------------------------------------------------
+Q_DECLARE_METATYPE(Measure*);
+Q_DECLARE_METATYPE(Score*);
 
-class ScMeasurePropertyIterator : public QScriptClassPropertyIterator
-      {
-      int m_index, m_last;
+      Q_PROPERTY(bool lineBreak READ getLineBreak WRITE setLineBreak SCRIPTABLE true)
+      Q_PROPERTY(int pageNumber READ getPageNumber SCRIPTABLE true)
+      Q_PROPERTY(double x READ getX SCRIPTABLE true)
+      Q_PROPERTY(double y READ getY SCRIPTABLE true)
+      Q_PROPERTY(double width READ getWidth SCRIPTABLE true)
+      Q_PROPERTY(double height READ getHeight SCRIPTABLE true)
 
-   public:
-      ScMeasurePropertyIterator(const QScriptValue &object);
-      ~ScMeasurePropertyIterator() {}
-      bool hasNext() const;
-      void next();
-      bool hasPrevious() const;
-      void previous();
-      void toFront();
-      void toBack();
-      QScriptString name() const { return QScriptString(); }
-      uint id() const            { return m_last; }
+static const char* const function_names_measure[] = {
+      "lineBreak", "pageNumber", "x", "y", "width", "height"
+      };
+static const int function_lengths_measure[] = {
+      1, 1, 1, 1, 1, 1
+      };
+static const QScriptValue::PropertyFlags flags_measure[] = {
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter
+      };
+
+ScriptInterface measureInterface = {
+      6,
+      function_names_measure,
+      function_lengths_measure,
+      flags_measure
       };
 
 //---------------------------------------------------------
-//   ScMeasure
+//   prototype_Measure_call
 //---------------------------------------------------------
 
-ScMeasure::ScMeasure(QScriptEngine* engine)
-   : QObject(engine), QScriptClass(engine)
+static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngine*)
       {
-      qScriptRegisterMetaType<MeasurePtr>(engine, toScriptValue, fromScriptValue);
+      Q_ASSERT(context->callee().isFunction());
+      uint _id = context->callee().data().toUInt32();
+      Q_ASSERT((_id & 0xFFFF0000) == 0xBABF0000);
+      _id &= 0xffff;
 
-      proto = engine->newQObject(new ScMeasurePrototype(this),
-         QScriptEngine::QtOwnership,
-         QScriptEngine::SkipMethodsInEnumeration
-          | QScriptEngine::ExcludeSuperClassMethods
-          | QScriptEngine::ExcludeSuperClassProperties);
-      QScriptValue global = engine->globalObject();
-      proto.setPrototype(global.property("Object").property("prototype"));
+      Measure* measure = qscriptvalue_cast<Measure*>(context->thisObject());
+      if (!measure) {
+            return context->throwError(QScriptContext::TypeError,
+               QString::fromLatin1("Measure.%0(): this object is not a Measure")
+               .arg(function_names_measure[_id]));
+            }
+      switch(_id) {
+            case 0:     // "lineBreak",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), measure->lineBreak());
+                  else if (context->argumentCount() == 1) {
+                        bool val = context->argument(0).toBool();
+                        measure->setLineBreak(val);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 1:     // "pageNumber",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), measure->system()->page()->no());
+                  break;
+            case 2:     // "x",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), measure->x());
+                  break;
+            case 3:     // "y",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), measure->y());
+                  break;
+            case 4:     // "width",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), measure->bbox().width());
+                  break;
+            case 5:     // "height"
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), measure->bbox().height());
+                  break;
 
-      ctor = engine->newFunction(construct);
-      ctor.setData(qScriptValueFromValue(engine, this));
+            }
+      return context->throwError(QScriptContext::TypeError,
+         QString::fromLatin1("Note.%0(): bad argument count or value")
+         .arg(function_names_measure[_id]));
       }
 
 //---------------------------------------------------------
-//   queryProperty
+//   static_Measure_call
 //---------------------------------------------------------
 
-QScriptClass::QueryFlags ScMeasure::queryProperty(const QScriptValue &object,
-   const QScriptString& /*name*/, QueryFlags /*flags*/, uint* /*id*/)
+static QScriptValue static_Measure_call(QScriptContext* context, QScriptEngine*)
       {
-      MeasurePtr* sp = qscriptvalue_cast<MeasurePtr*>(object.data());
-      if (!sp)
-            return 0;
-
-      return 0;   // qscript handles property
+      if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
+            return context->throwError(QString::fromLatin1("Measure(): Did you forget to construct with 'new'?"));
+      Measure* measure = 0;
+      if (context->argumentCount() == 0)
+            measure = new Measure(0);
+      else if (context->argumentCount() == 1) {
+            Score* score = qscriptvalue_cast<Score*>(context->argument(0));
+            measure   = new Measure(score);
+            }
+      if (measure)
+            return context->engine()->newVariant(context->thisObject(), qVariantFromValue(measure));
+      return context->throwError(QString::fromLatin1("Measure(): wrong argument count"));
       }
 
 //---------------------------------------------------------
-//   property
+//   create_Measure_class
 //---------------------------------------------------------
 
-QScriptValue ScMeasure::property(const QScriptValue& object,
-   const QScriptString& name, uint /*id*/)
+QScriptValue create_Measure_class(QScriptEngine* engine)
       {
-printf("property <%s>\n", qPrintable(name.toString()));
-      MeasurePtr* score = qscriptvalue_cast<MeasurePtr*>(object.data());
-      if (!score)
-            return QScriptValue();
-      return QScriptValue();
+      ScriptInterface* si = &measureInterface;
+
+      engine->setDefaultPrototype(qMetaTypeId<Measure*>(), QScriptValue());
+      QScriptValue proto = engine->newVariant(qVariantFromValue((Measure*)0));
+
+      for (int i = 0; i < si->n; ++i) {
+            QScriptValue fun = engine->newFunction(prototype_Measure_call, function_lengths_measure[i]);
+            fun.setData(QScriptValue(engine, uint(0xBABF0000 + i)));
+            proto.setProperty(si->name(i), fun, si->flag(i));
+            }
+
+      engine->setDefaultPrototype(qMetaTypeId<Measure*>(), proto);
+      return engine->newFunction(static_Measure_call, proto, 1);
       }
-
-//---------------------------------------------------------
-//   setProperty
-//---------------------------------------------------------
-
-void ScMeasure::setProperty(QScriptValue& /*object*/ , const QScriptString& /*s*/, uint /*id*/, const QScriptValue& /*value*/)
-      {
-/*      MeasurePtr* score = qscriptvalue_cast<MeasurePtr*>(object.data());
-      if (!score)
-            return;
-      */
-      }
-
-//---------------------------------------------------------
-//   propertyFlags
-//---------------------------------------------------------
-
-QScriptValue::PropertyFlags ScMeasure::propertyFlags(
-   const QScriptValue &/*object*/, const QScriptString& /*name*/, uint /*id*/)
-      {
-      return QScriptValue::Undeletable;
-      }
-
-QScriptClassPropertyIterator *ScMeasure::newIterator(const QScriptValue &object)
-      {
-      return new ScMeasurePropertyIterator(object);
-      }
-
-//---------------------------------------------------------
-//   newInstance
-//---------------------------------------------------------
-
-QScriptValue ScMeasure::newInstance(Score* score)
-      {
-      Measure* measure = new Measure(score);
-      return newInstance(measure);
-      }
-
-QScriptValue ScMeasure::newInstance(const MeasurePtr& measure)
-      {
-      QScriptValue data = engine()->newVariant(qVariantFromValue(measure));
-      return engine()->newObject(this, data);
-      }
-
-//---------------------------------------------------------
-//   construct
-//---------------------------------------------------------
-
-QScriptValue ScMeasure::construct(QScriptContext *ctx, QScriptEngine *)
-      {
-      ScMeasure *cls = qscriptvalue_cast<ScMeasure*>(ctx->callee().data());
-      if (!cls)
-            return QScriptValue();
-      QScriptValue v = ctx->argument(0);
-      ScorePtr* sp   = qscriptvalue_cast<ScorePtr*>(v.data());
-      return cls->newInstance(sp ? *sp : 0);
-      }
-
-QScriptValue ScMeasure::toScriptValue(QScriptEngine* eng, const MeasurePtr& ba)
-      {
-      QScriptValue ctor = eng->globalObject().property("Measure");
-      ScMeasure* cls = qscriptvalue_cast<ScMeasure*>(ctor.data());
-      if (!cls)
-            return eng->newVariant(qVariantFromValue(ba));
-      return cls->newInstance(ba);
-      }
-
-void ScMeasure::fromScriptValue(const QScriptValue& obj, MeasurePtr& ba)
-      {
-      MeasurePtr* np = qscriptvalue_cast<MeasurePtr*>(obj.data());
-      ba = np ? *np : 0;
-      }
-
-//---------------------------------------------------------
-//   ScMeasurePropertyIterator
-//---------------------------------------------------------
-
-ScMeasurePropertyIterator::ScMeasurePropertyIterator(const QScriptValue &object)
-   : QScriptClassPropertyIterator(object)
-      {
-      toFront();
-      }
-
-bool ScMeasurePropertyIterator::hasNext() const
-      {
-//      Measure* ba = qscriptvalue_cast<Measure*>(object().data());
-      return m_index < 1;     // TODO ba->size();
-      }
-
-void ScMeasurePropertyIterator::next()
-      {
-      m_last = m_index;
-      ++m_index;
-      }
-
-bool ScMeasurePropertyIterator::hasPrevious() const
-      {
-      return (m_index > 0);
-      }
-
-void ScMeasurePropertyIterator::previous()
-      {
-      --m_index;
-      m_last = m_index;
-      }
-
-void ScMeasurePropertyIterator::toFront()
-      {
-      m_index = 0;
-      m_last = -1;
-      }
-
-void ScMeasurePropertyIterator::toBack()
-      {
-//      MeasurePtr* ba = qscriptvalue_cast<MeasurePtr*>(object().data());
-      m_index = 0; // ba->size();
-      m_last = -1;
-      }
-
-//---------------------------------------------------------
-//   thisMeasure
-//---------------------------------------------------------
-
-Measure* ScMeasurePrototype::thisMeasure() const
-      {
-      MeasurePtr* mp = qscriptvalue_cast<MeasurePtr*>(thisObject().data());
-      if (mp)
-            return *mp;
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   getLineBreak
-//---------------------------------------------------------
-
-bool ScMeasurePrototype::getLineBreak() const
-      {
-      return thisMeasure()->lineBreak();
-      }
-
-//---------------------------------------------------------
-//   setLineBreak
-//---------------------------------------------------------
-
-void ScMeasurePrototype::setLineBreak(bool v)
-      {
-      
-      Measure* measure = thisMeasure();
-      bool lineb = measure->lineBreak();  
-      if (!lineb && v){
-        LayoutBreak* lb = new LayoutBreak(measure->score());
-        lb->setSubtype(LAYOUT_BREAK_LINE);
-        lb->setTrack(-1);       // this are system elements
-        lb->setParent(measure);
-        measure->score()->cmdAdd(lb);
-      }
-      if (lineb && !v){
-        // remove line break
-        foreach(Element* e, *measure->el()) {
-          if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {
-            measure->score()->cmdRemove(e);
-            break;
-          }
-        }
-      }
-}
-
-//---------------------------------------------------------
-//   getPageNumber
-//---------------------------------------------------------
-
-int ScMeasurePrototype::getPageNumber() const
-  {
-    Measure* m = thisMeasure();
-    Page* page = (Page*)m->parent()->parent();
-    return page->no();
-  }
-
-//---------------------------------------------------------
-//   getX
-//---------------------------------------------------------
-
-double ScMeasurePrototype::getX() const
-  {
-    Measure* m = thisMeasure();
-    Page* page = (Page*)m->parent()->parent();
-    return m->canvasPos().x() - page->canvasPos().x();              
-  }
-
-//---------------------------------------------------------
-//   getY
-//---------------------------------------------------------
-
-double ScMeasurePrototype::getY() const
-  {
-    Measure* m = thisMeasure();
-    return  m->canvasPos().y();
-  }
-
-//---------------------------------------------------------
-//   getWidth
-//---------------------------------------------------------
-
-double ScMeasurePrototype::getWidth() const
-  {
-    Measure* m = thisMeasure();
-    return m->bbox().width();
-  }
-
-//---------------------------------------------------------
-//   getHeight
-//---------------------------------------------------------
-
-double ScMeasurePrototype::getHeight() const{
-  Measure* m = thisMeasure();
-  return m->bbox().height();
-}
-
-      
-
-
-
-
-

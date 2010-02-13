@@ -119,7 +119,7 @@ Shortcut MuseScore::sc[] = {
          "undo",
          QT_TRANSLATE_NOOP("action","Undo"),
          QKeySequence::Undo,      // Qt::CTRL+Qt::Key_Z, // QKeySequence::Undo,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Undo"),
          QT_TRANSLATE_NOOP("action","Undo last change"),
           undo_ICON
@@ -129,7 +129,7 @@ Shortcut MuseScore::sc[] = {
          "redo",
          QT_TRANSLATE_NOOP("action","Redo"),
          QKeySequence::Redo,      // Qt::CTRL+Qt::SHIFT+Qt::Key_Z,    // QKeySequence::Redo,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Redo"),
          QT_TRANSLATE_NOOP("action","Redo last undo"),
           redo_ICON

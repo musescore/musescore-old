@@ -22,12 +22,12 @@
 #include "scnote.h"
 #include "note.h"
 #include "utils.h"
-#include "scscore.h"
 #include "undo.h"
 #include "script.h"
 
 Q_DECLARE_METATYPE(Note);
 Q_DECLARE_METATYPE(Note*);
+Q_DECLARE_METATYPE(Score*);
 
 static const char* const function_names_note[] = {
       "name", "pitch", "tuning", "color", "visible", "tpc", "tied", "userAccidental"
