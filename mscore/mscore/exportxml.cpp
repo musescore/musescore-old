@@ -79,6 +79,7 @@
 #include "system.h"
 #include "element.h"
 #include "glissando.h"
+#include "navigate.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -1563,13 +1564,95 @@ static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& orn
             }
       }
 
-// determine if chord has breath-mark
+//---------------------------------------------------------
+//   hasBreathMark - determine if chord has breath-mark
+//---------------------------------------------------------
 
 static bool hasBreathMark(Chord* ch)
       {
       Segment* s = ch->segment();
       s = s->next1();
       return (s->subtype() == Segment::SegBreath && s->element(ch->track()));
+      }
+
+//---------------------------------------------------------
+//   tremoloSingleStartStop
+//---------------------------------------------------------
+
+static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml)
+      {
+      printf("tremoloSingleStartStop: chord=%p trem=%p nextchord=%p\n", chord, chord->tremolo(), nextChordRest(chord));
+      ChordRest* cr = nextChordRest(chord);
+      Chord* nextChord = 0;
+      if (cr->type() == CHORD) nextChord = static_cast<Chord*>(cr);
+      if (nextChord && nextChord->tremolo()) {
+            Tremolo * tr = nextChord->tremolo();
+            int st = tr->subtype();
+            switch (st) {
+                  case TREMOLO_1:
+                  case TREMOLO_2:
+                  case TREMOLO_3:
+                        // ignore
+                        break;
+                  case 3:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"start\"", "1");
+                        break;
+                  case 4:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"start\"", "2");
+                        break;
+                  case 5:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"start\"", "3");
+                        break;
+                  default:
+                        printf("unknown tremolo %d\n", st);
+                        break;
+                  }
+            }
+      if (chord->tremolo()) {
+            Tremolo * tr = chord->tremolo();
+            int st = tr->subtype();
+            switch (st) {
+                  case TREMOLO_1:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"single\"", "1");
+                        break;
+                  case TREMOLO_2:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"single\"", "2");
+                        break;
+                  case TREMOLO_3:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"single\"", "3");
+                        break;
+                  case 3:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"stop\"", "1");
+                        break;
+                  case 4:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"stop\"", "2");
+                        break;
+                  case 5:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"stop\"", "3");
+                        break;
+                  default:
+                        printf("unknown tremolo %d\n", st);
+                        break;
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -1726,30 +1809,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         break;
                   }
             }
-            if (chord->tremolo()) {
-                  Tremolo * tr = chord->tremolo();
-                  int st = tr->subtype();
-                  switch (st) {
-                        case TREMOLO_1:
-                              notations.tag(xml);
-                              ornaments.tag(xml);
-                              xml.tag("tremolo type=\"single\"", "1");
-                              break;
-                        case TREMOLO_2:
-                              notations.tag(xml);
-                              ornaments.tag(xml);
-                              xml.tag("tremolo type=\"single\"", "2");
-                              break;
-                        case TREMOLO_3:
-                              notations.tag(xml);
-                              ornaments.tag(xml);
-                              xml.tag("tremolo type=\"single\"", "3");
-                              break;
-                        default:
-                              printf("unknown tremolo %d\n", st);
-                              break;
-                        }
-                  }
+            tremoloSingleStartStop(chord, notations, ornaments, xml);
             wavyLineStartStop(chord, notations, ornaments, xml);
             ornaments.etag(xml);
 
