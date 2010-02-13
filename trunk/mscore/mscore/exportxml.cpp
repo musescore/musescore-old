@@ -81,6 +81,8 @@
 #include "glissando.h"
 #include "navigate.h"
 
+static bool isTwoNoteTremolo(Chord* chord);
+
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
 //---------------------------------------------------------
@@ -1048,6 +1050,10 @@ void ExportMusicXml::calcDivisions()
                                     }
                               if (el->isChordRest()) {
                                     int l = static_cast<ChordRest*>(el)->ticks();
+                                    if (el->type() == CHORD) {
+                                          if (isTwoNoteTremolo(static_cast<Chord*>(el)))
+                                                l /= 2;
+                                          }
                                     printf("chordrest %d\n", l);
                                     addInteger(l);
                                     tick += l;
@@ -1576,6 +1582,30 @@ static bool hasBreathMark(Chord* ch)
       }
 
 //---------------------------------------------------------
+// isTwoNoteTremolo - determine is chord is part of two note tremolo
+//---------------------------------------------------------
+
+static bool isTwoNoteTremolo(Chord* chord)
+      {
+      ChordRest* cr = nextChordRest(chord);
+      Chord* nextChord = 0;
+      if (cr && cr->type() == CHORD) nextChord = static_cast<Chord*>(cr);
+      Tremolo * tr = 0;
+      // this chord or next chord may have tremolo, but not both chords
+      if (chord && chord->tremolo()) {
+            tr = chord->tremolo();
+            }
+      if (nextChord && nextChord->tremolo()) {
+            tr = nextChord->tremolo();
+            }
+      if (tr) {
+            int st = tr->subtype();
+            if (st == 3 || st == 4 || st == 5) return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
 //   tremoloSingleStartStop
 //---------------------------------------------------------
 
@@ -1584,7 +1614,7 @@ static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments
       printf("tremoloSingleStartStop: chord=%p trem=%p nextchord=%p\n", chord, chord->tremolo(), nextChordRest(chord));
       ChordRest* cr = nextChordRest(chord);
       Chord* nextChord = 0;
-      if (cr->type() == CHORD) nextChord = static_cast<Chord*>(cr);
+      if (cr && cr->type() == CHORD) nextChord = static_cast<Chord*>(cr);
       if (nextChord && nextChord->tremolo()) {
             Tremolo * tr = nextChord->tremolo();
             int st = tr->subtype();
@@ -1929,7 +1959,9 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                  || gracen == NOTE_GRACE16
                  || gracen == NOTE_GRACE32);
       printf("notetype=%d grace=%d\n", gracen, grace);
-      if (!grace) tick += chord->ticks();
+      int tremCorr = 1; // duration correction for two note tremolo
+      if (isTwoNoteTremolo(chord)) tremCorr = 2;
+      if (!grace) tick += chord->ticks() / tremCorr;
       printf(" newtick=%d\n", tick);
 
       PageFormat* pf = score->pageFormat();
@@ -1998,7 +2030,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
 
             // duration
             if (!grace)
-                  xml.tag("duration", note->chord()->tickLen() / div);
+                  xml.tag("duration", note->chord()->tickLen() / (div * tremCorr));
 
             if (note->tieBack())
                   xml.tagE("tie type=\"stop\"");
@@ -2024,7 +2056,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   nrmNotes = t->ratio().denominator();
                   }
 
-            QString s = tick2xml(note->chord()->tickLen() * actNotes / nrmNotes, &dots);
+            QString s = tick2xml(note->chord()->tickLen() * actNotes / (nrmNotes * tremCorr), &dots);
             if (s.isEmpty()) {
                   printf("no note type found for ticks %d\n",
                      note->chord()->tickLen());
