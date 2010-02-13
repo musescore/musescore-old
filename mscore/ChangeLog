@@ -1,4 +1,7 @@
-11.ffeb (ws)
+13.feb (lv)
+      - bug #4477: MusicXML: tremolos between two notes not exported/imported
+        export implemented according to comments by David Bolton on Thu, 02/11/2010 - 19:29
+11.feb (ws)
       - update to scripting interface
 8.feb (db)
       - update windows build for JACK 1.9.4
