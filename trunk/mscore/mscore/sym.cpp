@@ -311,6 +311,14 @@ SymCode pSymbols[] = {
       SymCode(0x00de, -1),
       SymCode(0x00df, -1),
 
+      //capital letters esperanto
+      SymCode(0x0108, -1),
+      SymCode(0x011c, -1),
+      SymCode(0x0124, -1),
+      SymCode(0x0134, -1),
+      SymCode(0x015c, -1),            
+      SymCode(0x016c, -1),
+
       SymCode(0x00e0, -1),
       SymCode(0x00e1, -1),
       SymCode(0x00e2, -1),
@@ -344,7 +352,15 @@ SymCode pSymbols[] = {
       SymCode(0x00fd, -1),
       SymCode(0x00fe, -1),
       SymCode(0x00ff, -1),
-
+      //small letters esperanto
+      SymCode(0x0109, -1),
+      SymCode(0x011d, -1),
+      SymCode(0x0125, -1),
+      SymCode(0x0135, -1),
+      SymCode(0x015d, -1),            
+      SymCode(0x016d, -1),
+      
+      
       SymCode(0x00BC, -1, "1/4", SYMBOL_FRACTION),
       SymCode(0x00BD, -1, "1/2", SYMBOL_FRACTION),
       SymCode(0x00BE, -1, "3/4", SYMBOL_FRACTION),
