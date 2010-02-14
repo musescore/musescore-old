@@ -28,13 +28,6 @@
 Q_DECLARE_METATYPE(Measure*);
 Q_DECLARE_METATYPE(Score*);
 
-      Q_PROPERTY(bool lineBreak READ getLineBreak WRITE setLineBreak SCRIPTABLE true)
-      Q_PROPERTY(int pageNumber READ getPageNumber SCRIPTABLE true)
-      Q_PROPERTY(double x READ getX SCRIPTABLE true)
-      Q_PROPERTY(double y READ getY SCRIPTABLE true)
-      Q_PROPERTY(double width READ getWidth SCRIPTABLE true)
-      Q_PROPERTY(double height READ getHeight SCRIPTABLE true)
-
 static const char* const function_names_measure[] = {
       "lineBreak", "pageNumber", "x", "y", "width", "height"
       };
@@ -79,8 +72,26 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), measure->lineBreak());
                   else if (context->argumentCount() == 1) {
+                        Score* score = measure->score();
                         bool val = context->argument(0).toBool();
-                        measure->setLineBreak(val);
+                        if (measure->lineBreak() == val)
+                              return context->engine()->undefinedValue();
+                        LayoutBreak* lb = new LayoutBreak(score);
+                        lb->setSubtype(LAYOUT_BREAK_LINE);
+                        if (measure->lineBreak()) {
+                              lb->setSubtype(LAYOUT_BREAK_LINE);
+
+                              foreach(Element* elem, *measure->el()) {
+                                    if (elem->type() == LAYOUT_BREAK) {
+                                          score->undoChangeElement(elem, lb);
+                                          break;
+                                          }
+                                    }
+                              return context->engine()->undefinedValue();
+                              }
+                        lb->setTrack(-1);       // this are system elements
+                        lb->setParent(measure);
+                        score->cmdAdd(lb);
                         return context->engine()->undefinedValue();
                         }
                   break;
