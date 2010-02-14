@@ -78,7 +78,7 @@ function accept()
 
               while (!cursor.eos()) {
                     if (cursor.isChord()) {
-                          for (var i = 0; i < cursor.chord().notes(); i++) {
+                          for (var i = 0; i < cursor.chord().notes; i++) {
                                 var note = cursor.chord().note(i);
                                 note.tuning = value;
                           }

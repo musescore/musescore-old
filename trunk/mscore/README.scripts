@@ -138,13 +138,13 @@ Objects
 
          Properties:
             tickLen     integer
+            notes       integer (ro) number of notes in chord
 
          Functions:
             topNote()
             note(integer n)         return note at index n; notes are sorted to pitch
             addNote(Note)
             removeNote(integer n)   remove note at index n
-            integer notes()         return number of notes in chord
             addHarmony(Harmony)
 
    Rest

@@ -67,7 +67,7 @@ function removeNote(idx)
       while (!cursor.eos()) {
             if (cursor.isChord()) {
                   var chord = cursor.chord();
-                  if (chord.notes() == 3) {
+                  if (chord.notes == 3) {
                         chord.removeNote(idx);
                         }
                   }
