@@ -207,6 +207,13 @@ void TimeSigMap::tickValues(int t, int* bar, int* beat, int* tick) const
       int delta  = t - e->first;
       int ticksB = ticks_beat(e->second.fraction().denominator());
       int ticksM = ticksB * e->second.fraction().numerator();
+      if (ticksM == 0) {
+            printf("TimeSigMap::tickValues: at %d %s\n", t, qPrintable(e->second.fraction().print()));
+            *bar = 0;
+            *beat = 0;
+            *tick = 0;
+            return;
+            }
       *bar       = e->second.bar + delta / ticksM;
       int rest   = delta % ticksM;
       *beat      = rest / ticksB;
