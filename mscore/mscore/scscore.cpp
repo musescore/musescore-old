@@ -358,13 +358,13 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         }
                   break;
             case 19:    // "startUndo",
-                  if (context->argumentCount() == 1) {
+                  if (context->argumentCount() == 0) {
                         score->startCmd();
                         return context->engine()->undefinedValue();
                         }
 
             case 20:    // "endUndo",
-                  if (context->argumentCount() == 1) {
+                  if (context->argumentCount() == 0) {
                         score->endCmd();
                         return context->engine()->undefinedValue();
                         }
