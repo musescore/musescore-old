@@ -85,7 +85,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 2:
+            case 2:     // tuning
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), note->tuning());
                   else if (context->argumentCount() == 1) {

@@ -168,7 +168,7 @@ Objects
             name              string      name of note pitch value (read only)
             color             QColor      notehead color
             tuning            double      note tuning
-            tpc               integer
+            tpc               integer     tonal pitch class
             visible           boolean
             tied              enum        0 no tie, 1 forward, 2 backward, 3 forw.+backw.
             userAccidental    integer
@@ -188,9 +188,9 @@ Objects
             var a = new Harmony();
 
          Properties:
-            id             integer
-            root           integer
-            base           integer
+            id             integer        chord id
+            root           integer        tonal pitch class of root
+            base           integer        tonal pitch class of base
 
    Style
 
