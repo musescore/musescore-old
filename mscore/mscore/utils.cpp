@@ -470,7 +470,7 @@ Interval intervalList[26] = {
 //    semitone distance
 //---------------------------------------------------------
 
-int chromatic2diatonic(int val)
+int chromatic2diatonic(int semitones)
       {
       static int il[12] = {
             0,    // Perfect Unison
@@ -487,11 +487,11 @@ int chromatic2diatonic(int val)
             22,   // Major Seventh
             // 25    Perfect Octave
             };
-      bool down = val < 0;
+      bool down = semitones < 0;
       if (down)
-            val = -val;
-      val = val % 12;
-      int octave = val / 12;
+            semitones = -semitones;
+      int val = semitones % 12;
+      int octave = semitones / 12;
       int intervalIndex = il[val];
       int steps = intervalList[intervalIndex].steps;
       steps = steps + octave * 7;
