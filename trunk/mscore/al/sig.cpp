@@ -117,10 +117,10 @@ void TimeSigMap::add(int tick, int ticks, const Fraction& nominal)
             actual = Fraction(ticks / AL::division, 4);
             }
       else if ((ticks % (AL::division/2)) == 0) {
-            actual = Fraction(ticks / AL::division/2, 8);
+            actual = Fraction(ticks / (AL::division/2), 8);
             }
       else if ((ticks % (AL::division/4)) == 0) {
-            actual = Fraction(ticks / AL::division/4, 16);
+            actual = Fraction(ticks / (AL::division/4), 16);
             }
       else {
             printf("TimeSigMap::add(tick:%d, ticks:%d, z2:%d, n2:%d): irregular measure not supported\n",
