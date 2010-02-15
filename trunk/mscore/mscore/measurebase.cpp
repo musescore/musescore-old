@@ -189,12 +189,10 @@ void MeasureBase::spatiumChanged(double oldValue, double newValue)
                         if ((e == 0) || (e->type() != CHORD))
                               continue;
                         Chord* ch = static_cast<Chord*>(e);
-                        NoteList* nl = ch->noteList();
-                        for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                              ElementList* el = i->second->el();
-                              foreach(Element* e, *el) {
+                        foreach(Note* n, ch->notes()) {
+                              ElementList* el = n->el();
+                              foreach(Element* e, *el)
                                     e->spatiumChanged(oldValue, newValue);
-                                    }
                               }
                         }
                   }

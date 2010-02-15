@@ -111,29 +111,6 @@ class LedgerLine : public Line {
       };
 
 //---------------------------------------------------------
-//   NoteList
-//---------------------------------------------------------
-
-/**
- List of notes.
-
- Used by Chord to store its notes.
-*/
-
-class NoteList : public std::multimap <const int, Note*> {
-   public:
-      NoteList::iterator add(Note* n);
-      Note* front() const { return (begin() != end()) ? begin()->second : 0;  }
-      Note* back()  const { return (begin() != end()) ? rbegin()->second : 0; }
-      Note* find(int pitch) const;
-      };
-
-typedef NoteList::iterator iNote;
-typedef NoteList::reverse_iterator riNote;
-typedef NoteList::const_iterator ciNote;
-typedef NoteList::const_reverse_iterator criNote;
-
-//---------------------------------------------------------
 //   Chord
 //---------------------------------------------------------
 
@@ -144,7 +121,7 @@ typedef NoteList::const_reverse_iterator criNote;
 */
 
 class Chord : public ChordRest {
-      NoteList notes;
+      QList<Note*> _notes;
       QList<LedgerLine*> _ledgerLines;
       Stem* _stem;
       Hook* _hook;
@@ -188,12 +165,12 @@ class Chord : public ChordRest {
 
       virtual void layoutStem1();
       virtual void layoutStem();
-      NoteList* noteList()                   { return &notes; }
-      const NoteList* noteList() const       { return &notes; }
-      const Note* upNote() const             { return notes.back(); }
-      const Note* downNote() const           { return notes.front(); }
-      Note* upNote()                         { return notes.back(); }
-      Note* downNote()                       { return notes.front(); }
+
+      QList<Note*>& notes()                  { return _notes; }
+      const QList<Note*>& notes() const      { return _notes; }
+      Note* upNote() const                   { return _notes.back(); }
+      Note* downNote() const                 { return _notes.front(); }
+      Note* findNote(int pitch) const;
 
       Stem* stem() const                     { return _stem; }
       void setStem(Stem* s);
@@ -231,6 +208,7 @@ class Chord : public ChordRest {
       bool noStem() const                 { return _noStem;  }
       void setNoStem(bool val)            { _noStem = val;   }
       virtual void setMag(double val);
+      void pitchChanged();
       };
 
 #endif

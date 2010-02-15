@@ -76,6 +76,15 @@ ChordRest* prevChordRest(ChordRest* cr)
       }
 
 //---------------------------------------------------------
+//   noteLessThan
+//---------------------------------------------------------
+
+static bool noteLessThan(const Note* n1, const Note* n2)
+      {
+      return n1->pitch() <= n2->pitch();
+      }
+
+//---------------------------------------------------------
 //   upAlt
 //    select next higher pitched note in chord
 //---------------------------------------------------------
@@ -95,32 +104,24 @@ Note* Score::upAlt(Element* element)
             Segment* segment = chord->segment();
 
             // collect all notes for this segment in noteList:
-            NoteList rnl;
-            iNote inote = rnl.end();
+            QList<Note*> rnl;
             int tracks = nstaves() * VOICES;
             for (int track = 0; track < tracks; ++track) {
                   Element* el = segment->element(track);
                   if (!el || el->type() != CHORD)
                         continue;
-                  NoteList* nl = static_cast<Chord*>(el)->noteList();
-                  for (riNote in   = nl->rbegin(); in != nl->rend(); ++in) {
-                        Note* note = in->second;
-                        iNote ii = rnl.add(note);
-                        if (note == element) {
-                              inote = ii;
-                              }
-                        }
-                  }
-            if (inote != rnl.end()) {
-                  ++inote;
-                  if (inote != rnl.end())
-                        re = inote->second;
+                  rnl.append(static_cast<Chord*>(el)->notes());
+                  qSort(rnl.begin(), rnl.end(), noteLessThan);
+                  int idx = rnl.indexOf(static_cast<Note*>(element));
+                  if (idx < rnl.size()-1)
+                        ++idx;
+                  re = rnl.value(idx);
                   }
             }
       if (re == 0)
             return 0;
       if (re->type() == CHORD)
-            re = ((Chord*)re)->noteList()->front();
+            re = ((Chord*)re)->notes().front();
       return (Note*)re;
       }
 
@@ -131,9 +132,7 @@ Note* Score::upAlt(Element* element)
 
 Note* Score::upAltCtrl(Note* note) const
       {
-      Chord* chord = note->chord();
-      NoteList* nl  = chord->noteList();
-      return nl->rbegin()->second;
+      return note->chord()->upNote();
       }
 
 //---------------------------------------------------------
@@ -158,34 +157,25 @@ Note* Score::downAlt(Element* element)
             Segment* segment = chord->segment();
 
             // collect all notes for this segment in noteList:
-            NoteList rnl;
-            iNote inote = rnl.end();
-            int tracks = staves * VOICES;
+            QList<Note*> rnl;
+            int tracks = nstaves() * VOICES;
             for (int track = 0; track < tracks; ++track) {
                   Element* el = segment->element(track);
                   if (!el || el->type() != CHORD)
                         continue;
-                  NoteList* nl = static_cast<Chord*>(el)->noteList();
-                  for (riNote in   = nl->rbegin(); in != nl->rend(); ++in) {
-                        Note* note = in->second;
-                        iNote ii = rnl.add(note);
-                        if (note == element) {
-                              inote = ii;
-                              }
-                        }
-                  }
-            if (inote != rnl.end()) {
-                  if (inote != rnl.begin()) {
-                        inote--;
-                        re = inote->second;
-                        }
+                  rnl.append(static_cast<Chord*>(el)->notes());
+                  qSort(rnl.begin(), rnl.end(), noteLessThan);
+                  int idx = rnl.indexOf(static_cast<Note*>(element));
+                  if (idx)
+                        --idx;
+                  re = rnl.value(idx);
                   }
             }
 
       if (re == 0)
             return 0;
       if (re->type() == CHORD)
-            re = static_cast<Chord*>(re)->noteList()->back();
+            re = static_cast<Chord*>(re)->notes().back();
       return (Note*)re;
       }
 
@@ -196,9 +186,7 @@ Note* Score::downAlt(Element* element)
 
 Note* Score::downAltCtrl(Note* note) const
       {
-      Chord* chord = note->chord();
-      NoteList* nl = chord->noteList();
-      return nl->begin()->second;
+      return note->chord()->downNote();
       }
 
 //---------------------------------------------------------

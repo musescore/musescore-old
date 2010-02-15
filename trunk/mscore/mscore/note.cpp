@@ -342,23 +342,9 @@ int Note::totalTicks() const
 
 void Note::changePitch(int n)
       {
-      if (chord()) {
-            // keep notes sorted in chord:
-            Chord* c     = chord();
-            NoteList* nl = c->noteList();
-            iNote i;
-            for (i = nl->begin(); i != nl->end(); ++i) {
-                  if (i->second == this)
-                        break;
-                  }
-            if (i == nl->end()) {
-                  printf("Note::changePitch(): note not found in chord()\n");
-                  return;
-                  }
-            nl->erase(i);
-            nl->insert(std::pair<const int, Note*> (n, this));
-            }
       setPitch(n);
+      if (chord())
+            chord()->pitchChanged();
       score()->spell(this);
       }
 

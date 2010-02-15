@@ -104,9 +104,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
             if (cr == 0 || cr->type() == REST)
                   continue;
             Chord* c = static_cast<Chord*>(cr);
-            NoteList* nl = c->noteList();
-            for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                  Note* note = i->second;
+            foreach(Note* note, c->notes()) {
                   if (note->pitch() < splitPoint) {
                         if (note->tieBack()) {
                               notesToRemove.append(note);

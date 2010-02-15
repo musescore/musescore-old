@@ -230,8 +230,8 @@ Chord::Chord(Score* s)
 Chord::Chord(const Chord& c)
    : ChordRest(c)
       {
-      for (ciNote i = c.notes.begin(); i != c.notes.end(); ++i)
-            add(new Note(*(i->second)));
+      foreach(Note* n, c.notes())
+            add(new Note(*n));
 
       foreach(const LedgerLine* ll, c._ledgerLines) {
             LedgerLine* l = new LedgerLine(*ll);
@@ -326,9 +326,8 @@ QPointF Chord::stemPos(bool upFlag, bool top) const
 void Chord::setSelected(bool f)
       {
       Element::setSelected(f);
-      NoteList* nl = noteList();
-      for (iNote in = nl->begin(); in != nl->end(); ++in)
-            in->second->setSelected(f);
+      foreach(Note* n, _notes)
+            n->setSelected(f);
       }
 
 //---------------------------------------------------------
@@ -341,7 +340,16 @@ void Chord::add(Element* e)
       e->setTrack(track());
       if (e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
-            notes.add(note);
+            bool found = false;
+            for (int idx = 0; idx < _notes.size(); ++idx) {
+                  if (note->pitch() < _notes[idx]->pitch()) {
+                        _notes.insert(idx, note);
+                        found = true;
+                        break;
+                        }
+                  }
+            if (!found)
+                  _notes.append(note);
             if (note->tieFor()) {
                   if (note->tieFor()->endNote())
                         note->tieFor()->endNote()->setTieBack(note->tieFor());
@@ -380,19 +388,14 @@ void Chord::add(Element* e)
 void Chord::remove(Element* e)
       {
       if (e->type() == NOTE) {
-            iNote i = notes.begin();
-            for (; i != notes.end(); ++i) {
-                  if (i->second == e) {
-                        Note* note = (Note*)e;
-                        if (note->tieFor()) {
-                              if (note->tieFor()->endNote())
-                                    note->tieFor()->endNote()->setTieBack(0);
-                              }
-                        notes.erase(i);
-                        break;
+            Note* note = static_cast<Note*>(e);
+            if (_notes.removeOne(note)) {
+                  if (note->tieFor()) {
+                        if (note->tieFor()->endNote())
+                              note->tieFor()->endNote()->setTieBack(0);
                         }
                   }
-            if (i == notes.end())
+            else
                   printf("Chord::remove() note %p not found!\n", e);
             }
       else if (e->type() == ARTICULATION) {
@@ -430,8 +433,8 @@ void Chord::remove(Element* e)
 QRectF Chord::bbox() const
       {
       QRectF _bbox;
-      for (ciNote i = notes.begin(); i != notes.end(); ++i)
-            _bbox |= i->second->bbox().translated(i->second->pos());
+      foreach (const Note* n, _notes)
+            _bbox |= n->bbox().translated(n->pos());
       foreach(const LedgerLine* l, _ledgerLines)
             _bbox |= l->bbox().translated(l->pos());
       for (ciArticulation i = articulations.begin(); i != articulations.end(); ++i)
@@ -488,8 +491,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
       //  shorten ledger line to avoid collisions with accidentals
       //
 
-      for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* n = in->second;
+      foreach(const Note* n, _notes) {
             if (n->line() >= (line-1) && n->line() <= (line+1) && n->accidentalType() != ACC_NONE) {
                   x   += _spatium * .25;
                   len -= Spatium(.25);
@@ -510,9 +512,8 @@ void Chord::addLedgerLines(double x, int move)
       int uppos = 1000;
       int ulr   = 0;
       int idx   = staffIdx() + move;
-
-      for (riNote in = notes.rbegin(); in != notes.rend(); ++in) {
-            const Note* note = in->second;
+      for (int ni = _notes.size() - 1; ni >= 0; --ni) {
+            const Note* note = _notes[ni];
             int l = note->line();
             if (l >= 0)
                   break;
@@ -526,8 +527,7 @@ void Chord::addLedgerLines(double x, int move)
 
       int downpos = -1000;
       int dlr = 0;
-      for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-            const Note* note = in->second;
+      foreach(const Note* note, _notes) {
             int l = note->line();
             if (l <= 8)
                   break;
@@ -585,7 +585,7 @@ void Chord::computeUp()
                   case 3:  _up = (score()->style(ST_stemDir4).toDirection() == UP); break;
                   }
             }
-      else if (notes.size() == 1 || staffMove()) {
+      else if (_notes.size() == 1 || staffMove()) {
             if (staffMove() > 0)
                   _up = true;
             else if (staffMove() < 0)
@@ -594,12 +594,14 @@ void Chord::computeUp()
                   _up = upNote()->line() > 4;
             }
       else {
-            int ud = upNote()->line() - 4;
-            int dd = downNote()->line() - 4;
+            Note* un = upNote();
+            Note* dn = downNote();
+            int ud = un->line() - 4;
+            int dd = dn->line() - 4;
             if (-ud == dd) {
                   int up = 0;
-                  for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-                        int l = in->second->line();
+                  foreach(const Note* n, _notes) {
+                        int l = n->line();
                         if (l <= 4)
                               --up;
                         else
@@ -619,11 +621,11 @@ void Chord::computeUp()
 Note* Chord::selectedNote() const
       {
       Note* note = 0;
-      for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-            if (in->second->selected()) {
+      foreach(Note* n, _notes) {
+            if (n->selected()) {
                   if (note)
                         return 0;
-                  note = in->second;
+                  note = n;
                   }
             }
       return note;
@@ -671,9 +673,8 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
             case DOWN: xml.tag("StemDirection", QVariant("down")); break;
             case AUTO: break;
             }
-      ciNote in = notes.begin();
-      for (; in != notes.end(); ++in)
-            in->second->write(xml, startTick, endTick);
+      foreach (const Note* n, _notes)
+            n->write(xml, startTick, endTick);
       if (_arpeggio)
             _arpeggio->write(xml);
       if (_glissando)
@@ -775,10 +776,8 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets)
 
             if (tag == "Note") {
                   Note* note = new Note(score());
-                  note->setParent(this);
-                  note->setTrack(track());
                   note->read(e);
-                  notes.add(note);
+                  add(note);
                   }
             else if (tag == "appoggiatura")
                   _noteType = NOTE_APPOGGIATURA;
@@ -842,27 +841,6 @@ void Chord::dump() const
       }
 
 //---------------------------------------------------------
-//   find
-//---------------------------------------------------------
-
-Note* NoteList::find(int pitch) const
-      {
-      ciNote i = std::multimap<const int, Note*>::find(pitch);
-      if (i != end())
-            return i->second;
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-NoteList::iterator NoteList::add(Note* n)
-      {
-      return std::multimap<const int, Note*>::insert(std::pair<const int, Note*> (n->pitch(), n));
-      }
-
-//---------------------------------------------------------
 //   upPos
 //---------------------------------------------------------
 
@@ -918,8 +896,8 @@ void Chord::scanElements(void* data, void (*func)(void*, Element*))
       foreach(LedgerLine* h, _ledgerLines)
             func(data, h);
 
-      for (iNote in = notes.begin(); in != notes.end(); ++in)
-            in->second->scanElements(data, func);
+      foreach(Note* n, _notes)
+            n->scanElements(data, func);
       ChordRest::scanElements(data, func);
       }
 
@@ -946,8 +924,8 @@ void Chord::setTrack(int val)
       foreach(LedgerLine* h, _ledgerLines)
             h->setTrack(val);
 
-      for (ciNote in = notes.begin(); in != notes.end(); ++in)
-            in->second->setTrack(val);
+      foreach(Note* n, _notes)
+            n->setTrack(val);
       }
 
 //---------------------------------------------------------
@@ -971,7 +949,8 @@ QPointF LedgerLine::canvasPos() const
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = chord()->measure()->system();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      int st = track() / VOICES;
+      double yp = y() + system->staff(st)->y() + system->y();
       return QPointF(xp, yp);
       }
 
@@ -1006,8 +985,8 @@ void Chord::setMag(double val)
             _tremolo->setMag(val);
       if (_glissando)
             _glissando->setMag(val);
-      for (ciNote in = notes.begin(); in != notes.end(); ++in)
-            in->second->setMag(val);
+      foreach (Note* n, _notes)
+            n->setMag(val);
       }
 
 //---------------------------------------------------------
@@ -1221,7 +1200,7 @@ void Chord::layout2()
 
 void Chord::layout()
       {
-      if (notes.empty())
+      if (_notes.empty())
             return;
 
       double _spatium  = spatium();
@@ -1230,10 +1209,8 @@ void Chord::layout()
             //
             // hack for use in palette
             //
-            for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  Note* note = in->second;
+            foreach(Note* note, _notes) {
                   note->layout();
-
                   double x = 0.0;
                   double y = note->line() * _spatium * .5;
                   note->setPos(x, y);
@@ -1251,8 +1228,7 @@ void Chord::layout()
 
       double lx = 0.0;
       _dotPosX  = 0.0;
-      for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* note = in->second;
+      foreach(Note* note, _notes) {
             note->layout();
 
             double x = 0.0;
@@ -1309,8 +1285,7 @@ void Chord::layout()
       //-----------------------------------------
 
 #if 0 // TODO
-      for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* note = in->second;
+      foreach(Note* note, _notes) {
             QList<Text*>& fingering = note->fingering();
             double x = _spatium * 0.8 + note->headWidth();
             foreach(const Text* f, fingering) {
@@ -1342,8 +1317,7 @@ void Chord::layout()
       if (_glissando)
             extraSpace += _spatium * .5;
 
-      for (ciNote i = notes.begin(); i != notes.end(); ++i) {
-            Note* note = i->second;
+      foreach(const Note* note, _notes) {
             double lhw = note->headWidth();
             if (note->mirror() && up() && (mirror < lhw))  // note head on the right side of stem
                   mirror = lhw;
@@ -1364,3 +1338,35 @@ Space Chord::space() const
       {
       return Space(extraSpace, minSpace);
       }
+
+//---------------------------------------------------------
+//   findNote
+//---------------------------------------------------------
+
+Note* Chord::findNote(int pitch) const
+      {
+      foreach(Note* n, _notes) {
+            if (n->pitch() == pitch)
+                  return n;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   noteLessThan
+//---------------------------------------------------------
+
+static bool noteLessThan(const Note* n1, const Note* n2)
+      {
+      return n1->pitch() <= n2->pitch();
+      }
+
+//---------------------------------------------------------
+//   pitchChanged
+//---------------------------------------------------------
+
+void Chord::pitchChanged()
+      {
+      qSort(_notes.begin(), _notes.end(), noteLessThan);
+      }
+

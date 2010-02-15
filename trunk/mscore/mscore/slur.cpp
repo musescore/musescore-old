@@ -812,11 +812,9 @@ void Slur::read(QDomElement e)
 
 static bool chordsHaveTie (Chord* c1, Chord* c2)
       {
-      NoteList* nl1 = c1->noteList();
-      NoteList* nl2 = c2->noteList();
-      for (iNote in1 = nl1->begin(); in1 != nl1->end(); ++in1) {
-            for (iNote in2 = nl2->begin(); in2 != nl2->end(); ++in2) {
-                  if (in1->second->tieFor() && in1->second->tieFor() == in2->second->tieBack())
+      foreach(Note* n1, c1->notes()) {
+            foreach(Note* n2, c2->notes()) {
+                  if (n1->tieFor() && n1->tieFor() == n2->tieBack())
                         return true;
                   }
             }

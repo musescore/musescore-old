@@ -429,10 +429,8 @@ void SCursor::add(ChordRest* c)
             }
       c->setScore(score());
       if (c->type() == CHORD) {
-            Chord* chord = static_cast<Chord*>(c);
-            NoteList* nl = chord->noteList();
-            for (iNote in = nl->begin(); in != nl->end(); ++in)
-                  in->second->setScore(score());
+            foreach(Note* n, static_cast<Chord*>(c)->notes())
+                  n->setScore(score());
             }
 
       setSegment(seg);

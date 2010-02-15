@@ -1139,7 +1139,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                                     }
                               for (int i = 0; i < nl.size(); ++i) {
                                     Event* mn = nl[i];
-                                    Note* note = chord->noteList()->find(mn->pitch());
+                                    Note* note = chord->findNote(mn->pitch());
             				n->ties[i] = new Tie(this);
                                     n->ties[i]->setStartNote(note);
       		      		note->setTieFor(n->ties[i]);

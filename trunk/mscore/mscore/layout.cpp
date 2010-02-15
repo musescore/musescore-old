@@ -174,12 +174,8 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             if (!e)
                  continue;
             ++voices;
-            if (e->type() == CHORD) {
-                  Chord* chord = static_cast<Chord*>(e);
-                  NoteList* nl = chord->noteList();
-                  for (iNote in = nl->begin(); in != nl->end(); ++in)
-                        notes.append(in->second);
-                  }
+            if (e->type() == CHORD)
+                  notes.append(static_cast<Chord*>(e)->notes());
             }
       if (notes.isEmpty())
             return;
@@ -1491,11 +1487,9 @@ static Note* searchTieNote(Note* note, Segment* segment, int track)
             Element* element = segment->element(track);
             if (element == 0 || element->type() != CHORD)
                   continue;
-            const NoteList* nl = ((Chord*)element)->noteList();
-            for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                  if (in->second->pitch() == pitch)
-                        return in->second;
-                  }
+            Note* n = static_cast<Chord*>(element)->findNote(pitch);
+            if (n)
+                  return n;
             }
       return 0;
       }
@@ -1520,19 +1514,18 @@ void Score::connectTies()
                         Element* el = s->element(i);
                         if (el == 0 || el->type() != CHORD)
                               continue;
-                        const NoteList* nl = ((Chord*)el)->noteList();
-                        for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                              Tie* tie = in->second->tieFor();
+                        foreach(Note* n, static_cast<Chord*>(el)->notes()) {
+                              Tie* tie = n->tieFor();
                               if (!tie)
                                     continue;
-                              Note* nnote = searchTieNote(in->second, s, i);
+                              Note* nnote = searchTieNote(n, s, i);
                               if (nnote == 0) {
                                     printf("next note at %d(measure %d) voice %d for tie not found; delete tie\n",
-                                       in->second->chord()->tick(),
+                                       n->chord()->tick(),
                                        m->no(),
-                                       in->second->chord()->voice()
+                                       n->chord()->voice()
                                        );
-                                    in->second->setTieFor(0);
+                                    n->setTieFor(0);
                                     delete tie;
                                     }
                               else {

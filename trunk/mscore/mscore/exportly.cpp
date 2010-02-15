@@ -2932,7 +2932,7 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
   QString stringno[10];
   bool tie=false;
   bool symb=false;
-  NoteList* nl = c->noteList();
+  QList<Note*> nl = c->notes();
   bool chordstart=false;
   int fing=0;
   int streng=0;
@@ -2945,7 +2945,7 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
 
   stemDir(c);
 
-  if (nl->size() > 1) chordstart = true;
+  if (nl.size() > 1) chordstart = true;
 
   int  pitchidx=0;
   bool arpeggioswitch=false;
@@ -2953,10 +2953,10 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
 
   gliss = glissandotest(c);
   int iter=0;
-  for (iNote notesinchord = nl->begin();;)
+  for (QList<Note*>::iterator notesinchord = nl.begin();;)
     {
 	  iter++;
-      Note* n = notesinchord->second;
+      Note* n = *notesinchord;
       //if fingering found on _previous_ chordnote, now is the time for writing it:
       if (fing>0)  writeFingering(fing,fingering);
       if (streng>0) writeStringInstruction(streng,stringno);
@@ -2995,19 +2995,19 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
 
       setOctave(purepitch, pitchidx, pitchlist);
 
-      if (notesinchord == nl->begin())
+      if (notesinchord == nl.begin())
 	{
 	  chordpitch=prevpitch;
 	  chordnote=cleannote;
 	}
 
       ++notesinchord; //number of notes in chord, we progress to next chordnote
-      if (notesinchord == nl->end())
+      if (notesinchord == nl.end())
 	break;
       out << " ";
     } //end of notelist = end of chord
 
-  if ((nl->size() > 1) or (streng > 0))
+  if ((nl.size() > 1) or (streng > 0))
     {
       //if fingering found on previous chordnote, now is the time for writing it:
       if (fing   > 0) writeFingering(fing, fingering);
@@ -3028,7 +3028,7 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
 
   writeLen(c->tickLen());
 
-  if ((symb) and (nl->size() == 1))
+  if ((symb) and (nl.size() == 1))
     writeSymbol(symbolname);
 
   if (arpeggioswitch)
@@ -3039,7 +3039,7 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
 
 
   //if fingering found on a single note, now is the time for writing it:
-  if (nl->size() == 1)
+  if (nl.size() == 1)
     writeFingering(fing, fingering);
 
   writeTremolo(c);
@@ -3253,7 +3253,7 @@ void ExportLy::writeVolta(int measurenumber, int lastind)
   bool utgang=false;
   int i=0;
 
-  if (pickup) 
+  if (pickup)
     measurenumber--;
   while ((voltarray[i].barno < measurenumber) and (i<=lastind))
     {
@@ -3760,7 +3760,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	  QString flatshortn="";
 
 	  cout << "X" << staffname[staffInd].partname.toUtf8().data() << "x\n";
-	  
+
 	  flatpartn = flatInInstrName(staffname[staffInd].partname);
 	  flatshortn = flatInInstrName(staffname[staffInd].partshort);
 
@@ -3768,12 +3768,12 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 
 	  cout << "F" << flatpartn.toUtf8().data() << "f\n";
 
-	  if (flatpartn == "") 
+	  if (flatpartn == "")
 	    out<< "#\"" << staffname[staffInd].partname << "\"";
 	  else
 	    out << flatpartn;
 	  out << "\n";
-	 
+
 	  indent();
 	  out << "\\set Staff.shortInstrumentName = ";
 	  if (flatshortn =="")
@@ -4103,9 +4103,9 @@ void ExportLy::writeScore()
       curTicks=-1;
       pickup=false;
 
-      if (part->nstaves()==2) 
+      if (part->nstaves()==2)
 	pianostaff = true;
-      else 
+      else
 	pianostaff = false;
 
       int strack = score->staffIdx(part) * VOICES;
@@ -4247,16 +4247,16 @@ void ExportLy::writeScore()
 		      //it will be possible to attach lyrics to them.
 		      indent();
 		      out << "\\context Voice = " << staffname[staffInd].voicename[voice] ;
-		      if ((voice == 0) and (pianostaff ==false)) 
+		      if ((voice == 0) and (pianostaff ==false))
 			out << "{\\voiceOne ";
 		      out << "\\" << staffname[staffInd].voicename[voice];
-		      if ((voice == 0) and (pianostaff == false)) 
+		      if ((voice == 0) and (pianostaff == false))
 			out << "}";
 		      if (voice < voiceno-1) out << "\\\\ \n";
 		      else out <<"\n";
 		    }
 		}
-	      
+
 	      indent();
 	      out << ">> \n\n";
 	      level=0;
@@ -4794,7 +4794,7 @@ bool ExportLy::write(const QString& name)
 
 
 /*----------------------TODOS------------------------------------
-  
+
 
       -- Coda/Segno symbols collides with rehearsalmarks, which
       accordingly are not printed. Lilypond has automatic

@@ -1,4 +1,6 @@
-14.feb (lv)
+14.feb (ws)
+      - make sure notes are sorted in chord note list; this fixes some obscure bugs
+      (lv)
       - fixed bug #4495: MusicXML import crashing if no time signature specified
 14.feb (ws)
       - added "scales" plugin from Maurizio M. Gavioli

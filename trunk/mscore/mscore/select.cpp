@@ -258,9 +258,7 @@ void Score::updateSelectedElements(SelState /*state*/)
                         continue;
                   if (e->type() == CHORD) {
                         Chord* chord = static_cast<Chord*>(e);
-                        NoteList* nl = chord->noteList();
-                        for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                              Note* note = in->second;
+                        foreach(Note* note, chord->notes()) {
                               note->setSelected(true);
                               _selection.append(note);
                               }
@@ -878,9 +876,7 @@ QList<Note*> Selection::noteList() const
                               if (e == 0 || e->type() != CHORD)
                                     continue;
                               Chord* c = static_cast<Chord*>(e);
-                              NoteList* notes = c->noteList();
-                              for(iNote i = notes->begin(); i != notes->end(); ++i)
-                                    nl.append(i->second);
+                              nl.append(c->notes());
                               }
                         }
                   }

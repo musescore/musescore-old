@@ -371,9 +371,7 @@ void Inspector::updateList(Score* s)
                                                 new ElementItem(sei, a);
                                           foreach(LedgerLine* h, *chord->ledgerLines())
                                                 new ElementItem(sei, h);
-                                          NoteList* notes = chord->noteList();
-                                          for (iNote in = notes->begin(); in != notes->end(); ++in) {
-                                                Note* note = in->second;
+                                          foreach(Note* note, chord->notes()) {
                                                 ElementItem* ni = new ElementItem(sei, note);
                                                 if (note->accidental()) {
                                                       new ElementItem(ni, note->accidental());
@@ -831,9 +829,7 @@ void ShowChordWidget::setElement(Element* e)
             cb.helplineList->addItem(item);
             }
       cb.notes->clear();
-      NoteList* nl = chord->noteList();
-      for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-            Note* n = in->second;
+      foreach(Note* n, chord->notes()) {
             QString s;
             s.setNum(long(n), 16);
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(n));
