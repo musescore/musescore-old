@@ -53,7 +53,9 @@ void ScoreView::editKey(QKeyEvent* ev)
                key, int(modifiers), qPrintable(s));
 
       Element* e = editObject;
-
+	  if(!e)
+			return;
+	  
       if (e->type() == LYRICS) {
             int found = false;
 #ifdef Q_WS_MAC
