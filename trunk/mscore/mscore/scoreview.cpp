@@ -2552,6 +2552,9 @@ void ScoreView::endEdit()
       {
       setDropTarget(0);
       setEditText(0);
+	  if(!editObject){
+			return;
+			}
       _score->addRefresh(editObject->bbox());
       editObject->endEdit();
       _score->addRefresh(editObject->bbox());
@@ -2911,7 +2914,7 @@ bool ScoreView::editElementDragTransition(QMouseEvent* ev)
       {
       startMove = imatrix.map(QPointF(ev->pos()));
       Element* e = elementNear(startMove);
-      if ((e == editObject) && (editObject->isTextB())) {
+      if (e && (e == editObject) && (editObject->isTextB())) {
             if (editObject->mousePress(startMove, ev)) {
                   _score->addRefresh(editObject->abbox());
                   _score->end();
