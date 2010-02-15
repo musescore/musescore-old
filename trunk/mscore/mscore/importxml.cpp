@@ -342,6 +342,7 @@ void MusicXml::import(Score* s)
       ottava = 0;
       trill = 0;
       pedal = 0;
+      tremStart = 0;
 
       // TODO only if multi-measure rests used ???
       score->style().set(ST_createMultiMeasureRests, true);
@@ -2230,6 +2231,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int actualNotes = 1;
       int normalNotes = 1;
       int tremolo = 0;
+      QString tremoloType;
       int headGroup = 0;
       bool noStem = false;
 
@@ -2474,8 +2476,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           invertedMordent = true;
                                     else if (eee.tagName() == "mordent")
                                           mordent = true;
-                                    else if (eee.tagName() == "tremolo")
+                                    else if (eee.tagName() == "tremolo") {
                                           tremolo = eee.text().toInt();
+                                          tremoloType = eee.attribute(QString("type"));
+                                          }
                                     else if (eee.tagName() == "accidental-mark")
                                           domNotImplemented(eee);
                                     else if (eee.tagName() == "delayed-turn")
@@ -2948,12 +2952,31 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             tuplet->add(cr);
             }
       if (tremolo) {
+            printf("tremolo=%d tremoloType='%s'\n", tremolo, qPrintable(tremoloType));
             if (tremolo == 1 || tremolo == 2 || tremolo == 3) {
-                  Tremolo * t = new Tremolo(score);
-                  if (tremolo == 1) t->setSubtype(TREMOLO_1);
-                  if (tremolo == 2) t->setSubtype(TREMOLO_2);
-                  if (tremolo == 3) t->setSubtype(TREMOLO_3);
-                  cr->add(t);
+                  if (tremoloType == "" || tremoloType == "single") {
+                        Tremolo * t = new Tremolo(score);
+                        if (tremolo == 1) t->setSubtype(TREMOLO_1);
+                        if (tremolo == 2) t->setSubtype(TREMOLO_2);
+                        if (tremolo == 3) t->setSubtype(TREMOLO_3);
+                        cr->add(t);
+                        }
+                  else if (tremoloType == "start") {
+                        if (tremStart) printf("MusicXML::import: double tremolo start\n");
+                        tremStart = static_cast<Chord*>(cr);
+                        }
+                  else if (tremoloType == "stop") {
+                        if (tremStart) {
+                              Tremolo * t = new Tremolo(score);
+                              if (tremolo == 1) t->setSubtype(3);
+                              if (tremolo == 2) t->setSubtype(4);
+                              if (tremolo == 3) t->setSubtype(5);
+                              t->setChords(tremStart, static_cast<Chord*>(cr));
+                              cr->add(t);
+                              }
+                        else printf("MusicXML::import: double tremolo stop w/o start\n");
+                        tremStart = 0;
+                        }
                   }
             else
                   printf("unknown tremolo type %d\n", tremolo);

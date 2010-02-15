@@ -1,7 +1,9 @@
-14.feb (ws)
+15.feb (ws)
       - make sure notes are sorted in chord note list; this fixes some obscure bugs
-      (lv)
+       (lv)
       - fixed bug #4495: MusicXML import crashing if no time signature specified
+      - bug #4477: MusicXML: tremolos between two notes not exported/imported
+        import implemented according to comments by David Bolton on Thu, 02/11/2010 - 19:29
 14.feb (ws)
       - added "scales" plugin from Maurizio M. Gavioli
 13.feb (ws)
