@@ -1,8 +1,10 @@
+14.feb (lv)
+      - fixed bug #4495: MusicXML import crashing if no time signature specified
 14.feb (ws)
       - added "scales" plugin from Maurizio M. Gavioli
 13.feb (ws)
       - overhaul of script bindings
-      (lv)
+       (lv)
       - bug #4477: MusicXML: tremolos between two notes not exported/imported
         export implemented according to comments by David Bolton on Thu, 02/11/2010 - 19:29
 12,feb (ws)
