@@ -1154,14 +1154,8 @@ void Score::spell()
                   int etrack = strack + VOICES;
                   for (int track = strack; track < etrack; ++track) {
                         Element* e = s->element(track);
-                        if (e && e->type() == CHORD) {
-                              Chord* chord = static_cast<Chord*>(e);
-                              const NoteList* nl = chord->noteList();
-                              for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                    Note* note = in->second;
-                                    notes.append(note);
-                                    }
-                              }
+                        if (e && e->type() == CHORD)
+                              notes.append(static_cast<Chord*>(e)->notes());
                         }
                   }
             spellNotelist(notes);
@@ -1177,14 +1171,8 @@ void Score::spell(int startStaff, int endStaff, Segment* startSegment, Segment* 
                   int etrack = strack + VOICES;
                   for (int track = strack; track < etrack; ++track) {
                         Element* e = s->element(track);
-                        if (e && e->type() == CHORD) {
-                              Chord* chord = static_cast<Chord*>(e);
-                              const NoteList* nl = chord->noteList();
-                              for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                    Note* note = in->second;
-                                    notes.append(note);
-                                    }
-                              }
+                        if (e && e->type() == CHORD)
+                              notes.append(static_cast<Chord*>(e)->notes());
                         }
                   }
             spellNotelist(notes);
@@ -1199,12 +1187,10 @@ Note* prevNote(Note* n)
       {
       Chord* chord = n->chord();
       Segment* seg = chord->segment();
-      NoteList* nl = chord->noteList();
-      ciNote i = nl->std::multimap<const int, Note*>::find(n->pitch());
-      if (i != nl->begin()) {
-            --i;
-            return i->second;
-            }
+      const QList<Note*> nl = chord->notes();
+      int i = nl.indexOf(n);
+      if (i)
+            return nl[i-1];
       int staff      = n->staffIdx();
       int startTrack = staff * VOICES + n->voice() - 1;
       int endTrack   = 0;
@@ -1229,11 +1215,11 @@ Note* prevNote(Note* n)
 Note* nextNote(Note* n)
       {
       Chord* chord = n->chord();
-      NoteList* nl = chord->noteList();
-      ciNote i = nl->std::multimap<const int, Note*>::find(n->pitch());
+      const QList<Note*> nl = chord->notes();
+      int i = nl.indexOf(n);
       ++i;
-      if (i != nl->end())
-            return i->second;
+      if (i < nl.size())
+            return nl[i];
       Segment* seg   = chord->segment();
       int staff      = n->staffIdx();
       int startTrack = staff * VOICES + n->voice() + 1;

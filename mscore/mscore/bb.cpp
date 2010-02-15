@@ -585,7 +585,7 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
                   }
             for (int i = 0; i < nl.size(); ++i) {
                   Event* mn = nl[i];
-                  Note* note = chord->noteList()->find(mn->pitch());
+                  Note* note = chord->findNote(mn->pitch());
       		n->ties[i] = new Tie(this);
                   n->ties[i]->setStartNote(note);
       		note->setTieFor(n->ties[i]);

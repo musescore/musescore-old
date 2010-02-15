@@ -1951,8 +1951,8 @@ static Chord* nextChord(Chord* ch)
 void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset)
       {
       printf("ExportMusicXml::chord() oldtick=%d\n", tick);
-      NoteList* nl = chord->noteList();
-      NoteType gracen = nl->begin()->second->noteType();
+      QList<Note*> nl = chord->notes();
+      NoteType gracen = nl.front()->noteType();
       bool grace = (gracen == NOTE_ACCIACCATURA
                  || gracen == NOTE_APPOGGIATURA
                  || gracen == NOTE_GRACE4
@@ -1968,9 +1968,8 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
       const double pageHeight  = getTenthsFromInches(pf->height());
 //      const double pageWidth  = getTenthsFromInches(pf->width());
 
-      for (iNote i = nl->begin(); i != nl->end(); ++i) {
+      foreach(Note* note, nl) {
             QString val;
-            Note* note = i->second;
 
             attr.doAttr(xml, false);
             QString noteTag = QString("note");
@@ -1997,7 +1996,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   else
                         xml.tagE("grace");
                   }
-            if (i != nl->begin())
+            if (note != nl.front())
                   xml.tagE("chord");
 
             char c;
@@ -2146,7 +2145,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             //    <beam number="1">backward hook</beam>
             //    <beam number="1">forward hook</beam>
 
-            if (i == nl->begin() && chord->beam()) {
+            if (note == nl.front() && chord->beam()) {
                   QString s = chord->beam()->xmlType(chord);
                   xml.tag("beam number=\"1\"", s);
                   }
@@ -2162,7 +2161,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   xml.tagE("tied type=\"start\"");
                   }
 
-            if (i == nl->begin()) {
+            if (note == nl.front()) {
                   tupletStartStop(chord, notations, xml);
                   sh.doSlurStop(chord, notations, xml);
                   sh.doSlurStart(chord, notations, xml);
@@ -2181,12 +2180,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   }
             technical.etag(xml);
             if (chord->arpeggio()) {
-                  arpeggiate(chord->arpeggio(), note == nl->front(), note == nl->back(), xml, notations);
+                  arpeggiate(chord->arpeggio(), note == nl.front(), note == nl.back(), xml, notations);
                   }
             // write glissando (only for last note)
             Chord* ch = nextChord(chord);
 //            printf("chord->gliss=%p nextchord=%p gliss=%p\n", chord->glissando(), ch, ch ? ch->glissando() : 0);
-            if ((note == nl->back()) && ch && ch->glissando()) {
+            if ((note == nl.back()) && ch && ch->glissando()) {
                   gh.doGlissandoStart(ch, notations, xml);
                   }
             if (chord->glissando()) {
@@ -2194,7 +2193,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   }
             notations.etag(xml);
             // write lyrics (only for first note)
-            if ((i == nl->begin()) && ll)
+            if ((note == nl.front()) && ll)
                   lyrics(ll);
             xml.etag();
             }

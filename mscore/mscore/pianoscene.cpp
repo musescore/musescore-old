@@ -304,11 +304,10 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
                   if (e == 0 || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
-                  NoteList* nl = chord->noteList();
-                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                        if (in->second->tieBack())
+                  foreach(Note* n, chord->notes()) {
+                        if (n->tieBack())
                               continue;
-                        scene()->addItem(new PianoItem(in->second));
+                        scene()->addItem(new PianoItem(n));
                         }
                   }
             }

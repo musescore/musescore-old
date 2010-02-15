@@ -184,9 +184,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
       chord->setParent(seg);
       undoAddElement(chord);
 
-      NoteList* nl = oc->noteList();
-      for (iNote i = nl->begin(); i != nl->end(); ++i) {
-            Note* n = i->second;
+      foreach(Note* n, oc->notes()) {
             Note* nn = new Note(this);
             chord->add(nn);
             nn->setPitch(n->pitch(), n->tpc());
@@ -579,11 +577,12 @@ void Score::putNote(const QPointF& pos, bool replace)
       //       to a total duration of _is.duration
       //
       if (!replace && (cr->duration() == _is.duration()) && (cr->type() == CHORD) && !_is.rest) {
-            const NoteList* nl = static_cast<Chord*>(cr)->noteList();
-            Note* note = nl->find(pitch);
+
+            Chord* chord = static_cast<Chord*>(cr);
+            Note* note = chord->findNote(pitch);
             if (note) {
                   // remove note from chord
-                  if (nl->size() > 1)
+                  if (chord->notes().size() > 1)
                         undoRemoveElement(note);
                   return;
                   }
@@ -766,11 +765,10 @@ void Score::cmdAddTie()
                   printf("addTie: no next chord found\n");
             return;
             }
-      NoteList* nl = static_cast<Chord*>(el)->noteList();
       Note* note2 = 0;
-      for (iNote i = nl->begin(); i != nl->end(); ++i) {
-            if (i->second->pitch() == note->pitch()) {
-                  note2 = i->second;
+      foreach(Note* n, static_cast<Chord*>(el)->notes()) {
+            if (n->pitch() == note->pitch()) {
+                  note2 = n;
                   break;
                   }
             }
@@ -1035,7 +1033,7 @@ void Score::deleteItem(Element* el)
             case NOTE:
                   {
                   Chord* chord = static_cast<Chord*>(el->parent());
-                  if (chord->noteList()->size() > 1) {
+                  if (chord->notes().size() > 1) {
                         undoRemoveElement(el);
                         break;
                         }

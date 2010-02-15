@@ -356,9 +356,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                   int staffMove = chord->staffMove();
                   if (chord->noteType() != NOTE_NORMAL)
                         m *= score()->styleD(ST_graceNoteMag);
-                  NoteList* nl = chord->noteList();
-                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                        Note* note = in->second;
+                  foreach(Note* note, chord->notes()) {
                         if (note->tieBack()) {
                               int line = note->tieBack()->startNote()->line();
                               note->setLine(line);
@@ -453,12 +451,8 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
             if (!e)
                  continue;
             ++voices;
-            if (e->type() == CHORD) {
-                  Chord* chord = static_cast<Chord*>(e);
-                  NoteList* nl = chord->noteList();
-                  for (iNote in = nl->begin(); in != nl->end(); ++in)
-                        notes.append(in->second);
-                  }
+            if (e->type() == CHORD)
+                  notes.append(static_cast<Chord*>(e)->notes());
             }
       if (notes.isEmpty())
             return;
@@ -691,14 +685,8 @@ int Measure::findAccidental(Note* note) const
                   Drumset* drumset = 0;
                   if (chord->staff()->part()->useDrumset())
                         drumset = chord->staff()->part()->drumset();
-                  NoteList* nl     = chord->noteList();
-                  QList<Note*> notes;
-                  for (iNote in = nl->begin(); in != nl->end(); ++in)
-                        notes.append(in->second);
 
-                  int nNotes  = notes.size();
-                  for (int i = 0; i < nNotes; ++i) {
-                        Note* note1  = notes[i];
+                  foreach(Note* note1, chord->notes()) {
                         int pitch   = note1->pitch();
                         //
                         // compute accidental
@@ -769,14 +757,8 @@ int Measure::findAccidental2(Note* note) const
                   Drumset* drumset = 0;
                   if (chord->staff()->part()->useDrumset())
                         drumset = chord->staff()->part()->drumset();
-                  NoteList* nl     = chord->noteList();
-                  QList<Note*> notes;
-                  for (iNote in = nl->begin(); in != nl->end(); ++in)
-                        notes.append(in->second);
 
-                  int nNotes  = notes.size();
-                  for (int i = 0; i < nNotes; ++i) {
-                        Note* note1  = notes[i];
+                  foreach(Note* note1, chord->notes()) {
                         int pitch   = note1->pitch();
 
                         //
@@ -944,9 +926,8 @@ void Measure::layout2()
                   if (el) {
                         if (el->type() == CHORD) {
                               Chord* a = static_cast<Chord*>(el);
-                              const NoteList* nl = a->noteList();
-                              for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                    Tie* tie = in->second->tieFor();
+                              foreach(Note* n, a->notes()) {
+                                    Tie* tie = n->tieFor();
                                     if (tie)
                                           tie->layout();
                                     }

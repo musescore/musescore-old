@@ -101,7 +101,6 @@ void Score::updateChannel()
                               if (e->type() != CHORD)
                                     continue;
                               Chord* c = static_cast<Chord*>(e);
-                              NoteList* nl = c->noteList();
                               int sc = 0;
                               //
                               // TODO: optimize
@@ -112,8 +111,7 @@ void Score::updateChannel()
                                     sc = ar.channel;
                                     }
                               QList<ARec> alist;
-                              for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                                    Note* note = in->second;
+                              foreach (Note* note, c->notes()) {
                                     if (note->hidden())
                                           continue;
                                     if (note->tieBack())
@@ -164,17 +162,15 @@ bool Score::isVolta(int tick, int repeat) const
 
 void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int tick, int len)
       {
-      NoteList* nl = chord->noteList();
       Arpeggio* arpeggio = chord->arpeggio();
 
       int arpeggioOffset = 0;
       static const int arpeggioNoteDistance = Duration(Duration::V_32ND).ticks();
-      if (arpeggio && chord->noteList()->size() * arpeggioNoteDistance <= unsigned(len))
+      if (arpeggio && chord->notes().size() * arpeggioNoteDistance <= unsigned(len))
             arpeggioOffset = arpeggioNoteDistance;
 
       int i = 0;
-      for (iNote in = nl->begin(); in != nl->end(); ++in, ++i) {
-            Note* note = in->second;
+      foreach(Note* note, chord->notes()) {
             int channel = instr->channel[note->subchannel()]->channel;
             collectNote(events, channel, note, tick + i * arpeggioOffset, len);
             }
@@ -334,12 +330,11 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         }
                   {
                   tick += tickOffset;
-                  NoteList* nl = chord->noteList();
                   Arpeggio* arpeggio = chord->arpeggio();
 
                   int arpeggioOffset = 0;
                   static const int arpeggioNoteDistance = Duration(Duration::V_32ND).ticks();
-                  if (arpeggio && chord->noteList()->size() * arpeggioNoteDistance <= unsigned(len))
+                  if (arpeggio && chord->notes().size() * arpeggioNoteDistance <= unsigned(len))
                         arpeggioOffset = arpeggioNoteDistance;
 
                   int i = 0;
@@ -373,8 +368,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
                   // -- end swing -- //
 
-                  for (iNote in = nl->begin(); in != nl->end(); ++in, ++i) {
-                        Note* note = in->second;
+                  foreach(Note* note, chord->notes()) {
                         int channel = instr->channel[note->subchannel()]->channel;
 
                         int tickLen = note->chord()->tickLen();
@@ -618,9 +612,7 @@ void Score::fixPpitch()
                         //
                         int velocity = velo[staffIdx].velo(chord->tick());
 
-                        NoteList* nl = chord->noteList();
-                        for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                              Note* note = in->second;
+                        foreach(Note* note, chord->notes()) {
 
                               //
                               // adjust velocity for instrument, channel and

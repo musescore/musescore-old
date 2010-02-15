@@ -120,8 +120,8 @@ void Score::endCmd()
             return;
             }
       bool noUndo = _undo->current()->childCount() <= 1;
-
-      setClean(noUndo);
+      if (!noUndo)
+            setClean(noUndo);
       _undo->endMacro(noUndo);
       end();
       }
@@ -1002,9 +1002,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                   // remove ties
                   //
                   Chord* c = static_cast<Chord*>(cr);
-                  NoteList* nl = c->noteList();
-                  for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                        Note* n = i->second;
+                  foreach(Note* n, c->notes()) {
                         if (n->tieFor())
                               undoRemoveElement(n->tieFor());
                         }
@@ -1680,12 +1678,9 @@ void Score::addAccidental(Note* note, int accidental)
             if (!e || e->type() != CHORD)
                   continue;
             Chord* c = static_cast<Chord*>(e);
-            NoteList* nl = c->noteList();
-            for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                  Note* n = in->second;
-                  if ((n != note) && (n->line() == line) && (n->accidentalType() != accidental)) {
+            foreach(Note* n, c->notes()) {
+                  if ((n != note) && (n->line() == line) && (n->accidentalType() != accidental))
                         _undo->push(new ChangeAccidental(n, accidental));
-                        }
                   }
             }
       }
@@ -2423,13 +2418,11 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     // nonexistant staff
                                     //
                                     Chord* c      = static_cast<Chord*>(cr);
-                                    NoteList* nl  = c->noteList();
                                     Part* part    = cr->staff()->part();
                                     int nn = (track / VOICES) + c->staffMove();
                                     if (nn < 0 || nn >= nstaves())
                                           c->setStaffMove(0);
-                                    for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                                          Note* n = i->second;
+                                    foreach(Note* n, c->notes()) {
                                           n->setPitch(n->pitch() - part->transposeChromatic());
                                           n->setTpcFromPitch();
                                           n->setTrack(track);
@@ -2489,23 +2482,21 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                                 c2->setParent(s);
                                                 undoAddElement(c2);
 
-                                                NoteList* nl1 = c->noteList();
-                                                NoteList* nl2 = c2->noteList();
-                                                iNote i1      = nl1->begin();
-                                                iNote i2      = nl2->begin();
+                                                QList<Note*> nl1 = c->notes();
+                                                QList<Note*> nl2 = c2->notes();
 
-                                                for (; i1 != nl1->end(); i1++, i2++) {
+                                                for (int i = 0; i < nl1.size(); ++i) {
                                                       Tie* tie = new Tie(this);
-                                                      tie->setStartNote(i1->second);
-                                                      tie->setEndNote(i2->second);
+                                                      tie->setStartNote(nl1[i]);
+                                                      tie->setEndNote(nl2[i]);
                                                       tie->setTrack(c->track());
-                                                      Tie* tie2 = i1->second->tieFor();
+                                                      Tie* tie2 = nl1[i]->tieFor();
                                                       if (tie2) {
-                                                            i2->second->setTieFor(i1->second->tieFor());
-                                                            tie2->setStartNote(i2->second);
+                                                            nl2[i]->setTieFor(nl1[i]->tieFor());
+                                                            tie2->setStartNote(nl2[i]);
                                                             }
-                                                      i1->second->setTieFor(tie);
-                                                      i2->second->setTieBack(tie);
+                                                      nl1[i]->setTieFor(tie);
+                                                      nl2[i]->setTieBack(tie);
                                                       }
                                                 c = c2;
                                                 }

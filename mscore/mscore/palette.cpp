@@ -181,7 +181,7 @@ void Palette::mousePressEvent(QMouseEvent* ev)
 
                   PaletteCell* cell = cells[i];
                   Chord* ch         = static_cast<Chord*>(cell->element);
-                  Note* note        = ch->noteList()->front();
+                  Note* note        = ch->downNote();
 
                   Instrument* instr = part->instrument();
                   Channel* channel  = instr->channel[0];
@@ -248,10 +248,8 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
                               continue;
                         if (e->type() == CHORD) {
                               Chord* chord = static_cast<Chord*>(e);
-                              NoteList* nl = chord->noteList();
-                              for (iNote i = nl->begin(); i != nl->end(); ++i)
-                                    applyDrop(score, viewer, i->second, element);
-
+                              foreach(Note* n, chord->notes())
+                                    applyDrop(score, viewer, n, element);
                               }
                         else
                               applyDrop(score, viewer, e, element);

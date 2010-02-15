@@ -124,46 +124,31 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
             case 4:     // "removeNote",
                   if (context->argumentCount() == 1) {
                         int idx = context->argument(0).toInt32();
-                        NoteList* nl = chord->noteList();
-                        if (idx < 0 || idx >= int(nl->size()))
+                        if (idx < 0 || idx >= int(chord->notes().size()))
                               return context->throwError(QScriptContext::TypeError,
                                  QString::fromLatin1("Note.%0(): note index out of range")
                                  .arg(function_names_chord[_id]));
                         Score* score = chord->score();
-                        int k = 0;
-                        for (iNote i = nl->begin(); i != nl->end(); ++i) {
-                              if (k == idx) {
-                                    if (score)
-                                          score->undoRemoveElement(i->second);
-                                    else
-                                          nl->erase(i);
-                                    return context->engine()->undefinedValue();
-                                    }
-                              ++k;
-                              }
+                        if (score)
+                              score->undoRemoveElement(chord->notes()[idx]);
+                        else
+                              chord->notes().removeAt(idx);
                         }
                   break;
             case 5:     // "notes",
                   if (context->argumentCount() == 0) {
-                        const NoteList* nl = chord->noteList();
-                        return qScriptValueFromValue(context->engine(), nl->size());
+                        return qScriptValueFromValue(context->engine(), chord->notes().size());
                         }
                   break;
             case 6:     // "note"
                   if (context->argumentCount() == 1) {
                         int idx = context->argument(0).toInt32();
-                        const NoteList* nl = chord->noteList();
-                        if (idx < 0 || idx >= int(nl->size())) {
+                        if (idx < 0 || idx >= int(chord->notes().size())) {
                               return context->throwError(QScriptContext::TypeError,
                                  QString::fromLatin1("Note.%0(): note index out of range")
                                  .arg(function_names_chord[_id]));
                               }
-                        int k = 0;
-                        for (ciNote i = nl->begin(); i != nl->end(); ++i) {
-                              if (k == idx)
-                                    return qScriptValueFromValue(context->engine(), i->second);
-                              ++k;
-                              }
+                        return qScriptValueFromValue(context->engine(), chord->notes()[idx]);
                         }
                   break;
             }

@@ -182,13 +182,7 @@ void Score::transpose()
                   if (!e || e->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
-                  NoteList* notes = chord->noteList();
-
-                  // we have to operate on a list copy because
-                  // change pitch changes chord->noteList():
-                  QList<Note*> nl;
-                  for (iNote i = notes->begin(); i != notes->end(); ++i)
-                        nl.append(i->second);
+                  QList<Note*> nl = chord->notes();
                   foreach (Note* n, nl) {
                         if (td.mode() == TRANSPOSE_BY_KEY)
                               transposeByKey(n, td.transposeKey(), td.direction());
@@ -253,13 +247,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diatonic, int chromatic)
                  if (!e || e->type() != CHORD)
                        continue;
                  Chord* chord = static_cast<Chord*>(e);
-                 NoteList* notes = chord->noteList();
-
-                 // we have to operate on a list copy because
-                 // change pitch changes chord->noteList():
-                 QList<Note*> nl;
-                 for (iNote i = notes->begin(); i != notes->end(); ++i)
-                       nl.append(i->second);
+                 QList<Note*> nl = chord->notes();
                  foreach(Note* n, nl)
                         transposeByInterval(n, diatonic, chromatic);
                  }
