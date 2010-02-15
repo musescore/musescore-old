@@ -47,16 +47,18 @@ static const char* const function_names_score[] = {
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
       "staves"
 #ifdef HAS_AUDIOFILE
-      , "saveWav", "saveFlac", "saveOgg",
+      , "saveWav", "saveFlac", "saveOgg"
 #endif
+      , "importMusicXml", "importCompressedMusicXml"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
       1, 1, 1, 1, 1, 5, 1, 1,
       1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0
 #ifdef HAS_AUDIOFILE
-      , 2, 2, 2,
+      , 2, 2, 2
 #endif
+      , 1, 1
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -93,13 +95,15 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration
 #endif
+      , QScriptValue::SkipInEnumeration
+      , QScriptValue::SkipInEnumeration
       };
 
 ScriptInterface scoreInterface = {
 #ifdef HAS_AUDIOFILE
-      28,
+      30,
 #else
-      25,
+      27,
 #endif
       function_names_score,
       function_lengths_score,
@@ -450,6 +454,20 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         }
                   break;
 #endif
+              case 28:    // "importMusicXml",
+                  if (context->argumentCount() == 1) {
+                        QString s = qscriptvalue_cast<QString>(context->argument(0));
+                        score->importMusicXml(s);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+              case 29:    // "importCompressedMusicXml",
+                  if (context->argumentCount() == 1) {
+                        QString s = qscriptvalue_cast<QString>(context->argument(0));
+                        score->importCompressedMusicXml(s);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Score.%0(): bad argument count or value")
