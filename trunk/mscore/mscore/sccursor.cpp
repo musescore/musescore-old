@@ -276,6 +276,11 @@ static QScriptValue static_Cursor_call(QScriptContext* context, QScriptEngine*)
             Score* score = qscriptvalue_cast<Score*>(context->argument(0));
             cursor   = new SCursor(score);
             }
+      else if (context->argumentCount() == 2) {
+            Score* score = qscriptvalue_cast<Score*>(context->argument(0));
+            bool expandRepeat = context->argument(1).toBool();
+            cursor   = new SCursor(score, expandRepeat);
+            }
       if (cursor)
             return context->engine()->newVariant(context->thisObject(), qVariantFromValue(cursor));
       return context->throwError(QString::fromLatin1("Cursor(): wrong argument count"));
