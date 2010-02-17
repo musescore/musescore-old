@@ -53,7 +53,7 @@
         <type>whole</type>
         <notations>
           <ornaments>
-            <tremolo>3</tremolo>
+            <tremolo type="single">3</tremolo>
             </ornaments>
           </notations>
         </note>
@@ -70,7 +70,7 @@
         <stem>up</stem>
         <notations>
           <ornaments>
-            <tremolo>3</tremolo>
+            <tremolo type="single">3</tremolo>
             </ornaments>
           </notations>
         </note>
@@ -85,7 +85,7 @@
         <stem>down</stem>
         <notations>
           <ornaments>
-            <tremolo>3</tremolo>
+            <tremolo type="single">3</tremolo>
             </ornaments>
           </notations>
         </note>
@@ -101,7 +101,7 @@
         <beam number="1">begin</beam>
         <notations>
           <ornaments>
-            <tremolo>2</tremolo>
+            <tremolo type="single">2</tremolo>
             </ornaments>
           </notations>
         </note>
@@ -117,7 +117,7 @@
         <beam number="1">continue</beam>
         <notations>
           <ornaments>
-            <tremolo>1</tremolo>
+            <tremolo type="single">1</tremolo>
             </ornaments>
           </notations>
         </note>
@@ -162,7 +162,7 @@
         <stem>up</stem>
         <notations>
           <ornaments>
-            <tremolo>1</tremolo>
+            <tremolo type="single">1</tremolo>
             </ornaments>
           </notations>
         </note>
@@ -177,7 +177,7 @@
         <stem>up</stem>
         <notations>
           <ornaments>
-            <tremolo>2</tremolo>
+            <tremolo type="single">2</tremolo>
             </ornaments>
           </notations>
         </note>
@@ -192,7 +192,7 @@
         <stem>down</stem>
         <notations>
           <ornaments>
-            <tremolo>1</tremolo>
+            <tremolo type="single">1</tremolo>
             </ornaments>
           </notations>
         </note>
@@ -207,7 +207,7 @@
         <stem>down</stem>
         <notations>
           <ornaments>
-            <tremolo>2</tremolo>
+            <tremolo type="single">2</tremolo>
             </ornaments>
           </notations>
         </note>
