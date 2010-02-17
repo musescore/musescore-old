@@ -114,7 +114,7 @@ class Seq : public QObject {
       void setPos(int);
       void playEvent(const Event*, unsigned framePos);
       void guiToSeq(const SeqMsg& msg);
-      void startNote(Channel*, int, int, double nt);
+      void startNote(const Channel&, int, int, double nt);
 
    private slots:
       void seqMessage(int msg);
@@ -164,7 +164,7 @@ class Seq : public QObject {
       int getEndTick() const    { return endTick;  }
       bool isRealtime() const   { return true;     }
       void sendMessage(SeqMsg&) const;
-      void startNote(Channel*, int, int, int, double nt);
+      void startNote(const Channel&, int, int, int, double nt);
       void setController(int, int, int);
       void sendEvent(const Event&);
       void setScoreView(ScoreView*);

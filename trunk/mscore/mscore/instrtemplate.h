@@ -55,10 +55,9 @@ struct InstrumentTemplate {
 
       bool useDrumset;
       Drumset* drumset;
-      QList<NamedEventList> midiActions;
-      QList<MidiArticulation*> articulation;
-
-      QList<Channel*> channel;
+      QList<NamedEventList>   midiActions;
+      QList<MidiArticulation> articulation;
+      QList<Channel>          channel;
 
       InstrumentTemplate();
       InstrumentTemplate(const InstrumentTemplate&);

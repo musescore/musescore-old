@@ -300,8 +300,10 @@ bool Seq::canStart()
       {
       if (!driver)
             return false;
-      if (events.empty() || cs->playlistDirty() || playlistChanged)
+      if (events.empty() || cs->playlistDirty() || playlistChanged) {
+            printf("collectEvents\n");
             collectEvents();
+            }
       return (!events.empty() && endTick != 0);
       }
 
@@ -312,8 +314,10 @@ bool Seq::canStart()
 
 void Seq::start()
       {
-      if (events.empty() || cs->playlistDirty() || playlistChanged)
+      if (events.empty() || cs->playlistDirty() || playlistChanged) {
+printf("collectEvents\n");
             collectEvents();
+            }
       seek(cs->playPos());
       driver->startTransport();
       }
@@ -468,8 +472,8 @@ void Seq::playEvent(const Event* event, unsigned framePos)
 
             if (note) {
                   Instrument* instr = note->staff()->part()->instrument();
-                  Channel* a = instr->channel[note->subchannel()];
-                  mute = a->mute || a->soloMute;
+                  const Channel& a = instr->channel[note->subchannel()];
+                  mute = a.mute || a.soloMute;
                   }
             else
                   mute = false;
@@ -630,12 +634,12 @@ void Seq::initInstruments()
       foreach(const Part* part, *cs->parts()) {
             const Instrument* instr = part->instrument();
 
-            foreach(const Channel* a, instr->channel) {
-                  foreach(Event* e, a->init) {
+            foreach(const Channel& a, instr->channel) {
+                  foreach(Event* e, a.init) {
                         if (e == 0)
                               continue;
                         Event ee(*e);
-                        ee.setChannel(a->channel);
+                        ee.setChannel(a.channel);
                         sendEvent(ee);
                         }
                   }
@@ -833,14 +837,12 @@ void Seq::seek(int tick)
 //   startNote
 //---------------------------------------------------------
 
-void Seq::startNote(Channel* a, int pitch, int velo, double nt)
+void Seq::startNote(const Channel& a, int pitch, int velo, double nt)
       {
       if (state != STOP)
             return;
 
       bool active = false;
-//      int port    = cs->midiPort(a->channel);
-//      int channel = cs->midiChannel(a->channel);
 
       //
       // Check if there is already a note sounding
@@ -848,7 +850,7 @@ void Seq::startNote(Channel* a, int pitch, int velo, double nt)
       // sending a note off event
       //
       foreach(const Event* event, eventList) {
-            if (event->channel() == a->channel && event->pitch() == pitch) {
+            if (event->channel() == a.channel && event->pitch() == pitch) {
                   sendEvent(*event);
                   active = true;
                   break;
@@ -856,7 +858,7 @@ void Seq::startNote(Channel* a, int pitch, int velo, double nt)
             }
 
       Event ev(ME_NOTEON);
-      ev.setChannel(a->channel);
+      ev.setChannel(a.channel);
       ev.setPitch(pitch);
       ev.setTuning(nt);
       ev.setVelo(velo);
@@ -864,14 +866,14 @@ void Seq::startNote(Channel* a, int pitch, int velo, double nt)
 
       if (!active) {
             Event* e = new Event(ME_NOTEON);
-            e->setChannel(a->channel);
+            e->setChannel(a.channel);
             e->setPitch(pitch);
             e->setVelo(0);
             eventList.append(e);
             }
       }
 
-void Seq::startNote(Channel* a, int pitch, int velo, int duration, double nt)
+void Seq::startNote(const Channel& a, int pitch, int velo, int duration, double nt)
       {
       stopNotes();
       startNote(a, pitch, velo, nt);

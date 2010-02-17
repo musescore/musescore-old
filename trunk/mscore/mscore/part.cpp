@@ -73,11 +73,7 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
             }
       _instrument.midiActions  = t->midiActions;
       _instrument.articulation = t->articulation;
-
-      foreach(Channel* a, _instrument.channel)
-            delete a;
-      _instrument.channel.clear();
-      _instrument.channel = t->channel;
+      _instrument.channel      = t->channel;
       }
 
 //---------------------------------------------------------
@@ -352,33 +348,33 @@ void Part::setMidiProgram(int p)
       {
       // LVIFIX: check if this is correct
       // at least it fixes the MIDI program handling in the MusicXML regression test
-      _instrument.channel[0]->program = p;
-      _instrument.channel[0]->updateInitList();
+      _instrument.channel[0].program = p;
+      _instrument.channel[0].updateInitList();
       }
 
 int Part::volume() const
       {
-      return _instrument.channel[0]->volume;
+      return _instrument.channel[0].volume;
       }
 
 int Part::reverb() const
       {
-      return _instrument.channel[0]->reverb;
+      return _instrument.channel[0].reverb;
       }
 
 int Part::chorus() const
       {
-      return _instrument.channel[0]->chorus;
+      return _instrument.channel[0].chorus;
       }
 
 int Part::pan() const
       {
-      return _instrument.channel[0]->pan;
+      return _instrument.channel[0].pan;
       }
 
 int Part::midiProgram() const
       {
-      return _instrument.channel[0]->program;
+      return _instrument.channel[0].program;
       }
 
 //---------------------------------------------------------
@@ -387,15 +383,16 @@ int Part::midiProgram() const
 
 int Part::midiChannel() const
       {
-      return score()->midiChannel(_instrument.channel[0]->channel);
+      return score()->midiChannel(_instrument.channel[0].channel);
       }
 
 //---------------------------------------------------------
 //   setMidiChannel
+//    called from importmusicxml
 //---------------------------------------------------------
 
-void Part::setMidiChannel(int)
+void Part::setMidiChannel(int) const
       {
-
       }
+
 

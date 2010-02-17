@@ -28,6 +28,7 @@
 #include "text.h"
 #include "utils.h"
 #include "instrtemplate.h"
+#include "seq.h"
 
 //---------------------------------------------------------
 //   EditStaff
@@ -138,8 +139,12 @@ void EditStaff::apply()
       instrument.minPitchP = pPitchMin->value();
       instrument.maxPitchP = pPitchMax->value();
 
-      if (snd || lnd || !(instrument == *part->instrument()))
+      if (snd || lnd || !(instrument == *part->instrument())) {
             score->undo()->push(new ChangePart(part, ln, sn, instrument));
+            score->rebuildMidiMapping();
+            seq->initInstruments();
+            score->setPlaylistDirty(true);
+            }
 
       int l        = lines->value();
       bool s       = small->isChecked();
@@ -207,11 +212,7 @@ void EditStaff::showInstrumentDialog()
                   }
             instrument.midiActions  = t->midiActions;
             instrument.articulation = t->articulation;
-
-            foreach(Channel* a, instrument.channel)
-                  delete a;
-            instrument.channel.clear();
-            instrument.channel = t->channel;
+            instrument.channel      = t->channel;
             }
       }
 

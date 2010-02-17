@@ -1401,6 +1401,7 @@ void Score::appendPart(Part* p)
 
 void Score::rebuildMidiMapping()
       {
+printf("rebuildMidiMapping\n");
       _midiMapping.clear();
       int port    = 0;
       int channel = 0;
@@ -1409,7 +1410,8 @@ void Score::rebuildMidiMapping()
             Instrument* i = part->instrument();
             bool drum = i->useDrumset;
 
-            foreach(Channel* a, i->channel) {
+            for (int k = 0; k < i->channel.size(); ++k) {
+                  Channel* a = &i->channel[k];
                   MidiMapping mm;
                   if (drum) {
                         mm.port    = port;

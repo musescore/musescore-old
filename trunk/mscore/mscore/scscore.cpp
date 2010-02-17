@@ -227,14 +227,14 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   if (t == 0) {
                         t = &defaultInstrument;
                         if (t->channel.isEmpty()) {
-                              Channel* a      = new Channel();
-                              a->chorus       = 0;
-                              a->reverb       = 0;
-                              a->name         = "normal";
-                              a->program      = 0;
-                              a->bank         = 0;
-                              a->volume       = 100;
-                              a ->pan         = 60;
+                              Channel a;
+                              a.chorus       = 0;
+                              a.reverb       = 0;
+                              a.name         = "normal";
+                              a.program      = 0;
+                              a.bank         = 0;
+                              a.volume       = 100;
+                              a.pan         = 60;
                               t->channel.append(a);
                               }
                         }

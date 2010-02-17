@@ -22,6 +22,7 @@
 #define __ILEDIT_H__
 
 #include "ui_partedit.h"
+#include "instrument.h"
 
 class Score;
 struct Channel;
