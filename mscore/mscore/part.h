@@ -114,7 +114,7 @@ class Part {
       void setMidiProgram(int);
 
       int midiChannel() const;
-      void setMidiChannel(int);
+      void setMidiChannel(int) const;
 
       void insertStaff(Staff*);
       void removeStaff(Staff*);

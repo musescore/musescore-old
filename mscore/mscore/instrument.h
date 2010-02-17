@@ -55,7 +55,6 @@ struct MidiArticulation {
       void read(QDomElement);
 
       MidiArticulation() {}
-      MidiArticulation(const MidiArticulation&);
       };
 
 //---------------------------------------------------------
@@ -86,13 +85,13 @@ struct Channel {
       bool solo;
       bool soloMute;
 
-      QList<MidiArticulation*> articulation;
+      QList<MidiArticulation> articulation;
 
       Channel();
-      Channel(const Channel&);
       void write(Xml&) const;
       void read(QDomElement);
       void updateInitList() const;
+      bool operator==(const Channel& c) { return (name == c.name) && (channel == c.channel); }
       };
 
 //---------------------------------------------------------
@@ -108,8 +107,8 @@ struct Instrument {
       Drumset* drumset;
 
       QList<NamedEventList> midiActions;
-      QList<Channel*> channel;      // at least one entry
-      QList<MidiArticulation*> articulation;
+      QList<Channel> channel;      // at least one entry
+      QList<MidiArticulation> articulation;
 
       Instrument();
       void read(QDomElement);

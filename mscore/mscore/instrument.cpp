@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2008-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -68,8 +68,8 @@ void NamedEventList::read(QDomElement e)
 
 Instrument::Instrument()
       {
-      Channel* a      = new Channel();
-      a->name         = "normal";
+      Channel a;
+      a.name  = "normal";
       channel.append(a);
 
       minPitchA          = 0;
@@ -107,8 +107,8 @@ void Instrument::write(Xml& xml) const
             }
       foreach(const NamedEventList& a, midiActions)
             a.write(xml, "MidiAction");
-      foreach(const Channel* a, channel)
-            a->write(xml);
+      foreach(const Channel& a, channel)
+            a.write(xml);
       xml.etag();
       }
 
@@ -126,8 +126,6 @@ void Instrument::read(QDomElement e)
       int pan    = 60;
       bool customDrumset = false;
 
-      foreach(Channel* a, channel)
-            delete a;
       channel.clear();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -180,13 +178,13 @@ void Instrument::read(QDomElement e)
                   midiActions.append(a);
                   }
             else if (tag == "Articulation") {
-                  MidiArticulation* a = new MidiArticulation;
-                  a->read(e);
+                  MidiArticulation a;
+                  a.read(e);
                   articulation.append(a);
                   }
             else if (tag == "Channel" || tag == "channel") {
-                  Channel* a = new Channel();
-                  a->read(e);
+                  Channel a;
+                  a.read(e);
                   channel.append(a);
                   }
             else if (tag == "chorus")     // obsolete
@@ -205,20 +203,20 @@ void Instrument::read(QDomElement e)
                   domError(e);
             }
       if (channel.isEmpty()) {      // for backward compatibility
-            Channel* a      = new Channel();
-            a->chorus       = chorus;
-            a->reverb       = reverb;
-            a->name         = "normal";
-            a->program      = program;
-            a->bank         = bank;
-            a->volume       = volume;
-            a ->pan         = pan;
+            Channel a;
+            a.chorus  = chorus;
+            a.reverb  = reverb;
+            a.name    = "normal";
+            a.program = program;
+            a.bank    = bank;
+            a.volume  = volume;
+            a.pan     = pan;
             channel.append(a);
             }
       if (useDrumset) {
-            if (channel[0]->bank == 0)
-                  channel[0]->bank = 128;
-            channel[0]->updateInitList();
+            if (channel[0].bank == 0)
+                  channel[0].bank = 128;
+            channel[0].updateInitList();
             }
       }
 
@@ -254,39 +252,6 @@ Channel::Channel()
       mute     = false;
       solo     = false;
       soloMute = false;
-      }
-
-//---------------------------------------------------------
-//   Channel
-//---------------------------------------------------------
-
-Channel::Channel(const Channel& c)
-      {
-      name = c.name;
-      channel = c.channel;
-      init    = c.init;
-      program = c.program;
-      bank    = c.bank;
-      volume  = c.volume;
-      pan     = c.pan;
-      chorus  = c.chorus;
-      reverb  = c.reverb;
-      mute    = c.mute;
-      solo    = c.solo;
-      soloMute = c.soloMute;
-      foreach(MidiArticulation* a, c.articulation)
-            articulation.append(new MidiArticulation(*a));
-      }
-
-//---------------------------------------------------------
-//   MidiArticulation
-//---------------------------------------------------------
-
-MidiArticulation::MidiArticulation(const MidiArticulation& a)
-      {
-      name     = a.name;
-      velocity = a.velocity;
-      gateTime = a.gateTime;
       }
 
 //---------------------------------------------------------
@@ -359,8 +324,8 @@ void Channel::read(QDomElement e)
                         }
                   }
             else if (tag == "Articulation") {
-                  MidiArticulation* a = new MidiArticulation;
-                  a->read(e);
+                  MidiArticulation a;
+                  a.read(e);
                   articulation.append(a);
                   }
             else
@@ -425,10 +390,10 @@ void Channel::updateInitList() const
 int Instrument::channelIdx(const QString& s) const
       {
       int idx = 0;
-      foreach(const Channel* a, channel) {
-            if (a->name.isEmpty() && s == "normal")
+      foreach(const Channel& a, channel) {
+            if (a.name.isEmpty() && s == "normal")
                   return idx;
-            if (s == a->name)
+            if (s == a.name)
                   return idx;
             ++idx;
             }
@@ -471,18 +436,18 @@ void MidiArticulation::read(QDomElement e)
 
 void Instrument::updateVelocity(int* velocity, int channelIdx, const QString& name)
       {
-      Channel* c = channel[channelIdx];
-      foreach(MidiArticulation* a, c->articulation) {
-            if (a->name == name) {
-                  *velocity = *velocity * a->velocity / 100;
-                  printf("UpdateVelocity: found channel data\n");
+      const Channel& c = channel[channelIdx];
+      foreach(const MidiArticulation& a, c.articulation) {
+            if (a.name == name) {
+                  *velocity = *velocity * a.velocity / 100;
+printf("UpdateVelocity: found channel data\n");
                   return;
                   }
             }
-      foreach(MidiArticulation* a, articulation) {
-            if (a->name == name) {
-                  *velocity = *velocity * a->velocity / 100;
-                  printf("UpdateVelocity: found instrument data\n");
+      foreach(const MidiArticulation& a, articulation) {
+            if (a.name == name) {
+                  *velocity = *velocity * a.velocity / 100;
+printf("UpdateVelocity: found instrument data\n");
                   return;
                   }
             }
@@ -501,7 +466,7 @@ bool Instrument::operator==(const Instrument& i) const
          &&  i.useDrumset == useDrumset
          &&  i.midiActions == midiActions
          &&  i.channel == channel
-         &&  i.articulation == articulation
+//         &&  i.articulation == articulation
          &&  i.transposeDiatonic == transposeDiatonic
          &&  i.transposeChromatic == transposeChromatic
          ;

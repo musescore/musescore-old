@@ -2033,6 +2033,9 @@ void ChangeStaff::flip()
                   mstaff->lines->setVisible(!staff->invisible());
                   }
             }
+      staff->score()->rebuildMidiMapping();
+      staff->score()->setPlaylistDirty(true);
+printf("ChangeStaff\n");
       }
 
 //---------------------------------------------------------
