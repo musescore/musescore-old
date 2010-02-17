@@ -27,6 +27,7 @@
 #include "undo.h"
 #include "text.h"
 #include "utils.h"
+#include "instrtemplate.h"
 
 //---------------------------------------------------------
 //   EditStaff
@@ -39,13 +40,17 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       setupUi(this);
 
       Part* part = staff->part();
+      instrument = *(part->instrument());
 
-      useDrumset->setChecked(part->useDrumset());
-      editDrumset->setEnabled(part->useDrumset());
       lines->setValue(staff->lines());
       small->setChecked(staff->small());
-      int diatonic  = part->transposeDiatonic();
-      int chromatic = part->transposeChromatic();
+
+      useDrumset->setChecked(instrument.useDrumset);
+      editDrumset->setEnabled(instrument.useDrumset);
+
+      int diatonic  = instrument.transposeDiatonic;
+      int chromatic = instrument.transposeChromatic;
+
       bool upFlag = true;
       if (chromatic < 0 || diatonic < 0) {
             upFlag = false;
@@ -66,13 +71,14 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       slashStyle->setChecked(staff->slashStyle());
       invisible->setChecked(staff->invisible());
 
-      aPitchMin->setValue(part->minPitchA());
-      aPitchMax->setValue(part->maxPitchA());
-      pPitchMin->setValue(part->minPitchP());
-      pPitchMax->setValue(part->maxPitchP());
+      aPitchMin->setValue(instrument.minPitchA);
+      aPitchMax->setValue(instrument.maxPitchA);
+      pPitchMin->setValue(instrument.minPitchP);
+      pPitchMax->setValue(instrument.maxPitchP);
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
+      connect(changeInstrument, SIGNAL(clicked()), SLOT(showInstrumentDialog()));
       }
 
 //---------------------------------------------------------
@@ -110,38 +116,30 @@ void EditStaff::apply()
       Score* score  = staff->score();
       Part* part    = staff->part();
 
-      bool ud       = useDrumset->isChecked();
+      instrument.useDrumset = useDrumset->isChecked();
       int interval  = iList->currentIndex();
       bool upFlag   = up->isChecked();
-      int diatonic  = intervalList[interval].steps;
-      int chromatic = intervalList[interval].semitones;
+
+      instrument.transposeDiatonic  = intervalList[interval].steps;
+      instrument.transposeChromatic = intervalList[interval].semitones;
 
       if (!upFlag) {
-            diatonic  = -diatonic;
-            chromatic = -chromatic;
+            instrument.transposeDiatonic  = -instrument.transposeDiatonic;
+            instrument.transposeChromatic = -instrument.transposeChromatic;
             }
       const QTextDocument* ln = longName->document();
       const QTextDocument* sn = shortName->document();
 
       bool snd = sn->toHtml() != part->shortName()->doc()->toHtml();
       bool lnd = ln->toHtml() != part->longName()->doc()->toHtml();
-      int aMin = aPitchMin->value();
-      int aMax = aPitchMax->value();
-      int pMin = pPitchMin->value();
-      int pMax = pPitchMax->value();
 
-      if ((ud != part->useDrumset())
-         || (diatonic != part->transposeDiatonic())
-         || (chromatic != part->transposeChromatic())
-         || snd || lnd
-         || aMin != part->minPitchA()
-         || aMax != part->maxPitchA()
-         || pMin != part->minPitchP()
-         || pMax != part->maxPitchP()
-         ) {
-            score->undo()->push(new ChangePart(part, ud, diatonic,
-               chromatic, ln, sn, aMin, aMax, pMin, pMax));
-            }
+      instrument.minPitchA = aPitchMin->value();
+      instrument.maxPitchA = aPitchMax->value();
+      instrument.minPitchP = pPitchMin->value();
+      instrument.maxPitchP = pPitchMax->value();
+
+      if (snd || lnd || !(instrument == *part->instrument()))
+            score->undo()->push(new ChangePart(part, ln, sn, instrument));
 
       int l        = lines->value();
       bool s       = small->isChecked();
@@ -162,5 +160,113 @@ void EditStaff::editDrumsetClicked()
       {
       EditDrumset dse(staff->part()->drumset(), this);
       dse.exec();
+      }
+
+//---------------------------------------------------------
+//   showInstrumentDialog
+//---------------------------------------------------------
+
+void EditStaff::showInstrumentDialog()
+      {
+      SelectInstrument si(this);
+      if (si.exec()) {
+            InstrumentTemplate* t = si.instrTemplate();
+            // setMidiProgram(t->midiProgram);
+
+            aPitchMin->setValue(t->minPitchA);
+            aPitchMax->setValue(t->maxPitchA);
+            pPitchMin->setValue(t->minPitchP);
+            pPitchMax->setValue(t->maxPitchP);
+
+            shortName->setHtml(t->shortName);
+            longName->setHtml(t->name);
+
+            int diatonic  = t->transposeDiatonic;
+            int chromatic = t->transposeChromatic;
+
+            bool upFlag = true;
+            if (chromatic < 0 || diatonic < 0) {
+                  upFlag = false;
+                  chromatic = -chromatic;
+                  diatonic  = -diatonic;
+                  }
+            int interval = searchInterval(diatonic, chromatic);
+            if (interval == -1) {
+                  printf("unknown interval %d %d\n", diatonic, chromatic);
+                  interval = 0;
+                  }
+            iList->setCurrentIndex(interval);
+            up->setChecked(upFlag);
+            down->setChecked(!upFlag);
+
+            instrument.useDrumset = t->useDrumset;
+            if (t->useDrumset) {
+                  if (instrument.drumset)
+                        delete instrument.drumset;
+                  instrument.drumset = new Drumset(*((t->drumset) ? t->drumset : smDrumset));
+                  }
+            instrument.midiActions  = t->midiActions;
+            instrument.articulation = t->articulation;
+
+            foreach(Channel* a, instrument.channel)
+                  delete a;
+            instrument.channel.clear();
+            instrument.channel = t->channel;
+            }
+      }
+
+//---------------------------------------------------------
+//   SelectInstrument
+//---------------------------------------------------------
+
+SelectInstrument::SelectInstrument(QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      buildTemplateList();
+      buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+      connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
+      }
+
+//---------------------------------------------------------
+//   buildTemplateList
+//---------------------------------------------------------
+
+void SelectInstrument::buildTemplateList()
+      {
+      populateInstrumentList(instrumentList, showMore->isChecked());
+      }
+
+//---------------------------------------------------------
+//   on_instrumentList_itemSelectionChanged
+//---------------------------------------------------------
+
+void SelectInstrument::on_instrumentList_itemSelectionChanged()
+      {
+      QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
+      bool flag = !wi.isEmpty();
+      buttonBox->button(QDialogButtonBox::Ok)->setEnabled(flag);
+      }
+
+//---------------------------------------------------------
+//   on_instrumentList
+//---------------------------------------------------------
+
+void SelectInstrument::on_instrumentList_itemDoubleClicked(QTreeWidgetItem*, int)
+      {
+      done(true);
+      }
+
+//---------------------------------------------------------
+//   instrTemplate
+//---------------------------------------------------------
+
+InstrumentTemplate* SelectInstrument::instrTemplate() const
+      {
+      QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
+      if (wi.isEmpty())
+            return 0;
+      InstrumentTemplateListItem* item = (InstrumentTemplateListItem*)wi.front();
+      return item->instrumentTemplate();
       }
 

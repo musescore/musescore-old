@@ -27,7 +27,7 @@
 #include "bracket.h"
 #include "utils.h"
 
-QList<InstrumentTemplate*> instrumentTemplates;
+QList<InstrumentGroup*> instrumentGroups;
 QList<MidiArticulation*> articulation;                // global articulations
 
 //---------------------------------------------------------
@@ -49,15 +49,16 @@ InstrumentTemplate::InstrumentTemplate()
       transposeDiatonic  = 0;
       useDrumset         = false;
       drumset            = 0;
+      extended           = false;
       }
 
 InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
       {
-      group      = t.group;
       trackName  = t.trackName;
       name       = t.name;
       shortName  = t.shortName;
       staves     = t.staves;
+      extended   = t.extended;
 
       for (int i = 0; i < MAX_STAVES; ++i) {
             clefIdx[i]    = t.clefIdx[i];
@@ -101,6 +102,7 @@ void InstrumentTemplate::write(Xml& xml) const
       xml.tag("name", name);
       xml.tag("short-name",  shortName);
       xml.tag("description", trackName);
+      xml.tag("extended", extended);
       if (staves == 1) {
             xml.tag("clef", clefIdx[0]);
             if (staffLines[0] != 5)
@@ -197,10 +199,9 @@ static QString parseInstrName(const QString& name)
 //   read
 //---------------------------------------------------------
 
-void InstrumentTemplate::read(const QString& g, QDomElement e)
+void InstrumentTemplate::read(QDomElement e)
       {
       bool customDrumset = false;
-      group  = g;
       staves = 1;
       for (int i = 0; i < MAX_STAVES; ++i) {
             clefIdx[i]    = 0;
@@ -227,6 +228,8 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
                   shortName = Xml::htmlToString(e);
             else if (tag == "description")
                   trackName = val;
+            else if (tag == "extended")
+                  extended = true;
             else if (tag == "staves")
                   staves = i;
             else if (tag == "clef") {
@@ -316,33 +319,23 @@ void InstrumentTemplate::read(const QString& g, QDomElement e)
 //   readInstrumentGroup
 //---------------------------------------------------------
 
-static void readInstrumentGroup(QDomElement e)
+static void readInstrumentGroup(InstrumentGroup* group, QDomElement e)
       {
-      QString group = e.attribute("name");
-
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "instrument") {
                   InstrumentTemplate* t = new InstrumentTemplate;
-                  t->read(group, e);
-                  instrumentTemplates.push_back(t);
+                  group->instrumentTemplates.append(t);
+                  t->read(e);
                   }
             else if (tag == "ref") {
-                  QString name = e.text();
-                  InstrumentTemplate* ttt = 0;
-                  foreach(InstrumentTemplate* tt, instrumentTemplates) {
-                        if (tt->trackName == name) {
-                              ttt = tt;
-                              break;
-                              }
-                        }
+                  InstrumentTemplate* ttt = searchTemplate(e.text());
                   if (ttt) {
                         InstrumentTemplate* t = new InstrumentTemplate(*ttt);
-                        t->group = group;
-                        instrumentTemplates.push_back(t);
+                        group->instrumentTemplates.append(t);
                         }
                   else
-                        printf("instrument reference not found <%s>\n", qPrintable(name));
+                        printf("instrument reference not found <%s>\n", qPrintable(e.text()));
                   }
             else
                   domError(e);
@@ -368,9 +361,12 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
       docName = qf.fileName();
       qf.close();
 
-      foreach(InstrumentTemplate* t, instrumentTemplates)
-            delete t;
-      instrumentTemplates.clear();
+      foreach(InstrumentGroup* g, instrumentGroups) {
+            foreach(InstrumentTemplate* t, g->instrumentTemplates)
+                  delete t;
+            delete g;
+            }
+      instrumentGroups.clear();
 
       if (!rv) {
             QString s;
@@ -386,8 +382,13 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         QString val(ee.text());
-                        if (tag == "instrument-group" || tag == "InstrumentGroup")
-                              readInstrumentGroup(ee);
+                        if (tag == "instrument-group" || tag == "InstrumentGroup") {
+                              InstrumentGroup* group = new InstrumentGroup;
+                              group->name = ee.attribute("name");
+                              group->extended = ee.attribute("extended", "0").toInt();
+                              readInstrumentGroup(group, ee);
+                              instrumentGroups.append(group);
+                              }
                         else if (tag == "Articulation") {
                               MidiArticulation* a = new MidiArticulation;
                               a->read(ee);
@@ -400,4 +401,41 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
             }
       return true;
       }
+
+//---------------------------------------------------------
+//   searchTemplate
+//---------------------------------------------------------
+
+InstrumentTemplate* searchTemplate(const QString& name)
+      {
+      foreach(InstrumentGroup* g, instrumentGroups) {
+            foreach(InstrumentTemplate* it, g->instrumentTemplates) {
+                  if (it->trackName == name)
+                        return it;
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   populateInstrumentList
+//---------------------------------------------------------
+
+void populateInstrumentList(QTreeWidget* instrumentList, bool extended)
+      {
+      instrumentList->clear();
+      // TODO: memory leak
+      foreach(InstrumentGroup* g, instrumentGroups) {
+            if (!extended && g->extended)
+                  continue;
+            InstrumentTemplateListItem* group = new InstrumentTemplateListItem(g->name, instrumentList);
+            group->setFlags(Qt::ItemIsEnabled);
+            foreach(InstrumentTemplate* t, g->instrumentTemplates) {
+                  if (!extended && t->extended)
+                        continue;
+                  new InstrumentTemplateListItem(t, group);
+                  }
+            }
+      }
+
 

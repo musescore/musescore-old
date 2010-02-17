@@ -34,6 +34,7 @@
 #include "style.h"
 #include "key.h"
 #include "select.h"
+#include "instrument.h"
 
 class ElementList;
 class Element;
@@ -1063,18 +1064,14 @@ class ChangeStaff : public UndoCommand {
 
 class ChangePart : public UndoCommand {
       Part* part;
-      bool useDrumset;
-      int transposeDiatonic;
-      int transposeChromatic;
       QTextDocument* longName;
       QTextDocument* shortName;
-      int aMin, aMax, pMin, pMax;
+      Instrument instrument;
 
       void flip();
 
    public:
-      ChangePart(Part*, bool useDrumset, int td, int tc, const QTextDocument*,
-         const QTextDocument*, int, int, int, int);
+      ChangePart(Part*, const QTextDocument*, const QTextDocument*, const Instrument&);
       ~ChangePart();
 
       virtual void undo() { flip(); }

@@ -119,14 +119,12 @@ InstrumentTemplateListItem::InstrumentTemplateListItem(QString group, QTreeWidge
 InstrumentTemplateListItem::InstrumentTemplateListItem(InstrumentTemplate* i, InstrumentTemplateListItem* item)
    : QTreeWidgetItem(item) {
       _instrumentTemplate = i;
-      _group = _instrumentTemplate->group;
       setText(0, i->trackName);
       }
 
 InstrumentTemplateListItem::InstrumentTemplateListItem(InstrumentTemplate* i, QTreeWidget* parent)
    : QTreeWidgetItem(parent) {
       _instrumentTemplate = i;
-      _group = _instrumentTemplate->group;
       setText(0, i->trackName);
       }
 
@@ -175,6 +173,7 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
             editButton->setVisible(false);
       aboveButton->setEnabled(false);
       belowButton->setEnabled(false);
+      connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
       }
 
 //---------------------------------------------------------
@@ -183,17 +182,7 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
 
 void InstrumentsDialog::buildTemplateList()
       {
-      instrumentList->clear();
-      InstrumentTemplateListItem* group = 0;
-      QString curGroup;
-      foreach(InstrumentTemplate* t, instrumentTemplates) {
-            if (curGroup != t->group) {
-                  curGroup = t->group;
-                  group    = new InstrumentTemplateListItem(curGroup, instrumentList);
-                  group->setFlags(Qt::ItemIsEnabled);
-                  }
-            new InstrumentTemplateListItem(t, group);
-            }
+      populateInstrumentList(instrumentList, showMore->isChecked());
       }
 
 //---------------------------------------------------------
@@ -1045,18 +1034,12 @@ void InstrumentsDialog::on_saveButton_clicked()
       Xml xml(&f);
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
-      QString curGroup;
-      foreach(InstrumentTemplate* t, instrumentTemplates) {
-            if (curGroup != t->group) {
-                  if (!curGroup.isEmpty())
-                        xml.etag();
-                  xml.stag(QString("InstrumentGroup name=\"%1\"").arg(t->group));
-                  curGroup = t->group;
-                  }
-            t->write(xml);
-            }
-      if (!curGroup.isEmpty())
+      foreach(InstrumentGroup* g, instrumentGroups) {
+            xml.stag(QString("InstrumentGroup name=\"%1\" extended=\"%2\"").arg(g->name).arg(g->extended));
+            foreach(InstrumentTemplate* t, g->instrumentTemplates)
+                  t->write(xml);
             xml.etag();
+            }
       xml.etag();
       if (f.error() != QFile::NoError) {
             QString s = QString("Write Style failed: ") + f.errorString();

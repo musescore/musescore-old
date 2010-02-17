@@ -42,23 +42,15 @@ Q_DECLARE_METATYPE(Text*);
 
 static const char* const function_names_score[] = {
       "title", "subtitle", "composer", "poet",
-      "saveMscz", "saveMscx", "saveXml", "saveMxl", "saveMidi", "savePng", "saveSvg", "saveLilypond",
+      "load", "save",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
       "staves"
-#ifdef HAS_AUDIOFILE
-      , "saveWav", "saveFlac", "saveOgg"
-#endif
-      , "importMusicXml", "importCompressedMusicXml"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
-      1, 1, 1, 1, 1, 5, 1, 1,
-      1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0
-#ifdef HAS_AUDIOFILE
-      , 2, 2, 2
-#endif
-      , 1, 1
+      1, 2,
+      1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0,
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -69,12 +61,6 @@ static const QScriptValue::PropertyFlags flags_score[] = {
 
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration,
 
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
@@ -89,22 +75,11 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter
-#ifdef HAS_AUDIOFILE
-      , QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration
-#endif
-      , QScriptValue::SkipInEnumeration
-      , QScriptValue::SkipInEnumeration
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       };
 
 ScriptInterface scoreInterface = {
-#ifdef HAS_AUDIOFILE
-      30,
-#else
-      27,
-#endif
+      19,
       function_names_score,
       function_lengths_score,
       flags_score
@@ -127,15 +102,16 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                QString::fromLatin1("Score.%0(): this object is not a Score")
                .arg(function_names_score[_id]));
             }
+      int argc = context->argumentCount();
       switch(_id) {
             case 0:     // "title",
                   {
                   Text* t = score->getText(TEXT_TITLE);
-                  if (context->argumentCount() == 0) {
+                  if (argc == 0) {
                         QString s = t ? t->getText() : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
-                  else if (context->argumentCount() == 1) {
+                  else if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         if (t)
                               t->setText(s);
@@ -149,11 +125,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 1:     // "subtitle",
                   {
                   Text* t = score->getText(TEXT_SUBTITLE);
-                  if (context->argumentCount() == 0) {
+                  if (argc) {
                         QString s = t ? t->getText() : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
-                  else if (context->argumentCount() == 1) {
+                  else if (argc) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         if (t)
                               t->setText(s);
@@ -167,11 +143,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 2:     // "composer",
                   {
                   Text* t = score->getText(TEXT_COMPOSER);
-                  if (context->argumentCount() == 0) {
+                  if (argc == 0) {
                         QString s = t ? t->getText() : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
-                  else if (context->argumentCount() == 1) {
+                  else if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         if (t)
                               t->setText(s);
@@ -185,11 +161,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 3:     // "poet",
                   {
                   Text* t = score->getText(TEXT_POET);
-                  if (context->argumentCount() == 0) {
+                  if (argc == 0) {
                         QString s = t ? t->getText() : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
-                  else if (context->argumentCount() == 1) {
+                  else if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         if (t)
                               t->setText(s);
@@ -200,77 +176,38 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         }
                   }
                   break;
-            case 4:     // "saveMscz",
-                  if (context->argumentCount() == 0) {
+            case 4:    // "load",
+                  if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        QFileInfo fi(s);
-                        try {
-                              score->saveCompressedFile(fi, false);
-                              } catch (QString s) {
-                              }
+                        return qScriptValueFromValue(context->engine(), score->read(s));
                         }
                   break;
-            case 5:     // "saveMscx",
-                  if (context->argumentCount() == 0) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        QFileInfo fi(s);
-                        score->saveFile(fi, false);
+            case 5:     // "save",
+                  {
+                  QString s, ext, sf;
+                  if (argc >= 2) {
+                        s = qscriptvalue_cast<QString>(context->argument(0));
+                        ext = qscriptvalue_cast<QString>(context->argument(1));
                         }
-                  break;
-            case 6:     // "saveXml",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->saveXml(s);
-                        return context->engine()->undefinedValue();
+                  if (argc == 3) {
+                        sf = qscriptvalue_cast<QString>(context->argument(1));
+                        return qScriptValueFromValue(context->engine(), score->saveAudio(s, ext, sf));
                         }
-                  break;
-            case 7:     // "saveMxl",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->saveMxl(s);
-                        return context->engine()->undefinedValue();
-                        }
-                  break;
-            case 8:     // "saveMidi",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->saveMidi(s);
-                        return context->engine()->undefinedValue();
-                        }
-                  break;
-            case 9:     // "savePng",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->savePng(s);
-                        return context->engine()->undefinedValue();
-                        }
-                  if (context->argumentCount() == 5) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        bool screenshot  = context->argument(1).toBool();
-                        bool transparent = context->argument(2).toBool();
-                        double convDpi = context->argument(3).toNumber();
-                        bool grayscale = context->argument(4).toBool();
+                  else if (argc == 2)
+                        return qScriptValueFromValue(context->engine(), score->saveAs(false, s, ext));
+                  else if (argc == 6 && ext == "png") {
+                        bool screenshot  = context->argument(2).toBool();
+                        bool transparent = context->argument(3).toBool();
+                        double convDpi = context->argument(4).toNumber();
+                        bool grayscale = context->argument(5).toBool();
                         QImage::Format f = grayscale ? QImage::Format_Indexed8 : QImage::Format_ARGB32_Premultiplied;
                         score->savePng(s, screenshot, transparent, convDpi, f);
                         return context->engine()->undefinedValue();
                         }
+                  }
                   break;
-            case 10:     // "saveSvg",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->saveSvg(s);
-                        return context->engine()->undefinedValue();
-                        }
-                  break;
-            case 11:    // "saveLilypond",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->saveLilypond(s);
-                        return context->engine()->undefinedValue();
-                        }
-                  break;
-            case 12:    // "setExpandRepeat",
-                  if (context->argumentCount() == 1) {
+            case 6:    // "setExpandRepeat",
+                  if (argc == 1) {
                         bool f = context->argument(1).toBool();
                         getAction("repeat")->setChecked(f);
                         preferences.midiExpandRepeats = f;
@@ -278,22 +215,14 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 13:    // "appendPart",
+            case 7:    // "appendPart",
                   {
                   InstrumentTemplate* t = 0;
                   static InstrumentTemplate defaultInstrument;
 
-                  if (context->argumentCount() == 1) {
-                        QString name = qscriptvalue_cast<QString>(context->argument(0));
-                        InstrumentTemplate* t = 0;
-                        foreach(InstrumentTemplate* it, instrumentTemplates) {
-                              if (it->trackName == name) {
-                                    t = it;
-                                    break;
-                                    }
-                              }
-                        }
-                  else if (context->argumentCount() != 0)
+                  if (argc == 1)
+                        t = searchTemplate(qscriptvalue_cast<QString>(context->argument(0)));
+                  else if (argc != 0)
                         break;
                   if (t == 0) {
                         t = &defaultInstrument;
@@ -330,51 +259,51 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   return context->engine()->undefinedValue();
                   }
                   break;
-            case 14:    // "appendMeasures",
-                  if (context->argumentCount() == 1) {
+            case 8:    // "appendMeasures",
+                  if (argc == 1) {
                         int n = context->argument(0).toInt32();
                         score->appendMeasures(n, MEASURE);
                         return context->engine()->undefinedValue();
                         }
                   break;
 
-            case 15:    // "pages",
-                  if (context->argumentCount() == 0)
+            case 9:    // "pages",
+                  if (argc == 0)
                         return qScriptValueFromValue(context->engine(), score->pages().size());
                   break;
-            case 16:    // "measures",
-                  if (context->argumentCount() == 0) {
+            case 10:    // "measures",
+                  if (argc == 0) {
                         int n = 0;
                         for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure())
                               n++;
                         return qScriptValueFromValue(context->engine(), n);
                         }
                   break;
-            case 17:    // "parts",
-                  if (context->argumentCount() == 0)
+            case 11:    // "parts",
+                  if (argc == 0)
                         return qScriptValueFromValue(context->engine(), score->parts()->size());
                   break;
-            case 18:    // "part",
-                  if (context->argumentCount() == 1) {
+            case 12:    // "part",
+                  if (argc == 1) {
                         int n = context->argument(0).toInt32();
                         Part* part = score->parts()->at(n);
                         return qScriptValueFromValue(context->engine(), part);
                         }
                   break;
-            case 19:    // "startUndo",
-                  if (context->argumentCount() == 0) {
+            case 13:    // "startUndo",
+                  if (argc == 0) {
                         score->startCmd();
                         return context->engine()->undefinedValue();
                         }
 
-            case 20:    // "endUndo",
-                  if (context->argumentCount() == 0) {
+            case 14:    // "endUndo",
+                  if (argc == 0) {
                         score->endCmd();
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 21:    // "setStyle",
-                  if (context->argumentCount() == 2) {
+            case 15:    // "setStyle",
+                  if (argc == 2) {
                         QString name = qscriptvalue_cast<QString>(context->argument(0));
                         QString val  = qscriptvalue_cast<QString>(context->argument(1));
                         StyleVal sv(name, val);
@@ -382,8 +311,8 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 22:    // "hasLyrics",
-                  if (context->argumentCount() == 0) {
+            case 16:    // "hasLyrics",
+                  if (argc == 0) {
                         for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                               for (Segment* seg = m->first(); seg; seg = seg->next()) {
                                     for (int i = 0; i < score->nstaves(); ++i) {
@@ -395,8 +324,8 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return qScriptValueFromValue(context->engine(), false);
                         }
                   break;
-            case 23:    // "hasHarmonies"
-                  if (context->argumentCount() == 0) {
+            case 17:    // "hasHarmonies"
+                  if (argc == 0) {
                         for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                               foreach(Element* element, *m->el()) {
                                     if (element->type() == HARMONY) {
@@ -409,64 +338,9 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return qScriptValueFromValue(context->engine(), false);
                         }
                   break;
-            case 24:    // staves
-                  if (context->argumentCount() == 0)
+            case 18:    // staves
+                  if (argc == 0)
                         return qScriptValueFromValue(context->engine(), score->nstaves());
-                  break;
-#ifdef HAS_AUDIOFILE
-            case 25:    // "saveWav",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->saveWav(s);
-                        return context->engine()->undefinedValue();
-                        }
-                  if (context->argumentCount() == 2) {
-                        QString s  = qscriptvalue_cast<QString>(context->argument(0));
-                        QString sf = qscriptvalue_cast<QString>(context->argument(1));
-                        score->saveWav(s, sf);
-                        return context->engine()->undefinedValue();
-                        }
-                  break;
-            case 26:    // "saveFlac",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->saveFlac(s);
-                        return context->engine()->undefinedValue();
-                        }
-                  if (context->argumentCount() == 2) {
-                        QString s  = qscriptvalue_cast<QString>(context->argument(0));
-                        QString sf = qscriptvalue_cast<QString>(context->argument(1));
-                        score->saveFlac(s, sf);
-                        return context->engine()->undefinedValue();
-                        }
-                  break;
-            case 27:    // "saveOgg",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->saveOgg(s);
-                        return context->engine()->undefinedValue();
-                        }
-                  if (context->argumentCount() == 2) {
-                        QString s  = qscriptvalue_cast<QString>(context->argument(0));
-                        QString sf = qscriptvalue_cast<QString>(context->argument(1));
-                        score->saveOgg(s, sf);
-                        return context->engine()->undefinedValue();
-                        }
-                  break;
-#endif
-              case 28:    // "importMusicXml",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->importMusicXml(s);
-                        return context->engine()->undefinedValue();
-                        }
-                  break;
-              case 29:    // "importCompressedMusicXml",
-                  if (context->argumentCount() == 1) {
-                        QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        score->importCompressedMusicXml(s);
-                        return context->engine()->undefinedValue();
-                        }
                   break;
             }
       return context->throwError(QScriptContext::TypeError,

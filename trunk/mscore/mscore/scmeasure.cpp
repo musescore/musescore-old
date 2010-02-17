@@ -29,22 +29,20 @@ Q_DECLARE_METATYPE(Measure*);
 Q_DECLARE_METATYPE(Score*);
 
 static const char* const function_names_measure[] = {
-      "lineBreak", "pageNumber", "x", "y", "width", "height"
+      "lineBreak", "pageNumber", "boundingRect", "pos"
       };
 static const int function_lengths_measure[] = {
-      1, 1, 1, 1, 1, 1
+      1, 1, 0, 0
       };
 static const QScriptValue::PropertyFlags flags_measure[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration
       };
 
 ScriptInterface measureInterface = {
-      6,
+      4,
       function_names_measure,
       function_lengths_measure,
       flags_measure
@@ -98,21 +96,13 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), measure->system()->page()->no());
                   break;
-            case 2:     // "x",
+            case 3:     // "boundingRect"
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), measure->x());
+                        return qScriptValueFromValue(context->engine(), measure->bbox());
                   break;
-            case 3:     // "y",
+            case 4:     // "pos"
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), measure->y());
-                  break;
-            case 4:     // "width",
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), measure->bbox().width());
-                  break;
-            case 5:     // "height"
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), measure->bbox().height());
+                        return qScriptValueFromValue(context->engine(), measure->pos());
                   break;
 
             }

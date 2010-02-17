@@ -35,8 +35,19 @@
 //   saveAudio
 //---------------------------------------------------------
 
-bool Score::saveAudio(const QString& name, int format, QString soundFont)
+bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont)
       {
+      int format;
+      if (ext == "wav")
+            format = SF_FORMAT_WAV | SF_FORMAT_PCM_16;
+      else if (ext == "ogg")
+            format = SF_FORMAT_OGG | SF_FORMAT_VORBIS;
+      else if (ext == "flac")
+            format = SF_FORMAT_FLAC | SF_FORMAT_PCM_16;
+      else {
+            fprintf(stderr, "unknown audio file type <%s>\n", qPrintable(ext));
+            return false;
+            }
       static const int sampleRate = 44100;
 
       Synth* synth = new FluidS::Fluid();
@@ -152,33 +163,6 @@ bool Score::saveAudio(const QString& name, int format, QString soundFont)
             }
 
       return true;
-      }
-
-//---------------------------------------------------------
-//   saveWav
-//---------------------------------------------------------
-
-bool Score::saveWav(const QString& name, QString sf)
-      {
-      return saveAudio(name, SF_FORMAT_WAV | SF_FORMAT_PCM_16, sf);
-      }
-
-//---------------------------------------------------------
-//   saveOgg
-//---------------------------------------------------------
-
-bool Score::saveOgg(const QString& name, QString sf)
-      {
-      return saveAudio(name, SF_FORMAT_OGG | SF_FORMAT_VORBIS, sf);
-      }
-
-//---------------------------------------------------------
-//   saveFlac
-//---------------------------------------------------------
-
-bool Score::saveFlac(const QString& name, QString sf)
-      {
-      return saveAudio(name, SF_FORMAT_FLAC | SF_FORMAT_PCM_16, sf);
       }
 
 #endif // HAS_AUDIOFILE

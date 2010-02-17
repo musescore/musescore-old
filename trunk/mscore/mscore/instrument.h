@@ -40,6 +40,7 @@ struct NamedEventList {
 
       void write(Xml&, const QString& name) const;
       void read(QDomElement);
+      bool operator==(const NamedEventList& i) const { return i.name == name && i.events == events; }
       };
 
 //---------------------------------------------------------
@@ -52,6 +53,9 @@ struct MidiArticulation {
       int gateTime;           // gate time change: -100% - +100%
       void write(Xml&) const;
       void read(QDomElement);
+
+      MidiArticulation() {}
+      MidiArticulation(const MidiArticulation&);
       };
 
 //---------------------------------------------------------
@@ -85,6 +89,7 @@ struct Channel {
       QList<MidiArticulation*> articulation;
 
       Channel();
+      Channel(const Channel&);
       void write(Xml&) const;
       void read(QDomElement);
       void updateInitList() const;
@@ -112,6 +117,8 @@ struct Instrument {
       NamedEventList* midiAction(const QString& s) const;
       int channelIdx(const QString& s) const;
       void updateVelocity(int* velocity, int channel, const QString& name);
+
+      bool operator==(const Instrument&) const;
       };
 
 #endif

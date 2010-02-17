@@ -80,6 +80,27 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             printf("Load plugin <%s>: no run function found\n", qPrintable(pluginPath));
             return;
             }
+      int majorVersion = val.property("majorVersion").toInt32();
+      int minorVersion = val.property("minorVersion").toInt32();
+      if (majorVersion) {
+            if (majorVersion != SCRIPT_MAJOR_VERSION) {
+                  QString s = tr("Script\n%1\nis incompatible with current interface");
+                  QMessageBox::warning(0,
+                     QWidget::tr("MuseScore: register script plugin:"),
+                     s.arg(pluginPath),
+                     QString::null, QString::null, QString::null, 0, 1);
+                  }
+            else if (minorVersion > SCRIPT_MINOR_VERSION) {
+                  printf("Your MuseScore version may be too old to run script <%s> (minor version %d > %d)\n",
+                     qPrintable(pluginPath), minorVersion, SCRIPT_MAJOR_VERSION);
+                  QString s = tr("MuseScore is too old to run script\n%1");
+                  QMessageBox::warning(0,
+                     QWidget::tr("MuseScore: register script plugin:"),
+                     s.arg(pluginPath),
+                     QString::null, QString::null, QString::null, 0, 1);
+                  }
+            }
+
       int pluginIdx = plugins.size();
       plugins.append(pluginPath);
 
@@ -90,8 +111,8 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             return;
             }
 
-      if(!pluginMapper)
-        return;
+      if (!pluginMapper)
+            return;
 
       QStringList ml   = menu.split(".", QString::SkipEmptyParts);
       int n            = ml.size();
@@ -172,14 +193,14 @@ bool MuseScore::loadPlugin(const QString& filename)
             printf("Plugin Path <%s>\n", qPrintable(mscoreGlobalShare + "plugins"));
 
       if (filename.endsWith(".js")){
-        QFileInfo fi(pluginDir, filename);
-        if (fi.exists()){
-          QString path(fi.filePath());
-          registerPlugin(path);
-          result = true;
-          }
-        }
-        return result;
+            QFileInfo fi(pluginDir, filename);
+            if (fi.exists()) {
+                  QString path(fi.filePath());
+                  registerPlugin(path);
+                  result = true;
+                  }
+            }
+      return result;
       }
 
 //---------------------------------------------------------
@@ -209,7 +230,6 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("Note",     create_Note_class(this),    QScriptValue::SkipInEnumeration);
       globalObject().setProperty("Chord",    create_Chord_class(this),   QScriptValue::SkipInEnumeration);
       globalObject().setProperty("Rest",     create_Rest_class(this),    QScriptValue::SkipInEnumeration);
-
       globalObject().setProperty("Harmony",  create_Harmony_class(this), QScriptValue::SkipInEnumeration);
       globalObject().setProperty("Text",     create_Text_class(this),    QScriptValue::SkipInEnumeration);
       globalObject().setProperty("Measure",  create_Measure_class(this), QScriptValue::SkipInEnumeration);

@@ -67,6 +67,8 @@ function run()
 //---------------------------------------------------------
 
 var mscorePlugin = {
+      majorVersion: 1,
+      minorVersion: 1,
       menu: 'Plugins.Test',
       init: init,
       run:  run

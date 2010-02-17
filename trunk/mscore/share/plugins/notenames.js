@@ -45,8 +45,6 @@ function init()
 
 function run()
       {
-      print("script: note names");
-
       var cursor   = new Cursor(curScore);
       cursor.staff = 0;
       cursor.voice = 0;
