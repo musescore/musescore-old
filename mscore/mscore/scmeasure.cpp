@@ -74,25 +74,24 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                   else if (context->argumentCount() == 1) {
                         Score* score = measure->score();
                         bool val = context->argument(0).toBool();
-                        if (measure->lineBreak() == val)
+                        bool lineb = measure->lineBreak();
+                        if (lineb == val)
                               return context->engine()->undefinedValue();
-                        LayoutBreak* lb = new LayoutBreak(score);
-                        lb->setSubtype(LAYOUT_BREAK_LINE);
-                        if (measure->lineBreak()) {
-                              lb->setSubtype(LAYOUT_BREAK_LINE);
-
-                              foreach(Element* elem, *measure->el()) {
-                                    if (elem->type() == LAYOUT_BREAK) {
-                                          score->undoChangeElement(elem, lb);
-                                          break;
-                                          }
+                        if (val){	       
+                	          LayoutBreak* lb = new LayoutBreak(score);	   
+                            lb->setSubtype(LAYOUT_BREAK_LINE);	       
+                            lb->setTrack(-1);       // this are system elements	       
+                            lb->setParent(measure);	             
+                            score->cmdAdd(lb);
+                        }else{ 	 
+                            // remove line break	 
+                            foreach(Element* e, *measure->el()) {	 
+                                if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {	 
+                                    measure->score()->cmdRemove(e); 
                                     }
-                              return context->engine()->undefinedValue();
-                              }
-                        lb->setTrack(-1);       // this are system elements
-                        lb->setParent(measure);
-                        score->cmdAdd(lb);
-                        return context->engine()->undefinedValue();
+                                }
+                             }
+                          return context->engine()->undefinedValue();     
                         }
                   break;
             case 1:     // "pageNumber",
