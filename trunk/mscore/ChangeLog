@@ -1,4 +1,6 @@
-17.feb (ws)
+17.feb (lv)
+      - updated MusicXML testfiles
+       (ws)
       - implemented "Change Instrument..." button in staff properties dialog to initialize all
         instrument properties from an instrument template (in instruments.xml)
       - implemented "show more" checkbox for instrument dialog. All instrument groups and instruments

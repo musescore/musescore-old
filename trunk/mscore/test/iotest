@@ -104,12 +104,14 @@ rwtestAllXml() {
       rwtestXml testNoteAttributes1.xml
       rwtestXml testNoteAttributes2.xml
       rwtestXml testNotesRests1.xml
+      rwtestXml testNotesRests2.xml
       rwtestXml testSystemBrackets1.xml
       rwtestXml testSystemBrackets2.xml
       rwtestXml testTempo1.xml
       rwtestXml testTimesig1.xml
       rwtestXml testTimesig3.xml
       rwtestXml testTremolo.xml
+      rwtestXml testTuplets.xml
       rwtestXml testVoicePiano1.xml
       rwtestXml testVolta1.xml
       rwtestXml testWedge1.xml
