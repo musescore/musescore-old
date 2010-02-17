@@ -776,6 +776,7 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets)
 
             if (tag == "Note") {
                   Note* note = new Note(score());
+                  note->setChord(this);
                   note->read(e);
                   add(note);
                   }
