@@ -1678,11 +1678,11 @@ static bool processNonGui()
                   return cs->saveLilypond(fn);
 #ifdef HAS_AUDIOFILE
             if (fn.endsWith(".wav"))
-                  return cs->saveWav(fn);
+                  return cs->saveAudio(fn, "wav");
             if (fn.endsWith(".ogg"))
-                  return cs->saveOgg(fn);
+                  return cs->saveAudio(fn, "ogg");
             if (fn.endsWith(".flac"))
-                  return cs->saveFlac(fn);
+                  return cs->saveAudio(fn, "flac");
 #endif
             else {
                   fprintf(stderr, "dont know how to convert to %s\n", qPrintable(outFileName));

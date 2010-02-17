@@ -257,6 +257,39 @@ Channel::Channel()
       }
 
 //---------------------------------------------------------
+//   Channel
+//---------------------------------------------------------
+
+Channel::Channel(const Channel& c)
+      {
+      name = c.name;
+      channel = c.channel;
+      init    = c.init;
+      program = c.program;
+      bank    = c.bank;
+      volume  = c.volume;
+      pan     = c.pan;
+      chorus  = c.chorus;
+      reverb  = c.reverb;
+      mute    = c.mute;
+      solo    = c.solo;
+      soloMute = c.soloMute;
+      foreach(MidiArticulation* a, c.articulation)
+            articulation.append(new MidiArticulation(*a));
+      }
+
+//---------------------------------------------------------
+//   MidiArticulation
+//---------------------------------------------------------
+
+MidiArticulation::MidiArticulation(const MidiArticulation& a)
+      {
+      name     = a.name;
+      velocity = a.velocity;
+      gateTime = a.gateTime;
+      }
+
+//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
@@ -455,3 +488,21 @@ void Instrument::updateVelocity(int* velocity, int channelIdx, const QString& na
             }
       }
 
+//---------------------------------------------------------
+//   operator==
+//---------------------------------------------------------
+
+bool Instrument::operator==(const Instrument& i) const
+      {
+      return i.minPitchA == minPitchA
+         &&  i.maxPitchA == maxPitchA
+         &&  i.minPitchP == minPitchP
+         &&  i.maxPitchP == maxPitchP
+         &&  i.useDrumset == useDrumset
+         &&  i.midiActions == midiActions
+         &&  i.channel == channel
+         &&  i.articulation == articulation
+         &&  i.transposeDiatonic == transposeDiatonic
+         &&  i.transposeChromatic == transposeChromatic
+         ;
+      }

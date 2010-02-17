@@ -24,6 +24,7 @@
 #include "utils.h"
 #include "undo.h"
 #include "script.h"
+#include "pitchspelling.h"
 
 Q_DECLARE_METATYPE(Note);
 Q_DECLARE_METATYPE(Note*);
@@ -70,13 +71,20 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                QString::fromLatin1("Note.%0(): this object is not a Note")
                .arg(function_names_note[_id]));
             }
+
+      int argc = context->argumentCount();
       switch(_id) {
             case 0:
-                  return qScriptValueFromValue(context->engine(), pitch2string(note->pitch()));
+                  {
+                  bool germanNames = (argc == 0) ? context->argument(1).toBool() : false;
+                  if (argc == 0 || argc == 1)
+                        return qScriptValueFromValue(context->engine(), tpc2name(note->tpc(), germanNames));
+                  }
+                  break;
             case 1:
-                  if (context->argumentCount() == 0)
+                  if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->pitch());
-                  else if (context->argumentCount() == 1) {
+                  else if (argc == 1) {
                         int pitch = context->argument(0).toInt32();
                         if (pitch < 0 || pitch > 127)
                               break;
@@ -86,18 +94,18 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         }
                   break;
             case 2:     // tuning
-                  if (context->argumentCount() == 0)
+                  if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->tuning());
-                  else if (context->argumentCount() == 1) {
+                  else if (argc == 1) {
                         double tuning = context->argument(0).toNumber();
                         note->setTuning(tuning);
                         return context->engine()->undefinedValue();
                         }
                   break;
             case 3:
-                  if (context->argumentCount() == 0)
+                  if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->color());
-                  else if (context->argumentCount() == 1) {
+                  else if (argc == 1) {
                         QColor c = qscriptvalue_cast<QColor>(context->argument(0));
                         Score* score = note->score();
                         if (score)
@@ -108,18 +116,18 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         }
                   break;
             case 4:
-                  if (context->argumentCount() == 0)
+                  if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->visible());
-                  else if (context->argumentCount() == 1) {
+                  else if (argc == 1) {
                         bool v = context->argument(0).toInt32();
                         note->setVisible(v);
                         return context->engine()->undefinedValue();
                         }
                   break;
             case 5:
-                  if (context->argumentCount() == 0)
+                  if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->tpc());
-                  else if (context->argumentCount() == 1) {
+                  else if (argc == 1) {
                         int v = context->argument(0).toInt32();
                         if (v < -1 || v > 33)
                               break;
@@ -128,7 +136,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         }
                   break;
             case 6:
-                  if (context->argumentCount() == 0) {
+                  if (argc == 0) {
                         int tiemode = 0;
                         if (note->tieBack())
                               tiemode |= 1;
@@ -138,9 +146,9 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         }
                   break;
             case 7:
-                  if (context->argumentCount() == 0)
+                  if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->userAccidental());
-                  else if (context->argumentCount() == 1) {
+                  else if (argc == 1) {
                         int v = context->argument(0).toInt32();
                         note->setUserAccidental(v);
                         return context->engine()->undefinedValue();

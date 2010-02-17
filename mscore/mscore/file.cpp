@@ -425,19 +425,48 @@ bool Score::saveAs(bool saveCopy)
       else
             mscore->lastSaveDirectory = fi.absolutePath();
 
-      QString ext = fi.suffix();
+      QString ext;
+      if (selectedFilter.isEmpty())
+            ext = fi.suffix();
+      else {
+            int idx = fl.indexOf(selectedFilter);
+            if (idx != -1) {
+                  static const char* extensions[] = {
+                        "mscz", "mscx", "xml", "mxl", "mid", "pdf", "ps", "png", "svg", "ly",
+#ifdef HAS_AUDIOFILE
+                        "wav", "flac", "ogg"
+#endif
+                        };
+                  ext = extensions[idx];
+                  }
+            }
+      if (ext.isEmpty()) {
+            QMessageBox::critical(mscore, tr("MuseScore: Save As"), tr("cannot determine file type"));
+            return false;
+            }
 
+      if (fi.suffix() != ext)
+            fn += "." + ext;
+      return saveAs(saveCopy, fn, ext);
+      }
+
+//---------------------------------------------------------
+//   saveAs
+//---------------------------------------------------------
+
+bool Score::saveAs(bool saveCopy, const QString& path, const QString& ext)
+      {
+      QString suffix = "." + ext;
+      QString fn(path);
+      if (!fn.endsWith(suffix))
+            fn += suffix;
       bool rv = false;
-      if (ext == "mscx" || ext == "mscz" || selectedFilter == fl[0] || selectedFilter == fl[1]) {
+      if (ext == "mscx" || ext == "mscz") {
             // save as mscore *.msc[xz] file
-            if (selectedFilter == fl[0] && (ext != "mscz"))
-                  fn.append(".mscz");
-            else if (selectedFilter == fl[1] && (ext != "mscx"))
-                  fn.append(".mscx");
             QFileInfo fi(fn);
             rv = true;
             try {
-                  if (selectedFilter == fl[0])
+                  if (ext == "mscz")
                         saveCompressedFile(fi, false);
                   else
                         saveFile(fi, false);
@@ -456,83 +485,47 @@ bool Score::saveAs(bool saveCopy)
                   mscore->writeSessionFile(false);
                   }
             }
-      else if (ext == "xml" || selectedFilter == fl[2]) {
+      else if (ext == "xml") {
             // save as MusicXML *.xml file
-            if (!fn.endsWith(".xml"))
-                  fn.append(".xml");
             rv = saveXml(fn);
             }
-      else if (ext == "mxl" || selectedFilter == fl[3]) {
+      else if (ext == "mxl") {
             // save as compressed MusicXML *.mxl file
-            if (!fn.endsWith(".mxl"))
-                  fn.append(".mxl");
             rv = saveMxl(fn);
             }
-      else if (ext == "mid" || selectedFilter == fl[4]) {
+      else if (ext == "mid") {
             // save as midi file *.mid
-            if (!fn.endsWith(".mid"))
-                  fn.append(".mid");
             rv = saveMidi(fn);
             }
-      else if (ext == "pdf" || selectedFilter == fl[5]) {
+      else if (ext == "pdf") {
             // save as pdf file *.pdf
-            if (!fn.endsWith(".pdf"))
-                  fn.append(".pdf");
             rv = savePsPdf(fn, QPrinter::PdfFormat);
             }
-      else if (ext == "ps" || selectedFilter == fl[6]) {
+      else if (ext == "ps") {
             // save as postscript file *.ps
-            if (!fn.endsWith(".ps"))
-                  fn.append(".ps");
             rv = savePsPdf(fn, QPrinter::PostScriptFormat);
             }
-      else if (ext == "png" || selectedFilter == fl[7]) {
+      else if (ext == "png") {
             // save as png file *.png
-            if (!fn.endsWith(".png"))
-                  fn.append(".png");
             rv = savePng(fn);
             }
-      else if (ext == "svg" || selectedFilter == fl[8]) {
+      else if (ext == "svg") {
             // save as svg file *.svg
-            if (!fn.endsWith(".svg"))
-                  fn.append(".svg");
             rv = saveSvg(fn);
             }
-      else if (ext == "ly" || selectedFilter == fl[9]) {
+      else if (ext == "ly") {
             // save as lilypond file *.ly
-            if (!fn.endsWith(".ly"))
-                  fn.append(".ly");
             rv = saveLilypond(fn);
             }
 #ifdef HAS_AUDIOFILE
-      else if (ext == "wav" || selectedFilter == fl[10]) {
-            // save as wave file *.wav
-            if (!fn.endsWith(".wav"))
-                  fn.append(".wav");
-            rv = saveWav(fn);
-            }
-      else if (ext == "flac" || selectedFilter == fl[11]) {
-            // save as lossless compressed audio file *.flac
-            if (!fn.endsWith(".flac"))
-                  fn.append(".flac");
-            rv = saveFlac(fn);
-            }
-      else if (ext == "ogg" || selectedFilter == fl[12]) {
-            // save as compressed audio file *.ogg
-            if (!fn.endsWith(".ogg"))
-                  fn.append(".ogg");
-            rv = saveOgg(fn);
-            }
+      else if (ext == "wav" || ext == "flac" || ext == "ogg")
+            rv = saveAudio(fn, ext);
 #endif
       else {
-            printf("internal error: unknown filter type <%s>\n",
-               qPrintable(selectedFilter));
+            fprintf(stderr, "internal error: unsupported extension <%s>\n",
+               qPrintable(ext));
             return false;
             }
-
-//    after a successful saveas (compressed) MusicXML, clear the "dirty" flag
-//      if (rv && ((ext == "xml") || (ext == "mxl")) && !saveCopy)
-//            _undo->setClean();
       return rv;
       }
 

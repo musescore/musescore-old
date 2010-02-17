@@ -558,6 +558,7 @@ class Score : public QObject {
       void saveCompressedFile(QFileInfo&, bool autosave);
       void saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
       bool saveAs(bool saveCopy = false);
+      bool saveAs(bool saveCopy, const QString& name, const QString& ext);
 
       void print(QPrinter* printer);
       bool saveXml(const QString& name);
@@ -569,10 +570,7 @@ class Score : public QObject {
       bool saveSvg(const QString& name);
       bool saveLilypond(const QString& name);
 #ifdef HAS_AUDIOFILE
-      bool saveOgg(const QString& name, QString sf = QString());
-      bool saveFlac(const QString& name, QString sf = QString());
-      bool saveWav(const QString& name, QString sf = QString());
-      bool saveAudio(const QString& name, int format, QString soundFont = QString());
+      bool saveAudio(const QString& name, const QString& ext, QString soundFont = QString());
 #endif
       ChordRest* getSelectedChordRest() const;
       void getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const;

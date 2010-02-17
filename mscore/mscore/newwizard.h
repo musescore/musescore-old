@@ -47,6 +47,7 @@ class InstrumentWizard : public QWidget, private Ui::InstrumentWizard {
       void on_downButton_clicked();
       void on_aboveButton_clicked();
       void on_belowButton_clicked();
+      void buildTemplateList();
 
    signals:
       void completeChanged(bool);

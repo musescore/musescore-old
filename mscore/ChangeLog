@@ -1,3 +1,12 @@
+17.feb (ws)
+      - implemented "Change Instrument..." button in staff properties dialog to initialize all
+        instrument properties from an instrument template (in instruments.xml)
+      - implemented "show more" checkbox for instrument dialog. All instrument groups and instruments
+        marked with the <extended\> tag in instruments.xml are only shown when "show more" is checked.
+16.feb (ws)
+      - script interface: introduced script interface version numbers
+      - script interface: simplified interface for Score store() and load(); Measure: pos(), boundingRect()
+      - script interface: fix return string for note name (now derived from tpc value, not pitch)
 15.feb (ws)
       - make sure notes are sorted in chord note list; this fixes some obscure bugs
        (lv)

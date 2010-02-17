@@ -34,7 +34,6 @@ class Staff;
 //---------------------------------------------------------
 
 struct InstrumentTemplate {
-      QString group;
       QString trackName;     ///< also used for track name
       QString name;          ///< shown on first system
       QString shortName;     ///< shown on followup systems
@@ -42,9 +41,10 @@ struct InstrumentTemplate {
       int staves;             // 1 <= MAX_STAVES
       int clefIdx[MAX_STAVES];
       int staffLines[MAX_STAVES];
-      bool smallStaff[MAX_STAVES];
       int bracket;            // bracket type (NO_BRACKET)
+      bool smallStaff[MAX_STAVES];
 
+      bool extended;          // belogns to extended instrument set if true
       char minPitchA;         // pitch range playable by an amateur
       char maxPitchA;
       char minPitchP;         // pitch range playable by professional
@@ -66,13 +66,18 @@ struct InstrumentTemplate {
 
       void setPitchRange(const QString& s, char* a, char* b) const;
       void write(Xml& xml) const;
-      void read(const QString& group, QDomElement);
+      void read(QDomElement);
       };
 
-extern QList<InstrumentTemplate*> instrumentTemplates;
-extern QList<MidiArticulation*> articulation;
+//---------------------------------------------------------
+//   InstrumentGroup
+//---------------------------------------------------------
 
-extern bool loadInstrumentTemplates(const QString& instrTemplates);
+struct InstrumentGroup {
+      QString name;
+      bool extended;
+      QList<InstrumentTemplate*> instrumentTemplates;
+      };
 
 //---------------------------------------------------------
 //   InstrumentTemplateListItem
@@ -131,5 +136,10 @@ class StaffListItem : public QTreeWidgetItem {
       int clef() const { return _clef; }
       };
 
+extern QList<InstrumentGroup*> instrumentGroups;
+extern QList<MidiArticulation*> articulation;
+extern bool loadInstrumentTemplates(const QString& instrTemplates);
+extern InstrumentTemplate* searchTemplate(const QString& name);
+extern void populateInstrumentList(QTreeWidget* instrumentList, bool extended);
 #endif
 

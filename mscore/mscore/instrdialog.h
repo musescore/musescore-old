@@ -40,8 +40,6 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
       Score* cs;
       EditInstrument* editInstrument;
 
-      void buildTemplateList();
-
    private slots:
       void on_instrumentList_itemSelectionChanged();
       void on_instrumentList_itemDoubleClicked(QTreeWidgetItem* item, int);
@@ -55,6 +53,7 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
       void on_belowButton_clicked();
       void on_saveButton_clicked();
       void on_loadButton_clicked();
+      void buildTemplateList();
       virtual void accept();
 
    public:

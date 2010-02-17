@@ -22,8 +22,11 @@
 #define __EDITSTAFF_H__
 
 #include "ui_editstaff.h"
+#include "ui_selectinstr.h"
+#include "instrument.h"
 
 class Staff;
+class InstrumentTemplate;
 
 //---------------------------------------------------------
 //   EditStaff
@@ -34,17 +37,36 @@ class EditStaff : public QDialog, private Ui::EditStaffBase {
       Q_OBJECT
 
       Staff* staff;
+      Instrument instrument;
 
       void apply();
+      void initFromInstrument(const Instrument&);
 
    private slots:
       void bboxClicked(QAbstractButton* button);
       void editDrumsetClicked();
+      void showInstrumentDialog();
 
    public:
       EditStaff(Staff*, QWidget* parent = 0);
       };
 
+//---------------------------------------------------------
+//   SelectInstrument
+//---------------------------------------------------------
+
+class SelectInstrument : public QDialog, private Ui::SelectInstrument {
+      Q_OBJECT
+
+   private slots:
+      void buildTemplateList();
+      void on_instrumentList_itemSelectionChanged();
+      void on_instrumentList_itemDoubleClicked(QTreeWidgetItem* item, int);
+
+   public:
+      SelectInstrument(QWidget* parent = 0);
+      InstrumentTemplate* instrTemplate() const;
+      };
 
 #endif
 

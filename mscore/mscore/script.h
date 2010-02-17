@@ -23,6 +23,9 @@
 
 #include "score.h"
 
+static const int SCRIPT_MAJOR_VERSION = 1;
+static const int SCRIPT_MINOR_VERSION = 1;
+
 //---------------------------------------------------------
 //   ScriptInterface
 //---------------------------------------------------------

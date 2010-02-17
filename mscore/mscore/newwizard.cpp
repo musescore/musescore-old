@@ -45,17 +45,7 @@ InstrumentWizard::InstrumentWizard(QWidget* parent)
       QStringList header = (QStringList() << tr("Staves") << tr("Clef"));
       partiturList->setHeaderLabels(header);
 
-      instrumentList->clear();
-      InstrumentTemplateListItem* group = 0;
-      QString curGroup;
-      foreach(InstrumentTemplate* t, instrumentTemplates) {
-            if (curGroup != t->group) {
-                  curGroup = t->group;
-                  group    = new InstrumentTemplateListItem(curGroup, instrumentList);
-                  group->setFlags(Qt::ItemIsEnabled);
-                  }
-            new InstrumentTemplateListItem(t, group);
-            }
+      buildTemplateList();
 
       addButton->setEnabled(false);
       removeButton->setEnabled(false);
@@ -63,7 +53,18 @@ InstrumentWizard::InstrumentWizard(QWidget* parent)
       downButton->setEnabled(false);
       aboveButton->setEnabled(false);
       belowButton->setEnabled(false);
+      connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
       }
+
+//---------------------------------------------------------
+//   buildTemplateList
+//---------------------------------------------------------
+
+void InstrumentWizard::buildTemplateList()
+      {
+      populateInstrumentList(instrumentList, showMore->isChecked());
+      }
+
 
 //---------------------------------------------------------
 //   init
