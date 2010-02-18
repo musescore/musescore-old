@@ -96,13 +96,16 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), measure->system()->page()->no());
                   break;
-            case 3:     // "boundingRect"
+            case 2:     // "boundingRect"
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), measure->bbox());
                   break;
-            case 4:     // "pos"
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), measure->pos());
+            case 3:     // "pos"
+                  if (context->argumentCount() == 0){
+                        Page* page = (Page*)measure->parent()->parent();	  
+                        QPointF pos(measure->canvasPos().x() - page->canvasPos().x(),  measure->canvasPos().y());
+                        return qScriptValueFromValue(context->engine(), pos);
+                        }
                   break;
 
             }
