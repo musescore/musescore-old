@@ -350,8 +350,10 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                             Staff* st = score->staff(0);
                             KeyList* kl = st->keymap();
                             KeySigEvent key = kl->key(0);
-                            if(key.custom)
-                                return qScriptValueFromValue(context->engine(), "undefined");
+                            if(key.custom){
+                                 QString s = "undefined";
+                                 return qScriptValueFromValue(context->engine(), s);
+                                 }
                             result = key.accidentalType;
                             int tr =  st->part()->instrument()->transposeChromatic;
                             if (tr){
