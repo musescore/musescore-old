@@ -2125,7 +2125,7 @@ void Score::setSelection(const Selection& s)
 
 Text* Score::getText(int subtype)
       {
-      Measure* m = firstMeasure();
+      MeasureBase* m = measures()->first();
       if (m) {
             foreach(Element* e, *m->el()) {
                   if (e->type() == TEXT && e->subtype() == subtype)

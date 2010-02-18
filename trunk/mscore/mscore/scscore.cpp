@@ -125,11 +125,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 1:     // "subtitle",
                   {
                   Text* t = score->getText(TEXT_SUBTITLE);
-                  if (argc) {
+                  if (argc == 0) {
                         QString s = t ? t->getText() : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
-                  else if (argc) {
+                  else if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         if (t)
                               t->setText(s);
