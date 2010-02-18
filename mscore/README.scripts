@@ -120,8 +120,8 @@ Objects
             Part part(int i)              part object at index i
             bool hasLyrics                true if a lyric element is found in the core
             bool hasHarmonies             true if a valid chordname is found
-            importMusicXml(string path)             open a MusicXML file
-            importCompressedMusicXml(string path)   open a compressed MusicXML file
+            int keysig                    key signature at the beginning 
+                -7 to 7 or undefined for custom signature
 
    Cursor
          create:  var a = new Cursor(Score score);
