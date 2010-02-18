@@ -45,12 +45,12 @@ static const char* const function_names_score[] = {
       "load", "save",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves"
+      "staves", "keysig"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
       1, 2,
-      1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0,
+      1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -76,10 +76,11 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       };
 
 ScriptInterface scoreInterface = {
-      19,
+      20,
       function_names_score,
       function_lengths_score,
       flags_score
@@ -341,6 +342,24 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 18:    // staves
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), score->nstaves());
+                  break;
+            case 19:    // keysig
+                  if (argc == 0){
+                        int result = 0;
+                        if(score->nstaves() > 0){
+                            Staff* st = score->staff(0);
+                            KeyList* kl = st->keymap();
+                            KeySigEvent key = kl->key(0);
+                            if(key.custom)
+                                return qScriptValueFromValue(context->engine(), "undefined");
+                            result = key.accidentalType;
+                            int tr =  st->part()->instrument()->transposeChromatic;
+                            if (tr){
+                                result = transposeKey(key.accidentalType, tr);
+                                }
+                            }
+                        return qScriptValueFromValue(context->engine(), result);
+                        }
                   break;
             }
       return context->throwError(QScriptContext::TypeError,
