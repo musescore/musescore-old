@@ -597,10 +597,10 @@ RECURSIVE              = YES
 # excluded from the INPUT source files. This way you can easily exclude a 
 # subdirectory from a directory tree whose root is specified with the INPUT tag.
 
-EXCLUDE                = portmidi \
-                         scriptgen \
-                         singleapp \
-                         qtcreator-build
+EXCLUDE                = @CMAKE_CURRENT_SOURCE_DIR@/portmidi \
+                         @CMAKE_CURRENT_SOURCE_DIR@/scriptgen \
+                         @CMAKE_CURRENT_SOURCE_DIR@/singleapp \
+                         @CMAKE_CURRENT_SOURCE_DIR@/qtcreator-build
 
 # The EXCLUDE_SYMLINKS tag can be used select whether or not files or 
 # directories that are symbolic links (a Unix filesystem feature) are excluded 
