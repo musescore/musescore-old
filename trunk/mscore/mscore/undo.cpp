@@ -2063,7 +2063,7 @@ ChangePart::~ChangePart()
 
 void ChangePart::flip()
       {
-      Instrument oi         = *(part->instrument());
+      Instrument oi         = *part;
       longName              = part->longName()->swapDoc(longName);
       shortName             = part->shortName()->swapDoc(shortName);
       part->setInstrument(instrument);

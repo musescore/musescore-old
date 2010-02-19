@@ -35,16 +35,9 @@ class Staff;
 
 struct InstrumentTemplate {
       QString trackName;     ///< also used for track name
-      QString name;          ///< shown on first system
+      QString longName;      ///< shown on first system
       QString shortName;     ///< shown on followup systems
 
-      int staves;             // 1 <= MAX_STAVES
-      int clefIdx[MAX_STAVES];
-      int staffLines[MAX_STAVES];
-      int bracket;            // bracket type (NO_BRACKET)
-      bool smallStaff[MAX_STAVES];
-
-      bool extended;          // belogns to extended instrument set if true
       char minPitchA;         // pitch range playable by an amateur
       char maxPitchA;
       char minPitchP;         // pitch range playable by professional
@@ -55,9 +48,18 @@ struct InstrumentTemplate {
 
       bool useDrumset;
       Drumset* drumset;
+
       QList<NamedEventList>   midiActions;
       QList<MidiArticulation> articulation;
       QList<Channel>          channel;
+
+      int staves;             // 1 <= MAX_STAVES
+      int clefIdx[MAX_STAVES];
+      int staffLines[MAX_STAVES];
+      int bracket;            // bracket type (NO_BRACKET)
+      bool smallStaff[MAX_STAVES];
+
+      bool extended;          // belongs to extended instrument set if true
 
       InstrumentTemplate();
       InstrumentTemplate(const InstrumentTemplate&);

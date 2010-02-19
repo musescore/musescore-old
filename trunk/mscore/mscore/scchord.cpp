@@ -32,10 +32,10 @@ Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(Note*);
 
 static const char* const function_names_chord[] = {
-      "tickLen", "addHarmony", "topNote", "addNote", "removeNote", "notes", "note"
+      "tickLen", "addHarmony", "topNote", "addNote", "removeNote", "notes", "note", "type"
       };
 static const int function_lengths_chord[] = {
-      1, 1, 0, 1, 1, 0, 1
+      1, 1, 0, 1, 1, 0, 1, 0
       };
 static const QScriptValue::PropertyFlags flags_chord[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
@@ -43,12 +43,13 @@ static const QScriptValue::PropertyFlags flags_chord[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      QScriptValue::SkipInEnumeration
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScripValue::ReadOnly
       };
 
 ScriptInterface chordInterface = {
-      7,
+      8,
       function_names_chord,
       function_lengths_chord,
       flags_chord
@@ -151,6 +152,8 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                         return qScriptValueFromValue(context->engine(), chord->notes()[idx]);
                         }
                   break;
+            case 7:     // "type"
+                  return qScriptValueFromValue(context->engine(), int(chord->noteType()));
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Note.%0(): bad argument count or value")

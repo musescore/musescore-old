@@ -542,14 +542,14 @@ void Score::putNote(const QPointF& pos, bool replace)
       KeySigEvent key         = st->keymap()->key(tick);
       int clef                = st->clef(tick);
       int pitch               = line2pitch(line, clef, key.accidentalType);
-      Instrument* instr       = st->part()->instrument();
+      Part* instr             = st->part();
       _is.track               = staffIdx * VOICES + (_is.track % VOICES);
       _is.pitch               = pitch;
       int headGroup           = 0;
       Direction stemDirection = AUTO;
 
-      if (instr->useDrumset) {
-            Drumset* ds   = instr->drumset;
+      if (instr->useDrumset()) {
+            Drumset* ds   = instr->drumset();
             pitch         = _is.drumNote;
             if (pitch < 0)
                   return;

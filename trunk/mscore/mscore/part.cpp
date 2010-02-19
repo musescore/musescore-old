@@ -63,7 +63,7 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
 
       setShortNameEncoded(t->shortName);
       setTrackName(t->trackName);
-      setLongNameEncoded(t->name);
+      setLongNameEncoded(t->longName);
 
       setTransposeDiatonic(t->transposeDiatonic);
       setTransposeChromatic(t->transposeChromatic);
@@ -71,9 +71,9 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
             setUseDrumset(true);
             setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
             }
-      _instrument.midiActions  = t->midiActions;
-      _instrument.articulation = t->articulation;
-      _instrument.channel      = t->channel;
+      setMidiActions(t->midiActions);
+      setArticulation(t->articulation);
+      setChannel(t->channel);
       }
 
 //---------------------------------------------------------
@@ -103,7 +103,7 @@ void Part::read(QDomElement e)
                   ++rstaff;
                   }
             else if (tag == "Instrument")
-                  _instrument.read(e);
+                  Instrument::read(e);
             else if (tag == "name") {
                   if (_score->mscVersion() <= 101)
                         _longName->setHtml(val);
@@ -121,7 +121,7 @@ void Part::read(QDomElement e)
                         _shortName->read(e);
                   }
             else if (tag == "trackName") {
-                  _trackName = val;
+                  setTrackName(val);
                   }
             else if (tag == "show")
                   _show = val.toInt();
@@ -251,15 +251,13 @@ void Part::write(Xml& xml) const
       xml.stag("Part");
       foreach(const Staff* staff, _staves)
             staff->write(xml);
-      if (!_trackName.isEmpty())
-            xml.tag("trackName", _trackName);
       if (!_longName->isEmpty())
             _longName->write(xml, "name");
-      if (!_shortName->isEmpty())
+      if (_shortName->isEmpty())
             _shortName->write(xml, "shortName");
       if (!_show)
             xml.tag("show", _show);
-      _instrument.write(xml);
+      Instrument::write(xml);
       xml.etag();
       }
 
@@ -287,17 +285,6 @@ void Part::setStaves(int n)
                   }
             ++staffIdx;
             }
-      }
-
-//---------------------------------------------------------
-//   setUseDrumset
-//---------------------------------------------------------
-
-void Part::setUseDrumset(bool val)
-      {
-      _instrument.useDrumset = val;
-      if (val && _instrument.drumset == 0)
-            _instrument.drumset = new Drumset(*smDrumset);
       }
 
 //---------------------------------------------------------
@@ -348,33 +335,33 @@ void Part::setMidiProgram(int p)
       {
       // LVIFIX: check if this is correct
       // at least it fixes the MIDI program handling in the MusicXML regression test
-      _instrument.channel[0].program = p;
-      _instrument.channel[0].updateInitList();
+      _channel[0].program = p;
+      _channel[0].updateInitList();
       }
 
 int Part::volume() const
       {
-      return _instrument.channel[0].volume;
+      return channel(0).volume;
       }
 
 int Part::reverb() const
       {
-      return _instrument.channel[0].reverb;
+      return channel(0).reverb;
       }
 
 int Part::chorus() const
       {
-      return _instrument.channel[0].chorus;
+      return channel(0).chorus;
       }
 
 int Part::pan() const
       {
-      return _instrument.channel[0].pan;
+      return channel(0).pan;
       }
 
 int Part::midiProgram() const
       {
-      return _instrument.channel[0].program;
+      return channel(0).program;
       }
 
 //---------------------------------------------------------
@@ -383,7 +370,7 @@ int Part::midiProgram() const
 
 int Part::midiChannel() const
       {
-      return score()->midiChannel(_instrument.channel[0].channel);
+      return score()->midiChannel(channel(0).channel);
       }
 
 //---------------------------------------------------------
@@ -395,4 +382,24 @@ void Part::setMidiChannel(int) const
       {
       }
 
+//---------------------------------------------------------
+//   setInstrument
+//---------------------------------------------------------
+
+void Part::setInstrument(const Instrument& i)
+      {
+      setTrackName(i.trackName());
+      setLongName(i.longName());
+      setShortName(i.shortName());
+      setMinPitchA(i.minPitchA());
+      setMaxPitchA(i.maxPitchA());
+      setMinPitchP(i.minPitchP());
+      setMaxPitchP(i.maxPitchP());
+      setTransposeDiatonic(i.transposeDiatonic());
+      setTransposeChromatic(i.transposeChromatic());
+      setDrumset(i.drumset());
+      setMidiActions(i.midiActions());
+      setArticulation(i.articulation());
+      setChannel(i.channel());
+      }
 

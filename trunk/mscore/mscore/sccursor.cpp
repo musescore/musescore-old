@@ -338,8 +338,12 @@ bool SCursor::next()
 
       if (_staffIdx >= 0) {
             int track = _staffIdx * VOICES + _voice;
-            while (seg && ((seg->subtype() != Segment::SegChordRest) || (seg->element(track) == 0)))
+            SegGrace,
+            while (seg
+               && ((seg->subtype() != Segment::SegChordRest && seg->subtype() != Segment::SegGrace)
+               || (seg->element(track) == 0))) {
                   seg = seg->next1();
+                  }
             }
       _segment = seg;
       return seg != 0;

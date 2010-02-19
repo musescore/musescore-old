@@ -55,7 +55,7 @@ InstrumentTemplate::InstrumentTemplate()
 InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
       {
       trackName  = t.trackName;
-      name       = t.name;
+      longName   = t.longName;
       shortName  = t.shortName;
       staves     = t.staves;
       extended   = t.extended;
@@ -94,8 +94,8 @@ InstrumentTemplate::~InstrumentTemplate()
 void InstrumentTemplate::write(Xml& xml) const
       {
       xml.stag("Instrument");
-      xml.tag("name", name);
-      xml.tag("short-name",  shortName);
+      xml.tag("longName", longName);
+      xml.tag("shortName",  shortName);
       xml.tag("description", trackName);
       xml.tag("extended", extended);
       if (staves == 1) {
@@ -217,9 +217,9 @@ void InstrumentTemplate::read(QDomElement e)
             QString val(e.text());
             int i = val.toInt();
 
-            if (tag == "name")
-                  name = Xml::htmlToString(e);
-            else if (tag == "short-name")
+            if (tag == "name" || tag == "longName")               // "name" is obsolete
+                  longName = Xml::htmlToString(e);
+            else if (tag == "short-name" || tag == "shortName")   // "short-name" is obsolete
                   shortName = Xml::htmlToString(e);
             else if (tag == "description")
                   trackName = val;
@@ -307,7 +307,7 @@ void InstrumentTemplate::read(QDomElement e)
             channel[0].updateInitList();
             }
       if (trackName.isEmpty())
-            trackName = parseInstrName(name);
+            trackName = parseInstrName(longName);
       }
 
 //---------------------------------------------------------

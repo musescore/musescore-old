@@ -63,6 +63,15 @@ void NamedEventList::read(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   operator
+//---------------------------------------------------------
+
+bool MidiArticulation::operator==(const MidiArticulation& i) const
+      {
+      return (i.name == name) && (i.velocity == velocity) && (i.gateTime == gateTime);
+      }
+
+//---------------------------------------------------------
 //   Instrument
 //---------------------------------------------------------
 
@@ -70,16 +79,16 @@ Instrument::Instrument()
       {
       Channel a;
       a.name  = "normal";
-      channel.append(a);
+      _channel.append(a);
 
-      minPitchA          = 0;
-      maxPitchA          = 127;
-      minPitchP          = 0;
-      maxPitchP          = 127;
-      transposeDiatonic  = 0;
-      transposeChromatic = 0;
-      drumset            = 0;
-      useDrumset         = false;
+      _minPitchA          = 0;
+      _maxPitchA          = 127;
+      _minPitchP          = 0;
+      _maxPitchP          = 127;
+      _transposeDiatonic  = 0;
+      _transposeChromatic = 0;
+      _drumset            = 0;
+      _useDrumset         = false;
       }
 
 //---------------------------------------------------------
@@ -89,25 +98,31 @@ Instrument::Instrument()
 void Instrument::write(Xml& xml) const
       {
       xml.stag("Instrument");
-      if (minPitchP > 0)
-            xml.tag("minPitchP", minPitchP);
-      if (maxPitchP < 127)
-            xml.tag("maxPitchP", maxPitchP);
-      if (minPitchA > 0)
-            xml.tag("minPitchA", minPitchA);
-      if (maxPitchA < 127)
-            xml.tag("maxPitchA", maxPitchA);
-      if (transposeDiatonic)
-            xml.tag("transposeDiatonic", transposeDiatonic);
-      if (transposeChromatic)
-            xml.tag("transposeChromatic", transposeChromatic);
-      if (useDrumset) {
-            xml.tag("useDrumset", useDrumset);
-            drumset->save(xml);
+      if (_minPitchP > 0)
+            xml.tag("minPitchP", _minPitchP);
+      if (_maxPitchP < 127)
+            xml.tag("maxPitchP", _maxPitchP);
+      if (_minPitchA > 0)
+            xml.tag("minPitchA", _minPitchA);
+      if (_maxPitchA < 127)
+            xml.tag("maxPitchA", _maxPitchA);
+      if (_transposeDiatonic)
+            xml.tag("transposeDiatonic", _transposeDiatonic);
+      if (_transposeChromatic)
+            xml.tag("transposeChromatic", _transposeChromatic);
+      if (_useDrumset) {
+            xml.tag("useDrumset", _useDrumset);
+            _drumset->save(xml);
             }
-      foreach(const NamedEventList& a, midiActions)
+      if (!_trackName.isEmpty())
+            xml.tag("trackName", _trackName);
+      if (!_longName.isEmpty())
+            xml.tag("longName", _longName);
+      if (!_shortName.isEmpty())
+            xml.tag("shortName", _shortName);
+      foreach(const NamedEventList& a, _midiActions)
             a.write(xml, "MidiAction");
-      foreach(const Channel& a, channel)
+      foreach(const Channel& a, _channel)
             a.write(xml);
       xml.etag();
       }
@@ -126,66 +141,66 @@ void Instrument::read(QDomElement e)
       int pan    = 60;
       bool customDrumset = false;
 
-      channel.clear();
+      _channel.clear();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
 
             if (tag == "minPitch") {      // obsolete
-                  minPitchP = i;
-                  minPitchA = i;
+                  _minPitchP = i;
+                  _minPitchA = i;
                   }
             else if (tag == "maxPitch") {       // obsolete
-                  maxPitchP = i;
-                  maxPitchA = i;
+                  _maxPitchP = i;
+                  _maxPitchA = i;
                   }
             else if (tag == "minPitchA")
-                  minPitchA = i;
+                  _minPitchA = i;
             else if (tag == "minPitchP")
-                  minPitchP = i;
+                  _minPitchP = i;
             else if (tag == "maxPitchA")
-                  maxPitchA = i;
+                  _maxPitchA = i;
             else if (tag == "maxPitchP")
-                  maxPitchP = i;
+                  _maxPitchP = i;
             else if (tag == "transposition") {    // obsolete
-                  transposeChromatic = i;
-                  transposeDiatonic = chromatic2diatonic(i);
+                  _transposeChromatic = i;
+                  _transposeDiatonic = chromatic2diatonic(i);
                   }
             else if (tag == "transposeChromatic")
-                  transposeChromatic = i;
+                  _transposeChromatic = i;
             else if (tag == "transposeDiatonic")
-                  transposeDiatonic = i;
+                  _transposeDiatonic = i;
             else if (tag == "useDrumset") {
-                  useDrumset = i;
-                  if (useDrumset)
-                        drumset = new Drumset(*smDrumset);
+                  _useDrumset = i;
+                  if (_useDrumset)
+                        _drumset = new Drumset(*smDrumset);
                   }
             else if (tag == "Drum") {
                   // if we see on of this tags, a custom drumset will
                   // be created
-                  if (drumset == 0)
-                        drumset = new Drumset(*smDrumset);
+                  if (_drumset == 0)
+                        _drumset = new Drumset(*smDrumset);
                   if (!customDrumset) {
-                        drumset->clear();
+                        _drumset->clear();
                         customDrumset = true;
                         }
-                  drumset->load(e);
+                  _drumset->load(e);
                   }
             else if (tag == "MidiAction") {
                   NamedEventList a;
                   a.read(e);
-                  midiActions.append(a);
+                  _midiActions.append(a);
                   }
             else if (tag == "Articulation") {
                   MidiArticulation a;
                   a.read(e);
-                  articulation.append(a);
+                  _articulation.append(a);
                   }
             else if (tag == "Channel" || tag == "channel") {
                   Channel a;
                   a.read(e);
-                  channel.append(a);
+                  _channel.append(a);
                   }
             else if (tag == "chorus")     // obsolete
                   chorus = i;
@@ -202,7 +217,7 @@ void Instrument::read(QDomElement e)
             else
                   domError(e);
             }
-      if (channel.isEmpty()) {      // for backward compatibility
+      if (_channel.isEmpty()) {      // for backward compatibility
             Channel a;
             a.chorus  = chorus;
             a.reverb  = reverb;
@@ -211,12 +226,12 @@ void Instrument::read(QDomElement e)
             a.bank    = bank;
             a.volume  = volume;
             a.pan     = pan;
-            channel.append(a);
+            _channel.append(a);
             }
-      if (useDrumset) {
-            if (channel[0].bank == 0)
-                  channel[0].bank = 128;
-            channel[0].updateInitList();
+      if (_useDrumset) {
+            if (_channel[0].bank == 0)
+                  _channel[0].bank = 128;
+            _channel[0].updateInitList();
             }
       }
 
@@ -226,7 +241,7 @@ void Instrument::read(QDomElement e)
 
 NamedEventList* Instrument::midiAction(const QString& s) const
       {
-      foreach(const NamedEventList& a, midiActions) {
+      foreach(const NamedEventList& a, _midiActions) {
             if (s == a.name)
                   return const_cast<NamedEventList*>(&a);
             }
@@ -390,7 +405,7 @@ void Channel::updateInitList() const
 int Instrument::channelIdx(const QString& s) const
       {
       int idx = 0;
-      foreach(const Channel& a, channel) {
+      foreach(const Channel& a, _channel) {
             if (a.name.isEmpty() && s == "normal")
                   return idx;
             if (s == a.name)
@@ -436,7 +451,7 @@ void MidiArticulation::read(QDomElement e)
 
 void Instrument::updateVelocity(int* velocity, int channelIdx, const QString& name)
       {
-      const Channel& c = channel[channelIdx];
+      const Channel& c = _channel[channelIdx];
       foreach(const MidiArticulation& a, c.articulation) {
             if (a.name == name) {
                   *velocity = *velocity * a.velocity / 100;
@@ -444,7 +459,7 @@ printf("UpdateVelocity: found channel data\n");
                   return;
                   }
             }
-      foreach(const MidiArticulation& a, articulation) {
+      foreach(const MidiArticulation& a, _articulation) {
             if (a.name == name) {
                   *velocity = *velocity * a.velocity / 100;
 printf("UpdateVelocity: found instrument data\n");
@@ -459,15 +474,39 @@ printf("UpdateVelocity: found instrument data\n");
 
 bool Instrument::operator==(const Instrument& i) const
       {
-      return i.minPitchA == minPitchA
-         &&  i.maxPitchA == maxPitchA
-         &&  i.minPitchP == minPitchP
-         &&  i.maxPitchP == maxPitchP
-         &&  i.useDrumset == useDrumset
-         &&  i.midiActions == midiActions
-         &&  i.channel == channel
-//         &&  i.articulation == articulation
-         &&  i.transposeDiatonic == transposeDiatonic
-         &&  i.transposeChromatic == transposeChromatic
+      return i._minPitchA == _minPitchA
+         &&  i._maxPitchA == _maxPitchA
+         &&  i._minPitchP == _minPitchP
+         &&  i._maxPitchP == _maxPitchP
+         &&  i._useDrumset == _useDrumset
+         &&  i._midiActions == _midiActions
+         &&  i._channel == _channel
+         &&  i._articulation == _articulation
+         &&  i._transposeDiatonic == _transposeDiatonic
+         &&  i._transposeChromatic == _transposeChromatic
          ;
       }
+
+//---------------------------------------------------------
+//   setUseDrumset
+//---------------------------------------------------------
+
+void Instrument::setUseDrumset(bool val)
+      {
+      _useDrumset = val;
+      if (val && _drumset == 0)
+            _drumset = new Drumset(*smDrumset);
+      }
+
+//---------------------------------------------------------
+//   setDrumset
+//---------------------------------------------------------
+
+void Instrument::setDrumset(Drumset* ds)
+      {
+      delete _drumset;
+      _drumset = ds;
+      if (_drumset)
+            _useDrumset = _drumset != 0;
+      }
+

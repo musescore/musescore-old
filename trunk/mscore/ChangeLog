@@ -1,3 +1,6 @@
+19.feb (ws)
+      - script interface chords: add "type" property to distinguish between normal and grace notes
+      - expose grace notes in script cursor interface
 17.feb (lv)
       - updated MusicXML testfiles
        (ws)

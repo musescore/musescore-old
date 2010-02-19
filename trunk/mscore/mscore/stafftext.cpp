@@ -106,15 +106,14 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
       staffText = st;
 
       Part* part = st->staff()->part();
-      Instrument* i = part->instrument();
-      foreach(const Channel& a, i->channel) {
+      foreach(const Channel& a, part->channel()) {
             if (a.name.isEmpty())
                   channelList->addItem(tr("normal"));
             else
                   channelList->addItem(a.name);
             }
 
-      foreach(const NamedEventList& e, i->midiActions)
+      foreach(const NamedEventList& e, part->midiActions())
             midiActionList->addItem(e.name);
 
       channel->setChecked(!st->channelName().isEmpty());

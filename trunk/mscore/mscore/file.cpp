@@ -680,14 +680,13 @@ void MuseScore::newFile()
                         s->add(ts);
                         Staff* staff = score->staff(staffIdx);
                         Part* part = staff->part();
-                        Instrument* instrument = part->instrument();
-                        if (!instrument->useDrumset) {
+                        if (!part->useDrumset()) {
                               //
                               // transpose key
                               //
                               KeySigEvent nKey = ks;
-                              if (instrument->transposeChromatic && !newWizard->useTemplate()) {
-                                    int diff = -instrument->transposeChromatic;
+                              if (part->transposeChromatic() && !newWizard->useTemplate()) {
+                                    int diff = -part->transposeChromatic();
                                     nKey.accidentalType = transposeKey(nKey.accidentalType, diff);
                                     }
                               if (nKey.accidentalType) {

@@ -55,6 +55,7 @@ struct MidiArticulation {
       void read(QDomElement);
 
       MidiArticulation() {}
+      bool operator==(const MidiArticulation& i) const;
       };
 
 //---------------------------------------------------------
@@ -99,17 +100,21 @@ struct Channel {
 //---------------------------------------------------------
 
 struct Instrument {
-      char minPitchA, maxPitchA, minPitchP, maxPitchP;
-      char transposeDiatonic;
-      char transposeChromatic;
+      QString _trackName;           ///< used in tracklist
+      QString _longName;
+      QString _shortName;
+      char _minPitchA, _maxPitchA, _minPitchP, _maxPitchP;
+      char _transposeDiatonic;
+      char _transposeChromatic;
 
-      bool useDrumset;
-      Drumset* drumset;
+      bool _useDrumset;
+      Drumset* _drumset;
 
-      QList<NamedEventList> midiActions;
-      QList<Channel> channel;      // at least one entry
-      QList<MidiArticulation> articulation;
+      QList<NamedEventList> _midiActions;
+      QList<MidiArticulation> _articulation;
+      QList<Channel> _channel;      // at least one entry
 
+   public:
       Instrument();
       void read(QDomElement);
       void write(Xml& xml) const;
@@ -118,6 +123,43 @@ struct Instrument {
       void updateVelocity(int* velocity, int channel, const QString& name);
 
       bool operator==(const Instrument&) const;
+
+      int minPitchP() const                    { return _minPitchP;  }
+      int maxPitchP() const                    { return _maxPitchP;  }
+      int minPitchA() const                    { return _minPitchA;  }
+      int maxPitchA() const                    { return _maxPitchA;  }
+      void setMinPitchP(int v)                 { _minPitchP = v;     }
+      void setMaxPitchP(int v)                 { _maxPitchP = v;     }
+      void setMinPitchA(int v)                 { _minPitchA = v;     }
+      void setMaxPitchA(int v)                 { _maxPitchA = v;     }
+      int transposeChromatic() const           { return _transposeChromatic; }
+      int transposeDiatonic() const            { return _transposeDiatonic; }
+      void setTransposeChromatic(int v)        { _transposeChromatic = v; }
+      void setTransposeDiatonic(int v)         { _transposeDiatonic = v; }
+
+      QString trackName() const                { return _trackName;  }
+      void setTrackName(const QString& s)      { _trackName = s; }
+      QString longName() const                 { return _longName; }
+      QString shortName() const                { return _shortName; }
+      void setLongName(const QString& s)       { _longName = s; }
+      void setShortName(const QString& s)      { _shortName = s; }
+
+      void setDrumset(Drumset* ds);
+      Drumset* drumset() const                 { return _drumset;    }
+      bool useDrumset() const                  { return _useDrumset; }
+      void setUseDrumset(bool val);
+      void setAmateurPitchRange(int a, int b)       { _minPitchA = a; _maxPitchA = b; }
+      void setProfessionalPitchRange(int a, int b)  { _minPitchP = a; _maxPitchP = b; }
+      Channel& channel(int idx)                     { return _channel[idx]; }
+      const Channel& channel(int idx) const         { return _channel[idx]; }
+
+      const QList<NamedEventList>& midiActions() const       { return _midiActions; }
+      const QList<MidiArticulation>& articulation() const    { return _articulation; }
+      const QList<Channel>& channel() const                  { return _channel; }
+
+      void setMidiActions(const QList<NamedEventList>& l)    { _midiActions = l;  }
+      void setArticulation(const QList<MidiArticulation>& l) { _articulation = l; }
+      void setChannel(const QList<Channel>& l)               { _channel = l;      }
       };
 
 #endif

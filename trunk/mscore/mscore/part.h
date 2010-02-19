@@ -35,14 +35,11 @@ class InstrumentTemplate;
 //   Part
 //---------------------------------------------------------
 
-class Part {
+class Part : public Instrument {
       Score* _score;
-      QString _trackName;           ///< used in tracklist
 
       TextC* _longName;
       TextC* _shortName;
-
-      Instrument _instrument;
       QList<Staff*> _staves;
       QString _id;                  ///< used for MusicXml import
       bool _show;                   ///< show part in partitur if true
@@ -60,8 +57,6 @@ class Part {
       Staff* staff(int idx) const;
       void setId(const QString& s)              { _id = s; }
       QString id() const                        { return _id; }
-      QString trackName() const                 { return _trackName;  }
-      void setTrackName(const QString& s)       { _trackName = s; }
 
       QString shortNameHtml() const;
       QString longNameHtml()  const;
@@ -79,33 +74,6 @@ class Part {
 
       void setStaves(int);
 
-      void setAmateurPitchRange(int a, int b)  {
-            _instrument.minPitchA = a;
-            _instrument.maxPitchA = b;
-            }
-      void setProfessionalPitchRange(int a, int b)  {
-            _instrument.minPitchP = a;
-            _instrument.maxPitchP = b;
-            }
-
-      void setDrumset(Drumset* ds)             { _instrument.drumset = ds;      }
-      Drumset* drumset() const                 { return _instrument.drumset;    }
-      bool useDrumset() const                  { return _instrument.useDrumset; }
-      void setUseDrumset(bool val);
-
-      int minPitchP() const                    { return _instrument.minPitchP;  }
-      int maxPitchP() const                    { return _instrument.maxPitchP;  }
-      int minPitchA() const                    { return _instrument.minPitchA;  }
-      int maxPitchA() const                    { return _instrument.maxPitchA;  }
-      void setMinPitchP(int v)                 { _instrument.minPitchP = v;     }
-      void setMaxPitchP(int v)                 { _instrument.maxPitchP = v;     }
-      void setMinPitchA(int v)                 { _instrument.minPitchA = v;     }
-      void setMaxPitchA(int v)                 { _instrument.maxPitchA = v;     }
-      int transposeChromatic() const           { return _instrument.transposeChromatic; }
-      int transposeDiatonic() const            { return _instrument.transposeDiatonic; }
-      void setTransposeChromatic(int v)        { _instrument.transposeChromatic = v; }
-      void setTransposeDiatonic(int v)         { _instrument.transposeDiatonic = v; }
-
       int volume() const;
       int reverb() const;
       int chorus() const;
@@ -118,12 +86,10 @@ class Part {
 
       void insertStaff(Staff*);
       void removeStaff(Staff*);
-      const Instrument* instrument() const     { return &_instrument; }
-      Instrument* instrument()                 { return &_instrument; }
-      void setInstrument(const Instrument& i)  { _instrument = i;     }
       bool show() const                        { return _show;        }
       void setShow(bool val);
       Score* score() const                     { return _score; }
+      void setInstrument(const Instrument&);
       };
 
 #endif

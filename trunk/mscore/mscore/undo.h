@@ -1210,10 +1210,10 @@ class ChangeMStaffProperties : public UndoCommand {
 class ChangeMeasureProperties : public UndoCommand {
       Measure* measure;
       bool breakMM;
-      bool irregular;
       int repeatCount;
       double stretch;
       int noOffset;
+      bool irregular;
 
       void flip();
    public:
