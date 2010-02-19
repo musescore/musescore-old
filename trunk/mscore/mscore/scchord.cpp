@@ -45,7 +45,7 @@ static const QScriptValue::PropertyFlags flags_chord[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly,
       QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScripValue::ReadOnly
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly
       };
 
 ScriptInterface chordInterface = {
