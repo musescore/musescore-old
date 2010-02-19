@@ -238,9 +238,8 @@ void PartEdit::soloToggled(bool val)
       channel->solo = val;
       if (val) {
             foreach(Part* part, *part->score()->parts()) {
-                  Instrument* instr = part->instrument();
-                  for (int i = 0; i < instr->channel.size(); ++i) {
-                        Channel* a = &instr->channel[i];
+                  for (int i = 0; i < part->channel().size(); ++i) {
+                        Channel* a = &part->channel(i);
                         a->soloMute = channel == a;
                         a->solo     = channel != a;
                         }
@@ -248,9 +247,8 @@ void PartEdit::soloToggled(bool val)
             }
       else {
             foreach(Part* part, *part->score()->parts()) {
-                  Instrument* instr = part->instrument();
-                  for (int i = 0; i < instr->channel.size(); ++i) {
-                        Channel* a = &instr->channel[i];
+                  for (int i = 0; i < part->channel().size(); ++i) {
+                        Channel* a = &part->channel(i);
                         a->soloMute = false;
                         a->solo = false;
                         }

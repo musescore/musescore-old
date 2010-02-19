@@ -26,7 +26,7 @@
 
 class Slur;
 class ChordRest;
-struct Drumset;
+class Drumset;
 class Segment;
 
 //---------------------------------------------------------

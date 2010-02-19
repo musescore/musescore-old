@@ -1458,7 +1458,7 @@ void ExportLy::handlePreInstruction(Element * el)
 		    c=tekst->getText();
 		    dec = c.toInt(&ok, 10);
 		    if (ok) rehearsalnumbers=true;
-		    Element* elm;
+		    Element* elm = 0;
     		    foundJoM = checkJumpOrMarker(measurenumber, true, elm); //true means at the start of measure.
 		      if (foundJoM)
 			writeCombinedMarker(foundJoM,elm);
@@ -4024,7 +4024,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
       if ((pickup) and (measurenumber==1) and (voice == 0))
 	{
 	  int punkt=0;
-	  int partial=getLen(barlen, &punkt);
+	  // int partial=getLen(barlen, &punkt);
 	  out << "\\partial ";
 	  writeLen(barlen);
 	  out << " \n";

@@ -41,16 +41,16 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       setupUi(this);
 
       Part* part = staff->part();
-      instrument = *(part->instrument());
+      instrument = *part;
 
       lines->setValue(staff->lines());
       small->setChecked(staff->small());
 
-      useDrumset->setChecked(instrument.useDrumset);
-      editDrumset->setEnabled(instrument.useDrumset);
+      useDrumset->setChecked(instrument.useDrumset());
+      editDrumset->setEnabled(instrument.useDrumset());
 
-      int diatonic  = instrument.transposeDiatonic;
-      int chromatic = instrument.transposeChromatic;
+      int diatonic  = instrument.transposeDiatonic();
+      int chromatic = instrument.transposeChromatic();
 
       bool upFlag = true;
       if (chromatic < 0 || diatonic < 0) {
@@ -72,10 +72,10 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       slashStyle->setChecked(staff->slashStyle());
       invisible->setChecked(staff->invisible());
 
-      aPitchMin->setValue(instrument.minPitchA);
-      aPitchMax->setValue(instrument.maxPitchA);
-      pPitchMin->setValue(instrument.minPitchP);
-      pPitchMax->setValue(instrument.maxPitchP);
+      aPitchMin->setValue(instrument.minPitchA());
+      aPitchMax->setValue(instrument.maxPitchA());
+      pPitchMin->setValue(instrument.minPitchP());
+      pPitchMax->setValue(instrument.maxPitchP());
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
@@ -117,16 +117,16 @@ void EditStaff::apply()
       Score* score  = staff->score();
       Part* part    = staff->part();
 
-      instrument.useDrumset = useDrumset->isChecked();
+      instrument.setUseDrumset(useDrumset->isChecked());
       int interval  = iList->currentIndex();
       bool upFlag   = up->isChecked();
 
-      instrument.transposeDiatonic  = intervalList[interval].steps;
-      instrument.transposeChromatic = intervalList[interval].semitones;
+      instrument.setTransposeDiatonic(intervalList[interval].steps);
+      instrument.setTransposeChromatic(intervalList[interval].semitones);
 
       if (!upFlag) {
-            instrument.transposeDiatonic  = -instrument.transposeDiatonic;
-            instrument.transposeChromatic = -instrument.transposeChromatic;
+            instrument.setTransposeDiatonic(-instrument.transposeDiatonic());
+            instrument.setTransposeChromatic(-instrument.transposeChromatic());
             }
       const QTextDocument* ln = longName->document();
       const QTextDocument* sn = shortName->document();
@@ -134,12 +134,12 @@ void EditStaff::apply()
       bool snd = sn->toHtml() != part->shortName()->doc()->toHtml();
       bool lnd = ln->toHtml() != part->longName()->doc()->toHtml();
 
-      instrument.minPitchA = aPitchMin->value();
-      instrument.maxPitchA = aPitchMax->value();
-      instrument.minPitchP = pPitchMin->value();
-      instrument.maxPitchP = pPitchMax->value();
+      instrument.setMinPitchA(aPitchMin->value());
+      instrument.setMaxPitchA(aPitchMax->value());
+      instrument.setMinPitchP(pPitchMin->value());
+      instrument.setMaxPitchP(pPitchMax->value());
 
-      if (snd || lnd || !(instrument == *part->instrument())) {
+      if (snd || lnd || !(instrument == *part)) {
             score->undo()->push(new ChangePart(part, ln, sn, instrument));
             score->rebuildMidiMapping();
             seq->initInstruments();
@@ -184,7 +184,7 @@ void EditStaff::showInstrumentDialog()
             pPitchMax->setValue(t->maxPitchP);
 
             shortName->setHtml(t->shortName);
-            longName->setHtml(t->name);
+            longName->setHtml(t->longName);
 
             int diatonic  = t->transposeDiatonic;
             int chromatic = t->transposeChromatic;
@@ -204,15 +204,14 @@ void EditStaff::showInstrumentDialog()
             up->setChecked(upFlag);
             down->setChecked(!upFlag);
 
-            instrument.useDrumset = t->useDrumset;
             if (t->useDrumset) {
-                  if (instrument.drumset)
-                        delete instrument.drumset;
-                  instrument.drumset = new Drumset(*((t->drumset) ? t->drumset : smDrumset));
+                  instrument.setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
                   }
-            instrument.midiActions  = t->midiActions;
-            instrument.articulation = t->articulation;
-            instrument.channel      = t->channel;
+            else
+                  instrument.setUseDrumset(false);
+            instrument.setMidiActions(t->midiActions);
+            instrument.setArticulation(t->articulation);
+            instrument.setChannel(t->channel);
             }
       }
 

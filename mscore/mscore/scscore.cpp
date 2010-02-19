@@ -355,7 +355,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                                  return qScriptValueFromValue(context->engine(), s);
                                  }
                             result = key.accidentalType;
-                            int tr =  st->part()->instrument()->transposeChromatic;
+                            int tr =  st->part()->transposeChromatic();
                             if (tr){
                                 result = transposeKey(key.accidentalType, tr);
                                 }

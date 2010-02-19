@@ -1184,14 +1184,13 @@ void ScoreView::setShadowNote(const QPointF& p)
       shadowNote->setVisible(true);
       Staff* staff      = score()->staff(pos.staffIdx);
       shadowNote->setMag(staff->mag());
-      Instrument* instr = staff->part()->instrument();
+      Part* instr       = staff->part();
       int noteheadGroup = 0;
       int line          = pos.line;
       int noteHead      = score()->inputState().duration().headType();
 
-
-      if (instr->useDrumset) {
-            Drumset* ds  = instr->drumset;
+      if (instr->useDrumset()) {
+            Drumset* ds  = instr->drumset();
             int pitch    = score()->inputState().drumNote;
             if (pitch >= 0 && ds->isValid(pitch)) {
                   line     = ds->line(pitch);
@@ -2819,9 +2818,9 @@ void ScoreView::select(QMouseEvent* ev)
             _score->select(curElement, st, dragStaff);
             if (mscore->playEnabled() && curElement && curElement->type() == NOTE) {
                   Note* note = static_cast<Note*>(curElement);
-                  Instrument* i = note->staff()->part()->instrument();
+                  Part* part = note->staff()->part();
                   int pitch = note->ppitch();
-                  seq->startNote(i->channel[note->subchannel()], pitch, 60, 1000, note->tuning());
+                  seq->startNote(part->channel(note->subchannel()), pitch, 60, 1000, note->tuning());
                   }
             }
       else

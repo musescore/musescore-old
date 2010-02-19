@@ -120,7 +120,7 @@ Objects
             Part part(int i)              part object at index i
             bool hasLyrics                true if a lyric element is found in the core
             bool hasHarmonies             true if a valid chordname is found
-            int keysig                    key signature at the beginning 
+            int keysig                    key signature at the beginning
                 -7 to 7 or undefined for custom signature
 
    Cursor
@@ -145,7 +145,7 @@ Objects
             add(Chord)
             add(Rest)
             measure()                     return the current measure
-            next()                        go to next segment
+            next()                        go to next chord/rest
             nextMeasure()                 go to first chord/rest of next measure
             time()            double      current score time in ms
             tick()            integer     current score tick
@@ -158,6 +158,13 @@ Objects
          Properties:
             tickLen     integer
             notes       integer (ro) number of notes in chord
+            type        integer (ro)      Note type
+                                          0 - NORMAL
+                                          1 - ACCIACCATURA
+                                          2 - APPOGGIATURA
+                                          3 - GRACE4
+                                          4 - GRACE16
+                                          5 - GRACE32
 
          Functions:
             topNote()

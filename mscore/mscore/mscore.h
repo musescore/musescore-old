@@ -56,7 +56,7 @@ class Staff;
 class ScoreView;
 class ScoreTab;
 class QScriptEngineDebugger;
-struct Drumset;
+class Drumset;
 class TextTools;
 class ScriptEngine;
 class KeyEditor;

@@ -183,11 +183,9 @@ void Palette::mousePressEvent(QMouseEvent* ev)
                   Chord* ch         = static_cast<Chord*>(cell->element);
                   Note* note        = ch->downNote();
 
-                  Instrument* instr = part->instrument();
-
                   int ticks   = preferences.defaultPlayDuration;
                   int pitch   = note->pitch();
-                  seq->startNote(instr->channel[0], pitch, 80, ticks, 0.0);
+                  seq->startNote(part->channel(0), pitch, 80, ticks, 0.0);
                   }
             }
       }

@@ -215,10 +215,8 @@ void Note::setPitch(int val)
       int pitchOffset = 0;
       if (score()) {
             Part* part = score()->part(staffIdx());
-            if (part) {
-                  Instrument* instr = part->instrument();
-                  pitchOffset   = score()->styleB(ST_concertPitch) ? 0 : instr->transposeChromatic;
-                  }
+            if (part)
+                  pitchOffset = score()->styleB(ST_concertPitch) ? 0 : part->transposeChromatic();
             }
       _ppitch = _pitch + pitchOffset;
       }
@@ -579,11 +577,11 @@ void Note::draw(QPainter& p) const
             // by coloring the note head
             //
             if (staff() && !selected() && !score()->printing() && preferences.warnPitchRange) {
-                  Instrument* in = staff()->part()->instrument();
+                  Part* in = staff()->part();
                   int i = ppitch();
-                  if (i < in->minPitchP || i > in->maxPitchP)
+                  if (i < in->minPitchP() || i > in->maxPitchP())
                         p.setPen(Qt::red);
-                  else if (i < in->minPitchA || i > in->maxPitchA)
+                  else if (i < in->minPitchA() || i > in->maxPitchA())
                         p.setPen(Qt::darkYellow);
                   }
             symbols[noteHead()].draw(p, magS());

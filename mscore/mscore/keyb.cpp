@@ -55,7 +55,7 @@ void ScoreView::editKey(QKeyEvent* ev)
       Element* e = editObject;
 	  if(!e)
 			return;
-	  
+
       if (e->type() == LYRICS) {
             int found = false;
 #ifdef Q_WS_MAC
@@ -330,13 +330,13 @@ void Score::setPadState(Element* e)
             _is.beamMode = BEAM_INVALID;
             }
       if (e->type() == NOTE || e->type() == REST) {
-            Instrument* instr   = e->staff()->part()->instrument();
-            if (instr->useDrumset) {
+            Part* instr   = e->staff()->part();
+            if (instr->useDrumset()) {
                   if (e->type() == NOTE)
                         _is.drumNote = static_cast<Note*>(e)->pitch();
                   else
                         _is.drumNote = -1;
-                  _is.drumset  = instr->drumset;
+                  _is.drumset  = instr->drumset();
                    }
             }
       setPadState();

@@ -78,7 +78,7 @@ void Score::updateChannel()
                               QString an(st->channelName());
                               if (an.isEmpty())
                                     continue;
-                              int a = part->instrument()->channelIdx(an);
+                              int a = part->channelIdx(an);
                               if (a != -1) {
                                     ARec ar;
                                     ar.tick = st->tick();
@@ -166,12 +166,12 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
 
       int arpeggioOffset = 0;
       static const int arpeggioNoteDistance = Duration(Duration::V_32ND).ticks();
-      if (arpeggio && chord->notes().size() * arpeggioNoteDistance <= unsigned(len))
+      if (arpeggio && chord->notes().size() * arpeggioNoteDistance <= len)
             arpeggioOffset = arpeggioNoteDistance;
 
       int i = 0;
       foreach(Note* note, chord->notes()) {
-            int channel = instr->channel[note->subchannel()].channel;
+            int channel = instr->channel(note->subchannel()).channel;
             collectNote(events, channel, note, tick + i * arpeggioOffset, len);
             }
       }
@@ -245,7 +245,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
       // for the purpose of knowing whether to find the playPos after repeats
       bool playExpandRepeats = getAction("repeat")->isChecked();
-      Instrument* instr = part(staffIdx)->instrument();
+      Part* instr = part(staffIdx);
 
       for (int voice = 0; voice < VOICES; ++voice) {
             int track = staffIdx * VOICES + voice;
@@ -334,7 +334,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
                   int arpeggioOffset = 0;
                   static const int arpeggioNoteDistance = Duration(Duration::V_32ND).ticks();
-                  if (arpeggio && chord->notes().size() * arpeggioNoteDistance <= unsigned(len))
+                  if (arpeggio && chord->notes().size() * arpeggioNoteDistance <= len)
                         arpeggioOffset = arpeggioNoteDistance;
 
                   int i = 0;
@@ -369,7 +369,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                   // -- end swing -- //
 
                   foreach(Note* note, chord->notes()) {
-                        int channel = instr->channel[note->subchannel()].channel;
+                        int channel = instr->channel(note->subchannel()).channel;
 
                         int tickLen = note->chord()->tickLen();
                         int len     = note->chord()->tickLen();
@@ -585,8 +585,8 @@ void Score::fixPpitch()
             }
 
       for (int staffIdx = 0; staffIdx < ns; ++staffIdx) {
-            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instrument()->transposeChromatic;
-            Instrument* instr = part(staffIdx)->instrument();
+            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->transposeChromatic();
+            Instrument* instr = part(staffIdx);
 
             for (Segment* seg = firstSegment(); seg; seg = seg->next1()) {
                   if (seg->subtype() != Segment::SegChordRest && seg->subtype() != Segment::SegGrace)

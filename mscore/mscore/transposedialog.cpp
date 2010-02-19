@@ -263,9 +263,9 @@ void Score::cmdConcertPitchChanged(bool flag)
       _undo->push(new ChangeConcertPitch(this, flag));
 
       foreach(Staff* staff, _staves) {
-            Instrument* instr = staff->part()->instrument();
-            int transposeDiatonic = instr->transposeDiatonic;
-            int transposeChromatic = instr->transposeChromatic;
+            Part* instr = staff->part();
+            int transposeDiatonic = instr->transposeDiatonic();
+            int transposeChromatic = instr->transposeChromatic();
             if (transposeChromatic == 0 && transposeDiatonic == 0)
                   continue;
             if (!flag) {

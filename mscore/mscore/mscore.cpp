@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -323,7 +323,7 @@ void MuseScore::preferencesChanged()
 MuseScore::MuseScore()
    : QMainWindow()
       {
-      _sstate = STATE_DISABLED;
+      _sstate = STATE_INIT;
       setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
 
@@ -1952,6 +1952,7 @@ int main(int argc, char* av[])
             }
       mscore->loadPlugins();
       mscore->writeSessionFile(false);
+      mscore->changeState(STATE_DISABLED);   // DEBUG
       mscore->show();
       if (sc)
             sc->finish(mscore);
@@ -2201,6 +2202,7 @@ void MuseScore::clipboardChanged()
 
 void MuseScore::changeState(ScoreState val)
       {
+printf("changeState %d->%d\n", _sstate, val);
       if (_sstate == val)
             return;
       if (debugMode)
@@ -2458,8 +2460,7 @@ void MuseScore::play(Element* e, int pitch) const
       if (mscore->playEnabled() && e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
             Part* part = note->staff()->part();
-            Instrument* i = part->instrument();
-            seq->startNote(i->channel[note->subchannel()], pitch, 80,
+            seq->startNote(part->channel(note->subchannel()), pitch, 80,
                preferences.defaultPlayDuration, note->tuning());
             }
       }

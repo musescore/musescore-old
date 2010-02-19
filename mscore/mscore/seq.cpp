@@ -471,8 +471,8 @@ void Seq::playEvent(const Event* event, unsigned framePos)
             Note* note = event->note();
 
             if (note) {
-                  Instrument* instr = note->staff()->part()->instrument();
-                  const Channel& a = instr->channel[note->subchannel()];
+                  Part* instr = note->staff()->part();
+                  const Channel& a = instr->channel(note->subchannel());
                   mute = a.mute || a.soloMute;
                   }
             else
@@ -632,9 +632,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 void Seq::initInstruments()
       {
       foreach(const Part* part, *cs->parts()) {
-            const Instrument* instr = part->instrument();
-
-            foreach(const Channel& a, instr->channel) {
+            foreach(const Channel& a, part->channel()) {
                   foreach(Event* e, a.init) {
                         if (e == 0)
                               continue;
