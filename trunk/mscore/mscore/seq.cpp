@@ -113,7 +113,7 @@ Seq::~Seq()
 
 void Seq::setScoreView(ScoreView* v)
       {
-      if (cv!=v && cs) {
+      if (cv !=v && cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             cs = v ? v->score() : 0;
             stop();
@@ -314,10 +314,8 @@ bool Seq::canStart()
 
 void Seq::start()
       {
-      if (events.empty() || cs->playlistDirty() || playlistChanged) {
-printf("collectEvents\n");
+      if (events.empty() || cs->playlistDirty() || playlistChanged)
             collectEvents();
-            }
       seek(cs->playPos());
       driver->startTransport();
       }
@@ -1058,7 +1056,8 @@ const QList<MidiPatch*>& Seq::getPatchInfo() const
 
 void Seq::midiInputReady()
       {
-      if (driver && cs)
+//      if (driver && cs)
+      if (driver)
             driver->midiRead();
       }
 

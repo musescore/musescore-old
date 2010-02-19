@@ -2202,7 +2202,6 @@ void MuseScore::clipboardChanged()
 
 void MuseScore::changeState(ScoreState val)
       {
-printf("changeState %d->%d\n", _sstate, val);
       if (_sstate == val)
             return;
       if (debugMode)
