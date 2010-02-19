@@ -1004,7 +1004,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">StaveMove:</translation>
     </message>
 </context>
 <context>
@@ -1084,7 +1084,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">stave</translation>
     </message>
     <message>
         <source>part</source>
@@ -1180,7 +1180,7 @@ failed: </source>
     </message>
     <message>
         <source>Staff Line:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave Line:</translation>
     </message>
     <message>
         <source>Stem Direction:</source>
@@ -1302,11 +1302,11 @@ failed: </source>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Edit Stave/Part Properties</translation>
     </message>
     <message>
         <source>Staff Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave Properties</translation>
     </message>
     <message>
         <source>Lines:</source>
@@ -1489,11 +1489,11 @@ failed: </source>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">TopStave</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">BottomStave</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -1604,7 +1604,7 @@ failed: </source>
     </message>
     <message>
         <source>all staffs</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">all staves</translation>
     </message>
     <message>
         <source>every system</source>
@@ -1713,7 +1713,7 @@ failed: </source>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Barline at start of single stave</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
@@ -1729,7 +1729,7 @@ failed: </source>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave distance</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
@@ -1857,7 +1857,7 @@ failed: </source>
     </message>
     <message>
         <source>Small staff size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Small stave size</translation>
     </message>
     <message>
         <source>Small note size</source>
@@ -1935,7 +1935,7 @@ failed: </source>
     </message>
     <message>
         <source>Color...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Colour...</translation>
     </message>
 </context>
 <context>
@@ -2339,7 +2339,7 @@ failed: </source>
     </message>
     <message>
         <source>Staff %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave %1</translation>
     </message>
     <message>
         <source>Instrument List</source>
@@ -2418,7 +2418,7 @@ failed: </source>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Colour:</translation>
     </message>
     <message>
         <source>Line</source>
@@ -2685,7 +2685,7 @@ failed: </source>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave</translation>
     </message>
     <message>
         <source>Visible</source>
@@ -3145,7 +3145,7 @@ failed: </source>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave</translation>
     </message>
     <message>
         <source>Chordname</source>
@@ -3473,7 +3473,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave spacer</translation>
     </message>
     <message>
         <source>Start beam</source>
@@ -3986,7 +3986,7 @@ Restore session?</source>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: &lt;%1&gt; Stave: %2</translation>
     </message>
     <message>
         <source>toolbar1</source>
@@ -4215,7 +4215,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Colour</translation>
     </message>
     <message>
         <source>Notesheet</source>
@@ -4243,7 +4243,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Colours</translation>
     </message>
     <message>
         <source>Note Entry</source>
@@ -4523,7 +4523,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Score element colours</translation>
     </message>
     <message>
         <source>Default foreground</source>
@@ -4603,7 +4603,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Colour notes outside of usable pitch range</translation>
     </message>
     <message>
         <source>Export MIDI</source>
@@ -5117,7 +5117,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
@@ -5133,11 +5133,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave Prperties</translation>
     </message>
     <message>
         <source>Split Staff...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Split Stave:</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -5211,7 +5211,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>same staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">same stave</translation>
     </message>
     <message>
         <source>same voice</source>
@@ -5377,7 +5377,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Staff:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave:</translation>
     </message>
     <message>
         <source>Voice:</source>
@@ -5437,11 +5437,11 @@ Try saving to a different location.</source>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Edit Stave/Part Properties</translation>
     </message>
     <message>
         <source>Split Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Split Stave</translation>
     </message>
     <message>
         <source>Split Point</source>
@@ -5452,7 +5452,7 @@ Try saving to a different location.</source>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave Text Properties...</translation>
     </message>
 </context>
 <context>
@@ -5463,7 +5463,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore: Stave Text Properties</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -5850,11 +5850,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Colour:</translation>
     </message>
     <message>
         <source>text color</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">text colour</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -5970,7 +5970,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>frame color</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">frame colour</translation>
     </message>
     <message>
         <source>System Flag</source>
@@ -6984,11 +6984,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">add stave above to selection</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">add stave below to selection</translation>
     </message>
     <message>
         <source>page-prev</source>
@@ -7368,11 +7368,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Staff Text</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Add Stave Text</translation>
     </message>
     <message>
         <source>Staff Text</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stave Text</translation>
     </message>
     <message>
         <source>Add Text</source>
@@ -7732,11 +7732,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Select all similar emements in same stave</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">All Similar Elements in Same Stave</translation>
     </message>
     <message>
         <source>Synthesizer</source>
@@ -8521,7 +8521,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffText</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">StaveText</translation>
     </message>
     <message>
         <source>Harmony</source>
@@ -8581,7 +8581,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffLines</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">StaveLines</translation>
     </message>
     <message>
         <source>Cursor</source>
@@ -8653,7 +8653,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffList</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">StaveList</translation>
     </message>
     <message>
         <source>MeasureList</source>
