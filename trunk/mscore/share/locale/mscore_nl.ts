@@ -853,7 +853,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>extra spatie rechts</translation>
+        <translation>extra ruimte achteraan</translation>
     </message>
     <message>
         <source>offtime</source>
@@ -901,7 +901,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>extra spatie links </translation>
+        <translation>extra ruimte vooraan </translation>
     </message>
     <message>
         <source>note head positon </source>
@@ -1211,7 +1211,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -1219,7 +1219,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Onder</translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1519,7 +1519,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>sp</source>
@@ -1531,7 +1531,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Onder</translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <source>Page</source>
@@ -1575,7 +1575,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation>Creëer courtesy-sleutels</translation>
+        <translation>Creëer herinnerings-voortekens</translation>
     </message>
     <message>
         <source>every system</source>
@@ -1751,7 +1751,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation>Creëer hulp-maattekens</translation>
+        <translation>Creëer hulp-maatsoorten</translation>
     </message>
     <message>
         <source>Minimum length</source>
@@ -1904,7 +1904,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Create time signatures</source>
-        <translation>Creëer Maattekens</translation>
+        <translation>Creëer Maatsoorten</translation>
     </message>
     <message>
         <source>Beam width</source>
@@ -2203,7 +2203,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2211,7 +2211,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Onder</translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -2265,7 +2265,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2277,7 +2277,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Onder</translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <source>Form</source>
@@ -2419,7 +2419,7 @@ mislukt: </translation>
     <name>LinePropertiesDialog</name>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>sp</source>
@@ -4670,7 +4670,7 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
     </message>
     <message>
         <source>Remember last connection(s)</source>
-        <translation>Onhouden laatste verbinding</translation>
+        <translation>Laatste verbinding onhouden</translation>
     </message>
     <message>
         <source>Update</source>
@@ -4876,7 +4876,7 @@ Selecteer één enkele noot of rust en probeer het opnieuw
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>extra spatie rechts</translation>
+        <translation>extra ruimte achteraan</translation>
     </message>
     <message>
         <source>Rest Properties</source>
@@ -4888,7 +4888,7 @@ Selecteer één enkele noot of rust en probeer het opnieuw
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>extra spatie links </translation>
+        <translation>extra ruimte vooraan </translation>
     </message>
     <message>
         <source>sp</source>
@@ -5324,7 +5324,7 @@ mislukt: </translation>
     <name>ShowChordWidget</name>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -5332,7 +5332,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Onder</translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <source>begin 1/32</source>
@@ -6186,11 +6186,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Boven</translation>
+        <translation type="unfinished">Omhoog</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Onder</translation>
+        <translation type="unfinished">Omlaag</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -6648,7 +6648,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation>Boven</translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>Cut</source>
@@ -6672,7 +6672,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation>Onder</translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <source>Flat</source>
@@ -8335,7 +8335,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation/>
+        <translation>Bartók pizzicato</translation>
     </message>
     <message>
         <source>upprall</source>
@@ -9194,7 +9194,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation/>
+        <translation>Bartók pizzicato</translation>
     </message>
     <message>
         <source>ushortfermata</source>
@@ -9274,7 +9274,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up bow</source>
-        <translation/>
+        <translation>opstreek</translation>
     </message>
     <message>
         <source>down bow</source>

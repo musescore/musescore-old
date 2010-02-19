@@ -8207,7 +8207,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Timewise Delete</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Apagar no Tempo</translation>
     </message>
     <message>
         <source>Delete element and duration</source>

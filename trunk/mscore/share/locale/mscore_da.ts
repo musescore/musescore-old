@@ -68,14 +68,14 @@ p, li { white-space: pre-wrap; }
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>Betonings angivelser...</translation>
+        <translation>Artikulation egenskaber ...</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore: Betonings angivelser</translation>
+        <translation>MuseScore: Artikulation egenskaber</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -834,7 +834,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>sp</translation>
+        <translation>enh</translation>
     </message>
     <message>
         <source>additional trailing space</source>
@@ -1531,7 +1531,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Numbers</source>
-        <translation>Numre</translation>
+        <translation>Sidenummerering og takttal</translation>
     </message>
     <message>
         <source>Beams</source>
@@ -1551,7 +1551,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Betoninger, fortegn</translation>
+        <translation>Artikulation, ornamenteringer</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -1571,7 +1571,7 @@ fejl: </translation>
     </message>
     <message>
         <source>sp</source>
-        <translation>sp</translation>
+        <translation>enh</translation>
     </message>
     <message>
         <source>Page fill threshold:</source>
@@ -1603,11 +1603,11 @@ fejl: </translation>
     </message>
     <message>
         <source>spaces</source>
-        <translation>mellemrum</translation>
+        <translation>enheder</translation>
     </message>
     <message>
         <source>Page Numbers</source>
-        <translation>Side numre</translation>
+        <translation>Side nummerering</translation>
     </message>
     <message>
         <source>show first</source>
@@ -1619,7 +1619,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Measure Numbers</source>
-        <translation>Takt tal</translation>
+        <translation>Takttal</translation>
     </message>
     <message>
         <source>all staffs</source>
@@ -1692,7 +1692,7 @@ fejl: </translation>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation>sp</translation>
+        <translation>enh</translation>
     </message>
     <message>
         <source>shorten stems</source>
@@ -2427,7 +2427,7 @@ fejl: </translation>
     </message>
     <message>
         <source>sp</source>
-        <translation>sp</translation>
+        <translation>enh</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2710,7 +2710,7 @@ fejl: </translation>
     </message>
     <message>
         <source>add to measure number</source>
-        <translation>læg til takt tal</translation>
+        <translation>læg til takttal</translation>
     </message>
     <message>
         <source>layout stretch</source>
@@ -2942,7 +2942,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>Åben &amp;Sidste</translation>
+        <translation>Åben &amp;seneste</translation>
     </message>
     <message>
         <source>Parts...</source>
@@ -2966,7 +2966,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Add Interval</source>
-        <translation>Tilføj internval</translation>
+        <translation>Tilføj interval</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
@@ -3215,7 +3215,7 @@ fejl: </translation>
     <message>
         <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>Gem ændringer til nodeark "%1!
+        <translation>Gem ændringer til nodeark "%1"&#13;
 før lukning?</translation>
     </message>
     <message>
@@ -3296,7 +3296,7 @@ før lukning?</translation>
     </message>
     <message>
         <source>MuseScore: Accidentals</source>
-        <translation>MuseScore: fortegn</translation>
+        <translation>MuseScore: Fortegn</translation>
     </message>
     <message>
         <source>MuseScore: Dynamics</source>
@@ -4138,7 +4138,7 @@ Genskab denne session?</translation>
     </message>
     <message>
         <source>continue last session</source>
-        <translation>Fortsæt sidste job</translation>
+        <translation>fortsæt forrige session</translation>
     </message>
     <message>
         <source>start with new score</source>
@@ -4889,7 +4889,7 @@ Vælg venligst en node eller pause of prøv igen
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>sp</translation>
+        <translation>enh</translation>
     </message>
     <message>
         <source>additional trailing space</source>
@@ -5524,7 +5524,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation>System flag</translation>
+        <translation>System Flag</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -5787,7 +5787,7 @@ Prøv af gemme den et andet sted.</translation>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>sp</translation>
+        <translation>enh</translation>
     </message>
 </context>
 <context>
@@ -6009,7 +6009,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">System flag</translation>
+        <translation type="unfinished">System Flag</translation>
     </message>
 </context>
 <context>
@@ -7659,7 +7659,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset Stretch</source>
-        <translation>Nultil spredning</translation>
+        <translation>Nulstil spredning</translation>
     </message>
     <message>
         <source>show invisible</source>

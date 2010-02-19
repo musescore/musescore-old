@@ -41,17 +41,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>AboutBoxDialog</name>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2455"/>
+        <location filename="../../mscore/mscore.cpp" line="2485"/>
         <source>Unstable Prerelease for Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2457"/>
+        <location filename="../../mscore/mscore.cpp" line="2487"/>
         <source>Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2459"/>
+        <location filename="../../mscore/mscore.cpp" line="2489"/>
         <source>Revision: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3613,13 +3613,13 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2260"/>
+        <location filename="../../mscore/mscore.cpp" line="2290"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="144"/>
-        <location filename="../../mscore/mscore.cpp" line="2838"/>
+        <location filename="../../mscore/mscore.cpp" line="2868"/>
         <source>MuseScore</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4331,7 +4331,7 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2839"/>
+        <location filename="../../mscore/mscore.cpp" line="2869"/>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
@@ -4386,27 +4386,27 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2208"/>
+        <location filename="../../mscore/mscore.cpp" line="2238"/>
         <source>no score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2219"/>
+        <location filename="../../mscore/mscore.cpp" line="2249"/>
         <source>note entry mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2223"/>
+        <location filename="../../mscore/mscore.cpp" line="2253"/>
         <source>edit mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2227"/>
+        <location filename="../../mscore/mscore.cpp" line="2257"/>
         <source>play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2243"/>
+        <location filename="../../mscore/mscore.cpp" line="2273"/>
         <source>Go To: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -4471,7 +4471,7 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1977"/>
+        <location filename="../../mscore/mscore.cpp" line="2005"/>
         <location filename="../../mscore/style.cpp" line="277"/>
         <source>System</source>
         <translation type="unfinished"></translation>
@@ -6033,9 +6033,9 @@ Please select a single note or rest and retry operation
         <location filename="../../mscore/file.cpp" line="957"/>
         <location filename="../../mscore/importmidi.cpp" line="1349"/>
         <location filename="../../mscore/instrdialog.cpp" line="1087"/>
-        <location filename="../../mscore/mscore.cpp" line="1580"/>
-        <location filename="../../mscore/mscore.cpp" line="1990"/>
-        <location filename="../../mscore/mscore.cpp" line="2033"/>
+        <location filename="../../mscore/mscore.cpp" line="1588"/>
+        <location filename="../../mscore/mscore.cpp" line="2018"/>
+        <location filename="../../mscore/mscore.cpp" line="2061"/>
         <location filename="../../mscore/palette.cpp" line="819"/>
         <location filename="../../mscore/palette.cpp" line="1303"/>
         <location filename="../../mscore/sym.cpp" line="591"/>
@@ -6098,22 +6098,22 @@ Please select a single note or rest and retry operation
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1576"/>
+        <location filename="../../mscore/mscore.cpp" line="1584"/>
         <source>MuseScore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1577"/>
+        <location filename="../../mscore/mscore.cpp" line="1585"/>
         <source>reading file &lt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1988"/>
+        <location filename="../../mscore/mscore.cpp" line="2016"/>
         <source>MuseScore: Load languages failed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="2031"/>
+        <location filename="../../mscore/mscore.cpp" line="2059"/>
         <source>MuseScore: invalid command</source>
         <translation type="unfinished"></translation>
     </message>
