@@ -216,7 +216,7 @@ if (NOT MINGW AND NOT APPLE)
 endif (NOT MINGW AND NOT APPLE)
 
 set (subdirs al awl osdabzip rtf2html mscore share manual demos
-     scriptgen singleapp fluid)
+     scriptgen singleapp fluid omr)
 
 if (MINGW OR APPLE)
       set (subdirs ${subdirs} portmidi)

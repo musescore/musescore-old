@@ -225,6 +225,7 @@ if (MINGW)
       fluid
       al
       awl
+      omr
       osdabzip
       rtf2html
       qtsingleapp
@@ -295,6 +296,7 @@ else (MINGW)
       ${PORTAUDIO_LIB}
       al
       awl
+      omr
       osdabzip
       rtf2html
       qtsingleapp
