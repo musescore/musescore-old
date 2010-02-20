@@ -774,7 +774,7 @@ void Seq::setRelTempo(double relTempo)
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp) {
             pp->setTempo(t);
-            pp->setRelTempo(relTempo);
+            pp->setRelTempo(lrint(relTempo));
             }
       }
 
