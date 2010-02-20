@@ -1709,14 +1709,15 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
 bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
-      QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
+      QPointF mrp = p - canvasPos(); // pos() - system()->pos() - system()->page()->pos();
       double mrpx = mrp.x();
       double mrpy = mrp.y();
 
       System* s = system();
       int idx = s->y2staff(p.y());
-      if (idx == -1)
+      if (idx == -1) {
             return false;                       // staff not found
+            }
       QRectF sb(s->staff(idx)->bbox());
       qreal t = sb.top();    // top of staff
       qreal b = sb.bottom(); // bottom of staff
@@ -1734,11 +1735,11 @@ bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) con
             case MEASURE_LIST:
             case JUMP:
             case MARKER:
+            case LAYOUT_BREAK:
                   viewer->setDropRectangle(rr);
                   return true;
 
             case BRACKET:
-            case LAYOUT_BREAK:
             case REPEAT_MEASURE:
             case MEASURE:
             case SPACER:
@@ -1779,9 +1780,12 @@ bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) con
                   if (mrpy < t || mrpy > b)
                         return false;
                   viewer->setDropRectangle(r);
-                  for (Segment* seg = _first; seg; seg = seg->next())
-                        if (seg->subtype() == Segment::SegChordRest)
-                              return (mrpx < seg->pos().x());
+                  for (Segment* seg = _first; seg; seg = seg->next()) {
+                        if (seg->subtype() == Segment::SegChordRest) {
+                              if (mrpx < seg->pos().x())
+                                    return true;
+                              }
+                        }
                   // fall through if no chordrest segment found
 
             default:
@@ -1804,7 +1808,18 @@ Element* Measure::drop(ScoreView*, const QPointF& p, const QPointF& dragOffset, 
       if (staffIdx == -1 || e->systemFlag()) {
             staffIdx = 0;
             }
+      QPointF mrp(p - canvasPos());
+      double mrpx = mrp.x();
       Staff* staff = score()->staff(staffIdx);
+      int t = tick();
+      for (Segment* seg = _first; seg; seg = seg->next()) {
+            if (seg->subtype() == Segment::SegChordRest) {
+                  if (mrpx < seg->pos().x()) {
+                        t = seg->tick();
+                        break;
+                        }
+                  }
+            }
 
       switch(e->type()) {
             case MEASURE_LIST:
@@ -1847,17 +1862,17 @@ printf("drop staffList\n");
                   break;
 
             case CLEF:
-                  staff->changeClef(tick(), e->subtype());
+                  staff->changeClef(t, e->subtype());
                   delete e;
                   break;
 
             case KEYSIG:
-                  staff->changeKeySig(tick(), static_cast<KeySig*>(e)->keySigEvent());
+                  staff->changeKeySig(t, static_cast<KeySig*>(e)->keySigEvent());
                   delete e;
                   break;
 
             case TIMESIG:
-                  score()->changeTimeSig(tick(), e->subtype());
+                  score()->changeTimeSig(t, e->subtype());
                   delete e;
                   break;
 
