@@ -574,69 +574,19 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
       {
       startCmd();
       foreach(Note* on, nl) {
-#if 0
-            Staff* staff = on->staff();
-
-            KeySigEvent key = staff->keymap()->key(on->chord()->tick());
-            int kt[15] = {
-                  //  cb gb db ab  eb bb  f  c  g  d  a  e   b  f# c#
-                  // -7  -6 -5 -4 -3  -2 -1  0  1  2  3  4   5  6  7
-                     11,  6, 1, 8, 3, 10, 5, 0, 7, 2, 9, 4, 11, 6, 1
-                  };
-
-            int po = 12 - kt[key.accidentalType + 7];
-
-            static int pt[12][16] = {
-                  //   2   3   4  5   6    7  OK   9   -2  -3  -4, -5, -6, -7,   OK   -9
-
-            /*C */   { 2,  4,  5, 7,  9,  11, 12, 14,  -1, -3, -5, -7, -8, -10, -12, -13 },
-            /*C#*/   { 1,  3,  4, 6,  8,  10, 12, 13,  -2, -4, -6, -8, -9, -11, -12, -14 },
-            /*D */   { 2,  3,  5, 7,  9,  10, 12, 14,  -2, -3, -5, -7, -9, -10, -12, -14 },
-            /*D#*/   { 1,  2,  4, 6,  8,   9, 12, 13,  -1, -3, -4, -6, -8, -10, -12, -13 },
-            /*E */   { 1,  3,  5, 7,  8,  10, 12, 13,  -2, -4, -5, -7, -9, -11, -12, -14 },
-            /*F */   { 2,  4,  6, 7,  9,  11, 12, 14,  -1, -3, -5, -6, -8, -10, -12, -13 },
-            /*F#*/   { 1,  3,  5, 6,  8,  10, 12, 13,  -1, -2, -4, -6, -7,  -9, -12, -13 },
-            /*G */   { 2,  4,  5, 7,  9,  10, 12, 14,  -2, -3, -5, -7, -8, -10, -12, -14 },
-            /*G#*/   { 1,  3,  4, 6,  8,   9, 12, 13,  -1, -3, -4, -6, -8,  -9, -12, -13 },
-            /*A */   { 2,  3,  5, 7,  8,  10, 12, 14,  -2, -4, -5, -7, -9, -10, -12, -14 },
-            /*A#*/   { 1,  2,  4, 6,  7,   9, 11, 13,  -1, -3, -5, -6, -8, -10, -12, -13 },
-            /*B */   { 1,  3,  5, 6,  8,  10, 12, 13,  -2, -4, -6, -7, -9, -11, -12, -14 },
-                  };
-
-            static int it[19] = {
-               // -9, -8, -7, -6, -5, -4, -3, -2, -1,  0,  1, 2, 3, 4, 5, 6, 7, 8, 9
-                  15, 14, 13, 12, 11, 10,  9,  8, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7
-                  };
-
-            int pitch = on->pitch();
-            int idx = it[val + 9];
-            int interval = 0;
-            if (idx != -1)
-                  interval = pt[(pitch+po) % 12][idx];
-
-            pitch += interval;
-            if (pitch > 127)
-                  pitch = 127;
-            if (pitch < 0)
-                  pitch = 0;
-#endif
-            static int itable[] = {
-             //   0,  1, 2, 3,  4,  5,  6,  7,  8,  9
-                  0,  0, 4, 8, 11, 14, 18, 22, 25,  4
-                  };
-
-            int interval = itable[qAbs(val)];
-
             Note* note = new Note(*on);
-            note->setParent(on->chord());
-            int npitch, ntpc;
-            transposeInterval(note->pitch(), note->tpc(), &npitch, &ntpc, interval, val > 0 ? TRANSPOSE_UP : TRANSPOSE_DOWN);
-            note->setPitch(npitch, ntpc);
+            Chord* chord = on->chord();
+            note->setParent(chord);
+            val = val < 0 ? val+1 : val-1;
+            int line = on->line() - val;
 
-            if (val > 8)
-                  note->setPitch(note->pitch() + 12, note->tpc());
-            else if (val < -8)
-                  note->setPitch(note->pitch() - 12, note->tpc());
+            int tick   = chord->tick();
+            Staff* estaff = staff(on->staffIdx() + chord->staffMove());
+            int clef   = estaff->clef(tick);
+            int key    = estaff->key(tick).accidentalType;
+            int npitch = line2pitch(line, clef, key);
+            int ntpc   = pitch2tpc(npitch, key);
+            note->setPitch(npitch, ntpc);
 
             cmdAdd(note);
             mscore->play(note);
