@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Config_Dlg" script:language="StarBasic">Option Explicit
+
+Private oDlgConfig As Object
+
+Sub ApplyConfig
+
+	&apos; Set the configuration variables...
+	sLilyPondExecutable = oDlgConfig.getControl(&quot;LilyPondExecutable&quot;).getText()
+	sTemplatePath = AddSlash(ConvertToURL(oDlgConfig.getControl(&quot;TemplatePath&quot;).getText()))
+	sFormat = oDlgConfig.getControl(&quot;Format&quot;).getText()
+	iGraphicDPI = oDlgConfig.getControl(&quot;GraphicDPI&quot;).getValue()
+	sWriterTemplate =  oDlgConfig.getControl(&quot;WriterTemplate&quot;).getText()
+
+	sImageMagicExecutable = oDlgConfig.getControl(&quot;ImageMagicExecutable&quot;).getText()
+
+	if oDlgConfig.getControl(&quot;WriterAnchorAsCharacter&quot;).getState() then iWriterAnchor = com.sun.star.text.TextContentAnchorType.AS_CHARACTER
+	if oDlgConfig.getControl(&quot;WriterAnchorToParagraph&quot;).getState() then iWriterAnchor = com.sun.star.text.TextContentAnchorType.AT_PARAGRAPH
+	if oDlgConfig.getControl(&quot;WriterAnchorToPage&quot;).getState() then iWriterAnchor = com.sun.star.text.TextContentAnchorType.AT_PAGE
+
+	if oDlgConfig.getControl(&quot;WriterNoWrap&quot;).getState() then iWriterWrap = com.sun.star.text.WrapTextMode.NONE
+	if oDlgConfig.getControl(&quot;WriterOptimalPageWrap&quot;).getState() then iWriterWrap = com.sun.star.text.WrapTextMode.DYNAMIC
+	if oDlgConfig.getControl(&quot;WriterWrapThrough&quot;).getState() then iWriterWrap = com.sun.star.text.WrapTextMode.THROUGHT
+	
+	sImpressTemplate =  oDlgConfig.getControl(&quot;ImpressTemplate&quot;).getText()
+
+End Sub
+
+&apos; Hejsan hoppsan
+&apos; Lingonskog...
+
+Sub ConfigDialog( )
+
+	&apos; Load the library OOoLilyPond...
+	DialogLibraries.LoadLibrary( &quot;OOoLilyPond&quot; )
+
+	&apos; Create the dialog object
+	oDlgConfig = createUnoDialog( DialogLibraries.GetByName(&quot;OOoLilyPond&quot;).GetByName(&quot;Config_GUI&quot;) )
+
+	&apos;Set the contents of the combo box only one time, thus not in SetDialogConfigValues
+	oDlgConfig.getControl(&quot;Format&quot;).addItems(Array(&quot;png&quot;,&quot;eps&quot;),0)
+	ListOfTemplates(oDlgConfig.getControl(&quot;WriterTemplate&quot;), True)
+	ListOfTemplates(oDlgConfig.getControl(&quot;ImpressTemplate&quot;), True)
+	SetDialogConfigValues()
+
+ 	&apos; Display the dialog.                                                                     
+    &apos; This routine call does not return until the dialog is dismissed.
+    oDlgConfig.Execute()
+End Sub
+
+Sub DefaultConfig()
+
+	sOSType=GetOSType()
+
+	If sOSType=&quot;Unix&quot; Then
+		sConfigFile = ConvertToURL(Environ(&quot;HOME&quot;)) &amp; &quot;/.ooolilypond&quot;
+			
+		sTmpPath = ConvertToURL(Environ(&quot;HOME&quot;)) &amp; &quot;/.ooolilypond-tmp/&quot;
+		If Not FileExists(ConvertFromURL(sTmpPath)) Then MkDir(ConvertFromURL(sTmpPath))
+ 	
+	 	&apos; LilyPond Executable (not an URL)
+ 		sLilyPondExecutable = &quot;lilypond&quot;
+
+ 		sTemplatePath = ConvertToURL(Environ(&quot;HOME&quot;)) &amp; &quot;/OOoLilyPond/templates/2.10/&quot;
+	Else
+		&apos;Operating System is Windows
+		sConfigFile = ConvertToURL(Environ(&quot;APPDATA&quot;)) &amp; &quot;/ooolilypond&quot;
+		&apos; The following tmp path usually contains spaces and does not work with OOo 2.0
+		&apos; for calling batch files:
+		sTmpPath = ConvertToURL(Environ(&quot;temp&quot;)) &amp; &quot;/&quot;
+
+		&apos; For OOo 2.0 the following path works when the user has administrative rights
+		&apos; sTmpPath = ConvertToURL(Environ(&quot;SystemRoot&quot;)) &amp; &quot;/Temp/&quot;
+		sLilyPondExecutable = Environ(&quot;ProgramFiles&quot;) &amp; &quot;\LilyPond\usr\bin\lilypond.exe&quot;
+		sTemplatePath = ConvertToURL(Environ(&quot;ProgramFiles&quot;) &amp; &quot;/OOoLilyPond/templates/2.10/&quot;)
+ 	End If
+
+	sWriterTemplate = &quot;a4&quot;
+	sImpressTemplate = &quot;a4_big&quot;
+	iWriterAnchor = com.sun.star.text.TextContentAnchorType.AS_CHARACTER
+	iWriterWrap = com.sun.star.text.WrapTextMode.NONE
+
+	sFormat = &quot;png&quot;
+	iGraphicDPI = 300
+	
+End sub
+
+Sub DefaultConfigButton_Clicked()
+	&apos; load default configuration...
+	DefaultConfig()
+	SetDialogConfigValues()
+End Sub
+
+Sub ReadConfigFile()
+	&apos;MsgBox(&quot;ReadConfigFile&quot;)
+	Dim iNumber As Integer
+	Dim sLine,sArguments(2) As String
+	
+	iNumber = Freefile
+	Open sConfigFile For Input As iNumber
+		While not eof(iNumber)
+			Line Input #iNumber, sLine
+			if sLine &lt;&gt; &quot;&quot; then 
+				sArguments() = Split(sLine,&quot;=&quot;)
+
+				Select Case sArguments(0)
+				Case &quot;LilyPondExecutable&quot;
+					sLilyPondExecutable = sArguments(1)
+				Case &quot;ImageMagicExecutable&quot;
+					sImageMagicExecutable = sArguments(1)
+
+					
+				Case &quot;TemplatePath&quot;
+					sTemplatePath = AddSlash(ConvertToURL(sArguments(1)))
+				Case &quot;GraphicDPI&quot;
+					iGraphicDPI = sArguments(1)
+				Case &quot;FileFormat&quot;
+					sFormat = sArguments(1)
+				Case &quot;WriterTemplate&quot;
+					sWriterTemplate = sArguments(1)
+				Case &quot;WriterAnchor&quot;
+					iWriterAnchor = CInt(sArguments(1))
+				Case &quot;WriterWrap&quot;
+					iWriterWrap = CInt(sArguments(1))
+				Case &quot;ImpressTemplate&quot;
+					sImpressTemplate = sArguments(1)
+				End Select
+
+			end if
+		wend
+	Close #iNumber
+End Sub
+
+Sub SaveConfig
+	&apos;MsgBox(&quot;SaveConfig&quot;)
+	&apos;MsgBox(sImageMagicExecutable)
+	Dim oFileAccess, oTextStream As Object
+
+	&apos; Open service file and an output stream...
+	oFileAccess = createUnoService(&quot;com.sun.star.ucb.SimpleFileAccess&quot;)
+	oTextStream  = createUnoService(&quot;com.sun.star.io.TextOutputStream&quot;)
+
+	&apos; Save the general options
+	If oFileAccess.exists( sConfigFile ) Then oFileAccess.kill( sConfigFile )	
+    oTextStream.setOutputStream(oFileAccess.openFileWrite(sConfigFile))
+
+    oTextStream.writeString(&quot;*** Configuration file of OOoLilyPond ***&quot; &amp; chr(10) )
+	oTextStream.writeString(&quot;LilyPondExecutable=&quot; &amp; ConvertFromURL(sLilyPondExecutable)&amp; chr(10) ) 
+oTextStream.writeString(&quot;ImageMagicExecutable=&quot; &amp; ConvertFromURL(sImageMagicExecutable)&amp; chr(10) ) 		
+	oTextStream.writeString(&quot;TemplatePath=&quot; &amp; ConvertFromURL(sTemplatePath)&amp; chr(10) ) 
+	oTextStream.writeString(&quot;GraphicDPI=&quot; &amp; iGraphicDPI &amp; chr(10))
+	oTextStream.writeString(&quot;FileFormat=&quot; &amp; sFormat &amp; chr(10))	
+	oTextStream.writeString(&quot;WriterTemplate=&quot; &amp; sWriterTemplate &amp; chr(10))
+	oTextStream.writeString(&quot;WriterAnchor=&quot; &amp; CStr(iWriterAnchor) &amp; chr(10))
+	oTextStream.writeString(&quot;WriterWrap=&quot; &amp; CStr(iWriterWrap) &amp; chr(10))
+	oTextStream.writeString(&quot;ImpressTemplate=&quot; &amp; sImpressTemplate &amp; chr(10))
+	
+	
+	
+	
+
+	oTextStream.closeOutput()
+End Sub
+
+Sub SaveConfigButton_Clicked
+	Dim sCommand As String
+
+	&apos;Read the values from the form
+	ApplyConfig()
+
+	&apos;Check wheter LilyPond can be executed and get version
+	CleanUp()
+	If sOSType = &quot;Unix&quot; Then
+		&apos;sCommand=&quot;cd &quot; &amp; Chr(34) &amp; ConvertFromURL(sTmpPath) &amp; Chr(34) &amp; &quot;; &quot; _
+		&apos;&amp; Chr(34) &amp; sLilyPondExecutable &amp; Chr(34) &amp; &quot; --version &gt;LilyPond-version.out || touch LilyPond-cannot_execute&quot;
+		&apos;BashCommand(sCommand)
+	ElseIf sOSType = &quot;Windows&quot; Then
+		&apos;sCommand=&quot;cd /d &quot; &amp; Chr(34) &amp; ConvertFromURL(sTmpPath) &amp; Chr(34) &amp; Chr(10) _
+		&apos;&amp; Chr(34) &amp; sLilyPondExecutable &amp; Chr(34) &amp; &quot; --version &gt;LilyPond-version.out&quot; &amp; Chr(10) _
+		&apos;&amp; &quot;if errorlevel 9009 echo cannot execute &gt;LilyPond-cannot_execute&quot; &apos;ToDo: 9009 OK? Other errors? Wrong Permissions?
+		&apos;WindowsCommand(sCommand)
+	End If
+
+	If FileExists(ConvertFromURL(sTmpPath) &amp; &quot;LilyPond-cannot_execute&quot;) then
+		MsgBox &quot;LilyPond cannot be executed.&quot; &amp; Chr(10) _
+		&amp; &quot;Check the path specified for the lilypond executable in the configuration dialog,&quot; &amp; Chr(10) _
+		&amp; &quot;your LilyPond installation and permissions.&quot;
+	EndIf
+
+	&apos;ToDo: evaluate LilyPond version
+	
+	&apos;Save the values to file and close dialog
+	SaveConfig()
+	oDlgConfig.endExecute()
+
+End Sub
+
+Sub SetDialogConfigValues()
+	&apos; System...
+	oDlgConfig.getControl(&quot;TemplatePath&quot;).setText(ConvertFromURL(sTemplatePath))
+	oDlgConfig.getControl(&quot;LilyPondExecutable&quot;).setText(ConvertFromURL(sLilyPondExecutable))
+	oDlgConfig.getControl(&quot;ImageMagicExecutable&quot;).setText(ConvertFromURL(sImageMagicExecutable))	
+	&apos; Image...
+	oDlgConfig.getControl(&quot;Format&quot;).setText(sFormat)
+	oDlgConfig.getControl(&quot;GraphicDPI&quot;).setValue(iGraphicDPI)
+	&apos; Writer configuration
+	oDlgConfig.getControl(&quot;WriterTemplate&quot;).setText(sWriterTemplate)
+	If iWriterAnchor = com.sun.star.text.TextContentAnchorType.AS_CHARACTER Then oDlgConfig.getControl(&quot;WriterAnchorAsCharacter&quot;).setState(true)
+	If iWriterAnchor = com.sun.star.text.TextContentAnchorType.AT_PARAGRAPH Then  oDlgConfig.getControl(&quot;WriterAnchorToParagraph&quot;).setState(true)
+	If iWriterAnchor = com.sun.star.text.TextContentAnchorType.AT_PAGE Then oDlgConfig.getControl(&quot;WriterAnchorToPage&quot;).setState(true)
+	If iWriterWrap = com.sun.star.text.WrapTextMode.NONE Then oDlgConfig.getControl(&quot;WriterNoWrap&quot;).setState(true)
+	If iWriterWrap = com.sun.star.text.WrapTextMode.DYNAMIC Then oDlgConfig.getControl(&quot;WriterOptimalPageWrap&quot;).setState(true)
+	If iWriterWrap = com.sun.star.text.WrapTextMode.THROUGHT Then oDlgConfig.getControl(&quot;WriterWrapThrough&quot;).setState(true)
+
+	&apos; Impress configuration
+	oDlgConfig.getControl(&quot;ImpressTemplate&quot;).setText(sImpressTemplate)
+End Sub
+</script:module>

@@ -1,0 +1,5857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<museScore version="1.12">
+  <Spatium>1.5</Spatium>
+  <Division>480</Division>
+  <Style>
+    <staffLowerBorder>1</staffLowerBorder>
+    <staffDistance>8.5</staffDistance>
+    <akkoladeDistance>5.5</akkoladeDistance>
+    <systemDistance>16.2</systemDistance>
+    <lyricsDistance>6.5</lyricsDistance>
+    <frameSystemDistance>7</frameSystemDistance>
+    <bracketDistance>0.3</bracketDistance>
+    <minNoteDistance>0.5</minNoteDistance>
+    <barNoteDistance>1.5</barNoteDistance>
+    <ledgerLineWidth>0.08</ledgerLineWidth>
+    <beamMinSlope>0.1</beamMinSlope>
+    <dotNoteDistance>0.5</dotNoteDistance>
+    <propertyDistanceHead>0.5</propertyDistanceHead>
+    <propertyDistance>0.25</propertyDistance>
+    <lastSystemFillLimit>0.5</lastSystemFillLimit>
+    <gateTime>85</gateTime>
+    </Style>
+  <showInvisible>0</showInvisible>
+  <showFrames>1</showFrames>
+  <page-layout>
+    <pageFormat>A4</pageFormat>
+    <page-margins type="both">
+      <left-margin>56.6929</left-margin>
+      <right-margin>56.6929</right-margin>
+      <top-margin>56.6929</top-margin>
+      <bottom-margin>113.386</bottom-margin>
+      </page-margins>
+    </page-layout>
+  <siglist>
+    <sig tick="0">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="1200">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="2640">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="3840">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="5280">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="6480">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="7920">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="9120">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="10560">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="11760">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="13200">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="14400">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="18720">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="19920">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="21360">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="22560">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="26880">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="28800">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="30240">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="31200">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="32640">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="36480">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="42240">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="43440">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="44880">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="46080">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="53280">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="54240">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="55200">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="56640">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="58560">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="61440">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="62640">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="64080">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="65280">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="66720">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="67920">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    </siglist>
+  <tempolist fix="1.5">
+    <tempo tick="0">1.33333</tempo>
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="0"/>
+        </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
+      <bracket type="-1" span="1"/>
+      </Staff>
+    <trackName>Gitarre</trackName>
+    <Instrument>
+      <Channel name="normal">
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
+        <program value="24"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
+      </Instrument>
+    </Part>
+  <Slur id="1">
+    </Slur>
+  <Slur id="2">
+    </Slur>
+  <Slur id="3">
+    </Slur>
+  <Slur id="4">
+    </Slur>
+  <Slur id="5">
+    <up>2</up>
+    </Slur>
+  <Slur id="6">
+    </Slur>
+  <Slur id="7">
+    <up>2</up>
+    </Slur>
+  <Slur id="8">
+    </Slur>
+  <Slur id="9">
+    <SlurSegment no="0">
+      <o2 x="0.207622" y="-0.498293"/>
+      <o3 x="0.207622" y="-0.207622"/>
+      <o4 x="0.125998" y="0.150539"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="10">
+    </Slur>
+  <Slur id="11">
+    <SlurSegment no="0">
+      <o3 x="0.59011" y="0.755341"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="12">
+    <SlurSegment no="0">
+      <o2 x="0.313101" y="-0.521836"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="13">
+    <SlurSegment no="0">
+      <o2 x="0.0417468" y="-0.709696"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="14">
+    <SlurSegment no="0">
+      <o4 x="0.01304" y="0.288492"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="15">
+    <up>2</up>
+    </Slur>
+  <Slur id="16">
+    </Slur>
+  <Slur id="17">
+    <up>2</up>
+    </Slur>
+  <Slur id="18">
+    <SlurSegment no="0">
+      <o2 x="0.810936" y="-0.70697"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="19">
+    <SlurSegment no="0">
+      <o2 x="0.956489" y="-0.873316"/>
+      <o4 x="-0.174957" y="0.367112"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="20">
+    <up>1</up>
+    </Slur>
+  <Slur id="21">
+    <SlurSegment no="0">
+      <o4 x="7.5034" y="-1.66533e-16"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur id="22">
+    </Slur>
+  <Slur id="23">
+    <up>2</up>
+    </Slur>
+  <Slur id="24">
+    </Slur>
+  <Slur id="25">
+    <up>2</up>
+    </Slur>
+  <Slur id="26">
+    <up>2</up>
+    </Slur>
+  <Slur id="27">
+    <up>2</up>
+    </Slur>
+  <Slur id="28">
+    <up>2</up>
+    </Slur>
+  <Slur id="29">
+    </Slur>
+  <Slur id="30">
+    </Slur>
+  <Slur id="31">
+    <SlurSegment no="0">
+      <o2 x="0.47228" y="-0.535251"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="32">
+    <SlurSegment no="0">
+      <o2 x="0.629707" y="-0.40931"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="33">
+    </Slur>
+  <Slur id="34">
+    </Slur>
+  <Slur id="35">
+    </Slur>
+  <Slur id="36">
+    </Slur>
+  <Slur id="37">
+    </Slur>
+  <Slur id="38">
+    </Slur>
+  <Slur id="39">
+    <up>2</up>
+    </Slur>
+  <Slur id="40">
+    <up>2</up>
+    </Slur>
+  <Slur id="41">
+    </Slur>
+  <Slur id="42">
+    <up>2</up>
+    </Slur>
+  <Slur id="43">
+    <up>2</up>
+    </Slur>
+  <Slur id="44">
+    </Slur>
+  <Slur id="45">
+    <up>2</up>
+    </Slur>
+  <Slur id="46">
+    </Slur>
+  <Slur id="47">
+    <up>2</up>
+    </Slur>
+  <Slur id="48">
+    </Slur>
+  <Slur id="49">
+    <SlurSegment no="0">
+      <o1 x="1.14874" y="3.32529"/>
+      <o4 x="-0.665058" y="2.90207"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="50">
+    <SlurSegment no="0">
+      <o1 x="1.11496" y="3.05582"/>
+      <o2 x="0.289064" y="0.578128"/>
+      <o3 x="0" y="0.702012"/>
+      <o4 x="-0.495538" y="3.26229"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="51">
+    <up>2</up>
+    </Slur>
+  <Slur id="52">
+    <SlurSegment no="0">
+      <o1 x="1.15626" y="3.09711"/>
+      <o2 x="0.371654" y="0.619423"/>
+      <o3 x="0" y="0.536833"/>
+      <o4 x="-0.0412948" y="2.93193"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="53">
+    <up>2</up>
+    </Slur>
+  <Slur id="54">
+    <SlurSegment no="0">
+      <o1 x="2.01412" y="2.23736"/>
+      <o2 x="-5.43946" y="-3.17697"/>
+      <o3 x="6.72406" y="-1.37538"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="55">
+    <SlurSegment no="0">
+      <o1 x="1.27084" y="2.28751"/>
+      <o2 x="-4.3844" y="-1.46147"/>
+      <o3 x="0.953131" y="-2.4146"/>
+      <o4 x="-0.564444" y="2.68111"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="56">
+    <SlurSegment no="0">
+      <o1 x="1.33438" y="2.22397"/>
+      <o2 x="-3.30419" y="-0.953131"/>
+      <o3 x="2.16043" y="-1.65209"/>
+      <o4 x="0" y="2.82222"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur id="57">
+    <SlurSegment no="0">
+      <o4 x="0.0141111" y="0"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="58">
+    <SlurSegment no="0">
+      <offset x="0.849659" y="3.53458"/>
+      <o4 x="0.296333" y="0"/>
+      </SlurSegment>
+    <SlurSegment no="1">
+      <o4 x="-0.159996" y="1.22663"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="59">
+    <SlurSegment no="0">
+      <o1 x="0.91388" y="0.91388"/>
+      <o4 x="-0.337381" y="-0.0702985"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="60">
+    <SlurSegment no="0">
+      <o4 x="0.141111" y="0"/>
+      </SlurSegment>
+    <SlurSegment no="1">
+      <o1 x="0" y="-0.702985"/>
+      <o3 x="-0.140597" y="-1.40597"/>
+      <o4 x="-0.351492" y="1.89806"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <HairPin>
+    <tick>69600</tick>
+    <tick2>77880</tick2>
+    <Segment>
+      <off1 x="-0.125186" y="3.88077"/>
+      <off2 x="0" y="0"/>
+      <offset x="-0.125186" y="3.88077"/>
+      </Segment>
+    <Segment>
+      <off1 x="0.625931" y="4.00596"/>
+      <off2 x="0" y="0"/>
+      <offset x="0.625931" y="4.00596"/>
+      </Segment>
+    </HairPin>
+  <Slur id="61">
+    <up>2</up>
+    </Slur>
+  <Staff id="1">
+    <VBox>
+      <height>15.1099</height>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
+      <Text>
+        <subtype>Composer</subtype>
+        <style>4</style>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Dave Phillips 2005</p></body></html>
+          </html-data>
+        </Text>
+      <Text>
+        <subtype>Title</subtype>
+        <style>2</style>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">In memoriam Alexandre Tansman</span></p>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Prelude</p>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">For Guitar</span></p></body></html>
+          </html-data>
+        </Text>
+      </VBox>
+    <Measure number="1">
+      <Symbol>
+        <name>clef eight</name>
+        <offset x="128.065" y="127.884"/>
+        </Symbol>
+      <Dynamic>
+        <subtype>f</subtype>
+        <offset x="-0.790478" y="2.79612"/>
+        <style>12</style>
+        <frame>0</frame>
+        </Dynamic>
+      <Tempo>
+        <tempo>1.33333</tempo>
+        <subtype>Tempo</subtype>
+        <offset x="-6.88524" y="-4.13114"/>
+        <systemFlag>1</systemFlag>
+        <style>14</style>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:10.2047pt; font-weight:600; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">Allegro sostenuto</span></p></body></html>
+          </html-data>
+        </Tempo>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="0">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="57"/>
+        <Beam>0</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.789768" y="-6.08793"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>0</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.549576" y="-6.01536"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>0</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.476345" y="-5.10507"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>0</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.316508" y="-5.92717"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="57"/>
+        <Beam>0</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.226724" y="-6.49805"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">0</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="2">
+      <Text>
+        <subtype>System</subtype>
+        <offset x="-0.200981" y="7.99448"/>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">II______________</span></p></body></html>
+          </html-data>
+        </Text>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="1">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="1"/>
+        <Beam>1</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.49931" y="-9.17222"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>1</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85208" y="-7.40834"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>1</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.5875" y="-6.87917"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Beam id="2">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>2</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.94028" y="-6.35"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>2</Beam>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.5875" y="-6.87917"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="1"/>
+        <Beam>2</Beam>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.5875" y="-6.87917"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="3">
+      <Text>
+        <subtype>System</subtype>
+        <offset x="0.842101" y="7.16996"/>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:9pt;">simile</span></p></body></html>
+          </html-data>
+        </Text>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="3">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="2"/>
+        <Beam>3</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>3</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>3</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>3</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="2"/>
+        <Beam>3</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="4">
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="4">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="3"/>
+        <Beam>4</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>4</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>4</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>4</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>4</Beam>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="3"/>
+        <Beam>4</Beam>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="5">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="5">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="4"/>
+        <Beam>5</Beam>
+        <Note>
+          <pitch>53</pitch>
+          <tpc>13</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.41111" y="-9.87778"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>5</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.67569" y="-6.87917"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>5</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.02847" y="-6.35"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>5</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.02847" y="-6.87917"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="4"/>
+        <Beam>5</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85208" y="-7.49653"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:7pt;">0</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="6">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Text>
+        <subtype>System</subtype>
+        <offset x="0.715764" y="-9.42297"/>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">V________________</span></p></body></html>
+          </html-data>
+        </Text>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="6">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="5"/>
+        <Beam>6</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>6</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>6</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>6</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>6</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-0.971353" y="1.28971"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="5"/>
+        <Beam>6</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.47979" y="0.615906"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>6480</tick>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.176389" y="-4.91612"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>84</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="7">
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="7">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="6"/>
+        <Beam>7</Beam>
+        <Note>
+          <pitch>53</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>7</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>7</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>7</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="6"/>
+        <Beam>7</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="8">
+      <Text>
+        <subtype>System</subtype>
+        <offset x="-0.427066" y="-8.62987"/>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">V__________________</span></p></body></html>
+          </html-data>
+        </Text>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="8">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="7"/>
+        <Beam>8</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>8</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>8</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>8</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>8</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="7"/>
+        <Beam>8</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>9120</tick>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.182079" y="-4.08209"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>83</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="9">
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="9">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="8"/>
+        <Beam>9</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>9</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>9</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>9</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="8"/>
+        <Beam>9</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="10">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="10">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="9"/>
+        <Beam>10</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>10</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>10</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>10</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>10</Beam>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="9"/>
+        <Beam>10</Beam>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="11">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="11">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="10"/>
+        <Beam>11</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>11</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>11</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>11</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="10"/>
+        <Beam>11</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="12">
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="12">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="11"/>
+        <Beam>12</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>12</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>12</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>12</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>12</Beam>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="11"/>
+        <Beam>12</Beam>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="13">
+      <Beam id="13">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0287164" y="0.832692"/>
+          </Articulation>
+        <Slur type="start" number="12"/>
+        <Beam>13</Beam>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.54469" y="-8.18683"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>13</Beam>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.69915" y="-7.10555"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="12"/>
+        <Beam>13</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.69915" y="-6.48768"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Beam id="14">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.171355" y="1.03795"/>
+          </Articulation>
+        <Slur type="start" number="13"/>
+        <Beam>14</Beam>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.54469" y="-8.18683"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>14</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85362" y="-7.26002"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="13"/>
+        <Beam>14</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.69915" y="-6.48768"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="14">
+      <Beam id="15">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>15</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.69915" y="-8.65024"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.264583" y="-7.58472"/>
+          </Articulation>
+        <Beam>15</Beam>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Beam id="58">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>58</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85362" y="-8.95917"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.748137" y="-6.572"/>
+          </Articulation>
+        <Beam>58</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.57699" y="-7.94646"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">0</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Beam id="59">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>59</Beam>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.39021" y="-8.18683"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.264583" y="-7.58472"/>
+          </Articulation>
+        <Beam>59</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="15">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="16">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="14"/>
+        <Beam>16</Beam>
+        <Note>
+          <pitch>53</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>16</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>16</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>16</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="14"/>
+        <Beam>16</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="16">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Text>
+        <subtype>System</subtype>
+        <offset x="0" y="-8.97861"/>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:9pt;">come prima</span></p></body></html>
+          </html-data>
+        </Text>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="17">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="15"/>
+        <Beam>17</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>17</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>17</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>17</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>17</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="15"/>
+        <Beam>17</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>19920</tick>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.308937" y="-5.4064"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>84</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="17">
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="18">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="16"/>
+        <Beam>18</Beam>
+        <Note>
+          <pitch>53</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>18</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>18</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>18</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="16"/>
+        <Beam>18</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="18">
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="19">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="17"/>
+        <Beam>19</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>19</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>19</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>19</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>19</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="17"/>
+        <Beam>19</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>22560</tick>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0" y="-5.77186"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>83</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="19">
+      <Beam id="20">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.124759" y="0.863124"/>
+          </Articulation>
+        <Slur type="start" number="18"/>
+        <Beam>20</Beam>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>20</Beam>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="18"/>
+        <Beam>20</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Beam id="21">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.191959" y="0.754338"/>
+          </Articulation>
+        <Slur type="start" number="19"/>
+        <Beam>21</Beam>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>21</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="19"/>
+        <Beam>21</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="20">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Beam id="22">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>22</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.508678" y="-7.503"/>
+          </Articulation>
+        <Beam>22</Beam>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Beam id="60">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>60</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.855447" y="-6.95735"/>
+          </Articulation>
+        <Beam>60</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Beam id="61">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>61</Beam>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.382253" y="-8.15659"/>
+          </Articulation>
+        <Beam>61</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="21">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Beam id="62">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>62</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>62</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>62</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>62</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>26880</tick>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0950921" y="-5.98358"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="start" number="20"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="22">
+      <Text>
+        <subtype>System</subtype>
+        <offset x="-0.0440053" y="-8.92477"/>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">II_____________</span></p></body></html>
+          </html-data>
+        </Text>
+      <Beam id="63">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="21"/>
+        <Beam>63</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="21"/>
+        <Beam>63</Beam>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>63</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>63</Beam>
+        <Note>
+          <pitch>54</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>27840</tick>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.26976" y="-7.72119"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.164263" y="-7.28717"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="stop" number="20"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="23">
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="64">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="22"/>
+        <Beam>64</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.59142" y="-9.25916"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>64</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.6229" y="-8.30264"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>64</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.78631" y="-6.82441"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>64</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.59142" y="-7.37839"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">0</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>64</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.73609" y="-7.52307"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">0</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="22"/>
+        <Beam>64</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.17012" y="-6.79969"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">0</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="24">
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Beam id="65">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="23"/>
+        <Beam>65</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>65</Beam>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>65</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="23"/>
+        <Beam>65</Beam>
+        <Note>
+          <pitch>54</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>30240</tick>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.308937" y="-5.4064"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.308937" y="-5.4064"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="25">
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="66">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="24"/>
+        <Beam>66</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>66</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>66</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>66</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>66</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="24"/>
+        <Beam>66</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="26">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Text>
+        <subtype>System</subtype>
+        <offset x="-0.387921" y="-9.11197"/>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">III___________</span></p></body></html>
+          </html-data>
+        </Text>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Beam id="67">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="25"/>
+        <Beam>67</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-0.0499395" y="5.4681"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>67</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.408623" y="7.46749"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>67</Beam>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.454876" y="8.52506"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="25"/>
+        <Beam>67</Beam>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="0.175989" y="4.73288"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>32640</tick>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.247187" y="-5.56032"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="start" number="58"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="27">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="26"/>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.77071" y="3.77824"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.83368" y="6.4545"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.32992" y="7.80837"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="26"/>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.67626" y="3.46339"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>33600</tick>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.346697" y="-6.7957"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>77</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="28">
+      <Text>
+        <subtype>System</subtype>
+        <offset x="0.140503" y="-9.79162"/>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">III____________</span></p></body></html>
+          </html-data>
+        </Text>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="27"/>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.42437" y="3.8727"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.64477" y="6.86381"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.55031" y="8.09174"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="27"/>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.86517" y="3.27448"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>34560</tick>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.400029" y="-6.95569"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>75</pitch>
+          <tpc>11</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-0.607619" y="-3.10655"/>
+            <track>1</track>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="29">
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="28"/>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.79467" y="1.92061"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="28"/>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.16496" y="0.314854"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>35520</tick>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.240033" y="-6.42098"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="stop" number="58"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="30">
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="23">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0944561" y="0.566736"/>
+          </Articulation>
+        <Slur type="start" number="29"/>
+        <Beam>23</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.29843" y="-8.40659"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>23</Beam>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.98358" y="-7.43054"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="29"/>
+        <Beam>23</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.82615" y="-6.39153"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Beam id="24">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0944561" y="0.566736"/>
+          </Articulation>
+        <Slur type="start" number="30"/>
+        <Beam>24</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.95209" y="-8.97333"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>24</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.98358" y="-7.87134"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="30"/>
+        <Beam>24</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.88912" y="-6.0137"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">3</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="31">
+      <Beam id="25">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>25</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.125941" y="-7.65094"/>
+          </Articulation>
+        <Beam>25</Beam>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      <Beam id="68">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>68</Beam>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.818619" y="-5.95073"/>
+          </Articulation>
+        <Beam>68</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Beam id="69">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0629707" y="-7.49351"/>
+          </Articulation>
+        <Beam>69</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>69</Beam>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="32">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Beam id="26">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.125941" y="0.47228"/>
+          </Articulation>
+        <Slur type="start" number="31"/>
+        <Beam>26</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>26</Beam>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="31"/>
+        <Beam>26</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Beam id="27">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.125941" y="0.47228"/>
+          </Articulation>
+        <Slur type="start" number="32"/>
+        <Beam>27</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>27</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="32"/>
+        <Beam>27</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="33">
+      <stretch>0.8</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Beam id="28">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>28</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.512168" y="-7.60935"/>
+          </Articulation>
+        <Beam>28</Beam>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Beam id="70">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>70</Beam>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.827776" y="-7.19003"/>
+          </Articulation>
+        <Beam>70</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Beam id="71">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.414974" y="-8.26351"/>
+          </Articulation>
+        <Beam>71</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="-0.559135" y="-9.28893"/>
+          </Articulation>
+        <Beam>71</Beam>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          </Note>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="34">
+      <stretch>0.7</stretch>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="29">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="33"/>
+        <Beam>29</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>29</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>29</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>29</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="33"/>
+        <Beam>29</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="35">
+      <stretch>0.7</stretch>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="30">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="34"/>
+        <Beam>30</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>30</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>30</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>30</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>30</Beam>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="34"/>
+        <Beam>30</Beam>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="36">
+      <stretch>0.7</stretch>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="31">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="35"/>
+        <Beam>31</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>31</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>31</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>31</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="35"/>
+        <Beam>31</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="37">
+      <stretch>0.7</stretch>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="32">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="36"/>
+        <Beam>32</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>32</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>32</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>32</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>32</Beam>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="36"/>
+        <Beam>32</Beam>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="38">
+      <LayoutBreak>
+        </LayoutBreak>
+      <Text>
+        <subtype>System</subtype>
+        <offset x="-0.108932" y="-7.32141"/>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">III________</span></p></body></html>
+          </html-data>
+        </Text>
+      <Text>
+        <subtype>System</subtype>
+        <offset x="0.00619971" y="-7.75049"/>
+        <tick>48480</tick>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">IV__</span></p></body></html>
+          </html-data>
+        </Text>
+      <Beam id="33">
+        </Beam>
+      <Chord>
+        <tick>47520</tick>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Beam>33</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>33</Beam>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Beam id="72">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.576923" y="-1.96154"/>
+          </Articulation>
+        <Beam>72</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>72</Beam>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.06861" y="0"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Beam id="73">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.115385" y="-2.30769"/>
+          </Articulation>
+        <Beam>73</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        <Note>
+          <pitch>75</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>73</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="39">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Beam id="34">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="37"/>
+        <Beam>34</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>34</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>34</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>34</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>34</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="37"/>
+        <Beam>34</Beam>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="40">
+      <stretch>0.9</stretch>
+      <Beam id="35">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="2.59585e-07" y="-3.29224"/>
+          </Articulation>
+        <Beam>35</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>35</Beam>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Beam id="74">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="2.59585e-07" y="-3.29224"/>
+          </Articulation>
+        <Beam>74</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>74</Beam>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      <Beam id="75">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="2.59585e-07" y="-3.29224"/>
+          </Articulation>
+        <Beam>75</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>75</Beam>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="41">
+      <stretch>0.9</stretch>
+      <Beam id="36">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="38"/>
+        <Beam>36</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>36</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>36</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>36</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>36</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="38"/>
+        <Beam>36</Beam>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="42">
+      <stretch>0.9</stretch>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Beam id="76">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="39"/>
+        <Beam>76</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>76</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>76</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="39"/>
+        <Beam>76</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>53280</tick>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.19953" y="-5.6866"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="start" number="59"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="43">
+      <stretch>0.9</stretch>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Beam id="77">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="40"/>
+        <Beam>77</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>77</Beam>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>77</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="40"/>
+        <Beam>77</Beam>
+        <Note>
+          <pitch>54</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>54240</tick>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.19953" y="-6.38958"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.691619" y="-6.53018"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="stop" number="59"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="44">
+      <stretch>0.9</stretch>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="78">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="41"/>
+        <Beam>78</Beam>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>78</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>78</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>78</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>78</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="41"/>
+        <Beam>78</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="45">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Beam id="79">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="42"/>
+        <Beam>79</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>79</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>79</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="42"/>
+        <Beam>79</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>56640</tick>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.19953" y="-5.6866"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="start" number="60"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="46">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="43"/>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="43"/>
+        <Note>
+          <pitch>54</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>57600</tick>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.529977" y="-7.26754"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0378872" y="-5.72097"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="stop" number="60"/>
+        <Note>
+          <track>1</track>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="47">
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="37">
+        </Beam>
+      <Chord>
+        <tick>58800</tick>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="44"/>
+        <Beam>37</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>37</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>37</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>37</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="44"/>
+        <Beam>37</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="48">
+      <Beam id="38">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="45"/>
+        <Beam>38</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>38</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>38</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>38</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>38</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="45"/>
+        <Beam>38</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>60000</tick>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0378872" y="-5.72097"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>84</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="49">
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="39">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="46"/>
+        <Beam>39</Beam>
+        <Note>
+          <pitch>53</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>39</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>39</Beam>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>39</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="46"/>
+        <Beam>39</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="50">
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="40">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="47"/>
+        <Beam>40</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>40</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>40</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>40</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>40</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="47"/>
+        <Beam>40</Beam>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>62640</tick>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.151549" y="-5.45576"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>83</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="51">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="41">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="48"/>
+        <Beam>41</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>41</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>41</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>41</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="48"/>
+        <Beam>41</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="52">
+      <stretch>0.9</stretch>
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="42">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="61"/>
+        <Beam>42</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>42</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>42</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>42</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>42</Beam>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.61757" y="-3.1124"/>
+          </Articulation>
+        <Slur type="stop" number="61"/>
+        <Beam>42</Beam>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>65280</tick>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0378872" y="-5.72097"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="start" number="49"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>81</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Beam id="57">
+        <track>1</track>
+        </Beam>
+      <Chord>
+        <track>1</track>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="49"/>
+        <Beam>57</Beam>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>81</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="50"/>
+        <Beam>57</Beam>
+        <Note>
+          <track>1</track>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="53">
+      <stretch>0.9</stretch>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Beam id="43">
+        <StemDirection>down</StemDirection>
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="51"/>
+        <Beam>43</Beam>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>43</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>43</Beam>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>43</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="51"/>
+        <Beam>43</Beam>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>66720</tick>
+        <durationType>half</durationType>
+        <Slur type="stop" number="50"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.182808" y="-5.86589"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="start" number="52"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="54">
+      <stretch>0.9</stretch>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Beam id="44">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="53"/>
+        <Beam>44</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>44</Beam>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>44</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Beam>44</Beam>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>44</Beam>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="53"/>
+        <Beam>44</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.44879" y="1.3813"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">2</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <tick>67920</tick>
+        <durationType>half</durationType>
+        <Slur type="stop" number="52"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.182808" y="-5.86589"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="55">
+      <stretch>0.9</stretch>
+      <Text>
+        <subtype>System</subtype>
+        <offset x="-0.789285" y="-4.34963"/>
+        <tick>70320</tick>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">III____</span></p></body></html>
+          </html-data>
+        </Text>
+      <Dynamic>
+        <subtype>p</subtype>
+        <offset x="0.425973" y="4.01225"/>
+        <tick>69360</tick>
+        <style>12</style>
+        </Dynamic>
+      <Beam id="45">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>45</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>45</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <durationType>eighth</durationType>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>61</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Beam id="46">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>46</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>46</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <track>1</track>
+        <tick>69360</tick>
+        <durationType>quarter</durationType>
+        <Slur type="start" number="54"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.61326" y="-6.76937"/>
+            <track>1</track>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">1</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85208" y="-7.49653"/>
+            <track>1</track>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">0</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="56">
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Text>
+        <subtype>System</subtype>
+        <offset x="0" y="-1.08844"/>
+        <tick>71760</tick>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">IV____</span></p></body></html>
+          </html-data>
+        </Text>
+      <Text>
+        <subtype>System</subtype>
+        <offset x="-0.245259" y="-3.68819"/>
+        <tick>71280</tick>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <rxoffset>0</rxoffset>
+        <ryoffset>0</ryoffset>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <frame>0</frame>
+        <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-weight:600;">III____</span></p></body></html>
+          </html-data>
+        </Text>
+      <Beam id="47">
+        </Beam>
+      <Chord>
+        <tick>70800</tick>
+        <durationType>eighth</durationType>
+        <Beam>47</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.19616" y="3.96783"/>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>47</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <durationType>eighth</durationType>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Beam id="48">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>48</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>61</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>48</Beam>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <track>1</track>
+        <tick>70800</tick>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>1</track>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <Text>
+            <subtype>Fingering</subtype>
+            <offset x="-2.77584" y="-5.45201"/>
+            <track>1</track>
+            <style>8</style>
+            <frame>0</frame>
+            <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:6.80315pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">4</span></p></body></html>
+              </html-data>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>70</pitch>
+          <tpc>24</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Slur type="stop" number="54"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="57">
+      <Text>
+        <subtype>MeasureNumber</subtype>
+        <style>17</style>
+        </Text>
+      <Beam id="49">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>49</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>49</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <durationType>eighth</durationType>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>61</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Beam id="50">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>50</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>50</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <track>1</track>
+        <tick>72240</tick>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0635421" y="-5.71878"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="start" number="55"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.31771" y="-6.86254"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.698962" y="-7.49796"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="58">
+      <stretch>0.9</stretch>
+      <Beam id="51">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>51</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>51</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <durationType>eighth</durationType>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Beam id="52">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>52</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>61</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>52</Beam>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <track>1</track>
+        <tick>73680</tick>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.254168" y="-7.43442"/>
+          <track>1</track>
+          </Articulation>
+        <Note>
+          <track>1</track>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.31771" y="-6.86254"/>
+          <track>1</track>
+          </Articulation>
+        <Note>
+          <track>1</track>
+          <pitch>70</pitch>
+          <tpc>24</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          <offset x="0.0635421" y="-5.71878"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="stop" number="55"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="59">
+      <stretch>0.9</stretch>
+      <Beam id="53">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>53</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>53</Beam>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <durationType>eighth</durationType>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>61</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          </Note>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Beam id="54">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>54</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>54</Beam>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <track>1</track>
+        <tick>75120</tick>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>umarcato</subtype>
+          <offset x="0.31771" y="-5.01982"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="start" number="56"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>umarcato</subtype>
+          <offset x="0.31771" y="-6.29066"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>umarcato</subtype>
+          <offset x="0.254168" y="-6.86254"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="60">
+      <stretch>0.9</stretch>
+      <Beam id="55">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>55</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>55</Beam>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <durationType>eighth</durationType>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Beam id="56">
+        </Beam>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Beam>56</Beam>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>61</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>16th</durationType>
+        <Beam>56</Beam>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2"/>
+        <durationType>16th</durationType>
+        </Rest>
+      <Chord>
+        <track>1</track>
+        <tick>76560</tick>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>umarcato</subtype>
+          <offset x="0.508336" y="-6.41774"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>umarcato</subtype>
+          <offset x="0.381252" y="-5.78232"/>
+          <track>1</track>
+          </Articulation>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>70</pitch>
+          <tpc>24</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>1</track>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>umarcato</subtype>
+          <offset x="0.0635418" y="-5.27399"/>
+          <track>1</track>
+          </Articulation>
+        <Slur type="stop" number="56"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="61">
+      <Dynamic>
+        <subtype>ff</subtype>
+        <offset x="-0.42188" y="3.83964"/>
+        <style>12</style>
+        <frame>0</frame>
+        </Dynamic>
+      <Chord>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Articulation>
+          <offset x="0.434762" y="-2.46365"/>
+          </Articulation>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          </Note>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        <Arpeggio>
+          <subtype>1</subtype>
+          <offset x="0.176389" y="0"/>
+          </Arpeggio>
+        </Chord>
+      </Measure>
+    <Measure number="62">
+      <Dynamic>
+        <subtype>mf</subtype>
+        <offset x="-1.19145" y="3.83582"/>
+        <style>12</style>
+        <frame>0</frame>
+        </Dynamic>
+      <Chord>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Articulation>
+          <offset x="0.434762" y="-2.46365"/>
+          </Articulation>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>19</tpc>
+          </Note>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        <Arpeggio>
+          <subtype>1</subtype>
+          <offset x="0.176389" y="0"/>
+          </Arpeggio>
+        </Chord>
+      </Measure>
+    </Staff>
+  <cursorTrack>0</cursorTrack>
+  </museScore>

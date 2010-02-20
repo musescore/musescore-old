@@ -1,0 +1,306 @@
+=====================================================
+      MuseScore Scripting Interface
+=====================================================
+
+MuseScore supports plugin extensions in ECMAScript code (ECMA-262 aka
+"Java Script").
+
+A plugin extension is a file with the file extension ".js".
+All extensions in the plugins directory are registered by MuseScore on
+startup.
+The linux plugin directory is usually located at
+$install-path$/museScore-0.9/plugins.
+On Windows you can find the plugins at ""install-path"\MuseScore 0.9\plugins".
+
+
+A MuseScore plugin script has access to the whole Qt Library, so it is possible
+to create complete guis.
+
+=====================================================
+      Compatibility
+=====================================================
+
+The script interface is defined by two numbers, the majorVersion and the
+minorVersion. A script written for a different majorVersion than the current MuseScore
+script version may not run at all. Higher minor versions are supposed to be
+backward compatible.
+The majorVersion will be increased if the script interface changes in an incompatible
+way. The minorVersion will be increased if the interface is only extended.
+
+=====================================================
+      Debugging
+=====================================================
+
+A script debugger can be enabled in Menu "Help".
+
+=====================================================
+      Overall structure of a MuseScore scripting
+      plugin.
+=====================================================
+
+Example of a "no operation" plugin:
+
+----------------begin code-----------------------
+function init() {}
+function run() {}
+
+var mscorePlugin = {
+      majorVersion:  1,
+      minorVersion:  1,
+      menu: 'Plugins.test',
+      init: init,
+      run: run
+      };
+----------------end code-----------------------
+
+The global object "mscorePlugin" defines the environment of the plugin.
+The variable "menu" creates a menu entry in MuseScore which triggers
+execution of the plugin. The test plugin above creates an entry "test"
+in the menu "Plugins".
+"init" defines a function, which is called on MuseScore startup, when
+the plugins are registered. The "run" function is executed, when the user
+activates the "test" menu entry.
+The majorVersion and minorVersion properties are optional. If present, MuseScore
+checks against the current used interface version and warns of any
+incompatibility.
+
+
+=====================================================
+      Bindings to internal MuseScore data
+=====================================================
+
+Note: (ro) stands for read-only.
+
+Objects
+=====================================
+   Score
+      represents a complete score
+
+            A new score can be created with:
+                  var a = new Score();
+            The new score is appended to mscores list of scores.
+
+         Properties:
+            name        string            file name
+            title       string            title text on score
+            subtitle    string            subtitle text on score (ro)
+            composer    string            composer text on score (ro)
+            poet        string            poet text on score (ro)
+            staves     integer            number of staves (ro)
+
+         Functions:
+            bool save(string path, string type)
+                  Write score into file 'path'. "type" is the file extension and
+                  determines the type of file:
+                        "mscz", "mscx", "xml", "mxl", "mid", "pdf",
+                        "ps", "png", "svg", "ly", "wav", "flac", "ogg"
+                  Note all types may be available.
+
+            bool save(string path, string type, string soundfontPath)
+                  For soundfile output ("wav", "flac", "ogg") the soundfont to be used can
+                  be specified as an additional parameter.
+
+            bool save(string path, "png", boolean screenshot, boolean transparent, double dpi,
+               boolean grayscale)
+                  Saving into a PNG file can have additional parameters
+
+            setExpandRepeat(bool)
+            appendPart(string partname)
+                  Append a new part to the score.
+                  "partname" refers to an instrument name in the file instruments.xml.
+                  The part will be initialized from the named instrument in this file.
+                  If "partname" is empty, a default part will be appended.
+
+            appendMeasure(integer n)      append "n" measure to score
+            startUndo()                   start undoable operations
+            endUndo()                     end undoable operations
+            int pages()                   number of pages
+            int measures()                number of actual measures
+            int parts()                   number of parts
+            Part part(int i)              part object at index i
+            bool hasLyrics                true if a lyric element is found in the core
+            bool hasHarmonies             true if a valid chordname is found
+            int keysig                    key signature at the beginning
+                -7 to 7 or undefined for custom signature
+
+   Cursor
+         create:  var a = new Cursor(Score score);
+                  var a = new Cursor(Score score, bool expandRepeat);
+
+         Properties:
+            staff       integer
+            voice       integer
+
+         Fuctions:
+            rewind()                position cursor to staff/voice
+            next()                  goto next chord/rest
+            nextMeasure()           goto first chord/rest in next measure
+            isChord()               return true if cursor points to a chord
+            chord()                 return chord at current position
+            isRest()                return true if cursor points to a rest
+            rest()                  return rest at current position
+            measure()               return measure at current position
+            putStaffText(Text)      add staff text at cursor position
+            eos()                   return true if at end of score
+            add(Chord)
+            add(Rest)
+            measure()                     return the current measure
+            next()                        go to next chord/rest
+            nextMeasure()                 go to first chord/rest of next measure
+            time()            double      current score time in ms
+            tick()            integer     current score tick
+
+   Chord
+         create:
+            var a = new Chord()
+            var a = new Chord(Score)
+
+         Properties:
+            tickLen     integer
+            notes       integer (ro) number of notes in chord
+            type        integer (ro)      Note type
+                                          0 - NORMAL
+                                          1 - ACCIACCATURA
+                                          2 - APPOGGIATURA
+                                          3 - GRACE4
+                                          4 - GRACE16
+                                          5 - GRACE32
+
+         Functions:
+            topNote()
+            note(integer n)         return note at index n; notes are sorted to pitch
+            addNote(Note)
+            removeNote(integer n)   remove note at index n
+            addHarmony(Harmony)
+
+   Rest
+         create:
+            var a = new Rest()
+            var a = new Rest(Score)
+
+         Properties:
+            tickLen     integer
+
+         Functions:
+            addHarmony(Harmony)
+
+   Note
+         create:
+            var a = new Note()
+            var a = new Note(Score)
+
+         Properties:
+            pitch             integer     midi pitch value of note
+            name              string      name of note tpc value (read only)
+            color             QColor      notehead color
+            tuning            double      note tuning
+            tpc               integer     tonal pitch class
+            visible           boolean
+            tied              enum        0 no tie, 1 forward, 2 backward, 3 forw.+backw.
+            userAccidental    integer
+
+   Text
+         create:
+            var a = new Text(score);
+
+         Properties:
+            text           string         the displayed text
+            defaultFont    QFont
+            color          QColor         text foreground color
+
+   Harmony
+         create:
+            var a = new Harmony();
+
+         Properties:
+            id             integer        chord id
+            root           integer        tonal pitch class of root
+            base           integer        tonal pitch class of base
+
+   Style
+
+   HarmonyInfo
+
+   Measure
+         Properties:
+            lineBreak   bool     break the system after this measure
+            pageNumber  integer      number of the page where the measure is drawn (ro)
+
+         Functions:
+            QRectF  boundingRect()  bounding box (ro)
+            QPointF pos()           position (ro)
+
+    Part
+         Properties:
+            longName    string      long name of the part (ro)
+            shortName   string      short name of the part (ro)
+            midiProgram integer     midi program of the part (ro)
+            midiChannel integer     midi channel of the part (ro)
+
+
+
+Global Variables
+=====================================
+
+      pluginPath  string                  path of current active plugin
+                                          This path can be used find additional data associated with this
+                                          plugin.
+      curScore                Score       current active Score
+      curCursor               Cursor
+      division                integer     number of midi ticks for 1/4 note
+      mscoreVersion           integer     complete version number: MMmmuu (major/minor/update)
+      mscoreMajorVersion      integer
+      mscoreMinorVersion      integer
+      mscoreUpdateVersion     integer
+      majorVersion            integer     interface major version of the currently running interpreter
+      minorVersion            integer     interface minor version number
+
+=====================================================
+      Example "run" scripts
+=====================================================
+
+1. Create a "hello world" message box
+
+      var mb = new QMessageBox();
+      mb.setWindowTitle("MuseScore: Hello");
+      mb.text = "Hello World!";
+      mb.exec();
+
+2. Create a new Score "Test-Score"
+
+      var score  = new Score();
+      score.name = "Test-Score";
+      score.appendPart("Piano");    // create two staff piano part
+      score.appendMeasures(5);      // append five empty measures
+
+3. Put note name above each chord
+
+      var cursor = new Cursor(curScore);
+      cursor.staff = 0;
+      cursor.voice = 0;
+      cursor.rewind();
+      while (!cursor.eos()) {
+            if (cursor.isChord()) {
+                  var text  = new Text(curScore);
+                  text.text = cursor.chord().topNote().name();
+                  cursor.putStaffText(text);
+                  }
+            cursor.next();
+            }
+
+4. Remove middle note in all three note chords
+
+      var cursor = new Cursor(curScore);
+      cursor.staff = 0;
+      cursor.voice = 0;
+      cursor.rewind();
+
+      while (!cursor.eos()) {
+            if (cursor.isChord()) {
+                  var chord = cursor.chord();
+                  if (chord.notes() == 3) {
+                        chord.removeNote(1);
+                        }
+                  }
+            cursor.next();
+            }

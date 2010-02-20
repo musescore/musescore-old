@@ -1,0 +1,73 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+   <qresource>
+      <file>data/reload.png</file>
+      <file>data/previous.png</file>
+      <file>data/next.png</file>
+      <file>data/repeat.svg</file>
+      <file>data/paper1.png</file>
+      <file>data/paper2.png</file>
+      <file>data/paper3.png</file>
+      <file>data/text_bold.svg</file>
+      <file>data/text_italic.svg</file>
+      <file>data/text_left.svg</file>
+      <file>data/text_top.svg</file>
+      <file>data/text_vcenter.svg</file>
+      <file>data/text_bottom.svg</file>
+      <file>data/text_right.svg</file>
+      <file>data/text_center.svg</file>
+      <file>data/text_under.svg</file>
+      <file>data/exit.svg</file>
+      <file>data/hotkeys.svg</file>
+      <file>data/start.svg</file>
+      <file>data/play.svg</file>
+      <file>data/plus.svg</file>
+      <file>data/minus.svg</file>
+      <file>data/tab_remove.png</file>
+      <file>data/fileopen.svg</file>
+      <file>data/filenew.svg</file>
+      <file>data/filesave.svg</file>
+      <file>data/filesaveas.svg</file>
+      <file>data/viewmag.xpm</file>
+      <file>data/subscript.svg</file>
+      <file>data/superscript.svg</file>
+      <file>fonts/mscore-20.ttf</file>
+      <file>fonts/mscore1-20.ttf</file>
+      <file>fonts/MuseJazz.ttf</file>
+      <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
+      <file>data/splash.jpg</file>
+      <file alias="data/demo.mscx">../demos/promenade.mscx</file>
+      <file>data/speaker.svg</file>
+      <file>data/midiin.svg</file>
+      <file>data/undo.svg</file>
+      <file>data/redo.svg</file>
+      <file>data/style.qss</file>
+      <file>data/greendot.svg</file>
+      <file>data/darkgreendot.svg</file>
+      <file>data/recordOn.svg</file>
+      <file>data/recordOff.svg</file>
+      <file>data/mscore.png</file>
+      <file>data/acciaccatura.svg</file>
+      <file>data/grace4.svg</file>
+      <file>data/grace16.svg</file>
+      <file>data/grace32.svg</file>
+      <file>data/appoggiatura.svg</file>
+      <file>data/sbeam.svg</file>
+      <file>data/nbeam.svg</file>
+      <file>data/mbeam.svg</file>
+      <file>data/beam32.svg</file>
+      <file>data/abeam.svg</file>
+      <file>data/bg1.jpg</file>
+      <file>data/flip.svg</file>
+      <file>data/cancel.png</file>
+      <file>data/keyboard.svg</file>
+      <file>data/noteentry.svg</file>
+      <file>data/symbols.xml</file>
+      <file alias="images/bookmark.svg">data/bookmark.svg</file>
+      <file alias="images/pending.svg">data/pending.svg</file>
+      <file alias="images/breakpoint.svg">data/breakpoint.svg</file>
+      <file alias="images/location.svg">data/location.svg</file>
+      <file>revision.h</file>
+   </qresource>
+</RCC>
+

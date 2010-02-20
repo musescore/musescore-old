@@ -1,0 +1,143 @@
+/* Begin External Fonts */
+/* Normal */
+@font-face {
+   font-family: "DejaVu Sans";
+   src: url(font/DejaVuSans.ttf);
+}
+/* Bold */
+@font-face {
+   font-family: "DejaVu Sans";
+   src: url(font/DejaVuSans-Bold.ttf);
+   font-weight: bold;
+}
+/* Italic */
+@font-face {
+   font-family: "DejaVu Sans";
+   src: url(font/DejaVuSans-Oblique.ttf);
+   font-style: italic;
+}
+/* Bold and italic */
+@font-face {
+   font-family: "DejaVu Sans";
+   src: url(font/DejaVuSans-BoldOblique.ttf);
+   font-weight: bold;
+   font-style: italic;
+}
+
+/* Normal */
+@font-face {
+   font-family: "DejaVu Serif";
+   src: url(font/DejaVuSerif.ttf);
+}
+/* Bold */
+@font-face {
+   font-family: "DejaVu Serif";
+   src: url(font/DejaVuSerif-Bold.ttf);
+   font-weight: bold;
+}
+/* Italic */
+@font-face {
+   font-family: "DejaVu Serif";
+   src: url(font/DejaVuSerif-Italic.ttf);
+   font-style: italic;
+}
+/* Bold and italic */
+@font-face {
+   font-family: "DejaVu Serif";
+   src: url(font/DejaVuSerif-BoldItalic.ttf);
+   font-weight: bold;
+   font-style: italic;
+}
+/* End External Fonts */
+
+h1 {
+  -pdf-outline: true;
+  -pdf-level: 0;
+  -pdf-open: true;
+}
+h2 {
+  -pdf-outline: true;
+  -pdf-level: 1;
+  -pdf-open: false;
+}
+h3,h4,h5,h6 {-pdf-outline:false;}
+pdftoc {
+  color: #666;
+}
+pdftoc.pdftoclevel0 {
+  font-weight: bold;
+  margin-top: 0.5em;
+  border-bottom: .25pt dotted black;
+}
+pdftoc.pdftoclevel1 {
+  margin-left: 1em;
+}
+pdftoc.pdftoclevel2 {
+  margin-left: 2em;
+  font-style: italic;
+  display:none;
+} 
+@frame footer {
+  -pdf-frame-content: footerContent;
+  bottom: 1cm;
+  margin-left: 4cm;
+  margin-right: 3cm;
+  height: 1cm;
+}
+#footerContent {text-align:right;}
+
+img {zoom: 80%; margin:0}
+
+.field-type-filefield {display:none} /*hides website bug that displays list of language-dependent images*/
+.print-breadcrumb {display:none}
+
+@page {margin: 2cm 3cm 2cm 4cm;}
+body {font-family:"DejaVu Serif",serif; font-size:10pt;}
+
+/*Expanded font for non-latin alphabets body {font-family:"DejaVu Sans"}*/
+
+p {margin-left: 0em;}
+ul, ol, dl {margin:1em 0 1em 1em;}
+li, dd {margin:.2em 0 .2em 1em;}
+
+/*img+br,br+img {padding: .2em 0 .2em 0;}*/
+
+span.chapter {page-break-before:always;}
+span.chapter, h1, h2, h3, h4, h5, h6 {font-family:"DejaVu Sans",sans-serif; page-break-after:avoid;}
+
+span.chapter {display:block; font-size:2em; padding-top:5em; padding-bottom:0.5em; font-weight:bold}
+h1 {font-size:2.5em; margin-bottom:1.5em; line-height:1em}
+h2 {margin:2.5em 0 0.5em 0; font-size:1.5em;}
+
+h3,h4,h5,h6 {margin:1em 0 0 0}
+h3+p, h3+br {margin-top:0.5em}
+
+kbd {
+  font-family: "DejaVu Sans", sans-serif;
+  font-style:italic;
+  font-size:0.9em;
+}
+kbd kbd {
+  border: 1pt solid black;
+  font-family: "DejaVu Sans", sans-serif;
+  font-style:italic;
+  margin:0pt;
+  padding:0pt 4pt;
+}
+samp.mode {
+  font-family: "DejaVu Sans", sans-serif;
+}
+kbd samp {
+  border:0pt none;
+  font-family: "DejaVu Sans", sans-serif;
+  margin:0pt;
+  padding:1pt;
+}
+
+del, del a, del a:link, del a:visited {color:grey; text-decoration:line-through}
+
+/*Version specific info*/
+.v0-9-2 {display:none}
+.v0-9-3 {display:none}
+.v0-9-4 {display:none}
+.v0-9-5.label, .latest .label {display:none}

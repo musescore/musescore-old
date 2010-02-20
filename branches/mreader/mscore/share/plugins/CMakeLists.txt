@@ -1,0 +1,43 @@
+#=============================================================================
+#  Mscore
+#  Linux Music Score Editor
+#  $Id:$
+#
+#  Copyright (C) 2008 by Werner Schweer and others
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License version 2.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#=============================================================================
+
+install(FILES
+      abc_import.js
+      test.js
+      test2.js
+      createscore.js
+      notenames.js
+      colornotes.js
+      fonttest.js
+      removenotes.js
+      removenotes.ui
+      chordchart.js
+      tuning.js
+      tuning.ui
+      scales_e35a.ui
+      scales_e35b.ui
+      scales.js
+      scales.readme
+      scales.tmpr
+      scales.ui
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
+      )
+
+subdirs( break )
