@@ -405,6 +405,20 @@
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>+octave</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="octave">
+            <property name="maximum">
+             <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QRadioButton" name="up">
             <property name="text">
              <string>up</string>

@@ -52,12 +52,20 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       int diatonic  = instrument.transposeDiatonic();
       int chromatic = instrument.transposeChromatic();
 
+      int oct = chromatic / 12;
+      if (oct < 0)
+            oct = -oct;
+
+
       bool upFlag = true;
       if (chromatic < 0 || diatonic < 0) {
             upFlag = false;
             chromatic = -chromatic;
             diatonic  = -diatonic;
             }
+      chromatic %= 12;
+      diatonic  %= 7;
+
       int interval = searchInterval(diatonic, chromatic);
       if (interval == -1) {
             printf("unknown interval %d %d\n", diatonic, chromatic);
@@ -66,6 +74,7 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       iList->setCurrentIndex(interval);
       up->setChecked(upFlag);
       down->setChecked(!upFlag);
+      octave->setValue(oct);
 
       shortName->setHtml(part->shortNameHtml());
       longName->setHtml(part->longNameHtml());
@@ -121,13 +130,19 @@ void EditStaff::apply()
       int interval  = iList->currentIndex();
       bool upFlag   = up->isChecked();
 
-      instrument.setTransposeDiatonic(intervalList[interval].steps);
-      instrument.setTransposeChromatic(intervalList[interval].semitones);
+printf("apply up %d  chromatic %d diatonic %d\n", upFlag, instrument.transposeChromatic(),
+      instrument.transposeDiatonic());
+
+      instrument.setTransposeDiatonic(intervalList[interval].steps + octave->value() * 7);
+      instrument.setTransposeChromatic(intervalList[interval].semitones + octave->value() * 12);
 
       if (!upFlag) {
             instrument.setTransposeDiatonic(-instrument.transposeDiatonic());
             instrument.setTransposeChromatic(-instrument.transposeChromatic());
             }
+printf("   apply up %d  chromatic %d diatonic %d\n", upFlag, instrument.transposeChromatic(),
+      instrument.transposeDiatonic());
+
       const QTextDocument* ln = longName->document();
       const QTextDocument* sn = shortName->document();
 
