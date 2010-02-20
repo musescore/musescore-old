@@ -2373,8 +2373,14 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     if (nn < 0 || nn >= nstaves())
                                           c->setStaffMove(0);
                                     foreach(Note* n, c->notes()) {
-                                          n->setPitch(n->pitch() - part->transposeChromatic());
-                                          n->setTpcFromPitch();
+                                          if (!styleB(ST_concertPitch) && part->transposeChromatic()) {
+                                                int npitch;
+                                                int ntpc;
+                                                transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc,
+                                                   -part->transposeDiatonic(),
+                                                   -part->transposeChromatic());
+                                                n->setPitch(npitch, ntpc);
+                                                }
                                           n->setTrack(track);
                                           }
                                     }

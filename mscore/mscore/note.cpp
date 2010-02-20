@@ -632,11 +632,23 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
       //
       // get real pitch for clipboard (copy/paste)
       //
-      xml.tag("pitch", xml.clipboardmode ? ppitch() : pitch());
+      int rpitch = pitch();
+      int rtpc   = tpc();
+
+      if (xml.clipboardmode && !score()->styleB(ST_concertPitch)) {
+            Part* part = staff()->part();
+            if (part->transposeChromatic()) {
+                  transposeInterval(pitch(), tpc(), &rpitch, &rtpc,
+                     part->transposeDiatonic(),
+                     part->transposeChromatic());
+                  }
+            }
+
+      xml.tag("pitch", rpitch);
+      xml.tag("tpc", rtpc);
 
       if (_tuning != 0.0)
             xml.tag("tuning", _tuning);
-      xml.tag("tpc", tpc());
 
       if (_userAccidental)
             xml.tag("userAccidental", _userAccidental);
