@@ -53,8 +53,8 @@ void ScoreView::editKey(QKeyEvent* ev)
                key, int(modifiers), qPrintable(s));
 
       Element* e = editObject;
-	  if(!e)
-			return;
+      if (!e)
+            return;
 
       if (e->type() == LYRICS) {
             int found = false;
@@ -156,18 +156,6 @@ void ScoreView::editKey(QKeyEvent* ev)
                   break;
             case Qt::Key_Down:
                   delta = QPointF(0, val);
-                  break;
-            case Qt::Key_Tab:
-                  curGrip += 1;
-                  if (curGrip >= grips)
-                        curGrip = 0;
-                  val = 0.0;
-                  break;
-            case Qt::Key_Backtab:
-                  curGrip -= 1;
-                  if (curGrip < 0)
-                        curGrip = grips -1;
-                  val = 0.0;
                   break;
             default:
                   ev->ignore();
