@@ -1703,6 +1703,8 @@ int main(int argc, char* av[])
       revision = QString(f.readAll());
       f.close();
 
+      // mreader needs hardware acceleration for pixmap scaling:
+      QApplication::setGraphicsSystem(QString("opengl"));
       QtSingleApplication* app = new QtSingleApplication("mscore", argc, av);
 
       QStringList argv =  QCoreApplication::arguments();
