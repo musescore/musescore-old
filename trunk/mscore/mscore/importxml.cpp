@@ -2355,13 +2355,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else if (s == "natural-flat")
                         ;
                   else if (s == "quarter-flat")
-                        ;
+                        accidental = 19;
                   else if (s == "quarter-sharp")
-                        ;
+                        accidental = 22;
                   else if (s == "three-quarters-flat")
-                        ;
+                        accidental = 18;
                   else if (s == "three-quarters-sharp")
-                        ;
+                        accidental = 25;
                   else if (s == "flat-flat")
                         accidental = 4;
                   else if (s == "natural-sharp")
@@ -2740,8 +2740,15 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
-            if (accidental && editorial)
+            // LVIFIX: accidental handling is ugly, replace magic numbers by constants
+            if (1 <= accidental &&  accidental <= 5 && editorial)
                   note->setUserAccidental(accidental + 5);
+            // LVIFIX: quarter tone accidentals support is "drawing only"
+            if (accidental == 18
+                || accidental == 19
+                || accidental == 22
+                || accidental == 25)
+                  note->setUserAccidental(accidental);
 
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);
