@@ -2095,8 +2095,8 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                         case 16: s = "quarter-flat";          break; //flat-slash (alternative quarter flat)
                         case 19: s = "quarter-flat";          break; //mirrored-flat (quarter flat recommended by Michael)
                         case 22: s = "quarter-sharp";         break;
-                        case 18: s = "three-quarters-flat";   break; //mirrored-flat1 (three quater flat recommended by Michael)
-                        case 21: s = "three-quarters-flat";   break; //flat-flat-slash (alternative three quters flat)
+                        case 18: s = "three-quarters-flat";   break; //mirrored-flat1 (three quarter flat recommended by Michael)
+                        case 21: s = "three-quarters-flat";   break; //flat-flat-slash (alternative three quarters flat)
                         case 25: s = "three-quarters-sharp";  break;
                         default:
                               printf("unknown accidental %d\n", acc);

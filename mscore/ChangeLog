@@ -1,3 +1,6 @@
+20.feb (lv)
+      - import MusicXML quarter tone accidentals following Tartini convention
+        (export was done by (la) on Jan 26
 19.feb (ws)
       - script interface chords: add "type" property to distinguish between normal and grace notes
       - expose grace notes in script cursor interface
