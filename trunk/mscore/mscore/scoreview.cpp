@@ -1317,7 +1317,7 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
             pen.setWidthF(lw);
             p.setPen(pen);
             for (int i = 0; i < grips; ++i) {
-                  p.setBrush(i == curGrip ? QBrush(Qt::blue) : Qt::NoBrush);
+                  p.setBrush(((i == curGrip) && hasFocus()) ? QBrush(Qt::blue) : Qt::NoBrush);
                   p.drawRect(grip[i]);
                   }
             }
@@ -3405,4 +3405,40 @@ void ScoreView::exitState()
             printf("exitState <%s>\n", qPrintable(sender()->objectName()));
       }
 
+//---------------------------------------------------------
+//   event
+//---------------------------------------------------------
+
+bool ScoreView::event(QEvent* event)
+      {
+      if (event->type() == QEvent::KeyPress && editObject) {
+            QKeyEvent* ke = static_cast<QKeyEvent*>(event);
+            if (ke->key() == Qt::Key_Tab || ke->key() == Qt::Key_Backtab) {
+                  bool rv = true;
+                  if (ke->key() == Qt::Key_Tab) {
+                        curGrip += 1;
+                        if (curGrip >= grips) {
+                              curGrip = 0;
+                              rv = false;
+                              }
+                        updateGrips();
+                        _score->end();
+                        if (curGrip)
+                              return true;
+                        }
+                  else if (ke->key() == Qt::Key_Backtab) {
+                        curGrip -= 1;
+                        if (curGrip < 0) {
+                              curGrip = grips -1;
+                              rv = false;
+                              }
+                        }
+                  updateGrips();
+                  _score->end();
+                  if (rv)
+                        return true;
+                  }
+            }
+      return QWidget::event(event);
+      }
 

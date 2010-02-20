@@ -127,6 +127,7 @@ class ScoreView : public QWidget {
 
       void saveChord(Xml&);
 
+      virtual bool event(QEvent* event);
       virtual void resizeEvent(QResizeEvent*);
       virtual void wheelEvent(QWheelEvent*);
       virtual void dragEnterEvent(QDragEnterEvent*);
