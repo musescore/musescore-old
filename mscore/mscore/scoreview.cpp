@@ -1686,12 +1686,18 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case SLUR:
                   case ACCIDENTAL_BRACKET:
                         {
-                        Element* el = elementAt(pos);
-                        if (el && el->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
-                              setDropTarget(el);
-                              break;
+                        QList<const Element*> el = elementsAt(pos);
+                        bool found = false;
+                        foreach(const Element* e, el) {
+                              if (e->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
+                                    if (e->type() != MEASURE)
+                                          setDropTarget(const_cast<Element*>(e));
+                                    found = true;
+                                    break;
+                                    }
                               }
-                        setDropTarget(0);
+                        if (!found)
+                              setDropTarget(0);
                         }
                         break;
                   default:
@@ -1834,7 +1840,13 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case SLUR:
                   case ACCIDENTAL_BRACKET:
                         {
-                        Element* el = elementAt(pos);
+                        Element* el = 0;
+                        foreach(const Element* e, elementsAt(pos)) {
+                              if (e->acceptDrop(this, pos, dragElement->type(), dragElement->subtype())) {
+                                    el = const_cast<Element*>(e);
+                                    break;
+                                    }
+                              }
                         if (!el) {
                               printf("cannot drop here\n");
                               delete dragElement;
