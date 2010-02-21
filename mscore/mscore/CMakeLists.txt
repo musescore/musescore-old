@@ -182,7 +182,7 @@ add_executable ( ${ExecutableName}
       screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
-      ${AUDIO}
+      importpdf.cpp ${AUDIO}
       )
 
 if (STATIC_SCRIPT_BINDINGS)
@@ -226,6 +226,8 @@ if (MINGW)
       al
       awl
       omr
+      poppler
+      gsl
       osdabzip
       rtf2html
       qtsingleapp
@@ -297,11 +299,13 @@ else (MINGW)
       al
       awl
       omr
+      poppler
       osdabzip
       rtf2html
       qtsingleapp
       fluid
       z
+      gsl
       )
 
    if (HAS_AUDIOFILE)

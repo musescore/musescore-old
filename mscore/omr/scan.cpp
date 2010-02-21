@@ -22,7 +22,7 @@
 #include "scan.h"
 #include "pdf.h"
 #include "page.h"
-#include "xml.h"
+// #include "xml.h"
 
 //---------------------------------------------------------
 //   Scan
@@ -70,6 +70,7 @@ bool Scan::read(const QString& path)
       return true;
       }
 
+#if 0
 //---------------------------------------------------------
 //   save
 //---------------------------------------------------------
@@ -85,5 +86,14 @@ void Scan::save(Xml& xml) const
       // staves
       //    measures
       }
+#endif
 
+//---------------------------------------------------------
+//   spatium
+//---------------------------------------------------------
+
+double Scan::spatium(int n) const
+      {
+      return pages[n]->spatium();
+      }
 

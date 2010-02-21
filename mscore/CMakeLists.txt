@@ -205,6 +205,12 @@ else (MINGW)
 endif (MINGW)
 
 ##
+##    TODO: check for
+##    - libpoppler (pdf i/o)
+##    - libgsl (gnu static library)
+##
+
+##
 ## produce config.h file
 ##
 configure_file (

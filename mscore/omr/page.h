@@ -56,7 +56,7 @@ class Page {
       QList<QRectF> staves;
       QList<HLine> slines;
 
-      double spatium;
+      double _spatium;
 
       QList<QLine>  lines;
       QList<QLineF> barlines;
@@ -84,12 +84,13 @@ class Page {
       const uint* scanLine(int y) const  { return (const uint*)_image.scanLine(y); }
       int wordsPerLine() const           { return (_image.bytesPerLine() + 3)/4; }
 
-      const QList<QLine>& sl()           { return lines; }
-      const QList<HLine>& l()            { return slines; }
-      const QList<QRectF>& r()           { return staves; }
+      const QList<QLine>& sl()           { return lines;    }
+      const QList<HLine>& l()            { return slines;   }
+      const QList<QRectF>& r()           { return staves;   }
       const QList<QLineF>& bl()          { return barlines; }
-      const QList<QRect>& slices() const { return _slices; }
-      const QList<QRect>& notes() const  { return _notes; }
+      const QList<QRect>& slices() const { return _slices;  }
+      const QList<QRect>& notes() const  { return _notes;   }
+      double spatium() const             { return _spatium; }
       };
 
 #endif

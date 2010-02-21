@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE Reader
-//  Linux Music Score Reader
-//  $Id$
+//  MuseScore
+//  Linux Music Score Editor
+//  $Id: importmidi.cpp 2721 2010-02-15 19:41:28Z wschweer $
 //
-//  Copyright (C) 2010 Werner Schweer
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,37 +18,23 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SCAN_H__
-#define __SCAN_H__
-
-class Page;
-// class Xml;
-class Pdf;
+#include "importpdf.h"
+#include "score.h"
+#include "omr/omr.h"
 
 //---------------------------------------------------------
-//   Scan
+//   importPdf
 //---------------------------------------------------------
 
-class Scan {
-      QString _pdfPath;
-      double _spatium;
-      int _division;
-
-      Pdf* _doc;
-      QList<Page*> pages;
-
-      void process1(int page);
-
-
-   public:
-      Scan();
-      bool read(const QString& path);
-      Page* page(int idx)                  { return pages[idx];            }
-      int numPages() const                 { return pages.size();          }
-      int pagesInDocument() const;
-//      void save(Xml&) const;
-      double spatium(int n) const;
-      };
-
-#endif
+bool Score::importPdf(const QString& path)
+      {
+      _omr = new Omr(path);
+      if (!_omr->read()) {
+            delete _omr;
+            _omr = 0;
+            return false;
+            }
+      setShowOmr(true);
+      return true;
+      }
 

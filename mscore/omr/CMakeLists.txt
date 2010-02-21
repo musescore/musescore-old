@@ -52,7 +52,8 @@ add_library (
       ${PROJECT_BINARY_DIR}/all.h.pch
       ${mocs}
       scan.cpp scanview.cpp pdf.cpp page.cpp
-      xml.cpp globals.cpp skew.cpp utils.cpp
+      globals.cpp skew.cpp utils.cpp
+      omr.cpp
       )
 
 set_target_properties( omr

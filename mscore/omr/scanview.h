@@ -52,6 +52,8 @@ class ScanView : public QWidget {
 
    public slots:
       void gotoPage(int);
+      void setScale(double);
+      void setOffset(double, double);
 
    signals:
       void pageNumberChanged(int);

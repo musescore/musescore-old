@@ -142,7 +142,7 @@ void Page::read1()
             int y = r.y();
             for (int i = -1; i < 10; ++i) {
                   if (i & 0x1)
-                        searchNotes(i, x1, x2, y + i * spatium*.5);
+                        searchNotes(i, x1, x2, y + i * _spatium*.5);
                   }
             }
       }
@@ -459,18 +459,18 @@ void Page::getStaffLines()
       // line width. Staff line distance (spatium) must be at least 10 dots
       //
       double maxCorrelation = 0;
-      spatium = 0;
+      _spatium = 0;
       for (int i = 10; i < autoTableSize; ++i) {
             if (autoTable[i] > maxCorrelation) {
                   maxCorrelation = autoTable[i];
-                  spatium = i;
+                  _spatium = i;
                   }
             }
-      if (spatium == 0) {
+      if (_spatium == 0) {
             printf("*** no staff lines found\n");
             return;
             }
-      printf("*** spatium = %f\n", spatium);
+      printf("*** spatium = %f\n", _spatium);
 
       //---------------------------------------------------
       //    look for staves
@@ -479,10 +479,10 @@ void Page::getStaffLines()
       QList<Lv> lv;
       int ly = 0;
       int lval = -1000.0;
-      for (int y = y1; y < (y2 - spatium * 4); ++y) {
+      for (int y = y1; y < (y2 - _spatium * 4); ++y) {
             double val = 0.0;
             for (int i = 0; i < 5; ++i)
-                  val += projection[y + i * int(spatium)];
+                  val += projection[y + i * int(_spatium)];
             if (val < lval) {
                   lv.append(Lv(ly, lval));
 //                  lines.append(HLine(0, width(), ly)); // debug
@@ -498,7 +498,7 @@ void Page::getStaffLines()
 //            }
 
       QList<Lv> staveTop;
-      int staffHeight = spatium * 6;
+      int staffHeight = _spatium * 6;
       foreach(Lv a, lv) {
             if (a.val < 10)   // MAGIC to avoid false positives
                   continue;
@@ -517,7 +517,7 @@ void Page::getStaffLines()
             }
       qSort(staveTop.begin(), staveTop.end(), sortLvStaves);
       foreach(Lv a, staveTop) {
-            staves.append(QRectF(cropL * 32, a.line, width() - cropR*32, spatium*4));
+            staves.append(QRectF(cropL * 32, a.line, width() - cropR*32, _spatium*4));
             }
       }
 
@@ -538,7 +538,7 @@ void Page::searchNotes(int line, int x1, int x2, int y)
       {
       QList<Hv> val;
 
-      int w = spatium * 1.3;
+      int w = _spatium * 1.3;
       x1 += w/2;
       x2 -= w/2;
       bool on = false;
@@ -554,8 +554,8 @@ void Page::searchNotes(int line, int x1, int x2, int y)
             else {
                   if (on) {
                         int w = x - xx1;
-                        if (w > spatium && w < (spatium*1.5))
-                              _notes.append(QRect(xx1, y-spatium*.5, w, spatium));
+                        if (w > _spatium && w < (_spatium*1.5))
+                              _notes.append(QRect(xx1, y-_spatium*.5, w, _spatium));
                         on = false;
                         }
                   }

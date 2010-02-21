@@ -65,6 +65,7 @@
 #include "repeatlist.h"
 #include "keysig.h"
 #include "beam.h"
+#include "omr/omr.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -278,6 +279,8 @@ Score::Score(const Style& s)
       _defaultsRead   = false;
       rights          = 0;
       _pageOffset     = 0;
+      _omr            = 0;
+      _showOmr        = false;
       _tempomap       = new AL::TempoMap;
       _sigmap         = new AL::TimeSigMap;
       _sigmap->add(0, Fraction(4, 4));
@@ -374,6 +377,10 @@ bool Score::read(QString name)
                         return false;
                   connectSlurs();
                   }
+            else if (cs.toLower() == "pdf") {
+                  if (!importPdf(name))
+                        return false;
+                  }
             else {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   }
@@ -412,6 +419,10 @@ bool Score::read(QString name)
 
 void Score::write(Xml& xml, bool /*autosave*/)
       {
+      if (_omr)
+            _omr->write(xml);
+      if (_showOmr)
+            xml.tag("showOmr", _showOmr);
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", AL::division);
       xml.curTrack = -1;

@@ -158,8 +158,8 @@ void ScanView::paintEvent(QPaintEvent* event)
             foreach(QLine l, page->sl())
                   p.drawLine(QLineF(l.x1()+.5, l.y1()+.5, l.x2()+.5, l.y2()+.5));
             }
-      foreach(const QRect r, page->slices())
-            p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
+//      foreach(const QRect r, page->slices())
+//            p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
 
       p.setPen(QPen(QColor(255, 0, 0), 3.0));
       foreach(const QRect r, page->notes())
@@ -294,5 +294,35 @@ void ScanView::wheelEvent(QWheelEvent* event)
       imatrix = _matrix.inverted();
 
       scroll(dx, dy, QRect(0, 0, width(), height()));
+      }
+
+//---------------------------------------------------------
+//   setScale
+//---------------------------------------------------------
+
+void ScanView::setScale(double v)
+      {
+      double spatium = _scan->spatium(0);
+      setMag(v/spatium);
+      update();
+      }
+
+//---------------------------------------------------------
+//   setOffset
+//---------------------------------------------------------
+
+void ScanView::setOffset(double x, double y)
+      {
+      double spatium = _scan->spatium(0) * _matrix.m11();
+      double nx = x*spatium;
+      double ny = y*spatium;
+      double ox = _matrix.dx();
+      double oy = _matrix.dy();
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         _matrix.m22(), _matrix.m23(), nx, ny, _matrix.m33());
+      imatrix = _matrix.inverted();
+
+      scroll(ox-nx, oy-ny, QRect(0, 0, width(), height()));
+      update();
       }
 
