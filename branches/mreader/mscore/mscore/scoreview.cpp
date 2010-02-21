@@ -1413,6 +1413,8 @@ void ScoreView::setViewRect(const QRectF& r)
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
+      double _spatium = score()->spatium() * _matrix.m11();
+      emit offsetChanged(_matrix.dx() / _spatium, _matrix.dy() / _spatium);
       }
 
 //---------------------------------------------------------
@@ -2044,6 +2046,8 @@ void ScoreView::zoom(int step, const QPoint& pos)
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
       emit viewRectChanged();
+      double _spatium = score()->spatium() * _matrix.m11();
+      emit offsetChanged(_matrix.dx() / _spatium, _matrix.dy() / _spatium);
       update();
       }
 
@@ -2085,6 +2089,8 @@ void ScoreView::wheelEvent(QWheelEvent* event)
 
       scroll(dx, dy, QRect(0, 0, width(), height()));
       emit viewRectChanged();
+      double _spatium = score()->spatium() * _matrix.m11();
+      emit offsetChanged(_matrix.dx() / _spatium, _matrix.dy() / _spatium);
       }
 
 //---------------------------------------------------------
@@ -2246,6 +2252,7 @@ void ScoreView::setMag(double nmag)
       _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m13(), _matrix.m21(),
          nmag, _matrix.m23(), _matrix.dx()*deltamag, _matrix.dy()*deltamag, _matrix.m33());
       imatrix = _matrix.inverted();
+      emit scaleChanged(nmag * score()->spatium());
       }
 
 //---------------------------------------------------------
@@ -2753,6 +2760,8 @@ void ScoreView::dragScoreView(QMouseEvent* ev)
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
+      double _spatium = score()->spatium() * _matrix.m11();
+      emit offsetChanged(_matrix.dx() / _spatium, _matrix.dy() / _spatium);
       emit viewRectChanged();
       }
 
@@ -3148,10 +3157,14 @@ qreal ScoreView::mag() const
 void ScoreView::setOffset(qreal x, qreal y)
       {
       double m = PDPI / DPI;
+      x *= m;
+      y *= m;
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
-         _matrix.m22(), _matrix.m23(), x*m, y*m, _matrix.m33());
+         _matrix.m22(), _matrix.m23(), x, y, _matrix.m33());
       imatrix = _matrix.inverted();
       emit viewRectChanged();
+      double _spatium = score()->spatium() * _matrix.m11();
+      emit offsetChanged(x / _spatium, y / _spatium);
       }
 
 //---------------------------------------------------------

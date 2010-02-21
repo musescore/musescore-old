@@ -95,6 +95,7 @@ class TextB;
 class Beam;
 class Lyrics;
 class Text;
+class Omr;
 
 extern bool showRubberBand;
 
@@ -274,6 +275,8 @@ class Score : public QObject {
 
       Selection _selection;
       QList<KeySig*> customKeysigs;
+      Omr* _omr;
+      bool _showOmr;
 
       //------------------
 
@@ -553,6 +556,7 @@ class Score : public QObject {
       bool importLilypond(const QString& name);
       bool importBB(const QString& name);
       bool importCapella(const QString& name);
+      bool importPdf(const QString& name);
       void saveFile(QFileInfo& info, bool autosave);
       void saveFile(QIODevice* f, bool autosave);
       void saveCompressedFile(QFileInfo&, bool autosave);
@@ -791,6 +795,9 @@ class Score : public QObject {
       void cmdEnterRest(const Duration& d);
       void cmdAddInterval(int, const QList<Note*>&);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
+      Omr* omr() const        { return _omr; }
+      bool showOmr() const    { return _showOmr; }
+      void setShowOmr(bool v) { _showOmr = v; }
       };
 
 extern Score* gscore;
