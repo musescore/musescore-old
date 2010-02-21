@@ -156,14 +156,14 @@ endif (APPLE OR MINGW)
 ##
 
 SET(JACK_LONGNAME "jack (jack audio connection kit)")
-SET(JACK_MIN_VERSION "0.98.0")
+SET(JACK_MIN_VERSION "2.98.0")
 
 SET(BUILD_JACK AUTO CACHE STRING "Build with support for ${JACK_LONGNAME}. jack >= ${JACK_MIN_VERSION} will be needed. [ON/OFF/AUTO]")
 IF(BUILD_JACK)
      IF(MINGW)
            set (USE_JACK 1)
-           set (JACK_INCDIR "C:/Program Files/Jack v1.9.5/includes")
-           set (JACK_LIB "C:/Program Files/Jack v1.9.5/lib/libjack.a")
+           set (JACK_INCDIR "C:/Program Files (x86)/Jack v1.9.3/includes")
+           set (JACK_LIB "C:/Program Files (x86)/Jack v1.9.3/lib/libjack.a")
      ELSE(MINGW)
            PKGCONFIG(jack ${JACK_MIN_VERSION} JACK_INCDIR JACK_LIBDIR JACK_LIB JACK_CPP)
            IF(JACK_INCDIR)

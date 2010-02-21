@@ -1178,7 +1178,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "sharp",
          QT_TRANSLATE_NOOP("action","sharp"),
-         Qt::Key_NumberSign,
+         0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","sharp"),
          QT_TRANSLATE_NOOP("action","sharp"),

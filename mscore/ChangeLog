@@ -1,6 +1,9 @@
 20.feb (lv)
       - import MusicXML quarter tone accidentals following Tartini convention
         (export was done by (la) on Jan 26
+      (db)
+      - remove Tuning plugin since feature is available via Display > Synthesizer
+      - remove default Sharp shortcut since it conflicts with Shift+3 on US layout
 19.feb (ws)
       - script interface chords: add "type" property to distinguish between normal and grace notes
       - expose grace notes in script cursor interface
