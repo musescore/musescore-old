@@ -1382,8 +1382,8 @@ bool MuseScore::midiinEnabled() const
 void MuseScore::midiNoteReceived(int pitch, bool chord)
       {
       QWidget* w = QApplication::activeModalWidget();
-      if (cs && w == 0)
-            cs->midiNoteReceived(pitch, chord);
+      if (cv && w == 0)
+            cv->midiNoteReceived(pitch, chord);
       }
 
 //---------------------------------------------------------

@@ -1036,14 +1036,14 @@ int Measure::snap(int tick, const QPointF p) const
 //   midiNoteReceived
 //---------------------------------------------------------
 
-void Score::midiNoteReceived(int pitch, bool chord)
+void ScoreView::midiNoteReceived(int pitch, bool chord)
       {
       MidiInputEvent ev;
       ev.pitch = pitch;
       ev.chord = chord;
 
-      midiInputQueue.enqueue(ev);
-      if (!_undo->active())
+      score()->enqueueMidiEvent(ev);
+      if (!score()->undo()->active())
             cmd(0);
       }
 
