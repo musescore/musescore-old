@@ -279,6 +279,7 @@ class ScoreView : public QWidget {
       void setFocusRect();
       Element* getDragElement() const { return dragElement; }
       void changeLineSegment(bool);
+      void midiNoteReceived(int pitch, bool);
       };
 
 extern int searchStaff(const Element* element);

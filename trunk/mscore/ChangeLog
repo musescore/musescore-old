@@ -1,3 +1,5 @@
+21.feb (ws)
+      - fix midi keyboard note entry
 20.feb (lv)
       - import MusicXML quarter tone accidentals following Tartini convention
         (export was done by (la) on Jan 26

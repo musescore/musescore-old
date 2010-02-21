@@ -1056,7 +1056,6 @@ const QList<MidiPatch*>& Seq::getPatchInfo() const
 
 void Seq::midiInputReady()
       {
-//      if (driver && cs)
       if (driver)
             driver->midiRead();
       }

@@ -530,7 +530,6 @@ class Score : public QObject {
       void changeVoice(int);
 
       void colorItem(Element*);
-      void midiNoteReceived(int pitch, bool);
       const QList<Part*>* parts() const  { return &_parts; }
       void appendPart(Part* p);
       void updateStaffIndex();
@@ -791,6 +790,7 @@ class Score : public QObject {
       void cmdEnterRest(const Duration& d);
       void cmdAddInterval(int, const QList<Note*>&);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
+      void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       };
 
 extern Score* gscore;
