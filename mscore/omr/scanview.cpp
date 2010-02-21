@@ -302,7 +302,7 @@ void ScanView::wheelEvent(QWheelEvent* event)
 
 void ScanView::setScale(double v)
       {
-      double spatium = _scan->spatium(0);
+      double spatium = _scan->spatium();
       setMag(v/spatium);
       update();
       }
@@ -313,7 +313,7 @@ void ScanView::setScale(double v)
 
 void ScanView::setOffset(double x, double y)
       {
-      double spatium = _scan->spatium(0) * _matrix.m11();
+      double spatium = _scan->spatium() * _matrix.m11();
       double nx = x*spatium;
       double ny = y*spatium;
       double ox = _matrix.dx();
