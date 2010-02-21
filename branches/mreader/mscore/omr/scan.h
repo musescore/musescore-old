@@ -22,7 +22,6 @@
 #define __SCAN_H__
 
 class Page;
-// class Xml;
 class Pdf;
 
 //---------------------------------------------------------
@@ -32,13 +31,12 @@ class Pdf;
 class Scan {
       QString _pdfPath;
       double _spatium;
-      int _division;
+      double _dpmm;
 
       Pdf* _doc;
       QList<Page*> pages;
 
       void process1(int page);
-
 
    public:
       Scan();
@@ -46,8 +44,9 @@ class Scan {
       Page* page(int idx)                  { return pages[idx];            }
       int numPages() const                 { return pages.size();          }
       int pagesInDocument() const;
-//      void save(Xml&) const;
-      double spatium(int n) const;
+      double spatiumMM() const;           // spatium in millimeter
+      double spatium() const               { return _spatium; }
+      double dpmm() const                  { return _dpmm;    }
       };
 
 #endif

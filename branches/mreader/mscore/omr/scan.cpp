@@ -30,9 +30,7 @@
 
 Scan::Scan()
       {
-      _spatium  = 3.0;  // unit: mm
-      _division = 480;
-      _doc      = 0;
+      _doc = 0;
       }
 
 //---------------------------------------------------------
@@ -65,35 +63,29 @@ bool Scan::read(const QString& path)
             page->setImage(image);
             pages.append(page);
             }
-      for (int i = 0; i < n; ++i)
+      double sp = 0;
+      double w  = 0;
+      for (int i = 0; i < n; ++i) {
             pages[i]->read();
+            sp += pages[i]->spatium();
+            w  += pages[i]->width();
+printf("page %d: %d %d: %f\n", i, pages[i]->width(), pages[i]->height(),
+              double(pages[i]->height()) / double(pages[i]->width()));
+            }
+      _spatium = sp / n;
+      w       /= n;
+      _dpmm    = w / 210.0;            // PaperSize A4
+
+printf("*** spatium: %f mm  dpmm: %f\n", spatiumMM(), _dpmm);
       return true;
       }
 
-#if 0
 //---------------------------------------------------------
-//   save
+//   spatiumMM
 //---------------------------------------------------------
 
-void Scan::save(Xml& xml) const
+double Scan::spatiumMM() const
       {
-      xml.tag("Spatium", _division);
-      xml.tag("Division", _division);
-      // sigmap
-      // tempomap
-      // part list
-      // beams/global elements
-      // staves
-      //    measures
-      }
-#endif
-
-//---------------------------------------------------------
-//   spatium
-//---------------------------------------------------------
-
-double Scan::spatium(int n) const
-      {
-      return pages[n]->spatium();
+      return _spatium / _dpmm;
       }
 
