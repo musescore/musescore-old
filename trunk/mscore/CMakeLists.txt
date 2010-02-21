@@ -156,7 +156,7 @@ endif (APPLE OR MINGW)
 ##
 
 SET(JACK_LONGNAME "jack (jack audio connection kit)")
-SET(JACK_MIN_VERSION "2.98.0")
+SET(JACK_MIN_VERSION "0.98.0")
 
 SET(BUILD_JACK AUTO CACHE STRING "Build with support for ${JACK_LONGNAME}. jack >= ${JACK_MIN_VERSION} will be needed. [ON/OFF/AUTO]")
 IF(BUILD_JACK)
