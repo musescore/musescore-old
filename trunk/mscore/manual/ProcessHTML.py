@@ -456,9 +456,13 @@ def generatePDF(html_source, verbose, language_code='en', pdf_parameter='openpdf
     file_name = 'MuseScore-' + language_code + '.pdf'
     print 'Create PDF handbook:',file_name
 
-    import ho.pisa as pisa
-    if verbose:
-        pisa.showLogging()
+    try:
+        import ho.pisa as pisa
+        if verbose:
+            pisa.showLogging()
+    except:
+        print "\nPisa library required from creating PDFs. See README.txt for information\n"
+        return
 
     #import re
     #html_source = re.sub('(.)','\\1 ',html_source)
@@ -596,6 +600,15 @@ def main():
     verbose = opts.verbose
     offline = opts.offline
     download_images = 'missing'
+
+    # Check for PDF library dependency
+    if pdf != "nopdf":
+        try:
+            import ho.pisa as pisa
+        except:
+            print "ImportError: No module named ho.pisa"
+            print "\nPisa library required from creating PDFs. See README.txt for information\n"
+            return
     
     # Create Handbooks for all languages
     if language_code == 'all':
