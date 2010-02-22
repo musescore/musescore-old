@@ -408,7 +408,7 @@ bool Element::intersects(const QRectF& rr) const
 
 void Element::layout()
       {
-      QPointF o(QPointF(_xoff, _yoff));
+      QPointF o(_xoff, _yoff);
       if (_offsetType == OFFSET_SPATIUM)
             o *= spatium();
       else
