@@ -605,7 +605,7 @@ MuseScore::MuseScore()
       menuFile->addAction(getAction("file-close"));
 
       menuFile->addSeparator();
-      menuFile->addAction(tr("Parts..."), this, SLOT(startExcerptsDialog()));
+      menuFile->addAction(getAction("parts"));
       menuFile->addAction(getAction("print"));
       menuFile->addSeparator();
       menuFile->addAction(getAction("quit"));
@@ -2167,6 +2167,8 @@ void MuseScore::cmd(QAction* a)
             splitWindow(false);
       else if (cmd == "edit-harmony")
             editChordStyle();
+      else if (cmd == "parts")
+            startExcerptsDialog();
       else {
             if (cv) {
                   cv->setFocus();
