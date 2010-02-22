@@ -1,6 +1,6 @@
 //=============================================================================
 //  MusE Reader
-//  Linux Music Score Reader
+//  Music Score Reader
 //  $Id$
 //
 //  Copyright (C) 2010 Werner Schweer
@@ -18,52 +18,32 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SCAN_VIEW_H__
-#define __SCAN_VIEW_H__
+#ifndef __OMR_H__
+#define __OMR_H__
 
+class ScanView;
 class Scan;
+class Xml;
 
 //---------------------------------------------------------
-//   ScanView
+//   Omr
 //---------------------------------------------------------
 
-class ScanView : public QWidget {
-      Q_OBJECT
+class Omr {
+      QString _path;
       Scan* _scan;
-      QPixmap pm[4];    // tiled because of max size restrictions
-      QPoint startDrag;
-
-      QTransform _matrix, imatrix;
-      int curPage;
-
-      void zoom(int step, const QPoint& pos);
-
-      virtual void mousePressEvent(QMouseEvent*);
-      virtual void mouseMoveEvent(QMouseEvent*);
-      virtual void wheelEvent(QWheelEvent*);
-      virtual void paintEvent(QPaintEvent*);
-
-      qreal mag() const { return _matrix.m11(); }
-      void setMag(double mag);
-
-   public slots:
-      void gotoPage(int);
-      void setScale(double);
-      void setOffset(double, double);
-      void nextPage();
-      void previousPage();
-
-   signals:
-      void pageNumberChanged(int);
-      void xPosChanged(int);
-      void yPosChanged(int);
 
    public:
-      ScanView(QWidget* parent = 0);
-      void setScan(Scan*);
-      Scan* scan() const { return _scan; }
+      Omr() { _scan = 0; }
+      Omr(const QString& path);
+      bool read();
+      ScanView* newScanView() const;
+      void write(Xml&) const;
+      void read(QDomElement e);
+      double spatiumMM() const;           // spatium in millimeter
       };
 
-
 #endif
+
+
 

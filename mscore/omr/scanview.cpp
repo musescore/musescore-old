@@ -40,16 +40,6 @@ ScanView::ScanView(QWidget* parent)
       double m = .25;
       _matrix = QTransform(m, 0.0, 0.0, m, 0.0, 0.0);
       imatrix = _matrix.inverted();
-
-      QAction* a = new QAction(tr("move to next page"), this);
-      a->setShortcut(QKeySequence::MoveToNextPage);
-      connect(a, SIGNAL(triggered()), SLOT(nextPage()));
-      addAction(a);
-
-      a = new QAction(tr("move to previous page"), this);
-      a->setShortcut(QKeySequence::MoveToPreviousPage);
-      connect(a, SIGNAL(triggered()), SLOT(previousPage()));
-      addAction(a);
       }
 
 //---------------------------------------------------------
@@ -314,7 +304,7 @@ void ScanView::setScale(double v)
 void ScanView::setOffset(double x, double y)
       {
       double spatium = _scan->spatium() * _matrix.m11();
-      double nx = x*spatium;
+      double nx = x*spatium + (_scan->page(curPage)->width() * _matrix.m11() * curPage);
       double ny = y*spatium;
       double ox = _matrix.dx();
       double oy = _matrix.dy();
