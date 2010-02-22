@@ -313,6 +313,7 @@ class MuseScore : public QMainWindow {
       void splitWindow(bool horizontal);
       void removeSessionFile();
       void editChordStyle();
+      void startExcerptsDialog();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -323,7 +324,6 @@ class MuseScore : public QMainWindow {
       void selectScore(QAction*);
       void selectionChanged(int);
       void startPreferenceDialog();
-      void startExcerptsDialog();
       void preferencesChanged();
       void seqStarted();
       void seqStopped();
