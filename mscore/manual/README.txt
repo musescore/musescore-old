@@ -7,20 +7,30 @@ http://davidbolton.info
 
 SET UP INSTRUCTIONS
 
-Code is written in Python 2.5. The actual PDF creation has several dependencies that must be installed first. See http://www.htmltopdf.org/ for details. I recommend pisa 3.0.31 or later since some earlier versions of pisa contain a image display bug. 
+Code is written for Python 2.6. The actual PDF creation 
+has several dependencies that must be installed first. 
+See http://www.htmltopdf.org/ for details. I recommend 
+pisa 3.0.31 or later since some earlier versions of 
+pisa contain a image display bug. 
 
-A connection to the Internet is required since ProcessHTML.py fetches HTML and images files from the MuseScore website.
+A connection to the Internet is required since 
+ProcessHTML.py fetches HTML and images files from the 
+MuseScore website.
 
 
 USE INSTRUCTIONS
 
-To create PDF handbooks run ProcessHTML.py from the command line.
+To create PDF handbooks run ProcessHTML.py from the 
+command line.
 
-By default the script will create the English handbook. To create other language handbooks use the standard two-letter language code as follows:
+By default the script will create the English handbook. 
+To create other language handbooks use the standard 
+two-letter language code as follows:
 
 > Python ProcessHTML.py fr
 
-To create all the language handbooks at once use "all" as the command line argument.
+To create all the language handbooks at once use "all" 
+as the command line argument.
 
 > Python ProcessHTML.py all
 
@@ -29,18 +39,26 @@ To create all the language handbooks at once use "all" as the command line argum
 
 INSTRUCTIONS FOR ADDING NEW LANGUAGE
 
-1. In chapterHeading() add the translation for "Chapter". For example:
+1. In chapterHeading() add the translation for 
+   "Chapter". For example:
 
     elif language_code == 'nb':
         chapter = 'Kapittel'
 
-2. In createHandbook() add the URL for the print version of the handbook and the top-level URL for the handbook on the website. Make sure the internal URL using Unicode characters rather than escaped charaters ('http://musescore.org/nb/håndbok' instead of 'http://musescore.org/nb/h%C3%A5ndbok'). For example
+2. In createHandbook() add the URL for the print 
+   version of the handbook and the top-level URL for 
+   the handbook on the website. Make sure the internal 
+   URL using Unicode characters rather than escaped 
+   charaters ('http://musescore.org/nb/håndbok' instead 
+   of 'http://musescore.org/nb/h%C3%A5ndbok'). For 
+   example
 
     elif language_code == 'nb':
         url = 'http://musescore.org/nb/print/book/export/html/2122'
         internal = 'http://musescore.org/nb/håndbok'
 
-3. In main() add a extra line to the "Create handbooks for all languages" section. For example
+3. In main() add a extra line to the "Create handbooks 
+   for all languages" section. For example
 
     createHandbook('nb', 'missing', pdf, verbose, heading_switch)
 
