@@ -1867,12 +1867,12 @@ printf("drop staffList\n");
                   break;
 
             case KEYSIG:
-                  staff->changeKeySig(t, static_cast<KeySig*>(e)->keySigEvent());
+                  staff->changeKeySig(tick(), static_cast<KeySig*>(e)->keySigEvent());
                   delete e;
                   break;
 
             case TIMESIG:
-                  score()->changeTimeSig(t, e->subtype());
+                  score()->changeTimeSig(tick(), e->subtype());
                   delete e;
                   break;
 
@@ -3155,7 +3155,8 @@ void Measure::layoutX(double stretch)
                                     }
                               else {
                                     int pt = s->prev()->subtype();
-                                    if (pt == Segment::SegKeySig || pt == Segment::SegTimeSig || pt == Segment::SegClef) {
+//                                    if (pt == Segment::SegKeySig || pt == Segment::SegTimeSig || pt == Segment::SegClef) {
+                                    if (pt == Segment::SegKeySig || pt == Segment::SegTimeSig) {
                                           minDistance = clefKeyRightMargin;
                                           }
                                     else {
@@ -3361,8 +3362,10 @@ void Measure::layoutX(double stretch)
                         chord->layout2();
                         }
                   else if ((t == CLEF) && (s != first())) {
-                        double w = xpos[seg+1] - xpos[seg];
-                        double m = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
+                        double w   = 0.0;
+                        if (types[seg+1] != Segment::SegChordRest)
+                              w = xpos[seg+1] - xpos[seg];
+                        double m   = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
                         e->rxpos() = w - e->width() - m;
                         }
                   else {
