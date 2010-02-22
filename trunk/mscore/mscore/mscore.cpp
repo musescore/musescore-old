@@ -744,7 +744,8 @@ MuseScore::MuseScore()
       menuStyle->setObjectName("Style");
       menuStyle->addAction(getAction("edit-style"));
       menuStyle->addAction(getAction("edit-text-style"));
-      menuStyle->addAction(getAction("edit-harmony"));
+      if (enableExperimental)
+            menuStyle->addAction(getAction("edit-harmony"));
       menuStyle->addSeparator();
       menuStyle->addAction(getAction("load-style"));
       menuStyle->addAction(getAction("save-style"));

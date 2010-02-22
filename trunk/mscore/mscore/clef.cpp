@@ -301,7 +301,8 @@ void Clef::layout()
             }
       addElement(symbol, .0, .0);
       symbol->setMag(smag * mag());
-      setUserOff(QPointF(0.0, yoff * _spatium));
+      setYoff(yoff);
+      setOffsetType(OFFSET_SPATIUM);
       }
 
 //---------------------------------------------------------
