@@ -1,3 +1,7 @@
+22.feb (la)
+      - cursor follows midi input
+      - customize doxygen
+      - fix time on first playback panel opening
 21.feb (ws)
       - fix midi keyboard note entry
 20.feb (lv)
