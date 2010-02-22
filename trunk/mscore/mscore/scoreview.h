@@ -169,12 +169,12 @@ class ScoreView : public QWidget {
       void cmdRepeatSelection();
 
    private slots:
-      void moveCursor();
       void textUndoLevelAdded();
       void enterState();
       void exitState();
 
    public slots:
+      void moveCursor();
       void setViewRect(const QRectF&);
       void dataChanged(const QRectF&);
 
