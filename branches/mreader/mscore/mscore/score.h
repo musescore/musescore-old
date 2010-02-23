@@ -533,7 +533,6 @@ class Score : public QObject {
       void changeVoice(int);
 
       void colorItem(Element*);
-      void midiNoteReceived(int pitch, bool);
       const QList<Part*>* parts() const  { return &_parts; }
       void appendPart(Part* p);
       void updateStaffIndex();
@@ -798,6 +797,7 @@ class Score : public QObject {
       Omr* omr() const        { return _omr; }
       bool showOmr() const    { return _showOmr; }
       void setShowOmr(bool v) { _showOmr = v; }
+      void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       };
 
 extern Score* gscore;

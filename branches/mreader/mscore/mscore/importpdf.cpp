@@ -34,6 +34,8 @@ bool Score::importPdf(const QString& path)
             _omr = 0;
             return false;
             }
+      _spatium = _omr->spatiumMM() * DPMM;
+
       setShowOmr(true);
       return true;
       }

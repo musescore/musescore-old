@@ -87,6 +87,32 @@ ScriptInterface scoreInterface = {
       };
 
 //---------------------------------------------------------
+//   addText
+//---------------------------------------------------------
+
+static void addText(Score* score, int subtype, const QString& s)
+      {
+      MeasureBase* measure = score->first();
+      if (measure == 0 || measure->type() != VBOX) {
+            measure = new VBox(score);
+            measure->setNext(score->first());
+            measure->setTick(0);
+            score->undoInsertMeasure(measure);
+            }
+      Text* text = new Text(score);
+      switch(subtype) {
+            case TEXT_TITLE:    text->setTextStyle(TEXT_STYLE_TITLE);    break;
+            case TEXT_SUBTITLE: text->setTextStyle(TEXT_STYLE_SUBTITLE); break;
+            case TEXT_COMPOSER: text->setTextStyle(TEXT_STYLE_COMPOSER); break;
+            case TEXT_POET:     text->setTextStyle(TEXT_STYLE_POET);     break;
+            }
+      text->setSubtype(subtype);
+      text->setParent(measure);
+      text->setText(s);
+      score->undoAddElement(text);
+      }
+
+//---------------------------------------------------------
 //   prototype_Score_call
 //---------------------------------------------------------
 
@@ -116,9 +142,8 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         if (t)
                               t->setText(s);
-                        else {
-                              ; // TODO-SCRIPT
-                              }
+                        else
+                              addText(score, TEXT_TITLE, s);
                         return context->engine()->undefinedValue();
                         }
                   }
@@ -134,9 +159,8 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         if (t)
                               t->setText(s);
-                        else {
-                              ; // TODO-SCRIPT
-                              }
+                        else
+                              addText(score, TEXT_SUBTITLE, s);
                         return context->engine()->undefinedValue();
                         }
                   }
@@ -152,9 +176,8 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         if (t)
                               t->setText(s);
-                        else {
-                              ; // TODO-SCRIPT
-                              }
+                        else
+                              addText(score, TEXT_COMPOSER, s);
                         return context->engine()->undefinedValue();
                         }
                   }
@@ -170,9 +193,8 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         if (t)
                               t->setText(s);
-                        else {
-                              ; // TODO-SCRIPT
-                              }
+                        else
+                              addText(score, TEXT_POET, s);
                         return context->engine()->undefinedValue();
                         }
                   }

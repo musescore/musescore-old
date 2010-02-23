@@ -674,7 +674,7 @@ void Seq::collectEvents()
 
 int Seq::getCurTime()
       {
-      return lrint(curTime() - startTime);
+          return (startTime > 0? lrint(curTime() - startTime) :0);
       }
 
 //---------------------------------------------------------
@@ -774,7 +774,7 @@ void Seq::setRelTempo(double relTempo)
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp) {
             pp->setTempo(t);
-            pp->setRelTempo(relTempo);
+            pp->setRelTempo(lrint(relTempo));
             }
       }
 
@@ -1056,7 +1056,6 @@ const QList<MidiPatch*>& Seq::getPatchInfo() const
 
 void Seq::midiInputReady()
       {
-//      if (driver && cs)
       if (driver)
             driver->midiRead();
       }

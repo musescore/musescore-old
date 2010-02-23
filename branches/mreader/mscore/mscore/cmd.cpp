@@ -2182,6 +2182,8 @@ void Score::processMidiInput()
             else {
                   startCmd();
                   addPitch(ev.pitch, ev.chord);
+				  ScoreView* sv = mscore->currentScoreView();
+				  sv->moveCursor();
                   layoutAll = true;
                   endCmd();
                   }

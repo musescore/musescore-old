@@ -1,3 +1,20 @@
+22.feb. (ws)
+      - fix #4626: layout of mid measure clef
+      - fix #4627: setting title/subtitle/poet/composer in score script interface not implemented
+      - fix #4288: its possible to drag/drop a time/key signature in middle of measure
+      - fix #4216: change font family in text properties does not work
+      (la)
+      - cursor follows midi input
+      - customize doxygen
+      - fix time on first playback panel opening
+21.feb (ws)
+      - fix midi keyboard note entry
+20.feb (lv)
+      - import MusicXML quarter tone accidentals following Tartini convention
+        (export was done by (la) on Jan 26
+      (db)
+      - remove Tuning plugin since feature is available via Display > Synthesizer
+      - remove default Sharp shortcut since it conflicts with Shift+3 on US layout
 19.feb (ws)
       - script interface chords: add "type" property to distinguish between normal and grace notes
       - expose grace notes in script cursor interface
