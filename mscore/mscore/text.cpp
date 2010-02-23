@@ -1484,4 +1484,106 @@ void TextB::dragTo(const QPointF& p)
       score()->setUpdateAll();
       score()->end();
       }
+#if 0
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool TextC::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a;
+      if (visible())
+            a = popup->addAction(tr("Set Invisible"));
+      else
+            a = popup->addAction(tr("Set Visible"));
+      a->setData("invisible");
+      a = popup->addAction(tr("Text Properties..."));
+      a->setData("props");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void TextC::propertyAction(ScoreView* viewer, const QString& s)
+      {
+      if (s == "props") {
+            TextC* nText = clone();
+            TextProperties tp(nText, 0);
+            int rv = tp.exec();
+            if (!rv) {
+                  delete nText;
+                  return;
+                  }
+            if (nText->defaultFont() != defaultFont()) {      // was font changed?
+                  QFont a = nText->defaultFont();
+                  QFont b = defaultFont();
+                  QFont f = defaultFont();
+                  if (a.family() != b.family())
+                        f.setFamily(a.family());
+                  if (a.pointSizeF() != b.pointSizeF())
+                        f.setPointSizeF(a.pointSizeF());
+                  if (a.bold() != b.bold())
+                        f.setBold(a.bold());
+                  if (a.italic() != b.italic())
+                        f.setItalic(a.italic());
+                  if (a.underline() != b.underline())
+                        f.setUnderline(a.underline());
+                  setDefaultFont(f);
+                  }
+#if 0
+            if (nText->textBase()->hasFrame() != textBase()->hasFrame())
+                  tt->textBase()->setHasFrame(nText->textBase()->hasFrame());
+            if (nText->frameWidth() != frameWidth())
+                  tt->setFrameWidth(nText->frameWidth());
+            if (nText->paddingWidth() != paddingWidth())
+                  tt->setPaddingWidth(nText->paddingWidth());
+            if (nText->frameColor() != frameColor())
+                  tt->setFrameColor(nText->frameColor());
+            if (nText->frameRound() != frameRound())
+                  tt->setFrameRound(nText->frameRound());
+            if (nText->circle() != circle())
+                  tt->setCircle(nText->circle());
+            if (nText->color() != color())
+                  tt->setColor(nText->color());
+            if (nText->defaultFont() != defaultFont()) {      // was font changed?
+                  QFont a = nText->defaultFont();
+                  QFont b = defaultFont();
+                  QFont f = t->defaultFont();
+                  if (a.family() != b.family())
+                        f.setFamily(a.family());
+                  if (a.pointSizeF() != b.pointSizeF())
+                        f.setPointSizeF(a.pointSizeF());
+                  if (a.bold() != b.bold())
+                        f.setBold(a.bold());
+                  if (a.italic() != b.italic())
+                        f.setItalic(a.italic());
+                  if (a.underline() != b.underline())
+                        f.setUnderline(a.underline());
+                  tt->setDefaultFont(f);
+                  }
+            if (nText->align() != align())
+                  tt->setAlign(nText->align());
+            if (nText->xoff() != xoff())
+                  tt->setXoff(nText->xoff());
+            if (nText->yoff() != yoff())
+                  tt->setYoff(nText->yoff());
+            if (nText->reloff() != _reloff)
+                  tt->setReloff(nText->reloff());
+            if (nText->offsetType() != offsetType())
+                  tt->setOffsetType(nText->offsetType());
+
+            tt->doc()->setModified(true);
+            if (t->selected())
+                  selectedElements.append(tt);
+#endif
+            delete nText;
+            score()->setLayoutAll(true);
+            }
+      else
+            Element::propertyAction(viewer, s);
+      }
+
+#endif
 

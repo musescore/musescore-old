@@ -3369,13 +3369,7 @@ void Measure::layoutX(double stretch)
                         e->rxpos() = w - e->width() - m;
                         }
                   else {
-                        double xo = e->xoff();
-                        double yo = e->yoff();
-                        if (e->offsetType() == OFFSET_SPATIUM) {
-                              xo *= _spatium;
-                              yo *= _spatium;
-                              }
-                        e->setPos(-e->bbox().x() + xo, yo);
+                        e->setPos(-e->bbox().x(), 0.0);
                         }
                   }
             }
