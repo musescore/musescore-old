@@ -164,12 +164,11 @@ void Clef::layout()
       double smag = _small ? score()->style(ST_smallClefMag).toDouble() : 1.0;
       double _spatium = spatium();
       double msp  = _spatium * smag;
-      int val     = subtype();
       double yoff = 0.0;
       clear();
       Symbol* symbol = new Symbol(score());
 
-      switch (val) {
+      switch (subtype()) {
             case CLEF_G:
                   symbol->setSym(trebleclefSym);
                   yoff = 3.0;
@@ -299,10 +298,10 @@ void Clef::layout()
                   }
                   break;
             }
-      addElement(symbol, .0, .0);
+      addElement(symbol, .0, yoff * _spatium);
       symbol->setMag(smag * mag());
-      setYoff(yoff);
-      setOffsetType(OFFSET_SPATIUM);
+//      setYoff(yoff);
+//      setOffsetType(OFFSET_SPATIUM);
       }
 
 //---------------------------------------------------------
@@ -455,4 +454,5 @@ void Clef::setSmall(bool val)
             _small = val;
       layout();
       }
+
 
