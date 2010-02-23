@@ -163,6 +163,12 @@ void Instrument::read(QDomElement e)
                   _maxPitchA = i;
             else if (tag == "maxPitchP")
                   _maxPitchP = i;
+            else if (tag == "trackName")
+                  _trackName = val;
+            else if (tag == "longName")
+                  _longName = val;
+            else if (tag == "shortName")
+                  _shortName = val;
             else if (tag == "transposition") {    // obsolete
                   _transposeChromatic = i;
                   _transposeDiatonic = chromatic2diatonic(i);

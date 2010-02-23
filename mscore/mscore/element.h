@@ -93,8 +93,8 @@ class Space {
       double _rw;       // space needed to the right
 
    public:
-      Space()                       { _lw = 0.0; _rw = 0.0; }
-      Space(double a, double b)     { _lw = a; _rw = b; }
+      Space() : _lw(0.0), _rw(0.0)  {}
+      Space(double a, double b) : _lw(a), _rw(b) {}
       double lw() const             { return _lw; }
       double rw() const             { return _rw; }
       double& rLw()                 { return _lw; }

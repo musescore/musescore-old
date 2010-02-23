@@ -29,8 +29,6 @@ install(FILES
       removenotes.js
       removenotes.ui
       chordchart.js
-      tuning.js
-      tuning.ui
       scales_e35a.ui
       scales_e35b.ui
       scales.js

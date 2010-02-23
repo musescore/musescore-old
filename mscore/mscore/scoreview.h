@@ -169,12 +169,12 @@ class ScoreView : public QWidget {
       void cmdRepeatSelection();
 
    private slots:
-      void moveCursor();
       void textUndoLevelAdded();
       void enterState();
       void exitState();
 
    public slots:
+      void moveCursor();
       void setViewRect(const QRectF&);
       void dataChanged(const QRectF&);
 
@@ -205,6 +205,8 @@ class ScoreView : public QWidget {
       void viewRectChanged();
       void scaleChanged(double);
       void offsetChanged(double, double);
+      void nextPage();
+      void previousPage();
 
    public:
       ScoreView(QWidget* parent = 0);
@@ -281,6 +283,7 @@ class ScoreView : public QWidget {
       void setFocusRect();
       Element* getDragElement() const { return dragElement; }
       void changeLineSegment(bool);
+      void midiNoteReceived(int pitch, bool);
       };
 
 extern int searchStaff(const Element* element);

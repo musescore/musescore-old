@@ -109,7 +109,7 @@ testdist:
 	cd mscore-${VERSION}; make release
 
 revision:
-	@svnversion -n | cut -c 1-4 > mscore/mscore/revision.h
+	@svnversion -n  > mscore/mscore/revision.h
 
 version: revision
 	@echo ${VERSION}

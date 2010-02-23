@@ -1362,6 +1362,8 @@ void Text::propertyAction(ScoreView* viewer, const QString& s)
                               QFont a = nText->defaultFont();
                               QFont b = defaultFont();
                               QFont f = t->defaultFont();
+                              if (a.family() != b.family())
+                                    f.setFamily(a.family());
                               if (a.pointSizeF() != b.pointSizeF())
                                     f.setPointSizeF(a.pointSizeF());
                               if (a.bold() != b.bold())
