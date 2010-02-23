@@ -1,4 +1,5 @@
 22.feb. (ws)
+      - fix: save editing of clef (dragging in edit mode)
       - fix #4626: layout of mid measure clef
       - fix #4627: setting title/subtitle/poet/composer in score script interface not implemented
       - fix #4288: its possible to drag/drop a time/key signature in middle of measure
