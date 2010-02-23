@@ -360,7 +360,7 @@ bool JackAudio::init()
             }
       jack_set_error_function(jackError);
       jack_set_process_callback(client, processAudio, this);
-      jack_on_shutdown(client, processShutdown, this);
+      //jack_on_shutdown(client, processShutdown, this);
       jack_set_buffer_size_callback(client, bufsize_callback, this);
       jack_set_sample_rate_callback(client, srate_callback, this);
       jack_set_port_registration_callback(client, registration_callback, this);
@@ -399,7 +399,6 @@ bool JackAudio::init()
                         fprintf(stderr, "no jack port for right channel found!\n");
                         }
                   }
-
             synth = new FluidS::Fluid();
             synth->init(sampleRate());
             }

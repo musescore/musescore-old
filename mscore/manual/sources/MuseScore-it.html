@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_c540ef07c664ec90aec54736d6ce4751.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_30bddadbb9c787feb26fd28ee3705203.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx"}});
@@ -12,8 +12,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
 </script>
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/it/manuale/indice' />
-    <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_9.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_cbd17c717009b015b29b604f2a31b2e3.css" />
+    <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_2201016fb500fdc8a6a1e9918a29addc.css" />
   </head>
   <body>
         <div class="print-logo"></div>
@@ -46,8 +46,16 @@ Il programma di installazione raccomanda di chiudere le altre applicazioni prima
 <p>Per avviare il programma selezionare <kbd><samp class="menu">Start</samp> → <samp class="submenu">Tutti i programmi</samp> → <samp class="submenu">MuseScore 0.9</samp> → <samp class="menuitem">MuseScore</samp></kbd>. </p>
 <p>Dopo alcuni secondi MuseScore apre una partitura dimostrativa. Potete fare delle prove con questa partitura e farvi un'idea del programma. Come passo successivo potete <a href="http://musescore.org/it/manuale/creare-una-nuova-partitura" title="Creare una nuova partitura">Creare una nuova partitura</a>.<br />
 <img src="/sites/musescore.org/files/screenshot-demo-score.png" alt="screenshot-demo-score.png" title="screenshot-demo-score.png" width="450" height="416" class="inline" /></p>
+<h3 id="mac-installation">MacOSX</h3>
+<h4>Installazione</h4>
+<p>Cercare il file dmg per Mac nella pagina <a href="http://musescore.org/it/../download">Download</a> del sito di MuseScore. Fare click sul link per scaricare il file. Alla fine del download il file dmg viene mostrato sul desktop come "MuseScore-0.9.5" e appare il programma di installazione.</p>
+<p><img src="/sites/musescore.org/files/install_mac.png" alt="install_mac.png" title="install_mac.png" width="399" height="262" class="inline" /></p>
+<p>Trascinare l'icona di MuseScore all'interno della cartella Applicazioni. Se non siete l'amministratore, MacOSX chiederà la password.<br />
+E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
+<h4>Disinstallazione</h4>
+<p>Cancellare MuseScore dalla cartella Applicazioni.</p>
 <h3>Linux</h3>
-<p>Questa guida è stata scritta principalmente per gli utilizzatori del K Desktop Environment (KDE), ambiente desktop usato nei sistemi Linux come SUSE o Kubuntu, con le istruzioni tra parentesi (...) per gli utilizzatori del GNOME Desktop Environment, ambiente desktop usato nei sistemi Linux come Ubuntu o Fedora. </p>
+<p>Questa guida è stata scritta principalmente per gli utilizzatori del K Desktop Environment (KDE), ambiente desktop usato nei sistemi Linux come SUSE o Kubuntu, con le istruzioni tra parentesi (...) per gli utilizzatori del GNOME Desktop Environment, ambiente desktop usato nei sistemi Linux come Ubuntu. Per istruzioni specifiche per Fedora vai al <a href="print/book/export/html/772#fedora-installation">paragrafo qui sotto</a>. </p>
 <h4>Installare MuseScore</h4>
 <p>I sorgenti del progetto sono disponibili all'indirizzo <a class="freelinking external" href="http://www.musescore.org/it/download">http://www.musescore.org/it/download</a> ma in genere trovate i package binari nei repository della distribuzione che utilizzate.<br />
 Nella distribuzione Ubuntu, il package MuseScore si trova nel repository "universe". Se volete installare MuseScore il repository "universe" deve essere abilitato.<br />
@@ -100,14 +108,24 @@ sudo su -c 'echo snd-seq &gt;&gt; /etc/modules'</pre></li>
 </ul>
 </li>
 </ul>
-<h3 id="mac-installation">MacOSX</h3>
-<h4>Installazione</h4>
-<p>Cercare il file dmg per Mac nella pagina <a href="http://musescore.org/it/../download">Download</a> del sito di MuseScore. Fare click sul link per scaricare il file. Alla fine del download il file dmg viene mostrato sul desktop come "MuseScore-0.9.5" e appare il programma di installazione.</p>
-<p><img src="/sites/musescore.org/files/install_mac.png" alt="install_mac.png" title="install_mac.png" width="399" height="262" class="inline" /></p>
-<p>Trascinare l'icona di MuseScore all'interno della cartella Applicazioni. Se non siete l'amministratore, MacOSX chiederà la password.<br />
-E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
-<h4>Disinstallazione</h4>
-<p>Cancellare MuseScore dalla cartella Applicazioni.</p>
+<h3 id="fedora-installation">Fedora</h3>
+<ol>
+<li>Importare la GPG key:<br />
+<pre>su
+rpm --import http://prereleases.musescore.org/linux/Fedora/RPM-GPG-KEY-Seve</pre></li>
+<li>Andare alla pagina di <a href="http://musescore.org/it/../download">Download</a> del sito di MuseScore. Fare click sul link della versione stabile per Fedora e scegliere quindi il package rpm corretto per la vostra architettura di sistema</li>
+<li>A seconda della architettura di sistema, utilizzare uno dei due gruppi di comandi per installare MuseScore
+<ul>
+<li>per architettura i386<br />
+<pre>su
+yum localinstall musescore-0.9.4-1.fc10.i386.rpm</pre></li>
+<li>oppure per architettura x86_64<br />
+<pre>su
+yum localinstall musescore-0.9.4-1.fc10.x86_64.rpm</pre></li>
+</ul>
+</li>
+</ol>
+<p>Se avete difficoltà riguardo la riproduzione dei suoni, potete consultare la pagina <a class="freelinking external" href="http://www.musescore.org/en/node/3848#comment-9634">Fedora 11 and sound</a> (in inglese).</p>
   </div>
 <div id="node-838" class="section-3">
   <h1 class="book-heading">Creare una nuova partitura</h1>
@@ -117,35 +135,35 @@ E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
 <p>Inserire titolo, compositore e le altre informazioni come mostrato sopra. Notare le due opzioni presentate in basso:</p>
 <ul>
 <li>Crea Nuovo Spartito da Modello</li>
-<li>Crea Nuovo Spartito</li>
+<li>Crea Nuovo Spartito da zero</li>
 </ul>
-<p>La prima opzione presenta nella schermata successiva una lista di modelli di spartiti. La seconda permette di scegliere nella schermata successiva gli strumenti da includere. I modelli sono discussi più in dettaglio <a href="print/book/export/html/772#newscore-templates" title="Templates">successivamente</a>, ma per adesso scegliete “Crea Nuovo Spartito”. </p>
+<p>La prima opzione presenta nella schermata successiva una lista di modelli di spartiti. La seconda opzione permette di scegliere nella schermata successiva gli strumenti da includere. I modelli sono discussi più in dettaglio <a href="print/book/export/html/772#newscore-templates" title="Templates">successivamente</a>, ma per adesso scegliete “Crea Nuovo Spartito”. </p>
 <p>Fare click su “Next”.</p>
 <h3>Strumenti e parti di voci</h3>
 <p><img src="/sites/musescore.org/files/newscore-instruments_0.png" alt="New Score wizard: Add instruments" title="New Score wizard: Add instruments" width="450" height="367" class="inline" /></p>
-<p>La finestra Strumenti Musicali è divisa in due colonne. Nella prima colonna sono elencati gli strumenti o voci da scegliere. La seconda colonna inizialmente è vuota ma presto conterrà l'elenco degli strumenti della nuova partitura.</p>
-<p>Gli strumenti elencati nella prima colonna sono raggruppati in famiglie. Selezionare uno strumento e fare click su “Aggiungi”. Lo strumento selezionato appare ora nella colonna di destra. E' possibile aggiungere altri strumenti o voci. </p>
-<p>L'ordine degli strumenti nella colonna di destra determina l'ordine in cui appaiono nella partitura. Per cambiare l'ordine fare click sul nome di uno strumento e usare i pulsanti  Su e Giù per spostarlo. Una volta finito fare click su “Next”.</p>
+<p>La finestra per inserire gli strumenti è divisa in due colonne. Nella prima colonna sono elencati gli strumenti o voci da scegliere. La seconda colonna inizialmente è vuota ma presto conterrà l'elenco degli strumenti della nuova partitura.</p>
+<p>Gli strumenti elencati nella prima colonna sono raggruppati in famiglie. Fare un doppio click su una categoria per vedere l'elenco di tutti gli strumenti di quella famiglia. Selezionare uno strumento e fare click su “Aggiungi”. Lo strumento selezionato appare ora nella colonna di destra. E' possibile aggiungere altri strumenti o voci. </p>
+<p>L'ordine degli strumenti nella colonna di destra determina l'ordine in cui appaiono nella partitura. Per cambiare l'ordine fare click sul nome di uno strumento e usare i pulsanti "Su" oppure "Giù" per spostarlo. Una volta finito fare click su “Next”.</p>
 <h3>Tonalità</h3>
-<p>Se state utilizzando la versione 0.9.3 o una successiva, l'assistente chiede di scegliere una tonalità. Selezionate quella desiderata e confermare con “Next”.</p>
+<p>Se state utilizzando la versione 0.9.3 o una successiva, l'assistente chiede di scegliere una tonalità (armatura di chiave). Selezionate quella desiderata e confermare con “Next”.</p>
 <p>Se state usando la versione 0.9.2 o una precedente l'assistente non chiederà la <a href="http://musescore.org/it/manuale/tonalità" title="tonalità">tonalità</a> e quindi potete ignorare questo passaggio.</p>
 <h3>Indicazione del tempo, prima battuta, numero delle battute</h3>
 <p><img src="/sites/musescore.org/files/newscore-measures_0.png" alt="New Score wizard: Time signature and measure options" title="New Score wizard: Time signature and measure options" width="450" height="367" class="inline" /></p>
-<p>Selezionare l'indicazione del tempo (Inserisci Tempo). Se il brano inizia con delle note in levare selezionare la voce “Prima Battuta” e regolare la durata della prima battuta.</p>
+<p>Selezionare il tempo (Inserisci indicazione di tempo). Se il brano inizia con delle note in levare selezionare la voce “Prima Battuta” e regolare la durata della prima battuta.</p>
 <p>Se conoscete approssimativamente di quante battute avete bisogno potete specificarne in questa finestra il numero. Altrimenti è possibile aggiungere o eliminare in seguito le battute. </p>
 <p>Fare “Click” sul pulsante “Finish” per creare la vostra partitura. </p>
 <h3>Adattamento della partitura dopo la sua creazione</h3>
-<p>Tutto quello che avete scelto con la Creazione Guidata Nuovo Spartito può essere cambiato in seguito.</p>
+<p>Tutto quello che avete scelto con la Creazione Guidata Nuovo Spartito può essere cambiato quando si lavora sulla partitura.</p>
 <ul>
 <li>Per aggiungere o eliminare battute o per creare una prima battuta in levare vai a <a href="http://musescore.org/it/manuale/azioni-sulle-battute" title="Azioni sulle battute">Azioni sulle battute</a></li>
 <li>Per cambiare qualunque testo vai a <a href="http://musescore.org/it/manuale/inserimento-e-modifica-testo" title="Inserimento e modifica testo">Inserimento e modifica testo</a>. Per aggiungere il titolo mancante (o qualunque altro elemento di testo) dal menù selezionare <kbd><samp class="menu">Elementi</samp> → <samp class="submenu">Testo</samp> → <samp class="menuitem">Titolo</samp></kbd> (o un altro elemento)</li>
-<li>Per aggiungere, cancellare o cambiare l'ordine degli strumenti dal menù selezionare <kbd><samp class="menu">Elementi</samp> → <samp class="menuitem">Strumenti Musicali...</samp></kbd>.</li>
+<li>Per aggiungere, cancellare o cambiare l'ordine degli strumenti dal menù selezionare <kbd><samp class="menu">Elementi</samp> → <samp class="menuitem">Strumenti...</samp></kbd>.</li>
 </ul>
 <p>Vedi anche: <a href="http://musescore.org/it/manuale/tonalità" title="Tonalità">Tonalità</a>, <a href="http://musescore.org/it/manuale/indicazione-del-tempo" title="Indicazione del tempo">Indicazione del tempo</a>, <a href="http://musescore.org/it/manuale/chiavi" title="Chiavi">Chiavi</a>.</p>
 <h3 id="newscore-templates">Modelli</h3>
 <p>Nella prima schermata dell'assistente “Creazione Guidata Nuovo Spartito” c'è l'opzione “Crea Nuovo Spartito da Modello” (vedi sopra <a href="print/book/export/html/772#newscore-titles">Titolo, compositore e altre informazioni</a> per i dettagli). Per creare uno spartito utilizzando questo metodo selezionare l'opzione e fare click su “Next”.</p>
 <p>La schermata successiva mostra un elenco di modelli. Selezionarne uno e fare click su “Next”. Continuare quindi nella creazione dello spartito come nel caso precedente. </p>
-<p>I file modello sono dei normali file MuseScore archiviati in Windows nella cartella “C:\Programmi\MuseScore 0.9\templates”. Nei sistemi Linux i file modello si trovano nella cartella /usr/share/mscore-xxx (se il programma è stato installato da un gestore di pacchetti) oppure nella cartella /usr/local/share/mscore-xxx (se avete compilato il programma dai sorgenti).</p>
+<p>I file modello sono dei normali file MuseScore archiviati nella cartella dei modelli (template). E' possibile creare dei nuovi modelli personalizzati salvando i file MuseScore in questa cartella. Nei sistemi Windows di solito la cartella è “C:\Programmi\MuseScore 0.9\templates”. Nei sistemi Linux i modelli si trovano nella cartella /usr/share/mscore-xxx (se il programma è stato installato da un gestore di pacchetti) oppure nella cartella /usr/local/share/mscore-xxx (se avete compilato il programma dai sorgenti). Nei sistemi Mac vedere nella cartella /Applications/MuseScore.app/Contents/Resources/templates</p>
   </div>
 </div>
 <div id="node-853" class="section-2">
@@ -185,7 +203,7 @@ E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
 </ul>
 <p>Le note si possono inserire utilizzando i tasti: <kbd><kbd>C</kbd></kbd> <kbd><kbd>D</kbd></kbd> <kbd><kbd>E</kbd></kbd> <kbd><kbd>F</kbd></kbd> <kbd><kbd>G</kbd></kbd> <kbd><kbd>A</kbd></kbd> <kbd><kbd>B</kbd></kbd> <kbd><kbd>C</kbd></kbd><br />
 <img src="/sites/musescore.org/files/noteentry1_0.png" alt="Notes: C, D, E, F, G, A, B, C" title="Notes: C, D, E, F, G, A, B, C" width="430" height="82" class="inline" /></p>
-<p><kbd>Il tasto <kbd>Spazio</kbd></kbd> inserisce una pausa: <kbd><kbd>C</kbd> <kbd>D</kbd> <kbd>Spazio</kbd> <kbd>E</kbd></kbd><br />
+<p>Il tasto <kbd><kbd>Spazio</kbd></kbd> inserisce una pausa: <kbd><kbd>C</kbd> <kbd>D</kbd> <kbd>Spazio</kbd> <kbd>E</kbd></kbd>. Notare che la durata selezionata per inserire le note (nell'esempio semiminime) determina anche la durata della pausa (nell'esempio pausa da 1/4).<br />
 <img src="/sites/musescore.org/files/noteentry2_0.png" alt="C, D, rest, E" title="C, D, rest, E" width="237" height="59" class="inline" /></p>
 <p>Per aggiungere una nota a un accordo utilizzare il tasto <kbd><kbd>Maius</kbd></kbd> e il tasto della nota: <kbd><kbd>C</kbd></kbd> <kbd><kbd>D</kbd></kbd> <kbd><kbd>Maius</kbd>+<kbd>F</kbd></kbd> <kbd><kbd>Maius</kbd>+<kbd>A</kbd> <kbd>E</kbd> <kbd>F</kbd></kbd><br />
 <img src="/sites/musescore.org/files/noteentry3_0.png" alt="C, D minor triad, E, F" title="C, D minor triad, E, F" width="233" height="59" class="inline" /></p>
@@ -203,6 +221,12 @@ E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
 </ul>
 <h3>Tastiera MIDI</h3>
 <p>E' possibile inserire le note utilizzando una tastiera MIDI a partire dalla versione 0.9.4 su Windows o Linux. Le versioni 0.9.3 e precedenti supportano la tastiera MIDI solo su Linux.</p>
+<h3>Colori</h3>
+<p>A partire dalla versione 0.9.5 il programma MuseScore mostra colorate le note al fuori dall'estensione dello strumento. Appaiono colorate in giallo le note fuori estensione a livello amatoriale e in rosso quelle fuori estensione a livello professionale. I colori servono come informazione e appaiono sullo schermo ma non nelle copie stampate. Per disabilitare questa opzione nella versione  0.9.6 o successive selezionare <kbd><samp class="menu">Modifica</samp> → <samp class="menuitem">Preferenze...</samp></kbd>, fare click sulla linguetta <kbd><samp>Inserimento note</samp></kbd> e deselezionare l'opzione "Colora le note fuori estensione".</p>
+<h4>Link esterni</h4>
+<ul>
+<li><a class="freelinking external" href="http://musictechtips.wordpress.com/2010/01/31/musescore-in-10-easy-steps-part-3-note-entry-basics/">Video tutorial: Note entry basics</a> by Katie Wardrobe (in inglese).</li>
+</ul>
   </div>
 <div id="node-840" class="section-3">
   <h1 class="book-heading">Copia e incolla</h1>
@@ -264,20 +288,27 @@ E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
 <h3>Inserire</h3>
 <p>Per prima cosa selezionare una battuta e quindi premere <kbd><kbd>Ins</kbd></kbd> per inserire una battuta vuota prima di quella selezionata. Per inserire più battute selezionare dal menù <kbd><samp class="menu">Elementi</samp> → <samp class="submenu">Battute</samp> → <samp class="menuitem">Inserisci battute...</samp></kbd>.</p>
 <h3>Cancellare</h3>
-<p>Per cancellare una battuta si deve per prima cosa selezionarla in maniera speciale. Premere <kbd><kbd>Ctr</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd></kbd>) sulla tastiera e fare click con il mouse in un'area vuota della battuta. La battuta appare adesso evidenziata con una linea punteggiata che indica la selezione di un “porzione di tempo”. Premere  <kbd><kbd>Ctrl</kbd>+<kbd>Click</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Click</kbd></kbd>) per estendere la selezione. Premendo il tasto <kbd><kbd>Canc</kbd></kbd> (Mac: <kbd><kbd>Fn</kbd>+<kbd>Backspace</kbd></kbd>) vengono eliminate le battute selezionate.</p>
+<p>Prima selezionare la battuta e quindi <kbd><kbd>Ctr</kbd>+<kbd>Canc</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Fn</kbd>+<kbd>Backspace</kbd></kbd>).</p>
+<p>Per la versione 0.9.5 e precedenti si deve procedere in maniera differente. Premere <kbd><kbd>Ctr</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd></kbd>) sulla tastiera e fare click con il mouse in un'area vuota della battuta. La battuta appare adesso evidenziata con una linea punteggiata che indica la selezione di un “porzione di tempo”. Premere  <kbd><kbd>Ctrl</kbd>+<kbd>Click</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Click</kbd></kbd>) per estendere la selezione. Premendo il tasto <kbd><kbd>Canc</kbd></kbd> (Mac: <kbd><kbd>Fn</kbd>+<kbd>Backspace</kbd></kbd>) vengono eliminate le battute selezionate.</p>
 <h3>Proprietà</h3>
 <p>Per modificare le proprietà di una battuta fare click con il tasto destro del mouse in un'area vuota della battuta e scegliere <kbd><samp class="menuitem">Proprietà Battuta...</samp></kbd>.</p>
 <p><img src="/sites/musescore.org/files/measure-properties.png" alt="Measure properties dialog" title="Measure properties dialog" width="449" height="347" class="inline" /></p>
 <h3>Pentagrammi</h3>
 <p>Agendo sulla proprietà <em>Visibile</em> è possibile mostrare o nascondere le note e le linee del pentagramma della battuta selezionata. Agendo sulla proprietà <em>Senza gambo</em> è possibile mostrare o nascondere i gambi di tutte le note della battuta selezionata. Se si seleziona l'opzione <em>Senza gambo</em>  note che normalmente hanno i gambi come le minime (2/4) e le semiminime (1/4) mostreranno solo le teste delle note.</p>
 <h3>Durata</h3>
-<p>La durata <em>nominale</em> corrisponde alla indicazione del tempo mostrata nella partitura. E' possibile modificare la durata <em>corrente</em> della battuta selezionata nonostante indicazione del tempo della partitura. Di solito la durata nominale è uguale a quella corrente. Una battuta iniziale in levare può avere una durata corrente inferiore.</p>
+<p>La durata <em>nominale</em> corrisponde alla indicazione del tempo mostrata nella partitura. E' possibile modificare la durata <em>corrente</em> della battuta selezionata nonostante indicazione del tempo della partitura. Di solito la durata nominale è uguale a quella corrente. Una battuta iniziale in levare può avere una durata corrente inferiore. Per esempio per inserire una nota in levare da 1/4 (semiminima) all'inizio di in un brano in 4/4 la battuta in levare avrà la durata nominale di 4/4 e la durata attuale di 1/4.</p>
 <h3>Irregolare</h3>
-<p>Una battuta “Irregolare” non è conteggiata nella numerazione delle battute. Di solito una  battuta iniziale in levare è segnata come “Irregolare”. Se contrassegnate come irregolare una battuta, per aggiornare la numerazione delle battute si deve chiudere e riaprire la partitura.</p>
+<p>Una battuta “Irregolare” non è conteggiata nella numerazione delle battute. Di solito una  battuta iniziale in levare è segnata come “Irregolare”. Se state utilizzando la versione 0.9.4 o precedente e contrassegnate come irregolare una battuta, per aggiornare la numerazione delle battute si deve chiudere e riaprire la partitura.</p>
 <h3>Numero delle ripetizioni</h3>
 <p>Se la battuta è alla fine di una <a href="http://musescore.org/it/manuale/ripetizione" title="Ripetizione">Ripetizione</a> è possibile indicare quante volte la ripetizione deve essere suonata.</p>
 <h3>Interrompi le pause di più battute</h3>
-<p>Questa proprietà interrompe una pausa che dura più di una battuta. Se la battuta corrente contiene una variazione di <a href="http://musescore.org/it/manuale/indicazione-del-tempo" title="indicazione del tempo">indicazione del tempo</a> allora il programma MuseScore seleziona automaticamente questa proprietà marks this property automatically.</p>
+<p>Questa proprietà interrompe una pausa che dura più di una battuta. Se la battuta corrente contiene una variazione di <a href="http://musescore.org/it/manuale/indicazione-del-tempo" title="indicazione del tempo">indicazione del tempo</a> allora il programma MuseScore seleziona automaticamente questa proprietà.</p>
+<h3>Numerazione</h3>
+<p>MuseScore inserisce automaticamente la numerazione nella prima battuta di ogni accollatura, ma sono possibili diverse opzioni. Dal menù principale selezionare <kbd><samp class="menu">Stile</samp> → <samp class="submenu">Modifica stile generale</samp></kbd>. Nel pannello di sinistra selezionare <b>"Numeri"</b>. Nel pannello di destra c'è in basso la sezione  <b>"Numeri delle battute"</b> .</p>
+<p>Se si seleziona "Numeri delle battute" si abilita la numerazione automatica.<br />
+Selezionare "mostra il primo" se si desidera che sia numerata la prima battuta.<br />
+Selezionare "tutti i pentagrammi" se desiderate che la numerazione sia ripetuta in ogni pentagramma dell'accollatura (altrimenti la numerazione compare solo sul primo pentagramma).<br />
+E' possibile mostrare i numeri in "ogni accollatura" (il numero appare nella prima battuta della riga) oppure secondo un "intervallo" selezionato nella casella in basso a destra. Per esempio se si seleziona 1 tutte le battute saranno numerate, se si seleziona 5 la numerazione sarà visualizzata ogni 5 battute.</p>
   </div>
 <div id="node-856" class="section-3">
   <h1 class="book-heading">Palette</h1>
@@ -441,16 +472,17 @@ E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
   </div>
 <div id="node-895" class="section-3">
   <h1 class="book-heading">Gruppo di note tra pentagrammi</h1>
-  <p>Negli spartiti per pianoforte è frequente l'utilizzo di tutti e due i pentagrammi (chiave di basso e chiave di violino) per scrivere frasi musicali.</p>
+  <p>Negli spartiti per pianoforte è frequente l'utilizzo di tutti e due i pentagrammi (chiave di basso e chiave di violino) per scrivere frasi musicali.<br />
+Questo effetto può essere ottenuto in MuseScore in questa maniera:</p>
 <p>Per prima cosa inserire tutte le note della frase in un pentagramma:<br />
 <img src="/sites/musescore.org/files/crossbeams1_0.png" alt="Beamed notes in upper staff" title="Beamed notes in upper staff" width="112" height="198" class="inline" /></p>
-<p>Con la combinazione<kbd><kbd>Maius</kbd>+<kbd>Ctrl</kbd>+<kbd>↓</kbd></kbd> si spostano le note o accordi selezionati nel pentagramma sottostante.<br />
+<p>Con la combinazione<kbd><kbd>Maius</kbd>+<kbd>Ctrl</kbd>+<kbd>↓</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Shift</kbd>+<kbd>Giù</kbd></kbd>) si spostano le note o accordi selezionati nel pentagramma sottostante.<br />
 <img src="/sites/musescore.org/files/crossbeams2_0.png" alt="Selected note moved to lower staff" title="Selected note moved to lower staff" width="106" height="159" class="inline" /></p>
 <p>Vedi anche: <a href="http://musescore.org/it/manuale/stanghette" title="Stanghette">Stanghette</a> per la stanghette di accollatura.</p>
   </div>
 <div id="node-916" class="section-3">
   <h1 class="book-heading">Indicazione del tempo</h1>
-  <p>I simboli delle <strong>indicazioni del tempo</strong> sono disponibili nella paletta Trmpo. E' possibile selezionare e trascinare (drag and drop) questi simboli nella partitura (vedi la voce <a href="http://musescore.org/it/manuale/palette" title="Palette">Palette</a> per le informazioni generali per lavorare con le palette di MuseScore).</p>
+  <p>I simboli delle <strong>indicazioni del tempo</strong> sono disponibili nella paletta "Tempo". E' possibile selezionare e trascinare (drag and drop) questi simboli nella partitura (vedi la voce <a href="http://musescore.org/it/manuale/palette" title="Palette">Palette</a> per le informazioni generali per lavorare con le palette di MuseScore).</p>
 <p><img src="/sites/musescore.org/files/time-palette-1.png" alt="Time Signature sidebar palette" title="Time Signature sidebar palette" width="135" height="176" class="inline" /></p>
 <p>Se vi serve un'indicazione di tempo non disponibile nella paletta selezionate dal menù <kbd><samp class="menu">Elementi</samp> → <samp class="menuitem">Tempo...</samp></kbd>. E' possibile modificare il numeratore e il denominatore nel pannello <samp>Aggiungi tempo</samp>. </p>
 <p>Nella maggior parte dei casi vi serve cambiare solo il numeratore nella prima casella a sinistra. Gli altri numeri disponibili per il numeratore sono per l'indicazione di <a class="freelinking external" href="http://en.wikipedia.org/wiki/Time_signature#Additive_meters">ritmi asimmetrici</a> che contengo più valori del numeratore separati da un segno +.</p>
@@ -474,9 +506,12 @@ E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
 <li><kbd><kbd>Esc</kbd></kbd> fa uscire dalla <samp class="mode">Modalità di modifica legatura</samp> (non sono più visibili le “maniglie”):<br />
 <img src="/sites/musescore.org/files/slur5_0.png" alt="Slur no longer in edit mode" title="Slur no longer in edit mode" width="203" height="85" class="inline" /></li>
 </ol>
+<h3>Modifiche</h3>
 <p>I quadratini o “maniglie” (mostrati nelle immagini dei passaggi 2-4) possono essere manipolati con il mouse. Con le due maniglie ai lati si possono modificare l'inizio e la fine della curva della legatura (non l'ancoraggio). Con le maniglie centrali si può accentuare o meno la curvatura.</p>
-<p>Una legatura di portamento si può estendere su diverse accollature e pagine. L'inizio e la fine della legatura sono ancorati a note, accordi o pause. Questo vuol dire che se queste note vengono spostate all'interno della partitura, anche la legatura di portamento viene spostata.</p>
-<p>Tuttavia non è possibile cambiare le note di ancoraggio iniziale e finale con il mouse. Per spostare gli ancoraggi si raccomanda quindi di utilizzare le combinazioni <kbd><kbd>Maius</kbd>+<kbd>→</kbd></kbd> e <kbd><kbd>Maius</kbd>+<kbd>←</kbd></kbd>.</p>
+<p>Una legatura di portamento si può estendere su diverse accollature e pagine. L'inizio e la fine della legatura sono ancorati a note, accordi o pause. Questo vuol dire che se queste note vengono riposizionate per cambiamenti dell'impaginazione, delle dimensioni delle battute oppure dello stile, anche la legatura di portamento verrà riposizionata e ridimensionata.</p>
+<p><b>Nota:</b> non è possibile cambiare le note di ancoraggio iniziale e finale con il mouse. Per spostare gli ancoraggi utilizzare le combinazioni <kbd><kbd>Maius</kbd>+<kbd>→</kbd></kbd> e <kbd><kbd>Maius</kbd>+<kbd>←</kbd></kbd>.</p>
+<h3>Linea punteggiata</h3>
+<p>Le legature di portamento con la linea punteggiata sono talvolta utilizzate nelle canzoni dove la presenza di una legatura varia da una strofa all'altra. Fare click con il tasto destro del mouse e selezionare <kbd><samp class="menuitem">Proprietà legatura...</samp></kbd>. Nella finestra di dialogo è possibile selezionare "linea continua" oppure "linea punteggiata".</p>
 <p>Vedi anche: <a href="http://musescore.org/it/manuale/legatura-di-valore" title="Legatura di valore">Legatura di valore</a>, <a href="http://musescore.org/it/manuale/modalità-di-modifica" title="Modalità di modifica">Modalità di modifica</a>.</p>
   </div>
 <div id="node-914" class="section-3">
@@ -495,6 +530,7 @@ E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
   <p>La paletta <strong>Linee</strong>, come le altre <a href="http://musescore.org/it/manuale/palette" title="palette">palette</a>, funziona con il sistema seleziona e trascina (“drag-and-drop”). Utilizzare il mouse per trascinare il simbolo dalla paletta alla partitura.</p>
 <p><img src="/sites/musescore.org/files/linepalette_0.png" alt="Lines palette" title="Lines palette" width="184" height="208" class="inline" /></p>
 <h3>Cambiare la lunghezza delle linee</h3>
+<p>Se si cambia la lunghezza di una linea utilizzando il mouse, la posizione di ancoraggio (la nota o la battuta alle quali è collegata la linea) allora non cambia. Quindi il metodo descritto qui sotto è quello raccomandato per correggere la posizione del punto iniziale e del punto finale di una linea.</p>
 <ol>
 <li>Se si è nella <samp class="mode">Modalità Inserimento Note</samp> premere <kbd><kbd>N</kbd></kbd> per uscire da questa modalità</li>
 <li>Fare doppio click sulla linea che si vuole correggere</li>
@@ -533,21 +569,35 @@ E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
 <div id="node-897" class="section-3">
   <h1 class="book-heading">Note di abbellimento (acciaccature)</h1>
   <p>Le <strong>note di abbellimento corte</strong> (Acciaccatura) sono disegnate come piccole note con una linea obliqua che attraversa il gambo. Le  <strong>note di abbellimento lunghe</strong> (Appoggiatura) non hanno questa linea. Le note di abbellimento si posizionano prima di una nota normale. </p>
-<p>Per creare una nota di abbellimento trascinare il simbolo desiderato dalla <a href="http://musescore.org/it/manuale/palette" title="palette">paletta</a> a una nota già inserita nella partitura.</p>
+<p>Per creare una nota di abbellimento trascinare il simbolo desiderato dalla <a href="http://musescore.org/it/manuale/palette" title="palette">paletta</a> Note di abbellimento (nelle versioni 0.9.5 e precedenti la paletta è chiamata semplicemente Note) a una nota normale già inserita nella partitura.</p>
 <p><img src="/sites/musescore.org/files/grace-palette.png" alt="grace-palette.png" title="grace-palette.png" width="168" height="64" class="inline" /></p>
 <p>Vedi anche: <a href="http://it.wikipedia.org/wiki/Abbellimento">Abbellimento</a> in Wikipedia</p>
   </div>
 <div id="node-902" class="section-3">
   <h1 class="book-heading">Pause di una battuta intera</h1>
-  <p>Quando una intera battuta è priva di note si utilizza una pausa di 4/4 (semibreve, se il tempo è 4/4).</p>
-<p>Per creare una pausa che duri tutta la battuta selezionare la battuta interessata e premere <kbd><kbd>Del</kbd></kbd>. Tutte le note e le pause di questa battuta sono sostituite da un'unica pausa.</p>
+  <h3>Pause di una battuta intera</h3>
+<p><img src="/sites/musescore.org/files/full-measure-rest_0.png" alt="A full-measure rest looks like a whole-note (semi-breve) rest except it is centered in the middle of a measure" title="A full-measure rest looks like a whole-note (semi-breve) rest except it is centered in the middle of a measure" width="52" height="22" class="inline" /></p>
+<p>Quando una intera battuta è priva di note si utilizza una pausa di 4/4 (semibreve, se il tempo è 4/4).</p>
+<p>Per creare una pausa che duri tutta la battuta selezionare la battuta interessata e premere <kbd><kbd>Canc</kbd></kbd>. Tutte le note e le pause di questa battuta saranno sostituite da un'unica pausa.</p>
+<h3>Pause di più battute</h3>
+<p><img src="/sites/musescore.org/files/multimeasure-rests_2.png" alt="Multi-measure rests have a number above the staff indicating the duration of the rest by the number of measures" title="Multi-measure rests have a number above the staff indicating the duration of the rest by the number of measures" width="386" height="37" class="inline" /></p>
+<p>Le pause di più battute indicano che il silenzio di uno strumento dura per più battute consecutive e sono utilizzate di frequente nelle partiture per la musica d'insieme. Nelle versioni 0.9.5 e precedenti questa funzione è sperimentale (vedi sotto le limitazioni)</p>
+<h4>Istruzioni</h4>
+<ol>
+<li>dal menù selezionare <kbd><samp class="menu">Stile</samp> → <samp class="menuitem">Modifica stile generale...</samp></kbd> (nelle versioni 0.9.5 e precedenti <kbd><samp class="menu">Stile</samp> → <samp class="menuitem">Modifica stile...</samp></kbd>)</li>
+<li>Selezionare col mouse la voce a sinistra "Spartito"</li>
+<li>Selezionare a destra la voce "Crea le pause di più battute"</li>
+</ol>
+<h4>Limitazioni</h4>
+<p>Le versioni 0.9.5 e precedenti le pause di più battute non vengono interrotte automaticamente in punti importanti come le stanghette doppie, i segni di armatura di chiave, i marcatori di riferimento. Questo limite è stato risolto per le versioni 0.9.6 e successive. Come scappatoia per le versioni precedenti si può utilizzare l'opzione "Interrompi le pause di più battute" come descritto nel capitolo <a href="http://musescore.org/it/manuale/azioni-sulle-battute" title="azioni sulle battute">azioni sulle battute</a>.</p>
+<p>Questa opzione di modifica dello stile creerà automaticamente le pause di più battute nella partitura. Si raccomanda pertanto di inserire prima tutte le note e solo dopo selezionare questa opzione.</p>
   </div>
 <div id="node-893" class="section-3">
   <h1 class="book-heading">Respiro</h1>
-  <p>Per inserire un simbolo di <strong>respiro</strong> selezionarlo dalla paletta e trascinarlo su una nota della partitura. Il simbolo del respiro verrà inserito prima di questa nota.<br />
-<img src="/sites/musescore.org/files/breathpalette_0.png" alt="Breath Palette" title="Breath Palette" width="185" height="67" class="inline" /></p>
-<p>Simbolo di respiro nella partitura:<br />
-<img src="/sites/musescore.org/files/breath_0.png" alt="Breath" title="Breath" width="284" height="181" class="inline" /></p>
+  <p>Per inserire un simbolo di <strong>respiro</strong> selezionarlo dalla paletta e trascinarlo su una nota della partitura. Il simbolo del respiro verrà inserito dopo questa nota. Nella versione 0.9.5 e precedenti il simbolo di respiro è posizionato invece <em>prima</em> della nota..</p>
+<p><img src="/sites/musescore.org/files/breathpalette_0.png" alt="Breath Palette" title="Breath Palette" width="185" height="67" class="inline" /></p>
+<p>Simbolo di respiro nella partitura: </p>
+<p><img src="/sites/musescore.org/files/breath_0.png" alt="Breath" title="Breath" width="284" height="181" class="inline" /></p>
   </div>
 <div id="node-903" class="section-3">
   <h1 class="book-heading">Ripetizione</h1>
@@ -564,8 +614,9 @@ E' possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
   <h3>Cambiare il tipo di stanghetta</h3>
 <p>Si possono cambiare le stanghette di fine battuta trascinando il simbolo dalla paletta a una stanghetta nella partitura.<br />
 <img src="/sites/musescore.org/files/barlinepalette_0.png" alt="Bar Line palette" title="Bar Line palette" width="168" height="125" class="inline" /></p>
+<p>Per rendere invisibile (no stampabile) una stanghetta farci click con il tasto destro del mouse e selezionare <kbd><samp class="menuitem">Rendi invisibile</samp></kbd>.</p>
 <h3>Stanghette di accollatura</h3>
-<p>Per estendere le  stanghette di fine battuta da due pentagrammi fare doppio click su una stanghetta (vedi <samp class="mode"><a href="http://musescore.org/it/manuale/modalità-di-modifica" title="Modalità di modifica">Modalità di modifica</a></samp>).<br />
+<p>Per estendere le  stanghette di fine battuta da un pentagramma all'altro dell'accollatura fare doppio click su una stanghetta (vedi <samp class="mode"><a href="http://musescore.org/it/manuale/modalità-di-modifica" title="Modalità di modifica">Modalità di modifica</a></samp>).<br />
 <img src="/sites/musescore.org/files/grandstaff0_0.png" alt="Bar Line edit mode" title="Bar Line edit mode" width="258" height="127" class="inline" /></p>
 <p>Fare click sul quadratino blu e trascinarlo giù fino al successivo pentagramma.<br />
 Tutte le stanghette della partitura saranno modificate e la modifica sarà visibile quando si lascia la <samp class="mode">Modalità di modifica</samp> (tasto Esc).<br />
@@ -593,8 +644,9 @@ Tutte le stanghette della partitura saranno modificate e la modifica sarà visib
   </div>
 <div id="node-919" class="section-3">
   <h1 class="book-heading">Voci</h1>
-  <p><strong>Nota:</strong> L'implementazione delle voci nella versione 0.9.4 di MuseScore non è ancora completa ed è soggetta a cambiamenti.</p>
-<h3>Inserimento di più voci in un pentagramma:</h3>
+  <p>Le <strong>voci</strong> permettono di posizionare in un pentagramma delle note che iniziano nello stesso punto ma che hanno durata differente. Le voci sono anche chiamate 'layers' in altri software di notazione musicale.</p>
+<p><img src="/sites/musescore.org/files/voices-diagram.png" alt="In a polyphonic measure, voice 1 takes the up-stem notes and voice 2 takes the down-stem notes" title="In a polyphonic measure, voice 1 takes the up-stem notes and voice 2 takes the down-stem notes" width="324" height="70" class="inline" /></p>
+<h3>Instruzioni</h3>
 <ol>
 <li>Per prima cosa inserire la voce più alta (tutte le note devono avere i gambi rivolti verso l'alto).</li>
 <li>Quando si inseriscono le note alcune di queste possono avere il gambo rivolto in giù. Se state usando la versione 0.9.4 o successiva non è necessario intervenire perché la direzione dei gambi sarà automaticamente invertita quando verrà aggiunta la seconda voce.<br />
@@ -628,13 +680,12 @@ Tutte le stanghette della partitura saranno modificate e la modifica sarà visib
 Gli altri comandi della <samp class="mode">Modalità di modifica</samp> spostano le "maniglie" del simbolo ma non cambiano l'ancoraggio e quindi neanche la modalità di riproduzione del ritornello.</p>
 <p>Se spostate le "maniglie" viene mostrata una linea intermittente tra la posizione logica (ancoraggio) e quella grafica attuale<br />
 <img src="/sites/musescore.org/files/volta2_0.png" alt="Second-ending volta in edit mode" title="Second-ending volta in edit mode" width="483" height="77" class="inline" /></p>
-<h3>Proprietà</h3>
-<h4>Elenco Ripetizioni</h4>
-<p>I numeri inseriti in questa casella determinano quante e quali volte viene eseguito il ritornello con quel finale. Se la volta è suonata per più di un ritornello tutti i numeri corrispondenti alle varie ripetizioni devono essere elencati separati da una virgola (",").</p>
 <h4>Testo</h4>
-<p>In questa casella è possibile inserire del testo libero. Ovviamente il testo dovrebbe corrispondere a quanto definito nella casella Elenco Ripetizioni.<br />
-<img src="/sites/musescore.org/files/volta3_0.png" alt="Volta Properties dialog" title="Volta Properties dialog" width="302" height="172" class="inline" /></p>
+<p>E' possibile cambiare il testo e altre proprietà del simbolo di volta. Fare click con il tasto destro del mouse sul simbolo e selezionare <kbd><samp class="menuitem">Proprietà linea...</samp></kbd>. Se state utilizzando la versione 0.9.3 o precedente selezionare "Proprietà Volta..." La figura seguente mostra l'esempio di una ripetizione "1.-5."</p>
+<p><img src="/sites/musescore.org/files/volta-line-properties.png" alt="Line Properties dialog" title="Line Properties dialog" width="607" height="219" class="inline" /></p>
 <p><img src="/sites/musescore.org/files/volta4_0.png" alt="Sample first-through-fifth ending followed by sixth ending" title="Sample first-through-fifth ending followed by sixth ending" width="401" height="73" class="inline" /></p>
+<h3>Riproduzione</h3>
+<p>A volte il ritornello deve essere ripetuto per più di due volte. nella figura qui sopra il testo indica che deve essere ripetuto per cinque volte. Se si desidera che MuseScore  suoni il ritornello in maniera corretta selezionare la battuta con la stanghetta del ritornello e modificare il parametro "conteggio ripetizione"  (vedi <a href="http://musescore.org/it/manuale/azioni-sulle-battute" title="Azioni sulle battute">Azioni sulle battute</a> per i dettagli).</p>
 <h3>Problema con partiture di più strumenti</h3>
 <p>Nella versione 0.9.4 e precedenti è possibile inserire il simbolo volta solo nel primo pentagramma della partitura con più strumenti. Se si procede diversamente si possono avere dei malfunzionamenti come l'interruzione del programma (crash) al momento di estrarre le parti dei singoli strumenti (vedi <a class="freelinking external" href="http://www.musescore.org/en/node/1257">bug report</a>) oppure lo spostamento dell'ancoraggio quando si riapre la partitura.</p>
 <table id="attachments" class="sticky-enabled">
@@ -653,7 +704,7 @@ Gli altri comandi della <samp class="mode">Modalità di modifica</samp> spostano
   <p>MuseScore ha integrati un sequencer ed un sintetizzatore per poter riprodurre la la partitura.<br />
 Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.png" title="play.png" width="34" height="33" class="inline" /> si entra nella <samp class="mode">Modalità riproduzione</samp>. In questa modalità sono disponibili i seguenti comandi:</p>
 <ul>
-<li>Alterna riproduzione/pausa <kbd><kbd>Spazio</kbd></kbd></li>
+<li class="latest">Riproduzione <kbd><kbd>Ctrl</kbd>+<kbd>Spazio</kbd></kbd> <strong class="label">(versione 0.9.6 o successive)</strong></li>
 <li>Vai all'accordo precedente <kbd><kbd>←</kbd></kbd></li>
 <li>Vai all'accordo successivo <kbd><kbd>→</kbd></kbd></li>
 <li>Vai alla battuta precedente <kbd><kbd>Ctrl</kbd>+<kbd>←</kbd></kbd></li>
@@ -664,19 +715,24 @@ Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.
 <p>Premere il pulsante play nuovamente per fermare ed uscire dalla <samp class="mode">Modalità riproduzione</samp>.</p>
 <p>MuseScore inizia la riproduzione dal punto dove era posizionato il cursore. Se si seleziona una nota la riproduzione parte da questa ultima nota selezionata. Nella Barra Riproduzione è presente un pulsante di riavvolgimento per posizionarsi all'inizio della partitura.</p>
 <h3>Controlli Riproduzione</h3>
-<p>Il pannello Controlli Riproduzione offre più controlli come tempo, punto di inizio, volume generale. Per visualizzare il pannello Controlli Riproduzione dal menù principale selezionare <kbd><samp class="menu">Mostra</samp> → <samp class="menuitem">Controlli Riproduzione</samp></kbd><br />
-<img src="/sites/musescore.org/files/playpanel_0.png" alt="The play panel allows you to adjust tempo and volume" title="The play panel allows you to adjust tempo and volume" width="298" height="211" class="inline" /></p>
-<p>Se si vuole ascoltare la partitura con strumenti diversi dal pianoforte è necessario sostituire il SoundFont integrato di MuseScore con uno più completo in <kbd><samp class="menu">Modifica</samp> → <samp class="menuitem">Preferenze...</samp> → scheda <samp class="tab">Sintetizzatore</samp></kbd>. Vedi <a href="http://musescore.org/it/manuale/librerie-di-suoni" title="Librerie di suoni">Librerie di suoni</a> per ulteriori istruzioni.</p>
+<p>Il pannello Controlli Riproduzione offre più controlli come tempo, punto di inizio, volume generale. Per visualizzare il pannello Controlli Riproduzione dal menù principale selezionare <kbd><samp class="menu">Mostra</samp> → <samp class="menuitem">Controlli Riproduzione</samp></kbd></p>
+<p><img src="/sites/musescore.org/files/playpanel_0.png" alt="The play panel allows you to adjust tempo and volume" title="The play panel allows you to adjust tempo and volume" width="298" height="211" class="inline" /></p>
+<h3>Risoluzione dei problemi</h3>
+<h4 class="v0-9-5">Suona solo il pianoforte</h4>
+<p><strong class="label">Versione 0.9.5 o precedente: </strong>se si vuole ascoltare la partitura con strumenti diversi dal pianoforte è necessario sostituire il SoundFont integrato di MuseScore con uno più completo in <kbd><samp class="menu">Modifica</samp> → <samp class="menuitem">Preferenze...</samp> → scheda <samp class="tab">Sintetizzatore</samp></kbd>. Vedi <a href="http://musescore.org/it/manuale/librerie-di-suoni" title="Librerie di suoni">Librerie di suoni</a> per ulteriori istruzioni.</p>
+<h4>Suoni nei sistemi Ubuntu</h4>
+<p>Se avete difficoltà nella riproduzione dei suoni nei sistemi Ubuntu potete consultare il capitolo <a href="http://musescore.org/it/manuale/installazione" title="Installazione">Installazione</a> del manuale, al paragrafo "Linux".</p>
   </div>
 <div id="node-923" class="section-3">
   <h1 class="book-heading">Librerie di suoni</h1>
   <p>L'installazione di MuseScore prevede di default il suono del pianoforte in riproduzione. Se si vogliono ulteriori suoni come, ad esempio, violino o percussioni, è necessario avere una libreria di suoni General MIDI.</p>
 <h3>Panoramica</h3>
-<p>Una libreria di suoni può contenere un elevato numero di strumenti. Sul Web si trovano molte librerie di suoni. E' consigliabile ricercarne una che copra i 128 suoni del <a href="http://en.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM).</p>
-<p>Nel Web si trovano librerie di suoni di varie dimensioni e qualità. In genere più grandi sono le dimensioni della libreria migliori sono i suoni ma d'altra parte una libreria troppo pesante può penalizzare le prestazioni del computer. Se MuseScore gira troppo lentamente dopo l'installazione di una libreria di suoni di grandi dimensioni o il computer non riesce ad eseguire la riproduzione, provate a cercare una libreria più piccola. Nell'elenco qui sotto ci sono due comuni librerie GM di diverse dimensioni.</p>
+<p>Una libreria di suoni può contenere un elevato numero di strumenti. Sul Web si trovano molte librerie di suoni. E' consigliabile ricercarne una che copra i 128 suoni del <a href="http://en.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM). Se utilizzate una libreria di suoni non conforme allo standard General MIDI è possibile che gli altri utilizzatori non potranno ascoltare i suoni corretti quando pubblicate le vostre partiture oppure quando le salvate in formato MIDI.</p>
+<p>Nel Web si trovano librerie di suoni di varie dimensioni e qualità. In genere più grandi sono le dimensioni della libreria migliori sono i suoni ma d'altra parte una libreria troppo pesante può penalizzare le prestazioni del computer. Se MuseScore gira troppo lentamente dopo l'installazione di una libreria di suoni di grandi dimensioni o il computer non riesce ad eseguire la riproduzione, provate a cercare una libreria più piccola. Nell'elenco qui sotto ci sono tre comuni librerie GM di diverse dimensioni.</p>
 <ul>
 <li>FluidR3_GM.sf2 (141 MB non compressa), download all'indirizzo <a class="freelinking external" href="http://www.musescore.org/download/fluid-soundfont.tar.gz">Fluid-soundfont.tar.gz (129 MB)</a></li>
 <li>MagicSF_ver2.sf2 (67.8 MB non compressa), vedi <a href="http://www.personalcopy.com/sfarkfonts1.htm">Big SoundFonts</a></li>
+<li>TimGM6mb.sf2 (5.7 MB non compressa), vedi <a href="http://ocmnet.com/saxguru/Timidity.htm#sf2">Tim Brechbill's Timidity++ Download Site</a> "Free SoundFont" section</li>
 </ul>
 <h3>Compressione</h3>
 <p>Poiché i file delle librerie di suoni sono di grandi dimensioni, spesso sono compressi con vari algoritmi tipo:.zip, .sfArk, e .tar.gz. Questi file, prima di essere utilizzati, devono essere decompressi.  </p>
@@ -687,7 +743,7 @@ Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.
 </ul>
 <h3>Impostazioni di MuseScore</h3>
 <p>Dopo aver trovato e scompattato una libreria di suoni non cliccarci due volte sopra tentando di eseguirla, non è questo il modo per installarla in MuseScore. Spostate invece il file in una cartella a scelta, eseguire MuseScore, quindi seguire le istruzioni riportate qui sotto.</p>
-<p>Andare su <kbd><samp class="menu">Modifica</samp> → <samp class="menuitem">Preferenze...</samp> → scheda <samp class="tab">Sintetizzatore</samp></kbd>.</p>
+<p>Selezionare <kbd><samp class="menu">Mostra</samp> → <samp class="menuitem">Sintetizzatore</samp></kbd>. Se state utilizzando la versione 0.9.5 o precedente, andare invece su <kbd><samp class="menu">Modifica</samp> → <samp class="menuitem">Preferenze...</samp> → scheda <samp class="tab">Sintetizzatore</samp></kbd>.</p>
 <p>La libreria di default è <samp>:/data/piano1.sf2</samp>. Sostituirla con il nuovo file (.sf2) di libreria. Cliccare sull'icona di apertura per ricercare il file ed selezionarlo.</p>
 <p>Per confermare il cambio cliccare sul pulsante OK ed uscire dalla finestra delle preferenze. Chiudere il programma MuseScore e farlo ripartire affinché le modifiche abbiano effetto.</p>
 <h3>Problemi comuni</h3>
@@ -696,6 +752,7 @@ Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.
 <li>Assicurarsi che ci sia il flag sul menù <kbd><samp class="menu">Mostra</samp> → <samp class="menuitem">Controlli Riproduzione</samp></kbd>. Aggiungere o rimuovere il flag cliccando sulla corrispondente voce di menù. Se questo non risolve il problema vedere il punto 2.</li>
 <li>Se il pannello di riproduzione scompare dopo la sostituzione della libreria di suoni, andare su <kbd><samp class="menu">Modifica</samp> → <samp class="menuitem">Preferenze...</samp> → scheda <samp class="tab">Sintetizzatore</samp></kbd> e fare click sul pulsante OK senza effettuare nessun cambiamento, quindi chiudere il programma MuseScore e farlo ripartire: il pannello di riproduzione dovrebbe riapparire. Questo è un bug conosciuto della versione 0.9.3 e precedenti.</li>
 </ol>
+<p>Se è la prima volta che utilizzate una libreria di suoni, si consiglia di provare per prima una di quelle elencate sopra.</p>
   </div>
 <div id="node-932" class="section-3">
   <h1 class="book-heading">Tempo</h1>
@@ -745,7 +802,8 @@ Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.
 </div>
 <div id="node-933" class="section-2">
   <h1 class="book-heading">Testo</h1>
-  <p>Il capitolo "Testo" tratta delle parole dei versi (parole), nomi degli accordi e altro testo del pentagramma. Nel precedente capitolo si è parlato del testo <a href="http://musescore.org/it/manuale/tempo" title="Tempo">Tempo</a> che modifica il tempo del metronomo.</p>
+  <p>Nel precedente capitolo si è parlato del <a href="http://musescore.org/it/manuale/tempo" title="tempo">testo che influenza il tempo del  metronomo</a>, ma in MuseScore ci sono altri tipi di oggetti testo: <a href="http://musescore.org/it/manuale/parole" title="parole">parole</a>, <a href="http://musescore.org/it/manuale/nomi-degli-accordi" title="nomi degli accordi">nomi degli accordi</a>, segni di dinamica, <a href="http://musescore.org/it/manuale/diteggiatura" title="diteggiatura">diteggiatura</a>, titoli e altri ancora. Questi oggetti testo sono accessibili selezionando dal menù <kbd><samp class="menu">Elementi</samp> → <samp class="submenu">Testo</samp></kbd>. </p>
+<p>Se si vuole inserire un breve testo generico utilizzare "Testo di accollatura" oppure "Testo di pentagramma". La differenza tra questi due oggetti testo è che il secondo riguarda il singolo pentagramma mentre il primo riguarda tutta l'accollatura..</p>
   <div id="node-934" class="section-3">
   <h1 class="book-heading">Inserimento e modifica testo</h1>
   <p>Fare doppio click sul testo per entrare in <samp class="mode">Modalità di modifica</samp>:<br />
@@ -801,7 +859,15 @@ Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.
 <li><kbd><kbd>Maius</kbd>+<kbd>Spazio</kbd></kbd> per passare all'accordo precedente (nota o pausa precedente).</li>
 <li><kbd><kbd>Ctrl</kbd>+<kbd>Spazio</kbd></kbd> per inserire uno spazio del nome dell'accordo.</li>
 </ol>
-<p>I nomi degli accordi possono essere <a href="http://musescore.org/it/manuale/inserimento-e-modifica-testo" title="Inserimento e modifica testo">modificati</a> come un testo normale. Per inserire il diesis digitare <kbd>#</kbd>  e per il bemolle <kbd>b</kbd>. Questi caratteri sono modificati automaticamente con i corretti simboli di diesis e bemolle quando si passa all'accordo successivo. In alternativa è possibile fare click col il tasto destro del mouse: si apre la finestra di dialogo "Proprietà Armonia". In questa finestra è possibile scegliere nome, nota bassa, estensione, ecc.)</p>
+<p>I nomi degli accordi possono essere <a href="http://musescore.org/it/manuale/inserimento-e-modifica-testo" title="Inserimento e modifica testo">modificati</a> come un testo normale. Per inserire il diesis digitare <kbd>#</kbd>  e per il bemolle <kbd>b</kbd>. Questi caratteri sono modificati automaticamente con i corretti simboli di diesis e bemolle quando si passa all'accordo successivo. In alternativa è possibile fare click col il tasto destro del mouse: si apre la finestra di dialogo "Proprietà Armonia". In questa finestra è possibile scegliere nome, nota bassa, estensione, ecc.).</p>
+<h3>Jazz font</h3>
+<p>Se desiderate per i nomi degli accordi ottenere nella partitura un'apparenza più simile al testo scritto a mano a partire dalla versione 0.9.5 è possibile selezionare un jazz font.</p>
+<p><img src="/sites/musescore.org/files/jazz-chord-names_0.png" alt="Chord names have a handwritten appearance" title="Chord names have a handwritten appearance" width="182" height="49" class="inline" /></p>
+<ol>
+<li>Dal menù principale selezionare <kbd><samp class="menu">Stile</samp> → <samp class="menuitem">Modifica stile generale...</samp></kbd> (nella versione 0.9.5 <kbd><samp class="menu">Stile</samp> → <samp class="menuitem">Modifica stile...</samp></kbd>)</li>
+<li>Nel pannello a sinistra selezionare la voce <kbd><samp>Nome accordi</samp></kbd></li>
+<li>Nel pannello a destra alla voce "file descrizione accordi" al posto del file <kbd>chords.xml</kbd> selezionare <kbd>jazzchords.xml</kbd></li>
+</ol>
   </div>
 <div id="node-938" class="section-3">
   <h1 class="book-heading">Parole</h1>
@@ -812,6 +878,8 @@ Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.
 <li>Premere <kbd><kbd>Spazio</kbd></kbd> alla fine della parola per andare alla nota successiva</li>
 <li>Premere il tasto trattino <kbd><kbd>-</kbd></kbd> alla fine della sillaba per andare alla nota successiva. Le sillabe della parola sono collegate sulla partitura da un trattino</li>
 <li><kbd><kbd>Maius</kbd>+<kbd>Spazio</kbd></kbd> per andare alla nota precedente</li>
+<li>Premere il tasto <kbd><kbd>Enter</kbd></kbd> (Mac: <kbd><kbd>Return</kbd></kbd>) per passare alla linea successiva delle parole</li>
+</ol>
 <p><img src="/sites/musescore.org/files/adeste.png" alt="Sample lyrics:A-des-te fi-del-es" title="Sample lyrics:A-des-te fi-del-es" width="475" height="220" class="inline" /></p>
 <p>Le sillabe possono essere allungate alle note successive dal trattino di sottolineatura:<br />
 <img src="/sites/musescore.org/files/lyrics1_0.png" alt="Syllable extension line" title="Syllable extension line" width="351" height="214" class="inline" /></p>
@@ -823,7 +891,7 @@ Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.
 <li><kbd><kbd>Ctrl</kbd>+<kbd>-</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>-</kbd></kbd>) per inserire un trattino (<samp>-</samp>) nella casella di testo</li>
 <li>Solo Mac: <kbd><kbd>⌥</kbd>+<kbd>_</kbd></kbd> per inserire un trattino basso (<samp>_</samp>) nella casella di testo</li>
 </ul>
-<p>Vedi anche: <a href="http://musescore.org/it/manuale/testo" title="Testo">Testo</a>, <a href="http://musescore.org/it/manuale/nomi-degli-accordi" title="Nomi degli accordi">Nomi degli accordi</a>.</ol>
+<p>Vedi anche: <a href="http://musescore.org/it/manuale/testo" title="Testo">Testo</a>, <a href="http://musescore.org/it/manuale/nomi-degli-accordi" title="Nomi degli accordi">Nomi degli accordi</a>.</p>
   </div>
 </div>
 <div id="node-939" class="section-2">
@@ -869,8 +937,35 @@ Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.
 <ul>
 <li>La versione del programma MuseScore che state utilizzando (es. versione 0.9.5) o il numero di revisione se state utilizzando una prelease (es. revisione 1944).</li>
 <li>Il sistema operativo utilizzato (es. Windows Vista, Mac OS 10.5 oppure Ubuntu 9.04)</li>
-<li>Cercate di descrivere in maniera precisa i passaggi che hanno condotto al problema (dove si è fatto click, quali tasti sono stati premuti, cosa è stato visualizzato, ecc.). Se non riuscite a riprodurre il problema seguendo gli stessi passaggi probabilmente non vale la pena segnalarlo perché gli sviluppatori non saranno in grado di riprodurre (ed eliminare) l'errore.</li>
+<li>Se state segnalando un errore (bug) cercate di descrivere in maniera precisa i passaggi che hanno condotto al problema (dove si è fatto click, quali tasti sono stati premuti, cosa è stato visualizzato, ecc.). Se non riuscite a riprodurre il problema seguendo gli stessi passaggi probabilmente non vale la pena segnalarlo perché gli sviluppatori non saranno in grado di riprodurre (ed eliminare) l'errore.</li>
+<li>Inserite nella segnalazione un solo errore (bug) per volta</li>
+<li>Ricordate che l'obbiettivo della segnalazione non è solo mostrare l'errore ma è anche permettere agli altri di riprodurlo facilmente</li>
 </ul>
+  </div>
+<div id="node-4557" class="section-3">
+  <h1 class="book-heading">Ripristinare le impostazioni predefinite</h1>
+  <p>Le versioni più recenti di MuseScore hanno l'opzione di ritornare alle impostazioni predefinite  o "impostazioni di fabbrica". Questa opzione a volte può essere utile se le impostazioni personalizzate si sono corrotte. E' comunque una evenienza non frequente e quindi per risolvere dei problemi si consiglia di consultare il forum prima di ritornare alle impostazioni predefinite e perdere le personalizzazioni.</p>
+<p><strong>Attenzione:</strong> ritornare alle "impostazioni di fabbrica" cancella tutti i cambiamenti fatti nelle preferenze, palette o modifiche sulla finestra.</p>
+<h3>Instruzioni per Windows</h3>
+<ol>
+<li>Se il programma MuseScore è aperto per prima cosa dovete chiuderlo</li>
+<li>Premere il tasto <kbd><kbd>Avvio</kbd>+<kbd>R</kbd></kbd> per aprire la finestra di dialogo "Esegui". (The <a class="freelinking external" href="http://en.wikipedia.org/wiki/Windows_key">tasto "Avvio" o "Start"</a> è il tasto con il logo di Microsoft Windows</li>
+<li>Fere click <kbd><samp>Sfoglia...</samp></kbd></li>
+<li>Cercare il file eseguibile mscore.exe nel computer. La posizione del file può variare (dipende dal processo di installazione) ma probabilmente si può trovare in Risorse del computer &gt; disco locale C &gt; Programmi &gt; MuseScore 0.9 &gt; bin &gt; mscore.exe</li>
+<li>Fare click sul pulsante <kbd><samp>Apri</samp></kbd> per lasciare la finestra di dialogo "sfoglia" e tornare alla finestra di dialogo "Esegui". Compare ora in questa finestra una linea di testo del tipo "C:\Programmmi\MuseScore 0.9\bin\mscore.exe"</li>
+<li>Fare click dopo le virgolette, aggiungere uno spazio seguito da un trattino e unaF maiuscola: <kbd> -F</kbd></li>
+<li>Selezionare <kbd><samp>OK</samp></kbd>
+</li>
+</ol>
+<p>Dopo pochi secondi parte il programma MuseScore e tutte le impostazioni sono state cancellate e riportate a quelle predefinite ("impostazioni di fabbrica").</p>
+<h3>Istruzioni per Mac OSX</h3>
+<ol>
+<li>Se il programma MuseScore è aperto per prima cosa dovete chiuderlo  (<kbd><kbd>⌘</kbd>+<kbd>Q</kbd></kbd>)</li>
+<li>Aprire Applications/Utilities/Terminal e apparirà una una finestra per una sessione "Terminale"</li>
+<li>Digitare (oppure copiare e incollare) la seguente linea di comando (incluso il carattere '/' all'inizio):
+<p><code>/Applications/MuseScore.app/Contents/MacOS/mscore -F</code></li>
+</ol>
+<p>In questa maniera le impostazioni di MuseScore vengono riportate a quelle predefinite e si avvia il programma. E' possibile chiudere il terminale e continuare ad utilizzare MuseScore.</p>
   </div>
 </div>
 </div>
@@ -883,3 +978,4 @@ Premendo il tasto Play <img src="/sites/musescore.org/files/play.png" alt="play.
     <div class="print-links"></div>
   </body>
 </html>
+<!-- Page cached by Boost @ 2010-02-23 07:40:03, expires @ 2010-02-23 10:40:03 -->

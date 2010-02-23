@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_6ece435fcaf280146fe7fd2d12f8a0da.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_a54c6cb36253ae1880e382b0e4116c93.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx"}});
@@ -12,8 +12,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
 </script>
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/pt-br/manual-pt-br/manual' />
-    <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_9.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_cbd17c717009b015b29b604f2a31b2e3.css" />
+    <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_2201016fb500fdc8a6a1e9918a29addc.css" />
   </head>
   <body>
         <div class="print-logo"></div>
@@ -312,13 +312,19 @@ yum localinstall musescore-0.9.4-1.fc10.x86_64.rpm</pre></li>
 <h3>Pautas</h3>
 <p>A propriedade <em>Visível</em> possibilita a você mostrar ou esconder as notas e as linhas para o compasso. A propriedade <em>Sem haste</em> possibilita a você mostrar ou esconder todas as hastes das notas para o compasso. Notas que normalmente têm uma haste, como as mínimas ou semínimas, só mostram a cabeça da nota quando marcadas como sem haste.</p>
 <h3>Duração</h3>
-<p>A duração <em>Nominal</em> é o tempo que é mostrado na partitura. Você pode mudar a duração <em>Real</em> de um compasso para qualquer outra medida, independentemente do tempo assinalado na partitura. Normalmente, as durações nominal e real de um compasso são idênticas. Compassos que iniciam em tempo fraco (anacruse) podem ter uma duração real menor.</p>
+<p>A duração <em>Nominal</em> é a fórmula que é mostrada na partitura. Você pode mudar a duração <em>Real</em> de um compasso para qualquer outra medida, independentemente do tempo assinalado na partitura. Normalmente as durações nominal e real de um compasso são idênticas. Entretanto, compassos que iniciam em tempo fraco (anacruse) podem ter uma duração real menor. Por exemplo, uma anacruse com duração de uma semínima em uma peça em compasso 4/4 terá uma duração nominal de 4/4, mas uma duração real de 1/4. </p>
 <h3>Irregular</h3>
 <p>Um compasso irregular não é contado na numeração do compasso. Normalmente, um compasso que inicia em tempo fraco (anacruse) é marcado como "irregular". Se você estiver usado a versão 0.9.4 ou anterior e marcar um compasso como irregular, pode precisar salvar e recarregar a partitura antes de o compassos mostrarem a mudança.</p>
 <h3>Número de repetições</h3>
 <p>Se o compasso é o fim de uma <a href="http://musescore.org/pt-br/manual-pt-br/repetições" title="repetições">repetição</a> você pode definir o quanto a repetição deve ser tocada,.</p>
 <h3>Quebrar compassos de espera</h3>
 <p>Essa propriedade separa um compasso de espera (pausa de determinado número de compassos) no compasso. Se o compasso atual contém uma mudança de <a href="http://musescore.org/pt-br/manual-pt-br/fórmula-de-compasso" title="Fórmula de compasso">compasso</a>, o MuseScore marca essa propriedade automaticamente.</p>
+<h3>Numeração</h3>
+<p>O MuseScore numera automaticamente o primeiro compasso de cada sistema, mas outras opções de numeração são possíveis. No menu principal selecione <kbd><samp class="menu">Estilo</samp> → <samp class="submenu">Editar Estilo</samp></kbd>. No painel da esquerda selecione <b>"Números"</b>. Na metade inferior do painel da direita está a seção <b>"Numeração de Compasso"</b>. </p>
+<p>Marque a caixa de seleção próximo a "Numeração de Compasso" para ativar a numeração automática.<br />
+Marque "exibir o primeiro número" se quiser que seja exibida a numeração desde o primeiro compasso.<br />
+Marque "todas as pautas" se quiser números em todas as pautas, caso contrário, apenas a pauta superior de cada sistema exibirá números.<br />
+Escolha entre exibir números "a cada sistema", o que numera o primeiro compasso de cada linha ou por "intervalo" e especifique o tamanho do intervalo. Por exemplo, um intervalo de valor 1, insere números em todos os compassos; um intervalo de valor 5 insere um número a cada cinco compassos.</p>
 <div class="field field-type-filefield field-field-file">
     <div class="field-items">
             <div class="field-item odd">
@@ -615,7 +621,7 @@ Outros comandos no <samp class="mode">modo de edição</samp> em vez disso, move
 <div id="node-2702" class="section-3">
   <h1 class="book-heading">Ornamentos (apojatura/acicatura)</h1>
   <p><strong>Ornamentos curtos</strong> (Acicatura) aparecem como pequenas notas com um risco atravessando a haste. <strong>Ornamentos longos</strong> (Apojatura) não têm o risco. Ambos são posicionados antes da nota principal. </p>
-<p>Insira um ornamento arrastando o símbolo de ornamento da <a href="http://musescore.org/pt-br/manual-pt-br/paletas" title="paletas">paleta</a> de notas para uma nota normal na partitura.</p>
+<p>Insira um ornamento arrastando o símbolo de ornamento da <a href="http://musescore.org/pt-br/manual-pt-br/paletas" title="paletas">paleta</a> de Ornamentos (nas versões 0.9.5 e anteriores esta paleta é chamada de Notas) para uma nota normal na partitura.</p>
 <p><img src="/sites/musescore.org/files/grace-palette.png" alt="grace-palette.png" title="grace-palette.png" width="168" height="64" class="inline" /></p>
 <p>Veja também: <a href="http://pt.wikipedia.org/wiki/Ornamento_(m%C3%BAsica)">Ornamento</a>, <a href="http://en.wikipedia.org/wiki/Ornament_(music)">Ornament</a> e <a href="http://en.wikipedia.org/wiki/Grace_note">Grace note</a> na Wikipedia</p>
 <p>N.T. Em inglês, o termo “<a href="http://musescore.org/handbook/grace-note" title="grace note">grace note</a>”, que dá nome originalmente a este artigo, é usado para designar os ornamentos dos tipos  apojatura e da acicatura, ou seja, ornamentos desenhados como pequenas notas. O termo “ornament”, assim como o seu cognato português “ornamento”, refere-se a todo o conjunto de ornamentos usados em notação musical.</p>
@@ -676,8 +682,8 @@ Outros comandos no <samp class="mode">modo de edição</samp> em vez disso, move
   </div>
 <div id="node-2697" class="section-3">
   <h1 class="book-heading">Respiração</h1>
-  <p>Para inserir uma <strong>respiração</strong>, arraste o símbolo de respiração da paleta de respiração para uma nota na partitura. O sinal de respiração é colocado antes da nota.<br />
-<img src="/sites/musescore.org/files/breathpalette_0.png" alt="Paleta de respiração" title="Paleta de respiração" width="185" height="67" class="inline" /></p>
+  <p>Para inserir uma <strong>respiração</strong>, arraste o símbolo de respiração da paleta de respiração para uma nota na partitura. O símbolo de respiração é inserido depois da nota. Nas versões 0.9.5 e anteriores o símbolo de respiração aparece <em>antes</em> da nota para a qual foi arrastado. </p>
+<p><img src="/sites/musescore.org/files/breathpalette_0.png" alt="Paleta de respiração" title="Paleta de respiração" width="185" height="67" class="inline" /></p>
 <p>Símbolo de respiração na partitura:<br />
 <img src="/sites/musescore.org/files/breath_0.png" alt="Respiração" title="Respiração" width="284" height="181" class="inline" /></p>
   </div>
@@ -749,7 +755,7 @@ Pressionando o botão Tocar <img src="/sites/musescore.org/files/play.png" alt="
   <h1 class="book-heading">SoundFont</h1>
   <p>O MuseScore vem com um timbre de piano para reprodução de música. Para ter mais timbres, como violino ou percussão, você vai precisar de uma “General MIDI SoundFont”.</p>
 <h3>Visão geral</h3>
-<p>Um arquivo SoundFont pode armazenar qualquer número de timbres de instrumentos. Muitas SoundFonts estão disponíveis na Internet. Procure por uma que cubra os 128 timbres da <a href="http://pt.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM).</p>
+<p>Um arquivo SoundFont pode armazenar qualquer número de timbres de instrumentos. Muitas SoundFonts estão disponíveis na Internet. Procure por uma que cubra os 128 timbres da <a href="http://pt.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM). Se você usar uma SoundFont que não está de acordo com o padrão General MIDI, outras pessoas poderão não ouvir corretamente os instrumentos quando você compartilhar a partitura ou salvar como MIDI. </p>
 <p>São diversos os tamanhos de arquivo e a qualidade de som das SoundFonts disponíveis na Internet. SoundFonts maiores são geralmente melhores, mas podem ser grandes demais para rodar no seu computador. Se você achar que o MuseScore ficou lento depois de instalar uma SoundFont grande ou que seu computador não aguenta reproduzir uma partitura, procure uma SoundFont menor. Abaixo estão três SoundFonts populares de tamanhos diferentes.</p>
 <ul>
 <li>FluidR3_GM.sf2 (141 MB não comprimido), download <a class="freelinking external" href="http://www.musescore.org/download/fluid-soundfont.tar.gz">Fluid-soundfont.tar.gz (129 MB)</a></li>
@@ -765,7 +771,7 @@ Pressionando o botão Tocar <img src="/sites/musescore.org/files/play.png" alt="
 </ul>
 <h3>Configurações do MuseScore</h3>
 <p>Depois que encontrar e descompactar uma SoundFont, não dê duplo clique para abri-la pois isso não configura o MuseScore. Ao invés disso, mova o arquivo para uma pasta de sua escolha, inicie o MuseScore e siga as seguintes instruções.</p>
-<p>Vá até <kbd><samp class="menu">Editar</samp> → <samp class="menuitem">Configurações...</samp> → aba <samp class="tab">I/O</samp></kbd>. (Se estiver usando uma versão de pré-lançamento ou noturna vá até <kbd><samp class="menu">Exibir</samp> → <samp class="menuitem">Sintetizador</samp></kbd>.)</p>
+<p>Vá até <kbd><samp class="menu">Exibir</samp> → <samp class="menuitem">Sintetizador</samp></kbd>. Se estiver usando a versão 0.9.5 ou mais antiga, vá até <kbd><samp class="menu">Editar</samp> → <samp class="menuitem">Configurações...</samp> → aba <samp class="tab">I/O</samp></kbd>. </p>
 <p>A configuração inicial de SoundFont é <samp>:/data/piano1.sf2</samp>. Substitua isso pelo endereço do seu novo arquivo SoundFont (.sf2). Clique no ícone Abrir para procurar e abrir o arquivo.</p>
 <p>Clique em OK para aplicar as mudanças e sair da janela de configurações. Feche e reabra o MuseScore para as mudanças terem efeito.</p>
 <h3>Resolução de problemas</h3>
@@ -899,6 +905,7 @@ Pressionando o botão Tocar <img src="/sites/musescore.org/files/play.png" alt="
 <li>Tecle <kbd><kbd>Espaço</kbd></kbd> ao final da palavra para ir para a próxima nota</li>
 <li>Tecle hífen <kbd><kbd>-</kbd></kbd> ao final de uma sílaba para ir para a próxima nota. As sílabas são conectadas com um traço</li>
 <li><kbd><kbd>Shift</kbd>+<kbd>Espaço</kbd></kbd> move para a nota anterior</li>
+<li><kbd><kbd>Enter</kbd></kbd> (Mac: <kbd><kbd>Return</kbd></kbd>) move para a próxima linha</li>
 </ol>
 <p><img src="/sites/musescore.org/files/adeste.png" alt="Exemplo de letra: A-des-te fi-del-es" title="Exemplo de letra: A-des-te fi-del-es" width="475" height="220" class="inline" /></p>
 <p>As sílabas podem ser estendidas por um sublinhado:<br />
@@ -975,7 +982,7 @@ Molduras verticais fornecem espaços entre ou antes de sistemas de pentagramas. 
 <li>Clique <kbd><samp>Procurar...</samp></kbd></li>
 <li>Procure por mscore.exe no seu computador. A localização pode variar dependendo da sua instalação, mas é provavelmente algo semelhante a Meu computador &gt; Disco local &gt; Arquivos de programas &gt; MuseScore 0.9 &gt; bin &gt; mscore.exe</li>
 <li>Clique em <kbd><samp>Abrir</samp></kbd> para sair do diálogo Procurar e retornar para o diálogo Executar. O seguinte texto (ou algo parecido) deve aparecer no diálogo Executar: <code>"C:\Program Files\MuseScore 0.9\bin\mscore.exe"</code></li>
-<li>Clique depois das aspas e insira um hífen seguido de um F maiúsculo: <kbd>-F</kbd></li>
+<li>Clique depois das aspas e insira um espaço seguido de um hífen e um F maiúsculo: <kbd> -F</kbd></li>
 <li>Pressione <kbd><samp>OK</samp></kbd>
 </li>
 </ol>
@@ -1000,3 +1007,4 @@ Molduras verticais fornecem espaços entre ou antes de sistemas de pentagramas. 
     <div class="print-links"></div>
   </body>
 </html>
+<!-- Page cached by Boost @ 2010-02-23 07:41:21, expires @ 2010-02-23 10:41:21 -->

@@ -611,7 +611,7 @@ MuseScore::MuseScore()
       menuFile->addAction(getAction("file-close"));
 
       menuFile->addSeparator();
-      menuFile->addAction(tr("Parts..."), this, SLOT(startExcerptsDialog()));
+      menuFile->addAction(getAction("parts"));
       menuFile->addAction(getAction("print"));
       menuFile->addSeparator();
       menuFile->addAction(getAction("quit"));
@@ -750,7 +750,8 @@ MuseScore::MuseScore()
       menuStyle->setObjectName("Style");
       menuStyle->addAction(getAction("edit-style"));
       menuStyle->addAction(getAction("edit-text-style"));
-      menuStyle->addAction(getAction("edit-harmony"));
+      if (enableExperimental)
+            menuStyle->addAction(getAction("edit-harmony"));
       menuStyle->addSeparator();
       menuStyle->addAction(getAction("load-style"));
       menuStyle->addAction(getAction("save-style"));
@@ -2181,6 +2182,8 @@ void MuseScore::cmd(QAction* a)
             splitWindow(false);
       else if (cmd == "edit-harmony")
             editChordStyle();
+      else if (cmd == "parts")
+            startExcerptsDialog();
       else {
             if (cv) {
                   cv->setFocus();

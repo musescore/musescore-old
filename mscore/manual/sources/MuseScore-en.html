@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_891461d87507eaff2a28c2b965aacf1a.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_3151946181d28164929a44153fa32a88.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx"}});
@@ -12,8 +12,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
 </script>
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/handbook/handbook' />
-    <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_9.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_cbd17c717009b015b29b604f2a31b2e3.css" />
+    <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_2201016fb500fdc8a6a1e9918a29addc.css" />
   </head>
   <body>
         <div class="print-logo"></div>
@@ -55,59 +55,7 @@ You can now launch MuseScore from Applications or SpotLight.</p>
 <h4>Uninstall</h4>
 <p>Just delete MuseScore from Applications folder.</p>
 <h3 id="linux-installation">Linux</h3>
-<p>This guide is written primarily for users of the K Desktop Environment (KDE), used in Linux systems such as SUSE or Kubuntu, with instructions in brackets (...) for users of the GNOME Desktop Environment, used in Linux systems such as Ubuntu. For instructions specific to Fedora see <a href="print/book/export/html/51#fedora-installation">below</a>.</p>
-<h4>Install MuseScore</h4>
-<p>The project source is available at <a class="freelinking external" href="http://www.musescore.org/en/download">http://www.musescore.org/en/download</a> but you will usually find a suitable binary package in the repository of your distribution.<br />
-In Ubuntu, MuseScore is located in the "universe" repository. The universe repository must be enabled, if you want to install MuseScore.<br />
-To output sounds you have the option to use ALSA or the JACK sound server. Which one works (better) depends on the individual system.</p>
-<p>Follow these steps to install MuseScore:</p>
-<ol>
-<li>Open Add/Remove Software (in Gnome: Add/Remove Programs)</li>
-<li>Under the category Multimedia (in Gnome: Sound &amp; Video), select MuseScore</li>
-<li>select the package  "JACK Control" too.</li>
-<li>Click on Preview (only KDE)</li>
-<li>Click on Apply Changes</li>
-</ol>
-<h4>Setting up the JACK server</h4>
-<p>Open the "JACK Audio Connection Kit" and select Setup.</p>
-<ol>
-<li>Under the audio tab deselect "realtime"</li>
-<li>If you use ALSA audio, set the driver to "ALSA" and set the I/O device to “hw:0” (hw:Zero)<br />
-             In some systems, OSS might work but ALSA doesn't.<br />
-             If you use OSS audio, set the driver to "oss" and set the I/O device to "/dev/audio".</li>
-<li>Apply the changes and start the JACK server</li>
-</ol>
-<h4>Setting up MuseScore</h4>
-<p>Follow these steps to set up MuseScore:</p>
-<ol>
-<li>Open Muse Score, which is under Multimedia in the main menu (in Gnome: Sound &amp; Video)</li>
-<li>Open the Edit menu and select Preferences</li>
-<li>Under the I/O tab:
-<ol>
-<li>Ensure that "Use internal synthesizer" is checked</li>
-<li>Ensure that your SoundFont is <kbd>/usr/share/sounds/sf2/FluidR3_GM.sf2</kbd> - this is the default - or select your private SoundFont if you have installed additional ones</li>
-<li>If you use ALSA audio, set the driver to "ALSA" and set the device to <kbd>hw:0</kbd> (hw:Zero)<br />
-             In the other case deselect ALSA and activate the JACK audio server</li>
-</ol>
-</li>
-<li>Click Apply, and then click OK</li>
-<li>Close MuseScore and then open it again to start writing your music</li>
-</ol>
-<h4>Comment</h4>
-<ul>
-<li>Your music player of choice, such as Amarok or Rhythmbox, cannot play music at the same time that JACK is running. You will need to stop your music, or even perhaps close your music player, to start the JACK server. However, to play music again, one simply needs to press Stop on JACK to use your music player again.<br />
-If you try to start the Jack server while listening to a playback, the JACK Connection GUI may hang.</li>
-<li>If you encounter problems with MIDI, it may be that your system is not set up to play MIDI. In a Console or Terminal, run the following commands:<br />
-<pre>sudo modprobe snd-seq
-sudo su -c 'echo snd-seq &gt;&gt; /etc/modules'</pre></li>
-<li>Especially the Jack server is a tricky thing that might hang if not configured properly.  If you encounter any problems that this handbook was unable to solve, please consult any or all of the following web pages:
-<ul>
-<li><a href="https://help.ubuntu.com/community/UbuntuStudioPreparation" title="https://help.ubuntu.com/community/UbuntuStudioPreparation">https://help.ubuntu.com/community/UbuntuStudioPreparation</a></li>
-<li><a href="https://help.ubuntu.com/community/HowToQjackCtlConnections" title="https://help.ubuntu.com/community/HowToQjackCtlConnections">https://help.ubuntu.com/community/HowToQjackCtlConnections</a></li>
-<li><a href="https://help.ubuntu.com/community/HowToJACKConfiguration" title="https://help.ubuntu.com/community/HowToJACKConfiguration">https://help.ubuntu.com/community/HowToJACKConfiguration</a></li>
-</ul>
-</li>
-</ul>
+<p>Please see the <a href="http://musescore.org/../download">Download</a> page for instructions pertaining to MuseScore on Linux. Packages are provided for Debian, Ubuntu, Fedora and PCLinuxOS. Other distributions will require you to build the application from source. For instructions specific to Fedora see <a href="print/book/export/html/51#fedora-installation">below</a>.</p>
 <h3 id="fedora-installation">Fedora</h3>
 <ol>
 <li>Import the GPG key:<br />
@@ -223,6 +171,10 @@ yum localinstall musescore-0.9.4-1.fc10.x86_64.rpm</pre></li>
 <p>You can also insert pitches using a MIDI keyboard on Windows or Linux as of version 0.9.4. Version 0.9.3 or earlier has support for MIDI keyboard on Linux only.</p>
 <h3>Colors</h3>
 <p>MuseScore colors out-of-range notes for as yellow or red in versions 0.9.5 or later. Notes above or below the comfortable range of an amateur appear yellow, note beyond the comfortable range of a professional appear red. The colors are informational and appear on the computer screen but do not appear on printed copies of your scores. To disable note colors in versions 0.9.6 or later choose <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp></kbd>, click on the <kbd><samp>Note Entry</samp></kbd> tab, and unmark "Color notes outside of usable pitch range".</p>
+<h4>External links</h4>
+<ul>
+<li><a class="freelinking external" href="http://musictechtips.wordpress.com/2010/01/31/musescore-in-10-easy-steps-part-3-note-entry-basics/">Video tutorial: Note entry basics</a> by Katie Wardrobe</li>
+</ul>
   </div>
 <div id="node-268" class="section-3">
   <h1 class="book-heading">Copy and paste</h1>
@@ -284,20 +236,27 @@ yum localinstall musescore-0.9.4-1.fc10.x86_64.rpm</pre></li>
 <h3>Insert</h3>
 <p>First select a measure then press <kbd><kbd>Ins</kbd></kbd> to insert a new empty measure before the selected one. To insert multiple measures use the menu <kbd><samp class="menu">Create</samp> → <samp class="submenu">Measures</samp> → <samp class="menuitem">Insert Measures...</samp></kbd>.</p>
 <h3>Delete</h3>
-<p>To delete a measure you have to first select it in a special way. Press <kbd><kbd>Ctr</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd></kbd>) on the keyboard as you click on an empty part of the measure with the mouse. The measure is marked with a dotted line indicating that you selected a "piece of time". Press <kbd><kbd>Ctr</kbd>+<kbd>Click</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Click</kbd></kbd>) to extend the selection. Pressing <kbd><kbd>Del</kbd></kbd> (Mac: <kbd><kbd>Fn</kbd>+<kbd>Backspace</kbd></kbd>) removes the selected measures.</p>
+<p>First select the measure then press <kbd><kbd>Ctr</kbd>+<kbd>Del</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Fn</kbd>+<kbd>Backspace</kbd></kbd>).<br />
+For 0.9.5 and earlier, it's different. Press <kbd><kbd>Ctr</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd></kbd>) on the keyboard as you click on an empty part of the measure with the mouse. The measure is marked with a dotted line indicating that you selected a "piece of time". Press <kbd><kbd>Ctr</kbd>+<kbd>Click</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Click</kbd></kbd>) to extend the selection. Pressing <kbd><kbd>Del</kbd></kbd> (Mac: <kbd><kbd>Fn</kbd>+<kbd>Backspace</kbd></kbd>) removes the selected measures.</p>
 <h3>Properties</h3>
 <p>To edit the properties of a measure right click on an empty part of the measure and select <kbd><samp class="menuitem">Measure Properties...</samp></kbd>.</p>
 <p><img src="/sites/musescore.org/files/measure-properties.png" alt="Measure properties dialog" title="Measure properties dialog" width="449" height="347" class="inline" /></p>
 <h3>Staves</h3>
 <p>The <em>Visible</em> property allows you to show or hide the notes and staff lines for the current measure. The <em>Stemless</em> property allows you to show or hide all note stems for the current measure. Notes that normally have a stem such as half notes (minums) and quarter notes (crotchets) only show the note head when marked as stemless. </p>
 <h3>Duration</h3>
-<p>The <em>Nominal</em> duration is the time signature that is displayed on the score. You can change the <em>Actual</em> duration of a measure to anything regardless of the time signature displayed on the score. Normally the nominal and actual duration of a measure is identical. A pickup (upbeat) measure can have a shorter actual duration.</p>
+<p>The <em>Nominal</em> duration is the time signature that is displayed on the score. You can change the <em>Actual</em> duration of a measure to anything regardless of the time signature displayed on the score. Normally the nominal and actual duration of a measure is identical. A pickup (upbeat) measure can have a shorter actual duration. For example a quarter note (crochet) pickup to a piece in 4/4 time would have a nominal measure duration of 4/4 but an actual duration of 1/4. </p>
 <h3>Irregular</h3>
 <p>An "irregular" measure is not counted in the measure numbering. Normally a pickup measure is marked as "irregular". If you are using version 0.9.4 or earlier and mark a measure as irregular then you may need to save and reload the score before the measure numbers show the change.</p>
 <h3>Repeat count</h3>
 <p>If the measure is the end of a <a href="http://musescore.org/handbook/repeat" title="repeat">repeat</a> you can define how often the repeat should be played.</p>
 <h3>Break multi-measure rests</h3>
 <p>This property separates a multi-measure rest at the current measure. If the current measure contains a change of <a href="http://musescore.org/handbook/time-signature" title="time signature">time signature</a> then MuseScore marks this property automatically.</p>
+<h3>Numbering</h3>
+<p>MuseScore automatically numbers the first measure of each system but more numbering options are possible. From the main menu choose <kbd><samp class="menu">Style</samp> → <samp class="submenu">Edit Style</samp></kbd>. In the left pane choose <b>"Numbers"</b>. In the bottom half of the right pane is the <b>"Measure Numbers"</b> ("Bar Numbers") section. </p>
+<p>Mark the checkbox next to the "Measure Numbers" ("Bar Numbers") to turn on automatic measure numbers.<br />
+Mark "show first" if you want the first measure numbered.<br />
+Mark "all staffs" if you want numbers on all staffs, otherwise only the top staff of each system shows measure numbers.<br />
+Choose to show numbers on "every system" which numbers the first measure of each line, or show numbers by "interval" and specify the size of the interval. For example, an interval of 1 numbers every measure; an interval of 5 numbers every fifth measure.</p>
   </div>
 <div id="node-82" class="section-3">
   <h1 class="book-heading">Palette</h1>
@@ -459,14 +418,14 @@ This can be entered in MuseScore as follows:</p>
 <li>Select a note or rest in the percussion staff. This loads the corresponding drum palette</li>
 <li>Press "N" to begin note entry</li>
 <li>Select a note duration from the Note Input toolbar</li>
-<li>Select a the type of note (such as bass drum or snare) from the drum <a href="http://musescore.org/handbook/palette" title="palette">palette</a></li>
+<li>Select a the type of note (such as bass drum or snare) from the drum <a href="http://musescore.org/it/manuale/palette" title="palette">palette</a></li>
 <li>Click on the percussion staff to add the note to the score</li>
 </ol>
   </div>
 <div id="node-52" class="section-3">
   <h1 class="book-heading">Grace note</h1>
   <p><strong>Short grace notes</strong> (Acciaccatura) appear as small notes with a stroke through the stem. <strong>Long grace notes</strong> (Appoggiatura) have no stroke. Both are placed before the normal-sized main note. </p>
-<p>Create a grace note by dragging a grace note symbol from the notes <a href="http://musescore.org/handbook/palette" title="palette">palette</a> to a regular note on the score.</p>
+<p>Create a grace note by dragging a grace note symbol from the Grace Notes <a href="http://musescore.org/handbook/palette" title="palette">palette</a> (In versions 0.9.5 and earlier the palette is simply called Notes) to a regular note on the score.</p>
 <p><img src="/sites/musescore.org/files/grace-palette.png" alt="grace-palette.png" title="grace-palette.png" width="168" height="64" class="inline" /></p>
 <p>See also: <a href="http://en.wikipedia.org/wiki/Grace_note">Grace note</a> at Wikipedia</p>
   </div>
@@ -533,7 +492,7 @@ This can be entered in MuseScore as follows:</p>
 <p>To create a one-bar rest select a measure and press <kbd><kbd>Del</kbd></kbd>. All notes and rests on this measure are then replaced by a one-bar rest.</p>
 <h3>Multi-measure rest</h3>
 <p><img src="/sites/musescore.org/files/multimeasure-rests_2.png" alt="Multi-measure rests have a number above the staff indicating the duration of the rest by the number of measures" title="Multi-measure rests have a number above the staff indicating the duration of the rest by the number of measures" width="386" height="37" class="inline" /></p>
-<p>Multi-measure rests indicate a long duration of silence for an instrument and are frequently used in ensemble sheet music. In versions 0.9.5 and earlier this feature is experimental only (see limitations below)</p>
+<p>Multi-measure (multi-bar) rests indicate a long duration of silence for an instrument and are frequently used in ensemble sheet music. In versions 0.9.5 and earlier this feature is experimental only (see limitations below)</p>
 <h4>Instructions</h4>
 <ol>
 <li>From the menu choose <kbd><samp class="menu">Style</samp> → <samp class="menuitem">Edit General Style</samp></kbd> (in versions 0.9.5 and earlier it is called <kbd><samp class="menu">Style</samp> → <samp class="menuitem">Edit Style</samp></kbd>)</li>
@@ -604,7 +563,7 @@ This can be entered in MuseScore as follows:</p>
   <p>Tremolo is the rapid repetition of one note or a rapid alternation between two or more notes. It is indicated by strokes through the stems of the notes. If the tremolo is between two or more notes, the bars are drawn between them.</p>
 <p>The tremolo palette contains separate symbols for one note tremolos (shown with stems below) and for two note tremolos (shown with no stem below).</p>
 <p><img src="/sites/musescore.org/files/tremolopalette_0.png" alt="Tremolo palette" title="Tremolo palette" width="168" height="64" class="inline" /></p>
-<p>In a two note tremolo every note has the value of the whole tremolo duration. To enter a tremolo with the duration of a half note (minim) first enter two normal quarter notes (quavers). After dragging a tremolo symbol to the first note the note values automatically double to half notes.</p>
+<p>In a two note tremolo every note has the value of the whole tremolo duration. To enter a tremolo with the duration of a half note (minim) first enter two normal quarter notes (crotchets). After dragging a tremolo symbol to the first note the note values automatically double to half notes.</p>
   </div>
 <div id="node-92" class="section-3">
   <h1 class="book-heading">Tuplet</h1>
@@ -709,8 +668,8 @@ By pressing the Play <img src="/sites/musescore.org/files/play.png" alt="play.pn
   <h1 class="book-heading">SoundFont</h1>
   <p>MuseScore comes with a piano sound for play back. For more sounds, such as a violin or percussion, you need a General MIDI SoundFont.</p>
 <h3>Overview</h3>
-<p>A SoundFont file can store any number of instrument sounds. Many SoundFonts are available on the web. Look for one that covers the 128 sounds of <a href="http://en.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM).</p>
-<p>The file size and sound quality of SoundFonts available on the web is varied. Larger SoundFonts often sound better but may be too large to run on your computer. If you find MuseScore runs slowly after installing a large SoundFont or your computer can't keep up during play back then look for a smaller SoundFont. Below are three popular GM SoundFonts of different sizes.</p>
+<p>A SoundFont file can store any number of instrument sounds. Many SoundFonts are available on the web. Look for one that covers the 128 sounds of <a href="http://en.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM). If you use a SoundFont that does not conform to the General MIDI standard then others may not hear the correct instruments when you share the score or save as MIDI. </p>
+<p>The file size and sound quality of SoundFonts available on the web varies. Larger SoundFonts often sound better but may be too large to run on your computer. If you find MuseScore runs slowly after installing a large SoundFont or your computer can't keep up during play back then look for a smaller SoundFont. Below are three popular GM SoundFonts of different sizes.</p>
 <ul>
 <li>FluidR3_GM.sf2 (141 MB uncompressed), download <a class="freelinking external" href="http://www.musescore.org/download/fluid-soundfont.tar.gz">Fluid-soundfont.tar.gz (129 MB)</a></li>
 <li>MagicSF_ver2.sf2 (67.8 MB uncompressed), see <a href="http://www.personalcopy.com/sfarkfonts1.htm">Big SoundFonts</a></li>
@@ -725,7 +684,7 @@ By pressing the Play <img src="/sites/musescore.org/files/play.png" alt="play.pn
 </ul>
 <h3>MuseScore settings</h3>
 <p>After finding and decompressing a SoundFont do not double click to open it since this does not set up MuseScore. Instead move the file to a folder of your choosing, start MuseScore, and follow the instructions below.</p>
-<p>Go to <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp> → <samp class="tab">I/O</samp> tab</kbd>. (If you are using a prereleases or nightly build then go to <kbd><samp class="menu">Display</samp> → <samp class="menuitem">Synthesizer</samp></kbd>.)</p>
+<p>Go to <kbd><samp class="menu">Display</samp> → <samp class="menuitem">Synthesizer</samp></kbd>. If you are using version 0.9.5 or earlier then go to <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp> → <samp class="tab">I/O</samp> tab</kbd>.</p>
 <p>The initial SoundFont setting is <samp>:/data/piano1.sf2</samp>. Replace this with the location of your new SoundFont (.sf2) file. Click on the Open icon to browse for the file and open it.</p>
 <p>To apply changes click OK to exit the preferences panel. Quit and and reopen MuseScore for the changes to take affect</p>
 <h3>Troubleshooting</h3>
@@ -837,7 +796,7 @@ By pressing the Play <img src="/sites/musescore.org/files/play.png" alt="play.pn
 </ul>
 <p>Chord names can be <a href="http://musescore.org/handbook/text-editing" title="text editing">edited</a> as normal text. To add a sharp type <kbd>#</kbd> and to add a flat type <kbd>b</kbd>. These characters will automatically turn into proper sharp or flat signs when you move to the next chord.</p>
 <h3>Jazz font</h3>
-<p>If you prefer a more handwritten appearance to the chord names in your score then versions 0.9.5 and later include this option.</p>
+<p>If you prefer a more handwritten appearance to the chord names in your score then versions 0.9.5 and later include a jazz font option.</p>
 <p><img src="/sites/musescore.org/files/jazz-chord-names_0.png" alt="Chord names have a handwritten appearance" title="Chord names have a handwritten appearance" width="182" height="49" class="inline" /></p>
 <ol>
 <li>From the main menu choose <kbd><samp class="menu">Style</samp> → <samp class="menuitem">Edit Style...</samp></kbd></li>
@@ -859,6 +818,7 @@ By pressing the Play <img src="/sites/musescore.org/files/play.png" alt="play.pn
 <li>Type <kbd><kbd>Space</kbd></kbd> at end of word to go next note</li>
 <li>Type an hyphen <kbd><kbd>-</kbd></kbd> at end of syllable to go to next note. The syllables are connected with a dash</li>
 <li><kbd><kbd>Shift</kbd>+<kbd>Space</kbd></kbd> moves to the previous note</li>
+<li><kbd><kbd>Enter</kbd></kbd> (Mac: <kbd><kbd>Return</kbd></kbd>) moves down to the next lyric line</li>
 </ol>
 <p><img src="/sites/musescore.org/files/adeste.png" alt="Sample lyrics:A-des-te fi-del-es" title="Sample lyrics:A-des-te fi-del-es" width="475" height="220" class="inline" /></p>
 <p>Syllables can be extended by an underline:<br />
@@ -935,7 +895,7 @@ Vertical frames provide empty space between or before systems. The height is adj
 <li>Click <kbd><samp>Browse...</samp></kbd></li>
 <li>Look for mscore.exe on your computer. The location may vary depending on your installation but it is probably something similar to My Computer &gt; Local Disk &gt; Program Files &gt; MuseScore 0.9 &gt; bin &gt; mscore.exe</li>
 <li>Click <kbd><samp>Open</samp></kbd> to leave the Browse dialog and return to the Run dialog. The following text (or something similar) should display in the Run dialog: <code>"C:\Program Files\MuseScore 0.9\bin\mscore.exe"</code></li>
-<li>Click after the quote and a hyphen followed by a capital F: <kbd>-F</kbd></li>
+<li>Click after the quote and add a space followed by a hyphen and a capital F: <kbd> -F</kbd></li>
 <li>Press <kbd><samp>OK</samp></kbd>
 </li>
 </ol>
@@ -960,4 +920,4 @@ Vertical frames provide empty space between or before systems. The height is adj
     <div class="print-links"></div>
   </body>
 </html>
-<!-- Page cached by Boost @ 2010-01-31 23:04:29, expires @ 2010-02-01 02:04:29 -->
+<!-- Page cached by Boost @ 2010-02-23 07:33:24, expires @ 2010-02-23 10:33:24 -->

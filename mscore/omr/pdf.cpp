@@ -29,7 +29,7 @@
 //------------------------------------------------------------------------
 
 class QImageOutputDev: public OutputDev {
-      int imgNum;			// current image number
+      int iy;
       QImage* image;
 
    public:
@@ -67,26 +67,47 @@ class QImageOutputDev: public OutputDev {
 //   drawImage
 //---------------------------------------------------------
 
-void QImageOutputDev::drawImage(GfxState*, Object*, Stream* str,
-   int width, int height,
-   GfxImageColorMap *colorMap,
-   GBool, int*, GBool)
+void QImageOutputDev::drawImage(GfxState* state, Object*, Stream* str,
+   int width, int height, GfxImageColorMap *colorMap, GBool, int*, GBool)
       {
       if (colorMap->getNumPixelComps() == 1 && colorMap->getBits() == 1) {
             // fprintf(f, "%d %d\n", width, height);
             str->reset();     // initialize stream
 
+            double* ctm = state->getCTM();
+            QMatrix matrix;
+
+            matrix.setMatrix(
+              ctm[0] / width,   0,
+              0,                 -ctm[3] / height,
+              ctm[4],  ctm[3] + ctm[5]);
+
+            int pw = state->getPageWidth() / matrix.m11();
+            pw = ((pw+31)/32) * 32;
+            int ph = state->getPageHeight() / matrix.m22();
+            if (image->isNull()) {
+                  *image = QImage(pw, ph+32, QImage::Format_MonoLSB);
+                  QVector<QRgb> ct(2);
+                  ct[0] = qRgb(255, 255, 255);
+                  ct[1] = qRgb(0, 0, 0);
+                  image->setColorTable(ct);
+                  image->fill(0);
+                  iy = 0;
+                  }
+            if (image->width() < pw || image->height() < ph) {
+                  printf("**********drop image %d x %d  <  %d x %d\n",
+                     image->width(), image->height(), pw, ph);
+                  return;
+                  }
+
             // copy the stream
             int stride  = (width + 7) / 8;
             unsigned char mask = 0xff << (stride * 8 - width);
-            int qstride = ((width + 31) / 32) * 4;
-            // int qsize   = height * qstride;
-
-            *image = QImage(width, height, QImage::Format_MonoLSB);
-
+            int qstride = ((image->width() + 31) / 32) * 4;
             const uchar* data = image->bits();
 
-            uchar* p = const_cast<uchar*>(data);
+            uchar* p = const_cast<uchar*>(data) + qstride * iy;;
+
             for (int y = 0; y < height; ++y) {
                   int x = 0;
                   for (; x < stride; ++x) {
@@ -100,12 +121,9 @@ void QImageOutputDev::drawImage(GfxState*, Object*, Stream* str,
                   for (; x < qstride; ++x)
                         *p++ = 0;
                   }
+            iy += height;
 
             str->close();
-            QVector<QRgb> ct(2);
-            ct[0] = qRgb(255, 255, 255);
-            ct[1] = qRgb(0, 0, 0);
-            image->setColorTable(ct);
             }
       else {
 #if 0
@@ -168,7 +186,8 @@ QImage Pdf::page(int i)
             imgOut = new QImageOutputDev();
       QImage image;
       imgOut->setImage(&image);
-      _doc->displayPages(imgOut, i+1, i+1, 72, 72, 0, gTrue, gFalse, gFalse);
+      // useMediaBox, crop, printing
+      _doc->displayPage(imgOut, i+1, 72, 72, 0, gTrue, gFalse, gFalse);
       return image;
       }
 
