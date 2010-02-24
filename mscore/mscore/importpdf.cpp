@@ -21,6 +21,11 @@
 #include "importpdf.h"
 #include "score.h"
 #include "omr/omr.h"
+#include "part.h"
+#include "staff.h"
+#include "measure.h"
+#include "al/al.h"
+#include "rest.h"
 
 //---------------------------------------------------------
 //   importPdf
@@ -35,6 +40,36 @@ bool Score::importPdf(const QString& path)
             return false;
             }
       _spatium = _omr->spatiumMM() * DPMM;
+      setStyle(ST_systemDistance,
+         StyleVal(ST_systemDistance, Spatium(_omr->systemDistance())));
+      setStyle(ST_akkoladeDistance,
+         StyleVal(ST_akkoladeDistance, Spatium(_omr->staffDistance())));
+
+      Part* part = new Part(this);
+      Staff* staff = new Staff(this, part, 0);
+      part->staves()->push_back(staff);
+      staves().insert(0, staff);
+      staff = new Staff(this, part, 1);
+      part->staves()->push_back(staff);
+      staves().insert(1, staff);
+      part->staves()->front()->setBarLineSpan(part->nstaves());
+      insertPart(part, 0);
+
+      int numMeasures = 4;
+      Duration d(Duration::V_MEASURE);
+      for (int i = 0; i < numMeasures; ++i) {
+            int tick = i * AL::division * 4;
+            Measure* measure = new Measure(this);
+		Rest* rest = new Rest(this, tick, d);
+            rest->setTrack(0);
+            Segment* s = measure->getSegment(rest);
+		s->add(rest);
+		rest = new Rest(this, tick, d);
+            rest->setTrack(4);
+		s->add(rest);
+
+            measures()->add(measure);
+            }
 
       setShowOmr(true);
       return true;

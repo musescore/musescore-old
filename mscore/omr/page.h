@@ -91,6 +91,8 @@ class Page {
       const QList<QRect>& slices() const { return _slices;  }
       const QList<QRect>& notes() const  { return _notes;   }
       double spatium() const             { return _spatium; }
+      double staffDistance() const;
+      double systemDistance() const;
       };
 
 #endif

@@ -47,6 +47,8 @@ class Scan {
       double spatiumMM() const;           // spatium in millimeter
       double spatium() const               { return _spatium; }
       double dpmm() const                  { return _dpmm;    }
+      double staffDistance() const;
+      double systemDistance() const;
       };
 
 #endif
