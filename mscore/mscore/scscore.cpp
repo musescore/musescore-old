@@ -34,6 +34,7 @@
 #include "harmony.h"
 #include "script.h"
 #include "score.h"
+#include "repeatlist.h"
 
 
 Q_DECLARE_METATYPE(Score*);
@@ -45,12 +46,12 @@ static const char* const function_names_score[] = {
       "load", "save",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves", "keysig"
+      "staves", "keysig", "duration"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
       1, 2,
-      1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0
+      1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0,0
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -77,10 +78,11 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       };
 
 ScriptInterface scoreInterface = {
-      20,
+      21,
       function_names_score,
       function_lengths_score,
       flags_score
@@ -384,6 +386,13 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                             }
                         return qScriptValueFromValue(context->engine(), result);
                         }
+                  break;
+            case 20:   //duration
+                  if (argc == 0){
+                    RepeatSegment* rs = score->repeatList()->last();
+                    double duration = score->utick2utime(rs->utick + rs->len)*1000;             
+                    return qScriptValueFromValue(context->engine(), duration);
+                  }
                   break;
             }
       return context->throwError(QScriptContext::TypeError,
