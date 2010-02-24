@@ -2645,9 +2645,11 @@ Element* Score::move(const QString& cmd)
 
 Element* Score::selectMove(const QString& cmd)
       {
-      ChordRest* cr = selection().lastChordRest();
+      ChordRest* cr;
       if (selection().activeCR())
             cr = selection().activeCR();
+      else
+            cr = selection().lastChordRest();
       ChordRest* el = 0;
       if (cr) {
             if (cmd == "select-next-chord")
