@@ -41,6 +41,8 @@ class Omr {
       void write(Xml&) const;
       void read(QDomElement e);
       double spatiumMM() const;           // spatium in millimeter
+      double staffDistance() const;
+      double systemDistance() const;
       };
 
 #endif

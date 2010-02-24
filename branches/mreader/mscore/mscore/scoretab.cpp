@@ -102,6 +102,13 @@ void ScoreTab::setCurrent(int n)
                   connect(v, SIGNAL(offsetChanged(double,double)), sv, SLOT(setOffset(double,double)));
                   connect(v, SIGNAL(nextPage()), sv, SLOT(nextPage()));
                   connect(v, SIGNAL(previousPage()), sv, SLOT(previousPage()));
+                  const QTransform _matrix = v->matrix();
+                  double _spatium = score->spatium();
+                  double scale = _matrix.m11() * _spatium;
+                  sv->setScale(scale);
+                  double dx = _matrix.dx() / scale;
+                  double dy = _matrix.dy() / scale;
+                  sv->setOffset(dx, dy);
                   QList<int> sizes;
                   sizes << 100 << 100;
                   vs->setSizes(sizes);

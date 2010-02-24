@@ -99,3 +99,22 @@ double Omr::spatiumMM() const
       return _scan->spatiumMM();
       }
 
+//---------------------------------------------------------
+//   staffDistance
+//---------------------------------------------------------
+
+double Omr::staffDistance() const
+      {
+      return _scan->staffDistance();
+      }
+
+//---------------------------------------------------------
+//   systemDistance
+//---------------------------------------------------------
+
+double Omr::systemDistance() const
+      {
+      return _scan->systemDistance();
+      }
+
+

@@ -89,3 +89,23 @@ double Scan::spatiumMM() const
       return _spatium / _dpmm;
       }
 
+//---------------------------------------------------------
+//   staffDistance
+//---------------------------------------------------------
+
+double Scan::staffDistance() const
+      {
+      return pages[0]->staffDistance();
+      }
+
+//---------------------------------------------------------
+//   systemDistance
+//---------------------------------------------------------
+
+double Scan::systemDistance() const
+      {
+      return pages[0]->systemDistance();
+      }
+
+
+

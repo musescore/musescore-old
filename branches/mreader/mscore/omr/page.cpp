@@ -356,7 +356,7 @@ double Page::xproject2(int y1)
       int x2 = x1 + (w/2 * 32);
 
       int ddx = x2 - x1;
-      for (int dy = -6; dy < 6; ++dy) {
+      for (int dy = -12; dy < 12; ++dy) {
             int onRun   = 0;
             int offRun  = 0;
             int on      = 0;
@@ -500,7 +500,7 @@ void Page::getStaffLines()
       QList<Lv> staveTop;
       int staffHeight = _spatium * 6;
       foreach(Lv a, lv) {
-            if (a.val < 10)   // MAGIC to avoid false positives
+            if (a.val < 500)   // MAGIC to avoid false positives
                   continue;
             int line = a.line;
             bool ok  = true;
@@ -560,5 +560,23 @@ void Page::searchNotes(int line, int x1, int x2, int y)
                         }
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   staffDistance
+//---------------------------------------------------------
+
+double Page::staffDistance() const
+      {
+      return ((staves[1].y() - staves[0].y()) / _spatium) - 4.0;
+      }
+
+//---------------------------------------------------------
+//   systemDistance
+//---------------------------------------------------------
+
+double Page::systemDistance() const
+      {
+      return ((staves[2].y() - staves[1].y()) / _spatium) - 4.0;
       }
 
