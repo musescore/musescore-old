@@ -180,7 +180,7 @@ void Clef::layout()
                   Symbol* number = new Symbol(score());
                   number->setMag(smag);
                   number->setSym(clefEightSym);
-                  addElement(number, 1.0 * msp, -5.0 * msp);
+                  addElement(number, 1.0 * msp, -5.0 * msp + yoff * _spatium);
                   }
                   break;
             case CLEF_G2:
@@ -190,10 +190,10 @@ void Clef::layout()
                   Symbol* number = new Symbol(score());
                   symbol->setMag(smag);
                   number->setSym(clefOneSym);
-                  addElement(number, .6 * msp, -5.0 * msp);
+                  addElement(number, .6 * msp, -5.0 * msp + yoff * _spatium);
                   number = new Symbol(score());
                   number->setSym(clefFiveSym);
-                  addElement(number, 1.4 * msp, -5.0 * msp);
+                  addElement(number, 1.4 * msp, -5.0 * msp + yoff * _spatium);
                   }
                   break;
             case CLEF_G3:
@@ -203,7 +203,7 @@ void Clef::layout()
                   Symbol* number = new Symbol(score());
                   symbol->setMag(smag);
                   number->setSym(clefEightSym);
-                  addElement(number, 1.0 * msp, 4.0 * msp);
+                  addElement(number, 1.0 * msp, 4.0 * msp + yoff * _spatium);
                   }
                   break;
             case CLEF_F:
@@ -217,7 +217,7 @@ void Clef::layout()
                   Symbol* number = new Symbol(score());
                   symbol->setMag(smag);
                   number->setSym(clefEightSym);
-                  addElement(number, .0, 4.5 * msp);
+                  addElement(number, .0, 4.5 * msp + yoff * _spatium);
                   }
                   break;
             case CLEF_F15:
@@ -227,10 +227,10 @@ void Clef::layout()
                   Symbol* number = new Symbol(score());
                   symbol->setMag(smag);
                   number->setSym(clefOneSym);
-                  addElement(number, .0, 4.5 * msp);
+                  addElement(number, .0, 4.5 * msp + yoff * _spatium);
                   number = new Symbol(score());
                   number->setSym(clefFiveSym);
-                  addElement(number, .8 * msp, 4.5 * msp);
+                  addElement(number, .8 * msp, 4.5 * msp + yoff * _spatium);
                   }
                   break;
             case CLEF_F_B:                            // baritone clef
@@ -281,7 +281,7 @@ void Clef::layout()
                   Symbol* number = new Symbol(score());
                   number->setMag(smag);
                   number->setSym(clefEightSym);
-                  addElement(number, .5 * msp, -1.5 * msp);
+                  addElement(number, .5 * msp, -1.5 * msp + yoff * _spatium);
                   }
                   break;
             case CLEF_F_15MA:
@@ -291,17 +291,15 @@ void Clef::layout()
                   Symbol* number = new Symbol(score());
                   symbol->setMag(smag);
                   number->setSym(clefOneSym);
-                  addElement(number, .0 * msp, -1.5 * msp);
+                  addElement(number, .0 * msp, -1.5 * msp + yoff * _spatium);
                   number = new Symbol(score());
                   number->setSym(clefFiveSym);
-                  addElement(number, .8 * msp, -1.5 * msp);
+                  addElement(number, .8 * msp, -1.5 * msp + yoff * _spatium);
                   }
                   break;
             }
       addElement(symbol, .0, yoff * _spatium);
       symbol->setMag(smag * mag());
-//      setYoff(yoff);
-//      setOffsetType(OFFSET_SPATIUM);
       }
 
 //---------------------------------------------------------
