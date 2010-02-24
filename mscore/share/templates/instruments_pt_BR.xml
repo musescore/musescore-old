@@ -4304,13 +4304,45 @@
           </channel>
         </instrument>
       <instrument>
+        <name>Contrabaixo Ac&#250;stico</name>
+        <short-name>Cb. Ac.</short-name>
+        <clef>5</clef>
+        <aPitchRange>28-62</aPitchRange>
+        <pPitchRange>23-67</pPitchRange>
+        <channel>
+           <program>43</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="32"/>
+          </channel>
+        <channel name="tremolo">
+         <program value="44"/>
+          </channel>
+        </instrument>
+      <instrument>
         <name>Contrabaixos</name>
         <short-name>Cbs.</short-name>
         <clef>5</clef>
         <aPitchRange>28-62</aPitchRange>
         <pPitchRange>23-67</pPitchRange>
         <channel>
-           <program>49</program>
+           <program>48</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        </instrument>
+       <instrument>
+        <name>Contrabaixos Ac&#250;sticos</name>
+        <short-name>Dbs.</short-name>
+        <clef>5</clef>
+        <aPitchRange>28-62</aPitchRange>
+        <pPitchRange>23-67</pPitchRange>
+        <channel>
+           <program>48</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4401,7 +4433,7 @@
         </instrument>
      </instrument-group>
 
-  <instrument-group name="Grupo-Teste">
+  <instrument-group name="Grupo-Teste" extended="1">
      <ref>Violone</ref>
      <ref>Piccolo</ref>
      </instrument-group>

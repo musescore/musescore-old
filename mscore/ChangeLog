@@ -1,3 +1,7 @@
+23.feb (db)
+      - update handbooks (except English)
+      - edit beams in wtc1fuga5 demo (Bug #4665)
+      - update Brazilian instrument list from vitor.
 22.feb. (ws)
       - fix: save editing of clef (dragging in edit mode)
       - fix #4626: layout of mid measure clef
