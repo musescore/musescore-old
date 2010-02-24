@@ -1738,7 +1738,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                   }
             m->scanElements(&eel, collectElements);
             }
-
+      int padding = QString("%1").arg(pages).size();
       for (int pageNumber = 0; pageNumber < pages; ++pageNumber) {
             Page* page = pl.at(pageNumber);
 
@@ -1798,8 +1798,8 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
             QString fileName(name);
             if (fileName.endsWith(".png"))
                   fileName = fileName.left(fileName.size() - 4);
-            fileName += QString("-%1.png").arg(pageNumber+1);
-
+            fileName += QString("-%1.png").arg(pageNumber+1, padding, 10, QLatin1Char('0'));
+            
             rv = printer.save(fileName, "png");
             if (!rv)
                   break;
