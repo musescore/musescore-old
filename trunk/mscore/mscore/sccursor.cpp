@@ -457,7 +457,10 @@ int SCursor::tick()
       RepeatSegment* rs = repeatSegment();
       if (rs && expandRepeat())
             offset = rs->utick - rs->tick;
-      return cr()->tick() + offset;
+      if(cr())
+          return cr()->tick() + offset;
+      else
+          return 0;
       }
 
 //---------------------------------------------------------
