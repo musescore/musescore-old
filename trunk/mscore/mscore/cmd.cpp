@@ -577,8 +577,8 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
             Note* note = new Note(*on);
             Chord* chord = on->chord();
             note->setParent(chord);
-            val = val < 0 ? val+1 : val-1;
-            int line = on->line() - val;
+            int valTmp = val < 0 ? val+1 : val-1;
+            int line = on->line() - valTmp;
 
             int tick   = chord->tick();
             Staff* estaff = staff(on->staffIdx() + chord->staffMove());

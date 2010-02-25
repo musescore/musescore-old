@@ -87,6 +87,7 @@ Objects
             composer    string            composer text on score (ro)
             poet        string            poet text on score (ro)
             staves     integer            number of staves (ro)
+            duration   integer            total score duration in seconds (ro)
 
          Functions:
             bool save(string path, string type)

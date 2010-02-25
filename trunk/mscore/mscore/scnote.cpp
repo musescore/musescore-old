@@ -74,14 +74,14 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
 
       int argc = context->argumentCount();
       switch(_id) {
-            case 0:
+            case 0:   //name
                   {
                   bool germanNames = (argc == 0) ? context->argument(1).toBool() : false;
                   if (argc == 0 || argc == 1)
                         return qScriptValueFromValue(context->engine(), tpc2name(note->tpc(), germanNames));
                   }
                   break;
-            case 1:
+            case 1:   //pitch
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->pitch());
                   else if (argc == 1) {
@@ -93,7 +93,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 2:     // tuning
+            case 2:    // tuning
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->tuning());
                   else if (argc == 1) {
@@ -102,7 +102,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 3:
+            case 3:   // color
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->color());
                   else if (argc == 1) {
@@ -115,7 +115,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 4:
+            case 4:   //visible
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->visible());
                   else if (argc == 1) {
@@ -124,7 +124,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 5:
+            case 5:   //tpc
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->tpc());
                   else if (argc == 1) {
@@ -135,17 +135,17 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 6:
+            case 6:   //tied
                   if (argc == 0) {
                         int tiemode = 0;
-                        if (note->tieBack())
-                              tiemode |= 1;
                         if (note->tieFor())
+                              tiemode |= 1;
+                        if (note->tieBack())
                               tiemode |= 2;
                         return qScriptValueFromValue(context->engine(), tiemode);
                         }
                   break;
-            case 7:
+            case 7:   //userAccidental
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), note->userAccidental());
                   else if (argc == 1) {

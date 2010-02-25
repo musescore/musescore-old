@@ -390,7 +390,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 20:   //duration
                   if (argc == 0){
                     RepeatSegment* rs = score->repeatList()->last();
-                    double duration = score->utick2utime(rs->utick + rs->len)*1000;             
+                    long duration = lrint(score->utick2utime(rs->utick + rs->len));             
                     return qScriptValueFromValue(context->engine(), duration);
                   }
                   break;
