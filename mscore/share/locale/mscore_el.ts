@@ -6692,7 +6692,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save score under a new file name</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Αποθήκευση παρτιτούρας με νέο όνομα αρχείου</translation>
     </message>
     <message>
         <source>File save a copy</source>
@@ -6704,7 +6704,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Αποθήκευση αντιγράφου της παρτιτούρας επιπρόσθετα με το τρέχον αρχείο</translation>
     </message>
     <message>
         <source>File reload</source>
@@ -6716,7 +6716,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reload score from file</source>
-        <translation type="unfinished">Επαναφόρτωση Παρτιτούρας από Αρχείο</translation>
+        <translation type="unfinished">Επαναφόρτωση παρτιτούρας από αρχείο</translation>
     </message>
     <message>
         <source>File close</source>
@@ -6800,7 +6800,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>show keys signatures palette</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Εμφάνιση παλέτας ετικέτας κλίμακας</translation>
     </message>
     <message>
         <source>Key Signatures...</source>
@@ -6820,7 +6820,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show time signatures palette</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Εμφάνιση παλέτας ετικέτας χρόνου</translation>
     </message>
     <message>
         <source>Time Signatures...</source>
@@ -6836,7 +6836,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note input mode</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Λειτουργία εισαγωγής νοτών</translation>
     </message>
     <message>
         <source>Note Input</source>
@@ -6844,7 +6844,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch spell</source>
-        <translation type="unfinished">Διόρθωση Τονικότητας</translation>
+        <translation type="unfinished">Διόρθωση Τονικού ύψους</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
@@ -6988,7 +6988,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note A</source>
-        <translation type="unfinished">Εισαγωγή νότας A</translation>
+        <translation type="unfinished">Εισαγωγή νότας A (Λα)</translation>
     </message>
     <message>
         <source>A</source>
@@ -6996,7 +6996,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note B</source>
-        <translation type="unfinished">Εισαγωγή Νότας Β</translation>
+        <translation type="unfinished">Εισαγωγή Νότας Β (Σι)</translation>
     </message>
     <message>
         <source>B</source>
@@ -7004,7 +7004,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note C</source>
-        <translation type="unfinished">Εισαγωγή Νότας C</translation>
+        <translation type="unfinished">Εισαγωγή Νότας C (Ντο)</translation>
     </message>
     <message>
         <source>C</source>
@@ -7012,7 +7012,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note D</source>
-        <translation type="unfinished">Εισαγωγή Νότας D</translation>
+        <translation type="unfinished">Εισαγωγή Νότας D (Ρε)</translation>
     </message>
     <message>
         <source>D</source>
@@ -7020,7 +7020,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note E</source>
-        <translation type="unfinished">Εισαγωγή Νότας Ε</translation>
+        <translation type="unfinished">Εισαγωγή Νότας Ε (Μι)</translation>
     </message>
     <message>
         <source>E</source>
@@ -7028,7 +7028,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note F</source>
-        <translation type="unfinished">Εισαγωγή Νότας F</translation>
+        <translation type="unfinished">Εισαγωγή Νότας F (Φα)</translation>
     </message>
     <message>
         <source>F</source>
@@ -7036,7 +7036,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note G</source>
-        <translation type="unfinished">Εισαγωγή Νότας G</translation>
+        <translation type="unfinished">Εισαγωγή Νότας G (Σολ)</translation>
     </message>
     <message>
         <source>G</source>
@@ -7156,7 +7156,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Επαναφορά λειτουργίας ενωτικών γραμμών για τα επιλεγμένα μέτρα</translation>
     </message>
     <message>
         <source>Flip direction</source>
@@ -7168,7 +7168,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch up</source>
-        <translation type="unfinished">οξύτητα πάνω</translation>
+        <translation type="unfinished">τονικό ύψος πάνω</translation>
     </message>
     <message>
         <source>Up</source>
@@ -7176,27 +7176,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch up octave</source>
-        <translation type="unfinished">οξύτητα κατά μία οκτάβα πάνω</translation>
+        <translation type="unfinished">τονικό ύψος οκτάβα πάνω</translation>
     </message>
     <message>
         <source>Up Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Οκτάβα πάνω</translation>
     </message>
     <message>
         <source>Pitch up by an octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τονικό ύψος πάνω σε οκτάβα</translation>
     </message>
     <message>
         <source>Pitch up note in chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τονικό ύψος επάνω σε νότα συγχορδίας</translation>
     </message>
     <message>
         <source>Up Note in Chord</source>
-        <translation type="unfinished">Πάνω νότα σε συγχορδία</translation>
+        <translation type="unfinished">Πάνω Νότα σε Συγχορδία</translation>
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
-        <translation type="unfinished">Πήγαινε στη νότα της συγχορδίας με την υψηλότερη οξύτητα</translation>
+        <translation type="unfinished">Πήγαινε στη νότα της συγχορδίας με το μεγαλύτερο τονικό ύψος</translation>
     </message>
     <message>
         <source>Go to top note in chord</source>
@@ -7216,7 +7216,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch down</source>
-        <translation type="unfinished">Οξύτητα κάτω</translation>
+        <translation type="unfinished">Τονικό ύψος κάτω</translation>
     </message>
     <message>
         <source>Down</source>
@@ -7224,19 +7224,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch down octave</source>
-        <translation type="unfinished">Οξύτητα κατά μία οκτάβα κάτω</translation>
+        <translation type="unfinished">Τονικό ύψος οκτάβα κάτω</translation>
     </message>
     <message>
         <source>Down octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Οκτάβα κάτω</translation>
     </message>
     <message>
         <source>Pitch down by an octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τονικό ύψος κάτω σε οκτάβα</translation>
     </message>
     <message>
         <source>Pitch down note in chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τονικό ύψος κάτψ σε νότα συγχορδίας</translation>
     </message>
     <message>
         <source>Down Note in Chord</source>
@@ -7244,7 +7244,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Go to lower pitched note in chord</source>
-        <translation type="unfinished">Πήγαινε στη νότα της συγχορδίας με τη χαμηλότερη οξύτητα</translation>
+        <translation type="unfinished">Πήγαινε στη νότα της συγχορδίας με το χαμηλότερο τονικό ύψος</translation>
     </message>
     <message>
         <source>Go to bottom note in chord</source>
@@ -7252,7 +7252,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bottom Note in Chord</source>
-        <translation type="unfinished">Κάτω νότα στη συχορδία</translation>
+        <translation type="unfinished">Κάτω Νότα στη Συχορδία</translation>
     </message>
     <message>
         <source>Move down</source>
@@ -7720,7 +7720,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Mag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mag</translation>
     </message>
     <message>
         <source>Zoom Canvas</source>
@@ -7744,11 +7744,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo Palette</source>
-        <translation type="unfinished">Παλέτα Tempo</translation>
+        <translation type="unfinished">Παλέτα Τέμπο</translation>
     </message>
     <message>
         <source>Tempo...</source>
-        <translation type="unfinished">Tempo...</translation>
+        <translation type="unfinished">Τέμπο...</translation>
     </message>
     <message>
         <source>Tempo</source>
@@ -8156,11 +8156,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>repeat selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">επανάληψη επιλογής</translation>
     </message>
     <message>
         <source>Repeat selection</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Επανάληψη επιλογής</translation>
     </message>
     <message>
         <source>follow song</source>
@@ -8172,39 +8172,39 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>split window horizontal</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Οριζόντια διαίρεση παραθύρου</translation>
     </message>
     <message>
         <source>Documents Side by Side</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Έγγραφα σε παράθεση</translation>
     </message>
     <message>
         <source>split window vertical</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Κατακόρυφη διαίρεση παραθύρου</translation>
     </message>
     <message>
         <source>Documents Stacked</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Στοίβα Εγγράφων</translation>
     </message>
     <message>
         <source>Player play</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Αναπαραγωγέας αναπαραγωγή</translation>
     </message>
     <message>
         <source>Seek to begin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Αναζήτηση αρχής</translation>
     </message>
     <message>
         <source>Player rewind</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Αναπαραγωγέας γρήγορη κίνηση πίσω</translation>
     </message>
     <message>
         <source>Rewind to start position</source>
-        <translation type="unfinished">Επαναφορά στη θέση αρχής</translation>
+        <translation type="unfinished">Επαναφορά στην αρχική θέση</translation>
     </message>
     <message>
         <source>Seek to end</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Αναζήτηση τέλους</translation>
     </message>
     <message>
         <source>Play repeats on/off</source>
@@ -8224,7 +8224,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Επεξεργασία Στυλ Συγχορδίας...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -8232,7 +8232,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Διαγραφή περιεχομένων από τα επιλεγμένα μέτρα</translation>
     </message>
     <message>
         <source>Timewise Delete</source>
@@ -8255,11 +8255,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished">thumb</translation>
+        <translation type="unfinished">αντίχειρας</translation>
     </message>
     <message>
         <source>sforzato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">sforzato</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -8477,7 +8477,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SlurSegment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τμήμα Σύζευξης</translation>
     </message>
     <message>
         <source>BarLine</source>
@@ -8517,11 +8517,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>KeySig</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Οπλισμός</translation>
     </message>
     <message>
         <source>TimeSig</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ετικέτα Χρόνου</translation>
     </message>
     <message>
         <source>Rest</source>
@@ -8573,7 +8573,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Marker</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Μαρκαδόρος</translation>
     </message>
     <message>
         <source>Jump</source>
@@ -8581,7 +8581,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tuplet</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Υποδιαίρεση Χρόνου</translation>
     </message>
     <message>
         <source>Tempo</source>
@@ -8601,27 +8601,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HairpinSegment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τμήμα Φουρκέτας</translation>
     </message>
     <message>
         <source>OttavaSegment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τμήμα Οκτάβας</translation>
     </message>
     <message>
         <source>PedalSegment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τμήμα Πεντάλ</translation>
     </message>
     <message>
         <source>TrillSegment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τμήμα Τρίλιας</translation>
     </message>
     <message>
         <source>TextLineSegment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τμήμα Γραμμής Κειμένου</translation>
     </message>
     <message>
         <source>VoltaSegment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Τμήμα Volta</translation>
     </message>
     <message>
         <source>LayoutBreak</source>
@@ -8633,7 +8633,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>LedgerLine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">LedgerLine</translation>
     </message>
     <message>
         <source>NoteHead</source>
@@ -8649,7 +8649,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffLines</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Γραμμές Πενταγράμμου</translation>
     </message>
     <message>
         <source>Cursor</source>
@@ -8665,7 +8665,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ShadowNote</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ShadowNote</translation>
     </message>
     <message>
         <source>RubberBand</source>
@@ -8745,7 +8745,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>AccidentalBracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Αγκύλη Σημείου Αλλοίωσης</translation>
     </message>
 </context>
 <context>
@@ -8878,7 +8878,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>rest M3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">παύση M3</translation>
     </message>
     <message>
         <source>breve rest</source>
@@ -9250,7 +9250,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished">thumb</translation>
+        <translation type="unfinished">αντίχειρας</translation>
     </message>
     <message>
         <source>sforza to accent</source>

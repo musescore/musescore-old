@@ -1575,7 +1575,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Create time signatures</source>
-        <translation>Crear Medidas de Compases</translation>
+        <translation>Crear Indicación de Compás</translation>
     </message>
     <message>
         <source>Create key sig for all systems</source>
@@ -3374,7 +3374,7 @@ Desde el menu de "Ayuda. Intenta usar el "Manual en "Internet.</translation>
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation>Compases</translation>
+        <translation>Indicaciones de Compás</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
@@ -3632,7 +3632,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Crear Compás</translation>
+        <translation>Crear Indicación de Compás</translation>
     </message>
 </context>
 <context>
@@ -4007,11 +4007,11 @@ Restore session?</source>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">barra de herramientas 1</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">barra de herramientas 2</translation>
     </message>
 </context>
 <context>
@@ -5196,7 +5196,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Compás</translation>
+        <translation>Indicación de Compás</translation>
     </message>
     <message>
         <source>Begin Repeat</source>
@@ -6031,7 +6031,7 @@ Intenta guardarlo en una localización distinta</translation>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation>MuseScore: Compases</translation>
+        <translation>MuseScore: Indicaciones de Compás</translation>
     </message>
 </context>
 <context>
@@ -6054,7 +6054,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Crear Compás</translation>
+        <translation>Crear Indicación de Compás</translation>
     </message>
 </context>
 <context>
@@ -6065,11 +6065,11 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
-        <translation>Introduzca Medida del Compás:</translation>
+        <translation>Introduzca Indicación de Compás:</translation>
     </message>
     <message>
         <source>Time Signature: </source>
-        <translation>Medida del Compás: </translation>
+        <translation>Indicación de Compás: </translation>
     </message>
     <message>
         <source>/</source>
@@ -6081,7 +6081,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Compás</translation>
+        <translation>Indicación de Compás</translation>
     </message>
     <message>
         <source>Enter Number of Measures:</source>
@@ -7920,11 +7920,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show time signatures palette</source>
-        <translation>Mostrar la paleta de compases</translation>
+        <translation>Mostrar la paleta de indicaciones de compás</translation>
     </message>
     <message>
         <source>Time Signatures...</source>
-        <translation>Compases...</translation>
+        <translation>Indicaciones de Compás...</translation>
     </message>
     <message>
         <source>Show dynamics palette</source>
@@ -8168,7 +8168,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rewind to start position</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Retroceder a la posición de inicio</translation>
     </message>
     <message>
         <source>Seek to end</source>
@@ -8489,7 +8489,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TimeSig</source>
-        <translation>Compás</translation>
+        <translation>Indicación de Compás</translation>
     </message>
     <message>
         <source>Rest</source>
