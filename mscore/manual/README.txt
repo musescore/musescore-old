@@ -57,10 +57,10 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
         url = 'http://musescore.org/nb/print/book/export/html/2122'
         internal = 'http://musescore.org/nb/håndbok'
 
-3. In main() add a extra line to the "Create handbooks 
-   for all languages" section. For example
+3. In main() the two-letter code the language_choices
+   list. For example
 
-    createHandbook('nb', 'missing', pdf, verbose, heading_switch)
+    language_choices = ['all','en','nl','de','es','fi','fr','gl','it','ja','nb','ru','pl','pt-BR']
 
 
 *********************************
@@ -68,6 +68,13 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
 
 CHANGE LOG
 
+* Compatibility update: remove "www." from handbook links again (HTML from website changed)
+* Add Hungarian and Catalan
+* Work around lower case problem for a couple letters in Hungarian alphabet
+* More flexibility with Chapter headings (numbers can go before the word chapter for Hungarian or right after without a space for Japanese)
+* Update instructions in README file for adding new language
+
+Version 1.4 (February 2010)
 * Unix style command line options
 * Fix: broken images
 * Fix: removable of stylesheets (change in website revealed bug)
