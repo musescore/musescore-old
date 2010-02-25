@@ -8231,7 +8231,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation/>
+        <translation>duim</translation>
     </message>
     <message>
         <source>trill</source>
@@ -9222,7 +9222,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation/>
+        <translation>duim</translation>
     </message>
     <message>
         <source>sforza to accent</source>
