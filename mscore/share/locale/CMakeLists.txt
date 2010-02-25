@@ -34,6 +34,7 @@ install(FILES
       mscore_gl.qm
       mscore_hi_IN.qm
       mscore_hu.qm
+      mscore_id.qm      
       mscore_it.qm
       mscore_ja.qm
       mscore_nl.qm
