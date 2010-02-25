@@ -18,6 +18,7 @@ echo       %1/share/locale/mscore_fr.ts \
 echo       %1/share/locale/mscore_gl.ts \
 echo       %1/share/locale/mscore_hi_IN.ts \
 echo       %1/share/locale/mscore_hu.ts \
+echo       %1/share/locale/mscore_id.ts \
 echo       %1/share/locale/mscore_it.ts \
 echo       %1/share/locale/mscore_ja.ts \
 echo       %1/share/locale/mscore_nb.ts \
