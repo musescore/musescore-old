@@ -849,8 +849,6 @@ MuseScore::MuseScore()
       loadScoreList();
 
       showPlayPanel(preferences.showPlayPanel);
-      if (getPlayPanel())
-            getPlayPanel()->move(preferences.playPanelPos);
 
       QClipboard* cb = QApplication::clipboard();
       connect(cb, SIGNAL(dataChanged()), SLOT(clipboardChanged()));
@@ -1289,7 +1287,6 @@ void MuseScore::showPlayPanel(bool visible)
       {
       if (cs == 0 || noSeq)
             return;
-
       if (playPanel == 0) {
             if (!visible)
                   return;
@@ -1309,6 +1306,7 @@ void MuseScore::showPlayPanel(bool visible)
             seq->getCurTick(&tick, &utick);
             playPanel->heartBeat(tick, utick);
             playPanel->heartBeat2(seq->getCurTime());
+            playPanel->move(preferences.playPanelPos);
             }
       playPanel->setVisible(visible);
       playId->setChecked(visible);
