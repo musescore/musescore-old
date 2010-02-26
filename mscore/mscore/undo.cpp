@@ -2045,10 +2045,10 @@ printf("ChangeStaff\n");
 ChangePart::ChangePart(Part* _part, const QTextDocument* _longName, const QTextDocument* _shortName,
    const Instrument& i)
       {
-      longName           = _longName->clone(0);
-      shortName          = _shortName->clone(0);
-      instrument         = i;
-      part               = _part;
+      longName   = _longName->clone(0);
+      shortName  = _shortName->clone(0);
+      instrument = i;
+      part       = _part;
       }
 
 ChangePart::~ChangePart()
@@ -2064,9 +2064,9 @@ ChangePart::~ChangePart()
 void ChangePart::flip()
       {
       Instrument oi         = *part;
+      part->setInstrument(instrument);
       longName              = part->longName()->swapDoc(longName);
       shortName             = part->shortName()->swapDoc(shortName);
-      part->setInstrument(instrument);
       instrument            = oi;
       part->score()->setInstrumentNames();
       }
