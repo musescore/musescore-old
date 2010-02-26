@@ -59,6 +59,7 @@ class Clef : public Compound {
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual Space space() const;
+      virtual void read(QDomElement);
 
       bool small() const                        { return _small; }
       void setSmall(bool val);

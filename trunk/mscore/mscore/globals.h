@@ -23,7 +23,7 @@
 
 #define MSC_VERSION     "1.12"
 
-static const int MSCVERSION = 112;
+static const int MSCVERSION = 113;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -35,6 +35,7 @@ static const int MSCVERSION = 112;
 //    1.10  TextLine properties changed
 //    1.11  Instrument name in part saved as TextC
 //    1.12  use durationType, remove tickLen
+//    1.13  Clefs: userOffset is not (mis)used for vertical layout position
 
 extern bool debugMode;
 extern bool enableExperimental;

@@ -130,9 +130,6 @@ void EditStaff::apply()
       int interval  = iList->currentIndex();
       bool upFlag   = up->isChecked();
 
-printf("apply up %d  chromatic %d diatonic %d\n", upFlag, instrument.transposeChromatic(),
-      instrument.transposeDiatonic());
-
       instrument.setTransposeDiatonic(intervalList[interval].steps + octave->value() * 7);
       instrument.setTransposeChromatic(intervalList[interval].semitones + octave->value() * 12);
 
@@ -140,8 +137,6 @@ printf("apply up %d  chromatic %d diatonic %d\n", upFlag, instrument.transposeCh
             instrument.setTransposeDiatonic(-instrument.transposeDiatonic());
             instrument.setTransposeChromatic(-instrument.transposeChromatic());
             }
-printf("   apply up %d  chromatic %d diatonic %d\n", upFlag, instrument.transposeChromatic(),
-      instrument.transposeDiatonic());
 
       const QTextDocument* ln = longName->document();
       const QTextDocument* sn = shortName->document();

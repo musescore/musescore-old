@@ -453,4 +453,20 @@ void Clef::setSmall(bool val)
       layout();
       }
 
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Clef::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (!Element::readProperties(e))
+                  domError(e);
+            }
+      if (subtype() == 0)      // make sure setSubtype() is called at least once
+            setSubtype(0);
+      if (score()->mscVersion() < 113)
+            setUserOff(QPointF());
+      }
+
 
