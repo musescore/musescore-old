@@ -122,6 +122,7 @@ MusicXml::MusicXml(QDomDocument* d)
       doc = d;
       maxLyrics = 0;
       lastVolta = 0;
+      beamMode = BEAM_NO;
       }
 
 //---------------------------------------------------------
@@ -2635,9 +2636,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
             cr = new Rest(score, tick, durationType);
             cr->setDots(dots);
-            // TODO: try to find out if this rest is part of a beam
-            cr->setBeamMode(BEAM_NO);
-//            cr->setBeamMode(BEAM_AUTO);
+            if (beamMode == BEAM_BEGIN || beamMode == BEAM_MID)
+                  cr->setBeamMode(BEAM_MID);
+            else
+                  cr->setBeamMode(BEAM_NO);
             cr->setTrack(track);
             ((Rest*)cr)->setStaffMove(move);
             Segment* s = measure->getSegment(cr);
@@ -2752,6 +2754,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);
+            // remember beam mode last non-grace note
+            // bm == BEAM_AUTO means no <beam> was found
+            if (!grace && bm != BEAM_AUTO)
+                  beamMode = bm;
             ((Chord*)cr)->setStemDirection(sd);
 
             note->setVisible(printObject == "yes");
