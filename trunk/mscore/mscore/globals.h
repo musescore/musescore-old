@@ -21,7 +21,7 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.12"
+#define MSC_VERSION     "1.13"
 
 static const int MSCVERSION = 113;
 
