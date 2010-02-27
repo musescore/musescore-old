@@ -300,10 +300,8 @@ bool Seq::canStart()
       {
       if (!driver)
             return false;
-      if (events.empty() || cs->playlistDirty() || playlistChanged) {
-            printf("collectEvents\n");
+      if (events.empty() || cs->playlistDirty() || playlistChanged)
             collectEvents();
-            }
       return (!events.empty() && endTick != 0);
       }
 
