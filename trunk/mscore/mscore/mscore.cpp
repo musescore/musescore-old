@@ -2585,9 +2585,11 @@ void MuseScore::setPos(int t)
 
 void MuseScore::undo()
       {
+      if (cv)
+            cv->startUndoRedo();
       _undoGroup->undo();
       if (cv)
-            ((ScoreView*)cv)->endUndoRedo();
+            cv->endUndoRedo();
       }
 
 //---------------------------------------------------------
@@ -2596,9 +2598,11 @@ void MuseScore::undo()
 
 void MuseScore::redo()
       {
+      if (cv)
+            cv->startUndoRedo();
       _undoGroup->redo();
       if (cv)
-            ((ScoreView*)cv)->endUndoRedo();
+            cv->endUndoRedo();
       }
 
 //---------------------------------------------------------

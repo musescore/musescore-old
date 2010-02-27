@@ -150,12 +150,12 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                         playTime += double(frames)/double(sampleRate);
                         }
                   if (pass == 1) {
-                        for (int i = 0; i < FRAMES * 2; ++i)
+                        for (unsigned i = 0; i < FRAMES * 2; ++i)
                               buffer[i] *= gain;
                         sf_writef_float(sf, buffer, FRAMES);
                         }
                   else {
-                        for (int i = 0; i < FRAMES * 2; ++i) {
+                        for (unsigned i = 0; i < FRAMES * 2; ++i) {
                               if (qAbs(buffer[i] > peak))
                                     peak = qAbs(buffer[i]);
                               }
