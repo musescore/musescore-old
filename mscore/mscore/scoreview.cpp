@@ -3505,7 +3505,6 @@ void ScoreView::endUndoRedo()
 
 void ScoreView::cmdAddSlur()
       {
-      _score->startCmd();
       InputState& is = _score->inputState();
       if (noteEntryMode() && is.slur) {
             QList<SlurSegment*>* el = is.slur->slurSegments();
@@ -3515,6 +3514,7 @@ void ScoreView::cmdAddSlur()
             is.slur = 0;
             return;
             }
+      _score->startCmd();
       QList<Note*> nl = _score->selection().noteList();
       Note* firstNote = 0;
       Note* lastNote = 0;
@@ -3529,7 +3529,6 @@ void ScoreView::cmdAddSlur()
       if (firstNote == lastNote)
             lastNote = 0;
       cmdAddSlur(firstNote, lastNote);
- //     _score->endCmd();
       }
 
 //---------------------------------------------------------
@@ -3554,19 +3553,18 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
       slur->layout();
       QList<SlurSegment*>* el = slur->slurSegments();
 
-#if 0
       if (noteEntryMode()) {
-            _is.slur = slur;
+            _score->inputState().slur = slur;
             if (!el->isEmpty())
                   el->front()->setSelected(true);
             else
                   printf("addSlur: no segment\n");
             // set again when leaving slur mode:
             static_cast<ChordRest*>(slur->endElement())->removeSlurBack(slur);
+            _score->endCmd();
             }
       else {
             //
-#endif
             // start slur in edit mode if lastNote is not given
             //
             if ((lastNote == 0) && !el->isEmpty()) {
@@ -3575,5 +3573,5 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
                   }
             else
                   _score->endCmd();
-//            }
+            }
       }
