@@ -73,9 +73,6 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
       EventMap events;
       toEList(&events);
 
-      EventMap::const_iterator playPos;
-      playPos = events.constBegin();
-
       SF_INFO info;
       memset(&info, 0, sizeof(info));
       info.channels   = 2;
@@ -90,68 +87,85 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
       QProgressBar* pBar = mscore->showProgressBar();
       pBar->reset();
 
-      EventMap::const_iterator endPos = events.constEnd();
-      --endPos;
-      double et = utick2utime(endPos.key());
-      et += 1.0;   // add trailer (sec)
-      pBar->setRange(0, int(et));
+      double peak = 0.0;
+      double gain = 1.0;
+      for (int pass = 0; pass < 2; ++pass) {
+            EventMap::const_iterator playPos;
+            playPos = events.constBegin();
+            EventMap::const_iterator endPos = events.constEnd();
+            --endPos;
+            double et = utick2utime(endPos.key());
+            et += 1.0;   // add trailer (sec)
+            pBar->setRange(0, int(et));
 
-      //
-      // init instruments
-      //
-      foreach(const Part* part, _parts) {
-            foreach(const Channel& a, part->channel()) {
-                  a.updateInitList();
-                  foreach(Event* e, a.init) {
-                        if (e == 0)
-                              continue;
-                        e->setChannel(a.channel);
-                        synth->play(*e);
-                        }
-                  }
-            }
-
-      static const unsigned int FRAMES = 512;
-      float buffer[FRAMES * 2];
-      int stride      = 2;
-      double playTime = 0.0;
-
-      for (;;) {
-            unsigned int frames = FRAMES;
             //
-            // collect events for one segment
+            // init instruments
             //
-            double endTime = playTime + double(frames)/double(sampleRate);
-            float* l = buffer;
-            float* r = buffer + 1;
-            for (; playPos != events.constEnd(); ++playPos) {
-                  double f = utick2utime(playPos.key());
-                  if (f >= endTime)
-                        break;
-                  int n = lrint((f - playTime) * sampleRate);
-                  synth->process(n, l, r, stride);
-
-                  l         += n * stride;
-                  r         += n * stride;
-                  playTime += double(n)/double(sampleRate);
-                  frames    -= n;
-                  const Event* e = playPos.value();
-                  if (e->isChannelEvent()) {
-                        int channelIdx = e->channel();
-                        Channel* c = _midiMapping[channelIdx].articulation;
-                        if (!c->mute)
+            foreach(const Part* part, _parts) {
+                  foreach(const Channel& a, part->channel()) {
+                        a.updateInitList();
+                        foreach(Event* e, a.init) {
+                              if (e == 0)
+                                    continue;
+                              e->setChannel(a.channel);
                               synth->play(*e);
+                              }
                         }
                   }
-            if (frames) {
-                  synth->process(frames, l, r, stride);
-                  playTime += double(frames)/double(sampleRate);
+
+            static const unsigned int FRAMES = 512;
+            float buffer[FRAMES * 2];
+            int stride      = 2;
+            double playTime = 0.0;
+
+            for (;;) {
+                  unsigned int frames = FRAMES;
+                  //
+                  // collect events for one segment
+                  //
+                  double endTime = playTime + double(frames)/double(sampleRate);
+                  float* l = buffer;
+                  float* r = buffer + 1;
+                  for (; playPos != events.constEnd(); ++playPos) {
+                        double f = utick2utime(playPos.key());
+                        if (f >= endTime)
+                              break;
+                        int n = lrint((f - playTime) * sampleRate);
+                        synth->process(n, l, r, stride);
+
+                        l         += n * stride;
+                        r         += n * stride;
+                        playTime += double(n)/double(sampleRate);
+                        frames    -= n;
+                        const Event* e = playPos.value();
+                        if (e->isChannelEvent()) {
+                              int channelIdx = e->channel();
+                              Channel* c = _midiMapping[channelIdx].articulation;
+                              if (!c->mute)
+                                    synth->play(*e);
+                              }
+                        }
+                  if (frames) {
+                        synth->process(frames, l, r, stride);
+                        playTime += double(frames)/double(sampleRate);
+                        }
+                  if (pass == 1) {
+                        for (int i = 0; i < FRAMES * 2; ++i)
+                              buffer[i] *= gain;
+                        sf_writef_float(sf, buffer, FRAMES);
+                        }
+                  else {
+                        for (int i = 0; i < FRAMES * 2; ++i) {
+                              if (qAbs(buffer[i] > peak))
+                                    peak = qAbs(buffer[i]);
+                              }
+                        }
+                  playTime = endTime;
+                  pBar->setValue(int(playTime));
+                  if (playTime > et)
+                        break;
                   }
-            sf_writef_float(sf, buffer, FRAMES);
-            playTime = endTime;
-            pBar->setValue(int(playTime));
-            if (playTime > et)
-                  break;
+            gain = 1.0 / peak;
             }
 
       mscore->hideProgressBar();
