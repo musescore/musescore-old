@@ -38,7 +38,7 @@ PlayPanel::PlayPanel(QWidget* parent)
       cachedTickPosition = -1;
       cachedTimePosition = -1;
       setupUi(this);
-      cs = 0;
+      setScore(0);
 
       playButton->setDefaultAction(getAction("play"));
       rewindButton->setDefaultAction(getAction("rewind"));
@@ -75,6 +75,17 @@ void PlayPanel::setScore(Score* s)
       posSlider->setEnabled(cs != 0);
       tempoSlider->setEnabled(cs != 0);
       swingStyle->setEnabled(cs != 0);
+      setTempo(cs ? cs->tempomap()->tempo(0) : 120.0);
+      setRelTempo(cs ? cs->tempomap()->relTempo() : 100);
+      if (cs)
+            setEndpos(cs->lastMeasure()->tick() + cs->lastMeasure()->tickLen());
+      else
+            setEndpos(0);
+      heartBeat2(seq->getCurTime());
+      int tick, utick;
+      seq->getCurTick(&tick, &utick);
+      heartBeat(tick, utick);
+      update();
       }
 
 //---------------------------------------------------------
