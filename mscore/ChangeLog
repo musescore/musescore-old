@@ -1,6 +1,7 @@
 27.feb (lv)
       - fix MusicXML import of beam over rest
        (ws)
+      - fix #4742: Undo slur lets handle on screen
       - implement two pass audio rendering to get max. output level
       - export sustain controller to midi
       - fix #4709: play panel preferences

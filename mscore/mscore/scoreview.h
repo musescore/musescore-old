@@ -232,6 +232,7 @@ class ScoreView : public QWidget {
       void cmd(const QAction* a);
 
       void drag(const QPointF&);
+      void startUndoRedo();
       void endUndoRedo();
       void zoom(int step, const QPoint& pos);
       void contextPopup(QMouseEvent* ev);

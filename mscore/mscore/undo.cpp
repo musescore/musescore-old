@@ -345,35 +345,6 @@ bool UndoGroup::isClean() const
       }
 
 //---------------------------------------------------------
-//   endUndoRedo
-//---------------------------------------------------------
-
-/**
- Common handling for ending undo or redo
-*/
-
-void ScoreView::endUndoRedo()
-      {
-      if (_score->inputState()._segment)
-            mscore->setPos(_score->inputState().tick());
-      if (_score->noteEntryMode() && !noteEntryMode()) {
-            // enter note entry mode
-            postCmd("note-input");
-            }
-      else if (!_score->inputState().noteEntryMode && noteEntryMode()) {
-            // leave note entry mode
-            postCmd("escape");
-            }
-      _score->updateSelection();
-      _score->setLayoutAll(true);
-      _score->setPadState();
-      if (noteEntryMode()) {
-            moveCursor();
-            }
-      _score->end();
-      }
-
-//---------------------------------------------------------
 //   SaveState
 //---------------------------------------------------------
 
