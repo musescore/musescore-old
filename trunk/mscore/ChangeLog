@@ -1,4 +1,5 @@
 27.feb (ws)
+      - implement two pass audio rendering to get max. output level
       - export sustain controller to midi
       - fix #4709: play panel preferences
       - fix #4722: play panel crash if no score loaded

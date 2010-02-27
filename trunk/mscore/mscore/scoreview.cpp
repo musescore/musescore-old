@@ -527,6 +527,9 @@ ScoreView::ScoreView(QWidget* parent)
       imatrix    = _matrix.inverted();
       _magIdx    = MAG_100;
 
+      if (converterMode)      // HACK
+            return;
+
       //---setup state machine-------------------------------------------------
       sm          = new QStateMachine(this);
       QState* stateActive = new QState();
