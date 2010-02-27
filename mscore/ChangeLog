@@ -1,4 +1,5 @@
 27.feb (ws)
+      - export sustain controller to midi
       - fix #4709: play panel preferences
       - fix #4722: play panel crash if no score loaded
       - fix #4717: arpeggio position of cross staff notes is wrong
