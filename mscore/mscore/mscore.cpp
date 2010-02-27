@@ -1162,6 +1162,8 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
                   continue;
             menu->setEnabled(enable);
             }
+      if (playPanel)
+            playPanel->setScore(cs);
       if (!enable) {
             changeState(STATE_DISABLED);
             seq->setScoreView(0);
@@ -1186,8 +1188,6 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       setWindowTitle("MuseScore: " + cs->name());
       if (seq)
             seq->setScoreView(cv);
-      if (playPanel)
-            playPanel->setScore(cs);
 
       QAction* a = getAction("concert-pitch");
       a->setChecked(cs->styleB(ST_concertPitch));
