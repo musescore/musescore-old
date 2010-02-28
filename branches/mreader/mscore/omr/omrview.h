@@ -18,38 +18,52 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SCAN_H__
-#define __SCAN_H__
+#ifndef __SCAN_VIEW_H__
+#define __SCAN_VIEW_H__
 
-class Page;
-class Pdf;
+class Omr;
 
 //---------------------------------------------------------
-//   Scan
+//   OmrView
 //---------------------------------------------------------
 
-class Scan {
-      QString _pdfPath;
-      double _spatium;
-      double _dpmm;
+class OmrView : public QWidget {
+      Q_OBJECT
+      Omr* _omr;
+      QPixmap pm[4];    // tiled because of max size restrictions
+      QPoint startDrag;
 
-      Pdf* _doc;
-      QList<Page*> pages;
+      QTransform _matrix, imatrix;
+      int curPage;
 
-      void process1(int page);
+      void zoom(int step, const QPoint& pos);
+
+      virtual void mousePressEvent(QMouseEvent*);
+      virtual void mouseMoveEvent(QMouseEvent*);
+      virtual void wheelEvent(QWheelEvent*);
+      virtual void paintEvent(QPaintEvent*);
+
+      qreal mag() const { return _matrix.m11(); }
+      void setMag(double mag);
+
+   public slots:
+      void gotoPage(int);
+      void setScale(double);
+      void setOffset(double, double);
+      void nextPage();
+      void previousPage();
+
+   signals:
+      void pageNumberChanged(int);
+      void xPosChanged(int);
+      void yPosChanged(int);
 
    public:
-      Scan();
-      bool read(const QString& path);
-      Page* page(int idx)                  { return pages[idx];            }
-      int numPages() const                 { return pages.size();          }
-      int pagesInDocument() const;
-      double spatiumMM() const;           // spatium in millimeter
-      double spatium() const               { return _spatium; }
-      double dpmm() const                  { return _dpmm;    }
-      double staffDistance() const;
-      double systemDistance() const;
+      OmrView(QWidget* parent = 0);
+      void setOmr(Omr*);
+      Omr* omr() const { return _omr; }
       };
+
 
 #endif
 

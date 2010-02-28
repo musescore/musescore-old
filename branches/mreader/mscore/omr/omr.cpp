@@ -19,45 +19,36 @@
 //=============================================================================
 
 #include "omr.h"
-#include "scanview.h"
-#include "scan.h"
+#include "omrview.h"
+#include "omr.h"
 #include "xml.h"
+#include "page.h"
+#include "pdf.h"
+#include "ocr.h"
 
 //---------------------------------------------------------
 //   Omr
 //---------------------------------------------------------
 
+Omr::Omr()
+      {
+      _ocr = 0;
+      }
+
 Omr::Omr(const QString& p)
       {
       _path = p;
-      _scan = 0;
+      _ocr = 0;
       }
 
 //---------------------------------------------------------
-//   read
-//    return true on success
+//   newOmrView
 //---------------------------------------------------------
 
-bool Omr::read()
+OmrView* Omr::newOmrView()
       {
-      if (_scan == 0)
-            _scan = new Scan;
-      if (!_scan->read(_path)) {
-            delete _scan;
-            _scan = 0;
-            return false;
-            }
-      return true;
-      }
-
-//---------------------------------------------------------
-//   newScanView
-//---------------------------------------------------------
-
-ScanView* Omr::newScanView() const
-      {
-      ScanView* sv = new ScanView;
-      sv->setScan(_scan);
+      OmrView* sv = new OmrView;
+      sv->setOmr(this);
       return sv;
       }
 
@@ -91,12 +82,56 @@ void Omr::read(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   pagesInDocument
+//---------------------------------------------------------
+
+int Omr::pagesInDocument() const
+      {
+      return _doc ? _doc->numPages() : 0;
+      }
+
+//---------------------------------------------------------
+//   read
+//    return true on success
+//---------------------------------------------------------
+
+bool Omr::read()
+      {
+      if (_ocr == 0)
+            _ocr = new Ocr;
+      _ocr->init();
+
+      _doc = new Pdf(_path);
+
+      int n = _doc->numPages();
+      for (int i = 0; i < n; ++i) {
+            Page* page = new Page(this);
+            QImage image = _doc->page(i);
+            page->setImage(image);
+            pages.append(page);
+            }
+      double sp = 0;
+      double w  = 0;
+      for (int i = 0; i < n; ++i) {
+            pages[i]->read(i);
+            sp += pages[i]->spatium();
+            w  += pages[i]->width();
+            }
+      _spatium = sp / n;
+      w       /= n;
+      _dpmm    = w / 210.0;            // PaperSize A4
+
+printf("*** spatium: %f mm  dpmm: %f\n", spatiumMM(), _dpmm);
+      return true;
+      }
+
+//---------------------------------------------------------
 //   spatiumMM
 //---------------------------------------------------------
 
 double Omr::spatiumMM() const
       {
-      return _scan->spatiumMM();
+      return _spatium / _dpmm;
       }
 
 //---------------------------------------------------------
@@ -105,7 +140,7 @@ double Omr::spatiumMM() const
 
 double Omr::staffDistance() const
       {
-      return _scan->staffDistance();
+      return pages[0]->staffDistance();
       }
 
 //---------------------------------------------------------
@@ -114,7 +149,9 @@ double Omr::staffDistance() const
 
 double Omr::systemDistance() const
       {
-      return _scan->systemDistance();
+      return pages[0]->systemDistance();
       }
+
+
 
 

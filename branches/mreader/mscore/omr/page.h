@@ -21,7 +21,7 @@
 #ifndef __PAGE_H__
 #define __PAGE_H__
 
-class Scan;
+class Omr;
 
 struct Measure {
       QRectF boundingRect;
@@ -47,7 +47,7 @@ struct HLine {
 //---------------------------------------------------------
 
 class Page {
-      Scan* _scan;
+      Omr* _omr;
       QImage _image;
       int cropL, cropR;       // crop values in words (32 bit) units
       int cropT, cropB;       // crop values in pixel units
@@ -62,7 +62,6 @@ class Page {
       QList<QLineF> barlines;
       QList<QRect> _notes;
 
-      void read1();
       bool dot(int x, int y) const;
       void crop();
       void slice();
@@ -75,10 +74,10 @@ class Page {
       void searchNotes(int line, int x1, int x2, int y);
 
    public:
-      Page(Scan* _parent);
+      Page(Omr* _parent);
       void setImage(const QImage& i)     { _image = i; }
       const QImage& image() const        { return _image; }
-      void read();
+      void read(int);
       int width() const                  { return _image.width(); }
       int height() const                 { return _image.height(); }
       const uint* scanLine(int y) const  { return (const uint*)_image.scanLine(y); }

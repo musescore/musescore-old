@@ -24,7 +24,7 @@
 #include "score.h"
 #include "magbox.h"
 #include "omr/omr.h"
-#include "omr/scanview.h"
+#include "omr/omrview.h"
 
 //---------------------------------------------------------
 //   ScoreTab
@@ -96,7 +96,7 @@ void ScoreTab::setCurrent(int n)
             stack->addWidget(vs);
             if (score->showOmr()) {
                   Omr* omr = score->omr();
-                  ScanView* sv = omr->newScanView();
+                  OmrView* sv = omr->newOmrView();
                   vs->addWidget(sv);
                   connect(v, SIGNAL(scaleChanged(double)), sv, SLOT(setScale(double)));
                   connect(v, SIGNAL(offsetChanged(double,double)), sv, SLOT(setOffset(double,double)));

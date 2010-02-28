@@ -21,9 +21,11 @@
 #ifndef __OMR_H__
 #define __OMR_H__
 
-class ScanView;
-class Scan;
+class OmrView;
 class Xml;
+class Pdf;
+class Page;
+class Ocr;
 
 //---------------------------------------------------------
 //   Omr
@@ -31,21 +33,32 @@ class Xml;
 
 class Omr {
       QString _path;
-      Scan* _scan;
+      double _spatium;
+      double _dpmm;
+      Pdf* _doc;
+      QList<Page*> pages;
+      Ocr* _ocr;
+
+      void process1(int page);
 
    public:
-      Omr() { _scan = 0; }
+      Omr();
       Omr(const QString& path);
       bool read();
-      ScanView* newScanView() const;
+      int pagesInDocument() const;
+      int numPages() const                 { return pages.size();          }
+      Page* page(int idx)                  { return pages[idx];            }
+      OmrView* newOmrView();
+      Ocr* ocr() const                     { return _ocr; }
+
       void write(Xml&) const;
       void read(QDomElement e);
+
       double spatiumMM() const;           // spatium in millimeter
+      double spatium() const               { return _spatium; }
+      double dpmm() const                  { return _dpmm;    }
       double staffDistance() const;
       double systemDistance() const;
       };
 
 #endif
-
-
-

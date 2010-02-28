@@ -19,7 +19,7 @@
 #=============================================================================
 
 QT4_WRAP_CPP (mocs
-      scanview.h
+      omrview.h
       )
 
 add_custom_command(
@@ -51,9 +51,9 @@ add_library (
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
       ${mocs}
-      scan.cpp scanview.cpp pdf.cpp page.cpp
-      globals.cpp skew.cpp utils.cpp
-      omr.cpp
+      omrview.cpp pdf.cpp page.cpp
+      skew.cpp utils.cpp
+      omr.cpp ocr.cpp
       )
 
 set_target_properties( omr
