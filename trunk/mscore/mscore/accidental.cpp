@@ -22,7 +22,7 @@
 #include "symbol.h"
 #include "sym.h"
 #include "score.h"
-#include "note.h"
+// #include "note.h"
 
 //---------------------------------------------------------
 //   Acc
@@ -278,11 +278,7 @@ Element* Accidental::drop(ScoreView*, const QPointF&, const QPointF&, Element* e
       {
       switch(e->type()) {
             case ACCIDENTAL_BRACKET:
-                  {
-                  int t = subtype();
-                  t |= 0x8000;
-                  score()->addAccidental(static_cast<Note*>(parent()), t);
-                  }
+                  score()->changeAccidental(note(), subtype() | 0x8000);
                   break;
 
             default:

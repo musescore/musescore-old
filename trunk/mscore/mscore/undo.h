@@ -383,22 +383,6 @@ class ChangeSubtype : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeAccidental
-//---------------------------------------------------------
-
-class ChangeAccidental : public UndoCommand {
-      Note* note;
-      int pitch;
-      int tpc;
-      int acc;
-
-   public:
-      ChangeAccidental(Note*, int acc);
-      virtual void undo();
-      virtual void redo();
-      };
-
-//---------------------------------------------------------
 //   SetStemDirection
 //---------------------------------------------------------
 
