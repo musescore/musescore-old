@@ -516,7 +516,8 @@ int searchInterval(int steps, int semitones)
 //   transposeInterval
 //---------------------------------------------------------
 
-void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int steps, int semitones)
+void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int steps, int semitones,
+   bool useDoubleSharpsFlats)
       {
       *rpitch = pitch + semitones;
 
@@ -536,10 +537,22 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int steps, in
 
             int p1     = tpc2pitch(step2tpc(step, 0)) + octave * 12;
             alter      = semitones - (p1 - pitch);
-            if (alter > 2)
-                  steps += 1;
-            else if (alter < -2)
-                  steps -= 1;
+
+            int minAlter;
+            int maxAlter;
+            if (useDoubleSharpsFlats) {
+                  minAlter = -2;
+                  maxAlter = 2;
+                  }
+            else {
+                  minAlter = -1;
+                  maxAlter = 1;
+                  }
+
+            if (alter > maxAlter)
+                  ++steps;
+            else if (alter < minAlter)
+                  --steps;
             else
                   break;
             }

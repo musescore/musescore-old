@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>496</width>
-    <height>354</height>
+    <height>370</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -375,6 +375,9 @@
          </item>
          <item>
           <widget class="QComboBox" name="accidentalOptions">
+           <property name="currentIndex">
+            <number>1</number>
+           </property>
            <item>
             <property name="text">
              <string>Single sharps and flats only</string>
@@ -383,11 +386,6 @@
            <item>
             <property name="text">
              <string>Use double sharps and flats</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Use multi sharps and flats</string>
             </property>
            </item>
           </widget>

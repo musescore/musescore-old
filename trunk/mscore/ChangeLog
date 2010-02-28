@@ -1,3 +1,6 @@
+28.feb (ws)
+      - New attempt implementing "transpose by key": transpose interval is
+        computed from target key -> first key (#2281)
 27.feb (lv)
       - fix MusicXML import of beam over rest
        (ws)
