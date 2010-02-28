@@ -412,7 +412,7 @@ bool Score::saveAs(bool saveCopy)
       QString fn = QFileDialog::getSaveFileName(
                0,
                saveDialogTitle,
-               saveDirectory,
+               QString("%1/%2.mscz").arg(saveDirectory).arg(info.baseName()),
                fl.join(";;"),
                &selectedFilter
                );
