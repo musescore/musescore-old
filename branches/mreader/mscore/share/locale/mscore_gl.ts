@@ -109,7 +109,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>up:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">arriba:</translation>
     </message>
     <message>
         <source>Chord/Rest</source>

@@ -486,17 +486,7 @@ void Palette::paintEvent(QPaintEvent*)
                   int column = idx % c;
 
                   el->layout();
-                  double xo = 0;
-                  double yo = 0;
-                  if (el->type() == CLEF) {     // HACK
-                        xo = el->xoff();
-                        yo = el->yoff();
-                        if (el->offsetType() == OFFSET_SPATIUM) {
-                              xo *= _spatium;
-                              yo *= _spatium;
-                              }
-                        }
-                  el->setPos(xo, yo);
+                  el->setPos(0.0, 0.0);   // HACK
 
                   if (drawStaff) {
                         qreal y = r.y() + vgrid * .5 - dy + _yOffset;

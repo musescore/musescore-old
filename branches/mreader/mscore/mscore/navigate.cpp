@@ -36,7 +36,7 @@
 
 //---------------------------------------------------------
 //   nextChordRest
-//    return next NOTE or REST
+//    return next NOTE or REST, skip grace notes
 //    element - current element
 //---------------------------------------------------------
 
@@ -46,6 +46,8 @@ ChordRest* nextChordRest(ChordRest* cr)
             return 0;
       int track = cr->track();
       for (Segment* seg = cr->segment()->next1(); seg; seg = seg->next1()) {
+            if (seg->subtype() != Segment::SegChordRest)
+                  continue;
             if (seg->measure()->multiMeasure() < 0)
                   continue;
             Element* e = seg->element(track);
@@ -66,6 +68,8 @@ ChordRest* prevChordRest(ChordRest* cr)
             return 0;
       int track = cr->track();
       for (Segment* seg = cr->segment()->prev1(); seg; seg = seg->prev1()) {
+            if (seg->subtype() != Segment::SegChordRest)
+                  continue;
             if (seg->measure()->multiMeasure() < 0)
                   continue;
             Element* e = seg->element(track);

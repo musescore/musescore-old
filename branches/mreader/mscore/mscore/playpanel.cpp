@@ -38,14 +38,15 @@ PlayPanel::PlayPanel(QWidget* parent)
       cachedTickPosition = -1;
       cachedTimePosition = -1;
       setupUi(this);
+      setScore(0);
 
       playButton->setDefaultAction(getAction("play"));
       rewindButton->setDefaultAction(getAction("rewind"));
 
       connect(volumeSlider, SIGNAL(valueChanged(double,int)), SLOT(volumeChanged(double,int)));
-      connect(posSlider,    SIGNAL(sliderMoved(int)),  SLOT(posChanged(int)));
+      connect(posSlider,    SIGNAL(sliderMoved(int)),         SLOT(posChanged(int)));
       connect(tempoSlider,  SIGNAL(valueChanged(double,int)), SIGNAL(relTempoChanged(double,int)));
-      connect(swingStyle, SIGNAL(currentIndexChanged(int)), SLOT(swingStyleChanged(int)));
+      connect(swingStyle,   SIGNAL(currentIndexChanged(int)), SLOT(swingStyleChanged(int)));
       }
 
 //---------------------------------------------------------
@@ -65,9 +66,26 @@ void PlayPanel::closeEvent(QCloseEvent* ev)
 void PlayPanel::setScore(Score* s)
       {
       cs = s;
-      MeasureBase* lm = cs->last();
-      if (lm)
-            setEndpos(lm->tick() + lm->tickLen());
+      if (cs) {
+            MeasureBase* lm = cs->last();
+            if (lm)
+                  setEndpos(lm->tick() + lm->tickLen());
+            }
+      volumeSlider->setEnabled(cs != 0);
+      posSlider->setEnabled(cs != 0);
+      tempoSlider->setEnabled(cs != 0);
+      swingStyle->setEnabled(cs != 0);
+      setTempo(cs ? cs->tempomap()->tempo(0) : 120.0);
+      setRelTempo(cs ? cs->tempomap()->relTempo() : 100);
+      if (cs)
+            setEndpos(cs->lastMeasure()->tick() + cs->lastMeasure()->tickLen());
+      else
+            setEndpos(0);
+      heartBeat2(seq->getCurTime());
+      int tick, utick;
+      seq->getCurTick(&tick, &utick);
+      heartBeat(tick, utick);
+      update();
       }
 
 //---------------------------------------------------------
@@ -133,26 +151,28 @@ void PlayPanel::posChanged(int tick)
 
 void PlayPanel::swingStyleChanged(int index)
       {
-        switch (index){
-          case 0:
-            cs->setSwingRatio(0);
-          break;
-          case 1:
-            cs->setSwingRatio(0.333);
-          break;
-          case 2:
-            cs->setSwingRatio(0.5);
-          break;
-
-        }
-        if (seq->isRunning()){
-          if(seq->isStopped()){
-            seq->collectEvents();
-          }else {
-            seq->guiStop(); // stop
-            seq->start(); // start
-          }
-        }
+      if (cs == 0)
+            return;
+      switch (index){
+            case 0:
+                  cs->setSwingRatio(0);
+                  break;
+            case 1:
+                  cs->setSwingRatio(0.333);
+                  break;
+            case 2:
+                  cs->setSwingRatio(0.5);
+                  break;
+            }
+      if (seq->isRunning()) {
+            if (seq->isStopped()) {
+                  seq->collectEvents();
+                  }
+            else {
+                  seq->guiStop(); // stop
+                  seq->start(); // start
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -161,9 +181,9 @@ void PlayPanel::swingStyleChanged(int index)
 
 void PlayPanel::heartBeat(int tick, int utick)
       {
-//      if (!isVisible())
-//            return;
       if (cachedTickPosition == utick)
+            return;
+      if (cs == 0)
             return;
       cachedTickPosition = utick;
 
@@ -182,8 +202,6 @@ void PlayPanel::heartBeat(int tick, int utick)
 
 void PlayPanel::heartBeat2(int sec)
       {
-//      if (!isVisible())
-//            return;
       if (sec == cachedTimePosition)
             return;
       cachedTimePosition = sec;

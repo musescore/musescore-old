@@ -41,15 +41,19 @@ def insertH1Anchors(html_source, anchors, verbose):
 
     for i in range(1, len(split)):
         name = split[i][split[i].index('>')+1:split[i].index('</h1>')].lower().replace(" ","-")
-
+        
         name = name.replace("&#039;","") #remove HTML encoding for French apostrophe
         name = name.replace(",","").replace("(","").replace(")","") #remove punctuation
         name = name.replace("-a-","-") #drop unnessary words
         name = urllib2.quote(name).lower() #percent encode name to match URLs
         name = name.replace('%c3%89','%c3%a9') #work-around for text encoding bug
-        name = name.replace('%c5%81','%c5%82') #manually convert to lower case (Python doesn't seem know the lowercase equivalent of this charaternvert this character
+        name = name.replace('%c5%81','%c5%82') #manually convert to lower case (Python doesn't seem know the lowercase equivalent of this charater
+        name = name.replace('%c3%9a','%c3%ba') #manually convert Ú to lower case ú (Hungarian handbook)
+        name = name.replace('%c3%96','%c3%b6') #manually convert Ö to lower case ö (Hungarian handbook)
+                
         split[i-1] = split[i-1] + '<a name="' + name + '"></a>'
         anchors.append(name)
+        #print name
         
     html_source = '<h1'.join(split)
 
@@ -92,40 +96,44 @@ def chapterHeading(html_source, verbose, language_code):
     if verbose:
         print "Add chapter headings"
 
-    chapter = 'Chapter' #Default English
+    chapter = 'Chapter [number]' #Default English
     
     if language_code == 'nl':
-        chapter = 'Hoofdstuk'
+        chapter = 'Hoofdstuk [number]'
+    elif language_code == 'ca':
+        chapter = 'Cap&iacute;tol [number]'
     elif language_code == 'de':
-        chapter = 'Kapitel'
+        chapter = 'Kapitel [number]'
     elif language_code == 'es':
-        chapter = 'Cap&iacute;tulo'
+        chapter = 'Cap&iacute;tulo [number]'
     elif language_code == 'fi':
-        chapter = 'Luku'
+        chapter = 'Luku [number]'
     elif language_code == 'fr':
-        chapter = 'Chapitre'
+        chapter = 'Chapitre [number]'
     elif language_code == 'gl':
-        chapter = 'Cap&iacute;tulo'
+        chapter = 'Cap&iacute;tulo [number]'
+    elif language_code == 'hu':
+        chapter = '[number] Fejezet'
     elif language_code == 'it':
-        chapter = 'Capitolo'
+        chapter = 'Capitolo [number]'
     elif language_code == 'ja':
-        chapter = '章'
+        chapter = '章[number]'
     elif language_code == 'nb':
-        chapter = 'Kapittel'
+        chapter = 'Kapittel [number]'
     elif language_code == 'pl':
-        chapter = 'Rozdział'
+        chapter = 'Rozdział [number]'
     elif language_code == 'pt-br':
-        chapter = 'Capítulo'
+        chapter = 'Capítulo [number]'
     elif language_code == 'ru':
-        chapter = 'Глава'
-        
+        chapter = 'Глава [number]'
+
     html_source = html_source.replace('<h1 class="print-title"></h1>','') #remove empty header
 
     counter = 1
     i = html_source.find('<h1 class="book-heading">')
     while i > -1:
         i = html_source.find('<h1 class="book-heading">',i+60)
-        html_source = html_source[:i] + html_source[i:].replace('<h1 class="book-heading">','<span class="chapter">' + chapter + ' ' + str(counter) + '</span> <h1 class="book-heading">',1)
+        html_source = html_source[:i] + html_source[i:].replace('<h1 class="book-heading">','<span class="chapter">' + chapter.replace('[number]',str(counter)) + '</span> <h1 class="book-heading">',1)
         counter = counter + 1
 
     return html_source
@@ -174,7 +182,7 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
         # Fix links to MuseScore website
         internal_href = internal_href.replace('../','')
         if internal_href[:1] == '/':
-            internal_href = 'http://www.musescore.org/' + language_code + '/handbook/index' + internal_href
+            internal_href = 'http://musescore.org/' + language_code + '/handbook/index' + internal_href
         
 ##        if internal_href[:3] == '../':
 ##            internal_href = 'http://musescore.org/en/' + internal_href[3:]
@@ -183,7 +191,7 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
 
         split[i] = split[i].replace(original_href, internal_href)
         if internal_href[1:] not in anchors:
-            if internal_href[0:20] == 'http://www.musescore':
+            if internal_href[0:17] == 'http://musescore':
                 if internal_href.find('/en/') > -1 and language_code != 'en': #check for website bug that sometimes links to English URL instead of local language URL
                     if internal_href.find('/node/1257') < 0: # check it is not a link to a bug report
                         print " * WARNING: English language link: ", internal_href
@@ -361,7 +369,7 @@ def fixImgSrc(html_source, verbose):
         print 'Fix image src attributes'
 
     html_source = html_source.replace('src="/sites/musescore.org/files/','src="sources/')
-    html_source = html_source.replace('http://www.musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png','sources/image-x-generic.png') #Work-around for temporary bug
+    html_source = html_source.replace('http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png','sources/image-x-generic.png') #Work-around for temporary bug
 
     return html_source
 
@@ -373,7 +381,7 @@ def addCoverPage(html_source, verbose):
 
     # Replace cover text for English version
     html_source = html_source.replace(
-        '<a name="handbook"></a><h1 class="book-heading">Handbook</h1>\n<span class="print-link"></span><p>This handbook is for MuseScore version 0.9.2 and above. In order to help improving or translating the handbook, leave a post in the <a href="http://www.musescore.org/forum/8">MuseScore documentation forum</a> and apply to become a handbook contributor.</p>',
+        '<a name="handbook"></a><h1 class="book-heading">Handbook</h1>\n<span class="print-link"></span><p>This handbook is for MuseScore version 0.9.2 and above. In order to help improving or translating the handbook, leave a post in the <a href="http://musescore.org/forum/8">MuseScore documentation forum</a> and apply to become a handbook contributor.</p>',
         '''
         <div style="text-align:center">
         <h1 style="border:0; padding-top:3cm">MuseScore Handbook</h1>
@@ -488,44 +496,50 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     language_code = language_code.lower()
     
     if language_code == 'en':
-        url = 'http://www.musescore.org/en/print/book/export/html/51'
-        internal = 'http://www.musescore.org/en/handbook'
+        url = 'http://musescore.org/en/print/book/export/html/51'
+        internal = 'http://musescore.org/en/handbook'
+    elif language_code == 'ca':
+        url = 'http://musescore.org/ca/print/book/export/html/3414'
+        internal = 'http://musescore.org/ca/manual'
     elif language_code == 'de':
-        url = 'http://www.musescore.org/de/print/book/export/html/98'
-        internal = 'http://www.musescore.org/de/handbuch'
+        url = 'http://musescore.org/de/print/book/export/html/98'
+        internal = 'http://musescore.org/de/handbuch'
     elif language_code == 'es':
-        url = 'http://www.musescore.org/es/print/book/export/html/137'
-        internal = 'http://www.musescore.org/es/manual'
+        url = 'http://musescore.org/es/print/book/export/html/137'
+        internal = 'http://musescore.org/es/manual'
     elif language_code == 'fi':
-        url = 'http://www.musescore.org/fi/print/book/export/html/1057'
-        internal = 'http://www.musescore.org/fi/käsikirja' #k%e4sikirja'
+        url = 'http://musescore.org/fi/print/book/export/html/1057'
+        internal = 'http://musescore.org/fi/käsikirja' #k%e4sikirja'
     elif language_code == 'fr':
-        url = 'http://www.musescore.org/fr/print/book/export/html/115'
-        internal = 'http://www.musescore.org/fr/manuel'
+        url = 'http://musescore.org/fr/print/book/export/html/115'
+        internal = 'http://musescore.org/fr/manuel'
     elif language_code == 'gl':
-        url = 'http://www.musescore.org/gl/print/book/export/html/534'
-        internal = 'http://www.musescore.org/gl/manual-galego'
+        url = 'http://musescore.org/gl/print/book/export/html/534'
+        internal = 'http://musescore.org/gl/manual-galego'
+    elif language_code == 'hu':
+        url = 'http://musescore.org/hu/print/book/export/html/1935'
+        internal = 'http://musescore.org/hu/kézikönyv' #k%C3%A9zik%C3%B6nyv
     elif language_code == 'it':
-        url = 'http://www.musescore.org/it/print/book/export/html/772'
-        internal = 'http://www.musescore.org/it/manuale'
+        url = 'http://musescore.org/it/print/book/export/html/772'
+        internal = 'http://musescore.org/it/manuale'
     elif language_code == 'ja':
-        url = 'http://www.musescore.org/ja/print/book/export/html/2696'
-        internal = 'http://www.musescore.org/ja/ハンドブック' #%E3%83%8F%E3%83%B3%E3%83%89%E3%83%96%E3%83%83%E3%82%AF'
+        url = 'http://musescore.org/ja/print/book/export/html/2696'
+        internal = 'http://musescore.org/ja/ハンドブック' #%E3%83%8F%E3%83%B3%E3%83%89%E3%83%96%E3%83%83%E3%82%AF'
     elif language_code == 'nb':
-        url = 'http://www.musescore.org/nb/print/book/export/html/2122'
-        internal = 'http://www.musescore.org/nb/håndbok' #h%C3%A5ndbok'
+        url = 'http://musescore.org/nb/print/book/export/html/2122'
+        internal = 'http://musescore.org/nb/håndbok' #h%C3%A5ndbok'
     elif language_code == 'nl':
-        url = 'http://www.musescore.org/nl/print/book/export/html/375'
-        internal = 'http://www.musescore.org/nl/handboek'
+        url = 'http://musescore.org/nl/print/book/export/html/375'
+        internal = 'http://musescore.org/nl/handboek'
     elif language_code == 'pl':
-        url = 'http://www.musescore.org/pl/print/book/export/html/2495'
-        internal = 'http://www.musescore.org/pl/podręcznik' #podr%C4%99cznik'
+        url = 'http://musescore.org/pl/print/book/export/html/2495'
+        internal = 'http://musescore.org/pl/podręcznik' #podr%C4%99cznik'
     elif language_code == 'pt-br':
-        url = 'http://www.musescore.org/pt-br/print/book/export/html/1248'
-        internal = 'http://www.musescore.org/pt-br/manual-pt-br' #podr%C4%99cznik'
+        url = 'http://musescore.org/pt-br/print/book/export/html/1248'
+        internal = 'http://musescore.org/pt-br/manual-pt-br' #podr%C4%99cznik'
     elif language_code == 'ru':
-        url = 'http://www.musescore.org/ru/print/book/export/html/2517'
-        internal = 'http://www.musescore.org/ru/cправочник' #c%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA'
+        url = 'http://musescore.org/ru/print/book/export/html/2352'
+        internal = 'http://musescore.org/ru/cправочник' #c%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA'
 
     print "Create handbook for",language_code
 
@@ -568,7 +582,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
 
 def main():
-    language_choices = ['all','en','nl','de','es','fi','fr','gl','it','ja','nb','ru','pl','pt-BR']
+    language_choices = ['all','en','ca','de','es','fi','fr','gl','hu','it','ja','nb','nl','ru','pl','pt-BR']
   
     parser = OptionParser()
     parser.add_option("-l","--lang", dest="language_code",
@@ -630,4 +644,5 @@ def main():
 
 
 if __name__ == '__main__':
-     main() 
+    main() 
+    #createHandbook("hu")

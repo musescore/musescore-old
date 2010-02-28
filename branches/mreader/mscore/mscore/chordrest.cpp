@@ -36,6 +36,7 @@
 #include "al/tempo.h"
 #include "tempotext.h"
 #include "note.h"
+#include "arpeggio.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -335,6 +336,20 @@ void ChordRest::layoutArticulations()
       Measure* m       = measure();
       System* s        = m->system();
       int idx          = staff()->rstaff() + staffMove();   // DEBUG
+
+      if (type() == CHORD && static_cast<Chord*>(this)->arpeggio()) {
+            Chord* c          = static_cast<Chord*>(this);
+            double distance   = score()->styleS(ST_ArpeggioNoteDistance).val() * _spatium;
+            double headHeight = c->upNote()->headHeight();
+            c->arpeggio()->layout();
+            double x  = -(c->arpeggio()->width() + distance);
+            double y  = c->upNote()->pos().y() - headHeight * .5;
+            double h  = c->downNote()->pos().y() - y;
+            y        += s->staff(staffIdx() + staffMove())->y() - s->staff(staffIdx())->y();
+            c->arpeggio()->setHeight(h);
+            c->arpeggio()->setPos(x, y);
+            }
+
       qreal x          = centerX();
 
       double distance1 = point(score()->styleS(ST_propertyDistanceHead));

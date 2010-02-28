@@ -25,19 +25,22 @@ Q_DECLARE_METATYPE(Text*);
 Q_DECLARE_METATYPE(Score*);
 
 static const char* const function_names_text[] = {
-      "text", "defaultFont", "color"
+      "text", "defaultFont", "color", "xOffset", "yOffset"
       };
 static const int function_lengths_text[] = {
-      1, 1, 1
+      1, 1, 1, 1, 1
       };
 static const QScriptValue::PropertyFlags flags_text[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+	   QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+	   QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       };
 
 ScriptInterface textInterface = {
-      3,
+      5,
       function_names_text,
       function_lengths_text,
       flags_text
@@ -88,6 +91,24 @@ static QScriptValue prototype_Text_call(QScriptContext* context, QScriptEngine*)
                         return context->engine()->undefinedValue();
                         }
                   break;
+            case 3:     // "xOffset"
+				          if (context->argumentCount() == 0)
+						            return qScriptValueFromValue(context->engine(), text->xoff());
+				          else if (context->argumentCount() == 1) {
+            						int v = context->argument(0).toInt32();
+            						text->setXoff(v);
+            						return context->engine()->undefinedValue();
+						            }
+				          break;
+			     case 4:     // "yOffset"
+                  if (context->argumentCount() == 0)
+						            return qScriptValueFromValue(context->engine(), text->yoff());
+				          else if (context->argumentCount() == 1) {
+            						int v = context->argument(0).toInt32();
+            						text->setYoff(v);
+            						return context->engine()->undefinedValue();
+						            }
+				          break;
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Note.%0(): bad argument count or value")

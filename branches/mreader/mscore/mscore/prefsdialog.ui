@@ -383,7 +383,7 @@
           <item row="0" column="4">
            <widget class="QToolButton" name="playPanelCur">
             <property name="text">
-             <string>Use Current Dimensions</string>
+             <string>Use Current Position</string>
             </property>
            </widget>
           </item>

@@ -300,10 +300,8 @@ bool Seq::canStart()
       {
       if (!driver)
             return false;
-      if (events.empty() || cs->playlistDirty() || playlistChanged) {
-            printf("collectEvents\n");
+      if (events.empty() || cs->playlistDirty() || playlistChanged)
             collectEvents();
-            }
       return (!events.empty() && endTick != 0);
       }
 
@@ -438,6 +436,13 @@ void Seq::stopTransport()
             ee.setVelo(0);
             driver->putEvent(ee, 0);
             }
+      // send sustain off
+      Event e;
+      e.setType(ME_CONTROLLER);
+      e.setController(CTRL_SUSTAIN);
+      e.setValue(0);
+      driver->putEvent(e, 0);
+
       activeNotes.clear();
       emit toGui('0');
       state = STOP;

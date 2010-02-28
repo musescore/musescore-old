@@ -45,6 +45,7 @@
 #include "velo.h"
 #include "dynamics.h"
 #include "navigate.h"
+#include "pedal.h"
 
 //---------------------------------------------------------
 //   ARec
@@ -468,6 +469,9 @@ Measure* Score::searchLabel(const QString& s, Measure* start)
 
 void Score::toEList(EventMap* events, int staffIdx)
       {
+      Part* instr = part(staffIdx);
+      int channel = instr->channel(0).channel;
+
       foreach(const RepeatSegment* rs, *_repeatList) {
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
@@ -476,6 +480,24 @@ void Score::toEList(EventMap* events, int staffIdx)
                   collectMeasureEvents(events, m, staffIdx, tickOffset);
                   if (m->tick() + m->tickLen() >= endTick)
                         break;
+                  }
+            foreach(Element* e, _gel) {
+                  if (e->type() == PEDAL && e->staffIdx() == staffIdx) {
+                        Pedal* p = static_cast<Pedal*>(e);
+                        if (p->tick() >= startTick && p->tick() < endTick) {
+                              Event* ev = new Event(ME_CONTROLLER);
+                              ev->setChannel(channel);
+                              ev->setController(CTRL_SUSTAIN);
+                              ev->setValue(127);
+                              events->insertMulti(p->tick() + tickOffset, ev);
+
+                              ev = new Event(ME_CONTROLLER);
+                              ev->setChannel(channel);
+                              ev->setController(CTRL_SUSTAIN);
+                              ev->setValue(0);
+                              events->insertMulti(p->tick2() + tickOffset, ev);
+                              }
+                        }
                   }
             }
       }
