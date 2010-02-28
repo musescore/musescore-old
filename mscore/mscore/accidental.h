@@ -28,6 +28,8 @@
 
 #include "element.h"
 
+class Note;
+
 // Accidental Subtype Values
 
 enum {
@@ -52,7 +54,6 @@ class Accidental : public Element {
       virtual Accidental* clone() const { return new Accidental(*this); }
       virtual ElementType type() const  { return ACCIDENTAL; }
       virtual void setSubtype(int v);
-//      virtual void setMag(double val);
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
@@ -60,6 +61,7 @@ class Accidental : public Element {
       virtual void layout();
       virtual void draw(QPainter&) const;
       int symbol();
+      Note* note() const { return (Note*)parent(); }
 
       const char* subTypeName() const;
       static int subtype2value(int);      // return effective pitch offset

@@ -1060,7 +1060,7 @@ void ChangePitch::flip()
 
       note->changePitch(pitch);
       note->setTpc(tpc);
-      note->setUserAccidental(userAccidental);
+      note->setAccidentalType(userAccidental);
 
       pitch          = f_pitch;
       tpc            = f_tpc;
@@ -1082,39 +1082,6 @@ void ChangeTpc::flip()
       int ntpc = note->tpc();
       note->setTpc(tpc);
       tpc = ntpc;
-      }
-
-//---------------------------------------------------------
-//   ChangeAccidental
-//---------------------------------------------------------
-
-ChangeAccidental::ChangeAccidental(Note* _note, int _acc)
-      {
-      note  = _note;
-      acc   = _acc;
-      }
-
-void ChangeAccidental::redo()
-      {
-      pitch = note->pitch();
-      tpc   = note->tpc();
-      int a = note->accidentalType();
-      note->changeAccidental(acc);
-      acc   = a;
-      }
-
-void ChangeAccidental::undo()
-      {
-      int a  = note->pitch();
-      int b  = note->tpc();
-      int c  = note->accidentalType();
-
-      note->setPitch(pitch, tpc);
-      note->setAccidentalType(acc);
-
-      pitch = a;
-      tpc   = b;
-      acc   = c;
       }
 
 //---------------------------------------------------------

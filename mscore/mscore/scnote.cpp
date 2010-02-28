@@ -150,7 +150,7 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         return qScriptValueFromValue(context->engine(), note->userAccidental());
                   else if (argc == 1) {
                         int v = context->argument(0).toInt32();
-                        note->setUserAccidental(v);
+                        note->setAccidentalType(v);
                         return context->engine()->undefinedValue();
                         }
                   break;

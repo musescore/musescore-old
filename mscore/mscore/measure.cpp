@@ -513,11 +513,13 @@ void Measure::layoutChords1(Segment* segment, int staffIdx)
                         if (note->userOff().isNull() && pnote->userOff().isNull()) {
                               if (ticks > pnote->chord()->tickLen()) {
                                     pnote->setHidden(true);
-                                    pnote->setAccidental(0);  // DEBUG: should be unecessary; layout dependency
+                                    // pnote->setAccidental(0);  // DEBUG: should be unecessary; layout dependency
+                                    pnote->setAccidentalType(ACC_NONE);
                                     note->setHidden(false);
                                     }
                               else {
-                                    note->setAccidental(0);
+                                    // note->setAccidental(0);
+                                    note->setAccidentalType(ACC_NONE);
                                     note->setHidden(true);
                                     }
                               }
