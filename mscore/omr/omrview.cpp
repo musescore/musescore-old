@@ -19,15 +19,15 @@
 //=============================================================================
 
 #include "globals.h"
-#include "scanview.h"
-#include "scan.h"
+#include "omrview.h"
+#include "omr.h"
 #include "page.h"
 
 //---------------------------------------------------------
-//   ScanView
+//   OmrView
 //---------------------------------------------------------
 
-ScanView::ScanView(QWidget* parent)
+OmrView::OmrView(QWidget* parent)
    : QWidget(parent)
       {
       setFocusPolicy(Qt::StrongFocus);
@@ -36,7 +36,7 @@ ScanView::ScanView(QWidget* parent)
       setAttribute(Qt::WA_StaticContents);
       setMouseTracking(true);
 
-      _scan   = 0;
+      _omr   = 0;
       double m = .25;
       _matrix = QTransform(m, 0.0, 0.0, m, 0.0, 0.0);
       imatrix = _matrix.inverted();
@@ -46,7 +46,7 @@ ScanView::ScanView(QWidget* parent)
 //   nextPage
 //---------------------------------------------------------
 
-void ScanView::nextPage()
+void OmrView::nextPage()
       {
       gotoPage(curPage + 2);
       }
@@ -55,19 +55,19 @@ void ScanView::nextPage()
 //   previousPage
 //---------------------------------------------------------
 
-void ScanView::previousPage()
+void OmrView::previousPage()
       {
       gotoPage(curPage);
       }
 
 //---------------------------------------------------------
-//   setScan
+//   setOmr
 //---------------------------------------------------------
 
-void ScanView::setScan(Scan* s)
+void OmrView::setOmr(Omr* s)
       {
-      delete _scan;
-      _scan = s;
+      delete _omr;
+      _omr = s;
       curPage = -1;
       gotoPage(1);
       }
@@ -77,17 +77,17 @@ void ScanView::setScan(Scan* s)
 //    page number n is counting from 1
 //---------------------------------------------------------
 
-void ScanView::gotoPage(int n)
+void OmrView::gotoPage(int n)
       {
       if (n < 1)
             n = 1;
-      if (n > _scan->numPages()) {
-            n = _scan->numPages();
+      if (n > _omr->numPages()) {
+            n = _omr->numPages();
             }
       if ((curPage + 1) == n)
             return;
       curPage    = n - 1;
-      Page* page = _scan->page(curPage);
+      Page* page = _omr->page(curPage);
       const QImage& i = page->image();
       int w = i.width();
       int h = i.height();
@@ -115,9 +115,9 @@ void ScanView::gotoPage(int n)
 //   paintEvent
 //---------------------------------------------------------
 
-void ScanView::paintEvent(QPaintEvent* event)
+void OmrView::paintEvent(QPaintEvent* event)
       {
-      if (_scan == 0)
+      if (_omr == 0)
             return;
 
       QPainter p(this);
@@ -141,15 +141,15 @@ void ScanView::paintEvent(QPaintEvent* event)
             if (rr.intersects(pr.translated(0.0, pr.height())))
                   p.drawPixmap(0.0, pr.height(), pm[3]);
             }
-      Page* page = _scan->page(curPage);
+      Page* page = _omr->page(curPage);
 
       if (debugMode == 1) {
             p.setPen(QPen(QColor(255, 0, 0, 80), 1.0));
             foreach(QLine l, page->sl())
                   p.drawLine(QLineF(l.x1()+.5, l.y1()+.5, l.x2()+.5, l.y2()+.5));
             }
-//      foreach(const QRect r, page->slices())
-//            p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
+      foreach(const QRect r, page->slices())
+            p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
 
       p.setPen(QPen(QColor(255, 0, 0), 3.0));
       foreach(const QRect r, page->notes())
@@ -169,7 +169,7 @@ void ScanView::paintEvent(QPaintEvent* event)
 //   mousePressEvent
 //---------------------------------------------------------
 
-void ScanView::mousePressEvent(QMouseEvent* e)
+void OmrView::mousePressEvent(QMouseEvent* e)
       {
       startDrag = e->pos();
       }
@@ -178,7 +178,7 @@ void ScanView::mousePressEvent(QMouseEvent* e)
 //   mouseMoveEvent
 //---------------------------------------------------------
 
-void ScanView::mouseMoveEvent(QMouseEvent* e)
+void OmrView::mouseMoveEvent(QMouseEvent* e)
       {
       if (QApplication::mouseButtons()) {
             QPoint delta = e->pos() - startDrag;
@@ -200,7 +200,7 @@ void ScanView::mouseMoveEvent(QMouseEvent* e)
 //   setMag
 //---------------------------------------------------------
 
-void ScanView::setMag(double nmag)
+void OmrView::setMag(double nmag)
       {
       qreal m = mag();
 
@@ -217,7 +217,7 @@ void ScanView::setMag(double nmag)
 //   zoom
 //---------------------------------------------------------
 
-void ScanView::zoom(int step, const QPoint& pos)
+void OmrView::zoom(int step, const QPoint& pos)
       {
       QPointF p1 = imatrix.map(QPointF(pos));
       double _scale = mag();
@@ -251,7 +251,7 @@ void ScanView::zoom(int step, const QPoint& pos)
 //   wheelEvent
 //---------------------------------------------------------
 
-void ScanView::wheelEvent(QWheelEvent* event)
+void OmrView::wheelEvent(QWheelEvent* event)
       {
       if (event->modifiers() & Qt::ControlModifier) {
             QApplication::sendPostedEvents(this, 0);
@@ -290,9 +290,9 @@ void ScanView::wheelEvent(QWheelEvent* event)
 //   setScale
 //---------------------------------------------------------
 
-void ScanView::setScale(double v)
+void OmrView::setScale(double v)
       {
-      double spatium = _scan->spatium();
+      double spatium = _omr->spatium();
       setMag(v/spatium);
       update();
       }
@@ -301,10 +301,10 @@ void ScanView::setScale(double v)
 //   setOffset
 //---------------------------------------------------------
 
-void ScanView::setOffset(double x, double y)
+void OmrView::setOffset(double x, double y)
       {
-      double spatium = _scan->spatium() * _matrix.m11();
-      double nx = x*spatium + (_scan->page(curPage)->width() * _matrix.m11() * curPage);
+      double spatium = _omr->spatium() * _matrix.m11();
+      double nx = x*spatium + (_omr->page(curPage)->width() * _matrix.m11() * curPage);
       double ny = y*spatium;
       double ox = _matrix.dx();
       double oy = _matrix.dy();

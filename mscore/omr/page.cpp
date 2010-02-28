@@ -19,10 +19,12 @@
 //=============================================================================
 
 #include <gsl/gsl_statistics_double.h>
-#include "globals.h"
+// #include "globals.h"
 #include "page.h"
 #include "image.h"
 #include "utils.h"
+#include "omr.h"
+#include "ocr.h"
 
 struct Lv {
       int line;
@@ -37,19 +39,10 @@ struct Lv {
 //   Page
 //---------------------------------------------------------
 
-Page::Page(Scan* parent)
+Page::Page(Omr* parent)
       {
-      _scan = parent;
+      _omr = parent;
       cropL = cropR = cropT = cropB = 0;
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void Page::read()
-      {
-      read1();
       }
 
 //---------------------------------------------------------
@@ -63,11 +56,10 @@ bool Page::dot(int x, int y) const
       }
 
 //---------------------------------------------------------
-//   read1
-//    find staves
+//   read
 //---------------------------------------------------------
 
-void Page::read1()
+void Page::read(int pageNo)
       {
       crop();
       slice();
@@ -75,10 +67,6 @@ void Page::read1()
       crop();
       slice();
       getStaffLines();
-
-      //--------------------------------------------------
-      //    identify staves
-      //--------------------------------------------------
 
       int numStaves = staves.size();
       printf("===numStaves: %d\n", numStaves);
@@ -136,6 +124,7 @@ void Page::read1()
                   staves[idx+1].setWidth(dx - staves[idx+1].x());
                   }
             }
+#if 0
       foreach(QRectF r, staves) {
             int x1 = r.x();
             int x2 = x1 + r.width();
@@ -144,6 +133,12 @@ void Page::read1()
                   if (i & 0x1)
                         searchNotes(i, x1, x2, y + i * _spatium*.5);
                   }
+            }
+#endif
+      if (pageNo == 0) {
+            OcrImage img(_image.bits(), _slices.front(), (_image.width() + 31)/32);
+            QString s = _omr->ocr()->readLine(img, &_notes);
+            printf("OCR Titel: <%s>\n", qPrintable(s));
             }
       }
 
@@ -209,18 +204,21 @@ void Page::crop()
 void Page::slice()
       {
       _slices.clear();
-      int h  = height() - cropT - cropB;
-      int ww = wordsPerLine() - cropL - cropR;
+      int y1    = cropT;
+      int y2    = height() - cropB;
+      int x1    = cropL;
+      int x2    = wordsPerLine() - cropR;
+      int xbits = (x2 - x1) * 32;
 
-      for (int y = cropT; y < h;) {
+      for (int y = y1; y < y2;) {
             //
             // skip contents
             //
-            int y1 = y;
-            for (; y < h; ++y) {
+            int ys = y;
+            for (; y < y2; ++y) {
                   const uint* p = scanLine(y) + cropL;
                   bool bits = false;
-                  for (int x = cropL; x < ww; ++x) {
+                  for (int x = cropL; x < x2; ++x) {
                         if (*p) {
                               bits = true;
                               break;
@@ -230,14 +228,15 @@ void Page::slice()
                   if (!bits)
                         break;
                   }
-            _slices.append(QRect(cropL*32, y1, ww*32, y - y1));
+            if (y - ys)
+                  _slices.append(QRect(cropL*32, ys, xbits, y - ys));
             //
             // skip space
             //
-            for (; y < h; ++y) {
+            for (; y < y2; ++y) {
                   const uint* p = scanLine(y) + cropL;
                   bool bits = false;
-                  for (int x = cropL; x < ww; ++x) {
+                  for (int x = cropL; x < x2; ++x) {
                         if (*p) {
                               bits = true;
                               break;
