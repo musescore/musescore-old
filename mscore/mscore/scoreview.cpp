@@ -521,12 +521,28 @@ bool CommandTransition::eventTest(QEvent* e)
 ScoreView::ScoreView(QWidget* parent)
    : QWidget(parent)
       {
-      _score     = 0;
-      dropTarget = 0;
-      _editText  = 0;
-      _matrix    = QTransform(PDPI/DPI, 0.0, 0.0, PDPI/DPI, 0.0, 0.0);
-      imatrix    = _matrix.inverted();
-      _magIdx    = MAG_100;
+      _score      = 0;
+      dropTarget  = 0;
+      _editText   = 0;
+      _matrix     = QTransform(PDPI/DPI, 0.0, 0.0, PDPI/DPI, 0.0, 0.0);
+      imatrix     = _matrix.inverted();
+      _magIdx     = MAG_100;
+      focusFrame  = 0;
+      level       = 0;
+      dragElement = 0;
+      curElement  = 0;
+      _bgColor    = Qt::darkBlue;
+      _fgColor    = Qt::white;
+      fgPixmap    = 0;
+      bgPixmap    = 0;
+      lasso       = new Lasso(_score);
+
+      cursor      = 0;
+      shadowNote  = 0;
+      grips       = 0;
+      origEditObject   = 0;
+      editObject  = 0;
+
 
       if (converterMode)      // HACK
             return;
@@ -704,23 +720,6 @@ ScoreView::ScoreView(QWidget* parent)
       setAttribute(Qt::WA_KeyCompression);
       setAttribute(Qt::WA_StaticContents);
       setAutoFillBackground(true);
-
-      focusFrame = 0;
-
-      level            = 0;
-      dragElement      = 0;
-      curElement       = 0;
-      _bgColor         = Qt::darkBlue;
-      _fgColor         = Qt::white;
-      fgPixmap         = 0;
-      bgPixmap         = 0;
-      lasso            = new Lasso(_score);
-
-      cursor           = 0;
-      shadowNote       = 0;
-      grips            = 0;
-      origEditObject   = 0;
-      editObject       = 0;
 
       if (debugMode)
             setMouseTracking(true);
