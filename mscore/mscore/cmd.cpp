@@ -2056,7 +2056,7 @@ void Score::cmd(const QAction* a)
                   transpose();
             else if (cmd == "concert-pitch") {
                   if (styleB(ST_concertPitch) != a->isChecked())
-                        cmdConcertPitchChanged(a->isChecked());
+                        cmdConcertPitchChanged(a->isChecked(), true);
                   }
             else if (cmd == "reset-beammode")
                   cmdResetBeamMode();
@@ -2373,7 +2373,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                                 int ntpc;
                                                 transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc,
                                                    -part->transposeDiatonic(),
-                                                   -part->transposeChromatic());
+                                                   -part->transposeChromatic(), true);
                                                 n->setPitch(npitch, ntpc);
                                                 }
                                           n->setTrack(track);

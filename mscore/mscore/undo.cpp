@@ -2073,7 +2073,7 @@ void ChangeStyle::flip()
       Style tmp = score->style();
 
       if (score->styleB(ST_concertPitch) != style[ST_concertPitch].toBool())
-            score->cmdConcertPitchChanged(style[ST_concertPitch].toBool());
+            score->cmdConcertPitchChanged(style[ST_concertPitch].toBool(), true);
 
       score->setStyle(style);
       style = tmp;

@@ -546,7 +546,7 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             if (part->transposeChromatic()) {
                   transposeInterval(pitch(), tpc(), &rpitch, &rtpc,
                      part->transposeDiatonic(),
-                     part->transposeChromatic());
+                     part->transposeChromatic(), true);
                   }
             }
 

@@ -352,7 +352,7 @@ class Score : public QObject {
       void layoutStage3();
       void layoutChords1(Segment* segment, int staffIdx);
       void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd,
-         TransposeMode mode, int key, int semitones);
+         int key, int semitones);
 
    signals:
       void selectionChanged(int);
@@ -394,8 +394,9 @@ class Score : public QObject {
       void cmdAddStretch(double);
       void transpose();
       void transposeBySemitones(Note* n, int diff);
-      void transposeByKey(Note* n, int keysig, TransposeDirection dir);
-      void transposeByInterval(Note* n, int diatonic, int chromatic);
+      void transposeByKey(int oKey, int keysig, TransposeDirection dir, bool useSharpsFlats,
+         int*, int*);
+      void transposeByInterval(Note* n, int diatonic, int chromatic, bool useSharpsFlats);
 
       Score(const Style&);
       ~Score();
@@ -674,8 +675,8 @@ class Score : public QObject {
       QList<MidiMapping>* midiMapping()       { return &_midiMapping; }
       void rebuildMidiMapping();
       void updateChannel();
-      void cmdTransposeStaff(int staffIdx, int diatonic, int chromatic);
-      void cmdConcertPitchChanged(bool);
+      void cmdTransposeStaff(int staffIdx, int diatonic, int chromatic, bool useDoubleSharpsFlats);
+      void cmdConcertPitchChanged(bool, bool useSharpsFlats);
       AL::TempoMap* tempomap() const { return _tempomap; }
 
       double swingRatio()                            { return _swingRatio;}
