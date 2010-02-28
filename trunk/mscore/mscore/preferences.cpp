@@ -490,7 +490,8 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       portaudioDriver->setEnabled(false);
 #endif
 #ifndef USE_PORTMIDI
-      portmidiDriverInput->setEnabled(false);
+      // portmidiDriverInput->setEnabled(false);
+      portmidiDriverInput->setVisible(false);
 #endif
 
       QButtonGroup* fgButtons = new QButtonGroup(this);
