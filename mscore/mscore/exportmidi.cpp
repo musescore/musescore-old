@@ -271,8 +271,18 @@ bool ExportMidi::write(const QString& name)
                         ne->setVelo(n->velo());
                         track->insert(ne);
                         }
-                  else
+                  else if (i.value()->type() == ME_CONTROLLER) {
+                        Event* n = i.value();
+                        Event* ne = new Event(ME_CONTROLLER);
+                        ne->setOntime(i.key());
+                        ne->setChannel(n->channel());
+                        ne->setController(n->controller());
+                        ne->setValue(n->value());
+                        track->insert(ne);
+                        }
+                  else {
                         printf("writeMidi: unknown midi event 0x%02x\n", i.value()->type());
+                        }
                   }
             }
       return !mf.write(&f);

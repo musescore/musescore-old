@@ -1279,8 +1279,6 @@ void Chord::layout()
       foreach(LedgerLine* l, _ledgerLines)
             l->layout();
 
-//      layoutArticulations();
-
       //-----------------------------------------
       //  Fingering
       //-----------------------------------------
@@ -1298,17 +1296,6 @@ void Chord::layout()
                   }
             }
 #endif
-
-      if (_arpeggio) {
-            double distance   = score()->styleS(ST_ArpeggioNoteDistance).val() * _spatium;
-            double headHeight = upnote->headHeight();
-            _arpeggio->layout();
-            lx -= _arpeggio->width() + distance;
-            double y = upNote()->pos().y() - headHeight * .5;
-            double h = downNote()->pos().y() - y;
-            _arpeggio->setHeight(h);
-            _arpeggio->setPos(lx, y);
-            }
 
       extraSpace    = -lx + _extraLeadingSpace.val() * _spatium;
       double mirror = 0.0;

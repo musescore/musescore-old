@@ -645,84 +645,6 @@ void ScoreView::modifyElement(Element* el)
       }
 
 //---------------------------------------------------------
-//   addSlur
-//    'S' typed on keyboard
-//---------------------------------------------------------
-
-void ScoreView::cmdAddSlur()
-      {
-      _score->startCmd();
-      InputState& is = _score->inputState();
-      if (noteEntryMode() && is.slur) {
-            QList<SlurSegment*>* el = is.slur->slurSegments();
-            if (!el->isEmpty())
-                  el->front()->setSelected(false);
-            static_cast<ChordRest*>(is.slur->endElement())->addSlurBack(is.slur);
-            is.slur = 0;
-            return;
-            }
-      QList<Note*> nl = _score->selection().noteList();
-      Note* firstNote = 0;
-      Note* lastNote = 0;
-      foreach(Note* n, nl) {
-            if (firstNote == 0 || firstNote->chord()->tick() > n->chord()->tick())
-                  firstNote = n;
-            if (lastNote == 0 || lastNote->chord()->tick() < n->chord()->tick())
-                  lastNote = n;
-            }
-      if (!firstNote)
-            return;
-      if (firstNote == lastNote)
-            lastNote = 0;
-      cmdAddSlur(firstNote, lastNote);
-      _score->endCmd();
-      }
-
-//---------------------------------------------------------
-//   addSlur
-//---------------------------------------------------------
-
-void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
-      {
-      ChordRest* cr1 = firstNote->chord();
-      ChordRest* cr2 = lastNote ? lastNote->chord() : nextChordRest(cr1);
-
-      if (cr2 == 0) {
-            printf("cannot create slur: at end\n");
-            return;
-            }
-      Slur* slur = new Slur(_score);
-      slur->setStartElement(cr1);
-      slur->setEndElement(cr2);
-      slur->setParent(0);
-      _score->cmdAdd(slur);
-
-      slur->layout();
-      QList<SlurSegment*>* el = slur->slurSegments();
-
-#if 0
-      if (noteEntryMode()) {
-            _is.slur = slur;
-            if (!el->isEmpty())
-                  el->front()->setSelected(true);
-            else
-                  printf("addSlur: no segment\n");
-            // set again when leaving slur mode:
-            static_cast<ChordRest*>(slur->endElement())->removeSlurBack(slur);
-            }
-      else {
-            //
-#endif
-            // start slur in edit mode if lastNote is not given
-            //
-            if ((lastNote == 0) && !el->isEmpty()) {
-                  origEditObject = el->front();
-                  sm->postEvent(new CommandEvent("edit"));
-                  }
-//            }
-      }
-
-//---------------------------------------------------------
 //   addTie
 //---------------------------------------------------------
 
@@ -1099,7 +1021,7 @@ void Score::deleteItem(Element* el)
                   break;
 
             case ACCIDENTAL:
-                  addAccidental(static_cast<Note*>(el->parent()), ACC_NONE);
+                  changeAccidental(static_cast<Note*>(el->parent()), ACC_NONE);
                   break;
 
             case BAR_LINE:

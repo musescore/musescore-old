@@ -162,13 +162,26 @@ SET(BUILD_JACK AUTO CACHE STRING "Build with support for ${JACK_LONGNAME}. jack 
 IF(BUILD_JACK)
      IF(MINGW)
            set (USE_JACK 1)
-           IF(CMAKE_SIZEOF_VOID_P 8)
-              set (JACK_INCDIR "C:/Program Files (x86)/Jack v1.9.5/includes")
-              set (JACK_LIB "C:/Program Files (x86)/Jack v1.9.5/lib/libjack.a")
-           ELSE(CMAKE_SIZEOF_VOID_P 8)
-              set (JACK_INCDIR "C:/Program Files/Jack v1.9.5/includes")
-              set (JACK_LIB "C:/Program Files/Jack v1.9.5/lib/libjack.a")
-           ENDIF(CMAKE_SIZEOF_VOID_P 8)
+           IF("$ENV{PROCESSOR_ARCHITEW6432}" STREQUAL "")
+              IF($ENV{PROCESSOR_ARCHITECTURE} STREQUAL "x86")
+                 # "pure" 32-bit environment
+                 set (JACK_INCDIR "C:/Program Files/Jack v1.9.5/includes")
+                 set (JACK_LIB "C:/Program Files/Jack v1.9.5/lib/libjack.a")
+              ELSE($ENV{PROCESSOR_ARCHITECTURE} STREQUAL "x86")
+                 # "pure" 64-bit environment
+                 set (JACK_INCDIR "C:/Program Files (x86)/Jack v1.9.5/includes")
+                 set (JACK_LIB "C:/Program Files (x86)/Jack v1.9.5/lib/libjack.a")
+              ENDIF($ENV{PROCESSOR_ARCHITECTURE} STREQUAL "x86")
+           ELSE("$ENV{PROCESSOR_ARCHITEW6432}" STREQUAL "")
+              IF("$ENV{PROCESSOR_ARCHITECTURE}" STREQUAL "x86")
+                 # 32-bit program running with an underlying 64-bit environment
+                 set (JACK_INCDIR "C:/Program Files (x86)/Jack v1.9.5/includes")
+                 set (JACK_LIB "C:/Program Files (x86)/Jack v1.9.5/lib/libjack.a")
+              ELSE("$ENV{PROCESSOR_ARCHITECTURE}" STREQUAL "x86")
+                 # theoretically impossible case...
+              ENDIF("$ENV{PROCESSOR_ARCHITECTURE}" STREQUAL "x86")
+           ENDIF("$ENV{PROCESSOR_ARCHITEW6432}" STREQUAL "")
+
      ELSE(MINGW)
            PKGCONFIG(jack ${JACK_MIN_VERSION} JACK_INCDIR JACK_LIBDIR JACK_LIB JACK_CPP)
            IF(JACK_INCDIR)
@@ -261,6 +274,8 @@ include (InstallRequiredSystemLibraries)
   SET(CPACK_PACKAGE_VERSION_MINOR "${Mscore_VERSION_MINOR}")
   SET(CPACK_PACKAGE_VERSION_PATCH "${Mscore_VERSION_PATCH}")
   SET(CPACK_PACKAGE_INSTALL_DIRECTORY "MuseScore ${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
+  
+  SET(CPACK_NSIS_COMPRESSOR "/FINAL /SOLID lzma")
 
   IF(MINGW)
       SET(CPACK_PACKAGE_INSTALL_DIRECTORY "MuseScore")

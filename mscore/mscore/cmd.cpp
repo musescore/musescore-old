@@ -577,8 +577,8 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
             Note* note = new Note(*on);
             Chord* chord = on->chord();
             note->setParent(chord);
-            val = val < 0 ? val+1 : val-1;
-            int line = on->line() - val;
+            int valTmp = val < 0 ? val+1 : val-1;
+            int line = on->line() - valTmp;
 
             int tick   = chord->tick();
             Staff* estaff = staff(on->staffIdx() + chord->staffMove());
@@ -1590,49 +1590,42 @@ void Score::addArticulation(int attr)
       }
 
 //---------------------------------------------------------
-//   addAccidental
+//   changeAccidental
 //---------------------------------------------------------
 
 /**
- Add accidental of subtype \a idx to all selected notes.
+ Change accidental to subtype \a idx for all selected notes.
 */
 
-void Score::addAccidental(int idx)
+void Score::changeAccidental(int idx)
       {
       foreach(Note* note, selection().noteList())
-            addAccidental(note, idx);
+            changeAccidental(note, idx);
       }
 
-//---------------------------------------------------------
-//   addAccidental
-//---------------------------------------------------------
-
 /**
- Add accidental of subtype \a idx to note \a oNote.
+ Change accidental to subtype \a idx for note \a oNote.
 */
 
-void Score::addAccidental(Note* note, int accidental)
+void Score::changeAccidental(Note* note, int accidental)
       {
-      _undo->push(new ChangeAccidental(note, accidental));
+      setLayoutAll(true);
+      //
+      // accidental change may result in pitch change
+      //
+      Chord* chord  = note->chord();
+      Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
+      int tick      = chord->tick();
+      int clef      = estaff->clef(tick);
+      int step      = clefTable[clef].pitchOffset - note->line();
+      while (step < 0)
+            step += 7;
+      step %= 7;
 
-      //
-      // look for note heads on the same staff line
-      //
-      Chord* chord     = note->chord();
-      Segment* segment = chord->segment();
-      int line         = note->line();
-      int t1 = chord->staffIdx() * VOICES;
-      int t2 = t1 + VOICES;
-      for (int track = t1; track < t2; ++track) {
-            Element* e = segment->element(track);
-            if (!e || e->type() != CHORD)
-                  continue;
-            Chord* c = static_cast<Chord*>(e);
-            foreach(Note* n, c->notes()) {
-                  if ((n != note) && (n->line() == line) && (n->accidentalType() != accidental))
-                        _undo->push(new ChangeAccidental(n, accidental));
-                  }
-            }
+      int acc    = Accidental::subtype2value(accidental);
+      int tpc    = step2tpc(step, acc);
+      int pitch  = line2pitch(note->line(), clef, 0) + acc;
+      _undo->push(new ChangePitch(note, pitch, tpc, accidental));
       }
 
 //---------------------------------------------------------
@@ -2018,15 +2011,15 @@ void Score::cmd(const QAction* a)
             else if (cmd == "beam-32")
                   padToggle(PAD_BEAM32);
             else if (cmd == "sharp2")
-                  addAccidental(3);
+                  changeAccidental(3);
             else if (cmd == "sharp")
-                  addAccidental(1);
+                  changeAccidental(1);
             else if (cmd == "nat")
-                  addAccidental(5);
+                  changeAccidental(5);
             else if (cmd == "flat")
-                  addAccidental(2);
+                  changeAccidental(2);
             else if (cmd == "flat2")
-                  addAccidental(4);
+                  changeAccidental(4);
             else if (cmd == "flip")
                   cmdFlip();
             else if (cmd == "voice-1")
@@ -2645,9 +2638,11 @@ Element* Score::move(const QString& cmd)
 
 Element* Score::selectMove(const QString& cmd)
       {
-      ChordRest* cr = selection().lastChordRest();
+      ChordRest* cr;
       if (selection().activeCR())
             cr = selection().activeCR();
+      else
+            cr = selection().lastChordRest();
       ChordRest* el = 0;
       if (cr) {
             if (cmd == "select-next-chord")

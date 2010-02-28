@@ -155,14 +155,13 @@ ChordRest* Selection::lastChordRest(int track) const
       ChordRest* cr = 0;
       for (ciElement i = _el.begin(); i != _el.end(); ++i) {
             Element* el = *i;
-            if (el->type() == NOTE) {
+            if (el->type() == NOTE)
                   el = ((Note*)el)->chord();
-                  }
-            if (el->isChordRest()) {
+            if (el->isChordRest() && static_cast<ChordRest*>(el)->segment()->subtype() == Segment::SegChordRest) {
                   if (track != -1 && el->track() != track)
                         continue;
                   if (cr) {
-                        if (((ChordRest*)el)->tick() > cr->tick())
+                        if (((ChordRest*)el)->tick() >= cr->tick())
                               cr = (ChordRest*)el;
                         }
                   else
@@ -312,6 +311,8 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         emit posChanged(_is.tick());
                         }
                   }
+            _selection.setActiveSegment(0);
+            _selection.setActiveTrack(0);
             }
       else if (type == SELECT_ADD) {
             if (e->type() == MEASURE) {
@@ -426,6 +427,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         _selection.setStaffStart(e->staffIdx());
                         _selection.setStaffEnd(_selection.staffStart() + 1);
                         _selection.setStartSegment(cr->segment());
+                        activeTrack = cr->track();
                         _selection.setEndSegment(cr->segment()->nextCR(cr->track()));
                         }
                   else if (_selection.isSingle()) {
@@ -463,7 +465,6 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                                     }
                               }
                         else {
-// printf("select: TODO\n");
                               select(e, SELECT_SINGLE, 0);
                               return;
                               }
@@ -484,15 +485,17 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         else if (tick >= _selection.tickEnd()) {
                               if (_selection.activeSegment() == _selection.startSegment())
                                     _selection.setStartSegment(_selection.endSegment());
-                              _selection.setEndSegment(cr->segment()->nextCR(cr->track()));
+                              Segment* s = cr->segment()->nextCR(cr->track());
+                              _selection.setEndSegment(s);
                               }
                         else {
                               if (_selection.activeSegment() == _selection.startSegment()) {
                                     _selection.setStartSegment(cr->segment());
                                     activeIsFirst = true;
                                     }
-                              else
+                              else {
                                     _selection.setEndSegment(cr->segment()->nextCR(cr->track()));
+                                    }
                               }
                         }
                   else {
@@ -500,7 +503,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         }
                   selState = SEL_RANGE;
                   if (!_selection.endSegment())
-                        _selection.setEndSegment(cr->segment()->next());
+                        _selection.setEndSegment(cr->segment()->nextCR());
                   if (!_selection.startSegment())
                         _selection.setStartSegment(cr->segment());
                   }
@@ -519,6 +522,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             selState = SEL_RANGE;
             updateSelectedElements(selState);
             }
+
       _selection.setState(selState);
       emit selectionChanged(int(_selection.state()));
       }

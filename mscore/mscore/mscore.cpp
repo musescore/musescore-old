@@ -855,8 +855,6 @@ MuseScore::MuseScore()
       loadScoreList();
 
       showPlayPanel(preferences.showPlayPanel);
-      if (getPlayPanel())
-            getPlayPanel()->move(preferences.playPanelPos);
 
       QClipboard* cb = QApplication::clipboard();
       connect(cb, SIGNAL(dataChanged()), SLOT(clipboardChanged()));
@@ -1175,9 +1173,12 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
                   continue;
             menu->setEnabled(enable);
             }
+      if (seq)
+            seq->setScoreView(cv);
+      if (playPanel)
+            playPanel->setScore(cs);
       if (!enable) {
             changeState(STATE_DISABLED);
-            seq->setScoreView(0);
             _undoGroup->setActiveStack(0);
             setWindowTitle("MuseScore");
             if (navigator)
@@ -1197,10 +1198,6 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             mag->setMagIdx(view->magIdx());
 
       setWindowTitle("MuseScore: " + cs->name());
-      if (seq)
-            seq->setScoreView(cv);
-      if (playPanel)
-            playPanel->setScore(cs);
 
       QAction* a = getAction("concert-pitch");
       a->setChecked(cs->styleB(ST_concertPitch));
@@ -1298,9 +1295,8 @@ void MuseScore::showElementContext(Element* el)
 
 void MuseScore::showPlayPanel(bool visible)
       {
-      if (cs == 0 || noSeq)
+      if (noSeq)
             return;
-
       if (playPanel == 0) {
             if (!visible)
                   return;
@@ -1312,14 +1308,8 @@ void MuseScore::showPlayPanel(bool visible)
             connect(seq,       SIGNAL(masterVolumeChanged(float)), playPanel, SLOT(setVolume(float)));
 
             playPanel->setVolume(seq->masterVolume());
-            playPanel->setTempo(cs->tempomap()->tempo(0));
-            playPanel->setRelTempo(cs->tempomap()->relTempo());
-            playPanel->setEndpos(seq->getEndTick());
             playPanel->setScore(cs);
-            int tick, utick;
-            seq->getCurTick(&tick, &utick);
-            playPanel->heartBeat(tick, utick);
-            playPanel->heartBeat2(seq->getCurTime());
+            playPanel->move(preferences.playPanelPos);
             }
       playPanel->setVisible(visible);
       playId->setChecked(visible);
@@ -2611,9 +2601,11 @@ void MuseScore::setPos(int t)
 
 void MuseScore::undo()
       {
+      if (cv)
+            cv->startUndoRedo();
       _undoGroup->undo();
       if (cv)
-            ((ScoreView*)cv)->endUndoRedo();
+            cv->endUndoRedo();
       }
 
 //---------------------------------------------------------
@@ -2622,9 +2614,11 @@ void MuseScore::undo()
 
 void MuseScore::redo()
       {
+      if (cv)
+            cv->startUndoRedo();
       _undoGroup->redo();
       if (cv)
-            ((ScoreView*)cv)->endUndoRedo();
+            cv->endUndoRedo();
       }
 
 //---------------------------------------------------------

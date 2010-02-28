@@ -345,35 +345,6 @@ bool UndoGroup::isClean() const
       }
 
 //---------------------------------------------------------
-//   endUndoRedo
-//---------------------------------------------------------
-
-/**
- Common handling for ending undo or redo
-*/
-
-void ScoreView::endUndoRedo()
-      {
-      if (_score->inputState()._segment)
-            mscore->setPos(_score->inputState().tick());
-      if (_score->noteEntryMode() && !noteEntryMode()) {
-            // enter note entry mode
-            postCmd("note-input");
-            }
-      else if (!_score->inputState().noteEntryMode && noteEntryMode()) {
-            // leave note entry mode
-            postCmd("escape");
-            }
-      _score->updateSelection();
-      _score->setLayoutAll(true);
-      _score->setPadState();
-      if (noteEntryMode()) {
-            moveCursor();
-            }
-      _score->end();
-      }
-
-//---------------------------------------------------------
 //   SaveState
 //---------------------------------------------------------
 
@@ -1089,7 +1060,7 @@ void ChangePitch::flip()
 
       note->changePitch(pitch);
       note->setTpc(tpc);
-      note->setUserAccidental(userAccidental);
+      note->setAccidentalType(userAccidental);
 
       pitch          = f_pitch;
       tpc            = f_tpc;
@@ -1111,39 +1082,6 @@ void ChangeTpc::flip()
       int ntpc = note->tpc();
       note->setTpc(tpc);
       tpc = ntpc;
-      }
-
-//---------------------------------------------------------
-//   ChangeAccidental
-//---------------------------------------------------------
-
-ChangeAccidental::ChangeAccidental(Note* _note, int _acc)
-      {
-      note  = _note;
-      acc   = _acc;
-      }
-
-void ChangeAccidental::redo()
-      {
-      pitch = note->pitch();
-      tpc   = note->tpc();
-      int a = note->accidentalType();
-      note->changeAccidental(acc);
-      acc   = a;
-      }
-
-void ChangeAccidental::undo()
-      {
-      int a  = note->pitch();
-      int b  = note->tpc();
-      int c  = note->accidentalType();
-
-      note->setPitch(pitch, tpc);
-      note->setAccidentalType(acc);
-
-      pitch = a;
-      tpc   = b;
-      acc   = c;
       }
 
 //---------------------------------------------------------
@@ -2045,10 +1983,10 @@ printf("ChangeStaff\n");
 ChangePart::ChangePart(Part* _part, const QTextDocument* _longName, const QTextDocument* _shortName,
    const Instrument& i)
       {
-      longName           = _longName->clone(0);
-      shortName          = _shortName->clone(0);
-      instrument         = i;
-      part               = _part;
+      longName   = _longName->clone(0);
+      shortName  = _shortName->clone(0);
+      instrument = i;
+      part       = _part;
       }
 
 ChangePart::~ChangePart()
@@ -2064,9 +2002,9 @@ ChangePart::~ChangePart()
 void ChangePart::flip()
       {
       Instrument oi         = *part;
+      part->setInstrument(instrument);
       longName              = part->longName()->swapDoc(longName);
       shortName             = part->shortName()->swapDoc(shortName);
-      part->setInstrument(instrument);
       instrument            = oi;
       part->score()->setInstrumentNames();
       }

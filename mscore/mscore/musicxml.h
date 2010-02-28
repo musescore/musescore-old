@@ -160,10 +160,11 @@ class MusicXml {
       std::vector<MusicXmlWedge> wedgeList;
       std::vector<MusicXmlPartGroup*> partGroupList;
 
-      Ottava* ottava;   ///< Current ottava
-      Trill* trill;     ///< Current trill
-      Pedal* pedal;     ///< Current pedal
-      Chord* tremStart; ///< Starting chord for current tremolo
+      Ottava* ottava;    ///< Current ottava
+      Trill* trill;      ///< Current trill
+      Pedal* pedal;      ///< Current pedal
+      Chord* tremStart;  ///< Starting chord for current tremolo
+      BeamMode beamMode; ///< Current beam mode
 
       //-----------------------------
 

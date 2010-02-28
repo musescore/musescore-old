@@ -62,25 +62,27 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       //
       Staff* s  = staff(staffIdx);
       Part*  p  = s->part();
-      Staff* ns = new Staff(this, p, 1);
-      ns->setRstaff(1);
+      int rstaff = s->rstaff();
+      Staff* ns = new Staff(this, p, rstaff + 1);
+      ns->setRstaff(rstaff + 1);
       ns->clefList()->setClef(0, CLEF_F);
 
       undoInsertStaff(ns, staffIdx+1);
 
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
             m->cmdAddStaves(staffIdx+1, staffIdx+2);
-      undoChangeBarLineSpan(s, p->nstaves());
+
+//      undoChangeBarLineSpan(s, p->nstaves());
       adjustBracketsIns(staffIdx+1, staffIdx+2);
       ns->changeKeySig(0, s->key(0));
 
-      Bracket* b = new Bracket(this);
-      b->setSubtype(BRACKET_AKKOLADE);
-      b->setTrack(staffIdx * VOICES);
-      b->setParent(firstMeasure()->system());
-      b->setLevel(-1);  // add bracket
-      b->setSpan(2);
-      cmdAdd(b);
+//      Bracket* b = new Bracket(this);
+//      b->setSubtype(BRACKET_AKKOLADE);
+//      b->setTrack(staffIdx * VOICES);
+//      b->setParent(firstMeasure()->system());
+//      b->setLevel(-1);  // add bracket
+//      b->setSpan(2);
+//      cmdAdd(b);
 
       rebuildMidiMapping();
       seq->initInstruments();

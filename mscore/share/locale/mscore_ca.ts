@@ -209,7 +209,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Maj</source>
-        <translation>M</translation>
+        <translation>Maj</translation>
     </message>
     <message>
         <source>2</source>
@@ -217,11 +217,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Maj7</source>
-        <translation>7M</translation>
+        <translation>7Maj</translation>
     </message>
     <message>
         <source>Maj9</source>
-        <translation>9M</translation>
+        <translation>9Maj</translation>
     </message>
     <message>
         <source>6</source>
@@ -265,7 +265,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mMaj7</source>
-        <translation>mMaj7</translation>
+        <translation>m7Maj</translation>
     </message>
     <message>
         <source>dim</source>
@@ -297,15 +297,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Maj9#11</source>
-        <translation>Maj9#11</translation>
+        <translation>9Maj#11</translation>
     </message>
     <message>
         <source>Maj13#11</source>
-        <translation>Maj13#11</translation>
+        <translation>13Maj#11</translation>
     </message>
     <message>
         <source>Maj13</source>
-        <translation>Maj13</translation>
+        <translation>13Maj</translation>
     </message>
     <message>
         <source>+</source>
@@ -313,7 +313,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Maj7#5</source>
-        <translation>Maj7#5</translation>
+        <translation>7Maj#5</translation>
     </message>
     <message>
         <source>maug</source>
@@ -341,11 +341,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Maj7Lyd</source>
-        <translation>Maj7Lyd</translation>
+        <translation>7MajLyd</translation>
     </message>
     <message>
         <source>Maj7b5</source>
-        <translation>Maj7b5</translation>
+        <translation>7Majb5</translation>
     </message>
     <message>
         <source>m9b5</source>
@@ -845,7 +845,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
-        <translation>Automàtica</translation>
+        <translation>Automàtic</translation>
     </message>
     <message>
         <source>up</source>
@@ -905,7 +905,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"> Cent</translation>
     </message>
     <message>
         <source> ticks</source>
@@ -933,7 +933,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Triangle</translation>
     </message>
     <message>
         <source>slash</source>
@@ -969,7 +969,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Automàtica</translation>
+        <translation type="unfinished">Automàtic</translation>
     </message>
     <message>
         <source>whole</source>
@@ -1190,7 +1190,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automàtica</translation>
+        <translation>Automàtic</translation>
     </message>
     <message>
         <source>Up</source>
@@ -1277,7 +1277,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Transposició</translation>
+        <translation>Transposa</translation>
     </message>
     <message>
         <source>Midi Program</source>
@@ -1340,7 +1340,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>Sense pliques</translation>
+        <translation>Sense plica</translation>
     </message>
     <message>
         <source>Invisible</source>
@@ -1538,7 +1538,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Chordnames</source>
-        <translation>Noms d'acrod</translation>
+        <translation>Noms d'acord</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
@@ -1827,7 +1827,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Ledger line width</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Amplada de línea addicional</translation>
     </message>
     <message>
         <source>Distance to note</source>
@@ -1839,7 +1839,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Beam width</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Amplada d'agrupació</translation>
     </message>
     <message>
         <source>Beam distance</source>
@@ -1879,7 +1879,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Use German names</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Utilitza nomenclatura alemanya</translation>
     </message>
     <message>
         <source>Chord description file</source>
@@ -2210,11 +2210,11 @@ Fallada: </translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Afegeix amunt</translation>
+        <translation>Afegeix damunt</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Afegeix avall</translation>
+        <translation>Afegeix a sota</translation>
     </message>
     <message>
         <source>1</source>
@@ -2272,11 +2272,11 @@ Fallada: </translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Afegeix amunt</translation>
+        <translation>Afegeix damunt</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Afegeix avall</translation>
+        <translation>Afegeix a sota</translation>
     </message>
     <message>
         <source>1</source>
@@ -2474,7 +2474,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>Ped (pedal)</translation>
+        <translation>Ped (Pedal)</translation>
     </message>
     <message>
         <source>x:</source>
@@ -2713,7 +2713,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>Sense pliques</translation>
+        <translation>Sense plica</translation>
     </message>
     <message>
         <source>New Row</source>
@@ -2945,7 +2945,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>Tremolos</translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <source>Segno</source>
@@ -3105,7 +3105,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>InstrumentsShort</source>
-        <translation>Abreviatura d'instrument</translation>
+        <translation>Abreviatura instrument</translation>
     </message>
     <message>
         <source>InstrumentsExcerpt</source>
@@ -3157,7 +3157,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation>Línia de text</translation>
+        <translation>Text de línia</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -3271,7 +3271,7 @@ abans de tancar?</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Caludàtor</translation>
+        <translation>Claudàtor</translation>
     </message>
     <message>
         <source>Akkolade</source>
@@ -3341,7 +3341,7 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acciaccatura</translation>
     </message>
     <message>
         <source>Appoggiatura</source>
@@ -3369,7 +3369,7 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">2/2 Allabreve</translation>
     </message>
     <message>
         <source>Barlines</source>
@@ -3385,7 +3385,7 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation type="unfinished">Lligadura</translation>
+        <translation type="unfinished">Lligadura d'expressió</translation>
     </message>
     <message>
         <source>Crescendo</source>
@@ -3413,7 +3413,7 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
     </message>
     <message>
         <source>Trill line</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Trino</translation>
     </message>
     <message>
         <source>Text line</source>
@@ -3469,7 +3469,7 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Trencaments i espaiament</translation>
     </message>
     <message>
         <source>Line break</source>
@@ -3501,7 +3501,7 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
     </message>
     <message>
         <source>Auto beam</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Agrupació automàtica</translation>
     </message>
     <message>
         <source>Brackets...</source>
@@ -3521,7 +3521,7 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Trencaments i espaiament ...</translation>
     </message>
     <message>
         <source>The previous session quit unexpectedly.
@@ -3687,7 +3687,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automàtica</translation>
+        <translation>Automàtic</translation>
     </message>
     <message>
         <source>User</source>
@@ -3978,7 +3978,7 @@ Restore session?</source>
     </message>
     <message>
         <source>auto</source>
-        <translation>Automàtica</translation>
+        <translation>Automàtic</translation>
     </message>
     <message>
         <source>user</source>
@@ -4644,7 +4644,7 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     </message>
     <message>
         <source>Use style file:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Utilitza fitxer d'estil:</translation>
     </message>
     <message>
         <source>System</source>
@@ -4656,7 +4656,7 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     </message>
     <message>
         <source>Use JACK MIDI output</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Utilitza la sortida MIDI JACK</translation>
     </message>
     <message>
         <source>Remember last connection(s)</source>
@@ -4683,7 +4683,7 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>Ped (pedal)</translation>
+        <translation>Ped (Pedal)</translation>
     </message>
     <message>
         <source>* (Pedal)</source>
@@ -5048,7 +5048,7 @@ Fallada: </translation>
     <message>
         <source>&gt; failed:
 </source>
-        <translation>&gt; Fallada:
+        <translation>&gt; fallada:
 </translation>
     </message>
     <message>
@@ -5256,7 +5256,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>add to selection</source>
-        <translation>Afegeix a selecció</translation>
+        <translation>Afegeix a la selecció</translation>
     </message>
     <message>
         <source>search in selection</source>
@@ -5313,7 +5313,7 @@ Prova a desar-ho en una localització diferent.</translation>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation>Automàtica</translation>
+        <translation>Automàtic</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -5337,7 +5337,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automàtica</translation>
+        <translation>Automàtic</translation>
     </message>
     <message>
         <source>Up</source>
@@ -5359,7 +5359,7 @@ Prova a desar-ho en una localització diferent.</translation>
     <name>ShowRestWidget</name>
     <message>
         <source>auto</source>
-        <translation>Automàtica</translation>
+        <translation>Automàtic</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -5394,7 +5394,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation>Lligadura</translation>
+        <translation>Lligadura d'expressió</translation>
     </message>
     <message>
         <source>Slur End</source>
@@ -5722,7 +5722,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation>Línia de text</translation>
+        <translation>Text de línia</translation>
     </message>
     <message>
         <source>line width:</source>
@@ -6089,10 +6089,10 @@ Prova a desar-ho en una localització diferent.</translation>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Nota: després de crear la paritura sempre podràs afegir o eliminar compassos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Nota: després de crear la partitura sempre podràs afegir o eliminar compassos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6356,7 +6356,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Caludàtor</translation>
+        <translation>Claudàtor</translation>
     </message>
     <message>
         <source>auto bracket</source>
@@ -6399,7 +6399,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Caludàtor</translation>
+        <translation>Claudàtor</translation>
     </message>
     <message>
         <source>auto bracket</source>
@@ -6486,7 +6486,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation>Naural / Becaire</translation>
+        <translation>Natural / Becaire</translation>
     </message>
     <message>
         <source>(sharp)</source>
@@ -7229,7 +7229,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation>Naural / Becaire</translation>
+        <translation>Natural / Becaire</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -7537,7 +7537,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Transposició</translation>
+        <translation>Transposa</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -7953,11 +7953,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add staccato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Afegeix staccato</translation>
     </message>
     <message>
         <source>Staccato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Staccato</translation>
     </message>
     <message>
         <source>Flat</source>
@@ -7965,7 +7965,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add trill</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Afegeix trino</translation>
     </message>
     <message>
         <source>Trill</source>
@@ -8081,11 +8081,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Previous chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acord anterior</translation>
     </message>
     <message>
         <source>Previous Chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acord anterior</translation>
     </message>
     <message>
         <source>Previous measure</source>
@@ -8121,7 +8121,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append measures</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Afegeix compassos</translation>
     </message>
     <message>
         <source>Insert measure</source>
@@ -8153,7 +8153,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Seek to begin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Anar a inici</translation>
     </message>
     <message>
         <source>Player rewind</source>
@@ -8165,11 +8165,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Seek to end</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Anar al final</translation>
     </message>
     <message>
         <source>Play repeats on/off</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Activa/desactiva reproducció de repeticions</translation>
     </message>
     <message>
         <source>Load style</source>
@@ -8454,7 +8454,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Caludàtor</translation>
+        <translation>Claudàtor</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -8598,7 +8598,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>Tremolos</translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -8646,7 +8646,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLine</source>
-        <translation>Línia de text</translation>
+        <translation>Text de línia</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -8666,7 +8666,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Slur</source>
-        <translation>Lligadura</translation>
+        <translation>Lligadura d'expressió</translation>
     </message>
     <message>
         <source>Element</source>
@@ -8907,7 +8907,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">Naural / Becaire</translation>
+        <translation type="unfinished">Natural / Becaire</translation>
     </message>
     <message>
         <source>natural arrow up</source>
@@ -9487,7 +9487,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>allabreve</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Allabreve</translation>
     </message>
     <message>
         <source>pedalasterisk</source>
@@ -9535,35 +9535,35 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acc dot</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acc punt</translation>
     </message>
     <message>
         <source>acc freebase</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acc lliure</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acc estàndard</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acc bayanbase</translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acc vella</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Acc discant</translation>
     </message>
     <message>
         <source>zero</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Zero</translation>
     </message>
     <message>
         <source>one</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Un</translation>
     </message>
     <message>
         <source>two</source>
@@ -9571,7 +9571,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>three</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tres</translation>
     </message>
     <message>
         <source>four</source>
@@ -9591,7 +9591,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>eight</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Vuit</translation>
     </message>
     <message>
         <source>nine</source>

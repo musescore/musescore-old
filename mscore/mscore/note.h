@@ -88,7 +88,6 @@ class Note : public Element {
       int _offTimeOffset;     ///< stop note offset in ticks
       int _offTimeUserOffset; ///< stop note user offset
 
-      int  _userAccidental;   ///< editorial accidental type
       char _headGroup;
       NoteHeadType _headType;
 
@@ -99,7 +98,6 @@ class Note : public Element {
                               ///< overlapping notes; hidden notes are not played
                               ///< and heads + accidentals are not shown
 
-      int _accidentalType;
       Accidental* _accidental;
 
       ElementList _el;        ///< fingering, other text, symbols or images
@@ -148,14 +146,12 @@ class Note : public Element {
       void changePitch(int val);
       void setTpcFromPitch();
 
-      int userAccidental() const      { return _userAccidental; }
-      void setUserAccidental(int n)   { _userAccidental = n; }
-
-      int accidentalType() const      { return _accidentalType; }
-      Accidental* accidental() const  { return _accidental;     }
-      void setAccidental(Accidental* a);
-      void setAccidentalType(int);
+      int userAccidental() const;
       void changeAccidental(int);
+      void setAccidentalType(int);
+      int accidentalType() const;
+
+      Accidental* accidental() const  { return _accidental;     }
 
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n);
@@ -249,7 +245,7 @@ class ShadowNote : public Element {
       void setLine(int n)               { _line = n;      }
       virtual QRectF bbox() const;
       virtual void draw(QPainter& p) const;
-      int headGroup() const           { return _headGroup; }
+      int headGroup() const            { return _headGroup; }
       void setHeadGroup(int val);
       void setHead(int val)            { _head = val; }
       int head() const                 { return _head; }

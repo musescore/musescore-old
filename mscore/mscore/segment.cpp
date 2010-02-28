@@ -40,8 +40,11 @@ const char* Segment::segmentTypeNames[] = {
       "Time Signature",
       "Begin Repeat",
       "BarLine",
-      "Grace", "ChordRest",
-      "Breath", "EndBarLine", "Time Sig Precaution",
+      "Grace",
+      "ChordRest",
+      "Breath",
+      "EndBarLine",
+      "Time Sig Precaution",
       0
       };
 
