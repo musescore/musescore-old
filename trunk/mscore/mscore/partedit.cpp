@@ -76,7 +76,7 @@ InstrumentListEditor::InstrumentListEditor(QWidget* parent)
       {
       setWindowTitle(tr("MuseScore: Part List"));
       setWidgetResizable(true);
-	  setWindowFlags(Qt::Dialog);
+      setWindowFlags(Qt::Dialog);
       QWidget* area = new QWidget(this);
       vb = new QVBoxLayout;
       vb->setMargin(0);
