@@ -124,6 +124,8 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'Rozdział [number]'
     elif language_code == 'pt-br':
         chapter = 'Capítulo [number]'
+    elif language_code == 'ro':
+        chapter = 'Capitolul [number]'
     elif language_code == 'ru':
         chapter = 'Глава [number]'
 
@@ -537,6 +539,9 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'pt-br':
         url = 'http://musescore.org/pt-br/print/book/export/html/1248'
         internal = 'http://musescore.org/pt-br/manual-pt-br' #podr%C4%99cznik'
+    elif language_code == 'ro':
+        url = 'http://musescore.org/ro/print/book/export/html/3081'
+        internal = 'http://musescore.org/ro/manual'
     elif language_code == 'ru':
         url = 'http://musescore.org/ru/print/book/export/html/2352'
         internal = 'http://musescore.org/ru/cправочник' #c%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA'
@@ -582,7 +587,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
 
 def main():
-    language_choices = ['all','en','ca','de','es','fi','fr','gl','hu','it','ja','nb','nl','ru','pl','pt-BR']
+    language_choices = ['all','en','ca','de','es','fi','fr','gl','hu','it','ja','nb','nl','pl','pt-BR','ro','ru']
   
     parser = OptionParser()
     parser.add_option("-l","--lang", dest="language_code",

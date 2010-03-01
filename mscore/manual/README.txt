@@ -69,7 +69,7 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
 CHANGE LOG
 
 * Compatibility update: remove "www." from handbook links again (HTML from website changed)
-* Add Hungarian and Catalan
+* Add Hungarian, Catalan, and Romanian
 * Work around lower case problem for a couple letters in Hungarian alphabet
 * More flexibility with Chapter headings (numbers can go before the word chapter for Hungarian or right after without a space for Japanese)
 * Update instructions in README file for adding new language
