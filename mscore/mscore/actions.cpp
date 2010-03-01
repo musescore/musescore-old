@@ -1381,7 +1381,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-palette",
          QT_TRANSLATE_NOOP("action","Palette"),
-         Qt::Key_F9,
+         #ifdef Q_WS_MAC
+		 Qt::CTRL+Qt::ALT+Qt::Key_K,
+		 #else
+		 Qt::Key_F9,
+		 #endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Palette"),
          QT_TRANSLATE_NOOP("action","Palette")
@@ -1390,7 +1394,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-playpanel",
          QT_TRANSLATE_NOOP("action","Play Panel"),
-         Qt::Key_F11,
+		 #ifdef Q_WS_MAC
+		 Qt::CTRL+Qt::ALT+Qt::Key_P,
+		 #else
+		 Qt::Key_F11,
+		 #endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Play Panel"),
          QT_TRANSLATE_NOOP("action","Play Panel")
@@ -1399,7 +1407,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-navigator",
          QT_TRANSLATE_NOOP("action","Navigator"),
-         Qt::Key_F12,
+         #ifdef Q_WS_MAC
+		 Qt::CTRL+Qt::ALT+Qt::Key_N,
+		 #else
+		 Qt::Key_F12,
+		 #endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Navigator"),
          QT_TRANSLATE_NOOP("action","Navigator")
@@ -1408,7 +1420,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-mixer",
          QT_TRANSLATE_NOOP("action","Mixer"),
-         Qt::Key_F10,
+         #ifdef Q_WS_MAC
+		 Qt::Key_M,
+		 #else
+		 Qt::Key_F10,
+		 #endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Mixer"),
          QT_TRANSLATE_NOOP("action","Mixer")
