@@ -22,19 +22,7 @@
 #define __PAGE_H__
 
 class Omr;
-
-struct Measure {
-      QRectF boundingRect;
-      };
-
-struct Staff {
-      QRectF boundingRect;
-      QList<double> lines;
-      };
-
-struct System {
-      QList<Staff*> staves;
-      };
+class Score;
 
 struct HLine {
       int x1, x2, y;
@@ -92,6 +80,7 @@ class Page {
       double spatium() const             { return _spatium; }
       double staffDistance() const;
       double systemDistance() const;
+      void readHeader(Score* score);
       };
 
 #endif

@@ -25,6 +25,10 @@
 #include "utils.h"
 #include "omr.h"
 #include "ocr.h"
+#include "score.h"
+#include "text.h"
+#include "measurebase.h"
+#include "box.h"
 
 struct Lv {
       int line;
@@ -135,11 +139,53 @@ void Page::read(int pageNo)
                   }
             }
 #endif
-      if (pageNo == 0) {
-            OcrImage img(_image.bits(), _slices.front(), (_image.width() + 31)/32);
-            QString s = _omr->ocr()->readLine(img, &_notes);
-            printf("OCR Titel: <%s>\n", qPrintable(s));
+      }
+
+//---------------------------------------------------------
+//   addText
+//---------------------------------------------------------
+
+static void addText(Score* score, int subtype, const QString& s)
+      {
+      MeasureBase* measure = score->first();
+      if (measure == 0 || measure->type() != VBOX) {
+            measure = new VBox(score);
+            measure->setNext(score->first());
+            measure->setTick(0);
+      	score->add(measure);
             }
+      Text* text = new Text(score);
+      switch(subtype) {
+            case TEXT_TITLE:    text->setTextStyle(TEXT_STYLE_TITLE);    break;
+            case TEXT_SUBTITLE: text->setTextStyle(TEXT_STYLE_SUBTITLE); break;
+            case TEXT_COMPOSER: text->setTextStyle(TEXT_STYLE_COMPOSER); break;
+            case TEXT_POET:     text->setTextStyle(TEXT_STYLE_POET);     break;
+            }
+      text->setSubtype(subtype);
+      text->setText(s);
+      measure->add(text);
+      }
+
+//---------------------------------------------------------
+//   readHeader
+//---------------------------------------------------------
+
+void Page::readHeader(Score* score)
+      {
+      OcrImage img = OcrImage(_image.bits(), _slices[0], (_image.width() + 31)/32);
+      QString s = _omr->ocr()->readLine(img).trimmed();
+      if (!s.isEmpty())
+            addText(score, TEXT_TITLE, s);
+
+      img = OcrImage(_image.bits(), _slices[1], (_image.width() + 31)/32);
+      s = _omr->ocr()->readLine(img).trimmed();
+      if (!s.isEmpty())
+            addText(score, TEXT_SUBTITLE, s);
+
+      img = OcrImage(_image.bits(), _slices[2], (_image.width() + 31)/32);
+      s = _omr->ocr()->readLine(img).trimmed();
+      if (!s.isEmpty())
+            addText(score, TEXT_COMPOSER, s);
       }
 
 //---------------------------------------------------------
