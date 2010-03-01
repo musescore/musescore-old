@@ -1487,6 +1487,14 @@ mislukt: </translation>
         <source>down</source>
         <translation type="unfinished">omlaag</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished">Verander instrument</translation>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished">+octaaf</translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -2245,6 +2253,10 @@ mislukt: </translation>
         <source>Add Below</source>
         <translation>Toevoegen beneden</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished">toon meer</translation>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2302,6 +2314,10 @@ mislukt: </translation>
     <message>
         <source>Instrument List</source>
         <translation>Instrumentenlijst</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished">toon meer</translation>
     </message>
 </context>
 <context>
@@ -3263,10 +3279,6 @@ voordat u afsluit?</translation>
         <translation>Maatstrepen</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation>Partijen...</translation>
-    </message>
-    <message>
         <source>1 between notes</source>
         <translation/>
     </message>
@@ -3564,6 +3576,20 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished">Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Bestanden (*.cap);;</translation>
     </message>
+    <message>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished">Script&#13;
+%1&#13;
+is niet compactibel met de huidige interface</translation>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished">MuseScore te oud voor script&#13;
+%1</translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3711,6 +3737,10 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
     <message>
         <source>note head group</source>
         <translation>nootkoppen-groep</translation>
+    </message>
+    <message>
+        <source>Tuning</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4837,6 +4867,10 @@ Selecteer één enkele noot of rust en probeer het opnieuw
         <source>MuseScore: Load languages failed:</source>
         <translation type="unfinished">MuseScore: Laden talen mislukt:</translation>
     </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
+        <translation type="unfinished">MuseScore: registeer script plugin</translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -5136,6 +5170,10 @@ mislukt: </translation>
         <source>The first time signature of a piece can not be removed.</source>
         <translation type="unfinished">De eerste maataanduiding van een stuk kan niet worden verwijderd.</translation>
     </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished">Kan bestandstype niet achterhalen</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5276,6 +5314,21 @@ mislukt: </translation>
     <message>
         <source>search in selection</source>
         <translation>zoek in selectie</translation>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialoog</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished">toon meer</translation>
     </message>
 </context>
 <context>
@@ -5723,6 +5776,21 @@ mislukt: </translation>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation>Teskst Stijl;</translation>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Maak Onzichtbaar</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Maak Zichtbaar</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Tekst-eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -8213,6 +8281,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished">Verwijder element en duur</translation>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">Partijen...</translation>
     </message>
 </context>
 <context>

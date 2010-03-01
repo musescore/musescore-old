@@ -1487,6 +1487,14 @@ nepodařilo se: </translation>
         <source>down</source>
         <translation type="unfinished">dolů</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -2245,6 +2253,10 @@ nepodařilo se: </translation>
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2302,6 +2314,10 @@ nepodařilo se: </translation>
     <message>
         <source>Instrument List</source>
         <translation>Seznam nástrojů</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2945,10 +2961,6 @@ nepodařilo se: </translation>
         <translation>Otevřít &amp;nedávný</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation>Hlasy...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;Upravit</translation>
     </message>
@@ -3562,6 +3574,17 @@ Restore session?</source>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished">Všechny podporované soubory (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Soubory MuseScore (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;Soubory MIDI (*.mid *.midi *.kar);;Soubory Muse Data (*.md);;Soubory Capella (*.cap);;</translation>
     </message>
+    <message>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3709,6 +3732,10 @@ Restore session?</source>
     <message>
         <source>OffTimeType:</source>
         <translation>Typ mimo čas:</translation>
+    </message>
+    <message>
+        <source>Tuning</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4836,6 +4863,10 @@ Vyberte, prosím, nějakou notu nebo pomlku a zkuste to ještě jednou
         <source>MuseScore: Load languages failed:</source>
         <translation type="unfinished">MuseScore: Nahrání překladůy se nezdařilo:</translation>
     </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -5134,6 +5165,10 @@ Zkuste uložení do jiného umístění.</translation>
         <source>The first time signature of a piece can not be removed.</source>
         <translation type="unfinished">První taktové označení díla nelze odstranit.</translation>
     </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5274,6 +5309,21 @@ Zkuste uložení do jiného umístění.</translation>
     <message>
         <source>subtract from selection</source>
         <translation>Odečíst z výběru</translation>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialog</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5722,6 +5772,21 @@ Zkuste uložení do jiného umístění.</translation>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation>Styl textu:</translation>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Nastavit jako neviditelné</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Nastavit jako viditelné</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Vlastnosti textu...</translation>
     </message>
 </context>
 <context>
@@ -8212,6 +8277,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished">Smazat prvek a dobu trvání</translation>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">Hlasy...</translation>
     </message>
 </context>
 <context>
