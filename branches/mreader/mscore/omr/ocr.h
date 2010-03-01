@@ -22,18 +22,6 @@
 #define __OCR_H__
 
 //---------------------------------------------------------
-//   OcrResult
-//---------------------------------------------------------
-
-struct OcrResult {
-      QChar c;
-      int matchVal;
-      OcrResult() {};
-      OcrResult(const QChar& _c, int mv) : c(_c), matchVal(mv) {}
-      bool operator<(const OcrResult& r) const { return matchVal < r.matchVal; }
-      };
-
-//---------------------------------------------------------
 //   OcrImage
 //---------------------------------------------------------
 
@@ -51,48 +39,15 @@ struct OcrImage {
       };
 
 //---------------------------------------------------------
-//   FeatureVector
-//---------------------------------------------------------
-
-static const int xstripes = 8;
-static const int ystripes = 8;
-static const int FeatureVectorSize = xstripes*ystripes+1;
-
-struct FeatureVector {
-      uchar values[FeatureVectorSize];
-
-      int compare(const FeatureVector& v) const;
-      void dump(const char*) const;
-      };
-
-//---------------------------------------------------------
-//   OcrDictValue
-//---------------------------------------------------------
-
-struct OcrDictValue {
-      QChar c;
-      FeatureVector f;
-      OcrDictValue() {}
-      OcrDictValue(const QChar& _c, const FeatureVector& _f) : c(_c), f(_f) {}
-      };
-
-//---------------------------------------------------------
 //   Ocr
 //---------------------------------------------------------
 
 class Ocr {
-      QList<OcrDictValue> dictionary;
-
-      void createFeatureVector(FeatureVector*, const OcrImage&) const;
-      void learn(const QChar& c);
-      void learn(const QChar& c, const OcrImage&);
-      void test(const QChar& c);
 
    public:
       Ocr();
-      QList<OcrResult> recognize(const OcrImage&) const;
       void init();
-      QString readLine(const OcrImage&, QList<QRect>* rl = 0);
+      QString readLine(const OcrImage&);
       };
 
 #endif

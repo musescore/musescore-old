@@ -236,6 +236,8 @@ if (MINGW)
       portmidi
       winmm
       ${JACK_LIB}
+      tesseract_full
+      tiff
       )
 
    if (HAS_AUDIOFILE)
@@ -306,6 +308,8 @@ else (MINGW)
       fluid
       z
       gsl
+      tesseract_full
+      tiff
       )
 
    if (HAS_AUDIOFILE)

@@ -26,6 +26,7 @@
 #include "measure.h"
 #include "al/al.h"
 #include "rest.h"
+#include "omr/page.h"
 
 //---------------------------------------------------------
 //   importPdf
@@ -70,8 +71,10 @@ bool Score::importPdf(const QString& path)
 
             measures()->add(measure);
             }
-
       setShowOmr(true);
+
+      _omr->page(0)->readHeader(this);
+
       return true;
       }
 
