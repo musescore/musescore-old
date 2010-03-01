@@ -482,7 +482,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                               _selection.setStartSegment(cr->segment());
                               activeIsFirst = true;
                               }
-                        else if (tick >= _selection.tickEnd()) {
+                        else if (_selection.endSegment() && tick >= _selection.tickEnd()) {
                               if (_selection.activeSegment() == _selection.startSegment())
                                     _selection.setStartSegment(_selection.endSegment());
                               Segment* s = cr->segment()->nextCR(cr->track());
