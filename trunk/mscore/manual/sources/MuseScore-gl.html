@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_c811cd2301d834d9dc6415673e3d21a2.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_c20473eba39fb12180cca292f7f53914.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx"}});
@@ -13,7 +13,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/gl/manual-galego/manual-galego' />
     <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_2201016fb500fdc8a6a1e9918a29addc.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_16fe280631badfe1c52bff269abfbff0.css" />
   </head>
   <body>
         <div class="print-logo"></div>
@@ -265,7 +265,7 @@ Xa pode lanzar o MuseScore desde Aplicativos ou SpotLight.</p>
 <h3>Irregular</h3>
 <p>Os compases "irregulares" non se contan na numeración de compases. Normalmente, as anacrusas márcanse como "irregulares". Cando se marca un compás como irregular nas versións actuais do MuseScore pode que haxa que gardar e volver a cargar a partitura antes de que os números de compás mostren o cambio.</p>
 <h3>Número de repeticións</h3>
-<p>Se o compás é o final dunha <a href="http://musescore.org/gl/manual-galego/repeticións" title="repeticións">repetición</a>, é posíbel definir cantas veces hai que repetilo.</p>
+<p>Se o compás é o final dunha <a href="http://musescore.org/ca/manual/repeticions" title="repeticións">repetición</a>, é posíbel definir cantas veces hai que repetilo.</p>
   </div>
 <div id="node-559" class="section-3">
   <h1 class="book-heading">Paletas</h1>
@@ -554,9 +554,22 @@ Isto pódese introducir en MuseScore deste xeito:</p>
   </div>
 <div id="node-558" class="section-3">
   <h1 class="book-heading">Silencios de un compás</h1>
-  <p>Cando un compás enteiro carece de notas, introdúcese un silencio de un compás completo (redonda).<br />
-Pódese crear un silencio de un compás marcando un compás e premendo <kbd><kbd>Supr</kbd></kbd>.<br />
-Substitúense todas as notas e silencios dese compás por un silencio de un compás.</p>
+  <h3>Silencios de un compás</h3>
+<p><img src="/sites/musescore.org/files/full-measure-rest_0.png" alt="Un silencio de un compás semella un silencio de redonda, excepto que está centrada no medio dun compás" title="Un silencio de un compás semella un silencio de redonda, excepto que está centrada no medio dun compás" width="52" height="22" class="inline" /></p>
+<p>Cando un compás completo carece de notas, emprégase un silencio de un compás.</p>
+<p>Para crear un silencio de un compás seleccione un compás e prema <kbd><kbd>Supr</kbd></kbd>. Todas as notas e silencios deste compás substitúense por un silencio de un compás.</p>
+<h3>Silencios de varios compases</h3>
+<p><img src="/sites/musescore.org/files/multimeasure-rests_2.png" alt="Os compases de espera teñen un número por riba do pentagrama que indica a duración do silencio polo número de compases" title="Os compases de espera teñen un número por riba do pentagrama que indica a duración do silencio polo número de compases" width="386" height="37" class="inline" /></p>
+<p>Os compases de espera indican un silencio de duración longa para un instrumento e utilízanse con frecuencia nas partituras para conxuntos musicais. Nas versións 0.95 e anteriores esta funcionalidade é meramente experimental (vexa as limitacións abaixo)</p>
+<h4>Instrucións</h4>
+<ol>
+<li>No menú escolla <kbd><samp class="menu">Estilo</samp> → <samp class="menuitem">Modificar o estilo xeral</samp></kbd> (nas versións 0.9.5 e anteriores chamábase <kbd><samp class="menu">Estilo</samp> → <samp class="menuitem">Modificar o estilo</samp></kbd>)</li>
+<li>Prema o separador "Partitura" de non estar xa seleccionado</li>
+<li>Engada a opción "Crear compases de espera"</li>
+</ol>
+<h4>Limitacións</h4>
+<p>As versións 0.9.5 e anteriores non rachaban automaticamente os silencios de  varios compases en puntos importantes, como as liñas de compás dobres, as armaduras e as marcas de ensaio. Isto xa está arranxado na futura versión 0.9.6. Como tranquilla para as versións anteriores, vexa a sección "Rachar os silencios de varios compases" de <a href="http://musescore.org/gl/manual-galego/operacións-cos-compases" title="operacións cos compases">operacións cos compases</a>.</p>
+<p>A opción de estilo crea automaticamente silencios de varios compases en toda a partitura. Polo tanto, recoméndase que se introduzan primeiro todas as notas e que se activen os silencios de varios compases despois.</p>
   </div>
 <div id="node-564" class="section-3">
   <h1 class="book-heading">Tremolo</h1>
@@ -659,11 +672,12 @@ Ao premer o botón Reproducir <img src="/sites/musescore.org/files/play.png" alt
   <h1 class="book-heading">SoundFont</h1>
   <p>O MuseScore ven cunha <em>fonte de sons</em> de piano para a reprodución. Para máis sons, como o de violín ou percusión, precísase unha baseada en General MIDI.</p>
 <h3>Xeral</h3>
-<p>Un ficheiro SoundFont pode almacenar un número determinado de sons de instrumentos. Na web hai moitos SoundFonts dispoñíbeis. Procure un que cobra os 128 sons do <a href="http://en.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM).</p>
-<p>O tamaño de ficheiro e a calidade dos sons dos SoundFonts disponíbeis na web varía moito. Os ficheiros SoundFont máis grandes normalmente soan mellor, mais poden seren demasiado grandes para executalos nalgúns computadores. Se o MuseScore se tornar lento despois de instalar un ficheiro SoundFont grande ou se o computador non pode manter estábel a reprodución, procure un ficheiro SoundFont máis pequeno. Aquí abaixo pode atopar dúas SoundFonts GM de tamaños diferentes.</p>
+<p>Un ficheiro SoundFont pode almacenar un número determinado de sons de instrumentos. Na web hai moitos SoundFonts dispoñíbeis. Procure un que cobra os 128 sons do <a href="http://en.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM). Se está a empregar unha fonte de son que non respecte a norma General MIDI, pode que outros non escoiten os instrumentos correctos cando comparta a partitura ou a grave como MIDI.</p>
+<p>O tamaño de ficheiro e a calidade dos sons das fontes de son disponíbeis na web varía moito. Os ficheiros SoundFont máis grandes normalmente soan mellor, mais poden seren demasiado grandes para executalos nalgúns computadores. Se o MuseScore se tornar lento despois de instalar un ficheiro SoundFont grande ou se o computador non pode manter estábel a reprodución, procure un ficheiro SoundFont máis pequeno. Aquí abaixo pode atopar tres fontes de son GM de tamaños diferentes.</p>
 <ul>
 <li>FluidR3_GM.sf2 (141 MB sen comprimir),  descargue <a class="freelinking external" href="http://www.musescore.org/download/fluid-soundfont.tar.gz">Fluid-soundfont.tar.gz (129 MB)</a></li>
 <li>MagicSF_ver2.sf2 (67.8 MB sen comprimir), vexa <a href="http://www.personalcopy.com/sfarkfonts1.htm">Big SoundFonts</a></li>
+<li>TimGM6mb.sf2 (5.7 MB sen comprimir), vexa <a href="http://ocmnet.com/saxguru/Timidity.htm#sf2">Sitio de descargas Tim Brechbill's Timidity++</a> sección "Free SoundFont"</li>
 </ul>
 <h3>Compresión</h3>
 <p>Dado que os ficheiros SoundFont son grandes, normalmente están comprimidos en diversos formatos, que inclúen .zip, .sfArk e .tar.gz. Hai que descomprimir estes ficheiros antes de os poder utilizar.</p>
@@ -674,7 +688,7 @@ Ao premer o botón Reproducir <img src="/sites/musescore.org/files/play.png" alt
 </ul>
 <h3>Configuración do MuseScore</h3>
 <p>Unha vez atopado e descomprimido un ficheiro SounFond non prema dúas veces nel para abrilo, porque isto non configura o MuseScore. No canto disto, mova o ficheiro para o cartafol que queira, inicie o MuseScore e siga as instrucións de embaixo.</p>
-<p>Vaia ao separador <kbd><samp class="menu">Editar</samp> → <samp class="menuitem">Preferencias...</samp> → <samp class="tab">E/S</samp></kbd>.</p>
+<p>Vaia a <kbd><samp class="menu">Mostrar</samp> → <samp class="menuitem">Sintetizador</samp></kbd>. Nas versións 0.95 e anteriores <kbd><samp class="menu">Editar</samp> → <samp class="menuitem">Preferencias... </samp> → </kbd>separador<kbd> <samp class="tab">E/S</samp></kbd>. </p>
 <p>A configuración inicial de SounFont é <samp>:/data/piano1.sf2</samp>. Substitúa isto pola localización do novo ficheiro SoundFont (.sf2). Prema a icona Abrir para procurar o ficheiro e abrilo.</p>
 <p>Para aplicar os cambios prema Aceptar para sair do panel de preferencias. Saia do MuseScore e volva a entrar para que se realicen as modificacións.</p>
 <h3>Problemas coñecidos</h3>
@@ -858,4 +872,3 @@ Ao premer o botón Reproducir <img src="/sites/musescore.org/files/play.png" alt
     <div class="print-links"></div>
   </body>
 </html>
-<!-- Page cached by Boost @ 2010-02-23 07:39:36, expires @ 2010-02-23 10:39:36 -->
