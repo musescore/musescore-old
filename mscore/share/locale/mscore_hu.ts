@@ -1487,6 +1487,14 @@ hiba: </translation>
         <source>down</source>
         <translation type="unfinished">le</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -2245,6 +2253,10 @@ hiba: </translation>
         <source>Cancel</source>
         <translation type="unfinished">Mégse</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2302,6 +2314,10 @@ hiba: </translation>
     <message>
         <source>Clef</source>
         <translation type="unfinished">Kulcs</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3155,10 +3171,6 @@ módosításait bezárás előtt?</translation>
         <translation type="unfinished">Megnyitás és &amp;legutóbbi</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation type="unfinished">Kivonatok...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Szerkesztés</translation>
     </message>
@@ -3560,6 +3572,17 @@ Helyreállítsa a munkamenetet?</translation>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished">Minden ismert fájl (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore fájlok (*.mscz *.mscx *.msc);;MusicXML fájlok (*.xml *.mxl);;MIDI fájlok (*.mid *.midi *.kar);;Muse Data fájlok (*.md);;Capella fájlok (*.cap);;</translation>
     </message>
+    <message>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3707,6 +3730,10 @@ Helyreállítsa a munkamenetet?</translation>
     <message>
         <source>OffTimeType:</source>
         <translation type="unfinished">OffTime Típus:</translation>
+    </message>
+    <message>
+        <source>Tuning</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4833,6 +4860,10 @@ Válassz ki egyetlen hangjegyet vagy szünetet és próbáld újra
         <source>MuseScore: Load languages failed:</source>
         <translation type="unfinished">MuseScore: Nyelvek betöltése sikertelen:</translation>
     </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -5131,6 +5162,10 @@ Próbáld más helyre menteni.</translation>
         <source>The first time signature of a piece can not be removed.</source>
         <translation type="unfinished">A darab első ütemmutatóját nem lehet törölni.</translation>
     </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5271,6 +5306,21 @@ Próbáld más helyre menteni.</translation>
     <message>
         <source>subtract from selection</source>
         <translation type="unfinished">eltávolítás a kijelölésből</translation>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Párbeszédablak</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5718,6 +5768,21 @@ Próbáld más helyre menteni.</translation>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation type="unfinished">Szövegstílus:</translation>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Legyen láthatatlan</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Legyen látható</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Szöveg tulajdonságai...</translation>
     </message>
 </context>
 <context>
@@ -8208,6 +8273,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished">Elem és hosszának törlése</translation>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">Kivonatok...</translation>
     </message>
 </context>
 <context>

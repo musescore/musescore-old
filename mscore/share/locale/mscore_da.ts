@@ -1487,6 +1487,14 @@ fejl: </translation>
         <source>down</source>
         <translation type="unfinished">ned</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished">Skift instrument...</translation>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished">+oktav</translation>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -2245,6 +2253,10 @@ fejl: </translation>
         <source>Cancel</source>
         <translation>Fortryd</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished">vis mere</translation>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2302,6 +2314,10 @@ fejl: </translation>
     <message>
         <source>Instrument List</source>
         <translation>Instrument liste</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished">vis mere</translation>
     </message>
 </context>
 <context>
@@ -2945,10 +2961,6 @@ fejl: </translation>
         <translation>Åben &amp;seneste</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation>Enkeltstemmer...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;Rediger</translation>
     </message>
@@ -3564,6 +3576,20 @@ Genskab denne session?</translation>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished">Alle understøttede filer (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Filer (*.mscz *.mscx *.msc);;MusicXML Filer (*.xml *.mxl);;MIDI Filer (*.mid *.midi *.kar);;Muse Data Filer (*.md);;Capella Filer (*.cap);;</translation>
     </message>
+    <message>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished">Scrip'et&#13;
+%1&#13;
+er ikke kompatibelt med det nuværende interface</translation>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished">MuseScore er for gammel til at køre script'et&#13;
+%1</translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3711,6 +3737,10 @@ Genskab denne session?</translation>
     <message>
         <source>OffTimeType:</source>
         <translation>OffTimeType:</translation>
+    </message>
+    <message>
+        <source>Tuning</source>
+        <translation type="unfinished">Stemning</translation>
     </message>
 </context>
 <context>
@@ -4837,6 +4867,10 @@ Vælg venligst en node eller pause of prøv igen
         <source>MuseScore: Load languages failed:</source>
         <translation type="unfinished">MuseScore: Indlæsning af sprog fejlede:</translation>
     </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
+        <translation type="unfinished">MuseScore: registrér script udvidelse</translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -5135,6 +5169,10 @@ Prøv af gemme den et andet sted.</translation>
         <source>The first time signature of a piece can not be removed.</source>
         <translation type="unfinished">Den første taktart i et stykke kan ikke fjernes</translation>
     </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished">kan ikke afgøre filtypen</translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5275,6 +5313,21 @@ Prøv af gemme den et andet sted.</translation>
     <message>
         <source>subtract from selection</source>
         <translation>træk fra det valgte</translation>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialog</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished">vis mere</translation>
     </message>
 </context>
 <context>
@@ -5722,6 +5775,21 @@ Prøv af gemme den et andet sted.</translation>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation>TekstStil:</translation>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Usynlig</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Synlig</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Tekst egenskaber...</translation>
     </message>
 </context>
 <context>
@@ -8212,6 +8280,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished">Slet element og længde</translation>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">Enkeltstemmer...</translation>
     </message>
 </context>
 <context>

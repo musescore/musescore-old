@@ -1487,6 +1487,14 @@ feilet: </translation>
         <source>down</source>
         <translation type="unfinished">Ned</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -2245,6 +2253,10 @@ feilet: </translation>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2302,6 +2314,10 @@ feilet: </translation>
     <message>
         <source>Instrument List</source>
         <translation>Liste over instrumenter</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3119,10 +3135,6 @@ før lukking?</translation>
         <translation>Åpne &amp;siste brukte</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation>Stemmer...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;Rediger</translation>
     </message>
@@ -3560,6 +3572,17 @@ Gjenopprett økt?</translation>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished">Alle støttede filtyper (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore-filer (*.mscz *.mscx *.msc);;MusicXML-filer (*.xml *.mxl);;MIDI-filer (*.mid *.midi *.kar);;Muse Data-filer (*.md);;Capella-filer (*.cap);;</translation>
     </message>
+    <message>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3706,6 +3729,10 @@ Gjenopprett økt?</translation>
     </message>
     <message>
         <source>OffTimeType:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tuning</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4833,6 +4860,10 @@ Vennligst velg én enkelt note eller pause og prøv igjen
         <source>MuseScore: Load languages failed:</source>
         <translation type="unfinished">MuseScore: Lasting av språk mislykket:</translation>
     </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -5131,6 +5162,10 @@ Prøv å lagre en annen plass.</translation>
         <source>The first time signature of a piece can not be removed.</source>
         <translation type="unfinished">Det første taktartsymbolet i et stykke kan ikke fjernes.</translation>
     </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5271,6 +5306,21 @@ Prøv å lagre en annen plass.</translation>
     <message>
         <source>subtract from selection</source>
         <translation type="unfinished">Trekk fra utvalg</translation>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialogboks</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5718,6 +5768,21 @@ Prøv å lagre en annen plass.</translation>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation>Tekststil:</translation>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Gjør usynlig</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Gjør synlig</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Egenskaper for tekst...</translation>
     </message>
 </context>
 <context>
@@ -8208,6 +8273,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished">Slett element og varighet</translation>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">Stemmer...</translation>
     </message>
 </context>
 <context>

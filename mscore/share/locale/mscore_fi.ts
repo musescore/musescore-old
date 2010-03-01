@@ -1478,6 +1478,14 @@ epäonnistui: </translation>
         <source>down</source>
         <translation type="unfinished">alas</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -2236,6 +2244,10 @@ epäonnistui: </translation>
         <source>Cancel</source>
         <translation>Peruuta</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2293,6 +2305,10 @@ epäonnistui: </translation>
     <message>
         <source>Instrument List</source>
         <translation>Instumenttiluettelo</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3032,10 +3048,6 @@ epäonnistui: </translation>
         <translation>Avaa &amp;entinen</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation>Luo stemmanuotti partituurista...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;Muokkaa</translation>
     </message>
@@ -3550,6 +3562,17 @@ Restore session?</source>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3696,6 +3719,10 @@ Restore session?</source>
     </message>
     <message>
         <source>OffTimeType:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tuning</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4823,6 +4850,10 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
         <source>MuseScore: Load languages failed:</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -5118,6 +5149,10 @@ Try saving to a different location.</source>
         <source>The first time signature of a piece can not be removed.</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5257,6 +5292,21 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>subtract from selection</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialogi</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>show more</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5705,6 +5755,21 @@ Try saving to a different location.</source>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation/>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Aseta näkymättömäksi</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Aseta näkyväksi</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Tekstin ominaisuudet...</translation>
     </message>
 </context>
 <context>
@@ -8195,6 +8260,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">Luo stemmanuotti partituurista...</translation>
     </message>
 </context>
 <context>

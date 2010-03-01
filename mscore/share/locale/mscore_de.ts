@@ -1488,6 +1488,14 @@ fehlgeschlagen: </translation>
         <source>down</source>
         <translation type="unfinished">tiefer</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -2246,6 +2254,10 @@ fehlgeschlagen: </translation>
         <source>Save</source>
         <translation>Sichern</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2303,6 +2315,10 @@ fehlgeschlagen: </translation>
     <message>
         <source>Instrument List</source>
         <translation>Instrumentenliste</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3178,10 +3194,6 @@ fehlgeschlagen: </translation>
         <translation>klingend</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation>Auszüge...</translation>
-    </message>
-    <message>
         <source>Untitled</source>
         <translation>ohneName</translation>
     </message>
@@ -3562,6 +3574,17 @@ Restore session?</source>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
         <translation type="unfinished">Alle unterstützte Dateien (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore (*.mscz *.mscx *.msc);;MusicXML (*.xml *.mxl);;MIDI (*.mid *.midi *.kar);;Muse Data (*.md);;Capella (*.cap);;</translation>
     </message>
+    <message>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -3709,6 +3732,10 @@ Restore session?</source>
     <message>
         <source>OffTimeType:</source>
         <translation>Typ Aus-Zeit</translation>
+    </message>
+    <message>
+        <source>Tuning</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4836,6 +4863,10 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
         <source>MuseScore: Load languages failed:</source>
         <translation>MuseScore: Fehler beim Laden der Übersetzungen:</translation>
     </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -5133,6 +5164,10 @@ Versuche sie woanders zu sichern.</translation>
         <source>The first time signature of a piece can not be removed.</source>
         <translation>Das erste Taktartzeichen eines Stückes kann nicht entfernt werden.</translation>
     </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5273,6 +5308,21 @@ Versuche sie woanders zu sichern.</translation>
     <message>
         <source>subtract from selection</source>
         <translation>von Selektion abziehen</translation>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialog</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5720,6 +5770,21 @@ Versuche sie woanders zu sichern.</translation>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation>Textstil:</translation>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Unsichtbar setzen</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Sichtbar setzen</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Eigenschaften Text...</translation>
     </message>
 </context>
 <context>
@@ -8207,6 +8272,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished">Element und Dauer löschen</translation>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">Auszüge...</translation>
     </message>
 </context>
 <context>
