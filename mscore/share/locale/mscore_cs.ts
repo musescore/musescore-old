@@ -1223,7 +1223,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Název</translation>
+        <translation>Jméno</translation>
     </message>
     <message>
         <source>Shortcut</source>
@@ -1278,7 +1278,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Název</translation>
+        <translation>Jméno</translation>
     </message>
     <message>
         <source>Short Name</source>
@@ -7580,7 +7580,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Ukazatel přehrávání o takt zpět</translation>
+        <translation>Přetočit</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -7612,7 +7612,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Převést</translation>
+        <translation>Transponovat</translation>
     </message>
     <message>
         <source>violin clef</source>

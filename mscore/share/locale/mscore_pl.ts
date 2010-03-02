@@ -105,7 +105,7 @@ p, li { white-space: pre-wrap; }
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>up:</source>
@@ -151,7 +151,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
 </context>
 <context>
@@ -1002,7 +1002,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>SlurFor:</source>
@@ -1021,7 +1021,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordStyleEditor</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>Chord Description File:</source>
@@ -1075,7 +1075,7 @@ p, li { white-space: pre-wrap; }
     <name>DynamicBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
 </context>
 <context>
@@ -1698,7 +1698,7 @@ niepowodzenie: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Na dół</translation>
+        <translation>W dół</translation>
     </message>
     <message>
         <source>Voice 2</source>
@@ -1948,7 +1948,7 @@ niepowodzenie: </translation>
     <name>Element</name>
     <message>
         <source>Set Invisible</source>
-        <translation>Ukryj</translation>
+        <translation>Ukryć</translation>
     </message>
     <message>
         <source>Set Visible</source>
@@ -1963,7 +1963,7 @@ niepowodzenie: </translation>
     <name>ElementBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>selectable</source>
@@ -1975,7 +1975,7 @@ niepowodzenie: </translation>
     </message>
     <message>
         <source>invalid</source>
-        <translation>brak</translation>
+        <translation>nieprawidłowy</translation>
     </message>
 </context>
 <context>
@@ -2040,7 +2040,7 @@ niepowodzenie: </translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation>Tekst:</translation>
+        <translation>Tekst</translation>
     </message>
 </context>
 <context>
@@ -2065,7 +2065,7 @@ niepowodzenie: </translation>
     <name>HairpinBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>Hairpin</source>
@@ -2182,7 +2182,7 @@ niepowodzenie: </translation>
     <name>InspectorBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>Back</source>
@@ -2271,7 +2271,7 @@ niepowodzenie: </translation>
     <name>InstrumentWizard</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>0</source>
@@ -2358,7 +2358,7 @@ niepowodzenie: </translation>
         <source>
 failed: </source>
         <translation>
-niepowodzenie: </translation>
+nie udane: </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
@@ -2407,7 +2407,7 @@ niepowodzenie: </translation>
     <name>KeyEdit</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>Create Key Signature</source>
@@ -2544,7 +2544,7 @@ niepowodzenie: </translation>
     <name>LineSegmentBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>LineSegment</source>
@@ -2583,7 +2583,7 @@ niepowodzenie: </translation>
     <name>LyricsBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -2658,7 +2658,7 @@ niepowodzenie: </translation>
     <name>MeasureBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
@@ -2673,7 +2673,7 @@ niepowodzenie: </translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation>bez ogonków</translation>
+        <translation>bez laseczek</translation>
     </message>
 </context>
 <context>
@@ -2752,7 +2752,7 @@ niepowodzenie: </translation>
     </message>
     <message>
         <source>visible</source>
-        <translation>widoczny</translation>
+        <translation>widoczne</translation>
     </message>
     <message>
         <source>c</source>
@@ -3591,7 +3591,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>Title:</source>
@@ -3700,7 +3700,7 @@ is incompatible with current interface</source>
     <name>NoteBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>head index</source>
@@ -3739,7 +3739,7 @@ is incompatible with current interface</source>
     <name>PageBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>Page</source>
@@ -4086,7 +4086,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Gł</translation>
+        <translation>Vol</translation>
     </message>
     <message>
         <source>Tmp</source>
@@ -4468,7 +4468,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Space</source>
-        <translation>Przestrzeń</translation>
+        <translation>Wielkość</translation>
     </message>
     <message>
         <source>mm</source>
@@ -4508,7 +4508,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>default</source>
-        <translation>domyślny</translation>
+        <translation>domyślne</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
@@ -4715,7 +4715,7 @@ is incompatible with current interface</source>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>Ped (Pedal)</translation>
+        <translation>Ped (Pedał)</translation>
     </message>
     <message>
         <source>* (Pedal)</source>
@@ -4868,7 +4868,7 @@ proszę zaznaczyć pojedynczą nutę lub pauzę i powtórzyć operację
     <name>RecordButton</name>
     <message>
         <source>record</source>
-        <translation>nagraj</translation>
+        <translation>nagrywanie</translation>
     </message>
 </context>
 <context>
@@ -4906,7 +4906,7 @@ proszę zaznaczyć pojedynczą nutę lub pauzę i powtórzyć operację
     </message>
     <message>
         <source>small</source>
-        <translation>małe</translation>
+        <translation>mała</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -5003,7 +5003,7 @@ proszę wybrać takt i spróbować ponownie</translation>
         <source>
 failed: </source>
         <translation>
-niepowodzenie: </translation>
+nie udało się: </translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
@@ -5015,7 +5015,7 @@ niepowodzenie: </translation>
     </message>
     <message>
         <source> failed</source>
-        <translation> niepowodzenie</translation>
+        <translation> nie udało się</translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
@@ -5129,7 +5129,7 @@ niepowodzenie: </translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Napisz styl</translation>
+        <translation>MuseScore: Zapisz styl</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
@@ -5289,7 +5289,7 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>Action</source>
-        <translation>Akcja</translation>
+        <translation>Czynność</translation>
     </message>
     <message>
         <source>replace selection</source>
@@ -5401,7 +5401,7 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Na dół</translation>
+        <translation>W dół</translation>
     </message>
 </context>
 <context>
@@ -5431,7 +5431,7 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>brak belki</translation>
+        <translation>bez belki</translation>
     </message>
     <message>
         <source>begin 1/32</source>
@@ -5446,7 +5446,7 @@ Spróbuj zapisać w innym miejscu.</translation>
     <name>SlurBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Forma</translation>
     </message>
     <message>
         <source>Slur</source>
@@ -5481,7 +5481,7 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>solid</source>
-        <translation>pogrubiona</translation>
+        <translation>stała</translation>
     </message>
     <message>
         <source>dotted</source>
@@ -5518,7 +5518,7 @@ Spróbuj zapisać w innym miejscu.</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Edycja właściwości Pięciolinii/Głosu</translation>
+        <translation>MuseScore: edytuj właściwości pięciolinii/głosu</translation>
     </message>
     <message>
         <source>Split Staff</source>

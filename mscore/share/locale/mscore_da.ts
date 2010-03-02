@@ -1477,7 +1477,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished">Ren oktav</translation>
+        <translation type="unfinished">Ren okta</translation>
     </message>
     <message>
         <source>up</source>
@@ -2207,7 +2207,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Sæt ind</translation>
+        <translation>Tilføj</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -2277,11 +2277,11 @@ fejl: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Sæt ind</translation>
+        <translation>Tilføj</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Slet</translation>
+        <translation>Fjern</translation>
     </message>
     <message>
         <source>Up</source>
@@ -2293,11 +2293,11 @@ fejl: </translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Tilføj ovenfor</translation>
+        <translation>Tilføj over</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Tilføj nedenunder</translation>
+        <translation>Tilføj under</translation>
     </message>
     <message>
         <source>1</source>
@@ -2348,7 +2348,7 @@ fejl: </translation>
         <source>
 failed: </source>
         <translation>
-fejl: </translation>
+fejlede: </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
@@ -2421,7 +2421,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Sæt ind</translation>
+        <translation>Tilføj</translation>
     </message>
 </context>
 <context>
@@ -2443,7 +2443,7 @@ fejl: </translation>
     </message>
     <message>
         <source>sp</source>
-        <translation>enh</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2671,7 +2671,7 @@ fejl: </translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation>ingen nodehals</translation>
+        <translation>uden hals</translation>
     </message>
 </context>
 <context>
@@ -2738,7 +2738,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>Uden nodehalse</translation>
+        <translation>Uden hals</translation>
     </message>
     <message>
         <source>New Row</source>
@@ -3810,7 +3810,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation>mm</translation>
+        <translation>..</translation>
     </message>
     <message>
         <source>inch</source>
@@ -4424,7 +4424,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>Standard</translation>
+        <translation>standard</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
@@ -4604,7 +4604,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation>2 sidet</translation>
+        <translation>To-sidet</translation>
     </message>
     <message>
         <source>Landscape</source>
@@ -4723,7 +4723,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>Pedal</translation>
+        <translation>Ped (Pedal)</translation>
     </message>
     <message>
         <source>* (Pedal)</source>
@@ -4918,16 +4918,16 @@ Vælg venligst en node eller pause of prøv igen
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>yderligere plads før </translation>
+        <translation>yderligere afstand før </translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>enh</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>yderligere plads efter</translation>
+        <translation>yderligere afstand efter</translation>
     </message>
 </context>
 <context>
@@ -5007,7 +5007,7 @@ vælg venligst en takt og prøv igen</translation>
         <source>
 failed: </source>
         <translation>
-fejl: </translation>
+fejlede: </translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
@@ -5016,7 +5016,7 @@ fejl: </translation>
     <message>
         <source>Open File
 </source>
-        <translation>Åben fil
+        <translation>Åbn fil
 </translation>
     </message>
     <message>
@@ -5039,7 +5039,7 @@ fejl: </translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Skriv layout-stil</translation>
+        <translation>MuseScore: Skrivning stilart</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
@@ -5063,7 +5063,7 @@ fejl: </translation>
     </message>
     <message>
         <source> failed</source>
-        <translation> fejl</translation>
+        <translation> fejlede</translation>
     </message>
     <message>
         <source>&gt; to backup &lt;</source>
@@ -5426,7 +5426,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>bjælke start</translation>
+        <translation>bjælke begynd</translation>
     </message>
     <message>
         <source>beam mid</source>
@@ -5442,7 +5442,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation>begynd 1/32</translation>
+        <translation>begyn 1/32</translation>
     </message>
     <message>
         <source>Segment:</source>
@@ -5488,7 +5488,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>solid</source>
-        <translation>gennemført</translation>
+        <translation>solid</translation>
     </message>
     <message>
         <source>dotted</source>
@@ -5525,7 +5525,7 @@ Prøv af gemme den et andet sted.</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Redigér linie/stemme egenskaber</translation>
+        <translation>MuseScore: Redigér nodelinie/stemme egenskaber</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5600,7 +5600,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation>Rum</translation>
+        <translation>Rev</translation>
     </message>
     <message>
         <source>Cho</source>
@@ -5781,11 +5781,11 @@ Prøv af gemme den et andet sted.</translation>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Usynlig</translation>
+        <translation type="unfinished">Gør usynlig</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Synlig</translation>
+        <translation type="unfinished">Gør synlig</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -5800,7 +5800,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation>Tekstlinie</translation>
+        <translation>TekstLinie</translation>
     </message>
     <message>
         <source>line width:</source>
@@ -5855,7 +5855,7 @@ Prøv af gemme den et andet sted.</translation>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>enh</translation>
+        <translation>sp</translation>
     </message>
 </context>
 <context>
@@ -5901,7 +5901,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>H</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>italic</source>
@@ -6077,7 +6077,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">System Flag</translation>
+        <translation type="unfinished">System flag</translation>
     </message>
 </context>
 <context>
@@ -6121,7 +6121,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Sæt ind</translation>
+        <translation>Tilføj</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
@@ -6473,7 +6473,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>nothing</source>
-        <translation>ingenting</translation>
+        <translation>intet</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -6507,7 +6507,7 @@ p, li { white-space: pre-wrap; }
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation>Sæt ind</translation>
+        <translation>Tilføj</translation>
     </message>
     <message>
         <source>VBox Properties...</source>
@@ -6537,7 +6537,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line Properties...</source>
-        <translation>Linie egenskaber...</translation>
+        <translation>Linie egenskaber:</translation>
     </message>
 </context>
 <context>
@@ -7299,7 +7299,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation>dobbelt-kryds</translation>
+        <translation>dobbelkryds</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -7419,7 +7419,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quit</source>
-        <translation>Afslut</translation>
+        <translation>Forlad</translation>
     </message>
     <message>
         <source>Mag</source>
@@ -7571,7 +7571,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Øvemærke</translation>
+        <translation>Øvemærker</translation>
     </message>
     <message>
         <source>Play</source>
@@ -8524,7 +8524,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>BarLine</source>
-        <translation>Taktstreg</translation>
+        <translation>TaktStreg</translation>
     </message>
     <message>
         <source>StemSlash</source>
@@ -8604,7 +8604,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hook</source>
-        <translation>Fane</translation>
+        <translation>Hak</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -8684,7 +8684,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Measure</source>
-        <translation>Takt</translation>
+        <translation>Takst</translation>
     </message>
     <message>
         <source>StaffLines</source>
@@ -8716,7 +8716,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ottava</source>
-        <translation>Ottava (anbragt over/under noden)</translation>
+        <translation>Ottava</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -8728,7 +8728,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLine</source>
-        <translation>Tekstlinie</translation>
+        <translation>TekstLinie</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -8749,7 +8749,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Slur</source>
-        <translation>Legato-bue</translation>
+        <translation>Legatobue</translation>
     </message>
     <message>
         <source>Element</source>
@@ -8970,7 +8970,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished">kryds pil op/ned</translation>
+        <translation type="unfinished">kryds pil begge</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -9002,7 +9002,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished">opløsningstegn pil op/ned</translation>
+        <translation type="unfinished">opløsningstegn pil begge</translation>
     </message>
     <message>
         <source>flat</source>
@@ -9014,7 +9014,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished">b pil op/ned</translation>
+        <translation type="unfinished">b pil begge</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -9058,7 +9058,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished">prikker</translation>
+        <translation type="unfinished">punkt</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -9258,11 +9258,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished">ufermat</translation>
+        <translation type="unfinished">ufermata</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished">dfermat</translation>
+        <translation type="unfinished">dfermata</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -9294,7 +9294,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished">tommelfinger</translation>
+        <translation type="unfinished">thumb</translation>
     </message>
     <message>
         <source>sforza to accent</source>
@@ -9358,7 +9358,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished">vend</translation>
+        <translation type="unfinished">turn</translation>
     </message>
     <message>
         <source>trill</source>
@@ -9426,7 +9426,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prall</source>
-        <translation type="unfinished">praltrille</translation>
+        <translation type="unfinished">pral-trille</translation>
     </message>
     <message>
         <source>mordent</source>
@@ -9534,7 +9534,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished">basnøgle</translation>
+        <translation type="unfinished">bas nøgle</translation>
     </message>
     <message>
         <source>cbass clef</source>

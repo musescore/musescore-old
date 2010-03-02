@@ -109,7 +109,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
@@ -1377,7 +1377,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Reine prime</translation>
+        <translation type="unfinished">Reine Prime</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -1385,99 +1385,99 @@ mislukt: </translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished">Verminderde secunde</translation>
+        <translation type="unfinished">Verlaag Tweede</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished">Kleine secunde</translation>
+        <translation type="unfinished">Verlaag Tweede</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished">Overmatige secunde</translation>
+        <translation type="unfinished">Majeur Tweede</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished">Dubbel overmatige secunde</translation>
+        <translation type="unfinished">Verhoog Tweede</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished">Verminderde terts</translation>
+        <translation type="unfinished">Verlaag Derde</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished">Verminderde terts</translation>
+        <translation type="unfinished">Mineur Derde</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished">Overmatige terts</translation>
+        <translation type="unfinished">Mineur Derde</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished">Dubbel overmatige terts</translation>
+        <translation type="unfinished">Verhoog Derde</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished">Verminderde kwart</translation>
+        <translation type="unfinished">Verlaag Vierde</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished">Reine kwart</translation>
+        <translation type="unfinished">Reine Kwart</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished">Overmatige kwart</translation>
+        <translation type="unfinished">Verhoog Vierde</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished">Verminderde kwint</translation>
+        <translation type="unfinished">Verlaag Vijfde</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished">Reine kwint</translation>
+        <translation type="unfinished">Reine Kwint</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished">Overmatige kwint</translation>
+        <translation type="unfinished">Verhoog Vijfde</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished">Verminderde sext</translation>
+        <translation type="unfinished">Verlaag Zesde</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished">Kleine sext</translation>
+        <translation type="unfinished">Mineur Zesde</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished">Grote sext</translation>
+        <translation type="unfinished">Majeur Zesde</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished">Vergrote sext</translation>
+        <translation type="unfinished">Verhoog Zesde</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished">Verminderde septiem</translation>
+        <translation type="unfinished">Verlaag Zevende</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished">Kleine septiem</translation>
+        <translation type="unfinished">Mineur Zevende</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished">Grote septiem</translation>
+        <translation type="unfinished">Majeur Zevende</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished">Vergrote septiem</translation>
+        <translation type="unfinished">Verhoog Zevende</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished">Verminderde octaaf</translation>
+        <translation type="unfinished">Verlaag Octaaf</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished">Reine octaaf</translation>
+        <translation type="unfinished">Volledig Octaaf</translation>
     </message>
     <message>
         <source>up</source>
@@ -1531,7 +1531,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>sp</source>
-        <translation>spaties</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>...</source>
@@ -1904,7 +1904,7 @@ mislukt: </translation>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation>spaties</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>Clef left margin</source>
@@ -2030,7 +2030,7 @@ mislukt: </translation>
     <name>GlissandoProperties</name>
     <message>
         <source>Text:</source>
-        <translation>Tekst:</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Show Text</source>
@@ -2086,7 +2086,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Tekst-eigenschappen...</translation>
+        <translation>Tekst-eigenschappen</translation>
     </message>
 </context>
 <context>
@@ -2305,11 +2305,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Toevoegen boven</translation>
+        <translation>Toevoegen erboven</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Toevoegen beneden</translation>
+        <translation>Toevoegen eronder</translation>
     </message>
     <message>
         <source>Instrument List</source>
@@ -2368,7 +2368,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Instrumentenlijst</translation>
+        <translation>Instrumentelijst</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
@@ -2439,7 +2439,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>sp</source>
-        <translation>spaties</translation>
+        <translation>sp</translation>
     </message>
     <message>
         <source>x:</source>
@@ -2581,7 +2581,7 @@ mislukt: </translation>
     <name>LyricsBase</name>
     <message>
         <source>End</source>
-        <translation>Einde</translation>
+        <translation>Eind</translation>
     </message>
     <message>
         <source>Form</source>
@@ -3276,7 +3276,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation>Maatstrepen</translation>
+        <translation>Barlijnen</translation>
     </message>
     <message>
         <source>1 between notes</source>
@@ -3649,14 +3649,14 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Create New Score</source>
-        <translation>Creëer een Nieuwe Partituur</translation>
+        <translation>Maak Nieuwe Partituur</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creëer een Nieuwe Partituur</translation>
+        <translation>Maak Nieuwe Partituur</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
@@ -3667,7 +3667,7 @@ is niet compactibel met de huidige interface</translation>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creëer een Nieuwe Partituur</translation>
+        <translation>Maak Nieuwe Partituur</translation>
     </message>
     <message>
         <source>Select Template File:</source>
@@ -3678,7 +3678,7 @@ is niet compactibel met de huidige interface</translation>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creëer een Nieuwe Partituur</translation>
+        <translation>Maak Nieuwe Partituur</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
@@ -3902,7 +3902,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation>Akkoord-eigenschappen</translation>
+        <translation>Akkoordeigenschappen</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -3925,7 +3925,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Naam:</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>Scale:</source>
@@ -4019,7 +4019,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Luidheid (velocity):</translation>
+        <translation>Luidheid:</translation>
     </message>
     <message>
         <source>Pitch:</source>
@@ -4054,7 +4054,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Volume</translation>
+        <translation>Vol</translation>
     </message>
     <message>
         <source>100%</source>
@@ -4504,7 +4504,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>record</source>
-        <translation>opnemen</translation>
+        <translation>Neem op</translation>
     </message>
     <message>
         <source>Expand Repeats</source>
@@ -4910,7 +4910,7 @@ Selecteer één enkele noot of rust en probeer het opnieuw
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>extra ruimte achteraan</translation>
+        <translation>extra spatie achteraan</translation>
     </message>
     <message>
         <source>Rest Properties</source>
@@ -4922,12 +4922,12 @@ Selecteer één enkele noot of rust en probeer het opnieuw
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>extra ruimte vooraan </translation>
+        <translation>extra spatie vooraan </translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>spaties</translation>
+        <translation>sp</translation>
     </message>
 </context>
 <context>
@@ -5381,7 +5381,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automatisch</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Down</source>
@@ -5393,7 +5393,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>auto</source>
-        <translation>automatisch</translation>
+        <translation>a</translation>
     </message>
     <message>
         <source>no beam</source>
@@ -5427,7 +5427,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>auto</source>
-        <translation>automatisch</translation>
+        <translation>auto</translation>
     </message>
     <message>
         <source>no beam</source>
@@ -5435,7 +5435,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation>waardestreep eind</translation>
+        <translation>waardestreep einde</translation>
     </message>
     <message>
         <source>beam mid</source>
@@ -5481,7 +5481,7 @@ mislukt: </translation>
     <name>SlurPropertyBase</name>
     <message>
         <source>solid</source>
-        <translation>vol</translation>
+        <translation>vast</translation>
     </message>
     <message>
         <source>dotted</source>
@@ -5526,7 +5526,7 @@ mislukt: </translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Bewerk Notenbalk/Partij-eigenschappen</translation>
+        <translation>MuseScore: Bewerk balk/partij eigenschappen</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5601,11 +5601,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation>Galm</translation>
+        <translation>Rev</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Volume</translation>
+        <translation>Vol</translation>
     </message>
     <message>
         <source>Sine</source>
@@ -5629,7 +5629,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Chorus</source>
-        <translation>Chorus (breder of dieper geluid)</translation>
+        <translation>Chorus</translation>
     </message>
     <message>
         <source>Depth:</source>
@@ -5637,7 +5637,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Reverb</source>
-        <translation>Galm</translation>
+        <translation>Reverb</translation>
     </message>
     <message>
         <source>Speed:</source>
@@ -5649,7 +5649,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Breedte:</translation>
+        <translation>Breedte</translation>
     </message>
     <message>
         <source>Master Tuning</source>
@@ -5741,7 +5741,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>Tussenruimte</translation>
+        <translation>Spatie</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -5782,22 +5782,22 @@ mislukt: </translation>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Maak Onzichtbaar</translation>
+        <translation type="unfinished">Maak onzichtbaar</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Maak Zichtbaar</translation>
+        <translation type="unfinished">Maak zichtbaar</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Tekst-eigenschappen...</translation>
+        <translation type="unfinished">Tekst eigenschappen...</translation>
     </message>
 </context>
 <context>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <source>ContinueText</source>
@@ -5809,7 +5809,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation>TekstLijn</translation>
+        <translation>Tekstlijn</translation>
     </message>
     <message>
         <source>BeginText</source>
@@ -5856,7 +5856,7 @@ mislukt: </translation>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>spaties</translation>
+        <translation>sp</translation>
     </message>
 </context>
 <context>
@@ -5918,7 +5918,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <source>bold</source>
@@ -5990,7 +5990,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation>Compensatie</translation>
+        <translation>Afstand</translation>
     </message>
     <message>
         <source>font face</source>
@@ -6122,11 +6122,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Kies Maatsoort</translation>
+        <translation>Creëer Maatsoort</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>voeg maatsoort aan palet toe</translation>
+        <translation>voeg maatsoort toe aan pallet</translation>
     </message>
 </context>
 <context>
@@ -6393,14 +6393,14 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Tuplet-eigenschappen...</translation>
+        <translation>Tupleteigenschappen...</translation>
     </message>
 </context>
 <context>
     <name>TupletBase</name>
     <message>
         <source>Form</source>
-        <translation>Vorm</translation>
+        <translation>Formulier</translation>
     </message>
 </context>
 <context>
@@ -6431,7 +6431,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Haak</translation>
+        <translation>Afbreken</translation>
     </message>
     <message>
         <source>bracket</source>
@@ -6470,7 +6470,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Haak</translation>
+        <translation>Afbreken</translation>
     </message>
     <message>
         <source>bracket</source>
@@ -6519,7 +6519,7 @@ p, li { white-space: pre-wrap; }
     <name>VoltaPropertyBase</name>
     <message>
         <source>Text:</source>
-        <translation>Tekst:</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Repeat List:</source>
@@ -6538,7 +6538,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line Properties...</source>
-        <translation>Lijn-eigenschappen...</translation>
+        <translation>Lijneigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -6549,7 +6549,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>none</source>
-        <translation>geen</translation>
+        <translation>niets</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -6768,7 +6768,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save</source>
-        <translation>Opslaan</translation>
+        <translation>Sla op</translation>
     </message>
     <message>
         <source>Undo</source>
@@ -6784,7 +6784,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation>Toon reële toonhoogte</translation>
+        <translation>Toon Reëele Toonhoogte</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
@@ -6828,7 +6828,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Close</source>
-        <translation>Afsluiten</translation>
+        <translation>Sluit</translation>
     </message>
     <message>
         <source>Longa</source>
@@ -7208,7 +7208,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation>herstelling</translation>
+        <translation>herstellingsteken</translation>
     </message>
     <message>
         <source>ESCAPE</source>
@@ -7268,7 +7268,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>no beam</source>
-        <translation>geen waardestreep</translation>
+        <translation>geen boog</translation>
     </message>
     <message>
         <source>Key Signatures...</source>
@@ -7900,7 +7900,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Cijfer-, Letterteken</translation>
+        <translation>Noteer Herhaling</translation>
     </message>
     <message>
         <source>Show local handbook</source>
@@ -8597,7 +8597,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Volta</source>
-        <translation>Herhalingshaak</translation>
+        <translation>Volta</translation>
     </message>
     <message>
         <source>Articulation</source>
@@ -8625,7 +8625,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Breath</source>
-        <translation>Ademhaling</translation>
+        <translation>Adem</translation>
     </message>
     <message>
         <source>Cursor</source>
@@ -8649,7 +8649,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ottava</source>
-        <translation>Octaaf</translation>
+        <translation>Ottava</translation>
     </message>
     <message>
         <source>Spacer</source>
@@ -8697,7 +8697,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation>Gebroken akkoord</translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -8970,7 +8970,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation>kruis met pijl omhoog en omlaagl</translation>
+        <translation>kruis met pijl omlaag</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -8994,15 +8994,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>hestelling met pijl omhoog</translation>
+        <translation>herstelling met pijl omhoog</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>hestelling met pijl naar beneden</translation>
+        <translation>herstelling pijl omlaag</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation>hersteliing met pijl omhoog en naar beneden</translation>
+        <translation>herstelling met pijl omlaag</translation>
     </message>
     <message>
         <source>flat</source>
@@ -9014,7 +9014,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation>mol met pijl omhoog en naar beneden</translation>
+        <translation>mol met pijl naar beneden</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -9058,7 +9058,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation>gepunt</translation>
+        <translation>punt</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -9290,7 +9290,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation>d erg lange fermata</translation>
+        <translation>d extra lange fermata</translation>
     </message>
     <message>
         <source>thumb</source>
@@ -9330,7 +9330,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>umarcato</source>
-        <translation>umarcato</translation>
+        <translation>u marcato</translation>
     </message>
     <message>
         <source>dmarcato</source>

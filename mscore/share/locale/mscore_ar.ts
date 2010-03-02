@@ -1190,7 +1190,7 @@ failed: </source>
     </message>
     <message>
         <source>Auto</source>
-        <translation>آليًّا</translation>
+        <translation>آليًا</translation>
     </message>
     <message>
         <source>Up</source>
@@ -2029,7 +2029,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation>النص:</translation>
+        <translation>نص:</translation>
     </message>
 </context>
 <context>
@@ -2077,7 +2077,7 @@ failed: </source>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">خواص النص...</translation>
+        <translation type="unfinished">خواص النصّ...</translation>
     </message>
 </context>
 <context>
@@ -2849,7 +2849,7 @@ failed: </source>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation>شِدّة الأداء</translation>
+        <translation>شدة الأداء</translation>
     </message>
     <message>
         <source>Technik</source>
@@ -2957,7 +2957,7 @@ failed: </source>
     </message>
     <message>
         <source>Voices</source>
-        <translation>أصوات</translation>
+        <translation>الأصوات</translation>
     </message>
     <message>
         <source>Preferences...</source>
@@ -3205,7 +3205,7 @@ failed: </source>
     </message>
     <message>
         <source>Text</source>
-        <translation>النصّ</translation>
+        <translation>نصّ</translation>
     </message>
     <message>
         <source>MuseScore: Clefs</source>
@@ -3433,7 +3433,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished">الخط</translation>
+        <translation type="unfinished">خط</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
@@ -5544,7 +5544,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>normal</source>
-        <translation>معتاد</translation>
+        <translation>اعتيادى</translation>
     </message>
 </context>
 <context>

@@ -2255,7 +2255,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished">Mostrar més</translation>
+        <translation type="unfinished">Mostra més</translation>
     </message>
 </context>
 <context>
@@ -2317,7 +2317,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished">Mostrar més</translation>
+        <translation type="unfinished">Mostra més</translation>
     </message>
 </context>
 <context>
@@ -4074,7 +4074,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Vol</translation>
+        <translation>Volum</translation>
     </message>
     <message>
         <source>Tmp</source>
@@ -5320,7 +5320,7 @@ Prova a desar-ho en una localització diferent.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">MuseScore: Metadades</translation>
+        <translation type="unfinished">Diàleg</translation>
     </message>
     <message>
         <source>0</source>
@@ -5458,7 +5458,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation>Lligadura d'expressió</translation>
+        <translation>Lligadura</translation>
     </message>
     <message>
         <source>Slur End</source>
@@ -5745,7 +5745,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>Espai</translation>
+        <translation>Espais</translation>
     </message>
     <message>
         <source>Text</source>
@@ -5902,7 +5902,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>Si</translation>
+        <translation>N</translation>
     </message>
     <message>
         <source>italic</source>
@@ -6018,7 +6018,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>Espai</translation>
+        <translation>Espais</translation>
     </message>
     <message>
         <source>enable text frame</source>
@@ -8749,7 +8749,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Slur</source>
-        <translation>Lligadura d'expressió</translation>
+        <translation>Lligadura</translation>
     </message>
     <message>
         <source>Element</source>
@@ -9058,7 +9058,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished">Puntejada</translation>
+        <translation type="unfinished">Puntet</translation>
     </message>
     <message>
         <source>longa up</source>

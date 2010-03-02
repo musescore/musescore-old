@@ -1215,7 +1215,7 @@ feilet: </translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automatisk</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Up</source>
@@ -1946,11 +1946,11 @@ feilet: </translation>
     <name>Element</name>
     <message>
         <source>Set Invisible</source>
-        <translation>Gjør usynlig</translation>
+        <translation>Lag usynlig</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Gjør synlig</translation>
+        <translation>Lag synlig</translation>
     </message>
     <message>
         <source>Color...</source>
@@ -1965,7 +1965,7 @@ feilet: </translation>
     </message>
     <message>
         <source>invalid</source>
-        <translation>ugyldig</translation>
+        <translation>Ugyldig</translation>
     </message>
     <message>
         <source>selectable</source>
@@ -2356,7 +2356,7 @@ feilet: </translation>
         <source>
 failed: </source>
         <translation>
-feilet: </translation>
+mislykket: </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
@@ -3256,11 +3256,11 @@ før lukking?</translation>
     </message>
     <message>
         <source>System</source>
-        <translation>Notesytem</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>System</translation>
+        <translation>Notesystem</translation>
     </message>
     <message>
         <source>Chordname</source>
@@ -3717,7 +3717,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Automatisk</translation>
+        <translation type="unfinished">Auto</translation>
     </message>
     <message>
         <source>User</source>
@@ -4008,11 +4008,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished">Fart:</translation>
+        <translation type="unfinished">Hastighet:</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished">Automatisk</translation>
+        <translation type="unfinished">Auto</translation>
     </message>
     <message>
         <source>user</source>
@@ -4087,7 +4087,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Vol</translation>
+        <translation>Volum</translation>
     </message>
     <message>
         <source>Tmp</source>
@@ -4449,7 +4449,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Score</source>
-        <translation>Partitur</translation>
+        <translation>Noteark</translation>
     </message>
     <message>
         <source>Default Paper Size</source>
@@ -4457,7 +4457,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation>Tosidig</translation>
+        <translation>Dobbeltsidig</translation>
     </message>
     <message>
         <source>Landscape</source>
@@ -4497,7 +4497,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>default</source>
-        <translation>standard</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
@@ -4605,7 +4605,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation>Hurtigtast</translation>
+        <translation>Snarvei</translation>
     </message>
     <message>
         <source>Reset to Default</source>
@@ -4681,7 +4681,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished">Notesytem</translation>
+        <translation type="unfinished">System</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4907,7 +4907,7 @@ Vennligst velg én enkelt note eller pause og prøv igjen
     </message>
     <message>
         <source>small</source>
-        <translation>liten</translation>
+        <translation>Liten</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -5004,7 +5004,7 @@ vennligst velg en takt og prøv igjen</translation>
         <source>
 failed: </source>
         <translation>
-feilet: </translation>
+mislykket: </translation>
     </message>
     <message>
         <source>removing old backup file </source>
@@ -5012,7 +5012,7 @@ feilet: </translation>
     </message>
     <message>
         <source> failed</source>
-        <translation> feilet</translation>
+        <translation> mislykket</translation>
     </message>
     <message>
         <source>&gt; to backup &lt;</source>
@@ -5183,7 +5183,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished">System</translation>
+        <translation type="unfinished">Notesystem</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
@@ -5369,7 +5369,7 @@ Prøv å lagre en annen plass.</translation>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation>Automatisk</translation>
+        <translation>auto</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -5393,7 +5393,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automatisk</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Up</source>
@@ -5415,7 +5415,7 @@ Prøv å lagre en annen plass.</translation>
     <name>ShowRestWidget</name>
     <message>
         <source>auto</source>
-        <translation>Automatisk</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -5518,7 +5518,7 @@ Prøv å lagre en annen plass.</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished">MuseScore: Rediger egenskaper for system/stemme</translation>
+        <translation type="unfinished">MuseScore: Rediger egenskaper for notesystem/stemme</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5540,7 +5540,7 @@ Prøv å lagre en annen plass.</translation>
     <name>StaffTextProperties</name>
     <message>
         <source>normal</source>
-        <translation>normal</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
@@ -5605,7 +5605,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished">Vol</translation>
+        <translation type="unfinished">Volum</translation>
     </message>
     <message>
         <source>...</source>
@@ -5633,7 +5633,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Tykkelse:</translation>
+        <translation type="unfinished">Bredde:</translation>
     </message>
     <message>
         <source>Preset:</source>
@@ -5946,7 +5946,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Farge:</translation>
+        <translation>Farge...</translation>
     </message>
     <message>
         <source>text color</source>
@@ -6038,7 +6038,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Tykkelse:</translation>
+        <translation>Bredde:</translation>
     </message>
     <message>
         <source>frame line width</source>
@@ -6110,7 +6110,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>Legg taktart til palett</translation>
+        <translation>Legg til taktart på paletten</translation>
     </message>
     <message>
         <source>Add</source>
@@ -6118,7 +6118,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation type="unfinished">Velg taktart</translation>
+        <translation type="unfinished">Opprett taktart</translation>
     </message>
 </context>
 <context>
@@ -6458,7 +6458,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>number</source>
-        <translation>Nummer</translation>
+        <translation>nummer</translation>
     </message>
     <message>
         <source>relation</source>
@@ -6466,7 +6466,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>nothing</source>
-        <translation>Ingenting</translation>
+        <translation>ingenting</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -6478,7 +6478,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bracket</source>
-        <translation>Klamme</translation>
+        <translation>klamme</translation>
     </message>
 </context>
 <context>
@@ -6537,7 +6537,7 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished">ingen</translation>
+        <translation type="unfinished">Ingen</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -7304,7 +7304,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished">Dobbel-b</translation>
+        <translation type="unfinished">Dobbel b</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -7364,7 +7364,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished">Bjelke midten</translation>
+        <translation type="unfinished">Bjelke middel</translation>
     </message>
     <message>
         <source>no beam</source>
@@ -7452,7 +7452,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Metronome</source>
-        <translation type="unfinished">Metronome</translation>
+        <translation type="unfinished">Metronom</translation>
     </message>
     <message>
         <source>Add System Text</source>
@@ -7652,7 +7652,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished">Vis i forhold til kammertone</translation>
+        <translation type="unfinished">Vis i kammertone</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -8260,7 +8260,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Slett</translation>
+        <translation type="unfinished">Delete</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
@@ -8729,7 +8729,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>System</source>
-        <translation>Notesytem</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>Compound</source>
@@ -9050,7 +9050,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished">Prikket</translation>
+        <translation type="unfinished">Punkt</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -9262,7 +9262,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished">Kort fermate opp</translation>
+        <translation type="unfinished">Kort fermate ned</translation>
     </message>
     <message>
         <source>dshortfermata</source>
@@ -9306,7 +9306,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished">Saccatissimo ned</translation>
+        <translation type="unfinished">Staccatissimo ned</translation>
     </message>
     <message>
         <source>tenuto</source>

@@ -105,7 +105,7 @@ p, li { white-space: pre-wrap; }
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation>Diálogo</translation>
+        <translation>Fromulario</translation>
     </message>
     <message>
         <source>up:</source>
@@ -151,7 +151,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation>Diálogo</translation>
+        <translation>Formulario</translation>
     </message>
 </context>
 <context>
@@ -1377,7 +1377,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Unísono Justo</translation>
+        <translation type="unfinished">Unísono</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -1413,7 +1413,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished">Tercera Aumentada</translation>
+        <translation type="unfinished">Tercera Aumentado</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
@@ -1433,7 +1433,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished">Quinta Justa</translation>
+        <translation type="unfinished">Quita Justa</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
@@ -1481,11 +1481,11 @@ fallo: </translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">arriba</translation>
+        <translation type="unfinished">subir</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">abajo</translation>
+        <translation type="unfinished">bajar</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
@@ -1675,11 +1675,11 @@ fallo: </translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Arriba</translation>
+        <translation>Hacia Arriba</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Abajo</translation>
+        <translation>Hacia Abajo</translation>
     </message>
     <message>
         <source>Voice 2</source>
@@ -2038,7 +2038,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation>Texto:</translation>
+        <translation>Texto</translation>
     </message>
 </context>
 <context>
@@ -2162,7 +2162,7 @@ fallo: </translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Ejecutar</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2239,7 +2239,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Load</source>
-        <translation>Abrir</translation>
+        <translation>Cargar</translation>
     </message>
     <message>
         <source>Save</source>
@@ -2348,7 +2348,7 @@ fallo: </translation>
         <source>
 failed: </source>
         <translation>
-fallo: </translation>
+fallido: </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
@@ -2495,7 +2495,7 @@ fallo: </translation>
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation>Extención de la linea</translation>
     </message>
     <message>
         <source>Ped (Pedal)</source>
@@ -2597,7 +2597,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation>Inicio</translation>
+        <translation>Comenzar</translation>
     </message>
     <message>
         <source>End</source>
@@ -2710,7 +2710,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Pentagramas</translation>
+        <translation>Pentagrama</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -2738,7 +2738,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>Sin Plica</translation>
+        <translation>Sin plica</translation>
     </message>
     <message>
         <source>New Row</source>
@@ -2773,7 +2773,7 @@ fallo: </translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Ejecutar</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -3394,7 +3394,7 @@ Desde el menu de "Ayuda. Intenta usar el "Manual en "Internet.</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation>Barras de Compás</translation>
+        <translation>Líneas de Compás</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -3640,7 +3640,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage2</name>
     <message>
         <source>Create New Score</source>
-        <translation>Crear Nueva Partitura</translation>
+        <translation>Crear Partitura Nueva</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
@@ -3651,7 +3651,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation>Crear Nueva Partitura</translation>
+        <translation>Crear Partitura Nueva</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
@@ -3662,7 +3662,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation>Crear Nueva Partitura</translation>
+        <translation>Crear Partitura Nueva</translation>
     </message>
     <message>
         <source>Select Template File:</source>
@@ -3673,7 +3673,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation>Crear Nueva Partitura</translation>
+        <translation>Crear Partitura Nueva</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
@@ -3769,7 +3769,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Ejecutar</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -3885,7 +3885,7 @@ is incompatible with current interface</source>
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Propiedades de Acorde</translation>
+        <translation>Propiedades del Acorde</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -4563,7 +4563,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Text</source>
-        <translation>Texto</translation>
+        <translation>Te</translation>
     </message>
     <message>
         <source>Score element colors</source>
@@ -4611,7 +4611,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Landscape</source>
-        <translation>Apaisada</translation>
+        <translation>Apaisado</translation>
     </message>
     <message>
         <source>Default duration:</source>
@@ -4909,7 +4909,7 @@ Selecciona una única nota o silencio y vuelve a intentar la operación, por fav
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation>Propiedades de Acorde</translation>
+        <translation>Propiedades del Acorde</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -4993,7 +4993,7 @@ por favor, selecciona primero un compás y vuelve a intentarlo</translation>
         <source>
 failed: </source>
         <translation>
-fallo: </translation>
+fallido: </translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
@@ -5420,7 +5420,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>inicio de grupo</translation>
+        <translation>comienzo de grupo</translation>
     </message>
     <message>
         <source>beam mid</source>
@@ -5836,7 +5836,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>Marco</translation>
+        <translation>MArco</translation>
     </message>
 </context>
 <context>
@@ -6111,7 +6111,7 @@ Intenta guardarlo en una localización distinta</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>añadir armadura a la paleta</translation>
+        <translation>añadir compás a la paleta</translation>
     </message>
     <message>
         <source>Add</source>
@@ -7609,7 +7609,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Transposición</translation>
+        <translation>Transportar</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -8518,7 +8518,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>BarLine</source>
-        <translation>Línea Divisoria</translation>
+        <translation>Barra de Compás</translation>
     </message>
     <message>
         <source>StemSlash</source>
@@ -8674,7 +8674,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>Trémolo</translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -9051,7 +9051,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished">punteado</translation>
+        <translation type="unfinished">puntillo</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -9263,27 +9263,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished">fermata corta superior</translation>
+        <translation type="unfinished">fermata superior breve</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished">fermata corta inferior</translation>
+        <translation type="unfinished">fermata inferior breve</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished">fermata larga superior</translation>
+        <translation type="unfinished">fermata superior larga</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished">fermata larga inferior</translation>
+        <translation type="unfinished">fermata inferior larga</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished">fermata extralarga superior</translation>
+        <translation type="unfinished">fermata superior extralarga</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished">fermata extralarga inferior</translation>
+        <translation type="unfinished">fermata inferior extralarga</translation>
     </message>
     <message>
         <source>thumb</source>
@@ -9303,11 +9303,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation type="unfinished">staccatissimo ascendente</translation>
+        <translation type="unfinished">staccatissimo superior</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished">staccatissimo descendente</translation>
+        <translation type="unfinished">staccatissimo inferior</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -9327,11 +9327,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dmarcato</source>
-        <translation type="unfinished">macato inferior</translation>
+        <translation type="unfinished">marcato inferior</translation>
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished">rozado</translation>
+        <translation type="unfinished">al aire</translation>
     </message>
     <message>
         <source>plus stop</source>
@@ -9351,7 +9351,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished">floreo</translation>
+        <translation type="unfinished">floreo ascendente</translation>
     </message>
     <message>
         <source>trill</source>

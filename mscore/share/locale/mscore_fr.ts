@@ -106,7 +106,7 @@ p, li { white-space: pre-wrap; }
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <translation type="unfinished">Form</translation>
     </message>
     <message>
         <source>up:</source>
@@ -939,11 +939,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">diamant</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">triangle</translation>
     </message>
     <message>
         <source>slash</source>
@@ -951,27 +951,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">croix cerclée</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ré</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">mi</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">la</translation>
     </message>
     <message>
         <source>ti</source>
@@ -983,19 +983,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ronde</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">blanche</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">noire</translation>
     </message>
     <message>
         <source>breve</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">brève</translation>
     </message>
 </context>
 <context>
@@ -1200,7 +1200,7 @@ failed: </source>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automatique</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Up</source>
@@ -1236,31 +1236,31 @@ failed: </source>
     </message>
     <message>
         <source>A</source>
-        <translation>La</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>Si</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>C</source>
-        <translation>Do</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>Ré</translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>E</source>
-        <translation>Mi</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>F</source>
-        <translation>Fa</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>G</source>
-        <translation>Sol</translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>--</source>
@@ -1279,7 +1279,7 @@ failed: </source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation>Nom complet</translation>
     </message>
     <message>
         <source>Short Name</source>
@@ -1378,7 +1378,7 @@ failed: </source>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Unisson juste</translation>
+        <translation type="unfinished">Unisson</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -1564,7 +1564,7 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
-        <translation>espace</translation>
+        <translation>esp.</translation>
     </message>
     <message>
         <source>Page fill threshold:</source>
@@ -1701,7 +1701,7 @@ failed: </source>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation>espace</translation>
+        <translation>esp.</translation>
     </message>
     <message>
         <source>shorten stems</source>
@@ -1741,19 +1741,19 @@ failed: </source>
     </message>
     <message>
         <source>Music upper margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge supérieure de la musique</translation>
     </message>
     <message>
         <source>Music lower margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge inférieure de la musique</translation>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Distance entre portées</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Distance dans l'accolade</translation>
     </message>
     <message>
         <source>System distance</source>
@@ -1761,31 +1761,31 @@ failed: </source>
     </message>
     <message>
         <source>Lyrics upper margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge supérieure des paroles</translation>
     </message>
     <message>
         <source>Lyrics lower margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge inférieure des paroles</translation>
     </message>
     <message>
         <source>V-frame upper margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge supérieure du cadre vertical</translation>
     </message>
     <message>
         <source>V-frame lower margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge inférieure du cadre vertical</translation>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Espacement (1=serré)</translation>
     </message>
     <message>
         <source>Left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge gauche</translation>
     </message>
     <message>
         <source>Right margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge droite</translation>
     </message>
     <message>
         <source>Min. note distance</source>
@@ -1793,15 +1793,15 @@ failed: </source>
     </message>
     <message>
         <source>Clef left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge à gauche de la clé</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge à gauche de l'armature</translation>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Marge gauche de l'indic. de mesure</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
@@ -1825,7 +1825,7 @@ failed: </source>
     </message>
     <message>
         <source>Shortest stem</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Plus courte hampe</translation>
     </message>
     <message>
         <source>Accidental note distance</source>
@@ -1833,7 +1833,7 @@ failed: </source>
     </message>
     <message>
         <source>Accidental distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Distance de l'altération</translation>
     </message>
     <message>
         <source>Note dot distance</source>
@@ -1841,7 +1841,7 @@ failed: </source>
     </message>
     <message>
         <source>Dot dot distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Distance point-point</translation>
     </message>
     <message>
         <source>Ledger line width</source>
@@ -1853,19 +1853,19 @@ failed: </source>
     </message>
     <message>
         <source>Hook length</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">longueur de crochet</translation>
     </message>
     <message>
         <source>Beam width</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Largeur de barre</translation>
     </message>
     <message>
         <source>Beam distance</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Distance entre barres</translation>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Longueur minimun</translation>
     </message>
     <message>
         <source>Minimum slope</source>
@@ -1889,7 +1889,7 @@ failed: </source>
     </message>
     <message>
         <source>Small clef size</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Taille des petites clés</translation>
     </message>
     <message>
         <source>Line break height</source>
@@ -1917,7 +1917,7 @@ failed: </source>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
-        <translation type="unfinished">Direction des tiges dans un contexte multi-voix</translation>
+        <translation type="unfinished">Direction des hampes dans un contexte multi-voix</translation>
     </message>
 </context>
 <context>
@@ -1981,7 +1981,7 @@ failed: </source>
     <name>ExcerptsDialog</name>
     <message>
         <source>Delete</source>
-        <translation>Supprimer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>New</source>
@@ -2039,7 +2039,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation>Texte :</translation>
+        <translation>Texte</translation>
     </message>
 </context>
 <context>
@@ -2216,11 +2216,11 @@ failed: </source>
     </message>
     <message>
         <source>Up</source>
-        <translation>Haut</translation>
+        <translation>Monter</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Bas</translation>
+        <translation>Descendre</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -2240,11 +2240,11 @@ failed: </source>
     </message>
     <message>
         <source>Load</source>
-        <translation>Ouvrir</translation>
+        <translation>Charger</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Enregistrer</translation>
+        <translation>Sauver</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2286,11 +2286,11 @@ failed: </source>
     </message>
     <message>
         <source>Up</source>
-        <translation>Haut</translation>
+        <translation>Monter</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Bas</translation>
+        <translation>Descendre</translation>
     </message>
     <message>
         <source>Add Above</source>
@@ -2298,7 +2298,7 @@ failed: </source>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Ajouter au dessous</translation>
+        <translation>Ajouter en dessous</translation>
     </message>
     <message>
         <source>1</source>
@@ -2318,7 +2318,7 @@ failed: </source>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished">Afficher</translation>
+        <translation type="unfinished">Afficher plus</translation>
     </message>
 </context>
 <context>
@@ -2349,7 +2349,7 @@ failed: </source>
         <source>
 failed: </source>
         <translation>
-échec : </translation>
+échec </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
@@ -2373,7 +2373,7 @@ failed: </source>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Liste d'instrument</translation>
+        <translation>Liste des instruments</translation>
     </message>
 </context>
 <context>
@@ -2418,7 +2418,7 @@ failed: </source>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished">ajouter l'indication de mesure à la palette</translation>
+        <translation type="unfinished">ajouter l'indication de la mesure à la  palette</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2429,7 +2429,7 @@ failed: </source>
     <name>KeyEditor</name>
     <message>
         <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished">MuseScore: les armatures</translation>
+        <translation type="unfinished">MuseScore: Armatures</translation>
     </message>
 </context>
 <context>
@@ -2444,7 +2444,7 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
-        <translation>espace</translation>
+        <translation>esp</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -2707,7 +2707,7 @@ failed: </source>
     </message>
     <message>
         <source>irregular</source>
-        <translation>incomplète</translation>
+        <translation>non-nominale</translation>
     </message>
     <message>
         <source>Staves</source>
@@ -3383,11 +3383,11 @@ Essayez plutôt dans le menu " Aide "  " Manuel en ligne ".</translation>
     </message>
     <message>
         <source>Key Signatures</source>
-        <translation type="unfinished">les armatures</translation>
+        <translation type="unfinished">Armatures</translation>
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation type="unfinished">indications de mesures</translation>
+        <translation type="unfinished">Indications de mesure</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
@@ -3447,7 +3447,7 @@ Essayez plutôt dans le menu " Aide "  " Manuel en ligne ".</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Arpèges &amp;&amp; Glissandos</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -3467,11 +3467,11 @@ Essayez plutôt dans le menu " Aide "  " Manuel en ligne ".</translation>
     </message>
     <message>
         <source>Fingering %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Doigtés %1</translation>
     </message>
     <message>
         <source>String number %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Numéro de corde %1</translation>
     </message>
     <message>
         <source>Repeat measure sign</source>
@@ -3503,7 +3503,7 @@ Essayez plutôt dans le menu " Aide "  " Manuel en ligne ".</translation>
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">écarteur de portées</translation>
     </message>
     <message>
         <source>Start beam</source>
@@ -3725,7 +3725,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automatique</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>User</source>
@@ -3815,7 +3815,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>inch</source>
-        <translation>Pouce</translation>
+        <translation>pouce</translation>
     </message>
     <message>
         <source>Even Page Margins</source>
@@ -3918,7 +3918,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom:</translation>
     </message>
     <message>
         <source>Cell Size:</source>
@@ -3973,19 +3973,19 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Vol</translation>
+        <translation>Vol.</translation>
     </message>
     <message>
         <source>Pan</source>
-        <translation>Pan</translation>
+        <translation>Pan.</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation>Rev</translation>
+        <translation>Rev.</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation>Cho</translation>
+        <translation>Chor.</translation>
     </message>
     <message>
         <source>Mute</source>
@@ -4016,15 +4016,15 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Vélocité :</translation>
+        <translation>Vélocité</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation>automatique</translation>
+        <translation>auto</translation>
     </message>
     <message>
         <source>user</source>
-        <translation>personnalisé</translation>
+        <translation>utilisateur</translation>
     </message>
     <message>
         <source>offset</source>
@@ -4040,11 +4040,11 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">barre d'outils 1</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">barre d'outils 2</translation>
     </message>
 </context>
 <context>
@@ -4076,7 +4076,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Vol</translation>
+        <translation>Vol.</translation>
     </message>
     <message>
         <source>Tmp</source>
@@ -4306,7 +4306,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Retour rapide</translation>
+        <translation>Aller au début</translation>
     </message>
     <message>
         <source>Play</source>
@@ -4346,7 +4346,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>Défaut</translation>
+        <translation>défaut</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
@@ -4702,7 +4702,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Remember last connection(s)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mémoriser la(es) dernière(s) connexion(s)</translation>
     </message>
     <message>
         <source>Update</source>
@@ -4912,7 +4912,7 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>small</source>
-        <translation>petite</translation>
+        <translation>petit</translation>
     </message>
     <message>
         <source>Chord Properties</source>
@@ -4925,7 +4925,7 @@ Veuillez sélectionner une note ou un silence et réessayez
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>espace</translation>
+        <translation>esp.</translation>
     </message>
     <message>
         <source>additional trailing space</source>
@@ -5001,7 +5001,7 @@ Veuillez sélectionner une mesure et réessayez</translation>
         <source>
 failed: </source>
         <translation>
-échec : </translation>
+échec </translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
@@ -5019,7 +5019,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore : Ecrire le style</translation>
+        <translation>MuseScore: Enregistrer le style</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
@@ -5196,7 +5196,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished">Editer le set de batterie...</translation>
+        <translation type="unfinished">Editer le jeu de batterie...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
@@ -5247,7 +5247,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Accord / Silence</translation>
+        <translation>Accord/Silence</translation>
     </message>
     <message>
         <source>Breath Segment</source>
@@ -5321,7 +5321,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Edition des métadonnées</translation>
+        <translation type="unfinished">Dialogue</translation>
     </message>
     <message>
         <source>0</source>
@@ -5378,7 +5378,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation>automatique</translation>
+        <translation>auto</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -5402,7 +5402,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automatique</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Up</source>
@@ -5424,27 +5424,27 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <name>ShowRestWidget</name>
     <message>
         <source>auto</source>
-        <translation>automatique</translation>
+        <translation>auto</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>début de la barre</translation>
+        <translation>début d'accroche</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>milieu de la barre</translation>
+        <translation>milieu d'accroche</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation>fin de la barre</translation>
+        <translation>fin d'accroche</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>pas de barre</translation>
+        <translation>pas d'accroche</translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation>début triple croche</translation>
+        <translation>début de triple-croches</translation>
     </message>
     <message>
         <source>Segment:</source>
@@ -5463,7 +5463,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Slur End</source>
-        <translation>Fin du Legato</translation>
+        <translation>Fin de la liaison</translation>
     </message>
     <message>
         <source>Staff:</source>
@@ -5490,7 +5490,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>solid</source>
-        <translation>plein</translation>
+        <translation>continu</translation>
     </message>
     <message>
         <source>dotted</source>
@@ -5527,7 +5527,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore : Editer les propriétés de la portée / partie</translation>
+        <translation>MuseScore: Editer les propriétés de la portée/partie</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5557,7 +5557,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Action midi</translation>
+        <translation>Action MIDI</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -5602,7 +5602,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation>Rev</translation>
+        <translation>Rév.</translation>
     </message>
     <message>
         <source>Cho</source>
@@ -5630,7 +5630,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Reverb</source>
-        <translation>Réverbération</translation>
+        <translation>Reverb</translation>
     </message>
     <message>
         <source>Room Size:</source>
@@ -5756,7 +5756,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation>Texte :</translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -5766,32 +5766,32 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <message>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation/>
+        <translation>Abs.</translation>
     </message>
     <message>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation/>
+        <translation>Rel.</translation>
     </message>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation/>
+        <translation>Style du texte</translation>
     </message>
 </context>
 <context>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Rendre invisible</translation>
+        <translation type="unfinished">Rendre Invisible</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Rendre visible</translation>
+        <translation type="unfinished">Rendre Visible</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Propriétés du texte...</translation>
+        <translation type="unfinished">Propriétés du texte ...</translation>
     </message>
 </context>
 <context>
@@ -5802,7 +5802,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation>Ligne de texte</translation>
+        <translation>Texte de la ligne</translation>
     </message>
     <message>
         <source>line width:</source>
@@ -5857,14 +5857,14 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>espace</translation>
+        <translation>esp</translation>
     </message>
 </context>
 <context>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore : Propriétés du texte</translation>
+        <translation>MuseScore: Propriétés du texte</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
@@ -5903,7 +5903,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>Si</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>italic</source>
@@ -6055,7 +6055,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation>mm</translation>
+        <translation>millimètres</translation>
     </message>
     <message>
         <source>Margin:</source>
@@ -6079,7 +6079,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">Etiquette du système</translation>
+        <translation type="unfinished">Texte du système</translation>
     </message>
 </context>
 <context>
@@ -6104,14 +6104,14 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation type="unfinished">MuseScore: les indications de Mesures</translation>
+        <translation type="unfinished">MuseScore: Indications de Mesures</translation>
     </message>
 </context>
 <context>
     <name>TimeDialogBase</name>
     <message>
         <source>Form</source>
-        <translation>Formulaire</translation>
+        <translation>Form</translation>
     </message>
     <message>
         <source>+</source>
@@ -6127,14 +6127,14 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation type="unfinished">Créer l'indication de mesure</translation>
+        <translation type="unfinished">Créer une indication de mesure</translation>
     </message>
 </context>
 <context>
     <name>TimesigWizard</name>
     <message>
         <source>Form</source>
-        <translation>Formulaire</translation>
+        <translation>Form</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
@@ -6394,7 +6394,7 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Propriétés du tuplet...</translation>
+        <translation>Propriétés du tuplet ...</translation>
     </message>
 </context>
 <context>
@@ -6436,7 +6436,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Crochet système</translation>
+        <translation>Crochet</translation>
     </message>
     <message>
         <source>auto bracket</source>
@@ -6471,7 +6471,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>relation</source>
-        <translation>rapport</translation>
+        <translation>relation</translation>
     </message>
     <message>
         <source>nothing</source>
@@ -6479,7 +6479,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Crochet système</translation>
+        <translation>Crochet</translation>
     </message>
     <message>
         <source>auto bracket</source>
@@ -6546,7 +6546,7 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation>Aucune</translation>
+        <translation>aucun</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -6662,7 +6662,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished">bémol flèche vers le haut</translation>
+        <translation type="unfinished">bémol flèche haut</translation>
     </message>
     <message>
         <source>flat arrow down</source>
@@ -6670,19 +6670,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished">bémol flèche vers le bas</translation>
+        <translation type="unfinished">bémol 2 flèches</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished">bécarre flèche vers le haut</translation>
+        <translation type="unfinished">bécarre flèche haut</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished">bécarre flèche vers le bas</translation>
+        <translation type="unfinished">bécarre flèche bas</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished">bécarre  flèches haut et bas</translation>
+        <translation type="unfinished">bécarre 2 flèches</translation>
     </message>
 </context>
 <context>
@@ -7373,11 +7373,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation>milieu de la barre</translation>
+        <translation>milieu d'accroche</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>pas de barre</translation>
+        <translation>pas d'accroche</translation>
     </message>
     <message>
         <source>beam 32</source>
@@ -7481,7 +7481,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Text</source>
-        <translation>Ajouter un texte</translation>
+        <translation>Ajouter du texte</translation>
     </message>
     <message>
         <source>Frame Text</source>
@@ -7505,7 +7505,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Subtitle</source>
-        <translation>Sous-titre</translation>
+        <translation>Sous Titre</translation>
     </message>
     <message>
         <source>Add Subtitle Text</source>
@@ -7577,7 +7577,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play</source>
-        <translation>Jouer</translation>
+        <translation>Lecture</translation>
     </message>
     <message>
         <source>Start or stop playback</source>
@@ -7585,7 +7585,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Retour rapide</translation>
+        <translation>Rembobiner</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -7617,7 +7617,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Transposition</translation>
+        <translation>Transposer</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -7657,11 +7657,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation>Tonalité de concert</translation>
+        <translation>Tonalité de Concert</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation>Afficher en tonalité de concert</translation>
+        <translation>Afficher dans la tonalité de concert</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -7805,7 +7805,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Search</source>
-        <translation>Rechercher</translation>
+        <translation>Recherche</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -7953,7 +7953,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show clefs palette</source>
-        <translation type="unfinished">Afficher la palette Clefs de la palette</translation>
+        <translation type="unfinished">Afficher la palette Clefs</translation>
     </message>
     <message>
         <source>Clefs...</source>
@@ -7965,7 +7965,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Key Signatures...</source>
-        <translation type="unfinished">les armatures</translation>
+        <translation type="unfinished">Armatures...</translation>
     </message>
     <message>
         <source>Show key signatures palette</source>
@@ -7981,7 +7981,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Time Signatures...</source>
-        <translation type="unfinished">indications de Mesures...</translation>
+        <translation type="unfinished">Indications de Mesures...</translation>
     </message>
     <message>
         <source>Show dynamics palette</source>
@@ -8065,11 +8065,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Flip direction</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Changer de sens</translation>
     </message>
     <message>
         <source>Flip Direction</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Changer de sens</translation>
     </message>
     <message>
         <source>Pitch up</source>
@@ -8300,7 +8300,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sforzato</source>
-        <translation>sforzato</translation>
+        <translation>accent</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -8340,19 +8340,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ouvert</source>
-        <translation>ouvert</translation>
+        <translation>corde à vide</translation>
     </message>
     <message>
         <source>plusstop</source>
-        <translation>plusstop</translation>
+        <translation>pizzicato main gauche</translation>
     </message>
     <message>
         <source>upbow</source>
-        <translation>arc vers le haut</translation>
+        <translation>poussé</translation>
     </message>
     <message>
         <source>downbow</source>
-        <translation>arc vers le bas</translation>
+        <translation>tiré</translation>
     </message>
     <message>
         <source>reverseturn</source>
@@ -8404,31 +8404,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">point d'orgue court haut</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished">point d'orgue haut court</translation>
+        <translation type="unfinished">point d'orgue court bas</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished">point d'orgue haut long</translation>
+        <translation type="unfinished">point d'orgue long haut</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished">point d'orgue bas long</translation>
+        <translation type="unfinished">point d'orgue long bas</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished">point d'orgue haut trés long</translation>
+        <translation type="unfinished">point d'orgue très long haut</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished">point d'orgue bas trés long</translation>
+        <translation type="unfinished">point d'orgue très long bas</translation>
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished">snappizzicato</translation>
+        <translation type="unfinished">pizzicato Bartok</translation>
     </message>
 </context>
 <context>
@@ -8538,7 +8538,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Crochet système</translation>
+        <translation>Accolade</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -8606,7 +8606,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hook</source>
-        <translation>Crochet</translation>
+        <translation>crochet</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -8614,7 +8614,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Marker</source>
-        <translation>Marque</translation>
+        <translation>Repère</translation>
     </message>
     <message>
         <source>Jump</source>
@@ -8638,7 +8638,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Volta</source>
-        <translation>Volta</translation>
+        <translation>Reprise</translation>
     </message>
     <message>
         <source>HairpinSegment</source>
@@ -8686,7 +8686,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Measure</source>
-        <translation>Mesure</translation>
+        <translation>Measure</translation>
     </message>
     <message>
         <source>StaffLines</source>
@@ -8718,7 +8718,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ottava</source>
-        <translation>Octaviation</translation>
+        <translation>Octava</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -8790,7 +8790,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>AccidentalBracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">parenthèse d'altération</translation>
     </message>
 </context>
 <context>
@@ -8971,7 +8971,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished">dièse 2 flèches</translation>
+        <translation type="unfinished">dièse deux flèches</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -9015,15 +9015,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished">bémol flèche vers le bas</translation>
+        <translation type="unfinished">bémol 2 flèches</translation>
     </message>
     <message>
         <source>flat slash</source>
-        <translation type="unfinished">bémol slash</translation>
+        <translation type="unfinished">bémol barré</translation>
     </message>
     <message>
         <source>flat slash2</source>
-        <translation type="unfinished">bémol slash 2</translation>
+        <translation type="unfinished">bémol double-barré</translation>
     </message>
     <message>
         <source>mirrored flat2</source>
@@ -9035,7 +9035,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirrored flat slash</source>
-        <translation type="unfinished">bémol slash miroir</translation>
+        <translation type="unfinished">bémol en miroir barré</translation>
     </message>
     <message>
         <source>flat flat</source>
@@ -9259,11 +9259,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished">point d'orgue vers le haut</translation>
+        <translation type="unfinished">point d'orgue haut</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished">point d'orgue vers le bas</translation>
+        <translation type="unfinished">point d'orgue bas</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -9271,11 +9271,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">point d'orgue court bas</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished">point d'orgue haut court</translation>
+        <translation type="unfinished">point d'orgue court haut</translation>
     </message>
     <message>
         <source>ulongfermata</source>
@@ -9311,11 +9311,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation type="unfinished">staccatissimo vers le haut</translation>
+        <translation type="unfinished">staccatissimo haut</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished">staccatissimo vers le bas</translation>
+        <translation type="unfinished">staccatissimo bas</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -9323,27 +9323,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>uportato</source>
-        <translation type="unfinished">portato vers le haut</translation>
+        <translation type="unfinished">portato haut</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation type="unfinished">portato vers le bas</translation>
+        <translation type="unfinished">portato bas</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation type="unfinished">marcato vers le haut</translation>
+        <translation type="unfinished">marcato haut</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation type="unfinished">marcato vers le bas</translation>
+        <translation type="unfinished">marcato bas</translation>
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished">ouvert</translation>
+        <translation type="unfinished">corde à vide</translation>
     </message>
     <message>
         <source>plus stop</source>
-        <translation type="unfinished">plus stop</translation>
+        <translation type="unfinished">pizzicato main gauche</translation>
     </message>
     <message>
         <source>up bow</source>
@@ -9355,11 +9355,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reverse turn</source>
-        <translation type="unfinished">tourne inversée</translation>
+        <translation type="unfinished">groupetto inversé</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished">gruppetto</translation>
+        <translation type="unfinished">groupetto</translation>
     </message>
     <message>
         <source>trill</source>
@@ -9383,7 +9383,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flageolet</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">harmonique</translation>
     </message>
     <message>
         <source>segno</source>
@@ -9411,7 +9411,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>trillelement</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">prolongement de trille</translation>
     </message>
     <message>
         <source>arpeggio arrow down</source>
@@ -9423,7 +9423,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>trill element</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">prolongement de trille</translation>
     </message>
     <message>
         <source>prall</source>
@@ -9595,7 +9595,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pedale</source>
-        <translation type="unfinished">pedale</translation>
+        <translation type="unfinished">e pedale</translation>
     </message>
     <message>
         <source>pedal ped</source>

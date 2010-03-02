@@ -833,7 +833,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Properties</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Propriedades da Nota</translation>
     </message>
     <message>
         <source>tuning offset</source>
@@ -877,11 +877,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Velocidade (0-127)</translation>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Utilizador</translation>
     </message>
     <message>
         <source>offset</source>
@@ -6520,7 +6520,7 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished">nenhum</translation>
+        <translation type="unfinished">Nenhum</translation>
     </message>
     <message>
         <source>sharp</source>
