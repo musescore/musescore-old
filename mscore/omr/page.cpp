@@ -304,7 +304,7 @@ void Page::deSkew()
       int wl    = wordsPerLine();
       int h     = height();
       uint* db  = new uint[wl * h];
-      memset(db, 0, wl * h * 4);
+      memset(db, 0, sizeof *db);
 
       foreach(const QRect& r, _slices) {
             double rot = skew(r);
@@ -350,7 +350,7 @@ void Page::deSkew()
             }
       const uchar* di = _image.bits();
       memcpy(const_cast<uchar*>(di), db, wl * h * 4);
-//      delete[] db;
+      delete[] db;
       }
 
 struct ScanLine {
@@ -393,7 +393,7 @@ int Page::xproject(const uint* p, int wl)
 double Page::xproject2(int y1)
       {
       int wl          = wordsPerLine();
-      const uint* db  = scanLine(0);
+      const uint* db  = bits();
       double val      = 0.0;
 
       int w  = wl - cropL - cropR;
@@ -410,7 +410,7 @@ double Page::xproject2(int y1)
             int incy    = (dy > 0) ? 1 : (dy < 0) ? -1 : 0;
             int ddy     = dy < 0 ? -dy : dy;
             int y       = y1;
-            if (y < 0)
+            if (y < 1)
                   y = 0;
             int err     = ddx / 2;
             for (int x = x1; x < x2;) {
@@ -448,6 +448,10 @@ double Page::xproject2(int y1)
                   if (err < 0) {
                         err += ddx;
                         y   += incy;
+                        if (y < 1)
+                              y = 1;
+                        else if (y >= height())
+                              y = height()-1;
                         }
                   ++x;
                   }
@@ -490,6 +494,7 @@ void Page::getStaffLines()
             projection[y] = 0;
       for (int y = y2; y < h; ++y)
             projection[y] = 0;
+printf("y1 %d y2 %d  h %d\n", y1, y2, h);
       for (int y = y1; y < y2; ++y)
             projection[y] = xproject2(y);
 
@@ -613,6 +618,8 @@ void Page::searchNotes(int line, int x1, int x2, int y)
 
 double Page::staffDistance() const
       {
+      if (staves.size() < 2)
+            return 5;
       return ((staves[1].y() - staves[0].y()) / _spatium) - 4.0;
       }
 
@@ -622,6 +629,8 @@ double Page::staffDistance() const
 
 double Page::systemDistance() const
       {
+      if (staves.size() < 3)
+            return 6.0;
       return ((staves[2].y() - staves[1].y()) / _spatium) - 4.0;
       }
 
