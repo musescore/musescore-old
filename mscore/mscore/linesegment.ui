@@ -1,55 +1,56 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>LineSegmentBase</class>
- <widget class="QWidget" name="LineSegmentBase" >
-  <property name="geometry" >
+ <widget class="QWidget" name="LineSegmentBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>512</width>
-    <height>167</height>
+    <width>480</width>
+    <height>131</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" >
-   <item row="0" column="0" colspan="2" >
-    <widget class="QGroupBox" name="MeasureBase_2" >
-     <property name="title" >
+  <layout class="QGridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QGroupBox" name="MeasureBase_2">
+     <property name="title">
       <string>LineSegment</string>
      </property>
-     <property name="flat" >
+     <property name="flat">
       <bool>true</bool>
      </property>
-     <layout class="QVBoxLayout" >
+     <layout class="QVBoxLayout">
       <item>
-       <layout class="QHBoxLayout" >
+       <layout class="QHBoxLayout">
         <item>
-         <widget class="QLabel" name="label" >
-          <property name="text" >
+         <widget class="QLabel" name="label">
+          <property name="text">
            <string>SegmentType:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="segmentType" >
+         <widget class="QComboBox" name="segmentType">
           <item>
-           <property name="text" >
+           <property name="text">
             <string>SINGLE</string>
            </property>
           </item>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>BEGIN</string>
            </property>
           </item>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>MIDDLE</string>
            </property>
           </item>
           <item>
-           <property name="text" >
+           <property name="text">
             <string>END</string>
            </property>
           </item>
@@ -57,10 +58,10 @@
         </item>
         <item>
          <spacer>
-          <property name="orientation" >
+          <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
             <height>20</height>
@@ -71,38 +72,38 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" >
+       <layout class="QHBoxLayout">
         <item>
-         <widget class="QLabel" name="label_2" >
-          <property name="text" >
+         <widget class="QLabel" name="label_2">
+          <property name="text">
            <string>Pos2</string>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="pos2x" />
+         <widget class="QDoubleSpinBox" name="pos2x"/>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="pos2y" />
+         <widget class="QDoubleSpinBox" name="pos2y"/>
         </item>
         <item>
-         <widget class="QLabel" name="label_3" >
-          <property name="text" >
+         <widget class="QLabel" name="label_3">
+          <property name="text">
            <string>Offset2</string>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="offset2x" />
+         <widget class="QDoubleSpinBox" name="offset2x"/>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="offset2y" />
+         <widget class="QDoubleSpinBox" name="offset2y"/>
         </item>
        </layout>
       </item>

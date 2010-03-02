@@ -118,6 +118,7 @@ Note::Note(Score* s)
       _pitch             = 0;
       _ppitch            = 0;
       _tuning            = 0.0;
+      _userAccidental    = ACC_NONE;
       _accidental        = 0;
       _mirror            = false;
       _userMirror        = DH_AUTO;
@@ -155,6 +156,7 @@ Note::Note(const Note& n)
       _tuning         = n._tuning;
       _tpc            = n._tpc;
       _line           = n._line;
+      _userAccidental = n._userAccidental;
       _accidental     = 0;
       if (n._accidental)
             add(new Accidental(*(n._accidental)));
@@ -1331,7 +1333,6 @@ void Note::setAccidentalType(int pre)
 
 void Note::changeAccidental(int accType)
       {
-#if 0
       int normalType = Accidental::value2subtype(tpc2alter(_tpc) + 2);
 
       Staff* estaff = score()->staff(staffIdx() + chord()->staffMove());
@@ -1371,28 +1372,9 @@ void Note::changeAccidental(int accType)
       // if the accidentals differ, this which means acc1 is
       // redundant and is set as an editorial accidental
 
-      if (accType != type2 && !_hidden) {
-//            printf("user acc %d  -- %d\n", accType, type2);
+      if (accType != type2 && !_hidden)
             _userAccidental = accType;    // editorial accidental
-            }
-#endif
       }
-
-//---------------------------------------------------------
-//   userAccidental
-//---------------------------------------------------------
-
-int Note::userAccidental() const
-      {
-      if (_accidental) {
-            int type = Accidental::value2subtype(tpc2alter(_tpc));
-            if (type != _accidental->subtype())
-                  return _accidental->subtype();
-            }
-      return ACC_NONE;
-      }
-
-//      void setUserAccidental(int n)   { _userAccidental = n; }
 
 //---------------------------------------------------------
 //   accidentalType

@@ -98,6 +98,7 @@ class Note : public Element {
                               ///< overlapping notes; hidden notes are not played
                               ///< and heads + accidentals are not shown
 
+      int _userAccidental;
       Accidental* _accidental;
 
       ElementList _el;        ///< fingering, other text, symbols or images
@@ -146,11 +147,11 @@ class Note : public Element {
       void changePitch(int val);
       void setTpcFromPitch();
 
-      int userAccidental() const;
       void changeAccidental(int);
       void setAccidentalType(int);
       int accidentalType() const;
 
+      int userAccidental() const      { return _userAccidental; }
       Accidental* accidental() const  { return _accidental;     }
 
       int line() const                { return _line + _lineOffset;   }
