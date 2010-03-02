@@ -1058,8 +1058,7 @@ void ChangePitch::flip()
       int f_tpc     = note->tpc();
       int f_userAcc = note->userAccidental();
 
-      note->changePitch(pitch);
-      note->setTpc(tpc);
+      note->setPitch(pitch, tpc);
       note->setAccidentalType(userAccidental);
 
       pitch          = f_pitch;
