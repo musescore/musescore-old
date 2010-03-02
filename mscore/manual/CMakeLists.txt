@@ -19,16 +19,19 @@
 #=============================================================================
 
 install(FILES
-      MuseScore-en.pdf
       MuseScore-de.pdf
+      MuseScore-en.pdf
       MuseScore-es.pdf
       MuseScore-fi.pdf
       MuseScore-fr.pdf
       MuseScore-gl.pdf
+      MuseScore-hu.pdf
       MuseScore-it.pdf
       MuseScore-nb.pdf
       MuseScore-nl.pdf
       MuseScore-pl.pdf
       MuseScore-pt-br.pdf
+      MuseScore-ro.pdf
+      MuseScore-ru.pdf
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}man
       )
