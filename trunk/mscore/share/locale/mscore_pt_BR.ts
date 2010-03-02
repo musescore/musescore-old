@@ -1377,7 +1377,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Uníssono Justo</translation>
+        <translation type="unfinished">Uníssono Perfeito</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -1481,11 +1481,11 @@ Falhou: </translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">para cima</translation>
+        <translation type="unfinished">Acima</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">para baixo</translation>
+        <translation type="unfinished">Abaixo</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
@@ -1965,7 +1965,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>invalid</source>
-        <translation>Inválido</translation>
+        <translation>inválido</translation>
     </message>
     <message>
         <source>selectable</source>
@@ -2293,11 +2293,11 @@ Falhou: </translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Adicionar acima</translation>
+        <translation>Adicionar Acima</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Adicionar abaixo</translation>
+        <translation>Adicionar Abaixo</translation>
     </message>
     <message>
         <source>1</source>
@@ -2348,7 +2348,7 @@ Falhou: </translation>
         <source>
 failed: </source>
         <translation>
-Falhou: </translation>
+falhou: </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
@@ -2372,7 +2372,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Lista de instrumentos</translation>
+        <translation>Lista de Instrumentos</translation>
     </message>
 </context>
 <context>
@@ -2487,7 +2487,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Para cima</translation>
+        <translation>Acima</translation>
     </message>
     <message>
         <source>Begin</source>
@@ -2738,7 +2738,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>Sem haste</translation>
+        <translation>Sem Haste</translation>
     </message>
     <message>
         <source>New Row</source>
@@ -4012,7 +4012,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Intensidade:</translation>
+        <translation>Ataque:</translation>
     </message>
     <message>
         <source>auto</source>
@@ -4373,7 +4373,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation>Atalho</translation>
+        <translation>Atalhos</translation>
     </message>
     <message>
         <source>Reset to Default</source>
@@ -4381,7 +4381,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Limpar</translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Define...</source>
@@ -4393,7 +4393,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Inserção de notas</translation>
+        <translation>Inserir Notas</translation>
     </message>
     <message>
         <source>Enable midi input</source>
@@ -4907,7 +4907,7 @@ Por favor, selecione uma nota ou pausa e tente novamente
     </message>
     <message>
         <source>small</source>
-        <translation>pequeno</translation>
+        <translation>pequena</translation>
     </message>
     <message>
         <source>Chord Properties</source>
@@ -4996,7 +4996,7 @@ Por favor, selecione um compasso e tente novamente</translation>
         <source>
 failed: </source>
         <translation>
-Falhou: </translation>
+falhou: </translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
@@ -5401,11 +5401,11 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Para cima</translation>
+        <translation>Para Cima</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Para baixo</translation>
+        <translation>Para Baixo</translation>
     </message>
 </context>
 <context>
@@ -5485,7 +5485,7 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>solid</source>
-        <translation>sólida</translation>
+        <translation>sólido</translation>
     </message>
     <message>
         <source>dotted</source>
@@ -5522,7 +5522,7 @@ Tente salvar em um local diferente.</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Editar propriedades de Pautas/Partes</translation>
+        <translation>MuseScore: Editar Propriedades da Pauta/Parte</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5637,7 +5637,7 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Espessura:</translation>
+        <translation>Largura:</translation>
     </message>
     <message>
         <source>Preset:</source>
@@ -5714,7 +5714,7 @@ Tente salvar em um local diferente.</translation>
     <name>Text</name>
     <message>
         <source>Text Properties...</source>
-        <translation>Propriedades de Texto...</translation>
+        <translation>Propriedades do Texto...</translation>
     </message>
     <message>
         <source>Set Invisible</source>
@@ -5859,7 +5859,7 @@ Tente salvar em um local diferente.</translation>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Propriedades de Texto</translation>
+        <translation>MuseScore: Propriedades do Texto</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
@@ -5898,7 +5898,7 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation>N</translation>
     </message>
     <message>
         <source>italic</source>
@@ -5958,7 +5958,7 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation>Compensação</translation>
+        <translation>Deslocamento</translation>
     </message>
     <message>
         <source>X:</source>
@@ -6042,7 +6042,7 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Espessura:</translation>
+        <translation>Espessura</translation>
     </message>
     <message>
         <source>frame line width</source>
@@ -6250,11 +6250,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Para cima</translation>
+        <translation type="unfinished">Acima</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Para baixo</translation>
+        <translation type="unfinished">Abaixo</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -6431,7 +6431,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Colchete reto</translation>
+        <translation>Colchete</translation>
     </message>
     <message>
         <source>auto bracket</source>
@@ -6474,7 +6474,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Colchete reto</translation>
+        <translation>Colchete</translation>
     </message>
     <message>
         <source>auto bracket</source>
@@ -6534,7 +6534,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line Properties...</source>
-        <translation>Propriedades da linha...</translation>
+        <translation>Propriedades da Linha...</translation>
     </message>
 </context>
 <context>
@@ -6553,7 +6553,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation>dobrado sustenido</translation>
+        <translation>duplo sustenido</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -6904,31 +6904,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>A</source>
-        <translation>A</translation>
+        <translation>Lá</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation>Si</translation>
     </message>
     <message>
         <source>C</source>
-        <translation>C</translation>
+        <translation>Dó</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
+        <translation>Ré</translation>
     </message>
     <message>
         <source>E</source>
-        <translation>E</translation>
+        <translation>Mi</translation>
     </message>
     <message>
         <source>F</source>
-        <translation>F</translation>
+        <translation>Fá</translation>
     </message>
     <message>
         <source>G</source>
-        <translation>G</translation>
+        <translation>Sol</translation>
     </message>
     <message>
         <source>Add A</source>
@@ -7368,11 +7368,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation>meio da barra de ligação</translation>
+        <translation>barra de ligação: meio</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>sem barra de ligação</translation>
+        <translation>barra de ligação: nenhuma</translation>
     </message>
     <message>
         <source>beam 32</source>
@@ -7568,7 +7568,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Marca de ensaio</translation>
+        <translation>Marcação de ensaio</translation>
     </message>
     <message>
         <source>Play</source>
@@ -8533,7 +8533,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Colchete reto</translation>
+        <translation>Colchete de Sistema</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -8601,7 +8601,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hook</source>
-        <translation>Dobra</translation>
+        <translation>Colchete</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -9054,7 +9054,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished">pontilhada</translation>
+        <translation type="unfinished">ponto</translation>
     </message>
     <message>
         <source>longa up</source>

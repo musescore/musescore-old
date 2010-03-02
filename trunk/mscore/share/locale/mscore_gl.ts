@@ -1243,7 +1243,7 @@ fallou: </translation>
     </message>
     <message>
         <source>C</source>
-        <translation>do</translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>D</source>
@@ -1965,7 +1965,7 @@ fallou: </translation>
     </message>
     <message>
         <source>invalid</source>
-        <translation>non válido</translation>
+        <translation>non é válido</translation>
     </message>
     <message>
         <source>selectable</source>
@@ -2297,7 +2297,7 @@ fallou: </translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Engadir por embaixo</translation>
+        <translation>Engadir por debaixo</translation>
     </message>
     <message>
         <source>1</source>
@@ -2328,7 +2328,7 @@ fallou: </translation>
     </message>
     <message>
         <source>Clef</source>
-        <translation>Clave</translation>
+        <translation>Chave</translation>
     </message>
     <message>
         <source>MuseScore: Save Instrument List</source>
@@ -2597,11 +2597,11 @@ fallou: </translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation>Comezo</translation>
+        <translation>Comezar</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>Fin</translation>
+        <translation>Rematar</translation>
     </message>
     <message>
         <source>Middle</source>
@@ -2858,7 +2858,7 @@ fallou: </translation>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation>Expresión</translation>
+        <translation>Dinámica</translation>
     </message>
     <message>
         <source>Technik</source>
@@ -3394,7 +3394,7 @@ No canto disto, escoller "Manual en liña" no menú "Axuda".</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished">Barras divisorias</translation>
+        <translation type="unfinished">Liñas divisorias</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -3645,7 +3645,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage2</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creación dunha partitura nova</translation>
+        <translation>Crear unha partitura nova</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
@@ -3656,7 +3656,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creación dunha partitura nova</translation>
+        <translation>Crear unha partitura nova</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
@@ -3667,7 +3667,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creación dunha partitura nova</translation>
+        <translation>Crear unha partitura nova</translation>
     </message>
     <message>
         <source>Select Template File:</source>
@@ -3678,7 +3678,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation>Creación dunha partitura nova</translation>
+        <translation>Crear unha partitura nova</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
@@ -3917,7 +3917,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nome:</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Cell Size:</source>
@@ -4276,7 +4276,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Width</source>
-        <translation>Anchura</translation>
+        <translation>Largo</translation>
     </message>
     <message>
         <source>Height</source>
@@ -4340,7 +4340,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Entrada de nota</translation>
+        <translation>Introdución de notas</translation>
     </message>
     <message>
         <source>Enable midi input</source>
@@ -4384,7 +4384,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Ir ao comezo</translation>
+        <translation>Rebobinar</translation>
     </message>
     <message>
         <source>Play</source>
@@ -4914,11 +4914,11 @@ Seleccione unha única nota ou silencio e tente a operación de novo
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation>Propiedades do acorde</translation>
+        <translation>Propiedades do acrodo</translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>espazo adicional antes </translation>
+        <translation>espazo adicional ao comezo </translation>
     </message>
     <message>
         <source>sp</source>
@@ -4927,7 +4927,7 @@ Seleccione unha única nota ou silencio e tente a operación de novo
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>espazo adicional despois</translation>
+        <translation>espazo adicional ao final</translation>
     </message>
 </context>
 <context>
@@ -5016,7 +5016,7 @@ fallou: </translation>
     <message>
         <source>Open File
 </source>
-        <translation>Abrir ficheiro
+        <translation>Abrir un ficheiro
 </translation>
     </message>
     <message>
@@ -5163,7 +5163,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation type="unfinished">Musescore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5426,23 +5426,23 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>comezo da barra</translation>
+        <translation>inicio de unión</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>centro da barra</translation>
+        <translation>metade de unión</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation>final da barra</translation>
+        <translation>final de unión</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>sen barra</translation>
+        <translation>sen unión</translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation>comezar 1/32</translation>
+        <translation>comezar fusa</translation>
     </message>
     <message>
         <source>Segment:</source>
@@ -5525,7 +5525,7 @@ Tente gardar nun sitio diferente.</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished">MuseScore: Modificar as propiedades do pentagrama/parte</translation>
+        <translation type="unfinished">Musescore: Modificar as propiedades do pentagrama/parte</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5555,7 +5555,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Acción de Midi</translation>
+        <translation>Acción Midi</translation>
     </message>
     <message>
         <source>normal</source>
@@ -5604,7 +5604,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation>Coro</translation>
+        <translation>Cho</translation>
     </message>
     <message>
         <source>master volume</source>
@@ -5640,7 +5640,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Anchura:</translation>
+        <translation>Largo</translation>
     </message>
     <message>
         <source>Preset:</source>
@@ -5800,7 +5800,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation>LiñaDeTexto</translation>
+        <translation>Liña de texto</translation>
     </message>
     <message>
         <source>line width:</source>
@@ -5862,7 +5862,7 @@ Tente gardar nun sitio diferente.</translation>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Propiedades do texto</translation>
+        <translation>Musescore: Propiedades do texto</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
@@ -6045,7 +6045,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Anchura:</translation>
+        <translation>Largo:</translation>
     </message>
     <message>
         <source>frame line width</source>
@@ -6125,7 +6125,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation type="unfinished">Cree a marca de tempo</translation>
+        <translation type="unfinished">Crear a marca de tempo</translation>
     </message>
 </context>
 <context>
@@ -6266,7 +6266,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Unísono perfecto</translation>
+        <translation type="unfinished">Unísono xusto</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -6274,7 +6274,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished">Segunda diminuída</translation>
+        <translation type="unfinished">Segunda aumentada</translation>
     </message>
     <message>
         <source>Minor Second</source>
@@ -6389,7 +6389,7 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Propiedades do grupo artificial...</translation>
+        <translation>Propiedades do grupo artificial</translation>
     </message>
 </context>
 <context>
@@ -6541,7 +6541,7 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation>ningunha</translation>
+        <translation>ningún</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -7304,7 +7304,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">becuadro</translation>
+        <translation type="unfinished">becadro</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -7368,7 +7368,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished">centro da barra</translation>
+        <translation type="unfinished">medio de barra</translation>
     </message>
     <message>
         <source>no beam</source>
@@ -7416,7 +7416,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished">Sair</translation>
+        <translation type="unfinished">Saír</translation>
     </message>
     <message>
         <source>Mag</source>
@@ -7424,7 +7424,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation type="unfinished">Ampliación do lenzo</translation>
+        <translation type="unfinished">Ampliar o lenzo</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -7580,7 +7580,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rewind</source>
-        <translation type="unfinished">Ir ao comezo</translation>
+        <translation type="unfinished">Rebobinar</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -7652,11 +7652,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation type="unfinished">Diapasón de concerto</translation>
+        <translation type="unfinished">Nota de concerto</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished">Mostrar en diapasón de concerto</translation>
+        <translation type="unfinished">Mostrar en nota de concerto</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -8072,7 +8072,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Arriba</translation>
+        <translation type="unfinished">arriva</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -8311,7 +8311,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished">staccatissimo abaixo</translation>
+        <translation type="unfinished">staccatissimo dereito</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -8521,7 +8521,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>BarLine</source>
-        <translation>BarraDivisoria</translation>
+        <translation>Barra divisoria</translation>
     </message>
     <message>
         <source>StemSlash</source>
@@ -8717,7 +8717,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ottava</source>
-        <translation>Octava</translation>
+        <translation>Oitava</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -8729,7 +8729,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLine</source>
-        <translation>LiñaDeTexto</translation>
+        <translation>Liña de texto</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -8749,7 +8749,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Slur</source>
-        <translation>Ligadura de expresión</translation>
+        <translation>Ligadura</translation>
     </message>
     <message>
         <source>Element</source>
@@ -8962,7 +8962,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished">sostenido con frecha arriba</translation>
+        <translation type="unfinished">sostenido con frecha encima</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
@@ -8986,7 +8986,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">becuadro</translation>
+        <translation type="unfinished">natural</translation>
     </message>
     <message>
         <source>natural arrow up</source>
@@ -9010,7 +9010,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished">sostenido con dúas frechas</translation>
+        <translation type="unfinished">bemol con dúas frechas</translation>
     </message>
     <message>
         <source>flat slash</source>

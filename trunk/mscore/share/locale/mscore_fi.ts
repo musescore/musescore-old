@@ -2363,7 +2363,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Instumenttiluettelo</translation>
+        <translation>Instrumenttiluettelo</translation>
     </message>
 </context>
 <context>
@@ -8512,7 +8512,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line</source>
-        <translation>Viiva</translation>
+        <translation>Liiva</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -8724,7 +8724,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <translation>Soinnussa</translation>
+        <translation>Sointu</translation>
     </message>
     <message>
         <source>Slur</source>

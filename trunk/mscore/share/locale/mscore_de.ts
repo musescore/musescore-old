@@ -1378,7 +1378,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Prime</translation>
+        <translation type="unfinished">Reine Prime</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -1390,11 +1390,11 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished">Kleine Sekunde</translation>
+        <translation type="unfinished">kleine Sekunde</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished">Große Sekunde</translation>
+        <translation type="unfinished">große Sekunde</translation>
     </message>
     <message>
         <source>Augmented Second</source>
@@ -1402,7 +1402,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished">Verminderte Sekunde</translation>
+        <translation type="unfinished">Verminderte Terz</translation>
     </message>
     <message>
         <source>Minor Third</source>
@@ -1414,11 +1414,11 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished">Übermäßige Terz</translation>
+        <translation type="unfinished">übermäßige Terz</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished">Verminderte Quarte</translation>
+        <translation type="unfinished">verminderte Quarte</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
@@ -1426,11 +1426,11 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished">Übermäßige Quarte</translation>
+        <translation type="unfinished">übermäßige Quarte</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished">Verminderte Quinte</translation>
+        <translation type="unfinished">verminderte Quinte</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
@@ -1438,43 +1438,43 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished">Übermäßige Quinte</translation>
+        <translation type="unfinished">übermäßige Quinte</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished">Verminderte Sexte</translation>
+        <translation type="unfinished">verminderte Sexte</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished">Kleine Sexte</translation>
+        <translation type="unfinished">kleine Sexte</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished">Große Sexte</translation>
+        <translation type="unfinished">große Sexte</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished">Übermäßige Sexte</translation>
+        <translation type="unfinished">übermäßige Sexte</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished">Verminderte Septime</translation>
+        <translation type="unfinished">verminderte Septime</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished">Kleine Septime</translation>
+        <translation type="unfinished">kleine Septime</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished">Große Septime</translation>
+        <translation type="unfinished">große Septime</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished">Übermäßige Septime</translation>
+        <translation type="unfinished">übermäßige Septime</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished">Verminderte Oktave</translation>
+        <translation type="unfinished">verminderte Oktave</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
@@ -1928,7 +1928,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Abbruch</translation>
     </message>
     <message>
         <source>BPM:</source>
@@ -1947,11 +1947,11 @@ fehlgeschlagen: </translation>
     <name>Element</name>
     <message>
         <source>Set Invisible</source>
-        <translation>Unsichtbar setzen</translation>
+        <translation>Unsichtbar machen</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Sichtbar setzen</translation>
+        <translation>Sichtbar machen</translation>
     </message>
     <message>
         <source>Color...</source>
@@ -2087,7 +2087,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Eigenschaften Text...</translation>
+        <translation>Texteigenschaften...</translation>
     </message>
 </context>
 <context>
@@ -2167,7 +2167,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Abbruch</translation>
     </message>
 </context>
 <context>
@@ -2208,7 +2208,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Zufügen</translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -2244,7 +2244,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Abbruch</translation>
     </message>
     <message>
         <source>Load</source>
@@ -2278,7 +2278,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Zufügen</translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -2294,11 +2294,11 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>oben Hinzufügen</translation>
+        <translation>Hinzufügen oberhalb</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>unten Hinzufügen</translation>
+        <translation>Hinzufügen unterhalb</translation>
     </message>
     <message>
         <source>1</source>
@@ -2329,7 +2329,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Clef</source>
-        <translation>Schlüssel</translation>
+        <translation>Notenschlüssel</translation>
     </message>
     <message>
         <source>MuseScore: Save Instrument List</source>
@@ -2422,7 +2422,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Zufügen</translation>
+        <translation>Hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -2672,7 +2672,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation>ohne Notenhals</translation>
+        <translation>halslos</translation>
     </message>
 </context>
 <context>
@@ -2739,7 +2739,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>kein Notenhals</translation>
+        <translation>Halslos</translation>
     </message>
     <message>
         <source>New Row</source>
@@ -2774,7 +2774,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Abbruch</translation>
     </message>
     <message>
         <source>Append empty measures:</source>
@@ -2963,7 +2963,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation>Dynamikzeichen</translation>
+        <translation>Dynamik</translation>
     </message>
     <message>
         <source>Symbols</source>
@@ -3640,7 +3640,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage2</name>
     <message>
         <source>Create New Score</source>
-        <translation>Neue Partitur erzeugen</translation>
+        <translation>Erzeuge neue Partitur</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
@@ -3651,7 +3651,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation>Neue Partitur erzeugen</translation>
+        <translation>Erzeuge neue Partitur</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
@@ -3662,7 +3662,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation>Neue Partitur erzeugen</translation>
+        <translation>Erzeuge neue Partitur</translation>
     </message>
     <message>
         <source>Select Template File:</source>
@@ -3673,7 +3673,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation>Neue Partitur erzeugen</translation>
+        <translation>Erzeuge neue Partitur</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
@@ -3769,7 +3769,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Abbruch</translation>
     </message>
     <message>
         <source>mm</source>
@@ -3885,7 +3885,7 @@ is incompatible with current interface</source>
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Eigenschaften Akkord/Note</translation>
+        <translation>Eigenschaften Akkord</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -4069,7 +4069,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Vol</translation>
+        <translation>Lautstärke</translation>
     </message>
     <message>
         <source>Tmp</source>
@@ -4223,7 +4223,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>default</source>
-        <translation>standard</translation>
+        <translation>Vorgabe</translation>
     </message>
     <message>
         <source>48000</source>
@@ -4303,7 +4303,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation>Abkürzung</translation>
+        <translation>Kürzel</translation>
     </message>
     <message>
         <source>Reset to Default</source>
@@ -4335,7 +4335,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Play</source>
-        <translation>Wiedergabe</translation>
+        <translation>Abspielen</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -4347,7 +4347,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>record</source>
-        <translation>Aufnahme</translation>
+        <translation>aufnehmen</translation>
     </message>
     <message>
         <source>192000</source>
@@ -4624,7 +4624,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation>Maßstab</translation>
+        <translation>Skalierung</translation>
     </message>
     <message>
         <source>Space</source>
@@ -4872,7 +4872,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
     <name>RecordButton</name>
     <message>
         <source>record</source>
-        <translation>Aufnahme</translation>
+        <translation>aufnehmen</translation>
     </message>
 </context>
 <context>
@@ -4910,7 +4910,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation>Eigenschaften Akkord/Note</translation>
+        <translation>Eigenschaften Akkord</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -5016,7 +5016,7 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Stildatei schreiben</translation>
+        <translation>MuseScore: Stil speichern</translation>
     </message>
     <message>
         <source>MuseScore: transpose</source>
@@ -5189,7 +5189,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Editiere Drumset...</translation>
+        <translation>Drumset editieren...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
@@ -5364,7 +5364,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Abbruch</translation>
     </message>
 </context>
 <context>
@@ -5468,7 +5468,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation>Haltebogen</translation>
+        <translation>Bindebogen</translation>
     </message>
 </context>
 <context>
@@ -5623,7 +5623,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Reverb</source>
-        <translation>Reverb</translation>
+        <translation>Hall</translation>
     </message>
     <message>
         <source>Room Size:</source>
@@ -5647,7 +5647,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Chorus</source>
-        <translation>Chorus</translation>
+        <translation>Chor</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -5712,15 +5712,15 @@ Versuche sie woanders zu sichern.</translation>
     <name>Text</name>
     <message>
         <source>Text Properties...</source>
-        <translation>Eigenschaften Text...</translation>
+        <translation>Texteigenschaften...</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Unsichtbar setzen</translation>
+        <translation>Ausblenden</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Sichtbar setzen</translation>
+        <translation>Einblenden</translation>
     </message>
 </context>
 <context>
@@ -5818,11 +5818,11 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Unsichtbar setzen</translation>
+        <translation>Unsichtbar machen</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Sichtbar setzen</translation>
+        <translation>Sichtbar machen</translation>
     </message>
 </context>
 <context>
@@ -5857,7 +5857,7 @@ Versuche sie woanders zu sichern.</translation>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Eigenschaften Text</translation>
+        <translation>EditMuseScore: Texteigenschaften</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
@@ -6004,7 +6004,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>MM</source>
-        <translation>mm</translation>
+        <translation>MM</translation>
     </message>
     <message>
         <source>offset in Space units</source>
@@ -6020,7 +6020,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>Rahmen</translation>
+        <translation>Ramen</translation>
     </message>
     <message>
         <source>draw circled frame</source>
@@ -6072,7 +6072,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">System Flag</translation>
+        <translation type="unfinished">Systemschalter</translation>
     </message>
 </context>
 <context>
@@ -6112,15 +6112,15 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>Taktart der Palette zufügen</translation>
+        <translation>Taktart zu Palette hinzufügen</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Zufügen</translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Taktart wählen</translation>
+        <translation>Erzeuge Taktart</translation>
     </message>
 </context>
 <context>
@@ -6162,7 +6162,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Taktart</translation>
+        <translation>Taktarten</translation>
     </message>
 </context>
 <context>
@@ -6461,11 +6461,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>relation</source>
-        <translation>Relation</translation>
+        <translation>Verhältnis</translation>
     </message>
     <message>
         <source>nothing</source>
-        <translation>nichts</translation>
+        <translation>keine</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -6473,7 +6473,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>Automatische Klammer</translation>
+        <translation>automatische Klammer</translation>
     </message>
     <message>
         <source>bracket</source>
@@ -6499,7 +6499,7 @@ p, li { white-space: pre-wrap; }
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation>Zufügen</translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>VBox Properties...</source>
@@ -6510,7 +6510,7 @@ p, li { white-space: pre-wrap; }
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation>Eigenschaften Volta</translation>
+        <translation>Volta Eigenschaften</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -6529,14 +6529,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line Properties...</source>
-        <translation>Eigenschaften Linie...</translation>
+        <translation>Linieneigenschaften...</translation>
     </message>
 </context>
 <context>
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation>kein</translation>
+        <translation>keine</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -7291,7 +7291,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished">doppelkreuz</translation>
+        <translation type="unfinished">Doppel-Kreuz</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -7299,7 +7299,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">Auflösungszeichen</translation>
+        <translation type="unfinished">Auflösung</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -7471,7 +7471,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Text</source>
-        <translation type="unfinished">Text zufügen</translation>
+        <translation type="unfinished">Text hinzufügen</translation>
     </message>
     <message>
         <source>Frame Text</source>
@@ -7531,7 +7531,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="unfinished">Copyright</translation>
+        <translation type="unfinished">Urheberschutz</translation>
     </message>
     <message>
         <source>Add Copyright Text</source>
@@ -7567,7 +7567,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished">Wiedergabe</translation>
+        <translation type="unfinished">Abspielen</translation>
     </message>
     <message>
         <source>Start or stop playback</source>
@@ -7607,7 +7607,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished">Transponiere</translation>
+        <translation type="unfinished">Transponieren</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -8740,7 +8740,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Slur</source>
-        <translation>Haltebogen</translation>
+        <translation>Bindebogen</translation>
     </message>
     <message>
         <source>Element</source>
@@ -8961,7 +8961,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished">Kreuz Pfeil beide</translation>
+        <translation type="unfinished">Kreuz Pfeil unten</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -8981,7 +8981,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">Auflösungszeichen</translation>
+        <translation type="unfinished">Auflösung</translation>
     </message>
     <message>
         <source>natural arrow up</source>
@@ -9049,7 +9049,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished">Punktiert</translation>
+        <translation type="unfinished">Punkt</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -9309,7 +9309,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tenuto</source>
-        <translation type="unfinished">Tenuto</translation>
+        <translation type="unfinished">Tenuto (ausgehalten)</translation>
     </message>
     <message>
         <source>uportato</source>

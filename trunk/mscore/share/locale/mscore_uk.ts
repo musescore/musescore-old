@@ -2673,7 +2673,7 @@ failed: </source>
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished">без штилів</translation>
+        <translation type="unfinished">без штилю</translation>
     </message>
 </context>
 <context>
@@ -3190,7 +3190,7 @@ before closing?</source>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Дужка</translation>
+        <translation>Аколода</translation>
     </message>
     <message>
         <source>Akkolade</source>
@@ -4223,7 +4223,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>default</source>
-        <translation>по умовчанню</translation>
+        <translation>за умовчанням</translation>
     </message>
     <message>
         <source>48000</source>
@@ -5043,7 +5043,7 @@ please select a measure and try again</source>
     </message>
     <message>
         <source> failed</source>
-        <translation> невдалося</translation>
+        <translation> не вдалося</translation>
     </message>
     <message>
         <source>&gt; to backup &lt;</source>
@@ -5898,7 +5898,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>B</source>
-        <translation>Сі</translation>
+        <translation>Ж</translation>
     </message>
     <message>
         <source>italic</source>
@@ -6014,7 +6014,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished">Пробіл</translation>
+        <translation type="unfinished">пробіли</translation>
     </message>
     <message>
         <source>enable text frame</source>
@@ -6122,7 +6122,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation type="unfinished">Вкажіть розмір такту</translation>
+        <translation type="unfinished">Створити тактовий розмір</translation>
     </message>
 </context>
 <context>
@@ -6167,7 +6167,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Розмір такту</translation>
+        <translation>Тактовий розмір</translation>
     </message>
 </context>
 <context>
@@ -6482,7 +6482,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bracket</source>
-        <translation>акколада</translation>
+        <translation>дужка</translation>
     </message>
 </context>
 <context>
@@ -7368,7 +7368,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished">середина в’язка</translation>
+        <translation type="unfinished">середина в’язки</translation>
     </message>
     <message>
         <source>no beam</source>
