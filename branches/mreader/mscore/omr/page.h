@@ -69,6 +69,7 @@ class Page {
       int width() const                  { return _image.width(); }
       int height() const                 { return _image.height(); }
       const uint* scanLine(int y) const  { return (const uint*)_image.scanLine(y); }
+      const uint* bits() const           { return (const uint*)_image.bits(); }
       int wordsPerLine() const           { return (_image.bytesPerLine() + 3)/4; }
 
       const QList<QLine>& sl()           { return lines;    }

@@ -25,6 +25,7 @@
 #include "page.h"
 #include "pdf.h"
 #include "ocr.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   Omr
@@ -33,12 +34,14 @@
 Omr::Omr()
       {
       _ocr = 0;
+      initUtils();
       }
 
 Omr::Omr(const QString& p)
       {
       _path = p;
       _ocr = 0;
+      initUtils();
       }
 
 //---------------------------------------------------------

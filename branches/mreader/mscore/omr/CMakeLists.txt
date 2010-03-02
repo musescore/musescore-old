@@ -58,5 +58,5 @@ add_library (
 
 set_target_properties( omr
    PROPERTIES COMPILE_FLAGS
-      "-O3 -include ${PROJECT_BINARY_DIR}/all.h -I /usr/include/poppler"
+      "-O3 -g -include ${PROJECT_BINARY_DIR}/all.h -I /usr/include/poppler"
    )
