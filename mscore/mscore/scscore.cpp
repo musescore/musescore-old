@@ -219,7 +219,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return qScriptValueFromValue(context->engine(), score->saveAudio(s, ext, sf));
                         }
                   else if (argc == 2)
-                        return qScriptValueFromValue(context->engine(), score->saveAs(false, s, ext));
+                        return qScriptValueFromValue(context->engine(), score->saveAs(true, s, ext));
                   else if (argc == 6 && ext == "png") {
                         bool screenshot  = context->argument(2).toBool();
                         bool transparent = context->argument(3).toBool();
