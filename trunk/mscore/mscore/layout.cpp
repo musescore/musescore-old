@@ -1287,6 +1287,15 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               if (s->element(track) == 0) {
                                     TimeSig* ts = new TimeSig(this, sig2.fraction().denominator(),
                                        sig2.fraction().numerator());
+                                    Measure* nm = m->nextMeasure();
+                                    if(nm){
+                                        Segment* tss = nm->findSegment(Segment::SegTimeSig, tick);
+                                        if(tss){
+                                            TimeSig* nts = (TimeSig*)tss->element(0);
+                                            if(nts)
+                                                ts->setSubtype(nts->subtype());
+                                            }
+                                        }
                                     ts->setTrack(track);
                                     ts->setGenerated(true);
                                     ts->setMag(ts->staff()->mag());
