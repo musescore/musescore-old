@@ -181,6 +181,8 @@ void UndoStack::push(UndoCommand* cmd)
       {
       if (!curCmd) {
             printf("UndoStack:push(): no active command\n");
+            cmd->redo();
+            delete cmd;
             return;
             }
       curCmd->appendChild(cmd);
@@ -359,9 +361,7 @@ void SaveState::undo()
       {
       redoInputState = score->inputState();
       redoSelection  = score->selection();
-//      redoSelection.clearElements();
       score->setInputState(undoInputState);
-//      undoSelection.searchSelectedElements();
       score->setSelection(undoSelection);
       }
 
@@ -369,9 +369,7 @@ void SaveState::redo()
       {
       undoInputState = score->inputState();
       undoSelection  = score->selection();
-//      undoSelection.clearElements();
       score->setInputState(redoInputState);
-//      redoSelection.searchSelectedElements();
       score->setSelection(redoSelection);
       }
 
@@ -1059,7 +1057,7 @@ void ChangePitch::flip()
       int f_userAcc = note->userAccidental();
 
       note->setPitch(pitch, tpc);
-      note->setAccidentalType(userAccidental);
+      note->setUserAccidental(userAccidental);
 
       pitch          = f_pitch;
       tpc            = f_tpc;

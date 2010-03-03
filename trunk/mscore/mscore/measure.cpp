@@ -339,7 +339,6 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
 
       if (staff->part()->useDrumset())
             drumset = staff->part()->drumset();
-      int tick = segment->tick();
 
       int endTrack = startTrack + VOICES;
       for (int track = startTrack; track < endTrack; ++track) {
@@ -353,7 +352,6 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
 
             if (cr->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(e);
-                  int staffMove = chord->staffMove();
                   if (chord->noteType() != NOTE_NORMAL)
                         m *= score()->styleD(ST_graceNoteMag);
                   foreach(Note* note, chord->notes()) {
@@ -383,45 +381,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                                     continue;
                                     }
                               }
-                        //
-                        // compute accidental
-                        //
-                        int tpc        = note->tpc();
-                        int line       = tpc2step(tpc) + (pitch/12) * 7;
-                        int tpcPitch   = tpc2pitch(tpc);
-                        if (tpcPitch < 0)
-                              line += 7;
-                        else
-                              line -= (tpcPitch/12)*7;
-
-                        int accidental = 0;
-                        if (note->userAccidental())
-                              accidental = note->userAccidental();
-                        else  {
-                              int accVal = ((tpc + 1) / 7) - 2;
-                              accidental = ACC_NONE;
-                              if ((accVal != tversatz[line]) || note->hidden()) {
-                                    if (note->tieBack() == 0)
-                                          tversatz[line] = accVal;
-                                    switch(accVal) {
-                                          case -2: accidental = ACC_FLAT2;  break;
-                                          case -1: accidental = ACC_FLAT;   break;
-                                          case  1: accidental = ACC_SHARP;  break;
-                                          case  2: accidental = ACC_SHARP2; break;
-                                          case  0: accidental = ACC_NATURAL; break;
-                                          default: printf("bad accidental\n"); break;
-                                          }
-                                    }
-                              }
-                        note->setAccidentalType(accidental);
-
-                        //
-                        // calculate the real note line depending on clef
-                        //
-                        int staffIdx = note->staffIdx() + staffMove;
-                        int clef     = score()->staff(staffIdx)->clefList()->clef(tick);
-                        line = 127 - line - 82 + clefTable[clef].yOffset;
-                        note->setLine(line);
+                        note->layout1(tversatz);
                         }
                   chord->computeUp();
                   }
@@ -737,6 +697,7 @@ int Measure::findAccidental(Note* note) const
 
 //---------------------------------------------------------
 //   findAccidental2
+//    return current accidental value at note position
 //---------------------------------------------------------
 
 int Measure::findAccidental2(Note* note) const

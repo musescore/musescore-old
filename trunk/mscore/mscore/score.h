@@ -353,6 +353,7 @@ class Score : public QObject {
       void layoutChords1(Segment* segment, int staffIdx);
       void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd,
          int key, int semitones);
+      void reLayout(Measure*);
 
    signals:
       void selectionChanged(int);
@@ -734,8 +735,6 @@ class Score : public QObject {
       void cmdMirrorNoteHead();
 
       void layout()                           { _needLayout = true; }
-      void doLayout();
-      void reLayout(Measure*);
       double spatium() const                  { return _spatium; }
       PageFormat* pageFormat() const          { return _pageFormat; }
       void setPageFormat(const PageFormat& pf);
@@ -792,6 +791,7 @@ class Score : public QObject {
       void cmdAddInterval(int, const QList<Note*>&);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
+      void doLayout();
       };
 
 extern Score* gscore;

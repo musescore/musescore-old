@@ -104,7 +104,7 @@ bool Selection::isEndActive() const {
 
 Element* Selection::element() const
       {
-      return isSingle() ? _el.front() : 0;
+      return _el.size() == 1 ? _el[0] : 0;
       }
 
 //---------------------------------------------------------
@@ -682,18 +682,15 @@ void Selection::updateState()
             setState(SEL_NONE);
             return;
             }
-      if (_state == SEL_NONE || _state == SEL_LIST) {
-            setState(SEL_LIST);
-            if (n == 1) {
-                  Element* e = element();
-                  if (e->type() == NOTE || e->type() == REST) {
-                        if (!_score->noteEntryMode())
-                              _score->setPadState(e);
-                        e->setSelected(true);
-                        if (e->type() == NOTE)
-                              e = e->parent();
-                        _score->setInputTrack(e->track());
-                        }
+      if (_state == SEL_RANGE || _state == SEL_LIST) {
+            Element* e = element();
+            if (e && (e->type() == NOTE || e->type() == REST)) {
+                  if (!_score->noteEntryMode())
+                        _score->setPadState(e);
+                  e->setSelected(true);
+                  if (e->type() == NOTE)
+                        e = e->parent();
+                  _score->setInputTrack(e->track());
                   }
             }
       }

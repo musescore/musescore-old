@@ -1613,7 +1613,9 @@ static bool processNonGui()
                         if (f.open(QIODevice::ReadOnly))
                               cs->loadStyle(&f);
                         }
-                  cs->doLayout();
+                  cs->startCmd();
+                  cs->setLayoutAll(true);
+                  cs->endCmd();
                   mscore->pluginTriggered(0);
                   res = true;
                   }
