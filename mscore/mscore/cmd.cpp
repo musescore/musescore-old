@@ -122,8 +122,8 @@ void Score::endCmd()
       bool noUndo = _undo->current()->childCount() <= 1;
       if (!noUndo)
             setClean(noUndo);
-      _undo->endMacro(noUndo);
       end();
+      _undo->endMacro(noUndo);
       }
 
 //---------------------------------------------------------
@@ -144,6 +144,8 @@ void Score::end()
             _updateAll = true;
             _needLayout = true;
             }
+      if (_needLayout)
+            doLayout();
 
       if (_updateAll)
             emit updateAll();
@@ -1272,11 +1274,9 @@ void Score::upDown(bool up, bool octave)
       startLayout = 0;        // DEBUG
       ElementList el;
 
-      QList<Note*> nl = selection().noteList();
-
       int tick = -1;
       bool playNotes = true;
-      foreach(Note* note, nl) {
+      foreach(Note* note, selection().noteList()) {
             if (startLayout == 0)
                   startLayout = note->chord()->segment()->measure();
             else if (startLayout != note->chord()->segment()->measure())
@@ -1288,7 +1288,7 @@ void Score::upDown(bool up, bool octave)
                               break;
                         }
                   if (ii == el.end()) {
-                        el.push_back(note);
+                        el.append(note);
                         if (tick == -1)
                               tick = note->chord()->tick();
                         else {
@@ -1332,8 +1332,11 @@ void Score::upDown(bool up, bool octave)
                   }
             _is.pitch = newPitch;
 
-            if (oNote->pitch() != newPitch || oNote->tpc() != newTpc)
+            if ((oNote->pitch() != newPitch) || (oNote->tpc() != newTpc) || oNote->userAccidental()) {
+                  if (oNote->accidental())            // to avoid undo() crash
+                        undoRemoveElement(oNote->accidental());
                   undoChangePitch(oNote, newPitch, newTpc, 0);
+                  }
 
             // play new note with velocity 80 for 0.3 sec:
             if (playNotes)
@@ -1610,9 +1613,7 @@ void Score::changeAccidental(int idx)
 void Score::changeAccidental(Note* note, int accidental)
       {
       setLayoutAll(true);
-      //
-      // accidental change may result in pitch change
-      //
+
       Chord* chord  = note->chord();
       Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
       int tick      = chord->tick();
@@ -1621,11 +1622,31 @@ void Score::changeAccidental(Note* note, int accidental)
       while (step < 0)
             step += 7;
       step %= 7;
+      int acc = Accidental::subtype2value(accidental);
 
-      int acc    = Accidental::subtype2value(accidental);
+      if (accidental == ACC_NONE) {
+            if (note->userAccidental() != ACC_NONE) {
+                  note->setUserAccidental(ACC_NONE);
+                  if (note->accidental())
+                        cmdRemove(note->accidental());
+                  _undo->push(new ChangePitch(note, note->pitch(), note->tpc(), ACC_NONE));
+                  return;
+                  }
+            if (note->accidentalType() == ACC_NATURAL)
+                  acc = chord->measure()->findAccidental2(note);
+            if (note->accidental())
+                  cmdRemove(note->accidental());
+            }
+      //
+      // accidental change may result in pitch change
+      //
       int tpc    = step2tpc(step, acc);
       int pitch  = line2pitch(note->line(), clef, 0) + acc;
-      _undo->push(new ChangePitch(note, pitch, tpc, accidental));
+
+      int acc2   = chord->measure()->findAccidental2(note);
+      int user   = ((acc2 == acc) ||(Accidental::value2subtype(acc)!= accidental)) ? accidental : 0;
+
+      _undo->push(new ChangePitch(note, pitch, tpc, user));
       }
 
 //---------------------------------------------------------

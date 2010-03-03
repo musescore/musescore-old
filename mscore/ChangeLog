@@ -1,3 +1,5 @@
+3.mar (ws)
+      - fix undo crash
 2.mar (db)
       - add zoom shortcuts
       - mark rare instruments for new score screen (instruments.xml locale)

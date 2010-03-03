@@ -121,6 +121,7 @@ class Note : public Element {
       virtual QRectF bbox() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
+      void layout1(char* tversatz);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void setTrack(int val);
 
@@ -147,11 +148,11 @@ class Note : public Element {
       void changePitch(int val);
       void setTpcFromPitch();
 
-      void changeAccidental(int);
       void setAccidentalType(int);
       int accidentalType() const;
 
       int userAccidental() const      { return _userAccidental; }
+      void setUserAccidental(int v)   { _userAccidental = v;    }
       Accidental* accidental() const  { return _accidental;     }
 
       int line() const                { return _line + _lineOffset;   }

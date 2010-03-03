@@ -402,7 +402,10 @@ bool Score::read(QString name)
 
       mscore->updateRecentScores(this);
 
+      startCmd();
       _needLayout = true;
+      endCmd();
+
       return true;
       }
 
@@ -2115,6 +2118,8 @@ void Score::setSelection(const Selection& s)
       {
       deselectAll();
       _selection = s;
+      foreach(Element* e, _selection.elements())
+            e->setSelected(true);
       }
 
 //---------------------------------------------------------

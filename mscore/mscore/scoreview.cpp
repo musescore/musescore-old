@@ -1233,15 +1233,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
-      QRegion region;
-      if (_score->needLayout()) {
-            _score->doLayout();
-            if (grips)
-                  updateGrips();
-            region = QRegion(0, 0, width(), height());
-            }
-      else
-            region = ev->region();
+      QRegion region = ev->region();
 
 // double startTime = curTime();
       const QVector<QRect>& vector = region.rects();
