@@ -135,7 +135,7 @@ void ScoreView::editKey(QKeyEvent* ev)
             if (e->isTextB() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right)) {
                   ev->accept();
                   _score->end();
-                  return;
+                  //return;
                   }
             }
       QPointF delta;
