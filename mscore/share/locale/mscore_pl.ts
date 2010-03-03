@@ -61,7 +61,7 @@ p, li { white-space: pre-wrap; }
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished">klamra okrągła</translation>
+        <translation>klamra okrągła</translation>
     </message>
 </context>
 <context>
@@ -915,87 +915,87 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
-        <translation type="unfinished"> centy</translation>
+        <translation> centy</translation>
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"> ptaszki</translation>
+        <translation> ptaszki</translation>
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished">Grupa główki nuty</translation>
+        <translation>Grupa główki nuty</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished">Typ główki nuty</translation>
+        <translation>Typ główki nuty</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normalny</translation>
+        <translation>normalny</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">krzyżyk</translation>
+        <translation>krzyżyk</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">romb</translation>
+        <translation>romb</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">trójkąt</translation>
+        <translation>trójkąt</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">ukośnik</translation>
+        <translation>ukośnik</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">xkółko</translation>
+        <translation>xkółko</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">si</translation>
+        <translation>si</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished">cała</translation>
+        <translation>cała</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished">pół</translation>
+        <translation>pół</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished">ćwierć</translation>
+        <translation>ćwierć</translation>
     </message>
     <message>
         <source>breve</source>
-        <translation type="unfinished">brevis</translation>
+        <translation>brevis</translation>
     </message>
 </context>
 <context>
@@ -3565,11 +3565,11 @@ Restore session?</source>
     </message>
     <message>
         <source>Check for Update</source>
-        <translation type="unfinished">Sprawdź aktualizacje</translation>
+        <translation>Sprawdź aktualizacje</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation type="unfinished">Wszystkie obsługiwane pliki (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Pliki MuseScore (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;Pliki MIDI (*.mid *.midi *.kar);;Pliki Muse Data (*.md);;Pliki Capella  (*.cap);;</translation>
+        <translation>Wszystkie obsługiwane pliki (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Pliki MuseScore (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;Pliki MIDI (*.mid *.midi *.kar);;Pliki Muse Data (*.md);;Pliki Capella  (*.cap);;</translation>
     </message>
     <message>
         <source>Script
@@ -4031,11 +4031,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation type="unfinished">pasek narzędziowy 1</translation>
+        <translation>pasek narzędziowy 1</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation type="unfinished">pasek narzędziowy 2</translation>
+        <translation>pasek narzędziowy 2</translation>
     </message>
 </context>
 <context>
@@ -4696,15 +4696,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Aktualizacja</translation>
+        <translation>Aktualizacja</translation>
     </message>
     <message>
         <source>Automatic Update Check</source>
-        <translation type="unfinished">Automatyczne sprawdzanie aktualizacji</translation>
+        <translation>Automatyczne sprawdzanie aktualizacji</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation type="unfinished">Sprawdź dostępność nowej wersji MuseScore przy starcie</translation>
+        <translation>Sprawdź dostępność nowej wersji MuseScore przy starcie</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
@@ -4857,7 +4857,7 @@ proszę zaznaczyć pojedynczą nutę lub pauzę i powtórzyć operację
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
-        <translation type="unfinished">MuseScore: nie udało się wczytać języków:</translation>
+        <translation>MuseScore: nie udało się wczytać języków:</translation>
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
@@ -5156,11 +5156,11 @@ Spróbuj zapisać w innym miejscu.</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
-        <translation type="unfinished">Nie można usunąć pierwszego oznaczenia metrycznego w utworze.</translation>
+        <translation>Nie można usunąć pierwszego oznaczenia metrycznego w utworze.</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
@@ -8807,27 +8807,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Every day</source>
-        <translation type="unfinished">Кожен день</translation>
+        <translation>Кожен день</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation type="unfinished">Кожні 3 дні</translation>
+        <translation>Кожні 3 дні</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation type="unfinished">Щотижня</translation>
+        <translation>Щотижня</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation type="unfinished">Кожні 2 тижні</translation>
+        <translation>Кожні 2 тижні</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation type="unfinished">Кожен місяць</translation>
+        <translation>Кожен місяць</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished">Кожні 2 місяці</translation>
+        <translation>Кожні 2 місяці</translation>
     </message>
 </context>
 <context>

@@ -921,7 +921,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">सामान्य</translation>
+        <translation>सामान्य</translation>
     </message>
     <message>
         <source>cross</source>
@@ -969,7 +969,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">स्वतः (ऑटो)</translation>
+        <translation>स्वतः (ऑटो)</translation>
     </message>
     <message>
         <source>whole</source>

@@ -61,7 +61,7 @@ p, li { white-space: pre-wrap; }
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished">parênteses</translation>
+        <translation>parênteses</translation>
     </message>
 </context>
 <context>
@@ -914,87 +914,87 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
-        <translation type="unfinished"> cent</translation>
+        <translation> cent</translation>
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"> ticks</translation>
+        <translation> ticks</translation>
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished">Grupo de Cabeça de Nota</translation>
+        <translation>Grupo de Cabeça de Nota</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished">Tipo de Cabeça de Nota</translation>
+        <translation>Tipo de Cabeça de Nota</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">cruz</translation>
+        <translation>cruz</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">losango</translation>
+        <translation>losango</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">triângulo</translation>
+        <translation>triângulo</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">diagonal</translation>
+        <translation>diagonal</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">cruz-círculo</translation>
+        <translation>cruz-círculo</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">dó</translation>
+        <translation>dó</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">ré</translation>
+        <translation>ré</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fá</translation>
+        <translation>fá</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">lá</translation>
+        <translation>lá</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">si</translation>
+        <translation>si</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished">semibreve</translation>
+        <translation>semibreve</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished">mínima</translation>
+        <translation>mínima</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished">semínima</translation>
+        <translation>semínima</translation>
     </message>
     <message>
         <source>breve</source>
-        <translation type="unfinished">breve</translation>
+        <translation>breve</translation>
     </message>
 </context>
 <context>
@@ -1020,31 +1020,31 @@ p, li { white-space: pre-wrap; }
     <name>ChordStyleEditor</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulário</translation>
+        <translation>Formulário</translation>
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation type="unfinished">Arquivo de Configuração de Acordes:</translation>
+        <translation>Arquivo de Configuração de Acordes:</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished">Id</translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished">Salvar Como</translation>
+        <translation>Salvar Como</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation type="unfinished">MuseScore: Editor de Estilo de Acorde</translation>
+        <translation>MuseScore: Editor de Estilo de Acorde</translation>
     </message>
 </context>
 <context>
@@ -1306,7 +1306,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished">Altura</translation>
+        <translation>Altura</translation>
     </message>
 </context>
 <context>
@@ -1373,123 +1373,123 @@ Falhou: </translation>
     </message>
     <message>
         <source>Play Transposition:</source>
-        <translation type="unfinished">Tocar Transposição</translation>
+        <translation>Tocar Transposição</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Uníssono Perfeito</translation>
+        <translation>Uníssono Perfeito</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished">Uníssono Aumentado</translation>
+        <translation>Uníssono Aumentado</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished">Segunda Diminuta</translation>
+        <translation>Segunda Diminuta</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished">Segunda Menor</translation>
+        <translation>Segunda Menor</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished">Segunda Maior</translation>
+        <translation>Segunda Maior</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished">Segunda Aumentada</translation>
+        <translation>Segunda Aumentada</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished">Terça Diminuta</translation>
+        <translation>Terça Diminuta</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished">Terça Menor</translation>
+        <translation>Terça Menor</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished">Terça Maior</translation>
+        <translation>Terça Maior</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished">Terça Aumentada</translation>
+        <translation>Terça Aumentada</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished">Quarta Diminuta</translation>
+        <translation>Quarta Diminuta</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished">Quarta Justa</translation>
+        <translation>Quarta Justa</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished">Quarta Aumentada</translation>
+        <translation>Quarta Aumentada</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished">Quinta Diminuta</translation>
+        <translation>Quinta Diminuta</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished">Quinta Justa</translation>
+        <translation>Quinta Justa</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished">Quinta Aumentada</translation>
+        <translation>Quinta Aumentada</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished">Sexta Diminuta</translation>
+        <translation>Sexta Diminuta</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished">Sexta Menor</translation>
+        <translation>Sexta Menor</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished">Sexta Maior</translation>
+        <translation>Sexta Maior</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished">Sexta Aumentada</translation>
+        <translation>Sexta Aumentada</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished">Sétima Diminuta</translation>
+        <translation>Sétima Diminuta</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished">Sétima Menor</translation>
+        <translation>Sétima Menor</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished">Sétima Maior</translation>
+        <translation>Sétima Maior</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished">Sétima Aumentada</translation>
+        <translation>Sétima Aumentada</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished">Oitava Diminuta</translation>
+        <translation>Oitava Diminuta</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished">Oitava Justa</translation>
+        <translation>Oitava Justa</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">Acima</translation>
+        <translation>Acima</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">Abaixo</translation>
+        <translation>Abaixo</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation type="unfinished"/>
+        <translation>Mudar Instrumento</translation>
     </message>
     <message>
         <source>+octave</source>
@@ -2086,7 +2086,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Propriedades de Texto...</translation>
+        <translation>Propriedades de Texto...</translation>
     </message>
 </context>
 <context>
@@ -2255,7 +2255,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>Ver mais</translation>
     </message>
 </context>
 <context>
@@ -2317,7 +2317,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>Ver mais</translation>
     </message>
 </context>
 <context>
@@ -3570,17 +3570,19 @@ Restaurar sessão?</translation>
     </message>
     <message>
         <source>Check for Update</source>
-        <translation type="unfinished">Verificar Atualizações</translation>
+        <translation>Verificar Atualizações</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation type="unfinished">Todos os Arquivos Suportados (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Arquivos do MuseScore (*.mscz *.mscx *.msc);;Arquivos MusicXML (*.xml *.mxl);;Arquivos MIDI (*.mid *.midi *.kar);;Arquivos Muse Data (*.md);;Arquivos Capella (*.cap);;</translation>
+        <translation>Todos os Arquivos Suportados (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Arquivos do MuseScore (*.mscz *.mscx *.msc);;Arquivos MusicXML (*.xml *.mxl);;Arquivos MIDI (*.mid *.midi *.kar);;Arquivos Muse Data (*.md);;Arquivos Capella (*.cap);;</translation>
     </message>
     <message>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished"/>
+        <translation>Script&#13;
+1%&#13;
+Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
@@ -4036,11 +4038,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation type="unfinished">barra de ferramentas 1</translation>
+        <translation>barra de ferramentas 1</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation type="unfinished">barra de ferramentas 2</translation>
+        <translation>barra de ferramentas 2</translation>
     </message>
 </context>
 <context>
@@ -4697,23 +4699,23 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Remember last connection(s)</source>
-        <translation type="unfinished">Lembrar últimas conexões</translation>
+        <translation>Lembrar últimas conexões</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Atualização</translation>
+        <translation>Atualização</translation>
     </message>
     <message>
         <source>Automatic Update Check</source>
-        <translation type="unfinished">Verificação Automática de Atualização</translation>
+        <translation>Verificação Automática de Atualização</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation type="unfinished">Procurar novas versões do MuseScore ao iniciar</translation>
+        <translation>Procurar novas versões do MuseScore ao iniciar</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation type="unfinished">Escolher a interface de entrada PortMidi</translation>
+        <translation>Escolher a interface de entrada PortMidi</translation>
     </message>
 </context>
 <context>
@@ -4850,19 +4852,19 @@ Por favor, selecione uma nota ou pausa e tente novamente
     </message>
     <message>
         <source>MuseScore: Load Chord Description File</source>
-        <translation type="unfinished">MuseScore: Carregar Arquivo de Descrição de Acordes</translation>
+        <translation>MuseScore: Carregar Arquivo de Descrição de Acordes</translation>
     </message>
     <message>
         <source>MuseScore: Save Chord Description File</source>
-        <translation type="unfinished">MuseScore: Salvar Arquivo de Descrição de Acordes</translation>
+        <translation>MuseScore: Salvar Arquivo de Descrição de Acordes</translation>
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
-        <translation type="unfinished">MuseScore: Falha ao Carregar Idiomas:</translation>
+        <translation>MuseScore: Falha ao Carregar Idiomas:</translation>
     </message>
     <message>
         <source>MuseScore: Load Palette failed:</source>
-        <translation type="unfinished">MuseScore: Falha ao Carregar Paleta:</translation>
+        <translation>MuseScore: Falha ao Carregar Paleta:</translation>
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
@@ -5160,15 +5162,15 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
-        <translation type="unfinished">A primeira fórmula de compasso de uma peça não pode ser removida.</translation>
+        <translation>A primeira fórmula de compasso de uma peça não pode ser removida.</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
-        <translation type="unfinished"/>
+        <translation>Não foi possível determinar o tipo de arquivo</translation>
     </message>
 </context>
 <context>
@@ -5324,7 +5326,7 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>ver mais</translation>
     </message>
 </context>
 <context>
@@ -5778,15 +5780,15 @@ Tente salvar em um local diferente.</translation>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Marcar como Invisível</translation>
+        <translation>Marcar como Invisível</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Marcar como Visível</translation>
+        <translation>Marcar como Visível</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Propriedades de Texto...</translation>
+        <translation>Propriedades de Texto</translation>
     </message>
 </context>
 <context>
@@ -6074,7 +6076,7 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">Marcação do Sistema</translation>
+        <translation>Marcação do Sistema</translation>
     </message>
 </context>
 <context>
@@ -6182,207 +6184,207 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation type="unfinished">MuseScore: Transpor</translation>
+        <translation>MuseScore: Transpor</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation type="unfinished">Transpor por Tonalizade</translation>
+        <translation>Transpor por Tonalizade</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
-        <translation type="unfinished">Dób maior / Láb menor</translation>
+        <translation>Dób maior / Láb menor</translation>
     </message>
     <message>
         <source>Gb major / Eb minor</source>
-        <translation type="unfinished">Solb maior / Mib menor</translation>
+        <translation>Solb maior / Mib menor</translation>
     </message>
     <message>
         <source>Db major / Bb minor</source>
-        <translation type="unfinished">Réb maior / Sib menor</translation>
+        <translation>Réb maior / Sib menor</translation>
     </message>
     <message>
         <source>Ab major / F minor</source>
-        <translation type="unfinished">Láb maior / Fá menor</translation>
+        <translation>Láb maior / Fá menor</translation>
     </message>
     <message>
         <source>Eb major / C minor</source>
-        <translation type="unfinished">Mib maior / Dó menor</translation>
+        <translation>Mib maior / Dó menor</translation>
     </message>
     <message>
         <source>Bb major / G minor</source>
-        <translation type="unfinished">Sib maior / Sol menor</translation>
+        <translation>Sib maior / Sol menor</translation>
     </message>
     <message>
         <source>F major / D minor</source>
-        <translation type="unfinished">Fá maior /  Ré menor</translation>
+        <translation>Fá maior /  Ré menor</translation>
     </message>
     <message>
         <source>C major / A minor</source>
-        <translation type="unfinished">Dó maior / Lá menor</translation>
+        <translation>Dó maior / Lá menor</translation>
     </message>
     <message>
         <source>G major / E minor</source>
-        <translation type="unfinished">Sol maior / Mi menor</translation>
+        <translation>Sol maior / Mi menor</translation>
     </message>
     <message>
         <source>D major / B minor</source>
-        <translation type="unfinished">Ré maior / Si menor</translation>
+        <translation>Ré maior / Si menor</translation>
     </message>
     <message>
         <source>A major / F# minor</source>
-        <translation type="unfinished">Lá maior / Fá# menor</translation>
+        <translation>Lá maior / Fá# menor</translation>
     </message>
     <message>
         <source>E major / C# minor</source>
-        <translation type="unfinished">Mi maior / Dó# menor</translation>
+        <translation>Mi maior / Dó# menor</translation>
     </message>
     <message>
         <source>B major / G# minor</source>
-        <translation type="unfinished">Si maior / Sol# menor</translation>
+        <translation>Si maior / Sol# menor</translation>
     </message>
     <message>
         <source>F# major / D# minor</source>
-        <translation type="unfinished">Fá# maior / Ré# menor</translation>
+        <translation>Fá# maior / Ré# menor</translation>
     </message>
     <message>
         <source>C# major / A# minor</source>
-        <translation type="unfinished">Dó# maior / Lá# menor</translation>
+        <translation>Dó# maior / Lá# menor</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Acima</translation>
+        <translation>Acima</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Abaixo</translation>
+        <translation>Abaixo</translation>
     </message>
     <message>
         <source>Closest</source>
-        <translation type="unfinished">Mais Próximo</translation>
+        <translation>Mais Próximo</translation>
     </message>
     <message>
         <source>Transpose by Interval</source>
-        <translation type="unfinished">Transpor por Intervalo</translation>
+        <translation>Transpor por Intervalo</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Uníssono Justo</translation>
+        <translation>Uníssono Justo</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished">Uníssono Aumentado</translation>
+        <translation>Uníssono Aumentado</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished">Segunda Diminuta</translation>
+        <translation>Segunda Diminuta</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished">Segunda Menor</translation>
+        <translation>Segunda Menor</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished">Segunda Maior</translation>
+        <translation>Segunda Maior</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished">Segunda Aumentada</translation>
+        <translation>Segunda Aumentada</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished">Terça Diminuta</translation>
+        <translation>Terça Diminuta</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished">Terça Menor</translation>
+        <translation>Terça Menor</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished">Terça Maior</translation>
+        <translation>Terça Maior</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished">Terça Aumentada</translation>
+        <translation>Terça Aumentada</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished">Quarta Diminuta</translation>
+        <translation>Quarta Diminuta</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished">Quarta Justa</translation>
+        <translation>Quarta Justa</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished">Quarta Aumentada</translation>
+        <translation>Quarta Aumentada</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished">Quinta Diminuta</translation>
+        <translation>Quinta Diminuta</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished">Quinta Justa</translation>
+        <translation>Quinta Justa</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished">Quinta Aumentada</translation>
+        <translation>Quinta Aumentada</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished">Sexta Diminuta</translation>
+        <translation>Sexta Diminuta</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished">Sexta Menor</translation>
+        <translation>Sexta Menor</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished">Sexta Maior</translation>
+        <translation>Sexta Maior</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished">Sexta Aumentada</translation>
+        <translation>Sexta Aumentada</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished">Sétima Diminuta</translation>
+        <translation>Sétima Diminuta</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished">Sétima Menor</translation>
+        <translation>Sétima Menor</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished">Sétima Maior</translation>
+        <translation>Sétima Maior</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished">Sétima Aumentada</translation>
+        <translation>Sétima Aumentada</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished">Oitava Diminuta</translation>
+        <translation>Oitava Diminuta</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished">Oitava Justa</translation>
+        <translation>Oitava Justa</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opções</translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>Single sharps and flats only</source>
-        <translation type="unfinished">Apenas sustenidos e bemóis simples</translation>
+        <translation>Apenas sustenidos e bemóis simples</translation>
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation type="unfinished">Usar dobrados sustenidos e bemóis</translation>
+        <translation>Usar dobrados sustenidos e bemóis</translation>
     </message>
     <message>
         <source>Use multi sharps and flats</source>
-        <translation type="unfinished">Usar múltiplos sustenidos e bemóis</translation>
+        <translation>Usar múltiplos sustenidos e bemóis</translation>
     </message>
 </context>
 <context>
@@ -6443,11 +6445,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>relation:</source>
-        <translation type="unfinished">relação:</translation>
+        <translation>relação:</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished">/</translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
@@ -6489,15 +6491,15 @@ p, li { white-space: pre-wrap; }
     <name>UpdateChecker</name>
     <message>
         <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation type="unfinished">Há uma atualização para o MuseScore disponível: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <translation>Há uma atualização para o MuseScore disponível: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
-        <translation type="unfinished">Atualização Disponível</translation>
+        <translation>Atualização Disponível</translation>
     </message>
     <message>
         <source>No Update Available</source>
-        <translation type="unfinished">Nenhuma Atualização Disponível</translation>
+        <translation>Nenhuma Atualização Disponível</translation>
     </message>
 </context>
 <context>
@@ -8224,59 +8226,59 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Apagar</translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
-        <translation type="unfinished">Apagar o conteúdo dos compassos selecionados</translation>
+        <translation>Apagar o conteúdo dos compassos selecionados</translation>
     </message>
     <message>
         <source>Player play</source>
-        <translation type="unfinished">Tocar</translation>
+        <translation>Tocar</translation>
     </message>
     <message>
         <source>Seek to begin</source>
-        <translation type="unfinished">Seguir para o início</translation>
+        <translation>Seguir para o início</translation>
     </message>
     <message>
         <source>Player rewind</source>
-        <translation type="unfinished">Retornar</translation>
+        <translation>Retornar</translation>
     </message>
     <message>
         <source>Rewind to start position</source>
-        <translation type="unfinished">Retornar à posição inicial</translation>
+        <translation>Retornar à posição inicial</translation>
     </message>
     <message>
         <source>Seek to end</source>
-        <translation type="unfinished">Seguir para o fim</translation>
+        <translation>Seguir para o fim</translation>
     </message>
     <message>
         <source>Play repeats on/off</source>
-        <translation type="unfinished">Tocar repetições ligado/desligado</translation>
+        <translation>Tocar repetições ligado/desligado</translation>
     </message>
     <message>
         <source>Load style</source>
-        <translation type="unfinished">Carregar estilo</translation>
+        <translation>Carregar estilo</translation>
     </message>
     <message>
         <source>Save style</source>
-        <translation type="unfinished">Salvar estilo</translation>
+        <translation>Salvar estilo</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished">Selecionar tudo</translation>
+        <translation>Selecionar tudo</translation>
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation type="unfinished">Editar Estilo de Acorde...</translation>
+        <translation>Editar Estilo de Acorde...</translation>
     </message>
     <message>
         <source>Timewise Delete</source>
-        <translation type="unfinished">Apagar no Tempo</translation>
+        <translation>Apagar no Tempo</translation>
     </message>
     <message>
         <source>Delete element and duration</source>
-        <translation type="unfinished">Apagar elemento e duração</translation>
+        <translation>Apagar elemento e duração</translation>
     </message>
     <message>
         <source>Parts...</source>
@@ -8807,31 +8809,31 @@ p, li { white-space: pre-wrap; }
     <name>preferences</name>
     <message>
         <source>Never</source>
-        <translation type="unfinished">Nunca</translation>
+        <translation>Nunca</translation>
     </message>
     <message>
         <source>Every day</source>
-        <translation type="unfinished">Diariamente</translation>
+        <translation>Diariamente</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation type="unfinished">A cada 3 dias</translation>
+        <translation>A cada 3 dias</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation type="unfinished">Semanalmente</translation>
+        <translation>Semanalmente</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation type="unfinished">A cada 2 semanas</translation>
+        <translation>A cada 2 semanas</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation type="unfinished">Mensalmente</translation>
+        <translation>Mensalmente</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished">A cada 2 meses</translation>
+        <translation>A cada 2 meses</translation>
     </message>
 </context>
 <context>
@@ -8902,783 +8904,783 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole rest</source>
-        <translation type="unfinished">pausa de semibreve</translation>
+        <translation>pausa de semibreve</translation>
     </message>
     <message>
         <source>half rest</source>
-        <translation type="unfinished">pausa de mínima</translation>
+        <translation>pausa de mínima</translation>
     </message>
     <message>
         <source>outside whole rest</source>
-        <translation type="unfinished">pausa de semibreve externa</translation>
+        <translation>pausa de semibreve externa</translation>
     </message>
     <message>
         <source>outside half rest</source>
-        <translation type="unfinished">pausa de mínima externa</translation>
+        <translation>pausa de mínima externa</translation>
     </message>
     <message>
         <source>rest M3</source>
-        <translation type="unfinished">pausa de máxima</translation>
+        <translation>pausa de máxima</translation>
     </message>
     <message>
         <source>breve rest</source>
-        <translation type="unfinished">pausa de breve</translation>
+        <translation>pausa de breve</translation>
     </message>
     <message>
         <source>longa rest</source>
-        <translation type="unfinished">pausa de longa</translation>
+        <translation>pausa de longa</translation>
     </message>
     <message>
         <source>quart rest</source>
-        <translation type="unfinished">pausa de semínima</translation>
+        <translation>pausa de semínima</translation>
     </message>
     <message>
         <source>clas quart rest</source>
-        <translation type="unfinished">pausa de semínima clas</translation>
+        <translation>pausa de semínima clas</translation>
     </message>
     <message>
         <source>eight rest</source>
-        <translation type="unfinished">pausa de colcheia</translation>
+        <translation>pausa de colcheia</translation>
     </message>
     <message>
         <source>16' rest</source>
-        <translation type="unfinished">pausa de semicolcheia</translation>
+        <translation>pausa de semicolcheia</translation>
     </message>
     <message>
         <source>32' rest</source>
-        <translation type="unfinished">pausa de fusa</translation>
+        <translation>pausa de fusa</translation>
     </message>
     <message>
         <source>64' rest</source>
-        <translation type="unfinished">pausa de semifusa</translation>
+        <translation>pausa de semifusa</translation>
     </message>
     <message>
         <source>128' rest</source>
-        <translation type="unfinished">pausa de quartifusa</translation>
+        <translation>pausa de quartifusa</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished">sustenido</translation>
+        <translation>sustenido</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished">sustenido com seta acima</translation>
+        <translation>sustenido com seta acima</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished">sustenido com duas setas</translation>
+        <translation>sustenido com duas setas</translation>
     </message>
     <message>
         <source>sharp slash</source>
-        <translation type="unfinished">meio sustenido</translation>
+        <translation>meio sustenido</translation>
     </message>
     <message>
         <source>sharp slash2</source>
-        <translation type="unfinished">sustenido 2</translation>
+        <translation>sustenido 2</translation>
     </message>
     <message>
         <source>sharp slash3</source>
-        <translation type="unfinished">sustenido 3</translation>
+        <translation>sustenido 3</translation>
     </message>
     <message>
         <source>sharp slash4</source>
-        <translation type="unfinished">sustenido 4</translation>
+        <translation>sustenido 4</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">bequadro</translation>
+        <translation>bequadro</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished">bequadro com seta acima</translation>
+        <translation>bequadro com seta acima</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished">bequadro com seta abaixo</translation>
+        <translation>bequadro com seta abaixo</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished">bequadro com duas setas</translation>
+        <translation>bequadro com duas setas</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished">bemol</translation>
+        <translation>bemol</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished">bemol com seta acima</translation>
+        <translation>bemol com seta acima</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished">bemol com duas setas</translation>
+        <translation>bemol com duas setas</translation>
     </message>
     <message>
         <source>flat slash</source>
-        <translation type="unfinished">bemol 2</translation>
+        <translation>bemol 2</translation>
     </message>
     <message>
         <source>flat slash2</source>
-        <translation type="unfinished">bemol 3</translation>
+        <translation>bemol 3</translation>
     </message>
     <message>
         <source>mirrored flat2</source>
-        <translation type="unfinished">bemol e meio</translation>
+        <translation>bemol e meio</translation>
     </message>
     <message>
         <source>mirrored flat</source>
-        <translation type="unfinished">meio bemol</translation>
+        <translation>meio bemol</translation>
     </message>
     <message>
         <source>mirrored flat slash</source>
-        <translation type="unfinished">bemol 4</translation>
+        <translation>bemol 4</translation>
     </message>
     <message>
         <source>flat flat</source>
-        <translation type="unfinished">dobrado bemol</translation>
+        <translation>dobrado bemol</translation>
     </message>
     <message>
         <source>flat flat slash</source>
-        <translation type="unfinished">dobrado bemol cortado</translation>
+        <translation>dobrado bemol cortado</translation>
     </message>
     <message>
         <source>sharp sharp</source>
-        <translation type="unfinished">dobrado sustenido</translation>
+        <translation>dobrado sustenido</translation>
     </message>
     <message>
         <source>right parenthesis</source>
-        <translation type="unfinished">parêntese à direita</translation>
+        <translation>parêntese à direita</translation>
     </message>
     <message>
         <source>left parenthesis</source>
-        <translation type="unfinished">parêntese à esquerda</translation>
+        <translation>parêntese à esquerda</translation>
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished">ponto</translation>
+        <translation>ponto</translation>
     </message>
     <message>
         <source>longa up</source>
-        <translation type="unfinished">longa para cima</translation>
+        <translation>longa para cima</translation>
     </message>
     <message>
         <source>longa down</source>
-        <translation type="unfinished">longa para baixo</translation>
+        <translation>longa para baixo</translation>
     </message>
     <message>
         <source>brevis head</source>
-        <translation type="unfinished">cabeça de breve</translation>
+        <translation>cabeça de breve</translation>
     </message>
     <message>
         <source>brevis double head</source>
-        <translation type="unfinished">cabeça de breve 2</translation>
+        <translation>cabeça de breve 2</translation>
     </message>
     <message>
         <source>whole head</source>
-        <translation type="unfinished">cabeça de semibreve</translation>
+        <translation>cabeça de semibreve</translation>
     </message>
     <message>
         <source>half head</source>
-        <translation type="unfinished">cabeça de mínima</translation>
+        <translation>cabeça de mínima</translation>
     </message>
     <message>
         <source>quart head</source>
-        <translation type="unfinished">cabeça de semínima</translation>
+        <translation>cabeça de semínima</translation>
     </message>
     <message>
         <source>whole diamond head</source>
-        <translation type="unfinished">cabeça de semibreve em losango</translation>
+        <translation>cabeça de semibreve em losango</translation>
     </message>
     <message>
         <source>half diamond head</source>
-        <translation type="unfinished">cabeça de mínima em losango</translation>
+        <translation>cabeça de mínima em losango</translation>
     </message>
     <message>
         <source>diamond head</source>
-        <translation type="unfinished">cabeça em losango</translation>
+        <translation>cabeça em losango</translation>
     </message>
     <message>
         <source>whole triangle head</source>
-        <translation type="unfinished">cabeça de semibreve em triângulo</translation>
+        <translation>cabeça de semibreve em triângulo</translation>
     </message>
     <message>
         <source>down half triangle head</source>
-        <translation type="unfinished">cabeça de mínima para baixo em triângulo</translation>
+        <translation>cabeça de mínima para baixo em triângulo</translation>
     </message>
     <message>
         <source>up half triangle head</source>
-        <translation type="unfinished">cabeça de mínima para cima em triângulo</translation>
+        <translation>cabeça de mínima para cima em triângulo</translation>
     </message>
     <message>
         <source>up quart triangle head</source>
-        <translation type="unfinished">cabeça de semínima para cima em triângulo</translation>
+        <translation>cabeça de semínima para cima em triângulo</translation>
     </message>
     <message>
         <source>down quart triangle head</source>
-        <translation type="unfinished">cabeça de semínima para baixo em triângulo</translation>
+        <translation>cabeça de semínima para baixo em triângulo</translation>
     </message>
     <message>
         <source>whole slash head</source>
-        <translation type="unfinished">cabeça de semibreve diagonal</translation>
+        <translation>cabeça de semibreve diagonal</translation>
     </message>
     <message>
         <source>half slash head</source>
-        <translation type="unfinished">cabeça de mínima diagonal</translation>
+        <translation>cabeça de mínima diagonal</translation>
     </message>
     <message>
         <source>quart slash head</source>
-        <translation type="unfinished">cabeça de semínima diagonal</translation>
+        <translation>cabeça de semínima diagonal</translation>
     </message>
     <message>
         <source>whole cross head</source>
-        <translation type="unfinished">cabeça de semibreve em cruz</translation>
+        <translation>cabeça de semibreve em cruz</translation>
     </message>
     <message>
         <source>half cross head</source>
-        <translation type="unfinished">cabeça de mínima em cruz</translation>
+        <translation>cabeça de mínima em cruz</translation>
     </message>
     <message>
         <source>cross head</source>
-        <translation type="unfinished">cabeça em cruz</translation>
+        <translation>cabeça em cruz</translation>
     </message>
     <message>
         <source>x circle head</source>
-        <translation type="unfinished">cabeça em cruz-círculo</translation>
+        <translation>cabeça em cruz-círculo</translation>
     </message>
     <message>
         <source>s0do head</source>
-        <translation type="unfinished">s0do head</translation>
+        <translation>s0do head</translation>
     </message>
     <message>
         <source>d1do head</source>
-        <translation type="unfinished">d1do head</translation>
+        <translation>d1do head</translation>
     </message>
     <message>
         <source>u1do head</source>
-        <translation type="unfinished">u1do head</translation>
+        <translation>u1do head</translation>
     </message>
     <message>
         <source>d2do head</source>
-        <translation type="unfinished">d2do head</translation>
+        <translation>d2do head</translation>
     </message>
     <message>
         <source>u2do head</source>
-        <translation type="unfinished">u2do head</translation>
+        <translation>u2do head</translation>
     </message>
     <message>
         <source>s0re head</source>
-        <translation type="unfinished">s0re head</translation>
+        <translation>s0re head</translation>
     </message>
     <message>
         <source>u1re head</source>
-        <translation type="unfinished">u1re head</translation>
+        <translation>u1re head</translation>
     </message>
     <message>
         <source>d1re head</source>
-        <translation type="unfinished">d1re head</translation>
+        <translation>d1re head</translation>
     </message>
     <message>
         <source>u2re head</source>
-        <translation type="unfinished">u2re head</translation>
+        <translation>u2re head</translation>
     </message>
     <message>
         <source>d2re head</source>
-        <translation type="unfinished">d2re head</translation>
+        <translation>d2re head</translation>
     </message>
     <message>
         <source>s0mi head</source>
-        <translation type="unfinished">s0mi head</translation>
+        <translation>s0mi head</translation>
     </message>
     <message>
         <source>s1mi head</source>
-        <translation type="unfinished">s1mi head</translation>
+        <translation>s1mi head</translation>
     </message>
     <message>
         <source>s2mi head</source>
-        <translation type="unfinished">s2mi head</translation>
+        <translation>s2mi head</translation>
     </message>
     <message>
         <source>u0fa head</source>
-        <translation type="unfinished">u0fa head</translation>
+        <translation>u0fa head</translation>
     </message>
     <message>
         <source>d0fa head</source>
-        <translation type="unfinished">d0fa head</translation>
+        <translation>d0fa head</translation>
     </message>
     <message>
         <source>u1fa head</source>
-        <translation type="unfinished">u1fa head</translation>
+        <translation>u1fa head</translation>
     </message>
     <message>
         <source>d1fa head</source>
-        <translation type="unfinished">d1fa head</translation>
+        <translation>d1fa head</translation>
     </message>
     <message>
         <source>u2fa head</source>
-        <translation type="unfinished">u2fa head</translation>
+        <translation>u2fa head</translation>
     </message>
     <message>
         <source>d2fa head</source>
-        <translation type="unfinished">d2fa head</translation>
+        <translation>d2fa head</translation>
     </message>
     <message>
         <source>s0la head</source>
-        <translation type="unfinished">s0la head</translation>
+        <translation>s0la head</translation>
     </message>
     <message>
         <source>s1la head</source>
-        <translation type="unfinished">s1la head</translation>
+        <translation>s1la head</translation>
     </message>
     <message>
         <source>s2la head</source>
-        <translation type="unfinished">s2la head</translation>
+        <translation>s2la head</translation>
     </message>
     <message>
         <source>s0ti head</source>
-        <translation type="unfinished">s0ti head</translation>
+        <translation>s0ti head</translation>
     </message>
     <message>
         <source>u1ti head</source>
-        <translation type="unfinished">u1ti head</translation>
+        <translation>u1ti head</translation>
     </message>
     <message>
         <source>d1ti head</source>
-        <translation type="unfinished">d1ti head</translation>
+        <translation>d1ti head</translation>
     </message>
     <message>
         <source>u2ti head</source>
-        <translation type="unfinished">u2ti head</translation>
+        <translation>u2ti head</translation>
     </message>
     <message>
         <source>d2ti head</source>
-        <translation type="unfinished">d2ti head</translation>
+        <translation>d2ti head</translation>
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished">fermata superior</translation>
+        <translation>fermata superior</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished">fermata inferior</translation>
+        <translation>fermata inferior</translation>
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished">pizzicato estalado</translation>
+        <translation>pizzicato estalado</translation>
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished">fermata superior curta</translation>
+        <translation>fermata superior curta</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished">fermata inferior curta</translation>
+        <translation>fermata inferior curta</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished">fermata superior longa</translation>
+        <translation>fermata superior longa</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished">fermata inferior longa</translation>
+        <translation>fermata inferior longa</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished">fermata superior muito longa</translation>
+        <translation>fermata superior muito longa</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished">fermata inferior muito longa</translation>
+        <translation>fermata inferior muito longa</translation>
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished">polegar</translation>
+        <translation>polegar</translation>
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation type="unfinished">acento</translation>
+        <translation>acento</translation>
     </message>
     <message>
         <source>espressivo</source>
-        <translation type="unfinished">espressivo</translation>
+        <translation>espressivo</translation>
     </message>
     <message>
         <source>staccato</source>
-        <translation type="unfinished">staccato</translation>
+        <translation>staccato</translation>
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation type="unfinished">staccatissimo superior</translation>
+        <translation>staccatissimo superior</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished">staccatissimo inferior</translation>
+        <translation>staccatissimo inferior</translation>
     </message>
     <message>
         <source>tenuto</source>
-        <translation type="unfinished">tenuto</translation>
+        <translation>tenuto</translation>
     </message>
     <message>
         <source>uportato</source>
-        <translation type="unfinished">portato inferior</translation>
+        <translation>portato inferior</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation type="unfinished">portato superior</translation>
+        <translation>portato superior</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation type="unfinished">marcato superior</translation>
+        <translation>marcato superior</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation type="unfinished">marcato inferior</translation>
+        <translation>marcato inferior</translation>
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished">ouvert</translation>
+        <translation>ouvert</translation>
     </message>
     <message>
         <source>plus stop</source>
-        <translation type="unfinished">mais</translation>
+        <translation>mais</translation>
     </message>
     <message>
         <source>up bow</source>
-        <translation type="unfinished">arco sobe</translation>
+        <translation>arco sobe</translation>
     </message>
     <message>
         <source>down bow</source>
-        <translation type="unfinished">arco desce</translation>
+        <translation>arco desce</translation>
     </message>
     <message>
         <source>reverse turn</source>
-        <translation type="unfinished">grupeto superior</translation>
+        <translation>grupeto superior</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished">grupeto inferior</translation>
+        <translation>grupeto inferior</translation>
     </message>
     <message>
         <source>trill</source>
-        <translation type="unfinished">trilo</translation>
+        <translation>trilo</translation>
     </message>
     <message>
         <source>upedal heel</source>
-        <translation type="unfinished">pedal no calcanhar para baixo</translation>
+        <translation>pedal no calcanhar para baixo</translation>
     </message>
     <message>
         <source>dpedalheel</source>
-        <translation type="unfinished">pedal no calcanhar para cima</translation>
+        <translation>pedal no calcanhar para cima</translation>
     </message>
     <message>
         <source>upedal toe</source>
-        <translation type="unfinished">pedal no dedo para cima</translation>
+        <translation>pedal no dedo para cima</translation>
     </message>
     <message>
         <source>dpedal toe</source>
-        <translation type="unfinished">pedal no dedo para baixo</translation>
+        <translation>pedal no dedo para baixo</translation>
     </message>
     <message>
         <source>flageolet</source>
-        <translation type="unfinished">harmônico</translation>
+        <translation>harmônico</translation>
     </message>
     <message>
         <source>segno</source>
-        <translation type="unfinished">segno</translation>
+        <translation>segno</translation>
     </message>
     <message>
         <source>coda</source>
-        <translation type="unfinished">coda</translation>
+        <translation>coda</translation>
     </message>
     <message>
         <source>varied coda</source>
-        <translation type="unfinished">variação de coda</translation>
+        <translation>variação de coda</translation>
     </message>
     <message>
         <source>rcomma</source>
-        <translation type="unfinished">vírgula dir</translation>
+        <translation>vírgula dir</translation>
     </message>
     <message>
         <source>lcomma</source>
-        <translation type="unfinished">vírgula esq</translation>
+        <translation>vírgula esq</translation>
     </message>
     <message>
         <source>arpeggio</source>
-        <translation type="unfinished">arpejo</translation>
+        <translation>arpejo</translation>
     </message>
     <message>
         <source>trillelement</source>
-        <translation type="unfinished">elemento de trilo</translation>
+        <translation>elemento de trilo</translation>
     </message>
     <message>
         <source>arpeggio arrow down</source>
-        <translation type="unfinished">seta de arpejo para baixo</translation>
+        <translation>seta de arpejo para baixo</translation>
     </message>
     <message>
         <source>arpeggio arrow up</source>
-        <translation type="unfinished">seta de arpejo para cima</translation>
+        <translation>seta de arpejo para cima</translation>
     </message>
     <message>
         <source>trill element</source>
-        <translation type="unfinished">elemento de trilo</translation>
+        <translation>elemento de trilo</translation>
     </message>
     <message>
         <source>prall</source>
-        <translation type="unfinished">mordente superior</translation>
+        <translation>mordente superior</translation>
     </message>
     <message>
         <source>mordent</source>
-        <translation type="unfinished">mordente inferior</translation>
+        <translation>mordente inferior</translation>
     </message>
     <message>
         <source>prall prall</source>
-        <translation type="unfinished">mordente duplo superior</translation>
+        <translation>mordente duplo superior</translation>
     </message>
     <message>
         <source>prall mordent</source>
-        <translation type="unfinished">mordente duplo inferior</translation>
+        <translation>mordente duplo inferior</translation>
     </message>
     <message>
         <source>up prall</source>
-        <translation type="unfinished">mordente superior com prefixo inferior</translation>
+        <translation>mordente superior com prefixo inferior</translation>
     </message>
     <message>
         <source>up mordent</source>
-        <translation type="unfinished">mordente inferior com prefixo inferior</translation>
+        <translation>mordente inferior com prefixo inferior</translation>
     </message>
     <message>
         <source>prall down</source>
-        <translation type="unfinished">mordente superior com sufixo superior</translation>
+        <translation>mordente superior com sufixo superior</translation>
     </message>
     <message>
         <source>down prall</source>
-        <translation type="unfinished">mordente superior com prefixo superior</translation>
+        <translation>mordente superior com prefixo superior</translation>
     </message>
     <message>
         <source>down mordent</source>
-        <translation type="unfinished">mordente inferior com prefixo superior</translation>
+        <translation>mordente inferior com prefixo superior</translation>
     </message>
     <message>
         <source>prall up</source>
-        <translation type="unfinished">mordente superior com sufixo inferior</translation>
+        <translation>mordente superior com sufixo inferior</translation>
     </message>
     <message>
         <source>line prall</source>
-        <translation type="unfinished">apojatura e mordente</translation>
+        <translation>apojatura e mordente</translation>
     </message>
     <message>
         <source>caesura curved</source>
-        <translation type="unfinished">cesura curva</translation>
+        <translation>cesura curva</translation>
     </message>
     <message>
         <source>caesura straight</source>
-        <translation type="unfinished">cesura reta</translation>
+        <translation>cesura reta</translation>
     </message>
     <message>
         <source>eight flag</source>
-        <translation type="unfinished">colchete de colcheia</translation>
+        <translation>colchete de colcheia</translation>
     </message>
     <message>
         <source>sixteenth flag</source>
-        <translation type="unfinished">colchete de  semicolcheia</translation>
+        <translation>colchete de  semicolcheia</translation>
     </message>
     <message>
         <source>thirtysecond flag</source>
-        <translation type="unfinished">colchete de fusa</translation>
+        <translation>colchete de fusa</translation>
     </message>
     <message>
         <source>sixtyfour flag</source>
-        <translation type="unfinished">colchete de semifusa</translation>
+        <translation>colchete de semifusa</translation>
     </message>
     <message>
         <source>128flag</source>
-        <translation type="unfinished">colchete de quartifusa</translation>
+        <translation>colchete de quartifusa</translation>
     </message>
     <message>
         <source>deight flag</source>
-        <translation type="unfinished">colchete de colcheia inferior</translation>
+        <translation>colchete de colcheia inferior</translation>
     </message>
     <message>
         <source>grace dash</source>
-        <translation type="unfinished">corte de apojatura</translation>
+        <translation>corte de apojatura</translation>
     </message>
     <message>
         <source>dgrace dash</source>
-        <translation type="unfinished">corte de apojatura inferior</translation>
+        <translation>corte de apojatura inferior</translation>
     </message>
     <message>
         <source>dsixteenth flag</source>
-        <translation type="unfinished">colchete de  semicolcheia inferior</translation>
+        <translation>colchete de  semicolcheia inferior</translation>
     </message>
     <message>
         <source>dthirtysecond flag</source>
-        <translation type="unfinished">colchete de fusa inferior</translation>
+        <translation>colchete de fusa inferior</translation>
     </message>
     <message>
         <source>dsixtyfourth flag</source>
-        <translation type="unfinished">colchete de semifusa inferior</translation>
+        <translation>colchete de semifusa inferior</translation>
     </message>
     <message>
         <source>d128flag</source>
-        <translation type="unfinished">colchete de quartifusa inferior</translation>
+        <translation>colchete de quartifusa inferior</translation>
     </message>
     <message>
         <source>alto clef</source>
-        <translation type="unfinished">clave de dó</translation>
+        <translation>clave de dó</translation>
     </message>
     <message>
         <source>calto clef</source>
-        <translation type="unfinished">clave de dó de precaução</translation>
+        <translation>clave de dó de precaução</translation>
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished">clave de fá</translation>
+        <translation>clave de fá</translation>
     </message>
     <message>
         <source>cbass clef</source>
-        <translation type="unfinished">clave de fá de precaução</translation>
+        <translation>clave de fá de precaução</translation>
     </message>
     <message>
         <source>trebleclef</source>
-        <translation type="unfinished">clave de sol</translation>
+        <translation>clave de sol</translation>
     </message>
     <message>
         <source>ctrebleclef</source>
-        <translation type="unfinished">clave de sol de precaução</translation>
+        <translation>clave de sol de precaução</translation>
     </message>
     <message>
         <source>percussion clef</source>
-        <translation type="unfinished">clave de percussão</translation>
+        <translation>clave de percussão</translation>
     </message>
     <message>
         <source>cpercussion clef</source>
-        <translation type="unfinished">clave de percussão de precaução</translation>
+        <translation>clave de percussão de precaução</translation>
     </message>
     <message>
         <source>tab clef</source>
-        <translation type="unfinished">clave de tablatura</translation>
+        <translation>clave de tablatura</translation>
     </message>
     <message>
         <source>ctab clef</source>
-        <translation type="unfinished">clave de tablatura de precaução</translation>
+        <translation>clave de tablatura de precaução</translation>
     </message>
     <message>
         <source>four four meter</source>
-        <translation type="unfinished">compasso comum</translation>
+        <translation>compasso comum</translation>
     </message>
     <message>
         <source>allabreve</source>
-        <translation type="unfinished">compasso meio comum</translation>
+        <translation>compasso meio comum</translation>
     </message>
     <message>
         <source>pedalasterisk</source>
-        <translation type="unfinished">asterisco de pedal</translation>
+        <translation>asterisco de pedal</translation>
     </message>
     <message>
         <source>pedaldash</source>
-        <translation type="unfinished">traço de pedal</translation>
+        <translation>traço de pedal</translation>
     </message>
     <message>
         <source>pedaldot</source>
-        <translation type="unfinished">ponto de pedal</translation>
+        <translation>ponto de pedal</translation>
     </message>
     <message>
         <source>pedalP</source>
-        <translation type="unfinished">P de pedal</translation>
+        <translation>P de pedal</translation>
     </message>
     <message>
         <source>pedald</source>
-        <translation type="unfinished">d de pedal</translation>
+        <translation>d de pedal</translation>
     </message>
     <message>
         <source>pedale</source>
-        <translation type="unfinished">e de pedal</translation>
+        <translation>e de pedal</translation>
     </message>
     <message>
         <source>pedal ped</source>
-        <translation type="unfinished">ped de pedal</translation>
+        <translation>ped de pedal</translation>
     </message>
     <message>
         <source>bracket tips up</source>
-        <translation type="unfinished">dobra superior do colchete</translation>
+        <translation>dobra superior do colchete</translation>
     </message>
     <message>
         <source>bracket tips down</source>
-        <translation type="unfinished">dobra inferior do colchete</translation>
+        <translation>dobra inferior do colchete</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation type="unfinished">dobra superior esquerda do colchete</translation>
+        <translation>dobra superior esquerda do colchete</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation type="unfinished">dobra inferior esquerda do colchete</translation>
+        <translation>dobra inferior esquerda do colchete</translation>
     </message>
     <message>
         <source>acc dot</source>
-        <translation type="unfinished">ac ponto</translation>
+        <translation>ac ponto</translation>
     </message>
     <message>
         <source>acc freebase</source>
-        <translation type="unfinished">ac base livre</translation>
+        <translation>ac base livre</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation type="unfinished">ac base padrão</translation>
+        <translation>ac base padrão</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished">ac base bayan</translation>
+        <translation>ac base bayan</translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation type="unfinished">ac antigo ee</translation>
+        <translation>ac antigo ee</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation type="unfinished">ac contracanto</translation>
+        <translation>ac contracanto</translation>
     </message>
     <message>
         <source>zero</source>
-        <translation type="unfinished">zero</translation>
+        <translation>zero</translation>
     </message>
     <message>
         <source>one</source>
-        <translation type="unfinished">um</translation>
+        <translation>um</translation>
     </message>
     <message>
         <source>two</source>
-        <translation type="unfinished">dois</translation>
+        <translation>dois</translation>
     </message>
     <message>
         <source>three</source>
-        <translation type="unfinished">três</translation>
+        <translation>três</translation>
     </message>
     <message>
         <source>four</source>
-        <translation type="unfinished">quatro</translation>
+        <translation>quatro</translation>
     </message>
     <message>
         <source>five</source>
-        <translation type="unfinished">cinco</translation>
+        <translation>cinco</translation>
     </message>
     <message>
         <source>six</source>
-        <translation type="unfinished">seis</translation>
+        <translation>seis</translation>
     </message>
     <message>
         <source>seven</source>
-        <translation type="unfinished">sete</translation>
+        <translation>sete</translation>
     </message>
     <message>
         <source>eight</source>
-        <translation type="unfinished">oito</translation>
+        <translation>oito</translation>
     </message>
     <message>
         <source>nine</source>
-        <translation type="unfinished">nove</translation>
+        <translation>nove</translation>
     </message>
     <message>
         <source>plus</source>
-        <translation type="unfinished">mais</translation>
+        <translation>mais</translation>
     </message>
 </context>
 </TS>

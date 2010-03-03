@@ -921,7 +921,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">標準</translation>
+        <translation>標準</translation>
     </message>
     <message>
         <source>cross</source>
@@ -969,7 +969,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">自動</translation>
+        <translation>自動</translation>
     </message>
     <message>
         <source>whole</source>
@@ -1019,7 +1019,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Id</source>
@@ -1027,7 +1027,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">名稱</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Save As</source>
@@ -2404,11 +2404,11 @@ failed: </source>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">清除</translation>
+        <translation>清除</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished">將拍號加入面板</translation>
+        <translation>將拍號加入面板</translation>
     </message>
     <message>
         <source>Add</source>
@@ -5081,59 +5081,59 @@ failed: </source>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished">MuseScore 壓縮格式 (*.mscz)</translation>
+        <translation>MuseScore 壓縮格式 (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished">MuseScore 格式 (*.mscx)</translation>
+        <translation>MuseScore 格式 (*.mscx)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished">MusicXML 格式 (*.xml)</translation>
+        <translation>MusicXML 格式 (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished">MusicXML 壓縮格式 (*.mxl)</translation>
+        <translation>MusicXML 壓縮格式 (*.mxl)</translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished">標準 MIDI 檔案 (*.mid)</translation>
+        <translation>標準 MIDI 檔案 (*.mid)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">PDF 檔案 (*.pdf)</translation>
+        <translation>PDF 檔案 (*.pdf)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished">PostScript 檔案 (*.ps)</translation>
+        <translation>PostScript 檔案 (*.ps)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">PNG 點陣圖 (*.png)</translation>
+        <translation>PNG 點陣圖 (*.png)</translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">可變動向量繪圖 (*.svg)</translation>
+        <translation>可變動向量繪圖 (*.svg)</translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished">Lilypond 格式 (*.ly)</translation>
+        <translation>Lilypond 格式 (*.ly)</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished">Wave 音訊檔 (*.wav)</translation>
+        <translation>Wave 音訊檔 (*.wav)</translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished">Flac 音訊檔 (*.flac)</translation>
+        <translation>Flac 音訊檔 (*.flac)</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished">Ogg Vorbis 音訊檔 (*.ogg)</translation>
+        <translation>Ogg Vorbis 音訊檔 (*.ogg)</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished">MuseScore：儲存副本</translation>
+        <translation>MuseScore：儲存副本</translation>
     </message>
     <message>
         <source>The following file is locked: 
@@ -5573,7 +5573,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished">SoundFont 檔案 (*.sf2 *.SF2);;所有檔案 (*)</translation>
+        <translation>SoundFont 檔案 (*.sf2 *.SF2);;所有檔案 (*)</translation>
     </message>
     <message>
         <source>Synthesizer</source>
@@ -7096,7 +7096,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>crescendo</source>
-        <translation type="unfinished">漸強</translation>
+        <translation>漸強</translation>
     </message>
     <message>
         <source>decrescendo</source>
@@ -7604,7 +7604,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished">低音譜號</translation>
+        <translation>低音譜號</translation>
     </message>
     <message>
         <source>Exchange Voice 1-2</source>
