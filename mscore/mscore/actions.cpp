@@ -1381,11 +1381,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-palette",
          QT_TRANSLATE_NOOP("action","Palette"),
-         #ifdef Q_WS_MAC
-		 Qt::CTRL+Qt::ALT+Qt::Key_K,
-		 #else
-		 Qt::Key_F9,
-		 #endif
+#ifdef Q_WS_MAC
+		     Qt::CTRL+Qt::ALT+Qt::Key_K,
+#else
+		     Qt::Key_F9,
+#endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Palette"),
          QT_TRANSLATE_NOOP("action","Palette")
@@ -1394,11 +1394,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-playpanel",
          QT_TRANSLATE_NOOP("action","Play Panel"),
-		 #ifdef Q_WS_MAC
+#ifdef Q_WS_MAC
 		 Qt::CTRL+Qt::ALT+Qt::Key_P,
-		 #else
+#else
 		 Qt::Key_F11,
-		 #endif
+#endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Play Panel"),
          QT_TRANSLATE_NOOP("action","Play Panel")
@@ -1407,24 +1407,30 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-navigator",
          QT_TRANSLATE_NOOP("action","Navigator"),
-         #ifdef Q_WS_MAC
+#ifdef Q_WS_MAC
 		 Qt::CTRL+Qt::ALT+Qt::Key_N,
-		 #else
+#else
 		 Qt::Key_F12,
-		 #endif
+#endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Navigator"),
          QT_TRANSLATE_NOOP("action","Navigator")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+#ifdef Q_WS_MAC
+         //Avoid conflict with M in text
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+#else
+		 STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+#endif
          "toggle-mixer",
          QT_TRANSLATE_NOOP("action","Mixer"),
-         #ifdef Q_WS_MAC
-		 Qt::Key_M,
-		 #else
+#ifdef Q_WS_MAC
+         //Cmd + M is for minimize to dock on mac
+		 Qt::Key_M, 
+#else
 		 Qt::Key_F10,
-		 #endif
+#endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Mixer"),
          QT_TRANSLATE_NOOP("action","Mixer")
