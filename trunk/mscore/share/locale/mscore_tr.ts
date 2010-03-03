@@ -921,7 +921,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
@@ -969,7 +969,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Otomatik</translation>
+        <translation>Otomatik</translation>
     </message>
     <message>
         <source>whole</source>
@@ -1027,7 +1027,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">İsim</translation>
+        <translation>İsim</translation>
     </message>
     <message>
         <source>Save As</source>

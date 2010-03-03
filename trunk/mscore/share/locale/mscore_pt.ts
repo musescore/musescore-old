@@ -13,11 +13,11 @@
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation type="unfinished">Versão: 0.9.0</translation>
+        <translation>Versão: 0.9.0</translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation type="unfinished">Revisão: 628</translation>
+        <translation>Revisão: 628</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -37,22 +37,22 @@ p, li { white-space: pre-wrap; }
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished">Pré-Lançamento Instável para a Versão: </translation>
+        <translation>Pré-Lançamento Instável para a Versão: </translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation type="unfinished">Versão </translation>
+        <translation>Versão </translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation type="unfinished">Revisão: %1</translation>
+        <translation>Revisão: %1</translation>
     </message>
 </context>
 <context>
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished">Parênteses Curvo</translation>
+        <translation>Parênteses Curvo</translation>
     </message>
 </context>
 <context>
@@ -833,7 +833,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Properties</source>
-        <translation type="unfinished">Propriedades da Nota</translation>
+        <translation>Propriedades da Nota</translation>
     </message>
     <message>
         <source>tuning offset</source>
@@ -877,11 +877,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation type="unfinished">Velocidade (0-127)</translation>
+        <translation>Velocidade (0-127)</translation>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished">Utilizador</translation>
+        <translation>Utilizador</translation>
     </message>
     <message>
         <source>offset</source>
@@ -921,7 +921,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
@@ -969,7 +969,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>whole</source>
@@ -1031,7 +1031,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"/>
+        <translation>Guardar Como</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
@@ -1042,23 +1042,23 @@ p, li { white-space: pre-wrap; }
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation type="unfinished">Dinâmicas</translation>
+        <translation>Dinamicas</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Marcar como Invisível</translation>
+        <translation>Marcar como Invisível</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Marcar como visível</translation>
+        <translation>Marcar como visível</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Propriedades de Texto</translation>
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Propriedades de MIDI</translation>
     </message>
 </context>
 <context>
@@ -1072,11 +1072,11 @@ p, li { white-space: pre-wrap; }
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished">MuseScore: Propriedades do Texto</translation>
+        <translation>MuseScore: Propriedades de Texto</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished"/>
+        <translation>Velocidade:</translation>
     </message>
     <message>
         <source>staff</source>
@@ -1088,7 +1088,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>system</source>
-        <translation type="unfinished">sistema</translation>
+        <translation>sistema</translation>
     </message>
     <message>
         <source>align left</source>
@@ -1771,11 +1771,11 @@ Falhou: </translation>
     </message>
     <message>
         <source>Left margin</source>
-        <translation type="unfinished"/>
+        <translation>Margem Esquerda</translation>
     </message>
     <message>
         <source>Right margin</source>
-        <translation type="unfinished"/>
+        <translation>Margem Direita</translation>
     </message>
     <message>
         <source>Min. note distance</source>
@@ -1941,7 +1941,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Marcar como visível</translation>
+        <translation>Marcar como Visível</translation>
     </message>
     <message>
         <source>Color...</source>
@@ -2007,7 +2007,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Fechar</translation>
     </message>
 </context>
 <context>
@@ -2242,7 +2242,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Guardar</translation>
+        <translation>Salvar</translation>
     </message>
     <message>
         <source>show more</source>
@@ -3246,7 +3246,7 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"/>
+        <translation>Procurar</translation>
     </message>
     <message>
         <source>MuseScore: failure</source>
@@ -3326,7 +3326,7 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Go To: </source>
-        <translation type="unfinished"/>
+        <translation>Ir Para: </translation>
     </message>
     <message>
         <source>Online Handbook</source>
@@ -3385,7 +3385,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"/>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Dashed</source>
@@ -3429,7 +3429,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished">Linha</translation>
+        <translation>Linha</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
@@ -3481,11 +3481,11 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Line break</source>
-        <translation type="unfinished"/>
+        <translation>Quebra de Linha</translation>
     </message>
     <message>
         <source>Page break</source>
-        <translation type="unfinished"/>
+        <translation>Quebra de Página</translation>
     </message>
     <message>
         <source>Staff spacer</source>
@@ -3535,7 +3535,9 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation type="unfinished"/>
+        <translation>A cessão anterior terminou inesperadamente&#13;
+&#13;
+Deseja restaurar a sessão</translation>
     </message>
     <message>
         <source>Note Heads</source>
@@ -3555,7 +3557,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Check for Update</source>
-        <translation type="unfinished"/>
+        <translation>Verificar Actualizações</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
@@ -3831,7 +3833,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Propriedades...</translation>
     </message>
 </context>
 <context>
@@ -3993,11 +3995,11 @@ is incompatible with current interface</source>
     <name>PianorollEditor</name>
     <message>
         <source>Cursor:</source>
-        <translation type="unfinished"/>
+        <translation>Cursor:</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished"/>
+        <translation>Velocidade:</translation>
     </message>
     <message>
         <source>auto</source>
@@ -4056,7 +4058,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Vol</translation>
+        <translation>Volume</translation>
     </message>
     <message>
         <source>Tmp</source>
@@ -5139,7 +5141,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5584,7 +5586,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>master volume</source>
-        <translation type="unfinished"/>
+        <translation>volume principal</translation>
     </message>
     <message>
         <source>Vol</source>
@@ -5725,12 +5727,12 @@ Try saving to a different location.</source>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Texto</translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished">Texto:</translation>
+        <translation>Texto:</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -5799,11 +5801,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Marcar como Invisível</translation>
+        <translation>Marcar como Invisível</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Marcar como visível</translation>
+        <translation>Marcar como Visível</translation>
     </message>
 </context>
 <context>
@@ -5853,7 +5855,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished">Fonte:</translation>
+        <translation>Fonte:</translation>
     </message>
     <message>
         <source>font face</source>
@@ -5861,7 +5863,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished">Tamanho:</translation>
+        <translation>Tamanho:</translation>
     </message>
     <message>
         <source>font point size</source>
@@ -5869,11 +5871,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Style:</source>
-        <translation type="unfinished">Estilo:</translation>
+        <translation>Estilo:</translation>
     </message>
     <message>
         <source>bold</source>
-        <translation type="unfinished">negrito</translation>
+        <translation>negrito</translation>
     </message>
     <message>
         <source>B</source>
@@ -5881,7 +5883,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>italic</source>
-        <translation type="unfinished">itálico</translation>
+        <translation>itálico</translation>
     </message>
     <message>
         <source>I</source>
@@ -5929,11 +5931,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Cor:</translation>
+        <translation>Cor:</translation>
     </message>
     <message>
         <source>text color</source>
-        <translation type="unfinished"/>
+        <translation>cor do texto</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -5957,7 +5959,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>Y:</source>
@@ -6349,7 +6351,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"/>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>Single sharps and flats only</source>
@@ -6426,7 +6428,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished">/</translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
@@ -6520,67 +6522,67 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished">Nenhum</translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished">Sustenido</translation>
+        <translation>Sustenido</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished">Bemol</translation>
+        <translation>Bemol</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished">Duplo Sustenido</translation>
+        <translation>Duplo Sustenido</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished">Duplo Bemol</translation>
+        <translation>Duplo Bemol</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">Bequadro</translation>
+        <translation>Bequadro</translation>
     </message>
     <message>
         <source>(sharp)</source>
-        <translation type="unfinished">(Sustenido)</translation>
+        <translation>(Sustenido)</translation>
     </message>
     <message>
         <source>(flat)</source>
-        <translation type="unfinished">(Bemol)</translation>
+        <translation>(Bemol)</translation>
     </message>
     <message>
         <source>(double sharp)</source>
-        <translation type="unfinished">(Duplo sustenido)</translation>
+        <translation>(Duplo sustenido)</translation>
     </message>
     <message>
         <source>(double flat)</source>
-        <translation type="unfinished">(duplo bemol)</translation>
+        <translation>(duplo bemol)</translation>
     </message>
     <message>
         <source>(natural)</source>
-        <translation type="unfinished">(bequadro)</translation>
+        <translation>(bequadro)</translation>
     </message>
     <message>
         <source>[sharp]</source>
-        <translation type="unfinished">[sustenido]</translation>
+        <translation>[sustenido]</translation>
     </message>
     <message>
         <source>[flat]</source>
-        <translation type="unfinished">[bemol]</translation>
+        <translation>[bemol]</translation>
     </message>
     <message>
         <source>[double sharp]</source>
-        <translation type="unfinished">[duplo sustenido]</translation>
+        <translation>[duplo sustenido]</translation>
     </message>
     <message>
         <source>[double flat]</source>
-        <translation type="unfinished">[duplo bemol]</translation>
+        <translation>[duplo bemol]</translation>
     </message>
     <message>
         <source>[natural]</source>
-        <translation type="unfinished">[bequadro]</translation>
+        <translation>[bequadro]</translation>
     </message>
     <message>
         <source>flat-slash</source>
@@ -6667,15 +6669,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Open...</source>
-        <translation type="unfinished"/>
+        <translation>Abrir...</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Guardar</translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation type="unfinished"/>
+        <translation>Guardar Como...</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
@@ -6687,7 +6689,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Fechar</translation>
     </message>
     <message>
         <source>file new</source>
@@ -6695,7 +6697,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>New...</source>
-        <translation type="unfinished"/>
+        <translation>Novo...</translation>
     </message>
     <message>
         <source>Create new score</source>
@@ -6703,31 +6705,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Print...</source>
-        <translation type="unfinished"/>
+        <translation>Imprimir...</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"/>
+        <translation>Desfazer</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"/>
+        <translation>Refazer</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"/>
+        <translation>Cortar</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"/>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"/>
+        <translation>Colar</translation>
     </message>
     <message>
         <source>Instruments...</source>
-        <translation type="unfinished"/>
+        <translation>Instrumentos...</translation>
     </message>
     <message>
         <source>Symbols...</source>
@@ -6735,7 +6737,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation type="unfinished"/>
+        <translation>Dinâmicas...</translation>
     </message>
     <message>
         <source>Note Input</source>
@@ -7283,7 +7285,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">Bequadro</translation>
+        <translation>natural</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -7311,19 +7313,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>voice 1</source>
-        <translation type="unfinished"/>
+        <translation>voz 1</translation>
     </message>
     <message>
         <source>voice 2</source>
-        <translation type="unfinished"/>
+        <translation>voz 2</translation>
     </message>
     <message>
         <source>voice 3</source>
-        <translation type="unfinished"/>
+        <translation>voz 3</translation>
     </message>
     <message>
         <source>voice 4</source>
-        <translation type="unfinished"/>
+        <translation>voz 4</translation>
     </message>
     <message>
         <source>midi input in</source>
@@ -7427,11 +7429,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo...</source>
-        <translation type="unfinished"/>
+        <translation>Tempo...</translation>
     </message>
     <message>
         <source>Tempo</source>
-        <translation type="unfinished">Tempo</translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <source>Metronome</source>

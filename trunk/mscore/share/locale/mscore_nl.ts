@@ -61,7 +61,7 @@ p, li { white-space: pre-wrap; }
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished">haak rond</translation>
+        <translation>haak rond</translation>
     </message>
 </context>
 <context>
@@ -922,79 +922,79 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished">Notenkoppen Groep</translation>
+        <translation>Notenkoppen Groep</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished">Notenkop Type</translation>
+        <translation>Notenkop Type</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normaal</translation>
+        <translation>normaal</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">kruis</translation>
+        <translation>kruis</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">ruit</translation>
+        <translation>ruit</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">triangel</translation>
+        <translation>triangel</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">schuin</translation>
+        <translation>schuin</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">xcirkel</translation>
+        <translation>xcirkel</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Automatisch</translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished">hele</translation>
+        <translation>hele</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished">halve</translation>
+        <translation>halve</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished">kwart</translation>
+        <translation>kwart</translation>
     </message>
     <message>
         <source>breve</source>
-        <translation type="unfinished">breve</translation>
+        <translation>breve</translation>
     </message>
 </context>
 <context>
@@ -1306,7 +1306,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished">Toonhoogte</translation>
+        <translation>Toonhoogte</translation>
     </message>
 </context>
 <context>
@@ -1373,11 +1373,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Play Transposition:</source>
-        <translation type="unfinished">Afspelen Transpositie:</translation>
+        <translation>Afspelen Transpositie:</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Reine Prime</translation>
+        <translation>Reine Prime</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -1385,115 +1385,115 @@ mislukt: </translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished">Verlaag Tweede</translation>
+        <translation>Verlaag Tweede</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished">Verlaag Tweede</translation>
+        <translation>Verlaag Tweede</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished">Majeur Tweede</translation>
+        <translation>Majeur Tweede</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished">Verhoog Tweede</translation>
+        <translation>Verhoog Tweede</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished">Verlaag Derde</translation>
+        <translation>Verlaag Derde</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished">Mineur Derde</translation>
+        <translation>Mineur Derde</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished">Mineur Derde</translation>
+        <translation>Mineur Derde</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished">Verhoog Derde</translation>
+        <translation>Verhoog Derde</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished">Verlaag Vierde</translation>
+        <translation>Verlaag Vierde</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished">Reine Kwart</translation>
+        <translation>Reine Kwart</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished">Verhoog Vierde</translation>
+        <translation>Verhoog Vierde</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished">Verlaag Vijfde</translation>
+        <translation>Verlaag Vijfde</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished">Reine Kwint</translation>
+        <translation>Reine Kwint</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished">Verhoog Vijfde</translation>
+        <translation>Verhoog Vijfde</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished">Verlaag Zesde</translation>
+        <translation>Verlaag Zesde</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished">Mineur Zesde</translation>
+        <translation>Mineur Zesde</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished">Majeur Zesde</translation>
+        <translation>Majeur Zesde</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished">Verhoog Zesde</translation>
+        <translation>Verhoog Zesde</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished">Verlaag Zevende</translation>
+        <translation>Verlaag Zevende</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished">Mineur Zevende</translation>
+        <translation>Mineur Zevende</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished">Majeur Zevende</translation>
+        <translation>Majeur Zevende</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished">Verhoog Zevende</translation>
+        <translation>Verhoog Zevende</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished">Verlaag Octaaf</translation>
+        <translation>Verlaag Octaaf</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished">Volledig Octaaf</translation>
+        <translation>Volledig Octaaf</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">omhoog</translation>
+        <translation>omhoog</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">omlaag</translation>
+        <translation>omlaag</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation type="unfinished">Verander instrument</translation>
+        <translation>Verander instrument</translation>
     </message>
     <message>
         <source>+octave</source>
-        <translation type="unfinished">+octaaf</translation>
+        <translation>+octaaf</translation>
     </message>
 </context>
 <context>
@@ -2255,7 +2255,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished">toon meer</translation>
+        <translation>toon meer</translation>
     </message>
 </context>
 <context>
@@ -2317,7 +2317,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished">toon meer</translation>
+        <translation>toon meer</translation>
     </message>
 </context>
 <context>
@@ -3570,24 +3570,24 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
     </message>
     <message>
         <source>Check for Update</source>
-        <translation type="unfinished">Controleer op nieuwe versie</translation>
+        <translation>Controleer op nieuwe versie</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation type="unfinished">Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Bestanden (*.cap);;</translation>
+        <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Bestanden (*.cap);;</translation>
     </message>
     <message>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished">Script&#13;
+        <translation>Script&#13;
 %1&#13;
 is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished">MuseScore te oud voor script&#13;
+        <translation>MuseScore te oud voor script&#13;
 %1</translation>
     </message>
 </context>
@@ -4704,19 +4704,19 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Update</translation>
+        <translation>Update</translation>
     </message>
     <message>
         <source>Automatic Update Check</source>
-        <translation type="unfinished">Automatische update Check</translation>
+        <translation>Automatische update Check</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation type="unfinished">Controleer tijdens het opstarten op nieuwe versies van MuseScore</translation>
+        <translation>Controleer tijdens het opstarten op nieuwe versies van MuseScore</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation type="unfinished">Kies PortMidi input-interface</translation>
+        <translation>Kies PortMidi input-interface</translation>
     </message>
 </context>
 <context>
@@ -4865,11 +4865,11 @@ Selecteer één enkele noot of rust en probeer het opnieuw
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
-        <translation type="unfinished">MuseScore: Laden talen mislukt:</translation>
+        <translation>MuseScore: Laden talen mislukt:</translation>
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished">MuseScore: registeer script plugin</translation>
+        <translation>MuseScore: registeer script plugin</translation>
     </message>
 </context>
 <context>
@@ -5164,15 +5164,15 @@ mislukt: </translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
-        <translation type="unfinished">De eerste maataanduiding van een stuk kan niet worden verwijderd.</translation>
+        <translation>De eerste maataanduiding van een stuk kan niet worden verwijderd.</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
-        <translation type="unfinished">Kan bestandstype niet achterhalen</translation>
+        <translation>Kan bestandstype niet achterhalen</translation>
     </message>
 </context>
 <context>
@@ -5320,7 +5320,7 @@ mislukt: </translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialoog</translation>
+        <translation>Dialoog</translation>
     </message>
     <message>
         <source>0</source>
@@ -5328,7 +5328,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished">toon meer</translation>
+        <translation>toon meer</translation>
     </message>
 </context>
 <context>
@@ -5782,15 +5782,15 @@ mislukt: </translation>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Maak onzichtbaar</translation>
+        <translation>Maak onzichtbaar</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Maak zichtbaar</translation>
+        <translation>Maak zichtbaar</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Tekst eigenschappen...</translation>
+        <translation>Tekst eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -6078,7 +6078,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">Systeem Vlag</translation>
+        <translation>Systeem Vlag</translation>
     </message>
 </context>
 <context>
@@ -6186,207 +6186,207 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation type="unfinished">MuseScore: Transporteer</translation>
+        <translation>MuseScore: Transporteer</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation type="unfinished">Transponeer bij Voortekening</translation>
+        <translation>Transponeer bij Voortekening</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
-        <translation type="unfinished">Cb majeur / Ab mineur</translation>
+        <translation>Cb majeur / Ab mineur</translation>
     </message>
     <message>
         <source>Gb major / Eb minor</source>
-        <translation type="unfinished">Gb majeur / Eb mineur</translation>
+        <translation>Gb majeur / Eb mineur</translation>
     </message>
     <message>
         <source>Db major / Bb minor</source>
-        <translation type="unfinished">Db majeur / Bb mineur</translation>
+        <translation>Db majeur / Bb mineur</translation>
     </message>
     <message>
         <source>Ab major / F minor</source>
-        <translation type="unfinished">Ab majeur / F mineur</translation>
+        <translation>Ab majeur / F mineur</translation>
     </message>
     <message>
         <source>Eb major / C minor</source>
-        <translation type="unfinished">Eb majeur / C mineur</translation>
+        <translation>Eb majeur / C mineur</translation>
     </message>
     <message>
         <source>Bb major / G minor</source>
-        <translation type="unfinished">Bb majeur / G mineur</translation>
+        <translation>Bb majeur / G mineur</translation>
     </message>
     <message>
         <source>F major / D minor</source>
-        <translation type="unfinished">F majeur / D mineur</translation>
+        <translation>F majeur / D mineur</translation>
     </message>
     <message>
         <source>C major / A minor</source>
-        <translation type="unfinished">C majeur / A mineur</translation>
+        <translation>C majeur / A mineur</translation>
     </message>
     <message>
         <source>G major / E minor</source>
-        <translation type="unfinished">G majeur / E mineur</translation>
+        <translation>G majeur / E mineur</translation>
     </message>
     <message>
         <source>D major / B minor</source>
-        <translation type="unfinished">D majeur / B mineur</translation>
+        <translation>D majeur / B mineur</translation>
     </message>
     <message>
         <source>A major / F# minor</source>
-        <translation type="unfinished">A majeur / F# mineur</translation>
+        <translation>A majeur / F# mineur</translation>
     </message>
     <message>
         <source>E major / C# minor</source>
-        <translation type="unfinished">E majeur / C# mineur</translation>
+        <translation>E majeur / C# mineur</translation>
     </message>
     <message>
         <source>B major / G# minor</source>
-        <translation type="unfinished">B majeur / G# mineur</translation>
+        <translation>B majeur / G# mineur</translation>
     </message>
     <message>
         <source>F# major / D# minor</source>
-        <translation type="unfinished">F# majeur / D# mineur</translation>
+        <translation>F# majeur / D# mineur</translation>
     </message>
     <message>
         <source>C# major / A# minor</source>
-        <translation type="unfinished">C# major / A# mineur</translation>
+        <translation>C# major / A# mineur</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Omhoog</translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Omlaag</translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <source>Closest</source>
-        <translation type="unfinished">Dichtstbijzijnde</translation>
+        <translation>Dichtstbijzijnde</translation>
     </message>
     <message>
         <source>Transpose by Interval</source>
-        <translation type="unfinished">Transponeren door Interval</translation>
+        <translation>Transponeren door Interval</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">Reine prime</translation>
+        <translation>Reine prime</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished">Overmatige prime</translation>
+        <translation>Overmatige prime</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished">Verminderde secunde</translation>
+        <translation>Verminderde secunde</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished">Kleine secunde</translation>
+        <translation>Kleine secunde</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished">Overmatige secunde</translation>
+        <translation>Overmatige secunde</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished">Dubbel overmatige secunde</translation>
+        <translation>Dubbel overmatige secunde</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished">Verminderde terts</translation>
+        <translation>Verminderde terts</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished">Verminderde terts</translation>
+        <translation>Verminderde terts</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished">Overmatige terts</translation>
+        <translation>Overmatige terts</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished">Dubbel overmatige terts</translation>
+        <translation>Dubbel overmatige terts</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished">Verminderde kwart</translation>
+        <translation>Verminderde kwart</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished">Reine kwart</translation>
+        <translation>Reine kwart</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished">Overmatige kwart</translation>
+        <translation>Overmatige kwart</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished">Verminderde kwint</translation>
+        <translation>Verminderde kwint</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished">Reine kwint</translation>
+        <translation>Reine kwint</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished">Overmatige kwint</translation>
+        <translation>Overmatige kwint</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished">Verminderde sext</translation>
+        <translation>Verminderde sext</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished">Kleine sext</translation>
+        <translation>Kleine sext</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished">Grote sext</translation>
+        <translation>Grote sext</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished">Vergrote sext</translation>
+        <translation>Vergrote sext</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished">Verminderde septiem</translation>
+        <translation>Verminderde septiem</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished">Kleine septiem</translation>
+        <translation>Kleine septiem</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished">Grote septiem</translation>
+        <translation>Grote septiem</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished">Vergrote septiem</translation>
+        <translation>Vergrote septiem</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished">Verminderde octaaf</translation>
+        <translation>Verminderde octaaf</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished">Reine octaaf</translation>
+        <translation>Reine octaaf</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opties</translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>Single sharps and flats only</source>
-        <translation type="unfinished">Enkel enkele kruisen en mollen</translation>
+        <translation>Enkel enkele kruisen en mollen</translation>
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation type="unfinished">Gebruik dubbele kruisen en mollen</translation>
+        <translation>Gebruik dubbele kruisen en mollen</translation>
     </message>
     <message>
         <source>Use multi sharps and flats</source>
-        <translation type="unfinished">Gebruik meerdere kruisen en mollen</translation>
+        <translation>Gebruik meerdere kruisen en mollen</translation>
     </message>
 </context>
 <context>
@@ -6447,11 +6447,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>relation:</source>
-        <translation type="unfinished">relatie:</translation>
+        <translation>relatie:</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished">/</translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
@@ -6493,15 +6493,15 @@ p, li { white-space: pre-wrap; }
     <name>UpdateChecker</name>
     <message>
         <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation type="unfinished">Er is een update voor MuseScore beschikbaar: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <translation>Er is een update voor MuseScore beschikbaar: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
-        <translation type="unfinished">Update Beschikbaar</translation>
+        <translation>Update Beschikbaar</translation>
     </message>
     <message>
         <source>No Update Available</source>
-        <translation type="unfinished">Geen Update Beschikbaar</translation>
+        <translation>Geen Update Beschikbaar</translation>
     </message>
 </context>
 <context>
@@ -8280,7 +8280,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete element and duration</source>
-        <translation type="unfinished">Verwijder element en duur</translation>
+        <translation>Verwijder element en duur</translation>
     </message>
     <message>
         <source>Parts...</source>
@@ -8811,31 +8811,31 @@ p, li { white-space: pre-wrap; }
     <name>preferences</name>
     <message>
         <source>Never</source>
-        <translation type="unfinished">Nooit</translation>
+        <translation>Nooit</translation>
     </message>
     <message>
         <source>Every day</source>
-        <translation type="unfinished">Elke dag</translation>
+        <translation>Elke dag</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation type="unfinished">Eens in de 3 dagen</translation>
+        <translation>Eens in de 3 dagen</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation type="unfinished">Elke week</translation>
+        <translation>Elke week</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation type="unfinished">Eens in de 2 weken</translation>
+        <translation>Eens in de 2 weken</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation type="unfinished">Elke maand</translation>
+        <translation>Elke maand</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished">Eens in de 2 maanden</translation>
+        <translation>Eens in de 2 maanden</translation>
     </message>
 </context>
 <context>

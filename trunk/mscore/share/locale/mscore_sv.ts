@@ -921,7 +921,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
@@ -969,7 +969,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>whole</source>
@@ -2404,7 +2404,7 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">Klar</translation>
+        <translation>Klar</translation>
     </message>
     <message>
         <source>add time signature to palette</source>

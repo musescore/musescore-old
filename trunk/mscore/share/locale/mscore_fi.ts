@@ -104,7 +104,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished">Sointu/Tauko</translation>
+        <translation>Sointu/Tauko</translation>
     </message>
 </context>
 <context>
@@ -921,7 +921,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normaali</translation>
+        <translation>normaali</translation>
     </message>
     <message>
         <source>cross</source>
@@ -945,43 +945,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Automaattinen</translation>
+        <translation>Automaattinen</translation>
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished">koko</translation>
+        <translation>koko</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished">puoli</translation>
+        <translation>puoli</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished">neljäsosa</translation>
+        <translation>neljäsosa</translation>
     </message>
     <message>
         <source>breve</source>
@@ -1031,7 +1031,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished">Tallenna nimellä</translation>
+        <translation>Tallenna nimellä</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
@@ -1703,7 +1703,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Arpeggios</source>
-        <translation type="unfinished">Murtosoinnut</translation>
+        <translation>Murtosoinnut</translation>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
@@ -1719,15 +1719,15 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished">Tahtiviivat</translation>
+        <translation>Tahtiviivat</translation>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished">Tahtiviiva yksittäisen viivaston alussa</translation>
+        <translation>Tahtiviiva yksittäisen viivaston alussa</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation type="unfinished">Tahtiviiva monen viivaston alussa</translation>
+        <translation>Tahtiviiva monen viivaston alussa</translation>
     </message>
     <message>
         <source>Music upper margin</source>
@@ -1739,11 +1739,11 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation type="unfinished">Viivaston väli</translation>
+        <translation>Viivaston väli</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation type="unfinished">Hakaviivastojen väli</translation>
+        <translation>Hakaviivastojen väli</translation>
     </message>
     <message>
         <source>System distance</source>
@@ -1767,43 +1767,43 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation type="unfinished">välistys (1=tiivis)</translation>
+        <translation>välistys (1=tiivis)</translation>
     </message>
     <message>
         <source>Left margin</source>
-        <translation type="unfinished">vasen marginaali</translation>
+        <translation>vasen marginaali</translation>
     </message>
     <message>
         <source>Right margin</source>
-        <translation type="unfinished">oikea marginaali</translation>
+        <translation>oikea marginaali</translation>
     </message>
     <message>
         <source>Min. note distance</source>
-        <translation type="unfinished">minimi nuottien väli</translation>
+        <translation>minimi nuottien väli</translation>
     </message>
     <message>
         <source>Clef left margin</source>
-        <translation type="unfinished">avaimen vasen marginaali</translation>
+        <translation>avaimen vasen marginaali</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation type="unfinished">etumerkinnän vasen marginaali</translation>
+        <translation>etumerkinnän vasen marginaali</translation>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation type="unfinished">tahtilajin vasen marginaali</translation>
+        <translation>tahtilajin vasen marginaali</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
-        <translation type="unfinished">etäisyys nuottiavaimesta</translation>
+        <translation>etäisyys nuottiavaimesta</translation>
     </message>
     <message>
         <source>Clef-barline distance</source>
-        <translation type="unfinished">etäisyys tahtiviivasta</translation>
+        <translation>etäisyys tahtiviivasta</translation>
     </message>
     <message>
         <source>Begin repeat left margin</source>
-        <translation type="unfinished">kertausmerkin vasen marginaali</translation>
+        <translation>kertausmerkin vasen marginaali</translation>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
@@ -1811,31 +1811,31 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Progression</source>
-        <translation type="unfinished">vaikutus</translation>
+        <translation>vaikutus</translation>
     </message>
     <message>
         <source>Shortest stem</source>
-        <translation type="unfinished">lyhin varsi</translation>
+        <translation>lyhin varsi</translation>
     </message>
     <message>
         <source>Accidental note distance</source>
-        <translation type="unfinished">tilapäisnuotin etäisyys</translation>
+        <translation>tilapäisnuotin etäisyys</translation>
     </message>
     <message>
         <source>Accidental distance</source>
-        <translation type="unfinished">tilapäismerkin etäisyys</translation>
+        <translation>tilapäismerkin etäisyys</translation>
     </message>
     <message>
         <source>Note dot distance</source>
-        <translation type="unfinished">nuotin pisteen etäisyys</translation>
+        <translation>nuotin pisteen etäisyys</translation>
     </message>
     <message>
         <source>Dot dot distance</source>
-        <translation type="unfinished">kaksoispisteen etäisyys</translation>
+        <translation>kaksoispisteen etäisyys</translation>
     </message>
     <message>
         <source>Ledger line width</source>
-        <translation type="unfinished">apuviivan paksuus</translation>
+        <translation>apuviivan paksuus</translation>
     </message>
     <message>
         <source>Distance to note</source>
@@ -1867,11 +1867,11 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Small staff size</source>
-        <translation type="unfinished">Pienen viivaston koko</translation>
+        <translation>Pienen viivaston koko</translation>
     </message>
     <message>
         <source>Small note size</source>
-        <translation type="unfinished">Pienen nuotin koko</translation>
+        <translation>Pienen nuotin koko</translation>
     </message>
     <message>
         <source>Grace note size</source>
@@ -1879,7 +1879,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Small clef size</source>
-        <translation type="unfinished">Pienen avaimen koko</translation>
+        <translation>Pienen avaimen koko</translation>
     </message>
     <message>
         <source>Line break height</source>
@@ -1887,7 +1887,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Use German names</source>
-        <translation type="unfinished">Käytä saksalaisia nimiä</translation>
+        <translation>Käytä saksalaisia nimiä</translation>
     </message>
     <message>
         <source>Chord description file</source>
@@ -1895,19 +1895,19 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Articulation - note head distance</source>
-        <translation type="unfinished">Artikulaatio - nuotinpään etäisyys</translation>
+        <translation>Artikulaatio - nuotinpään etäisyys</translation>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation type="unfinished">Artikulaatio - nuotinvarren etäisyys</translation>
+        <translation>Artikulaatio - nuotinvarren etäisyys</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
-        <translation type="unfinished">Artikulaatio - artikulaation etäisyys</translation>
+        <translation>Artikulaatio - artikulaation etäisyys</translation>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
-        <translation type="unfinished">Varren suunta moniäänisessä yhteydessä</translation>
+        <translation>Varren suunta moniäänisessä yhteydessä</translation>
     </message>
 </context>
 <context>
@@ -1960,7 +1960,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>selectable</source>
-        <translation type="unfinished">valittavissa</translation>
+        <translation>valittavissa</translation>
     </message>
     <message>
         <source>droptarget</source>
@@ -1999,15 +1999,15 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished">Tiedostonimi:</translation>
+        <translation>Tiedostonimi:</translation>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation type="unfinished">Osan otsikko:</translation>
+        <translation>Osan otsikko:</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Sulje</translation>
+        <translation>Sulje</translation>
     </message>
 </context>
 <context>
@@ -2077,7 +2077,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Tekstin ominaisuudet...</translation>
+        <translation>Tekstin ominaisuudet...</translation>
     </message>
 </context>
 <context>
@@ -2099,7 +2099,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Image Properties</source>
-        <translation type="unfinished">Kuvan ominaisuudet</translation>
+        <translation>Kuvan ominaisuudet</translation>
     </message>
 </context>
 <context>
@@ -2183,7 +2183,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2400,7 +2400,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation type="unfinished">Luo sävellaji</translation>
+        <translation>Luo sävellaji</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -2412,14 +2412,14 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Lisää</translation>
+        <translation>Lisää</translation>
     </message>
 </context>
 <context>
     <name>KeyEditor</name>
     <message>
         <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished">MuseScore: Sävellajit</translation>
+        <translation>MuseScore: Sävellajit</translation>
     </message>
 </context>
 <context>
@@ -4699,7 +4699,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation type="unfinished">Valitse PortMidi input-liitäntä</translation>
+        <translation>Valitse PortMidi input-liitäntä</translation>
     </message>
 </context>
 <context>
@@ -8091,7 +8091,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished">Siirrä ylös</translation>
+        <translation>Siirrä ylös</translation>
     </message>
     <message>
         <source>Pitch down</source>
@@ -8099,7 +8099,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Alas</translation>
+        <translation>Alas</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
@@ -8231,7 +8231,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load style</source>
-        <translation type="unfinished">Lataa tyyli</translation>
+        <translation>Lataa tyyli</translation>
     </message>
     <message>
         <source>Save style</source>
@@ -8239,7 +8239,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished">Valitse kaikki</translation>
+        <translation>Valitse kaikki</translation>
     </message>
     <message>
         <source>Edit Chord Style...</source>
@@ -8247,7 +8247,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Poista</translation>
+        <translation>Poista</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
@@ -8790,31 +8790,31 @@ p, li { white-space: pre-wrap; }
     <name>preferences</name>
     <message>
         <source>Never</source>
-        <translation type="unfinished">Ei koskaan</translation>
+        <translation>Ei koskaan</translation>
     </message>
     <message>
         <source>Every day</source>
-        <translation type="unfinished">Joka päivä</translation>
+        <translation>Joka päivä</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation type="unfinished">Joka 3. päivä</translation>
+        <translation>Joka 3. päivä</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation type="unfinished">Joka viikko</translation>
+        <translation>Joka viikko</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation type="unfinished">Joka 2. viikko</translation>
+        <translation>Joka 2. viikko</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation type="unfinished">Joka kuukausi</translation>
+        <translation>Joka kuukausi</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished">Joka toinen kuukausi</translation>
+        <translation>Joka toinen kuukausi</translation>
     </message>
 </context>
 <context>
@@ -8885,11 +8885,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole rest</source>
-        <translation type="unfinished">kokotauko</translation>
+        <translation>kokotauko</translation>
     </message>
     <message>
         <source>half rest</source>
-        <translation type="unfinished">puolitauko</translation>
+        <translation>puolitauko</translation>
     </message>
     <message>
         <source>outside whole rest</source>
@@ -9621,47 +9621,47 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>zero</source>
-        <translation type="unfinished">nolla</translation>
+        <translation>nolla</translation>
     </message>
     <message>
         <source>one</source>
-        <translation type="unfinished">yksi</translation>
+        <translation>yksi</translation>
     </message>
     <message>
         <source>two</source>
-        <translation type="unfinished">kaksi</translation>
+        <translation>kaksi</translation>
     </message>
     <message>
         <source>three</source>
-        <translation type="unfinished">kolme</translation>
+        <translation>kolme</translation>
     </message>
     <message>
         <source>four</source>
-        <translation type="unfinished">neljä</translation>
+        <translation>neljä</translation>
     </message>
     <message>
         <source>five</source>
-        <translation type="unfinished">viisi</translation>
+        <translation>viisi</translation>
     </message>
     <message>
         <source>six</source>
-        <translation type="unfinished">kuusi</translation>
+        <translation>kuusi</translation>
     </message>
     <message>
         <source>seven</source>
-        <translation type="unfinished">seitsemän</translation>
+        <translation>seitsemän</translation>
     </message>
     <message>
         <source>eight</source>
-        <translation type="unfinished">kahdeksan</translation>
+        <translation>kahdeksan</translation>
     </message>
     <message>
         <source>nine</source>
-        <translation type="unfinished">yhdeksän</translation>
+        <translation>yhdeksän</translation>
     </message>
     <message>
         <source>plus</source>
-        <translation type="unfinished">plus</translation>
+        <translation>plus</translation>
     </message>
 </context>
 </TS>
