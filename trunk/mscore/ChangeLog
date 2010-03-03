@@ -1,5 +1,6 @@
 2.mar (db)
       - add zoom shortcuts
+      - mark rare instruments for new score screen (instruments.xml locale)
 28.feb (ws)
       - New attempt implementing "transpose by key": transpose interval is
         computed from target key -> first key (#2281)
