@@ -253,7 +253,7 @@ void Part::write(Xml& xml) const
             staff->write(xml);
       if (!_longName->isEmpty())
             _longName->write(xml, "name");
-      if (_shortName->isEmpty())
+      if (!_shortName->isEmpty())
             _shortName->write(xml, "shortName");
       if (!_show)
             xml.tag("show", _show);

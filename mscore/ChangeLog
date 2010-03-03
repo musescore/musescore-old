@@ -1,4 +1,5 @@
 3.mar (ws)
+      - fix #4837: Instrument short names disappear
       - fix undo crash
 2.mar (db)
       - add zoom shortcuts
