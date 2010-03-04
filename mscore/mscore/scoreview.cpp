@@ -97,11 +97,8 @@ class MagTransition1 : public QEventTransition
       {
    protected:
       virtual bool eventTest(QEvent* e) {
-            if (!QEventTransition::eventTest(e)) {
-                  printf("MagTransition1: wrong event\n");
+            if (!QEventTransition::eventTest(e))
                   return false;
-                  }
-            printf("MagTransition1: event %d\n", !(QApplication::keyboardModifiers() & Qt::ShiftModifier));
             return !(QApplication::keyboardModifiers() & Qt::ShiftModifier);
             }
       virtual void onTransition(QEvent* e) {
@@ -126,7 +123,6 @@ class MagTransition2 : public QEventTransition
                   printf("MagTransition2: wrong event\n");
                   return false;
                   }
-            printf("MagTransition2: event %d\n", int (QApplication::keyboardModifiers() & Qt::ShiftModifier));
             return bool(QApplication::keyboardModifiers() & Qt::ShiftModifier);
             }
       virtual void onTransition(QEvent* e) {
@@ -746,7 +742,6 @@ ScoreView::ScoreView(QWidget* parent)
 
 void ScoreView::setScore(Score* s)
       {
-// printf("ScoreView(%p)::setScore: %p -> %p\n", this, _score, s);
       _score = s;
       if (cursor == 0) {
             cursor = new Cursor(_score, this);
@@ -1235,7 +1230,6 @@ void ScoreView::paintEvent(QPaintEvent* ev)
 
       QRegion region = ev->region();
 
-// double startTime = curTime();
       const QVector<QRect>& vector = region.rects();
       foreach(const QRect& r, vector)
             paint(r, p);
@@ -1253,8 +1247,6 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             }
       if (dragElement)
             dragElement->scanElements(&p, paintElement);
-//double elapsed = curTime() - startTime;
-//printf("paintEvent %f msec\n", elapsed * 1000.0);
       }
 
 //---------------------------------------------------------
@@ -1263,7 +1255,6 @@ void ScoreView::paintEvent(QPaintEvent* ev)
 
 void ScoreView::paint(const QRect& rr, QPainter& p)
       {
-// printf("paint %d %d -- %d %d\n", rr.x(), rr.y(), rr.width(), rr.height());
       p.save();
       if (fgPixmap == 0 || fgPixmap->isNull())
             p.fillRect(rr, _fgColor);
@@ -2382,7 +2373,7 @@ void ScoreView::normalPaste()
 void ScoreView::cmd(const QAction* a)
       {
       QString cmd(a ? a->data().toString() : "");
-//      if (debugMode)
+      if (debugMode)
             printf("ScoreView::cmd <%s>\n", qPrintable(cmd));
 
       if (cmd == "escape")

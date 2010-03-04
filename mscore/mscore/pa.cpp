@@ -81,11 +81,13 @@ Portaudio::~Portaudio()
 
 bool Portaudio::init()
       {
+printf("1\n");
       PaError err = Pa_Initialize();
       if (err != paNoError) {
             printf("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
+printf("2\n");
 
       initialized = true;
       if (debugMode)
@@ -106,6 +108,7 @@ bool Portaudio::init()
       out.suggestedLatency = 0.100;
       out.hostApiSpecificStreamInfo = 0;
 
+printf("3\n");
       err = Pa_OpenStream(&stream, 0, &out, double(_sampleRate), 0, 0, paCallback, (void*)this);
       if (err != paNoError) {
             // fall back to default device:
@@ -116,6 +119,7 @@ bool Portaudio::init()
                   return false;
                   }
             }
+printf("4\n");
       synth = new FluidS::Fluid();
       synth->init(_sampleRate);
 
@@ -125,6 +129,7 @@ bool Portaudio::init()
 #ifdef USE_PORTMIDI
       midiDriver = new PortMidiDriver(seq);
 #endif
+printf("5\n");
       if (midiDriver && !midiDriver->init()) {
             printf("Init midi driver failed\n");
             delete midiDriver;
@@ -135,6 +140,7 @@ bool Portaudio::init()
             return false;
 #endif
             }
+printf("6---\n");
       return true;
       }
 

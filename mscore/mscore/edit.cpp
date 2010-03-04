@@ -1418,18 +1418,15 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
       int tick    = cr->tick();
       Tuplet* ot  = cr->tuplet();
 
-      f.reduce(); //measure duration might not be reduced
+      f.reduce();       //measure duration might not be reduced
       Fraction ratio(n, f.numerator());
       Fraction fr(1, f.denominator());
-      for (;;) {
-            if (qAbs(ratio.numerator() - ratio.denominator())
-               > qAbs(ratio.numerator() - ratio.denominator() * 2)) {
-                  ratio /= 2;
-                  fr    /= 2;
-                  }
-            else
-                  break;
+//       while (qAbs(ratio.numerator() - ratio.denominator()) > qAbs(ratio.numerator() - ratio.denominator() * 2)) {
+      while (ratio.numerator() >= ratio.denominator()*2) {
+            ratio /= 2;
+            fr    /= 2;
             }
+
 //      if (ratio == Fraction(1,1))   // this is not a tuplet
 //            return;
 
