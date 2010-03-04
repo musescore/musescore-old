@@ -6116,6 +6116,14 @@ Zkuste uložení do jiného umístění.</translation>
         <source>MuseScore: Time Signatures</source>
         <translation>MuseScore: Taktová označení</translation>
     </message>
+    <message>
+        <source>4/4 common time</source>
+        <translation type="unfinished">4/4 čtyřčtvrťový takt/rytmus</translation>
+    </message>
+    <message>
+        <source>2/2 alla breve</source>
+        <translation type="unfinished">2/2 alla breve</translation>
+    </message>
 </context>
 <context>
     <name>TimeDialogBase</name>

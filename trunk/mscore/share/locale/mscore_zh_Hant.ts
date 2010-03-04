@@ -6080,6 +6080,14 @@ Try saving to a different location.</source>
         <source>MuseScore: Time Signatures</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>4/4 common time</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>2/2 alla breve</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>TimeDialogBase</name>
