@@ -1597,7 +1597,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   }
             return;
             }
-      QString s = QString("unknown drop format: formats %1:\n").arg(data->hasFormat(mimeSymbolFormat));
+      QString s = tr("unknown drop format: formats %1:\n").arg(data->hasFormat(mimeSymbolFormat));
       foreach(QString ss, data->formats())
             s += (QString("   <%1>\n").arg(ss));
       QMessageBox::warning(0,

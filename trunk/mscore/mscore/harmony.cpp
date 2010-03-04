@@ -1167,7 +1167,7 @@ bool ChordList::write(const QString& name)
 
       xml.etag();
       if (f.error() != QFile::NoError) {
-            QString s = QString("Write Chord Description failed: ") + f.errorString();
+            QString s = qApp->translate("ChordList", "Write Chord Description failed: ") + f.errorString();
             QMessageBox::critical(0, ("MuseScore: Write Chord Description"), s);
             }
       return true;
