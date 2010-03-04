@@ -20,7 +20,7 @@
         <translatorcomment>r2381 translated JLWaltener - 06/12/2009 - QT Linguist v4.6.0</translatorcomment>
         <translation>Révision : 2381</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -855,6 +855,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>automatique</translation>
     </message>
     <message>
@@ -891,10 +892,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation>personnalisé</translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation>décalage</translation>
     </message>
     <message>
@@ -915,6 +918,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation> cent</translation>
     </message>
     <message>
@@ -1564,6 +1568,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>esp.</translation>
     </message>
     <message>
@@ -3574,10 +3583,6 @@ Restaurer la session?</translation>
         <translation>Chercher des mises à jour</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation>Fichiers supportés (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Fichiers MuseScore (*.mscz *.mscx *.msc);;Fichiers MusicXML (*.xml *.mxl);;Fichiers MIDI (*.mid *.midi *.kar);;Fichiers Muse Data (*.md);;Fichiers Capella (*.cap);;</translation>
-    </message>
-    <message>
         <source>Script
 %1
 is incompatible with current interface</source>
@@ -3590,6 +3595,10 @@ est incompatible avec l'interface actuelle</translation>
 %1</source>
         <translation>Cette version de MuseScore est trop ancienne pour executer ce plugin&#13;
 %1</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation>Fichiers supportés (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Fichiers MuseScore (*.mscz *.mscx *.msc);;Fichiers MusicXML (*.xml *.mxl);;Fichiers MIDI (*.mid *.midi *.kar);;Fichiers Muse Data (*.md);;Fichiers Capella (*.cap);;Fichiers BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Tous les fichiers (*)</translation>
     </message>
 </context>
 <context>
@@ -3720,10 +3729,6 @@ est incompatible avec l'interface actuelle</translation>
         <translation>groupe de la tête de note</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation>Type OnTime :</translation>
-    </message>
-    <message>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
@@ -3736,12 +3741,16 @@ est incompatible avec l'interface actuelle</translation>
         <translation>Décalage</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
-        <translation>Type OffTime :</translation>
-    </message>
-    <message>
         <source>Tuning</source>
         <translation>Décalage de la hauteur tonale</translation>
+    </message>
+    <message>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4638,6 +4647,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4647,10 +4657,6 @@ est incompatible avec l'interface actuelle</translation>
     <message>
         <source>Browse...</source>
         <translation>Parcourir...</translation>
-    </message>
-    <message>
-        <source>Use Current Dimensions</source>
-        <translation>Utiliser les dimensions actuelles</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
@@ -4668,11 +4674,11 @@ est incompatible avec l'interface actuelle</translation>
         <source>Auto-correction</source>
         <translation>Correction automatique</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Remplacer 1/2  par le symbole de fraction ½</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Remplacer (C) par le symbole © (Seulement dans le texte de la section copyright)</translation>
     </message>
@@ -4719,6 +4725,10 @@ est incompatible avec l'interface actuelle</translation>
     <message>
         <source>Choose PortMidi input interface</source>
         <translation>Choisir l'interface MIDI d'entrée</translation>
+    </message>
+    <message>
+        <source>Use Current Position</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5516,10 +5526,12 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation/>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation/>
     </message>
 </context>
@@ -5626,6 +5638,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -5967,6 +5980,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X :</translation>
     </message>
     <message>
@@ -5987,6 +6001,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y :</translation>
     </message>
     <message>
@@ -6384,10 +6399,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use double sharps and flats</source>
         <translation>Utiliser des double dièses et bémols</translation>
-    </message>
-    <message>
-        <source>Use multi sharps and flats</source>
-        <translation>Utiliser de dièses et bémols multiples</translation>
     </message>
 </context>
 <context>
@@ -9579,7 +9590,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pedaldash</source>
-        <translation>pédale tiret</translation>
+        <translation>pédale : tiret</translation>
     </message>
     <message>
         <source>pedaldot</source>

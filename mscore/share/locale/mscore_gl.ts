@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>Revisión: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -846,6 +846,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>automático</translation>
     </message>
     <message>
@@ -890,10 +891,12 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation>usuario</translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation>desprazamento</translation>
     </message>
     <message>
@@ -914,6 +917,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation> cent</translation>
     </message>
     <message>
@@ -1579,6 +1583,11 @@ fallou: </translation>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -3573,10 +3582,6 @@ Restaurar a sesión?</translation>
         <translation>Comprobar se hai actualizacións</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation>Todos os ficheiros admitidos (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Ficheiros de MuseScore (*.mscz *.mscx *.msc);;Ficheiros MusicXML (*.xml *.mxl);;Ficheiros MIDI (*.mid *.midi *.kar);;Ficheiros de datos de Muse (*.md);;Ficheiros de Capella (*.cap);;</translation>
-    </message>
-    <message>
         <source>Script
 %1
 is incompatible with current interface</source>
@@ -3589,6 +3594,10 @@ is incompatible with current interface</source>
 %1</source>
         <translation>Musescore é vello de máis para executar este guión&#13;
 %1</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3719,10 +3728,6 @@ is incompatible with current interface</source>
         <translation>grupo de cabezas</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation>Tipo no tempo:</translation>
-    </message>
-    <message>
         <source>Auto</source>
         <translation>Automático</translation>
     </message>
@@ -3735,12 +3740,16 @@ is incompatible with current interface</source>
         <translation>Desprazamento</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
-        <translation>Tipo fóra do tempo:</translation>
-    </message>
-    <message>
         <source>Tuning</source>
         <translation>Afinación</translation>
+    </message>
+    <message>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4636,6 +4645,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4645,10 +4655,6 @@ is incompatible with current interface</source>
     <message>
         <source>Browse...</source>
         <translation>Examinar</translation>
-    </message>
-    <message>
-        <source>Use Current Dimensions</source>
-        <translation>Empregar as dimensións actuais</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
@@ -4666,11 +4672,11 @@ is incompatible with current interface</source>
         <source>Auto-correction</source>
         <translation>Corrección automática</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Substituír 1/2 polo carácter de fracción½</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Substituír (C) polo símbolo de copyright © (Só se aplica ao texto da sección do copyright)</translation>
     </message>
@@ -4717,6 +4723,10 @@ is incompatible with current interface</source>
     <message>
         <source>Choose PortMidi input interface</source>
         <translation>Escoller a interface de entrada PortMidi</translation>
+    </message>
+    <message>
+        <source>Use Current Position</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5514,10 +5524,12 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation>inicioElemento</translation>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation>finElemento</translation>
     </message>
 </context>
@@ -5624,6 +5636,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -5965,6 +5978,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5985,6 +5999,7 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6379,10 +6394,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use double sharps and flats</source>
         <translation>Empregar dobres sostenidos e bemoles</translation>
-    </message>
-    <message>
-        <source>Use multi sharps and flats</source>
-        <translation>Empregar varios sostenidos e bemoles</translation>
     </message>
 </context>
 <context>

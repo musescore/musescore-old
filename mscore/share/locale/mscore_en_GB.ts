@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>Revision: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -845,6 +845,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>auto</translation>
     </message>
     <message>
@@ -881,10 +882,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation>user</translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation>offset</translation>
     </message>
     <message>
@@ -905,6 +908,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation> cent</translation>
     </message>
     <message>
@@ -1297,7 +1301,7 @@ failed: </translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Pitch</translation>
     </message>
 </context>
 <context>
@@ -1368,39 +1372,39 @@ failed: </translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Perfect Unison</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Augmented Unison</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Diminished Second</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Minor Second</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Major Second</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Augmented Second</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Diminished Third</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Minor Third</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Major Third</translation>
     </message>
     <message>
         <source>Augmented Third</source>
@@ -1472,11 +1476,11 @@ failed: </translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">up</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">down</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
@@ -1562,6 +1566,11 @@ failed: </translation>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -2194,7 +2203,7 @@ failed: </translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">0</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2264,7 +2273,7 @@ failed: </translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">0</translation>
     </message>
     <message>
         <source>Add</source>
@@ -3561,10 +3570,6 @@ Restore session?</source>
         <translation>Check for Update</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</translation>
-    </message>
-    <message>
         <source>Script
 %1
 is incompatible with current interface</source>
@@ -3573,6 +3578,10 @@ is incompatible with current interface</source>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -3704,10 +3713,6 @@ is incompatible with current interface</source>
         <translation>note head group</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation>OnTimeType:</translation>
-    </message>
-    <message>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
@@ -3720,11 +3725,15 @@ is incompatible with current interface</source>
         <translation>Offset</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
-        <translation>OffTimeType:</translation>
+        <source>Tuning</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Tuning</source>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4621,6 +4630,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4630,10 +4640,6 @@ is incompatible with current interface</source>
     <message>
         <source>Browse...</source>
         <translation>Browse…</translation>
-    </message>
-    <message>
-        <source>Use Current Dimensions</source>
-        <translation>Use Current Dimensions</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
@@ -4651,11 +4657,11 @@ is incompatible with current interface</source>
         <source>Auto-correction</source>
         <translation>Auto-correction</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Replace 1/2 with fraction character ½</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</translation>
     </message>
@@ -4701,6 +4707,10 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Use Current Position</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5298,11 +5308,11 @@ Try saving to a different location.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dialog</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">0</translation>
     </message>
     <message>
         <source>show more</source>
@@ -5493,10 +5503,12 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation>startElement</translation>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation>endElement</translation>
     </message>
 </context>
@@ -5603,6 +5615,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -5760,15 +5773,15 @@ Try saving to a different location.</translation>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Set Invisible</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Set Visible</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Text Properties…</translation>
     </message>
 </context>
 <context>
@@ -5944,6 +5957,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5964,6 +5978,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6056,7 +6071,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">System Flag</translation>
     </message>
 </context>
 <context>
@@ -6362,23 +6377,19 @@ p, li { white-space: pre-wrap; }
         <source>Use double sharps and flats</source>
         <translation type="unfinished"/>
     </message>
-    <message>
-        <source>Use multi sharps and flats</source>
-        <translation type="unfinished"/>
-    </message>
 </context>
 <context>
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tuplet Properties…</translation>
     </message>
 </context>
 <context>
     <name>TupletBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Form</translation>
     </message>
 </context>
 <context>
@@ -6413,7 +6424,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bracket</translation>
     </message>
     <message>
         <source>auto bracket</source>
@@ -6429,7 +6440,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">/</translation>
     </message>
 </context>
 <context>
@@ -6456,7 +6467,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bracket</translation>
     </message>
     <message>
         <source>auto bracket</source>
@@ -6486,7 +6497,7 @@ p, li { white-space: pre-wrap; }
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Add</translation>
     </message>
     <message>
         <source>VBox Properties...</source>
@@ -6501,7 +6512,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Text:</translation>
     </message>
     <message>
         <source>Repeat List:</source>
@@ -6516,14 +6527,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Line Properties…</translation>
     </message>
 </context>
 <context>
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">none</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -6674,7 +6685,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Save</translation>
     </message>
     <message>
         <source>Save As...</source>
@@ -6690,7 +6701,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Close</translation>
     </message>
     <message>
         <source>file new</source>
@@ -6886,31 +6897,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">B</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">C</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">D</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">E</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">F</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">G</translation>
     </message>
     <message>
         <source>Add A</source>
@@ -7350,11 +7361,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">beam mid</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">no beam</translation>
     </message>
     <message>
         <source>beam 32</source>
@@ -7398,7 +7409,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Quit</translation>
     </message>
     <message>
         <source>Mag</source>
@@ -7406,11 +7417,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Zoom Canvas</translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Lyrics</translation>
     </message>
     <message>
         <source>Fingering Palette</source>
@@ -7422,7 +7433,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Fingering</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Fingering</translation>
     </message>
     <message>
         <source>Tempo Palette</source>
@@ -7434,11 +7445,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tempo</translation>
     </message>
     <message>
         <source>Metronome</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Metronome</translation>
     </message>
     <message>
         <source>Add System Text</source>
@@ -7458,7 +7469,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Text</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Add Text</translation>
     </message>
     <message>
         <source>Frame Text</source>
@@ -7470,7 +7481,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Title</translation>
     </message>
     <message>
         <source>Add Title Text</source>
@@ -7482,7 +7493,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Subtitle</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Subtitle</translation>
     </message>
     <message>
         <source>Add Subtitle Text</source>
@@ -7494,7 +7505,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Composer</translation>
     </message>
     <message>
         <source>Add Composer Text</source>
@@ -7506,7 +7517,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Poet</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Poet</translation>
     </message>
     <message>
         <source>Add Poet Text</source>
@@ -7518,7 +7529,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Copyright</translation>
     </message>
     <message>
         <source>Add Copyright Text</source>
@@ -7550,11 +7561,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rehearsal Mark</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Play</translation>
     </message>
     <message>
         <source>Start or stop playback</source>
@@ -7562,7 +7573,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rewind</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rewind</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -7594,7 +7605,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Transpose</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -7634,11 +7645,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Concert Pitch</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Display in Concert Pitch</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -7782,7 +7793,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Search</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -7822,7 +7833,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Synthesiser</translation>
     </message>
     <message>
         <source>Synthesizer Control</source>
@@ -8006,7 +8017,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rest</translation>
     </message>
     <message>
         <source>Add staccato</source>
@@ -8054,7 +8065,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Up</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -8098,7 +8109,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Down</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
@@ -8246,7 +8257,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Delete</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
@@ -8491,11 +8502,11 @@ p, li { white-space: pre-wrap; }
     <name>elementName</name>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Symbol</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Text</translation>
     </message>
     <message>
         <source>SlurSegment</source>
@@ -8503,7 +8514,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>BarLine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bar Line</translation>
     </message>
     <message>
         <source>StemSlash</source>
@@ -8511,15 +8522,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Line</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Bracket</translation>
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Arpeggio</translation>
     </message>
     <message>
         <source>Accidental</source>
@@ -8527,7 +8538,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Note</translation>
     </message>
     <message>
         <source>Stem</source>
@@ -8535,7 +8546,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Clef</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Clef</translation>
     </message>
     <message>
         <source>KeySig</source>
@@ -8547,15 +8558,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rest</translation>
     </message>
     <message>
         <source>Breath</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Breath</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Glissando</translation>
     </message>
     <message>
         <source>RepeatMeasure</source>
@@ -8563,7 +8574,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Image</translation>
     </message>
     <message>
         <source>Tie</source>
@@ -8575,7 +8586,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Page</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -8583,11 +8594,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Hook</translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Lyrics</translation>
     </message>
     <message>
         <source>Marker</source>
@@ -8603,7 +8614,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tempo</translation>
     </message>
     <message>
         <source>StaffText</source>
@@ -8659,7 +8670,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tremolo</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -8695,11 +8706,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ottava</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ottava</translation>
     </message>
     <message>
         <source>Pedal</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Pedal</translation>
     </message>
     <message>
         <source>Trill</source>
@@ -8707,15 +8718,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLine</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">TextLine</translation>
     </message>
     <message>
         <source>Segment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Segment</translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">System</translation>
     </message>
     <message>
         <source>Compound</source>
@@ -8723,11 +8734,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Chord</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Slur</translation>
     </message>
     <message>
         <source>Element</source>
@@ -8836,7 +8847,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">m</translation>
     </message>
     <message>
         <source>p</source>
@@ -9036,7 +9047,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">dot</translation>
     </message>
     <message>
         <source>longa up</source>

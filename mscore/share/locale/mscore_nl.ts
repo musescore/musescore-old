@@ -7,7 +7,7 @@
         <source>Version: 0.9.0</source>
         <translation>Versie: 0.9.0</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -825,6 +825,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>automatisch</translation>
     </message>
     <message>
@@ -833,6 +834,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation>gebruiker</translation>
     </message>
     <message>
@@ -861,6 +863,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation>compensatie</translation>
     </message>
     <message>
@@ -910,10 +913,11 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>spaties</translation>
+        <translation>spatie</translation>
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation> cent</translation>
     </message>
     <message>
@@ -1013,7 +1017,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation type="unfinished"/>
+        <translation>BalkVerplaats</translation>
     </message>
 </context>
 <context>
@@ -1531,6 +1535,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -2620,7 +2629,7 @@ mislukt: </translation>
     <name>MagBox</name>
     <message>
         <source>Zoom Canvas</source>
-        <translation>Inzoomen/Uitzoomen</translation>
+        <translation>Beeld partituur vergroten / verkleinen</translation>
     </message>
     <message>
         <source>Magnification</source>
@@ -3220,7 +3229,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Noten Invoeren</translation>
+        <translation>Noten Invoer</translation>
     </message>
     <message>
         <source>F major,  D minor</source>
@@ -3573,10 +3582,6 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
         <translation>Controleer op nieuwe versie</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Bestanden (*.cap);;</translation>
-    </message>
-    <message>
         <source>Script
 %1
 is incompatible with current interface</source>
@@ -3589,6 +3594,10 @@ is niet compactibel met de huidige interface</translation>
 %1</source>
         <translation>MuseScore te oud voor script&#13;
 %1</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation>Alle ondersteunde bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore bestanden (*.mscz *.mscx *.msc);;MusicXML bestanden (*.xml *.mxl);;MIDI bestanden (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella bestanden (*.cap);;BB bestanden &lt;experimenteel&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle bestanden (*)</translation>
     </message>
 </context>
 <context>
@@ -3719,10 +3728,6 @@ is niet compactibel met de huidige interface</translation>
         <translation>Gebruiker</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation>OnTime Type:</translation>
-    </message>
-    <message>
         <source>Offset</source>
         <translation>Compensatie</translation>
     </message>
@@ -3731,15 +3736,19 @@ is niet compactibel met de huidige interface</translation>
         <translation>hoofd index</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
-        <translation>OffTime Type:</translation>
-    </message>
-    <message>
         <source>note head group</source>
         <translation>nootkoppen-groep</translation>
     </message>
     <message>
         <source>Tuning</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4160,6 +4169,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4386,7 +4396,7 @@ is niet compactibel met de huidige interface</translation>
         <source>Color notes outside of usable pitch range</source>
         <translation>Kleur de noten welke buiten het berijk van het instrument liggen</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Vervang 1/2 met  karakterr ½</translation>
     </message>
@@ -4554,7 +4564,7 @@ is niet compactibel met de huidige interface</translation>
         <source>ru Russian</source>
         <translation>ru Russisch</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Vervang (C) met het copyright symbool © (Alleen van toepassing op tekst in het tekstvak auteursrechten)</translation>
     </message>
@@ -4605,10 +4615,6 @@ is niet compactibel met de huidige interface</translation>
     <message>
         <source>Default Paper Size</source>
         <translation>Standaard papierformaat</translation>
-    </message>
-    <message>
-        <source>Use Current Dimensions</source>
-        <translation>Huidige Dimensies</translation>
     </message>
     <message>
         <source>Default foreground</source>
@@ -4717,6 +4723,10 @@ is niet compactibel met de huidige interface</translation>
     <message>
         <source>Choose PortMidi input interface</source>
         <translation>Kies PortMidi input-interface</translation>
+    </message>
+    <message>
+        <source>Use Current Position</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5515,10 +5525,12 @@ mislukt: </translation>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation>eindelement</translation>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation>beginelement</translation>
     </message>
 </context>
@@ -5589,6 +5601,7 @@ mislukt: </translation>
     <name>SynthControl</name>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -5894,10 +5907,12 @@ mislukt: </translation>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6384,10 +6399,6 @@ p, li { white-space: pre-wrap; }
         <source>Use double sharps and flats</source>
         <translation>Gebruik dubbele kruisen en mollen</translation>
     </message>
-    <message>
-        <source>Use multi sharps and flats</source>
-        <translation>Gebruik meerdere kruisen en mollen</translation>
-    </message>
 </context>
 <context>
     <name>Tuplet</name>
@@ -6677,7 +6688,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation>kruis met pijl omhoog en omlaagl</translation>
+        <translation>kruis met pijl omhoog en omlaag</translation>
     </message>
     <message>
         <source>sharp arrow down</source>
