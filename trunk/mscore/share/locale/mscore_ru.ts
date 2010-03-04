@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>Редакция: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -373,7 +373,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7Sus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">9sus {7S?}</translation>
     </message>
     <message>
         <source>m6</source>
@@ -401,7 +401,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>5b</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">5b</translation>
     </message>
     <message>
         <source>aug</source>
@@ -845,6 +845,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>авто</translation>
     </message>
     <message>
@@ -881,10 +882,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -905,6 +908,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1472,11 +1476,11 @@ failed: </source>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">вверх</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">вниз</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
@@ -1578,6 +1582,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2662,7 +2671,7 @@ failed: </source>
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">без штиля</translation>
     </message>
 </context>
 <context>
@@ -3559,10 +3568,6 @@ Restore session?</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Script
 %1
 is incompatible with current interface</source>
@@ -3571,6 +3576,10 @@ is incompatible with current interface</source>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -3702,10 +3711,6 @@ is incompatible with current interface</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Auto</source>
         <translation type="unfinished">Авто</translation>
     </message>
@@ -3718,11 +3723,15 @@ is incompatible with current interface</source>
         <translation type="unfinished">Смещение</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
+        <source>Tuning</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>Tuning</source>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4619,6 +4628,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>мм</translation>
     </message>
     <message>
@@ -4627,10 +4637,6 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Use Current Dimensions</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -4649,11 +4655,11 @@ is incompatible with current interface</source>
         <source>Auto-correction</source>
         <translation type="unfinished"/>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation type="unfinished"/>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"/>
     </message>
@@ -4699,6 +4705,10 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Use Current Position</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5490,10 +5500,12 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5600,6 +5612,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -5941,6 +5954,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5961,6 +5975,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6357,10 +6372,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Use multi sharps and flats</source>
         <translation type="unfinished"/>
     </message>
 </context>

@@ -20,7 +20,7 @@
         <translation>Ελληνική μετάφραση: ΙΟΝΙΟ ΠΑΝΕΠΙΣΤΗΜΙΟ
 Τμήμα Μουσικών Σπουδών</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -856,6 +856,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>αυτόματο</translation>
     </message>
     <message>
@@ -884,10 +885,12 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation>χρήστης</translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation>απόκλιση</translation>
     </message>
     <message>
@@ -920,6 +923,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation> cent</translation>
     </message>
     <message>
@@ -1611,6 +1615,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -3596,10 +3605,6 @@ Restore session?</source>
         <translation>Έλεγχος για Ενημερώσεις</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation>Όλα τα Υποστηριζόμενα Αρχεία (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Αρχεία MuseScore (*.mscz *.mscx *.msc);;Αρχεία MusicXML (*.xml *.mxl);;Αρχεία MIDI (*.mid *.midi *.kar);;Αρχεία Δεδομένων Muse (*.md);;Αρχεία Capella (*.cap);;</translation>
-    </message>
-    <message>
         <source>Script
 %1
 is incompatible with current interface</source>
@@ -3612,6 +3617,10 @@ is incompatible with current interface</translation>
 %1</source>
         <translation>Το MuseScore είναι πολύ παλιό για να τρέξει το σενάριο&#13;
 %1</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3742,10 +3751,6 @@ is incompatible with current interface</translation>
         <translation>ομάδα κεφαλών φθογγοσήμων</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation>Τύπος OnTime:</translation>
-    </message>
-    <message>
         <source>Auto</source>
         <translation>Αυτόματο</translation>
     </message>
@@ -3758,12 +3763,16 @@ is incompatible with current interface</translation>
         <translation>Απόκλιση</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
-        <translation>Τύπος OffTime:</translation>
-    </message>
-    <message>
         <source>Tuning</source>
         <translation>Κούρδισμα</translation>
+    </message>
+    <message>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4304,10 +4313,6 @@ is incompatible with current interface</translation>
         <translation>εμφάνιση</translation>
     </message>
     <message>
-        <source>Use Current Dimensions</source>
-        <translation>Χρήση Τρεχουσών Διαστάσεων</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>Στυλ</translation>
     </message>
@@ -4530,6 +4535,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4692,11 +4698,11 @@ is incompatible with current interface</translation>
         <source>Auto-correction</source>
         <translation>Αυτόματη Διόρθωση</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Αντικατάσταση του 1/2 με χαρακτήρα κλάσματος ½</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Αντικατάσταση του (C) με το σύμβολο περί πνευματικών δικαιωμάτων  © (Ισχύει μόνο για το κείμενο στο τμήμα πνευματικών δικαιωμάτων)</translation>
     </message>
@@ -4743,6 +4749,10 @@ is incompatible with current interface</translation>
     <message>
         <source>Choose PortMidi input interface</source>
         <translation>Choose PortMidi input interface</translation>
+    </message>
+    <message>
+        <source>Use Current Position</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5540,10 +5550,12 @@ failed: </source>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation>αρχή Στοιχείου</translation>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation>τέλος Στοιχείου</translation>
     </message>
 </context>
@@ -5650,6 +5662,7 @@ failed: </source>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translatorcomment>I know what Hz means! 1/T = N Hz</translatorcomment>
         <translation>Hz</translation>
     </message>
@@ -5993,6 +6006,7 @@ failed: </source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -6013,6 +6027,7 @@ failed: </source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6410,10 +6425,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use double sharps and flats</source>
         <translation>Χρήση διπλών διέσεων και υφέσεων</translation>
-    </message>
-    <message>
-        <source>Use multi sharps and flats</source>
-        <translation>Χρήση πολλαπλών διέσεων και υφέσεων</translation>
     </message>
 </context>
 <context>

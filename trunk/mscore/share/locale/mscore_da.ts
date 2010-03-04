@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>Revision: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -854,6 +854,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>auto</translation>
     </message>
     <message>
@@ -890,10 +891,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation>bruger</translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation>offset</translation>
     </message>
     <message>
@@ -914,6 +917,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation> cent</translation>
     </message>
     <message>
@@ -1579,6 +1583,11 @@ fejl: </translation>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>enh</translation>
     </message>
     <message>
@@ -3573,10 +3582,6 @@ Genskab denne session?</translation>
         <translation>Tjek for opdateringer</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation>Alle understøttede filer (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Filer (*.mscz *.mscx *.msc);;MusicXML Filer (*.xml *.mxl);;MIDI Filer (*.mid *.midi *.kar);;Muse Data Filer (*.md);;Capella Filer (*.cap);;</translation>
-    </message>
-    <message>
         <source>Script
 %1
 is incompatible with current interface</source>
@@ -3589,6 +3594,10 @@ er ikke kompatibelt med det nuværende interface</translation>
 %1</source>
         <translation>MuseScore er for gammel til at køre script'et&#13;
 %1</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3719,10 +3728,6 @@ er ikke kompatibelt med det nuværende interface</translation>
         <translation>Node hoveder</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation>OnTimeType:</translation>
-    </message>
-    <message>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
@@ -3735,12 +3740,16 @@ er ikke kompatibelt med det nuværende interface</translation>
         <translation>Offset</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
-        <translation>OffTimeType:</translation>
-    </message>
-    <message>
         <source>Tuning</source>
         <translation>Stemning</translation>
+    </message>
+    <message>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4636,6 +4645,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4645,10 +4655,6 @@ er ikke kompatibelt med det nuværende interface</translation>
     <message>
         <source>Browse...</source>
         <translation>Gennemse...</translation>
-    </message>
-    <message>
-        <source>Use Current Dimensions</source>
-        <translation>Benyt aktuelle dimensioner</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
@@ -4666,11 +4672,11 @@ er ikke kompatibelt med det nuværende interface</translation>
         <source>Auto-correction</source>
         <translation>Auto-rettelser</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Erstat 1/2 med brøktegnet ½</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Erstat (C) med copyright symbolet © (kun gældende for tekst i copyright sektionen)</translation>
     </message>
@@ -4717,6 +4723,10 @@ er ikke kompatibelt med det nuværende interface</translation>
     <message>
         <source>Choose PortMidi input interface</source>
         <translation>Vælg PortMidi input interface</translation>
+    </message>
+    <message>
+        <source>Use Current Position</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5514,10 +5524,12 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation>startElement</translation>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation>endElement</translation>
     </message>
 </context>
@@ -5624,6 +5636,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -5965,6 +5978,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5985,6 +5999,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6382,10 +6397,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use double sharps and flats</source>
         <translation>Tillad dobbelt-#/b</translation>
-    </message>
-    <message>
-        <source>Use multi sharps and flats</source>
-        <translation>Tillad flere #/b</translation>
     </message>
 </context>
 <context>

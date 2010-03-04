@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>Revision: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -854,6 +854,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translatorcomment>auto</translatorcomment>
         <translation>auto</translation>
     </message>
@@ -891,10 +892,12 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation>Benutzer</translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished">Versatz</translation>
     </message>
     <message>
@@ -915,6 +918,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation> Cent</translation>
     </message>
     <message>
@@ -1482,15 +1486,15 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">hoch</translation>
+        <translation>hoch</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">tiefer</translation>
+        <translation>runter</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation type="unfinished"/>
+        <translation>Instrument ändern</translation>
     </message>
     <message>
         <source>+octave</source>
@@ -1588,6 +1592,11 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -1664,7 +1673,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Tief</translation>
+        <translation>Runter</translation>
     </message>
     <message>
         <source>Voice 2</source>
@@ -2189,7 +2198,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation/>
+        <translation>Vorwärts</translation>
     </message>
     <message>
         <source>...</source>
@@ -2220,7 +2229,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Tief</translation>
+        <translation>Runter</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -2290,7 +2299,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Tief</translation>
+        <translation>Runter</translation>
     </message>
     <message>
         <source>Add Above</source>
@@ -3571,19 +3580,21 @@ Restore session?</source>
         <translation>auf Aktualisierung prüfen</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
-        <translation>Alle unterstützte Dateien (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore (*.mscz *.mscx *.msc);;MusicXML (*.xml *.mxl);;MIDI (*.mid *.midi *.kar);;Muse Data (*.md);;Capella (*.cap);;</translation>
-    </message>
-    <message>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished"/>
+        <translation>Skript&#13;
+%1</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished"/>
+        <translation>MiseScore ist zu alt um Skript&#13;
+%1 laufen zu lassen</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation>Alle unterstützten Dateien (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</translation>
     </message>
 </context>
 <context>
@@ -3714,10 +3725,6 @@ is incompatible with current interface</source>
         <translation>Notenkopfgruppe</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation>Typ Ein-Zeit</translation>
-    </message>
-    <message>
         <source>Auto</source>
         <translation>Auto</translation>
     </message>
@@ -3730,11 +3737,15 @@ is incompatible with current interface</source>
         <translation>Offset</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
-        <translation>Typ Aus-Zeit</translation>
+        <source>Tuning</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Tuning</source>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4632,6 +4643,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>mm</translation>
     </message>
     <message>
@@ -4641,10 +4653,6 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     <message>
         <source>Browse...</source>
         <translation>Browse...</translation>
-    </message>
-    <message>
-        <source>Use Current Dimensions</source>
-        <translation>Aktuelle Einheiten verwenden</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
@@ -4662,11 +4670,11 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <source>Auto-correction</source>
         <translation>Autokorrektur</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation>Ersetzte 1/2 durch ½</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation>Ersetze (C) durch Copyright Symbol © (Nur für Copyright Text)</translation>
     </message>
@@ -4713,6 +4721,10 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     <message>
         <source>Choose PortMidi input interface</source>
         <translation>PortMidi Eingang auswählen</translation>
+    </message>
+    <message>
+        <source>Use Current Position</source>
+        <translation>Aktuelle Position benutzen</translation>
     </message>
 </context>
 <context>
@@ -5166,7 +5178,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
-        <translation type="unfinished"/>
+        <translation>kann Dateityp nicht erkennen</translation>
     </message>
 </context>
 <context>
@@ -5314,7 +5326,7 @@ Versuche sie woanders zu sichern.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <source>0</source>
@@ -5403,7 +5415,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Tief</translation>
+        <translation>Runter</translation>
     </message>
 </context>
 <context>
@@ -5509,10 +5521,12 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation>startElement</translation>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation>endElement</translation>
     </message>
 </context>
@@ -5619,6 +5633,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation>Hz</translation>
     </message>
     <message>
@@ -5780,11 +5795,11 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Sichtbar setzen</translation>
+        <translation>Sichbar machen</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Eigenschaften Text...</translation>
+        <translation>Texteigenschaften...</translation>
     </message>
 </context>
 <context>
@@ -5960,6 +5975,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5980,6 +5996,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6249,7 +6266,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation>Tief</translation>
+        <translation>Runter</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -6374,10 +6391,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use double sharps and flats</source>
         <translation>auch Doppelkreuz und Doppel-B's verwenden</translation>
-    </message>
-    <message>
-        <source>Use multi sharps and flats</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8067,7 +8080,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Hoch</translation>
+        <translation>Hoch</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -8111,7 +8124,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Tief</translation>
+        <translation>Runter</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
