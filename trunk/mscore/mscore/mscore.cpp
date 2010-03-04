@@ -1805,9 +1805,6 @@ int main(int argc, char* av[])
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
 
-      //read languages list
-      mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
-
       // set translator before preferences are read to get
       //    translations for all shortcuts
       //
@@ -1819,6 +1816,9 @@ int main(int argc, char* av[])
             }
 
       setMscoreLocale(localeName);
+
+      //read languages list
+      mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
 
       if (!useFactorySettings)
             preferences.read();
@@ -1997,7 +1997,7 @@ void MuseScore::checkForUpdate()
 
 bool MuseScore::readLanguages(const QString& path)
       {
-      languages.append(LanguageItem("", tr("System")));
+      languages.append(LanguageItem("system", tr("System")));
       QFile qf(path);
       if (qf.exists()){
           QDomDocument doc;

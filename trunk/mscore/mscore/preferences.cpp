@@ -190,7 +190,7 @@ void Preferences::init()
       autoSave                 = true;
       autoSaveTime             = 2;       // minutes
       pngScreenShot            = false;
-      language                 = "System";
+      language                 = "system";
       iconWidth                = 24;
       iconHeight               = 24;
       noteEntryIconWidth       = ICON_WIDTH;
