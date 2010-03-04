@@ -6120,6 +6120,14 @@ mislukt: </translation>
         <source>MuseScore: Time Signatures</source>
         <translation>MuseScore: Maatsoorten</translation>
     </message>
+    <message>
+        <source>4/4 common time</source>
+        <translation>4/4 gewone maat</translation>
+    </message>
+    <message>
+        <source>2/2 alla breve</source>
+        <translation type="unfinished">2/2 alla breve</translation>
+    </message>
 </context>
 <context>
     <name>TimeDialogBase</name>
