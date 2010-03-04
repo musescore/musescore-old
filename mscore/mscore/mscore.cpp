@@ -2574,7 +2574,7 @@ void MuseScore::setPos(int t)
       AL::TimeSigMap* s = cs->sigmap();
       int bar, beat, tick;
       s->tickValues(t, &bar, &beat, &tick);
-      _positionLabel->setText(QString("Bar %1 Beat %2.%3")
+      _positionLabel->setText(tr("Bar %1 Beat %2.%3")
          .arg(bar + 1,  3, 10, QLatin1Char(' '))
          .arg(beat + 1, 2, 10, QLatin1Char(' '))
          .arg(tick,     3, 10, QLatin1Char('0'))

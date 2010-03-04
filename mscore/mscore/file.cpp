@@ -1018,7 +1018,7 @@ void Score::saveStyle()
 
       xml.etag();
       if (f.error() != QFile::NoError) {
-            QString s = QString("Write Style failed: ") + f.errorString();
+            QString s = tr("Write Style failed: ") + f.errorString();
             QMessageBox::critical(0, tr("MuseScore: Write Style"), s);
             }
       }

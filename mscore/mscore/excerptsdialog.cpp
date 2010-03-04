@@ -164,7 +164,7 @@ void ExcerptsDialog::newClicked()
       Excerpt* e = new Excerpt(score);
       QString name;
       for (int i = 1;; ++i) {
-            name = QString("Excerpt-%1").arg(i);
+            name = tr("Part-%1").arg(i);
             Excerpt* ee = 0;
             foreach(ee, el) {
                   if (ee->name() == name)

@@ -60,7 +60,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                qPrintable(sv.toString()));
 #endif
             QMessageBox::critical(0, "MuseScore Error",
-               QString("Error loading plugin\n"
+               tr("Error loading plugin\n"
                   "\"%1\" line %2:\n"
                   "%3").arg(pluginPath)
                      .arg(se->uncaughtExceptionLineNumber())
@@ -307,7 +307,7 @@ void MuseScore::pluginTriggered(int idx)
       if (se->hasUncaughtException()) {
             QScriptValue sv = se->uncaughtException();
             QMessageBox::critical(0, "MuseScore Error",
-               QString("Error loading plugin\n"
+               tr("Error loading plugin\n"
                   "\"%1\" line %2:\n"
                   "%3").arg(pluginPath)
                      .arg(se->uncaughtExceptionLineNumber())

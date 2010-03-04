@@ -389,7 +389,7 @@ void EditDrumset::save()
       nDrumset.save(xml);
       xml.etag();
       if (f.error() != QFile::NoError) {
-            QString s = QString("Write File failed: ") + f.errorString();
+            QString s = tr("Write File failed: ") + f.errorString();
             QMessageBox::critical(this, tr("MuseScore: Write Drumset"), s);
             }
       }
