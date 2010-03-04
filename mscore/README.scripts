@@ -81,13 +81,20 @@ Objects
             The new score is appended to mscores list of scores.
 
          Properties:
-            name        string            file name
-            title       string            title text on score
-            subtitle    string            subtitle text on score (ro)
-            composer    string            composer text on score (ro)
-            poet        string            poet text on score (ro)
-            staves     integer            number of staves (ro)
-            duration   integer            total score duration in seconds (ro)
+            name          string            file name
+            title         string            title text on score
+            subtitle      string            subtitle text on score
+            composer      string            composer text on score
+            poet          string            poet text on score
+            staves        integer           number of staves (ro)
+            duration      integer           total score duration in seconds (ro)
+            pages         integer           number of pages (ro)
+            measures      integer           number of actual measures (ro)
+            parts         integer           number of parts (ro)
+            hasLyrics     bool              true if a lyric element is found in the core (ro)
+            hasHarmonies  bool              true if a valid chordname is found (ro)
+            keysig        integer           key signature at the beginning (ro)
+                                            -7 to 7 or undefined for custom signature
 
          Functions:
             bool save(string path, string type)
@@ -115,14 +122,8 @@ Objects
             appendMeasure(integer n)      append "n" measure to score
             startUndo()                   start undoable operations
             endUndo()                     end undoable operations
-            int pages()                   number of pages
-            int measures()                number of actual measures
-            int parts()                   number of parts
+
             Part part(int i)              part object at index i
-            bool hasLyrics                true if a lyric element is found in the core
-            bool hasHarmonies             true if a valid chordname is found
-            int keysig                    key signature at the beginning
-                -7 to 7 or undefined for custom signature
 
    Cursor
          create:  var a = new Cursor(Score score);
