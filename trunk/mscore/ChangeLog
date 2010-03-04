@@ -1,3 +1,8 @@
+4.mar (ws)
+      - fix #2033: Dividing rests in 3/2 creates wrong rest values
+      - fix #4696: Septuplet uses too many beams
+      - fix #4695: dots collides with next note/rest
+      - fix #4845: New score from templates crash
 3.mar (ws)
       - fix #4837: Instrument short names disappear
       - fix undo crash
