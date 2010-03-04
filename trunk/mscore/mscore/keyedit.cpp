@@ -306,12 +306,12 @@ KeyEditor::KeyEditor(QWidget* parent)
       for (int i = 1; i < 6; ++i) {
             Accidental* s = new Accidental(gscore);
             s->setSubtype(i);
-            sp1->append(s, qApp->translate("Accidental", s->subTypeName()));
+            sp1->append(s, qApp->translate("accidental", s->subTypeName()));
             }
       for (int i = 16; i < 26+9; ++i) {
             Accidental* s = new Accidental(gscore);
             s->setSubtype(i);
-            sp1->append(s, qApp->translate("Accidental", s->subTypeName()));
+            sp1->append(s, qApp->translate("accidental", s->subTypeName()));
             }
 
       connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));

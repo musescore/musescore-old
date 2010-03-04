@@ -931,18 +931,18 @@ void MuseScore::accidentalsMenu()
             for (int i = 1; i < 16+6+4+9; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("Accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
 #endif
             for (int i = 1; i < 6; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("Accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
             for (int i = 16; i < 26+9; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("Accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
             AccidentalBracket* ab = new AccidentalBracket(gscore);
             ab->setSubtype(0);
