@@ -1152,7 +1152,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","tie"),
          QT_TRANSLATE_NOOP("action","tie"),
-          plus_ICON
+         tie_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1427,7 +1427,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Mixer"),
 #ifdef Q_WS_MAC
          //Cmd + M is for minimize to dock on mac
-		 Qt::Key_M, 
+		 Qt::Key_M,
 #else
 		 Qt::Key_F10,
 #endif
