@@ -1300,7 +1300,6 @@ void Chord::layout()
       extraSpace    = -lx + _extraLeadingSpace.val() * _spatium;
       double mirror = 0.0;
       double hw     = 0.0;
-      minSpace      = 0.0;
 
       if (_glissando)
             extraSpace += _spatium * .5;
@@ -1312,7 +1311,14 @@ void Chord::layout()
             else if (lhw > hw)
                   hw = lhw;
             }
-      minSpace += mirror + hw + _extraTrailingSpace.val() * _spatium;
+      double rs = _dotPosX;
+
+      if (dots())
+            rs += point(score()->styleS(ST_dotNoteDistance)) + dots() * point(score()->styleS(ST_dotDotDistance));
+
+      // minSpace = mirror + hw + _extraTrailingSpace.val() * _spatium;
+      minSpace = rs + _extraTrailingSpace.val() * _spatium;
+
       if (up() && _hook)
             minSpace += _hook->width();
       extraSpace += point(_extraLeadingSpace);

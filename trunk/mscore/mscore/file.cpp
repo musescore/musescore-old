@@ -579,7 +579,7 @@ void MuseScore::newFile()
 
       Score* score = new Score(defaultStyle);
       score->setCreated(true);
-      score->layout();
+//      score->layout();
 
       //
       //  create score from template
@@ -771,6 +771,7 @@ void MuseScore::newFile()
             score->setCopyright(copyright);
 
       score->rebuildMidiMapping();
+      score->doLayout();
       setCurrentScoreView(appendScore(score));
       }
 
@@ -1799,7 +1800,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
             if (fileName.endsWith(".png"))
                   fileName = fileName.left(fileName.size() - 4);
             fileName += QString("-%1.png").arg(pageNumber+1, padding, 10, QLatin1Char('0'));
-            
+
             rv = printer.save(fileName, "png");
             if (!rv)
                   break;

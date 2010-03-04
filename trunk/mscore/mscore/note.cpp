@@ -217,6 +217,8 @@ void Note::setPitch(int val)
                   pitchOffset = score()->styleB(ST_concertPitch) ? 0 : part->transposeChromatic();
             }
       _ppitch = _pitch + pitchOffset;
+      if (chord())
+            chord()->pitchChanged();
       }
 
 void Note::setPitch(int a, int b)
@@ -500,9 +502,6 @@ void Note::draw(QPainter& p) const
                   double d  = point(score()->styleS(ST_dotNoteDistance));
                   double dd = point(score()->styleS(ST_dotDotDistance));
                   double y = 0;
-
-//                do not draw dots on line, except ledger lines
-//                if ((_line >= 0) && (_line < 9) && (_line & 1) == 0)
 
                   // do not draw dots on staff line
                   if ((_line & 1) == 0) {
