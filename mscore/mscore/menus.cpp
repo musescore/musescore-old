@@ -880,8 +880,8 @@ void MuseScore::bracketMenu()
             b1->setHeight(_spatium * 7);
             b2->setHeight(_spatium * 7);
 
-            sp->append(b1, "Bracket");
-            sp->append(b2, "Akkolade");
+            sp->append(b1, tr("Bracket"));
+            sp->append(b2, tr("Akkolade"));
 
             }
       bracketPalette->show();
@@ -1045,7 +1045,7 @@ void MuseScore::fingeringMenu()
                   k = new Text(gscore);
                   k->setSubtype(TEXT_FINGERING);
                   k->setText(QString(finger[i]));
-                  sp->append(k, QString("Fingering %1").arg(finger[i]));
+                  sp->append(k, tr("Fingering %1").arg(finger[i]));
                   }
             const char stringnumber[] = "0123456";
             for (unsigned i = 0; i < strlen(stringnumber); ++i) {
