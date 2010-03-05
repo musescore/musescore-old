@@ -1,3 +1,5 @@
+5.mar (ws)
+      - add Overture (*.ove) file format import from Van Ferry
 4.mar (ws)
       - fix #2033: Dividing rests in 3/2 creates wrong rest values
       - fix #4696: Septuplet uses too many beams
