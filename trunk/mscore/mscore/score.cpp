@@ -374,6 +374,10 @@ bool Score::read(QString name)
                         return false;
                   connectSlurs();
                   }
+            else if (cs.toLower() == "ove") {
+            	if(!importOve(name))
+            		return false;
+				}
             else {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   }
