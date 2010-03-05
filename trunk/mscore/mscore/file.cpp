@@ -187,7 +187,7 @@ void MuseScore::loadFile()
             "Capella Files (*.cap);;"
 //            "LilyPond Files <experimental> (*.ly);;"
             "BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;"
-        	"Overture Files (*.ove);;"
+        	  "Overture Files <experimental> (*.ove);;"
             "All Files (*)"
             )
          );
