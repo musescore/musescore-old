@@ -98,9 +98,9 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       extOtherCombo->setEnabled(false);
 
       model = new QStandardItemModel(0, 3);
-      model->setHeaderData(0, Qt::Horizontal, "Type");
-      model->setHeaderData(1, Qt::Horizontal, "Value");
-      model->setHeaderData(2, Qt::Horizontal, "Alter");
+      model->setHeaderData(0, Qt::Horizontal, tr("Type"));
+      model->setHeaderData(1, Qt::Horizontal, tr("Value"));
+      model->setHeaderData(2, Qt::Horizontal, tr("Alter"));
 
       connect(model, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
                      SLOT(modelDataChanged(QModelIndex,QModelIndex)));
