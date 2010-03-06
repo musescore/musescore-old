@@ -1,4 +1,7 @@
 6.mar (ws)
+      - script plugin extension for cursor:
+            rewind(1) positions to start of selection
+            rewind(2) positions to end of selection
       - fix #4881: Special Barlines not included in parts
       - implement reapeat bar lines spanning more than 2 staves
       - fix #2855: Multi-measure rests hide special bar lines

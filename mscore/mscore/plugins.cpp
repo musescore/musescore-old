@@ -27,8 +27,10 @@
 #include "chord.h"
 #include "note.h"
 #include "utils.h"
+#include "sccursor.h"
 
 Q_DECLARE_METATYPE(Score*);
+Q_DECLARE_METATYPE(SCursor*);
 
 //---------------------------------------------------------
 //   registerPlugin
@@ -284,10 +286,6 @@ void MuseScore::pluginTriggered(int idx)
             }
 
       se->globalObject().setProperty("curScore", se->newVariant(qVariantFromValue(cs)));
-
-//      SCursor c;
-//      v = se->getCursorClass()->newInstance(c);
-//      se->globalObject().setProperty("curCursor", v);
 
       QFileInfo fi(f);
       pluginPath = fi.absolutePath();

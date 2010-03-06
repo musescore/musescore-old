@@ -75,21 +75,33 @@ ChordRest* SCursor::cr() const
 //   rewind
 //---------------------------------------------------------
 
-void SCursor::rewind()
+void SCursor::rewind(int type)
       {
-      _segment   = 0;
-      Measure* m = _score->firstMeasure();
-      if (_expandRepeat && !_score->repeatList()->isEmpty()){
-            _curRepeatSegment = _score->repeatList()->first();
-            _curRepeatSegmentIndex = 0;
-            }
-      if (m) {
-            _segment = m->first();
-            if (_staffIdx >= 0) {
-                  int track = _staffIdx * VOICES + _voice;
-                  while (_segment && ((_segment->subtype() != Segment::SegChordRest) || (_segment->element(track) == 0)))
-                        _segment = _segment->next1();
+      if (type == 0) {
+            _segment   = 0;
+            Measure* m = _score->firstMeasure();
+            if (_expandRepeat && !_score->repeatList()->isEmpty()){
+                  _curRepeatSegment = _score->repeatList()->first();
+                  _curRepeatSegmentIndex = 0;
                   }
+            if (m) {
+                  _segment = m->first();
+                  if (_staffIdx >= 0) {
+                        int track = _staffIdx * VOICES + _voice;
+                        while (_segment && ((_segment->subtype() != Segment::SegChordRest) || (_segment->element(track) == 0)))
+                              _segment = _segment->next1();
+                        }
+                  }
+            }
+      else if (type == 1) {
+            _segment  = _score->selection().startSegment();
+            _staffIdx = _score->selection().staffStart();
+            _voice    = 0;
+            }
+      else if (type == 2) {
+            _segment  = _score->selection().endSegment();
+            _staffIdx = _score->selection().staffEnd();
+            _voice    = 0;
             }
       }
 
@@ -153,7 +165,12 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
       switch(_id) {
             case 0:     // "rewind",
                   if (context->argumentCount() == 0) {
-                        cursor->rewind();
+                        cursor->rewind(0);
+                        return context->engine()->undefinedValue();
+                        }
+                  if (context->argumentCount() == 1) {
+                        int val = context->argument(0).toInteger();
+                        cursor->rewind(val);
                         return context->engine()->undefinedValue();
                         }
                   break;

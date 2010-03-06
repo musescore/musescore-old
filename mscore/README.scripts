@@ -134,7 +134,9 @@ Objects
             voice       integer
 
          Fuctions:
-            rewind()                position cursor to staff/voice
+            rewind() or rewind(0)   position cursor to staff/voice
+            rewind(1)               position to start of selection
+            rewind(2)               position to end of selection
             next()                  goto next chord/rest
             nextMeasure()           goto first chord/rest in next measure
             isChord()               return true if cursor points to a chord
