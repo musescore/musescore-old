@@ -140,9 +140,9 @@ DECL_FUNCTION(jack_nframes_t, jack_thread_wait, (jack_client_t *client, int stat
 //
 DECL_FUNCTION(jack_nframes_t, jack_cycle_wait, (jack_client_t *client), (client));
 DECL_VOID_FUNCTION(jack_cycle_signal, (jack_client_t *client, int status), (client, status));
-DECL_FUNCTION(int, jack_set_process_thread, (jack_client_t *client,
-                                            JackThreadCallback fun,
-                                            void *arg), (client, fun, arg));
+//DECL_FUNCTION(int, jack_set_process_thread, (jack_client_t *client,
+//                                            JackThreadCallback fun,
+//                                            void *arg), (client, fun, arg));
 DECL_FUNCTION(int, jack_set_thread_init_callback, (jack_client_t *client,
                                             JackThreadInitCallback thread_init_callback,
                                             void *arg), (client, thread_init_callback, arg));
