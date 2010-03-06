@@ -1148,7 +1148,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                               }
                         }
 
-//                  m->createEndBarLines();
+                  m->createEndBarLines();
 
                   m->layoutX(1.0);
                   ww      = m->layoutWidth().stretchable;

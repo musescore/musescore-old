@@ -2293,8 +2293,8 @@ void Measure::read(QDomElement e, int idx)
                   barLine->setParent(this);
                   barLine->setTick(score()->curTick);
                   barLine->read(e);
-                  if ((barLine->tick() != tick())
-                     && (barLine->tick() != (tick() + tickLen()))) {
+                  if ((barLine->tick() != tick()) && (barLine->tick() != (tick() + tickLen()))) {
+                        // this is a mid measure bar line
                         Segment* s = getSegment(Segment::SegBarLine, barLine->tick());
                         s->add(barLine);
                         }
