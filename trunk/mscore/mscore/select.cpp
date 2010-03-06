@@ -576,7 +576,7 @@ void Score::lassoSelectEnd()
             _selection.setState(SEL_NONE);
             return;
             }
-      _selection.setState(SEL_RANGE);
+      _selection.setState(SEL_LIST);
 
       foreach(const Element* e, _selection.elements()) {
             if (e->type() != NOTE && e->type() != REST)
