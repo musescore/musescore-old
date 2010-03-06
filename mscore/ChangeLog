@@ -1,4 +1,6 @@
 6.mar (ws)
+      - fix #4881: Special Barlines not included in parts
+      - implement reapeat bar lines spanning more than 2 staves
       - fix #2855: Multi-measure rests hide special bar lines
 5.mar (ws)
       - add Overture (*.ove) file format import from Van Ferry
