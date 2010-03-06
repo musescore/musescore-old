@@ -56,20 +56,20 @@ class SCursor {
       SCursor(Score*);
       SCursor(Score*, bool);
       SCursor() {}
-      int staffIdx() const        { return _staffIdx; }
-      int voice() const           { return _voice;    }
-      void setStaffIdx(int v)     { _staffIdx = v;    }
-      void setVoice(int v)        { _voice = v;       }
-      Segment* segment() const    { return _segment;  }
-      void setSegment(Segment* s) { _segment = s;     }
-      RepeatSegment* repeatSegment() const      { return _curRepeatSegment;  }
-      void setRepeatSegment(RepeatSegment* s)   { _curRepeatSegment = s;     }
-      int repeatSegmentIndex()            { return _curRepeatSegmentIndex; }
-      void setRepeatSegmentIndex(int idx) { _curRepeatSegmentIndex = idx; }
-      bool expandRepeat()                 { return _expandRepeat; }
-      Score* score() const        { return _score;    }
+      int staffIdx() const                    { return _staffIdx; }
+      int voice() const                       { return _voice;    }
+      void setStaffIdx(int v)                 { _staffIdx = v;    }
+      void setVoice(int v)                    { _voice = v;       }
+      Segment* segment() const                { return _segment;  }
+      void setSegment(Segment* s)             { _segment = s;     }
+      RepeatSegment* repeatSegment() const    { return _curRepeatSegment;  }
+      void setRepeatSegment(RepeatSegment* s) { _curRepeatSegment = s;     }
+      int repeatSegmentIndex()                { return _curRepeatSegmentIndex; }
+      void setRepeatSegmentIndex(int idx)     { _curRepeatSegmentIndex = idx; }
+      bool expandRepeat()                     { return _expandRepeat; }
+      Score* score() const                    { return _score;    }
       ChordRest* cr() const;
-      void rewind();
+      void rewind(int);
       bool next();
       bool nextMeasure();
       void putStaffText(Text* s);
