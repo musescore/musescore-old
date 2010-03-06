@@ -44,7 +44,7 @@ EOF
 rm ${WORKING_DIRECTORY}/${COMPRESSEDDMGNAME}
 
 #tip: increase the size if error on copy or macdeployqt
-hdiutil create -size 200m -fs HFS+ -volname ${VOLNAME} ${WORKING_DIRECTORY}/${DMGNAME}
+hdiutil create -size 170m -fs HFS+ -volname ${VOLNAME} ${WORKING_DIRECTORY}/${DMGNAME}
  
 # Mount the disk image
 hdiutil attach ${WORKING_DIRECTORY}/${DMGNAME}
@@ -59,15 +59,6 @@ cp -Rp ${APP_PATH} ${VOLUME}/${APPNAME}.app
  
 # fix the libs
 macdeployqt ${VOLUME}/${APPNAME}.app
-
-# jack
-mkdir -p ${VOLUME}/${APPNAME}.app/Contents/Frameworks/Jackmp.framework/Versions/A
-cp -Rp /Library/Frameworks/Jackmp.framework/Versions/A/Jackmp ${VOLUME}/${APPNAME}.app/Contents/Frameworks/Jackmp.framework/Versions/A/
-strip -S ${VOLUME}/${APPNAME}.app/Contents/Frameworks/Jackmp.framework/Versions/A/Jackmp
-mkdir -p ${VOLUME}/${APPNAME}.app/Contents/Frameworks/Jackmp.framework/Resources
-cp -Rp /Library/Frameworks/Jackmp.framework/Resources/Info.plist ${VOLUME}/${APPNAME}.app/Contents/Frameworks/Jackmp.framework/Resources/
-
-install_name_tool -change /Library/Frameworks/Jackmp.framework/Versions/A/Jackmp @executable_path/../Frameworks/Jackmp.framework/Versions/A/Jackmp ${VOLUME}/${APPNAME}.app/Contents/MacOs/${APPNAME}
 
 mv ${VOLUME}/${APPNAME}.app  ${VOLUME}/${LONG_NAME}.app 
 
