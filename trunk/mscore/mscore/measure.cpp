@@ -3178,7 +3178,7 @@ void Measure::layoutX(double stretch)
                               else
                                     stretchDistance = score()->styleS(ST_noteBarDistance).val() * _spatium;
                               }
-                        Element* e = s->element(barLine ? 0 : track);
+                        Element* e = s->element(track);
                         if (e) {
                               found = true;
                               e->layout();
