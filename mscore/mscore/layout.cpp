@@ -390,7 +390,8 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
 //-------------------------------------------------------------------
 //    layoutStage1
-//    compute note head lines and accidentals
+//    - compute note head lines and accidentals
+//    - mark multi measure rest breaks if in multi measure rest mode
 //-------------------------------------------------------------------
 
 void Score::layoutStage1()
@@ -407,22 +408,28 @@ void Score::layoutStage1()
 
                   m->setBreakMMRest(false);
                   if (styleB(ST_createMultiMeasureRests)) {
-                        // TODO: this is slow!
-                        foreach(const Element* el, _gel) {
-                              if (el->type() == VOLTA) {
-                                    const Volta* volta = static_cast<const Volta*>(el);
-                                    if (m->tick() >= volta->tick() && m->tick() <= volta->tick2()) {
+                        if ((m->repeatFlags() & RepeatStart) || (m->prevMeasure() && (m->prevMeasure()->repeatFlags() & RepeatEnd)))
+                              m->setBreakMMRest(true);
+                        else {
+                              foreach (Element* e, *m->el()) {
+                                    if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
                                           m->setBreakMMRest(true);
-                                          break;
+                                    else if (e->type() == TEMPO_TEXT)
+                                          m->setBreakMMRest(true);
+                                    }
+                              if (!m->breakMMRest()) {
+                                    // TODO: this is slow!
+                                    foreach(const Element* el, _gel) {
+                                          if (el->type() == VOLTA) {
+                                                const Volta* volta = static_cast<const Volta*>(el);
+                                                if (m->tick() >= volta->tick() && m->tick() <= volta->tick2()) {
+                                                      m->setBreakMMRest(true);
+                                                      break;
+                                                      }
+                                                }
                                           }
                                     }
                               }
-                        }
-                  foreach(Element* e, *m->el()) {
-                        if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
-                              m->setBreakMMRest(true);
-                        else if (e->type() == TEMPO_TEXT)
-                              m->setBreakMMRest(true);
                         }
 
                   int track = staffIdx * VOICES;
@@ -445,7 +452,6 @@ void Score::layoutStage1()
                               }
                         }
                   }
-
             MeasureBase* mb = m->prev();
             if (mb && mb->type() == MEASURE) {
                   Measure* prev = static_cast<Measure*>(mb);
@@ -1037,7 +1043,6 @@ Measure* Score::skipEmptyMeasures(Measure* m, System* system)
       while (m->isEmpty()) {
             MeasureBase* mb = m->next();
             if (m->breakMultiMeasureRest() && n)
-//            if (m->breakMultiMeasureRest())
                   break;
             ++n;
             if (!mb || (mb->type() != MEASURE))
@@ -1140,12 +1145,10 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                                     }
                               else if (el->type() == KEYSIG || el->type() == TIMESIG)
                                     el->setMag(staffMag);
-//TODO                              double staffMag = staff(staffIdx)->mag();
-//                              el->setMag(staffMag);
                               }
                         }
 
-                  m->createEndBarLines();
+//                  m->createEndBarLines();
 
                   m->layoutX(1.0);
                   ww      = m->layoutWidth().stretchable;
@@ -1342,21 +1345,34 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             //    compute repeat bar lines
             //
             bool firstMeasure = true;
-            for (int i = 0; i < n; ++i) {
-                  MeasureBase* mb = ml[i];
-                  if (mb->type() != MEASURE)
+            MeasureBase* lmb = ml.back();
+            if (lmb->type() == MEASURE) {
+                  if (static_cast<Measure*>(lmb)->multiMeasure() > 0) {
+                        for (;;lmb = lmb->next()) {
+                              if (lmb->next() == 0)
+                                    break;
+                              if ((lmb->next()->type() == MEASURE) && ((Measure*)(lmb->next()))->multiMeasure() >= 0)
+                                    break;
+                              }
+                        }
+                  }
+            for (MeasureBase* mb = ml.front();; mb = mb->next()) {
+                  if (mb->type() != MEASURE) {
+                        mb = mb->next();
+                        if (mb == lmb)
+                              break;
                         continue;
+                        }
                   Measure* m = (Measure*)mb;
-
                   // first measure repeat?
                   bool fmr = firstMeasure && (m->repeatFlags() & RepeatStart);
 
-                  if (i == (n-1)) {       // last measure in system?
+                  if (mb == ml.back()) {       // last measure in system?
                         //
                         // if last bar has a courtesy key signature,
                         // create a double bar line as end bar line
                         //
-                        int bl = (hasCourtesyKeysig && (i == (n-1))) ? DOUBLE_BAR : NORMAL_BAR;
+                        int bl = hasCourtesyKeysig ? DOUBLE_BAR : NORMAL_BAR;
 
                         if (m->repeatFlags() & RepeatEnd)
                               m->setEndBarLineType(END_REPEAT, true);
@@ -1366,10 +1382,11 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         }
                   else {
                         MeasureBase* mb = m->next();
-                        while (mb && mb->type() != MEASURE && (mb != ml[n-1]))
+                        while (mb && mb->type() != MEASURE && (mb != ml.back()))
                               mb = mb->next();
+
                         Measure* nm = 0;
-                        if (mb->type() == MEASURE)
+                        if (mb && mb->type() == MEASURE)
                               nm = (Measure*)mb;
 
                         needRelayout |= m->setStartRepeatBarLine(fmr);
@@ -1386,8 +1403,34 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         }
                   needRelayout |= m->createEndBarLines();
                   firstMeasure = false;
+                  if (mb == lmb)
+                        break;
+                  }
+            Measure* firstMM = 0;
+            for (MeasureBase* mb = ml.front();; mb = mb->next()) {
+                  if (mb->type() != MEASURE) {
+                        mb = mb->next();
+                        if (mb == lmb)
+                              break;
+                        continue;
+                        }
+                  Measure* m = (Measure*)mb;
+
+                  if (m->multiMeasure() > 0)
+                        firstMM = m;
+                  else if ((m->multiMeasure() < 0) &&
+                     (m->next() == 0 || m->next()->type() != MEASURE || static_cast<Measure*>(m->next())->multiMeasure() >= 0))
+                        {
+                        firstMM->setMmEndBarLineType(m->endBarLineType());
+                        needRelayout |= firstMM->createEndBarLines();
+                        }
+
+
+                  if (mb == lmb)
+                        break;
                   }
             }
+
 
       minWidth           = 0.0;
       double totalWeight = 0.0;

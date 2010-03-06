@@ -1,3 +1,5 @@
+6.mar (ws)
+      - fix #2855: Multi-measure rests hide special bar lines
 5.mar (ws)
       - add Overture (*.ove) file format import from Van Ferry
 4.mar (ws)
