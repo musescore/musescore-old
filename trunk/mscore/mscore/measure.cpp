@@ -2166,7 +2166,14 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                               if (beam && beam->elements().front() == cr)
                                     beam->write(xml);
                               }
-                        e->write(xml);
+                        if (segment->subtype() == Segment::SegEndBarLine && _multiMeasure > 0) {
+                              xml.stag("BarLine");
+                              xml.tag("subtype", _endBarLineType);
+                              xml.tag("visible", _endBarLineVisible);
+                              xml.etag();
+                              }
+                        else
+                              e->write(xml);
                         }
                   }
             }
@@ -2220,7 +2227,14 @@ void Measure::write(Xml& xml) const
                                           tuplet->write(xml);
                                           }
                                     }
-                              e->write(xml);
+                              if (segment->subtype() == Segment::SegEndBarLine && _multiMeasure > 0) {
+                                    xml.stag("BarLine");
+                                    xml.tag("subtype", _endBarLineType);
+                                    xml.tag("visible", _endBarLineVisible);
+                                    xml.etag();
+                                    }
+                              else
+                                    e->write(xml);
                               }
                         }
                   }
@@ -3300,16 +3314,22 @@ void Measure::layoutX(double stretch)
                         Rest* rest = static_cast<Rest*>(e);
                         if (rest->duration() == Duration::V_MEASURE) {
                               if (_multiMeasure > 0) {
-                                    Segment* ls = last();
-                                    double eblw = 0.0;
-                                    int t = (track / VOICES) * VOICES;
-                                    if (ls->subtype() == Segment::SegEndBarLine)
-                                          eblw = ls->element(t) ? ls->element(t)->width() : 0.0;
-                                    if (seg == 1)
-                                          rest->setMMWidth(xpos[segs] - 2 * s->x() - eblw);
-                                    else
-                                          rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) - eblw);
-                                    e->rxpos() = 0.0;
+                                    if ((track % VOICES) == 0) {
+                                          Segment* ls = last();
+                                          double eblw = 0.0;
+                                          int t = (track / VOICES) * VOICES;
+                                          if (ls->subtype() == Segment::SegEndBarLine) {
+                                                Element* e = ls->element(t);
+                                                if (!e)
+                                                      e = ls->element(0);
+                                                eblw = e ? e->width() : 0.0;
+                                                }
+                                          if (seg == 1)
+                                                rest->setMMWidth(xpos[segs] - 2 * s->x() - eblw);
+                                          else
+                                                rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) - eblw);
+                                          e->rxpos() = 0.0;
+                                          }
                                     }
                               else {
                                     double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;

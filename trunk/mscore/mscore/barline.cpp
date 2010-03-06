@@ -154,11 +154,22 @@ void BarLine::draw(QPainter& p) const
                   double x1   =  lw2 + d1 + lw * .5;                     // thin line (lw)
                   double x0   =  lw2 + d1 + lw + d1;                     // dot position
 
-                  symbols[dotSym].draw(p, mags, x0, 1.5 * ld);
-                  symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
-                  if (_span == 2) {
-                        symbols[dotSym].draw(p, mags, x0, y2 - 1.5 * ld);
-                        symbols[dotSym].draw(p, mags, x0, y2 - 2.5 * ld);
+                  if (parent() == 0) {    // for use in palette
+                        symbols[dotSym].draw(p, mags, x0, 1.5 * ld);
+                        symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
+                        }
+                  else {
+                        Segment* segment = (Segment*)parent();
+                        Measure* measure = segment->measure();
+                        System* system   = measure->system();
+                        double yp = system->staff(staffIdx())->y();
+                        for (int i = 0; i < _span; ++i) {
+                              StaffLines* l2 = measure->staffLines(staffIdx() + i);
+                              double yy = l2->y2() - yp;
+
+                              symbols[dotSym].draw(p, mags, x0, yy - 1.5 * ld);
+                              symbols[dotSym].draw(p, mags, x0, yy - 2.5 * ld);
+                              }
                         }
 
                   p.drawLine(QLineF(x1, y1, x1, y2));
@@ -183,11 +194,22 @@ void BarLine::draw(QPainter& p) const
                   double x1   =  dotw + d1 + lw * .5;
                   double x2   =  dotw + d1 + lw + d1 + lw2 * .5;
 
-                  symbols[dotSym].draw(p, mags, 0.0, 1.5 * ld);
-                  symbols[dotSym].draw(p, mags, 0.0, 2.5 * ld);
-                  if (_span == 2) {
-                        symbols[dotSym].draw(p, mags, 0.0, y2 - 1.5 * ld);
-                        symbols[dotSym].draw(p, mags, 0.0, y2 - 2.5 * ld);
+                  if (parent() == 0) {    // for use in palette
+                        symbols[dotSym].draw(p, mags, 0.0, 1.5 * ld);
+                        symbols[dotSym].draw(p, mags, 0.0, 2.5 * ld);
+                        }
+                  else {
+                        Segment* segment = (Segment*)parent();
+                        Measure* measure = segment->measure();
+                        System* system   = measure->system();
+                        double yp = system->staff(staffIdx())->y();
+                        for (int i = 0; i < _span; ++i) {
+                              StaffLines* l2 = measure->staffLines(staffIdx() + i);
+                              double yy = l2->y2() - yp;
+
+                              symbols[dotSym].draw(p, mags, 0.0, yy - 1.5 * ld);
+                              symbols[dotSym].draw(p, mags, 0.0, yy - 2.5 * ld);
+                              }
                         }
 
                   p.drawLine(QLineF(x1, y1, x1, y2));
@@ -213,15 +235,26 @@ void BarLine::draw(QPainter& p) const
                   double x3   =  dotw + d1 + lw + d1 + lw2 + d1 + lw * .5;           // thin bar
                   double x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + dotw * .5;    // dots
 
-                  symbols[dotSym].draw(p, mags, .0, 1.5 * ld);
-                  symbols[dotSym].draw(p, mags, .0, 2.5 * ld);
-                  symbols[dotSym].draw(p, mags, x4, 1.5 * ld);
-                  symbols[dotSym].draw(p, mags, x4, 2.5 * ld);
-                  if (_span == 2) {
-                        symbols[dotSym].draw(p, mags, .0, y2 - 1.5 * ld);
-                        symbols[dotSym].draw(p, mags, .0, y2 - 2.5 * ld);
-                        symbols[dotSym].draw(p, mags, x4, y2 - 1.5 * ld);
-                        symbols[dotSym].draw(p, mags, x4, y2 - 2.5 * ld);
+                  if (parent() == 0) {    // for use in palette
+                        symbols[dotSym].draw(p, mags, .0, 1.5 * ld);
+                        symbols[dotSym].draw(p, mags, .0, 2.5 * ld);
+                        symbols[dotSym].draw(p, mags, x4, 1.5 * ld);
+                        symbols[dotSym].draw(p, mags, x4, 2.5 * ld);
+                        }
+                  else {
+                        Segment* segment = (Segment*)parent();
+                        Measure* measure = segment->measure();
+                        System* system   = measure->system();
+                        double yp = system->staff(staffIdx())->y();
+                        for (int i = 0; i < _span; ++i) {
+                              StaffLines* l2 = measure->staffLines(staffIdx() + i);
+                              double yy = l2->y2() - yp;
+
+                              symbols[dotSym].draw(p, mags, 0.0, yy - 1.5 * ld);
+                              symbols[dotSym].draw(p, mags, 0.0, yy - 2.5 * ld);
+                              symbols[dotSym].draw(p, mags, x4, yy - 1.5 * ld);
+                              symbols[dotSym].draw(p, mags, x4, yy - 2.5 * ld);
+                              }
                         }
 
                   p.drawLine(QLineF(x1, y1, x1, y2));
