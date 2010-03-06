@@ -102,9 +102,13 @@ class Measure : public MeasureBase {
       bool _irregular;              ///< Irregular measure, do not count
       bool _breakMultiMeasureRest;  ///< set by user
       bool _breakMMRest;            ///< set by layout
+
       bool _endBarLineGenerated;
       bool _endBarLineVisible;
       int _endBarLineType;
+
+      int _mmEndBarLineType;       ///< bar line type if this measure is presented
+                                    ///< as multi measure rest
 
       int _multiMeasure;      // set from layout();
                               //   0 - normal measure
@@ -207,6 +211,8 @@ class Measure : public MeasureBase {
       bool createEndBarLines();
       void setEndBarLineType(int val, bool g, bool visible = true, QColor color = Qt::black);
       int endBarLineType() const          { return _endBarLineType; }
+      int mmEndBarLineType() const        { return _mmEndBarLineType; }
+      void setMmEndBarLineType(int v)     { _mmEndBarLineType = v;    }
       bool setStartRepeatBarLine(bool);
       bool endBarLineGenerated() const    { return _endBarLineGenerated; }
       void setEndBarLineGenerated(bool v) { _endBarLineGenerated = v; }

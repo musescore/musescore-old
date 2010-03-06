@@ -138,6 +138,7 @@ Measure::Measure(Score* s)
       _noOffset    = 0;
       _noText      = 0;
       _endBarLineType = NORMAL_BAR;
+      _mmEndBarLineType = NORMAL_BAR;
       _endBarLineGenerated = true;
       }
 
@@ -841,8 +842,6 @@ void Measure::layout2()
                   staves[staffIdx]->_vspacer->setPos(_spatium * .5, y + 4 * _spatium);
                   }
             }
-
-//      layoutBeams();
 
       foreach(const MStaff* ms, staves)
             ms->lines->setWidth(width());
@@ -2754,8 +2753,9 @@ bool Measure::createEndBarLines()
                   }
             if (bl) {
                   bl->setMag(staff->mag());
-                  if (bl->subtype() != _endBarLineType) {
-                        bl->setSubtype(_endBarLineType);
+                  int et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
+                  if (bl->subtype() != et) {
+                        bl->setSubtype(et);
                         changed = true;
                         }
                   bl->setGenerated(_endBarLineGenerated);
@@ -3300,10 +3300,15 @@ void Measure::layoutX(double stretch)
                         Rest* rest = static_cast<Rest*>(e);
                         if (rest->duration() == Duration::V_MEASURE) {
                               if (_multiMeasure > 0) {
+                                    Segment* ls = last();
+                                    double eblw = 0.0;
+                                    int t = (track / VOICES) * VOICES;
+                                    if (ls->subtype() == Segment::SegEndBarLine)
+                                          eblw = ls->element(t) ? ls->element(t)->width() : 0.0;
                                     if (seg == 1)
-                                          rest->setMMWidth(xpos[segs] - 2 * s->x());
+                                          rest->setMMWidth(xpos[segs] - 2 * s->x() - eblw);
                                     else
-                                          rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) );
+                                          rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) - eblw);
                                     e->rxpos() = 0.0;
                                     }
                               else {
