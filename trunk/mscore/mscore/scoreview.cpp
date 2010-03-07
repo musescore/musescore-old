@@ -2526,6 +2526,14 @@ void ScoreView::cmd(const QAction* a)
             cmdTuplet(9);
       else if (cmd == "repeat-sel")
             cmdRepeatSelection();
+      else if (cmd == "voice-1")
+            changeVoice(0);
+      else if (cmd == "voice-2")
+            changeVoice(1);
+      else if (cmd == "voice-3")
+            changeVoice(2);
+      else if (cmd == "voice-4")
+            changeVoice(3);
       else
             _score->cmd(a);
       _score->processMidiInput();

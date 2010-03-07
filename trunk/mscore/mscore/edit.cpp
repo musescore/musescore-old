@@ -970,7 +970,8 @@ void Score::deleteItem(Element* el)
 
                   // replace with rest if voice 0 or if in tuplet
                   Tuplet* tuplet = chord->tuplet();
-                  if ((el->voice() == 0 || tuplet) && (chord->noteType() == NOTE_NORMAL)) {
+                  // if ((el->voice() == 0 || tuplet) && (chord->noteType() == NOTE_NORMAL)) {
+                  if (chord->noteType() == NOTE_NORMAL) {
                         Rest* rest = new Rest(this, chord->tick(), chord->duration());
                         rest->setDuration(chord->duration());
                         rest->setTrack(el->track());
@@ -1552,22 +1553,25 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
 //   changeVoice
 //---------------------------------------------------------
 
-void Score::changeVoice(int voice)
+void ScoreView::changeVoice(int voice)
       {
-      if ((_is.track % VOICES) == voice)
+      InputState* is = &score()->inputState();
+      if ((is->track % VOICES) == voice)
             return;
 
-      _is.track = (_is.track / VOICES) * VOICES + voice;
+      is->track = (is->track / VOICES) * VOICES + voice;
       //
       // in note entry mode search for a valid input
       // position
       //
-      if (!_is.noteEntryMode || _is.cr())
+      if (!is->noteEntryMode || is->cr())
             return;
 
-      _is._segment = _is._segment->measure()->firstCRSegment();
-      emit posChanged(_is._segment->tick());
-      _updateAll = true;
+      is->_segment = is->_segment->measure()->firstCRSegment();
+      moveCursor();
+      score()->setUpdateAll(true);
+      score()->end();
+      mscore->setPos(is->_segment->tick());
       }
 
 //---------------------------------------------------------

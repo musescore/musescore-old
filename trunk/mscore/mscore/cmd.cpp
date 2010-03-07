@@ -79,12 +79,9 @@
 
 //---------------------------------------------------------
 //   startCmd
+///   Start a GUI command by clearing the redraw area
+///   and starting a user-visble undo.
 //---------------------------------------------------------
-
-/**
- Start a GUI command by clearing the redraw area
- and starting a user-visble undo.
-*/
 
 void Score::startCmd()
       {
@@ -104,12 +101,9 @@ void Score::startCmd()
 
 //---------------------------------------------------------
 //   endCmd
+///   End a GUI command by (if \a undo) ending a user-visble undo
+///   and (always) updating the redraw area.
 //---------------------------------------------------------
-
-/**
- End a GUI command by (if \a undo) ending a user-visble undo
- and (always) updating the redraw area.
-*/
 
 void Score::endCmd()
       {
@@ -128,11 +122,9 @@ void Score::endCmd()
 
 //---------------------------------------------------------
 //   end
+///   Update the redraw area.
 //---------------------------------------------------------
 
-/**
- Update the redraw area.
-*/
 void Score::end()
       {
       if (layoutAll) {
@@ -420,7 +412,7 @@ void Score::cmdRemove(Element* e)
 void ScoreView::cmdAddPitch(int note, bool addFlag)
       {
       InputState& is = _score->inputState();
-      Drumset* ds = is.drumset;
+      Drumset* ds    = is.drumset;
       int pitch;
       if (ds) {
             char note1 = "CDEFGAB"[note];
@@ -500,6 +492,7 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
 void Score::expandVoice()
       {
       if (_is.voice() && (_is.cr() == 0)) {
+printf("expandVoice\n");
             //
             // if there is no chord/rest at current position for voice > 0
             // then there is no chord/rest for this voice at all in this measure
@@ -1262,11 +1255,8 @@ void ScoreView::cmdAddText(int subtype)
 
 //---------------------------------------------------------
 //   upDown
+///   Increment/decrement pitch of note by one or by an octave.
 //---------------------------------------------------------
-
-/**
- Increment/decrement pitch of note by one or by an octave.
-*/
 
 void Score::upDown(bool up, bool octave)
       {
@@ -1347,15 +1337,12 @@ void Score::upDown(bool up, bool octave)
 
 //---------------------------------------------------------
 //   cmdAppendMeasures
-//    - keyboard callback
+///   Append \a n measures.
+///
+///   Keyboard callback, called from pulldown menu.
+//
 //    - called from pulldown menu
 //---------------------------------------------------------
-
-/**
- Append \a n measures.
-
- Keyboard callback, called from pulldown menu.
-*/
 
 void Score::cmdAppendMeasures(int n)
       {
@@ -1573,13 +1560,10 @@ void Score::insertMeasures(int n, int type)
 
 //---------------------------------------------------------
 //   addArticulation
+///   Add attribute \a attr to all selected notes/rests.
+///
+///   Called from padToggle() to add note prefix/accent.
 //---------------------------------------------------------
-
-/**
- Add attribute \a attr to all selected notes/rests.
-
- Called from padToggle() to add note prefix/accent.
-*/
 
 void Score::addArticulation(int attr)
       {
@@ -1594,11 +1578,9 @@ void Score::addArticulation(int attr)
 
 //---------------------------------------------------------
 //   changeAccidental
+///   Change accidental to subtype \a idx for all selected
+///   notes.
 //---------------------------------------------------------
-
-/**
- Change accidental to subtype \a idx for all selected notes.
-*/
 
 void Score::changeAccidental(int idx)
       {
@@ -1679,13 +1661,10 @@ void Score::addArticulation(Element* el, Articulation* atr)
 
 //---------------------------------------------------------
 //   resetUserOffsets
+///   Reset user offset for all selected notes.
+///
+///   Called from pulldown menu.
 //---------------------------------------------------------
-
-/**
- Reset user offset for all selected notes.
-
- Called from pulldown menu.
-*/
 
 void Score::toDefault()
       {
@@ -2043,14 +2022,6 @@ void Score::cmd(const QAction* a)
                   changeAccidental(4);
             else if (cmd == "flip")
                   cmdFlip();
-            else if (cmd == "voice-1")
-                  changeVoice(0);
-            else if (cmd == "voice-2")
-                  changeVoice(1);
-            else if (cmd == "voice-3")
-                  changeVoice(2);
-            else if (cmd == "voice-4")
-                  changeVoice(3);
             else if (cmd == "stretch+")
                   cmdAddStretch(0.1);
             else if (cmd == "stretch-")
