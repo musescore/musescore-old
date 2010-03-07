@@ -1,6 +1,7 @@
 7.mar (lv)
       - fix #4324: MusicXML export of beam is incomplete
       (ws)
+      - fix #4898: Up to empty lyric syllable crash
       - fix #4900: Transpose from C major to Cb major
       - fix #4899: Transpose by interval not working
       - fix #4881-2nd: Special Barlines not included in parts

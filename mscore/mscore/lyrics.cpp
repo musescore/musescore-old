@@ -152,6 +152,7 @@ void ScoreView::lyricsUpDown(bool up, bool end)
       {
       Lyrics* lyrics   = static_cast<Lyrics*>(editObject);
       int staffIdx     = lyrics->staffIdx();
+      int track        = lyrics->track();
       Segment* segment = lyrics->segment();
       int verse        = lyrics->no();
       LyricsList* ll   = segment->lyricsList(staffIdx);
@@ -169,6 +170,14 @@ void ScoreView::lyricsUpDown(bool up, bool end)
       endEdit();
       _score->startCmd();
       lyrics = ll->value(verse);
+      if (!lyrics) {
+            lyrics = new Lyrics(_score);
+            lyrics->setTick(segment->tick());
+            lyrics->setTrack(track);
+            lyrics->setParent(segment);
+            lyrics->setNo(verse);
+            _score->undoAddElement(lyrics);
+            }
 
       _score->select(lyrics, SELECT_SINGLE, 0);
       startEdit(lyrics, -1);
