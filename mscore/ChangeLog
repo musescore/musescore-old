@@ -1,6 +1,7 @@
 7.mar (lv)
       - fix #4324: MusicXML export of beam is incomplete
       (ws)
+      - fix #4881-2nd: Special Barlines not included in parts
       - fix #4798: note stems move to wrong position when adjusting beam height
 6.mar (ws)
       - fix #4866: Lasso select chordname, copy, crash

@@ -1925,6 +1925,23 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
       for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {
             for (Segment* segment = first(); segment; segment = segment->next()) {
                   Element* e = segment->element(track);
+                  //
+                  // special case: - barline span > 1
+                  //               - part (excerpt) staff starts after
+                  //                 barline element
+                  if ((segment->subtype() == Segment::SegEndBarLine)
+                     && (e == 0)
+                     && writeSystemElements
+                     && ((track % VOICES) == 0)) {
+                        // search barline:
+                        for (int idx = track - VOICES; idx >= 0; idx -= VOICES) {
+                              if (segment->element(idx)) {
+                                    segment->element(idx)->write(xml);
+                                    break;
+                                    }
+                              }
+                        }
+
                   if (e && !e->generated()) {
                         if (e->isChordRest()) {
                               ChordRest* cr = static_cast<ChordRest*>(e);
