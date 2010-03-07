@@ -244,7 +244,7 @@ class Measure : public MeasureBase {
       int multiMeasure() const                { return _multiMeasure; }
       void setMultiMeasure(int val)           { _multiMeasure = val;  }
       Fraction fraction() const;
-      void layoutChords1(Segment* segment, int startTrack);
+//      void layoutChords1(Segment* segment, int startTrack);
       void layoutChords0(Segment* segment, int startTrack, char* tversatz);
       void writeTuplets(Xml&, int staff) const;
       };

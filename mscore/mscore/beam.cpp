@@ -443,7 +443,7 @@ void Beam::layout()
                   if (c->up() != nup) {
                         c->setUp(nup);
                         // guess was wrong, have to relayout
-                        c->measure()->layoutChords1(c->segment(), c->staffIdx());
+                        score()->layoutChords1(c->segment(), c->staffIdx());
                         }
                   }
             _up = _elements.front()->up();
@@ -478,7 +478,7 @@ void Beam::layout()
                   if (c->up() != nup) {
                         c->setUp(nup);
                         // guess was wrong, have to relayout
-                        c->measure()->layoutChords1(c->segment(), c->staffIdx());
+                        score()->layoutChords1(c->segment(), c->staffIdx());
                         }
                   }
             _up = -1;
