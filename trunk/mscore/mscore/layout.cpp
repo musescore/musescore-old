@@ -219,29 +219,24 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             int head     = note->noteHead();      // symbol number or note head
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
+            bool sameHead = (ll == line) && (head == lastHead);
             if ((chord->up() != isLeft) || conflict)
                   isLeft = !isLeft;
-            bool nmirror  = chord->up() != isLeft;
-            bool sameHead = (ll == line) && (head == lastHead);
+            bool nmirror  = (chord->up() != isLeft) && !sameHead;
 
-//printf("conflict %d(%d %d %d==%d) nmirror %d mirror %d idx %d sameHead %d\n",
-//      conflict,
-//      ll, line, move1, move,
-//      nmirror, mirror, idx, sameHead);
+            note->setHidden(false);
+            chord->rxpos() = 0.0;
 
             if (conflict && (nmirror == mirror) && idx) {
                   if (sameHead) {
-                        chord->rxpos() = 0.0;
                         Note* pnote = notes[idx-1];
                         if (note->userOff().isNull() && pnote->userOff().isNull()) {
                               if (ticks > pnote->chord()->tickLen()) {
                                     pnote->setHidden(true);
-                                    // pnote->setAccidental(0);  // DEBUG: should be unecessary; layout dependency
                                     pnote->setAccidentalType(ACC_NONE);
                                     note->setHidden(false);
                                     }
                               else {
-                                    // note->setAccidental(0);
                                     note->setAccidentalType(ACC_NONE);
                                     note->setHidden(true);
                                     }
@@ -250,23 +245,17 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                               note->setHidden(false);
                         }
                   else {
-// printf("A idx %d  startIdx %d\n", idx, startIdx);
                         if ((line > ll) || !chord->up()) {
-//printf("A1\n");
                               note->chord()->rxpos() = note->headWidth() - note->point(styleS(ST_stemWidth));
+                              note->rxpos() = 0.0;
                               }
                         else {
-//printf("A2\n");
                               notes[idx-incIdx]->chord()->rxpos() = note->headWidth() - note->point(styleS(ST_stemWidth));
+                              note->rxpos() = 0.0;
                               }
                         moveLeft = true;
                         }
                   }
-            else {
-                  chord->rxpos() = 0.0;
-                  note->setHidden(false);
-                  }
-
             if (note->userMirror() == DH_AUTO) {
                   mirror = nmirror;
                   }
@@ -657,8 +646,9 @@ void Score::layoutStage3()
       {
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
-                  if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
+                  if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace)) {
                         layoutChords1(segment, staffIdx);
+                        }
                   }
             }
       }

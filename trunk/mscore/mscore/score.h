@@ -350,7 +350,6 @@ class Score : public QObject {
       void layoutStage1();
       void layoutStage2();
       void layoutStage3();
-      void layoutChords1(Segment* segment, int staffIdx);
       void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd,
          int key, int semitones);
       void reLayout(Measure*);
@@ -793,6 +792,7 @@ class Score : public QObject {
       void cmdCreateTuplet(ChordRest*, Tuplet*);
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       void doLayout();
+      void layoutChords1(Segment* segment, int staffIdx);
       };
 
 extern Score* gscore;

@@ -1,3 +1,5 @@
+7.mar (ws)
+      - fix #4798: note stems move to wrong position when adjusting beam height
 6.mar (ws)
       - fix #4866: Lasso select chordname, copy, crash
       - script plugin extension for cursor:
