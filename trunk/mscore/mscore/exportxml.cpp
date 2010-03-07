@@ -2145,10 +2145,8 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             //    <beam number="1">backward hook</beam>
             //    <beam number="1">forward hook</beam>
 
-            if (note == nl.front() && chord->beam()) {
-                  QString s = chord->beam()->xmlType(chord);
-                  xml.tag("beam number=\"1\"", s);
-                  }
+            if (note == nl.front() && chord->beam())
+                  chord->beam()->writeMusicXml(xml, chord);
 
             Notations notations;
             Technical technical;
