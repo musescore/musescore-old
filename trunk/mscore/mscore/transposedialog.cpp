@@ -186,10 +186,11 @@ void Score::transpose()
       int startTrack = _selection.staffStart() * VOICES;
       int endTrack   = _selection.staffEnd() * VOICES;
 
-      km       = staff(_selection.staffStart())->keymap();
-      int oKey = km->key(_selection.startSegment()->tick()).accidentalType;
-      transposeByKey(oKey, td.transposeKey(), td.direction(),
-         useDoubleSharpsFlats, &diatonic, &chromatic);
+      if (td.mode() == TRANSPOSE_BY_KEY) {
+            km       = staff(_selection.staffStart())->keymap();
+            int oKey = km->key(_selection.startSegment()->tick()).accidentalType;
+            transposeByKey(oKey, td.transposeKey(), td.direction(), useDoubleSharpsFlats, &diatonic, &chromatic);
+            }
 
       for (int st = startTrack; st < endTrack; ++st) {
             for (Segment* segment = _selection.startSegment(); segment && segment != _selection.endSegment(); segment = segment->next1()) {
@@ -325,6 +326,7 @@ void Score::transposeByKey(int oKey, int nKey, TransposeDirection dir, bool useD
       diatonic = stepTable[(nKey + 7) % 7] - stepTable[(oKey + 7) % 7];
       if (diatonic < 0)
             diatonic += 7;
+      diatonic %= 7;
       int chromatic = (cofSteps * 7) % 12;
 
 
@@ -334,6 +336,10 @@ void Score::transposeByKey(int oKey, int nKey, TransposeDirection dir, bool useD
       if (dir == TRANSPOSE_DOWN) {
             chromatic = chromatic - 12;
             diatonic  = diatonic - 7;
+            if (diatonic == -7)
+                  diatonic = 0;
+            if (chromatic == -12)
+                  chromatic = 0;
             }
       *dia = diatonic;
       *chr = chromatic;
