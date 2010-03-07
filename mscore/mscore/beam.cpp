@@ -319,19 +319,68 @@ void Beam::move(double x, double y)
       }
 
 //---------------------------------------------------------
-//   xmlType
+//   writeMusicXml
 //---------------------------------------------------------
 
-QString Beam::xmlType(ChordRest* cr) const
+// needed only for dump beam contents
+// #include "rest.h"
+
+void Beam::writeMusicXml(Xml& xml, ChordRest* cr) const
       {
-      if (cr == _elements.front())
-            return QString("begin");
-      if (cr == _elements.back())
-            return QString("end");
+/*
+      printf("Beam::writeMusicXml(cr=%p)\n", cr);
+      // dump beam contents
+      foreach(ChordRest* crst, _elements) {
+            if (crst->type() == CHORD) {
+                  Chord* c = static_cast<Chord*>(crst);
+                  printf(" chord %p tick=%d durtype=%d beams=%d\n", c, c->tick(), c->duration().type(), c->beams());
+                  }
+            else if (crst->type() == REST) {
+                  Rest* r = static_cast<Rest*>(crst);
+                  printf(" rest %p tick=%d durtype=%d beams=%d\n", r, r->tick(), r->duration().type(), r->beams());
+                  }
+            else {
+                  printf(" type=%d %p tick=%d\n", crst->type(), crst, crst->tick());
+                  }
+            }
+      // end dump beam contents
+*/
       int idx = _elements.indexOf(cr);
-      if (idx == -1)
-            printf("Beam::xmlType(): cannot find ChordRest\n");
-      return QString("continue");
+      if (idx == -1) {
+            printf("Beam::writeMusicXml(): cannot find ChordRest\n");
+            return;
+            }
+      int blp = -1; // beam level previous chord
+      int blc = -1; // beam level current chord
+      int bln = -1; // beam level next chord
+      // find beam level previous chord
+      for (int i = idx - 1; blp == -1 && i >= 0; --i) {
+            ChordRest* crst = _elements[i];
+            if (crst->type() == CHORD)
+                  blp = (static_cast<Chord*>(crst))->beams();
+            }
+      // find beam level current chord
+      if (cr->type() == CHORD)
+            blc = (static_cast<Chord*>(cr))->beams();
+      // find beam level next chord
+      for (int i = idx + 1; bln == -1 && i < _elements.size(); ++i) {
+            ChordRest* crst = _elements[i];
+            if (crst->type() == CHORD)
+                  bln = (static_cast<Chord*>(crst))->beams();
+            }
+//      printf(" blp=%d blc=%d bln=%d\n", blp, blc, bln);
+      for (int i = 1; i <= blc; ++i) {
+            QString s;
+            if (blp < i && bln >= i) s = "begin";
+            else if (blp < i && bln < i) {
+                  if (bln > 0) s = "forward hook";
+                  else if (blp > 0) s = "backward hook";
+                  }
+            else if (blp >= i && bln < i) s = "end";
+            else if (blp >= i && bln >= i) s = "continue";
+            if (s != "")
+                  xml.tag(QString("beam number=\"%1\"").arg(i), s);
+            }
       }
 
 //---------------------------------------------------------
