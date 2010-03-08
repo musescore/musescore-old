@@ -6,6 +6,8 @@
       - fix #4899: Transpose by interval not working
       - fix #4881-2nd: Special Barlines not included in parts
       - fix #4798: note stems move to wrong position when adjusting beam height
+      (db)
+      - use Up and Down arrows to move through verses (like other scorewriters)
 6.mar (ws)
       - fix #4866: Lasso select chordname, copy, crash
       - script plugin extension for cursor:
@@ -414,7 +416,7 @@
       - fix: grace notes don't transpose
       - layout: remove accidental, if two notes share the same note head
       (og)
-	- exportly: lyrics. Works at least on demo adeste. several bugfixes.
+      - exportly: lyrics. Works at least on demo adeste. several bugfixes.
 6.nov. (ws)
       - cross beam layout fix
       - fix: D.S. ignored if inside a repeated section

@@ -81,11 +81,11 @@ void ScoreView::editKey(QKeyEvent* ev)
                         lyricsTab(false, false, true);    // go to next lyrics
                   found = true;
                   }
-            else if (ctrl && (ev->key() == Qt::Key_Up)) {
+            else if (ev->key() == Qt::Key_Up) {
                   lyricsUpDown(true, true);
                   found = true;
                   }
-            else if (ctrl && (ev->key() == Qt::Key_Down)) {
+            else if (ev->key() == Qt::Key_Down) {
                   lyricsUpDown(false, true);
                   found = true;
                   }
