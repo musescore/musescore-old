@@ -212,9 +212,10 @@ void Score::transpose()
 
       if (transposeChordNames) {
             Measure* sm = _selection.startSegment()->measure();
-            Measure* em = _selection.endSegment()->measure();
-            int stick   = _selection.startSegment()->tick();
-            int etick   = _selection.endSegment()->tick();
+            Segment* ses =  _selection.endSegment();
+            Measure* em = ( ses ? _selection.endSegment()->measure() : lastMeasure() );
+            int stick   = _selection.tickStart();
+            int etick   = _selection.tickEnd();
 
             for (Measure* m = sm; m; m = m->nextMeasure()) {
                   foreach (Element* e, *m->el()) {

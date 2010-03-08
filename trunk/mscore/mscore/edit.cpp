@@ -1142,7 +1142,7 @@ void Score::cmdDeleteSelectedMeasures()
             Segment* seg = selection().endSegment();
             MeasureBase* ie = seg ? seg->measure() : lastMeasure();
             if (ie) {
-                  if ((seg == 0) || (ie->tick() < selection().endSegment()->tick())) {
+                  if ((seg == 0) || (ie->tick() < selection().tickEnd())) {
                         // if last measure is selected
                         if (ie->type() == MEASURE)
                               createEndBar = static_cast<Measure*>(ie)->endBarLineType() == END_BAR;
@@ -1647,8 +1647,8 @@ void Score::cmdExchangeVoice(int s, int d)
             selectStavesMessage();
             return;
             }
-      int t1 = selection().startSegment()->tick();
-      int t2 = selection().endSegment()->tick();
+      int t1 = selection().tickStart();
+      int t2 = selection().tickEnd();
 
       Measure* m1 = tick2measure(t1);
       Measure* m2 = tick2measure(t2);

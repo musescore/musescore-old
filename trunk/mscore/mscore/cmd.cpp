@@ -1729,8 +1729,8 @@ void Score::cmdAddStretch(double val)
       {
       if (selection().state() != SEL_RANGE)
             return;
-      int startTick = selection().startSegment()->tick();
-      int endTick   = selection().endSegment()->tick();
+      int startTick = selection().tickStart();
+      int endTick   = selection().tickEnd();
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             if (m->tick() < startTick)
                   continue;
@@ -1765,8 +1765,8 @@ void Score::cmdResetBeamMode()
             printf("no system or staff selected\n");
             return;
             }
-      int startTick = selection().startSegment()->tick();
-      int endTick   = selection().endSegment()->tick();
+      int startTick = selection().tickStart();
+      int endTick   = selection().tickEnd();
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             if (m->type() != MEASURE)
                   continue;
