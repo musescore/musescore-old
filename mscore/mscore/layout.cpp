@@ -1346,10 +1346,10 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               }
                         }
                   }
-            for (MeasureBase* mb = ml.front();; mb = mb->next()) {
+            for (MeasureBase* mb = ml.front(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE) {
                         mb = mb->next();
-                        if (mb == lmb)
+                        if (!mb || mb == lmb)
                               break;
                         continue;
                         }
@@ -1397,10 +1397,10 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         break;
                   }
             Measure* firstMM = 0;
-            for (MeasureBase* mb = ml.front();; mb = mb->next()) {
+            for (MeasureBase* mb = ml.front(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE) {
                         mb = mb->next();
-                        if (mb == lmb)
+                        if (!mb || mb == lmb)
                               break;
                         continue;
                         }
