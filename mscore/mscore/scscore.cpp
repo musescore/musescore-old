@@ -215,10 +215,12 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         s = qscriptvalue_cast<QString>(context->argument(0));
                         ext = qscriptvalue_cast<QString>(context->argument(1));
                         }
+#ifdef HAS_AUDIOFILE
                   if (argc == 3) {
                         sf = qscriptvalue_cast<QString>(context->argument(1));
                         return qScriptValueFromValue(context->engine(), score->saveAudio(s, ext, sf));
                         }
+#endif // HAS_AUDIOFILE
                   else if (argc == 2)
                         return qScriptValueFromValue(context->engine(), score->saveAs(true, s, ext));
                   else if (argc == 6 && ext == "png") {
