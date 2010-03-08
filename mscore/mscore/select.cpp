@@ -78,7 +78,12 @@ int Selection::tickStart() const
 
 int Selection::tickEnd() const
       {
-      return _endSegment->tick();
+      if(_endSegment)
+          return _endSegment->tick();
+      else{ // endsegment == 0 if end of score
+          Measure* m = _score->lastMeasure();
+          return m->tick() + m->tickLen();
+          }
       }
 
 //---------------------------------------------------------
@@ -87,7 +92,7 @@ int Selection::tickEnd() const
 
 bool Selection::isStartActive() const
       {
-      return activeSegment() && activeSegment()->tick() == startSegment()->tick();
+      return activeSegment() && activeSegment()->tick() == tickStart();
       }
 
 //---------------------------------------------------------
@@ -95,7 +100,7 @@ bool Selection::isStartActive() const
 //---------------------------------------------------------
 
 bool Selection::isEndActive() const {
-      return activeSegment() && activeSegment()->tick() == endSegment()->tick();
+      return activeSegment() && activeSegment()->tick() == tickEnd();
       }
 
 //---------------------------------------------------------
@@ -827,7 +832,7 @@ QByteArray Selection::staffMimeData() const
                               }
                         if (e->type() == CHORD) {
                               Chord* c = static_cast<Chord*>(e);
-                              c->write(xml, _startSegment->tick(), _endSegment->tick());
+                              c->write(xml, tickStart(), tickEnd());
                               }
                         else if (e->type() == REST) {
                               Rest* r = static_cast<Rest*>(e);
