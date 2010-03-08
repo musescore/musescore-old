@@ -115,6 +115,7 @@
         <type>16th</type>
         <stem>down</stem>
         <beam number="1">continue</beam>
+        <beam number="2">begin</beam>
         <notations>
           <ornaments>
             <tremolo type="single">1</tremolo>
@@ -131,6 +132,8 @@
         <type>32nd</type>
         <stem>down</stem>
         <beam number="1">continue</beam>
+        <beam number="2">continue</beam>
+        <beam number="3">begin</beam>
         </note>
       <note>
         <pitch>
@@ -142,6 +145,9 @@
         <type>64th</type>
         <stem>down</stem>
         <beam number="1">end</beam>
+        <beam number="2">end</beam>
+        <beam number="3">end</beam>
+        <beam number="4">backward hook</beam>
         </note>
       <note>
         <rest/>
