@@ -74,6 +74,7 @@
         <type>16th</type>
         <stem>up</stem>
         <beam number="1">continue</beam>
+        <beam number="2">begin</beam>
         </note>
       <note>
         <pitch>
@@ -85,6 +86,8 @@
         <type>32nd</type>
         <stem>up</stem>
         <beam number="1">end</beam>
+        <beam number="2">end</beam>
+        <beam number="3">backward hook</beam>
         </note>
       <note>
         <pitch>
@@ -96,6 +99,9 @@
         <type>64th</type>
         <stem>up</stem>
         <beam number="1">begin</beam>
+        <beam number="2">begin</beam>
+        <beam number="3">begin</beam>
+        <beam number="4">begin</beam>
         </note>
       <note>
         <pitch>
@@ -107,6 +113,9 @@
         <type>64th</type>
         <stem>up</stem>
         <beam number="1">end</beam>
+        <beam number="2">end</beam>
+        <beam number="3">end</beam>
+        <beam number="4">end</beam>
         </note>
       <note>
         <pitch>

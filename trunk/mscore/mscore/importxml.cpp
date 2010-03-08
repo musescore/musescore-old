@@ -2310,20 +2310,21 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else if (tag == "staff")
                   relStaff = s.toInt() - 1;
             else if (tag == "beam") {
-                  if (s == "begin") {
-                        bm = BEAM_BEGIN;
+                  int beamNo = e.attribute(QString("number"), "1").toInt();
+                  if (beamNo == 1) {
+                        if (s == "begin")
+                              bm = BEAM_BEGIN;
+                        else if (s == "end")
+                              bm = BEAM_END;
+                        else if (s == "continue")
+                              bm = BEAM_MID;
+                        else if (s == "backward hook")
+                              ;
+                        else if (s == "forward hook")
+                              ;
+                        else
+                              printf("unknown beam keyword <%s>\n", s.toLatin1().data());
                         }
-                  else if (s == "end") {
-                        bm = BEAM_END;
-                        }
-                  else if (s == "continue")
-                        bm = BEAM_MID;
-                  else if (s == "backward hook")
-                        ;
-                  else if (s == "forward hook")
-                        ;
-                  else
-                        printf("unknown beam keyword <%s>\n", s.toLatin1().data());
                   }
             else if (tag == "rest") {
                   rest = true;

@@ -182,6 +182,7 @@
         <type>16th</type>
         <stem>up</stem>
         <beam number="1">begin</beam>
+        <beam number="2">begin</beam>
         </note>
       <note>
         <grace/>
@@ -193,6 +194,7 @@
         <type>16th</type>
         <stem>up</stem>
         <beam number="1">end</beam>
+        <beam number="2">end</beam>
         </note>
       <note>
         <pitch>
@@ -216,6 +218,8 @@
         <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">begin</beam>
+        <beam number="2">begin</beam>
+        <beam number="3">begin</beam>
         </note>
       <note>
         <grace/>
@@ -229,6 +233,8 @@
         <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">continue</beam>
+        <beam number="2">continue</beam>
+        <beam number="3">continue</beam>
         </note>
       <note>
         <grace/>
@@ -242,6 +248,8 @@
         <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">continue</beam>
+        <beam number="2">continue</beam>
+        <beam number="3">continue</beam>
         </note>
       <note>
         <grace/>
@@ -255,6 +263,8 @@
         <accidental>sharp</accidental>
         <stem>up</stem>
         <beam number="1">end</beam>
+        <beam number="2">end</beam>
+        <beam number="3">end</beam>
         </note>
       <note>
         <pitch>
