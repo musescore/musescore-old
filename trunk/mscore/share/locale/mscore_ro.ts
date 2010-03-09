@@ -20,37 +20,37 @@
         <translation>Revizie: 628</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;
-&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;
-&lt;/head&gt;
-
-&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Vizitaţi &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; pentru cea mai recentă versiune şi mai multe detalii.&lt;/span&gt;&lt;/p&gt;
-
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Sprijiniţi MuseScore cu &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;o donaţie&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-
-
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Toate drepturile rezervate &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer şi alţii. &lt;/span&gt;&lt;/p&gt;
-
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publicat sub Licenţa Publică Generală GNU&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&#13;
+&lt;html&gt;&#13;
+&lt;head&gt;&#13;
+&lt;meta name="qrichtext" content="1" /&gt;&#13;
+&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&#13;
+&lt;/head&gt;&#13;
+&#13;
+&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Vizitaţi &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; pentru cea mai recentă versiune şi mai multe detalii.&lt;/span&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Sprijiniţi MuseScore cu &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;o donaţie&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Toate drepturile rezervate &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer şi alţii. &lt;/span&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicat sub Licenţa Publică Generală GNU&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -79,14 +79,14 @@ p, li { white-space: pre-wrap; }
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>Configurează modul de atac...</translation>
+        <translation>Proprietăţile modului de atac...</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore: Configurare mode de atac</translation>
+        <translation>MuseScore: Proprietăţile modului de atac</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -133,7 +133,7 @@ p, li { white-space: pre-wrap; }
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>MuseScore: Configurare cadru</translation>
+        <translation>MuseScore: Proprietăţile cadrului</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -172,7 +172,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: Configurare armonie</translation>
+        <translation>MuseScore: Proprietăţile armoniei</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -180,7 +180,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Root</source>
-        <translation>Fundamentală</translation>
+        <translation>Fundamentala acordului</translation>
     </message>
     <message>
         <source>C</source>
@@ -232,8 +232,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Extension</source>
-        <translatorcomment>didn&apos;t figure out exactly what this refers to</translatorcomment>
-        <translation>Armonie extisă (mai mult decât trisonuri)</translation>
+        <translatorcomment>didn't figure out exactly what this refers to</translatorcomment>
+        <translation>Tipul acordului (major, minor, septimă, nonă, etc.)</translation>
     </message>
     <message>
         <source>Maj</source>
@@ -313,7 +313,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Other:</source>
-        <translation>Alta:</translation>
+        <translation>Altul:</translation>
     </message>
     <message>
         <source>5b</source>
@@ -757,7 +757,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Degrees</source>
-        <translation>Trepte</translation>
+        <translation>Modifică structura intervalică a acordului</translation>
     </message>
     <message>
         <source>Add</source>
@@ -769,11 +769,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation>Nota din bas/răsturnarea</translation>
+        <translation>Nota din bas şi răsturnarea acordului</translation>
     </message>
     <message>
         <source>none</source>
-        <translation>niciuna</translation>
+        <translation>--</translation>
     </message>
     <message>
         <source>/C</source>
@@ -833,6 +833,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordList</name>
+    <message>
+        <source>Write Chord Description failed: </source>
+        <translation>Nu s-a putut scrie fişierul cu descrierea acordurilor: </translation>
+    </message>
+</context>
+<context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
@@ -840,7 +847,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>small</source>
-        <translation>mic</translation>
+        <translation>dimensiune mică</translation>
     </message>
     <message>
         <source>stemless</source>
@@ -866,7 +873,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>auto</source>
         <extracomment>velocity type</extracomment>
-        <translation>automată</translation>
+        <translation>automat</translation>
     </message>
     <message>
         <source>up</source>
@@ -902,12 +909,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation>atac (MIDI: velocity, 0-127)</translation>
+        <translation>forţă atac (0-127)</translation>
     </message>
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation>utilizator</translation>
+        <translation>definit de utilizator</translation>
     </message>
     <message>
         <source>offset</source>
@@ -916,19 +923,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ontime offset type</source>
-        <translation type="unfinished"></translation>
+        <translation>atac timpi tari</translation>
     </message>
     <message>
         <source>ontime offset</source>
-        <translation type="unfinished"></translation>
+        <translation>decalaj timpi tari</translation>
     </message>
     <message>
         <source>offtime offset type</source>
-        <translation type="unfinished"></translation>
+        <translation>atac timpi slabi</translation>
     </message>
     <message>
         <source>offtime</source>
-        <translation type="unfinished"></translation>
+        <translation>decalaj timpi slabi</translation>
     </message>
     <message>
         <source> cent</source>
@@ -941,11 +948,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished"></translation>
+        <translation>tipul boabei</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation>Tip Boabă</translation>
+        <translation>valoarea notei</translation>
     </message>
     <message>
         <source>normal</source>
@@ -993,11 +1000,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished"></translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Automată</translation>
+        <translation>automat</translation>
     </message>
     <message>
         <source>whole</source>
@@ -1051,7 +1058,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1063,7 +1070,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: Configurare Stil Acord</translation>
+        <translation>MuseScore: Modificarea stilului acordului</translation>
     </message>
 </context>
 <context>
@@ -1082,7 +1089,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Modifică textul...</translation>
+        <translation>Proprietăţile textului...</translation>
     </message>
     <message>
         <source>MIDI Properties...</source>
@@ -1100,11 +1107,11 @@ p, li { white-space: pre-wrap; }
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Configurare nuanţă</translation>
+        <translation>MuseScore: Proprietăţile MIDI ale indicaţiei dinamice</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Forţă:</translation>
+        <translation>Forţă atac (0-127):</translation>
     </message>
     <message>
         <source>staff</source>
@@ -1116,7 +1123,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>system</source>
-        <translation>sistem</translation>
+        <translation>sistemului</translation>
     </message>
     <message>
         <source>align left</source>
@@ -1128,7 +1135,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Apply to:</source>
-        <translation>Aplică pentru:</translation>
+        <translation>Valoarea de mai sus se aplică:</translation>
     </message>
 </context>
 <context>
@@ -1164,7 +1171,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Load Drumset</source>
-        <translation>MuseScore: Încarcă set de percuţie</translation>
+        <translation>MuseScore: Încărcare set de percuţie</translation>
     </message>
     <message>
         <source>MuseScore drumset (*.drm)</source>
@@ -1172,7 +1179,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Save Drumset</source>
-        <translation>MuseScore: Salvează set de percuţie</translation>
+        <translation>MuseScore: Salvare set de percuţie</translation>
     </message>
     <message>
         <source>Open File
@@ -1188,18 +1195,22 @@ eroare: </translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
-        <translation>MuseScore: Deschide fişier</translation>
+        <translation>MuseScore: Deschidere fişier</translation>
     </message>
     <message>
         <source>MuseScore: Write Drumset</source>
-        <translation>MuseScore: Salvează set de percuţie</translation>
+        <translation>MuseScore: Salvare set de percuţie</translation>
+    </message>
+    <message>
+        <source>Write File failed: </source>
+        <translation>Nu s-a putut scrie fişierul: </translation>
     </message>
 </context>
 <context>
     <name>EditDrumsetBase</name>
     <message>
         <source>MuseScore: Edit Drumset</source>
-        <translation>MuseScore: configurare set de percuţie</translation>
+        <translation>MuseScore: Modificare set de percuţie</translation>
     </message>
     <message>
         <source>Pitch</source>
@@ -1223,7 +1234,7 @@ eroare: </translation>
     </message>
     <message>
         <source>Note Head:</source>
-        <translation>Capul notei:</translation>
+        <translation>Boabă:</translation>
     </message>
     <message>
         <source>Staff Line:</source>
@@ -1290,7 +1301,7 @@ eroare: </translation>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>MuseScore: configurează instrument</translation>
+        <translation>MuseScore: Proprietăţile instrumentului</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
@@ -1333,7 +1344,7 @@ eroare: </translation>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: configurează portativul/ştima</translation>
+        <translation>MuseScore: Proprietăţile portativului / ştimei</translation>
     </message>
     <message>
         <source>Staff Properties</source>
@@ -1345,7 +1356,7 @@ eroare: </translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Mic</translation>
+        <translation>Dimensiune mică</translation>
     </message>
     <message>
         <source>Invisible</source>
@@ -1373,11 +1384,11 @@ eroare: </translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Configurează...</translation>
+        <translation>Proprietăţile setului de percuţie...</translation>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
-        <translation>Registru Disponibil:</translation>
+        <translation>Registru disponibil (în note MIDI):</translation>
     </message>
     <message>
         <source>Amateur:</source>
@@ -1393,7 +1404,7 @@ eroare: </translation>
     </message>
     <message>
         <source>Play Transposition:</source>
-        <translation>Cântă transpozitoriu:</translation>
+        <translation>Instrumentul este transpozitoriu:</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
@@ -1501,11 +1512,11 @@ eroare: </translation>
     </message>
     <message>
         <source>up</source>
-        <translation>up</translation>
+        <translation>în sus</translation>
     </message>
     <message>
         <source>down</source>
-        <translation>jos</translation>
+        <translation>în jos</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
@@ -1513,7 +1524,7 @@ eroare: </translation>
     </message>
     <message>
         <source>+octave</source>
-        <translation>+octave</translation>
+        <translation>peste (octave)</translation>
     </message>
 </context>
 <context>
@@ -1543,7 +1554,7 @@ eroare: </translation>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
-        <translation>MuseScore: configurare scriitură</translation>
+        <translation>MuseScore: Stilul scriiturii</translation>
     </message>
     <message>
         <source>Score</source>
@@ -1684,7 +1695,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>interval</source>
-        <translation>arată numărul măsurii pentru fiecare al &quot;n&quot;-lea  sistem</translation>
+        <translation>arată numărul măsurii pentru fiecare al "n"-lea  sistem</translation>
     </message>
     <message>
         <source>spaces</source>
@@ -1840,7 +1851,7 @@ space unit</extracomment>
         <translation>Margine în stânga barei de repetiţie</translation>
     </message>
     <message>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
+        <source>Show repeat bar tips ("winged" repeats)</source>
         <translation>Adaugă acolade în jurul semnelor de repetiţie</translation>
     </message>
     <message>
@@ -1917,7 +1928,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Line break height</source>
-        <translation type="unfinished"></translation>
+        <translation>Înălţimea despărţitorul de rând</translation>
     </message>
     <message>
         <source>Use German names</source>
@@ -2044,19 +2055,23 @@ space unit</extracomment>
         <source>Close</source>
         <translation>Închide</translation>
     </message>
+    <message>
+        <source>Part-%1</source>
+        <translation>Ştimă-%1</translation>
+    </message>
 </context>
 <context>
     <name>Glissando</name>
     <message>
         <source>Glissando Properties...</source>
-        <translation>Configurează glisando...</translation>
+        <translation>Proprietăţile glisando-ului...</translation>
     </message>
 </context>
 <context>
     <name>GlissandoProperties</name>
     <message>
         <source>MuseScore: Glissando Properties</source>
-        <translation>MuseScore: configurare glissando</translation>
+        <translation>MuseScore: Proprietăţile glissando-ului</translation>
     </message>
     <message>
         <source>Show Text</source>
@@ -2082,7 +2097,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation>Configurează cadru orizontal...</translation>
+        <translation>Proprietăţile cadrului orizontal...</translation>
     </message>
 </context>
 <context>
@@ -2108,7 +2123,7 @@ space unit</extracomment>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>Configurează armonie...</translation>
+        <translation>Proprietăţile armoniei...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -2123,7 +2138,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation>Configurează imagine...</translation>
+        <translation>Proprietăţile imaginii...</translation>
     </message>
 </context>
 <context>
@@ -2176,7 +2191,7 @@ space unit</extracomment>
     <name>InsertMeasuresDialogBase</name>
     <message>
         <source>Mscore: Insert Measures</source>
-        <translation>MuseScore: inserare măsuri</translation>
+        <translation>MuseScore: Inserare măsuri</translation>
     </message>
     <message>
         <source>Insert empty measures:</source>
@@ -2199,7 +2214,7 @@ space unit</extracomment>
     <name>Inspector</name>
     <message>
         <source>MuseScore: Object Inspector</source>
-        <translation>MuseScore: Examinare obiect</translation>
+        <translation>MuseScore: Inspector</translation>
     </message>
 </context>
 <context>
@@ -2229,7 +2244,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>0</source>
-        <translation></translation>
+        <translation/>
     </message>
     <message>
         <source>Add</source>
@@ -2299,7 +2314,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>0</source>
-        <translation></translation>
+        <translation/>
     </message>
     <message>
         <source>Add</source>
@@ -2386,11 +2401,11 @@ eroare: </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
-        <translation>MuseScore: Deschide fişier instrumente</translation>
+        <translation>MuseScore: Deschidere listă de instrumente</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Salvare scriitură</translation>
+        <translation>MuseScore: Salvare stil de scriitură</translation>
     </message>
     <message>
         <source>MuseScore: Load Instrument List</source>
@@ -2400,19 +2415,23 @@ eroare: </translation>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
         <translation>MuseScore instrumente (*.xml);;Toate tipurile de fişier</translation>
     </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation>Nu s-a putut scrie stilul: </translation>
+    </message>
 </context>
 <context>
     <name>Jump</name>
     <message>
         <source>Jump Properties...</source>
-        <translation>Configurează volta...</translation>
+        <translation>Proprietăţile voltei...</translation>
     </message>
 </context>
 <context>
     <name>JumpPropertyBase</name>
     <message>
         <source>Jump Properties</source>
-        <translation>Configurare volta</translation>
+        <translation>Proprietăţile voltei</translation>
     </message>
     <message>
         <source>Jump to:</source>
@@ -2454,14 +2473,14 @@ eroare: </translation>
     <name>KeyEditor</name>
     <message>
         <source>MuseScore: Key Signatures</source>
-        <translation>MuseScore: Configurare Armură</translation>
+        <translation>MuseScore: Proprietăţile armurii</translation>
     </message>
 </context>
 <context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
-        <translation>MuseScore: Configurare linie</translation>
+        <translation>MuseScore: Proprietăţile liniei</translation>
     </message>
     <message>
         <source>Line</source>
@@ -2639,7 +2658,7 @@ eroare: </translation>
     </message>
     <message>
         <source>End Tick:</source>
-        <translation type="unfinished"></translation>
+        <translation>End Tick:</translation>
     </message>
 </context>
 <context>
@@ -2704,11 +2723,11 @@ eroare: </translation>
     <name>MeasurePropertiesBase</name>
     <message>
         <source>MuseScore: Measure Properties</source>
-        <translation>Configurează măsură...</translation>
+        <translation>MuseScore: Proprietăţile măsurii</translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Portative</translation>
+        <translation>Portative (în măsura curentă)</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -2724,11 +2743,11 @@ eroare: </translation>
     </message>
     <message>
         <source>Measure Duration</source>
-        <translation>Durata măsurii</translation>
+        <translation>Durata măsurii (numărul şi felul timpilor)</translation>
     </message>
     <message>
         <source>nominal</source>
-        <translation type="unfinished"></translation>
+        <translation>scrisă</translation>
     </message>
     <message>
         <source>/</source>
@@ -2736,11 +2755,11 @@ eroare: </translation>
     </message>
     <message>
         <source>actual</source>
-        <translation>efectiv</translation>
+        <translation>reală</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>Altul</translation>
+        <translation>Alte proprietăţi ale măsurii</translation>
     </message>
     <message>
         <source>do not count</source>
@@ -2748,7 +2767,7 @@ eroare: </translation>
     </message>
     <message>
         <source>irregular</source>
-        <translation>neregulat</translation>
+        <translation>se numără diferit (vezi mai jos)</translation>
     </message>
     <message>
         <source>break multi measure rest</source>
@@ -2756,15 +2775,15 @@ eroare: </translation>
     </message>
     <message>
         <source>add to measure number</source>
-        <translation>adaugă la numărul măsurii</translation>
+        <translation>adaugă la nr. de măsuri</translation>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>factor de spaţiere</translation>
     </message>
     <message>
         <source>repeat count:</source>
-        <translation>numărul de repetiţii</translation>
+        <translation>număr de repetiţii</translation>
     </message>
     <message>
         <source>New Row</source>
@@ -2880,7 +2899,7 @@ eroare: </translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation>Partitura în &quot;Do&quot;</translation>
+        <translation>Partitura în "Do"</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2891,14 +2910,14 @@ eroare: </translation>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <source>Save changes to the score &quot;%1&quot;
+        <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>Salvezi modificările aduse partiturii &quot;%1&quot;
+        <translation>Salvezi modificările aduse partiturii "%1"&#13;
 înainte de închidere?</translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
-        <translation>MuseScore: Încarcă Partitură</translation>
+        <translation>MuseScore: Încărcare partitură</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -2906,7 +2925,7 @@ before closing?</source>
     </message>
     <message>
         <source>MuseScore: failure</source>
-        <translation>MuseScore: eroare</translation>
+        <translation>MuseScore: Eroare</translation>
     </message>
     <message>
         <source>Load template file </source>
@@ -3058,31 +3077,31 @@ before closing?</source>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>Trmolo</translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <source>1 through stem</source>
-        <translation type="unfinished"></translation>
+        <translation>optime, pe notă</translation>
     </message>
     <message>
         <source>2 through stem</source>
-        <translation type="unfinished"></translation>
+        <translation>şaisprezecime, pe notă</translation>
     </message>
     <message>
         <source>3 through stem</source>
-        <translation type="unfinished"></translation>
+        <translation>treizecidoime, pe notă</translation>
     </message>
     <message>
         <source>1 between notes</source>
-        <translation type="unfinished"></translation>
+        <translation>optime, între note</translation>
     </message>
     <message>
         <source>2 between notes</source>
-        <translation type="unfinished"></translation>
+        <translation>şaisprezecime, între note</translation>
     </message>
     <message>
         <source>3 between notes</source>
-        <translation type="unfinished"></translation>
+        <translation>treizecidoime, între note</translation>
     </message>
     <message>
         <source>Repeats</source>
@@ -3170,7 +3189,7 @@ before closing?</source>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
-        <translation>MuseScore: Bare de Măsură</translation>
+        <translation>MuseScore: Bare de măsură</translation>
     </message>
     <message>
         <source>MuseScore: Fingering</source>
@@ -3226,7 +3245,7 @@ before closing?</source>
     </message>
     <message>
         <source>Page Settings...</source>
-        <translation>Configurare Pagină...</translation>
+        <translation>Proprietăţile Paginii...</translation>
     </message>
     <message>
         <source>&amp;Style</source>
@@ -3250,7 +3269,7 @@ before closing?</source>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
-        <translation>MuseScore: Deschidere Ghid de Utilizare</translation>
+        <translation>MuseScore: Deschidere "Ghid de Utilizare"</translation>
     </message>
     <message>
         <source>no score</source>
@@ -3346,7 +3365,7 @@ before closing?</source>
     </message>
     <message>
         <source>TextLine</source>
-        <translation>LinieText</translation>
+        <translation>Linii cu text</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -3358,7 +3377,7 @@ before closing?</source>
     </message>
     <message>
         <source>Ottava</source>
-        <translation>Marcaje &quot;ottava&quot; (8va, 8vb, etc.)</translation>
+        <translation>Marcaje "ottava" (8va, 8vb, etc.)</translation>
     </message>
     <message>
         <source>Online Handbook</source>
@@ -3373,10 +3392,10 @@ before closing?</source>
     <message>
         <source>
 
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-Ca alternativă, încercaţi să alegeţi &quot;Ghid de Utilizare pe Internet&quot; din meniul &quot;Ajutor&quot;.</translation>
+Ca alternativă, încercaţi să alegeţi "Ghid de Utilizare pe Internet" din meniul "Ajutor".</translation>
     </message>
     <message>
         <source>Grace Notes</source>
@@ -3384,11 +3403,11 @@ Ca alternativă, încercaţi să alegeţi &quot;Ghid de Utilizare pe Internet&qu
     </message>
     <message>
         <source>Acciaccatura</source>
-        <translation>Acciaccatura</translation>
+        <translation>Apogiatură scurtă</translation>
     </message>
     <message>
         <source>Appoggiatura</source>
-        <translation>Appoggiatura</translation>
+        <translation>Apogiatură</translation>
     </message>
     <message>
         <source>Quarter grace note</source>
@@ -3570,8 +3589,8 @@ Ca alternativă, încercaţi să alegeţi &quot;Ghid de Utilizare pe Internet&qu
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>Sesiunea anterioară a fost întreruptă în mod neaşteptat.
-
+        <translation>Sesiunea anterioară a fost întreruptă în mod neaşteptat.&#13;
+&#13;
 Restaurez sesiunea?</translation>
     </message>
     <message>
@@ -3584,7 +3603,7 @@ Restaurez sesiunea?</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation>MuseScore: Moduri de Atac şi Ornamente</translation>
+        <translation>MuseScore: Moduri de atac şi ornamente</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
@@ -3598,26 +3617,38 @@ Restaurez sesiunea?</translation>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>Scriptul
-%1
+        <translation>Scriptul&#13;
+%1&#13;
 nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>Această versiune a programului MuseScore este prea veche pentru a rula scriptul
+        <translation>Această versiune a programului MuseScore este prea veche pentru a rula scriptul&#13;
 %1</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Toate tipurile de fişier suportate (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Fişiere MuseScore (*.mscz *.mscx *.msc);;Fişiere MusicXML (*.xml *.mxl);;Fişiere MIDI (*.mid *.midi *.kar);;Fişiere Muse Data (*.md);;Fişiere Capella (*.cap);;Fişiere BB &lt;cu titlu de experiment&gt; (*.mgu *.MGU *.sgu *.SGU);;Toate tipurile de fişier (*)</translation>
+    </message>
+    <message>
+        <source>Bar %1 Beat %2.%3</source>
+        <translation>Măsura %1, timpul %2.%3</translation>
+    </message>
+    <message>
+        <source>Error loading plugin
+"%1" line %2:
+%3</source>
+        <translation>Nu s-a putut încărca modulul&#13;
+"%1" linia %2:&#13;
+%3</translation>
     </message>
 </context>
 <context>
     <name>NewWizard</name>
     <message>
         <source>MuseScore: Create New Score</source>
-        <translation>MuseScore: Crează Partitură Nouă</translation>
+        <translation>MuseScore: Creare partitură nouă</translation>
     </message>
     <message>
         <source>Form</source>
@@ -3734,11 +3765,11 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>head index</source>
-        <translation type="unfinished"></translation>
+        <translation>head index</translation>
     </message>
     <message>
         <source>note head group</source>
-        <translation type="unfinished"></translation>
+        <translation>tipul boabei</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -3758,11 +3789,11 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"></translation>
+        <translation>Timpi tari</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"></translation>
+        <translation>Timpi slabi</translation>
     </message>
 </context>
 <context>
@@ -3784,7 +3815,7 @@ nu este compatibil cu interfaţa curentă</translation>
     <name>PageSettingsBase</name>
     <message>
         <source>MuseScore: Page Settings</source>
-        <translation>MuseScore: Configurare Pagină</translation>
+        <translation>MuseScore: Proprietăţile paginii</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -3878,14 +3909,14 @@ nu este compatibil cu interfaţa curentă</translation>
     <name>PaletteBox</name>
     <message>
         <source>Palettes</source>
-        <translation>Panouri</translation>
+        <translation>Paletă</translation>
     </message>
 </context>
 <context>
     <name>PaletteBoxButton</name>
     <message>
         <source>Palette Properties</source>
-        <translation>Proprietăţi Panouri</translation>
+        <translation>Proprietăţile paletei</translation>
     </message>
     <message>
         <source>Insert new Palette</source>
@@ -3935,7 +3966,7 @@ nu este compatibil cu interfaţa curentă</translation>
     <name>PaletteProperties</name>
     <message>
         <source>MuseScore: Palette Properties</source>
-        <translation>MuseScore: Proprietăţi Panouri</translation>
+        <translation>MuseScore: Proprietăţile paletei</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -4037,7 +4068,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Forţă:</translation>
+        <translation>Forţă atac (0-127):</translation>
     </message>
     <message>
         <source>auto</source>
@@ -4049,7 +4080,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>offset</source>
-        <translation type="unfinished">decalaj</translation>
+        <translation>decalaj</translation>
     </message>
     <message>
         <source>Pitch:</source>
@@ -4072,7 +4103,7 @@ nu este compatibil cu interfaţa curentă</translation>
     <name>PlayPanelBase</name>
     <message>
         <source>MuseScore: Play Panel</source>
-        <translation>MuseScore: Panou Redare</translation>
+        <translation>MuseScore: Panou de redare</translation>
     </message>
     <message>
         <source>measure.beat</source>
@@ -4442,7 +4473,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>Dacă folosiţi metoda de intrare standard, nota creată depinde de tonalitatea curentă. De exemplu, dacă tastaţi &apos;F&apos;  în Sol Major, veţi insera nota &apos;fa diez&apos;. Dacă metoda de intrare alternativă este pornită, atunci tonalitatea curentă este irelevantă. De exemplu &apos;F&apos; întotdeauna inserează nota &apos;fa natural&apos;.</translation>
+        <translation>Dacă folosiţi metoda de intrare standard, nota creată depinde de tonalitatea curentă. De exemplu, dacă tastaţi 'F'  în Sol Major, veţi insera nota 'fa diez'. Dacă metoda de intrare alternativă este pornită, atunci tonalitatea curentă este irelevantă. De exemplu 'F' întotdeauna inserează nota 'fa natural'.</translation>
     </message>
     <message>
         <source>Expand Repeats</source>
@@ -4691,7 +4722,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation>Înlocuieşte (C) cu semnul &quot;drepturi de autor&quot; © (Funcţionează doar pentru textul din secţiunea &quot;dreptul de autor&quot;)</translation>
+        <translation>Înlocuieşte (C) cu semnul © (va funcţiona doar pentru secţiunea "drepturi de autor")</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
@@ -4775,7 +4806,7 @@ nu este compatibil cu interfaţa curentă</translation>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation>Nicio notă selectată:
+        <translation>Nicio notă selectată:&#13;
 Selectaţi o (singură) notă şi reluaţi operaţia
 </translation>
     </message>
@@ -4783,7 +4814,7 @@ Selectaţi o (singură) notă şi reluaţi operaţia
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation>Nicio notă/pauză selectată:
+        <translation>Nicio notă/pauză selectată:&#13;
 Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
 </translation>
     </message>
@@ -4804,7 +4835,7 @@ Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
     <name>QWidget</name>
     <message>
         <source>MuseScore: Import Capella</source>
-        <translation>MuseScore: Importă fişier Capella</translation>
+        <translation>MuseScore: Import Capella</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -4812,7 +4843,7 @@ Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
-        <translation>MuseScore: Încarcă Descriere Acord</translation>
+        <translation>MuseScore: Încărcare descriere acord</translation>
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
@@ -4828,7 +4859,7 @@ Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
     </message>
     <message>
         <source>MuseScore: Load Style</source>
-        <translation>MuseScore: Încarcă Stil</translation>
+        <translation>MuseScore: Încărcare stil scriitură</translation>
     </message>
     <message>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
@@ -4836,7 +4867,7 @@ Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
     </message>
     <message>
         <source>MuseScore: Load Style failed:</source>
-        <translation>MuseScore: nu se poate încărca stilul:</translation>
+        <translation>MuseScore: nu se poate încărca stilul de scriitură:</translation>
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
@@ -4848,7 +4879,7 @@ Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
     </message>
     <message>
         <source>MuseScore: load midi</source>
-        <translation>MuseScore: încarcă MIDI</translation>
+        <translation>MuseScore: încărcare MIDI</translation>
     </message>
     <message>
         <source>MuseScore: load Style failed:</source>
@@ -4864,31 +4895,31 @@ Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
     </message>
     <message>
         <source>MuseScore: invalid command</source>
-        <translation>MuseScore: comandă greşită</translation>
+        <translation>MuseScore: comanda a fost recunoscută</translation>
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
-        <translation>MuseScore: nu se pot încărca panourile:</translation>
+        <translation>MuseScore: nu se poate încărca paleta:</translation>
     </message>
     <message>
         <source>MuseScore: Load font symbols failed:</source>
-        <translation>MuseScore: Încărcarea caracterelor a eşuat:</translation>
+        <translation>MuseScore: Încărcarea caracterelor speciale a eşuat:</translation>
     </message>
     <message>
         <source>MuseScore: Load Palette failed:</source>
-        <translation>MuseScore: Încărcarea Paletei a eşuat:</translation>
+        <translation>MuseScore: Încărcarea paletei a eşuat:</translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description File</source>
-        <translation>MuseScore: Încarcă Fişier Descriere Acorduri</translation>
+        <translation>MuseScore: Încărcare fişier cu descrierea acordurilor</translation>
     </message>
     <message>
         <source>MuseScore: Save Chord Description File</source>
-        <translation>MuseScore: Salvează Fişier Descriere Acorduri</translation>
+        <translation>MuseScore: Salvare fişier cu descrierea acordurilor</translation>
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
-        <translation>MuseScore: Încărcarea limbilor a eşuat:</translation>
+        <translation>MuseScore: Încărcarea traducerilor a eşuat:</translation>
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
@@ -4937,7 +4968,7 @@ Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
     </message>
     <message>
         <source>small</source>
-        <translation>mic</translation>
+        <translation>dimensiune mică</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -4998,14 +5029,14 @@ Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Nu s-a găsit niciun portativ:
-vă rugăm folosiţi fereastra de dialog &quot;instrumente&quot;
+        <translation>Nu s-a găsit niciun portativ:&#13;
+vă rugăm folosiţi fereastra de dialog "instrumente"&#13;
 pentru a crea unul sau mai multe portative</translation>
     </message>
     <message>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation>Nu este selectat nicio măsură:
+        <translation>Nu este selectat nicio măsură:&#13;
 vă rugăm selectaşi o măsură şi reluaţi operaţia</translation>
     </message>
     <message>
@@ -5018,11 +5049,11 @@ vă rugăm selectaşi o măsură şi reluaţi operaţia</translation>
     </message>
     <message>
         <source>MuseScore: Save Score</source>
-        <translation>MuseScore: Salvare Partitură</translation>
+        <translation>MuseScore: Salvare partitură</translation>
     </message>
     <message>
         <source>MuseScore: Save File</source>
-        <translation>MuseScore: Salvare Fişier</translation>
+        <translation>MuseScore: Salvare fişier</translation>
     </message>
     <message>
         <source>Open Temp File
@@ -5128,7 +5159,7 @@ eroare: </translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation>MuseScore: Salvare Copie</translation>
+        <translation>MuseScore: Salvare copie</translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
@@ -5142,7 +5173,7 @@ eroare: </translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
-        <translation>MuseScore: Salvare Stil</translation>
+        <translation>MuseScore: Salvare stil de scriitură</translation>
     </message>
     <message>
         <source>MuseScore Style File (*.mss)</source>
@@ -5156,15 +5187,15 @@ eroare: </translation>
     </message>
     <message>
         <source>MuseScore: Open Style file</source>
-        <translation>MuseScore: Deschidere Fişier Stil</translation>
+        <translation>MuseScore: Deschidere stil de scriitură</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Stil Scriitură</translation>
+        <translation>MuseScore: Stil de scriitură</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
-        <translation>MuseScore: Citire Fişier</translation>
+        <translation>MuseScore: Citire fişier</translation>
     </message>
     <message>
         <source>MuseScore: transpose</source>
@@ -5179,9 +5210,9 @@ eroare: </translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation>Următorul fişier este blocat pentru scriere: 
-%1 
-
+        <translation>Următorul fişier este blocat pentru scriere: &#13;
+%1 &#13;
+&#13;
 Încercaţi să salvaţi în alt fişier.</translation>
     </message>
     <message>
@@ -5196,6 +5227,14 @@ Try saving to a different location.</source>
         <source>cannot determine file type</source>
         <translation>nu pot determina tipul fişierului</translation>
     </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation>Nu s-a putut scrie stilul: </translation>
+    </message>
+    <message>
+        <source>Load failed: </source>
+        <translation>Nu s-a putut încărca: </translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5209,7 +5248,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Object Inspector</source>
-        <translation>Inspector Obiecte</translation>
+        <translation>Inspector</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -5225,7 +5264,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
-        <translation>Editor Pianină Mecanică...</translation>
+        <translation>Pianină mecanică...</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
@@ -5238,6 +5277,12 @@ Try saving to a different location.</source>
     <message>
         <source>Measure</source>
         <translation>Măsură</translation>
+    </message>
+    <message>
+        <source>unknown drop format: formats %1:
+</source>
+        <translation>format necunoscut: formate %1:
+</translation>
     </message>
 </context>
 <context>
@@ -5252,7 +5297,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Clef Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Clef Segment</translation>
     </message>
     <message>
         <source>Key Signature</source>
@@ -5354,6 +5399,39 @@ Try saving to a different location.</source>
     </message>
 </context>
 <context>
+    <name>Seq</name>
+    <message>
+        <source>Init audio driver failed.
+Sequencer will be disabled.</source>
+        <translation>Nu s-a putut porni serverul audio.&#13;
+Interpretarea partiturii nu va fi disponibilă.</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load SoundFont</source>
+        <translation>MuseScore: Încărcare bancă de sunete</translation>
+    </message>
+    <message>
+        <source>No SoundFont configured
+Playback will be disabled.</source>
+        <translation>Nu a fost configurată nicio bancă de sunete&#13;
+Redarea nu va fi disponibilă.</translation>
+    </message>
+    <message>
+        <source>Loading SoundFont
+"%1"
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
+and check that the file location is correct</source>
+        <translation>Încărcarea băncii de sunete&#13;
+"%1"&#13;
+a eşuat. Redarea nu va fi disponibilă.&#13;
+&#13;
+Accesaţi "Afişează" &gt; "Sintetizator" din meniu&#13;
+şi verificaţi calea către fişier, dacă este corectă.</translation>
+    </message>
+</context>
+<context>
     <name>ShortcutCaptureDialog</name>
     <message>
         <source>Shortcut conflicts with </source>
@@ -5407,23 +5485,23 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished">mijloc ligatură</translation>
+        <translation>beam mid</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation type="unfinished">final ligatură</translation>
+        <translation>beam end</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished">fără ligatură</translation>
+        <translation>no beam</translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation type="unfinished">început 1/32</translation>
+        <translation>begin 1/32</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Automată</translation>
+        <translation>Automat</translation>
     </message>
     <message>
         <source>Up</source>
@@ -5496,7 +5574,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Tick:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tick:</translation>
     </message>
 </context>
 <context>
@@ -5550,7 +5628,7 @@ Try saving to a different location.</source>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Modificare Proprietăţi Portativ/Ştimă</translation>
+        <translation>MuseScore: Modificare proprietăţi portativ / ştimă</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5565,7 +5643,7 @@ Try saving to a different location.</source>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation>Proprietăţi Text Portativ</translation>
+        <translation>Proprietăţile indicaţiei...</translation>
     </message>
 </context>
 <context>
@@ -5576,7 +5654,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
-        <translation>MuseScore: Proprietăţi Text Portativ</translation>
+        <translation>MuseScore: Proprietăţile indicaţiei</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -5584,7 +5662,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Acşiune MIDI</translation>
+        <translation>Acţiune MIDI</translation>
     </message>
 </context>
 <context>
@@ -5641,7 +5719,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Master Tuning</source>
@@ -5717,7 +5795,7 @@ Try saving to a different location.</source>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
-        <translation>MuseScore: Proprietăţi Text Tempo</translation>
+        <translation>MuseScore: Proprietăţile indicaţiei de tempo</translation>
     </message>
     <message>
         <source>Tempo Properties</source>
@@ -5815,7 +5893,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Configurare Text...</translation>
+        <translation>Proprietăţile textului...</translation>
     </message>
 </context>
 <context>
@@ -5860,7 +5938,7 @@ Try saving to a different location.</source>
     <name>TextPaletteBase</name>
     <message>
         <source>MuseScore: Special Text Symbols</source>
-        <translation>MuseScore:Caractere Speciale</translation>
+        <translation>MuseScore: Caractere speciale</translation>
     </message>
     <message>
         <source>Text</source>
@@ -5888,7 +5966,7 @@ Try saving to a different location.</source>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: Configurare Text</translation>
+        <translation>MuseScore: Proprietăţile textului</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
@@ -6112,7 +6190,7 @@ Try saving to a different location.</source>
     <name>TextStyleDialog</name>
     <message>
         <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Formatare Text</translation>
+        <translation>MuseScore: Modificare stiluri de text</translation>
     </message>
 </context>
 <context>
@@ -6130,15 +6208,15 @@ Try saving to a different location.</source>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation>MuseScore: Metru</translation>
+        <translation>MuseScore: Metri</translation>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4</translation>
+        <translation>4/4 în scriere prescurtată</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 alla breve</translation>
+        <translation>2/2 alla breve</translation>
     </message>
 </context>
 <context>
@@ -6184,7 +6262,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Pickup Measure</source>
-        <translation>Auftakt</translation>
+        <translation>Anacruză (specifică numărul şi durata timpilor)</translation>
     </message>
     <message>
         <source>Time Signature</source>
@@ -6199,14 +6277,14 @@ Try saving to a different location.</source>
         <translation>Măsuri:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Pont: puteţi să introduceţi măsuri şi după crearea partiturii..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Pont: puteţi să introduceţi măsuri şi după crearea partiturii..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6438,7 +6516,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletDialog</name>
     <message>
         <source>MuseScore: create tuplet</source>
-        <translation>MuseScore: definire diviziune excepţională</translation>
+        <translation>MuseScore: Definire diviziune excepţională</translation>
     </message>
     <message>
         <source>Type</source>
@@ -6489,7 +6567,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletProperties</name>
     <message>
         <source>MuseScore: Tuplet Properties</source>
-        <translation>MuseScore: Proprietăţi Diviziune Excepţională</translation>
+        <translation>MuseScore: Proprietăţile diviziunii excepţionale</translation>
     </message>
     <message>
         <source>Number</source>
@@ -6523,8 +6601,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>Este disponibilă o versiune nouă a programului  MuseScore : &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Este disponibilă o versiune nouă a programului  MuseScore : &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -6747,7 +6825,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>file new</source>
-        <translation type="unfinished"></translation>
+        <translation>file new</translation>
     </message>
     <message>
         <source>New...</source>
@@ -6967,7 +7045,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add A</source>
-        <translation>Adaugă La</translation>
+        <translation>Adaugă La în acord</translation>
     </message>
     <message>
         <source>Add note A to chord</source>
@@ -7047,15 +7125,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up+shift+ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>up+shift+ctrl</translation>
     </message>
     <message>
         <source>down+shift+ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>down+shift+ctrl</translation>
     </message>
     <message>
         <source>left+ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>left+ctrl</translation>
     </message>
     <message>
         <source>add previous chord to selection</source>
@@ -7251,7 +7329,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/1</source>
-        <translation type="unfinished">pad note 1/1</translation>
+        <translation>pad note 1/1</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
@@ -7259,7 +7337,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/2</source>
-        <translation type="unfinished">pad note 1/2</translation>
+        <translation>pad note 1/2</translation>
     </message>
     <message>
         <source>Half note (minim)</source>
@@ -7267,7 +7345,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation type="unfinished">pad note 1/4</translation>
+        <translation>pad note 1/4</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
@@ -7275,7 +7353,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation type="unfinished">pad note 1/8</translation>
+        <translation>pad note 1/8</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
@@ -7291,7 +7369,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation type="unfinished">pad note 1/32</translation>
+        <translation>pad note 1/32</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
@@ -7299,7 +7377,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation type="unfinished">pad note 1/64</translation>
+        <translation>pad note 1/64</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
@@ -7307,7 +7385,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad dot</source>
-        <translation type="unfinished"></translation>
+        <translation>pad dot</translation>
     </message>
     <message>
         <source>Dot</source>
@@ -7315,7 +7393,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad double dot</source>
-        <translation type="unfinished"></translation>
+        <translation>pad double dot</translation>
     </message>
     <message>
         <source>Double dot</source>
@@ -7327,7 +7405,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad rest</source>
-        <translation type="unfinished"></translation>
+        <translation>pad rest</translation>
     </message>
     <message>
         <source>double sharp</source>
@@ -7355,15 +7433,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace-4</source>
-        <translation type="unfinished"></translation>
+        <translation>grace-4</translation>
     </message>
     <message>
         <source>grace-16</source>
-        <translation type="unfinished"></translation>
+        <translation>grace-16</translation>
     </message>
     <message>
         <source>grace-32</source>
-        <translation type="unfinished"></translation>
+        <translation>grace-32</translation>
     </message>
     <message>
         <source>voice 1</source>
@@ -7387,7 +7465,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enable MIDI Input</source>
-        <translation>Deschide Intrarea MIDI</translation>
+        <translation>Permite semnale de intrare MIDI</translation>
     </message>
     <message>
         <source>editing sound on</source>
@@ -7403,19 +7481,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished">mijloc ligatură</translation>
+        <translation>beam mid</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished">fără ligatură</translation>
+        <translation>no beam</translation>
     </message>
     <message>
         <source>beam 32</source>
-        <translation type="unfinished"></translation>
+        <translation>beam 32</translation>
     </message>
     <message>
         <source>auto beam</source>
-        <translation type="unfinished"></translation>
+        <translation>ligatură automată</translation>
     </message>
     <message>
         <source>Palette</source>
@@ -7459,7 +7537,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation>Dimensiune Spaţiu de Lucru</translation>
+        <translation>Schimbă raportul de afişare</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -7827,7 +7905,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>backspace</source>
-        <translation type="unfinished"></translation>
+        <translation>backspace</translation>
     </message>
     <message>
         <source>search</source>
@@ -7847,7 +7925,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirror note head</source>
-        <translation type="unfinished"></translation>
+        <translation>mirror note head</translation>
     </message>
     <message>
         <source>Edit General Style...</source>
@@ -7915,23 +7993,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File open</source>
-        <translation type="unfinished"></translation>
+        <translation>File open</translation>
     </message>
     <message>
         <source>Load score from file</source>
-        <translation>Încarcă partitură din fişierul</translation>
+        <translation>Încarcă o partitură dintr-un fişier</translation>
     </message>
     <message>
         <source>File save</source>
-        <translation type="unfinished"></translation>
+        <translation>File save</translation>
     </message>
     <message>
         <source>Save score to file</source>
-        <translation>Salvează partitura în fişierul</translation>
+        <translation>Salvează partitura într-un fişier</translation>
     </message>
     <message>
         <source>File save as</source>
-        <translation type="unfinished"></translation>
+        <translation>File save as</translation>
     </message>
     <message>
         <source>Save score under a new file name</source>
@@ -7939,7 +8017,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File save a copy</source>
-        <translation type="unfinished"></translation>
+        <translation>File save a copy</translation>
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
@@ -7947,7 +8025,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File reload</source>
-        <translation type="unfinished"></translation>
+        <translation>File reload</translation>
     </message>
     <message>
         <source>Reload score from file</source>
@@ -7955,7 +8033,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File close</source>
-        <translation type="unfinished"></translation>
+        <translation>File close</translation>
     </message>
     <message>
         <source>Close current score</source>
@@ -7971,11 +8049,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Undo last change</source>
-        <translation>Anulează ultima schimbare</translation>
+        <translation>Înapoi cu o versiune</translation>
     </message>
     <message>
         <source>Redo last undo</source>
-        <translation>Reiterează ultima schimbare anulată</translation>
+        <translation>Înainte cu o versiune</translation>
     </message>
     <message>
         <source>Show instruments dialog</source>
@@ -8095,15 +8173,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Flip direction</source>
-        <translation>Inversează direcţia</translation>
+        <translation>Inversează cozi, legato, etc.</translation>
     </message>
     <message>
         <source>Flip Direction</source>
-        <translation>Inversează direcţia</translation>
+        <translation>Inversează cozi, legato, etc.</translation>
     </message>
     <message>
         <source>Pitch up</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitch up</translation>
     </message>
     <message>
         <source>Up</source>
@@ -8111,23 +8189,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch up octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitch up octave</translation>
     </message>
     <message>
         <source>Up Octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Up Octave</translation>
     </message>
     <message>
         <source>Pitch up by an octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitch up by an octave</translation>
     </message>
     <message>
         <source>Pitch up note in chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitch up note in chord</translation>
     </message>
     <message>
         <source>Up Note in Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Up Note in Chord</translation>
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
@@ -8143,11 +8221,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Move up</translation>
     </message>
     <message>
         <source>Pitch down</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitch down</translation>
     </message>
     <message>
         <source>Down</source>
@@ -8155,23 +8233,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch down octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitch down octave</translation>
     </message>
     <message>
         <source>Down octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Down octave</translation>
     </message>
     <message>
         <source>Pitch down by an octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitch down by an octave</translation>
     </message>
     <message>
         <source>Pitch down note in chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitch down note in chord</translation>
     </message>
     <message>
         <source>Down Note in Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Down Note in Chord</translation>
     </message>
     <message>
         <source>Go to lower pitched note in chord</source>
@@ -8187,7 +8265,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Move down</translation>
     </message>
     <message>
         <source>Previous chord</source>
@@ -8307,7 +8385,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Timewise Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Timewise Delete</translation>
     </message>
     <message>
         <source>Delete element and duration</source>
@@ -8362,7 +8440,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>umarcato</source>
-        <translation type="unfinished">umarcato</translation>
+        <translation>marcato</translation>
     </message>
     <message>
         <source>dmarcato</source>
@@ -8422,11 +8500,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upmordent</source>
-        <translation>upmordent</translation>
+        <translation>mordent</translation>
     </message>
     <message>
         <source>downmordent</source>
-        <translation>downmordent</translation>
+        <translation>mordent</translation>
     </message>
     <message>
         <source>ufermata</source>
@@ -8640,7 +8718,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished">Cârlig</translation>
+        <translation>Hook</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -8648,7 +8726,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Marker</source>
-        <translation type="unfinished"></translation>
+        <translation>Marker</translation>
     </message>
     <message>
         <source>Jump</source>
@@ -8776,7 +8854,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Compound</source>
-        <translation type="unfinished"></translation>
+        <translation>Compound</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -8976,19 +9054,19 @@ p, li { white-space: pre-wrap; }
         <translation>pauză de optime</translation>
     </message>
     <message>
-        <source>16&apos; rest</source>
+        <source>16' rest</source>
         <translation>pauză de şaisprezecime</translation>
     </message>
     <message>
-        <source>32&apos; rest</source>
+        <source>32' rest</source>
         <translation>pauză de treizecidoime</translation>
     </message>
     <message>
-        <source>64&apos; rest</source>
+        <source>64' rest</source>
         <translation>pauză de şaizecipătrime</translation>
     </message>
     <message>
-        <source>128&apos; rest</source>
+        <source>128' rest</source>
         <translation>pauză de osutădouăzecioptime</translation>
     </message>
     <message>
@@ -9373,7 +9451,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>plus stop</source>
-        <translation type="unfinished"></translation>
+        <translation>plus stop</translation>
     </message>
     <message>
         <source>up bow</source>
@@ -9477,7 +9555,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up mordent</source>
-        <translation type="unfinished"></translation>
+        <translation>mordent în sus</translation>
     </message>
     <message>
         <source>prall down</source>
@@ -9489,7 +9567,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>down mordent</source>
-        <translation type="unfinished"></translation>
+        <translation>mordent în jos</translation>
     </message>
     <message>
         <source>prall up</source>

@@ -818,6 +818,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordList</name>
+    <message>
+        <source>Write Chord Description failed: </source>
+        <translation>Schrijven van akkoord beschrijving gefaald: </translation>
+    </message>
+</context>
+<context>
     <name>ChordPropertyBase</name>
     <message>
         <source>up</source>
@@ -1177,6 +1184,10 @@ mislukt: </translation>
     <message>
         <source>Cross Head</source>
         <translation>Kruis Nootkop</translation>
+    </message>
+    <message>
+        <source>Write File failed: </source>
+        <translation>Bestand Schrijven mislukt: </translation>
     </message>
 </context>
 <context>
@@ -2027,6 +2038,10 @@ space unit</extracomment>
         <source>Create Part</source>
         <translation>Creëer Partij</translation>
     </message>
+    <message>
+        <source>Part-%1</source>
+        <translation>Partij-%1</translation>
+    </message>
 </context>
 <context>
     <name>Glissando</name>
@@ -2382,6 +2397,10 @@ mislukt: </translation>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
         <translation>MuseScore Instrumenten (*.xml);;Alle bestanden (*)</translation>
+    </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation>Stijl Schrijven mislukt: </translation>
     </message>
 </context>
 <context>
@@ -3599,6 +3618,18 @@ is niet compactibel met de huidige interface</translation>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
         <translation>Alle ondersteunde bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore bestanden (*.mscz *.mscx *.msc);;MusicXML bestanden (*.xml *.mxl);;MIDI bestanden (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella bestanden (*.cap);;BB bestanden &lt;experimenteel&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle bestanden (*)</translation>
     </message>
+    <message>
+        <source>Bar %1 Beat %2.%3</source>
+        <translation>Maat %1 Tel %2.%3</translation>
+    </message>
+    <message>
+        <source>Error loading plugin
+"%1" line %2:
+%3</source>
+        <translation>Fout bij het laden van de plugin&#13;
+"%1" lijn %2:&#13;
+%3</translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -4726,7 +4757,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Use Current Position</source>
-        <translation type="unfinished"/>
+        <translation>Gebruik Huidige Positie</translation>
     </message>
 </context>
 <context>
@@ -5184,6 +5215,14 @@ mislukt: </translation>
         <source>cannot determine file type</source>
         <translation>Kan bestandstype niet achterhalen</translation>
     </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation>Schrijven van Stijl gefaald: </translation>
+    </message>
+    <message>
+        <source>Load failed: </source>
+        <translation>Laden gefaald: </translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5226,6 +5265,11 @@ mislukt: </translation>
     <message>
         <source>Split Staff...</source>
         <translation>Splits Notenbalk...</translation>
+    </message>
+    <message>
+        <source>unknown drop format: formats %1:
+</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5339,6 +5383,39 @@ mislukt: </translation>
     <message>
         <source>show more</source>
         <translation>toon meer</translation>
+    </message>
+</context>
+<context>
+    <name>Seq</name>
+    <message>
+        <source>Init audio driver failed.
+Sequencer will be disabled.</source>
+        <translation>Initialisatie van audio driver gefaald.&#13;
+De sequencer wordt uitgeschakeld..</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load SoundFont</source>
+        <translation>MuseScore: Laad SoundFont</translation>
+    </message>
+    <message>
+        <source>No SoundFont configured
+Playback will be disabled.</source>
+        <translation>Geen SoundFont geconfigureerd&#13;
+Afspelen is uitgeschakeld.</translation>
+    </message>
+    <message>
+        <source>Loading SoundFont
+"%1"
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
+and check that the file location is correct</source>
+        <translation>Inladen van SoundFont&#13;
+"%1"&#13;
+is mislukt. Afspelen is uitgeschakeld.&#13;
+&#13;
+Ga naar Beeld &gt; Synthesizer &#13;
+en controleer dat de bestandslocatie juist is.</translation>
     </message>
 </context>
 <context>
@@ -8303,7 +8380,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation type="unfinished">Partijen...</translation>
+        <translation>Partijen...</translation>
     </message>
 </context>
 <context>
