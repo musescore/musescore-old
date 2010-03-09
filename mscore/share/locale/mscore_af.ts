@@ -1031,6 +1031,14 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordList</name>
+    <message>
+        <location filename="../../mscore/harmony.cpp" line="1170"/>
+        <source>Write Chord Description failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChordPropertyBase</name>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="14"/>
@@ -1477,6 +1485,11 @@ failed: </source>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="382"/>
         <source>MuseScore: Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/editdrumset.cpp" line="392"/>
+        <source>Write File failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2590,6 +2603,11 @@ space unit</extracomment>
         <source>Create Part</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.cpp" line="167"/>
+        <source>Part-%1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Glissando</name>
@@ -3005,6 +3023,11 @@ failed: </source>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1030"/>
         <source>MuseScore: Open Instruments file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/instrdialog.cpp" line="1045"/>
+        <source>Write Style failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4363,6 +4386,11 @@ before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../mscore/mscore.cpp" line="2577"/>
+        <source>Bar %1 Beat %2.%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../mscore/mscore.cpp" line="2869"/>
         <source>The previous session quit unexpectedly.
 
@@ -4552,6 +4580,14 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
     <message>
         <location filename="../../mscore/style.cpp" line="310"/>
         <source>Ottava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/plugins.cpp" line="63"/>
+        <location filename="../../mscore/plugins.cpp" line="310"/>
+        <source>Error loading plugin
+&quot;%1&quot; line %2:
+%3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6540,6 +6576,11 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../mscore/file.cpp" line="1021"/>
+        <source>Write Style failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../mscore/file.cpp" line="1022"/>
         <source>MuseScore: Write Style</source>
         <translation type="unfinished"></translation>
@@ -6567,6 +6608,11 @@ failed: </source>
     <message>
         <location filename="../../mscore/edit.cpp" line="442"/>
         <source>The first time signature of a piece can not be removed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/importmidi.cpp" line="1348"/>
+        <source>Load failed: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6621,6 +6667,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="886"/>
         <source>Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/scoreview.cpp" line="1600"/>
+        <source>unknown drop format: formats %1:
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6760,6 +6812,37 @@ failed: </source>
     <message>
         <location filename="../../mscore/selectinstr.ui" line="29"/>
         <source>show more</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Seq</name>
+    <message>
+        <location filename="../../mscore/seq.cpp" line="207"/>
+        <source>Init audio driver failed.
+Sequencer will be disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/seq.cpp" line="223"/>
+        <location filename="../../mscore/seq.cpp" line="237"/>
+        <source>MuseScore: Load SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/seq.cpp" line="224"/>
+        <source>No SoundFont configured
+Playback will be disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/seq.cpp" line="232"/>
+        <source>Loading SoundFont
+&quot;%1&quot;
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
+and check that the file location is correct</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

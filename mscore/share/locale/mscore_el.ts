@@ -21,26 +21,26 @@
 Τμήμα Μουσικών Σπουδών</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; για νέες εκδόσεις και περισσότερες πληροφορίες.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Υποστηρίξτε το MuseScore με &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;τις δωρεές σας&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; για νέες εκδόσεις και περισσότερες πληροφορίες.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Υποστηρίξτε το MuseScore με &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;τις δωρεές σας&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -823,6 +823,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordList</name>
+    <message>
+        <source>Write Chord Description failed: </source>
+        <translation>Γραφή Περιγραφής Συγχορδίας απέτυχε: </translation>
+    </message>
+</context>
+<context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
@@ -1186,6 +1193,10 @@ failed: </source>
         <source>MuseScore: Write Drumset</source>
         <translation>MuseScore: Γραφή Drumset</translation>
     </message>
+    <message>
+        <source>Write File failed: </source>
+        <translation>Αρχείο Γραφής απέτυχε: </translation>
+    </message>
 </context>
 <context>
     <name>EditDrumsetBase</name>
@@ -1247,37 +1258,37 @@ failed: </source>
     </message>
     <message>
         <source>A</source>
-        <translatorcomment>It&apos;s translated as La, because it&apos;s more widely used in Greece. However, it could be written as A as well.</translatorcomment>
+        <translatorcomment>It's translated as La, because it's more widely used in Greece. However, it could be written as A as well.</translatorcomment>
         <translation>A (Λα)</translation>
     </message>
     <message>
         <source>B</source>
-        <translatorcomment>It&apos;s translated as Si, because it&apos;s more widely used in Greece. However, it could be written as B as well.</translatorcomment>
+        <translatorcomment>It's translated as Si, because it's more widely used in Greece. However, it could be written as B as well.</translatorcomment>
         <translation>B (Σι)</translation>
     </message>
     <message>
         <source>C</source>
-        <translatorcomment>It&apos;s translated as Dp, because it&apos;s more widely used in Greece. However, it could be written as C as well.</translatorcomment>
+        <translatorcomment>It's translated as Dp, because it's more widely used in Greece. However, it could be written as C as well.</translatorcomment>
         <translation>C (Ντο)</translation>
     </message>
     <message>
         <source>D</source>
-        <translatorcomment>It&apos;s translated as Re, because it&apos;s more widely used in Greece. However, it could be written as D as well.</translatorcomment>
+        <translatorcomment>It's translated as Re, because it's more widely used in Greece. However, it could be written as D as well.</translatorcomment>
         <translation>D (Ρε)</translation>
     </message>
     <message>
         <source>E</source>
-        <translatorcomment>It&apos;s translated as Mi, because it&apos;s more widely used in Greece. However, it could be written as E as well.</translatorcomment>
+        <translatorcomment>It's translated as Mi, because it's more widely used in Greece. However, it could be written as E as well.</translatorcomment>
         <translation>E (Μι)</translation>
     </message>
     <message>
         <source>F</source>
-        <translatorcomment>It&apos;s translated as Fa, because it&apos;s more widely used in Greece. However, it could be written as F as well.</translatorcomment>
+        <translatorcomment>It's translated as Fa, because it's more widely used in Greece. However, it could be written as F as well.</translatorcomment>
         <translation>F (Φα)</translation>
     </message>
     <message>
         <source>G</source>
-        <translatorcomment>It&apos;s translated as Sol, because it&apos;s more widely used in Greece. However, it could be written as G as well.</translatorcomment>
+        <translatorcomment>It's translated as Sol, because it's more widely used in Greece. However, it could be written as G as well.</translatorcomment>
         <translation>G (Σολ)</translation>
     </message>
     <message>
@@ -1841,8 +1852,8 @@ space unit</extracomment>
         <translation>Αριστερό περιθώριο αρχής επανάληψης</translation>
     </message>
     <message>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
-        <translation>Πληροφορίες μέτρου επανάλυψης (&quot;φτερωτή&quot; επανάλυψη)</translation>
+        <source>Show repeat bar tips ("winged" repeats)</source>
+        <translation>Πληροφορίες μέτρου επανάλυψης ("φτερωτή" επανάλυψη)</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -2045,6 +2056,10 @@ space unit</extracomment>
     <message>
         <source>Close</source>
         <translation>Κλείσιμο</translation>
+    </message>
+    <message>
+        <source>Part-%1</source>
+        <translation>Μέρος-%1</translation>
     </message>
 </context>
 <context>
@@ -2406,6 +2421,10 @@ failed: </source>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
         <translation>MuseScore: Όργανα (*.xml);;Όλα τα αρχεία (*)</translation>
     </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation>Στυλ Γραφής απέτυχε: </translation>
+    </message>
 </context>
 <context>
     <name>Jump</name>
@@ -2753,7 +2772,7 @@ failed: </source>
     </message>
     <message>
         <source>nominal</source>
-        <translation>κατ&apos; όνομα</translation>
+        <translation>κατ' όνομα</translation>
     </message>
     <message>
         <source>/</source>
@@ -2900,9 +2919,9 @@ failed: </source>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <source>Save changes to the score &quot;%1&quot;
+        <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>Αποθήκευση αλλαγών στην παρτιτούρα &quot;%1&quot;
+        <translation>Αποθήκευση αλλαγών στην παρτιτούρα "%1"
 πριν το κλείσιμο;</translation>
     </message>
     <message>
@@ -3275,10 +3294,10 @@ before closing?</source>
     <message>
         <source>
 
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-Από το μενού &quot;Βοήθεια&quot; δοκιμάστε αντί αυτού να επιλέξετε &quot;Online Εγχειρίδιο Χρήσης&quot;.</translation>
+Από το μενού "Βοήθεια" δοκιμάστε αντί αυτού να επιλέξετε "Online Εγχειρίδιο Χρήσης".</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -3580,8 +3599,8 @@ From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>Η προηγούμενη συνεδρία τερματίστηκε απρόσμενα.
-
+        <translation>Η προηγούμενη συνεδρία τερματίστηκε απρόσμενα.&#13;
+&#13;
 Ανάκτηση της συνεδρίας;</translation>
     </message>
     <message>
@@ -3608,19 +3627,31 @@ Restore session?</source>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>Script
-%1
+        <translation>Script&#13;
+%1&#13;
 is incompatible with current interface</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>Το MuseScore είναι πολύ παλιό για να τρέξει το σενάριο
+        <translation>Το MuseScore είναι πολύ παλιό για να τρέξει το σενάριο&#13;
 %1</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Όλα τα Υποστηριζόμενα Αρχεία (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Αρχεία MuseScore (*.mscz *.mscx *.msc);;Αρχεία MusicXML (*.xml *.mxl);;Αρχεία MIDI (*.mid *.midi *.kar);;Αρχεία Δεδομένων Muse (*.md);;Αρχεία Capella (*.cap);;Αρχεία BB &lt;πειραματικό&gt; (*.mgu *.MGU *.sgu *.SGU);;Όλα τα αρχεία (*)</translation>
+    </message>
+    <message>
+        <source>Bar %1 Beat %2.%3</source>
+        <translation>Γραμμή μέτρου %1 Χτύπος %2.%3</translation>
+    </message>
+    <message>
+        <source>Error loading plugin
+"%1" line %2:
+%3</source>
+        <translation>Σφάλμα Φόρτωσης plugin&#13;
+"%1" γραμμή %2:&#13;
+%3</translation>
     </message>
 </context>
 <context>
@@ -3768,11 +3799,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"></translation>
+        <translation>OnTime:</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"></translation>
+        <translation>OffTime:</translation>
     </message>
 </context>
 <context>
@@ -4752,7 +4783,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Use Current Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση Τρέχουσας Θέσης</translation>
     </message>
 </context>
 <context>
@@ -5209,6 +5240,14 @@ failed: </source>
         <source>cannot determine file type</source>
         <translation>αδύνατος ο προσδιορισμός του τύπου αρχείου</translation>
     </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation>Στυλ Γραφής απέτυχε: </translation>
+    </message>
+    <message>
+        <source>Load failed: </source>
+        <translation>Φόρτωση απέτυχε: </translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5251,6 +5290,12 @@ failed: </source>
     <message>
         <source>Measure</source>
         <translation>Μέτρο</translation>
+    </message>
+    <message>
+        <source>unknown drop format: formats %1:
+</source>
+        <translation>άγνωστη μορφή εναπόθεσης: μορφές %1:
+</translation>
     </message>
 </context>
 <context>
@@ -5364,6 +5409,39 @@ failed: </source>
     <message>
         <source>show more</source>
         <translation>δείξε περισσότερα</translation>
+    </message>
+</context>
+<context>
+    <name>Seq</name>
+    <message>
+        <source>Init audio driver failed.
+Sequencer will be disabled.</source>
+        <translation>Έναρξη οδηγού audio απέτυχε.&#13;
+Ο Sequencer θα απενεργοποιηθεί.</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load SoundFont</source>
+        <translation>MuseScore: Φόρτωση SoundFont</translation>
+    </message>
+    <message>
+        <source>No SoundFont configured
+Playback will be disabled.</source>
+        <translation>Καμία διαμόρφωση SoundFont&#13;
+Η Αναπαραγωγή θα απενεργοποιηθεί.</translation>
+    </message>
+    <message>
+        <source>Loading SoundFont
+"%1"
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
+and check that the file location is correct</source>
+        <translation>Φόρτωση SoundFont&#13;
+"%1"&#13;
+απέτυχε. Η Αναπαραγωγή θα απενεργοποιηθεί.&#13;
+&#13;
+Πήγαινε στην Εμφάνιση &gt; Synthesizer &#13;
+και έλεγξε ότι η δίευθυνση αρχείου είναι σωστή</translation>
     </message>
 </context>
 <context>
@@ -5822,7 +5900,7 @@ failed: </source>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation>Όριεσ Αόρατο</translation>
+        <translation>Όρισε Αόρατο</translation>
     </message>
     <message>
         <source>Set Visible</source>
@@ -6149,11 +6227,11 @@ failed: </source>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4 κοινός χρόνος</translation>
+        <translation>4/4 κοινός χρόνος</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 alla breve</translation>
+        <translation>2/2 alla breve</translation>
     </message>
 </context>
 <context>
@@ -6214,14 +6292,14 @@ failed: </source>
         <translation>Μέτρα:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Συμβουλή: Μπορείτε επίσης να προσθέσετε ή να αφαιρέσετε μέτρα μετά τη δημιουργία παρτιτούρας.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Συμβουλή: Μπορείτε επίσης να προσθέσετε ή να αφαιρέσετε μέτρα μετά τη δημιουργία παρτιτούρας.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6539,8 +6617,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>Υπάρχουν διαθέσιμες ενημερώσεις για το MuseScore: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Υπάρχουν διαθέσιμες ενημερώσεις για το MuseScore: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -8992,20 +9070,20 @@ p, li { white-space: pre-wrap; }
         <translation>παύση ογδόου</translation>
     </message>
     <message>
-        <source>16&apos; rest</source>
-        <translation>παύση 16&apos;</translation>
+        <source>16' rest</source>
+        <translation>παύση 16'</translation>
     </message>
     <message>
-        <source>32&apos; rest</source>
-        <translation>παύση 32&apos;</translation>
+        <source>32' rest</source>
+        <translation>παύση 32'</translation>
     </message>
     <message>
-        <source>64&apos; rest</source>
-        <translation>παύση 64&apos;</translation>
+        <source>64' rest</source>
+        <translation>παύση 64'</translation>
     </message>
     <message>
-        <source>128&apos; rest</source>
-        <translation>παύση 128&apos;</translation>
+        <source>128' rest</source>
+        <translation>παύση 128'</translation>
     </message>
     <message>
         <source>sharp</source>

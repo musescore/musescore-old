@@ -818,6 +818,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordList</name>
+    <message>
+        <source>Write Chord Description failed: </source>
+        <translation>Der skete en fejl ved skrivning af akkord beskrivelser: </translation>
+    </message>
+</context>
+<context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
@@ -1177,6 +1184,10 @@ fejl: </translation>
     <message>
         <source>MuseScore: Write Drumset</source>
         <translation>MuseScore: Skriv trommesæt</translation>
+    </message>
+    <message>
+        <source>Write File failed: </source>
+        <translation>Skrivning til fil fejlede: </translation>
     </message>
 </context>
 <context>
@@ -2027,6 +2038,10 @@ space unit</extracomment>
         <source>Close</source>
         <translation>Luk</translation>
     </message>
+    <message>
+        <source>Part-%1</source>
+        <translation>Stemme-%1</translation>
+    </message>
 </context>
 <context>
     <name>Glissando</name>
@@ -2382,6 +2397,10 @@ fejlede: </translation>
     <message>
         <source>Instrument List</source>
         <translation>Instrument liste</translation>
+    </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation>Skrivning af layout-stil fejlede </translation>
     </message>
 </context>
 <context>
@@ -3597,7 +3616,19 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Alle understøttede filer (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore filer (*.mscz *.mscx *.msc);;MusicXML filer (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data filer (*.md);;Capella filer (*.cap);;BB filer &lt;eksperimentel&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle filer (*)</translation>
+    </message>
+    <message>
+        <source>Bar %1 Beat %2.%3</source>
+        <translation>Takt %1 slag %2.%3</translation>
+    </message>
+    <message>
+        <source>Error loading plugin
+"%1" line %2:
+%3</source>
+        <translation>Fejl ved indlæsning af plugin&#13;
+"%1" linie %2:&#13;
+%3</translation>
     </message>
 </context>
 <context>
@@ -3745,11 +3776,11 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>OnTime:</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>OffTime:</translation>
     </message>
 </context>
 <context>
@@ -4726,7 +4757,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Use Current Position</source>
-        <translation type="unfinished"/>
+        <translation>Benyt nuværende placering</translation>
     </message>
 </context>
 <context>
@@ -5183,6 +5214,14 @@ Prøv af gemme den et andet sted.</translation>
         <source>cannot determine file type</source>
         <translation>kan ikke afgøre filtypen</translation>
     </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation>Skrivning af layout-stil fejlede: </translation>
+    </message>
+    <message>
+        <source>Load failed: </source>
+        <translation>Indlæsning fejlede: </translation>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5225,6 +5264,12 @@ Prøv af gemme den et andet sted.</translation>
     <message>
         <source>Measure</source>
         <translation>Takt</translation>
+    </message>
+    <message>
+        <source>unknown drop format: formats %1:
+</source>
+        <translation>ukendt drop format: formater %1:
+</translation>
     </message>
 </context>
 <context>
@@ -5338,6 +5383,39 @@ Prøv af gemme den et andet sted.</translation>
     <message>
         <source>show more</source>
         <translation>vis mere</translation>
+    </message>
+</context>
+<context>
+    <name>Seq</name>
+    <message>
+        <source>Init audio driver failed.
+Sequencer will be disabled.</source>
+        <translation>Opstart af lys driver fejlede.&#13;
+Sequenzer vil ikke være tilgængelig.</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load SoundFont</source>
+        <translation>MuseScore: Indlæs SoundFont</translation>
+    </message>
+    <message>
+        <source>No SoundFont configured
+Playback will be disabled.</source>
+        <translation>Ingen SoundFont konfigureret.&#13;
+Afspilning vil ikke være tilgængelig.</translation>
+    </message>
+    <message>
+        <source>Loading SoundFont
+"%1"
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
+and check that the file location is correct</source>
+        <translation>Indlæsning af Sound&#13;
+"%1"&#13;
+fejlede: Afspilning vil ikke være tilgængelig.&#13;
+&#13;
+Gå til Vis &gt; Syntesizer&#13;
+og kontrollér at filplaceringen er korrekt.</translation>
     </message>
 </context>
 <context>
@@ -6121,11 +6199,11 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4 taktart</translation>
+        <translation>4/4</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 alla breve</translation>
+        <translation>2/2 alla breve</translation>
     </message>
 </context>
 <context>
