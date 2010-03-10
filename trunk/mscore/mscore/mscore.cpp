@@ -977,8 +977,8 @@ void MuseScore::selectScore(QAction* action)
       QString a = action->data().toString();
       if (!a.isEmpty()) {
             Score* score = new Score(defaultStyle);
-            score->read(a);
-            setCurrentScoreView(appendScore(score));
+            if(score->read(a)) //! \todo add a warning dialog "file not found"
+                setCurrentScoreView(appendScore(score));
             }
       }
 
