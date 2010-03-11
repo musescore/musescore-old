@@ -208,11 +208,19 @@ void Score::collectNote(EventMap* events, int channel, Note* note, int onTime, i
             return;
 
       int pitch  = note->ppitch();
+      int velo = note->velocity();
+      if (note->veloType() == OFFSET_VAL) {
+            velo = velo + (velo * note->veloOffset()) / 100;
+            if (velo < 1)
+                  velo = 1;
+            else if (velo > 127)
+                  velo = 127;
+            }
 
       Event* ev = new Event(ME_NOTEON);
       ev->setChannel(channel);
       ev->setPitch(pitch);
-      ev->setVelo(note->velocity());
+      ev->setVelo(velo);
       ev->setTuning(note->tuning());
       ev->setNote(note);
       events->insertMulti(onTime, ev);
@@ -345,9 +353,9 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
                   //deal with odd measure in anacrusis
                   int offSet = 0;
-                  if(!sigmap()->timesig(m->tick()).nominalEqualActual() && m->tickLen()%480 !=0){
-                      offSet = 480 - m->tickLen()%480;
-                  }
+                  if (!sigmap()->timesig(m->tick()).nominalEqualActual() && m->tickLen()%480 !=0) {
+                        offSet = 480 - m->tickLen() % 480;
+                        }
 
                   //detect 8th on the offbeat
                   bool swing = ((tick - m->tick()+offSet)%AL::division == 240 && chord->tickLen() == 240);
@@ -357,15 +365,15 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
                   //on the beat and a 8th
                   bool swingBeat = ((tick - m->tick()+offSet)%AL::division == 0 && chord->tickLen() == 240);
-                  if(swingBeat){
-                    //find chord on counter beat and verify it's an 8th
-                     ChordRest* ncr = nextChordRest(chord);
-                     if(ncr){
-                        swingBeat = ((ncr->tick() == tick + 240) && (ncr->tickLen() == 240));
-                     }
-                     else
-                        swingBeat = false;
-                  }
+                  if (swingBeat) {
+                        //find chord on counter beat and verify it's an 8th
+                        ChordRest* ncr = nextChordRest(chord);
+                        if (ncr) {
+                              swingBeat = ((ncr->tick() == tick + 240) && (ncr->tickLen() == 240));
+                              }
+                        else
+                              swingBeat = false;
+                        }
 
                   // -- end swing -- //
 

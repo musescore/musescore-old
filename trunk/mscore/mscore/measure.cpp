@@ -371,8 +371,8 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                               continue;
                               }
 
-                        int pitch = note->pitch();
                         if (drumset) {
+                              int pitch = note->pitch();
                               if (!drumset->isValid(pitch)) {
                                     printf("unmapped drum note %d\n", pitch);
                                     }
