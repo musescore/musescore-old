@@ -372,7 +372,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       if (i != _sigmap->end()) {
             oSig = i->second;
             AL::SigEvent e = _sigmap->timesig(tick - 1);
-            if ((tick == 0) || (e.fraction() != nfraction)) {
+            if ((tick == 0) || (e.getNominal() != nfraction)) {
                   nSig = AL::SigEvent(nfraction);
                   }
             }
