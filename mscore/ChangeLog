@@ -1,3 +1,5 @@
+11.mar (ws)
+      - fix #4857: dropping a clef onto a former drum staff hangs MuseScore
 8.mar (lv)
       - fix MusicXML import of beams
       - fix MusicXML regression test for beams

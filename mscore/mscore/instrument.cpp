@@ -461,14 +461,12 @@ void Instrument::updateVelocity(int* velocity, int channelIdx, const QString& na
       foreach(const MidiArticulation& a, c.articulation) {
             if (a.name == name) {
                   *velocity = *velocity * a.velocity / 100;
-printf("UpdateVelocity: found channel data\n");
                   return;
                   }
             }
       foreach(const MidiArticulation& a, _articulation) {
             if (a.name == name) {
                   *velocity = *velocity * a.velocity / 100;
-printf("UpdateVelocity: found instrument data\n");
                   return;
                   }
             }
@@ -500,8 +498,9 @@ bool Instrument::operator==(const Instrument& i) const
 void Instrument::setUseDrumset(bool val)
       {
       _useDrumset = val;
-      if (val && _drumset == 0)
+      if (val && _drumset == 0) {
             _drumset = new Drumset(*smDrumset);
+            }
       }
 
 //---------------------------------------------------------
@@ -510,9 +509,9 @@ void Instrument::setUseDrumset(bool val)
 
 void Instrument::setDrumset(Drumset* ds)
       {
-      delete _drumset;
-      _drumset = ds;
-      if (_drumset)
-            _useDrumset = _drumset != 0;
+      if (ds != _drumset) {
+            delete _drumset;
+            _drumset = ds;
+            }
       }
 

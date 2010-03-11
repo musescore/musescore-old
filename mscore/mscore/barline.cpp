@@ -18,18 +18,12 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "xml.h"
 #include "barline.h"
-#include "preferences.h"
-#include "style.h"
-#include "utils.h"
 #include "score.h"
 #include "sym.h"
-// #include "scoreview.h"
 #include "staff.h"
 #include "system.h"
 #include "measure.h"
-#include "segment.h"
 
 //---------------------------------------------------------
 //   BarLine
@@ -421,8 +415,16 @@ void BarLine::endEditDrag()
             }
       int newSpan = staffIdx2 - staffIdx1 + 1;
       if (newSpan != _span) {
+            if (newSpan > _span) {
+                  int diff = newSpan - _span;
+                  staffIdx1 += _span;
+                  staffIdx2 = staffIdx1 + diff;
+printf("remove barlines in staff %d - %d\n", staffIdx1, staffIdx2);
+                  }
             _span = newSpan;
-            staff()->setBarLineSpan(_span);
+
+            score()->undoChangeBarLineSpan(staff(), _span);
+            // staff()->setBarLineSpan(_span);
             }
       }
 

@@ -78,7 +78,7 @@ class Note : public Element {
 
       ValueType _veloType;
       char _velocity;         ///< midi playback velocity (0 - 127);
-      int _veloOffset;        ///< velocity user offset in promille
+      int _veloOffset;        ///< velocity user offset in percent
 
       ValueType _onTimeType;
       int _onTimeOffset;      ///< start note offset in ticks
@@ -132,7 +132,7 @@ class Note : public Element {
       int noteHead() const;
       int headGroup() const            { return _headGroup; }
       NoteHeadType headType() const    { return _headType;  }
-      void setHeadGroup(int val)       { _headGroup = val;  }
+      void setHeadGroup(int val);
       void setHeadType(NoteHeadType t) { _headType = t;     }
 
       int pitch() const               { return _pitch;    }

@@ -398,6 +398,7 @@ void Part::setInstrument(const Instrument& i)
       setTransposeDiatonic(i.transposeDiatonic());
       setTransposeChromatic(i.transposeChromatic());
       setDrumset(i.drumset());
+      setUseDrumset(i.useDrumset());
       setMidiActions(i.midiActions());
       setArticulation(i.articulation());
       setChannel(i.channel());

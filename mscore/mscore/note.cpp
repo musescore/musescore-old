@@ -23,6 +23,8 @@
  Implementation of classes Note and ShadowNote.
 */
 
+#include <assert.h>
+
 #include "note.h"
 #include "score.h"
 #include "key.h"
@@ -1377,5 +1379,15 @@ int Note::accidentalType() const
       if (!_accidental)
             return ACC_NONE;
       return _accidental->subtype();
+      }
+
+//---------------------------------------------------------
+//   setHeadGroup
+//---------------------------------------------------------
+
+void Note::setHeadGroup(int val)
+      {
+      assert(val >= 0 && val < HEAD_GROUPS);
+      _headGroup = val;
       }
 
