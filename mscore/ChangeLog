@@ -1,5 +1,8 @@
 11.mar (ws)
       - fix #4857: dropping a clef onto a former drum staff hangs MuseScore
+      (db)
+      - MusicXML export of quarter tones for arrowed accidentals as specified:
+        http://musescore.org/node/3807#comment-13071
 8.mar (lv)
       - fix MusicXML import of beams
       - fix MusicXML regression test for beams
@@ -145,7 +148,7 @@
 30.jan (ws)
       - simplify selection model; remove system selection (dotted line selection)
       - new shortcut: Ctrl+Delete removes selected measure timewise
-28,jan (db)
+28.jan (db)
       - export slash flats as quarter notes
       - better BPM for each tempo text (traditional metronome numbers and
         correct speeds)
@@ -229,15 +232,15 @@
 27.dec (ws)
       - first code for chord style editor
       (og)
-      exportly: two (and not more than two) standard dynamics on one note.
+      - exportly: two (and not more than two) standard dynamics on one note.
 26.dec (og)
-      -exportly: Fixed bug in triplets of chords. Tried to update outdated code on
-      keychanges.
+      - exportly: Fixed bug in triplets of chords. Tried to update outdated code on
+        keychanges.
 24.dec (ws)
       - allow editing of text properties for chord names
 23.dec (og)
-      Exportly: Flat symbol in instrumentnames are now handled. Some
-      progress on reconciling rehearsalmarks and segno/coda-symbols.
+      - Exportly: Flat symbol in instrumentnames are now handled. Some
+        progress on reconciling rehearsalmarks and segno/coda-symbols.
 22.dec (la)
       - uncomment workaround for set(QT_USE_QTSCRIPTTOOLS TRUE) for ubuntu users
         see http://www.musescore.org/en/node/3475
@@ -318,7 +321,7 @@
 3.dec (ws)
       - Reorganized layout of beams. They are not longer restricted to one measure.
         However beams spanning systems do not work yet.
-3.dec (db)
+      (db)
       - Add spacer to Layout > Breaks & Spacer
       - Minor renaming
             - Rename "Breaths" palette to "Breaths & Pauses" since
@@ -329,7 +332,7 @@
       - Better error message for restore session
       - Update pt_BR translation from ..vitor..
       (og)
-	-exportly: fixed bugs connected to pickupbar.
+      -exportly: fixed bugs connected to pickupbar.
 1.dec (lv)
       - fix MusicXML export of pedal symbols
 30.nov (ws)
@@ -369,13 +372,13 @@
       (db)
       - add handbook html, image, and font source files to SVN
 20.nov  (ws)
-        - fix import of capella whole measure rests
-        (og)
-        - exportly: tried to fix reported crash on file Cronicaz.mscz
-        (la)
-        - fix tiny text on windows if no printer installed
-        - fix crash with drag and delete instrument name
-        - fix rendering of dynamics (staff, part, system)
+      - fix import of capella whole measure rests
+      (og)
+      - exportly: tried to fix reported crash on file Cronicaz.mscz
+      (la)
+      - fix tiny text on windows if no printer installed
+      - fix crash with drag and delete instrument name
+      - fix rendering of dynamics (staff, part, system)
 17.nov. (ws)
       - autosave: create dataPath if it does not exist
 16.nov. (ws)
