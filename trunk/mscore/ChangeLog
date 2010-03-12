@@ -1,4 +1,6 @@
-12.mar (ws)
+12.mar (lvi)
+      - MusicXML import/export of string and pluck
+        (ws)
       - fix #3861: compatibility of tremolos from 0.9.5
 11.mar (ws)
       - fix #4857: dropping a clef onto a former drum staff hangs MuseScore
