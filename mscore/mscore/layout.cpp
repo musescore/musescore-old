@@ -444,7 +444,7 @@ void Score::layoutStage1()
             MeasureBase* mb = m->prev();
             if (mb && mb->type() == MEASURE) {
                   Measure* prev = static_cast<Measure*>(mb);
-                  if (prev->endBarLineType() != NORMAL_BAR)
+                  if (prev->endBarLineType() != NORMAL_BAR && prev->endBarLineType() != BROKEN_BAR)
                         m->setBreakMMRest(true);
                   }
             }
