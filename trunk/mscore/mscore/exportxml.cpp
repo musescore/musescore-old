@@ -2092,12 +2092,18 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                         case ACC_SHARP2:  s = "double-sharp"; break;
                         case ACC_FLAT2:   s = "flat-flat";    break;
                         case ACC_NATURAL: s = "natural";      break;
-                        case 16: s = "quarter-flat";          break; //flat-slash (alternative quarter flat)
-                        case 19: s = "quarter-flat";          break; //mirrored-flat (quarter flat recommended by Michael)
-                        case 22: s = "quarter-sharp";         break;
-                        case 18: s = "three-quarters-flat";   break; //mirrored-flat1 (three quarter flat recommended by Michael)
-                        case 21: s = "three-quarters-flat";   break; //flat-flat-slash (alternative three quarters flat)
-                        case 25: s = "three-quarters-sharp";  break;
+                        case 16: s = "quarter-flat";          break; //flat-slash (alternative)
+                        case 19: s = "quarter-flat";          break; //mirrored-flat (recommended by Michael)
+                        case 29: s = "quarter-flat";          break; //flat arrow up (alternative)
+                        case 33: s = "quarter-flat";          break; //natural arrow down (alternative)
+                        case 22: s = "quarter-sharp";         break; //sharp-slash (recommended by Michael)
+                        case 27: s = "quarter-sharp";         break; //sharp arrow down (alternative)
+                        case 32: s = "quarter-sharp";         break; //natural arrow up (alternative)
+                        case 18: s = "three-quarters-flat";   break; //mirrored-flat1 (recommended by Michael)
+                        case 21: s = "three-quarters-flat";   break; //flat-flat-slash (alternative)
+                        case 30: s = "three-quarters-flat";   break; //flat arrow down (alternative)
+                        case 25: s = "three-quarters-sharp";  break; //sharp-slash4 (recommended by Michael)
+                        case 26: s = "three-quarters-sharp";  break; //sharp arrow up (alternate)
                         default:
                               printf("unknown accidental %d\n", acc);
                         }
