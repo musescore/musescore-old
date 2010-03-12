@@ -32,4 +32,4 @@ install(FILES
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
       )
 
-subdirs(break)
+subdirs(break temperament)
