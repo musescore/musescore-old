@@ -49,8 +49,6 @@ function init()
 var outFile;
 var reqId;
 var defaultOpenDir = QDir.homePath();
-var program = "C:/Program Files/MuseScore 0.9/bin/mscore";
-
 
 function run()
       {
@@ -118,9 +116,8 @@ function finished(id ,error){
     outFile.flush();
     outFile.close();
     if(outFile.size() > 200){
-      var arguments = [outFile.fileName()];
-      var process = new QProcess(this);
-      process.start(program, arguments);
+      var score   = new Score();
+      score.load(outFile.fileName());    
     }else{
       errorMessage();
     }  
