@@ -1,3 +1,5 @@
+12.mar (ws)
+      - fix #3861: compatibility of tremolos from 0.9.5
 11.mar (ws)
       - fix #4857: dropping a clef onto a former drum staff hangs MuseScore
       (db)

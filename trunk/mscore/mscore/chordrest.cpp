@@ -641,4 +641,38 @@ void DurationElement::convertTicks()
             setFraction(Fraction::fromTicks(_ticks));
       }
 
+//---------------------------------------------------------
+//   setDurationType
+//---------------------------------------------------------
 
+void ChordRest::setDurationType(Duration::DurationType t)
+      {
+      _duration.setType(t);
+      _ticks = -1;
+      }
+
+void ChordRest::setDurationType(const QString& s)
+      {
+      _duration.setType(s);
+      _ticks = -1;
+      }
+
+//---------------------------------------------------------
+//   setDurationVal
+//---------------------------------------------------------
+
+void ChordRest::setDurationVal(int ticks)
+      {
+      _duration.setVal(ticks);
+      _ticks = -1;
+      }
+
+//---------------------------------------------------------
+//   setDuration
+//---------------------------------------------------------
+
+void ChordRest::setDuration(const Duration& v)
+      {
+      _duration = v;
+      _ticks = -1;
+      }
