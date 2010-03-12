@@ -139,7 +139,7 @@ QByteArray.prototype.toString = function()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.ABC import',
+      menu: 'Plugins.ABC Import',
       init: init,
       run:  run
       };

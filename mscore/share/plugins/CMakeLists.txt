@@ -29,13 +29,7 @@ install(FILES
       removenotes.js
       removenotes.ui
       chordchart.js
-      scales_e35a.ui
-      scales_e35b.ui
-      scales.js
-      scales.readme
-      scales.tmpr
-      scales.ui
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
       )
 
-subdirs( break )
+subdirs( break temperament)
