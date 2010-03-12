@@ -2097,7 +2097,11 @@ void Measure::read(QDomElement e, int idx)
                   chord->read(e, _tuplets);
                   Segment* s = getSegment(chord);
                   s->add(chord);
-                  score()->curTick = chord->tick() + chord->tickLen();
+                  if (chord->tremolo() && chord->tremolo()->subtype() >= 3) {
+                        score()->curTick = chord->tick();
+                        }
+                  else
+                        score()->curTick = chord->tick() + chord->tickLen();
                   }
             else if (tag == "Breath") {
                   Breath* breath = new Breath(score());
@@ -3001,8 +3005,9 @@ void Measure::layoutX(double stretch)
                         }
                   int nticks = (nseg ? nseg->tick() : ntick) - s->tick();
                   if (nticks == 0) {
-                        printf("layoutX: empty measure: tick %d len %d\n", tick(), tickLen());
-                        printf("layoutX: nticks==0 segmente %d, segmentIdx: %d, ticks: %d ntick %d\n",
+                        // this happens for tremolo notes
+                        printf("layoutX: empty segment: tick %d len %d\n", tick(), tickLen());
+                        printf("         nticks==0 segmente %d, segmentIdx: %d, ticks: %d ntick %d\n",
                            size(), segmentIdx-1, s->tick(), ntick
                            );
                         }
