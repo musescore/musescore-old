@@ -216,9 +216,11 @@ void EditStaff::showInstrumentDialog()
 
             if (t->useDrumset) {
                   instrument.setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
+                  instrument.setUseDrumset(true);
                   }
             else
                   instrument.setUseDrumset(false);
+            useDrumset->setChecked(instrument.useDrumset());
             instrument.setMidiActions(t->midiActions);
             instrument.setArticulation(t->articulation);
             instrument.setChannel(t->channel);
