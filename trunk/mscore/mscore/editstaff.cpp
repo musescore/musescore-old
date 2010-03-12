@@ -195,7 +195,7 @@ void EditStaff::showInstrumentDialog()
 
             shortName->setHtml(t->shortName);
             longName->setHtml(t->longName);
-
+            instrument.setTrackName(t->trackName);
             int diatonic  = t->transposeDiatonic;
             int chromatic = t->transposeChromatic;
 
