@@ -460,8 +460,12 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
       ++nsi;
 
       undoRemoveElement(ts->segment());
-      undoChangeSig(tick, oval, AL::SigEvent());
-
+      AL::SigEvent prev = _sigmap->timesig(tick-1);
+      if(prev.nominalEqualActual())
+          undoChangeSig(tick, oval, AL::SigEvent());
+      else
+          undoChangeSig(tick, oval, AL::SigEvent(prev.getNominal()));
+		
       oval = _sigmap->timesig(tick);
       if (nsi->second == oval)
             undoChangeSig(nsi->first, oval, AL::SigEvent());
