@@ -2172,11 +2172,22 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   chordAttributes(chord, notations, technical, xml);
                   }
             foreach (const Element* e, *note->el()) {
-                  if (e->type() == TEXT && e->subtype() == TEXT_FINGERING) {
+                  if (e->type() == TEXT 
+                      && (e->subtype() == TEXT_FINGERING || e->subtype() == TEXT_STRING_NUMBER)) {
                         Text* f = (Text*)e;
                         notations.tag(xml);
                         technical.tag(xml);
-                        xml.tag("fingering", f->getText());
+                        QString t = f->getText();
+                        if (e->subtype() == TEXT_FINGERING) {
+                              // p, i, m, a, c represent the plucking finger
+                              if (t == "p" || t == "i"  || t == "m" || t == "a" || t == "c")
+                                    xml.tag("pluck", t);
+                              else
+                                    xml.tag("fingering", t);
+                              }
+                        else
+                              // TEXT_STRING_NUMBER
+                              xml.tag("string", t);
                         }
                   else {
                         // TODO

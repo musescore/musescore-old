@@ -389,6 +389,11 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
+        <notations>
+          <technical>
+            <fingering>2</fingering>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -399,6 +404,11 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
+        <notations>
+          <technical>
+            <pluck>p</pluck>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>
@@ -409,6 +419,11 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
+        <notations>
+          <technical>
+            <string>4</string>
+            </technical>
+          </notations>
         </note>
       <note>
         <pitch>

@@ -2208,6 +2208,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QString tupletBracket;
       QString step;
       QString fingering;
+      QString pluck;
+      QString string;
       QString graceSlash;
       QString wavyLineType;
       int alter  = 0;
@@ -2496,8 +2498,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           fingering = eee.text();
                                     else if (eee.tagName() == "fret")
                                           domNotImplemented(eee);
+                                    else if (eee.tagName() == "pluck")
+                                          pluck = eee.text();
                                     else if (eee.tagName() == "string")
-                                          domNotImplemented(eee);
+                                          string = eee.text();
                                     else if (eee.tagName() == "pull-off")
                                           domNotImplemented(eee);
                                     else if (eee.tagName() == "stopped")
@@ -2674,7 +2678,24 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (!fingering.isEmpty()) {
                   Text* f = new Text(score);
                   f->setSubtype(TEXT_FINGERING);
+                  f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->setText(fingering);
+                  note->add(f);
+                  }
+
+            if (!pluck.isEmpty()) {
+                  Text* f = new Text(score);
+                  f->setSubtype(TEXT_FINGERING);
+                  f->setTextStyle(TEXT_STYLE_FINGERING);
+                  f->setText(pluck);
+                  note->add(f);
+                  }
+
+            if (!string.isEmpty()) {
+                  Text* f = new Text(score);
+                  f->setSubtype(TEXT_STRING_NUMBER);
+                  f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
+                  f->setText(string);
                   note->add(f);
                   }
 
