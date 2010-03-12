@@ -3,6 +3,7 @@
       (db)
       - MusicXML export of quarter tones for arrowed accidentals as specified:
         http://musescore.org/node/3807#comment-13071
+      - Fix naming of plugins
 8.mar (lv)
       - fix MusicXML import of beams
       - fix MusicXML regression test for beams
@@ -106,7 +107,7 @@
        (lv)
       - bug #4477: MusicXML: tremolos between two notes not exported/imported
         export implemented according to comments by David Bolton on Thu, 02/11/2010 - 19:29
-12,feb (ws)
+12.feb (ws)
       - undo/redo are now application shortcuts and work even if a palette opened
         by create is active
       - export small staves in part always at normal size

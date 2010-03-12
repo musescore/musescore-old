@@ -97,7 +97,7 @@ function accept()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.Break every X measures',
+      menu: 'Plugins.Break Every X Measures',
       init: init,
       run:  run
       };
