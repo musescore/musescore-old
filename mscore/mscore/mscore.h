@@ -299,6 +299,7 @@ class MuseScore : public QMainWindow {
       void saveFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
+      void pluginExecuteFunction(int idx, const char* functionName);
       void startInspector();
       void midiinToggled(bool);
       void speakerToggled(bool);
@@ -408,6 +409,7 @@ class MuseScore : public QMainWindow {
       bool splitScreen() const { return _splitScreen; }
       void setCurrentView(int tabIdx, int idx);
       void loadPlugins();
+      void unloadPlugins();
       ScoreState state() const { return _sstate; }
       void changeState(ScoreState);
       bool readLanguages(const QString& path);
