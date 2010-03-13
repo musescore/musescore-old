@@ -193,6 +193,7 @@ static const int RECENT_LIST_SIZE = 10;
 
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
+      unloadPlugins();
       QList<Score*> removeList;
       foreach(Score* score, scoreList) {
             if (score->created() && !score->dirty())
