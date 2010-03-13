@@ -41,6 +41,7 @@
 #include "ui_linesegment.h"
 #include "ui_lyrics.h"
 #include "ui_beam.h"
+#include "ui_tremolo.h"
 
 class ShowElementBase;
 class Element;
@@ -84,6 +85,7 @@ class Inspector : public QDialog, public Ui::InspectorBase {
       ShowElementBase* voltaSegmentView;
       ShowElementBase* lyricsView;
       ShowElementBase* beamView;
+      ShowElementBase* tremoloView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
       void addSymbol(ElementItem* parent, BSymbol* bs);
@@ -218,6 +220,10 @@ class ShowChordWidget : public ShowElementBase {
       void tupletClicked();
       void upChanged(bool);
       void beamModeChanged(int);
+      void stemSlashClicked();
+      void arpeggioClicked();
+      void tremoloClicked();
+      void glissandoClicked();
 
    public:
       ShowChordWidget();
@@ -526,6 +532,24 @@ class BeamView : public ShowElementBase {
 
    public:
       BeamView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   TremoloView
+//---------------------------------------------------------
+
+class TremoloView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::TremoloBase tb;
+
+   private slots:
+      void chord1Clicked();
+      void chord2Clicked();
+
+   public:
+      TremoloView();
       virtual void setElement(Element*);
       };
 

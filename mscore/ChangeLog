@@ -1,4 +1,5 @@
 13.mar (ws)
+      - fix #3861-2: Compatibility of tremolos from 0.9.5
       - fix #4957: Repeat bar lines spanning more than one staff have extra line
       - fix #4881-2: Special Barlines not included in parts
 12.mar (lvi)

@@ -2102,13 +2102,36 @@ void Measure::read(QDomElement e, int idx)
                   chord->setTrack(score()->curTrack);
                   chord->setTick(score()->curTick);   // set default tick position
                   chord->read(e, _tuplets);
-                  Segment* s = getSegment(chord);
-                  s->add(chord);
-                  if (chord->tremolo() && chord->tremolo()->subtype() >= 3) {
-                        score()->curTick = chord->tick();
+                  if (chord->tremolo() && chord->tremolo()->twoNotes()) {
+                        //
+                        // search first note of tremolo
+                        //
+                        Chord* c1 = 0;
+                        int track = score()->curTrack;
+                        for (Segment* s = first(SegChordRest); s; s = s->next(SegChordRest)) {
+                              if (s->tick() >= chord->tick())
+                                    break;
+                              if (s->element(track) && s->element(track)->type() == CHORD)
+                                    c1 = static_cast<Chord*>(s->element(track));
+                              }
+                        if (c1 && (chord->tick() != c1->tick() + c1->tickLen() / 2)) {
+                              //
+                              // fixup some tremolo quirks
+                              // chord tick position is wrong
+                              //
+                              int ticklen2 = chord->tickLen() / 2;
+                              int tick = c1->tick() + ticklen2;
+                              chord->setTick(tick);
+                              }
+                        Segment* s = getSegment(chord);
+                        s->add(chord);
+                        score()->curTick = chord->tick() + chord->tickLen() / 2;
                         }
-                  else
+                  else {
+                        Segment* s = getSegment(chord);
+                        s->add(chord);
                         score()->curTick = chord->tick() + chord->tickLen();
+                        }
                   }
             else if (tag == "Breath") {
                   Breath* breath = new Breath(score());
