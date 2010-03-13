@@ -1578,7 +1578,7 @@ static bool hasBreathMark(Chord* ch)
       {
       Segment* s = ch->segment();
       s = s->next1();
-      return (s->subtype() == Segment::SegBreath && s->element(ch->track()));
+      return (s->subtype() == SegBreath && s->element(ch->track()));
       }
 
 //---------------------------------------------------------
@@ -1922,7 +1922,7 @@ static Chord* nextChord(Chord* ch)
       Segment* s = ch->segment();
       s = s->next1();
       while (s) {
-            if (s->subtype() == Segment::SegChordRest && s->element(ch->track()))
+            if (s->subtype() == SegChordRest && s->element(ch->track()))
                   break;
             s = s->next1();
             }
@@ -2172,7 +2172,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   chordAttributes(chord, notations, technical, xml);
                   }
             foreach (const Element* e, *note->el()) {
-                  if (e->type() == TEXT 
+                  if (e->type() == TEXT
                       && (e->subtype() == TEXT_FINGERING || e->subtype() == TEXT_STRING_NUMBER)) {
                         Text* f = (Text*)e;
                         notations.tag(xml);

@@ -1161,7 +1161,7 @@ void Chord::layout2()
             bool found = false;
             double cx  = x + canvasPos().x();
             Segment* s = segment()->prev();
-            if (s && s->subtype() == Segment::SegChordRest) {
+            if (s && s->subtype() == SegChordRest) {
                   int strack = staffIdx() * VOICES;
                   int etrack = strack + VOICES;
                   for (int track = strack; track < etrack; ++track) {

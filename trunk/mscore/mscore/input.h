@@ -57,6 +57,7 @@ class InputState {
       void setDuration(const Duration& d) { _duration = d; }
       Duration duration() const           { return _duration; }
       void setDots(int n)                 { _duration.setDots(n); }
+      Segment* segment() const            { return _segment; }
       };
 
 #endif

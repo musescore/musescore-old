@@ -1421,8 +1421,8 @@ void ChangeMeasureLen::flip()
       int staves = measure->score()->nstaves();
       int endTick = measure->tick() + nl;
       for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-            if (segment->subtype() != Segment::SegEndBarLine
-               && segment->subtype() != Segment::SegTimeSigAnnounce)
+            if (segment->subtype() != SegEndBarLine
+               && segment->subtype() != SegTimeSigAnnounce)
                   continue;
             segment->setTick(endTick);
             for (int track = 0; track < staves*VOICES; ++track) {

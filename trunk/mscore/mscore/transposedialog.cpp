@@ -253,7 +253,7 @@ void Score::cmdTransposeStaff(int staffIdx, int diatonic, int chromatic, bool us
       transposeKeys(staffIdx, staffIdx+1, 0, lastSegment()->tick(), 0, chromatic);
 
       for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
-           if (segment->subtype() != Segment::SegChordRest)
+           if (segment->subtype() != SegChordRest)
                  continue;
            for (int st = startTrack; st < endTrack; ++st) {
                  Element* e = segment->element(st);
@@ -379,7 +379,7 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
                   undoChangeKey(staff(staffIdx), tick, oKey, KeySigEvent(nKey));
                   }
             for (Segment* s = firstSegment(); s; s = s->next1()) {
-                  if (s->subtype() != Segment::SegKeySig)
+                  if (s->subtype() != SegKeySig)
                         continue;
                   if (s->tick() < tickStart)
                         continue;

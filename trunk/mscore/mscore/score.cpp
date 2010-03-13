@@ -697,7 +697,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                                     QPointF pppp = ppp - m->pos();
                                     int track = i * VOICES;
                                     for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                                          if (segment->subtype() != Segment::SegChordRest)
+                                          if (segment->subtype() != SegChordRest)
                                                 continue;
                                           if ((segment->element(track) == 0)
                                              && (segment->element(track+1) == 0)
@@ -707,7 +707,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                                                 continue;
                                           Segment* ns = segment->next();
                                           for (; ns; ns = ns->next()) {
-                                                if (ns->subtype() != Segment::SegChordRest)
+                                                if (ns->subtype() != SegChordRest)
                                                       continue;
                                                 if (ns->element(track)
                                                    || ns->element(track+1)
@@ -741,10 +741,10 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                               // search for segment + offset
                               QPointF pppp = ppp - m->pos();
                               for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                                    if (segment->subtype() != Segment::SegChordRest)
+                                    if (segment->subtype() != SegChordRest)
                                           continue;
                                     Segment* ns = segment->next();
-                                    while (ns && ns->subtype() != Segment::SegChordRest)
+                                    while (ns && ns->subtype() != SegChordRest)
                                           ns = ns->next();
                                     if (ns) {
                                           double x1 = segment->x();
@@ -842,13 +842,13 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, int* rst, int* line,
                               QPointF pppp = ppp - m->pos();
                               int track = (i-1) * VOICES + voice;
                               for (Segment* segment = m->first(); segment;) {
-                                    if (segment->subtype() != Segment::SegChordRest || (segment->element(track) == 0 && voice == 0)) {
+                                    if (segment->subtype() != SegChordRest || (segment->element(track) == 0 && voice == 0)) {
                                           segment = segment->next();
                                           continue;
                                           }
                                     Segment* ns = segment->next();
                                     for (; ns; ns = ns->next()) {
-                                          if (ns->subtype() == Segment::SegChordRest && (ns->element(track) || voice))
+                                          if (ns->subtype() == SegChordRest && (ns->element(track) || voice))
                                                 break;
                                           }
                                     if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
@@ -1202,7 +1202,7 @@ Note* prevNote(Note* n)
       int startTrack = staff * VOICES + n->voice() - 1;
       int endTrack   = 0;
       while (seg) {
-            if (seg->subtype() == Segment::SegChordRest) {
+            if (seg->subtype() == SegChordRest) {
                   for (int track = startTrack; track >= endTrack; --track) {
                         Element* e = seg->element(track);
                         if (e && e->type() == CHORD)
@@ -1232,7 +1232,7 @@ Note* nextNote(Note* n)
       int startTrack = staff * VOICES + n->voice() + 1;
       int endTrack   = staff * VOICES + VOICES;
       while (seg) {
-            if (seg->subtype() == Segment::SegChordRest) {
+            if (seg->subtype() == SegChordRest) {
                   for (int track = startTrack; track < endTrack; ++track) {
                         Element* e = seg->element(track);
                         if (e && e->type() == CHORD) {
@@ -1481,7 +1481,7 @@ Page* Score::searchPage(const QPointF& p) const
 
 static Segment* getNextCRSegment(Segment* s, int track)
       {
-      while (s && ((s->subtype() != Segment::SegChordRest) || !s->element(track)))
+      while (s && ((s->subtype() != SegChordRest) || !s->element(track)))
             s = s->next();
       return s;
       }
@@ -1615,7 +1615,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   // for voice > 0 even if there is no chord/rest
                   //
                   for (segment = pos->measure->first(); segment;) {
-                        if (segment->subtype() == Segment::SegChordRest)
+                        if (segment->subtype() == SegChordRest)
                               break;
                         segment = segment->next();
                         }

@@ -162,7 +162,7 @@ ChordRest* Selection::lastChordRest(int track) const
             Element* el = *i;
             if (el->type() == NOTE)
                   el = ((Note*)el)->chord();
-            if (el->isChordRest() && static_cast<ChordRest*>(el)->segment()->subtype() == Segment::SegChordRest) {
+            if (el->isChordRest() && static_cast<ChordRest*>(el)->segment()->subtype() == SegChordRest) {
                   if (track != -1 && el->track() != track)
                         continue;
                   if (cr) {
@@ -797,9 +797,9 @@ QByteArray Selection::staffMimeData() const
             int startTrack = staffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
             for (Segment* seg = seg1; seg && seg != seg2; seg = seg->next1()) {
-                  if (seg->subtype() == Segment::SegEndBarLine)
+                  if (seg->subtype() == SegEndBarLine)
                         continue;
-                  if (seg->subtype() == Segment::SegTimeSig)
+                  if (seg->subtype() == SegTimeSig)
                         continue;
                   for (int track = startTrack; track < endTrack; ++track) {
                         Element* e = seg->element(track);
@@ -876,7 +876,7 @@ QList<Note*> Selection::noteList() const
                   int startTrack = staffIdx * VOICES;
                   int endTrack   = startTrack + VOICES;
                   for (Segment* seg = _startSegment; seg && seg != _endSegment; seg = seg->next1()) {
-                        if (seg->subtype() != Segment::SegChordRest && seg->subtype() != Segment::SegGrace)
+                        if (!(seg->subtype() & (SegChordRest | SegGrace)))
                               continue;
                         for (int track = startTrack; track < endTrack; ++track) {
                               Element* e = seg->element(track);

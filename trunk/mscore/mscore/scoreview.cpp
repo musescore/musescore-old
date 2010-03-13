@@ -1960,7 +1960,7 @@ if (debugMode)
             if (idx != -1) {
                   Segment* seg = measure->first();
                   // assume there is always a ChordRest segment
-                  while (seg->subtype() != Segment::SegChordRest)
+                  while (seg->subtype() != SegChordRest)
                         seg = seg->next();
                   score()->pasteStaff(doc.documentElement(), (ChordRest*)(seg->element(idx * VOICES)));
                   }

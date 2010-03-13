@@ -88,7 +88,7 @@ void SCursor::rewind(int type)
                   _segment = m->first();
                   if (_staffIdx >= 0) {
                         int track = _staffIdx * VOICES + _voice;
-                        while (_segment && ((_segment->subtype() != Segment::SegChordRest) || (_segment->element(track) == 0)))
+                        while (_segment && ((_segment->subtype() != SegChordRest) || (_segment->element(track) == 0)))
                               _segment = _segment->next1();
                         }
                   }
@@ -356,7 +356,7 @@ bool SCursor::next()
       if (_staffIdx >= 0) {
             int track = _staffIdx * VOICES + _voice;
             while (seg
-               && ((seg->subtype() != Segment::SegChordRest && seg->subtype() != Segment::SegGrace)
+               && ((seg->subtype() != SegChordRest && seg->subtype() != SegGrace)
                || (seg->element(track) == 0))) {
                   seg = seg->next1();
                   }
@@ -401,7 +401,7 @@ bool SCursor::nextMeasure()
       Segment* seg = m->first();
       if (_staffIdx >= 0) {
             int track = _staffIdx * VOICES + _voice;
-            while (seg && ((seg->subtype() != Segment::SegChordRest) || (seg->element(track) == 0)))
+            while (seg && ((seg->subtype() != SegChordRest) || (seg->element(track) == 0)))
                   seg = seg->next1();
             }
       _segment = seg;
@@ -446,7 +446,7 @@ void SCursor::add(ChordRest* c)
             return;
             }
       Measure* measure = score()->tick2measure(tick);
-      Segment::SegmentType st = Segment::SegChordRest;
+      SegmentType st = SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);

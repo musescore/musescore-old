@@ -182,7 +182,7 @@ int Score::nextSeg(int tick, int track)
             seg = seg->next1();
             if (seg == 0)
                   break;
-            if (seg->subtype() != Segment::SegChordRest)
+            if (seg->subtype() != SegChordRest)
                   continue;
             if (seg->element(track))
                   break;
@@ -207,7 +207,7 @@ int Score::nextSeg1(int tick, int& track)
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
       while ((seg = seg->next1())) {
-            if (seg->subtype() != Segment::SegChordRest)
+            if (seg->subtype() != SegChordRest)
                   continue;
             if (seg->element(track))
                   break;
@@ -242,7 +242,7 @@ int Score::prevSeg1(int tick, int& track)
             seg = seg->prev1();
             if (seg == 0)
                   break;
-            if (seg->subtype() != Segment::SegChordRest)
+            if (seg->subtype() != SegChordRest)
                   continue;
             if (seg->element(track))
                   break;

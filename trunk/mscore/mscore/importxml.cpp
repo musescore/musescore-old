@@ -2711,7 +2711,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             int gl = nrOfGraceSegsReq(pn);
             cr = measure->findChord(tick, track, grace);
             if (cr == 0) {
-                  Segment::SegmentType st = Segment::SegChordRest;
+                  SegmentType st = SegChordRest;
                   cr = new Chord(score);
                   cr->setTick(tick);
                   cr->setBeamMode(bm);
@@ -2739,7 +2739,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               }
                         else
                               cr->setDuration(Duration::V_EIGHT);
-                        st = Segment::SegGrace;
+                        st = SegGrace;
                         }
                   else {
                         if (durationType.type() == Duration::V_INVALID)
@@ -2952,7 +2952,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             Breath* b = new Breath(score);
             b->setTick(tick);
             b->setTrack((staff + relStaff) * VOICES + voice);
-            Segment* seg = measure->getSegment(Segment::SegBreath, tick);
+            Segment* seg = measure->getSegment(SegBreath, tick);
             seg->add(b);
             }
       if (!tupletType.isEmpty()) {

@@ -77,7 +77,7 @@ CScore::CScore(Score* s, int track, Segment* segment)
 
       xml.stag(QString("Track no=\"%1\"").arg(track));
       for (; segment; segment = segment->next()) {
-            if (segment->subtype() == Segment::SegChordRest) {
+            if (segment->subtype() == SegChordRest) {
                   ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
                   if (cr)
                         segment = write(xml, cr);
