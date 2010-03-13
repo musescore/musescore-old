@@ -85,7 +85,7 @@ QT4_WRAP_UI (ui_headers
       glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
       dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
-      harmonyedit.ui selectinstr.ui
+      harmonyedit.ui selectinstr.ui tremolo.ui
       )
 
 QT4_WRAP_CPP (mocs

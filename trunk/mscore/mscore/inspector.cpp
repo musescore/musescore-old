@@ -142,6 +142,7 @@ Inspector::Inspector(QWidget* parent)
       voltaSegmentView = new VoltaSegmentView;
       lyricsView   = new LyricsView;
       beamView     = new BeamView;
+      tremoloView  = new TremoloView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -165,6 +166,7 @@ Inspector::Inspector(QWidget* parent)
       stack->addWidget(voltaSegmentView);
       stack->addWidget(lyricsView);
       stack->addWidget(beamView);
+      stack->addWidget(tremoloView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -188,6 +190,7 @@ Inspector::Inspector(QWidget* parent)
       connect(voltaSegmentView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(lyricsView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(beamView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(tremoloView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
       connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
@@ -529,6 +532,7 @@ void Inspector::updateElement(Element* el)
             case VOLTA_SEGMENT: ew = voltaSegmentView; break;
             case LYRICS:        ew = lyricsView;   break;
             case BEAM:          ew = beamView;     break;
+            case TREMOLO:       ew = tremoloView;  break;
             case MARKER:
             case JUMP:
             case TEXT:
@@ -766,6 +770,11 @@ ShowChordWidget::ShowChordWidget()
       layout->addStretch(100);
       connect(cb.hookButton, SIGNAL(clicked()), SLOT(hookClicked()));
       connect(cb.stemButton, SIGNAL(clicked()), SLOT(stemClicked()));
+      connect(cb.stemSlashButton, SIGNAL(clicked()), SLOT(stemSlashClicked()));
+      connect(cb.arpeggioButton, SIGNAL(clicked()), SLOT(arpeggioClicked()));
+      connect(cb.tremoloButton, SIGNAL(clicked()), SLOT(tremoloClicked()));
+      connect(cb.glissandoButton, SIGNAL(clicked()), SLOT(glissandoClicked()));
+
       connect(cb.stemDirection, SIGNAL(activated(int)), SLOT(directionChanged(int)));
       connect(cb.helplineList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(cb.notes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
@@ -804,6 +813,11 @@ void ShowChordWidget::setElement(Element* e)
       cb.stemButton->setEnabled(chord->stem());
       cb.graceNote->setChecked(chord->noteType() != NOTE_NORMAL);
       cb.stemDirection->setCurrentIndex(int(chord->stemDirection()));
+
+      cb.stemSlashButton->setEnabled(chord->stemSlash());
+      cb.arpeggioButton->setEnabled(chord->arpeggio());
+      cb.tremoloButton->setEnabled(chord->tremolo());
+      cb.glissandoButton->setEnabled(chord->glissando());
 
       crb.attributes->clear();
       foreach(Articulation* a, *chord->getArticulations()) {
@@ -877,6 +891,26 @@ void ShowChordWidget::beamClicked()
 void ShowChordWidget::tupletClicked()
       {
       emit elementChanged(((Chord*)element())->tuplet());
+      }
+
+void ShowChordWidget::stemSlashClicked()
+      {
+      emit elementChanged(((Chord*)element())->stemSlash());
+      }
+
+void ShowChordWidget::arpeggioClicked()
+      {
+      emit elementChanged(((Chord*)element())->arpeggio());
+      }
+
+void ShowChordWidget::tremoloClicked()
+      {
+      emit elementChanged(((Chord*)element())->tremolo());
+      }
+
+void ShowChordWidget::glissandoClicked()
+      {
+      emit elementChanged(((Chord*)element())->glissando());
       }
 
 //---------------------------------------------------------
@@ -1882,4 +1916,49 @@ void BeamView::elementClicked(QTreeWidgetItem* item)
       emit elementChanged(e);
       }
 
+//---------------------------------------------------------
+//   TremoloView
+//---------------------------------------------------------
+
+TremoloView::TremoloView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      tb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      connect(tb.firstChord, SIGNAL(clicked()), SLOT(chord1Clicked()));
+      connect(tb.secondChord, SIGNAL(clicked()), SLOT(chord2Clicked()));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void TremoloView::setElement(Element* e)
+      {
+      Tremolo* b = static_cast<Tremolo*>(e);
+      ShowElementBase::setElement(e);
+
+      tb.firstChord->setEnabled(b->chord1());
+      tb.secondChord->setEnabled(b->chord2());
+      }
+
+//---------------------------------------------------------
+//   chord1Clicked
+//---------------------------------------------------------
+
+void TremoloView::chord1Clicked()
+      {
+      emit elementChanged(static_cast<Tremolo*>(element())->chord1());
+      }
+
+//---------------------------------------------------------
+//   chord2Clicked
+//---------------------------------------------------------
+
+void TremoloView::chord2Clicked()
+      {
+      emit elementChanged(static_cast<Tremolo*>(element())->chord2());
+      }
 

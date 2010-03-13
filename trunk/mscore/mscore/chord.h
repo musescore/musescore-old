@@ -177,6 +177,7 @@ class Chord : public ChordRest {
       Arpeggio* arpeggio() const             { return _arpeggio;  }
       Tremolo* tremolo() const               { return _tremolo;   }
       Glissando* glissando() const           { return _glissando; }
+      StemSlash* stemSlash() const           { return _stemSlash; }
 
       virtual QPointF stemPos(bool, bool) const;
 
