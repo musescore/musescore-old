@@ -220,12 +220,18 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                         }
                   break;
             case 8:     // "isChord",
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), cursor->cr()->type() == CHORD);
+                  if (context->argumentCount() == 0) {
+                        ChordRest* cr = cursor->cr();
+                        bool val = cr ? cr->type() == CHORD : false;
+                        return qScriptValueFromValue(context->engine(), val);
+                        }
                   break;
             case 9:     // "isRest",
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), cursor->cr()->type() == REST);
+                  if (context->argumentCount() == 0) {
+                        ChordRest* cr = cursor->cr();
+                        bool val = cr ? cr->type() == REST : false;
+                        return qScriptValueFromValue(context->engine(), val);
+                        }
                   break;
             case 10:    // "add",
                   if (context->argumentCount() == 1) {
@@ -332,7 +338,9 @@ QScriptValue create_Cursor_class(QScriptEngine* engine)
 
 bool SCursor::next()
       {
-      Segment* seg = segment();;
+      if (!_segment)
+            return false;
+      Segment* seg = _segment;
       seg = seg->next1();
       RepeatSegment* rs = repeatSegment();
       if (rs && expandRepeat()){
@@ -355,9 +363,7 @@ bool SCursor::next()
 
       if (_staffIdx >= 0) {
             int track = _staffIdx * VOICES + _voice;
-            while (seg
-               && ((seg->subtype() != SegChordRest && seg->subtype() != SegGrace)
-               || (seg->element(track) == 0))) {
+            while (seg && (!(seg->subtype() & (SegChordRest | SegGrace)) || !seg->element(track))) {
                   seg = seg->next1();
                   }
             }
@@ -474,10 +480,10 @@ int SCursor::tick()
       RepeatSegment* rs = repeatSegment();
       if (rs && expandRepeat())
             offset = rs->utick - rs->tick;
-      if(cr())
+      if (cr())
           return cr()->tick() + offset;
       else
-          return 0;
+          return _score->lastMeasure()->tick() + _score->lastMeasure()->tickLen();  // end of score
       }
 
 //---------------------------------------------------------
