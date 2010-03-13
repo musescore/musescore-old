@@ -426,14 +426,14 @@ void Score::layoutStage1()
                   for (Segment* segment = m->first(); segment; segment = segment->next()) {
                         Element* e = segment->element(track);
 
-                        if (segment->subtype() == Segment::SegKeySig
-                           || segment->subtype() == Segment::SegStartRepeatBarLine
-                           || segment->subtype() == Segment::SegTimeSig) {
+                        if (segment->subtype() == SegKeySig
+                           || segment->subtype() == SegStartRepeatBarLine
+                           || segment->subtype() == SegTimeSig) {
                               if (e && !e->generated())
                                     m->setBreakMMRest(true);
                               }
 
-                        if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace))
+                        if ((segment->subtype() == SegChordRest) || (segment->subtype() == SegGrace))
                               m->layoutChords0(segment, staffIdx * VOICES, tversatz);
                         if (e && e->type() == KEYSIG) {
                               KeySigEvent oval = staff(staffIdx)->keymap()->key(e->tick() - 1);
@@ -470,7 +470,7 @@ void Score::layoutStage2()
             BeamMode bm = BEAM_AUTO;
             for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
                   Element* e = segment->element(track);
-                  if (((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
+                  if (((segment->subtype() != SegChordRest) && (segment->subtype() != SegGrace))
                      || e == 0 || !e->isChordRest())
                         continue;
                   ChordRest* cr = static_cast<ChordRest*>(e);
@@ -490,9 +490,9 @@ void Score::layoutStage2()
                               oldBeam = 0;
                               }
                         }
-                  if (segment->subtype() == Segment::SegGrace) {
+                  if (segment->subtype() == SegGrace) {
                         Segment* nseg = segment->next();
-                        if (nseg && nseg->subtype() == Segment::SegGrace && nseg->element(track)) {
+                        if (nseg && nseg->subtype() == SegGrace && nseg->element(track)) {
                               Beam* b = cr->beam();
                               if (b == 0) {
                                     b = new Beam(this);
@@ -507,7 +507,7 @@ void Score::layoutStage2()
                                     ChordRest* cr = static_cast<ChordRest*>(nseg->element(track));
                                     b->add(cr);
                                     s = nseg->next();
-                                    if (!s || (s->subtype() != Segment::SegGrace) || !s->element(track))
+                                    if (!s || (s->subtype() != SegGrace) || !s->element(track))
                                           break;
                                     }
                               b->layout1();
@@ -646,7 +646,7 @@ void Score::layoutStage3()
       {
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
-                  if ((segment->subtype() == Segment::SegChordRest) || (segment->subtype() == Segment::SegGrace)) {
+                  if ((segment->subtype() == SegChordRest) || (segment->subtype() == SegGrace)) {
                         layoutChords1(segment, staffIdx);
                         }
                   }
@@ -786,7 +786,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
 
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
                   // search only up to the first ChordRest
-                  if (seg->subtype() == Segment::SegChordRest)
+                  if (seg->subtype() == SegChordRest)
                         break;
                   Element* el = seg->element(strack);
                   if (!el)
@@ -1116,7 +1116,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   //    TODO: check if removed elements can be deleted
                   //
                   for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                        if (seg->subtype() == Segment::SegEndBarLine)
+                        if (seg->subtype() == SegEndBarLine)
                               continue;
                         for (int staffIdx = 0;  staffIdx < nstaves; ++staffIdx) {
                               int track = staffIdx * VOICES;
@@ -1124,7 +1124,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                               if (el == 0)
                                     continue;
                               if (el->generated()) {
-                                    if (!isFirstMeasure || (seg->subtype() == Segment::SegTimeSigAnnounce))
+                                    if (!isFirstMeasure || (seg->subtype() == SegTimeSigAnnounce))
                                           seg->setElement(track, 0);
                                     }
                               double staffMag = staff(staffIdx)->mag();
@@ -1274,7 +1274,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   AL::SigEvent sig1   = _sigmap->timesig(tick - 1);
                   AL::SigEvent sig2   = _sigmap->timesig(tick);
                   if (styleB(ST_genCourtesyTimesig) && !sig1.nominalEqual(sig2)) {
-                        Segment* s  = m->getSegment(Segment::SegTimeSigAnnounce, tick);
+                        Segment* s  = m->getSegment(SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
                               if (s->element(track) == 0) {
@@ -1282,7 +1282,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                        sig2.fraction().numerator());
                                     Measure* nm = m->nextMeasure();
                                     if(nm){
-                                        Segment* tss = nm->findSegment(Segment::SegTimeSig, tick);
+                                        Segment* tss = nm->findSegment(SegTimeSig, tick);
                                         if(tss){
                                             TimeSig* nts = (TimeSig*)tss->element(0);
                                             if(nts)
@@ -1305,7 +1305,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               KeySigEvent key2 = staff->key(tick);
                               if (key1 != key2) {
                                     hasCourtesyKeysig = true;
-                                    Segment* s  = m->getSegment(Segment::SegKeySigAnnounce, tick);
+                                    Segment* s  = m->getSegment(SegKeySigAnnounce, tick);
                                     int track = staffIdx * VOICES;
                                     if (!s->element(track)) {
                                           KeySig* ks = new KeySig(this);

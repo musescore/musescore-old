@@ -2155,7 +2155,7 @@ void ExportLy::findStartRepNoBarline(int &i, Measure* m)
  // loop over all measure relative segments in this measure
   for (Segment* seg = m->first(); seg; seg = seg->next())
     {
-      if (seg->subtype() == Segment::SegStartRepeatBarLine)
+      if (seg->subtype() == SegStartRepeatBarLine)
 	{
 	  i++; // insert at next slot of voltarray
 	  voltarray[i].voltart = startrepeat;
@@ -3376,7 +3376,7 @@ static void checkIfNextIsRest(MeasureBase* mb, Segment* s, bool &nextisrest, int
   Element*  nextelem;
   nextelem= nextseg->element(track);
 
-  while (!(nextseg->subtype() == Segment::SegEndBarLine))//  and !(nextseg->subtype() == Segment::SegEndBarLine)))
+  while (!(nextseg->subtype() == SegEndBarLine))//  and !(nextseg->subtype() == SegEndBarLine)))
     {
       //go to next segment, check if it is chord or end of measure.
       if (nextseg->isChordRest())	break;
@@ -3386,7 +3386,7 @@ static void checkIfNextIsRest(MeasureBase* mb, Segment* s, bool &nextisrest, int
 
   //if it is not on this track, continue until end we find segment
   //containing element of this track, or end of measure
-  while ((nextelem==0) and (!(nextseg->subtype() == Segment::SegEndBarLine)))
+  while ((nextelem==0) and (!(nextseg->subtype() == SegEndBarLine)))
     {
       nextseg = nextseg->next();
       nextelem = nextseg->element(track);
@@ -3394,7 +3394,7 @@ static void checkIfNextIsRest(MeasureBase* mb, Segment* s, bool &nextisrest, int
 
   // if next segment contains element of this track, check for end of
   // measure and chordorrest.
-  if ((nextseg->subtype() != Segment::SegEndBarLine) &&  (nextseg->isChordRest()))
+  if ((nextseg->subtype() != SegEndBarLine) &&  (nextseg->isChordRest()))
     {
       // probably superfluous as we have previously checked for
       // element on this track (!=0)

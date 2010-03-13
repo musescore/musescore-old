@@ -136,7 +136,7 @@ int Score::pos()
 Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
-      Segment::SegmentType st = Segment::SegChordRest;
+      SegmentType st = SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);
@@ -170,7 +170,7 @@ Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
 Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
-      Segment::SegmentType st = Segment::SegChordRest;
+      SegmentType st = SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);
@@ -215,9 +215,9 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       newcr->setTuplet(cr->tuplet());
       newcr->setTick(tick);
 
-      Segment* seg = cr->measure()->findSegment(Segment::SegChordRest, tick);
+      Segment* seg = cr->measure()->findSegment(SegChordRest, tick);
       if (seg == 0) {
-            seg = cr->measure()->createSegment(Segment::SegChordRest, tick);
+            seg = cr->measure()->createSegment(SegChordRest, tick);
             undoAddElement(seg);
             }
       newcr->setParent(seg);
@@ -344,7 +344,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             // check if there is already a time signature symbol
             //
             for (Segment* s = firstSegment(); s; s = s->next1()) {
-                  if (s->subtype() != Segment::SegTimeSig)
+                  if (s->subtype() != SegTimeSig)
                         continue;
                   int etick = s->tick();
                   if (etick > tick)
@@ -389,7 +389,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       int staves = nstaves();
       for (Segment* segment = firstSegment(); segment;) {
             Segment* nseg = segment->next1();
-            if (segment->subtype() != Segment::SegTimeSig) {
+            if (segment->subtype() != SegTimeSig) {
                   segment = nseg;
                   continue;
                   }
@@ -465,14 +465,14 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
           undoChangeSig(tick, oval, AL::SigEvent());
       else
           undoChangeSig(tick, oval, AL::SigEvent(prev.getNominal()));
-		
+
       oval = _sigmap->timesig(tick);
       if (nsi->second == oval)
             undoChangeSig(nsi->first, oval, AL::SigEvent());
 
       Segment* s = ts->segment()->next1();;
       for (; s; s = s->next1()) {
-            if (s->subtype() != Segment::SegTimeSig)
+            if (s->subtype() != SegTimeSig)
                   continue;
             TimeSig* e = static_cast<TimeSig*>(s->element(0));
             if (e) {
@@ -514,7 +514,7 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
             TimeSig* nsig = new TimeSig(this, timeSigSubtype);
             nsig->setTrack(staffIdx * VOICES);
             nsig->setTick(tick);
-            Segment::SegmentType st = Segment::segmentType(TIMESIG);
+            SegmentType st = Segment::segmentType(TIMESIG);
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
                   seg = measure->createSegment(st, tick);
@@ -1034,14 +1034,14 @@ void Score::deleteItem(Element* el)
                   BarLine* bl  = static_cast<BarLine*>(el);
                   Segment* seg = bl->segment();
                   Measure* m   = seg->measure();
-                  if (seg->subtype() == Segment::SegStartRepeatBarLine)
+                  if (seg->subtype() == SegStartRepeatBarLine)
                         undoChangeRepeatFlags(m, m->repeatFlags() & ~RepeatStart);
-                  else if (seg->subtype() == Segment::SegBarLine) {
+                  else if (seg->subtype() == SegBarLine) {
                         undoRemoveElement(el);
                         if (seg->isEmpty())
                               undoRemoveElement(seg);
                         }
-                  else if (seg->subtype() == Segment::SegEndBarLine) {
+                  else if (seg->subtype() == SegEndBarLine) {
                         if (m->endBarLineType() != NORMAL_BAR) {
                               undoChangeRepeatFlags(m, m->repeatFlags() & ~RepeatEnd);
                               Measure* nm = m->nextMeasure();
@@ -1202,12 +1202,12 @@ void Score::cmdDeleteSelection()
                   Tuplet* tuplet = 0;
                   for (Segment* s = s1; s != s2; s = s->next1()) {
                         if (s->element(track) &&
-                           ((s->subtype() == Segment::SegBreath)
-                           || (s->subtype() == Segment::SegGrace))) {
+                           ((s->subtype() == SegBreath)
+                           || (s->subtype() == SegGrace))) {
                               deleteItem(s->element(track));
                               continue;
                               }
-                        if (s->subtype() != Segment::SegChordRest || !s->element(track))
+                        if (s->subtype() != SegChordRest || !s->element(track))
                               continue;
                         ChordRest* cr = static_cast<ChordRest*>(s->element(track));
                         if (tick == -1) {
@@ -1291,13 +1291,13 @@ void ScoreView::chordTab(bool back)
       // search next chord
       if (back) {
             while ((segment = segment->prev1())) {
-                  if (segment->subtype() == Segment::SegChordRest)
+                  if (segment->subtype() == SegChordRest)
                         break;
                   }
             }
       else {
             while ((segment = segment->next1())) {
-                  if (segment->subtype() == Segment::SegChordRest)
+                  if (segment->subtype() == SegChordRest)
                         break;
                   }
             }
@@ -1523,7 +1523,7 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
 printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
       qPrintable(tuplet->baseLen().name()), actualNotes, cr->ticks());
 
-      Segment::SegmentType st = Segment::segmentType(cr->type());
+      SegmentType st = Segment::segmentType(cr->type());
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);
@@ -1541,7 +1541,7 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
             rest->setTuplet(tuplet);
             rest->setTrack(track);
             rest->setDuration(tuplet->baseLen());
-            Segment::SegmentType st = Segment::segmentType(rest->type());
+            SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
                   seg = measure->createSegment(st, tick);
@@ -1590,7 +1590,7 @@ void Score::toggleInvisible(Element* e)
       refresh |= e->abbox();
       if (e->type() == BAR_LINE) {
             Element* pe = e->parent();
-            if (pe->type() == SEGMENT && pe->subtype() == Segment::SegEndBarLine) {
+            if (pe->type() == SEGMENT && pe->subtype() == SegEndBarLine) {
                   Measure* m = static_cast<Segment*>(pe)->measure();
                   m->setEndBarLineType(e->subtype(), false, e->visible(), e->color());
                   }
@@ -1623,7 +1623,7 @@ void Score::colorItem(Element* element)
                   refresh |= e->abbox();
                   if (e->type() == BAR_LINE) {
                         Element* ep = e->parent();
-                        if (ep->type() == SEGMENT && ep->subtype() == Segment::SegEndBarLine) {
+                        if (ep->type() == SEGMENT && ep->subtype() == SegEndBarLine) {
                               Measure* m = static_cast<Segment*>(ep)->measure();
                               m->setEndBarLineType(e->subtype(), false, e->visible(), e->color());
                               }

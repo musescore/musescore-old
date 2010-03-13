@@ -643,15 +643,15 @@ static QString instrName(int type, int hbank, int lbank, int program)
 void Score::addLyrics(int tick, int staffIdx, const QString& txt)
       {
       Measure* measure = tick2measure(tick);
-      Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
+      Segment* seg = measure->findSegment(SegChordRest, tick);
       if (seg == 0) {
             for (seg = measure->first(); seg;) {
-                  if (seg->subtype() != Segment::SegChordRest) {
+                  if (seg->subtype() != SegChordRest) {
                         seg = seg->next();
                         continue;
                         }
                   Segment* ns;
-                  for (ns = seg->next(); ns && ns->subtype() != Segment::SegChordRest; ns = ns->next())
+                  for (ns = seg->next(); ns && ns->subtype() != SegChordRest; ns = ns->next())
                         ;
                   if (ns == 0 || ns->tick() > tick)
                         break;

@@ -419,12 +419,18 @@ void BarLine::endEditDrag()
                   int diff = newSpan - _span;
                   staffIdx1 += _span;
                   staffIdx2 = staffIdx1 + diff;
-printf("remove barlines in staff %d - %d\n", staffIdx1, staffIdx2);
+                  Segment* s = score()->firstMeasure()->first(SegEndBarLine);
+                  for (; s; s = s->next1(SegEndBarLine)) {
+                        for (int staffIdx = staffIdx1; staffIdx < staffIdx2; ++staffIdx) {
+                              Element* e = s->element(staffIdx * VOICES);
+                              if (e) {
+                                    score()->undoRemoveElement(e);
+                                    }
+                              }
+                        }
                   }
             _span = newSpan;
-
             score()->undoChangeBarLineSpan(staff(), _span);
-            // staff()->setBarLineSpan(_span);
             }
       }
 

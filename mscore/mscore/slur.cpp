@@ -829,7 +829,7 @@ static bool isDirectionMixture (Chord* c1, Chord* c2)
       {
       bool up = c1->up();
       for (Segment* seg = c1->segment(); seg; seg = seg->next()) {
-            if (seg->subtype() == Segment::SegChordRest) {
+            if (seg->subtype() == SegChordRest) {
                   Element* e = seg->element(c1->track());
                   if (!e)
                         continue;
@@ -1022,7 +1022,7 @@ double SlurTie::firstNoteRestSegmentX(System* system)
             if (mb->type() == MEASURE) {
                   Measure* measure = (Measure*)mb;
                   for (Segment* seg = measure->first(); seg; seg = seg->next()) {
-                        if (seg->subtype() == Segment::SegChordRest) {
+                        if (seg->subtype() == SegChordRest) {
                               return seg->canvasPos().x();
                               }
                         }

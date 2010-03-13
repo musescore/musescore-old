@@ -619,7 +619,7 @@ void Score::fixPpitch()
             Instrument* instr = part(staffIdx);
 
             for (Segment* seg = firstSegment(); seg; seg = seg->next1()) {
-                  if (seg->subtype() != Segment::SegChordRest && seg->subtype() != Segment::SegGrace)
+                  if (seg->subtype() != SegChordRest && seg->subtype() != SegGrace)
                         continue;
                   int ottavaShift = 0;
                   foreach(const OttavaShiftSegment& ss, osl[staffIdx]) {

@@ -147,6 +147,30 @@ Segment* Segment::next1() const
             }
       }
 
+
+Segment* Segment::next1(SegmentTypes types) const
+      {
+      for (Segment* s = next1(); s; s = s->next1()) {
+            if (s->subtype() & types)
+                  return s;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   next
+//    got to next segment which has subtype in types
+//---------------------------------------------------------
+
+Segment* Segment::next(SegmentTypes types) const
+      {
+      for (Segment* s = next(); s; s = s->next()) {
+            if (s->subtype() & types)
+                  return s;
+            }
+      return 0;
+      }
+
 //---------------------------------------------------------
 //   prev1
 //---------------------------------------------------------
@@ -179,7 +203,7 @@ Segment* Segment::nextCR(int track) const
       {
       Segment* seg = next1();
       for (; seg; seg = seg->next1()) {
-            if (seg->subtype() == Segment::SegChordRest) {
+            if (seg->subtype() == SegChordRest) {
                   if (track != -1 && !seg->element(track))
                         continue;
                   return seg;
@@ -353,24 +377,24 @@ void Segment::remove(Element* el)
 //    returns segment type suitable for storage of Element
 //---------------------------------------------------------
 
-Segment::SegmentType Segment::segmentType(int type)
+SegmentType Segment::segmentType(int type)
       {
       switch (type) {
             case CHORD:
             case REST:
             case LYRICS:
-                  return Segment::SegChordRest;
+                  return SegChordRest;
             case CLEF:
-                  return Segment::SegClef;
+                  return SegClef;
             case KEYSIG:
-                  return Segment::SegKeySig;
+                  return SegKeySig;
             case TIMESIG:
-                  return Segment::SegTimeSig;
+                  return SegTimeSig;
             case BAR_LINE:
-                  return Segment::SegStartRepeatBarLine;
+                  return SegStartRepeatBarLine;
             default:
                   printf("Segment:segmentType()  bad type!\n");
-                  return (Segment::SegmentType)-1;
+                  return (SegmentType)-1;
             }
       }
 

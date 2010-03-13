@@ -1033,7 +1033,7 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   Segment* s = ch->segment();
                   s = s->next1();
                   while (s) {
-                        if (s->subtype() == Segment::SegChordRest && s->element(track()))
+                        if (s->subtype() == SegChordRest && s->element(track()))
                               break;
                         s = s->next1();
                         }

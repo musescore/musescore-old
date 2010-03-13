@@ -1,3 +1,6 @@
+13.mar (ws)
+      - fix #4957: Repeat bar lines spanning more than one staff have extra line
+      - fix #4881-2: Special Barlines not included in parts
 12.mar (lvi)
       - MusicXML import/export of string and pluck
         (ws)

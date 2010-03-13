@@ -717,7 +717,13 @@ void SegmentView::setElement(Element* e)
 
       Segment* s = (Segment*)e;
       ShowElementBase::setElement(e);
-      sb.segmentType->setCurrentIndex(s->subtype());
+      int st = s->subtype();
+      int idx;
+      for (idx = 0; idx < 11; ++idx) {
+            if ((1 << idx) == st)
+                  break;
+            }
+      sb.segmentType->setCurrentIndex(idx);
       sb.lyrics->clear();
 
       Score* cs = e->score();

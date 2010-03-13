@@ -276,7 +276,7 @@ void Lilypond::addNote(const LNote& lnote)
       createMeasure();
 
       Segment* segment = new Segment(measure);
-      segment->setSubtype(Segment::SegChordRest);
+      segment->setSubtype(SegChordRest);
       segment->setTick(tick);
       segment->setParent(measure);
       measure->add(segment);
@@ -309,7 +309,7 @@ void Lilypond::addRest()
       createMeasure();
 
       Segment* segment = new Segment(measure);
-      segment->setSubtype(Segment::SegChordRest);
+      segment->setSubtype(SegChordRest);
       segment->setTick(tick);
       segment->setParent(measure);
       measure->add(segment);

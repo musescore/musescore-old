@@ -60,26 +60,25 @@ typedef LyricsList::const_iterator ciLyrics;
                                (logicl position is the tick position of the next main note)
 */
 
+enum SegmentType {
+      SegClef                 = 0x1,
+      SegKeySig               = 0x2,
+      SegTimeSig              = 0x4,
+      SegStartRepeatBarLine   = 0x8,
+      SegBarLine              = 0x10,
+      SegGrace                = 0x20,
+      SegChordRest            = 0x40,
+      SegBreath               = 0x80,
+      SegEndBarLine           = 0x100,
+      SegTimeSigAnnounce      = 0x200,
+      SegKeySigAnnounce       = 0x400
+      };
+typedef QFlags<SegmentType> SegmentTypes;
+
 class Segment : public Element {
       Segment* _next;
       Segment* _prev;
       mutable bool empty;     // cached value
-
-   public:
-      enum SegmentType {
-            SegClef,
-            SegKeySig,
-            SegTimeSig,
-            SegStartRepeatBarLine,
-            SegBarLine,
-            SegGrace,
-            SegChordRest,
-            SegBreath,
-            SegEndBarLine,
-            SegTimeSigAnnounce,
-            SegKeySigAnnounce
-            };
-      static const char* segmentTypeNames[];
 
    private:
       QList<Element*> _elist;      ///< Element storage, size = staves * VOICES.
@@ -97,11 +96,14 @@ class Segment : public Element {
       virtual ElementType type() const  { return SEGMENT; }
 
       Segment* next() const             { return _next;   }
+      Segment* next(SegmentTypes) const;
+
       void setNext(Segment* e)          { _next = e;      }
       Segment* prev() const             { return _prev;   }
       void setPrev(Segment* e)          { _prev = e;      }
 
       Segment* next1() const;
+      Segment* next1(SegmentTypes) const;
       Segment* prev1() const;
 
       Segment* nextCR(int track = -1) const;
@@ -131,8 +133,9 @@ class Segment : public Element {
       void removeGeneratedElements();
       bool isEmpty() const               { return empty; }
       void fixStaffIdx();
-      bool isChordRest() const           { return subtype() == Segment::SegChordRest; }
-      bool isGrace() const               { return subtype() == Segment::SegGrace; }
+      bool isChordRest() const           { return subtype() == SegChordRest; }
+      bool isGrace() const               { return subtype() == SegGrace; }
+      static const char* segmentTypeNames[];
       };
 
 #endif
