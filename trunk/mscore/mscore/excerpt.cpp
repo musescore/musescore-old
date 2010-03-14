@@ -126,7 +126,7 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       s->read(e);
       if (!excerpt->title().isEmpty()) {
             MeasureBase* measure = s->first();
-            if (measure->type() != VBOX) {
+            if (!measure || (measure->type() != VBOX)) {
                   measure = new VBox(s);
                   measure->setTick(0);
                   s->addMeasure(measure);
