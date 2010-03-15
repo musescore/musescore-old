@@ -1,5 +1,8 @@
 14.mar (ws)
       - fix #4969: Create empty part with title crash
+      (db)
+      - add Concert Band and Chamber Orchestra templates
+      - remove violina5demo template
 13.mar (ws)
       - fix #3861-2: Compatibility of tremolos from 0.9.5
       - fix #4957: Repeat bar lines spanning more than one staff have extra line

@@ -32,12 +32,13 @@ install(FILES
       instruments_uk.xml
       instruments_zh_TW.xml
       instruments.xml
+      Chamber\ Orchestra.mscx
       Choir\ SATB.mscx
       Choir\ SATB\ with\ Piano.mscx
+      Concert\ Band.mscx
       Hymn.mscz
       leadsheet.mscx
       Piano.mscx
-      violina5demo.mscx
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )
 
