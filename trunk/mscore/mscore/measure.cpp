@@ -2749,8 +2749,8 @@ bool Measure::hasVoice(int track) const
 //---------------------------------------------------------
 
 /**
- Check if the measure is filled by a full-measure rest on
- this staff
+ Check if the measure is filled by a full-measure rest or full of rests on
+ this staff 
 */
 
 bool Measure::isMeasureRest(int staffIdx)
@@ -2758,29 +2758,14 @@ bool Measure::isMeasureRest(int staffIdx)
       int strack = staffIdx * VOICES;
       int etrack = staffIdx * VOICES + VOICES;
       for (Segment* s = first(); s; s = s->next()) {
-            if (s->subtype() != SegChordRest)
-                  continue;
-			int count = 0;
-			bool measureRestSegment = false;
-            for (int track = strack; track < etrack; ++track) {
-                  Element* e = s->element(track);
-				  if(!e){
-					count++;
-                  }else if (e->type() == REST) {
-                        Rest* r = static_cast<Rest*>(e);
-                        Duration d = r->duration();
-                        if (d.type() == Duration::V_MEASURE)
-                              count++;
-							  measureRestSegment = true;
-                        }
-                  }
-			if(count == VOICES){ //all voices checked
-				return true;
-				}
-			break; //if we go that far we got a valid seg non empty
+            if (s->subtype() == SegChordRest)    
+                for (int track = strack; track < etrack; ++track) {
+                      Element* e = s->element(track);
+    				          if(e && e->type() != REST)
+    					           return false;
+                      }
             }
-
-      return false;
+            return true;
       }
 
 //---------------------------------------------------------
