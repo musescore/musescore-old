@@ -198,7 +198,9 @@ void PortMidiDriver::getOutputPollFd(struct pollfd**, int* n)
 void PortMidiDriver::read()
       {
       static int active = 0;
-
+      //for some reason, some users could have "active" blocked in < 0
+      if (active < 0)
+        active = 0;
       if (!inputStream)
             return;
       PmEvent buffer[1];
@@ -211,6 +213,8 @@ void PortMidiDriver::read()
                               int pitch = Pm_MessageData1(buffer[0].message);
                               int velo = Pm_MessageData2(buffer[0].message);
                               if (velo) {
+                                    if (debugMode)
+                                        printf("--> enqueue %d ## %d\n", pitch, active);
                                     mscore->midiNoteReceived(pitch, active);
                                     ++active;
                                     }

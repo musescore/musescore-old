@@ -1,3 +1,6 @@
+15.mar (la)
+      - add playback for MIDI in even if not in note entry mode. 
+        Instrument is first selected staff or first staff
 14.mar (ws)
       - fix #4969: Create empty part with title crash
       (db)
@@ -7,16 +10,26 @@
       - fix #3861-2: Compatibility of tremolos from 0.9.5
       - fix #4957: Repeat bar lines spanning more than one staff have extra line
       - fix #4881-2: Special Barlines not included in parts
+       (la)
+      - add onClose hook for plugin framework 
 12.mar (lvi)
       - MusicXML import/export of string and pluck
-        (ws)
+       (ws)
       - fix #3861: compatibility of tremolos from 0.9.5
+       (la)
+      - dashed bar does not break multi measure rests anymore
+      - fix #3347 remove time sig changes actual duration
+      - make abc import plugin platform independent
 11.mar (ws)
       - fix #4857: dropping a clef onto a former drum staff hangs MuseScore
       (db)
       - MusicXML export of quarter tones for arrowed accidentals as specified:
         http://musescore.org/node/3807#comment-13071
       - Fix naming of plugins
+      (la)
+      - fix #4935 Time signature after incomplete measure
+      - fix to load chord style in a cross platform way
+      - fix #3750 mid measure tempo not read correctly
 8.mar (lv)
       - fix MusicXML import of beams
       - fix MusicXML regression test for beams

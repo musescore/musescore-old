@@ -43,13 +43,15 @@ Example of a "no operation" plugin:
 ----------------begin code-----------------------
 function init() {}
 function run() {}
+function close() {}
 
 var mscorePlugin = {
       majorVersion:  1,
       minorVersion:  1,
       menu: 'Plugins.test',
       init: init,
-      run: run
+      run: run,
+      onClose: close
       };
 ----------------end code-----------------------
 
@@ -59,7 +61,7 @@ execution of the plugin. The test plugin above creates an entry "test"
 in the menu "Plugins".
 "init" defines a function, which is called on MuseScore startup, when
 the plugins are registered. The "run" function is executed, when the user
-activates the "test" menu entry.
+activates the "test" menu entry. The "onClose" is executed when MuseScore quits.
 The majorVersion and minorVersion properties are optional. If present, MuseScore
 checks against the current used interface version and warns of any
 incompatibility.
