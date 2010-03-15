@@ -2168,26 +2168,39 @@ void Score::cmd(const QAction* a)
 
 void Score::processMidiInput()
       {
+      if (debugMode)
+          printf("processMidiInput\n");
       if (midiInputQueue.isEmpty())
             return;
-
-//TODO-S      if (!noteEntryMode())
-//            setNoteEntry(true);
-      if (!noteEntryMode())
-            return;
-
+      
       while (!midiInputQueue.isEmpty()) {
-            MidiInputEvent ev = midiInputQueue.dequeue();
-            if (midiActionMap[ev.pitch] && midiActionMap[ev.pitch]->action)
-                  midiActionMap[ev.pitch]->action->activate(QAction::Trigger);
-            else {
-                  startCmd();
-                  addPitch(ev.pitch, ev.chord);
-				  ScoreView* sv = mscore->currentScoreView();
-				  sv->moveCursor();
-                  layoutAll = true;
-                  endCmd();
-                  }
+                MidiInputEvent ev = midiInputQueue.dequeue();
+                if (debugMode)
+                    printf("<-- !noteentry dequeue %i\n", ev.pitch);
+                if (midiActionMap[ev.pitch] && midiActionMap[ev.pitch]->action)
+                    midiActionMap[ev.pitch]->action->activate(QAction::Trigger);
+                else{
+                    if (!noteEntryMode()){
+                        int staffIdx = selection().staffStart();
+                        Part* p; 
+                        if (staffIdx < 0 || staffIdx >= nstaves()){
+                              p = part(0);
+                              } 
+                        else{
+                              p = staff(staffIdx)->part(); 
+                              }
+                        if(p)
+                              seq->startNote(p->channel(0), ev.pitch, 80, preferences.defaultPlayDuration, 0.0);
+                              }
+                        else{
+                              startCmd();
+                              addPitch(ev.pitch, ev.chord);
+                    				  ScoreView* sv = mscore->currentScoreView();
+                    				  sv->moveCursor();
+                              layoutAll = true;
+                              endCmd();
+                              }
+                    }
             }
       }
 
