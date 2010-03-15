@@ -134,6 +134,7 @@ Objects
          Properties:
             staff       integer
             voice       integer
+            pageNumber  integer (ro)  
 
          Fuctions:
             rewind() or rewind(0)   position cursor to staff/voice
@@ -155,7 +156,8 @@ Objects
             nextMeasure()                 go to first chord/rest of next measure
             time()            double      current score time in ms
             tick()            integer     current score tick
-
+            pos()             QPointF     position 
+                
    Chord
          create:
             var a = new Chord()
