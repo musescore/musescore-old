@@ -26,7 +26,9 @@
 #include "text.h"
 #include "measure.h"
 #include "repeatlist.h"
+#include "page.h"
 #include "script.h"
+#include "system.h"
 #include "sccursor.h"
 
 //---------------------------------------------------------
@@ -115,10 +117,10 @@ Q_DECLARE_METATYPE(Text*);
 
 static const char* const function_names_cursor[] = {
       "rewind", "eos", "chord", "rest", "measure", "next", "nextMeasure", "putStaffText",  "isChord", "isRest",
-      "add", "tick", "time", "staff", "voice"
+      "add", "tick", "time", "staff", "voice", "pageNumber", "pos"
       };
 static const int function_lengths_cursor[] = {
-      0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0
+      0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0
       };
 static const QScriptValue::PropertyFlags flags_cursor[] = {
       QScriptValue::SkipInEnumeration,
@@ -135,7 +137,9 @@ static const QScriptValue::PropertyFlags flags_cursor[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration
       };
 
 ScriptInterface cursorInterface = {
@@ -276,6 +280,20 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                               val = VOICES - 1;
                         cursor->setVoice(val);
                         return context->engine()->undefinedValue();
+                        }
+                  break;
+             case 15:    // "pageNumber",
+                  if (context->argumentCount() == 0)
+                        if(cursor->segment())
+                            return qScriptValueFromValue(context->engine(), cursor->segment()->measure()->system()->page()->no());
+                  break;
+             case 16:    // "pos"
+                  if (context->argumentCount() == 0){
+                        if(cursor->segment()){
+                              Page* page = (Page*)cursor->segment()->measure()->parent()->parent();	  
+                              QPointF pos(cursor->segment()->canvasPos().x() - page->canvasPos().x(),  cursor->segment()->canvasPos().y());
+                              return qScriptValueFromValue(context->engine(), pos);
+                            }
                         }
                   break;
             }
@@ -482,8 +500,10 @@ int SCursor::tick()
             offset = rs->utick - rs->tick;
       if (cr())
           return cr()->tick() + offset;
+      else if (segment())
+          return segment()->tick() + offset;
       else
-          return _score->lastMeasure()->tick() + _score->lastMeasure()->tickLen();  // end of score
+          return _score->lastMeasure()->tick() + _score->lastMeasure()->tickLen() + offset;  // end of score
       }
 
 //---------------------------------------------------------
