@@ -137,9 +137,9 @@ Objects
             pageNumber  integer (ro)  
 
          Fuctions:
-            rewind() or rewind(0)   position cursor to staff/voice
-            rewind(1)               position to start of selection
-            rewind(2)               position to end of selection
+            rewind()                position cursor to staff/voice
+            goToSelectionStart()    position to start of selection, voice will be 0
+            goToSelectionEnd()      position to end of selection, voice will be 0
             next()                  goto next chord/rest
             nextMeasure()           goto first chord/rest in next measure
             isChord()               return true if cursor points to a chord
@@ -312,3 +312,41 @@ Global Variables
                   }
             cursor.next();
             }
+
+=====================================================
+      Useful functions
+=====================================================
+
+1. Apply the given function "func" to all notes in selection on all voices
+
+function applyToNotesInSelection(func)
+      {
+      var cursor       = new Cursor(curScore);
+      var selectionEnd = new Cursor(curScore);
+
+      cursor.goToSelectionStart();
+      selectionEnd.goToSelectionEnd();
+      var startStaff = cursor.staff;
+      var endStaff   = selectionEnd.staff;
+
+      for (var staff = startStaff; staff < endStaff; ++staff) {
+            cursor.goToSelectionStart();
+            for (var v = 0; v < 4; v++) {          
+                  cursor.goToSelectionStart(); // set voice to 0
+                  cursor.voice = v; //voice has to be set after goTo
+                  cursor.staff = staff;
+
+                  while (cursor.tick() < selectionEnd.tick()) {
+                        if (cursor.isChord()) {
+                              var chord = cursor.chord();
+                              var n     = chord.notes;
+                              for (var i = 0; i < n; i++) {
+                                    var note   = chord.note(i);
+                                    func(note);
+                                    }
+                              }
+                        cursor.next();
+                        }
+                  }
+            }
+      }
