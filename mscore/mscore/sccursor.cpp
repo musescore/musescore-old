@@ -117,7 +117,7 @@ Q_DECLARE_METATYPE(Text*);
 
 static const char* const function_names_cursor[] = {
       "rewind", "eos", "chord", "rest", "measure", "next", "nextMeasure", "putStaffText",  "isChord", "isRest",
-      "add", "tick", "time", "staff", "voice", "pageNumber", "pos"
+      "add", "tick", "time", "staff", "voice", "pageNumber", "pos", "goToSelectionStart", "goToSelectionEnd",  
       };
 static const int function_lengths_cursor[] = {
       0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0
@@ -139,6 +139,8 @@ static const QScriptValue::PropertyFlags flags_cursor[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration
       };
 
@@ -170,11 +172,6 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
             case 0:     // "rewind",
                   if (context->argumentCount() == 0) {
                         cursor->rewind(0);
-                        return context->engine()->undefinedValue();
-                        }
-                  if (context->argumentCount() == 1) {
-                        int val = context->argument(0).toInteger();
-                        cursor->rewind(val);
                         return context->engine()->undefinedValue();
                         }
                   break;
@@ -296,6 +293,18 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                             }
                         }
                   break;
+             case 17:    // "goToSelectionStart"
+                  if (context->argumentCount() == 0) {
+                        cursor->rewind(1);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+             case 18:    // "goToSelectionEnd"
+                  if (context->argumentCount() == 0) {
+                        cursor->rewind(2);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;                                    
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Cursor.%0(): bad argument count or value")
