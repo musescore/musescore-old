@@ -212,8 +212,8 @@ void Score::transpose()
 
       if (transposeChordNames) {
             Measure* sm = _selection.startSegment()->measure();
-            Segment* ses =  _selection.endSegment();
-            Measure* em = ( ses ? _selection.endSegment()->measure() : lastMeasure() );
+            Segment* es =  _selection.endSegment();
+            Measure* em = es ? es->measure() : lastMeasure();
             int stick   = _selection.tickStart();
             int etick   = _selection.tickEnd();
 
@@ -224,15 +224,11 @@ void Score::transpose()
                         Harmony* harmony = static_cast<Harmony*>(e);
                         if (harmony->tick() >= etick)
                               break;
-                        if (td.mode() == TRANSPOSE_BY_KEY)
-                              ; // TODO
-                        else {
-                              int rootTpc = transposeTpc(harmony->rootTpc(),
-                                 td.transposeInterval(), td.direction());
-                              int baseTpc = transposeTpc(harmony->baseTpc(),
-                                 td.transposeInterval(), td.direction());
-                              undoTransposeHarmony(harmony, rootTpc, baseTpc);
-                              }
+                        int rootTpc = transposeTpc(harmony->rootTpc(),
+                           diatonic, chromatic, td.direction());
+                        int baseTpc = transposeTpc(harmony->baseTpc(),
+                           diatonic, chromatic, td.direction());
+                        undoTransposeHarmony(harmony, rootTpc, baseTpc);
                         }
                   if (m == em)
                         break;

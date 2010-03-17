@@ -173,9 +173,11 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             Element* e = segment->element(track);
             if (!e)
                  continue;
-            ++voices;
-            if (e->type() == CHORD)
+            // ++voices;
+            if (e->type() == CHORD) {
+                  ++voices;
                   notes.append(static_cast<Chord*>(e)->notes());
+                  }
             }
       if (notes.isEmpty())
             return;

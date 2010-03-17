@@ -2750,7 +2750,7 @@ bool Measure::hasVoice(int track) const
 
 /**
  Check if the measure is filled by a full-measure rest or full of rests on
- this staff 
+ this staff
 */
 
 bool Measure::isMeasureRest(int staffIdx)
@@ -2758,7 +2758,7 @@ bool Measure::isMeasureRest(int staffIdx)
       int strack = staffIdx * VOICES;
       int etrack = staffIdx * VOICES + VOICES;
       for (Segment* s = first(); s; s = s->next()) {
-            if (s->subtype() == SegChordRest)    
+            if (s->subtype() == SegChordRest)
                 for (int track = strack; track < etrack; ++track) {
                       Element* e = s->element(track);
     				          if(e && e->type() != REST)
@@ -2983,17 +2983,24 @@ void Measure::layoutX(double stretch)
                         space.max(Space(w, w));
                         }
                   else {
+                        Element* e = s->element(track);
                         if (s->subtype() == SegStartRepeatBarLine) {
                               minDistance = .5 * _spatium;
                               }
-                        bool barLine = s->subtype() == SegEndBarLine;
-                        if (barLine && segmentIdx) {
+                        else if ((s->subtype() == SegEndBarLine) && segmentIdx) {
                               if (s->prev()->subtype() == SegClef)
                                     minDistance = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
                               else
                                     stretchDistance = score()->styleS(ST_noteBarDistance).val() * _spatium;
+                              if (e == 0) {
+                                    // look for barline
+                                    for (int i = track - VOICES; i >= 0; i -= VOICES) {
+                                          e = s->element(i);
+                                          if (e)
+                                                break;
+                                          }
+                                    }
                               }
-                        Element* e = s->element(track);
                         if (e) {
                               found = true;
                               e->layout();
