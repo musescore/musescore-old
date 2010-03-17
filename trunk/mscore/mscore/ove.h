@@ -922,7 +922,7 @@ public:
 	void setBriefName(const std::string& str);
 	std::string getBriefName(void) const;
 
-	void setPatch(unsigned int patch);
+	void setPatch(unsigned int patch); // -1: percussion
 	unsigned int getPatch() const;
 
 	void setChannel(int channel);
@@ -994,6 +994,18 @@ public:
 	void setShowClefEachLine(bool show);
 	bool getShowClefEachLine() const;
 
+	struct DrumNode {
+		int line_;
+		int headType_;
+		int pitch_;
+		int voice_;
+
+	public:
+		DrumNode():line_(0), headType_(0), pitch_(0), voice_(0){}
+	};
+	void addDrum(const DrumNode& node);
+	std::vector<DrumNode> getDrumKit() const;
+
 	void clear(void);
 
 	/////////////////////////////////////////////////
@@ -1031,6 +1043,8 @@ private:
 
 	bool mute_;
 	bool solo_;
+
+	std::vector<DrumNode> drumKit_;
 
 	//////////////////////////////
 	int part_;

@@ -563,13 +563,10 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int steps, in
 //   transposeTpc
 //---------------------------------------------------------
 
-int transposeTpc(int tpc, int interval, TransposeDirection dir)
+int transposeTpc(int tpc, int steps, int semitones, TransposeDirection dir)
       {
-      if (tpc == INVALID_TPC || interval == 0 || interval == 25) // perfect unison & perfect octave
+      if (tpc == INVALID_TPC) // perfect unison & perfect octave
             return tpc;
-
-      int steps     = intervalList[interval].steps;
-      int semitones = intervalList[interval].semitones;
 
       if (dir == TRANSPOSE_DOWN) {
             steps     = -steps;

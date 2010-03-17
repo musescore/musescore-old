@@ -1,5 +1,14 @@
+17.mar (ws)
+      - update for overture import filter from Van Ferry:
+            1. note stem direction sometimes wrong. (Fixed)
+            2. the stop position of some Wedge (Hairpin) is wrong. (Fixed)
+            3. the stop position of some Octave Shift (Ottava) is wrong. (Fixed)
+      - fix #4198: notehead position after adding a second below
+      - fix #4997: Courtesy accidentals not read
+      - fix #4973: Staff lines extend beyond bar line
+      - fix #4902: Chordnames not transposed
 15.mar (la)
-      - add playback for MIDI in even if not in note entry mode. 
+      - add playback for MIDI in even if not in note entry mode.
         Instrument is first selected staff or first staff
 14.mar (ws)
       - fix #4969: Create empty part with title crash
@@ -11,7 +20,7 @@
       - fix #4957: Repeat bar lines spanning more than one staff have extra line
       - fix #4881-2: Special Barlines not included in parts
        (la)
-      - add onClose hook for plugin framework 
+      - add onClose hook for plugin framework
 12.mar (lvi)
       - MusicXML import/export of string and pluck
        (ws)

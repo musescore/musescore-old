@@ -677,10 +677,8 @@ void Note::read(QDomElement e)
                   _headGroup = i;
             else if (tag == "headType")
                   _headType = NoteHeadType(i);
-            else if (tag == "userAccidental"){
-                  setAccidentalType(i);
-                  _userAccidental = i;
-                  }
+            else if (tag == "userAccidental")
+                  setUserAccidental(i);
             else if (tag == "Accidental") {
                   Accidental* a = new Accidental(score());
                   a->read(e);

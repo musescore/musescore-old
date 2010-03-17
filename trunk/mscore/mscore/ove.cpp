@@ -1,4 +1,4 @@
-//=============================================================================
+﻿//=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
 //  $Id: importove.cpp 2814 2010-03-04 18:27:09Z vanferry $
@@ -952,6 +952,19 @@ bool Track::getShowClefEachLine() const {
 	return showClefEachLine_;
 }
 
+void Track::addDrum(const DrumNode& node) {
+	/*DrumNode node;
+	node.line_ = line;
+	node.headType_ = headType;
+	node.pitch_ = pitch;
+	node.voice_ = voice;*/
+	drumKit_.push_back(node);
+}
+
+std::vector<Track::DrumNode> Track::getDrumKit() const {
+	return drumKit_;
+}
+
 void Track::setPart(int part) {
 	part_ = part;
 }
@@ -991,6 +1004,8 @@ void Track::clear(void) {
 
 	mute_ = false;
 	solo_ = false;
+
+	drumKit_.clear();
 
 	part_ = 0;
 
@@ -3931,6 +3946,34 @@ bool TrackParse::parse() {
 		oveTrack->addVoice(voices[i]);
 	}
 
+	// percussion define
+	std::vector<Track::DrumNode> nodes;
+	nodes.assign(16, Track::DrumNode());
+
+	// line
+	for( i=0; i<16; ++i ) {
+		if( !readBuffer(placeHolder, 1) ) { return false; }
+		nodes[i].line_ = placeHolder.toInt();
+	}
+
+	// head type
+	for( i=0; i<16; ++i ) {
+		if( !readBuffer(placeHolder, 1) ) { return false; }
+		nodes[i].headType_ = placeHolder.toUnsignedInt();
+	}
+
+	// pitch
+	for( i=0; i<16; ++i ) {
+		if( !readBuffer(placeHolder, 1) ) { return false; }
+		nodes[i].pitch_ = placeHolder.toUnsignedInt();
+	}
+
+	// voice
+	for( i=0; i<16; ++i ) {
+		if( !readBuffer(placeHolder, 1) ) { return false; }
+		nodes[i].voice_ = placeHolder.toUnsignedInt();
+	}
+
 /*	if( !Jump(17) ) { return false; }
 
 	// voice 0 channel
@@ -5165,7 +5208,7 @@ bool BarsParse::parseNoteRest(MeasureData* measureData, int length, BdatType typ
 		// stem up 0x80, stem down 0x00
 		if( !readBuffer(placeHolder, 1) ) { return false; }
 		thisByte = placeHolder.toUnsignedInt();
-		container->setStemUp(getHighNibble(thisByte)==0x8);
+		container->setStemUp((getHighNibble(thisByte)&0x8)==0x8);
 
 		// stem length
 		int stemOffset = thisByte%0x80;
@@ -6701,6 +6744,7 @@ bool BarsParse::parseOctaveShift(MeasureData* measureData, int /*length*/) {
 		octavePoint->copyCommonBlock(*octave);
 		octavePoint->setOctaveShiftType(octaveShiftType);
 		octavePoint->setOctaveShiftPosition(position);
+		octavePoint->setEndTick(octave->getEndTick());
 
 		// stop
 		if( i==0 && position == OctavePosition_Stop ) {
@@ -6848,7 +6892,7 @@ bool BarsParse::parseOffsetCommonBlock(MusicData* ptr) {
 
 	// end unit
 	if( !readBuffer(placeHolder, 2) ) { return false; }
-	ptr->stop()->setOffset(placeHolder.toUnsignedInt());
+	ptr->stop()->setOffset(placeHolder.toInt());
 
 	return true;
 }
@@ -7144,7 +7188,7 @@ std::vector<std::string> stringToWords(const std::string& str) {
 void LyricChunkParse::processLyricInfo(const LyricInfo& info) {
 	unsigned int i;
 	unsigned int j;
-	unsigned int index = 0; //wordsµƒœ¬±Í
+	unsigned int index = 0; //words
 
 	int measureId = info.measure_-1;
 	bool changeMeasure = true;
