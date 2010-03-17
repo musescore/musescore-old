@@ -7,6 +7,8 @@
       - fix #4997: Courtesy accidentals not read
       - fix #4973: Staff lines extend beyond bar line
       - fix #4902: Chordnames not transposed
+       (la)
+      - fix #4174: Arrow left or right then undo deletes lyric syllables
 15.mar (la)
       - add playback for MIDI in even if not in note entry mode.
         Instrument is first selected staff or first staff
