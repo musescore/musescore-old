@@ -2154,10 +2154,13 @@ void Score::cmd(const QAction* a)
                   cmdDoubleDuration();
             else if (cmd == "half-duration")
                   cmdHalfDuration();
-            else if (cmd == "")
-                  ;
+            else if (cmd == ""){ //Midi note received only?
+                  if(!noteEntryMode())
+                      setLayoutAll(false);
+                  }
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
+
             endCmd();
             }
       }
