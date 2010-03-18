@@ -3051,7 +3051,8 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       else hp->setYoff(wedgeList[no].above ? -3 : 8);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setTrack(staff * VOICES);
-      score->add(hp);
+      if(hp->check())
+          score->add(hp);
 
 // printf("gen wedge %p staff %d, tick %d-%d\n", hp, staff, hp->tick(), hp->tick2());
       }

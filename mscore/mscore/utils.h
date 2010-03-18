@@ -62,7 +62,8 @@ extern void selectNoteRestMessage();
 extern void selectNoteSlurMessage();
 extern void selectStavesMessage();
 extern QString pitch2string(int v);
-extern void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int diatonic, int chromatic);
+extern void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc,
+   int diatonic, int chromatic, bool useDoubleSharpsFlats);
 extern int transposeTpc(int tpc, int interval, TransposeDirection);
 
 extern Interval intervalList[26];

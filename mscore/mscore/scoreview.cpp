@@ -97,11 +97,8 @@ class MagTransition1 : public QEventTransition
       {
    protected:
       virtual bool eventTest(QEvent* e) {
-            if (!QEventTransition::eventTest(e)) {
-                  printf("MagTransition1: wrong event\n");
+            if (!QEventTransition::eventTest(e))
                   return false;
-                  }
-            printf("MagTransition1: event %d\n", !(QApplication::keyboardModifiers() & Qt::ShiftModifier));
             return !(QApplication::keyboardModifiers() & Qt::ShiftModifier);
             }
       virtual void onTransition(QEvent* e) {
@@ -126,7 +123,6 @@ class MagTransition2 : public QEventTransition
                   printf("MagTransition2: wrong event\n");
                   return false;
                   }
-            printf("MagTransition2: event %d\n", int (QApplication::keyboardModifiers() & Qt::ShiftModifier));
             return bool(QApplication::keyboardModifiers() & Qt::ShiftModifier);
             }
       virtual void onTransition(QEvent* e) {
@@ -521,12 +517,28 @@ bool CommandTransition::eventTest(QEvent* e)
 ScoreView::ScoreView(QWidget* parent)
    : QWidget(parent)
       {
-      _score     = 0;
-      dropTarget = 0;
-      _editText  = 0;
-      _matrix    = QTransform(PDPI/DPI, 0.0, 0.0, PDPI/DPI, 0.0, 0.0);
-      imatrix    = _matrix.inverted();
-      _magIdx    = MAG_100;
+      _score      = 0;
+      dropTarget  = 0;
+      _editText   = 0;
+      _matrix     = QTransform(PDPI/DPI, 0.0, 0.0, PDPI/DPI, 0.0, 0.0);
+      imatrix     = _matrix.inverted();
+      _magIdx     = MAG_100;
+      focusFrame  = 0;
+      level       = 0;
+      dragElement = 0;
+      curElement  = 0;
+      _bgColor    = Qt::darkBlue;
+      _fgColor    = Qt::white;
+      fgPixmap    = 0;
+      bgPixmap    = 0;
+      lasso       = new Lasso(_score);
+
+      cursor      = 0;
+      shadowNote  = 0;
+      grips       = 0;
+      origEditObject   = 0;
+      editObject  = 0;
+
 
       if (converterMode)      // HACK
             return;
@@ -705,23 +717,6 @@ ScoreView::ScoreView(QWidget* parent)
       setAttribute(Qt::WA_StaticContents);
       setAutoFillBackground(true);
 
-      focusFrame = 0;
-
-      level            = 0;
-      dragElement      = 0;
-      curElement       = 0;
-      _bgColor         = Qt::darkBlue;
-      _fgColor         = Qt::white;
-      fgPixmap         = 0;
-      bgPixmap         = 0;
-      lasso            = new Lasso(_score);
-
-      cursor           = 0;
-      shadowNote       = 0;
-      grips            = 0;
-      origEditObject   = 0;
-      editObject       = 0;
-
       if (debugMode)
             setMouseTracking(true);
 
@@ -747,7 +742,6 @@ ScoreView::ScoreView(QWidget* parent)
 
 void ScoreView::setScore(Score* s)
       {
-// printf("ScoreView(%p)::setScore: %p -> %p\n", this, _score, s);
       _score = s;
       if (cursor == 0) {
             cursor = new Cursor(_score, this);
@@ -1234,17 +1228,8 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
-      QRegion region;
-      if (_score->needLayout()) {
-            _score->doLayout();
-            if (grips)
-                  updateGrips();
-            region = QRegion(0, 0, width(), height());
-            }
-      else
-            region = ev->region();
+      QRegion region = ev->region();
 
-// double startTime = curTime();
       const QVector<QRect>& vector = region.rects();
       foreach(const QRect& r, vector)
             paint(r, p);
@@ -1262,8 +1247,6 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             }
       if (dragElement)
             dragElement->scanElements(&p, paintElement);
-//double elapsed = curTime() - startTime;
-//printf("paintEvent %f msec\n", elapsed * 1000.0);
       }
 
 //---------------------------------------------------------
@@ -1272,7 +1255,6 @@ void ScoreView::paintEvent(QPaintEvent* ev)
 
 void ScoreView::paint(const QRect& rr, QPainter& p)
       {
-// printf("paint %d %d -- %d %d\n", rr.x(), rr.y(), rr.width(), rr.height());
       p.save();
       if (fgPixmap == 0 || fgPixmap->isNull())
             p.fillRect(rr, _fgColor);
@@ -1331,8 +1313,8 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
       if (sel.state() == SEL_RANGE) {
             Segment* ss = sel.startSegment();
             Segment* es = sel.endSegment();
-			if(!ss || !es)
-				return;
+            if(!ss)
+      			    return;
             p.setBrush(Qt::NoBrush);
 
             QPen pen(QColor(Qt::blue));
@@ -1608,7 +1590,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   }
             return;
             }
-      QString s = QString("unknown drop format: formats %1:\n").arg(data->hasFormat(mimeSymbolFormat));
+      QString s = tr("unknown drop format: formats %1:\n").arg(data->hasFormat(mimeSymbolFormat));
       foreach(QString ss, data->formats())
             s += (QString("   <%1>\n").arg(ss));
       QMessageBox::warning(0,
@@ -2398,7 +2380,7 @@ void ScoreView::normalPaste()
 void ScoreView::cmd(const QAction* a)
       {
       QString cmd(a ? a->data().toString() : "");
-//      if (debugMode)
+      if (debugMode)
             printf("ScoreView::cmd <%s>\n", qPrintable(cmd));
 
       if (cmd == "escape")

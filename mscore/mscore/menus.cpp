@@ -880,8 +880,8 @@ void MuseScore::bracketMenu()
             b1->setHeight(_spatium * 7);
             b2->setHeight(_spatium * 7);
 
-            sp->append(b1, "Bracket");
-            sp->append(b2, "Akkolade");
+            sp->append(b1, tr("Bracket"));
+            sp->append(b2, tr("Akkolade"));
 
             }
       bracketPalette->show();
@@ -931,18 +931,18 @@ void MuseScore::accidentalsMenu()
             for (int i = 1; i < 16+6+4+9; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("Accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
 #endif
             for (int i = 1; i < 6; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("Accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
             for (int i = 16; i < 26+9; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("Accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
                   }
             AccidentalBracket* ab = new AccidentalBracket(gscore);
             ab->setSubtype(0);
@@ -1045,7 +1045,7 @@ void MuseScore::fingeringMenu()
                   k = new Text(gscore);
                   k->setSubtype(TEXT_FINGERING);
                   k->setText(QString(finger[i]));
-                  sp->append(k, QString("Fingering %1").arg(finger[i]));
+                  sp->append(k, tr("Fingering %1").arg(finger[i]));
                   }
             const char stringnumber[] = "0123456";
             for (unsigned i = 0; i < strlen(stringnumber); ++i) {

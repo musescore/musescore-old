@@ -1152,7 +1152,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","tie"),
          QT_TRANSLATE_NOOP("action","tie"),
-          plus_ICON
+         tie_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -1381,7 +1381,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-palette",
          QT_TRANSLATE_NOOP("action","Palette"),
-         Qt::Key_F9,
+#ifdef Q_WS_MAC
+		     Qt::CTRL+Qt::ALT+Qt::Key_K,
+#else
+		     Qt::Key_F9,
+#endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Palette"),
          QT_TRANSLATE_NOOP("action","Palette")
@@ -1390,7 +1394,11 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-playpanel",
          QT_TRANSLATE_NOOP("action","Play Panel"),
-         Qt::Key_F11,
+#ifdef Q_WS_MAC
+		 Qt::CTRL+Qt::ALT+Qt::Key_P,
+#else
+		 Qt::Key_F11,
+#endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Play Panel"),
          QT_TRANSLATE_NOOP("action","Play Panel")
@@ -1399,16 +1407,30 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-navigator",
          QT_TRANSLATE_NOOP("action","Navigator"),
-         Qt::Key_F12,
+#ifdef Q_WS_MAC
+		 Qt::CTRL+Qt::ALT+Qt::Key_N,
+#else
+		 Qt::Key_F12,
+#endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Navigator"),
          QT_TRANSLATE_NOOP("action","Navigator")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+#ifdef Q_WS_MAC
+         //Avoid conflict with M in text
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+#else
+		 STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+#endif
          "toggle-mixer",
          QT_TRANSLATE_NOOP("action","Mixer"),
-         Qt::Key_F10,
+#ifdef Q_WS_MAC
+         //Cmd + M is for minimize to dock on mac
+		 Qt::Key_M,
+#else
+		 Qt::Key_F10,
+#endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","Mixer"),
          QT_TRANSLATE_NOOP("action","Mixer")
@@ -1969,7 +1991,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "zoomin",
          QT_TRANSLATE_NOOP("action","Zoom In"),
-         0,
+         Qt::CTRL + Qt::Key_Plus,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Zoom In")
          ),
@@ -1980,7 +2002,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "zoomout",
          QT_TRANSLATE_NOOP("action","Zoom Out"),
-         0,
+         Qt::CTRL + Qt::Key_Minus,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Zoom Out")
          ),

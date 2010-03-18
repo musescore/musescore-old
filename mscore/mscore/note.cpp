@@ -118,6 +118,7 @@ Note::Note(Score* s)
       _pitch             = 0;
       _ppitch            = 0;
       _tuning            = 0.0;
+      _userAccidental    = ACC_NONE;
       _accidental        = 0;
       _mirror            = false;
       _userMirror        = DH_AUTO;
@@ -155,6 +156,7 @@ Note::Note(const Note& n)
       _tuning         = n._tuning;
       _tpc            = n._tpc;
       _line           = n._line;
+      _userAccidental = n._userAccidental;
       _accidental     = 0;
       if (n._accidental)
             add(new Accidental(*(n._accidental)));
@@ -215,6 +217,8 @@ void Note::setPitch(int val)
                   pitchOffset = score()->styleB(ST_concertPitch) ? 0 : part->transposeChromatic();
             }
       _ppitch = _pitch + pitchOffset;
+      if (chord())
+            chord()->pitchChanged();
       }
 
 void Note::setPitch(int a, int b)
@@ -244,7 +248,7 @@ void Note::setTpc(int v)
             abort();
             }
       _tpc = v;
-//      _userAccidental = 0;
+      _userAccidental = 0;
       }
 
 //---------------------------------------------------------
@@ -373,7 +377,6 @@ void Note::add(Element* e)
                   }
                   break;
             case ACCIDENTAL:
-                  delete _accidental;
                   _accidental = static_cast<Accidental*>(e);
                   break;
             default:
@@ -389,10 +392,8 @@ void Note::add(Element* e)
 void Note::setTieBack(Tie* t)
       {
       _tieBack = t;
-      if (t && _accidental) {          // dont show prefix of second tied note
-            delete _accidental;
-            _accidental = 0;
-            }
+      if (t && _accidental)         // dont show prefix of second tied note
+            score()->undoRemoveElement(_accidental);
       }
 
 //---------------------------------------------------------
@@ -410,7 +411,7 @@ void Note::remove(Element* e)
                   break;
 	      case TIE:
                   {
-                  Tie* tie = (Tie*) e;
+                  Tie* tie = static_cast<Tie*>(e);
                   setTieFor(0);
                   if (tie->endNote())
                         tie->endNote()->setTieBack(0);
@@ -502,9 +503,6 @@ void Note::draw(QPainter& p) const
                   double dd = point(score()->styleS(ST_dotDotDistance));
                   double y = 0;
 
-//                do not draw dots on line, except ledger lines
-//                if ((_line >= 0) && (_line < 9) && (_line & 1) == 0)
-
                   // do not draw dots on staff line
                   if ((_line & 1) == 0) {
                         Measure* m = chord()->measure();
@@ -546,7 +544,7 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             if (part->transposeChromatic()) {
                   transposeInterval(pitch(), tpc(), &rpitch, &rtpc,
                      part->transposeDiatonic(),
-                     part->transposeChromatic());
+                     part->transposeChromatic(), true);
                   }
             }
 
@@ -944,13 +942,10 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
+
             case ACCIDENTAL:
-                  {
-                  Accidental* a = static_cast<Accidental*>(e);
-                  int subtype = a->subtype();
-                  delete a;
-                  score()->changeAccidental(this, subtype);
-                  }
+                  score()->changeAccidental(this, e->subtype());
+                  delete e;
                   break;
 
             case ARPEGGIO:
@@ -1204,6 +1199,61 @@ void Note::layout()
       }
 
 //---------------------------------------------------------
+//   layout1
+//    compute actual accidental and line
+//---------------------------------------------------------
+
+void Note::layout1(char* tversatz)
+      {
+      _line          = tpc2step(_tpc) + (_pitch/12) * 7;
+      int tpcPitch   = tpc2pitch(_tpc);
+      if (tpcPitch < 0)
+            _line += 7;
+      else
+            _line -= (tpcPitch/12)*7;
+
+      int acci = 0;
+      if (_userAccidental)
+            acci = _userAccidental;
+      else  {
+            int accVal = ((_tpc + 1) / 7) - 2;
+            acci       = ACC_NONE;
+            if ((accVal != tversatz[_line]) || hidden()) {
+                  if (_tieBack == 0)
+                        tversatz[_line] = accVal;
+                  switch(accVal) {
+                        case -2: acci = ACC_FLAT2;   break;
+                        case -1: acci = ACC_FLAT;    break;
+                        case  1: acci = ACC_SHARP;   break;
+                        case  2: acci = ACC_SHARP2;  break;
+                        case  0: acci = ACC_NATURAL; break;
+                        default: printf("bad accidental\n"); break;
+                        }
+                  }
+            }
+      if (acci != ACC_NONE && !_tieBack && !_hidden) {
+            if (!_accidental)
+                  add(new Accidental(score()));
+            _accidental->setSubtype(acci);
+            }
+      else {
+            if (_accidental) {
+                  score()->undoRemoveElement(_accidental);
+                  // TODO: memory leak, cannot delete because _accidental may be
+                  //       referenced by undo/redo history
+                  // _accidental = 0;
+                  }
+            }
+      //
+      // calculate the real note line depending on clef
+      //
+      Staff* s     = score()->staff(staffIdx() + chord()->staffMove());
+      int tick     = chord()->tick();
+      int clef     = s->clefList()->clef(tick);
+      _line        = 127 - _line - 82 + clefTable[clef].yOffset;
+      }
+
+//---------------------------------------------------------
 //   noteType
 //---------------------------------------------------------
 
@@ -1313,86 +1363,10 @@ void Note::setAccidentalType(int pre)
             _accidental->setSubtype(pre);
             }
       else {
-            delete _accidental;
-            _accidental = 0;
+            if (_accidental)
+                  score()->undoRemoveElement(_accidental);
             }
       }
-
-//---------------------------------------------------------
-//   changeAccidental
-//---------------------------------------------------------
-
-/**
- Sets a "user selected" accidental.
- This recomputes _pitch and _tpc. If the accidental is
- redundant, it is set as an editorial accidental
- "userAccidental"
-*/
-
-void Note::changeAccidental(int accType)
-      {
-#if 0
-      int normalType = Accidental::value2subtype(tpc2alter(_tpc) + 2);
-
-      Staff* estaff = score()->staff(staffIdx() + chord()->staffMove());
-
-      int tick = chord()->tick();
-      int clef = estaff->clef(tick);
-      int step = clefTable[clef].pitchOffset - _line;
-      while (step < 0)        // ??
-            step += 7;
-      step = step % 7;
-      Measure* m = chord()->measure();
-
-      if (accType == ACC_NONE) {
-            if ((_userAccidental != ACC_NONE)) {
-                  _userAccidental = ACC_NONE;
-                  return;
-                  }
-            if (accidentalType() == ACC_NATURAL) {
-                  int acc    = m->findAccidental2(this);
-                  int opitch = _pitch;
-                  _pitch     = line2pitch(_line, clef, 0) + acc;
-                  _ppitch    = _ppitch + (_pitch - opitch);
-                  _tpc       = step2tpc(step, acc);
-                  return;
-                  }
-            }
-      int acc    = Accidental::subtype2value(accType);
-      _tpc       = step2tpc(step, acc);
-      int opitch = _pitch;
-      _pitch     = line2pitch(_line, clef, 0) + acc;
-      _ppitch    = _ppitch + (_pitch - opitch);
-
-      // compute the "normal" accidental of this note in
-      // measure context:
-      int type2  = m->findAccidental(this);
-
-      // if the accidentals differ, this which means acc1 is
-      // redundant and is set as an editorial accidental
-
-      if (accType != type2 && !_hidden) {
-//            printf("user acc %d  -- %d\n", accType, type2);
-            _userAccidental = accType;    // editorial accidental
-            }
-#endif
-      }
-
-//---------------------------------------------------------
-//   userAccidental
-//---------------------------------------------------------
-
-int Note::userAccidental() const
-      {
-      if (_accidental) {
-            int type = Accidental::value2subtype(tpc2alter(_tpc));
-            if (type != _accidental->subtype())
-                  return _accidental->subtype();
-            }
-      return ACC_NONE;
-      }
-
-//      void setUserAccidental(int n)   { _userAccidental = n; }
 
 //---------------------------------------------------------
 //   accidentalType

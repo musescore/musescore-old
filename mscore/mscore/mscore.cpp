@@ -1626,7 +1626,9 @@ static bool processNonGui()
                         if (f.open(QIODevice::ReadOnly))
                               cs->loadStyle(&f);
                         }
-                  cs->doLayout();
+                  cs->startCmd();
+                  cs->setLayoutAll(true);
+                  cs->endCmd();
                   mscore->pluginTriggered(0);
                   res = true;
                   }
@@ -1818,9 +1820,6 @@ int main(int argc, char* av[])
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
 
-      //read languages list
-      mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
-
       // set translator before preferences are read to get
       //    translations for all shortcuts
       //
@@ -1832,6 +1831,9 @@ int main(int argc, char* av[])
             }
 
       setMscoreLocale(localeName);
+
+      //read languages list
+      mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
 
       if (!useFactorySettings)
             preferences.read();
@@ -2010,7 +2012,7 @@ void MuseScore::checkForUpdate()
 
 bool MuseScore::readLanguages(const QString& path)
       {
-      languages.append(LanguageItem("", tr("System")));
+      languages.append(LanguageItem("system", tr("System")));
       QFile qf(path);
       if (qf.exists()){
           QDomDocument doc;
@@ -2588,7 +2590,7 @@ void MuseScore::setPos(int t)
       AL::TimeSigMap* s = cs->sigmap();
       int bar, beat, tick;
       s->tickValues(t, &bar, &beat, &tick);
-      _positionLabel->setText(QString("Bar %1 Beat %2.%3")
+      _positionLabel->setText(tr("Bar %1 Beat %2.%3")
          .arg(bar + 1,  3, 10, QLatin1Char(' '))
          .arg(beat + 1, 2, 10, QLatin1Char(' '))
          .arg(tick,     3, 10, QLatin1Char('0'))

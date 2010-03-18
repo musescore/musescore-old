@@ -135,7 +135,7 @@ void ScoreView::editKey(QKeyEvent* ev)
             if (e->isTextB() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right)) {
                   ev->accept();
                   _score->end();
-                  return;
+                  //return;
                   }
             }
       QPointF delta;
@@ -251,16 +251,14 @@ void Score::padToggle(int n)
             }
 
       //do not allow to add a dot on a full measure rest
-      if (selection().isSingle()) {
-            Element* e = selection().element();
-            if (e && e->type() == REST) {
-                  Rest* r = static_cast<Rest*>(e);
-                  Duration d = r->duration();
-                  if (d.type() == Duration::V_MEASURE) {
-                        _is.setDots(0);
-                        setPadState();    // updates dot state
-                        return;
-                        }
+      Element* e = selection().element();
+      if (e && e->type() == REST) {
+            Rest* r = static_cast<Rest*>(e);
+            Duration d = r->duration();
+            if (d.type() == Duration::V_MEASURE) {
+                  _is.setDots(0);
+                  setPadState();    // updates dot state
+                  // return;
                   }
             }
 

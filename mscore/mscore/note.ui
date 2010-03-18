@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>733</width>
-    <height>284</height>
+    <width>635</width>
+    <height>329</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
       <bool>true</bool>
      </property>
      <layout class="QGridLayout">
-      <property name="verticalSpacing">
+      <property name="spacing">
        <number>0</number>
       </property>
       <item row="0" column="0">
@@ -50,6 +50,12 @@
       </item>
       <item row="0" column="1">
        <widget class="QSpinBox" name="pitch">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="maximum">
          <number>127</number>
         </property>
@@ -83,7 +89,14 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QSpinBox" name="tpc"/>
+       <widget class="QSpinBox" name="tpc">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item row="2" column="2">
        <widget class="QLabel" name="label_7">
@@ -120,6 +133,12 @@
       </item>
       <item row="3" column="1">
        <widget class="QSpinBox" name="line">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimum">
          <number>-99</number>
         </property>
@@ -161,7 +180,14 @@
        </widget>
       </item>
       <item row="5" column="1">
-       <widget class="QSpinBox" name="subchannel"/>
+       <widget class="QSpinBox" name="subchannel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="label_8">
@@ -171,7 +197,14 @@
        </widget>
       </item>
       <item row="6" column="1">
-       <widget class="QSpinBox" name="userAccidental"/>
+       <widget class="QSpinBox" name="userAccidental">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_9">
@@ -185,6 +218,12 @@
       </item>
       <item row="1" column="1">
        <widget class="QSpinBox" name="ppitch">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="maximum">
          <number>127</number>
         </property>
@@ -207,12 +246,18 @@
       <item row="0" column="4">
        <widget class="QLabel" name="label_12">
         <property name="text">
-         <string>OnTimeType:</string>
+         <string>OnTime:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="5">
        <widget class="QComboBox" name="onTimeType">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <item>
          <property name="text">
           <string>Auto</string>
@@ -232,6 +277,12 @@
       </item>
       <item row="0" column="6">
        <widget class="QSpinBox" name="onTimeOffset">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimum">
          <number>-999999</number>
         </property>
@@ -242,6 +293,12 @@
       </item>
       <item row="0" column="7">
        <widget class="QSpinBox" name="onTimeUserOffset">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimum">
          <number>-999999</number>
         </property>
@@ -253,12 +310,18 @@
       <item row="1" column="4">
        <widget class="QLabel" name="label_13">
         <property name="text">
-         <string>OffTimeType:</string>
+         <string>OffTime:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="5">
        <widget class="QComboBox" name="offTimeType">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <item>
          <property name="text">
           <string>Auto</string>
@@ -278,6 +341,12 @@
       </item>
       <item row="1" column="6">
        <widget class="QSpinBox" name="offTimeOffset">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimum">
          <number>-999999</number>
         </property>
@@ -288,6 +357,12 @@
       </item>
       <item row="1" column="7">
        <widget class="QSpinBox" name="offTimeUserOffset">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimum">
          <number>-999999</number>
         </property>
@@ -299,14 +374,14 @@
       <item row="2" column="4">
        <widget class="QLabel" name="label_10">
         <property name="text">
-         <string notr="true" comment="do not translate">Subelements:</string>
+         <string notr="true" comment="do not translate">S.-ements:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="5" rowspan="4" colspan="3">
        <widget class="QListWidget" name="fingering"/>
       </item>
-      <item row="7" column="5">
+      <item row="7" column="5" colspan="3">
        <widget class="QComboBox" name="userMirror">
         <item>
          <property name="text">
@@ -334,6 +409,12 @@
       </item>
       <item row="4" column="1">
        <widget class="QDoubleSpinBox" name="tuning">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimum">
          <double>-1000.000000000000000</double>
         </property>
