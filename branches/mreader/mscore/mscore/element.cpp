@@ -992,8 +992,11 @@ void Compound::setVisible(bool f)
 
 void Compound::clear()
       {
-      for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
-            delete *i;
+      foreach(Element* e, elemente) {
+            if (e->selected())
+                  score()->deselect(e);
+            delete e;
+            }
       elemente.clear();
       }
 

@@ -67,8 +67,8 @@ TimeDialog::TimeDialog(QWidget* parent)
 	sp->append(new TimeSig(gscore, 8, 6), "6/8");
 	sp->append(new TimeSig(gscore, 8, 9), "9/8");
 	sp->append(new TimeSig(gscore, 8, 12), "12/8");
-	sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), "4/4 common time");
-	sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), "2/2 alla breve");
+	sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"));
+	sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("2/2 alla breve"));
       }
 
 //---------------------------------------------------------

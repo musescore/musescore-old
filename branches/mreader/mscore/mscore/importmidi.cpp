@@ -1345,7 +1345,7 @@ bool Score::importMidi(const QString& name)
       catch(QString errorText) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: load midi"),
-               QString("Load failed: ") + errorText,
+               tr("Load failed: ") + errorText,
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             fp.close();
             return false;

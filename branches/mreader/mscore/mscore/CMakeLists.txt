@@ -125,7 +125,7 @@ if (USE_PORTMIDI)
 endif (USE_PORTMIDI)
 
 if (USE_JACK)
-      set (AUDIO ${AUDIO} jackaudio.cpp)
+      set (AUDIO ${AUDIO} jackaudio.cpp jackweakapi.cpp)
 endif (USE_JACK)
 
 if (APPLE)
@@ -182,7 +182,8 @@ add_executable ( ${ExecutableName}
       screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
-      importpdf.cpp ${AUDIO}
+      importove.cpp ove.cpp importpdf.cpp
+      ${AUDIO}
       )
 
 if (STATIC_SCRIPT_BINDINGS)
@@ -235,7 +236,6 @@ if (MINGW)
       portaudio
       portmidi
       winmm
-      ${JACK_LIB}
       tesseract_full
       tiff
       )
@@ -251,7 +251,6 @@ if (MINGW)
       ${CROSS}/bin/libgcc_s_dw2-1.dll
       ${CROSS}/bin/portaudio.dll
       ${CROSS}/bin/libsndfile-1.dll
-      "C:/Windows/System32/libjack.dll"
       ${CROSSQT}/bin/QtCore4.dll
       ${CROSSQT}/bin/QtGui4.dll
       ${CROSSQT}/bin/QtXml4.dll
@@ -269,22 +268,6 @@ if (MINGW)
       ${CROSSQT}/plugins/imageformats/qsvg4.dll
       ${CROSSQT}/plugins/imageformats/qtiff4.dll
       )
-   install_files ( /locale .qm
-      ${CROSSQT}/translations/qt_ar.qm
-      ${CROSSQT}/translations/qt_de.qm
-      ${CROSSQT}/translations/qt_es.qm
-      ${CROSSQT}/translations/qt_fr.qm
-      ${CROSSQT}/translations/qt_iw.qm
-      ${CROSSQT}/translations/qt_ja_JP.qm
-      ${CROSSQT}/translations/qt_pl.qm
-      ${CROSSQT}/translations/qt_pt.qm
-      ${CROSSQT}/translations/qt_ru.qm
-      ${CROSSQT}/translations/qt_sk.qm
-      ${CROSSQT}/translations/qt_sv.qm
-      ${CROSSQT}/translations/qt_uk.qm
-      ${CROSSQT}/translations/qt_zh_CN.qm
-      ${CROSSQT}/translations/qt_zh_TW.qm
-      )
 
 else (MINGW)
    set_target_properties( mscore
@@ -296,7 +279,6 @@ else (MINGW)
       ${QT_QTSCRIPT_LIBRARY_RELEASE}
       ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
       ${ALSA_LIB}
-      ${JACK_LIB}
       ${PORTAUDIO_LIB}
       al
       awl
@@ -323,9 +305,9 @@ else (MINGW)
      target_link_libraries(mscore ${OsxFrameworks})
    endif (APPLE)
 
-if (QT45)
-   target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )
-endif (QT45)
+   if (QT45)
+     target_link_libraries(mscore ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE} )
+   endif (QT45)
 
    if (APPLE)
      install (TARGETS mscore BUNDLE DESTINATION ${CMAKE_INSTALL_PREFIX})

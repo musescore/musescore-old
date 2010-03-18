@@ -76,6 +76,7 @@ InstrumentListEditor::InstrumentListEditor(QWidget* parent)
       {
       setWindowTitle(tr("MuseScore: Part List"));
       setWidgetResizable(true);
+      setWindowFlags(Qt::Dialog);
       QWidget* area = new QWidget(this);
       vb = new QVBoxLayout;
       vb->setMargin(0);
@@ -153,7 +154,7 @@ void InstrumentListEditor::patchListChanged()
 void MuseScore::showMixer(bool val)
       {
       if (iledit == 0) {
-            iledit = new InstrumentListEditor(0);
+            iledit = new InstrumentListEditor(this);
             if (synthControl) {
                   connect(synthControl, SIGNAL(soundFontChanged()), iledit,
                      SLOT(patchListChanged()));

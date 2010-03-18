@@ -204,7 +204,7 @@ bool Seq::init()
 #endif
       if (driver == 0) {
 #if 0
-            QString s = QString("Init audio driver failed.\n"
+            QString s = tr("Init audio driver failed.\n"
                                 "Sequencer will be disabled.");
             QMessageBox::critical(0, "MuseScore: Init Audio Driver", s);
 #endif
@@ -220,21 +220,21 @@ bool Seq::init()
             else
                   p = QString(getenv("DEFAULT_SOUNDFONT"));
             if (p.isEmpty()) {
-                  QMessageBox::critical(0, "MuseScore: Load SoundFont",
-                     "No SoundFont configured\n"
-                     "Playback will be disabled.");
+                  QMessageBox::critical(0, tr("MuseScore: Load SoundFont"),
+                     tr("No SoundFont configured\n"
+                     "Playback will be disabled."));
                   }
             else {
                   if (debugMode)
                         printf("load soundfont <%s>\n", qPrintable(p));
                   bool rv = synth->loadSoundFont(p);
                   if (!rv) {
-                        QString s = QString("Loading SoundFont\n"
+                        QString s = tr("Loading SoundFont\n"
                            "\"%1\"\n"
                            "failed. Playback will be disabled.\n\n"
                            "Go to Display > Synthesizer \n"
                            "and check that the file location is correct").arg(p);
-                        QMessageBox::critical(0, "MuseScore: Load SoundFont", s);
+                        QMessageBox::critical(0, tr("MuseScore: Load SoundFont"), s);
                         }
                   }
             synth->setMasterTuning(preferences.tuning);

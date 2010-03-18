@@ -180,7 +180,7 @@ void MuseScore::loadFile()
          this,
          tr("MuseScore: Load Score"),
          lastOpenPath,
-         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;"
+         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;"
             "MuseScore Files (*.mscz *.mscx *.msc);;"
             "MusicXML Files (*.xml *.mxl);;"
             "MIDI Files (*.mid *.midi *.kar);;"
@@ -189,6 +189,7 @@ void MuseScore::loadFile()
 //            "LilyPond Files <experimental> (*.ly);;"
             "BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;"
             "PDF <experimental> (*.pdf);;"
+        	"Overture Files <experimental> (*.ove);;"
             "All Files (*)"
             )
          );
@@ -415,7 +416,7 @@ bool Score::saveAs(bool saveCopy)
       QString fn = QFileDialog::getSaveFileName(
                0,
                saveDialogTitle,
-               saveDirectory,
+               QString("%1/%2.mscz").arg(saveDirectory).arg(info.baseName()),
                fl.join(";;"),
                &selectedFilter
                );
@@ -582,7 +583,7 @@ void MuseScore::newFile()
 
       Score* score = new Score(defaultStyle);
       score->setCreated(true);
-      score->layout();
+//      score->layout();
 
       //
       //  create score from template
@@ -774,6 +775,7 @@ void MuseScore::newFile()
             score->setCopyright(copyright);
 
       score->rebuildMidiMapping();
+      score->doLayout();
       setCurrentScoreView(appendScore(score));
       }
 
@@ -1021,7 +1023,7 @@ void Score::saveStyle()
 
       xml.etag();
       if (f.error() != QFile::NoError) {
-            QString s = QString("Write Style failed: ") + f.errorString();
+            QString s = tr("Write Style failed: ") + f.errorString();
             QMessageBox::critical(0, tr("MuseScore: Write Style"), s);
             }
       }
@@ -1814,7 +1816,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
             if (fileName.endsWith(".png"))
                   fileName = fileName.left(fileName.size() - 4);
             fileName += QString("-%1.png").arg(pageNumber+1, padding, 10, QLatin1Char('0'));
-            
+
             rv = printer.save(fileName, "png");
             if (!rv)
                   break;

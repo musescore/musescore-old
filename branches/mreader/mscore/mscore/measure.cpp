@@ -138,6 +138,7 @@ Measure::Measure(Score* s)
       _noOffset    = 0;
       _noText      = 0;
       _endBarLineType = NORMAL_BAR;
+      _mmEndBarLineType = NORMAL_BAR;
       _endBarLineGenerated = true;
       }
 
@@ -339,7 +340,6 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
 
       if (staff->part()->useDrumset())
             drumset = staff->part()->drumset();
-      int tick = segment->tick();
 
       int endTrack = startTrack + VOICES;
       for (int track = startTrack; track < endTrack; ++track) {
@@ -353,7 +353,6 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
 
             if (cr->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(e);
-                  int staffMove = chord->staffMove();
                   if (chord->noteType() != NOTE_NORMAL)
                         m *= score()->styleD(ST_graceNoteMag);
                   foreach(Note* note, chord->notes()) {
@@ -383,45 +382,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                                     continue;
                                     }
                               }
-                        //
-                        // compute accidental
-                        //
-                        int tpc        = note->tpc();
-                        int line       = tpc2step(tpc) + (pitch/12) * 7;
-                        int tpcPitch   = tpc2pitch(tpc);
-                        if (tpcPitch < 0)
-                              line += 7;
-                        else
-                              line -= (tpcPitch/12)*7;
-
-                        int accidental = 0;
-                        if (note->userAccidental())
-                              accidental = note->userAccidental();
-                        else  {
-                              int accVal = ((tpc + 1) / 7) - 2;
-                              accidental = ACC_NONE;
-                              if ((accVal != tversatz[line]) || note->hidden()) {
-                                    if (note->tieBack() == 0)
-                                          tversatz[line] = accVal;
-                                    switch(accVal) {
-                                          case -2: accidental = ACC_FLAT2;  break;
-                                          case -1: accidental = ACC_FLAT;   break;
-                                          case  1: accidental = ACC_SHARP;  break;
-                                          case  2: accidental = ACC_SHARP2; break;
-                                          case  0: accidental = ACC_NATURAL; break;
-                                          default: printf("bad accidental\n"); break;
-                                          }
-                                    }
-                              }
-                        note->setAccidentalType(accidental);
-
-                        //
-                        // calculate the real note line depending on clef
-                        //
-                        int staffIdx = note->staffIdx() + staffMove;
-                        int clef     = score()->staff(staffIdx)->clefList()->clef(tick);
-                        line = 127 - line - 82 + clefTable[clef].yOffset;
-                        note->setLine(line);
+                        note->layout1(tversatz);
                         }
                   chord->computeUp();
                   }
@@ -737,6 +698,7 @@ int Measure::findAccidental(Note* note) const
 
 //---------------------------------------------------------
 //   findAccidental2
+//    return current accidental value at note position
 //---------------------------------------------------------
 
 int Measure::findAccidental2(Note* note) const
@@ -880,8 +842,6 @@ void Measure::layout2()
                   staves[staffIdx]->_vspacer->setPos(_spatium * .5, y + 4 * _spatium);
                   }
             }
-
-//      layoutBeams();
 
       foreach(const MStaff* ms, staves)
             ms->lines->setWidth(width());
@@ -2206,7 +2166,14 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                               if (beam && beam->elements().front() == cr)
                                     beam->write(xml);
                               }
-                        e->write(xml);
+                        if (segment->subtype() == Segment::SegEndBarLine && _multiMeasure > 0) {
+                              xml.stag("BarLine");
+                              xml.tag("subtype", _endBarLineType);
+                              xml.tag("visible", _endBarLineVisible);
+                              xml.etag();
+                              }
+                        else
+                              e->write(xml);
                         }
                   }
             }
@@ -2260,7 +2227,14 @@ void Measure::write(Xml& xml) const
                                           tuplet->write(xml);
                                           }
                                     }
-                              e->write(xml);
+                              if (segment->subtype() == Segment::SegEndBarLine && _multiMeasure > 0) {
+                                    xml.stag("BarLine");
+                                    xml.tag("subtype", _endBarLineType);
+                                    xml.tag("visible", _endBarLineVisible);
+                                    xml.etag();
+                                    }
+                              else
+                                    e->write(xml);
                               }
                         }
                   }
@@ -2793,8 +2767,9 @@ bool Measure::createEndBarLines()
                   }
             if (bl) {
                   bl->setMag(staff->mag());
-                  if (bl->subtype() != _endBarLineType) {
-                        bl->setSubtype(_endBarLineType);
+                  int et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
+                  if (bl->subtype() != et) {
+                        bl->setSubtype(et);
                         changed = true;
                         }
                   bl->setGenerated(_endBarLineGenerated);
@@ -3203,7 +3178,7 @@ void Measure::layoutX(double stretch)
                               else
                                     stretchDistance = score()->styleS(ST_noteBarDistance).val() * _spatium;
                               }
-                        Element* e = s->element(barLine ? 0 : track);
+                        Element* e = s->element(track);
                         if (e) {
                               found = true;
                               e->layout();
@@ -3339,11 +3314,22 @@ void Measure::layoutX(double stretch)
                         Rest* rest = static_cast<Rest*>(e);
                         if (rest->duration() == Duration::V_MEASURE) {
                               if (_multiMeasure > 0) {
-                                    if (seg == 1)
-                                          rest->setMMWidth(xpos[segs] - 2 * s->x());
-                                    else
-                                          rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) );
-                                    e->rxpos() = 0.0;
+                                    if ((track % VOICES) == 0) {
+                                          Segment* ls = last();
+                                          double eblw = 0.0;
+                                          int t = (track / VOICES) * VOICES;
+                                          if (ls->subtype() == Segment::SegEndBarLine) {
+                                                Element* e = ls->element(t);
+                                                if (!e)
+                                                      e = ls->element(0);
+                                                eblw = e ? e->width() : 0.0;
+                                                }
+                                          if (seg == 1)
+                                                rest->setMMWidth(xpos[segs] - 2 * s->x() - eblw);
+                                          else
+                                                rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) - eblw);
+                                          e->rxpos() = 0.0;
+                                          }
                                     }
                               else {
                                     double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;

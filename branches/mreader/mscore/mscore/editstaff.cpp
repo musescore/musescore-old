@@ -264,7 +264,9 @@ void SelectInstrument::on_instrumentList_itemSelectionChanged()
 
 void SelectInstrument::on_instrumentList_itemDoubleClicked(QTreeWidgetItem*, int)
       {
-      done(true);
+      QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
+      if(!wi.isEmpty())
+          done(true);
       }
 
 //---------------------------------------------------------

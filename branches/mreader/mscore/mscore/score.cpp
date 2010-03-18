@@ -378,9 +378,13 @@ bool Score::read(QString name)
                   connectSlurs();
                   }
             else if (cs.toLower() == "pdf") {
-                  if (!importPdf(name))
-                        return false;
-                  }
+            	if(!importPdf(name))
+            		return false;
+				}
+            else if (cs.toLower() == "ove") {
+            	if(!importOve(name))
+            		return false;
+				}
             else {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   }
@@ -409,7 +413,10 @@ bool Score::read(QString name)
 
       mscore->updateRecentScores(this);
 
+      startCmd();
       _needLayout = true;
+      endCmd();
+
       return true;
       }
 
@@ -2126,6 +2133,8 @@ void Score::setSelection(const Selection& s)
       {
       deselectAll();
       _selection = s;
+      foreach(Element* e, _selection.elements())
+            e->setSelected(true);
       }
 
 //---------------------------------------------------------

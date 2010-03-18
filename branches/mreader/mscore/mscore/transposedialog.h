@@ -45,6 +45,7 @@ class TransposeDialog : public QDialog, Ui::TransposeDialogBase {
       TransposeDirection direction() const;
       TransposeMode mode() const;
       void setKey(int k)                  { keyList->setCurrentIndex(k + 7); }
+      bool useDoubleSharpsFlats() const   { return accidentalOptions->currentIndex() == 1; }
       };
 #endif
 

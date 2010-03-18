@@ -86,7 +86,6 @@ bool Portaudio::init()
             printf("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
             return false;
             }
-
       initialized = true;
       if (debugMode)
             printf("using PortAudio Version: %s\n", Pa_GetVersionText());

@@ -27,8 +27,10 @@
 #include "chord.h"
 #include "note.h"
 #include "utils.h"
+#include "sccursor.h"
 
 Q_DECLARE_METATYPE(Score*);
+Q_DECLARE_METATYPE(SCursor*);
 
 //---------------------------------------------------------
 //   registerPlugin
@@ -60,7 +62,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                qPrintable(sv.toString()));
 #endif
             QMessageBox::critical(0, "MuseScore Error",
-               QString("Error loading plugin\n"
+               tr("Error loading plugin\n"
                   "\"%1\" line %2:\n"
                   "%3").arg(pluginPath)
                      .arg(se->uncaughtExceptionLineNumber())
@@ -285,10 +287,6 @@ void MuseScore::pluginTriggered(int idx)
 
       se->globalObject().setProperty("curScore", se->newVariant(qVariantFromValue(cs)));
 
-//      SCursor c;
-//      v = se->getCursorClass()->newInstance(c);
-//      se->globalObject().setProperty("curCursor", v);
-
       QFileInfo fi(f);
       pluginPath = fi.absolutePath();
       se->globalObject().setProperty("pluginPath", se->newVariant(pluginPath));
@@ -307,7 +305,7 @@ void MuseScore::pluginTriggered(int idx)
       if (se->hasUncaughtException()) {
             QScriptValue sv = se->uncaughtException();
             QMessageBox::critical(0, "MuseScore Error",
-               QString("Error loading plugin\n"
+               tr("Error loading plugin\n"
                   "\"%1\" line %2:\n"
                   "%3").arg(pluginPath)
                      .arg(se->uncaughtExceptionLineNumber())

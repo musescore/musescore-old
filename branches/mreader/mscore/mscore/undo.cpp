@@ -181,6 +181,8 @@ void UndoStack::push(UndoCommand* cmd)
       {
       if (!curCmd) {
             printf("UndoStack:push(): no active command\n");
+            cmd->redo();
+            delete cmd;
             return;
             }
       curCmd->appendChild(cmd);
@@ -359,9 +361,7 @@ void SaveState::undo()
       {
       redoInputState = score->inputState();
       redoSelection  = score->selection();
-//      redoSelection.clearElements();
       score->setInputState(undoInputState);
-//      undoSelection.searchSelectedElements();
       score->setSelection(undoSelection);
       }
 
@@ -369,9 +369,7 @@ void SaveState::redo()
       {
       undoInputState = score->inputState();
       undoSelection  = score->selection();
-//      undoSelection.clearElements();
       score->setInputState(redoInputState);
-//      redoSelection.searchSelectedElements();
       score->setSelection(redoSelection);
       }
 
@@ -1058,9 +1056,8 @@ void ChangePitch::flip()
       int f_tpc     = note->tpc();
       int f_userAcc = note->userAccidental();
 
-      note->changePitch(pitch);
-      note->setTpc(tpc);
-      note->setAccidentalType(userAccidental);
+      note->setPitch(pitch, tpc);
+      note->setUserAccidental(userAccidental);
 
       pitch          = f_pitch;
       tpc            = f_tpc;
@@ -1826,14 +1823,12 @@ void ChangeBracketSpan::flip()
 
 void EditText::undo()
       {
-printf("EditText %p->%p::undo: undoLevel %d\n", text, text->doc(), undoLevel);
       for (int i = 0; i < undoLevel; ++i)
             text->doc()->undo();
       }
 
 void EditText::redo()
       {
-printf("EditText %p->%p::redo: undoLevel %d\n", text, text->doc(), undoLevel);
       for (int i = 0; i < undoLevel; ++i)
             text->doc()->redo();
       }
@@ -2073,7 +2068,7 @@ void ChangeStyle::flip()
       Style tmp = score->style();
 
       if (score->styleB(ST_concertPitch) != style[ST_concertPitch].toBool())
-            score->cmdConcertPitchChanged(style[ST_concertPitch].toBool());
+            score->cmdConcertPitchChanged(style[ST_concertPitch].toBool(), true);
 
       score->setStyle(style);
       style = tmp;
