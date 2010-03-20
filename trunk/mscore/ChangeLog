@@ -1,3 +1,5 @@
+20.mar (la)
+      - fix #5015 cursor doesn't respond to (Ctrl+)right/left keys in Entry mode.
 17.mar (ws)
       - update for overture import filter from Van Ferry:
             1. note stem direction sometimes wrong. (Fixed)

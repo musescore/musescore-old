@@ -2198,8 +2198,7 @@ void Score::processMidiInput()
                         else{
                               startCmd();
                               addPitch(ev.pitch, ev.chord);
-                    				  ScoreView* sv = mscore->currentScoreView();
-                    				  sv->moveCursor();
+                    				  mscore->currentScoreView()->moveCursor();
                               layoutAll = true;
                               endCmd();
                               }
@@ -2612,8 +2611,10 @@ Element* Score::move(const QString& cmd)
 
       Element* el = 0;
       if (cmd == "next-chord") {
-            if (noteEntryMode())
+            if (noteEntryMode()){
                   moveToNextInputPos();
+                  mscore->currentScoreView()->moveCursor();
+                  }
             el = nextChordRest(cr);
             }
       else if (cmd == "prev-chord") {
@@ -2639,13 +2640,26 @@ Element* Score::move(const QString& cmd)
                   if (s && !s->element(track))
                         s = m->firstCRSegment();
                   moveInputPos(s);
+                  mscore->currentScoreView()->moveCursor();
                   }
             el = prevChordRest(cr);
             }
-      else if (cmd == "next-measure")
+      else if (cmd == "next-measure"){
             el = nextMeasure(cr);
-      else if (cmd == "prev-measure")
+            if (noteEntryMode() && el && (el->type() == CHORD || el->type() == REST)){
+                ChordRest* crc = static_cast<ChordRest*>(el);
+                moveInputPos(crc->segment());
+                mscore->currentScoreView()->moveCursor();
+                }
+            }
+      else if (cmd == "prev-measure"){
             el = prevMeasure(cr);
+            if (noteEntryMode() && el && (el->type() == CHORD || el->type() == REST)){
+                ChordRest* crc = static_cast<ChordRest*>(el);
+                moveInputPos(crc->segment());
+                mscore->currentScoreView()->moveCursor();
+                }
+            }
       if (el) {
             if (el->type() == CHORD) {
                   el = static_cast<Chord*>(el)->upNote();
