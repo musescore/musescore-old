@@ -237,25 +237,37 @@ void PartEdit::muteChanged(bool val)
 void PartEdit::soloToggled(bool val)
       {
       channel->solo = val;
+      channel->soloMute = !val;
       if (val) {
             foreach(Part* part, *part->score()->parts()) {
                   for (int i = 0; i < part->channel().size(); ++i) {
                         Channel* a = &part->channel(i);
-                        a->soloMute = channel == a;
-                        a->solo     = channel != a;
+                        a->soloMute = (channel != a && !a->solo);
+                        a->solo     = (channel == a || a->solo);
                         }
                   }
             }
-      else {
+      else { //do nothing except if it's the last solo to be switched off
+            bool found = false;
             foreach(Part* part, *part->score()->parts()) {
                   for (int i = 0; i < part->channel().size(); ++i) {
                         Channel* a = &part->channel(i);
-                        a->soloMute = false;
-                        a->solo = false;
+                        if(a->solo){
+                            found = true;
+                            break;
+                            }
                         }
                   }
+            if(!found){
+                foreach(Part* part, *part->score()->parts()) {
+                  for (int i = 0; i < part->channel().size(); ++i) {
+                        Channel* a = &part->channel(i);
+                        a->soloMute = false;
+                        a->solo     = false;
+                        }
+                  }
+                }
             }
-      emit soloChanged();
       }
 
 //---------------------------------------------------------
