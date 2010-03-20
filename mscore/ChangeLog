@@ -1,5 +1,7 @@
 20.mar (la)
       - fix #5015 cursor doesn't respond to (Ctrl+)right/left keys in Entry mode.
+      - fix #5024 solo in mixer is not working
+      - fix #4102 ability to solo multiple instruments at once
 17.mar (ws)
       - update for overture import filter from Van Ferry:
             1. note stem direction sometimes wrong. (Fixed)
