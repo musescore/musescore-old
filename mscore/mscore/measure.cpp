@@ -1943,7 +1943,10 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                         // search barline:
                         for (int idx = track - VOICES; idx >= 0; idx -= VOICES) {
                               if (segment->element(idx)) {
+                                    int oDiff = xml.trackDiff;
+                                    xml.trackDiff = idx;          // staffIdx should be zero
                                     segment->element(idx)->write(xml);
+                                    xml.trackDiff = oDiff;
                                     break;
                                     }
                               }

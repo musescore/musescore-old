@@ -2474,6 +2474,7 @@ void ScoreView::cmd(const QAction* a)
             Element* el = _score->selectMove(cmd);
             if (el)
                   adjustCanvasPosition(el, false);
+            moveCursor();
             update();
             }
       else if (cmd == "next-chord"

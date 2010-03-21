@@ -157,8 +157,7 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       s->rebuildMidiMapping();
       s->updateChannel();
       s->fixPpitch();
-//      s->setLayoutAll(true);
-//      s->end();
+      s->doLayout();
       return s;
       }
 
