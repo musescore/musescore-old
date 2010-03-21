@@ -115,8 +115,7 @@ void InstrumentListEditor::updateAll(Score* score)
             }
       while (n > 0) {
             PartEdit* pe = new PartEdit;
-            connect(pe, SIGNAL(soloChanged()), SLOT(updateSolo()));
-            connect(this, SIGNAL(soloChanged()), pe, SLOT(updateSolo()));
+            connect(pe, SIGNAL(soloChanged(bool)), SLOT(updateSolo(bool)));
             vb->addWidget(pe);
             --n;
             }
@@ -239,6 +238,7 @@ void PartEdit::soloToggled(bool val)
       channel->solo = val;
       channel->soloMute = !val;
       if (val) {
+            mute->setChecked(false);
             foreach(Part* part, *part->score()->parts()) {
                   for (int i = 0; i < part->channel().size(); ++i) {
                         Channel* a = &part->channel(i);
@@ -246,6 +246,7 @@ void PartEdit::soloToggled(bool val)
                         a->solo     = (channel == a || a->solo);
                         }
                   }
+            emit soloChanged(true);
             }
       else { //do nothing except if it's the last solo to be switched off
             bool found = false;
@@ -266,6 +267,7 @@ void PartEdit::soloToggled(bool val)
                         a->solo     = false;
                         }
                   }
+                  emit soloChanged(false);
                 }
             }
       }
@@ -290,17 +292,12 @@ void PartEdit::drumsetToggled(bool val)
 //   updateSolo
 //---------------------------------------------------------
 
-void PartEdit::updateSolo()
+void InstrumentListEditor::updateSolo(bool val)
       {
-      solo->setChecked(channel->solo);
-      }
-
-//---------------------------------------------------------
-//   soloChanged
-//---------------------------------------------------------
-
-void InstrumentListEditor::updateSolo()
-      {
-      emit soloChanged();
+      for(int i = 0; i <vb->count(); i++ ){
+            QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(i));
+            PartEdit* pe    = (PartEdit*)(wi->widget());
+            pe->mute->setEnabled(!val);
+            }
       }
 
