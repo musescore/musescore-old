@@ -1,6 +1,8 @@
 21.mar (ws)
       - fix #4980: Normal bar line incompatibility
       - fix #4970: Part appears empty
+       (la)
+      - fix #5029: Solo and Mute checked at the same time  
 20.mar (la)
       - fix #5015 cursor doesn't respond to (Ctrl+)right/left keys in Entry mode.
       - fix #5024 solo in mixer is not working
