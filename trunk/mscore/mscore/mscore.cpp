@@ -1128,8 +1128,9 @@ void MuseScore::setCurrentView(int tabIdx, int idx)
       {
       if (idx == -1)
             setCurrentScoreView((ScoreView*)0);
-      else
+      else {
             (tabIdx ? tab2 : tab1)->setCurrentIndex(idx);
+            }
       }
 
 //---------------------------------------------------------
