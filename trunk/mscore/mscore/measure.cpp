@@ -140,6 +140,7 @@ Measure::Measure(Score* s)
       _endBarLineType = NORMAL_BAR;
       _mmEndBarLineType = NORMAL_BAR;
       _endBarLineGenerated = true;
+      _endBarLineVisible   = true;
       }
 
 //---------------------------------------------------------
