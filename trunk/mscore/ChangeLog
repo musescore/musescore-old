@@ -3,6 +3,8 @@
       - fix #4970: Part appears empty
        (la)
       - fix #5029: Solo and Mute checked at the same time  
+       (db)
+      - Notes > Transpose has chord names and key signatures marked by default
 20.mar (la)
       - fix #5015 cursor doesn't respond to (Ctrl+)right/left keys in Entry mode.
       - fix #5024 solo in mixer is not working
