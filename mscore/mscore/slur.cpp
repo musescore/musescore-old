@@ -99,10 +99,10 @@ void SlurSegment::draw(QPainter& p) const
             p.setBrush(curColor());
             }
       else {
+            p.setBrush(QBrush());
             QPen pen(p.pen());
             qreal lw = point(score()->styleS(ST_barWidth));
             pen.setWidthF(lw);
-            // pen.setStyle(Qt::DashLine);
             pen.setStyle(Qt::DotLine);
             p.setPen(pen);
             }

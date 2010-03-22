@@ -1,3 +1,5 @@
+22.mar (la)
+      - fix #5037: Dotted slurs corrupted in print and .pdf export
 21.mar (ws)
       - fix #4980: Normal bar line incompatibility
       - fix #4970: Part appears empty
