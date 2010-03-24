@@ -1,3 +1,5 @@
+24.mar (la)
+      - fix #4441: Create new key signature no longer works
 22.mar (la)
       - fix #5037: Dotted slurs corrupted in print and .pdf export
 21.mar (ws)

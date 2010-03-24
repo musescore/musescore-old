@@ -102,7 +102,7 @@ void KeySig::layout()
       double _spatium = spatium();
       _bbox           = QRectF(0, 0, 0, 0);
 
-      if (keySigEvent().custom) {
+      if (isCustom()) {
             foreach(KeySym* ks, keySymbols) {
                   ks->pos = ks->spos * _spatium;
                   _bbox |= symbols[ks->sym].bbox(magS()).translated(ks->pos);
