@@ -36,8 +36,6 @@ KeySigEvent::KeySigEvent()
 KeySigEvent::KeySigEvent(int v)
       {
       subtype = v;
-      invalid = false;
-      custom  = false;
       }
 
 //---------------------------------------------------------

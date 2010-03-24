@@ -1603,9 +1603,19 @@ printf("drop staffList\n");
                   break;
 
             case KEYSIG:
-                  staff->changeKeySig(tick(), static_cast<KeySig*>(e)->keySigEvent());
+                  {
+                  KeySig* ks    = static_cast<KeySig*>(e);
+                  KeySigEvent k = ks->keySigEvent();
+                  //add custom key to score if not exist
+                  if (k.custom) {
+                      int customIdx = score()->customKeySigIdx(ks);
+                      if (customIdx == -1)
+                          customIdx = score()->addCustomKeySig(ks);
+                      }
+                  staff->changeKeySig(tick(), k);
                   delete e;
                   break;
+                  }
 
             case TIMESIG:
                   score()->changeTimeSig(tick(), e->subtype());
