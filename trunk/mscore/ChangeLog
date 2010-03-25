@@ -1,6 +1,7 @@
 25.mar (la)
       - fix #5068: Custom key signature crashes on add measures
       - fix #5067: Wrong note values with some dotted notes when beamed
+      - fix arpeggios playback
 24.mar (la)
       - fix #4441: Create new key signature no longer works
 22.mar (la)
