@@ -174,6 +174,7 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
       foreach(Note* note, chord->notes()) {
             int channel = instr->channel(note->subchannel()).channel;
             collectNote(events, channel, note, tick + i * arpeggioOffset, len);
+            i++;
             }
       }
 
@@ -421,6 +422,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
 
                         int onTime = tick + i * arpeggioOffset;
                         collectNote(events, channel, note, onTime, noteLen);
+                        i++;
                         }
                   }
                   lv.clear();
