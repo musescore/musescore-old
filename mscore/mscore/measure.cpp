@@ -1611,9 +1611,12 @@ printf("drop staffList\n");
                       int customIdx = score()->customKeySigIdx(ks);
                       if (customIdx == -1)
                           customIdx = score()->addCustomKeySig(ks);
+                      else 
+                          delete ks;
                       }
+                  else
+                      delete ks;
                   staff->changeKeySig(tick(), k);
-                  delete e;
                   break;
                   }
 
