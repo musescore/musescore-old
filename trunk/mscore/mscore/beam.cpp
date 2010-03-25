@@ -702,7 +702,7 @@ void Beam::layout()
                   else
                         y1 = p1dy + beamDist * nn;
 
-                  if (chord->duration() > d) {
+                  if (chord->duration().type() < d.type()) {
                         if (nn2) {
                               // create short segment
                               BeamSegment* bs = new BeamSegment;
