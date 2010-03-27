@@ -85,6 +85,7 @@ class ScoreView : public QWidget {
 
       QStateMachine* sm;
       QState* states[STATES];
+      bool addSelect;
 
       QFocusFrame* focusFrame;
       int level;

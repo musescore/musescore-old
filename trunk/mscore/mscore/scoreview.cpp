@@ -359,10 +359,10 @@ class EditScoreViewDragTransition : public QMouseEventTransition
       };
 
 //---------------------------------------------------------
-//   ScoreViewSelectTransition
+//   SelectTransition
 //---------------------------------------------------------
 
-class ScoreViewSelectTransition : public QMouseEventTransition
+class SelectTransition : public QMouseEventTransition
       {
       ScoreView* canvas;
 
@@ -380,8 +380,34 @@ class ScoreViewSelectTransition : public QMouseEventTransition
             canvas->select(me);
             }
    public:
-      ScoreViewSelectTransition(ScoreView* c)
+      SelectTransition(ScoreView* c)
          : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   DeSelectTransition
+//---------------------------------------------------------
+
+class DeSelectTransition : public QMouseEventTransition
+      {
+      ScoreView* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QMouseEventTransition::eventTest(event))
+                  return false;
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            return canvas->mousePress(me);
+            }
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->select(me);
+            }
+   public:
+      DeSelectTransition(ScoreView* c)
+         : QMouseEventTransition(c, QEvent::MouseButtonRelease, Qt::LeftButton), canvas(c) {}
       };
 
 //---------------------------------------------------------
@@ -565,7 +591,9 @@ ScoreView::ScoreView(QWidget* parent)
       EditTransition* et = new EditTransition(this, states[EDIT]);            // ->edit
       connect(et, SIGNAL(triggered()), SLOT(startEdit()));
       s->addTransition(et);
-      s->addTransition(new ScoreViewSelectTransition(this));                  // select
+      s->addTransition(new SelectTransition(this));                           // select
+      connect(s, SIGNAL(entered()), mscore, SLOT(setNormalState()));
+      s->addTransition(new DeSelectTransition(this));                         // deselect
       connect(s, SIGNAL(entered()), mscore, SLOT(setNormalState()));
       s->addTransition(new ScoreViewDragTransition(this, states[DRAG]));      // ->stateDrag
       s->addTransition(new ScoreViewLassoTransition(this, states[LASSO]));    // ->stateLasso
@@ -2819,6 +2847,8 @@ void ScoreView::select(QMouseEvent* ev)
             System* dragSystem = (System*)(curElement->parent());
             dragStaff  = getStaff(dragSystem, startMove);
             }
+      if ((!curElement->selected() || addSelect) && (ev->type() == QEvent::MouseButtonRelease))
+            return;
       // As findSelectableElement may return a measure
       // when clicked "a little bit" above or below it, getStaff
       // may not find the staff and return -1, which would cause
@@ -2829,8 +2859,15 @@ void ScoreView::select(QMouseEvent* ev)
                   st = SELECT_SINGLE;
             else if (keyState & Qt::ShiftModifier)
                   st = SELECT_RANGE;
-            else if (keyState & Qt::ControlModifier)
+            else if (keyState & Qt::ControlModifier) {
+                  if (curElement->selected() && (ev->type() == QEvent::MouseButtonPress)) {
+                        // do not deselect on ButtonPress, only on ButtonRelease
+                        addSelect = false;
+                        return;
+                        }
+                  addSelect = true;
                   st = SELECT_ADD;
+                  }
             _score->select(curElement, st, dragStaff);
             if (mscore->playEnabled() && curElement && curElement->type() == NOTE) {
                   Note* note = static_cast<Note*>(curElement);
@@ -2847,6 +2884,7 @@ void ScoreView::select(QMouseEvent* ev)
 
 //---------------------------------------------------------
 //   mousePress
+//    return true if element is clicked
 //---------------------------------------------------------
 
 bool ScoreView::mousePress(QMouseEvent* ev)
