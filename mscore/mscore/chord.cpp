@@ -153,6 +153,37 @@ void Stem::toDefault()
       }
 
 //---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool Stem::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
+      {
+      if ((type == TREMOLO) && (subtype <= TREMOLO_3)) {
+            return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* Stem::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+      {
+      Chord* ch = chord();
+      switch(e->type()) {
+            case TREMOLO:
+                  e->setParent(ch);
+                  score()->setLayout(ch->measure());
+                  score()->undoAddElement(e);
+                  break;
+            default:
+                  break;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   StemSlash
 //---------------------------------------------------------
 
