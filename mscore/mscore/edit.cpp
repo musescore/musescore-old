@@ -245,8 +245,12 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
             else
                   f = measure->fraction();
 
+            for (Tuplet* t = tuplet; t; t = t->tuplet())
+                  f *= t->ratio();
+
             if (f > l)
                   f = l;
+
             if ((track % VOICES) && !measure->hasVoice(track)) {
                   l -= f;
                   measure = measure->nextMeasure();

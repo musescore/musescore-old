@@ -141,7 +141,7 @@ class Event {
       int _voice;
       QList<Event*> _notes;
 
-      unsigned char* _data;
+      unsigned char* _data;   // always zero terminated (_data[_len] = 0; )
       int _len;
       int _metaType;
 
