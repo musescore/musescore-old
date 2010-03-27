@@ -1,4 +1,5 @@
 27.mar (ws)
+      - fix #5095: Articulations move when new instrument inserted
       - fix #5096: Grace notes not erased on paste
       - fix #4902-2: Chordnames not transposed
       - fix #3748: Tuplet and Tie bug

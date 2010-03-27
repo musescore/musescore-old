@@ -908,7 +908,6 @@ void Chord::scanElements(void* data, void (*func)(void*, Element*))
 
 void Chord::setTrack(int val)
       {
-      Element::setTrack(val);
       if (_hook)
             _hook->setTrack(val);
       if (_stem)
@@ -927,6 +926,7 @@ void Chord::setTrack(int val)
 
       foreach(Note* n, _notes)
             n->setTrack(val);
+      ChordRest::setTrack(val);
       }
 
 //---------------------------------------------------------
