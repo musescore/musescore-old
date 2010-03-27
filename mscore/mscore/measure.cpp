@@ -1605,11 +1605,13 @@ printf("drop staffList\n");
                   KeySigEvent k = ks->keySigEvent();
                   //add custom key to score if not exist
                   if (k.custom) {
-                      int customIdx = score()->customKeySigIdx(ks);
-                      if (customIdx == -1)
-                          customIdx = score()->addCustomKeySig(ks);
-                      else
-                          delete ks;
+                        int customIdx = score()->customKeySigIdx(ks);
+                        if (customIdx == -1) {
+                              customIdx = score()->addCustomKeySig(ks);
+                              k.customType = customIdx;
+                              }
+                        else
+                              delete ks;
                       }
                   else
                       delete ks;
@@ -2208,8 +2210,8 @@ void Measure::read(QDomElement e, int idx)
                   ks->setTrack(score()->curTrack);
                   ks->setTick(score()->curTick);
                   ks->read(e);
-                  char newSig = ks->subtype() & 0xff;
-                  ks->setSig(0, newSig);
+//??                  char newSig = ks->subtype() & 0xff;
+//                  ks->setSig(0, newSig);
                   Segment* s = getSegment(ks);
                   s->add(ks);
                   score()->curTick = ks->tick();

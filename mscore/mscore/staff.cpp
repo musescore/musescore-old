@@ -277,8 +277,10 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
       {
 printf("Staff::changeKeySig "); st.print(); printf("\n");
       KeySigEvent ot = _keymap->key(tick);
-      if (ot == st)
+      if (ot == st) {
+printf("Staff::changeKeySig: no change\n");
             return;                 // no change
+            }
 
       iKeyList ki     = _keymap->find(tick);
       KeySigEvent oval = ki != _keymap->end() ? ki->second : KeySigEvent();
@@ -328,7 +330,7 @@ printf("Staff::changeKeySig "); st.print(); printf("\n");
             KeySig* keysig = new KeySig(_score);
             keysig->setTrack(idx() * VOICES);
             keysig->setTick(tick);
-            keysig->setSig(0, st.accidentalType);
+            keysig->changeType(st);
 
             SegmentType stype = Segment::segmentType(KEYSIG);
             Segment* s = measure->findSegment(stype, tick);
