@@ -572,6 +572,12 @@ int transposeTpc(int tpc, int steps, int semitones, TransposeDirection dir)
             steps     = -steps;
             semitones = -semitones;
             }
+      while (steps < 0)
+            steps += 7;
+      while (semitones < 0)
+            semitones += 12;
+
+      printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
 
       int step, alter;
       int pitch = tpc2pitch(tpc);
@@ -580,10 +586,9 @@ int transposeTpc(int tpc, int steps, int semitones, TransposeDirection dir)
             step       = tpc2step(tpc) + steps;
             while (step < 0)
                   step += 7;
-            while (step >= 7)
-                  step -= 7;
-            int p1     = tpc2pitch(step2tpc(step, 0));
-            alter      = semitones - (p1 - pitch);
+            step   %= 7;
+            int p1 = tpc2pitch(step2tpc(step, 0));
+            alter  = semitones - (p1 - pitch);
             if (alter > 2)
                   steps -= 1;
             else if (alter < -2)
