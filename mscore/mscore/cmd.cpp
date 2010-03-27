@@ -677,7 +677,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
 
       Segment* seg = 0;
       Measure* measure = 0;
-      while (true) {
+      for (;;) {
             // the returned gap ends at the measure boundary or at tuplet end
             Fraction dd = makeGap(cr, sd, cr->tuplet());
 
@@ -743,14 +743,22 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
             if (sd.isZero())
                   break;
 
-            measure = measure->nextMeasure();
-            if (measure == 0) {
+            seg = tick2segment(tick);
+            if (seg == 0) {
                   printf("reached end of score\n");
                   break;
                   }
-            tick = measure->tick();
-            seg  = measure->firstCRSegment();
+
+
+//            measure = measure->nextMeasure();
+//            if (measure == 0) {
+//                  printf("reached end of score\n");
+//                  break;
+//                  }
+//            tick = measure->tick();
+//            seg  = measure->firstCRSegment();
             cr   = static_cast<ChordRest*>(seg->element(track));
+
             if (cr == 0) {
                   if (track % VOICES)
                         cr = addRest(seg, track, Duration(Duration::V_MEASURE), 0);
