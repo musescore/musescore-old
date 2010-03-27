@@ -106,6 +106,7 @@ class Selection {
       void setStaffStart(int v)         { _staffStart = v;  }
       void setStaffEnd(int v)           { _staffEnd = v;    }
       void setActiveTrack(int v)        { _activeTrack = v; }
+      bool canCopy() const;
       };
 
 //---------------------------------------------------------
