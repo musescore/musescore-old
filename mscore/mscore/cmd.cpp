@@ -804,6 +804,14 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
       Fraction sd = _sd;
 
       for (Segment* seg = cr->segment(); seg; seg = seg->next()) {
+            if (seg->subtype() == SegGrace) {
+                  if (seg->element(track)) {
+                        undoRemoveElement(seg->element(track));
+                        if (seg->isEmpty())
+                              undoRemoveElement(seg);
+                        }
+                  continue;
+                  }
             if (!seg->isChordRest())
                   continue;
             if (!seg->element(track))
