@@ -1021,3 +1021,44 @@ void Score::selectElementDialog(Element* e)
             }
       }
 
+//---------------------------------------------------------
+//   isInMiddleOfTuplet
+//---------------------------------------------------------
+
+static bool isInMiddleOfTuplet(Element* e)
+      {
+      if (e == 0 || !e->isChordRest())
+            return false;
+      ChordRest* cr = static_cast<ChordRest*>(e);
+      if (!cr->tuplet())
+            return false;
+      Tuplet* tuplet = cr->tuplet();
+      while (tuplet) {
+            if (tuplet->elements().front() == e)
+                  return false;
+            if (tuplet->elements().back() == e)
+                  return false;
+            tuplet = tuplet->tuplet();
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   canCopy
+//    return false if range selection intersects a tuplet
+//---------------------------------------------------------
+
+bool Selection::canCopy() const
+      {
+      if (_state != SEL_RANGE)
+            return true;
+
+      for (int staffIdx = _staffStart; staffIdx != _staffEnd; ++staffIdx) {
+            if (isInMiddleOfTuplet(_startSegment->element(staffIdx)))
+                  return false;
+            if (_endSegment && isInMiddleOfTuplet(_endSegment->element(staffIdx)))
+                  return false;
+            }
+      return true;
+      }
+

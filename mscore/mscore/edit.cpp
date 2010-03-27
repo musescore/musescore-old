@@ -214,6 +214,7 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       newcr->setDuration(d);
       newcr->setTuplet(cr->tuplet());
       newcr->setTick(tick);
+      newcr->setSelected(false);
 
       Segment* seg = cr->measure()->findSegment(SegChordRest, tick);
       if (seg == 0) {

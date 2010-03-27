@@ -2323,6 +2323,10 @@ void ScoreView::editCopy()
 
 void ScoreView::normalCopy()
       {
+      if (!_score->selection().canCopy()) {
+            printf("cannot copy selection: intersects a tuplet\n");
+            return;
+            }
       QString mimeType = _score->selection().mimeType();
       if (!mimeType.isEmpty()) {
             QMimeData* mimeData = new QMimeData;
@@ -2339,6 +2343,10 @@ void ScoreView::normalCopy()
 
 void ScoreView::normalCut()
       {
+      if (!_score->selection().canCopy()) {
+            printf("cannot copy selection: intersects a tuplet\n");
+            return;
+            }
       _score->startCmd();
       normalCopy();
       _score->cmdDeleteSelection();
