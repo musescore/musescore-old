@@ -429,13 +429,10 @@ int Measure::findAccidental(Note* note) const
                         else
                               line -= (tpcPitch/12)*7;
 
-                        int accidental = 0;
-                        if (note1->userAccidental())
-                              // cannot be note
-                              accidental = note1->userAccidental();
-                        else  {
+//                        if (note1->userAccidental())
+//                              ;
+//                        else  {
                               int accVal = ((tpc + 1) / 7) - 2;
-                              accidental = ACC_NONE;
                               if (accVal != tversatz[line]) {
                                     if (note == note1) {
                                           switch(accVal) {
@@ -455,7 +452,7 @@ int Measure::findAccidental(Note* note) const
                                     if (note == note1)
                                           return 0;
                                     }
-                              }
+//                              }
                         }
                   }
             }
