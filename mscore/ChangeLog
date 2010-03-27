@@ -1,4 +1,5 @@
 27.mar (ws)
+      - fix #5081: Ctrl+drag should not deselect
       - fix #5091: Parethesized accidentals not played back
       - fix #5100: Multi-measure rest display issue for non-full-measure
       - fix #5092: Tremolos can't be dragged to note-stem
