@@ -1,4 +1,5 @@
 27.mar (ws)
+      - fix #5100: Multi-measure rest display issue for non-full-measure
       - fix #5092: Tremolos can't be dragged to note-stem
       - fix #5095: Articulations move when new instrument inserted
       - fix #5096: Grace notes not erased on paste
