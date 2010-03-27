@@ -121,6 +121,7 @@ class ChordRest : public DurationElement {
 
       virtual Fraction fraction() const;
       virtual void setFraction(const Fraction&);
+      virtual void setTrack(int val);
       };
 
 #endif

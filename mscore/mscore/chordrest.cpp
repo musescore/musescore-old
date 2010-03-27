@@ -676,3 +676,15 @@ void ChordRest::setDuration(const Duration& v)
       _duration = v;
       _ticks = -1;
       }
+
+//---------------------------------------------------------
+//   setTrack
+//---------------------------------------------------------
+
+void ChordRest::setTrack(int val)
+      {
+      foreach(Articulation* a, articulations)
+            a->setTrack(val);
+      Element::setTrack(val);
+      }
+
