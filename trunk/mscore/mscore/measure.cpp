@@ -1611,7 +1611,7 @@ printf("drop staffList\n");
                       int customIdx = score()->customKeySigIdx(ks);
                       if (customIdx == -1)
                           customIdx = score()->addCustomKeySig(ks);
-                      else 
+                      else
                           delete ks;
                       }
                   else
@@ -3152,30 +3152,28 @@ void Measure::layoutX(double stretch)
                   ElementType t = e->type();
                   if (t == REST) {
                         Rest* rest = static_cast<Rest*>(e);
-                        if (rest->duration() == Duration::V_MEASURE) {
-                              if (_multiMeasure > 0) {
-                                    if ((track % VOICES) == 0) {
-                                          Segment* ls = last();
-                                          double eblw = 0.0;
-                                          int t = (track / VOICES) * VOICES;
-                                          if (ls->subtype() == SegEndBarLine) {
-                                                Element* e = ls->element(t);
-                                                if (!e)
-                                                      e = ls->element(0);
-                                                eblw = e ? e->width() : 0.0;
-                                                }
-                                          if (seg == 1)
-                                                rest->setMMWidth(xpos[segs] - 2 * s->x() - eblw);
-                                          else
-                                                rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) - eblw);
-                                          e->rxpos() = 0.0;
+                        if (_multiMeasure > 0) {
+                              if ((track % VOICES) == 0) {
+                                    Segment* ls = last();
+                                    double eblw = 0.0;
+                                    int t = (track / VOICES) * VOICES;
+                                    if (ls->subtype() == SegEndBarLine) {
+                                          Element* e = ls->element(t);
+                                          if (!e)
+                                                e = ls->element(0);
+                                          eblw = e ? e->width() : 0.0;
                                           }
+                                    if (seg == 1)
+                                          rest->setMMWidth(xpos[segs] - 2 * s->x() - eblw);
+                                    else
+                                          rest->setMMWidth(xpos[segs] - s->x() - point(score()->styleS(ST_barNoteDistance)) - eblw);
+                                    e->rxpos() = 0.0;
                                     }
-                              else {
-                                    double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
-                                    double w  = xpos[segs-1] - x1;
-                                    e->rxpos() = (w - e->width()) * .5 + x1 - s->x();
-                                    }
+                              }
+                        else if (rest->duration() == Duration::V_MEASURE) {
+                              double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
+                              double w  = xpos[segs-1] - x1;
+                              e->rxpos() = (w - e->width()) * .5 + x1 - s->x();
                               }
                         }
                   else if (t == REPEAT_MEASURE) {
