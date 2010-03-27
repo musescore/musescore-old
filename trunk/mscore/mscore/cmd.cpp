@@ -2175,7 +2175,7 @@ void Score::processMidiInput()
           printf("processMidiInput\n");
       if (midiInputQueue.isEmpty())
             return;
-      
+
       while (!midiInputQueue.isEmpty()) {
                 MidiInputEvent ev = midiInputQueue.dequeue();
                 if (debugMode)
@@ -2185,12 +2185,12 @@ void Score::processMidiInput()
                 else{
                     if (!noteEntryMode()){
                         int staffIdx = selection().staffStart();
-                        Part* p; 
+                        Part* p;
                         if (staffIdx < 0 || staffIdx >= nstaves()){
                               p = part(0);
-                              } 
+                              }
                         else{
-                              p = staff(staffIdx)->part(); 
+                              p = staff(staffIdx)->part();
                               }
                         if(p)
                               seq->startNote(p->channel(0), ev.pitch, 80, preferences.defaultPlayDuration, 0.0);

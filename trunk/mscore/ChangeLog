@@ -1,3 +1,5 @@
+27.mar (ws)
+      - fix #4977: Tuplet corruption
 25.mar (la)
       - fix #5068: Custom key signature crashes on add measures
       - fix #5067: Wrong note values with some dotted notes when beamed
@@ -10,7 +12,7 @@
       - fix #4980: Normal bar line incompatibility
       - fix #4970: Part appears empty
        (la)
-      - fix #5029: Solo and Mute checked at the same time  
+      - fix #5029: Solo and Mute checked at the same time
        (db)
       - Notes > Transpose has chord names and key signatures marked by default
 20.mar (la)

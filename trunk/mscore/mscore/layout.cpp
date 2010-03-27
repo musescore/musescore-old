@@ -184,7 +184,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
       int startIdx, endIdx, incIdx;
 
-      if (notes[0]->chord()->up()) {
+      if (notes[0]->chord()->up() || (voices > 1)) {
             startIdx = 0;
             incIdx   = 1;
             endIdx   = notes.size();
