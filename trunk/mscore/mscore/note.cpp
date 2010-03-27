@@ -1223,14 +1223,9 @@ void Note::layout1(char* tversatz)
             if ((accVal != tversatz[_line]) || hidden()) {
                   if (_tieBack == 0)
                         tversatz[_line] = accVal;
-                  switch(accVal) {
-                        case -2: acci = ACC_FLAT2;   break;
-                        case -1: acci = ACC_FLAT;    break;
-                        case  1: acci = ACC_SHARP;   break;
-                        case  2: acci = ACC_SHARP2;  break;
-                        case  0: acci = ACC_NATURAL; break;
-                        default: printf("bad accidental\n"); break;
-                        }
+                  acci = Accidental::value2subtype(accVal);
+                  if (acci == ACC_NONE)
+                        acci = ACC_NATURAL;
                   }
             }
       if (acci != ACC_NONE && !_tieBack && !_hidden) {
