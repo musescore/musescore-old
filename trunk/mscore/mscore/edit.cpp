@@ -240,13 +240,21 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
             // divide into measures
             //
             Fraction f;
-            if (measure->tick() < tick)
+            if (tuplet) {
+                  int ticks = (tuplet->tick() + tuplet->ticks()) - tick;
+                  f = Fraction::fromTicks(ticks);
+                  for (Tuplet* t = tuplet; t; t = t->tuplet())
+                        f *= t->ratio();
+                  //
+                  // restrict to tuplet len
+                  //
+                  if (f < l)
+                        l = f;
+                  }
+            else if (measure->tick() < tick)
                   f = sigmap()->measureRest(tick);
             else
                   f = measure->fraction();
-
-            for (Tuplet* t = tuplet; t; t = t->tuplet())
-                  f *= t->ratio();
 
             if (f > l)
                   f = l;
@@ -266,6 +274,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                && (measure->fraction() == f)
                && (f < Duration(Duration::V_BREVE).fraction())) {
                   Rest* rest = addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
+                  tick += rest->ticks();
                   if (r == 0)
                         r = rest;
                   }

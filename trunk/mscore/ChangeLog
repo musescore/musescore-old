@@ -1,4 +1,5 @@
 27.mar (ws)
+      - fix #3748: Tuplet and Tie bug
       - fix #4977: Tuplet corruption
 25.mar (la)
       - fix #5068: Custom key signature crashes on add measures
