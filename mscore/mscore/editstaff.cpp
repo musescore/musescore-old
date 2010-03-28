@@ -49,8 +49,8 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       useDrumset->setChecked(instrument.useDrumset());
       editDrumset->setEnabled(instrument.useDrumset());
 
-      int diatonic  = instrument.transposeDiatonic();
-      int chromatic = instrument.transposeChromatic();
+      int diatonic  = instrument.transpose().diatonic;
+      int chromatic = instrument.transpose().chromatic;
 
       int oct = chromatic / 12;
       if (oct < 0)
@@ -127,16 +127,16 @@ void EditStaff::apply()
       Part* part    = staff->part();
 
       instrument.setUseDrumset(useDrumset->isChecked());
-      int interval  = iList->currentIndex();
-      bool upFlag   = up->isChecked();
+      int intervalIdx = iList->currentIndex();
+      bool upFlag     = up->isChecked();
 
-      instrument.setTransposeDiatonic(intervalList[interval].steps + octave->value() * 7);
-      instrument.setTransposeChromatic(intervalList[interval].semitones + octave->value() * 12);
+      Interval interval = intervalList[intervalIdx];
+      interval.diatonic += octave->value() * 7;
+      interval.chromatic += octave->value() * 12;
 
-      if (!upFlag) {
-            instrument.setTransposeDiatonic(-instrument.transposeDiatonic());
-            instrument.setTransposeChromatic(-instrument.transposeChromatic());
-            }
+      if (!upFlag)
+            interval.flip();
+      instrument.setTranspose(interval);
 
       const QTextDocument* ln = longName->document();
       const QTextDocument* sn = shortName->document();
@@ -196,8 +196,8 @@ void EditStaff::showInstrumentDialog()
             shortName->setHtml(t->shortName);
             longName->setHtml(t->longName);
             instrument.setTrackName(t->trackName);
-            int diatonic  = t->transposeDiatonic;
-            int chromatic = t->transposeChromatic;
+            int diatonic  = t->transpose.diatonic;
+            int chromatic = t->transpose.chromatic;
 
             bool upFlag = true;
             if (chromatic < 0 || diatonic < 0) {

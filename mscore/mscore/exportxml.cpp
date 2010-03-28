@@ -3512,10 +3512,10 @@ foreach(Element* el, *(score->gel())) {
                             xml.etag();
                           }
                         }
-                        if (part->transposeDiatonic() || part->transposeChromatic()) {
+                        if (part->transpose().chromatic) {
                           xml.stag("transpose");
-                          xml.tag("diatonic", part->transposeDiatonic());
-                          xml.tag("chromatic", part->transposeChromatic());
+                          xml.tag("diatonic",  part->transpose().diatonic);
+                          xml.tag("chromatic", part->transpose().chromatic);
                           xml.etag();
                         }
                       }
