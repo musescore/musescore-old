@@ -1,3 +1,6 @@
+28.mar (ws)
+      - fix #5104: Transpose chordnames hang
+      - cleanup of transpose implementation; more testing is needed;
 27.mar (ws)
       - fix #5077: Custom key signature only works for first measure
       - fix #5081: Ctrl+drag should not deselect

@@ -67,7 +67,7 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
 
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter, 
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration,
@@ -76,7 +76,7 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      
+
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
@@ -382,7 +382,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                                  return qScriptValueFromValue(context->engine(), s);
                                  }
                             result = key.accidentalType;
-                            int tr =  st->part()->transposeChromatic();
+                            int tr =  st->part()->transpose().chromatic;
                             if (tr){
                                 result = transposeKey(key.accidentalType, tr);
                                 }
@@ -393,7 +393,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 20:   //duration
                   if (argc == 0){
                     RepeatSegment* rs = score->repeatList()->last();
-                    long duration = lrint(score->utick2utime(rs->utick + rs->len));             
+                    long duration = lrint(score->utick2utime(rs->utick + rs->len));
                     return qScriptValueFromValue(context->engine(), duration);
                   }
                   break;

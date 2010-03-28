@@ -38,6 +38,7 @@
 #include "al/al.h"
 #include "scoreview.h"
 #include "key.h"
+#include "interval.h"
 
 namespace AL {
       class TempoMap;
@@ -350,8 +351,7 @@ class Score : public QObject {
       void layoutStage1();
       void layoutStage2();
       void layoutStage3();
-      void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd,
-         int key, int semitones);
+      void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int semitones);
       void reLayout(Measure*);
 
    signals:
@@ -393,10 +393,7 @@ class Score : public QObject {
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
       void transpose();
-      void transposeBySemitones(Note* n, int diff);
-      void transposeByKey(int oKey, int keysig, TransposeDirection dir, bool useSharpsFlats,
-         int*, int*);
-      void transposeByInterval(Note* n, int diatonic, int chromatic, bool useSharpsFlats);
+      void transpose(Note* n, Interval, bool useSharpsFlats);
 
       Score(const Style&);
       ~Score();
@@ -676,7 +673,7 @@ class Score : public QObject {
       QList<MidiMapping>* midiMapping()       { return &_midiMapping; }
       void rebuildMidiMapping();
       void updateChannel();
-      void cmdTransposeStaff(int staffIdx, int diatonic, int chromatic, bool useDoubleSharpsFlats);
+      void cmdTransposeStaff(int staffIdx, Interval, bool useDoubleSharpsFlats);
       void cmdConcertPitchChanged(bool, bool useSharpsFlats);
       AL::TempoMap* tempomap() const { return _tempomap; }
 

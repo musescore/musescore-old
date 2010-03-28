@@ -216,7 +216,7 @@ void Note::setPitch(int val)
       if (score()) {
             Part* part = score()->part(staffIdx());
             if (part)
-                  pitchOffset = score()->styleB(ST_concertPitch) ? 0 : part->transposeChromatic();
+                  pitchOffset = score()->styleB(ST_concertPitch) ? 0 : part->transpose().chromatic;
             }
       _ppitch = _pitch + pitchOffset;
       if (chord())
@@ -543,11 +543,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
 
       if (xml.clipboardmode && !score()->styleB(ST_concertPitch)) {
             Part* part = staff()->part();
-            if (part->transposeChromatic()) {
-                  transposeInterval(pitch(), tpc(), &rpitch, &rtpc,
-                     part->transposeDiatonic(),
-                     part->transposeChromatic(), true);
-                  }
+            if (part->transpose().chromatic)
+                  transposeInterval(pitch(), tpc(), &rpitch, &rtpc, part->transpose(), true);
             }
 
       xml.tag("pitch", rpitch);

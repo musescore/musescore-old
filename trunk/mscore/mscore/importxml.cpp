@@ -2002,17 +2002,19 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             }
             else if (e.tagName() == "instruments")
                   domNotImplemented(e);
-            else if (e.tagName() == "transpose")
+            else if (e.tagName() == "transpose") {
+                  Interval interval;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        Part* part = score->part(staff);
                         int i = ee.text().toInt();
                         if (ee.tagName() == "diatonic")
-                              part->setTransposeDiatonic(i);
+                              interval.diatonic = i;
                         else if (ee.tagName() == "chromatic")
-                              part->setTransposeChromatic(i);
+                              interval.chromatic = i;
                         else
                               domError(ee);
                         }
+                  score->part(staff)->setTranspose(interval);
+                  }
             else if (e.tagName() == "measure-style")
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "multiple-rest") {
