@@ -782,7 +782,10 @@ void PreferenceDialog::portaudioApiActivated(int)  {}
 
 bool ShortcutItem::operator<(const QTreeWidgetItem& item) const
       {
-      return QString::localeAwareCompare(text(0).toLower(), item.text(0).toLower()) < 0;
+      
+      const QTreeWidget * pTree =treeWidget ();
+      int column   = pTree ? pTree->sortColumn() : 0;
+      return QString::localeAwareCompare(text(column).toLower(), item.text(column).toLower()) < 0;
       }
 
 //---------------------------------------------------------
