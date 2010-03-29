@@ -56,7 +56,7 @@ extern void selectStavesMessage();
 extern QString pitch2string(int v);
 extern void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc,
    Interval, bool useDoubleSharpsFlats);
-extern int transposeTpc(int tpc, Interval interval);
+extern int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats);
 
 extern Interval intervalList[26];
 extern int searchInterval(int steps, int semitones);

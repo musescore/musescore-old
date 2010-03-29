@@ -113,6 +113,17 @@ TransposeMode TransposeDialog::mode() const
       }
 
 //---------------------------------------------------------
+//   enableTransposeByKey
+//---------------------------------------------------------
+
+void TransposeDialog::enableTransposeByKey(bool val)
+      {
+      transposeByKey->setEnabled(val);
+      transposeByInterval->setChecked(!val);
+      transposeByKey->setChecked(val);
+      }
+
+//---------------------------------------------------------
 //   direction
 //---------------------------------------------------------
 
@@ -158,11 +169,16 @@ void Score::transpose()
             _selection.setStaffStart(0);
             _selection.setStaffEnd(nstaves());
             }
+      bool rangeSelection = _selection.state() == SEL_RANGE;
       TransposeDialog td;
-      td.enableTransposeKeys(_selection.state() == SEL_RANGE);
+
+      // TRANSPOSE_BY_KEY and "transpose keys" is only possible if selection state is SEL_RANGE
+      td.enableTransposeKeys(rangeSelection);
+      td.enableTransposeByKey(rangeSelection);
+
       int startStaffIdx = 0;
-      int startTick = 0;
-      if (selection().state() == SEL_RANGE) {
+      int startTick     = 0;
+      if (rangeSelection) {
             startStaffIdx = selection().staffStart();
             startTick     = selection().tickStart();
             }
@@ -175,8 +191,8 @@ void Score::transpose()
       Interval interval;
       if (td.mode() == TRANSPOSE_BY_KEY) {
             // calculate interval from "transpose by key"
-            km       = staff(_selection.staffStart())->keymap();
-            int oKey = km->key(_selection.startSegment()->tick()).accidentalType;
+            km       = staff(startStaffIdx)->keymap();
+            int oKey = km->key(startTick).accidentalType;
             interval = keydiff2Interval(oKey, td.transposeKey(), td.direction());
             }
       else {
@@ -188,7 +204,7 @@ void Score::transpose()
       bool trKeys               = td.getTransposeKeys();
       bool transposeChordNames  = td.getTransposeChordNames();
 
-      if (_selection.state() != SEL_RANGE)
+      if (!rangeSelection)
             trKeys = false;
       bool fullOctave = (interval.chromatic % 12) == 0;
       if (fullOctave && (td.mode() != TRANSPOSE_BY_KEY)) {
@@ -199,10 +215,21 @@ void Score::transpose()
       bool useDoubleSharpsFlats = td.useDoubleSharpsFlats();
       if (_selection.state() == SEL_LIST) {
             foreach(Element* e, _selection.elements()) {
-                  if (e->type() != NOTE)
-                        continue;
-                  Note* n = static_cast<Note*>(e);
-                  transpose(n, interval, useDoubleSharpsFlats);
+                  if (e->type() == NOTE)
+                        transpose(static_cast<Note*>(e), interval, useDoubleSharpsFlats);
+                  else if ((e->type() == HARMONY) && transposeChordNames) {
+                        Harmony* h  = static_cast<Harmony*>(e);
+                        int rootTpc = transposeTpc(h->rootTpc(), interval, false);
+                        int baseTpc = transposeTpc(h->baseTpc(), interval, false);
+                        undoTransposeHarmony(h, rootTpc, baseTpc);
+                        }
+                  else if ((e->type() == KEYSIG) && trKeys) {
+                        KeySig* ks = static_cast<KeySig*>(e);
+                        KeySigEvent key  = km->key(ks->tick());
+                        KeySigEvent okey = km->key(ks->tick() - 1);
+                        key.naturalType  = okey.accidentalType;
+                        _undo->push(new ChangeKeySig(ks, key));
+                        }
                   }
             return;
             }
@@ -241,8 +268,8 @@ void Score::transpose()
                         if (e->tick() >= etick)
                               break;
                         Harmony* h  = static_cast<Harmony*>(e);
-                        int rootTpc = transposeTpc(h->rootTpc(), interval);
-                        int baseTpc = transposeTpc(h->baseTpc(), interval);
+                        int rootTpc = transposeTpc(h->rootTpc(), interval, false);
+                        int baseTpc = transposeTpc(h->baseTpc(), interval, false);
                         undoTransposeHarmony(h, rootTpc, baseTpc);
                         }
                   if (m == em)

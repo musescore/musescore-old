@@ -38,6 +38,7 @@ class TransposeDialog : public QDialog, Ui::TransposeDialogBase {
    public:
       TransposeDialog(QWidget* parent = 0);
       void enableTransposeKeys(bool val)  { transposeKeys->setEnabled(val);       }
+      void enableTransposeByKey(bool val);
       bool getTransposeKeys() const       { return transposeKeys->isChecked();    }
       bool getTransposeChordNames() const { return transposeChordNames->isChecked(); }
       int transposeKey() const            { return keyList->currentIndex() - 7;      }

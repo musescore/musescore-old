@@ -522,6 +522,17 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, Interval inte
       *rpitch   = pitch + interval.chromatic;
       int steps = interval.diatonic;
 
+      int minAlter;
+      int maxAlter;
+      if (useDoubleSharpsFlats) {
+            minAlter = -2;
+            maxAlter = 2;
+            }
+      else {
+            minAlter = -1;
+            maxAlter = 1;
+            }
+
       int step, alter;
       for (;;) {
             int octave = (pitch / 12);
@@ -538,18 +549,10 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, Interval inte
 
             int p1     = tpc2pitch(step2tpc(step, 0)) + octave * 12;
             alter      = interval.chromatic - (p1 - pitch);
-
-            int minAlter;
-            int maxAlter;
-            if (useDoubleSharpsFlats) {
-                  minAlter = -2;
-                  maxAlter = 2;
-                  }
-            else {
-                  minAlter = -1;
-                  maxAlter = 1;
-                  }
-
+            if (alter < 0)
+                  alter = -((-alter) % 12);
+            else
+                  alter %= 12;
             if (alter > maxAlter)
                   ++steps;
             else if (alter < minAlter)
@@ -564,39 +567,53 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, Interval inte
 //   transposeTpc
 //---------------------------------------------------------
 
-int transposeTpc(int tpc, Interval interval)
+int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
       {
       if (tpc == INVALID_TPC) // perfect unison & perfect octave
             return tpc;
 
+      int minAlter;
+      int maxAlter;
+      if (useDoubleSharpsFlats) {
+            minAlter = -2;
+            maxAlter = 2;
+            }
+      else {
+            minAlter = -1;
+            maxAlter = 1;
+            }
       int steps     = interval.diatonic;
       int semitones = interval.chromatic;
 
-      while (steps < 0)
-            steps += 7;
-      while (semitones < 0)
-            semitones += 12;
 printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
       if (semitones == 0)
-            return step2tpc(0, 0);
+            return tpc;
 
       int step, alter;
       int pitch = tpc2pitch(tpc);
 
-      for (;;) {
+      for (int k = 0; k < 10; ++k) {
             step = tpc2step(tpc) + steps;
             while (step < 0)
                   step += 7;
             step   %= 7;
             int p1 = tpc2pitch(step2tpc(step, 0));
             alter  = semitones - (p1 - pitch);
-            if (alter > 2)
-                  steps -= 1;
-            else if (alter < -2)
-                  steps += 1;
+            // alter  = p1 + semitones - pitch;
+printf("alter %d, p1 %d semitones %d pitch %d\n", alter, p1, semitones, pitch);
+            if (alter < 0)
+                  alter = -((-alter) % 12);
+            else
+                  alter %= 12;
+            if (alter > maxAlter)
+                  ++steps;
+            else if (alter < minAlter)
+                  --steps;
             else
                   break;
+            printf("  again alter %d steps %d, step %d\n", alter, steps, step);
             }
+      printf("  = step %d alter %d  tpc %d\n", step, alter, step2tpc(step, alter));
       return step2tpc(step, alter);
       }
 
