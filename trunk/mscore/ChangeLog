@@ -1,4 +1,6 @@
-29.mar (la)
+29.mar (ws)
+      - more transpose code debugging, fixing #5007, #5111, #5104, #5115
+      (la)
       - fix shortcuts sorting in preferences
       - fix: shortcuts not saved & Enable changing default Qt shortcuts
 28.mar (ws)

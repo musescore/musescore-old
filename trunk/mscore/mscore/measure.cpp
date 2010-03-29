@@ -1614,7 +1614,7 @@ printf("drop staffList\n");
                               delete ks;
                       }
                   else
-                      delete ks;
+                        delete ks;
                   staff->changeKeySig(tick(), k);
                   break;
                   }

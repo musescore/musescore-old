@@ -168,7 +168,7 @@ bool Stem::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
 //   drop
 //---------------------------------------------------------
 
-Element* Stem::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+Element* Stem::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       Chord* ch = chord();
       switch(e->type()) {
