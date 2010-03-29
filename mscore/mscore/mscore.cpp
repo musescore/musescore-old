@@ -1821,7 +1821,7 @@ int main(int argc, char* av[])
 
       //read languages list
       mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
-
+      initShortcuts();
       if (!useFactorySettings)
             preferences.read();
       else {
@@ -1916,7 +1916,7 @@ int main(int argc, char* av[])
 
       initSymbols();
       genIcons();
-      initShortcuts();
+
       if (!converterMode) {
             qApp->setWindowIcon(*icons[window_ICON]);
             }
