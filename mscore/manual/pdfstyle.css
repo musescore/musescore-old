@@ -140,4 +140,5 @@ del, del a, del a:link, del a:visited {color:grey; text-decoration:line-through}
 .v0-9-2 {display:none}
 .v0-9-3 {display:none}
 .v0-9-4 {display:none}
-.v0-9-5.label, .latest .label {display:none}
+.v0-9-5 {display:none}
+.v0-9-6.label, .latest .label {display:none}

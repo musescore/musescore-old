@@ -1,5 +1,9 @@
 30.mar (ws)
       - fix #5123: Infinite loop on first measure repeat
+      (db)
+      - add Greek handbook (most intra-document links don't work)
+      - fix English handbook, and update the rest
+      - update Brasilian Portuguese instrument list
 29.mar (ws)
       - more transpose code debugging, fixing #5007, #5111, #5104, #5115
       (la)
