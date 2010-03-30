@@ -1,3 +1,5 @@
+30.mar (ws)
+      - fix #5123: Infinite loop on first measure repeat
 29.mar (ws)
       - more transpose code debugging, fixing #5007, #5111, #5104, #5115
       (la)
