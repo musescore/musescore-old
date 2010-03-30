@@ -216,7 +216,8 @@ void RepeatList::unwind()
             //  check for repeat start
             //
             if ((flags & RepeatStart) && (rstack.isEmpty() || rstack.top().m != m)) {
-                  printf("startRepeat\n");
+// printf("startRepeat stack empty %d --- %p != %p\n", rstack.isEmpty(),
+//                  rstack.isEmpty() ? 0 : rstack.top().m, m);
                   rstack.push(RepeatLoop(m));
                   }
 
@@ -319,8 +320,11 @@ void RepeatList::unwind()
                               m = nm;
                               continue;
                               }
-                        if (!rstack.isEmpty())
+                        if (!rstack.isEmpty()) {
                               rstack.pop();     // end this loop
+                              if (flags & RepeatStart)      // if start/end repeat in one measure
+                                    m = m->nextMeasure();
+                              }
                         else
                               printf("repeatStack:: cannot pop\n");
                         continue;
