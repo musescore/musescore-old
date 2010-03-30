@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_f002c0739b2cc2a004924f3aa082c8dc.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_03baa23ea1e0e9342c709f7490fa2cb9.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx"}});
@@ -13,7 +13,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/handbook/handbook' />
     <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_16fe280631badfe1c52bff269abfbff0.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_4eb6c605f0d66872c47ff3690a734887.css" />
   </head>
   <body>
         <div class="print-logo"></div>
@@ -169,6 +169,15 @@ yum localinstall musescore-0.9.4-1.fc10.x86_64.rpm</pre></li>
 </ul>
 <h3>MIDI keyboard</h3>
 <p>You can also insert pitches using a MIDI keyboard on Windows or Linux as of version 0.9.4. Version 0.9.3 or earlier has support for MIDI keyboard on Linux only.</p>
+<ol>
+<li>Connect your MIDI keyboard to the computer and switch your keyboard on</li>
+<li>Start MuseScore</li>
+<li>Create a new score</li>
+<li>Click to select the rest in measure 1 to indicate where you want note entry to begin</li>
+<li>Press N to begin note entry mode</li>
+<li>Select a note duration such as quarter note (crochet), as described above</li>
+<li>Press a note on your MIDI keyboard, and notice that the pitch is added to your score</li>
+</ol>
 <h3>Colors</h3>
 <p>MuseScore colors out-of-range notes for as yellow or red in versions 0.9.5 or later. Notes above or below the comfortable range of an amateur appear yellow, note beyond the comfortable range of a professional appear red. The colors are informational and appear on the computer screen but do not appear on printed copies of your scores. To disable note colors in versions 0.9.6 or later choose <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp></kbd>, click on the <kbd><samp>Note Entry</samp></kbd> tab, and unmark "Color notes outside of usable pitch range".</p>
 <h4>External links</h4>
@@ -287,7 +296,7 @@ Choose to show numbers on "every system" which numbers the first measure of each
   <p>A score can be exported via <kbd><samp class="menu">File</samp> → <samp class="menuitem">Save As...</samp></kbd> to several different formats:</p>
 <dl>
 <dt>Compressed MuseScore format (<code>*.mscz</code>)</dt>
-<dd>MSCZ is the standard <i>MuseScore</i> file format and recommended for most uses. A score saved in this format will not loose any information. The format is a ZIP-compressed version of <code>.msc</code> files.</dd>
+<dd>MSCZ is the standard <i>MuseScore</i> file format and recommended for most uses. A score saved in this format will not lose any information. The format is a ZIP-compressed version of <code>.msc</code> files.</dd>
 <dt class="latest">MuseScore format (<code>*.mscx</code>)</dt>
 <dd class="latest">MSCX is the uncompressed version of the <i>MuseScore</i> file format used in version 0.9.5 or later. A score saved in this format will not loose any information and is recommended if you need to manually edit the file format using a text editor. Previous versions of MuseScore used the MSC file extension. However MSC has file extension conflicts on Microsoft Windows and is blocked by some email providers. The new MSCX file extension supersedes the old MSC file extension due to the problems outlined above.</dd>
 <dt>MusicXML (<code>*.xml</code>)</dt>
@@ -321,7 +330,7 @@ Choose to show numbers on "every system" which numbers the first measure of each
   <div id="node-53" class="section-3">
   <h1 class="book-heading">Accidental</h1>
   <p><strong>Accidentals</strong> can be set or changed by dragging an accidental symbol from the accidental palette to a note in the score.<br />
-<img src="/sites/musescore.org/files/accidentalspalette.png" alt="Accidentals palette" title="Accidentals palette" width="175" height="168" class="inline" /></p>
+<img src="/sites/musescore.org/files/accidental-palette.png" alt="Accidentals palette" title="Accidentals palette" width="168" height="203" class="inline" /></p>
 <p>If you only want to change the pitch of a note you can also select the note and press:</p>
 <ul>
 <li><kbd><kbd>Up</kbd></kbd>:   	Increase the pitch of a note by one semitone.</li>
@@ -379,11 +388,12 @@ Display of all staff bar lines updates when you leave <samp class="mode">edit mo
 <p>Double click on a bracket to enter <samp class="mode"><a href="http://musescore.org/handbook/edit-mode" title="edit mode">edit mode</a></samp>, In <samp class="mode">edit mode</samp> you can drag the height of a bracket to span arbitrary staves of a system.</p>
   </div>
 <div id="node-64" class="section-3">
-  <h1 class="book-heading">Breath</h1>
+  <h1 class="book-heading">Breath and pause</h1>
   <p>To place a <strong>breath</strong> symbol drag it from the breath palette to a note in the score. The breath symbol is placed after the note. In versions 0.9.5 and earlier the breath symbol appears <em>before</em> the note it was dragged to.</p>
-<p><img src="/sites/musescore.org/files/breathpalette_0.png" alt="Breath Palette" title="Breath Palette" width="185" height="67" class="inline" /></p>
+<p><img src="/sites/musescore.org/files/breath-pause-palette.png" alt="Breath &amp;amp; Pause Palette" title="Breath &amp;amp; Pause Palette" width="138" height="103" class="inline" /></p>
 <p>Breath symbol in score: </p>
 <p><img src="/sites/musescore.org/files/breath_0.png" alt="Breath" title="Breath" width="284" height="181" class="inline" /></p>
+<p>A <strong>caesura</strong> (informally called <strong>tram lines</strong> or <strong>railroad tracks</strong>) work the same way and are available in versions 0.9.6 or later.</p>
   </div>
 <div id="node-67" class="section-3">
   <h1 class="book-heading">Clef</h1>
@@ -647,7 +657,6 @@ Other commands in <samp class="mode">edit mode</samp> also move the handles but 
   <p>MuseScore has an integrated sequencer and synthesizer to play your score.<br />
 By pressing the Play <img src="/sites/musescore.org/files/play.png" alt="play.png" title="play.png" width="34" height="33" class="inline" /> button you enter <samp class="mode">Play mode</samp>. In <samp class="mode">Play mode</samp> the following commands are available:</p>
 <ul>
-<li class="latest">Play <kbd><kbd>Ctrl</kbd>+<kbd>Space</kbd></kbd> <strong class="label">(version 0.9.6 or later)</strong></li>
 <li>Seek to previous chord <kbd><kbd>Left</kbd></kbd></li>
 <li>Seek to next chord <kbd><kbd>Right</kbd></kbd></li>
 <li>Seek to previous measure <kbd><kbd>Ctrl</kbd>+<kbd>Left</kbd></kbd></li>
