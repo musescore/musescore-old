@@ -388,8 +388,8 @@ void Part::setMidiChannel(int) const
 void Part::setInstrument(const Instrument& i)
       {
       setTrackName(i.trackName());
-      setLongName(i.longName());
-      setShortName(i.shortName());
+//      setLongName(i.longName());
+//      setShortName(i.shortName());
       setMinPitchA(i.minPitchA());
       setMaxPitchA(i.maxPitchA());
       setMinPitchP(i.minPitchP());

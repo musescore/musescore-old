@@ -127,7 +127,7 @@ class Segment : public Element {
       virtual void remove(Element*);
 
       void sortStaves(QList<int>& dst);
-      const char* subTypeName() const    { return segmentTypeNames[subtype()]; }
+      const char* subTypeName() const;
       static SegmentType segmentType(int type);
       void setTime(int tick);
       void removeGeneratedElements();
@@ -135,7 +135,6 @@ class Segment : public Element {
       void fixStaffIdx();
       bool isChordRest() const           { return subtype() == SegChordRest; }
       bool isGrace() const               { return subtype() == SegGrace; }
-      static const char* segmentTypeNames[];
       };
 
 #endif

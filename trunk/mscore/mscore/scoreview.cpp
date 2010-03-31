@@ -1341,8 +1341,8 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
       if (sel.state() == SEL_RANGE) {
             Segment* ss = sel.startSegment();
             Segment* es = sel.endSegment();
-            if(!ss)
-      			    return;
+            if (!ss)
+                  return;
             p.setBrush(Qt::NoBrush);
 
             QPen pen(QColor(Qt::blue));
@@ -1371,7 +1371,10 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
             double x1;
 
             for (Segment* s = ss; s && (s != es);) {
-                  Segment* ns = s->nextCR();
+                  Segment* ns = s->next1();
+//                  Segment* ns = s->nextCR();
+//                  if (ns->tick() >= es->tick())
+//                        break;
                   system1  = system2;
                   system2  = s->measure()->system();
                   pt       = s->canvasPos();
@@ -2630,7 +2633,9 @@ void ScoreView::startDrag()
       dragElement = curElement;
       startMove -= dragElement->userOff();
       _score->startCmd();
-      _startDragPosition = dragElement->userOff();
+
+      foreach(Element* e, _score->selection().elements())
+            e->setStartDragPosition(e->userOff());
       QList<Element*> el;
       dragElement->scanElements(&el, collectElements);
       foreach(Element* e, el)
@@ -2644,9 +2649,8 @@ void ScoreView::startDrag()
 
 void ScoreView::drag(const QPointF& delta)
       {
-      foreach(Element* e, _score->selection().elements()) {
+      foreach(Element* e, _score->selection().elements())
             _score->addRefresh(e->drag(delta));
-            }
       _score->end();
       }
 
@@ -2656,10 +2660,12 @@ void ScoreView::drag(const QPointF& delta)
 
 void ScoreView::endDrag()
       {
-      dragElement->endDrag();
-      QPointF npos = dragElement->userOff();
-      dragElement->setUserOff(_startDragPosition);
-      _score->undoMove(dragElement, npos);
+      foreach(Element* e, _score->selection().elements()) {
+            e->endDrag();
+            QPointF npos = e->userOff();
+            e->setUserOff(e->startDragPosition());
+            _score->undoMove(e, npos);
+            }
       _score->setLayoutAll(true);
       dragElement = 0;
       setDropTarget(0); // this also resets dropAnchor

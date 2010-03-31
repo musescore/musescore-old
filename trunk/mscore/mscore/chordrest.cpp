@@ -337,6 +337,7 @@ void ChordRest::layoutArticulations()
       System* s        = m->system();
       int idx          = staff()->rstaff() + staffMove();   // DEBUG
 
+#if 0 // moved to chord()->layout()
       if (type() == CHORD && static_cast<Chord*>(this)->arpeggio()) {
             Chord* c          = static_cast<Chord*>(this);
             double distance   = score()->styleS(ST_ArpeggioNoteDistance).val() * _spatium;
@@ -349,7 +350,7 @@ void ChordRest::layoutArticulations()
             c->arpeggio()->setHeight(h);
             c->arpeggio()->setPos(x, y);
             }
-
+#endif
       qreal x          = centerX();
 
       double distance1 = point(score()->styleS(ST_propertyDistanceHead));

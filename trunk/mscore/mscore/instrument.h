@@ -102,8 +102,8 @@ struct Channel {
 
 struct Instrument {
       QString _trackName;           ///< used in tracklist
-      QString _longName;
-      QString _shortName;
+//      QString _longName;
+//      QString _shortName;
       char _minPitchA, _maxPitchA, _minPitchP, _maxPitchP;
       Interval _transpose;
 
@@ -137,10 +137,10 @@ struct Instrument {
 
       QString trackName() const                { return _trackName;  }
       void setTrackName(const QString& s)      { _trackName = s; }
-      QString longName() const                 { return _longName; }
-      QString shortName() const                { return _shortName; }
-      void setLongName(const QString& s)       { _longName = s; }
-      void setShortName(const QString& s)      { _shortName = s; }
+//      QString longName() const                 { return _longName; }
+//      QString shortName() const                { return _shortName; }
+//      void setLongName(const QString& s)       { _longName = s; }
+//      void setShortName(const QString& s)      { _shortName = s; }
 
       void setDrumset(Drumset* ds);
       Drumset* drumset() const                 { return _drumset;    }

@@ -238,7 +238,7 @@ void Score::deselect(Element* el)
 //   updateSelectedElements
 //---------------------------------------------------------
 
-void Score::updateSelectedElements(SelState /*state*/)
+void Score::updateSelectedElements()
       {
       setUpdateAll();
       foreach(Element* e, _selection.elements())
@@ -336,7 +336,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   selState = SEL_RANGE;
                   _selection.setStaffStart(0);
                   _selection.setStaffEnd(nstaves());
-                  updateSelectedElements(selState);
+                  updateSelectedElements();
                   }
             else {
                   if (_selection.state() == SEL_RANGE) {
@@ -366,7 +366,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         _selection.setStaffStart(staffIdx);
                         _selection.setStaffEnd(staffIdx + 1);
                         _selection.setStartSegment(m->tick2segment(tick, true));
-                        _selection.setEndSegment(tick2segment(etick));
+                        _selection.setEndSegment(tick2segment(etick, true));
                         }
                   else if (_selection.state() == SEL_RANGE) {
                         if (staffIdx < _selection.staffStart())
@@ -378,14 +378,14 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                               activeIsFirst = true;
                               }
                         else if (etick >= _selection.tickEnd())
-                              _selection.setEndSegment(tick2segment(etick));
+                              _selection.setEndSegment(tick2segment(etick, true));
                         else {
                               if (_selection.activeSegment() == _selection.startSegment()) {
                                     _selection.setStartSegment(m->tick2segment(tick, true));
                                     activeIsFirst = true;
                                     }
                               else
-                                    _selection.setEndSegment(tick2segment(etick));
+                                    _selection.setEndSegment(tick2segment(etick, true));
                               }
                         }
                   else if (_selection.isSingle()) {
@@ -525,7 +525,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             _selection.setActiveTrack(activeTrack);
 
             selState = SEL_RANGE;
-            updateSelectedElements(selState);
+            updateSelectedElements();
             }
 
       _selection.setState(selState);

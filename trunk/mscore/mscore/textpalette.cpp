@@ -177,7 +177,6 @@ void TextTools::setBlockFormat(const QTextBlockFormat& bf)
 
 void TextTools::sizeChanged(double value)
       {
-printf("sizeChanged\n");
       format.setFontPointSize(value);
       _textElement->setCharFormat(format);
       _textElement->score()->setLayoutAll(true);
@@ -191,6 +190,7 @@ printf("sizeChanged\n");
 
 void TextTools::moveFocus()
       {
+      mscore->currentScoreView()->update();
 //TODO-S      _textElement->score()->canvas()->setFocus();
 //cannot work:      mscore->currentScoreView()->setFocus();
       }

@@ -34,19 +34,27 @@
 #include "repeat.h"
 #include "staff.h"
 
-const char* Segment::segmentTypeNames[] = {
-      "Clef",
-      "Key Signature",
-      "Time Signature",
-      "Begin Repeat",
-      "BarLine",
-      "Grace",
-      "ChordRest",
-      "Breath",
-      "EndBarLine",
-      "Time Sig Precaution",
-      0
-      };
+//---------------------------------------------------------
+//   subTypeName
+//---------------------------------------------------------
+
+const char* Segment::subTypeName() const
+      {
+      switch(subtype()) {
+            case SegClef:                 return "Clef";
+            case SegKeySig:               return "Key Signature";
+            case SegTimeSig:              return "Time Signature";
+            case SegStartRepeatBarLine:   return "Begin Repeat";
+            case SegBarLine:              return "BarLine";
+            case SegGrace:                return "Grace";
+            case SegChordRest:            return "ChordRest";
+            case SegBreath:               return "Breath";
+            case SegEndBarLine:           return "EndBarLine";
+            case SegTimeSigAnnounce:      return "Time Sig Precaution";
+            case SegKeySigAnnounce:       return "Key Sig Precaution";
+            }
+      return "??";
+      }
 
 //---------------------------------------------------------
 //   setElement

@@ -139,7 +139,7 @@ MeasureBase* Score::tick2measureBase(int tick) const
 //   tick2segment
 //---------------------------------------------------------
 
-Segment* Score::tick2segment(int tick) const
+Segment* Score::tick2segment(int tick, bool first) const
       {
       Measure* m = tick2measure(tick);
       if (m == 0) {
@@ -147,10 +147,10 @@ Segment* Score::tick2segment(int tick) const
             return 0;
             }
       for (Segment* segment = m->first(); segment;) {
-            Segment* nsegment = segment->next();
             int t1 = segment->tick();
+            Segment* nsegment = segment->next();
             int t2 = nsegment ? nsegment->tick() : INT_MAX;
-            if (tick >= t1 && tick < t2)
+            if (((tick == t1) && first) || ((tick >= t1) && (tick < t2)))
                   return segment;
             segment = nsegment;
             }
