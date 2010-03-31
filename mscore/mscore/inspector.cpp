@@ -704,11 +704,17 @@ SegmentView::SegmentView()
       layout->addWidget(seg);
       layout->addStretch(10);
       sb.segmentType->clear();
-      for (int i = 0; true; i++) {
-            if (Segment::segmentTypeNames[i] == 0)
-                  break;
-            sb.segmentType->addItem(Segment::segmentTypeNames[i]);
-            }
+      sb.segmentType->addItem("SegClef",               0x1);
+      sb.segmentType->addItem("SegKeySig",             0x2);
+      sb.segmentType->addItem("SegTimeSig",            0x4);
+      sb.segmentType->addItem("SegStartRepeatBarLine", 0x8);
+      sb.segmentType->addItem("SegBarLine",            0x10);
+      sb.segmentType->addItem("SegGrace",              0x20);
+      sb.segmentType->addItem("SegChordRest",          0x40);
+      sb.segmentType->addItem("SegBreath",             0x80);
+      sb.segmentType->addItem("SegEndBarLine",         0x100);
+      sb.segmentType->addItem("SegTimeSigAnnounce",    0x200);
+      sb.segmentType->addItem("SegKeySigAnnounce",     0x400);
       }
 
 //---------------------------------------------------------

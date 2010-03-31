@@ -153,6 +153,9 @@ class Element {
       mutable QRectF _bbox;       ///< Bounding box relative to _pos + _userOff
                                   ///< valid after call to layout()
 
+      QPointF _startDragPosition;   ///< used during drag
+
+
    public:
       Element(Score* s = 0);
       Element(const Element&);
@@ -371,6 +374,9 @@ class Element {
       // is not valid
       //
       virtual bool check() const { return true; }
+
+      QPointF startDragPosition() const           { return _startDragPosition; }
+      void setStartDragPosition(const QPointF& v) { _startDragPosition = v; }
 
       static const char* name(ElementType type);
       static Element* create(ElementType type, Score*);

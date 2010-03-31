@@ -117,7 +117,6 @@ class ScoreView : public QWidget {
 
       Element* origEditObject;
       Element* editObject;          ///< Valid in edit mode
-      QPointF _startDragPosition;
       int textUndoLevel;
 
       virtual void paintEvent(QPaintEvent*);

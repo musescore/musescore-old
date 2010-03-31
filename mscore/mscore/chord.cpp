@@ -1327,7 +1327,17 @@ void Chord::layout()
                   }
             }
 #endif
-
+#if 1
+      if (_arpeggio) {
+            double headHeight = upnote->headHeight();
+            _arpeggio->layout();
+            lx -= _arpeggio->width() + _spatium * .5;
+            double y = upNote()->pos().y() - headHeight * .5;
+            double h = downNote()->pos().y() - y;
+            _arpeggio->setHeight(h);
+            _arpeggio->setPos(lx, y);
+            }
+#endif
       extraSpace    = -lx + _extraLeadingSpace.val() * _spatium;
       double mirror = 0.0;
       double hw     = 0.0;

@@ -1,3 +1,10 @@
+31.mar (ws)
+      - fix #5152: Crash Opening Full Orchestra MusicXML
+      - fix #5065: Arpeggio collides with accidental
+      - fix #5096-2: Grace notes not erased on paste
+      - fix #5112: Undo after CNTRL drag group of selected lyrics not working
+      - fix #5133: Font resize not immediate
+      - fix #4701: Unable to edit instrument name
 30.mar (ws)
       - fix #5123: Infinite loop on first measure repeat
       (db)

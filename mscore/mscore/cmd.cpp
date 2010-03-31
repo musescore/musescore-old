@@ -913,9 +913,15 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
 void Score::makeGap1(int tick, int staffIdx, Fraction len)
       {
       ChordRest* cr = 0;
-      Segment* seg = tick2segment(tick);
+      Segment* seg = tick2segment(tick, true);
       if (!seg) {
-            printf("makeGap1: no segment at %d\n", tick);
+            printf("1:makeGap1: no segment at %d\n", tick);
+            return;
+            }
+      while (seg && !(seg->subtype() & (SegChordRest | SegGrace)))
+            seg = seg->next1();
+      if (!seg) {
+            printf("2:makeGap1: no segment at %d\n", tick);
             return;
             }
       cr = static_cast<ChordRest*>(seg->element(staffIdx * VOICES));
@@ -2564,7 +2570,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             Segment* s1 = tick2segment(dstTick);
             Segment* s2 = tick2segment(dstTick + tickLen);
             _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
-            updateSelectedElements(SEL_RANGE);
+            updateSelectedElements();
             if (selection().state() != SEL_RANGE) {
                   _selection.setState(SEL_RANGE);
                   emit selectionChanged(int(selection().state()));

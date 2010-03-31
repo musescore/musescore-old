@@ -114,10 +114,10 @@ void Instrument::write(Xml& xml) const
             }
       if (!_trackName.isEmpty())
             xml.tag("trackName", _trackName);
-      if (!_longName.isEmpty())
-            xml.tag("longName", _longName);
-      if (!_shortName.isEmpty())
-            xml.tag("shortName", _shortName);
+//      if (!_longName.isEmpty())
+//            xml.tag("longName", _longName);
+//      if (!_shortName.isEmpty())
+//            xml.tag("shortName", _shortName);
       foreach(const NamedEventList& a, _midiActions)
             a.write(xml, "MidiAction");
       foreach(const Channel& a, _channel)
@@ -163,10 +163,10 @@ void Instrument::read(QDomElement e)
                   _maxPitchP = i;
             else if (tag == "trackName")
                   _trackName = val;
-            else if (tag == "longName")
-                  _longName = val;
-            else if (tag == "shortName")
-                  _shortName = val;
+//            else if (tag == "longName")
+//                  _longName = val;
+//            else if (tag == "shortName")
+//                  _shortName = val;
             else if (tag == "transposition") {    // obsolete
                   _transpose.chromatic = i;
                   _transpose.diatonic = chromatic2diatonic(i);

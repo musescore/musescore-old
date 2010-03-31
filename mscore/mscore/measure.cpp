@@ -838,7 +838,7 @@ Segment* Measure::getSegment(SegmentType st, int t)
 
 Segment* Measure::getSegment(SegmentType st, int t, int gl)
       {
-//      printf("Measure::getSegment(st=%d, t=%d, gl=%d)\n", st, t, gl);
+// printf("Measure::getSegment(st=%d, t=%d, gl=%d)\n", st, t, gl);
       if (st != SegChordRest && st != SegGrace) {
             printf("Measure::getSegment(st=%d, t=%d, gl=%d): incorrect segment type\n", st, t, gl);
             return 0;
@@ -879,10 +879,13 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
 
       if (gl > 0) {
             if (gl <= nGraces) {
-//                  printf("grace segment already exist, returning it\n");
+//                  printf("grace segment %d already exist, returning it\n", gl);
                   int graces = 0;
-                  for (Segment* ss = last(); ss && ss->tick() <= t; ss = ss->prev()) {
-                        if (ss->subtype() == SegGrace && ss->tick() == t)
+                  // for (Segment* ss = last(); ss && ss->tick() <= t; ss = ss->prev()) {
+                  for (Segment* ss = last(); ss && ss->tick() >= t; ss = ss->prev()) {
+                        if (ss->tick() > t)
+                              continue;
+                        if ((ss->subtype() == SegGrace) && (ss->tick() == t))
                               graces++;
                         if (gl == graces)
                               return ss;

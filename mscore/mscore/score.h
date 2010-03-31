@@ -327,7 +327,7 @@ class Score : public QObject {
       void cmdInsertClef(int type);
       void cmdExchangeVoice(int, int);
 
-      void updateSelectedElements(SelState);
+      void updateSelectedElements();
       void removeChordRest(ChordRest* cr, bool clearSegment);
       void cmdMove(Element* e, QPointF delta);
 
@@ -580,7 +580,7 @@ class Score : public QObject {
       int pos();
       Measure* tick2measure(int tick) const;
       MeasureBase* tick2measureBase(int tick) const;
-      Segment* tick2segment(int tick) const;
+      Segment* tick2segment(int tick, bool first = false) const;
       void fixTicks();
       void addArticulation(Element*, Articulation* atr);
 
