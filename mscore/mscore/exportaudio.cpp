@@ -156,7 +156,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                         }
                   else {
                         for (unsigned i = 0; i < FRAMES * 2; ++i) {
-                              if (qAbs(buffer[i] > peak))
+                              if (qAbs(buffer[i]) > peak)
                                     peak = qAbs(buffer[i]);
                               }
                         }

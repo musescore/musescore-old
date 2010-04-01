@@ -2002,17 +2002,19 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             }
             else if (e.tagName() == "instruments")
                   domNotImplemented(e);
-            else if (e.tagName() == "transpose")
+            else if (e.tagName() == "transpose") {
+                  Interval interval;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        Part* part = score->part(staff);
                         int i = ee.text().toInt();
                         if (ee.tagName() == "diatonic")
-                              part->setTransposeDiatonic(i);
+                              interval.diatonic = i;
                         else if (ee.tagName() == "chromatic")
-                              part->setTransposeChromatic(i);
+                              interval.chromatic = i;
                         else
                               domError(ee);
                         }
+                  score->part(staff)->setTranspose(interval);
+                  }
             else if (e.tagName() == "measure-style")
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "multiple-rest") {
@@ -2208,6 +2210,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QString tupletBracket;
       QString step;
       QString fingering;
+      QString pluck;
+      QString string;
       QString graceSlash;
       QString wavyLineType;
       int alter  = 0;
@@ -2310,20 +2314,21 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else if (tag == "staff")
                   relStaff = s.toInt() - 1;
             else if (tag == "beam") {
-                  if (s == "begin") {
-                        bm = BEAM_BEGIN;
+                  int beamNo = e.attribute(QString("number"), "1").toInt();
+                  if (beamNo == 1) {
+                        if (s == "begin")
+                              bm = BEAM_BEGIN;
+                        else if (s == "end")
+                              bm = BEAM_END;
+                        else if (s == "continue")
+                              bm = BEAM_MID;
+                        else if (s == "backward hook")
+                              ;
+                        else if (s == "forward hook")
+                              ;
+                        else
+                              printf("unknown beam keyword <%s>\n", s.toLatin1().data());
                         }
-                  else if (s == "end") {
-                        bm = BEAM_END;
-                        }
-                  else if (s == "continue")
-                        bm = BEAM_MID;
-                  else if (s == "backward hook")
-                        ;
-                  else if (s == "forward hook")
-                        ;
-                  else
-                        printf("unknown beam keyword <%s>\n", s.toLatin1().data());
                   }
             else if (tag == "rest") {
                   rest = true;
@@ -2495,8 +2500,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           fingering = eee.text();
                                     else if (eee.tagName() == "fret")
                                           domNotImplemented(eee);
+                                    else if (eee.tagName() == "pluck")
+                                          pluck = eee.text();
                                     else if (eee.tagName() == "string")
-                                          domNotImplemented(eee);
+                                          string = eee.text();
                                     else if (eee.tagName() == "pull-off")
                                           domNotImplemented(eee);
                                     else if (eee.tagName() == "stopped")
@@ -2673,7 +2680,24 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (!fingering.isEmpty()) {
                   Text* f = new Text(score);
                   f->setSubtype(TEXT_FINGERING);
+                  f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->setText(fingering);
+                  note->add(f);
+                  }
+
+            if (!pluck.isEmpty()) {
+                  Text* f = new Text(score);
+                  f->setSubtype(TEXT_FINGERING);
+                  f->setTextStyle(TEXT_STYLE_FINGERING);
+                  f->setText(pluck);
+                  note->add(f);
+                  }
+
+            if (!string.isEmpty()) {
+                  Text* f = new Text(score);
+                  f->setSubtype(TEXT_STRING_NUMBER);
+                  f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
+                  f->setText(string);
                   note->add(f);
                   }
 
@@ -2689,7 +2713,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             int gl = nrOfGraceSegsReq(pn);
             cr = measure->findChord(tick, track, grace);
             if (cr == 0) {
-                  Segment::SegmentType st = Segment::SegChordRest;
+                  SegmentType st = SegChordRest;
                   cr = new Chord(score);
                   cr->setTick(tick);
                   cr->setBeamMode(bm);
@@ -2717,7 +2741,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               }
                         else
                               cr->setDuration(Duration::V_EIGHT);
-                        st = Segment::SegGrace;
+                        st = SegGrace;
                         }
                   else {
                         if (durationType.type() == Duration::V_INVALID)
@@ -2930,7 +2954,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             Breath* b = new Breath(score);
             b->setTick(tick);
             b->setTrack((staff + relStaff) * VOICES + voice);
-            Segment* seg = measure->getSegment(Segment::SegBreath, tick);
+            Segment* seg = measure->getSegment(SegBreath, tick);
             seg->add(b);
             }
       if (!tupletType.isEmpty()) {

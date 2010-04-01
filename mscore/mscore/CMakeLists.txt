@@ -85,7 +85,7 @@ QT4_WRAP_UI (ui_headers
       glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
       dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
-      harmonyedit.ui selectinstr.ui
+      harmonyedit.ui selectinstr.ui tremolo.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -182,7 +182,7 @@ add_executable ( ${ExecutableName}
       screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
-      importove.cpp ove.cpp importpdf.cpp
+      importove.cpp ove.cpp importpdf.cpp interval.cpp
       ${AUDIO}
       )
 
@@ -236,8 +236,11 @@ if (MINGW)
       portaudio
       portmidi
       winmm
+<<<<<<< .working
       tesseract_full
       tiff
+=======
+>>>>>>> .merge-rechts.r2926
       )
 
    if (HAS_AUDIOFILE)

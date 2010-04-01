@@ -58,9 +58,7 @@ void TempoText::read(QDomElement e)
             if (tag == "tempo"){
                   double tpo = e.text().toDouble();
                   setTempo(tpo);
-                  AL::TempoMap* tl   = score()->tempomap();
-                  if(tl)
-                    tl->addTempo(tick(), tpo);
+                  //Don't need to add to tempo since tempo map is read at the beginning of the file.
             }
             else if (!Text::readProperties(e))
                   domError(e);

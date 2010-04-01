@@ -28,7 +28,6 @@
 class Xml;
 class Staff;
 class Score;
-class Drumset;
 class InstrumentTemplate;
 
 //---------------------------------------------------------

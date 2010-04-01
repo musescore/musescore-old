@@ -102,7 +102,7 @@ void KeySig::layout()
       double _spatium = spatium();
       _bbox           = QRectF(0, 0, 0, 0);
 
-      if (keySigEvent().custom) {
+      if (isCustom()) {
             foreach(KeySym* ks, keySymbols) {
                   ks->pos = ks->spos * _spatium;
                   _bbox |= symbols[ks->sym].bbox(magS()).translated(ks->pos);
@@ -222,7 +222,7 @@ Element* KeySig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       if (e->type() == KEYSIG) {
             KeySig* ks    = static_cast<KeySig*>(e);
             KeySigEvent k = ks->keySigEvent();
-printf("drop ");k.print(); printf("\n");
+// printf("drop ");k.print(); printf("\n");
             if (k.custom) {
                   int customIdx = score()->customKeySigIdx(ks);
                   if (customIdx == -1)

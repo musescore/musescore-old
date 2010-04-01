@@ -337,6 +337,7 @@ void ChordRest::layoutArticulations()
       System* s        = m->system();
       int idx          = staff()->rstaff() + staffMove();   // DEBUG
 
+#if 0 // moved to chord()->layout()
       if (type() == CHORD && static_cast<Chord*>(this)->arpeggio()) {
             Chord* c          = static_cast<Chord*>(this);
             double distance   = score()->styleS(ST_ArpeggioNoteDistance).val() * _spatium;
@@ -349,7 +350,7 @@ void ChordRest::layoutArticulations()
             c->arpeggio()->setHeight(h);
             c->arpeggio()->setPos(x, y);
             }
-
+#endif
       qreal x          = centerX();
 
       double distance1 = point(score()->styleS(ST_propertyDistanceHead));
@@ -510,9 +511,9 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
 
                   // TODO: insert automatically in all staves?
 
-                  Segment* seg = m->findSegment(Segment::SegBreath, tick());
+                  Segment* seg = m->findSegment(SegBreath, tick());
                   if (seg == 0) {
-                        seg = m->createSegment(Segment::SegBreath, tick());
+                        seg = m->createSegment(SegBreath, tick());
                         score()->undoAddElement(seg);
                         }
                   b->setParent(seg);
@@ -530,9 +531,9 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
                         return m->drop(view, p1, p2, e);
                         }
 
-                  Segment* seg = m->findSegment(Segment::SegBarLine, tick());
+                  Segment* seg = m->findSegment(SegBarLine, tick());
                   if (seg == 0) {
-                        seg = m->createSegment(Segment::SegBarLine, tick());
+                        seg = m->createSegment(SegBarLine, tick());
                         score()->undoAddElement(seg);
                         }
                   bl->setParent(seg);
@@ -641,4 +642,50 @@ void DurationElement::convertTicks()
             setFraction(Fraction::fromTicks(_ticks));
       }
 
+//---------------------------------------------------------
+//   setDurationType
+//---------------------------------------------------------
+
+void ChordRest::setDurationType(Duration::DurationType t)
+      {
+      _duration.setType(t);
+      _ticks = -1;
+      }
+
+void ChordRest::setDurationType(const QString& s)
+      {
+      _duration.setType(s);
+      _ticks = -1;
+      }
+
+//---------------------------------------------------------
+//   setDurationVal
+//---------------------------------------------------------
+
+void ChordRest::setDurationVal(int ticks)
+      {
+      _duration.setVal(ticks);
+      _ticks = -1;
+      }
+
+//---------------------------------------------------------
+//   setDuration
+//---------------------------------------------------------
+
+void ChordRest::setDuration(const Duration& v)
+      {
+      _duration = v;
+      _ticks = -1;
+      }
+
+//---------------------------------------------------------
+//   setTrack
+//---------------------------------------------------------
+
+void ChordRest::setTrack(int val)
+      {
+      foreach(Articulation* a, articulations)
+            a->setTrack(val);
+      Element::setTrack(val);
+      }
 

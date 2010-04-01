@@ -49,10 +49,9 @@ class PartEdit : public QWidget, public Ui::PartEditBase {
       void drumsetToggled(bool);
 
    public slots:
-      void updateSolo();
-
+      
    signals:
-      void soloChanged();
+      void soloChanged(bool);
 
    public:
       PartEdit(QWidget* parent = 0);
@@ -73,14 +72,13 @@ class InstrumentListEditor : public QScrollArea
       virtual void closeEvent(QCloseEvent*);
 
    private slots:
-      void updateSolo();
+      void updateSolo(bool);
 
    public slots:
       void patchListChanged();
 
    signals:
-      void soloChanged();
-
+      
    public:
       InstrumentListEditor(QWidget* parent);
       void updateAll(Score*);

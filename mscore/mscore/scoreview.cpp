@@ -359,10 +359,10 @@ class EditScoreViewDragTransition : public QMouseEventTransition
       };
 
 //---------------------------------------------------------
-//   ScoreViewSelectTransition
+//   SelectTransition
 //---------------------------------------------------------
 
-class ScoreViewSelectTransition : public QMouseEventTransition
+class SelectTransition : public QMouseEventTransition
       {
       ScoreView* canvas;
 
@@ -380,8 +380,34 @@ class ScoreViewSelectTransition : public QMouseEventTransition
             canvas->select(me);
             }
    public:
-      ScoreViewSelectTransition(ScoreView* c)
+      SelectTransition(ScoreView* c)
          : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {}
+      };
+
+//---------------------------------------------------------
+//   DeSelectTransition
+//---------------------------------------------------------
+
+class DeSelectTransition : public QMouseEventTransition
+      {
+      ScoreView* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QMouseEventTransition::eventTest(event))
+                  return false;
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            return canvas->mousePress(me);
+            }
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->select(me);
+            }
+   public:
+      DeSelectTransition(ScoreView* c)
+         : QMouseEventTransition(c, QEvent::MouseButtonRelease, Qt::LeftButton), canvas(c) {}
       };
 
 //---------------------------------------------------------
@@ -565,7 +591,9 @@ ScoreView::ScoreView(QWidget* parent)
       EditTransition* et = new EditTransition(this, states[EDIT]);            // ->edit
       connect(et, SIGNAL(triggered()), SLOT(startEdit()));
       s->addTransition(et);
-      s->addTransition(new ScoreViewSelectTransition(this));                  // select
+      s->addTransition(new SelectTransition(this));                           // select
+      connect(s, SIGNAL(entered()), mscore, SLOT(setNormalState()));
+      s->addTransition(new DeSelectTransition(this));                         // deselect
       connect(s, SIGNAL(entered()), mscore, SLOT(setNormalState()));
       s->addTransition(new ScoreViewDragTransition(this, states[DRAG]));      // ->stateDrag
       s->addTransition(new ScoreViewLassoTransition(this, states[LASSO]));    // ->stateLasso
@@ -1313,8 +1341,8 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
       if (sel.state() == SEL_RANGE) {
             Segment* ss = sel.startSegment();
             Segment* es = sel.endSegment();
-            if(!ss)
-      			    return;
+            if (!ss)
+                  return;
             p.setBrush(Qt::NoBrush);
 
             QPen pen(QColor(Qt::blue));
@@ -1343,7 +1371,10 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
             double x1;
 
             for (Segment* s = ss; s && (s != es);) {
-                  Segment* ns = s->nextCR();
+                  Segment* ns = s->next1();
+//                  Segment* ns = s->nextCR();
+//                  if (ns->tick() >= es->tick())
+//                        break;
                   system1  = system2;
                   system2  = s->measure()->system();
                   pt       = s->canvasPos();
@@ -1962,7 +1993,7 @@ if (debugMode)
             if (idx != -1) {
                   Segment* seg = measure->first();
                   // assume there is always a ChordRest segment
-                  while (seg->subtype() != Segment::SegChordRest)
+                  while (seg->subtype() != SegChordRest)
                         seg = seg->next();
                   score()->pasteStaff(doc.documentElement(), (ChordRest*)(seg->element(idx * VOICES)));
                   }
@@ -2330,6 +2361,10 @@ void ScoreView::editCopy()
 
 void ScoreView::normalCopy()
       {
+      if (!_score->selection().canCopy()) {
+            printf("cannot copy selection: intersects a tuplet\n");
+            return;
+            }
       QString mimeType = _score->selection().mimeType();
       if (!mimeType.isEmpty()) {
             QMimeData* mimeData = new QMimeData;
@@ -2346,6 +2381,10 @@ void ScoreView::normalCopy()
 
 void ScoreView::normalCut()
       {
+      if (!_score->selection().canCopy()) {
+            printf("cannot copy selection: intersects a tuplet\n");
+            return;
+            }
       _score->startCmd();
       normalCopy();
       _score->cmdDeleteSelection();
@@ -2481,6 +2520,7 @@ void ScoreView::cmd(const QAction* a)
             Element* el = _score->selectMove(cmd);
             if (el)
                   adjustCanvasPosition(el, false);
+            moveCursor();
             update();
             }
       else if (cmd == "next-chord"
@@ -2533,6 +2573,14 @@ void ScoreView::cmd(const QAction* a)
             cmdTuplet(9);
       else if (cmd == "repeat-sel")
             cmdRepeatSelection();
+      else if (cmd == "voice-1")
+            changeVoice(0);
+      else if (cmd == "voice-2")
+            changeVoice(1);
+      else if (cmd == "voice-3")
+            changeVoice(2);
+      else if (cmd == "voice-4")
+            changeVoice(3);
       else
             _score->cmd(a);
       _score->processMidiInput();
@@ -2592,7 +2640,9 @@ void ScoreView::startDrag()
       dragElement = curElement;
       startMove -= dragElement->userOff();
       _score->startCmd();
-      _startDragPosition = dragElement->userOff();
+
+      foreach(Element* e, _score->selection().elements())
+            e->setStartDragPosition(e->userOff());
       QList<Element*> el;
       dragElement->scanElements(&el, collectElements);
       foreach(Element* e, el)
@@ -2606,9 +2656,8 @@ void ScoreView::startDrag()
 
 void ScoreView::drag(const QPointF& delta)
       {
-      foreach(Element* e, _score->selection().elements()) {
+      foreach(Element* e, _score->selection().elements())
             _score->addRefresh(e->drag(delta));
-            }
       _score->end();
       }
 
@@ -2618,10 +2667,12 @@ void ScoreView::drag(const QPointF& delta)
 
 void ScoreView::endDrag()
       {
-      dragElement->endDrag();
-      QPointF npos = dragElement->userOff();
-      dragElement->setUserOff(_startDragPosition);
-      _score->undoMove(dragElement, npos);
+      foreach(Element* e, _score->selection().elements()) {
+            e->endDrag();
+            QPointF npos = e->userOff();
+            e->setUserOff(e->startDragPosition());
+            _score->undoMove(e, npos);
+            }
       _score->setLayoutAll(true);
       dragElement = 0;
       setDropTarget(0); // this also resets dropAnchor
@@ -2811,6 +2862,8 @@ void ScoreView::select(QMouseEvent* ev)
             System* dragSystem = (System*)(curElement->parent());
             dragStaff  = getStaff(dragSystem, startMove);
             }
+      if ((!curElement->selected() || addSelect) && (ev->type() == QEvent::MouseButtonRelease))
+            return;
       // As findSelectableElement may return a measure
       // when clicked "a little bit" above or below it, getStaff
       // may not find the staff and return -1, which would cause
@@ -2821,8 +2874,15 @@ void ScoreView::select(QMouseEvent* ev)
                   st = SELECT_SINGLE;
             else if (keyState & Qt::ShiftModifier)
                   st = SELECT_RANGE;
-            else if (keyState & Qt::ControlModifier)
+            else if (keyState & Qt::ControlModifier) {
+                  if (curElement->selected() && (ev->type() == QEvent::MouseButtonPress)) {
+                        // do not deselect on ButtonPress, only on ButtonRelease
+                        addSelect = false;
+                        return;
+                        }
+                  addSelect = true;
                   st = SELECT_ADD;
+                  }
             _score->select(curElement, st, dragStaff);
             if (mscore->playEnabled() && curElement && curElement->type() == NOTE) {
                   Note* note = static_cast<Note*>(curElement);
@@ -2839,6 +2899,7 @@ void ScoreView::select(QMouseEvent* ev)
 
 //---------------------------------------------------------
 //   mousePress
+//    return true if element is clicked
 //---------------------------------------------------------
 
 bool ScoreView::mousePress(QMouseEvent* ev)

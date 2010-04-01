@@ -162,6 +162,8 @@ class Measure : public MeasureBase {
       virtual void setTick(int t);
 
       Segment* first() const           { return _first;      }
+      Segment* first(SegmentTypes) const;
+
       Segment* last() const            { return _last;       }
       Segment* firstCRSegment() const;
       void remove(Segment*);
@@ -203,10 +205,10 @@ class Measure : public MeasureBase {
       void setRepeatCount(int val)    { _repeatCount = val; }
 
       Segment* getSegment(Element* el);
-      Segment* getSegment(Segment::SegmentType st, int tick);
-      Segment* getSegment(Segment::SegmentType st, int tick, int gl);
-      Segment* findSegment(Segment::SegmentType st, int t);
-      Segment* createSegment(Segment::SegmentType st, int t);
+      Segment* getSegment(SegmentType st, int tick);
+      Segment* getSegment(SegmentType st, int tick, int gl);
+      Segment* findSegment(SegmentType st, int t);
+      Segment* createSegment(SegmentType st, int t);
 
       bool createEndBarLines();
       void setEndBarLineType(int val, bool g, bool visible = true, QColor color = Qt::black);
@@ -244,7 +246,7 @@ class Measure : public MeasureBase {
       int multiMeasure() const                { return _multiMeasure; }
       void setMultiMeasure(int val)           { _multiMeasure = val;  }
       Fraction fraction() const;
-      void layoutChords1(Segment* segment, int startTrack);
+//      void layoutChords1(Segment* segment, int startTrack);
       void layoutChords0(Segment* segment, int startTrack, char* tversatz);
       void writeTuplets(Xml&, int staff) const;
       };

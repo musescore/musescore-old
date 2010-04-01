@@ -566,8 +566,10 @@ void Element::propertyAction(ScoreView*, const QString& s)
             if (e->type() == type()) {
                   if (s == "invisible")
                         score()->toggleInvisible(e);
-                  else if (s == "color")
+                  else if (s == "color"){
                         score()->colorItem(e);
+                        break;
+                        }
                   }
             }
       }

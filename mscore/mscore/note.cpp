@@ -23,6 +23,8 @@
  Implementation of classes Note and ShadowNote.
 */
 
+#include <assert.h>
+
 #include "note.h"
 #include "score.h"
 #include "key.h"
@@ -214,7 +216,7 @@ void Note::setPitch(int val)
       if (score()) {
             Part* part = score()->part(staffIdx());
             if (part)
-                  pitchOffset = score()->styleB(ST_concertPitch) ? 0 : part->transposeChromatic();
+                  pitchOffset = score()->styleB(ST_concertPitch) ? 0 : part->transpose().chromatic;
             }
       _ppitch = _pitch + pitchOffset;
       if (chord())
@@ -541,11 +543,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
 
       if (xml.clipboardmode && !score()->styleB(ST_concertPitch)) {
             Part* part = staff()->part();
-            if (part->transposeChromatic()) {
-                  transposeInterval(pitch(), tpc(), &rpitch, &rtpc,
-                     part->transposeDiatonic(),
-                     part->transposeChromatic(), true);
-                  }
+            if (part->transpose().chromatic)
+                  transposeInterval(pitch(), tpc(), &rpitch, &rtpc, part->transpose(), true);
             }
 
       xml.tag("pitch", rpitch);
@@ -676,7 +675,7 @@ void Note::read(QDomElement e)
             else if (tag == "headType")
                   _headType = NoteHeadType(i);
             else if (tag == "userAccidental")
-                  setAccidentalType(i);
+                  setUserAccidental(i);
             else if (tag == "Accidental") {
                   Accidental* a = new Accidental(score());
                   a->read(e);
@@ -1031,7 +1030,7 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   Segment* s = ch->segment();
                   s = s->next1();
                   while (s) {
-                        if (s->subtype() == Segment::SegChordRest && s->element(track()))
+                        if (s->subtype() == SegChordRest && s->element(track()))
                               break;
                         s = s->next1();
                         }
@@ -1221,14 +1220,9 @@ void Note::layout1(char* tversatz)
             if ((accVal != tversatz[_line]) || hidden()) {
                   if (_tieBack == 0)
                         tversatz[_line] = accVal;
-                  switch(accVal) {
-                        case -2: acci = ACC_FLAT2;   break;
-                        case -1: acci = ACC_FLAT;    break;
-                        case  1: acci = ACC_SHARP;   break;
-                        case  2: acci = ACC_SHARP2;  break;
-                        case  0: acci = ACC_NATURAL; break;
-                        default: printf("bad accidental\n"); break;
-                        }
+                  acci = Accidental::value2subtype(accVal);
+                  if (acci == ACC_NONE)
+                        acci = ACC_NATURAL;
                   }
             }
       if (acci != ACC_NONE && !_tieBack && !_hidden) {
@@ -1377,5 +1371,15 @@ int Note::accidentalType() const
       if (!_accidental)
             return ACC_NONE;
       return _accidental->subtype();
+      }
+
+//---------------------------------------------------------
+//   setHeadGroup
+//---------------------------------------------------------
+
+void Note::setHeadGroup(int val)
+      {
+      assert(val >= 0 && val < HEAD_GROUPS);
+      _headGroup = val;
       }
 

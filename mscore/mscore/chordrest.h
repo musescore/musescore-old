@@ -112,15 +112,16 @@ class ChordRest : public DurationElement {
       virtual void toDefault();
 
       const Duration& duration() const               { return _duration;        }
-      void setDurationType(Duration::DurationType t) { _duration.setType(t);    }
-      void setDurationType(const QString& s)         { _duration.setType(s);    }
-      void setDurationVal(int ticks)                 { _duration.setVal(ticks); }
-      void setDuration(const Duration& v)            { _duration = v;           }
+      void setDurationType(Duration::DurationType t);
+      void setDurationType(const QString& s);
+      void setDurationVal(int ticks);
+      void setDuration(const Duration& v);
       void setDots(int n)                            { _duration.setDots(n); }
       int dots() const                               { return _duration.dots(); }
 
       virtual Fraction fraction() const;
       virtual void setFraction(const Fraction&);
+      virtual void setTrack(int val);
       };
 
 #endif

@@ -511,13 +511,14 @@ Event* MidiFile::readEvent()
                   printf("readEvent: error 3\n");
                   return 0;
                   }
-            data    = new unsigned char[len];
+            data    = new unsigned char[len+1];
             dataLen = len;
             if (read(data, len)) {
                   printf("readEvent: error 4\n");
                   delete data;
                   return 0;
                   }
+            data[dataLen] = 0;    // always terminate with zero
             if (data[len-1] != 0xf7) {
                   printf("SYSEX does not end with 0xf7!\n");
                   // more to come?

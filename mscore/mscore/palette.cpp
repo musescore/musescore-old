@@ -1015,7 +1015,7 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, Palette* p, QWidget* parent)
       setCheckable(true);
       setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
-      setFixedHeight(QFontMetrics(font()).height() + 2);
+      setFixedHeight(QFontMetrics(font()).height() + 3);
       setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       QMenu* menu = new QMenu;
       connect(menu, SIGNAL(aboutToShow()), SLOT(beforePulldown()));

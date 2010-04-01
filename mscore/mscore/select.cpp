@@ -78,7 +78,12 @@ int Selection::tickStart() const
 
 int Selection::tickEnd() const
       {
-      return _endSegment->tick();
+      if(_endSegment)
+          return _endSegment->tick();
+      else{ // endsegment == 0 if end of score
+          Measure* m = _score->lastMeasure();
+          return m->tick() + m->tickLen();
+          }
       }
 
 //---------------------------------------------------------
@@ -87,7 +92,7 @@ int Selection::tickEnd() const
 
 bool Selection::isStartActive() const
       {
-      return activeSegment() && activeSegment()->tick() == startSegment()->tick();
+      return activeSegment() && activeSegment()->tick() == tickStart();
       }
 
 //---------------------------------------------------------
@@ -95,7 +100,7 @@ bool Selection::isStartActive() const
 //---------------------------------------------------------
 
 bool Selection::isEndActive() const {
-      return activeSegment() && activeSegment()->tick() == endSegment()->tick();
+      return activeSegment() && activeSegment()->tick() == tickEnd();
       }
 
 //---------------------------------------------------------
@@ -157,7 +162,7 @@ ChordRest* Selection::lastChordRest(int track) const
             Element* el = *i;
             if (el->type() == NOTE)
                   el = ((Note*)el)->chord();
-            if (el->isChordRest() && static_cast<ChordRest*>(el)->segment()->subtype() == Segment::SegChordRest) {
+            if (el->isChordRest() && static_cast<ChordRest*>(el)->segment()->subtype() == SegChordRest) {
                   if (track != -1 && el->track() != track)
                         continue;
                   if (cr) {
@@ -233,7 +238,7 @@ void Score::deselect(Element* el)
 //   updateSelectedElements
 //---------------------------------------------------------
 
-void Score::updateSelectedElements(SelState /*state*/)
+void Score::updateSelectedElements()
       {
       setUpdateAll();
       foreach(Element* e, _selection.elements())
@@ -331,7 +336,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   selState = SEL_RANGE;
                   _selection.setStaffStart(0);
                   _selection.setStaffEnd(nstaves());
-                  updateSelectedElements(selState);
+                  updateSelectedElements();
                   }
             else {
                   if (_selection.state() == SEL_RANGE) {
@@ -361,7 +366,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         _selection.setStaffStart(staffIdx);
                         _selection.setStaffEnd(staffIdx + 1);
                         _selection.setStartSegment(m->tick2segment(tick, true));
-                        _selection.setEndSegment(tick2segment(etick));
+                        _selection.setEndSegment(tick2segment(etick, true));
                         }
                   else if (_selection.state() == SEL_RANGE) {
                         if (staffIdx < _selection.staffStart())
@@ -373,14 +378,14 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                               activeIsFirst = true;
                               }
                         else if (etick >= _selection.tickEnd())
-                              _selection.setEndSegment(tick2segment(etick));
+                              _selection.setEndSegment(tick2segment(etick, true));
                         else {
                               if (_selection.activeSegment() == _selection.startSegment()) {
                                     _selection.setStartSegment(m->tick2segment(tick, true));
                                     activeIsFirst = true;
                                     }
                               else
-                                    _selection.setEndSegment(tick2segment(etick));
+                                    _selection.setEndSegment(tick2segment(etick, true));
                               }
                         }
                   else if (_selection.isSingle()) {
@@ -520,7 +525,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             _selection.setActiveTrack(activeTrack);
 
             selState = SEL_RANGE;
-            updateSelectedElements(selState);
+            updateSelectedElements();
             }
 
       _selection.setState(selState);
@@ -576,7 +581,7 @@ void Score::lassoSelectEnd()
             _selection.setState(SEL_NONE);
             return;
             }
-      _selection.setState(SEL_RANGE);
+      _selection.setState(SEL_LIST);
 
       foreach(const Element* e, _selection.elements()) {
             if (e->type() != NOTE && e->type() != REST)
@@ -792,9 +797,9 @@ QByteArray Selection::staffMimeData() const
             int startTrack = staffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
             for (Segment* seg = seg1; seg && seg != seg2; seg = seg->next1()) {
-                  if (seg->subtype() == Segment::SegEndBarLine)
+                  if (seg->subtype() == SegEndBarLine)
                         continue;
-                  if (seg->subtype() == Segment::SegTimeSig)
+                  if (seg->subtype() == SegTimeSig)
                         continue;
                   for (int track = startTrack; track < endTrack; ++track) {
                         Element* e = seg->element(track);
@@ -827,7 +832,7 @@ QByteArray Selection::staffMimeData() const
                               }
                         if (e->type() == CHORD) {
                               Chord* c = static_cast<Chord*>(e);
-                              c->write(xml, _startSegment->tick(), _endSegment->tick());
+                              c->write(xml, tickStart(), tickEnd());
                               }
                         else if (e->type() == REST) {
                               Rest* r = static_cast<Rest*>(e);
@@ -871,7 +876,7 @@ QList<Note*> Selection::noteList() const
                   int startTrack = staffIdx * VOICES;
                   int endTrack   = startTrack + VOICES;
                   for (Segment* seg = _startSegment; seg && seg != _endSegment; seg = seg->next1()) {
-                        if (seg->subtype() != Segment::SegChordRest && seg->subtype() != Segment::SegGrace)
+                        if (!(seg->subtype() & (SegChordRest | SegGrace)))
                               continue;
                         for (int track = startTrack; track < endTrack; ++track) {
                               Element* e = seg->element(track);
@@ -1014,5 +1019,46 @@ void Score::selectElementDialog(Element* e)
                         select(ee, SELECT_ADD, 0);
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   isInMiddleOfTuplet
+//---------------------------------------------------------
+
+static bool isInMiddleOfTuplet(Element* e)
+      {
+      if (e == 0 || !e->isChordRest())
+            return false;
+      ChordRest* cr = static_cast<ChordRest*>(e);
+      if (!cr->tuplet())
+            return false;
+      Tuplet* tuplet = cr->tuplet();
+      while (tuplet) {
+            if (tuplet->elements().front() == e)
+                  return false;
+            if (tuplet->elements().back() == e)
+                  return false;
+            tuplet = tuplet->tuplet();
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   canCopy
+//    return false if range selection intersects a tuplet
+//---------------------------------------------------------
+
+bool Selection::canCopy() const
+      {
+      if (_state != SEL_RANGE)
+            return true;
+
+      for (int staffIdx = _staffStart; staffIdx != _staffEnd; ++staffIdx) {
+            if (isInMiddleOfTuplet(_startSegment->element(staffIdx)))
+                  return false;
+            if (_endSegment && isInMiddleOfTuplet(_endSegment->element(staffIdx)))
+                  return false;
+            }
+      return true;
       }
 

@@ -43,8 +43,7 @@ struct InstrumentTemplate {
       char minPitchP;         // pitch range playable by professional
       char maxPitchP;
 
-      char transposeChromatic;      // for transposing instruments
-      char transposeDiatonic;
+      Interval transpose;     // for transposing instruments
 
       bool useDrumset;
       Drumset* drumset;

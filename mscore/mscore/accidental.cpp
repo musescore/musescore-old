@@ -42,16 +42,16 @@ Acc accList[] = {
       Acc(QT_TRANSLATE_NOOP("accidental", "double flat"),        -2),
       Acc(QT_TRANSLATE_NOOP("accidental", "natural"),             0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "(sharp)"),             0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(flat)"),              0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(double sharp)"),      0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(double flat)"),       0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(sharp)"),             1),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(flat)"),             -1),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(double sharp)"),      2),
+      Acc(QT_TRANSLATE_NOOP("accidental", "(double flat)"),      -2),
       Acc(QT_TRANSLATE_NOOP("accidental", "(natural)"),           0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "[sharp]"),             0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[flat]"),              0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[double sharp]"),      0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[double flat]"),       0),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[sharp]"),             1),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[flat]"),             -1),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[double sharp]"),      2),
+      Acc(QT_TRANSLATE_NOOP("accidental", "[double flat]"),      -2),
       Acc(QT_TRANSLATE_NOOP("accidental", "[natural]"),           0),
 
       Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash"),          0),
@@ -143,6 +143,7 @@ int Accidental::symbol()
             case  ACC_SHARP2:  s = sharpsharpSym;        break;
             case  ACC_FLAT2:   s = flatflatSym;          break;
             case  ACC_NATURAL: s = naturalSym;           break;
+
             case 11:           s = sharpSym;             break;
             case 12:           s = flatSym;              break;
             case 13:           s = sharpsharpSym;        break;
@@ -213,22 +214,14 @@ void Accidental::layout()
 
 int Accidental::subtype2value(int st)
       {
-      static const int preTab[] = {
-            0,  // ACC_NONE
-            1,  // ACC_SHARP
-            -1, // ACC_FLAT
-            2,  // ACC_SHARP2
-            -2, // ACC_FLAT2
-            0,  // ACC_NAT
-            1, -1, 2, -2, 0,  // () brackets
-            1, -1, 2, -2, 0,  // [] brackets
-            0, 0, 0, 0, 0, 0,  // special flats
-            0, 0, 0, 0,        // spacial sharps
-            0,0,0,0,0,0,0,0,0  // arrows
-            };
-      if (st < 0 || st >= int(sizeof(preTab)/sizeof(*preTab)))
-            return 0;
-      return preTab[st];
+      switch(st & 0xfff) {
+            case ACC_NONE:    return 0;
+            case ACC_SHARP:   return 1;
+            case ACC_SHARP2:  return 2;
+            case ACC_FLAT:    return -1;
+            case ACC_FLAT2:   return -2;
+            }
+      return 0;
       }
 
 //---------------------------------------------------------

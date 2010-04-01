@@ -153,6 +153,37 @@ void Stem::toDefault()
       }
 
 //---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool Stem::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
+      {
+      if ((type == TREMOLO) && (subtype <= TREMOLO_3)) {
+            return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* Stem::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+      {
+      Chord* ch = chord();
+      switch(e->type()) {
+            case TREMOLO:
+                  e->setParent(ch);
+                  score()->setLayout(ch->measure());
+                  score()->undoAddElement(e);
+                  break;
+            default:
+                  break;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   StemSlash
 //---------------------------------------------------------
 
@@ -908,7 +939,6 @@ void Chord::scanElements(void* data, void (*func)(void*, Element*))
 
 void Chord::setTrack(int val)
       {
-      Element::setTrack(val);
       if (_hook)
             _hook->setTrack(val);
       if (_stem)
@@ -927,6 +957,7 @@ void Chord::setTrack(int val)
 
       foreach(Note* n, _notes)
             n->setTrack(val);
+      ChordRest::setTrack(val);
       }
 
 //---------------------------------------------------------
@@ -1161,7 +1192,7 @@ void Chord::layout2()
             bool found = false;
             double cx  = x + canvasPos().x();
             Segment* s = segment()->prev();
-            if (s && s->subtype() == Segment::SegChordRest) {
+            if (s && s->subtype() == SegChordRest) {
                   int strack = staffIdx() * VOICES;
                   int etrack = strack + VOICES;
                   for (int track = strack; track < etrack; ++track) {
@@ -1296,7 +1327,17 @@ void Chord::layout()
                   }
             }
 #endif
-
+#if 1
+      if (_arpeggio) {
+            double headHeight = upnote->headHeight();
+            _arpeggio->layout();
+            lx -= _arpeggio->width() + _spatium * .5;
+            double y = upNote()->pos().y() - headHeight * .5;
+            double h = downNote()->pos().y() - y;
+            _arpeggio->setHeight(h);
+            _arpeggio->setPos(lx, y);
+            }
+#endif
       extraSpace    = -lx + _extraLeadingSpace.val() * _spatium;
       double mirror = 0.0;
       double hw     = 0.0;

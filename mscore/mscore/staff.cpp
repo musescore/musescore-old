@@ -277,8 +277,10 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
       {
 printf("Staff::changeKeySig "); st.print(); printf("\n");
       KeySigEvent ot = _keymap->key(tick);
-      if (ot == st)
+      if (ot == st) {
+printf("Staff::changeKeySig: no change\n");
             return;                 // no change
+            }
 
       iKeyList ki     = _keymap->find(tick);
       KeySigEvent oval = ki != _keymap->end() ? ki->second : KeySigEvent();
@@ -302,7 +304,7 @@ printf("Staff::changeKeySig "); st.print(); printf("\n");
             m = m->prevMeasure();
       int track = idx() * VOICES;
       for (Segment* segment = measure->first(); segment; segment = segment->next1()) {
-            if (segment->subtype() != Segment::SegKeySig)
+            if (segment->subtype() != SegKeySig)
                   continue;
             //
             // we assume keySigs are only in first track (voice 0)
@@ -328,9 +330,9 @@ printf("Staff::changeKeySig "); st.print(); printf("\n");
             KeySig* keysig = new KeySig(_score);
             keysig->setTrack(idx() * VOICES);
             keysig->setTick(tick);
-            keysig->setSig(0, st.accidentalType);
+            keysig->changeType(st);
 
-            Segment::SegmentType stype = Segment::segmentType(KEYSIG);
+            SegmentType stype = Segment::segmentType(KEYSIG);
             Segment* s = measure->findSegment(stype, tick);
             if (!s) {
                   s = measure->createSegment(stype, tick);
@@ -385,7 +387,7 @@ void Staff::changeClef(int tick, int st)
             //
             int track = idx() * VOICES;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->subtype() != Segment::SegClef)
+                  if (segment->subtype() != SegClef)
                         continue;
                   int etick = segment->tick();
                   Clef* e = static_cast<Clef*>(segment->element(track));
@@ -425,7 +427,7 @@ void Staff::changeClef(int tick, int st)
             //
             if (measure->tick() == tick && (tick != 0))
                   measure = measure->prevMeasure();
-            Segment::SegmentType stype = Segment::segmentType(CLEF);
+            SegmentType stype = Segment::segmentType(CLEF);
             Segment* s = measure->findSegment(stype, tick);
             if (!s) {
                   s = measure->createSegment(stype, tick);
