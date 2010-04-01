@@ -3195,6 +3195,7 @@ qreal ScoreView::mag() const
 
 void ScoreView::setOffset(qreal x, qreal y)
       {
+printf("ScoreView::setOffset\n");
       double m = PDPI / DPI;
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), x*m, y*m, _matrix.m33());

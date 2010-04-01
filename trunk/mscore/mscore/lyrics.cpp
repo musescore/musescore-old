@@ -240,7 +240,7 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
                   }
             }
 
-      
+
 
       LyricsList* ll = nextSegment->lyricsList(staffIdx);
       lyrics         = ll->value(verse);
@@ -252,7 +252,7 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
             lyrics->setParent(nextSegment);
             lyrics->setNo(verse);
             }
-      
+
       _score->startCmd();
 
       if (oldLyrics && !moveOnly) {
@@ -268,7 +268,7 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
                         break;
                   }
             }
-            
+
       if(newLyrics)
           _score->undoAddElement(lyrics);
 
@@ -352,8 +352,8 @@ void ScoreView::lyricsMinus()
                         break;
                   }
             }
-            
-      if(newLyrics)      
+
+      if(newLyrics)
           _score->undoAddElement(lyrics);
 
       _score->select(lyrics, SELECT_SINGLE, 0);
@@ -370,10 +370,10 @@ void ScoreView::lyricsMinus()
 
 void ScoreView::lyricsUnderscore()
       {
-      Lyrics* lyrics   = (Lyrics*)editObject;
+      Lyrics* lyrics   = static_cast<Lyrics*>(editObject);
       int track        = lyrics->track();
       int staffIdx     = lyrics->staffIdx();
-      Segment* segment = (Segment*)(lyrics->parent());
+      Segment* segment = lyrics->segment();
       int verse        = lyrics->no();
       int endTick      = lyrics->tick();
 
@@ -441,8 +441,8 @@ void ScoreView::lyricsUnderscore()
             if (oldLyrics->tick() < endTick)
                   oldLyrics->setEndTick(endTick);
             }
-      if(newLyrics)
-          _score->undoAddElement(lyrics);
+      if (newLyrics)
+            _score->undoAddElement(lyrics);
 
       _score->select(lyrics, SELECT_SINGLE, 0);
       startEdit(lyrics, -1);
@@ -536,7 +536,14 @@ void Lyrics::layout()
       int line       = ll->indexOf(this);
       double y       = lh * line + point(score()->styleS(ST_lyricsDistance))
                        + sys->staff(staffIdx())->bbox().height();
-      double x       = noteHeadWidth2 - bbox().width() * .5;
+      double x;
+      //
+      // left align if syllable spans more than one note
+      //
+      if (_endTick == 0)
+            x = noteHeadWidth2 - bbox().width() * .5;
+      else
+            x = 0.0;
       setPos(x, y);
       }
 

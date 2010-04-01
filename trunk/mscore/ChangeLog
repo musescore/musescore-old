@@ -1,3 +1,9 @@
+1.apr (ws)
+      - implemented #4149: Left align lyrics for melismas and tied notes
+      - fix #4680: QString conversion of MIDI meta message text needs fixing:
+        forgot to copy trailing zero in meta data in Event(const Event&)
+      - fix #5155: High CPU Usage When Showing the beginning of a score
+        (navigator problem)
 31.mar (ws)
       - fix #5152: Crash Opening Full Orchestra MusicXML
       - fix #5065: Arpeggio collides with accidental
