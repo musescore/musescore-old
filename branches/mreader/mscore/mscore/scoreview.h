@@ -85,6 +85,7 @@ class ScoreView : public QWidget {
 
       QStateMachine* sm;
       QState* states[STATES];
+      bool addSelect;
 
       QFocusFrame* focusFrame;
       int level;
@@ -116,7 +117,6 @@ class ScoreView : public QWidget {
 
       Element* origEditObject;
       Element* editObject;          ///< Valid in edit mode
-      QPointF _startDragPosition;
       int textUndoLevel;
 
       virtual void paintEvent(QPaintEvent*);
@@ -285,6 +285,7 @@ class ScoreView : public QWidget {
       Element* getDragElement() const { return dragElement; }
       void changeLineSegment(bool);
       void midiNoteReceived(int pitch, bool);
+      void changeVoice(int voice);
       };
 
 extern int searchStaff(const Element* element);

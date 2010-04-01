@@ -1380,7 +1380,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               if (!o->invisible) {
                                     for (unsigned i = 0; i < o->fullMeasures; ++i) {
                                           Measure* m = getCreateMeasure(tick + i * ft);
-                                          Segment* s = m->getSegment(Segment::SegChordRest, tick + i * ft);
+                                          Segment* s = m->getSegment(SegChordRest, tick + i * ft);
                                           Rest* rest = new Rest(this);
                                           rest->setTick(tick + i * ft);
                                           rest->setDuration(Duration(Duration::V_MEASURE));
@@ -1390,7 +1390,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                                     }
                               }
                         if (!o->invisible) {
-                              Segment* s = m->getSegment(Segment::SegChordRest, tick);
+                              Segment* s = m->getSegment(SegChordRest, tick);
                               Rest* rest = new Rest(this);
                               rest->setTick(tick);
                               Duration d;
@@ -1410,7 +1410,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         ChordObj* o = static_cast<ChordObj*>(no);
                         int ticks = o->ticks();
                         Measure* m = getCreateMeasure(tick);
-                        Segment* s = m->getSegment(Segment::SegChordRest, tick);
+                        Segment* s = m->getSegment(SegChordRest, tick);
                         Chord* chord = new Chord(this);
                         chord->setTick(tick);
                         Duration d;
@@ -1522,7 +1522,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               KeySig* ks = new KeySig(this);
                               ks->setTrack(staffIdx * VOICES);
                               Measure* m = getCreateMeasure(tick);
-                              Segment* s = m->getSegment(Segment::SegKeySig, tick);
+                              Segment* s = m->getSegment(SegKeySig, tick);
                               s->add(ks);
                               ks->setSig(key, o->signature);
                               }
@@ -1542,7 +1542,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         ts->setTick(tick);
                         ts->setTrack(staffIdx * VOICES + voice);
                         Measure* m = getCreateMeasure(tick);
-                        Segment* s = m->getSegment(Segment::SegTimeSig, tick);
+                        Segment* s = m->getSegment(SegTimeSig, tick);
                         s->add(ts);
                         }
                         break;
@@ -1584,7 +1584,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               if (seg) {
                                     int n = so->nNotes;
                                     for (seg = seg->next1(); seg; seg = seg->next1()) {
-                                          if (seg->subtype() != Segment::SegChordRest)
+                                          if (seg->subtype() != SegChordRest)
                                                 continue;
                                           if (seg->element(track))
                                                 --n;

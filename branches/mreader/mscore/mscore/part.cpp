@@ -65,8 +65,7 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       setTrackName(t->trackName);
       setLongNameEncoded(t->longName);
 
-      setTransposeDiatonic(t->transposeDiatonic);
-      setTransposeChromatic(t->transposeChromatic);
+      setTranspose(t->transpose);
       if (t->useDrumset) {
             setUseDrumset(true);
             setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
@@ -389,15 +388,15 @@ void Part::setMidiChannel(int) const
 void Part::setInstrument(const Instrument& i)
       {
       setTrackName(i.trackName());
-      setLongName(i.longName());
-      setShortName(i.shortName());
+//      setLongName(i.longName());
+//      setShortName(i.shortName());
       setMinPitchA(i.minPitchA());
       setMaxPitchA(i.maxPitchA());
       setMinPitchP(i.minPitchP());
       setMaxPitchP(i.maxPitchP());
-      setTransposeDiatonic(i.transposeDiatonic());
-      setTransposeChromatic(i.transposeChromatic());
+      setTranspose(i.transpose());
       setDrumset(i.drumset());
+      setUseDrumset(i.useDrumset());
       setMidiActions(i.midiActions());
       setArticulation(i.articulation());
       setChannel(i.channel());

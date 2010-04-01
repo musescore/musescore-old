@@ -85,8 +85,6 @@ Instrument::Instrument()
       _maxPitchA          = 127;
       _minPitchP          = 0;
       _maxPitchP          = 127;
-      _transposeDiatonic  = 0;
-      _transposeChromatic = 0;
       _drumset            = 0;
       _useDrumset         = false;
       }
@@ -106,20 +104,20 @@ void Instrument::write(Xml& xml) const
             xml.tag("minPitchA", _minPitchA);
       if (_maxPitchA < 127)
             xml.tag("maxPitchA", _maxPitchA);
-      if (_transposeDiatonic)
-            xml.tag("transposeDiatonic", _transposeDiatonic);
-      if (_transposeChromatic)
-            xml.tag("transposeChromatic", _transposeChromatic);
+      if (_transpose.diatonic)
+            xml.tag("transposeDiatonic", _transpose.diatonic);
+      if (_transpose.chromatic)
+            xml.tag("transposeChromatic", _transpose.chromatic);
       if (_useDrumset) {
             xml.tag("useDrumset", _useDrumset);
             _drumset->save(xml);
             }
       if (!_trackName.isEmpty())
             xml.tag("trackName", _trackName);
-      if (!_longName.isEmpty())
-            xml.tag("longName", _longName);
-      if (!_shortName.isEmpty())
-            xml.tag("shortName", _shortName);
+//      if (!_longName.isEmpty())
+//            xml.tag("longName", _longName);
+//      if (!_shortName.isEmpty())
+//            xml.tag("shortName", _shortName);
       foreach(const NamedEventList& a, _midiActions)
             a.write(xml, "MidiAction");
       foreach(const Channel& a, _channel)
@@ -165,18 +163,18 @@ void Instrument::read(QDomElement e)
                   _maxPitchP = i;
             else if (tag == "trackName")
                   _trackName = val;
-            else if (tag == "longName")
-                  _longName = val;
-            else if (tag == "shortName")
-                  _shortName = val;
+//            else if (tag == "longName")
+//                  _longName = val;
+//            else if (tag == "shortName")
+//                  _shortName = val;
             else if (tag == "transposition") {    // obsolete
-                  _transposeChromatic = i;
-                  _transposeDiatonic = chromatic2diatonic(i);
+                  _transpose.chromatic = i;
+                  _transpose.diatonic = chromatic2diatonic(i);
                   }
             else if (tag == "transposeChromatic")
-                  _transposeChromatic = i;
+                  _transpose.chromatic = i;
             else if (tag == "transposeDiatonic")
-                  _transposeDiatonic = i;
+                  _transpose.diatonic = i;
             else if (tag == "useDrumset") {
                   _useDrumset = i;
                   if (_useDrumset)
@@ -461,14 +459,12 @@ void Instrument::updateVelocity(int* velocity, int channelIdx, const QString& na
       foreach(const MidiArticulation& a, c.articulation) {
             if (a.name == name) {
                   *velocity = *velocity * a.velocity / 100;
-printf("UpdateVelocity: found channel data\n");
                   return;
                   }
             }
       foreach(const MidiArticulation& a, _articulation) {
             if (a.name == name) {
                   *velocity = *velocity * a.velocity / 100;
-printf("UpdateVelocity: found instrument data\n");
                   return;
                   }
             }
@@ -488,8 +484,8 @@ bool Instrument::operator==(const Instrument& i) const
          &&  i._midiActions == _midiActions
          &&  i._channel == _channel
          &&  i._articulation == _articulation
-         &&  i._transposeDiatonic == _transposeDiatonic
-         &&  i._transposeChromatic == _transposeChromatic
+         &&  i._transpose.diatonic == _transpose.diatonic
+         &&  i._transpose.chromatic == _transpose.chromatic
          ;
       }
 
@@ -500,8 +496,9 @@ bool Instrument::operator==(const Instrument& i) const
 void Instrument::setUseDrumset(bool val)
       {
       _useDrumset = val;
-      if (val && _drumset == 0)
+      if (val && _drumset == 0) {
             _drumset = new Drumset(*smDrumset);
+            }
       }
 
 //---------------------------------------------------------
@@ -510,9 +507,9 @@ void Instrument::setUseDrumset(bool val)
 
 void Instrument::setDrumset(Drumset* ds)
       {
-      delete _drumset;
-      _drumset = ds;
-      if (_drumset)
-            _useDrumset = _drumset != 0;
+      if (ds != _drumset) {
+            delete _drumset;
+            _drumset = ds;
+            }
       }
 

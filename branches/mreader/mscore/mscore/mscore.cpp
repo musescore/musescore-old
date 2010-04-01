@@ -193,6 +193,7 @@ static const int RECENT_LIST_SIZE = 10;
 
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
+      unloadPlugins();
       QList<Score*> removeList;
       foreach(Score* score, scoreList) {
             if (score->created() && !score->dirty())
@@ -983,8 +984,8 @@ void MuseScore::selectScore(QAction* action)
       QString a = action->data().toString();
       if (!a.isEmpty()) {
             Score* score = new Score(defaultStyle);
-            score->read(a);
-            setCurrentScoreView(appendScore(score));
+            if(score->read(a)) //! \todo add a warning dialog "file not found"
+                setCurrentScoreView(appendScore(score));
             }
       }
 
@@ -1138,8 +1139,9 @@ void MuseScore::setCurrentView(int tabIdx, int idx)
       {
       if (idx == -1)
             setCurrentScoreView((ScoreView*)0);
-      else
+      else {
             (tabIdx ? tab2 : tab1)->setCurrentIndex(idx);
+            }
       }
 
 //---------------------------------------------------------
@@ -1834,7 +1836,7 @@ int main(int argc, char* av[])
 
       //read languages list
       mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
-
+      initShortcuts();
       if (!useFactorySettings)
             preferences.read();
       else {
@@ -1929,7 +1931,7 @@ int main(int argc, char* av[])
 
       initSymbols();
       genIcons();
-      initShortcuts();
+
       if (!converterMode) {
             qApp->setWindowIcon(*icons[window_ICON]);
             }

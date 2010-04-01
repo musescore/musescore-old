@@ -173,15 +173,6 @@ class Shortcut {
       };
 
 //---------------------------------------------------------
-//   Command
-//---------------------------------------------------------
-
-struct Command {
-      QAction* a;
-      int data;
-      };
-
-//---------------------------------------------------------
 //   MuseScore
 //---------------------------------------------------------
 
@@ -194,8 +185,6 @@ class MuseScore : public QMainWindow {
       QList<Score*> scoreList;
       Score* cs;              // current score
       ScoreView* cv;             // current viewer
-
-      QQueue<Command> commandQueue;
 
       QVBoxLayout* layout;    // main window layout
       QSplitter* splitter;
@@ -299,6 +288,7 @@ class MuseScore : public QMainWindow {
       void saveFile();
       void fingeringMenu();
       void registerPlugin(const QString& pluginPath);
+      void pluginExecuteFunction(int idx, const char* functionName);
       void startInspector();
       void midiinToggled(bool);
       void speakerToggled(bool);
@@ -408,6 +398,7 @@ class MuseScore : public QMainWindow {
       bool splitScreen() const { return _splitScreen; }
       void setCurrentView(int tabIdx, int idx);
       void loadPlugins();
+      void unloadPlugins();
       ScoreState state() const { return _sstate; }
       void changeState(ScoreState);
       bool readLanguages(const QString& path);

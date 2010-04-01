@@ -137,7 +137,7 @@ void ChordProperties::ontimeOffsetTypeChanged(int vt)
             case USER_VAL:
                   ontimeOffset->setReadOnly(false);
                   ontimeOffset->setSuffix("");
-                  ontimeOffset->setRange(0, 127);
+                  ontimeOffset->setRange(-1000, 1000);
                   ontimeOffset->setValue(_ontimeOffset);
                   break;
             case OFFSET_VAL:
@@ -178,7 +178,7 @@ void ChordProperties::offtimeOffsetTypeChanged(int vt)
             case USER_VAL:
                   offtimeOffset->setReadOnly(false);
                   offtimeOffset->setSuffix("");
-                  offtimeOffset->setRange(0, 127);
+                  offtimeOffset->setRange(-1000, +1000);
                   offtimeOffset->setValue(_offtimeOffset);
                   break;
             case OFFSET_VAL:

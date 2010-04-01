@@ -1080,7 +1080,8 @@ void ChordList::read(QDomElement e)
 bool ChordList::read(const QString& name)
       {
       QString path;
-      if (name[0] == '/')
+      QFileInfo ftest(name);
+      if (ftest.isAbsolute())
             path = name;
       else
             path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(name);

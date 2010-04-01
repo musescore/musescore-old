@@ -46,7 +46,7 @@ ChordRest* nextChordRest(ChordRest* cr)
             return 0;
       int track = cr->track();
       for (Segment* seg = cr->segment()->next1(); seg; seg = seg->next1()) {
-            if (seg->subtype() != Segment::SegChordRest)
+            if (seg->subtype() != SegChordRest)
                   continue;
             if (seg->measure()->multiMeasure() < 0)
                   continue;
@@ -68,7 +68,7 @@ ChordRest* prevChordRest(ChordRest* cr)
             return 0;
       int track = cr->track();
       for (Segment* seg = cr->segment()->prev1(); seg; seg = seg->prev1()) {
-            if (seg->subtype() != Segment::SegChordRest)
+            if (seg->subtype() != SegChordRest)
                   continue;
             if (seg->measure()->multiMeasure() < 0)
                   continue;
@@ -259,7 +259,7 @@ ChordRest* Score::nextMeasure(ChordRest* element, bool selectBehavior)
       bool last = false;
 
       if (selection().state() == SEL_RANGE) {
-            if (element->tick() != endTick && selection().endSegment()->tick() <= endTick) {
+            if (element->tick() != endTick && selection().tickEnd() <= endTick) {
                   measure = element->measure();
                   last = true;
                   }

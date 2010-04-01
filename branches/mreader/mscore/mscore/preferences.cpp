@@ -782,7 +782,10 @@ void PreferenceDialog::portaudioApiActivated(int)  {}
 
 bool ShortcutItem::operator<(const QTreeWidgetItem& item) const
       {
-      return QString::localeAwareCompare(text(0).toLower(), item.text(0).toLower()) < 0;
+      
+      const QTreeWidget * pTree =treeWidget ();
+      int column   = pTree ? pTree->sortColumn() : 0;
+      return QString::localeAwareCompare(text(column).toLower(), item.text(column).toLower()) < 0;
       }
 
 //---------------------------------------------------------
@@ -798,7 +801,13 @@ void PreferenceDialog::updateSCListView()
             ShortcutItem* newItem = new ShortcutItem;
             newItem->setText(0, s->descr);
             newItem->setIcon(0, *icons[s->icon]);
-            newItem->setText(1, s->key.toString(QKeySequence::NativeText));
+            if(!s->key.isEmpty())
+                newItem->setText(1, s->key.toString(QKeySequence::NativeText));
+            else{
+                QList<QKeySequence> list = QKeySequence::keyBindings(s->standardKey);
+                if (list.size() > 0)
+                    newItem->setText(1, list.at(0).toString(QKeySequence::NativeText));
+                }
             newItem->setData(0, Qt::UserRole, s->xml);
             shortcutList->addTopLevelItem(newItem);
             }
@@ -1251,10 +1260,10 @@ QAction* getAction(Shortcut* s)
             QAction* a = new QAction(s->xml, 0); // mscore);
             s->action  = a;
             a->setData(s->xml);
-            if (s->standardKey != QKeySequence::UnknownKey)
-                  a->setShortcuts(s->standardKey);
+            if(!s->key.isEmpty())
+                a->setShortcut(s->key);
             else
-                  a->setShortcut(s->key);
+                a->setShortcuts(s->standardKey);                  
             a->setShortcutContext(s->context);
             if (!s->help.isEmpty()) {
                   a->setToolTip(s->help);

@@ -23,6 +23,7 @@
 
 #include "globals.h"
 #include "event.h"
+#include "interval.h"
 
 class Instrument;
 class Xml;
@@ -101,11 +102,10 @@ struct Channel {
 
 struct Instrument {
       QString _trackName;           ///< used in tracklist
-      QString _longName;
-      QString _shortName;
+//      QString _longName;
+//      QString _shortName;
       char _minPitchA, _maxPitchA, _minPitchP, _maxPitchP;
-      char _transposeDiatonic;
-      char _transposeChromatic;
+      Interval _transpose;
 
       bool _useDrumset;
       Drumset* _drumset;
@@ -132,17 +132,15 @@ struct Instrument {
       void setMaxPitchP(int v)                 { _maxPitchP = v;     }
       void setMinPitchA(int v)                 { _minPitchA = v;     }
       void setMaxPitchA(int v)                 { _maxPitchA = v;     }
-      int transposeChromatic() const           { return _transposeChromatic; }
-      int transposeDiatonic() const            { return _transposeDiatonic; }
-      void setTransposeChromatic(int v)        { _transposeChromatic = v; }
-      void setTransposeDiatonic(int v)         { _transposeDiatonic = v; }
+      Interval transpose() const               { return _transpose; }
+      void setTranspose(const Interval& v)     { _transpose = v; }
 
       QString trackName() const                { return _trackName;  }
       void setTrackName(const QString& s)      { _trackName = s; }
-      QString longName() const                 { return _longName; }
-      QString shortName() const                { return _shortName; }
-      void setLongName(const QString& s)       { _longName = s; }
-      void setShortName(const QString& s)      { _shortName = s; }
+//      QString longName() const                 { return _longName; }
+//      QString shortName() const                { return _shortName; }
+//      void setLongName(const QString& s)       { _longName = s; }
+//      void setShortName(const QString& s)      { _shortName = s; }
 
       void setDrumset(Drumset* ds);
       Drumset* drumset() const                 { return _drumset;    }

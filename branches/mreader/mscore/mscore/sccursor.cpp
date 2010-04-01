@@ -26,7 +26,9 @@
 #include "text.h"
 #include "measure.h"
 #include "repeatlist.h"
+#include "page.h"
 #include "script.h"
+#include "system.h"
 #include "sccursor.h"
 
 //---------------------------------------------------------
@@ -88,7 +90,7 @@ void SCursor::rewind(int type)
                   _segment = m->first();
                   if (_staffIdx >= 0) {
                         int track = _staffIdx * VOICES + _voice;
-                        while (_segment && ((_segment->subtype() != Segment::SegChordRest) || (_segment->element(track) == 0)))
+                        while (_segment && ((_segment->subtype() != SegChordRest) || (_segment->element(track) == 0)))
                               _segment = _segment->next1();
                         }
                   }
@@ -115,10 +117,10 @@ Q_DECLARE_METATYPE(Text*);
 
 static const char* const function_names_cursor[] = {
       "rewind", "eos", "chord", "rest", "measure", "next", "nextMeasure", "putStaffText",  "isChord", "isRest",
-      "add", "tick", "time", "staff", "voice"
+      "add", "tick", "time", "staff", "voice", "pageNumber", "pos", "goToSelectionStart", "goToSelectionEnd",
       };
 static const int function_lengths_cursor[] = {
-      0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0
+      0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0
       };
 static const QScriptValue::PropertyFlags flags_cursor[] = {
       QScriptValue::SkipInEnumeration,
@@ -135,7 +137,11 @@ static const QScriptValue::PropertyFlags flags_cursor[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration
       };
 
 ScriptInterface cursorInterface = {
@@ -220,12 +226,18 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                         }
                   break;
             case 8:     // "isChord",
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), cursor->cr()->type() == CHORD);
+                  if (context->argumentCount() == 0) {
+                        ChordRest* cr = cursor->cr();
+                        bool val = cr ? cr->type() == CHORD : false;
+                        return qScriptValueFromValue(context->engine(), val);
+                        }
                   break;
             case 9:     // "isRest",
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), cursor->cr()->type() == REST);
+                  if (context->argumentCount() == 0) {
+                        ChordRest* cr = cursor->cr();
+                        bool val = cr ? cr->type() == REST : false;
+                        return qScriptValueFromValue(context->engine(), val);
+                        }
                   break;
             case 10:    // "add",
                   if (context->argumentCount() == 1) {
@@ -269,6 +281,32 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                         else if (val >= VOICES)
                               val = VOICES - 1;
                         cursor->setVoice(val);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+             case 15:    // "pageNumber",
+                  if (context->argumentCount() == 0)
+                        if(cursor->segment())
+                            return qScriptValueFromValue(context->engine(), cursor->segment()->measure()->system()->page()->no());
+                  break;
+             case 16:    // "pos"
+                  if (context->argumentCount() == 0){
+                        if(cursor->segment()){
+                              Page* page = (Page*)cursor->segment()->measure()->parent()->parent();
+                              QPointF pos(cursor->segment()->canvasPos().x() - page->canvasPos().x(),  cursor->segment()->canvasPos().y());
+                              return qScriptValueFromValue(context->engine(), pos);
+                            }
+                        }
+                  break;
+             case 17:    // "goToSelectionStart"
+                  if (context->argumentCount() == 0) {
+                        cursor->rewind(1);
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+             case 18:    // "goToSelectionEnd"
+                  if (context->argumentCount() == 0) {
+                        cursor->rewind(2);
                         return context->engine()->undefinedValue();
                         }
                   break;
@@ -332,7 +370,9 @@ QScriptValue create_Cursor_class(QScriptEngine* engine)
 
 bool SCursor::next()
       {
-      Segment* seg = segment();;
+      if (!_segment)
+            return false;
+      Segment* seg = _segment;
       seg = seg->next1();
       RepeatSegment* rs = repeatSegment();
       if (rs && expandRepeat()){
@@ -355,9 +395,7 @@ bool SCursor::next()
 
       if (_staffIdx >= 0) {
             int track = _staffIdx * VOICES + _voice;
-            while (seg
-               && ((seg->subtype() != Segment::SegChordRest && seg->subtype() != Segment::SegGrace)
-               || (seg->element(track) == 0))) {
+            while (seg && (!(seg->subtype() & (SegChordRest | SegGrace)) || !seg->element(track))) {
                   seg = seg->next1();
                   }
             }
@@ -401,7 +439,7 @@ bool SCursor::nextMeasure()
       Segment* seg = m->first();
       if (_staffIdx >= 0) {
             int track = _staffIdx * VOICES + _voice;
-            while (seg && ((seg->subtype() != Segment::SegChordRest) || (seg->element(track) == 0)))
+            while (seg && ((seg->subtype() != SegChordRest) || (seg->element(track) == 0)))
                   seg = seg->next1();
             }
       _segment = seg;
@@ -446,7 +484,7 @@ void SCursor::add(ChordRest* c)
             return;
             }
       Measure* measure = score()->tick2measure(tick);
-      Segment::SegmentType st = Segment::SegChordRest;
+      SegmentType st = SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);
@@ -474,10 +512,12 @@ int SCursor::tick()
       RepeatSegment* rs = repeatSegment();
       if (rs && expandRepeat())
             offset = rs->utick - rs->tick;
-      if(cr())
+      if (cr())
           return cr()->tick() + offset;
+      else if (segment())
+          return segment()->tick() + offset;
       else
-          return 0;
+          return _score->lastMeasure()->tick() + _score->lastMeasure()->tickLen() + offset;  // end of score
       }
 
 //---------------------------------------------------------

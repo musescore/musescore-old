@@ -36,8 +36,6 @@ KeySigEvent::KeySigEvent()
 KeySigEvent::KeySigEvent(int v)
       {
       subtype = v;
-      invalid = false;
-      custom  = false;
       }
 
 //---------------------------------------------------------
@@ -222,9 +220,9 @@ int transposeKey(int key, int semitones)
 
       while (semitones < 0)
             semitones += 12;
-      semitones = semitones % 12;
+      semitones %= 12;
 
-// printf("transposeKey key %d semitones %d\n", key, semitones);
+printf("transposeKey key %d semitones %d\n", key, semitones);
 
       // switch to enharmonic key:
       if (key == -7)
@@ -238,7 +236,7 @@ int transposeKey(int key, int semitones)
       int kpitch = kp[key];
       kpitch = (kpitch + semitones) % 12;
       key = kp1[kpitch] - 6;
-// printf("  key %d\n", key);
+printf("  key %d\n", key);
       return key;
       }
 

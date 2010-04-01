@@ -69,6 +69,9 @@ class Stem : public Element {
       virtual void toDefault();
       Spatium userLen() const         { return _userLen; }
       virtual void setVisible(bool f);
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      Chord* chord() const            { return (Chord*)parent(); }
       };
 
 //---------------------------------------------------------
@@ -177,6 +180,7 @@ class Chord : public ChordRest {
       Arpeggio* arpeggio() const             { return _arpeggio;  }
       Tremolo* tremolo() const               { return _tremolo;   }
       Glissando* glissando() const           { return _glissando; }
+      StemSlash* stemSlash() const           { return _stemSlash; }
 
       virtual QPointF stemPos(bool, bool) const;
 

@@ -45,8 +45,6 @@ InstrumentTemplate::InstrumentTemplate()
       maxPitchA          = 127;
       minPitchP          = 0;
       maxPitchP          = 127;
-      transposeChromatic = 0;
-      transposeDiatonic  = 0;
       useDrumset         = false;
       drumset            = 0;
       extended           = false;
@@ -70,8 +68,7 @@ InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
       maxPitchA  = t.maxPitchA;
       minPitchP  = t.minPitchP;
       maxPitchP  = t.maxPitchP;
-      transposeChromatic = t.transposeChromatic;
-      transposeDiatonic  = t.transposeDiatonic;
+      transpose  = t.transpose;
       useDrumset = t.useDrumset;
       if (t.drumset)
             drumset = new Drumset(*t.drumset);
@@ -120,10 +117,10 @@ void InstrumentTemplate::write(Xml& xml) const
             xml.tag("aPitchRange", QString("%1-%2").arg(minPitchA).arg(maxPitchA));
       if (minPitchP != 0 || maxPitchP != 127)
             xml.tag("pPitchRange", QString("%1-%2").arg(minPitchP).arg(maxPitchP));
-      if (transposeDiatonic)
-            xml.tag("transposeDiatonic", transposeDiatonic);
-      if (transposeChromatic)
-            xml.tag("transposeChromatic", transposeChromatic);
+      if (transpose.diatonic)
+            xml.tag("transposeDiatonic", transpose.diatonic);
+      if (transpose.chromatic)
+            xml.tag("transposeChromatic", transpose.chromatic);
       if (useDrumset) {
             xml.tag("drumset", useDrumset);
             drumset->save(xml);
@@ -208,8 +205,8 @@ void InstrumentTemplate::read(QDomElement e)
       maxPitchA  = 127;
       minPitchP  = 0;
       maxPitchP  = 127;
-      transposeDiatonic  = 0;
-      transposeChromatic  = 0;
+      transpose.diatonic  = 0;
+      transpose.chromatic  = 0;
       useDrumset = false;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -252,13 +249,13 @@ void InstrumentTemplate::read(QDomElement e)
             else if (tag == "pPitchRange")
                   setPitchRange(val, &minPitchP, &maxPitchP);
             else if (tag == "transposition") {    // obsolete
-                  transposeChromatic = i;
-                  transposeDiatonic = chromatic2diatonic(i);
+                  transpose.chromatic = i;
+                  transpose.diatonic = chromatic2diatonic(i);
                   }
             else if (tag == "transposeChromatic")
-                  transposeChromatic = i;
+                  transpose.chromatic = i;
             else if (tag == "transposeDiatonic")
-                  transposeDiatonic = i;
+                  transpose.diatonic = i;
             else if (tag == "drumset")
                   useDrumset = i;
             else if (tag == "Drum") {

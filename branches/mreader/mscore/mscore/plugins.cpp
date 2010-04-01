@@ -50,8 +50,10 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       if (debugMode)
             printf("Register Plugin <%s>\n", qPrintable(pluginPath));
 
-      if (se == 0)
+      if (se == 0){
             se = new ScriptEngine();
+            se->installTranslatorFunctions();
+            }
       QScriptValue val  = se->evaluate(f.readAll(), pluginPath);
       if (se->hasUncaughtException()) {
             QScriptValue sv = se->uncaughtException();
@@ -183,6 +185,17 @@ void MuseScore::loadPlugins()
       }
 
 //---------------------------------------------------------
+//   unloadPlugins
+//---------------------------------------------------------
+
+void MuseScore::unloadPlugins()
+      {
+      for(int idx = 0; idx < plugins.size() ; idx++){
+          pluginExecuteFunction(idx, "onClose");
+          }
+      }
+
+//---------------------------------------------------------
 //   loadPlugin
 //---------------------------------------------------------
 
@@ -250,6 +263,12 @@ ScriptEngine::ScriptEngine()
 
 void MuseScore::pluginTriggered(int idx)
       {
+      pluginExecuteFunction(idx, "run");
+      }
+
+
+void MuseScore::pluginExecuteFunction(int idx, const char* functionName)
+      {
       QString pp = plugins[idx];
       QFile f(pp);
       if (!f.open(QIODevice::ReadOnly)) {
@@ -258,9 +277,10 @@ void MuseScore::pluginTriggered(int idx)
             return;
             }
       if (debugMode)
-            printf("Run Plugin <%s>\n", qPrintable(pp));
+            printf("Run Plugin <%s> : <%s>\n", qPrintable(pp), functionName);
       if (se == 0) {
             se = new ScriptEngine();
+            se->installTranslatorFunctions();
             if (debugMode) {
                   QStringList lp = qApp->libraryPaths();
                   foreach(const QString& s, lp)
@@ -293,9 +313,10 @@ void MuseScore::pluginTriggered(int idx)
 
       QScriptValue val = se->evaluate(f.readAll(), pp);
       f.close();
-      QScriptValue run = val.property("run");
+      QScriptValue run = val.property(functionName);
       if (!run.isFunction()) {
-            printf("Run plugin: no run function found\n");
+            if (debugMode)
+                printf("Execute plugin: no %s function found\n", functionName);
             return;
             }
 
@@ -313,7 +334,7 @@ void MuseScore::pluginTriggered(int idx)
                );
             }
       foreach(Score* s, scoreList)
-            s->endCmd();
-      cs->end();
-      }
-
+          s->endCmd();
+      if(cs)
+          cs->end();
+      } 

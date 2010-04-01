@@ -38,6 +38,7 @@
 #include "al/al.h"
 #include "scoreview.h"
 #include "key.h"
+#include "interval.h"
 
 namespace AL {
       class TempoMap;
@@ -329,7 +330,7 @@ class Score : public QObject {
       void cmdInsertClef(int type);
       void cmdExchangeVoice(int, int);
 
-      void updateSelectedElements(SelState);
+      void updateSelectedElements();
       void removeChordRest(ChordRest* cr, bool clearSegment);
       void cmdMove(Element* e, QPointF delta);
 
@@ -353,9 +354,7 @@ class Score : public QObject {
       void layoutStage1();
       void layoutStage2();
       void layoutStage3();
-      void layoutChords1(Segment* segment, int staffIdx);
-      void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd,
-         int key, int semitones);
+      void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int semitones);
       void reLayout(Measure*);
 
    signals:
@@ -397,10 +396,7 @@ class Score : public QObject {
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
       void transpose();
-      void transposeBySemitones(Note* n, int diff);
-      void transposeByKey(int oKey, int keysig, TransposeDirection dir, bool useSharpsFlats,
-         int*, int*);
-      void transposeByInterval(Note* n, int diatonic, int chromatic, bool useSharpsFlats);
+      void transpose(Note* n, Interval, bool useSharpsFlats);
 
       Score(const Style&);
       ~Score();
@@ -588,7 +584,7 @@ class Score : public QObject {
       int pos();
       Measure* tick2measure(int tick) const;
       MeasureBase* tick2measureBase(int tick) const;
-      Segment* tick2segment(int tick) const;
+      Segment* tick2segment(int tick, bool first = false) const;
       void fixTicks();
       void addArticulation(Element*, Articulation* atr);
 
@@ -681,7 +677,7 @@ class Score : public QObject {
       QList<MidiMapping>* midiMapping()       { return &_midiMapping; }
       void rebuildMidiMapping();
       void updateChannel();
-      void cmdTransposeStaff(int staffIdx, int diatonic, int chromatic, bool useDoubleSharpsFlats);
+      void cmdTransposeStaff(int staffIdx, Interval, bool useDoubleSharpsFlats);
       void cmdConcertPitchChanged(bool, bool useSharpsFlats);
       AL::TempoMap* tempomap() const { return _tempomap; }
 
@@ -800,6 +796,7 @@ class Score : public QObject {
       void setShowOmr(bool v) { _showOmr = v; }
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       void doLayout();
+      void layoutChords1(Segment* segment, int staffIdx);
       };
 
 extern Score* gscore;

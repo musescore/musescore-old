@@ -1578,7 +1578,7 @@ static bool hasBreathMark(Chord* ch)
       {
       Segment* s = ch->segment();
       s = s->next1();
-      return (s->subtype() == Segment::SegBreath && s->element(ch->track()));
+      return (s->subtype() == SegBreath && s->element(ch->track()));
       }
 
 //---------------------------------------------------------
@@ -1922,7 +1922,7 @@ static Chord* nextChord(Chord* ch)
       Segment* s = ch->segment();
       s = s->next1();
       while (s) {
-            if (s->subtype() == Segment::SegChordRest && s->element(ch->track()))
+            if (s->subtype() == SegChordRest && s->element(ch->track()))
                   break;
             s = s->next1();
             }
@@ -2092,12 +2092,18 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                         case ACC_SHARP2:  s = "double-sharp"; break;
                         case ACC_FLAT2:   s = "flat-flat";    break;
                         case ACC_NATURAL: s = "natural";      break;
-                        case 16: s = "quarter-flat";          break; //flat-slash (alternative quarter flat)
-                        case 19: s = "quarter-flat";          break; //mirrored-flat (quarter flat recommended by Michael)
-                        case 22: s = "quarter-sharp";         break;
-                        case 18: s = "three-quarters-flat";   break; //mirrored-flat1 (three quarter flat recommended by Michael)
-                        case 21: s = "three-quarters-flat";   break; //flat-flat-slash (alternative three quarters flat)
-                        case 25: s = "three-quarters-sharp";  break;
+                        case 16: s = "quarter-flat";          break; //flat-slash (alternative)
+                        case 19: s = "quarter-flat";          break; //mirrored-flat (recommended by Michael)
+                        case 29: s = "quarter-flat";          break; //flat arrow up (alternative)
+                        case 33: s = "quarter-flat";          break; //natural arrow down (alternative)
+                        case 22: s = "quarter-sharp";         break; //sharp-slash (recommended by Michael)
+                        case 27: s = "quarter-sharp";         break; //sharp arrow down (alternative)
+                        case 32: s = "quarter-sharp";         break; //natural arrow up (alternative)
+                        case 18: s = "three-quarters-flat";   break; //mirrored-flat1 (recommended by Michael)
+                        case 21: s = "three-quarters-flat";   break; //flat-flat-slash (alternative)
+                        case 30: s = "three-quarters-flat";   break; //flat arrow down (alternative)
+                        case 25: s = "three-quarters-sharp";  break; //sharp-slash4 (recommended by Michael)
+                        case 26: s = "three-quarters-sharp";  break; //sharp arrow up (alternate)
                         default:
                               printf("unknown accidental %d\n", acc);
                         }
@@ -2145,10 +2151,8 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             //    <beam number="1">backward hook</beam>
             //    <beam number="1">forward hook</beam>
 
-            if (note == nl.front() && chord->beam()) {
-                  QString s = chord->beam()->xmlType(chord);
-                  xml.tag("beam number=\"1\"", s);
-                  }
+            if (note == nl.front() && chord->beam())
+                  chord->beam()->writeMusicXml(xml, chord);
 
             Notations notations;
             Technical technical;
@@ -2168,11 +2172,22 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   chordAttributes(chord, notations, technical, xml);
                   }
             foreach (const Element* e, *note->el()) {
-                  if (e->type() == TEXT && e->subtype() == TEXT_FINGERING) {
+                  if (e->type() == TEXT
+                      && (e->subtype() == TEXT_FINGERING || e->subtype() == TEXT_STRING_NUMBER)) {
                         Text* f = (Text*)e;
                         notations.tag(xml);
                         technical.tag(xml);
-                        xml.tag("fingering", f->getText());
+                        QString t = f->getText();
+                        if (e->subtype() == TEXT_FINGERING) {
+                              // p, i, m, a, c represent the plucking finger
+                              if (t == "p" || t == "i"  || t == "m" || t == "a" || t == "c")
+                                    xml.tag("pluck", t);
+                              else
+                                    xml.tag("fingering", t);
+                              }
+                        else
+                              // TEXT_STRING_NUMBER
+                              xml.tag("string", t);
                         }
                   else {
                         // TODO
@@ -3497,10 +3512,10 @@ foreach(Element* el, *(score->gel())) {
                             xml.etag();
                           }
                         }
-                        if (part->transposeDiatonic() || part->transposeChromatic()) {
+                        if (part->transpose().chromatic) {
                           xml.stag("transpose");
-                          xml.tag("diatonic", part->transposeDiatonic());
-                          xml.tag("chromatic", part->transposeChromatic());
+                          xml.tag("diatonic",  part->transpose().diatonic);
+                          xml.tag("chromatic", part->transpose().chromatic);
                           xml.etag();
                         }
                       }

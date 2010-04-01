@@ -140,7 +140,9 @@ QPointF Lyrics::canvasPos() const
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = measure()->system();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      double yp = y();
+	  if(system)
+	      yp = yp + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
 
@@ -152,6 +154,7 @@ void ScoreView::lyricsUpDown(bool up, bool end)
       {
       Lyrics* lyrics   = static_cast<Lyrics*>(editObject);
       int staffIdx     = lyrics->staffIdx();
+      int track        = lyrics->track();
       Segment* segment = lyrics->segment();
       int verse        = lyrics->no();
       LyricsList* ll   = segment->lyricsList(staffIdx);
@@ -169,6 +172,14 @@ void ScoreView::lyricsUpDown(bool up, bool end)
       endEdit();
       _score->startCmd();
       lyrics = ll->value(verse);
+      if (!lyrics) {
+            lyrics = new Lyrics(_score);
+            lyrics->setTick(segment->tick());
+            lyrics->setTrack(track);
+            lyrics->setParent(segment);
+            lyrics->setNo(verse);
+            _score->undoAddElement(lyrics);
+            }
 
       _score->select(lyrics, SELECT_SINGLE, 0);
       startEdit(lyrics, -1);
@@ -229,10 +240,11 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
                   }
             }
 
-      _score->startCmd();
+      
 
       LyricsList* ll = nextSegment->lyricsList(staffIdx);
       lyrics         = ll->value(verse);
+      bool newLyrics = (lyrics == 0);
       if (!lyrics) {
             lyrics = new Lyrics(_score);
             lyrics->setTick(nextSegment->tick());
@@ -240,8 +252,8 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
             lyrics->setParent(nextSegment);
             lyrics->setNo(verse);
             }
-
-      //lyrics->setSyllabic(Lyrics::SINGLE);
+      
+      _score->startCmd();
 
       if (oldLyrics && !moveOnly) {
             switch(oldLyrics->syllabic()) {
@@ -249,20 +261,16 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
                   case Lyrics::END:
                         break;
                   case Lyrics::BEGIN:
-//                        oldLyrics->setEndTick(endTick);
                         oldLyrics->setSyllabic(Lyrics::END);
                         break;
                   case Lyrics::MIDDLE:
-//                        if (oldLyrics->tick() < endTick) {
-//                              oldLyrics->setEndTick(endTick);
-//                              }
                         oldLyrics->setSyllabic(Lyrics::END);
                         break;
                   }
             }
-
-      //lyrics->setSyllabic(Lyrics::SINGLE);
-      _score->undoAddElement(lyrics);
+            
+      if(newLyrics)
+          _score->undoAddElement(lyrics);
 
       _score->select(lyrics, SELECT_SINGLE, 0);
       startEdit(lyrics, -1);
@@ -316,6 +324,7 @@ void ScoreView::lyricsMinus()
 
       LyricsList* ll = nextSegment->lyricsList(staffIdx);
       lyrics         = ll->value(verse);
+      bool newLyrics = (lyrics == 0);
       if (!lyrics) {
             lyrics = new Lyrics(_score);
             lyrics->setTick(nextSegment->tick());
@@ -343,7 +352,9 @@ void ScoreView::lyricsMinus()
                         break;
                   }
             }
-      _score->undoAddElement(lyrics);
+            
+      if(newLyrics)      
+          _score->undoAddElement(lyrics);
 
       _score->select(lyrics, SELECT_SINGLE, 0);
       startEdit(lyrics, -1);
@@ -407,6 +418,7 @@ void ScoreView::lyricsUnderscore()
 
       LyricsList* ll = nextSegment->lyricsList(staffIdx);
       lyrics         = ll->value(verse);
+      bool newLyrics = (lyrics == 0);
       if (!lyrics) {
             lyrics = new Lyrics(_score);
             lyrics->setTick(nextSegment->tick());
@@ -429,7 +441,8 @@ void ScoreView::lyricsUnderscore()
             if (oldLyrics->tick() < endTick)
                   oldLyrics->setEndTick(endTick);
             }
-      _score->undoAddElement(lyrics);
+      if(newLyrics)
+          _score->undoAddElement(lyrics);
 
       _score->select(lyrics, SELECT_SINGLE, 0);
       startEdit(lyrics, -1);

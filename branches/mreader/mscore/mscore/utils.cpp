@@ -139,7 +139,7 @@ MeasureBase* Score::tick2measureBase(int tick) const
 //   tick2segment
 //---------------------------------------------------------
 
-Segment* Score::tick2segment(int tick) const
+Segment* Score::tick2segment(int tick, bool first) const
       {
       Measure* m = tick2measure(tick);
       if (m == 0) {
@@ -147,10 +147,10 @@ Segment* Score::tick2segment(int tick) const
             return 0;
             }
       for (Segment* segment = m->first(); segment;) {
-            Segment* nsegment = segment->next();
             int t1 = segment->tick();
+            Segment* nsegment = segment->next();
             int t2 = nsegment ? nsegment->tick() : INT_MAX;
-            if (tick >= t1 && tick < t2)
+            if (((tick == t1) && first) || ((tick >= t1) && (tick < t2)))
                   return segment;
             segment = nsegment;
             }
@@ -182,7 +182,7 @@ int Score::nextSeg(int tick, int track)
             seg = seg->next1();
             if (seg == 0)
                   break;
-            if (seg->subtype() != Segment::SegChordRest)
+            if (seg->subtype() != SegChordRest)
                   continue;
             if (seg->element(track))
                   break;
@@ -207,7 +207,7 @@ int Score::nextSeg1(int tick, int& track)
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
       while ((seg = seg->next1())) {
-            if (seg->subtype() != Segment::SegChordRest)
+            if (seg->subtype() != SegChordRest)
                   continue;
             if (seg->element(track))
                   break;
@@ -242,7 +242,7 @@ int Score::prevSeg1(int tick, int& track)
             seg = seg->prev1();
             if (seg == 0)
                   break;
-            if (seg->subtype() != Segment::SegChordRest)
+            if (seg->subtype() != SegChordRest)
                   continue;
             if (seg->element(track))
                   break;
@@ -429,39 +429,39 @@ QString pitch2string(int v)
 //---------------------------------------------------------
 
 Interval intervalList[26] = {
-      { 0, 0 },         //  0 Perfect Unison
-      { 0, 1 },         //  1 Augmented Unison
+      Interval(0, 0),         //  0 Perfect Unison
+      Interval(0, 1),         //  1 Augmented Unison
 
-      { 1, 0 },         //  2 Diminished Second
-      { 1, 1 },         //  3 Minor Second
-      { 1, 2 },         //  4 Major Second
-      { 1, 3 },         //  5 Augmented Second
+      Interval(1, 0),         //  2 Diminished Second
+      Interval(1, 1),         //  3 Minor Second
+      Interval(1, 2),         //  4 Major Second
+      Interval(1, 3),         //  5 Augmented Second
 
-      { 2, 2 },         //  6 Diminished Third
-      { 2, 3 },         //  7 Minor Third
-      { 2, 4 },         //  8 Major Third
-      { 2, 5 },         //  9 Augmented Third
+      Interval(2, 2),         //  6 Diminished Third
+      Interval(2, 3),         //  7 Minor Third
+      Interval(2, 4),         //  8 Major Third
+      Interval(2, 5),         //  9 Augmented Third
 
-      { 3, 4 },         // 10 Diminished Fourth
-      { 3, 5 },         // 11 Perfect Fourth
-      { 3, 6 },         // 12 Augmented Fourth
+      Interval(3, 4),         // 10 Diminished Fourth
+      Interval(3, 5),         // 11 Perfect Fourth
+      Interval(3, 6),         // 12 Augmented Fourth
 
-      { 4, 6 },         // 13 Diminished Fifth
-      { 4, 7 },         // 14 Perfect Fifth
-      { 4, 8 },         // 15 Augmented Fifth
+      Interval(4, 6),         // 13 Diminished Fifth
+      Interval(4, 7),         // 14 Perfect Fifth
+      Interval(4, 8),         // 15 Augmented Fifth
 
-      { 5, 7 },         // 16 Diminished Sixth
-      { 5, 8 },         // 17 Minor Sixth
-      { 5, 9 },         // 18 Major Sixth
-      { 5, 10 },        // 19 Augmented Sixth
+      Interval(5, 7),         // 16 Diminished Sixth
+      Interval(5, 8),         // 17 Minor Sixth
+      Interval(5, 9),         // 18 Major Sixth
+      Interval(5, 10),        // 19 Augmented Sixth
 
-      { 6, 9 },         // 20 Diminished Seventh
-      { 6, 10 },        // 21 Minor Seventh
-      { 6, 11 },        // 22 Major Seventh
-      { 6, 12 },        // 23 Augmented Seventh
+      Interval(6, 9),         // 20 Diminished Seventh
+      Interval(6, 10),        // 21 Minor Seventh
+      Interval(6, 11),        // 22 Major Seventh
+      Interval(6, 12),        // 23 Augmented Seventh
 
-      { 7, 11 },        // 24 Diminshed Octave
-      { 7, 12 }         // 25 Perfect Octave
+      Interval(7, 11),        // 24 Diminshed Octave
+      Interval(7, 12)         // 25 Perfect Octave
       };
 
 //---------------------------------------------------------
@@ -493,7 +493,7 @@ int chromatic2diatonic(int semitones)
       int val = semitones % 12;
       int octave = semitones / 12;
       int intervalIndex = il[val];
-      int steps = intervalList[intervalIndex].steps;
+      int steps = intervalList[intervalIndex].diatonic;
       steps = steps + octave * 7;
       return down ? -steps : steps;
       }
@@ -506,7 +506,7 @@ int searchInterval(int steps, int semitones)
       {
       unsigned n = sizeof(intervalList)/sizeof(*intervalList);
       for (unsigned i = 0; i < n; ++i) {
-            if ((intervalList[i].steps == steps) && (intervalList[i].semitones == semitones))
+            if ((intervalList[i].diatonic == steps) && (intervalList[i].chromatic == semitones))
                   return i;
             }
       return -1;
@@ -516,10 +516,22 @@ int searchInterval(int steps, int semitones)
 //   transposeInterval
 //---------------------------------------------------------
 
-void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int steps, int semitones,
+void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, Interval interval,
    bool useDoubleSharpsFlats)
       {
-      *rpitch = pitch + semitones;
+      *rpitch   = pitch + interval.chromatic;
+      int steps = interval.diatonic;
+
+      int minAlter;
+      int maxAlter;
+      if (useDoubleSharpsFlats) {
+            minAlter = -2;
+            maxAlter = 2;
+            }
+      else {
+            minAlter = -1;
+            maxAlter = 1;
+            }
 
       int step, alter;
       for (;;) {
@@ -536,19 +548,11 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int steps, in
                   }
 
             int p1     = tpc2pitch(step2tpc(step, 0)) + octave * 12;
-            alter      = semitones - (p1 - pitch);
-
-            int minAlter;
-            int maxAlter;
-            if (useDoubleSharpsFlats) {
-                  minAlter = -2;
-                  maxAlter = 2;
-                  }
-            else {
-                  minAlter = -1;
-                  maxAlter = 1;
-                  }
-
+            alter      = interval.chromatic - (p1 - pitch);
+            if (alter < 0)
+                  alter = -((-alter) % 12);
+            else
+                  alter %= 12;
             if (alter > maxAlter)
                   ++steps;
             else if (alter < minAlter)
@@ -563,37 +567,53 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, int steps, in
 //   transposeTpc
 //---------------------------------------------------------
 
-int transposeTpc(int tpc, int interval, TransposeDirection dir)
+int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
       {
-      if (tpc == INVALID_TPC || interval == 0 || interval == 25) // perfect unison & perfect octave
+      if (tpc == INVALID_TPC) // perfect unison & perfect octave
             return tpc;
 
-      int steps     = intervalList[interval].steps;
-      int semitones = intervalList[interval].semitones;
-
-      if (dir == TRANSPOSE_DOWN) {
-            steps     = -steps;
-            semitones = -semitones;
+      int minAlter;
+      int maxAlter;
+      if (useDoubleSharpsFlats) {
+            minAlter = -2;
+            maxAlter = 2;
             }
+      else {
+            minAlter = -1;
+            maxAlter = 1;
+            }
+      int steps     = interval.diatonic;
+      int semitones = interval.chromatic;
+
+printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
+      if (semitones == 0)
+            return tpc;
 
       int step, alter;
       int pitch = tpc2pitch(tpc);
 
-      for (;;) {
-            step       = tpc2step(tpc) + steps;
+      for (int k = 0; k < 10; ++k) {
+            step = tpc2step(tpc) + steps;
             while (step < 0)
                   step += 7;
-            while (step >= 7)
-                  step -= 7;
-            int p1     = tpc2pitch(step2tpc(step, 0));
-            alter      = semitones - (p1 - pitch);
-            if (alter > 2)
-                  steps -= 1;
-            else if (alter < -2)
-                  steps += 1;
+            step   %= 7;
+            int p1 = tpc2pitch(step2tpc(step, 0));
+            alter  = semitones - (p1 - pitch);
+            // alter  = p1 + semitones - pitch;
+printf("alter %d, p1 %d semitones %d pitch %d\n", alter, p1, semitones, pitch);
+            if (alter < 0)
+                  alter = -((-alter) % 12);
+            else
+                  alter %= 12;
+            if (alter > maxAlter)
+                  ++steps;
+            else if (alter < minAlter)
+                  --steps;
             else
                   break;
+            printf("  again alter %d steps %d, step %d\n", alter, steps, step);
             }
+      printf("  = step %d alter %d  tpc %d\n", step, alter, step2tpc(step, alter));
       return step2tpc(step, alter);
       }
 

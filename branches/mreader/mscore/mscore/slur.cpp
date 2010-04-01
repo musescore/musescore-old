@@ -99,10 +99,10 @@ void SlurSegment::draw(QPainter& p) const
             p.setBrush(curColor());
             }
       else {
+            p.setBrush(QBrush());
             QPen pen(p.pen());
             qreal lw = point(score()->styleS(ST_barWidth));
             pen.setWidthF(lw);
-            // pen.setStyle(Qt::DashLine);
             pen.setStyle(Qt::DotLine);
             p.setPen(pen);
             }
@@ -829,7 +829,7 @@ static bool isDirectionMixture (Chord* c1, Chord* c2)
       {
       bool up = c1->up();
       for (Segment* seg = c1->segment(); seg; seg = seg->next()) {
-            if (seg->subtype() == Segment::SegChordRest) {
+            if (seg->subtype() == SegChordRest) {
                   Element* e = seg->element(c1->track());
                   if (!e)
                         continue;
@@ -1022,7 +1022,7 @@ double SlurTie::firstNoteRestSegmentX(System* system)
             if (mb->type() == MEASURE) {
                   Measure* measure = (Measure*)mb;
                   for (Segment* seg = measure->first(); seg; seg = seg->next()) {
-                        if (seg->subtype() == Segment::SegChordRest) {
+                        if (seg->subtype() == SegChordRest) {
                               return seg->canvasPos().x();
                               }
                         }
