@@ -328,11 +328,7 @@ int MidiFile::readShort()
       short format;
       read(&format, 2);
 #ifdef Q_WS_MAC
-	  if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
-		return format;
-      }else{
-        return BE_SHORT(format);
-        }
+      return QSysInfo::ByteOrder == QSysInfo::BigEndian ? format : BE_SHORT(format);
 #else
       return BE_SHORT(format);
 #endif
@@ -356,7 +352,6 @@ void MidiFile::writeShort(int i)
       int format = BE_SHORT(i);
 	  write(&format, 2);
 #endif
-
       }
 
 //---------------------------------------------------------
@@ -369,11 +364,10 @@ int MidiFile::readLong()
       int format;
       read(&format, 4);
 #ifdef Q_WS_MAC
-	  if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+      if (QSysInfo::ByteOrder == QSysInfo::BigEndian)
 		return format;
-      }else{
-        return BE_LONG(format);
-      }
+      else
+            return BE_LONG(format);
 #else
       return BE_LONG(format);
 #endif
@@ -387,11 +381,10 @@ void MidiFile::writeLong(int i)
       {
 #ifdef Q_WS_MAC
 	  int format;
-      if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+      if (QSysInfo::ByteOrder == QSysInfo::BigEndian)
 		format = i;
-      }else{
-        format = BE_LONG(i);
-      }
+      else
+            format = BE_LONG(i);
 #else
       int format = BE_LONG(i);
 #endif
@@ -552,7 +545,7 @@ Event* MidiFile::readEvent()
                         return 0;
                         }
                   }
-            data[dataLen] = 0;
+            data[dataLen] = 0;      // always terminate with zero so we get valid C++ strings
             Event* e = new Event(ME_META);
             e->setOntime(ontime);
             e->setMetaType(type);
