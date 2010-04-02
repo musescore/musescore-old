@@ -1,3 +1,5 @@
+2.apr (tb)
+      - adding Bulgarian language
 1.apr (ws)
       - implemented #4149: Left align lyrics for melismas and tied notes
       - fix #4680: QString conversion of MIDI meta message text needs fixing:
