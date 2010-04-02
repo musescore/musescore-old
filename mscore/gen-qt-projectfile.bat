@@ -5,6 +5,7 @@ set OLD_DIR=%CD%
 echo TRANSLATIONS = \
 echo       %1/share/locale/mscore_af.ts \
 echo       %1/share/locale/mscore_ar.ts \
+echo       %1/share/locale/mscore_bg.ts \
 echo       %1/share/locale/mscore_ca.ts \
 echo       %1/share/locale/mscore_cs.ts \
 echo       %1/share/locale/mscore_da.ts \
@@ -36,6 +37,7 @@ echo       %1/share/locale/mscore_zh_Hant.ts \
 echo       %1/share/locale/mscore_zh_TW.ts \
 REM == Qt missing files from r27026 http://www.virtualbox.org/svn/vbox/trunk/src/VBox/Frontends/VirtualBox/nls/==
 echo       %1/share/locale/qt_ar.ts \
+echo       %1/share/locale/qt_bg.ts \
 echo       %1/share/locale/qt_ca.ts \
 echo       %1/share/locale/qt_cs.ts \
 echo       %1/share/locale/qt_da.ts \
