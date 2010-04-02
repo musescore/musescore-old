@@ -1,4 +1,6 @@
-2.apr (tb)
+2.apr (ws)
+      - fix #5177: memory corruption when creating more than four staves/part
+      (tb)
       - adding Bulgarian language
 1.apr (ws)
       - implemented #4149: Left align lyrics for melismas and tied notes
