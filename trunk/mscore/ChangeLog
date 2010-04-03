@@ -1,3 +1,6 @@
+3.apr (la)
+      - add enum for arpeggio types
+      - add support for up to down arpeggio (patch from aepstein)
 2.apr (ws)
       - fix #5177: memory corruption when creating more than four staves/part
       (tb)
