@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>مراجعة: 628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -52,7 +52,7 @@ p, li { white-space: pre-wrap; }
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished">بين قوسين</translation>
+        <translation>بين قوسين</translation>
     </message>
 </context>
 <context>
@@ -96,15 +96,15 @@ p, li { white-space: pre-wrap; }
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">سياق</translation>
+        <translation>سياق</translation>
     </message>
     <message>
         <source>up:</source>
-        <translation type="unfinished">لفوق</translation>
+        <translation>لفوق</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished">تراكب/سكتة</translation>
+        <translation>تراكب/سكتة</translation>
     </message>
 </context>
 <context>
@@ -809,6 +809,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordList</name>
+    <message>
+        <source>Write Chord Description failed: </source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
@@ -845,6 +852,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>آليًّا</translation>
     </message>
     <message>
@@ -873,18 +881,20 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>velocity type</source>
-        <translation type="unfinished">نوع شدة العزف</translation>
+        <translation>نوع شدة العزف</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation type="unfinished">شدة العزف</translation>
+        <translation>شدة العزف</translation>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished">المستخدم</translation>
+        <extracomment>velocity type</extracomment>
+        <translation>المستخدم</translation>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -905,83 +915,84 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
-        <translation type="unfinished"> سنت</translation>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
+        <translation> سنت</translation>
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"> مقابض</translation>
+        <translation> مقابض</translation>
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished">مجموعة رأس النغمة</translation>
+        <translation>مجموعة رأس النغمة</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished">طراز رأس النغمة</translation>
+        <translation>طراز رأس النغمة</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">معتاد</translation>
+        <translation>معتاد</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">صليبية</translation>
+        <translation>صليبية</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">ماسية</translation>
+        <translation>ماسية</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">مثلثية</translation>
+        <translation>مثلثية</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">مشروطة</translation>
+        <translation>مشروطة</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">دائرية مشطوبة</translation>
+        <translation>دائرية مشطوبة</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">دو</translation>
+        <translation>دو</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">رى</translation>
+        <translation>رى</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">مى</translation>
+        <translation>مى</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">فا</translation>
+        <translation>فا</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">لا</translation>
+        <translation>لا</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">سى</translation>
+        <translation>سى</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">آليًّا</translation>
+        <translation>آليًّا</translation>
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished">روند</translation>
+        <translation>روند</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished">بلانش</translation>
+        <translation>بلانش</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished">كروش</translation>
+        <translation>كروش</translation>
     </message>
     <message>
         <source>breve</source>
@@ -996,46 +1007,46 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation type="unfinished">وصلة للأمام:</translation>
+        <translation>وصلة للأمام:</translation>
     </message>
     <message>
         <source>SlurBack:</source>
-        <translation type="unfinished">وصلة للخلف:</translation>
+        <translation>وصلة للخلف:</translation>
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation type="unfinished">تحريك مدرج:</translation>
+        <translation>تحريك مدرج:</translation>
     </message>
 </context>
 <context>
     <name>ChordStyleEditor</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">سياق</translation>
+        <translation>سياق</translation>
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation type="unfinished">ملف توصيف التراكبات:</translation>
+        <translation>ملف توصيف التراكبات:</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished">هوية</translation>
+        <translation>هوية</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">اسم</translation>
+        <translation>اسم</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished">حفظ باسم</translation>
+        <translation>حفظ باسم</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation type="unfinished">ميوزسكور: محرر طراز التراكب</translation>
+        <translation>ميوزسكور: محرر طراز التراكب</translation>
     </message>
 </context>
 <context>
@@ -1058,7 +1069,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation type="unfinished">خواص الميدى...</translation>
+        <translation>خواص الميدى...</translation>
     </message>
 </context>
 <context>
@@ -1096,11 +1107,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MIDI Values</source>
-        <translation type="unfinished">قيم الميدى</translation>
+        <translation>قيم الميدى</translation>
     </message>
     <message>
         <source>Apply to:</source>
-        <translation type="unfinished">تطبيق على:</translation>
+        <translation>تطبيق على:</translation>
     </message>
 </context>
 <context>
@@ -1165,6 +1176,10 @@ failed: </source>
         <source>MuseScore: Write Drumset</source>
         <translation>ميوزسكور: كتابة مجموعة طبول</translation>
     </message>
+    <message>
+        <source>Write File failed: </source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>EditDrumsetBase</name>
@@ -1190,7 +1205,7 @@ failed: </source>
     </message>
     <message>
         <source>Auto</source>
-        <translation>آليًّا</translation>
+        <translation>آليًا</translation>
     </message>
     <message>
         <source>Up</source>
@@ -1348,19 +1363,19 @@ failed: </source>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
-        <translation type="unfinished">النطاق الصوتى الممكن:</translation>
+        <translation>النطاق الصوتى الممكن:</translation>
     </message>
     <message>
         <source>Amateur:</source>
-        <translation type="unfinished">للهواة:</translation>
+        <translation>للهواة:</translation>
     </message>
     <message>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>Professional:</source>
-        <translation type="unfinished">للمحترفين:</translation>
+        <translation>للمحترفين:</translation>
     </message>
     <message>
         <source>Play Transposition:</source>
@@ -1478,6 +1493,14 @@ failed: </source>
         <source>down</source>
         <translation type="unfinished">لأسفل</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1562,6 +1585,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation>مسافة</translation>
     </message>
     <message>
@@ -1695,111 +1723,111 @@ failed: </source>
     </message>
     <message>
         <source>Arpeggios</source>
-        <translation type="unfinished">أربيجات</translation>
+        <translation>أربيجات</translation>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation type="unfinished">تخليق دليل مقام للتنبيه</translation>
+        <translation>تخليق دليل مقام للتنبيه</translation>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
-        <translation type="unfinished">تثبيت عدد الموازير/المجاميع</translation>
+        <translation>تثبيت عدد الموازير/المجاميع</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation type="unfinished">تثبيت اتساع المازورة</translation>
+        <translation>تثبيت اتساع المازورة</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished">فواصل الموازير</translation>
+        <translation>فواصل الموازير</translation>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished">خط فى بداية مدرج وحيد</translation>
+        <translation>خط فى بداية مدرج وحيد</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation type="unfinished">خط فى بداية مدرجات متعددة</translation>
+        <translation>خط فى بداية مدرجات متعددة</translation>
     </message>
     <message>
         <source>Music upper margin</source>
-        <translation type="unfinished">الحد الأعلى للموسيقى</translation>
+        <translation>الحد الأعلى للموسيقى</translation>
     </message>
     <message>
         <source>Music lower margin</source>
-        <translation type="unfinished">الحد الأدنى للموسيقى</translation>
+        <translation>الحد الأدنى للموسيقى</translation>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation type="unfinished">بُعد المدرج</translation>
+        <translation>بُعد المدرج</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation type="unfinished">بُعد القوس</translation>
+        <translation>بُعد القوس</translation>
     </message>
     <message>
         <source>System distance</source>
-        <translation type="unfinished">بُعد المجموعة</translation>
+        <translation>بُعد المجموعة</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
-        <translation type="unfinished">الحد الأعلى للكلمات</translation>
+        <translation>الحد الأعلى للكلمات</translation>
     </message>
     <message>
         <source>Lyrics lower margin</source>
-        <translation type="unfinished">الحد الأدنى للكلمات</translation>
+        <translation>الحد الأدنى للكلمات</translation>
     </message>
     <message>
         <source>V-frame upper margin</source>
-        <translation type="unfinished">الحد الأعلى للإطار الرأسى</translation>
+        <translation>الحد الأعلى للإطار الرأسى</translation>
     </message>
     <message>
         <source>V-frame lower margin</source>
-        <translation type="unfinished">الحد الأدنى للإطار الرأسى</translation>
+        <translation>الحد الأدنى للإطار الرأسى</translation>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation type="unfinished">التفريق (1=ضيق)</translation>
+        <translation>التفريق (1=ضيق)</translation>
     </message>
     <message>
         <source>Left margin</source>
-        <translation type="unfinished">الحد الأيسر</translation>
+        <translation>الحد الأيسر</translation>
     </message>
     <message>
         <source>Right margin</source>
-        <translation type="unfinished">الحد الأيمن</translation>
+        <translation>الحد الأيمن</translation>
     </message>
     <message>
         <source>Min. note distance</source>
-        <translation type="unfinished">أقل مسافة للنغمة</translation>
+        <translation>أقل مسافة للنغمة</translation>
     </message>
     <message>
         <source>Clef left margin</source>
-        <translation type="unfinished">الحد الأيسر للمفتاح</translation>
+        <translation>الحد الأيسر للمفتاح</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation type="unfinished">الحد الأيسر للدليل</translation>
+        <translation>الحد الأيسر للدليل</translation>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation type="unfinished">الحد الأيسر للميزان</translation>
+        <translation>الحد الأيسر للميزان</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
-        <translation type="unfinished">المسافة من المفتاح حتى الدليل</translation>
+        <translation>المسافة من المفتاح حتى الدليل</translation>
     </message>
     <message>
         <source>Clef-barline distance</source>
-        <translation type="unfinished">المسافة من المفتاح حتى الفاصل</translation>
+        <translation>المسافة من المفتاح حتى الفاصل</translation>
     </message>
     <message>
         <source>Begin repeat left margin</source>
-        <translation type="unfinished">الحد الأيسر لبداية المرجّع</translation>
+        <translation>الحد الأيسر لبداية المرجّع</translation>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation type="unfinished">إظهار أجنحة لفواصل المرجّعات</translation>
+        <translation>إظهار أجنحة لفواصل المرجّعات</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -1807,99 +1835,99 @@ failed: </source>
     </message>
     <message>
         <source>Shortest stem</source>
-        <translation type="unfinished">أقصر ساق</translation>
+        <translation>أقصر ساق</translation>
     </message>
     <message>
         <source>Accidental note distance</source>
-        <translation type="unfinished">بُعد علامة التحويل عن النغمة</translation>
+        <translation>بُعد علامة التحويل عن النغمة</translation>
     </message>
     <message>
         <source>Accidental distance</source>
-        <translation type="unfinished">بُعد علامة التحويل</translation>
+        <translation>بُعد علامة التحويل</translation>
     </message>
     <message>
         <source>Note dot distance</source>
-        <translation type="unfinished">بُعد النغمة عن نقطة التطويل</translation>
+        <translation>بُعد النغمة عن نقطة التطويل</translation>
     </message>
     <message>
         <source>Dot dot distance</source>
-        <translation type="unfinished">البُعد بين نقاط التطويل</translation>
+        <translation>البُعد بين نقاط التطويل</translation>
     </message>
     <message>
         <source>Ledger line width</source>
-        <translation type="unfinished">اتساع الخط الإضافى</translation>
+        <translation>اتساع الخط الإضافى</translation>
     </message>
     <message>
         <source>Distance to note</source>
-        <translation type="unfinished">المسافة حتى النغمة</translation>
+        <translation>المسافة حتى النغمة</translation>
     </message>
     <message>
         <source>Hook length</source>
-        <translation type="unfinished">طول الخطاف</translation>
+        <translation>طول الخطاف</translation>
     </message>
     <message>
         <source>Beam width</source>
-        <translation type="unfinished">اتساع خط التوصيل</translation>
+        <translation>اتساع خط التوصيل</translation>
     </message>
     <message>
         <source>Beam distance</source>
-        <translation type="unfinished">بُعد خط التوصيل</translation>
+        <translation>بُعد خط التوصيل</translation>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation type="unfinished">أقل طول</translation>
+        <translation>أقل طول</translation>
     </message>
     <message>
         <source>Minimum slope</source>
-        <translation type="unfinished">أقل ميل</translation>
+        <translation>أقل ميل</translation>
     </message>
     <message>
         <source>Maximum slope</source>
-        <translation type="unfinished">أكبر ميل</translation>
+        <translation>أكبر ميل</translation>
     </message>
     <message>
         <source>Small staff size</source>
-        <translation type="unfinished">قياس المدرج الصغير</translation>
+        <translation>قياس المدرج الصغير</translation>
     </message>
     <message>
         <source>Small note size</source>
-        <translation type="unfinished">قياس النغمة الصغيرة</translation>
+        <translation>قياس النغمة الصغيرة</translation>
     </message>
     <message>
         <source>Grace note size</source>
-        <translation type="unfinished">قياس النغمة المخطوفة</translation>
+        <translation>قياس النغمة المخطوفة</translation>
     </message>
     <message>
         <source>Small clef size</source>
-        <translation type="unfinished">قياس المفتاح الصغير</translation>
+        <translation>قياس المفتاح الصغير</translation>
     </message>
     <message>
         <source>Line break height</source>
-        <translation type="unfinished">علوّ فصل الخط</translation>
+        <translation>علوّ فصل الخط</translation>
     </message>
     <message>
         <source>Use German names</source>
-        <translation type="unfinished">استعمال الأسماء الألمانية</translation>
+        <translation>استعمال الأسماء الألمانية</translation>
     </message>
     <message>
         <source>Chord description file</source>
-        <translation type="unfinished">ملف توصيف التراكبات</translation>
+        <translation>ملف توصيف التراكبات</translation>
     </message>
     <message>
         <source>Articulation - note head distance</source>
-        <translation type="unfinished">بُعد العلامات الأدائية عن رأس النغمة</translation>
+        <translation>بُعد العلامات الأدائية عن رأس النغمة</translation>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation type="unfinished">بُعد العلامات الأدائية عن ساق النغمة</translation>
+        <translation>بُعد العلامات الأدائية عن ساق النغمة</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
-        <translation type="unfinished">بُعد العلامات الأدائية بعضها عن بعض</translation>
+        <translation>بُعد العلامات الأدائية بعضها عن بعض</translation>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
-        <translation type="unfinished">اتجاه السيقان عند تعدد الأصوات</translation>
+        <translation>اتجاه السيقان عند تعدد الأصوات</translation>
     </message>
 </context>
 <context>
@@ -1952,11 +1980,11 @@ failed: </source>
     </message>
     <message>
         <source>selectable</source>
-        <translation type="unfinished">يمكن تحديده</translation>
+        <translation>يمكن تحديده</translation>
     </message>
     <message>
         <source>droptarget</source>
-        <translation type="unfinished">هدف الإسقاط</translation>
+        <translation>هدف الإسقاط</translation>
     </message>
 </context>
 <context>
@@ -1991,15 +2019,19 @@ failed: </source>
     </message>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished">اسم الملف:</translation>
+        <translation>اسم الملف:</translation>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation type="unfinished">عنوان المستقطع:</translation>
+        <translation>عنوان المستقطع:</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">إغلاق</translation>
+        <translation>إغلاق</translation>
+    </message>
+    <message>
+        <source>Part-%1</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2021,7 +2053,7 @@ failed: </source>
     </message>
     <message>
         <source>Text:</source>
-        <translation>النص:</translation>
+        <translation>نص:</translation>
     </message>
 </context>
 <context>
@@ -2069,7 +2101,7 @@ failed: </source>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">خواص النص...</translation>
+        <translation>خواص النصّ...</translation>
     </message>
 </context>
 <context>
@@ -2091,7 +2123,7 @@ failed: </source>
     </message>
     <message>
         <source>Image Properties</source>
-        <translation type="unfinished">خواص الصور</translation>
+        <translation>خواص الصور</translation>
     </message>
 </context>
 <context>
@@ -2156,7 +2188,7 @@ failed: </source>
     <name>Inspector</name>
     <message>
         <source>MuseScore: Object Inspector</source>
-        <translation type="unfinished">ميوزسكور: مراقب المكوّنات</translation>
+        <translation>ميوزسكور: مراقب المكوّنات</translation>
     </message>
 </context>
 <context>
@@ -2171,11 +2203,11 @@ failed: </source>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">للأمام</translation>
+        <translation>للأمام</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -2236,6 +2268,10 @@ failed: </source>
         <source>Cancel</source>
         <translation>إلغاء</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2294,6 +2330,10 @@ failed: </source>
         <source>Instrument List</source>
         <translation>قائمة الآلات</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentsDialog</name>
@@ -2349,6 +2389,10 @@ failed: </source>
         <source>Instrument List</source>
         <translation>قائمة الآلات</translation>
     </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>Jump</name>
@@ -2380,30 +2424,30 @@ failed: </source>
     <name>KeyEdit</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">سياق</translation>
+        <translation>سياق</translation>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation type="unfinished">تخليق دليل مقام</translation>
+        <translation>تخليق دليل مقام</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">مسح</translation>
+        <translation>مسح</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished">إضافة دليل مقام للبالتة</translation>
+        <translation>إضافة دليل مقام للبالتة</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">إضافة</translation>
+        <translation>إضافة</translation>
     </message>
 </context>
 <context>
     <name>KeyEditor</name>
     <message>
         <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished">ميوزسكور: أدلة المقامات</translation>
+        <translation>ميوزسكور: أدلة المقامات</translation>
     </message>
 </context>
 <context>
@@ -2635,18 +2679,18 @@ failed: </source>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
-        <translation type="unfinished">تفتيت السكتة المجمّعة</translation>
+        <translation>تفتيت السكتة المجمّعة</translation>
     </message>
 </context>
 <context>
     <name>MeasureProperties</name>
     <message>
         <source>visible</source>
-        <translation type="unfinished">مرئى</translation>
+        <translation>مرئى</translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished">دون ساق</translation>
+        <translation>دون ساق</translation>
     </message>
 </context>
 <context>
@@ -2717,19 +2761,19 @@ failed: </source>
     </message>
     <message>
         <source>New Row</source>
-        <translation type="unfinished">صف جديد</translation>
+        <translation>صف جديد</translation>
     </message>
     <message>
         <source>a</source>
-        <translation type="unfinished">لا</translation>
+        <translation>لا</translation>
     </message>
     <message>
         <source>visible</source>
-        <translation type="unfinished">مرئى</translation>
+        <translation>مرئى</translation>
     </message>
     <message>
         <source>c</source>
-        <translation type="unfinished">دو</translation>
+        <translation>دو</translation>
     </message>
 </context>
 <context>
@@ -2759,7 +2803,7 @@ failed: </source>
     <name>MenuNotes</name>
     <message>
         <source>&amp;Notes</source>
-        <translation type="unfinished">&amp;نغمات</translation>
+        <translation>&amp;نغمات</translation>
     </message>
 </context>
 <context>
@@ -2833,7 +2877,7 @@ failed: </source>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation>شِدّة الأداء</translation>
+        <translation>شدة الأداء</translation>
     </message>
     <message>
         <source>Technik</source>
@@ -2936,16 +2980,12 @@ failed: </source>
         <translation>فتح &amp;حديث</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation>مستقطعات...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;تحرير</translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation>أصوات</translation>
+        <translation>الأصوات</translation>
     </message>
     <message>
         <source>Preferences...</source>
@@ -3193,7 +3233,7 @@ failed: </source>
     </message>
     <message>
         <source>Text</source>
-        <translation>النصّ</translation>
+        <translation>نصّ</translation>
     </message>
     <message>
         <source>MuseScore: Clefs</source>
@@ -3319,113 +3359,113 @@ before closing?</source>
     </message>
     <message>
         <source>Online Handbook</source>
-        <translation type="unfinished">دليل المستخدم على الإنترنت</translation>
+        <translation>دليل المستخدم على الإنترنت</translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation type="unfinished">لم يُستدل على دليل المستخدم فى: 
+        <translation>لم يُستدل على دليل المستخدم فى: 
 </translation>
     </message>
     <message>
         <source>
 
 From the "Help" menu try choosing "Online Handbook" instead.</source>
-        <translation type="unfinished">
+        <translation>
 
 حاول اختيار "دليل المستخدم على الإنترنت" من قائمة المساعدة بدلاً من ذلك.</translation>
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation type="unfinished">نغمات مخطوفة</translation>
+        <translation>نغمات مخطوفة</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
-        <translation type="unfinished">نغمات مخطوفة</translation>
+        <translation>نغمات مخطوفة</translation>
     </message>
     <message>
         <source>Appoggiatura</source>
-        <translation type="unfinished">نغمات سابقة</translation>
+        <translation>نغمات سابقة</translation>
     </message>
     <message>
         <source>Quarter grace note</source>
-        <translation type="unfinished">كروش مخطوفة</translation>
+        <translation>كروش مخطوفة</translation>
     </message>
     <message>
         <source>16th grace note</source>
-        <translation type="unfinished">دوبل كروش مخطوفة</translation>
+        <translation>دوبل كروش مخطوفة</translation>
     </message>
     <message>
         <source>32nd grace note</source>
-        <translation type="unfinished">تيبل كروش مخطوفة</translation>
+        <translation>تيبل كروش مخطوفة</translation>
     </message>
     <message>
         <source>Key Signatures</source>
-        <translation type="unfinished">أدلة المقامات</translation>
+        <translation>أدلة المقامات</translation>
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation type="unfinished">الموازين</translation>
+        <translation>الموازين</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">الوحدة الكبيرة</translation>
+        <translation>الوحدة الكبيرة</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished">فواصل الموازير</translation>
+        <translation>فواصل الموازير</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished">اعتيادى</translation>
+        <translation>اعتيادى</translation>
     </message>
     <message>
         <source>Dashed</source>
-        <translation type="unfinished">مقطّع</translation>
+        <translation>مقطّع</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation type="unfinished">وصلة</translation>
+        <translation>وصلة</translation>
     </message>
     <message>
         <source>Crescendo</source>
-        <translation type="unfinished">ارتفاع تدريجى فى الشِدة</translation>
+        <translation>ارتفاع تدريجى فى الشِدة</translation>
     </message>
     <message>
         <source>Diminuendo</source>
-        <translation type="unfinished">انخفاض تدريجى فى الشِدة</translation>
+        <translation>انخفاض تدريجى فى الشِدة</translation>
     </message>
     <message>
         <source>Prima volta</source>
-        <translation type="unfinished">المرة الأولى</translation>
+        <translation>المرة الأولى</translation>
     </message>
     <message>
         <source>Seconda volta</source>
-        <translation type="unfinished">المرة الثانية</translation>
+        <translation>المرة الثانية</translation>
     </message>
     <message>
         <source>Terza volta</source>
-        <translation type="unfinished">المرة الثالثة</translation>
+        <translation>المرة الثالثة</translation>
     </message>
     <message>
         <source>Seconda volta 2</source>
-        <translation type="unfinished">المرة الثانية 2</translation>
+        <translation>المرة الثانية 2</translation>
     </message>
     <message>
         <source>Trill line</source>
-        <translation type="unfinished">خط الزغردة</translation>
+        <translation>خط الزغردة</translation>
     </message>
     <message>
         <source>Text line</source>
-        <translation type="unfinished">سطر نصّى</translation>
+        <translation>سطر نصّى</translation>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished">الخط</translation>
+        <translation>خط</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation type="unfinished">أربيج وانزلاق</translation>
+        <translation>أربيج وانزلاق</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -3433,11 +3473,11 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
-        <translation type="unfinished">نَفَس وسكتات</translation>
+        <translation>نَفَس وسكتات</translation>
     </message>
     <message>
         <source>Caesura</source>
-        <translation type="unfinished">قاطع</translation>
+        <translation>قاطع</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
@@ -3473,86 +3513,107 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Line break</source>
-        <translation type="unfinished">قطع للخط الفاصل</translation>
+        <translation>قطع للخط الفاصل</translation>
     </message>
     <message>
         <source>Page break</source>
-        <translation type="unfinished">قطع للصفحة</translation>
+        <translation>قطع للصفحة</translation>
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation type="unfinished">توسيع بين المدرجات</translation>
+        <translation>توسيع بين المدرجات</translation>
     </message>
     <message>
         <source>Start beam</source>
-        <translation type="unfinished">بدء خط توصيل</translation>
+        <translation>بدء خط توصيل</translation>
     </message>
     <message>
         <source>Middle of beam</source>
-        <translation type="unfinished">وسط خط توصيل</translation>
+        <translation>وسط خط توصيل</translation>
     </message>
     <message>
         <source>No beam</source>
-        <translation type="unfinished">دون خط توصيل</translation>
+        <translation>دون خط توصيل</translation>
     </message>
     <message>
         <source>Start subbeam</source>
-        <translation type="unfinished">بدء خط توصيل فرعى</translation>
+        <translation>بدء خط توصيل فرعى</translation>
     </message>
     <message>
         <source>Auto beam</source>
-        <translation type="unfinished">توصيل آلىّ</translation>
+        <translation>توصيل آلىّ</translation>
     </message>
     <message>
         <source>Brackets...</source>
-        <translation type="unfinished">أقواس ضامّة...</translation>
+        <translation>أقواس ضامّة...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation type="unfinished">أدائيات وحليات</translation>
+        <translation>أدائيات وحليات</translation>
     </message>
     <message>
         <source>Pedal</source>
-        <translation type="unfinished">بدّال</translation>
+        <translation>بدّال</translation>
     </message>
     <message>
         <source>MuseScore: Brackets</source>
-        <translation type="unfinished">ميوزسكور: الأقواس</translation>
+        <translation>ميوزسكور: الأقواس</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation type="unfinished">قواطع وتوسيعات...</translation>
+        <translation>قواطع وتوسيعات...</translation>
     </message>
     <message>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation type="unfinished">حدث انقطاعٌ غير متوقع فى المرة السابقة.&#13;
+        <translation>حدث انقطاعٌ غير متوقع فى المرة السابقة.&#13;
 &#13;
 هل أستعيدها؟</translation>
     </message>
     <message>
         <source>Note Heads</source>
-        <translation type="unfinished">رؤوس النغمات</translation>
+        <translation>رؤوس النغمات</translation>
     </message>
     <message>
         <source>Varied coda</source>
-        <translation type="unfinished">قفلة منوّعة</translation>
+        <translation>قفلة منوّعة</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation type="unfinished">ميوزسكور: أدائيات وحليات</translation>
+        <translation>ميوزسكور: أدائيات وحليات</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation type="unfinished">ميوزسكور: قواطع وتوسيعات</translation>
+        <translation>ميوزسكور: قواطع وتوسيعات</translation>
     </message>
     <message>
         <source>Check for Update</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bar %1 Beat %2.%3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Error loading plugin
+"%1" line %2:
+%3</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -3684,10 +3745,6 @@ Restore session?</source>
         <translation>مجموعة رؤوس النغمات</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Auto</source>
         <translation type="unfinished">آليًّا</translation>
     </message>
@@ -3700,7 +3757,15 @@ Restore session?</source>
         <translation type="unfinished">بُعد البداية</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
+        <source>Tuning</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4597,6 +4662,7 @@ Restore session?</source>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>ملليمتر</translation>
     </message>
     <message>
@@ -4605,10 +4671,6 @@ Restore session?</source>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Use Current Dimensions</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -4627,11 +4689,11 @@ Restore session?</source>
         <source>Auto-correction</source>
         <translation type="unfinished"/>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation type="unfinished"/>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"/>
     </message>
@@ -4677,6 +4739,10 @@ Restore session?</source>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Use Current Position</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4826,6 +4892,10 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5123,6 +5193,18 @@ Try saving to a different location.</source>
         <source>The first time signature of a piece can not be removed.</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Load failed: </source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5165,6 +5247,11 @@ Try saving to a different location.</source>
     <message>
         <source>Measure</source>
         <translation type="unfinished">مازورة</translation>
+    </message>
+    <message>
+        <source>unknown drop format: formats %1:
+</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5262,6 +5349,47 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>subtract from selection</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">محاورة</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>Seq</name>
+    <message>
+        <source>Init audio driver failed.
+Sequencer will be disabled.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore: Load SoundFont</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>No SoundFont configured
+Playback will be disabled.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Loading SoundFont
+"%1"
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
+and check that the file location is correct</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5449,10 +5577,12 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5494,7 +5624,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>normal</source>
-        <translation>معتاد</translation>
+        <translation>اعتيادى</translation>
     </message>
 </context>
 <context>
@@ -5559,6 +5689,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -5710,6 +5841,21 @@ Try saving to a different location.</source>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation>طراز النصّ:</translation>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">دعه يختفى</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">دعه يظهر</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">خواص النص...</translation>
     </message>
 </context>
 <context>
@@ -5885,6 +6031,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>س:</translation>
     </message>
     <message>
@@ -5905,6 +6052,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>ص:</translation>
     </message>
     <message>
@@ -6023,6 +6171,14 @@ Try saving to a different location.</source>
     <message>
         <source>MuseScore: Time Signatures</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>4/4 common time</source>
+        <translation type="unfinished">توقيع معتاد 4\4</translation>
+    </message>
+    <message>
+        <source>2/2 alla breve</source>
+        <translation type="unfinished">الوحدة الكبيرة</translation>
     </message>
 </context>
 <context>
@@ -6303,10 +6459,6 @@ p, li { white-space: pre-wrap; }
         <source>Use double sharps and flats</source>
         <translation type="unfinished"/>
     </message>
-    <message>
-        <source>Use multi sharps and flats</source>
-        <translation type="unfinished"/>
-    </message>
 </context>
 <context>
     <name>Tuplet</name>
@@ -6464,71 +6616,71 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished">لا شىء</translation>
+        <translation>ﻻشىء</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished">دييز</translation>
+        <translation>دييز</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished">بيمول</translation>
+        <translation>بيمول</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished">دوبل دييز</translation>
+        <translation>دوبل دييز</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished">دوبل بيمول</translation>
+        <translation>دوبل بيمول</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">بيكار</translation>
+        <translation>بيكار</translation>
     </message>
     <message>
         <source>(sharp)</source>
-        <translation type="unfinished"/>
+        <translation>(دييز)</translation>
     </message>
     <message>
         <source>(flat)</source>
-        <translation type="unfinished"/>
+        <translation>(بيمول)</translation>
     </message>
     <message>
         <source>(double sharp)</source>
-        <translation type="unfinished"/>
+        <translation>(دوبل دييز)</translation>
     </message>
     <message>
         <source>(double flat)</source>
-        <translation type="unfinished"/>
+        <translation>(دوبل بيمول)</translation>
     </message>
     <message>
         <source>(natural)</source>
-        <translation type="unfinished"/>
+        <translation>(بيكار)</translation>
     </message>
     <message>
         <source>[sharp]</source>
-        <translation type="unfinished"/>
+        <translation>[دييز]</translation>
     </message>
     <message>
         <source>[flat]</source>
-        <translation type="unfinished"/>
+        <translation>[بيمول]</translation>
     </message>
     <message>
         <source>[double sharp]</source>
-        <translation type="unfinished"/>
+        <translation>[دوبل دييز]</translation>
     </message>
     <message>
         <source>[double flat]</source>
-        <translation type="unfinished"/>
+        <translation>[دوبل بيمول]</translation>
     </message>
     <message>
         <source>[natural]</source>
-        <translation type="unfinished"/>
+        <translation>[بيكار]</translation>
     </message>
     <message>
         <source>flat-slash</source>
-        <translation type="unfinished"/>
+        <translation>نصف بيمول</translation>
     </message>
     <message>
         <source>flat-slash2</source>
@@ -6540,7 +6692,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirrored-flat</source>
-        <translation type="unfinished"/>
+        <translation>نصف بيمول</translation>
     </message>
     <message>
         <source>mirrored-flat-slash</source>
@@ -6548,11 +6700,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat-flat-slash</source>
-        <translation type="unfinished"/>
+        <translation>بيمول ونصف</translation>
     </message>
     <message>
         <source>sharp-slash</source>
-        <translation type="unfinished"/>
+        <translation>نصف دييز</translation>
     </message>
     <message>
         <source>sharp-slash2</source>
@@ -6607,439 +6759,439 @@ p, li { white-space: pre-wrap; }
     <name>action</name>
     <message>
         <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"/>
+        <translation>الكتيّب فى جهازك</translation>
     </message>
     <message>
         <source>Open...</source>
-        <translation type="unfinished"/>
+        <translation>فتح...</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">حفظ</translation>
+        <translation>حفظ</translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation type="unfinished"/>
+        <translation>حفظ باسم...</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
-        <translation type="unfinished"/>
+        <translation>حفظ نسخة...</translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation type="unfinished"/>
+        <translation>إعادة تحميل</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">إغلاق</translation>
+        <translation>إغلاق</translation>
     </message>
     <message>
         <source>file new</source>
-        <translation type="unfinished"/>
+        <translation>ملف جديد</translation>
     </message>
     <message>
         <source>New...</source>
-        <translation type="unfinished"/>
+        <translation>جديد...</translation>
     </message>
     <message>
         <source>Create new score</source>
-        <translation type="unfinished"/>
+        <translation>تخليق مدوّنة جديدة</translation>
     </message>
     <message>
         <source>Print...</source>
-        <translation type="unfinished"/>
+        <translation>طباعة...</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"/>
+        <translation>إلغاء</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"/>
+        <translation>إعادة</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"/>
+        <translation>قصّ</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"/>
+        <translation>نسخ</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"/>
+        <translation>لصق</translation>
     </message>
     <message>
         <source>Instruments...</source>
-        <translation type="unfinished"/>
+        <translation>الآلات...</translation>
     </message>
     <message>
         <source>Symbols...</source>
-        <translation type="unfinished"/>
+        <translation>الرموز...</translation>
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation type="unfinished"/>
+        <translation>شدّة الأداء...</translation>
     </message>
     <message>
         <source>Note Input</source>
-        <translation type="unfinished"/>
+        <translation>إدخال نغمة</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
-        <translation type="unfinished"/>
+        <translation>اسم النغمة</translation>
     </message>
     <message>
         <source>Unison Above</source>
-        <translation type="unfinished"/>
+        <translation>نفس النغمة فوق</translation>
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation type="unfinished"/>
+        <translation>إدخال نفس النغمة فوق</translation>
     </message>
     <message>
         <source>Second Above</source>
-        <translation type="unfinished"/>
+        <translation>ثانية فوق</translation>
     </message>
     <message>
         <source>Enter second above</source>
-        <translation type="unfinished"/>
+        <translation>إدخال ثانية فوق</translation>
     </message>
     <message>
         <source>Third Above</source>
-        <translation type="unfinished"/>
+        <translation>ثالثة فوق</translation>
     </message>
     <message>
         <source>Enter third above</source>
-        <translation type="unfinished"/>
+        <translation>إدخال ثالثة فوق</translation>
     </message>
     <message>
         <source>Fourth Above</source>
-        <translation type="unfinished"/>
+        <translation>رابعة فوق</translation>
     </message>
     <message>
         <source>Enter fourth above</source>
-        <translation type="unfinished"/>
+        <translation>إدخال رابعة فوق</translation>
     </message>
     <message>
         <source>Fifth Above</source>
-        <translation type="unfinished"/>
+        <translation>خامسة فوق</translation>
     </message>
     <message>
         <source>Enter fifth above</source>
-        <translation type="unfinished"/>
+        <translation>إدخال خامسة فوق</translation>
     </message>
     <message>
         <source>Sixth Above</source>
-        <translation type="unfinished"/>
+        <translation>سادسة فوق</translation>
     </message>
     <message>
         <source>Enter sixth above</source>
-        <translation type="unfinished"/>
+        <translation>إدخال سادسة فوق</translation>
     </message>
     <message>
         <source>Seventh Above</source>
-        <translation type="unfinished"/>
+        <translation>سابعة فوق</translation>
     </message>
     <message>
         <source>Enter seventh above</source>
-        <translation type="unfinished"/>
+        <translation>إدخال سابعة فوق</translation>
     </message>
     <message>
         <source>Octave Above</source>
-        <translation type="unfinished"/>
+        <translation>أوكتاف فوق</translation>
     </message>
     <message>
         <source>Enter octave above</source>
-        <translation type="unfinished"/>
+        <translation>إدخال أوكتاف فوق</translation>
     </message>
     <message>
         <source>Ninth Above</source>
-        <translation type="unfinished"/>
+        <translation>تاسعة فوق</translation>
     </message>
     <message>
         <source>Enter ninth above</source>
-        <translation type="unfinished"/>
+        <translation>إدخال تاسعة فوق</translation>
     </message>
     <message>
         <source>Second Below</source>
-        <translation type="unfinished"/>
+        <translation>ثانية تحت</translation>
     </message>
     <message>
         <source>Enter second below</source>
-        <translation type="unfinished"/>
+        <translation>إدخال ثانية تحت</translation>
     </message>
     <message>
         <source>Third Below</source>
-        <translation type="unfinished"/>
+        <translation>ثالثة تحت</translation>
     </message>
     <message>
         <source>Enter third below</source>
-        <translation type="unfinished"/>
+        <translation>إدخال ثالثة تحت</translation>
     </message>
     <message>
         <source>Fourth Below</source>
-        <translation type="unfinished"/>
+        <translation>رابعة تحت</translation>
     </message>
     <message>
         <source>Enter fourth below</source>
-        <translation type="unfinished"/>
+        <translation>إدخال رابعة تحت</translation>
     </message>
     <message>
         <source>Fifth Below</source>
-        <translation type="unfinished"/>
+        <translation>خامسة تحت</translation>
     </message>
     <message>
         <source>Enter fifth below</source>
-        <translation type="unfinished"/>
+        <translation>إدخال خامسة تحت</translation>
     </message>
     <message>
         <source>Sixth Below</source>
-        <translation type="unfinished"/>
+        <translation>سادسة تحت</translation>
     </message>
     <message>
         <source>Enter sixth below</source>
-        <translation type="unfinished"/>
+        <translation>إدخال سادسة تحت</translation>
     </message>
     <message>
         <source>Seventh Below</source>
-        <translation type="unfinished"/>
+        <translation>سابعة تحت</translation>
     </message>
     <message>
         <source>Enter seventh below</source>
-        <translation type="unfinished"/>
+        <translation>إدخال سابعة تحت</translation>
     </message>
     <message>
         <source>Octave Below</source>
-        <translation type="unfinished"/>
+        <translation>أوكتاف تحت</translation>
     </message>
     <message>
         <source>Enter octave below</source>
-        <translation type="unfinished"/>
+        <translation>إدخال أوكتاف تحت</translation>
     </message>
     <message>
         <source>Ninth Below</source>
-        <translation type="unfinished"/>
+        <translation>تاسعة تحت</translation>
     </message>
     <message>
         <source>Enter ninth below</source>
-        <translation type="unfinished"/>
+        <translation>إدخال تاسعة تحت</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished">لا</translation>
+        <translation>ﻻ</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished">سى</translation>
+        <translation>سى</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished">دو</translation>
+        <translation>دو</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">رى</translation>
+        <translation>رى</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished">مى</translation>
+        <translation>مى</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished">فا</translation>
+        <translation>فا</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished">صول</translation>
+        <translation>صول</translation>
     </message>
     <message>
         <source>Add A</source>
-        <translation type="unfinished"/>
+        <translation>إضافة ﻻ</translation>
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation type="unfinished"/>
+        <translation>إضافة نغمة ﻻ للتراكب</translation>
     </message>
     <message>
         <source>Add B</source>
-        <translation type="unfinished"/>
+        <translation>إضافة سى</translation>
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation type="unfinished"/>
+        <translation>إضافة نغمة سى للتراكب</translation>
     </message>
     <message>
         <source>Add C</source>
-        <translation type="unfinished"/>
+        <translation>إضافة دو</translation>
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation type="unfinished"/>
+        <translation>إضافة نغمة دو للتراكب</translation>
     </message>
     <message>
         <source>Add D</source>
-        <translation type="unfinished"/>
+        <translation>إضافة رى</translation>
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation type="unfinished"/>
+        <translation>إضافة نغمة رى للتراكب</translation>
     </message>
     <message>
         <source>Add E</source>
-        <translation type="unfinished"/>
+        <translation>إضافة مى</translation>
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation type="unfinished"/>
+        <translation>إضافة نغمة مى للتراكب</translation>
     </message>
     <message>
         <source>Add F</source>
-        <translation type="unfinished"/>
+        <translation>إضافة فا</translation>
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation type="unfinished"/>
+        <translation>إضافة نغمة فا للتراكب</translation>
     </message>
     <message>
         <source>Add G</source>
-        <translation type="unfinished"/>
+        <translation>إضافة صول</translation>
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation type="unfinished"/>
+        <translation>إضافة نغمة صول للتراكب</translation>
     </message>
     <message>
         <source>rest</source>
-        <translation type="unfinished"/>
+        <translation>سكتة</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
-        <translation type="unfinished"/>
+        <translation>إضافة مزيد من اﻻتساع</translation>
     </message>
     <message>
         <source>Add more stretch to selected measure</source>
-        <translation type="unfinished"/>
+        <translation>توسيع المازورة المحددة</translation>
     </message>
     <message>
         <source>Add Less Stretch</source>
-        <translation type="unfinished"/>
+        <translation>إضافة اتساع أقلّ</translation>
     </message>
     <message>
         <source>Add less stretch to selected measure</source>
-        <translation type="unfinished"/>
+        <translation>تضييق المازورة المحددة</translation>
     </message>
     <message>
         <source>Reset Beam Mode</source>
-        <translation type="unfinished"/>
+        <translation>إرجاع طور التربيط للأصل</translation>
     </message>
     <message>
         <source>up+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>فوق+عالى+تحكّم</translation>
     </message>
     <message>
         <source>down+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>تحت+عالى+تحكّم</translation>
     </message>
     <message>
         <source>left+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>يسار+تحكّم</translation>
     </message>
     <message>
         <source>add previous chord to selection</source>
-        <translation type="unfinished"/>
+        <translation>إضافة التراكب السابق للتحديد</translation>
     </message>
     <message>
         <source>left+shift</source>
-        <translation type="unfinished"/>
+        <translation>يسار+عالى</translation>
     </message>
     <message>
         <source>select to beginning of measure</source>
-        <translation type="unfinished"/>
+        <translation>تحديد حتى بداية المازورة</translation>
     </message>
     <message>
         <source>add next chord to selection</source>
-        <translation type="unfinished"/>
+        <translation>إضافة التراكب اللاحق للتحديد</translation>
     </message>
     <message>
         <source>right+shift</source>
-        <translation type="unfinished"/>
+        <translation>يمين+عالى</translation>
     </message>
     <message>
         <source>select to end of measure</source>
-        <translation type="unfinished"/>
+        <translation>تحديد حتى نهاية المازورة</translation>
     </message>
     <message>
         <source>right+ctrl+shift</source>
-        <translation type="unfinished"/>
+        <translation>يمين+تحكّم+عالى</translation>
     </message>
     <message>
         <source>select to beginning of line</source>
-        <translation type="unfinished"/>
+        <translation>تحديد حتى بداية السطر</translation>
     </message>
     <message>
         <source>shift+home</source>
-        <translation type="unfinished"/>
+        <translation>عالى+بداية</translation>
     </message>
     <message>
         <source>select to end of line</source>
-        <translation type="unfinished"/>
+        <translation>تحديد حتى نهاية السطر</translation>
     </message>
     <message>
         <source>shift+end</source>
-        <translation type="unfinished"/>
+        <translation>عالى+نهاية</translation>
     </message>
     <message>
         <source>select to beginning of score</source>
-        <translation type="unfinished"/>
+        <translation>تحديد حتى بداية المدوّنة</translation>
     </message>
     <message>
         <source>ctrl+shift+home</source>
-        <translation type="unfinished"/>
+        <translation>تحكّم+عالى+بداية</translation>
     </message>
     <message>
         <source>select to end of score</source>
-        <translation type="unfinished"/>
+        <translation>تحديد حتى نهاية المدوّنة</translation>
     </message>
     <message>
         <source>ctrl+shift+end</source>
-        <translation type="unfinished"/>
+        <translation>تحكّم+عالى+نهاية</translation>
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation type="unfinished"/>
+        <translation>إضافة مدرج فوق ما تم تحديده</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation type="unfinished"/>
+        <translation>إضافة مدرج تحت ما تم تحديده</translation>
     </message>
     <message>
         <source>page-prev</source>
-        <translation type="unfinished"/>
+        <translation>الصفحة السابقة</translation>
     </message>
     <message>
         <source>page-next</source>
-        <translation type="unfinished"/>
+        <translation>الصفحة اللاحقة</translation>
     </message>
     <message>
         <source>page-top</source>
-        <translation type="unfinished"/>
+        <translation>أعلى الصفحة</translation>
     </message>
     <message>
         <source>page-end</source>
-        <translation type="unfinished"/>
+        <translation>أسفل الصفحة</translation>
     </message>
     <message>
         <source>add slur</source>
-        <translation type="unfinished"/>
+        <translation>إضافة قوس ربط</translation>
     </message>
     <message>
         <source>crescendo</source>
-        <translation type="unfinished">أقوى تدريجيًا</translation>
+        <translation>أقوى بالتدريج</translation>
     </message>
     <message>
         <source>decrescendo</source>
-        <translation type="unfinished"/>
+        <translation>أهدأ بالتدريج</translation>
     </message>
     <message>
         <source>ESCAPE</source>
@@ -7047,87 +7199,87 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"/>
+        <translation>مسح الموازير المحددة</translation>
     </message>
     <message>
         <source>Append Measure</source>
-        <translation type="unfinished"/>
+        <translation>إلحاق مازورة</translation>
     </message>
     <message>
         <source>Append Measures...</source>
-        <translation type="unfinished"/>
+        <translation>إلحاق موازير...</translation>
     </message>
     <message>
         <source>Insert Measure</source>
-        <translation type="unfinished"/>
+        <translation>تحشير مازورة</translation>
     </message>
     <message>
         <source>Insert Measures...</source>
-        <translation type="unfinished"/>
+        <translation>تحشير موازير...</translation>
     </message>
     <message>
         <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"/>
+        <translation>تحشير إطار أفقى</translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
-        <translation type="unfinished"/>
+        <translation>تحشير إطار رأسى</translation>
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation type="unfinished"/>
+        <translation>إلحاق إطار أفقى</translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished"/>
+        <translation>إلحاق إطار رأسى</translation>
     </message>
     <message>
         <source>Duplet</source>
-        <translation type="unfinished"/>
+        <translation>زوجية</translation>
     </message>
     <message>
         <source>Triplet</source>
-        <translation type="unfinished"/>
+        <translation>ثلثية</translation>
     </message>
     <message>
         <source>Quadruplet</source>
-        <translation type="unfinished"/>
+        <translation>ربعية</translation>
     </message>
     <message>
         <source>Quintuplet</source>
-        <translation type="unfinished"/>
+        <translation>خمسية</translation>
     </message>
     <message>
         <source>Sextuplet</source>
-        <translation type="unfinished"/>
+        <translation>سدسية</translation>
     </message>
     <message>
         <source>Septuplet</source>
-        <translation type="unfinished"/>
+        <translation>سبعية</translation>
     </message>
     <message>
         <source>Octuplet</source>
-        <translation type="unfinished"/>
+        <translation>ثمنية</translation>
     </message>
     <message>
         <source>Nonuplet</source>
-        <translation type="unfinished"/>
+        <translation>تسعية</translation>
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation type="unfinished"/>
+        <translation>تقسيمات أخرى</translation>
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished"/>
+        <translation>خلافه...</translation>
     </message>
     <message>
         <source>note longa</source>
-        <translation type="unfinished"/>
+        <translation>نغمة طويلة</translation>
     </message>
     <message>
         <source>Longa</source>
-        <translation type="unfinished"/>
+        <translation>ضعف ضعف الروند</translation>
     </message>
     <message>
         <source>note breve</source>
@@ -7135,7 +7287,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation type="unfinished"/>
+        <translation>ضعف الروند</translation>
     </message>
     <message>
         <source>pad note 1/1</source>
@@ -7143,7 +7295,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Whole note (semibreve)</source>
-        <translation type="unfinished"/>
+        <translation>روند</translation>
     </message>
     <message>
         <source>pad note 1/2</source>
@@ -7151,7 +7303,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Half note (minim)</source>
-        <translation type="unfinished"/>
+        <translation>بلانش</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
@@ -7159,7 +7311,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quarter note (crochet)</source>
-        <translation type="unfinished"/>
+        <translation>نوار</translation>
     </message>
     <message>
         <source>pad note 1/8</source>
@@ -7167,7 +7319,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Eighth note (quaver)</source>
-        <translation type="unfinished"/>
+        <translation>كروش</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
@@ -7175,7 +7327,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>16th note (semiquaver)</source>
-        <translation type="unfinished"/>
+        <translation>دوبل كروش</translation>
     </message>
     <message>
         <source>pad note 1/32</source>
@@ -7183,7 +7335,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
-        <translation type="unfinished"/>
+        <translation>تريبل كروش</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
@@ -7191,7 +7343,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation type="unfinished"/>
+        <translation>كادريبل كروش</translation>
     </message>
     <message>
         <source>pad dot</source>
@@ -7199,7 +7351,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dot</source>
-        <translation type="unfinished"/>
+        <translation>نقطة</translation>
     </message>
     <message>
         <source>pad double dot</source>
@@ -7207,11 +7359,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Double dot</source>
-        <translation type="unfinished"/>
+        <translation>نقتطان</translation>
     </message>
     <message>
         <source>tie</source>
-        <translation type="unfinished"/>
+        <translation>رباط</translation>
     </message>
     <message>
         <source>pad rest</source>
@@ -7219,71 +7371,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished">دوبل دييز</translation>
+        <translation>دوبل دييز</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished">دييز</translation>
+        <translation>دييز</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">بيكار</translation>
+        <translation>بيكار</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished">دوبل بيمول</translation>
+        <translation>دوبل بيمول</translation>
     </message>
     <message>
         <source>acciaccatura</source>
-        <translation type="unfinished"/>
+        <translation>نغمة مخطوفة</translation>
     </message>
     <message>
         <source>appoggiatura</source>
-        <translation type="unfinished">سبّاقة</translation>
+        <translation>نغمة سابقة</translation>
     </message>
     <message>
         <source>grace-4</source>
-        <translation type="unfinished">نغمة مخطوفة-4</translation>
+        <translation>كروش مخطوفة</translation>
     </message>
     <message>
         <source>grace-16</source>
-        <translation type="unfinished">نغمة مخطوفة-16</translation>
+        <translation>دوبل كروش مخطوفة</translation>
     </message>
     <message>
         <source>grace-32</source>
-        <translation type="unfinished">نغمة مخطوفة-32</translation>
+        <translation>تريبل كروش مخطوفة</translation>
     </message>
     <message>
         <source>voice 1</source>
-        <translation type="unfinished"/>
+        <translation>الصوت اﻷول</translation>
     </message>
     <message>
         <source>voice 2</source>
-        <translation type="unfinished"/>
+        <translation>الصوت الثانى</translation>
     </message>
     <message>
         <source>voice 3</source>
-        <translation type="unfinished"/>
+        <translation>الصوت الثالث</translation>
     </message>
     <message>
         <source>voice 4</source>
-        <translation type="unfinished"/>
+        <translation>الصوت الرابع</translation>
     </message>
     <message>
         <source>midi input in</source>
-        <translation type="unfinished"/>
+        <translation>دخول الميدى</translation>
     </message>
     <message>
         <source>Enable MIDI Input</source>
-        <translation type="unfinished"/>
+        <translation>تفعيل دخول الميدى</translation>
     </message>
     <message>
         <source>editing sound on</source>
-        <translation type="unfinished"/>
+        <translation>تصويت أثناء الكتابة</translation>
     </message>
     <message>
         <source>Enable sound while editing</source>
-        <translation type="unfinished"/>
+        <translation>تفعيل التصويت أثناء الكتابة</translation>
     </message>
     <message>
         <source>beam start</source>
@@ -8200,6 +8352,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">مستقطعات...</translation>
     </message>
 </context>
 <context>

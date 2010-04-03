@@ -20,7 +20,7 @@
 
 #include <gsl/gsl_statistics_double.h>
 // #include "globals.h"
-#include "page.h"
+#include "omrpage.h"
 #include "image.h"
 #include "utils.h"
 #include "omr.h"
@@ -40,10 +40,10 @@ struct Lv {
       };
 
 //---------------------------------------------------------
-//   Page
+//   OmrPage
 //---------------------------------------------------------
 
-Page::Page(Omr* parent)
+OmrPage::OmrPage(Omr* parent)
       {
       _omr = parent;
       cropL = cropR = cropT = cropB = 0;
@@ -53,7 +53,7 @@ Page::Page(Omr* parent)
 //   dot
 //---------------------------------------------------------
 
-bool Page::dot(int x, int y) const
+bool OmrPage::dot(int x, int y) const
       {
       const uint* p = scanLine(y) + (x / 32);
       return (*p) & (0x1 << (x % 32));
@@ -63,7 +63,7 @@ bool Page::dot(int x, int y) const
 //   read
 //---------------------------------------------------------
 
-void Page::read(int pageNo)
+void OmrPage::read(int pageNo)
       {
       crop();
       slice();
@@ -170,7 +170,7 @@ static void addText(Score* score, int subtype, const QString& s)
 //   readHeader
 //---------------------------------------------------------
 
-void Page::readHeader(Score* score)
+void OmrPage::readHeader(Score* score)
       {
       OcrImage img = OcrImage(_image.bits(), _slices[0], (_image.width() + 31)/32);
       QString s = _omr->ocr()->readLine(img).trimmed();
@@ -192,7 +192,7 @@ void Page::readHeader(Score* score)
 //   crop
 //---------------------------------------------------------
 
-void Page::crop()
+void OmrPage::crop()
       {
       int wl  = wordsPerLine();
       int cropT = cropB = cropL = cropR = 0;
@@ -247,7 +247,7 @@ void Page::crop()
 //   slice
 //---------------------------------------------------------
 
-void Page::slice()
+void OmrPage::slice()
       {
       _slices.clear();
       int y1    = cropT;
@@ -299,17 +299,21 @@ void Page::slice()
 //    deSkew
 //---------------------------------------------------------
 
-void Page::deSkew()
+void OmrPage::deSkew()
       {
       int wl    = wordsPerLine();
       int h     = height();
       uint* db  = new uint[wl * h];
-      memset(db, 0, sizeof *db);
+      memset(db, 0, wl * h * sizeof(uint));
 
       foreach(const QRect& r, _slices) {
             double rot = skew(r);
-            if (rot == 0) {
-                  memcpy(db + wl * r.y(), scanLine(r.y()), wl * r.height() * 4);
+
+            // rot = 0.0;
+            printf("rot %f\n", rot);
+
+            if (rot == 0.0) {
+                  memcpy(db + wl * r.y(), scanLine(r.y()), wl * r.height() * sizeof(uint));
                   continue;
                   }
 
@@ -326,7 +330,8 @@ void Page::deSkew()
 
             double m21y = r.y() * m21;
             double m22y = r.y() * m22;
-            for (int y = r.y(); y < r.y()+r.height(); ++y) {
+            int y2 = r.y() + r.height();
+            for (int y = r.y(); y < y2; ++y) {
                   const uint* s = scanLine(y);
                   m21y += m21;
                   m22y += m22;
@@ -348,8 +353,7 @@ void Page::deSkew()
                         }
                   }
             }
-      const uchar* di = _image.bits();
-      memcpy(const_cast<uchar*>(di), db, wl * h * 4);
+      memcpy(_image.bits(), db, wl * h * sizeof(uint));
       delete[] db;
       }
 
@@ -370,7 +374,7 @@ struct H {
 //   xproject
 //---------------------------------------------------------
 
-int Page::xproject(const uint* p, int wl)
+int OmrPage::xproject(const uint* p, int wl)
       {
       int run = 0;
       int w   = wl - cropL - cropR;
@@ -390,7 +394,7 @@ int Page::xproject(const uint* p, int wl)
 //   xproject2
 //---------------------------------------------------------
 
-double Page::xproject2(int y1)
+double OmrPage::xproject2(int y1)
       {
       int wl          = wordsPerLine();
       const uint* db  = bits();
@@ -478,7 +482,7 @@ static bool sortLvStaves(const Lv& a, const Lv& b)
 //   getStaffLines
 //---------------------------------------------------------
 
-void Page::getStaffLines()
+void OmrPage::getStaffLines()
       {
       int h  = height();
       int wl = wordsPerLine();
@@ -494,11 +498,13 @@ void Page::getStaffLines()
             projection[y] = 0;
       for (int y = y2; y < h; ++y)
             projection[y] = 0;
-printf("y1 %d y2 %d  h %d\n", y1, y2, h);
+// printf("y1 %d y2 %d  h %d\n", y1, y2, h);
       for (int y = y1; y < y2; ++y)
             projection[y] = xproject2(y);
 
       int autoTableSize = (wl * 32) / 10;       // 1/10 page width
+      if (autoTableSize > y2-y1)
+            autoTableSize = y2 - y1;
       double autoTable[autoTableSize];
       memset(autoTable, 0, sizeof(autoTable));
       for (int i = 0; i < autoTableSize; ++i) {
@@ -584,7 +590,7 @@ struct Hv {
 //   searchNotes
 //---------------------------------------------------------
 
-void Page::searchNotes(int line, int x1, int x2, int y)
+void OmrPage::searchNotes(int line, int x1, int x2, int y)
       {
       QList<Hv> val;
 
@@ -616,7 +622,7 @@ void Page::searchNotes(int line, int x1, int x2, int y)
 //   staffDistance
 //---------------------------------------------------------
 
-double Page::staffDistance() const
+double OmrPage::staffDistance() const
       {
       if (staves.size() < 2)
             return 5;
@@ -627,7 +633,7 @@ double Page::staffDistance() const
 //   systemDistance
 //---------------------------------------------------------
 
-double Page::systemDistance() const
+double OmrPage::systemDistance() const
       {
       if (staves.size() < 3)
             return 6.0;

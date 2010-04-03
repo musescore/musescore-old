@@ -63,8 +63,8 @@ Event::Event(const Event& e)
       _notes      = e._notes;
       _len        = e._len;
       if (e._data) {
-            _data = new unsigned char[_len];
-            memcpy(_data, e._data, _len);
+            _data = new unsigned char[_len + 1];      // dont forget trailing zero
+            memcpy(_data, e._data, _len+1);
             }
       else
             _data = 0;

@@ -22,23 +22,27 @@
 #include "omrview.h"
 #include "omr.h"
 #include "xml.h"
-#include "page.h"
+#include "omrpage.h"
 #include "pdf.h"
 #include "ocr.h"
 #include "utils.h"
+
+class ScoreView;
 
 //---------------------------------------------------------
 //   Omr
 //---------------------------------------------------------
 
-Omr::Omr()
+Omr::Omr(Score* s)
       {
+      _score = s;
       _ocr = 0;
       initUtils();
       }
 
-Omr::Omr(const QString& p)
+Omr::Omr(const QString& p, Score* s)
       {
+      _score = s;
       _path = p;
       _ocr = 0;
       initUtils();
@@ -48,11 +52,11 @@ Omr::Omr(const QString& p)
 //   newOmrView
 //---------------------------------------------------------
 
-OmrView* Omr::newOmrView()
+OmrView* Omr::newOmrView(ScoreView* sv)
       {
-      OmrView* sv = new OmrView;
-      sv->setOmr(this);
-      return sv;
+      OmrView* ov = new OmrView(sv);
+      ov->setOmr(this);
+      return ov;
       }
 
 //---------------------------------------------------------
@@ -108,7 +112,7 @@ bool Omr::read()
 
       int n = _doc->numPages();
       for (int i = 0; i < n; ++i) {
-            Page* page = new Page(this);
+            OmrPage* page = new OmrPage(this);
             QImage image = _doc->page(i);
             page->setImage(image);
             pages.append(page);

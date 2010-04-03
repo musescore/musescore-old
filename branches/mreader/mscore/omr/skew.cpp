@@ -20,7 +20,7 @@
 
 #include "image.h"
 #include "utils.h"
-#include "page.h"
+#include "omrpage.h"
 
 //=============================================================================
 //  inspired by ImageMagick (http://www.imagemagick.org)
@@ -124,7 +124,7 @@ static void radonProjection(RadonInfo* src, RadonInfo* dst, int sign, ulong* pro
 //   radonTransform
 //---------------------------------------------------------
 
-void Page::radonTransform(ulong* projection, int w, int n, const QRect& r)
+void OmrPage::radonTransform(ulong* projection, int w, int n, const QRect& r)
       {
       int h = r.height();
       RadonInfo* src = new RadonInfo(w, h);
@@ -156,7 +156,7 @@ void Page::radonTransform(ulong* projection, int w, int n, const QRect& r)
 //    compute image skew angle
 //---------------------------------------------------------
 
-double Page::skew(const QRect& r)
+double OmrPage::skew(const QRect& r)
       {
 //      Benchmark bench("imageSkew");
 

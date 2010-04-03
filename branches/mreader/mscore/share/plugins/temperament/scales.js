@@ -693,7 +693,7 @@ function saveTemper(fName)
 //---------------------------------------------------------
 
 var mscorePlugin =
-{	menu:	'Plugins.Scales',
+{	menu:	'Plugins.Temperament Tuning',
 	init:	init,
 	run:	run
 };

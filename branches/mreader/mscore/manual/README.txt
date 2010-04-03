@@ -68,13 +68,16 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
 
 CHANGE LOG
 
+Version 1.6 (March 2010)
+* Update style sheet for 0.9.6
+* Fix for "/" link in English handbook
 * Compatibility update: remove "www." from handbook links again (HTML from website changed)
-* Add Hungarian and Catalan
+* Add Hungarian, Catalan, Romanian, and Greek
 * Work around lower case problem for a couple letters in Hungarian alphabet
 * More flexibility with Chapter headings (numbers can go before the word chapter for Hungarian or right after without a space for Japanese)
 * Update instructions in README file for adding new language
 
-Version 1.4 (February 2010)
+Version 1.5 (February 2010)
 * Unix style command line options
 * Fix: broken images
 * Fix: removable of stylesheets (change in website revealed bug)

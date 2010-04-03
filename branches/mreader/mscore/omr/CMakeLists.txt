@@ -51,7 +51,7 @@ add_library (
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
       ${mocs}
-      omrview.cpp pdf.cpp page.cpp
+      omrview.cpp pdf.cpp omrpage.cpp
       skew.cpp utils.cpp
       omr.cpp ocr.cpp
       )

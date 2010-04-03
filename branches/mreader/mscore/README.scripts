@@ -43,13 +43,15 @@ Example of a "no operation" plugin:
 ----------------begin code-----------------------
 function init() {}
 function run() {}
+function close() {}
 
 var mscorePlugin = {
       majorVersion:  1,
       minorVersion:  1,
       menu: 'Plugins.test',
       init: init,
-      run: run
+      run: run,
+      onClose: close
       };
 ----------------end code-----------------------
 
@@ -59,7 +61,7 @@ execution of the plugin. The test plugin above creates an entry "test"
 in the menu "Plugins".
 "init" defines a function, which is called on MuseScore startup, when
 the plugins are registered. The "run" function is executed, when the user
-activates the "test" menu entry.
+activates the "test" menu entry. The "onClose" is executed when MuseScore quits.
 The majorVersion and minorVersion properties are optional. If present, MuseScore
 checks against the current used interface version and warns of any
 incompatibility.
@@ -81,13 +83,20 @@ Objects
             The new score is appended to mscores list of scores.
 
          Properties:
-            name        string            file name
-            title       string            title text on score
-            subtitle    string            subtitle text on score (ro)
-            composer    string            composer text on score (ro)
-            poet        string            poet text on score (ro)
-            staves     integer            number of staves (ro)
-            duration   integer            total score duration in seconds (ro)
+            name          string            file name
+            title         string            title text on score
+            subtitle      string            subtitle text on score
+            composer      string            composer text on score
+            poet          string            poet text on score
+            staves        integer           number of staves (ro)
+            duration      integer           total score duration in seconds (ro)
+            pages         integer           number of pages (ro)
+            measures      integer           number of actual measures (ro)
+            parts         integer           number of parts (ro)
+            hasLyrics     bool              true if a lyric element is found in the core (ro)
+            hasHarmonies  bool              true if a valid chordname is found (ro)
+            keysig        integer           key signature at the beginning (ro)
+                                            -7 to 7 or undefined for custom signature
 
          Functions:
             bool save(string path, string type)
@@ -115,14 +124,8 @@ Objects
             appendMeasure(integer n)      append "n" measure to score
             startUndo()                   start undoable operations
             endUndo()                     end undoable operations
-            int pages()                   number of pages
-            int measures()                number of actual measures
-            int parts()                   number of parts
+
             Part part(int i)              part object at index i
-            bool hasLyrics                true if a lyric element is found in the core
-            bool hasHarmonies             true if a valid chordname is found
-            int keysig                    key signature at the beginning
-                -7 to 7 or undefined for custom signature
 
    Cursor
          create:  var a = new Cursor(Score score);
@@ -131,9 +134,12 @@ Objects
          Properties:
             staff       integer
             voice       integer
+            pageNumber  integer (ro)  
 
          Fuctions:
             rewind()                position cursor to staff/voice
+            goToSelectionStart()    position to start of selection, voice will be 0
+            goToSelectionEnd()      position to end of selection, voice will be 0
             next()                  goto next chord/rest
             nextMeasure()           goto first chord/rest in next measure
             isChord()               return true if cursor points to a chord
@@ -150,7 +156,8 @@ Objects
             nextMeasure()                 go to first chord/rest of next measure
             time()            double      current score time in ms
             tick()            integer     current score tick
-
+            pos()             QPointF     position 
+                
    Chord
          create:
             var a = new Chord()
@@ -305,3 +312,41 @@ Global Variables
                   }
             cursor.next();
             }
+
+=====================================================
+      Useful functions
+=====================================================
+
+1. Apply the given function "func" to all notes in selection on all voices
+
+function applyToNotesInSelection(func)
+      {
+      var cursor       = new Cursor(curScore);
+      var selectionEnd = new Cursor(curScore);
+
+      cursor.goToSelectionStart();
+      selectionEnd.goToSelectionEnd();
+      var startStaff = cursor.staff;
+      var endStaff   = selectionEnd.staff;
+
+      for (var staff = startStaff; staff < endStaff; ++staff) {
+            cursor.goToSelectionStart();
+            for (var v = 0; v < 4; v++) {          
+                  cursor.goToSelectionStart(); // set voice to 0
+                  cursor.voice = v; //voice has to be set after goTo
+                  cursor.staff = staff;
+
+                  while (cursor.tick() < selectionEnd.tick()) {
+                        if (cursor.isChord()) {
+                              var chord = cursor.chord();
+                              var n     = chord.notes;
+                              for (var i = 0; i < n; i++) {
+                                    var note   = chord.note(i);
+                                    func(note);
+                                    }
+                              }
+                        cursor.next();
+                        }
+                  }
+            }
+      }

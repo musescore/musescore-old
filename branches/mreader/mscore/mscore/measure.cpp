@@ -2980,17 +2980,26 @@ void Measure::layoutX(double stretch)
                               space.max(cr->space());
                               }
 
-                        double w = 0.0;
+                        double llw = 0.0;
+                        double rrw = 0.0;
                         Lyrics* lyrics = 0;
-                        const LyricsList* ll = s->lyricsList(staffIdx);
-                        for (ciLyrics l = ll->begin(); l != ll->end(); ++l) {
-                              if (!*l)
+                        foreach(Lyrics* l, *s->lyricsList(staffIdx)) {
+                              if (!l)
                                     continue;
-                              (*l)->layout();
-                              lyrics = *l;
-                              double lw = ((*l)->bbox().width()) * .5;
-                              if (lw > w)
-                                    w = lw;
+                              l->layout();
+                              lyrics = l;
+                              if (l->endTick() > 0) {
+                                    double rw = l->bbox().width();
+                                    if (rw > rrw)
+                                          rrw = rw;
+                                    }
+                              else {
+                                    double lw = l->bbox().width() * .5;
+                                    if (lw > llw)
+                                          llw = lw;
+                                    if (lw > rrw)
+                                          rrw = lw;
+                                    }
                               }
                         if (lyrics) {
                               found = true;
@@ -2999,7 +3008,7 @@ void Measure::layoutX(double stretch)
                               if (y > staves[staffIdx]->distance)
                                  staves[staffIdx]->distance = y;
                               }
-                        space.max(Space(w, w));
+                        space.max(Space(llw, rrw));
                         }
                   else {
                         Element* e = s->element(track);

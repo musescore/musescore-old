@@ -1,3 +1,146 @@
+2.apr (ws)
+      - fix #5177: memory corruption when creating more than four staves/part
+      (tb)
+      - adding Bulgarian language
+1.apr (ws)
+      - implemented #4149: Left align lyrics for melismas and tied notes
+      - fix #4680: QString conversion of MIDI meta message text needs fixing:
+        forgot to copy trailing zero in meta data in Event(const Event&)
+      - fix #5155: High CPU Usage When Showing the beginning of a score
+        (navigator problem)
+31.mar (ws)
+      - fix #5152: Crash Opening Full Orchestra MusicXML
+      - fix #5065: Arpeggio collides with accidental
+      - fix #5096-2: Grace notes not erased on paste
+      - fix #5112: Undo after CNTRL drag group of selected lyrics not working
+      - fix #5133: Font resize not immediate
+      - fix #4701: Unable to edit instrument name
+30.mar (ws)
+      - fix #5123: Infinite loop on first measure repeat
+      (db)
+      - add Greek handbook (most intra-document links don't work)
+      - fix English handbook, and update the rest
+      - update Brasilian Portuguese instrument list
+29.mar (ws)
+      - more transpose code debugging, fixing #5007, #5111, #5104, #5115
+      (la)
+      - fix shortcuts sorting in preferences
+      - fix: shortcuts not saved & Enable changing default Qt shortcuts
+28.mar (ws)
+      - fix #5104: Transpose chordnames hang
+      - cleanup of transpose implementation; more testing is needed;
+27.mar (ws)
+      - fix #5077: Custom key signature only works for first measure
+      - fix #5081: Ctrl+drag should not deselect
+      - fix #5091: Parethesized accidentals not played back
+      - fix #5100: Multi-measure rest display issue for non-full-measure
+      - fix #5092: Tremolos can't be dragged to note-stem
+      - fix #5095: Articulations move when new instrument inserted
+      - fix #5096: Grace notes not erased on paste
+      - fix #4902-2: Chordnames not transposed
+      - fix #3748: Tuplet and Tie bug
+      - fix #4977: Tuplet corruption
+25.mar (la)
+      - fix #5068: Custom key signature crashes on add measures
+      - fix #5067: Wrong note values with some dotted notes when beamed
+      - fix arpeggios playback
+24.mar (la)
+      - fix #4441: Create new key signature no longer works
+22.mar (la)
+      - fix #5037: Dotted slurs corrupted in print and .pdf export
+21.mar (ws)
+      - fix #4980: Normal bar line incompatibility
+      - fix #4970: Part appears empty
+       (la)
+      - fix #5029: Solo and Mute checked at the same time
+       (db)
+      - Notes > Transpose has chord names and key signatures marked by default
+20.mar (la)
+      - fix #5015 cursor doesn't respond to (Ctrl+)right/left keys in Entry mode.
+      - fix #5024 solo in mixer is not working
+      - fix #4102 ability to solo multiple instruments at once
+17.mar (ws)
+      - update for overture import filter from Van Ferry:
+            1. note stem direction sometimes wrong. (Fixed)
+            2. the stop position of some Wedge (Hairpin) is wrong. (Fixed)
+            3. the stop position of some Octave Shift (Ottava) is wrong. (Fixed)
+      - fix #4198: notehead position after adding a second below
+      - fix #4997: Courtesy accidentals not read
+      - fix #4973: Staff lines extend beyond bar line
+      - fix #4902: Chordnames not transposed
+       (la)
+      - fix #4174: Arrow left or right then undo deletes lyric syllables
+15.mar (la)
+      - add playback for MIDI in even if not in note entry mode.
+        Instrument is first selected staff or first staff
+14.mar (ws)
+      - fix #4969: Create empty part with title crash
+      (db)
+      - add Concert Band and Chamber Orchestra templates
+      - remove violina5demo template
+13.mar (ws)
+      - fix #3861-2: Compatibility of tremolos from 0.9.5
+      - fix #4957: Repeat bar lines spanning more than one staff have extra line
+      - fix #4881-2: Special Barlines not included in parts
+       (la)
+      - add onClose hook for plugin framework
+12.mar (lvi)
+      - MusicXML import/export of string and pluck
+       (ws)
+      - fix #3861: compatibility of tremolos from 0.9.5
+       (la)
+      - dashed bar does not break multi measure rests anymore
+      - fix #3347 remove time sig changes actual duration
+      - make abc import plugin platform independent
+11.mar (ws)
+      - fix #4857: dropping a clef onto a former drum staff hangs MuseScore
+      (db)
+      - MusicXML export of quarter tones for arrowed accidentals as specified:
+        http://musescore.org/node/3807#comment-13071
+      - Fix naming of plugins
+      (la)
+      - fix #4935 Time signature after incomplete measure
+      - fix to load chord style in a cross platform way
+      - fix #3750 mid measure tempo not read correctly
+8.mar (lv)
+      - fix MusicXML import of beams
+      - fix MusicXML regression test for beams
+7.mar (lv)
+      - fix #4324: MusicXML export of beam is incomplete
+      (ws)
+      - fix #4898: Up to empty lyric syllable crash
+      - fix #4900: Transpose from C major to Cb major
+      - fix #4899: Transpose by interval not working
+      - fix #4881-2nd: Special Barlines not included in parts
+      - fix #4798: note stems move to wrong position when adjusting beam height
+      (db)
+      - use Up and Down arrows to move through verses (like other scorewriters)
+6.mar (ws)
+      - fix #4866: Lasso select chordname, copy, crash
+      - script plugin extension for cursor:
+            rewind(1) positions to start of selection
+            rewind(2) positions to end of selection
+      - fix #4881: Special Barlines not included in parts
+      - implement reapeat bar lines spanning more than 2 staves
+      - fix #2855: Multi-measure rests hide special bar lines
+5.mar (ws)
+      - add Overture (*.ove) file format import from Van Ferry
+4.mar (ws)
+      - fix #2033: Dividing rests in 3/2 creates wrong rest values
+      - fix #4696: Septuplet uses too many beams
+      - fix #4695: dots collides with next note/rest
+      - fix #4845: New score from templates crash
+3.mar (ws)
+      - fix #4837: Instrument short names disappear
+      - fix undo crash
+2.mar (db)
+      - add zoom shortcuts
+      - mark rare instruments for new score screen (instruments.xml locale)
+28.feb (ws)
+      - New attempt implementing "transpose by key": transpose interval is
+        computed from target key -> first key (#2281)
+      (db)
+      - Add Russian and Romanian handbooks
 27.feb (lv)
       - fix MusicXML import of beam over rest
        (ws)
@@ -62,7 +205,7 @@
        (lv)
       - bug #4477: MusicXML: tremolos between two notes not exported/imported
         export implemented according to comments by David Bolton on Thu, 02/11/2010 - 19:29
-12,feb (ws)
+12.feb (ws)
       - undo/redo are now application shortcuts and work even if a palette opened
         by create is active
       - export small staves in part always at normal size
@@ -104,7 +247,7 @@
 30.jan (ws)
       - simplify selection model; remove system selection (dotted line selection)
       - new shortcut: Ctrl+Delete removes selected measure timewise
-28,jan (db)
+28.jan (db)
       - export slash flats as quarter notes
       - better BPM for each tempo text (traditional metronome numbers and
         correct speeds)
@@ -188,15 +331,15 @@
 27.dec (ws)
       - first code for chord style editor
       (og)
-      exportly: two (and not more than two) standard dynamics on one note.
+      - exportly: two (and not more than two) standard dynamics on one note.
 26.dec (og)
-      -exportly: Fixed bug in triplets of chords. Tried to update outdated code on
-      keychanges.
+      - exportly: Fixed bug in triplets of chords. Tried to update outdated code on
+        keychanges.
 24.dec (ws)
       - allow editing of text properties for chord names
 23.dec (og)
-      Exportly: Flat symbol in instrumentnames are now handled. Some
-      progress on reconciling rehearsalmarks and segno/coda-symbols.
+      - Exportly: Flat symbol in instrumentnames are now handled. Some
+        progress on reconciling rehearsalmarks and segno/coda-symbols.
 22.dec (la)
       - uncomment workaround for set(QT_USE_QTSCRIPTTOOLS TRUE) for ubuntu users
         see http://www.musescore.org/en/node/3475
@@ -277,7 +420,7 @@
 3.dec (ws)
       - Reorganized layout of beams. They are not longer restricted to one measure.
         However beams spanning systems do not work yet.
-3.dec (db)
+      (db)
       - Add spacer to Layout > Breaks & Spacer
       - Minor renaming
             - Rename "Breaths" palette to "Breaths & Pauses" since
@@ -288,7 +431,7 @@
       - Better error message for restore session
       - Update pt_BR translation from ..vitor..
       (og)
-	-exportly: fixed bugs connected to pickupbar.
+      -exportly: fixed bugs connected to pickupbar.
 1.dec (lv)
       - fix MusicXML export of pedal symbols
 30.nov (ws)
@@ -328,13 +471,13 @@
       (db)
       - add handbook html, image, and font source files to SVN
 20.nov  (ws)
-        - fix import of capella whole measure rests
-        (og)
-        - exportly: tried to fix reported crash on file Cronicaz.mscz
-        (la)
-        - fix tiny text on windows if no printer installed
-        - fix crash with drag and delete instrument name
-        - fix rendering of dynamics (staff, part, system)
+      - fix import of capella whole measure rests
+      (og)
+      - exportly: tried to fix reported crash on file Cronicaz.mscz
+      (la)
+      - fix tiny text on windows if no printer installed
+      - fix crash with drag and delete instrument name
+      - fix rendering of dynamics (staff, part, system)
 17.nov. (ws)
       - autosave: create dataPath if it does not exist
 16.nov. (ws)
@@ -380,7 +523,7 @@
       - fix: grace notes don't transpose
       - layout: remove accidental, if two notes share the same note head
       (og)
-	- exportly: lyrics. Works at least on demo adeste. several bugfixes.
+      - exportly: lyrics. Works at least on demo adeste. several bugfixes.
 6.nov. (ws)
       - cross beam layout fix
       - fix: D.S. ignored if inside a repeated section

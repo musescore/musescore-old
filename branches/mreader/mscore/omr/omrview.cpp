@@ -22,21 +22,25 @@
 #include "omrview.h"
 #include "omr.h"
 #include "page.h"
+#include "omrpage.h"
+#include "score.h"
+#include "scoreview.h"
 
 //---------------------------------------------------------
 //   OmrView
 //---------------------------------------------------------
 
-OmrView::OmrView(QWidget* parent)
+OmrView::OmrView(ScoreView* sv, QWidget* parent)
    : QWidget(parent)
       {
       setFocusPolicy(Qt::StrongFocus);
       setAttribute(Qt::WA_InputMethodEnabled);
       setAttribute(Qt::WA_KeyCompression);
-      setAttribute(Qt::WA_StaticContents);
+//      setAttribute(Qt::WA_StaticContents);
       setMouseTracking(true);
 
       _omr   = 0;
+      _scoreView = sv;
       double m = .25;
       _matrix = QTransform(m, 0.0, 0.0, m, 0.0, 0.0);
       imatrix = _matrix.inverted();
@@ -87,7 +91,7 @@ void OmrView::gotoPage(int n)
       if ((curPage + 1) == n)
             return;
       curPage    = n - 1;
-      Page* page = _omr->page(curPage);
+      OmrPage* page = _omr->page(curPage);
       const QImage& i = page->image();
       int w = i.width();
       int h = i.height();
@@ -98,8 +102,8 @@ void OmrView::gotoPage(int n)
       //    0  1
       //    3  2
       //
-      pm[0] = QPixmap::fromImage(i.copy(0,   0,       w/2,     h/2));
-      pm[1] = QPixmap::fromImage(i.copy(w/2, 0,   w - w/2,     h/2));
+      pm[0] = QPixmap::fromImage(i.copy(0,   0,         w/2,     h/2));
+      pm[1] = QPixmap::fromImage(i.copy(w/2, 0,     w - w/2,     h/2));
       pm[2] = QPixmap::fromImage(i.copy(w/2, h/2,   w - w/2, h - h/2));
       pm[3] = QPixmap::fromImage(i.copy(0,   h/2,       w/2, h - h/2));
 
@@ -141,7 +145,7 @@ void OmrView::paintEvent(QPaintEvent* event)
             if (rr.intersects(pr.translated(0.0, pr.height())))
                   p.drawPixmap(0.0, pr.height(), pm[3]);
             }
-      Page* page = _omr->page(curPage);
+      OmrPage* page = _omr->page(curPage);
 
       if (debugMode == 1) {
             p.setPen(QPen(QColor(255, 0, 0, 80), 1.0));
@@ -303,9 +307,19 @@ void OmrView::setScale(double v)
 
 void OmrView::setOffset(double x, double y)
       {
+      Score* score = _omr->score();
+      const QList<Page*>& pages = score->pages();
+      double sSpatium = score->spatium() * _scoreView->matrix().m11();
+
+      int pageNo = curPage >= pages.size() ? pages.size()-1 : curPage;
+
+      double pageX = pages[pageNo]->canvasPos().x() * _scoreView->matrix().m11();
+
       double spatium = _omr->spatium() * _matrix.m11();
-      double nx = x*spatium + (_omr->page(curPage)->width() * _matrix.m11() * curPage);
-      double ny = y*spatium;
+
+      double nx = (x + pageX) / sSpatium * spatium;
+      double ny = y / sSpatium * spatium;
+
       double ox = _matrix.dx();
       double oy = _matrix.dy();
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),

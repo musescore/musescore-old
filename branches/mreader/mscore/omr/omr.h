@@ -24,8 +24,10 @@
 class OmrView;
 class Xml;
 class Pdf;
-class Page;
+class OmrPage;
 class Ocr;
+class Score;
+class ScoreView;
 
 //---------------------------------------------------------
 //   Omr
@@ -36,19 +38,20 @@ class Omr {
       double _spatium;
       double _dpmm;
       Pdf* _doc;
-      QList<Page*> pages;
+      QList<OmrPage*> pages;
       Ocr* _ocr;
+      Score* _score;
 
       void process1(int page);
 
    public:
-      Omr();
-      Omr(const QString& path);
+      Omr(Score*);
+      Omr(const QString& path, Score*);
       bool read();
       int pagesInDocument() const;
       int numPages() const                 { return pages.size();          }
-      Page* page(int idx)                  { return pages[idx];            }
-      OmrView* newOmrView();
+      OmrPage* page(int idx)               { return pages[idx];            }
+      OmrView* newOmrView(ScoreView*);
       Ocr* ocr() const                     { return _ocr; }
 
       void write(Xml&) const;
@@ -59,6 +62,7 @@ class Omr {
       double dpmm() const                  { return _dpmm;    }
       double staffDistance() const;
       double systemDistance() const;
+      Score* score() const                 { return _score; }
       };
 
 #endif

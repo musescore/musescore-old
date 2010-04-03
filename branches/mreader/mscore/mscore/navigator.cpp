@@ -71,6 +71,7 @@ void MuseScore::showNavigator(bool visible)
             }
       navigator->setShown(visible);
       navigator->setScore(cv);
+      navigator->updateViewRect();
       getAction("toggle-navigator")->setChecked(visible);
       }
 
@@ -137,7 +138,13 @@ void Navigator::paintEvent(QPaintEvent* ev)
       if (redraw) {
             if (_cv) {
                   redraw = false;
-                  updateViewRect();
+                  qreal m = (height()-10.0) / (_score->pageFormat()->height() * DPI);
+                  matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
+                     matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
+
+                  QRectF r(0.0, 0.0, _cv->width(), _cv->height());
+                  viewRect = matrix.mapRect(_cv->toLogical(r)).toRect();
+
                   QColor _fgColor(Qt::white);
                   QColor _bgColor(Qt::gray);
                   int dx = lrint(matrix.m11());
@@ -256,20 +263,6 @@ void Navigator::mouseMoveEvent(QMouseEvent* ev)
 void Navigator::setViewRect(const QRectF& _viewRect)
       {
       viewRect = matrix.mapRect(_viewRect).toRect();
-      if (viewRect.x() < 0) {
-            double dx = -viewRect.x() / matrix.m11();
-            viewRect.moveLeft(0);
-            if (matrix.dx() < 5.0)
-                  matrix.translate(dx, 0.0);
-            redraw = true;
-            }
-      if (viewRect.right() > width()) {
-            double dx = (rect().right() - viewRect.right()) / matrix.m11();
-            dx *= 2.0;
-            viewRect.moveRight(width());
-            matrix.translate(dx, 0.0);
-            redraw = true;
-            }
       update();
       }
 

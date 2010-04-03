@@ -21,6 +21,7 @@
 install(FILES
       mscore_af.qm
       mscore_ar.qm
+      mscore_bg.qm
       mscore_ca.qm
       mscore_cs.qm
       mscore_da.qm
@@ -50,6 +51,30 @@ install(FILES
       mscore_uk.qm
       mscore_zh_TW.qm
       languages.xml
+      qt_ar.qm
+      qt_ca.qm
+      qt_cs.qm
+      qt_da.qm
+      qt_de.qm
+      qt_el.qm
+      qt_es.qm
+      qt_fi.qm
+      qt_fr.qm
+      qt_gl.qm
+      qt_hu.qm
+      qt_id.qm
+      qt_it.qm
+      qt_ja.qm
+      qt_nl.qm
+      qt_pl.qm
+      qt_pt.qm
+      qt_pt_BR.qm
+      qt_ro.qm
+      qt_ru.qm
+      qt_sv.qm
+      qt_tr.qm
+      qt_uk.qm
+      qt_zh_TW.qm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
       )
 
