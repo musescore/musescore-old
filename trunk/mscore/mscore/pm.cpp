@@ -208,7 +208,9 @@ void PortMidiDriver::read()
             int n = Pm_Read(inputStream, buffer, 1);
             if (n > 0) {
                   if (mscore->midiinEnabled()) {
-                        int type = Pm_MessageStatus(buffer[0].message);
+                        int status = Pm_MessageStatus(buffer[0].message);
+                        int type = status & 0xF0;
+                        //int channel = status & 0x0F; //going to need this at some point
                         if (type == ME_NOTEON) {
                               int pitch = Pm_MessageData1(buffer[0].message);
                               int velo = Pm_MessageData2(buffer[0].message);
