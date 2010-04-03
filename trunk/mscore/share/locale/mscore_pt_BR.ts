@@ -75,7 +75,7 @@ p, li { white-space: pre-wrap; }
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>Musescore: Propriedades das Articulações</translation>
+        <translation>MuseScore: Propriedades das Articulações</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -120,7 +120,7 @@ p, li { white-space: pre-wrap; }
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>Musescore: Propriedades da Moldura</translation>
+        <translation>MuseScore: Propriedades da Moldura</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -152,6 +152,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Formulário</translation>
+    </message>
+    <message>
+        <source>Arpeggio</source>
+        <translation type="unfinished">Arpejo</translation>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished">Trêmulo</translation>
+    </message>
+    <message>
+        <source>Glissando</source>
+        <translation type="unfinished">Glissando</translation>
     </message>
 </context>
 <context>
@@ -816,12 +828,24 @@ p, li { white-space: pre-wrap; }
         <source>MuseScore: Harmony Properties</source>
         <translation>MuseScore: Propriedades de Harmonia</translation>
     </message>
+    <message>
+        <source>Type</source>
+        <translation>Tipo</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Valor</translation>
+    </message>
+    <message>
+        <source>Alter</source>
+        <translation>Alterar</translation>
+    </message>
 </context>
 <context>
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation type="unfinished"/>
+        <translation>Erro ao Escrever Descrição de Acorde: </translation>
     </message>
 </context>
 <context>
@@ -849,7 +873,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Properties</source>
-        <translation>Propriedades da nota</translation>
+        <translation>Propriedades da Nota</translation>
     </message>
     <message>
         <source>tuning offset</source>
@@ -1078,7 +1102,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation>Propriedades de MIDI...</translation>
+        <translation>Propriedades MIDI...</translation>
     </message>
 </context>
 <context>
@@ -1187,7 +1211,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Write File failed: </source>
-        <translation type="unfinished"/>
+        <translation>Erro ao Gravar Arquivo </translation>
     </message>
 </context>
 <context>
@@ -1372,7 +1396,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
-        <translation>Tessitura Praticável:</translation>
+        <translation>Tessitura:</translation>
     </message>
     <message>
         <source>Amateur:</source>
@@ -1508,7 +1532,7 @@ Falhou: </translation>
     </message>
     <message>
         <source>+octave</source>
-        <translation type="unfinished"/>
+        <translation>+oitava</translation>
     </message>
 </context>
 <context>
@@ -1836,7 +1860,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation>Mostrar dobras na barra de ritornello</translation>
+        <translation>Mostrar abas na barra de ritornello</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -2008,7 +2032,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>MuseScore: Parts</source>
-        <translation>Musescore: Partes</translation>
+        <translation>MuseScore: Partes</translation>
     </message>
     <message>
         <source>Select Part:</source>
@@ -2040,7 +2064,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation type="unfinished"/>
+        <translation>Parte-%1</translation>
     </message>
 </context>
 <context>
@@ -2054,7 +2078,7 @@ space unit</extracomment>
     <name>GlissandoProperties</name>
     <message>
         <source>MuseScore: Glissando Properties</source>
-        <translation>Musescore: Propriedades do Glissando</translation>
+        <translation>MuseScore: Propriedades do Glissando</translation>
     </message>
     <message>
         <source>Show Text</source>
@@ -2139,7 +2163,7 @@ space unit</extracomment>
     <name>ImportMidiDialog</name>
     <message>
         <source>MuseScore: Midi Import</source>
-        <translation>Musescore: Importação de MIDI</translation>
+        <translation>MuseScore: Importação de MIDI</translation>
     </message>
     <message>
         <source>Shortest note on import:</source>
@@ -2400,7 +2424,7 @@ falhou: </translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation>Erro ao Gravar Estilo </translation>
     </message>
 </context>
 <context>
@@ -2511,7 +2535,7 @@ falhou: </translation>
     </message>
     <message>
         <source>Hook</source>
-        <translation>Dobra</translation>
+        <translation>Dobradura</translation>
     </message>
     <message>
         <source>Up</source>
@@ -3386,7 +3410,7 @@ Ao invés disso, experimente selecionar "Manual Online" no menu "Ajuda".</transl
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation>Apojatura/Acicatura</translation>
+        <translation>Ornamentos</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
@@ -3611,21 +3635,24 @@ Incompatível com a atual interface</translation>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>O MuseScore é muito antigo para rodar script&#13;
+%1</translation>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
-        <translation type="unfinished"/>
+        <translation>Compasso %1 Tempo %2.%3</translation>
     </message>
     <message>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao carregar o plugin&#13;
+"%1" linha %2:&#13;
+%3</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <translation>Todos os Arquivos Suportados (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Arquivos MuseScore (*.mscz *.mscx *.msc);;Arquivos MusicXML (*.xml *.mxl);;Arquivos MIDI (*.mid *.midi *.kar);;Arquivos Muse Data (*.md);;Arquivos Capella (*.cap);;Arquivos BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Arquivos Overture &lt;experimental&gt; (*.ove);;Todos os Arquivos (*)</translation>
     </message>
 </context>
 <context>
@@ -3726,7 +3753,7 @@ Incompatível com a atual interface</translation>
     <name>Note</name>
     <message>
         <source>Note Properties...</source>
-        <translation>Propriedade de nota...</translation>
+        <translation>Propriedades da Nota...</translation>
     </message>
     <message>
         <source>Tuplet Properties...</source>
@@ -3769,15 +3796,15 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Tuning</source>
-        <translation type="unfinished"/>
+        <translation>Afinação</translation>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>NoTempo</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>ForaDoTempo</translation>
     </message>
 </context>
 <context>
@@ -4139,7 +4166,7 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Straight</source>
-        <translation>Straight</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Swing</source>
@@ -4433,7 +4460,7 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Inserir Notas</translation>
+        <translation>Inserção de Notas</translation>
     </message>
     <message>
         <source>Enable midi input</source>
@@ -4754,7 +4781,7 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Use Current Position</source>
-        <translation type="unfinished"/>
+        <translation>Usar Posição Atual</translation>
     </message>
 </context>
 <context>
@@ -4907,7 +4934,7 @@ Por favor, selecione uma nota ou pausa e tente novamente
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: registrar script plugin:</translation>
     </message>
 </context>
 <context>
@@ -5213,11 +5240,11 @@ Tente salvar em um local diferente.</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation>Erro ao Gravar Estilo </translation>
     </message>
     <message>
         <source>Load failed: </source>
-        <translation type="unfinished"/>
+        <translation>Falha ao carregar </translation>
     </message>
 </context>
 <context>
@@ -5265,7 +5292,8 @@ Tente salvar em um local diferente.</translation>
     <message>
         <source>unknown drop format: formats %1:
 </source>
-        <translation type="unfinished"/>
+        <translation>formato desconhecido: formatos %1:
+</translation>
     </message>
 </context>
 <context>
@@ -5370,7 +5398,7 @@ Tente salvar em um local diferente.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Diálogo</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <source>0</source>
@@ -5386,16 +5414,18 @@ Tente salvar em um local diferente.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao iniciar driver de áudio.&#13;
+O sequenciador será desabilitado.</translation>
     </message>
     <message>
         <source>MuseScore: Load SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Carregar SoundFont</translation>
     </message>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Nenhuma SoundFont configurada&#13;
+A reprodução será desabilitada.</translation>
     </message>
     <message>
         <source>Loading SoundFont
@@ -5404,7 +5434,12 @@ failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao carregar a SoundFont&#13;
+"%1"&#13;
+A reprodução será desabilitada.&#13;
+&#13;
+Vá até Exibir &gt; Sintetizador &#13;
+e verifique se a localização do arquivo está correta</translation>
     </message>
 </context>
 <context>
@@ -6188,11 +6223,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4 compasso comum</translation>
+        <translation>4/4 compasso comum</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 meio comum</translation>
+        <translation>2/2 meio comum</translation>
     </message>
 </context>
 <context>
@@ -6475,6 +6510,23 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>TremoloBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formulário</translation>
+    </message>
+    <message>
+        <source>firstChord</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>secondChord</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
@@ -6642,7 +6694,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation>duplo sustenido</translation>
+        <translation>dobrado sustenido</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -6662,11 +6714,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>(double sharp)</source>
-        <translation>(duplo sustenido)</translation>
+        <translation>(dobrado sustenido)</translation>
     </message>
     <message>
         <source>(double flat)</source>
-        <translation>(duplo bemol)</translation>
+        <translation>(dobrado bemol)</translation>
     </message>
     <message>
         <source>(natural)</source>
@@ -6682,11 +6734,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>[double sharp]</source>
-        <translation>[duplo sustenido]</translation>
+        <translation>[dobrado sustenido]</translation>
     </message>
     <message>
         <source>[double flat]</source>
-        <translation>[duplo bemol]</translation>
+        <translation>[dobrado bemol]</translation>
     </message>
     <message>
         <source>[natural]</source>
@@ -7937,7 +7989,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double duration</source>
-        <translation>duração dupla</translation>
+        <translation>dobrar duração</translation>
     </message>
     <message>
         <source>half duration</source>
@@ -8369,7 +8421,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation type="unfinished">Partes...</translation>
+        <translation>Partes...</translation>
     </message>
 </context>
 <context>
@@ -9687,19 +9739,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bracket tips up</source>
-        <translation>dobra superior do colchete</translation>
+        <translation>aba superior do colchete</translation>
     </message>
     <message>
         <source>bracket tips down</source>
-        <translation>dobra inferior do colchete</translation>
+        <translation>aba inferior do colchete</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation>dobra superior esquerda do colchete</translation>
+        <translation>aba superior esquerda do colchete</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation>dobra inferior esquerda do colchete</translation>
+        <translation>aba inferior esquerda do colchete</translation>
     </message>
     <message>
         <source>acc dot</source>

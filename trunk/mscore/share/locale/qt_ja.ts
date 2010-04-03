@@ -2,8031 +2,12572 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ja">
 <context>
-    <name>CloseButton</name>
+    <name>AboutBox</name>
     <message>
-        <location filename="../src/gui/widgets/qtabbar.cpp" line="+2253"/>
-        <source>Close Tab</source>
-        <translatorcomment>ToolTip</translatorcomment>
-        <translation>タブを閉じる</translation>
-    </message>
-</context>
-<context>
-    <name>PPDOptionsModel</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">名前</translation>
+        <location filename="../../mscore/aboutbox.ui" line="+489"/>
+        <source>AboutBox</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Value</source>
-        <translation type="obsolete">値</translation>
-    </message>
-</context>
-<context>
-    <name>Phonon::</name>
-    <message>
-        <location filename="../src/3rdparty/phonon/phonon/phononnamespace.cpp" line="+55"/>
-        <source>Notifications</source>
-        <translation>通知</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Music</source>
-        <translation>音楽</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Video</source>
-        <translation>動画</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Communication</source>
-        <translation>コミュニケーション</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Games</source>
-        <translation>ゲーム</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Accessibility</source>
-        <translation>アクセシビリティ</translation>
-    </message>
-</context>
-<context>
-    <name>Phonon::AudioOutput</name>
-    <message>
-        <location filename="../src/3rdparty/phonon/phonon/audiooutput.cpp" line="+375"/>
-        <source>&lt;html&gt;The audio playback device &lt;b&gt;%1&lt;/b&gt; does not work.&lt;br/&gt;Falling back to &lt;b&gt;%2&lt;/b&gt;.&lt;/html&gt;</source>
-        <translation>&lt;html&gt;オーディオ再生デバイス&lt;b&gt;%1&lt;/b&gt;が動作しません。&lt;br/&gt;&lt;b&gt;%2&lt;/b&gt;を使用します。&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>&lt;html&gt;Switching to the audio playback device &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;which just became available and has higher preference.&lt;/html&gt;</source>
-        <translation>&lt;html&gt;より高いパフォーマンスを得られるオーディオデバイス &lt;b&gt;%1&lt;/b&gt; が使用可能となったので、使用します。&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Revert back to device &apos;%1&apos;</source>
-        <translation>デバイス &apos;%1&apos; に戻す</translation>
-    </message>
-</context>
-<context>
-    <name>Phonon::Gstreamer::Backend</name>
-    <message>
-        <location filename="../src/3rdparty/phonon/gstreamer/backend.cpp" line="+171"/>
-        <source>Warning: You do not seem to have the package gstreamer0.10-plugins-good installed.
-          Some video features have been disabled.</source>
-        <translation>警告: gstreamer0.10-plugins-good がインストールされていません。幾つかの動画機能は使用できません。</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Warning: You do not seem to have the base GStreamer plugins installed.
-          All audio and video support has been disabled</source>
-        <translation>警告: GStreamer plugin がインストールされていません。すべての音声、動画機能は使用できません</translation>
-    </message>
-</context>
-<context>
-    <name>Phonon::Gstreamer::MediaObject</name>
-    <message>
-        <location filename="../src/3rdparty/phonon/gstreamer/mediaobject.cpp" line="+90"/>
-        <source>Cannot start playback. 
-
-Check your Gstreamer installation and make sure you 
-have libgstreamer-plugins-base installed.</source>
-        <translation>再生できません。
-
-Gstreamer と libgstreamer-plugins-base が正しくインストールされているか確認してください。</translation>
-    </message>
-    <message>
-        <location line="+113"/>
-        <source>A required codec is missing. You need to install the following codec(s) to play this content: %0</source>
-        <translation>必要なコーデックがみつかりません。このコンテンツを再生するためには、以下のコーデックをインストールする必要があります: %0</translation>
-    </message>
-    <message>
-        <location line="+676"/>
-        <location line="+8"/>
-        <location line="+15"/>
-        <location line="+9"/>
-        <location line="+6"/>
-        <location line="+19"/>
-        <location line="+335"/>
-        <location line="+24"/>
-        <source>Could not open media source.</source>
-        <translation>メディアソースを開くことができません。</translation>
-    </message>
-    <message>
-        <location line="-403"/>
-        <source>Invalid source type.</source>
-        <translation>無効なソースの形式です。</translation>
-    </message>
-    <message>
-        <location line="+377"/>
-        <source>Could not locate media source.</source>
-        <translation>メディアソースがみつかりません。</translation>
+        <location line="+56"/>
+        <source>MuseScore</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>Could not open audio device. The device is already in use.</source>
-        <translation>オーディオデバイスを開くことができません。デバイスは既に他のプロセスにより使用されています。</translation>
+        <source>Version: 0.9.0</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>Could not decode media source.</source>
-        <translation>メディアソースを開くことができません。見つからないか、未知の形式です。</translation>
+        <location line="+10"/>
+        <source>Revision: 628</source>
+        <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>Phonon::VolumeSlider</name>
-    <message>
-        <location filename="../src/3rdparty/phonon/phonon/volumeslider.cpp" line="+42"/>
-        <location line="+18"/>
-        <location line="+129"/>
-        <location line="+15"/>
-        <source>Volume: %1%</source>
-        <translation>音量: %1%</translation>
-    </message>
-    <message>
-        <location line="-159"/>
-        <location line="+18"/>
-        <location line="+54"/>
-        <source>Use this slider to adjust the volume. The leftmost position is 0%, the rightmost is %1%</source>
-        <translation>スライダを用いて音量を指定してください。左端が0%、右端が%1%になります</translation>
-    </message>
-    <message>
-        <location line="+67"/>
-        <source>Muted</source>
-        <translation>ミュート</translation>
+    <message utf8="true">
+        <location line="+16"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>Q3Accel</name>
+    <name>AboutBoxDialog</name>
     <message>
-        <location filename="../src/qt3support/other/q3accel.cpp" line="+481"/>
-        <source>%1, %2 not defined</source>
-        <translation>%1, %2 は定義されていません</translation>
-    </message>
-    <message>
-        <location line="+36"/>
-        <source>Ambiguous %1 not handled</source>
-        <translation>曖昧な %1 は扱えません</translation>
-    </message>
-</context>
-<context>
-    <name>Q3DataTable</name>
-    <message>
-        <location filename="../src/qt3support/sql/q3datatable.cpp" line="+285"/>
-        <source>True</source>
-        <translation>真</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>False</source>
-        <translation>偽</translation>
-    </message>
-    <message>
-        <location line="+505"/>
-        <source>Insert</source>
-        <translation>挿入</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Update</source>
-        <translation>アップデート</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-</context>
-<context>
-    <name>Q3FileDialog</name>
-    <message>
-        <location filename="../src/qt3support/dialogs/q3filedialog_win.cpp" line="+132"/>
-        <source>All Files (*.*)</source>
-        <translation>すべてのファイル(*.*)</translation>
-    </message>
-    <message>
-        <location line="+375"/>
-        <source>Open </source>
-        <translation>オープン</translation>
-    </message>
-    <message>
-        <location line="+155"/>
-        <source>Select a Directory</source>
-        <translation>ディレクトリを選択</translation>
-    </message>
-    <message>
-        <location filename="../src/qt3support/dialogs/q3filedialog.cpp" line="+865"/>
-        <source>Copy or Move a File</source>
-        <translation>ファイルをコピーまたは移動</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Read: %1</source>
-        <translation>読み込み: %1</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+30"/>
-        <source>Write: %1</source>
-        <translation>書き込み: %1</translation>
-    </message>
-    <message>
-        <location line="-22"/>
-        <location line="+1579"/>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <location line="-157"/>
-        <location line="+49"/>
-        <location line="+2153"/>
-        <location filename="../src/qt3support/dialogs/q3filedialog_mac.cpp" line="+110"/>
-        <source>All Files (*)</source>
-        <translation>すべてのファイル(*)</translation>
-    </message>
-    <message>
-        <location line="-2089"/>
-        <source>Name</source>
-        <translation>名前</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Size</source>
-        <translation>サイズ</translation>
+        <location filename="../../mscore/mscore.cpp" line="+2482"/>
+        <source>Unstable Prerelease for Version: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Type</source>
-        <translation>タイプ</translation>
+        <source>Version: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Date</source>
-        <translation>日付</translation>
+        <location line="+2"/>
+        <source>Revision: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Accidental</name>
+    <message>
+        <location filename="../../mscore/menus.cpp" line="+416"/>
+        <location line="+533"/>
+        <source>round bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Articulation</name>
+    <message>
+        <location filename="../../mscore/articulation.cpp" line="+157"/>
+        <source>Articulation Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ArticulationProperties</name>
+    <message>
+        <location filename="../../mscore/articulation.ui" line="+13"/>
+        <source>MuseScore: Articulations Properties</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Attributes</source>
-        <translation>属性</translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <location line="+2031"/>
-        <source>&amp;OK</source>
-        <translation>OK(&amp;O)</translation>
-    </message>
-    <message>
-        <location line="-1991"/>
-        <source>Look &amp;in:</source>
-        <translation>検索する場所(&amp;I):</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <location line="+1981"/>
-        <location line="+16"/>
-        <source>File &amp;name:</source>
-        <translation>ファイル名(&amp;N):</translation>
-    </message>
-    <message>
-        <location line="-1996"/>
-        <source>File &amp;type:</source>
-        <translation>ファイルタイプ(&amp;T):</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Back</source>
-        <translation>戻る</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>One directory up</source>
-        <translation>1つ上のディレクトリへ移動</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Create New Folder</source>
-        <translation>新しいフォルダの作成</translation>
+        <location line="+26"/>
+        <source>Channel</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>List View</source>
-        <translation>一覧表示</translation>
+        <source>Midi Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>BarLineBase</name>
+    <message>
+        <location filename="../../mscore/barline.ui" line="+16"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+8"/>
-        <source>Detail View</source>
-        <translation>詳細表示</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Preview File Info</source>
-        <translation>ファイル情報のプレビュー</translation>
+        <location line="+12"/>
+        <source>BarLine</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
-        <source>Preview File Contents</source>
-        <translation>ファイルの内容のプレビュー</translation>
-    </message>
-    <message>
-        <location line="+88"/>
-        <source>Read-write</source>
-        <translation>読み込み/書き込み</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Read-only</source>
-        <translation>読み込み専用</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Write-only</source>
-        <translation>書き込み専用</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Inaccessible</source>
-        <translation>アクセス不可</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Symlink to File</source>
-        <translation>ファイルへのシンボリックリンク</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Symlink to Directory</source>
-        <translation>ディレクトリへのシンボリックリンク</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Symlink to Special</source>
-        <translation>スペシャルファイルへのシンボリックリンク</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>File</source>
-        <translation>ファイル</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Dir</source>
-        <translation>ディレクトリ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Special</source>
-        <translation>スペシャル</translation>
-    </message>
-    <message>
-        <location line="+704"/>
-        <location line="+2100"/>
-        <location filename="../src/qt3support/dialogs/q3filedialog_win.cpp" line="-325"/>
-        <source>Open</source>
-        <translation>オープン</translation>
-    </message>
-    <message>
-        <location line="-1990"/>
-        <location filename="../src/qt3support/dialogs/q3filedialog_win.cpp" line="+84"/>
-        <source>Save As</source>
-        <translation>名前を付けて保存</translation>
-    </message>
-    <message>
-        <location line="+642"/>
-        <location line="+5"/>
-        <location line="+355"/>
-        <source>&amp;Open</source>
-        <translation>オープン(&amp;O)</translation>
-    </message>
-    <message>
-        <location line="-357"/>
-        <location line="+341"/>
-        <source>&amp;Save</source>
-        <translation>保存(&amp;S)</translation>
-    </message>
-    <message>
-        <location line="-334"/>
-        <source>&amp;Rename</source>
-        <translation>名前の変更(&amp;R)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Delete</source>
-        <translation>削除(&amp;D)</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>R&amp;eload</source>
-        <translation>リロード(&amp;E)</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Sort by &amp;Name</source>
-        <translation>名前順にソート(&amp;N)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Sort by &amp;Size</source>
-        <translation>サイズ順にソート(&amp;S)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Sort by &amp;Date</source>
-        <translation>日付順にソート(&amp;D)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>&amp;Unsorted</source>
-        <translation>ソート解除(&amp;U)</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Sort</source>
-        <translation>ソート</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Show &amp;hidden files</source>
-        <translation>隠しファイルの表示(&amp;H)</translation>
-    </message>
-    <message>
-        <location line="+31"/>
-        <source>the file</source>
-        <translation>ファイル</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>the directory</source>
-        <translation>ディレクトリ</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>the symlink</source>
-        <translation>シンボリックリンク</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Delete %1</source>
-        <translation>%1 の削除</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&lt;qt&gt;Are you sure you wish to delete %1 &quot;%2&quot;?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;%1 &quot;%2&quot; を削除しますか?&lt;/qt&gt;</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>&amp;Yes</source>
-        <translation>はい(&amp;Y)</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>&amp;No</source>
-        <translation>いいえ(&amp;N)</translation>
-    </message>
-    <message>
-        <location line="+36"/>
-        <source>New Folder 1</source>
-        <translation>新しいフォルダ1</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>New Folder</source>
-        <translation>新しいフォルダ</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>New Folder %1</source>
-        <translation>新しいフォルダ %1</translation>
-    </message>
-    <message>
-        <location line="+98"/>
-        <source>Find Directory</source>
-        <translation>ディレクトリの検索</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+108"/>
-        <source>Directories</source>
-        <translation>ディレクトリ</translation>
-    </message>
-    <message>
-        <location line="-2"/>
-        <source>Directory:</source>
-        <translation>ディレクトリ:</translation>
-    </message>
-    <message>
-        <location line="+40"/>
-        <location line="+1110"/>
-        <source>Error</source>
-        <translation>エラー</translation>
-    </message>
-    <message>
-        <location line="-1109"/>
-        <source>%1
-File not found.
-Check path and filename.</source>
-        <translation>%1
-ファイルが見つかりませんでした。
-パスおよびファイル名を確認してください。</translation>
+        <source>SubType:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>Q3LocalFs</name>
+    <name>BeamBase</name>
     <message>
-        <location filename="../src/qt3support/network/q3localfs.cpp" line="+130"/>
-        <location line="+10"/>
-        <source>Could not read directory
-%1</source>
-        <translation>ディレクトリを読み込めませんでした
-%1</translation>
+        <location filename="../../mscore/beam.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+45"/>
-        <source>Could not create directory
-%1</source>
-        <translation>ディレクトリを作成できませんでした
-%1</translation>
-    </message>
-    <message>
-        <location line="+34"/>
-        <source>Could not remove file or directory
-%1</source>
-        <translation>ファイルまたはディレクトリを削除できませんでした
-%1</translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Could not rename
-%1
-to
-%2</source>
-        <translation>名前を変更できませんでした
-%1
-を
-%2
-へ</translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Could not open
-%1</source>
-        <translation>開けませんでした
-%1</translation>
-    </message>
-    <message>
-        <location line="+68"/>
-        <source>Could not write
-%1</source>
-        <translation>書き込めませんでした
-%1</translation>
-    </message>
-</context>
-<context>
-    <name>Q3MainWindow</name>
-    <message>
-        <location filename="../src/qt3support/widgets/q3mainwindow.cpp" line="+2051"/>
-        <source>Line up</source>
-        <translation>整列</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Customize...</source>
-        <translation>カスタマイズ...</translation>
-    </message>
-</context>
-<context>
-    <name>Q3NetworkProtocol</name>
-    <message>
-        <location filename="../src/qt3support/network/q3networkprotocol.cpp" line="+854"/>
-        <source>Operation stopped by the user</source>
-        <translation>操作がユーザによって停止されました</translation>
-    </message>
-</context>
-<context>
-    <name>Q3ProgressDialog</name>
-    <message>
-        <location filename="../src/qt3support/dialogs/q3progressdialog.cpp" line="+224"/>
-        <location line="+61"/>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-</context>
-<context>
-    <name>Q3TabDialog</name>
-    <message>
-        <location filename="../src/qt3support/dialogs/q3tabdialog.cpp" line="+190"/>
-        <location line="+824"/>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <location line="-366"/>
-        <source>Apply</source>
-        <translation>適用</translation>
-    </message>
-    <message>
-        <location line="+43"/>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <location line="+45"/>
-        <source>Defaults</source>
-        <translation>デフォルト</translation>
-    </message>
-    <message>
-        <location line="+50"/>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-</context>
-<context>
-    <name>Q3TextEdit</name>
-    <message>
-        <location filename="../src/qt3support/text/q3textedit.cpp" line="+5429"/>
-        <source>&amp;Undo</source>
-        <translation>元に戻す(&amp;U)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Redo</source>
-        <translation>やり直す(&amp;R)</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Cu&amp;t</source>
-        <translation>切り取り(&amp;T)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Copy</source>
-        <translation>コピー(&amp;C)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>&amp;Paste</source>
-        <translation>貼り付け(&amp;P)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Clear</source>
-        <translation>消去</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location line="+2"/>
-        <source>Select All</source>
-        <translation>すべてを選択</translation>
-    </message>
-</context>
-<context>
-    <name>Q3TitleBar</name>
-    <message>
-        <location filename="../src/plugins/accessible/compat/q3complexwidgets.cpp" line="+246"/>
-        <source>System</source>
-        <translation>システム</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Restore up</source>
-        <translation>元に戻す</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Minimize</source>
-        <translation>最小化</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Restore down</source>
-        <translation>元に戻す</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Maximize</source>
-        <translation>最大化</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Close</source>
-        <translation>閉じる</translation>
+        <location line="+30"/>
+        <source>up:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>Contains commands to manipulate the window</source>
-        <translation>ウィンドウを操作するコマンドを含みます</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Puts a minimized back to normal</source>
-        <translation>最小化されたウィンドウを元のサイズに戻します</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Moves the window out of the way</source>
-        <translation>ウィンドウを隠します</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Puts a maximized window back to normal</source>
-        <translation>最大化されたウィンドウを元のサイズに戻します</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Makes the window full screen</source>
-        <translation>ウィンドウをフルスクリーンにします</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Closes the window</source>
-        <translation>ウィンドウを閉じます</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Displays the name of the window and contains controls to manipulate it</source>
-        <translation>ウィンドウの名前と、ウィンドウを操作するコントロールを表示します</translation>
+        <source>Chord/Rest</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>Q3ToolBar</name>
+    <name>BoxPropertiesBase</name>
     <message>
-        <location filename="../src/qt3support/widgets/q3toolbar.cpp" line="+692"/>
-        <source>More...</source>
-        <translation>その他...</translation>
-    </message>
-</context>
-<context>
-    <name>Q3UrlOperator</name>
-    <message>
-        <location filename="../src/qt3support/network/q3urloperator.cpp" line="+386"/>
-        <location line="+260"/>
-        <location line="+4"/>
-        <source>The protocol `%1&apos; is not supported</source>
-        <translation>プロトコル &apos;%1&apos; はサポートされていません</translation>
+        <location filename="../../mscore/boxproperties.ui" line="+16"/>
+        <source>MuseScore: Frame Properties</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-260"/>
-        <source>The protocol `%1&apos; does not support listing directories</source>
-        <translation>プロトコル &apos;%1&apos; はディレクトリのリスティングをサポートしていません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The protocol `%1&apos; does not support creating new directories</source>
-        <translation>プロトコル &apos;%1&apos; は新しいディレクトリの作成をサポートしていません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The protocol `%1&apos; does not support removing files or directories</source>
-        <translation>プロトコル &apos;%1&apos; はファイルまたはディレクトリの削除をサポートしていません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The protocol `%1&apos; does not support renaming files or directories</source>
-        <translation>プロトコル &apos;%1&apos; はファイルまたはディレクトリの名前の変更をサポートしていません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The protocol `%1&apos; does not support getting files</source>
-        <translation>プロトコル &apos;%1&apos; はファイルの取得をサポートしていません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The protocol `%1&apos; does not support putting files</source>
-        <translation>プロトコル &apos;%1&apos; はファイルの送信をサポートしていません</translation>
-    </message>
-    <message>
-        <location line="+243"/>
-        <location line="+4"/>
-        <source>The protocol `%1&apos; does not support copying or moving files or directories</source>
-        <translation>プロトコル &apos;%1&apos; はファイルまたはディレクトリのコピーまたは移動をサポートしていません</translation>
-    </message>
-    <message>
-        <location line="+237"/>
-        <location line="+1"/>
-        <source>(unknown)</source>
-        <translation>(不明)</translation>
-    </message>
-</context>
-<context>
-    <name>Q3Wizard</name>
-    <message>
-        <location filename="../src/qt3support/dialogs/q3wizard.cpp" line="+177"/>
-        <source>&amp;Cancel</source>
-        <translation>キャンセル(&amp;C)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&lt; &amp;Back</source>
-        <translation>&lt; 戻る(&amp;B)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Next &gt;</source>
-        <translation>次へ(&amp;N) &gt;</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Finish</source>
-        <translation>完了(&amp;F)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Help</source>
-        <translation>ヘルプ(&amp;H)</translation>
-    </message>
-</context>
-<context>
-    <name>QAbstractSocket</name>
-    <message>
-        <location filename="../src/network/socket/qabstractsocket.cpp" line="+868"/>
-        <location filename="../src/network/socket/qhttpsocketengine.cpp" line="+615"/>
-        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="+657"/>
         <location line="+26"/>
-        <source>Host not found</source>
-        <translation>ホストが見つかりませんでした</translation>
+        <source>Margins</source>
+        <translation type="unfinished">余白</translation>
     </message>
     <message>
-        <location line="+50"/>
-        <location filename="../src/network/socket/qhttpsocketengine.cpp" line="+3"/>
-        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="+4"/>
-        <source>Connection refused</source>
-        <translation>接続が拒否されました</translation>
+        <location line="+15"/>
+        <source>left:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+13"/>
+        <location line="+16"/>
+        <location line="+16"/>
+        <location line="+29"/>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-13"/>
+        <source>right:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>bottom:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>top:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChordBase</name>
+    <message>
+        <location filename="../../mscore/chord.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+62"/>
+        <source>Arpeggio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Tremolo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChordEdit</name>
+    <message>
+        <location filename="../../mscore/chordedit.ui" line="+13"/>
+        <source>MuseScore: Harmony Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>bb (double flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>b (flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>(no accidental)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source># (sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>## (double sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
         <location line="+141"/>
-        <source>Connection timed out</source>
-        <translation>接続がタイムアウトしました</translation>
+        <source>Maj</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-547"/>
-        <location line="+787"/>
-        <location line="+208"/>
-        <source>Operation on socket is not supported</source>
-        <translatorcomment>抽象ソケットクラスでのソケットのエラー</translatorcomment>
-        <translation>このソケットへのこの操作はサポートされていません</translation>
+        <location line="-134"/>
+        <location line="+194"/>
+        <location line="+750"/>
+        <source>2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+137"/>
-        <source>Socket operation timed out</source>
-        <translation>ソケット操作がタイムアウトしました</translation>
+        <location line="-937"/>
+        <location line="+147"/>
+        <source>Maj7</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+380"/>
-        <source>Socket is not connected</source>
-        <translation>ソケットが接続されていません</translation>
+        <location line="-140"/>
+        <location line="+145"/>
+        <source>Maj9</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="-8"/>
-        <source>Network unreachable</source>
-        <translation>ネットワークへ到達できません</translation>
+        <location line="-138"/>
+        <location line="+128"/>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-121"/>
+        <location line="+161"/>
+        <source>69</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-154"/>
+        <location line="+164"/>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-157"/>
+        <location line="+172"/>
+        <source>m7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-165"/>
+        <location line="+215"/>
+        <source>m7b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-208"/>
+        <location line="+253"/>
+        <source>7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-246"/>
+        <location line="+736"/>
+        <source>sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-729"/>
+        <source>7Sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+157"/>
+        <source>m6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-150"/>
+        <location line="+135"/>
+        <source>m9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-128"/>
+        <location line="+118"/>
+        <source>mMaj7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-111"/>
+        <location line="+171"/>
+        <source>dim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-164"/>
+        <location line="+234"/>
+        <source>9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-227"/>
+        <location line="+202"/>
+        <source>13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-195"/>
+        <location line="+245"/>
+        <source>7b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-238"/>
+        <source>Other:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>5b</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>aug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Maj9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Maj13#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Maj13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>+</source>
+        <translation type="unfinished">+</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Maj7#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>maug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>m11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>m13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>m#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>m7#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>m69</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Maj7Lyd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Maj7b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>m9b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>(blues)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7(Blues)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>7b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+25"/>
+        <source>13#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-20"/>
+        <source>7#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+60"/>
+        <source>9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-50"/>
+        <source>9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>13b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7b9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7b9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7#9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>13#9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7#9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7b5b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9b5b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7b5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13b5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7b5b9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7b5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13b5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7b5#9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7#5#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13#5#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9#5#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7#5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13#5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7#5b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13#5b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7#5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+10"/>
+        <source>13#5#9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-5"/>
+        <source>7#5#9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>7alt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+25"/>
+        <source>13sus#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-20"/>
+        <source>7sus#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9susb13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+60"/>
+        <source>9sus#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-50"/>
+        <source>9sus#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13susb9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13susb9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13sus#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus#9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>13sus#9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus#9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13susb5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb5b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9susb5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9susb5b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13susb5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb5b9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13susb5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7susb5#9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13sus#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus#5#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13sus#5#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9sus#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>9sus#5#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus#5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13sus#5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus#5b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>13sus#5b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>7sus#5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+10"/>
+        <source>13sus#5#9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-5"/>
+        <source>7sus#5#9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Bass Note / Inversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <location line="+72"/>
+        <source>none</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-67"/>
+        <source>/C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/Db</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/Eb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/F#</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/Ab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/Bb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>/B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/chordedit.cpp" line="+101"/>
+        <source>Type</source>
+        <translation type="unfinished">タイプ</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Value</source>
+        <translation type="unfinished">値</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Alter</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>QAbstractSpinBox</name>
+    <name>ChordList</name>
     <message>
-        <location filename="../src/gui/widgets/qabstractspinbox.cpp" line="+1200"/>
-        <source>&amp;Step up</source>
-        <translation>上(&amp;S)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Step &amp;down</source>
-        <translation>下(&amp;D)</translation>
-    </message>
-    <message>
-        <location line="-8"/>
-        <source>&amp;Select All</source>
-        <translation>すべてを選択(&amp;S)</translation>
+        <location filename="../../mscore/harmony.cpp" line="+1171"/>
+        <source>Write Chord Description failed: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
+    <name>ChordPropertyBase</name>
     <message>
-        <location filename="../src/gui/accessible/qaccessibleobject.cpp" line="+376"/>
-        <source>Activate</source>
-        <translation>アクティブに</translation>
+        <location filename="../../mscore/chordproperties.ui" line="+14"/>
+        <location line="+36"/>
+        <source>Chord Properties</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Activates the program&apos;s main window</source>
-        <translation>メインウィンドウをアクティブにする</translation>
+        <location line="+11"/>
+        <source>small</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qmessagebox.h" line="+352"/>
-        <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
-        <translation>実行可能ファイル &apos;%1&apos; には Qt %2 が必要です。Qt %3 が見つかりました。</translation>
+        <location line="+7"/>
+        <source>stemless</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Incompatible Qt Library Error</source>
-        <translation>互換性のないQtライブラリエラー</translation>
+        <location line="+14"/>
+        <source>additional leading space </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/kernel/qapplication.cpp" line="+2238"/>
-        <source>QT_LAYOUT_DIRECTION</source>
-        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
-        <translation>LTR</translation>
+        <location line="+7"/>
+        <location line="+20"/>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>additional trailing space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>stem direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <location line="+108"/>
+        <location line="+48"/>
+        <location line="+161"/>
+        <location line="+58"/>
+        <source>auto</source>
+        <extracomment>velocity type</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-370"/>
+        <source>up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Note Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>tuning offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>velocity type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>velocity (0-127)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <location line="+209"/>
+        <location line="+58"/>
+        <source>user</source>
+        <extracomment>velocity type</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-262"/>
+        <location line="+209"/>
+        <location line="+58"/>
+        <source>offset</source>
+        <extracomment>velocity type</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-243"/>
+        <source>note head positon </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>left of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>right of stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Note Head Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Note Head Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>cross</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>diamond</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>xcircle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>do</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>re</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>mi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>fa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>la</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>ti</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>whole</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>half</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>quarter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>ontime offset type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>ontime offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location line="+58"/>
+        <source> ticks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-45"/>
+        <source>offtime offset type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>offtime</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>QAxSelect</name>
+    <name>ChordRestBase</name>
     <message>
-        <location filename="../src/activeqt/container/qaxselect.ui"/>
-        <source>Select ActiveX Control</source>
-        <translation>ActiveX Control を選択</translation>
+        <location filename="../../mscore/chordrest.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location/>
+        <location line="+71"/>
+        <source>SlurFor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>SlurBack:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+84"/>
+        <source>StaffMove:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChordStyleEditor</name>
+    <message>
+        <location filename="../../mscore/harmonyedit.ui" line="+78"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Chord Description File:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Name</source>
+        <translation type="unfinished">名前</translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <source>Save As</source>
+        <translation type="unfinished">名前を付けて保存</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/harmonyedit.cpp" line="+40"/>
+        <source>MuseScore: Chord Style Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Dynamic</name>
+    <message>
+        <location filename="../../mscore/dynamics.cpp" line="+264"/>
+        <source>Dynamics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MIDI Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DynamicBase</name>
+    <message>
+        <location filename="../../mscore/dynamic.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DynamicProperties</name>
+    <message>
+        <location filename="../../mscore/dynamicproperties.ui" line="+14"/>
+        <source>MuseScore: Text Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>MIDI Values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Velocity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Apply to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>part</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>align left</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditDrumset</name>
+    <message>
+        <location filename="../../mscore/editdrumset.cpp" line="+57"/>
+        <source>invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Normal Head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cross Head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Diamond Head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Triangle Head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Load</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Save</source>
+        <translation type="unfinished">保存</translation>
+    </message>
+    <message>
+        <location line="+262"/>
+        <source>MuseScore: Load Drumset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+45"/>
+        <source>MuseScore drumset (*.drm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <source>MuseScore: Save Drumset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Open File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>
+failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MuseScore: Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Write File failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>MuseScore: Write Drumset</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditDrumsetBase</name>
+    <message>
+        <location filename="../../mscore/editdrumset.ui" line="+14"/>
+        <source>MuseScore: Edit Drumset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Shortcut</source>
+        <translation type="unfinished">ショートカット</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Name</source>
+        <translation type="unfinished">名前</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Note Head:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Staff Line:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Stem Direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Up</source>
+        <translation type="unfinished">↑</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Down</source>
+        <translation type="unfinished">↓</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Default Voice:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>--</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditInstrumentBase</name>
+    <message>
+        <location filename="../../mscore/editinstrument.ui" line="+14"/>
+        <source>MuseScore: Edit Instrument Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Instrument Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Name</source>
+        <translation type="unfinished">名前</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Short Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Midi Program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+80"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location/>
-        <source>&amp;Cancel</source>
-        <translation>キャンセル(&amp;C)</translation>
-    </message>
-    <message>
-        <location/>
-        <source>COM &amp;Object:</source>
-        <translation>COM オブジェクト(&amp;O):</translation>
+        <location line="+7"/>
+        <source>Cancel</source>
+        <translation type="unfinished">キャンセル</translation>
     </message>
 </context>
 <context>
-    <name>QCheckBox</name>
+    <name>EditStaffBase</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="+114"/>
-        <source>Uncheck</source>
-        <translation>選択解除</translation>
+        <location filename="../../mscore/editstaff.ui" line="+20"/>
+        <source>MuseScore: Edit Staff/Part Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Staff Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Lines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Stemless</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Part Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Long Instrument Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Short Instrument Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>Usable Pitch Range:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Amateur:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <location line="+28"/>
+        <source>-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-14"/>
+        <source>Professional:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Play Transposition:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Perfect Unison</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Unison</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Minor Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Major Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Minor Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Major Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Perfect Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Fifth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Perfect Fifth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Fifth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Minor Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Major Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Minor Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Major Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Perfect Octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>+octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Use Drumset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Edit Drumset...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditStyle</name>
+    <message>
+        <location filename="../../mscore/editstyle.cpp" line="+62"/>
+        <source>Symbol</source>
+        <translation type="unfinished">記号</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Anchor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>TopStaff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>BottomStaff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditStyleBase</name>
+    <message>
+        <location filename="../../mscore/editstyle.ui" line="+14"/>
+        <source>MuseScore: Edit Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Page</source>
+        <translation type="unfinished">ページ</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+622"/>
+        <source>System</source>
+        <translation type="unfinished">システム</translation>
+    </message>
+    <message>
+        <location line="-617"/>
+        <location line="+686"/>
+        <source>Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-681"/>
+        <location line="+928"/>
+        <source>Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-923"/>
+        <location line="+960"/>
+        <source>Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-955"/>
+        <location line="+1163"/>
+        <source>Arpeggios</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1158"/>
+        <source>Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+1357"/>
+        <source>Beams</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1352"/>
+        <source>Sizes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Hairpins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+1679"/>
+        <source>Chordnames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1674"/>
+        <source>Articulations, Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Voices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Display in Concert Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Create Multi Measure Rests</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Minumum width of measure:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+71"/>
+        <location line="+35"/>
+        <location line="+35"/>
+        <location line="+35"/>
+        <location line="+35"/>
+        <location line="+35"/>
+        <location line="+42"/>
+        <location line="+32"/>
+        <location line="+164"/>
+        <location line="+41"/>
+        <location line="+95"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+17"/>
+        <location line="+23"/>
+        <location line="+86"/>
+        <location line="+10"/>
+        <location line="+56"/>
+        <location line="+20"/>
+        <location line="+20"/>
+        <location line="+20"/>
+        <location line="+20"/>
+        <location line="+47"/>
+        <location line="+20"/>
+        <location line="+20"/>
+        <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1104"/>
+        <source>Minimum Number of empty measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Hide Empty Staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Music upper margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Music lower margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Staff distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Akkolade distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>System distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Lyrics upper margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Lyrics lower margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>V-frame upper margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>V-frame lower margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Page fill threshold:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location line="+38"/>
+        <location line="+1006"/>
+        <location line="+38"/>
+        <location line="+35"/>
+        <location line="+38"/>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1130"/>
+        <source>Last system fill threshold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Create clef for all systems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Create key sig for all systems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Create time signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Create courtesy time signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Create courtesy key signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>System Bracket Distance:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Fix Number of Measures/System:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Fix Measure Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Spacing (1=tight)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Right margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Min. note distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Clef left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Key sig. left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Time sig. left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Clef-key distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Clef-barline distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Begin repeat left margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Barline at start of single staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Barline at start of multiple staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>shorten stems</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Progression</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Shortest stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Accidental note distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Accidental distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Note dot distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Dot dot distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Ledger line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>Distance to note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <location line="+450"/>
+        <source>Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-430"/>
+        <source>Hook length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+48"/>
+        <source>Page Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+45"/>
+        <source>show first</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-38"/>
+        <source>odd/even</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Measure Numbers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>all staffs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>every system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>Beam width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <location line="+34"/>
+        <source>spaces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-27"/>
+        <source>Beam distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>beam width units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Minimum length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Minimum slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Maximum slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>Small staff size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Small note size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Grace note size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Small clef size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+69"/>
+        <source>Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Line break height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>Use German names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Chord description file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Articulation - note head distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <source>sp</source>
+        <comment>space unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-21"/>
+        <source>Articulation - note stem distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Articulation - articulation distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+73"/>
+        <source>Stem Direction in Multi Voice Context</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Voice 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+21"/>
+        <location line="+21"/>
+        <location line="+21"/>
+        <source>Up</source>
+        <translation type="unfinished">↑</translation>
+    </message>
+    <message>
+        <location line="-56"/>
+        <location line="+21"/>
+        <location line="+21"/>
+        <location line="+21"/>
+        <source>Down</source>
+        <translation type="unfinished">↓</translation>
+    </message>
+    <message>
+        <location line="-56"/>
+        <source>Voice 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Voice 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Voice 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditTempoBase</name>
+    <message>
+        <location filename="../../mscore/edittempo.ui" line="+14"/>
+        <source>MuseScore: Tempo Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>BPM:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Cancel</source>
+        <translation type="unfinished">キャンセル</translation>
+    </message>
+</context>
+<context>
+    <name>Element</name>
+    <message>
+        <location filename="../../mscore/element.cpp" line="+550"/>
+        <source>Set Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Color...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ElementBase</name>
+    <message>
+        <location filename="../../mscore/element.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+128"/>
+        <source>selectable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>droptarget</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+107"/>
+        <source>invalid</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExcerptsDialog</name>
+    <message>
+        <location filename="../../mscore/excerptsdialog.ui" line="+13"/>
+        <source>MuseScore: Parts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Select Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Edit Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>File Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Part Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Instrument:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Create Part</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Close</source>
+        <translation type="unfinished">閉じる</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/excerptsdialog.cpp" line="+167"/>
+        <source>Part-%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Glissando</name>
+    <message>
+        <location filename="../../mscore/glissando.cpp" line="+203"/>
+        <source>Glissando Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GlissandoProperties</name>
+    <message>
+        <location filename="../../mscore/glissandoprop.ui" line="+13"/>
+        <source>MuseScore: Glissando Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Show Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GreendotButton</name>
+    <message>
+        <location filename="../../mscore/utils.cpp" line="+53"/>
+        <source>record</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HBox</name>
+    <message>
+        <location filename="../../mscore/box.cpp" line="+365"/>
+        <source>Add Text</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Check</source>
-        <translation>選択</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Toggle</source>
-        <translation>反転</translation>
+        <source>HBox Properties...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>QColorDialog</name>
+    <name>HairpinBase</name>
     <message>
-        <location filename="../src/gui/dialogs/qcolordialog.cpp" line="+1253"/>
-        <source>Hu&amp;e:</source>
-        <translation>色相(&amp;E):</translation>
+        <location filename="../../mscore/hairpin.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Hairpin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Tick1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Tick2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Harmony</name>
+    <message>
+        <location filename="../../mscore/harmony.cpp" line="-764"/>
+        <source>Harmony Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Image</name>
+    <message>
+        <location filename="../../mscore/image.cpp" line="+310"/>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>&amp;Sat:</source>
-        <translation>彩度(&amp;S):</translation>
+        <source>Image Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImageProperties</name>
+    <message>
+        <location filename="../../mscore/imageproperties.ui" line="+13"/>
+        <source>Image Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>lock aspect ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImportMidiDialog</name>
+    <message>
+        <location filename="../../mscore/importmidi.ui" line="+13"/>
+        <source>MuseScore: Midi Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Shortest note on import:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>1/4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>1/8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>1/16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>1/32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>1/64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>1/128</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InsertMeasuresDialogBase</name>
+    <message>
+        <location filename="../../mscore/insertmeasuresdialog.ui" line="+13"/>
+        <source>Mscore: Insert Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>Insert empty measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Number of measures to insert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Cancel</source>
+        <translation type="unfinished">キャンセル</translation>
+    </message>
+</context>
+<context>
+    <name>Inspector</name>
+    <message>
+        <location filename="../../mscore/inspector.cpp" line="+120"/>
+        <source>MuseScore: Object Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InspectorBase</name>
+    <message>
+        <location filename="../../mscore/inspector.ui" line="+15"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Back</source>
+        <translation type="unfinished">戻る</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Forward</source>
+        <translation type="unfinished">進む</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+</context>
+<context>
+    <name>InstrumentDialogBase</name>
+    <message>
+        <location filename="../../mscore/instrdialog.ui" line="+14"/>
+        <source>MuseScore: Create Instruments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <location line="+196"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-188"/>
+        <source>show more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Remove</source>
+        <translation type="unfinished">削除</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Up</source>
+        <translation type="unfinished">↑</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Down</source>
+        <translation type="unfinished">↓</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Add Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Add Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Load</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Save</source>
+        <translation type="unfinished">保存</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Cancel</source>
+        <translation type="unfinished">キャンセル</translation>
+    </message>
+</context>
+<context>
+    <name>InstrumentListEditor</name>
+    <message>
+        <location filename="../../mscore/partedit.cpp" line="+77"/>
+        <source>MuseScore: Part List</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InstrumentWizard</name>
+    <message>
+        <location filename="../../mscore/instrwizard.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <location line="+161"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-153"/>
+        <source>show more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Remove</source>
+        <translation type="unfinished">削除</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Up</source>
+        <translation type="unfinished">↑</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Down</source>
+        <translation type="unfinished">↓</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Add Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Add Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/newwizard.cpp" line="+44"/>
+        <source>Instrument List</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>&amp;Val:</source>
-        <translation>明度(&amp;V):</translation>
+        <source>Staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InstrumentsDialog</name>
+    <message>
+        <location filename="../../mscore/instrdialog.cpp" line="+73"/>
+        <source>Staff %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+87"/>
+        <source>Instrument List</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>&amp;Red:</source>
-        <translation>赤(&amp;R):</translation>
+        <source>Staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+854"/>
+        <source>MuseScore: Save Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MuseScore Instruments (*.xml);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Open Instruments File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>
+failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MuseScore: Open Instruments file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Write Style failed: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>&amp;Green:</source>
-        <translation>緑(&amp;G):</translation>
+        <source>MuseScore: Write Style</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Bl&amp;ue:</source>
-        <translation>青(&amp;U):</translation>
+        <location line="+11"/>
+        <source>MuseScore: Load Instrument List</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>A&amp;lpha channel:</source>
-        <translation>アルファチャネル(&amp;L):</translation>
+        <location line="+2"/>
+        <source>MuseScore Instruments (*.xml);;All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Jump</name>
+    <message>
+        <location filename="../../mscore/repeat.cpp" line="+405"/>
+        <source>Jump Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>JumpPropertyBase</name>
+    <message>
+        <location filename="../../mscore/jumpproperties.ui" line="+13"/>
+        <source>Jump Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Jump to:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Play until:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Continue at:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KeyEdit</name>
+    <message>
+        <location filename="../../mscore/keyedit.ui" line="+78"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+101"/>
-        <source>Select Color</source>
-        <translation>色</translation>
+        <source>Create Key Signature</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+137"/>
-        <source>&amp;Basic colors</source>
-        <translation>基本的なカラー(&amp;B)</translation>
+        <location line="+49"/>
+        <source>Clear</source>
+        <translation type="unfinished">消去</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>add time signature to palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KeyEditor</name>
+    <message>
+        <location filename="../../mscore/keyedit.cpp" line="+273"/>
+        <source>MuseScore: Key Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LinePropertiesDialog</name>
+    <message>
+        <location filename="../../mscore/lineproperties.ui" line="+13"/>
+        <source>MuseScore: Line Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Width:</source>
+        <translation type="unfinished">幅:</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <location line="+248"/>
+        <location line="+32"/>
+        <location line="+24"/>
+        <location line="+189"/>
+        <location line="+32"/>
+        <location line="+106"/>
+        <location line="+32"/>
+        <location line="+36"/>
+        <source>sp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-689"/>
+        <source>Line style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>solid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>dash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>dash dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>dash dot dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>diagonally</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+245"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-232"/>
+        <location line="+245"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location line="-223"/>
+        <location line="+245"/>
+        <source>place:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-237"/>
+        <location line="+245"/>
+        <source>Left</source>
+        <translation type="unfinished">→</translation>
+    </message>
+    <message>
+        <location line="-240"/>
+        <location line="+245"/>
+        <source>Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-229"/>
+        <location line="+245"/>
+        <location line="+141"/>
+        <source>Symb.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-375"/>
+        <location line="+245"/>
+        <location line="+138"/>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-341"/>
+        <location line="+245"/>
+        <location line="+138"/>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-351"/>
+        <location line="+245"/>
+        <location line="+138"/>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-355"/>
+        <location line="+389"/>
+        <source>Hook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-364"/>
+        <location line="+401"/>
+        <source>Up</source>
+        <translation type="unfinished">↑</translation>
+    </message>
+    <message>
+        <location line="-370"/>
+        <source>Continue</source>
+        <translation type="unfinished">続き</translation>
+    </message>
+    <message>
+        <location line="+205"/>
+        <source>End</source>
+        <translation type="unfinished">End</translation>
+    </message>
+</context>
+<context>
+    <name>LineSegmentBase</name>
+    <message>
+        <location filename="../../mscore/linesegment.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>LineSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>SegmentType:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>SINGLE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>BEGIN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>MIDDLE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>END</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Pos2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Offset2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LyricsBase</name>
+    <message>
+        <location filename="../../mscore/lyrics.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Lyrics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Syllabic:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Single</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>End</source>
+        <translation type="unfinished">End</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Middle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Row:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>End Tick:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MagBox</name>
+    <message>
+        <location filename="../../mscore/magbox.cpp" line="+52"/>
+        <source>Magnification</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>&amp;Custom colors</source>
-        <translation>カスタムカラー(&amp;C)</translation>
+        <source>Zoom Canvas</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Marker</name>
+    <message>
+        <location filename="../../mscore/repeat.cpp" line="-146"/>
+        <source>Marker Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MarkerPropertyBase</name>
+    <message>
+        <location filename="../../mscore/markerproperties.ui" line="+13"/>
+        <source>Marker Properties</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Define Custom Colors &gt;&gt;</source>
-        <translation type="obsolete">カスタムカラーの定義(&amp;D) &gt;&gt;</translation>
+        <location line="+28"/>
+        <source>Label:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Measure</name>
+    <message>
+        <location filename="../../mscore/measure.cpp" line="+1750"/>
+        <source>Measure Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MeasureBase</name>
+    <message>
+        <location filename="../../mscore/measure.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+69"/>
+        <source>breakMultiMeasureRest</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MeasureProperties</name>
+    <message>
+        <location filename="../../mscore/measureproperties.cpp" line="+62"/>
+        <source>visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>stemless</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MeasurePropertiesBase</name>
+    <message>
+        <location filename="../../mscore/measureproperties.ui" line="+17"/>
+        <source>MuseScore: Measure Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>New Row</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Stemless</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>a</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>c</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Measure Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>nominal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <location line="+33"/>
+        <source>/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-17"/>
+        <source>actual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+71"/>
+        <source>Other</source>
+        <translation type="unfinished">その他</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>do not count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>irregular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>break multi measure rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>add to measure number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>layout stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>repeat count:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MeasuresDialogBase</name>
+    <message>
+        <location filename="../../mscore/measuresdialog.ui" line="+13"/>
+        <source>Mscore: Append Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Append empty measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Number of measures to append</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+53"/>
         <source>OK</source>
-        <translation type="obsolete">OK</translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
+        <location line="+7"/>
         <source>Cancel</source>
-        <translation type="obsolete">キャンセル</translation>
+        <translation type="unfinished">キャンセル</translation>
+    </message>
+</context>
+<context>
+    <name>MenuNotes</name>
+    <message>
+        <location filename="../../mscore/mscore.cpp" line="-1820"/>
+        <source>&amp;Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MetaEditDialog</name>
+    <message>
+        <location filename="../../mscore/metaedit.ui" line="+13"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Work Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Work Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Movement Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Movement Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Source:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MuseScore</name>
+    <message>
+        <location filename="../../mscore/file.cpp" line="+144"/>
+        <location filename="../../mscore/mscore.cpp" line="+2203"/>
+        <source>MuseScore</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>&amp;Add to Custom Colors</source>
-        <translation>カスタムカラーに追加(&amp;A)</translation>
+        <source>Save changes to the score &quot;%1&quot;
+before closing?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select color</source>
-        <translation type="obsolete">カラーの選択</translation>
+        <location line="+35"/>
+        <source>MuseScore: Load Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+357"/>
+        <source>Untitled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>MuseScore: failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Load template file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source> failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/keysig.cpp" line="+31"/>
+        <source>G major, E minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Cb major, Ab minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>D major, B minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Gb major, Eb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A major, F# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Db major, Bb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>E major, C# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Ab major, F minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B major, G# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Eb major, C minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>F# major, D# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Bb major, G minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>C# major, A# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>F major,  D minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>C major, A minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/menus.cpp" line="-856"/>
+        <source>Grace Notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Acciaccatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Appoggiatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Quarter grace note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>16th grace note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>32nd grace note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Drums</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Clefs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Key Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Time Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>4/4 common time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>2/2 alla breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <location line="+789"/>
+        <source>Normal</source>
+        <translation type="unfinished">明朝</translation>
+    </message>
+    <message>
+        <location line="-788"/>
+        <location line="+789"/>
+        <source>Dashed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-788"/>
+        <location line="+789"/>
+        <source>End Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-788"/>
+        <location line="+789"/>
+        <source>Double Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-788"/>
+        <location line="+789"/>
+        <source>Start Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-788"/>
+        <location line="+789"/>
+        <source>End Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-788"/>
+        <location line="+789"/>
+        <source>End-Start Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-775"/>
+        <source>Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Slur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location line="+523"/>
+        <source>Crescendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-519"/>
+        <location line="+524"/>
+        <source>Diminuendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-516"/>
+        <location line="+527"/>
+        <source>Prima volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-519"/>
+        <location line="+528"/>
+        <location line="+18"/>
+        <source>Seconda volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-538"/>
+        <location line="+529"/>
+        <source>Terza volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-521"/>
+        <source>Seconda volta 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location line="+533"/>
+        <source>8va</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-529"/>
+        <location line="+534"/>
+        <source>15ma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-530"/>
+        <location line="+535"/>
+        <source>8vb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-531"/>
+        <location line="+536"/>
+        <source>15mb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-533"/>
+        <source>pedal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+540"/>
+        <source>Trill line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-534"/>
+        <location line="+538"/>
+        <source>Text line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-534"/>
+        <location line="+540"/>
+        <source>Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-531"/>
+        <source>Arpeggio &amp;&amp; Glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Arpeggio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location filename="../../mscore/style.cpp" line="+304"/>
+        <source>Glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Breath &amp;&amp; Pauses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Breath</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Caesura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Brackets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <location line="+508"/>
+        <source>Bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-507"/>
+        <location line="+508"/>
+        <source>Akkolade</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-498"/>
+        <source>Articulations &amp;&amp; Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Accidentals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <location filename="../../mscore/style.cpp" line="-58"/>
+        <source>Dynamics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <location filename="../../mscore/style.cpp" line="-12"/>
+        <source>Fingering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <location line="+593"/>
+        <source>Fingering %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-585"/>
+        <location line="+592"/>
+        <source>String number %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-582"/>
+        <source>Note Heads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Tremolo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>1 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>2 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>3 through stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>1 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>2 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>3 between notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Repeats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Repeat measure sign</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Segno</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Varied coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Codetta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Fine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Da Capo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Da Capo al Fine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Da Capo al Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>D.S al Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>D.S al Fine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>D.S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>To Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Breaks &amp;&amp; Spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+529"/>
+        <source>Line break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-525"/>
+        <location line="+528"/>
+        <source>Page break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-524"/>
+        <location line="+527"/>
+        <source>Staff spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-518"/>
+        <source>Beam Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Start beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Middle of beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>No beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Start subbeam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Auto beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>&amp;Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Barlines...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>&amp;Lines...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Brackets...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Articulations &amp;&amp; Ornaments...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Accidentals...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>MuseScore: Clefs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>MuseScore: Lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+79"/>
+        <source>Pedal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>MuseScore: Brackets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>MuseScore: Articulations &amp; Ornaments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>MuseScore: Accidentals</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>MuseScore: Dynamics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>MuseScore: Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>MuseScore: Fingering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+71"/>
+        <source>MuseScore: Breaks &amp; Spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/mscore.cpp" line="-2390"/>
+        <source>File Operations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Transport Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Concert Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Note Entry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+61"/>
+        <source>&amp;File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Open &amp;Recent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Voices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Preferences...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Add Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Add Interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <location filename="../../mscore/style.cpp" line="+40"/>
+        <source>Tuplets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>&amp;Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Page Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Breaks &amp;&amp; Spacer...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>&amp;Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>&amp;Display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+63"/>
+        <source>&amp;Help</source>
+        <translation type="unfinished">ヘルプ(&amp;H)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Online Handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>About&amp;Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Check for Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+72"/>
+        <source>MuseScore handbook not found at: 
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>
+
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>MuseScore: Open Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1096"/>
+        <location filename="../../mscore/style.cpp" line="+3"/>
+        <source>System</source>
+        <translation type="unfinished">システム</translation>
+    </message>
+    <message>
+        <location line="+235"/>
+        <source>no score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>note entry mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>edit mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Go To: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Search</source>
+        <translation type="unfinished">検索</translation>
+    </message>
+    <message>
+        <location line="+290"/>
+        <source>Bar %1 Beat %2.%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+292"/>
+        <source>The previous session quit unexpectedly.
+
+Restore session?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/plugins.cpp" line="+67"/>
+        <location line="+262"/>
+        <source>Error loading plugin
+&quot;%1&quot; line %2:
+%3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-238"/>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/style.cpp" line="-67"/>
+        <source>Symbols1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Symbols3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Subtitle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Composer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Poet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Lyrics odd lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Lyrics even lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>InstrumentsLong</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>InstrumentsShort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>InstrumentsExcerpt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Technik</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Metronome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Copyright</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Measure Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Page Number Odd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Page Number Even</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Translator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Chordname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Rehearsal Mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Repeat Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>TextLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>String Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ottava</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizard</name>
+    <message>
+        <location filename="../../mscore/newwizard.ui" line="+13"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Subtitle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Composer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Poet:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Copyright:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Create new score from template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Create new score from scratch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/newwizard.cpp" line="+628"/>
+        <source>MuseScore: Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizardPage1</name>
+    <message>
+        <location line="-227"/>
+        <source>Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This wizard creates a new score</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizardPage2</name>
+    <message>
+        <location line="+30"/>
+        <source>Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizardPage3</name>
+    <message>
+        <location line="+39"/>
+        <source>Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Create Time Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizardPage4</name>
+    <message>
+        <location line="+14"/>
+        <source>Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Select Template File:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizardPage5</name>
+    <message>
+        <location line="+46"/>
+        <source>Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Select Key Signature:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Note</name>
+    <message>
+        <location filename="../../mscore/note.cpp" line="+1118"/>
+        <source>Note Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Tuplet...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tuplet Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Delete Tuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NoteBase</name>
+    <message>
+        <location filename="../../mscore/note.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+63"/>
+        <source>head index</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>note head group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+138"/>
+        <source>OnTime:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <location line="+64"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-59"/>
+        <location line="+64"/>
+        <source>User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-59"/>
+        <location line="+64"/>
+        <source>Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-24"/>
+        <source>OffTime:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+116"/>
+        <source>Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PageBase</name>
+    <message>
+        <location filename="../../mscore/page.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Page</source>
+        <translation type="unfinished">ページ</translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Page No.:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PageSettingsBase</name>
+    <message>
+        <location filename="../../mscore/pagesettings.ui" line="+13"/>
+        <source>MuseScore: Page Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Preview</source>
+        <translation type="unfinished">プレビュー</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Apply</source>
+        <translation type="unfinished">適用</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Cancel</source>
+        <translation type="unfinished">キャンセル</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Page Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Two Sided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Landscape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Space</source>
+        <translation type="unfinished">Space</translation>
+    </message>
+    <message>
+        <location line="+49"/>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>inch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Even Page Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+64"/>
+        <location line="+119"/>
+        <source>Bottom Margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-106"/>
+        <location line="+119"/>
+        <source>Top Margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-106"/>
+        <location line="+119"/>
+        <source>Right Margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-106"/>
+        <location line="+119"/>
+        <source>Left Margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-103"/>
+        <source>Odd Page Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Palette</name>
+    <message>
+        <location filename="../../mscore/palette.cpp" line="+118"/>
+        <source>Delete Contents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaletteBox</name>
+    <message>
+        <location line="+998"/>
+        <source>Palettes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaletteBoxButton</name>
+    <message>
+        <location line="-92"/>
+        <source>Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Insert new Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move Palette Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move Palette Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Enable Editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Delete Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaletteCellProperties</name>
+    <message>
+        <location filename="../../mscore/cellproperties.ui" line="+14"/>
+        <source>Chord Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Palette Cell Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Content Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>x:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>y:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PaletteProperties</name>
+    <message>
+        <location filename="../../mscore/palette.ui" line="+14"/>
+        <source>MuseScore: Palette Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Cell Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>w:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>h:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Show Grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Element Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PartEditBase</name>
+    <message>
+        <location filename="../../mscore/partedit.ui" line="+19"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Part Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <source>Panorama Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Reverb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>Chorus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>Vol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Pan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Rev</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Cho</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Mute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Solo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>drumset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Sound:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>midi sound for part</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PianorollEditor</name>
+    <message>
+        <location filename="../../mscore/pianoroll.cpp" line="+57"/>
+        <source>toolbar1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>toolbar2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Cursor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Velocity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Pitch:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+60"/>
+        <source>MuseScore: &lt;%1&gt; Staff: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PlayPanelBase</name>
+    <message>
+        <location filename="../../mscore/playpanel.ui" line="+489"/>
+        <source>MuseScore: Play Panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+525"/>
+        <source>measure.beat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>001.01</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+503"/>
+        <source>h:mm:s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>0:00:00</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+504"/>
+        <source>actual tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>120bpm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+500"/>
+        <source>relative tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>100%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+69"/>
+        <source>Straight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Swing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Shuffle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Rewind</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Vol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Tmp</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PreferenceDialog</name>
+    <message>
+        <location filename="../../mscore/preferences.cpp" line="+656"/>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+209"/>
+        <source>Choose Notepaper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+16"/>
+        <source>Images (*.jpg *.gif *.png)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <source>Choose Background Wallpaper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Choose Working Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Choose Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Instrument List (*.xml)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Choose Starting Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PrefsDialogBase</name>
+    <message>
+        <location filename="../../mscore/prefsdialog.ui" line="+14"/>
+        <source>MuseScore: Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>MuseScore Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Program Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>start empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>continue last session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>start with new score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>start with score:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location line="+209"/>
+        <location line="+21"/>
+        <location line="+390"/>
+        <location line="+55"/>
+        <location line="+1359"/>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-2021"/>
+        <source>show splash screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>System</source>
+        <translation type="unfinished">システム</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>cz Czech</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>de German</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>en English</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>es Spanish</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>fr French</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>gl Galician</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>hi_IN Hindi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>it Italian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>nl Dutch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>pt Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>pt_BR Brasilian Portuguese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>ru Russian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>tr Turkey</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+51"/>
+        <source>Attention: changing the language requires a restart of MuseScore.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Paths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Instrument List:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Working Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Play Panel:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <location line="+38"/>
+        <source>show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-17"/>
+        <source>Use Current Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Navigator:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Auto Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Save every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>General:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <location line="+64"/>
+        <location line="+887"/>
+        <source>Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-921"/>
+        <location line="+77"/>
+        <location line="+831"/>
+        <source>Height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-883"/>
+        <source>Note Entry:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+67"/>
+        <source>Application Font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>pt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Canvas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <location line="+106"/>
+        <source>Wallpaper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-99"/>
+        <location line="+106"/>
+        <source>Color</source>
+        <translation type="unfinished">カラー</translation>
+    </message>
+    <message>
+        <location line="-59"/>
+        <source>Notesheet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+69"/>
+        <source>Misc.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Proximity for selecting elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>disable antialiased drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>uncheck this to speed up drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Draw Antialiased</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Auto-correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location line="+9"/>
+        <source>Replace 1/2 with fraction character ½</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location line="+7"/>
+        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Score element colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Default foreground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Select Voice 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Select Voice 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Select Voice 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Select Voice 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Drop Target</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Note Entry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Enable midi input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Play notes when editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Default duration:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>ms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>Alternate input method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Color notes outside of usable pitch range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Export MIDI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Expand Repeats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>enable midi remote control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>MIDI Remote Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Stop</source>
+        <translation type="unfinished">停止</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+40"/>
+        <location line="+27"/>
+        <location line="+27"/>
+        <source>is active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-91"/>
+        <location line="+10"/>
+        <location line="+30"/>
+        <location line="+10"/>
+        <location line="+17"/>
+        <location line="+10"/>
+        <location line="+17"/>
+        <location line="+10"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location line="-97"/>
+        <location line="+40"/>
+        <location line="+27"/>
+        <location line="+27"/>
+        <source>record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-71"/>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Rewind</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Default Paper Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>Two Sided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Landscape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>Scaling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Space</source>
+        <translation type="unfinished">Space</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>mm</source>
+        <extracomment>millimeter</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>I/O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Use JACK MIDI output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Ports</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Remember last connection(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Use internal synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>JACK Audio Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Left-Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Right-Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>ALSA Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <location line="+189"/>
+        <source>Device:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-182"/>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Sample Rate:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>192000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>96000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>88200</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>48000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>44100</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>32000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>22050</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Fragments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Period Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>4096</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>2048</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>1024</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>512</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>256</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>128</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Portaudio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Api:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+71"/>
+        <source>Choose PortMidi input interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+78"/>
+        <source>Attention: Any changes on this page require a restart of MuseScore.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Style Used for Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Built in style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Use style file:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>PNG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>screen shot function</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Shortcut</source>
+        <translation type="unfinished">ショートカット</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <location line="+110"/>
+        <source>Reset to Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-103"/>
+        <source>Clear</source>
+        <translation type="unfinished">消去</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Define...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Update</source>
+        <translation type="unfinished">アップデート</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Automatic Update Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Check for new versions of MuseScore on startup</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/complexwidgets.cpp" line="+1771"/>
-        <location line="+65"/>
-        <source>Open</source>
-        <translation>オープン</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/itemviews/qitemeditorfactory.cpp" line="+544"/>
-        <source>False</source>
-        <translation>偽</translation>
+        <location filename="../../mscore/textline.cpp" line="+525"/>
+        <source>Ped (Pedal)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>True</source>
-        <translation>真</translation>
-    </message>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/complexwidgets.cpp" line="+0"/>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
-</context>
-<context>
-    <name>QCoreApplication</name>
-    <message>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_unix.cpp" line="+119"/>
-        <source>%1: key is empty</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: キーが空です</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>%1: unable to make key</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: キーを作成できません</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>%1: ftok failed</source>
-        <comment>QSystemSemaphore</comment>
-        <translation>%1: fork に失敗しました</translation>
-    </message>
-</context>
-<context>
-    <name>QDB2Driver</name>
-    <message>
-        <location filename="../src/sql/drivers/db2/qsql_db2.cpp" line="+1276"/>
-        <source>Unable to connect</source>
-        <translation>接続できません</translation>
-    </message>
-    <message>
-        <location line="+303"/>
-        <source>Unable to commit transaction</source>
-        <translation>トランザクションをコミットできません</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Unable to rollback transaction</source>
-        <translation>トランザクションをロールバックできません</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Unable to set autocommit</source>
-        <translation>オートコミットを設定できません</translation>
-    </message>
-</context>
-<context>
-    <name>QDB2Result</name>
-    <message>
-        <location line="-1043"/>
-        <location line="+243"/>
-        <source>Unable to execute statement</source>
-        <translation>ステートメントを実行できません</translation>
-    </message>
-    <message>
-        <location line="-206"/>
-        <source>Unable to prepare statement</source>
-        <translation>プリペアステートメントを使えません</translation>
-    </message>
-    <message>
-        <location line="+196"/>
-        <source>Unable to bind variable</source>
-        <translation>変数をバインドできません</translation>
-    </message>
-    <message>
-        <location line="+92"/>
-        <source>Unable to fetch record %1</source>
-        <translation>レコード %1 をフェッチできません</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Unable to fetch next</source>
-        <translation>次のレコードをフェッチできません</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Unable to fetch first</source>
-        <translation>最初のレコードをフェッチできません</translation>
-    </message>
-</context>
-<context>
-    <name>QDateTimeEdit</name>
-    <message>
-        <location filename="../src/gui/widgets/qdatetimeedit.cpp" line="+2295"/>
-        <source>AM</source>
-        <translation>AM</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>am</source>
-        <translation>am</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>PM</source>
-        <translation>PM</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>pm</source>
-        <translation>pm</translation>
-    </message>
-</context>
-<context>
-    <name>QDial</name>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+951"/>
-        <source>QDial</source>
-        <translation>ダイヤル</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>SpeedoMeter</source>
-        <translation>スピードメータ</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>SliderHandle</source>
-        <translation>スライダハンドル</translation>
-    </message>
-</context>
-<context>
-    <name>QDialog</name>
-    <message>
-        <location filename="../src/gui/dialogs/qdialog.cpp" line="+597"/>
-        <source>What&apos;s This?</source>
-        <translation>ヒント?</translation>
-    </message>
-    <message>
-        <location line="-115"/>
-        <source>Done</source>
-        <translation>終了</translation>
-    </message>
-</context>
-<context>
-    <name>QDialogButtonBox</name>
-    <message>
-        <location filename="../src/gui/dialogs/qmessagebox.cpp" line="+1866"/>
-        <location line="+464"/>
-        <location filename="../src/gui/widgets/qdialogbuttonbox.cpp" line="+561"/>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/widgets/qdialogbuttonbox.cpp" line="+9"/>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Apply</source>
-        <translation>適用</translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>Ignore</source>
-        <translation>無視</translation>
-    </message>
-    <message>
-        <location line="-3"/>
-        <source>Retry</source>
-        <translation>再試行</translation>
-    </message>
-    <message>
-        <location line="-3"/>
-        <source>Abort</source>
-        <translation>中止</translation>
-    </message>
-    <message>
-        <location line="-26"/>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <location line="-18"/>
-        <source>Save</source>
-        <translation>保存</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>&amp;Save</source>
-        <translation>保存(&amp;S)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Open</source>
-        <translation>オープン</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;Cancel</source>
-        <translation>キャンセル(&amp;C)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>&amp;Close</source>
-        <translation>閉じる(&amp;C)</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Reset</source>
-        <translation>リセット</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Don&apos;t Save</source>
-        <translation>保存しない</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Close without Saving</source>
-        <translation>保存せずに閉じる</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Discard</source>
-        <translation>変更を破棄</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;Yes</source>
-        <translation>はい(&amp;Y)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Yes to &amp;All</source>
-        <translation>全てにはい(&amp;A)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;No</source>
-        <translation>いいえ(&amp;N)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>N&amp;o to All</source>
-        <translation>全てにいいえ(&amp;O)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Save All</source>
-        <translation>すべて保存</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Restore Defaults</source>
-        <translation>デフォルトに戻す</translation>
-    </message>
-    <message>
-        <location line="-56"/>
-        <source>&amp;OK</source>
-        <translation>OK(&amp;O)</translation>
-    </message>
-</context>
-<context>
-    <name>QDirModel</name>
-    <message>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+454"/>
-        <source>Name</source>
-        <translation>名前</translation>
+        <source>* (Pedal)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Size</source>
-        <translation>サイズ</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Date Modified</source>
-        <translation>更新日</translation>
-    </message>
-    <message>
-        <location line="-8"/>
-        <source>Kind</source>
-        <comment>Match OS X Finder</comment>
-        <translation>種類</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Type</source>
-        <comment>All other platforms</comment>
-        <translation>タイプ</translation>
-    </message>
-</context>
-<context>
-    <name>QDockWidget</name>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/qaccessiblewidgets.cpp" line="+1239"/>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Dock</source>
-        <translation>ドック</translation>
+        <source>. (Pedal)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Float</source>
-        <translation>フロート</translation>
-    </message>
-</context>
-<context>
-    <name>QDoubleSpinBox</name>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-537"/>
-        <source>More</source>
-        <translation>増やす</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Less</source>
-        <translation>減らす</translation>
-    </message>
-</context>
-<context>
-    <name>QErrorMessage</name>
-    <message>
-        <location filename="../src/gui/dialogs/qerrormessage.cpp" line="+192"/>
-        <source>Debug Message:</source>
-        <translation>デバッグメッセージ:</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Warning:</source>
-        <translation>警告:</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Fatal Error:</source>
-        <translation>致命的なエラー:</translation>
-    </message>
-    <message>
-        <location line="+193"/>
-        <source>&amp;Show this message again</source>
-        <translation>次回もこのメッセージを表示する(&amp;S)</translation>
+        <source>dash (Pedal)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>&amp;OK</source>
-        <translation>OK(&amp;O)</translation>
-    </message>
-</context>
-<context>
-    <name>QFile</name>
-    <message>
-        <location filename="../src/corelib/io/qfile.cpp" line="+708"/>
-        <location line="+142"/>
-        <source>Destination file exists</source>
-        <translation>新しい名前のファイルは既に存在します</translation>
-    </message>
-    <message>
-        <location line="-108"/>
-        <source>Cannot remove source file</source>
-        <translation>元のファイルを削除できません</translation>
-    </message>
-    <message>
-        <location line="+121"/>
-        <source>Cannot open %1 for input</source>
-        <translation>コピー元ファイル %1 を読めません</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Cannot open for output</source>
-        <translation>コピー先のファイルをオープンできません</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Failure to write block</source>
-        <translation>書き込みに失敗しました</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Cannot create %1 for output</source>
-        <translation>コピー先として %1 を作成できません</translation>
-    </message>
-</context>
-<context>
-    <name>QFileDialog</name>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="+514"/>
-        <location line="+447"/>
-        <source>All Files (*)</source>
-        <translation>すべてのファイル(*)</translation>
-    </message>
-    <message>
-        <location line="+222"/>
-        <source>Directories</source>
-        <translation>ディレクトリ</translation>
-    </message>
-    <message>
-        <location line="-647"/>
-        <location line="+651"/>
-        <source>Directory:</source>
-        <translation>ディレクトリ:</translation>
-    </message>
-    <message>
-        <location line="-649"/>
-        <location line="+655"/>
-        <source>File &amp;name:</source>
-        <translation>ファイル名(&amp;N):</translation>
-    </message>
-    <message>
-        <location line="-13"/>
-        <location line="+50"/>
-        <location line="+1467"/>
-        <location line="+75"/>
-        <source>&amp;Open</source>
-        <translation>オープン(&amp;O)</translation>
-    </message>
-    <message>
-        <location line="-1592"/>
-        <location line="+50"/>
-        <source>&amp;Save</source>
-        <translation>保存(&amp;S)</translation>
-    </message>
-    <message>
-        <location line="-733"/>
-        <source>Open</source>
-        <translation>オープン</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">保存</translation>
-    </message>
-    <message>
-        <source>
-File not found.
-Please verify the correct file name was given</source>
-        <translation type="obsolete">
-ファイルが見つかりません。
-正しいファイル名が入力されたかどうか確認してください</translation>
-    </message>
-    <message>
-        <location line="+1515"/>
-        <source>%1 already exists.
-Do you want to replace it?</source>
-        <translation>%1 はすでに存在します。
-置き換えますか?</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>%1
-File not found.
-Please verify the correct file name was given.</source>
-        <translation>%1
-ファイルが見つかりません。
-正しいファイル名が入力されたかどうか確認してください。</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+408"/>
-        <source>My Computer</source>
-        <translation>マイ コンピュータ</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-54"/>
-        <location line="+861"/>
-        <source>%1
-Directory not found.
-Please verify the correct directory name was given.</source>
-        <translation>%1
-ディレクトリが見つかりません。
-正しいディレクトリ名が入力されたかどうか確認してください。</translation>
-    </message>
-    <message>
-        <source>Sort</source>
-        <translation type="obsolete">ソート</translation>
-    </message>
-    <message>
-        <location line="-2311"/>
-        <source>&amp;Rename</source>
-        <translation>名前の変更(&amp;R)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Delete</source>
-        <translation>削除(&amp;D)</translation>
-    </message>
-    <message>
-        <source>&amp;Reload</source>
-        <translation type="obsolete">リロード(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Sort by &amp;Name</source>
-        <translation type="obsolete">名前順にソート(&amp;N)</translation>
-    </message>
-    <message>
-        <source>Sort by &amp;Size</source>
-        <translation type="obsolete">サイズ順にソート(&amp;S)</translation>
-    </message>
-    <message>
-        <source>Sort by &amp;Date</source>
-        <translation type="obsolete">日付順にソート(&amp;D)</translation>
-    </message>
-    <message>
-        <source>&amp;Unsorted</source>
-        <translation type="obsolete">ソート解除(&amp;U)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show &amp;hidden files</source>
-        <translation>隠しファイルの表示(&amp;H)</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
-        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
-        <source>Back</source>
-        <translation>戻る</translation>
-    </message>
-    <message>
-        <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
-        <source>Parent Directory</source>
-        <translation>親ディレクトリ</translation>
-    </message>
-    <message>
-        <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
-        <source>Create New Folder</source>
-        <translation>新しいフォルダの作成</translation>
-    </message>
-    <message>
-        <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
-        <source>List View</source>
-        <translation>一覧表示</translation>
-    </message>
-    <message>
-        <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
-        <source>Detail View</source>
-        <translation>詳細表示</translation>
-    </message>
-    <message>
-        <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
-        <source>Look in:</source>
-        <translation>検索する場所:</translation>
-    </message>
-    <message>
-        <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
-        <source>Files of type:</source>
-        <translation>ファイルの種類:</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/itemviews/qfileiconprovider.cpp" line="+411"/>
-        <source>Drive</source>
-        <translation>ドライブ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>File</source>
-        <translation>ファイル</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>File Folder</source>
-        <comment>Match Windows Explorer</comment>
-        <translation>ファイルフォルダ</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Folder</source>
-        <comment>All other platforms</comment>
-        <translation>フォルダ</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Alias</source>
-        <comment>Mac OS X Finder</comment>
-        <translation>エイリアス</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Shortcut</source>
-        <comment>All other platforms</comment>
-        <translation>ショートカット</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Unknown</source>
-        <translation>不明</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog_win.cpp" line="+160"/>
-        <source>All Files (*.*)</source>
-        <translation>すべてのファイル(*.*)</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-31"/>
-        <source>Save As</source>
-        <translation>名前を付けて保存</translation>
-    </message>
-    <message>
-        <source>Open </source>
-        <translation type="obsolete">オープン</translation>
-    </message>
-    <message>
-        <source>Select a Directory</source>
-        <translation type="obsolete">ディレクトリを選択</translation>
-    </message>
-    <message>
-        <location line="+2122"/>
-        <source>&apos;%1&apos; is write protected.
-Do you want to delete it anyway?</source>
-        <translation>&apos;%1&apos; は書き込みが禁止されています。
-本当に削除しますか?</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Are sure you want to delete &apos;%1&apos;?</source>
-        <translation>&apos;%1&apos; を本当に削除しますか?</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Could not delete directory.</source>
-        <translation>ディレクトリを削除できませんでした。</translation>
-    </message>
-    <message>
-        <location line="-2146"/>
-        <source>Find Directory</source>
-        <translation>ディレクトリの検索</translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Show </source>
-        <translation>表示</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>&amp;New Folder</source>
-        <translation>新しいフォルダ(&amp;N)</translation>
-    </message>
-    <message>
-        <location line="+659"/>
-        <location line="+38"/>
-        <source>&amp;Choose</source>
-        <translation>選択(&amp;C)</translation>
-    </message>
-    <message>
-        <location line="+1265"/>
-        <source>New Folder</source>
-        <translation>新しいフォルダ</translation>
-    </message>
-    <message>
-        <location line="+555"/>
-        <source>Recent Places</source>
-        <translation>履歴</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
-        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
-        <source>Forward</source>
-        <translation>進む</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qsidebar.cpp" line="+437"/>
-        <source>Remove</source>
-        <translation>削除</translation>
-    </message>
-</context>
-<context>
-    <name>QFileSystemModel</name>
-    <message>
-        <location filename="../src/gui/dialogs/qfilesystemmodel.cpp" line="+892"/>
-        <source>Name</source>
-        <translation>名前</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Size</source>
-        <translation>サイズ</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Date Modified</source>
-        <translation>更新日</translation>
-    </message>
-    <message>
-        <location line="-9"/>
-        <source>Kind</source>
-        <comment>Match OS X Finder</comment>
-        <translation>種類</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Type</source>
-        <comment>All other platforms</comment>
-        <translation>タイプ</translation>
-    </message>
-    <message>
-        <location line="-156"/>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+471"/>
-        <source>%1 TB</source>
-        <translation>%1 TB</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+2"/>
-        <source>%1 GB</source>
-        <translation>%1 GB</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+2"/>
-        <source>%1 MB</source>
-        <translation>%1 MB</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+2"/>
-        <source>%1 KB</source>
-        <translation>%1 KB</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+1"/>
-        <source>%1 bytes</source>
-        <translation>%1 バイト</translation>
-    </message>
-    <message>
-        <location line="+77"/>
-        <source>Invalid filename</source>
-        <translation>無効なファイル名</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&lt;b&gt;The name &quot;%1&quot; can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
-        <translation>&lt;b&gt;ファイル名 &quot;%1&quot; は使用できません。&lt;/b&gt;&lt;p&gt;名前を短くしたり、アクセント記号などを削除して再度試してください。</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfilesystemmodel_p.h" line="+248"/>
-        <source>My Computer</source>
-        <translation>マイ コンピュータ</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Computer</source>
-        <translation>コンピュータ</translation>
-    </message>
-</context>
-<context>
-    <name>QFontDatabase</name>
-    <message>
-        <location filename="../src/gui/text/qfontdatabase.cpp" line="+90"/>
-        <location line="+1176"/>
-        <source>Normal</source>
-        <translatorcomment>ここはどう訳すべきか...</translatorcomment>
-        <translation>明朝</translation>
-    </message>
-    <message>
-        <location line="-1173"/>
-        <location line="+12"/>
-        <location line="+1149"/>
-        <source>Bold</source>
-        <translation>ゴシック</translation>
-    </message>
-    <message>
-        <location line="-1158"/>
-        <location line="+1160"/>
-        <source>Demi Bold</source>
-        <translation>Demi Bold</translation>
-    </message>
-    <message>
-        <location line="-1157"/>
-        <location line="+18"/>
-        <location line="+1135"/>
-        <source>Black</source>
-        <translation>太字</translation>
-    </message>
-    <message>
-        <location line="-1145"/>
-        <source>Demi</source>
-        <translation>Demi</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+1145"/>
-        <source>Light</source>
-        <translation>細字</translation>
-    </message>
-    <message>
-        <location line="-1004"/>
-        <location line="+1007"/>
-        <source>Italic</source>
-        <translation>イタリック</translation>
-    </message>
-    <message>
-        <location line="-1004"/>
-        <location line="+1006"/>
-        <source>Oblique</source>
-        <translation>斜体</translation>
-    </message>
-    <message>
-        <location line="+705"/>
-        <source>Any</source>
-        <translation>すべて</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Latin</source>
-        <translation>ラテン</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Greek</source>
-        <translation>ギリシャ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Cyrillic</source>
-        <translation>キリル</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Armenian</source>
-        <translation>アルメニア</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Hebrew</source>
-        <translation>ヘブライ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Arabic</source>
-        <translation>アラビア</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Syriac</source>
-        <translation>シリア</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Thaana</source>
-        <translation>ターナ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Devanagari</source>
-        <translation>デーヴァナーガリー</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Bengali</source>
-        <translation>ベンガル</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Gurmukhi</source>
-        <translation>グルムキー</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Gujarati</source>
-        <translation>グジャラート</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Oriya</source>
-        <translation>オリヤー</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Tamil</source>
-        <translation>タミル</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Telugu</source>
-        <translation>テルグ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Kannada</source>
-        <translation>カンナダ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Malayalam</source>
-        <translation>マラヤーラム</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Sinhala</source>
-        <translation>シンハラ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Thai</source>
-        <translation>タイ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Lao</source>
-        <translation>ラーオ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Tibetan</source>
-        <translation>チベット</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Myanmar</source>
-        <translation>ビルマ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Georgian</source>
-        <translation>グルジア</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Khmer</source>
-        <translation>クメール</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Simplified Chinese</source>
-        <translation>簡体中国</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Traditional Chinese</source>
-        <translation>繁体中国</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Japanese</source>
-        <translation>日本</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Korean</source>
-        <translation>ハングル</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Vietnamese</source>
-        <translation>ベトナム</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Symbol</source>
-        <translation>記号</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Ogham</source>
-        <translation>オガム</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Runic</source>
-        <translation>ルーン</translation>
-    </message>
-</context>
-<context>
-    <name>QFontDialog</name>
-    <message>
-        <location filename="../src/gui/dialogs/qfontdialog.cpp" line="+772"/>
-        <source>&amp;Font</source>
-        <translation>フォント(&amp;F)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Font st&amp;yle</source>
-        <translation>フォントスタイル(&amp;Y)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Size</source>
-        <translation>サイズ(&amp;S)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Effects</source>
-        <translation>文字飾り</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Stri&amp;keout</source>
-        <translation>取り消し線(&amp;K)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Underline</source>
-        <translation>下線(&amp;U)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Sample</source>
-        <translation>サンプル</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Wr&amp;iting System</source>
-        <translation>言語(&amp;I)</translation>
-    </message>
-    <message>
-        <location line="-604"/>
-        <location line="+247"/>
-        <source>Select Font</source>
-        <translation>フォントの選択</translation>
-    </message>
-</context>
-<context>
-    <name>QFtp</name>
-    <message>
-        <location filename="../src/network/access/qftp.cpp" line="+826"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+683"/>
-        <source>Not connected</source>
-        <translation>未接続です</translation>
-    </message>
-    <message>
-        <location line="+65"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+65"/>
-        <source>Host %1 not found</source>
-        <translation>ホスト %1 が見つかりませんでした</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+4"/>
-        <source>Connection refused to host %1</source>
-        <translation>ホスト %1 への接続が拒否されました</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Connection timed out to host %1</source>
-        <translation>ホスト %1 への接続がタイムアウトしました</translation>
-    </message>
-    <message>
-        <location line="+104"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+102"/>
-        <location line="+1451"/>
-        <source>Connected to host %1</source>
-        <translation>ホスト %1 に接続しました</translation>
-    </message>
-    <message>
-        <location line="+219"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="-1290"/>
-        <source>Connection refused for data connection</source>
-        <translation>データ接続のための接続が拒否されました</translation>
-    </message>
-    <message>
-        <location line="+178"/>
-        <location line="+29"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+195"/>
-        <location line="+728"/>
-        <source>Unknown error</source>
-        <translation>不明なエラー</translation>
-    </message>
-    <message>
-        <location line="+889"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+77"/>
-        <source>Connecting to host failed:
-%1</source>
-        <translation>ホストへの接続に失敗しました:
-%1</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
-        <source>Login failed:
-%1</source>
-        <translation>ログインに失敗しました:
-%1</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
-        <source>Listing directory failed:
-%1</source>
-        <translation>ディレクトリのリストに失敗しました:
-%1</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
-        <source>Changing directory failed:
-%1</source>
-        <translation>ディレクトリの変更に失敗しました:
-%1</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
-        <source>Downloading file failed:
-%1</source>
-        <translation>ファイルのダウンロードに失敗しました:
-%1</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
-        <source>Uploading file failed:
-%1</source>
-        <translation>ファイルのアップロードに失敗しました:
-%1</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
-        <source>Removing file failed:
-%1</source>
-        <translation>ファイルの削除に失敗しました:
-%1</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
-        <source>Creating directory failed:
-%1</source>
-        <translation>ディレクトリの作成に失敗しました:
-%1</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
-        <source>Removing directory failed:
-%1</source>
-        <translation>ディレクトリの削除に失敗しました:
-%1</translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+25"/>
-        <location line="+250"/>
-        <source>Connection closed</source>
-        <translation>接続が閉じられました</translation>
-    </message>
-    <message>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="-11"/>
-        <source>Host %1 found</source>
-        <translation>ホスト %1 が見つかりました</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Connection to %1 closed</source>
-        <translation>%1 への接続が閉じられました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Host found</source>
-        <translation>ホストが見つかりました</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Connected to host</source>
-        <translation>ホストに接続しました</translation>
-    </message>
-</context>
-<context>
-    <name>QHostInfo</name>
-    <message>
-        <location filename="../src/network/kernel/qhostinfo_p.h" line="+183"/>
-        <source>Unknown error</source>
-        <translation>不明なエラー</translation>
-    </message>
-</context>
-<context>
-    <name>QHostInfoAgent</name>
-    <message>
-        <location filename="../src/network/kernel/qhostinfo_unix.cpp" line="+178"/>
-        <location line="+9"/>
-        <location line="+64"/>
-        <location line="+31"/>
-        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="+180"/>
-        <location line="+9"/>
-        <location line="+40"/>
-        <location line="+27"/>
-        <source>Host not found</source>
-        <translation>ホストが見つかりません</translation>
-    </message>
-    <message>
-        <location line="-44"/>
-        <location line="+39"/>
-        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="-34"/>
-        <location line="+29"/>
-        <source>Unknown address type</source>
-        <translation>不明なアドレス型です</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="-19"/>
-        <location line="+27"/>
-        <source>Unknown error</source>
-        <translation>不明なエラー</translation>
-    </message>
-</context>
-<context>
-    <name>QHttp</name>
-    <message>
-        <location filename="../src/network/access/qhttp.cpp" line="+365"/>
-        <source>HTTPS connection requested but SSL support not compiled in</source>
-        <translation>HTTPSによる接続が要求されましたが、SSLのサポートがコンパイル時に組み込まれていないため、接続できません</translation>
-    </message>
-    <message>
-        <location line="+1209"/>
-        <location line="+820"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+1160"/>
-        <location line="+567"/>
-        <source>Unknown error</source>
-        <translation>不明なエラー</translation>
-    </message>
-    <message>
-        <location line="-568"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="-370"/>
-        <source>Request aborted</source>
-        <translation>要求が中止されました</translation>
-    </message>
-    <message>
-        <location line="+579"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+381"/>
-        <source>No server set to connect to</source>
-        <translation>接続が設定されているサーバがありません</translation>
-    </message>
-    <message>
-        <location line="+164"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+56"/>
-        <source>Wrong content length</source>
-        <translation>コンテンツの長さが正しくありません</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+4"/>
-        <source>Server closed connection unexpectedly</source>
-        <translation>サーバの接続が予期せず閉じられました</translation>
-    </message>
-    <message>
-        <location line="+179"/>
-        <source>Unknown authentication method</source>
-        <translation>非対応の認証方法が要求されました</translation>
-    </message>
-    <message>
-        <location line="+183"/>
-        <source>Error writing response to device</source>
-        <translation>デバイスへの書き込み時にエラーが発生しました</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="+968"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+38"/>
-        <source>Connection refused</source>
-        <translation>接続が拒否されました</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttp.cpp" line="-304"/>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="-4"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+3"/>
-        <source>Host %1 not found</source>
-        <translation>ホスト %1 が見つかりませんでした</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="+10"/>
-        <location line="+19"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+3"/>
-        <source>HTTP request failed</source>
-        <translation>HTTP要求に失敗しました</translation>
-    </message>
-    <message>
-        <location line="+73"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+69"/>
-        <source>Invalid HTTP response header</source>
-        <translation>無効なHTTP応答ヘッダです</translation>
-    </message>
-    <message>
-        <location line="+125"/>
-        <location line="+48"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+40"/>
-        <location line="+47"/>
-        <source>Invalid HTTP chunked body</source>
-        <translation>無効なHTTPチャンクドボディです</translation>
-    </message>
-    <message>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+294"/>
-        <source>Host %1 found</source>
-        <translation>ホスト %1 が見つかりました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Connected to host %1</source>
-        <translation>ホスト %1 に接続しました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Connection to %1 closed</source>
-        <translation>%1 への接続が閉じられました</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Host found</source>
-        <translation>ホストが見つかりました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Connected to host</source>
-        <translation>ホストに接続しました</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="-22"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+3"/>
-        <source>Connection closed</source>
-        <translation>接続が閉じられました</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttp.cpp" line="-135"/>
-        <source>Proxy authentication required</source>
-        <translation>プロキシーの認証が必要です</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Authentication required</source>
-        <translation>認証が必要です</translation>
-    </message>
-    <message>
-        <location line="-138"/>
-        <source>Connection refused (or timed out)</source>
-        <translation>接続が拒否されたか、タイムアウトしました</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="+6"/>
-        <source>Proxy requires authentication</source>
-        <translation>プロキシーの認証が必要です</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Host requires authentication</source>
-        <translation>ホストの認証が必要です</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Data corrupted</source>
-        <translation>データが破損しています</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Unknown protocol specified</source>
-        <translation>未対応のプロトコルです</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>SSL handshake failed</source>
-        <translation>SSLのハンドシェークに失敗しました</translation>
-    </message>
-</context>
-<context>
-    <name>QHttpSocketEngine</name>
-    <message>
-        <location filename="../src/network/socket/qhttpsocketengine.cpp" line="-89"/>
-        <source>Did not receive HTTP response from proxy</source>
-        <translation>プロキシーからHTTPレスポンスを受信できませんでした</translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Error parsing authentication request from proxy</source>
-        <translation>プロキシーからの認証要求のパースに失敗しました</translation>
-    </message>
-    <message>
-        <location line="+31"/>
-        <source>Authentication required</source>
-        <translation>認証が必要です</translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Proxy denied connection</source>
-        <translation>プロキシーが接続を拒否しました</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Error communicating with HTTP proxy</source>
-        <translation>HTTP プロキシーとの通信にて、エラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Proxy server not found</source>
-        <translation>プロキシーサーバが見つかりません</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Proxy connection refused</source>
-        <translation>プロキシーが接続を拒否しました</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Proxy server connection timed out</source>
-        <translation>プロキシーとの接続がタイムアウトしました</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Proxy connection closed prematurely</source>
-        <translation>プロキシーの接続が通信の終了前に切断されました</translation>
-    </message>
-</context>
-<context>
-    <name>QIBaseDriver</name>
-    <message>
-        <location filename="../src/sql/drivers/ibase/qsql_ibase.cpp" line="+1435"/>
-        <source>Error opening database</source>
-        <translation>データベースのオープンでエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+54"/>
-        <source>Could not start transaction</source>
-        <translation>トランザクションを開始できませんでした</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Unable to commit transaction</source>
-        <translation>トランザクションをコミットできません</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Unable to rollback transaction</source>
-        <translation>トランザクションをロールバックできません</translation>
-    </message>
-</context>
-<context>
-    <name>QIBaseResult</name>
-    <message>
-        <location line="-1097"/>
-        <source>Unable to create BLOB</source>
-        <translation>バイナリラージオブジェクトを作成できません</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Unable to write BLOB</source>
-        <translation>バイナリラージオブジェクトを書き込めません</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Unable to open BLOB</source>
-        <translation>バイナリラージオブジェクトをオープンできません</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Unable to read BLOB</source>
-        <translation>バイナリラージオブジェクトを読み込めません</translation>
-    </message>
-    <message>
-        <location line="+125"/>
-        <location line="+189"/>
-        <source>Could not find array</source>
-        <translation>配列が見つかりませんでした</translation>
-    </message>
-    <message>
-        <location line="-157"/>
-        <source>Could not get array data</source>
-        <translation>配列データを取得できませんでした</translation>
-    </message>
-    <message>
-        <location line="+212"/>
-        <source>Could not get query info</source>
-        <translation>クエリー情報を取得できませんでした</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Could not start transaction</source>
-        <translation>トランザクションを開始できませんでした</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Unable to commit transaction</source>
-        <translation>トランザクションをコミットできません</translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Could not allocate statement</source>
-        <translation>ステートメントの領域を確保できませんでした</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Could not prepare statement</source>
-        <translation>プリペアステートメントを使えませんでした</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+7"/>
-        <source>Could not describe input statement</source>
-        <translation>INPUT ステートメントの情報を取得できませんでした</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Could not describe statement</source>
-        <translation>ステートメントの情報を取得できませんでした</translation>
-    </message>
-    <message>
-        <location line="+115"/>
-        <source>Unable to close statement</source>
-        <translation>ステートメントをクローズできません</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Unable to execute query</source>
-        <translation>クエリーを実行できません</translation>
-    </message>
-    <message>
-        <location line="+46"/>
-        <source>Could not fetch next item</source>
-        <translation>次のレコードをフェッチできませんでした</translation>
-    </message>
-    <message>
-        <location line="+160"/>
-        <source>Could not get statement info</source>
-        <translation>ステートメントの情報を取得できませんでした</translation>
-    </message>
-</context>
-<context>
-    <name>QIODevice</name>
-    <message>
-        <location filename="../src/corelib/global/qglobal.cpp" line="+1869"/>
-        <source>Permission denied</source>
-        <translation>許可されていません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Too many open files</source>
-        <translation>開かれたファイルが多すぎます</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>No such file or directory</source>
-        <translation>そのようなファイルやディレクトリはありません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>No space left on device</source>
-        <translation>デバイスの残り容量がありません</translation>
-    </message>
-    <message>
-        <location filename="../src/corelib/io/qiodevice.cpp" line="+1540"/>
-        <source>Unknown error</source>
-        <translation>不明なエラー</translation>
-    </message>
-</context>
-<context>
-    <name>QInputContext</name>
-    <message>
-        <location filename="../src/gui/inputmethod/qinputcontextfactory.cpp" line="+242"/>
-        <source>XIM</source>
-        <translation>XIM</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>XIM input method</source>
-        <translation>XIM 入力メソッド</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Windows input method</source>
-        <translation>Windows 入力メソッド</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Mac OS X input method</source>
-        <translation>Mac OS X 入力メソッド</translation>
-    </message>
-</context>
-<context>
-    <name>QInputDialog</name>
-    <message>
-        <location filename="../src/gui/dialogs/qinputdialog.cpp" line="+223"/>
-        <source>Enter a value:</source>
-        <translation>数値を入力:</translation>
-    </message>
-</context>
-<context>
-    <name>QLibrary</name>
-    <message>
-        <location filename="../src/corelib/plugin/qlibrary.cpp" line="+378"/>
-        <source>Could not mmap &apos;%1&apos;: %2</source>
-        <translation>&apos;%1&apos; をメモリにマッピングできませんでした: %2</translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Plugin verification data mismatch in &apos;%1&apos;</source>
-        <translation>&apos;%1&apos; でプラグイン検証データが一致しません</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Could not unmap &apos;%1&apos;: %2</source>
-        <translation>&apos;%1&apos; のマッピングを解除できませんでした: %2</translation>
-    </message>
-    <message>
-        <location line="+302"/>
-        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (%2.%3.%4) [%5]</source>
-        <translation>プラグイン &apos;%1&apos; は、互換性のない Qt ライブラリを使用しています。(%2.%3.%4) [%5]</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>The plugin &apos;%1&apos; uses incompatible Qt library. Expected build key &quot;%2&quot;, got &quot;%3&quot;</source>
-        <translation>プラグイン &apos;%1&apos; は、互換性のない Qt ライブラリを使用しています。ビルドキー　&quot;%2&quot;　が必要ですが、&quot;%3&quot; しかありません </translation>
-    </message>
-    <message>
-        <location line="+340"/>
-        <source>Unknown error</source>
-        <translation>不明なエラー</translation>
-    </message>
-    <message>
-        <source>QLibrary::load_sys: Cannot load %1 (%2)</source>
-        <translation type="obsolete">QLibrary::load_sys: %1 をロードできません (%2)</translation>
-    </message>
-    <message>
-        <source>QLibrary::unload_sys: Cannot unload %1 (%2)</source>
-        <translation type="obsolete">QLibrary::unload_sys: %1 をアンロードできません (%2)</translation>
-    </message>
-    <message>
-        <source>QLibrary::resolve_sys: Symbol &quot;%1&quot; undefined in %2 (%3)</source>
-        <translation type="obsolete">QLibrary::resolve_sys: シンボル &quot;%1&quot; は %2 で定義されていません (%3)</translation>
-    </message>
-    <message>
-        <location line="-377"/>
-        <location filename="../src/corelib/plugin/qpluginloader.cpp" line="+280"/>
-        <source>The shared library was not found.</source>
-        <translation>共有ライブラリがみつかりません。</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>The file &apos;%1&apos; is not a valid Qt plugin.</source>
-        <translation>ファイル &apos;%1&apos; は Qt プラグインではありません。</translation>
-    </message>
-    <message>
-        <location line="+43"/>
-        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
-        <translation>プラグイン &apos;%1&apos; はこの Qt と互換性のないライブラリを使用しています。 (デバック版とリリース版のライブラリを同時に使用することはできません)</translation>
-    </message>
-    <message>
-        <location filename="../src/corelib/plugin/qlibrary_unix.cpp" line="+209"/>
-        <location filename="../src/corelib/plugin/qlibrary_win.cpp" line="+99"/>
-        <source>Cannot load library %1: %2</source>
-        <translation>ライブラリ &apos;%1&apos; を読み込むことができません: %2</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <location filename="../src/corelib/plugin/qlibrary_win.cpp" line="+26"/>
-        <source>Cannot unload library %1: %2</source>
-        <translation>ライブラリ %1 を解放することができません: %2</translation>
-    </message>
-    <message>
-        <location line="+31"/>
-        <location filename="../src/corelib/plugin/qlibrary_win.cpp" line="+15"/>
-        <source>Cannot resolve symbol &quot;%1&quot; in %2: %3</source>
-        <translation>&apos;%2&apos;に含まれる識別子 &quot;%1&quot; を解決できません: %3</translation>
-    </message>
-</context>
-<context>
-    <name>QLineEdit</name>
-    <message>
-        <location filename="../src/gui/widgets/qlineedit.cpp" line="+2680"/>
-        <source>&amp;Undo</source>
-        <translation>元に戻す(&amp;U)</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>&amp;Redo</source>
-        <translation>やり直す(&amp;R)</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Cu&amp;t</source>
-        <translation>切り取り(&amp;T)</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>&amp;Copy</source>
-        <translation>コピー(&amp;C)</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>&amp;Paste</source>
-        <translation>貼り付け(&amp;P)</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Select All</source>
-        <translation>すべてを選択</translation>
-    </message>
-</context>
-<context>
-    <name>QLocalServer</name>
-    <message>
-        <location filename="../src/network/socket/qlocalserver.cpp" line="+226"/>
-        <location filename="../src/network/socket/qlocalserver_unix.cpp" line="+233"/>
-        <source>%1: Name error</source>
-        <translation>%1: 名前の解決に失敗</translation>
-    </message>
-    <message>
-        <location filename="../src/network/socket/qlocalserver_unix.cpp" line="-8"/>
-        <source>%1: Permission denied</source>
-        <translation>%1: 許可されていません</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>%1: Address in use</source>
-        <translation>%1: アドレスは既に使用されています</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>%1: Unknown error %2</source>
-        <translation>%1: 未知のエラー %2</translation>
-    </message>
-</context>
-<context>
-    <name>QLocalSocket</name>
-    <message>
-        <location filename="../src/network/socket/qlocalsocket_tcp.cpp" line="+132"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+134"/>
-        <source>%1: Connection refused</source>
-        <translation>%1: 接続が拒否されました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <source>%1: Remote closed</source>
-        <translation>%1: リモートにより接続が閉じられました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_win.cpp" line="+80"/>
-        <location line="+43"/>
-        <source>%1: Invalid name</source>
-        <translation>%1: 無効な名前です</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <source>%1: Socket access error</source>
-        <translation>%1: ソケットアクセスのエラーです</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <source>%1: Socket resource error</source>
-        <translation>%1: ソケットリソースのエラーです</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <source>%1: Socket operation timed out</source>
-        <translation>%1: ソケット操作がタイムアウトしました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <source>%1: Datagram too large</source>
-        <translation>%1: データグラムが大きすぎます</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_win.cpp" line="-48"/>
-        <source>%1: Connection error</source>
-        <translation>%1: 接続のエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <source>%1: The socket operation is not supported</source>
-        <translation>%1: そのソケット操作はサポートされていません</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>%1: Unknown error</source>
-        <translation>%1: 未知のエラーです</translation>
-    </message>
-    <message>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+4"/>
-        <location filename="../src/network/socket/qlocalsocket_win.cpp" line="+10"/>
-        <source>%1: Unknown error %2</source>
-        <translation>%1: 未知のエラー %2</translation>
-    </message>
-</context>
-<context>
-    <name>QMYSQLDriver</name>
-    <message>
-        <location filename="../src/sql/drivers/mysql/qsql_mysql.cpp" line="+1252"/>
-        <source>Unable to open database &apos;</source>
-        <translation>データベースをオープンできません &apos;</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Unable to connect</source>
-        <translation>接続できません</translation>
-    </message>
-    <message>
-        <location line="+127"/>
-        <source>Unable to begin transaction</source>
-        <translation>トランザクションを開始できません</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Unable to commit transaction</source>
-        <translation>トランザクションをコミットできません</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Unable to rollback transaction</source>
-        <translation>トランザクションをロールバックできません</translation>
-    </message>
-</context>
-<context>
-    <name>QMYSQLResult</name>
-    <message>
-        <location line="-935"/>
-        <source>Unable to fetch data</source>
-        <translation>データをフェッチできません</translation>
-    </message>
-    <message>
-        <location line="+183"/>
-        <source>Unable to execute query</source>
-        <translation>クエリーを実行できません</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Unable to store result</source>
-        <translation>実行結果を記録できません</translation>
-    </message>
-    <message>
-        <location line="+194"/>
-        <location line="+8"/>
-        <source>Unable to prepare statement</source>
-        <translation>プリペアステートメントを使えません</translation>
-    </message>
-    <message>
-        <location line="+36"/>
-        <source>Unable to reset statement</source>
-        <translation>ステートメントをリセットできません</translation>
-    </message>
-    <message>
-        <location line="+87"/>
-        <source>Unable to bind value</source>
-        <translation>値をバインドできません</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Unable to execute statement</source>
-        <translation>ステートメントを実行できません</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <location line="+21"/>
-        <source>Unable to bind outvalues</source>
-        <translation>出力値をバインドできません</translation>
-    </message>
-    <message>
-        <location line="-12"/>
-        <source>Unable to store statement results</source>
-        <translation>ステートメントの実行結果を記録できません</translation>
-    </message>
-    <message>
-        <location line="-257"/>
-        <source>Unable to execute next query</source>
-        <translation>次のクエリーを実行できません</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Unable to store next result</source>
-        <translation>次の結果を記録できません</translation>
-    </message>
-</context>
-<context>
-    <name>QMdiArea</name>
-    <message>
-        <location filename="../src/gui/widgets/qmdiarea.cpp" line="+290"/>
-        <source>(Untitled)</source>
-        <translation>(タイトルなし)</translation>
-    </message>
-</context>
-<context>
-    <name>QMdiSubWindow</name>
-    <message>
-        <location filename="../src/gui/widgets/qmdisubwindow.cpp" line="+280"/>
-        <source>%1 - [%2]</source>
-        <translation>%1 - [%2]</translation>
-    </message>
-    <message>
-        <location line="+72"/>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
-    <message>
-        <location line="-18"/>
-        <source>Minimize</source>
-        <translation>最小化</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Restore Down</source>
-        <translation>元に戻す</translation>
-    </message>
-    <message>
-        <location line="+707"/>
-        <source>&amp;Restore</source>
-        <translation>元に戻す(&amp;R)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;Move</source>
-        <translation>移動(&amp;M)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Size</source>
-        <translation>サイズ(&amp;S)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Mi&amp;nimize</source>
-        <translation>最小化(&amp;N)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Ma&amp;ximize</source>
-        <translation>最大化(&amp;X)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Stay on &amp;Top</source>
-        <translation>常に手前に表示(&amp;T)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;Close</source>
-        <translation>閉じる(&amp;C)</translation>
-    </message>
-    <message>
-        <location line="-787"/>
-        <source>- [%1]</source>
-        <translation>- [%1]</translation>
-    </message>
-    <message>
-        <location line="+58"/>
-        <source>Maximize</source>
-        <translation>最大化</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Unshade</source>
-        <translatorcomment>たぶん選択・非選択状態のウィンドウのことだと思うけど。fvwmなどのx11で使われている用語</translatorcomment>
-        <translation>非選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Shade</source>
-        <translation>選択</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Restore</source>
-        <translation>元に戻す</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Menu</source>
-        <translation>メニュー</translation>
-    </message>
-</context>
-<context>
-    <name>QMenu</name>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/qaccessiblemenu.cpp" line="+157"/>
-        <location line="+225"/>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
-    <message>
-        <location line="-224"/>
-        <location line="+225"/>
-        <source>Open</source>
-        <translation>オープン</translation>
-    </message>
-    <message>
-        <location line="-223"/>
-        <location line="+225"/>
-        <location line="+51"/>
-        <source>Execute</source>
-        <translation>実行</translation>
-    </message>
-</context>
-<context>
-    <name>QMenuBar</name>
-    <message>
-        <source>About Qt</source>
-        <translation type="obsolete">Qt について</translation>
+        <source>tr (Trill)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../src/gui/dialogs/qmessagebox.cpp" line="-1111"/>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <location line="-853"/>
-        <location line="+852"/>
-        <location filename="../src/gui/dialogs/qmessagebox.h" line="-52"/>
+        <location filename="../../mscore/utils.cpp" line="+321"/>
+        <location line="+9"/>
+        <location line="+9"/>
         <location line="+8"/>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qtopia Core.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;h3&gt;Qt について&lt;/h3&gt;%1
-&lt;p&gt;QtはクロスプラットフォームのC++ アプリケーション開発ツールキットです。&lt;/p&gt;
-&lt;p&gt;Qt は MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, 商用のUnix派生版でソースコード互換を実現します。また、Qtopia Coreのように、内蔵デバイスでも利用可能です。&lt;/p&gt;
-&lt;p&gt;QtはTrolltechの商品です。詳細は&lt;tt&gt;http://qt.nokia.com/&lt;/tt&gt;を参照してください。&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;このプログラムは Qt バージョン %1 を使用しています。&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;This program uses Qt Open Source Edition version %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition is intended for the development of Open Source applications. You need a commercial Qt license for development of proprietary (closed source) applications.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;このプログラムは Qt オープンソース版バージョン %1 を使用しています。&lt;/p&gt;
-&lt;p&gt;Qt オープンソース版はオープンソースのアプリケーションの開発用です。ソースコードを公開しない商用アプリケーションを開発するには商用版のライセンスが必要です。&lt;/p&gt;&lt;p&gt;Qtのライセンスについては&lt;tt&gt;http://qt.nokia.com/company/model.html&lt;/tt&gt;を参照してください。&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location line="+509"/>
-        <source>About Qt</source>
-        <translation>Qt について</translation>
-    </message>
-    <message>
-        <location line="-1605"/>
-        <source>Show Details...</source>
-        <translation>詳細を表示...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Hide Details...</source>
-        <translation>詳細を隠す...</translation>
-    </message>
-    <message>
-        <location line="+1570"/>
-        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Qtについて&lt;/h3&gt;
-&lt;p&gt;このプログラムは Qt バージョン %1 を使用しています。&lt;/p&gt;
-&lt;p&gt;Qt は、クロスプラットホームのアプリケーション開発に使用される C++ のツールキットです。&lt;/p&gt;
-&lt;p&gt;Qt は、 MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, そして多数の Unix 系OS環境に対して、単一のソースからバイナリを生成します。
-また、 Linux および Windows CE を元とした組み込み環境にも対応しています。&lt;/p&gt;
-&lt;p&gt;Qt は様々なユーザの要望に応じるために、3つの異なるライセンスで提供されています。&lt;/p&gt;
-&lt;p&gt;
-Qt 商用ライセンスは、プロプライエタリまたは商用ソフトウェアに適用できます。
-この場合は、他者とのソースコードの共有を拒否し、 GNU LGP バージョン 2.1 または GNU GPL バージョン 3.0 を許容できないソフトウェアにおいて Qt を使用できます。
-&lt;/p&gt;
-&lt;p&gt;
-Qt GNU LGPL バージョン 2.1 ライセンスは、プロプライエタリまたはオープンソースソフトウェアに適用できます。
-この場合は、 GNU LGPL バージョン 2.1 に従う必要があります。
-&lt;/p&gt;
-&lt;p&gt;
-Qt GNU General Public License バージョン 3.0 ライセンスは、GNU GPL バージョン 3.0 または GPL 3.0 と互換性のあるライセンスを採用しているソフトウェアに適用されます。
-この場合は、GNU GPL バージョン 3.0 に従う必要があります。
-&lt;/p&gt;
-&lt;p&gt;
-ライセンスの詳細については、&lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt;
-を参照してください。&lt;/p&gt;
-&lt;p&gt;Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;
-&lt;p&gt;Qt は Nokia の製品です。詳細については&lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; を参照してください。&lt;/p&gt;
-&lt;p&gt;
-訳注: ライセンスはここにある翻訳は参考のためのものであり、オリジナルの(英語の)ものが正式なものとなります。
-&lt;/p&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>QMultiInputContext</name>
-    <message>
-        <location filename="../src/plugins/inputmethods/imsw-multi/qmultiinputcontext.cpp" line="+88"/>
-        <source>Select IM</source>
-        <translation>インプットメソッドを選択</translation>
-    </message>
-</context>
-<context>
-    <name>QMultiInputContextPlugin</name>
-    <message>
-        <location filename="../src/plugins/inputmethods/imsw-multi/qmultiinputcontextplugin.cpp" line="+95"/>
-        <source>Multiple input method switcher</source>
-        <translation>複数のインプットメソッドを切り替え</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Multiple input method switcher that uses the context menu of the text widgets</source>
-        <translation>テキストウィジェットのコンテキストメニューを使った複数のインプットメソッドの切り替えです</translation>
-    </message>
-</context>
-<context>
-    <name>QNativeSocketEngine</name>
-    <message>
-        <location filename="../src/network/socket/qnativesocketengine.cpp" line="+197"/>
-        <source>Unable to initialize non-blocking socket</source>
-        <translation>非ブロック型ソケットを初期化できません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Unable to initialize broadcast socket</source>
-        <translation>ブロードキャストソケットを初期化できません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Attempt to use IPv6 socket on a platform with no IPv6 support</source>
-        <translation>IPv6 がサポートされていないプラットフォームで IPv6 ソケットを使用しようとしています</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The remote host closed the connection</source>
-        <translation>リモートホストは接続を閉じました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Network operation timed out</source>
-        <translation>ネットワーク操作がタイムアウトしました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Out of resources</source>
-        <translation>リソースが足りません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Unsupported socket operation</source>
-        <translation>サポートされていないソケット操作です</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Protocol type not supported</source>
-        <translation>プロトコル型がサポートされていません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Invalid socket descriptor</source>
-        <translation>無効なソケット記述子です</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Host unreachable</source>
-        <translation>ホストへ到達できません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Network unreachable</source>
-        <translation>ネットワークへ到達できません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Permission denied</source>
-        <translation>許可されていません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Connection timed out</source>
-        <translation>接続がタイムアウトしました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Connection refused</source>
-        <translation>接続を拒否されました</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The bound address is already in use</source>
-        <translation>バインドアドレスは既に使われています</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The address is not available</source>
-        <translation>そのアドレスは使用できません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The address is protected</source>
-        <translation>そのアドレスへのアクセス権がありません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Datagram was too large to send</source>
-        <translation>データグラムが大き過ぎて送信できませんでした</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Unable to send a message</source>
-        <translation>メッセージを送信できません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Unable to receive a message</source>
-        <translation>メッセージを受信できません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Unable to write</source>
-        <translation>書き込みができません</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Network error</source>
-        <translation>ネットワークエラー</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Another socket is already listening on the same port</source>
-        <translation>別のソケットが同じポートで既に待ち受けています</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Operation on non-socket</source>
-        <translation>非ソケットに対する操作です</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Unknown error</source>
-        <translation>不明なエラー</translation>
-    </message>
-    <message>
-        <location line="-3"/>
-        <source>The proxy type is invalid for this operation</source>
-        <translation>このプロキシーは、この操作に対応していません</translation>
-    </message>
-</context>
-<context>
-    <name>QNetworkAccessCacheBackend</name>
-    <message>
-        <location filename="../src/network/access/qnetworkaccesscachebackend.cpp" line="+65"/>
-        <source>Error opening %1</source>
-        <translation>オープンのエラー %1</translation>
-    </message>
-</context>
-<context>
-    <name>QNetworkAccessDebugPipeBackend</name>
-    <message>
-        <location filename="../src/network/access/qnetworkaccessdebugpipebackend.cpp" line="+191"/>
-        <source>Write error writing to %1: %2</source>
-        <translation>%1 への書き込み時にエラーが発生しました: %2</translation>
-    </message>
-</context>
-<context>
-    <name>QNetworkAccessFileBackend</name>
-    <message>
-        <location filename="../src/network/access/qnetworkaccessfilebackend.cpp" line="+100"/>
-        <source>Request for opening non-local file %1</source>
-        <translation>非ローカルファイル %1 をオープンするよう要求されましたが、ローカルファイルのみオープンできます</translation>
-    </message>
-    <message>
-        <location line="+45"/>
-        <source>Error opening %1: %2</source>
-        <translation>%1 をオープンする時にエラーが発生しました: %2</translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>Write error writing to %1: %2</source>
-        <translation>%1 への書き込み時にエラーが発生しました: %2</translation>
-    </message>
-    <message>
-        <location line="+48"/>
-        <source>Cannot open %1: Path is a directory</source>
-        <translation>%1 をオープンできません。指定されたパスはディレクトリです</translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Read error reading from %1: %2</source>
-        <translation>%1 を読み込み時にエラーが発生しました: %2</translation>
-    </message>
-</context>
-<context>
-    <name>QNetworkAccessFtpBackend</name>
-    <message>
-        <location filename="../src/network/access/qnetworkaccessftpbackend.cpp" line="+131"/>
-        <source>No suitable proxy found</source>
-        <translation>適切なプロキシーがみつかりません</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Cannot open %1: is a directory</source>
-        <translation>%1 をオープンできません。指定されたパスはディレクトリです</translation>
-    </message>
-    <message>
-        <location line="+112"/>
-        <source>Logging in to %1 failed: authentication required</source>
-        <translation>%1 へのログインに失敗しました。認証が必要です</translation>
-    </message>
-    <message>
-        <location line="+39"/>
-        <source>Error while downloading %1: %2</source>
-        <translation>%1 をダウンロード中にエラーが発生しました: %2</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Error while uploading %1: %2</source>
-        <translation>%1 をアップロード中にエラーが発生しました: %2</translation>
-    </message>
-</context>
-<context>
-    <name>QNetworkAccessHttpBackend</name>
-    <message>
-        <location filename="../src/network/access/qnetworkaccesshttpbackend.cpp" line="+567"/>
-        <source>No suitable proxy found</source>
-        <translation>適切なプロキシーがみつかりません</translation>
-    </message>
-</context>
-<context>
-    <name>QNetworkReply</name>
-    <message>
-        <location line="+88"/>
-        <source>Error downloading %1 - server replied: %2</source>
-        <translation>%1 をダウンロード中にエラーが発生しました。サーバの返答: %2</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qnetworkreplyimpl.cpp" line="+75"/>
-        <source>Protocol &quot;%1&quot; is unknown</source>
-        <translation>プロトコル &quot;%1&quot; はサポートされていません</translation>
-    </message>
-</context>
-<context>
-    <name>QNetworkReplyImpl</name>
-    <message>
-        <location line="+459"/>
-        <location line="+22"/>
-        <source>Operation canceled</source>
-        <translation>操作はキャンセルされました</translation>
-    </message>
-</context>
-<context>
-    <name>QOCIDriver</name>
-    <message>
-        <location filename="../src/sql/drivers/oci/qsql_oci.cpp" line="+1925"/>
-        <source>Unable to initialize</source>
-        <comment>QOCIDriver</comment>
-        <translation>初期化できません</translation>
-    </message>
-    <message>
-        <location line="+144"/>
-        <source>Unable to logon</source>
-        <translation>ログオンできません</translation>
-    </message>
-    <message>
-        <location line="+71"/>
-        <source>Unable to begin transaction</source>
-        <translation>トランザクションを開始できません</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Unable to commit transaction</source>
-        <translation>トランザクションをコミットできません</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Unable to rollback transaction</source>
-        <translation>トランザクションをロールバックできません</translation>
-    </message>
-</context>
-<context>
-    <name>QOCIResult</name>
-    <message>
-        <location line="-963"/>
-        <location line="+161"/>
-        <location line="+15"/>
-        <source>Unable to bind column for batch execute</source>
-        <translation>バッチ処理用にフィールドをバインドできません</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Unable to execute batch statement</source>
-        <translation>バッチステートメントを実行できません</translation>
-    </message>
-    <message>
-        <location line="+302"/>
-        <source>Unable to goto next</source>
-        <translation>次のレコードへ進めません</translation>
-    </message>
-    <message>
-        <location line="+59"/>
-        <source>Unable to alloc statement</source>
-        <translation>ステートメントの領域を確保できません</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Unable to prepare statement</source>
-        <translation>プリペアステートメントを使えません</translation>
-    </message>
-    <message>
-        <location line="+36"/>
-        <source>Unable to bind value</source>
-        <translation>値をバインドできません</translation>
-    </message>
-    <message>
-        <source>Unable to execute select statement</source>
-        <translation type="obsolete">SELECT ステートメントを実行できません</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Unable to execute statement</source>
-        <translation>ステートメントを実行できません</translation>
-    </message>
-</context>
-<context>
-    <name>QODBCDriver</name>
-    <message>
-        <location filename="../src/sql/drivers/odbc/qsql_odbc.cpp" line="+1781"/>
-        <source>Unable to connect</source>
-        <translation>接続できません</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Unable to connect - Driver doesn&apos;t support all needed functionality</source>
-        <translation>接続できません - ドライバは全ての必要な機能をサポートしていません</translation>
-    </message>
-    <message>
-        <location line="+242"/>
-        <source>Unable to disable autocommit</source>
-        <translation>オートコミットを無効にできません</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Unable to commit transaction</source>
-        <translation>トランザクションをコミットできません</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Unable to rollback transaction</source>
-        <translation>トランザクションをロールバックできません</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Unable to enable autocommit</source>
-        <translation>オートコミットを有効にできません</translation>
-    </message>
-</context>
-<context>
-    <name>QODBCResult</name>
-    <message>
-        <location line="-1201"/>
-        <location line="+626"/>
-        <source>Unable to execute statement</source>
-        <translation>ステートメントを実行できません</translation>
-    </message>
-    <message>
-        <location line="-555"/>
-        <source>Unable to fetch next</source>
-        <translation>次のレコードをフェッチできません</translation>
-    </message>
-    <message>
-        <location line="+279"/>
-        <source>Unable to prepare statement</source>
-        <translation>プリペアステートメントを使えません</translation>
-    </message>
-    <message>
-        <location line="+268"/>
-        <source>Unable to bind variable</source>
-        <translation>変数をバインドできません</translation>
-    </message>
-    <message>
-        <location line="-635"/>
-        <location line="+349"/>
-        <source>QODBCResult::reset: Unable to set &apos;SQL_CURSOR_STATIC&apos; as statement attribute. Please check your ODBC driver configuration</source>
-        <translation>QODBCResult::reset: ステートメントの属性として &apos;SQL_CURSOR_STATUS&apos; を設定できません。ODBC ドライバの構成をチェックしてください</translation>
-    </message>
-    <message>
-        <location filename="../src/sql/drivers/db2/qsql_db2.cpp" line="+194"/>
-        <location filename="../src/sql/drivers/odbc/qsql_odbc.cpp" line="-189"/>
-        <location line="+578"/>
-        <source>Unable to fetch last</source>
-        <translation>リストを取得できません</translation>
-    </message>
-    <message>
-        <location filename="../src/sql/drivers/odbc/qsql_odbc.cpp" line="-672"/>
-        <source>Unable to fetch</source>
-        <translation>フェッチできません</translation>
-    </message>
-    <message>
-        <location line="+44"/>
-        <source>Unable to fetch first</source>
-        <translation>最初のレコードをフェッチできません</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Unable to fetch previous</source>
-        <translation>前のレコードをフェッチできません</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>False</source>
-        <translation type="obsolete">False</translation>
-    </message>
-    <message>
-        <source>True</source>
-        <translation type="obsolete">True</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/util/qdesktopservices_mac.cpp" line="+165"/>
-        <source>Home</source>
-        <translation>ホーム</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qnetworkaccessdatabackend.cpp" line="+74"/>
-        <source>Operation not supported on %1</source>
-        <translation>%1 ではこの操作はサポートされていません</translation>
-    </message>
-    <message>
-        <location line="+53"/>
-        <source>Invalid URI: %1</source>
-        <translation>無効なURIです: %1</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qnetworkaccessdebugpipebackend.cpp" line="+60"/>
-        <source>Socket error on %1: %2</source>
-        <translation>%1 のソケットにおいてエラーが発生しました: %2</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Remote host closed the connection prematurely on %1</source>
-        <translation>リモートホスト %1 との接続が通信の終了前に切断されました</translation>
-    </message>
-    <message>
-        <location filename="../src/network/kernel/qhostinfo.cpp" line="+177"/>
-        <location line="+57"/>
-        <source>No host name given</source>
-        <translation>ホストネームが与えられていません</translation>
-    </message>
-</context>
-<context>
-    <name>QPPDOptionsModel</name>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="+1197"/>
-        <source>Name</source>
-        <translation>名前</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Value</source>
-        <translation>値</translation>
-    </message>
-</context>
-<context>
-    <name>QPSQLDriver</name>
-    <message>
-        <location filename="../src/sql/drivers/psql/qsql_psql.cpp" line="+763"/>
-        <source>Unable to connect</source>
-        <translation>接続できません</translation>
-    </message>
-    <message>
-        <location line="+49"/>
-        <source>Could not begin transaction</source>
-        <translation>トランザクションを開始できませんでした</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Could not commit transaction</source>
-        <translation>トランザクションをコミットできませんでした</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Could not rollback transaction</source>
-        <translation>トランザクションをロールバックできませんでした</translation>
-    </message>
-    <message>
-        <location line="+358"/>
-        <source>Unable to subscribe</source>
-        <translation>subscribe できません</translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Unable to unsubscribe</source>
-        <translation>unsubscribe できません</translation>
-    </message>
-</context>
-<context>
-    <name>QPSQLResult</name>
-    <message>
-        <location line="-1058"/>
-        <source>Unable to create query</source>
-        <translation>クエリーを作成できません</translation>
-    </message>
-    <message>
-        <location line="+374"/>
-        <source>Unable to prepare statement</source>
-        <translation>プリペアステートメントを使えません</translation>
-    </message>
-</context>
-<context>
-    <name>QPageSetupWidget</name>
-    <message>
-        <location filename="../src/gui/dialogs/qpagesetupdialog_unix.cpp" line="+304"/>
-        <source>Centimeters (cm)</source>
-        <translation>センチメートル (cm)</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Millimeters (mm)</source>
-        <translation>ミリメートル (mm)</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Inches (in)</source>
-        <translation>インチ (in)</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Points (pt)</source>
-        <translation>ポイント (pt)</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qpagesetupwidget.ui"/>
-        <source>Form</source>
-        <translation>書式設定</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Paper</source>
-        <translation>用紙</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Page size:</source>
-        <translation>ページサイズ:</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Width:</source>
-        <translation>幅:</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Height:</source>
-        <translation>高さ:</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Paper source:</source>
-        <translation>給紙装置:</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Orientation</source>
-        <translation>印刷方向</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Portrait</source>
-        <translation>縦 (ポートレート)</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Landscape</source>
-        <translation>横 (ランドスケープ)</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Reverse landscape</source>
-        <translation>横 反転 (リバースランドスケープ)</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Reverse portrait</source>
-        <translation>縦 反転 (リバースポートレート)</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Margins</source>
-        <translation>余白</translation>
-    </message>
-    <message>
-        <location/>
-        <source>top margin</source>
-        <translation>上端余白</translation>
-    </message>
-    <message>
-        <location/>
-        <source>left margin</source>
-        <translation>左端余白</translation>
-    </message>
-    <message>
-        <location/>
-        <source>right margin</source>
-        <translation>右端余白</translation>
-    </message>
-    <message>
-        <location/>
-        <source>bottom margin</source>
-        <translation>下端余白</translation>
-    </message>
-</context>
-<context>
-    <name>QPatternist::QtXmlPatterns</name>
-    <message>
-        <location filename="../src/xmlpatterns/acceltree/qacceltreebuilder.cpp" line="+205"/>
-        <source>An %1-attribute with value %2 has already been declared.</source>
-        <translation type="unfinished">属性 %1 の値 %2 は既に宣言されています。</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>An %1-attribute must have a valid %2 as value, which %3 isn&apos;t.</source>
-        <translation type="unfinished">属性 %1 の値は %2 の型でなければなりませんが、 %3 が指定されました。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/acceltree/qacceltreeresourceloader.cpp" line="+314"/>
-        <source>%1 is an unsupported encoding.</source>
-        <translation type="unfinished">%1 はサポートされていないエンコーディングです。</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>%1 contains octets which are disallowed in the requested encoding %2.</source>
-        <translation type="unfinished">エンコーディング %2 では許可されていないオクテットが %1 に含まれています。</translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>The codepoint %1, occurring in %2 using encoding %3, is an invalid XML character.</source>
-        <translation type="unfinished">%2 で使用されているエンコード %3 では、コードポイント %1 は有効な XML 表現ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/api/qiodevicedelegate.cpp" line="+84"/>
-        <source>Network timeout.</source>
-        <translation type="unfinished">ネットワーク接続がタイムアウトしました。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/api/qxmlserializer.cpp" line="+320"/>
-        <source>Element %1 can&apos;t be serialized because it appears outside the document element.</source>
-        <translation type="unfinished">エレメント %1 はシリアライズできません。このドキュメントの範囲を越えるエレメントを含んでいます。</translation>
-    </message>
-    <message>
-        <location line="+60"/>
-        <source>Attribute %1 can&apos;t be serialized because it appears at the top level.</source>
-        <translation type="unfinished">属性 %1 はシリアライズできません。トップレベルに現れているためです。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qabstractdatetime.cpp" line="+80"/>
-        <source>Year %1 is invalid because it begins with %2.</source>
-        <translation type="unfinished">%1 年はむこうです。%2 で始まっています。</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Day %1 is outside the range %2..%3.</source>
-        <translation type="unfinished">%1 日は、有効な範囲 %2..%3 を逸脱しています。</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Month %1 is outside the range %2..%3.</source>
-        <translation type="unfinished">%1 月は、有効な範囲 %2..%3 を逸脱しています。</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Overflow: Can&apos;t represent date %1.</source>
-        <translation type="unfinished">オーバーフロー: 日付 %1 を再現できません。</translation>
+        <source>MuseScore:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <source>No note selected:
+Please select a single note and retry operation
+</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>Day %1 is invalid for month %2.</source>
-        <translation type="unfinished">%2 月には、%1 日は存在しません。</translation>
-    </message>
-    <message>
-        <location line="+49"/>
-        <source>Time 24:%1:%2.%3 is invalid. Hour is 24, but minutes, seconds, and milliseconds are not all 0; </source>
-        <translation type="unfinished">24:%1:%2.%3 は無効です。24時0分0秒のみ使用できます</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Time %1:%2:%3.%4 is invalid.</source>
-        <translation type="unfinished">時刻 %1時%2分%3.%4秒は無効です。</translation>
-    </message>
-    <message>
-        <location line="+115"/>
-        <source>Overflow: Date can&apos;t be represented.</source>
-        <translation type="unfinished">オーバーフロー: 日付を再現できません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qabstractduration.cpp" line="+99"/>
-        <location line="+15"/>
-        <source>At least one component must be present.</source>
-        <translation type="unfinished">年、月、日のうちいずれかを指定しなければなりません。</translation>
-    </message>
-    <message>
-        <location line="-7"/>
-        <source>At least one time component must appear after the %1-delimiter.</source>
-        <translation type="unfinished">%1 の後には、時刻を指定しなければなりません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qabstractfloatmathematician.cpp" line="+64"/>
-        <source>No operand in an integer division, %1, can be %2.</source>
-        <translatorcomment>ゼロ除算? NaN?</translatorcomment>
-        <translation type="unfinished">整数の除算のためのオペランドが不足しています。%1 は %2 でなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>The first operand in an integer division, %1, cannot be infinity (%2).</source>
-        <translation type="unfinished">整数の除算における最初のオペランド %1 を認識できません (%2)。</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>The second operand in a division, %1, cannot be zero (%2).</source>
-        <translation type="unfinished">整数の除算における二つ目のオペランド %1 はゼロであってはいけまん(%2)。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qanyuri_p.h" line="+132"/>
-        <source>%1 is not a valid value of type %2.</source>
-        <translation type="unfinished">%1 は、%2 の型に対して有効な値ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qatomiccasters_p.h" line="+223"/>
-        <source>When casting to %1 from %2, the source value cannot be %3.</source>
-        <translation type="unfinished">%2 から %1 への型変換に際しては、値 %3 は有効な値ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qatomicmathematicians.cpp" line="+65"/>
-        <source>Integer division (%1) by zero (%2) is undefined.</source>
-        <translation type="unfinished">整数の除算において %1 をゼロ (%2) で割った結果は定義されていません。</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Division (%1) by zero (%2) is undefined.</source>
-        <translation type="unfinished">除算において %1 をゼロ (%2) で割った結果は定義されていません。</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Modulus division (%1) by zero (%2) is undefined.</source>
-        <translation type="unfinished">剰余を求めるに際し、%1 をゼロ (%2) で除した結果は定義されていません。</translation>
-    </message>
-    <message>
-        <location line="+122"/>
-        <location line="+32"/>
-        <source>Dividing a value of type %1 by %2 (not-a-number) is not allowed.</source>
-        <translation type="unfinished">型 %1 を非数 %2 (NaN) で除すことはできません。</translation>
-    </message>
-    <message>
-        <location line="-20"/>
-        <source>Dividing a value of type %1 by %2 or %3 (plus or minus zero) is not allowed.</source>
-        <translation type="unfinished">型 %1 を%2 または %3 (正または負のゼロ) で除することはできません。</translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Multiplication of a value of type %1 by %2 or %3 (plus or minus infinity) is not allowed.</source>
-        <translation type="unfinished">型 %1 を %2 または %3 (正または負のゼロ)で乗ずることはできません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qatomicvalue.cpp" line="+79"/>
-        <source>A value of type %1 cannot have an Effective Boolean Value.</source>
-        <translation type="unfinished">型 %1 は有効な論理型(bool)ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qboolean.cpp" line="+78"/>
-        <source>Effective Boolean Value cannot be calculated for a sequence containing two or more atomic values.</source>
-        <translatorcomment>??</translatorcomment>
-        <translation type="unfinished">論理型は、論理型以外の複数の値からなる計算によって求めることはできません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qderivedinteger_p.h" line="+402"/>
-        <source>Value %1 of type %2 exceeds maximum (%3).</source>
-        <translation type="unfinished">型 %2 の値 %1 は、上限 (%3) を越えています。</translation>
+        <source>No note or rest selected:
+Please select a single note or rest and retry operation
+</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>Value %1 of type %2 is below minimum (%3).</source>
-        <translation type="unfinished">型 %2 の値 %1 は、下限 (%3) を越えています。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qhexbinary.cpp" line="+91"/>
-        <source>A value of type %1 must contain an even number of digits. The value %2 does not.</source>
-        <translation type="unfinished">型 %1 の値は偶数個の十進数文字を必要とします。しかし、%2 はそうではありません。</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>%1 is not valid as a value of type %2.</source>
-        <translation type="unfinished">型 %2 に対して、値 %1 は有効ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qapplytemplate.cpp" line="+119"/>
-        <source>Ambiguous rule match.</source>
-        <translation type="unfinished">曖昧なルールにマッチしました。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qarithmeticexpression.cpp" line="+207"/>
-        <source>Operator %1 cannot be used on type %2.</source>
-        <translation type="unfinished">型 %2 に対して、オペレータ %1 は使用できません。</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Operator %1 cannot be used on atomic values of type %2 and %3.</source>
-        <translation type="unfinished">アトミックな型 %2 と %3 に対して、オペレータ %1 は使用できません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qattributenamevalidator.cpp" line="+66"/>
-        <source>The namespace URI in the name for a computed attribute cannot be %1.</source>
-        <translatorcomment>computed attrib. ってなんてやくすのが適当かな。</translatorcomment>
-        <translation type="unfinished">結合された属性に対する名前空間のURIとして、%1 を使用することはできません。</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>The name for a computed attribute cannot have the namespace URI %1 with the local name %2.</source>
-        <translation type="unfinished">結合された属性の名前空間URI %1 は、ローカルな名前である %2 と併用できません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qcastas.cpp" line="+88"/>
-        <source>Type error in cast, expected %1, received %2.</source>
-        <translation type="unfinished">型変換時のエラーです。望んでいた %1 ではなく、%2 になりました。</translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>When casting to %1 or types derived from it, the source value must be of the same type, or it must be a string literal. Type %2 is not allowed.</source>
-        <translation type="unfinished">%1 またはそれを継承している型への型変換においては、元の値の型は同じ型か、リテラルな文字列である必要があります。型 %2 は許可されていません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qcastingplatform.cpp" line="+134"/>
-        <source>No casting is possible with %1 as the target type.</source>
-        <translation type="unfinished">目標とする型に %1 を型変換することはできません。</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>It is not possible to cast from %1 to %2.</source>
-        <translation type="unfinished">型 %1 を型 %2 に型変換することはできません。</translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Casting to %1 is not possible because it is an abstract type, and can therefore never be instantiated.</source>
-        <translation type="unfinished">型 %1 への型変換はできません。抽象型であり、インスタンス化することができないからです。</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>It&apos;s not possible to cast the value %1 of type %2 to %3</source>
-        <translation type="unfinished">型 %2 の値 %1 を、型 %3 に型変換することはできません</translation>
+        <source>Please select a single note or slur and retry operation
+</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+8"/>
-        <source>Failure when casting from %1 to %2: %3</source>
-        <translation type="unfinished">%1 を %2 に型変換することができません: %3</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qcommentconstructor.cpp" line="+67"/>
-        <source>A comment cannot contain %1</source>
-        <translation type="unfinished">コメントが %1 を含むことはできません</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>A comment cannot end with a %1.</source>
-        <translation type="unfinished">コメントは %1 で終了することはできません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qcomparisonplatform.cpp" line="+167"/>
-        <source>No comparisons can be done involving the type %1.</source>
-        <translation type="unfinished">型 %1 に対して比較を行うことはできません。</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Operator %1 is not available between atomic values of type %2 and %3.</source>
-        <translation type="unfinished">オペレータ %1 は、アトミックな型である %2 と %3 には適用できません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qcomputednamespaceconstructor.cpp" line="+69"/>
-        <source>In a namespace constructor, the value for a namespace cannot be an empty string.</source>
-        <translation type="unfinished">名前空間のスントラクトにおいて、空白の文字列を名前空間の値として使用することはできません。</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>The prefix must be a valid %1, which %2 is not.</source>
-        <translation type="unfinished">プレフィックスは %1 でなければなりません。%2 は無効です。</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>The prefix %1 cannot be bound.</source>
-        <translation type="unfinished">プレフィックス %1 はバウンドできません。</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Only the prefix %1 can be bound to %2 and vice versa.</source>
-        <translation type="unfinished">プレフィックス %1 は、%2 にのみバウンドできます。逆も同じです。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qdocumentcontentvalidator.cpp" line="+86"/>
-        <source>An attribute node cannot be a child of a document node. Therefore, the attribute %1 is out of place.</source>
-        <translation type="unfinished">ドキュメントノードの子として属性ノードを指定することはできません。属性 %1 は誤った場所にあります。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qevaluationcache.cpp" line="+117"/>
-        <source>Circularity detected</source>
-        <translation type="unfinished">循環を検出しました</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qexpressionfactory.cpp" line="+169"/>
-        <source>A library module cannot be evaluated directly. It must be imported from a main module.</source>
-        <translation type="unfinished">ライブラリモジュールを直接評価することはできません。メインモジュールからインポートする必要があります。</translation>
-    </message>
-    <message>
-        <location line="+40"/>
-        <source>No template by name %1 exists.</source>
-        <translation type="unfinished">テンプレート名 %1 は存在しません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qgenericpredicate.cpp" line="+106"/>
-        <source>A value of type %1 cannot be a predicate. A predicate must have either a numeric type or an Effective Boolean Value type.</source>
-        <translation type="unfinished">型 %1 は述部として使用できません。数値型か、論理型である必要があります。</translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>A positional predicate must evaluate to a single numeric value.</source>
-        <translatorcomment>positional?</translatorcomment>
-        <translation type="unfinished">述部は評価されたとき、単一の数値になるようにしなければなりません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qncnameconstructor_p.h" line="+113"/>
-        <source>The target name in a processing instruction cannot be %1 in any combination of upper and lower case. Therefore, is %2 invalid.</source>
-        <translation type="unfinished">ターゲットとしている名前は、%1 であってはなりません。%2 は無効です。</translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>%1 is not a valid target name in a processing instruction. It must be a %2 value, e.g. %3.</source>
-        <translation type="unfinished">%1 はターゲットとして無効です。%2 である必要があります。例えば &quot;%3&quot; のようにです。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qpath.cpp" line="+109"/>
-        <source>The last step in a path must contain either nodes or atomic values. It cannot be a mixture between the two.</source>
-        <translation type="unfinished">バスの末端であるリーフは、単一のノードかアトミックな値である必要があります。複数の型の組み合わせであってはいけません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qprocessinginstructionconstructor.cpp" line="+84"/>
-        <source>The data of a processing instruction cannot contain the string %1</source>
-        <translation type="unfinished">処理中のデータは、以下の文字列を含んでいてはなりません: %1</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qqnameconstructor.cpp" line="+82"/>
-        <source>No namespace binding exists for the prefix %1</source>
-        <translation type="unfinished">プレフィックス %1 にバインドされたネームスペースがありません</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qqnameconstructor_p.h" line="+156"/>
-        <source>No namespace binding exists for the prefix %1 in %2</source>
-        <translation type="unfinished">%2 におけるプレフィックス %1 にバインディングされたネームスペースが存在しません</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <location filename="../src/xmlpatterns/functions/qqnamefns.cpp" line="+69"/>
-        <source>%1 is an invalid %2</source>
-        <translation type="unfinished">型 %2 に対し、値 %1 は無効です</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qtemplate.cpp" line="+74"/>
-        <source>The parameter %1 is passed, but no corresponding %2 exists.</source>
-        <translation type="unfinished">パラメータ %1 を処理しました。しかし、対応する %2 が存在しません。</translation>
-    </message>
-    <message>
-        <location line="+71"/>
-        <source>The parameter %1 is required, but no corresponding %2 is supplied.</source>
-        <translation type="unfinished">パメータ %1 が必要です。しかし、対応する %2 がありません。</translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../src/xmlpatterns/functions/qabstractfunctionfactory.cpp" line="+77"/>
-        <source>%1 takes at most %n argument(s). %2 is therefore invalid.</source>
-        <translation type="unfinished">
-            <numerusform>%1 は、最大で %n 個の引数をとることができます。%2 は無効です。</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location line="+11"/>
-        <source>%1 requires at least %n argument(s). %2 is therefore invalid.</source>
-        <translation type="unfinished">
-            <numerusform>%1 は、少くとも %n 個の引数を必要とします。%2 は無効です。</numerusform>
-        </translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qaggregatefns.cpp" line="+120"/>
-        <source>The first argument to %1 cannot be of type %2. It must be a numeric type, xs:yearMonthDuration or xs:dayTimeDuration.</source>
-        <translation type="unfinished">%1 への最初の引数は、型 %2 であってはなりません。数値型、xs:yerMonthDuration、xs:dayTimeDurationである必要があります。</translation>
-    </message>
-    <message>
-        <location line="+74"/>
-        <source>The first argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
-        <translation type="unfinished">%1 への最初の引数は、型 %2 であってはなりません。%3, %4, %5 のいずれかである必要があります。</translation>
-    </message>
-    <message>
-        <location line="+91"/>
-        <source>The second argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
-        <translation type="unfinished">%1 への二つ目の引数は、型 %2 であってはなりません。%3, %4, %5 のいずれかである必要があります。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qassemblestringfns.cpp" line="+88"/>
-        <source>%1 is not a valid XML 1.0 character.</source>
-        <translation type="unfinished">%1 は XML 1.0 において有効な文字ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qcomparingaggregator.cpp" line="+197"/>
-        <source>The first argument to %1 cannot be of type %2.</source>
-        <translation type="unfinished">%1 への最初の引数は、型 %2 であってはなりません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qcontextnodechecker.cpp" line="+54"/>
-        <source>The root node of the second argument to function %1 must be a document node. %2 is not a document node.</source>
-        <translation type="unfinished">%1 への二つ目の引数のルートノードは、ドキュメントノードでなければなりません。しかし、%2 はドキュメントノードではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qdatetimefn.cpp" line="+86"/>
-        <source>If both values have zone offsets, they must have the same zone offset. %1 and %2 are not the same.</source>
-        <translatorcomment>ゾーンオフセットってなに? xmlにそんなのあったっけ?</translatorcomment>
-        <translation type="unfinished">もし二つの値がゾーンオフセットをもつ場合、両者は同じゾーンオフセットでなければなりません。%1 と %2 は同一ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qerrorfn.cpp" line="+61"/>
-        <source>%1 was called.</source>
-        <translation type="unfinished">%1 が呼ばれました。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qpatternmatchingfns.cpp" line="+94"/>
-        <source>%1 must be followed by %2 or %3, not at the end of the replacement string.</source>
-        <translation type="unfinished">%1 の後には、%2 か %3 が続かなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+39"/>
-        <source>In the replacement string, %1 must be followed by at least one digit when not escaped.</source>
-        <translation type="unfinished">置換操作において、%1 には少くとも一文字以上の数値が続く必要があります(エスケープされている場合を除く)。</translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>In the replacement string, %1 can only be used to escape itself or %2, not %3</source>
-        <translation type="unfinished">置換操作において、%1 はそれ自身または %2 をエスケープする為にのみ使用できます。%3 に対しては使用できません</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qpatternplatform.cpp" line="+92"/>
-        <source>%1 matches newline characters</source>
-        <translation type="unfinished">%1 は改行文字(列)にマッチしました</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>%1 and %2 match the start and end of a line.</source>
-        <translation type="unfinished">%1 と %2 は、行の先頭と末尾にマッチしました。</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Matches are case insensitive</source>
-        <translation type="unfinished">マッチは大文字小文字を区別しません</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Whitespace characters are removed, except when they appear in character classes</source>
-        <translatorcomment>CDATA?</translatorcomment>
-        <translation type="unfinished">空白文字は削除されました。ただし、キャラクタークラスに属するものは除きます</translation>
-    </message>
-    <message>
-        <location line="+99"/>
-        <source>%1 is an invalid regular expression pattern: %2</source>
-        <translation type="unfinished">%1 は有効な正規表現ではありません。: %2</translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>%1 is an invalid flag for regular expressions. Valid flags are:</source>
-        <translation type="unfinished">%1 は正規表現において無効なフラグです。使用可能なフラグは次の通りです:</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qqnamefns.cpp" line="+17"/>
-        <source>If the first argument is the empty sequence or a zero-length string (no namespace), a prefix cannot be specified. Prefix %1 was specified.</source>
-        <translation type="unfinished">もし、最初の引数が空白からなる文字列か、長さが0 (名前空間をともなわない)である場合、プレフィックスを指定することはできません。しかし、プレフィックスとして %1 が指定されています。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qsequencefns.cpp" line="+346"/>
-        <source>It will not be possible to retrieve %1.</source>
-        <translation type="unfinished">%1 を取得することはできないかもしれません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qsequencegeneratingfns.cpp" line="+279"/>
-        <source>The default collection is undefined</source>
-        <translation type="unfinished">デフォルトのコレクションが定義されていません</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>%1 cannot be retrieved</source>
-        <translation type="unfinished">%1 を取得できません</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qstringvaluefns.cpp" line="+252"/>
-        <source>The normalization form %1 is unsupported. The supported forms are %2, %3, %4, and %5, and none, i.e. the empty string (no normalization).</source>
-        <translatorcomment>つまり、空白の文字です、はどうでもいいよね。</translatorcomment>
-        <translation type="unfinished">正規化された表現 %1 はサポートされていません。サポートされている表現は、%2, %3, %4, %5 のみです。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qtimezonefns.cpp" line="+87"/>
-        <source>A zone offset must be in the range %1..%2 inclusive. %3 is out of range.</source>
-        <translation type="unfinished">ゾーンオフセットは、%1 から %2 の範囲である必要があります(境界を含む)。%3 は範囲外です。</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>%1 is not a whole number of minutes.</source>
-        <translation type="unfinished">%1 は、分を現す値ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qunparsedtextfn.cpp" line="+65"/>
-        <source>The URI cannot have a fragment</source>
-        <translation type="unfinished">この URI はフラグメントをもつことはできません</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/janitors/qcardinalityverifier.cpp" line="+58"/>
-        <source>Required cardinality is %1; got cardinality %2.</source>
-        <translation type="unfinished">カーディナリティ %1 が必要です。%2 ではありません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/janitors/qitemverifier.cpp" line="+67"/>
-        <source>The item %1 did not match the required type %2.</source>
-        <translation type="unfinished">アイテム %1 は、要求された型 %2 にマッチしません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/parser/qmaintainingreader.cpp" line="+183"/>
-        <source>Attribute %1 cannot appear on the element %2. Only the standard attributes can appear.</source>
-        <translation type="unfinished">エレメント %2 に属性 %1 を指定することはできません。標準の属性のみが許可されています。</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Attribute %1 cannot appear on the element %2. Only %3 is allowed, and the standard attributes.</source>
-        <translation type="unfinished">エレメント %2 に属性 %1 を指定することはできません。%3 と標準の属性のみが許可されています。</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Attribute %1 cannot appear on the element %2. Allowed is %3, %4, and the standard attributes.</source>
-        <translation type="unfinished">エレメント %2 に属性 %1 を指定することはできません。%3, %4 と標準の属性のみが許可されています。</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Attribute %1 cannot appear on the element %2. Allowed is %3, and the standard attributes.</source>
-        <translation type="unfinished">エレメント %2 に %1 は指定できません。%3 と標準の属性のみが指定できます。</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>XSL-T attributes on XSL-T elements must be in the null namespace, not in the XSL-T namespace which %1 is.</source>
-        <translation type="unfinished">XSLT エレメントに対するXSLT属性は、名前空間がnullでなければなりません。%1 は使用できません。</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>The attribute %1 must appear on element %2.</source>
-        <translation type="unfinished">属性 %1 は、エレメント %2 にのみ記述できます。</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>The element with local name %1 does not exist in XSL-T.</source>
-        <translation type="unfinished">ローカル名 %1 のエレメントは、XSLTに存在しません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/parser/qparsercontext.cpp" line="+93"/>
-        <source>The variable %1 is unused</source>
-        <translation type="unfinished">値 %1 は使用されませんでした</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/parser/qquerytransformparser.cpp" line="+330"/>
-        <source>A construct was encountered which only is allowed in XQuery.</source>
-        <translation type="unfinished">XQuery でのみ許可されている construct に遭遇しました。</translation>
-    </message>
-    <message>
-        <location line="+49"/>
-        <location line="+7253"/>
-        <source>%1 is an unknown schema type.</source>
-        <translation type="unfinished">%1 はサポートされていないスキーマのタイプです。</translation>
-    </message>
-    <message>
-        <location line="-7184"/>
-        <source>A template by name %1 has already been declared.</source>
-        <translation type="unfinished">テンプレート名 &apos;%1&apos; は、既に宣言されています。</translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>%1 is not a valid numeric literal.</source>
-        <translation type="unfinished">%1 は数値リテラルとして無効です。</translation>
-    </message>
-    <message>
-        <location line="+187"/>
-        <source>Only one %1 declaration can occur in the query prolog.</source>
-        <translation type="unfinished">クェリーのプロローグでは、%1 は一回のみ宣言できます。</translation>
-    </message>
-    <message>
-        <location line="+188"/>
-        <source>The initialization of variable %1 depends on itself</source>
-        <translatorcomment>再帰?</translatorcomment>
-        <translation type="unfinished">値 %1 の初期化は、それ自身に依存しています</translation>
-    </message>
-    <message>
-        <location line="+63"/>
-        <source>No variable by name %1 exists</source>
-        <translation type="unfinished">変数 %1 は存在しません</translation>
-    </message>
-    <message>
-        <location line="+2841"/>
-        <source>Version %1 is not supported. The supported XQuery version is 1.0.</source>
-        <translation type="unfinished">バージョン %1 はサポートされていません。XQuery バージョン 1.0 のみサポートされています。</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>The encoding %1 is invalid. It must contain Latin characters only, must not contain whitespace, and must match the regular expression %2.</source>
-        <translation type="unfinished">エンコーディング &apos;%1&apos; は無効です。ラテン文字 (空白を除く) からなるもので、正規表現 &apos;%2&apos; にマッチするもののみ使用できます。</translation>
-    </message>
-    <message>
-        <location line="+55"/>
-        <source>No function with signature %1 is available</source>
-        <translation type="unfinished">シグネチャ %1 をもつ関数がみつかりません</translation>
-    </message>
-    <message>
-        <location line="+72"/>
-        <location line="+10"/>
-        <source>A default namespace declaration must occur before function, variable, and option declarations.</source>
-        <translation type="unfinished">標準の名前空間の宣言は、関数、変数、オプションの宣言の前にしなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Namespace declarations must occur before function, variable, and option declarations.</source>
-        <translation type="unfinished">名前空間の宣言は、関数、変数、オプションの宣言の前にしなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Module imports must occur before function, variable, and option declarations.</source>
-        <translation type="unfinished">モジュールのインポートは、関数、変数、オプションの宣言の前にしなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+102"/>
-        <source>The keyword %1 cannot occur with any other mode name.</source>
-        <translation type="unfinished">キーワード %1 は、他の名をともなって使用することはできません。</translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>The value of attribute %1 must of type %2, which %3 isn&apos;t.</source>
-        <translation type="unfinished">属性 &apos;%1&apos; の値として &apos;%3&apos; が指定されましたが、型 &apos;%2&apos; でなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+69"/>
-        <source>It is not possible to redeclare prefix %1.</source>
-        <translation type="unfinished">プレフィックス &apos;%1&apos; を再定義することはできません。</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>The prefix %1 can not be bound. By default, it is already bound to the namespace %2.</source>
-        <translation type="unfinished">プレフィックス &apos;%1&apos; はバウンドできません。デフォルトでは、それは既に名前空間 &apos;%2&apos; にバウンドされています。</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Prefix %1 is already declared in the prolog.</source>
-        <translation type="unfinished">プロローグ部において、プレフィックス &apos;%1&apos; はすでに宣言されています。</translation>
-    </message>
-    <message>
-        <location line="+95"/>
-        <source>The name of an option must have a prefix. There is no default namespace for options.</source>
-        <translation type="unfinished">オプションの名前はプレフィックスをもたなければなりません。このオプションに対するデフォルトの名前空間は存在しません。</translation>
-    </message>
-    <message>
-        <location line="+171"/>
-        <source>The Schema Import feature is not supported, and therefore %1 declarations cannot occur.</source>
-        <translation type="unfinished">このスキーマのインポート機能は使用できません。また、&apos;%1&apos; 宣言も使用できません。</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>The target namespace of a %1 cannot be empty.</source>
-        <translation type="unfinished">名前空間 &apos;%1&apos; は、空であってはなりません。</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>The module import feature is not supported</source>
-        <translation type="unfinished">モジュールインポートの機能はサポートされていません</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>A variable by name %1 has already been declared.</source>
-        <translation type="unfinished">名前 &apos;%1&apos; の変数は、すでに宣言されています。</translation>
-    </message>
-    <message>
-        <location line="+39"/>
-        <source>No value is available for the external variable by name %1.</source>
-        <translation type="unfinished">外部変数 &apos;%1&apos; の値がみつかりません。</translation>
-    </message>
-    <message>
-        <location line="+96"/>
-        <source>A stylesheet function must have a prefixed name.</source>
-        <translation type="unfinished">スタイルシート関数は、プレフィックス名を持たなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>The namespace for a user defined function cannot be empty (try the predefined prefix %1 which exists for cases like this)</source>
-        <translation type="unfinished">ユーザ定義の関数の名前空間は、空であってはなりません。(すでに定義されているプレフィックス &apos;%1&apos; が使用できます)</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>The namespace %1 is reserved; therefore user defined functions may not use it. Try the predefined prefix %2, which exists for these cases.</source>
-        <translation type="unfinished">名前空間 &apos;%1&apos; は予約済です。ユーザ定義の関数では使用することはできません。プレフィックス &apos;%2&apos; が使用できます。</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>The namespace of a user defined function in a library module must be equivalent to the module namespace. In other words, it should be %1 instead of %2</source>
-        <translation type="unfinished">ライブラリモジュールで使用されている名前空間は、モジュールの名前空間と同一でなければなりません。つまり、&apos;%2&apos; ではなく、&apos;%1&apos; でなければなりません</translation>
-    </message>
-    <message>
-        <location line="+34"/>
-        <source>A function already exists with the signature %1.</source>
-        <translation type="unfinished">シグネチャー &apos;%1&apos; の関数はすでに存在しています。</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>No external functions are supported. All supported functions can be used directly, without first declaring them as external</source>
-        <translation type="unfinished">外部関数はサポートされていません。すべてのサポートされている関数は、外部宣言をすることなく、直接使用することができます</translation>
-    </message>
-    <message>
-        <location line="+37"/>
-        <source>An argument by name %1 has already been declared. Every argument name must be unique.</source>
-        <translation type="unfinished">引数名 &apos;%1&apos; は既に宣言されています。すべての引数名はユニークである必要があります。</translation>
-    </message>
-    <message>
-        <location line="+179"/>
-        <source>When function %1 is used for matching inside a pattern, the argument must be a variable reference or a string literal.</source>
-        <translation type="unfinished">パターン一致の内側で関数 &apos;%1&apos; を使用する場合、引数はリテラルな文字列を参照する値でなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>In an XSL-T pattern, the first argument to function %1 must be a string literal, when used for matching.</source>
-        <translation type="unfinished">XSL-T パターンマッチングにおいて、関数 &apos;%1&apos; の最初の引数は、リテラルな文字列でなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>In an XSL-T pattern, the first argument to function %1 must be a literal or a variable reference, when used for matching.</source>
-        <translatorcomment>variable ref?</translatorcomment>
-        <translation type="unfinished">XSL-T パターンマッチングにおいて、関数 &apos;%1&apos; への最初の引数は、リテラルか変数でなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>In an XSL-T pattern, function %1 cannot have a third argument.</source>
-        <translation type="unfinished">XSL-T パターンにおいて、関数 &apos;%1&apos; は三つの引数をもつことはできません。</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>In an XSL-T pattern, only function %1 and %2, not %3, can be used for matching.</source>
-        <translation type="unfinished">XSL-T パターンマッチングにおいて、関数 &apos;%1&apos; と &apos;%2&apos; のみ使用できます。&apos;%3&apos; は使用できません。</translation>
-    </message>
-    <message>
-        <location line="+63"/>
-        <source>In an XSL-T pattern, axis %1 cannot be used, only axis %2 or %3 can.</source>
-        <translation type="unfinished">XSL-T パターンにおいて、axis %1 は使用できません。%2 または %3 のみ使用できます。</translation>
-    </message>
-    <message>
-        <location line="+126"/>
-        <source>%1 is an invalid template mode name.</source>
-        <translation type="unfinished">%1 はテンプレートモジュール名として無効です。</translation>
-    </message>
-    <message>
-        <location line="+44"/>
-        <source>The name of a variable bound in a for-expression must be different from the positional variable. Hence, the two variables named %1 collide.</source>
-        <translation type="unfinished">for 構文において使用する変数は、場所に関する変数とは異なる必要があります。つまり、&apos;%1&apos; が重複して使用されています。</translation>
-    </message>
-    <message>
-        <location line="+758"/>
-        <source>The Schema Validation Feature is not supported. Hence, %1-expressions may not be used.</source>
-        <translation type="unfinished">スキーマの検証機能はサポートされていません。よって、&apos;%1&apos; 構文は使用できません。</translation>
-    </message>
-    <message>
-        <location line="+39"/>
-        <source>None of the pragma expressions are supported. Therefore, a fallback expression must be present</source>
-        <translation type="unfinished">pragma 構文はサポートされていません。fallback 構文でなければなりません</translation>
-    </message>
-    <message>
-        <location line="+267"/>
-        <source>Each name of a template parameter must be unique; %1 is duplicated.</source>
-        <translation type="unfinished">テンプレートパラメータ名はユニークである必要があります。&apos;%1&apos; は重複しています。</translation>
-    </message>
-    <message>
-        <location line="+129"/>
-        <source>The %1-axis is unsupported in XQuery</source>
-        <translation type="unfinished">XQuery において、%1 axis はサポートされていません</translation>
-    </message>
-    <message>
-        <location line="+286"/>
-        <source>No function by name %1 is available.</source>
-        <translation type="unfinished">関数名 &apos;%1&apos; はみつかりません。</translation>
-    </message>
-    <message>
-        <location line="+102"/>
-        <source>The namespace URI cannot be the empty string when binding to a prefix, %1.</source>
-        <translation type="unfinished">プレフィックス &apos;%1&apos; にバインディングする名前空間の URI は、空であってはなりません。</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>%1 is an invalid namespace URI.</source>
-        <translation type="unfinished">%1 は名前空間 URI として無効です。</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>It is not possible to bind to the prefix %1</source>
-        <translation type="unfinished">プレフィックス %1 にバインドすることはできません</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Namespace %1 can only be bound to %2 (and it is, in either case, pre-declared).</source>
-        <translatorcomment>?</translatorcomment>
-        <translation type="unfinished">名前空間 %1 は %2 にのみバウンドできます。</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Prefix %1 can only be bound to %2 (and it is, in either case, pre-declared).</source>
-        <translation type="unfinished">プリフィックス %1 は %2 にのみバウンドできます。</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Two namespace declaration attributes have the same name: %1.</source>
-        <translation type="unfinished">二つの名前空間宣言の属性が、同じ名前 &apos;%1&apos; をもっています。</translation>
-    </message>
-    <message>
-        <location line="+89"/>
-        <source>The namespace URI must be a constant and cannot use enclosed expressions.</source>
-        <translation type="unfinished">名前空間 URI は、constantでなければなりません。式を含むことはできません。</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>An attribute by name %1 has already appeared on this element.</source>
-        <translation type="unfinished">属性名 &apos;%1&apos; は、すでにこのエレメントで使用されています。</translation>
-    </message>
-    <message>
-        <location line="+61"/>
-        <source>A direct element constructor is not well-formed. %1 is ended with %2.</source>
-        <translation type="unfinished">直積的な指定のエレメントがwell formedではありません。&apos;%1&apos; が、&apos;%2&apos; で終わっています。</translation>
-    </message>
-    <message>
-        <location line="+458"/>
-        <source>The name %1 does not refer to any schema type.</source>
-        <translation type="unfinished">名前 &apos;%1&apos; は、なんのスキーマタイプも参照していません。</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>%1 is an complex type. Casting to complex types is not possible. However, casting to atomic types such as %2 works.</source>
-        <translation type="unfinished">&apos;%1&apos; は complex 型です。complex 型への型変換はできません。しかし、アトミックな型である &apos;%2&apos; への変換はできます。</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>%1 is not an atomic type. Casting is only possible to atomic types.</source>
-        <translation type="unfinished">&apos;%1&apos; はアトミックな型ではありません。型変換はアトミックな型に対してのみ可能です。</translation>
-    </message>
-    <message>
-        <location line="+76"/>
-        <source>%1 is not a valid name for a processing-instruction.</source>
-        <translation type="unfinished">処理指定において、&apos;%1&apos; は無効です。</translation>
-    </message>
-    <message>
-        <location line="+69"/>
-        <location line="+71"/>
-        <source>%1 is not in the in-scope attribute declarations. Note that the schema import feature is not supported.</source>
-        <translation type="unfinished">&apos;%1&apos; は、スコープ属性宣言ではありません。スキーマインポート機能はサポートされていません。</translation>
-    </message>
-    <message>
-        <location line="+48"/>
-        <source>The name of an extension expression must be in a namespace.</source>
-        <translation type="unfinished">拡張式 (extension expression) の名前は、名前空間の中になければなりません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/parser/qxslttokenizer.cpp" line="+519"/>
-        <source>Element %1 is not allowed at this location.</source>
-        <translation type="unfinished">この場所にエレメント &apos;%1&apos; をおくことは許されていません。</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Text nodes are not allowed at this location.</source>
-        <translation type="unfinished">この場所にテキストノードをおくことは許されていません。</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Parse error: %1</source>
-        <translation type="unfinished">パースエラー: %1</translation>
-    </message>
-    <message>
-        <location line="+62"/>
-        <source>The value of the XSL-T version attribute must be a value of type %1, which %2 isn&apos;t.</source>
-        <translation type="unfinished">XSL-T バージョン属性の値は、&apos;%1&apos; 型でなければなりません。&apos;%2&apos; はそうではありません。</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Running an XSL-T 1.0 stylesheet with a 2.0 processor.</source>
-        <translation type="unfinished">XSL-T 1.0 のスタイルシートを 2.0 のプロセッサで使用します。</translation>
-    </message>
-    <message>
-        <location line="+108"/>
-        <source>Unknown XSL-T attribute %1.</source>
-        <translation type="unfinished">未知の XSL-T 属性 %1 があります。</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Attribute %1 and %2 are mutually exclusive.</source>
-        <translation type="unfinished">属性 &apos;%1&apos; と &apos;%2&apos; は排他的にのみ使用できます。</translation>
-    </message>
-    <message>
-        <location line="+166"/>
-        <source>In a simplified stylesheet module, attribute %1 must be present.</source>
-        <translation type="unfinished">simplified stylesheet モジュールにおいては、属性 &apos;%1&apos; を指定されなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+72"/>
-        <source>If element %1 has no attribute %2, it cannot have attribute %3 or %4.</source>
-        <translation type="unfinished">エレメント &apos;%1&apos; が属性 &apos;%2&apos; を持たない場合は、属性 &apos;%3&apos; や &apos;%4&apos; を使用することはできません。</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Element %1 must have at least one of the attributes %2 or %3.</source>
-        <translation type="unfinished">エレメント &apos;%1&apos; は、属性 &apos;%2&apos; か &apos;%3&apos; のいずれかを持たなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>At least one mode must be specified in the %1-attribute on element %2.</source>
-        <translation type="unfinished">エレメント &apos;%2&apos; において、&apos;%1&apos; 属性は少くとも一つのモードを指定しなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+123"/>
-        <source>Element %1 must come last.</source>
-        <translation type="unfinished">エレメント %1 は最後になければなりません。</translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>At least one %1-element must occur before %2.</source>
-        <translation type="unfinished">%2 の前に、少くとも一つは %1 エレメントが存在しなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Only one %1-element can appear.</source>
-        <translation type="unfinished">%1 エレメントは一つのみ存在しなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+31"/>
-        <source>At least one %1-element must occur inside %2.</source>
-        <translation type="unfinished">%2 の内側には、少くとも一つの &apos;%1&apos; エレメントが存在しなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+58"/>
-        <source>When attribute %1 is present on %2, a sequence constructor cannot be used.</source>
-        <translation type="unfinished">%2 に属性 %1 がある場合、sequence constructor は使用できません。</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Element %1 must have either a %2-attribute or a sequence constructor.</source>
-        <translation type="unfinished">エレメント %1 には、%2 属性またはsequence constructorがなければなりません。</translation>
-    </message>
-    <message>
-        <location line="+125"/>
-        <source>When a parameter is required, a default value cannot be supplied through a %1-attribute or a sequence constructor.</source>
-        <translation type="unfinished">パラメータが要求されているときには、デフォルトの値は、%1 属性または sequence constructor によって指定されていてはなりません。</translation>
-    </message>
-    <message>
-        <location line="+270"/>
-        <source>Element %1 cannot have children.</source>
-        <translation type="unfinished">エレメント %1 は、子要素を持つことができません。</translation>
-    </message>
-    <message>
-        <location line="+434"/>
-        <source>Element %1 cannot have a sequence constructor.</source>
-        <translation type="unfinished">エレメント %1 は、sequence constructor を含むことができません。</translation>
-    </message>
-    <message>
-        <location line="+86"/>
-        <location line="+9"/>
-        <source>The attribute %1 cannot appear on %2, when it is a child of %3.</source>
-        <translation type="unfinished">%2 が %3 の子要素であるときは、属性 %1 を使用してはなりません。</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>A parameter in a function cannot be declared to be a tunnel.</source>
-        <translation type="unfinished">関数へのパラメータは、トンネルであってはなりません。</translation>
-    </message>
-    <message>
-        <location line="+149"/>
-        <source>This processor is not Schema-aware and therefore %1 cannot be used.</source>
-        <translation type="unfinished">この処理系は、Schema-aware ではありません。よって、%1 は使用できません。</translation>
-    </message>
-    <message>
-        <location line="+57"/>
-        <source>Top level stylesheet elements must be in a non-null namespace, which %1 isn&apos;t.</source>
-        <translation type="unfinished">トップレベルのスタイルシートのエレメントは、non-nullな名前空間を持っていなければなりません。しかし、%1 はそうではありません。</translation>
-    </message>
-    <message>
-        <location line="+48"/>
-        <source>The value for attribute %1 on element %2 must either be %3 or %4, not %5.</source>
-        <translation type="unfinished">エレメント %2 の属性 %1 の値は、%3 または %4 でなければなりません。%5 は異なります。</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Attribute %1 cannot have the value %2.</source>
-        <translation type="unfinished">属性 %1 に、値 %2 を指定することはできません。</translation>
-    </message>
-    <message>
-        <location line="+58"/>
-        <source>The attribute %1 can only appear on the first %2 element.</source>
-        <translation type="unfinished">属性 %1 は、最初の %2 エレメントにのみ指定できます。</translation>
-    </message>
-    <message>
-        <location line="+99"/>
-        <source>At least one %1 element must appear as child of %2.</source>
-        <translation type="unfinished">%2 の子要素としては、少くとも一つは %1 エレメントがなければなりません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/type/qcardinality.cpp" line="+55"/>
-        <source>empty</source>
-        <translation type="unfinished">空</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>zero or one</source>
-        <translation type="unfinished">ゼロまたは一つ</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>exactly one</source>
-        <translation type="unfinished">厳密に一つ</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>one or more</source>
-        <translation type="unfinished">一つまたは複数</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>zero or more</source>
-        <translation type="unfinished">ゼロまたはそれ以上</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/type/qtypechecker.cpp" line="+63"/>
-        <source>Required type is %1, but %2 was found.</source>
-        <translation type="unfinished">要求されている型は %1 ですが、 %2 があります。</translation>
-    </message>
-    <message>
-        <location line="+44"/>
-        <source>Promoting %1 to %2 may cause loss of precision.</source>
-        <translation type="unfinished">%1 を %2 に変換する際に、精度のロスが生じます。</translation>
-    </message>
-    <message>
-        <location line="+49"/>
-        <source>The focus is undefined.</source>
-        <translation type="unfinished">フォーカスが定義されていません。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/utils/qoutputvalidator.cpp" line="+86"/>
-        <source>It&apos;s not possible to add attributes after any other kind of node.</source>
-        <translation type="unfinished">他の種類のノードの中では、属性を追加することはできません。</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>An attribute by name %1 has already been created.</source>
-        <translation type="unfinished">名前 &apos;%1&apos; の属性は、すでに生成されています。</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/utils/qxpathhelper_p.h" line="+120"/>
-        <source>Only the Unicode Codepoint Collation is supported(%1). %2 is unsupported.</source>
-        <translation type="unfinished">UNICODE Codepoint Collection のみ使用できます(%1)。 %2 はサポートされていません。</translation>
-    </message>
-</context>
-<context>
-    <name>QPluginLoader</name>
-    <message>
-        <location filename="../src/corelib/plugin/qpluginloader.cpp" line="+24"/>
-        <source>Unknown error</source>
-        <translation>不明なエラー</translation>
-    </message>
-    <message>
-        <location line="-68"/>
-        <source>The plugin was not loaded.</source>
-        <translation>そのプラグインはロードされていません。</translation>
-    </message>
-</context>
-<context>
-    <name>QPrintDialog</name>
-    <message>
-        <source>Page size:</source>
-        <translation type="obsolete">ページサイズ:</translation>
-    </message>
-    <message>
-        <source>Orientation:</source>
-        <translation type="obsolete">方向:</translation>
-    </message>
-    <message>
-        <source>Paper source:</source>
-        <translation type="obsolete">給紙装置:</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="+268"/>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">キャンセル</translation>
-    </message>
-    <message>
-        <source>Portrait</source>
-        <translation type="obsolete">縦</translation>
-    </message>
-    <message>
-        <source>Landscape</source>
-        <translation type="obsolete">横</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/painting/qprinterinfo_unix.cpp" line="+98"/>
-        <source>locally connected</source>
-        <translation>ローカルに接続しています</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <location line="+225"/>
-        <source>Aliases: %1</source>
-        <translation>エイリアス: %1</translation>
-    </message>
-    <message>
-        <location line="+223"/>
-        <location line="+199"/>
-        <source>unknown</source>
-        <translation>不明</translation>
-    </message>
-    <message>
-        <source>Print in color if available</source>
-        <translation type="obsolete">可能であればカラーで印刷</translation>
-    </message>
-    <message>
-        <source>Print to file</source>
-        <translation type="obsolete">ファイルに出力:</translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="obsolete">参照...</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_qws.cpp" line="+375"/>
-        <source>Print all</source>
-        <translation>すべて印刷</translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation type="obsolete">選択した部分を印刷</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Print range</source>
-        <translation>印刷範囲</translation>
-    </message>
-    <message>
-        <source>Pages from</source>
-        <translation type="obsolete">先頭のページ:</translation>
-    </message>
-    <message>
-        <source>to</source>
-        <translation type="obsolete">末尾のページ:</translation>
-    </message>
-    <message>
-        <source>Print last page first</source>
-        <translation type="obsolete">末尾のページから印刷</translation>
-    </message>
-    <message>
-        <source>Number of copies:</source>
-        <translation type="obsolete">部数:</translation>
-    </message>
-    <message>
-        <source>Paper format</source>
-        <translation type="obsolete">用紙の形式</translation>
-    </message>
-    <message>
-        <location line="-48"/>
-        <source>A0 (841 x 1189 mm)</source>
-        <translation>A0 (841 x 1189mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A1 (594 x 841 mm)</source>
-        <translation>A1 (594 x 841mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A2 (420 x 594 mm)</source>
-        <translation>A2 (420 x 594mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A3 (297 x 420 mm)</source>
-        <translation>A3 (297 x 420mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
-        <translation>A4 (210 x 297mm、8.26 x 11.7インチ)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A5 (148 x 210 mm)</source>
-        <translation>A5 (148 x 210mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A6 (105 x 148 mm)</source>
-        <translation>A6 (105 x 148mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A7 (74 x 105 mm)</source>
-        <translation>A7 (74 x 105mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A8 (52 x 74 mm)</source>
-        <translation>A8 (52 x 74mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A9 (37 x 52 mm)</source>
-        <translation>A9 (37 x 52mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B0 (1000 x 1414 mm)</source>
-        <translation>B0 (1000 x 1414mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B1 (707 x 1000 mm)</source>
-        <translation>B1 (707 x 1000mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B2 (500 x 707 mm)</source>
-        <translation>B2 (500 x 707mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B3 (353 x 500 mm)</source>
-        <translation>B3 (353 x 500mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B4 (250 x 353 mm)</source>
-        <translation>B4 (250 x 353mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
-        <translation>B5 (176 x 250mm、6.93 x 9.84インチ)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B6 (125 x 176 mm)</source>
-        <translation>B6 (125 x 176mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B7 (88 x 125 mm)</source>
-        <translation>B7 (88 x 125mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B8 (62 x 88 mm)</source>
-        <translation>B8 (62 x 88mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B9 (44 x 62 mm)</source>
-        <translation>B9 (44 x 62mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B10 (31 x 44 mm)</source>
-        <translation>B10 (31 x 44mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>C5E (163 x 229 mm)</source>
-        <translation>C5E (163 x 229mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>DLE (110 x 220 mm)</source>
-        <translation>DLE (110 x 220mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
-        <translation>Executive (7.5 x 10インチ、191 x 254mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Folio (210 x 330 mm)</source>
-        <translation>Folio (210 x 330mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Ledger (432 x 279 mm)</source>
-        <translation>Ledger (432 x 279mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
-        <translation>Legal (8.5 x 14インチ、216 x 356mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
-        <translation>Letter (8.5 x 11インチ、216 x 279mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tabloid (279 x 432 mm)</source>
-        <translation>Tabloid (279 x 432mm)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>US Common #10 Envelope (105 x 241 mm)</source>
-        <translation>US Common #10 Envelope (105 x 241mm)</translation>
-    </message>
-    <message>
-        <source>Print dialog</source>
-        <translation type="obsolete">プリントダイアログ</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="obsolete">サイズ:</translation>
-    </message>
-    <message>
-        <source>Printer</source>
-        <translation type="obsolete">プリンタ</translation>
-    </message>
-    <message>
-        <source>Properties</source>
-        <translation type="obsolete">プロパティ</translation>
-    </message>
-    <message>
-        <source>Printer info:</source>
-        <translation type="obsolete">プリンタ情報:</translation>
-    </message>
-    <message>
-        <source>Copies</source>
-        <translation type="obsolete">印刷部数</translation>
-    </message>
-    <message>
-        <source>Collate</source>
-        <translation type="obsolete">丁合い</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">その他</translation>
-    </message>
-    <message>
-        <source>Double side printing</source>
-        <translation type="obsolete">両面印刷</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qabstractprintdialog.cpp" line="+110"/>
-        <location line="+13"/>
-        <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="-2"/>
-        <source>Print</source>
-        <translation>印刷</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">ファイル</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-357"/>
-        <source>Print To File ...</source>
-        <translation>ファイルへ出力...</translation>
-    </message>
-    <message>
-        <location line="+80"/>
-        <source>File %1 is not writable.
-Please choose a different file name.</source>
-        <translation>ファイル %1 は書き込み可能ではありません。
-別のファイル名を選んでください。</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>%1 already exists.
-Do you want to overwrite it?</source>
-        <translation>%1 はすでに存在します。
-上書きしますか?</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_qws.cpp" line="-210"/>
-        <source>File exists</source>
-        <translation>ファイルは既に存在しています</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;ファイルを上書きしてもよろしいですか?&lt;/qt&gt;</translation>
-    </message>
-    <message>
-        <location line="+227"/>
-        <source>Print selection</source>
-        <translation>選択された範囲を印刷</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-8"/>
-        <source>%1 is a directory.
-Please choose a different file name.</source>
-        <translation>%1 はディレクトリです。
-ファイル名を指定してください。</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qpagesetupdialog_unix.cpp" line="-232"/>
-        <source>A0</source>
-        <translation>A0</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A1</source>
-        <translation>A1</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A2</source>
-        <translation>A2</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A3</source>
-        <translation>A3</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A4</source>
-        <translation>A4</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A5</source>
-        <translation>A5</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A6</source>
-        <translation>A6</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A7</source>
-        <translation>A7</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A8</source>
-        <translation>A8</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A9</source>
-        <translation>A9</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B0</source>
-        <translation>B0</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B1</source>
-        <translation>B1</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B2</source>
-        <translation>B2</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B3</source>
-        <translation>B3</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B4</source>
-        <translation>B4</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B5</source>
-        <translation>B5</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B6</source>
-        <translation>B6</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B7</source>
-        <translation>B7</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B8</source>
-        <translation>B8</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B9</source>
-        <translation>B9</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B10</source>
-        <translation>B10</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>C5E</source>
-        <translation>C5E</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>DLE</source>
-        <translation>DLE</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Executive</source>
-        <translation>Exclusive</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Folio</source>
-        <translation>Folio</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Ledger</source>
-        <translation>Ledger</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Legal</source>
-        <translation>リーガルサイズ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Letter</source>
-        <translation>レターサイズ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tabloid</source>
-        <translation>タブロイドサイズ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>US Common #10 Envelope</source>
-        <translation>US標準#10封筒</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Custom</source>
-        <translation>カスタム</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-524"/>
-        <location line="+68"/>
-        <source>&amp;Options &gt;&gt;</source>
-        <translation>オプション(&amp;O) &gt;&gt;</translation>
-    </message>
-    <message>
-        <location line="-63"/>
-        <source>&amp;Print</source>
-        <translation>印刷(&amp;P)</translation>
-    </message>
-    <message>
-        <location line="+67"/>
-        <source>&amp;Options &lt;&lt;</source>
-        <translation>オプション(&amp;O) &lt;&lt;</translation>
-    </message>
-    <message>
-        <location line="+253"/>
-        <source>Print to File (PDF)</source>
-        <translation>PDFファイルに出力</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Print to File (Postscript)</source>
-        <translation>Postscriptファイルに出力</translation>
-    </message>
-    <message>
-        <location line="+47"/>
-        <source>Local file</source>
-        <translation>ローカルファイル</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Write %1 file</source>
-        <translation>ファイル %1 に書き込みました</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="+1"/>
-        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
-        <translatorcomment>QPrintPropertiesWidgetにFromとToがあってそれを指している</translatorcomment>
-        <translation>印刷開始ページ番号は、印刷終了ページ番号より小さくなければなりません。</translation>
-    </message>
-</context>
-<context>
-    <name>QPrintPreviewDialog</name>
-    <message>
-        <location filename="../src/gui/dialogs/qabstractpagesetupdialog.cpp" line="+68"/>
-        <location line="+12"/>
-        <source>Page Setup</source>
-        <translation>ページの設定</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintpreviewdialog.cpp" line="+246"/>
-        <source>%1%</source>
-        <translation>%1%</translation>
-    </message>
-    <message>
-        <location line="+68"/>
-        <source>Print Preview</source>
-        <translation>印刷のプレビュー</translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Next page</source>
-        <translation>次のページ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Previous page</source>
-        <translation>前のページ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>First page</source>
-        <translation>最初のページ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Last page</source>
-        <translation>最後のページ</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Fit width</source>
-        <translation>幅をあわせる</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Fit page</source>
-        <translation>高さをあわせる</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Zoom in</source>
-        <translation>拡大</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Zoom out</source>
-        <translation>縮小</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Portrait</source>
-        <translation>縦</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Landscape</source>
-        <translation>横</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Show single page</source>
-        <translation>一枚のページを表示する</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show facing pages</source>
-        <translation>見開きのページを表示する</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show overview of all pages</source>
-        <translation>すべてのページを表示する</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Print</source>
-        <translation>印刷</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Page setup</source>
-        <translation>ページの設定</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">閉じる</translation>
-    </message>
-    <message>
-        <location line="+150"/>
-        <source>Export to PDF</source>
-        <translation>PDFに出力</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Export to PostScript</source>
-        <translation>Postscriptに出力</translation>
-    </message>
-</context>
-<context>
-    <name>QPrintPropertiesDialog</name>
-    <message>
-        <source>PPD Properties</source>
-        <translation type="obsolete">印刷プロパティのダイアログのプロパティ</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">保存</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-</context>
-<context>
-    <name>QPrintPropertiesWidget</name>
-    <message>
-        <location filename="../src/gui/dialogs/qprintpropertieswidget.ui"/>
-        <source>Form</source>
-        <translation>書式</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Page</source>
-        <translation>ページ</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Advanced</source>
-        <translation>高度な設定</translation>
-    </message>
-</context>
-<context>
-    <name>QPrintSettingsOutput</name>
-    <message>
-        <location filename="../src/gui/dialogs/qprintsettingsoutput.ui"/>
-        <source>Form</source>
-        <translation>書式</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Copies</source>
-        <translation>印刷部数</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Print range</source>
-        <translation>印刷範囲</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Print all</source>
-        <translation>すべて印刷</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Pages from</source>
-        <translation>先頭のページ</translation>
-    </message>
-    <message>
-        <location/>
-        <source>to</source>
-        <translation>末尾のページ</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Selection</source>
-        <translation>選択した部分を印刷</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Output Settings</source>
-        <translation>出力設定</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Copies:</source>
-        <translation>印刷部数:</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Collate</source>
-        <translation>丁合い</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Reverse</source>
-        <translation>逆順</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Options</source>
-        <translation>オプション</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Color Mode</source>
-        <translation>色</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Color</source>
-        <translation>カラー</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Grayscale</source>
-        <translation>グレースケール</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Duplex Printing</source>
-        <translation>両面印刷</translation>
-    </message>
-    <message>
-        <location/>
-        <source>None</source>
-        <translation>なし</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Long side</source>
-        <translation>長辺綴じ</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Short side</source>
-        <translation>短辺綴じ</translation>
-    </message>
-</context>
-<context>
-    <name>QPrintWidget</name>
-    <message>
-        <location filename="../src/gui/dialogs/qprintwidget.ui"/>
-        <source>Form</source>
-        <translation>書式</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Printer</source>
-        <translation>プリンタ</translation>
-    </message>
-    <message>
-        <location/>
-        <source>&amp;Name:</source>
-        <translation>名前(&amp;N):</translation>
-    </message>
-    <message>
-        <location/>
-        <source>P&amp;roperties</source>
-        <translation>プロパティ(&amp;r)</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Location:</source>
-        <translation>設置場所:</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Preview</source>
-        <translation>プレビュー</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Type:</source>
-        <translation>タイプ:</translation>
-    </message>
-    <message>
-        <location/>
-        <source>Output &amp;file:</source>
-        <translation>出力ファイル名(&amp;f):</translation>
-    </message>
-    <message>
-        <location/>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-</context>
-<context>
-    <name>QProcess</name>
-    <message>
-        <location filename="../src/corelib/io/qprocess_unix.cpp" line="+475"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="+147"/>
-        <source>Could not open input redirection for reading</source>
-        <translation>標準入力リダイレクトを読み込みのためにオープンすることができません</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="+36"/>
-        <source>Could not open output redirection for writing</source>
-        <translation>標準出力リダイレクトを書き込みのためにオープンすることができません</translation>
-    </message>
-    <message>
-        <location line="+241"/>
-        <source>Resource error (fork failure): %1</source>
-        <translation>リソースエラー (fork に失敗しました): %1</translation>
-    </message>
-    <message>
-        <location line="+259"/>
-        <location line="+53"/>
-        <location line="+74"/>
-        <location line="+67"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="+447"/>
-        <location line="+50"/>
-        <location line="+75"/>
-        <location line="+42"/>
-        <location line="+54"/>
-        <source>Process operation timed out</source>
-        <translation>プロセス処理がタイムアウトしました</translation>
-    </message>
-    <message>
-        <location filename="../src/corelib/io/qprocess.cpp" line="+558"/>
-        <location line="+52"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="-211"/>
-        <location line="+50"/>
-        <source>Error reading from process</source>
-        <translation>プロセスからの読み込みにおいてエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+47"/>
-        <location line="+833"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="+140"/>
-        <source>Error writing to process</source>
-        <translation>プロセスへの書き込みにおいてエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="-763"/>
-        <source>Process crashed</source>
-        <translation>プロセスがクラッシュしました</translation>
-    </message>
-    <message>
-        <location line="+966"/>
-        <source>No program defined</source>
-        <translation>プログラム名が指定されていません</translation>
-    </message>
-    <message>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="-341"/>
-        <source>Process failed to start</source>
-        <translation>プロセスのスタートに失敗しました</translation>
-    </message>
-</context>
-<context>
-    <name>QProgressDialog</name>
-    <message>
-        <location filename="../src/gui/dialogs/qprogressdialog.cpp" line="+182"/>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-</context>
-<context>
-    <name>QPushButton</name>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="-8"/>
-        <source>Open</source>
-        <translation>オープン</translation>
-    </message>
-</context>
-<context>
-    <name>QRadioButton</name>
-    <message>
-        <location line="+12"/>
-        <source>Check</source>
-        <translation>選択</translation>
-    </message>
-</context>
-<context>
-    <name>QRegExp</name>
-    <message>
-        <location filename="../src/corelib/tools/qregexp.cpp" line="+64"/>
-        <source>no error occurred</source>
-        <translation>エラーは発生しませんでした</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>disabled feature used</source>
-        <translation>無効な機能が使用されました</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>bad char class syntax</source>
-        <translation>不正なcharクラス構文</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>bad lookahead syntax</source>
-        <translation>不正なlookahead構文</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>bad repetition syntax</source>
-        <translation>不正なrepetition構文</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>invalid octal value</source>
-        <translation>無効な8進値</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>missing left delim</source>
-        <translation>左の区切り文字がありません</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>unexpected end</source>
-        <translation>予期しない末尾です</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>met internal limit</source>
-        <translation>内部制限を満たしました</translation>
-    </message>
-</context>
-<context>
-    <name>QSQLite2Driver</name>
-    <message>
-        <location filename="../src/sql/drivers/sqlite2/qsql_sqlite2.cpp" line="+396"/>
-        <source>Error to open database</source>
-        <translation>データベースのオープンでエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+41"/>
-        <source>Unable to begin transaction</source>
-        <translation>トランザクションを開始できません</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Unable to commit transaction</source>
-        <translation>トランザクションをコミットできません</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Unable to rollback Transaction</source>
-        <translation>トランザクションをロールバックできません</translation>
-    </message>
-</context>
-<context>
-    <name>QSQLite2Result</name>
-    <message>
-        <location line="-323"/>
-        <source>Unable to fetch results</source>
-        <translation>実行結果をフェッチできません</translation>
-    </message>
-    <message>
-        <location line="+147"/>
-        <source>Unable to execute statement</source>
-        <translation>ステートメントを実行できません</translation>
-    </message>
-</context>
-<context>
-    <name>QSQLiteDriver</name>
-    <message>
-        <location filename="../src/sql/drivers/sqlite/qsql_sqlite.cpp" line="+528"/>
-        <source>Error opening database</source>
-        <translation>データベースのオープンでエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Error closing database</source>
-        <translation>データベースのクローズでエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Unable to begin transaction</source>
-        <translation>トランザクションを開始できません</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Unable to commit transaction</source>
-        <translation>トランザクションをコミットできません</translation>
-    </message>
-    <message>
-        <source>Unable to roll back transaction</source>
-        <translation type="obsolete">トランザクションをロールバックできません</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Unable to rollback transaction</source>
-        <translation>トランザクションをロールバックできません</translation>
-    </message>
-</context>
-<context>
-    <name>QSQLiteResult</name>
-    <message>
-        <location line="-400"/>
-        <location line="+66"/>
-        <location line="+8"/>
-        <source>Unable to fetch row</source>
-        <translation>レコードをフェッチできません</translation>
-    </message>
-    <message>
-        <location line="+63"/>
-        <source>Unable to execute statement</source>
-        <translation>ステートメントを実行できません</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Unable to reset statement</source>
-        <translation>ステートメントをリセットできません</translation>
-    </message>
-    <message>
-        <location line="+45"/>
-        <source>Unable to bind parameters</source>
-        <translation>パラメータをバインドできません</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Parameter count mismatch</source>
-        <translation>パラメータの数が合っていません</translation>
-    </message>
-    <message>
-        <location line="-208"/>
-        <source>No query</source>
-        <translation>クェリーがありません</translation>
-    </message>
-</context>
-<context>
-    <name>QScrollBar</name>
-    <message>
-        <location filename="../src/gui/widgets/qscrollbar.cpp" line="+448"/>
-        <source>Scroll here</source>
-        <translation>ここにスクロール</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Left edge</source>
-        <translation>左端</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Top</source>
-        <translation>上端</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Right edge</source>
-        <translation>右端</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Bottom</source>
-        <translation>下端</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Page left</source>
-        <translation>１ページ左へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+143"/>
-        <source>Page up</source>
-        <translation>１ページ戻る</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Page right</source>
-        <translation>１ページ右へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+4"/>
-        <source>Page down</source>
-        <translation>１ページ進む</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Scroll left</source>
-        <translation>左へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Scroll up</source>
-        <translation>上へスクロール</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Scroll right</source>
-        <translation>右へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Scroll down</source>
-        <translation>下へスクロール</translation>
-    </message>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-6"/>
-        <source>Line up</source>
-        <translation>１行上へ</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Position</source>
-        <translation>位置</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Line down</source>
-        <translation>１行下へ</translation>
-    </message>
-</context>
-<context>
-    <name>QSharedMemory</name>
-    <message>
-        <location filename="../src/corelib/kernel/qsharedmemory.cpp" line="+207"/>
-        <source>%1: unable to set key on lock</source>
-        <translatorcomment>共有メモリ関連</translatorcomment>
-        <translation>%1: ロックするためのキーを設定できません</translation>
-    </message>
-    <message>
-        <location line="+81"/>
-        <source>%1: create size is less then 0</source>
-        <translation>%1: 0より小さいサイズの共有メモリは作成できません</translation>
-    </message>
-    <message>
-        <location line="+168"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_p.h" line="+148"/>
-        <source>%1: unable to lock</source>
-        <translation>%1: ロックできません</translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>%1: unable to unlock</source>
-        <translation>%1: アンロックできません</translation>
-    </message>
-    <message>
-        <location filename="../src/corelib/kernel/qsharedmemory_unix.cpp" line="+77"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+87"/>
-        <source>%1: permission denied</source>
-        <translation>%1: 許可されていません</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="-22"/>
-        <source>%1: already exists</source>
-        <translation>%1: 既に存在します</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+9"/>
-        <source>%1: doesn&apos;t exists</source>
-        <translation>%1: 存在しません</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+9"/>
-        <source>%1: out of resources</source>
-        <translation>%1: リソース不足です</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+7"/>
-        <source>%1: unknown error %2</source>
-        <translation>%1: 未知のエラー %2</translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>%1: key is empty</source>
-        <translation>%1: キーが空です</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>%1: unix key file doesn&apos;t exists</source>
-        <translatorcomment>?</translatorcomment>
-        <translation>%1: UNIX key file が存在しません</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>%1: ftok failed</source>
-        <translation>%1: fork に失敗しました</translation>
-    </message>
-    <message>
-        <location line="+51"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+15"/>
-        <source>%1: unable to make key</source>
-        <translation>%1: キーを作成できません</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>%1: system-imposed size restrictions</source>
-        <translatorcomment>EINVAL</translatorcomment>
-        <translation>%1: 指定されたサイズはシステムにより拒否されました</translation>
-    </message>
-    <message>
-        <location line="+53"/>
-        <source>%1: not attached</source>
-        <translation>%1: アタッチしていません</translation>
-    </message>
-    <message>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="-27"/>
-        <source>%1: invalid size</source>
-        <translation>%1: 無効なサイズです</translation>
-    </message>
-    <message>
-        <location line="+68"/>
-        <source>%1: key error</source>
-        <translatorcomment>safekey.isEmpty()==true</translatorcomment>
-        <translation>%1: キーかありません</translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>%1: size query failed</source>
-        <translation>%1: サイズのクェリーに失敗しました</translation>
-    </message>
-</context>
-<context>
-    <name>QShortcut</name>
-    <message>
-        <location filename="../src/gui/kernel/qkeysequence.cpp" line="+394"/>
-        <source>Space</source>
-        <translation>Space</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Esc</source>
-        <translation>Esc</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tab</source>
-        <translation>Tab</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Backtab</source>
-        <translation>Backtab</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Backspace</source>
-        <translation>Backspace</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Return</source>
-        <translation>Return</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Enter</source>
-        <translation>Enter</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Ins</source>
-        <translation>Ins</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Del</source>
-        <translation>Del</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Pause</source>
-        <translation>Pause</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Print</source>
-        <translation>Print</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>SysReq</source>
-        <translation>SysReq</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Home</source>
-        <translation>Home</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>End</source>
-        <translation>End</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Left</source>
-        <translation>→</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Up</source>
-        <translation>↑</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Right</source>
-        <translation>←</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Down</source>
-        <translation>↓</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>PgUp</source>
-        <translation>PgUp</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>PgDown</source>
-        <translation>PgDown</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>CapsLock</source>
-        <translation>CapsLock</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>NumLock</source>
-        <translation>NumLock</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ScrollLock</source>
-        <translation>ScrollLock</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Menu</source>
-        <translation>メニュー</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Back</source>
-        <translation>戻る</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Forward</source>
-        <translation>進む</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Stop</source>
-        <translation>停止</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Refresh</source>
-        <translation>更新間隔</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Volume Down</source>
-        <translation>音量を下げる</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Volume Mute</source>
-        <translation>消音</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Volume Up</source>
-        <translation>音量を上げる</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Bass Boost</source>
-        <translation>低音ブースト</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Bass Up</source>
-        <translation>低音を上げる</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Bass Down</source>
-        <translation>低音を下げる</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Treble Up</source>
-        <translation>高音を上げる</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Treble Down</source>
-        <translation>高音を下げる</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Media Play</source>
-        <translation>メディアの再生</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Media Stop</source>
-        <translation>メディアの停止</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Media Previous</source>
-        <translation>前のメディア</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Media Next</source>
-        <translation>次のメディア</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Media Record</source>
-        <translation>メディアの録音</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Home Page</source>
-        <translation>ホームページ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Favorites</source>
-        <translation>お気に入り</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Search</source>
-        <translation>検索</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Standby</source>
-        <translation>スタンバイ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Open URL</source>
-        <translation>URLを開く</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch Mail</source>
-        <translation>メールの起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch Media</source>
-        <translation>メディアの起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (0)</source>
-        <translation>(0)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (1)</source>
-        <translation>(1)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (2)</source>
-        <translation>(2)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (3)</source>
-        <translation>(3)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (4)</source>
-        <translation>(4)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (5)</source>
-        <translation>(5)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (6)</source>
-        <translation>(6)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (7)</source>
-        <translation>(7)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (8)</source>
-        <translation>(8)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (9)</source>
-        <translation>(9)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (A)</source>
-        <translation>(A)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (B)</source>
-        <translation>(B)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (C)</source>
-        <translation>(C)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (D)</source>
-        <translation>(D)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (E)</source>
-        <translation>(E)の起動</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Launch (F)</source>
-        <translation>(F)の起動</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Print Screen</source>
-        <translation>Print Screen</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Page Up</source>
-        <translation>Page Up</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Page Down</source>
-        <translation>Page Down</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Caps Lock</source>
-        <translation>Caps Lock</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Num Lock</source>
-        <translation>Num Lock</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Number Lock</source>
-        <translation>Number Lock</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Scroll Lock</source>
-        <translation>Scroll Lock</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Insert</source>
-        <translation>Insert</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Delete</source>
-        <translation>Delete</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Escape</source>
-        <translation>Escape</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>System Request</source>
-        <translation>System Request</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Select</source>
-        <translation>Select</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Yes</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>No</source>
-        <translation>いいえ</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Context1</source>
-        <translation>Context1</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Context2</source>
-        <translation>Context2</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Context3</source>
-        <translation>Context3</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Context4</source>
-        <translation>Context4</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Call</source>
-        <translation>Call</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Hangup</source>
-        <translation>Hangup</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Flip</source>
-        <translation>Flip</translation>
-    </message>
-    <message>
-        <location line="+559"/>
-        <location line="+135"/>
-        <source>Ctrl</source>
-        <translation>Ctrl</translation>
-    </message>
-    <message>
-        <location line="-134"/>
-        <location line="+138"/>
-        <source>Shift</source>
-        <translation>Shift</translation>
-    </message>
-    <message>
-        <location line="-137"/>
-        <location line="+135"/>
-        <source>Alt</source>
-        <translation>Alt</translation>
-    </message>
-    <message>
-        <location line="-134"/>
-        <location line="+130"/>
-        <source>Meta</source>
-        <translation>Meta</translation>
-    </message>
-    <message>
-        <location line="-40"/>
-        <source>+</source>
-        <translation>+</translation>
-    </message>
-    <message>
-        <location line="+61"/>
-        <source>F%1</source>
-        <translation>F%1</translation>
-    </message>
-</context>
-<context>
-    <name>QSlider</name>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+151"/>
-        <source>Page left</source>
-        <translation>１ページ左へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Page up</source>
-        <translation>１ページ戻る</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Position</source>
-        <translation>位置</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Page right</source>
-        <translation>1ページ右へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Page down</source>
-        <translation>１ページ進む</translation>
-    </message>
-</context>
-<context>
-    <name>QSocks5SocketEngine</name>
-    <message>
-        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="-67"/>
-        <source>Connection to proxy refused</source>
-        <translation>プロキシーへの接続が拒否されました</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Connection to proxy closed prematurely</source>
-        <translation>プロキシーの接続が通信の終了前に切断されました</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Proxy host not found</source>
-        <translation>プロキシーホストが見つかりません</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Connection to proxy timed out</source>
-        <translation>プロキシーとの接続がタイムアウトしました</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Proxy authentication failed</source>
-        <translation>プロキシーの認証に失敗しました</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Proxy authentication failed: %1</source>
-        <translation>プロキシーの認証に失敗しました: %1</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>SOCKS version 5 protocol error</source>
-        <translation>SOCKS バージョン 5 プロトコルのエラーです</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>General SOCKSv5 server failure</source>
-        <translation>SOCKS バージョン 5 サーバのエラーです</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Connection not allowed by SOCKSv5 server</source>
-        <translation>SOCKSv5 サーバより接続を拒否されました</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>TTL expired</source>
-        <translatorcomment>実際はホップ数です</translatorcomment>
-        <translation>有効期限(TTL)がきれました</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>SOCKSv5 command not supported</source>
-        <translation>この SOCKSv5 コマンドはサポートされていません</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Address type not supported</source>
-        <translation>指定されたアドレスタイプはサポートされていません</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Unknown SOCKSv5 proxy error code 0x%1</source>
-        <translation>未知の SOCKSv5 プロキシーエラーです: 0x%1</translation>
-    </message>
-    <message>
-        <source>Socks5 timeout error connecting to socks server</source>
-        <translation type="obsolete">Socks5 はソックスサーバ接続しようとしてタイムアウトになりました</translation>
-    </message>
-    <message>
-        <location line="+685"/>
-        <source>Network operation timed out</source>
-        <translation>ネットワーク操作がタイムアウトしました</translation>
-    </message>
-</context>
-<context>
-    <name>QSpinBox</name>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-574"/>
-        <source>More</source>
-        <translation>増やす</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Less</source>
-        <translation>減らす</translation>
-    </message>
-</context>
-<context>
-    <name>QSql</name>
-    <message>
-        <location filename="../src/qt3support/sql/q3sqlmanager_p.cpp" line="+890"/>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Delete this record?</source>
-        <translation>このレコードを削除しますか?</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <location line="+16"/>
-        <location line="+36"/>
-        <source>Yes</source>
-        <translation>はい</translation>
-    </message>
-    <message>
-        <location line="-51"/>
-        <location line="+16"/>
-        <location line="+36"/>
-        <source>No</source>
-        <translation>いいえ</translation>
-    </message>
-    <message>
-        <location line="-44"/>
-        <source>Insert</source>
-        <translation>挿入</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Update</source>
-        <translation>アップデート</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Save edits?</source>
-        <translation>編集内容を保存しますか?</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Confirm</source>
-        <translation>確認</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Cancel your edits?</source>
-        <translation>編集をキャンセルしますか?</translation>
-    </message>
-</context>
-<context>
-    <name>QSslSocket</name>
-    <message>
-        <location filename="../src/network/ssl/qsslsocket_openssl.cpp" line="+260"/>
-        <source>Error creating SSL context (%1)</source>
-        <translation>SSL content の作成に失敗しました (%1)</translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Invalid or empty cipher list (%1)</source>
-        <translation>暗号方式リストが無効または空です (%1)</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Cannot provide a certificate with no key, %1</source>
-        <translation>鍵が指定されていないため、証明書を扱えません。 %1</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Error loading local certificate, %1</source>
-        <translation>ローカルの証明書をロードできません。 %1</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Error loading private key, %1</source>
-        <translation>プライベートキーをロードできません。 %1</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Private key does not certificate public key, %1</source>
-        <translation>プライベートキーが、パブリックキーの証明書となっていません %1</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Error creating SSL session, %1</source>
-        <translation>SSL セッションを作成できません。 %1</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Error creating SSL session: %1</source>
-        <translation>SSL セッションを作成できません: %1</translation>
-    </message>
-    <message>
-        <location line="+207"/>
-        <source>Unable to write data: %1</source>
-        <translation>書き込みできません: %1</translation>
-    </message>
-    <message>
-        <location line="+119"/>
-        <source>Error while reading: %1</source>
-        <translation>読み込み時にエラーが発生しました: %1</translation>
-    </message>
-    <message>
-        <location line="+96"/>
-        <source>Error during SSL handshake: %1</source>
-        <translation>SSL ハンドシェーク時にエラーが発生しました: %1</translation>
-    </message>
-</context>
-<context>
-    <name>QSystemSemaphore</name>
-    <message>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_unix.cpp" line="-41"/>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_win.cpp" line="+66"/>
-        <source>%1: out of resources</source>
-        <translation>%1: リソース不足です</translation>
-    </message>
-    <message>
-        <location line="-13"/>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_win.cpp" line="+4"/>
-        <source>%1: permission denied</source>
-        <translation>%1: 許可されていません</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>%1: already exists</source>
-        <translation>%1: 既に存在します</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>%1: does not exist</source>
-        <translation>%1: 存在しません</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_win.cpp" line="+3"/>
-        <source>%1: unknown error %2</source>
-        <translation>%1: 未知のエラーです %2</translation>
-    </message>
-</context>
-<context>
-    <name>QTDSDriver</name>
-    <message>
-        <location filename="../src/sql/drivers/tds/qsql_tds.cpp" line="+584"/>
-        <source>Unable to open connection</source>
-        <translation>接続をオープンできません</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Unable to use database</source>
-        <translation>データベースを使用できません</translation>
-    </message>
-</context>
-<context>
-    <name>QTabBar</name>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/complexwidgets.cpp" line="-326"/>
-        <source>Scroll Left</source>
-        <translation>左へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Scroll Right</source>
-        <translation>右へスクロール</translation>
-    </message>
-</context>
-<context>
-    <name>QTcpServer</name>
-    <message>
-        <source>Socket operation unsupported</source>
-        <translation type="obsolete">ソケット操作はサポートされていません</translation>
-    </message>
-    <message>
-        <location filename="../src/network/socket/qtcpserver.cpp" line="+282"/>
-        <source>Operation on socket is not supported</source>
-        <translation>このソケットへの操作はサポートされていません</translation>
-    </message>
-</context>
-<context>
-    <name>QTextControl</name>
-    <message>
-        <location filename="../src/gui/text/qtextcontrol.cpp" line="+1973"/>
-        <source>&amp;Undo</source>
-        <translation>元に戻す(&amp;U)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>&amp;Redo</source>
-        <translation>やり直す(&amp;R)</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Cu&amp;t</source>
-        <translation>切り取り(&amp;T)</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>&amp;Copy</source>
-        <translation>コピー(&amp;C)</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Copy &amp;Link Location</source>
-        <translation>リンクの場所をコピー(&amp;L)</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>&amp;Paste</source>
-        <translation>貼り付け(&amp;P)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Delete</source>
-        <translation>削除</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Select All</source>
-        <translation>すべてを選択</translation>
-    </message>
-</context>
-<context>
-    <name>QToolButton</name>
-    <message>
-        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="+254"/>
-        <location line="+6"/>
-        <source>Press</source>
-        <translation>押す</translation>
-    </message>
-    <message>
-        <location line="-4"/>
-        <location line="+8"/>
-        <source>Open</source>
-        <translation>オープン</translation>
-    </message>
-</context>
-<context>
-    <name>QUdpSocket</name>
-    <message>
-        <location filename="../src/network/socket/qudpsocket.cpp" line="+169"/>
-        <source>This platform does not support IPv6</source>
-        <translation>このプラットフォームは IPv6 をサポートしていません</translation>
-    </message>
-</context>
-<context>
-    <name>QUndoGroup</name>
-    <message>
-        <location filename="../src/gui/util/qundogroup.cpp" line="+386"/>
-        <source>Undo</source>
-        <translation>元に戻す</translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Redo</source>
-        <translation>やり直す</translation>
-    </message>
-</context>
-<context>
-    <name>QUndoModel</name>
-    <message>
-        <location filename="../src/gui/util/qundoview.cpp" line="+101"/>
-        <source>&lt;empty&gt;</source>
-        <translation>&lt;空&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>QUndoStack</name>
-    <message>
-        <location filename="../src/gui/util/qundostack.cpp" line="+834"/>
-        <source>Undo</source>
-        <translation>元に戻す</translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Redo</source>
-        <translation>やり直す</translation>
-    </message>
-</context>
-<context>
-    <name>QUnicodeControlCharacterMenu</name>
-    <message>
-        <location filename="../src/gui/text/qtextcontrol.cpp" line="+884"/>
-        <source>LRM Left-to-right mark</source>
-        <translation>LRM (左横書き指定)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>RLM Right-to-left mark</source>
-        <translation>RLM (右横書き指定)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ZWJ Zero width joiner</source>
-        <translation>ZWJ (幅のない接続文字)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ZWNJ Zero width non-joiner</source>
-        <translation>ZWNJ (幅のない非接続文字)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ZWSP Zero width space</source>
-        <translation>ZWSP (幅の無い空白)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>LRE Start of left-to-right embedding</source>
-        <translation>LRE (左横書き開始指定)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>RLE Start of right-to-left embedding</source>
-        <translation>RLE (右横書き開始指定)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>LRO Start of left-to-right override</source>
-        <translation>LRO (左横書き上書き開始指定)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>RLO Start of right-to-left override</source>
-        <translation>RLO (右横書き上書き開始指定)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>PDF Pop directional formatting</source>
-        <translation>PDF (方向上書きの終了指定)</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Insert Unicode control character</source>
-        <translation>Unicode制御文字を挿入</translation>
-    </message>
-</context>
-<context>
-    <name>QWebFrame</name>
-    <message>
-        <location filename="../src/3rdparty/webkit/WebKit/qt/WebCoreSupport/FrameLoaderClientQt.cpp" line="+692"/>
-        <source>Request cancelled</source>
-        <translation>リクエストはキャンセルされました</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Request blocked</source>
-        <translation>リクエストはブロックされました</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Cannot show URL</source>
-        <translation>URL を表示できません</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Frame load interruped by policy change</source>
-        <translation>ポリシーの変更により、フレームのロードが中断しました</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Cannot show mimetype</source>
-        <translation>MIME Type を表示できません</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>File does not exist</source>
-        <translation>ファイルが存在しません</translation>
-    </message>
-</context>
-<context>
-    <name>QWebPage</name>
-    <message>
-        <location filename="../src/3rdparty/webkit/WebCore/platform/network/qt/QNetworkReplyHandler.cpp" line="+384"/>
-        <source>Bad HTTP request</source>
-        <translation>誤った HTTP のリクエストです</translation>
-    </message>
-    <message>
-        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/Localizations.cpp" line="+42"/>
-        <source>Submit</source>
-        <comment>default label for Submit buttons in forms on web pages</comment>
-        <translation>送信</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Submit</source>
-        <comment>Submit (input element) alt text for &lt;input&gt; elements with no alt, title, or value</comment>
-        <translation>送信</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Reset</source>
-        <comment>default label for Reset buttons in forms on web pages</comment>
-        <translation>リセット</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>This is a searchable index. Enter search keywords: </source>
-        <comment>text that appears at the start of nearly-obsolete web pages in the form of a &apos;searchable index&apos;</comment>
-        <translation>検索が可能です。検索のためのキーワードを入力してください: </translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Choose File</source>
-        <comment>title for file button used in HTML forms</comment>
-        <translation>ファイルを選ぶ</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>No file selected</source>
-        <comment>text to display in file button used in HTML forms when no file is selected</comment>
-        <translation>ファイルが選択されていません</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Open in New Window</source>
-        <comment>Open in New Window context menu item</comment>
-        <translation>新しいウィンドウで開く</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Save Link...</source>
-        <comment>Download Linked File context menu item</comment>
-        <translation>リンク先を保存...</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Copy Link</source>
-        <comment>Copy Link context menu item</comment>
-        <translation>リンク先をコピー</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Open Image</source>
-        <comment>Open Image in New Window context menu item</comment>
-        <translation>イメージを開く</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Save Image</source>
-        <comment>Download Image context menu item</comment>
-        <translation>画像を保存</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Copy Image</source>
-        <comment>Copy Link context menu item</comment>
-        <translation>画像をコピー</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Open Frame</source>
-        <comment>Open Frame in New Window context menu item</comment>
-        <translation>フレームを新しいウィンドウで開く</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Copy</source>
-        <comment>Copy context menu item</comment>
-        <translation>コピー</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Go Back</source>
-        <comment>Back context menu item</comment>
-        <translation>戻る</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Go Forward</source>
-        <comment>Forward context menu item</comment>
-        <translation>進む</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Stop</source>
-        <comment>Stop context menu item</comment>
-        <translation>停止</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Reload</source>
-        <comment>Reload context menu item</comment>
-        <translation>リロード</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Cut</source>
-        <comment>Cut context menu item</comment>
-        <translation>切り取り</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Paste</source>
-        <comment>Paste context menu item</comment>
-        <translation>貼り付け</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>No Guesses Found</source>
-        <comment>No Guesses Found context menu item</comment>
-        <translation>推測候補はありません</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Ignore</source>
-        <comment>Ignore Spelling context menu item</comment>
-        <translation>無視</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Add To Dictionary</source>
-        <comment>Learn Spelling context menu item</comment>
-        <translation>辞書に追加</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Search The Web</source>
-        <comment>Search The Web context menu item</comment>
-        <translation>Web を検索</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Look Up In Dictionary</source>
-        <comment>Look Up in Dictionary context menu item</comment>
-        <translation>辞書から探す</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Open Link</source>
-        <comment>Open Link context menu item</comment>
-        <translation>リンクを開く</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Ignore</source>
-        <comment>Ignore Grammar context menu item</comment>
-        <translation>無視</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Spelling</source>
-        <comment>Spelling and Grammar context sub-menu item</comment>
-        <translation>スペル</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Show Spelling and Grammar</source>
-        <comment>menu item title</comment>
-        <translation>スペルと文法を表示</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Hide Spelling and Grammar</source>
-        <comment>menu item title</comment>
-        <translation>スペルと文法を隠す</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Check Spelling</source>
-        <comment>Check spelling context menu item</comment>
-        <translation>スペルをチェックする</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Check Spelling While Typing</source>
-        <comment>Check spelling while typing context menu item</comment>
-        <translation>入力中にスペルをチェックする</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Check Grammar With Spelling</source>
-        <comment>Check grammar with spelling context menu item</comment>
-        <translation>スペルおよび文法をチェックする</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Fonts</source>
-        <comment>Font context sub-menu item</comment>
-        <translation>フォント</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Bold</source>
-        <comment>Bold context menu item</comment>
-        <translation>太字</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Italic</source>
-        <comment>Italic context menu item</comment>
-        <translation>イタリック</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Underline</source>
-        <comment>Underline context menu item</comment>
-        <translation>下線</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Outline</source>
-        <comment>Outline context menu item</comment>
-        <translation>アウトライン</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Direction</source>
-        <comment>Writing direction context sub-menu item</comment>
-        <translation>方向</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Text Direction</source>
-        <comment>Text direction context sub-menu item</comment>
-        <translation>テキストの方向</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Default</source>
-        <comment>Default writing direction context menu item</comment>
-        <translation>デフォルト</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>LTR</source>
-        <comment>Left to Right context menu item</comment>
-        <translation>左横書き</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>RTL</source>
-        <comment>Right to Left context menu item</comment>
-        <translation>右横書き</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Inspect</source>
-        <comment>Inspect Element context menu item</comment>
-        <translatorcomment>?</translatorcomment>
-        <translation>検査</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>No recent searches</source>
-        <comment>Label for only item in menu that appears when clicking on the search field image, when no searches have been performed</comment>
-        <translation>検索の履歴はありません</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Recent searches</source>
-        <comment>label for first item in the menu that appears when clicking on the search field image, used as embedded menu title</comment>
-        <translation>検索の履歴</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Clear recent searches</source>
-        <comment>menu item in Recent Searches menu that empties menu&apos;s contents</comment>
-        <translation>検索の履歴をクリア</translation>
-    </message>
-    <message>
-        <location line="+75"/>
-        <source>Unknown</source>
-        <comment>Unknown filesize FTP directory listing item</comment>
-        <translation>不明</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>%1 (%2x%3 pixels)</source>
-        <comment>Title string for images</comment>
-        <translation>%1 (%2x%3 ピクセル)</translation>
-    </message>
-    <message>
-        <location filename="../src/3rdparty/webkit/WebKit/qt/WebCoreSupport/InspectorClientQt.cpp" line="+185"/>
-        <source>Web Inspector - %2</source>
-        <translation>Web の検査 - %2</translation>
-    </message>
-    <message>
-        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/ScrollbarQt.cpp" line="+58"/>
-        <source>Scroll here</source>
-        <translation>ここにスクロール</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Left edge</source>
-        <translation>左端</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Top</source>
-        <translation>上端</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Right edge</source>
-        <translation>右端</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Bottom</source>
-        <translation>下端</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Page left</source>
-        <translation>1ページ左へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Page up</source>
-        <translation>1ページ戻る</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Page right</source>
-        <translation>1ページ右へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Page down</source>
-        <translation>1ページ進む</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Scroll left</source>
-        <translation>左へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Scroll up</source>
-        <translation>上へスクロール</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Scroll right</source>
-        <translation>右へスクロール</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Scroll down</source>
-        <translation>下へスクロール</translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/FileChooserQt.cpp" line="+45"/>
-        <source>%n file(s)</source>
-        <comment>number of chosen file</comment>
-        <translation>
-            <numerusform>%n 個のファイル</numerusform>
-        </translation>
-    </message>
-    <message>
-        <location filename="../src/3rdparty/webkit/WebKit/qt/Api/qwebpage.cpp" line="+1322"/>
-        <source>JavaScript Alert - %1</source>
-        <translation>JavaScript アラート - %1</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>JavaScript Confirm - %1</source>
-        <translation>JavaScript 確認 - %1</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>JavaScript Prompt - %1</source>
-        <translation>JavaScript 質問 - %1</translation>
-    </message>
-    <message>
-        <location line="+340"/>
-        <source>Move the cursor to the next character</source>
-        <translation>次の文字へカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the previous character</source>
-        <translation>前の文字にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the next word</source>
-        <translation>次の単語にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the previous word</source>
-        <translation>前の単語にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the next line</source>
-        <translation>次の行にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the previous line</source>
-        <translation>前の行にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the start of the line</source>
-        <translatorcomment>文なのか行なのか</translatorcomment>
-        <translation>文頭にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the end of the line</source>
-        <translation>文末にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the start of the block</source>
-        <translation>ブロックの先頭にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the end of the block</source>
-        <translation>ブロックの末尾にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the start of the document</source>
-        <translation>文章の先頭にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move the cursor to the end of the document</source>
-        <translation>文章の末尾にカーソルを移動</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select all</source>
-        <translation>すべてを選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the next character</source>
-        <translation>次の文字を選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the previous character</source>
-        <translation>前の文字を選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the next word</source>
-        <translation>次の単語を選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the previous word</source>
-        <translation>前の単語を選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the next line</source>
-        <translation>次の行を選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the previous line</source>
-        <translation>前の行を選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the start of the line</source>
-        <translation>文頭から選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the end of the line</source>
-        <translation>文末まで選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the start of the block</source>
-        <translation>ブロックの先頭から選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the end of the block</source>
-        <translation>ブロックの末尾まで選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the start of the document</source>
-        <translation>ドキュメントの先頭から選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Select to the end of the document</source>
-        <translation>ドキュメントの末尾まで選択</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Delete to the start of the word</source>
-        <translation>単語の先頭まで削除</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Delete to the end of the word</source>
-        <translation>単語の末尾まで削除</translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Insert a new paragraph</source>
-        <translation>新しい段落を挿入</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Insert a new line</source>
-        <translation>新しい行を挿入</translation>
-    </message>
-</context>
-<context>
-    <name>QWhatsThisAction</name>
-    <message>
-        <location filename="../src/gui/kernel/qwhatsthis.cpp" line="+522"/>
-        <source>What&apos;s This?</source>
-        <translation>ヒント?</translation>
+        <source>Please select one or more staves and retry operation
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <location filename="../src/gui/kernel/qwidget.cpp" line="+5288"/>
-        <source>*</source>
-        <translation>*</translation>
-    </message>
-</context>
-<context>
-    <name>QWizard</name>
-    <message>
-        <location filename="../src/gui/dialogs/qwizard.cpp" line="+637"/>
-        <source>Go Back</source>
-        <translation>戻る</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Continue</source>
-        <translation>続き</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Commit</source>
-        <translation>適用</translation>
+        <location filename="../../mscore/capella.cpp" line="+1338"/>
+        <source>MuseScore: Import Capella</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Done</source>
-        <translation>終了</translation>
+        <location filename="../../mscore/file.cpp" line="-470"/>
+        <location line="+7"/>
+        <location line="+800"/>
+        <location line="+22"/>
+        <location filename="../../mscore/importmidi.cpp" line="+1349"/>
+        <location filename="../../mscore/instrdialog.cpp" line="+11"/>
+        <location filename="../../mscore/mscore.cpp" line="-1290"/>
+        <location line="+434"/>
+        <location line="+43"/>
+        <location filename="../../mscore/palette.cpp" line="-227"/>
+        <location line="+484"/>
+        <location filename="../../mscore/sym.cpp" line="+607"/>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <location line="-14"/>
-        <source>&lt; &amp;Back</source>
-        <translation>&lt; 戻る(&amp;B)</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>&amp;Finish</source>
-        <translation>完了(&amp;F)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Cancel</source>
-        <translation>キャンセル</translation>
+        <location filename="../../mscore/editstyle.cpp" line="+276"/>
+        <source>MuseScore: Load Chord Description</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>&amp;Help</source>
-        <translation>ヘルプ(&amp;H)</translation>
+        <location filename="../../mscore/harmonyedit.cpp" line="+79"/>
+        <location line="+24"/>
+        <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-8"/>
-        <source>&amp;Next</source>
-        <translation>次へ(&amp;N)</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>&amp;Next &gt;</source>
-        <translation>次へ(&amp;N) &gt;</translation>
-    </message>
-</context>
-<context>
-    <name>QWorkspace</name>
-    <message>
-        <location filename="../src/gui/widgets/qworkspace.cpp" line="+1094"/>
-        <source>&amp;Restore</source>
-        <translation>元に戻す(&amp;R)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Move</source>
-        <translation>移動(&amp;M)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Size</source>
-        <translation>サイズを変更(&amp;S)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Mi&amp;nimize</source>
-        <translation>最小化(&amp;N)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Ma&amp;ximize</source>
-        <translation>最大化(&amp;X)</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>&amp;Close</source>
-        <translation>閉じる(&amp;C)</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Stay on &amp;Top</source>
-        <translation>常に手前に表示(&amp;T)</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1059"/>
-        <source>Sh&amp;ade</source>
-        <translation>シェード(&amp;A)</translation>
-    </message>
-    <message>
-        <location line="-278"/>
-        <location line="+60"/>
-        <source>%1 - [%2]</source>
-        <translation>%1 - [%2]</translation>
-    </message>
-    <message>
-        <location line="-1837"/>
-        <source>Minimize</source>
-        <translation>最小化</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Restore Down</source>
-        <translation>元に戻す</translation>
-    </message>
-    <message>
-        <location line="-4"/>
-        <source>Close</source>
-        <translation>閉じる</translation>
-    </message>
-    <message>
-        <location line="+2053"/>
-        <source>&amp;Unshade</source>
-        <translation>シェードを解除(&amp;U)</translation>
-    </message>
-</context>
-<context>
-    <name>QXml</name>
-    <message>
-        <location filename="../src/xml/sax/qxml.cpp" line="+58"/>
-        <source>no error occurred</source>
-        <translation>エラーは発生しませんでした</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>error triggered by consumer</source>
-        <translation>消費者によってエラーが誘発されました</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>unexpected end of file</source>
-        <translation>予期せぬファイルの終りです</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>more than one document type definition</source>
-        <translation>ドキュメントタイプの定義が複数あります</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>error occurred while parsing element</source>
-        <translation>要素の解析中にエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>tag mismatch</source>
-        <translation>タグが一致しません</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>error occurred while parsing content</source>
-        <translation>コンテンツの解析中にエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>unexpected character</source>
-        <translation>予期しない文字です</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>invalid name for processing instruction</source>
-        <translation>処理の指示に無効な名前です</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>version expected while reading the XML declaration</source>
-        <translation>XML宣言を読み込むにはバージョンが必要です</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>wrong value for standalone declaration</source>
-        <translation>スタンドアロン宣言として正しくない値です</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>encoding declaration or standalone declaration expected while reading the XML declaration</source>
-        <translation>XML宣言を読み込むにはエンコーディング宣言かスタンドアローン宣言が必要です</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>standalone declaration expected while reading the XML declaration</source>
-        <translation>XML宣言を読み込むにはスタンドアローン宣言が必要です</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>error occurred while parsing document type definition</source>
-        <translation>ドキュメントタイプの定義を解析中にエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>letter is expected</source>
-        <translation>文字が必要です</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>error occurred while parsing comment</source>
-        <translation>コメントの解析中にエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>error occurred while parsing reference</source>
-        <translation>参照の解析中にエラーが発生しました</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>internal general entity reference not allowed in DTD</source>
-        <translation>内部一般エンティティ参照はDTDで許されていません</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>external parsed general entity reference not allowed in attribute value</source>
-        <translation>解析された外部一般エンティティ参照は属性値で許されていません</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>external parsed general entity reference not allowed in DTD</source>
-        <translation>解析された外部一般エンティティ参照はDTDで許されていません</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>unparsed entity reference in wrong context</source>
-        <translation>不正な文脈で解析されないエンティティ参照です</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>recursive entities</source>
-        <translation>再帰的エンティティ</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>error in the text declaration of an external entity</source>
-        <translation>外部エンティティのテキスト宣言にエラーがあります</translation>
-    </message>
-</context>
-<context>
-    <name>QXmlStream</name>
-    <message>
-        <location filename="../src/corelib/xml/qxmlstream.cpp" line="+592"/>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+1770"/>
-        <source>Extra content at end of document.</source>
-        <translation>ドキュメントの末尾に余計なものがついています。</translation>
-    </message>
-    <message>
-        <location line="+222"/>
-        <source>Invalid entity value.</source>
-        <translation>エンティティの値が無効です。</translation>
-    </message>
-    <message>
-        <location line="+107"/>
-        <source>Invalid XML character.</source>
-        <translation>無効な XML 文字です。</translation>
-    </message>
-    <message>
-        <location line="+259"/>
-        <source>Sequence &apos;]]&gt;&apos; not allowed in content.</source>
-        <translation>このコンテキストでは、&apos;]]&gt;&apos; は許可されていません。</translation>
-    </message>
-    <message>
-        <location line="+279"/>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="-691"/>
-        <source>Encountered incorrectly encoded content.</source>
-        <translation>正しくないエンコードの文脈に遭遇しました。</translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Namespace prefix &apos;%1&apos; not declared</source>
-        <translation>名前空間のブリフィックス &apos;%1&apos; は宣言されていません</translation>
-    </message>
-    <message>
-        <location line="+78"/>
-        <source>Attribute redefined.</source>
-        <translation>属性が再度指定されています。</translation>
-    </message>
-    <message>
-        <location line="+115"/>
-        <source>Unexpected character &apos;%1&apos; in public id literal.</source>
-        <translatorcomment>DTD宣言の部分</translatorcomment>
-        <translation>公開 ID 指定に使用できない文字 &apos;%1&apos; が使用されています。</translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Invalid XML version string.</source>
-        <translation>無効な XML バージョン指定です。</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Unsupported XML version.</source>
-        <translation>この XML のバージョンはサポートされていません。</translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>The standalone pseudo attribute must appear after the encoding.</source>
-        <translatorcomment>&amp;ddd; は、エンコーディングを指定していないと使えないということかな。utf8だとおもうけど。</translatorcomment>
-        <translation>仮想属性指定は、エンコーディング指定の後にのみ使用できます。</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>%1 is an invalid encoding name.</source>
-        <translation>%1 は無効なエンコーディングの名前です。</translation>
+        <location filename="../../mscore/file.cpp" line="-831"/>
+        <source>MuseScore: file not found:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Encoding %1 is unsupported</source>
-        <translation>エンコーディング &apos;%1&apos; はサポートされていません</translation>
+        <source>MuseScore: load failed:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
-        <source>Standalone accepts only yes or no.</source>
-        <translation>standalone の指定は yes または no のみ指定できます。</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Invalid attribute in XML declaration.</source>
-        <translation>XML 宣言に無効な属性がついています。</translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Premature end of document.</source>
-        <translation>ドキュメントが途中で終わっています。</translation>
+        <location line="+789"/>
+        <location filename="../../mscore/preferences.cpp" line="+436"/>
+        <source>MuseScore: Load Style</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Invalid document.</source>
-        <translation>無効なドキュメントです。</translation>
+        <location filename="../../mscore/preferences.cpp" line="+2"/>
+        <source>MuseScore Styles (*.mss);;All Files (*)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+40"/>
-        <source>Expected </source>
-        <translation>予期していた表現は、</translation>
+        <location line="+9"/>
+        <location line="+22"/>
+        <source>MuseScore: Load Style failed:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
-        <source>, but got &apos;</source>
-        <translation>ですが、取得した表現は以下のものでした &apos;</translation>
+        <location filename="../../mscore/harmony.cpp" line="+687"/>
+        <source>MuseScore: Open chord list failed:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Unexpected &apos;</source>
-        <translation>予期していなかった表現 &apos;</translation>
+        <location line="+12"/>
+        <source>MuseScore: Load chord list failed:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+210"/>
-        <source>Expected character data.</source>
-        <translation>予期していた文字列。</translation>
+        <location filename="../../mscore/harmonyedit.cpp" line="-26"/>
+        <source>MuseScore: Load Chord Description File</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="-304"/>
-        <source>Recursive entity detected.</source>
-        <translation>再帰しているエンティティを発見しました。</translation>
+        <location line="+24"/>
+        <source>MuseScore: Save Chord Description File</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+516"/>
-        <source>Start tag expected.</source>
-        <translation>開始タグをよきしていましたが、みつかりません。</translation>
+        <location filename="../../mscore/importmidi.cpp" line="-2"/>
+        <source>MuseScore: load midi</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+191"/>
-        <source>NDATA in parameter entity declaration.</source>
-        <translation>パラメータエンティティの宣言において NDATA があります。</translation>
+        <location filename="../../mscore/instrdialog.cpp" line="-2"/>
+        <source>MuseScore: load Style failed:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+31"/>
-        <source>XML declaration not at start of document.</source>
-        <translation>XML 宣言がドキュメントの先頭にありません。</translation>
+        <location filename="../../mscore/mscore.cpp" line="-481"/>
+        <source>MuseScore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>reading file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+435"/>
+        <source>MuseScore: Load languages failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>MuseScore: invalid command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/palette.cpp" line="-486"/>
+        <source>MuseScore: Load Palette failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+484"/>
+        <source>MuseScore: Load Palettes failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/plugins.cpp" line="-7"/>
+        <location line="+9"/>
+        <source>MuseScore: register script plugin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/sym.cpp" line="-2"/>
+        <source>MuseScore: Load font symbols failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RecordButton</name>
+    <message>
+        <location filename="../../mscore/utils.cpp" line="-359"/>
+        <source>record</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Rest</name>
+    <message>
+        <location filename="../../mscore/rest.cpp" line="+419"/>
+        <source>Rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Tuplet...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tuplet Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Delete Tuplet</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>%1 is an invalid processing instruction name.</source>
-        <translatorcomment>XMLにそんなのあったっけ?</translatorcomment>
-        <translation>%1 は無効な処理指定の名前です。</translation>
+        <source>Rest Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RestPropertyBase</name>
+    <message>
+        <location filename="../../mscore/restproperties.ui" line="+14"/>
+        <source>Chord Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Rest Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>small</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>additional leading space </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+20"/>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>additional trailing space</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SLineBase</name>
+    <message>
+        <location filename="../../mscore/line.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>SLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>tick2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Anchor:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>SEGMENT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>MEASURE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>digonal</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+11"/>
-        <source>Invalid processing instruction name.</source>
-        <translation>無効な処理命令です。</translation>
+        <source>LineSegments</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+114"/>
-        <source>%1 is an invalid PUBLIC identifier.</source>
-        <translation>%1 は、公開 (PUBLIC) 識別子として無効です。</translation>
+        <location line="+8"/>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Score</name>
+    <message>
+        <location filename="../../mscore/cmd.cpp" line="+1419"/>
+        <source>No staves found:
+please use the instruments dialog to
+first create some staves</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/corelib/xml/qxmlstream.cpp" line="-521"/>
-        <location line="+12"/>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+50"/>
-        <location line="+53"/>
-        <source>Illegal namespace declaration.</source>
-        <translation>無効な名前空間の指定です。</translation>
+        <location line="+58"/>
+        <source>No Measure selected:
+please select a measure and try again</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+15"/>
-        <source>Invalid XML name.</source>
-        <translation>無効な XML 名です。</translation>
+        <location filename="../../mscore/edit.cpp" line="+441"/>
+        <source>MuseScore</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
-        <source>Opening and ending tag mismatch.</source>
-        <translation>開始タグと、終了タグがマッチしません。</translation>
+        <location line="+1"/>
+        <source>The first time signature of a piece can not be removed.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../mscore/file.cpp" line="-706"/>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>MuseScore File (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MuseScore: Save Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>The following file is locked: 
+%1 
+
+Try saving to a different location.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+15"/>
         <location line="+18"/>
-        <source>Reference to unparsed entity &apos;%1&apos;.</source>
-        <translation>まだパースしていないエンティティ &apos;%1&apos; を参照しています。</translation>
+        <location line="+25"/>
+        <location line="+12"/>
+        <location line="+11"/>
+        <source>MuseScore: Save File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-50"/>
+        <source>Open Temp File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location line="+487"/>
+        <location line="+109"/>
+        <location line="+107"/>
+        <source>
+failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-691"/>
+        <location line="+4"/>
+        <source>MuseScore: Save File failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>removing old backup file </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source> failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>renaming old file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&gt; to backup &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>&gt; failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>renaming temp. file &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>&gt; to &lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>&gt; failed:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Compressed MuseScore Format (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>MusicXML Format (*.xml)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Compressed MusicXML Format (*.mxl)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Standard MIDI File (*.mid)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PDF File (*.pdf)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PNG Bitmap Graphic (*.png)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Scalable Vector Graphic (*.svg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lilypond Format (*.ly)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+43"/>
+        <location line="+32"/>
+        <source>MuseScore: Save As</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-32"/>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+347"/>
+        <location line="+109"/>
+        <source>Open File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+94"/>
+        <source>MuseScore: Save Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MuseScore Style File (*.mss)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Open Style File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MuseScore: Open Style file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Write Style failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>MuseScore: Write Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+150"/>
+        <source>MuseScore: Read File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/importmidi.cpp" line="+1"/>
+        <source>Load failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/transposedialog.cpp" line="+103"/>
+        <source>MuseScore: transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>There is nothing selected. Transpose whole score?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ScoreView</name>
+    <message>
+        <location filename="../../mscore/scoreview.cpp" line="+796"/>
+        <source>Select</source>
+        <translation type="unfinished">Select</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>More...</source>
+        <translation type="unfinished">その他...</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+88"/>
+        <source>Object Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-33"/>
+        <source>Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Edit Drumset...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Drumroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Pianoroll Editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Staff Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Split Staff...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+710"/>
+        <source>unknown drop format: formats %1:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SegmentBase</name>
+    <message>
+        <location filename="../../mscore/segment.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Clef Segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Key Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Time Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Begin Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Chord/Rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Breath Segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>End Bar Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Time Signature Announce</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Lyrics:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Segment Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SelectDialog</name>
+    <message>
+        <location filename="../../mscore/select.ui" line="+14"/>
+        <source>MuseScore: Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Search for</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Element Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>same voice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>same system</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>replace selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>add to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>search in selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>subtract from selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <location filename="../../mscore/selectinstr.ui" line="+14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>show more</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Seq</name>
+    <message>
+        <location filename="../../mscore/seq.cpp" line="+207"/>
+        <source>Init audio driver failed.
+Sequencer will be disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <location line="+14"/>
+        <source>MuseScore: Load SoundFont</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-13"/>
-        <location line="+61"/>
-        <location line="+40"/>
-        <source>Entity &apos;%1&apos; not declared.</source>
-        <translation>エンティティ &apos;%1&apos; は宣言されていません。</translation>
+        <source>No SoundFont configured
+Playback will be disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Loading SoundFont
+&quot;%1&quot;
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
+and check that the file location is correct</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShortcutCaptureDialog</name>
+    <message>
+        <location filename="../../mscore/shortcutcapturedialog.cpp" line="+80"/>
+        <source>Shortcut conflicts with </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Undefined</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShortcutCaptureDialogBase</name>
+    <message>
+        <location filename="../../mscore/shortcutcapturedialog.ui" line="+13"/>
+        <source>Enter shortcut sequence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Press up to 4 keys to enter shortcut sequence!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Old shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>New shortcut:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Clear</source>
+        <translation type="unfinished">消去</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Cancel</source>
+        <translation type="unfinished">キャンセル</translation>
+    </message>
+</context>
+<context>
+    <name>ShowChordWidget</name>
+    <message>
+        <location filename="../../mscore/inspector.cpp" line="+662"/>
+        <source>auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>beam begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>beam mid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>beam end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>no beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>begin 1/32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Up</source>
+        <translation type="unfinished">↑</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Down</source>
+        <translation type="unfinished">↓</translation>
+    </message>
+</context>
+<context>
+    <name>ShowClefWidget</name>
+    <message>
+        <location line="+378"/>
+        <source>Clef Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShowRestWidget</name>
+    <message>
+        <location line="-118"/>
+        <source>auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>beam begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>beam mid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>beam end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>no beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>begin 1/32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Segment:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SlurBase</name>
+    <message>
+        <location filename="../../mscore/slur.ui" line="+13"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Slur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Slur End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Staff:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Voice:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Tick:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SlurPropertyBase</name>
+    <message>
+        <location filename="../../mscore/slurproperties.ui" line="+14"/>
+        <source>Volta Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Slur Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>solid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>dotted</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SlurSegment</name>
+    <message>
+        <location filename="../../mscore/slur.cpp" line="+406"/>
+        <source>Edit Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Slur Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SlurTieBase</name>
+    <message>
+        <location filename="../../mscore/slurtie.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+97"/>
+        <source>startElement</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SplitStaff</name>
+    <message>
+        <location filename="../../mscore/splitstaff.ui" line="+20"/>
+        <source>MuseScore: Edit Staff/Part Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Split Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Split Point</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StaffText</name>
+    <message>
+        <location filename="../../mscore/stafftext.cpp" line="+79"/>
+        <source>Staff Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StaffTextProperties</name>
+    <message>
+        <location filename="../../mscore/stafftext.ui" line="+13"/>
+        <source>MuseScore: Staff Text Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Channel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Midi Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/stafftext.cpp" line="+32"/>
+        <source>normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SymbolDialog</name>
+    <message>
+        <location filename="../../mscore/symboldialog.cpp" line="+49"/>
+        <source>MuseScore: Symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SymbolDialogBase</name>
+    <message>
+        <location filename="../../mscore/symboldialog.ui" line="+13"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>System Flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SynthControl</name>
+    <message>
+        <location filename="../../mscore/synthcontrol.ui" line="+14"/>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Rev</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Cho</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>master volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Vol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Loaded SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location line="+193"/>
+        <location line="+164"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location line="-346"/>
+        <source>Master Tuning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Reverb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Room Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Damp:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Width:</source>
+        <translation type="unfinished">幅:</translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <location line="+164"/>
+        <source>Preset:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-150"/>
+        <location line="+164"/>
+        <source>not implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-112"/>
+        <source>Chorus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Type:</source>
+        <translation type="unfinished">タイプ:</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Sine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Triangle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Speed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Depth:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/synthcontrol.cpp" line="+155"/>
+        <source>Choose Synthesizer SoundFont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TempoProperties</name>
+    <message>
+        <location filename="../../mscore/tempoproperties.ui" line="+13"/>
+        <source>MuseScore: Tempo Text Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Tempo Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Tempo:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>BPM</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TempoText</name>
+    <message>
+        <location filename="../../mscore/tempotext.cpp" line="+76"/>
+        <source>Tempo Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Text</name>
+    <message>
+        <location filename="../../mscore/text.cpp" line="+1316"/>
+        <source>Set Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextBase</name>
+    <message>
+        <location filename="../../mscore/text.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Text</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Text:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Offset:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+54"/>
+        <source>MM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Space</source>
+        <translation type="unfinished">Space</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Type:</source>
+        <translation type="unfinished">タイプ:</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Abs.:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Rel.:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>TextStyle:</source>
+        <comment>do not translate</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <location filename="../../mscore/text.cpp" line="+176"/>
+        <source>Set Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Text Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextLineBase</name>
+    <message>
+        <location filename="../../mscore/textline.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>TextLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>BeginText</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>ContinueText</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextLineSegment</name>
+    <message>
+        <location filename="../../mscore/textline.cpp" line="-45"/>
+        <source>Set Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set Visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Line Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextPaletteBase</name>
+    <message>
+        <location filename="../../mscore/textpalette.ui" line="+77"/>
+        <source>MuseScore: Special Text Symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+84"/>
+        <source>Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextProp</name>
+    <message>
+        <location filename="../../mscore/textproperties.cpp" line="+55"/>
+        <source>mm</source>
+        <comment>millimeter unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>sp</source>
+        <comment>spatium unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextProperties</name>
+    <message>
+        <location filename="../../mscore/text.cpp" line="-55"/>
+        <source>MuseScore: Text Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>apply to all elements of same type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextPropertiesBase</name>
+    <message>
+        <location filename="../../mscore/textproperties.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>font face</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Size:</source>
+        <translation type="unfinished">サイズ:</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>font point size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>bold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>italic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>I</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>underline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>U</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Align:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>align left edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <location line="+23"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location line="-95"/>
+        <source>center text on reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>align right edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>align top edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>center text vertical to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>align bottom edge of text to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <location line="+335"/>
+        <source>Color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-316"/>
+        <source>text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>System Flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>X:</source>
+        <extracomment>coordinate</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>horizontal offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>relX:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>reference point offset in percent of parent width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+59"/>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-36"/>
+        <source>Y:</source>
+        <extracomment>coordinate</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>vertical offset to reference point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>relY:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>reference point offset in percent of parent height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Unit:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>offset is absolute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>MM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>offset in Space units</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Space</source>
+        <translation type="unfinished">Space</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>enable text frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>draw circled frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>draw boxed frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Width:</source>
+        <translation type="unfinished">幅:</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>frame line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+20"/>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-10"/>
+        <source>Margin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>frame inner margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Round:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>corner round</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>frame color</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextStyleDialog</name>
+    <message>
+        <location filename="../../mscore/textstyle.cpp" line="+38"/>
+        <source>MuseScore: Edit Text Styles</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TextTools</name>
+    <message>
+        <location filename="../../mscore/textpalette.cpp" line="+55"/>
+        <source>Text Tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Text Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeDialog</name>
+    <message>
+        <location filename="../../mscore/timedialog.cpp" line="+37"/>
+        <source>MuseScore: Time Signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>4/4 common time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>2/2 alla breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeDialogBase</name>
+    <message>
+        <location filename="../../mscore/timedialog.ui" line="+78"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+101"/>
+        <source>Create Time Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+58"/>
+        <location line="+26"/>
+        <location line="+26"/>
+        <source>+</source>
+        <translation type="unfinished">+</translation>
+    </message>
+    <message>
+        <location line="+118"/>
+        <source>add time signature to palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimesigWizard</name>
+    <message>
+        <location filename="../../mscore/timesigwizard.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Enter Time Signature:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Time Signature: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <location line="+70"/>
+        <source>/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-41"/>
+        <source>Pickup Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Time Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+55"/>
+        <source>Enter Number of Measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TransposeDialogBase</name>
+    <message>
+        <location filename="../../mscore/transposedialog.ui" line="+14"/>
+        <source>MuseScore: Transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Transpose by Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Cb major / Ab minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Gb major / Eb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Db major / Bb minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Ab major / F minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Eb major / C minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Bb major / G minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>F major / D minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>C major / A minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>G major / E minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>D major / B minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>A major / F# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>E major / C# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>B major / G# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>F# major / D# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>C# major / A# minor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <location line="+51"/>
+        <source>Up</source>
+        <translation type="unfinished">↑</translation>
+    </message>
+    <message>
+        <location line="-44"/>
+        <location line="+188"/>
+        <source>Down</source>
+        <translation type="unfinished">↓</translation>
+    </message>
+    <message>
+        <location line="-181"/>
+        <source>Closest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Transpose by Interval</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Perfect Unison</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Unison</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Minor Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Major Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Second</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Minor Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Major Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Third</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Perfect Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Fourth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Fifth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Perfect Fifth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Fifth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Minor Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Major Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Sixth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Minor Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Major Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Augmented Seventh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Diminished Octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Perfect Octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Options</source>
+        <translation type="unfinished">オプション</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Transpose key signatures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Transpose chord names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Single sharps and flats only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Use double sharps and flats</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TremoloBase</name>
+    <message>
+        <location filename="../../mscore/tremolo.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>firstChord</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>secondChord</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Tuplet</name>
+    <message>
+        <location filename="../../mscore/tuplet.cpp" line="+563"/>
+        <source>Tuplet Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TupletBase</name>
+    <message>
+        <location filename="../../mscore/tuplet.ui" line="+14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TupletDialog</name>
+    <message>
+        <location filename="../../mscore/tupletdialog.ui" line="+14"/>
+        <source>MuseScore: create tuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Type</source>
+        <translation type="unfinished">タイプ</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>relation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>relation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+39"/>
+        <source>nothing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-29"/>
+        <source>Bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>auto bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TupletProperties</name>
+    <message>
+        <location filename="../../mscore/tupletproperties.ui" line="+13"/>
+        <source>MuseScore: Tuplet Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>relation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+36"/>
+        <source>nothing</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-26"/>
-        <source>Reference to external entity &apos;%1&apos; in attribute value.</source>
-        <translation>属性値として、外部エンティティ &apos;%1&apos; を再度指定しています。</translation>
+        <source>Bracket</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+40"/>
-        <source>Invalid character reference.</source>
-        <translation>無効な文字への参照です。</translation>
+        <location line="+12"/>
+        <source>auto bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>UpdateChecker</name>
+    <message>
+        <location filename="../../mscore/updatechecker.cpp" line="+79"/>
+        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Update Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+1"/>
+        <source>No Update Available</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VBox</name>
+    <message>
+        <location filename="../../mscore/box.cpp" line="+52"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>VBox Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VoltaPropertyBase</name>
+    <message>
+        <location filename="../../mscore/voltaproperties.ui" line="+13"/>
+        <location line="+24"/>
+        <source>Volta Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Repeat List:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VoltaSegment</name>
+    <message>
+        <location filename="../../mscore/volta.cpp" line="+176"/>
+        <source>Volta Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Line Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>accidental</name>
+    <message>
+        <location filename="../../mscore/accidental.cpp" line="+38"/>
+        <source>none</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>double sharp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>double flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>natural</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>(sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>(flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>(double sharp)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>(double flat)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>(natural)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>[sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>[flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>[double sharp]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>[double flat]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>[natural]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>mirrored-flat2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>mirrored-flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>mirrored-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat-flat-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>sharp-slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp-slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp-slash3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp-slash4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>sharp arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp arrow down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp arrow both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat arrow down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat arrow both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>natural arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>natural arrow down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>natural arrow both</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>action</name>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="+33"/>
+        <source>Local handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Local &amp;Handbook...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show local handbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>File open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Open...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Load score from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>File save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Save</source>
+        <translation type="unfinished">保存</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Save score to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>File save as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Save score under a new file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>File save a copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Save a Copy...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Save a copy of the score in addition to the current file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>File reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Reload</source>
+        <translation type="unfinished">リロード</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Reload score from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>File close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Close</source>
+        <translation type="unfinished">閉じる</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Close current score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>file new</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>New...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Create new score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Print...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Print score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <source>Undo</source>
+        <translation type="unfinished">元に戻す</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Undo last change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <source>Redo</source>
+        <translation type="unfinished">やり直す</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Redo last undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <source>Cut</source>
+        <translation type="unfinished">切り取り</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+3"/>
+        <source>Copy</source>
+        <translation type="unfinished">コピー</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+3"/>
+        <source>Paste</source>
+        <translation type="unfinished">貼り付け</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+4"/>
+        <source>Show instruments dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Instruments...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Show clefs palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Clefs...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>show keys signatures palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Key Signatures...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show key signatures palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Show symbols palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Symbols...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Show time signatures palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Time Signatures...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Show dynamics palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Dynamics...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Note input mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <location line="+1224"/>
+        <source>Note Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1217"/>
+        <location line="+4"/>
+        <source>Pitch spell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Pitch Spell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter unison above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Unison Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter second above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Second Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter third above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Third Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter fourth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Fourth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter fifth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Fifth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter sixth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Sixth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter seventh above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Seventh Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter octave above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Octave Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter ninth above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Ninth Above</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter second below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Second Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter third below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Third Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter fourth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Fourth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter fifth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Fifth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter sixth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Sixth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter seventh below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Seventh Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter octave below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Octave Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter ninth below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Ninth Below</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter note A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter note B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter note C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter note D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter note E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter note F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <location line="+1661"/>
+        <source>F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1655"/>
+        <location line="+4"/>
+        <source>Enter note G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add note A to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Add A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add note B to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Add B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add note C to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Add C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add note D to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Add D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add note E to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Add E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add note F to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Add F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add note G to chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Add G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Enter rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+4"/>
+        <source>Add staccato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Staccato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>More stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Add More Stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add more stretch to selected measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Less stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Add Less Stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add less stretch to selected measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Reset Beam Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Reset beam mode of selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+4"/>
+        <source>Flip direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Flip Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+4"/>
+        <source>Pitch up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Up</source>
+        <translation type="unfinished">↑</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Pitch up octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Up Octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Pitch up by an octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Pitch up note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Up Note in Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Go to higher pitched note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+4"/>
+        <source>Go to top note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Top Note in Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Move up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>up+shift+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+4"/>
+        <source>Pitch down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Down</source>
+        <translation type="unfinished">↓</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Pitch down octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Down octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Pitch down by an octave</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Pitch down note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Down Note in Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Go to lower pitched note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+4"/>
+        <source>Go to bottom note in chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Bottom Note in Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Move down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>down+shift+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+4"/>
+        <location line="+953"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Previous chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-958"/>
+        <source>Previous Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <location line="+953"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Previous measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-958"/>
+        <source>Previous Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <location line="+953"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Next chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-958"/>
+        <source>Next Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <location line="+953"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Next measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-958"/>
+        <source>Next Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>add previous chord to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>left+shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>select to beginning of measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>left+ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>add next chord to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>right+shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>select to end of measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>right+ctrl+shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>select to beginning of line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>shift+home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>select to end of line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>shift+end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>select to beginning of score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>ctrl+shift+home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>select to end of score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>ctrl+shift+end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>add staff above to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>add staff below to selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>page-prev</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>page-next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>page-top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>page-end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>add slur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>crescendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>decrescendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>ESCAPE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <location line="+3"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Delete contents of the selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Timewise Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Delete element and duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+4"/>
+        <source>Delete selected measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Delete Selected Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Append measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Append Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Append measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Append Measures...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Insert measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Insert Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Insert measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Insert Measures...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Insert Horizontal Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Insert Vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Append Horizontal Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Append Vertical Frame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Duplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Triplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Quadruplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Quintuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Sextuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Septuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Octuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Nonuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Other Tuplets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Other...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>note longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Longa</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>note breve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Double whole note (breve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad note 1/1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Whole note (semibreve)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad note 1/2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Half note (minim)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad note 1/4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Quarter note (crochet)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad note 1/8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Eighth note (quaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad note 1/16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>16th note (semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad note 1/32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>32nd note (demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad note 1/64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>64th note (semi-demi-semiquaver)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Double dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>tie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>pad rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>double sharp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>sharp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>natural</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>double flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>acciaccatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>appoggiatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>grace-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>grace-16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>grace-32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>voice 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>voice 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>voice 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>voice 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>midi input in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Enable MIDI Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>editing sound on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Enable sound while editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>beam start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>beam mid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>no beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>beam 32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>auto beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+7"/>
+        <location line="+1"/>
+        <source>Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+7"/>
+        <location line="+1"/>
+        <source>Play Panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+7"/>
+        <location line="+1"/>
+        <source>Navigator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <location line="+8"/>
+        <location line="+1"/>
+        <source>Mixer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Transport Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Transport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Note Input Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Status Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <source>Mag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zoom Canvas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Lyrics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Fingering Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Fingering...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Fingering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Tempo Palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Tempo...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Metronome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add System Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>System Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add Staff Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Staff Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>Add Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Frame Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Add Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add Title Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Add Subtitle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Subtitle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add Subtitle Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Add Composer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Composer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add Composer Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Add Poet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Poet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add Poet Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Add Copyright</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Copyright</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add Copyright Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Add Chord Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Chord Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Add Chord Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>show harmony properties for chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Harmony Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+4"/>
+        <source>Add Rehearsal Mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Rehearsal Mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Player play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Start or stop playback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>Seek to begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Player rewind</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Rewind</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rewind to start position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Seek to end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <location line="+4"/>
+        <source>Play repeats on/off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Load style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Load Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Load Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Save style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Save Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Save Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Select all</source>
+        <translation type="unfinished">すべてを選択</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Select All</source>
+        <translation type="unfinished">すべてを選択</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+4"/>
+        <source>Transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Transpose...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>violin clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>bass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Exchange Voice 1-2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Exchange Voice 1-3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Exchange Voice 1-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Exchange Voice 2-3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Exchange Voice 2-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Exchange Voice 3-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>display in concert pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Concert Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Display in Concert Pitch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>repeat last command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Repeat last command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>edit score meta data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Meta Data...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Meta Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>toggle system break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Toggle System Break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>toggle page break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Toggle Page Break</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>edit element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Edit Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>reset positions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Reset Positions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>show inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Inspector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>reset measure stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Reset Stretch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>show invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Show Invisible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>show frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Show Frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>show keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Show Keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>enable script debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Enable Script Debugger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+4"/>
+        <source>enter 1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>1/1 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>enter 1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>1/2 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>enter 1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>1/4 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+4"/>
+        <source>enter 1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>1/8 rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>backspace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Search</source>
+        <translation type="unfinished">検索</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Zoom In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <location line="+3"/>
+        <source>Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>mirror note head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Edit General Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Edit Text Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Edit Chord Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Select all similar elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>All Similar Elements</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Select all similar elements in same staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>All Similar Elements in Same Staff</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <source>Synthesizer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Synthesizer Control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>double duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>half duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>repeat selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Repeat selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>follow song</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Follow Song</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>split window horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Documents Side by Side</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>split window vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Documents Stacked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>Parts...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>articulation</name>
+    <message>
+        <location filename="../../mscore/articulation.cpp" line="-124"/>
+        <source>ufermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ushortfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dshortfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ulongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dlongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>uverylongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dverylongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>thumb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sforzato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>espressivo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>staccato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ustaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dstaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>tenuto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>uportato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dportato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>umarcato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dmarcato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ouvert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>plusstop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>upbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>downbow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>reverseturn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>turn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>prall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>mordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>prallprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>prallmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>upprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>downprall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>upmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>downmordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>snappizzicato</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>clefTable</name>
+    <message>
+        <location filename="../../mscore/clef.cpp" line="+48"/>
+        <source>Treble clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Treble clef 8va</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Treble clef 15ma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Treble clef 8vb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Bass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Bass clef 8vb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Bass clef 15mb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Baritone clef (F clef)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Subbass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Soprano clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Mezzo-soprano clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Alto clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Tenor clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Tablature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location line="+20"/>
+        <source>Percussion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-16"/>
+        <source>Baritone clef (C clef)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>French violin clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Bass clef 8va</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Bass clef 15ma</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>elementName</name>
+    <message>
+        <location filename="../../mscore/element.cpp" line="-477"/>
+        <source>Symbol</source>
+        <translation type="unfinished">記号</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SlurSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>BarLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>StemSlash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Arpeggio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Accidental</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>KeySig</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>TimeSig</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Breath</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Glissando</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>RepeatMeasure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Articulation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Dynamic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Page</source>
+        <translation type="unfinished">ページ</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lyrics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Marker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Jump</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tuplet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tempo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>StaffText</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Harmony</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>HairpinSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>OttavaSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PedalSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>TrillSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>TextLineSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>VoltaSegment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>LayoutBreak</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Spacer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>LedgerLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>NoteHead</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tremolo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>StaffLines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Selection</source>
+        <translation type="unfinished">選択した部分を印刷</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Lasso</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ShadowNote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>RubberBand</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>HairPin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ottava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Pedal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>TextLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>System</source>
+        <translation type="unfinished">システム</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Compound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Slur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ElementList</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>StaffList</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>MeasureList</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>HBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>VBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>AccidentalBracket</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>magTable</name>
+    <message>
+        <location filename="../../mscore/magbox.cpp" line="-17"/>
+        <source>Page Width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Whole Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Two Pages</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>preferences</name>
+    <message>
+        <location filename="../../mscore/preferences.cpp" line="-1308"/>
+        <source>Every day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Every 3 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Every week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Every 2 weeks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Every month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Every 2 months</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Never</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>symbol</name>
+    <message>
+        <location filename="../../mscore/sym.cpp" line="-567"/>
+        <source>whole rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>half rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>outside whole rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>outside half rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>rest M3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>breve rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>longa rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>quart rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>clas quart rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>eight rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>16&apos; rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>32&apos; rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>64&apos; rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>128&apos; rest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>sharp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+1"/>
+        <source>sharp arrow both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp slash3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp slash4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>natural</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>natural arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>natural arrow down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>natural arrow both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+1"/>
+        <source>flat arrow both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat slash2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>mirrored flat2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>mirrored flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>mirrored flat slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat flat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flat flat slash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sharp sharp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>right parenthesis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>left parenthesis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>longa up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>longa down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>brevis head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>brevis double head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>whole head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>half head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>quart head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>whole diamond head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>half diamond head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>diamond head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>whole triangle head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>down half triangle head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>up half triangle head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>up quart triangle head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>down quart triangle head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>whole slash head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>half slash head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>quart slash head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>whole cross head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>half cross head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>cross head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>x circle head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>s0do head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d1do head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>u1do head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d2do head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>u2do head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>s0re head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>u1re head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d1re head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>u2re head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d2re head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>s0mi head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>s1mi head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>s2mi head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>u0fa head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d0fa head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>u1fa head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d1fa head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>u2fa head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d2fa head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>s0la head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>s1la head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>s2la head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>s0ti head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>u1ti head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d1ti head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>u2ti head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d2ti head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ufermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>snappizzicato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ushortfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dshortfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ulongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dlongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>uverylongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dverylongfermata</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>thumb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sforza to accent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>espressivo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>staccato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ustaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dstaccatissimo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>tenuto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>uportato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dportato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>umarcato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dmarcato</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ouvert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>plus stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>up bow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>down bow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>reverse turn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>turn</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>trill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>upedal heel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dpedalheel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>upedal toe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dpedal toe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>flageolet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>segno</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>varied coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>rcomma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>lcomma</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>arpeggio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>trillelement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>arpeggio arrow down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>arpeggio arrow up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>trill element</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>prall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>mordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>prall prall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>prall mordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>up prall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>up mordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>prall down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>down prall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>down mordent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>prall up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>line prall</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>caesura curved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>caesura straight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>eight flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sixteenth flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>thirtysecond flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>sixtyfour flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>128flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>deight flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>grace dash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dgrace dash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dsixteenth flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dthirtysecond flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dsixtyfourth flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>d128flag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>alto clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>calto clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>bass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>cbass clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>trebleclef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ctrebleclef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>percussion clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>cpercussion clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>tab clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ctab clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>four four meter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>allabreve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>pedalasterisk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>pedaldash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>pedaldot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>pedalP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>pedald</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>pedale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>pedal ped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>bracket tips up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>bracket tips down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>bracket tips left up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>bracket tips left down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>acc dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>acc freebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>acc stdbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>acc bayanbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>acc old ee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>acc discant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>zero</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>two</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>three</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>four</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>five</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>six</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>seven</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>eight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>nine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>plus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+322"/>
+        <source>z</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-321"/>
+        <location line="+316"/>
+        <source>f</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-315"/>
+        <location line="+319"/>
+        <source>s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-318"/>
+        <location line="+316"/>
+        <source>p</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-315"/>
+        <location line="+314"/>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-313"/>
+        <location line="+315"/>
+        <source>r</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-6"/>
+        <source>clef eight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>clef one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>clef five</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>note 1/2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>note 1/4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>note 1/8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>note 1/16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>note 1/32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>note 1/64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>dot dot</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -61,7 +61,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>parentesi</translation>
+        <translation>parentesi (alterazioni precauzionali)</translation>
     </message>
 </context>
 <context>
@@ -152,6 +152,18 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Form</source>
         <translation>Casella</translation>
+    </message>
+    <message>
+        <source>Arpeggio</source>
+        <translation type="unfinished">Arpeggio</translation>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished">Tremolo</translation>
+    </message>
+    <message>
+        <source>Glissando</source>
+        <translation type="unfinished">Glissando</translation>
     </message>
 </context>
 <context>
@@ -816,6 +828,18 @@ p, li { white-space: pre-wrap; }&#13;
         <source>MuseScore: Harmony Properties</source>
         <translation>MuseScore: Proprietà Armonia</translation>
     </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Tipo</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Alter</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordList</name>
@@ -949,7 +973,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>diamond</source>
-        <translation>diamante</translation>
+        <translation>losanga</translation>
     </message>
     <message>
         <source>triangle</source>
@@ -1062,7 +1086,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation>Dinamica</translation>
+        <translation>Dinamiche</translation>
     </message>
     <message>
         <source>Set Invisible</source>
@@ -1139,7 +1163,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Diamond Head</source>
-        <translation>Testa a diamante</translation>
+        <translation>Testa a losanga</translation>
     </message>
     <message>
         <source>Triangle Head</source>
@@ -1297,7 +1321,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Trasposizione</translation>
+        <translation>Trasporto</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
@@ -1388,7 +1412,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Play Transposition:</source>
-        <translation>Suona trasposizione</translation>
+        <translation>Suona trasporto</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
@@ -1611,7 +1635,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Page fill threshold:</source>
-        <translation>soglia riempimento pagina:</translation>
+        <translation>Soglia riempimento pagina:</translation>
     </message>
     <message>
         <source>Hairpins</source>
@@ -1619,7 +1643,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Last system fill threshold</source>
-        <translation>soglia riempimento ultima accollatura</translation>
+        <translation>Soglia riem. ultima accollatura</translation>
     </message>
     <message>
         <source>Line width</source>
@@ -1635,7 +1659,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create key sig for all systems</source>
-        <translation>Crea armatura per tutte le accollature</translation>
+        <translation>Crea armatura di chiave per tutte le accollature</translation>
     </message>
     <message>
         <source>Chordnames</source>
@@ -1643,11 +1667,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create time signatures</source>
-        <translation>Crea indicazioni di tempo</translation>
+        <translation>Crea unità di tempo</translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation>Crea indicazioni di tempo di cortesia</translation>
+        <translation>Crea unità di tempo di cortesia</translation>
     </message>
     <message>
         <source>Score</source>
@@ -1655,7 +1679,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation>Mostra altezza note d'effetto (strum. traspositori)</translation>
+        <translation>Mostra note reali (strumenti traspositori disattivati)</translation>
     </message>
     <message>
         <source>Create Multi Measure Rests</source>
@@ -1667,7 +1691,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Articolazioni, Ornamenti</translation>
+        <translation>Articolazioni, abbellimenti</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -1703,7 +1727,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System Bracket Distance:</source>
-        <translation>Distanza della graffa:</translation>
+        <translation>Distanza della graffa di accollatura:</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
@@ -1820,7 +1844,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation>Margine sin. segni di tempo</translation>
+        <translation>Margine sin. unità di tempo</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
@@ -1836,7 +1860,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation>Mostra punte stanghette  ritornelli (stanghette con "ali")</translation>
+        <translation>Mostra le stanghette dei ritornelli con le "ali")</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -1860,7 +1884,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Dot dot distance</source>
-        <translation>Distanza doppio punto</translation>
+        <translation>Distanza punto-punto</translation>
     </message>
     <message>
         <source>Ledger line width</source>
@@ -1932,7 +1956,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
-        <translation>Abbellimento - distanza abbellimento</translation>
+        <translation>Articolazione - distanza articolazione</translation>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
@@ -2445,7 +2469,7 @@ fallito: </translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>aggiungi indicazione di tempo alla paletta</translation>
+        <translation>aggiungi unità di tempo alla tavolozza</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2926,7 +2950,7 @@ fallito: </translation>
     </message>
     <message>
         <source>&amp;Layout</source>
-        <translation>&amp;Posizionamento</translation>
+        <translation>&amp;Impaginazione</translation>
     </message>
     <message>
         <source>Page Settings...</source>
@@ -2998,7 +3022,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Brackets</source>
-        <translation>Graffe</translation>
+        <translation>Accollature</translation>
     </message>
     <message>
         <source>Accidentals</source>
@@ -3034,7 +3058,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Repeats</source>
-        <translation>Ritornelli</translation>
+        <translation>Ripetizioni</translation>
     </message>
     <message>
         <source>Segno</source>
@@ -3142,11 +3166,11 @@ fallito: </translation>
     </message>
     <message>
         <source>InstrumentsLong</source>
-        <translation>NomeStrumLungo</translation>
+        <translation>Nome strumento intero</translation>
     </message>
     <message>
         <source>InstrumentsShort</source>
-        <translation>NomeStrumCorto</translation>
+        <translation>Nome strumento abbreviato</translation>
     </message>
     <message>
         <source>Symbols1</source>
@@ -3218,7 +3242,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation>Note d'effetto</translation>
+        <translation>Partitura in Do</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -3386,7 +3410,7 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation>Note di abbellimento</translation>
+        <translation>Abbellimenti</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
@@ -3414,7 +3438,7 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation>Indicazioni di tempo</translation>
+        <translation>Unità di tempo</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
@@ -3490,7 +3514,7 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Articolazioni &amp;&amp; Ornamenti</translation>
+        <translation>Articolazioni e abbellimenti</translation>
     </message>
     <message>
         <source>Fingering %1</source>
@@ -3554,11 +3578,11 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
     </message>
     <message>
         <source>Brackets...</source>
-        <translation>Graffe...</translation>
+        <translation>Accollature...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation>Articolazioni &amp;&amp; Ornamenti</translation>
+        <translation>Articolazioni e abbellimenti...</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -3566,7 +3590,7 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
     </message>
     <message>
         <source>MuseScore: Brackets</source>
-        <translation>MuseScore: Graffe</translation>
+        <translation>MuseScore: Accollature</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
@@ -3590,7 +3614,7 @@ Ripristinare la sessione?</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation>MuseScore: Articolazioni e Ornamenti</translation>
+        <translation>MuseScore: Articolazioni e abbellimenti</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
@@ -3612,10 +3636,6 @@ is incompatible with current interface</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Bar %1 Beat %2.%3</source>
         <translation type="unfinished"/>
     </message>
@@ -3623,6 +3643,10 @@ is incompatible with current interface</source>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -3695,7 +3719,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Crea indicazione di tempo</translation>
+        <translation>Crea unità di tempo</translation>
     </message>
 </context>
 <context>
@@ -3891,30 +3915,30 @@ is incompatible with current interface</source>
     <name>PaletteBox</name>
     <message>
         <source>Palettes</source>
-        <translation>Palette</translation>
+        <translation>Tavolozze</translation>
     </message>
 </context>
 <context>
     <name>PaletteBoxButton</name>
     <message>
         <source>Delete Palette</source>
-        <translation>Cancella paletta</translation>
+        <translation>Cancella tavolozza</translation>
     </message>
     <message>
         <source>Palette Properties</source>
-        <translation>Proprietà paletta</translation>
+        <translation>Proprietà tavolozza</translation>
     </message>
     <message>
         <source>Insert new Palette</source>
-        <translation>Inserisci nuova paletta</translation>
+        <translation>Inserisci nuova tavolozza</translation>
     </message>
     <message>
         <source>Move Palette Up</source>
-        <translation>Sposta paletta in su</translation>
+        <translation>Sposta tavolozza in su</translation>
     </message>
     <message>
         <source>Move Palette Down</source>
-        <translation>Sposta paletta in giù</translation>
+        <translation>Sposta tavolozza in giù</translation>
     </message>
     <message>
         <source>Enable Editing</source>
@@ -3929,7 +3953,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Palette Cell Properties</source>
-        <translation>Proprietà cella paletta</translation>
+        <translation>Proprietà cella tavolozza</translation>
     </message>
     <message>
         <source>Content Offset</source>
@@ -3948,7 +3972,7 @@ is incompatible with current interface</source>
     <name>PaletteProperties</name>
     <message>
         <source>MuseScore: Palette Properties</source>
-        <translation>MuseScore: Proprietà della paletta</translation>
+        <translation>MuseScore: Proprietà della tavolozza</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -4752,7 +4776,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Use Current Position</source>
-        <translation type="unfinished"/>
+        <translation>Utilizza attuale posizione</translation>
     </message>
 </context>
 <context>
@@ -4849,7 +4873,7 @@ selezionare una nota o una pausa e ripetere l'operazione
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
-        <translation>MuseScore: caricamento Palette fallito:</translation>
+        <translation>MuseScore: Caricamento Tavolozze fallito:</translation>
     </message>
     <message>
         <source>MuseScore</source>
@@ -4889,7 +4913,7 @@ selezionare una nota o una pausa e ripetere l'operazione
     </message>
     <message>
         <source>MuseScore: Load Palette failed:</source>
-        <translation>MuseScore: Caricamento palette fallito</translation>
+        <translation>MuseScore: Caricamento tavolozza fallito</translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description File</source>
@@ -5061,7 +5085,7 @@ selezionare una battuta e riprovare</translation>
     </message>
     <message>
         <source>MuseScore: transpose</source>
-        <translation>MuseScore: Trasposizione</translation>
+        <translation>MuseScore: Trasporto</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
@@ -5203,7 +5227,7 @@ Prova a salvare in una posizione differente</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
-        <translation>La prima indicazione di tempo di un brano non può essere eliminata</translation>
+        <translation>La prima unità di tempo di un brano non può essere eliminata</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
@@ -5286,7 +5310,7 @@ Prova a salvare in una posizione differente</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Indicazione di tempo</translation>
+        <translation>Unità di tempo</translation>
     </message>
     <message>
         <source>Begin Repeat</source>
@@ -5314,7 +5338,7 @@ Prova a salvare in una posizione differente</translation>
     </message>
     <message>
         <source>Time Signature Announce</source>
-        <translation>Notifica indicazione di tempo</translation>
+        <translation>Notifica unità di tempo</translation>
     </message>
 </context>
 <context>
@@ -5658,7 +5682,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>System Flag</source>
-        <translation>Marcatore di Sistema</translation>
+        <translation>Marcatore di accollatura</translation>
     </message>
 </context>
 <context>
@@ -6157,7 +6181,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">Marcatore di Sistema</translation>
+        <translation>Marcatore di accollatura</translation>
     </message>
 </context>
 <context>
@@ -6182,7 +6206,7 @@ and check that the file location is correct</source>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation>MuseScore: Indicazione di tempo</translation>
+        <translation>MuseScore: Unità di tempo</translation>
     </message>
     <message>
         <source>4/4 common time</source>
@@ -6205,7 +6229,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>aggiungi indicazione di tempo alla paletta</translation>
+        <translation>aggiungi unità di tempo alla tavolozza</translation>
     </message>
     <message>
         <source>Add</source>
@@ -6213,7 +6237,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Crea indicazione di tempo</translation>
+        <translation>Crea unità di tempo</translation>
     </message>
 </context>
 <context>
@@ -6224,11 +6248,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Enter Time Signature:</source>
-        <translation>Inserisci indicazione di tempo:</translation>
+        <translation>Inserisci unità di tempo:</translation>
     </message>
     <message>
         <source>Time Signature: </source>
-        <translation>Indicazione di tempo: </translation>
+        <translation>Unità di tempo: </translation>
     </message>
     <message>
         <source>/</source>
@@ -6258,7 +6282,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Indicazione di tempo</translation>
+        <translation>Unità di tempo</translation>
     </message>
 </context>
 <context>
@@ -6470,6 +6494,23 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Use double sharps and flats</source>
         <translation>Usa doppi diesis e doppi bemolli</translation>
+    </message>
+</context>
+<context>
+    <name>TremoloBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>firstChord</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>secondChord</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -6700,11 +6741,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>mirrored-flat2</source>
-        <translation type="unfinished"/>
+        <translation>Tribemolle</translation>
     </message>
     <message>
         <source>mirrored-flat</source>
-        <translation type="unfinished"/>
+        <translation>mobemolle</translation>
     </message>
     <message>
         <source>mirrored-flat-slash</source>
@@ -6716,11 +6757,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sharp-slash</source>
-        <translation type="unfinished"/>
+        <translation>monesis</translation>
     </message>
     <message>
         <source>sharp-slash2</source>
-        <translation type="unfinished"/>
+        <translation>triesis</translation>
     </message>
     <message>
         <source>sharp-slash3</source>
@@ -6728,15 +6769,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sharp-slash4</source>
-        <translation type="unfinished"/>
+        <translation>triesis2</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished">diesis freccia in su</translation>
+        <translation>diesis + 1/8 di tono</translation>
     </message>
     <message>
         <source>sharp arrow down</source>
-        <translation type="unfinished"/>
+        <translation>diesis - 1/8 di tono</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
@@ -6744,11 +6785,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation>bemolle + 1/8 di tono</translation>
     </message>
     <message>
         <source>flat arrow down</source>
-        <translation type="unfinished"/>
+        <translation>bemolle - 1/8 di tono</translation>
     </message>
     <message>
         <source>flat arrow both</source>
@@ -6756,11 +6797,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished">bequadro freccia in su</translation>
+        <translation>bequadro + 1/8 di tono</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished">bequadro freccia in giù</translation>
+        <translation>bequadro - 1/8 di tono</translation>
     </message>
     <message>
         <source>natural arrow both</source>
@@ -6799,7 +6840,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>file new</source>
-        <translation>nuovo file</translation>
+        <translation>File: nuovo</translation>
     </message>
     <message>
         <source>New...</source>
@@ -6843,7 +6884,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation>Dinamica...</translation>
+        <translation>Dinamiche...</translation>
     </message>
     <message>
         <source>Note Input</source>
@@ -7023,7 +7064,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation>Aggiungi La all'accordo</translation>
+        <translation>Aggiungi nota La all'accordo</translation>
     </message>
     <message>
         <source>Add B</source>
@@ -7031,7 +7072,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation>Aggiungi Si all'accordo</translation>
+        <translation>Aggiungi nota Si all'accordo</translation>
     </message>
     <message>
         <source>Add C</source>
@@ -7039,7 +7080,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation>Aggiungi Do all'accordo</translation>
+        <translation>Aggiungi nota Do all'accordo</translation>
     </message>
     <message>
         <source>Add D</source>
@@ -7047,7 +7088,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation>Aggiungi Re all'accordo</translation>
+        <translation>Aggiungi nota Re all'accordo</translation>
     </message>
     <message>
         <source>Add E</source>
@@ -7055,7 +7096,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation>Aggiungi Mi all'accordo</translation>
+        <translation>Aggiungi nota Mi all'accordo</translation>
     </message>
     <message>
         <source>Add F</source>
@@ -7063,7 +7104,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation>Aggiungi Fa all'accordo</translation>
+        <translation>Aggiungi nota Fa all'accordo</translation>
     </message>
     <message>
         <source>Add G</source>
@@ -7071,7 +7112,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation>Aggiungi Sol all'accordo</translation>
+        <translation>Aggiungi nota Sol all'accordo</translation>
     </message>
     <message>
         <source>rest</source>
@@ -7267,7 +7308,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Septuplet</source>
-        <translation>Settuplina</translation>
+        <translation>Settimina</translation>
     </message>
     <message>
         <source>Octuplet</source>
@@ -7303,7 +7344,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad note 1/1</source>
-        <translation>nota tastierino 4/4</translation>
+        <translation>tastierino: nota 4/4</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
@@ -7311,7 +7352,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad note 1/2</source>
-        <translation>nota tastierino 2/4</translation>
+        <translation>tastierino: nota 2/4</translation>
     </message>
     <message>
         <source>Half note (minim)</source>
@@ -7319,7 +7360,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation>nota tastierino 1/4</translation>
+        <translation>tastierino: nota 1/4</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
@@ -7327,7 +7368,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation>nota tastierino 1/8</translation>
+        <translation>tastierino: nota 1/8</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
@@ -7335,7 +7376,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad note 1/16</source>
-        <translation>nota tastierino 1/16</translation>
+        <translation>tastierino: nota 1/16</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
@@ -7343,7 +7384,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation>nota tastierino 1/32</translation>
+        <translation>tastierino: nota 1/32</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
@@ -7351,7 +7392,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation>nota tastierino 1/64</translation>
+        <translation>tastierino: nota 1/64</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
@@ -7359,7 +7400,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad dot</source>
-        <translation>tastierino punto</translation>
+        <translation>tastierino: punto</translation>
     </message>
     <message>
         <source>Dot</source>
@@ -7367,7 +7408,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad double dot</source>
-        <translation>tastierino doppio punto</translation>
+        <translation>tastierino: doppio punto</translation>
     </message>
     <message>
         <source>Double dot</source>
@@ -7379,7 +7420,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad rest</source>
-        <translation>tastierino pausa</translation>
+        <translation>tastierino: pausa</translation>
     </message>
     <message>
         <source>double sharp</source>
@@ -7399,7 +7440,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>acciaccatura</source>
-        <translation>acciaccatuta</translation>
+        <translation>acciaccatura</translation>
     </message>
     <message>
         <source>appoggiatura</source>
@@ -7435,7 +7476,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>midi input in</source>
-        <translation>ingresso MIDI</translation>
+        <translation>Abilita ingresso MIDI</translation>
     </message>
     <message>
         <source>Enable MIDI Input</source>
@@ -7471,7 +7512,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Palette</source>
-        <translation>Palette</translation>
+        <translation>Mostra le tavolozze</translation>
     </message>
     <message>
         <source>Play Panel</source>
@@ -7479,7 +7520,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Navigator</source>
-        <translation>Navigatore</translation>
+        <translation>Mostra Navigatore</translation>
     </message>
     <message>
         <source>Mixer</source>
@@ -7519,7 +7560,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Fingering Palette</source>
-        <translation>Paletta diteggiatura</translation>
+        <translation>Tavolozza diteggiatura</translation>
     </message>
     <message>
         <source>Fingering...</source>
@@ -7531,7 +7572,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Tempo Palette</source>
-        <translation>Paletta tempo</translation>
+        <translation>Tavolozza unità di tempo</translation>
     </message>
     <message>
         <source>Tempo...</source>
@@ -7643,7 +7684,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>show harmony properties for chord</source>
-        <translation>mostra proprietà armonia dell'accordo</translation>
+        <translation>Mostra proprietà armonia dell'accordo</translation>
     </message>
     <message>
         <source>Harmony Properties</source>
@@ -7695,11 +7736,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Transpose...</source>
-        <translation>Trasposizione...</translation>
+        <translation>Trasporto...</translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Trasposizione</translation>
+        <translation>Trasporto</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -7735,15 +7776,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>display in concert pitch</source>
-        <translation>mostra altezza note d'effetto (strum. traspositori)</translation>
+        <translation>Mostra note reali (strumenti traspositori disattivati)</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation>Note d'effetto</translation>
+        <translation>Partitura in Do</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation>Mostra altezza note d'effetto (strum. traspositori)</translation>
+        <translation>Mostra note reali (strumenti traspositori disattivati)</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -7799,7 +7840,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>show inspector</source>
-        <translation>mostra ispettore</translation>
+        <translation>Mostra ispettore</translation>
     </message>
     <message>
         <source>Inspector</source>
@@ -7815,7 +7856,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>show invisible</source>
-        <translation>mostra oggetti nascosti</translation>
+        <translation>Mostra oggetti nascosti</translation>
     </message>
     <message>
         <source>Show Invisible</source>
@@ -7823,7 +7864,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>show frames</source>
-        <translation>mostra le cornici delle caselle</translation>
+        <translation>Mostra le cornici delle caselle</translation>
     </message>
     <message>
         <source>Show Frames</source>
@@ -7831,7 +7872,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>show keyboard</source>
-        <translation>mostra la tastiera</translation>
+        <translation>Mostra la tastiera</translation>
     </message>
     <message>
         <source>Show Keyboard</source>
@@ -7847,7 +7888,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>enter 1/1 rest</source>
-        <translation>inserisci pausa 4/4</translation>
+        <translation>Inserisci pausa 4/4</translation>
     </message>
     <message>
         <source>1/1 rest</source>
@@ -7855,7 +7896,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>enter 1/2 rest</source>
-        <translation>inserisci pausa 2/4</translation>
+        <translation>Inserisci pausa 2/4</translation>
     </message>
     <message>
         <source>1/2 rest</source>
@@ -7863,7 +7904,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>enter 1/4 rest</source>
-        <translation>inserisci pausa 1/4</translation>
+        <translation>Inserisci pausa 1/4</translation>
     </message>
     <message>
         <source>1/4 rest</source>
@@ -7871,7 +7912,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>enter 1/8 rest</source>
-        <translation>inserisci pausa 1/8</translation>
+        <translation>Inserisci pausa 1/8</translation>
     </message>
     <message>
         <source>1/8 rest</source>
@@ -7899,7 +7940,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>mirror note head</source>
-        <translation type="unfinished"/>
+        <translation>Rovescia la testa della nota</translation>
     </message>
     <message>
         <source>Edit General Style...</source>
@@ -7967,7 +8008,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>File open</source>
-        <translation>Apri file</translation>
+        <translation>File: apri</translation>
     </message>
     <message>
         <source>Load score from file</source>
@@ -7975,7 +8016,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>File save</source>
-        <translation>Salva file</translation>
+        <translation>File: salva</translation>
     </message>
     <message>
         <source>Save score to file</source>
@@ -7983,7 +8024,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>File save as</source>
-        <translation>Salva file con nome</translation>
+        <translation>File: salva come</translation>
     </message>
     <message>
         <source>Save score under a new file name</source>
@@ -7991,7 +8032,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>File save a copy</source>
-        <translation>Salva una copia del file</translation>
+        <translation>File: salva una copia del file</translation>
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
@@ -7999,7 +8040,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>File reload</source>
-        <translation>Ricarica file</translation>
+        <translation>File: ricarica</translation>
     </message>
     <message>
         <source>Reload score from file</source>
@@ -8007,7 +8048,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>File close</source>
-        <translation>Chiudi file</translation>
+        <translation>File: chiudi</translation>
     </message>
     <message>
         <source>Close current score</source>
@@ -8035,7 +8076,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Show clefs palette</source>
-        <translation>Mostra la paletta delle chiavi</translation>
+        <translation>Mostra la tavolozza delle chiavi</translation>
     </message>
     <message>
         <source>Clefs...</source>
@@ -8043,7 +8084,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>show keys signatures palette</source>
-        <translation>mostra la paletta delle tonalità (armatura di chiave)</translation>
+        <translation>Mostra la tavolozza armatura di chiave (tonalità)</translation>
     </message>
     <message>
         <source>Key Signatures...</source>
@@ -8051,23 +8092,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Show key signatures palette</source>
-        <translation>Mostra la paletta delle tonalità (armatura di chiave)</translation>
+        <translation>Mostra la tavolozza delle tonalità (armatura di chiave)</translation>
     </message>
     <message>
         <source>Show symbols palette</source>
-        <translation>Mostra la paletta dei simboli</translation>
+        <translation>Mostra la tavolozza dei simboli</translation>
     </message>
     <message>
         <source>Show time signatures palette</source>
-        <translation>Mostra la paletta delle indicazioni di tempo</translation>
+        <translation>Mostra la tavolozza delle unità di tempo</translation>
     </message>
     <message>
         <source>Time Signatures...</source>
-        <translation>Indicazioni di tempo...</translation>
+        <translation>Unità di tempo...</translation>
     </message>
     <message>
         <source>Show dynamics palette</source>
-        <translation>Mostra la paletta della dinamica</translation>
+        <translation>Mostra la tavolozza delle dinamiche</translation>
     </message>
     <message>
         <source>Note input mode</source>
@@ -8123,7 +8164,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Flat</source>
-        <translation>Bemolle</translation>
+        <translation>bemolle</translation>
     </message>
     <message>
         <source>Add trill</source>
@@ -8135,11 +8176,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>More stretch</source>
-        <translation>Aumenta larghezza battuta</translation>
+        <translation>Larghezza battuta: aumenta</translation>
     </message>
     <message>
         <source>Less stretch</source>
-        <translation>Diminuisci larghezza battuta</translation>
+        <translation>Larghezza battuta: diminuisci</translation>
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
@@ -8147,15 +8188,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Flip direction</source>
-        <translation>Inverti direzione aste</translation>
+        <translation>Inverti direzione gambi note</translation>
     </message>
     <message>
         <source>Flip Direction</source>
-        <translation>Inverti direzione aste</translation>
+        <translation>Inverti direzione gambi note</translation>
     </message>
     <message>
         <source>Pitch up</source>
-        <translation>Aumenta altezza</translation>
+        <translation>Aumenta altezza nota</translation>
     </message>
     <message>
         <source>Up</source>
@@ -8175,7 +8216,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch up note in chord</source>
-        <translation>Aumenta altezza nota dell'accordo</translation>
+        <translation>Nota superiore dell'accordo</translation>
     </message>
     <message>
         <source>Up Note in Chord</source>
@@ -8199,7 +8240,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch down</source>
-        <translation>Abbassa altezza</translation>
+        <translation>Abbassa altezza nota</translation>
     </message>
     <message>
         <source>Down</source>
@@ -8207,7 +8248,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch down octave</source>
-        <translation>Abbassa altezza di un'ottava</translation>
+        <translation>Abbassa altezza nota di un'ottava</translation>
     </message>
     <message>
         <source>Down octave</source>
@@ -8219,7 +8260,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch down note in chord</source>
-        <translation>Abbassa altezza nota dell'accordo</translation>
+        <translation>Nota inferiore dell'accordo</translation>
     </message>
     <message>
         <source>Down Note in Chord</source>
@@ -8279,19 +8320,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Append measure</source>
-        <translation>Aggiungi una battuta</translation>
+        <translation>Aggiungi battuta</translation>
     </message>
     <message>
         <source>Append measures</source>
-        <translation>Aggiungi delle battute</translation>
+        <translation>Aggiungi battute</translation>
     </message>
     <message>
         <source>Insert measure</source>
-        <translation>Inserisci una battuta</translation>
+        <translation>Inserisci battuta</translation>
     </message>
     <message>
         <source>Insert measures</source>
-        <translation>Inserisci delle battute</translation>
+        <translation>Inserisci battute</translation>
     </message>
     <message>
         <source>split window horizontal</source>
@@ -8422,11 +8463,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished"/>
+        <translation>aperto</translation>
     </message>
     <message>
         <source>plusstop</source>
-        <translation type="unfinished"/>
+        <translation>chiuso</translation>
     </message>
     <message>
         <source>upbow</source>
@@ -8510,7 +8551,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished"/>
+        <translation>Pizzicato  Bartók</translation>
     </message>
 </context>
 <context>
@@ -8624,7 +8665,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation>Arpeggio</translation>
+        <translation>arpeggio</translation>
     </message>
     <message>
         <source>Accidental</source>
@@ -8868,7 +8909,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Articulation</source>
-        <translation>Ornamento</translation>
+        <translation>Articolazione</translation>
     </message>
     <message>
         <source>AccidentalBracket</source>
@@ -9049,19 +9090,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation>diesis freccia in su</translation>
+        <translation>diesis + 1/8 di tono</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation>diesis freccia in giù</translation>
+        <translation>sharp arrow both</translation>
     </message>
     <message>
         <source>sharp slash</source>
-        <translation type="unfinished"/>
+        <translation>monesis</translation>
     </message>
     <message>
         <source>sharp slash2</source>
-        <translation type="unfinished"/>
+        <translation>triesis</translation>
     </message>
     <message>
         <source>sharp slash3</source>
@@ -9069,7 +9110,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sharp slash4</source>
-        <translation type="unfinished"/>
+        <translation>triesis2</translation>
     </message>
     <message>
         <source>natural</source>
@@ -9077,11 +9118,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>bequadro freccia in su</translation>
+        <translation>bequadro + 1/8 di tono</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>bequadro freccia in giù</translation>
+        <translation>bequadro - 1/8 di tono</translation>
     </message>
     <message>
         <source>natural arrow both</source>
@@ -9093,7 +9134,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation>bemolle + 1/8 di tono</translation>
     </message>
     <message>
         <source>flat arrow both</source>
@@ -9109,11 +9150,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>mirrored flat2</source>
-        <translation type="unfinished"/>
+        <translation>Tribemolle</translation>
     </message>
     <message>
         <source>mirrored flat</source>
-        <translation type="unfinished"/>
+        <translation>mobemolle</translation>
     </message>
     <message>
         <source>mirrored flat slash</source>
@@ -9173,15 +9214,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>whole diamond head</source>
-        <translation>testa diamante nota semibreve 4/4</translation>
+        <translation>testa a losanga nota semibreve 4/4</translation>
     </message>
     <message>
         <source>half diamond head</source>
-        <translation>testa diamante nota minima 2/4</translation>
+        <translation>testa a losanga nota minima 2/4</translation>
     </message>
     <message>
         <source>diamond head</source>
-        <translation>testa diamante</translation>
+        <translation>testa a losanga</translation>
     </message>
     <message>
         <source>whole triangle head</source>
@@ -9497,11 +9538,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>arpeggio arrow down</source>
-        <translation type="unfinished"/>
+        <translation>arpeggio giù</translation>
     </message>
     <message>
         <source>arpeggio arrow up</source>
-        <translation type="unfinished"/>
+        <translation>arpeggio su</translation>
     </message>
     <message>
         <source>trill element</source>

@@ -105,11 +105,11 @@ p, li { white-space: pre-wrap; }
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>up:</source>
-        <translation type="unfinished"/>
+        <translation>вгору:</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
@@ -152,6 +152,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Form</source>
         <translation>Форма</translation>
+    </message>
+    <message>
+        <source>Arpeggio</source>
+        <translation type="unfinished">Арпеджіо</translation>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished">Тремоло</translation>
+    </message>
+    <message>
+        <source>Glissando</source>
+        <translation type="unfinished">Ґлісандо</translation>
     </message>
 </context>
 <context>
@@ -346,15 +358,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7+</source>
-        <translation type="unfinished">7+</translation>
+        <translation>7+</translation>
     </message>
     <message>
         <source>9+</source>
-        <translation type="unfinished">9+</translation>
+        <translation>9+</translation>
     </message>
     <message>
         <source>13+</source>
-        <translation type="unfinished">13+</translation>
+        <translation>13+</translation>
     </message>
     <message>
         <source>(blues)</source>
@@ -722,55 +734,55 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/C</source>
-        <translation type="unfinished"/>
+        <translation>/До</translation>
     </message>
     <message>
         <source>/Db</source>
-        <translation type="unfinished"/>
+        <translation>/Ре b</translation>
     </message>
     <message>
         <source>/D</source>
-        <translation type="unfinished"/>
+        <translation>/Ре</translation>
     </message>
     <message>
         <source>/Eb</source>
-        <translation type="unfinished"/>
+        <translation>/Мі b</translation>
     </message>
     <message>
         <source>/E</source>
-        <translation type="unfinished"/>
+        <translation>/Мі</translation>
     </message>
     <message>
         <source>/F</source>
-        <translation type="unfinished"/>
+        <translation>/Фа</translation>
     </message>
     <message>
         <source>/F#</source>
-        <translation type="unfinished"/>
+        <translation>/Фа #</translation>
     </message>
     <message>
         <source>/G</source>
-        <translation type="unfinished"/>
+        <translation>/Соль</translation>
     </message>
     <message>
         <source>/Ab</source>
-        <translation type="unfinished"/>
+        <translation>/Ля b</translation>
     </message>
     <message>
         <source>/A</source>
-        <translation type="unfinished"/>
+        <translation>/Ля</translation>
     </message>
     <message>
         <source>/Bb</source>
-        <translation type="unfinished"/>
+        <translation>/Сі b</translation>
     </message>
     <message>
         <source>/B</source>
-        <translation type="unfinished"/>
+        <translation>/Сі</translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished"/>
+        <translation>Ступені</translation>
     </message>
     <message>
         <source>Add</source>
@@ -790,7 +802,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation type="unfinished"/>
+        <translation>(без альтерації)</translation>
     </message>
     <message>
         <source># (sharp)</source>
@@ -816,12 +828,24 @@ p, li { white-space: pre-wrap; }
         <source>MuseScore: Harmony Properties</source>
         <translation>MuseScore: властивості гармонії</translation>
     </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished">Тип</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Alter</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation type="unfinished"/>
+        <translation>Помилка при записі опису акордів: </translation>
     </message>
 </context>
 <context>
@@ -841,7 +865,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">пр</translation>
+        <translation>пр</translation>
     </message>
     <message>
         <source>additional trailing space</source>
@@ -854,7 +878,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>auto</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished">авто</translation>
+        <translation>автоматично</translation>
     </message>
     <message>
         <source>up</source>
@@ -870,7 +894,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tuning offset</source>
-        <translation type="unfinished"/>
+        <translation>коректування зміщення</translation>
     </message>
     <message>
         <source>note head positon </source>
@@ -899,12 +923,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>користувач</translation>
     </message>
     <message>
         <source>offset</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>зміщення</translation>
     </message>
     <message>
         <source>ontime offset type</source>
@@ -925,7 +949,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source> cent</source>
         <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"/>
+        <translation> відсотка</translation>
     </message>
     <message>
         <source> ticks</source>
@@ -941,23 +965,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">Тактова риска</translation>
+        <translation>стандартний</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished"/>
+        <translation>хрест</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation>ромб</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished"/>
+        <translation>трикутник</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished"/>
+        <translation>слеш (/)</translation>
     </message>
     <message>
         <source>xcircle</source>
@@ -965,47 +989,47 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished"/>
+        <translation>до</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished"/>
+        <translation>ре</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"/>
+        <translation>мі</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished"/>
+        <translation>фа</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished"/>
+        <translation>ля</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished"/>
+        <translation>сі</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Авто</translation>
+        <translation>автоматично</translation>
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished"/>
+        <translation>ціла</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished"/>
+        <translation>половинна</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished"/>
+        <translation>четвертна</translation>
     </message>
     <message>
         <source>breve</source>
-        <translation type="unfinished"/>
+        <translation>бревіс</translation>
     </message>
 </context>
 <context>
@@ -1031,7 +1055,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordStyleEditor</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Chord Description File:</source>
@@ -1039,19 +1063,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">…</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"/>
+        <translation>Ідент.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Ім’я</translation>
+        <translation>Назва</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation>Ззберегти як</translation>
+        <translation>Зберегти як</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
@@ -1809,7 +1833,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Min. note distance</source>
-        <translation>Мін. відст. між нотами</translation>
+        <translation>Мін.відс.між нотами</translation>
     </message>
     <message>
         <source>Clef left margin</source>
@@ -3036,7 +3060,7 @@ failed: </source>
     </message>
     <message>
         <source>Breath</source>
-        <translation>Дихання</translation>
+        <translation>Дихання, люфтпауза</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
@@ -3060,35 +3084,35 @@ failed: </source>
     </message>
     <message>
         <source>Segno</source>
-        <translation>Знак</translation>
+        <translation>Умовний знак (сеньо)</translation>
     </message>
     <message>
         <source>Coda</source>
-        <translation type="unfinished"/>
+        <translation>Кода</translation>
     </message>
     <message>
         <source>Codetta</source>
-        <translation type="unfinished"/>
+        <translation>Кодетта (маленька кода)</translation>
     </message>
     <message>
         <source>Fine</source>
-        <translation type="unfinished"/>
+        <translation>Кінець (фіне)</translation>
     </message>
     <message>
         <source>D.S al Coda</source>
-        <translation type="unfinished"/>
+        <translation>Dal Segno al Coda – повторити з місця, позначеного умовним знаком (сеньо), до коди</translation>
     </message>
     <message>
         <source>D.S al Fine</source>
-        <translation>від знака до кінця</translation>
+        <translation>Dal Segno al Fine – повторити від умовного знаку (сеньо) до кінця</translation>
     </message>
     <message>
         <source>D.S</source>
-        <translation type="unfinished"/>
+        <translation>Dal Segno – повторити від умовного знаку (сеньо)</translation>
     </message>
     <message>
         <source>To Coda</source>
-        <translation type="unfinished"/>
+        <translation>To Coda – до коди (заключного розділу)</translation>
     </message>
     <message>
         <source>4/4 common time</source>
@@ -3218,35 +3242,35 @@ before closing?</source>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Аколода</translation>
+        <translation>Аколада</translation>
     </message>
     <message>
         <source>Akkolade</source>
-        <translation>Акколада</translation>
+        <translation>Аколада</translation>
     </message>
     <message>
         <source>1 through stem</source>
-        <translation type="unfinished"/>
+        <translation>1 риска на штиль</translation>
     </message>
     <message>
         <source>2 through stem</source>
-        <translation type="unfinished"/>
+        <translation>2 риски на штиль</translation>
     </message>
     <message>
         <source>3 through stem</source>
-        <translation type="unfinished"/>
+        <translation>3 риски на штиль</translation>
     </message>
     <message>
         <source>1 between notes</source>
-        <translation>1 між нотами</translation>
+        <translation>1 риска між нотами</translation>
     </message>
     <message>
         <source>2 between notes</source>
-        <translation>2 між нотами</translation>
+        <translation>2 риски між нотами</translation>
     </message>
     <message>
         <source>3 between notes</source>
-        <translation>3 між нотами</translation>
+        <translation>3 риски між нотами</translation>
     </message>
     <message>
         <source>Beam Properties</source>
@@ -3492,7 +3516,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Fingering %1</source>
-        <translation>Аплікатура %1</translation>
+        <translation>Аплікатура „%1“</translation>
     </message>
     <message>
         <source>String number %1</source>
@@ -3500,19 +3524,19 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Repeat measure sign</source>
-        <translation type="unfinished"/>
+        <translation>Знак повторення такту чи долі</translation>
     </message>
     <message>
         <source>Da Capo</source>
-        <translation type="unfinished"/>
+        <translation>Da Capo – повторити від початку</translation>
     </message>
     <message>
         <source>Da Capo al Fine</source>
-        <translation type="unfinished"/>
+        <translation>Da Capo al Fine – повторити від початку до кінця</translation>
     </message>
     <message>
         <source>Da Capo al Coda</source>
-        <translation type="unfinished"/>
+        <translation>Da Capo al coda – повторити від початку до вказаного місця, після чого грати коду</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
@@ -3528,7 +3552,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation type="unfinished"/>
+        <translation>Розпірка для нотоносця</translation>
     </message>
     <message>
         <source>Start beam</source>
@@ -3584,7 +3608,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Varied coda</source>
-        <translation type="unfinished"/>
+        <translation>Змінна кода</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
@@ -3610,10 +3634,6 @@ is incompatible with current interface</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Bar %1 Beat %2.%3</source>
         <translation type="unfinished"/>
     </message>
@@ -3621,6 +3641,10 @@ is incompatible with current interface</source>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5231,7 +5255,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished">Нотний стан</translation>
+        <translation>Нотоносець</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
@@ -5247,7 +5271,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Властивості нотоносця</translation>
     </message>
     <message>
         <source>Split Staff...</source>
@@ -5303,7 +5327,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Breath Segment</source>
-        <translation>Сегмент дихання</translation>
+        <translation>Сегмент дихання, люфтпаузи</translation>
     </message>
     <message>
         <source>End Bar Line</source>
@@ -5599,7 +5623,7 @@ and check that the file location is correct</source>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished">MuseScore: редагування властивостей нотоносця/партії</translation>
+        <translation>MuseScore: редагування властивостей нотоносця/партії</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5682,7 +5706,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>master volume</source>
-        <translation type="unfinished"/>
+        <translation>загальна гучність</translation>
     </message>
     <message>
         <source>Vol</source>
@@ -6465,10 +6489,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Single sharps and flats only</source>
-        <translation type="unfinished"/>
+        <translation>Лише одиночні дієзи та бемолі</translation>
     </message>
     <message>
         <source>Use double sharps and flats</source>
+        <translation>Використовувати дубль дієзи та бемолі</translation>
+    </message>
+</context>
+<context>
+    <name>TremoloBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Форма</translation>
+    </message>
+    <message>
+        <source>firstChord</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>secondChord</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -6522,11 +6563,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>авто-акколада</translation>
+        <translation>авто-аколада</translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>акколада</translation>
+        <translation>аколада</translation>
     </message>
     <message>
         <source>relation:</source>
@@ -6708,11 +6749,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirrored-flat-slash</source>
-        <translation type="unfinished"/>
+        <translation>четвертьтоновий бемоль з перекресленням</translation>
     </message>
     <message>
         <source>flat-flat-slash</source>
-        <translation type="unfinished"/>
+        <translation>дубль-бемоль з перекресленням</translation>
     </message>
     <message>
         <source>sharp-slash</source>
@@ -6775,7 +6816,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Open...</source>
-        <translation type="unfinished">Відкрити...</translation>
+        <translation>Відкрити...</translation>
     </message>
     <message>
         <source>Save</source>
@@ -6791,11 +6832,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reload</source>
-        <translation type="unfinished">Оновити файл</translation>
+        <translation>Оновити файл</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Зачинити</translation>
+        <translation>Зачинити</translation>
     </message>
     <message>
         <source>file new</source>
@@ -6807,7 +6848,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Create new score</source>
-        <translation type="unfinished">Створити нову партитуру</translation>
+        <translation>Створити нову партитуру</translation>
     </message>
     <message>
         <source>Print...</source>
@@ -6815,211 +6856,211 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Undo</source>
-        <translation>Відміна</translation>
+        <translation>Скасувати останню дію</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished">Повторити</translation>
+        <translation>Повторити відмінене</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished">Вирізати</translation>
+        <translation>Вирізати</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished">Копіювати</translation>
+        <translation>Копіювати</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished">Вставити</translation>
+        <translation>Вставити</translation>
     </message>
     <message>
         <source>Instruments...</source>
-        <translation type="unfinished">Інструменти...</translation>
+        <translation>Інструменти...</translation>
     </message>
     <message>
         <source>Symbols...</source>
-        <translation type="unfinished">Символи...</translation>
+        <translation>Символи...</translation>
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation type="unfinished">Динаміка...</translation>
+        <translation>Динаміка...</translation>
     </message>
     <message>
         <source>Note Input</source>
-        <translation type="unfinished">Введення нот</translation>
+        <translation>Введення нот</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
-        <translation type="unfinished">Знаки альтерації по всій партитурі</translation>
+        <translation>Знаки альтерації по всій партитурі</translation>
     </message>
     <message>
         <source>Unison Above</source>
-        <translation type="unfinished">Унісон вверх</translation>
+        <translation>Унісон вверх</translation>
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation type="unfinished">Додати унісон вверх</translation>
+        <translation>Додати унісон вверх</translation>
     </message>
     <message>
         <source>Second Above</source>
-        <translation type="unfinished">Секунда вверх</translation>
+        <translation>Секунда вверх</translation>
     </message>
     <message>
         <source>Enter second above</source>
-        <translation type="unfinished">Додати секунду вверх</translation>
+        <translation>Додати секунду вверх</translation>
     </message>
     <message>
         <source>Third Above</source>
-        <translation type="unfinished">Терція вверх</translation>
+        <translation>Терція вверх</translation>
     </message>
     <message>
         <source>Enter third above</source>
-        <translation type="unfinished">Додати терцію вверх</translation>
+        <translation>Додати терцію вверх</translation>
     </message>
     <message>
         <source>Fourth Above</source>
-        <translation type="unfinished">Кварта вверх</translation>
+        <translation>Кварта вверх</translation>
     </message>
     <message>
         <source>Enter fourth above</source>
-        <translation type="unfinished">Додати кварту вверх</translation>
+        <translation>Додати кварту вверх</translation>
     </message>
     <message>
         <source>Fifth Above</source>
-        <translation type="unfinished">Квінта вверх</translation>
+        <translation>Квінта вверх</translation>
     </message>
     <message>
         <source>Enter fifth above</source>
-        <translation type="unfinished">Додати квітну вверх</translation>
+        <translation>Додати квінту вверх</translation>
     </message>
     <message>
         <source>Sixth Above</source>
-        <translation type="unfinished">Секста вверх</translation>
+        <translation>Секста вверх</translation>
     </message>
     <message>
         <source>Enter sixth above</source>
-        <translation type="unfinished">Додати сексту вверх</translation>
+        <translation>Додати сексту вверх</translation>
     </message>
     <message>
         <source>Seventh Above</source>
-        <translation type="unfinished">Септима вверх</translation>
+        <translation>Септима вверх</translation>
     </message>
     <message>
         <source>Enter seventh above</source>
-        <translation type="unfinished">Додати септиму вверх</translation>
+        <translation>Додати септиму вверх</translation>
     </message>
     <message>
         <source>Octave Above</source>
-        <translation type="unfinished">Октава вверх</translation>
+        <translation>Октава вверх</translation>
     </message>
     <message>
         <source>Enter octave above</source>
-        <translation type="unfinished">Додати октаву вверх</translation>
+        <translation>Додати октаву вверх</translation>
     </message>
     <message>
         <source>Ninth Above</source>
-        <translation type="unfinished">Нона вверх</translation>
+        <translation>Нона вверх</translation>
     </message>
     <message>
         <source>Enter ninth above</source>
-        <translation type="unfinished">Додати нону вверх</translation>
+        <translation>Додати нону вверх</translation>
     </message>
     <message>
         <source>Second Below</source>
-        <translation type="unfinished">Секунда вниз</translation>
+        <translation>Секунда вниз</translation>
     </message>
     <message>
         <source>Enter second below</source>
-        <translation type="unfinished">Додати секунду вниз</translation>
+        <translation>Додати секунду вниз</translation>
     </message>
     <message>
         <source>Third Below</source>
-        <translation type="unfinished">Терція вниз</translation>
+        <translation>Терція вниз</translation>
     </message>
     <message>
         <source>Enter third below</source>
-        <translation type="unfinished">Додати терцію вниз</translation>
+        <translation>Додати терцію вниз</translation>
     </message>
     <message>
         <source>Fourth Below</source>
-        <translation type="unfinished">Кварта вниз</translation>
+        <translation>Кварта вниз</translation>
     </message>
     <message>
         <source>Enter fourth below</source>
-        <translation type="unfinished">Додати кварту вниз</translation>
+        <translation>Додати кварту вниз</translation>
     </message>
     <message>
         <source>Fifth Below</source>
-        <translation type="unfinished">Квінта вниз</translation>
+        <translation>Квінта вниз</translation>
     </message>
     <message>
         <source>Enter fifth below</source>
-        <translation type="unfinished">Додати квінту вниз</translation>
+        <translation>Додати квінту вниз</translation>
     </message>
     <message>
         <source>Sixth Below</source>
-        <translation type="unfinished">Секста вниз</translation>
+        <translation>Секста вниз</translation>
     </message>
     <message>
         <source>Enter sixth below</source>
-        <translation type="unfinished">Додати сексту вниз</translation>
+        <translation>Додати сексту вниз</translation>
     </message>
     <message>
         <source>Seventh Below</source>
-        <translation type="unfinished">Септима вниз</translation>
+        <translation>Септима вниз</translation>
     </message>
     <message>
         <source>Enter seventh below</source>
-        <translation type="unfinished">Додати септиму вниз</translation>
+        <translation>Додати септиму вниз</translation>
     </message>
     <message>
         <source>Octave Below</source>
-        <translation type="unfinished">Октава вниз</translation>
+        <translation>Октава вниз</translation>
     </message>
     <message>
         <source>Enter octave below</source>
-        <translation type="unfinished">Додати оетаву вниз</translation>
+        <translation>Додати оетаву вниз</translation>
     </message>
     <message>
         <source>Ninth Below</source>
-        <translation type="unfinished">Нона вниз</translation>
+        <translation>Нона вниз</translation>
     </message>
     <message>
         <source>Enter ninth below</source>
-        <translation type="unfinished">Додати нону вниз</translation>
+        <translation>Додати нону вниз</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished">Ля</translation>
+        <translation>Ля</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished">Сі</translation>
+        <translation>Сі</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished">До</translation>
+        <translation>До</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">Ре</translation>
+        <translation>Ре</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished">Мі</translation>
+        <translation>Мі</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished">Фа</translation>
+        <translation>Фа</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished">Соль</translation>
+        <translation>Соль</translation>
     </message>
     <message>
         <source>Add A</source>
-        <translation type="unfinished">Додати Ля</translation>
+        <translation>Додати Ля</translation>
     </message>
     <message>
         <source>Add note A to chord</source>
@@ -7027,7 +7068,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add B</source>
-        <translation type="unfinished">Додати Сі</translation>
+        <translation>Додати Сі</translation>
     </message>
     <message>
         <source>Add note B to chord</source>
@@ -7035,7 +7076,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add C</source>
-        <translation type="unfinished">Додати До</translation>
+        <translation>Додати До</translation>
     </message>
     <message>
         <source>Add note C to chord</source>
@@ -7043,7 +7084,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add D</source>
-        <translation type="unfinished">Додати Ре</translation>
+        <translation>Додати Ре</translation>
     </message>
     <message>
         <source>Add note D to chord</source>
@@ -7051,7 +7092,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add E</source>
-        <translation type="unfinished">Додати Мі</translation>
+        <translation>Додати Мі</translation>
     </message>
     <message>
         <source>Add note E to chord</source>
@@ -7059,7 +7100,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add F</source>
-        <translation type="unfinished">Додати Фа</translation>
+        <translation>Додати Фа</translation>
     </message>
     <message>
         <source>Add note F to chord</source>
@@ -7067,7 +7108,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add G</source>
-        <translation type="unfinished">Додати Соль</translation>
+        <translation>Додати Соль</translation>
     </message>
     <message>
         <source>Add note G to chord</source>
@@ -7075,23 +7116,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>rest</source>
-        <translation type="unfinished">пауза</translation>
+        <translation>пауза</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
-        <translation type="unfinished">Збільшити розтягнення</translation>
+        <translation>Збільшити розтягнення</translation>
     </message>
     <message>
         <source>Add more stretch to selected measure</source>
-        <translation type="unfinished">Збільшити розтягнення у виділеному такті</translation>
+        <translation>Збільшити розтягнення у виділеному такті</translation>
     </message>
     <message>
         <source>Add Less Stretch</source>
-        <translation type="unfinished">Зменшити розтягнення</translation>
+        <translation>Зменшити розтягнення</translation>
     </message>
     <message>
         <source>Add less stretch to selected measure</source>
-        <translation type="unfinished">Зменшити розтягнення у виділеному такті</translation>
+        <translation>Зменшити розтягнення у виділеному такті</translation>
     </message>
     <message>
         <source>Reset Beam Mode</source>
@@ -7099,15 +7140,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>Вверх+Shift+Ctrl</translation>
     </message>
     <message>
         <source>down+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>Вниз+Shift+Ctrl</translation>
     </message>
     <message>
         <source>left+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>Наліво+Ctrl</translation>
     </message>
     <message>
         <source>add previous chord to selection</source>
@@ -7115,11 +7156,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>left+shift</source>
-        <translation type="unfinished">left+shift</translation>
+        <translation>Наліво+Shift</translation>
     </message>
     <message>
         <source>select to beginning of measure</source>
-        <translation type="unfinished">виділити до початку такту</translation>
+        <translation>виділити до початку такту</translation>
     </message>
     <message>
         <source>add next chord to selection</source>
@@ -7127,71 +7168,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>right+shift</source>
-        <translation type="unfinished">right+shift</translation>
+        <translation>Направо+Shift</translation>
     </message>
     <message>
         <source>select to end of measure</source>
-        <translation type="unfinished">виділити до кінця такту</translation>
+        <translation>виділити до кінця такту</translation>
     </message>
     <message>
         <source>right+ctrl+shift</source>
-        <translation type="unfinished">right+ctrl+shift</translation>
+        <translation>Направо+Ctrl+Shift</translation>
     </message>
     <message>
         <source>select to beginning of line</source>
-        <translation type="unfinished">віділити до початку рядка</translation>
+        <translation>віділити до початку рядка</translation>
     </message>
     <message>
         <source>shift+home</source>
-        <translation type="unfinished">shift+home</translation>
+        <translation>Shift+Home</translation>
     </message>
     <message>
         <source>select to end of line</source>
-        <translation type="unfinished">виділити до кінця рядка</translation>
+        <translation>виділити до кінця рядка</translation>
     </message>
     <message>
         <source>shift+end</source>
-        <translation type="unfinished">shift+end</translation>
+        <translation>Shift+End</translation>
     </message>
     <message>
         <source>select to beginning of score</source>
-        <translation type="unfinished">виділити до початку партитури</translation>
+        <translation>виділити до початку партитури</translation>
     </message>
     <message>
         <source>ctrl+shift+home</source>
-        <translation type="unfinished">ctrl+shift+home</translation>
+        <translation>Ctrl+Shift+Home</translation>
     </message>
     <message>
         <source>select to end of score</source>
-        <translation type="unfinished">виділити до кінця партитури</translation>
+        <translation>виділити до кінця партитури</translation>
     </message>
     <message>
         <source>ctrl+shift+end</source>
-        <translation type="unfinished">ctrl+shift+end</translation>
+        <translation>Ctrl+Shift+End</translation>
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation type="unfinished">додати нотний стан над виділенням</translation>
+        <translation>додати нотний стан над виділенням</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation type="unfinished">додати нотний стан під виділенням</translation>
+        <translation>додати нотний стан під виділенням</translation>
     </message>
     <message>
         <source>page-prev</source>
-        <translation type="unfinished">попередня сторінка</translation>
+        <translation>сторінка_попередня</translation>
     </message>
     <message>
         <source>page-next</source>
-        <translation type="unfinished">наступна сторінка</translation>
+        <translation>сторінка_наступна</translation>
     </message>
     <message>
         <source>page-top</source>
-        <translation type="unfinished"/>
+        <translation>сторінка_верх</translation>
     </message>
     <message>
         <source>page-end</source>
-        <translation type="unfinished"/>
+        <translation>сторінка_низ</translation>
     </message>
     <message>
         <source>add slur</source>
@@ -7215,11 +7256,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append Measure</source>
-        <translation type="unfinished">Додати такт наприкінці</translation>
+        <translation>Додати такт наприкінці</translation>
     </message>
     <message>
         <source>Append Measures...</source>
-        <translation type="unfinished">Додати такти наприкінці...</translation>
+        <translation>Додати такти наприкінці...</translation>
     </message>
     <message>
         <source>Insert Measure</source>
@@ -7239,51 +7280,51 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation type="unfinished">Додати горизонтальну рамку наприкінці</translation>
+        <translation>Додати горизонтальну рамку наприкінці</translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished">Додати вертикальну рамку наприкінці</translation>
+        <translation>Додати вертикальну рамку наприкінці</translation>
     </message>
     <message>
         <source>Duplet</source>
-        <translation type="unfinished">Дуоль</translation>
+        <translation>Дуоль</translation>
     </message>
     <message>
         <source>Triplet</source>
-        <translation type="unfinished">Тріоль</translation>
+        <translation>Тріоль</translation>
     </message>
     <message>
         <source>Quadruplet</source>
-        <translation type="unfinished">Квартоль</translation>
+        <translation>Квартоль</translation>
     </message>
     <message>
         <source>Quintuplet</source>
-        <translation type="unfinished">Квінтоль</translation>
+        <translation>Квінтоль</translation>
     </message>
     <message>
         <source>Sextuplet</source>
-        <translation type="unfinished">Секстоль</translation>
+        <translation>Секстоль</translation>
     </message>
     <message>
         <source>Septuplet</source>
-        <translation type="unfinished">Септоль</translation>
+        <translation>Септоль</translation>
     </message>
     <message>
         <source>Octuplet</source>
-        <translation type="unfinished">Октоль</translation>
+        <translation>Октоль</translation>
     </message>
     <message>
         <source>Nonuplet</source>
-        <translation type="unfinished">Нонемоль</translation>
+        <translation>Нонемоль</translation>
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation type="unfinished">Інші тріолеподібні групи</translation>
+        <translation>Інші тріолеподібні групи</translation>
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished">Інша...</translation>
+        <translation>Інша...</translation>
     </message>
     <message>
         <source>note longa</source>
@@ -7291,7 +7332,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Longa</source>
-        <translation type="unfinished">Довга (4 цілих ноти; люнга)</translation>
+        <translation>Довга (4 цілих ноти; люнга)</translation>
     </message>
     <message>
         <source>note breve</source>
@@ -7555,11 +7596,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Staff Text</source>
-        <translation type="unfinished">Додати текст стану</translation>
+        <translation>Додати текст нотного стану</translation>
     </message>
     <message>
         <source>Staff Text</source>
-        <translation type="unfinished">Текст нотного стану</translation>
+        <translation>Текст нотного стану</translation>
     </message>
     <message>
         <source>Add Text</source>
@@ -7831,11 +7872,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>show keyboard</source>
-        <translation type="unfinished"/>
+        <translation>показати клавіатуру</translation>
     </message>
     <message>
         <source>Show Keyboard</source>
-        <translation type="unfinished"/>
+        <translation>Показати клавіатуру</translation>
     </message>
     <message>
         <source>enable script debugger</source>
@@ -8279,11 +8320,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append measure</source>
-        <translation type="unfinished"/>
+        <translation>Додати такт наприкінці</translation>
     </message>
     <message>
         <source>Append measures</source>
-        <translation type="unfinished"/>
+        <translation>Додати такти наприкінці</translation>
     </message>
     <message>
         <source>Insert measure</source>
@@ -8295,7 +8336,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>split window horizontal</source>
-        <translation type="unfinished"/>
+        <translation>розділити вікно по горизонталі</translation>
     </message>
     <message>
         <source>Documents Side by Side</source>
@@ -8303,7 +8344,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>split window vertical</source>
-        <translation type="unfinished"/>
+        <translation>розділити вікно по вертикалі</translation>
     </message>
     <message>
         <source>Documents Stacked</source>
@@ -8315,7 +8356,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Seek to begin</source>
-        <translation type="unfinished"/>
+        <translation>Шукати до початку</translation>
     </message>
     <message>
         <source>Player rewind</source>
@@ -8327,7 +8368,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Seek to end</source>
-        <translation type="unfinished"/>
+        <translation>Шукати до кінця</translation>
     </message>
     <message>
         <source>Play repeats on/off</source>
@@ -8335,15 +8376,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load style</source>
-        <translation type="unfinished"/>
+        <translation>Завантажити стиль</translation>
     </message>
     <message>
         <source>Save style</source>
-        <translation type="unfinished"/>
+        <translation>Зберегти стиль</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"/>
+        <translation>Позначити усе</translation>
     </message>
     <message>
         <source>Edit Chord Style...</source>
@@ -8351,23 +8392,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Вилучити</translation>
+        <translation>Вилучити</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
-        <translation type="unfinished"/>
+        <translation>Вилучити вміст позначеного такту</translation>
     </message>
     <message>
         <source>Timewise Delete</source>
-        <translation type="unfinished"/>
+        <translation>Вилучити часову прив’язку</translation>
     </message>
     <message>
         <source>Delete element and duration</source>
-        <translation type="unfinished"/>
+        <translation>Вилучити елемент та тривалість</translation>
     </message>
     <message>
         <source>Parts...</source>
-        <translation type="unfinished">Партії...</translation>
+        <translation>Партії...</translation>
     </message>
 </context>
 <context>
@@ -8406,7 +8447,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tenuto</source>
-        <translation type="unfinished">тенуто (витримано)</translation>
+        <translation>тенуто (витримано)</translation>
     </message>
     <message>
         <source>uportato</source>
@@ -8470,19 +8511,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upprall</source>
-        <translation type="unfinished"/>
+        <translation>мордент вгору</translation>
     </message>
     <message>
         <source>downprall</source>
-        <translation type="unfinished"/>
+        <translation>мордент вниз</translation>
     </message>
     <message>
         <source>upmordent</source>
-        <translation type="unfinished"/>
+        <translation>зворотний мордент вгору</translation>
     </message>
     <message>
         <source>downmordent</source>
-        <translation type="unfinished"/>
+        <translation>зворотний мордент вниз</translation>
     </message>
     <message>
         <source>ushortfermata</source>
@@ -8656,7 +8697,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Breath</source>
-        <translation>Дихання</translation>
+        <translation>Дихання, люфтпауза</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -8757,7 +8798,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Spacer</source>
-        <translation type="unfinished"/>
+        <translation>Розпірка</translation>
     </message>
     <message>
         <source>LedgerLine</source>
@@ -9118,7 +9159,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirrored flat slash</source>
-        <translation type="unfinished"/>
+        <translation>четвертьтоновий бемоль з перекресленням</translation>
     </message>
     <message>
         <source>flat flat</source>
@@ -9474,11 +9515,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>coda</source>
-        <translation type="unfinished"/>
+        <translation>кода</translation>
     </message>
     <message>
         <source>varied coda</source>
-        <translation type="unfinished"/>
+        <translation>змінна кода</translation>
     </message>
     <message>
         <source>rcomma</source>
@@ -9526,31 +9567,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up prall</source>
-        <translation type="unfinished"/>
+        <translation>мордент вгору</translation>
     </message>
     <message>
         <source>up mordent</source>
-        <translation type="unfinished"/>
+        <translation>зворотний мордент вгору</translation>
     </message>
     <message>
         <source>prall down</source>
-        <translation type="unfinished"/>
+        <translation>мордент вниз</translation>
     </message>
     <message>
         <source>down prall</source>
-        <translation type="unfinished"/>
+        <translation>мордент вниз</translation>
     </message>
     <message>
         <source>down mordent</source>
-        <translation type="unfinished"/>
+        <translation>зворотний мордент вниз</translation>
     </message>
     <message>
         <source>prall up</source>
-        <translation type="unfinished"/>
+        <translation>мордент вгору</translation>
     </message>
     <message>
         <source>line prall</source>
-        <translation type="unfinished"/>
+        <translation>лінія мордента</translation>
     </message>
     <message>
         <source>caesura curved</source>

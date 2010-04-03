@@ -167,6 +167,18 @@ p, li { white-space: pre-wrap; }&#13;
         <translatorcomment>no idea what this means in this context</translatorcomment>
         <translation>Formular</translation>
     </message>
+    <message>
+        <source>Arpeggio</source>
+        <translation type="unfinished">Arpegiatto</translation>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished">Tremolo</translation>
+    </message>
+    <message>
+        <source>Glissando</source>
+        <translation type="unfinished">Glissando</translation>
+    </message>
 </context>
 <context>
     <name>ChordEdit</name>
@@ -830,6 +842,18 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>3</source>
         <translation>3</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tip</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Valoare</translation>
+    </message>
+    <message>
+        <source>Alter</source>
+        <translation>Modificare</translation>
     </message>
 </context>
 <context>
@@ -3628,10 +3652,6 @@ nu este compatibil cu interfaţa curentă</translation>
 %1</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Toate tipurile de fişier suportate (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Fişiere MuseScore (*.mscz *.mscx *.msc);;Fişiere MusicXML (*.xml *.mxl);;Fişiere MIDI (*.mid *.midi *.kar);;Fişiere Muse Data (*.md);;Fişiere Capella (*.cap);;Fişiere BB &lt;cu titlu de experiment&gt; (*.mgu *.MGU *.sgu *.SGU);;Toate tipurile de fişier (*)</translation>
-    </message>
-    <message>
         <source>Bar %1 Beat %2.%3</source>
         <translation>Măsura %1, timpul %2.%3</translation>
     </message>
@@ -3642,6 +3662,10 @@ nu este compatibil cu interfaţa curentă</translation>
         <translation>Nu s-a putut încărca modulul&#13;
 "%1" linia %2:&#13;
 %3</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <translation>Toate fișierele recunoscute (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Fișiere MuseScore (*.mscz *.mscx *.msc);;Fișiere MusicXML (*.xml *.mxl);;Fișiere MIDI (*.mid *.midi *.kar);;Fișiere Muse Data (*.md);;Capella Files (*.cap);;Fișiere BB &lt;cu titlu de experiment&gt; (*.mgu *.MGU *.sgu *.SGU);;Fișiere Overture &lt;cu titlu de experiment&gt; (*.ove);;Toate Fișierele (*)</translation>
     </message>
 </context>
 <context>
@@ -6496,6 +6520,23 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Use double sharps and flats</source>
         <translation>Cu dublu-diez sau dublu-bemol</translation>
+    </message>
+</context>
+<context>
+    <name>TremoloBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>firstChord</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>secondChord</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
