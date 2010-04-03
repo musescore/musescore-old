@@ -1431,8 +1431,7 @@ void ScoreView::setViewRect(const QRectF& r)
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
-      double _spatium = score()->spatium() * _matrix.m11();
-      emit offsetChanged(_matrix.dx() / _spatium, _matrix.dy() / _spatium);
+      emit offsetChanged(_matrix.dx(), _matrix.dy());
       }
 
 //---------------------------------------------------------
@@ -2064,8 +2063,7 @@ void ScoreView::zoom(int step, const QPoint& pos)
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
       emit viewRectChanged();
-      double _spatium = score()->spatium() * _matrix.m11();
-      emit offsetChanged(_matrix.dx() / _spatium, _matrix.dy() / _spatium);
+      emit offsetChanged(_matrix.dx(), _matrix.dy());
       update();
       }
 
@@ -2107,8 +2105,7 @@ void ScoreView::wheelEvent(QWheelEvent* event)
 
       scroll(dx, dy, QRect(0, 0, width(), height()));
       emit viewRectChanged();
-      double _spatium = score()->spatium() * _matrix.m11();
-      emit offsetChanged(_matrix.dx() / _spatium, _matrix.dy() / _spatium);
+      emit offsetChanged(_matrix.dx(), _matrix.dy());
       }
 
 //---------------------------------------------------------
@@ -2798,8 +2795,7 @@ void ScoreView::dragScoreView(QMouseEvent* ev)
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
-      double _spatium = score()->spatium() * _matrix.m11();
-      emit offsetChanged(_matrix.dx() / _spatium, _matrix.dy() / _spatium);
+      emit offsetChanged(_matrix.dx(), _matrix.dy());
       emit viewRectChanged();
       }
 
@@ -3211,8 +3207,7 @@ void ScoreView::setOffset(qreal x, qreal y)
          _matrix.m22(), _matrix.m23(), x, y, _matrix.m33());
       imatrix = _matrix.inverted();
       emit viewRectChanged();
-      double _spatium = score()->spatium() * _matrix.m11();
-      emit offsetChanged(x / _spatium, y / _spatium);
+      emit offsetChanged(x, y);
       }
 
 //---------------------------------------------------------

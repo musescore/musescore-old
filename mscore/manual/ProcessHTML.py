@@ -4,6 +4,13 @@
 import sys
 from optparse import OptionParser
 
+# Save file (to debug output)
+def save(contents, file_name):
+    out_file = open(file_name,"w")
+    out_file.write(contents)
+    out_file.close()
+
+
 # Get handbook from the web
 def obtainHTML(url, verbose, language_code='en'):
     if verbose:
@@ -50,7 +57,8 @@ def insertH1Anchors(html_source, anchors, verbose):
         name = name.replace('%c5%81','%c5%82') #manually convert to lower case (Python doesn't seem know the lowercase equivalent of this charater
         name = name.replace('%c3%9a','%c3%ba') #manually convert Ú to lower case ú (Hungarian handbook)
         name = name.replace('%c3%96','%c3%b6') #manually convert Ö to lower case ö (Hungarian handbook)
-                
+        name = name.replace('%c3%9c','%c3%bc') #manually convert Ü to lower case ü (Hungarian handbook)
+        name = name.replace('li%c3%b1as','li%c3%b1') #workaround incorrect url on website (Galacian handbook)
         split[i-1] = split[i-1] + '<a name="' + name + '"></a>'
         anchors.append(name)
         #print name
@@ -104,6 +112,8 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'Cap&iacute;tol [number]'
     elif language_code == 'de':
         chapter = 'Kapitel [number]'
+    elif language_code == 'el':
+        chapter = 'Κεφάλαιο [number]'
     elif language_code == 'es':
         chapter = 'Cap&iacute;tulo [number]'
     elif language_code == 'fi':
@@ -124,6 +134,8 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'Rozdział [number]'
     elif language_code == 'pt-br':
         chapter = 'Capítulo [number]'
+    elif language_code == 'ro':
+        chapter = 'Capitolul [number]'
     elif language_code == 'ru':
         chapter = 'Глава [number]'
 
@@ -169,6 +181,8 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
 
     for i in range(1, len(split)):
         original_href = split[i][0:split[i].index('"')]
+        if (original_href == "/"):
+            original_href = "http://musescore.org/"
 
         # Fix links to h1 and h2 anchors
         internal_href = original_href.replace(handbook_url + '/','#').replace('%20','-').replace('%2520','-').lower()
@@ -204,7 +218,7 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
                 print " * WARNING: no anchor tag corresponding to ", internal_href
 
     html_source = 'href="'.join(split)
-
+    
     return html_source
 
 
@@ -504,6 +518,9 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'de':
         url = 'http://musescore.org/de/print/book/export/html/98'
         internal = 'http://musescore.org/de/handbuch'
+    elif language_code == 'el':
+        url = 'http://musescore.org/el/print/book/export/html/3533'
+        internal = 'http://musescore.org/el/εγχειρίδιο' #%CE%B5%CE%B3%CF%87%CE%B5%CE%B9%CF%81%CE%AF%CE%B4%CE%B9%CE%BF
     elif language_code == 'es':
         url = 'http://musescore.org/es/print/book/export/html/137'
         internal = 'http://musescore.org/es/manual'
@@ -537,6 +554,9 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'pt-br':
         url = 'http://musescore.org/pt-br/print/book/export/html/1248'
         internal = 'http://musescore.org/pt-br/manual-pt-br' #podr%C4%99cznik'
+    elif language_code == 'ro':
+        url = 'http://musescore.org/ro/print/book/export/html/3081'
+        internal = 'http://musescore.org/ro/manual'
     elif language_code == 'ru':
         url = 'http://musescore.org/ru/print/book/export/html/2352'
         internal = 'http://musescore.org/ru/cправочник' #c%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA'
@@ -560,7 +580,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
         html = changeToH2(html)
 
     html = chapterHeading(html, verbose, language_code)
-        
+  
     html, anchors = insertH3Anchors(html, anchors, verbose)
     html = fixLinks(html, anchors, verbose, internal, language_code)
     html = removeBaseTag(html, language_code)
@@ -569,7 +589,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
     if download_images != 'local' and not offline:
         downloadImages(html, verbose, download_images)
-        
+    
     html = fixImgSrc(html, verbose)
     html = addCoverPage(html, verbose)
     html = addLastPage(html, verbose, internal, language_code)
@@ -582,7 +602,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
 
 def main():
-    language_choices = ['all','en','ca','de','es','fi','fr','gl','hu','it','ja','nb','nl','ru','pl','pt-BR']
+    language_choices = ['all','en','ca','de','el','es','fi','fr','gl','hu','it','ja','nb','nl','pl','pt-BR','ro','ru']
   
     parser = OptionParser()
     parser.add_option("-l","--lang", dest="language_code",

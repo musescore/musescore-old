@@ -26,7 +26,7 @@
 #include "measure.h"
 #include "al/al.h"
 #include "rest.h"
-#include "omr/page.h"
+#include "omr/omrpage.h"
 
 //---------------------------------------------------------
 //   importPdf
@@ -34,7 +34,7 @@
 
 bool Score::importPdf(const QString& path)
       {
-      _omr = new Omr(path);
+      _omr = new Omr(path, this);
       if (!_omr->read()) {
             delete _omr;
             _omr = 0;

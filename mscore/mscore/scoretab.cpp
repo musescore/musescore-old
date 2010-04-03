@@ -96,7 +96,7 @@ void ScoreTab::setCurrent(int n)
             stack->addWidget(vs);
             if (score->showOmr()) {
                   Omr* omr = score->omr();
-                  OmrView* sv = omr->newOmrView();
+                  OmrView* sv = omr->newOmrView(v);
                   vs->addWidget(sv);
                   connect(v, SIGNAL(scaleChanged(double)), sv, SLOT(setScale(double)));
                   connect(v, SIGNAL(offsetChanged(double,double)), sv, SLOT(setOffset(double,double)));
@@ -106,9 +106,7 @@ void ScoreTab::setCurrent(int n)
                   double _spatium = score->spatium();
                   double scale = _matrix.m11() * _spatium;
                   sv->setScale(scale);
-                  double dx = _matrix.dx() / scale;
-                  double dy = _matrix.dy() / scale;
-                  sv->setOffset(dx, dy);
+                  sv->setOffset(_matrix.dx(), _matrix.dy());
                   QList<int> sizes;
                   sizes << 100 << 100;
                   vs->setSizes(sizes);

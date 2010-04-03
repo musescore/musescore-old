@@ -37,6 +37,7 @@
         <channel>
            <program>72</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E<symbol name="flat"/> Flute</name>
@@ -49,6 +50,7 @@
         <channel>
            <program>73</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Flute</name>
@@ -81,6 +83,7 @@
         <channel>
            <program>73</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Contra-alto Flute</name>
@@ -93,6 +96,7 @@
         <channel>
            <program>73</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Contrabass Flute</name>
@@ -103,6 +107,7 @@
         <channel>
            <program>73</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Subcontra-alto Flute</name>
@@ -115,6 +120,7 @@
         <channel>
            <program>73</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Subcontrabass Flute</name>
@@ -125,6 +131,7 @@
         <channel>
            <program>73</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Hypobass Flute</name>
@@ -135,6 +142,7 @@
         <channel>
            <program>73</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Transverse Flute</name>
@@ -145,6 +153,7 @@
         <channel>
            <program>77</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Transverse Flute</name>
@@ -155,6 +164,7 @@
         <channel>
            <program>82</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Danso</name>
@@ -165,6 +175,7 @@
         <channel>
            <program>76</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>A Dizi</name>
@@ -175,6 +186,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>G Dizi</name>
@@ -185,6 +197,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Dizi</name>
@@ -195,6 +208,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E Dizi</name>
@@ -205,6 +219,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>D Dizi</name>
@@ -215,6 +230,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Dizi</name>
@@ -225,6 +241,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Quena</name>
@@ -235,6 +252,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>G Quena</name>
@@ -245,6 +263,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Quena</name>
@@ -255,6 +274,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>D Quena</name>
@@ -265,6 +285,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Pan Flute</name>
@@ -365,6 +386,7 @@
         <channel>
            <program>78</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>English Flageolet</name>
@@ -375,6 +397,7 @@
         <channel>
            <program>78</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tonette</name>
@@ -385,6 +408,7 @@
         <channel>
            <program>68</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>G Soprano Ocarina</name>
@@ -395,6 +419,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Soprano Ocarina</name>
@@ -405,6 +430,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Soprano Ocarina</name>
@@ -415,6 +441,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Soprano Ocarina</name>
@@ -425,6 +452,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>G Alto Ocarina</name>
@@ -435,6 +463,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Alto Ocarina</name>
@@ -445,6 +474,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Alto Ocarina</name>
@@ -455,6 +485,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Alto Ocarina</name>
@@ -465,6 +496,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Bass Ocarina</name>
@@ -475,6 +507,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Soprano Gemshorn</name>
@@ -485,6 +518,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Gemshorn</name>
@@ -495,6 +529,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tenor Gemshorn</name>
@@ -505,6 +540,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bass Gemshorn</name>
@@ -515,6 +551,7 @@
         <channel>
            <program>79</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B Galoubet</name>
@@ -527,6 +564,7 @@
         <channel>
            <program>74</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Slide Whistle</name>
@@ -549,6 +587,7 @@
         <channel>
            <program>68</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Oboe</name>
@@ -571,6 +610,7 @@
         <channel>
            <program>68</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>English Horn</name>
@@ -593,6 +633,7 @@
         <channel>
            <program>68</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Heckelphone</name>
@@ -603,6 +644,7 @@
         <channel>
            <program>68</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Baroque Oboe</name>
@@ -613,6 +655,7 @@
         <channel>
            <program>69</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Oboe da caccia</name>
@@ -625,6 +668,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Shawm</name>
@@ -635,6 +679,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Sopranino Shawm</name>
@@ -645,6 +690,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Descant Pommer</name>
@@ -655,6 +701,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Pommer</name>
@@ -665,6 +712,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Soprano Crumhorn</name>
@@ -675,6 +723,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Crumhorn</name>
@@ -685,6 +734,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tenor Crumhorn</name>
@@ -695,6 +745,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bass Crumhorn</name>
@@ -705,6 +756,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Greatbass Crumhorn</name>
@@ -715,6 +767,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Soprano Cornamuse</name>
@@ -725,6 +778,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Cornamuse</name>
@@ -735,6 +789,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tenor Cornamuse</name>
@@ -745,6 +800,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bass Cornamuse</name>
@@ -755,6 +811,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Soprano Kelhorn</name>
@@ -765,6 +822,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Kelhorn</name>
@@ -775,6 +833,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tenor Kelhorn</name>
@@ -785,6 +844,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bass Kelhorn</name>
@@ -795,6 +855,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Greatbass Kelhorn</name>
@@ -805,6 +866,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Sopranino Rauschpfeife</name>
@@ -815,6 +877,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Soprano Rauschpfeife</name>
@@ -825,6 +888,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Duduk</name>
@@ -835,6 +899,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E Duduk</name>
@@ -845,6 +910,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>D Duduk</name>
@@ -855,6 +921,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Duduk</name>
@@ -865,6 +932,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B Duduk</name>
@@ -875,6 +943,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Duduk</name>
@@ -885,6 +954,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>A Duduk</name>
@@ -905,6 +975,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>A Bass Duduk</name>
@@ -915,6 +986,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Shanai</name>
@@ -925,18 +997,7 @@
         <channel>
            <program>111</program>
            </channel>
-        </instrument>
-     <instrument>
-        <name>Soprano Clarinet</name>
-        <short-name>S. Cl.</short-name>
-        <clef>0</clef>
-        <transposeDiatonic>4</transposeDiatonic>
-        <transposeChromatic>7</transposeChromatic>
-        <aPitchRange>59-88</aPitchRange>
-        <pPitchRange>59-88</pPitchRange>
-        <channel>
-           <program>71</program>
-           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Piccolo Clarinet</name>
@@ -946,6 +1007,19 @@
         <transposeChromatic>8</transposeChromatic>
         <aPitchRange>60-99</aPitchRange>
         <pPitchRange>60-104</pPitchRange>
+        <channel>
+           <program>71</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Soprano Clarinet</name>
+        <short-name>S. Cl.</short-name>
+        <clef>0</clef>
+        <transposeDiatonic>4</transposeDiatonic>
+        <transposeChromatic>7</transposeChromatic>
+        <aPitchRange>59-88</aPitchRange>
+        <pPitchRange>59-88</pPitchRange>
         <channel>
            <program>71</program>
            </channel>
@@ -973,6 +1047,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Clarinet</name>
@@ -983,6 +1058,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Clarinet</name>
@@ -1019,6 +1095,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Clarinet</name>
@@ -1043,6 +1120,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bass Clarinet</name>
@@ -1067,6 +1145,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Contrabass Clarinet</name>
@@ -1079,6 +1158,7 @@
         <channel>
            <program>71</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Sopranino Chalumeau</name>
@@ -1089,6 +1169,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Soprano Chalumeau</name>
@@ -1099,6 +1180,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Chalumeau</name>
@@ -1109,6 +1191,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tenor Chalumeau</name>
@@ -1119,6 +1202,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tarogato</name>
@@ -1129,6 +1213,7 @@
         <channel>
            <program>69</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Octavin</name>
@@ -1139,6 +1224,7 @@
         <channel>
            <program>69</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bassoon</name>
@@ -1171,6 +1257,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Rackett</name>
@@ -1181,6 +1268,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Sopranino Sarrusophone</name>
@@ -1193,6 +1281,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Soprano Sarrusophone</name>
@@ -1205,6 +1294,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Sarrusophone</name>
@@ -1217,6 +1307,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tenor Sarrusophone</name>
@@ -1229,6 +1320,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Baritone Sarrusophone</name>
@@ -1241,6 +1333,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bass Sarrusophone</name>
@@ -1253,6 +1346,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Contrabass Sarrusophone</name>
@@ -1265,6 +1359,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Sopranissimo Saxophone</name>
@@ -1277,6 +1372,7 @@
         <channel>
            <program>64</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Sopranino Saxophone</name>
@@ -1289,6 +1385,7 @@
         <channel>
            <program>64</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Soprano Saxophone</name>
@@ -1349,6 +1446,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Contrabass Saxophone</name>
@@ -1361,6 +1459,7 @@
         <channel>
            <program>67</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Subcontrabass Saxophone</name>
@@ -1373,16 +1472,7 @@
         <channel>
            <program>67</program>
            </channel>
-        </instrument>
-     <instrument>
-        <name>Woodwind Synthesizer</name>
-        <short-name>Ww. Syn.</short-name>
-        <clef>0</clef>
-        <aPitchRange>0-127</aPitchRange>
-        <pPitchRange>0-127</pPitchRange>
-        <channel>
-           <program>80</program>
-           </channel>
+        <extended>1</extended>
         </instrument>
      </instrument-group>
 
@@ -1408,6 +1498,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>High B<symbol name="flat"/> Horn</name>
@@ -1420,6 +1511,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>A Horn</name>
@@ -1432,6 +1524,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>A<symbol name="flat"/> Horn</name>
@@ -1444,6 +1537,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>G Horn</name>
@@ -1456,6 +1550,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E Horn</name>
@@ -1468,6 +1563,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E<symbol name="flat"/> Horn</name>
@@ -1480,6 +1576,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>D Horn</name>
@@ -1492,6 +1589,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Low C Horn</name>
@@ -1502,6 +1600,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Low B<symbol name="flat"/> Horn</name>
@@ -1514,6 +1613,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Piccolo Trumpet</name>
@@ -1529,6 +1629,7 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>A Piccolo Trumpet</name>
@@ -1559,6 +1660,7 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>D Trumpet</name>
@@ -1574,6 +1676,7 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Trumpet</name>
@@ -1617,6 +1720,7 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Bass Trumpet</name>
@@ -1632,6 +1736,7 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Baroque Trumpet</name>
@@ -1647,6 +1752,7 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E<symbol name="flat"/> Baroque Trumpet</name>
@@ -1662,6 +1768,7 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>D Baroque Trumpet</name>
@@ -1677,6 +1784,7 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Baroque Trumpet</name>
@@ -1690,6 +1798,7 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Baroque Trumpet</name>
@@ -1705,10 +1814,11 @@
         <channel name="mute">
           <program value="59"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E<symbol name="flat"/> Cornet</name>
-        <short-name>E<symbol name="flat"/> B. Tpt.</short-name>
+        <short-name>E<symbol name="flat"/> Cnt.</short-name>
         <clef>0</clef>
         <transposeDiatonic>2</transposeDiatonic>
         <transposeChromatic>3</transposeChromatic>
@@ -1760,6 +1870,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Zink</name>
@@ -1770,6 +1881,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tenor Zink</name>
@@ -1780,6 +1892,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Serpent</name>
@@ -1790,6 +1903,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Alto Ophicleide</name>
@@ -1800,6 +1914,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E<symbol name="flat"/> Alto Ophicleide</name>
@@ -1810,6 +1925,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>C Bass Ophicleide</name>
@@ -1820,6 +1936,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Bass Ophicleide</name>
@@ -1830,6 +1947,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E<symbol name="flat"/> Contrabass Ophicleide</name>
@@ -1840,6 +1958,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Alto Horn</name>
@@ -1852,6 +1971,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E<symbol name="flat"/> Alto Horn</name>
@@ -1898,6 +2018,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Mellophonium</name>
@@ -1910,6 +2031,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>E<symbol name="flat"/> Mellophonium</name>
@@ -1922,6 +2044,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>B<symbol name="flat"/> Wagner Tuba</name>
@@ -1934,6 +2057,7 @@
         <channel>
            <program>60</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>F Wagner Tuba</name>
@@ -1946,6 +2070,7 @@
         <channel>
            <program>56</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Trombone</name>
@@ -1966,6 +2091,7 @@
         <channel>
            <program>57</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Trombone</name>
@@ -1976,6 +2102,7 @@
         <channel>
            <program>57</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tenor Trombone</name>
@@ -1986,6 +2113,7 @@
         <channel>
            <program>57</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bass Trombone</name>
@@ -2006,6 +2134,7 @@
         <channel>
            <program>57</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Euphonium</name>
@@ -3632,6 +3761,7 @@
         <channel>
            <program>24</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Guitar</name>
@@ -3765,6 +3895,7 @@
         <channel>
            <program>24</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bouzouki (4-course)</name>
@@ -3775,6 +3906,7 @@
         <channel>
            <program>24</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Ukulele</name>
@@ -3795,6 +3927,7 @@
         <channel>
            <program>24</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Banjo</name>
@@ -3825,6 +3958,7 @@
         <channel>
            <program>106</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Hutozao Shamisen</name>
@@ -3835,6 +3969,7 @@
         <channel>
            <program>106</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Sitar</name>
@@ -4115,6 +4250,7 @@
         <channel>
            <program>20</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Alto Sheng</name>
@@ -4125,6 +4261,7 @@
         <channel>
            <program>20</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Tenor Sheng</name>
@@ -4135,6 +4272,7 @@
         <channel>
            <program>20</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Bass Sheng</name>
@@ -4145,6 +4283,7 @@
         <channel>
            <program>20</program>
            </channel>
+        <extended>1</extended>
         </instrument>
      </instrument-group>
 
@@ -4256,6 +4395,73 @@
           </channel>
         </instrument>
      <instrument>
+        <name>Soprano Viola da gamba</name>
+        <short-name>S. Vla. d. g.</short-name>
+        <clef>9</clef>
+        <aPitchRange>50-86</aPitchRange>
+        <pPitchRange>50-93</pPitchRange>
+        <channel>
+           <program>110</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Alto Viola da gamba</name>
+        <short-name>A. Vla. d. g.</short-name>
+        <clef>11</clef>
+        <aPitchRange>45-81</aPitchRange>
+        <pPitchRange>45-88</pPitchRange>
+        <channel>
+           <program>110</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Tenor Viola da gamba</name>
+        <short-name>T. Vla. d. g.</short-name>
+        <clef>12</clef>
+        <aPitchRange>43-79</aPitchRange>
+        <pPitchRange>43-86</pPitchRange>
+        <channel>
+           <program>110</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Viola da gamba</name>
+        <short-name>Vla. d. g.</short-name>
+        <clef>4</clef>
+        <aPitchRange>38-74</aPitchRange>
+        <pPitchRange>38-81</pPitchRange>
+        <channel>
+           <program>110</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        </instrument>
+     <instrument>
         <name>Violoncello</name>
         <short-name>Vlc.</short-name>
         <clef>4</clef>
@@ -4352,70 +4558,6 @@
           </channel>
         </instrument>
      <instrument>
-        <name>Soprano Viola da gamba</name>
-        <short-name>S. Vla. d. g.</short-name>
-        <clef>9</clef>
-        <aPitchRange>50-86</aPitchRange>
-        <pPitchRange>50-93</pPitchRange>
-        <channel>
-           <program>110</program>
-           </channel>
-        <channel name="pizzicato">
-          <program value="45"/>
-          </channel>
-        <channel name="tremolo">
-          <program value="44"/>
-          </channel>
-        </instrument>
-     <instrument>
-        <name>Alto Viola da gamba</name>
-        <short-name>A. Vla. d. g.</short-name>
-        <clef>11</clef>
-        <aPitchRange>45-81</aPitchRange>
-        <pPitchRange>45-88</pPitchRange>
-        <channel>
-           <program>110</program>
-           </channel>
-        <channel name="pizzicato">
-          <program value="45"/>
-          </channel>
-        <channel name="tremolo">
-          <program value="44"/>
-          </channel>
-        </instrument>
-     <instrument>
-        <name>Tenor Viola da gamba</name>
-        <short-name>T. Vla. d. g.</short-name>
-        <clef>12</clef>
-        <aPitchRange>43-79</aPitchRange>
-        <pPitchRange>43-86</pPitchRange>
-        <channel>
-           <program>110</program>
-           </channel>
-        <channel name="pizzicato">
-          <program value="45"/>
-          </channel>
-        <channel name="tremolo">
-          <program value="44"/>
-          </channel>
-        </instrument>
-     <instrument>
-        <name>Viola da gamba</name>
-        <short-name>Vla. d. g.</short-name>
-        <clef>4</clef>
-        <aPitchRange>38-74</aPitchRange>
-        <pPitchRange>38-81</pPitchRange>
-        <channel>
-           <program>110</program>
-           </channel>
-        <channel name="pizzicato">
-          <program value="45"/>
-          </channel>
-        <channel name="tremolo">
-          <program value="44"/>
-          </channel>
-        </instrument>
-     <instrument>
         <name>Violone</name>
         <short-name>Vne.</short-name>
         <clef>5</clef>
@@ -4430,6 +4572,7 @@
         <channel name="tremolo">
           <program value="44"/>
           </channel>
+        <extended>1</extended>
         </instrument>
      </instrument-group>
 

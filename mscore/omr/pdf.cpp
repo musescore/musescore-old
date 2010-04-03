@@ -68,10 +68,11 @@ class QImageOutputDev: public OutputDev {
 //---------------------------------------------------------
 
 void QImageOutputDev::drawImage(GfxState* state, Object*, Stream* str,
-   int width, int height, GfxImageColorMap *colorMap, GBool, int*, GBool)
+   int width, int height, GfxImageColorMap* colorMap, GBool, int*, GBool)
       {
       if (colorMap->getNumPixelComps() == 1 && colorMap->getBits() == 1) {
-            // fprintf(f, "%d %d\n", width, height);
+// printf("Image %d %d\n", width, height);
+            bool invertBits = colorMap->getDecodeLow(0) == 0.0;
             str->reset();     // initialize stream
 
             double* ctm = state->getCTM();
@@ -86,7 +87,8 @@ void QImageOutputDev::drawImage(GfxState* state, Object*, Stream* str,
             pw = ((pw+31)/32) * 32;
             int ph = state->getPageHeight() / matrix.m22();
             if (image->isNull()) {
-                  *image = QImage(pw, ph+32, QImage::Format_MonoLSB);
+                  // *image = QImage(pw, ph+32, QImage::Format_MonoLSB);
+                  *image = QImage(width, height, QImage::Format_MonoLSB);
                   QVector<QRgb> ct(2);
                   ct[0] = qRgb(255, 255, 255);
                   ct[1] = qRgb(0, 0, 0);
@@ -94,32 +96,33 @@ void QImageOutputDev::drawImage(GfxState* state, Object*, Stream* str,
                   image->fill(0);
                   iy = 0;
                   }
-            if (image->width() < pw || image->height() < ph) {
+/*            if (image->width() < pw || image->height() < ph) {
                   printf("**********drop image %d x %d  <  %d x %d\n",
                      image->width(), image->height(), pw, ph);
                   return;
                   }
-
+  */
             // copy the stream
             int stride  = (width + 7) / 8;
-            unsigned char mask = 0xff << (stride * 8 - width);
-            int qstride = ((image->width() + 31) / 32) * 4;
-            const uchar* data = image->bits();
-
-            uchar* p = const_cast<uchar*>(data) + qstride * iy;;
-
+            uchar mask  = 0xff << (stride * 8 - width);
+            int qstride = image->bytesPerLine();
+            uchar* p    = image->bits();
             for (int y = 0; y < height; ++y) {
+                  p = image->scanLine(y);
                   int x = 0;
                   for (; x < stride; ++x) {
                         static unsigned char invert[16] = {
                               0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15
                               };
-                        unsigned char c = ~(str->getChar());
+                        unsigned char c = str->getChar();
+                        if (invertBits)
+                              c = ~c;
                         *p++ = (invert[c & 15] << 4) | invert[(c >> 4) & 15];
                         }
                   p[-1] &= ~mask;
-                  for (; x < qstride; ++x)
-                        *p++ = 0;
+
+//                  for (; x < qstride; ++x)
+//                        *p++ = 0;
                   }
             iy += height;
 

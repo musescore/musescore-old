@@ -18,8 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __PAGE_H__
-#define __PAGE_H__
+#ifndef __OMRPAGE_H__
+#define __OMRPAGE_H__
 
 class Omr;
 class Score;
@@ -31,10 +31,10 @@ struct HLine {
       };
 
 //---------------------------------------------------------
-//   Page
+//   OmrPage
 //---------------------------------------------------------
 
-class Page {
+class OmrPage {
       Omr* _omr;
       QImage _image;
       int cropL, cropR;       // crop values in words (32 bit) units
@@ -62,7 +62,7 @@ class Page {
       void searchNotes(int line, int x1, int x2, int y);
 
    public:
-      Page(Omr* _parent);
+      OmrPage(Omr* _parent);
       void setImage(const QImage& i)     { _image = i; }
       const QImage& image() const        { return _image; }
       void read(int);

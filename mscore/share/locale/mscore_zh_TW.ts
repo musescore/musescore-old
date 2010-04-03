@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation>修訂：628</translation>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -809,6 +809,13 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordList</name>
+    <message>
+        <source>Write Chord Description failed: </source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
@@ -837,6 +844,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>自動</translation>
     </message>
     <message>
@@ -881,10 +889,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -905,6 +915,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -921,7 +932,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished">標準</translation>
+        <translation>標準</translation>
     </message>
     <message>
         <source>cross</source>
@@ -969,7 +980,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">自動</translation>
+        <translation>自動</translation>
     </message>
     <message>
         <source>whole</source>
@@ -1019,7 +1030,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Id</source>
@@ -1027,7 +1038,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">名稱</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Save As</source>
@@ -1164,6 +1175,10 @@ failed: </source>
     <message>
         <source>MuseScore: Write Drumset</source>
         <translation>MuseScore：寫入鼓組</translation>
+    </message>
+    <message>
+        <source>Write File failed: </source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1478,6 +1493,14 @@ failed: </source>
         <source>down</source>
         <translation type="unfinished">向下</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1554,6 +1577,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation/>
     </message>
     <message>
@@ -2001,6 +2029,10 @@ failed: </source>
         <source>Close</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Part-%1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>Glissando</name>
@@ -2236,6 +2268,10 @@ failed: </source>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2294,6 +2330,10 @@ failed: </source>
         <source>Instrument List</source>
         <translation>樂器列表</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentsDialog</name>
@@ -2349,6 +2389,10 @@ failed: </source>
         <source>Instrument List</source>
         <translation>樂器列表</translation>
     </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>Jump</name>
@@ -2388,11 +2432,11 @@ failed: </source>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">清除</translation>
+        <translation>清除</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished">將拍號加入面板</translation>
+        <translation>將拍號加入面板</translation>
     </message>
     <message>
         <source>Add</source>
@@ -3049,10 +3093,6 @@ failed: </source>
         <translation>開啟最近(&amp;R)</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation>分譜...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>編輯(&amp;E)</translation>
     </message>
@@ -3549,7 +3589,28 @@ Restore session?</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bar %1 Beat %2.%3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Error loading plugin
+"%1" line %2:
+%3</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -3681,10 +3742,6 @@ Restore session?</source>
         <translation>符頭群組</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Auto</source>
         <translation type="unfinished">自動</translation>
     </message>
@@ -3697,7 +3754,15 @@ Restore session?</source>
         <translation type="unfinished">偏移</translation>
     </message>
     <message>
-        <source>OffTimeType:</source>
+        <source>Tuning</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4594,6 +4659,7 @@ Restore session?</source>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation>毫米</translation>
     </message>
     <message>
@@ -4602,10 +4668,6 @@ Restore session?</source>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Use Current Dimensions</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -4624,11 +4686,11 @@ Restore session?</source>
         <source>Auto-correction</source>
         <translation type="unfinished"/>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation type="unfinished"/>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"/>
     </message>
@@ -4674,6 +4736,10 @@ Restore session?</source>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Use Current Position</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4823,6 +4889,10 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5050,59 +5120,59 @@ failed: </source>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished">MuseScore 壓縮格式 (*.mscz)</translation>
+        <translation>MuseScore 壓縮格式 (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished">MuseScore 格式 (*.mscx)</translation>
+        <translation>MuseScore 格式 (*.mscx)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished">MusicXML 格式 (*.xml)</translation>
+        <translation>MusicXML 格式 (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished">MusicXML 壓縮格式 (*.mxl)</translation>
+        <translation>MusicXML 壓縮格式 (*.mxl)</translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished">標準 MIDI 檔案 (*.mid)</translation>
+        <translation>標準 MIDI 檔案 (*.mid)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">PDF 檔案 (*.pdf)</translation>
+        <translation>PDF 檔案 (*.pdf)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished">PostScript 檔案 (*.ps)</translation>
+        <translation>PostScript 檔案 (*.ps)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">PNG 點陣圖 (*.png)</translation>
+        <translation>PNG 點陣圖 (*.png)</translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">可變動向量繪圖 (*.svg)</translation>
+        <translation>可變動向量繪圖 (*.svg)</translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished">Lilypond 格式 (*.ly)</translation>
+        <translation>Lilypond 格式 (*.ly)</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished">Wave 音訊檔 (*.wav)</translation>
+        <translation>Wave 音訊檔 (*.wav)</translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished">Flac 音訊檔 (*.flac)</translation>
+        <translation>Flac 音訊檔 (*.flac)</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished">Ogg Vorbis 音訊檔 (*.ogg)</translation>
+        <translation>Ogg Vorbis 音訊檔 (*.ogg)</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished">MuseScore：儲存副本</translation>
+        <translation>MuseScore：儲存副本</translation>
     </message>
     <message>
         <source>The following file is locked: 
@@ -5117,6 +5187,18 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Load failed: </source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5161,6 +5243,11 @@ Try saving to a different location.</source>
     <message>
         <source>Measure</source>
         <translation type="unfinished">小節</translation>
+    </message>
+    <message>
+        <source>unknown drop format: formats %1:
+</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5258,6 +5345,47 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>subtract from selection</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">對話框</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>Seq</name>
+    <message>
+        <source>Init audio driver failed.
+Sequencer will be disabled.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore: Load SoundFont</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>No SoundFont configured
+Playback will be disabled.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Loading SoundFont
+"%1"
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
+and check that the file location is correct</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5445,10 +5573,12 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5523,7 +5653,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished">SoundFont 檔案 (*.sf2 *.SF2);;所有檔案 (*)</translation>
+        <translation>SoundFont 檔案 (*.sf2 *.SF2);;所有檔案 (*)</translation>
     </message>
     <message>
         <source>Synthesizer</source>
@@ -5555,6 +5685,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -5706,6 +5837,21 @@ Try saving to a different location.</source>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation/>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">設為隱藏</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">取消隱藏</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">文字屬性...</translation>
     </message>
 </context>
 <context>
@@ -5881,6 +6027,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation>X:</translation>
     </message>
     <message>
@@ -5901,6 +6048,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation>Y:</translation>
     </message>
     <message>
@@ -6018,6 +6166,14 @@ Try saving to a different location.</source>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>4/4 common time</source>
+        <translation type="unfinished">4/4 一般拍子</translation>
+    </message>
+    <message>
+        <source>2/2 alla breve</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -6297,10 +6453,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Use multi sharps and flats</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -7031,7 +7183,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>crescendo</source>
-        <translation type="unfinished">漸強</translation>
+        <translation>漸強</translation>
     </message>
     <message>
         <source>decrescendo</source>
@@ -7539,7 +7691,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished">低音譜號</translation>
+        <translation>低音譜號</translation>
     </message>
     <message>
         <source>Exchange Voice 1-2</source>
@@ -8196,6 +8348,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">分譜...</translation>
     </message>
 </context>
 <context>

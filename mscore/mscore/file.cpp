@@ -1263,7 +1263,7 @@ bool Score::read(QDomElement e)
                         //      _yoff *= DPMM;
                         }
                   else if (tag == "Omr") {
-                        _omr = new Omr;
+                        _omr = new Omr(this);
                         _omr->read(ee);
                         if (!_omr->read()) {
                               delete _omr;

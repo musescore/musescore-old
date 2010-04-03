@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_3151946181d28164929a44153fa32a88.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_03baa23ea1e0e9342c709f7490fa2cb9.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx"}});
@@ -13,7 +13,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/handbook/handbook' />
     <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_2201016fb500fdc8a6a1e9918a29addc.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_4eb6c605f0d66872c47ff3690a734887.css" />
   </head>
   <body>
         <div class="print-logo"></div>
@@ -169,6 +169,15 @@ yum localinstall musescore-0.9.4-1.fc10.x86_64.rpm</pre></li>
 </ul>
 <h3>MIDI keyboard</h3>
 <p>You can also insert pitches using a MIDI keyboard on Windows or Linux as of version 0.9.4. Version 0.9.3 or earlier has support for MIDI keyboard on Linux only.</p>
+<ol>
+<li>Connect your MIDI keyboard to the computer and switch your keyboard on</li>
+<li>Start MuseScore</li>
+<li>Create a new score</li>
+<li>Click to select the rest in measure 1 to indicate where you want note entry to begin</li>
+<li>Press N to begin note entry mode</li>
+<li>Select a note duration such as quarter note (crochet), as described above</li>
+<li>Press a note on your MIDI keyboard, and notice that the pitch is added to your score</li>
+</ol>
 <h3>Colors</h3>
 <p>MuseScore colors out-of-range notes for as yellow or red in versions 0.9.5 or later. Notes above or below the comfortable range of an amateur appear yellow, note beyond the comfortable range of a professional appear red. The colors are informational and appear on the computer screen but do not appear on printed copies of your scores. To disable note colors in versions 0.9.6 or later choose <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp></kbd>, click on the <kbd><samp>Note Entry</samp></kbd> tab, and unmark "Color notes outside of usable pitch range".</p>
 <h4>External links</h4>
@@ -244,7 +253,9 @@ For 0.9.5 and earlier, it's different. Press <kbd><kbd>Ctr</kbd></kbd> (Mac: <kb
 <h3>Staves</h3>
 <p>The <em>Visible</em> property allows you to show or hide the notes and staff lines for the current measure. The <em>Stemless</em> property allows you to show or hide all note stems for the current measure. Notes that normally have a stem such as half notes (minums) and quarter notes (crotchets) only show the note head when marked as stemless. </p>
 <h3>Duration</h3>
-<p>The <em>Nominal</em> duration is the time signature that is displayed on the score. You can change the <em>Actual</em> duration of a measure to anything regardless of the time signature displayed on the score. Normally the nominal and actual duration of a measure is identical. A pickup (upbeat) measure can have a shorter actual duration. For example a quarter note (crochet) pickup to a piece in 4/4 time would have a nominal measure duration of 4/4 but an actual duration of 1/4. </p>
+<p>The <em>Nominal</em> duration is the time signature that is displayed on the score. You can change the <em>Actual</em> duration of a measure to anything regardless of the time signature displayed on the score. Normally the nominal and actual duration of a measure is identical. However a pickup (upbeat) measure for example can have a shorter actual duration. </p>
+<p>In the figure below the quarter note (crochet) pickup has a nominal measure duration of 4/4 but an actual duration of 1/4. The measures in the middle have both nominal and actual durations of 4/4. The complimentary measure with only a dotted half note (dotted minum) at the end has an actual duration of 3/4.</p>
+<p><img src="/sites/musescore.org/files/incomplete-measures.png" alt="incomplete-measures.png" title="incomplete-measures.png" width="369" height="52" class="inline" /></p>
 <h3>Irregular</h3>
 <p>An "irregular" measure is not counted in the measure numbering. Normally a pickup measure is marked as "irregular". If you are using version 0.9.4 or earlier and mark a measure as irregular then you may need to save and reload the score before the measure numbers show the change.</p>
 <h3>Repeat count</h3>
@@ -285,7 +296,7 @@ Choose to show numbers on "every system" which numbers the first measure of each
   <p>A score can be exported via <kbd><samp class="menu">File</samp> → <samp class="menuitem">Save As...</samp></kbd> to several different formats:</p>
 <dl>
 <dt>Compressed MuseScore format (<code>*.mscz</code>)</dt>
-<dd>MSCZ is the standard <i>MuseScore</i> file format and recommended for most uses. A score saved in this format will not loose any information. The format is a ZIP-compressed version of <code>.msc</code> files.</dd>
+<dd>MSCZ is the standard <i>MuseScore</i> file format and recommended for most uses. A score saved in this format will not lose any information. The format is a ZIP-compressed version of <code>.msc</code> files.</dd>
 <dt class="latest">MuseScore format (<code>*.mscx</code>)</dt>
 <dd class="latest">MSCX is the uncompressed version of the <i>MuseScore</i> file format used in version 0.9.5 or later. A score saved in this format will not loose any information and is recommended if you need to manually edit the file format using a text editor. Previous versions of MuseScore used the MSC file extension. However MSC has file extension conflicts on Microsoft Windows and is blocked by some email providers. The new MSCX file extension supersedes the old MSC file extension due to the problems outlined above.</dd>
 <dt>MusicXML (<code>*.xml</code>)</dt>
@@ -319,7 +330,7 @@ Choose to show numbers on "every system" which numbers the first measure of each
   <div id="node-53" class="section-3">
   <h1 class="book-heading">Accidental</h1>
   <p><strong>Accidentals</strong> can be set or changed by dragging an accidental symbol from the accidental palette to a note in the score.<br />
-<img src="/sites/musescore.org/files/accidentalspalette.png" alt="Accidentals palette" title="Accidentals palette" width="175" height="168" class="inline" /></p>
+<img src="/sites/musescore.org/files/accidental-palette.png" alt="Accidentals palette" title="Accidentals palette" width="168" height="203" class="inline" /></p>
 <p>If you only want to change the pitch of a note you can also select the note and press:</p>
 <ul>
 <li><kbd><kbd>Up</kbd></kbd>:   	Increase the pitch of a note by one semitone.</li>
@@ -377,11 +388,12 @@ Display of all staff bar lines updates when you leave <samp class="mode">edit mo
 <p>Double click on a bracket to enter <samp class="mode"><a href="http://musescore.org/handbook/edit-mode" title="edit mode">edit mode</a></samp>, In <samp class="mode">edit mode</samp> you can drag the height of a bracket to span arbitrary staves of a system.</p>
   </div>
 <div id="node-64" class="section-3">
-  <h1 class="book-heading">Breath</h1>
+  <h1 class="book-heading">Breath and pause</h1>
   <p>To place a <strong>breath</strong> symbol drag it from the breath palette to a note in the score. The breath symbol is placed after the note. In versions 0.9.5 and earlier the breath symbol appears <em>before</em> the note it was dragged to.</p>
-<p><img src="/sites/musescore.org/files/breathpalette_0.png" alt="Breath Palette" title="Breath Palette" width="185" height="67" class="inline" /></p>
+<p><img src="/sites/musescore.org/files/breath-pause-palette.png" alt="Breath &amp;amp; Pause Palette" title="Breath &amp;amp; Pause Palette" width="138" height="103" class="inline" /></p>
 <p>Breath symbol in score: </p>
 <p><img src="/sites/musescore.org/files/breath_0.png" alt="Breath" title="Breath" width="284" height="181" class="inline" /></p>
+<p>A <strong>caesura</strong> (informally called <strong>tram lines</strong> or <strong>railroad tracks</strong>) work the same way and are available in versions 0.9.6 or later.</p>
   </div>
 <div id="node-67" class="section-3">
   <h1 class="book-heading">Clef</h1>
@@ -418,7 +430,7 @@ This can be entered in MuseScore as follows:</p>
 <li>Select a note or rest in the percussion staff. This loads the corresponding drum palette</li>
 <li>Press "N" to begin note entry</li>
 <li>Select a note duration from the Note Input toolbar</li>
-<li>Select a the type of note (such as bass drum or snare) from the drum <a href="http://musescore.org/it/manuale/palette" title="palette">palette</a></li>
+<li>Select a type of note (such as bass drum or snare) from the drum <a href="http://musescore.org/handbook/palette" title="palette">palette</a></li>
 <li>Click on the percussion staff to add the note to the score</li>
 </ol>
   </div>
@@ -452,7 +464,7 @@ This can be entered in MuseScore as follows:</p>
   <h1 class="book-heading">Key signature</h1>
   <p><strong>Key signatures</strong> are created or changed by dragging a key symbol from the key palette to a measure or existing key signature.<br />
 <img src="/sites/musescore.org/files/keypalette_0.png" alt="Keys palette" title="Keys palette" width="177" height="251" class="inline" /></p>
-<p><kbd><kbd>F9</kbd></kbd> toggles the <a href="http://musescore.org/it/manuale/palette" title="palette">palette</a> window.</p>
+<p><kbd><kbd>F9</kbd></kbd> toggles the <a href="http://musescore.org/handbook/palette" title="palette">palette</a> window.</p>
 <h3>Change</h3>
 <p>Drag a key from the palette onto a key in the score. You can also drag a key from the score to another key on the score by using <kbd><kbd>Shift</kbd>+<kbd class="mouse">leftMouseButton</kbd>+Drag</kbd>.</p>
 <h3>Add</h3>
@@ -645,7 +657,6 @@ Other commands in <samp class="mode">edit mode</samp> also move the handles but 
   <p>MuseScore has an integrated sequencer and synthesizer to play your score.<br />
 By pressing the Play <img src="/sites/musescore.org/files/play.png" alt="play.png" title="play.png" width="34" height="33" class="inline" /> button you enter <samp class="mode">Play mode</samp>. In <samp class="mode">Play mode</samp> the following commands are available:</p>
 <ul>
-<li class="latest">Play <kbd><kbd>Ctrl</kbd>+<kbd>Space</kbd></kbd> <strong class="label">(version 0.9.6 or later)</strong></li>
 <li>Seek to previous chord <kbd><kbd>Left</kbd></kbd></li>
 <li>Seek to next chord <kbd><kbd>Right</kbd></kbd></li>
 <li>Seek to previous measure <kbd><kbd>Ctrl</kbd>+<kbd>Left</kbd></kbd></li>
@@ -662,7 +673,7 @@ By pressing the Play <img src="/sites/musescore.org/files/play.png" alt="play.pn
 <h4 class="v0-9-5">Piano only</h4>
 <p><strong class="label">Version 0.9.5 or earlier:</strong> If you want to play instruments other than piano you have to change the MuseScore integrated SoundFont with a more capable one in <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp> → <samp class="tab">I/O</samp> tab</kbd>. See <a href="http://musescore.org/handbook/soundfont" title="SoundFont">SoundFont</a> for instructions.</p>
 <h4>Sound on Ubuntu</h4>
-<p>If you are having difficulty with sound on Ubuntu then see <a href="http://musescore.org/handbook/installation" title="Installation">Installation</a>, "Linux" heading.</p>
+<p>If you are having difficulty with sound on Ubuntu then it is recommended to upgrade to version 0.9.5 or later. Instructions for obtaining the latest release are on the download page of the website. If you have further problems feel free to use the forums.</p>
   </div>
 <div id="node-101" class="section-3">
   <h1 class="book-heading">SoundFont</h1>
@@ -920,4 +931,3 @@ Vertical frames provide empty space between or before systems. The height is adj
     <div class="print-links"></div>
   </body>
 </html>
-<!-- Page cached by Boost @ 2010-02-23 07:33:24, expires @ 2010-02-23 10:33:24 -->

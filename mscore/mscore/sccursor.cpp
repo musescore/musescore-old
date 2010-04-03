@@ -117,7 +117,7 @@ Q_DECLARE_METATYPE(Text*);
 
 static const char* const function_names_cursor[] = {
       "rewind", "eos", "chord", "rest", "measure", "next", "nextMeasure", "putStaffText",  "isChord", "isRest",
-      "add", "tick", "time", "staff", "voice", "pageNumber", "pos", "goToSelectionStart", "goToSelectionEnd",
+      "add", "tick", "time", "staff", "voice", "pageNumber", "pos", "goToSelectionStart", "goToSelectionEnd",  
       };
 static const int function_lengths_cursor[] = {
       0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0
@@ -172,11 +172,6 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
             case 0:     // "rewind",
                   if (context->argumentCount() == 0) {
                         cursor->rewind(0);
-                        return context->engine()->undefinedValue();
-                        }
-                  if (context->argumentCount() == 1) {
-                        int val = context->argument(0).toInteger();
-                        cursor->rewind(val);
                         return context->engine()->undefinedValue();
                         }
                   break;
@@ -292,7 +287,7 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
              case 16:    // "pos"
                   if (context->argumentCount() == 0){
                         if(cursor->segment()){
-                              Page* page = (Page*)cursor->segment()->measure()->parent()->parent();
+                              Page* page = (Page*)cursor->segment()->measure()->parent()->parent();	  
                               QPointF pos(cursor->segment()->canvasPos().x() - page->canvasPos().x(),  cursor->segment()->canvasPos().y());
                               return qScriptValueFromValue(context->engine(), pos);
                             }
@@ -309,7 +304,7 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                         cursor->rewind(2);
                         return context->engine()->undefinedValue();
                         }
-                  break;
+                  break;                                    
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Cursor.%0(): bad argument count or value")

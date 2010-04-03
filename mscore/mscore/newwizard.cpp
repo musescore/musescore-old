@@ -138,7 +138,10 @@ void InstrumentWizard::on_addButton_clicked()
             sli->staff    = 0;
             sli->setPartIdx(i);
             sli->staffIdx = -1;
-            sli->setClef(it->clefIdx[i]);
+            if (i > MAX_STAVES)
+                  sli->setClef(CLEF_G);
+            else
+                  sli->setClef(it->clefIdx[i]);
             }
       partiturList->setItemExpanded(pli, true);
       partiturList->clearSelection();     // should not be necessary
@@ -344,8 +347,14 @@ void InstrumentWizard::createInstruments(Score* cs)
                   staff->setRstaff(rstaff);
                   ++rstaff;
                   staff->clefList()->setClef(0, sli->clef());
-                  staff->setLines(t->staffLines[cidx]);
-                  staff->setSmall(t->smallStaff[cidx]);
+                  if (cidx > MAX_STAVES) {
+                        staff->setLines(5);
+                        staff->setSmall(false);
+                        }
+                  else {
+                        staff->setLines(t->staffLines[cidx]);
+                        staff->setSmall(t->smallStaff[cidx]);
+                        }
                   if (cidx == 0) {
                         staff->setBracket(0, t->bracket);
                         staff->setBracketSpan(0, t->staves);

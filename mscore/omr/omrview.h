@@ -22,6 +22,8 @@
 #define __SCAN_VIEW_H__
 
 class Omr;
+class Page;
+class ScoreView;
 
 //---------------------------------------------------------
 //   OmrView
@@ -30,6 +32,7 @@ class Omr;
 class OmrView : public QWidget {
       Q_OBJECT
       Omr* _omr;
+      ScoreView* _scoreView;
       QPixmap pm[4];    // tiled because of max size restrictions
       QPoint startDrag;
 
@@ -59,7 +62,7 @@ class OmrView : public QWidget {
       void yPosChanged(int);
 
    public:
-      OmrView(QWidget* parent = 0);
+      OmrView(ScoreView*, QWidget* parent = 0);
       void setOmr(Omr*);
       Omr* omr() const { return _omr; }
       };

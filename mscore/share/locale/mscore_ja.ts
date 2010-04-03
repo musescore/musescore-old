@@ -19,7 +19,7 @@
         <source>Revision: 628</source>
         <translation type="unfinished"/>
     </message>
-    <message>
+    <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
@@ -217,7 +217,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">2</translation>
     </message>
     <message>
         <source>Maj7</source>
@@ -229,11 +229,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">6</translation>
     </message>
     <message>
         <source>69</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">69</translation>
     </message>
     <message>
         <source>m</source>
@@ -249,7 +249,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">7</translation>
     </message>
     <message>
         <source>sus</source>
@@ -277,11 +277,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">9</translation>
     </message>
     <message>
         <source>13</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">13</translation>
     </message>
     <message>
         <source>7b9</source>
@@ -293,7 +293,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>5b</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">5b</translation>
     </message>
     <message>
         <source>aug</source>
@@ -357,19 +357,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">5</translation>
     </message>
     <message>
         <source>7+</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">7+</translation>
     </message>
     <message>
         <source>9+</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">9+</translation>
     </message>
     <message>
         <source>13+</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">13+</translation>
     </message>
     <message>
         <source>(blues)</source>
@@ -385,11 +385,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#11</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">7#11</translation>
     </message>
     <message>
         <source>13#11</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">13#11</translation>
     </message>
     <message>
         <source>7#11b13</source>
@@ -401,7 +401,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>9#11</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">9#11</translation>
     </message>
     <message>
         <source>9#11b13</source>
@@ -429,11 +429,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#9</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">7#9</translation>
     </message>
     <message>
         <source>13#9</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">13#9</translation>
     </message>
     <message>
         <source>7#9b13</source>
@@ -441,7 +441,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>13#9#11</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">13#9#11</translation>
     </message>
     <message>
         <source>7#9#11b13</source>
@@ -493,27 +493,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#5</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">7#5</translation>
     </message>
     <message>
         <source>13#5</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">13#5</translation>
     </message>
     <message>
         <source>7#5#11</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">7#5#11</translation>
     </message>
     <message>
         <source>13#5#11</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">13#5#11</translation>
     </message>
     <message>
         <source>9#5</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">9#5</translation>
     </message>
     <message>
         <source>9#5#11</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">9#5#11</translation>
     </message>
     <message>
         <source>7#5b9</source>
@@ -533,15 +533,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7#5#9</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">7#5#9</translation>
     </message>
     <message>
         <source>13#5#9#11</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">13#5#9#11</translation>
     </message>
     <message>
         <source>7#5#9#11</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">7#5#9#11</translation>
     </message>
     <message>
         <source>7alt</source>
@@ -729,7 +729,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">4</translation>
     </message>
     <message>
         <source>Degrees</source>
@@ -801,10 +801,17 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>3</source>
+        <translation type="unfinished">3</translation>
+    </message>
+</context>
+<context>
+    <name>ChordList</name>
+    <message>
+        <source>Write Chord Description failed: </source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -841,6 +848,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto</source>
+        <extracomment>velocity type</extracomment>
         <translation>自動</translation>
     </message>
     <message>
@@ -881,10 +889,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>user</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>offset</source>
+        <extracomment>velocity type</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -905,6 +915,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> cent</source>
+        <extracomment>100 cent = 1 semitone intervall</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -969,7 +980,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">自動</translation>
+        <translation>自動</translation>
     </message>
     <message>
         <source>whole</source>
@@ -1058,7 +1069,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation type="unfinished">MIDIプロパティ...</translation>
+        <translation>MIDIプロパティ...</translation>
     </message>
 </context>
 <context>
@@ -1165,6 +1176,10 @@ failed: </source>
     <message>
         <source>MuseScore: Write Drumset</source>
         <translation>MuseScore: ドラムセットを書き込む</translation>
+    </message>
+    <message>
+        <source>Write File failed: </source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1479,6 +1494,14 @@ failed: </source>
         <source>down</source>
         <translation type="unfinished">下</translation>
     </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>+octave</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>EditStyle</name>
@@ -1575,6 +1598,11 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
+        <extracomment>spatium unit
+----------
+space unit
+----------
+space unit</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2002,6 +2030,10 @@ failed: </source>
         <source>Close</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Part-%1</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>Glissando</name>
@@ -2237,6 +2269,10 @@ failed: </source>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
@@ -2295,6 +2331,10 @@ failed: </source>
         <source>Clef</source>
         <translation>音部記号</translation>
     </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>InstrumentsDialog</name>
@@ -2349,6 +2389,10 @@ failed: </source>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
         <translation>MuseScore 楽器 (*.xml);;すべてのファイル (*)</translation>
+    </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3147,10 +3191,6 @@ before closing?</source>
         <translation>最近開いたファイル(&amp;R)</translation>
     </message>
     <message>
-        <source>Parts...</source>
-        <translation>パート...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>編集(&amp;E)</translation>
     </message>
@@ -3544,7 +3584,28 @@ Restore session?</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;</source>
+        <source>Script
+%1
+is incompatible with current interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore is too old to run script
+%1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bar %1 Beat %2.%3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Error loading plugin
+"%1" line %2:
+%3</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -3676,10 +3737,6 @@ Restore session?</source>
         <translation>符頭グループ</translation>
     </message>
     <message>
-        <source>OnTimeType:</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Auto</source>
         <translation type="unfinished">自動</translation>
     </message>
@@ -3692,7 +3749,15 @@ Restore session?</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>OffTimeType:</source>
+        <source>Tuning</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OnTime:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>OffTime:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4011,7 +4076,7 @@ Restore session?</source>
     </message>
     <message>
         <source>001.01</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">001.01</translation>
     </message>
     <message>
         <source>h:mm:s</source>
@@ -4019,7 +4084,7 @@ Restore session?</source>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">0:00:00</translation>
     </message>
     <message>
         <source>actual tempo</source>
@@ -4035,7 +4100,7 @@ Restore session?</source>
     </message>
     <message>
         <source>100%</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">100%</translation>
     </message>
     <message>
         <source>Rewind</source>
@@ -4433,6 +4498,7 @@ Restore session?</source>
     </message>
     <message>
         <source>mm</source>
+        <extracomment>millimeter</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -4477,31 +4543,31 @@ Restore session?</source>
     </message>
     <message>
         <source>192000</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">192000</translation>
     </message>
     <message>
         <source>96000</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">96000</translation>
     </message>
     <message>
         <source>88200</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">88200</translation>
     </message>
     <message>
         <source>48000</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">48000</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">44100</translation>
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">32000</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">22050</translation>
     </message>
     <message>
         <source>Fragments:</source>
@@ -4513,31 +4579,31 @@ Restore session?</source>
     </message>
     <message>
         <source>4096</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">4096</translation>
     </message>
     <message>
         <source>2048</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">2048</translation>
     </message>
     <message>
         <source>1024</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">1024</translation>
     </message>
     <message>
         <source>512</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">512</translation>
     </message>
     <message>
         <source>256</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">256</translation>
     </message>
     <message>
         <source>128</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">128</translation>
     </message>
     <message>
         <source>64</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">64</translation>
     </message>
     <message>
         <source>Portaudio</source>
@@ -4600,10 +4666,6 @@ Restore session?</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>Use Current Dimensions</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Color notes outside of usable pitch range</source>
         <translation type="unfinished"/>
     </message>
@@ -4619,11 +4681,11 @@ Restore session?</source>
         <source>Auto-correction</source>
         <translation type="unfinished"/>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
         <translation type="unfinished"/>
     </message>
-    <message>
+    <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
         <translation type="unfinished"/>
     </message>
@@ -4669,6 +4731,10 @@ Restore session?</source>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Use Current Position</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -4812,6 +4878,10 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore: register script plugin:</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5103,6 +5173,18 @@ failed: </source>
         <source>The first time signature of a piece can not be removed.</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Write Style failed: </source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Load failed: </source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ScoreView</name>
@@ -5145,6 +5227,11 @@ failed: </source>
     <message>
         <source>Measure</source>
         <translation type="unfinished">小節</translation>
+    </message>
+    <message>
+        <source>unknown drop format: formats %1:
+</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5242,6 +5329,47 @@ failed: </source>
     </message>
     <message>
         <source>subtract from selection</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>SelectInstrument</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">ダイアログ</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>show more</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>Seq</name>
+    <message>
+        <source>Init audio driver failed.
+Sequencer will be disabled.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore: Load SoundFont</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>No SoundFont configured
+Playback will be disabled.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Loading SoundFont
+"%1"
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
+and check that the file location is correct</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5429,10 +5557,12 @@ failed: </source>
     </message>
     <message>
         <source>startElement</source>
+        <extracomment>do not translate</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>endElement</source>
+        <extracomment>do not translate - only for debugging</extracomment>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5539,6 +5669,7 @@ failed: </source>
     </message>
     <message>
         <source>Hz</source>
+        <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -5690,6 +5821,21 @@ failed: </source>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
         <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>TextC</name>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">非表示にする</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">表示する</translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">テキストプロパティ...</translation>
     </message>
 </context>
 <context>
@@ -5865,6 +6011,7 @@ failed: </source>
     </message>
     <message>
         <source>X:</source>
+        <extracomment>coordinate</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -5885,6 +6032,7 @@ failed: </source>
     </message>
     <message>
         <source>Y:</source>
+        <extracomment>coordinate</extracomment>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -6002,6 +6150,14 @@ failed: </source>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>4/4 common time</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>2/2 alla breve</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -6278,10 +6434,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Use multi sharps and flats</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -8177,6 +8329,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Delete element and duration</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Parts...</source>
+        <translation type="unfinished">パート...</translation>
     </message>
 </context>
 <context>
