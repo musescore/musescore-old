@@ -173,7 +173,14 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
       int i = 0;
       foreach(Note* note, chord->notes()) {
             int channel = instr->channel(note->subchannel()).channel;
-            collectNote(events, channel, note, tick + i * arpeggioOffset, len);
+            int onTime = tick;
+            if(arpeggio){
+                if(arpeggio->subtype() != ARP_DOWN)
+                    onTime = tick + i * arpeggioOffset;
+                else
+                    onTime = tick + (chord->notes().size() - 1 - i) * arpeggioOffset;
+                }  
+            collectNote(events, channel, note, onTime, len);
             i++;
             }
       }
@@ -420,7 +427,13 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               noteLen = tickLen + note->offTimeOffset() + note->offTimeUserOffset();
                               }
 
-                        int onTime = tick + i * arpeggioOffset;
+                        int onTime = tick;
+                        if(arpeggio){
+                            if(arpeggio->subtype() != ARP_DOWN)
+                                onTime = tick + i * arpeggioOffset;
+                            else
+                                onTime = tick + (chord->notes().size() - 1 - i) * arpeggioOffset;
+                            }                  
                         collectNote(events, channel, note, onTime, noteLen);
                         i++;
                         }

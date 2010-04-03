@@ -23,6 +23,9 @@
 
 #include "element.h"
 
+// Arpeggio types 
+enum { ARP_NORMAL, ARP_UP, ARP_DOWN, ARP_BRACKET};
+
 //---------------------------------------------------------
 //   Arpeggio
 //---------------------------------------------------------
