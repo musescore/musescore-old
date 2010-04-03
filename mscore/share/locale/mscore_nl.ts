@@ -153,6 +153,18 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>Vorm</translation>
     </message>
+    <message>
+        <source>Arpeggio</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished">Tremolo</translation>
+    </message>
+    <message>
+        <source>Glissando</source>
+        <translation type="unfinished">Glissando</translation>
+    </message>
 </context>
 <context>
     <name>ChordEdit</name>
@@ -816,6 +828,18 @@ p, li { white-space: pre-wrap; }
         <source># (sharp)</source>
         <translation># (kruis)</translation>
     </message>
+    <message>
+        <source>Type</source>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Waarde</translation>
+    </message>
+    <message>
+        <source>Alter</source>
+        <translation>Wijzigen</translation>
+    </message>
 </context>
 <context>
     <name>ChordList</name>
@@ -1127,7 +1151,7 @@ p, li { white-space: pre-wrap; }
     <name>EditDrumset</name>
     <message>
         <source>Load</source>
-        <translation>Laden</translation>
+        <translation>Laad</translation>
     </message>
     <message>
         <source>Save</source>
@@ -1388,7 +1412,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Play Transposition:</source>
-        <translation>Afspelen Transpositie:</translation>
+        <translation>Afspelen Transponeren:</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
@@ -1396,11 +1420,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished">Overmatige prime</translation>
+        <translation>Verhoog Prime</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation>Verlaag Tweede</translation>
+        <translation>Verlaag Secunde</translation>
     </message>
     <message>
         <source>Minor Second</source>
@@ -1412,11 +1436,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation>Verhoog Tweede</translation>
+        <translation>Verhoog Seconde</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation>Verlaag Derde</translation>
+        <translation>Verlaag Terts</translation>
     </message>
     <message>
         <source>Minor Third</source>
@@ -1428,11 +1452,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation>Verhoog Derde</translation>
+        <translation>Verhoog Terts</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation>Verlaag Vierde</translation>
+        <translation>Verlaag Kwart</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
@@ -1440,11 +1464,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation>Verhoog Vierde</translation>
+        <translation>Verhoog Kwart</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation>Verlaag Vijfde</translation>
+        <translation>Verlaag Kwint</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
@@ -1452,11 +1476,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation>Verhoog Vijfde</translation>
+        <translation>Verhoog Kwint</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation>Verlaag Zesde</translation>
+        <translation>Verlaag Sext</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
@@ -1468,11 +1492,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation>Verhoog Zesde</translation>
+        <translation>Verhoog Sext</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation>Verlaag Zevende</translation>
+        <translation>Verlaag Septime</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
@@ -1484,7 +1508,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation>Verhoog Zevende</translation>
+        <translation>Verhoog Septime</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
@@ -2356,7 +2380,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Schrijfstijl</translation>
+        <translation>MuseScore: Stijl Opslaan</translation>
     </message>
     <message>
         <source>MuseScore: Save Instrument List</source>
@@ -2487,7 +2511,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>dot</source>
-        <translation>gepunt</translation>
+        <translation>gestippeld</translation>
     </message>
     <message>
         <source>Hook</source>
@@ -2958,7 +2982,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>Venster</translation>
+        <translation>Kader</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -3172,7 +3196,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Ottava</source>
-        <translation>Octaaf</translation>
+        <translation>Ottava</translation>
     </message>
     <message>
         <source>End Repeat</source>
@@ -3308,15 +3332,15 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>1 between notes</source>
-        <translation/>
+        <translation>1 noten er tussen in</translation>
     </message>
     <message>
         <source>3 between notes</source>
-        <translation/>
+        <translation>3 noten er tussen in</translation>
     </message>
     <message>
         <source>2 between notes</source>
-        <translation/>
+        <translation>2 noten er tussen in</translation>
     </message>
     <message>
         <source>Repeats</source>
@@ -3336,7 +3360,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation>Gebroken akkoord</translation>
+        <translation>Gebroken Akkoord</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
@@ -3615,10 +3639,6 @@ is niet compactibel met de huidige interface</translation>
 %1</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Alle ondersteunde bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore bestanden (*.mscz *.mscx *.msc);;MusicXML bestanden (*.xml *.mxl);;MIDI bestanden (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella bestanden (*.cap);;BB bestanden &lt;experimenteel&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle bestanden (*)</translation>
-    </message>
-    <message>
         <source>Bar %1 Beat %2.%3</source>
         <translation>Maat %1 Tel %2.%3</translation>
     </message>
@@ -3629,6 +3649,10 @@ is niet compactibel met de huidige interface</translation>
         <translation>Fout bij het laden van de plugin&#13;
 "%1" lijn %2:&#13;
 %3</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <translation>Alle Ondersteunde Bestanden (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Bestanden (*.mscz *.mscx *.msc);;MusicXML Bestanden (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Bestanden (*.md);;Capella Bestanden (*.cap);;BB Bestanden &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Bestanden &lt;experimenteel&gt; (*.ove);;Alle Bestanden (*)</translation>
     </message>
 </context>
 <context>
@@ -3772,15 +3796,15 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Tuning</source>
-        <translation type="unfinished"/>
+        <translation>Stemming</translation>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>Tijd Aan:</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>Tijd Uit:</translation>
     </message>
 </context>
 <context>
@@ -4000,7 +4024,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Volume</translation>
+        <translation>Vol</translation>
     </message>
     <message>
         <source>Form</source>
@@ -4737,7 +4761,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Remember last connection(s)</source>
-        <translation>Laatste verbinding onhouden</translation>
+        <translation>Laatste verbinding onthouden</translation>
     </message>
     <message>
         <source>Update</source>
@@ -5269,7 +5293,8 @@ mislukt: </translation>
     <message>
         <source>unknown drop format: formats %1:
 </source>
-        <translation type="unfinished"/>
+        <translation>onbekend opgegeven formaat: formaten %1:
+</translation>
     </message>
 </context>
 <context>
@@ -5850,7 +5875,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     <message>
         <source>Offset:</source>
         <comment>do not translate</comment>
-        <translation>Afstand</translation>
+        <translation>Afstand:</translation>
     </message>
     <message>
         <source>Abs.:</source>
@@ -6203,7 +6228,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 alla breve</translation>
+        <translation>2/2  alla breve</translation>
     </message>
 </context>
 <context>
@@ -6350,7 +6375,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>C# major / A# minor</source>
-        <translation>C# major / A# mineur</translation>
+        <translation>C# majeur / A# mineur</translation>
     </message>
     <message>
         <source>Up</source>
@@ -6370,103 +6395,103 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation>Reine prime</translation>
+        <translation>Reine Eenstemmig</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation>Overmatige prime</translation>
+        <translation>Verhoog Eenstemmig</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation>Verminderde secunde</translation>
+        <translation>Verlaag Tweede</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation>Kleine secunde</translation>
+        <translation>Mineur Tweede</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation>Overmatige secunde</translation>
+        <translation>Majeur Tweede</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation>Dubbel overmatige secunde</translation>
+        <translation>Verhoog Tweede</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation>Verminderde terts</translation>
+        <translation>Verlaag Derde</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation>Verminderde terts</translation>
+        <translation>Mineur Derde</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation>Overmatige terts</translation>
+        <translation>Majeur Derde</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation>Dubbel overmatige terts</translation>
+        <translation>Verhoog Derde</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation>Verminderde kwart</translation>
+        <translation>Verlaag Vierde</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation>Reine kwart</translation>
+        <translation>Reine Vierde</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation>Overmatige kwart</translation>
+        <translation>Verhoog Vierde</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation>Verminderde kwint</translation>
+        <translation>Verlaag Kwint</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation>Reine kwint</translation>
+        <translation>Reine Vijfde</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation>Overmatige kwint</translation>
+        <translation>Verhoog Vijfde</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation>Verminderde sext</translation>
+        <translation>Verlaag Zesde</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation>Kleine sext</translation>
+        <translation>Mineur Zesde</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation>Grote sext</translation>
+        <translation>Majeur Zesde</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation>Vergrote sext</translation>
+        <translation>Verhoog Zesde</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation>Verminderde septiem</translation>
+        <translation>Verlaag Zevende</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation>Kleine septiem</translation>
+        <translation>Mineur Zevende</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation>Grote septiem</translation>
+        <translation>Majeur Zevende</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation>Vergrote septiem</translation>
+        <translation>Verhoog Zevende</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation>Verminderde octaaf</translation>
+        <translation>Verlaag Octaaf</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
@@ -6483,6 +6508,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use double sharps and flats</source>
         <translation>Gebruik dubbele kruisen en mollen</translation>
+    </message>
+</context>
+<context>
+    <name>TremoloBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>firstChord</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>secondChord</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8483,7 +8525,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reverseturn</source>
-        <translation/>
+        <translation>omgekeerde dubbelslag</translation>
     </message>
     <message>
         <source>staccato</source>
@@ -8881,7 +8923,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>OttavaSegment</source>
-        <translation>OctaafSegment</translation>
+        <translation>OttavaSegment</translation>
     </message>
     <message>
         <source>Accidental</source>
@@ -9450,11 +9492,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reverse turn</source>
-        <translation/>
+        <translation>omgekeerde dubbelslag</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation>draai</translation>
+        <translation>dubbelslag</translation>
     </message>
     <message>
         <source>trill</source>
@@ -9598,11 +9640,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace dash</source>
-        <translation/>
+        <translation>grace streep</translation>
     </message>
     <message>
         <source>dgrace dash</source>
-        <translation/>
+        <translation>d grace streep</translation>
     </message>
     <message>
         <source>dsixteenth flag</source>
@@ -9718,15 +9760,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acc freebase</source>
-        <translation/>
+        <translation>accordeon freebase</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation/>
+        <translation>accordeon stdbase</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation/>
+        <translation>accordeon bayanbase</translation>
     </message>
     <message>
         <source>acc old ee</source>

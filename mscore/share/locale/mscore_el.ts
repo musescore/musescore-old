@@ -158,6 +158,18 @@ p, li { white-space: pre-wrap; }&#13;
         <translatorcomment>ή φόρμα</translatorcomment>
         <translation>Μορφή</translation>
     </message>
+    <message>
+        <source>Arpeggio</source>
+        <translation type="unfinished">Αρπισμός</translation>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Glissando</source>
+        <translation type="unfinished">Glissando</translation>
+    </message>
 </context>
 <context>
     <name>ChordEdit</name>
@@ -820,6 +832,18 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>3</source>
         <translation>3</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Τύπος</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Τιμή</translation>
+    </message>
+    <message>
+        <source>Alter</source>
+        <translation>Τροποποιώ</translation>
     </message>
 </context>
 <context>
@@ -3638,10 +3662,6 @@ is incompatible with current interface</translation>
 %1</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Όλα τα Υποστηριζόμενα Αρχεία (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;Αρχεία MuseScore (*.mscz *.mscx *.msc);;Αρχεία MusicXML (*.xml *.mxl);;Αρχεία MIDI (*.mid *.midi *.kar);;Αρχεία Δεδομένων Muse (*.md);;Αρχεία Capella (*.cap);;Αρχεία BB &lt;πειραματικό&gt; (*.mgu *.MGU *.sgu *.SGU);;Όλα τα αρχεία (*)</translation>
-    </message>
-    <message>
         <source>Bar %1 Beat %2.%3</source>
         <translation>Γραμμή μέτρου %1 Χτύπος %2.%3</translation>
     </message>
@@ -3652,6 +3672,10 @@ is incompatible with current interface</translation>
         <translation>Σφάλμα Φόρτωσης plugin&#13;
 "%1" γραμμή %2:&#13;
 %3</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <translation>Όλα τα υποστηριζόμενα αρχεία (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Αρχεία MuseScore (*.mscz *.mscx *.msc);;Αρχεία MusicXML (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Αρχεία Δεδομένων Muse (*.md);;Αρχεία Capella (*.cap);;Αρχεία BB &lt;πειραματικό&gt; (*.mgu *.MGU *.sgu *.SGU);;Αρχεία Overture &lt;πειραματικό&gt; (*.ove);;Όλα τα αρχεία (*)</translation>
     </message>
 </context>
 <context>
@@ -6511,6 +6535,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use double sharps and flats</source>
         <translation>Χρήση διπλών διέσεων και υφέσεων</translation>
+    </message>
+</context>
+<context>
+    <name>TremoloBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Μορφή</translation>
+    </message>
+    <message>
+        <source>firstChord</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>secondChord</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

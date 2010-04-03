@@ -153,6 +153,18 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>Form</translation>
     </message>
+    <message>
+        <source>Arpeggio</source>
+        <translation type="unfinished">Arpeggio</translation>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished">Tremolo</translation>
+    </message>
+    <message>
+        <source>Glissando</source>
+        <translation type="unfinished">Glissando</translation>
+    </message>
 </context>
 <context>
     <name>ChordEdit</name>
@@ -815,6 +827,18 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>3</source>
         <translation>3</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Værdi</translation>
+    </message>
+    <message>
+        <source>Alter</source>
+        <translation>Skift</translation>
     </message>
 </context>
 <context>
@@ -2998,7 +3022,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>Preferences...</source>
-        <translation>Egenskaber...</translation>
+        <translation>Indstillinger...</translation>
     </message>
     <message>
         <source>Add Note</source>
@@ -3615,10 +3639,6 @@ er ikke kompatibelt med det nuværende interface</translation>
 %1</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation>Alle understøttede filer (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore filer (*.mscz *.mscx *.msc);;MusicXML filer (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data filer (*.md);;Capella filer (*.cap);;BB filer &lt;eksperimentel&gt; (*.mgu *.MGU *.sgu *.SGU);;Alle filer (*)</translation>
-    </message>
-    <message>
         <source>Bar %1 Beat %2.%3</source>
         <translation>Takt %1 slag %2.%3</translation>
     </message>
@@ -3629,6 +3649,10 @@ er ikke kompatibelt med det nuværende interface</translation>
         <translation>Fejl ved indlæsning af plugin&#13;
 "%1" linie %2:&#13;
 %3</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <translation>Alle understøttede filer (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore filer (*.mscz *.mscx *.msc);;MusicXML filer (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data filer (*.md);;Capella filer (*.cap);;BB filer &lt;eksperimentel&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture filer &lt;experimental&gt; (*.ove);;Alle filer (*)</translation>
     </message>
 </context>
 <context>
@@ -6483,6 +6507,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use double sharps and flats</source>
         <translation>Tillad dobbelt-#/b</translation>
+    </message>
+</context>
+<context>
+    <name>TremoloBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Form</translation>
+    </message>
+    <message>
+        <source>firstChord</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>secondChord</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

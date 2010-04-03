@@ -153,6 +153,18 @@ line break&#13;
         <source>Form</source>
         <translation>Ablak</translation>
     </message>
+    <message>
+        <source>Arpeggio</source>
+        <translation type="unfinished">Arpeggio</translation>
+    </message>
+    <message>
+        <source>Tremolo</source>
+        <translation type="unfinished">Tremolo</translation>
+    </message>
+    <message>
+        <source>Glissando</source>
+        <translation type="unfinished">Glissando</translation>
+    </message>
 </context>
 <context>
     <name>ChordEdit</name>
@@ -816,12 +828,24 @@ line break&#13;
         <source>3</source>
         <translation>3</translation>
     </message>
+    <message>
+        <source>Type</source>
+        <translation>Típus</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Érték</translation>
+    </message>
+    <message>
+        <source>Alter</source>
+        <translation>Módosítás</translation>
+    </message>
 </context>
 <context>
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation type="unfinished"/>
+        <translation>Nem sikerült létrehozni az akkord leírását: </translation>
     </message>
 </context>
 <context>
@@ -1187,7 +1211,7 @@ hiba: </translation>
     </message>
     <message>
         <source>Write File failed: </source>
-        <translation type="unfinished"/>
+        <translation>Nem sikerült írni a fájlt: </translation>
     </message>
 </context>
 <context>
@@ -1504,11 +1528,11 @@ hiba: </translation>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation type="unfinished"/>
+        <translation>Hangszer váltása...</translation>
     </message>
     <message>
         <source>+octave</source>
-        <translation type="unfinished"/>
+        <translation>+oktáv</translation>
     </message>
 </context>
 <context>
@@ -2040,7 +2064,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation type="unfinished"/>
+        <translation>Szólam-%1</translation>
     </message>
 </context>
 <context>
@@ -2279,7 +2303,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>több</translation>
     </message>
 </context>
 <context>
@@ -2341,7 +2365,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>több</translation>
     </message>
 </context>
 <context>
@@ -2400,7 +2424,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation>Nem sikerült kiírni a stílust: </translation>
     </message>
 </context>
 <context>
@@ -3608,18 +3632,20 @@ is incompatible with current interface</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;All Files (*)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Bar %1 Beat %2.%3</source>
-        <translation type="unfinished"/>
+        <translation>%1. ütem %2.%3. ütés</translation>
     </message>
     <message>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
-        <translation type="unfinished"/>
+        <translation>Hiba a(z)&#13;
+"%1" beépülő modul betöltése közben a(z) %2. sorban:&#13;
+%3</translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <translation>Minden támogatott fájl (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore fájlok (*.mscz *.mscx *.msc);;MusicXML fájlok (*.xml *.mxl);;MIDI fájlok (*.mid *.midi *.kar);;Muse Data fájlok (*.md);;Capella Files (*.cap);;BB fájlok &lt;kísérleti&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture fájlok &lt;kísérleti&gt; (*.ove);;Minden fájl (*)</translation>
     </message>
 </context>
 <context>
@@ -3763,15 +3789,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Tuning</source>
-        <translation type="unfinished"/>
+        <translation>Hangolás</translation>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>Megszólalás ideje:</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>Elhallgatás ideje:</translation>
     </message>
 </context>
 <context>
@@ -4748,7 +4774,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Use Current Position</source>
-        <translation type="unfinished"/>
+        <translation>Aktuális pozíció használata</translation>
     </message>
 </context>
 <context>
@@ -5203,15 +5229,15 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
-        <translation type="unfinished"/>
+        <translation>nem sikerült megállapítani a fájltípust</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation>Nem sikerült kiírni a stílust: </translation>
     </message>
     <message>
         <source>Load failed: </source>
-        <translation type="unfinished"/>
+        <translation>Nem sikerült a betöltés: </translation>
     </message>
 </context>
 <context>
@@ -5372,7 +5398,7 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>több</translation>
     </message>
 </context>
 <context>
@@ -5384,12 +5410,13 @@ Sequencer will be disabled.</source>
     </message>
     <message>
         <source>MuseScore: Load SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: SoundFont betöltése</translation>
     </message>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Nincs SoundFont konfigurálva.&#13;
+Lejátszás letiltva.</translation>
     </message>
     <message>
         <source>Loading SoundFont
@@ -5398,7 +5425,12 @@ failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation type="unfinished"/>
+        <translation>A(z)&#13;
+"%1"&#13;
+SoundFont betöltése nem sikerült. Lejátszás letiltva.&#13;
+&#13;
+A szintetizátorban (Megjelenés &gt; Szintetizátor menüpont)&#13;
+győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translation>
     </message>
 </context>
 <context>
@@ -6182,11 +6214,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4 szokásos ütemmutató</translation>
+        <translation>4/4 rövidítve</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 alla breve</translation>
+        <translation>2/2 rövidítve</translation>
     </message>
 </context>
 <context>
@@ -6466,6 +6498,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Use double sharps and flats</source>
         <translation>Használjon dupla kereszteket és b-ket</translation>
+    </message>
+</context>
+<context>
+    <name>TremoloBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Ablak</translation>
+    </message>
+    <message>
+        <source>firstChord</source>
+        <extracomment>do not translate</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>secondChord</source>
+        <extracomment>do not translate - only for debugging</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
