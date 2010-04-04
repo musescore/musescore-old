@@ -1,4 +1,6 @@
 4.apr (ws)
+      - Modified portaudio exit code. Maybe this fixes problems when exiting
+        mscore.
       - fix #5189: Corrupted custom beam depending on the platform. The fix
         involves a change in the *.msc[xz] format. Version number increased
         to 1.14.

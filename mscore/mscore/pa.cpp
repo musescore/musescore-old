@@ -1,4 +1,4 @@
-//=============================================================================
+//==========
 //  MusE Score
 //  Linux Music Score Editor
 //  $Id$
@@ -35,7 +35,7 @@
 #include "mididriver.h"
 #include "pm.h"
 
-PaStream* stream;
+static PaStream* stream;
 
 //---------------------------------------------------------
 //   paCallback
@@ -70,7 +70,10 @@ Portaudio::Portaudio(Seq* s)
 Portaudio::~Portaudio()
       {
       if (initialized) {
-            Pa_Terminate();      // DEBUG: crashes
+            PaError err = Pa_CloseStream(stream);
+            if (err != paNoError)
+                  printf("Portaudio close stream failed: %s\n", Pa_GetErrorText(err));
+            Pa_Terminate();
             }
       }
 
