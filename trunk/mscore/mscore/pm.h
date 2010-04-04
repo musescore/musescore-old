@@ -49,7 +49,7 @@ class PortMidiDriver : public MidiDriver {
       virtual void read();
       virtual void write(const Event&);
       QStringList deviceInList() const;
-      int getDeviceIn(QString name);
+      int getDeviceIn(const QString& name);
       };
 
 #endif

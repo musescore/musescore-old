@@ -260,19 +260,17 @@ QStringList PortMidiDriver::deviceInList() const
 //   getDeviceIn
 //---------------------------------------------------------
 
-int PortMidiDriver::getDeviceIn(QString name)
+int PortMidiDriver::getDeviceIn(const QString& name)
       {
-
       int interf = Pm_CountDevices();
       for (int id = 0; id < interf; id++) {
             const PmDeviceInfo* info = Pm_GetDeviceInfo((PmDeviceID)id);
-            if(info->input){
-              QString n = QString(info->interf) +","+ QString(info->name);
-              if (n == name){
-                 return id;
-              }
+            if (info->input) {
+                  QString n = QString(info->interf) + "," + QString(info->name);
+                  if (n == name)
+                        return id;
+                  }
             }
-      }
       return -1;
       }
 

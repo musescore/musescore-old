@@ -838,8 +838,9 @@ void Beam::write(Xml& xml) const
             }
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       if (_userModified[idx]) {
-            xml.tag("y1", _p1[idx].y());
-            xml.tag("y2", _p2[idx].y());
+            double spatium = _score->spatium();
+            xml.tag("y1", _p1[idx].y() / spatium);
+            xml.tag("y2", _p2[idx].y() / spatium);
             }
       xml.etag();
       }
@@ -884,6 +885,11 @@ void Beam::read(QDomElement e)
             _userModified[idx] = true;
             _p1[idx] = p1;
             _p2[idx] = p2;
+            if (_score->mscVersion() >= 114) {
+                  double spatium = _score->spatium();
+                  _p1[idx] /= spatium;
+                  _p2[idx] /= spatium;
+                  }
             }
       }
 
