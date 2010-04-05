@@ -30,7 +30,7 @@
 //---------------------------------------------------------
 
 SynthControl::SynthControl(Synth* s, QWidget* parent)
-   : QWidget(parent)
+   : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
       synth = s;
@@ -94,7 +94,7 @@ void SynthControl::closeEvent(QCloseEvent* ev)
 void MuseScore::showSynthControl(bool val)
       {
       if (synthControl == 0) {
-            synthControl = new SynthControl(seq->getDriver()->getSynth(), 0);
+            synthControl = new SynthControl(seq->getDriver()->getSynth(), this);
             connect(synthControl, SIGNAL(closed()), SLOT(closeSynthControl()));
             connect(seq, SIGNAL(masterVolumeChanged(float)), synthControl, SLOT(setMasterGain(float)));
             connect(synthControl, SIGNAL(masterGainChanged(float)), seq, SLOT(setMasterVolume(float)));
