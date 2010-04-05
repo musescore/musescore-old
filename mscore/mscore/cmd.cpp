@@ -34,7 +34,7 @@
 #include "note.h"
 #include "rest.h"
 #include "chord.h"
-#include "segment.h"
+// #include "segment.h"
 #include "text.h"
 #include "al/sig.h"
 #include "staff.h"
@@ -743,21 +743,14 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
             if (sd.isZero())
                   break;
 
-            seg = tick2segment(tick);
-            if (seg == 0) {
+            Segment* nseg = tick2segment(tick, false, SegChordRest);
+            if (nseg == 0) {
                   printf("reached end of score\n");
                   break;
                   }
+            seg = nseg;
 
-
-//            measure = measure->nextMeasure();
-//            if (measure == 0) {
-//                  printf("reached end of score\n");
-//                  break;
-//                  }
-//            tick = measure->tick();
-//            seg  = measure->firstCRSegment();
-            cr   = static_cast<ChordRest*>(seg->element(track));
+            cr = static_cast<ChordRest*>(seg->element(track));
 
             if (cr == 0) {
                   if (track % VOICES)

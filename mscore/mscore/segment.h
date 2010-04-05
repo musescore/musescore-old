@@ -71,9 +71,11 @@ enum SegmentType {
       SegBreath               = 0x80,
       SegEndBarLine           = 0x100,
       SegTimeSigAnnounce      = 0x200,
-      SegKeySigAnnounce       = 0x400
+      SegKeySigAnnounce       = 0x400,
+      SegAll                  = 0xfff
       };
 typedef QFlags<SegmentType> SegmentTypes;
+Q_DECLARE_OPERATORS_FOR_FLAGS(SegmentTypes)
 
 class Segment : public Element {
       Segment* _next;
