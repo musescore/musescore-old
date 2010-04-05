@@ -440,10 +440,17 @@ void MidiArticulation::read(QDomElement e)
       name = e.attribute("name");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "velocity")
-                  velocity = e.text().toInt();
-            else if (tag == "gateTime")
-                  gateTime = e.text().toInt();
+            QString text(e.text());
+            if (tag == "velocity") {
+                  if (text.endsWith("%"))
+                        text = text.left(text.size()-1);
+                  velocity = text.toInt();
+                  }
+            else if (tag == "gateTime") {
+                  if (text.endsWith("%"))
+                        text = text.left(text.size()-1);
+                  gateTime = text.toInt();
+                  }
             else
                   domError(e);
             }
