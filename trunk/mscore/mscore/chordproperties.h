@@ -61,7 +61,7 @@ class ChordProperties : public QDialog, Ui::ChordPropertyBase {
       int getUserMirror() const;
       int getStemDirection() const;
 
-      int getHeadGroup() const         { return noteHeadGroup->currentIndex(); }
+      int getHeadGroup() const;
       NoteHeadType getHeadType() const { return (NoteHeadType)noteHeadType->currentIndex(); }
 
       ValueType veloType() const    { return ValueType(_veloType->currentIndex()); }

@@ -38,6 +38,17 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       tuningSpinBox->setValue(note->tuning());
       userMirror->setCurrentIndex(int(note->userMirror()));
       stemDirection->setCurrentIndex(int(chord->stemDirection()));
+
+      //
+      // fix order of note heads
+      //
+      static const int heads[] = {
+            HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
+            HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_MI, HEAD_FA, HEAD_LA, HEAD_TI
+            };
+      for (int i = 0; i < HEAD_GROUPS; ++i)
+            noteHeadGroup->setItemData(i, QVariant(heads[i]));
+
       noteHeadGroup->setCurrentIndex(note->headGroup());
       noteHeadType->setCurrentIndex(int(note->headType()));
 
@@ -65,6 +76,15 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       connect(velocity,           SIGNAL(valueChanged(int)), SLOT(velocityChanged(int)));
       connect(ontimeOffset,       SIGNAL(valueChanged(int)), SLOT(ontimeOffsetChanged(int)));
       connect(offtimeOffset,      SIGNAL(valueChanged(int)), SLOT(offtimeOffsetChanged(int)));
+      }
+
+//---------------------------------------------------------
+//   getHeadGroup
+//---------------------------------------------------------
+
+int ChordProperties::getHeadGroup() const
+      {
+      return noteHeadGroup->itemData(noteHeadGroup->currentIndex()).toInt();
       }
 
 //---------------------------------------------------------
