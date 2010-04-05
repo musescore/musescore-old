@@ -108,7 +108,7 @@ static QScriptValue prototype_Part_call(QScriptContext* context, QScriptEngine*)
                   break;
             }
       return context->throwError(QScriptContext::TypeError,
-         QString::fromLatin1("Note.%0(): bad argument count or value")
+         QString::fromLatin1("Part.%0(): bad argument count or value")
          .arg(function_names_part[_id]));
       }
 

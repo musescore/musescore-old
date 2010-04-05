@@ -240,15 +240,16 @@ ScriptEngine::ScriptEngine()
       // create MuseScore bindings
       //
 
-      globalObject().setProperty("Cursor",   create_Cursor_class(this),  QScriptValue::SkipInEnumeration);
-      globalObject().setProperty("Score",    create_Score_class(this),   QScriptValue::SkipInEnumeration);
-      globalObject().setProperty("Note",     create_Note_class(this),    QScriptValue::SkipInEnumeration);
-      globalObject().setProperty("Chord",    create_Chord_class(this),   QScriptValue::SkipInEnumeration);
-      globalObject().setProperty("Rest",     create_Rest_class(this),    QScriptValue::SkipInEnumeration);
-      globalObject().setProperty("Harmony",  create_Harmony_class(this), QScriptValue::SkipInEnumeration);
-      globalObject().setProperty("Text",     create_Text_class(this),    QScriptValue::SkipInEnumeration);
-      globalObject().setProperty("Measure",  create_Measure_class(this), QScriptValue::SkipInEnumeration);
-      globalObject().setProperty("Part",     create_Part_class(this),    QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Cursor",    create_Cursor_class(this),  QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Score",     create_Score_class(this),   QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Note",      create_Note_class(this),    QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Chord",     create_Chord_class(this),   QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Rest",      create_Rest_class(this),    QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Harmony",   create_Harmony_class(this), QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Text",      create_Text_class(this),    QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Measure",   create_Measure_class(this), QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("Part",      create_Part_class(this),    QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("PageFormat",create_PageFormat_class(this),    QScriptValue::SkipInEnumeration);
 
       globalObject().setProperty("division",            newVariant(AL::division));
       globalObject().setProperty("mscoreVersion",       newVariant(version()));

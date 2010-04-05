@@ -97,6 +97,7 @@ Objects
             hasHarmonies  bool              true if a valid chordname is found (ro)
             keysig        integer           key signature at the beginning (ro)
                                             -7 to 7 or undefined for custom signature
+            pageFormat    PageFormat        the page format associated to this score
 
          Functions:
             bool save(string path, string type)
@@ -244,6 +245,13 @@ Objects
             shortName   string      short name of the part (ro)
             midiProgram integer     midi program of the part (ro)
             midiChannel integer     midi channel of the part (ro)
+            
+    PageFormat
+         Properties:
+            landscape   bool     true if the score is in landscape orientation (ro)
+            twosided    bool     true if the score is two sided (ro)
+            width       double   page width in mm (ro)
+            height      double   page height in mm (ro)
 
 
 

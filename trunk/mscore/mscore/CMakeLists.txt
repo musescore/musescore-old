@@ -49,7 +49,7 @@ add_custom_command(
    OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
    COMMAND ${CMAKE_CXX_COMPILER}
      -g -Wextra -Wall
-     -I${QT_INCLUDE_DIR}
+     -I"${QT_INCLUDE_DIR}"
      -o all.h.pch all.h
    DEPENDS ${PROJECT_BINARY_DIR}/all.h
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
@@ -177,7 +177,7 @@ add_executable ( ${ExecutableName}
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
       fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
-      scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp scmeasure.cpp
+      scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp scmeasure.cpp scpageformat.cpp
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
       screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
