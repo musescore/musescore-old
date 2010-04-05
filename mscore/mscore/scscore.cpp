@@ -36,7 +36,7 @@
 #include "score.h"
 #include "repeatlist.h"
 
-
+Q_DECLARE_METATYPE(PageFormat*);
 Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(Part*);
 Q_DECLARE_METATYPE(Text*);
@@ -46,12 +46,14 @@ static const char* const function_names_score[] = {
       "load", "save",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves", "keysig", "duration"
+      "staves", "keysig", "duration", "pageFormat"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
-      1, 2,
-      1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0,0
+      1, 6,
+      1, 1, 1,
+      0, 0, 0, 1, 0, 0, 2, 0, 0,
+      0, 0, 0, 0
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -80,10 +82,11 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       };
 
 ScriptInterface scoreInterface = {
-      21,
+      sizeof(function_names_score) / sizeof(*function_names_score),
       function_names_score,
       function_lengths_score,
       flags_score
@@ -395,6 +398,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                     RepeatSegment* rs = score->repeatList()->last();
                     long duration = lrint(score->utick2utime(rs->utick + rs->len));
                     return qScriptValueFromValue(context->engine(), duration);
+                  }
+                  break;
+            case 21:   //pageFormat
+                  if (argc == 0){
+                    return qScriptValueFromValue(context->engine(), score->pageFormat());
                   }
                   break;
             }

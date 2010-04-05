@@ -1,6 +1,9 @@
 5.apr (ws)
       - fix #5195: Copy paste disables playback
       - fix #5205: bad matching in "Notehead" in note properties
+      (la)
+      - Add pageFormat object in plugin framework
+      - small patch for Snow Leopard build
 4.apr (ws)
       - Modified portaudio exit code. Maybe this fixes problems when exiting
         mscore.
