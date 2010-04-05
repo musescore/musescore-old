@@ -1,4 +1,5 @@
 5.apr (ws)
+      - fix #5220: Crash when inserting note at end
       - fix #5195: Copy paste disables playback
       - fix #5205: bad matching in "Notehead" in note properties
       (la)

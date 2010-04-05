@@ -39,6 +39,7 @@
 #include "scoreview.h"
 #include "key.h"
 #include "interval.h"
+#include "segment.h"
 
 namespace AL {
       class TempoMap;
@@ -580,7 +581,7 @@ class Score : public QObject {
       int pos();
       Measure* tick2measure(int tick) const;
       MeasureBase* tick2measureBase(int tick) const;
-      Segment* tick2segment(int tick, bool first = false) const;
+      Segment* tick2segment(int tick, bool first = false, SegmentTypes st = SegAll) const;
       void fixTicks();
       void addArticulation(Element*, Articulation* atr);
 
