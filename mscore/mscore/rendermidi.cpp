@@ -179,7 +179,7 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
                     onTime = tick + i * arpeggioOffset;
                 else
                     onTime = tick + (chord->notes().size() - 1 - i) * arpeggioOffset;
-                }  
+                }
             collectNote(events, channel, note, onTime, len);
             i++;
             }
@@ -433,7 +433,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                                 onTime = tick + i * arpeggioOffset;
                             else
                                 onTime = tick + (chord->notes().size() - 1 - i) * arpeggioOffset;
-                            }                  
+                            }
                         collectNote(events, channel, note, onTime, noteLen);
                         i++;
                         }
@@ -656,7 +656,6 @@ void Score::fixPpitch()
                         // crescendo and diminuendo
                         //
                         int velocity = velo[staffIdx].velo(chord->tick());
-
                         foreach(Note* note, chord->notes()) {
 
                               //

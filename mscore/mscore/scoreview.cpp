@@ -2853,7 +2853,7 @@ void ScoreView::select(QMouseEvent* ev)
             System* dragSystem = (System*)(curElement->parent());
             dragStaff  = getStaff(dragSystem, startMove);
             }
-      if ((!curElement->selected() || addSelect) && (ev->type() == QEvent::MouseButtonRelease))
+      if ((ev->type() == QEvent::MouseButtonRelease) && ((!curElement->selected() || addSelect)))
             return;
       // As findSelectableElement may return a measure
       // when clicked "a little bit" above or below it, getStaff
