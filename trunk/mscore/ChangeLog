@@ -4,6 +4,7 @@
       (la)
       - Add pageFormat object in plugin framework
       - small patch for Snow Leopard build
+      - Synth dialog changed to modal
 4.apr (ws)
       - Modified portaudio exit code. Maybe this fixes problems when exiting
         mscore.
