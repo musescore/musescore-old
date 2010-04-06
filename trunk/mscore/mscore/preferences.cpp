@@ -785,7 +785,7 @@ bool ShortcutItem::operator<(const QTreeWidgetItem& item) const
       
       const QTreeWidget * pTree =treeWidget ();
       int column   = pTree ? pTree->sortColumn() : 0;
-      return QString::localeAwareCompare(text(column).toLower(), item.text(column).toLower()) < 0;
+      return QString::localeAwareCompare(text(column).toLower(), item.text(column).toLower()) > 0;
       }
 
 //---------------------------------------------------------

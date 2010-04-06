@@ -206,7 +206,7 @@ void PortMidiDriver::read()
       if (!inputStream)
             return;
       PmEvent buffer[1];
-      iter = (iter >= THRESHOLD) ? iter : (++iter);
+      iter = (iter >= THRESHOLD) ? iter : (iter+1);
       while (Pm_Poll(inputStream)) {
             int n = Pm_Read(inputStream, buffer, 1);
             if (n > 0) {

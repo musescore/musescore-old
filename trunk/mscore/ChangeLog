@@ -1,5 +1,6 @@
 6.apr (la)
       - handle MIDI IN for special drumkits (patch by Jason Essington)
+      - fix #5227: Shortcuts Are Listed From Z-A
 5.apr (ws)
       - fix #5220: Crash when inserting note at end
       - fix #5195: Copy paste disables playback
