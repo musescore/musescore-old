@@ -1,3 +1,5 @@
+6.apr (la)
+      - handle MIDI IN for special drumkits (patch by Jason Essington)
 5.apr (ws)
       - fix #5220: Crash when inserting note at end
       - fix #5195: Copy paste disables playback
