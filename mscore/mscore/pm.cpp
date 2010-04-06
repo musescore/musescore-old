@@ -197,34 +197,56 @@ void PortMidiDriver::getOutputPollFd(struct pollfd**, int* n)
 
 void PortMidiDriver::read()
       {
+      static const int THRESHOLD = 3; // iterations required before consecutive drum notes are not considered part of a chord
       static int active = 0;
+      static int iter = 0;
       //for some reason, some users could have "active" blocked in < 0
       if (active < 0)
         active = 0;
       if (!inputStream)
             return;
       PmEvent buffer[1];
+      iter = (iter >= THRESHOLD) ? iter : (++iter);
       while (Pm_Poll(inputStream)) {
             int n = Pm_Read(inputStream, buffer, 1);
             if (n > 0) {
                   if (mscore->midiinEnabled()) {
                         int status = Pm_MessageStatus(buffer[0].message);
                         int type = status & 0xF0;
-                        //int channel = status & 0x0F; //going to need this at some point
+                        int channel = status & 0x0F;
                         if (type == ME_NOTEON) {
                               int pitch = Pm_MessageData1(buffer[0].message);
                               int velo = Pm_MessageData2(buffer[0].message);
                               if (velo) {
                                     if (debugMode)
                                         printf("--> enqueue %d ## %d\n", pitch, active);
+                                    /* 
+                                     * Since some drum modules do not overlap note on / off messages
+                                     * we need to take a bit of a different tactic to allow chords 
+                                     * to be entered.
+                                     * 
+                                     * Rather than decrement active for drums (midi on ch10), 
+                                     * we'll just assume that if read() has been called a couple
+                                     * times in a row without a drum note, that this note is not
+                                     * part of a cord.
+                                     */
+                                    if (channel == 0x09) {
+                                          if (iter >= THRESHOLD) {
+                                                active = 0;
+                                          }
+                                          iter = 0;
+                                    }
                                     mscore->midiNoteReceived(pitch, active);
                                     ++active;
                                     }
-                              else
-                                    --active;
+                              else {
+                                    if(channel != 0x09)
+                                          --active;
+                                    }
                               }
                         else if (type == ME_NOTEOFF)
-                              --active;
+                              if (channel != 0x09) 
+                                    --active;
                         }
                   else
                         active = 0;
