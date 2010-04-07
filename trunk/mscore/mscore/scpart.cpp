@@ -29,20 +29,21 @@ Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(TextC*);
 
 static const char* const function_names_part[] = {
-      "longName", "shortName", "midiProgram", "midiChannel"
+      "longName", "shortName", "midiProgram", "midiChannel", "staves"
       };
 static const int function_lengths_part[] = {
-      1, 1, 1, 1
+      1, 1, 1, 1, 0
       };
 static const QScriptValue::PropertyFlags flags_part[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter
       };
 
 ScriptInterface partInterface = {
-      4,
+      sizeof(function_names_part) / sizeof(*function_names_part),
       function_names_part,
       function_lengths_part,
       flags_part
@@ -105,6 +106,10 @@ static QScriptValue prototype_Part_call(QScriptContext* context, QScriptEngine*)
                               return context->engine()->undefinedValue();
                               }
                         }
+                  break;
+            case 4:     // "staves"
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), part->staves()->size());
                   break;
             }
       return context->throwError(QScriptContext::TypeError,

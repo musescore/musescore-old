@@ -317,8 +317,10 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 12:    // "part",
                   if (argc == 1) {
                         int n = context->argument(0).toInt32();
-                        Part* part = score->parts()->at(n);
-                        return qScriptValueFromValue(context->engine(), part);
+                        if(n >= 0 && n < score->parts()->size()){
+                            Part* part = score->parts()->at(n);
+                            return qScriptValueFromValue(context->engine(), part);
+                            }
                         }
                   break;
             case 13:    // "startUndo",
