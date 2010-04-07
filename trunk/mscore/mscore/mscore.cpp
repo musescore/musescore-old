@@ -588,28 +588,28 @@ MuseScore::MuseScore()
       //    Menu File
       //---------------------
 
-      QMenu* menuFile = mb->addMenu(tr("&File"));
-      menuFile->setObjectName("File");
+      _fileMenu = mb->addMenu(tr("&File"));
+      _fileMenu->setObjectName("File");
 
-      menuFile->addAction(getAction("file-new"));
-      menuFile->addAction(getAction("file-open"));
-      openRecent = menuFile->addMenu(*icons[fileOpen_ICON], tr("Open &Recent"));
+      _fileMenu->addAction(getAction("file-new"));
+      _fileMenu->addAction(getAction("file-open"));
+      openRecent = _fileMenu->addMenu(*icons[fileOpen_ICON], tr("Open &Recent"));
       connect(openRecent, SIGNAL(aboutToShow()), SLOT(openRecentMenu()));
       connect(openRecent, SIGNAL(triggered(QAction*)), SLOT(selectScore(QAction*)));
-      menuFile->addSeparator();
-      menuFile->addAction(getAction("file-save"));
-      menuFile->addAction(getAction("file-save-as"));
-      menuFile->addAction(getAction("file-save-a-copy"));
-      menuFile->addSeparator();
-      menuFile->addAction(getAction("file-reload"));
-      menuFile->addSeparator();
-      menuFile->addAction(getAction("file-close"));
+      _fileMenu->addSeparator();
+      _fileMenu->addAction(getAction("file-save"));
+      _fileMenu->addAction(getAction("file-save-as"));
+      _fileMenu->addAction(getAction("file-save-a-copy"));
+      _fileMenu->addSeparator();
+      _fileMenu->addAction(getAction("file-reload"));
+      _fileMenu->addSeparator();
+      _fileMenu->addAction(getAction("file-close"));
 
-      menuFile->addSeparator();
-      menuFile->addAction(getAction("parts"));
-      menuFile->addAction(getAction("print"));
-      menuFile->addSeparator();
-      menuFile->addAction(getAction("quit"));
+      _fileMenu->addSeparator();
+      _fileMenu->addAction(getAction("parts"));
+      _fileMenu->addAction(getAction("print"));
+      _fileMenu->addSeparator();
+      _fileMenu->addAction(getAction("quit"));
 
       //---------------------
       //    Menu Edit

@@ -50,7 +50,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       if (debugMode)
             printf("Register Plugin <%s>\n", qPrintable(pluginPath));
 
-      if (se == 0){
+      if (se == 0) {
             se = new ScriptEngine();
             se->installTranslatorFunctions();
             }
@@ -118,7 +118,31 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       if (!pluginMapper)
             return;
 
-      QStringList ml   = menu.split(".", QString::SkipEmptyParts);
+      QStringList ml;
+      QString s;
+      bool escape = false;
+      foreach (QChar c, menu) {
+            if (escape) {
+                  escape = false;
+                  s += c;
+                  }
+            else {
+                  if (c == '\\')
+                        escape = true;
+                  else {
+                        if (c == '.') {
+                              ml += s;
+                              s = "";
+                              }
+                        else {
+                              s += c;
+                              }
+                        }
+                  }
+            }
+      if (!s.isEmpty())
+            ml += s;
+
       int n            = ml.size();
       QWidget* curMenu = menuBar();
 
@@ -145,7 +169,24 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                               printf("add Menu <%s>\n", qPrintable(m));
                         }
                   else if (i + 1 == n) {
-                        QAction* a = ((QMenu*)curMenu)->addAction(m);
+                        QStringList sl = m.split(":");
+                        QAction* a = 0;
+                        QMenu* cm = static_cast<QMenu*>(curMenu);
+                        if (sl.size() == 2) {
+                              QList<QAction*> al = cm->actions();
+                              QAction* ba = 0;
+                              foreach(QAction* ia, al) {
+                                    if (ia->text() == sl[0]) {
+                                          ba = ia;
+                                          break;
+                                          }
+                                    }
+                              a = new QAction(sl[1], 0);
+                              cm->insertAction(ba, a);
+                              }
+                        else {
+                              a = cm->addAction(m);
+                              }
                         connect(a, SIGNAL(triggered()), pluginMapper, SLOT(map()));
                         pluginMapper->setMapping(a, pluginIdx);
                         if (debugMode)
@@ -158,6 +199,22 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                         }
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   registerPlugin
+//---------------------------------------------------------
+
+void MuseScore::registerPlugin(QAction* a)
+      {
+      if (!pluginMapper) {
+            printf("registerPlugin: no pluginMapper\n");
+            return;
+            }
+      int pluginIdx = plugins.size() - 1; // plugin is already appended
+      connect(a, SIGNAL(triggered()), pluginMapper, SLOT(map()));
+      pluginMapper->setMapping(a, pluginIdx);
+printf("registerPlugin: add action idx %d\n", pluginIdx);
       }
 
 //---------------------------------------------------------
@@ -251,6 +308,7 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("Part",      create_Part_class(this),    QScriptValue::SkipInEnumeration);
       globalObject().setProperty("PageFormat",create_PageFormat_class(this),    QScriptValue::SkipInEnumeration);
 
+      globalObject().setProperty("mscore",              newQObject(mscore));
       globalObject().setProperty("division",            newVariant(AL::division));
       globalObject().setProperty("mscoreVersion",       newVariant(version()));
       globalObject().setProperty("mscoreMajorVersion",  newVariant(majorVersion()));
@@ -338,4 +396,4 @@ void MuseScore::pluginExecuteFunction(int idx, const char* functionName)
           s->endCmd();
       if(cs)
           cs->end();
-      } 
+      }

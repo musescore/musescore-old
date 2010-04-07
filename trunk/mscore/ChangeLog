@@ -1,3 +1,6 @@
+7.apr (ws)
+      - extended script registration: scripts can now register actions and have
+        access to the main application window to extend the menu structure.
 6.apr (la)
       - handle MIDI IN for special drumkits (patch by Jason Essington)
       - fix #5227: Shortcuts Are Listed From Z-A

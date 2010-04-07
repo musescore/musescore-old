@@ -58,7 +58,11 @@ var mscorePlugin = {
 The global object "mscorePlugin" defines the environment of the plugin.
 The variable "menu" creates a menu entry in MuseScore which triggers
 execution of the plugin. The test plugin above creates an entry "test"
-in the menu "Plugins".
+in the menu "Plugins". The syntax "entry:test" puts the new menu entry
+"test" before the existing entry "entry". Not existing submenus are
+automatically created. Dots are used as separators and must escaped with
+"\" if they are part of a string.
+
 "init" defines a function, which is called on MuseScore startup, when
 the plugins are registered. The "run" function is executed, when the user
 activates the "test" menu entry. The "onClose" is executed when MuseScore quits.
@@ -75,6 +79,15 @@ Note: (ro) stands for read-only.
 
 Objects
 =====================================
+   MuseScore
+      this is the main application window
+
+      Functions:
+            QMenu* fileMenu()  returns the file menu entry
+            registerPlugin(QAction*)      Registers the current plugin with
+                                          QAction. Has to be called in the
+                                          init() function of a plugin if no
+                                          "menu" is defined.
    Score
       represents a complete score
 
@@ -135,7 +148,7 @@ Objects
          Properties:
             staff       integer
             voice       integer
-            pageNumber  integer (ro)  
+            pageNumber  integer (ro)
 
          Fuctions:
             rewind()                position cursor to staff/voice
@@ -157,8 +170,8 @@ Objects
             nextMeasure()                 go to first chord/rest of next measure
             time()            double      current score time in ms
             tick()            integer     current score tick
-            pos()             QPointF     position 
-                
+            pos()             QPointF     position
+
    Chord
          create:
             var a = new Chord()
@@ -246,7 +259,7 @@ Objects
             midiProgram integer     midi program of the part (ro)
             midiChannel integer     midi channel of the part (ro)
             staves      integer     number of staves in the part (ro)
-            
+
     PageFormat
          Properties:
             landscape   bool     true if the score is in landscape orientation (ro)
@@ -258,6 +271,8 @@ Objects
 
 Global Variables
 =====================================
+
+      mscore                  MuseScore   This is the main application window
 
       pluginPath  string                  path of current active plugin
                                           This path can be used find additional data associated with this
@@ -282,6 +297,24 @@ Global Variables
       mb.setWindowTitle("MuseScore: Hello");
       mb.text = "Hello World!";
       mb.exec();
+
+      if no "menu" is defined in the mscorePlugin structure, the plugin must
+      be registered in the init() function:
+
+      function init()
+            {
+            // create action
+            var action = new QAction("mops", mscore);
+
+            // put action into menu
+            var menu   = mscore.fileMenu();
+            var actionList = menu.actions();
+            menu.insertAction(actionList[5], action);
+
+            // register plugin
+            mscore.registerPlugin(action);
+            }
+
 
 2. Create a new Score "Test-Score"
 
@@ -340,7 +373,7 @@ function applyToNotesInSelection(func)
 
       for (var staff = startStaff; staff < endStaff; ++staff) {
             cursor.goToSelectionStart();
-            for (var v = 0; v < 4; v++) {          
+            for (var v = 0; v < 4; v++) {
                   cursor.goToSelectionStart(); // set voice to 0
                   cursor.voice = v; //voice has to be set after goTo
                   cursor.staff = staff;
