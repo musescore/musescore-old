@@ -2,12572 +2,8228 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="fr">
 <context>
-    <name>AboutBox</name>
+    <name>AudioOutput</name>
     <message>
-        <location filename="../../mscore/aboutbox.ui" line="+489"/>
-        <source>AboutBox</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/3rdparty/phonon/phonon/audiooutput.cpp" line="+375"/>
+        <source>&lt;html&gt;The audio playback device &lt;b&gt;%1&lt;/b&gt; does not work.&lt;br/&gt;Falling back to &lt;b&gt;%2&lt;/b&gt;.&lt;/html&gt;</source>
+        <translation>&lt;html&gt;Le dispositif audio &lt;b&gt;%1&lt;/b&gt; ne fonctionne pas.&lt;br/&gt;Utilisation de &lt;b&gt;%2&lt;/b&gt;.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+56"/>
-        <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <location line="+13"/>
+        <source>&lt;html&gt;Switching to the audio playback device &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;which just became available and has higher preference.&lt;/html&gt;</source>
+        <translation>&lt;html&gt;Utilisation de &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;qui vient de devenir disponible et a une plus grande priorité.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>Version: 0.9.0</source>
-        <translation type="unfinished"></translation>
+        <location line="+3"/>
+        <source>Revert back to device &apos;%1&apos;</source>
+        <translation>Utilisation de &apos;%1&apos;</translation>
+    </message>
+</context>
+<context>
+    <name>BackendSelection</name>
+    <message>
+        <source>A list of Phonon Backends found on your system.  The order here determines the order Phonon will use them in.</source>
+        <translation type="obsolete">Une list de backends pour Phonon trouvés sur le système. L&apos;ordre determine l&apos;ordre dans lequel Phonon va les utiliser.</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>Revision: 628</source>
-        <translation type="unfinished"></translation>
+        <source>Prefer</source>
+        <translation type="obsolete">Préférer</translation>
     </message>
-    <message utf8="true">
-        <location line="+16"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+    <message>
+        <source>Defer</source>
+        <translation type="obsolete">Différer</translation>
+    </message>
+</context>
+<context>
+    <name>BackendTester</name>
+    <message>
+        <source>MainWindow</source>
+        <translation type="obsolete">Fenêtre Principale</translation>
+    </message>
+    <message>
+        <source>local audio file:</source>
+        <translation type="obsolete">Fichier audio local:</translation>
+    </message>
+    <message>
+        <source>local video file:</source>
+        <translation type="obsolete">Fichier vidéo local:</translation>
+    </message>
+    <message>
+        <source>remote media URL:</source>
+        <translation type="obsolete">URL distante :</translation>
+    </message>
+    <message>
+        <source>run tests</source>
+        <translation type="obsolete">Lancer les tests</translation>
+    </message>
+    <message>
+        <source>testing: %p%</source>
+        <translation type="obsolete">test de : %P%</translation>
+    </message>
+</context>
+<context>
+    <name>CloseButton</name>
+    <message>
+        <location filename="../src/gui/widgets/qtabbar.cpp" line="+2251"/>
+        <source>Close Tab</source>
+        <translation>Fermer l&apos;onglet</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>Print</source>
+        <translation type="obsolete">Impr écran</translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="obsolete">Emplacement:</translation>
+    </message>
+</context>
+<context>
+    <name>OutputDeviceChoice</name>
+    <message>
+        <source>Various categories of outputs.  For each category you may choose what device you wish to output to.</source>
+        <translation type="obsolete">Differentes catégories de sortie. Pour chaque catégorie vous pouvez choisir quel périphérique vous souhaitez utiliser.</translation>
+    </message>
+    <message>
+        <source>Show Advanced Devices</source>
+        <translation type="obsolete">Montrer les périphériques avancés</translation>
+    </message>
+    <message>
+        <source>Apply Device List to ...</source>
+        <translation type="obsolete">Appliquer la liste de périphériques à...</translation>
+    </message>
+    <message>
+        <source>Audio Outputs found on your system.  Choose the device that you wish sound to come out of.</source>
+        <translation type="obsolete">Périphériques audio trouvés sur votre système. Choisissez le périphérique que vous voulez utiliser.</translation>
+    </message>
+    <message>
+        <source>The order determines the preference of the output devices. If for some reason the first device cannot be used Phonon will try to use the second, and
+so on.</source>
+        <translation type="obsolete">L&apos;ordre détermine la préférence du périphérique audio. Si pour quelque raison le premier ne peut pas être utilisé, Phonon essaiera d&apos;utiliser le deuxième...</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="obsolete">Supprimer</translation>
+    </message>
+    <message>
+        <source>prefer the selected device</source>
+        <translation type="obsolete">préférer le périphérique sélectionné</translation>
+    </message>
+    <message>
+        <source>Prefer</source>
+        <translation type="obsolete">Préférer</translation>
+    </message>
+    <message>
+        <source>no preference for the selected device</source>
+        <translation type="obsolete">pas de préférence pour le périphérique sélectionné</translation>
+    </message>
+    <message>
+        <source>Defer</source>
+        <translation type="obsolete">Différer</translation>
+    </message>
+</context>
+<context>
+    <name>PPDOptionsModel</name>
+    <message>
+        <source>Name</source>
+        <translation type="obsolete">Nom</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="obsolete">Valeur</translation>
+    </message>
+</context>
+<context>
+    <name>Phonon::</name>
+    <message>
+        <location filename="../src/3rdparty/phonon/phonon/phononnamespace.cpp" line="+55"/>
+        <source>Notifications</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Music</source>
+        <translation>Musique</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Video</source>
+        <translation>Vidéo</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Communication</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Games</source>
+        <translation>Jeux</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Accessibility</source>
+        <translation>Accessibilité</translation>
+    </message>
+</context>
+<context>
+    <name>Phonon::Gstreamer::Backend</name>
+    <message>
+        <location filename="../src/3rdparty/phonon/gstreamer/backend.cpp" line="+171"/>
+        <source>Warning: You do not seem to have the package gstreamer0.10-plugins-good installed.
+          Some video features have been disabled.</source>
+        <translation>Attention: Vous n&apos;avez apparemment pas installé le paquet gstreamer0.10-plugins-good.
+Des fonctionnalités vidéo ont été desactivées.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Warning: You do not seem to have the base GStreamer plugins installed.
+          All audio and video support has been disabled</source>
+        <translation>Attention: Vous n&apos;avez apparemment pas installées les plugins de base de GStreamer.
+Le support audio et vidéo est désactivé</translation>
+    </message>
+</context>
+<context>
+    <name>Phonon::Gstreamer::MediaObject</name>
+    <message>
+        <location filename="../src/3rdparty/phonon/gstreamer/mediaobject.cpp" line="+90"/>
+        <source>Cannot start playback. 
 
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>AboutBoxDialog</name>
-    <message>
-        <location filename="../../mscore/mscore.cpp" line="+2482"/>
-        <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished"></translation>
+Check your Gstreamer installation and make sure you 
+have libgstreamer-plugins-base installed.</source>
+        <translation>Impossible de démarrer la lecture. Verifiez votre installation de Gstreamer et assuez-vousd&apos;avoir installé libgstreamer-plugins-base.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <source>Unknown media format: %1</source>
+        <translation type="obsolete">Format inconnu : %1</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Revision: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Accidental</name>
-    <message>
-        <location filename="../../mscore/menus.cpp" line="+416"/>
-        <location line="+533"/>
-        <source>round bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Articulation</name>
-    <message>
-        <location filename="../../mscore/articulation.cpp" line="+157"/>
-        <source>Articulation Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ArticulationProperties</name>
-    <message>
-        <location filename="../../mscore/articulation.ui" line="+13"/>
-        <source>MuseScore: Articulations Properties</source>
-        <translation type="unfinished"></translation>
+        <source>Unable to flush media pipeline</source>
+        <translation type="obsolete">Impossible de vider le pipeline multimédia</translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <source>Could not decode URL.</source>
+        <translation type="obsolete">Impossible de décoder l&apos;URL.</translation>
     </message>
     <message>
-        <location line="+18"/>
-        <source>Midi Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>BarLineBase</name>
-    <message>
-        <location filename="../../mscore/barline.ui" line="+16"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <source>Could not open file.</source>
+        <translation type="obsolete">Impossible d&apos;ouvrir le fichier.</translation>
     </message>
     <message>
-        <location line="+12"/>
-        <source>BarLine</source>
-        <translation type="unfinished"></translation>
+        <source>Source type invalid</source>
+        <translation type="obsolete">Type de source invalide</translation>
     </message>
     <message>
-        <location line="+23"/>
-        <source>SubType:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>BeamBase</name>
-    <message>
-        <location filename="../../mscore/beam.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <source>Could not open stream.</source>
+        <translation type="obsolete">Impossible d&apos;ouvrir le flux.</translation>
     </message>
     <message>
-        <location line="+30"/>
-        <source>up:</source>
-        <translation type="unfinished"></translation>
+        <source>Source type not supported</source>
+        <translation type="obsolete">Type de source non supporté</translation>
     </message>
     <message>
-        <location line="+18"/>
-        <source>Chord/Rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>BoxPropertiesBase</name>
-    <message>
-        <location filename="../../mscore/boxproperties.ui" line="+16"/>
-        <source>MuseScore: Frame Properties</source>
-        <translation type="unfinished"></translation>
+        <source>Could not load source</source>
+        <translation type="obsolete">Impossible de charger la source</translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>Margins</source>
-        <translation type="unfinished">Marges</translation>
+        <location line="+113"/>
+        <source>A required codec is missing. You need to install the following codec(s) to play this content: %0</source>
+        <translation>Un codec requis est manquant. Vous devez installer le codec suivant pour jouer le contenu: %0</translation>
     </message>
     <message>
+        <location line="+676"/>
+        <location line="+8"/>
         <location line="+15"/>
-        <source>left:</source>
-        <translation type="unfinished"></translation>
+        <location line="+9"/>
+        <location line="+6"/>
+        <location line="+19"/>
+        <location line="+335"/>
+        <location line="+24"/>
+        <source>Could not open media source.</source>
+        <translation>Impossible d&apos;ouvrir le média source.</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <location line="+16"/>
-        <location line="+16"/>
-        <location line="+29"/>
-        <source>mm</source>
-        <translation type="unfinished"></translation>
+        <location line="-403"/>
+        <source>Invalid source type.</source>
+        <translation>Type de source invalide.</translation>
     </message>
     <message>
-        <location line="-13"/>
-        <source>right:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>bottom:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>top:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordBase</name>
-    <message>
-        <location filename="../../mscore/chord.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+62"/>
-        <source>Arpeggio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Tremolo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Glissando</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordEdit</name>
-    <message>
-        <location filename="../../mscore/chordedit.ui" line="+13"/>
-        <source>MuseScore: Harmony Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Root</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>C</source>
-        <translation type="unfinished"></translation>
+        <location line="+377"/>
+        <source>Could not locate media source.</source>
+        <translation>Impossible de localiser le média source.</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>E</source>
-        <translation type="unfinished"></translation>
+        <source>Could not open audio device. The device is already in use.</source>
+        <translation>Impossible d&apos;ouvrir le périphérique audio. Celui-ci est déjà en cours d&apos;utilisation.</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>bb (double flat)</source>
-        <translation type="unfinished"></translation>
+        <location line="+13"/>
+        <source>Could not decode media source.</source>
+        <translation>Impossible de décoder le média source.</translation>
+    </message>
+</context>
+<context>
+    <name>Phonon::VolumeSlider</name>
+    <message>
+        <location filename="../src/3rdparty/phonon/phonon/volumeslider.cpp" line="+42"/>
+        <location line="+18"/>
+        <source>Volume: %1%</source>
+        <translation>Volume: %1%</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>F</source>
-        <translation type="unfinished"></translation>
+        <location line="-15"/>
+        <location line="+18"/>
+        <location line="+54"/>
+        <source>Use this slider to adjust the volume. The leftmost position is 0%, the rightmost is %1%</source>
+        <translation>Utilisez le slider pour ajuster le volume. La position la plus à gauche est 0%, la plus à droite est %1%</translation>
+    </message>
+</context>
+<context>
+    <name>Q3Accel</name>
+    <message>
+        <location filename="../src/qt3support/other/q3accel.cpp" line="+481"/>
+        <source>%1, %2 not defined</source>
+        <translation>La séquence %1, %2 n&apos;est pas définie</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>b (flat)</source>
-        <translation type="unfinished"></translation>
+        <location line="+36"/>
+        <source>Ambiguous %1 not handled</source>
+        <translation>Séquence ambiguë %1 non traitée</translation>
+    </message>
+</context>
+<context>
+    <name>Q3DataTable</name>
+    <message>
+        <location filename="../src/qt3support/sql/q3datatable.cpp" line="+285"/>
+        <source>True</source>
+        <translation>Vrai</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>G</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>False</source>
+        <translation>Faux</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>(no accidental)</source>
-        <translation type="unfinished"></translation>
+        <location line="+505"/>
+        <source>Insert</source>
+        <translation>Insérer</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>A</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>Update</source>
+        <translation>Actualiser</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source># (sharp)</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>Delete</source>
+        <translation>Supprimer</translation>
+    </message>
+</context>
+<context>
+    <name>Q3FileDialog</name>
+    <message>
+        <location filename="../src/qt3support/dialogs/q3filedialog.cpp" line="+864"/>
+        <source>Copy or Move a File</source>
+        <translation>Copie ou déplace un fichier</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>B</source>
-        <translation type="unfinished"></translation>
+        <location line="+8"/>
+        <source>Read: %1</source>
+        <translation>Lecture : %1</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>## (double sharp)</source>
-        <translation type="unfinished"></translation>
+        <location line="+6"/>
+        <location line="+30"/>
+        <source>Write: %1</source>
+        <translation>Écriture : %1</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Extension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <location line="+141"/>
-        <source>Maj</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-134"/>
-        <location line="+194"/>
-        <location line="+750"/>
-        <source>2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-937"/>
-        <location line="+147"/>
-        <source>Maj7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-140"/>
-        <location line="+145"/>
-        <source>Maj9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-138"/>
-        <location line="+128"/>
-        <source>6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-121"/>
-        <location line="+161"/>
-        <source>69</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-154"/>
-        <location line="+164"/>
-        <source>m</source>
-        <translation type="unfinished"></translation>
+        <location line="-22"/>
+        <location line="+1575"/>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location line="-157"/>
-        <location line="+172"/>
-        <source>m7</source>
-        <translation type="unfinished"></translation>
+        <location line="+49"/>
+        <location line="+2153"/>
+        <location filename="../src/qt3support/dialogs/q3filedialog_mac.cpp" line="+110"/>
+        <source>All Files (*)</source>
+        <translation>Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location line="-165"/>
-        <location line="+215"/>
-        <source>m7b5</source>
-        <translation type="unfinished"></translation>
+        <location line="-2089"/>
+        <source>Name</source>
+        <translation>Nom</translation>
     </message>
     <message>
-        <location line="-208"/>
-        <location line="+253"/>
-        <source>7</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>Size</source>
+        <translation>Taille</translation>
     </message>
     <message>
-        <location line="-246"/>
-        <location line="+736"/>
-        <source>sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-729"/>
-        <source>7Sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+157"/>
-        <source>m6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-150"/>
-        <location line="+135"/>
-        <source>m9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-128"/>
-        <location line="+118"/>
-        <source>mMaj7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-111"/>
-        <location line="+171"/>
-        <source>dim</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-164"/>
-        <location line="+234"/>
-        <source>9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-227"/>
-        <location line="+202"/>
-        <source>13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-195"/>
-        <location line="+245"/>
-        <source>7b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-238"/>
-        <source>Other:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>5b</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>aug</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Maj9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Maj13#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Maj13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>+</source>
-        <translation type="unfinished">+</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Maj7#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>maug</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>m11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>m13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>m#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>m7#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>m69</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Maj7Lyd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Maj7b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>m9b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7+</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9+</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13+</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>(blues)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7(Blues)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>7b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+25"/>
-        <source>13#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-20"/>
-        <source>7#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+60"/>
-        <source>9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-50"/>
-        <source>9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>13b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7b9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7b9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7#9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>13#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7#9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7b5b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9b5b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7b5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13b5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7b5b9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7b5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13b5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7b5#9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7#5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13#5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7#5b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13#5b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7#5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+10"/>
-        <source>13#5#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-5"/>
-        <source>7#5#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>7alt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+25"/>
-        <source>13sus#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-20"/>
-        <source>7sus#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9susb13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+60"/>
-        <source>9sus#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-50"/>
-        <source>9sus#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13susb9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13susb9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13sus#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus#9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>13sus#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus#9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13susb5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb5b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9susb5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9susb5b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13susb5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb5b9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13susb5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7susb5#9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13sus#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13sus#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9sus#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>9sus#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus#5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13sus#5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus#5b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>13sus#5b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>7sus#5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+10"/>
-        <source>13sus#5#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-5"/>
-        <source>7sus#5#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Degrees</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Bass Note / Inversion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <location line="+72"/>
-        <source>none</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-67"/>
-        <source>/C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/Db</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/Eb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/F#</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/Ab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/Bb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>/B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/chordedit.cpp" line="+101"/>
+        <location line="+2"/>
         <source>Type</source>
-        <translation type="unfinished">Type</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <source>Date</source>
+        <translation>Date</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Alter</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordList</name>
-    <message>
-        <location filename="../../mscore/harmony.cpp" line="+1171"/>
-        <source>Write Chord Description failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordPropertyBase</name>
-    <message>
-        <location filename="../../mscore/chordproperties.ui" line="+14"/>
-        <location line="+36"/>
-        <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <source>Attributes</source>
+        <translation>Attributs</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <source>small</source>
-        <translation type="unfinished"></translation>
+        <location line="+35"/>
+        <location line="+2031"/>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>stemless</source>
-        <translation type="unfinished"></translation>
+        <location line="-1991"/>
+        <source>Look &amp;in:</source>
+        <translation>Chercher &amp;dans :</translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>additional leading space </source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <location line="+1981"/>
+        <location line="+16"/>
+        <source>File &amp;name:</source>
+        <translation>&amp;Nom de fichier :</translation>
+    </message>
+    <message>
+        <location line="-1996"/>
+        <source>File &amp;type:</source>
+        <translation>&amp;Type de fichier :</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location line="+20"/>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-7"/>
-        <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>stem direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <location line="+108"/>
-        <location line="+48"/>
-        <location line="+161"/>
-        <location line="+58"/>
-        <source>auto</source>
-        <extracomment>velocity type</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-370"/>
-        <source>up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Note Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>tuning offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source> cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>velocity type</source>
-        <translation type="unfinished"></translation>
+        <source>Back</source>
+        <translation>Précédent (historique)</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>velocity (0-127)</source>
-        <translation type="unfinished"></translation>
+        <source>One directory up</source>
+        <translation>Aller au dossier parent</translation>
     </message>
     <message>
-        <location line="+19"/>
-        <location line="+209"/>
-        <location line="+58"/>
-        <source>user</source>
-        <extracomment>velocity type</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-262"/>
-        <location line="+209"/>
-        <location line="+58"/>
-        <source>offset</source>
-        <extracomment>velocity type</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-243"/>
-        <source>note head positon </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>left of stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>right of stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Note Head Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Note Head Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>cross</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>diamond</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>triangle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>xcircle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>do</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>re</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>mi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>fa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>la</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>ti</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>whole</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>half</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>quarter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>breve</source>
-        <translation type="unfinished"></translation>
+        <location line="+9"/>
+        <source>Create New Folder</source>
+        <translation>Créer un nouveau dossier</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>ontime offset type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>ontime offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <location line="+58"/>
-        <source> ticks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-45"/>
-        <source>offtime offset type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>offtime</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordRestBase</name>
-    <message>
-        <location filename="../../mscore/chordrest.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+71"/>
-        <source>SlurFor:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>SlurBack:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+84"/>
-        <source>StaffMove:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordStyleEditor</name>
-    <message>
-        <location filename="../../mscore/harmonyedit.ui" line="+78"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <source>List View</source>
+        <translation>Affichage liste</translation>
     </message>
     <message>
         <location line="+8"/>
-        <source>Chord Description File:</source>
-        <translation type="unfinished"></translation>
+        <source>Detail View</source>
+        <translation>Affichage détaillé</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
+        <location line="+9"/>
+        <source>Preview File Info</source>
+        <translation>Informations du fichier prévisualisé</translation>
     </message>
     <message>
-        <location line="+32"/>
-        <source>Id</source>
-        <translation type="unfinished"></translation>
+        <location line="+23"/>
+        <source>Preview File Contents</source>
+        <translation>Contenu du fichier prévisualisé</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <location line="+88"/>
+        <source>Read-write</source>
+        <translation>Lecture-écriture</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+1"/>
+        <source>Read-only</source>
+        <translation>Lecture seule</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Write-only</source>
+        <translation>Écriture seule</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Inaccessible</source>
+        <translation>Inaccessible</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Symlink to File</source>
+        <translation>Lien symbolique vers un fichier</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Symlink to Directory</source>
+        <translation>Lien symbolique vers un dossier</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Symlink to Special</source>
+        <translation>Lien symbolique vers un fichier spécial</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>File</source>
+        <translation>Fichier</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Dir</source>
+        <translation>Dossier</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Special</source>
+        <translation>Fichier spécial</translation>
+    </message>
+    <message>
+        <location line="+704"/>
+        <location line="+2100"/>
+        <location filename="../src/qt3support/dialogs/q3filedialog_win.cpp" line="+337"/>
+        <source>Open</source>
+        <translation>Ouvrir</translation>
+    </message>
+    <message>
+        <location line="-1990"/>
+        <location filename="../src/qt3support/dialogs/q3filedialog_win.cpp" line="+84"/>
         <source>Save As</source>
-        <translation type="unfinished">Enregistrer sous</translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
-        <location filename="../../mscore/harmonyedit.cpp" line="+40"/>
-        <source>MuseScore: Chord Style Editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dynamic</name>
-    <message>
-        <location filename="../../mscore/dynamics.cpp" line="+264"/>
-        <source>Dynamics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>MIDI Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DynamicBase</name>
-    <message>
-        <location filename="../../mscore/dynamic.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-</context>
-<context>
-    <name>DynamicProperties</name>
-    <message>
-        <location filename="../../mscore/dynamicproperties.ui" line="+14"/>
-        <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>MIDI Values</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Velocity:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Apply to:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>part</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>align left</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditDrumset</name>
-    <message>
-        <location filename="../../mscore/editdrumset.cpp" line="+57"/>
-        <source>invalid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Normal Head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Cross Head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Diamond Head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Triangle Head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Load</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Save</source>
-        <translation type="unfinished">Enregistrer</translation>
-    </message>
-    <message>
-        <location line="+262"/>
-        <source>MuseScore: Load Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location line="+45"/>
-        <source>MuseScore drumset (*.drm)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-2"/>
-        <source>MuseScore: Save Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Open File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>
-failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>MuseScore: Open File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Write File failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>MuseScore: Write Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditDrumsetBase</name>
-    <message>
-        <location filename="../../mscore/editdrumset.ui" line="+14"/>
-        <source>MuseScore: Edit Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <location line="+642"/>
         <location line="+5"/>
-        <source>Note</source>
-        <translation type="unfinished"></translation>
+        <location line="+355"/>
+        <source>&amp;Open</source>
+        <translation>&amp;Ouvrir</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <location line="-357"/>
+        <location line="+341"/>
+        <source>&amp;Save</source>
+        <translation>&amp;Enregistrer</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <location line="-334"/>
+        <source>&amp;Rename</source>
+        <translation>&amp;Renommer</translation>
     </message>
     <message>
-        <location line="+24"/>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Note Head:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Staff Line:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Stem Direction:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Up</source>
-        <translation type="unfinished">Haut</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Down</source>
-        <translation type="unfinished">Bas</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Default Voice:</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>&amp;Delete</source>
+        <translation>Suppri&amp;mer</translation>
     </message>
     <message>
         <location line="+20"/>
-        <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <source>R&amp;eload</source>
+        <translation>R&amp;echarger</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <source>A</source>
-        <translation type="unfinished"></translation>
+        <location line="+4"/>
+        <source>Sort by &amp;Name</source>
+        <translation>Trier par &amp;nom</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>B</source>
-        <translation type="unfinished"></translation>
+        <location line="+2"/>
+        <source>Sort by &amp;Size</source>
+        <translation>Trier par ta&amp;ille</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>C</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>Sort by &amp;Date</source>
+        <translation>Trier par &amp;date</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>D</source>
-        <translation type="unfinished"></translation>
+        <location line="+2"/>
+        <source>&amp;Unsorted</source>
+        <translation>&amp;Non trié</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>E</source>
-        <translation type="unfinished"></translation>
+        <location line="+15"/>
+        <source>Sort</source>
+        <translation>Tri</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>--</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditInstrumentBase</name>
-    <message>
-        <location filename="../../mscore/editinstrument.ui" line="+14"/>
-        <source>MuseScore: Edit Instrument Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Instrument Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Name</source>
-        <translation type="unfinished">Nom</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Short Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Transpose</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Midi Program</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+80"/>
-        <source>OK</source>
-        <translation type="unfinished">OK</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
-    </message>
-</context>
-<context>
-    <name>EditStaffBase</name>
-    <message>
-        <location filename="../../mscore/editstaff.ui" line="+20"/>
-        <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Staff Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Lines:</source>
-        <translation type="unfinished"></translation>
+        <location line="+4"/>
+        <source>Show &amp;hidden files</source>
+        <translation>Afficher les fic&amp;hiers cachés</translation>
     </message>
     <message>
         <location line="+31"/>
-        <source>Stemless</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Small</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Part Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Change Instrument...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Long Instrument Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Short Instrument Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+41"/>
-        <source>Usable Pitch Range:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Amateur:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <location line="+28"/>
-        <source>-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-14"/>
-        <source>Professional:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Play Transposition:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Perfect Unison</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Unison</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Minor Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Major Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Minor Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Major Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Perfect Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Perfect Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Minor Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Major Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Minor Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Major Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Perfect Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>+octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>Use Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditStyle</name>
-    <message>
-        <location filename="../../mscore/editstyle.cpp" line="+62"/>
-        <source>Symbol</source>
-        <translation type="unfinished">Symbole</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Anchor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>TopStaff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>BottomStaff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditStyleBase</name>
-    <message>
-        <location filename="../../mscore/editstyle.ui" line="+14"/>
-        <source>MuseScore: Edit Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+622"/>
-        <source>System</source>
-        <translation type="unfinished">Système</translation>
-    </message>
-    <message>
-        <location line="-617"/>
-        <location line="+686"/>
-        <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-681"/>
-        <location line="+928"/>
-        <source>Barlines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-923"/>
-        <location line="+960"/>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-955"/>
-        <location line="+1163"/>
-        <source>Arpeggios</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1158"/>
-        <source>Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+1357"/>
-        <source>Beams</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1352"/>
-        <source>Sizes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Hairpins</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+1679"/>
-        <source>Chordnames</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1674"/>
-        <source>Articulations, Ornaments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Voices</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Create Multi Measure Rests</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Minumum width of measure:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+71"/>
-        <location line="+35"/>
-        <location line="+35"/>
-        <location line="+35"/>
-        <location line="+35"/>
-        <location line="+35"/>
-        <location line="+42"/>
-        <location line="+32"/>
-        <location line="+164"/>
-        <location line="+41"/>
-        <location line="+95"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+17"/>
-        <location line="+23"/>
-        <location line="+86"/>
-        <location line="+10"/>
-        <location line="+56"/>
-        <location line="+20"/>
-        <location line="+20"/>
-        <location line="+20"/>
-        <location line="+20"/>
-        <location line="+47"/>
-        <location line="+20"/>
-        <location line="+20"/>
-        <source>sp</source>
-        <extracomment>spatium unit
-----------
-space unit
-----------
-space unit</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1104"/>
-        <source>Minimum Number of empty measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Hide Empty Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Music upper margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Music lower margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Staff distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Akkolade distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>System distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Lyrics upper margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Lyrics lower margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>V-frame upper margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>V-frame lower margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Page fill threshold:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <location line="+38"/>
-        <location line="+1006"/>
-        <location line="+38"/>
-        <location line="+35"/>
-        <location line="+38"/>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1130"/>
-        <source>Last system fill threshold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Create clef for all systems</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Create key sig for all systems</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Create time signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Create courtesy time signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Create courtesy key signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+41"/>
-        <source>System Bracket Distance:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Fix Number of Measures/System:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Fix Measure Width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Spacing (1=tight)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Right margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Min. note distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Clef left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Key sig. left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Time sig. left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Clef-key distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Clef-barline distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Begin repeat left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Barline at start of single staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Barline at start of multiple staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>shorten stems</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Progression</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Shortest stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Accidental note distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Accidental distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Note dot distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Dot dot distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Ledger line width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+53"/>
-        <source>Distance to note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <location line="+450"/>
-        <source>Line width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-430"/>
-        <source>Hook length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+48"/>
-        <source>Page Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <location line="+45"/>
-        <source>show first</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-38"/>
-        <source>odd/even</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Measure Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>all staffs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>every system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>interval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+36"/>
-        <source>Beam width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <location line="+34"/>
-        <source>spaces</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-27"/>
-        <source>Beam distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>beam width units</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Minimum length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Minimum slope</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Maximum slope</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+43"/>
-        <source>Small staff size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>Small note size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Grace note size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>Small clef size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+69"/>
-        <source>Height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Line break height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+36"/>
-        <source>Use German names</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Chord description file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Articulation - note head distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+14"/>
-        <location line="+14"/>
-        <source>sp</source>
-        <comment>space unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-21"/>
-        <source>Articulation - note stem distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Articulation - articulation distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+73"/>
-        <source>Stem Direction in Multi Voice Context</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Voice 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+21"/>
-        <location line="+21"/>
-        <location line="+21"/>
-        <source>Up</source>
-        <translation type="unfinished">Haut</translation>
-    </message>
-    <message>
-        <location line="-56"/>
-        <location line="+21"/>
-        <location line="+21"/>
-        <location line="+21"/>
-        <source>Down</source>
-        <translation type="unfinished">Bas</translation>
-    </message>
-    <message>
-        <location line="-56"/>
-        <source>Voice 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Voice 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Voice 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditTempoBase</name>
-    <message>
-        <location filename="../../mscore/edittempo.ui" line="+14"/>
-        <source>MuseScore: Tempo Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+41"/>
-        <source>BPM:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Text:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+34"/>
-        <source>OK</source>
-        <translation type="unfinished">OK</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
-    </message>
-</context>
-<context>
-    <name>Element</name>
-    <message>
-        <location filename="../../mscore/element.cpp" line="+550"/>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <source>the file</source>
+        <translation>le fichier</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <source>the directory</source>
+        <translation>le dossier</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Color...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ElementBase</name>
-    <message>
-        <location filename="../../mscore/element.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+128"/>
-        <source>selectable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>droptarget</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+107"/>
-        <source>invalid</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ExcerptsDialog</name>
-    <message>
-        <location filename="../../mscore/excerptsdialog.ui" line="+13"/>
-        <source>MuseScore: Parts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Select Part:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Edit Part:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>File Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Part Title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Instrument:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Create Part</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/excerptsdialog.cpp" line="+167"/>
-        <source>Part-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Glissando</name>
-    <message>
-        <location filename="../../mscore/glissando.cpp" line="+203"/>
-        <source>Glissando Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GlissandoProperties</name>
-    <message>
-        <location filename="../../mscore/glissandoprop.ui" line="+13"/>
-        <source>MuseScore: Glissando Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Show Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Text:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GreendotButton</name>
-    <message>
-        <location filename="../../mscore/utils.cpp" line="+53"/>
-        <source>record</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>HBox</name>
-    <message>
-        <location filename="../../mscore/box.cpp" line="+365"/>
-        <source>Add Text</source>
-        <translation type="unfinished"></translation>
+        <source>the symlink</source>
+        <translation>le lien symbolique</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>HBox Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>HairpinBase</name>
-    <message>
-        <location filename="../../mscore/hairpin.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Hairpin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Tick1:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Tick2:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Harmony</name>
-    <message>
-        <location filename="../../mscore/harmony.cpp" line="-764"/>
-        <source>Harmony Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Image</name>
-    <message>
-        <location filename="../../mscore/image.cpp" line="+310"/>
-        <source>Image</source>
-        <translation type="unfinished"></translation>
+        <source>Delete %1</source>
+        <translation>Supprimer %1</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Image Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImageProperties</name>
-    <message>
-        <location filename="../../mscore/imageproperties.ui" line="+13"/>
-        <source>Image Properties</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;qt&gt;Are you sure you wish to delete %1 &quot;%2&quot;?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;Voulez-vous vraiment supprimer %1 &quot;%2&quot; ?&lt;/qt&gt;</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>lock aspect ratio</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImportMidiDialog</name>
-    <message>
-        <location filename="../../mscore/importmidi.ui" line="+13"/>
-        <source>MuseScore: Midi Import</source>
-        <translation type="unfinished"></translation>
+        <location line="+2"/>
+        <source>&amp;Yes</source>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
-        <location line="+21"/>
-        <source>Shortest note on import:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>1/4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>1/8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>1/16</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>1/64</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>1/128</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InsertMeasuresDialogBase</name>
-    <message>
-        <location filename="../../mscore/insertmeasuresdialog.ui" line="+13"/>
-        <source>Mscore: Insert Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+39"/>
-        <source>Insert empty measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Number of measures to insert</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+43"/>
-        <source>OK</source>
-        <translation type="unfinished">OK</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
-    </message>
-</context>
-<context>
-    <name>Inspector</name>
-    <message>
-        <location filename="../../mscore/inspector.cpp" line="+120"/>
-        <source>MuseScore: Object Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InspectorBase</name>
-    <message>
-        <location filename="../../mscore/inspector.ui" line="+15"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Back</source>
-        <translation type="unfinished">Précédent (historique)</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Forward</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InstrumentDialogBase</name>
-    <message>
-        <location filename="../../mscore/instrdialog.ui" line="+14"/>
-        <source>MuseScore: Create Instruments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <location line="+196"/>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-188"/>
-        <source>show more</source>
-        <translation type="unfinished"></translation>
+        <location line="+0"/>
+        <source>&amp;No</source>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <location line="+36"/>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
+        <source>New Folder 1</source>
+        <translation>Nouveau dossier 1</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>Remove</source>
-        <translation type="unfinished">Supprimer</translation>
+        <location line="+5"/>
+        <source>New Folder</source>
+        <translation>Nouveau dossier</translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>Up</source>
-        <translation type="unfinished">Haut</translation>
+        <location line="+5"/>
+        <source>New Folder %1</source>
+        <translation>Nouveau dossier %1</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>Down</source>
-        <translation type="unfinished">Bas</translation>
+        <location line="+98"/>
+        <source>Find Directory</source>
+        <translation>Chercher dans le dossier</translation>
     </message>
     <message>
-        <location line="+29"/>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <location line="+5"/>
+        <location line="+108"/>
+        <source>Directories</source>
+        <translation>Dossiers</translation>
     </message>
     <message>
-        <location line="+26"/>
-        <source>Add Above</source>
-        <translation type="unfinished"></translation>
+        <location line="-2"/>
+        <source>Directory:</source>
+        <translation>Dossier :</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>Add Below</source>
-        <translation type="unfinished"></translation>
+        <location line="+40"/>
+        <location line="+1110"/>
+        <source>Error</source>
+        <translation>Erreur</translation>
     </message>
     <message>
-        <location line="+37"/>
-        <source>1</source>
-        <translation type="unfinished"></translation>
+        <location line="-1109"/>
+        <source>%1
+File not found.
+Check path and filename.</source>
+        <translation>%1
+Impossible de trouver le fichier.
+Vérifier le chemin et le nom du fichier.</translation>
+    </message>
+    <message>
+        <location filename="../src/qt3support/dialogs/q3filedialog_win.cpp" line="-289"/>
+        <source>All Files (*.*)</source>
+        <translation>Tous les fichiers (*.*)</translation>
+    </message>
+    <message>
+        <location line="+375"/>
+        <source>Open </source>
+        <translation>Ouvrir</translation>
+    </message>
+    <message>
+        <location line="+155"/>
+        <source>Select a Directory</source>
+        <translation>Sélectionner un dossier</translation>
+    </message>
+</context>
+<context>
+    <name>Q3LocalFs</name>
+    <message>
+        <location filename="../src/qt3support/network/q3localfs.cpp" line="+130"/>
+        <location line="+10"/>
+        <source>Could not read directory
+%1</source>
+        <translation>Impossible de lire le dossier
+%1</translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>Could not create directory
+%1</source>
+        <translation>Impossible de créer le dossier
+%1</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>Could not remove file or directory
+%1</source>
+        <translation>Impossible de supprimer le fichier ou dossier
+%1</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Could not rename
+%1
+to
+%2</source>
+        <translation>Impossible de renommer
+%1
+en
+%2</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Could not open
+%1</source>
+        <translation>Impossible d&apos;ouvrir
+%1</translation>
+    </message>
+    <message>
+        <location line="+68"/>
+        <source>Could not write
+%1</source>
+        <translation>Impossible d&apos;écrire
+%1</translation>
+    </message>
+</context>
+<context>
+    <name>Q3MainWindow</name>
+    <message>
+        <location filename="../src/qt3support/widgets/q3mainwindow.cpp" line="+2051"/>
+        <source>Line up</source>
+        <translation>Aligner</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Customize...</source>
+        <translation>Personnaliser...</translation>
+    </message>
+</context>
+<context>
+    <name>Q3NetworkProtocol</name>
+    <message>
+        <location filename="../src/qt3support/network/q3networkprotocol.cpp" line="+854"/>
+        <source>Operation stopped by the user</source>
+        <translation>Opération interrompue par l&apos;utilisateur</translation>
+    </message>
+</context>
+<context>
+    <name>Q3ProgressDialog</name>
+    <message>
+        <location filename="../src/qt3support/dialogs/q3progressdialog.cpp" line="+224"/>
+        <location line="+61"/>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
+    </message>
+</context>
+<context>
+    <name>Q3TabDialog</name>
+    <message>
+        <location filename="../src/qt3support/dialogs/q3tabdialog.cpp" line="+189"/>
+        <location line="+814"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location line="-356"/>
+        <source>Apply</source>
+        <translation>Appliquer</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>Help</source>
+        <translation>Aide</translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>Defaults</source>
+        <translation>Par défaut</translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
+    </message>
+</context>
+<context>
+    <name>Q3TextEdit</name>
+    <message>
+        <location filename="../src/qt3support/text/q3textedit.cpp" line="+5429"/>
+        <source>&amp;Undo</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Redo</source>
+        <translation>&amp;Rétablir</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Cu&amp;t</source>
+        <translation>Co&amp;uper</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Copy</source>
+        <translation>Cop&amp;ier</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&amp;Paste</source>
+        <translation>Co&amp;ller</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Clear</source>
+        <translation>Effacer</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location line="+2"/>
+        <source>Select All</source>
+        <translation>Tout sélectionner</translation>
+    </message>
+</context>
+<context>
+    <name>Q3TitleBar</name>
+    <message>
+        <location filename="../src/plugins/accessible/compat/q3complexwidgets.cpp" line="+246"/>
+        <source>System</source>
+        <translation>Système</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Restore up</source>
+        <translation>Restaurer en haut</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Minimize</source>
+        <translation>Réduire</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Restore down</source>
+        <translation>Restaurer en bas</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Maximize</source>
+        <translation>Maximiser</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>Load</source>
-        <translation type="unfinished"></translation>
+        <source>Contains commands to manipulate the window</source>
+        <translation>Contient des commandes pour manipuler la fenêtre</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>Save</source>
-        <translation type="unfinished">Enregistrer</translation>
+        <location line="+3"/>
+        <source>Puts a minimized back to normal</source>
+        <translation>Rend à une fenêtre minimisée son aspect normal</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+1"/>
+        <source>Moves the window out of the way</source>
+        <translation>Déplace la fenêtre à l&apos;écart</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Puts a maximized window back to normal</source>
+        <translation>Rend à une fenêtre minimisée son aspect normal</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Makes the window full screen</source>
+        <translation>Affiche la fenêtre en plein écran</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Closes the window</source>
+        <translation>Ferme la fenêtre</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Displays the name of the window and contains controls to manipulate it</source>
+        <translation>Affiche le nom de la fenêtre et contient des contrôles pour la manipuler</translation>
+    </message>
+</context>
+<context>
+    <name>Q3ToolBar</name>
+    <message>
+        <location filename="../src/qt3support/widgets/q3toolbar.cpp" line="+692"/>
+        <source>More...</source>
+        <translation>Reste...</translation>
+    </message>
+</context>
+<context>
+    <name>Q3UrlOperator</name>
+    <message>
+        <location filename="../src/qt3support/network/q3urloperator.cpp" line="+386"/>
+        <location line="+260"/>
+        <location line="+4"/>
+        <source>The protocol `%1&apos; is not supported</source>
+        <translation>Le protocole &apos;%1&apos; n&apos;est pas géré</translation>
+    </message>
+    <message>
+        <location line="-260"/>
+        <source>The protocol `%1&apos; does not support listing directories</source>
+        <translation>Le protocole `%1&apos; ne permet pas de lister les fichiers d&apos;un dossier</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The protocol `%1&apos; does not support creating new directories</source>
+        <translation>Le protocole `%1&apos; ne permet pas de créer de nouveaux dossiers</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The protocol `%1&apos; does not support removing files or directories</source>
+        <translation>Le protocole `%1&apos; ne permet pas de supprimer des fichiers ou des dossiers</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The protocol `%1&apos; does not support renaming files or directories</source>
+        <translation>Le protocole `%1&apos; ne permet pas de renommer des fichiers ou des dossiers</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The protocol `%1&apos; does not support getting files</source>
+        <translation>Le protocole `%1&apos; ne permet pas de recevoir des fichiers</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The protocol `%1&apos; does not support putting files</source>
+        <translation>Le protocole `%1&apos; ne permet pas d&apos;envoyer des fichiers</translation>
+    </message>
+    <message>
+        <location line="+243"/>
+        <location line="+4"/>
+        <source>The protocol `%1&apos; does not support copying or moving files or directories</source>
+        <translation>Le protocole `%1&apos; ne permet pas de copier ou de déplacer des fichiers</translation>
+    </message>
+    <message>
+        <location line="+237"/>
+        <location line="+1"/>
+        <source>(unknown)</source>
+        <translation>(inconnu)</translation>
+    </message>
+</context>
+<context>
+    <name>Q3Wizard</name>
+    <message>
+        <location filename="../src/qt3support/dialogs/q3wizard.cpp" line="+177"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&lt; &amp;Back</source>
+        <translation>&lt; &amp;Précédent</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Next &gt;</source>
+        <translation>&amp;Suivant &gt;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Finish</source>
+        <translation>&amp;Terminer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Help</source>
+        <translation>&amp;Aide</translation>
+    </message>
+</context>
+<context>
+    <name>QAbstractSocket</name>
+    <message>
+        <location filename="../src/network/socket/qabstractsocket.cpp" line="+868"/>
+        <location filename="../src/network/socket/qhttpsocketengine.cpp" line="+615"/>
+        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="+657"/>
+        <location line="+26"/>
+        <source>Host not found</source>
+        <translation>Hôte introuvable</translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <location filename="../src/network/socket/qhttpsocketengine.cpp" line="+3"/>
+        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="+4"/>
+        <source>Connection refused</source>
+        <translation>Connexion refusée</translation>
+    </message>
+    <message>
+        <location line="+141"/>
+        <source>Connection timed out</source>
+        <translation>Connexion expirée</translation>
+    </message>
+    <message>
+        <location line="-547"/>
+        <location line="+787"/>
+        <location line="+208"/>
+        <source>Operation on socket is not supported</source>
+        <translation>Opération sur socket non supportée</translation>
+    </message>
+    <message>
+        <location line="+137"/>
+        <source>Socket operation timed out</source>
+        <translation>Opération socket expirée</translation>
+    </message>
+    <message>
+        <location line="+380"/>
+        <source>Socket is not connected</source>
+        <translation>Le socket n&apos;est pas connecté</translation>
+    </message>
+    <message>
+        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="-8"/>
+        <source>Network unreachable</source>
+        <translation>Réseau impossible à rejoindre</translation>
+    </message>
+</context>
+<context>
+    <name>QAbstractSpinBox</name>
+    <message>
+        <location filename="../src/gui/widgets/qabstractspinbox.cpp" line="+1199"/>
+        <source>&amp;Step up</source>
+        <translation>&amp;Augmenter</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Step &amp;down</source>
+        <translation>&amp;Diminuer</translation>
+    </message>
+    <message>
+        <location line="-8"/>
+        <source>&amp;Select All</source>
+        <translation>Tout &amp;sélectionner</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <location filename="../src/gui/kernel/qapplication.cpp" line="+2248"/>
+        <source>QT_LAYOUT_DIRECTION</source>
+        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
+        <translation>LTR</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qmessagebox.h" line="+352"/>
+        <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
+        <translation>L&apos;exécutable &apos;%1&apos; requiert Qt %2 (Qt %3 présent).</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Incompatible Qt Library Error</source>
+        <translation>Erreur : bibliothèque Qt incompatible</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/accessible/qaccessibleobject.cpp" line="+376"/>
+        <source>Activate</source>
+        <translation>Activer</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Activates the program&apos;s main window</source>
+        <translation>Active la fenêtre principale du programme</translation>
+    </message>
+</context>
+<context>
+    <name>QAxSelect</name>
+    <message>
+        <location filename="../src/activeqt/container/qaxselect.ui"/>
+        <source>Select ActiveX Control</source>
+        <translation>Sélectionner un contrôle ActiveX</translation>
+    </message>
+    <message>
+        <location/>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <location/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
     </message>
-</context>
-<context>
-    <name>InstrumentListEditor</name>
     <message>
-        <location filename="../../mscore/partedit.cpp" line="+77"/>
-        <source>MuseScore: Part List</source>
-        <translation type="unfinished"></translation>
+        <location/>
+        <source>COM &amp;Object:</source>
+        <translation>&amp;Objet COM :</translation>
     </message>
 </context>
 <context>
-    <name>InstrumentWizard</name>
+    <name>QCheckBox</name>
     <message>
-        <location filename="../../mscore/instrwizard.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="+114"/>
+        <source>Uncheck</source>
+        <translation>Décocher</translation>
     </message>
     <message>
-        <location line="+21"/>
-        <location line="+161"/>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-153"/>
-        <source>show more</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Remove</source>
-        <translation type="unfinished">Supprimer</translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Up</source>
-        <translation type="unfinished">Haut</translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Down</source>
-        <translation type="unfinished">Bas</translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Add Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Add Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+37"/>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/newwizard.cpp" line="+44"/>
-        <source>Instrument List</source>
-        <translation type="unfinished"></translation>
+        <location line="+3"/>
+        <source>Check</source>
+        <translation>Cocher</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Clef</source>
-        <translation type="unfinished"></translation>
+        <source>Toggle</source>
+        <translation>Changer</translation>
     </message>
 </context>
 <context>
-    <name>InstrumentsDialog</name>
+    <name>QColorDialog</name>
     <message>
-        <location filename="../../mscore/instrdialog.cpp" line="+73"/>
-        <source>Staff %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+87"/>
-        <source>Instrument List</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/gui/dialogs/qcolordialog.cpp" line="+1253"/>
+        <source>Hu&amp;e:</source>
+        <translation>&amp;Teinte :</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+854"/>
-        <source>MuseScore: Save Instrument List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>MuseScore Instruments (*.xml);;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Open Instruments File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>
-failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>MuseScore: Open Instruments file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Write Style failed: </source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Sat:</source>
+        <translation>&amp;Saturation :</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>MuseScore: Write Style</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Val:</source>
+        <translation>&amp;Valeur :</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <source>MuseScore: Load Instrument List</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>&amp;Red:</source>
+        <translation>&amp;Rouge :</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>MuseScore Instruments (*.xml);;All files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Jump</name>
-    <message>
-        <location filename="../../mscore/repeat.cpp" line="+405"/>
-        <source>Jump Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>JumpPropertyBase</name>
-    <message>
-        <location filename="../../mscore/jumpproperties.ui" line="+13"/>
-        <source>Jump Properties</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>&amp;Green:</source>
+        <translation>&amp;Vert :</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>Jump to:</source>
-        <translation type="unfinished"></translation>
+        <location line="+1"/>
+        <source>Bl&amp;ue:</source>
+        <translation>Ble&amp;u :</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>Play until:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Continue at:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>KeyEdit</name>
-    <message>
-        <location filename="../../mscore/keyedit.ui" line="+78"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <location line="+1"/>
+        <source>A&amp;lpha channel:</source>
+        <translation>Canal a&amp;lpha :</translation>
     </message>
     <message>
         <location line="+101"/>
-        <source>Create Key Signature</source>
-        <translation type="unfinished"></translation>
+        <source>Select Color</source>
+        <translation>Sélectionner une couleur</translation>
     </message>
     <message>
-        <location line="+49"/>
-        <source>Clear</source>
-        <translation type="unfinished">Effacer</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>add time signature to palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>KeyEditor</name>
-    <message>
-        <location filename="../../mscore/keyedit.cpp" line="+273"/>
-        <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>LinePropertiesDialog</name>
-    <message>
-        <location filename="../../mscore/lineproperties.ui" line="+13"/>
-        <source>MuseScore: Line Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Width:</source>
-        <translation type="unfinished">Largeur :</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <location line="+248"/>
-        <location line="+32"/>
-        <location line="+24"/>
-        <location line="+189"/>
-        <location line="+32"/>
-        <location line="+106"/>
-        <location line="+32"/>
-        <location line="+36"/>
-        <source>sp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-689"/>
-        <source>Line style:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>solid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>dash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>dash dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>dash dot dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+39"/>
-        <source>diagonally</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+245"/>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-232"/>
-        <location line="+245"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-223"/>
-        <location line="+245"/>
-        <source>place:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-237"/>
-        <location line="+245"/>
-        <source>Left</source>
-        <translation type="unfinished">Gauche</translation>
-    </message>
-    <message>
-        <location line="-240"/>
-        <location line="+245"/>
-        <source>Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-229"/>
-        <location line="+245"/>
-        <location line="+141"/>
-        <source>Symb.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-375"/>
-        <location line="+245"/>
-        <location line="+138"/>
-        <source>Ped (Pedal)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-341"/>
-        <location line="+245"/>
-        <location line="+138"/>
-        <source>x:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-351"/>
-        <location line="+245"/>
-        <location line="+138"/>
-        <source>y:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-355"/>
-        <location line="+389"/>
-        <source>Hook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-364"/>
-        <location line="+401"/>
-        <source>Up</source>
-        <translation type="unfinished">Haut</translation>
-    </message>
-    <message>
-        <location line="-370"/>
-        <source>Continue</source>
-        <translation type="unfinished">Suivant</translation>
-    </message>
-    <message>
-        <location line="+205"/>
-        <source>End</source>
-        <translation type="unfinished">Fin</translation>
-    </message>
-</context>
-<context>
-    <name>LineSegmentBase</name>
-    <message>
-        <location filename="../../mscore/linesegment.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>LineSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>SegmentType:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>SINGLE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>BEGIN</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>MIDDLE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>END</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Pos2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Offset2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>LyricsBase</name>
-    <message>
-        <location filename="../../mscore/lyrics.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Lyrics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Syllabic:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Single</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>End</source>
-        <translation type="unfinished">Fin</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Middle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Row:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>End Tick:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MagBox</name>
-    <message>
-        <location filename="../../mscore/magbox.cpp" line="+52"/>
-        <source>Magnification</source>
-        <translation type="unfinished"></translation>
+        <location line="+137"/>
+        <source>&amp;Basic colors</source>
+        <translation>Couleurs de &amp;base</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Zoom Canvas</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Marker</name>
-    <message>
-        <location filename="../../mscore/repeat.cpp" line="-146"/>
-        <source>Marker Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MarkerPropertyBase</name>
-    <message>
-        <location filename="../../mscore/markerproperties.ui" line="+13"/>
-        <source>Marker Properties</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Custom colors</source>
+        <translation>&amp;Couleurs personnalisées</translation>
     </message>
     <message>
-        <location line="+28"/>
-        <source>Label:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Measure</name>
-    <message>
-        <location filename="../../mscore/measure.cpp" line="+1750"/>
-        <source>Measure Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MeasureBase</name>
-    <message>
-        <location filename="../../mscore/measure.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
+        <source>&amp;Define Custom Colors &gt;&gt;</source>
+        <translation type="obsolete">Définir des &amp;couleurs personnalisées &gt;&gt;</translation>
     </message>
     <message>
-        <location line="+69"/>
-        <source>breakMultiMeasureRest</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MeasureProperties</name>
-    <message>
-        <location filename="../../mscore/measureproperties.cpp" line="+62"/>
-        <source>visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>stemless</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MeasurePropertiesBase</name>
-    <message>
-        <location filename="../../mscore/measureproperties.ui" line="+17"/>
-        <source>MuseScore: Measure Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>New Row</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Stemless</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>a</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>c</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Measure Duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>nominal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <location line="+33"/>
-        <source>/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-17"/>
-        <source>actual</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+71"/>
-        <source>Other</source>
-        <translation type="unfinished">Autre</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>do not count</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>irregular</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>break multi measure rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>add to measure number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>layout stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>repeat count:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MeasuresDialogBase</name>
-    <message>
-        <location filename="../../mscore/measuresdialog.ui" line="+13"/>
-        <source>Mscore: Append Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Append empty measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Number of measures to append</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+53"/>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
-    </message>
-</context>
-<context>
-    <name>MenuNotes</name>
-    <message>
-        <location filename="../../mscore/mscore.cpp" line="-1820"/>
-        <source>&amp;Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MetaEditDialog</name>
-    <message>
-        <location filename="../../mscore/metaedit.ui" line="+13"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Work Title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Work Number:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Movement Title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Movement Number:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Source:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MuseScore</name>
-    <message>
-        <location filename="../../mscore/file.cpp" line="+144"/>
-        <location filename="../../mscore/mscore.cpp" line="+2203"/>
-        <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Save changes to the score &quot;%1&quot;
-before closing?</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Add to Custom Colors</source>
+        <translation>&amp;Ajouter aux couleurs personnalisées</translation>
     </message>
     <message>
-        <location line="+35"/>
-        <source>MuseScore: Load Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+357"/>
-        <source>Untitled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+52"/>
-        <source>MuseScore: failure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Load template file </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source> failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/keysig.cpp" line="+31"/>
-        <source>G major, E minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Cb major, Ab minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>D major, B minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Gb major, Eb minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>A major, F# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Db major, Bb minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>E major, C# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Ab major, F minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B major, G# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Eb major, C minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>F# major, D# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Bb major, G minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>C# major, A# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>F major,  D minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>C major, A minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/menus.cpp" line="-856"/>
-        <source>Grace Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Acciaccatura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Appoggiatura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Quarter grace note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>16th grace note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>32nd grace note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Drums</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Clefs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Key Signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Time Signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>4/4 common time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>2/2 alla breve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Barlines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <location line="+789"/>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-788"/>
-        <location line="+789"/>
-        <source>Dashed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-788"/>
-        <location line="+789"/>
-        <source>End Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-788"/>
-        <location line="+789"/>
-        <source>Double Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-788"/>
-        <location line="+789"/>
-        <source>Start Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-788"/>
-        <location line="+789"/>
-        <source>End Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-788"/>
-        <location line="+789"/>
-        <source>End-Start Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-775"/>
-        <source>Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Slur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location line="+523"/>
-        <source>Crescendo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-519"/>
-        <location line="+524"/>
-        <source>Diminuendo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-516"/>
-        <location line="+527"/>
-        <source>Prima volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-519"/>
-        <location line="+528"/>
-        <location line="+18"/>
-        <source>Seconda volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-538"/>
-        <location line="+529"/>
-        <source>Terza volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-521"/>
-        <source>Seconda volta 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location line="+533"/>
-        <source>8va</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-529"/>
-        <location line="+534"/>
-        <source>15ma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-530"/>
-        <location line="+535"/>
-        <source>8vb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-531"/>
-        <location line="+536"/>
-        <source>15mb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-533"/>
-        <source>pedal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+540"/>
-        <source>Trill line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-534"/>
-        <location line="+538"/>
-        <source>Text line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-534"/>
-        <location line="+540"/>
-        <source>Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-531"/>
-        <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Arpeggio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location filename="../../mscore/style.cpp" line="+304"/>
-        <source>Glissando</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Breath &amp;&amp; Pauses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Breath</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Caesura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Brackets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <location line="+508"/>
-        <source>Bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-507"/>
-        <location line="+508"/>
-        <source>Akkolade</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-498"/>
-        <source>Articulations &amp;&amp; Ornaments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Accidentals</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <location filename="../../mscore/style.cpp" line="-58"/>
-        <source>Dynamics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <location filename="../../mscore/style.cpp" line="-12"/>
-        <source>Fingering</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <location line="+593"/>
-        <source>Fingering %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-585"/>
-        <location line="+592"/>
-        <source>String number %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-582"/>
-        <source>Note Heads</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Tremolo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>1 through stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>2 through stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>3 through stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>1 between notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>2 between notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>3 between notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Repeats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Repeat measure sign</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Segno</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Varied coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Codetta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Fine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Da Capo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Da Capo al Fine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Da Capo al Coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>D.S al Coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>D.S al Fine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>D.S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>To Coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Breaks &amp;&amp; Spacer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+529"/>
-        <source>Line break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-525"/>
-        <location line="+528"/>
-        <source>Page break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-524"/>
-        <location line="+527"/>
-        <source>Staff spacer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-518"/>
-        <source>Beam Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Start beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Middle of beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>No beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Start subbeam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Auto beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>&amp;Create</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Barlines...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>&amp;Lines...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Brackets...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Accidentals...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+45"/>
-        <source>MuseScore: Clefs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>MuseScore: Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+79"/>
-        <source>Pedal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>MuseScore: Brackets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>MuseScore: Accidentals</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>MuseScore: Dynamics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>MuseScore: Barlines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>MuseScore: Fingering</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+71"/>
-        <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/mscore.cpp" line="-2390"/>
-        <source>File Operations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Transport Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Concert Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Note Entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+61"/>
-        <source>&amp;File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Open &amp;Recent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Voices</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Preferences...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Add Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Add Interval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <location filename="../../mscore/style.cpp" line="+40"/>
-        <source>Tuplets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>&amp;Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Page Settings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Breaks &amp;&amp; Spacer...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>&amp;Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>&amp;Display</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+63"/>
-        <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Aide</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Online Handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>&amp;About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>About&amp;Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Check for Update</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+72"/>
-        <source>MuseScore handbook not found at: 
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>
-
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>MuseScore: Open Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1096"/>
-        <location filename="../../mscore/style.cpp" line="+3"/>
-        <source>System</source>
-        <translation type="unfinished">Système</translation>
-    </message>
-    <message>
-        <location line="+235"/>
-        <source>no score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>note entry mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>edit mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Go To: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Search</source>
-        <translation type="unfinished">Recherche</translation>
-    </message>
-    <message>
-        <location line="+290"/>
-        <source>Bar %1 Beat %2.%3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+292"/>
-        <source>The previous session quit unexpectedly.
-
-Restore session?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/plugins.cpp" line="+67"/>
-        <location line="+262"/>
-        <source>Error loading plugin
-&quot;%1&quot; line %2:
-%3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-238"/>
-        <source>Script
-%1
-is incompatible with current interface</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>MuseScore is too old to run script
-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/style.cpp" line="-67"/>
-        <source>Symbols1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Symbols3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Subtitle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Composer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Poet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Lyrics odd lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Lyrics even lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>InstrumentsLong</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>InstrumentsShort</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>InstrumentsExcerpt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Technik</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Metronome</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Copyright</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Measure Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Page Number Odd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Page Number Even</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Translator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Chordname</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Repeat Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>TextLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>String Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Ottava</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizard</name>
-    <message>
-        <location filename="../../mscore/newwizard.ui" line="+13"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Subtitle:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Composer:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Poet:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Copyright:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Create new score from template</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Create new score from scratch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/newwizard.cpp" line="+628"/>
-        <source>MuseScore: Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage1</name>
-    <message>
-        <location line="-227"/>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>This wizard creates a new score</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage2</name>
-    <message>
-        <location line="+30"/>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage3</name>
-    <message>
-        <location line="+39"/>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Create Time Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage4</name>
-    <message>
-        <location line="+14"/>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Select Template File:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage5</name>
-    <message>
-        <location line="+46"/>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Select Key Signature:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Note</name>
-    <message>
-        <location filename="../../mscore/note.cpp" line="+1118"/>
-        <source>Note Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Tuplet...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tuplet Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Delete Tuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NoteBase</name>
-    <message>
-        <location filename="../../mscore/note.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+63"/>
-        <source>head index</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+34"/>
-        <source>note head group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+138"/>
-        <source>OnTime:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <location line="+64"/>
-        <source>Auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-59"/>
-        <location line="+64"/>
-        <source>User</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-59"/>
-        <location line="+64"/>
-        <source>Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-24"/>
-        <source>OffTime:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+116"/>
-        <source>Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PageBase</name>
-    <message>
-        <location filename="../../mscore/page.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Page No.:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PageSettingsBase</name>
-    <message>
-        <location filename="../../mscore/pagesettings.ui" line="+13"/>
-        <source>MuseScore: Page Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Preview</source>
-        <translation type="unfinished">Prévisualisation</translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Apply</source>
-        <translation type="unfinished">Appliquer</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>OK</source>
-        <translation type="unfinished">OK</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Page Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>Two Sided</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Landscape</source>
-        <translation type="unfinished">Paysage</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Scaling</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Space</source>
-        <translation type="unfinished">Espace</translation>
-    </message>
-    <message>
-        <location line="+49"/>
-        <source>mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>inch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Even Page Margins</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+64"/>
-        <location line="+119"/>
-        <source>Bottom Margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-106"/>
-        <location line="+119"/>
-        <source>Top Margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-106"/>
-        <location line="+119"/>
-        <source>Right Margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-106"/>
-        <location line="+119"/>
-        <source>Left Margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-103"/>
-        <source>Odd Page Margins</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Palette</name>
-    <message>
-        <location filename="../../mscore/palette.cpp" line="+118"/>
-        <source>Delete Contents</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PaletteBox</name>
-    <message>
-        <location line="+998"/>
-        <source>Palettes</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PaletteBoxButton</name>
-    <message>
-        <location line="-92"/>
-        <source>Palette Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Insert new Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move Palette Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Move Palette Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Enable Editing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Delete Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PaletteCellProperties</name>
-    <message>
-        <location filename="../../mscore/cellproperties.ui" line="+14"/>
-        <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Palette Cell Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Content Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>x:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>y:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PaletteProperties</name>
-    <message>
-        <location filename="../../mscore/palette.ui" line="+14"/>
-        <source>MuseScore: Palette Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Cell Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>w:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>h:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Show Grid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Element Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Scale:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PartEditBase</name>
-    <message>
-        <location filename="../../mscore/partedit.ui" line="+19"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Part Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+36"/>
-        <source>Volume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+47"/>
-        <source>Panorama Position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Reverb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+37"/>
-        <source>Chorus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+37"/>
-        <source>Vol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Pan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Rev</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Cho</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Mute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Solo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Sound:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>midi sound for part</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PianorollEditor</name>
-    <message>
-        <location filename="../../mscore/pianoroll.cpp" line="+57"/>
-        <source>toolbar1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>toolbar2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Cursor:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Velocity:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>user</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Pitch:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+60"/>
-        <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PlayPanelBase</name>
-    <message>
-        <location filename="../../mscore/playpanel.ui" line="+489"/>
-        <source>MuseScore: Play Panel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+525"/>
-        <source>measure.beat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>001.01</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+503"/>
-        <source>h:mm:s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>0:00:00</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+504"/>
-        <source>actual tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>120bpm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+500"/>
-        <source>relative tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>100%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+69"/>
-        <source>Straight</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Swing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Shuffle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Rewind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Vol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Tmp</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PreferenceDialog</name>
-    <message>
-        <location filename="../../mscore/preferences.cpp" line="+656"/>
-        <source>default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+209"/>
-        <source>Choose Notepaper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location line="+16"/>
-        <source>Images (*.jpg *.gif *.png)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-2"/>
-        <source>Choose Background Wallpaper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Choose Working Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Choose Instrument List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Instrument List (*.xml)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Choose Starting Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PrefsDialogBase</name>
-    <message>
-        <location filename="../../mscore/prefsdialog.ui" line="+14"/>
-        <source>MuseScore: Preferences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>MuseScore Preferences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Program Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>start empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>continue last session</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>start with new score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>start with score:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <location line="+209"/>
-        <location line="+21"/>
-        <location line="+390"/>
-        <location line="+55"/>
-        <location line="+1359"/>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-2021"/>
-        <source>show splash screen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>System</source>
-        <translation type="unfinished">Système</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>cz Czech</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>de German</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>en English</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>es Spanish</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>fr French</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>gl Galician</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>hi_IN Hindi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>it Italian</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>nl Dutch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>pt Portuguese</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>ru Russian</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>tr Turkey</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+51"/>
-        <source>Attention: changing the language requires a restart of MuseScore.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Paths</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Instrument List:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Working Directory:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>Windows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Play Panel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <location line="+38"/>
-        <source>show</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-17"/>
-        <source>Use Current Position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Navigator:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Auto Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Save every</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Icons</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>General:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location line="+64"/>
-        <location line="+887"/>
-        <source>Width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-921"/>
-        <location line="+77"/>
-        <location line="+831"/>
-        <source>Height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-883"/>
-        <source>Note Entry:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+67"/>
-        <source>Application Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>pt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Canvas</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Background</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <location line="+106"/>
-        <source>Wallpaper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-99"/>
-        <location line="+106"/>
-        <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
-    </message>
-    <message>
-        <location line="-59"/>
-        <source>Notesheet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+69"/>
-        <source>Misc.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Proximity for selecting elements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>disable antialiased drawing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>uncheck this to speed up drawing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Draw Antialiased</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Auto-correction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location line="+9"/>
-        <source>Replace 1/2 with fraction character ½</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location line="+7"/>
-        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Score element colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Default foreground</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Select Voice 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Select Voice 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Select Voice 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Select Voice 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Drop Target</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Note Entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Enable midi input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Play notes when editing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Default duration:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>ms</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+34"/>
-        <source>Alternate input method</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Color notes outside of usable pitch range</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Export MIDI</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Expand Repeats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>enable midi remote control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>MIDI Remote Control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Stop</source>
-        <translation type="unfinished">Stop</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+40"/>
-        <location line="+27"/>
-        <location line="+27"/>
-        <source>is active</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-91"/>
-        <location line="+10"/>
-        <location line="+30"/>
-        <location line="+10"/>
-        <location line="+17"/>
-        <location line="+10"/>
-        <location line="+17"/>
-        <location line="+10"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-97"/>
-        <location line="+40"/>
-        <location line="+27"/>
-        <location line="+27"/>
-        <source>record</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-71"/>
-        <source>Record</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Rewind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+34"/>
-        <source>Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Default Paper Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+41"/>
-        <source>Two Sided</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Landscape</source>
-        <translation type="unfinished">Paysage</translation>
-    </message>
-    <message>
-        <location line="+52"/>
-        <source>Scaling</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Space</source>
-        <translation type="unfinished">Espace</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>mm</source>
-        <extracomment>millimeter</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+42"/>
-        <source>I/O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Use JACK MIDI output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Ports</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Remember last connection(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Use internal synthesizer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>JACK Audio Server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Left-Port:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Right-Port:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>ALSA Audio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <location line="+189"/>
-        <source>Device:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-182"/>
-        <source>default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Sample Rate:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>192000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>96000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>88200</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>48000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>44100</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>32000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>22050</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Fragments:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Period Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>4096</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>2048</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>1024</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>512</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>256</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>128</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>64</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Portaudio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Api:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+71"/>
-        <source>Choose PortMidi input interface</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+78"/>
-        <source>Attention: Any changes on this page require a restart of MuseScore.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Style Used for Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Built in style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Use style file:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+43"/>
-        <source>Export</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>PNG</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>screen shot function</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+31"/>
-        <source>Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Shortcut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <location line="+110"/>
-        <source>Reset to Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-103"/>
-        <source>Clear</source>
-        <translation type="unfinished">Effacer</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Define...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Update</source>
-        <translation type="unfinished">Actualiser</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Automatic Update Check</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Check for new versions of MuseScore on startup</source>
-        <translation type="unfinished"></translation>
+        <source>Select color</source>
+        <translation type="obsolete">Sélection d&apos;une couleur</translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
     <message>
-        <location filename="../../mscore/textline.cpp" line="+525"/>
-        <source>Ped (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/plugins/accessible/widgets/complexwidgets.cpp" line="+1771"/>
+        <location line="+65"/>
+        <source>Open</source>
+        <translation>Ouvrir</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/itemviews/qitemeditorfactory.cpp" line="+544"/>
+        <source>False</source>
+        <translation>Faux</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>* (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <source>True</source>
+        <translation>Vrai</translation>
+    </message>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/complexwidgets.cpp" line="+0"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+</context>
+<context>
+    <name>QCoreApplication</name>
+    <message>
+        <source>%1: permission denied</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="obsolete">%1: permission refusée</translation>
+    </message>
+    <message>
+        <source>%1: already exists</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="obsolete">%1: existe déjà</translation>
+    </message>
+    <message>
+        <source>%1: doesn&apos;t exists</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="obsolete">%1: n&apos;existe pas</translation>
+    </message>
+    <message>
+        <source>%1: out of resources</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="obsolete">%1: plus de ressources disponibles</translation>
+    </message>
+    <message>
+        <source>%1: unknown error %2</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="obsolete">%1: erreur inconnue %2</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/kernel/qsystemsemaphore_unix.cpp" line="+119"/>
+        <source>%1: key is empty</source>
+        <comment>QSystemSemaphore</comment>
+        <translation>%1: clé vide</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>%1: unable to make key</source>
+        <comment>QSystemSemaphore</comment>
+        <translation>%1: impossible de créer la clé</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>%1: ftok failed</source>
+        <comment>QSystemSemaphore</comment>
+        <translation>%1: ftok a échoué</translation>
+    </message>
+</context>
+<context>
+    <name>QDB2Driver</name>
+    <message>
+        <location filename="../src/sql/drivers/db2/qsql_db2.cpp" line="+1276"/>
+        <source>Unable to connect</source>
+        <translation>Incapable d&apos;établir une connexion</translation>
+    </message>
+    <message>
+        <location line="+303"/>
+        <source>Unable to commit transaction</source>
+        <translation>Incapable de soumettre la transaction</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Unable to rollback transaction</source>
+        <translation>Incapable d&apos;annuler la transaction</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Unable to set autocommit</source>
+        <translation>Impossible d&apos;activer l&apos;auto-soumission</translation>
+    </message>
+</context>
+<context>
+    <name>QDB2Result</name>
+    <message>
+        <location line="-1043"/>
+        <location line="+243"/>
+        <source>Unable to execute statement</source>
+        <translation>Impossible d&apos;exécuter la requête</translation>
+    </message>
+    <message>
+        <location line="-206"/>
+        <source>Unable to prepare statement</source>
+        <translation>Impossible de prépare la requête</translation>
+    </message>
+    <message>
+        <location line="+196"/>
+        <source>Unable to bind variable</source>
+        <translation>Impossible d&apos;attacher la variable</translation>
+    </message>
+    <message>
+        <location line="+92"/>
+        <source>Unable to fetch record %1</source>
+        <translation>Impossible de récupérer l&apos;enregistrement %1</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Unable to fetch next</source>
+        <translation>Impossible de récupérer le suivant</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Unable to fetch first</source>
+        <translation>Impossible de récupérer le premier</translation>
+    </message>
+</context>
+<context>
+    <name>QDateTimeEdit</name>
+    <message>
+        <location filename="../src/gui/widgets/qdatetimeedit.cpp" line="+2295"/>
+        <source>AM</source>
+        <translation>AM</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>am</source>
+        <translation>am</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>PM</source>
+        <translation>PM</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>pm</source>
+        <translation>pm</translation>
+    </message>
+</context>
+<context>
+    <name>QDial</name>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+951"/>
+        <source>QDial</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>SpeedoMeter</source>
+        <translation>Tachymètre</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>SliderHandle</source>
+        <translation>Poignée</translation>
+    </message>
+</context>
+<context>
+    <name>QDialog</name>
+    <message>
+        <location filename="../src/gui/dialogs/qdialog.cpp" line="+597"/>
+        <source>What&apos;s This?</source>
+        <translation>Qu&apos;est-ce que c&apos;est ?</translation>
+    </message>
+    <message>
+        <location line="-115"/>
+        <source>Done</source>
+        <translation>Terminer</translation>
+    </message>
+</context>
+<context>
+    <name>QDialogButtonBox</name>
+    <message>
+        <location filename="../src/gui/dialogs/qmessagebox.cpp" line="+1866"/>
+        <location line="+464"/>
+        <location filename="../src/gui/widgets/qdialogbuttonbox.cpp" line="+561"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/widgets/qdialogbuttonbox.cpp" line="+3"/>
+        <source>Save</source>
+        <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>&amp;Save</source>
+        <translation>Enregi&amp;strer</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Open</source>
+        <translation>Ouvrir</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>&amp;Close</source>
+        <translation>&amp;Fermer</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Apply</source>
+        <translation>Appliquer</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Reset</source>
+        <translation>Réinitialiser</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Help</source>
+        <translation>Aide</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Don&apos;t Save</source>
+        <translation>Ne pas enregistrer</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Discard</source>
+        <translation>Ne pas enregistrer</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Yes</source>
+        <translation>&amp;Oui</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Yes to &amp;All</source>
+        <translation>Oui à &amp;tout</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;No</source>
+        <translation>&amp;Non</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>N&amp;o to All</source>
+        <translation>Non à to&amp;ut</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Save All</source>
+        <translation>Tout Enregistrer</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Abort</source>
+        <translation>Abandonner</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Retry</source>
+        <translation>Réessayer</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ignore</source>
+        <translation>Ignorer</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Restore Defaults</source>
+        <translation>Restaurer les valeurs par défaut</translation>
+    </message>
+    <message>
+        <location line="-29"/>
+        <source>Close without Saving</source>
+        <translation>Fermer sans sauvegarder</translation>
+    </message>
+    <message>
+        <location line="-27"/>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+</context>
+<context>
+    <name>QDirModel</name>
+    <message>
+        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+453"/>
+        <source>Name</source>
+        <translation>Nom</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>. (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <source>Size</source>
+        <translation>Taille</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Kind</source>
+        <comment>Match OS X Finder</comment>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Type</source>
+        <comment>All other platforms</comment>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Date Modified</source>
+        <translation>Dernière Modification</translation>
+    </message>
+</context>
+<context>
+    <name>QDockWidget</name>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/qaccessiblewidgets.cpp" line="+1239"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Dock</source>
+        <translation>Attacher</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>dash (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <source>Float</source>
+        <translation>Détacher</translation>
+    </message>
+</context>
+<context>
+    <name>QDoubleSpinBox</name>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-537"/>
+        <source>More</source>
+        <translation>Plus</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Less</source>
+        <translation>Moins</translation>
+    </message>
+</context>
+<context>
+    <name>QErrorMessage</name>
+    <message>
+        <location filename="../src/gui/dialogs/qerrormessage.cpp" line="+391"/>
+        <source>&amp;Show this message again</source>
+        <translation>&amp;Afficher ce message de nouveau</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>tr (Trill)</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+    <message>
+        <location line="-200"/>
+        <source>Debug Message:</source>
+        <translation>Message de débogage:</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Warning:</source>
+        <translation>Avertissement:</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Fatal Error:</source>
+        <translation>Erreur fatale:</translation>
+    </message>
+</context>
+<context>
+    <name>QFile</name>
+    <message>
+        <location filename="../src/corelib/io/qfile.cpp" line="+708"/>
+        <location line="+141"/>
+        <source>Destination file exists</source>
+        <translation>Le fichier destination existe</translation>
+    </message>
+    <message>
+        <location line="-108"/>
+        <source>Cannot remove source file</source>
+        <translation>Impossible de supprimer le fichier source</translation>
+    </message>
+    <message>
+        <location line="+120"/>
+        <source>Cannot open %1 for input</source>
+        <translation>Impossible d&apos;ouvrir %1 pour lecture</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Cannot open for output</source>
+        <translation>Impossible d&apos;ouvrir pour écriture</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Failure to write block</source>
+        <translation>Impossible d&apos;écrire un bloc</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Cannot create %1 for output</source>
+        <translation>Impossible de créer %1 pour écriture</translation>
+    </message>
+</context>
+<context>
+    <name>QFileDialog</name>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Back</source>
+        <translation>Précédent (historique)</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>List View</source>
+        <translation>Affichage liste</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Detail View</source>
+        <translation>Affichage détaillé</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="+498"/>
+        <source>Open</source>
+        <translation>Ouvrir</translation>
+    </message>
+    <message>
+        <location line="+680"/>
+        <location line="+50"/>
+        <location line="+1471"/>
+        <location line="+75"/>
+        <source>&amp;Open</source>
+        <translation>&amp;Ouvrir</translation>
+    </message>
+    <message>
+        <location line="-1596"/>
+        <location line="+50"/>
+        <source>&amp;Save</source>
+        <translation>&amp;Enregistrer</translation>
+    </message>
+    <message>
+        <location line="-699"/>
+        <source>&amp;Rename</source>
+        <translation>&amp;Renommer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Delete</source>
+        <translation>Suppri&amp;mer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show &amp;hidden files</source>
+        <translation>Afficher les fic&amp;hiers cachés</translation>
+    </message>
+    <message>
+        <location line="+650"/>
+        <source>Directories</source>
+        <translation>Dossiers</translation>
+    </message>
+    <message>
+        <location line="+1869"/>
+        <source>Recent Places</source>
+        <translation>Emplacements récents</translation>
+    </message>
+    <message>
+        <location line="-2535"/>
+        <location line="+444"/>
+        <source>All Files (*)</source>
+        <translation>Tous les fichiers (*)</translation>
+    </message>
+    <message>
+        <location line="+1054"/>
+        <source>%1 already exists.
+Do you want to replace it?</source>
+        <translation>Le fichier %1 existe déjà. Voulez-vous l&apos;écraser ?</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>%1
+File not found.
+Please verify the correct file name was given.</source>
+        <translation>%1
+Fichier introuvable.
+Veuillez vérifier que le nom du fichier est correct.</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+402"/>
+        <source>My Computer</source>
+        <translation>Poste de travail</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Parent Directory</source>
+        <translation>Dossier parent</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Files of type:</source>
+        <translation>Fichiers de type :</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-1496"/>
+        <location line="+648"/>
+        <source>Directory:</source>
+        <translation>Dossier :</translation>
+    </message>
+    <message>
+        <source>
+File not found.
+Please verify the correct file name was given</source>
+        <translation type="obsolete">
+Fichier introuvable.
+Veuillez vérifier que le nom du fichier est correct</translation>
+    </message>
+    <message>
+        <location line="+794"/>
+        <location line="+862"/>
+        <source>%1
+Directory not found.
+Please verify the correct directory name was given.</source>
+        <translation>%1
+Dossier introuvable.
+Veuillez vérifier que le nom du dossier est correct.</translation>
+    </message>
+    <message>
+        <location line="-218"/>
+        <source>&apos;%1&apos; is write protected.
+Do you want to delete it anyway?</source>
+        <translation>&apos;%1&apos; est protégé en écriture.
+Voulez-vous quand même le supprimer ?</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Are sure you want to delete &apos;%1&apos;?</source>
+        <translation>Etes-vous sûr de vouloir supprimer &apos;%1&apos; ?</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Could not delete directory.</source>
+        <translation>Impossible de supprimer le dossier.</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog_win.cpp" line="+160"/>
+        <source>All Files (*.*)</source>
+        <translation>Tous les fichiers (*.*)</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-2143"/>
+        <source>Save As</source>
+        <translation>Enregistrer sous</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/itemviews/qfileiconprovider.cpp" line="+411"/>
+        <source>Drive</source>
+        <translation>Unité</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location line="+1"/>
+        <source>File</source>
+        <translation>Fichier</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Unknown</source>
+        <translation>Inconnu</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-4"/>
+        <source>Find Directory</source>
+        <translation>Chercher dans le dossier</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Show </source>
+        <translation>Montrer </translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Forward</source>
+        <translation>Successeur</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="+1970"/>
+        <source>New Folder</source>
+        <translation>Nouveau dossier</translation>
+    </message>
+    <message>
+        <location line="-1963"/>
+        <source>&amp;New Folder</source>
+        <translation>&amp;Nouveau dossier</translation>
+    </message>
+    <message>
+        <location line="+656"/>
+        <location line="+38"/>
+        <source>&amp;Choose</source>
+        <translation>&amp;Choisir</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qsidebar.cpp" line="+418"/>
+        <source>Remove</source>
+        <translation>Supprimer</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-687"/>
+        <location line="+652"/>
+        <source>File &amp;name:</source>
+        <translation>&amp;Nom de fichier :</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Look in:</source>
+        <translation>Voir dans:</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../src/gui/dialogs/qfiledialog_wince.ui"/>
+        <source>Create New Folder</source>
+        <translation>Créer un nouveau dossier</translation>
+    </message>
+</context>
+<context>
+    <name>QFileSystemModel</name>
+    <message>
+        <location filename="../src/gui/dialogs/qfilesystemmodel.cpp" line="+744"/>
+        <source>%1 TB</source>
+        <translation>%1 To</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1 GB</source>
+        <translation>%1 Go</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1 MB</source>
+        <translation>%1 Mo</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1 KB</source>
+        <translation>%1 Ko</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>%1 bytes</source>
+        <translation>%1 octets</translation>
+    </message>
+    <message>
+        <location line="+77"/>
+        <source>Invalid filename</source>
+        <translation>Nom de fichier invalide</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&lt;b&gt;The name &quot;%1&quot; can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
+        <translation>&lt;b&gt;Le nom &quot;%1&quot; ne peut pas être utilisé.&lt;/b&gt;&lt;p&gt;Essayez un autre nom avec moins de caractères ou sans ponctuation.</translation>
+    </message>
+    <message>
+        <location line="+63"/>
+        <source>Name</source>
+        <translation>Nom</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Size</source>
+        <translation>Taille</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Kind</source>
+        <comment>Match OS X Finder</comment>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Type</source>
+        <comment>All other platforms</comment>
+        <translation>Type</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Date Modified</source>
+        <translation>Dernière modification</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qfilesystemmodel_p.h" line="+234"/>
+        <source>My Computer</source>
+        <translation>Mon ordinateur</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Computer</source>
+        <translation>Ordinateur</translation>
+    </message>
+</context>
+<context>
+    <name>QFontDatabase</name>
+    <message>
+        <location filename="../src/gui/text/qfontdatabase.cpp" line="+90"/>
+        <location line="+1176"/>
+        <source>Normal</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="-1173"/>
+        <location line="+12"/>
+        <location line="+1149"/>
+        <source>Bold</source>
+        <translation>Gras</translation>
+    </message>
+    <message>
+        <location line="-1158"/>
+        <location line="+1160"/>
+        <source>Demi Bold</source>
+        <translation>Semi Gras</translation>
+    </message>
+    <message>
+        <location line="-1157"/>
+        <location line="+18"/>
+        <location line="+1135"/>
+        <source>Black</source>
+        <translation>Noir</translation>
+    </message>
+    <message>
+        <location line="-1145"/>
+        <source>Demi</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+1145"/>
+        <source>Light</source>
+        <translation>Léger</translation>
+    </message>
+    <message>
+        <location line="-1004"/>
+        <location line="+1007"/>
+        <source>Italic</source>
+        <translation>Italique</translation>
+    </message>
+    <message>
+        <location line="-1004"/>
+        <location line="+1006"/>
+        <source>Oblique</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+705"/>
+        <source>Any</source>
+        <translation>Tous</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Latin</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Greek</source>
+        <translation>Grec</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cyrillic</source>
+        <translation>Cyrillique</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Armenian</source>
+        <translation>Arménien</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Hebrew</source>
+        <translation>Hébreu</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Arabic</source>
+        <translation>Arabe</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Syriac</source>
+        <translation>Syriaque</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Thaana</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Devanagari</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Bengali</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Gurmukhi</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Gujarati</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Oriya</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Tamil</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Telugu</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Kannada</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Malayalam</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Sinhala</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Thai</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Lao</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Tibetan</source>
+        <translation>Tibétain</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Myanmar</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Georgian</source>
+        <translation>Géorgien</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Khmer</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Simplified Chinese</source>
+        <translation>Chinois Simplifié</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Traditional Chinese</source>
+        <translation>Chinois Traditionnel</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Japanese</source>
+        <translation>Japonais</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Korean</source>
+        <translation>Coréen</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Vietnamese</source>
+        <translation>Vietnamien</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Symbol</source>
+        <translation>Symbole</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ogham</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Runic</source>
+        <translation>Runique</translation>
+    </message>
+</context>
+<context>
+    <name>QFontDialog</name>
+    <message>
+        <location filename="../src/gui/dialogs/qfontdialog.cpp" line="+772"/>
+        <source>&amp;Font</source>
+        <translation>&amp;Police</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Font st&amp;yle</source>
+        <translation>St&amp;yle de police</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Size</source>
+        <translation>&amp;Taille</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Effects</source>
+        <translation>Effets</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Stri&amp;keout</source>
+        <translation>&amp;Barré</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Underline</source>
+        <translation>&amp;Souligné</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Sample</source>
+        <translation>Exemple</translation>
+    </message>
+    <message>
+        <location line="-603"/>
+        <location line="+247"/>
+        <source>Select Font</source>
+        <translation>Choisir une police</translation>
+    </message>
+    <message>
+        <location line="+357"/>
+        <source>Wr&amp;iting System</source>
+        <translation>&amp;Système d&apos;écriture</translation>
+    </message>
+</context>
+<context>
+    <name>QFtp</name>
+    <message>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+2303"/>
+        <source>Host %1 found</source>
+        <translation>Hôte %1 trouvé</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Host found</source>
+        <translation>Hôte trouvé</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qftp.cpp" line="+1003"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="-1456"/>
+        <location line="+1451"/>
+        <source>Connected to host %1</source>
+        <translation>Connecté à l&apos;hôte %1</translation>
+    </message>
+    <message>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+7"/>
+        <source>Connected to host</source>
+        <translation>Connecté à l&apos;hôte</translation>
+    </message>
+    <message>
+        <location line="-5"/>
+        <source>Connection to %1 closed</source>
+        <translation>Connexion à %1 arrêtée</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qftp.cpp" line="+1375"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="-243"/>
+        <location line="+250"/>
+        <source>Connection closed</source>
+        <translation>Connexion arrêtée</translation>
+    </message>
+    <message>
+        <location line="-1487"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="-1566"/>
+        <source>Host %1 not found</source>
+        <translation>Hôte %1 introuvable</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+4"/>
+        <source>Connection refused to host %1</source>
+        <translation>Connexion à l&apos;hôte %1 refusée</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Connection timed out to host %1</source>
+        <translation>Connexion expirée vers l&apos;hôte %1</translation>
+    </message>
+    <message>
+        <location line="+501"/>
+        <location line="+29"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+458"/>
+        <location line="+728"/>
+        <source>Unknown error</source>
+        <translation>Erreur inconnue</translation>
+    </message>
+    <message>
+        <location line="+889"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+77"/>
+        <source>Connecting to host failed:
+%1</source>
+        <translation>Échec de la connexion à l&apos;hôte
+%1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <source>Login failed:
+%1</source>
+        <translation>Échec du login:
+%1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <source>Listing directory failed:
+%1</source>
+        <translation>Échec du listage du dossier :
+%1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <source>Changing directory failed:
+%1</source>
+        <translation>Échec du changement de dossier :
+%1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <source>Downloading file failed:
+%1</source>
+        <translation>Échec du téléchargement du fichier :
+%1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <source>Uploading file failed:
+%1</source>
+        <translation>Échec du télédéchargement :
+%1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <source>Removing file failed:
+%1</source>
+        <translation>Échec de la suppression d&apos;un fichier :
+%1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <source>Creating directory failed:
+%1</source>
+        <translation>Échec de la création d&apos;un dossier :
+%1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <source>Removing directory failed:
+%1</source>
+        <translation>Échec de la suppression d&apos;un dossier :
+%1</translation>
+    </message>
+    <message>
+        <location line="-1524"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="-1356"/>
+        <source>Not connected</source>
+        <translation>Non connecté</translation>
+    </message>
+    <message>
+        <location line="+396"/>
+        <location filename="../src/qt3support/network/q3ftp.cpp" line="+332"/>
+        <source>Connection refused for data connection</source>
+        <translation>Connexion donnée refusée</translation>
+    </message>
+</context>
+<context>
+    <name>QHostInfo</name>
+    <message>
+        <location filename="../src/network/kernel/qhostinfo_p.h" line="+183"/>
+        <source>Unknown error</source>
+        <translation>Erreur inconnue</translation>
+    </message>
+</context>
+<context>
+    <name>QHostInfoAgent</name>
+    <message>
+        <location filename="../src/network/kernel/qhostinfo_unix.cpp" line="+178"/>
+        <location line="+9"/>
+        <location line="+64"/>
+        <location line="+31"/>
+        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="+180"/>
+        <location line="+9"/>
+        <location line="+40"/>
+        <location line="+27"/>
+        <source>Host not found</source>
+        <translation>Hôte introuvable</translation>
+    </message>
+    <message>
+        <location line="-44"/>
+        <location line="+39"/>
+        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="-34"/>
+        <location line="+29"/>
+        <source>Unknown address type</source>
+        <translation>Adresse de type inconnu</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="-19"/>
+        <location line="+27"/>
+        <source>Unknown error</source>
+        <translation>Erreur inconnue</translation>
+    </message>
+</context>
+<context>
+    <name>QHttp</name>
+    <message>
+        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="+876"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="+1836"/>
+        <source>Connection refused</source>
+        <translation>Connexion refusée</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qhttp.cpp" line="+2631"/>
+        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="-4"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="+3"/>
+        <source>Host %1 not found</source>
+        <translation>Hôte %1 introuvable</translation>
+    </message>
+    <message>
+        <location line="-62"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="-45"/>
+        <source>Wrong content length</source>
+        <translation>Longueur du contenu invalide</translation>
+    </message>
+    <message>
+        <location line="+82"/>
+        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="+10"/>
+        <location line="+19"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="+48"/>
+        <source>HTTP request failed</source>
+        <translation>Échec de la requête HTTP</translation>
+    </message>
+    <message>
+        <location filename="../src/qt3support/network/q3http.cpp" line="+450"/>
+        <source>Host %1 found</source>
+        <translation>Hôte %1 trouvé</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Host found</source>
+        <translation>Hôte trouvé</translation>
+    </message>
+    <message>
+        <location line="-11"/>
+        <source>Connected to host %1</source>
+        <translation>Connecté à l&apos;hôte %1</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Connected to host</source>
+        <translation>Connecté à l&apos;hôte</translation>
+    </message>
+    <message>
+        <location line="-11"/>
+        <source>Connection to %1 closed</source>
+        <translation>Connexion à %1 arrêtée</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="-22"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="+14"/>
+        <source>Connection closed</source>
+        <translation>Connexion arrêtée</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qhttp.cpp" line="-1077"/>
+        <location line="+820"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="-1152"/>
+        <location line="+567"/>
+        <source>Unknown error</source>
+        <translation>Erreur inconnue</translation>
+    </message>
+    <message>
+        <location line="-568"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="-370"/>
+        <source>Request aborted</source>
+        <translation>Requête interrompue</translation>
+    </message>
+    <message>
+        <location line="+579"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="+381"/>
+        <source>No server set to connect to</source>
+        <translation>Aucun serveur spécifié</translation>
+    </message>
+    <message>
+        <location line="+168"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="+60"/>
+        <source>Server closed connection unexpectedly</source>
+        <translation>Connexion interrompue par le serveur</translation>
+    </message>
+    <message>
+        <location line="+151"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="+113"/>
+        <source>Invalid HTTP response header</source>
+        <translation>Entête de réponse HTTP invalide</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Unknown authentication method</source>
+        <translation>Méthode d&apos;authentification inconnue</translation>
+    </message>
+    <message>
+        <location line="+97"/>
+        <location line="+48"/>
+        <location filename="../src/qt3support/network/q3http.cpp" line="+40"/>
+        <location line="+47"/>
+        <source>Invalid HTTP chunked body</source>
+        <translation>Fragment HTTP invalide</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Error writing response to device</source>
+        <translation>Erreur lors de l&apos;écriture de la réponse</translation>
+    </message>
+    <message>
+        <location line="-173"/>
+        <source>Proxy authentication required</source>
+        <translation>Le proxy requiert une authentification</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Authentication required</source>
+        <translation>Authentification requise</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="+6"/>
+        <source>Proxy requires authentication</source>
+        <translation>Le proxy requiert une authentification</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Host requires authentication</source>
+        <translation>L&apos;hôte requiert une authentification</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Data corrupted</source>
+        <translation>Données corrompues</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Unknown protocol specified</source>
+        <translation>Protocole spécifié inconnu</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>SSL handshake failed</source>
+        <translation>le handshake SSL a échoué</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qhttp.cpp" line="-138"/>
+        <source>Connection refused (or timed out)</source>
+        <translation>Connexion refusée (ou délai expiré)</translation>
+    </message>
+    <message>
+        <location line="-2263"/>
+        <source>HTTPS connection requested but SSL support not compiled in</source>
+        <translation>Connexion HTTPS requise mais le support SSL n&apos;est pas compilé</translation>
+    </message>
+</context>
+<context>
+    <name>QHttpSocketEngine</name>
+    <message>
+        <location filename="../src/network/socket/qhttpsocketengine.cpp" line="-89"/>
+        <source>Did not receive HTTP response from proxy</source>
+        <translation>Pas de réponse HTTP de la part du proxy</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Error parsing authentication request from proxy</source>
+        <translation>Erreur dans le reqête d&apos;authentification reçue du proxy</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Authentication required</source>
+        <translation>Authentification requise</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Proxy denied connection</source>
+        <translation>Le Proxy a rejeté la connexion</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Error communicating with HTTP proxy</source>
+        <translation>Erreur de communication avec le proxy HTTP</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Proxy server not found</source>
+        <translation>Serveur proxy introuvable</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Proxy connection refused</source>
+        <translation>Connexion au proxy refusée</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Proxy server connection timed out</source>
+        <translation>La connexion au serveur proxy a expiré</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Proxy connection closed prematurely</source>
+        <translation>La connexion au serveur proxy a été fermée prématurément</translation>
+    </message>
+</context>
+<context>
+    <name>QIBaseDriver</name>
+    <message>
+        <location filename="../src/sql/drivers/ibase/qsql_ibase.cpp" line="+1428"/>
+        <source>Error opening database</source>
+        <translation>Erreur d&apos;ouverture de la base de données</translation>
+    </message>
+    <message>
+        <location line="+54"/>
+        <source>Could not start transaction</source>
+        <translation>La transaction n&apos;a pas pu être démarrée</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Unable to commit transaction</source>
+        <translation>Incapable de soumettre la transaction</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Unable to rollback transaction</source>
+        <translation>Incapable d&apos;annuler la transaction</translation>
+    </message>
+</context>
+<context>
+    <name>QIBaseResult</name>
+    <message>
+        <location line="-1097"/>
+        <source>Unable to create BLOB</source>
+        <translation>Impossible de créer un BLOB</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Unable to write BLOB</source>
+        <translation>Impossible d&apos;écrire le BLOB</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Unable to open BLOB</source>
+        <translation>Impossible d&apos;ouvrir le BLOB</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Unable to read BLOB</source>
+        <translation>Impossible de lire le BLOB</translation>
+    </message>
+    <message>
+        <location line="+125"/>
+        <location line="+189"/>
+        <source>Could not find array</source>
+        <translation>Impossible de trouver le tableau</translation>
+    </message>
+    <message>
+        <location line="-157"/>
+        <source>Could not get array data</source>
+        <translation>Impossible de trouver le tableau de données</translation>
+    </message>
+    <message>
+        <location line="+212"/>
+        <source>Could not get query info</source>
+        <translation>Impossible d&apos;avoir les informations sur la requête</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Could not start transaction</source>
+        <translation>Impossible de démarrer la transaction</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Unable to commit transaction</source>
+        <translation>Incapable de soumettre la transaction</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Could not allocate statement</source>
+        <translation>Impossible d&apos;allouer la requête</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Could not prepare statement</source>
+        <translation>Impossible de préparer la requête</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+7"/>
+        <source>Could not describe input statement</source>
+        <translation>Impossible de décrire la requête</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Could not describe statement</source>
+        <translation>Impossible de décrire la requête</translation>
+    </message>
+    <message>
+        <location line="+115"/>
+        <source>Unable to close statement</source>
+        <translation>Impossible de fermer la requête</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Unable to execute query</source>
+        <translation>Impossible d&apos;exécuter la requête</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>Could not fetch next item</source>
+        <translation>Impossible de récuperer l&apos;élément suivant</translation>
+    </message>
+    <message>
+        <location line="+160"/>
+        <source>Could not get statement info</source>
+        <translation>Impossible d&apos;avoir les informations sur la requête</translation>
+    </message>
+</context>
+<context>
+    <name>QIODevice</name>
+    <message>
+        <location filename="../src/corelib/global/qglobal.cpp" line="+1869"/>
+        <source>Permission denied</source>
+        <translation>Accès refusé</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Too many open files</source>
+        <translation>Trop de fichiers ouverts simultanément</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>No such file or directory</source>
+        <translation>Aucun fichier ou dossier de ce nom</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>No space left on device</source>
+        <translation>Aucun espace disponible sur le périphérique</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/io/qiodevice.cpp" line="+1536"/>
+        <source>Unknown error</source>
+        <translation>Erreur inconnue</translation>
+    </message>
+</context>
+<context>
+    <name>QInputContext</name>
+    <message>
+        <location filename="../src/gui/inputmethod/qinputcontextfactory.cpp" line="+242"/>
+        <source>XIM</source>
+        <translation>XIM</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>XIM input method</source>
+        <translation>Méthode d&apos;entrée XIM</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Windows input method</source>
+        <translation>Méthode d&apos;entrée Windows</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Mac OS X input method</source>
+        <translation>Méthode d&apos;entrée Mac OS X</translation>
+    </message>
+</context>
+<context>
+    <name>QInputDialog</name>
+    <message>
+        <location filename="../src/gui/dialogs/qinputdialog.cpp" line="+223"/>
+        <source>Enter a value:</source>
+        <translation>Entrer une valeur :</translation>
+    </message>
+</context>
+<context>
+    <name>QLibrary</name>
+    <message>
+        <source>QLibrary::load_sys: Cannot load %1 (%2)</source>
+        <translation type="obsolete">QLibrary::load_sys: Impossible de charger %1 (%2)</translation>
+    </message>
+    <message>
+        <source>QLibrary::unload_sys: Cannot unload %1 (%2)</source>
+        <translation type="obsolete">QLibrary::unload_sys: Impossible de décharger %1 (%2)</translation>
+    </message>
+    <message>
+        <source>QLibrary::resolve_sys: Symbol &quot;%1&quot; undefined in %2 (%3)</source>
+        <translation type="obsolete">QLibrary::resolve_sys: Symbole &quot;%1&quot; non défini dans %2 (%3)</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/plugin/qlibrary.cpp" line="+378"/>
+        <source>Could not mmap &apos;%1&apos;: %2</source>
+        <translation>Impossible d&apos;établir la projection en mémoire de &apos;%1&apos; : %2</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Plugin verification data mismatch in &apos;%1&apos;</source>
+        <translation>Données de vérification du plugin différente dans &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Could not unmap &apos;%1&apos;: %2</source>
+        <translation>Impossible de supprimer la projection en mémoire de &apos;%1&apos; : %2</translation>
+    </message>
+    <message>
+        <location line="+302"/>
+        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (%2.%3.%4) [%5]</source>
+        <translation>Le plugin &apos;%1&apos; utilise une bibliothèque Qt incompatible. (%2.%3.%4) [%5]</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>The plugin &apos;%1&apos; uses incompatible Qt library. Expected build key &quot;%2&quot;, got &quot;%3&quot;</source>
+        <translation>Le plugin &apos;%1&apos; utilise une bibliothèque Qt incompatible. Clé attendue &quot;%2&quot;, reçue &quot;%3&quot;</translation>
+    </message>
+    <message>
+        <location line="+340"/>
+        <source>Unknown error</source>
+        <translation>Erreur inconnue</translation>
+    </message>
+    <message>
+        <location line="-377"/>
+        <location filename="../src/corelib/plugin/qpluginloader.cpp" line="+280"/>
+        <source>The shared library was not found.</source>
+        <translation>La bibliothèque partagée est introuvable.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>The file &apos;%1&apos; is not a valid Qt plugin.</source>
+        <translation>Le fichier &apos;%1&apos; n&apos;est pas un plugin Qt valide.</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
+        <translation>Le plugin &apos;%1&apos; utilise une bibliothèque Qt incompatible.  (Il est impossible de mélanger des bibliothèques &apos;debug&apos; et &apos;release&apos;.)</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/plugin/qlibrary_unix.cpp" line="+209"/>
+        <location filename="../src/corelib/plugin/qlibrary_win.cpp" line="+99"/>
+        <source>Cannot load library %1: %2</source>
+        <translation>Impossible de charger la bibliothèque %1 : %2</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <location filename="../src/corelib/plugin/qlibrary_win.cpp" line="+26"/>
+        <source>Cannot unload library %1: %2</source>
+        <translation>Impossible de décharger la bibliothèque %1 : %2</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <location filename="../src/corelib/plugin/qlibrary_win.cpp" line="+15"/>
+        <source>Cannot resolve symbol &quot;%1&quot; in %2: %3</source>
+        <translation>Impossible de résoudre le symbole &quot;%1&quot; dans %2 : %3</translation>
+    </message>
+</context>
+<context>
+    <name>QLineEdit</name>
+    <message>
+        <location filename="../src/gui/widgets/qlineedit.cpp" line="+2710"/>
+        <source>Select All</source>
+        <translation>Tout sélectionner</translation>
+    </message>
+    <message>
+        <location line="-30"/>
+        <source>&amp;Undo</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>&amp;Redo</source>
+        <translation>&amp;Rétablir</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Cu&amp;t</source>
+        <translation>Co&amp;uper</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>&amp;Copy</source>
+        <translation>Cop&amp;ier</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>&amp;Paste</source>
+        <translation>Co&amp;ller</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Delete</source>
+        <translation>Supprimer</translation>
+    </message>
+</context>
+<context>
+    <name>QLocalServer</name>
+    <message>
+        <location filename="../src/network/socket/qlocalserver.cpp" line="+226"/>
+        <location filename="../src/network/socket/qlocalserver_unix.cpp" line="+231"/>
+        <source>%1: Name error</source>
+        <translation>%1: Erreur de nom</translation>
+    </message>
+    <message>
+        <location filename="../src/network/socket/qlocalserver_unix.cpp" line="-8"/>
+        <source>%1: Permission denied</source>
+        <translation>%1: Permission refusée</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>%1: Address in use</source>
+        <translation>%1: Address déjà utilisée</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location filename="../src/network/socket/qlocalserver_win.cpp" line="+158"/>
+        <source>%1: Unknown error %2</source>
+        <translation>%1: Erreur inconnue %2</translation>
+    </message>
+</context>
+<context>
+    <name>QLocalSocket</name>
+    <message>
+        <location filename="../src/network/socket/qlocalsocket_tcp.cpp" line="+132"/>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+134"/>
+        <source>%1: Connection refused</source>
+        <translation>%1: Connexion refusée</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <source>%1: Remote closed</source>
+        <translation>%1: Connexion fermée</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_win.cpp" line="+80"/>
+        <location line="+43"/>
+        <source>%1: Invalid name</source>
+        <translation>%1: Nom invalide</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <source>%1: Socket access error</source>
+        <translation>%1: Erreur d&apos;accès au socket</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <source>%1: Socket resource error</source>
+        <translation>%1: Erreur de ressource du socket</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <source>%1: Socket operation timed out</source>
+        <translation>%1: L&apos;opération socket a expiré</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <source>%1: Datagram too large</source>
+        <translation>%1: Datagramme trop grand</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_win.cpp" line="-48"/>
+        <source>%1: Connection error</source>
+        <translation>%1: Erreur de connexion</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <source>%1: The socket operation is not supported</source>
+        <translation>%1: L&apos;opération n&apos;est pas supportée</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>%1: Unknown error</source>
+        <translation>%1 : erreur inconnue</translation>
+    </message>
+    <message>
+        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+4"/>
+        <location filename="../src/network/socket/qlocalsocket_win.cpp" line="+10"/>
+        <source>%1: Unknown error %2</source>
+        <translation>%1: Erreur inconnue %2</translation>
+    </message>
+</context>
+<context>
+    <name>QMYSQLDriver</name>
+    <message>
+        <location filename="../src/sql/drivers/mysql/qsql_mysql.cpp" line="+1231"/>
+        <source>Unable to open database &apos;</source>
+        <translation>Impossible d&apos;ouvrir la base de données &apos;</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Unable to connect</source>
+        <translation>Impossible d&apos;établir une connexion</translation>
+    </message>
+    <message>
+        <location line="+127"/>
+        <source>Unable to begin transaction</source>
+        <translation>Impossible de démarrer la transaction</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Unable to commit transaction</source>
+        <translation>Impossible de soumettre la transaction</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Unable to rollback transaction</source>
+        <translation>Impossible d&apos;annuler la transaction</translation>
+    </message>
+</context>
+<context>
+    <name>QMYSQLResult</name>
+    <message>
+        <location line="-922"/>
+        <source>Unable to fetch data</source>
+        <translation>Impossible de récuperer des données</translation>
+    </message>
+    <message>
+        <location line="+176"/>
+        <source>Unable to execute query</source>
+        <translation>Impossible d&apos;exécuter la requête</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Unable to store result</source>
+        <translation>Impossible de stocker le résultat</translation>
+    </message>
+    <message>
+        <location line="+190"/>
+        <location line="+8"/>
+        <source>Unable to prepare statement</source>
+        <translation>Impossible de préparer l&apos;instruction</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>Unable to reset statement</source>
+        <translation>Impossible de réinitialiser l&apos;instruction</translation>
+    </message>
+    <message>
+        <location line="+87"/>
+        <source>Unable to bind value</source>
+        <translation>Impossible d&apos;attacher la valeur</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Unable to execute statement</source>
+        <translation>Impossible d&apos;exécuter la requête</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <location line="+21"/>
+        <source>Unable to bind outvalues</source>
+        <translation>Impossible d&apos;attacher les valeurs de sortie</translation>
+    </message>
+    <message>
+        <location line="-12"/>
+        <source>Unable to store statement results</source>
+        <translation>Impossible de stocker les résultats de la requête</translation>
+    </message>
+    <message>
+        <location line="-253"/>
+        <source>Unable to execute next query</source>
+        <translation>Impossible d&apos;exécuterla prochaine requête</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Unable to store next result</source>
+        <translation>Impossible de stocker le prochain résultat</translation>
+    </message>
+</context>
+<context>
+    <name>QMdiArea</name>
+    <message>
+        <location filename="../src/gui/widgets/qmdiarea.cpp" line="+290"/>
+        <source>(Untitled)</source>
+        <translation>(Sans titre)</translation>
+    </message>
+</context>
+<context>
+    <name>QMdiSubWindow</name>
+    <message>
+        <location filename="../src/gui/widgets/qmdisubwindow.cpp" line="+280"/>
+        <source>%1 - [%2]</source>
+        <translation>%1 - [%2]</translation>
+    </message>
+    <message>
+        <location line="+72"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location line="-18"/>
+        <source>Minimize</source>
+        <translation>Réduire</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Restore Down</source>
+        <translation>Restaurer en bas</translation>
+    </message>
+    <message>
+        <location line="+707"/>
+        <source>&amp;Restore</source>
+        <translation>&amp;Restaurer</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Move</source>
+        <translation>&amp;Déplacer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Size</source>
+        <translation>&amp;Taille</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Mi&amp;nimize</source>
+        <translation>Réd&amp;uire</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Ma&amp;ximize</source>
+        <translation>Ma&amp;ximiser</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Stay on &amp;Top</source>
+        <translation>&amp;Rester au premier plan</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>&amp;Close</source>
+        <translation>&amp;Fermer</translation>
+    </message>
+    <message>
+        <location line="-787"/>
+        <source>- [%1]</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+58"/>
+        <source>Maximize</source>
+        <translation>Maximiser</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Unshade</source>
+        <translation>Restaurer</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Shade</source>
+        <translation>Ombrer</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Restore</source>
+        <translation>Restaurer</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Help</source>
+        <translation>Aide</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Menu</source>
+        <translation>Menu</translation>
+    </message>
+</context>
+<context>
+    <name>QMenu</name>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/qaccessiblemenu.cpp" line="+157"/>
+        <location line="+225"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location line="-224"/>
+        <location line="+225"/>
+        <source>Open</source>
+        <translation>Ouvrir</translation>
+    </message>
+    <message>
+        <location line="-223"/>
+        <location line="+225"/>
+        <location line="+51"/>
+        <source>Execute</source>
+        <translation>Exécuter</translation>
+    </message>
+</context>
+<context>
+    <name>QMenuBar</name>
+    <message>
+        <source>About</source>
+        <translation type="obsolete">A propos</translation>
+    </message>
+    <message>
+        <source>Config</source>
+        <translation type="obsolete">Configuration</translation>
+    </message>
+    <message>
+        <source>Preference</source>
+        <translation type="obsolete">Préférence</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="obsolete">Options</translation>
+    </message>
+    <message>
+        <source>Setting</source>
+        <translation type="obsolete">Paramètre</translation>
+    </message>
+    <message>
+        <source>Setup</source>
+        <translation type="obsolete">Réglage</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="obsolete">Quitter</translation>
+    </message>
+    <message>
+        <source>Exit</source>
+        <translation type="obsolete">Quitter</translation>
+    </message>
+    <message>
+        <source>About %1</source>
+        <translation type="obsolete">A propos de %1</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="obsolete">À propos de Qt</translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="obsolete">Préférences</translation>
+    </message>
+    <message>
+        <source>Quit %1</source>
+        <translation type="obsolete">Quitter %1</translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../mscore/utils.cpp" line="+321"/>
-        <location line="+9"/>
-        <location line="+9"/>
+        <location filename="../src/gui/dialogs/qmessagebox.cpp" line="-1964"/>
+        <location line="+852"/>
+        <location filename="../src/gui/dialogs/qmessagebox.h" line="-52"/>
         <location line="+8"/>
-        <source>MuseScore:</source>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <location line="+509"/>
+        <source>About Qt</source>
+        <translation>À propos de Qt</translation>
+    </message>
+    <message>
+        <location line="-508"/>
+        <source>Help</source>
+        <translation>Aide</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;Ce programme utilise la version %1 de Qt.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qtopia Core.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com/&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;h3&gt;A propos de Qt&lt;/h3&gt;%1&lt;p&gt;Qt est un toolkit C++ pour le développement d&apos;applications multi-platformes.&lt;/p&gt;&lt;p&gt;Qt fournit la portabilité du code source pour MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux et toutes les variantes commerciales majeures d&apos;Unix. Qt est aussi disponible pour les systèmes embarqués sous le nom Qtopia Core.&lt;/p&gt;&lt;p&gt;Qt est un produit de Trolltech. &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location line="-1097"/>
+        <source>Show Details...</source>
+        <translation>Montrer les détails...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hide Details...</source>
+        <translation>Cacher les détails...</translation>
+    </message>
+    <message>
+        <location line="+1570"/>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;h3&gt;A propos de Qt&lt;/h3&gt;%1&lt;p&gt;Qt est un framework de développement d&apos;applications multi-plateforme.&lt;/p&gt;&lt;p&gt;Qt fournit la portabilité du code source surMS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, et toutes les variantes majeures d&apos;Unix. Qt est aussi disponible pour l&apos;embarqué avec Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt est un produit de Nokia. Allez à &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; pour plus d&apos;informations.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;This program uses Qt Open Source Edition version %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition is intended for the development of Open Source applications. You need a commercial Qt license for development of proprietary (closed source) applications.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;Ce programme utilise Qt Open Source Edition version %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition est prévu pour le développement d&apos;applications Open Source. Vous devez avoir un license commerciale de Qt pour développer des applications propiétaires (Closed Source).&lt;/p&gt;&lt;p&gt;Vous pouvez aller sur &lt;a href=&quot;http://qt.nokia.com/company/model/&quot;&gt;qt.nokia.com/company/model/&lt;/a&gt; pour plus d&apos;informations sur les licenses Qt.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt Embedded.&lt;/p&gt;&lt;p&gt;Qt is a Trolltech product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;h3&gt;A propos de Qt&lt;/h3&gt;%1&lt;p&gt;Qt est un toolkit C++ pour le développement d&apos;application multi-plateforme.&lt;/p&gt;&lt;p&gt;Qt fournit la portabilité de votre source pour MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, toutes les variantes majeures d&apos;Unix. Qt est aussi disponible pour les périphériques embarqués avec Qt Embedded.&lt;/p&gt;&lt;p&gt;Qt est un produit de Trolltech. Voir &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; pour plus d&apos;informations.&lt;/p&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>QMultiInputContext</name>
+    <message>
+        <location filename="../src/plugins/inputmethods/imsw-multi/qmultiinputcontext.cpp" line="+88"/>
+        <source>Select IM</source>
+        <translation>Sélectionner IM</translation>
+    </message>
+</context>
+<context>
+    <name>QMultiInputContextPlugin</name>
+    <message>
+        <location filename="../src/plugins/inputmethods/imsw-multi/qmultiinputcontextplugin.cpp" line="+95"/>
+        <source>Multiple input method switcher</source>
+        <translation>Sélectionneur de méthode de saisie</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Multiple input method switcher that uses the context menu of the text widgets</source>
+        <translation>Sélectionneur de méthode de saisie qui utilise le menu contextuel des widgets de texte</translation>
+    </message>
+</context>
+<context>
+    <name>QNativeSocketEngine</name>
+    <message>
+        <location filename="../src/network/socket/qnativesocketengine.cpp" line="+206"/>
+        <source>The remote host closed the connection</source>
+        <translation>L&apos;hôte distant a fermé la connexion</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Network operation timed out</source>
+        <translation>L&apos;opération réseau a expiré</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Out of resources</source>
+        <translation>Manque de ressources</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Unsupported socket operation</source>
+        <translation>Opération socket non supportée</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Protocol type not supported</source>
+        <translation>Protocol non géré</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Invalid socket descriptor</source>
+        <translation>Descripteur de socket invalide</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Network unreachable</source>
+        <translation>Réseau impossible à rejoindre</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Permission denied</source>
+        <translation>Accès refusé</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Connection timed out</source>
+        <translation>Connexion expirée</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Connection refused</source>
+        <translation>Connexion refusée</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The bound address is already in use</source>
+        <translation>L&apos;adresse liée est déjà en usage</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The address is not available</source>
+        <translation>L&apos;adresse n&apos;est pas disponible</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The address is protected</source>
+        <translation>L&apos;adresse est protégée</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Unable to send a message</source>
+        <translation>Impossible d&apos;envoyer un message</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Unable to receive a message</source>
+        <translation>Impossible de recevoir un message</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Unable to write</source>
+        <translation>Impossible d&apos;écrire</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Network error</source>
+        <translation>Erreur réseau</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Another socket is already listening on the same port</source>
+        <translation>Un autre socket écoute déjà sur le même port</translation>
+    </message>
+    <message>
+        <location line="-66"/>
+        <source>Unable to initialize non-blocking socket</source>
+        <translation>Impossible d&apos;initialiser le socket asynchrone</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Unable to initialize broadcast socket</source>
+        <translation>Impossible d&apos;initialiser le socket broadcast</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Attempt to use IPv6 socket on a platform with no IPv6 support</source>
+        <translation>Tentative d&apos;utiliser un socket IPv6 sur une plateforme qui ne supporte pas IPv6</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Host unreachable</source>
+        <translation>Hôte inaccessible</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Datagram was too large to send</source>
+        <translation>Le datagramme était trop grand pour être envoyé</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Operation on non-socket</source>
+        <translation>Operation sur non-socket</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Unknown error</source>
+        <translation>Erreur inconnue</translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <source>The proxy type is invalid for this operation</source>
+        <translation>Le type de proxy est invalide pour cette opération</translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkAccessCacheBackend</name>
+    <message>
+        <location filename="../src/network/access/qnetworkaccesscachebackend.cpp" line="+65"/>
+        <source>Error opening %1</source>
+        <translation>Erreur lors de l&apos;ouverture de %1</translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkAccessFileBackend</name>
+    <message>
+        <location filename="../src/network/access/qnetworkaccessfilebackend.cpp" line="+99"/>
+        <source>Request for opening non-local file %1</source>
+        <translation>Requête d&apos;ouverture de fichier distant %1</translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>Error opening %1: %2</source>
+        <translation>Erreur lors de l&apos;ouverture de %1 : %2</translation>
+    </message>
+    <message>
+        <location line="+56"/>
+        <source>Write error writing to %1: %2</source>
+        <translation>Erreur d&apos;écriture de %1 : %2</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Cannot open %1: Path is a directory</source>
+        <translation>Impossible d&apos;ouvrir %1 : le chemin est un dossier</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Read error reading from %1: %2</source>
+        <translation>Erreur de lecture de %1 : %2</translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkAccessFtpBackend</name>
+    <message>
+        <location filename="../src/network/access/qnetworkaccessftpbackend.cpp" line="+165"/>
+        <source>No suitable proxy found</source>
+        <translation>Aucun proxy trouvé</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Cannot open %1: is a directory</source>
+        <translation>Impossible d&apos;ouvrir %1 : le chemin est un dossier</translation>
+    </message>
+    <message>
+        <location line="+130"/>
+        <source>Logging in to %1 failed: authentication required</source>
+        <translation>Connexion à %1 a échoué : authentification requise</translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>Error while downloading %1: %2</source>
+        <translation>Erreur lors du téléchargement de %1 : %2</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error while uploading %1: %2</source>
+        <translation>Erreur lors de l&apos;envoi de %1 : %2</translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkAccessHttpBackend</name>
+    <message>
+        <location filename="../src/network/access/qnetworkaccesshttpbackend.cpp" line="+597"/>
+        <source>No suitable proxy found</source>
+        <translation>Aucun proxy trouvé</translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkReply</name>
+    <message>
+        <location line="+128"/>
+        <source>Error downloading %1 - server replied: %2</source>
+        <translation>Erreur lors du téléchargement de %1 - le serveur a répondu: %2</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qnetworkreplyimpl.cpp" line="+68"/>
+        <source>Protocol &quot;%1&quot; is unknown</source>
+        <translation>Le protocole &quot;%1&quot; est inconnu</translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkReplyImpl</name>
+    <message>
+        <location line="+432"/>
+        <location line="+22"/>
+        <source>Operation canceled</source>
+        <translation>Opération annulée</translation>
+    </message>
+</context>
+<context>
+    <name>QOCIDriver</name>
+    <message>
+        <location filename="../src/sql/drivers/oci/qsql_oci.cpp" line="+2069"/>
+        <source>Unable to logon</source>
+        <translation>Impossible d&apos;ouvrir une session</translation>
+    </message>
+    <message>
+        <location line="-144"/>
+        <source>Unable to initialize</source>
+        <comment>QOCIDriver</comment>
+        <translation>L&apos;initialisation a échouée</translation>
+    </message>
+    <message>
+        <location line="+215"/>
+        <source>Unable to begin transaction</source>
+        <translation>Impossible de démarrer la transaction</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Unable to commit transaction</source>
+        <translation>Impossible d&apos;enregistrer la transaction</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Unable to rollback transaction</source>
+        <translation>Impossible d&apos;annuler la transaction</translation>
+    </message>
+</context>
+<context>
+    <name>QOCIResult</name>
+    <message>
+        <location line="-963"/>
+        <location line="+161"/>
+        <location line="+15"/>
+        <source>Unable to bind column for batch execute</source>
+        <translation>Impossible d&apos;attacher la colonne pour une execution batch</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Unable to execute batch statement</source>
+        <translation>Impossible d&apos;exécuter l&apos;instruction batch</translation>
+    </message>
+    <message>
+        <location line="+302"/>
+        <source>Unable to goto next</source>
+        <translation>Impossible de passer au suivant</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Unable to alloc statement</source>
+        <translation>Impossible d&apos;allouer la requête</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Unable to prepare statement</source>
+        <translation>Impossible de préparer la requête</translation>
+    </message>
+    <message>
+        <location line="+36"/>
+        <source>Unable to bind value</source>
+        <translation>Impossible d&apos;attacher la valeur</translation>
+    </message>
+    <message>
+        <source>Unable to execute select statement</source>
+        <translation type="obsolete">Impossible d&apos;exéctuer la requête select</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Unable to execute statement</source>
+        <translation>Impossible d&apos;exéctuer la requête</translation>
+    </message>
+</context>
+<context>
+    <name>QODBCDriver</name>
+    <message>
+        <location filename="../src/sql/drivers/odbc/qsql_odbc.cpp" line="+1785"/>
+        <source>Unable to connect</source>
+        <translation>Incapable d&apos;établir une connexion</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Unable to connect - Driver doesn&apos;t support all needed functionality</source>
+        <translation>Impossible de se connecter - Le pilote ne supporte pas toutes les fonctionnalités nécessaires</translation>
+    </message>
+    <message>
+        <location line="+242"/>
+        <source>Unable to disable autocommit</source>
+        <translation>Impossible de désactiver l&apos;autocommit</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Unable to commit transaction</source>
+        <translation>Incapable de soumettre la transaction</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Unable to rollback transaction</source>
+        <translation>Incapable d&apos;annuler la transaction</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Unable to enable autocommit</source>
+        <translation>Impossible d&apos;active l&apos;autocommit</translation>
+    </message>
+</context>
+<context>
+    <name>QODBCResult</name>
+    <message>
+        <location line="-1218"/>
+        <location line="+349"/>
+        <source>QODBCResult::reset: Unable to set &apos;SQL_CURSOR_STATIC&apos; as statement attribute. Please check your ODBC driver configuration</source>
+        <translation>QODBCResult::reset: Impossible d&apos;utiliser &apos;SQL_CURSOR_STATIC&apos; comme attribut de requête. Veuillez vérifier la configuration de votre pilote ODBC</translation>
+    </message>
+    <message>
+        <location line="-332"/>
+        <location line="+626"/>
+        <source>Unable to execute statement</source>
+        <translation>Impossible d&apos;exéctuer la requête</translation>
+    </message>
+    <message>
+        <location line="-555"/>
+        <source>Unable to fetch next</source>
+        <translation>Impossible de récupérer le suivant</translation>
+    </message>
+    <message>
+        <location line="+279"/>
+        <source>Unable to prepare statement</source>
+        <translation>Impossible de préparer la requête</translation>
+    </message>
+    <message>
+        <location line="+268"/>
+        <source>Unable to bind variable</source>
+        <translation>Impossible d&apos;attacher la variable</translation>
+    </message>
+    <message>
+        <location filename="../src/sql/drivers/db2/qsql_db2.cpp" line="+194"/>
+        <location filename="../src/sql/drivers/odbc/qsql_odbc.cpp" line="-475"/>
+        <location line="+578"/>
+        <source>Unable to fetch last</source>
+        <translation>Impossible de récupérer le dernier</translation>
+    </message>
+    <message>
+        <location filename="../src/sql/drivers/odbc/qsql_odbc.cpp" line="-672"/>
+        <source>Unable to fetch</source>
+        <translation>Impossible de récupérer</translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <source>Unable to fetch first</source>
+        <translation>Impossible de récupérer le premier</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Unable to fetch previous</source>
+        <translation>Impossible de récupérer le précedent</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="../src/gui/util/qdesktopservices_mac.cpp" line="+165"/>
+        <source>Home</source>
+        <translation>Début</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qnetworkaccessdatabackend.cpp" line="+74"/>
+        <source>Operation not supported on %1</source>
+        <translation>Opération non supportée sur %1</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>Invalid URI: %1</source>
+        <translation>URI invalide : %1</translation>
+    </message>
+    <message>
+        <location filename="../src/network/access/qnetworkaccessdebugpipebackend.cpp" line="+175"/>
+        <source>Write error writing to %1: %2</source>
+        <translation>Erreur d&apos;écriture sur %1 : %2</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>Read error reading from %1: %2</source>
+        <translation>Erreur de lecture sur %1 : %2</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>Socket error on %1: %2</source>
+        <translation>Erreur de socket sur %1 : %2</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Remote host closed the connection prematurely on %1</source>
+        <translation>L&apos;hôte distant a fermé sa connexion de façon prématurée sur %1</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>Protocol error: packet of size 0 received</source>
+        <translation>Erreur de protocole: paquet de taille 0 reçu</translation>
+    </message>
+    <message>
+        <location filename="../src/network/kernel/qhostinfo.cpp" line="+177"/>
+        <location line="+57"/>
+        <source>No host name given</source>
+        <translation>Nom d&apos;hôte manquant</translation>
+    </message>
+</context>
+<context>
+    <name>QPPDOptionsModel</name>
+    <message>
+        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="+1195"/>
+        <source>Name</source>
+        <translation>Nom</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Value</source>
+        <translation>Valeur</translation>
+    </message>
+</context>
+<context>
+    <name>QPSQLDriver</name>
+    <message>
+        <location filename="../src/sql/drivers/psql/qsql_psql.cpp" line="+763"/>
+        <source>Unable to connect</source>
+        <translation>Impossible d&apos;établir une connexion</translation>
+    </message>
+    <message>
+        <location line="+49"/>
+        <source>Could not begin transaction</source>
+        <translation>Impossible de démarrer la transaction</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Could not commit transaction</source>
+        <translation>Impossible de soumettre la transaction</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Could not rollback transaction</source>
+        <translation>Impossible d&apos;annuler la transaction</translation>
+    </message>
+    <message>
+        <location line="+358"/>
+        <source>Unable to subscribe</source>
+        <translation>Impossible de s&apos;inscrire</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Unable to unsubscribe</source>
+        <translation>Impossible de se désinscrire</translation>
+    </message>
+</context>
+<context>
+    <name>QPSQLResult</name>
+    <message>
+        <location line="-1058"/>
+        <source>Unable to create query</source>
+        <translation>Impossible de créer la requête</translation>
+    </message>
+    <message>
+        <location line="+374"/>
+        <source>Unable to prepare statement</source>
+        <translation>Impossible de préparer la requête</translation>
+    </message>
+</context>
+<context>
+    <name>QPageSetupWidget</name>
+    <message>
+        <location filename="../src/gui/dialogs/qpagesetupdialog_unix.cpp" line="+304"/>
+        <source>Centimeters (cm)</source>
+        <translation>Centimètres (cm)</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Millimeters (mm)</source>
+        <translation>Millimètres (mm)</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Inches (in)</source>
+        <translation>Pouces (in)</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Points (pt)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qpagesetupwidget.ui"/>
+        <source>Form</source>
+        <translation>Formulaire</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Paper</source>
+        <translation>Papier</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Page size:</source>
+        <translation>Dimensions :</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Width:</source>
+        <translation>Largeur :</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Height:</source>
+        <translation>Hauteur :</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Paper source:</source>
+        <translation>Source du papier :</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Orientation</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location/>
+        <source>Portrait</source>
+        <translation>Portrait</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Landscape</source>
+        <translation>Paysage</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Reverse landscape</source>
+        <translation>Paysage inversé</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Reverse portrait</source>
+        <translation>Portrait inversé</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Margins</source>
+        <translation>Marges</translation>
+    </message>
+    <message>
+        <location/>
+        <source>top margin</source>
+        <translation>marge haute</translation>
+    </message>
+    <message>
+        <location/>
+        <source>left margin</source>
+        <translation>marge gauche</translation>
+    </message>
+    <message>
+        <location/>
+        <source>right margin</source>
+        <translation>marge droite</translation>
+    </message>
+    <message>
+        <location/>
+        <source>bottom margin</source>
+        <translation>marge basse</translation>
+    </message>
+</context>
+<context>
+    <name>QPluginLoader</name>
+    <message>
+        <location filename="../src/corelib/plugin/qpluginloader.cpp" line="+24"/>
+        <source>Unknown error</source>
+        <translation>Erreur inconnue</translation>
+    </message>
+    <message>
+        <location line="-68"/>
+        <source>The plugin was not loaded.</source>
+        <translation>Le plugin n&apos;a pas été chargé.</translation>
+    </message>
+</context>
+<context>
+    <name>QPrintDialog</name>
+    <message>
+        <location filename="../src/gui/painting/qprinterinfo_unix.cpp" line="+98"/>
+        <source>locally connected</source>
+        <translation>connecté en local</translation>
+    </message>
+    <message>
+        <location line="+471"/>
+        <location line="+199"/>
+        <source>unknown</source>
+        <translation>inconnu</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="+268"/>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Annuler</translation>
+    </message>
+    <message>
+        <source>Print in color if available</source>
+        <translation type="obsolete">Imprimer en couleur si possible</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qprintdialog_qws.cpp" line="+375"/>
+        <source>Print all</source>
+        <translation>Imprimer tout</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Print range</source>
+        <translation>Imprimer la sélection</translation>
+    </message>
+    <message>
+        <source>Print last page first</source>
+        <translation type="obsolete">Imprimer d&apos;abord la dernière page</translation>
+    </message>
+    <message>
+        <source>Number of copies:</source>
+        <translation type="obsolete">Nombre de copies :</translation>
+    </message>
+    <message>
+        <source>Paper format</source>
+        <translation type="obsolete">Format du papier</translation>
+    </message>
+    <message>
+        <source>Portrait</source>
+        <translation type="obsolete">Portrait</translation>
+    </message>
+    <message>
+        <source>Landscape</source>
+        <translation type="obsolete">Paysage</translation>
+    </message>
+    <message>
+        <location line="-48"/>
+        <source>A0 (841 x 1189 mm)</source>
+        <translation>A0 (841 x 1189 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A1 (594 x 841 mm)</source>
+        <translation>A1 (594 x 841 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A2 (420 x 594 mm)</source>
+        <translation>A2 (420 x 594 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A3 (297 x 420 mm)</source>
+        <translation>A3 (297 x 420 mm)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>A5 (148 x 210 mm)</source>
+        <translation>A5 (148 x 210 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A6 (105 x 148 mm)</source>
+        <translation>A6 (105 x 148 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A7 (74 x 105 mm)</source>
+        <translation>A7 (74 x 105 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A8 (52 x 74 mm)</source>
+        <translation>A8 (52 x 74 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A9 (37 x 52 mm)</source>
+        <translation>A9 (37 x 52 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B0 (1000 x 1414 mm)</source>
+        <translation>B0 (1000 x 1414 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B1 (707 x 1000 mm)</source>
+        <translation>B1 (707 x 1000 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B2 (500 x 707 mm)</source>
+        <translation>B2 (500 x 707 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B3 (353 x 500 mm)</source>
+        <translation>B3 (353 x 500 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B4 (250 x 353 mm)</source>
+        <translation>B4 (250 x 353 mm)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>B6 (125 x 176 mm)</source>
+        <translation>B6 (125 x 176 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B7 (88 x 125 mm)</source>
+        <translation>B7 (88 x 125 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B8 (62 x 88 mm)</source>
+        <translation>B8 (62 x 88 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B9 (44 x 62 mm)</source>
+        <translation>B9 (44 x 62 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B10 (31 x 44 mm)</source>
+        <translation>B10 (31 x 44 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>C5E (163 x 229 mm)</source>
+        <translation>C5E (163 x 229 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>DLE (110 x 220 mm)</source>
+        <translation>DLE (110 x 220 mm)</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Folio (210 x 330 mm)</source>
+        <translation>Folio (210 x 330 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ledger (432 x 279 mm)</source>
+        <translation>Ledger (432 x 279 mm)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Tabloid (279 x 432 mm)</source>
+        <translation>Tabloïde (279 x 432 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>US Common #10 Envelope (105 x 241 mm)</source>
+        <translation>US Common #10 Envelope (105 x 241 mm)</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/painting/qprinterinfo_unix.cpp" line="-647"/>
+        <location line="+225"/>
+        <source>Aliases: %1</source>
+        <translation>Alias : %1</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qprintdialog_qws.cpp" line="-25"/>
+        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
+        <translation>A4 (210 x 297 mm)</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
+        <translation>B5 (176 x 250 mm)</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
+        <translation>Executive (7,5 x 10 pouces, 191 x 254 mm)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
+        <translation>Legal (8.5 x 14 pouces, 216 x 356 mm)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
+        <translation>Letter (8,5 x 11 pouces, 216 x 279 mm)</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Print selection</source>
+        <translation>Imprimer la sélection</translation>
+    </message>
+    <message>
+        <source>Page size:</source>
+        <translation type="obsolete">Dimensions :</translation>
+    </message>
+    <message>
+        <source>Orientation:</source>
+        <translation type="obsolete">Orientation :</translation>
+    </message>
+    <message>
+        <source>Paper source:</source>
+        <translation type="obsolete">Source du papier :</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qabstractprintdialog.cpp" line="+110"/>
+        <location line="+13"/>
+        <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="-2"/>
+        <source>Print</source>
+        <translation>Impr écran</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="obsolete">Fichier</translation>
+    </message>
+    <message>
+        <source>Printer</source>
+        <translation type="obsolete">Imprimante</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-357"/>
+        <source>Print To File ...</source>
+        <translation>Imprimer dans un fichier...</translation>
+    </message>
+    <message>
+        <source>Print dialog</source>
+        <translation type="obsolete">Fenêtre d&apos;impression</translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="obsolete">Taille :</translation>
+    </message>
+    <message>
+        <source>Properties</source>
+        <translation type="obsolete">Propriétés</translation>
+    </message>
+    <message>
+        <source>Printer info:</source>
+        <translation type="obsolete">Informations sur l&apos;imprimante :</translation>
+    </message>
+    <message>
+        <source>Browse</source>
+        <translation type="obsolete">Parcourir</translation>
+    </message>
+    <message>
+        <source>Print to file</source>
+        <translation type="obsolete">Imprimer dans un fichier</translation>
+    </message>
+    <message>
+        <source>Pages from</source>
+        <translation type="obsolete">Pages</translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation type="obsolete">à</translation>
+    </message>
+    <message>
+        <source>Selection</source>
+        <translation type="obsolete">Sélection</translation>
+    </message>
+    <message>
+        <source>Copies</source>
+        <translation type="obsolete">Copies</translation>
+    </message>
+    <message>
+        <source>Collate</source>
+        <translation type="obsolete">Assembler</translation>
+    </message>
+    <message>
+        <source>Other</source>
+        <translation type="obsolete">Autre</translation>
+    </message>
+    <message>
+        <source>Double side printing</source>
+        <translation type="obsolete">Impression recto verso</translation>
+    </message>
+    <message>
+        <location line="+80"/>
+        <source>File %1 is not writable.
+Please choose a different file name.</source>
+        <translation>Impossible d&apos;écrire dans le fichier %1.
+Veuillez choisir un nom de fichier différent.</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>%1 already exists.
+Do you want to overwrite it?</source>
+        <translation>%1 existe.
+Voulez-vous l&apos;écraser ?</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qprintdialog_qws.cpp" line="-228"/>
+        <source>File exists</source>
+        <translation>Le fichier existe</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&lt;qt&gt;Do you want to overwrite it?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;voulez-vous l&apos;écraser ?&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-8"/>
+        <source>%1 is a directory.
+Please choose a different file name.</source>
+        <translation>%1 est un dossier.
+Veuillez choisir un nom de fichier différent.</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qpagesetupdialog_unix.cpp" line="-232"/>
+        <source>A0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A4</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A5</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A6</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A7</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A8</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>A9</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B0</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B3</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B4</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B5</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B6</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B7</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B8</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B9</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>B10</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>C5E</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>DLE</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Executive</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Folio</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ledger</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Legal</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Letter</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tabloid</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>US Common #10 Envelope</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Custom</source>
+        <translation>Personnalisé</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-522"/>
+        <location line="+68"/>
+        <source>&amp;Options &gt;&gt;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="-63"/>
+        <source>&amp;Print</source>
+        <translation>Im&amp;primer</translation>
+    </message>
+    <message>
+        <location line="+67"/>
+        <source>&amp;Options &lt;&lt;</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+253"/>
+        <source>Print to File (PDF)</source>
+        <translation>Imprimer dans un fichier (PDF)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Print to File (Postscript)</source>
+        <translation>Imprimer dans un fichier (PostScript)</translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>Local file</source>
+        <translation>Fichier local</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Write %1 file</source>
+        <translation>Ecriture du fichier %1</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="+1"/>
+        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
+        <translation>La valeur &apos;de&apos; ne peut pas être plus grande que la valeur &apos;à&apos;.</translation>
+    </message>
+</context>
+<context>
+    <name>QPrintPreviewDialog</name>
+    <message>
+        <location filename="../src/gui/dialogs/qprintpreviewdialog.cpp" line="+252"/>
+        <source>%1%</source>
+        <translation>%1%</translation>
+    </message>
+    <message>
+        <location line="+79"/>
+        <source>Print Preview</source>
+        <translation>Aperçu avant impression</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Next page</source>
+        <translation>Page suivante</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Previous page</source>
+        <translation>Page précédente</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>First page</source>
+        <translation>Première page</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Last page</source>
+        <translation>Dernière page</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Fit width</source>
+        <translation>Ajuster la largeur</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Fit page</source>
+        <translation>Ajuster la page</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Zoom in</source>
+        <translation>Zoom avant</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zoom out</source>
+        <translation>Zoom arrière</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Portrait</source>
+        <translation>Portrait</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Landscape</source>
+        <translation>Paysage</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Show single page</source>
+        <translation>Afficher une seule page</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show facing pages</source>
+        <translation>Afficher deux pages</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show overview of all pages</source>
+        <translation>Afficher un aperçu de toutes les pages</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Print</source>
+        <translation>Impr écran</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Page setup</source>
+        <translation>Configuration de la page</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location line="+151"/>
+        <source>Export to PDF</source>
+        <translation>Exporter vers PDF</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Export to PostScript</source>
+        <translation>Exporter vers PostScript</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/dialogs/qabstractpagesetupdialog.cpp" line="+68"/>
+        <location line="+12"/>
+        <source>Page Setup</source>
+        <translation>Configuration de la page</translation>
+    </message>
+</context>
+<context>
+    <name>QPrintPropertiesDialog</name>
+    <message>
+        <source>PPD Properties</source>
+        <translation type="obsolete">Propriétés PPD</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Enregistrer</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="obsolete">OK</translation>
+    </message>
+</context>
+<context>
+    <name>QPrintPropertiesWidget</name>
+    <message>
+        <location filename="../src/gui/dialogs/qprintpropertieswidget.ui"/>
+        <source>Form</source>
+        <translation>Formulaire</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Page</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location/>
+        <source>Advanced</source>
+        <translation>Avancé</translation>
+    </message>
+</context>
+<context>
+    <name>QPrintSettingsOutput</name>
+    <message>
+        <location filename="../src/gui/dialogs/qprintsettingsoutput.ui"/>
+        <source>Form</source>
+        <translation>Formulaire</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Copies</source>
+        <translation>Copies</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Print range</source>
+        <translation>Imprimer la sélection</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Print all</source>
+        <translation>Imprimer tout</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Pages from</source>
+        <translation>Pages</translation>
+    </message>
+    <message>
+        <location/>
+        <source>to</source>
+        <translation>à</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Selection</source>
+        <translation>Sélection</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Output Settings</source>
+        <translation>Paramètres de sortie</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Copies:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location/>
+        <source>Collate</source>
+        <translation>Assembler</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Reverse</source>
+        <translation>Inverse</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Options</source>
+        <translation>Options</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Color Mode</source>
+        <translation>Mode de couleur</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Color</source>
+        <translation>Couleur</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Grayscale</source>
+        <translation>Dégradé de gris</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Duplex Printing</source>
+        <translation>Impression en duplex</translation>
+    </message>
+    <message>
+        <location/>
+        <source>None</source>
+        <translation>Aucun</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Long side</source>
+        <translation>Côté long</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Short side</source>
+        <translation>Côté court</translation>
+    </message>
+</context>
+<context>
+    <name>QPrintWidget</name>
+    <message>
+        <location filename="../src/gui/dialogs/qprintwidget.ui"/>
+        <source>Form</source>
+        <translation>Formulaire</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Printer</source>
+        <translation>Imprimante</translation>
+    </message>
+    <message>
+        <location/>
+        <source>&amp;Name:</source>
+        <translation>&amp;Nom :</translation>
+    </message>
+    <message>
+        <location/>
+        <source>P&amp;roperties</source>
+        <translation>P&amp;ropriétés</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Location:</source>
+        <translation>Emplacement :</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Preview</source>
+        <translation>Prévisualisation</translation>
+    </message>
+    <message>
+        <location/>
+        <source>Type:</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location/>
+        <source>Output &amp;file:</source>
+        <translation>&amp;Fichier de sortie:</translation>
+    </message>
+    <message>
+        <location/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>QProcess</name>
+    <message>
+        <location filename="../src/corelib/io/qprocess_unix.cpp" line="+475"/>
+        <location filename="../src/corelib/io/qprocess_win.cpp" line="+147"/>
+        <source>Could not open input redirection for reading</source>
+        <translation>Impossible d&apos;ouvrir la redirection d&apos;entrée en lecture</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location filename="../src/corelib/io/qprocess_win.cpp" line="+36"/>
+        <source>Could not open output redirection for writing</source>
+        <translation>Impossible d&apos;ouvrir la redirection de sortie pour écriture</translation>
+    </message>
+    <message>
+        <location line="+235"/>
+        <source>Resource error (fork failure): %1</source>
+        <translation>Erreur de ressouce (fork) : %1</translation>
+    </message>
+    <message>
+        <location line="+259"/>
+        <location line="+53"/>
+        <location line="+74"/>
+        <location line="+67"/>
+        <location filename="../src/corelib/io/qprocess_win.cpp" line="+422"/>
+        <location line="+50"/>
+        <location line="+75"/>
+        <location line="+42"/>
+        <location line="+54"/>
+        <source>Process operation timed out</source>
+        <translation>Operation de processus a expiré</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/io/qprocess.cpp" line="+533"/>
+        <location line="+52"/>
+        <location filename="../src/corelib/io/qprocess_win.cpp" line="-211"/>
+        <location line="+50"/>
+        <source>Error reading from process</source>
+        <translation>Erreur de lecture du processus</translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <location line="+779"/>
+        <location filename="../src/corelib/io/qprocess_win.cpp" line="+140"/>
+        <source>Error writing to process</source>
+        <translation>Erreur d&quot;écriture vers le processus</translation>
+    </message>
+    <message>
+        <location line="-709"/>
+        <source>Process crashed</source>
+        <translation>Le processus à planté</translation>
+    </message>
+    <message>
+        <location line="+912"/>
+        <source>No program defined</source>
+        <translation>Aucun programme défini</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/io/qprocess_win.cpp" line="-341"/>
+        <source>Process failed to start</source>
+        <translation>Le processus n&apos;a pas démarré</translation>
+    </message>
+</context>
+<context>
+    <name>QProgressDialog</name>
+    <message>
+        <location filename="../src/gui/dialogs/qprogressdialog.cpp" line="+182"/>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
+    </message>
+</context>
+<context>
+    <name>QPushButton</name>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="-8"/>
+        <source>Open</source>
+        <translation>Ouvrir</translation>
+    </message>
+</context>
+<context>
+    <name>QRadioButton</name>
+    <message>
+        <location line="+12"/>
+        <source>Check</source>
+        <translation>Cocher</translation>
+    </message>
+</context>
+<context>
+    <name>QRegExp</name>
+    <message>
+        <location filename="../src/corelib/tools/qregexp.cpp" line="+64"/>
+        <source>no error occurred</source>
+        <translation>aucune erreur ne s&apos;est produite</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>disabled feature used</source>
+        <translation>option désactivée</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>bad char class syntax</source>
+        <translation>syntaxe invalide pour classe de caractère</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>bad lookahead syntax</source>
+        <translation>syntaxe invalide pour lookahead</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>bad repetition syntax</source>
+        <translation>syntaxe invalide pour répétition</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>invalid octal value</source>
+        <translation>valeur octale invalide</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>missing left delim</source>
+        <translation>délémiteur gauche manquant</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>unexpected end</source>
+        <translation>fin impromptue</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>met internal limit</source>
+        <translation>rencontré limite interne</translation>
+    </message>
+</context>
+<context>
+    <name>QSQLite2Driver</name>
+    <message>
+        <location filename="../src/sql/drivers/sqlite2/qsql_sqlite2.cpp" line="+396"/>
+        <source>Error to open database</source>
+        <translation>Erreur à l&apos;ouverture de la base de données</translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>Unable to begin transaction</source>
+        <translation>Impossible de démarrer la transaction</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Unable to commit transaction</source>
+        <translation>Impossible de soumettre la transaction</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Unable to rollback Transaction</source>
+        <translation>Impossible d&apos;annuler la transaction</translation>
+    </message>
+</context>
+<context>
+    <name>QSQLite2Result</name>
+    <message>
+        <location line="-323"/>
+        <source>Unable to fetch results</source>
+        <translation>Impossible de récupérer les résultats</translation>
+    </message>
+    <message>
+        <location line="+147"/>
+        <source>Unable to execute statement</source>
+        <translation>Impossible d&apos;exécuter la requête</translation>
+    </message>
+</context>
+<context>
+    <name>QSQLiteDriver</name>
+    <message>
+        <location filename="../src/sql/drivers/sqlite/qsql_sqlite.cpp" line="+528"/>
+        <source>Error opening database</source>
+        <translation>Erreur lors de l&apos;ouverture de la base de données</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Error closing database</source>
+        <translation>Erreur lors de la fermeture de la base de données</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Unable to begin transaction</source>
+        <translation>Impossible de démarrer la transaction</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Unable to commit transaction</source>
+        <translation>Incapable de soumettre la transaction</translation>
+    </message>
+    <message>
+        <source>Unable to roll back transaction</source>
+        <translation type="obsolete">Impossible d&apos;annuler la transaction</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Unable to rollback transaction</source>
+        <translation>Impossible d&apos;annuler la transaction</translation>
+    </message>
+</context>
+<context>
+    <name>QSQLiteResult</name>
+    <message>
+        <location line="-400"/>
+        <location line="+66"/>
+        <location line="+8"/>
+        <source>Unable to fetch row</source>
+        <translation>Impossible de récupérer la rangée</translation>
+    </message>
+    <message>
+        <location line="+63"/>
+        <source>Unable to execute statement</source>
+        <translation>Impossible d&apos;exécuter la requête</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Unable to reset statement</source>
+        <translation>Impossible de réinitialiser la requête</translation>
+    </message>
+    <message>
+        <location line="+45"/>
+        <source>Unable to bind parameters</source>
+        <translation>Impossible d&apos;attacher les paramètres</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Parameter count mismatch</source>
+        <translation>Nombre de paramètres incorrect</translation>
+    </message>
+    <message>
+        <location line="-208"/>
+        <source>No query</source>
+        <translation>Pas de requête</translation>
+    </message>
+</context>
+<context>
+    <name>QScrollBar</name>
+    <message>
+        <location filename="../src/gui/widgets/qscrollbar.cpp" line="+448"/>
+        <source>Scroll here</source>
+        <translation>Défiler jusqu&apos;ici</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Left edge</source>
+        <translation>Extrême gauche</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Top</source>
+        <translation>En haut</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Right edge</source>
+        <translation>Extrême droite</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Bottom</source>
+        <translation>En bas</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Page left</source>
+        <translation>Page précédente</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+143"/>
+        <source>Page up</source>
+        <translation>Page précédente</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Page right</source>
+        <translation>Page suivante</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+4"/>
+        <source>Page down</source>
+        <translation>Page suivante</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Scroll left</source>
+        <translation>Défiler vers la gauche</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Scroll up</source>
+        <translation>Défiler vers le haut</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Scroll right</source>
+        <translation>Défiler vers la droite</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Scroll down</source>
+        <translation>Défiler vers le bas</translation>
+    </message>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-6"/>
+        <source>Line up</source>
+        <translation>Aligner</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Position</source>
+        <translation>Position</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Line down</source>
+        <translation>Aligner en-bas</translation>
+    </message>
+</context>
+<context>
+    <name>QSharedMemory</name>
+    <message>
+        <location filename="../src/corelib/kernel/qsharedmemory.cpp" line="+207"/>
+        <source>%1: unable to set key on lock</source>
+        <translation>%1 : impossible d&apos;affecter la clé au verrou</translation>
+    </message>
+    <message>
+        <location line="+81"/>
+        <source>%1: create size is less then 0</source>
+        <translation>%1 : taille de création est inférieur à 0</translation>
+    </message>
+    <message>
+        <location line="+168"/>
+        <location filename="../src/corelib/kernel/qsharedmemory_p.h" line="+148"/>
+        <source>%1: unable to lock</source>
+        <translation>%1 : impossible de vérrouiller</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>%1: unable to unlock</source>
+        <translation>%1 : impossible de déverrouiller</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/kernel/qsharedmemory_unix.cpp" line="+78"/>
+        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+87"/>
+        <source>%1: permission denied</source>
+        <translation>%1 : permission refusée</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="-22"/>
+        <source>%1: already exists</source>
+        <translation>%1 : existe déjà</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+9"/>
+        <source>%1: doesn&apos;t exists</source>
+        <translation>%1 : n&apos;existe pas</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+9"/>
+        <source>%1: out of resources</source>
+        <translation>%1 : plus de ressources disponibles</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+7"/>
+        <source>%1: unknown error %2</source>
+        <translation>%1 : erreur inconnue %2</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>%1: key is empty</source>
+        <translation>%1 : clé vide</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>%1: unix key file doesn&apos;t exists</source>
+        <translation>%1 : le fichier de clé unix n&apos;existe pas</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>%1: ftok failed</source>
+        <translation>%1 : ftok a échoué</translation>
+    </message>
+    <message>
+        <location line="+51"/>
+        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+15"/>
+        <source>%1: unable to make key</source>
+        <translation>%1 : impossible de créer la clé</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>%1: system-imposed size restrictions</source>
+        <translation>%1 : le système impose des restrictions sur la taille</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>%1: not attached</source>
+        <translation>%1 : non attaché</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="-27"/>
+        <source>%1: invalid size</source>
+        <translation>%1 : taille invalide</translation>
+    </message>
+    <message>
+        <location line="+68"/>
+        <source>%1: key error</source>
+        <translation>%1 : erreur de clé</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>%1: size query failed</source>
+        <translation>%1 : la requête de taille a échoué</translation>
+    </message>
+</context>
+<context>
+    <name>QShortcut</name>
+    <message>
+        <location filename="../src/gui/kernel/qkeysequence.cpp" line="+373"/>
+        <source>Space</source>
+        <translation>Espace</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Esc</source>
+        <translation>Échap</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Tab</source>
+        <translation>Tab</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Backtab</source>
+        <translation>Tab arr</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Backspace</source>
+        <translation>Effacement</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Return</source>
+        <translation>Retour</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Enter</source>
+        <translation>Entrée</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Ins</source>
+        <translation>Inser</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Del</source>
+        <translation>Suppr</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Pause</source>
+        <translation>Pause</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Print</source>
+        <translation>Impr écran</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>SysReq</source>
+        <translation>Syst</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Home</source>
+        <translation>Début</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>End</source>
+        <translation>Fin</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Left</source>
+        <translation>Gauche</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Up</source>
+        <translation>Haut</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Right</source>
+        <translation>Droite</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Down</source>
+        <translation>Bas</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PgUp</source>
+        <translation>Page préc</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PgDown</source>
+        <translation>Page suiv</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>CapsLock</source>
+        <translation>Verr maj</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>NumLock</source>
+        <translation>Verr num</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ScrollLock</source>
+        <translation>Arrêt défil</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Menu</source>
+        <translation>Menu</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Help</source>
+        <translation>Aide</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Back</source>
+        <translation>Précédent (historique)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Forward</source>
+        <translation>Successeur (historique)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Stop</source>
+        <translation>Stop</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Refresh</source>
+        <translation>Rafraîchir</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Volume Down</source>
+        <translation>Volume bas</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Volume Mute</source>
+        <translation>Volume muet</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Volume Up</source>
+        <translation>Volume haut
+</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bass Boost</source>
+        <translation>Graves fort</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bass Up</source>
+        <translation>Graves haut</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bass Down</source>
+        <translation>Graves bas</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Treble Up</source>
+        <translation>Aigus haut</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Treble Down</source>
+        <translation>Aigus bas</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Media Play</source>
+        <translation>Média démarrer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Media Stop</source>
+        <translation>Média arrêt</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Media Previous</source>
+        <translation>Média précédent</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Media Next</source>
+        <translation>Média suivant</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Media Record</source>
+        <translation>Média enregistrer</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Favorites</source>
+        <translation>Préférés</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Search</source>
+        <translation>Recherche</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Standby</source>
+        <translation>Attente</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Open URL</source>
+        <translation>Ouvrir URL</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch Mail</source>
+        <translation>Lancer courrier</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch Media</source>
+        <translation>Lancer média</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (0)</source>
+        <translation>Lancer (0)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (1)</source>
+        <translation>Lancer (1)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (2)</source>
+        <translation>Lancer (2)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (3)</source>
+        <translation>Lancer (3)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (4)</source>
+        <translation>Lancer (4)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (5)</source>
+        <translation>Lancer (5)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (6)</source>
+        <translation>Lancer (6)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (7)</source>
+        <translation>Lancer (7)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (8)</source>
+        <translation>Lancer (8)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (9)</source>
+        <translation>Lancer (9)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (A)</source>
+        <translation>Lancer (A)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (B)</source>
+        <translation>Lancer (B)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (C)</source>
+        <translation>Lancer (C)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (D)</source>
+        <translation>Lancer (D)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (E)</source>
+        <translation>Lancer (E)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Launch (F)</source>
+        <translation>Lancer (F)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Print Screen</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Page Up</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Page Down</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Caps Lock</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Num Lock</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Number Lock</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Scroll Lock</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Insert</source>
+        <translation>Insérer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Delete</source>
+        <translation>Supprimer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Escape</source>
+        <translation>Échapement</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>System Request</source>
+        <translation>Système</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Select</source>
+        <translation>Sélectionner</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Yes</source>
+        <translation>Oui</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>No</source>
+        <translation>Non</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Context1</source>
+        <translation>Contexte1</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Context2</source>
+        <translation>Contexte2</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Context3</source>
+        <translation>Contexte3</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Context4</source>
+        <translation>Contexte4</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Call</source>
+        <translation>Appeler</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangup</source>
+        <translation>Raccrocher</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Flip</source>
+        <translation>Retourner</translation>
+    </message>
+    <message>
+        <location line="+527"/>
+        <location line="+122"/>
+        <source>Ctrl</source>
+        <translation>Ctrl</translation>
+    </message>
+    <message>
+        <location line="-121"/>
+        <location line="+125"/>
+        <source>Shift</source>
+        <translation>Maj</translation>
+    </message>
+    <message>
+        <location line="-124"/>
+        <location line="+122"/>
+        <source>Alt</source>
+        <translation>Alt</translation>
+    </message>
+    <message>
+        <location line="-121"/>
+        <location line="+117"/>
+        <source>Meta</source>
+        <translation>Méta</translation>
     </message>
     <message>
         <location line="-25"/>
-        <source>No note selected:
-Please select a single note and retry operation
-</source>
-        <translation type="unfinished"></translation>
+        <source>+</source>
+        <translation>+</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>F%1</source>
+        <translation>F%1</translation>
+    </message>
+    <message>
+        <location line="-720"/>
+        <source>Home Page</source>
+        <translation>Page d&apos;accueil</translation>
+    </message>
+</context>
+<context>
+    <name>QSlider</name>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+151"/>
+        <source>Page left</source>
+        <translation>Page précédente</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Page up</source>
+        <translation>Page précédente</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Position</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Page right</source>
+        <translation>Page suivante</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Page down</source>
+        <translation>Page suivante</translation>
+    </message>
+</context>
+<context>
+    <name>QSocks5SocketEngine</name>
+    <message>
+        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="-67"/>
+        <source>Connection to proxy refused</source>
+        <translation>Connexion au proxy refusée</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Connection to proxy closed prematurely</source>
+        <translation>connexion au proxy fermée prématurément</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Proxy host not found</source>
+        <translation>Hôte proxy introuvable</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Connection to proxy timed out</source>
+        <translation>Connexion au proxy expirée</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Proxy authentication failed</source>
+        <translation>L&apos;authentification proxy a échoué</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Proxy authentication failed: %1</source>
+        <translation>L&apos;authentification proxy a échoué : %1</translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>No note or rest selected:
-Please select a single note or rest and retry operation
-</source>
-        <translation type="unfinished"></translation>
+        <source>SOCKS version 5 protocol error</source>
+        <translation>Erreur de protocole SOCKS version 5</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>General SOCKSv5 server failure</source>
+        <translation>Erreur générale du serveur SOCKSv5</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Connection not allowed by SOCKSv5 server</source>
+        <translation>Connexion refusée par le serveur SOCKSv5</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>TTL expired</source>
+        <translation>TTL expiré</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>SOCKSv5 command not supported</source>
+        <translation>Commande SOCKSv5 non supportée</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Address type not supported</source>
+        <translation>Type d&apos;adresse non supporté</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Unknown SOCKSv5 proxy error code 0x%1</source>
+        <translation>Erreur proxy SOCKSv5 inconnue : 0x%1</translation>
+    </message>
+    <message>
+        <source>Socks5 timeout error connecting to socks server</source>
+        <translation type="obsolete">Erreur d&apos;expiration socks5 lors de l&apos;établissement d&apos;une connexion au serveur socks</translation>
+    </message>
+    <message>
+        <location line="+685"/>
+        <source>Network operation timed out</source>
+        <translation>L&apos;opération réseau a expiré</translation>
+    </message>
+</context>
+<context>
+    <name>QSpinBox</name>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-574"/>
+        <source>More</source>
+        <translation>Plus</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Less</source>
+        <translation>Moins</translation>
+    </message>
+</context>
+<context>
+    <name>QSql</name>
+    <message>
+        <location filename="../src/qt3support/sql/q3sqlmanager_p.cpp" line="+890"/>
+        <source>Delete</source>
+        <translation>Supprimer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Delete this record?</source>
+        <translation>Supprimer cet enregistrement ?</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+16"/>
+        <location line="+36"/>
+        <source>Yes</source>
+        <translation>Oui</translation>
+    </message>
+    <message>
+        <location line="-51"/>
+        <location line="+16"/>
+        <location line="+36"/>
+        <source>No</source>
+        <translation>Non</translation>
+    </message>
+    <message>
+        <location line="-44"/>
+        <source>Insert</source>
+        <translation>Insérer</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Update</source>
+        <translation>Actualiser</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Save edits?</source>
+        <translation>Enregistrer les modifications ?</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Confirm</source>
+        <translation>Confirmer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cancel your edits?</source>
+        <translation>Annuler vos modifications ?</translation>
+    </message>
+</context>
+<context>
+    <name>QSslSocket</name>
+    <message>
+        <location filename="../src/network/ssl/qsslsocket_openssl.cpp" line="+569"/>
+        <source>Unable to write data: %1</source>
+        <translation>Impossible d&apos;écrire les données : %1</translation>
+    </message>
+    <message>
+        <location line="+119"/>
+        <source>Error while reading: %1</source>
+        <translation>Erreur lors de la lecture : %1</translation>
+    </message>
+    <message>
+        <location line="+96"/>
+        <source>Error during SSL handshake: %1</source>
+        <translation>Erreur lors de la poignée de main SSL : %1</translation>
+    </message>
+    <message>
+        <location line="-524"/>
+        <source>Error creating SSL context (%1)</source>
+        <translation>Erreur lors de la création du contexte SSL (%1)</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Invalid or empty cipher list (%1)</source>
+        <translation>La list de chiffrements est invalide ou vide (%1)</translation>
+    </message>
+    <message>
+        <location line="+62"/>
+        <source>Error creating SSL session, %1</source>
+        <translation>Erreur lors de la création de la session SSL, %1</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Error creating SSL session: %1</source>
+        <translation>Erreur lors de la création de la session SSL : %1</translation>
+    </message>
+    <message>
+        <location line="-61"/>
+        <source>Cannot provide a certificate with no key, %1</source>
+        <translation>Impossible de fournir un certificat sans clé, %1</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Error loading local certificate, %1</source>
+        <translation>Erreur lors du chargement du certificat local, %1</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Error loading private key, %1</source>
+        <translation>Erreur lors du chargement de la clé privée, %1</translation>
+    </message>
+    <message>
+        <source>Private key do not certificate public key, %1</source>
+        <translation type="obsolete">La clé privée ne certifie pas la clé publique, %1</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Private key does not certificate public key, %1</source>
+        <translation>La clé privée ne certifie pas la clé publique, %1</translation>
+    </message>
+</context>
+<context>
+    <name>QSystemSemaphore</name>
+    <message>
+        <location filename="../src/corelib/kernel/qsystemsemaphore_unix.cpp" line="-41"/>
+        <location filename="../src/corelib/kernel/qsystemsemaphore_win.cpp" line="+66"/>
+        <source>%1: out of resources</source>
+        <translation>%1: plus de ressources disponibles</translation>
+    </message>
+    <message>
+        <location line="-13"/>
+        <location filename="../src/corelib/kernel/qsystemsemaphore_win.cpp" line="+4"/>
+        <source>%1: permission denied</source>
+        <translation>%1: permission refusée</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>%1: already exists</source>
+        <translation>%1 : existe déjà</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>%1: does not exist</source>
+        <translation>%1 : n&apos;existe pas</translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>Please select a single note or slur and retry operation
-</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/corelib/kernel/qsystemsemaphore_win.cpp" line="+3"/>
+        <source>%1: unknown error %2</source>
+        <translation>%1: erreur inconnue %2</translation>
+    </message>
+</context>
+<context>
+    <name>QTDSDriver</name>
+    <message>
+        <location filename="../src/sql/drivers/tds/qsql_tds.cpp" line="+584"/>
+        <source>Unable to open connection</source>
+        <translation>Impossible d&apos;ouvrir la connexion</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>Unable to use database</source>
+        <translation>Impossible d&apos;utiliser la base de données</translation>
+    </message>
+</context>
+<context>
+    <name>QTabBar</name>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/complexwidgets.cpp" line="-326"/>
+        <source>Scroll Left</source>
+        <translation>Défiler vers la gauche</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Scroll Right</source>
+        <translation>Défiler vers la droite</translation>
+    </message>
+</context>
+<context>
+    <name>QTcpServer</name>
+    <message>
+        <source>Socket operation unsupported</source>
+        <translation type="obsolete">Operation socket non supportée</translation>
+    </message>
+    <message>
+        <location filename="../src/network/socket/qtcpserver.cpp" line="+282"/>
+        <source>Operation on socket is not supported</source>
+        <translation>Opération sur le socket non supportée</translation>
+    </message>
+</context>
+<context>
+    <name>QTextControl</name>
+    <message>
+        <location filename="../src/gui/text/qtextcontrol.cpp" line="+1973"/>
+        <source>&amp;Undo</source>
+        <translation>&amp;Annuler</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&amp;Redo</source>
+        <translation>&amp;Répéter</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Cu&amp;t</source>
+        <translation>Co&amp;uper</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>&amp;Copy</source>
+        <translation>Cop&amp;ier</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Copy &amp;Link Location</source>
+        <translation>Copier l&apos;adresse du &amp;lien</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>&amp;Paste</source>
+        <translation>Co&amp;ller</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Delete</source>
+        <translation>Supprimer</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Select All</source>
+        <translation>Tout sélectionner</translation>
+    </message>
+</context>
+<context>
+    <name>QToolButton</name>
+    <message>
+        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="+254"/>
+        <location line="+6"/>
+        <source>Press</source>
+        <translation>Presser</translation>
+    </message>
+    <message>
+        <location line="-4"/>
         <location line="+8"/>
-        <source>Please select one or more staves and retry operation
-</source>
-        <translation type="unfinished"></translation>
+        <source>Open</source>
+        <translation>Ouvrir</translation>
+    </message>
+</context>
+<context>
+    <name>QUdpSocket</name>
+    <message>
+        <location filename="../src/network/socket/qudpsocket.cpp" line="+169"/>
+        <source>This platform does not support IPv6</source>
+        <translation>Cette plateforme ne supporte pas IPv6</translation>
+    </message>
+</context>
+<context>
+    <name>QUndoGroup</name>
+    <message>
+        <location filename="../src/gui/util/qundogroup.cpp" line="+386"/>
+        <source>Undo</source>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Redo</source>
+        <translation>Répéter</translation>
+    </message>
+</context>
+<context>
+    <name>QUndoModel</name>
+    <message>
+        <location filename="../src/gui/util/qundoview.cpp" line="+101"/>
+        <source>&lt;empty&gt;</source>
+        <translation>&lt;vide&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>QUndoStack</name>
+    <message>
+        <location filename="../src/gui/util/qundostack.cpp" line="+834"/>
+        <source>Undo</source>
+        <translation>Annuler</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Redo</source>
+        <translation>Répéter</translation>
+    </message>
+</context>
+<context>
+    <name>QUnicodeControlCharacterMenu</name>
+    <message>
+        <location filename="../src/gui/text/qtextcontrol.cpp" line="+884"/>
+        <source>LRM Left-to-right mark</source>
+        <translation>LRM Left-to-right mark</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>RLM Right-to-left mark</source>
+        <translation>RLM Right-to-left mark</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ZWJ Zero width joiner</source>
+        <translation>ZWJ Zero width joiner</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ZWNJ Zero width non-joiner</source>
+        <translation>ZWNJ Zero width non-joiner</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>ZWSP Zero width space</source>
+        <translation>ZWSP Zero width space</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>LRE Start of left-to-right embedding</source>
+        <translation>LRE Start of left-to-right embedding</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>RLE Start of right-to-left embedding</source>
+        <translation>RLE Start of right-to-left embedding</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>LRO Start of left-to-right override</source>
+        <translation>LRO Start of left-to-right override</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>RLO Start of right-to-left override</source>
+        <translation>RLO Start of right-to-left override</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>PDF Pop directional formatting</source>
+        <translation>PDF Pop directional formatting</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Insert Unicode control character</source>
+        <translation>Insérer caractère de contrôle Unicode</translation>
+    </message>
+</context>
+<context>
+    <name>QWebFrame</name>
+    <message>
+        <location filename="../src/3rdparty/webkit/WebKit/qt/WebCoreSupport/FrameLoaderClientQt.cpp" line="+692"/>
+        <source>Request cancelled</source>
+        <translation>Requête annulée</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Request blocked</source>
+        <translation>Requête bloquée</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Cannot show URL</source>
+        <translation>Impossible d&apos;afficher l&apos;URL</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Frame load interruped by policy change</source>
+        <translation>Chargement de la frame interrompu par un changement de configuration</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Cannot show mimetype</source>
+        <translation>Impossible d&apos;afficher le mimetype</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>File does not exist</source>
+        <translation>Le fichier n&apos;existe pas</translation>
+    </message>
+</context>
+<context>
+    <name>QWebPage</name>
+    <message>
+        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/Localizations.cpp" line="+42"/>
+        <source>Submit</source>
+        <comment>default label for Submit buttons in forms on web pages</comment>
+        <translation>Soumettre</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Submit</source>
+        <comment>Submit (input element) alt text for &lt;input&gt; elements with no alt, title, or value</comment>
+        <translation>Soumettre</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Reset</source>
+        <comment>default label for Reset buttons in forms on web pages</comment>
+        <translation>Réinitialiser</translation>
+    </message>
+    <message>
+        <source>Searchable Index</source>
+        <comment>text that appears at the start of nearly-obsolete web pages in the form of a &apos;searchable index&apos;</comment>
+        <translation type="obsolete">Index recherchable</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Choose File</source>
+        <comment>title for file button used in HTML forms</comment>
+        <translation>Choisir le fichier</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>No file selected</source>
+        <comment>text to display in file button used in HTML forms when no file is selected</comment>
+        <translation>Pas de fichier sélectionné</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Open in New Window</source>
+        <comment>Open in New Window context menu item</comment>
+        <translation>Ouvrir dans une Nouvelle Fenêtre</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Save Link...</source>
+        <comment>Download Linked File context menu item</comment>
+        <translation>Sauvegarder le lien...</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Copy Link</source>
+        <comment>Copy Link context menu item</comment>
+        <translation>Copier le lien</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Open Image</source>
+        <comment>Open Image in New Window context menu item</comment>
+        <translation>Ouvrir l&apos;image</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Save Image</source>
+        <comment>Download Image context menu item</comment>
+        <translation>SAuvegarder l&apos;image</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Copy Image</source>
+        <comment>Copy Link context menu item</comment>
+        <translation>Copier l&apos;image</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Open Frame</source>
+        <comment>Open Frame in New Window context menu item</comment>
+        <translation>Ouvrir le cadre</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Copy</source>
+        <comment>Copy context menu item</comment>
+        <translation>Copier</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Go Back</source>
+        <comment>Back context menu item</comment>
+        <translation>Précédent</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Go Forward</source>
+        <comment>Forward context menu item</comment>
+        <translation>Suivant</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Stop</source>
+        <comment>Stop context menu item</comment>
+        <translation>Stop</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Reload</source>
+        <comment>Reload context menu item</comment>
+        <translation>Recharger</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Cut</source>
+        <comment>Cut context menu item</comment>
+        <translation>Couper</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Paste</source>
+        <comment>Paste context menu item</comment>
+        <translation>Coller</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>No Guesses Found</source>
+        <comment>No Guesses Found context menu item</comment>
+        <translation>Pas de candidat trouvés</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Ignore</source>
+        <comment>Ignore Spelling context menu item</comment>
+        <translation>Ignorer</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Add To Dictionary</source>
+        <comment>Learn Spelling context menu item</comment>
+        <translation>Ajouter au dictionnaire</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Search The Web</source>
+        <comment>Search The Web context menu item</comment>
+        <translation>Chercher sur le Web</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Look Up In Dictionary</source>
+        <comment>Look Up in Dictionary context menu item</comment>
+        <translation>Chercher dans le dictionnaire</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Open Link</source>
+        <comment>Open Link context menu item</comment>
+        <translation>Ouvrir le lien</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Ignore</source>
+        <comment>Ignore Grammar context menu item</comment>
+        <translation>Ignorer</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Spelling</source>
+        <comment>Spelling and Grammar context sub-menu item</comment>
+        <translation>Orthographe</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Show Spelling and Grammar</source>
+        <comment>menu item title</comment>
+        <translation>Afficher Orthographe et Grammaire</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hide Spelling and Grammar</source>
+        <comment>menu item title</comment>
+        <translation>Cacher Orthographe et Grammaire</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Check Spelling</source>
+        <comment>Check spelling context menu item</comment>
+        <translation>Vérifier l&apos;orthographe</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Check Spelling While Typing</source>
+        <comment>Check spelling while typing context menu item</comment>
+        <translation>Vérifier l&apos;orthographe pendant la saisie</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Check Grammar With Spelling</source>
+        <comment>Check grammar with spelling context menu item</comment>
+        <translation>Vérifier la grammaire en même temps que l&apos;orthographe</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Fonts</source>
+        <comment>Font context sub-menu item</comment>
+        <translation>Polices</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Bold</source>
+        <comment>Bold context menu item</comment>
+        <translation>Gras</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Italic</source>
+        <comment>Italic context menu item</comment>
+        <translation>Italique</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Underline</source>
+        <comment>Underline context menu item</comment>
+        <translation>Souligné</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Outline</source>
+        <comment>Outline context menu item</comment>
+        <translation>Contour</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Direction</source>
+        <comment>Writing direction context sub-menu item</comment>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Text Direction</source>
+        <comment>Text direction context sub-menu item</comment>
+        <translation>Orientation du texte</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Default</source>
+        <comment>Default writing direction context menu item</comment>
+        <translation>Défaut</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>LTR</source>
+        <comment>Left to Right context menu item</comment>
+        <translation>De la gauche vers la droite</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>RTL</source>
+        <comment>Right to Left context menu item</comment>
+        <translation>De la droite vers la gauche</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Inspect</source>
+        <comment>Inspect Element context menu item</comment>
+        <translation>Inspecter</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>No recent searches</source>
+        <comment>Label for only item in menu that appears when clicking on the search field image, when no searches have been performed</comment>
+        <translation>Pas de recherche récente</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Recent searches</source>
+        <comment>label for first item in the menu that appears when clicking on the search field image, used as embedded menu title</comment>
+        <translation>Recherches récentes</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Clear recent searches</source>
+        <comment>menu item in Recent Searches menu that empties menu&apos;s contents</comment>
+        <translation>Effacer les recherches récentes</translation>
+    </message>
+    <message>
+        <location line="+75"/>
+        <source>Unknown</source>
+        <comment>Unknown filesize FTP directory listing item</comment>
+        <translation>Inconnu</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>%1 (%2x%3 pixels)</source>
+        <comment>Title string for images</comment>
+        <translation>%1 (%2x%3 pixels)</translation>
+    </message>
+    <message>
+        <location filename="../src/3rdparty/webkit/WebKit/qt/WebCoreSupport/InspectorClientQt.cpp" line="+185"/>
+        <source>Web Inspector - %2</source>
+        <translation>Inspecteur Web - %2</translation>
+    </message>
+    <message>
+        <location filename="../src/3rdparty/webkit/WebCore/platform/network/qt/QNetworkReplyHandler.cpp" line="+382"/>
+        <source>Bad HTTP request</source>
+        <translation>Requête HTTP erronée</translation>
+    </message>
+    <message>
+        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/Localizations.cpp" line="-291"/>
+        <source>This is a searchable index. Enter search keywords: </source>
+        <comment>text that appears at the start of nearly-obsolete web pages in the form of a &apos;searchable index&apos;</comment>
+        <translation>Ceci est un index. Veuillez saisir les mots-clé :</translation>
+    </message>
+    <message>
+        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/ScrollbarQt.cpp" line="+58"/>
+        <source>Scroll here</source>
+        <translation>Défiler jusqu&apos;ici</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Left edge</source>
+        <translation>Extrême gauche</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Top</source>
+        <translation>En haut</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Right edge</source>
+        <translation>Extrême droite</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Bottom</source>
+        <translation>En bas</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Page left</source>
+        <translation>Page précédente</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Page up</source>
+        <translation>Page précédente</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Page right</source>
+        <translation>Page suivante</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Page down</source>
+        <translation>Page suivante</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Scroll left</source>
+        <translation>Défiler vers la gauche</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Scroll up</source>
+        <translation>Défiler vers le haut</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Scroll right</source>
+        <translation>Défiler vers la droite</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Scroll down</source>
+        <translation>Défiler vers le bas</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/FileChooserQt.cpp" line="+45"/>
+        <source>%n file(s)</source>
+        <comment>number of chosen file</comment>
+        <translation>
+            <numerusform>%n fichier</numerusform>
+            <numerusform>%n fichiers</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../src/3rdparty/webkit/WebKit/qt/Api/qwebpage.cpp" line="+1322"/>
+        <source>JavaScript Alert - %1</source>
+        <translation>Alerte javascript - %1</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>JavaScript Confirm - %1</source>
+        <translation>Confirmation javascript - %1</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>JavaScript Prompt - %1</source>
+        <translation>Invite javascript - %1</translation>
+    </message>
+    <message>
+        <location line="+333"/>
+        <source>Move the cursor to the next character</source>
+        <translation>Positionner le curseur sur le caractère suivant</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the previous character</source>
+        <translation>Positionner le curseur sur le caractère précédent</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the next word</source>
+        <translation>Positionner le curseur au mot suivant</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the previous word</source>
+        <translation>Positionner le curseur sur le mot précédent</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the next line</source>
+        <translation>Positionner le curseur sur la prochaine ligne</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the previous line</source>
+        <translation>Déplacer le curseur sur la ligne précédente</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the start of the line</source>
+        <translation>Positionner le curseur au début de la ligne</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the end of the line</source>
+        <translation>Positionner le curseur à la fin de la ligne</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the start of the block</source>
+        <translation>Positionner le curseur au début du bloc</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the end of the block</source>
+        <translation>Positionner le curseur à la fin du bloc</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the start of the document</source>
+        <translation>Positionner le curseur au début du document</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Move the cursor to the end of the document</source>
+        <translation>Positionner le curseur à la fin du document</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select all</source>
+        <translation>Sélectionner tout</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the next character</source>
+        <translation>Sélectionner le caractère suivant</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the previous character</source>
+        <translation>Sélectionner le caractère précédent</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the next word</source>
+        <translation>Sélectionner le prochain mot</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the previous word</source>
+        <translation>Sélectionner le mot précédent</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the next line</source>
+        <translation>Sélectionner jusqu&apos;à la prochaine ligne</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the previous line</source>
+        <translation>Sélectionner jusqu&apos;à la ligne précédente</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the start of the line</source>
+        <translation>Sélectionner jusqu&apos;au début de la ligne</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the end of the line</source>
+        <translation>Sélectionner jusqu&apos;à la fin de la ligne</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the start of the block</source>
+        <translation>Sélectionner jusqu&apos;au début du bloc</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the end of the block</source>
+        <translation>Sélectionner jusqu&apos;à la fin du bloc</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the start of the document</source>
+        <translation>Sélectionner jusqu&apos;au début du document</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Select to the end of the document</source>
+        <translation>Sélectionner jusqu&apos;à la fin du document</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Delete to the start of the word</source>
+        <translation>Supprimer jusqu&apos;au début du mot</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Delete to the end of the word</source>
+        <translation>Supprimer jusqu&apos;à la fin du mot</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Insert a new paragraph</source>
+        <translation>Insérer un nouveau paragraphe</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Insert a new line</source>
+        <translation>Insérer une nouvelle ligne</translation>
+    </message>
+</context>
+<context>
+    <name>QWhatsThisAction</name>
+    <message>
+        <location filename="../src/gui/kernel/qwhatsthis.cpp" line="+522"/>
+        <source>What&apos;s This?</source>
+        <translation>Qu&apos;est-ce que c&apos;est ?</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <location filename="../../mscore/capella.cpp" line="+1338"/>
-        <source>MuseScore: Import Capella</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/gui/kernel/qwidget.cpp" line="+5326"/>
+        <source>*</source>
+        <translation>*</translation>
+    </message>
+</context>
+<context>
+    <name>QWizard</name>
+    <message>
+        <location filename="../src/gui/dialogs/qwizard.cpp" line="+637"/>
+        <source>Go Back</source>
+        <translation>Précédent</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Continue</source>
+        <translation>Suivant</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Commit</source>
+        <translation>Soumettre</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../mscore/file.cpp" line="-470"/>
-        <location line="+7"/>
-        <location line="+800"/>
-        <location line="+22"/>
-        <location filename="../../mscore/importmidi.cpp" line="+1349"/>
-        <location filename="../../mscore/instrdialog.cpp" line="+11"/>
-        <location filename="../../mscore/mscore.cpp" line="-1290"/>
-        <location line="+434"/>
-        <location line="+43"/>
-        <location filename="../../mscore/palette.cpp" line="-227"/>
-        <location line="+484"/>
-        <location filename="../../mscore/sym.cpp" line="+607"/>
+        <source>Done</source>
+        <translation>Terminer</translation>
+    </message>
+    <message>
         <source>Quit</source>
-        <translation type="unfinished">Quitter</translation>
+        <translation type="obsolete">Quitter</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.cpp" line="+276"/>
-        <source>MuseScore: Load Chord Description</source>
-        <translation type="unfinished"></translation>
+        <location line="+4"/>
+        <source>Help</source>
+        <translation>Aide</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location filename="../../mscore/harmonyedit.cpp" line="+79"/>
-        <location line="+24"/>
-        <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/file.cpp" line="-831"/>
-        <source>MuseScore: file not found:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>MuseScore: load failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+789"/>
-        <location filename="../../mscore/preferences.cpp" line="+436"/>
-        <source>MuseScore: Load Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../../mscore/preferences.cpp" line="+2"/>
-        <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location line="+22"/>
-        <source>MuseScore: Load Style failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/harmony.cpp" line="+687"/>
-        <source>MuseScore: Open chord list failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>MuseScore: Load chord list failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/harmonyedit.cpp" line="-26"/>
-        <source>MuseScore: Load Chord Description File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>MuseScore: Save Chord Description File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/importmidi.cpp" line="-2"/>
-        <source>MuseScore: load midi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/instrdialog.cpp" line="-2"/>
-        <source>MuseScore: load Style failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/mscore.cpp" line="-481"/>
-        <source>MuseScore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>reading file &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+435"/>
-        <source>MuseScore: Load languages failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+43"/>
-        <source>MuseScore: invalid command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/palette.cpp" line="-486"/>
-        <source>MuseScore: Load Palette failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+484"/>
-        <source>MuseScore: Load Palettes failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/plugins.cpp" line="-7"/>
-        <location line="+9"/>
-        <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/sym.cpp" line="-2"/>
-        <source>MuseScore: Load font symbols failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RecordButton</name>
-    <message>
-        <location filename="../../mscore/utils.cpp" line="-359"/>
-        <source>record</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Rest</name>
-    <message>
-        <location filename="../../mscore/rest.cpp" line="+419"/>
-        <source>Rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Tuplet...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tuplet Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Delete Tuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Rest Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RestPropertyBase</name>
-    <message>
-        <location filename="../../mscore/restproperties.ui" line="+14"/>
-        <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Rest Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>small</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>additional leading space </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+20"/>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-7"/>
-        <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SLineBase</name>
-    <message>
-        <location filename="../../mscore/line.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>SLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>tick2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>Anchor:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>SEGMENT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>MEASURE</source>
-        <translation type="unfinished"></translation>
+        <location line="-14"/>
+        <source>&lt; &amp;Back</source>
+        <translation>&lt; &amp;Précédent</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>digonal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>LineSegments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Score</name>
-    <message>
-        <location filename="../../mscore/cmd.cpp" line="+1419"/>
-        <source>No staves found:
-please use the instruments dialog to
-first create some staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+58"/>
-        <source>No Measure selected:
-please select a measure and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/edit.cpp" line="+441"/>
-        <source>MuseScore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>The first time signature of a piece can not be removed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/file.cpp" line="-706"/>
-        <source>Compressed MuseScore File (*.mscz)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>MuseScore File (*.mscx)</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Finish</source>
+        <translation>&amp;Terminer</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>MuseScore: Save Score</source>
-        <translation type="unfinished"></translation>
+        <source>Cancel</source>
+        <translation>Annuler</translation>
     </message>
     <message>
-        <location line="+27"/>
-        <source>The following file is locked: 
-%1 
-
-Try saving to a different location.</source>
-        <translation type="unfinished"></translation>
+        <location line="+2"/>
+        <source>&amp;Help</source>
+        <translation>&amp;Aide</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location line="+15"/>
-        <location line="+18"/>
-        <location line="+25"/>
-        <location line="+12"/>
-        <location line="+11"/>
-        <source>MuseScore: Save File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-50"/>
-        <source>Open Temp File
-</source>
-        <translation type="unfinished"></translation>
+        <location line="-8"/>
+        <source>&amp;Next</source>
+        <translation>&amp;Suivant</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+487"/>
-        <location line="+109"/>
+        <source>&amp;Next &gt;</source>
+        <translation>&amp;Suivant &gt;</translation>
+    </message>
+</context>
+<context>
+    <name>QWorkspace</name>
+    <message>
+        <location filename="../src/gui/widgets/qworkspace.cpp" line="+1094"/>
+        <source>&amp;Restore</source>
+        <translation>&amp;Restaurer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Move</source>
+        <translation>&amp;Déplacer</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Size</source>
+        <translation>&amp;Redimensionner</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Mi&amp;nimize</source>
+        <translation>Réd&amp;uire</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Ma&amp;ximize</source>
+        <translation>Ma&amp;ximiser</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>&amp;Close</source>
+        <translation>&amp;Fermer</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Stay on &amp;Top</source>
+        <translation>&amp;Rester au premier plan</translation>
+    </message>
+    <message>
+        <location line="-993"/>
+        <source>Minimize</source>
+        <translation>Réduire</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Restore Down</source>
+        <translation>Restaurer en bas</translation>
+    </message>
+    <message>
+        <location line="-4"/>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <location line="+998"/>
+        <location line="+1059"/>
+        <source>Sh&amp;ade</source>
+        <translation>&amp;Enrouler</translation>
+    </message>
+    <message>
+        <location line="-278"/>
+        <location line="+60"/>
+        <source>%1 - [%2]</source>
+        <translation>%1 - [%2]</translation>
+    </message>
+    <message>
+        <location line="+214"/>
+        <source>&amp;Unshade</source>
+        <translation>&amp;Dérouler</translation>
+    </message>
+</context>
+<context>
+    <name>QXml</name>
+    <message>
+        <location filename="../src/xml/sax/qxml.cpp" line="+58"/>
+        <source>no error occurred</source>
+        <translation>aucune erreur ne s&apos;est produite</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>error triggered by consumer</source>
+        <translation>erreur déclenchée par le consommateur</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>unexpected end of file</source>
+        <translation>fin de fichier impromptue</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>more than one document type definition</source>
+        <translation>plus d&apos;une définition de type de document</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>error occurred while parsing element</source>
+        <translation>une erreur s&apos;est produite lors de l&apos;analyse d&apos;un élément</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>tag mismatch</source>
+        <translation>balise débalancée</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>error occurred while parsing content</source>
+        <translation>une erreur s&apos;est produise lors de l&apos;analyse du contenu</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>unexpected character</source>
+        <translation>caractère impromptu</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>invalid name for processing instruction</source>
+        <translation>nom d&apos;instruction de traitement invalide</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>version expected while reading the XML declaration</source>
+        <translation>version attendue dans la déclaration XML</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>wrong value for standalone declaration</source>
+        <translation>valeur invalide pour déclaration autonome</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>error occurred while parsing document type definition</source>
+        <translation>une erreur s&apos;est produite lors de l&apos;analyse d&apos;une définition de type de document</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>letter is expected</source>
+        <translation>lettre attendue</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>error occurred while parsing comment</source>
+        <translation>une erreur s&apos;est produise lors de l&apos;analyse d&apos;un commentaire</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>error occurred while parsing reference</source>
+        <translation>une erreur s&apos;est produite lors de l&apos;analyse d&apos;une référence</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>internal general entity reference not allowed in DTD</source>
+        <translation>appel d&apos;entité interne générale non permis dans la DTD</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>external parsed general entity reference not allowed in attribute value</source>
+        <translation>appel d&apos;entité externe parsée  non permis dans la valeur d&apos;un attribut</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>external parsed general entity reference not allowed in DTD</source>
+        <translation>appel d&apos;entité externe parsée générale non permis dans la DTD</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>unparsed entity reference in wrong context</source>
+        <translation>appel d&apos;entité non parsée dans un contexte invalide</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>recursive entities</source>
+        <translation>entités récursives</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>error in the text declaration of an external entity</source>
+        <translation>erreur dans la déclaration de texte d&apos;une entité externe</translation>
+    </message>
+    <message>
+        <location line="-11"/>
+        <source>encoding declaration or standalone declaration expected while reading the XML declaration</source>
+        <translation>déclaration d&apos;encodage ou déclaration autonome attendue dans la déclaration XML</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>standalone declaration expected while reading the XML declaration</source>
+        <translation>déclaration autonome attendue dans la déclaration XML</translation>
+    </message>
+</context>
+<context>
+    <name>QXmlStream</name>
+    <message>
+        <location filename="../src/corelib/xml/qxmlstream.cpp" line="+592"/>
+        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+1769"/>
+        <source>Extra content at end of document.</source>
+        <translation>Conteny supplémentaire à la fin du document.</translation>
+    </message>
+    <message>
+        <location line="+222"/>
+        <source>Invalid entity value.</source>
+        <translation>Valeur de l&apos;entité invalide.</translation>
+    </message>
+    <message>
         <location line="+107"/>
-        <source>
-failed: </source>
-        <translation type="unfinished"></translation>
+        <source>Invalid XML character.</source>
+        <translation>Caractère XML invalide.</translation>
     </message>
     <message>
-        <location line="-691"/>
-        <location line="+4"/>
-        <source>MuseScore: Save File failed: </source>
-        <translation type="unfinished"></translation>
+        <location line="+259"/>
+        <source>Sequence &apos;]]&gt;&apos; not allowed in content.</source>
+        <translation>Séquence &apos;]]&gt;&apos; interdite dans le contenu.</translation>
     </message>
     <message>
-        <location line="+12"/>
-        <source>removing old backup file </source>
-        <translation type="unfinished"></translation>
+        <location line="+309"/>
+        <source>Namespace prefix &apos;%1&apos; not declared</source>
+        <translation>Le préfixe de namespace &apos;%1&apos; non déclaré</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <source> failed</source>
-        <translation type="unfinished"></translation>
+        <location line="+78"/>
+        <source>Attribute redefined.</source>
+        <translation>Attribut redéfini.</translation>
     </message>
     <message>
-        <location line="+12"/>
-        <source>renaming old file &lt;</source>
-        <translation type="unfinished"></translation>
+        <location line="+115"/>
+        <source>Unexpected character &apos;%1&apos; in public id literal.</source>
+        <translation>Caractère &apos;%1&apos; inattendu dans un &apos;public id literal&apos;.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>&gt; to backup &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>&gt; failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>renaming temp. file &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>&gt; to &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>&gt; failed:
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>PDF File (*.pdf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>PostScript File (*.ps)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished"></translation>
+        <location line="+28"/>
+        <source>Invalid XML version string.</source>
+        <translation>Version XML invalide.</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"></translation>
+        <source>Unsupported XML version.</source>
+        <translation>Version XML non supportée.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <location line="+43"/>
-        <location line="+32"/>
-        <source>MuseScore: Save As</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-32"/>
-        <source>cannot determine file type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+347"/>
-        <location line="+109"/>
-        <source>Open File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+94"/>
-        <source>MuseScore: Save Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>MuseScore Style File (*.mss)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Open Style File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>MuseScore: Open Style file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Write Style failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>MuseScore: Write Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+150"/>
-        <source>MuseScore: Read File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/importmidi.cpp" line="+1"/>
-        <source>Load failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/transposedialog.cpp" line="+103"/>
-        <source>MuseScore: transpose</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>There is nothing selected. Transpose whole score?</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ScoreView</name>
-    <message>
-        <location filename="../../mscore/scoreview.cpp" line="+796"/>
-        <source>Select</source>
-        <translation type="unfinished">Sélectionner</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>More...</source>
-        <translation type="unfinished">Reste...</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+88"/>
-        <source>Object Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-33"/>
-        <source>Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Drumroll Editor...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Pianoroll Editor...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Staff Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Split Staff...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+710"/>
-        <source>unknown drop format: formats %1:
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SegmentBase</name>
-    <message>
-        <location filename="../../mscore/segment.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>Clef Segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Key Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Time Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Begin Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Chord/Rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Breath Segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>End Bar Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Time Signature Announce</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Lyrics:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Segment Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SelectDialog</name>
-    <message>
-        <location filename="../../mscore/select.ui" line="+14"/>
-        <source>MuseScore: Select</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>Search for</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Element Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>same staff</source>
-        <translation type="unfinished"></translation>
+        <location line="+23"/>
+        <source>%1 is an invalid encoding name.</source>
+        <translation>%1 n&apos;est pas un encodage valide.</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>same voice</source>
-        <translation type="unfinished"></translation>
+        <source>Encoding %1 is unsupported</source>
+        <translation>Encodage %1 n&apos;est pas supporté</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>same system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>replace selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>add to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>search in selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>subtract from selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SelectInstrument</name>
-    <message>
-        <location filename="../../mscore/selectinstr.ui" line="+14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>show more</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Seq</name>
-    <message>
-        <location filename="../../mscore/seq.cpp" line="+207"/>
-        <source>Init audio driver failed.
-Sequencer will be disabled.</source>
-        <translation type="unfinished"></translation>
+        <source>Invalid XML encoding name.</source>
+        <translation type="obsolete">Encodage XML invalide.</translation>
     </message>
     <message>
         <location line="+16"/>
-        <location line="+14"/>
-        <source>MuseScore: Load SoundFont</source>
-        <translation type="unfinished"></translation>
+        <source>Standalone accepts only yes or no.</source>
+        <translation>&apos;Standalone&apos; n&apos;accepte que &apos;yes&apos; ou &apos;no&apos;.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Invalid attribute in XML declaration.</source>
+        <translation>Attribut invalide dans la déclaration XML.</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Premature end of document.</source>
+        <translation>Fin de document prématurée.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Invalid document.</source>
+        <translation>Document invalide.</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>Expected </source>
+        <translation>Attendu </translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>, but got &apos;</source>
+        <translation>, mais eu &apos;</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Unexpected &apos;</source>
+        <translation>Inattendu &apos;</translation>
+    </message>
+    <message>
+        <location line="+210"/>
+        <source>Expected character data.</source>
+        <translation>Character data attendu.</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/xml/qxmlstream_p.h" line="-995"/>
+        <source>Recursive entity detected.</source>
+        <translation>Entité recursive détectée.</translation>
+    </message>
+    <message>
+        <location line="+516"/>
+        <source>Start tag expected.</source>
+        <translation>Balise ouvrante attendue.</translation>
+    </message>
+    <message>
+        <location line="+222"/>
+        <source>XML declaration not at start of document.</source>
+        <translation>Déclaration XML après le début du document.</translation>
+    </message>
+    <message>
+        <location line="-31"/>
+        <source>NDATA in parameter entity declaration.</source>
+        <translation>NDATA dans une déclaration d&apos;entité paramètre.</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>%1 is an invalid processing instruction name.</source>
+        <translation>%1 est un nom d&apos;instruction de traitement invalide.</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Invalid processing instruction name.</source>
+        <translation>Nom d&apos;instruction de traitement invalide.</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/xml/qxmlstream.cpp" line="-521"/>
+        <location line="+12"/>
+        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+164"/>
+        <location line="+53"/>
+        <source>Illegal namespace declaration.</source>
+        <translation>Déclaration de namespace illégale.</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+15"/>
+        <source>Invalid XML name.</source>
+        <translation>Nom XML invalide.</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Opening and ending tag mismatch.</source>
+        <translation>Ouverture et fermeture de balise invalide.</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Reference to unparsed entity &apos;%1&apos;.</source>
+        <translation>Référence vers une entité non analysée &apos;%1&apos;.</translation>
     </message>
     <message>
         <location line="-13"/>
-        <source>No SoundFont configured
-Playback will be disabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Loading SoundFont
-&quot;%1&quot;
-failed. Playback will be disabled.
-
-Go to Display &gt; Synthesizer 
-and check that the file location is correct</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ShortcutCaptureDialog</name>
-    <message>
-        <location filename="../../mscore/shortcutcapturedialog.cpp" line="+80"/>
-        <source>Shortcut conflicts with </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Undefined</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ShortcutCaptureDialogBase</name>
-    <message>
-        <location filename="../../mscore/shortcutcapturedialog.ui" line="+13"/>
-        <source>Enter shortcut sequence</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Press up to 4 keys to enter shortcut sequence!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Old shortcut:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>New shortcut:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Clear</source>
-        <translation type="unfinished">Effacer</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>OK</source>
-        <translation type="unfinished">OK</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
-    </message>
-</context>
-<context>
-    <name>ShowChordWidget</name>
-    <message>
-        <location filename="../../mscore/inspector.cpp" line="+662"/>
-        <source>auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>beam begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>beam mid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>beam end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>no beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Up</source>
-        <translation type="unfinished">Haut</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Down</source>
-        <translation type="unfinished">Bas</translation>
-    </message>
-</context>
-<context>
-    <name>ShowClefWidget</name>
-    <message>
-        <location line="+378"/>
-        <source>Clef Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ShowRestWidget</name>
-    <message>
-        <location line="-118"/>
-        <source>auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>beam begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>beam mid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>beam end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>no beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Segment:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SlurBase</name>
-    <message>
-        <location filename="../../mscore/slur.ui" line="+13"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>Slur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Slur End</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Staff:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Voice:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Tick:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SlurPropertyBase</name>
-    <message>
-        <location filename="../../mscore/slurproperties.ui" line="+14"/>
-        <source>Volta Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>Slur Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>solid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>dotted</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SlurSegment</name>
-    <message>
-        <location filename="../../mscore/slur.cpp" line="+406"/>
-        <source>Edit Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Slur Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SlurTieBase</name>
-    <message>
-        <location filename="../../mscore/slurtie.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+97"/>
-        <source>startElement</source>
-        <extracomment>do not translate</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>endElement</source>
-        <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SplitStaff</name>
-    <message>
-        <location filename="../../mscore/splitstaff.ui" line="+20"/>
-        <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Split Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Split Point</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StaffText</name>
-    <message>
-        <location filename="../../mscore/stafftext.cpp" line="+79"/>
-        <source>Staff Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StaffTextProperties</name>
-    <message>
-        <location filename="../../mscore/stafftext.ui" line="+13"/>
-        <source>MuseScore: Staff Text Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Midi Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/stafftext.cpp" line="+32"/>
-        <source>normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SymbolDialog</name>
-    <message>
-        <location filename="../../mscore/symboldialog.cpp" line="+49"/>
-        <source>MuseScore: Symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SymbolDialogBase</name>
-    <message>
-        <location filename="../../mscore/symboldialog.ui" line="+13"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>System Flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
-    </message>
-</context>
-<context>
-    <name>SynthControl</name>
-    <message>
-        <location filename="../../mscore/synthcontrol.ui" line="+14"/>
-        <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>Rev</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Cho</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>master volume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Vol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Loaded SoundFont</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <location line="+193"/>
-        <location line="+164"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-346"/>
-        <source>Master Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>SoundFont</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Reverb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Room Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Damp:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Width:</source>
-        <translation type="unfinished">Largeur :</translation>
-    </message>
-    <message>
-        <location line="+41"/>
-        <location line="+164"/>
-        <source>Preset:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-150"/>
-        <location line="+164"/>
-        <source>not implemented</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-112"/>
-        <source>Chorus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Sine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Triangle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Number:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Speed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Depth:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../mscore/synthcontrol.cpp" line="+155"/>
-        <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TempoProperties</name>
-    <message>
-        <location filename="../../mscore/tempoproperties.ui" line="+13"/>
-        <source>MuseScore: Tempo Text Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>Tempo Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Tempo:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>BPM</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TempoText</name>
-    <message>
-        <location filename="../../mscore/tempotext.cpp" line="+76"/>
-        <source>Tempo Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Text</name>
-    <message>
-        <location filename="../../mscore/text.cpp" line="+1316"/>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextBase</name>
-    <message>
-        <location filename="../../mscore/text.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Text</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Text:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Offset:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+54"/>
-        <source>MM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Space</source>
-        <translation type="unfinished">Espace</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Abs.:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Rel.:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>TextStyle:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextC</name>
-    <message>
-        <location filename="../../mscore/text.cpp" line="+176"/>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextLineBase</name>
-    <message>
-        <location filename="../../mscore/textline.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>TextLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>line width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>BeginText</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>ContinueText</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextLineSegment</name>
-    <message>
-        <location filename="../../mscore/textline.cpp" line="-45"/>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Line Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextPaletteBase</name>
-    <message>
-        <location filename="../../mscore/textpalette.ui" line="+77"/>
-        <source>MuseScore: Special Text Symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+84"/>
-        <source>Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextProp</name>
-    <message>
-        <location filename="../../mscore/textproperties.cpp" line="+55"/>
-        <source>mm</source>
-        <comment>millimeter unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextProperties</name>
-    <message>
-        <location filename="../../mscore/text.cpp" line="-55"/>
-        <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>apply to all elements of same type</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextPropertiesBase</name>
-    <message>
-        <location filename="../../mscore/textproperties.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Font:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>font face</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Size:</source>
-        <translation type="unfinished">Taille :</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>font point size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Style:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>bold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>italic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <source>underline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>U</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>Align:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>align left edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <location line="+23"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-95"/>
-        <source>center text on reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>align right edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>align top edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>center text vertical to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+27"/>
-        <location line="+335"/>
-        <source>Color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-316"/>
-        <source>text color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>System Flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>X:</source>
-        <extracomment>coordinate</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>horizontal offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>relX:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+59"/>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-36"/>
-        <source>Y:</source>
-        <extracomment>coordinate</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>vertical offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>relY:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>Unit:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>offset is absolute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>MM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>offset in Space units</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Space</source>
-        <translation type="unfinished">Espace</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>enable text frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>draw circled frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>draw boxed frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Box</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Width:</source>
-        <translation type="unfinished">Largeur :</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>frame line width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+20"/>
-        <source>mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-10"/>
-        <source>Margin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>frame inner margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>Round:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>corner round</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>frame color</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextStyleDialog</name>
-    <message>
-        <location filename="../../mscore/textstyle.cpp" line="+38"/>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextTools</name>
-    <message>
-        <location filename="../../mscore/textpalette.cpp" line="+55"/>
-        <source>Text Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Text Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TimeDialog</name>
-    <message>
-        <location filename="../../mscore/timedialog.cpp" line="+37"/>
-        <source>MuseScore: Time Signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
-        <source>4/4 common time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>2/2 alla breve</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TimeDialogBase</name>
-    <message>
-        <location filename="../../mscore/timedialog.ui" line="+78"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+101"/>
-        <source>Create Time Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+58"/>
-        <location line="+26"/>
-        <location line="+26"/>
-        <source>+</source>
-        <translation type="unfinished">+</translation>
-    </message>
-    <message>
-        <location line="+118"/>
-        <source>add time signature to palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TimesigWizard</name>
-    <message>
-        <location filename="../../mscore/timesigwizard.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Enter Time Signature:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Time Signature: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <location line="+70"/>
-        <source>/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-41"/>
-        <source>Pickup Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Time Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+55"/>
-        <source>Enter Number of Measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+39"/>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TransposeDialogBase</name>
-    <message>
-        <location filename="../../mscore/transposedialog.ui" line="+14"/>
-        <source>MuseScore: Transpose</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Transpose by Key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Cb major / Ab minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Gb major / Eb minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Db major / Bb minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Ab major / F minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Eb major / C minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Bb major / G minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>F major / D minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>C major / A minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>G major / E minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>D major / B minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>A major / F# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>E major / C# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>B major / G# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>F# major / D# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>C# major / A# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <location line="+51"/>
-        <source>Up</source>
-        <translation type="unfinished">Haut</translation>
-    </message>
-    <message>
-        <location line="-44"/>
-        <location line="+188"/>
-        <source>Down</source>
-        <translation type="unfinished">Bas</translation>
-    </message>
-    <message>
-        <location line="-181"/>
-        <source>Closest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Transpose by Interval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Perfect Unison</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Unison</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Minor Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Major Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Minor Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Major Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Perfect Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Perfect Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Minor Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Major Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Minor Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Major Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Augmented Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Diminished Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Perfect Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <source>Options</source>
-        <translation type="unfinished">Options</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Transpose key signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Transpose chord names</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Single sharps and flats only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Use double sharps and flats</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TremoloBase</name>
-    <message>
-        <location filename="../../mscore/tremolo.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-    <message>
-        <location line="+23"/>
-        <source>firstChord</source>
-        <extracomment>do not translate</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>secondChord</source>
-        <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Tuplet</name>
-    <message>
-        <location filename="../../mscore/tuplet.cpp" line="+563"/>
-        <source>Tuplet Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TupletBase</name>
-    <message>
-        <location filename="../../mscore/tuplet.ui" line="+14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulaire</translation>
-    </message>
-</context>
-<context>
-    <name>TupletDialog</name>
-    <message>
-        <location filename="../../mscore/tupletdialog.ui" line="+14"/>
-        <source>MuseScore: create tuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>Type</source>
-        <translation type="unfinished">Type</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>relation:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+57"/>
-        <source>Format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>relation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+39"/>
-        <source>nothing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-29"/>
-        <source>Bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>auto bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TupletProperties</name>
-    <message>
-        <location filename="../../mscore/tupletproperties.ui" line="+13"/>
-        <source>MuseScore: Tuplet Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+26"/>
-        <source>Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>relation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+36"/>
-        <source>nothing</source>
-        <translation type="unfinished"></translation>
+        <location line="+61"/>
+        <location line="+40"/>
+        <source>Entity &apos;%1&apos; not declared.</source>
+        <translation>Entité &apos;%1&apos; non déclarée.</translation>
     </message>
     <message>
         <location line="-26"/>
-        <source>Bracket</source>
-        <translation type="unfinished"></translation>
+        <source>Reference to external entity &apos;%1&apos; in attribute value.</source>
+        <translation>Référence vers une entité externe &apos;%1&apos; dans la valeur de l&apos;attribut.</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>Invalid character reference.</source>
+        <translation>Référence vers un caractère invalide.</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/xml/qxmlstream.cpp" line="-75"/>
+        <location filename="../src/corelib/xml/qxmlstream_p.h" line="-823"/>
+        <source>Encountered incorrectly encoded content.</source>
+        <translation>Encodage du contenu incorrect.</translation>
+    </message>
+    <message>
+        <location line="+274"/>
+        <source>The standalone pseudo attribute must appear after the encoding.</source>
+        <translation>Le pseudo attribut standalone doit apparaître après l&apos;encodage.</translation>
+    </message>
+    <message>
+        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+562"/>
+        <source>%1 is an invalid PUBLIC identifier.</source>
+        <translation>%1 n&apos;est pas un identifiant PUBLIC valide.</translation>
+    </message>
+</context>
+<context>
+    <name>QtXmlPatterns</name>
+    <message>
+        <location filename="../src/xmlpatterns/acceltree/qacceltreebuilder.cpp" line="+205"/>
+        <source>An %1-attribute with value %2 has already been declared.</source>
+        <translation>Un attribute %1 avec la valeur %2 est déjà déclaré.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>An %1-attribute must have a valid %2 as value, which %3 isn&apos;t.</source>
+        <translation>Un attribute %1 doit avoir un %2 valide, %3 ne l&apos;a pas.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/api/qiodevicedelegate.cpp" line="+84"/>
+        <source>Network timeout.</source>
+        <translation>Le réseau ne répond pas.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/api/qxmlserializer.cpp" line="+320"/>
+        <source>Element %1 can&apos;t be serialized because it appears outside the document element.</source>
+        <translation>L&apos;élément %1 ne peut pas être sérialisé parce qu&apos;il est hors de l&apos;élément document.</translation>
+    </message>
+    <message>
+        <source>Attribute element %1 can&apos;t be serialized because it appears at the top level.</source>
+        <translation type="obsolete">L&apos;élément attribute %1 ne peut pas être sérialisé parce qu&apos;il apparaît comme racine.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qabstractdatetime.cpp" line="+80"/>
+        <source>Year %1 is invalid because it begins with %2.</source>
+        <translation>L&apos;année %1 est invalide parce qu&apos;elle commence par %2.</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Day %1 is outside the range %2..%3.</source>
+        <translation>Le jour %1 est hors de l&apos;intervalle %2..%3.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Month %1 is outside the range %2..%3.</source>
+        <translation>Le mois %1 est hors de l&apos;intervalle %2..%3.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Overflow: Can&apos;t represent date %1.</source>
+        <translation>Overflow: ne peut pas représenter la date %1.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Day %1 is invalid for month %2.</source>
+        <translation>Jour %1 est invalide pour le mois %2.</translation>
+    </message>
+    <message>
+        <location line="+49"/>
+        <source>Time 24:%1:%2.%3 is invalid. Hour is 24, but minutes, seconds, and milliseconds are not all 0; </source>
+        <translation>L&apos;heure 24:%1:%2.%3 est invalide. L&apos;heure est 24 mais les minutes, seconndes et millisecondes ne sont pas à 0;</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Time %1:%2:%3.%4 is invalid.</source>
+        <translation>L&apos;heure %1:%2:%3.%4 est invalide.</translation>
+    </message>
+    <message>
+        <location line="+115"/>
+        <source>Overflow: Date can&apos;t be represented.</source>
+        <translation>Overflow : la date ne peut pas être représentée.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qabstractduration.cpp" line="+99"/>
+        <location line="+15"/>
+        <source>At least one component must be present.</source>
+        <translation>Au moins un composant doit être présent.</translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>At least one time component must appear after the %1-delimiter.</source>
+        <translation>Au moins un composant doit apparaître après le délimiteur %1.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qabstractfloatmathematician.cpp" line="+64"/>
+        <source>No operand in an integer division, %1, can be %2.</source>
+        <translation>Pas d&apos;opérande dans une division entière, %1, peut être %2.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>The first operand in an integer division, %1, cannot be infinity (%2).</source>
+        <translation>Le premier opérande dans une division entière, %1, ne peut être infini (%2).</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>The second operand in a division, %1, cannot be zero (%2).</source>
+        <translation>Le second opérande dans une division, %1, ne peut être nul (%2).</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qanyuri_p.h" line="+132"/>
+        <source>%1 is not a valid value of type %2.</source>
+        <translation>%1 n&apos;est pas une valeur valide du type %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qatomiccasters_p.h" line="+223"/>
+        <source>When casting to %1 from %2, the source value cannot be %3.</source>
+        <translation>En castant de %2 vers %1, la valeur source ne peut pas être %3.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qatomicmathematicians.cpp" line="+65"/>
+        <source>Integer division (%1) by zero (%2) is undefined.</source>
+        <translation>Division entière (%1) par zéro (%2) indéfinie.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Division (%1) by zero (%2) is undefined.</source>
+        <translation>Division (%1) par zéro (%2) indéfinie.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Modulus division (%1) by zero (%2) is undefined.</source>
+        <translation>Module division (%1) par zéro (%2) indéfinie.</translation>
+    </message>
+    <message>
+        <location line="+122"/>
+        <location line="+32"/>
+        <source>Dividing a value of type %1 by %2 (not-a-number) is not allowed.</source>
+        <translation>Diviser une valeur du type %1 par %2 (not-a-number) est interdit.</translation>
+    </message>
+    <message>
+        <location line="-20"/>
+        <source>Dividing a value of type %1 by %2 or %3 (plus or minus zero) is not allowed.</source>
+        <translation>Diviser une valeur de type %1 par %2 ou %3 (plus ou moins zéro) est interdit.</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Multiplication of a value of type %1 by %2 or %3 (plus or minus infinity) is not allowed.</source>
+        <translation>La multiplication d&apos;une valeur du type %1 par %2 ou %3 (plus ou moins infini) est interdite.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qatomicvalue.cpp" line="+79"/>
+        <source>A value of type %1 cannot have an Effective Boolean Value.</source>
+        <translation>Une valeur de type %1 ne peut pas avoir une Effective Boolean Value.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qboolean.cpp" line="+78"/>
+        <source>Effective Boolean Value cannot be calculated for a sequence containing two or more atomic values.</source>
+        <translation>Effective Boolean Value ne peut être calculée pour une séquence contenant deux ou plus valeurs atomiques.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qderivedinteger_p.h" line="+402"/>
+        <source>Value %1 of type %2 exceeds maximum (%3).</source>
+        <translation>La valeur %1 de type %2 excède le maximum (%3).</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Value %1 of type %2 is below minimum (%3).</source>
+        <translation>La valeur %1 de type %2 est inférieur au minimum (%3).</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/data/qhexbinary.cpp" line="+91"/>
+        <source>A value of type %1 must contain an even number of digits. The value %2 does not.</source>
+        <translation>Une valeur de type %1 doit contenir un nombre pair de chiffre. La valeur %2 n&apos;est pas conforme.</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>%1 is not valid as a value of type %2.</source>
+        <translation>%1 n&apos;est pas une valeur valide de type %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qarithmeticexpression.cpp" line="+207"/>
+        <source>Operator %1 cannot be used on type %2.</source>
+        <translation>L&apos;opérateur %1 ne peut pas être utilisé pour le type %2.</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Operator %1 cannot be used on atomic values of type %2 and %3.</source>
+        <translation>L&apos;opérateur %1 ne peut pas être utilisé pour des valeurs atomiques de type %2 ou %3.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qattributenamevalidator.cpp" line="+66"/>
+        <source>The namespace URI in the name for a computed attribute cannot be %1.</source>
+        <translation>L&apos;URI de namespace dans le nom d&apos;un attribut calculé ne peut pas être %1.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>The name for a computed attribute cannot have the namespace URI %1 with the local name %2.</source>
+        <translation>Le nom d&apos;un attribut calculé ne peut pas avoir l&apos;URI de namespace %1 avec le nom local %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qcastas.cpp" line="+88"/>
+        <source>Type error in cast, expected %1, received %2.</source>
+        <translation>Erreur de type lors du cast, attendu %1 mais reçu %2.</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>When casting to %1 or types derived from it, the source value must be of the same type, or it must be a string literal. Type %2 is not allowed.</source>
+        <translation>En castant vers %1 ou des types dérivés, la valeur source doit être du même type ou une chaîne. Le type %2 n&apos;est pas autorisé.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qcastingplatform.cpp" line="+134"/>
+        <source>No casting is possible with %1 as the target type.</source>
+        <translation>Aucun cast n&apos;est possible avec %1 comme type de destination.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>It is not possible to cast from %1 to %2.</source>
+        <translation>Il est impossible de caster de %1 en %2.</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>Casting to %1 is not possible because it is an abstract type, and can therefore never be instantiated.</source>
+        <translation>Caster vers %1 est impossible parce que c&apos;est un type abstrait qui ne peut donc être instancié.</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>It&apos;s not possible to cast the value %1 of type %2 to %3</source>
+        <translation>I lest impossible de caster la valeur %1 de type %2 en %3</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Failure when casting from %1 to %2: %3</source>
+        <translation>Echec en castant de %1 ver %2 : %3</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qcommentconstructor.cpp" line="+67"/>
+        <source>A comment cannot contain %1</source>
+        <translation>Un commentaire ne peut pas contenir %1</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>A comment cannot end with a %1.</source>
+        <translation>Un commentaire ne peut pas finir par %1.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qcomparisonplatform.cpp" line="+167"/>
+        <source>No comparisons can be done involving the type %1.</source>
+        <translation>Aucune comparaison ne peut être faite avec le type %1.</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Operator %1 is not available between atomic values of type %2 and %3.</source>
+        <translation>L&apos;opérateur %1 n&apos;est pas disponible entre valeurs atomiques de type %2 et %3.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qdocumentcontentvalidator.cpp" line="+86"/>
+        <source>An attribute node cannot be a child of a document node. Therefore, the attribute %1 is out of place.</source>
+        <translation>Un noeuds attribut ne peut être un fils d&apos;un noeuds document. C&apos;est pourquoi l&apos;attribut %1 est mal placé.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qexpressionfactory.cpp" line="+169"/>
+        <source>A library module cannot be evaluated directly. It must be imported from a main module.</source>
+        <translation>Un module de bibliothèque ne peut pas être évalué directement. Il doit être importé d&apos;un module principal.</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>No template by name %1 exists.</source>
+        <translation>Aucun template nommé %1 n&apos;existe.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qgenericpredicate.cpp" line="+106"/>
+        <source>A value of type %1 cannot be a predicate. A predicate must have either a numeric type or an Effective Boolean Value type.</source>
+        <translation>Une valeur de type %1 ne peut être un prédicat. Un prédicat doit être de type numérique ou un Effective Boolean Value.</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>A positional predicate must evaluate to a single numeric value.</source>
+        <translation>Un prédicat de position doit être évalué en une unique valeur numérique.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qncnameconstructor_p.h" line="+113"/>
+        <source>The target name in a processing instruction cannot be %1 in any combination of upper and lower case. Therefore, is %2 invalid.</source>
+        <translation>Le nom de destination dans une instruction de traitement ne peut être %1. %2 est invalide.</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>%1 is not a valid target name in a processing instruction. It must be a %2 value, e.g. %3.</source>
+        <translation>%1 n&apos;est pas un nom de destination valide dans une instruction de traitement. Ce doit être une valeur %2, par ex. %3.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qpath.cpp" line="+109"/>
+        <source>The last step in a path must contain either nodes or atomic values. It cannot be a mixture between the two.</source>
+        <translation>La dernière étape dans un chemin doit contenir soit des noeuds soit des valeurs atomiques. Cela ne peut pas être un mélange des deux.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qprocessinginstructionconstructor.cpp" line="+84"/>
+        <source>The data of a processing instruction cannot contain the string %1</source>
+        <translation>Les données d&apos;une instruction de traitement ne peut contenir la chaîne %1</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qqnameconstructor.cpp" line="+82"/>
+        <source>No namespace binding exists for the prefix %1</source>
+        <translation>Aucun lien de namespace n&apos;existe pour le préfixe %1</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/expr/qqnameconstructor_p.h" line="+156"/>
+        <source>No namespace binding exists for the prefix %1 in %2</source>
+        <translation>Aucun lien de namespace n&apos;existe pour le préfixe %1 dans %2</translation>
     </message>
     <message>
         <location line="+12"/>
-        <source>auto bracket</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/functions/qqnamefns.cpp" line="+69"/>
+        <source>%1 is an invalid %2</source>
+        <translation>%1 est un ivalide %2</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/xmlpatterns/functions/qabstractfunctionfactory.cpp" line="+77"/>
+        <source>%1 takes at most %n argument(s). %2 is therefore invalid.</source>
+        <translation>
+            <numerusform>%1 prend au maximum %n argument. %2 est donc invalide.</numerusform>
+            <numerusform>%1 prend au maximum %n arguments. %2 est donc invalide.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location line="+11"/>
+        <source>%1 requires at least %n argument(s). %2 is therefore invalid.</source>
+        <translation>
+            <numerusform>%1 requiert au moins %n argument. %2 est donc invalide.</numerusform>
+            <numerusform>%1 requiert au moins %n arguments. %2 est donc invalide.</numerusform>
+        </translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>bracket</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/functions/qaggregatefns.cpp" line="+120"/>
+        <source>The first argument to %1 cannot be of type %2. It must be a numeric type, xs:yearMonthDuration or xs:dayTimeDuration.</source>
+        <translation>Le premier argument de %1 ne peut être du type %2. Il doit être de type numérique, xs:yearMonthDuration ou xs:dayTimeDuration.</translation>
     </message>
-</context>
-<context>
-    <name>UpdateChecker</name>
     <message>
-        <location filename="../../mscore/updatechecker.cpp" line="+79"/>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <location line="+74"/>
+        <source>The first argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
+        <translation>Le premier argument de %1 ne peut être du type %2. Il doit être de type %3, %4 ou %5.</translation>
+    </message>
+    <message>
+        <location line="+91"/>
+        <source>The second argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
+        <translation>Le deuxième argument de %1 ne peut être du type %2. Il doit être de type %3, %4 ou %5.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qassemblestringfns.cpp" line="+88"/>
+        <source>%1 is not a valid XML 1.0 character.</source>
+        <translation>%1 n&apos;est pas un caractère XML 1.0 valide.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qcomparingaggregator.cpp" line="+197"/>
+        <source>The first argument to %1 cannot be of type %2.</source>
+        <translation>Le premier argument de %1 ne peut être du type %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qdatetimefn.cpp" line="+86"/>
+        <source>If both values have zone offsets, they must have the same zone offset. %1 and %2 are not the same.</source>
+        <translation>Si les deux valeurs ont des décalages de zone, elle doivent avoir le même. %1 et %2 sont différents.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qerrorfn.cpp" line="+61"/>
+        <source>%1 was called.</source>
+        <translation>%1 a été appelé.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qpatternmatchingfns.cpp" line="+94"/>
+        <source>%1 must be followed by %2 or %3, not at the end of the replacement string.</source>
+        <translation>%1 doit être suivi par %2 ou %3, et non à la fin de la chaîne de remplacement.</translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>In the replacement string, %1 must be followed by at least one digit when not escaped.</source>
+        <translation>Dans la chaîne de remplacement, %1 doit être suivi par au moins un chiffre s&apos;il n&apos;est pas échappé.</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>In the replacement string, %1 can only be used to escape itself or %2, not %3</source>
+        <translation>Dans la chaîne de remplacement, %1 peut seulement être utilisé pour échapper lui-même ou %2 mais pas %3</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qpatternplatform.cpp" line="+92"/>
+        <source>%1 matches newline characters</source>
+        <translation>%1 correspond à des caractères de saut de ligne</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>Update Available</source>
-        <translation type="unfinished"></translation>
+        <source>%1 and %2 match the start and end of a line.</source>
+        <translation>%1 et %2 correspondent au début et à la fin d&apos;une ligne.</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+1"/>
-        <source>No Update Available</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VBox</name>
-    <message>
-        <location filename="../../mscore/box.cpp" line="+52"/>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
+        <source>Matches are case insensitive</source>
+        <translation>Les correspondances ne sont pas sensibles à la casse</translation>
     </message>
     <message>
-        <location line="+22"/>
-        <source>VBox Properties...</source>
-        <translation type="unfinished"></translation>
+        <location line="+4"/>
+        <source>Whitespace characters are removed, except when they appear in character classes</source>
+        <translation>Les blancs sont supprimés excepté quand ils apparaissent dans les classes de caractère</translation>
     </message>
-</context>
-<context>
-    <name>VoltaPropertyBase</name>
     <message>
-        <location filename="../../mscore/voltaproperties.ui" line="+13"/>
-        <location line="+24"/>
-        <source>Volta Properties</source>
-        <translation type="unfinished"></translation>
+        <location line="+99"/>
+        <source>%1 is an invalid regular expression pattern: %2</source>
+        <translation>%1 est un modèle d&apos;expression régulière invalide: %2</translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>%1 is an invalid flag for regular expressions. Valid flags are:</source>
+        <translation>%1 est un flag invalide pour des expressions régulières. Les flags valides sont :</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qqnamefns.cpp" line="+17"/>
+        <source>If the first argument is the empty sequence or a zero-length string (no namespace), a prefix cannot be specified. Prefix %1 was specified.</source>
+        <translation>Si le premier argument est une sequence vide ou un chaîne vide (sans namespace), un préfixe ne peut être spécifié. Le préfixe %1 a été spécifié.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qsequencefns.cpp" line="+347"/>
+        <source>It will not be possible to retrieve %1.</source>
+        <translation>Il sera impossible de récupérer %1.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qcontextnodechecker.cpp" line="+54"/>
+        <source>The root node of the second argument to function %1 must be a document node. %2 is not a document node.</source>
+        <translation>Le noeuds racine du deuxième argument à la fonction %1 doit être un noeuds document. %2 n&apos;est pas un document.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qsequencegeneratingfns.cpp" line="+279"/>
+        <source>The default collection is undefined</source>
+        <translation>I&apos;l n&apos;y a pas de collection par défaut</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>%1 cannot be retrieved</source>
+        <translation>%1 ne peut pas être récupéré</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qstringvaluefns.cpp" line="+252"/>
+        <source>The normalization form %1 is unsupported. The supported forms are %2, %3, %4, and %5, and none, i.e. the empty string (no normalization).</source>
+        <translation>Le forme de normalisation %1 n&apos;est pas supportée. Les formes supportées sont %2, %3, %4 et %5, et aucun, ie. une chaîne vide (pas de normalisation).</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/functions/qtimezonefns.cpp" line="+87"/>
+        <source>A zone offset must be in the range %1..%2 inclusive. %3 is out of range.</source>
+        <translation>Un décalage de zone doit être dans l&apos;intervalle %1..%2 inclus. %3 est hors de l&apos;intervalle.</translation>
+    </message>
+    <message>
+        <source>%1 is not an whole number of minutes.</source>
+        <translation type="obsolete">%1 n&apos;est pas un nombre complet de minutes.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/janitors/qcardinalityverifier.cpp" line="+58"/>
+        <source>Required cardinality is %1; got cardinality %2.</source>
+        <translation>La cardinalité requise est %1; reçu %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/janitors/qitemverifier.cpp" line="+67"/>
+        <source>The item %1 did not match the required type %2.</source>
+        <translation>L&apos;item %1 ne correspond pas au type requis %2.</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/parser/qquerytransformparser.cpp" line="+379"/>
+        <location line="+7253"/>
+        <source>%1 is an unknown schema type.</source>
+        <translation>%1 est un type de schema inconnu.</translation>
+    </message>
+    <message>
+        <location line="-6971"/>
+        <source>Only one %1 declaration can occur in the query prolog.</source>
+        <translation>Seulement une déclaration %1 peut intervenir lors du prologue de la requête.</translation>
+    </message>
+    <message>
+        <location line="+188"/>
+        <source>The initialization of variable %1 depends on itself</source>
+        <translation>L&apos;initialisation de la variable %1 dépend d&apos;elle-même</translation>
+    </message>
+    <message>
+        <location line="+63"/>
+        <source>No variable by name %1 exists</source>
+        <translation>Aucun variable nommée %1 existe</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/parser/qparsercontext.cpp" line="+93"/>
+        <source>The variable %1 is unused</source>
+        <translation>La variable %1 est inutilisée</translation>
+    </message>
+    <message>
+        <location filename="../src/xmlpatterns/parser/qquerytransformparser.cpp" line="+2841"/>
+        <source>Version %1 is not supported. The supported XQuery version is 1.0.</source>
+        <translation>La version %1 n&apos;est pas supportée. La version de XQuery supportée est 1.0.</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>The encoding %1 is invalid. It must contain Latin characters only, must not contain whitespace, and must match the regular expression %2.</source>
+        <translation>L&apos;encodage %1 est invalide. Il doit contenir uniquement des caractères latins, sans blanc et doit être conforme à l&apos;expression régulière %2.</translation>
+    </message>
+    <message>
+        <location line="+55"/>
+        <source>No function with signature %1 is available</source>
+        <translation>Aucune fonction avec la signature %1 n&apos;est disponible</translation>
+    </message>
+    <message>
+        <location line="+72"/>
+        <location line="+10"/>
+        <source>A default namespace declaration must occur before function, variable, and option declarations.</source>
+        <translation>Un déclaration de namespace par défaut doit être placée avant toute fonction, variable ou declaration d&apos;option.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Namespace declarations must occur before function, variable, and option declarations.</source>
+        <translation>Les declarations de namespace doivent être placées avant tout fonction, variable ou déclaration d&apos;option.</translation>
     </message>
     <message>
         <location line="+11"/>
-        <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <source>Module imports must occur before function, variable, and option declarations.</source>
+        <translation>Les imports de module doivent être placés avant tout fonction, variable ou déclaration d&apos;option.</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>Repeat List:</source>
-        <translation type="unfinished"></translation>
+        <location line="+200"/>
+        <source>It is not possible to redeclare prefix %1.</source>
+        <translation>Il est impossible de redéclarer le préfixe %1.</translation>
     </message>
-</context>
-<context>
-    <name>VoltaSegment</name>
     <message>
-        <location filename="../../mscore/volta.cpp" line="+176"/>
-        <source>Volta Properties...</source>
-        <translation type="unfinished"></translation>
+        <source>Only the prefix %1 can be declared to bind the namespace %2. By default, it is already bound to the prefix %1.</source>
+        <translation type="obsolete">Seul le préfixe %1 peut être déclaré pour lié le namespace %2. Par défaut, il est déjà lié au préfixe %1.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Line Properties...</source>
-        <translation type="unfinished"></translation>
+        <location line="+18"/>
+        <source>Prefix %1 is already declared in the prolog.</source>
+        <translation>Le préfixe %1 est déjà déclaré dans le prologue.</translation>
     </message>
-</context>
-<context>
-    <name>accidental</name>
     <message>
-        <location filename="../../mscore/accidental.cpp" line="+38"/>
-        <source>none</source>
-        <translation type="unfinished"></translation>
+        <location line="+95"/>
+        <source>The name of an option must have a prefix. There is no default namespace for options.</source>
+        <translation>Le nom d&apos;une option doit avoir un préfixe. Il n&apos;y a pas de namespace par défaut pour les options.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <location line="+171"/>
+        <source>The Schema Import feature is not supported, and therefore %1 declarations cannot occur.</source>
+        <translation>La fonctionnalité &quot;Schema Import&quot; n&apos;est pas supportée et les déclarations %1 ne peuvent donc intervenir.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>double sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>double flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>natural</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>(sharp)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>(flat)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>(double sharp)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>(double flat)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>(natural)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>[sharp]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>[flat]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>[double sharp]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>[double flat]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>[natural]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>flat-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat-slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>mirrored-flat2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>mirrored-flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>mirrored-flat-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat-flat-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>sharp-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp-slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp-slash3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp-slash4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>sharp arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>natural arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>natural arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>natural arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>action</name>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="+33"/>
-        <source>Local handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show local handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>File open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Open...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Load score from file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>File save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Save</source>
-        <translation type="unfinished">Enregistrer</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Save score to file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>File save as</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Save As...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Save score under a new file name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>File save a copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Save a Copy...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Save a copy of the score in addition to the current file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>File reload</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Reload</source>
-        <translation type="unfinished">Recharger</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Reload score from file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>File close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Close current score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>file new</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>New...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Create new score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Print</source>
-        <translation type="unfinished">Impr écran</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Print...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Print score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <source>Undo</source>
-        <translation type="unfinished">Annuler</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Undo last change</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <source>Redo</source>
-        <translation type="unfinished">Répéter</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Redo last undo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <source>Cut</source>
-        <translation type="unfinished">Couper</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+3"/>
-        <source>Copy</source>
-        <translation type="unfinished">Copier</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+3"/>
-        <source>Paste</source>
-        <translation type="unfinished">Coller</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+4"/>
-        <source>Show instruments dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Instruments...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Show clefs palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Clefs...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>show keys signatures palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Key Signatures...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show key signatures palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Show symbols palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Symbols...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Show time signatures palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Time Signatures...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Show dynamics palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Dynamics...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Note input mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <location line="+1224"/>
-        <source>Note Input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1217"/>
-        <location line="+4"/>
-        <source>Pitch spell</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Pitch Spell</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter unison above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Unison Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter second above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Second Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter third above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Third Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter fourth above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Fourth Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter fifth above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Fifth Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter sixth above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Sixth Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter seventh above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Seventh Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter octave above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Octave Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter ninth above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Ninth Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter second below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Second Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter third below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Third Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter fourth below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Fourth Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter fifth below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Fifth Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter sixth below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Sixth Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter seventh below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Seventh Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter octave below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Octave Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter ninth below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Ninth Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter note A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter note B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter note C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter note D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter note E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter note F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <location line="+1661"/>
-        <source>F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1655"/>
-        <location line="+4"/>
-        <source>Enter note G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add note A to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Add A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add note B to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Add B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add note C to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Add C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add note D to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Add D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add note E to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Add E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add note F to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Add F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add note G to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Add G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Enter rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+4"/>
-        <source>Add staccato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Staccato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add trill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Trill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>More stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Add More Stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Add more stretch to selected measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Less stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Add Less Stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Add less stretch to selected measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Reset Beam Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Reset beam mode of selected measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+4"/>
-        <source>Flip direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Flip Direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+4"/>
-        <source>Pitch up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Up</source>
-        <translation type="unfinished">Haut</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Pitch up octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Up Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Pitch up by an octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Pitch up note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Up Note in Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Go to higher pitched note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+4"/>
-        <source>Go to top note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Top Note in Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Move up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>up+shift+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+4"/>
-        <source>Pitch down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Down</source>
-        <translation type="unfinished">Bas</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Pitch down octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Down octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Pitch down by an octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Pitch down note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Down Note in Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Go to lower pitched note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+4"/>
-        <source>Go to bottom note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Bottom Note in Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Move down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>down+shift+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+4"/>
-        <location line="+953"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Previous chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-958"/>
-        <source>Previous Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <location line="+953"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Previous measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-958"/>
-        <source>Previous Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <location line="+953"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Next chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-958"/>
-        <source>Next Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <location line="+953"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Next measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-958"/>
-        <source>Next Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>add previous chord to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>left+shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>select to beginning of measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>left+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>add next chord to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>right+shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>select to end of measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>right+ctrl+shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>select to beginning of line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>shift+home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>select to end of line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>shift+end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>select to beginning of score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>ctrl+shift+home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>select to end of score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>ctrl+shift+end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>add staff above to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>add staff below to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>page-prev</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>page-next</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>page-top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>page-end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>add slur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>crescendo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>decrescendo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>ESCAPE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location line="+3"/>
-        <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Delete contents of the selected measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Timewise Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Delete element and duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+4"/>
-        <source>Delete selected measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Append measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Append Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Append measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Append Measures...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Insert measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Insert Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Insert measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Insert Measures...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Insert Vertical Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Append Horizontal Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Append Vertical Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Duplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Triplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Quadruplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Quintuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Sextuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Septuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Octuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Nonuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Other Tuplets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Other...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>note longa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Longa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>note breve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Double whole note (breve)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad note 1/1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Whole note (semibreve)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad note 1/2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Half note (minim)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad note 1/4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Quarter note (crochet)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad note 1/8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Eighth note (quaver)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad note 1/16</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>16th note (semiquaver)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad note 1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>32nd note (demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad note 1/64</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>64th note (semi-demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad double dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Double dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>tie</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>pad rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>double sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>natural</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>double flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>acciaccatura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>appoggiatura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>grace-4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>grace-16</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>grace-32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>voice 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>voice 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>voice 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>voice 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>midi input in</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Enable MIDI Input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>editing sound on</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Enable sound while editing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>beam start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>beam mid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>no beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>beam 32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>auto beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+7"/>
-        <location line="+1"/>
-        <source>Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+7"/>
-        <location line="+1"/>
-        <source>Play Panel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+7"/>
-        <location line="+1"/>
-        <source>Navigator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <location line="+8"/>
-        <location line="+1"/>
-        <source>Mixer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Transport Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Transport</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Note Input Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Status Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Quit</source>
-        <translation type="unfinished">Quitter</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <source>Mag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Zoom Canvas</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Lyrics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Fingering Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Fingering...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Fingering</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Tempo Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Tempo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Metronome</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add System Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>System Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add Staff Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Staff Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>Add Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Frame Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Add Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Add Title Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Add Subtitle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Subtitle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Add Subtitle Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Add Composer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Composer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Add Composer Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Add Poet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Poet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Add Poet Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Add Copyright</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Copyright</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Add Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Add Chord Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Chord Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Add Chord Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>show harmony properties for chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Harmony Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+4"/>
-        <source>Add Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Player play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Start or stop playback</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+42"/>
-        <source>Seek to begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Player rewind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Rewind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Rewind to start position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Seek to end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location line="+4"/>
-        <source>Play repeats on/off</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Load style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Load Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Load Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Save style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Save Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Save Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Select all</source>
-        <translation type="unfinished">Sélectionner tout</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Select All</source>
-        <translation type="unfinished">Tout sélectionner</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+4"/>
-        <source>Transpose</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>Transpose...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>violin clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>bass clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Exchange Voice 1-2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Exchange Voice 1-3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Exchange Voice 1-4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Exchange Voice 2-3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Exchange Voice 2-4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Exchange Voice 3-4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>display in concert pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Concert Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>repeat last command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Repeat last command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>edit score meta data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Meta Data...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Meta Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>toggle system break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Toggle System Break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>toggle page break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Toggle Page Break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>edit element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Edit Element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>reset positions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Reset Positions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>show inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>reset measure stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Reset Stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>show invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Show Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>show frames</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Show Frames</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>show keyboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Show Keyboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>enable script debugger</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Enable Script Debugger</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+4"/>
-        <source>enter 1/1 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>1/1 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>enter 1/2 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>1/2 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>enter 1/4 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>1/4 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+4"/>
-        <source>enter 1/8 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1"/>
-        <source>1/8 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Search</source>
-        <translation type="unfinished">Recherche</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <location line="+13"/>
+        <source>The target namespace of a %1 cannot be empty.</source>
+        <translation>Le namespace cible d&apos;un %1 ne peut être vide.</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location line="+3"/>
-        <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <source>The module import feature is not supported</source>
+        <translation>La fonctionnalité &quot;module import&quot; n&apos;est pas supportée</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>mirror note head</source>
-        <translation type="unfinished"></translation>
+        <source>A variable by name %1 has already been declared in the prolog.</source>
+        <translation type="obsolete">Une variable du nom %1 a déjà été déclarée dans le prologue.</translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>No value is available for the external variable by name %1.</source>
+        <translation>Aucune valeur n&apos;est disponible pour la variable externe %1.</translation>
+    </message>
+    <message>
+        <source>The namespace for a user defined function cannot be empty(try the predefined prefix %1 which exists for cases like this)</source>
+        <translation type="obsolete">Le namespace d&apos;une fonction définie par l&apos;utilisateur ne peut être vide (essayez le préfixe prédéfini %1 qui existe pour ce genre de cas)</translation>
+    </message>
+    <message>
+        <location line="-4154"/>
+        <source>A construct was encountered which only is allowed in XQuery.</source>
+        <translation>Construct n&apos;est autorisé que dans XQuery.</translation>
+    </message>
+    <message>
+        <location line="+118"/>
+        <source>A template by name %1 has already been declared.</source>
+        <translation>Un template nommé %1 a déjà été déclaré.</translation>
+    </message>
+    <message>
+        <location line="+3581"/>
+        <source>The keyword %1 cannot occur with any other mode name.</source>
+        <translation>Le mot-clé %1 ne peut pas apparaître avec un autre nom de mode.</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>The value of attribute %1 must of type %2, which %3 isn&apos;t.</source>
+        <translation>La valeur de l&apos;attribut %1 doit être du type %2, %3 n&apos;en est pas.</translation>
+    </message>
+    <message>
+        <location line="+75"/>
+        <source>The prefix %1 can not be bound. By default, it is already bound to the namespace %2.</source>
+        <translation>Le préfixe %1 ne peut être lié. Par défault, il est déjà lié au namespace %2.</translation>
+    </message>
+    <message>
+        <location line="+312"/>
+        <source>A variable by name %1 has already been declared.</source>
+        <translation>Une variable nommée %1 a déjà été déclarée.</translation>
+    </message>
+    <message>
+        <location line="+135"/>
+        <source>A stylesheet function must have a prefixed name.</source>
+        <translation>Une fonction de feuille de style doit avoir un nom préfixé.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>The namespace for a user defined function cannot be empty (try the predefined prefix %1 which exists for cases like this)</source>
+        <translation>Le namespace d&apos;une fonction utilisateur ne peut pas être vide (essayez le préfixe prédéfini %1 qui existe pour ce genre de cas)</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>The namespace %1 is reserved; therefore user defined functions may not use it. Try the predefined prefix %2, which exists for these cases.</source>
+        <translation>Le namespace %1 est réservé; c&apos;est pourquoi les fonctions définies par l&apos;utilisateur ne peuvent l&apos;utiliser. Essayez le préfixe prédéfini %2 qui existe pour ces cas.</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>The namespace of a user defined function in a library module must be equivalent to the module namespace. In other words, it should be %1 instead of %2</source>
+        <translation>Le namespace d&apos;une fonction utilisateur dans un module de bibliothèque doit être équivalent au namespace du module. En d&apos;autres mots, il devrait être %1 au lieu de %2</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>A function already exists with the signature %1.</source>
+        <translation>Une fonction avec la signature %1 existe déjà.</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>No external functions are supported. All supported functions can be used directly, without first declaring them as external</source>
+        <translation>Les fonctions externes ne sont pas supportées. Toutes les fonctions supportées peuvent êter utilisées directement sans les déclarer préalablement comme externes</translation>
+    </message>
+    <message>
+        <location line="+37"/>
+        <source>An argument by name %1 has already been declared. Every argument name must be unique.</source>
+        <translation>Un argument nommé %1 a déjà été déclaré. Chaque nom d&apos;argument doit être unique.</translation>
+    </message>
+    <message>
+        <location line="+179"/>
+        <source>When function %1 is used for matching inside a pattern, the argument must be a variable reference or a string literal.</source>
+        <translation>Quand la fonction %1 est utilisée pour vérifier la correspondance dans un pattern, l&apos;argument doit être une référence de variable ou une chaîne de caractères.</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>In an XSL-T pattern, the first argument to function %1 must be a string literal, when used for matching.</source>
+        <translation>Dans un pattern XSL-T, le premier argument à la fonction %1 doit être une chaîne de caractères quand utilisé pour correspondance.</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>In an XSL-T pattern, the first argument to function %1 must be a literal or a variable reference, when used for matching.</source>
+        <translation>Dans un pattern XSL-T, le premier argument à la fonction %1 doit être un litéral ou une référence de variable.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>In an XSL-T pattern, function %1 cannot have a third argument.</source>
+        <translation>Dans un pattern XSL-T, la fonction %1 ne peut pas avoir de 3e argument.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>In an XSL-T pattern, only function %1 and %2, not %3, can be used for matching.</source>
+        <translation>Dans un pattern XSL-T, seules les fonctions %1 et %2 (pas %3) peuvent être utilisées pour le matching.</translation>
+    </message>
+    <message>
+        <location line="+63"/>
+        <source>In an XSL-T pattern, axis %1 cannot be used, only axis %2 or %3 can.</source>
+        <translation>Dans un pattern XSL-T, l&apos;axe %1 ne peut pas être utilisé, seulement %2 ou %3 le peuvent.</translation>
+    </message>
+    <message>
+        <location line="+126"/>
+        <source>%1 is an invalid template mode name.</source>
+        <translation>%1 est un nom de mode de template invalide.</translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <source>The name of a variable bound in a for-expression must be different from the positional variable. Hence, the two variables named %1 collide.</source>
+        <translation>Le nom d&apos;une variable liée dans un expression for doit être different de la variable positionnelle. Les deux variables appelées %1 sont en conflit.</translation>
+    </message>
+    <message>
+        <location line="+758"/>
+        <source>The Schema Validation Feature is not supported. Hence, %1-expressions may not be used.</source>
+        <translation>La fonctionnalité &quot;Schema Validation&quot; n&apos;est pas supportée. Les expressions %1 ne seront pas utilisées.</translation>
+    </message>
+    <message>
+        <location line="+39"/>
+        <source>None of the pragma expressions are supported. Therefore, a fallback expression must be present</source>
+        <translation>Aucune des expressions pragma n&apos;est supportée. Une expression par défault doit être présente</translation>
+    </message>
+    <message>
+        <location line="+267"/>
+        <source>Each name of a template parameter must be unique; %1 is duplicated.</source>
+        <translation>Chaque nom d&apos;un paramètre ede template doit être unique; %1 est dupliqué.</translation>
+    </message>
+    <message>
+        <location line="+129"/>
+        <source>The %1-axis is unsupported in XQuery</source>
+        <translation>L&apos;axe %1 n&apos;est pas supporté dans XQuery</translation>
+    </message>
+    <message>
+        <location line="+1150"/>
+        <source>%1 is not a valid name for a processing-instruction.</source>
+        <translation>%1 n&apos;est pas un nom valide pour une instruction de traitement.</translation>
+    </message>
+    <message>
+        <location line="-7029"/>
+        <source>%1 is not a valid numeric literal.</source>
+        <translation>%1 n&apos;est pas une valeur numérique valide.</translation>
+    </message>
+    <message>
+        <location line="+6165"/>
+        <source>No function by name %1 is available.</source>
+        <translation>La fonction %1 n&apos;est pas disponible.</translation>
+    </message>
+    <message>
+        <location line="+102"/>
+        <source>The namespace URI cannot be the empty string when binding to a prefix, %1.</source>
+        <translation>L&apos;URI de namespace ne peut être une chaîne vide quand on le lie à un préfixe, %1.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>%1 is an invalid namespace URI.</source>
+        <translation>%1 est un URI de namespace invalide.</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Edit General Style...</source>
-        <translation type="unfinished"></translation>
+        <source>It is not possible to bind to the prefix %1</source>
+        <translation>Il est impossible de se lier au préfixe %1</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Edit Text Style...</source>
-        <translation type="unfinished"></translation>
+        <location line="+7"/>
+        <source>Namespace %1 can only be bound to %2 (and it is, in either case, pre-declared).</source>
+        <translation>Le namespace %1 peut seulement être lié à %2 (et doit être pré-déclaré).</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Edit Chord Style...</source>
-        <translation type="unfinished"></translation>
+        <location line="+8"/>
+        <source>Prefix %1 can only be bound to %2 (and it is, in either case, pre-declared).</source>
+        <translation>Le préfixe %1 peut seulement être lié à %2 (et doit être prédéclaré).</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Select all similar elements</source>
-        <translation type="unfinished"></translation>
+        <location line="+15"/>
+        <source>Two namespace declaration attributes have the same name: %1.</source>
+        <translation>Deux attributs de déclarations de namespace ont le même nom : %1.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>All Similar Elements</source>
-        <translation type="unfinished"></translation>
+        <location line="+89"/>
+        <source>The namespace URI must be a constant and cannot use enclosed expressions.</source>
+        <translation>L&apos;URI de namespace doit être une constante et ne peut contenir d&apos;expressions.</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"></translation>
+        <location line="+16"/>
+        <source>An attribute by name %1 has already appeared on this element.</source>
+        <translation>Un attribute nommé %1 existe déjà pour cet élément.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"></translation>
+        <location line="+61"/>
+        <source>A direct element constructor is not well-formed. %1 is ended with %2.</source>
+        <translation>Un constructeur direct d&apos;élément est mal-formé. %1 est terminé par %2.</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
+        <location line="+458"/>
+        <source>The name %1 does not refer to any schema type.</source>
+        <translation>Le nom %1 ne se réfère à aucun type de schema.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Synthesizer Control</source>
-        <translation type="unfinished"></translation>
+        <location line="+10"/>
+        <source>%1 is an complex type. Casting to complex types is not possible. However, casting to atomic types such as %2 works.</source>
+        <translation>%1 est une type complexe. Caster vers des types complexes n&apos;est pas possible. Cependant, caster vers des types atomiques comme %2 marche.</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>double duration</source>
-        <translation type="unfinished"></translation>
+        <location line="+9"/>
+        <source>%1 is not an atomic type. Casting is only possible to atomic types.</source>
+        <translation>%1 n&apos;est pas un type atomique. Il est uniquement possible de caster vers des types atomiques.</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>half duration</source>
-        <translation type="unfinished"></translation>
+        <source>%1 is not a valid name for a processing-instruction. Therefore this name test will never match.</source>
+        <translation type="obsolete">%1 n&apos;est pas un nom valide pour une instruction de traitement. C&apos;est pourquoi ce test de nom ne réussira jamais.</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>repeat selection</source>
-        <translation type="unfinished"></translation>
+        <location line="+145"/>
+        <location line="+71"/>
+        <source>%1 is not in the in-scope attribute declarations. Note that the schema import feature is not supported.</source>
+        <translation>%1 n&apos;est pas dans les déclaration d&apos;attribut in-scope. La fonctionnalité d&apos;inport de schéma n&apos;est pas supportée.</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Repeat selection</source>
-        <translation type="unfinished"></translation>
+        <location line="+48"/>
+        <source>The name of an extension expression must be in a namespace.</source>
+        <translation>Le nom d&apos;une expression d&apos;extension doit être dans un namespace.</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>follow song</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/type/qcardinality.cpp" line="+55"/>
+        <source>empty</source>
+        <translation>vide</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Follow Song</source>
-        <translation type="unfinished"></translation>
+        <location line="+2"/>
+        <source>zero or one</source>
+        <translation>zéro ou un</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>split window horizontal</source>
-        <translation type="unfinished"></translation>
+        <location line="+2"/>
+        <source>exactly one</source>
+        <translation>exactement un</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Documents Side by Side</source>
-        <translation type="unfinished"></translation>
+        <location line="+2"/>
+        <source>one or more</source>
+        <translation>un ou plus</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>split window vertical</source>
-        <translation type="unfinished"></translation>
+        <location line="+2"/>
+        <source>zero or more</source>
+        <translation>zéro ou plus</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Documents Stacked</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/type/qtypechecker.cpp" line="+63"/>
+        <source>Required type is %1, but %2 was found.</source>
+        <translation>Le type requis est %1, mais %2 a été reçu.</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+3"/>
-        <location line="+1"/>
-        <source>Parts...</source>
-        <translation type="unfinished"></translation>
+        <location line="+44"/>
+        <source>Promoting %1 to %2 may cause loss of precision.</source>
+        <translation>La Promotion de %1 vers %2 peut causer un perte de précision.</translation>
     </message>
-</context>
-<context>
-    <name>articulation</name>
     <message>
-        <location filename="../../mscore/articulation.cpp" line="-124"/>
-        <source>ufermata</source>
-        <translation type="unfinished"></translation>
+        <location line="+49"/>
+        <source>The focus is undefined.</source>
+        <translation>Le focus est indéfini.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>dfermata</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/utils/qoutputvalidator.cpp" line="+86"/>
+        <source>It&apos;s not possible to add attributes after any other kind of node.</source>
+        <translation>Il est impossible d&apos;ajouter des attributs après un autre type de noeuds.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>ushortfermata</source>
-        <translation type="unfinished"></translation>
+        <location line="+7"/>
+        <source>An attribute by name %1 has already been created.</source>
+        <translation>Un attribute de nom %1 a déjà été créé.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>dshortfermata</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/utils/qxpathhelper_p.h" line="+120"/>
+        <source>Only the Unicode Codepoint Collation is supported(%1). %2 is unsupported.</source>
+        <translation>Seule le Unicode CodepointCollation est supporté (%1), %2 n&apos;est pas supporté.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>ulongfermata</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/functions/qtimezonefns.cpp" line="+12"/>
+        <source>%1 is not a whole number of minutes.</source>
+        <translation>%1 n&apos;est pas un nombre entier de minutes.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>dlongfermata</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/api/qxmlserializer.cpp" line="+60"/>
+        <source>Attribute %1 can&apos;t be serialized because it appears at the top level.</source>
+        <translation>L&apos;attribut %1 ne peut pas être sérialisé car il apparaît à la racine.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>uverylongfermata</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/acceltree/qacceltreeresourceloader.cpp" line="+314"/>
+        <source>%1 is an unsupported encoding.</source>
+        <translation>%1 est un encodage non supporté.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>dverylongfermata</source>
-        <translation type="unfinished"></translation>
+        <location line="+16"/>
+        <source>%1 contains octets which are disallowed in the requested encoding %2.</source>
+        <translation>%1 contient &apos;octets&apos;, qui n&apos;est pas autorisé pour l&apos;encodage %2.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>thumb</source>
-        <translation type="unfinished"></translation>
+        <location line="+18"/>
+        <source>The codepoint %1, occurring in %2 using encoding %3, is an invalid XML character.</source>
+        <translation>Le codepoint %1 dans %2 et utilisant l&apos;encodage %3 est un caractère XML invalide.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>sforzato</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/expr/qapplytemplate.cpp" line="+119"/>
+        <source>Ambiguous rule match.</source>
+        <translation>Corresonpdance aux règles ambigüe.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>espressivo</source>
-        <translation type="unfinished"></translation>
+        <source>In a namespace constructor, the value for a namespace value cannot be an empty string.</source>
+        <translation type="obsolete">Dans un cosntructeur de namespace, la valeur pour un namespace ne peut pas être une chaîne vide.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>staccato</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/expr/qcomputednamespaceconstructor.cpp" line="+69"/>
+        <source>In a namespace constructor, the value for a namespace cannot be an empty string.</source>
+        <translation>Dans un constructeur d&apos;espace de noms, la valeur pour un espace de noms ne peut pas être une chaîne vide.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>ustaccatissimo</source>
-        <translation type="unfinished"></translation>
+        <location line="+11"/>
+        <source>The prefix must be a valid %1, which %2 is not.</source>
+        <translation>Le préfixe doit être un valide %1; %2 n&apos;e l&apos;est pas.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>dstaccatissimo</source>
-        <translation type="unfinished"></translation>
+        <location line="+14"/>
+        <source>The prefix %1 cannot be bound.</source>
+        <translation>Le préfixe %1 ne peut être lié.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>tenuto</source>
-        <translation type="unfinished"></translation>
+        <location line="+10"/>
+        <source>Only the prefix %1 can be bound to %2 and vice versa.</source>
+        <translation>Seul le préfixe %1 peut être lié à %2, et vice versa.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>uportato</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/expr/qevaluationcache.cpp" line="+117"/>
+        <source>Circularity detected</source>
+        <translation>Circularité détectée</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>dportato</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/expr/qtemplate.cpp" line="+145"/>
+        <source>The parameter %1 is required, but no corresponding %2 is supplied.</source>
+        <translation>Le paramètre %1 est requis, mais aucun %2 correspondant n&apos;est fourni.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>umarcato</source>
-        <translation type="unfinished"></translation>
+        <location line="-71"/>
+        <source>The parameter %1 is passed, but no corresponding %2 exists.</source>
+        <translation>Le paramètre %1 est passé mais aucun %2 correspondant n&apos;existe.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>dmarcato</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/functions/qunparsedtextfn.cpp" line="+65"/>
+        <source>The URI cannot have a fragment</source>
+        <translation>L&apos;URI ne peut pas avoir de fragments</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>ouvert</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/parser/qxslttokenizer.cpp" line="+519"/>
+        <source>Element %1 is not allowed at this location.</source>
+        <translation>L&apos;élément %1 n&apos;est pas autorisé à cet emplacement.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>plusstop</source>
-        <translation type="unfinished"></translation>
+        <location line="+9"/>
+        <source>Text nodes are not allowed at this location.</source>
+        <translation>Les noeuds de texte ne sont pas autorisés à cet emplacement.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>upbow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>downbow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>reverseturn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>turn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>trill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>mordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>prallprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>prallmordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>upprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>downprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>upmordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>downmordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>snappizzicato</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>clefTable</name>
-    <message>
-        <location filename="../../mscore/clef.cpp" line="+48"/>
-        <source>Treble clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Treble clef 8va</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Treble clef 15ma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Treble clef 8vb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Bass clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Bass clef 8vb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Bass clef 15mb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Baritone clef (F clef)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Subbass clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Soprano clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Mezzo-soprano clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Alto clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Tenor clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Tablature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
         <location line="+20"/>
-        <source>Percussion</source>
-        <translation type="unfinished"></translation>
+        <source>Parse error: %1</source>
+        <translation>Erreur: %1</translation>
     </message>
     <message>
-        <location line="-16"/>
-        <source>Baritone clef (C clef)</source>
-        <translation type="unfinished"></translation>
+        <location line="+62"/>
+        <source>The value of the XSL-T version attribute must be a value of type %1, which %2 isn&apos;t.</source>
+        <translation>La valeur de l&apos;attribut de version XSL-T doit être du type %1, et non %2.</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>French violin clef</source>
-        <translation type="unfinished"></translation>
+        <location line="+20"/>
+        <source>Running an XSL-T 1.0 stylesheet with a 2.0 processor.</source>
+        <translation>Lancement d&apos;une feuille de style XSL-T 1.0 avec un processeur 2.0.</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Bass clef 8va</source>
-        <translation type="unfinished"></translation>
+        <location line="+108"/>
+        <source>Unknown XSL-T attribute %1.</source>
+        <translation>Attribut XSL-T inconnu : %1.</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Bass clef 15ma</source>
-        <translation type="unfinished"></translation>
+        <location line="+23"/>
+        <source>Attribute %1 and %2 are mutually exclusive.</source>
+        <translation>Les attributs %1 et %2 sont mutuellement exclusifs.</translation>
     </message>
-</context>
-<context>
-    <name>elementName</name>
     <message>
-        <location filename="../../mscore/element.cpp" line="-477"/>
-        <source>Symbol</source>
-        <translation type="unfinished">Symbole</translation>
+        <location line="+166"/>
+        <source>In a simplified stylesheet module, attribute %1 must be present.</source>
+        <translation>Dans un module de feuille de style simplifié, l&apos;attribut %1 doit être présent.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
+        <location line="+72"/>
+        <source>If element %1 has no attribute %2, it cannot have attribute %3 or %4.</source>
+        <translation>Si l&apos;élément %1 n&apos;a pas d&apos;attribut %2, il ne peut pas avoir d&apos;attribut %3 ou %4.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>SlurSegment</source>
-        <translation type="unfinished"></translation>
+        <location line="+9"/>
+        <source>Element %1 must have at least one of the attributes %2 or %3.</source>
+        <translation>L&apos;élement %1 doit avoir au moins un des attributs %2 ou %3.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>BarLine</source>
-        <translation type="unfinished"></translation>
+        <location line="+28"/>
+        <source>At least one mode must be specified in the %1-attribute on element %2.</source>
+        <translation>Au moins un mode doit être spécifié dans l&apos;attribut %1 sur l&apos;élément %2.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>StemSlash</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/parser/qmaintainingreader.cpp" line="+183"/>
+        <source>Attribute %1 cannot appear on the element %2. Only the standard attributes can appear.</source>
+        <translation>L&apos;attribut %1 ne peut pas apparaître sur l&apos;élément %2. Seuls les attributs standard le peuvent.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Arpeggio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Accidental</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>KeySig</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>TimeSig</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Breath</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Glissando</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>RepeatMeasure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tie</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Articulation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Dynamic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Hook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Lyrics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Marker</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Jump</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>StaffText</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Harmony</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>HairpinSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>OttavaSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>PedalSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>TrillSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>TextLineSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>VoltaSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>LayoutBreak</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Spacer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>LedgerLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>NoteHead</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Tremolo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>StaffLines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Cursor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Selection</source>
-        <translation type="unfinished">Sélection</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Lasso</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ShadowNote</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>RubberBand</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>HairPin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Ottava</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Pedal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Trill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>TextLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>System</source>
-        <translation type="unfinished">Système</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Compound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Slur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ElementList</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>StaffList</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>MeasureList</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>HBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>VBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>AccidentalBracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>magTable</name>
-    <message>
-        <location filename="../../mscore/magbox.cpp" line="-17"/>
-        <source>Page Width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Whole Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Two Pages</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>preferences</name>
-    <message>
-        <location filename="../../mscore/preferences.cpp" line="-1308"/>
-        <source>Every day</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Every 3 days</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Every week</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Every 2 weeks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Every month</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Every 2 months</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Never</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>symbol</name>
-    <message>
-        <location filename="../../mscore/sym.cpp" line="-567"/>
-        <source>whole rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>half rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>outside whole rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>outside half rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>rest M3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>breve rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>longa rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>quart rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>clas quart rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>eight rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>16&apos; rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>32&apos; rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>64&apos; rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>128&apos; rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <location line="+1"/>
-        <source>sharp arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp slash3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp slash4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>natural</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>natural arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>natural arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>natural arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <location line="+1"/>
-        <source>flat arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>mirrored flat2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>mirrored flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>mirrored flat slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flat flat slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sharp sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>right parenthesis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>left parenthesis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>longa up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>longa down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>brevis head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>brevis double head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>whole head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>half head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>quart head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>whole diamond head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>half diamond head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>diamond head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>whole triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>down half triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>up half triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>up quart triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>down quart triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>whole slash head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>half slash head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>quart slash head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>whole cross head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>half cross head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>cross head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>x circle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>s0do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d1do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>u1do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d2do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>u2do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>s0re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>u1re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d1re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>u2re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d2re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>s0mi head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>s1mi head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>s2mi head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>u0fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d0fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>u1fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d1fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>u2fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d2fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>s0la head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>s1la head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>s2la head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>s0ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>u1ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d1ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>u2ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d2ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ufermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>snappizzicato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ushortfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dshortfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ulongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dlongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>uverylongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dverylongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>thumb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sforza to accent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>espressivo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>staccato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ustaccatissimo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dstaccatissimo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>tenuto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>uportato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dportato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>umarcato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dmarcato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ouvert</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>plus stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>up bow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>down bow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>reverse turn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>turn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>trill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>upedal heel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dpedalheel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>upedal toe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dpedal toe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>flageolet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>segno</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>varied coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>rcomma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>lcomma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>arpeggio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>trillelement</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>arpeggio arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>arpeggio arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>trill element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>mordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>prall prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>prall mordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>up prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>up mordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>prall down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>down prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>down mordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>prall up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>line prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>caesura curved</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>caesura straight</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>eight flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sixteenth flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>thirtysecond flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>sixtyfour flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>128flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>deight flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>grace dash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dgrace dash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dsixteenth flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dthirtysecond flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>dsixtyfourth flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>d128flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>alto clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>calto clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>bass clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>cbass clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>trebleclef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ctrebleclef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>percussion clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>cpercussion clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>tab clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>ctab clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>four four meter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>allabreve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>pedalasterisk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>pedaldash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>pedaldot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>pedalP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>pedald</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>pedale</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>pedal ped</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>bracket tips up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>bracket tips down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>bracket tips left up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>bracket tips left down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>acc dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>acc freebase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>acc stdbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>acc bayanbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>acc old ee</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>acc discant</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>zero</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>one</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>two</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>three</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>four</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>five</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>six</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>seven</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>eight</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>nine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>plus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location line="+322"/>
-        <source>z</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-321"/>
-        <location line="+316"/>
-        <source>f</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-315"/>
-        <location line="+319"/>
-        <source>s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-318"/>
-        <location line="+316"/>
-        <source>p</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-315"/>
-        <location line="+314"/>
-        <source>m</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-313"/>
-        <location line="+315"/>
-        <source>r</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-6"/>
-        <source>clef eight</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>clef one</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>clef five</source>
-        <translation type="unfinished"></translation>
+        <location line="+6"/>
+        <source>Attribute %1 cannot appear on the element %2. Only %3 is allowed, and the standard attributes.</source>
+        <translation>L&apos;attribut %1 ne peut pas apparaître sur l&apos;élément %2. Seul %3 est autorisé, ainsi que les attributs standard.</translation>
     </message>
     <message>
         <location line="+8"/>
-        <source>note 1/2</source>
-        <translation type="unfinished"></translation>
+        <source>Attribute %1 cannot appear on the element %2. Allowed is %3, %4, and the standard attributes.</source>
+        <translation>L&apos;attribut %1 ne peut pas apparaître sur l&apos;élément %2. Seuls %3, %4 et les attributs standard le sont.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>note 1/4</source>
-        <translation type="unfinished"></translation>
+        <location line="+9"/>
+        <source>Attribute %1 cannot appear on the element %2. Allowed is %3, and the standard attributes.</source>
+        <translation>L&apos;attribut %1 ne peut pas apparaître sur l&apos;élément %2. Seul %3 et les attributs standard le sont.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>note 1/8</source>
-        <translation type="unfinished"></translation>
+        <location line="+13"/>
+        <source>XSL-T attributes on XSL-T elements must be in the null namespace, not in the XSL-T namespace which %1 is.</source>
+        <translation>Les attributs XSL-T sur des éléments XSL-T doivent être dans le namespace null, et pas dans %1.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>note 1/16</source>
-        <translation type="unfinished"></translation>
+        <location line="+12"/>
+        <source>The attribute %1 must appear on element %2.</source>
+        <translation>L&apos;attribut %1 doit apparaître sur l&apos;élément %2.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>note 1/32</source>
-        <translation type="unfinished"></translation>
+        <location line="+8"/>
+        <source>The element with local name %1 does not exist in XSL-T.</source>
+        <translation>L&apos;élément avec le nom local %1 n&apos;existe pas dans XSL-T.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>note 1/64</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/xmlpatterns/parser/qxslttokenizer.cpp" line="+123"/>
+        <source>Element %1 must come last.</source>
+        <translation>L&apos;élément %1 doit être le dernier.</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>dot dot</source>
-        <translation type="unfinished"></translation>
+        <location line="+24"/>
+        <source>At least one %1-element must occur before %2.</source>
+        <translation>Au moins un élément %1 doit être placé avant %2.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Only one %1-element can appear.</source>
+        <translation>Seulement un élément %1 peut apparaître.</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>At least one %1-element must occur inside %2.</source>
+        <translation>Au moins un élément %1 doit apparaître dans %2.</translation>
+    </message>
+    <message>
+        <location line="+58"/>
+        <source>When attribute %1 is present on %2, a sequence constructor cannot be used.</source>
+        <translation>Quand l&apos;attribut %1 est présent sur %2, un constructeur de séquence ne peut pas être utilisé.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Element %1 must have either a %2-attribute or a sequence constructor.</source>
+        <translation>L&apos;élément %1 doit avoir un attribut %2 ou un constructeur de séquence.</translation>
+    </message>
+    <message>
+        <location line="+125"/>
+        <source>When a parameter is required, a default value cannot be supplied through a %1-attribute or a sequence constructor.</source>
+        <translation>Quand un paramètre est requis, un valeur par défault ne peut pas être fournie par un attribute %1 ou un constructeur de séquence.</translation>
+    </message>
+    <message>
+        <location line="+270"/>
+        <source>Element %1 cannot have children.</source>
+        <translation>L&apos;élément %1 ne peut pas avoir de fils.</translation>
+    </message>
+    <message>
+        <location line="+434"/>
+        <source>Element %1 cannot have a sequence constructor.</source>
+        <translation>L&apos;élément %1 ne peut pas avoir un constructuer de séquence.</translation>
+    </message>
+    <message>
+        <location line="+86"/>
+        <location line="+9"/>
+        <source>The attribute %1 cannot appear on %2, when it is a child of %3.</source>
+        <translation>L&apos;attribut %1 ne peut pas apparaître sur %2 quand il est fils de %3.</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>A parameter in a function cannot be declared to be a tunnel.</source>
+        <translation>Un paramètre de fonction ne peut pas être déclaré comme un tunnel.</translation>
+    </message>
+    <message>
+        <location line="+149"/>
+        <source>This processor is not Schema-aware and therefore %1 cannot be used.</source>
+        <translation>Ce processeur ne comprend pas les Schemas. C&apos;est pourquoi %1 ne peut pas être utilisé.</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>Top level stylesheet elements must be in a non-null namespace, which %1 isn&apos;t.</source>
+        <translation>Les élément d&apos;une feuille de style de haut niveau doivent être dans un namespace non nul; %1 ne l&apos;est pas.</translation>
+    </message>
+    <message>
+        <location line="+48"/>
+        <source>The value for attribute %1 on element %2 must either be %3 or %4, not %5.</source>
+        <translation>La valeur de l&apos;attribut %1 de l&apos;élement %2 doit être %3 ou %4, et pas %5.</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Attribute %1 cannot have the value %2.</source>
+        <translation>L&apos;attribut %1 ne peut avoir la valeur %2.</translation>
+    </message>
+    <message>
+        <location line="+58"/>
+        <source>The attribute %1 can only appear on the first %2 element.</source>
+        <translation>L&apos;attribute %1 peut seulement apparaître sur le premier élément %2.</translation>
+    </message>
+    <message>
+        <location line="+99"/>
+        <source>At least one %1 element must appear as child of %2.</source>
+        <translation>Au moins un élément %1 doit apparaître comme fils de %2.</translation>
+    </message>
+</context>
+<context>
+    <name>VolumeSlider</name>
+    <message>
+        <location filename="../src/3rdparty/phonon/phonon/volumeslider.cpp" line="+67"/>
+        <source>Muted</source>
+        <translation>Muet</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location line="+15"/>
+        <source>Volume: %1%</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>WebCore::PlatformScrollbar</name>
+    <message>
+        <source>Scroll here</source>
+        <translation type="obsolete">Défiler jusqu&apos;ici</translation>
+    </message>
+    <message>
+        <source>Left edge</source>
+        <translation type="obsolete">Extrême gauche</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="obsolete">En haut</translation>
+    </message>
+    <message>
+        <source>Right edge</source>
+        <translation type="obsolete">Extrême droite</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="obsolete">En bas</translation>
+    </message>
+    <message>
+        <source>Page left</source>
+        <translation type="obsolete">Page précédente</translation>
+    </message>
+    <message>
+        <source>Page up</source>
+        <translation type="obsolete">Page précédente</translation>
+    </message>
+    <message>
+        <source>Page right</source>
+        <translation type="obsolete">Page suivante</translation>
+    </message>
+    <message>
+        <source>Page down</source>
+        <translation type="obsolete">Page suivante</translation>
+    </message>
+    <message>
+        <source>Scroll left</source>
+        <translation type="obsolete">Défiler vers la gauche</translation>
+    </message>
+    <message>
+        <source>Scroll up</source>
+        <translation type="obsolete">Défiler vers le haut</translation>
+    </message>
+    <message>
+        <source>Scroll right</source>
+        <translation type="obsolete">Défiler vers la droite</translation>
+    </message>
+    <message>
+        <source>Scroll down</source>
+        <translation type="obsolete">Défiler vers le bas</translation>
     </message>
 </context>
 </TS>

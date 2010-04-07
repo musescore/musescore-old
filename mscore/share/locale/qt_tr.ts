@@ -2,115 +2,2647 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="tr">
 <context>
-    <name>AboutBox</name>
+    <name>AudioOutput</name>
     <message>
-        <source>AboutBox</source>
+        <source>&lt;html&gt;The audio playback device &lt;b&gt;%1&lt;/b&gt; does not work.&lt;br/&gt;Falling back to &lt;b&gt;%2&lt;/b&gt;.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore</source>
+        <source>&lt;html&gt;Switching to the audio playback device &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;which just became available and has higher preference.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Version: 0.9.0</source>
+        <source>Revert back to device &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Phonon::</name>
+    <message>
+        <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Revision: 628</source>
+        <source>Music</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+    <message>
+        <source>Video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Communication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Games</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accessibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Phonon::Gstreamer::Backend</name>
+    <message>
+        <source>Warning: You do not seem to have the package gstreamer0.10-plugins-good installed.
+          Some video features have been disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning: You do not seem to have the base GStreamer plugins installed.
+          All audio and video support has been disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Phonon::Gstreamer::MediaObject</name>
+    <message>
+        <source>Cannot start playback. 
 
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+Check your Gstreamer installation and make sure you 
+have libgstreamer-plugins-base installed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>A required codec is missing. You need to install the following codec(s) to play this content: %0</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Could not open media source.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid source type.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not locate media source.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open audio device. The device is already in use.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not decode media source.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>AboutBoxDialog</name>
+    <name>Phonon::VolumeSlider</name>
     <message>
-        <source>Unstable Prerelease for Version: </source>
+        <source>Volume: %1%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Version: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Revision: %1</source>
+        <source>Use this slider to adjust the volume. The leftmost position is 0%, the rightmost is %1%</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>Accidental</name>
+    <name>Q3Accel</name>
     <message>
-        <source>round bracket</source>
+        <source>%1, %2 not defined</source>
+        <translation>%1, %2 tanımlanmamış</translation>
+    </message>
+    <message>
+        <source>Ambiguous %1 not handled</source>
+        <translation>Belirsiz %1 yürütülemedi</translation>
+    </message>
+</context>
+<context>
+    <name>Q3DataTable</name>
+    <message>
+        <source>True</source>
+        <translation>Doğru</translation>
+    </message>
+    <message>
+        <source>False</source>
+        <translation>Yanlış</translation>
+    </message>
+    <message>
+        <source>Insert</source>
+        <translation>Ekle</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation>Güncelle</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Sil</translation>
+    </message>
+</context>
+<context>
+    <name>Q3FileDialog</name>
+    <message>
+        <source>Copy or Move a File</source>
+        <translation>Bir Dosya Kopyala ya da Taşı</translation>
+    </message>
+    <message>
+        <source>Read: %1</source>
+        <translation>Oku: %1</translation>
+    </message>
+    <message>
+        <source>Write: %1</source>
+        <translation>Yaz: %1</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Tüm Dosyalar (*)</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>İsim</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Boyut</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tip</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Tarih</translation>
+    </message>
+    <message>
+        <source>Attributes</source>
+        <translation>Nitelikler</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;TAMAM</translation>
+    </message>
+    <message>
+        <source>Look &amp;in:</source>
+        <translation>Ko&amp;num:</translation>
+    </message>
+    <message>
+        <source>File &amp;name:</source>
+        <translation>Dosya &amp;adı:</translation>
+    </message>
+    <message>
+        <source>File &amp;type:</source>
+        <translation>Dosya &amp;tipi:</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Geri</translation>
+    </message>
+    <message>
+        <source>One directory up</source>
+        <translation>Bir dizin yukarı</translation>
+    </message>
+    <message>
+        <source>Create New Folder</source>
+        <translation>Yeni Dizin Oluştur</translation>
+    </message>
+    <message>
+        <source>List View</source>
+        <translation>Liste Görünümü</translation>
+    </message>
+    <message>
+        <source>Detail View</source>
+        <translation>Ayrıntılı Görünüm</translation>
+    </message>
+    <message>
+        <source>Preview File Info</source>
+        <translation>Dosya Bilgisini Önizle</translation>
+    </message>
+    <message>
+        <source>Preview File Contents</source>
+        <translation>Dosya İçeriğini Önizle</translation>
+    </message>
+    <message>
+        <source>Read-write</source>
+        <translation>Oku-yaz</translation>
+    </message>
+    <message>
+        <source>Read-only</source>
+        <translation>Salt-okunur</translation>
+    </message>
+    <message>
+        <source>Write-only</source>
+        <translation>Sadece-yaz</translation>
+    </message>
+    <message>
+        <source>Inaccessible</source>
+        <translation>Erişilemez</translation>
+    </message>
+    <message>
+        <source>Symlink to File</source>
+        <translation>Dosyaya sembolik bağlantı</translation>
+    </message>
+    <message>
+        <source>Symlink to Directory</source>
+        <translation>Dizine sembolik bağlantı</translation>
+    </message>
+    <message>
+        <source>Symlink to Special</source>
+        <translation>Özel konuma sembolik bağlantı</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation>Dosya</translation>
+    </message>
+    <message>
+        <source>Dir</source>
+        <translation>Dizin</translation>
+    </message>
+    <message>
+        <source>Special</source>
+        <translation>Özel</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Aç</translation>
+    </message>
+    <message>
+        <source>Save As</source>
+        <translation>Farklı Kaydet</translation>
+    </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation>&amp;Aç</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Kaydet</translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation>&amp;Yeniden Adlandır</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation>&amp;Sil</translation>
+    </message>
+    <message>
+        <source>R&amp;eload</source>
+        <translation>Y&amp;eniden Yükle</translation>
+    </message>
+    <message>
+        <source>Sort by &amp;Name</source>
+        <translation>İs&amp;me Göre Sırala</translation>
+    </message>
+    <message>
+        <source>Sort by &amp;Size</source>
+        <translation>B&amp;oyuta Göre Sırala</translation>
+    </message>
+    <message>
+        <source>Sort by &amp;Date</source>
+        <translation>Ta&amp;rihe Göre Sırala</translation>
+    </message>
+    <message>
+        <source>&amp;Unsorted</source>
+        <translation>&amp;Sıralanmamış</translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation>Sırala</translation>
+    </message>
+    <message>
+        <source>Show &amp;hidden files</source>
+        <translation>Gizli &amp;dosyaları göster</translation>
+    </message>
+    <message>
+        <source>the file</source>
+        <translation>dosya</translation>
+    </message>
+    <message>
+        <source>the directory</source>
+        <translation>dizin</translation>
+    </message>
+    <message>
+        <source>the symlink</source>
+        <translation>sembolik bağlantı</translation>
+    </message>
+    <message>
+        <source>Delete %1</source>
+        <translation>%1 konumunu sil</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you wish to delete %1 &quot;%2&quot;?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;%1  &quot;%2&quot; ögesini silmek istediğinizden emin misiniz?&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Evet</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Hayır</translation>
+    </message>
+    <message>
+        <source>New Folder 1</source>
+        <translation>Yeni Dizin 1</translation>
+    </message>
+    <message>
+        <source>New Folder</source>
+        <translation>Yeni Dizin</translation>
+    </message>
+    <message>
+        <source>New Folder %1</source>
+        <translation>Yeni Dizin %1</translation>
+    </message>
+    <message>
+        <source>Find Directory</source>
+        <translation>Dizin Bul</translation>
+    </message>
+    <message>
+        <source>Directories</source>
+        <translation>Dizinler</translation>
+    </message>
+    <message>
+        <source>Directory:</source>
+        <translation>Dizin:</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Hata</translation>
+    </message>
+    <message>
+        <source>%1
+File not found.
+Check path and filename.</source>
+        <translation>%1
+Dosya bulunamadı.
+Yolu ve dosya adını kontrol edin.</translation>
+    </message>
+</context>
+<context>
+    <name>Q3LocalFs</name>
+    <message>
+        <source>Could not read directory
+%1</source>
+        <translation>Dizin okunamadı
+%1</translation>
+    </message>
+    <message>
+        <source>Could not create directory
+%1</source>
+        <translation>Dizin oluşturulamadı
+%1</translation>
+    </message>
+    <message>
+        <source>Could not remove file or directory
+%1</source>
+        <translation>Dizin silinemedi
+%1</translation>
+    </message>
+    <message>
+        <source>Could not rename
+%1
+to
+%2</source>
+        <translation>Yeniden adlandırılamadı
+%1
+%2</translation>
+    </message>
+    <message>
+        <source>Could not open
+%1</source>
+        <translation>Açılamadı
+%1</translation>
+    </message>
+    <message>
+        <source>Could not write
+%1</source>
+        <translation>Yazılamadı
+%1</translation>
+    </message>
+</context>
+<context>
+    <name>Q3MainWindow</name>
+    <message>
+        <source>Line up</source>
+        <translation>Diz</translation>
+    </message>
+    <message>
+        <source>Customize...</source>
+        <translation>Özelleştir...</translation>
+    </message>
+</context>
+<context>
+    <name>Q3NetworkProtocol</name>
+    <message>
+        <source>Operation stopped by the user</source>
+        <translation>İşlem kullanıcı tarafından durduruldu</translation>
+    </message>
+</context>
+<context>
+    <name>Q3ProgressDialog</name>
+    <message>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+</context>
+<context>
+    <name>Q3TabDialog</name>
+    <message>
+        <source>OK</source>
+        <translation>TAMAM</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Uygula</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Yardım</translation>
+    </message>
+    <message>
+        <source>Defaults</source>
+        <translation>Öntanımlılar</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+</context>
+<context>
+    <name>Q3TextEdit</name>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>&amp;Geri Al</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>&amp;Yinele</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>K&amp;es</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>&amp;Kopyala</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>&amp;Yapıştır</translation>
+    </message>
+    <message>
+        <source>Clear</source>
+        <translation>Temizle</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Tümünü Seç</translation>
+    </message>
+</context>
+<context>
+    <name>Q3TitleBar</name>
+    <message>
+        <source>System</source>
+        <translation>Sistem</translation>
+    </message>
+    <message>
+        <source>Restore up</source>
+        <translation>Yukarı geri yükle</translation>
+    </message>
+    <message>
+        <source>Minimize</source>
+        <translation>Küçült</translation>
+    </message>
+    <message>
+        <source>Restore down</source>
+        <translation>Aşağı geri yükle</translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation>Büyüt</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+    <message>
+        <source>Contains commands to manipulate the window</source>
+        <translation>Pencereyi durumunu değiştirmek için gereken komutları içerir</translation>
+    </message>
+    <message>
+        <source>Puts a minimized back to normal</source>
+        <translation>Küçültülmüş bir pencereyi önceki haline getirir</translation>
+    </message>
+    <message>
+        <source>Moves the window out of the way</source>
+        <translation>Pencereyi taşır</translation>
+    </message>
+    <message>
+        <source>Puts a maximized window back to normal</source>
+        <translation>Büyütülmüş bir pencereyi önceki haline getirir</translation>
+    </message>
+    <message>
+        <source>Makes the window full screen</source>
+        <translation>Pencereyi tam ekran yapar</translation>
+    </message>
+    <message>
+        <source>Closes the window</source>
+        <translation>Pencereyi kapatır</translation>
+    </message>
+    <message>
+        <source>Displays the name of the window and contains controls to manipulate it</source>
+        <translation>Pencerenin adını gösterir ve pencereyi değiştirebilecek kontrolleri içerir</translation>
+    </message>
+</context>
+<context>
+    <name>Q3ToolBar</name>
+    <message>
+        <source>More...</source>
+        <translation>Daha Fazlası...</translation>
+    </message>
+</context>
+<context>
+    <name>Q3UrlOperator</name>
+    <message>
+        <source>The protocol `%1&apos; is not supported</source>
+        <translation>`%1&apos; protokolü desteklenmiyor</translation>
+    </message>
+    <message>
+        <source>The protocol `%1&apos; does not support listing directories</source>
+        <translation>`%1&apos;  protokolü dizin listelemeyi desteklemiyor</translation>
+    </message>
+    <message>
+        <source>The protocol `%1&apos; does not support creating new directories</source>
+        <translation>`%1&apos;  protokolü yeni dizin oluşturmayı desteklemiyor</translation>
+    </message>
+    <message>
+        <source>The protocol `%1&apos; does not support removing files or directories</source>
+        <translation>`%1&apos;  protokolü dosya veya dizinleri silmeyi desteklemiyor</translation>
+    </message>
+    <message>
+        <source>The protocol `%1&apos; does not support renaming files or directories</source>
+        <translation>`%1&apos;  protokolü dosya veya dizinleri yeniden adlandırmayı desteklemiyor</translation>
+    </message>
+    <message>
+        <source>The protocol `%1&apos; does not support getting files</source>
+        <translation>`%1&apos;  protokolü dosyaları almayı desteklemiyor</translation>
+    </message>
+    <message>
+        <source>The protocol `%1&apos; does not support putting files</source>
+        <translation>`%1&apos;  protokolü dosya koymayı desteklemiyor</translation>
+    </message>
+    <message>
+        <source>The protocol `%1&apos; does not support copying or moving files or directories</source>
+        <translation>`%1&apos;  protokolü dosya veya dizinleri kopyalamyı ya da taşımayı desteklemiyor</translation>
+    </message>
+    <message>
+        <source>(unknown)</source>
+        <translation>(bilinmeyen)</translation>
+    </message>
+</context>
+<context>
+    <name>Q3Wizard</name>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;İptal</translation>
+    </message>
+    <message>
+        <source>&lt; &amp;Back</source>
+        <translation>&lt; &amp;Geri</translation>
+    </message>
+    <message>
+        <source>&amp;Next &gt;</source>
+        <translation>&amp;İleri &gt;</translation>
+    </message>
+    <message>
+        <source>&amp;Finish</source>
+        <translation>&amp;Bitir</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation>&amp;Yardım</translation>
+    </message>
+</context>
+<context>
+    <name>QAbstractSocket</name>
+    <message>
+        <source>Host not found</source>
+        <translation>Makine bulunamadı</translation>
+    </message>
+    <message>
+        <source>Connection refused</source>
+        <translation>Bağlantı reddedildi</translation>
+    </message>
+    <message>
+        <source>Socket operation timed out</source>
+        <translation>Soket işleminde zamanaşımı oluştu</translation>
+    </message>
+    <message>
+        <source>Socket is not connected</source>
+        <translation>Soket bağlı değil</translation>
+    </message>
+</context>
+<context>
+    <name>QAbstractSpinBox</name>
+    <message>
+        <source>&amp;Step up</source>
+        <translation>Bir düzey &amp;yukarı</translation>
+    </message>
+    <message>
+        <source>Step &amp;down</source>
+        <translation>Bir düzey &amp;aşağı</translation>
+    </message>
+    <message>
+        <source>&amp;Select All</source>
+        <translation>&amp;Tümünü Seç</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <source>Activate</source>
+        <translation>Etkinleştir</translation>
+    </message>
+    <message>
+        <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
+        <translation>&apos;%1&apos; çalıştırılabilir dosyası Qt %2 gerektiriyor, sistemde Qt %3 bulundu.</translation>
+    </message>
+    <message>
+        <source>Incompatible Qt Library Error</source>
+        <translation>Uyumsuz Qt Kütüphanesi Hatası</translation>
+    </message>
+    <message>
+        <source>QT_LAYOUT_DIRECTION</source>
+        <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
+        <translation>LTR</translation>
+    </message>
+    <message>
+        <source>Activates the program&apos;s main window</source>
+        <translation>Uygulamanın ana penceresini etkinleştirir</translation>
+    </message>
+</context>
+<context>
+    <name>QCheckBox</name>
+    <message>
+        <source>Uncheck</source>
+        <translation>İşaretleme</translation>
+    </message>
+    <message>
+        <source>Check</source>
+        <translation>Kontrol Et</translation>
+    </message>
+    <message>
+        <source>Toggle</source>
+        <translation>Değiştir</translation>
+    </message>
+</context>
+<context>
+    <name>QColorDialog</name>
+    <message>
+        <source>Hu&amp;e:</source>
+        <translation>T&amp;on:</translation>
+    </message>
+    <message>
+        <source>&amp;Sat:</source>
+        <translation>&amp;Doygunluk:</translation>
+    </message>
+    <message>
+        <source>&amp;Val:</source>
+        <translation>&amp;Değer:</translation>
+    </message>
+    <message>
+        <source>&amp;Red:</source>
+        <translation>&amp;Kırmızı:</translation>
+    </message>
+    <message>
+        <source>&amp;Green:</source>
+        <translation>&amp;Yeşil:</translation>
+    </message>
+    <message>
+        <source>Bl&amp;ue:</source>
+        <translation>Ma&amp;vi:</translation>
+    </message>
+    <message>
+        <source>A&amp;lpha channel:</source>
+        <translation>A&amp;lfa kanalı:</translation>
+    </message>
+    <message>
+        <source>&amp;Basic colors</source>
+        <translation>&amp;Temel renkler</translation>
+    </message>
+    <message>
+        <source>&amp;Custom colors</source>
+        <translation>&amp;Özel renkler</translation>
+    </message>
+    <message>
+        <source>&amp;Add to Custom Colors</source>
+        <translation>Ö&amp;zel Renkler Ekle</translation>
+    </message>
+    <message>
+        <source>Select color</source>
+        <translation>Renk seç</translation>
+    </message>
+</context>
+<context>
+    <name>QComboBox</name>
+    <message>
+        <source>Open</source>
+        <translation>Aç</translation>
+    </message>
+    <message>
+        <source>False</source>
+        <translation>Yanlış</translation>
+    </message>
+    <message>
+        <source>True</source>
+        <translation>Doğru</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+</context>
+<context>
+    <name>QCoreApplication</name>
+    <message>
+        <source>%1: permission denied</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: already exists</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: doesn&apos;t exists</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: out of resources</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: unknown error %2</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: key is empty</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: unable to make key</source>
+        <comment>QSystemSemaphore</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: ftok failed</source>
+        <comment>QSystemSemaphore</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>Articulation</name>
+    <name>QDB2Driver</name>
     <message>
-        <source>Articulation Properties...</source>
+        <source>Unable to connect</source>
+        <translation>Bağlanılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to commit transaction</source>
+        <translation>İşlem (transaction) yapılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to rollback transaction</source>
+        <translation>İşlem (transaction) geri alınamadı</translation>
+    </message>
+    <message>
+        <source>Unable to set autocommit</source>
+        <translation>Otomatik uygulama ayarlanamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QDB2Result</name>
+    <message>
+        <source>Unable to execute statement</source>
+        <translation>İfade çalıştırılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to prepare statement</source>
+        <translation>İfade hazırlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to bind variable</source>
+        <translation>Değişken atanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to fetch record %1</source>
+        <translation>%1 kaydı getirilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to fetch next</source>
+        <translation>Sonraki getirilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to fetch first</source>
+        <translation>Öncelikle birinci getirilemedi</translation>
+    </message>
+</context>
+<context>
+    <name>QDateTimeEdit</name>
+    <message>
+        <source>AM</source>
+        <translation>ÖÖ</translation>
+    </message>
+    <message>
+        <source>am</source>
+        <translation>öö</translation>
+    </message>
+    <message>
+        <source>PM</source>
+        <translation>ÖS</translation>
+    </message>
+    <message>
+        <source>pm</source>
+        <translation>ös</translation>
+    </message>
+</context>
+<context>
+    <name>QDial</name>
+    <message>
+        <source>QDial</source>
+        <translation>QDial</translation>
+    </message>
+    <message>
+        <source>SpeedoMeter</source>
+        <translation>Hız Ölçer</translation>
+    </message>
+    <message>
+        <source>SliderHandle</source>
+        <translation>Kaydırma Çubuğu Tutucu</translation>
+    </message>
+</context>
+<context>
+    <name>QDialog</name>
+    <message>
+        <source>What&apos;s This?</source>
+        <translation>Bu nedir?</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation type="unfinished">Tamam</translation>
+    </message>
+</context>
+<context>
+    <name>QDialogButtonBox</name>
+    <message>
+        <source>OK</source>
+        <translation>TAMAM</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Kaydet</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Aç</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation>Uygula</translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <translation>Sıfırla</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Yardım</translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation>Kaydetme</translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation>Vazgeç</translation>
+    </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;Evet</translation>
+    </message>
+    <message>
+        <source>Yes to &amp;All</source>
+        <translation>&amp;Tümüne Evet</translation>
+    </message>
+    <message>
+        <source>&amp;No</source>
+        <translation>&amp;Hayır</translation>
+    </message>
+    <message>
+        <source>N&amp;o to All</source>
+        <translation>Tümüne &amp;Hayır</translation>
+    </message>
+    <message>
+        <source>Save All</source>
+        <translation>Tümünü Kaydet</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation>İptal</translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation>Yeniden Dene</translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <translation>Yoksay</translation>
+    </message>
+    <message>
+        <source>Restore Defaults</source>
+        <translation>Öntanımlılara Dön</translation>
+    </message>
+    <message>
+        <source>Close without Saving</source>
+        <translation>Kaydetmeden Kapat</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="unfinished">&amp;TAMAM</translation>
+    </message>
+</context>
+<context>
+    <name>QDirModel</name>
+    <message>
+        <source>Name</source>
+        <translation>İsim</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Boyut</translation>
+    </message>
+    <message>
+        <source>Kind</source>
+        <comment>Match OS X Finder</comment>
+        <translation>Tip</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <comment>All other platforms</comment>
+        <translation>Tip</translation>
+    </message>
+    <message>
+        <source>Date Modified</source>
+        <translation>Değiştirilme Tarihi</translation>
+    </message>
+</context>
+<context>
+    <name>QDockWidget</name>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+    <message>
+        <source>Dock</source>
+        <translation>Gömülü</translation>
+    </message>
+    <message>
+        <source>Float</source>
+        <translation>Float</translation>
+    </message>
+</context>
+<context>
+    <name>QDoubleSpinBox</name>
+    <message>
+        <source>More</source>
+        <translation>Daha Fazla</translation>
+    </message>
+    <message>
+        <source>Less</source>
+        <translation>Daha Az</translation>
+    </message>
+</context>
+<context>
+    <name>QErrorMessage</name>
+    <message>
+        <source>Debug Message:</source>
+        <translation>Hata Ayıklama İletisi:</translation>
+    </message>
+    <message>
+        <source>Warning:</source>
+        <translation>Uyarı:</translation>
+    </message>
+    <message>
+        <source>Fatal Error:</source>
+        <translation>Ölümcül Hata:</translation>
+    </message>
+    <message>
+        <source>&amp;Show this message again</source>
+        <translation>&amp;Bu iletiyi tekrar göster</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;TAMAM</translation>
+    </message>
+</context>
+<context>
+    <name>QFileDialog</name>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Tüm Dosyalar (*)</translation>
+    </message>
+    <message>
+        <source>Directories</source>
+        <translation>Dizinler</translation>
+    </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation>&amp;Aç</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Kaydet</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Aç</translation>
+    </message>
+    <message>
+        <source>%1 already exists.
+Do you want to replace it?</source>
+        <translation>%1 zaten var.
+Üzerine yazmak ister misiniz?</translation>
+    </message>
+    <message>
+        <source>%1
+File not found.
+Please verify the correct file name was given.</source>
+        <translation>%1
+Dosya bulunamadı.
+Lütfen verilen ismin doğruluğunu kontrol edin.</translation>
+    </message>
+    <message>
+        <source>My Computer</source>
+        <translation>Bilgisayarım</translation>
+    </message>
+    <message>
+        <source>&amp;Rename</source>
+        <translation>&amp;Yeniden Adlandır</translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation>&amp;Sil</translation>
+    </message>
+    <message>
+        <source>Show &amp;hidden files</source>
+        <translation>Gizli &amp;dosyaları göster</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Geri</translation>
+    </message>
+    <message>
+        <source>Parent Directory</source>
+        <translation>Üst Dizin</translation>
+    </message>
+    <message>
+        <source>List View</source>
+        <translation>Liste Görünümü</translation>
+    </message>
+    <message>
+        <source>Detail View</source>
+        <translation>Ayrıntılı Görünüm</translation>
+    </message>
+    <message>
+        <source>Files of type:</source>
+        <translation>Dosya türü:</translation>
+    </message>
+    <message>
+        <source>Directory:</source>
+        <translation>Dizin:</translation>
+    </message>
+    <message>
+        <source>%1
+Directory not found.
+Please verify the correct directory name was given.</source>
+        <translation>%1
+Dizin bulunamadı.
+Lütfen verilen ismin doğruluğunu kontrol edin.</translation>
+    </message>
+    <message>
+        <source>&apos;%1&apos; is write protected.
+Do you want to delete it anyway?</source>
+        <translation>&apos;%1&apos; yazma korumalı.
+Yine de silmek istiyor musunuz?</translation>
+    </message>
+    <message>
+        <source>Are sure you want to delete &apos;%1&apos;?</source>
+        <translation>&apos;%1&apos; konumunu silmek istediğinizden emin misiniz?</translation>
+    </message>
+    <message>
+        <source>Could not delete directory.</source>
+        <translation>Dizin silinemedi.</translation>
+    </message>
+    <message>
+        <source>Save As</source>
+        <translation>Farklı Kaydet</translation>
+    </message>
+    <message>
+        <source>Drive</source>
+        <translation>Disk Sürücüsü</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation>Dosya</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Bilinmeyen</translation>
+    </message>
+    <message>
+        <source>Find Directory</source>
+        <translation>Dizin Bul</translation>
+    </message>
+    <message>
+        <source>Show </source>
+        <translation>Göster </translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>İleri</translation>
+    </message>
+    <message>
+        <source>New Folder</source>
+        <translation>Yeni Dizin</translation>
+    </message>
+    <message>
+        <source>&amp;New Folder</source>
+        <translation>&amp;Yeni Dizin</translation>
+    </message>
+    <message>
+        <source>&amp;Choose</source>
+        <translation>Se&amp;ç</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Sil</translation>
+    </message>
+    <message>
+        <source>File &amp;name:</source>
+        <translation>Dosya &amp;adı:</translation>
+    </message>
+    <message>
+        <source>Look in:</source>
+        <translation>Konum:</translation>
+    </message>
+    <message>
+        <source>Create New Folder</source>
+        <translation>Yeni Dizin Oluştur</translation>
+    </message>
+</context>
+<context>
+    <name>QFileSystemModel</name>
+    <message>
+        <source>Invalid filename</source>
+        <translation>Geçersiz dosya adı</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;The name &quot;%1&quot; can not be used.&lt;/b&gt;&lt;p&gt;Try using another name, with fewer characters or no punctuations marks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>İsim</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Boyut</translation>
+    </message>
+    <message>
+        <source>Kind</source>
+        <comment>Match OS X Finder</comment>
+        <translation>Tip</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <comment>All other platforms</comment>
+        <translation>Tip</translation>
+    </message>
+    <message>
+        <source>Date Modified</source>
+        <translation>Değiştirilme Tarihi</translation>
+    </message>
+    <message>
+        <source>My Computer</source>
+        <translation>Bilgisayarım</translation>
+    </message>
+    <message>
+        <source>Computer</source>
+        <translation>Kök Dizini</translation>
+    </message>
+    <message>
+        <source>%1 TB</source>
+        <translation>%1 TB</translation>
+    </message>
+    <message>
+        <source>%1 GB</source>
+        <translation>%1 GB</translation>
+    </message>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation>%1 KB</translation>
+    </message>
+    <message>
+        <source>%1 bytes</source>
+        <translation>%1 bayt</translation>
+    </message>
+</context>
+<context>
+    <name>QFontDatabase</name>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Demi Bold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Demi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Italic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Oblique</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Any</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Latin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Greek</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cyrillic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Armenian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hebrew</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arabic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Syriac</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thaana</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Devanagari</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bengali</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gurmukhi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gujarati</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Oriya</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tamil</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Telugu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kannada</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Malayalam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sinhala</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thai</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lao</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tibetan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Myanmar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Georgian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Khmer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simplified Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Traditional Chinese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Japanese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Korean</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vietnamese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ogham</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Runic</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ArticulationProperties</name>
+    <name>QFontDialog</name>
     <message>
-        <source>MuseScore: Articulations Properties</source>
+        <source>&amp;Font</source>
+        <translation>&amp;Yazıtipi</translation>
+    </message>
+    <message>
+        <source>Font st&amp;yle</source>
+        <translation>Yazıtipi B&amp;içemi</translation>
+    </message>
+    <message>
+        <source>&amp;Size</source>
+        <translation>&amp;Boyut</translation>
+    </message>
+    <message>
+        <source>Effects</source>
+        <translation>Efektler</translation>
+    </message>
+    <message>
+        <source>Stri&amp;keout</source>
+        <translation>&amp;Üzeriçizili</translation>
+    </message>
+    <message>
+        <source>&amp;Underline</source>
+        <translation>&amp;Altıçizili</translation>
+    </message>
+    <message>
+        <source>Sample</source>
+        <translation>Örnek</translation>
+    </message>
+    <message>
+        <source>Wr&amp;iting System</source>
+        <translation>Ya&amp;zma Sistemi</translation>
+    </message>
+    <message>
+        <source>Select Font</source>
+        <translation>Yazıtipi Seç</translation>
+    </message>
+</context>
+<context>
+    <name>QFtp</name>
+    <message>
+        <source>Not connected</source>
+        <translation>Bağlı değil</translation>
+    </message>
+    <message>
+        <source>Host %1 not found</source>
+        <translation>%1 makinesi bulunamadı</translation>
+    </message>
+    <message>
+        <source>Connection refused to host %1</source>
+        <translation>%1 makinesine bağlantı reddedildi</translation>
+    </message>
+    <message>
+        <source>Connected to host %1</source>
+        <translation>%1 makinesine bağlanıldı</translation>
+    </message>
+    <message>
+        <source>Connection refused for data connection</source>
+        <translation>Veri bağlantısı için bağlantı reddedildi</translation>
+    </message>
+    <message>
+        <source>Unknown error</source>
+        <translation>Bilinmeyen hata</translation>
+    </message>
+    <message>
+        <source>Connecting to host failed:
+%1</source>
+        <translation>Makineye bağlantı reddedildi:
+%1</translation>
+    </message>
+    <message>
+        <source>Login failed:
+%1</source>
+        <translation>Giriş başarısız:
+%1</translation>
+    </message>
+    <message>
+        <source>Listing directory failed:
+%1</source>
+        <translation>Dizin listeleme işlemi başarısız oldu:
+%1</translation>
+    </message>
+    <message>
+        <source>Changing directory failed:
+%1</source>
+        <translation>Dizin değiştirme işlemi başarısız oldu:
+%1</translation>
+    </message>
+    <message>
+        <source>Downloading file failed:
+%1</source>
+        <translation>Dosya indirme işlemi başarısız oldu:
+%1</translation>
+    </message>
+    <message>
+        <source>Uploading file failed:
+%1</source>
+        <translation>Dosya gönderme işlemi başarısız oldu:
+%1</translation>
+    </message>
+    <message>
+        <source>Removing file failed:
+%1</source>
+        <translation>Dosya silme işlemi başarısız oldu:
+%1</translation>
+    </message>
+    <message>
+        <source>Creating directory failed:
+%1</source>
+        <translation>Dizin oluşturma işlemi başarısız oldu:
+%1</translation>
+    </message>
+    <message>
+        <source>Removing directory failed:
+%1</source>
+        <translation>Dizin silme işlemi başarısız oldu:
+%1</translation>
+    </message>
+    <message>
+        <source>Connection closed</source>
+        <translation>Bağlantı kapatıldı</translation>
+    </message>
+    <message>
+        <source>Host %1 found</source>
+        <translation>%1 makinesi bulundu</translation>
+    </message>
+    <message>
+        <source>Connection to %1 closed</source>
+        <translation>%1 makinesine yapılan bağlantı kapatıldı</translation>
+    </message>
+    <message>
+        <source>Host found</source>
+        <translation>Makine bulundu</translation>
+    </message>
+    <message>
+        <source>Connected to host</source>
+        <translation>Makineye bağlanıldı</translation>
+    </message>
+</context>
+<context>
+    <name>QHostInfo</name>
+    <message>
+        <source>Unknown error</source>
+        <translation>Bilinmeyen hata</translation>
+    </message>
+</context>
+<context>
+    <name>QHostInfoAgent</name>
+    <message>
+        <source>Host not found</source>
+        <translation>Makine bulunamadı</translation>
+    </message>
+    <message>
+        <source>Unknown address type</source>
+        <translation>Bilinmeyen adres tipi</translation>
+    </message>
+    <message>
+        <source>Unknown error</source>
+        <translation>Bilinmeyen hata</translation>
+    </message>
+</context>
+<context>
+    <name>QHttp</name>
+    <message>
+        <source>Unknown error</source>
+        <translation>Bilinmeyen hata</translation>
+    </message>
+    <message>
+        <source>Request aborted</source>
+        <translation>İstek iptal edildi</translation>
+    </message>
+    <message>
+        <source>No server set to connect to</source>
+        <translation>Bağlanılacak sunucu ayarlanmamış</translation>
+    </message>
+    <message>
+        <source>Wrong content length</source>
+        <translation>Yanlış içerik uzunluğu</translation>
+    </message>
+    <message>
+        <source>Server closed connection unexpectedly</source>
+        <translation>Sunucu bağlantıyı beklenmedik şekilde kapattı</translation>
+    </message>
+    <message>
+        <source>Connection refused</source>
+        <translation>Bağlantı reddedildi</translation>
+    </message>
+    <message>
+        <source>Host %1 not found</source>
+        <translation>%1 makinesi bulunamadı</translation>
+    </message>
+    <message>
+        <source>HTTP request failed</source>
+        <translation>HTTP isteği başarısız oldu</translation>
+    </message>
+    <message>
+        <source>Invalid HTTP response header</source>
+        <translation>Geçersiz HTTP yanıt başlığı</translation>
+    </message>
+    <message>
+        <source>Invalid HTTP chunked body</source>
+        <translation>Geçersiz HTTP yığın gövdesi</translation>
+    </message>
+    <message>
+        <source>Host %1 found</source>
+        <translation>%1 makinesi bulundu</translation>
+    </message>
+    <message>
+        <source>Connected to host %1</source>
+        <translation>%1 makinesine bağlanıldı</translation>
+    </message>
+    <message>
+        <source>Connection to %1 closed</source>
+        <translation>%1 makinesine yapılan bağlantı kapatıldı</translation>
+    </message>
+    <message>
+        <source>Host found</source>
+        <translation>Makine bulundu</translation>
+    </message>
+    <message>
+        <source>Connected to host</source>
+        <translation>Makineye bağlanıldı</translation>
+    </message>
+    <message>
+        <source>Connection closed</source>
+        <translation>Bağlantı kapatıldı</translation>
+    </message>
+    <message>
+        <source>Proxy authentication required</source>
+        <translation>Vekil sunucu kimlik doğrulaması gerektiriyor</translation>
+    </message>
+    <message>
+        <source>Authentication required</source>
+        <translation>Kimlik doğrulaması gerekiyor</translation>
+    </message>
+    <message>
+        <source>HTTPS connection requested but SSL support not compiled in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Channel</source>
+        <source>Connection refused (or timed out)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Midi Action</source>
+        <source>Proxy requires authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host requires authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data corrupted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown protocol specified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SSL handshake failed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>BarLineBase</name>
+    <name>QHttpSocketEngine</name>
+    <message>
+        <source>Authentication required</source>
+        <translation>Kimlik doğrulaması gerekiyor</translation>
+    </message>
+</context>
+<context>
+    <name>QIBaseDriver</name>
+    <message>
+        <source>Error opening database</source>
+        <translation>Veritabanı açılırken hata oluştu</translation>
+    </message>
+    <message>
+        <source>Could not start transaction</source>
+        <translation>İşlem (transaction) başlatılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to commit transaction</source>
+        <translation>İşlem (transaction) yapılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to rollback transaction</source>
+        <translation>İşlem (transaction) geri alınamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QIBaseResult</name>
+    <message>
+        <source>Unable to create BLOB</source>
+        <translation>BLOB oluşturulamadı</translation>
+    </message>
+    <message>
+        <source>Unable to write BLOB</source>
+        <translation>BLOB yazılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to open BLOB</source>
+        <translation>BLOB açılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to read BLOB</source>
+        <translation>BLOB okunamadı</translation>
+    </message>
+    <message>
+        <source>Could not find array</source>
+        <translation>Dizi (array) bulunamadı</translation>
+    </message>
+    <message>
+        <source>Could not get array data</source>
+        <translation>Dizi (array) verisi alınamadı</translation>
+    </message>
+    <message>
+        <source>Could not get query info</source>
+        <translation>Sorgu bilgisi alınamadı</translation>
+    </message>
+    <message>
+        <source>Could not start transaction</source>
+        <translation>İşlem (transaction) başlatılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to commit transaction</source>
+        <translation>İşlem (transaction) yapılamadı</translation>
+    </message>
+    <message>
+        <source>Could not allocate statement</source>
+        <translation>İfade yerleştirilemedi</translation>
+    </message>
+    <message>
+        <source>Could not prepare statement</source>
+        <translation>İfade hazırlanamadı</translation>
+    </message>
+    <message>
+        <source>Could not describe input statement</source>
+        <translation>Girdi ifadesi tanımlanamadı</translation>
+    </message>
+    <message>
+        <source>Could not describe statement</source>
+        <translation>İfade tanımlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to close statement</source>
+        <translation>İfade kapatılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to execute query</source>
+        <translation>Sorgu yapılamadı</translation>
+    </message>
+    <message>
+        <source>Could not fetch next item</source>
+        <translation>Sonraki öge getirilemedi</translation>
+    </message>
+    <message>
+        <source>Could not get statement info</source>
+        <translation>İfade bilgisi alınamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QIODevice</name>
+    <message>
+        <source>Permission denied</source>
+        <translation>İzin verilmedi</translation>
+    </message>
+    <message>
+        <source>Too many open files</source>
+        <translation>Çok fazla açık dosya</translation>
+    </message>
+    <message>
+        <source>No such file or directory</source>
+        <translation>Böyle bir dosya ya da dizin yok</translation>
+    </message>
+    <message>
+        <source>No space left on device</source>
+        <translation>Disk sürücüde yer kalmadı</translation>
+    </message>
+    <message>
+        <source>Unknown error</source>
+        <translation>Bilinmeyen hata</translation>
+    </message>
+</context>
+<context>
+    <name>QInputContext</name>
+    <message>
+        <source>XIM</source>
+        <translation>XIM</translation>
+    </message>
+    <message>
+        <source>XIM input method</source>
+        <translation>XIM girdi metodu</translation>
+    </message>
+    <message>
+        <source>Windows input method</source>
+        <translation>Windows girdi metodu</translation>
+    </message>
+    <message>
+        <source>Mac OS X input method</source>
+        <translation>Mac OS X girdi metodu</translation>
+    </message>
+</context>
+<context>
+    <name>QLibrary</name>
+    <message>
+        <source>QLibrary::load_sys: Cannot load %1 (%2)</source>
+        <translation>QLibrary::load_sys: %1 (%2) yüklenemedi</translation>
+    </message>
+    <message>
+        <source>QLibrary::unload_sys: Cannot unload %1 (%2)</source>
+        <translation>QLibrary::unload_sys: %1 (%2) kaldırılamadı</translation>
+    </message>
+    <message>
+        <source>QLibrary::resolve_sys: Symbol &quot;%1&quot; undefined in %2 (%3)</source>
+        <translation>QLibrary::resolve_sys: Symbol &quot;%1&quot; %2 (%3) içerisinde tanımlanmamış</translation>
+    </message>
+    <message>
+        <source>Could not mmap &apos;%1&apos;: %2</source>
+        <translation>mmap başarısız &apos;%1&apos;: %2</translation>
+    </message>
+    <message>
+        <source>Plugin verification data mismatch in &apos;%1&apos;</source>
+        <translation>&apos;%1&apos; içerisindeki eklenti doğrulama verisi uyuşmuyor</translation>
+    </message>
+    <message>
+        <source>Could not unmap &apos;%1&apos;: %2</source>
+        <translation>unmap başarısız &apos;%1&apos;: %2</translation>
+    </message>
+    <message>
+        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (%2.%3.%4) [%5]</source>
+        <translation>&apos;%1&apos; eklentisi uyumsuz Qt kütüphanesi kullanıyor. (%2.%3.%4) [%5]</translation>
+    </message>
+    <message>
+        <source>The plugin &apos;%1&apos; uses incompatible Qt library. Expected build key &quot;%2&quot;, got &quot;%3&quot;</source>
+        <translation>&apos;%1&apos; eklentisi uyumsuz bir Qt kitaplığı kullanıyor. Beklenen inşa anahtarı &quot;%2&quot;, alınan &quot;%3&quot;</translation>
+    </message>
+    <message>
+        <source>Unknown error</source>
+        <translation>Bilinmeyen hata</translation>
+    </message>
+    <message>
+        <source>The shared library was not found.</source>
+        <translation>Ortak kütüphane bulunamadı.</translation>
+    </message>
+    <message>
+        <source>The file &apos;%1&apos; is not a valid Qt plugin.</source>
+        <translation>&apos;%1&apos; geçerli bir Qt eklentisi değil.</translation>
+    </message>
+    <message>
+        <source>The plugin &apos;%1&apos; uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
+        <translation>&apos;%1&apos; eklentisi uyumsuz Qt kütüphanesi kullanıyor. (Hata ayıklama ve uygulama kütüphaneleri karışık olamaz.)</translation>
+    </message>
+</context>
+<context>
+    <name>QLineEdit</name>
+    <message>
+        <source>&amp;Undo</source>
+        <translation>&amp;Geri Al</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>&amp;Yinele</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>K&amp;es</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>&amp;Kopyala</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>&amp;Yapıştır</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Sil</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Tümünü Seç</translation>
+    </message>
+</context>
+<context>
+    <name>QLocalServer</name>
+    <message>
+        <source>%1: Name error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Permission denied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Address in use</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Unknown error %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QLocalSocket</name>
+    <message>
+        <source>%1: Connection refused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Remote closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Invalid name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Socket access error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Socket resource error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Socket operation timed out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Datagram too large</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Connection error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: The socket operation is not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: Unknown error %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMYSQLDriver</name>
+    <message>
+        <source>Unable to open database &apos;</source>
+        <translation>Veritabanı açılamadı &apos;</translation>
+    </message>
+    <message>
+        <source>Unable to connect</source>
+        <translation>Bağlanılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to begin transaction</source>
+        <translation>İşleme (transaction) başlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to commit transaction</source>
+        <translation>İşlem (transaction) yapılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to rollback transaction</source>
+        <translation>İşlem (transaction) geri alınamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QMYSQLResult</name>
+    <message>
+        <source>Unable to fetch data</source>
+        <translation>Veri getirilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to execute query</source>
+        <translation>Sorgu yapılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to store result</source>
+        <translation>Sonuç kaydedilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to prepare statement</source>
+        <translation>İfade hazırlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to reset statement</source>
+        <translation>İfade sıfırlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to bind value</source>
+        <translation>Değer atanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to execute statement</source>
+        <translation>İfade çalıştırılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to bind outvalues</source>
+        <translation>Otomatik değerler atanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to store statement results</source>
+        <translation>İfade sonuçları kaydedilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to execute next query</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to store next result</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMdiArea</name>
+    <message>
+        <source>(Untitled)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMdiSubWindow</name>
+    <message>
+        <source>%1 - [%2]</source>
+        <translation>%1 - [%2]</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+    <message>
+        <source>Minimize</source>
+        <translation>Küçült</translation>
+    </message>
+    <message>
+        <source>Restore Down</source>
+        <translation>Aşağıya Geri Yükle</translation>
+    </message>
+    <message>
+        <source>&amp;Restore</source>
+        <translation>&amp;Geri Yükle</translation>
+    </message>
+    <message>
+        <source>&amp;Move</source>
+        <translation>&amp;Taşı</translation>
+    </message>
+    <message>
+        <source>&amp;Size</source>
+        <translation>&amp;Boyut</translation>
+    </message>
+    <message>
+        <source>Mi&amp;nimize</source>
+        <translation>&amp;Küçült</translation>
+    </message>
+    <message>
+        <source>Ma&amp;ximize</source>
+        <translation>B&amp;üyüt</translation>
+    </message>
+    <message>
+        <source>Stay on &amp;Top</source>
+        <translation>&amp;Herzaman Üstte</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>&amp;Kapat</translation>
+    </message>
+    <message>
+        <source>- [%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximize</source>
+        <translation type="unfinished">Büyüt</translation>
+    </message>
+    <message>
+        <source>Unshade</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shade</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished">Yardım</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="unfinished">Menü</translation>
+    </message>
+</context>
+<context>
+    <name>QMenu</name>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Aç</translation>
+    </message>
+    <message>
+        <source>Execute</source>
+        <translation>Çalıştır</translation>
+    </message>
+</context>
+<context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Help</source>
+        <translation>Yardım</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>TAMAM</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation>Qt Hakkında</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;Bu uygulama Qt %1 sürümü kullanmaktadır.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Show Details...</source>
+        <translation>Ayrıntıları Göster...</translation>
+    </message>
+    <message>
+        <source>Hide Details...</source>
+        <translation>Ayrıntıları Gizle...</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;This program uses Qt Open Source Edition version %1.&lt;/p&gt;&lt;p&gt;Qt Open Source Edition is intended for the development of Open Source applications. You need a commercial Qt license for development of proprietary (closed source) applications.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://www.trolltech.com/company/model/&quot;&gt;www.trolltech.com/company/model/&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;About Qt&lt;/h3&gt;%1&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://www.trolltech.com/qt/&quot;&gt;www.trolltech.com/qt/&lt;/a&gt; for more information.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMultiInputContext</name>
+    <message>
+        <source>Select IM</source>
+        <translation>Çoklu Girdi Seç</translation>
+    </message>
+</context>
+<context>
+    <name>QMultiInputContextPlugin</name>
+    <message>
+        <source>Multiple input method switcher</source>
+        <translation>Çoklu girdi metodu seçici</translation>
+    </message>
+    <message>
+        <source>Multiple input method switcher that uses the context menu of the text widgets</source>
+        <translation>Çoklu girdi metodu seçici metin parçacıkları genel menüsünü kullanır</translation>
+    </message>
+</context>
+<context>
+    <name>QNativeSocketEngine</name>
+    <message>
+        <source>The remote host closed the connection</source>
+        <translation>Uzak makine bağlantıyı kapattı</translation>
+    </message>
+    <message>
+        <source>Network operation timed out</source>
+        <translation>Ağ işleminde zamanaşımı</translation>
+    </message>
+    <message>
+        <source>Out of resources</source>
+        <translation>Yetersiz kaynak</translation>
+    </message>
+    <message>
+        <source>Unsupported socket operation</source>
+        <translation>Desteklenmeyen soket işlemi</translation>
+    </message>
+    <message>
+        <source>Protocol type not supported</source>
+        <translation>Protokol tipi desteklenmiyor</translation>
+    </message>
+    <message>
+        <source>Invalid socket descriptor</source>
+        <translation>Geçersiz soket tanımlayıcı</translation>
+    </message>
+    <message>
+        <source>Network unreachable</source>
+        <translation>Ağ erişilemez durumda</translation>
+    </message>
+    <message>
+        <source>Permission denied</source>
+        <translation>İzin verilmedi</translation>
+    </message>
+    <message>
+        <source>Connection timed out</source>
+        <translation>Bağlantıda zamanaşımı</translation>
+    </message>
+    <message>
+        <source>Connection refused</source>
+        <translation>Bağlantı reddedildi</translation>
+    </message>
+    <message>
+        <source>The bound address is already in use</source>
+        <translation>Bağlanılacak adres zaten kullanılıyor</translation>
+    </message>
+    <message>
+        <source>The address is not available</source>
+        <translation>Adres erişilebilir değil</translation>
+    </message>
+    <message>
+        <source>The address is protected</source>
+        <translation>Adres korumalı</translation>
+    </message>
+    <message>
+        <source>Unable to send a message</source>
+        <translation>Bir ileti gönderilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to receive a message</source>
+        <translation>Bir ileti alınamadı</translation>
+    </message>
+    <message>
+        <source>Unable to write</source>
+        <translation>Yazılamadı</translation>
+    </message>
+    <message>
+        <source>Network error</source>
+        <translation>Ağ hatası</translation>
+    </message>
+    <message>
+        <source>Another socket is already listening on the same port</source>
+        <translation>Aynı port üzerinde zaten başka bir soket dinleniyor</translation>
+    </message>
+    <message>
+        <source>Unable to initialize non-blocking socket</source>
+        <translation>Tıkanmasız soket başlatılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to initialize broadcast socket</source>
+        <translation>Yayın soketi başlatılamadı</translation>
+    </message>
+    <message>
+        <source>Attempt to use IPv6 socket on a platform with no IPv6 support</source>
+        <translation>IPv6 desteği olmayan bir platformda IPv6 soketi kullanılmaya çalışıldı</translation>
+    </message>
+    <message>
+        <source>Host unreachable</source>
+        <translation>Makine erişilemez durumda</translation>
+    </message>
+    <message>
+        <source>Datagram was too large to send</source>
+        <translation>Veri paketi göndermek için çok büyük</translation>
+    </message>
+    <message>
+        <source>Operation on non-socket</source>
+        <translation>Soketsiz işlem</translation>
+    </message>
+    <message>
+        <source>Unknown error</source>
+        <translation>Bilinmeyen hata</translation>
+    </message>
+    <message>
+        <source>The proxy type is invalid for this operation</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkAccessFileBackend</name>
+    <message>
+        <source>Request for opening non-local file %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error opening %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write error writing to %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot open %1: Path is a directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read error reading from %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkAccessFtpBackend</name>
+    <message>
+        <source>Cannot open %1: is a directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logging in to %1 failed: authentication required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error while downloading %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error while uploading %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkReply</name>
+    <message>
+        <source>Error downloading %1 - server replied: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protocol &quot;%1&quot; is unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkReplyImpl</name>
+    <message>
+        <source>Operation canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QOCIDriver</name>
+    <message>
+        <source>Unable to logon</source>
+        <translation>Girilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to initialize</source>
+        <comment>QOCIDriver</comment>
+        <translation>Başlatılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to begin transaction</source>
+        <translation type="unfinished">İşleme (transaction) başlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to commit transaction</source>
+        <translation type="unfinished">İşlem (transaction) yapılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to rollback transaction</source>
+        <translation type="unfinished">İşlem (transaction) geri alınamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QOCIResult</name>
+    <message>
+        <source>Unable to bind column for batch execute</source>
+        <translation>Toplu çalıştırma için sütun atanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to execute batch statement</source>
+        <translation>Toplu ifade çalıştırılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to goto next</source>
+        <translation>Sonrakine gidilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to alloc statement</source>
+        <translation>İfade yerleştirilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to prepare statement</source>
+        <translation>İfade hazırlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to bind value</source>
+        <translation>Değer atanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to execute select statement</source>
+        <translation>Select ifadesi çalıştırılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to execute statement</source>
+        <translation>İfade çalıştırılamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QODBCDriver</name>
+    <message>
+        <source>Unable to connect</source>
+        <translation>Bağlanılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to connect - Driver doesn&apos;t support all needed functionality</source>
+        <translation>Bağlanılamadı - Sürücü gereken işlevleri desteklemiyor</translation>
+    </message>
+    <message>
+        <source>Unable to disable autocommit</source>
+        <translation>Otomatik uygulama pasifleştirilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to commit transaction</source>
+        <translation>İşlem (transaction) yapılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to rollback transaction</source>
+        <translation>İşlem (transaction) geri alınamadı</translation>
+    </message>
+    <message>
+        <source>Unable to enable autocommit</source>
+        <translation>Otomatik uygulama etkinleştirilemedi</translation>
+    </message>
+</context>
+<context>
+    <name>QODBCResult</name>
+    <message>
+        <source>QODBCResult::reset: Unable to set &apos;SQL_CURSOR_STATIC&apos; as statement attribute. Please check your ODBC driver configuration</source>
+        <translation>QODBCResult::reset:  &apos;SQL_CURSOR_STATIC&apos; sorgu niteliği olarak ayarlanamadı. Lütfen ODBC sürücü yapılandırmanızı kontrol edin</translation>
+    </message>
+    <message>
+        <source>Unable to execute statement</source>
+        <translation>İfade çalıştırılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to fetch next</source>
+        <translation>Sonraki getirilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to prepare statement</source>
+        <translation>İfade hazırlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to bind variable</source>
+        <translation>Değişken atanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to fetch last</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to fetch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to fetch first</source>
+        <translation type="unfinished">Öncelikle birinci getirilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to fetch previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Operation not supported on %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid URI: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write error writing to %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read error reading from %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Socket error on %1: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remote host closed the connection prematurely on %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protocol error: packet of size 0 received</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QPPDOptionsModel</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">İsim</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Değer</translation>
+    </message>
+</context>
+<context>
+    <name>QPSQLDriver</name>
+    <message>
+        <source>Unable to connect</source>
+        <translation>Bağlanılamadı</translation>
+    </message>
+    <message>
+        <source>Could not begin transaction</source>
+        <translation>İşleme (transaction) başlanamadı</translation>
+    </message>
+    <message>
+        <source>Could not commit transaction</source>
+        <translation>İşlem (transaction) yapılamadı</translation>
+    </message>
+    <message>
+        <source>Could not rollback transaction</source>
+        <translation>İşlem (transaction) geri alınamadı</translation>
+    </message>
+    <message>
+        <source>Unable to subscribe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to unsubscribe</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QPSQLResult</name>
+    <message>
+        <source>Unable to create query</source>
+        <translation>Sorgu oluşturulamadı</translation>
+    </message>
+    <message>
+        <source>Unable to prepare statement</source>
+        <translation type="unfinished">İfade hazırlanamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QPageSetupWidget</name>
+    <message>
+        <source>Centimeters (cm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Millimeters (mm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Inches (in)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Points (pt)</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>BarLine</source>
+        <source>Paper</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>SubType:</source>
-        <translation type="unfinished"></translation>
+        <source>Page size:</source>
+        <translation type="unfinished">Sayfa boyutu:</translation>
     </message>
-</context>
-<context>
-    <name>BeamBase</name>
     <message>
-        <source>Form</source>
+        <source>Width:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>up:</source>
+        <source>Height:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Chord/Rest</source>
+        <source>Paper source:</source>
+        <translation type="unfinished">Sayfa kaynağı:</translation>
+    </message>
+    <message>
+        <source>Orientation</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>BoxPropertiesBase</name>
     <message>
-        <source>MuseScore: Frame Properties</source>
+        <source>Portrait</source>
+        <translation type="unfinished">Dikey</translation>
+    </message>
+    <message>
+        <source>Landscape</source>
+        <translation type="unfinished">Yatay</translation>
+    </message>
+    <message>
+        <source>Reverse landscape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reverse portrait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -118,6749 +2650,282 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>left:</source>
+        <source>top margin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>mm</source>
+        <source>left margin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>right:</source>
+        <source>right margin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>bottom:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>top:</source>
+        <source>bottom margin</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ChordBase</name>
+    <name>QPluginLoader</name>
     <message>
-        <source>Form</source>
+        <source>Unknown error</source>
+        <translation>Bilinmeyen hata</translation>
+    </message>
+    <message>
+        <source>The plugin was not loaded.</source>
+        <translation>Eklenti yüklenmedi.</translation>
+    </message>
+</context>
+<context>
+    <name>QPrintDialog</name>
+    <message>
+        <source>locally connected</source>
+        <translation>yerel olarak bağlı</translation>
+    </message>
+    <message>
+        <source>Aliases: %1</source>
+        <translation>Takma adlar: %1</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>Unbekannt</translation>
+    </message>
+    <message>
+        <source>Print To File ...</source>
+        <translation>Dosyaya Yazdır...</translation>
+    </message>
+    <message>
+        <source>File %1 is not writable.
+Please choose a different file name.</source>
+        <translation>%1 dosyası yazılabilir değil.
+Lütfen başka bir dosya adı seçin.</translation>
+    </message>
+    <message>
+        <source>%1 already exists.
+Do you want to overwrite it?</source>
+        <translation>%1 zaten var.
+Üzerine yazmak ister misiniz?</translation>
+    </message>
+    <message>
+        <source>%1 is a directory.
+Please choose a different file name.</source>
+        <translation>%1 bir dizin.
+Lütfen başka bir dosya adı seçin.</translation>
+    </message>
+    <message>
+        <source>A0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Arpeggio</source>
+        <source>A1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tremolo</source>
+        <source>A2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Glissando</source>
+        <source>A3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C5E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DLE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Executive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Folio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ledger</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Letter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>US Common #10 Envelope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Options &gt;&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Options &lt;&lt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to File (PDF)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print to File (Postscript)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write %1 file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ChordEdit</name>
+    <name>QPrintPreviewDialog</name>
     <message>
-        <source>MuseScore: Harmony Properties</source>
+        <source>Page Setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel</source>
+        <source>Print Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Root</source>
+        <source>Next page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>C</source>
+        <source>Previous page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>E</source>
+        <source>First page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>bb (double flat)</source>
+        <source>Last page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>F</source>
+        <source>Fit width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>b (flat)</source>
+        <source>Fit page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>G</source>
+        <source>Zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>(no accidental)</source>
+        <source>Zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source># (sharp)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>## (double sharp)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Extension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maj</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maj7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maj9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>69</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m7b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7Sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mMaj7</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dim</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Other:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>5b</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>aug</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maj9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maj13#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maj13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>+</source>
-        <translation type="unfinished">+</translation>
-    </message>
-    <message>
-        <source>Maj7#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>maug</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m7#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m69</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maj7Lyd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maj7b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>m9b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7+</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9+</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13+</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(blues)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7(Blues)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b5b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9b5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9b5b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13b5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b5b9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13b5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7b5#9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13#5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#5b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13#5b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13#5#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7#5#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7alt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13sus#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9sus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9susb13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9sus#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9sus#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13susb9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13susb9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13sus#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13sus#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#9#11b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13susb5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb5b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9susb5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9susb5b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13susb5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb5b9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13susb5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7susb5#9b13</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13sus#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13sus#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9sus#5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>9sus#5#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13sus#5b9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#5b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13sus#5b9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#5#9</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>13sus#5#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>7sus#5#9#11</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Degrees</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished">Sil</translation>
-    </message>
-    <message>
-        <source>Bass Note / Inversion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>none</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/Db</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/Eb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/F#</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/Ab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/Bb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="unfinished">Tip</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished">Değer</translation>
-    </message>
-    <message>
-        <source>Alter</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordList</name>
-    <message>
-        <source>Write Chord Description failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordPropertyBase</name>
-    <message>
-        <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>stemless</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>additional leading space </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>stem direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>auto</source>
-        <extracomment>velocity type</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tuning offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> cent</source>
-        <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>velocity type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>velocity (0-127)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>user</source>
-        <extracomment>velocity type</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset</source>
-        <extracomment>velocity type</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>note head positon </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>left of stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>right of stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Head Group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Head Type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>cross</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>diamond</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>triangle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>xcircle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>do</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>re</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>fa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>la</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ti</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>whole</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>quarter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>breve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ontime offset type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ontime offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> ticks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offtime offset type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offtime</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordRestBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SlurFor:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SlurBack:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>StaffMove:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ChordStyleEditor</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chord Description File:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Id</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">İsim</translation>
-    </message>
-    <message>
-        <source>Save As</source>
-        <translation type="unfinished">Farklı Kaydet</translation>
-    </message>
-    <message>
-        <source>MuseScore: Chord Style Editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dynamic</name>
-    <message>
-        <source>Dynamics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MIDI Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DynamicBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DynamicProperties</name>
-    <message>
-        <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MIDI Values</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Velocity:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Apply to:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>part</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align left</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditDrumset</name>
-    <message>
-        <source>invalid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal Head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cross Head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diamond Head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Triangle Head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished">Kaydet</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore drumset (*.drm)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Open File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write File failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Write Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditDrumsetBase</name>
-    <message>
-        <source>MuseScore: Edit Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shortcut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">İsim</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Head:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff Line:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stem Direction:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Yukarı</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="unfinished">Aşağı</translation>
-    </message>
-    <message>
-        <source>Default Voice:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>--</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditInstrumentBase</name>
-    <message>
-        <source>MuseScore: Edit Instrument Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Instrument Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished">İsim</translation>
-    </message>
-    <message>
-        <source>Short Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transpose</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Midi Program</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished">TAMAM</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
-    </message>
-</context>
-<context>
-    <name>EditStaffBase</name>
-    <message>
-        <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lines:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stemless</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Part Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change Instrument...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Long Instrument Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Short Instrument Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Usable Pitch Range:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Amateur:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Professional:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play Transposition:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Perfect Unison</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Unison</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Perfect Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Perfect Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Perfect Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>+octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditStyle</name>
-    <message>
-        <source>Symbol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Anchor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TopStaff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BottomStaff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditStyleBase</name>
-    <message>
-        <source>MuseScore: Edit Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation type="unfinished">Sistem</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Barlines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arpeggios</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Beams</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sizes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hairpins</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chordnames</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Articulations, Ornaments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voices</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Multi Measure Rests</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minumum width of measure:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <extracomment>spatium unit
-----------
-space unit
-----------
-space unit</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minimum Number of empty measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide Empty Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Music upper margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Music lower margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Akkolade distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lyrics upper margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lyrics lower margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>V-frame upper margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>V-frame lower margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page fill threshold:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Last system fill threshold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create clef for all systems</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create key sig for all systems</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create time signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create courtesy time signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create courtesy key signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System Bracket Distance:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fix Number of Measures/System:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fix Measure Width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Spacing (1=tight)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Min. note distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clef left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key sig. left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time sig. left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clef-key distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clef-barline distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Begin repeat left margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Barline at start of single staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Barline at start of multiple staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>shorten stems</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Progression</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shortest stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accidental note distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accidental distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note dot distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dot dot distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ledger line width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Distance to note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hook length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show first</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>odd/even</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measure Numbers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>all staffs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>every system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>interval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Beam width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>spaces</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Beam distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam width units</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minimum length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minimum slope</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Maximum slope</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Small staff size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Small note size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Grace note size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Small clef size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line break height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use German names</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chord description file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Articulation - note head distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>space unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Articulation - note stem distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Articulation - articulation distance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stem Direction in Multi Voice Context</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voice 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Yukarı</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="unfinished">Aşağı</translation>
-    </message>
-    <message>
-        <source>Voice 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voice 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voice 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>EditTempoBase</name>
-    <message>
-        <source>MuseScore: Tempo Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BPM:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished">TAMAM</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
-    </message>
-</context>
-<context>
-    <name>Element</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ElementBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>selectable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>droptarget</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>invalid</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ExcerptsDialog</name>
-    <message>
-        <source>MuseScore: Parts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Part:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished">Sil</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Part:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Part Title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Instrument:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Part</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished">Kapat</translation>
-    </message>
-    <message>
-        <source>Part-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Glissando</name>
-    <message>
-        <source>Glissando Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GlissandoProperties</name>
-    <message>
-        <source>MuseScore: Glissando Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GreendotButton</name>
-    <message>
-        <source>record</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>HBox</name>
-    <message>
-        <source>Add Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HBox Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>HairpinBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hairpin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tick1:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tick2:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Harmony</name>
-    <message>
-        <source>Harmony Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Image</name>
-    <message>
-        <source>Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Image Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImageProperties</name>
-    <message>
-        <source>Image Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>lock aspect ratio</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImportMidiDialog</name>
-    <message>
-        <source>MuseScore: Midi Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shortest note on import:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/16</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/64</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/128</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InsertMeasuresDialogBase</name>
-    <message>
-        <source>Mscore: Insert Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert empty measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number of measures to insert</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished">TAMAM</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
-    </message>
-</context>
-<context>
-    <name>Inspector</name>
-    <message>
-        <source>MuseScore: Object Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InspectorBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Back</source>
-        <translation type="unfinished">Geri</translation>
-    </message>
-    <message>
-        <source>Forward</source>
-        <translation type="unfinished">İleri</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InstrumentDialogBase</name>
-    <message>
-        <source>MuseScore: Create Instruments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show more</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished">Sil</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Yukarı</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="unfinished">Aşağı</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished">Kaydet</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished">TAMAM</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
-    </message>
-</context>
-<context>
-    <name>InstrumentListEditor</name>
-    <message>
-        <source>MuseScore: Part List</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InstrumentWizard</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show more</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished">Sil</translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Yukarı</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="unfinished">Aşağı</translation>
-    </message>
-    <message>
-        <source>Add Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Instrument List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InstrumentsDialog</name>
-    <message>
-        <source>Staff %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Instrument List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save Instrument List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Instruments (*.xml);;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Instruments File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Open Instruments file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write Style failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Write Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Instrument List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Instruments (*.xml);;All files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Jump</name>
-    <message>
-        <source>Jump Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>JumpPropertyBase</name>
-    <message>
-        <source>Jump Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Jump to:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play until:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Continue at:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>KeyEdit</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Key Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="unfinished">Temizle</translation>
-    </message>
-    <message>
-        <source>add time signature to palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>KeyEditor</name>
-    <message>
-        <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>LinePropertiesDialog</name>
-    <message>
-        <source>MuseScore: Line Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line style:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>solid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dash dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dash dot dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>diagonally</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>place:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left</source>
-        <translation type="unfinished">Sol</translation>
-    </message>
-    <message>
-        <source>Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Symb.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ped (Pedal)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>x:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>y:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Yukarı</translation>
-    </message>
-    <message>
-        <source>Continue</source>
-        <translation type="unfinished">Devam Et</translation>
-    </message>
-    <message>
-        <source>End</source>
-        <translation type="unfinished">Bitir</translation>
-    </message>
-</context>
-<context>
-    <name>LineSegmentBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LineSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SegmentType:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SINGLE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BEGIN</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MIDDLE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>END</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pos2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offset2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>LyricsBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Syllabic:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Single</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End</source>
-        <translation type="unfinished">Bitir</translation>
-    </message>
-    <message>
-        <source>Middle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Row:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End Tick:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MagBox</name>
-    <message>
-        <source>Magnification</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zoom Canvas</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Marker</name>
-    <message>
-        <source>Marker Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MarkerPropertyBase</name>
-    <message>
-        <source>Marker Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Label:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Measure</name>
-    <message>
-        <source>Measure Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MeasureBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>breakMultiMeasureRest</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MeasureProperties</name>
-    <message>
-        <source>visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>stemless</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MeasurePropertiesBase</name>
-    <message>
-        <source>MuseScore: Measure Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Row</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stemless</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>a</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>c</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measure Duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>nominal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>actual</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>do not count</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>irregular</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>break multi measure rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add to measure number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>layout stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>repeat count:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MeasuresDialogBase</name>
-    <message>
-        <source>Mscore: Append Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Append empty measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number of measures to append</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished">TAMAM</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
-    </message>
-</context>
-<context>
-    <name>MenuNotes</name>
-    <message>
-        <source>&amp;Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MetaEditDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Work Title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Work Number:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Movement Title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Movement Number:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Source:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MuseScore</name>
-    <message>
-        <source>MuseScore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save changes to the score &quot;%1&quot;
-before closing?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Untitled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: failure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load template file </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>G major, E minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cb major, Ab minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>D major, B minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gb major, Eb minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A major, F# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Db major, Bb minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>E major, C# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ab major, F minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B major, G# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Eb major, C minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F# major, D# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bb major, G minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C# major, A# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F major,  D minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C major, A minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Grace Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Acciaccatura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Appoggiatura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quarter grace note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>16th grace note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>32nd grace note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Drums</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clefs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key Signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time Signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>4/4 common time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>2/2 alla breve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Barlines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dashed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Double Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End-Start Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Slur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Crescendo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminuendo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Prima volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seconda volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Terza volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seconda volta 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>8va</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>15ma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>8vb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>15mb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Trill line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arpeggio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Glissando</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Breath &amp;&amp; Pauses</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Breath</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Caesura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Brackets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Akkolade</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Articulations &amp;&amp; Ornaments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accidentals</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dynamics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fingering</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fingering %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>String number %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Heads</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tremolo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1 through stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>2 through stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>3 through stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1 between notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>2 between notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>3 between notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat measure sign</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Segno</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Varied coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Codetta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Da Capo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Da Capo al Fine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Da Capo al Coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>D.S al Coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>D.S al Fine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>D.S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>To Coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Breaks &amp;&amp; Spacer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff spacer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Beam Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Middle of beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start subbeam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Create</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Barlines...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Lines...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Brackets...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accidentals...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Clefs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pedal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Brackets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Accidentals</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Dynamics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Barlines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Fingering</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File Operations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transport Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Concert Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open &amp;Recent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voices</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Preferences...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Interval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuplets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page Settings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Breaks &amp;&amp; Spacer...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Display</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Yardım</translation>
-    </message>
-    <message>
-        <source>Online Handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About&amp;Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Check for Update</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore handbook not found at: 
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Open Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation type="unfinished">Sistem</translation>
-    </message>
-    <message>
-        <source>no score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>note entry mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>edit mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go To: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="unfinished">Ara</translation>
-    </message>
-    <message>
-        <source>Bar %1 Beat %2.%3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The previous session quit unexpectedly.
-
-Restore session?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error loading plugin
-&quot;%1&quot; line %2:
-%3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Script
-%1
-is incompatible with current interface</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore is too old to run script
-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Symbols1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Symbols3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Subtitle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Composer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Poet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lyrics odd lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lyrics even lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>InstrumentsLong</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>InstrumentsShort</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>InstrumentsExcerpt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Technik</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Metronome</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copyright</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measure Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page Number Odd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page Number Even</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Translator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chordname</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TextLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>String Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ottava</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizard</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Title:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Subtitle:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Composer:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Poet:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copyright:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create new score from template</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create new score from scratch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage1</name>
-    <message>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This wizard creates a new score</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage2</name>
-    <message>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage3</name>
-    <message>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Time Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage4</name>
-    <message>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Template File:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NewWizardPage5</name>
-    <message>
-        <source>Create New Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Key Signature:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Note</name>
-    <message>
-        <source>Note Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuplet...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Tuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>NoteBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>head index</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>note head group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OnTime:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OffTime:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PageBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page No.:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PageSettingsBase</name>
-    <message>
-        <source>MuseScore: Page Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Preview</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="unfinished">Uygula</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished">TAMAM</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
-    </message>
-    <message>
-        <source>Page Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Two Sided</source>
-        <translation type="unfinished"></translation>
+        <source>Portrait</source>
+        <translation type="unfinished">Dikey</translation>
     </message>
     <message>
         <source>Landscape</source>
         <translation type="unfinished">Yatay</translation>
     </message>
     <message>
-        <source>Height</source>
+        <source>Show single page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Width</source>
+        <source>Show facing pages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Scaling</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation type="unfinished">Space</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>inch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Even Page Margins</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom Margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top Margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right Margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left Margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Odd Page Margins</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Palette</name>
-    <message>
-        <source>Delete Contents</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PaletteBox</name>
-    <message>
-        <source>Palettes</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PaletteBoxButton</name>
-    <message>
-        <source>Palette Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert new Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move Palette Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move Palette Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable Editing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PaletteCellProperties</name>
-    <message>
-        <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Palette Cell Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Content Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>x:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>y:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PaletteProperties</name>
-    <message>
-        <source>MuseScore: Palette Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cell Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>w:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>h:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show Grid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Element Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scale:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PartEditBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Part Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Volume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Panorama Position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reverb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chorus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rev</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cho</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Solo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>drumset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sound:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>midi sound for part</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PianorollEditor</name>
-    <message>
-        <source>toolbar1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>toolbar2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cursor:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Velocity:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>user</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PlayPanelBase</name>
-    <message>
-        <source>MuseScore: Play Panel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>measure.beat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>001.01</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>h:mm:s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>0:00:00</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>actual tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>120bpm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>relative tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>100%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Straight</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Swing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shuffle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tmp</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PreferenceDialog</name>
-    <message>
-        <source>default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose Notepaper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Images (*.jpg *.gif *.png)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose Background Wallpaper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose Working Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose Instrument List</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Instrument List (*.xml)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose Starting Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PrefsDialogBase</name>
-    <message>
-        <source>MuseScore: Preferences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Preferences</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Program Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>start empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>continue last session</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>start with new score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>start with score:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show splash screen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation type="unfinished">Sistem</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Attention: changing the language requires a restart of MuseScore.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Paths</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Instrument List:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Working Directory:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Windows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play Panel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Current Position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Navigator:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save every</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Icons</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Entry:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Application Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Canvas</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wallpaper</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notesheet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Misc.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proximity for selecting elements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>disable antialiased drawing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>uncheck this to speed up drawing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Draw Antialiased</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto-correction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <source>Replace 1/2 with fraction character ½</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Score element colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default foreground</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Voice 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Voice 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Voice 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Voice 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Drop Target</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable midi input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play notes when editing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default duration:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ms</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alternate input method</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color notes outside of usable pitch range</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export MIDI</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Expand Repeats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MIDI Remote Control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="unfinished">Dur</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default Paper Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Two Sided</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Landscape</source>
-        <translation type="unfinished">Yatay</translation>
-    </message>
-    <message>
-        <source>Scaling</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation type="unfinished">Space</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <extracomment>millimeter</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>I/O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use JACK MIDI output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ports</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remember last connection(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use internal synthesizer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>JACK Audio Server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Left-Port:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right-Port:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ALSA Audio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Device:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sample Rate:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>192000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>96000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>88200</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>48000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>44100</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>32000</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>22050</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fragments:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Period Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>4096</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>2048</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1024</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>512</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>256</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>128</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>64</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Portaudio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Api:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose PortMidi input interface</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Attention: Any changes on this page require a restart of MuseScore.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Style Used for Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Built in style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use style file:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PNG</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>screen shot function</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shortcut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reset to Default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="unfinished">Temizle</translation>
-    </message>
-    <message>
-        <source>Define...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation type="unfinished">Güncelle</translation>
-    </message>
-    <message>
-        <source>Automatic Update Check</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Check for new versions of MuseScore on startup</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QComboBox</name>
-    <message>
-        <source>Ped (Pedal)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>* (Pedal)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>. (Pedal)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dash (Pedal)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tr (Trill)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QMessageBox</name>
-    <message>
-        <source>MuseScore:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No note selected:
-Please select a single note and retry operation
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No note or rest selected:
-Please select a single note or rest and retry operation
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please select a single note or slur and retry operation
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please select one or more staves and retry operation
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QWidget</name>
-    <message>
-        <source>MuseScore: Import Capella</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="unfinished">Çık</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Chord Description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: file not found:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: load failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Style failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Open chord list failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load chord list failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Chord Description File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save Chord Description File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: load midi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: load Style failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reading file &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load languages failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: invalid command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Palette failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Palettes failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load font symbols failed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RecordButton</name>
-    <message>
-        <source>record</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Rest</name>
-    <message>
-        <source>Rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuplet...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Tuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rest Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>RestPropertyBase</name>
-    <message>
-        <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rest Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>additional leading space </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SLineBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tick2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Anchor:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SEGMENT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MEASURE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>digonal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LineSegments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Score</name>
-    <message>
-        <source>No staves found:
-please use the instruments dialog to
-first create some staves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No Measure selected:
-please select a measure and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The first time signature of a piece can not be removed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Compressed MuseScore File (*.mscz)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore File (*.mscx)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save Score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The following file is locked: 
-%1 
-
-Try saving to a different location.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Temp File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save File failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>removing old backup file </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>renaming old file &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&gt; to backup &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&gt; failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>renaming temp. file &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&gt; to &lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&gt; failed:
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>cannot determine file type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Save Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Style File (*.mss)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Style File
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Open Style file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write Style failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Write Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Read File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: transpose</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>There is nothing selected. Transpose whole score?</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ScoreView</name>
-    <message>
-        <source>Select</source>
-        <translation type="unfinished">Seç</translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="unfinished">Daha Fazlası...</translation>
-    </message>
-    <message>
-        <source>Object Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Drumroll Editor...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pianoroll Editor...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Split Staff...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>unknown drop format: formats %1:
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SegmentBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clef Segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Begin Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chord/Rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Breath Segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End Bar Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time Signature Announce</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lyrics:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Segment Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SelectDialog</name>
-    <message>
-        <source>MuseScore: Select</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search for</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Element Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>same staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>same voice</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>same system</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>replace selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>search in selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>subtract from selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SelectInstrument</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show more</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Seq</name>
-    <message>
-        <source>Init audio driver failed.
-Sequencer will be disabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: Load SoundFont</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No SoundFont configured
-Playback will be disabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loading SoundFont
-&quot;%1&quot;
-failed. Playback will be disabled.
-
-Go to Display &gt; Synthesizer 
-and check that the file location is correct</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ShortcutCaptureDialog</name>
-    <message>
-        <source>Shortcut conflicts with </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Undefined</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ShortcutCaptureDialogBase</name>
-    <message>
-        <source>Enter shortcut sequence</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Press up to 4 keys to enter shortcut sequence!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Old shortcut:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New shortcut:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clear</source>
-        <translation type="unfinished">Temizle</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished">TAMAM</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
-    </message>
-</context>
-<context>
-    <name>ShowChordWidget</name>
-    <message>
-        <source>auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>no beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Yukarı</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="unfinished">Aşağı</translation>
-    </message>
-</context>
-<context>
-    <name>ShowClefWidget</name>
-    <message>
-        <source>Clef Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ShowRestWidget</name>
-    <message>
-        <source>auto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>no beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Segment:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SlurBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Slur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Slur End</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Voice:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tick:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SlurPropertyBase</name>
-    <message>
-        <source>Volta Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Slur Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>solid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dotted</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SlurSegment</name>
-    <message>
-        <source>Edit Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Slur Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SlurTieBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>startElement</source>
-        <extracomment>do not translate</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>endElement</source>
-        <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SplitStaff</name>
-    <message>
-        <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Split Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Split Point</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StaffText</name>
-    <message>
-        <source>Staff Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StaffTextProperties</name>
-    <message>
-        <source>MuseScore: Staff Text Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Midi Action</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SymbolDialog</name>
-    <message>
-        <source>MuseScore: Symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SymbolDialogBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System Flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished">Sil</translation>
-    </message>
-</context>
-<context>
-    <name>SynthControl</name>
-    <message>
-        <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rev</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cho</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>master volume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Loaded SoundFont</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Master Tuning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hz</source>
-        <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SoundFont</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reverb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Room Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Damp:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Preset:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>not implemented</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chorus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Triangle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Speed:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Depth:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TempoProperties</name>
-    <message>
-        <source>MuseScore: Tempo Text Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tempo Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tempo:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BPM</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TempoText</name>
-    <message>
-        <source>Tempo Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Text</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offset:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation type="unfinished">Space</translation>
-    </message>
-    <message>
-        <source>Type:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abs.:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rel.:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TextStyle:</source>
-        <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextC</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextLineBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TextLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>line width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BeginText</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ContinueText</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextLineSegment</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextPaletteBase</name>
-    <message>
-        <source>MuseScore: Special Text Symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextProp</name>
-    <message>
-        <source>mm</source>
-        <comment>millimeter unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sp</source>
-        <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextProperties</name>
-    <message>
-        <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>apply to all elements of same type</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextPropertiesBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Font:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>font face</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>font point size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>italic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>underline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Align:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align left edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>center text on reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align right edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align top edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>center text vertical to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>text color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System Flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>X:</source>
-        <extracomment>coordinate</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>horizontal offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>relX:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Y:</source>
-        <extracomment>coordinate</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>vertical offset to reference point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>relY:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unit:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset is absolute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>offset in Space units</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Space</source>
-        <translation type="unfinished">Space</translation>
-    </message>
-    <message>
-        <source>enable text frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>draw circled frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>draw boxed frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Box</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>frame line width</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Margin:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>frame inner margin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Round:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>corner round</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>frame color</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextStyleDialog</name>
-    <message>
-        <source>MuseScore: Edit Text Styles</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TextTools</name>
-    <message>
-        <source>Text Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TimeDialog</name>
-    <message>
-        <source>MuseScore: Time Signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>4/4 common time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>2/2 alla breve</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TimeDialogBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create Time Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>+</source>
-        <translation type="unfinished">+</translation>
-    </message>
-    <message>
-        <source>add time signature to palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TimesigWizard</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Time Signature:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time Signature: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pickup Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time Signature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Number of Measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measures:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TransposeDialogBase</name>
-    <message>
-        <source>MuseScore: Transpose</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transpose by Key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cb major / Ab minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gb major / Eb minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Db major / Bb minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ab major / F minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Eb major / C minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bb major / G minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F major / D minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C major / A minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>G major / E minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>D major / B minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A major / F# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>E major / C# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B major / G# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F# major / D# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C# major / A# minor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Yukarı</translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="unfinished">Aşağı</translation>
-    </message>
-    <message>
-        <source>Closest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transpose by Interval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Perfect Unison</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Unison</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Second</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Third</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Perfect Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Fourth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Perfect Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Fifth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Sixth</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Minor Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Major Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Augmented Seventh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Diminished Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Perfect Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="unfinished">Seçenekler</translation>
-    </message>
-    <message>
-        <source>Transpose key signatures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transpose chord names</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Single sharps and flats only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use double sharps and flats</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TremoloBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>firstChord</source>
-        <extracomment>do not translate</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>secondChord</source>
-        <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Tuplet</name>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TupletBase</name>
-    <message>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TupletDialog</name>
-    <message>
-        <source>MuseScore: create tuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="unfinished">Tip</translation>
-    </message>
-    <message>
-        <source>relation:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>relation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>nothing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>auto bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TupletProperties</name>
-    <message>
-        <source>MuseScore: Tuplet Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>relation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>nothing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>auto bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>UpdateChecker</name>
-    <message>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update Available</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No Update Available</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VBox</name>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>VBox Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VoltaPropertyBase</name>
-    <message>
-        <source>Volta Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat List:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VoltaSegment</name>
-    <message>
-        <source>Volta Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>accidental</name>
-    <message>
-        <source>none</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(sharp)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(flat)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(double sharp)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(double flat)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(natural)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[sharp]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[flat]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[double sharp]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[double flat]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>[natural]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat-slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirrored-flat2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirrored-flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirrored-flat-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat-flat-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp-slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp-slash3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp-slash4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>action</name>
-    <message>
-        <source>Local handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show local handbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load score from file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished">Kaydet</translation>
-    </message>
-    <message>
-        <source>Save score to file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File save as</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save As...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save score under a new file name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File save a copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save a Copy...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save a copy of the score in addition to the current file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File reload</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reload score from file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished">Kapat</translation>
-    </message>
-    <message>
-        <source>Close current score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>file new</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create new score</source>
+        <source>Show overview of all pages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6868,1816 +2933,18 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Yazdır</translation>
     </message>
     <message>
-        <source>Print...</source>
+        <source>Page setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Print score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation type="unfinished">Geri Al</translation>
-    </message>
-    <message>
-        <source>Undo last change</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Redo</source>
-        <translation type="unfinished">Yinele</translation>
-    </message>
-    <message>
-        <source>Redo last undo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show instruments dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Instruments...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show clefs palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clefs...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show keys signatures palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key Signatures...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show key signatures palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show symbols palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Symbols...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show time signatures palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time Signatures...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show dynamics palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dynamics...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note input mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch spell</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch Spell</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter unison above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unison Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter second above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Second Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter third above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Third Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter fourth above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fourth Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter fifth above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fifth Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter sixth above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sixth Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter seventh above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seventh Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter octave above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Octave Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter ninth above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ninth Above</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter second below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Second Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter third below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Third Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter fourth below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fourth Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter fifth below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fifth Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter sixth below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sixth Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter seventh below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seventh Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter octave below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Octave Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter ninth below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ninth Below</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter note A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter note B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter note C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter note D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter note E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter note F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter note G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add note A to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add note B to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add note C to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add note D to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add note E to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add note F to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add note G to chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add staccato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staccato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add trill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Trill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add More Stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add more stretch to selected measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Less stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Less Stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add less stretch to selected measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reset Beam Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reset beam mode of selected measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flip direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flip Direction</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Up</source>
-        <translation type="unfinished">Yukarı</translation>
-    </message>
-    <message>
-        <source>Pitch up octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Up Octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch up by an octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch up note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Up Note in Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to higher pitched note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to top note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Top Note in Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up+shift+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Down</source>
-        <translation type="unfinished">Aşağı</translation>
-    </message>
-    <message>
-        <source>Pitch down octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Down octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch down by an octave</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitch down note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Down Note in Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to lower pitched note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to bottom note in chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bottom Note in Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down+shift+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Previous chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Previous Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Previous measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Previous Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Next chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Next Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Next measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Next Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add previous chord to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>left+shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to beginning of measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>left+ctrl</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add next chord to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>right+shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to end of measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>right+ctrl+shift</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to beginning of line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>shift+home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to end of line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>shift+end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to beginning of score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ctrl+shift+home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>select to end of score</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ctrl+shift+end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add staff above to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add staff below to selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>page-prev</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>page-next</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>page-top</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>page-end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>add slur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>crescendo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>decrescendo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ESCAPE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished">Sil</translation>
-    </message>
-    <message>
-        <source>Delete contents of the selected measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Timewise Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete element and duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete selected measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Append measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Append Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Append measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Append Measures...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert measures</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert Measures...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Insert Vertical Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Append Horizontal Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Append Vertical Frame</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Duplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Triplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quadruplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quintuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sextuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Septuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Octuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nonuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Other Tuplets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Other...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>note longa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Longa</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>note breve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Double whole note (breve)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad note 1/1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Whole note (semibreve)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad note 1/2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Half note (minim)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad note 1/4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quarter note (crochet)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad note 1/8</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Eighth note (quaver)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad note 1/16</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>16th note (semiquaver)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad note 1/32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>32nd note (demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad note 1/64</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>64th note (semi-demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad double dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Double dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tie</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pad rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acciaccatura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>appoggiatura</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>grace-4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>grace-16</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>grace-32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>voice 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>voice 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>voice 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>voice 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>midi input in</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable MIDI Input</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>editing sound on</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable sound while editing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam mid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>no beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>beam 32</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>auto beam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play Panel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Navigator</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mixer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transport Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transport</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note Input Toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Status Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="unfinished">Çık</translation>
-    </message>
-    <message>
-        <source>Mag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zoom Canvas</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fingering Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fingering...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fingering</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tempo Palette</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tempo...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Metronome</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add System Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Staff Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staff Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Frame Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Title Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Subtitle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Subtitle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Subtitle Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Composer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Composer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Composer Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Poet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Poet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Poet Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Copyright</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copyright</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Copyright Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Chord Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chord Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Chord Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show harmony properties for chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Harmony Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Player play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start or stop playback</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seek to begin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Player rewind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rewind to start position</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seek to end</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play repeats on/off</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="unfinished">Tümünü Seç</translation>
-    </message>
-    <message>
-        <source>Transpose</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Transpose...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>violin clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Exchange Voice 1-4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Exchange Voice 2-4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Exchange Voice 3-4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>display in concert pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Concert Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>repeat last command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat last command</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>edit score meta data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Meta Data...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Meta Data</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>toggle system break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Toggle System Break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>toggle page break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Toggle Page Break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>edit element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reset positions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reset Positions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Inspector</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reset measure stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reset Stretch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show Invisible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show frames</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show Frames</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>show keyboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show Keyboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enable script debugger</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable Script Debugger</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enter 1/1 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/1 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enter 1/2 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/2 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enter 1/4 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/4 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enter 1/8 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/8 rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>backspace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="unfinished">Ara</translation>
-    </message>
-    <message>
-        <source>Zoom In</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirror note head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit General Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Text Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Chord Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select all similar elements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Similar Elements</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Synthesizer Control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>double duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half duration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>repeat selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>follow song</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow Song</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>split window horizontal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Documents Side by Side</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>split window vertical</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Documents Stacked</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parts...</source>
-        <translation type="unfinished"></translation>
+        <source>Close</source>
+        <translation type="unfinished">Kapat</translation>
     </message>
 </context>
 <context>
-    <name>articulation</name>
+    <name>QPrintPropertiesWidget</name>
     <message>
-        <source>ufermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ushortfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dshortfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ulongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dlongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>uverylongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dverylongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>thumb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sforzato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>espressivo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ustaccatissimo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dstaccatissimo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tenuto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>uportato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dportato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>umarcato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dmarcato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ouvert</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>plusstop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>upbow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>downbow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reverseturn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>turn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prallprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prallmordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>upprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>downprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>upmordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>downmordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>snappizzicato</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>clefTable</name>
-    <message>
-        <source>Treble clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Treble clef 8va</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Treble clef 15ma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Treble clef 8vb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass clef 8vb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass clef 15mb</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Baritone clef (F clef)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Subbass clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Soprano clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mezzo-soprano clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alto clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tenor clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tablature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Percussion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Baritone clef (C clef)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>French violin clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass clef 8va</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass clef 15ma</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>elementName</name>
-    <message>
-        <source>Symbol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SlurSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>BarLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>StemSlash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arpeggio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>KeySig</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TimeSig</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Breath</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Glissando</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RepeatMeasure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tie</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Articulation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8685,1085 +2952,2340 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Beam</source>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QPrintSettingsOutput</name>
+    <message>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hook</source>
-        <translation type="unfinished"></translation>
+        <source>Copies</source>
+        <translation type="unfinished">Kopya</translation>
     </message>
     <message>
-        <source>Lyrics</source>
-        <translation type="unfinished"></translation>
+        <source>Print range</source>
+        <translation type="unfinished">Yazdırma oranı</translation>
     </message>
     <message>
-        <source>Marker</source>
-        <translation type="unfinished"></translation>
+        <source>Print all</source>
+        <translation type="unfinished">Tümünü yazdır</translation>
     </message>
     <message>
-        <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <source>Pages from</source>
+        <translation type="unfinished">Bu sayfadan</translation>
     </message>
     <message>
-        <source>Tuplet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tempo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>StaffText</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Harmony</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HairpinSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OttavaSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PedalSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TrillSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TextLineSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>VoltaSegment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LayoutBreak</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Spacer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>LedgerLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NoteHead</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tremolo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>StaffLines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cursor</source>
-        <translation type="unfinished"></translation>
+        <source>to</source>
+        <translation type="unfinished">bu sayfaya</translation>
     </message>
     <message>
         <source>Selection</source>
         <translation type="unfinished">Seçim</translation>
     </message>
     <message>
-        <source>Lasso</source>
+        <source>Output Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ShadowNote</source>
+        <source>Copies:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>RubberBand</source>
+        <source>Collate</source>
+        <translation type="unfinished">Harmanla</translation>
+    </message>
+    <message>
+        <source>Reverse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>HairPin</source>
+        <source>Options</source>
+        <translation type="unfinished">Seçenekler</translation>
+    </message>
+    <message>
+        <source>Color Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ottava</source>
+        <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pedal</source>
+        <source>Grayscale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Trill</source>
+        <source>Duplex Printing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLine</source>
+        <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Segment</source>
+        <source>Long side</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>System</source>
-        <translation type="unfinished">Sistem</translation>
-    </message>
-    <message>
-        <source>Compound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chord</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Slur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ElementList</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>StaffList</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MeasureList</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>VBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Icon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>AccidentalBracket</source>
+        <source>Short side</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>magTable</name>
+    <name>QPrintWidget</name>
     <message>
-        <source>Page Width</source>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Whole Page</source>
+        <source>Printer</source>
+        <translation type="unfinished">Yazıcı</translation>
+    </message>
+    <message>
+        <source>&amp;Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Two Pages</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>preferences</name>
-    <message>
-        <source>Every day</source>
+        <source>P&amp;roperties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Every 3 days</source>
+        <source>Location:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Every week</source>
+        <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Every 2 weeks</source>
+        <source>Type:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Every month</source>
+        <source>Output &amp;file:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Every 2 months</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Never</source>
+        <source>...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>symbol</name>
+    <name>QProgressDialog</name>
     <message>
-        <source>whole rest</source>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+</context>
+<context>
+    <name>QPushButton</name>
+    <message>
+        <source>Open</source>
+        <translation>Aç</translation>
+    </message>
+</context>
+<context>
+    <name>QRadioButton</name>
+    <message>
+        <source>Check</source>
+        <translation>Kontrol Et</translation>
+    </message>
+</context>
+<context>
+    <name>QRegExp</name>
+    <message>
+        <source>no error occurred</source>
+        <translation>hata yok</translation>
+    </message>
+    <message>
+        <source>disabled feature used</source>
+        <translation>pasifleştirilmiş özellik kullanıldı</translation>
+    </message>
+    <message>
+        <source>bad char class syntax</source>
+        <translation>kötü karakter sınıfı söz dizimi</translation>
+    </message>
+    <message>
+        <source>bad lookahead syntax</source>
+        <translation>ileriye dönük kötü söz dizimi</translation>
+    </message>
+    <message>
+        <source>bad repetition syntax</source>
+        <translation>kötü tekrarlama söz dizimi</translation>
+    </message>
+    <message>
+        <source>invalid octal value</source>
+        <translation>geçersiz sekizlik değer</translation>
+    </message>
+    <message>
+        <source>missing left delim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unexpected end</source>
+        <translation>beklenmeyen bitiş</translation>
+    </message>
+    <message>
+        <source>met internal limit</source>
+        <translation>iç limite ulaşıldı</translation>
+    </message>
+</context>
+<context>
+    <name>QSQLite2Driver</name>
+    <message>
+        <source>Error to open database</source>
+        <translation>Veritabanı açma hatası</translation>
+    </message>
+    <message>
+        <source>Unable to begin transaction</source>
+        <translation>İşleme (transaction) başlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to commit transaction</source>
+        <translation>İşlem (transaction) yapılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to rollback Transaction</source>
+        <translation>İşlem (transaction) geri alınamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QSQLite2Result</name>
+    <message>
+        <source>Unable to fetch results</source>
+        <translation>Sonuçlar eşlenemedi</translation>
+    </message>
+    <message>
+        <source>Unable to execute statement</source>
+        <translation>İfade çalıştırılamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QSQLiteDriver</name>
+    <message>
+        <source>Error opening database</source>
+        <translation>Veritabanı açılırken hata oluştu</translation>
+    </message>
+    <message>
+        <source>Error closing database</source>
+        <translation>Veritabanı kapatma hatası</translation>
+    </message>
+    <message>
+        <source>Unable to begin transaction</source>
+        <translation>İşleme (transaction) başlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to commit transaction</source>
+        <translation>İşlem (transaction) yapılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to rollback transaction</source>
+        <translation type="unfinished">İşlem (transaction) geri alınamadı</translation>
+    </message>
+</context>
+<context>
+    <name>QSQLiteResult</name>
+    <message>
+        <source>Unable to fetch row</source>
+        <translation>Satır getirilemedi</translation>
+    </message>
+    <message>
+        <source>Unable to execute statement</source>
+        <translation>İfade çalıştırılamadı</translation>
+    </message>
+    <message>
+        <source>Unable to reset statement</source>
+        <translation>İfade sıfırlanamadı</translation>
+    </message>
+    <message>
+        <source>Unable to bind parameters</source>
+        <translation>Parametreler atanamadı</translation>
+    </message>
+    <message>
+        <source>Parameter count mismatch</source>
+        <translation>Parametre sayısı tutmuyor</translation>
+    </message>
+    <message>
+        <source>No query</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QScrollBar</name>
+    <message>
+        <source>Scroll here</source>
+        <translation>Buraya kaydır</translation>
+    </message>
+    <message>
+        <source>Left edge</source>
+        <translation>Sol gölge</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation>En Yukarı</translation>
+    </message>
+    <message>
+        <source>Right edge</source>
+        <translation>Sağ gölge</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation>En Aşağı</translation>
+    </message>
+    <message>
+        <source>Page left</source>
+        <translation>Sayfa sola</translation>
+    </message>
+    <message>
+        <source>Page up</source>
+        <translation>Sayfa yukarı</translation>
+    </message>
+    <message>
+        <source>Page right</source>
+        <translation>Sayfa sağa</translation>
+    </message>
+    <message>
+        <source>Page down</source>
+        <translation>Sayfa aşağı</translation>
+    </message>
+    <message>
+        <source>Scroll left</source>
+        <translation>Sola kaydır</translation>
+    </message>
+    <message>
+        <source>Scroll up</source>
+        <translation>Yukarı kaydır</translation>
+    </message>
+    <message>
+        <source>Scroll right</source>
+        <translation>Sağa kaydır</translation>
+    </message>
+    <message>
+        <source>Scroll down</source>
+        <translation>Aşağı kaydır</translation>
+    </message>
+    <message>
+        <source>Line up</source>
+        <translation>Diz</translation>
+    </message>
+    <message>
+        <source>Position</source>
+        <translation>Konum</translation>
+    </message>
+    <message>
+        <source>Line down</source>
+        <translation>Satır aşağı</translation>
+    </message>
+</context>
+<context>
+    <name>QSharedMemory</name>
+    <message>
+        <source>%1: unable to set key on lock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: create size is less then 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: unable to lock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: unable to unlock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: permission denied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: doesn&apos;t exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: out of resources</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: unknown error %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: key is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: unix key file doesn&apos;t exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: ftok failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: unable to make key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: system-imposed size restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: not attached</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QShortcut</name>
+    <message>
+        <source>Space</source>
+        <translation>Space</translation>
+    </message>
+    <message>
+        <source>Esc</source>
+        <translation>Esc</translation>
+    </message>
+    <message>
+        <source>Tab</source>
+        <translation>Tab</translation>
+    </message>
+    <message>
+        <source>Backtab</source>
+        <translation>Backtab</translation>
+    </message>
+    <message>
+        <source>Backspace</source>
+        <translation>Backspace</translation>
+    </message>
+    <message>
+        <source>Return</source>
+        <translation>Return</translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation>Enter</translation>
+    </message>
+    <message>
+        <source>Ins</source>
+        <translation>Ins</translation>
+    </message>
+    <message>
+        <source>Del</source>
+        <translation>Del</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>Pause</translation>
+    </message>
+    <message>
+        <source>Print</source>
+        <translation>Yazdır</translation>
+    </message>
+    <message>
+        <source>SysReq</source>
+        <translation>SysReq</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Başlangıç</translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation>Bitir</translation>
+    </message>
+    <message>
+        <source>Left</source>
+        <translation>Sol</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation>Yukarı</translation>
+    </message>
+    <message>
+        <source>Right</source>
+        <translation>Sağ</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation>Aşağı</translation>
+    </message>
+    <message>
+        <source>PgUp</source>
+        <translation>PgUp</translation>
+    </message>
+    <message>
+        <source>PgDown</source>
+        <translation>PgDown</translation>
+    </message>
+    <message>
+        <source>CapsLock</source>
+        <translation>CapsLock</translation>
+    </message>
+    <message>
+        <source>NumLock</source>
+        <translation>NumLock</translation>
+    </message>
+    <message>
+        <source>ScrollLock</source>
+        <translation>ScrollLock</translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation>Menü</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Yardım</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Geri</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>İleri</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Dur</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>Yenile</translation>
+    </message>
+    <message>
+        <source>Volume Down</source>
+        <translation>Sesi Yükselt</translation>
+    </message>
+    <message>
+        <source>Volume Mute</source>
+        <translation>Sesi Kapat</translation>
+    </message>
+    <message>
+        <source>Volume Up</source>
+        <translation>Sesi Alçalt</translation>
+    </message>
+    <message>
+        <source>Bass Boost</source>
+        <translation>Bası Güçlendir</translation>
+    </message>
+    <message>
+        <source>Bass Up</source>
+        <translation>Bası Yükselt</translation>
+    </message>
+    <message>
+        <source>Bass Down</source>
+        <translation>Bası Alçalt</translation>
+    </message>
+    <message>
+        <source>Treble Up</source>
+        <translation>Tizi Yükselt</translation>
+    </message>
+    <message>
+        <source>Treble Down</source>
+        <translation>Tizi Alçalt</translation>
+    </message>
+    <message>
+        <source>Media Play</source>
+        <translation>Çokluortam Çal</translation>
+    </message>
+    <message>
+        <source>Media Stop</source>
+        <translation>Çokluortam Dur</translation>
+    </message>
+    <message>
+        <source>Media Previous</source>
+        <translation>Çokluortam Önceki</translation>
+    </message>
+    <message>
+        <source>Media Next</source>
+        <translation>Çokluortam Sonraki</translation>
+    </message>
+    <message>
+        <source>Media Record</source>
+        <translation>Çokluortam Kaydet</translation>
+    </message>
+    <message>
+        <source>Favorites</source>
+        <translation>Yer İmleri</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Ara</translation>
+    </message>
+    <message>
+        <source>Standby</source>
+        <translation>Bekleme Kipine Geç</translation>
+    </message>
+    <message>
+        <source>Open URL</source>
+        <translation>Adres Aç</translation>
+    </message>
+    <message>
+        <source>Launch Mail</source>
+        <translation>E-posta Uygulamasını Aç</translation>
+    </message>
+    <message>
+        <source>Launch Media</source>
+        <translation>Çokluortam Aç</translation>
+    </message>
+    <message>
+        <source>Launch (0)</source>
+        <translation>Çalıştır (0)</translation>
+    </message>
+    <message>
+        <source>Launch (1)</source>
+        <translation>Çalıştır (1)</translation>
+    </message>
+    <message>
+        <source>Launch (2)</source>
+        <translation>Çalıştır (2)</translation>
+    </message>
+    <message>
+        <source>Launch (3)</source>
+        <translation>Çalıştır (3)</translation>
+    </message>
+    <message>
+        <source>Launch (4)</source>
+        <translation>Çalıştır (4)</translation>
+    </message>
+    <message>
+        <source>Launch (5)</source>
+        <translation>Çalıştır (5)</translation>
+    </message>
+    <message>
+        <source>Launch (6)</source>
+        <translation>Çalıştır (6)</translation>
+    </message>
+    <message>
+        <source>Launch (7)</source>
+        <translation>Çalıştır (7)</translation>
+    </message>
+    <message>
+        <source>Launch (8)</source>
+        <translation>Çalıştır (8)</translation>
+    </message>
+    <message>
+        <source>Launch (9)</source>
+        <translation>Çalıştır (9)</translation>
+    </message>
+    <message>
+        <source>Launch (A)</source>
+        <translation>Çalıştır (A)</translation>
+    </message>
+    <message>
+        <source>Launch (B)</source>
+        <translation>Çalıştır (B)</translation>
+    </message>
+    <message>
+        <source>Launch (C)</source>
+        <translation>Çalıştır (C)</translation>
+    </message>
+    <message>
+        <source>Launch (D)</source>
+        <translation>Çalıştır (D)</translation>
+    </message>
+    <message>
+        <source>Launch (E)</source>
+        <translation>Çalıştır (E)</translation>
+    </message>
+    <message>
+        <source>Launch (F)</source>
+        <translation>Çalıştır (F)</translation>
+    </message>
+    <message>
+        <source>Print Screen</source>
+        <translation>Ekran Görüntüsü Al</translation>
+    </message>
+    <message>
+        <source>Page Up</source>
+        <translation>Sayfa Yukarı</translation>
+    </message>
+    <message>
+        <source>Page Down</source>
+        <translation>Sayfa Aşağı</translation>
+    </message>
+    <message>
+        <source>Caps Lock</source>
+        <translation>Caps Lock</translation>
+    </message>
+    <message>
+        <source>Num Lock</source>
+        <translation>Num Lock</translation>
+    </message>
+    <message>
+        <source>Number Lock</source>
+        <translation>Number Lock</translation>
+    </message>
+    <message>
+        <source>Scroll Lock</source>
+        <translation>Scroll Lock</translation>
+    </message>
+    <message>
+        <source>Insert</source>
+        <translation>Ekle</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Sil</translation>
+    </message>
+    <message>
+        <source>Escape</source>
+        <translation>Escape</translation>
+    </message>
+    <message>
+        <source>System Request</source>
+        <translation>Sistem İsteği</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation>Seç</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Evet</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Hayır</translation>
+    </message>
+    <message>
+        <source>Context1</source>
+        <translation>Bağlam1</translation>
+    </message>
+    <message>
+        <source>Context2</source>
+        <translation>Bağlam2</translation>
+    </message>
+    <message>
+        <source>Context3</source>
+        <translation>Bağlam3</translation>
+    </message>
+    <message>
+        <source>Context4</source>
+        <translation>Bağlam4</translation>
+    </message>
+    <message>
+        <source>Call</source>
+        <translation>Ara</translation>
+    </message>
+    <message>
+        <source>Hangup</source>
+        <translation>Aç</translation>
+    </message>
+    <message>
+        <source>Flip</source>
+        <translation>Çevir</translation>
+    </message>
+    <message>
+        <source>Ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alt</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meta</source>
+        <translation>Meta</translation>
+    </message>
+    <message>
+        <source>+</source>
+        <translation>+</translation>
+    </message>
+    <message>
+        <source>F%1</source>
+        <translation>F%1</translation>
+    </message>
+    <message>
+        <source>Home Page</source>
+        <translation>Web Sayfası</translation>
+    </message>
+</context>
+<context>
+    <name>QSlider</name>
+    <message>
+        <source>Page left</source>
+        <translation>Sayfa sola</translation>
+    </message>
+    <message>
+        <source>Page up</source>
+        <translation>Sayfa yukarı</translation>
+    </message>
+    <message>
+        <source>Position</source>
+        <translation>Konum</translation>
+    </message>
+    <message>
+        <source>Page right</source>
+        <translation>Sayfa sağa</translation>
+    </message>
+    <message>
+        <source>Page down</source>
+        <translation>Sayfa aşağı</translation>
+    </message>
+</context>
+<context>
+    <name>QSocks5SocketEngine</name>
+    <message>
+        <source>Socks5 timeout error connecting to socks server</source>
+        <translation>Socks sunucusuna bağlanırken Socks5 zamanaşımı hatası</translation>
+    </message>
+    <message>
+        <source>Network operation timed out</source>
+        <translation type="unfinished">Ağ işleminde zamanaşımı</translation>
+    </message>
+</context>
+<context>
+    <name>QSpinBox</name>
+    <message>
+        <source>More</source>
+        <translation>Daha Fazla</translation>
+    </message>
+    <message>
+        <source>Less</source>
+        <translation>Daha Az</translation>
+    </message>
+</context>
+<context>
+    <name>QSql</name>
+    <message>
+        <source>Delete</source>
+        <translation>Sil</translation>
+    </message>
+    <message>
+        <source>Delete this record?</source>
+        <translation>Bu kayıt silinsin mi?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Evet</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Hayır</translation>
+    </message>
+    <message>
+        <source>Insert</source>
+        <translation>Ekle</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation>Güncelle</translation>
+    </message>
+    <message>
+        <source>Save edits?</source>
+        <translation>Kaydedilsin mi?</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+    <message>
+        <source>Confirm</source>
+        <translation>Doğrula</translation>
+    </message>
+    <message>
+        <source>Cancel your edits?</source>
+        <translation>Değişiklikleriniz iptal edilsin mi?</translation>
+    </message>
+</context>
+<context>
+    <name>QSslSocket</name>
+    <message>
+        <source>Unable to write data: %1</source>
+        <translation>Veri yazılamadı: %1</translation>
+    </message>
+    <message>
+        <source>Error while reading: %1</source>
+        <translation>Okuma hatası: %1</translation>
+    </message>
+    <message>
+        <source>Error during SSL handshake: %1</source>
+        <translation>SSL tokalaşması sırasında hata: %1</translation>
+    </message>
+    <message>
+        <source>Error creating SSL context (%1)</source>
+        <translation>SSL bağlamı oluşturulurken hata (%1)</translation>
+    </message>
+    <message>
+        <source>Invalid or empty cipher list (%1)</source>
+        <translation>Geçersiz ya da boş edinme listesi (%1)</translation>
+    </message>
+    <message>
+        <source>Error creating SSL session, %1</source>
+        <translation>SSL oturumu oluşturma hatası, %1</translation>
+    </message>
+    <message>
+        <source>Error creating SSL session: %1</source>
+        <translation>SSL oturumu oluşturma hatası: %1</translation>
     </message>
     <message>
-        <source>half rest</source>
-        <translation type="unfinished"></translation>
+        <source>Cannot provide a certificate with no key, %1</source>
+        <translation>Anahtar olmadan bir sertifika sağlanamaz, %1</translation>
     </message>
     <message>
-        <source>outside whole rest</source>
-        <translation type="unfinished"></translation>
+        <source>Error loading local certificate, %1</source>
+        <translation>Yerel sertifika yüklenirken hata, %1</translation>
     </message>
     <message>
-        <source>outside half rest</source>
-        <translation type="unfinished"></translation>
+        <source>Error loading private key, %1</source>
+        <translation>Yerel gizli anahtar yüklenirken hata, %1</translation>
     </message>
     <message>
-        <source>rest M3</source>
+        <source>Private key does not certificate public key, %1</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>QTDSDriver</name>
     <message>
-        <source>breve rest</source>
-        <translation type="unfinished"></translation>
+        <source>Unable to open connection</source>
+        <translation>Bağlantı açılamadı</translation>
     </message>
     <message>
-        <source>longa rest</source>
-        <translation type="unfinished"></translation>
+        <source>Unable to use database</source>
+        <translation>Veritabanı kullanılamadı</translation>
     </message>
+</context>
+<context>
+    <name>QTabBar</name>
     <message>
-        <source>quart rest</source>
-        <translation type="unfinished"></translation>
+        <source>Scroll Left</source>
+        <translation>Sola Kaydır</translation>
     </message>
     <message>
-        <source>clas quart rest</source>
-        <translation type="unfinished"></translation>
+        <source>Scroll Right</source>
+        <translation>Sağa Kaydır</translation>
     </message>
+</context>
+<context>
+    <name>QTextControl</name>
     <message>
-        <source>eight rest</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Undo</source>
+        <translation>&amp;Geri Al</translation>
+    </message>
+    <message>
+        <source>&amp;Redo</source>
+        <translation>&amp;Yinele</translation>
+    </message>
+    <message>
+        <source>Cu&amp;t</source>
+        <translation>K&amp;es</translation>
+    </message>
+    <message>
+        <source>&amp;Copy</source>
+        <translation>&amp;Kopyala</translation>
+    </message>
+    <message>
+        <source>Copy &amp;Link Location</source>
+        <translation>Bağlantı Konumunu Kopya&amp;la</translation>
+    </message>
+    <message>
+        <source>&amp;Paste</source>
+        <translation>&amp;Yapıştır</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Sil</translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation>Tümünü Seç</translation>
+    </message>
+</context>
+<context>
+    <name>QToolButton</name>
+    <message>
+        <source>Press</source>
+        <translation>Bas</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Aç</translation>
+    </message>
+</context>
+<context>
+    <name>QUdpSocket</name>
+    <message>
+        <source>This platform does not support IPv6</source>
+        <translation>Bu platform IPv6 desteklemiyor</translation>
+    </message>
+</context>
+<context>
+    <name>QUndoGroup</name>
+    <message>
+        <source>Undo</source>
+        <translation>Geri Al</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation>Yinele</translation>
+    </message>
+</context>
+<context>
+    <name>QUndoModel</name>
+    <message>
+        <source>&lt;empty&gt;</source>
+        <translation>&lt;boş&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>QUndoStack</name>
+    <message>
+        <source>Undo</source>
+        <translation>Geri Al</translation>
+    </message>
+    <message>
+        <source>Redo</source>
+        <translation>Yinele</translation>
+    </message>
+</context>
+<context>
+    <name>QUnicodeControlCharacterMenu</name>
+    <message>
+        <source>LRM Left-to-right mark</source>
+        <translation>LRM Soldan-sağa yap</translation>
+    </message>
+    <message>
+        <source>RLM Right-to-left mark</source>
+        <translation>RLM Sağdan-sola yap</translation>
     </message>
     <message>
-        <source>16&apos; rest</source>
+        <source>ZWJ Zero width joiner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>32&apos; rest</source>
+        <source>ZWNJ Zero width non-joiner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>64&apos; rest</source>
+        <source>ZWSP Zero width space</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LRE Start of left-to-right embedding</source>
+        <translation>LRE Soldan-sağa gömülü yap</translation>
+    </message>
+    <message>
+        <source>RLE Start of right-to-left embedding</source>
+        <translation>RLE Sağdan-sola gömülü yap</translation>
     </message>
     <message>
-        <source>128&apos; rest</source>
+        <source>LRO Start of left-to-right override</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sharp</source>
+        <source>RLO Start of right-to-left override</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sharp arrow up</source>
+        <source>PDF Pop directional formatting</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Insert Unicode control character</source>
+        <translation>Unicode kontrol karakteri ekle</translation>
     </message>
+</context>
+<context>
+    <name>QWebFrame</name>
     <message>
-        <source>sharp arrow both</source>
+        <source>Request cancelled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sharp slash</source>
+        <source>Request blocked</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sharp slash2</source>
+        <source>Cannot show URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sharp slash3</source>
+        <source>Frame load interruped by policy change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sharp slash4</source>
+        <source>Cannot show mimetype</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>natural</source>
+        <source>File does not exist</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>QWebPage</name>
     <message>
-        <source>natural arrow up</source>
+        <source>Bad HTTP request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>natural arrow down</source>
+        <source>Submit</source>
+        <comment>default label for Submit buttons in forms on web pages</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>natural arrow both</source>
+        <source>Submit</source>
+        <comment>Submit (input element) alt text for &lt;input&gt; elements with no alt, title, or value</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset</source>
+        <comment>default label for Reset buttons in forms on web pages</comment>
+        <translation type="unfinished">Sıfırla</translation>
     </message>
     <message>
-        <source>flat</source>
+        <source>This is a searchable index. Enter search keywords: </source>
+        <comment>text that appears at the start of nearly-obsolete web pages in the form of a &apos;searchable index&apos;</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>flat arrow up</source>
+        <source>Choose File</source>
+        <comment>title for file button used in HTML forms</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>flat arrow both</source>
+        <source>No file selected</source>
+        <comment>text to display in file button used in HTML forms when no file is selected</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>flat slash</source>
+        <source>Open in New Window</source>
+        <comment>Open in New Window context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>flat slash2</source>
+        <source>Save Link...</source>
+        <comment>Download Linked File context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>mirrored flat2</source>
+        <source>Copy Link</source>
+        <comment>Copy Link context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>mirrored flat</source>
+        <source>Open Image</source>
+        <comment>Open Image in New Window context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>mirrored flat slash</source>
+        <source>Save Image</source>
+        <comment>Download Image context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>flat flat</source>
+        <source>Copy Image</source>
+        <comment>Copy Link context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>flat flat slash</source>
+        <source>Open Frame</source>
+        <comment>Open Frame in New Window context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sharp sharp</source>
+        <source>Copy</source>
+        <comment>Copy context menu item</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go Back</source>
+        <comment>Back context menu item</comment>
+        <translation type="unfinished">Geri Git</translation>
     </message>
     <message>
-        <source>right parenthesis</source>
+        <source>Go Forward</source>
+        <comment>Forward context menu item</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <comment>Stop context menu item</comment>
+        <translation type="unfinished">Dur</translation>
     </message>
     <message>
-        <source>left parenthesis</source>
+        <source>Reload</source>
+        <comment>Reload context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dot</source>
+        <source>Cut</source>
+        <comment>Cut context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>longa up</source>
+        <source>Paste</source>
+        <comment>Paste context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>longa down</source>
+        <source>No Guesses Found</source>
+        <comment>No Guesses Found context menu item</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <comment>Ignore Spelling context menu item</comment>
+        <translation type="unfinished">Yoksay</translation>
     </message>
     <message>
-        <source>brevis head</source>
+        <source>Add To Dictionary</source>
+        <comment>Learn Spelling context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>brevis double head</source>
+        <source>Search The Web</source>
+        <comment>Search The Web context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>whole head</source>
+        <source>Look Up In Dictionary</source>
+        <comment>Look Up in Dictionary context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>half head</source>
+        <source>Open Link</source>
+        <comment>Open Link context menu item</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore</source>
+        <comment>Ignore Grammar context menu item</comment>
+        <translation type="unfinished">Yoksay</translation>
     </message>
     <message>
-        <source>quart head</source>
+        <source>Spelling</source>
+        <comment>Spelling and Grammar context sub-menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>whole diamond head</source>
+        <source>Show Spelling and Grammar</source>
+        <comment>menu item title</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>half diamond head</source>
+        <source>Hide Spelling and Grammar</source>
+        <comment>menu item title</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>diamond head</source>
+        <source>Check Spelling</source>
+        <comment>Check spelling context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>whole triangle head</source>
+        <source>Check Spelling While Typing</source>
+        <comment>Check spelling while typing context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>down half triangle head</source>
+        <source>Check Grammar With Spelling</source>
+        <comment>Check grammar with spelling context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>up half triangle head</source>
+        <source>Fonts</source>
+        <comment>Font context sub-menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>up quart triangle head</source>
+        <source>Bold</source>
+        <comment>Bold context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>down quart triangle head</source>
+        <source>Italic</source>
+        <comment>Italic context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>whole slash head</source>
+        <source>Underline</source>
+        <comment>Underline context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>half slash head</source>
+        <source>Outline</source>
+        <comment>Outline context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>quart slash head</source>
+        <source>Direction</source>
+        <comment>Writing direction context sub-menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>whole cross head</source>
+        <source>Default</source>
+        <comment>Default writing direction context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>half cross head</source>
+        <source>LTR</source>
+        <comment>Left to Right context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cross head</source>
+        <source>RTL</source>
+        <comment>Right to Left context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>x circle head</source>
+        <source>Inspect</source>
+        <comment>Inspect Element context menu item</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>s0do head</source>
+        <source>No recent searches</source>
+        <comment>Label for only item in menu that appears when clicking on the search field image, when no searches have been performed</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>d1do head</source>
+        <source>Recent searches</source>
+        <comment>label for first item in the menu that appears when clicking on the search field image, used as embedded menu title</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>u1do head</source>
+        <source>Clear recent searches</source>
+        <comment>menu item in Recent Searches menu that empties menu&apos;s contents</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <comment>Unknown filesize FTP directory listing item</comment>
+        <translation type="unfinished">Bilinmeyen</translation>
     </message>
     <message>
-        <source>d2do head</source>
+        <source>%1 (%2x%3 pixels)</source>
+        <comment>Title string for images</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>u2do head</source>
+        <source>Web Inspector - %2</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QWhatsThisAction</name>
+    <message>
+        <source>What&apos;s This?</source>
+        <translation>Bu nedir?</translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
+    <message>
+        <source>*</source>
+        <translation>*</translation>
+    </message>
+</context>
+<context>
+    <name>QWizard</name>
+    <message>
+        <source>Go Back</source>
+        <translation>Geri Git</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Devam Et</translation>
+    </message>
+    <message>
+        <source>Commit</source>
+        <translation>Gönder</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Tamam</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Çık</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Yardım</translation>
+    </message>
+    <message>
+        <source>&lt; &amp;Back</source>
+        <translation>&lt; &amp;Geri</translation>
+    </message>
+    <message>
+        <source>&amp;Finish</source>
+        <translation>&amp;Bitir</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>İptal</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation>&amp;Yardım</translation>
     </message>
     <message>
-        <source>s0re head</source>
+        <source>&amp;Next</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Next &gt;</source>
+        <translation type="unfinished">&amp;İleri &gt;</translation>
+    </message>
+</context>
+<context>
+    <name>QWorkspace</name>
+    <message>
+        <source>&amp;Restore</source>
+        <translation>&amp;Geri Yükle</translation>
+    </message>
+    <message>
+        <source>&amp;Move</source>
+        <translation>&amp;Taşı</translation>
+    </message>
+    <message>
+        <source>&amp;Size</source>
+        <translation>&amp;Boyut</translation>
+    </message>
+    <message>
+        <source>Mi&amp;nimize</source>
+        <translation>&amp;Küçült</translation>
+    </message>
+    <message>
+        <source>Ma&amp;ximize</source>
+        <translation>B&amp;üyüt</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>&amp;Kapat</translation>
+    </message>
+    <message>
+        <source>Stay on &amp;Top</source>
+        <translation>&amp;Herzaman Üstte</translation>
+    </message>
+    <message>
+        <source>Sh&amp;ade</source>
+        <translation>G&amp;ölgele</translation>
+    </message>
+    <message>
+        <source>%1 - [%2]</source>
+        <translation>%1 - [%2]</translation>
+    </message>
+    <message>
+        <source>Minimize</source>
+        <translation>Küçült</translation>
+    </message>
+    <message>
+        <source>Restore Down</source>
+        <translation>Aşağıya Geri Yükle</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Kapat</translation>
+    </message>
+    <message>
+        <source>&amp;Unshade</source>
+        <translation>Gölgele&amp;me</translation>
+    </message>
+</context>
+<context>
+    <name>QXml</name>
+    <message>
+        <source>no error occurred</source>
+        <translation>hata yok</translation>
+    </message>
+    <message>
+        <source>error triggered by consumer</source>
+        <translation>hata tüketici tarafından tetiklendi</translation>
+    </message>
+    <message>
+        <source>unexpected end of file</source>
+        <translation>beklenmeyen dosya sonu</translation>
+    </message>
+    <message>
+        <source>more than one document type definition</source>
+        <translation>birden fazla belge tipi tanımlaması</translation>
+    </message>
+    <message>
+        <source>error occurred while parsing element</source>
+        <translation>Öge ayrıştırılırken hata oluştu</translation>
+    </message>
+    <message>
+        <source>tag mismatch</source>
+        <translation>etiket uyumsuzluğu</translation>
+    </message>
+    <message>
+        <source>error occurred while parsing content</source>
+        <translation>İçerik ayrıştırılırken hata oluştu</translation>
+    </message>
+    <message>
+        <source>unexpected character</source>
+        <translation>beklenmeyen karakter</translation>
+    </message>
+    <message>
+        <source>invalid name for processing instruction</source>
+        <translation>işleme komutu için geçersiz isim</translation>
+    </message>
+    <message>
+        <source>version expected while reading the XML declaration</source>
+        <translation>XML bildirimi okunurken sürüm beklenir</translation>
+    </message>
+    <message>
+        <source>wrong value for standalone declaration</source>
+        <translation>bağımsız bildirim için hatalı değer</translation>
+    </message>
+    <message>
+        <source>encoding declaration or standalone declaration expected while reading the XML declaration</source>
+        <translation>XML bildirimi okunurken  kodlama bildirmi ya da bağımsız bildirim beklenir</translation>
+    </message>
+    <message>
+        <source>standalone declaration expected while reading the XML declaration</source>
+        <translation>XML bildirimi okunurken bağımsız bildirim beklenir</translation>
+    </message>
+    <message>
+        <source>error occurred while parsing document type definition</source>
+        <translation>Belge tipi tanımlaması ayrıştırılırken hata oluştu</translation>
+    </message>
+    <message>
+        <source>letter is expected</source>
+        <translation>harf beklenir</translation>
+    </message>
+    <message>
+        <source>error occurred while parsing comment</source>
+        <translation>yorum ayrıştırılırken hata oluştu</translation>
+    </message>
+    <message>
+        <source>error occurred while parsing reference</source>
+        <translation>Referans ayrıştırılırken hata oluştu</translation>
+    </message>
+    <message>
+        <source>internal general entity reference not allowed in DTD</source>
+        <translation>DTD içerisinde genel iç varlık referansılarına (entity) izin verilmez</translation>
+    </message>
+    <message>
+        <source>external parsed general entity reference not allowed in attribute value</source>
+        <translation>Nitelik değeri içerisinde ayrıştırılmış genel dış varlık referansılarına (entity) izin verilmez</translation>
+    </message>
+    <message>
+        <source>external parsed general entity reference not allowed in DTD</source>
+        <translation>DTD içerisinde ayrıştırılmış genel dış varlık referansılarına (entity) izin verilmez</translation>
+    </message>
+    <message>
+        <source>unparsed entity reference in wrong context</source>
+        <translation>hatalı yerde ayrıştırılmamış varlık referansı (entity)</translation>
+    </message>
+    <message>
+        <source>recursive entities</source>
+        <translation>özyinelemeli varlık referansları (entity)</translation>
+    </message>
+    <message>
+        <source>error in the text declaration of an external entity</source>
+        <translation>dış varlık referansının (entity) metin bildiriminde hata</translation>
+    </message>
+</context>
+<context>
+    <name>QXmlStream</name>
+    <message>
+        <source>Extra content at end of document.</source>
+        <translation>Belge sonunda fazladan içerik var.</translation>
+    </message>
+    <message>
+        <source>Invalid entity value.</source>
+        <translation>Geçersiz varlık referansı (entity) değeri.</translation>
+    </message>
+    <message>
+        <source>Invalid XML character.</source>
+        <translation>Geçersiz XML karakteri.</translation>
+    </message>
+    <message>
+        <source>Sequence &apos;]]&gt;&apos; not allowed in content.</source>
+        <translation>İçerik içerisinde &apos;]]&gt;&apos; dizisine izin verilmez.</translation>
+    </message>
+    <message>
+        <source>Namespace prefix &apos;%1&apos; not declared</source>
+        <translation>İsimlendirme öneki &apos;%1&apos; bildirilmedi</translation>
+    </message>
+    <message>
+        <source>Attribute redefined.</source>
+        <translation>Nitelik yeniden tanımlandı.</translation>
+    </message>
+    <message>
+        <source>Unexpected character &apos;%1&apos; in public id literal.</source>
+        <translation>Açık kimlik bilgisinde beklenmeyen &apos;%1&apos; karakteri.</translation>
+    </message>
+    <message>
+        <source>Invalid XML version string.</source>
+        <translation>Geçersiz XML sürüm ifadesi.</translation>
+    </message>
+    <message>
+        <source>Unsupported XML version.</source>
+        <translation>Desteklenmeyen XML sürümü.</translation>
+    </message>
+    <message>
+        <source>%1 is an invalid encoding name.</source>
+        <translation>%1 geçersiz bir kodlama adıdır.</translation>
+    </message>
+    <message>
+        <source>Encoding %1 is unsupported</source>
+        <translation>%1 kodlaması desteklenmiyor</translation>
+    </message>
+    <message>
+        <source>Standalone accepts only yes or no.</source>
+        <translation>Bağımsız sadece evet ya da hayır kabul eder.</translation>
+    </message>
+    <message>
+        <source>Invalid attribute in XML declaration.</source>
+        <translation>XML bildiriminde geçersiz nitelik.</translation>
+    </message>
+    <message>
+        <source>Premature end of document.</source>
+        <translation>Tamamlanmamış belge sonu.</translation>
+    </message>
+    <message>
+        <source>Invalid document.</source>
+        <translation>Geçersiz belge.</translation>
+    </message>
+    <message>
+        <source>Expected </source>
+        <translation>Beklenen  </translation>
+    </message>
+    <message>
+        <source>, but got &apos;</source>
+        <translation>, alınan &apos;</translation>
+    </message>
+    <message>
+        <source>Unexpected &apos;</source>
+        <translation>Beklenmeyen &apos;</translation>
+    </message>
+    <message>
+        <source>Expected character data.</source>
+        <translation>Beklenen karakter verisi.</translation>
+    </message>
+    <message>
+        <source>Recursive entity detected.</source>
+        <translation>Özyinelemeli varlık referansı (entity) bulundu.</translation>
+    </message>
+    <message>
+        <source>Start tag expected.</source>
+        <translation>Başlama etiketi beklenir.</translation>
+    </message>
+    <message>
+        <source>XML declaration not at start of document.</source>
+        <translation>XML bildirimi belgenin başlangıcında değil.</translation>
+    </message>
+    <message>
+        <source>NDATA in parameter entity declaration.</source>
+        <translation>Varlık referansı (entity) bildirimi parametresinde NDATA.</translation>
+    </message>
+    <message>
+        <source>%1 is an invalid processing instruction name.</source>
+        <translation>%1 geçersiz bir işleme komutu adı.</translation>
+    </message>
+    <message>
+        <source>Invalid processing instruction name.</source>
+        <translation>Geçersiz bir işleme komutu adı.</translation>
+    </message>
+    <message>
+        <source>Illegal namespace declaration.</source>
+        <translation>Geçersiz isimlendirme bildirimi.</translation>
+    </message>
+    <message>
+        <source>Invalid XML name.</source>
+        <translation>Geçersiz XML adı.</translation>
+    </message>
+    <message>
+        <source>Opening and ending tag mismatch.</source>
+        <translation>Açma etiketi ile kapatma etiketi uyuşmuyor.</translation>
+    </message>
+    <message>
+        <source>Reference to unparsed entity &apos;%1&apos;.</source>
+        <translation>&apos;%1&apos; ayrıştırılmamış varlık referansına (entity) referans.</translation>
+    </message>
+    <message>
+        <source>Entity &apos;%1&apos; not declared.</source>
+        <translation>Varlık referansı (entity) &apos;%1&apos; bildirilmemiş.</translation>
+    </message>
+    <message>
+        <source>Reference to external entity &apos;%1&apos; in attribute value.</source>
+        <translation> &apos;%1&apos; dış varlık referansının (entity) nitelik değerine referans.</translation>
+    </message>
+    <message>
+        <source>Invalid character reference.</source>
+        <translation>Geçersiz karakter referansı.</translation>
+    </message>
+    <message>
+        <source>Encountered incorrectly encoded content.</source>
+        <translation>Doğru şekilde kodlanmamış içeriğe rastlandı.</translation>
+    </message>
+    <message>
+        <source>The standalone pseudo attribute must appear after the encoding.</source>
+        <translation>Bağımsız yalancı nitelik kodlamadan sonra belirmelidir.</translation>
+    </message>
+    <message>
+        <source>%1 is an invalid PUBLIC identifier.</source>
+        <translation>%1 geçerisiz bir PUBLIC tanımlayıcı.</translation>
     </message>
+</context>
+<context>
+    <name>QtXmlPatterns</name>
     <message>
-        <source>u1re head</source>
+        <source>An %1-attribute with value %2 has already been declared.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>d1re head</source>
+        <source>An %1-attribute must have a valid %2 as value, which %3 isn&apos;t.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>u2re head</source>
+        <source>Network timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>d2re head</source>
+        <source>Element %1 can&apos;t be serialized because it appears outside the document element.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>s0mi head</source>
+        <source>Attribute %1 can&apos;t be serialized because it appears at the top level.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>s1mi head</source>
+        <source>Year %1 is invalid because it begins with %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>s2mi head</source>
+        <source>Day %1 is outside the range %2..%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>u0fa head</source>
+        <source>Month %1 is outside the range %2..%3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>d0fa head</source>
+        <source>Overflow: Can&apos;t represent date %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>u1fa head</source>
+        <source>Day %1 is invalid for month %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>d1fa head</source>
+        <source>Time 24:%1:%2.%3 is invalid. Hour is 24, but minutes, seconds, and milliseconds are not all 0; </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>u2fa head</source>
+        <source>Time %1:%2:%3.%4 is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>d2fa head</source>
+        <source>Overflow: Date can&apos;t be represented.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>s0la head</source>
+        <source>At least one component must be present.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>s1la head</source>
+        <source>At least one time component must appear after the %1-delimiter.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>s2la head</source>
+        <source>No operand in an integer division, %1, can be %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>s0ti head</source>
+        <source>The first operand in an integer division, %1, cannot be infinity (%2).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>u1ti head</source>
+        <source>The second operand in a division, %1, cannot be zero (%2).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>d1ti head</source>
+        <source>%1 is not a valid value of type %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>u2ti head</source>
+        <source>When casting to %1 from %2, the source value cannot be %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>d2ti head</source>
+        <source>Integer division (%1) by zero (%2) is undefined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ufermata</source>
+        <source>Division (%1) by zero (%2) is undefined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dfermata</source>
+        <source>Modulus division (%1) by zero (%2) is undefined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>snappizzicato</source>
+        <source>Dividing a value of type %1 by %2 (not-a-number) is not allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ushortfermata</source>
+        <source>Dividing a value of type %1 by %2 or %3 (plus or minus zero) is not allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dshortfermata</source>
+        <source>Multiplication of a value of type %1 by %2 or %3 (plus or minus infinity) is not allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ulongfermata</source>
+        <source>A value of type %1 cannot have an Effective Boolean Value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dlongfermata</source>
+        <source>Effective Boolean Value cannot be calculated for a sequence containing two or more atomic values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>uverylongfermata</source>
+        <source>Value %1 of type %2 exceeds maximum (%3).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dverylongfermata</source>
+        <source>Value %1 of type %2 is below minimum (%3).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>thumb</source>
+        <source>A value of type %1 must contain an even number of digits. The value %2 does not.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sforza to accent</source>
+        <source>%1 is not valid as a value of type %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>espressivo</source>
+        <source>Operator %1 cannot be used on type %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>staccato</source>
+        <source>Operator %1 cannot be used on atomic values of type %2 and %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ustaccatissimo</source>
+        <source>The namespace URI in the name for a computed attribute cannot be %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dstaccatissimo</source>
+        <source>The name for a computed attribute cannot have the namespace URI %1 with the local name %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>tenuto</source>
+        <source>Type error in cast, expected %1, received %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>uportato</source>
+        <source>When casting to %1 or types derived from it, the source value must be of the same type, or it must be a string literal. Type %2 is not allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dportato</source>
+        <source>No casting is possible with %1 as the target type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>umarcato</source>
+        <source>It is not possible to cast from %1 to %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dmarcato</source>
+        <source>Casting to %1 is not possible because it is an abstract type, and can therefore never be instantiated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ouvert</source>
+        <source>It&apos;s not possible to cast the value %1 of type %2 to %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>plus stop</source>
+        <source>Failure when casting from %1 to %2: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>up bow</source>
+        <source>A comment cannot contain %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>down bow</source>
+        <source>A comment cannot end with a %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>reverse turn</source>
+        <source>No comparisons can be done involving the type %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>turn</source>
+        <source>Operator %1 is not available between atomic values of type %2 and %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>trill</source>
+        <source>An attribute node cannot be a child of a document node. Therefore, the attribute %1 is out of place.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>upedal heel</source>
+        <source>A library module cannot be evaluated directly. It must be imported from a main module.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dpedalheel</source>
+        <source>A value of type %1 cannot be a predicate. A predicate must have either a numeric type or an Effective Boolean Value type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>upedal toe</source>
+        <source>A positional predicate must evaluate to a single numeric value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dpedal toe</source>
+        <source>The target name in a processing instruction cannot be %1 in any combination of upper and lower case. Therefore, is %2 invalid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>flageolet</source>
+        <source>%1 is not a valid target name in a processing instruction. It must be a %2 value, e.g. %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>segno</source>
+        <source>The last step in a path must contain either nodes or atomic values. It cannot be a mixture between the two.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>coda</source>
+        <source>The data of a processing instruction cannot contain the string %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>varied coda</source>
+        <source>No namespace binding exists for the prefix %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>rcomma</source>
+        <source>No namespace binding exists for the prefix %1 in %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>lcomma</source>
+        <source>%1 is an invalid %2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%1 takes at most %n argument(s). %2 is therefore invalid.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
+    <message numerus="yes">
+        <source>%1 requires at least %n argument(s). %2 is therefore invalid.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
     <message>
-        <source>arpeggio</source>
+        <source>The first argument to %1 cannot be of type %2. It must be a numeric type, xs:yearMonthDuration or xs:dayTimeDuration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>trillelement</source>
+        <source>The first argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>arpeggio arrow down</source>
+        <source>The second argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>arpeggio arrow up</source>
+        <source>%1 is not a valid XML 1.0 character.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>trill element</source>
+        <source>The first argument to %1 cannot be of type %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>prall</source>
+        <source>If both values have zone offsets, they must have the same zone offset. %1 and %2 are not the same.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>mordent</source>
+        <source>%1 was called.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>prall prall</source>
+        <source>%1 must be followed by %2 or %3, not at the end of the replacement string.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>prall mordent</source>
+        <source>In the replacement string, %1 must be followed by at least one digit when not escaped.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>up prall</source>
+        <source>In the replacement string, %1 can only be used to escape itself or %2, not %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>up mordent</source>
+        <source>%1 matches newline characters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>prall down</source>
+        <source>%1 and %2 match the start and end of a line.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>down prall</source>
+        <source>Matches are case insensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>down mordent</source>
+        <source>Whitespace characters are removed, except when they appear in character classes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>prall up</source>
+        <source>%1 is an invalid regular expression pattern: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>line prall</source>
+        <source>%1 is an invalid flag for regular expressions. Valid flags are:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>caesura curved</source>
+        <source>If the first argument is the empty sequence or a zero-length string (no namespace), a prefix cannot be specified. Prefix %1 was specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>caesura straight</source>
+        <source>It will not be possible to retrieve %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>eight flag</source>
+        <source>The root node of the second argument to function %1 must be a document node. %2 is not a document node.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sixteenth flag</source>
+        <source>The default collection is undefined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>thirtysecond flag</source>
+        <source>%1 cannot be retrieved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>sixtyfour flag</source>
+        <source>The normalization form %1 is unsupported. The supported forms are %2, %3, %4, and %5, and none, i.e. the empty string (no normalization).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>128flag</source>
+        <source>A zone offset must be in the range %1..%2 inclusive. %3 is out of range.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>deight flag</source>
+        <source>%1 is not a whole number of minutes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>grace dash</source>
+        <source>Required cardinality is %1; got cardinality %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dgrace dash</source>
+        <source>The item %1 did not match the required type %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dsixteenth flag</source>
+        <source>%1 is an unknown schema type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dthirtysecond flag</source>
+        <source>Only one %1 declaration can occur in the query prolog.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dsixtyfourth flag</source>
+        <source>The initialization of variable %1 depends on itself</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>d128flag</source>
+        <source>No variable by name %1 exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>alto clef</source>
+        <source>The variable %1 is unused</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>calto clef</source>
+        <source>Version %1 is not supported. The supported XQuery version is 1.0.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>bass clef</source>
+        <source>The encoding %1 is invalid. It must contain Latin characters only, must not contain whitespace, and must match the regular expression %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cbass clef</source>
+        <source>No function with signature %1 is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>trebleclef</source>
+        <source>A default namespace declaration must occur before function, variable, and option declarations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ctrebleclef</source>
+        <source>Namespace declarations must occur before function, variable, and option declarations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>percussion clef</source>
+        <source>Module imports must occur before function, variable, and option declarations.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cpercussion clef</source>
+        <source>It is not possible to redeclare prefix %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>tab clef</source>
+        <source>Only the prefix %1 can be declared to bind the namespace %2. By default, it is already bound to the prefix %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ctab clef</source>
+        <source>Prefix %1 is already declared in the prolog.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>four four meter</source>
+        <source>The name of an option must have a prefix. There is no default namespace for options.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>allabreve</source>
+        <source>The Schema Import feature is not supported, and therefore %1 declarations cannot occur.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pedalasterisk</source>
+        <source>The target namespace of a %1 cannot be empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pedaldash</source>
+        <source>The module import feature is not supported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pedaldot</source>
+        <source>A variable by name %1 has already been declared in the prolog.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pedalP</source>
+        <source>No value is available for the external variable by name %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pedald</source>
+        <source>The namespace for a user defined function cannot be empty (try the predefined prefix %1 which exists for cases like this)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pedale</source>
+        <source>The namespace %1 is reserved; therefore user defined functions may not use it. Try the predefined prefix %2, which exists for these cases.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>pedal ped</source>
+        <source>The namespace of a user defined function in a library module must be equivalent to the module namespace. In other words, it should be %1 instead of %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>bracket tips up</source>
+        <source>A function already exists with the signature %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>bracket tips down</source>
+        <source>No external functions are supported. All supported functions can be used directly, without first declaring them as external</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>bracket tips left up</source>
+        <source>An argument by name %1 has already been declared. Every argument name must be unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>bracket tips left down</source>
+        <source>The name of a variable bound in a for-expression must be different from the positional variable. Hence, the two variables named %1 collide.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>acc dot</source>
+        <source>The Schema Validation Feature is not supported. Hence, %1-expressions may not be used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>acc freebase</source>
+        <source>None of the pragma expressions are supported. Therefore, a fallback expression must be present</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>acc stdbase</source>
+        <source>The %1-axis is unsupported in XQuery</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>acc bayanbase</source>
+        <source>%1 is not a valid numeric literal.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>acc old ee</source>
+        <source>No function by name %1 is available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>acc discant</source>
+        <source>The namespace URI cannot be the empty string when binding to a prefix, %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>zero</source>
+        <source>%1 is an invalid namespace URI.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>one</source>
+        <source>It is not possible to bind to the prefix %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>two</source>
+        <source>Namespace %1 can only be bound to %2 (and it is, in either case, pre-declared).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>three</source>
+        <source>Prefix %1 can only be bound to %2 (and it is, in either case, pre-declared).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>four</source>
+        <source>Two namespace declaration attributes have the same name: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>five</source>
+        <source>The namespace URI must be a constant and cannot use enclosed expressions.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>six</source>
+        <source>An attribute by name %1 has already appeared on this element.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>seven</source>
+        <source>A direct element constructor is not well-formed. %1 is ended with %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>eight</source>
+        <source>The name %1 does not refer to any schema type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>nine</source>
+        <source>%1 is an complex type. Casting to complex types is not possible. However, casting to atomic types such as %2 works.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>plus</source>
+        <source>%1 is not an atomic type. Casting is only possible to atomic types.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>z</source>
+        <source>%1 is not a valid name for a processing-instruction. Therefore this name test will never match.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>f</source>
+        <source>%1 is not in the in-scope attribute declarations. Note that the schema import feature is not supported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>s</source>
+        <source>The name of an extension expression must be in a namespace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>p</source>
+        <source>empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>m</source>
+        <source>zero or one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>r</source>
+        <source>exactly one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>clef eight</source>
+        <source>one or more</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>clef one</source>
+        <source>zero or more</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>clef five</source>
+        <source>Required type is %1, but %2 was found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>note 1/2</source>
+        <source>Promoting %1 to %2 may cause loss of precision.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>note 1/4</source>
+        <source>The focus is undefined.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>note 1/8</source>
+        <source>It&apos;s not possible to add attributes after any other kind of node.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>note 1/16</source>
+        <source>An attribute by name %1 has already been created.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>note 1/32</source>
+        <source>Only the Unicode Codepoint Collation is supported(%1). %2 is unsupported.</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>VolumeSlider</name>
     <message>
-        <source>note 1/64</source>
+        <source>Muted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>dot dot</source>
+        <source>Volume: %1%</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WebCore::PlatformScrollbar</name>
+    <message>
+        <source>Scroll here</source>
+        <translation type="unfinished">Buraya kaydır</translation>
+    </message>
+    <message>
+        <source>Left edge</source>
+        <translation type="unfinished">Sol gölge</translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished">En Yukarı</translation>
+    </message>
+    <message>
+        <source>Right edge</source>
+        <translation type="unfinished">Sağ gölge</translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished">En Aşağı</translation>
+    </message>
+    <message>
+        <source>Page left</source>
+        <translation type="unfinished">Sayfa sola</translation>
+    </message>
+    <message>
+        <source>Page up</source>
+        <translation type="unfinished">Sayfa yukarı</translation>
+    </message>
+    <message>
+        <source>Page right</source>
+        <translation type="unfinished">Sayfa sağa</translation>
+    </message>
+    <message>
+        <source>Page down</source>
+        <translation type="unfinished">Sayfa aşağı</translation>
+    </message>
+    <message>
+        <source>Scroll left</source>
+        <translation type="unfinished">Sola kaydır</translation>
+    </message>
+    <message>
+        <source>Scroll up</source>
+        <translation type="unfinished">Yukarı kaydır</translation>
+    </message>
+    <message>
+        <source>Scroll right</source>
+        <translation type="unfinished">Sağa kaydır</translation>
+    </message>
+    <message>
+        <source>Scroll down</source>
+        <translation type="unfinished">Aşağı kaydır</translation>
     </message>
 </context>
 </TS>
