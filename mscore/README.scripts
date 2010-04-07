@@ -245,6 +245,7 @@ Objects
             shortName   string      short name of the part (ro)
             midiProgram integer     midi program of the part (ro)
             midiChannel integer     midi channel of the part (ro)
+            staves      integer     number of staves in the part (ro)
             
     PageFormat
          Properties:
