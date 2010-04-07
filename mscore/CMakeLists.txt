@@ -345,7 +345,7 @@ add_custom_target(lupdate
 
 add_custom_target(lrelease
    COMMAND ${PROJECT_SOURCE_DIR}/gen-qt-projectfile ${PROJECT_SOURCE_DIR} > mscore.pro
-   COMMAND lrelease ${PROJECT_BINARY_DIR}/mscore.pro
+   COMMAND lrelease ${PROJECT_SOURCE_DIR}/share/locale/*.ts
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
    )
 
