@@ -210,6 +210,7 @@ class MuseScore : public QMainWindow {
       InstrumentsDialog* instrList;
       MeasuresDialog* measuresDialog;
       InsertMeasuresDialog* insertMeasuresDialog;
+      QMenu* _fileMenu;
       QMenu* menuEdit;
       QMenu* menuCreate;
       QMenu* menuNotes;
@@ -350,6 +351,8 @@ class MuseScore : public QMainWindow {
       void setPlayState()      { changeState(STATE_PLAY); }
       void setSearchState()    { changeState(STATE_SEARCH); }
       void checkForUpdate();
+      void registerPlugin(QAction*);
+      QMenu* fileMenu() const  { return _fileMenu; }
 
    public:
       MuseScore();
