@@ -1,3 +1,5 @@
+8.apr (la)
+      - add a minimal infrastructure to translate plugins
 7.apr (ws)
       - extended script registration: scripts can now register actions and have
         access to the main application window to extend the menu structure.

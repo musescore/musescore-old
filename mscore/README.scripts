@@ -286,6 +286,26 @@ Global Variables
       mscoreUpdateVersion     integer
       majorVersion            integer     interface major version of the currently running interpreter
       minorVersion            integer     interface minor version number
+      
+=====================================================
+      Translation
+=====================================================
+
+See: http://doc.trolltech.com/4.6/scripting.html#internationalization
+
+To translate a plugin, you need to use :
+qsTr() for all your "quoted text"
+For the menu item use : QT_TR_NOOP("Plugins.MyMenuItem")
+
+Then create a directory "translations" in the plugin directory.
+You need to put locale_XX.qm files in it.
+
+How to obtain a qm file for your plugin?
+Run :(replace XX by the targetted language)
+  lupdate <your plugins file> translations/locale_XX.ts
+Use Qt Linguist or an xml editor to put the translation in local_XX.ts. Once done run :
+  lrelease locale_XX.ts
+You will obtain a qm file. Now run MuseScore in your language and your plugin should be translated!
 
 =====================================================
       Example "run" scripts
