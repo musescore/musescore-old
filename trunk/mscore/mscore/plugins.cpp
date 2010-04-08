@@ -54,6 +54,18 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             se = new ScriptEngine();
             se->installTranslatorFunctions();
             }
+            
+      //load translation
+      QFileInfo fi(pluginPath);
+      QString pPath = fi.absolutePath();
+      QSettings settings;
+      QString lName = settings.value("language", "system").toString();
+      if (lName.toLower() == "system")
+            lName = QLocale::system().name();
+      QTranslator* translator = new QTranslator;
+      if(translator->load("locale_"+lName, pPath+"/translations"))
+            qApp->installTranslator(translator);
+           
       QScriptValue val  = se->evaluate(f.readAll(), pluginPath);
       if (se->hasUncaughtException()) {
             QScriptValue sv = se->uncaughtException();
@@ -107,9 +119,14 @@ void MuseScore::registerPlugin(const QString& pluginPath)
 
       int pluginIdx = plugins.size();
       plugins.append(pluginPath);
-
+      
+      //give access to pluginPath in init
+      se->globalObject().setProperty("pluginPath", se->newVariant(pPath));
+      
       init.call();
       QString menu = val.property("menu").toString();
+      QString context = fi.baseName();
+      menu = qApp->translate(qPrintable(context), qPrintable(menu));
       if (menu.isEmpty()) {
             printf("Load plugin: no menu property\n");
             return;
@@ -314,6 +331,8 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("mscoreMajorVersion",  newVariant(majorVersion()));
       globalObject().setProperty("mscoreMinorVersion",  newVariant(minorVersion()));
       globalObject().setProperty("mscoreUpdateVersion", newVariant(updateVersion()));
+      
+      //globalObject().setProperty("localeName",          newVariant(lName));
       }
 
 //---------------------------------------------------------
