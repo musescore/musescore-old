@@ -1,4 +1,5 @@
 11.apr (ws)
+      - fix #5196: First note entered is ignored if no duration selected
       - fix #5204: The offsets of tempo changes get calculated without
         regard to repeats when exporting midi files
       - fix #5289: Multi-measure rest number does not resize with scaling

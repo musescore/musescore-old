@@ -472,6 +472,7 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
             }
       if (!noteEntryMode())
             sm->postEvent(new CommandEvent("note-input"));
+      qApp->processEvents();
 
       _score->addPitch(pitch, addFlag);
       moveCursor();
@@ -2213,7 +2214,7 @@ void Score::processMidiInput()
                         else{
                               startCmd();
                               addPitch(ev.pitch, ev.chord);
-                    				  mscore->currentScoreView()->moveCursor();
+                              mscore->currentScoreView()->moveCursor();
                               layoutAll = true;
                               endCmd();
                               }
@@ -2583,6 +2584,7 @@ void Score::moveInputPos(Segment* s)
             return;
       _is._segment = s;
       emit posChanged(s->tick());
+#if 0 // TODO-S
       Element* el;
       if (s->element(_is.track))
             el = s->element(_is.track);
@@ -2590,7 +2592,8 @@ void Score::moveInputPos(Segment* s)
             el = s->element(_is.track / VOICES * VOICES);
       if (el->type() == CHORD)
             el = static_cast<Chord*>(el)->upNote();
-//TODO-S      emit adjustCanvasPosition(el, false);
+      emit adjustCanvasPosition(el, false);
+#endif
       }
 
 //---------------------------------------------------------
@@ -2603,9 +2606,7 @@ void Score::moveToNextInputPos()
       Segment* s = _is._segment;
       Measure* m = s->measure();
       int track  = _is.track;
-      for (s = s->next1(); s; s = s->next1()) {
-            if (s->subtype() != SegChordRest)
-                  continue;
+      for (s = s->next1(SegChordRest); s; s = s->next1(SegChordRest)) {
             if (s->element(track) || s->measure() != m)
                   break;
             }

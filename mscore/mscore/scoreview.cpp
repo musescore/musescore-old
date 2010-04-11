@@ -1143,10 +1143,8 @@ void ScoreView::moveCursor()
       cursor->setTick(_score->inputPos());
 
       Segment* segment = _score->tick2segment(cursor->tick());
-      if (segment) {
+      if (segment)
             moveCursor(segment, track / VOICES);
-            return;
-            }
       }
 
 void ScoreView::moveCursor(Segment* segment, int staffIdx)
