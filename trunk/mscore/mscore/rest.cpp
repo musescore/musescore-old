@@ -69,6 +69,7 @@ void Rest::draw(QPainter& p) const
       double _spatium = spatium();
 
       Measure* m = measure();
+      double mag = magS();
       if (m && m->multiMeasure()) {
             int n = m->multiMeasure();
 
@@ -90,13 +91,17 @@ void Rest::draw(QPainter& p) const
             p.drawLine(x2, y-_spatium, x2, y+_spatium);
 
             p.setFont(symbols[allabreveSym].font());
-            y = -_spatium * 6.5;
-            x1 = x1 + (x2 - x1) * .5;
+            p.scale(mag, mag);
+            double imag = 1.0 / mag;
+
+            y = -_spatium * 6.75 * imag;
+            x1 = x1 + (x2 - x1) * .5 * imag;
             p.drawText(QRectF(x1, y, 0.0, 0.0), Qt::AlignHCenter|Qt::TextDontClip,
                QString("%1").arg(n));
+            p.scale(imag, imag);
             }
       else {
-            symbols[_sym].draw(p, magS());
+            symbols[_sym].draw(p, mag);
             int dots = duration().dots();
             if (dots) {
                   double y = dotline * _spatium * .5;

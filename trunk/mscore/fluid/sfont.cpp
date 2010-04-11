@@ -88,30 +88,7 @@ bool SFont::read(const QString& s)
             if (!p->importSfont())
                   return false;
             }
-#ifdef DEBUG_SFONT
-      QFile of("mops");
-      if (of.open(QIODevice::WriteOnly)) {
-            Xml xml(&of);
-            write(xml);
-            of.close();
-            }
-      else
-            printf("open mops failed\n");
-#endif
       return true;
-      }
-
-//---------------------------------------------------------
-//   get_sample
-//---------------------------------------------------------
-
-Sample* SFont::get_sample(char *s)
-      {
-      foreach(Sample* sa, sample) {
-            if (strcmp(sa->name, s) == 0)
-                  return sa;
-            }
-      return 0;
       }
 
 //---------------------------------------------------------
@@ -371,7 +348,7 @@ bool Preset::importSfont()
 
       int idx = 0;
       foreach(Zone* zone, zones) {
-            zone->name = QString("%1/%2").arg(name).arg(idx);
+            // zone->name = QString("%1/%2").arg(name).arg(idx);
             if (!zone->importZone())
                   return false;
             if ((idx == 0) && (zone->get_inst() == 0))
@@ -387,12 +364,8 @@ bool Preset::importSfont()
 
 bool Instrument::import_sfont()
       {
-      if (name.isEmpty())
-            name = "<untitled>";
-
       int idx = 0;
       foreach(Zone* zone, zones) {
-            zone->name = QString("%1/%2").arg(name).arg(idx);
             if (!zone->importZone())
                   return false;
             if ((idx == 0) && (zone->get_sample() == 0))
@@ -600,7 +573,6 @@ Sample::Sample(SFont* s)
       {
       sf          = s;
       _valid      = false;
-      name[0]     = 0;
       start       = 0;
       end         = 0;
       loopstart   = 0;
@@ -1333,7 +1305,6 @@ void SFont::load_ihdr(int size)
             instruments.append(p);
             char buffer[21];
             READSTR (buffer);	/* Possible read failure ^ */
-            p->name = buffer;
             zndx = READW();
 
             if (pr) {   /* not first instrument? */
@@ -1548,13 +1519,11 @@ void SFont::load_igen (int size)
 		                  /* if global zone is not 1st zone, relocate */
       		            if (k != 0) {
 	      	                  Zone* save = zl.takeAt(k);
-		                        synth->log("Instrumentrument \"%s\": Global zone is not first zone", qPrintable(instr->name));
 	      	                  zl.prepend(save);
 		                        continue;
 		                        }
       		            }
 	                  else {      /* previous global zone exists, discard */
-		                  synth->log("Instrumentrument \"%s\": Discarding invalid global zone", qPrintable(instr->name));
 		                  sfont_zone_delete (&zl, z);
 		                  }
       	            }
@@ -1568,7 +1537,7 @@ void SFont::load_igen (int size)
 	                  }
                   }
             if (discarded && debugMode)
-                  qWarning("Instrumentrument \"%s\": Some invalid generators were discarded", qPrintable(instr->name));
+                  qWarning("Instrument: Some invalid generators were discarded");
             }
       /* for those non-terminal record cases, grr! */
       if (size == 0)
@@ -1601,7 +1570,9 @@ void SFont::load_shdr (int size)
       for (int i = 0; i < size; i++) {
             Sample* p = new Sample(this);
             sample.append(p);
-            READSTR (p->name);
+            char buffer[21];
+            READSTR (buffer);
+            // READSTR (p->name);
             READD (p->start);
             READD (p->end);	      /* - end, loopstart and loopend */
             READD (p->loopstart);	/* - will be checked and turned into */
@@ -1616,7 +1587,7 @@ void SFont::load_shdr (int size)
                   continue;
                   }
             if ((p->end > getSamplesize()) || (p->start > (p->end - 4))) {
-                  qWarning("Sample '%s' start/end file positions are invalid, disabling", p->name);
+                  qWarning("Sample start/end file positions are invalid, disabling");
                   p->setValid(false);
                   continue;
                   }
@@ -1665,7 +1636,8 @@ void SFont::fixup_igen()
                   if (z->sampIdx) {
                         z->sample = sample[z->sampIdx - 1];
                         if (!z->sample)
-                              throw(QString("Instrument <%1>: Invalid sample reference").arg(p->name));
+                              throw(QString("Instrument: Invalid sample reference"));
+                              // throw(QString("Instrument <%1>: Invalid sample reference").arg(p->name));
                         }
                   }
             }
@@ -1694,88 +1666,6 @@ void SFont::safe_fseek(long ofs)
       qint64 newpos = ofs + f.pos();
       if (f.seek(newpos) == -1)
             throw(QString("File seek failed with offset = %1").arg(ofs));
-      }
-
-//---------------------------------------------------------
-//   SFont::write
-//---------------------------------------------------------
-
-void SFont::write(Xml& xml) const
-      {
-      xml.header();
-      xml.stag("MSound");
-      foreach(Preset* p, presets)
-            p->write(xml);
-      foreach(Instrument* p, instruments)
-            p->write(xml);
-      foreach(Sample* p, sample)
-            p->write(xml);
-
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   Preset::write
-//---------------------------------------------------------
-
-void Preset::write(Xml& xml) const
-      {
-      xml.stag(QString("Preset name=\"%1\"").arg(name));
-      xml.tag("bank", bank);
-      xml.tag("num", num);
-      if (_global_zone)
-            _global_zone->write(xml, "GlobalZone", true);
-      foreach(Zone* z, zones)
-            z->write(xml, "Zone", true);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Zone::write(Xml& xml, const char* p, bool hasInstrument) const
-      {
-      xml.stag(QString("%1 name=\"%2\"").arg(p).arg(name));
-      xml.tag("range", QString("%1-%2 %3-%4").arg(keylo).arg(keyhi).arg(vello).arg(velhi));
-      if (hasInstrument && instrument)
-            instrument->write(xml);
-      else if (!hasInstrument && sample)
-            sample->write(xml);
-      xml.tag("mods", modlist.size());
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Instrument::write(Xml& xml) const
-      {
-      xml.stag(QString("Instrument name=\"%1\"").arg(name));
-      if (global_zone)
-            global_zone->write(xml, "GlobalZone", false);
-      foreach(Zone* z, zones)
-            z->write(xml, "Zone", false);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Sample::write(Xml& xml) const
-      {
-      xml.stag(QString("Sample name=\"%1\"").arg(name));
-      xml.tag("start",      start);
-      xml.tag("end",        end);
-      xml.tag("loopstart",  loopstart);
-      xml.tag("loopend",    loopend);
-      xml.tag("samplerate", samplerate);
-      xml.tag("origpitch",  origpitch);
-      xml.tag("pitchadj",   pitchadj);
-      xml.tag("sampletype", sampletype);
-      xml.etag();
       }
 }
 
