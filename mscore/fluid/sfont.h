@@ -25,8 +25,6 @@
 
 #include "fluid.h"
 
-class Xml;
-
 namespace FluidS {
 
 class Preset;
@@ -106,9 +104,7 @@ class SFont {
       Preset* get_preset(int bank, int prenum);
 
       bool read(const QString& file);
-      void write(Xml&) const;
 
-      Sample* get_sample(char*);
       int load_sampledata();
       unsigned int samplePos() const            { return samplepos;  }
       unsigned id() const                       { return _id; }
@@ -128,7 +124,6 @@ class Sample {
 
    public:
       SFont* sf;
-      char name[21];
       unsigned int start;
       unsigned int end;
       unsigned int loopstart;
@@ -156,7 +151,6 @@ class Sample {
       void load();
       bool valid() const    { return _valid; }
       void setValid(bool v) { _valid = v; }
-      void write(Xml&) const;
       };
 
 //---------------------------------------------------------
@@ -165,8 +159,6 @@ class Sample {
 
 class Zone {
    public:
-      QString name;
-
       union {
             Sample* sample;
             int sampIdx;
@@ -188,7 +180,6 @@ class Zone {
       bool inside_range(int key, int vel) const;
       Instrument* get_inst()     const          { return instrument; }
       Sample* get_sample() const                { return sample; }
-      void write(Xml&, const char*, bool hasInstrument) const;
       };
 
 //---------------------------------------------------------
@@ -197,8 +188,6 @@ class Zone {
 
 class Instrument {
    public:
-      QString name;
-
       Zone* global_zone;
       QList<Zone*> zones;
 
@@ -208,7 +197,6 @@ class Instrument {
       Zone* get_global_zone() const     { return global_zone; }
       QList<Zone*> get_zone()           { return zones; }
       bool import_sfont();
-      void write(Xml&) const;
       };
 
 //---------------------------------------------------------
@@ -240,7 +228,6 @@ class Preset {
       Zone* global_zone()                       { return _global_zone; }
       void loadSamples();
       QList<Zone*> getZones()                   { return zones; }
-      void write(Xml&) const;
       };
 
 //---------------------------------------------------------

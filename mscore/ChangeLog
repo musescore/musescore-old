@@ -1,3 +1,5 @@
+11.apr (ws)
+      - fix #5289: Multi-measure rest number does not resize with scaling
 8.apr (la)
       - add a minimal infrastructure to translate plugins
 7.apr (ws)
