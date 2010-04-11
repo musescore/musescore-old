@@ -29,6 +29,7 @@
 #include "preferences.h"
 #include "text.h"
 #include "measure.h"
+#include "repeatlist.h"
 
 //---------------------------------------------------------
 //   exportMidi
@@ -112,34 +113,43 @@ void ExportMidi::writeHeader()
       //--------------------------------------------
 
       AL::TimeSigMap* sigmap = cs->sigmap();
-      for (AL::iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
-            AL::SigEvent se   = is->second;
-            unsigned char* data = new unsigned char[4];
-            data[0] = se.fraction().numerator();
-            int n;
-            switch (se.fraction().denominator()) {
-                  case 1:  n = 0; break;
-                  case 2:  n = 1; break;
-                  case 4:  n = 2; break;
-                  case 8:  n = 3; break;
-                  case 16: n = 4; break;
-                  case 32: n = 5; break;
-                  default:
-                        n = 2;
-                        printf("ExportMidi: unknown time signature %s\n",
-                           qPrintable(se.fraction().print()));
-                        break;
-                  }
-            data[1] = n;
-            data[2] = 24;
-            data[3] = 8;
+      foreach(const RepeatSegment* rs, *cs->repeatList()) {
+            int startTick  = rs->tick;
+            int endTick    = startTick + rs->len;
+            int tickOffset = rs->utick - rs->tick;
 
-            Event* ev = new Event(ME_META);
-            ev->setMetaType(META_TIME_SIGNATURE);
-            ev->setData(data);
-            ev->setLen(4);
-            ev->setOntime(is->first);
-            track->insert(ev);
+            AL::iSigEvent bs = sigmap->lower_bound(startTick);
+            AL::iSigEvent es = sigmap->lower_bound(endTick);
+
+            for (AL::iSigEvent is = bs; is != es; ++is) {
+                  AL::SigEvent se   = is->second;
+                  unsigned char* data = new unsigned char[4];
+                  data[0] = se.fraction().numerator();
+                  int n;
+                  switch (se.fraction().denominator()) {
+                        case 1:  n = 0; break;
+                        case 2:  n = 1; break;
+                        case 4:  n = 2; break;
+                        case 8:  n = 3; break;
+                        case 16: n = 4; break;
+                        case 32: n = 5; break;
+                        default:
+                              n = 2;
+                              printf("ExportMidi: unknown time signature %s\n",
+                                 qPrintable(se.fraction().print()));
+                              break;
+                        }
+                  data[1] = n;
+                  data[2] = 24;
+                  data[3] = 8;
+
+                  Event* ev = new Event(ME_META);
+                  ev->setMetaType(META_TIME_SIGNATURE);
+                  ev->setData(data);
+                  ev->setLen(4);
+                  ev->setOntime(is->first + tickOffset);
+                  track->insert(ev);
+                  }
             }
 
       //---------------------------------------------------
@@ -152,17 +162,27 @@ void ExportMidi::writeHeader()
             MidiTrack* track  = tl->at(i);
 
             KeyList* keymap = cs->staff(i)->keymap();
-            for (iKeyList ik = keymap->begin(); ik != keymap->end(); ++ik) {
-                  Event* ev  = new Event(ME_META);
-                  ev->setOntime(ik->first);
-                  int key       = ik->second.accidentalType;   // -7 -- +7
-                  ev->setMetaType(META_KEY_SIGNATURE);
-                  ev->setLen(2);
-                  unsigned char* data = new unsigned char[2];
-                  data[0]   = key;
-                  data[1]   = 0;  // major
-                  ev->setData(data);
-                  track->insert(ev);
+
+            foreach(const RepeatSegment* rs, *cs->repeatList()) {
+                  int startTick  = rs->tick;
+                  int endTick    = startTick + rs->len;
+                  int tickOffset = rs->utick - rs->tick;
+
+                  iKeyList sk = keymap->lower_bound(startTick);
+                  iKeyList ek = keymap->lower_bound(endTick);
+
+                  for (iKeyList ik = sk; ik != ek; ++ik) {
+                        Event* ev  = new Event(ME_META);
+                        ev->setOntime(ik->first + tickOffset);
+                        int key       = ik->second.accidentalType;   // -7 -- +7
+                        ev->setMetaType(META_KEY_SIGNATURE);
+                        ev->setLen(2);
+                        unsigned char* data = new unsigned char[2];
+                        data[0]   = key;
+                        data[1]   = 0;  // major
+                        ev->setData(data);
+                        track->insert(ev);
+                        }
                   }
             }
 
@@ -171,22 +191,30 @@ void ExportMidi::writeHeader()
       //--------------------------------------------
 
       AL::TempoMap* tempomap = cs->tempomap();
-      for (AL::iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
-            Event* ev = new Event(ME_META);
-            ev->setOntime(it->first);
-            //
-            // compute midi tempo: microseconds / quarter note
-            //
-            int tempo = lrint((1.0 / it->second.tempo) * 1000000.0);
+      foreach(const RepeatSegment* rs, *cs->repeatList()) {
+            int startTick  = rs->tick;
+            int endTick    = startTick + rs->len;
+            int tickOffset = rs->utick - rs->tick;
 
-            ev->setMetaType(META_TEMPO);
-            ev->setLen(3);
-            unsigned char* data = new unsigned char[3];
-            data[0]   = tempo >> 16;
-            data[1]   = tempo >> 8;
-            data[2]   = tempo;
-            ev->setData(data);
-            track->insert(ev);
+            AL::iTEvent se = tempomap->lower_bound(startTick);
+            AL::iTEvent ee = tempomap->lower_bound(endTick);
+            for (AL::iTEvent it = se; it != ee; ++it) {
+                  Event* ev = new Event(ME_META);
+                  ev->setOntime(it->first + tickOffset);
+                  //
+                  // compute midi tempo: microseconds / quarter note
+                  //
+                  int tempo = lrint((1.0 / it->second.tempo) * 1000000.0);
+
+                  ev->setMetaType(META_TEMPO);
+                  ev->setLen(3);
+                  unsigned char* data = new unsigned char[3];
+                  data[0]   = tempo >> 16;
+                  data[1]   = tempo >> 8;
+                  data[2]   = tempo;
+                  ev->setData(data);
+                  track->insert(ev);
+                  }
             }
       }
 
@@ -210,9 +238,8 @@ bool ExportMidi::write(const QString& name)
       for (int i = 0; i < nstaves; ++i)
             tracks->append(new MidiTrack(&mf));
 
-      writeHeader();
-
       cs->updateRepeatList(preferences.midiExpandRepeats);
+      writeHeader();
 
       foreach (Staff* staff, cs->staves()) {
             Part* part       = staff->part();
