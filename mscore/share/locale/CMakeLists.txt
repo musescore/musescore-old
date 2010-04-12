@@ -49,6 +49,7 @@ install(FILES
       mscore_th.qm
       mscore_tr.qm
       mscore_uk.qm
+      mscore_zh_CN.qm
       mscore_zh_TW.qm
       languages.xml
       qt_ar.qm
@@ -74,6 +75,7 @@ install(FILES
       qt_sv.qm
       qt_tr.qm
       qt_uk.qm
+      qt_zh_CN.qm
       qt_zh_TW.qm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
       )
