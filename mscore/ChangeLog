@@ -1,3 +1,5 @@
+12.apr (la)
+      - fix #5303 MusicXML import/export of "none" text for <bar-style> element 
 11.apr (ws)
       - fix #5196: First note entered is ignored if no duration selected
       - fix #5204: The offsets of tempo changes get calculated without
