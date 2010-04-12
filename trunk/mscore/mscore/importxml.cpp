@@ -1070,6 +1070,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                         }
                   if ((barStyle != "") || (repeat != "")) {
                         BarLine* barLine = new BarLine(score);
+                        bool visible = true;
                         if (barStyle == "light-heavy" && repeat == "backward") {
                               barLine->setSubtype(END_REPEAT);
                               }
@@ -1089,8 +1090,10 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                         else if (barStyle == "heavy-heavy")
                               ;
       */
-                        else if (barStyle == "none")
+                        else if (barStyle == "none"){
                               barLine->setSubtype(NORMAL_BAR);
+                              visible = false;
+                        }
                         else if (barStyle == "") {
                               if (repeat == "backward")
                                     barLine->setSubtype(END_REPEAT);
@@ -1109,7 +1112,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               measure->setRepeatFlags(RepeatEnd);
                               }
                         else
-                              measure->setEndBarLineType(barLine->subtype(), false);
+                              measure->setEndBarLineType(barLine->subtype(), false, visible);
                         }
                   if (!(endingNumber.isEmpty() && endingType.isEmpty())) {
                         if (endingNumber.isEmpty())
@@ -1952,6 +1955,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         else if (ee.tagName() == "beat-type") {
                               beatType = ee.text();
                               }
+                        else if(ee.tagName() == "senza-misura")
+                              ;
                         else
                               domError(ee);
                         }
@@ -2569,6 +2574,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         headGroup = 1;
                   else if (s == "circle-x")
                         headGroup = 6;
+                  else if (s == "normal")
+                        ;
                   else
                         printf("unknown notehead %s\n", qPrintable(s));
                   }

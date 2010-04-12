@@ -1396,29 +1396,34 @@ void ExportMusicXml::barlineLeft(Measure* m)
 void ExportMusicXml::barlineRight(Measure* m)
       {
       int bst = m->endBarLineType();
-      bool needBarStyle = (bst != NORMAL_BAR && bst != START_REPEAT);
+      bool visible = m->endBarLineVisible();
+      bool needBarStyle = (bst != NORMAL_BAR && bst != START_REPEAT) || !visible;
       Volta* volta = findVolta(m, false);
       if (!needBarStyle && !volta)
             return;
       xml.stag(QString("barline location=\"right\""));
       if (needBarStyle) {
-            switch(bst) {
-                  case DOUBLE_BAR:
-                        xml.tag("bar-style", QString("light-light"));
-                        break;
-                  case END_REPEAT:
-                        xml.tag("bar-style", QString("light-heavy"));
-                        break;
-                  case BROKEN_BAR:
-                        xml.tag("bar-style", QString("dotted"));
-                        break;
-                  case END_BAR:
-                  case END_START_REPEAT:
-                        xml.tag("bar-style", QString("light-heavy"));
-                        break;
-                  default:
-                        printf("ExportMusicXml::bar(): bar subtype %d not supported\n", bst);
-                        break;
+            if(!visible){
+                  xml.tag("bar-style", QString("none"));
+            }else{
+                  switch(bst) {
+                        case DOUBLE_BAR:
+                              xml.tag("bar-style", QString("light-light"));
+                              break;
+                        case END_REPEAT:
+                              xml.tag("bar-style", QString("light-heavy"));
+                              break;
+                        case BROKEN_BAR:
+                              xml.tag("bar-style", QString("dotted"));
+                              break;
+                        case END_BAR:
+                        case END_START_REPEAT:
+                              xml.tag("bar-style", QString("light-heavy"));
+                              break;
+                        default:
+                              printf("ExportMusicXml::bar(): bar subtype %d not supported\n", bst);
+                              break;
+                        }
                   }
             }
       if (volta)
