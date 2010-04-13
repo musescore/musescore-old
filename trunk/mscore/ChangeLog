@@ -1,5 +1,7 @@
 12.apr (la)
       - fix #5303 MusicXML import/export of "none" text for <bar-style> element 
+      (db)
+      - notation fixes to promenade demo for slurs and dot (by craig)
 11.apr (ws)
       - fix #5196: First note entered is ignored if no duration selected
       - fix #5204: The offsets of tempo changes get calculated without
@@ -53,7 +55,7 @@
       - fix #5123: Infinite loop on first measure repeat
       (db)
       - add Greek handbook (most intra-document links don't work)
-      - fix English handbook, and update the rest
+      - fix English handbook, and update style sheet for 0.9.6
       - update Brasilian Portuguese instrument list
 29.mar (ws)
       - more transpose code debugging, fixing #5007, #5111, #5104, #5115
