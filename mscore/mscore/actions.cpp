@@ -64,7 +64,7 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Save As..."),
          QT_TRANSLATE_NOOP("action","Save score under a new file name"),
-          fileSave_ICON
+          fileSaveAs_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
@@ -91,8 +91,7 @@ Shortcut MuseScore::sc[] = {
          QKeySequence::Close,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Close"),
-         QT_TRANSLATE_NOOP("action","Close current score"),
-          fileSave_ICON
+         QT_TRANSLATE_NOOP("action","Close current score")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,

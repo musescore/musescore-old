@@ -69,6 +69,7 @@
       <file alias="images/breakpoint.svg">data/breakpoint.svg</file>
       <file alias="images/location.svg">data/location.svg</file>
       <file>revision.h</file>
+      <file>data/musescore_logo_full.png</file>
    </qresource>
 </RCC>
 
