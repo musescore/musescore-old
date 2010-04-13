@@ -113,7 +113,7 @@ void Preferences::init()
       // set fallback defaults:
 
       bgUseColor         = true;
-      fgUseColor         = false;
+      fgUseColor         = true;
       bgWallpaper        = QString();
       fgWallpaper        = ":/data/paper3.png";
       fgColor.setRgb(255, 255, 255);
@@ -340,7 +340,7 @@ void Preferences::read()
       QSettings s;
 
       bgUseColor      = s.value("bgUseColor", true).toBool();
-      fgUseColor      = s.value("fgUseColor", false).toBool();
+      fgUseColor      = s.value("fgUseColor", true).toBool();
       bgWallpaper     = s.value("bgWallpaper").toString();
       fgWallpaper     = s.value("fgWallpaper", ":/data/paper3.png").toString();
       fgColor         = s.value("fgColor", QColor(255, 255, 255)).value<QColor>();
