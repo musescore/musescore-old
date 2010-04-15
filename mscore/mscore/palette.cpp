@@ -877,8 +877,10 @@ void Palette::read(QDomElement e)
                   _drawGrid = text.toInt();
             else if (tag == "yoffset")
                   _yOffset = text.toDouble();
-            else if (tag == "drumPalette")
+            else if (tag == "drumPalette") {
                   _drumPalette = text.toInt();
+                  _selectable = true;
+                  }
             else if (tag == "Cell") {
                   if (e.firstChildElement().isNull())
                         append(0, "");
