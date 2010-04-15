@@ -300,15 +300,9 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         return;
                         }
                   refresh |= e->abbox();
-//                  if (e->selected()) {
-//                        _selection.remove(e);
-//                        selState = SEL_NONE;
-//                       }
-//                  else {
-                        _selection.add(e);
-                        _is.track = e->track();
-                        selState = SEL_LIST;
-//                        }
+                  _selection.add(e);
+                  _is.track = e->track();
+                  selState = SEL_LIST;
                   if (e->type() == NOTE || e->type() == REST || e->type() == CHORD) {
                         if (e->type() == NOTE)
                               e = e->parent();

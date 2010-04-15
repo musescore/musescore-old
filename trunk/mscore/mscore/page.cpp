@@ -126,8 +126,11 @@ void Page::layout()
                   _pageNo->setSubtype(subtype);
                   _pageNo->setTextStyle(style);
                   }
-            _pageNo->setText(QString("%1").arg(n));
-            _pageNo->layout();
+            QString s = QString("%1").arg(n);
+            if (_pageNo->getText() != s) {
+                  _pageNo->setText(s);
+                  _pageNo->layout();
+                  }
             }
       else {
             delete _pageNo;

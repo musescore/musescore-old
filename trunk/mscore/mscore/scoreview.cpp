@@ -1216,7 +1216,7 @@ void ScoreView::setShadowNote(const QPointF& p)
 
       if (instr->useDrumset()) {
             Drumset* ds  = instr->drumset();
-            int pitch    = score()->inputState().drumNote;
+            int pitch    = score()->inputState().drumNote();
             if (pitch >= 0 && ds->isValid(pitch)) {
                   line     = ds->line(pitch);
                   noteheadGroup = ds->noteHead(pitch);
@@ -2702,6 +2702,9 @@ void ScoreView::startNoteEntry()
                   note = c->upNote();
             el = note;
             }
+      Duration d(_score->inputState().duration());
+      if (!d.isValid() || d.isZero() || d.type() == Duration::V_MEASURE)
+            _score->inputState().setDuration(Duration(Duration::V_QUARTER));
 
       _score->select(el, SELECT_SINGLE, 0);
       _score->inputState().noteEntryMode = true;
@@ -2713,9 +2716,6 @@ void ScoreView::startNoteEntry()
       setMouseTracking(true);
       shadowNote->setVisible(true);
       dragElement = 0;
-      //
-      // TODO: check for valid duration
-      //
       _score->setUpdateAll();
       _score->end();
       }
@@ -3193,7 +3193,6 @@ qreal ScoreView::mag() const
 
 void ScoreView::setOffset(qreal x, qreal y)
       {
-printf("ScoreView::setOffset\n");
       double m = PDPI / DPI;
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), x*m, y*m, _matrix.m33());

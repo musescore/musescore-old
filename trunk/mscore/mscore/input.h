@@ -35,6 +35,8 @@ class Segment;
 
 class InputState {
       Duration _duration;      // currently duration
+      int _drumNote;
+      Drumset* _drumset;
 
    public:
       bool rest;
@@ -42,8 +44,6 @@ class InputState {
       int pitch;
       NoteType noteType;
       BeamMode beamMode;
-      int drumNote;
-      Drumset* drumset;
       int track;
       Segment* _segment;
       bool noteEntryMode;
@@ -54,10 +54,14 @@ class InputState {
       int tickLen() const                 { return _duration.ticks(); }
       ChordRest* cr() const;
       int tick() const;
-      void setDuration(const Duration& d) { _duration = d; }
-      Duration duration() const           { return _duration; }
+      void setDuration(const Duration& d) { _duration = d;        }
+      Duration duration() const           { return _duration;     }
       void setDots(int n)                 { _duration.setDots(n); }
-      Segment* segment() const            { return _segment; }
+      Segment* segment() const            { return _segment;      }
+      Drumset* drumset() const            { return _drumset;      }
+      void setDrumset(Drumset* d)         { _drumset = d;         }
+      int drumNote() const                { return _drumNote;     }
+      void setDrumNote(int v)             { _drumNote = v;        }
       };
 
 #endif

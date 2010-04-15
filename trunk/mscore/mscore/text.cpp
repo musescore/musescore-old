@@ -98,7 +98,7 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
             return false;
 
       if (_doc->blockCount() > 1) {
-            printf(" blocks > 1\n");
+//            printf(" blocks > 1\n");
             return false;
             }
 
@@ -109,7 +109,7 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
             if (i.fragment().isValid())
                   ++fragments;
             if (fragments > 1) {
-                  printf("  fragments > 1\n");
+//                  printf("  fragments > 1\n");
                   return false;
                   }
             cf = i.fragment().charFormat();
@@ -117,8 +117,8 @@ bool TextBase::isSimpleText(TextStyle* style, double spatium) const
       double d = fabs(style->font(spatium).pointSizeF() - cf.font().pointSizeF());
       if (d < 0.1)
             return true;
-      printf("  font changed from style %f -> %f\n", style->font(spatium).pointSizeF(),
-         cf.font().pointSizeF());
+//      printf("  font changed from style %f -> %f\n", style->font(spatium).pointSizeF(),
+//         cf.font().pointSizeF());
       return false;
       }
 
@@ -298,7 +298,9 @@ void TextBase::layout(double w)
       _layoutWidth = w;
       if (!_doc->isModified())
             return;
+
       _doc->documentLayout()->setPaintDevice(pdev);
+
       if (w <= 0.0)
             w = _doc->idealWidth();
       else {
@@ -335,6 +337,8 @@ void TextBase::layout(double w)
             }
       else {
             _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
+//            double m = DPI / PDPI;
+//            _bbox.adjust(_bbox.x() * m, _bbox.y() * m, _bbox.width() * m, _bbox.height() * m);
             }
       _doc->setModified(false);
       }
@@ -361,6 +365,7 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       c.palette.setColor(QPalette::Text, color);
 
       _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0*DPI/PDPI))));
+// p.scale(DPI/PDPI, DPI/PDPI);
       _doc->documentLayout()->draw(&p, c);
 
       // draw frame
@@ -661,6 +666,7 @@ void TextB::layout()
             textBase()->layout(parent()->width());
       else
             textBase()->layout(-1.0);
+
       setbbox(textBase()->bbox());
 
       Element::layout();      // process alignment

@@ -568,7 +568,7 @@ void Score::putNote(const QPointF& pos, bool replace)
 
       if (instr->useDrumset()) {
             Drumset* ds   = instr->drumset();
-            pitch         = _is.drumNote;
+            pitch         = _is.drumNote();
             if (pitch < 0)
                   return;
             // voice         = ds->voice(pitch);
@@ -1483,8 +1483,10 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
             el = cl[1];
       if (el) {
             _score->select(el, SELECT_SINGLE, 0);
-            if (!noteEntryMode())
+            if (!noteEntryMode()) {
                   sm->postEvent(new CommandEvent("note-input"));
+                  qApp->processEvents();
+                  }
             _score->inputState().setDuration(baseLen);
             _score->setPadState();
             }
