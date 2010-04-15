@@ -91,8 +91,8 @@ InputState::InputState() :
    pitch(72),
    noteType(NOTE_NORMAL),
    beamMode(BEAM_AUTO),
-   drumNote(-1),
-   drumset(0),
+   _drumNote(-1),
+   _drumset(0),
    track(0),
    _segment(0),
    noteEntryMode(false),
@@ -259,7 +259,7 @@ Score::Score(const Style& s)
       // deep copy of defaultTextStyles:
       for (int i = 0; i < TEXT_STYLES; ++i)
             _textStyles.append(new TextStyle(defaultTextStyles[i]));
-      
+
       _mscVersion     = MSCVERSION;
       _created        = false;
       _updateAll      = false;

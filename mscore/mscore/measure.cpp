@@ -637,7 +637,8 @@ void Measure::layout2()
                   _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
                   _noText->setParent(this);
                   }
-            _noText->setText(s);
+            if (_noText->getText() != s)
+                  _noText->setText(s);
             }
       else {
             delete _noText;

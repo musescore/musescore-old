@@ -1134,7 +1134,7 @@ void MuseScore::updateDrumset()
 
       double _spatium = gscore->spatium();
       const InputState& padState = cs->inputState();
-      Drumset* ds        = padState.drumset;
+      Drumset* ds        = padState.drumset();
       if (ds != drumset) {
             drumset = ds;
             drumPalette->clear();
@@ -1187,7 +1187,7 @@ void MuseScore::updateDrumset()
             drumPalette->setSelected(-1);
             for (int pitch = 0; pitch < 128; ++pitch) {
                   if (drumset->isValid(pitch)) {
-                        if (pitch == padState.drumNote) {
+                        if (pitch == padState.drumNote()) {
                               drumPalette->setSelected(i);
                               break;
                               }
@@ -1207,7 +1207,7 @@ void MuseScore::drumPaletteSelected(int idx)
       if (cs == 0)
             return;
       InputState& padState = cs->inputState();
-      Drumset* ds        = padState.drumset;
+      Drumset* ds          = padState.drumset();
       if (ds == 0)
             return;
       int i = 0;
@@ -1215,7 +1215,7 @@ void MuseScore::drumPaletteSelected(int idx)
             if (!drumset->isValid(pitch))
                   continue;
             if (i == idx) {
-                  padState.drumNote = pitch;
+                  padState.setDrumNote(pitch);
                   padState.track    = (padState.track / VOICES) * VOICES + ds->voice(pitch);
                   cs->setPadState();
                   break;

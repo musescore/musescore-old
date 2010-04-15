@@ -1,3 +1,6 @@
+15.apr (ws)
+      - fix #5382: Crash with frames and two lines score
+      - fix #5330: Frame crash multi-measure rest
 14.apr (la)
       - fix #5373 : Drum notation not working
 13.apr (la)
@@ -5,7 +8,7 @@
       - update File menu icons
       - default score background color to white
 12.apr (la)
-      - fix #5303 MusicXML import/export of "none" text for <bar-style> element 
+      - fix #5303 MusicXML import/export of "none" text for <bar-style> element
       (db)
       - notation fixes to promenade demo for slurs and dot (by craig)
 11.apr (ws)

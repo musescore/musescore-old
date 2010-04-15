@@ -285,8 +285,8 @@ void Score::padToggle(int n)
 
 void Score::setPadState(Element* e)
       {
-      _is.drumNote = -1;
-      _is.drumset  = 0;
+      _is.setDrumNote(-1);
+      _is.setDrumset(0);
 
       if (e->type() == NOTE) {
             Note* note    = static_cast<Note*>(e);
@@ -319,10 +319,10 @@ void Score::setPadState(Element* e)
             Part* instr   = e->staff()->part();
             if (instr->useDrumset()) {
                   if (e->type() == NOTE)
-                        _is.drumNote = static_cast<Note*>(e)->pitch();
+                        _is.setDrumNote(static_cast<Note*>(e)->pitch());
                   else
-                        _is.drumNote = -1;
-                  _is.drumset  = instr->drumset();
+                        _is.setDrumNote(-1);
+                  _is.setDrumset(instr->drumset());
                    }
             }
       setPadState();

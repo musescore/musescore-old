@@ -412,7 +412,7 @@ void Score::cmdRemove(Element* e)
 void ScoreView::cmdAddPitch(int note, bool addFlag)
       {
       InputState& is = _score->inputState();
-      Drumset* ds    = is.drumset;
+      Drumset* ds    = is.drumset();
       int pitch;
       if (ds) {
             char note1 = "CDEFGAB"[note];
@@ -470,9 +470,10 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
             printf("cannot enter notes here (no chord rest at current position)\n");
             return;
             }
-      if (!noteEntryMode())
+      if (!noteEntryMode()) {
             sm->postEvent(new CommandEvent("note-input"));
-      qApp->processEvents();
+            qApp->processEvents();
+            }
 
       _score->addPitch(pitch, addFlag);
       moveCursor();
@@ -541,9 +542,9 @@ Note* Score::addPitch(int pitch, bool addFlag)
       Direction stemDirection = AUTO;
       int headGroup           = 0;
       int track               = _is.track;
-      if (_is.drumNote != -1) {
-            int pitch     = _is.drumNote;
-            Drumset* ds   = _is.drumset;
+      if (_is.drumNote() != -1) {
+            int pitch     = _is.drumNote();
+            Drumset* ds   = _is.drumset();
             headGroup     = ds->noteHead(pitch);
             stemDirection = ds->stemDirection(pitch);
             track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
@@ -2253,6 +2254,20 @@ void Score::cmdPaste(ScoreView* view)
                   if (el) {
                         el->read(e);
                         addRefresh(selection().element()->abbox());   // layout() ?!
+#if 0
+                        if (el->type() == NOTE) {
+                              Note* n = static_cast<Note*>(el);
+                              if (!styleB(ST_concertPitch) && part->transpose().chromatic) {
+                                    int npitch;
+                                    int ntpc;
+                                    Interval interval = part->transpose();
+                                    interval.flip();
+                                    transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc,
+                                      interval, true);
+                                    n->setPitch(npitch, ntpc);
+                                    }
+                              }
+#endif
                         selection().element()->drop(view, QPointF(), QPointF(), el);
                         if (selection().element())
                               addRefresh(selection().element()->abbox());

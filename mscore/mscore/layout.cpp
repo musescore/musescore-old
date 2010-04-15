@@ -1071,6 +1071,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
       system->setInstrumentNames();
       system->layout(xo);
+
       minWidth            = system->leftMargin();
       double systemWidth  = w;
 
@@ -1350,12 +1351,14 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   }
             for (MeasureBase* mb = ml.front(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE) {
+                        if (mb == lmb)
+                              break;
                         mb = mb->next();
-                        if (!mb || mb == lmb)
+                        if (!mb)
                               break;
                         continue;
                         }
-                  Measure* m = (Measure*)mb;
+                  Measure* m = static_cast<Measure*>(mb);
                   // first measure repeat?
                   bool fmr = firstMeasure && (m->repeatFlags() & RepeatStart);
 
@@ -1379,7 +1382,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
 
                         Measure* nm = 0;
                         if (mb && mb->type() == MEASURE)
-                              nm = (Measure*)mb;
+                              nm = static_cast<Measure*>(mb);
 
                         needRelayout |= m->setStartRepeatBarLine(fmr);
                         if (m->repeatFlags() & RepeatEnd) {
@@ -1399,27 +1402,21 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         break;
                   }
             Measure* firstMM = 0;
-            for (MeasureBase* mb = ml.front(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE) {
-                        mb = mb->next();
-                        if (!mb || mb == lmb)
-                              break;
+            foreach (MeasureBase* mb, ml) {
+                  if (mb->type() != MEASURE)
                         continue;
-                        }
-                  Measure* m = (Measure*)mb;
+                  Measure* m = static_cast<Measure*>(mb);
 
                   if (m->multiMeasure() > 0)
                         firstMM = m;
                   else if ((m->multiMeasure() < 0) &&
                      (m->next() == 0 || m->next()->type() != MEASURE || static_cast<Measure*>(m->next())->multiMeasure() >= 0))
                         {
-                        firstMM->setMmEndBarLineType(m->endBarLineType());
-                        needRelayout |= firstMM->createEndBarLines();
+                        if (firstMM) {    // DEBUT
+                              firstMM->setMmEndBarLineType(m->endBarLineType());
+                              needRelayout |= firstMM->createEndBarLines();
+                              }
                         }
-
-
-                  if (mb == lmb)
-                        break;
                   }
             }
 
