@@ -715,6 +715,7 @@ void TextB::setTextStyle(int idx)
       _reloff.rx()   = s->rxoff;
       _reloff.ry()   = s->ryoff;
       _offsetType    = s->offsetType;
+      setColor(s->foregroundColor);
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
       setSystemFlag(s->systemFlag);
 

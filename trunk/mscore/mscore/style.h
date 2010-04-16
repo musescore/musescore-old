@@ -91,6 +91,7 @@ class TextStyle {
       QColor frameColor;
       bool circle;
       bool systemFlag;
+      QColor foregroundColor;
 
       TextStyle(QString _name, QString _family, int _size,
          bool _bold, bool _italic, bool _underline,
@@ -99,7 +100,8 @@ class TextStyle {
          double _rxoff = 0, double _ryoff = 0,
          bool sd = false,
          double fw = 0.0, double pw = 0.0, int fr = 25,
-         QColor co = QColor(Qt::black), bool circle = false, bool systemFlag = false);
+         QColor co = QColor(Qt::black), bool circle = false, bool systemFlag = false,
+         QColor fg = QColor(Qt::black));
 
       TextStyle() {}
       void write(Xml&) const;

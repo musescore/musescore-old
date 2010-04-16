@@ -507,14 +507,17 @@ TextStyle::TextStyle(
    Align _align,
    double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
    bool sd,
-   double fw, double pw, int fr, QColor co, bool _circle, bool _systemFlag)
+   double fw, double pw, int fr, QColor co, bool _circle, bool _systemFlag,
+   QColor fg)
 
    : name(_name), size(_size), bold(_bold),
    italic(_italic), underline(_underline),
    align(_align),
    xoff(_xoff), yoff(_yoff), offsetType(_ot), rxoff(_rxoff), ryoff(_ryoff),
    sizeIsSpatiumDependent(sd), frameWidth(fw), paddingWidth(pw),
-   frameRound(fr), frameColor(co), circle(_circle), systemFlag(_systemFlag)
+   frameRound(fr), frameColor(co), circle(_circle), systemFlag(_systemFlag),
+   foregroundColor(fg)
+
       {
       hasFrame = fw != 0.0;
 	  family = _family;
@@ -543,6 +546,7 @@ bool TextStyle::operator!=(const TextStyle& s) const
           || s.paddingWidth           != paddingWidth
           || s.frameRound             != frameRound
           || s.frameColor             != frameColor
+          || s.foregroundColor        != foregroundColor
           || s.circle                 != circle
           || s.systemFlag             != systemFlag;
       }
@@ -613,6 +617,7 @@ void TextStyle::write(Xml& xml) const
       xml.tag("align", int(align));
       xml.tag("offsetType", offsetType);
       xml.tag("sizeIsSpatiumDependent", sizeIsSpatiumDependent);
+      xml.tag("foregroundColor", foregroundColor);
       if (offsetType == OFFSET_ABS) {
             xml.tag("xoffset", xoff * INCH);
             xml.tag("yoffset", yoff * INCH);
@@ -684,6 +689,8 @@ void TextStyle::read(QDomElement e)
                   frameRound = i;
             else if (tag == "frameColor")
                   frameColor = readColor(e);
+            else if (tag == "foregroundColor")
+                  foregroundColor = readColor(e);
             else if (tag == "circle")
                   circle = val.toInt();
             else if (tag == "systemFlag")
