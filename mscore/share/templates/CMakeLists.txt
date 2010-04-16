@@ -25,6 +25,7 @@ install(FILES
       instruments_fr.xml
       instruments_gl.xml
       instruments_it.xml
+      instruments_ja.xml
       instruments_nl.xml
       instruments_pt.xml
       instruments_pt_BR.xml
