@@ -1,3 +1,5 @@
+16.apr (ws)
+      - fix #5398: Customized beam does not persist after save
 15.apr (ws)
       - fix #5382: Crash with frames and two lines score
       - fix #5330: Frame crash multi-measure rest

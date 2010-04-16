@@ -887,8 +887,8 @@ void Beam::read(QDomElement e)
             _p2[idx] = p2;
             if (_score->mscVersion() >= 114) {
                   double spatium = _score->spatium();
-                  _p1[idx] /= spatium;
-                  _p2[idx] /= spatium;
+                  _p1[idx] *= spatium;
+                  _p2[idx] *= spatium;
                   }
             }
       }
