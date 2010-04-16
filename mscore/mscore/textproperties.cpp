@@ -159,6 +159,7 @@ void TextProp::set(TextStyle* s)
       fontItalic->setChecked(s->italic);
       fontUnderline->setChecked(s->underline);
       fontSize->setValue(s->size);
+      color->setColor(s->foregroundColor);
 
       systemFlag->setChecked(s->systemFlag);
       int a = s->align;
@@ -234,5 +235,6 @@ void TextProp::get(TextStyle* s)
       s->frameRound   = frameRound->value();
       s->hasFrame     = frame->isChecked();
       s->systemFlag   = systemFlag->isChecked();
+      s->foregroundColor = color->color();
       }
 

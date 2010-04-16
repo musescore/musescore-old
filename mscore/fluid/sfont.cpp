@@ -890,7 +890,7 @@ void SFont::process_sdta (int size)
             throw(QString("Expected SMPL chunk found invalid id instead"));
 
       if ((size - chunk.size) != 0)
-            throw(QString("SDTA chunk size mismatch"));
+            throw(QString("SDTA chunk size mismatch %1 != %2").arg(size).arg(chunk.size));
       /* sample data follows */
       setSamplepos(f.pos());
       setSamplesize(chunk.size);
