@@ -41,6 +41,7 @@ class EditStaff : public QDialog, private Ui::EditStaffBase {
 
       void apply();
       void initFromInstrument(const Instrument&);
+      void setInterval(const Interval&);
 
    private slots:
       void bboxClicked(QAbstractButton* button);
