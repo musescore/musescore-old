@@ -1008,18 +1008,35 @@ void Seq::prevMeasure()
 void Seq::prevChord()
       {
       int tick  = playPos.key();
+      //find the chord just before playpos
       EventMap::const_iterator i = playPos;
       for (;;) {
             if (i.value()->type() == ME_NOTEON) {
                   Event* n = i.value();
                   if (i.key() < tick && n->velo()) {
-                        seek(i.key());
+                        tick = i.key();
                         break;
                         }
                   }
             if (i == events.constBegin())
                   break;
             --i;
+            }
+      //go the previous chord      
+      if (i != events.constBegin()) {
+            i = playPos;
+            for (;;) {
+                  if (i.value()->type() == ME_NOTEON) {
+                        Event* n = i.value();
+                        if (i.key() < tick && n->velo()) {
+                              seek(i.key());
+                              break;
+                              }
+                        }
+                  if (i == events.constBegin())
+                        break;
+                  --i;
+                  }
             }
       }
 
