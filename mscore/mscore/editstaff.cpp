@@ -49,32 +49,7 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       useDrumset->setChecked(instrument.useDrumset());
       editDrumset->setEnabled(instrument.useDrumset());
 
-      int diatonic  = instrument.transpose().diatonic;
-      int chromatic = instrument.transpose().chromatic;
-
-      int oct = chromatic / 12;
-      if (oct < 0)
-            oct = -oct;
-
-
-      bool upFlag = true;
-      if (chromatic < 0 || diatonic < 0) {
-            upFlag = false;
-            chromatic = -chromatic;
-            diatonic  = -diatonic;
-            }
-      chromatic %= 12;
-      diatonic  %= 7;
-
-      int interval = searchInterval(diatonic, chromatic);
-      if (interval == -1) {
-            printf("unknown interval %d %d\n", diatonic, chromatic);
-            interval = 0;
-            }
-      iList->setCurrentIndex(interval);
-      up->setChecked(upFlag);
-      down->setChecked(!upFlag);
-      octave->setValue(oct);
+      setInterval(instrument.transpose());
 
       shortName->setHtml(part->shortNameHtml());
       longName->setHtml(part->longNameHtml());
@@ -89,6 +64,39 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
       connect(changeInstrument, SIGNAL(clicked()), SLOT(showInstrumentDialog()));
+      }
+
+//---------------------------------------------------------
+//   setInterval
+//---------------------------------------------------------
+
+void EditStaff::setInterval(const Interval& iv)
+      {
+      int diatonic  = iv.diatonic;
+      int chromatic = iv.chromatic;
+
+      int oct = chromatic / 12;
+      if (oct < 0)
+            oct = -oct;
+
+      bool upFlag = true;
+      if (chromatic < 0 || diatonic < 0) {
+            upFlag    = false;
+            chromatic = -chromatic;
+            diatonic  = -diatonic;
+            }
+      chromatic %= 12;
+      diatonic  %= 7;
+
+      int interval = searchInterval(diatonic, chromatic);
+      if (interval == -1) {
+            printf("EditStaff: unknown interval %d %d\n", diatonic, chromatic);
+            interval = 0;
+            }
+      iList->setCurrentIndex(interval);
+      up->setChecked(upFlag);
+      down->setChecked(!upFlag);
+      octave->setValue(oct);
       }
 
 //---------------------------------------------------------
@@ -131,7 +139,7 @@ void EditStaff::apply()
       bool upFlag     = up->isChecked();
 
       Interval interval = intervalList[intervalIdx];
-      interval.diatonic += octave->value() * 7;
+      interval.diatonic  += octave->value() * 7;
       interval.chromatic += octave->value() * 12;
 
       if (!upFlag)
@@ -196,23 +204,8 @@ void EditStaff::showInstrumentDialog()
             shortName->setHtml(t->shortName);
             longName->setHtml(t->longName);
             instrument.setTrackName(t->trackName);
-            int diatonic  = t->transpose.diatonic;
-            int chromatic = t->transpose.chromatic;
 
-            bool upFlag = true;
-            if (chromatic < 0 || diatonic < 0) {
-                  upFlag = false;
-                  chromatic = -chromatic;
-                  diatonic  = -diatonic;
-                  }
-            int interval = searchInterval(diatonic, chromatic);
-            if (interval == -1) {
-                  printf("unknown interval %d %d\n", diatonic, chromatic);
-                  interval = 0;
-                  }
-            iList->setCurrentIndex(interval);
-            up->setChecked(upFlag);
-            down->setChecked(!upFlag);
+            setInterval(t->transpose);
 
             if (t->useDrumset) {
                   instrument.setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
