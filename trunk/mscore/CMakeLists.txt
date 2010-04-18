@@ -33,6 +33,7 @@ set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE FALSE)
+set(SOUNDFONT3 TRUE)                      # enable ogg vorbis compressed fonts
 
 if (MINGW)
       set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
@@ -78,6 +79,10 @@ else (MINGW OR APPLE)
       SET(Mscore_INSTALL_NAME  "mscore-${Mscore_VERSION}/")
       SET(Mscore_SHARE_NAME    "share/")
 endif (MINGW OR APPLE)
+
+if (SOUNDFONT3)
+      set(OGGVORBIS TRUE)
+endif (SOUNDFONT3)
 
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)

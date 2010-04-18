@@ -426,6 +426,7 @@ class Fluid : public Synth {
       QString error() const { return _error; }
 
       friend class Voice;
+      friend class Preset;
       };
 
   /*
@@ -472,11 +473,14 @@ enum fluid_interp {
 
 /** Sample types */
 
-#define FLUID_SAMPLETYPE_MONO	      1
-#define FLUID_SAMPLETYPE_RIGHT	2
-#define FLUID_SAMPLETYPE_LEFT	      4
-#define FLUID_SAMPLETYPE_LINKED	8
-#define FLUID_SAMPLETYPE_ROM	      0x8000
+enum {
+      FLUID_SAMPLETYPE_MONO =	      1,
+      FLUID_SAMPLETYPE_RIGHT =	2,
+      FLUID_SAMPLETYPE_LEFT =	      4,
+      FLUID_SAMPLETYPE_LINKED =	8,
+      FLUID_SAMPLETYPE_OGG_VORBIS = 0x10,
+      FLUID_SAMPLETYPE_ROM =	      0x8000
+      };
 
 /* Sets the sound data of the sample
  *     Warning : if copy_data is FALSE, data should have 8 unused frames at start
