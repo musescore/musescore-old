@@ -1,5 +1,8 @@
 18.apr (ws)
       - fix #5367: Change instrument changes transposition incorrectly
+       (la)
+      - fix #5309: Left arrow key during playback
+      - fix #5249: Space after winged repeat bars (cheap fix)
 16.apr (ws)
       - add foreground color to text style
       - fix #5398: Customized beam does not persist after save
