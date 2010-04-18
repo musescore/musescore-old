@@ -135,6 +135,7 @@ Preset::~Preset()
 
 void Preset::loadSamples()
       {
+      sfont->synth->mutex.lock();
       if (_global_zone && _global_zone->instrument) {
             Instrument* i = _global_zone->instrument;
             if (i->global_zone && i->global_zone->sample)
@@ -150,6 +151,7 @@ void Preset::loadSamples()
             foreach(Zone* iz, i->zones)
                   iz->sample->load();
             }
+      sfont->synth->mutex.unlock();
       }
 
 //---------------------------------------------------------
@@ -606,31 +608,49 @@ void Sample::load()
       QFile fd(sf->get_name());
       if (!fd.open(QIODevice::ReadOnly))
             return;
-      if (!fd.seek(sf->samplePos() + start * sizeof(short)))
-            return;
-      unsigned int size = end - start;
-      data              = new short[size];
-      size              *= sizeof(short);
-
-      if (fd.read((char*)data, size) != size)
-            return;
-
-      if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
-            unsigned char hi, lo;
-            unsigned int i, j;
-            short s;
-            unsigned char* cbuf = (unsigned char*) data;
-            for (i = 0, j = 0; j < size; i++) {
-                  lo = cbuf[j++];
-                  hi = cbuf[j++];
-                  s = (hi << 8) | lo;
-                  data[i] = s;
-                  }
+      if (sampletype & FLUID_SAMPLETYPE_OGG_VORBIS) {
+            if (!fd.seek(sf->samplePos() + start))
+                  return;
             }
-      end       -= start - 1;       // marks last sample, contrary to SF spec.
-      loopstart -= start;
-      loopend   -= start;
-      start      = 0;
+      else {
+            if (!fd.seek(sf->samplePos() + start * sizeof(short)))
+                  return;
+            }
+      unsigned int size = end - start;
+
+      if (sampletype & FLUID_SAMPLETYPE_OGG_VORBIS) {
+            char* p = new char[size];
+            if (fd.read(p, size) != size) {
+                  printf("  read %d failed\n", size);
+                  return;
+                  }
+            decompressOggVorbis(p, size);
+            delete[] p;
+            }
+      else {
+            data = new short[size];
+            size *= sizeof(short);
+
+            if (fd.read((char*)data, size) != size)
+                  return;
+
+            if (QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+                  unsigned char hi, lo;
+                  unsigned int i, j;
+                  short s;
+                  uchar* cbuf = (uchar*) data;
+                  for (i = 0, j = 0; j < size; i++) {
+                        lo = cbuf[j++];
+                        hi = cbuf[j++];
+                        s = (hi << 8) | lo;
+                        data[i] = s;
+                        }
+                  }
+            end       -= (start + 1);       // marks last sample, contrary to SF spec.
+            loopstart -= start;
+            loopend   -= start;
+            start      = 0;
+            }
       optimize();
       }
 
@@ -837,11 +857,11 @@ void SFont::process_info(int size)
                   if (chunk.size != 4)
                         throw(QString("Sound font version info chunk has invalid size"));
 
-                  version.major = READW();
-                  version.minor = READW();
+                  _version.major = READW();
+                  _version.minor = READW();
 
-                  if (version.major < 2 || version.major > 2)
-                        throw(QString("Bad Sound font version"));
+                  if (_version.major < 2 || _version.major > 3)
+                        throw(QString("Bad Sound font version %1.%2").arg(_version.major).arg(_version.minor));
                   }
             else if (id == IVER_ID) {   /* ROM version chunk? */
                   if (chunk.size != 4)
@@ -1592,19 +1612,24 @@ void SFont::load_shdr (int size)
                   continue;
                   }
             p->setValid(true);
-            if (p->loopend > p->end || p->loopstart >= p->loopend || p->loopstart <= p->start) {	 /* loop is fowled?? (cluck cluck :) */
-                  /* can pad loop by 8 samples and ensure at least 4 for loop (2*8+4) */
-                  if ((p->end - p->start) >= 20) {
-                        p->loopstart = p->start + 8;
-                        p->loopend   = p->end - 8;
-                        }
-                  else {      // loop is fowled, sample is tiny (can't pad 8 samples)
-                        p->loopstart = p->start + 1;
-                        p->loopend   = p->end - 1;
-                        }
+            if (p->sampletype & FLUID_SAMPLETYPE_OGG_VORBIS) {
                   }
-            if (p->end - p->start < 8)
-                  p->setValid(false);
+            else {
+                  // loop is fowled?? (cluck cluck :)
+                  if (p->loopend > p->end || p->loopstart >= p->loopend || p->loopstart <= p->start) {
+                        /* can pad loop by 8 samples and ensure at least 4 for loop (2*8+4) */
+                        if ((p->end - p->start) >= 20) {
+                              p->loopstart = p->start + 8;
+                              p->loopend   = p->end - 8;
+                              }
+                        else {      // loop is fowled, sample is tiny (can't pad 8 samples)
+                              p->loopstart = p->start + 1;
+                              p->loopend   = p->end - 1;
+                              }
+                        }
+                  if ((p->end - p->start) < 8)
+                        p->setValid(false);
+                  }
             }
       FSKIP (SFSHDRSIZE);	/* skip terminal shdr */
       }

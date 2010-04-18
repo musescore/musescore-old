@@ -239,6 +239,10 @@ if (MINGW)
       target_link_libraries(mscore libsndfile-1)
    endif (HAS_AUDIOFILE)
 
+   if (OGGVORBIS)
+      target_link_libraries(mscore vorbis ogg)
+   endif (OGGVORBIS)
+
    install( TARGETS mscore RUNTIME DESTINATION bin )
 
    install_files ( /bin .dll
@@ -287,6 +291,10 @@ else (MINGW)
    if (HAS_AUDIOFILE)
        target_link_libraries(mscore sndfile)
    endif (HAS_AUDIOFILE)
+
+   if (OGGVORBIS)
+      target_link_libraries(mscore vorbis ogg)
+   endif (OGGVORBIS)
 
    if (APPLE)
      if (USE_PORTMIDI)

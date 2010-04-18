@@ -24,7 +24,7 @@ set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 add_library (fluid STATIC
   dsp.cpp fluid.cpp voice.cpp chan.cpp sfont.cpp chorus.cpp
-  conv.cpp gen.cpp mod.cpp rev.cpp tuning.cpp
+  conv.cpp gen.cpp mod.cpp rev.cpp tuning.cpp sfont3.cpp
   )
 
 set_target_properties( fluid

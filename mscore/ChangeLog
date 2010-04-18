@@ -1,4 +1,5 @@
 18.apr (ws)
+      - add utility to compress sound font files with ogg vorbis
       - fix #5367: Change instrument changes transposition incorrectly
        (la)
       - fix #5309: Left arrow key during playback

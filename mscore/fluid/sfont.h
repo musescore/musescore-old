@@ -59,7 +59,7 @@ class SFont {
       QList<Sample*> sample;
 
       unsigned _id;
-      SFVersion version;		// sound font version
+      SFVersion _version;		// sound font version
       SFVersion romver;		      // ROM version
       QList<unsigned char*> infos;	// list of info strings (1st byte is ID)
 
@@ -113,6 +113,8 @@ class SFont {
       void setSamplesize(unsigned v)            { samplesize = v; }
       unsigned getSamplesize() const            { return samplesize; }
       const QList<Preset*> getPresets() const   { return presets; }
+      SFVersion version() const                 { return _version; }
+      friend class Preset;
       };
 
 //---------------------------------------------------------
@@ -151,6 +153,7 @@ class Sample {
       void load();
       bool valid() const    { return _valid; }
       void setValid(bool v) { _valid = v; }
+      bool decompressOggVorbis(char* p, int size);
       };
 
 //---------------------------------------------------------
