@@ -482,12 +482,12 @@ void BarLine::layout()
             double mags = magS();
             switch(subtype()) {
                   case START_REPEAT:
-                        r |= symbols[brackettipsRightUp].bbox(mags).translated(0.0, y1);
-                        r |= symbols[brackettipsRightDown].bbox(mags).translated(0.0, y2);
+                        //r |= symbols[brackettipsRightUp].bbox(mags).translated(0, y1);
+                        //r |= symbols[brackettipsRightDown].bbox(mags).translated(0, y2);
                         break;
                   case END_REPEAT:
-                        r |= symbols[brackettipsLeftUp].bbox(mags).translated(dw, y1);
-                        r |= symbols[brackettipsLeftDown].bbox(mags).translated(dw, y2);
+                        //r |= symbols[brackettipsLeftUp].bbox(mags).translated(0, y1);
+                        //r |= symbols[brackettipsLeftDown].bbox(mags).translated(0, y2);
                         break;
                   }
             }
