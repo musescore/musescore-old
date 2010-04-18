@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.14">
   <programVersion>0.9.6</programVersion>
-  <programRevision>2960 
+  <programRevision>2811 
 </programRevision>
   <Spatium>1.425</Spatium>
   <Division>480</Division>
@@ -248,7 +248,7 @@ p, li { white-space: pre-wrap; }
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</span></p></body></html>
           </html-data>
         </Tempo>
       <TimeSig>
@@ -256,9 +256,13 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>5</nom1>
         </TimeSig>
-      <Rest>
+      <Chord>
         <durationType>quarter</durationType>
-        </Rest>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
       <Chord>
         <durationType>quarter</durationType>
         <Articulation>
@@ -4649,5 +4653,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>1</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>
