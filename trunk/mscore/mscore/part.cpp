@@ -388,13 +388,23 @@ void Part::setMidiChannel(int) const
 void Part::setInstrument(const Instrument& i)
       {
       setTrackName(i.trackName());
-//      setLongName(i.longName());
-//      setShortName(i.shortName());
       setMinPitchA(i.minPitchA());
       setMaxPitchA(i.maxPitchA());
       setMinPitchP(i.minPitchP());
       setMaxPitchP(i.maxPitchP());
+      if (!_score->styleB(ST_concertPitch) && transpose().chromatic) {
+            foreach(Staff* staff, _staves) {
+                  _score->cmdTransposeStaff(staff->idx(), transpose(), false);
+                  }
+            }
       setTranspose(i.transpose());
+      if (!_score->styleB(ST_concertPitch) && transpose().chromatic) {
+            foreach(Staff* staff, _staves) {
+                  Interval iv(transpose());
+                  iv.flip();
+                  _score->cmdTransposeStaff(staff->idx(), iv, false);
+                  }
+            }
       setDrumset(i.drumset());
       setUseDrumset(i.useDrumset());
       setMidiActions(i.midiActions());
