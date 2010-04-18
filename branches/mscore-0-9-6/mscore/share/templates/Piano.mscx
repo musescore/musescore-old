@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<museScore version="1.11">
+  <MagIdx>3</MagIdx>
+  <xoff>0</xoff>
+  <yoff>0</yoff>
+  <Spatium>1.425</Spatium>
+  <Division>480</Division>
+  <Style>
+    <frameSystemDistance>7</frameSystemDistance>
+    <bracketDistance>0.3</bracketDistance>
+    <measureSpacing>1.3</measureSpacing>
+    <ledgerLineWidth>0.08</ledgerLineWidth>
+    </Style>
+  <showInvisible>1</showInvisible>
+  <showFrames>1</showFrames>
+  <siglist>
+    <sig tick="0">
+      <nom>4</nom>
+      <denom>4</denom>
+      </sig>
+    </siglist>
+  <tempolist fix="2">
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="0"/>
+        </cleflist>
+      <keylist>
+        </keylist>
+      <bracket type="1" span="4"/>
+      <barLineSpan>2</barLineSpan>
+      </Staff>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="4"/>
+        </cleflist>
+      <keylist>
+        </keylist>
+      </Staff>
+    <trackName>Piano</trackName>
+    <Instrument>
+      <Channel>
+        <controller ctrl="0" value="0"/>
+        <controller ctrl="32" value="0"/>
+        <program value="0"/>
+        <controller ctrl="7" value="100"/>
+        <controller ctrl="10" value="64"/>
+        <controller ctrl="93" value="30"/>
+        <controller ctrl="91" value="30"/>
+        </Channel>
+      </Instrument>
+    </Part>
+  <Staff id="1">
+    <HBox>
+      <width>7.22807</width>
+      <leftMargin>5</leftMargin>
+      <rightMargin>5</rightMargin>
+      <topMargin>5</topMargin>
+      <bottomMargin>5</bottomMargin>
+      </HBox>
+    <Measure number="1">
+      <TimeSig>
+        <subtype>260</subtype>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Rest>
+        </Rest>
+      </Measure>
+    </Staff>
+  <Staff id="2">
+    <Measure number="1">
+      <TimeSig>
+        <subtype>260</subtype>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Rest>
+        </Rest>
+      </Measure>
+    </Staff>
+  <cursorTrack>-1</cursorTrack>
+  </museScore>

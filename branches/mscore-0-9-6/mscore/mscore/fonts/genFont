@@ -1,0 +1,80 @@
+#!/bin/bash
+
+#
+#     quick & dirty build script for mscore-20.ttf
+#
+
+rm -rf out
+mkdir out
+
+MFINPUTS=. mf-nowin -progname=mf "\mode:=ljfour; nonstopmode; input feta20.mf;"
+mv feta20.log out
+MFINPUTS=. mf-nowin -progname=mf "\mode:=ljfour; nonstopmode; input feta-alphabet20.mf;"
+mv feta-alphabet20.log out
+mv feta-alphabet20.tfm out
+MFINPUTS=. mf-nowin -progname=mf "\mode:=ljfour; nonstopmode; input mscore1-20.mf;"
+mv mscore1-20.log out
+
+/usr/bin/python ./mf-to-table.py \
+   --global-lisp=./out/feta20.otf-gtable \
+   --lisp=./out/feta20.lisp \
+   --outdir=./out \
+   --enc ./out/feta20.enc \
+   out/feta20.log
+
+/usr/bin/python ./mf-to-table.py \
+   --global-lisp=./out/feta-alphabet20.otf-gtable \
+   --lisp=./out/feta-alphabet20.lisp \
+   --outdir=./out \
+   --enc ./out/feta-alphabet20.enc \
+   out/feta-alphabet20.log
+
+/usr/bin/python ./mf-to-table.py \
+   --global-lisp=./out/mscore1-20.otf-gtable \
+   --lisp=./out/mscore1-20.lisp \
+   --outdir=./out \
+   --enc ./out/mscore1-20.enc \
+   out/mscore1-20.log
+
+# cat out/feta20.lisp out/parmesan20.lisp out/feta-alphabet20.lisp > out/feta20.otf-table
+cat out/feta20.lisp out/feta-alphabet20.lisp > out/feta20.otf-table
+# cat out/mscore1-20.lisp > out/mscore1-20.otf-table
+
+cd ./out && mpost -progname=mpost -ini ../mf2pt1.mp \\dump
+cd ..
+
+TMP=`mktemp -d ./out/pfbtemp.XXXXXXXXX` \
+   && ( cd $TMP \
+   && ln -s ../mf2pt1.mem . \
+   && MFINPUTS=../..:..:: /usr/bin/perl ../../mf2pt1.pl --rounding=0.0001 --family=feta20 --fullname=feta20 --name=feta20 feta20.mf ) \
+   && mv $TMP/*pfb ./out; \
+   rm -rf $TMP
+
+TMP=`mktemp -d ./out/pfbtemp.XXXXXXXXX` \
+   && ( cd $TMP \
+   && ln -s ../mf2pt1.mem . \
+   && MFINPUTS=../..:..:: /usr/bin/perl ../../mf2pt1.pl --rounding=0.0001 --family=feta-alphabet20 --fullname=feta-alphabet20 --name=feta-alphabet20 feta-alphabet20.mf ) \
+   && mv $TMP/*pfb ./out; \
+   rm -rf $TMP
+
+TMP=`mktemp -d ./out/pfbtemp.XXXXXXXXX` \
+   && ( cd $TMP \
+   && ln -s ../mf2pt1.mem . \
+   && MFINPUTS=../..:..:: /usr/bin/perl ../../mf2pt1.pl --rounding=0.0001 --family=feta-alphabet20 --fullname=mscore1-20 --name=mscore1-20 mscore1-20.mf ) \
+   && mv $TMP/*pfb ./out; \
+   rm -rf $TMP
+
+/usr/bin/python gen-emmentaler-scripts --dir=./out
+/usr/bin/python gen-mscore1-scripts --dir=./out
+cd ./out && /usr/bin/fontforge -script emmentaler-20.pe
+cd ..
+cd ./out && /usr/bin/fontforge -script mscore1-20.pe
+
+# fontforge feta20.pfb
+mv emmentaler-20.ttf ../mscore-20.ttf
+mv mscore1-20.ttf ..
+
+cd ..
+/usr/bin/fontforge -script gen-jazz.pe
+../../../build/mscore/genft mscore-20.ttf > ../data/symbols.xml
+

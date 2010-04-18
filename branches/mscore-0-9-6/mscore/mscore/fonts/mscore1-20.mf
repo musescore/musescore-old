@@ -1,0 +1,54 @@
+% mscore1-20.mf
+
+design_size := 20;
+input feta-autometric;
+
+test := 0;
+
+%=========from feta-generic:
+
+if test = -1:
+	mode := smoke;
+fi
+
+staffsize# := design_size * pt#;
+
+mode_setup;
+
+input feta-macros;
+input feta-params;
+
+font_x_height staff_space#;
+
+%% this is a fallback so we can run the font without including feta-bolletjes.
+black_notehead_width# := 1.0 staff_space#;
+
+
+fet_beginfont ("feta", design_size, "fetaMusic");
+
+% input feta-eindelijk;
+% input feta-toevallig;
+% input feta-arrow;
+% input feta-puntje;
+input mscore1-utils;
+% input feta-schrift;
+% input feta-banier;
+% input feta-klef;
+% input feta-timesig;
+% input feta-pendaal;
+% input feta-haak;
+% input feta-accordion;
+
+input mscore;
+
+autometric_parameter ("staffsize", staffsize#);
+autometric_parameter ("stafflinethickness", stafflinethickness#);
+autometric_parameter ("staff_space", staff_space#);
+autometric_parameter ("linethickness", linethickness#);
+autometric_parameter ("black_notehead_width", black_notehead_width#);
+autometric_parameter ("ledgerlinethickness", ledgerlinethickness#);
+autometric_parameter ("blot_diameter", blot_diameter#);
+
+fet_endfont;
+
+end.
