@@ -1,3 +1,5 @@
+18.apr (ws)
+      - fix #5367: Change instrument changes transposition incorrectly
 16.apr (ws)
       - add foreground color to text style
       - fix #5398: Customized beam does not persist after save
