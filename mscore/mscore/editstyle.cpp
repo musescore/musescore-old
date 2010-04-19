@@ -68,7 +68,7 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       for (int i = 0; i < ARTICULATIONS; ++i) {
             ArticulationInfo* ai = &Articulation::articulationList[i];
 
-            QTableWidgetItem* item = new QTableWidgetItem(*symIcon(symbols[ai->sym], 50, 25, 25), ai->name);
+            QTableWidgetItem* item = new QTableWidgetItem(*symIcon(symbols[ai->sym], 50, 25, 25), qApp->translate("articulation", qPrintable(ai->name)));
             item->setFlags(item->flags() & ~Qt::ItemIsEditable);
             articulationTable->setItem(i, 0, item);
 
