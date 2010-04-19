@@ -9065,11 +9065,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>breve rest</source>
-        <translation>breve</translation>
+        <translation>silence de brève</translation>
     </message>
     <message>
         <source>longa rest</source>
-        <translation>longa</translation>
+        <translation>silence de longa</translation>
     </message>
     <message>
         <source>quart rest</source>
@@ -9241,23 +9241,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole triangle head</source>
-        <translation>tête de ronde en triangle</translation>
+        <translation>tête de ronde en triangle arrondi</translation>
     </message>
     <message>
         <source>down half triangle head</source>
-        <translation>tête de blanche en triangle</translation>
+        <translation>tête de blanche en triangle arrondi</translation>
     </message>
     <message>
         <source>up half triangle head</source>
-        <translation>tête de blanche en triangle haut</translation>
+        <translation>tête de blanche en triangle arrondi haut</translation>
     </message>
     <message>
         <source>up quart triangle head</source>
-        <translation>tête de noire en triangle haut</translation>
+        <translation>tête de noire en triangle arrondi haut</translation>
     </message>
     <message>
         <source>down quart triangle head</source>
-        <translation>tête de noire en triangle bas</translation>
+        <translation>tête de noire en triangle arrondi bas</translation>
     </message>
     <message>
         <source>whole slash head</source>
@@ -9285,7 +9285,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>x circle head</source>
-        <translation>tête en croix dans un cercle</translation>
+        <translation>tête en croix cerclée</translation>
     </message>
     <message>
         <source>s0do head</source>
@@ -9349,7 +9349,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>u1fa head</source>
-        <translation>tête u1fa</translation>
+        <translation>tête de ronde 1/2 rectangle haut</translation>
     </message>
     <message>
         <source>d1fa head</source>
@@ -9405,7 +9405,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation>snappizzicato</translation>
+        <translation>pizzicato bartok</translation>
     </message>
     <message>
         <source>ushortfermata</source>
