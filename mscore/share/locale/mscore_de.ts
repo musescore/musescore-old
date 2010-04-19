@@ -929,7 +929,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>offset</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished">Versatz</translation>
+        <translation>Versatz</translation>
     </message>
     <message>
         <source>ontime offset type</source>
@@ -7656,7 +7656,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Poet</source>
-        <translation type="unfinished">Texter</translation>
+        <translation>Texter</translation>
     </message>
     <message>
         <source>Add Poet Text</source>
@@ -9422,7 +9422,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Daumen</translation>
     </message>
     <message>
         <source>sforza to accent</source>
