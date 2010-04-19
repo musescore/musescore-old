@@ -27,6 +27,7 @@
 
 #include "sfont.h"
 #include "xml.h"
+#include "time.h"
 
 #define BE_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))
 #ifdef __i486__

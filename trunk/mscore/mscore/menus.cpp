@@ -389,7 +389,7 @@ void MuseScore::showPalette(bool visible)
             for (unsigned i = 0; i < nn; ++i) {
                   Articulation* s = new Articulation(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("articulation", s->subtypeName().toAscii().constData()));
+                  sp->append(s, qApp->translate("articulation", qPrintable(s->subtypeName())));
                   }
             paletteBox->addPalette(sp);
 
@@ -906,7 +906,7 @@ void MuseScore::noteAttributesMenu()
             for (unsigned i = 0; i < nn; ++i) {
                   Articulation* s = new Articulation(gscore);
                   s->setSubtype(i);
-                  sp->append(s, s->subtypeName());
+                  sp->append(s, qApp->translate("articulation", qPrintable(s->subtypeName())));
                   }
             }
       noteAttributesPalette->show();
