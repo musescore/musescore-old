@@ -957,7 +957,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished"/>
+        <translation>Gruppo testa della nota</translation>
     </message>
     <message>
         <source>Note Head Type</source>
@@ -1416,123 +1416,123 @@ fallito: </translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished">unisono perfetto</translation>
+        <translation>Unisono</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished">unisono aumentato</translation>
+        <translation>Unisono Aumentato</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished">seconda diminuita</translation>
+        <translation>Seconda Diminuita</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished">seconda minore</translation>
+        <translation>Seconda Minore</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished">seconda maggiore</translation>
+        <translation>Seconda Maggiore</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished">seconda aumentata</translation>
+        <translation>Seconda Aumentata</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished">terza diminuita</translation>
+        <translation>Terza Diminuita</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished">terza minore</translation>
+        <translation>Terza Minore</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished">terza maggiore</translation>
+        <translation>Terza Maggiore</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished">terza aumentata</translation>
+        <translation>Terza Aumentata</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished">quarta diminuita</translation>
+        <translation>Quarta Diminuita</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished">quarta perfetta</translation>
+        <translation>Quarta Giusta</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished">quarta aumentata</translation>
+        <translation>Quarta Aumentata</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished">quinta diminuita</translation>
+        <translation>Quinta Diminuita</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished">quinta perfetta</translation>
+        <translation>Quinta Giusta</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished">quinta aumentata</translation>
+        <translation>Quinta Aumentata</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished">sesta diminuita</translation>
+        <translation>Sesta Diminuita</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished">sesta minore</translation>
+        <translation>Sesta Minore</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished">sesta maggiore</translation>
+        <translation>Sesta Maggiore</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished">sesta aumentata</translation>
+        <translation>Sesta Aumentata</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished">settima diminuita</translation>
+        <translation>Settima Diminuita</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished">settima minore</translation>
+        <translation>Settima Minore</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished">settima maggiore</translation>
+        <translation>Settima Maggiore</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished">settima aumentata</translation>
+        <translation>Settima Aumentata</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished">ottava diminuita</translation>
+        <translation>Ottava Diminuita</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished">ottava perfetta</translation>
+        <translation>Ottava Giusta</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">su</translation>
+        <translation>su</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">giù</translation>
+        <translation>giù</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation type="unfinished"/>
+        <translation>Cambia Strumento</translation>
     </message>
     <message>
         <source>+octave</source>
-        <translation type="unfinished"/>
+        <translation>+ottava</translation>
     </message>
 </context>
 <context>
@@ -6765,7 +6765,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sharp-slash3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">triesis2 {3?}</translation>
     </message>
     <message>
         <source>sharp-slash4</source>
@@ -6892,7 +6892,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch Spell</source>
-        <translation>Verifica altezza note</translation>
+        <translation>Sostituzione enarmonica alterazioni</translation>
     </message>
     <message>
         <source>Unison Above</source>
@@ -8116,7 +8116,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch spell</source>
-        <translation>Verifica altezza note</translation>
+        <translation>Sostituzione enarmonica alterazioni</translation>
     </message>
     <message>
         <source>Enter note A</source>
@@ -9098,19 +9098,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sharp slash</source>
-        <translation>monesis</translation>
+        <translation>monesis (+1/4 di tono)</translation>
     </message>
     <message>
         <source>sharp slash2</source>
-        <translation>triesis</translation>
+        <translation>triesis (+3/4 di tono)</translation>
     </message>
     <message>
         <source>sharp slash3</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">triesis2 {3?}</translation>
     </message>
     <message>
         <source>sharp slash4</source>
-        <translation>triesis2</translation>
+        <translation>triesis2 (+3/4 di tono)</translation>
     </message>
     <message>
         <source>natural</source>
@@ -9150,7 +9150,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>mirrored flat2</source>
-        <translation>Tribemolle</translation>
+        <translation>tribemolle</translation>
     </message>
     <message>
         <source>mirrored flat</source>
@@ -9390,7 +9390,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Pizzicato  Bartók</translation>
     </message>
     <message>
         <source>ushortfermata</source>
@@ -9462,7 +9462,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">aperto</translation>
     </message>
     <message>
         <source>plus stop</source>

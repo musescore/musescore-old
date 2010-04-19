@@ -3002,7 +3002,7 @@ fallou: </translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Entrada de nota</translation>
+        <translation>Introdución de notas</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -3066,7 +3066,7 @@ fallou: </translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation>modo de entrada de notas</translation>
+        <translation>modo de introdución de notas</translation>
     </message>
     <message>
         <source>edit mode</source>
@@ -4348,7 +4348,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation>Entrada de notas:</translation>
+        <translation>Introdución de notas:</translation>
     </message>
     <message>
         <source>Application Font</source>
@@ -4572,11 +4572,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importar</translation>
+        <translation>Importación</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Exportar</translation>
+        <translation>Exportación</translation>
     </message>
     <message>
         <source>PNG</source>
@@ -4765,7 +4765,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Update</source>
-        <translation>Actualizar</translation>
+        <translation>Actualizacións</translation>
     </message>
     <message>
         <source>Automatic Update Check</source>
@@ -6221,11 +6221,11 @@ e verifique que a localización do ficheiro é a correcta</translation>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4</translation>
+        <translation>4/4 compasillo</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 alla breve</translation>
+        <translation>2/2 alla breve</translation>
     </message>
 </context>
 <context>
@@ -6896,7 +6896,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Entrada de notas</translation>
+        <translation>Introdución de notas</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
@@ -8471,7 +8471,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished"/>
+        <translation>ouvert</translation>
     </message>
     <message>
         <source>plusstop</source>
@@ -9578,7 +9578,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up mordent</source>
-        <translation type="unfinished"/>
+        <translation>mordente arriba</translation>
     </message>
     <message>
         <source>prall down</source>
@@ -9634,11 +9634,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace dash</source>
-        <translation type="unfinished"/>
+        <translation>corte de apoiatura</translation>
     </message>
     <message>
         <source>dgrace dash</source>
-        <translation type="unfinished"/>
+        <translation>corte de apoiatura abaixo</translation>
     </message>
     <message>
         <source>dsixteenth flag</source>

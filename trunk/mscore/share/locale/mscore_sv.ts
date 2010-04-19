@@ -100,7 +100,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up:</source>
-        <translation type="unfinished"/>
+        <translation>upp:</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
@@ -889,7 +889,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>note head positon </source>
-        <translation>nothuvudposition </translation>
+        <translation>nothuvudsposition </translation>
     </message>
     <message>
         <source>left of stem</source>
@@ -914,7 +914,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>användare</translation>
     </message>
     <message>
         <source>offset</source>
@@ -952,7 +952,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished"/>
+        <translation>Nothuvudstyp</translation>
     </message>
     <message>
         <source>normal</source>
@@ -960,19 +960,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished"/>
+        <translation>kors</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation>diamant</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished"/>
+        <translation>triangel</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished"/>
+        <translation>snedstreck</translation>
     </message>
     <message>
         <source>xcircle</source>
@@ -980,27 +980,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished"/>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished"/>
+        <translation>re</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"/>
+        <translation>mi</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished"/>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished"/>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished"/>
+        <translation>si</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -1008,19 +1008,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished"/>
+        <translation>hel</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished"/>
+        <translation>halv</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished"/>
+        <translation>fjärdedel</translation>
     </message>
     <message>
         <source>breve</source>
-        <translation type="unfinished"/>
+        <translation>brevis</translation>
     </message>
 </context>
 <context>
@@ -1058,7 +1058,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"/>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1066,7 +1066,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"/>
+        <translation>Spara som</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
@@ -1093,7 +1093,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation type="unfinished"/>
+        <translation>MIDI Egenskaper</translation>
     </message>
 </context>
 <context>
@@ -1336,7 +1336,7 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished">Tonhöjd</translation>
+        <translation>Tonhöjd</translation>
     </message>
 </context>
 <context>
@@ -1387,143 +1387,143 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
-        <translation type="unfinished"/>
+        <translation>Användbart tonomfång:</translation>
     </message>
     <message>
         <source>Amateur:</source>
-        <translation type="unfinished"/>
+        <translation>Amatör:</translation>
     </message>
     <message>
         <source>-</source>
-        <translation type="unfinished"/>
+        <translation>-</translation>
     </message>
     <message>
         <source>Professional:</source>
-        <translation type="unfinished"/>
+        <translation>Professionellt:</translation>
     </message>
     <message>
         <source>Play Transposition:</source>
-        <translation type="unfinished"/>
+        <translation>Spela transponering</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation>Ren prim</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation>Överstigande prim</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation>Förminskad sekund</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation>Liten sekund</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation>Stor sekund</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation>Överstigande sekund</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation>Förminskad ters</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation>Liten ters</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation>Stor ters</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation>Överstigande ters</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Förminskad kvart</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Ren kvart</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Överstigande kvart</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Förminskad kvint</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Ren kvint</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Överstigande kvint</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Förminskad sext</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Liten sext</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Stor sext</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Överstigande sext</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Förminskad septima</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Liten septima</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Stor septima</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Överstigande septima</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished"/>
+        <translation>Förminskad oktav</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished"/>
+        <translation>Ren oktav</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">upp</translation>
+        <translation>upp</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">ner</translation>
+        <translation>ner</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation type="unfinished"/>
+        <translation>Byt instrument...</translation>
     </message>
     <message>
         <source>+octave</source>
-        <translation type="unfinished"/>
+        <translation>+oktav</translation>
     </message>
 </context>
 <context>
@@ -1755,15 +1755,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished"/>
+        <translation>Taktstreck</translation>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
-        <translation type="unfinished"/>
+        <translation>Fixera antal takter/system</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation type="unfinished"/>
+        <translation>Fixera taktbredd</translation>
     </message>
     <message>
         <source>Barline at start of single staff</source>
@@ -1783,23 +1783,23 @@ space unit</extracomment>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation type="unfinished"/>
+        <translation>Notplansavstånd</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation type="unfinished"/>
+        <translation>Ackoladavstånd</translation>
     </message>
     <message>
         <source>System distance</source>
-        <translation type="unfinished"/>
+        <translation>Systemavstånd</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
-        <translation type="unfinished"/>
+        <translation>Sångtextens övre avstånd</translation>
     </message>
     <message>
         <source>Lyrics lower margin</source>
-        <translation type="unfinished"/>
+        <translation>Sångtextens undre avstånd</translation>
     </message>
     <message>
         <source>V-frame upper margin</source>
@@ -1815,15 +1815,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Left margin</source>
-        <translation type="unfinished"/>
+        <translation>Vänstermarginal</translation>
     </message>
     <message>
         <source>Right margin</source>
-        <translation type="unfinished"/>
+        <translation>Högermarginal</translation>
     </message>
     <message>
         <source>Min. note distance</source>
-        <translation type="unfinished"/>
+        <translation>Minsta notavstånd</translation>
     </message>
     <message>
         <source>Clef left margin</source>
@@ -1855,11 +1855,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Progression</source>
-        <translation type="unfinished"/>
+        <translation>Progression</translation>
     </message>
     <message>
         <source>Shortest stem</source>
-        <translation type="unfinished"/>
+        <translation>Kortast skaft</translation>
     </message>
     <message>
         <source>Accidental note distance</source>
@@ -1871,11 +1871,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Note dot distance</source>
-        <translation type="unfinished"/>
+        <translation>Avstånd not-punkt</translation>
     </message>
     <message>
         <source>Dot dot distance</source>
-        <translation type="unfinished"/>
+        <translation>Avstånd punkt-punkt</translation>
     </message>
     <message>
         <source>Ledger line width</source>
@@ -1883,7 +1883,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Distance to note</source>
-        <translation type="unfinished"/>
+        <translation>Avstånd till not</translation>
     </message>
     <message>
         <source>Hook length</source>
@@ -1931,7 +1931,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Use German names</source>
-        <translation type="unfinished"/>
+        <translation>Använd tyska beteckningar</translation>
     </message>
     <message>
         <source>Chord description file</source>
@@ -1939,11 +1939,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulation - note head distance</source>
-        <translation type="unfinished"/>
+        <translation>Artikulation - nothuvudsavstånd</translation>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation type="unfinished"/>
+        <translation>Artikulation - notskaftsavstånd</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
@@ -2023,7 +2023,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Radera</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <source>New</source>
@@ -2043,7 +2043,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished"/>
+        <translation>Filnamn</translation>
     </message>
     <message>
         <source>Part Title:</source>
@@ -2051,7 +2051,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Stäng</translation>
     </message>
     <message>
         <source>Part-%1</source>
@@ -2125,7 +2125,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Textegenskaper ...</translation>
+        <translation>Textegenskaper...</translation>
     </message>
 </context>
 <context>
@@ -2278,7 +2278,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Load</source>
-        <translation>Ladda</translation>
+        <translation>Öppna</translation>
     </message>
     <message>
         <source>Save</source>
@@ -2294,7 +2294,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>visa mer</translation>
     </message>
 </context>
 <context>
@@ -2320,7 +2320,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Radera</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <source>Up</source>
@@ -2344,7 +2344,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Staves</source>
-        <translation>System</translation>
+        <translation>Notplan</translation>
     </message>
     <message>
         <source>Clef</source>
@@ -2356,7 +2356,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>visa mer</translation>
     </message>
 </context>
 <context>
@@ -2367,11 +2367,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Instrumentlista</translation>
+        <translation>Instrument</translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>System</translation>
+        <translation>Notplan</translation>
     </message>
     <message>
         <source>Clef</source>
@@ -2452,7 +2452,7 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation type="unfinished"/>
+        <translation>Skapa tonartssignatur</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -2464,14 +2464,14 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Lägg till</translation>
+        <translation>Lägg till</translation>
     </message>
 </context>
 <context>
     <name>KeyEditor</name>
     <message>
         <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Tonartssignaturer</translation>
     </message>
 </context>
 <context>
@@ -2644,7 +2644,7 @@ misslyckades: </translation>
     </message>
     <message>
         <source>End</source>
-        <translation>Ände</translation>
+        <translation>Sluta</translation>
     </message>
     <message>
         <source>Middle</source>
@@ -2710,11 +2710,11 @@ misslyckades: </translation>
     <name>MeasureProperties</name>
     <message>
         <source>visible</source>
-        <translation type="unfinished"/>
+        <translation>synlig</translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished">skaftlös</translation>
+        <translation>skaftlös</translation>
     </message>
 </context>
 <context>
@@ -2725,7 +2725,7 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>System</translation>
+        <translation>Notplan</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -2781,23 +2781,23 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>skaftlös</translation>
+        <translation>Skaftlös</translation>
     </message>
     <message>
         <source>New Row</source>
-        <translation type="unfinished"/>
+        <translation>Ny rad</translation>
     </message>
     <message>
         <source>a</source>
-        <translation type="unfinished"/>
+        <translation>a</translation>
     </message>
     <message>
         <source>visible</source>
-        <translation type="unfinished"/>
+        <translation>synlig</translation>
     </message>
     <message>
         <source>c</source>
-        <translation type="unfinished"/>
+        <translation>c</translation>
     </message>
 </context>
 <context>
@@ -3303,7 +3303,7 @@ före stängning?</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>System</translation>
+        <translation>Notplan</translation>
     </message>
     <message>
         <source>Chordname</source>
@@ -3421,11 +3421,11 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Key Signatures</source>
-        <translation type="unfinished"/>
+        <translation>Tonartssignatur</translation>
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation type="unfinished"/>
+        <translation>Taktartssignatur</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
@@ -3433,15 +3433,15 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished"/>
+        <translation>Taktstreck</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"/>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Dashed</source>
-        <translation type="unfinished"/>
+        <translation>Prickad</translation>
     </message>
     <message>
         <source>Slur</source>
@@ -3473,11 +3473,11 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Trill line</source>
-        <translation type="unfinished"/>
+        <translation>Drill-linje</translation>
     </message>
     <message>
         <source>Text line</source>
-        <translation type="unfinished"/>
+        <translation>Textlinje</translation>
     </message>
     <message>
         <source>Line</source>
@@ -3497,7 +3497,7 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Caesura</source>
-        <translation type="unfinished"/>
+        <translation>Cesur</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
@@ -3505,7 +3505,7 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Fingering %1</source>
-        <translation type="unfinished"/>
+        <translation>Fingersättning%1</translation>
     </message>
     <message>
         <source>String number %1</source>
@@ -3587,11 +3587,13 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation type="unfinished"/>
+        <translation>Föregående session avbröts oväntat.&#13;
+&#13;
+Återskapa session?</translation>
     </message>
     <message>
         <source>Note Heads</source>
-        <translation type="unfinished"/>
+        <translation>Nothuvuden</translation>
     </message>
     <message>
         <source>Varied coda</source>
@@ -3607,7 +3609,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Check for Update</source>
-        <translation type="unfinished"/>
+        <translation>Sök efter uppdateringar</translation>
     </message>
     <message>
         <source>Script
@@ -3764,11 +3766,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"/>
+        <translation>Användare</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -3776,7 +3778,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Tuning</source>
-        <translation type="unfinished"/>
+        <translation>Stämning</translation>
     </message>
     <message>
         <source>OnTime:</source>
@@ -3889,11 +3891,11 @@ is incompatible with current interface</source>
     <name>Palette</name>
     <message>
         <source>Delete Contents</source>
-        <translation type="unfinished"/>
+        <translation>Ta bort innehåll</translation>
     </message>
     <message>
         <source>Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Egenskaper...</translation>
     </message>
 </context>
 <context>
@@ -3946,11 +3948,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>x:</source>
-        <translation type="unfinished">x:</translation>
+        <translation>x:</translation>
     </message>
     <message>
         <source>y:</source>
-        <translation type="unfinished">y:</translation>
+        <translation>y:</translation>
     </message>
 </context>
 <context>
@@ -4055,19 +4057,19 @@ is incompatible with current interface</source>
     <name>PianorollEditor</name>
     <message>
         <source>Cursor:</source>
-        <translation type="unfinished"/>
+        <translation>Pekare:</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished">Hastighet:</translation>
+        <translation>Hastighet:</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished">auto</translation>
+        <translation>auto</translation>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished"/>
+        <translation>användare</translation>
     </message>
     <message>
         <source>offset</source>
@@ -4075,7 +4077,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Pitch:</source>
-        <translation type="unfinished"/>
+        <translation>Tonhöjd</translation>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
@@ -4083,11 +4085,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation type="unfinished"/>
+        <translation>verktygsfält 1</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation type="unfinished"/>
+        <translation>verktygsfält 2</translation>
     </message>
 </context>
 <context>
@@ -4193,7 +4195,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore Filer (*.mscz *.mscx *.msc);;All (*)</translation>
     </message>
 </context>
 <context>
@@ -4492,7 +4494,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Bakåt</translation>
+        <translation>Spola tillbaka</translation>
     </message>
     <message>
         <source>Play</source>
@@ -4664,7 +4666,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Klar</translation>
+        <translation>Rensa</translation>
     </message>
     <message>
         <source>Define...</source>
@@ -4685,7 +4687,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MuseScore Preferences</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore Inställningar</translation>
     </message>
     <message>
         <source>Browse...</source>
@@ -4693,15 +4695,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
-        <translation type="unfinished"/>
+        <translation>Färgade noter utanför användbart tonomfång</translation>
     </message>
     <message>
         <source>Export MIDI</source>
-        <translation type="unfinished"/>
+        <translation>Exportera MIDI</translation>
     </message>
     <message>
         <source>MIDI Remote Control</source>
-        <translation type="unfinished"/>
+        <translation>MIDI Fjärrkontroll</translation>
     </message>
     <message>
         <source>Auto-correction</source>
@@ -4709,11 +4711,11 @@ is incompatible with current interface</source>
     </message>
     <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
-        <translation type="unfinished"/>
+        <translation>Ersätt 1/2 med ½</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation type="unfinished"/>
+        <translation>Ersätt (C) med copyrightsymbol © (Görs endast i copyrightfältet)</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
@@ -4729,15 +4731,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished">Ackolad</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>Navigator:</source>
-        <translation type="unfinished"/>
+        <translation>Navigator:</translation>
     </message>
     <message>
         <source>Use JACK MIDI output</source>
-        <translation type="unfinished"/>
+        <translation>Använd JACK MIDI output</translation>
     </message>
     <message>
         <source>Remember last connection(s)</source>
@@ -4745,19 +4747,19 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <source>Automatic Update Check</source>
-        <translation type="unfinished"/>
+        <translation>Sök automatiskt efter uppdateringar</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation type="unfinished"/>
+        <translation>Sök efter nya versioner av MuseScore vid uppstart</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation type="unfinished"/>
+        <translation>Välj PortMIDI interface</translation>
     </message>
     <message>
         <source>Use Current Position</source>
@@ -5056,7 +5058,7 @@ Vänligen markera en takt och försök igen</translation>
         <source>
 failed: </source>
         <translation>
-misslyckades: </translation>
+misslyckades </translation>
     </message>
     <message>
         <source>removing old backup file </source>
@@ -5085,7 +5087,7 @@ misslyckades: </translation>
     <message>
         <source>Open File
 </source>
-        <translation>Öppna fil
+        <translation>Öppna
 </translation>
     </message>
     <message>
@@ -5208,11 +5210,11 @@ Försök spara på annan plats.</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
-        <translation type="unfinished"/>
+        <translation>Styckets första taktartssignatur kan inte tas bort</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
@@ -5231,11 +5233,11 @@ Försök spara på annan plats.</translation>
     <name>ScoreView</name>
     <message>
         <source>Select</source>
-        <translation type="unfinished"/>
+        <translation>Markera</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished"/>
+        <translation>Mer..</translation>
     </message>
     <message>
         <source>Object Inspector</source>
@@ -5243,11 +5245,11 @@ Försök spara på annan plats.</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished">System</translation>
+        <translation>Notplan</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished">Bearbeta trumset ...</translation>
+        <translation>Redigera trumset...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
@@ -5259,15 +5261,15 @@ Försök spara på annan plats.</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Notplansegenskaper...</translation>
     </message>
     <message>
         <source>Split Staff...</source>
-        <translation type="unfinished"/>
+        <translation>Dela notplan...</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished">Takt</translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <source>unknown drop format: formats %1:
@@ -5377,7 +5379,7 @@ Försök spara på annan plats.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <source>0</source>
@@ -5385,7 +5387,7 @@ Försök spara på annan plats.</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>visa mer</translation>
     </message>
 </context>
 <context>
@@ -5397,12 +5399,13 @@ Sequencer will be disabled.</source>
     </message>
     <message>
         <source>MuseScore: Load SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Öppna ljudfont</translation>
     </message>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Ingen ljudfont konfigurerad&#13;
+Playback ej tillgänglig</translation>
     </message>
     <message>
         <source>Loading SoundFont
@@ -5445,7 +5448,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Klar</translation>
+        <translation>Rensa</translation>
     </message>
     <message>
         <source>OK</source>
@@ -5615,11 +5618,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Split Staff</source>
-        <translation type="unfinished"/>
+        <translation>Dela notplan</translation>
     </message>
     <message>
         <source>Split Point</source>
-        <translation type="unfinished"/>
+        <translation>Delningspunkt</translation>
     </message>
 </context>
 <context>
@@ -5641,7 +5644,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Channel</source>
-        <translation>Kanal</translation>
+        <translation>kanal</translation>
     </message>
     <message>
         <source>Midi Action</source>
@@ -5682,7 +5685,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation>Syntetisator</translation>
+        <translation>Synthesizer</translation>
     </message>
     <message>
         <source>Rev</source>
@@ -5767,11 +5770,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Loaded SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>Inläst ljudfont</translation>
     </message>
     <message>
         <source>SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>Ljudfont</translation>
     </message>
 </context>
 <context>
@@ -5812,7 +5815,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Textegenskaper ...</translation>
+        <translation>Textegenskaper...</translation>
     </message>
 </context>
 <context>
@@ -5861,22 +5864,22 @@ and check that the file location is correct</source>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation/>
+        <translation>Textstil</translation>
     </message>
 </context>
 <context>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Gör osynlig</translation>
+        <translation>Gör osynlig</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Gör synlig</translation>
+        <translation>Gör synlig</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Textegenskaper ...</translation>
+        <translation>Textegenskaper</translation>
     </message>
 </context>
 <context>
@@ -5899,7 +5902,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>ContinueText</source>
-        <translation>Textfortsättning</translation>
+        <translation>Fortsätt text</translation>
     </message>
 </context>
 <context>
@@ -6166,7 +6169,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">Systemflagga</translation>
+        <translation>Systemflagga</translation>
     </message>
 </context>
 <context>
@@ -6184,14 +6187,14 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Text Tools</source>
-        <translation type="unfinished"/>
+        <translation>Textverktyg</translation>
     </message>
 </context>
 <context>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Taktartssignaturer</translation>
     </message>
     <message>
         <source>4/4 common time</source>
@@ -6222,7 +6225,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation type="unfinished">Skapa taktartssignatur</translation>
+        <translation>Skapa taktartssignatur</translation>
     </message>
 </context>
 <context>
@@ -6282,7 +6285,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Transponering</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
@@ -6290,75 +6293,75 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Cb major / Ab minor</source>
-        <translation type="unfinished"/>
+        <translation>Cb-dur / Ab-moll</translation>
     </message>
     <message>
         <source>Gb major / Eb minor</source>
-        <translation type="unfinished"/>
+        <translation>Gb-dur / Eb-moll</translation>
     </message>
     <message>
         <source>Db major / Bb minor</source>
-        <translation type="unfinished"/>
+        <translation>Db-dur / Bb-moll</translation>
     </message>
     <message>
         <source>Ab major / F minor</source>
-        <translation type="unfinished"/>
+        <translation>Ab-dur / F-moll</translation>
     </message>
     <message>
         <source>Eb major / C minor</source>
-        <translation type="unfinished"/>
+        <translation>Eb-dur / C-moll</translation>
     </message>
     <message>
         <source>Bb major / G minor</source>
-        <translation type="unfinished"/>
+        <translation>Bb-dur / G-moll</translation>
     </message>
     <message>
         <source>F major / D minor</source>
-        <translation type="unfinished"/>
+        <translation>F-dur / D-moll</translation>
     </message>
     <message>
         <source>C major / A minor</source>
-        <translation type="unfinished"/>
+        <translation>C-dur / A-moll</translation>
     </message>
     <message>
         <source>G major / E minor</source>
-        <translation type="unfinished"/>
+        <translation>G-dur / E-moll</translation>
     </message>
     <message>
         <source>D major / B minor</source>
-        <translation type="unfinished"/>
+        <translation>D-dur / B-moll</translation>
     </message>
     <message>
         <source>A major / F# minor</source>
-        <translation type="unfinished"/>
+        <translation>A-dur / F#-moll</translation>
     </message>
     <message>
         <source>E major / C# minor</source>
-        <translation type="unfinished"/>
+        <translation>E-dur / C#-moll</translation>
     </message>
     <message>
         <source>B major / G# minor</source>
-        <translation type="unfinished"/>
+        <translation>B-dur / G#-moll</translation>
     </message>
     <message>
         <source>F# major / D# minor</source>
-        <translation type="unfinished"/>
+        <translation>F#-dur / D#-moll</translation>
     </message>
     <message>
         <source>C# major / A# minor</source>
-        <translation type="unfinished"/>
+        <translation>C#-dur / A#-moll</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Upp</translation>
+        <translation>Upp</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Ner</translation>
+        <translation>Ner</translation>
     </message>
     <message>
         <source>Closest</source>
-        <translation type="unfinished"/>
+        <translation>Närmast</translation>
     </message>
     <message>
         <source>Transpose by Interval</source>
@@ -6366,107 +6369,107 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ren prim</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Överstigande prim</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Förminskad sekund</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Liten sekund</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stor sekund</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Överstigande sekund</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Förminskad ters</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Liten ters</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stor ters</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Överstigande ters</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Förminskad kvart</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ren kvart</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Överstigande kvart</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Förminskad kvint</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ren kvint</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Överstigande kvint</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Förminskad sext</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Liten sext</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stor sext</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Överstigande sext</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Förminskad septima</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Liten septima</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Stor septima</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Överstigande septima</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Förminskad oktav</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Ren oktav</translation>
     </message>
     <message>
         <source>Options</source>
@@ -6556,11 +6559,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>relation:</source>
-        <translation type="unfinished"/>
+        <translation>förhållande:</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished">/</translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
@@ -6575,7 +6578,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>number</source>
-        <translation>nummer</translation>
+        <translation>nummer:</translation>
     </message>
     <message>
         <source>relation</source>
@@ -6583,7 +6586,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>nothing</source>
-        <translation>ingenting</translation>
+        <translation>inget</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -6602,15 +6605,15 @@ p, li { white-space: pre-wrap; }
     <name>UpdateChecker</name>
     <message>
         <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation type="unfinished"/>
+        <translation>En uppdatering för MuseScore är tillgänglig: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatering är tillgänglig</translation>
     </message>
     <message>
         <source>No Update Available</source>
-        <translation type="unfinished"/>
+        <translation>Ingen uppdatering är tillgänglig</translation>
     </message>
 </context>
 <context>
@@ -6628,7 +6631,7 @@ p, li { white-space: pre-wrap; }
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation>Egenskaper för reprishake</translation>
+        <translation>Volta-egenskaper</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -6643,11 +6646,11 @@ p, li { white-space: pre-wrap; }
     <name>VoltaSegment</name>
     <message>
         <source>Volta Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Volta-egenskaper</translation>
     </message>
     <message>
         <source>Line Properties...</source>
-        <translation type="unfinished">Radegenskaper ...</translation>
+        <translation>Linje-egenskaper</translation>
     </message>
 </context>
 <context>
@@ -6801,27 +6804,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Open...</source>
-        <translation type="unfinished"/>
+        <translation>Öppna...</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Spara</translation>
+        <translation>Spara</translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation type="unfinished"/>
+        <translation>Spara som...</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
-        <translation type="unfinished"/>
+        <translation>Spara en kopia...</translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Stäng</translation>
     </message>
     <message>
         <source>file new</source>
@@ -6829,19 +6832,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>New...</source>
-        <translation type="unfinished"/>
+        <translation>Ny...</translation>
     </message>
     <message>
         <source>Create new score</source>
-        <translation type="unfinished"/>
+        <translation>Skapa nytt dokument</translation>
     </message>
     <message>
         <source>Print...</source>
-        <translation type="unfinished"/>
+        <translation>Skriv ut...</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"/>
+        <translation>Ångra</translation>
     </message>
     <message>
         <source>Redo</source>
@@ -6849,31 +6852,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"/>
+        <translation>Klipp ut</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"/>
+        <translation>Kopiera</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"/>
+        <translation>Klistra in</translation>
     </message>
     <message>
         <source>Instruments...</source>
-        <translation type="unfinished"/>
+        <translation>Instrument...</translation>
     </message>
     <message>
         <source>Symbols...</source>
-        <translation type="unfinished"/>
+        <translation>Symboler...</translation>
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation type="unfinished"/>
+        <translation>Dynamik...</translation>
     </message>
     <message>
         <source>Note Input</source>
-        <translation type="unfinished"/>
+        <translation>Notinmatning</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
@@ -6881,243 +6884,243 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Unison Above</source>
-        <translation type="unfinished"/>
+        <translation>Unison</translation>
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation type="unfinished"/>
+        <translation>Mata in unison</translation>
     </message>
     <message>
         <source>Second Above</source>
-        <translation type="unfinished"/>
+        <translation>Sekund över</translation>
     </message>
     <message>
         <source>Enter second above</source>
-        <translation type="unfinished"/>
+        <translation>Mata in sekund över</translation>
     </message>
     <message>
         <source>Third Above</source>
-        <translation type="unfinished"/>
+        <translation>Ters över</translation>
     </message>
     <message>
         <source>Enter third above</source>
-        <translation type="unfinished"/>
+        <translation>Mata in ters över</translation>
     </message>
     <message>
         <source>Fourth Above</source>
-        <translation type="unfinished"/>
+        <translation>Kvart över</translation>
     </message>
     <message>
         <source>Enter fourth above</source>
-        <translation type="unfinished"/>
+        <translation>Mata in kvart över</translation>
     </message>
     <message>
         <source>Fifth Above</source>
-        <translation type="unfinished"/>
+        <translation>Kvint över</translation>
     </message>
     <message>
         <source>Enter fifth above</source>
-        <translation type="unfinished"/>
+        <translation>Mata in kvint över</translation>
     </message>
     <message>
         <source>Sixth Above</source>
-        <translation type="unfinished"/>
+        <translation>Sext över</translation>
     </message>
     <message>
         <source>Enter sixth above</source>
-        <translation type="unfinished"/>
+        <translation>Mata in sext över</translation>
     </message>
     <message>
         <source>Seventh Above</source>
-        <translation type="unfinished"/>
+        <translation>Septima över</translation>
     </message>
     <message>
         <source>Enter seventh above</source>
-        <translation type="unfinished"/>
+        <translation>Mata in septima över</translation>
     </message>
     <message>
         <source>Octave Above</source>
-        <translation type="unfinished"/>
+        <translation>Oktav över</translation>
     </message>
     <message>
         <source>Enter octave above</source>
-        <translation type="unfinished"/>
+        <translation>Mata in oktav över</translation>
     </message>
     <message>
         <source>Ninth Above</source>
-        <translation type="unfinished"/>
+        <translation>Nona över</translation>
     </message>
     <message>
         <source>Enter ninth above</source>
-        <translation type="unfinished"/>
+        <translation>Mata in nona över</translation>
     </message>
     <message>
         <source>Second Below</source>
-        <translation type="unfinished"/>
+        <translation>Sekund under</translation>
     </message>
     <message>
         <source>Enter second below</source>
-        <translation type="unfinished"/>
+        <translation>Mata in sekund under</translation>
     </message>
     <message>
         <source>Third Below</source>
-        <translation type="unfinished"/>
+        <translation>Ters under</translation>
     </message>
     <message>
         <source>Enter third below</source>
-        <translation type="unfinished"/>
+        <translation>Mata in ters under</translation>
     </message>
     <message>
         <source>Fourth Below</source>
-        <translation type="unfinished"/>
+        <translation>Kvart under</translation>
     </message>
     <message>
         <source>Enter fourth below</source>
-        <translation type="unfinished"/>
+        <translation>Mata in kvart under</translation>
     </message>
     <message>
         <source>Fifth Below</source>
-        <translation type="unfinished"/>
+        <translation>Kvint under</translation>
     </message>
     <message>
         <source>Enter fifth below</source>
-        <translation type="unfinished"/>
+        <translation>Mata in kvint under</translation>
     </message>
     <message>
         <source>Sixth Below</source>
-        <translation type="unfinished"/>
+        <translation>Sext under</translation>
     </message>
     <message>
         <source>Enter sixth below</source>
-        <translation type="unfinished"/>
+        <translation>Mata in sext under</translation>
     </message>
     <message>
         <source>Seventh Below</source>
-        <translation type="unfinished"/>
+        <translation>Septima under</translation>
     </message>
     <message>
         <source>Enter seventh below</source>
-        <translation type="unfinished"/>
+        <translation>Mata in septima under</translation>
     </message>
     <message>
         <source>Octave Below</source>
-        <translation type="unfinished"/>
+        <translation>Oktav under</translation>
     </message>
     <message>
         <source>Enter octave below</source>
-        <translation type="unfinished"/>
+        <translation>Mata in oktav under</translation>
     </message>
     <message>
         <source>Ninth Below</source>
-        <translation type="unfinished"/>
+        <translation>Nona under</translation>
     </message>
     <message>
         <source>Enter ninth below</source>
-        <translation type="unfinished"/>
+        <translation>Mata in nona under</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished">A</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished">B</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished">C</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">D</translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished">E</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished">F</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished">G</translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>Add A</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till A</translation>
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till noten A i ackord</translation>
     </message>
     <message>
         <source>Add B</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till B</translation>
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till noten B i ackord</translation>
     </message>
     <message>
         <source>Add C</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till C</translation>
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till noten C i ackord</translation>
     </message>
     <message>
         <source>Add D</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till D</translation>
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till noten D i ackord</translation>
     </message>
     <message>
         <source>Add E</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till E</translation>
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till noten E i ackord</translation>
     </message>
     <message>
         <source>Add F</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till F</translation>
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till noten F i ackord</translation>
     </message>
     <message>
         <source>Add G</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till G</translation>
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till noten G i ackord</translation>
     </message>
     <message>
         <source>rest</source>
-        <translation type="unfinished"/>
+        <translation>paus</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
-        <translation type="unfinished"/>
+        <translation>Sträck ut</translation>
     </message>
     <message>
         <source>Add more stretch to selected measure</source>
-        <translation type="unfinished"/>
+        <translation>Sträck ut markerad takt</translation>
     </message>
     <message>
         <source>Add Less Stretch</source>
-        <translation type="unfinished"/>
+        <translation>Minska bredd</translation>
     </message>
     <message>
         <source>Add less stretch to selected measure</source>
-        <translation type="unfinished"/>
+        <translation>Minska bredden på markerad takt</translation>
     </message>
     <message>
         <source>Reset Beam Mode</source>
@@ -7125,23 +7128,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>pil upp+shift+ctrl</translation>
     </message>
     <message>
         <source>down+shift+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>pil ner+shift+ctrl</translation>
     </message>
     <message>
         <source>left+ctrl</source>
-        <translation type="unfinished"/>
+        <translation>pil vänster+ctrl</translation>
     </message>
     <message>
         <source>add previous chord to selection</source>
-        <translation type="unfinished"/>
+        <translation>lägg till föregående ackord till markering</translation>
     </message>
     <message>
         <source>left+shift</source>
-        <translation type="unfinished"/>
+        <translation>pil vänster+shift</translation>
     </message>
     <message>
         <source>select to beginning of measure</source>
@@ -7149,11 +7152,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add next chord to selection</source>
-        <translation type="unfinished"/>
+        <translation>lägg till nästa ackord till markering</translation>
     </message>
     <message>
         <source>right+shift</source>
-        <translation type="unfinished"/>
+        <translation>pil höger+shift</translation>
     </message>
     <message>
         <source>select to end of measure</source>
@@ -7161,7 +7164,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>right+ctrl+shift</source>
-        <translation type="unfinished"/>
+        <translation>pil höger+ctrl+shift</translation>
     </message>
     <message>
         <source>select to beginning of line</source>
@@ -7197,31 +7200,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation type="unfinished"/>
+        <translation>lägg till övre notplan till markering</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation type="unfinished"/>
+        <translation>lägg till nedre notplan till markering</translation>
     </message>
     <message>
         <source>page-prev</source>
-        <translation type="unfinished"/>
+        <translation>sida-föregående</translation>
     </message>
     <message>
         <source>page-next</source>
-        <translation type="unfinished"/>
+        <translation>sida-nästa</translation>
     </message>
     <message>
         <source>page-top</source>
-        <translation type="unfinished"/>
+        <translation>sida-topp</translation>
     </message>
     <message>
         <source>page-end</source>
-        <translation type="unfinished"/>
+        <translation>sida-slut</translation>
     </message>
     <message>
         <source>add slur</source>
-        <translation type="unfinished"/>
+        <translation>lägg till båge</translation>
     </message>
     <message>
         <source>crescendo</source>
@@ -7229,71 +7232,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>decrescendo</source>
-        <translation type="unfinished"/>
+        <translation>decrescendo</translation>
     </message>
     <message>
         <source>ESCAPE</source>
-        <translation type="unfinished"/>
+        <translation>ESCAPE</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"/>
+        <translation>Ta bort markerade takter</translation>
     </message>
     <message>
         <source>Append Measure</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till takt</translation>
     </message>
     <message>
         <source>Append Measures...</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till takter...</translation>
     </message>
     <message>
         <source>Insert Measure</source>
-        <translation type="unfinished"/>
+        <translation>Infoga takt</translation>
     </message>
     <message>
         <source>Insert Measures...</source>
-        <translation type="unfinished"/>
+        <translation>Infoga takter...</translation>
     </message>
     <message>
         <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"/>
+        <translation>Infoga horisontell ram</translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
-        <translation type="unfinished"/>
+        <translation>Infoga vertikal ram</translation>
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till horisontell ram</translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till vertikal ram</translation>
     </message>
     <message>
         <source>Duplet</source>
-        <translation type="unfinished"/>
+        <translation>Duol</translation>
     </message>
     <message>
         <source>Triplet</source>
-        <translation type="unfinished"/>
+        <translation>Triol</translation>
     </message>
     <message>
         <source>Quadruplet</source>
-        <translation type="unfinished"/>
+        <translation>Kvadrol</translation>
     </message>
     <message>
         <source>Quintuplet</source>
-        <translation type="unfinished"/>
+        <translation>Kvintol</translation>
     </message>
     <message>
         <source>Sextuplet</source>
-        <translation type="unfinished"/>
+        <translation>Sextol</translation>
     </message>
     <message>
         <source>Septuplet</source>
-        <translation type="unfinished"/>
+        <translation>Septol</translation>
     </message>
     <message>
         <source>Octuplet</source>
@@ -7305,11 +7308,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation type="unfinished"/>
+        <translation>Annan delning</translation>
     </message>
     <message>
         <source>Other...</source>
-        <translation type="unfinished"/>
+        <translation>Annan...</translation>
     </message>
     <message>
         <source>note longa</source>
@@ -7445,19 +7448,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>voice 1</source>
-        <translation type="unfinished"/>
+        <translation>stämma 1</translation>
     </message>
     <message>
         <source>voice 2</source>
-        <translation type="unfinished"/>
+        <translation>stämma 2</translation>
     </message>
     <message>
         <source>voice 3</source>
-        <translation type="unfinished"/>
+        <translation>stämma 3</translation>
     </message>
     <message>
         <source>voice 4</source>
-        <translation type="unfinished"/>
+        <translation>stämma 4</translation>
     </message>
     <message>
         <source>midi input in</source>
@@ -7717,19 +7720,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished"/>
+        <translation>Markera allt</translation>
     </message>
     <message>
         <source>Transpose...</source>
-        <translation type="unfinished"/>
+        <translation>Transponera...</translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished">Transponera</translation>
+        <translation>Transponera</translation>
     </message>
     <message>
         <source>violin clef</source>
-        <translation type="unfinished"/>
+        <translation>violinklav</translation>
     </message>
     <message>
         <source>bass clef</source>
@@ -7761,15 +7764,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>display in concert pitch</source>
-        <translation type="unfinished"/>
+        <translation>visa i klingande tonhöjd</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation type="unfinished">Klingande notation</translation>
+        <translation>Klingande tonhöjd</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished">Visa klingande notation</translation>
+        <translation>Visa i klingande tonhöjd</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -7817,11 +7820,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reset positions</source>
-        <translation type="unfinished"/>
+        <translation>återställ positioner</translation>
     </message>
     <message>
         <source>Reset Positions</source>
-        <translation type="unfinished"/>
+        <translation>Återställ positioner</translation>
     </message>
     <message>
         <source>show inspector</source>
@@ -7833,35 +7836,35 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reset measure stretch</source>
-        <translation type="unfinished"/>
+        <translation>Återställ taktbredd</translation>
     </message>
     <message>
         <source>Reset Stretch</source>
-        <translation type="unfinished"/>
+        <translation>Återställ sträckning</translation>
     </message>
     <message>
         <source>show invisible</source>
-        <translation type="unfinished"/>
+        <translation>visa osynlig</translation>
     </message>
     <message>
         <source>Show Invisible</source>
-        <translation type="unfinished"/>
+        <translation>Visa osynlig</translation>
     </message>
     <message>
         <source>show frames</source>
-        <translation type="unfinished"/>
+        <translation>visa ramar</translation>
     </message>
     <message>
         <source>Show Frames</source>
-        <translation type="unfinished"/>
+        <translation>Visa ramar</translation>
     </message>
     <message>
         <source>show keyboard</source>
-        <translation type="unfinished"/>
+        <translation>visa keyboard</translation>
     </message>
     <message>
         <source>Show Keyboard</source>
-        <translation type="unfinished"/>
+        <translation>Visa keyboard</translation>
     </message>
     <message>
         <source>enable script debugger</source>
@@ -7873,35 +7876,35 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>enter 1/1 rest</source>
-        <translation type="unfinished"/>
+        <translation>mata in 1/1 paus</translation>
     </message>
     <message>
         <source>1/1 rest</source>
-        <translation type="unfinished"/>
+        <translation>1/1 paus</translation>
     </message>
     <message>
         <source>enter 1/2 rest</source>
-        <translation type="unfinished"/>
+        <translation>mata in 1/1 paus</translation>
     </message>
     <message>
         <source>1/2 rest</source>
-        <translation type="unfinished"/>
+        <translation>1/2 paus</translation>
     </message>
     <message>
         <source>enter 1/4 rest</source>
-        <translation type="unfinished"/>
+        <translation>mata in 1/2 paus</translation>
     </message>
     <message>
         <source>1/4 rest</source>
-        <translation type="unfinished"/>
+        <translation>1/4 paus</translation>
     </message>
     <message>
         <source>enter 1/8 rest</source>
-        <translation type="unfinished"/>
+        <translation>mata in 1/8 paus</translation>
     </message>
     <message>
         <source>1/8 rest</source>
-        <translation type="unfinished"/>
+        <translation>1/8 paus</translation>
     </message>
     <message>
         <source>backspace</source>
@@ -7909,19 +7912,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>search</source>
-        <translation type="unfinished"/>
+        <translation>sök</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Sök</translation>
+        <translation>Sök</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"/>
+        <translation>Zooma in</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"/>
+        <translation>Zooma ut</translation>
     </message>
     <message>
         <source>mirror note head</source>
@@ -7937,27 +7940,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select all similar elements</source>
-        <translation type="unfinished"/>
+        <translation>Markera alla liknande element</translation>
     </message>
     <message>
         <source>All Similar Elements</source>
-        <translation type="unfinished"/>
+        <translation>Alla liknande element</translation>
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"/>
+        <translation>Markera alla liknande element i samma notplan</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"/>
+        <translation>Alla liknande element i samma notplan</translation>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation type="unfinished">Syntetisator</translation>
+        <translation>Synthesizer</translation>
     </message>
     <message>
         <source>Synthesizer Control</source>
-        <translation type="unfinished"/>
+        <translation>Synthesizerkontroll</translation>
     </message>
     <message>
         <source>double duration</source>
@@ -7985,119 +7988,119 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Local handbook</source>
-        <translation type="unfinished"/>
+        <translation>Lokal handbok</translation>
     </message>
     <message>
         <source>Show local handbook</source>
-        <translation type="unfinished"/>
+        <translation>Visa lokal handbok</translation>
     </message>
     <message>
         <source>File open</source>
-        <translation type="unfinished"/>
+        <translation>Öppna fil</translation>
     </message>
     <message>
         <source>Load score from file</source>
-        <translation type="unfinished"/>
+        <translation>Öppna dokument från fil</translation>
     </message>
     <message>
         <source>File save</source>
-        <translation type="unfinished"/>
+        <translation>Spara fil</translation>
     </message>
     <message>
         <source>Save score to file</source>
-        <translation type="unfinished"/>
+        <translation>Spara dokument till fil</translation>
     </message>
     <message>
         <source>File save as</source>
-        <translation type="unfinished"/>
+        <translation>Spara fil som</translation>
     </message>
     <message>
         <source>Save score under a new file name</source>
-        <translation type="unfinished"/>
+        <translation>Spara dokument under nytt filnamn</translation>
     </message>
     <message>
         <source>File save a copy</source>
-        <translation type="unfinished"/>
+        <translation>Spara fil som kopia</translation>
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
-        <translation type="unfinished"/>
+        <translation>Spara en kopia av dokumentet förutom den aktuella filen</translation>
     </message>
     <message>
         <source>File reload</source>
-        <translation type="unfinished"/>
+        <translation>Återöppna fil</translation>
     </message>
     <message>
         <source>Reload score from file</source>
-        <translation type="unfinished"/>
+        <translation>Återöppna dokument från fil</translation>
     </message>
     <message>
         <source>File close</source>
-        <translation type="unfinished"/>
+        <translation>Stäng dokument</translation>
     </message>
     <message>
         <source>Close current score</source>
-        <translation type="unfinished"/>
+        <translation>Stäng aktuellt dokument</translation>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished"/>
+        <translation>Skriv ut</translation>
     </message>
     <message>
         <source>Print score</source>
-        <translation type="unfinished"/>
+        <translation>Skriv ut dokument</translation>
     </message>
     <message>
         <source>Undo last change</source>
-        <translation type="unfinished"/>
+        <translation>Ångra senaste ändring</translation>
     </message>
     <message>
         <source>Redo last undo</source>
-        <translation type="unfinished"/>
+        <translation>Återställ senaste ångrande</translation>
     </message>
     <message>
         <source>Show instruments dialog</source>
-        <translation type="unfinished"/>
+        <translation>Visa instrumentdialogrutan</translation>
     </message>
     <message>
         <source>Show clefs palette</source>
-        <translation type="unfinished"/>
+        <translation>Visa klavpaletten</translation>
     </message>
     <message>
         <source>Clefs...</source>
-        <translation type="unfinished"/>
+        <translation>Klaver...</translation>
     </message>
     <message>
         <source>show keys signatures palette</source>
-        <translation type="unfinished"/>
+        <translation>Visa tonartspaletten</translation>
     </message>
     <message>
         <source>Key Signatures...</source>
-        <translation type="unfinished"/>
+        <translation>Tonartssignaturer...</translation>
     </message>
     <message>
         <source>Show key signatures palette</source>
-        <translation type="unfinished"/>
+        <translation>Visa tonartspaletten</translation>
     </message>
     <message>
         <source>Show symbols palette</source>
-        <translation type="unfinished"/>
+        <translation>Visa symbolpaletten</translation>
     </message>
     <message>
         <source>Show time signatures palette</source>
-        <translation type="unfinished"/>
+        <translation>Visa taktartspaletten</translation>
     </message>
     <message>
         <source>Time Signatures...</source>
-        <translation type="unfinished"/>
+        <translation>Taktartssignaturer...</translation>
     </message>
     <message>
         <source>Show dynamics palette</source>
-        <translation type="unfinished"/>
+        <translation>Visa dynamikpaletten</translation>
     </message>
     <message>
         <source>Note input mode</source>
-        <translation type="unfinished"/>
+        <translation>Notinmatningsläge</translation>
     </message>
     <message>
         <source>Pitch spell</source>
@@ -8105,47 +8108,47 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter note A</source>
-        <translation type="unfinished"/>
+        <translation>Mata in noten A</translation>
     </message>
     <message>
         <source>Enter note B</source>
-        <translation type="unfinished"/>
+        <translation>Mata in noten B</translation>
     </message>
     <message>
         <source>Enter note C</source>
-        <translation type="unfinished"/>
+        <translation>Mata in noten C</translation>
     </message>
     <message>
         <source>Enter note D</source>
-        <translation type="unfinished"/>
+        <translation>Mata in noten D</translation>
     </message>
     <message>
         <source>Enter note E</source>
-        <translation type="unfinished"/>
+        <translation>Mata in noten E</translation>
     </message>
     <message>
         <source>Enter note F</source>
-        <translation type="unfinished"/>
+        <translation>Mata in noten F</translation>
     </message>
     <message>
         <source>Enter note G</source>
-        <translation type="unfinished"/>
+        <translation>Mata in noten G</translation>
     </message>
     <message>
         <source>Enter rest</source>
-        <translation type="unfinished"/>
+        <translation>Mata in paus</translation>
     </message>
     <message>
         <source>Rest</source>
-        <translation type="unfinished">Paus</translation>
+        <translation>Paus</translation>
     </message>
     <message>
         <source>Add staccato</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till staccato</translation>
     </message>
     <message>
         <source>Staccato</source>
-        <translation type="unfinished"/>
+        <translation>Staccato</translation>
     </message>
     <message>
         <source>Flat</source>
@@ -8153,7 +8156,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add trill</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till drill</translation>
     </message>
     <message>
         <source>Trill</source>
@@ -8161,11 +8164,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>More stretch</source>
-        <translation type="unfinished"/>
+        <translation>Mer bredd</translation>
     </message>
     <message>
         <source>Less stretch</source>
-        <translation type="unfinished"/>
+        <translation>Mindre bredd</translation>
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
@@ -8185,7 +8188,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Upp</translation>
+        <translation>Upp</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -8209,19 +8212,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
-        <translation type="unfinished"/>
+        <translation>Gå till högre belägen not i ackordet</translation>
     </message>
     <message>
         <source>Go to top note in chord</source>
-        <translation type="unfinished"/>
+        <translation>Gå till översta noten i ackordet</translation>
     </message>
     <message>
         <source>Top Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation>Översta noten i ackordet</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"/>
+        <translation>Flytta upp</translation>
     </message>
     <message>
         <source>Pitch down</source>
@@ -8229,7 +8232,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Ner</translation>
+        <translation>Ner</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
@@ -8253,83 +8256,83 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Go to lower pitched note in chord</source>
-        <translation type="unfinished"/>
+        <translation>Gå till lägre belägen not i ackordet</translation>
     </message>
     <message>
         <source>Go to bottom note in chord</source>
-        <translation type="unfinished"/>
+        <translation>Gå till lägsta noten i ackordet</translation>
     </message>
     <message>
         <source>Bottom Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation>Lägsta not i ackordet</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"/>
+        <translation>Flytta ner</translation>
     </message>
     <message>
         <source>Previous chord</source>
-        <translation type="unfinished"/>
+        <translation>Föregående ackord</translation>
     </message>
     <message>
         <source>Previous Chord</source>
-        <translation type="unfinished"/>
+        <translation>Föregående ackord</translation>
     </message>
     <message>
         <source>Previous measure</source>
-        <translation type="unfinished"/>
+        <translation>Föregående takt</translation>
     </message>
     <message>
         <source>Previous Measure</source>
-        <translation type="unfinished"/>
+        <translation>Föregående takt</translation>
     </message>
     <message>
         <source>Next chord</source>
-        <translation type="unfinished"/>
+        <translation>Nästa ackord</translation>
     </message>
     <message>
         <source>Next Chord</source>
-        <translation type="unfinished"/>
+        <translation>Nästa ackord</translation>
     </message>
     <message>
         <source>Next measure</source>
-        <translation type="unfinished"/>
+        <translation>Nästa takt</translation>
     </message>
     <message>
         <source>Next Measure</source>
-        <translation type="unfinished"/>
+        <translation>Nästa takt</translation>
     </message>
     <message>
         <source>Delete selected measures</source>
-        <translation type="unfinished"/>
+        <translation>Ta bort markerade takter</translation>
     </message>
     <message>
         <source>Append measure</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till takt</translation>
     </message>
     <message>
         <source>Append measures</source>
-        <translation type="unfinished"/>
+        <translation>Lägg till takter</translation>
     </message>
     <message>
         <source>Insert measure</source>
-        <translation type="unfinished"/>
+        <translation>Infoga takt</translation>
     </message>
     <message>
         <source>Insert measures</source>
-        <translation type="unfinished"/>
+        <translation>Infoga takter</translation>
     </message>
     <message>
         <source>split window horizontal</source>
-        <translation type="unfinished"/>
+        <translation>dela fönstret horisontellt</translation>
     </message>
     <message>
         <source>Documents Side by Side</source>
-        <translation type="unfinished"/>
+        <translation>Dokument sida vid sida</translation>
     </message>
     <message>
         <source>split window vertical</source>
-        <translation type="unfinished"/>
+        <translation>dela fönstret vertikalt</translation>
     </message>
     <message>
         <source>Documents Stacked</source>
@@ -8357,19 +8360,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play repeats on/off</source>
-        <translation type="unfinished"/>
+        <translation>Spela repriser on/off</translation>
     </message>
     <message>
         <source>Load style</source>
-        <translation type="unfinished"/>
+        <translation>Öppna stil</translation>
     </message>
     <message>
         <source>Save style</source>
-        <translation type="unfinished"/>
+        <translation>Spara stil</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"/>
+        <translation>Markera allt</translation>
     </message>
     <message>
         <source>Edit Chord Style...</source>
@@ -8377,11 +8380,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Radera</translation>
+        <translation>Ta bort</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
-        <translation type="unfinished"/>
+        <translation>Ta bort innehållet i markerade takter</translation>
     </message>
     <message>
         <source>Timewise Delete</source>
@@ -8393,7 +8396,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation type="unfinished">Stämmor ...</translation>
+        <translation>Stämmor...</translation>
     </message>
 </context>
 <context>
@@ -8476,7 +8479,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prall</source>
-        <translation type="unfinished">pralldrill</translation>
+        <translation>prall</translation>
     </message>
     <message>
         <source>mordent</source>
@@ -8658,7 +8661,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note</source>
-        <translation>Ton</translation>
+        <translation>Not</translation>
     </message>
     <message>
         <source>Stem</source>
@@ -8838,7 +8841,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>TextLine</source>
-        <translation>Textrad</translation>
+        <translation>Textlinje</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -8846,7 +8849,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>System</source>
-        <translation>Ackolad</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>Compound</source>
@@ -8920,31 +8923,31 @@ p, li { white-space: pre-wrap; }
     <name>preferences</name>
     <message>
         <source>Never</source>
-        <translation type="unfinished"/>
+        <translation>Aldrig</translation>
     </message>
     <message>
         <source>Every day</source>
-        <translation type="unfinished"/>
+        <translation>Varje dag</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation type="unfinished"/>
+        <translation>Var tredje dag</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation type="unfinished"/>
+        <translation>Varje vecka</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation type="unfinished"/>
+        <translation>Varannan vecka</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation type="unfinished"/>
+        <translation>Varje månad</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished"/>
+        <translation>Varannan månad</translation>
     </message>
 </context>
 <context>
@@ -9015,11 +9018,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole rest</source>
-        <translation type="unfinished"/>
+        <translation>helpaus</translation>
     </message>
     <message>
         <source>half rest</source>
-        <translation type="unfinished"/>
+        <translation>halvpaus</translation>
     </message>
     <message>
         <source>outside whole rest</source>
@@ -9159,23 +9162,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>right parenthesis</source>
-        <translation type="unfinished"/>
+        <translation>höger parentes</translation>
     </message>
     <message>
         <source>left parenthesis</source>
-        <translation type="unfinished"/>
+        <translation>vänster parentes</translation>
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished">prickad</translation>
+        <translation>punkt</translation>
     </message>
     <message>
         <source>longa up</source>
-        <translation type="unfinished"/>
+        <translation>longa upp</translation>
     </message>
     <message>
         <source>longa down</source>
-        <translation type="unfinished"/>
+        <translation>longa ner</translation>
     </message>
     <message>
         <source>brevis head</source>
@@ -9427,7 +9430,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tenuto</source>
-        <translation type="unfinished">tenuto</translation>
+        <translation>tenuto</translation>
     </message>
     <message>
         <source>uportato</source>
@@ -9471,7 +9474,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>trill</source>
-        <translation type="unfinished">drill</translation>
+        <translation>drill</translation>
     </message>
     <message>
         <source>upedal heel</source>
@@ -9491,15 +9494,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flageolet</source>
-        <translation type="unfinished"/>
+        <translation>flageolett</translation>
     </message>
     <message>
         <source>segno</source>
-        <translation type="unfinished"/>
+        <translation>segno</translation>
     </message>
     <message>
         <source>coda</source>
-        <translation type="unfinished"/>
+        <translation>coda</translation>
     </message>
     <message>
         <source>varied coda</source>
@@ -9587,23 +9590,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>eight flag</source>
-        <translation type="unfinished"/>
+        <translation>åttondelsflagga</translation>
     </message>
     <message>
         <source>sixteenth flag</source>
-        <translation type="unfinished"/>
+        <translation>sextondelsflagga</translation>
     </message>
     <message>
         <source>thirtysecond flag</source>
-        <translation type="unfinished"/>
+        <translation>trettiotvåondelsflagga</translation>
     </message>
     <message>
         <source>sixtyfour flag</source>
-        <translation type="unfinished"/>
+        <translation>sextiofjärdedelsflagga</translation>
     </message>
     <message>
         <source>128flag</source>
-        <translation type="unfinished"/>
+        <translation>hundratjugoåttondelsflagga</translation>
     </message>
     <message>
         <source>deight flag</source>
@@ -9635,7 +9638,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>alto clef</source>
-        <translation type="unfinished"/>
+        <translation>altklav</translation>
     </message>
     <message>
         <source>calto clef</source>
@@ -9643,7 +9646,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished">basklav</translation>
+        <translation>basklav</translation>
     </message>
     <message>
         <source>cbass clef</source>
@@ -9651,7 +9654,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>trebleclef</source>
-        <translation type="unfinished"/>
+        <translation>diskantklav</translation>
     </message>
     <message>
         <source>ctrebleclef</source>
@@ -9659,7 +9662,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>percussion clef</source>
-        <translation type="unfinished"/>
+        <translation>slagverksklav</translation>
     </message>
     <message>
         <source>cpercussion clef</source>
@@ -9707,7 +9710,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pedal ped</source>
-        <translation type="unfinished"/>
+        <translation>pedal ped</translation>
     </message>
     <message>
         <source>bracket tips up</source>
@@ -9751,47 +9754,47 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>zero</source>
-        <translation type="unfinished"/>
+        <translation>noll</translation>
     </message>
     <message>
         <source>one</source>
-        <translation type="unfinished"/>
+        <translation>en</translation>
     </message>
     <message>
         <source>two</source>
-        <translation type="unfinished"/>
+        <translation>två</translation>
     </message>
     <message>
         <source>three</source>
-        <translation type="unfinished"/>
+        <translation>tre</translation>
     </message>
     <message>
         <source>four</source>
-        <translation type="unfinished"/>
+        <translation>fyra</translation>
     </message>
     <message>
         <source>five</source>
-        <translation type="unfinished"/>
+        <translation>fem</translation>
     </message>
     <message>
         <source>six</source>
-        <translation type="unfinished"/>
+        <translation>sex</translation>
     </message>
     <message>
         <source>seven</source>
-        <translation type="unfinished"/>
+        <translation>sju</translation>
     </message>
     <message>
         <source>eight</source>
-        <translation type="unfinished"/>
+        <translation>åtta</translation>
     </message>
     <message>
         <source>nine</source>
-        <translation type="unfinished"/>
+        <translation>nio</translation>
     </message>
     <message>
         <source>plus</source>
-        <translation type="unfinished"/>
+        <translation>plus</translation>
     </message>
 </context>
 </TS>
