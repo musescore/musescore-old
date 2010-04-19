@@ -159,7 +159,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tremolo</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -3150,7 +3150,7 @@ fallido: </translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation>Acerca de &amp;Qt</translation>
+        <translation>Acerca de&amp;Qt</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -3259,8 +3259,7 @@ fallido: </translation>
     <message>
         <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>Guardar los cambios a la partitura "%1"
-antes de cerrar?</translation>
+        <translation>¿Desea guardar los cambios en la partitura "%1" antes de cerrar?</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -3406,7 +3405,7 @@ antes de cerrar?</translation>
 From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-Desde el menu de "Ayuda. Intenta usar el "Manual en "Internet.</translation>
+Intenta usar el "Manual en Internet" desde el menu de "Ayuda".</translation>
     </message>
     <message>
         <source>Grace Notes</source>
@@ -3426,11 +3425,11 @@ Desde el menu de "Ayuda. Intenta usar el "Manual en "Internet.</translation>
     </message>
     <message>
         <source>16th grace note</source>
-        <translation>apoyatura de semicorchea</translation>
+        <translation>Apoyatura de semicorchea</translation>
     </message>
     <message>
         <source>32nd grace note</source>
-        <translation>apoyatura de fusa</translation>
+        <translation>Apoyatura de fusa</translation>
     </message>
     <message>
         <source>Key Signatures</source>
@@ -4042,7 +4041,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Rev</translation>
     </message>
     <message>
         <source>Cho</source>
@@ -7456,15 +7455,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace-4</source>
-        <translation>negra de gracia</translation>
+        <translation>apoyatura de negra</translation>
     </message>
     <message>
         <source>grace-16</source>
-        <translation>semicorchea de gracia</translation>
+        <translation>apoyatura de semicorchea</translation>
     </message>
     <message>
         <source>grace-32</source>
-        <translation>fusa de gracia</translation>
+        <translation>apoyatura de fusa</translation>
     </message>
     <message>
         <source>voice 1</source>

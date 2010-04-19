@@ -173,11 +173,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">C</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">E</translation>
     </message>
     <message>
         <source>bb (double flat)</source>
@@ -201,7 +201,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A</translation>
     </message>
     <message>
         <source># (sharp)</source>
@@ -209,7 +209,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">B</translation>
     </message>
     <message>
         <source>## (double sharp)</source>
@@ -217,7 +217,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">D</translation>
     </message>
     <message>
         <source>Extension</source>
@@ -1166,7 +1166,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Simpan</translation>
     </message>
     <message>
         <source>MuseScore: Load Drumset</source>
@@ -1263,23 +1263,23 @@ failed: </source>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">A</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">B</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">C</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">D</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">E</translation>
     </message>
     <message>
         <source>F</source>
@@ -1979,11 +1979,11 @@ space unit</extracomment>
     <name>Element</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jadikan Transparan</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jadikan Terlihat</translation>
     </message>
     <message>
         <source>Color...</source>
@@ -2049,7 +2049,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Tutup</translation>
     </message>
     <message>
         <source>Part-%1</source>
@@ -2280,7 +2280,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Simpan</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2901,7 +2901,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>Save changes to the score "%1"
@@ -3070,7 +3070,7 @@ before closing?</source>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Dinamika</translation>
     </message>
     <message>
         <source>Tremolo</source>
@@ -4864,7 +4864,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>reading file &lt;</source>
@@ -5183,7 +5183,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">MuseScore</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
@@ -5278,7 +5278,7 @@ failed: </source>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Akord/Istirahat</translation>
     </message>
     <message>
         <source>Breath Segment</source>
@@ -5616,7 +5616,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kanal</translation>
     </message>
     <message>
         <source>Midi Action</source>
@@ -5779,11 +5779,11 @@ and check that the file location is correct</source>
     <name>Text</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jadikan Transparan</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jadikan Terlihat</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -5843,11 +5843,11 @@ and check that the file location is correct</source>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jadikan Transparan</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jadikan Terlihat</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -5881,11 +5881,11 @@ and check that the file location is correct</source>
     <name>TextLineSegment</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jadikan Transparan</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Jadikan Terlihat</translation>
     </message>
     <message>
         <source>Line Properties...</source>
@@ -5963,7 +5963,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">B</translation>
     </message>
     <message>
         <source>italic</source>
@@ -7381,19 +7381,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kreis Ganda</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kreis</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Natural</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mol Ganda</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -9043,7 +9043,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kreis</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
@@ -9071,7 +9071,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Natural</translation>
     </message>
     <message>
         <source>natural arrow up</source>
@@ -9087,7 +9087,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Mol</translation>
     </message>
     <message>
         <source>flat arrow up</source>
@@ -9399,7 +9399,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tenuto</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">tenuto</translation>
     </message>
     <message>
         <source>uportato</source>

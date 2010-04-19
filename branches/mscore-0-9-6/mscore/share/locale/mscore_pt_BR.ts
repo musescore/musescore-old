@@ -928,23 +928,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>offset</source>
         <extracomment>velocity type</extracomment>
-        <translation>compensação</translation>
+        <translation>alterado</translation>
     </message>
     <message>
         <source>ontime offset type</source>
-        <translation>tipo de compensação no tempo</translation>
+        <translation>tipo de alteração de ataque</translation>
     </message>
     <message>
         <source>ontime offset</source>
-        <translation>compensação no tempo</translation>
+        <translation>alteração de ataque</translation>
     </message>
     <message>
         <source>offtime offset type</source>
-        <translation>tipo de compensação fora do tempo</translation>
+        <translation>tipo de alteração de fim</translation>
     </message>
     <message>
         <source>offtime</source>
-        <translation>fora do tempo</translation>
+        <translation>alteração de fim</translation>
     </message>
     <message>
         <source> cent</source>
@@ -957,11 +957,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation>Grupo de Cabeça de Nota</translation>
+        <translation>grupo de cabeça de nota</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation>Tipo de Cabeça de Nota</translation>
+        <translation>tipo de cabeça de nota</translation>
     </message>
     <message>
         <source>normal</source>
@@ -3882,7 +3882,7 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Even Page Margins</source>
-        <translation>Margem de Páginas Pares</translation>
+        <translation>Margens das Páginas Pares</translation>
     </message>
     <message>
         <source>Bottom Margin</source>
@@ -3902,7 +3902,7 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Odd Page Margins</source>
-        <translation>Margem de Páginas Ímpares</translation>
+        <translation>Margens das Páginas Ímpares</translation>
     </message>
 </context>
 <context>
@@ -4444,7 +4444,7 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Reset to Default</source>
-        <translation>Restaurar Configurações Padrão</translation>
+        <translation>Restaurar Padrão</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -5695,7 +5695,7 @@ e verifique se a localização do arquivo está correta</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation>Marcação do Sistema</translation>
+        <translation>Indicador de Sistema</translation>
     </message>
 </context>
 <context>
@@ -6186,7 +6186,7 @@ e verifique se a localização do arquivo está correta</translation>
     </message>
     <message>
         <source>corner round</source>
-        <translation>arredondamento do canto</translation>
+        <translation>arredondamento dos cantos</translation>
     </message>
     <message>
         <source>frame color</source>
@@ -6194,7 +6194,7 @@ e verifique se a localização do arquivo está correta</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation>Marcação do Sistema</translation>
+        <translation>Indicador de Sistema</translation>
     </message>
 </context>
 <context>
@@ -6314,7 +6314,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation>Transpor por Tonalizade</translation>
+        <translation>Transpor por Tonalidade</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
@@ -7809,15 +7809,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>edit score meta data</source>
-        <translation>editar metadata da partitura</translation>
+        <translation>editar metadados da partitura</translation>
     </message>
     <message>
         <source>Meta Data...</source>
-        <translation>Metadata...</translation>
+        <translation>Metadados...</translation>
     </message>
     <message>
         <source>Meta Data</source>
-        <translation>Metadata</translation>
+        <translation>Metadados</translation>
     </message>
     <message>
         <source>toggle system break</source>
