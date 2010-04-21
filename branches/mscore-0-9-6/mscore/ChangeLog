@@ -1,3 +1,5 @@
+21.apr (la)
+      - fix #5531: Crash on windows when inserting a image from non system disk
 18.apr (ws)
       - fix #5367: Change instrument changes transposition incorrectly
        (la)
