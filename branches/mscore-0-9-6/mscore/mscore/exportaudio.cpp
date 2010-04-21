@@ -165,7 +165,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                   if (playTime > et)
                         break;
                   }
-            gain = 1.0 / peak;
+            gain = 0.99 / peak;
             }
 
       mscore->hideProgressBar();
