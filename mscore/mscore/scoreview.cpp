@@ -1909,8 +1909,10 @@ void ScoreView::dropEvent(QDropEvent* event)
                         return;
                   _score->startCmd();
                   QString str(u.path());
-                  if (str.startsWith("/C:/"))    // HACK
+                  #if defined(Q_WS_WIN)
+                  if (str.startsWith("/"))    // HACK
                         str = str.mid(1);
+                  #endif     
                   s->setPath(str);
 if (debugMode)
       printf("drop image <%s> <%s>\n", qPrintable(str), qPrintable(s->path()));
