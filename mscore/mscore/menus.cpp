@@ -1177,7 +1177,7 @@ void MuseScore::updateDrumset()
                         stem->setLen((up ? -3.0 : 3.0) * _spatium);
                         chord->setStem(stem);
                         stem->setPos(note->stemPos(up));
-                        drumPalette->append(chord, drumset->name(pitch));
+                        drumPalette->append(chord, qApp->translate("drumset", qPrintable(drumset->name(pitch))));
                         ++i;
                         }
                   }
