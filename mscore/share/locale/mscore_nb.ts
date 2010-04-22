@@ -8,10 +8,6 @@
         <translation>Om</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>Versjon: 0.9.0</translation>
     </message>
@@ -5288,7 +5284,8 @@ Prøv å lagre en annen plass.</translation>
     <message>
         <source>unknown drop format: formats %1:
 </source>
-        <translation type="unfinished"/>
+        <translation>Ukjent format:  format %1:
+</translation>
     </message>
 </context>
 <context>
@@ -5393,7 +5390,7 @@ Prøv å lagre en annen plass.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogboks</translation>
+        <translation>Dialogboks</translation>
     </message>
     <message>
         <source>0</source>
@@ -7352,7 +7349,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/1</source>
-        <translation type="unfinished"/>
+        <translation>Helnote</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
@@ -7360,7 +7357,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/2</source>
-        <translation type="unfinished"/>
+        <translation>Halvnote</translation>
     </message>
     <message>
         <source>Half note (minim)</source>
@@ -7368,7 +7365,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation type="unfinished"/>
+        <translation>Fjerdedelsnote</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
@@ -7376,7 +7373,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation type="unfinished"/>
+        <translation>Åttedelsnote</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
@@ -7384,7 +7381,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/16</source>
-        <translation type="unfinished"/>
+        <translation>Sekstendelsnote</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
@@ -7392,7 +7389,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation type="unfinished"/>
+        <translation>Trettitodelsnote</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
@@ -7400,7 +7397,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation type="unfinished"/>
+        <translation>Sekstifiredelsnote</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
@@ -7408,7 +7405,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad dot</source>
-        <translation type="unfinished"/>
+        <translation>Punktering</translation>
     </message>
     <message>
         <source>Dot</source>
@@ -7416,7 +7413,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad double dot</source>
-        <translation type="unfinished"/>
+        <translation>Dobbelpunktering</translation>
     </message>
     <message>
         <source>Double dot</source>
@@ -7428,7 +7425,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad rest</source>
-        <translation type="unfinished"/>
+        <translation>Pause</translation>
     </message>
     <message>
         <source>double sharp</source>
@@ -7512,7 +7509,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam 32</source>
-        <translation type="unfinished"/>
+        <translation>Underbjelke</translation>
     </message>
     <message>
         <source>auto beam</source>
@@ -7848,11 +7845,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>show inspector</source>
-        <translation>Vis overvåker</translation>
+        <translation>Vis objektovervåker</translation>
     </message>
     <message>
         <source>Inspector</source>
-        <translation>Overvåker</translation>
+        <translation>Objektovervåker</translation>
     </message>
     <message>
         <source>reset measure stretch</source>
@@ -7888,7 +7885,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>enable script debugger</source>
-        <translation>aktiver feilsøking av skript</translation>
+        <translation>Aktiver feilsøking av skript</translation>
     </message>
     <message>
         <source>Enable Script Debugger</source>
@@ -7920,7 +7917,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>enter 1/8 rest</source>
-        <translation>Legg til åttendedelspause</translation>
+        <translation>Legg til åttedelspause</translation>
     </message>
     <message>
         <source>1/8 rest</source>
@@ -9046,11 +9043,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>outside whole rest</source>
-        <translation>Helnotepause m/strek</translation>
+        <translation>Helpause m/strek</translation>
     </message>
     <message>
         <source>outside half rest</source>
-        <translation>Halvnotepause m/strek</translation>
+        <translation>Halvpause m/strek</translation>
     </message>
     <message>
         <source>rest M3</source>
@@ -9070,7 +9067,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>clas quart rest</source>
-        <translation type="unfinished"/>
+        <translation>Åttedelspause omvendt</translation>
     </message>
     <message>
         <source>eight rest</source>
@@ -9098,11 +9095,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished">Kryss med pil opp</translation>
+        <translation>Kryss med pil opp</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished">Kryss med pil opp og ned</translation>
+        <translation>Kryss med pil opp og ned</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -9126,15 +9123,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished">Oppløsningstegn med pil opp</translation>
+        <translation>Oppløsningstegn med pil opp</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished">Oppløsningstegn med pil ned</translation>
+        <translation>Oppløsningstegn med pil ned</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished">Oppløsningstegn med pil opp og ned</translation>
+        <translation>Oppløsningstegn med pil opp og ned</translation>
     </message>
     <message>
         <source>flat</source>
@@ -9142,11 +9139,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished">b med pil opp</translation>
+        <translation>b med pil opp</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished">b med pil opp og ned</translation>
+        <translation>b med pil opp og ned</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -9246,11 +9243,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up quart triangle head</source>
-        <translation>Fjerdedelshode triangle opp</translation>
+        <translation>Fjerdedelshode triangel opp</translation>
     </message>
     <message>
         <source>down quart triangle head</source>
-        <translation>Fjerdedelshode triangle ned</translation>
+        <translation>Fjerdedelshode triangel ned</translation>
     </message>
     <message>
         <source>whole slash head</source>
@@ -9698,7 +9695,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>four four meter</source>
-        <translation type="unfinished"/>
+        <translation>Fire fjerdedelstakt</translation>
     </message>
     <message>
         <source>allabreve</source>
@@ -9706,31 +9703,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pedalasterisk</source>
-        <translation type="unfinished"/>
+        <translation>Fortepedal opp</translation>
     </message>
     <message>
         <source>pedaldash</source>
-        <translation type="unfinished"/>
+        <translation>Pedal strek</translation>
     </message>
     <message>
         <source>pedaldot</source>
-        <translation type="unfinished"/>
+        <translation>Pedal punkt</translation>
     </message>
     <message>
         <source>pedalP</source>
-        <translation type="unfinished"/>
+        <translation>Pedal P</translation>
     </message>
     <message>
         <source>pedald</source>
-        <translation type="unfinished"/>
+        <translation>Pedal d</translation>
     </message>
     <message>
         <source>pedale</source>
-        <translation type="unfinished"/>
+        <translation>Pedal e</translation>
     </message>
     <message>
         <source>pedal ped</source>
-        <translation type="unfinished"/>
+        <translation>Fortepedal ned</translation>
     </message>
     <message>
         <source>bracket tips up</source>

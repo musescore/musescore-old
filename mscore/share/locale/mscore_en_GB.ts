@@ -8,10 +8,6 @@
         <translation>AboutBox</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>Version: 0.9.0</translation>
     </message>

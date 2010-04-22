@@ -8,10 +8,6 @@
         <translation>Hakkında</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>Versiyon: 0.9.0</translation>
     </message>

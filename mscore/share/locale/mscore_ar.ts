@@ -8,10 +8,6 @@
         <translation>صندوق التعريف</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>ميوزسكور</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>إصدار: 0.9.0</translation>
     </message>

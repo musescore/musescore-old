@@ -8,10 +8,6 @@
         <translation>Über MuseScore</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>Version: 0.9.0</translation>
     </message>
@@ -838,14 +834,14 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Alter</source>
-        <translation type="unfinished"/>
+        <translation>ändern</translation>
     </message>
 </context>
 <context>
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation type="unfinished"/>
+        <translation>Akkordbeschreibung konnte nicht geschrieben werden: </translation>
     </message>
 </context>
 <context>
@@ -1533,7 +1529,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>+octave</source>
-        <translation type="unfinished"/>
+        <translation>+Oktave</translation>
     </message>
 </context>
 <context>
@@ -3793,7 +3789,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Tuning</source>
-        <translation type="unfinished"/>
+        <translation>stimmung</translation>
     </message>
     <message>
         <source>OnTime:</source>
@@ -4694,7 +4690,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>Spatium</translation>
+        <translation>leertaste</translation>
     </message>
     <message>
         <source>mm</source>
@@ -4932,7 +4928,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"/>
+        <translation>Muse Score: Skript-Erweiterung registrieren</translation>
     </message>
 </context>
 <context>
@@ -5411,7 +5407,8 @@ Versuche sie woanders zu sichern.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Start des Audio Treibers fehlgeschlagen.&#13;
+Sequenzer wird abgeschaltet.</translation>
     </message>
     <message>
         <source>MuseScore: Load SoundFont</source>
@@ -5594,7 +5591,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>solid</source>
-        <translation>massiv</translation>
+        <translation>gefüllt</translation>
     </message>
     <message>
         <source>dotted</source>
@@ -5853,7 +5850,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Space</source>
-        <translation>Spatium</translation>
+        <translation>leertaste</translation>
     </message>
     <message>
         <source>Text</source>
@@ -6128,7 +6125,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Space</source>
-        <translation>Spatium</translation>
+        <translation>leertaste</translation>
     </message>
     <message>
         <source>enable text frame</source>
@@ -7248,11 +7245,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>decrescendo</source>
-        <translation>decrescendo</translation>
+        <translation>Decrescendo</translation>
     </message>
     <message>
         <source>ESCAPE</source>
-        <translation type="unfinished"/>
+        <translation>abbrechen</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
@@ -7440,7 +7437,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double flat</source>
-        <translation>doppel-b</translation>
+        <translation>Doppel-b</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -7452,15 +7449,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace-4</source>
-        <translation type="unfinished">Grace-4</translation>
+        <translation>Verzug-4</translation>
     </message>
     <message>
         <source>grace-16</source>
-        <translation type="unfinished">Grace-16</translation>
+        <translation>verzug-16</translation>
     </message>
     <message>
         <source>grace-32</source>
-        <translation type="unfinished">Grace-32</translation>
+        <translation>Verzug-32</translation>
     </message>
     <message>
         <source>voice 1</source>
@@ -7488,7 +7485,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>editing sound on</source>
-        <translation type="unfinished"/>
+        <translation>beim Bearbeiten mit anhören</translation>
     </message>
     <message>
         <source>Enable sound while editing</source>
@@ -7552,7 +7549,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Mag</source>
-        <translation type="unfinished"/>
+        <translation>lupe</translation>
     </message>
     <message>
         <source>Zoom Canvas</source>
@@ -7696,11 +7693,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Rehearsal Mark</source>
-        <translation type="unfinished"/>
+        <translation>Übungszeichen hinzufügen</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation type="unfinished">Übungsmarke</translation>
+        <translation>Übungszeichen</translation>
     </message>
     <message>
         <source>Play</source>
@@ -7996,11 +7993,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>follow song</source>
-        <translation type="unfinished"/>
+        <translation>folge dem stück</translation>
     </message>
     <message>
         <source>Follow Song</source>
-        <translation type="unfinished"/>
+        <translation>dem stück folgen</translation>
     </message>
     <message>
         <source>Local handbook</source>
@@ -8356,7 +8353,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Player play</source>
-        <translation type="unfinished"/>
+        <translation>wiedergabe</translation>
     </message>
     <message>
         <source>Seek to begin</source>
@@ -8511,11 +8508,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upprall</source>
-        <translation type="unfinished"/>
+        <translation>Aufwärts Pralltriller</translation>
     </message>
     <message>
         <source>downprall</source>
-        <translation type="unfinished"/>
+        <translation>Abwärts Pralltriller</translation>
     </message>
     <message>
         <source>upmordent</source>
@@ -8869,7 +8866,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Compound</source>
-        <translation>Compound</translation>
+        <translation>Verbinden</translation>
     </message>
     <message>
         <source>Chord</source>
@@ -8917,7 +8914,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>AccidentalBracket</source>
-        <translation type="unfinished"/>
+        <translation>vorzeichenklammer</translation>
     </message>
 </context>
 <context>
@@ -9278,111 +9275,111 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>s0do head</source>
-        <translation type="unfinished"/>
+        <translation>s0do Kopf</translation>
     </message>
     <message>
         <source>d1do head</source>
-        <translation type="unfinished"/>
+        <translation>d1do Kopf</translation>
     </message>
     <message>
         <source>u1do head</source>
-        <translation type="unfinished"/>
+        <translation>u1do Kopf</translation>
     </message>
     <message>
         <source>d2do head</source>
-        <translation type="unfinished"/>
+        <translation>d2do Kopf</translation>
     </message>
     <message>
         <source>u2do head</source>
-        <translation type="unfinished"/>
+        <translation>u2do Kopf</translation>
     </message>
     <message>
         <source>s0re head</source>
-        <translation type="unfinished"/>
+        <translation>s0re Kopf</translation>
     </message>
     <message>
         <source>u1re head</source>
-        <translation type="unfinished"/>
+        <translation>u1re Kopf</translation>
     </message>
     <message>
         <source>d1re head</source>
-        <translation type="unfinished"/>
+        <translation>d1re Kopf</translation>
     </message>
     <message>
         <source>u2re head</source>
-        <translation type="unfinished"/>
+        <translation>u2re Kopf</translation>
     </message>
     <message>
         <source>d2re head</source>
-        <translation type="unfinished"/>
+        <translation>d2re Kopf</translation>
     </message>
     <message>
         <source>s0mi head</source>
-        <translation type="unfinished"/>
+        <translation>s0mi Kopf</translation>
     </message>
     <message>
         <source>s1mi head</source>
-        <translation type="unfinished"/>
+        <translation>s1mi Kopf</translation>
     </message>
     <message>
         <source>s2mi head</source>
-        <translation type="unfinished"/>
+        <translation>s2mi Kopf</translation>
     </message>
     <message>
         <source>u0fa head</source>
-        <translation type="unfinished"/>
+        <translation>u0fa Kopf</translation>
     </message>
     <message>
         <source>d0fa head</source>
-        <translation type="unfinished"/>
+        <translation>d0fa Kopf</translation>
     </message>
     <message>
         <source>u1fa head</source>
-        <translation type="unfinished"/>
+        <translation>u1fa Kopf</translation>
     </message>
     <message>
         <source>d1fa head</source>
-        <translation type="unfinished"/>
+        <translation>d1fa Kopf</translation>
     </message>
     <message>
         <source>u2fa head</source>
-        <translation type="unfinished"/>
+        <translation>u2fa Kopf</translation>
     </message>
     <message>
         <source>d2fa head</source>
-        <translation type="unfinished"/>
+        <translation>d2fa Kopf</translation>
     </message>
     <message>
         <source>s0la head</source>
-        <translation type="unfinished"/>
+        <translation>s0la Kopf</translation>
     </message>
     <message>
         <source>s1la head</source>
-        <translation type="unfinished"/>
+        <translation>s1la Kopf</translation>
     </message>
     <message>
         <source>s2la head</source>
-        <translation type="unfinished"/>
+        <translation>s2la Kopf</translation>
     </message>
     <message>
         <source>s0ti head</source>
-        <translation type="unfinished"/>
+        <translation>s0ti kopf</translation>
     </message>
     <message>
         <source>u1ti head</source>
-        <translation type="unfinished"/>
+        <translation>u1ti Kopf</translation>
     </message>
     <message>
         <source>d1ti head</source>
-        <translation type="unfinished"/>
+        <translation>d1ti Kopf</translation>
     </message>
     <message>
         <source>u2ti head</source>
-        <translation type="unfinished"/>
+        <translation>u2ti Kopf</translation>
     </message>
     <message>
         <source>d2ti head</source>
-        <translation type="unfinished"/>
+        <translation>d2ti Kopf</translation>
     </message>
     <message>
         <source>ufermata</source>
@@ -9474,11 +9471,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up bow</source>
-        <translation type="unfinished"/>
+        <translation>Aufstrich</translation>
     </message>
     <message>
         <source>down bow</source>
-        <translation type="unfinished"/>
+        <translation>Abstrich</translation>
     </message>
     <message>
         <source>reverse turn</source>
@@ -9562,7 +9559,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prall prall</source>
-        <translation type="unfinished"/>
+        <translation>Doppelter Pralltriller</translation>
     </message>
     <message>
         <source>prall mordent</source>
@@ -9754,7 +9751,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation type="unfinished"/>
+        <translation>Akkordeon Vorlage Standard</translation>
     </message>
     <message>
         <source>acc bayanbase</source>

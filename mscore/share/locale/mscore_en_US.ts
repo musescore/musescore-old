@@ -8,10 +8,6 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation type="unfinished"/>
     </message>
@@ -1787,7 +1783,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation type="unfinished"/>
+        <translation>Accolade distance</translation>
     </message>
     <message>
         <source>System distance</source>
@@ -3338,7 +3334,7 @@ before closing?</source>
     </message>
     <message>
         <source>Akkolade</source>
-        <translation/>
+        <translation>Accolade</translation>
     </message>
     <message>
         <source>Search</source>
