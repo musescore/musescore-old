@@ -8,10 +8,6 @@
         <translation>Caixa "Acerca De"</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>Versão: 0.9.0</translation>
     </message>

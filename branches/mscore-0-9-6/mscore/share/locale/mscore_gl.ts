@@ -8,10 +8,6 @@
         <translation>CaixaAcercaDe</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>Versión: 0.9.0</translation>
     </message>
@@ -9470,7 +9466,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ouvert</translation>
     </message>
     <message>
         <source>plus stop</source>
