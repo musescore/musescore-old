@@ -33,7 +33,13 @@ set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE FALSE)
-set(SOUNDFONT3 TRUE)                      # enable ogg vorbis compressed fonts
+set(SOUNDFONT3 TRUE)                      # enable ogg vorbis compressed fonts, require ogg & vorbis
+
+if (APPLE OR MINGW)
+      set(SF_COMPRESSOR FALSE)
+else (APPLE OR MINGW)
+      set(SF_COMPRESSOR TRUE)             # build sfconvert, require ogg, vorbis, vorbisenc
+endif (APPLE OR MINGW)
 
 if (MINGW)
       set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
@@ -239,11 +245,15 @@ if (NOT MINGW AND NOT APPLE)
 endif (NOT MINGW AND NOT APPLE)
 
 set (subdirs al awl osdabzip rtf2html mscore share manual demos
-     scriptgen singleapp fluid sfont)
+     scriptgen singleapp fluid)
 
 if (MINGW OR APPLE)
       set (subdirs ${subdirs} portmidi)
 endif (MINGW OR APPLE)
+
+if(SF_COMPRESSOR)
+      set (subdirs ${subdirs} sfont)
+endif (SF_COMPRESSOR)
 
 subdirs(${subdirs})
 
