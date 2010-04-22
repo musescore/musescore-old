@@ -8,10 +8,6 @@
         <translation>Referent a</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>Versió: 0.9.0</translation>
     </message>

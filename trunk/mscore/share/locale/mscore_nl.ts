@@ -34,10 +34,6 @@ p, li { white-space: pre-wrap; }
         <translation>AboutBox</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>Revision: 628</source>
         <translation>Revisie: 628</translation>
     </message>

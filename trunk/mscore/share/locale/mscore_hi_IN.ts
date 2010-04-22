@@ -8,10 +8,6 @@
         <translation>"के बारे में" सूचीपेटी</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>म्यूजस्कोर</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>विवरण: ०.९.०</translation>
     </message>
