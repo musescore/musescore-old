@@ -93,7 +93,7 @@ void EditDrumset::updateList()
                   QString s(QChar(nDrumset.shortcut(i)));
                   item->setText(COL_SHORTCUT, s);
                   }
-            item->setText(COL_NAME, nDrumset.name(i));
+            item->setText(COL_NAME, qApp->translate("drumset", qPrintable(nDrumset.name(i))));
             item->setData(0, Qt::UserRole, i);
             }
       }
@@ -109,7 +109,7 @@ void EditDrumset::updateList2()
                   QString s(QChar(nDrumset.shortcut(pitch)));
                   item->setText(COL_SHORTCUT, s);
                   }
-            item->setText(COL_NAME, nDrumset.name(pitch));
+            item->setText(COL_NAME, qApp->translate("drumset", qPrintable(nDrumset.name(pitch))));
             item->setData(0, Qt::UserRole, pitch);
             }
       }
@@ -222,7 +222,7 @@ void EditDrumset::itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previou
             else
                   nDrumset.drum(pitch).shortcut = "ABCDEFG"[shortcut->currentIndex()];
             nDrumset.drum(pitch).stemDirection = Direction(stemDirection->currentIndex());
-            previous->setText(COL_NAME, nDrumset.name(pitch));
+            previous->setText(COL_NAME, qApp->translate("drumset", qPrintable(nDrumset.name(pitch))));
             }
       if (current == 0)
             return;
@@ -233,7 +233,7 @@ void EditDrumset::itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previou
       noteHead->blockSignals(true);
 
       int pitch = current->data(0, Qt::UserRole).toInt();
-      name->setText(nDrumset.name(pitch));
+      name->setText(qApp->translate("drumset", qPrintable(nDrumset.name(pitch))));
       staffLine->setValue(nDrumset.line(pitch));
       voice->setValue(nDrumset.voice(pitch));
       stemDirection->setCurrentIndex(int(nDrumset.stemDirection(pitch)));
@@ -313,7 +313,7 @@ void EditDrumset::updateExample()
       stem->setLen((up ? -3.0 : 3.0) * gscore->spatium());
       chord->setStem(stem);
       stem->setPos(note->stemPos(up));
-      drumNote->add(0,  chord, nDrumset.name(pitch));
+      drumNote->add(0,  chord, qApp->translate("drumset", qPrintable(nDrumset.name(pitch))));
       }
 
 //---------------------------------------------------------
