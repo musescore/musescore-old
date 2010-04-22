@@ -8,10 +8,6 @@
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation type="unfinished"/>
     </message>

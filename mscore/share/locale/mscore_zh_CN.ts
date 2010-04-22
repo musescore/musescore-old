@@ -8,10 +8,6 @@
         <translation>关于 MuseScore</translation>
     </message>
     <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
         <source>Version: 0.9.0</source>
         <translation>版本：0.9.0</translation>
     </message>
@@ -9296,7 +9292,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d1do head</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">d2do 头 {1d?}</translation>
     </message>
     <message>
         <source>u1do head</source>
@@ -9408,7 +9404,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">单元拨奏</translation>
     </message>
     <message>
         <source>ushortfermata</source>
