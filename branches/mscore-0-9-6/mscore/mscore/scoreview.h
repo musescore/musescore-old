@@ -252,6 +252,8 @@ class ScoreView : public QWidget {
       void cmdAddSlur();
       void cmdAddSlur(Note* firstNote, Note* lastNote);
       bool noteEntryMode() const;
+      bool editMode() const;
+
       void editInputTransition(QInputMethodEvent* ie);
       void onEditPasteTransition(QMouseEvent* ev);
 
