@@ -1,3 +1,6 @@
+25.apr (ws)
+      - fix crash when reload in text edit mode when text palette is open
+        (maybe fix for #5544)
 21.apr (la)
       - fix #5531: Crash on windows when inserting a image from non system disk
 18.apr (ws)

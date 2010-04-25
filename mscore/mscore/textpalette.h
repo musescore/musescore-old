@@ -88,6 +88,7 @@ class TextTools : public QDockWidget {
       void setText(TextB* te);
       void setCharFormat(const QTextCharFormat&);
       void setBlockFormat(const QTextBlockFormat&);
+      QAction* kbAction() const { return showKeyboard; }
       };
 
 #endif
