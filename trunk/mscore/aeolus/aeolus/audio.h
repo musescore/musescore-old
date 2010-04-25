@@ -41,18 +41,7 @@ class Audio : public A_thread
       virtual void thr_main();
       void proc_queue(Lfq_u32 *);
       void proc_synth(int);
-      void proc_keys1();
-      void proc_keys2();
       void proc_mesg();
-
-      void key_off (int n, int b) {
-            _keymap [n] &= ~b;
-            _keymap [n] |= 128;
-            }
-
-      void key_on (int n, int b) {
-            _keymap [n] |= b | 128;
-            }
 
       void cond_key_off (int m, int b) {
             unsigned char  *p;
@@ -77,9 +66,7 @@ class Audio : public A_thread
 
       const char     *_appname;
       uint16_t        _midimap [16];
-      Lfq_u32        *_qnote;
       Lfq_u32        *_qcomm;
-      Lfq_u8         *_qmidi;
       volatile bool   _running;
       int             _policy;
       int             _abspri;
@@ -105,9 +92,9 @@ class Audio : public A_thread
       float loutb[PERIOD];
 
    public:
-      Audio(const char *jname, Lfq_u32 *qnote, Lfq_u32 *qcomm);
+      Audio(const char *jname, Lfq_u32 *qcomm);
       virtual ~Audio();
-      void  init_jack(Lfq_u8 *qmidi);
+      void  init(int sampleRate);
       void  start();
 
       const char  *appname() const { return _appname; }
@@ -116,6 +103,15 @@ class Audio : public A_thread
       int  abspri() const          { return _abspri; }
       int  relpri() const          { return _relpri; }
       void process(unsigned len, float* lout, float* rout, int stride);
+
+      void key_off (int n, int b) {
+            _keymap [n] &= ~b;
+            _keymap [n] |= 128;
+            }
+
+      void key_on (int n, int b) {
+            _keymap [n] |= b | 128;
+            }
       };
 
 #endif
