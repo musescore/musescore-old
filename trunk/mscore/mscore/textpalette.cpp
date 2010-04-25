@@ -319,7 +319,7 @@ void TextTools::showKeyboardClicked(bool val)
       {
       if (val) {
             if (textPalette == 0)
-                  textPalette = new TextPalette(mscore->currentScoreView());
+                  textPalette = new TextPalette(mscore);
             textPalette->setText(_textElement);
             textPalette->show();
             }

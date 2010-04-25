@@ -3,7 +3,7 @@
 #  Linux Music Score Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2007 by Werner Schweer and others
+#  Copyright (C) 2002-2010 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -72,7 +72,7 @@ include_directories(
 QT4_WRAP_UI (ui_headers
       insertmeasuresdialog.ui barline.ui chord.ui chordrest.ui editinstrument.ui editstyle.ui
       edittempo.ui element.ui hairpin.ui instrdialog.ui measure.ui measuresdialog.ui
-      note.ui page.ui pagesettings.ui partedit.ui playpanel.ui prefsdialog.ui
+      note.ui page.ui pagesettings.ui mixer.ui playpanel.ui prefsdialog.ui
       measureproperties.ui segment.ui text.ui textpalette.ui timedialog.ui
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
@@ -90,7 +90,7 @@ QT4_WRAP_UI (ui_headers
 
 QT4_WRAP_CPP (mocs
       scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h inspector.h
-      mscore.h navigator.h pagesettings.h palette.h partedit.h playpanel.h
+      mscore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
       preferences.h measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h
@@ -160,7 +160,7 @@ add_executable ( ${ExecutableName}
       measure.cpp menus.cpp midifile.cpp importmidi.cpp mscore.cpp
       navigate.cpp navigator.cpp note.cpp ottava.cpp
       page.cpp pagesettings.cpp palette.cpp part.cpp
-      partedit.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp
+      mixer.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       preview.cpp rest.cpp score.cpp segment.cpp select.cpp
       seq.cpp slur.cpp staff.cpp style.cpp instrtemplate.cpp boxproperties.cpp
       sym.cpp sym.h symbol.cpp symbol.h hook.cpp hook.h
@@ -243,6 +243,10 @@ if (MINGW)
       target_link_libraries(mscore vorbis ogg)
    endif (OGGVORBIS)
 
+   if (AEOLUS)
+      target_link_libraries(mscore aeolus readline)
+   endif (AEOLUS)
+
    install( TARGETS mscore RUNTIME DESTINATION bin )
 
    install_files ( /bin .dll
@@ -296,6 +300,10 @@ else (MINGW)
       target_link_libraries(mscore vorbis ogg)
    endif (OGGVORBIS)
 
+   if (AEOLUS)
+      target_link_libraries(mscore aeolus readline)
+   endif (AEOLUS)
+
    if (APPLE)
      if (USE_PORTMIDI)
        target_link_libraries(mscore portmidi)
@@ -318,7 +326,7 @@ else (MINGW)
 endif (MINGW)
 
 if (NOT MINGW AND NOT APPLE)
-# command line utilities are not build for windows
+# command line utilities are not build for windows/apple
 #
 #======================================
 #     target smf2xml

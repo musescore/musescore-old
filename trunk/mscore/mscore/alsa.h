@@ -28,7 +28,6 @@
 #include "driver.h"
 #include "mididriver.h"
 #include "config.h"
-#include "fluid.h"
 
 #define ALSA_PCM_NEW_HW_PARAMS_API
 #define ALSA_PCM_NEW_SW_PARAMS_API
@@ -112,7 +111,6 @@ class AlsaAudio : public Driver {
       bool seekflag;
       double startTime;
 
-//      Port midiInPort;
       MidiDriver* midiDriver;
 
       void registerClient();
@@ -137,7 +135,6 @@ class AlsaAudio : public Driver {
       void write(int n, void* l, void* r);
 
       virtual void putEvent(const Event&, unsigned framePos);
-      virtual void process(int, float*, float*, int);
       virtual void midiRead();
 
       virtual int registerPort(const QString& name, bool input, bool midi);

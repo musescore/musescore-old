@@ -33,6 +33,7 @@
 #include "seq.h"
 #include "alsamidi.h"
 #include "utils.h"
+#include "synti.h"
 
 //---------------------------------------------------------
 //   AlsaDriver
@@ -558,7 +559,6 @@ AlsaAudio::AlsaAudio(Seq* s)
    : Driver(s)
       {
       alsa       = 0;
-      synth      = 0;
       state      = Seq::STOP;
       seekflag   = false;
       startTime  = curTime();
@@ -583,7 +583,6 @@ int AlsaAudio::sampleRate() const
 
 AlsaAudio::~AlsaAudio()
       {
-      delete synth;
       delete alsa;
       }
 
@@ -605,8 +604,6 @@ bool AlsaAudio::init()
             fprintf(stderr, "init ALSA audio driver failed\n");
             return false;
             }
-      synth = new FluidS::Fluid();
-      synth->init(alsa->sampleRate());
 
       midiDriver = new AlsaMidiDriver(seq);
       if (!midiDriver->init()) {
@@ -754,16 +751,7 @@ int AlsaAudio::getState()
 
 void AlsaAudio::putEvent(const Event& e, unsigned /* framePos */)
       {
-      synth->play(e);
-      }
-
-//---------------------------------------------------------
-//   process
-//---------------------------------------------------------
-
-void AlsaAudio::process(int n, float* l, float* r, int stride)
-      {
-      synth->process(n, l, r, stride);
+//      synth->play(e);
       }
 
 //---------------------------------------------------------

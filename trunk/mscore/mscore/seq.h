@@ -81,6 +81,7 @@ class Seq : public QObject {
 
       SeqMsgFifo toSeq;
 
+      QList<Synth*> syntis;
       Driver* driver;
 
       double meterValue[2];
@@ -115,6 +116,7 @@ class Seq : public QObject {
       void playEvent(const Event*, unsigned framePos);
       void guiToSeq(const SeqMsg& msg);
       void startNote(const Channel&, int, int, double nt);
+      void putEvent(const Event&, int framePos);
 
    private slots:
       void seqMessage(int msg);
@@ -172,12 +174,14 @@ class Seq : public QObject {
       ScoreView* viewer() const { return cv; }
       void initInstruments();
 
-      const QList<MidiPatch*>& getPatchInfo() const;
+      QList<MidiPatch*> getPatchInfo() const;
       Driver* getDriver()  { return driver; }
       int getCurTime();
       int getCurTick();
       void getCurTick(int*, int*);
       float masterVolume() const;
+      void loadSoundFont(const QString&);
+      Synth* getSynth(int n) { return syntis[n]; }
       };
 
 extern Seq* seq;

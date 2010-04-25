@@ -260,6 +260,7 @@ Channel::Channel()
       {
       for(int i = 0; i < A_INIT_COUNT; ++i)
             init.append(0);
+      synti    = -1;
       channel  = -1;
       program  = -1;
       bank     = 0;
@@ -288,6 +289,8 @@ void Channel::write(Xml& xml) const
             if (e)
                   e->write(xml);
             }
+      if (synti)
+            xml.tag("synti", synti);
       if (mute)
             xml.tag("mute", mute);
       if (solo)
@@ -301,6 +304,7 @@ void Channel::write(Xml& xml) const
 
 void Channel::read(QDomElement e)
       {
+      synti = 0;
       name = e.attribute("name");
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -347,6 +351,8 @@ void Channel::read(QDomElement e)
                   a.read(e);
                   articulation.append(a);
                   }
+            else if (tag == "synti")
+                  synti = val.toInt();
             else
                   domError(e);
             }

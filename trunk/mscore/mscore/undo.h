@@ -35,6 +35,7 @@
 #include "key.h"
 #include "select.h"
 #include "instrument.h"
+#include "synti.h"
 
 class ElementList;
 class Element;
@@ -962,13 +963,13 @@ class EditText : public UndoCommand {
 class ChangePatch : public UndoCommand {
       Part* part;
       Channel* channel;
-      int prog, bank;
+      MidiPatch patch;
 
       void flip();
 
    public:
-      ChangePatch(Part* p, Channel* c, int pr, int b)
-         : part(p), channel(c), prog(pr), bank(b) {}
+      ChangePatch(Part* p, Channel* c, const MidiPatch* pt)
+         : part(p), channel(c), patch(*pt) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

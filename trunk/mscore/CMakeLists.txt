@@ -34,9 +34,11 @@ set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE FALSE)
 set(SOUNDFONT3 TRUE)                      # enable ogg vorbis compressed fonts, require ogg & vorbis
+set(AEOLUS TRUE)                          # pipe organ synthesizer
 
 if (APPLE OR MINGW)
       set(SF_COMPRESSOR FALSE)
+      set(AEOLUS FALSE)
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)             # build sfconvert, require ogg, vorbis, vorbisenc
 endif (APPLE OR MINGW)
@@ -251,9 +253,13 @@ if (MINGW OR APPLE)
       set (subdirs ${subdirs} portmidi)
 endif (MINGW OR APPLE)
 
-if(SF_COMPRESSOR)
+if (SF_COMPRESSOR)
       set (subdirs ${subdirs} sfont)
 endif (SF_COMPRESSOR)
+
+if (AEOLUS)
+      set (subdirs ${subdirs} aeolus)
+endif (AEOLUS)
 
 subdirs(${subdirs})
 

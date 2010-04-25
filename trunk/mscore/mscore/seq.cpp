@@ -22,7 +22,6 @@
 #include "seq.h"
 #include "mscore.h"
 
-
 #ifdef USE_ALSA
 #include "alsa.h"
 #endif
@@ -52,6 +51,12 @@
 #ifdef USE_JACK
 #include "jackaudio.h"
 #endif
+
+#ifdef AEOLUS
+#include "aeolus/aeolus/aeolus.h"
+#endif
+
+#include "fluid.h"
 
 Seq* seq;
 
@@ -105,6 +110,8 @@ Seq::Seq()
 Seq::~Seq()
       {
       delete driver;
+      foreach(Synth* s, syntis)
+            delete s;
       }
 
 //---------------------------------------------------------
@@ -157,11 +164,19 @@ void Seq::selectionChanged(int mode)
 
 bool Seq::init()
       {
+printf("seq init\n");
       driver = 0;
 
       bool useJackFlag      = preferences.useJackAudio || preferences.useJackMidi;
       bool useAlsaFlag      = preferences.useAlsaAudio;
       bool usePortaudioFlag = preferences.usePortaudioAudio;
+
+      if (useJackFlag || useAlsaFlag || usePortaudioFlag) {
+            syntis.append(new FluidS::Fluid());
+#ifdef AEOLUS
+            syntis.append(new Aeolus());
+#endif
+            }
 
 #ifdef USE_JACK
       if (useJackFlag) {
@@ -211,9 +226,11 @@ bool Seq::init()
             printf("init audio driver failed\n");
             return false;
             }
+printf("seq init2\n");
       AL::sampleRate = driver->sampleRate();
-      Synth* synth = driver->getSynth();
-      if (synth) {
+      if (!syntis.isEmpty()) {
+            foreach(Synth* s, syntis)
+                  s->init(AL::sampleRate);
             QString p;
             if (!preferences.soundFont.isEmpty())
                   p = preferences.soundFont;
@@ -227,7 +244,9 @@ bool Seq::init()
             else {
                   if (debugMode)
                         printf("load soundfont <%s>\n", qPrintable(p));
-                  bool rv = synth->loadSoundFont(p);
+printf("seq init3\n");
+                  bool rv = syntis[0]->loadSoundFont(p);
+printf("seq init4\n");
                   if (!rv) {
                         QString s = tr("Loading SoundFont\n"
                            "\"%1\"\n"
@@ -237,14 +256,16 @@ bool Seq::init()
                         QMessageBox::critical(0, tr("MuseScore: Load SoundFont"), s);
                         }
                   }
-            synth->setMasterTuning(preferences.tuning);
-            synth->setMasterGain(preferences.masterGain);
-            synth->setEffectParameter(0, 0, preferences.reverbRoomSize);
-            synth->setEffectParameter(0, 1, preferences.reverbDamp);
-            synth->setEffectParameter(0, 2, preferences.reverbWidth);
-            synth->setEffectParameter(0, 3, preferences.reverbGain);
-
-            synth->setEffectParameter(1, 4, preferences.chorusGain);
+printf("init syntis\n");
+            foreach(Synth* s, syntis) {
+                  s->setMasterTuning(preferences.tuning);
+                  s->setMasterGain(preferences.masterGain);
+                  s->setEffectParameter(0, 0, preferences.reverbRoomSize);
+                  s->setEffectParameter(0, 1, preferences.reverbDamp);
+                  s->setEffectParameter(0, 2, preferences.reverbWidth);
+                  s->setEffectParameter(0, 3, preferences.reverbGain);
+                  s->setEffectParameter(1, 4, preferences.chorusGain);
+                  }
             }
 
       if (!driver->start()) {
@@ -398,7 +419,7 @@ void Seq::seqMessage(int msg)
             case '0':         // STOP
                   guiStop();
                   heartBeatTimer->stop();
-                  if (driver && driver->getSynth() && mscore->getSynthControl()) {
+                  if (driver && mscore->getSynthControl()) {
                         meterValue[0]     = .0f;
                         meterValue[1]     = .0f;
                         meterPeakValue[0] = .0f;
@@ -434,14 +455,14 @@ void Seq::stopTransport()
                   continue;
             Event ee(*e);
             ee.setVelo(0);
-            driver->putEvent(ee, 0);
+            putEvent(ee, 0);
             }
       // send sustain off
       Event e;
       e.setType(ME_CONTROLLER);
       e.setController(CTRL_SUSTAIN);
       e.setValue(0);
-      driver->putEvent(e, 0);
+      putEvent(e, 0);
 
       activeNotes.clear();
       emit toGui('0');
@@ -483,7 +504,7 @@ void Seq::playEvent(const Event* event, unsigned framePos)
 
             if (event->velo()) {
                   if (!mute) {
-                        driver->putEvent(*event, framePos);
+                        putEvent(*event, framePos);
                         activeNotes.append(event);
                         }
                   }
@@ -494,14 +515,14 @@ void Seq::playEvent(const Event* event, unsigned framePos)
                               Event ee(*l);
                               ee.setVelo(0);
                               activeNotes.erase(k);
-                              driver->putEvent(ee, framePos);
+                              putEvent(ee, framePos);
                               break;
                               }
                         }
                   }
             }
       else if (type == ME_CONTROLLER)
-            driver->putEvent(*event, framePos);
+            putEvent(*event, framePos);
       }
 
 //---------------------------------------------------------
@@ -529,7 +550,7 @@ void Seq::processMessages()
                         }
                         break;
                   case SEQ_PLAY:
-                        driver->putEvent(msg.event, 0);
+                        putEvent(msg.event, 0);
                         break;
                   case SEQ_SEEK:
                         setPos(msg.data);
@@ -559,6 +580,14 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 
       float* l = lbuffer;
       float* r = rbuffer;
+      for (int i = 0; i < n; ++i) {
+            *l = 0;
+            *r = 0;
+            l += stride;
+            r += stride;
+            }
+      l = lbuffer;
+      r = rbuffer;
 
       processMessages();
 
@@ -578,9 +607,10 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                         printf("%d:  %f - %f\n", playPos.key(), f, playTime);
 						n=0;
                         }
-                  driver->process(n, l, r, stride);
-                  l         += n * stride;
-                  r         += n * stride;
+                  foreach(Synth* s, syntis)
+                        s->process(n, l, r, stride);
+                  l += n * stride;
+                  r += n * stride;
                   playTime += double(n)/double(AL::sampleRate);
 
                   frames    -= n;
@@ -588,7 +618,8 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   playEvent(playPos.value(), framePos);
                   }
             if (frames) {
-                  driver->process(frames, l, r, stride);
+                  foreach(Synth* s, syntis)
+                        s->process(frames, l, r, stride);
                   playTime += double(frames)/double(AL::sampleRate);
                   }
             if (playPos == events.constEnd()) {
@@ -596,8 +627,10 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   rewindStart();
                   }
             }
-      else
-            driver->process(frames, l, r, stride);
+      else {
+            foreach(Synth* s, syntis)
+                  s->process(frames, l, r, stride);
+            }
 
       if (lbuffer == 0 || rbuffer == 0)   // midi only?
             return;
@@ -708,7 +741,7 @@ void Seq::heartBeat()
             return;
 
       SynthControl* sc = mscore->getSynthControl();
-      if (sc && driver && driver->getSynth()) {
+      if (sc && driver) {
             if (++peakTimer[0] >= peakHold)
                   meterPeakValue[0] *= .7f;
             if (++peakTimer[1] >= peakHold)
@@ -797,7 +830,7 @@ void Seq::setPos(int utick)
                   continue;
             Event e(*n);
             e.setVelo(0);
-            driver->putEvent(e, 0);
+            putEvent(e, 0);
             }
       activeNotes.clear();
 
@@ -1022,7 +1055,7 @@ void Seq::prevChord()
                   break;
             --i;
             }
-      //go the previous chord      
+      //go the previous chord
       if (i != events.constBegin()) {
             i = playPos;
             for (;;) {
@@ -1064,11 +1097,17 @@ void Seq::guiToSeq(const SeqMsg& msg)
 //   getPatchInfo
 //---------------------------------------------------------
 
-const QList<MidiPatch*>& Seq::getPatchInfo() const
+QList<MidiPatch*> Seq::getPatchInfo() const
       {
-      static QList<MidiPatch*> pl;
-      if (driver && driver->getSynth())
-            return driver->getSynth()->getPatchInfo();
+      QList<MidiPatch*> pl;
+      int idx = 0;
+      foreach(Synth* s, syntis) {
+            QList<MidiPatch*> ip = s->getPatchInfo();
+            foreach(MidiPatch* mp, ip)
+                  mp->synti = idx;
+            pl += ip;
+            ++idx;
+            }
       return pl;
       }
 
@@ -1123,10 +1162,9 @@ SeqMsg SeqMsgFifo::dequeue()
 
 void Seq::setMasterVolume(float gain)
       {
-      if (driver && driver->getSynth()) {
-            emit masterVolumeChanged(gain);
-            return driver->getSynth()->setMasterGain(gain);
-            }
+      foreach(Synth* s, syntis)
+            s->setMasterGain(gain);
+      emit masterVolumeChanged(gain);
       }
 
 //---------------------------------------------------------
@@ -1135,9 +1173,29 @@ void Seq::setMasterVolume(float gain)
 
 float Seq::masterVolume() const
       {
-      if (driver && driver->getSynth())
-            return driver->getSynth()->masterGain();
+      if (!syntis.isEmpty())
+            return syntis[0]->masterGain();
       return 0;
       }
 
+//---------------------------------------------------------
+//   loadSoundFont
+//---------------------------------------------------------
+
+void Seq::loadSoundFont(const QString& s)
+      {
+      foreach(Synth* synti, syntis)
+            synti->loadSoundFont(s);
+      }
+
+//---------------------------------------------------------
+//   putEvent
+//---------------------------------------------------------
+
+void Seq::putEvent(const Event& event, int /*framePos*/)
+      {
+      Channel* c = cs->midiMapping()->at(event.channel()).articulation;
+      int syntiIdx = c->synti;
+      syntis[syntiIdx]->play(event);
+      }
 

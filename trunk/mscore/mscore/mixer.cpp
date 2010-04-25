@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,7 +21,7 @@
 #include "mscore.h"
 #include "score.h"
 #include "part.h"
-#include "partedit.h"
+#include "mixer.h"
 #include "seq.h"
 #include "undo.h"
 #include "synti.h"
@@ -63,7 +63,15 @@ void PartEdit::setPart(Part* p, Channel* a)
       reverb->setValue(a->reverb);
       chorus->setValue(a->chorus);
       pan->setValue(a->pan);
-      patch->setCurrentIndex(a->program);
+printf("setPart %d %d %d\n", a->synti, a->bank, a->program);
+      for (int i = 0; i < patch->count(); ++i) {
+            MidiPatch* p = (MidiPatch*)patch->itemData(i, Qt::UserRole).value<void*>();
+            if (a->synti == p->synti && a->program == p->prog && a->bank == p->bank) {
+                  patch->setCurrentIndex(i);
+printf("   setPart found %d <%s>\n", i, qPrintable(p->name));
+                  break;
+                  }
+            }
       drumset->setChecked(p->useDrumset());
       }
 
@@ -172,7 +180,7 @@ void PartEdit::patchChanged(int n)
       MidiPatch* p = (MidiPatch*)patch->itemData(n, Qt::UserRole).value<void*>();
       Score* score = part->score();
       score->startCmd();
-      score->undo()->push(new ChangePatch(part, channel, p->prog, p->bank));
+      score->undo()->push(new ChangePatch(part, channel, p));
       score->endCmd();
       }
 

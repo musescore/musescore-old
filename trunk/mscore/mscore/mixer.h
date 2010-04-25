@@ -21,7 +21,7 @@
 #ifndef __ILEDIT_H__
 #define __ILEDIT_H__
 
-#include "ui_partedit.h"
+#include "ui_mixer.h"
 #include "instrument.h"
 
 class Score;
@@ -49,7 +49,7 @@ class PartEdit : public QWidget, public Ui::PartEditBase {
       void drumsetToggled(bool);
 
    public slots:
-      
+
    signals:
       void soloChanged(bool);
 
@@ -78,7 +78,7 @@ class InstrumentListEditor : public QScrollArea
       void patchListChanged();
 
    signals:
-      
+
    public:
       InstrumentListEditor(QWidget* parent);
       void updateAll(Score*);

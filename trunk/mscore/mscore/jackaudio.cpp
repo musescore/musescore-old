@@ -24,7 +24,6 @@
 #include "synti.h"
 #include "mscore.h"
 #include "seq.h"
-#include "fluid.h"
 #include "al/al.h"
 
 #include <jack/midiport.h>
@@ -36,8 +35,7 @@
 JackAudio::JackAudio(Seq* s)
    : Driver(s)
       {
-      client        = 0;
-      synth         = 0;
+      client = 0;
       }
 
 //---------------------------------------------------------
@@ -52,7 +50,6 @@ JackAudio::~JackAudio()
                      strerror(errno));
                   }
             }
-      delete synth;
       }
 
 //---------------------------------------------------------
@@ -312,15 +309,6 @@ int JackAudio::processAudio(jack_nframes_t frames, void* p)
       }
 
 //---------------------------------------------------------
-//   processShutdown
-//---------------------------------------------------------
-
-static void processShutdown(void*)
-      {
-      fprintf(stderr, "JACK SHUTDOWN\n");
-      }
-
-//---------------------------------------------------------
 //   jackError
 //---------------------------------------------------------
 
@@ -399,8 +387,6 @@ bool JackAudio::init()
                         fprintf(stderr, "no jack port for right channel found!\n");
                         }
                   }
-            synth = new FluidS::Fluid();
-            synth->init(sampleRate());
             }
 
       if (preferences.useJackMidi) {
@@ -452,8 +438,8 @@ int JackAudio::getState()
 
 void JackAudio::putEvent(const Event& e, unsigned framePos)
       {
-      if (preferences.useJackAudio)
-            synth->play(e);
+//      if (preferences.useJackAudio)
+//            synth->play(e);
       if (!preferences.useJackMidi)
             return;
 
@@ -532,16 +518,6 @@ void JackAudio::putEvent(const Event& e, unsigned framePos)
                   printf("JackMidi: event type %x not supported\n", e.type());
                   break;
             }
-      }
-
-//---------------------------------------------------------
-//   process
-//---------------------------------------------------------
-
-void JackAudio::process(int n, float* l, float* r, int stride)
-      {
-      if (preferences.useJackAudio)
-            synth->process(n, l, r, stride);
       }
 
 //---------------------------------------------------------

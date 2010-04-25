@@ -782,7 +782,7 @@ void PreferenceDialog::portaudioApiActivated(int)  {}
 
 bool ShortcutItem::operator<(const QTreeWidgetItem& item) const
       {
-      
+
       const QTreeWidget * pTree =treeWidget ();
       int column   = pTree ? pTree->sortColumn() : 0;
       return QString::localeAwareCompare(text(column).toLower(), item.text(column).toLower()) > 0;
@@ -1151,9 +1151,7 @@ void PreferenceDialog::apply()
                   }
             if (seq->isRunning()) {
                   sfChanged = false;
-                  Synth* synth = seq->getDriver()->getSynth();
-                  if (synth)
-                        synth->loadSoundFont(preferences.soundFont);
+                  seq->loadSoundFont(preferences.soundFont);
                   }
             }
       mscore->startAutoSave();
@@ -1263,7 +1261,7 @@ QAction* getAction(Shortcut* s)
             if(!s->key.isEmpty())
                 a->setShortcut(s->key);
             else
-                a->setShortcuts(s->standardKey);                  
+                a->setShortcuts(s->standardKey);
             a->setShortcutContext(s->context);
             if (!s->help.isEmpty()) {
                   a->setToolTip(s->help);

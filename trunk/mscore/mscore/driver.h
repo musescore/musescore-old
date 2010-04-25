@@ -34,10 +34,9 @@ class Driver {
 
    protected:
       Seq* seq;
-      Synth* synth;
 
    public:
-      Driver(Seq* s)    { seq = s; synth = 0; }
+      Driver(Seq* s)    { seq = s; }
       virtual ~Driver() {}
       virtual bool init() = 0;
       virtual bool start() = 0;
@@ -50,10 +49,8 @@ class Driver {
       virtual int registerPort(const QString& name, bool input, bool midi) = 0;
       virtual void unregisterPort(int) = 0;
       virtual void putEvent(const Event&, unsigned framePos) = 0;
-      virtual void process(int, float*, float*, int) = 0;
+//      virtual void process(int, float*, float*, int) = 0;
       virtual void midiRead() {}
-
-      Synth* getSynth() const { return synth; }
       };
 
 #endif
