@@ -1146,8 +1146,10 @@ void TextB::endEdit()
             return;
             }
       cursorPos = cursor->position();
-      if (textPalette)
+      if (textPalette) {
             textPalette->hide();
+            mscore->textTools()->kbAction()->setChecked(false);
+            }
       mscore->textTools()->hide();
       delete cursor;
       cursor = 0;

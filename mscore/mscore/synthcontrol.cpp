@@ -23,7 +23,7 @@
 #include "seq.h"
 #include "synti.h"
 #include "preferences.h"
-#include "partedit.h"
+#include "mixer.h"
 
 //---------------------------------------------------------
 //   SynthControl
@@ -94,7 +94,7 @@ void SynthControl::closeEvent(QCloseEvent* ev)
 void MuseScore::showSynthControl(bool val)
       {
       if (synthControl == 0) {
-            synthControl = new SynthControl(seq->getDriver()->getSynth(), this);
+            synthControl = new SynthControl(seq->getSynth(0), this);
             connect(synthControl, SIGNAL(closed()), SLOT(closeSynthControl()));
             connect(seq, SIGNAL(masterVolumeChanged(float)), synthControl, SLOT(setMasterGain(float)));
             connect(synthControl, SIGNAL(masterGainChanged(float)), seq, SLOT(setMasterVolume(float)));

@@ -1912,7 +1912,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   #if defined(Q_WS_WIN)
                   if (str.startsWith("/"))    // HACK
                         str = str.mid(1);
-                  #endif     
+                  #endif
                   s->setPath(str);
 if (debugMode)
       printf("drop image <%s> <%s>\n", qPrintable(str), qPrintable(s->path()));
@@ -2598,9 +2598,8 @@ void ScoreView::endEdit()
       {
       setDropTarget(0);
       setEditText(0);
-	  if(!editObject){
-			return;
-			}
+      if (!editObject)
+	      return;
       _score->addRefresh(editObject->bbox());
       editObject->endEdit();
       _score->addRefresh(editObject->bbox());
@@ -3075,6 +3074,15 @@ void ScoreView::deselectAll()
 bool ScoreView::noteEntryMode() const
       {
       return sm->configuration().contains(states[NOTE_ENTRY]);
+      }
+
+//---------------------------------------------------------
+//   editMode
+//---------------------------------------------------------
+
+bool ScoreView::editMode() const
+      {
+      return sm->configuration().contains(states[EDIT]);
       }
 
 //---------------------------------------------------------

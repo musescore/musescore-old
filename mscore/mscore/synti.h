@@ -30,6 +30,7 @@ class Event;
 
 struct MidiPatch {
       bool drum;
+      int synti;
       int bank, prog;
       QString name;
       };

@@ -24,7 +24,6 @@
 #include "mscore.h"
 #include "seq.h"
 #include "pa.h"
-#include "fluid.h"
 
 #ifdef USE_ALSA
 #include "alsa.h"
@@ -118,9 +117,6 @@ bool Portaudio::init()
                   return false;
                   }
             }
-      synth = new FluidS::Fluid();
-      synth->init(_sampleRate);
-
 #ifdef USE_ALSA
       midiDriver = new AlsaMidiDriver(seq);
 #endif
@@ -298,16 +294,7 @@ int Portaudio::getState()
 
 void Portaudio::putEvent(const Event& e, unsigned /* framePos*/)
       {
-      synth->play(e);
-      }
-
-//---------------------------------------------------------
-//   process
-//---------------------------------------------------------
-
-void Portaudio::process(int n, float* l, float* r, int stride)
-      {
-      synth->process(n, l, r, stride);
+//      synth->play(e);
       }
 
 //---------------------------------------------------------

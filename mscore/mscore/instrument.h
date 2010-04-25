@@ -76,6 +76,7 @@ struct Channel {
       int channel;      // mscore channel number, mapped to midi port/channel
       mutable EventList init;
 
+      int synti;
       int program;     // current values as shown in mixer
       int bank;        // initialized from "init"
       char volume;

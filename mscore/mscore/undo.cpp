@@ -1839,18 +1839,22 @@ void EditText::redo()
 
 void ChangePatch::flip()
       {
-      int oprogram     = channel->program;
-      int obank        = channel->bank;
-      channel->program = prog;
-      channel->bank    = bank;
-      prog             = oprogram;
-      bank             = obank;
+      MidiPatch op;
+      op.prog     = channel->program;
+      op.bank     = channel->bank;
+      op.synti    = channel->synti;
+
+      channel->program = patch.prog;
+      channel->bank    = patch.bank;
+      channel->synti   = patch.synti;
+
+      patch = op;
 
       Event event(ME_CONTROLLER);
       event.setChannel(channel->channel);
 
-      int hbank = (bank >> 7) & 0x7f;
-      int lbank = bank & 0x7f;
+      int hbank = (patch.bank >> 7) & 0x7f;
+      int lbank = patch.bank & 0x7f;
 
       event.setController(CTRL_HBANK);
       event.setValue(hbank);
@@ -1861,7 +1865,7 @@ void ChangePatch::flip()
       seq->sendEvent(event);
 
       event.setController(CTRL_PROGRAM);
-      event.setValue(channel->program);
+      event.setValue(patch.prog);
       seq->sendEvent(event);
       }
 

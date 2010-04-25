@@ -40,7 +40,7 @@
 #include "editstyle.h"
 #include "playpanel.h"
 #include "page.h"
-#include "partedit.h"
+#include "mixer.h"
 #include "palette.h"
 #include "part.h"
 #include "drumset.h"
@@ -2084,6 +2084,10 @@ void MuseScore::cmd(QAction* a)
             saveFile();
       else if (cmd == "file-reload") {
             if (cs && !cs->created() && !checkDirty(cs)) {
+                  if (cv->editMode()) {
+                        cv->postCmd("escape");
+                        qApp->processEvents();
+                        }
                   Score* score = new Score(defaultStyle);
                   score->read(cs->filePath());
                   // hack: so we don't get another checkDirty in appendScore
@@ -2217,7 +2221,8 @@ void MuseScore::changeState(ScoreState val)
                   s->action->setEnabled(cs && cs->selection().state());
             else if (strcmp(s->xml, "synth-control") == 0) {
                   Driver* driver = seq ? seq->getDriver() : 0;
-                  s->action->setEnabled(driver && driver->getSynth());
+                  // s->action->setEnabled(driver && driver->getSynth());
+                  s->action->setEnabled(driver);
                   }
             else
                   s->action->setEnabled(s->state & val);
@@ -2241,8 +2246,8 @@ void MuseScore::changeState(ScoreState val)
                   break;
             case STATE_NORMAL:
                   _modeText->hide();
-                  if(searchDialog)
-                    searchDialog->hide();
+                  if (searchDialog)
+                        searchDialog->hide();
                   break;
             case STATE_NOTE_ENTRY:
                   _modeText->setText(tr("note entry mode"));
