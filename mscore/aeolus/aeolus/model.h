@@ -151,6 +151,8 @@ public:
     virtual ~Model (void);
 
     void terminate (void) {  put_event (EV_EXIT, 1); }
+    void set_ifelm (int g, int i, int m);
+    void clr_group (int g);
 
 private:
 
@@ -159,13 +161,11 @@ private:
     void init (void);
     void fini (void);
     void proc_mesg (ITC_mesg *M);
-    void proc_qmidi (void);
+//    void proc_qmidi (void);
     void init_audio (void);
     void init_iface (void);
     void init_ranks (int comm);
     void proc_rank (int g, int i, int comm);
-    void set_ifelm (int g, int i, int m);
-    void clr_group (int g);
     void set_aupar (int s, int a, int p, float v);
     void set_dipar (int s, int d, int p, float v);
     void set_mconf (int i, uint16_t *d);

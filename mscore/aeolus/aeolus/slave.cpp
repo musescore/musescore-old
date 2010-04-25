@@ -30,6 +30,7 @@ void Slave::thr_main()
             if (!M)
                   continue;
 
+// printf("Slave %d\n", M->type());
             switch (M->type ()) {
                   case MT_CALC_RANK:
                         {
@@ -70,5 +71,3 @@ void Slave::thr_main()
             }
       send_event (EV_EXIT, 1);
       }
-
-

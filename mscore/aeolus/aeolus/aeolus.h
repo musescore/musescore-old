@@ -39,13 +39,14 @@ class Lfq_u32;
 
 class Aeolus : public Synth {
       Lfq_u8*   midi_queue;
-      Lfq_u32*  note_queue;
 
       Audio* audio;
       Model* model;
       Slave* slave;
       QList<MidiPatch*> patchList;
       uint16_t _midimap [16];
+      int _sc_cmode; // stop control command mode
+      int _sc_group; // stop control group number
 
    public:
       Aeolus();

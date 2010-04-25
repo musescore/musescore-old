@@ -27,12 +27,12 @@
 //   Audio
 //---------------------------------------------------------
 
-Audio::Audio (const char *name, Lfq_u32 *qnote, Lfq_u32 *qcomm) :
+Audio::Audio (const char *name, Lfq_u32 *qcomm) :
     A_thread ("Audio"),
     _appname (name),
-    _qnote (qnote),
+//    _qnote (qnote),
     _qcomm (qcomm),
-    _qmidi (0),
+//    _qmidi (0),
     _running (false),
     _abspri (0),
     _relpri (0),
@@ -121,17 +121,11 @@ void Audio::thr_main()
 //   init_jack
 //---------------------------------------------------------
 
-void Audio::init_jack (Lfq_u8 *qmidi)
+void Audio::init(int sampleRate)
       {
-      int                 i;
-      jack_status_t       stat;
-      struct sched_param  spar;
-
-      _qmidi = qmidi;
-
       _appname = "aeolus";
 	_nplay   = 2;
-      _fsamp   = 48000;
+      _fsamp   = sampleRate;
       init_audio();
 
       _policy = SCHED_OTHER;
@@ -245,42 +239,25 @@ void Audio::proc_queue (Lfq_u32 *Q)
     }
 }
 
-
-void Audio::proc_keys1 (void)
-{
-    int d, m, n;
-
-    for (n = 0; n < NNOTES; n++)
-    {
-	m = _keymap [n];
-	if (m & 128)
-	{
-            m &= 127;
-   	    _keymap [n] = m;
-            for (d = 0; d < _ndivis; d++) _divisp [d]->update (n, m);
-	}
-    }
-}
-
-
-void Audio::proc_keys2 (void)
-{
-    int d;
-
-    for (d = 0; d < _ndivis; d++) _divisp [d]->update (_keymap);
-}
-
-
 //---------------------------------------------------------
 //   process
 //---------------------------------------------------------
 
 void Audio::process(unsigned nframes, float* lout, float* rout, int stride)
       {
-      proc_queue (_qnote);
+//      proc_queue (_qnote);
       proc_queue (_qcomm);
-      proc_keys1 ();
-      proc_keys2 ();
+      for (int n = 0; n < NNOTES; n++) {
+            int m = _keymap [n];
+            if (m & 128) {
+                  m &= 127;
+                  _keymap [n] = m;
+                  for (int d = 0; d < _ndivis; d++)
+                        _divisp [d]->update (n, m);
+	            }
+            }
+      for (int d = 0; d < _ndivis; d++)
+            _divisp[d]->update (_keymap);
 
       if (fabsf (_revsize - _audiopar [REVSIZE]._val) > 0.001f) {
             _revsize = _audiopar [REVSIZE]._val;

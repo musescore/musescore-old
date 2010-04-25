@@ -127,11 +127,11 @@ void Model::thr_main (void)
 
                   case EV_TIME:
                         inc_time(50000);
-                        proc_qmidi ();
+//                        proc_qmidi ();
                         break;
 
                   case EV_QMIDI:
-                        proc_qmidi ();
+//                        proc_qmidi ();
                         break;
 
                   default:
@@ -366,6 +366,7 @@ void Model::proc_mesg (ITC_mesg *M)
 }
 
 
+#if 0
 void Model::proc_qmidi()
       {
       int c, d, p, t, v;
@@ -414,24 +415,8 @@ printf("Midi %x %x %x\n", t, p, v);
                                     if (v < NBANK)
                                           _bank = v;
                                     break;
-
-                              case MIDICTL_IFELM:
-                                    // Stop control.
-                                    if (v & 64) {
-                                          // Set mode or clear group.
-                                         _sc_cmode = (v >> 4) & 3;
-                                         _sc_group = v & 7;
-printf("mode %d group %d\n", _sc_cmode, _sc_group);
-                                          if (_sc_cmode == 0)
-                                                clr_group (_sc_group);
-                                          }
-                                    else if (_sc_cmode) {
-                                          // Set, reset or toggle stop.
-                                          set_ifelm (_sc_group, v & 31, _sc_cmode - 1);
-                                          }
-                                    break;
-                                    }
-                              break;
+                              }
+                        break;
 
                   case 0xC0:
 	                  // Program change.
@@ -441,7 +426,7 @@ printf("mode %d group %d\n", _sc_cmode, _sc_group);
                   }
             }
       }
-
+#endif
 
 void Model::init_audio (void)
 {
@@ -538,21 +523,18 @@ void Model::init_iface (void)
 
 
 void Model::init_ranks (int comm)
-{
-    int    g, i;
-    Group  *G;
+      {
+      _count++;
+      _ready = false;
+      send_event (TO_IFACE, new M_ifc_retune (_fbase, _itemp));
 
-    _count++;
-    _ready = false;
-    send_event (TO_IFACE, new M_ifc_retune (_fbase, _itemp));
-
-    for (g = 0; g < _ngroup; g++)
-    {
-	G = _group + g;
-	for (i = 0; i < G->_nifelm; i++) proc_rank (g, i, comm);
-    }
-    send_event (TO_SLAVE, new ITC_mesg (MT_AUDIO_SYNC));
-}
+      for (int g = 0; g < _ngroup; g++) {
+            Group* G = _group + g;
+            for (int i = 0; i < G->_nifelm; i++)
+                  proc_rank (g, i, comm);
+            }
+      send_event (TO_SLAVE, new ITC_mesg (MT_AUDIO_SYNC));
+      }
 
 
 void Model::proc_rank (int g, int i, int comm)
@@ -612,8 +594,6 @@ void Model::proc_rank (int g, int i, int comm)
 void Model::set_ifelm (int g, int i, int m)
       {
       Group* G = _group + g;
-
-printf("set_ifelm group %d stop %d %s\n", g, i, m == 0 ? "reset" : (m == 1 ? "set" : "reset"));
 
       if ((!_ready) || (g >= _ngroup) || (i >= G->_nifelm))
             return;
