@@ -244,7 +244,7 @@ if (MINGW)
    endif (OGGVORBIS)
 
    if (AEOLUS)
-      target_link_libraries(mscore aeolus readline)
+      target_link_libraries(mscore aeolus)
    endif (AEOLUS)
 
    install( TARGETS mscore RUNTIME DESTINATION bin )
