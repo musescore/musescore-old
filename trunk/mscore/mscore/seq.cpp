@@ -164,7 +164,6 @@ void Seq::selectionChanged(int mode)
 
 bool Seq::init()
       {
-printf("seq init\n");
       driver = 0;
 
       bool useJackFlag      = preferences.useJackAudio || preferences.useJackMidi;
@@ -226,7 +225,6 @@ printf("seq init\n");
             printf("init audio driver failed\n");
             return false;
             }
-printf("seq init2\n");
       AL::sampleRate = driver->sampleRate();
       if (!syntis.isEmpty()) {
             foreach(Synth* s, syntis)
@@ -244,9 +242,7 @@ printf("seq init2\n");
             else {
                   if (debugMode)
                         printf("load soundfont <%s>\n", qPrintable(p));
-printf("seq init3\n");
                   bool rv = syntis[0]->loadSoundFont(p);
-printf("seq init4\n");
                   if (!rv) {
                         QString s = tr("Loading SoundFont\n"
                            "\"%1\"\n"
@@ -256,7 +252,6 @@ printf("seq init4\n");
                         QMessageBox::critical(0, tr("MuseScore: Load SoundFont"), s);
                         }
                   }
-printf("init syntis\n");
             foreach(Synth* s, syntis) {
                   s->setMasterTuning(preferences.tuning);
                   s->setMasterGain(preferences.masterGain);
@@ -580,7 +575,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 
       float* l = lbuffer;
       float* r = rbuffer;
-      for (int i = 0; i < n; ++i) {
+      for (unsigned i = 0; i < n; ++i) {
             *l = 0;
             *r = 0;
             l += stride;
@@ -1199,3 +1194,28 @@ void Seq::putEvent(const Event& event, int /*framePos*/)
       syntis[syntiIdx]->play(event);
       }
 
+//---------------------------------------------------------
+//   synthNameToIndex
+//---------------------------------------------------------
+
+int Seq::synthNameToIndex(const QString& name) const
+      {
+      int idx = 0;
+      foreach(Synth* s, syntis) {
+            if (s->name() == name)
+                  return idx;
+            ++idx;
+            }
+      return -1;
+      }
+
+//---------------------------------------------------------
+//   synthIndexToName
+//---------------------------------------------------------
+
+QString Seq::synthIndexToName(int idx) const
+      {
+      if (idx >= syntis.size())
+            return QString();
+      return QString(syntis[idx]->name());
+      }

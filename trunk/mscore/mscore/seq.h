@@ -107,7 +107,6 @@ class Seq : public QObject {
 
       QList<Event*> eventList;
 
-
       void collectMeasureEvents(Measure*, int staffIdx);
 
       void stopTransport();
@@ -182,6 +181,8 @@ class Seq : public QObject {
       float masterVolume() const;
       void loadSoundFont(const QString&);
       Synth* getSynth(int n) { return syntis[n]; }
+      int synthNameToIndex(const QString&) const;
+      QString synthIndexToName(int) const;
       };
 
 extern Seq* seq;

@@ -48,8 +48,7 @@ class Driver {
       virtual int sampleRate() const = 0;
       virtual int registerPort(const QString& name, bool input, bool midi) = 0;
       virtual void unregisterPort(int) = 0;
-      virtual void putEvent(const Event&, unsigned framePos) = 0;
-//      virtual void process(int, float*, float*, int) = 0;
+      virtual void putEvent(const Event&, unsigned /*framePos*/) {}
       virtual void midiRead() {}
       };
 

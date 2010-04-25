@@ -1,5 +1,5 @@
 25.apr (ws)
-      - first code to add the Aeolus pipe organ synthesizer
+      - first code to integrate the Aeolus pipe organ synthesizer
       - fix crash when reload in text edit mode when text palette is open
         (maybe fix for #5544)
 21.apr (la)

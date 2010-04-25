@@ -41,8 +41,8 @@ StaffText::StaffText(Score* s)
 void StaffText::write(Xml& xml) const
       {
       xml.stag("StaffText");
-      if (!_midiActionName.isEmpty())
-            xml.tagE(QString("midiAction name=\"%1\"").arg(_midiActionName));
+      foreach(QString s, _midiActionNames)
+            xml.tagE(QString("MidiAction name=\"%1\"").arg(s));
       if (!_channelName.isEmpty())
             xml.tagE(QString("channelSwitch name=\"%1\"").arg(_channelName));
       Text::writeProperties(xml);
@@ -55,12 +55,12 @@ void StaffText::write(Xml& xml) const
 
 void StaffText::read(QDomElement e)
       {
-      _midiActionName.clear();
+      _midiActionNames.clear();
       _channelName.clear();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "midiAction")
-                  _midiActionName = e.attribute("name");
+            if (tag == "MidiAction")
+                  _midiActionNames.append(e.attribute("name"));
             else if (tag == "channelSwitch" || tag == "articulationChange")
                   _channelName = e.attribute("name");
             else if (!Text::readProperties(e))
@@ -117,19 +117,17 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
             midiActionList->addItem(e.name);
 
       channel->setChecked(!st->channelName().isEmpty());
-      midiAction->setChecked(!st->midiActionName().isEmpty());
+      midiAction->setChecked(!st->midiActionNames()->isEmpty());
 
       if (!st->channelName().isEmpty()) {
-            QList<QListWidgetItem*> wl = channelList
-               ->findItems(st->channelName(), Qt::MatchExactly);
+            QList<QListWidgetItem*> wl = channelList->findItems(st->channelName(), Qt::MatchExactly);
             if (!wl.isEmpty())
                   channelList->setCurrentRow(channelList->row(wl[0]));
             }
-      if (!st->midiActionName().isEmpty()) {
-            QList<QListWidgetItem*> wl = midiActionList
-               ->findItems(st->midiActionName(), Qt::MatchExactly);
-            if (!wl.isEmpty())
-                  midiActionList->setCurrentRow(midiActionList->row(wl[0]));
+      foreach(QString s, *st->midiActionNames()) {
+            QList<QListWidgetItem*> wl = midiActionList->findItems(s, Qt::MatchExactly);
+            foreach(QListWidgetItem* item, wl)
+                  item->setSelected(true);
             }
       connect(this, SIGNAL(accepted()), SLOT(saveValues()));
       }
@@ -146,8 +144,11 @@ void StaffTextProperties::saveValues()
                   staffText->setChannelName(i->text());
             }
       if (midiAction->isChecked()) {
-            QListWidgetItem* i = midiActionList->currentItem();
-            if (i)
-                  staffText->setMidiActionName(i->text());
+            staffText->midiActionNames()->clear();
+            for (int i = 0; i < midiActionList->count(); ++i) {
+                  QListWidgetItem* item = midiActionList->item(i);
+                  if (item->isSelected())
+                        staffText->midiActionNames()->append(item->text());
+                  }
             }
       }

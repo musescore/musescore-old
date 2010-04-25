@@ -38,7 +38,7 @@ class Lfq_u32;
 //---------------------------------------------------------
 
 class Aeolus : public Synth {
-      Lfq_u8* midi_queue;
+      Lfq_u8*   midi_queue;
       Lfq_u32*  note_queue;
 
       Audio* audio;
@@ -51,6 +51,8 @@ class Aeolus : public Synth {
       Aeolus();
       virtual ~Aeolus();
       virtual void init(int sampleRate);
+
+      virtual const char* name() const { return "Aeolus"; }
 
       virtual void setMasterTuning(double);
       virtual double masterTuning() const;

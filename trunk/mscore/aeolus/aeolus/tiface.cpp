@@ -138,12 +138,13 @@ void Tiface::handle_ifc_mcset (M_ifc_chconf *M)
 
 
 void Tiface::handle_ifc_retune (M_ifc_retune *M)
-{
-    printf ("Retuning Aeolus, A = %3.1lf Hz, %s (%s)\n",
+      {
+/*      printf ("Retuning Aeolus, A = %3.1lf Hz, %s (%s)\n",
 	    M->_freq,
 	    _initdata->_temped [M->_temp]._label,
 	    _initdata->_temped [M->_temp]._mnemo);
-}
+      */
+      }
 
 
 void Tiface::handle_ifc_grclr (M_ifc_ifelm *M)
@@ -165,13 +166,14 @@ void Tiface::handle_ifc_elset (M_ifc_ifelm *M)
 
 
 void Tiface::handle_ifc_elatt (M_ifc_ifelm *M)
-{
-    rewrite_label (_initdata->_groupd [M->_group]._ifelmd [M->_ifelm]._label);
-    printf ("Retuning %7s %-1s (%s)\n",
+      {
+      rewrite_label (_initdata->_groupd [M->_group]._ifelmd [M->_ifelm]._label);
+/*      printf ("Retuning %7s %-1s (%s)\n",
 	    _initdata->_groupd [M->_group]._label,
 	    _tempstr,
 	    _initdata->_groupd [M->_group]._ifelmd [M->_ifelm]._mnemo);
-}
+      */
+      }
 
 
 void Tiface::print_info (void)

@@ -167,15 +167,6 @@ void Aeolus::init(int /* samplerate */)
       ITC_ctrl itcc;
       char     s [1024];
 
-      //TODO: not crossplatform
-      char* p = getenv("HOME");
-      if (p)
-            sprintf(s, "%s/.aeolusrc", p);
-      else
-            strcpy(s, ".aeolusrc");
-      if (readconfig(s))
-            readconfig("/etc/aeolus.conf");
-      procoptions (ac, av, "On command line:");
       if (mlockall (MCL_CURRENT | MCL_FUTURE))
             fprintf (stderr, "Warning: memory lock failed.\n");
 
@@ -284,20 +275,52 @@ void Aeolus::play(const Event& event)
       int ch   = event.channel();
       int type = event.type();
       int m    = _midimap [ch] & 127;        // Keyboard and hold bits
+      int f    = (_midimap [ch] >> 12) & 7;     // Control enabled if (f & 4)
       if (type == ME_NOTEON) {
             int n = event.dataA();
             int v = event.dataB();
             if (v == 0) {   // note off
-                  if (midi_queue->write_avail () > 0) {
-	                  note_queue->write(0, ((n - 36) << 8) | m);
-                        note_queue->write_commit(1);
+                  if (n < 36)
+                        ;
+                  else if (n <= 96) {
+                        if (midi_queue->write_avail () > 0) {
+	                        note_queue->write(0, ((n - 36) << 8) | m);
+                              note_queue->write_commit(1);
+	                        }
 	                  }
                   }
             else {            // note on
-                  if (midi_queue->write_avail () > 0) {
-                        note_queue->write(0, (1 << 24) | ((n - 36) << 8) | m);
-                        note_queue->write_commit(1);
+                  if (n < 36)
+                        ;
+                  else if (n <= 96) {
+                        if (midi_queue->write_avail () > 0) {
+                              note_queue->write(0, (1 << 24) | ((n - 36) << 8) | m);
+                              note_queue->write_commit(1);
+                              }
                         }
+                  }
+            }
+      else if (type == ME_CONTROLLER) {
+            int p = event.dataA();
+            int v = event.dataB();
+            switch(p) {
+                  case MIDICTL_HOLD:
+                  case MIDICTL_ASOFF:
+                  case MIDICTL_ANOFF:
+                        break;
+                  case MIDICTL_BANK:
+                  case MIDICTL_IFELM:
+printf("IFELM\n");
+                        if (f & 4) {
+printf("   IFELM\n");
+                              if (midi_queue->write_avail() >= 3) {
+                                    midi_queue->write(0, 0xb0 | ch);
+                                    midi_queue->write(1, p);
+                                    midi_queue->write(2, v);
+                                    midi_queue->write_commit(3);
+                                    }
+                              }
+                        break;
                   }
             }
       }

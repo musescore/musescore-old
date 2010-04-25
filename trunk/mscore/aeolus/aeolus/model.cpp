@@ -366,9 +366,9 @@ void Model::proc_mesg (ITC_mesg *M)
 }
 
 
-void Model::proc_qmidi (void)
-{
-    int c, d, p, t, v;
+void Model::proc_qmidi()
+      {
+      int c, d, p, t, v;
 
     // Handle commands from the qmidi queue. These are coming
     // from either the midi thread (ALSA), or the audio thread
@@ -376,71 +376,71 @@ void Model::proc_qmidi (void)
     // messages are 3 bytes. All command have already been
     // checked at the sending side.
 
-    while (_qmidi->read_avail () >= 3)
-    {
-	t = _qmidi->read (0);
-	p = _qmidi->read (1);
-	v = _qmidi->read (2);
-	_qmidi->read_commit (3);
-      printf("Midi %x %x %x\n", t, p, v);
-	c = t & 0x0F;
-        d = (_midimap [c] >>  8) & 7;
-	switch (t & 0xF0)
-        {
-	case 0x90:
-	    // Program change from notes 24..33.
-	    set_state (_bank, p - 24);
-	    break;
+      while (_qmidi->read_avail () >= 3) {
+            t = _qmidi->read (0);
+            p = _qmidi->read (1);
+            v = _qmidi->read (2);
+            _qmidi->read_commit (3);
+printf("Midi %x %x %x\n", t, p, v);
+            c = t & 0x0F;
+            d = (_midimap [c] >>  8) & 7;
 
-	case 0xB0:
-	    // Controllers.
-            switch (p)
-	    {
-	    case MIDICTL_SWELL:
-		// Swell pedal
-                set_dipar (SRC_MIDI_PAR, d, 0, SWELL_MIN + v * (SWELL_MAX - SWELL_MIN) / 127.0f);
-                break;
+            switch (t & 0xF0) {
+                  case 0x90:
+                        // Program change from notes 24..33.
+                        set_state (_bank, p - 24);
+                        break;
 
-	    case MIDICTL_TFREQ:
-		// Tremulant frequency
-                set_dipar (SRC_MIDI_PAR, d, 1, TFREQ_MIN + v * (TFREQ_MAX - TFREQ_MIN) / 127.0f);
-                break;
+                  case 0xB0:
+                        // Controllers.
+                        switch (p) {
+                              case MIDICTL_SWELL:
+                     		      // Swell pedal
+                                    set_dipar (SRC_MIDI_PAR, d, 0, SWELL_MIN + v * (SWELL_MAX - SWELL_MIN) / 127.0f);
+                                    break;
 
-	    case MIDICTL_TMODD:
-		// Tremulant amplitude
-                set_dipar (SRC_MIDI_PAR, d, 2, TMODD_MIN + v * (TMODD_MAX - TMODD_MIN) / 127.0f);
-                break;
+                              case MIDICTL_TFREQ:
+                                    // Tremulant frequency
+                                    set_dipar (SRC_MIDI_PAR, d, 1, TFREQ_MIN + v * (TFREQ_MAX - TFREQ_MIN) / 127.0f);
+                                    break;
 
-            case MIDICTL_BANK:
-                // Preset bank.
- 	        if (v < NBANK) _bank = v;
-                break;
+                              case MIDICTL_TMODD:
+                                    // Tremulant amplitude
+                                    set_dipar (SRC_MIDI_PAR, d, 2, TMODD_MIN + v * (TMODD_MAX - TMODD_MIN) / 127.0f);
+                                    break;
 
-	    case MIDICTL_IFELM:
-		// Stop control.
-                if (v & 64)
-  	        {
-		    // Set mode or clear group.
-                    _sc_cmode = (v >> 4) & 3;
-                    _sc_group = v & 7;
-                    if (_sc_cmode == 0) clr_group (_sc_group);
-		}
-                else if (_sc_cmode)
-		{
-		    // Set, reset or toggle stop.
-                    set_ifelm (_sc_group, v & 31, _sc_cmode - 1);
-		}
-                break;
-	    }
-	    break;
+                              case MIDICTL_BANK:
+                                    // Preset bank.
+                                    if (v < NBANK)
+                                          _bank = v;
+                                    break;
 
-	case 0xC0:
-	    // Program change.
-	    if (p < NPRES) set_state (_bank, p);
-	    break;
-	}
-    }
-}
+                              case MIDICTL_IFELM:
+                                    // Stop control.
+                                    if (v & 64) {
+                                          // Set mode or clear group.
+                                         _sc_cmode = (v >> 4) & 3;
+                                         _sc_group = v & 7;
+printf("mode %d group %d\n", _sc_cmode, _sc_group);
+                                          if (_sc_cmode == 0)
+                                                clr_group (_sc_group);
+                                          }
+                                    else if (_sc_cmode) {
+                                          // Set, reset or toggle stop.
+                                          set_ifelm (_sc_group, v & 31, _sc_cmode - 1);
+                                          }
+                                    break;
+                                    }
+                              break;
+
+                  case 0xC0:
+	                  // Program change.
+	                  if (p < NPRES)
+                              set_state (_bank, p);
+                        break;
+                  }
+            }
+      }
 
 
 void Model::init_audio (void)
@@ -612,6 +612,8 @@ void Model::proc_rank (int g, int i, int comm)
 void Model::set_ifelm (int g, int i, int m)
       {
       Group* G = _group + g;
+
+printf("set_ifelm group %d stop %d %s\n", g, i, m == 0 ? "reset" : (m == 1 ? "set" : "reset"));
 
       if ((!_ready) || (g >= _ngroup) || (i >= G->_nifelm))
             return;
