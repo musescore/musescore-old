@@ -334,6 +334,8 @@ class Fluid : public Synth {
       ~Fluid();
       virtual void init(int sampleRate);
 
+      virtual const char* name() const { return "Fluid"; }
+
       virtual bool loadSoundFont(const QString& s);
       virtual QString soundFont() const;
 

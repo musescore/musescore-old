@@ -46,6 +46,8 @@ class Synth {
       virtual ~Synth() {}
       virtual void init(int sampleRate) = 0;
 
+      virtual const char* name() const = 0;
+
       virtual void setMasterTuning(double) {}
       virtual double masterTuning() const { return 440.0; }
 

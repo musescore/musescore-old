@@ -449,15 +449,16 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
             if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
                   continue;
             const StaffText* st = static_cast<const StaffText*>(e);
-            QString ma(st->midiActionName());
-            if (!ma.isEmpty()) {
+            int stick = 0;
+            foreach(const QString ma, *st->midiActionNames()) {
                   NamedEventList* nel = instr->midiAction(ma);
                   if (nel) {
                         foreach(Event* ev, nel->events) {
                               Event* event = new Event(*ev);
-                              int tick = st->tick() + tickOffset;
+                              int tick = st->tick() + tickOffset + stick;
                               event->setOntime(tick);
                               events->insertMulti(tick, event);
+                              ++stick;
                               }
                         }
                   }

@@ -269,7 +269,7 @@ void InstrumentTemplate::read(QDomElement e)
                         }
                   drumset->load(e);
                   }
-            else if (tag == "midiAction") {
+            else if (tag == "MidiAction") {
                   NamedEventList a;
                   a.read(e);
                   midiActions.append(a);

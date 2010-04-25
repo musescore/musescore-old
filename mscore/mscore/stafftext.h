@@ -32,7 +32,7 @@
 class StaffText : public Text  {
       Q_DECLARE_TR_FUNCTIONS(StaffText)
       QString _channelName;
-      QString _midiActionName;
+      QStringList _midiActionNames;
 
    public:
       StaffText(Score*);
@@ -44,9 +44,9 @@ class StaffText : public Text  {
       virtual void propertyAction(ScoreView*, const QString&);
 
       QString channelName() const                { return _channelName;      }
-      QString midiActionName() const             { return _midiActionName;   }
       void setChannelName(const QString& s)      { _channelName = s;         }
-      void setMidiActionName(const QString& s)   { _midiActionName = s;      }
+      QStringList* midiActionNames()             { return &_midiActionNames; }
+      const QStringList* midiActionNames() const { return &_midiActionNames; }
       };
 
 //---------------------------------------------------------
