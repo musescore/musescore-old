@@ -2802,6 +2802,7 @@ void Score::cmdHalfDuration()
       else
             changeCRlen(cr, d);
       _is.setDuration(d);
+      setPadState();
       nextInputPos(cr, false);
       }
 
@@ -2832,6 +2833,7 @@ void Score::cmdDoubleDuration()
       else
             changeCRlen(cr, d);
       _is.setDuration(d);
+      setPadState();
       nextInputPos(cr, false);
       }
 
