@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
 
   <Articulation>
@@ -4177,8 +4177,76 @@
         <clef staff="3">4</clef>
         <bracket>1</bracket>
         <channel>
-           <program>19</program>
+           <synti>Aeolus</synti>
+           <program>0</program>
            </channel>
+        <channel name="I">
+          <program value="0"/>
+          </channel>
+        <channel name="II">
+          <program value="1"/>
+          </channel>
+        <channel name="III">
+          <program value="2"/>
+          </channel>
+        <channel name="P">
+          <program value="3"/>
+          </channel>
+        <MidiAction name="Reset">
+           <controller ctrl="98" value="66"/>
+           </MidiAction>
+        <MidiAction name="Principal-8">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="0"/>
+           </MidiAction>
+        <MidiAction name="Principal-4">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="1"/>
+           </MidiAction>
+        <MidiAction name="Octave-1">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="2"/>
+           </MidiAction>
+        <MidiAction name="Quint-5-1/3">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="3"/>
+           </MidiAction>
+        <MidiAction name="Quint-2-2/3">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="4"/>
+           </MidiAction>
+        <MidiAction name="Tibia-8">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="5"/>
+           </MidiAction>
+        <MidiAction name="Celesta-8">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="6"/>
+           </MidiAction>
+        <MidiAction name="Flöte-8">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="7"/>
+           </MidiAction>
+        <MidiAction name="Flöte-4">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="8"/>
+           </MidiAction>
+        <MidiAction name="Flöte-2">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="9"/>
+           </MidiAction>
+        <MidiAction name="Cymbel">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="10"/>
+           </MidiAction>
+        <MidiAction name="Mixtur">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="11"/>
+           </MidiAction>
+        <MidiAction name="Trumpet">
+           <controller ctrl="98" value="98"/>
+           <controller ctrl="98" value="12"/>
+           </MidiAction>
         </instrument>
      <instrument>
         <name>Órgão Eletrônico</name>
