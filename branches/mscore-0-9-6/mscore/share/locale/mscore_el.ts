@@ -156,15 +156,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished">Αρπισμός</translation>
+        <translation>Αρπισμός</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished"/>
+        <translation>Τρέμολο</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished">Glissando</translation>
+        <translation>Glissando</translation>
     </message>
 </context>
 <context>
@@ -839,7 +839,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Alter</source>
-        <translation>Τροποποιώ</translation>
+        <translation>Alter</translation>
     </message>
 </context>
 <context>
@@ -6537,17 +6537,17 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Μορφή</translation>
+        <translation>Μορφή</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>πρώτη συγχορδία</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>δεύτερη συγχορδία</translation>
     </message>
 </context>
 <context>
@@ -8669,6 +8669,93 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Bass clef 15ma</source>
         <translation>Κλειδί του Φα 15ma</translation>
+    </message>
+</context>
+<context>
+    <name>drumset</name>
+    <message>
+        <source>Acoustic Bass Drum</source>
+        <translation>Ακουστική Ντράμς Μπάσο</translation>
+    </message>
+    <message>
+        <source>Bass Drum</source>
+        <translation>Μπάσο Ντράμς</translation>
+    </message>
+    <message>
+        <source>Side Stick</source>
+        <translation>Side Stick</translation>
+    </message>
+    <message>
+        <source>Snare (Acoustic)</source>
+        <translation>Snare (Acoustic)</translation>
+    </message>
+    <message>
+        <source>Snare (Electric)</source>
+        <translation>Snare (Electric)</translation>
+    </message>
+    <message>
+        <source>Tom 5</source>
+        <translation>Tom 5</translation>
+    </message>
+    <message>
+        <source>Hi-Hat Closed</source>
+        <translation>Hit-Hat Κλειστό</translation>
+    </message>
+    <message>
+        <source>Tom 4</source>
+        <translation>Tom 4</translation>
+    </message>
+    <message>
+        <source>Hi-Hat Pedal</source>
+        <translation>Hit-Hat Πεντάλ</translation>
+    </message>
+    <message>
+        <source>Tom 3</source>
+        <translation>Tom 3</translation>
+    </message>
+    <message>
+        <source>Hi-Hat Open</source>
+        <translation>Hit-Hat Ανοιχτό</translation>
+    </message>
+    <message>
+        <source>Tom 2</source>
+        <translation>Tom 2</translation>
+    </message>
+    <message>
+        <source>Tom 1</source>
+        <translation>Tom 1</translation>
+    </message>
+    <message>
+        <source>Crash 1</source>
+        <translation>Crash 1</translation>
+    </message>
+    <message>
+        <source>Tom</source>
+        <translation>Tom</translation>
+    </message>
+    <message>
+        <source>Ride</source>
+        <translation>Ride</translation>
+    </message>
+    <message>
+        <source>China</source>
+        <translation>China</translation>
+    </message>
+    <message>
+        <source>Ride (Bell)</source>
+        <translation>Ride (Bell)</translation>
+    </message>
+    <message>
+        <source>Tambourine</source>
+        <translation>Tambourine</translation>
+    </message>
+    <message>
+        <source>open high conga</source>
+        <translation>ανοιχτό high conga</translation>
+    </message>
+    <message>
+        <source>low conga</source>
+        <translation>χαμηλό conga</translation>
     </message>
 </context>
 <context>
