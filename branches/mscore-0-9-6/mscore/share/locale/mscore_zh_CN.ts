@@ -852,7 +852,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>small</source>
-        <translation>縮小的</translation>
+        <translation>缩小的</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -3126,7 +3126,7 @@ failed: </translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation>声音</translation>
+        <translation>声部</translation>
     </message>
     <message>
         <source>Preferences...</source>
@@ -3455,7 +3455,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Slur</source>
-        <translation>连音线</translation>
+        <translation>连句线</translation>
     </message>
     <message>
         <source>Crescendo</source>
@@ -3789,7 +3789,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Offset</source>
-        <translation>偏移</translation>
+        <translation>偏移量</translation>
     </message>
     <message>
         <source>Tuning</source>
@@ -5320,7 +5320,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>音符 / 休止符</translation>
+        <translation>和弦/休止符</translation>
     </message>
     <message>
         <source>Breath Segment</source>
@@ -5496,7 +5496,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>beam end</source>
-        <translation>共用符杠终点</translation>
+        <translation>符杠末尾</translation>
     </message>
     <message>
         <source>no beam</source>
@@ -5550,7 +5550,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation>起始为32分音符</translation>
+        <translation>开始 1/32</translation>
     </message>
     <message>
         <source>Segment:</source>
@@ -7265,7 +7265,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append Measure</source>
-        <translation>添加小节</translation>
+        <translation>追加小节</translation>
     </message>
     <message>
         <source>Append Measures...</source>
