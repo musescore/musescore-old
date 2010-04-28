@@ -11091,6 +11091,118 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>drumset</name>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="161"/>
+        <source>Acoustic Bass Drum</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="162"/>
+        <source>Bass Drum</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="163"/>
+        <source>Side Stick</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="164"/>
+        <source>Snare (Acoustic)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="165"/>
+        <source>Snare (Electric)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="166"/>
+        <source>Tom 5</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="167"/>
+        <source>Hi-Hat Closed</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="168"/>
+        <source>Tom 4</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="169"/>
+        <source>Hi-Hat Pedal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="170"/>
+        <source>Tom 3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="171"/>
+        <source>Hi-Hat Open</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="172"/>
+        <source>Tom 2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="173"/>
+        <source>Tom 1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="174"/>
+        <source>Crash 1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="175"/>
+        <source>Tom</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="176"/>
+        <source>Ride</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="177"/>
+        <source>China</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="178"/>
+        <location filename="../../mscore/drumset.cpp" line="180"/>
+        <location filename="../../mscore/drumset.cpp" line="181"/>
+        <location filename="../../mscore/drumset.cpp" line="182"/>
+        <location filename="../../mscore/drumset.cpp" line="183"/>
+        <source>Ride (Bell)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="179"/>
+        <source>Tambourine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="184"/>
+        <source>open high conga</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/drumset.cpp" line="185"/>
+        <source>low conga</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>elementName</name>
     <message>
         <location filename="../../mscore/element.cpp" line="77"/>

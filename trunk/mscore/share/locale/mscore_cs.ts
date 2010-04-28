@@ -2325,7 +2325,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Odstranit</translation>
+        <translation>Odebrat</translation>
     </message>
     <message>
         <source>Up</source>
@@ -8627,6 +8627,93 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Bass clef 15ma</source>
         <translation>Basový klíč 15ma</translation>
+    </message>
+</context>
+<context>
+    <name>drumset</name>
+    <message>
+        <source>Acoustic Bass Drum</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bass Drum</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Side Stick</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Snare (Acoustic)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Snare (Electric)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 5</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hi-Hat Closed</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 4</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hi-Hat Pedal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hi-Hat Open</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Crash 1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Ride</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>China</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Ride (Bell)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tambourine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>open high conga</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>low conga</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

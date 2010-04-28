@@ -26,16 +26,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visita&lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; para nuevas versiones y más información &lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Apoya MuseScore con&lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;tu donación&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicado bajo la GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt; &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt; p, li { white-space: pre-wrap; } &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visita &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; para nuevas versiones y más información &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Apoya MuseScore con &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;tu donación&lt;/span&gt;&lt;/a&gt;&lt;/p&gt; &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicado bajo la GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -105,7 +96,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up:</source>
-        <translation type="unfinished"/>
+        <translation>arriba:</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
@@ -151,11 +142,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished">Arpeggio</translation>
+        <translation>Arpegio</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished">Tremolo</translation>
+        <translation>Trémolo</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -949,7 +940,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"/>
+        <translation> golpes</translation>
     </message>
     <message>
         <source>Note Head Group</source>
@@ -1195,7 +1186,7 @@ p, li { white-space: pre-wrap; }
         <source>
 failed: </source>
         <translation>
-fallo: </translation>
+error: </translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
@@ -1396,7 +1387,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Amateur:</source>
-        <translation>Amateur:</translation>
+        <translation>Aficionado:</translation>
     </message>
     <message>
         <source>-</source>
@@ -1448,7 +1439,7 @@ fallo: </translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation>Tercera Aumentado</translation>
+        <translation>Tercera Aumentada</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
@@ -3315,15 +3306,15 @@ before closing?</source>
     </message>
     <message>
         <source>1 through stem</source>
-        <translation>1 atraves de la plica</translation>
+        <translation>1 a través de la plica</translation>
     </message>
     <message>
         <source>2 through stem</source>
-        <translation>2 atraves de la plica</translation>
+        <translation>2 a través de la plica</translation>
     </message>
     <message>
         <source>3 through stem</source>
-        <translation>3 atraves de la plica</translation>
+        <translation>3 a través de la plica</translation>
     </message>
     <message>
         <source>1 between notes</source>
@@ -3769,7 +3760,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>head index</source>
-        <translation>Indice de cabezas de notas</translation>
+        <translation>Índice de cabezas de notas</translation>
     </message>
     <message>
         <source>note head group</source>
@@ -3793,11 +3784,11 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>A tiempo</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>Fuera de tiempo</translation>
     </message>
 </context>
 <context>
@@ -4088,7 +4079,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>offset</source>
-        <translation>desplazamiento</translation>
+        <translation>Desplazamiento</translation>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
@@ -4793,7 +4784,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>dash (Pedal)</source>
-        <translation>línea discontínua (Pedal)</translation>
+        <translation>línea discontinua (Pedal)</translation>
     </message>
     <message>
         <source>tr (Trill)</source>
@@ -5084,7 +5075,7 @@ fallido: </translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation>No hay nada seleccionado. Transportar la partitura completa?</translation>
+        <translation>No hay nada seleccionado.  ¿Transportar la partitura completa?</translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
@@ -6372,7 +6363,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Abajo</translation>
+        <translation>Descendente</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -6503,17 +6494,17 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Formulario</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>Primer acorde</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>Segundo acorde</translation>
     </message>
 </context>
 <context>
@@ -8215,7 +8206,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Arriba</translation>
+        <translation>Subir</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -8223,19 +8214,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Up Octave</source>
-        <translation type="unfinished"/>
+        <translation>Subir una octava</translation>
     </message>
     <message>
         <source>Pitch up by an octave</source>
-        <translation type="unfinished"/>
+        <translation>Subir el tono una octava</translation>
     </message>
     <message>
         <source>Pitch up note in chord</source>
-        <translation type="unfinished"/>
+        <translation>Subir el tono de la nota del acorde</translation>
     </message>
     <message>
         <source>Up Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation>Subir la nota del acorde</translation>
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
@@ -8259,7 +8250,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Abajo</translation>
+        <translation>Bajar</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
@@ -8267,19 +8258,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down octave</source>
-        <translation type="unfinished"/>
+        <translation>Bajar una octava</translation>
     </message>
     <message>
         <source>Pitch down by an octave</source>
-        <translation type="unfinished"/>
+        <translation>Bajar el tono una octava</translation>
     </message>
     <message>
         <source>Pitch down note in chord</source>
-        <translation type="unfinished"/>
+        <translation>Bajar el tono de la nota del acorde</translation>
     </message>
     <message>
         <source>Down Note in Chord</source>
-        <translation type="unfinished"/>
+        <translation>Bajar la nota del acorde</translation>
     </message>
     <message>
         <source>Go to lower pitched note in chord</source>
@@ -8634,6 +8625,93 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Bass clef 15ma</source>
         <translation>Clave de Fa 15ma</translation>
+    </message>
+</context>
+<context>
+    <name>drumset</name>
+    <message>
+        <source>Acoustic Bass Drum</source>
+        <translation>Bombo</translation>
+    </message>
+    <message>
+        <source>Bass Drum</source>
+        <translation>Bombo acústico</translation>
+    </message>
+    <message>
+        <source>Side Stick</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Snare (Acoustic)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Snare (Electric)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 5</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hi-Hat Closed</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 4</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hi-Hat Pedal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hi-Hat Open</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Crash 1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Ride</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>China</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Ride (Bell)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tambourine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>open high conga</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>low conga</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9249,7 +9327,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole slash head</source>
-        <translation>redoda con cabeza de barra inclinada</translation>
+        <translation>redonda con cabeza de barra inclinada</translation>
     </message>
     <message>
         <source>half slash head</source>
