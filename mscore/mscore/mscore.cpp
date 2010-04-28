@@ -1864,11 +1864,12 @@ int main(int argc, char* av[])
                   exit(-1);
             }
 
-      if (converterMode) {
+/*      if (converterMode) {
             noSeq = true;
             seq = 0;
             }
       else {
+      */
             seq = new Seq();
             if (!noSeq) {
                   if (!seq->init()) {
@@ -1876,7 +1877,7 @@ int main(int argc, char* av[])
                         noSeq = true;
                         }
                   }
-            }
+//            }
       //
       // avoid font problems by overriding the environment
       //    fall back to "C" locale
