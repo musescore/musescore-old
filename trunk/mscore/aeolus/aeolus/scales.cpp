@@ -1,6 +1,6 @@
 /*
   Copyright (C) 2003-2010 Fons Adriaensen <fons@kokkinizita.net>
-    
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
@@ -22,83 +22,79 @@
 
 // Pythagorean
 
-float scale_pythagorean [12] =
-{
-    1.00000000,
-    1.06787109,
-    1.12500000,
-    1.18518519,
-    1.26562500,
-    1.33333333,
-    1.42382812,
-    1.50000000,
-    1.60180664,
-    1.68750000,
-    1.77777778,
-    1.89843750,
-};
+static float scale_pythagorean [12] = {
+      1.00000000,
+      1.06787109,
+      1.12500000,
+      1.18518519,
+      1.26562500,
+      1.33333333,
+      1.42382812,
+      1.50000000,
+      1.60180664,
+      1.68750000,
+      1.77777778,
+      1.89843750,
+      };
 
 
 // 1/4 comma meantone (Pietro Aaron, 1523)
 
-float scale_meanquart [12] = 
-{
-    1.0000000,
-    1.0449067,
-    1.1180340,
-    1.1962790,
-    1.2500000,
-    1.3374806,
-    1.3975425,
-    1.4953488,
-    1.5625000,
-    1.6718508,
-    1.7888544,
-    1.8691860
-};
+static float scale_meanquart [12] =  {
+      1.0000000,
+      1.0449067,
+      1.1180340,
+      1.1962790,
+      1.2500000,
+      1.3374806,
+      1.3975425,
+      1.4953488,
+      1.5625000,
+      1.6718508,
+      1.7888544,
+      1.8691860
+      };
 
 
 // Andreas Werckmeister III, 1681
 
-float scale_werckm3 [12] = 
-{
-    1.00000000,
-    1.05349794,
-    1.11740331,
-    1.18518519,
-    1.25282725,
-    1.33333333,
-    1.40466392,
-    1.49492696,
-    1.58024691,
-    1.67043633,
-    1.77777778,
-    1.87924088
-};
+static float scale_werckm3 [12] = {
+      1.00000000,
+      1.05349794,
+      1.11740331,
+      1.18518519,
+      1.25282725,
+      1.33333333,
+      1.40466392,
+      1.49492696,
+      1.58024691,
+      1.67043633,
+      1.77777778,
+      1.87924088
+      };
 
 
 // Kirnberger III
 
-float scale_kirnberg3 [12] = 
-{
-    1.00000000,
-    1.05349794,
-    1.11848107,
-    1.18518519,
-    1.25000021,
-    1.33333333,
-    1.40625000,
-    1.49542183,
-    1.58024691,
-    1.67176840,
-    1.77777778,
-    1.87500000
-};
+static float scale_kirnberg3 [12] =  {
+      1.00000000,
+      1.05349794,
+      1.11848107,
+      1.18518519,
+      1.25000021,
+      1.33333333,
+      1.40625000,
+      1.49542183,
+      1.58024691,
+      1.67176840,
+      1.77777778,
+      1.87500000
+      };
 
 
 // Well-tempered (Jacob Breetvelt)
 
-float scale_welltemp [12] =
+static float scale_welltemp [12] =
 {
     1.00000000,
     1.05468828,
@@ -117,7 +113,7 @@ float scale_welltemp [12] =
 
 // Equally Tempered
 
-float scale_equaltemp [12] =
+static float scale_equaltemp [12] =
 {
     1.00000000,
     1.05946309,
@@ -139,7 +135,7 @@ float scale_equaltemp [12] =
 
 // Vogel/Ahrend
 
-float scale_ahrend [12] =
+static float scale_ahrend [12] =
 {
     1.00000000,
     1.05064661,
@@ -158,7 +154,7 @@ float scale_ahrend [12] =
 
 // Vallotti
 
-float scale_vallotti [12] =
+static float scale_vallotti [12] =
 {
     1.00000000,
     1.05647631,
@@ -177,7 +173,7 @@ float scale_vallotti [12] =
 
 // Kellner
 
-float scale_kellner [12] =
+static float scale_kellner [12] =
 {
     1.00000000,
     1.05349794,
@@ -196,7 +192,7 @@ float scale_kellner [12] =
 
 // Lehman
 
-float scale_lehman [12] =
+static float scale_lehman [12] =
 {
     1.00000000,
     1.05826737,
@@ -214,7 +210,7 @@ float scale_lehman [12] =
 
 // Pythagorean
 
-float scale_pure_cfg [12] =
+static float scale_pure_cfg [12] =
 {
     1.00000000,
     1.04166667,
@@ -229,7 +225,6 @@ float scale_pure_cfg [12] =
     1.77777778,
     1.87500000,
 };
-
 
 
 struct temper scales [NSCALES] =

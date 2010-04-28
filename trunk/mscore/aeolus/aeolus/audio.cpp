@@ -18,54 +18,31 @@
 
 
 #include <math.h>
-#include <jack/midiport.h>
-#include "audio.h"
 #include "messages.h"
-
+#include "aeolus.h"
 
 //---------------------------------------------------------
-//   Audio
+//   start
 //---------------------------------------------------------
 
-Audio::Audio (const char *name, Lfq_u32 *qcomm) :
-    A_thread ("Audio"),
-    _appname (name),
-//    _qnote (qnote),
-    _qcomm (qcomm),
-//    _qmidi (0),
-    _running (false),
-    _abspri (0),
-    _relpri (0),
-    _nplay (0),
-    _fsamp (0),
-    _nasect (0),
-    _ndivis (0)
+void Aeolus::audio_start ()
       {
-      nout = 0;
-      }
-
-//---------------------------------------------------------
-//   ~Audio
-//---------------------------------------------------------
-
-Audio::~Audio()
-      {
+      _audio->_nasect = _nasect;
+      _audio->_fsamp  = _fsamp;
+      _audio->_fsize  = 0;
+      _audio->_instrpar = _audiopar;
       for (int i = 0; i < _nasect; i++)
-            delete _asectp [i];
-      for (int i = 0; i < _ndivis; i++)
-            delete _divisp [i];
-      _reverb.fini ();
+            _audio->_asectpar [i] = _asectp [i]->get_apar ();
       }
 
 //---------------------------------------------------------
-//   init_audio
+//   init
 //---------------------------------------------------------
 
-void Audio::init_audio()
+void Aeolus::audio_init(int sampleRate)
       {
-      int i;
-
-      _jmidi_pdata = 0;
+	_nplay   = 2;
+      _fsamp   = sampleRate;
       _audiopar [VOLUME]._val  = 0.32f;
       _audiopar [VOLUME]._min  = 0.00f;
       _audiopar [VOLUME]._max  = 1.00f;
@@ -85,7 +62,7 @@ void Audio::init_audio()
       _reverb.set_t60hi (_revtime * 0.50f, 3e3f);
 
       _nasect = NASECT;
-      for (i = 0; i < NASECT; i++) {
+      for (int i = 0; i < NASECT; i++) {
             _asectp [i] = new Asection ((float) _fsamp);
             _asectp [i]->set_size (_revsize);
             }
@@ -93,160 +70,102 @@ void Audio::init_audio()
       }
 
 //---------------------------------------------------------
-//   start
+//   proc_queue
+//    Execute command from the model
 //---------------------------------------------------------
 
-void Audio::start ()
+void Aeolus::proc_queue (uint32_t k)
       {
-      M_audio_info* M = new M_audio_info ();
-      M->_nasect = _nasect;
-      M->_fsamp  = _fsamp;
-      M->_fsize  = 0;
-      M->_instrpar = _audiopar;
-      for (int i = 0; i < _nasect; i++)
-            M->_asectpar [i] = _asectp [i]->get_apar ();
-      send_event (TO_MODEL, M);
+      int c = k >> 24;
+      int j = (k >> 16) & 255;
+      int i = (k >>  8) & 255;
+      int b = k & 255;
+
+      switch (c) {
+            case 0:
+                  // Single key off.
+                  key_off (i, b);
+                  break;
+
+            case 1:
+	            // Single key on.
+                  key_on (i, b);
+	            break;
+
+            case 2:
+                  // Conditional key off.
+                  cond_key_off (j, b);
+                  break;
+
+            case 3:
+                  // Conditional key on.
+                  cond_key_on (j, b);
+                  break;
+
+            case 4:
+                  // Clear bits in division mask.
+                  _divisp [j]->clr_div_mask (b);
+                  break;
+
+            case 5:
+                  // Set bits in division mask.
+                  _divisp [j]->set_div_mask (b);
+                  break;
+
+            case 6:
+                  // Clear bits in rank mask.
+                  _divisp [j]->clr_rank_mask (i, b);
+                  break;
+
+            case 7:
+                  // Set bits in rank mask.
+                  _divisp [j]->set_rank_mask (i, b);
+                  break;
+
+            case 8:
+                  // Hold off.
+                  _hold = KEYS_MASK;
+                  cond_key_off (HOLD_MASK, HOLD_MASK);
+                  break;
+
+            case 9:
+                  // Hold on.
+                  _hold = KEYS_MASK | HOLD_MASK;
+                  cond_key_on (j, HOLD_MASK);
+                  break;
+
+            case 16:
+                  // Tremulant on/off.
+                  if (b)
+                        _divisp [j]->trem_on ();
+                  else
+                        _divisp [j]->trem_off ();
+                  break;
+
+            case 17:
+                  // Per-division performance controllers.
+#if 0
+                  if (n < 2)
+                        return;
+//TODO                  u.i = Q->read (1);
+//TODO                  Q->read_commit (2);
+                  switch (i) {
+                        case 0: _divisp [j]->set_swell (u.f); break;
+                        case 1: _divisp [j]->set_tfreq (u.f); break;
+                        case 2: _divisp [j]->set_tmodd (u.f); break;
+                        break;
+                        }
+#endif
+                  break;
+            }
       }
-
-//---------------------------------------------------------
-//   thr_main
-//---------------------------------------------------------
-
-void Audio::thr_main()
-      {
-      }
-
-
-//---------------------------------------------------------
-//   init_jack
-//---------------------------------------------------------
-
-void Audio::init(int sampleRate)
-      {
-      _appname = "aeolus";
-	_nplay   = 2;
-      _fsamp   = sampleRate;
-      init_audio();
-
-      _policy = SCHED_OTHER;
-      _abspri = 60;
-      _relpri = 60 - 99;
-      }
-
-void Audio::proc_queue (Lfq_u32 *Q)
-{
-    uint32_t  k;
-    int       b, c, i, j, n;
-    union     { uint32_t i; float f; } u;
-
-    // Execute commands from the model thread (qcomm),
-    // or from the midi thread (qnote).
-
-    n = Q->read_avail ();
-    while (n > 0)
-    {
-	k = Q->read (0);
-        c = k >> 24;
-        j = (k >> 16) & 255;
-        i = (k >>  8) & 255;
-        b = k & 255;
-
-        switch (c)
-	{
-	case 0:
-	    // Single key off.
-            key_off (i, b);
-	    Q->read_commit (1);
-	    break;
-
-	case 1:
-	    // Single key on.
-            key_on (i, b);
-	    Q->read_commit (1);
-	    break;
-
-	case 2:
-	    // Conditional key off.
-	    cond_key_off (j, b);
-	    Q->read_commit (1);
-	    break;
-
-	case 3:
-	    // Conditional key on.
-	    cond_key_on (j, b);
-	    Q->read_commit (1);
-	    break;
-
-        case 4:
-	    // Clear bits in division mask.
-            _divisp [j]->clr_div_mask (b);
-	    Q->read_commit (1);
-            break;
-
-        case 5:
-	    // Set bits in division mask.
-            _divisp [j]->set_div_mask (b);
-	    Q->read_commit (1);
-            break;
-
-        case 6:
-	    // Clear bits in rank mask.
-            _divisp [j]->clr_rank_mask (i, b);
-	    Q->read_commit (1);
-            break;
-
-        case 7:
-	    // Set bits in rank mask.
-            _divisp [j]->set_rank_mask (i, b);
-	    Q->read_commit (1);
-            break;
-
-        case 8:
-	    // Hold off.
-            _hold = KEYS_MASK;
-	    cond_key_off (HOLD_MASK, HOLD_MASK);
-	    Q->read_commit (1);
-	    break;
-
-        case 9:
-	    // Hold on.
-            _hold = KEYS_MASK | HOLD_MASK;
-	    cond_key_on (j, HOLD_MASK);
-	    Q->read_commit (1);
-	    break;
-
-        case 16:
-	    // Tremulant on/off.
-            if (b) _divisp [j]->trem_on ();
-            else   _divisp [j]->trem_off ();
-	    Q->read_commit (1);
-            break;
-
-        case 17:
-	    // Per-division performance controllers.
-	    if (n < 2) return;
-            u.i = Q->read (1);
-            Q->read_commit (2);
-            switch (i)
- 	    {
-            case 0: _divisp [j]->set_swell (u.f); break;
-            case 1: _divisp [j]->set_tfreq (u.f); break;
-            case 2: _divisp [j]->set_tmodd (u.f); break;
-            break;
-	    }
-	}
-        n = Q->read_avail ();
-    }
-}
 
 //---------------------------------------------------------
 //   process
 //---------------------------------------------------------
 
-void Audio::process(unsigned nframes, float* lout, float* rout, int stride)
+void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride)
       {
-//      proc_queue (_qnote);
-      proc_queue (_qcomm);
       for (int n = 0; n < NNOTES; n++) {
             int m = _keymap [n];
             if (m & 128) {
@@ -299,52 +218,58 @@ void Audio::process(unsigned nframes, float* lout, float* rout, int stride)
                   nout = PERIOD;
                   k += PERIOD;
                   }
-            *lout++ += loutb[PERIOD - nout];
-            *rout++ += routb[PERIOD - nout];
+            *lout += loutb[PERIOD - nout];
+            *rout += routb[PERIOD - nout];
+            lout += stride;
+            rout += stride;
             --nout;
             --nframes;
             }
-      proc_mesg();
       }
 
+//---------------------------------------------------------
+//   newDivis
+//---------------------------------------------------------
 
-void Audio::proc_mesg (void)
-{
-    ITC_mesg *M;
+void Aeolus::newDivis(M_new_divis* X)
+      {
+      Division     *D = new Division (_asectp [X->_asect], (float) _fsamp);
+      D->set_div_mask (X->_dmask);
+      D->set_swell (X->_swell);
+      D->set_tfreq (X->_tfreq);
+      D->set_tmodd (X->_tmodd);
+      _divisp [_ndivis] = D;
+      _ndivis++;
+      }
 
-    while (get_event_nowait () != EV_TIME)
-    {
-	M = get_message ();
-        if (! M) continue;
+void Aeolus::cond_key_off (int m, int b)
+      {
+      unsigned char  *p;
+      int i;
+      for (i = 0, p = _keymap; i < NNOTES; i++, p++) {
+            if (*p & m) {
+                  *p &= ~b;
+                  *p |= 128;
+                  }
+            }
+      }
 
-        switch (M->type ())
-	{
-	    case MT_NEW_DIVIS:
-	    {
-	        M_new_divis  *X = (M_new_divis *) M;
-                Division     *D = new Division (_asectp [X->_asect], (float) _fsamp);
-                D->set_div_mask (X->_dmask);
-                D->set_swell (X->_swell);
-                D->set_tfreq (X->_tfreq);
-                D->set_tmodd (X->_tmodd);
-                _divisp [_ndivis] = D;
-                _ndivis++;
-                break;
-	    }
-	    case MT_CALC_RANK:
-	    case MT_LOAD_RANK:
-	    {
-	        M_def_rank *X = (M_def_rank *) M;
-                _divisp [X->_divis]->set_rank (X->_rank, X->_wave,  X->_sdef->_pan, X->_sdef->_del);
-                send_event (TO_MODEL, M);
-                M = 0;
-	        break;
-	    }
-	    case MT_AUDIO_SYNC:
-                send_event (TO_MODEL, M);
-                M = 0;
-		break;
-	}
-        if (M) M->recover ();
-    }
-}
+void Aeolus::cond_key_on (int m, int b) {
+            unsigned char  *p;
+            int i;
+            for (i = 0, p = _keymap; i < NNOTES; i++, p++) {
+                  if (*p & m) {
+                        *p |= b | 128;
+                        }
+                  }
+            }
+void Aeolus::key_off (int n, int b) {
+            _keymap [n] &= ~b;
+            _keymap [n] |= 128;
+            }
+
+void Aeolus::key_on (int n, int b) {
+            _keymap [n] |= b | 128;
+            }
+
+

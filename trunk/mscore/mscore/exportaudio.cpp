@@ -30,6 +30,7 @@
 #include "mscore.h"
 #include "part.h"
 #include "preferences.h"
+#include "seq.h"
 
 //---------------------------------------------------------
 //   saveAudio
@@ -50,8 +51,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             }
       static const int sampleRate = 44100;
 
-      Synth* synth = new FluidS::Fluid();
-      synth->init(sampleRate);
+      const QList<Synth*>& syntis = seq->getSyntis();
 
       if (soundFont.isEmpty()) {
             if (!preferences.soundFont.isEmpty())
@@ -60,14 +60,12 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                   soundFont = QString(getenv("DEFAULT_SOUNDFONT"));
             if (soundFont.isEmpty()) {
                   fprintf(stderr, "MuseScore: error: no soundfont configured\n");
-                  delete synth;
                   return false;
                   }
             }
-      bool rv = synth->loadSoundFont(soundFont);
+      bool rv = synthis[0]->loadSoundFont(soundFont);
       if (!rv) {
             fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
-            delete synth;
             return false;
             }
       EventMap events;
@@ -108,7 +106,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                               if (e == 0)
                                     continue;
                               e->setChannel(a.channel);
-                              synth->play(*e);
+                              seq->putEvent(*e);
                               }
                         }
                   }
@@ -131,7 +129,8 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                         if (f >= endTime)
                               break;
                         int n = lrint((f - playTime) * sampleRate);
-                        synth->process(n, l, r, stride);
+                        foreach(Synth* s, syntis)
+                              s->process(n, l, r, stride);
 
                         l         += n * stride;
                         r         += n * stride;
@@ -142,11 +141,12 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                               int channelIdx = e->channel();
                               Channel* c = _midiMapping[channelIdx].articulation;
                               if (!c->mute)
-                                    synth->play(*e);
+                                    synth->putEvent(*e);
                               }
                         }
                   if (frames) {
-                        synth->process(frames, l, r, stride);
+                        foreach(Synth* s, syntis)
+                              s->process(frames, l, r, stride);
                         playTime += double(frames)/double(sampleRate);
                         }
                   if (pass == 1) {

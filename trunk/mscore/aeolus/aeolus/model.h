@@ -21,13 +21,12 @@
 #define __MODEL_H
 
 
-#include <clthreads.h>
 #include "messages.h"
-#include "lfqueue.h"
 #include "addsynth.h"
 #include "rankwave.h"
 #include "global.h"
 
+class Aeolus;
 
 class Asect
 {
@@ -135,33 +134,12 @@ public:
 
 
 
-class Model : public A_thread
-{
-public:
+class Model
+      {
+//    virtual void thr_main (void);
 
-    Model (Lfq_u32      *qcomm,
-           Lfq_u8       *qmidi,
-	   uint16_t     *midimap,
-           const char   *appname,
-           const char   *stops,
-           const char   *instr,
-           const char   *waves,
-           bool          uhome);
-
-    virtual ~Model (void);
-
-    void terminate (void) {  put_event (EV_EXIT, 1); }
-    void set_ifelm (int g, int i, int m);
-    void clr_group (int g);
-
-private:
-
-    virtual void thr_main (void);
-
-    void init (void);
     void fini (void);
     void proc_mesg (ITC_mesg *M);
-//    void proc_qmidi (void);
     void init_audio (void);
     void init_iface (void);
     void init_ranks (int comm);
@@ -185,8 +163,9 @@ private:
     int  read_presets (void);
     int  write_presets (void);
 
-    Lfq_u32        *_qcomm;
-    Lfq_u8         *_qmidi;
+    Aeolus*     _aeolus;
+//    Lfq_u32        *_qcomm;
+//    Lfq_u8         *_qmidi;
     uint16_t       *_midimap;
     const char     *_appname;
     const char     *_stops;
@@ -215,10 +194,24 @@ private:
     int             _sc_group; // stop control group number
     Chconf          _chconf [8];
     Preset         *_preset [NBANK][NPRES];
-    M_audio_info   *_audio;
-    M_midi_info    *_midi;
-};
 
+   public:
+
+      Model (Aeolus* aeolus,
+         uint16_t     *midimap,
+         const char   *appname,
+         const char   *stops,
+         const char   *instr,
+         const char   *waves,
+         bool          uhome);
+
+      virtual ~Model();
+
+      void terminate() {  /* put_event (EV_EXIT, 1);*/ }
+      void set_ifelm (int g, int i, int m);
+      void clr_group (int g);
+      void init ();
+      };
 
 #endif
 

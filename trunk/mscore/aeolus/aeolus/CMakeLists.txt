@@ -19,15 +19,13 @@
 #=============================================================================
 
 set(CMAKE_CXX_FLAGS         "-include all.h -g -Wall -Wextra -Winvalid-pch -DVERSION=\"\\\"0.8.4\\\"\" -D_REENTRANT")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 add_library (aeolus STATIC
-      aeolus.cpp audio.cpp model.cpp slave.cpp addsynth.cpp scales.cpp
+      aeolus.cpp audio.cpp model.cpp addsynth.cpp scales.cpp
 	reverb.cpp asection.cpp division.cpp rankwave.cpp rngen.cpp exp2ap.cpp
-      lfqueue.cpp
-      a_thread.cpp itc_ctrl.cpp itc_ip1q.cpp itc_mesg.cpp p_thread.cpp textmsg.cpp
-      tiface.cpp
+#      tiface.cpp
   )
 
 set_target_properties( fluid

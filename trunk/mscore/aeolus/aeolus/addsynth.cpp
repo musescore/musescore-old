@@ -333,7 +333,7 @@ int Addsynth::save (const char* sdir)
 //   load
 //---------------------------------------------------------
 
-int Addsynth::load (const char *sdir)
+int Addsynth::load (const char* sdir)
       {
       FILE  *F;
       char   d [32];
@@ -396,5 +396,3 @@ int Addsynth::load (const char *sdir)
       fclose (F);
       return 0;
       }
-
-

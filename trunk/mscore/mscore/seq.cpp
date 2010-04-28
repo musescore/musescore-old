@@ -450,14 +450,14 @@ void Seq::stopTransport()
                   continue;
             Event ee(*e);
             ee.setVelo(0);
-            putEvent(ee, 0);
+            putEvent(ee);
             }
       // send sustain off
       Event e;
       e.setType(ME_CONTROLLER);
       e.setController(CTRL_SUSTAIN);
       e.setValue(0);
-      putEvent(e, 0);
+      putEvent(e);
 
       activeNotes.clear();
       emit toGui('0');
@@ -499,7 +499,7 @@ void Seq::playEvent(const Event* event, unsigned framePos)
 
             if (event->velo()) {
                   if (!mute) {
-                        putEvent(*event, framePos);
+                        putEvent(*event);
                         activeNotes.append(event);
                         }
                   }
@@ -510,14 +510,14 @@ void Seq::playEvent(const Event* event, unsigned framePos)
                               Event ee(*l);
                               ee.setVelo(0);
                               activeNotes.erase(k);
-                              putEvent(ee, framePos);
+                              putEvent(ee);
                               break;
                               }
                         }
                   }
             }
       else if (type == ME_CONTROLLER)
-            putEvent(*event, framePos);
+            putEvent(*event);
       }
 
 //---------------------------------------------------------
@@ -545,7 +545,7 @@ void Seq::processMessages()
                         }
                         break;
                   case SEQ_PLAY:
-                        putEvent(msg.event, 0);
+                        putEvent(msg.event);
                         break;
                   case SEQ_SEEK:
                         setPos(msg.data);
@@ -825,7 +825,7 @@ void Seq::setPos(int utick)
                   continue;
             Event e(*n);
             e.setVelo(0);
-            putEvent(e, 0);
+            putEvent(e);
             }
       activeNotes.clear();
 
@@ -1187,7 +1187,7 @@ void Seq::loadSoundFont(const QString& s)
 //   putEvent
 //---------------------------------------------------------
 
-void Seq::putEvent(const Event& event, int /*framePos*/)
+void Seq::putEvent(const Event& event)
       {
       Channel* c = cs->midiMapping()->at(event.channel()).articulation;
       int syntiIdx = c->synti;
