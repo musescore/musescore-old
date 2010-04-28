@@ -682,7 +682,7 @@
         <extended>1</extended>
         </instrument>
      <instrument>
-        <name>高音肖姆管<name>
+        <name>高音肖姆管</name>
         <short-name>Si. Sh.</short-name>
         <clef>0</clef>
         <aPitchRange>65-81</aPitchRange>
@@ -1424,7 +1424,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>上低音萨克斯<name>
+        <name>上低音萨克斯</name>
         <short-name>Bar. Sax.</short-name>
         <clef>0</clef>
         <transposeDiatonic>-12</transposeDiatonic>
