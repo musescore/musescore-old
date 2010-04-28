@@ -115,7 +115,6 @@ class Seq : public QObject {
       void playEvent(const Event*, unsigned framePos);
       void guiToSeq(const SeqMsg& msg);
       void startNote(const Channel&, int, int, double nt);
-      void putEvent(const Event&);
 
    private slots:
       void seqMessage(int msg);
@@ -184,6 +183,7 @@ class Seq : public QObject {
       const QList<Synth*>& getSyntis() const { return syntis; }
       int synthNameToIndex(const QString&) const;
       QString synthIndexToName(int) const;
+      void putEvent(const Event&);
       };
 
 extern Seq* seq;

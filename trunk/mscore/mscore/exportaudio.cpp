@@ -63,7 +63,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                   return false;
                   }
             }
-      bool rv = synthis[0]->loadSoundFont(soundFont);
+      bool rv = syntis[0]->loadSoundFont(soundFont);
       if (!rv) {
             fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
             return false;
@@ -141,7 +141,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                               int channelIdx = e->channel();
                               Channel* c = _midiMapping[channelIdx].articulation;
                               if (!c->mute)
-                                    synth->putEvent(*e);
+                                    seq->putEvent(*e);
                               }
                         }
                   if (frames) {
