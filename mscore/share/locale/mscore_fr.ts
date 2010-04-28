@@ -152,15 +152,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished">Arpège</translation>
+        <translation>Arpège</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished">Tremolo</translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished">Glissando</translation>
+        <translation>Glissando</translation>
     </message>
 </context>
 <context>
@@ -6511,17 +6511,17 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Form</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>premier accord</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>second accord</translation>
     </message>
 </context>
 <context>
@@ -8642,6 +8642,93 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Bass clef 15ma</source>
         <translation>Clef de Fa 15ma</translation>
+    </message>
+</context>
+<context>
+    <name>drumset</name>
+    <message>
+        <source>Acoustic Bass Drum</source>
+        <translation>Grosse Caisse Acoustique</translation>
+    </message>
+    <message>
+        <source>Bass Drum</source>
+        <translation>Grosse Caisse</translation>
+    </message>
+    <message>
+        <source>Side Stick</source>
+        <translation>Coup de baguette sur côté caisse claire</translation>
+    </message>
+    <message>
+        <source>Snare (Acoustic)</source>
+        <translation>Caisse Claire Acoustique</translation>
+    </message>
+    <message>
+        <source>Snare (Electric)</source>
+        <translation>Caisse Claire Electrique</translation>
+    </message>
+    <message>
+        <source>Tom 5</source>
+        <translation>Tom 5</translation>
+    </message>
+    <message>
+        <source>Hi-Hat Closed</source>
+        <translation>Charleston Fermé</translation>
+    </message>
+    <message>
+        <source>Tom 4</source>
+        <translation>Tom 4</translation>
+    </message>
+    <message>
+        <source>Hi-Hat Pedal</source>
+        <translation>Pedale du Charleston</translation>
+    </message>
+    <message>
+        <source>Tom 3</source>
+        <translation>Tom 3</translation>
+    </message>
+    <message>
+        <source>Hi-Hat Open</source>
+        <translation>Charleston Ouvert</translation>
+    </message>
+    <message>
+        <source>Tom 2</source>
+        <translation>Tom 2</translation>
+    </message>
+    <message>
+        <source>Tom 1</source>
+        <translation>Tom 1</translation>
+    </message>
+    <message>
+        <source>Crash 1</source>
+        <translation>Crash 1</translation>
+    </message>
+    <message>
+        <source>Tom</source>
+        <translation>Tom</translation>
+    </message>
+    <message>
+        <source>Ride</source>
+        <translation>Ride</translation>
+    </message>
+    <message>
+        <source>China</source>
+        <translation>China</translation>
+    </message>
+    <message>
+        <source>Ride (Bell)</source>
+        <translation>Ride (Cloche)</translation>
+    </message>
+    <message>
+        <source>Tambourine</source>
+        <translation>Tambourin</translation>
+    </message>
+    <message>
+        <source>open high conga</source>
+        <translation>Conga Haut Ouvert</translation>
+    </message>
+    <message>
+        <source>low conga</source>
+        <translation>Conga Bas</translation>
     </message>
 </context>
 <context>

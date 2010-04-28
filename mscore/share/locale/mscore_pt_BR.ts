@@ -151,15 +151,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished">Arpejo</translation>
+        <translation>Arpejo</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished">Trêmulo</translation>
+        <translation>Trêmulo</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished">Glissando</translation>
+        <translation>Glissando</translation>
     </message>
 </context>
 <context>
@@ -6509,17 +6509,17 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulário</translation>
+        <translation>Formulário</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>primeiroAcorde</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>segundoAcorde</translation>
     </message>
 </context>
 <context>
@@ -8640,6 +8640,93 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Bass clef 15ma</source>
         <translation>Clave de Fá 15ma</translation>
+    </message>
+</context>
+<context>
+    <name>drumset</name>
+    <message>
+        <source>Acoustic Bass Drum</source>
+        <translation>Bumbo Acústico</translation>
+    </message>
+    <message>
+        <source>Bass Drum</source>
+        <translation>Bumbo</translation>
+    </message>
+    <message>
+        <source>Side Stick</source>
+        <translation>Aro</translation>
+    </message>
+    <message>
+        <source>Snare (Acoustic)</source>
+        <translation>Caixa (Acústica)</translation>
+    </message>
+    <message>
+        <source>Snare (Electric)</source>
+        <translation>Caixa (Elétrica)</translation>
+    </message>
+    <message>
+        <source>Tom 5</source>
+        <translation>Tom 5</translation>
+    </message>
+    <message>
+        <source>Hi-Hat Closed</source>
+        <translation>Chimbau Fechado</translation>
+    </message>
+    <message>
+        <source>Tom 4</source>
+        <translation>Tom 4</translation>
+    </message>
+    <message>
+        <source>Hi-Hat Pedal</source>
+        <translation>Pedal de Chimbau</translation>
+    </message>
+    <message>
+        <source>Tom 3</source>
+        <translation>Tom 3</translation>
+    </message>
+    <message>
+        <source>Hi-Hat Open</source>
+        <translation>Chimbau Aberto</translation>
+    </message>
+    <message>
+        <source>Tom 2</source>
+        <translation>Tom 2</translation>
+    </message>
+    <message>
+        <source>Tom 1</source>
+        <translation>Tom 1</translation>
+    </message>
+    <message>
+        <source>Crash 1</source>
+        <translation>Prato de Ataque</translation>
+    </message>
+    <message>
+        <source>Tom</source>
+        <translation>Tom</translation>
+    </message>
+    <message>
+        <source>Ride</source>
+        <translation>Prato de Condução</translation>
+    </message>
+    <message>
+        <source>China</source>
+        <translation>Prato Chinês</translation>
+    </message>
+    <message>
+        <source>Ride (Bell)</source>
+        <translation>Ride (Bell)</translation>
+    </message>
+    <message>
+        <source>Tambourine</source>
+        <translation>Pandeiro</translation>
+    </message>
+    <message>
+        <source>open high conga</source>
+        <translation>Conga Aguda Aberta</translation>
+    </message>
+    <message>
+        <source>low conga</source>
+        <translation>Conga Grave</translation>
     </message>
 </context>
 <context>

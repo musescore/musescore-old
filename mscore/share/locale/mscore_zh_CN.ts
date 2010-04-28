@@ -79,7 +79,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>MIDI 命令</translation>
+        <translation>Midi 命令</translation>
     </message>
 </context>
 <context>
@@ -848,7 +848,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>和弦属性</translation>
+        <translation>音符组属性</translation>
     </message>
     <message>
         <source>small</source>
@@ -856,7 +856,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>附加前置间隔 </translation>
+        <translation>附加前缀间隔 </translation>
     </message>
     <message>
         <source>sp</source>
@@ -865,7 +865,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>附加的后缀间隔</translation>
+        <translation>附加后缀间隔</translation>
     </message>
     <message>
         <source>stem direction</source>
@@ -906,7 +906,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>stemless</source>
-        <translation>无符干的</translation>
+        <translation>无符干</translation>
     </message>
     <message>
         <source>velocity type</source>
@@ -1116,7 +1116,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>力度：</translation>
+        <translation>力度:</translation>
     </message>
     <message>
         <source>staff</source>
@@ -1195,7 +1195,7 @@ p, li { white-space: pre-wrap; }
         <source>
 failed: </source>
         <translation>
-失败： </translation>
+失败: </translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
@@ -1218,7 +1218,7 @@ failed: </source>
     </message>
     <message>
         <source>Name:</source>
-        <translation>名称：</translation>
+        <translation>名称:</translation>
     </message>
     <message>
         <source>Note Head:</source>
@@ -1348,7 +1348,7 @@ failed: </source>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore：编辑 谱表/分谱 属性</translation>
+        <translation>MuseScore: 编辑 谱表/分谱 属性</translation>
     </message>
     <message>
         <source>Staff Properties</source>
@@ -1384,7 +1384,7 @@ failed: </source>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>无符干的</translation>
+        <translation>无符干</translation>
     </message>
     <message>
         <source>Invisible</source>
@@ -2400,7 +2400,7 @@ failed: </translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore：写入样式</translation>
+        <translation>MuseScore：保存样式</translation>
     </message>
     <message>
         <source>MuseScore: Load Instrument List</source>
@@ -2465,7 +2465,7 @@ failed: </translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>将拍号加入面板</translation>
+        <translation>将拍号添加到面板</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2503,7 +2503,7 @@ failed: </translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>宽度：</translation>
+        <translation>宽度:</translation>
     </message>
     <message>
         <source>Line style:</source>
@@ -2519,7 +2519,7 @@ failed: </translation>
     </message>
     <message>
         <source>dot</source>
-        <translation>附点</translation>
+        <translation>················ (点划线)</translation>
     </message>
     <message>
         <source>dash dot</source>
@@ -2543,7 +2543,7 @@ failed: </translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation>开始</translation>
+        <translation>起始</translation>
     </message>
     <message>
         <source>...</source>
@@ -2715,7 +2715,7 @@ failed: </translation>
     <name>MeasureProperties</name>
     <message>
         <source>visible</source>
-        <translation>设为显示</translation>
+        <translation>可见的</translation>
     </message>
     <message>
         <source>stemless</source>
@@ -2809,15 +2809,15 @@ failed: </translation>
     <name>MeasuresDialogBase</name>
     <message>
         <source>Mscore: Append Measures</source>
-        <translation>MuseScore：扩充小节</translation>
+        <translation>MuseScore：追加小节</translation>
     </message>
     <message>
         <source>Append empty measures:</source>
-        <translation>扩充空白小节：</translation>
+        <translation>追加空白小节：</translation>
     </message>
     <message>
         <source>Number of measures to append</source>
-        <translation>扩充的小节数</translation>
+        <translation>追加小节个数</translation>
     </message>
     <message>
         <source>OK</source>
@@ -3010,7 +3010,7 @@ failed: </translation>
     </message>
     <message>
         <source>Brackets</source>
-        <translation>方括号</translation>
+        <translation>连谱号</translation>
     </message>
     <message>
         <source>Accidentals</source>
@@ -3114,7 +3114,7 @@ failed: </translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>输入音符</translation>
+        <translation>音符输入</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
@@ -3305,7 +3305,7 @@ before closing?</source>
     </message>
     <message>
         <source>Search</source>
-        <translation>搜索</translation>
+        <translation>查找</translation>
     </message>
     <message>
         <source>MuseScore: failure</source>
@@ -3867,7 +3867,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Space</source>
-        <translation>间隔</translation>
+        <translation>线间隔</translation>
     </message>
     <message>
         <source>mm</source>
@@ -5687,7 +5687,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>System Flag</source>
-        <translation>谱表组标记</translation>
+        <translation>谱表组标志</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -5767,7 +5767,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Type:</source>
-        <translation>类型：</translation>
+        <translation>单位：</translation>
     </message>
     <message>
         <source>Sine</source>
@@ -6560,7 +6560,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>relation</source>
-        <translation>关系</translation>
+        <translation>关联</translation>
     </message>
     <message>
         <source>nothing</source>
@@ -6901,7 +6901,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch Spell</source>
-        <translation>音高拼写</translation>
+        <translation>音高修正</translation>
     </message>
     <message>
         <source>Unison Above</source>
@@ -7177,7 +7177,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>right+shift</source>
-        <translation>右边shift</translation>
+        <translation>right+shift</translation>
     </message>
     <message>
         <source>select to end of measure</source>
@@ -7185,7 +7185,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>right+ctrl+shift</source>
-        <translation>右边ctrl+shift</translation>
+        <translation>right+ctrl+shift</translation>
     </message>
     <message>
         <source>select to beginning of line</source>
@@ -7269,7 +7269,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append Measures...</source>
-        <translation>添加多个小节...</translation>
+        <translation>追加多个小节...</translation>
     </message>
     <message>
         <source>Insert Measure</source>
@@ -7289,11 +7289,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation>添加水平框</translation>
+        <translation>追加水平框</translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation>添加垂直框</translation>
+        <translation>追加垂直框</translation>
     </message>
     <message>
         <source>Duplet</source>
@@ -8329,11 +8329,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append measure</source>
-        <translation>添加小节</translation>
+        <translation>追加小节</translation>
     </message>
     <message>
         <source>Append measures</source>
-        <translation>添加多个小节</translation>
+        <translation>追加多个小节</translation>
     </message>
     <message>
         <source>Insert measure</source>
@@ -8504,7 +8504,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mordent</source>
-        <translation>漣音</translation>
+        <translation>波音</translation>
     </message>
     <message>
         <source>prallprall</source>
@@ -8645,6 +8645,93 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Bass clef 15ma</source>
         <translation>倍高八度 低音谱号</translation>
+    </message>
+</context>
+<context>
+    <name>drumset</name>
+    <message>
+        <source>Acoustic Bass Drum</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bass Drum</source>
+        <translation>低音鼓</translation>
+    </message>
+    <message>
+        <source>Side Stick</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Snare (Acoustic)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Snare (Electric)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 5</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hi-Hat Closed</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 4</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hi-Hat Pedal</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 3</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hi-Hat Open</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 2</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom 1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Crash 1</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tom</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Ride</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>China</source>
+        <translation>中国</translation>
+    </message>
+    <message>
+        <source>Ride (Bell)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Tambourine</source>
+        <translation>铃鼓</translation>
+    </message>
+    <message>
+        <source>open high conga</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>low conga</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9532,7 +9619,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>varied coda</source>
-        <translation>多样尾声</translation>
+        <translation>变化尾声</translation>
     </message>
     <message>
         <source>rcomma</source>
