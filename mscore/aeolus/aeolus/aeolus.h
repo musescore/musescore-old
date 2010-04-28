@@ -27,26 +27,60 @@ class Event;
 #include "stdint.h"
 #include "synti.h"
 
-class Audio;
+#include "asection.h"
+#include "division.h"
+#include "reverb.h"
+#include "global.h"
+
 class Model;
-class Slave;
-class Lfq_u8;
-class Lfq_u32;
+class M_audio_info;
+class M_new_divis;
 
 //---------------------------------------------------------
 //   Synth
 //---------------------------------------------------------
 
 class Aeolus : public Synth {
-      Lfq_u8*   midi_queue;
-
-      Audio* audio;
       Model* model;
-      Slave* slave;
       QList<MidiPatch*> patchList;
       uint16_t _midimap [16];
-      int _sc_cmode; // stop control command mode
-      int _sc_group; // stop control group number
+      int _sc_cmode;          // stop control command mode
+      int _sc_group;          // stop control group number
+
+      enum { VOLUME, REVSIZE, REVTIME, STPOSIT };
+
+      volatile bool   _running;
+      int             _hold;
+      int             _nplay;
+      unsigned int    _fsamp;
+      int             _nasect;
+      int             _ndivis;
+      Asection       *_asectp [NASECT];
+
+      Division       *_divisp [NDIVIS];
+      Reverb          _reverb;
+      unsigned char   _keymap [NNOTES];
+      Fparm           _audiopar [4];
+      float           _revsize;
+      float           _revtime;
+
+      int nout;
+      float routb[PERIOD];
+      float loutb[PERIOD];
+
+      M_audio_info* _audio;
+
+      void proc_synth(int);
+      void cond_key_off (int m, int b);
+      void cond_key_on (int m, int b);
+
+      void  audio_init(int sampleRate);
+      void  audio_start();
+
+      void key_off (int n, int b);
+      void key_on (int n, int b);
+      void newDivis(M_new_divis* X);
+      void proc_queue(uint32_t);
 
    public:
       Aeolus();
@@ -71,6 +105,8 @@ class Aeolus : public Synth {
 
       virtual double effectParameter(int /*effect*/, int /*parameter*/);
       virtual void setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ );
+
+      friend class Model;
       };
 
 #endif

@@ -25,8 +25,9 @@
 #include "model.h"
 #include "scales.h"
 #include "global.h"
+#include "aeolus.h"
 
-Divis::Divis (void) :
+Divis::Divis () :
     _flags (0),
     _dmask (0),
     _nrank (0)
@@ -67,17 +68,16 @@ Group::Group (void) :
 }
 
 
-Model::Model (Lfq_u32      *qcomm,
-              Lfq_u8       *qmidi,
+Model::Model (Aeolus* a,
 	      uint16_t     *midimap,
               const char   *appname,
               const char   *stops,
               const char   *instr,
               const char   *waves,
               bool          uhome) :
-    A_thread ("Model"),
-    _qcomm (qcomm),
-    _qmidi (qmidi),
+    _aeolus(a),
+//    _qcomm (qcomm),
+//    _qmidi (qmidi),
     _midimap (midimap),
     _appname (appname),
     _stops (stops),
@@ -91,29 +91,26 @@ Model::Model (Lfq_u32      *qcomm,
     _bank (0),
     _pres (0),
     _sc_cmode (0),
-    _sc_group (0),
-    _audio (0),
-    _midi (0)
-{
-    sprintf (_instr, "%s/%s", stops, instr);
-    _waves = waves;
-    memset (_midimap, 0, 16 * sizeof (uint16_t));
-    memset (_preset, 0, NBANK * NPRES * sizeof (Preset *));
-}
+    _sc_group (0)
+      {
+      sprintf (_instr, "%s/%s", stops, instr);
+      _waves = waves;
+      memset (_midimap, 0, 16 * sizeof (uint16_t));
+      memset (_preset, 0, NBANK * NPRES * sizeof (Preset *));
+      }
 
 
 Model::~Model (void)
-{
-    if (_audio) _audio->recover ();
-    if (_midi)  _midi->recover ();
-}
+      {
+      }
 
 
+#if 0
 void Model::thr_main (void)
       {
       int E;
 
-      init();
+//      init();
       set_time(0);
       inc_time(100000);
       while ((E = get_event_timed ()) != EV_EXIT) {
@@ -141,11 +138,18 @@ void Model::thr_main (void)
       fini ();
       send_event (EV_EXIT, 1);
       }
+#endif
+
 
 void Model::init()
       {
       read_instr ();
       read_presets ();
+
+      init_audio ();
+      init_iface ();
+      init_ranks (MT_LOAD_RANK);
+      init_ranks (MT_SAVE_RANK);
       }
 
 
@@ -160,10 +164,11 @@ void Model::fini()
 
 void Model::proc_mesg (ITC_mesg *M)
       {
+#if 0
       // Handle commands from other threads, including
       // the user interface.
 
-//      printf("proc_mesg   ===%ld\n", M->type());
+      printf("proc_mesg   ===%ld\n", M->type());
 
       switch (M->type ()) {
             case MT_IFC_ELCLR:
@@ -175,12 +180,11 @@ void Model::proc_mesg (ITC_mesg *M)
                   set_ifelm (X->_group, X->_ifelm, X->type () - MT_IFC_ELCLR);
                   break;
                   }
-    case MT_IFC_ELATT:
-    {
-	send_event (TO_IFACE, M);
-	M = 0;
-	break;
-    }
+      case MT_IFC_ELATT:
+            send_event(TO_IFACE, M);
+            M = 0;
+            break;
+
     case MT_IFC_GRCLR:
     {
 	// Reset a group of stops.
@@ -321,37 +325,14 @@ void Model::proc_mesg (ITC_mesg *M)
 	save ();
         break;
 
-    case MT_LOAD_RANK:
-    case MT_CALC_RANK:
-    {
-	// Load a rank into a division.
-        M_def_rank *X = (M_def_rank *) M;
-        _divis [X->_divis]._ranks [X->_rank]._wave = X->_wave;
-	break;
-    }
-    case MT_AUDIO_INFO:
-	// Initialisation info from audio thread.
-        _audio = (M_audio_info *) M;
-        M = 0;
-        if (_midi)
-	{
-            init_audio ();
-            init_iface ();
-            init_ranks (MT_LOAD_RANK);
-	}
-	break;
-
-    case MT_MIDI_INFO:
-	// Initialisation info from midi thread.
-        _midi = (M_midi_info *) M;
-        M = 0;
-//        if (_audio)
-//	{
-            init_audio ();
-            init_iface ();
-            init_ranks (MT_LOAD_RANK);
-//	}
-	break;
+            case MT_LOAD_RANK:
+            case MT_CALC_RANK:
+                  {
+                  // Load a rank into a division.
+                  M_def_rank *X = (M_def_rank *) M;
+                  _divis [X->_divis]._ranks [X->_rank]._wave = X->_wave;
+                  break;
+                  }
 
     case MT_AUDIO_SYNC:
 	// Wavetable calculation done.
@@ -363,6 +344,7 @@ void Model::proc_mesg (ITC_mesg *M)
         fprintf (stderr, "Model: unexpected message, type = %ld\n", M->type ());
     }
     if (M) M->recover ();
+#endif
 }
 
 
@@ -429,23 +411,23 @@ printf("Midi %x %x %x\n", t, p, v);
 #endif
 
 void Model::init_audio (void)
-{
-    int          d;
-    Divis        *D;
-    M_new_divis  *M;
+      {
+      int d;
+      Divis        *D;
+      M_new_divis  *M;
 
-    for (d = 0, D = _divis; d < _ndivis; d++, D++)
-    {
-        M = new M_new_divis ();
-        M->_flags = D->_flags;
-        M->_dmask = D->_dmask;
-        M->_asect = D->_asect;
-        M->_swell = D->_param [Divis::SWELL]._val;
-        M->_tfreq = D->_param [Divis::TFREQ]._val;
-        M->_tmodd = D->_param [Divis::TMODD]._val;
-        send_event (TO_AUDIO, M);
-    }
-}
+      for (d = 0, D = _divis; d < _ndivis; d++, D++) {
+            M = new M_new_divis ();
+            M->_flags = D->_flags;
+            M->_dmask = D->_dmask;
+            M->_asect = D->_asect;
+            M->_swell = D->_param [Divis::SWELL]._val;
+            M->_tfreq = D->_param [Divis::TFREQ]._val;
+            M->_tmodd = D->_param [Divis::TMODD]._val;
+            _aeolus->newDivis(M);
+            // send_event (TO_AUDIO, M);
+            }
+      }
 
 
 void Model::init_iface (void)
@@ -461,8 +443,8 @@ void Model::init_iface (void)
     M->_waves  = _waves;
     M->_instr  = _instr;
     M->_appid  = _appname;
-    M->_client = _midi->_client;
-    M->_ipport = _midi->_ipport;
+    M->_client = 0;     // _midi->_client;
+    M->_ipport = 0;     // _midi->_ipport;
     M->_nasect = _nasect;
     M->_nkeybd = _nkeybd;
     M->_ndivis = _ndivis;
@@ -498,17 +480,18 @@ void Model::init_iface (void)
 	M->_temped [i]._label = scales [i]._label;
 	M->_temped [i]._mnemo = scales [i]._mnemo;
     }
+#if 0
     send_event (TO_IFACE, M);
 
     for (j = 0; j < 4; j++)
     {
-        send_event (TO_IFACE, new M_ifc_aupar (0, -1, j, _audio->_instrpar [j]._val));
+        send_event (TO_IFACE, new M_ifc_aupar (0, -1, j, _aeolus->_instrpar [j]._val));
     }
     for (i = 0; i < _nasect; i++)
     {
 	for (j = 0; j < 5; j++)
 	{
-	    send_event (TO_IFACE, new M_ifc_aupar (0, i, j, _audio->_asectpar [i][j]._val));
+	    send_event (TO_IFACE, new M_ifc_aupar (0, i, j, _aeolus->_audio->_asectpar [i][j]._val));
 	}
     }
     for (i = 0; i < _ndivis; i++)
@@ -518,6 +501,7 @@ void Model::init_iface (void)
 	    send_event (TO_IFACE, new M_ifc_dipar (0, i, j, _divis [i]._param [j]._val));
 	}
     }
+#endif
     set_mconf (0, _chconf [0]._bits);
 }
 
@@ -526,62 +510,56 @@ void Model::init_ranks (int comm)
       {
       _count++;
       _ready = false;
-      send_event (TO_IFACE, new M_ifc_retune (_fbase, _itemp));
+//WS      send_event (TO_IFACE, new M_ifc_retune (_fbase, _itemp));
 
       for (int g = 0; g < _ngroup; g++) {
             Group* G = _group + g;
             for (int i = 0; i < G->_nifelm; i++)
                   proc_rank (g, i, comm);
             }
-      send_event (TO_SLAVE, new ITC_mesg (MT_AUDIO_SYNC));
+//WS        send_event (TO_IFACE, new ITC_mesg (MT_IFC_READY));
+        _ready = true;
       }
 
 
 void Model::proc_rank (int g, int i, int comm)
-{
-    int         d, r;
-    M_def_rank  *M;
-    Ifelm       *I;
-    Rank        *R;
+      {
+      Ifelm* I = _group [g]._ifelms + i;
+      if ((I->_type == Ifelm::DIVRANK) || (I->_type == Ifelm::KBDRANK)) {
+            int d = (I->_action0 >> 16) & 255;
+            int r = (I->_action0 >>  8) & 255;
+            Rank* R = _divis [d]._ranks + r;
+            if (comm == MT_SAVE_RANK) {
+                  if (R->_wave->modif ()) {
+                        R->_wave->save(_waves, R->_sdef, _aeolus->_fsamp,
+                           _fbase, scales[_itemp]._data);
+                        }
+                  }
+            else if (R->_count != _count) {
+                  R->_count = _count;
+                  M_def_rank* M = new M_def_rank (comm);
+                  M->_divis = d;
+                  M->_rank  = r;
+                  M->_group = g;
+                  M->_ifelm = i;
+                  M->_fsamp = _aeolus->_fsamp;
+                  M->_fbase = _fbase;
+                  M->_scale = scales [_itemp]._data;
+                  M->_sdef  = R->_sdef;
+                  M->_wave  = R->_wave;
+                  M->_path  = _waves;
 
-    I = _group [g]._ifelms + i;
-    if ((I->_type == Ifelm::DIVRANK) || (I->_type == Ifelm::KBDRANK))
-    {
-        d = (I->_action0 >> 16) & 255;
-        r = (I->_action0 >>  8) & 255;
-        R = _divis [d]._ranks + r;
-        if (comm == MT_SAVE_RANK)
-        {
-	    if (R->_wave->modif ())
-	    {
-		M = new M_def_rank (comm);
-   	        M->_fsamp = _audio->_fsamp;
-	        M->_fbase = _fbase;
-	        M->_scale = scales [_itemp]._data;
-	        M->_sdef  = R->_sdef;
-	        M->_wave  = R->_wave;
-  	        M->_path  = _waves;
-	        send_event (TO_SLAVE, M);
-	    }
-	}
-        else if (R->_count != _count)
-	{
-            R->_count = _count;
-	    M = new M_def_rank (comm);
-	    M->_divis = d;
-	    M->_rank  = r;
-	    M->_group = g;
-	    M->_ifelm = i;
-	    M->_fsamp = _audio->_fsamp;
-	    M->_fbase = _fbase;
-	    M->_scale = scales [_itemp]._data;
-	    M->_sdef  = R->_sdef;
-	    M->_wave  = R->_wave;
-	    M->_path  = _waves;
-	    send_event (TO_SLAVE, M);
-	}
-    }
-}
+//WS                  send_event(TO_IFACE, new M_ifc_ifelm (MT_IFC_ELATT, M->_group, M->_ifelm));
+
+                  M->_wave = new Rankwave (M->_sdef->_n0, M->_sdef->_n1);
+                  if (M->_wave->load (M->_path, M->_sdef, M->_fsamp, M->_fbase, M->_scale))
+                        M->_wave->gen_waves (M->_sdef, M->_fsamp, M->_fbase, M->_scale);
+
+                  _aeolus->_divisp [M->_divis]->set_rank (M->_rank, M->_wave,  M->_sdef->_pan, M->_sdef->_del);
+                  _divis [M->_divis]._ranks [M->_rank]._wave = M->_wave;
+                  }
+            }
+      }
 
 //---------------------------------------------------------
 //   set_ifelm
@@ -601,38 +579,27 @@ void Model::set_ifelm (int g, int i, int m)
       int s = (m == 2) ? I->_state ^ 1 : m;
       if (I->_state != s) {
             I->_state = s;
-            if (_qcomm->write_avail ()) {
-                  _qcomm->write (0, s ? I->_action1 : I->_action0);
-                  _qcomm->write_commit (1);
-                  send_event (TO_IFACE, new M_ifc_ifelm (MT_IFC_ELCLR + s, g, i));
-                  }
+            _aeolus->proc_queue(s ? I->_action1 : I->_action0);
+//WS        send_event (TO_IFACE, new M_ifc_ifelm (MT_IFC_ELCLR + s, g, i));
             }
       }
 
 void Model::clr_group (int g)
-{
-    int     i;
-    Ifelm  *I;
-    Group  *G;
+      {
+      Group* G = _group + g;
 
-    G = _group + g;
-    if ((! _ready) || (g >= _ngroup)) return;
+      if ((! _ready) || (g >= _ngroup))
+            return;
 
-    for (i = 0; i < G->_nifelm; i++)
-    {
-        I = G->_ifelms + i;
-        if (I->_state)
-        {
-	    I->_state = 0;
-            if (_qcomm->write_avail ())
-	    {
-	       _qcomm->write (0, I->_action0);
-               _qcomm->write_commit (1);
-	    }
-	}
-    }
-    send_event (TO_IFACE, new M_ifc_ifelm (MT_IFC_GRCLR, g, 0));
-}
+      for (int i = 0; i < G->_nifelm; i++) {
+            Ifelm* I = G->_ifelms + i;
+            if (I->_state) {
+                  I->_state = 0;
+                  _aeolus->proc_queue(I->_action0);
+                  }
+            }
+//WS    send_event (TO_IFACE, new M_ifc_ifelm (MT_IFC_GRCLR, g, 0));
+      }
 
 
 void Model::get_state (uint32_t *d)
@@ -676,9 +643,11 @@ void Model::set_state (int bank, int pres)
                 s >>= 1;
 	    }
 	}
-        send_event (TO_IFACE, new M_ifc_preset (MT_IFC_PRRCL, bank, pres, _ngroup, d));
+//WS        send_event (TO_IFACE, new M_ifc_preset (MT_IFC_PRRCL, bank, pres, _ngroup, d));
     }
-    else send_event (TO_IFACE, new M_ifc_preset (MT_IFC_PRRCL, bank, pres, 0, 0));
+    else  {
+//WS            send_event (TO_IFACE, new M_ifc_preset (MT_IFC_PRRCL, bank, pres, 0, 0));
+            }
 }
 
 
@@ -686,11 +655,11 @@ void Model::set_aupar (int s, int a, int p, float v)
 {
     Fparm  *P;
 
-    P = ((a < 0) ? _audio->_instrpar : _audio->_asectpar [a]) + p;
+    P = ((a < 0) ? _aeolus->_audio->_instrpar : _aeolus->_audio->_asectpar [a]) + p;
     if (v < P->_min) v = P->_min;
     if (v > P->_max) v = P->_max;
     P->_val = v;
-    send_event (TO_IFACE, new M_ifc_aupar (s, a, p, v));
+//WS    send_event (TO_IFACE, new M_ifc_aupar (s, a, p, v));
 }
 
 
@@ -703,14 +672,17 @@ void Model::set_dipar (int s, int d, int p, float v)
     if (v < P->_min) v = P->_min;
     if (v > P->_max) v = P->_max;
     P->_val = v;
+printf("Model::set_dipar\n");
+#if 0
     if (_qcomm->write_avail () >= 2)
     {
 	u.f = v;
 	_qcomm->write (0, (17 << 24) | (d << 16) | (p << 8));
 	_qcomm->write (1, u.i);
         _qcomm->write_commit (2);
-        send_event (TO_IFACE, new M_ifc_dipar (s, d, p, v));
+//WS        send_event (TO_IFACE, new M_ifc_dipar (s, d, p, v));
     }
+#endif
 }
 
 
@@ -726,19 +698,15 @@ void Model::set_mconf (int i, uint16_t *d)
         b |= a & 0x7700;
         _midimap [j] = b;
     }
-    send_event (TO_IFACE, new M_ifc_chconf (MT_IFC_MCSET, i, d));
+//WS    send_event (TO_IFACE, new M_ifc_chconf (MT_IFC_MCSET, i, d));
 }
 
 
 void Model::midi_off (int mask)
-{
-    mask &= 127;
-    if (_qcomm->write_avail ())
-    {
-        _qcomm->write (0, (2 << 24) | (mask << 16) | mask);
-        _qcomm->write_commit (1);
-    }
-}
+      {
+      mask &= 127;
+      _aeolus->proc_queue((2 << 24) | (mask << 16) | mask);
+      }
 
 
 void Model::retune (float freq, int temp)
@@ -749,7 +717,9 @@ void Model::retune (float freq, int temp)
         _itemp = temp;
         init_ranks (MT_CALC_RANK);
     }
-    else send_event (TO_IFACE, new M_ifc_retune (_fbase, _itemp));
+    else  {
+//WS            send_event (TO_IFACE, new M_ifc_retune (_fbase, _itemp));
+            }
 }
 
 
@@ -758,11 +728,11 @@ void Model::recalc (int g, int i)
     _count++;
     _ready = false;
     proc_rank (g, i, MT_CALC_RANK);
-    send_event (TO_SLAVE, new ITC_mesg (MT_AUDIO_SYNC));
+//WS    send_event (TO_SLAVE, new ITC_mesg (MT_AUDIO_SYNC));
 }
 
 
-void Model::save (void)
+void Model::save ()
 {
     int     g, i;
     Group   *G;
@@ -775,7 +745,7 @@ void Model::save (void)
 	G = _group + g;
 	for (i = 0; i < G->_nifelm; i++) proc_rank (g, i, MT_SAVE_RANK);
     }
-    send_event (TO_SLAVE, new ITC_mesg (MT_AUDIO_SYNC));
+//WS    send_event (TO_SLAVE, new ITC_mesg (MT_AUDIO_SYNC));
 }
 
 

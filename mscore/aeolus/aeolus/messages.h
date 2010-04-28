@@ -27,6 +27,12 @@
 #include "global.h"
 
 
+class ITC_mesg {
+   public:
+      ITC_mesg() {}
+      ITC_mesg(int) {};
+      };
+
 enum
 {
     FM_SLAVE =  8,

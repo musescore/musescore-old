@@ -1,7 +1,7 @@
 /*
     Copyright (C) 2003-2008 Fons Adriaensen <fons@kokkinizita.net>
     Copyright (C) 2008 Hans Fugal <hans@fugal.net> (OSX version)
-    
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -50,10 +50,7 @@
 #error Byte order is undefined !
 #endif
 
-#include "lfqueue.h"
-
-
-enum // GLOBAL LIMITS 
+enum // GLOBAL LIMITS
 {
     NASECT = 4,
     NDIVIS = 8,
