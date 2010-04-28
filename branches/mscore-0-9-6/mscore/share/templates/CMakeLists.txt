@@ -31,6 +31,7 @@ install(FILES
       instruments_pt_BR.xml
       instruments_ru.xml
       instruments_uk.xml
+      instruments_zh_CN.xml
       instruments_zh_TW.xml
       instruments.xml
       Chamber\ Orchestra.mscx
