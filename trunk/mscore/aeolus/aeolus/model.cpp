@@ -16,82 +16,71 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <ctype.h>
-#include <time.h>
 #include "model.h"
 #include "scales.h"
 #include "global.h"
 #include "aeolus.h"
 
+//---------------------------------------------------------
+//   Divis
+//---------------------------------------------------------
+
 Divis::Divis () :
-    _flags (0),
-    _dmask (0),
-    _nrank (0)
-{
-    *_label = 0;
-    _param [SWELL]._val = SWELL_DEF;
-    _param [SWELL]._min = SWELL_MIN;
-    _param [SWELL]._max = SWELL_MAX;
-    _param [TFREQ]._val = TFREQ_DEF;
-    _param [TFREQ]._min = TFREQ_MIN;
-    _param [TFREQ]._max = TFREQ_MAX;
-    _param [TMODD]._val = TMODD_DEF;
-    _param [TMODD]._min = TMODD_MIN;
-    _param [TMODD]._max = TMODD_MAX;
-}
+   _flags (0),
+   _dmask (0),
+   _nrank (0)
+      {
+      *_label = 0;
+      _param [SWELL]._val = SWELL_DEF;
+      _param [SWELL]._min = SWELL_MIN;
+      _param [SWELL]._max = SWELL_MAX;
+      _param [TFREQ]._val = TFREQ_DEF;
+      _param [TFREQ]._min = TFREQ_MIN;
+      _param [TFREQ]._max = TFREQ_MAX;
+      _param [TMODD]._val = TMODD_DEF;
+      _param [TMODD]._min = TMODD_MIN;
+      _param [TMODD]._max = TMODD_MAX;
+      }
 
+Keybd::Keybd() : _flags (0)
+      {
+      *_label = 0;
+      }
 
+Ifelm::Ifelm() : _state (0)
+      {
+      *_label = 0;
+      *_mnemo = 0;
+      }
 
-Keybd::Keybd (void) :
-    _flags (0)
-{
-    *_label = 0;
-}
+Group::Group() : _nifelm (0)
+      {
+      *_label = 0;
+      }
 
-
-Ifelm::Ifelm (void) :
-    _state (0)
-{
-    *_label = 0;
-    *_mnemo = 0;
-}
-
-
-Group::Group (void) :
-    _nifelm (0)
-{
-    *_label = 0;
-}
-
+//---------------------------------------------------------
+//   Model
+//---------------------------------------------------------
 
 Model::Model (Aeolus* a,
-	      uint16_t     *midimap,
-              const char   *appname,
-              const char   *stops,
-              const char   *instr,
-              const char   *waves,
-              bool          uhome) :
-    _aeolus(a),
-//    _qcomm (qcomm),
-//    _qmidi (qmidi),
-    _midimap (midimap),
-    _appname (appname),
-    _stops (stops),
-    _uhome (uhome),
-    _ready (false),
-    _nasect (0),
-    _ndivis (0),
-    _nkeybd (0),
-    _ngroup (0),
-    _count (0),
-    _bank (0),
-    _pres (0),
-    _sc_cmode (0),
-    _sc_group (0)
+   uint16_t     *midimap,
+   const char   *stops,
+   const char   *instr,
+   const char   *waves)
+   :
+   _aeolus(a),
+   _midimap (midimap),
+   _stops (stops),
+   _ready (false),
+   _nasect (0),
+   _ndivis (0),
+   _nkeybd (0),
+   _ngroup (0),
+   _count (0),
+   _bank (0),
+   _pres (0),
+   _sc_cmode (0),
+   _sc_group (0)
       {
       sprintf (_instr, "%s/%s", stops, instr);
       _waves = waves;
@@ -99,47 +88,9 @@ Model::Model (Aeolus* a,
       memset (_preset, 0, NBANK * NPRES * sizeof (Preset *));
       }
 
-
-Model::~Model (void)
-      {
-      }
-
-
-#if 0
-void Model::thr_main (void)
-      {
-      int E;
-
-//      init();
-      set_time(0);
-      inc_time(100000);
-      while ((E = get_event_timed ()) != EV_EXIT) {
-            switch (E) {
-                  case FM_AUDIO:
-                  case FM_IMIDI:
-                  case FM_SLAVE:
-                  case FM_IFACE:
-                        proc_mesg (get_message ());
-                        break;
-
-                  case EV_TIME:
-                        inc_time(50000);
-//                        proc_qmidi ();
-                        break;
-
-                  case EV_QMIDI:
-//                        proc_qmidi ();
-                        break;
-
-                  default:
-                        ;
-                  }
-            }
-      fini ();
-      send_event (EV_EXIT, 1);
-      }
-#endif
-
+//---------------------------------------------------------
+//   init
+//---------------------------------------------------------
 
 void Model::init()
       {
@@ -152,17 +103,11 @@ void Model::init()
       init_ranks (MT_SAVE_RANK);
       }
 
-
-void Model::fini()
-      {
-      write_presets ();
-      }
-
 //---------------------------------------------------------
 //   proc_mesg
 //---------------------------------------------------------
 
-void Model::proc_mesg (ITC_mesg *M)
+void Model::proc_mesg (ITC_mesg* /*M*/)
       {
 #if 0
       // Handle commands from other threads, including
@@ -429,82 +374,52 @@ void Model::init_audio (void)
             }
       }
 
+//---------------------------------------------------------
+//   init_iface
+//---------------------------------------------------------
 
 void Model::init_iface (void)
-{
-    int          i, j;
-    M_ifc_init   *M;
-    Keybd        *K;
-    Divis        *D;
-    Group        *G;
+      {
+      M_ifc_init* M = new M_ifc_init;
+      _aeolus->_ifc_init = M;
+      M->_stops  = _stops;
+      M->_waves  = _waves;
+      M->_instr  = _instr;
+      M->_client = 0;     // _midi->_client;
+      M->_ipport = 0;     // _midi->_ipport;
+      M->_nasect = _nasect;
+      M->_nkeybd = _nkeybd;
+      M->_ndivis = _ndivis;
+      M->_ngroup = _ngroup;
+      M->_ntempe = NSCALES;
+      for (int i = 0; i < NKEYBD; i++) {
+            Keybd* K = _keybd + i;
+            M->_keybdd [i]._label = K->_label;
+            M->_keybdd [i]._flags = K->_flags;
+            }
+      for (int i = 0; i < NDIVIS; i++) {
+            Divis* D = _divis + i;
+            M->_divisd [i]._label = D->_label;
+            M->_divisd [i]._flags = D->_flags;
+            M->_divisd [i]._asect = D->_asect;
+            }
+      for (int i = 0; i < NGROUP; i++) {
+            Group* G = _group + i;
+            M->_groupd [i]._label  = G->_label;
+            M->_groupd [i]._nifelm = G->_nifelm;
+            for (int j = 0; j < G->_nifelm; j++) {
+                  M->_groupd [i]._ifelmd [j]._label = G->_ifelms [j]._label;
+                  M->_groupd [i]._ifelmd [j]._mnemo = G->_ifelms [j]._mnemo;
+                  M->_groupd [i]._ifelmd [j]._type  = G->_ifelms [j]._type;
+                  }
+            }
+      for (int i = 0; i < NSCALES; i++) {
+            M->_temped [i]._label = scales [i]._label;
+            M->_temped [i]._mnemo = scales [i]._mnemo;
+            }
 
-    M = new M_ifc_init;
-    M->_stops  = _stops;
-    M->_waves  = _waves;
-    M->_instr  = _instr;
-    M->_appid  = _appname;
-    M->_client = 0;     // _midi->_client;
-    M->_ipport = 0;     // _midi->_ipport;
-    M->_nasect = _nasect;
-    M->_nkeybd = _nkeybd;
-    M->_ndivis = _ndivis;
-    M->_ngroup = _ngroup;
-    M->_ntempe = NSCALES;
-    for (i = 0; i < NKEYBD; i++)
-    {
-        K = _keybd + i;
-	M->_keybdd [i]._label = K->_label;
-	M->_keybdd [i]._flags = K->_flags;
-    }
-    for (i = 0; i < NDIVIS; i++)
-    {
-        D = _divis + i;
-	M->_divisd [i]._label = D->_label;
-	M->_divisd [i]._flags = D->_flags;
-	M->_divisd [i]._asect = D->_asect;
-    }
-    for (i = 0; i < NGROUP; i++)
-    {
-        G = _group + i;
-	M->_groupd [i]._label  = G->_label;
-	M->_groupd [i]._nifelm = G->_nifelm;
-        for (j = 0; j < G->_nifelm; j++)
-	{
-	    M->_groupd [i]._ifelmd [j]._label = G->_ifelms [j]._label;
-	    M->_groupd [i]._ifelmd [j]._mnemo = G->_ifelms [j]._mnemo;
-	    M->_groupd [i]._ifelmd [j]._type  = G->_ifelms [j]._type;
-	}
-    }
-    for (i = 0; i < NSCALES; i++)
-    {
-	M->_temped [i]._label = scales [i]._label;
-	M->_temped [i]._mnemo = scales [i]._mnemo;
-    }
-#if 0
-    send_event (TO_IFACE, M);
-
-    for (j = 0; j < 4; j++)
-    {
-        send_event (TO_IFACE, new M_ifc_aupar (0, -1, j, _aeolus->_instrpar [j]._val));
-    }
-    for (i = 0; i < _nasect; i++)
-    {
-	for (j = 0; j < 5; j++)
-	{
-	    send_event (TO_IFACE, new M_ifc_aupar (0, i, j, _aeolus->_audio->_asectpar [i][j]._val));
-	}
-    }
-    for (i = 0; i < _ndivis; i++)
-    {
-	for (j = 0; j < 3; j++)
-	{
-	    send_event (TO_IFACE, new M_ifc_dipar (0, i, j, _divis [i]._param [j]._val));
-	}
-    }
-#endif
-    set_mconf (0, _chconf [0]._bits);
-}
-
+      set_mconf (0, _chconf [0]._bits);
+      }
 
 void Model::init_ranks (int comm)
       {
@@ -580,7 +495,13 @@ void Model::set_ifelm (int g, int i, int m)
       if (I->_state != s) {
             I->_state = s;
             _aeolus->proc_queue(s ? I->_action1 : I->_action0);
-//WS        send_event (TO_IFACE, new M_ifc_ifelm (MT_IFC_ELCLR + s, g, i));
+            M_ifc_ifelm*  e = new M_ifc_ifelm (MT_IFC_ELCLR + s, g, i);
+            if (m == 0)
+                  _aeolus->_ifelms [e->_group] &= ~(1 << e->_ifelm);
+            else if (m == 1)
+                  _aeolus->_ifelms [e->_group] |= (1 << e->_ifelm);
+            else if (m == 2)
+                  _aeolus->_ifelms [e->_group] = 0;
             }
       }
 
@@ -598,7 +519,7 @@ void Model::clr_group (int g)
                   _aeolus->proc_queue(I->_action0);
                   }
             }
-//WS    send_event (TO_IFACE, new M_ifc_ifelm (MT_IFC_GRCLR, g, 0));
+      _aeolus->_ifelms[g] = 0;
       }
 
 
@@ -651,22 +572,22 @@ void Model::set_state (int bank, int pres)
 }
 
 
-void Model::set_aupar (int s, int a, int p, float v)
-{
-    Fparm  *P;
-
-    P = ((a < 0) ? _aeolus->_audio->_instrpar : _aeolus->_audio->_asectpar [a]) + p;
-    if (v < P->_min) v = P->_min;
-    if (v > P->_max) v = P->_max;
-    P->_val = v;
+void Model::set_aupar (int /*s*/, int a, int p, float v)
+      {
+      Fparm* P = ((a < 0) ? _aeolus->_audio->_instrpar : _aeolus->_audio->_asectpar [a]) + p;
+      if (v < P->_min)
+            v = P->_min;
+      if (v > P->_max)
+            v = P->_max;
+      P->_val = v;
 //WS    send_event (TO_IFACE, new M_ifc_aupar (s, a, p, v));
-}
+      }
 
 
-void Model::set_dipar (int s, int d, int p, float v)
+void Model::set_dipar (int /*s*/, int d, int p, float v)
 {
     Fparm  *P;
-    union { uint32_t i; float f; } u;
+//    union { uint32_t i; float f; } u;
 
     P = _divis [d]._param + p;
     if (v < P->_min) v = P->_min;
@@ -686,7 +607,7 @@ printf("Model::set_dipar\n");
 }
 
 
-void Model::set_mconf (int i, uint16_t *d)
+void Model::set_mconf (int /*i*/, uint16_t *d)
 {
     int j, a, b;
 
@@ -791,7 +712,6 @@ int Model::read_instr ()
             fprintf (stderr, "Can't open '%s' for reading\n", buff);
             return 1;
             }
-printf ("Reading '%s'\n", buff);
 
       stat = 0;
       line = 0;
@@ -1214,214 +1134,186 @@ int Model::write_instr (void)
 }
 
 
+//---------------------------------------------------------
+//   get_preset
+//---------------------------------------------------------
+
 int Model::get_preset (int bank, int pres, uint32_t *bits)
-{
-    int     k;
-    Preset  *P;
+      {
+      if ((bank < 0) | (pres < 0) || (bank >= NBANK) || (pres >= NPRES))
+            return 0;
+      Preset* P = _preset [bank][pres];
+      if (P) {
+            for (int k = 0; k < _ngroup; k++)
+                  *bits++ = P->_bits [k];
+            return _ngroup;
+            }
+      return 0;
+      }
 
-    if ((bank < 0) | (pres < 0) || (bank >= NBANK) || (pres >= NPRES)) return 0;
-    P = _preset [bank][pres];
-    if (P)
-    {
-        for (k = 0; k < _ngroup; k++) *bits++ = P->_bits [k];
-        return k;
-    }
-    return 0;
-}
-
+//---------------------------------------------------------
+//   set_preset
+//---------------------------------------------------------
 
 void Model::set_preset (int bank, int pres, uint32_t *bits)
-{
-    int     k;
-    Preset  *P;
+      {
+      if ((bank  < 0) | (pres < 0) || (bank >= NBANK) || (pres >= NPRES))
+            return;
+      Preset* P = _preset [bank][pres];
+      if (! P) {
+            P = new Preset;
+            _preset [bank][pres] = P;
+            }
+      for (int k = 0; k < _ngroup; k++)
+            P->_bits [k] = *bits++;
+      }
 
-    if ((bank  < 0) | (pres < 0) || (bank >= NBANK) || (pres >= NPRES)) return;
-    P = _preset [bank][pres];
-    if (! P)
-    {
-	P = new Preset;
-        _preset [bank][pres] = P;
-    }
-    for (k = 0; k < _ngroup; k++) P->_bits [k] = *bits++;
-}
-
+//---------------------------------------------------------
+//   ins_preset
+//---------------------------------------------------------
 
 void Model::ins_preset (int bank, int pres, uint32_t *bits)
-{
-    int     j, k;
-    Preset  *P;
+      {
+      if ((bank < 0) | (pres < 0) || (bank >= NBANK) || (pres >= NPRES))
+            return;
+      Preset* P = _preset [bank][NPRES - 1];
+      for (int j = NPRES - 1; j > pres; j--)
+            _preset [bank][j] = _preset [bank][j - 1];
+      if (!P) {
+            P = new Preset;
+            _preset [bank][pres] = P;
+            }
+      for (int k = 0; k < _ngroup; k++)
+            P->_bits [k] = *bits++;
+      }
 
-    if ((bank < 0) | (pres < 0) || (bank >= NBANK) || (pres >= NPRES)) return;
-    P = _preset [bank][NPRES - 1];
-    for (j = NPRES - 1; j > pres; j--) _preset [bank][j] = _preset [bank][j - 1];
-    if (! P)
-    {
-	P = new Preset;
-        _preset [bank][pres] = P;
-    }
-    for (k = 0; k < _ngroup; k++) P->_bits [k] = *bits++;
-}
-
+//---------------------------------------------------------
+//   del_preset
+//---------------------------------------------------------
 
 void Model::del_preset (int bank, int pres)
-{
-    int j;
+      {
+      if ((bank < 0) | (pres < 0) || (bank >= NBANK) || (pres >= NPRES))
+            return;
+      delete _preset [bank][pres];
+      for (int j = pres; j < NPRES - 1; j++)
+            _preset [bank][j] = _preset [bank][j + 1];
+      _preset [bank][NPRES - 1] = 0;
+      }
 
-    if ((bank < 0) | (pres < 0) || (bank >= NBANK) || (pres >= NPRES)) return;
-    delete _preset [bank][pres];
-    for (j = pres; j < NPRES - 1; j++) _preset [bank][j] = _preset [bank][j + 1];
-    _preset [bank][NPRES - 1] = 0;
-}
+//---------------------------------------------------------
+//   read_presets
+//---------------------------------------------------------
 
+int Model::read_presets ()
+      {
+      char           name [1024];
+      unsigned char data [256];
+      FILE           *F;
 
-int Model::read_presets (void)
-{
-    int            i, j, k, n;
-    char           name [1024];
-    unsigned char  *p, data [256];
-    FILE           *F;
-    Preset         *P;
+      sprintf (name, "%s/presets", _instr);
+      if (! (F = fopen (name, "r"))) {
+            fprintf (stderr, "Can't open '%s' for reading\n", name);
+            return 1;
+            }
 
-    if (_uhome)
-    {
-        p = (unsigned char *)(getenv ("HOME"));
-        if (p) sprintf (name, "%s/.aeolus-presets", p);
-        else strcpy (name, ".aeolus-presets");
-    }
-    else
-    {
-	sprintf (name, "%s/presets", _instr);
-    }
-    if (! (F = fopen (name, "r")))
-    {
-	fprintf (stderr, "Can't open '%s' for reading\n", name);
-        return 1;
-    }
+      fread (data, 16, 1, F);
+      if (strcmp ((char *) data, "PRESET") || data [7]) {
+            fprintf (stderr, "File '%s' is not a valid preset file\n", name);
+            fclose (F);
+            return 1;
+            }
+      int n = RD2 (data + 14);
 
-    fread (data, 16, 1, F);
-    if (strcmp ((char *) data, "PRESET") || data [7])
-    {
-	fprintf (stderr, "File '%s' is not a valid preset file\n", name);
-        fclose (F);
-        return 1;
-    }
-    printf ("Reading '%s'\n", name);
-    n = RD2 (data + 14);
+      if (fread (data, 256, 1, F) != 1) {
+            fprintf (stderr, "No valid data in file '%s'\n", name);
+            fclose (F);
+            return 1;
+            }
+      uchar* p = data;
+      for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 16; j++) {
+                  _chconf [i]._bits [j] = RD2 (p);
+                  p += 2;
+                  }
+            }
+      if (n != _ngroup) {
+            fprintf (stderr, "Presets in file '%s' are not compatible\n", name);
+            fclose (F);
+            return 1;
+            }
+      while (fread (data, 4 + 4 * _ngroup, 1, F) == 1) {
+            p = data;
+            int i = *p++;
+            int j = *p++;
+            p++;
+            p++;
+            if ((i < NBANK) && (j < NPRES)) {
+                  Preset* P = new Preset;
+                  for (int k = 0; k < _ngroup; k++) {
+                        P->_bits [k] = RD4 (p);
+                        p += 4;
+                        }
+                  _preset [i][j] = P;
+                  }
+            }
+      fclose (F);
+      return 0;
+      }
 
-    if (fread (data, 256, 1, F) != 1)
-    {
-	fprintf (stderr, "No valid data in file '%s'\n", name);
-        fclose (F);
-        return 1;
-    }
-    p = data;
-    for (i = 0; i < 8; i++)
-    {
-        for (j = 0; j < 16; j++)
-	{
-	    _chconf [i]._bits [j] = RD2 (p);
-            p += 2;
-	}
-    }
+//---------------------------------------------------------
+//   write_presets
+//---------------------------------------------------------
 
-    if (n != _ngroup)
-    {
-	fprintf (stderr, "Presets in file '%s' are not compatible\n", name);
-        fclose (F);
-        return 1;
-    }
-    while (fread (data, 4 + 4 * _ngroup, 1, F) == 1)
-    {
-        p = data;
-	i = *p++;
-        j = *p++;
-        p++;
-        p++;
-        if ((i < NBANK) && (j < NPRES))
-	{
-            P = new Preset;
-            for (k = 0; k < _ngroup; k++)
-	    {
-                P->_bits [k] = RD4 (p);
-                p += 4;
-	    }
-            _preset [i][j] = P;
-	}
-    }
+int Model::write_presets()
+      {
+      char           name [1024];
+      unsigned char  *p, data [256];
+      FILE           *F;
 
-    fclose (F);
-    return 0;
-}
+      sprintf (name, "%s/presets", _instr);
+      if (! (F = fopen (name, "w"))) {
+            fprintf (stderr, "Can't open '%s' for writing\n", name);
+            return 1;
+            }
 
+      strcpy ((char *) data, "PRESET");
+      data [7] = 0;
+      WR2 (data +  8, 0);
+      WR2 (data + 10, 0);
+      WR2 (data + 12, 0);
+      WR2 (data + 14, _ngroup);
+      fwrite (data, 16, 1, F);
 
-int Model::write_presets (void)
-{
-    int            i, j, k, v;
-    char           name [1024];
-    unsigned char  *p, data [256];
-    FILE           *F;
-    Preset         *P;
+      p = data;
+      for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 16; j++) {
+                  int v = _chconf [i]._bits [j];
+                  WR2 (p, v);
+                  p += 2;
+                  }
+            }
+      fwrite (data, 256, 1, F);
 
-    if (_uhome)
-    {
-        p = (unsigned char *)(getenv ("HOME"));
-        if (p) sprintf (name, "%s/.aeolus-presets", p);
-        else strcpy (name, ".aeolus-presets");
-    }
-    else
-    {
-	sprintf (name, "%s/presets", _instr);
-    }
-    if (! (F = fopen (name, "w")))
-    {
-	fprintf (stderr, "Can't open '%s' for writing\n", name);
-        return 1;
-    }
-    printf ("Writing '%s'\n", name);
+      for (int i = 0; i < NBANK; i++) {
+            for (int j = 0; j < NPRES; j++) {
+                  Preset* P = _preset [i][j];
+                  if (P) {
+                        p = data;
+                        *p++ = i;
+                        *p++ = j;
+                        *p++ = 0;
+                        *p++ = 0;
+                        for (int k = 0; k < _ngroup; k++) {
+                              int v = P->_bits [k];
+                              WR4 (p, v);
+                              p += 4;
+                              }
+                        fwrite (data, 4 + 4 * _ngroup, 1, F);
+                        }
+                  }
+            }
+      fclose (F);
+      return 0;
+      }
 
-    strcpy ((char *) data, "PRESET");
-    data [7] = 0;
-    WR2 (data +  8, 0);
-    WR2 (data + 10, 0);
-    WR2 (data + 12, 0);
-    WR2 (data + 14, _ngroup);
-    fwrite (data, 16, 1, F);
-
-    p = data;
-    for (i = 0; i < 8; i++)
-    {
-	for (j = 0; j < 16; j++)
-	{
-	    v = _chconf [i]._bits [j];
-	    WR2 (p, v);
-            p += 2;
-	}
-    }
-    fwrite (data, 256, 1, F);
-
-    for (i = 0; i < NBANK; i++)
-    {
-        for (j = 0; j < NPRES; j++)
-	{
-            P = _preset [i][j];
-            if (P)
-	    {
-		p = data;
-		*p++ = i;
-		*p++ = j;
-		*p++ = 0;
-		*p++ = 0;
-		for (k = 0; k < _ngroup; k++)
-		{
-		    v = P->_bits [k];
-		    WR4 (p, v);
-		    p += 4;
-		}
-		fwrite (data, 4 + 4 * _ngroup, 1, F);
-	    }
-	}
-    }
-
-    fclose (F);
-    return 0;
-}

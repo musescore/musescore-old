@@ -17,7 +17,6 @@
 */
 
 
-#include <math.h>
 #include "messages.h"
 #include "aeolus.h"
 

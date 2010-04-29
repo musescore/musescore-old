@@ -29,7 +29,11 @@
 #define __PDP_ENDIAN	__DARWIN_PDP_ENDIAN
 #define	__BYTE_ORDER	__DARWIN_BYTE_ORDER
 #else
+#ifdef __MINGW32__
+#define __BYTE_ORDER __LITTLE_ENDIAN
+#else
 #include <endian.h>
+#endif
 #endif
 
 #ifdef __BYTE_ORDER

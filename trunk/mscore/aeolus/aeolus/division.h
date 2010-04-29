@@ -20,7 +20,6 @@
 #ifndef __DIVISION_H
 #define __DIVISION_H
 
-
 #include "asection.h"
 #include "rankwave.h"
 
@@ -59,7 +58,7 @@ class Division
       void trem_on()                { _trem = 1; }
       void trem_off()               { _trem = 2; }
 
-      void process (void);
+      void process();
       void update(int note, int mask);
       void update(unsigned char *keys);
       };

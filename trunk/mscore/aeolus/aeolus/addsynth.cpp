@@ -17,10 +17,8 @@
 */
 
 
-#include <string.h>
 #include "global.h"
 #include "addsynth.h"
-
 
 #define M (N_NOTE - 1)
 
@@ -181,14 +179,6 @@ void N_func::read (FILE *F)
 #error Byte order is undefined !
 #endif
 }
-
-//---------------------------------------------------------
-//   HN_func
-//---------------------------------------------------------
-
-HN_func::HN_func()
-      {
-      }
 
 //---------------------------------------------------------
 //   reset

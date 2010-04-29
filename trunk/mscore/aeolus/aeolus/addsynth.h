@@ -20,11 +20,6 @@
 #ifndef __ADDSYNTH_H
 #define __ADDSYNTH_H
 
-
-#include <stdio.h>
-#include <stdint.h>
-
-
 #define N_NOTE 11
 #define N_HARM 64
 #define NOTE_MIN 36
@@ -70,7 +65,7 @@ class HN_func
 
    public:
 
-      HN_func();
+      HN_func() {}
       void reset (float v);
       void setv (int i, float v);
       void clrv (int i);
