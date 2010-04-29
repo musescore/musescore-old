@@ -354,7 +354,7 @@ bool Score::read(QString name)
                   }
             else if (cs == "mxl")
                   importCompressedMusicXml(name);
-            else if (cs.toLower() == "mid" || cs.toLower() == "kar") {
+            else if (cs.toLower() == "mid" || cs.toLower() == "midi" || cs.toLower() == "kar") {
                   if (!importMidi(name))
                         return false;
                   }
