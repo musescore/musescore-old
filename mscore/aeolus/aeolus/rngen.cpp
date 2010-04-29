@@ -1,6 +1,6 @@
 /*
   Copyright (C) 2003-2008 Fons Adriaensen <fons@kokkinizita.net>
-    
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
@@ -16,9 +16,7 @@
   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
- 
-#include <math.h>
-#include <time.h>
+
 #include "rngen.h"
 
 
@@ -33,12 +31,12 @@ Rngen::Rngen (void)
     init (0);
 }
 
- 
+
 Rngen::~Rngen (void)
 {
 }
 
- 
+
 void Rngen::init (uint32_t s)
 {
     int i, j;
@@ -62,7 +60,7 @@ void Rngen::init (uint32_t s)
     _mf = false;
 }
 
- 
+
 double Rngen::grand (void)
 {
     double a, b, r;
@@ -86,9 +84,9 @@ double Rngen::grand (void)
     _vd = r * b;
 
     return r * a;
-}    
+}
 
- 
+
 void Rngen::grand (double *x, double *y)
 {
     double a, b, r;
@@ -104,7 +102,7 @@ void Rngen::grand (double *x, double *y)
     r = sqrt (-log (r) / r);
     *x = r * a;
     *y = r * b;
-}    
+}
 
 
 float Rngen::grandf (void)
@@ -130,9 +128,9 @@ float Rngen::grandf (void)
     _vf = r * b;
 
     return r * a;
-}    
+}
 
- 
+
 void Rngen::grandf (float *x, float *y)
 {
     float a, b, r;
@@ -148,4 +146,4 @@ void Rngen::grandf (float *x, float *y)
     r = sqrtf (-logf (r) / r);
     *x = r * a;
     *y = r * b;
-}    
+}

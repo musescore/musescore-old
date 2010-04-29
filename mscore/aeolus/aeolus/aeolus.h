@@ -35,6 +35,7 @@ class Event;
 class Model;
 class M_audio_info;
 class M_new_divis;
+class M_ifc_init;
 
 //---------------------------------------------------------
 //   Synth
@@ -57,7 +58,7 @@ class Aeolus : public Synth {
       int             _ndivis;
       Asection       *_asectp [NASECT];
 
-      Division       *_divisp [NDIVIS];
+      Division*       _divisp [NDIVIS];
       Reverb          _reverb;
       unsigned char   _keymap [NNOTES];
       Fparm           _audiopar [4];
@@ -69,6 +70,9 @@ class Aeolus : public Synth {
       float loutb[PERIOD];
 
       M_audio_info* _audio;
+      M_ifc_init*   _ifc_init;
+      uint32_t      _ifelms [NGROUP];
+      char          _tempstr[64];
 
       void proc_synth(int);
       void cond_key_off (int m, int b);
@@ -81,6 +85,8 @@ class Aeolus : public Synth {
       void key_on (int n, int b);
       void newDivis(M_new_divis* X);
       void proc_queue(uint32_t);
+      void printGui();
+      void rewrite_label(const char*);
 
    public:
       Aeolus();

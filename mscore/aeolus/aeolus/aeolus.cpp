@@ -16,8 +16,6 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-#include <stdio.h>
-
 #include "aeolus.h"
 #include "model.h"
 
@@ -47,10 +45,11 @@ void Aeolus::init(int samplerate)
       strcpy(wavesPath, qPrintable(waves));
 
       audio_init(samplerate);
-      model = new Model (this, _midimap, "aeolus", stopsPath, "Aeolus", wavesPath, false);
+      model = new Model (this, _midimap, stopsPath, "Aeolus", wavesPath);
 
       audio_start();
       model->init();
+      printGui();
       }
 
 //---------------------------------------------------------
@@ -75,6 +74,9 @@ Aeolus::Aeolus()
       _nasect = 0;
       _ndivis = 0;
       nout = 0;
+      _ifc_init = 0;
+      for (int i = 0; i < NGROUP; i++)
+            _ifelms [i] = 0;
       }
 
 Aeolus::~Aeolus()
@@ -183,4 +185,38 @@ double Aeolus::effectParameter(int /*effect*/, int /*parameter*/)
 void Aeolus::setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ )
       {
       }
+
+void Aeolus::rewrite_label (const char *p)
+      {
+      strcpy (_tempstr, p);
+      char* t = strstr (_tempstr, "-$");
+      if (t)
+            strcpy (t, t + 2);
+      else {
+            t = strchr (_tempstr, '$');
+            if (t)
+                  *t = ' ';
+            }
+      }
+
+//---------------------------------------------------------
+//   printGui
+//---------------------------------------------------------
+
+void Aeolus::printGui()
+      {
+      for (int i = 0; i < _ifc_init->_ndivis; ++i) {
+            int group = i;
+            rewrite_label (_ifc_init->_groupd [group]._label);
+            printf ("Stops in group %s\n", _tempstr);
+            uint32_t m = _ifelms [group];
+            int n = _ifc_init->_groupd [group]._nifelm;
+            for (int i = 0; i < n; i++) {
+                  rewrite_label (_ifc_init->_groupd [group]._ifelmd [i]._label);
+                  printf ("  %c %-7s %-1s\n", (m & 1) ? '+' : '-', _ifc_init->_groupd [group]._ifelmd [i]._mnemo, _tempstr);
+                  m >>= 1;
+                  }
+            }
+      }
+
 

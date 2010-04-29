@@ -20,7 +20,6 @@
 #ifndef __MESSAGES_H
 #define __MESSAGES_H
 
-#include <string.h>
 #include "rankwave.h"
 #include "asection.h"
 #include "addsynth.h"
@@ -163,7 +162,7 @@ class M_ifc_init : public ITC_mesg
       {
    public:
 
-      M_ifc_init (void) : ITC_mesg (MT_IFC_INIT) {}
+      M_ifc_init () : ITC_mesg (MT_IFC_INIT) {}
 
       const char         *_stops;
       const char         *_waves;

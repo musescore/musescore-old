@@ -49,24 +49,23 @@ public:
 
 
 class Divis
-{
-public:
+      {
+   public:
 
-    enum { HAS_SWELL = 1, HAS_TREM = 2, NRANK = 32 };
-    enum { SWELL, TFREQ, TMODD, NPARAM };
+      enum { HAS_SWELL = 1, HAS_TREM = 2, NRANK = 32 };
+      enum { SWELL, TFREQ, TMODD, NPARAM };
 
-    Divis (void);
+      Divis();
 
-    char        _label [16];
-    int         _flags;
-    int         _dmask;
-    int         _nrank;
-    int         _asect;
-    int         _keybd;
-    Fparm       _param [NPARAM];
-    Rank        _ranks [NRANK];
-};
-
+      char        _label [16];
+      int         _flags;
+      int         _dmask;
+      int         _nrank;
+      int         _asect;
+      int         _keybd;
+      Fparm       _param [NPARAM];
+      Rank        _ranks [NRANK];
+      };
 
 class Keybd
 {
@@ -74,7 +73,7 @@ public:
 
     enum { IS_PEDAL = 256 };
 
-    Keybd (void);
+    Keybd ();
 
     char    _label [16];
     int     _flags;
@@ -133,81 +132,70 @@ public:
 };
 
 
+//---------------------------------------------------------
+//   Model
+//---------------------------------------------------------
 
 class Model
       {
-//    virtual void thr_main (void);
+      Aeolus*        _aeolus;
+      uint16_t*      _midimap;
+      const char*    _stops;
+      char           _instr [1024];
+      const char*    _waves;
+      bool           _ready;
 
-    void fini (void);
-    void proc_mesg (ITC_mesg *M);
-    void init_audio (void);
-    void init_iface (void);
-    void init_ranks (int comm);
-    void proc_rank (int g, int i, int comm);
-    void set_aupar (int s, int a, int p, float v);
-    void set_dipar (int s, int d, int p, float v);
-    void set_mconf (int i, uint16_t *d);
-    void get_state (uint32_t *bits);
-    void set_state (int bank, int pres);
-    void midi_off (int mask);
-    void retune (float freq, int temp);
-    void recalc (int g, int i);
-    void save (void);
-    Rank *find_rank (int g, int i);
-    int  read_instr (void);
-    int  write_instr (void);
-    int  get_preset (int bank, int pres, uint32_t *bits);
-    void set_preset (int bank, int pres, uint32_t *bits);
-    void ins_preset (int bank, int pres, uint32_t *bits);
-    void del_preset (int bank, int pres);
-    int  read_presets (void);
-    int  write_presets (void);
+      Asect           _asect [NASECT];
+      Keybd           _keybd [NKEYBD];
+      Divis           _divis [NDIVIS];
+      Group           _group [NGROUP];
 
-    Aeolus*     _aeolus;
-//    Lfq_u32        *_qcomm;
-//    Lfq_u8         *_qmidi;
-    uint16_t       *_midimap;
-    const char     *_appname;
-    const char     *_stops;
-    char            _instr [1024];
-    const char*     _waves;
-    bool            _uhome;
-    bool            _ready;
+      int             _nasect;
+      int             _ndivis;
+      int             _nkeybd;
+      int             _ngroup;
+      float           _fbase;
+      int             _itemp;
+      int             _count;
+      int             _bank;
+      int             _pres;
+      int             _client;
+      int             _portid;
+      int             _sc_cmode; // stop control command mode
+      int             _sc_group; // stop control group number
+      Chconf          _chconf [8];
+      Preset         *_preset [NBANK][NPRES];
 
-    Asect           _asect [NASECT];
-    Keybd           _keybd [NKEYBD];
-    Divis           _divis [NDIVIS];
-    Group           _group [NGROUP];
-
-    int             _nasect;
-    int             _ndivis;
-    int             _nkeybd;
-    int             _ngroup;
-    float           _fbase;
-    int             _itemp;
-    int             _count;
-    int             _bank;
-    int             _pres;
-    int             _client;
-    int             _portid;
-    int             _sc_cmode; // stop control command mode
-    int             _sc_group; // stop control group number
-    Chconf          _chconf [8];
-    Preset         *_preset [NBANK][NPRES];
+      void proc_mesg(ITC_mesg *M);
+      void init_audio();
+      void init_iface();
+      void init_ranks(int comm);
+      void proc_rank(int g, int i, int comm);
+      void set_aupar(int s, int a, int p, float v);
+      void set_dipar(int s, int d, int p, float v);
+      void set_mconf(int i, uint16_t *d);
+      void get_state(uint32_t *bits);
+      void set_state(int bank, int pres);
+      void midi_off(int mask);
+      void retune(float freq, int temp);
+      void recalc(int g, int i);
+      void save();
+      Rank* find_rank(int g, int i);
+      int  read_instr();
+      int  write_instr();
+      int  get_preset(int bank, int pres, uint32_t *bits);
+      void set_preset(int bank, int pres, uint32_t *bits);
+      void ins_preset(int bank, int pres, uint32_t *bits);
+      void del_preset(int bank, int pres);
+      int  read_presets();
+      int  write_presets();
 
    public:
+      Model (Aeolus* aeolus, uint16_t* midimap, const char* stops,
+         const char* instr, const char* waves);
 
-      Model (Aeolus* aeolus,
-         uint16_t     *midimap,
-         const char   *appname,
-         const char   *stops,
-         const char   *instr,
-         const char   *waves,
-         bool          uhome);
+      virtual ~Model() {}
 
-      virtual ~Model();
-
-      void terminate() {  /* put_event (EV_EXIT, 1);*/ }
       void set_ifelm (int g, int i, int m);
       void clr_group (int g);
       void init ();

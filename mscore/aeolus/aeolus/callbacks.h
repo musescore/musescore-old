@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2003-2008 Fons Adriaensen <fons@kokkinizita.net>
-    
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -20,11 +20,7 @@
 #ifndef __CALLBACKS_H
 #define __CALLBACKS_H
 
-
-#include <clxclient.h>
-
-
-enum 
+enum
 {
     CB_GLOB_SAVE = 0x1000,
     CB_GLOB_MOFF,
@@ -36,8 +32,8 @@ enum
     CB_EDIT_REQ,
     CB_EDIT_APP,
     CB_EDIT_END,
-    CB_AUDIO_ACT,   
-    CB_DIVIS_ACT,   
+    CB_AUDIO_ACT,
+    CB_DIVIS_ACT,
     CB_MIDI_MODCONF,
     CB_MIDI_SETCONF,
     CB_MIDI_GETCONF,
