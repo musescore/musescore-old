@@ -72,6 +72,7 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                QString::fromLatin1("Chord.%0(): this object is not a Chord")
                .arg(function_names_chord[_id]));
             }
+            
       switch(_id) {
             case 0:
                   if (context->argumentCount() == 0)
@@ -127,13 +128,14 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                         int idx = context->argument(0).toInt32();
                         if (idx < 0 || idx >= int(chord->notes().size()))
                               return context->throwError(QScriptContext::TypeError,
-                                 QString::fromLatin1("Note.%0(): note index out of range")
+                                 QString::fromLatin1("Chord.%0(): note index out of range")
                                  .arg(function_names_chord[_id]));
                         Score* score = chord->score();
                         if (score)
                               score->undoRemoveElement(chord->notes()[idx]);
                         else
                               chord->notes().removeAt(idx);
+                        return context->engine()->undefinedValue();
                         }
                   break;
             case 5:     // "notes",
@@ -146,7 +148,7 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                         int idx = context->argument(0).toInt32();
                         if (idx < 0 || idx >= int(chord->notes().size())) {
                               return context->throwError(QScriptContext::TypeError,
-                                 QString::fromLatin1("Note.%0(): note index out of range")
+                                 QString::fromLatin1("Chord.%0(): note index out of range")
                                  .arg(function_names_chord[_id]));
                               }
                         return qScriptValueFromValue(context->engine(), chord->notes()[idx]);
@@ -156,7 +158,7 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                   return qScriptValueFromValue(context->engine(), int(chord->noteType()));
             }
       return context->throwError(QScriptContext::TypeError,
-         QString::fromLatin1("Note.%0(): bad argument count or value")
+         QString::fromLatin1("Chord.%0(): bad argument count or value")
          .arg(function_names_chord[_id]));
       }
 
