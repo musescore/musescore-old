@@ -1924,6 +1924,7 @@ int main(int argc, char* av[])
       initDrumset();
       gscore = new Score(defaultStyle);
       mscore = new MuseScore();
+      QApplication::instance()->installEventFilter(mscore);
       mscore->setRevision(revision);
 
       if (!(converterMode || pluginMode)) {
@@ -1970,6 +1971,22 @@ bool MuseScore::unstable()
 #else
       return false;
 #endif
+      }
+
+
+//---------------------------------------------------------
+//   eventFilter
+//---------------------------------------------------------
+
+bool MuseScore::eventFilter(QObject *obj, QEvent *event)
+      {
+      switch(event->type()) {
+            case QEvent::FileOpen:
+                  handleMessage(static_cast<QFileOpenEvent *>(event)->file());
+                  return true;
+            default:
+                  return QObject::eventFilter(obj, event);
+            }
       }
 
 //---------------------------------------------------------
