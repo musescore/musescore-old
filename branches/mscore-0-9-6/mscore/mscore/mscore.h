@@ -410,6 +410,7 @@ class MuseScore : public QMainWindow {
       void newFile();
       bool hasToCheckForUpdate();
       static bool unstable();
+      bool eventFilter(QObject *, QEvent *);
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

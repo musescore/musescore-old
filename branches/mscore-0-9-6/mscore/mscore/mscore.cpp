@@ -1786,6 +1786,7 @@ int main(int argc, char* av[])
                   int ok = true;
                   foreach(QString message, argv) {
                         QFileInfo fi(message);
+                        printf("send message %s\n", qPrintable(fi.absoluteFilePath()));
                         if (!app->sendMessage(fi.absoluteFilePath())) {
                               ok = false;
                               break;
@@ -1794,10 +1795,12 @@ int main(int argc, char* av[])
                   if (ok)
                         return 0;
                   }
-            else
-                  if (app->sendMessage("")) {
+            else{
+                 printf("argv empty\n");
+                   if (app->sendMessage("")) {
                       return 0;
                       }
+                }
             }
 
 /**/
@@ -1923,6 +1926,7 @@ int main(int argc, char* av[])
       initDrumset();
       gscore = new Score(defaultStyle);
       mscore = new MuseScore();
+      QApplication::instance()->installEventFilter(mscore);
       mscore->setRevision(revision);
 
       if (!(converterMode || pluginMode)) {
@@ -1969,6 +1973,18 @@ bool MuseScore::unstable()
 #else
       return false;
 #endif
+      }
+
+
+bool MuseScore::eventFilter(QObject *obj, QEvent *event)
+      {
+      switch(event->type()) {
+            case QEvent::FileOpen:
+                  handleMessage(static_cast<QFileOpenEvent *>(event)->file());
+                  return true;
+            default:
+                  return QObject::eventFilter(obj, event);
+            }
       }
 
 //---------------------------------------------------------
@@ -2663,6 +2679,7 @@ void MuseScore::endSearch()
 
 void MuseScore::handleMessage(const QString& message)
       {
+      printf("message %s\n", qPrintable(message));
       if (message.isEmpty())
             return;
       ((QtSingleApplication*)(qApp))->activateWindow();

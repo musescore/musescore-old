@@ -195,6 +195,10 @@ if (STATIC_SCRIPT_BINDINGS)
             qtscript_xml)
 endif (STATIC_SCRIPT_BINDINGS)
 
+if (APPLE)
+      set_target_properties (mscore PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/packaging/MacOSXBundleInfo.plist.in)
+endif(APPLE)
+
 if (MINGW)
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
@@ -302,6 +306,7 @@ else (MINGW)
    if (APPLE)
      install (TARGETS mscore BUNDLE DESTINATION ${CMAKE_INSTALL_PREFIX})
      install (FILES data/mscore.icns DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME})
+     install (FILES data/musescoreDocument.icns DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME})
    else (APPLE)
      install( TARGETS mscore RUNTIME DESTINATION bin )
      install( FILES   data/mscore.png DESTINATION share/pixmaps)
