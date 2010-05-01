@@ -1698,7 +1698,11 @@ int main(int argc, char* av[])
       revision = QString(f.readAll());
       f.close();
 
+#ifdef Q_WS_MAC      
+      MuseScoreApplication* app = new MuseScoreApplication("mscore", argc, av);
+#else
       QtSingleApplication* app = new QtSingleApplication("mscore", argc, av);
+#endif      
 
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();
@@ -1926,7 +1930,9 @@ int main(int argc, char* av[])
       initDrumset();
       gscore = new Score(defaultStyle);
       mscore = new MuseScore();
+#ifdef Q_WS_MAC 
       QApplication::instance()->installEventFilter(mscore);
+#endif
       mscore->setRevision(revision);
 
       if (!(converterMode || pluginMode)) {
@@ -1939,11 +1945,17 @@ int main(int argc, char* av[])
                   if (!name.isEmpty())
                         ++files;
                   }
-            //
+           
+#ifdef Q_WS_MAC
+            if (!mscore->restoreSession(preferences.sessionStart == LAST_SESSION))
+                  loadScores(static_cast<MuseScoreApplication*>(qApp)->paths);
+#else
+             //
             // TODO: delete old session backups
             //
             if (files || !mscore->restoreSession(preferences.sessionStart == LAST_SESSION))
                   loadScores(argv);
+#endif
             }
       else {
             loadScores(argv);
@@ -1976,6 +1988,23 @@ bool MuseScore::unstable()
       }
 
 
+//---------------------------------------------------------
+//   MuseScoreApplication::event (mac only)
+//---------------------------------------------------------
+bool MuseScoreApplication::event(QEvent *event)
+      {
+      switch(event->type()) {
+            case QEvent::FileOpen:
+                  paths.append(static_cast<QFileOpenEvent *>(event)->file());
+                  return true;
+            default:
+                  return QApplication::event(event);
+            }
+      }
+
+//---------------------------------------------------------
+//   eventFilter (mac only)
+//---------------------------------------------------------
 bool MuseScore::eventFilter(QObject *obj, QEvent *event)
       {
       switch(event->type()) {

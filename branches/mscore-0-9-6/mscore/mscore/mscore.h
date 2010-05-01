@@ -172,6 +172,18 @@ class Shortcut {
       Shortcut(const Shortcut& c);
       };
 
+
+//---------------------------------------------------------
+//   MuseScoreApplication (mac only)
+//---------------------------------------------------------
+
+class MuseScoreApplication : public QtSingleApplication {
+   public:  
+      QStringList paths;
+      MuseScoreApplication(const QString &id, int &argc, char **argv) : QtSingleApplication(id, argc, argv){};
+      bool event(QEvent *ev);
+      };
+
 //---------------------------------------------------------
 //   MuseScore
 //---------------------------------------------------------
