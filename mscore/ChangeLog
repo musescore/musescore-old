@@ -1,3 +1,5 @@
+1.may  (la)
+      - fix #5547: file association on mac + double click in finder
 29.apr (db)
       - fix import of MIDI files with .midi file extension
 25.apr (ws)
