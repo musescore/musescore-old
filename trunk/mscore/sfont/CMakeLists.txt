@@ -18,6 +18,30 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+add_custom_command(
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h
+   COMMAND ${CMAKE_COMMAND}
+   ARGS -E copy ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
+   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+add_custom_command(
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
+   COMMAND ${CMAKE_CXX_COMPILER}
+     -g -Wextra -Wall
+     -I"${QT_INCLUDE_DIR}"
+     -o all.h.pch all.h
+   DEPENDS ${PROJECT_BINARY_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+set_source_files_properties(
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PROJECT_BINARY_DIR}/all.h.pch
+      PROPERTIES generated true
+      )
+
 add_executable(sfconvert
    sfconvert.cpp sfont.cpp
    ${PROJECT_BINARY_DIR}/all.h.pch

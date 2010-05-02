@@ -25,10 +25,7 @@
 //   Divis
 //---------------------------------------------------------
 
-Divis::Divis () :
-   _flags (0),
-   _dmask (0),
-   _nrank (0)
+Divis::Divis() : _flags(0), _dmask(0), _nrank(0)
       {
       *_label = 0;
       _param [SWELL]._val = SWELL_DEF;
@@ -42,18 +39,18 @@ Divis::Divis () :
       _param [TMODD]._max = TMODD_MAX;
       }
 
-Keybd::Keybd() : _flags (0)
+Keybd::Keybd() : _flags(0)
       {
       *_label = 0;
       }
 
-Ifelm::Ifelm() : _state (0)
+Ifelm::Ifelm() : _state(0)
       {
       *_label = 0;
       *_mnemo = 0;
       }
 
-Group::Group() : _nifelm (0)
+Group::Group() : _nifelm(0)
       {
       *_label = 0;
       }
@@ -63,10 +60,10 @@ Group::Group() : _nifelm (0)
 //---------------------------------------------------------
 
 Model::Model (Aeolus* a,
-   uint16_t     *midimap,
-   const char   *stops,
-   const char   *instr,
-   const char   *waves)
+   uint16_t* midimap,
+   const char* stops,
+   const char* instr,
+   const char* waves)
    :
    _aeolus(a),
    _midimap (midimap),
@@ -97,10 +94,10 @@ void Model::init()
       read_instr ();
       read_presets ();
 
-      init_audio ();
-      init_iface ();
-      init_ranks (MT_LOAD_RANK);
-      init_ranks (MT_SAVE_RANK);
+      init_audio();
+      init_iface();
+      init_ranks(MT_LOAD_RANK);
+      init_ranks(MT_SAVE_RANK);
       }
 
 //---------------------------------------------------------
@@ -355,14 +352,13 @@ printf("Midi %x %x %x\n", t, p, v);
       }
 #endif
 
-void Model::init_audio (void)
+void Model::init_audio()
       {
+      Divis *D;
       int d;
-      Divis        *D;
-      M_new_divis  *M;
 
       for (d = 0, D = _divis; d < _ndivis; d++, D++) {
-            M = new M_new_divis ();
+            M_new_divis* M = new M_new_divis ();
             M->_flags = D->_flags;
             M->_dmask = D->_dmask;
             M->_asect = D->_asect;
@@ -370,7 +366,6 @@ void Model::init_audio (void)
             M->_tfreq = D->_param [Divis::TFREQ]._val;
             M->_tmodd = D->_param [Divis::TMODD]._val;
             _aeolus->newDivis(M);
-            // send_event (TO_AUDIO, M);
             }
       }
 
@@ -378,7 +373,7 @@ void Model::init_audio (void)
 //   init_iface
 //---------------------------------------------------------
 
-void Model::init_iface (void)
+void Model::init_iface()
       {
       M_ifc_init* M = new M_ifc_init;
       _aeolus->_ifc_init = M;
@@ -432,8 +427,7 @@ void Model::init_ranks (int comm)
             for (int i = 0; i < G->_nifelm; i++)
                   proc_rank (g, i, comm);
             }
-//WS        send_event (TO_IFACE, new ITC_mesg (MT_IFC_READY));
-        _ready = true;
+      _ready = true;
       }
 
 
@@ -523,53 +517,50 @@ void Model::clr_group (int g)
       }
 
 
-void Model::get_state (uint32_t *d)
-{
-    int    g, i;
-    uint32_t    s;
-    Group  *G;
-    Ifelm  *I;
+//---------------------------------------------------------
+//   get_state
+//---------------------------------------------------------
 
-    for (g = 0; g < _ngroup; g++)
-    {
-        G = _group + g;
-	s = 0;
-        for (i = 0; i < G->_nifelm; i++)
-	{
-	    I = G->_ifelms + i;
-            if (I->_state & 1) s |= 1 << i;
-	}
-        *d++ = s;
-    }
-}
-
-
-void Model::set_state (int bank, int pres)
-{
-    int    g, i;
-    uint32_t    d [NGROUP], s;
-    Group  *G;
-
-    _bank = bank;
-    _pres = pres;
-    if (get_preset (bank, pres, d))
-    {
-        for (g = 0; g < _ngroup; g++)
-        {
-            s = d [g];
-            G = _group + g;
-            for (i = 0; i < G->_nifelm; i++)
-	    {
-                set_ifelm (g, i, s & 1);
-                s >>= 1;
-	    }
-	}
-//WS        send_event (TO_IFACE, new M_ifc_preset (MT_IFC_PRRCL, bank, pres, _ngroup, d));
-    }
-    else  {
-//WS            send_event (TO_IFACE, new M_ifc_preset (MT_IFC_PRRCL, bank, pres, 0, 0));
+void Model::get_state(uint32_t* d)
+      {
+      for (int g = 0; g < _ngroup; g++) {
+            Group* G = _group + g;
+            uint32_t s = 0;
+            for (int i = 0; i < G->_nifelm; i++) {
+                  Ifelm* I = G->_ifelms + i;
+                  if (I->_state & 1)
+                        s |= 1 << i;
+                  }
+            *d++ = s;
             }
-}
+      }
+
+
+//---------------------------------------------------------
+//   set_state
+//---------------------------------------------------------
+
+void Model::set_state(int bank, int pres)
+      {
+      uint32_t d[NGROUP];
+
+      _bank = bank;
+      _pres = pres;
+      if (get_preset(bank, pres, d)) {
+            for (int g = 0; g < _ngroup; g++) {
+                  uint32_t s = d [g];
+                  Group* G = _group + g;
+                  for (int i = 0; i < G->_nifelm; i++) {
+                        set_ifelm (g, i, s & 1);
+                        s >>= 1;
+                        }
+                  }
+//WS        send_event (TO_IFACE, new M_ifc_preset (MT_IFC_PRRCL, bank, pres, _ngroup, d));
+            }
+      else  {
+//WS        send_event (TO_IFACE, new M_ifc_preset (MT_IFC_PRRCL, bank, pres, 0, 0));
+            }
+      }
 
 
 void Model::set_aupar (int /*s*/, int a, int p, float v)
@@ -608,19 +599,16 @@ printf("Model::set_dipar\n");
 
 
 void Model::set_mconf (int /*i*/, uint16_t *d)
-{
-    int j, a, b;
-
-    midi_off (127);
-    for (j = 0; j < 16; j++)
-    {
-        a = d [j];
-	b =  (a & 0x1000) ? (_keybd [a & 7]._flags & 127) : 0;
-        b |= a & 0x7700;
-        _midimap [j] = b;
-    }
+      {
+      midi_off(127);
+      for (int j = 0; j < 16; j++) {
+            int a = d [j];
+            int b =  (a & 0x1000) ? (_keybd [a & 7]._flags & 127) : 0;
+            b |= a & 0x7700;
+            _midimap [j] = b;
+            }
 //WS    send_event (TO_IFACE, new M_ifc_chconf (MT_IFC_MCSET, i, d));
-}
+      }
 
 
 void Model::midi_off (int mask)
@@ -643,47 +631,35 @@ void Model::retune (float freq, int temp)
             }
 }
 
-
 void Model::recalc (int g, int i)
-{
-    _count++;
-    _ready = false;
-    proc_rank (g, i, MT_CALC_RANK);
-//WS    send_event (TO_SLAVE, new ITC_mesg (MT_AUDIO_SYNC));
-}
-
+      {
+      _count++;
+      _ready = false;
+      proc_rank (g, i, MT_CALC_RANK);
+      }
 
 void Model::save ()
-{
-    int     g, i;
-    Group   *G;
-
-    write_instr ();
-    write_presets ();
-    _ready = false;
-    for (g = 0; g < _ngroup; g++)
-    {
-	G = _group + g;
-	for (i = 0; i < G->_nifelm; i++) proc_rank (g, i, MT_SAVE_RANK);
-    }
-//WS    send_event (TO_SLAVE, new ITC_mesg (MT_AUDIO_SYNC));
-}
-
+      {
+      write_instr ();
+      writePresets();
+      _ready = false;
+      for (int g = 0; g < _ngroup; g++) {
+            Group* G = _group + g;
+            for (int i = 0; i < G->_nifelm; i++)
+                  proc_rank (g, i, MT_SAVE_RANK);
+            }
+      }
 
 Rank *Model::find_rank (int g, int i)
-{
-    int    d, r;
-    Ifelm  *I;
-
-    I = _group [g]._ifelms + i;
-    if ((I->_type == Ifelm::DIVRANK) || (I->_type == Ifelm::KBDRANK))
-    {
-        d = (I->_action0 >> 16) & 255;
-        r = (I->_action0 >>  8) & 255;
-        return _divis [d]._ranks + r;
-    }
-    return 0;
-}
+      {
+      Ifelm* I = _group [g]._ifelms + i;
+      if ((I->_type == Ifelm::DIVRANK) || (I->_type == Ifelm::KBDRANK)) {
+            int d = (I->_action0 >> 16) & 255;
+            int r = (I->_action0 >>  8) & 255;
+            return _divis [d]._ranks + r;
+            }
+      return 0;
+      }
 
 
 int Model::read_instr ()
@@ -1042,17 +1018,17 @@ int Model::read_instr ()
 }
 
 
-int Model::write_instr (void)
-{
-    FILE          *F;
-    int           d, g, i, k, r;
-    char          buff [1024];
-    time_t        t;
-    Divis         *D;
-    Rank          *R;
-    Group         *G;
-    Ifelm         *I;
-    Addsynth      *A;
+int Model::write_instr()
+      {
+      FILE          *F;
+      int           d, g, i, k, r;
+      char          buff [1024];
+      time_t        t;
+      Divis         *D;
+      Rank          *R;
+      Group         *G;
+      Ifelm         *I;
+      Addsynth      *A;
 
     sprintf (buff, "%s/definition", _instr);
     if (! (F = fopen (buff, "w")))
@@ -1133,7 +1109,6 @@ int Model::write_instr (void)
     return 0;
 }
 
-
 //---------------------------------------------------------
 //   get_preset
 //---------------------------------------------------------
@@ -1160,7 +1135,7 @@ void Model::set_preset (int bank, int pres, uint32_t *bits)
       if ((bank  < 0) | (pres < 0) || (bank >= NBANK) || (pres >= NPRES))
             return;
       Preset* P = _preset [bank][pres];
-      if (! P) {
+      if (!P) {
             P = new Preset;
             _preset [bank][pres] = P;
             }
@@ -1205,11 +1180,11 @@ void Model::del_preset (int bank, int pres)
 //   read_presets
 //---------------------------------------------------------
 
-int Model::read_presets ()
+int Model::read_presets()
       {
-      char           name [1024];
-      unsigned char data [256];
-      FILE           *F;
+      char name [1024];
+      uchar data [256];
+      FILE *F;
 
       sprintf (name, "%s/presets", _instr);
       if (! (F = fopen (name, "r"))) {
@@ -1265,11 +1240,11 @@ int Model::read_presets ()
 //   write_presets
 //---------------------------------------------------------
 
-int Model::write_presets()
+bool Model::writePresets()
       {
-      char           name [1024];
-      unsigned char  *p, data [256];
-      FILE           *F;
+      char   name [1024];
+      uchar  data [256];
+      FILE   *F;
 
       sprintf (name, "%s/presets", _instr);
       if (! (F = fopen (name, "w"))) {
@@ -1285,7 +1260,7 @@ int Model::write_presets()
       WR2 (data + 14, _ngroup);
       fwrite (data, 16, 1, F);
 
-      p = data;
+      uchar* p = data;
       for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 16; j++) {
                   int v = _chconf [i]._bits [j];
