@@ -97,40 +97,40 @@ public:
     uint32_t  _action1;
 };
 
-
 class Group
-{
-public:
+      {
+   public:
 
-    enum { NIFELM = 32 };
+      enum { NIFELM = 32 };
 
-    Group (void);
+      Group();
 
-    char     _label [16];
-    int      _nifelm;
-    Ifelm    _ifelms [NIFELM];
-};
-
+      char     _label [16];
+      int      _nifelm;
+      Ifelm    _ifelms [NIFELM];
+      };
 
 class Chconf
-{
-public:
+      {
+   public:
 
-    Chconf (void) { memset (_bits, 0, 16 * sizeof (uint16_t)); }
+      Chconf () { memset (_bits, 0, 16 * sizeof (uint16_t)); }
 
-    uint16_t  _bits [16];
-};
+      uint16_t  _bits [16];
+      };
 
+//---------------------------------------------------------
+//   Preset
+//---------------------------------------------------------
 
 class Preset
-{
-public:
+      {
+   public:
 
-    Preset (void) { memset (_bits, 0, NGROUP * sizeof (uint32_t)); }
+      Preset () { memset (_bits, 0, NGROUP * sizeof (uint32_t)); }
 
-    uint32_t  _bits [NGROUP];
-};
-
+      uint32_t  _bits [NGROUP];
+      };
 
 //---------------------------------------------------------
 //   Model
@@ -164,7 +164,7 @@ class Model
       int             _sc_cmode; // stop control command mode
       int             _sc_group; // stop control group number
       Chconf          _chconf [8];
-      Preset         *_preset [NBANK][NPRES];
+      Preset*         _preset [NBANK][NPRES];
 
       void proc_mesg(ITC_mesg *M);
       void init_audio();
@@ -188,7 +188,7 @@ class Model
       void ins_preset(int bank, int pres, uint32_t *bits);
       void del_preset(int bank, int pres);
       int  read_presets();
-      int  write_presets();
+      bool writePresets();
 
    public:
       Model (Aeolus* aeolus, uint16_t* midimap, const char* stops,

@@ -1,3 +1,5 @@
+2.may (ws)
+      - fix #5441: calling appendPart() in plugin causes crash
 1.may  (la)
       - fix #5547: file association on mac + double click in finder
 29.apr (db)

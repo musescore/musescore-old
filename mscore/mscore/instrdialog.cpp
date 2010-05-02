@@ -583,12 +583,8 @@ void MuseScore::editInstrList()
 
                               cs->undoInsertStaff(staff, staffIdx);
 
-                              for (MeasureBase* mb = cs->measures()->first(); mb; mb = mb->next()) {
-                                    if (mb->type() != MEASURE)
-                                          continue;
-                                    Measure* m = (Measure*)mb;
+                              for (Measure* m = cs->firstMeasure(); m; m = m->nextMeasure())
                                     m->cmdAddStaves(staffIdx, staffIdx+1);
-                                    }
 
                               cs->adjustBracketsIns(staffIdx, staffIdx+1);
                               ++staffIdx;
