@@ -3796,11 +3796,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>NoTempo:</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>FóraDoTempo:</translation>
     </message>
 </context>
 <context>
@@ -4170,7 +4170,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation type="unfinished"/>
+        <translation>Barallar</translation>
     </message>
 </context>
 <context>
@@ -4971,7 +4971,7 @@ Seleccione unha única nota ou silencio e tente a operación de novo
     </message>
     <message>
         <source>small</source>
-        <translation>pequenos</translation>
+        <translation>pequeno</translation>
     </message>
     <message>
         <source>Chord Properties</source>
@@ -5267,11 +5267,11 @@ Tente gardar nun sitio diferente.</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
-        <translation type="unfinished"/>
+        <translation>Editor de drumroll...</translation>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
-        <translation type="unfinished"/>
+        <translation>Editor de pianoroll...</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
@@ -5288,7 +5288,8 @@ Tente gardar nun sitio diferente.</translation>
     <message>
         <source>unknown drop format: formats %1:
 </source>
-        <translation type="unfinished"/>
+        <translation>formato descoñecido: formatos %1:
+</translation>
     </message>
 </context>
 <context>
@@ -5409,7 +5410,8 @@ Tente gardar nun sitio diferente.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Fallou a inicialización do controlador de audio.&#13;
+Desactívase o secuenciador.</translation>
     </message>
     <message>
         <source>MuseScore: Load SoundFont</source>
@@ -6188,7 +6190,7 @@ e verifique que a localización do ficheiro é a correcta</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">Bandeira de sistema</translation>
+        <translation>Indicador de sistema</translation>
     </message>
 </context>
 <context>
@@ -6504,7 +6506,7 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulario</translation>
+        <translation>Formulario</translation>
     </message>
     <message>
         <source>firstChord</source>
@@ -8641,23 +8643,23 @@ p, li { white-space: pre-wrap; }
     <name>drumset</name>
     <message>
         <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Bombo acústico</translation>
     </message>
     <message>
         <source>Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Bombo</translation>
     </message>
     <message>
         <source>Side Stick</source>
-        <translation type="unfinished"/>
+        <translation>Aro</translation>
     </message>
     <message>
         <source>Snare (Acoustic)</source>
-        <translation type="unfinished"/>
+        <translation>Caixa (acústica)</translation>
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation type="unfinished"/>
+        <translation>Caixa (eléctrica)</translation>
     </message>
     <message>
         <source>Tom 5</source>
@@ -8665,7 +8667,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation type="unfinished"/>
+        <translation>Chimbau fechado</translation>
     </message>
     <message>
         <source>Tom 4</source>
@@ -8673,7 +8675,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
-        <translation type="unfinished"/>
+        <translation>Pedal de chimbau</translation>
     </message>
     <message>
         <source>Tom 3</source>
@@ -8681,7 +8683,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Open</source>
-        <translation type="unfinished"/>
+        <translation>Chimbau aberto</translation>
     </message>
     <message>
         <source>Tom 2</source>
@@ -8705,7 +8707,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished"/>
+        <translation>Prato chinés</translation>
     </message>
     <message>
         <source>Ride (Bell)</source>
@@ -8713,15 +8715,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tambourine</source>
-        <translation type="unfinished"/>
+        <translation>Pandeireta</translation>
     </message>
     <message>
         <source>open high conga</source>
-        <translation type="unfinished"/>
+        <translation>Conga aguda aberta</translation>
     </message>
     <message>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation>Conga grave</translation>
     </message>
 </context>
 <context>
@@ -9481,7 +9483,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished">pizzicato estalado</translation>
+        <translation>pizzicato estalado</translation>
     </message>
     <message>
         <source>ushortfermata</source>
@@ -9513,7 +9515,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation type="unfinished"/>
+        <translation>acento</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -9553,7 +9555,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished">ouvert</translation>
+        <translation>ouvert</translation>
     </message>
     <message>
         <source>plus stop</source>
@@ -9609,7 +9611,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>varied coda</source>
-        <translation type="unfinished"/>
+        <translation>variación de coda</translation>
     </message>
     <message>
         <source>rcomma</source>
@@ -9685,11 +9687,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>caesura curved</source>
-        <translation type="unfinished"/>
+        <translation>cesura curva</translation>
     </message>
     <message>
         <source>caesura straight</source>
-        <translation type="unfinished"/>
+        <translation>cesura recta</translation>
     </message>
     <message>
         <source>eight flag</source>
@@ -9709,11 +9711,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>128flag</source>
-        <translation type="unfinished"/>
+        <translation>corchete de garrapatea</translation>
     </message>
     <message>
         <source>deight flag</source>
-        <translation type="unfinished"/>
+        <translation>corchete inferior de corchea</translation>
     </message>
     <message>
         <source>grace dash</source>
@@ -9737,7 +9739,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>d128flag</source>
-        <translation type="unfinished"/>
+        <translation>corchete inferior de garrapatea</translation>
     </message>
     <message>
         <source>alto clef</source>

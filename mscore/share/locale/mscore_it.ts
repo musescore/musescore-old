@@ -869,7 +869,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Properties</source>
-        <translation>Proprietà note</translation>
+        <translation>Proprietà della nota</translation>
     </message>
     <message>
         <source>tuning offset</source>
@@ -914,7 +914,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation type="unfinished"/>
+        <translation>dinamica (0-127)</translation>
     </message>
     <message>
         <source>user</source>
@@ -1116,7 +1116,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Velocità:</translation>
+        <translation>Dinamica (velocity):</translation>
     </message>
     <message>
         <source>align left</source>
@@ -1679,7 +1679,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create Multi Measure Rests</source>
-        <translation>Crea una pausa su più battute</translation>
+        <translation>Crea le pause di più battute</translation>
     </message>
     <message>
         <source>Hide Empty Staves</source>
@@ -3744,7 +3744,7 @@ is incompatible with current interface</source>
     <name>Note</name>
     <message>
         <source>Note Properties...</source>
-        <translation>Proprietà Note...</translation>
+        <translation>Proprietà della nota...</translation>
     </message>
     <message>
         <source>Tuplet Properties...</source>
@@ -4070,7 +4070,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished">Velocità:</translation>
+        <translation>Dinamica (velocity):</translation>
     </message>
     <message>
         <source>auto</source>
@@ -5085,7 +5085,7 @@ selezionare una battuta e riprovare</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation>Nessuna selezione. Si desidera trasporre l'INTERO spartito?</translation>
+        <translation>Nessuna selezione. Si desidera trasportare l'intero spartito?</translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
@@ -5726,7 +5726,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Reverb</source>
-        <translation>Reverb</translation>
+        <translation>Riverbero</translation>
     </message>
     <message>
         <source>Room Size:</source>
@@ -6285,19 +6285,19 @@ p, li { white-space: pre-wrap; }&#13;
     <name>TransposeDialogBase</name>
     <message>
         <source>Transpose key signatures</source>
-        <translation>Trasponi la tonalità</translation>
+        <translation>Trasporta la tonalità</translation>
     </message>
     <message>
         <source>Transpose chord names</source>
-        <translation>Trasponi i nomi degli accordi</translation>
+        <translation>Trasporta i nomi degli accordi</translation>
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation>MuseScore: Trasponi</translation>
+        <translation>MuseScore: Trasporto</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation type="unfinished"/>
+        <translation>Trasporta per tonalità</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
@@ -6373,7 +6373,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Transpose by Interval</source>
-        <translation>Trasponi per intervallo</translation>
+        <translation>Trasporta per intervallo</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
