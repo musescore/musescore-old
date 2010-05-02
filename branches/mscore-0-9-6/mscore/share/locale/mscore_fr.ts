@@ -1933,7 +1933,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Line break height</source>
-        <translation>Hauteur avant saut de ligne</translation>
+        <translation>Hauteur avant saut de système</translation>
     </message>
     <message>
         <source>Use German names</source>
@@ -2709,7 +2709,7 @@ failed: </source>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
-        <translation>Supprimer les pauses multi mesures</translation>
+        <translation>Diviser les pauses multi mesures</translation>
     </message>
 </context>
 <context>
@@ -2755,7 +2755,7 @@ failed: </source>
     </message>
     <message>
         <source>irregular</source>
-        <translation>non-nominale</translation>
+        <translation>hors compte</translation>
     </message>
     <message>
         <source>Staves</source>
@@ -2771,7 +2771,7 @@ failed: </source>
     </message>
     <message>
         <source>break multi measure rest</source>
-        <translation>Supprimer les pauses multi mesures</translation>
+        <translation>Diviser les pauses multi mesures</translation>
     </message>
     <message>
         <source>add to measure number</source>
@@ -3543,7 +3543,7 @@ Essayez plutôt dans le menu " Aide "  " Manuel en ligne ".</translation>
     </message>
     <message>
         <source>Line break</source>
-        <translation>Saut de ligne</translation>
+        <translation>Saut de système</translation>
     </message>
     <message>
         <source>Page break</source>

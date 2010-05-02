@@ -4977,7 +4977,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>zusätzlicher Platz links </translation>
+        <translation>zusätzlicher vorausgehender Abstand </translation>
     </message>
     <message>
         <source>sp</source>
@@ -4986,7 +4986,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>zusätzlicher Platz rechts</translation>
+        <translation>zusätzlicher nachfolgender Abstand</translation>
     </message>
 </context>
 <context>
@@ -5887,7 +5887,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Unsichtbar setzen</translation>
+        <translation>Unsichtbar</translation>
     </message>
     <message>
         <source>Set Visible</source>
@@ -7921,7 +7921,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>backspace</source>
-        <translation type="unfinished"/>
+        <translation>Rückschritt</translation>
     </message>
     <message>
         <source>search</source>
@@ -8361,7 +8361,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Player rewind</source>
-        <translation type="unfinished"/>
+        <translation>Zurückspulen</translation>
     </message>
     <message>
         <source>Rewind to start position</source>
@@ -8945,7 +8945,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Segment</source>
-        <translation>Segment</translation>
+        <translation>Abschnitt</translation>
     </message>
     <message>
         <source>System</source>
@@ -9506,7 +9506,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished">Daumen</translation>
+        <translation>Daumen</translation>
     </message>
     <message>
         <source>sforza to accent</source>
@@ -9550,7 +9550,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished">Offen</translation>
+        <translation>Ouvert</translation>
     </message>
     <message>
         <source>plus stop</source>

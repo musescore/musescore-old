@@ -92,7 +92,7 @@ p, li { white-space: pre-wrap; }
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Form</translation>
+        <translation>Form</translation>
     </message>
     <message>
         <source>up:</source>
@@ -100,7 +100,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished">Ackord/Paus</translation>
+        <translation>Ackord/Paus</translation>
     </message>
 </context>
 <context>
@@ -936,7 +936,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source> cent</source>
         <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"/>
+        <translation> cent</translation>
     </message>
     <message>
         <source> ticks</source>
@@ -1131,7 +1131,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Apply to:</source>
-        <translation type="unfinished"/>
+        <translation>Verkställ på:</translation>
     </message>
 </context>
 <context>
@@ -1763,11 +1763,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished"/>
+        <translation>Taktstreck i början av enstaka notplan</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation type="unfinished"/>
+        <translation>Taktstreck i början av sammansatt system</translation>
     </message>
     <message>
         <source>Music upper margin</source>
@@ -1807,7 +1807,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation type="unfinished"/>
+        <translation>Spridning (1=tätt)</translation>
     </message>
     <message>
         <source>Left margin</source>
@@ -1823,27 +1823,27 @@ space unit</extracomment>
     </message>
     <message>
         <source>Clef left margin</source>
-        <translation type="unfinished"/>
+        <translation>Klavs vänstermarginal</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation>Tonartssignaturs vänstermarginal</translation>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation>Taktartssignaturs vänstermarginal</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
-        <translation type="unfinished"/>
+        <translation>Avstånd klav-tonartssign</translation>
     </message>
     <message>
         <source>Clef-barline distance</source>
-        <translation type="unfinished"/>
+        <translation>Avstånd klav-taktstreck</translation>
     </message>
     <message>
         <source>Begin repeat left margin</source>
-        <translation type="unfinished"/>
+        <translation>Framåtvänt repristeckens vänstermarginal</translation>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
@@ -1875,7 +1875,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Ledger line width</source>
-        <translation type="unfinished"/>
+        <translation>Hjälplinjebredd</translation>
     </message>
     <message>
         <source>Distance to note</source>
@@ -1887,39 +1887,39 @@ space unit</extracomment>
     </message>
     <message>
         <source>Beam width</source>
-        <translation type="unfinished"/>
+        <translation>balkbredd</translation>
     </message>
     <message>
         <source>Beam distance</source>
-        <translation type="unfinished"/>
+        <translation>balkavstånd</translation>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation type="unfinished"/>
+        <translation>minsta längd</translation>
     </message>
     <message>
         <source>Minimum slope</source>
-        <translation type="unfinished"/>
+        <translation>minsta lutning</translation>
     </message>
     <message>
         <source>Maximum slope</source>
-        <translation type="unfinished"/>
+        <translation>största lutning</translation>
     </message>
     <message>
         <source>Small staff size</source>
-        <translation type="unfinished"/>
+        <translation>Storlek för litet system</translation>
     </message>
     <message>
         <source>Small note size</source>
-        <translation type="unfinished"/>
+        <translation>Liten notstorlek</translation>
     </message>
     <message>
         <source>Grace note size</source>
-        <translation type="unfinished"/>
+        <translation>Prydnadsnots storlek</translation>
     </message>
     <message>
         <source>Small clef size</source>
-        <translation type="unfinished"/>
+        <translation>Liten klavstorlek</translation>
     </message>
     <message>
         <source>Line break height</source>
@@ -1931,15 +1931,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Chord description file</source>
-        <translation type="unfinished"/>
+        <translation>Ackordbeteckningsfil:</translation>
     </message>
     <message>
         <source>Articulation - note head distance</source>
-        <translation>Artikulation - nothuvudsavstånd</translation>
+        <translation>Avstånd mellan nothuvud och artikulationsbeteckning</translation>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation>Artikulation - notskaftsavstånd</translation>
+        <translation>Avstånd mellan notskaft och artikulationsbeteckning</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
