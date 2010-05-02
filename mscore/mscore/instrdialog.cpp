@@ -536,7 +536,6 @@ void MuseScore::editInstrList()
                         Staff* staff       = new Staff(cs, part, rstaff);
                         sli->staff         = staff;
                         staff->setRstaff(rstaff);
-                        // ++rstaff;
                         staff->clefList()->setClef(0, sli->clef());
                         staff->setLines(t->staffLines[cidx]);
                         staff->setSmall(t->smallStaff[cidx]);
@@ -674,12 +673,8 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
 
       int sidx = this->staffIdx(part);
       int eidx = sidx + part->nstaves();
-      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
             m->cmdAddStaves(sidx, eidx);
-            }
       adjustBracketsIns(sidx, eidx);
       }
 
