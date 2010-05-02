@@ -5600,7 +5600,7 @@ e verifique se a localização do arquivo está correta</translation>
     </message>
     <message>
         <source>dotted</source>
-        <translation>pontilhada</translation>
+        <translation>pontilhado</translation>
     </message>
 </context>
 <context>
