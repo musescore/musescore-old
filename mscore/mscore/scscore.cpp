@@ -283,6 +283,9 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                               }
                         score->staves().insert(i, staff);
                         part->staves()->push_back(staff);
+                        int staffIdx = staff->idx();
+                        for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure())
+                              m->cmdAddStaves(staffIdx, staffIdx+1);
                         }
                   score->insertPart(part, 0);
                   score->fixTicks();
