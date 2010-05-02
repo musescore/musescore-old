@@ -271,23 +271,20 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         }
                   Part* part = new Part(score);
                   part->initFromInstrTemplate(t);
+                  int n = score->nstaves();
                   for (int i = 0; i < t->staves; ++i) {
                         Staff* staff = new Staff(score, part, i);
                         staff->clefList()->setClef(0, t->clefIdx[i]);
                         staff->setLines(t->staffLines[i]);
                         staff->setSmall(t->smallStaff[i]);
-                        staff->setRstaff(i);
                         if (i == 0) {
                               staff->setBracket(0, t->bracket);
                               staff->setBracketSpan(0, t->staves);
                               }
-                        score->staves().insert(i, staff);
-                        part->staves()->push_back(staff);
-                        int staffIdx = staff->idx();
-                        for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure())
-                              m->cmdAddStaves(staffIdx, staffIdx+1);
+                        score->undoInsertStaff(staff, n + i);
                         }
-                  score->insertPart(part, 0);
+                  part->staves()->front()->setBarLineSpan(part->nstaves());
+                  score->cmdInsertPart(part, n);
                   score->fixTicks();
                   score->rebuildMidiMapping();
                   return context->engine()->undefinedValue();
