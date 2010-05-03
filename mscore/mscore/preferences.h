@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -35,10 +35,13 @@ enum SessionStart {
 //---------------------------------------------------------
 
 struct MidiRemote {
+      const char* cmd;
       int channel;
       int type;         // -1 : inactive, 0 : noteOn, 1 : ctrl
       int data;         // pitch or controller number
       };
+
+static const int MIDI_REMOTES = 2;
 
 //---------------------------------------------------------
 //   Preferences
@@ -85,9 +88,11 @@ struct Preferences {
       QString workingDirectory;
       bool showSplashScreen;
 
-      MidiRemote rewind, play, stop;
-      MidiRemote len1, len2, len4, len8, len16, len32;
-      MidiRemote len3, len6, len12, len24;
+      bool useMidiRemote;
+      MidiRemote midiRemote[MIDI_REMOTES];
+
+//      MidiRemote len1, len2, len4, len8, len16, len32;
+//      MidiRemote len3, len6, len12, len24;
       bool midiExpandRepeats;
 
       bool playRepeats;
@@ -109,10 +114,10 @@ struct Preferences {
       bool landscape;
       bool twosided;
       double spatium;
-      
+
       //update
       int checkUpdateStartup;
-      
+
       float tuning;                 // synthesizer master tuning offset (440Hz)
       float masterGain;            // synthesizer master gain
       float chorusGain;
@@ -181,12 +186,14 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void pageFormatSelected(int);
       void landscapeToggled(bool);
       void styleFileButtonClicked();
+      void recordButtonClicked(int);
 
    signals:
       void preferencesChanged();
 
    public:
       PreferenceDialog(QWidget* parent);
+      void updateRemote();
       };
 
 extern Preferences preferences;

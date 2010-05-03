@@ -1,4 +1,5 @@
 3.may (ws)
+      - midi remote control of play/rewind
       - fix #5641, #5644: change pitch of tied notes
 2.may (ws)
       - fix #5441: calling appendPart() in plugin causes crash

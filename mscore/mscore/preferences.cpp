@@ -119,10 +119,6 @@ void Preferences::init()
       fgColor.setRgb(255, 255, 255);
       bgColor.setRgb(0x76, 0x76, 0x6e);
 
-      //selectColor[0] = Qt::blue;
-      //selectColor[1] = Qt::green;
-      //selectColor[2] = Qt::yellow;
-      //selectColor[3] = Qt::magenta;
       selectColor[0].setRgb(0, 0, 255);     //blue
       selectColor[1].setRgb(0, 150, 0);     //green
       selectColor[2].setRgb(230, 180, 50);  //yellow
@@ -167,19 +163,9 @@ void Preferences::init()
       workingDirectory         = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       showSplashScreen         = true;
 
-      rewind.type              = -1;
-      play.type                = -1;
-      stop.type                = -1;
-      len1.type                = -1;
-      len2.type                = -1;
-      len4.type                = -1;
-      len8.type                = -1;
-      len16.type               = -1;
-      len32.type               = -1;
-      len3.type                = -1;
-      len6.type                = -1;
-      len12.type               = -1;
-      len24.type               = -1;
+      useMidiRemote      = false;
+      for (int i = 0; i < MIDI_REMOTES; ++i)
+            midiRemote[i].type = -1;
 
       midiExpandRepeats        = true;
       playRepeats              = true;
@@ -324,6 +310,12 @@ void Preferences::write()
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
 
+      s.setValue("useMidiRemote", useMidiRemote);
+      for (int i = 0; i < MIDI_REMOTES; ++i) {
+            if (midiRemote[i].type != -1)
+                  s.setValue(QString("remote%1").arg(i), midiRemote[i].data);
+            }
+
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
       s.endGroup();
@@ -449,6 +441,12 @@ void Preferences::read()
       startScore     = s.value("startScore", ":/data/demo.mscx").toString();
       instrumentList = s.value("instrumentList", ":/data/instruments.xml").toString();
 
+      useMidiRemote  = s.value("useMidiRemote", false).toBool();
+      for (int i = 0; i < MIDI_REMOTES; ++i) {
+            midiRemote[i].data = s.value(QString("remote%1").arg(i), -1).toInt();
+            midiRemote[i].type = midiRemote[i].data == -1 ? -1 : 0;
+            }
+
       s.beginGroup("PlayPanel");
       playPanelPos = s.value("pos", QPoint(100, 300)).toPoint();
       s.endGroup();
@@ -525,7 +523,45 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(pageGroup,   SIGNAL(activated(int)), SLOT(pageFormatSelected(int)));
       connect(landscape,   SIGNAL(toggled(bool)), SLOT(landscapeToggled(bool)));
 
-      connect(styleFileButton, SIGNAL(clicked()), SLOT(styleFileButtonClicked()));
+      QButtonGroup* recordButtons = new QButtonGroup(this);
+      recordButtons->setExclusive(false);
+      recordButtons->addButton(recordRewind, 0);
+      recordButtons->addButton(recordPlay,   1);
+
+      connect(recordButtons, SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
+      updateRemote();
+      }
+
+//---------------------------------------------------------
+//   recordButtonClicked
+//---------------------------------------------------------
+
+void PreferenceDialog::recordButtonClicked(int val)
+      {
+      switch(val) {
+            case 0:
+                  recordRewind->setChecked(true);
+                  recordPlay->setChecked(false);
+                  break;
+            case 1:
+                  recordRewind->setChecked(false);
+                  recordPlay->setChecked(true);
+                  break;
+            }
+      mscore->setMidiRecordId(val);
+      }
+
+//---------------------------------------------------------
+//   updateRemote
+//---------------------------------------------------------
+
+void PreferenceDialog::updateRemote()
+      {
+      rewindActive->setChecked(preferences.midiRemote[0].type != -1);
+      playActive->setChecked(preferences.midiRemote[1].type   != -1);
+      int id = mscore->midiRecordId();
+      recordRewind->setChecked(id == 0);
+      recordPlay->setChecked(id == 1);
       }
 
 //---------------------------------------------------------
@@ -534,6 +570,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
 void PreferenceDialog::updateValues(Preferences* p)
       {
+      rcGroup->setChecked(p->useMidiRemote);
       fgWallpaper->setText(p->fgWallpaper);
       bgWallpaper->setText(p->bgWallpaper);
 
@@ -989,6 +1026,7 @@ void PreferenceDialog::buttonBoxClicked(QAbstractButton* button)
 
 void PreferenceDialog::apply()
       {
+      preferences.useMidiRemote  = rcGroup->isChecked();
       preferences.selectColor[0] = selectColorLabel1->color();
       preferences.selectColor[1] = selectColorLabel2->color();
       preferences.selectColor[2] = selectColorLabel3->color();

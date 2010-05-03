@@ -39,6 +39,7 @@ RecordButton::RecordButton(QWidget* parent)
    : SimpleButton(":/data/recordOn.svg", ":/data/recordOff.svg", parent)
       {
       setCheckable(true);
+      defaultAction()->setCheckable(true);
       setToolTip(tr("record"));
       }
 
