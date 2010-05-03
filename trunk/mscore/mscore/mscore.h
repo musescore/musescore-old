@@ -177,7 +177,7 @@ class Shortcut {
 //---------------------------------------------------------
 
 class MuseScoreApplication : public QtSingleApplication {
-   public:  
+   public:
       QStringList paths;
       MuseScoreApplication(const QString &id, int &argc, char **argv) : QtSingleApplication(id, argc, argv){};
       bool event(QEvent *ev);
@@ -279,6 +279,8 @@ class MuseScore : public QMainWindow {
       bool _horizontalSplit;
 
       QString rev;
+
+      int _midiRecordId;
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
@@ -422,6 +424,8 @@ class MuseScore : public QMainWindow {
       bool hasToCheckForUpdate();
       static bool unstable();
       bool eventFilter(QObject *, QEvent *);
+      void setMidiRecordId(int id) { _midiRecordId = id; }
+      int midiRecordId() const { return _midiRecordId; }
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

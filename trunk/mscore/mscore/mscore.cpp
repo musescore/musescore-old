@@ -372,6 +372,7 @@ MuseScore::MuseScore()
       _splitScreen          = false;
       _horizontalSplit      = true;
       chordStyleEditor      = 0;
+      _midiRecordId         = -1;
 
       _positionLabel = new QLabel;
       _positionLabel->setText("001:01:000");
@@ -1374,6 +1375,28 @@ bool MuseScore::midiinEnabled() const
 
 void MuseScore::midiNoteReceived(int pitch, bool chord)
       {
+      if (_midiRecordId != -1) {
+            preferences.midiRemote[_midiRecordId].type = 0;
+            preferences.midiRemote[_midiRecordId].data = pitch;
+            printf("learned id %d pitch %d\n", _midiRecordId, pitch);
+            _midiRecordId = -1;
+            if (preferenceDialog)
+                  preferenceDialog->updateRemote();
+            return;
+            }
+      if (preferences.useMidiRemote) {
+            for (int i = 0; i < MIDI_REMOTES; ++i) {
+                  if (preferences.midiRemote[i].type == 0 && preferences.midiRemote[i].data == pitch) {
+                        if (cv == 0)
+                              return;
+                        switch(i) {
+                              case 0: cv->cmd(getAction("rewind")); break;
+                              case 1: cv->cmd(getAction("play")); break;
+                              }
+                        return;
+                        }
+                  }
+            }
       QWidget* w = QApplication::activeModalWidget();
       if (cv && w == 0)
             cv->midiNoteReceived(pitch, chord);
@@ -1698,11 +1721,11 @@ int main(int argc, char* av[])
       revision = QString(f.readAll());
       f.close();
 
-#ifdef Q_WS_MAC      
+#ifdef Q_WS_MAC
       MuseScoreApplication* app = new MuseScoreApplication("mscore", argc, av);
 #else
       QtSingleApplication* app = new QtSingleApplication("mscore", argc, av);
-#endif 
+#endif
 
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();
@@ -1928,7 +1951,7 @@ int main(int argc, char* av[])
       initDrumset();
       gscore = new Score(defaultStyle);
       mscore = new MuseScore();
-#ifdef Q_WS_MAC 
+#ifdef Q_WS_MAC
       QApplication::instance()->installEventFilter(mscore);
 #endif
       mscore->setRevision(revision);

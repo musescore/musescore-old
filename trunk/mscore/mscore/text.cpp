@@ -365,7 +365,7 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       c.palette.setColor(QPalette::Text, color);
 
       _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0*DPI/PDPI))));
-// p.scale(DPI/PDPI, DPI/PDPI);
+//    p.scale(DPI/PDPI, DPI/PDPI);
       _doc->documentLayout()->draw(&p, c);
 
       // draw frame
