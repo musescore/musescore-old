@@ -1304,13 +1304,10 @@ void Score::upDown(bool up, bool octave)
                   startLayout = note->chord()->segment()->measure();
             else if (startLayout != note->chord()->segment()->measure())
                   layoutAll = true;
+            while (note->tieBack())
+                  note = note->tieBack()->startNote();
             for (; note; note = note->tieFor() ? note->tieFor()->endNote() : 0) {
-                  iElement ii;
-                  for (ii = el.begin(); ii != el.end(); ++ii) {
-                        if (*ii == note)
-                              break;
-                        }
-                  if (ii == el.end()) {
+                  if (el.indexOf(note) == -1) {
                         el.append(note);
                         if (tick == -1)
                               tick = note->chord()->tick();
@@ -1662,6 +1659,21 @@ void Score::changeAccidental(Note* note, int accidental)
       int user   = ((acc2 == acc) ||(Accidental::value2subtype(acc)!= accidental)) ? accidental : 0;
 
       _undo->push(new ChangePitch(note, pitch, tpc, user));
+      //
+      // handle ties
+      //
+      if (note->tieBack()) {
+            cmdRemove(note->tieBack());
+            if (note->tieFor())
+                  cmdRemove(note->tieFor());
+            }
+      else {
+            Note* n = note;
+            while(n->tieFor()) {
+                  n = n->tieFor()->endNote();
+                  _undo->push(new ChangePitch(n, pitch, tpc, user));
+                  }
+            }
       }
 
 //---------------------------------------------------------
