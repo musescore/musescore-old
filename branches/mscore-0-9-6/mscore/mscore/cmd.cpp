@@ -2936,7 +2936,12 @@ void ScoreView::search(const QString& s)
                   for (track = 0; track < tracks; ++track) {
                         ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
                         if (cr) {
-                              Element* e = cr->type() == CHORD ? static_cast<Chord*>(cr)->upNote() : 0;
+                              Element* e;
+                              if(cr->type() == CHORD)
+                                    e =  static_cast<Chord*>(cr)->upNote();
+                              else //REST
+                                    e = cr;  
+                                    
                               _score->select(e, SELECT_SINGLE, 0);
                               break;
                               }

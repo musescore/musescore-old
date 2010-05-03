@@ -242,7 +242,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             ++idx;
             }
 
-      settings.setValue("lastSaveCopyDirctory", lastSaveCopyDirectory);
+      settings.setValue("lastSaveCopyDirectory", lastSaveCopyDirectory);
       settings.setValue("lastSaveDirectory", lastSaveDirectory);
 
       if (synthControl)
@@ -1790,7 +1790,6 @@ int main(int argc, char* av[])
                   int ok = true;
                   foreach(QString message, argv) {
                         QFileInfo fi(message);
-                        printf("send message %s\n", qPrintable(fi.absoluteFilePath()));
                         if (!app->sendMessage(fi.absoluteFilePath())) {
                               ok = false;
                               break;
@@ -1800,7 +1799,6 @@ int main(int argc, char* av[])
                         return 0;
                   }
             else{
-                 printf("argv empty\n");
                    if (app->sendMessage("")) {
                       return 0;
                       }
