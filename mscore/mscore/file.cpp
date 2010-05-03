@@ -403,9 +403,9 @@ bool Score::saveAs(bool saveCopy)
 
       QSettings settings;
       if (mscore->lastSaveCopyDirectory.isEmpty())
-            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory").toString();
+            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.workingDirectory).toString();
       if (mscore->lastSaveDirectory.isEmpty())
-            mscore->lastSaveDirectory = settings.value("lastSaveDirectory").toString();
+            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
       QString saveDirectory = saveCopy ?
             mscore->lastSaveCopyDirectory : mscore->lastSaveDirectory;
 
