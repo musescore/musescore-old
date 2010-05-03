@@ -38,8 +38,17 @@ Q_DECLARE_METATYPE(SCursor*);
 
 void MuseScore::registerPlugin(const QString& pluginPath)
       {
-      if (plugins.contains(pluginPath))
-            return;
+      QFileInfo np(pluginPath);
+      QString baseName = np.baseName();
+
+      foreach(QString s, plugins) {
+            QFileInfo fi(s);
+            if (fi.baseName() == baseName) {
+                  if (debugMode)
+                        printf("  Plugin <%s> already registered\n", qPrintable(pluginPath));
+                  return;
+                  }
+            }
 
       QFile f(pluginPath);
       if (!f.open(QIODevice::ReadOnly)) {
@@ -54,7 +63,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             se = new ScriptEngine();
             se->installTranslatorFunctions();
             }
-            
+
       //load translation
       QFileInfo fi(pluginPath);
       QString pPath = fi.absolutePath();
@@ -65,7 +74,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       QTranslator* translator = new QTranslator;
       if(translator->load("locale_"+lName, pPath+"/translations"))
             qApp->installTranslator(translator);
-           
+
       QScriptValue val  = se->evaluate(f.readAll(), pluginPath);
       if (se->hasUncaughtException()) {
             QScriptValue sv = se->uncaughtException();
@@ -119,10 +128,10 @@ void MuseScore::registerPlugin(const QString& pluginPath)
 
       int pluginIdx = plugins.size();
       plugins.append(pluginPath);
-      
+
       //give access to pluginPath in init
       se->globalObject().setProperty("pluginPath", se->newVariant(pPath));
-      
+
       init.call();
       QString menu = val.property("menu").toString();
       QString context = fi.baseName();
@@ -242,10 +251,15 @@ void MuseScore::loadPlugins()
       {
       pluginMapper = new QSignalMapper(this);
       connect(pluginMapper, SIGNAL(mapped(int)), SLOT(pluginTriggered(int)));
+      loadPluginDir(dataPath + "/plugins");
+      loadPluginDir(mscoreGlobalShare + "plugins");
+      }
 
-      QDir pluginDir(mscoreGlobalShare + "plugins");
+void MuseScore::loadPluginDir(const QString& pluginPath)
+      {
       if (debugMode)
-            printf("Plugin Path <%s>\n", qPrintable(mscoreGlobalShare + "plugins"));
+            printf("Plugin Path <%s>\n", qPrintable(pluginPath));
+      QDir pluginDir(pluginPath);
       QDirIterator it(pluginDir, QDirIterator::Subdirectories);
       while (it.hasNext()) {
             it.next();
@@ -331,7 +345,7 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("mscoreMajorVersion",  newVariant(majorVersion()));
       globalObject().setProperty("mscoreMinorVersion",  newVariant(minorVersion()));
       globalObject().setProperty("mscoreUpdateVersion", newVariant(updateVersion()));
-      
+
       //globalObject().setProperty("localeName",          newVariant(lName));
       }
 

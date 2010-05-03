@@ -444,7 +444,7 @@ void Preferences::read()
       useMidiRemote  = s.value("useMidiRemote", false).toBool();
       for (int i = 0; i < MIDI_REMOTES; ++i) {
             midiRemote[i].data = s.value(QString("remote%1").arg(i), -1).toInt();
-            midiRemote[i].type = midiRemote[i].data == -1 ? -1 : 0;
+            midiRemote[i].type = (midiRemote[i].data == -1) ? -1 : 0;
             }
 
       s.beginGroup("PlayPanel");
@@ -523,10 +523,21 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(pageGroup,   SIGNAL(activated(int)), SLOT(pageFormatSelected(int)));
       connect(landscape,   SIGNAL(toggled(bool)), SLOT(landscapeToggled(bool)));
 
-      QButtonGroup* recordButtons = new QButtonGroup(this);
+      recordButtons = new QButtonGroup(this);
       recordButtons->setExclusive(false);
       recordButtons->addButton(recordRewind, 0);
       recordButtons->addButton(recordPlay,   1);
+      recordButtons->addButton(rcr2,   2);
+      recordButtons->addButton(rcr3,   3);
+      recordButtons->addButton(rcr4,   4);
+      recordButtons->addButton(rcr5,   5);
+      recordButtons->addButton(rcr6,   6);
+      recordButtons->addButton(rcr7,   7);
+      recordButtons->addButton(rcr8,   8);
+      recordButtons->addButton(rcr9,   9);
+      recordButtons->addButton(rcr10, 10);
+      recordButtons->addButton(rcr11, 11);
+      recordButtons->addButton(rcr12, 12);
 
       connect(recordButtons, SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
       updateRemote();
@@ -538,15 +549,8 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
 void PreferenceDialog::recordButtonClicked(int val)
       {
-      switch(val) {
-            case 0:
-                  recordRewind->setChecked(true);
-                  recordPlay->setChecked(false);
-                  break;
-            case 1:
-                  recordRewind->setChecked(false);
-                  recordPlay->setChecked(true);
-                  break;
+      foreach(QAbstractButton* b, recordButtons->buttons()) {
+            b->setChecked(recordButtons->id(b) == val);
             }
       mscore->setMidiRecordId(val);
       }
@@ -559,9 +563,32 @@ void PreferenceDialog::updateRemote()
       {
       rewindActive->setChecked(preferences.midiRemote[0].type != -1);
       playActive->setChecked(preferences.midiRemote[1].type   != -1);
+      rca2->setChecked(preferences.midiRemote[2].type != -1);
+      rca3->setChecked(preferences.midiRemote[3].type != -1);
+      rca4->setChecked(preferences.midiRemote[4].type != -1);
+      rca5->setChecked(preferences.midiRemote[5].type != -1);
+      rca6->setChecked(preferences.midiRemote[6].type != -1);
+      rca7->setChecked(preferences.midiRemote[7].type != -1);
+      rca8->setChecked(preferences.midiRemote[8].type != -1);
+      rca9->setChecked(preferences.midiRemote[9].type != -1);
+      rca10->setChecked(preferences.midiRemote[10].type != -1);
+      rca11->setChecked(preferences.midiRemote[11].type != -1);
+      rca12->setChecked(preferences.midiRemote[12].type != -1);
+
       int id = mscore->midiRecordId();
       recordRewind->setChecked(id == 0);
       recordPlay->setChecked(id == 1);
+      rcr2->setChecked(id == 2);
+      rcr3->setChecked(id == 3);
+      rcr4->setChecked(id == 4);
+      rcr5->setChecked(id == 5);
+      rcr6->setChecked(id == 6);
+      rcr7->setChecked(id == 7);
+      rcr8->setChecked(id == 8);
+      rcr9->setChecked(id == 9);
+      rcr10->setChecked(id == 10);
+      rcr11->setChecked(id == 11);
+      rcr12->setChecked(id == 12);
       }
 
 //---------------------------------------------------------
