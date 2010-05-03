@@ -46,7 +46,7 @@ TextBase::TextBase()
       {
       _refCount     = 1;
       _doc          = new QTextDocument(0);
-      _doc->setUseDesignMetrics(true);
+//      _doc->setUseDesignMetrics(true);
       _doc->setUndoRedoEnabled(true);
 
       _hasFrame     = false;

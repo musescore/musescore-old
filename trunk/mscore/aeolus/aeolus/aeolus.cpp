@@ -49,7 +49,7 @@ void Aeolus::init(int samplerate)
 
       audio_start();
       model->init();
-      printGui();
+//      printGui();
       }
 
 //---------------------------------------------------------
