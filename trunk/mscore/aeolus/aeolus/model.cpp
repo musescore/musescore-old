@@ -16,6 +16,7 @@
     Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
+#include <time.h>
 #include "model.h"
 #include "scales.h"
 #include "global.h"
