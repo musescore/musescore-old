@@ -348,6 +348,7 @@ class MuseScore : public QMainWindow {
       void drumPaletteSelected(int);
       void endSearch();
       void closeSynthControl();
+      void loadPluginDir(const QString& pluginPath);
 
    public slots:
       void dirtyChanged(Score*);
