@@ -38,8 +38,17 @@ Q_DECLARE_METATYPE(SCursor*);
 
 void MuseScore::registerPlugin(const QString& pluginPath)
       {
-      if (plugins.contains(pluginPath))
-            return;
+      QFileInfo np(pluginPath);
+      QString baseName = np.baseName();
+
+      foreach(QString s, plugins) {
+            QFileInfo fi(s);
+            if (fi.baseName() == baseName) {
+                  if (debugMode)
+                        printf("  Plugin <%s> already registered\n", qPrintable(pluginPath));
+                  return;
+                  }
+            }
 
       QFile f(pluginPath);
       if (!f.open(QIODevice::ReadOnly)) {
@@ -242,10 +251,15 @@ void MuseScore::loadPlugins()
       {
       pluginMapper = new QSignalMapper(this);
       connect(pluginMapper, SIGNAL(mapped(int)), SLOT(pluginTriggered(int)));
+      loadPluginDir(dataPath + "/plugins");
+      loadPluginDir(mscoreGlobalShare + "plugins");
+      }
 
-      QDir pluginDir(mscoreGlobalShare + "plugins");
+void MuseScore::loadPluginDir(const QString& pluginPath)
+      {
       if (debugMode)
-            printf("Plugin Path <%s>\n", qPrintable(mscoreGlobalShare + "plugins"));
+            printf("Plugin Path <%s>\n", qPrintable(pluginPath));
+      QDir pluginDir(pluginPath);
       QDirIterator it(pluginDir, QDirIterator::Subdirectories);
       while (it.hasNext()) {
             it.next();

@@ -1,4 +1,6 @@
 3.may (ws)
+      - read plugins also from local data dir
+        on linux: $HOME/.local/share/data/MusE/MuseScore/plugins
       - fix #5641, #5644: change pitch of tied notes
 2.may (ws)
       - fix #5441: calling appendPart() in plugin causes crash

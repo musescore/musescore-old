@@ -1698,11 +1698,11 @@ int main(int argc, char* av[])
       revision = QString(f.readAll());
       f.close();
 
-#ifdef Q_WS_MAC      
+#ifdef Q_WS_MAC
       MuseScoreApplication* app = new MuseScoreApplication("mscore", argc, av);
 #else
       QtSingleApplication* app = new QtSingleApplication("mscore", argc, av);
-#endif      
+#endif
 
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();
@@ -1807,6 +1807,12 @@ int main(int argc, char* av[])
 
 /**/
       dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+
+      // create local plugin directory
+      // if not already there:
+      QDir dir;
+      dir.mkpath(dataPath + "/plugins");
+
       setDefaultStyle();
       mscoreGlobalShare = getSharePath();
       if (debugMode)
@@ -1928,7 +1934,7 @@ int main(int argc, char* av[])
       initDrumset();
       gscore = new Score(defaultStyle);
       mscore = new MuseScore();
-#ifdef Q_WS_MAC 
+#ifdef Q_WS_MAC
       QApplication::instance()->installEventFilter(mscore);
 #endif
       mscore->setRevision(revision);
@@ -1943,7 +1949,7 @@ int main(int argc, char* av[])
                   if (!name.isEmpty())
                         ++files;
                   }
-           
+
 #ifdef Q_WS_MAC
             if (!mscore->restoreSession(preferences.sessionStart == LAST_SESSION))
                   loadScores(static_cast<MuseScoreApplication*>(qApp)->paths);
