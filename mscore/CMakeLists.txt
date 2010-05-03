@@ -34,7 +34,7 @@ set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE FALSE)
 set(SOUNDFONT3 TRUE)                      # enable ogg vorbis compressed fonts, require ogg & vorbis
-set(AEOLUS TRUE)                          # pipe organ synthesizer
+set(AEOLUS FALSE)                          # pipe organ synthesizer
 
 if (APPLE OR MINGW)
       set(SF_COMPRESSOR FALSE)
