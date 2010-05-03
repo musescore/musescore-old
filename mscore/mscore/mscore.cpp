@@ -242,7 +242,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             ++idx;
             }
 
-      settings.setValue("lastSaveCopyDirctory", lastSaveCopyDirectory);
+      settings.setValue("lastSaveCopyDirectory", lastSaveCopyDirectory);
       settings.setValue("lastSaveDirectory", lastSaveDirectory);
 
       if (synthControl)
