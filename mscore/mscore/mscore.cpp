@@ -1829,6 +1829,12 @@ int main(int argc, char* av[])
 
 /**/
       dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+
+      // create local plugin directory
+      // if not already there:
+      QDir dir;
+      dir.mkpath(dataPath + "/plugins");
+
       setDefaultStyle();
       mscoreGlobalShare = getSharePath();
       if (debugMode)
