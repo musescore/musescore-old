@@ -1236,22 +1236,20 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               note->setOffTimeOffset(ot);
                               note->setVeloType(USER_VAL);
                               note->setVelocity(mn->velo());
-#if 0
+
                               if (n->ties[i]) {
                                     n->ties[i]->setEndNote(note);
                                     n->ties[i]->setTrack(note->track());
                                     note->setTieBack(n->ties[i]);
                                     }
-#endif
+                              }
+                        if (n->mc->duration() <= len) {
+                              notes.removeAt(notes.indexOf(n));
+                              continue;
                               }
                         n->mc->setDuration(n->mc->duration() - len);
-                        if (n->mc->duration() <= 0) {
-                              notes.removeAt(notes.indexOf(n));
-                              delete n;
-                              }
-                        else
-                              n->mc->setOntime(n->mc->ontime() + len);
-#if 0
+                        n->mc->setOntime(n->mc->ontime() + len);
+
                         for (int i = 0; i < nl.size(); ++i) {
                               Event* mn = nl[i];
                               Note* note = chord->findNote(mn->pitch());
@@ -1259,7 +1257,6 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               n->ties[i]->setStartNote(note);
                               note->setTieFor(n->ties[i]);
                               }
-#endif
                         }
                   ctick += len;
 
