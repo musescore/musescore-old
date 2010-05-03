@@ -35,13 +35,12 @@ enum SessionStart {
 //---------------------------------------------------------
 
 struct MidiRemote {
-      const char* cmd;
       int channel;
       int type;         // -1 : inactive, 0 : noteOn, 1 : ctrl
       int data;         // pitch or controller number
       };
 
-static const int MIDI_REMOTES = 2;
+static const int MIDI_REMOTES = 13;
 
 //---------------------------------------------------------
 //   Preferences
@@ -91,8 +90,6 @@ struct Preferences {
       bool useMidiRemote;
       MidiRemote midiRemote[MIDI_REMOTES];
 
-//      MidiRemote len1, len2, len4, len8, len16, len32;
-//      MidiRemote len3, len6, len12, len24;
       bool midiExpandRepeats;
 
       bool playRepeats;
@@ -160,6 +157,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
 
       QMap<QString, Shortcut*> localShortcuts;
       bool shortcutsChanged;
+      QButtonGroup* recordButtons;
 
       void apply();
       bool sfChanged;

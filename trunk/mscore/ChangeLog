@@ -1,5 +1,7 @@
 3.may (ws)
-      - midi remote control of play/rewind
+      - read plugins also from local data dir
+        on linux: $HOME/.local/share/data/MusE/MuseScore/plugins
+      - midi remote control
       - fix #5641, #5644: change pitch of tied notes
 2.may (ws)
       - fix #5441: calling appendPart() in plugin causes crash
