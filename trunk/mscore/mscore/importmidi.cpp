@@ -1097,6 +1097,9 @@ void Score::convertTrack(MidiTrack* midiTrack)
                         chord->setTrack(staffIdx * VOICES + voice);
                         Duration d;
                         d.setVal(len);
+                        // might be shorter:
+                        len = d.ticks();
+
                         chord->setDuration(d);
                         Segment* s = measure->getSegment(chord);
                         s->add(chord);
@@ -1194,7 +1197,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             //
       	// process pending notes
             //
-            if (!notes.isEmpty()) {
+            while (!notes.isEmpty()) {
                   int tick = notes[0]->mc->ontime();
             	Measure* measure = tick2measure(tick);
                   Chord* chord = new Chord(this);
@@ -1207,11 +1210,19 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   	if (n->mc->duration() < len)
                               len = n->mc->duration();
                         }
+                  // split notes on measure boundary
+                  if ((tick + len) > measure->tick() + measure->tickLen()) {
+                        len = measure->tick() + measure->tickLen() - tick;
+                        }
                   Duration d;
                   d.setVal(len);
+                  len = d.ticks();
                   chord->setDuration(d);
+
             	foreach (MNote* n, notes) {
-                        foreach(Event* mn, n->mc->notes()) {
+                        QList<Event*>& nl = n->mc->notes();
+                        for (int i = 0; i < nl.size(); ++i) {
+                              Event* mn = nl[i];
                   		Note* note = new Note(this);
                               note->setPitch(mn->pitch(), mn->tpc());
             	      	note->setTrack(staffIdx * VOICES + voice);
@@ -1224,14 +1235,27 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               note->setOffTimeOffset(ot);
                               note->setVeloType(USER_VAL);
                               note->setVelocity(mn->velo());
+
+                              if (n->ties[i]) {
+                                    n->ties[i]->setEndNote(note);
+                                    n->ties[i]->setTrack(note->track());
+                                    note->setTieBack(n->ties[i]);
+                                    }
+                              }
+                        if (n->mc->duration() <= len) {
+                              notes.removeAt(notes.indexOf(n));
+                              continue;
                               }
                         n->mc->setDuration(n->mc->duration() - len);
-                        if (n->mc->duration() <= 0) {
-                              notes.removeAt(notes.indexOf(n));
-                              delete n;
+                        n->mc->setOntime(n->mc->ontime() + len);
+
+                        for (int i = 0; i < nl.size(); ++i) {
+                              Event* mn = nl[i];
+                              Note* note = chord->findNote(mn->pitch());
+                              n->ties[i] = new Tie(this);
+                              n->ties[i]->setStartNote(note);
+                              note->setTieFor(n->ties[i]);
                               }
-                        else
-                              n->mc->setOntime(n->mc->ontime() + len);
                         }
                   ctick += len;
 

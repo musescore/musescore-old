@@ -253,7 +253,7 @@ Channel::Channel()
       {
       for(int i = 0; i < A_INIT_COUNT; ++i)
             init.append(0);
-      synti    = -1;
+      synti    = 0;     // -1;
       channel  = -1;
       program  = -1;
       bank     = 0;
