@@ -1067,11 +1067,7 @@ void Score::convertTrack(MidiTrack* midiTrack)
             int ctick = 0;
             for (ciEvent i = el.begin(); i != el.end();) {
                   Event* e = *i;
-                  if (e->type() != ME_CHORD) {
-                        ++i;
-                        continue;
-                        }
-                  if (e->voice() != voice) {
+                  if (e->type() != ME_CHORD || e->voice() != voice) {
                         ++i;
                         continue;
                         }
@@ -1089,15 +1085,13 @@ void Score::convertTrack(MidiTrack* midiTrack)
                               }
             		Measure* measure = tick2measure(tick);
                         // split notes on measure boundary
-                        if ((tick + len) > measure->tick() + measure->tickLen()) {
+                        if ((tick + len) > measure->tick() + measure->tickLen())
                               len = measure->tick() + measure->tickLen() - tick;
-                              }
                         Chord* chord = new Chord(this);
                         chord->setTick(tick);
                         chord->setTrack(staffIdx * VOICES + voice);
-                        Duration d;
-                        d.setVal(len);
-                        // might be shorter:
+                        QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
+                        Duration d = dl[0];
                         len = d.ticks();
 
                         chord->setDuration(d);
@@ -1161,24 +1155,21 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               int len = restLen;
                   		Measure* measure = tick2measure(ctick);
                               // split rest on measure boundary
-                              if ((ctick + len) > measure->tick() + measure->tickLen()) {
+                              if ((ctick + len) > measure->tick() + measure->tickLen())
                                     len = measure->tick() + measure->tickLen() - ctick;
-                                    }
-                              Duration d;
-                              d.setVal(len);
-                              len = d.ticks();
+                              QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
+                              Duration d = dl.back();
                               Rest* rest = new Rest(this, ctick, d);
                               rest->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(rest);
                               s->add(rest);
-                              ctick   += len;
+                              len = d.ticks();
                               restLen -= len;
+                              ctick   += len;
                               }
                         }
-                  else {
-                        if (restLen > 0)
-                              ctick += restLen;
-                        }
+                  else
+                        ctick += restLen;
 
                   //
                   // collect all notes on current
@@ -1195,14 +1186,16 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   	MNote* n = new MNote(e);
             	      notes.append(n);
                         }
+                  if (notes.isEmpty())
+                        break;
                   }
-
             //
       	// process pending notes
             //
+            Measure* measure;
             while (!notes.isEmpty()) {
                   int tick = notes[0]->mc->ontime();
-            	Measure* measure = tick2measure(tick);
+            	measure = tick2measure(tick);
                   Chord* chord = new Chord(this);
                   chord->setTick(tick);
                   chord->setTrack(staffIdx * VOICES + voice);
@@ -1217,10 +1210,11 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   if ((tick + len) > measure->tick() + measure->tickLen()) {
                         len = measure->tick() + measure->tickLen() - tick;
                         }
-                  Duration d;
-                  d.setVal(len);
+                  QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
+                  Duration d = dl.front();
                   len = d.ticks();
                   chord->setDuration(d);
+                  ctick += len;
 
             	foreach (MNote* n, notes) {
                         QList<Event*>& nl = n->mc->notes();
@@ -1260,22 +1254,22 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               note->setTieFor(n->ties[i]);
                               }
                         }
-                  ctick += len;
-
-                  //
-                  // check for gap and fill with rest
-                  //
-                  int restLen = measure->tick() + measure->tickLen() - ctick;
-                  if (restLen > 0 && voice == 0) {
-                        Duration d;
-                        d.setVal(restLen);
-                        restLen = d.ticks();
-                        Rest* rest = new Rest(this, ctick, d);
-            		Measure* measure = tick2measure(ctick);
-                        rest->setTrack(staffIdx * VOICES + voice);
-                        Segment* s = measure->getSegment(rest);
-                        s->add(rest);
-                        }
+                  }
+            //
+            // check for gap and fill with rest
+            //
+            int restLen = measure->tick() + measure->tickLen() - ctick;
+            while (restLen > 0 && voice == 0) {
+                  QList<Duration> dl = toDurationList(Fraction::fromTicks(restLen), false);
+                  Duration d = dl.back();
+                  Rest* rest = new Rest(this, ctick, d);
+      		Measure* measure = tick2measure(ctick);
+                  rest->setTrack(staffIdx * VOICES + voice);
+                  Segment* s = measure->getSegment(rest);
+                  s->add(rest);
+                  int ticks = d.ticks();
+                  restLen -= ticks;
+                  ctick   += ticks;
                   }
             }
       if (!midiTrack->hasKey() && !midiTrack->isDrumTrack()) {
