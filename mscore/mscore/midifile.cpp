@@ -995,7 +995,7 @@ void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
       else if (mintick <= division * 8)
             mintick = division * 8;
 
-      if (mintick < mf->shortestNote())
+//DEBUG      if (mintick < mf->shortestNote())
             mintick = mf->shortestNote();
 
       int raster  = mintick;
