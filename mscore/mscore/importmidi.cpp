@@ -1175,8 +1175,10 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               restLen -= len;
                               }
                         }
-                  else
-                        ctick += restLen;
+                  else {
+                        if (restLen > 0)
+                              ctick += restLen;
+                        }
 
                   //
                   // collect all notes on current
