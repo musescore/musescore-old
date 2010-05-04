@@ -76,7 +76,7 @@ class TimeSig : public Element {
             }
       void getSig(int* n, int* z1, int* z2, int*z3=0, int*z4=0) const;
       void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);
-      void setSig(const Fraction& f) { setSig(f.denominator(), f.denominator(), 0, 0, 0); }
+      void setSig(const Fraction& f)     { setSig(f.denominator(), f.numerator(), 0, 0, 0); }
       void setSig(const AL::SigEvent& e) { setSig(e.fraction()); }
 
       bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
