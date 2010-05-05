@@ -283,7 +283,7 @@ void Channel::write(Xml& xml) const
                   e->write(xml);
             }
       if (synti)
-            xml.tag("synti", synti);
+            xml.tag("synti", seq->synthIndexToName(synti));
       if (mute)
             xml.tag("mute", mute);
       if (solo)

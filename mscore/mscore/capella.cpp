@@ -1515,10 +1515,11 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   case T_KEY:
                         {
                         CapKey* o = static_cast<CapKey*>(no);
-                        // printf("%d:%d <Key> %d\n", tick, staffIdx, o->signature);
                         int key = staff(staffIdx)->key(tick).accidentalType;
                         if (key != o->signature) {
+printf("%d:%d <Key> %d (is %d)\n", tick, staffIdx, o->signature, key);
                               staff(staffIdx)->setKey(tick, o->signature);
+printf("  "); staff(staffIdx)->key(tick).print(); printf("\n");
                               KeySig* ks = new KeySig(this);
                               ks->setTrack(staffIdx * VOICES);
                               Measure* m = getCreateMeasure(tick);

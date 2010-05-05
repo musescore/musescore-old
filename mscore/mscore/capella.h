@@ -95,7 +95,7 @@ class CapKey : public NoteObj, public CapellaObj {
    public:
       CapKey(Capella* c) : NoteObj(T_KEY), CapellaObj(c) {}
       void read();
-      int signature;
+      int signature;    // -7 - +7
       };
 
 //---------------------------------------------------------
