@@ -1,4 +1,5 @@
 5.may (ws)
+      - fix capella import: stave ordering for a part when saving
       - fix crash on import of some *.cap files
 3.may (ws)
       - read plugins also from local data dir
