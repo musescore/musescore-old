@@ -1665,7 +1665,7 @@ void Score::convertCapella(Capella* cap)
 
       Part* part = new Part(this);
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-            Staff* s = new Staff(this, part, 0);
+            Staff* s = new Staff(this, part, staffIdx);
             part->insertStaff(s);
             _staves.push_back(s);
             }
