@@ -1,3 +1,5 @@
+5.may (ws)
+      - fix crash on import of some *.cap files
 3.may (ws)
       - read plugins also from local data dir
         on linux: $HOME/.local/share/data/MusE/MuseScore/plugins
