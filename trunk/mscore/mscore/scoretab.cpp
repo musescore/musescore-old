@@ -23,6 +23,10 @@
 #include "scoreview.h"
 #include "score.h"
 #include "magbox.h"
+#ifdef OMR
+#include "omr/omr.h"
+#include "omr/omrview.h"
+#endif
 
 //---------------------------------------------------------
 //   ScoreTab
@@ -55,11 +59,20 @@ ScoreTab::ScoreTab(QList<Score*>* sl, QWidget* parent)
 
 ScoreView* ScoreTab::view(int n) const
       {
+      QSplitter* s = viewSplitter(n);
+      if (s)
+            return static_cast<ScoreView*>(s->widget(0));
+      return 0;
+      }
+
+QSplitter* ScoreTab::viewSplitter(int n) const
+      {
       Score* score = scoreList->value(n);
       for (int i = 0; i < stack->count(); ++i) {
-            ScoreView* v = static_cast<ScoreView*>(stack->widget(i));
+            QSplitter* sp = static_cast<QSplitter*>(stack->widget(i));
+            ScoreView* v = static_cast<ScoreView*>(sp->widget(0));
             if (v->score() == score)
-                  return v;
+                  return sp;
             }
       return 0;
       }
@@ -74,13 +87,38 @@ void ScoreTab::setCurrent(int n)
             emit currentScoreViewChanged(0);
             return;
             }
-      ScoreView* v = view(n);
-      if (!v)  {
+      QSplitter* vs = viewSplitter(n);
+
+      ScoreView* v;
+      if (!vs) {
+            Score* score = scoreList->value(n);
+            vs = new QSplitter;
             v = new ScoreView;
+            vs->addWidget(v);
             v->setScore(scoreList->value(n));
-            stack->addWidget(v);
+            stack->addWidget(vs);
+
+            if (score->showOmr()) {
+                  Omr* omr = score->omr();
+                  OmrView* sv = omr->newOmrView(v);
+                  vs->addWidget(sv);
+                  connect(v, SIGNAL(scaleChanged(double)), sv, SLOT(setScale(double)));
+                  connect(v, SIGNAL(offsetChanged(double,double)), sv, SLOT(setOffset(double,double)));
+                  connect(v, SIGNAL(nextPage()), sv, SLOT(nextPage()));
+                  connect(v, SIGNAL(previousPage()), sv, SLOT(previousPage()));
+                  const QTransform _matrix = v->matrix();
+                  double _spatium = score->spatium();
+                  double scale = _matrix.m11() * _spatium;
+                  sv->setScale(scale);
+                  sv->setOffset(_matrix.dx(), _matrix.dy());
+                  QList<int> sizes;
+                  sizes << 100 << 100;
+                  vs->setSizes(sizes);
+                  }
             }
-      stack->setCurrentWidget(v);
+      else
+            v = static_cast<ScoreView*>(vs->widget(0));
+      stack->setCurrentWidget(vs);
       emit currentScoreViewChanged(v);
       }
 

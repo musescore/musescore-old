@@ -66,6 +66,10 @@
 #include "keysig.h"
 #include "beam.h"
 
+#ifdef OMR
+#include "omr/omr.h"
+#endif
+
 Score* gscore;                 ///< system score, used for palettes etc.
 
 QPoint scorePos(0,0);
@@ -237,7 +241,7 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
 
 void Score::setSpatium(double v)
       {
-      _spatium    = v;
+      _spatium = v;
       }
 
 //---------------------------------------------------------
@@ -279,6 +283,8 @@ Score::Score(const Style& s)
       _defaultsRead   = false;
       rights          = 0;
       _pageOffset     = 0;
+      _omr            = 0;
+      _showOmr        = false;
       _tempomap       = new AL::TempoMap;
       _sigmap         = new AL::TimeSigMap;
       _sigmap->add(0, Fraction(4, 4));
@@ -378,7 +384,13 @@ bool Score::read(QString name)
             else if (cs.toLower() == "ove") {
             	if(!importOve(name))
             		return false;
-				}
+			}
+#ifdef OMR
+            else if (cs.toLower() == "pdf") {
+                  if (!importPdf(name))
+                        return false;
+                  }
+#endif
             else {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   }
@@ -420,6 +432,10 @@ bool Score::read(QString name)
 
 void Score::write(Xml& xml, bool /*autosave*/)
       {
+      if (_omr)
+            _omr->write(xml);
+      if (_showOmr)
+            xml.tag("showOmr", _showOmr);
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", AL::division);
       xml.curTrack = -1;

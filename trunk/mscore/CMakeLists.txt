@@ -34,7 +34,8 @@ set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE FALSE)
 set(SOUNDFONT3 TRUE)                      # enable ogg vorbis compressed fonts, require ogg & vorbis
-set(AEOLUS FALSE)                          # pipe organ synthesizer
+set(AEOLUS TRUE)                          # pipe organ synthesizer
+set(OMR TRUE)                             # optical music recognition
 
 if (APPLE OR MINGW)
       set(SF_COMPRESSOR FALSE)
@@ -261,8 +262,11 @@ if (AEOLUS)
       set (subdirs ${subdirs} aeolus)
 endif (AEOLUS)
 
-subdirs(${subdirs})
+if (OMR)
+      set (subdirs ${subdirs} omr)
+endif (OMR)
 
+subdirs(${subdirs})
 
 include_directories(
    ${PROJECT_SOURCE_DIR}

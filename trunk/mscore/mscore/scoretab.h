@@ -50,6 +50,8 @@ class ScoreTab : public QWidget {
       void removeTab(int);
       int count() const { return scoreList->size(); }
       ScoreView* view(int) const;
+      QSplitter* viewSplitter(int n) const;
+
       ScoreView* view() const { return view(currentIndex()); }
       bool contains(ScoreView*) const;
       void initScoreView(int idx, double mag, int magIdx, double xoffset, double yoffset);
