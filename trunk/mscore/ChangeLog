@@ -1,4 +1,5 @@
 5.may (ws)
+      - some effort to support tuplets for capella import
       - merge mreader branch
 3.may (ws)
       - read plugins also from local data dir

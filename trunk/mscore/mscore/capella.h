@@ -480,7 +480,7 @@ class WedgeObj : public LineObj {
 //---------------------------------------------------------
 
 class BasicDurationalObj : public CapellaObj {
-   protected:
+   public:
       int nDots;
       bool noDuration;
       bool postGrace;
