@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE
-//  Linux Music Editor
-//  $Id:$
+//  MusE Reader
+//  Music Score Reader
+//  $Id$
 //
-//  Copyright (C) 2002-2010 by Werner Schweer and others
+//  Copyright (C) 2010 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,22 +18,18 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#cmakedefine USE_ALSA
-#cmakedefine USE_JACK
-#cmakedefine USE_PORTAUDIO
-#cmakedefine USE_PORTMIDI
+#ifndef __IMAGE_H__
+#define __IMAGE_H__
 
-#cmakedefine MSCORE_UNSTABLE
+//---------------------------------------------------------
+//   Image
+//---------------------------------------------------------
 
-#cmakedefine HAS_MIDI
-#cmakedefine STATIC_SCRIPT_BINDINGS
-#cmakedefine HAS_AUDIOFILE
-#cmakedefine USE_SSE
+class Image : public QImage {
+   public:
+      };
 
-#define INSTALL_NAME      "${Mscore_INSTALL_NAME}"
-#define INSTPREFIX        "${CMAKE_INSTALL_PREFIX}"
-#define VERSION           "${Mscore_VERSION_FULL}"
+extern double imageSkew(const QImage& image);
 
-#cmakedefine AEOLUS
-#cmakedefine OMR
+#endif
 

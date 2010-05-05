@@ -290,23 +290,25 @@ void MuseScore::preferencesChanged()
                   canvas->setForeground(pm);
                   }
             }
-      for (int i = 0; i < tab2->count(); ++i) {
-            ScoreView* canvas = tab2->view(i);
-            if (canvas == 0)
-                  continue;
-            if (preferences.bgUseColor)
-                  canvas->setBackground(preferences.bgColor);
-            else {
-                  QPixmap* pm = new QPixmap(preferences.bgWallpaper);
-                  canvas->setBackground(pm);
-                  }
-            if (preferences.fgUseColor)
-                  canvas->setForeground(preferences.fgColor);
-            else {
-                  QPixmap* pm = new QPixmap(preferences.fgWallpaper);
-                  if (pm == 0 || pm->isNull())
-                        printf("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
-                  canvas->setForeground(pm);
+      if (tab2) {
+            for (int i = 0; i < tab2->count(); ++i) {
+                  ScoreView* canvas = tab2->view(i);
+                  if (canvas == 0)
+                        continue;
+                  if (preferences.bgUseColor)
+                        canvas->setBackground(preferences.bgColor);
+                  else {
+                        QPixmap* pm = new QPixmap(preferences.bgWallpaper);
+                        canvas->setBackground(pm);
+                        }
+                  if (preferences.fgUseColor)
+                        canvas->setForeground(preferences.fgColor);
+                  else {
+                        QPixmap* pm = new QPixmap(preferences.fgWallpaper);
+                        if (pm == 0 || pm->isNull())
+                              printf("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
+                        canvas->setForeground(pm);
+                        }
                   }
             }
 
@@ -417,7 +419,6 @@ MuseScore::MuseScore()
       layout->setMargin(0);
       layout->setSpacing(0);
       mainScore->setLayout(layout);
-      mainWindow->addWidget(mainScore);
       navigator = new Navigator;
       navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       mainWindow->addWidget(navigator);
@@ -427,20 +428,24 @@ MuseScore::MuseScore()
       mainWindow->setSizes(sizes);
 
       splitter = new QSplitter;
+      mainWindow->addWidget(mainScore);
 
       tab1 = new ScoreTab(&scoreList);
       tab1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       connect(tab1, SIGNAL(currentScoreViewChanged(ScoreView*)), SLOT(setCurrentScoreView(ScoreView*)));
       connect(tab1, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
-
-      tab2 = new ScoreTab(&scoreList);
-      tab2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      connect(tab2, SIGNAL(currentScoreViewChanged(ScoreView*)), SLOT(setCurrentScoreView(ScoreView*)));
-      connect(tab2, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
-
       splitter->addWidget(tab1);
-      splitter->addWidget(tab2);
-      tab2->setVisible(false);
+
+      if (splitScreen()) {
+            tab2 = new ScoreTab(&scoreList);
+            tab2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            connect(tab2, SIGNAL(currentScoreViewChanged(ScoreView*)), SLOT(setCurrentScoreView(ScoreView*)));
+            connect(tab2, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
+            splitter->addWidget(tab2);
+            tab2->setVisible(false);
+            }
+      else
+            tab2 = 0;
       layout->addWidget(splitter);
 
       searchDialog = 0;
@@ -1015,12 +1020,15 @@ int MuseScore::appendScore(Score* score)
             }
       scoreList.insert(index, score);
       tab1->blockSignals(true);
-      tab2->blockSignals(true);
+      if (tab2)
+            tab2->blockSignals(true);
       tab1->insertTab(index, score->name());
-      tab2->insertTab(index, score->name());
+      if (tab2)
+            tab2->insertTab(index, score->name());
       _undoGroup->addStack(score->undo());
       tab1->blockSignals(false);
-      tab2->blockSignals(false);
+      if (tab2)
+            tab2->blockSignals(false);
       return index;
       }
 
@@ -1046,10 +1054,12 @@ void MuseScore::updateTabNames()
             if (view)
                   tab1->setTabText(i, view->score()->name());
             }
-      for (int i = 0; i < tab2->count(); ++i) {
-            ScoreView* view = tab2->view(i);
-            if (view)
-                  tab2->setTabText(i, view->score()->name());
+      if (tab2) {
+            for (int i = 0; i < tab2->count(); ++i) {
+                  ScoreView* view = tab2->view(i);
+                  if (view)
+                        tab2->setTabText(i, view->score()->name());
+                  }
             }
       }
 
@@ -1453,9 +1463,11 @@ void MuseScore::removeTab(int i)
       tab1->removeTab(i);
       tab1->blockSignals(false);
 
-      tab2->blockSignals(true);
-      tab2->removeTab(i);
-      tab2->blockSignals(false);
+      if (tab2) {
+            tab2->blockSignals(true);
+            tab2->removeTab(i);
+            tab2->blockSignals(false);
+            }
 
       cs = 0;
       cv = 0;
@@ -1720,6 +1732,11 @@ int main(int argc, char* av[])
       f.open(QIODevice::ReadOnly);
       revision = QString(f.readAll());
       f.close();
+
+#ifdef OMR
+      // omr display needs hardware acceleration for pixmap scaling:
+      QApplication::setGraphicsSystem(QString("opengl"));
+#endif
 
 #ifdef Q_WS_MAC
       MuseScoreApplication* app = new MuseScoreApplication("mscore", argc, av);
@@ -2579,7 +2596,8 @@ void MuseScore::dirtyChanged(Score* score)
       if (score->dirty())
             label += "*";
       tab1->setTabText(idx, label);
-      tab2->setTabText(idx, label);
+      if (tab2)
+            tab2->setTabText(idx, label);
       }
 
 //---------------------------------------------------------
@@ -3051,6 +3069,13 @@ bool MuseScore::restoreSession(bool always)
 void MuseScore::splitWindow(bool horizontal)
       {
       if (!_splitScreen) {
+            if (tab2 == 0) {
+                  tab2 = new ScoreTab(&scoreList);
+                  tab2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+                  connect(tab2, SIGNAL(currentScoreViewChanged(ScoreView*)), SLOT(setCurrentScoreView(ScoreView*)));
+                  connect(tab2, SIGNAL(tabCloseRequested(int)), SLOT(removeTab(int)));
+                  splitter->addWidget(tab2);
+                  }
             tab2->setVisible(true);
             _splitScreen = true;
             _horizontalSplit = horizontal;

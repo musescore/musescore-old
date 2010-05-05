@@ -1429,6 +1429,7 @@ void ScoreView::setViewRect(const QRectF& r)
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
+      emit offsetChanged(_matrix.dx(), _matrix.dy());
       }
 
 //---------------------------------------------------------
@@ -2062,6 +2063,7 @@ void ScoreView::zoom(int step, const QPoint& pos)
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
       emit viewRectChanged();
+      emit offsetChanged(_matrix.dx(), _matrix.dy());
       update();
       }
 
@@ -2103,6 +2105,7 @@ void ScoreView::wheelEvent(QWheelEvent* event)
 
       scroll(dx, dy, QRect(0, 0, width(), height()));
       emit viewRectChanged();
+      emit offsetChanged(_matrix.dx(), _matrix.dy());
       }
 
 //---------------------------------------------------------
@@ -2264,6 +2267,7 @@ void ScoreView::setMag(double nmag)
       _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m13(), _matrix.m21(),
          nmag, _matrix.m23(), _matrix.dx()*deltamag, _matrix.dy()*deltamag, _matrix.m33());
       imatrix = _matrix.inverted();
+      emit scaleChanged(nmag * score()->spatium());
       }
 
 //---------------------------------------------------------
@@ -2790,6 +2794,7 @@ void ScoreView::dragScoreView(QMouseEvent* ev)
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
+      emit offsetChanged(_matrix.dx(), _matrix.dy());
       emit viewRectChanged();
       }
 
@@ -3204,10 +3209,14 @@ qreal ScoreView::mag() const
 void ScoreView::setOffset(qreal x, qreal y)
       {
       double m = PDPI / DPI;
+      x *= m;
+      y *= m;
+
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
-         _matrix.m22(), _matrix.m23(), x*m, y*m, _matrix.m33());
+         _matrix.m22(), _matrix.m23(), x, y, _matrix.m33());
       imatrix = _matrix.inverted();
       emit viewRectChanged();
+      emit offsetChanged(x, y);
       }
 
 //---------------------------------------------------------
@@ -3253,6 +3262,7 @@ void ScoreView::pageNext()
       if (x < lx)
             x = lx;
       setOffset(x, 10.0);
+      emit nextPage();
       update();
       }
 
@@ -3269,6 +3279,7 @@ void ScoreView::pagePrev()
       if (x > 10.0)
             x = 10.0;
       setOffset(x, 10.0);
+      emit previousPage();
       update();
       }
 

@@ -2133,6 +2133,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Parts..."),
          QT_TRANSLATE_NOOP("action","Parts...")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "show-omr",
+         QT_TRANSLATE_NOOP("action","show score image"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","show omr image"),
+         QT_TRANSLATE_NOOP("action","show omr image")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),
       };

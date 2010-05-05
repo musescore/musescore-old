@@ -73,6 +73,10 @@
 #include "scoretab.h"
 #include "beam.h"
 
+#ifdef OMR
+#include "omr/omr.h"
+#endif
+
 //---------------------------------------------------------
 //   load
 //    return true on error
@@ -179,7 +183,7 @@ void MuseScore::loadFile()
          this,
          tr("MuseScore: Load Score"),
          lastOpenPath,
-         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;"
+         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove);;"
             "MuseScore Files (*.mscz *.mscx *.msc);;"
             "MusicXML Files (*.xml *.mxl);;"
             "MIDI Files (*.mid *.midi *.kar);;"
@@ -187,7 +191,8 @@ void MuseScore::loadFile()
             "Capella Files (*.cap);;"
 //            "LilyPond Files <experimental> (*.ly);;"
             "BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;"
-        	  "Overture Files <experimental> (*.ove);;"
+            "PDF Files <experimental omr> (*.pdf);;"
+        	"Overture Files <experimental> (*.ove);;"
             "All Files (*)"
             )
          );
@@ -216,7 +221,8 @@ void MuseScore::saveFile()
             setWindowTitle("MuseScore: " + cs->name());
             int idx = scoreList.indexOf(cs);
             tab1->setTabText(idx, cs->name());
-            tab2->setTabText(idx, cs->name());
+            if (tab2)
+                  tab2->setTabText(idx, cs->name());
             QString tmp = cs->tmpName();
             if (!tmp.isEmpty()) {
                   QFile f(tmp);
@@ -1259,6 +1265,16 @@ bool Score::read(QDomElement e)
                         //if (_mscVersion >= 105)
                         //      _yoff *= DPMM;
                         }
+                  else if (tag == "Omr") {
+                        _omr = new Omr(this);
+                        _omr->read(ee);
+                        if (!_omr->read()) {
+                              delete _omr;
+                              _omr = 0;
+                              }
+                        }
+                  else if (tag == "showOmr")
+                        _showOmr = i;
                   else if (tag == "Spatium")
                         setSpatium (val.toDouble() * DPMM);
                   else if (tag == "Division")
@@ -1413,6 +1429,9 @@ bool Score::read(QDomElement e)
 //DEBUG
 //      _repeatList->unwind();
 //      _repeatList->dump();
+
+      if (_omr == 0)
+            _showOmr = false;
 
       return true;
       }

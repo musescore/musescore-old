@@ -182,7 +182,7 @@ add_executable ( ${ExecutableName}
       screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
-      importove.cpp ove.cpp interval.cpp
+      importove.cpp ove.cpp interval.cpp importpdf.cpp
       ${AUDIO}
       )
 
@@ -251,6 +251,10 @@ if (MINGW)
       target_link_libraries(mscore aeolus)
    endif (AEOLUS)
 
+   if (OMR)
+      target_link_libraries(mscore omr poppler gsl gslcblas tesseract_full tiff)
+   endif (OMR)
+
    install( TARGETS mscore RUNTIME DESTINATION bin )
 
    install_files ( /bin .dll
@@ -307,6 +311,10 @@ else (MINGW)
    if (AEOLUS)
       target_link_libraries(mscore aeolus)
    endif (AEOLUS)
+
+   if (OMR)
+      target_link_libraries(mscore omr poppler gsl gslcblas tesseract_full tiff)
+   endif (OMR)
 
    if (APPLE)
      if (USE_PORTMIDI)

@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE
-//  Linux Music Editor
-//  $Id:$
+//  MusE Reader
+//  Music Score Reader
+//  $Id$
 //
-//  Copyright (C) 2002-2010 by Werner Schweer and others
+//  Copyright (C) 2010 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,22 +18,20 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#cmakedefine USE_ALSA
-#cmakedefine USE_JACK
-#cmakedefine USE_PORTAUDIO
-#cmakedefine USE_PORTMIDI
+#include "utils.h"
 
-#cmakedefine MSCORE_UNSTABLE
+char bitsSetTable[256];
 
-#cmakedefine HAS_MIDI
-#cmakedefine STATIC_SCRIPT_BINDINGS
-#cmakedefine HAS_AUDIOFILE
-#cmakedefine USE_SSE
+//---------------------------------------------------------
+//   initUtils
+//---------------------------------------------------------
 
-#define INSTALL_NAME      "${Mscore_INSTALL_NAME}"
-#define INSTPREFIX        "${CMAKE_INSTALL_PREFIX}"
-#define VERSION           "${Mscore_VERSION_FULL}"
-
-#cmakedefine AEOLUS
-#cmakedefine OMR
+void initUtils()
+      {
+      //
+      // populate the bitsSetTable
+      bitsSetTable[0] = 0;
+      for (int i = 1; i < 256; i++)
+            bitsSetTable[i] = (i & 1) + bitsSetTable[i/2];
+      }
 
