@@ -39,6 +39,7 @@
 #include "box.h"
 #include "measure.h"
 #include "al/sig.h"
+#include "tuplet.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -485,8 +486,8 @@ void BasicDurationalObj::read()
       if (c & 0x20) {
             unsigned char tuplet = cap->readByte();
             count        = tuplet & 0x0f;
-            tripartite   = tuplet & 0x10;
-            isProlonging = tuplet & 0x20;
+            tripartite   = (tuplet & 0x10) != 0;
+            isProlonging = (tuplet & 0x20) != 0;
             if (tuplet & 0xc0)
                   printf("bad tuplet value 0x%02x\n", tuplet);
             }
@@ -1363,7 +1364,12 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
       // pass I
       //
       int startTick = tick;
-// printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick);
+printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick);
+
+      Tuplet* tuplet = 0;
+      int tupletCount = 0;
+      int nTuplet;
+      int tupletTick;
 
       foreach(NoteObj* no, cvoice->objects) {
             switch(no->type()) {
@@ -1371,6 +1377,11 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         {
                         Measure* m = getCreateMeasure(tick);
                         RestObj* o = static_cast<RestObj*>(no);
+                        if (o->count) {
+                              printf("Capella: Tuplet with rest\n");
+                              abort();
+                              }
+
                         int ticks  = o->ticks();
                         int ft     = m->tickLen();
                         if (o->fullMeasures) {
@@ -1409,12 +1420,39 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         {
                         ChordObj* o = static_cast<ChordObj*>(no);
                         int ticks = o->ticks();
-                        Measure* m = getCreateMeasure(tick);
-                        Segment* s = m->getSegment(SegChordRest, tick);
-                        Chord* chord = new Chord(this);
-                        chord->setTick(tick);
                         Duration d;
                         d.setVal(ticks);
+                        Measure* m = getCreateMeasure(tick);
+                        Segment* s = m->getSegment(SegChordRest, tick);
+
+                        if (o->count) {
+                              if (tuplet == 0) {
+                                    tupletCount = o->count;
+                                    nTuplet     = 0;
+                                    tupletTick  = tick;
+                                    tuplet      = new Tuplet(this);
+                                    Fraction f(3,2);
+                                    if (tupletCount == 3)
+                                          f = Fraction(3,2);
+                                    else
+                                          printf("Capella: unknown tuplet\n");
+                                    tuplet->setRatio(f);
+                                    tuplet->setBaseLen(d);
+                                    tuplet->setTrack(track);
+                                    tuplet->setTick(tick);
+                                    // tuplet->setParent(m);
+                                    int nn = ((tupletCount * ticks) * f.denominator()) / f.numerator();
+                                    tuplet->setFraction(Fraction::fromTicks(nn));
+                                    m->add(tuplet);
+                                    }
+//                              printf("Tuplet at %d: count: %d  tri: %d  prolonging: %d  ticks %d objects %d\n",
+//                                 tick, o->count, o->tripartite, o->isProlonging, ticks,
+//                                 o->objects.size());
+                              }
+
+                        Chord* chord = new Chord(this);
+                        chord->setTuplet(tuplet);
+                        chord->setTick(tick);
                         chord->setDuration(d);
                         chord->setTrack(track);
                         switch (o->stemDir) {
@@ -1499,7 +1537,17 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               l->setNo(v.num);
                               s->add(l);
                               }
-                        tick += ticks;
+                        if (tuplet) {
+                              if (++nTuplet >= tupletCount) {
+                                    tick = tupletTick + tuplet->ticks();
+                                    tuplet = 0;
+                                    }
+                              else {
+                                    tick += (ticks * tuplet->ratio().denominator()) / tuplet->ratio().numerator();
+                                    }
+                              }
+                        else
+                              tick += ticks;
                         }
                         break;
                   case T_CLEF:
@@ -1517,9 +1565,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         CapKey* o = static_cast<CapKey*>(no);
                         int key = staff(staffIdx)->key(tick).accidentalType;
                         if (key != o->signature) {
-printf("%d:%d <Key> %d (is %d)\n", tick, staffIdx, o->signature, key);
                               staff(staffIdx)->setKey(tick, o->signature);
-printf("  "); staff(staffIdx)->key(tick).print(); printf("\n");
                               KeySig* ks = new KeySig(this);
                               ks->setTrack(staffIdx * VOICES);
                               Measure* m = getCreateMeasure(tick);
@@ -1555,6 +1601,7 @@ printf("  "); staff(staffIdx)->key(tick).print(); printf("\n");
                         break;
                   }
             }
+      int endTick = tick;
 
       //
       // pass II
@@ -1635,6 +1682,7 @@ printf("  "); staff(staffIdx)->key(tick).print(); printf("\n");
                               printf("draw obj %d\n", o->type);
                         }
                   }
+            // TODO: tick is wrong wg. tuplets
             int ticks = d->ticks();
             if (no->type() == T_REST) {
                   RestObj* o = static_cast<RestObj*>(no);
@@ -1646,7 +1694,7 @@ printf("  "); staff(staffIdx)->key(tick).print(); printf("\n");
                   }
             tick += ticks;
             }
-      return tick;
+      return endTick;
       }
 
 //---------------------------------------------------------
@@ -1702,20 +1750,21 @@ void Score::convertCapella(Capella* cap)
             }
 
 
-      int mtick = 0;
+      int systemTick = 0;
       foreach(CapSystem* csys, cap->systems) {
-            int oldTick  = mtick;
+            int mtick = 0;
             int staffIdx = 0;
             foreach(CapStaff* cstaff, csys->staves) {
                   int voice = 0;
                   foreach(CapVoice* cvoice, cstaff->voices) {
-                        int tick = readCapVoice(cvoice, staffIdx, oldTick);
+                        int tick = readCapVoice(cvoice, staffIdx, systemTick);
                         ++voice;
                         if (tick > mtick)
                               mtick = tick;
                         }
                   ++staffIdx;
                   }
+            systemTick = mtick;
             }
       _parts.push_back(part);
       connectTies();

@@ -46,7 +46,7 @@ class QImageOutputDev: public OutputDev {
       virtual void drawImage(GfxState *state, Object *ref, Stream *str,
 	   int width, int height, GfxImageColorMap *colorMap,
 	   GBool interpolate, int *maskColors, GBool inlineImg);
-/*      virtual void drawMaskedImage(GfxState *state, Object *ref, Stream *str,
+      virtual void drawMaskedImage(GfxState *state, Object *ref, Stream *str,
          int width, int height,
 	   GfxImageColorMap *colorMap,
 	   GBool interpolate,
@@ -60,8 +60,31 @@ class QImageOutputDev: public OutputDev {
 	   int maskWidth, int maskHeight,
 	   GfxImageColorMap *maskColorMap,
 	   GBool maskInterpolate);
-      */
       };
+
+void QImageOutputDev::drawMaskedImage(GfxState *state, Object *ref, Stream *str,
+         int width, int height,
+	   GfxImageColorMap *colorMap,
+	   GBool interpolate,
+	   Stream *maskStr, int maskWidth, int maskHeight,
+	   GBool maskInvert, GBool maskInterpolate)
+      {
+      printf("=========drawMaskedImage\n");
+      abort();
+      }
+
+void QImageOutputDev::drawSoftMaskedImage(GfxState *state, Object *ref, Stream *str,
+	   int width, int height,
+	   GfxImageColorMap *colorMap,
+	   GBool interpolate,
+	   Stream *maskStr,
+	   int maskWidth, int maskHeight,
+	   GfxImageColorMap *maskColorMap,
+	   GBool maskInterpolate)
+      {
+      printf("==========drawSoftMaskedImage\n");
+      abort();
+      }
 
 //---------------------------------------------------------
 //   drawImage
@@ -71,7 +94,7 @@ void QImageOutputDev::drawImage(GfxState* state, Object*, Stream* str,
    int width, int height, GfxImageColorMap* colorMap, GBool, int*, GBool)
       {
       if (colorMap->getNumPixelComps() == 1 && colorMap->getBits() == 1) {
-// printf("Image %d %d\n", width, height);
+printf("Image %d %d\n", width, height);
             bool invertBits = colorMap->getDecodeLow(0) == 0.0;
             str->reset();     // initialize stream
 
@@ -129,6 +152,7 @@ void QImageOutputDev::drawImage(GfxState* state, Object*, Stream* str,
             str->close();
             }
       else {
+printf("Color Image %d %d\n", width, height);
 #if 0
             fprintf(f, "P6\n");
             fprintf(f, "%d %d\n", width, height);

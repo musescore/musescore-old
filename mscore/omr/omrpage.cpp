@@ -19,7 +19,6 @@
 //=============================================================================
 
 #include <gsl/gsl_statistics_double.h>
-// #include "globals.h"
 #include "omrpage.h"
 #include "image.h"
 #include "utils.h"
