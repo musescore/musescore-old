@@ -472,7 +472,10 @@ double Staff::mag() const
 
 void Staff::setKey(int tick, int st)
       {
-      (*_keymap)[tick] = st;
+      KeySigEvent ke;
+      ke.setAccidentalType(st);
+
+      (*_keymap)[tick] = ke;
       }
 
 //---------------------------------------------------------

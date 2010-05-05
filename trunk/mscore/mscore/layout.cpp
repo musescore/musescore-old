@@ -784,7 +784,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
             // we assume that keysigs and clefs are only in the first
             // track of a segment
 
-            KeySigEvent keyIdx = staff->keymap()->key(tick);
+            const KeySigEvent& keyIdx = staff->keymap()->key(tick);
 
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
                   // search only up to the first ChordRest
