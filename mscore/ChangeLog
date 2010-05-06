@@ -1,3 +1,7 @@
+6.may (ws)
+      - implement playback of mordent
+      - apply consistency checks after score is loaded: make sure voice 1
+        is continuous and has no gaps
 5.may (ws)
       - some effort to support tuplets for capella import
       - merge mreader branch

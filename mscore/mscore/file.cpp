@@ -1472,54 +1472,6 @@ void Score::connectSlurs()
       }
 
 //---------------------------------------------------------
-//   checkSlurs
-//    helper routine to check for sanity slurs
-//---------------------------------------------------------
-
-void Score::checkSlurs()
-      {
-      foreach(Element* e, _gel) {
-            if (e->type() != SLUR)
-                  continue;
-            Slur* s = (Slur*)e;
-            Element* n1 = s->startElement();
-            Element* n2 = s->endElement();
-            if (n1 == 0 || n2 == 0 || n1 == n2) {
-                  printf("unconnected slur: removing\n");
-                  if (n1) {
-                        ((ChordRest*)n1)->removeSlurFor(s);
-                        ((ChordRest*)n1)->removeSlurBack(s);
-                        }
-                  if (n1 == 0)
-                        printf("  start at %d(%d) not found\n", s->tick(), s->track());
-                  if (n2 == 0)
-                        printf("  end at %d(%d) not found\n", s->tick2(), s->track2());
-                  if ((n1 || n2) && (n1==n2))
-                        printf("  start == end\n");
-                  int idx = _gel.indexOf(s);
-                  _gel.removeAt(idx);
-                  }
-            }
-      }
-
-//---------------------------------------------------------
-//   checkTuplets
-//    helper routine to check for tuplet sanity
-//---------------------------------------------------------
-
-void Score::checkTuplets()
-      {
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            foreach(Tuplet* t, *m->tuplets()) {
-                  if (t->elements().empty()) {
-                        printf("empty tuplet: removing\n");
-                        m->tuplets()->removeAll(t);
-                        }
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   printFile
 //---------------------------------------------------------
 
