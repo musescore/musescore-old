@@ -92,7 +92,6 @@ void MasterSynth::init(int sampleRate)
             }
       foreach(Synth* s, syntis) {
             s->setMasterTuning(preferences.tuning);
-            s->setMasterGain(preferences.masterGain);
             s->setEffectParameter(0, 0, preferences.reverbRoomSize);
             s->setEffectParameter(0, 1, preferences.reverbDamp);
             s->setEffectParameter(0, 2, preferences.reverbWidth);

@@ -135,7 +135,7 @@ class Seq : public QObject {
       void started();
       void stopped();
       int toGui(int);
-      void masterVolumeChanged(float);
+      void gainChanged(float);
 
    public:
       enum { STOP, PLAY, START_PLAY };
@@ -178,7 +178,9 @@ class Seq : public QObject {
       int getCurTime();
       int getCurTick();
       void getCurTick(int*, int*);
-      float masterVolume() const;
+
+      float gain() const;
+
       void loadSoundFont(const QString&);
 
       Synth* getSynth(int n);

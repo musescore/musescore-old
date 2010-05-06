@@ -91,6 +91,12 @@ class MasterSynth {
       QList<MidiPatch*> getPatchInfo() const;
       Synth* getSynth(int n);
       const QList<Synth*>& getSyntis() const;
+
+      double effectParameter(int /*effect*/, int /*param*/)  { return 0.0; }
+      void setEffectParameter(int /*effect*/, int /*param*/, double /*val*/ ) { }
+
+      void setMasterTuning(double) {}
+      double masterTuning() const { return 440.0; }
       };
 
 #endif
