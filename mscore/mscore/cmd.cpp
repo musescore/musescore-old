@@ -1905,11 +1905,18 @@ void Score::cmd(const QAction* a)
             // Hack for moving articulations while selected
             //
             Element* el = selection().element();
-            if (el && el->type() == ARTICULATION && cmd == "pitch-up")
-                  cmdMove(el, QPointF(0.0, -.25));
-            else if (el && el->type() == ARTICULATION && cmd == "pitch-down")
-                  cmdMove(el, QPointF(0.0, .25));
-
+            if (el && cmd == "pitch-up") {
+                  if (el->type() == ARTICULATION)
+                        cmdMove(el, QPointF(0.0, -.25));
+                  else if (el->type() == REST)
+                        cmdMoveRest(static_cast<Rest*>(el), UP);
+                  }
+            else if (el && cmd == "pitch-down") {
+                  if (el->type() == ARTICULATION)
+                        cmdMove(el, QPointF(0.0, .25));
+                  else if (el->type() == REST)
+                        cmdMoveRest(static_cast<Rest*>(el), DOWN);
+                  }
             else if (cmd == "append-measure")
                   appendMeasures(1, MEASURE);
             else if (cmd == "insert-measure")
@@ -2940,8 +2947,8 @@ void ScoreView::search(const QString& s)
                               if(cr->type() == CHORD)
                                     e =  static_cast<Chord*>(cr)->upNote();
                               else //REST
-                                    e = cr;  
-                                    
+                                    e = cr;
+
                               _score->select(e, SELECT_SINGLE, 0);
                               break;
                               }
@@ -2955,4 +2962,17 @@ void ScoreView::search(const QString& s)
             }
       }
 
+//---------------------------------------------------------
+//   cmdMoveRest
+//---------------------------------------------------------
+
+void Score::cmdMoveRest(Rest* rest, Direction dir)
+      {
+      QPointF pos(rest->userOff());
+      if (dir == UP)
+            pos.ry() -= spatium();
+      else if (dir == DOWN)
+            pos.ry() += spatium();
+      undoChangeUserOffset(rest, pos);
+      }
 
