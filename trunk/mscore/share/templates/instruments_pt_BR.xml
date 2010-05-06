@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf8"?>
+Ôªø<?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.0">
 
   <Articulation>
@@ -288,8 +288,8 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>Flauta-de-p„</name>
-        <short-name>Fl. p„</short-name>
+        <name>Flauta-de-p√£</name>
+        <short-name>Fl. p√£</short-name>
         <clef>0</clef>
         <aPitchRange>60-96</aPitchRange>
         <pPitchRange>60-96</pPitchRange>
@@ -378,7 +378,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Flageolet FrancÍs</name>
+        <name>Flageolet Franc√™s</name>
         <short-name>Fla. Fr.</short-name>
         <clef>1</clef>
         <aPitchRange>80-105</aPitchRange>
@@ -389,7 +389,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>Flageolet InglÍs</name>
+        <name>Flageolet Ingl√™s</name>
         <short-name>Fla. Ing.</short-name>
         <clef>1</clef>
         <aPitchRange>74-98</aPitchRange>
@@ -567,7 +567,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>Apito de  mbolo</name>
+        <name>Apito de √ämbolo</name>
         <short-name>Ap. Emb..</short-name>
         <clef>1</clef>
         <aPitchRange>69-96</aPitchRange>
@@ -577,7 +577,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>OboÈ Piccolo</name>
+        <name>Obo√© Piccolo</name>
         <short-name>Ob. P.</short-name>
         <clef>0</clef>
         <transposeDiatonic>2</transposeDiatonic>
@@ -590,7 +590,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>OboÈ</name>
+        <name>Obo√©</name>
         <short-name>Ob.</short-name>
         <clef>0</clef>
         <aPitchRange>58-87</aPitchRange>
@@ -600,7 +600,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>OboÈ d'amore</name>
+        <name>Obo√© d'amore</name>
         <short-name>Ob. d'a.</short-name>
         <clef>0</clef>
         <transposeDiatonic>-2</transposeDiatonic>
@@ -613,7 +613,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>Corne InglÍs</name>
+        <name>Corne Ingl√™s</name>
         <short-name>Cne. I.</short-name>
         <clef>0</clef>
         <transposeDiatonic>-4</transposeDiatonic>
@@ -625,7 +625,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>OboÈ BarÌtono</name>
+        <name>Obo√© Bar√≠tono</name>
         <short-name>Ob. Bar.</short-name>
         <clef>3</clef>
         <aPitchRange>47-76</aPitchRange>
@@ -647,7 +647,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>OboÈ Barroco</name>
+        <name>Obo√© Barroco</name>
         <short-name>Ob. Bc.</short-name>
         <clef>0</clef>
         <aPitchRange>60-83</aPitchRange>
@@ -658,7 +658,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>OboÈ da caccia</name>
+        <name>Obo√© da caccia</name>
         <short-name>Ob. d. ca.</short-name>
         <clef>0</clef>
         <transposeDiatonic>-4</transposeDiatonic>
@@ -1205,8 +1205,8 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>T·rogatÛ</name>
-        <short-name>T·r.</short-name>
+        <name>T√°rogat√≥</name>
+        <short-name>T√°r.</short-name>
         <clef>0</clef>
         <aPitchRange>58-84</aPitchRange>
         <pPitchRange>58-81</pPitchRange>
@@ -1323,7 +1323,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>Sarrusofone BarÌtono</name>
+        <name>Sarrusofone Bar√≠tono</name>
         <short-name>Sar. Bar.</short-name>
         <clef>0</clef>
         <transposeDiatonic>-12</transposeDiatonic>
@@ -1362,7 +1362,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>Saxofone SopranÌssimo</name>
+        <name>Saxofone Sopran√≠ssimo</name>
         <short-name>Sax. Sio.</short-name>
         <clef>0</clef>
         <transposeDiatonic>6</transposeDiatonic>
@@ -1424,7 +1424,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Saxofone BarÌtono</name>
+        <name>Saxofone Bar√≠tono</name>
         <short-name>Sax. Bar.</short-name>
         <clef>0</clef>
         <transposeDiatonic>-12</transposeDiatonic>
@@ -1895,7 +1895,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>Serpent„o</name>
+        <name>Serpent√£o</name>
         <short-name>Spt.</short-name>
         <clef>4</clef>
         <aPitchRange>36-65</aPitchRange>
@@ -1986,7 +1986,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Trompa BarÌtono</name>
+        <name>Trompa Bar√≠tono</name>
         <short-name>Tr. Bar.</short-name>
         <clef>4</clef>
         <aPitchRange>40-67</aPitchRange>
@@ -2137,7 +2137,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>EufÙnio</name>
+        <name>Euf√¥nio</name>
         <short-name>Eu.</short-name>
         <clef>4</clef>
         <aPitchRange>40-70</aPitchRange>
@@ -2178,10 +2178,10 @@
         </instrument>
      </instrument-group>
 
-  <instrument-group name="Percuss„o com alturas definidas">
+  <instrument-group name="Percuss√£o com alturas definidas">
      <instrument>
-        <name>TÌmpanos</name>
-        <short-name>TÌmp.</short-name>
+        <name>T√≠mpanos</name>
+        <short-name>T√≠mp.</short-name>
         <clef>4</clef>
         <aPitchRange>38-60</aPitchRange>
         <pPitchRange>38-60</pPitchRange>
@@ -2323,8 +2323,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Tambor de AÁo Baixo</name>
-        <short-name>Tb. AÁ. B.</short-name>
+        <name>Tambor de A√ßo Baixo</name>
+        <short-name>Tb. A√ß. B.</short-name>
         <clef>4</clef>
         <aPitchRange>36-53</aPitchRange>
         <pPitchRange>36-53</pPitchRange>
@@ -2333,8 +2333,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Tambor de AÁo Cello</name>
-        <short-name>Tb. AÁ. Ce.</short-name>
+        <name>Tambor de A√ßo Cello</name>
+        <short-name>Tb. A√ß. Ce.</short-name>
         <clef>3</clef>
         <aPitchRange>47-67</aPitchRange>
         <pPitchRange>47-67</pPitchRange>
@@ -2343,8 +2343,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Tambor de AÁo Tenor</name>
-        <short-name>Tb. AÁ. T.</short-name>
+        <name>Tambor de A√ßo Tenor</name>
+        <short-name>Tb. A√ß. T.</short-name>
         <clef>3</clef>
         <aPitchRange>52-69</aPitchRange>
         <pPitchRange>52-69</pPitchRange>
@@ -2353,8 +2353,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Tambor de AÁo Guitarra</name>
-        <short-name>Tb. AÁ. Gtr.</short-name>
+        <name>Tambor de A√ßo Guitarra</name>
+        <short-name>Tb. A√ß. Gtr.</short-name>
         <clef>0</clef>
         <aPitchRange>54-81</aPitchRange>
         <pPitchRange>54-81</pPitchRange>
@@ -2363,8 +2363,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Tambor de AÁo Alto</name>
-        <short-name>Tb. AÁ. A.</short-name>
+        <name>Tambor de A√ßo Alto</name>
+        <short-name>Tb. A√ß. A.</short-name>
         <clef>0</clef>
         <aPitchRange>56-85</aPitchRange>
         <pPitchRange>56-85</pPitchRange>
@@ -2373,8 +2373,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Tambor de AÁo Soprano</name>
-        <short-name>Tb. AÁ. S.</short-name>
+        <name>Tambor de A√ßo Soprano</name>
+        <short-name>Tb. A√ß. S.</short-name>
         <clef>0</clef>
         <aPitchRange>60-88</aPitchRange>
         <pPitchRange>60-88</pPitchRange>
@@ -2443,7 +2443,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>HarmÙnica de Vidro</name>
+        <name>Harm√¥nica de Vidro</name>
         <short-name>Har. Vdr.</short-name>
         <clef>0</clef>
         <aPitchRange>53-89</aPitchRange>
@@ -2566,7 +2566,7 @@
         </instrument>
      </instrument-group>
 
-  <instrument-group name="Percuss„o com alturas indefinidas">
+  <instrument-group name="Percuss√£o com alturas indefinidas">
      <instrument>
         <name>Bateria</name>
         <description>Bateria 3 linhas</description>
@@ -2606,7 +2606,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Caixa Ac˙stica</name>
+           <name>Caixa Ac√∫stica</name>
            <stem>2</stem>
            </Drum>
         <channel>
@@ -2623,7 +2623,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Bumbo Ac˙stico</name>
+           <name>Bumbo Ac√∫stico</name>
            <stem>2</stem>
            </Drum>
         <channel>
@@ -2671,7 +2671,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Caixa Ac˙stica</name>
+           <name>Caixa Ac√∫stica</name>
            <stem>2</stem>
            </Drum>
         <channel>
@@ -2703,7 +2703,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Tom MÈdio</name>
+        <name>Tom M√©dio</name>
         <short-name>To. M.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -2712,14 +2712,14 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Tom MÈdio 1</name>
+           <name>Tom M√©dio 1</name>
            <stem>1</stem>
            </Drum>
         <Drum pitch="45">
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Tom MÈdio 2</name>
+           <name>Tom M√©dio 2</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -2784,7 +2784,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>BongÙ Grave</name>
+           <name>Bong√¥ Grave</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -2792,7 +2792,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>BongÙs</name>
+        <name>Bong√¥s</name>
         <short-name>Bon.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -2801,14 +2801,14 @@
            <head>0</head>
            <line>3</line>
            <voice>0</voice>
-           <name>BongÙ Agudo</name>
+           <name>Bong√¥ Agudo</name>
            <stem>1</stem>
            </Drum>
         <Drum pitch="61">
            <head>0</head>
            <line>5</line>
            <voice>0</voice>
-           <name>BongÙ Grave</name>
+           <name>Bong√¥ Grave</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -2912,7 +2912,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>CuÌca</name>
+        <name>Cu√≠ca</name>
         <short-name>Cu.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -2921,7 +2921,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>CuÌca Aberta</name>
+           <name>Cu√≠ca Aberta</name>
            <stem>1</stem>
            </Drum>
         <Drum pitch="78">
@@ -3020,7 +3020,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>AfuxÈ</name>
+           <name>Afux√©</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3054,7 +3054,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Prato ChinÍs</name>
+           <name>Prato Chin√™s</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3062,8 +3062,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Ganz·</name>
-        <short-name>Gz·.</short-name>
+        <name>Ganz√°</name>
+        <short-name>Gz√°.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
         <drumset>1</drumset>
@@ -3071,7 +3071,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Tri‚ngulo Aberto</name>
+           <name>Tri√¢ngulo Aberto</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3088,7 +3088,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>AgogÙ Agudo</name>
+           <name>Agog√¥ Agudo</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3105,7 +3105,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>AgogÙ Grave</name>
+           <name>Agog√¥ Grave</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3122,7 +3122,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>AgogÙ Grave</name>
+           <name>Agog√¥ Grave</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3139,7 +3139,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>AfuxÈ</name>
+           <name>Afux√©</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3188,7 +3188,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Bloco ChinÍs</name>
+        <name>Bloco Chin√™s</name>
         <short-name>Blo. Chin.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -3212,7 +3212,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Tri‚ngulo</name>
+        <name>Tri√¢ngulo</name>
         <short-name>Trgl.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -3221,14 +3221,14 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Tri‚ngulo Aberto</name>
+           <name>Tri√¢ngulo Aberto</name>
            <stem>2</stem>
            </Drum>
         <Drum pitch="80">
            <head>1</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Tri‚ngulo Abafado</name>
+           <name>Tri√¢ngulo Abafado</name>
            <stem>2</stem>
            </Drum>
         <channel>
@@ -3250,7 +3250,7 @@
            </Drum>
          </instrument>
      <instrument>
-        <name>Prato de ConduÁ„o</name>
+        <name>Prato de Condu√ß√£o</name>
         <short-name>Prt. Com.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -3259,7 +3259,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name> Prato de ConduÁ„o 1</name>
+           <name> Prato de Condu√ß√£o 1</name>
            <stem>2</stem>
            </Drum>
         <Drum pitch="53">
@@ -3274,7 +3274,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Prato ChinÍs</name>
+        <name>Prato Chin√™s</name>
         <short-name>Prt. Chin.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -3283,7 +3283,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>Prato ChinÍs</name>
+           <name>Prato Chin√™s</name>
            <stem>2</stem>
            </Drum>
         <channel>
@@ -3410,7 +3410,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>AfoxÈ</name>
+        <name>Afox√©</name>
         <short-name>Afo.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -3419,7 +3419,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>AfoxÈ</name>
+           <name>Afox√©</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3436,7 +3436,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>AfoxÈ</name>
+           <name>Afox√©</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3640,7 +3640,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>AgogÙ Agudo</name>
+           <name>Agog√¥ Agudo</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3665,8 +3665,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>M„os</name>
-        <short-name>M„os</short-name>
+        <name>M√£os</name>
+        <short-name>M√£os</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
         <drumset>1</drumset>
@@ -3674,7 +3674,7 @@
            <head>0</head>
            <line>4</line>
            <voice>0</voice>
-           <name>M„os</name>
+           <name>M√£os</name>
            <stem>1</stem>
            </Drum>
         <channel>
@@ -3699,8 +3699,8 @@
            </channel>
         </instrument>
      <instrument>
-        <name>PÈ</name>
-        <short-name>PÈ</short-name>
+        <name>P√©</name>
+        <short-name>P√©</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
         <drumset>1</drumset>
@@ -3716,7 +3716,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Sintetizador de Percuss„o</name>
+        <name>Sintetizador de Percuss√£o</name>
         <short-name>Sin. Perc.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -3751,9 +3751,9 @@
         </instrument>
      </instrument-group>
 
-   <instrument-group name="Violıes/Guitarras">
+   <instrument-group name="Viol√µes/Guitarras">
      <instrument>
-        <name>Viol„o Soprano</name>
+        <name>Viol√£o Soprano</name>
         <short-name>Vio. S.</short-name>
         <clef>0</clef>
         <aPitchRange>52-93</aPitchRange>
@@ -3764,7 +3764,7 @@
         <extended>1</extended>
 		</instrument>
      <instrument>
-        <name>Viol„o Alto</name>
+        <name>Viol√£o Alto</name>
         <short-name>Vio. A.</short-name>
         <clef>3</clef>
         <aPitchRange>47-88</aPitchRange>
@@ -3774,7 +3774,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Viol„o</name>
+        <name>Viol√£o</name>
         <short-name>Vio.</short-name>
         <clef>3</clef>
         <aPitchRange>40-83</aPitchRange>
@@ -3784,7 +3784,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Viol„o Alto de 11 cordas</name>
+        <name>Viol√£o Alto de 11 cordas</name>
         <short-name>Vio. A. 11c.</short-name>
         <staves>2</staves>
         <clef staff="1">0</clef>
@@ -3797,7 +3797,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Viol„o de Cordas de AÁo</name>
+        <name>Viol√£o de Cordas de A√ßo</name>
         <short-name>Vio. C. A.</short-name>
         <clef>3</clef>
         <aPitchRange>40-83</aPitchRange>
@@ -3807,7 +3807,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Viol„o de 12 Cordas</name>
+        <name>Viol√£o de 12 Cordas</name>
         <short-name>Vio. 12 C.</short-name>
         <clef>3</clef>
         <aPitchRange>40-83</aPitchRange>
@@ -3817,7 +3817,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Baixo ElÈtrico</name>
+        <name>Baixo El√©trico</name>
         <short-name>B. El.</short-name>
         <clef>5</clef>
         <aPitchRange>28-65</aPitchRange>
@@ -3837,7 +3837,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Guitarra ElÈtrica</name>
+        <name>Guitarra El√©trica</name>
         <short-name>Guit. El.</short-name>
         <clef>3</clef>
         <aPitchRange>40-86</aPitchRange>
@@ -3847,7 +3847,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Contrabaixo ElÈtrico</name>
+        <name>Contrabaixo El√©trico</name>
         <short-name>Cb. El.</short-name>
         <clef>5</clef>
         <aPitchRange>28-65</aPitchRange>
@@ -3857,7 +3857,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Baixo ElÈtrico sem Trastes</name>
+        <name>Baixo El√©trico sem Trastes</name>
         <short-name>B. El. s-T.</short-name>
         <clef>5</clef>
         <aPitchRange>28-65</aPitchRange>
@@ -3919,7 +3919,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Ukulele BarÌtono</name>
+        <name>Ukulele Bar√≠tono</name>
         <short-name>Uk. Bar.</short-name>
         <clef>0</clef>
         <aPitchRange>50-76</aPitchRange>
@@ -4045,7 +4045,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>BarÌtono</name>
+        <name>Bar√≠tono</name>
         <short-name>Bar.</short-name>
         <clef>4</clef>
         <aPitchRange>45-65</aPitchRange>
@@ -4104,7 +4104,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>ClavicÛrdio</name>
+        <name>Clavic√≥rdio</name>
         <short-name>Clc.</short-name>
         <staves>2</staves>
         <clef staff="1">0</clef>
@@ -4143,7 +4143,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Piano ElÈtrico</name>
+        <name>Piano El√©trico</name>
         <short-name>Pno. El.</short-name>
         <staves>2</staves>
         <clef staff="1">0</clef>
@@ -4169,7 +4169,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>”rg„o</name>
+        <name>√ìrg√£o</name>
         <short-name>Org.</short-name>
         <staves>3</staves>
         <clef staff="1">0</clef>
@@ -4223,15 +4223,15 @@
            <controller ctrl="98" value="98"/>
            <controller ctrl="98" value="6"/>
            </MidiAction>
-        <MidiAction name="Flˆte-8">
+        <MidiAction name="Flte-8">
            <controller ctrl="98" value="98"/>
            <controller ctrl="98" value="7"/>
            </MidiAction>
-        <MidiAction name="Flˆte-4">
+        <MidiAction name="Flte-4">
            <controller ctrl="98" value="98"/>
            <controller ctrl="98" value="8"/>
            </MidiAction>
-        <MidiAction name="Flˆte-2">
+        <MidiAction name="Flte-2">
            <controller ctrl="98" value="98"/>
            <controller ctrl="98" value="9"/>
            </MidiAction>
@@ -4249,7 +4249,7 @@
            </MidiAction>
         </instrument>
      <instrument>
-        <name>”rg„o EletrÙnico</name>
+        <name>√ìrg√£o Eletr√¥nico</name>
         <short-name>Org. Et.</short-name>
         <staves>3</staves>
         <clef staff="1">0</clef>
@@ -4261,7 +4261,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>HarmÙnio</name>
+        <name>Harm√¥nio</name>
         <short-name>Harm.</short-name>
         <staves>2</staves>
         <clef staff="1">0</clef>
@@ -4578,7 +4578,7 @@
           </channel>
         </instrument>
      <instrument>
-        <name>Contrabaixo Ac&#250;stico</name>
+        <name>Contrabaixo Ac√∫stico</name>
         <short-name>Cb. Ac.</short-name>
         <clef>5</clef>
         <aPitchRange>28-62</aPitchRange>
@@ -4610,7 +4610,7 @@
           </channel>
         </instrument>
 	  <instrument>
-        <name>Contrabaixos Ac&#250;sticos</name>
+        <name>Contrabaixos Ac√∫sticos</name>
         <short-name>Dbs.</short-name>
         <clef>5</clef>
         <aPitchRange>28-62</aPitchRange>
