@@ -1,4 +1,5 @@
 6.may (ws)
+      - cursor up/down moves selected rest one staff line up/down
       - implement playback of mordent
       - apply consistency checks after score is loaded: make sure voice 1
         is continuous and has no gaps

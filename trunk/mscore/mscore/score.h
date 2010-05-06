@@ -332,6 +332,7 @@ class Score : public QObject {
       void updateSelectedElements();
       void removeChordRest(ChordRest* cr, bool clearSegment);
       void cmdMove(Element* e, QPointF delta);
+      void cmdMoveRest(Rest* rest, Direction dir);
 
       void cmdHalfDuration();
       void cmdDoubleDuration();
