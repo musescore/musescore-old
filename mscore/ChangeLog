@@ -1,0 +1,14 @@
+6.may (ws)
+      - cursor up/down moves selected rest one staff line up/down
+      - implement playback of mordent
+      - apply consistency checks after score is loaded: make sure voice 1
+        is continuous and has no gaps
+5.may (ws)
+      - some effort to support tuplets for capella import
+      - merge mreader branch
+3.may (ws)
+      - read plugins also from local data dir
+        on linux: $HOME/.local/share/data/MusE/MuseScore/plugins
+      - midi remote control
+      - fix #5641, #5644: change pitch of tied notes
+
