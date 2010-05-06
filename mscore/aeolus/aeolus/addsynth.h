@@ -52,7 +52,7 @@ class N_func
             return v;
             }
       void write(FILE*);
-      void read(FILE*);
+      void read(QFile*);
       };
 
 //---------------------------------------------------------
@@ -75,7 +75,7 @@ class HN_func
       int   st (int h, int i) const { return _h [h].st (i); }
       float vi (int h, int n) const { return _h [h].vi (n); }
       void write (FILE *F, int k);
-      void read (FILE *F, int k);
+      void read (QFile *F, int k);
       };
 
 //---------------------------------------------------------

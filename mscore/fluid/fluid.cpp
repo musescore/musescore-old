@@ -496,7 +496,7 @@ void Fluid::set_chorus(int nr, double level, double speed, double depth_ms, int 
 //   process
 //---------------------------------------------------------
 
-void Fluid::process(unsigned len, float* lout, float* rout, int stride)
+void Fluid::process(unsigned len, float* lout, float* rout, int stride, float gain)
       {
       const int byte_size = len * sizeof(float);
 
@@ -521,8 +521,8 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride)
             mutex.unlock();
             }
       for (unsigned i = 0; i < len; i++) {
-            *lout = left_buf[i];
-            *rout = right_buf[i];
+            *lout += gain * left_buf[i];
+            *rout += gain * right_buf[i];
             lout += stride;
             rout += stride;
             }

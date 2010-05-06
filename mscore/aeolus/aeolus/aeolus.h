@@ -101,13 +101,10 @@ class Aeolus : public Synth {
       virtual bool loadSoundFont(const QString&);
       virtual QString soundFont() const;
 
-      virtual void process(unsigned, float*, float*, int);
+      virtual void process(unsigned, float*, float*, int, float);
       virtual void play(const Event&);
 
       virtual const QList<MidiPatch*>& getPatchInfo() const;
-
-      virtual double masterGain() const;
-      virtual void setMasterGain(double);
 
       virtual double effectParameter(int /*effect*/, int /*parameter*/);
       virtual void setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ );
