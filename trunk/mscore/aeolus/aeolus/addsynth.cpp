@@ -154,21 +154,21 @@ void N_func::write (FILE *F)
 //   read
 //---------------------------------------------------------
 
-void N_func::read (FILE *F)
+void N_func::read (QFile* f)
       {
 #ifdef __BYTE_ORDER
 #if (__BYTE_ORDER == __LITTLE_ENDIAN)
-      fread (&_b, 1, sizeof (int32_t), F);
-      fread (&_v, N_NOTE, sizeof (float), F);
+      f->read ((char*)&_b, sizeof (int32_t));
+      f->read ((char*)&_v, N_NOTE * sizeof (float));
 
 #elif (__BYTE_ORDER == __BIG_ENDIAN)
 
       int  i;
       char d [sizeof (int) + N_NOTE * sizeof (float)];
 
-      fread (d, 1, sizeof (int32_t), F);
+      f->read (d, sizeof (int32_t));
       swap4 ((char *)(&_b), d);
-      fread (d, N_NOTE, sizeof (float), F);
+      f-read (d, N_NOTE * sizeof (float));
       for (i = 0; i < N_NOTE; i++)
             swap4 ((char *)(_v + i), d + i * sizeof (float));
 
@@ -224,10 +224,10 @@ void HN_func::write (FILE *F, int k)
 //   read
 //---------------------------------------------------------
 
-void HN_func::read (FILE *F, int k)
+void HN_func::read (QFile* f, int k)
       {
       for (int j = 0; j < k; j++)
-            (_h + j)->read (F);
+            (_h + j)->read(f);
       }
 
 //---------------------------------------------------------
@@ -325,26 +325,22 @@ int Addsynth::save (const char* sdir)
 
 int Addsynth::load (const char* sdir)
       {
-      FILE  *F;
       char   d [32];
-      char   path [1024];
       int    v, k;
-
-      strcpy (path, sdir);
-      strcat (path, "/");
-      strcat (path, _filename);
 
       reset ();
 
-      if (! (F = fopen (path, "r"))) {
-            fprintf (stderr, "Can't open '%s' for reading\n", path);
+      QFile f(QString("%1/%2").arg(sdir).arg(_filename));
+
+      if (!f.open (QIODevice::ReadOnly)) {
+            fprintf (stderr, "Can't open '%s' for reading\n", qPrintable(f.fileName()));
             return 1;
             }
 
-      fread (d, 1, 32, F);
+      f.read (d, 32);
       if (strcmp (d, "AEOLUS")) {
             fprintf (stderr, "File '%s' is not an Aeolus file\n", _filename);
-            fclose (F);
+            f.close();
             return 1;
             }
       v = d [7];
@@ -358,31 +354,31 @@ int Addsynth::load (const char* sdir)
       _fn = d [30];
       _fd = d [31];
 
-      fread (_stopname, 1, 32, F);
-      fread (_copyrite, 1, 56, F);
-      fread (_mnemonic, 1,  8, F);
-      fread (_comments, 1, 56, F);
-      fread (_reserved, 1,  8, F);
+      f.read (_stopname, 32);
+      f.read (_copyrite, 56);
+      f.read (_mnemonic,  8);
+      f.read (_comments, 56);
+      f.read (_reserved,  8);
 
-      _n_vol.read (F);
-      _n_off.read (F);
-      _n_ran.read (F);
+      _n_vol.read (&f);
+      _n_off.read (&f);
+      _n_ran.read (&f);
       if (v >= 2) {
-            _n_ins.read (F);
-            _n_att.read (F);
-            _n_atd.read (F);
-            _n_dct.read (F);
-            _n_dcd.read (F);
+            _n_ins.read (&f);
+            _n_att.read (&f);
+            _n_atd.read (&f);
+            _n_dct.read (&f);
+            _n_dcd.read (&f);
             }
       _h_lev.reset (-100.0f);
       _h_ran.reset (0.0f);
       _h_att.reset (0.050f);
       _h_atp.reset (0.0f);
-      _h_lev.read (F, k);
-      _h_ran.read (F, k);
-      _h_att.read (F, k);
-      _h_atp.read (F, k);
+      _h_lev.read (&f, k);
+      _h_ran.read (&f, k);
+      _h_att.read (&f, k);
+      _h_atp.read (&f, k);
 
-      fclose (F);
+      f.close();
       return 0;
       }

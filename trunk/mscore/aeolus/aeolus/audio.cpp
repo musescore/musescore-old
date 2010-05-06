@@ -163,7 +163,7 @@ void Aeolus::proc_queue (uint32_t k)
 //   process
 //---------------------------------------------------------
 
-void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride)
+void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride, float gain)
       {
       for (int n = 0; n < NNOTES; n++) {
             int m = _keymap [n];
@@ -217,8 +217,8 @@ void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride)
                   nout = PERIOD;
                   k += PERIOD;
                   }
-            *lout += loutb[PERIOD - nout];
-            *rout += routb[PERIOD - nout];
+            *lout += gain * loutb[PERIOD - nout];
+            *rout += gain * routb[PERIOD - nout];
             lout += stride;
             rout += stride;
             --nout;
@@ -243,7 +243,7 @@ void Aeolus::newDivis(M_new_divis* X)
 
 void Aeolus::cond_key_off (int m, int b)
       {
-      unsigned char  *p;
+      unsigned char* p;
       int i;
       for (i = 0, p = _keymap; i < NNOTES; i++, p++) {
             if (*p & m) {

@@ -665,7 +665,6 @@ Rank *Model::find_rank (int g, int i)
 
 int Model::read_instr ()
       {
-      FILE          *F;
       int           line, stat, n;
       bool          instr;
       int           d, k, r, s;
@@ -684,9 +683,9 @@ int Model::read_instr ()
            BAD_SCOPE, BAD_ASECT, BAD_RANK, BAD_DIVIS, BAD_KEYBD, BAD_IFACE,
            BAD_STR1, BAD_STR2 };
 
-      sprintf (buff, "%s/definition", _instr);
-      if (! (F = fopen (buff, "r")))  {
-            fprintf (stderr, "Can't open '%s' for reading\n", buff);
+      QFile f(QString("%1/definition").arg(_instr));
+      if (!f.open(QIODevice::ReadOnly))  {
+            fprintf (stderr, "Can't open '%s' for reading\n", qPrintable(f.fileName()));
             return 1;
             }
 
@@ -697,7 +696,7 @@ int Model::read_instr ()
       G = 0;
       d = k = r = s = 0;
 
-      while (! stat && fgets (buff, 1024, F)) {
+      while (!stat && f.readLine(buff, 1024)) {
             line++;
             p = buff;
             if (*p != '/') {
@@ -723,43 +722,42 @@ int Model::read_instr ()
                   else
                         instr = true;
                   }
-        else if (! instr)
-	{
-	    stat = NO_INSTR;
-	}
-        else if (! strcmp (p, "/instr/end"))
-        {
-            instr = false;
-            stat = DONE;
-	}
-        else if (! strcmp (p, "/manual/new") || ! strcmp (p, "/pedal/new"))
-        {
-	    if (D || G) stat = BAD_SCOPE;
-            else if (sscanf (q, "%s%n", t1, &n) != 1) stat = ARGS;
-            else
-    	    {
-		q += n;
-                if (_nkeybd == NKEYBD)
-		{
-		    fprintf (stderr, "Line %d: can't create more than %d keyboards\n", line, NKEYBD);
-                    stat = ERROR;
-		}
-                else if (strlen (t1) > 15) stat = BAD_STR1;
-                else
-		{
-                    k = _nkeybd++;
-		    K = _keybd + k;
-                    strcpy (K->_label, t1);
-                    K->_flags = 1 << k;
-                    if (p [1] == 'p') K->_flags |= HOLD_MASK | Keybd::IS_PEDAL;
-		}
-	    }
-	}
-        else if (! strcmp (p, "/divis/new"))
-        {
-	    if (D || G) stat = BAD_SCOPE;
-            else if (sscanf (q, "%s%d%d%n", t1, &k, &s, &n) != 3) stat = ARGS;
-            else
+            else if (! instr) {
+                  stat = NO_INSTR;
+                  }
+            else if (! strcmp (p, "/instr/end")) {
+                  instr = false;
+                  stat = DONE;
+                  }
+            else if (! strcmp (p, "/manual/new") || ! strcmp (p, "/pedal/new")) {
+                  if (D || G)
+                        stat = BAD_SCOPE;
+                  else if (sscanf (q, "%s%n", t1, &n) != 1)
+                        stat = ARGS;
+                  else {
+		            q += n;
+                        if (_nkeybd == NKEYBD) {
+                              fprintf (stderr, "Line %d: can't create more than %d keyboards\n", line, NKEYBD);
+                              stat = ERROR;
+                              }
+                        else if (strlen (t1) > 15)
+                              stat = BAD_STR1;
+                        else {
+                              k = _nkeybd++;
+                              K = _keybd + k;
+                              strcpy (K->_label, t1);
+                              K->_flags = 1 << k;
+                              if (p [1] == 'p')
+                                    K->_flags |= HOLD_MASK | Keybd::IS_PEDAL;
+                              }
+                        }
+                  }
+            else if (! strcmp (p, "/divis/new")) {
+                  if (D || G)
+                        stat = BAD_SCOPE;
+                  else if (sscanf (q, "%s%d%d%n", t1, &k, &s, &n) != 3)
+                        stat = ARGS;
+                  else
 	    {
 		q += n;
 		if (_ndivis == NDIVIS)
@@ -1014,9 +1012,9 @@ int Model::read_instr ()
 	}
     }
 
-    fclose (F);
-    return (stat <= DONE) ? 0 : 2;
-}
+      f.close();
+      return (stat <= DONE) ? 0 : 2;
+      }
 
 
 int Model::write_instr()
@@ -1185,25 +1183,24 @@ int Model::read_presets()
       {
       char name [1024];
       uchar data [256];
-      FILE *F;
 
-      sprintf (name, "%s/presets", _instr);
-      if (! (F = fopen (name, "r"))) {
-            fprintf (stderr, "Can't open '%s' for reading\n", name);
+      QFile f(QString("%1/presets").arg(_instr));
+      if (!f.open(QIODevice::ReadOnly)) {
+            fprintf (stderr, "Can't open '%s' for reading\n", qPrintable(f.fileName()));
             return 1;
             }
 
-      fread (data, 16, 1, F);
+      f.read((char*)data, 16);
       if (strcmp ((char *) data, "PRESET") || data [7]) {
             fprintf (stderr, "File '%s' is not a valid preset file\n", name);
-            fclose (F);
+            f.close();
             return 1;
             }
       int n = RD2 (data + 14);
 
-      if (fread (data, 256, 1, F) != 1) {
+      if (f.read ((char*)data, 256) != 256) {
             fprintf (stderr, "No valid data in file '%s'\n", name);
-            fclose (F);
+            f.close();
             return 1;
             }
       uchar* p = data;
@@ -1215,10 +1212,10 @@ int Model::read_presets()
             }
       if (n != _ngroup) {
             fprintf (stderr, "Presets in file '%s' are not compatible\n", name);
-            fclose (F);
+            f.close();
             return 1;
             }
-      while (fread (data, 4 + 4 * _ngroup, 1, F) == 1) {
+      while (f.read ((char*)data, 4 + 4 * _ngroup) == 4 + 4 * _ngroup) {
             p = data;
             int i = *p++;
             int j = *p++;
@@ -1233,7 +1230,7 @@ int Model::read_presets()
                   _preset [i][j] = P;
                   }
             }
-      fclose (F);
+      f.close();
       return 0;
       }
 

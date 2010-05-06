@@ -397,7 +397,7 @@ class Fluid : public Synth {
       Voice* alloc_voice(unsigned id, Sample* sample, int chan, int key, int vel, double vt);
       Voice* free_voice_by_kill();
 
-      virtual void process(unsigned len, float* lout, float* rout, int stride);
+      virtual void process(unsigned len, float* lout, float* rout, int stride, float gain);
 
       void set_chorus(int nr, double level, double speed, double depth_ms, int type);
       void set_reverb(double roomsize, double damping, double width, double level);

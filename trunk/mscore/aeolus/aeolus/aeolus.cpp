@@ -168,15 +168,6 @@ const QList<MidiPatch*>& Aeolus::getPatchInfo() const
       return patchList;
       }
 
-double Aeolus::masterGain() const
-      {
-      return 1.0;
-      }
-
-void Aeolus::setMasterGain(double)
-      {
-      }
-
 double Aeolus::effectParameter(int /*effect*/, int /*parameter*/)
       {
       return 0.0;
