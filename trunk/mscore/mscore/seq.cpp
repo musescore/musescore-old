@@ -1099,20 +1099,20 @@ SeqMsg SeqMsgFifo::dequeue()
       }
 
 //---------------------------------------------------------
-//   setMasterVolume
+//   setGain
 //---------------------------------------------------------
 
-void Seq::setMasterVolume(float gain)
+void Seq::setGain(float gain)
       {
       synti->setGain(gain);
-      emit masterVolumeChanged(gain);
+      emit gainChanged(gain);
       }
 
 //---------------------------------------------------------
-//   masterVolume
+//   gain
 //---------------------------------------------------------
 
-float Seq::masterVolume() const
+float Seq::gain() const
       {
       return synti->gain();
       }
