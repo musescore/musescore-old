@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: select.h 2047 2009-08-26 18:33:38Z wschweer $
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,7 +23,7 @@
 
 #include "ui_synthcontrol.h"
 
-class Synth;
+class MasterSynth;
 
 //---------------------------------------------------------
 //   SynthControl
@@ -32,28 +32,28 @@ class Synth;
 class SynthControl : public QWidget, Ui::SynthControl {
       Q_OBJECT
 
-      Synth* synth;
+      MasterSynth* synti;
 
       virtual void closeEvent(QCloseEvent*);
 
    private slots:
       void selectSoundFont();
-      void masterGainChanged(double, int);
+      void gainChanged(double, int);
       void masterTuningChanged(double);
       void reverbValueChanged(double val, int idx);
       void chorusValueChanged(double val, int idx);
 
    signals:
       void closed();
-      void masterGainChanged(float);
+      void gainChanged(float);
       void soundFontChanged();
 
    public slots:
-      void setMasterGain(float);
+      void setGain(float);
 
    public:
-      Synth* getSynth() const { return synth; }
-      SynthControl(Synth*, QWidget* parent);
+      MasterSynth* getSynth() const { return synti; }
+      SynthControl(MasterSynth*, QWidget* parent);
       void updatePreferences();
       void setMeter(float, float, float, float);
       void stop();

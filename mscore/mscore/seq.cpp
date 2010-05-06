@@ -70,6 +70,8 @@ static const int peakHold     = (peakHoldTime * guiRefresh) / 1000;
 
 Seq::Seq()
       {
+      synti = new MasterSynth();
+
       running         = false;
       playlistChanged = false;
       cs              = 0;
@@ -109,9 +111,8 @@ Seq::Seq()
 
 Seq::~Seq()
       {
+      delete synti;
       delete driver;
-      foreach(Synth* s, syntis)
-            delete s;
       }
 
 //---------------------------------------------------------
@@ -170,13 +171,6 @@ bool Seq::init()
       bool useAlsaFlag      = preferences.useAlsaAudio;
       bool usePortaudioFlag = preferences.usePortaudioAudio;
 
-      if (useJackFlag || useAlsaFlag || usePortaudioFlag) {
-            syntis.append(new FluidS::Fluid());
-#ifdef AEOLUS
-            syntis.append(new Aeolus());
-#endif
-            }
-
 #ifdef USE_JACK
       if (useJackFlag) {
             useAlsaFlag      = false;
@@ -226,42 +220,7 @@ bool Seq::init()
             return false;
             }
       AL::sampleRate = driver->sampleRate();
-      if (!syntis.isEmpty()) {
-            foreach(Synth* s, syntis)
-                  s->init(AL::sampleRate);
-            QString p;
-            if (!preferences.soundFont.isEmpty())
-                  p = preferences.soundFont;
-            else
-                  p = QString(getenv("DEFAULT_SOUNDFONT"));
-            if (p.isEmpty()) {
-                  QMessageBox::critical(0, tr("MuseScore: Load SoundFont"),
-                     tr("No SoundFont configured\n"
-                     "Playback will be disabled."));
-                  }
-            else {
-                  if (debugMode)
-                        printf("load soundfont <%s>\n", qPrintable(p));
-                  bool rv = syntis[0]->loadSoundFont(p);
-                  if (!rv) {
-                        QString s = tr("Loading SoundFont\n"
-                           "\"%1\"\n"
-                           "failed. Playback will be disabled.\n\n"
-                           "Go to Display > Synthesizer \n"
-                           "and check that the file location is correct").arg(p);
-                        QMessageBox::critical(0, tr("MuseScore: Load SoundFont"), s);
-                        }
-                  }
-            foreach(Synth* s, syntis) {
-                  s->setMasterTuning(preferences.tuning);
-                  s->setMasterGain(preferences.masterGain);
-                  s->setEffectParameter(0, 0, preferences.reverbRoomSize);
-                  s->setEffectParameter(0, 1, preferences.reverbDamp);
-                  s->setEffectParameter(0, 2, preferences.reverbWidth);
-                  s->setEffectParameter(0, 3, preferences.reverbGain);
-                  s->setEffectParameter(1, 4, preferences.chorusGain);
-                  }
-            }
+      synti->init(AL::sampleRate);
 
       if (!driver->start()) {
             printf("Cannot start I/O\n");
@@ -602,8 +561,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                         printf("%d:  %f - %f\n", playPos.key(), f, playTime);
 						n=0;
                         }
-                  foreach(Synth* s, syntis)
-                        s->process(n, l, r, stride);
+                  synti->process(n, l, r, stride);
                   l += n * stride;
                   r += n * stride;
                   playTime += double(n)/double(AL::sampleRate);
@@ -613,8 +571,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   playEvent(playPos.value(), framePos);
                   }
             if (frames) {
-                  foreach(Synth* s, syntis)
-                        s->process(frames, l, r, stride);
+                  synti->process(frames, l, r, stride);
                   playTime += double(frames)/double(AL::sampleRate);
                   }
             if (playPos == events.constEnd()) {
@@ -623,8 +580,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   }
             }
       else {
-            foreach(Synth* s, syntis)
-                  s->process(frames, l, r, stride);
+            synti->process(frames, l, r, stride);
             }
 
       if (lbuffer == 0 || rbuffer == 0)   // midi only?
@@ -1094,16 +1050,7 @@ void Seq::guiToSeq(const SeqMsg& msg)
 
 QList<MidiPatch*> Seq::getPatchInfo() const
       {
-      QList<MidiPatch*> pl;
-      int idx = 0;
-      foreach(Synth* s, syntis) {
-            QList<MidiPatch*> ip = s->getPatchInfo();
-            foreach(MidiPatch* mp, ip)
-                  mp->synti = idx;
-            pl += ip;
-            ++idx;
-            }
-      return pl;
+      return synti->getPatchInfo();
       }
 
 //---------------------------------------------------------
@@ -1157,8 +1104,7 @@ SeqMsg SeqMsgFifo::dequeue()
 
 void Seq::setMasterVolume(float gain)
       {
-      foreach(Synth* s, syntis)
-            s->setMasterGain(gain);
+      synti->setGain(gain);
       emit masterVolumeChanged(gain);
       }
 
@@ -1168,9 +1114,7 @@ void Seq::setMasterVolume(float gain)
 
 float Seq::masterVolume() const
       {
-      if (!syntis.isEmpty())
-            return syntis[0]->masterGain();
-      return 0;
+      return synti->gain();
       }
 
 //---------------------------------------------------------
@@ -1179,8 +1123,7 @@ float Seq::masterVolume() const
 
 void Seq::loadSoundFont(const QString& s)
       {
-      foreach(Synth* synti, syntis)
-            synti->loadSoundFont(s);
+      synti->loadSoundFont(s);
       }
 
 //---------------------------------------------------------
@@ -1189,9 +1132,8 @@ void Seq::loadSoundFont(const QString& s)
 
 void Seq::putEvent(const Event& event)
       {
-      Channel* c = cs->midiMapping()->at(event.channel()).articulation;
-      int syntiIdx = c->synti;
-      syntis[syntiIdx]->play(event);
+      int syntiIdx= cs->midiMapping()->at(event.channel()).articulation->synti;
+      synti->play(event, syntiIdx);
       }
 
 //---------------------------------------------------------
@@ -1200,13 +1142,7 @@ void Seq::putEvent(const Event& event)
 
 int Seq::synthNameToIndex(const QString& name) const
       {
-      int idx = 0;
-      foreach(Synth* s, syntis) {
-            if (s->name() == name)
-                  return idx;
-            ++idx;
-            }
-      return -1;
+      return synti->synthNameToIndex(name);
       }
 
 //---------------------------------------------------------
@@ -1215,7 +1151,24 @@ int Seq::synthNameToIndex(const QString& name) const
 
 QString Seq::synthIndexToName(int idx) const
       {
-      if (idx >= syntis.size())
-            return QString();
-      return QString(syntis[idx]->name());
+      return synti->synthIndexToName(idx);
       }
+
+//---------------------------------------------------------
+//   getSynth
+//---------------------------------------------------------
+
+Synth* Seq::getSynth(int n)
+      {
+      return synti->getSynth(n);
+      }
+
+//---------------------------------------------------------
+//   getSyntis
+//---------------------------------------------------------
+
+const QList<Synth*>& Seq::getSyntis() const
+      {
+      return synti->getSyntis();
+      }
+

@@ -35,6 +35,7 @@ class Driver;
 class Part;
 struct Channel;
 class ScoreView;
+class MasterSynth;
 
 //---------------------------------------------------------
 //   SeqMsg
@@ -81,7 +82,7 @@ class Seq : public QObject {
 
       SeqMsgFifo toSeq;
 
-      QList<Synth*> syntis;
+      MasterSynth* synti;
       Driver* driver;
 
       double meterValue[2];
@@ -124,7 +125,7 @@ class Seq : public QObject {
 
    public slots:
       void setRelTempo(double);
-      void setMasterVolume(float);
+      void setGain(float);
       void seek(int);
       void stopNotes();
       void start();
@@ -179,8 +180,11 @@ class Seq : public QObject {
       void getCurTick(int*, int*);
       float masterVolume() const;
       void loadSoundFont(const QString&);
-      Synth* getSynth(int n) { return syntis[n]; }
-      const QList<Synth*>& getSyntis() const { return syntis; }
+
+      Synth* getSynth(int n);
+      const QList<Synth*>& getSyntis() const;
+      MasterSynth* getSynti() const { return synti; }
+
       int synthNameToIndex(const QString&) const;
       QString synthIndexToName(int) const;
       void putEvent(const Event&);

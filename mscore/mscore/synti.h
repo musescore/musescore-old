@@ -54,16 +54,43 @@ class Synth {
       virtual bool loadSoundFont(const QString&) = 0;
       virtual QString soundFont() const = 0;
 
-      virtual void process(unsigned, float*, float*, int) = 0;
+      virtual void process(unsigned, float*, float*, int, float) = 0;
       virtual void play(const Event&) = 0;
 
       virtual const QList<MidiPatch*>& getPatchInfo() const = 0;
 
-      virtual double masterGain() const { return 1.0; }
-      virtual void setMasterGain(double) {}
+      virtual double effectParameter(int /*effect*/, int /*param*/)  { return 0.0; }
+      virtual void setEffectParameter(int /*effect*/, int /*param*/, double /*val*/ ) { }
+      };
 
-      virtual double effectParameter(int /*effect*/, int /*parameter*/)                { return 0.0; }
-      virtual void setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ ) { }
+//---------------------------------------------------------
+//   MasterSynth
+//---------------------------------------------------------
+
+class MasterSynth {
+      QList<Synth*> syntis;
+      float _gain;
+
+   public:
+      MasterSynth();
+      ~MasterSynth();
+      void init(int sampleRate);
+
+      void process(unsigned, float*, float*, int);
+      void play(const Event&, int);
+
+      double gain() const     { return _gain; }
+      void setGain(float val) { _gain = val;  }
+
+      bool loadSoundFont(const QString&);
+      QString soundFont() const;
+
+      int synthNameToIndex(const QString&) const;
+      QString synthIndexToName(int) const;
+
+      QList<MidiPatch*> getPatchInfo() const;
+      Synth* getSynth(int n);
+      const QList<Synth*>& getSyntis() const;
       };
 
 #endif

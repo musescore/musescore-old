@@ -51,7 +51,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             }
       static const int sampleRate = 44100;
 
-      const QList<Synth*>& syntis = seq->getSyntis();
+      MasterSynth* synti = seq->getSynti();
 
       if (soundFont.isEmpty()) {
             if (!preferences.soundFont.isEmpty())
@@ -63,7 +63,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                   return false;
                   }
             }
-      bool rv = syntis[0]->loadSoundFont(soundFont);
+      bool rv = synti->loadSoundFont(soundFont);
       if (!rv) {
             fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
             return false;
@@ -115,6 +115,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             float buffer[FRAMES * 2];
             int stride      = 2;
             double playTime = 0.0;
+            synti->setGain(gain);
 
             for (;;) {
                   unsigned int frames = FRAMES;
@@ -129,8 +130,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                         if (f >= endTime)
                               break;
                         int n = lrint((f - playTime) * sampleRate);
-                        foreach(Synth* s, syntis)
-                              s->process(n, l, r, stride);
+                        synti->process(n, l, r, stride);
 
                         l         += n * stride;
                         r         += n * stride;
@@ -145,13 +145,10 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                               }
                         }
                   if (frames) {
-                        foreach(Synth* s, syntis)
-                              s->process(frames, l, r, stride);
+                        synti->process(frames, l, r, stride);
                         playTime += double(frames)/double(sampleRate);
                         }
                   if (pass == 1) {
-                        for (unsigned i = 0; i < FRAMES * 2; ++i)
-                              buffer[i] *= gain;
                         sf_writef_float(sf, buffer, FRAMES);
                         }
                   else {

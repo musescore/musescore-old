@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: select.cpp 2054 2009-08-28 16:15:01Z wschweer $
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -29,11 +29,11 @@
 //   SynthControl
 //---------------------------------------------------------
 
-SynthControl::SynthControl(Synth* s, QWidget* parent)
+SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
    : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
-      synth = s;
+      synti = s;
 
       reverbRoomSize->setId(0);
       reverbDamp->setId(1);
@@ -42,20 +42,20 @@ SynthControl::SynthControl(Synth* s, QWidget* parent)
       chorus->setId(4);
 
       soundFont->setText(preferences.soundFont);
-      masterTuning->setValue(synth->masterTuning());
-      setMasterGain(synth->masterGain());
+      masterTuning->setValue(synti->masterTuning());
+      setGain(synti->gain());
 
-      reverb->setValue(synth->effectParameter(0, 3));
-      roomSizeBox->setValue(synth->effectParameter(0, 0));
-      dampBox->setValue(synth->effectParameter(0, 1));
-      widthBox->setValue(synth->effectParameter(0, 2));
+      reverb->setValue(synti->effectParameter(0, 3));
+      roomSizeBox->setValue(synti->effectParameter(0, 0));
+      dampBox->setValue(synti->effectParameter(0, 1));
+      widthBox->setValue(synti->effectParameter(0, 2));
 
-      chorus->setValue(synth->effectParameter(1, 4));
-      chorusSpeed->setValue(synth->effectParameter(1, 1));
-      chorusDepth->setValue(synth->effectParameter(1, 2));
+      chorus->setValue(synti->effectParameter(1, 4));
+      chorusSpeed->setValue(synti->effectParameter(1, 1));
+      chorusDepth->setValue(synti->effectParameter(1, 2));
 
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
-      connect(gain,     SIGNAL(valueChanged(double,int)), SLOT(masterGainChanged(double,int)));
+      connect(gain,     SIGNAL(valueChanged(double,int)), SLOT(gainChanged(double,int)));
       connect(masterTuning, SIGNAL(valueChanged(double)),       SLOT(masterTuningChanged(double)));
 
       connect(reverb,         SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
@@ -69,10 +69,10 @@ SynthControl::SynthControl(Synth* s, QWidget* parent)
       }
 
 //---------------------------------------------------------
-//   setMasterGain
+//   setGain
 //---------------------------------------------------------
 
-void SynthControl::setMasterGain(float val)
+void SynthControl::setGain(float val)
       {
       gain->setValue(val);
       }
@@ -94,10 +94,10 @@ void SynthControl::closeEvent(QCloseEvent* ev)
 void MuseScore::showSynthControl(bool val)
       {
       if (synthControl == 0) {
-            synthControl = new SynthControl(seq->getSynth(0), this);
+            synthControl = new SynthControl(seq->getSynti(), this);
             connect(synthControl, SIGNAL(closed()), SLOT(closeSynthControl()));
-            connect(seq, SIGNAL(masterVolumeChanged(float)), synthControl, SLOT(setMasterGain(float)));
-            connect(synthControl, SIGNAL(masterGainChanged(float)), seq, SLOT(setMasterVolume(float)));
+            connect(seq, SIGNAL(gainChanged(float)), synthControl, SLOT(setGain(float)));
+            connect(synthControl, SIGNAL(gainChanged(float)), seq, SLOT(setGain(float)));
 
             if (iledit) {
                   connect(synthControl, SIGNAL(soundFontChanged()), iledit,
@@ -158,18 +158,18 @@ void SynthControl::selectSoundFont()
          );
       if (!s.isNull()) {
             soundFont->setText(s);
-            synth->loadSoundFont(s);
+            synti->loadSoundFont(s);
             emit soundFontChanged();
             }
       }
 
 //---------------------------------------------------------
-//   masterGainChanged
+//   gainChanged
 //---------------------------------------------------------
 
-void SynthControl::masterGainChanged(double val, int)
+void SynthControl::gainChanged(double val, int)
       {
-      emit masterGainChanged(val);
+      emit gainChanged(val);
       }
 
 //---------------------------------------------------------
@@ -178,7 +178,7 @@ void SynthControl::masterGainChanged(double val, int)
 
 void SynthControl::masterTuningChanged(double val)
       {
-      synth->setMasterTuning(val);
+      synti->setMasterTuning(val);
       }
 
 //---------------------------------------------------------
@@ -207,7 +207,7 @@ void SynthControl::stop()
 
 void SynthControl::reverbValueChanged(double val, int idx)
       {
-      synth->setEffectParameter(0, idx, val);
+      synti->setEffectParameter(0, idx, val);
       }
 
 //---------------------------------------------------------
@@ -216,6 +216,6 @@ void SynthControl::reverbValueChanged(double val, int idx)
 
 void SynthControl::chorusValueChanged(double val, int idx)
       {
-      synth->setEffectParameter(1, idx, val);
+      synti->setEffectParameter(1, idx, val);
       }
 
