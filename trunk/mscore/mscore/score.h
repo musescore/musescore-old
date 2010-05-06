@@ -324,8 +324,6 @@ class Score : public QObject {
       void writeExcerpt(Excerpt*, Xml&);
       void cmdResetBeamMode();
       void connectSlurs();
-      void checkSlurs();
-      void checkTuplets();
       void tupletDialog();
 
       void cmdInsertClef(int type);
@@ -357,6 +355,10 @@ class Score : public QObject {
       void layoutStage3();
       void transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int semitones);
       void reLayout(Measure*);
+
+      void checkSlurs();
+      void checkTuplets();
+      void checkScore();
 
    signals:
       void selectionChanged(int);

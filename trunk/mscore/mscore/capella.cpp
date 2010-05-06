@@ -1400,7 +1400,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                                           }
                                     }
                               }
-                        if (!o->invisible) {
+                        if (!o->invisible || voice == 0) {
                               Segment* s = m->getSegment(SegChordRest, tick);
                               Rest* rest = new Rest(this);
                               rest->setTick(tick);
@@ -1411,6 +1411,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                                     d.setVal(ticks);
                               rest->setDuration(d);
                               rest->setTrack(track);
+                              rest->setVisible(!o->invisible);
                               s->add(rest);
                               }
                         tick += ticks;

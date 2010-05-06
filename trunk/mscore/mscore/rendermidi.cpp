@@ -174,7 +174,7 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
       foreach(Note* note, chord->notes()) {
             int channel = instr->channel(note->subchannel()).channel;
             int onTime = tick;
-            if(arpeggio){
+            if (arpeggio){
                 if(arpeggio->subtype() != ARP_DOWN)
                     onTime = tick + i * arpeggioOffset;
                 else
@@ -183,6 +183,29 @@ void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int 
             collectNote(events, channel, note, onTime, len);
             i++;
             }
+      }
+
+//---------------------------------------------------------
+//   playNote
+//---------------------------------------------------------
+
+static void playNote(EventMap* events, Note* note, int channel, int pitch,
+   int velo, int onTime, int offTime)
+      {
+      Event* ev = new Event(ME_NOTEON);
+      ev->setChannel(channel);
+      ev->setPitch(pitch);
+      ev->setVelo(velo);
+      ev->setTuning(note->tuning());
+      ev->setNote(note);
+      events->insertMulti(onTime, ev);
+
+      ev = new Event(ME_NOTEON);
+      ev->setChannel(channel);
+      ev->setPitch(pitch);
+      ev->setVelo(0);
+      ev->setNote(note);
+      events->insertMulti(offTime, ev);
       }
 
 //---------------------------------------------------------
@@ -224,21 +247,25 @@ void Score::collectNote(EventMap* events, int channel, Note* note, int onTime, i
             else if (velo > 127)
                   velo = 127;
             }
+      bool mordent = false;
+      foreach(Articulation* a, *note->chord()->getArticulations()) {
+            if (a->subtype() == MordentSym) {
+                  mordent = true;
+                  break;
+                  }
+            }
+      if (mordent) {
+            int l = len / 8;
 
-      Event* ev = new Event(ME_NOTEON);
-      ev->setChannel(channel);
-      ev->setPitch(pitch);
-      ev->setVelo(velo);
-      ev->setTuning(note->tuning());
-      ev->setNote(note);
-      events->insertMulti(onTime, ev);
+            // TODO: downstep depends on scale
+            int downstep = 2;
 
-      Event* evo = new Event(ME_NOTEON);
-      evo->setChannel(channel);
-      evo->setPitch(pitch);
-      evo->setVelo(0);
-      evo->setNote(note);
-      events->insertMulti(offTime, evo);
+            playNote(events, note, channel, pitch, velo, onTime, onTime + l);
+            playNote(events, note, channel, pitch-downstep, velo, onTime+l, onTime + l+l);
+            playNote(events, note, channel, pitch, velo, onTime+l+l, onTime + len);
+            }
+      else
+            playNote(events, note, channel, pitch, velo, onTime, offTime);
       }
 
 //---------------------------------------------------------
