@@ -61,7 +61,7 @@ def insertH1Anchors(html_source, anchors, verbose):
         name = name.replace('li%c3%b1as','li%c3%b1') #workaround incorrect url on website (Galacian handbook)
         split[i-1] = split[i-1] + '<a name="' + name + '"></a>'
         anchors.append(name)
-        #print name
+        print name
         
     html_source = '<h1'.join(split)
 
@@ -81,8 +81,8 @@ def markAsH2(html_source, verbose):
     for i in range(1, len(html_soup('h1'))):
         ##if html_soup('h1')[i].parent.parent.parent.name == 'div':
         if html_soup('h1')[i].parent['class'] == 'section-3':
-            if verbose:
-                print ' * ' + html_soup('h1')[i].string
+            #if verbose:
+                #print ' * ' + html_soup('h1')[i].string
             html_soup('h1')[i]['class'] = 'h2-heading ' + html_soup('h1')[i]['class']
 
     html_source = str(html_soup)
@@ -138,6 +138,8 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'Capitolul [number]'
     elif language_code == 'ru':
         chapter = 'Глава [number]'
+    elif language_code == 'zh-hans':
+        chapter = '第 [number] 章'
 
     html_source = html_source.replace('<h1 class="print-title"></h1>','') #remove empty header
 
@@ -260,6 +262,20 @@ def addCustomStyles(html_source, verbose, language_code='en'):
                     '''
             full_css = re.sub('DejaVu Sans','Sazanami Gothic',full_css)
             full_css = re.sub('DejaVu Serif','Sazanami Mincho',full_css)
+        elif (language_code == 'zh-hans'):
+            external_fonts = '''/* Normal */
+                    @font-face {
+                       font-family: "Zenhei";
+                       src: url(font/zh-hans/wqy-zenhei.ttf);
+                    }
+                    /* Normal */
+                    @font-face {
+                       font-family: "Ukai";
+                       src: url(font/zh-hans/ukai00.ttf);
+                    }
+                    '''
+            full_css = re.sub('DejaVu Sans','Zenhei',full_css)
+            full_css = re.sub('DejaVu Serif','Ukai',full_css)
 
         if (external_fonts != 'default'):
             pattern = re.compile(r'/\* Begin External Fonts \*/.*/\* End External Fonts \*/',re.DOTALL)
@@ -277,7 +293,8 @@ def addCustomStyles(html_source, verbose, language_code='en'):
     css_file.close()
 
     sock = externalFonts(sock,language_code)
-
+    if language_code == 'ja' or language_code == 'zh-hans':
+        sock += 'body {-pdf-word-wrap:"CJK"}'
     html_source = html_source.replace('</head>','<style type="text/css" media="all">\n'
                                       + sock + '</style>\n</head>')
 
@@ -491,8 +508,8 @@ def generatePDF(html_source, verbose, language_code='en', pdf_parameter='openpdf
     #m = re.search(">([^<]*)<",h)
     #m.group(0)
 
-    if (language_code == 'ja'):
-        html_source = insertSpaces(html_source)
+    #if (language_code == 'ja'):
+    #    html_source = insertSpaces(html_source)
 
     pdf = pisa.CreatePDF(
         html_source,
@@ -560,6 +577,9 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'ru':
         url = 'http://musescore.org/ru/print/book/export/html/2352'
         internal = 'http://musescore.org/ru/cправочник' #c%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA'
+    elif language_code == 'zh-hans':
+        url = 'http://musescore.org/zh-hans/print/book/export/html/5541'
+        internal = 'http://musescore.org/zh-hans/用户手册' #%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C'
 
     print "Create handbook for",language_code
 
@@ -602,7 +622,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
 
 def main():
-    language_choices = ['all','en','ca','de','el','es','fi','fr','gl','hu','it','ja','nb','nl','pl','pt-BR','ro','ru']
+    language_choices = ['all','en','ca','de','el','es','fi','fr','gl','hu','it','ja','nb','nl','pl','pt-BR','ro','ru', 'zh-hans']
   
     parser = OptionParser()
     parser.add_option("-l","--lang", dest="language_code",

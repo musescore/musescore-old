@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_23cf73813c6a9289838ce63d257cc659.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_88a781bb2ec6aedb348304e7b0d302b3.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx"}});
@@ -13,14 +13,15 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/fr/manuel/manuel' />
     <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_4eb6c605f0d66872c47ff3690a734887.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_13fd1fd02a9ee52854c713d5c48e3ddf.css" />
   </head>
   <body>
-        <div class="print-logo"></div>
-    <div class="print-site_name">Publié sur <em>MuseScore</em> (<a href="http://musescore.org">http://musescore.org</a>)</div>
-    <p />
-    <div class="print-breadcrumb"><a href="/fr">Accueil</a> &gt; Manuel</div>
+        <div class="print-logo"><img class='print-logo' src='/sites/musescore.org/files/musescore-logo.png' alt='' />
+</div>
+    <div class="print-slogan">Logiciel libre d'édition de partitions</div>
+    <p></p>
     <hr class="print-hr" />
+    <div class="print-site_name">Recupéré depuis <a href="http://musescore.org/fr">http://musescore.org</a> le jeu, 06/05/2010</div>
     <h1 class="print-title"></h1>
     <div class="print-submitted"></div>
     <div class="print-created"></div>
@@ -48,26 +49,45 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
 <p>Après quelques secondes, MuseScore ouvre la partition de démonstration. Vous pouvez experimenter avec cette partition et vous faire une idée du programme. Ensuite vous pouvez créer votre <a href="http://musescore.org/fr/manuel/création-dune-nouvelle-partition" title="création d&#039;une nouvelle partition">première partition</a>.</p>
 <p><img src="/sites/musescore.org/files/screenshot-demo-score-fr.png" alt="MuseScore ouvert sur la partition de démonstration" title="MuseScore ouvert sur la partition de démonstration" width="450" height="415" class="inline" /></p>
 <h3>Linux</h3>
-<p>Ce quide est essentiellement écrit pour les utilisateurs de K Desktop Environment (KDE), utilisé par les systèmes SUSE et Kunbuntu, les instructions entre parentèses (...) sont pour les utilisateurs de GNOME Desktop Environment, utilisé par les systèmes Unbuntu ou Fedora.</p>
+<h4>Ubuntu: Installation depuis le PPA stable</h4>
+<p>Pour des raisons d'agendas différents entre les versions stables d'Ubuntu et les versions stables de MuseScore, il est possible que Ubuntu n'ait pas dans ses paquets officiels la dernière version stable de MuseScore (version 0.9.5 pour le moment). Les paquets stables sont donc livrés dans un <a class="freelinking external" href="http://doc.ubuntu-fr.org/ppa">PPA</a>.</p>
+<p><b>Instructions</b><br />
+Aller dans Système → Administration → Gestionnaire de paquet Synaptic<br />
+Configuration → Depots → Logiciels de tierce parties (Autres logiciels)<br />
++Ajouter<br />
+dans <code>ligne APT</code> copier ce qui suit (si vous utilisez une autre version que karmic, remplacer karmic par votre version)<br />
+<code>deb <a href="http://ppa.launchpad.net/mscore-ubuntu/mscore-stable/ubuntu" title="http://ppa.launchpad.net/mscore-ubuntu/mscore-stable/ubuntu">http://ppa.launchpad.net/mscore-ubuntu/mscore-stable/ubuntu</a> karmic main</code><br />
+Valider (Ajouter une source de mise à jour)</p>
+<p>puis recommence pareil avec:<br />
+<code>deb-src <a href="http://ppa.launchpad.net/mscore-ubuntu/mscore-stable/ubuntu" title="http://ppa.launchpad.net/mscore-ubuntu/mscore-stable/ubuntu">http://ppa.launchpad.net/mscore-ubuntu/mscore-stable/ubuntu</a> karmic main</code><br />
+Valider.<br />
+Fermer. Recharger<br />
+Le message suivant pourrait s'afficher<br />
+W: GPG error: <a href="http://ppa.launchpad.net" title="http://ppa.launchpad.net">http://ppa.launchpad.net</a> jaunty Release: Les signatures suivantes n'ont pas pu être vérifiées car la clé publique n'est pas disponible : NO_PUBKEY 04E482780EC0BBD2<br />
+Passer outre en validant pour le moment, il s'agit d'une signature. On pourra toujours entrer la clé plus tard.<br />
+Fermer Synaptic<br />
+Installer MuseScore ou mettre à jour normalement.</p>
+<h4>Installation générique de la version livrée avec votre distribution</h4>
+<p>Ce guide est essentiellement écrit pour les utilisateurs de K Desktop Environment (KDE), utilisé par les systèmes SUSE et Kunbuntu, les instructions entre parentèses (...) sont pour les utilisateurs de GNOME Desktop Environment, utilisé par les systèmes Unbuntu ou Fedora.</p>
 <h4>Installation de MuseScore</h4>
 <p>Le fichier d'installation se trouve à la page <a class="freelinking external" href="http://www.musescore.org/fr/t%C3%A9l%C3%A9chargement">Téléchargement</a> mais vous pourrez trouver les binaires dans le dépot standard de votre distribution.<br />
-Pour Unbuntu, MuseScore se trouve dans le dépot "universe".  Le dépot "universe" doit d'abord être autorisé si vous voulez installer MuseScore.<br />
+Pour Ubuntu, MuseScore se trouve dans le dépot "universe".  Le dépot "universe" doit d'abord être autorisé si vous voulez installer MuseScore.<br />
 Pour écouter les notes et les partitions vous avez le choix entre ALSA ou JACK server. Le choix dépend de la configuration personnelle de chaque système.</p>
 <p>Pour installer MuseScore, suivez les étapes suivantes :</p>
 <ol>
 <li>Ouvrir Add/Remove Software (pour Gnome : Add/Remove Programs)</li>
 <li>Sous la categorie Multimedia (pour Gnome : Sound &amp; amp; Video), sélectionnez MuseScore</li>
-<li>sélectionnez aussi le package "JACK Control".</li>
+<li>Optionnel: sélectionnez aussi le package "JACK Control".</li>
 <li>Cliquez sur Preview (seulement KDE)</li>
 <li>Cliquer sur Apply Changes</li>
 </ol>
-<h4>Configuration de JACK server</h4>
+<h4>Configuration de JACK server (Optionnel)</h4>
 <p>Ouvrez le "JACK Audio Connection Kit" et sélectionnez Setup.</p>
 <ol>
 <li>Sous l'onglet audio desélectionnez "realtime"</li>
-<li>Si vous utilisez ALSA audio, positionnez le pilote à "ALSA" et le I/O device à “hw:0” (hw:Zéro)<br />
+<li>Si vous utilisez ALSA audio, positionnez le pilote à "ALSA" et le E/S device à “hw:0” (hw:Zéro)<br />
              pour quelques systèmes, OSS fonctionne mais pas ALSA.<br />
-             Si vous utilisez OSS audio, positionnez le pilote à "OSS" et le I/O device à "/dev/audio".</li>
+             Si vous utilisez OSS audio, positionnez le pilote à "OSS" et le E/S device à "/dev/audio".</li>
 <li>Appliquez les changements et démarrez le JACK server.</li>
 </ol>
 <h4>Configuration de MuseScore</h4>
@@ -75,12 +95,12 @@ Pour écouter les notes et les partitions vous avez le choix entre ALSA ou JACK 
 <ol>
 <li>Ouvrez MuseScore, Qui se trouve sous Multimedia dans le menu principal (pour Gnome: Sound &amp; Video)</li>
 <li>Ouvrez le menu Edit et sélectionnez Preferences</li>
-<li>Sous l'onglet I/O :
+<li>Sous l'onglet E/S :
 <ol>
 <li>Vérifiez que la case "Use internal synthesizer" soit cochée</li>
 <li>Vérifiez que la SoundFont soit <kbd>/usr/share/sounds/sf2/FluidR3_GM.sf2</kbd> sélectionnée - c'est la valeur par défaut -<br />
              ou sélectionnez votre propre SoundFont si vous en avez installé une.</li>
-<li>Si vous utilisez ALSA audio, positionnez le pilote à "ALSA" et le I/O device à “hw:0” (hw:Zéro)<br />
+<li>Si vous utilisez ALSA audio, positionnez le pilote à "ALSA" et le E/S device à “hw:0” (hw:Zéro)<br />
              Si vous utilisez JACK server déselectionnez ALSA et activez JACK audio server</li>
 </ol>
 </li>
@@ -104,16 +124,6 @@ sudo su -c 'echo snd-seq &gt;&gt; /etc/modules'</pre></li>
 </ul>
 </li>
 </ul>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/screenshot-demo-score-fr.png" type="image/png; length=33561">screenshot-demo-score-fr.png</a></div>        </div>
-              <div class="field-item even">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/install-wizard-1-winvista-fr.png" type="image/png; length=14632">install-wizard-1-winvista-fr.png</a></div>        </div>
-              <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/install-wizard-finish-winvista-fr.png" type="image/png; length=9194">install-wizard-finish-winvista-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-225" class="section-3">
   <h1 class="book-heading">Création d&#039;une nouvelle partition</h1>
@@ -154,18 +164,6 @@ Les modèles seront exposés <a href="print/book/export/html/115#newscore-templa
 <p>Lorsqu'on choisit l'option "Créer une partition depuis un modèle", et que l'on clique sur <kbd><kbd>Suivant</kbd></kbd>, une liste de modèles apparaît. </p>
 <p>Sélectionnez un modèle et  cliquez sur <kbd><kbd>Suivant</kbd></kbd>. Il ne reste plus qu'à choisir les options de mesures (indication, anacrouse, nombre). Ceci est le moyen le plus simple de créer une partition. </p>
 <p>Notez que les modèles sont de simples fichiers MuseScore stockés dans le répertoire C:\Program Files\MuseScore 0.9\templates pour Windows et sur Linux  dans /usr/share/mscore-xxx si vous avez installé depuis les dépôts et dans /usr/local/share/mscore-xxx si vous avez compilé vous même les sources.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/newscore-titles-fr.png" type="image/png; length=9305">newscore-titles-fr.png</a></div>        </div>
-              <div class="field-item even">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/newscore-instruments-fr.png" type="image/png; length=12032">newscore-instruments-fr.png</a></div>        </div>
-              <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/newscore-measures-fr.png" type="image/png; length=9952">newscore-measures-fr.png</a></div>        </div>
-              <div class="field-item even">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/newscore-key-signature-fr.png" type="image/png; length=10232">newscore-key-signature-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 </div>
 <div id="node-224" class="section-2">
@@ -231,12 +229,6 @@ Les modèles seront exposés <a href="print/book/export/html/115#newscore-templa
 <ul>
 <li><a class="freelinking external" href="http://musictechtips.wordpress.com/2010/01/31/musescore-in-10-easy-steps-part-3-note-entry-basics/">Video tutorial: Note entry basics</a> by Katie Wardrobe</li>
 </ul>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/noteentry1-fr.png" type="image/png; length=3617">noteentry1-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-269" class="section-3">
   <h1 class="book-heading">Copier Coller</h1>
@@ -314,8 +306,9 @@ Pour supprimer une mesure dans les versions 0.9.5 et précédente, c'est différ
 <p>Une mesure "irrégulière" ne sera pas comptée. Normalement, une mesure en anacrouse est marquée comme une mesure irrégulière. Si vous utilisez la version 0.9.4 ou précedente et que la mesure soit marquée irrégulière vous devrez sauvegarder la partition et la recharger pour que le compte de mesures soit mis à jour.</p>
 <h3>Nombre de répétitions</h3>
 <p>Si la mesure est à la fin d'une <a href="http://musescore.org/fr/manuel/reprises" title="Reprises">reprise</a>, on peut définir le nombre de fois qu'elle doit être jouée.</p>
-<h3>Supprimer les pauses multi mesures</h3>
-<p>Cette case à cocher sépare la mesure courante des autres mesures d'une pause multi mesure. Si la mesure courante a un changement d'<a href="http://musescore.org/fr/manuel/indication-de-mesure" title="indication de mesure">indication de mesure</a> la case sera automatiquement cochée.</p>
+<h3>Diviser les pauses multi mesures</h3>
+<p>Cette case à cocher divise une pause multi mesures au niveau de la mesure courante. Cette option doit être appliquée à la mesure <b>avant</b> la création des pauses multi-mesures dans le menu <kbd><samp class="menu">Style</samp> → <samp class="menuitem">Editer le style global</samp></kbd><br />
+Si la mesure courante a un changement d'<a href="http://musescore.org/fr/manuel/indication-de-mesure" title="indication de mesure">indication de mesure</a> la case sera automatiquement cochée.</p>
 <h3>Numérotation</h3>
 <p>MuseScore numérote automatiquement la 1ère mesure de chaque système, mais d'autres options de numérotation sont possibles.<br />
 Dans le menu principal, choisir <kbd><samp class="menu">Style</samp> → <samp class="submenu">Editer le style global</samp></kbd>. Dans la fenêtre de gauche, choisir <b>"Nombres"</b>. La section <b>"Numéros de mesures"</b> est dans la moitié inférieure de la fenêtre de droite. </p>
@@ -325,12 +318,6 @@ Cocher "toutes les portées" si vous voulez numéroter toutes les portées d'un 
 Cocher "Chaque système " affichera seulement le numéro de la 1ère mesure de chaque ligne.<br />
 Cocher "intervalle" affichera les numéros suivant un intervalle dont vous spécifierez la taille dans le champ de droite.<br />
 Ainsi '1' permet d'afficher les numéros de toutes les mesures; '5' affiche les numéros toutes les 5 mesures.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/measure-fr.png" type="image/png; length=21489">measure-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-229" class="section-3">
   <h1 class="book-heading">Palettes</h1>
@@ -403,12 +390,6 @@ Les raccourcis sont :</p>
 <p>Dans la version 0.9.4 et suivantes, vous pouvez ajuster la position horizontale de l'accolade. Double cliquez sur l'accolade et appuyez sur <kbd><kbd>Shift</kbd>+<kbd>Gauche</kbd></kbd> ou <kbd><kbd>Shift</kbd>+<kbd>Droite</kbd></kbd> pour la déplacer sur la gauche ou sur la droite.</p>
 <h3>Éditer</h3>
 <p>Double cliquez sur une accolade pour passer en <samp class="mode"><a href="http://musescore.org/fr/manuel/mode-édition" title="Mode édition">Mode édition</a></samp>.  En <samp class="mode">Mode édition</samp>, on peut faire glisser le carré bleu pour changer la hauteur de l'accolade ou l'étendre sur plusieurs portées.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/bracketspalette-fr.png" type="image/png; length=1739">bracketspalette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-121" class="section-3">
   <h1 class="book-heading">Accroche</h1>
@@ -420,12 +401,6 @@ Les raccourcis sont :</p>
 <img src="/sites/musescore.org/files/beambutton3_0.png" alt="Pas d&#039;accroche" title="Pas d&#039;accroche" width="29" height="28" class="inline" /> 		Ne pas accrocher cette note.<br />
 <img src="/sites/musescore.org/files/beambutton4_1.png" alt="Barre de deuxième niveau" title="Barre de deuxième niveau" width="29" height="28" class="inline" /> 		Commencer une barre de deuxième niveau à cette note.</p>
 <p>Voir aussi : <a href="http://musescore.org/fr/manuel/accroche-entre-portées" title="Accroche entre portées">Accroche entre portées</a></p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/beampalette-fr.png" type="image/png; length=2109">beampalette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-1067" class="section-3">
   <h1 class="book-heading">Accroche entre portées</h1>
@@ -461,12 +436,6 @@ Si l'alternative est jouée dans plus d'une reprise, les numéros doivent être 
 <p><img src="/sites/musescore.org/files/volta4_0.png" alt="1-5 alternative suivit de la 6ème" title="1-5 alternative suivit de la 6ème" width="401" height="73" class="inline" /></p>
 <h3 class="v0-9-4">Limitations des partitions multi-parties</h3>
 <p>Dans les versions 0.9.4 et antérieures de MuseScore, les alternatives de reprises ne peuvent être placées que sur la portée supèrieure des partitions multi parties. Sinon à la création d'une nouvelle partie MuseScore se fermera ou le point d'ancrage se déplacera à la prochaine ouverture de la partition. (voir <a class="freelinking external" href="http://www.musescore.org/en/node/1257">le rapport de bug</a>).</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/volta3-fr.png" type="image/png; length=4068">volta3-fr.png</a></div>        </div>
-        </div>
-</div>
 <table id="attachments" class="sticky-enabled">
  <thead><tr><th>Fichier attaché</th><th>Taille</th> </tr></thead>
 <tbody>
@@ -487,12 +456,6 @@ Si l'alternative est jouée dans plus d'une reprise, les numéros doivent être 
 </ul>
 <p>MuseScore essaie d'utiliser l'altération appropriée pour la hauteur choisie. Si cela ne vous satisfait pas ou que vous souhaitez placer une altération accidentelle, vous pouvez faire glisser une altération depuis la palette sur la note. Si, par la suite, vous changez la hauteur de la note, l'altération positionnée manuellement sera perdue.</p>
 <p>Le menu  <kbd><samp class="menu">Notes</samp> → <samp class="menuitem">Enoncé de la hauteur</samp></kbd> essaie de deviner les altérations pour toute la partition.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/accidentalspalette-fr.png" type="image/png; length=3169">accidentalspalette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-237" class="section-3">
   <h1 class="book-heading">Armature</h1>
@@ -505,12 +468,6 @@ Si l'alternative est jouée dans plus d'une reprise, les numéros doivent être 
 <p>Faites glisser un symbole depuis la palette sur une partie vide d'une mesure pour créer l'armature en début de mesure.</p>
 <h3>Supprimer</h3>
 <p>Sélectionnez une armature et appuyez sur <kbd><kbd>Suppr</kbd></kbd>.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/keypalette-fr.png" type="image/png; length=3264">keypalette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-119" class="section-3">
   <h1 class="book-heading">Arpège</h1>
@@ -518,12 +475,6 @@ Si l'alternative est jouée dans plus d'une reprise, les numéros doivent être 
 <p><img src="/sites/musescore.org/files/arpeggiopalette-fr.png" alt="Palette Arpège / Glissando" title="Palette Arpège / Glissando" width="178" height="88" class="inline" /></p>
 <p>Dans la version 0.9.5, ou supérieure, la taille de l'arpège peut être modifiée en double cliquant sur l'arpège et en déplaçant la poignée.</p>
 <p><img src="/sites/musescore.org/files/arpeggio-multi-staff_0.png" alt="Arpège sur deux portées" title="Arpège sur deux portées" width="136" height="110" class="inline" /></p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/arpeggiopalette-fr.png" type="image/png; length=2208">arpeggiopalette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-120" class="section-3">
   <h1 class="book-heading">Barre de mesure</h1>
@@ -538,12 +489,6 @@ Si l'alternative est jouée dans plus d'une reprise, les numéros doivent être 
 Toutes les portées seront mises à jour lorsque l'on quitte le <samp class="mode">Mode Edition</samp>.</p>
 <p><img src="/sites/musescore.org/files/grandstaff1_0.png" alt="Barre de mesure dans un système" title="Barre de mesure dans un système" width="258" height="127" class="inline" /></p>
 <p>Voir aussi <a href="http://musescore.org/fr/manuel/opérations-sur-les-mesures" title="Opérations sur les mesures">Opérations sur les mesures</a></p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/barlinepalette-fr.png" type="image/png; length=2073">barlinepalette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-223" class="section-3">
   <h1 class="book-heading">Clef</h1>
@@ -557,12 +502,6 @@ Toutes les portées seront mises à jour lorsque l'on quitte le <samp class="mod
 <h3>Supprimer</h3>
 <p>Sélectionner une clef et appuyer sur <kbd><kbd>Suppr</kbd></kbd>.</p>
 <p>Il est à noter que changer une clef ne change pas la hauteur des notes mais toutes les notes sont déplacées sur la portée.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/clef-palette-fr.png" type="image/png; length=3904">clef-palette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-234" class="section-3">
   <h1 class="book-heading">Crescendo et decrescendo</h1>
@@ -583,27 +522,15 @@ Toutes les portées seront mises à jour lorsque l'on quitte le <samp class="mod
 <li><kbd><kbd>Right</kbd></kbd> déplace le point d'arrêt :<br />
 <img src="/sites/musescore.org/files/hairpin4_0.png" alt="Le Crescendo est étendu entre chaque poignée et point d&#039;ancrage" title="Le Crescendo est étendu entre chaque poignée et point d&#039;ancrage" width="345" height="67" class="inline" /></li>
 </ol>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/lines-palette-fr.png" type="image/png; length=3085">lines-palette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-235" class="section-3">
   <h1 class="book-heading">Fioritures</h1>
   <p>Les <strong>fioritures brèves</strong> (Acciaccatures) sont dessinées avec des petites notes avec un trait en travers de la hampe.<br />
 Les <strong>fioritures longues</strong> (Appoggiatures) n'ont pas de trait.<br />
-Les fioritures sont placées avant le note.</p>
-<p>Pour créer une fioriture, faites glisser un symbole depuis la <a href="http://musescore.org/fr/manuel/palettes" title="Palettes">palette</a> Notes jusqu'à une note de la partition.</p>
+Les fioritures sont placées avant la note.</p>
+<p>Pour créer une fioriture, faites glisser un symbole depuis la <a href="http://musescore.org/fr/manuel/palettes" title="Palettes">palette</a> Fioritures jusqu'à une note de la partition.</p>
 <p><img src="/sites/musescore.org/files/grace-palette-fr.png" alt="grace-palette-fr.png" title="grace-palette-fr.png" width="178" height="67" class="inline" /></p>
 <p>Voir aussi : <a href="http://fr.wikipedia.org/wiki/Appoggiature_(ornement_m%C3%A9lodique)">Fioritures</a> dans Wikipedia.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/grace-palette-fr.png" type="image/png; length=1871">grace-palette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-245" class="section-3">
   <h1 class="book-heading">Indication de mesure</h1>
@@ -614,14 +541,6 @@ Les fioritures sont placées avant le note.</p>
 <p><img src="/sites/musescore.org/files/time-palette-2-fr.png" alt="Créer une nouvelle indication de mesure" title="Créer une nouvelle indication de mesure" width="455" height="235" class="inline" /></p>
 <h3>Anacrouse</h3>
 <p>Il arrive que l'on souhaite que la durée réelle de la mesure soit différente de celle indiquée par l'indication de mesure. Le meilleur exemple est une mesure en anacrouse. Pour changer le durée réelle d'une mesure sans afficher une nouvelle indication de mesure, se reporter à la section Propriétés de <a href="http://musescore.org/fr/manuel/opérations-sur-les-mesures" title="Opérations sur les mesures">Opérations sur les mesures</a>.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/time-palette-1-fr.png" type="image/png; length=3012">time-palette-1-fr.png</a></div>        </div>
-              <div class="field-item even">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/time-palette-2-fr.png" type="image/png; length=7617">time-palette-2-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-231" class="section-3">
   <h1 class="book-heading">Liaison d&#039;articulation ou de phrasé</h1>
@@ -677,12 +596,6 @@ Les fioritures sont placées avant le note.</p>
 </ul>
 </li>
 <p>Voir aussi : <a href="http://musescore.org/fr/manuel/crescendo-et-decrescendo" title="Crescendo et decrescendo">Crescendo et decrescendo</a>, <a href="http://musescore.org/fr/manuel/alternatives-de-reprise" title="Alternatives de reprise">Alternatives de reprise</a></ol>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/lines-palette-fr_0.png" type="image/png; length=3085">lines-palette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-226" class="section-3">
   <h1 class="book-heading">Notation pour batterie</h1>
@@ -710,12 +623,6 @@ Les fioritures sont placées avant le note.</p>
 <h3>Texte</h3>
 <p>Les textes de reprise tels que "D.C. al Fine" ou "D.S. al Coda" sont situés dans la <a href="http://musescore.org/fr/manuel/palettes" title="palettes">palette</a> Reprises.</p>
 <p><img src="/sites/musescore.org/files/repeats-palette-fr.png" alt="La palette Reprises contient les symboles des répétitions de mesures, Segno, Coda, D.S, D.C, Fine." title="La palette Reprises contient les symboles des répétitions de mesures, Segno, Coda, D.S, D.C, Fine." width="180" height="224" class="inline" /></p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/repeats-palette-fr.png" type="image/png; length=2799">repeats-palette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-124" class="section-3">
   <h1 class="book-heading">Respiration</h1>
@@ -723,12 +630,6 @@ Les fioritures sont placées avant le note.</p>
 <img src="/sites/musescore.org/files/breathpalette-fr.png" alt="Palette Respiration" title="Palette Respiration" width="178" height="67" class="inline" /></p>
 <p>Une respiration dans une partition :<br />
 <img src="/sites/musescore.org/files/breath_0.png" alt="Respiration" title="Respiration" width="284" height="181" class="inline" /></p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/breathpalette-fr.png" type="image/png; length=1585">breathpalette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-240" class="section-3">
   <h1 class="book-heading">Silence sur une mesure entière</h1>
@@ -755,12 +656,6 @@ Toutes les notes et silences de la mesure seront alors remplacés par une pause.
 <p>Il y a des symboles différents pour des tremolos d'une ou plusieurs notes dans la palette "Tremolo"</p>
 <p><img src="/sites/musescore.org/files/tremolopalette-fr.png" alt="Palette tremolo" title="Palette tremolo" width="178" height="67" class="inline" /></p>
 <p>Dans un tremolo de deux notes, chaque note à la durée du tremolo en entier. Pour entrer un tremolo de la durée d'une blanche, entrez d'abord deux noires. Après avoir fait glisser le symbole de tremolo depuis la palette, les notes se transforment en blanche.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/tremolopalette-fr.png" type="image/png; length=1764">tremolopalette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-246" class="section-3">
   <h1 class="book-heading">Triolet</h1>
@@ -832,22 +727,17 @@ En appuyant sur le bouton Lecture <img src="/sites/musescore.org/files/play.png"
 <p>La fenêtre de lecture dispose de plus de contrôles que la lecture elle même, dont le tempo, la position de départ, et le volume général. Dans la barre de menu, choisissez <kbd><samp class="menu">Affichage</samp> → <samp class="menuitem">Fenêtre de lecture</samp></kbd></p>
 <p><img src="/sites/musescore.org/files/playpanel-fr.png" alt="La fenêtre de lecture vous permet d&#039;ajuster le tempo et le volume." title="La fenêtre de lecture vous permet d&#039;ajuster le tempo et le volume." width="298" height="208" class="inline" /></p>
 <p>Si vous souhaitez jouer des instruments autre que le piano, vous devez changer la <a href="http://musescore.org/fr/manuel/soundfont" title="SoundFont">SoundFont</a> intégrée dans MuseScore par une plus complète dans le menu <kbd><samp class="menu">Edition</samp> → <samp class="menuitem">Préférences...</samp> → onglet <samp class="tab">E / S</samp> </kbd>. Voir <a href="http://musescore.org/fr/manuel/soundfont" title="SoundFont">SoundFont</a> pour plus de détails.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/playpanel-fr.png" type="image/png; length=5923">playpanel-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-243" class="section-3">
   <h1 class="book-heading">SoundFont</h1>
-  <p>MuseScore intègre un son de piano uniquement. Pour plus de sons, comme par exemple le violon ou les percussions, vous aurez besoind d'une <strong>SoundFont</strong> General Midi.</p>
+  <p>MuseScore intègre un son de piano uniquement. Pour plus de sons, comme par exemple le violon ou les percussions, vous aurez besoin d'une <strong>SoundFont</strong> General Midi.</p>
 <h3>Introduction</h3>
 <p>Un fichier SoundFont  permet de stocker des sons d'instruments. Plusieurs SoundFonts sont disponibles sur le web. Cherchez en une qui couvre l'ensemble des 128 instruments de  <a href="http://fr.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM).</p>
 <p>Les taille et la qualité de son des SoundFonts qu'on trouve sur le web sont variées. Les SoundFonts les plus volumineuses sont souvent de meilleure qualité mais peuvent être trop grandes pour votre ordinateur. Si vous trouvez que MuseScore devient lent après l'installation d'une SoundFont volumineuse ou que votre ordinateur ralentit pendant la lecture, essayez une SoundFont plus petite. Ci dessous, deux SoundFont GM populaires de taille différente :</p>
 <ul>
 <li>FluidR3_GM.sf2 (141 Mo décompressée), voir <a href="http://www.musescore.org/download/fluid-soundfont.tar.gz">Fluid</a></li>
 <li>MagicSF_ver2.sf2 (67.8 Mo décompressée), voir <a href="http://www.personalcopy.com/sfarkfonts1.htm">Big SoundFonts</a></li>
+<li>TimGM6mb.sf2 (5.7 Mo décompressée), voir <a href="http://ocmnet.com/saxguru/Timidity.htm#sf2">Le site de Timidity++ par Tim Brechbill</a> Section "Free SoundFont"</li>
 </ul>
 <h3>Compression</h3>
 <p>Comme les fichiers SoundFont sont volumineux, ils sont souvent compressés dans des formats variés tel que .zip, .sfArk, et .tar.gz. Vous devrez décompresser ces fichiers avant de pouvoir les utiliser.</p>
@@ -857,10 +747,10 @@ En appuyant sur le bouton Lecture <img src="/sites/musescore.org/files/play.png"
 <li>.tar.gz est un format de compression populaire sous Linux. Les utilisateurs de Windows auront besoin, par exemple, de <a href="http://www.7-zip.org/">7-zip</a> qui supporte plusieurs formats de compression. Notez que vous devrez "décompresser" deux fois, une fois pour GZip et une fois pour TAR. (Pour les puristes, on ne parle pas de décompression pour TAR, car il ne compresse pas)</li>
 </ul>
 <h3>Configuration de MuseScore</h3>
-<p>Maintenant que vous avez votre fichier SoundFont, on doit configurer MuseScore pour l'utiliser.</p>
-<p>Allez dans le menu <kbd><samp class="menu">Edition</samp> → <samp class="menuitem">Préférences...</samp> → onglet <samp class="tab">E / S</samp></kbd>.</p>
-<p>Par défaut, la SoundFont est <samp>:/data/piano1.sf2</samp>. Remplacez- la par le chemin vers votre nouvelle SoundFont (fichier .sf2) . Cliquez sur le bouton "Ouvrir", pour sélectionner le fichier et l'ouvrir.</p>
-<p>Pour appliquer les changements, appuyez sur OK puis quittez et relancez MuseScore pour que les changements prennent effet.</p>
+<p>Maintenant que vous avez votre fichier SoundFont, ne double cliquez pas pour l'ouvrir, ça ne sert à rien. On doit configurer MuseScore pour l'utiliser. Démarrer MuseScore et suivez les instructions suivantes.</p>
+<p>Aller dans le menu <kbd><samp class="menu">Affichage</samp> → <samp class="menuitem">Synthétiseur</samp></kbd>. Si vous utilisez la version 0.9.5 ou précédente, aller dans <kbd><samp class="menu">Edition</samp> → <samp class="menuitem">Préférences...</samp> → <samp class="tab">E/S</samp></kbd>.</p>
+<p>La Soundfont par défaut est <samp>:/data/piano1.sf2</samp> ou <samp>TimGM6mb.sf2</samp>. Remplacez la par le chemin de votre nouveau fichier SoundFont (.sf2). Cliquez sur le bouton "Ouvrir" pour trouver votre fichier et le sélectionner. Avec la version 0.9.6 et supérieure, la SoundFont est prise en compte immédiatement.</p>
+<p>Si vous utilisez la version 0.9.5 ou précédente, pour appliquer les changements, appuyez sur OK puis quittez et relancez MuseScore pour que les changements prennent effet.</p>
 <h3>Problèmes rencontrés</h3>
 <p>Si le panneau de lecture disparait après avoir changé la SoundFont, suivez les instructions qui suivent :</p>
 <ol>
@@ -870,7 +760,7 @@ En appuyant sur le bouton Lecture <img src="/sites/musescore.org/files/play.png"
   </div>
 <div id="node-249" class="section-3">
   <h1 class="book-heading">Tempo</h1>
-  <p>Le tempo de lecture peut être changé soit par la fenêtre de lecture, soit pas une indication de tempo sur la partition.</p>
+  <p>Le tempo de lecture peut être changé soit par la fenêtre de lecture, soit par une indication de tempo sur la partition.</p>
 <h3>Fenêtre de lecture</h3>
 <ul>
 <li>Pour afficher la fenêtre de lecture : <kbd><samp class="menu">Affichage</samp> → <samp class="menuitem">Fenêtre de lecture</samp></kbd></li>
@@ -886,7 +776,7 @@ En appuyant sur le bouton Lecture <img src="/sites/musescore.org/files/play.png"
 <p>Les indications de tempo existantes peuvent être modifiées en double cliquant sur le texte pour passer en <samp class="mode">Mode édition</samp>. Utilisez la <a href="http://musescore.org/fr/manuel/édition-de-texte" title="édition de texte">Palette F2</a> pour ajouter une noire ou un autre signe d'indication de métronome au texte du tempo.<br />
 <img src="/sites/musescore.org/files/met_mark.jpg" alt="Indication de métronome : Andante noire = 75" title="Indication de métronome : Andante noire = 75" width="123" height="29" class="inline" /></p>
 <p>Le BPM peut être édité en cliquant avec le bouton droit sur le texte et choisissant <kbd><samp class="menuitem">Propriétés du tempo...</samp></kbd></p>
-<p>Note : Les indications de tempo dans la partition priment sur le tempo de la fenêtre de lecture.</p>
+<p>Note : Le tempo de lecture peut être plus rapide ou plus lent que le tempo affiché si, dans la fenêtre de lecture (raccourci clavier F11), le réglage du tempo est différent de 100%.</p>
   </div>
 <div id="node-1856" class="section-3">
   <h1 class="book-heading">Modification et réglage des sons</h1>
@@ -936,12 +826,6 @@ En appuyant sur le bouton Lecture <img src="/sites/musescore.org/files/play.png"
 <p>Palette Texte :<br />
 <img src="/sites/musescore.org/files/special-text-symbols-fr_2.png" alt="La palette texte permet de formater un texte, alignement, style, taille, et police. Plus un clavier de symboles, notes, caractères spéciaux et accentués." title="La palette texte permet de formater un texte, alignement, style, taille, et police. Plus un clavier de symboles, notes, caractères spéciaux et accentués." width="600" height="275" class="inline" /></p>
 <p>Voir aussi : <a href="http://musescore.org/fr/manuel/nom-daccord" title="Nom d&#039;accord">Nom d&#039;accord</a>, <a href="http://musescore.org/fr/manuel/paroles" title="Paroles">Paroles</a>, <a href="http://musescore.org/fr/manuel/cadre" title="Cadre">Cadre</a></p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/special-text-symbols-fr_2.png" type="image/png; length=134719">special-text-symbols-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-734" class="section-3">
   <h1 class="book-heading">Style du texte</h1>
@@ -987,12 +871,6 @@ En appuyant sur le bouton Lecture <img src="/sites/musescore.org/files/play.png"
   <p>Les <strong>Doigtés</strong> peuvent être ajoutés aux notes en faisant glisser un caractère depuis la palette Doigtés jusqu'à une tête de note de la partition. Les indications de doigtés sont des textes classiques et peuvent donc être <a href="http://musescore.org/fr/manuel/édition-de-texte" title="Édition de texte">édités</a> comme les autres textes.<br />
 Il y a aussi l'éditeur de style de texte de doigtés qui peut être utilisé pour définir (bien qu'imparfaitement) le positionnement des doigtés.</p>
 <p><img src="/sites/musescore.org/files/fingering-palette-fr.png" alt="Palette des Doigtés" title="Palette des Doigtés" width="174" height="117" class="inline" /></p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/fingering-palette-fr.png" type="image/png; length=3100">fingering-palette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-239" class="section-3">
   <h1 class="book-heading">Paroles</h1>
@@ -1022,16 +900,10 @@ Il y a aussi l'éditeur de style de texte de doigtés qui peut être utilisé po
   <h1 class="book-heading">Mise en page</h1>
     <div id="node-123" class="section-3">
   <h1 class="book-heading">Sauts et Espacements</h1>
-  <p>Les <strong>Sauts de page</strong> et les <strong>Sauts de ligne</strong> (sauts de système) peuvent être forcés en faisant glisser un symbole depuis la palette Sauts jusqu'à un espace libre d'une mesure. Le saut sera placé après cette mesure. La marque verte de saut visible à l'écran ne sera pas imprimée.</p>
+  <p>Les <strong>Sauts de page</strong> et les <strong>Sauts de système</strong> peuvent être forcés en faisant glisser un symbole depuis la palette Sauts jusqu'à un espace libre d'une mesure. Le saut sera placé après cette mesure. La marque verte de saut visible à l'écran ne sera pas imprimée.</p>
 <p><img src="/sites/musescore.org/files/breakspalette-fr.png" alt="Palette Sauts" title="Palette Sauts" width="176" height="63" class="inline" /></p>
 <p>Les <strong>Espacements</strong> sont utilisés pour augmenter l'espace entre 2 portées contigües.Faites glisser le symbole d'espacement jusqu'à une mesure au dessus de l'espace vertical à étendre. Double cliquez sur le symbole et déplacez la poignée à l'aide de la souris pour obtenir la hauteur voulue.</p>
 <p>Les Espacements sont des modifications ponctuelles, si vous voulez définir un espace entre portées pour toute la partition vous devez définr la valeur d'espacements dans les paramètres de style.</p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/breakspalette-fr.png" type="image/png; length=1811">breakspalette-fr.png</a></div>        </div>
-        </div>
-</div>
   </div>
 <div id="node-236" class="section-3">
   <h1 class="book-heading">Cadre</h1>
@@ -1052,12 +924,11 @@ Un cadre vertical permet de placer un espace vide entre deux systèmes ou avant 
 <p>Double cliquez sur un cadre pour passer en <samp class="mode"><a href="http://musescore.org/fr/manuel/mode-édition" title="Mode édition">Mode édition</a></samp>. Une poignée apparait . Elle peut être utilisée pour changer la taille du cadre.</p>
 <p>Le cadre de titre en <samp class="mode">Mode édition</samp> :</p>
 <p><img src="/sites/musescore.org/files/frame-fr.png" alt="Cadre vertical" title="Cadre vertical" width="655" height="428" class="inline" /></p>
-<div class="field field-type-filefield field-field-file">
-    <div class="field-items">
-            <div class="field-item odd">
-                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/frame-fr.png" type="image/png; length=18577">frame-fr.png</a></div>        </div>
-        </div>
-</div>
+  </div>
+<div id="node-5647" class="section-3">
+  <h1 class="book-heading">Image</h1>
+  <p>Vous pouvez utiliser des <strong>images</strong> pour illustrer vos partitions ou ajouter des symboles qui ne sont pas présents dans les palettes standards.</p>
+<p>Pour ajouter une image, faites glisser un fichier image dans la partition. MuseScore supporte les fichiers PNG et JPG ainsi que les fichiers SVG simples. MuseScore ne supporte pas l'ombrage ou le flou dans les fichiers SVG.</p>
   </div>
 </div>
 <div id="node-803" class="section-2">
@@ -1080,9 +951,9 @@ Un cadre vertical permet de placer un espace vide entre deux systèmes ou avant 
 </div>
 </div>
     <div class="print-taxonomy"></div>
-    <hr class="print-hr" />
     <div class="print-footer">Sous licence <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0</a>, 2002-2010 <a href="mailto:ws at seh dot de">Werner Schweer</a> et autres contributeurs.
 </div>
+    <hr class="print-hr" />
     <div class="print-source_url"></div>
     <div class="print-links"></div>
   </body>
