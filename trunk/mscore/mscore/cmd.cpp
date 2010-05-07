@@ -1905,17 +1905,21 @@ void Score::cmd(const QAction* a)
             // Hack for moving articulations while selected
             //
             Element* el = selection().element();
-            if (el && cmd == "pitch-up") {
-                  if (el->type() == ARTICULATION)
+            if (cmd == "pitch-up") {
+                  if (el && el->type() == ARTICULATION)
                         cmdMove(el, QPointF(0.0, -.25));
-                  else if (el->type() == REST)
+                  else if (el && el->type() == REST)
                         cmdMoveRest(static_cast<Rest*>(el), UP);
+                  else
+                        upDown(true, false);
                   }
-            else if (el && cmd == "pitch-down") {
-                  if (el->type() == ARTICULATION)
+            else if (cmd == "pitch-down") {
+                  if (el && el->type() == ARTICULATION)
                         cmdMove(el, QPointF(0.0, .25));
-                  else if (el->type() == REST)
+                  else if (el && el->type() == REST)
                         cmdMoveRest(static_cast<Rest*>(el), DOWN);
+                  else
+                        upDown(false, false);
                   }
             else if (cmd == "append-measure")
                   appendMeasures(1, MEASURE);
@@ -1950,10 +1954,6 @@ void Score::cmd(const QAction* a)
                   // remove measures if stave-range is 0-nstaves()
                   cmdDeleteSelectedMeasures();
                   }
-            else if (cmd == "pitch-up")
-                  upDown(true, false);
-            else if (cmd == "pitch-down")
-                  upDown(false, false);
             else if (cmd == "pitch-up-octave")
                   upDown(true, true);
             else if (cmd == "pitch-down-octave")
