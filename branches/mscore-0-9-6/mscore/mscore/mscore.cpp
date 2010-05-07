@@ -2712,7 +2712,6 @@ void MuseScore::endSearch()
 
 void MuseScore::handleMessage(const QString& message)
       {
-      printf("message %s\n", qPrintable(message));
       if (message.isEmpty())
             return;
       ((QtSingleApplication*)(qApp))->activateWindow();
