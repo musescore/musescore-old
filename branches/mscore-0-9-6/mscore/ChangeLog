@@ -1,3 +1,6 @@
+7.may (ws)
+      - fix #5683: No cautionary time signatures when changing between
+        two different time signatures of the same note value
 5.may (ws)
       - fix capella import: stave ordering for a part when saving
       - fix crash on import of some *.cap files
