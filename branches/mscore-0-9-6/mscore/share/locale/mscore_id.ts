@@ -111,27 +111,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"/>
+        <translation>Batas</translation>
     </message>
     <message>
         <source>left:</source>
-        <translation type="unfinished"/>
+        <translation>kiri:</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"/>
+        <translation>mm</translation>
     </message>
     <message>
         <source>right:</source>
-        <translation type="unfinished"/>
+        <translation>kanan:</translation>
     </message>
     <message>
         <source>bottom:</source>
-        <translation type="unfinished"/>
+        <translation>bawah:</translation>
     </message>
     <message>
         <source>top:</source>
-        <translation type="unfinished"/>
+        <translation>atas:</translation>
     </message>
 </context>
 <context>
@@ -169,11 +169,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished">C</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished">E</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>bb (double flat)</source>
@@ -181,15 +181,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"/>
+        <translation>F</translation>
     </message>
     <message>
         <source>b (flat)</source>
-        <translation type="unfinished"/>
+        <translation>b (mol)</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished"/>
+        <translation>G</translation>
     </message>
     <message>
         <source>(no accidental)</source>
@@ -197,15 +197,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished">A</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source># (sharp)</source>
-        <translation type="unfinished"/>
+        <translation># (kres)</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished">B</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>## (double sharp)</source>
@@ -249,19 +249,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>m7</source>
-        <translation type="unfinished"/>
+        <translation>m7</translation>
     </message>
     <message>
         <source>m7b5</source>
-        <translation type="unfinished"/>
+        <translation>m7b5</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"/>
+        <translation>7</translation>
     </message>
     <message>
         <source>sus</source>
-        <translation type="unfinished"/>
+        <translation>sus</translation>
     </message>
     <message>
         <source>7Sus</source>

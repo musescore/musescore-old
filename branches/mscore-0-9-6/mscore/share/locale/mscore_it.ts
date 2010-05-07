@@ -1856,7 +1856,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation>Mostra le stanghette dei ritornelli con le "ali")</translation>
+        <translation>Mostra le stanghette dei ritornelli con le "ali"</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -3406,7 +3406,7 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation>Abbellimenti</translation>
+        <translation>Note di abbellimento</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
@@ -5270,7 +5270,7 @@ Prova a salvare in una posizione differente</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation>Proprietà pentagramma</translation>
+        <translation>Proprietà pentagramma...</translation>
     </message>
     <message>
         <source>Split Staff...</source>
@@ -8344,7 +8344,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Documents Stacked</source>
-        <translation>Documenti in sequenza</translation>
+        <translation>Documenti sovrapposti</translation>
     </message>
     <message>
         <source>Player play</source>
