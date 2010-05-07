@@ -19,17 +19,9 @@
 #=============================================================================
 
 install(FILES
-      abc_import.js
-      test.js
-      test2.js
-      createscore.js
-      notenames.js
-      colornotes.js
-      fonttest.js
-      removenotes.js
-      removenotes.ui
-      chordchart.js
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
+      musescore.com.js
+      README.txt
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins/musescore.com
       )
 
-subdirs(break temperament musescore.com)
+subdirs(ui icons)
