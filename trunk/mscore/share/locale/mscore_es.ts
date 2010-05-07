@@ -150,7 +150,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished">Glissando</translation>
+        <translation>Glissando</translation>
     </message>
 </context>
 <context>
@@ -3946,7 +3946,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Content Offset</source>
-        <translation>Contenido de la impresión</translation>
+        <translation>Margen del Contenido</translation>
     </message>
     <message>
         <source>x:</source>
@@ -8695,7 +8695,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished"/>
+        <translation>China</translation>
     </message>
     <message>
         <source>Ride (Bell)</source>

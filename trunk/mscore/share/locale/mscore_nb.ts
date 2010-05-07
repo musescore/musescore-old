@@ -79,7 +79,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Midi-handling</translation>
+        <translation>MIDI-handling</translation>
     </message>
 </context>
 <context>
@@ -1098,7 +1098,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation>Egenskaper for midi...</translation>
+        <translation>Egenskaper for MIDI...</translation>
     </message>
 </context>
 <context>
@@ -1136,7 +1136,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MIDI Values</source>
-        <translation>Midi-verdier</translation>
+        <translation>MIDI-verdier</translation>
     </message>
     <message>
         <source>Apply to:</source>
@@ -1325,7 +1325,7 @@ feilet: </translation>
     </message>
     <message>
         <source>Midi Program</source>
-        <translation>Midi-program</translation>
+        <translation>MIDI-program</translation>
     </message>
     <message>
         <source>Staves</source>
@@ -2159,7 +2159,7 @@ space unit</extracomment>
     <name>ImportMidiDialog</name>
     <message>
         <source>MuseScore: Midi Import</source>
-        <translation>MuseScore: Importer midi</translation>
+        <translation>MuseScore: Importer MIDI</translation>
     </message>
     <message>
         <source>Shortest note on import:</source>
@@ -4060,7 +4060,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>midi sound for part</source>
-        <translation>Midi-lyd for stemme</translation>
+        <translation>MIDI-lyd for stemme</translation>
     </message>
 </context>
 <context>
@@ -4456,7 +4456,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Enable midi input</source>
-        <translation>Aktiver innkommende midi</translation>
+        <translation>Aktiver MIDI inn</translation>
     </message>
     <message>
         <source>Play notes when editing</source>
@@ -4484,7 +4484,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>enable midi remote control</source>
-        <translation>Aktiver midi fjernstyring</translation>
+        <translation>Aktiver MIDI fjernstyring</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -4709,11 +4709,11 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Export MIDI</source>
-        <translation>Eksporter midi</translation>
+        <translation>Eksporter MIDI</translation>
     </message>
     <message>
         <source>MIDI Remote Control</source>
-        <translation>Midi fjernkontroll</translation>
+        <translation>MIDI fjernkontroll</translation>
     </message>
     <message>
         <source>Auto-correction</source>
@@ -4862,7 +4862,7 @@ Vennligst velg én enkelt note eller pause og prøv igjen
     </message>
     <message>
         <source>MuseScore: load midi</source>
-        <translation>MuseScore: Last inn midi</translation>
+        <translation>MuseScore: Last inn MIDI</translation>
     </message>
     <message>
         <source>MuseScore: load Style failed:</source>
@@ -5170,7 +5170,7 @@ mislykket: </translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
-        <translation>Standard midi-fil (*.mid)</translation>
+        <translation>Standard MIDI-fil (*.mid)</translation>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
@@ -5665,7 +5665,7 @@ og sjekk at stilen til fila er riktig</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Midi-handling</translation>
+        <translation>MIDI-handling</translation>
     </message>
 </context>
 <context>
@@ -7481,11 +7481,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>midi input in</source>
-        <translation>Midi inndata</translation>
+        <translation>MIDI inn</translation>
     </message>
     <message>
         <source>Enable MIDI Input</source>
-        <translation>Aktiver Midi inndata</translation>
+        <translation>Aktiver MIDI inn</translation>
     </message>
     <message>
         <source>editing sound on</source>
