@@ -1265,6 +1265,7 @@ bool Score::read(QDomElement e)
                         //if (_mscVersion >= 105)
                         //      _yoff *= DPMM;
                         }
+#ifdef OMR
                   else if (tag == "Omr") {
                         _omr = new Omr(this);
                         _omr->read(ee);
@@ -1273,6 +1274,7 @@ bool Score::read(QDomElement e)
                               _omr = 0;
                               }
                         }
+#endif
                   else if (tag == "showOmr")
                         _showOmr = i;
                   else if (tag == "Spatium")
