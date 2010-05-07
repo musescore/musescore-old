@@ -142,6 +142,9 @@ else (APPLE)
 	set (ExecutableName mscore)
 endif (APPLE)
 
+if (OMR)
+      set(OMR_FILES importpdf.cpp)
+endif (OMR)
 
 add_executable ( ${ExecutableName}
       ${qrc_files}
@@ -182,7 +185,8 @@ add_executable ( ${ExecutableName}
       screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
-      importove.cpp ove.cpp interval.cpp importpdf.cpp check.cpp synti.cpp
+      importove.cpp ove.cpp interval.cpp check.cpp synti.cpp
+      ${OMR_FILES}
       ${AUDIO}
       )
 

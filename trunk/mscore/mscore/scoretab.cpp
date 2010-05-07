@@ -98,6 +98,7 @@ void ScoreTab::setCurrent(int n)
             v->setScore(scoreList->value(n));
             stack->addWidget(vs);
 
+#ifdef OMR
             if (score->showOmr()) {
                   Omr* omr = score->omr();
                   OmrView* sv = omr->newOmrView(v);
@@ -115,6 +116,7 @@ void ScoreTab::setCurrent(int n)
                   sizes << 100 << 100;
                   vs->setSizes(sizes);
                   }
+#endif
             }
       else
             v = static_cast<ScoreView*>(vs->widget(0));

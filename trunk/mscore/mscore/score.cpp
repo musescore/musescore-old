@@ -431,10 +431,12 @@ bool Score::read(QString name)
 
 void Score::write(Xml& xml, bool /*autosave*/)
       {
+#ifdef OMR
       if (_omr)
             _omr->write(xml);
       if (_showOmr)
             xml.tag("showOmr", _showOmr);
+#endif
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", AL::division);
       xml.curTrack = -1;

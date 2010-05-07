@@ -441,7 +441,7 @@ void Seq::startTransport()
 //    send one event to the synthesizer
 //---------------------------------------------------------
 
-void Seq::playEvent(const Event* event, unsigned framePos)
+void Seq::playEvent(const Event* event)
       {
       int type = event->type();
       if (type == ME_NOTEON) {
@@ -568,7 +568,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 
                   frames    -= n;
                   framePos  += n;
-                  playEvent(playPos.value(), framePos);
+                  playEvent(playPos.value());
                   }
             if (frames) {
                   synti->process(frames, l, r, stride);
