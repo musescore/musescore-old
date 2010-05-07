@@ -1,3 +1,6 @@
+7.may (ws)
+      - fix #5683: No cautionary time signatures when changing between
+        two different time signatures of the same note value
 6.may (ws)
       - cursor up/down moves selected rest one staff line up/down
       - implement playback of mordent

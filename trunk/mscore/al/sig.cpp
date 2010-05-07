@@ -73,7 +73,7 @@ SigEvent::SigEvent(const Fraction& a, const Fraction& n)
 
 bool SigEvent::operator==(const SigEvent& e) const
       {
-      return (actual == e.actual) && (nominal == e.nominal);
+      return (actual.identical(e.actual)) && (nominal.identical(e.nominal));
       }
 
 //---------------------------------------------------------
