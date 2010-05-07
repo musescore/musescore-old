@@ -1,4 +1,6 @@
 7.may (ws)
+      - another fix for midi import (#4989). Playback onset of last
+        note was wrong.
       - fix #5683: No cautionary time signatures when changing between
         two different time signatures of the same note value
 5.may (ws)

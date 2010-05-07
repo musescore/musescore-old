@@ -1106,7 +1106,6 @@ void Score::convertTrack(MidiTrack* midiTrack)
                                     note->setPitch(mn->pitch(), mn->tpc());
                         		note->setTrack(chord->track());
                   	      	chord->add(note);
-                                    note->setTick(tick);
                                     note->setOnTimeType(USER_VAL);
                                     note->setOnTimeOffset(mn->noquantOntime() - tick);
                                     note->setOffTimeType(USER_VAL);
@@ -1128,6 +1127,8 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                                           n->ties[i]->setEndNote(note);
                                           n->ties[i]->setTrack(note->track());
                                           note->setTieBack(n->ties[i]);
+                                          note->setOnTimeType(AUTO_VAL);
+                                          note->setOnTimeOffset(0);
                                           }
                                     }
                               if (n->mc->duration() <= len) {
@@ -1139,6 +1140,8 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                                     Note* note = chord->findNote(mn->pitch());
             				n->ties[i] = new Tie(this);
                                     n->ties[i]->setStartNote(note);
+                                    note->setOffTimeType(AUTO_VAL);
+                                    note->setOffTimeOffset(0);
       		      		note->setTieFor(n->ties[i]);
                                     }
       	                  n->mc->setOntime(n->mc->ontime() + len);
@@ -1223,10 +1226,9 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   		Note* note = new Note(this);
                               note->setPitch(mn->pitch(), mn->tpc());
             	      	note->setTrack(staffIdx * VOICES + voice);
-                              note->setTick(tick);
             	      	chord->add(note);
                               note->setOnTimeType(USER_VAL);
-                              note->setOnTimeOffset(tick - mn->noquantOntime() - tick);
+                              note->setOnTimeOffset(mn->noquantOntime() - tick);
                               note->setOffTimeType(USER_VAL);
                               int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
                               note->setOffTimeOffset(ot);
@@ -1237,6 +1239,8 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                                     n->ties[i]->setEndNote(note);
                                     n->ties[i]->setTrack(note->track());
                                     note->setTieBack(n->ties[i]);
+                                    note->setOnTimeType(AUTO_VAL);
+                                    note->setOnTimeOffset(0);
                                     }
                               }
                         if (n->mc->duration() <= len) {
@@ -1252,6 +1256,8 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               n->ties[i] = new Tie(this);
                               n->ties[i]->setStartNote(note);
                               note->setTieFor(n->ties[i]);
+                              note->setOffTimeType(AUTO_VAL);
+                              note->setOffTimeOffset(0);
                               }
                         }
                   }
