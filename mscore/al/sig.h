@@ -51,9 +51,9 @@ struct SigEvent {
             return valid() ? actual.print() : QString("void");
             }
       bool nominalEqual(const SigEvent& e) const {
-            return nominal == e.nominal;
+            return nominal.identical(e.nominal);
             }
-      bool nominalEqualActual() const { return actual == nominal; }
+      bool nominalEqualActual() const { return actual.identical(nominal); }
       Fraction fraction() const       { return actual;            }
       Fraction getNominal() const     { return nominal;           }
       };
