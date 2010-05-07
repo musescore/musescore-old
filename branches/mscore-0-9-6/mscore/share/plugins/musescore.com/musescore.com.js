@@ -1104,7 +1104,7 @@ function processAnswerRequestToken(id ,error){
         var file   = new QFile(pluginPath + "/ui/authorize_dialog.ui");
         file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
         form = loader.load(file, null);
-        form.label.text = "Please <a href='"+url+"'>click here</a> to authorize MuseScore on MuseScore.com<br/> Then press OK.";
+        form.label.text = "Please <a href='"+url+"'>click here</a> to authorize MuseScore on <a href='http://musescore.com'>musescore.com</a><br/> Then press OK.";
         form.buttonBox.accepted.connect(acceptAuthorize);
         form.show();  
       
