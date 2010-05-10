@@ -1,3 +1,5 @@
+10.may (ws)
+      - fix #5742: 0.9.5 score crashes 0.9.6 RC1
 7.may (ws)
       - another fix for midi import (#4989). Playback onset of last
         note was wrong.
