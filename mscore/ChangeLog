@@ -1,3 +1,10 @@
+13.may (ws)
+      - integration of Aeolus organ software synthesizer
+      - extension of playback architecture: its now possible to assign
+        midi instruments to individual voices in a staff
+      - fix #5744: grace notes do not transpose
+      - fix #5732: second note in measure missing accidental
+      - fix #5742: 0.9.5 score crashes 0.9.6 RC1
 7.may (ws)
       - fix #5683: No cautionary time signatures when changing between
         two different time signatures of the same note value

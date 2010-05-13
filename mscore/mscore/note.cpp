@@ -1211,12 +1211,12 @@ void Note::layout1(char* tversatz)
       else
             _line -= (tpcPitch/12)*7;
 
-      int acci = 0;
-      if (_userAccidental)
+      int acci = ACC_NONE;
+      if (_userAccidental) {
             acci = _userAccidental;
+            }
       else  {
-            int accVal = ((_tpc + 1) / 7) - 2;
-            acci       = ACC_NONE;
+            int accVal = tpc2alter(_tpc);
             if ((accVal != tversatz[_line]) || hidden()) {
                   if (_tieBack == 0)
                         tversatz[_line] = accVal;
@@ -1231,12 +1231,8 @@ void Note::layout1(char* tversatz)
             _accidental->setSubtype(acci);
             }
       else {
-            if (_accidental) {
+            if (_accidental)
                   score()->undoRemoveElement(_accidental);
-                  // TODO: memory leak, cannot delete because _accidental may be
-                  //       referenced by undo/redo history
-                  // _accidental = 0;
-                  }
             }
       //
       // calculate the real note line depending on clef

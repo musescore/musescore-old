@@ -414,7 +414,7 @@ void Model::init_iface()
             M->_temped [i]._mnemo = scales [i]._mnemo;
             }
 
-      set_mconf (0, _chconf [0]._bits);
+      set_mconf (0, _chconf[0]._bits);
       }
 
 void Model::init_ranks (int comm)
@@ -483,8 +483,10 @@ void Model::set_ifelm (int g, int i, int m)
       {
       Group* G = _group + g;
 
-      if ((!_ready) || (g >= _ngroup) || (i >= G->_nifelm))
+      if ((!_ready) || (g >= _ngroup) || (i >= G->_nifelm)) {
+            printf("Aeolus::Model::set_ifelm failed\n");
             return;
+            }
       Ifelm* I = G->_ifelms + i;
       int s = (m == 2) ? I->_state ^ 1 : m;
       if (I->_state != s) {

@@ -106,74 +106,74 @@ void Asection::set_size (float time)
 }
 
 
+//---------------------------------------------------------
+//   process
+//---------------------------------------------------------
+
 void Asection::process (float vol, float *W, float *X, float *Y, float *R)
-{
-    int     i;
-    float   s, d, g, gw, gr, gx1, gy1, gx2, gy2;
-    float   *p, t0, t1, t2, t3;
-    float   x [PERIOD];
-    float   y [PERIOD];
+      {
+      float x[PERIOD];
+      float y[PERIOD];
 
-    gw = vol * _apar [DIRECT]._val;
-    g = 0.45f * _apar [STWIDTH]._val;
-    s = 0.5f + g * (1 - g);
-    d = g - 0.5f;
-    gx1 = gw * (s - d);
-    gy1 = gw * (s + d);
-    g = 0.25f * _apar [STWIDTH]._val;
-    s = 0.5f + g * (1 - g);
-    d = g - 0.5f;
-    gx2 = gw * (s - d);
-    gy2 = gw * (s + d);
-    p = _base + _offs0;
-    gr = 0.5f * _apar [REVERB]._val;
-    for (i = 0; i < PERIOD; i++)
-    {
-	t0 = p [0 * N];
-	t1 = p [1 * N];
-	t2 = p [2 * N];
-	t3 = p [3 * N];
-        p++;
-        s = t0 + t1 + t2 + t3;
-        R [i] += gr * s;
-        W [i] += gw * s;
-        x [i] = gx1 * (t3 + t0) + gx2 * (t2 + t1);
-        y [i] = gy1 * (t3 - t0) + gy2 * (t2 - t1);
-    }
+      float gw = vol * _apar [DIRECT]._val;
+      float g = 0.45f * _apar [STWIDTH]._val;
+      float s = 0.5f + g * (1 - g);
+      float d = g - 0.5f;
+      float gx1 = gw * (s - d);
+      float gy1 = gw * (s + d);
+      g = 0.25f * _apar [STWIDTH]._val;
+      s = 0.5f + g * (1 - g);
+      d = g - 0.5f;
+      float gx2 = gw * (s - d);
+      float gy2 = gw * (s + d);
+      float* p = _base + _offs0;
+      float gr = 0.5f * _apar [REVERB]._val;
 
-    gr = vol * _apar [REFLECT]._val;
-    p = _base;
-    for (i = 0; i < PERIOD; i++)
-    {
-        t0 = _dif0.process (p [_offs [1]] + p [_offs  [5]] + p [_offs [11]] + p [_offs [15]] + 1e-20f);
-        t1 = _dif1.process (p [_offs [0]] + p [_offs  [4]] + p [_offs [10]] + p [_offs [14]] + 1e-20f);
-        t2 = _dif2.process (p [_offs [2]] + p [_offs  [6]] + p [_offs  [8]] + p [_offs [12]] + 2e-20f);
-        t3 = _dif3.process (p [_offs [3]] + p [_offs  [7]] + p [_offs  [9]] + p [_offs [13]] + 2e-20f);
-        p++;
-        s = t0 + t1 + t2 + t3;
-        _sw += 0.5f * (s - _sw);
-        _sx += 0.5f * (0.4f * (t0 + t3) + 0.6f * (t2 + t1) - _sx);
-        _sy += 0.5f * (0.9f * (t0 - t3) + 0.8f * (t2 - t1) - _sy);
-        W [i] += gr * _sw;
-        x [i] += gr * _sx;
-        y [i] += gr * _sy;
-    }
+      for (int i = 0; i < PERIOD; i++) {
+            float t0 = p [0 * N];
+            float t1 = p [1 * N];
+            float t2 = p [2 * N];
+            float t3 = p [3 * N];
+            p++;
+            s = t0 + t1 + t2 + t3;
+            R [i] += gr * s;
+            W [i] += gw * s;
+            x [i] = gx1 * (t3 + t0) + gx2 * (t2 + t1);
+            y [i] = gy1 * (t3 - t0) + gy2 * (t2 - t1);
+            }
 
-    g = 6.283184f * _apar [AZIMUTH]._val;
-    gx1 = cosf (g);
-    gy1 = sinf (g);
-    for (i = 0; i < PERIOD; i++)
-    {
-	X [i] += gx1 * x [i] + gy1 * y [i];
-	Y [i] += gx1 * y [i] - gy1 * x [i];
-    }
+      gr = vol * _apar [REFLECT]._val;
+      p = _base;
 
-    _offs0 = (_offs0 + PERIOD) & (N - 1);
-    for (i = 0; i < 16; i++) _offs [i] = ((_offs [i] + PERIOD) & (N - 1)) + (i >> 2) * N;
-    p = _base + _offs0;
-    memset (p + 0 * N, 0, PERIOD * sizeof (float));
-    memset (p + 1 * N, 0, PERIOD * sizeof (float));
-    memset (p + 2 * N, 0, PERIOD * sizeof (float));
-    memset (p + 3 * N, 0, PERIOD * sizeof (float));
-}
+      for (int i = 0; i < PERIOD; i++) {
+            float t0 = _dif0.process (p[_offs[1]] + p[_offs[5]] + p [_offs [11]] + p [_offs [15]] + 1e-20f);
+            float t1 = _dif1.process (p[_offs[0]] + p[_offs[4]] + p [_offs [10]] + p [_offs [14]] + 1e-20f);
+            float t2 = _dif2.process (p[_offs[2]] + p[_offs[6]] + p [_offs  [8]] + p [_offs [12]] + 2e-20f);
+            float t3 = _dif3.process (p[_offs[3]] + p[_offs[7]] + p [_offs  [9]] + p [_offs [13]] + 2e-20f);
+            p++;
+            s = t0 + t1 + t2 + t3;
+            _sw += 0.5f * (s - _sw);
+            _sx += 0.5f * (0.4f * (t0 + t3) + 0.6f * (t2 + t1) - _sx);
+            _sy += 0.5f * (0.9f * (t0 - t3) + 0.8f * (t2 - t1) - _sy);
+            W [i] += gr * _sw;
+            x [i] += gr * _sx;
+            y [i] += gr * _sy;
+            }
+
+      g = 6.283184f * _apar [AZIMUTH]._val;
+      gx1 = cosf (g);
+      gy1 = sinf (g);
+      for (int i = 0; i < PERIOD; i++) {
+            X [i] += gx1 * x [i] + gy1 * y [i];
+            Y [i] += gx1 * y [i] - gy1 * x [i];
+            }
+      _offs0 = (_offs0 + PERIOD) & (N - 1);
+      for (int i = 0; i < 16; i++)
+            _offs [i] = ((_offs [i] + PERIOD) & (N - 1)) + (i >> 2) * N;
+      p = _base + _offs0;
+      memset(p + 0 * N, 0, PERIOD * sizeof(float));
+      memset(p + 1 * N, 0, PERIOD * sizeof(float));
+      memset(p + 2 * N, 0, PERIOD * sizeof(float));
+      memset(p + 3 * N, 0, PERIOD * sizeof(float));
+      }
 

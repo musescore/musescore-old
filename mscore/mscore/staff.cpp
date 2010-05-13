@@ -487,3 +487,18 @@ void Staff::setClef(int tick, int clef)
       (*_clefList)[tick] = clef;
       }
 
+//---------------------------------------------------------
+//   channel
+//---------------------------------------------------------
+
+int Staff::channel(int tick,  int voice) const
+      {
+      if (_channelList[voice].isEmpty())
+            return 0;
+      QMap<int, int>::const_iterator i = _channelList[voice].lowerBound(tick);
+      if (i == _channelList[voice].begin())
+            return _channelList[voice].begin().value();
+      --i;
+      return i.value();
+      }
+

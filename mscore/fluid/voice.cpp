@@ -160,11 +160,8 @@ void Voice::init(Sample* _sample, Channel* _channel, int _key, int _vel,
       * This value can be kept, it is a worst-case estimate.
       */
 
-      double g = _fluid->masterGain();
-      if (g == 0.0)
-            g = 0.0000001;
-      amplitude_that_reaches_noise_floor_nonloop = FLUID_NOISE_FLOOR / g;
-      amplitude_that_reaches_noise_floor_loop    = FLUID_NOISE_FLOOR / g;
+      amplitude_that_reaches_noise_floor_nonloop = FLUID_NOISE_FLOOR;
+      amplitude_that_reaches_noise_floor_loop    = FLUID_NOISE_FLOOR;
       }
 
 //---------------------------------------------------------
@@ -767,7 +764,7 @@ void Voice::update_param(int _gen)
       float y;
       unsigned int count;
 
-      double gain = _fluid->masterGain() / 32768.0f;
+      double gain = 1.0 / 32768.0f;
       switch (_gen) {
             case GEN_PAN:
                   /* range checking is done in the fluid_pan function */
@@ -801,7 +798,6 @@ void Voice::update_param(int _gen)
                   // reverb_send = GEN(GEN_REVERBSEND) / 1000.0f;
                   reverb_send = float(channel->cc[EFFECTS_DEPTH1]) / 128.0;
                   // fluid_clip(reverb_send, 0.0, 1.0);
-                  // amp_reverb = reverb_send * _fluid->masterGain();
                   amp_reverb = reverb_send * gain;
                   break;
 
@@ -1541,10 +1537,7 @@ void Voice::check_sample_sanity()
             if ((int)loopstart >= (int)sample->loopstart && (int)loopend <= (int)sample->loopend){
 	            /* Is there a valid peak amplitude available for the loop? */
 	            if (sample->amplitude_that_reaches_noise_floor_is_valid) {
-                        double g = _fluid->masterGain();
-                        if (g == 0.0)
-                              g = 0.0000001;
-	                  amplitude_that_reaches_noise_floor_loop = sample->amplitude_that_reaches_noise_floor / g;
+	                  amplitude_that_reaches_noise_floor_loop = sample->amplitude_that_reaches_noise_floor;
                         }
                   else
 	                  /* Worst case */

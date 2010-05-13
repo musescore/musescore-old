@@ -81,68 +81,56 @@ void Aeolus::proc_queue (uint32_t k)
       int b = k & 255;
 
       switch (c) {
-            case 0:
-                  // Single key off.
+            case 0:     // Single key off.
                   key_off (i, b);
                   break;
 
-            case 1:
-	            // Single key on.
+            case 1:     // Single key on.
                   key_on (i, b);
 	            break;
 
-            case 2:
-                  // Conditional key off.
+            case 2:     // Conditional key off.
                   cond_key_off (j, b);
                   break;
 
-            case 3:
-                  // Conditional key on.
+            case 3:     // Conditional key on.
                   cond_key_on (j, b);
                   break;
 
-            case 4:
-                  // Clear bits in division mask.
+            case 4:     // Clear bits in division mask.
                   _divisp [j]->clr_div_mask (b);
                   break;
 
-            case 5:
-                  // Set bits in division mask.
+            case 5:     // Set bits in division mask.
                   _divisp [j]->set_div_mask (b);
                   break;
 
-            case 6:
-                  // Clear bits in rank mask.
+            case 6:     // Clear bits in rank mask.
                   _divisp [j]->clr_rank_mask (i, b);
                   break;
 
-            case 7:
-                  // Set bits in rank mask.
+            case 7:     // Set bits in rank mask.
                   _divisp [j]->set_rank_mask (i, b);
                   break;
 
-            case 8:
-                  // Hold off.
+            case 8:     // Hold off.
                   _hold = KEYS_MASK;
                   cond_key_off (HOLD_MASK, HOLD_MASK);
                   break;
 
-            case 9:
-                  // Hold on.
+            case 9:     // Hold on.
                   _hold = KEYS_MASK | HOLD_MASK;
                   cond_key_on (j, HOLD_MASK);
                   break;
 
-            case 16:
-                  // Tremulant on/off.
+            case 16:    // Tremulant on/off.
                   if (b)
                         _divisp [j]->trem_on ();
                   else
                         _divisp [j]->trem_off ();
                   break;
 
-            case 17:
-                  // Per-division performance controllers.
+            case 17:    // Per-division performance controllers.
 #if 0
                   if (n < 2)
                         return;
@@ -171,23 +159,23 @@ void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride, flo
                   m &= 127;
                   _keymap [n] = m;
                   for (int d = 0; d < _ndivis; d++)
-                        _divisp [d]->update (n, m);
+                        _divisp[d]->update (n, m);
 	            }
             }
       for (int d = 0; d < _ndivis; d++)
-            _divisp[d]->update (_keymap);
+            _divisp[d]->update(_keymap);
 
-      if (fabsf (_revsize - _audiopar [REVSIZE]._val) > 0.001f) {
-            _revsize = _audiopar [REVSIZE]._val;
-            _reverb.set_delay (_revsize);
+      if (fabsf(_revsize - _audiopar [REVSIZE]._val) > 0.001f) {
+            _revsize = _audiopar[REVSIZE]._val;
+            _reverb.set_delay(_revsize);
             for (int j = 0; j < _nasect; j++)
                   _asectp[j]->set_size(_revsize);
             }
-      if (fabsf (_revtime - _audiopar [REVTIME]._val) > 0.1f) {
+      if (fabsf(_revtime - _audiopar [REVTIME]._val) > 0.1f) {
             _revtime = _audiopar [REVTIME]._val;
-            _reverb.set_t60mf (_revtime);
-            _reverb.set_t60lo (_revtime * 1.50f, 250.0f);
-            _reverb.set_t60hi (_revtime * 0.50f, 3e3f);
+            _reverb.set_t60mf(_revtime);
+            _reverb.set_t60lo(_revtime * 1.50f, 250.0f);
+            _reverb.set_t60hi(_revtime * 0.50f, 3e3f);
             }
 
       int k = nout;
@@ -196,23 +184,23 @@ void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride, flo
                   float W [PERIOD];
                   float X [PERIOD];
                   float Y [PERIOD];
-                  float Z [PERIOD];
                   float R [PERIOD];
-                  memset (W, 0, PERIOD * sizeof (float));
-                  memset (X, 0, PERIOD * sizeof (float));
-                  memset (Y, 0, PERIOD * sizeof (float));
-                  memset (Z, 0, PERIOD * sizeof (float));
-                  memset (R, 0, PERIOD * sizeof (float));
+                  memset(W, 0, PERIOD * sizeof (float));
+                  memset(X, 0, PERIOD * sizeof (float));
+                  memset(Y, 0, PERIOD * sizeof (float));
+                  memset(R, 0, PERIOD * sizeof (float));
 
                   for (int j = 0; j < _ndivis; j++)
-                        _divisp [j]->process ();
+                        _divisp[j]->process();
                   for (int j = 0; j < _nasect; j++)
-                        _asectp [j]->process (_audiopar [VOLUME]._val, W, X, Y, R);
-                  _reverb.process (PERIOD, _audiopar [VOLUME]._val, R, W, X, Y, Z);
+                        _asectp[j]->process(gain, W, X, Y, R);
 
+                  _reverb.process(PERIOD, gain, R, W, X, Y);
+
+                  float stposit = _audiopar[STPOSIT]._val;
                   for (int j = 0; j < PERIOD; j++) {
-                        loutb[j] = W [j] + _audiopar [STPOSIT]._val * X [j] + Y [j];
-                        routb[j] = W [j] + _audiopar [STPOSIT]._val * X [j] - Y [j];
+                        loutb[j] = W[j] + stposit * X[j] + Y[j];
+                        routb[j] = W[j] + stposit * X[j] - Y[j];
                         }
                   nout = PERIOD;
                   k += PERIOD;
@@ -243,9 +231,9 @@ void Aeolus::newDivis(M_new_divis* X)
 
 void Aeolus::cond_key_off (int m, int b)
       {
-      unsigned char* p;
-      int i;
-      for (i = 0, p = _keymap; i < NNOTES; i++, p++) {
+      unsigned char* p = _keymap;
+
+      for (int i = 0; i < NNOTES; i++, p++) {
             if (*p & m) {
                   *p &= ~b;
                   *p |= 128;
@@ -253,22 +241,25 @@ void Aeolus::cond_key_off (int m, int b)
             }
       }
 
-void Aeolus::cond_key_on (int m, int b) {
-            unsigned char  *p;
-            int i;
-            for (i = 0, p = _keymap; i < NNOTES; i++, p++) {
-                  if (*p & m) {
-                        *p |= b | 128;
-                        }
-                  }
-            }
-void Aeolus::key_off (int n, int b) {
-            _keymap [n] &= ~b;
-            _keymap [n] |= 128;
-            }
+void Aeolus::cond_key_on (int m, int b)
+      {
+      unsigned char* p = _keymap;
 
-void Aeolus::key_on (int n, int b) {
-            _keymap [n] |= b | 128;
+      for (int i = 0; i < NNOTES; i++, p++) {
+            if (*p & m)
+                  *p |= b | 128;
             }
+      }
+
+void Aeolus::key_off (int n, int b)
+      {
+      _keymap[n] &= ~b;
+      _keymap[n] |= 128;
+      }
+
+void Aeolus::key_on (int n, int b)
+      {
+      _keymap[n] |= b | 128;
+      }
 
 

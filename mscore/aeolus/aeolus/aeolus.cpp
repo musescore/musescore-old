@@ -117,7 +117,7 @@ void Aeolus::play(const Event& event)
       int ch   = event.channel();
       int type = event.type();
       int m    = _midimap [ch] & 127;        // Keyboard and hold bits
-      int f    = (_midimap [ch] >> 12) & 7;  // Control enabled if (f & 4)
+//      int f    = (_midimap [ch] >> 12) & 7;  // Control enabled if (f & 4)
       if (type == ME_NOTEON) {
             int n = event.dataA();
             int v = event.dataB();
@@ -145,8 +145,8 @@ void Aeolus::play(const Event& event)
                   case MIDICTL_BANK:
                         break;
                   case MIDICTL_IFELM:
-                        if (!(f & 4))
-                              break;
+                        // if (!(f & 4))  enabale control for all channels
+                        //      break;
                         if (v & 64) {
                               // Set mode or clear group.
                               _sc_cmode = (v >> 4) & 3;

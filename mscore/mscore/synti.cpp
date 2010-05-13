@@ -117,6 +117,7 @@ void MasterSynth::process(unsigned n, float* l, float* r, int stride)
 
 void MasterSynth::play(const Event& event, int syntiIdx)
       {
+//      printf("play synti %d ch %d type 0x%02x\n", syntiIdx, event.channel(), event.type());
       syntis[syntiIdx]->play(event);
       }
 

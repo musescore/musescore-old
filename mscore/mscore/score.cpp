@@ -90,13 +90,13 @@ bool showRubberBand  = true;
 
 InputState::InputState() :
    _duration(Duration::V_INVALID),
+   _drumNote(-1),
+   _drumset(0),
    rest(false),
    pad(0),
    pitch(72),
    noteType(NOTE_NORMAL),
    beamMode(BEAM_AUTO),
-   _drumNote(-1),
-   _drumset(0),
    track(0),
    _segment(0),
    noteEntryMode(false),

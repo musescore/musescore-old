@@ -342,8 +342,6 @@ class Fluid : public Synth {
       virtual void play(const Event&);
       virtual const QList<MidiPatch*>& getPatchInfo() const { return patches; }
 
-      virtual double masterGain() const            { return _gain; }
-      virtual void setMasterGain(double val)       { _gain = val;  }
       virtual double effectParameter(int effect, int parameter);
       virtual void setEffectParameter(int ffect, int parameter, double value);
 
