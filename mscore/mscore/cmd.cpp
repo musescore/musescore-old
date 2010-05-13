@@ -1656,7 +1656,10 @@ void Score::changeAccidental(Note* note, int accidental)
       int pitch  = line2pitch(note->line(), clef, 0) + acc;
 
       int acc2   = chord->measure()->findAccidental2(note);
-      int user   = ((acc2 == acc) ||(Accidental::value2subtype(acc)!= accidental)) ? accidental : 0;
+      int accType = Accidental::value2subtype(acc);
+      if (accType == ACC_NONE)
+            accType = ACC_NATURAL;
+      int user   = ((acc2 == acc) || (accType != accidental)) ? accidental : ACC_NONE;
 
       _undo->push(new ChangePitch(note, pitch, tpc, user));
       //
@@ -2940,8 +2943,8 @@ void ScoreView::search(const QString& s)
                               if(cr->type() == CHORD)
                                     e =  static_cast<Chord*>(cr)->upNote();
                               else //REST
-                                    e = cr;  
-                                    
+                                    e = cr;
+
                               _score->select(e, SELECT_SINGLE, 0);
                               break;
                               }
