@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,13 +26,22 @@
 #include "part.h"
 
 //---------------------------------------------------------
+//   ChannelActions
+//---------------------------------------------------------
+
+struct ChannelActions {
+      int channel;
+      QStringList midiActionNames;
+      };
+
+//---------------------------------------------------------
 //   StaffText
 //---------------------------------------------------------
 
 class StaffText : public Text  {
       Q_DECLARE_TR_FUNCTIONS(StaffText)
-      QString _channelName;
-      QStringList _midiActionNames;
+      QString _channelNames[4];
+      QList<ChannelActions> _channelActions;
 
    public:
       StaffText(Score*);
@@ -43,10 +52,10 @@ class StaffText : public Text  {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
 
-      QString channelName() const                { return _channelName;      }
-      void setChannelName(const QString& s)      { _channelName = s;         }
-      QStringList* midiActionNames()             { return &_midiActionNames; }
-      const QStringList* midiActionNames() const { return &_midiActionNames; }
+      QString channelName(int voice) const                { return _channelNames[voice]; }
+      void setChannelName(int v, const QString& s)        { _channelNames[v] = s;        }
+      const QList<ChannelActions>* channelActions() const { return &_channelActions;    }
+      QList<ChannelActions>* channelActions()             { return &_channelActions;    }
       };
 
 //---------------------------------------------------------
@@ -58,9 +67,14 @@ class StaffTextProperties : public QDialog, public Ui::StaffTextProperties {
       Q_OBJECT
 
       StaffText* staffText;
+      QToolButton* vb[4][4];
+      QComboBox* channelCombo[4];
+      void saveChannel(int channel);
 
    private slots:
       void saveValues();
+      void channelItemChanged(QTreeWidgetItem*, QTreeWidgetItem*);
+      void voiceButtonClicked(int);
 
    public:
       StaffTextProperties(StaffText*, QWidget* parent = 0);

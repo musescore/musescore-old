@@ -58,7 +58,7 @@ TextBase::TextBase()
       _layoutWidth  = -1;
 
       QTextOption to = _doc->defaultTextOption();
-      to.setUseDesignMetrics(true);
+//      to.setUseDesignMetrics(true);
       to.setWrapMode(QTextOption::NoWrap);
       _doc->setDefaultTextOption(to);
       }
@@ -305,7 +305,7 @@ void TextBase::layout(double w)
             w = _doc->idealWidth();
       else {
             QTextOption to = _doc->defaultTextOption();
-            to.setUseDesignMetrics(true);
+//            to.setUseDesignMetrics(true);
             to.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
             _doc->setDefaultTextOption(to);
             }

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -46,16 +46,7 @@
 #include "dynamics.h"
 #include "navigate.h"
 #include "pedal.h"
-
-//---------------------------------------------------------
-//   ARec
-//    articulation record
-//---------------------------------------------------------
-
-struct ARec {
-      int tick;
-      int channel;
-      };
+#include "staff.h"
 
 //---------------------------------------------------------
 //   updateChannel
@@ -63,67 +54,48 @@ struct ARec {
 
 void Score::updateChannel()
       {
-      int staffIdx   = 0;
-      QList<ARec> alist;
-      foreach(Part* part, _parts) {
-            alist.clear();
-            for (int i = 0; i < part->staves()->size(); ++i) {
-                  for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-                        if (mb->type() != MEASURE)
+      foreach(Staff* s, _staves) {
+            for (int i = 0; i < VOICES; ++i)
+                  s->channelList(i)->clear();
+            }
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            foreach(const Element* e, *m->el()) {
+                  if (e->type() != STAFF_TEXT)
+                        continue;
+                  const StaffText* st = static_cast<const StaffText*>(e);
+                  for (int voice = 0; voice < VOICES; ++voice) {
+                        QString an(st->channelName(voice));
+                        if (an.isEmpty())
                               continue;
-                        Measure* m = static_cast<Measure*>(mb);
-                        foreach(const Element* e, *m->el()) {
-                              if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
-                                    continue;
-                              const StaffText* st = static_cast<const StaffText*>(e);
-                              QString an(st->channelName());
-                              if (an.isEmpty())
-                                    continue;
-                              int a = part->channelIdx(an);
-                              if (a != -1) {
-                                    ARec ar;
-                                    ar.tick = st->tick();
-                                    ar.channel = a;
-                                    alist.append(ar);
-                                    }
-                              else
-                                    printf("channel <%s> not found\n", qPrintable(an));
-                              }
+                        Staff* staff = _staves[st->staffIdx()];
+                        int a = staff->part()->channelIdx(an);
+                        if (a != -1)
+                              staff->channelList(voice)->insert(st->tick(), a);
                         }
                   }
+            }
 
-            for (int i = 0; i < part->staves()->size(); ++i) {
-                  Segment* s = tick2segment(0);
-                  while (s) {
-                        for (int track = staffIdx * VOICES; track < staffIdx*VOICES+VOICES; ++track) {
-                              if (!s->element(track))
+      for (Segment* s = firstMeasure()->first(SegChordRest | SegGrace); s; s = s->next1(SegChordRest | SegGrace)) {
+            foreach(Staff* st, _staves) {
+                  int strack = st->idx() * VOICES;
+                  int etrack = strack + VOICES;
+                  for (int track = strack; track < etrack; ++track) {
+                        if (!s->element(track))
+                              continue;
+                        Element* e = s->element(track);
+                        if (e->type() != CHORD)
+                              continue;
+                        Chord* c = static_cast<Chord*>(e);
+                        int channel = st->channel(c->tick(), c->voice());
+                        foreach (Note* note, c->notes()) {
+                              if (note->hidden())
                                     continue;
-                              Element* e = s->element(track);
-                              if (e->type() != CHORD)
+                              if (note->tieBack())
                                     continue;
-                              Chord* c = static_cast<Chord*>(e);
-                              int sc = 0;
-                              //
-                              // TODO: optimize
-                              //
-                              foreach(const ARec& ar, alist) {
-                                    if (ar.tick > c->tick())
-                                          break;
-                                    sc = ar.channel;
-                                    }
-                              QList<ARec> alist;
-                              foreach (Note* note, c->notes()) {
-                                    if (note->hidden())
-                                          continue;
-                                    if (note->tieBack())
-                                          continue;
-                                    note->setSubchannel(sc);
-                                    }
+                              note->setSubchannel(channel);
                               }
-                        s = s->next1();
                         }
                   }
-            ++staffIdx;
             }
       }
 
@@ -476,16 +448,19 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
             if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
                   continue;
             const StaffText* st = static_cast<const StaffText*>(e);
-            int stick = 0;
-            foreach(const QString ma, *st->midiActionNames()) {
-                  NamedEventList* nel = instr->midiAction(ma);
-                  if (nel) {
-                        foreach(Event* ev, nel->events) {
-                              Event* event = new Event(*ev);
-                              int tick = st->tick() + tickOffset + stick;
+            foreach (const ChannelActions& ca, *st->channelActions()) {
+                  int channel = ca.channel;
+                  foreach(const QString& ma, ca.midiActionNames) {
+                        NamedEventList* nel = instr->midiAction(ma, channel);
+                        if (!nel)
+                              continue;
+                        int n = nel->events.size();
+                        for (int i = n-1; i >= 0; --i) {
+                              Event* event = new Event(*nel->events[i]);
+                              int tick = st->tick() + tickOffset;
                               event->setOntime(tick);
+                              event->setChannel(channel);
                               events->insertMulti(tick, event);
-                              ++stick;
                               }
                         }
                   }

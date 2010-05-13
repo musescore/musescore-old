@@ -32,6 +32,8 @@
 void NamedEventList::write(Xml& xml, const QString& n) const
       {
       xml.stag(QString("%1 name=\"%2\"").arg(n).arg(name));
+      if (!descr.isEmpty())
+            xml.tag("descr", descr);
       foreach(Event* e, events)
             e->write(xml);
       xml.etag();
@@ -58,6 +60,8 @@ void NamedEventList::read(QDomElement e)
                   ev->setValue(e.attribute("value", "0").toInt());
                   events.append(ev);
                   }
+            else if (tag == "descr")
+                  descr = e.text();
             else
                   domError(e);
             }
@@ -117,6 +121,8 @@ void Instrument::write(Xml& xml) const
             xml.tag("trackName", _trackName);
       foreach(const NamedEventList& a, _midiActions)
             a.write(xml, "MidiAction");
+      foreach(const MidiArticulation& a, _articulation)
+            a.write(xml);
       foreach(const Channel& a, _channel)
             a.write(xml);
       xml.etag();
@@ -236,8 +242,15 @@ void Instrument::read(QDomElement e)
 //   action
 //---------------------------------------------------------
 
-NamedEventList* Instrument::midiAction(const QString& s) const
+NamedEventList* Instrument::midiAction(const QString& s, int channelIdx) const
       {
+      // first look in channel list
+
+      foreach(const NamedEventList& a, _channel[channelIdx].midiActions) {
+            if (s == a.name)
+                  return const_cast<NamedEventList*>(&a);
+            }
+
       foreach(const NamedEventList& a, _midiActions) {
             if (s == a.name)
                   return const_cast<NamedEventList*>(&a);
@@ -277,6 +290,8 @@ void Channel::write(Xml& xml) const
             xml.stag("Channel");
       else
             xml.stag(QString("Channel name=\"%1\"").arg(name));
+      if (!descr.isEmpty())
+            xml.tag("descr", descr);
       updateInitList();
       foreach(Event* e, init) {
             if (e)
@@ -288,6 +303,10 @@ void Channel::write(Xml& xml) const
             xml.tag("mute", mute);
       if (solo)
             xml.tag("solo", solo);
+      foreach(const NamedEventList& a, midiActions)
+            a.write(xml, "MidiAction");
+      foreach(const MidiArticulation& a, articulation)
+            a.write(xml);
       xml.etag();
       }
 
@@ -344,10 +363,17 @@ void Channel::read(QDomElement e)
                   a.read(e);
                   articulation.append(a);
                   }
+            else if (tag == "MidiAction") {
+                  NamedEventList a;
+                  a.read(e);
+                  midiActions.append(a);
+                  }
             else if (tag == "synti") {
                   int idx = seq->synthNameToIndex(val);
                   synti = idx == -1 ? val.toInt() : idx;
                   }
+            else if (tag == "descr")
+                  descr = e.text();
             else
                   domError(e);
             }
@@ -427,6 +453,8 @@ int Instrument::channelIdx(const QString& s) const
 void MidiArticulation::write(Xml& xml) const
       {
       xml.stag(QString("Articulation name=\"%1\"").arg(name));
+      if (!descr.isEmpty())
+            xml.tag("descr", descr);
       xml.tag("velocity", velocity);
       xml.tag("gateTime", gateTime);
       xml.etag();
@@ -452,6 +480,8 @@ void MidiArticulation::read(QDomElement e)
                         text = text.left(text.size()-1);
                   gateTime = text.toInt();
                   }
+            else if (tag == "descr")
+                  descr = e.text();
             else
                   domError(e);
             }

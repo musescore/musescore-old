@@ -1383,6 +1383,10 @@ TupletView::TupletView()
       layout->addWidget(tw);
       layout->addStretch(10);
 
+      tb.direction->addItem(tr("Auto"), 0);
+      tb.direction->addItem(tr("Up"), 1);
+      tb.direction->addItem(tr("Down"), 2);
+
       connect(tb.number, SIGNAL(clicked()), SLOT(numberClicked()));
       connect(tb.elements, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
       }
@@ -1413,7 +1417,7 @@ void TupletView::elementClicked(QTreeWidgetItem* item)
 void TupletView::setElement(Element* e)
       {
       ShowElementBase::setElement(e);
-      Tuplet* tuplet = (Tuplet*)e;
+      Tuplet* tuplet = static_cast<Tuplet*>(e);
       tb.baseLen->setText(tuplet->baseLen().name());
       tb.ratioZ->setValue(tuplet->ratio().numerator());
       tb.ratioN->setValue(tuplet->ratio().denominator());
@@ -1428,6 +1432,8 @@ void TupletView::setElement(Element* e)
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
             tb.elements->addTopLevelItem(item);
             }
+      tb.isUp->setChecked(tuplet->isUp());
+      tb.direction->setCurrentIndex(int(tuplet->direction()));
       }
 
 //---------------------------------------------------------

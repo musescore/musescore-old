@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,7 @@
  Definition of class Staff.
 */
 
+#include "globals.h"
 #include "key.h"
 
 class Instrument;
@@ -77,6 +78,7 @@ class Staff {
       bool _small;
       bool _slashStyle;
       bool _invisible;
+      QMap<int,int> _channelList[VOICES];
 
    public:
       Staff(Score*, Part*, int);
@@ -125,6 +127,8 @@ class Staff {
       double mag() const;
       double height() const;
       double spatium() const;
+      int channel(int tick, int voice) const;
+      QMap<int,int>* channelList(int voice)   { return  &_channelList[voice]; }
       };
 #endif
 

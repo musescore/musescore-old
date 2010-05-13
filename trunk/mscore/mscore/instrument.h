@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -37,6 +37,7 @@ class Drumset;
 
 struct NamedEventList {
       QString name;
+      QString descr;
       EventList events;
 
       void write(Xml&, const QString& name) const;
@@ -50,6 +51,7 @@ struct NamedEventList {
 
 struct MidiArticulation {
       QString name;
+      QString descr;
       int velocity;           // velocity change: -100% - +100%
       int gateTime;           // gate time change: -100% - +100%
       void write(Xml&) const;
@@ -73,6 +75,7 @@ enum {
 
 struct Channel {
       QString name;
+      QString descr;
       int channel;      // mscore channel number, mapped to midi port/channel
       mutable EventList init;
 
@@ -88,6 +91,7 @@ struct Channel {
       bool solo;
       bool soloMute;
 
+      QList<NamedEventList> midiActions;
       QList<MidiArticulation> articulation;
 
       Channel();
@@ -117,7 +121,7 @@ struct Instrument {
       Instrument();
       void read(QDomElement);
       void write(Xml& xml) const;
-      NamedEventList* midiAction(const QString& s) const;
+      NamedEventList* midiAction(const QString& s, int channel) const;
       int channelIdx(const QString& s) const;
       void updateVelocity(int* velocity, int channel, const QString& name);
 
