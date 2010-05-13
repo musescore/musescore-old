@@ -291,8 +291,6 @@ void Score::cmdTransposeStaff(int staffIdx, Interval interval, bool useDoubleSha
       transposeKeys(staffIdx, staffIdx+1, 0, lastSegment()->tick(), interval.chromatic);
 
       for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
-           if (segment->subtype() != SegChordRest)
-                 continue;
            for (int st = startTrack; st < endTrack; ++st) {
                  Element* e = segment->element(st);
                  if (!e || e->type() != CHORD)
