@@ -1,4 +1,6 @@
 14.may (ws)
+      - Removed gui elements for "midi remote control". This feature
+        is postponed to the next release.
       - fix persistence of text colors
       - do not show ledger lines if staff lines are set invisible
 13.may (ws)
