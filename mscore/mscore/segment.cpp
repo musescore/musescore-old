@@ -391,6 +391,7 @@ SegmentType Segment::segmentType(int type)
             case CHORD:
             case REST:
             case LYRICS:
+            case REPEAT_MEASURE:
                   return SegChordRest;
             case CLEF:
                   return SegClef;

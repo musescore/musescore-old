@@ -45,7 +45,6 @@ class RepeatMeasure : public Rest {
       virtual void write(Xml& xml) const { Element::write(xml); }
       virtual QRectF bbox() const        { return _bbox;        }
       virtual void scanElements(void* data, void (*func)(void*, Element*)) { func(data, this); }
-      virtual QPointF canvasPos() const;
       };
 
 enum {
