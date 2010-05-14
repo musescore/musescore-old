@@ -1,4 +1,5 @@
 14.may (ws)
+      - fix persistence of text colors
       - do not show ledger lines if staff lines are set invisible
 13.may (ws)
       - fix #5744: grace notes do not transpose

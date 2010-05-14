@@ -769,12 +769,12 @@ void TextB::read(QDomElement e)
 
 void TextB::writeProperties(Xml& xml, bool writeText) const
       {
-      Element::writeProperties(xml);
-
       // write all properties which are different from style
 
       if (_textStyle >= 0)
             xml.tag("style", _textStyle);
+
+      Element::writeProperties(xml);
 
       TextStyle* st = score()->textStyle(_textStyle);
       if (st == 0 || _align != st->align) {
