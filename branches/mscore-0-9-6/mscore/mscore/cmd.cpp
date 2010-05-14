@@ -76,6 +76,7 @@
 #include "editstyle.h"
 #include "textstyle.h"
 #include "timesig.h"
+#include "repeat.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -2407,15 +2408,18 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               slur->setTick(-1);
                               undoAddElement(slur);
                               }
-                        else if (tag == "Chord" || tag == "Rest") {
+                        else if (tag == "Chord" || tag == "Rest" || tag == "RepeatMeasure") {
                               ChordRest* cr;
                               if (tag == "Chord")
                                    cr = new Chord(this);
-                              else
+                              else if (tag == "Rest")
                                    cr = new Rest(this);
+                              else
+                                    cr = new RepeatMeasure(this);
                               cr->setTrack(curTrack);
                               cr->setTick(curTick);         // set default tick position
                               cr->read(eee, tuplets);
+                              cr->setSelected(false);
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);

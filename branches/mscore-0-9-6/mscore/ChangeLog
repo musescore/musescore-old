@@ -1,4 +1,6 @@
 14.may (ws)
+      - fix crash: loading a score with a selected measure repeat
+      - fix: copy/paste of measure repeats
       - Removed gui elements for "midi remote control". This feature
         is postponed to the next release.
       - fix persistence of text colors
