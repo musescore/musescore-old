@@ -2320,7 +2320,7 @@ void Score::cmdPaste(ScoreView* view)
                   }
 
             QByteArray data(ms->data(mimeStaffListFormat));
-// printf("paste <%s>\n", data.data());
+printf("paste <%s>\n", data.data());
             QDomDocument doc;
             int line, column;
             QString err;

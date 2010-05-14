@@ -103,6 +103,7 @@ class StemSlash : public Element {
 //---------------------------------------------------------
 
 class LedgerLine : public Line {
+
    public:
       LedgerLine(Score*);
       LedgerLine &operator=(const LedgerLine&);

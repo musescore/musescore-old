@@ -2556,7 +2556,7 @@ bool Measure::setStartRepeatBarLine(bool val)
                   bl = new BarLine(score());
                   bl->setTrack(track);
                   bl->setSubtype(START_REPEAT);
-                  bl->setGenerated(true);
+                  // bl->setGenerated(true);
                   Segment* seg = getSegment(SegStartRepeatBarLine, tick());
                   seg->add(bl);
                   changed = true;
@@ -2609,7 +2609,7 @@ bool Measure::createEndBarLines()
                         bl->setSubtype(et);
                         changed = true;
                         }
-                  bl->setGenerated(_endBarLineGenerated);
+//                  bl->setGenerated(_endBarLineGenerated);
                   bl->setVisible(_endBarLineVisible);
                   bl->setColor(_endBarLineColor);
                   span = staff->barLineSpan();

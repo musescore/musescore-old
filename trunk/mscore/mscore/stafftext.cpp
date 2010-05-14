@@ -218,6 +218,10 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
             }
       connect(mapper, SIGNAL(mapped(int)), SLOT(voiceButtonClicked(int)));
 
+      //---------------------------------------------------
+      //    setup midi actions
+      //---------------------------------------------------
+
       QTreeWidgetItem* selectedItem = 0;
       for (int i = 0; i < n; ++i) {
             const Channel& a = part->channel(i);
@@ -232,6 +236,134 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
          SLOT(channelItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)));
       connect(this, SIGNAL(accepted()), SLOT(saveValues()));
       channelList->setCurrentItem(selectedItem);
+
+      //---------------------------------------------------
+      //    setup aeolus stops
+      //---------------------------------------------------
+
+      for (int i = 0; i < 4; ++i) {
+            for (int k = 0; k < 16; ++k)
+                  stops[i][k] = 0;
+            }
+      stops[0][0]  = stop_3_0;
+      stops[0][1]  = stop_3_1;
+      stops[0][2]  = stop_3_2;
+      stops[0][3]  = stop_3_3;
+      stops[0][4]  = stop_3_4;
+      stops[0][5]  = stop_3_5;
+      stops[0][6]  = stop_3_6;
+      stops[0][7]  = stop_3_7;
+      stops[0][8]  = stop_3_8;
+      stops[0][9]  = stop_3_9;
+      stops[0][10] = stop_3_10;
+      stops[0][11] = stop_3_11;
+
+      stops[1][0]  = stop_2_0;
+      stops[1][1]  = stop_2_1;
+      stops[1][2]  = stop_2_2;
+      stops[1][3]  = stop_2_3;
+      stops[1][4]  = stop_2_4;
+      stops[1][5]  = stop_2_5;
+      stops[1][6]  = stop_2_6;
+      stops[1][7]  = stop_2_7;
+      stops[1][8]  = stop_2_8;
+      stops[1][9]  = stop_2_9;
+      stops[1][10] = stop_2_10;
+      stops[1][11] = stop_2_11;
+      stops[1][12] = stop_2_12;
+
+      stops[2][0]  = stop_1_0;
+      stops[2][1]  = stop_1_1;
+      stops[2][2]  = stop_1_2;
+      stops[2][3]  = stop_1_3;
+      stops[2][4]  = stop_1_4;
+      stops[2][5]  = stop_1_5;
+      stops[2][6]  = stop_1_6;
+      stops[2][7]  = stop_1_7;
+      stops[2][8]  = stop_1_8;
+      stops[2][9]  = stop_1_9;
+      stops[2][10] = stop_1_10;
+      stops[2][11] = stop_1_11;
+      stops[2][12] = stop_1_12;
+      stops[2][13] = stop_1_13;
+      stops[2][14] = stop_1_14;
+      stops[2][15] = stop_1_15;
+
+      stops[3][0]  = stop_p_0;
+      stops[3][1]  = stop_p_1;
+      stops[3][2]  = stop_p_2;
+      stops[3][3]  = stop_p_3;
+      stops[3][4]  = stop_p_4;
+      stops[3][5]  = stop_p_5;
+      stops[3][6]  = stop_p_6;
+      stops[3][7]  = stop_p_7;
+      stops[3][8]  = stop_p_8;
+      stops[3][9]  = stop_p_9;
+      stops[3][10] = stop_p_10;
+      stops[3][11] = stop_p_11;
+      stops[3][12] = stop_p_12;
+      stops[3][13] = stop_p_13;
+      stops[3][14] = stop_p_14;
+      stops[3][15] = stop_p_15;
+
+      curTabIndex = tabWidget->currentIndex();
+      connect(tabWidget, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
+      }
+
+//---------------------------------------------------------
+//   tabChanged
+//---------------------------------------------------------
+
+void StaffTextProperties::tabChanged(int tab)
+      {
+      if (tab == 2) {
+            int mode  = -1;
+            int group = 0;
+            Part* part = staffText->staff()->part();
+            foreach(const ChannelActions& ca, *staffText->channelActions()) {
+                  int channel = ca.channel;
+                  foreach(const QString& a, ca.midiActionNames) {
+                        NamedEventList* el = part->midiAction(a, channel);
+                        foreach(Event* e, el->events) {
+                              if (e->type() != ME_CONTROLLER) {
+                                    continue;
+                                    }
+                              if (e->controller() != 98) {
+                                    continue;
+                                    }
+                              if (e->value() & 0x40) {
+                                    mode  = (e->value() & 0x30) >> 4;
+                                    group = e->value() & 0x7;
+                                    }
+                              else {
+                                    int button = e->value() & 0x1f;
+                                    if (stops[group][button]) {
+                                          if (mode == 2)
+                                                stops[group][button]->setChecked(true);
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+#if 0
+      if (curTabIndex == 2) {
+            foreach(const ChannelActions& ca, *staffText->channelActions()) {
+                  int channel = ca.channel;
+                  QStringList nl;
+                  foreach(const QString& a, ca.midiActionNames) {
+                        NamedEventList* el = part->midiAction(a, channel);
+                        if (el->events.isEmpty())
+                              continue;
+                        if (e->type() == ME_CONTROLLER && e->controller() == 98)
+                              continue;
+                        nl.append(a);
+                        }
+
+                  }
+            }
+#endif
+      curTabIndex = tab;
       }
 
 //---------------------------------------------------------

@@ -40,6 +40,7 @@ Bracket::Bracket(Score* s)
       _span    = 1;
       _column   = 0;
       yoff     = 0.0;
+      setGenerated(true);     // brackets are not saved
       }
 
 //---------------------------------------------------------

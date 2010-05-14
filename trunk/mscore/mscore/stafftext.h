@@ -69,12 +69,16 @@ class StaffTextProperties : public QDialog, public Ui::StaffTextProperties {
       StaffText* staffText;
       QToolButton* vb[4][4];
       QComboBox* channelCombo[4];
+      QPushButton* stops[4][16];
+      int curTabIndex;
+
       void saveChannel(int channel);
 
    private slots:
       void saveValues();
       void channelItemChanged(QTreeWidgetItem*, QTreeWidgetItem*);
       void voiceButtonClicked(int);
+      void tabChanged(int tab);
 
    public:
       StaffTextProperties(StaffText*, QWidget* parent = 0);

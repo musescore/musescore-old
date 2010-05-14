@@ -212,6 +212,7 @@ void Preferences::init()
       landscape               = false;
       twosided                = true;
       spatium                 = SPATIUM20;
+      mag                     = 1.0;
       tuning                  = 440.0f;
       masterGain              = 0.2;
       chorusGain              = 0.5;
@@ -313,6 +314,7 @@ void Preferences::write()
       s.setValue("landscape", landscape);
       s.setValue("twosided", twosided);
       s.setValue("spatium", spatium);
+      s.setValue("mag", mag);
       s.setValue("tuning", tuning);
       s.setValue("masterGain", masterGain);
       s.setValue("chorusGain", chorusGain);
@@ -429,6 +431,7 @@ void Preferences::read()
       landscape              = s.value("landscape", false).toBool();
       twosided               = s.value("twosided", true).toBool();
       spatium                = s.value("spatium", SPATIUM20).toDouble();
+      mag                    = s.value("mag", 1.0).toDouble();
       tuning                 = s.value("tuning", 440.0).toDouble();
       masterGain             = s.value("masterGain", 0.2).toDouble();
       chorusGain             = s.value("chorusGain", 0.5).toDouble();
@@ -822,6 +825,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       twosided->setChecked(p->twosided);
       spatiumEntry->setValue(p->spatium * INCH);
+      scale->setValue(p->mag);
 
       landscape->setChecked(p->landscape);
 
@@ -1196,6 +1200,7 @@ void PreferenceDialog::apply()
       double f  = mmUnit ? 1.0/INCH : 1.0;
       preferences.twosided    = twosided->isChecked();
       preferences.spatium     = spatiumEntry->value() / INCH;
+      preferences.mag         = scale->value();
       preferences.landscape   = landscape->isChecked();
       preferences.paperSize   = QPrinter::PageSize(pageGroup->currentIndex());
       preferences.paperHeight = paperHeight->value() * f;
