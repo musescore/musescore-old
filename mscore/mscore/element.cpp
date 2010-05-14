@@ -546,13 +546,15 @@ void Element::read(QDomElement e)
 bool Element::genPropertyMenu(QMenu* popup) const
       {
       QAction* a;
-      if (visible())
-            a = popup->addAction(tr("Set Invisible"));
-      else
-            a = popup->addAction(tr("Set Visible"));
-      a->setData("invisible");
-      a = popup->addAction(tr("Color..."));
-      a->setData("color");
+      if (!_generated) {
+            if (visible())
+                  a = popup->addAction(tr("Set Invisible"));
+            else
+                  a = popup->addAction(tr("Set Visible"));
+            a->setData("invisible");
+            a = popup->addAction(tr("Color..."));
+            a->setData("color");
+            }
       return true;
       }
 

@@ -546,9 +546,11 @@ ScoreView::ScoreView(QWidget* parent)
       _score      = 0;
       dropTarget  = 0;
       _editText   = 0;
-      _matrix     = QTransform(PDPI/DPI, 0.0, 0.0, PDPI/DPI, 0.0, 0.0);
+
+      double mag  = preferences.mag * PDPI / DPI;
+      _matrix     = QTransform(mag, 0.0, 0.0, mag, 0.0, 0.0);
       imatrix     = _matrix.inverted();
-      _magIdx     = MAG_100;
+      _magIdx     = preferences.mag == 1.0 ? MAG_100 : MAG_FREE;
       focusFrame  = 0;
       level       = 0;
       dragElement = 0;
@@ -812,7 +814,8 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
             }
 
       QMenu* popup = new QMenu(this);
-      popup->setSeparatorsCollapsible(false);
+//      popup->setSeparatorsCollapsible(false);
+      popup->setSeparatorsCollapsible(true);
 
       QAction* a = popup->addAction(obj->userName());
       a->setEnabled(false);

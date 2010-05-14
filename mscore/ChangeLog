@@ -1,3 +1,6 @@
+14.may (ws)
+      - new preference parameter: default scale for new score views
+      - do not show ledger lines if staff lines are set invisible
 13.may (ws)
       - integration of Aeolus organ software synthesizer
       - extension of playback architecture: its now possible to assign

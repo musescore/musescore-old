@@ -4205,67 +4205,67 @@
             <MidiAction name="oct1">
                <descr>set stop Octave 1</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="2"/>
+               <controller ctrl="98" value="3"/>
                </MidiAction>
             <MidiAction name="qu513">
                <descr>set stop Quint 5 1/3</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="3"/>
+               <controller ctrl="98" value="4"/>
                </MidiAction>
             <MidiAction name="qu223">
                <descr>set stop Quint 2 2/3</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="4"/>
+               <controller ctrl="98" value="5"/>
                </MidiAction>
             <MidiAction name="tibia8">
                <descr>set stop Tibia 8</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="5"/>
+               <controller ctrl="98" value="6"/>
                </MidiAction>
             <MidiAction name="celes8">
                <descr>set stop Celesta 8</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="6"/>
+               <controller ctrl="98" value="7"/>
                </MidiAction>
             <MidiAction name="flute8">
                <descr>set stop Flöte 8</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="7"/>
+               <controller ctrl="98" value="8"/>
                </MidiAction>
             <MidiAction name="flute4">
                <descr>set stop Flöte 4</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="8"/>
+               <controller ctrl="98" value="9"/>
                </MidiAction>
             <MidiAction name="flute2">
                <descr>set stop Flöte 2</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="9"/>
+               <controller ctrl="98" value="10"/>
                </MidiAction>
             <MidiAction name="cymb">
                <descr>set stop Cymbel VI</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="10"/>
+               <controller ctrl="98" value="11"/>
                </MidiAction>
             <MidiAction name="mixt">
                <descr>set stop Mixtur</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="11"/>
+               <controller ctrl="98" value="12"/>
                </MidiAction>
             <MidiAction name="trum8">
                <descr>set stop Trumpet</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="12"/>
+               <controller ctrl="98" value="13"/>
                </MidiAction>
             <MidiAction name="C1+2">
                <descr>set stop I+II</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="12"/>
+               <controller ctrl="98" value="14"/>
                </MidiAction>
             <MidiAction name="C1+3">
                <descr>set stop I+III</descr>
                <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="12"/>
+               <controller ctrl="98" value="15"/>
                </MidiAction>
             </channel>
         <channel name="II">

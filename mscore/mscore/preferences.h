@@ -111,6 +111,7 @@ struct Preferences {
       bool landscape;
       bool twosided;
       double spatium;
+      double mag;
 
       //update
       int checkUpdateStartup;
