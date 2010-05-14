@@ -503,6 +503,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
 
       LedgerLine* h   = new LedgerLine(score());
       h->setTrack(staffIdx * VOICES);
+      h->setVisible(!staff()->invisible());
 
       Spatium len(h->len());
 
