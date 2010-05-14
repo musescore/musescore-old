@@ -1,3 +1,5 @@
+14.may (ws)
+      - do not show ledger lines if staff lines are set invisible
 13.may (ws)
       - fix #5744: grace notes do not transpose
       - fix #5732: second note in measure missing accidental
