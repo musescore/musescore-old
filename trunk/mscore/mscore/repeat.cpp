@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -120,6 +120,7 @@ void RepeatMeasure::layout()
       setbbox(path.boundingRect());
       }
 
+#if 0
 //---------------------------------------------------------
 //   canvasPos
 //---------------------------------------------------------
@@ -135,6 +136,7 @@ QPointF RepeatMeasure::canvasPos() const
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
+#endif
 
 //---------------------------------------------------------
 //   Marker

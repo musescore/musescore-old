@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -41,11 +41,9 @@ class RepeatMeasure : public Rest {
       virtual ElementType type() const      { return REPEAT_MEASURE; }
       virtual void draw(QPainter&) const;
       virtual void layout();
-      virtual void read(QDomElement e)   { Element::read(e);    }
-      virtual void write(Xml& xml) const { Element::write(xml); }
       virtual QRectF bbox() const        { return _bbox;        }
       virtual void scanElements(void* data, void (*func)(void*, Element*)) { func(data, this); }
-      virtual QPointF canvasPos() const;
+//      virtual QPointF canvasPos() const;
       };
 
 enum {

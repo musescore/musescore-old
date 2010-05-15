@@ -42,6 +42,8 @@ class StaffText : public Text  {
       Q_DECLARE_TR_FUNCTIONS(StaffText)
       QString _channelNames[4];
       QList<ChannelActions> _channelActions;
+      bool _setAeolusStops;
+      int aeolusStops[4];
 
    public:
       StaffText(Score*);
@@ -56,6 +58,11 @@ class StaffText : public Text  {
       void setChannelName(int v, const QString& s)        { _channelNames[v] = s;        }
       const QList<ChannelActions>* channelActions() const { return &_channelActions;    }
       QList<ChannelActions>* channelActions()             { return &_channelActions;    }
+      void clearAeolusStops();
+      void setAeolusStop(int group, int idx, bool val);
+      bool getAeolusStop(int group, int idx) const;
+      void setSetAeolusStops(bool val) { _setAeolusStops = val; }
+      bool setAeolusStops() const      { return _setAeolusStops; }
       };
 
 //---------------------------------------------------------

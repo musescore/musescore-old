@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: importove.cpp 2814 2010-03-04 18:27:09Z vanferry $
+//  $Id: importove.cpp 3075 2010-05-14 14:45:09Z vanferry $
 //
 //  Copyright (C) 2002-2009 Werner Schweer and others
 //
@@ -1391,6 +1391,8 @@ public:
 
 	void setNoteShift(int octave);
 	int getNoteShift() const;
+
+	int getOffsetStaff() const;
 
 	int getDuration() const;
 

@@ -151,8 +151,9 @@ void Aeolus::play(const Event& event)
                               // Set mode or clear group.
                               _sc_cmode = (v >> 4) & 3;
                               _sc_group = v & 7;
-                              if (_sc_cmode == 0)
+                              if (_sc_cmode == 0) {
                                     model->clr_group(_sc_group);
+                                    }
                               }
                         else if (_sc_cmode) {
                               // Set, reset or toggle stop.

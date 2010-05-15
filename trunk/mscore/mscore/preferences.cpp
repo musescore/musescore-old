@@ -325,6 +325,7 @@ void Preferences::write()
 
       s.setValue("defaultPlayDuration", defaultPlayDuration);
       s.setValue("importStyleFile", importStyleFile);
+      s.setValue("importCharset", importCharset);
       s.setValue("warnPitchRange", warnPitchRange);
       s.setValue("followSong", followSong);
 
@@ -442,6 +443,7 @@ void Preferences::read()
 
       defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
       importStyleFile        = s.value("importStyleFile", "").toString();
+      importCharset          = s.value("importCharset", "GBK").toByteArray();
       warnPitchRange         = s.value("warnPitchRange", true).toBool();
       followSong             = s.value("followSong", true).toBool();
 
@@ -833,6 +835,19 @@ void PreferenceDialog::updateValues(Preferences* p)
       importStyleFile->setText(p->importStyleFile);
       useImportBuildinStyle->setChecked(p->importStyleFile.isEmpty());
       useImportStyleFile->setChecked(!p->importStyleFile.isEmpty());
+
+      importCharsetList->clear();
+      QList<QByteArray> charsets = QTextCodec::availableCodecs();
+      qSort(charsets.begin(), charsets.end());
+      idx = 0;
+      foreach (QByteArray charset, charsets) {
+    	  importCharsetList->addItem(charset);
+    	  if(charset == p->importCharset) {
+    		  importCharsetList->setCurrentIndex(idx);
+    	  }
+    	  idx++;
+      }
+
       warnPitchRange->setChecked(p->warnPitchRange);
 
       language->clear();
@@ -1212,6 +1227,8 @@ void PreferenceDialog::apply()
             preferences.importStyleFile = importStyleFile->text();
       else
             preferences.importStyleFile.clear();
+
+      preferences.importCharset = importCharsetList->currentText().toUtf8();
 
       preferences.warnPitchRange = warnPitchRange->isChecked();
 

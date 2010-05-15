@@ -448,6 +448,7 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
             if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
                   continue;
             const StaffText* st = static_cast<const StaffText*>(e);
+            int tick = st->tick() + tickOffset;
             foreach (const ChannelActions& ca, *st->channelActions()) {
                   int channel = ca.channel;
                   foreach(const QString& ma, ca.midiActionNames) {
@@ -457,11 +458,44 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         int n = nel->events.size();
                         for (int i = n-1; i >= 0; --i) {
                               Event* event = new Event(*nel->events[i]);
-                              int tick = st->tick() + tickOffset;
                               event->setOntime(tick);
                               event->setChannel(channel);
                               events->insertMulti(tick, event);
                               }
+                        }
+                  }
+            if (st->setAeolusStops()) {
+                  Staff* staff = st->staff();
+                  int voice   = 0;
+                  int channel = staff->channel(tick, voice);
+
+                  for (int i = 0; i < 4; ++i) {
+                        for (int k = 0; k < 16; ++k) {
+                              if (st->getAeolusStop(i, k)) {
+                                    Event* event = new Event;
+                                    event->setType(ME_CONTROLLER);
+                                    event->setController(98);
+                                    event->setValue(k);
+                                    event->setOntime(tick);
+                                    event->setChannel(channel);
+                                    events->insertMulti(tick, event);
+                                    }
+                              }
+                        Event* event = new Event;
+                        event->setType(ME_CONTROLLER);
+                        event->setController(98);
+                        event->setValue(96 + i);
+                        event->setOntime(tick);
+                        event->setChannel(channel);
+                        events->insertMulti(tick, event);
+
+                        event = new Event;
+                        event->setType(ME_CONTROLLER);
+                        event->setController(98);
+                        event->setValue(64 + i);
+                        event->setOntime(tick);
+                        event->setChannel(channel);
+                        events->insertMulti(tick, event);
                         }
                   }
             }
