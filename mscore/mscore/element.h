@@ -416,6 +416,7 @@ typedef ElementList::const_iterator ciElement;
 class StaffLines : public Element {
       // Spatium lineWidth;
       qreal _width;
+      int _tablature;
 
    public:
       StaffLines(Score*);
@@ -432,6 +433,7 @@ class StaffLines : public Element {
       void setLines(int val)               { setSubtype(val);  }
       double y1() const;
       double y2() const;
+      void setTablature(int val)           { _tablature = val; }
       };
 
 //---------------------------------------------------------

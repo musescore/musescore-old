@@ -841,12 +841,11 @@ void PreferenceDialog::updateValues(Preferences* p)
       qSort(charsets.begin(), charsets.end());
       idx = 0;
       foreach (QByteArray charset, charsets) {
-    	  importCharsetList->addItem(charset);
-    	  if(charset == p->importCharset) {
-    		  importCharsetList->setCurrentIndex(idx);
-    	  }
-    	  idx++;
-      }
+            importCharsetList->addItem(charset);
+            if (charset == p->importCharset)
+                  importCharsetList->setCurrentIndex(idx);
+            idx++;
+            }
 
       warnPitchRange->setChecked(p->warnPitchRange);
 

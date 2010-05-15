@@ -680,12 +680,14 @@ void MuseScore::newFile()
 	      for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
                   Duration d(Duration::V_MEASURE);
                   if (tick == 0) {
-                        TimeSig* ts = new TimeSig(score, timesigN, timesigZ);
-                        ts->setTick(0);
-                        ts->setTrack(staffIdx * VOICES);
-                        Segment* s = measure->getSegment(ts);
-                        s->add(ts);
                         Staff* staff = score->staff(staffIdx);
+                        if (staff->tablature() == 0) {
+                              TimeSig* ts = new TimeSig(score, timesigN, timesigZ);
+                              ts->setTick(0);
+                              ts->setTrack(staffIdx * VOICES);
+                              Segment* s = measure->getSegment(ts);
+                              s->add(ts);
+                              }
                         Part* part = staff->part();
                         if (!part->useDrumset()) {
                               //
@@ -702,7 +704,7 @@ void MuseScore::newFile()
                                     keysig->setTrack(staffIdx * VOICES);
                                     keysig->setTick(0);
                                     keysig->setSubtype(nKey);
-                                    s = measure->getSegment(keysig);
+                                    Segment* s = measure->getSegment(keysig);
                                     s->add(keysig);
                                     }
                               }

@@ -74,6 +74,7 @@ class Staff {
       QList <BracketItem> _brackets;
       int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
       int _lines;
+      int _tablature;
       bool _show;             ///< derived from part->show()
       bool _small;
       bool _slashStyle;
@@ -129,6 +130,8 @@ class Staff {
       double spatium() const;
       int channel(int tick, int voice) const;
       QMap<int,int>* channelList(int voice)   { return  &_channelList[voice]; }
+      int tablature() const      { return _tablature; }
+      void setTablature(int val) { _tablature = val; }
       };
 #endif
 

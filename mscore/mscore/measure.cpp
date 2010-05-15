@@ -119,6 +119,7 @@ Measure::Measure(Score* s)
             s->lines->setTrack(staffIdx * VOICES);
             s->lines->setLines(staff->lines());
             s->lines->setParent(this);
+            s->lines->setTablature(staff->tablature());
             s->lines->setVisible(!staff->invisible());
             staves.push_back(s);
             }

@@ -169,6 +169,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       (*_keymap)[0] = 0;                  // default to C major
       _show         = true;
       _lines        = 5;
+      _tablature    = 0;                  // no tablature
       _small        = false;
       _slashStyle   = false;
       _barLineSpan  = 1;
@@ -214,6 +215,8 @@ void Staff::write(Xml& xml) const
       xml.stag("Staff");
       if (lines() != 5)
             xml.tag("lines", lines());
+      if (tablature())
+            xml.tag("tab", tablature());
       if (small() && !xml.excerptmode)    // switch small staves to normal ones when extracting part
             xml.tag("small", small());
       if (invisible())
@@ -243,6 +246,8 @@ void Staff::read(QDomElement e)
             int v = e.text().toInt();
             if (tag == "lines")
                   setLines(v);
+            else if (tag == "tab")
+                  setTablature(v);
             else if (tag == "small")
                   setSmall(v);
             else if (tag == "invisible")
@@ -445,7 +450,10 @@ void Staff::changeClef(int tick, int st)
 
 double Staff::height() const
       {
-      return 4 * _score->spatium() * mag();
+      double d = spatium();
+      if (_tablature)
+            d *= 1.5;
+      return (_lines-1) * d;
       }
 
 //---------------------------------------------------------

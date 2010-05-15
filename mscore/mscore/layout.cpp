@@ -812,6 +812,8 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         }
                   }
             bool needKeysig = keyIdx.isValid() && (isFirstSystem || styleB(ST_genKeysig));
+            if (staff->tablature())
+                  needKeysig = false;
             if (needKeysig && !hasKeysig) {
                   //
                   // create missing key signature

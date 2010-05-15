@@ -1,4 +1,5 @@
 15.may (ws)
+      - first code for tablature support; new test file: tab.mscx
       - ove import update from Rui Fan:
         - add recognition of percussion staff
         - read title, composer, poet, add title box

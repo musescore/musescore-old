@@ -3784,6 +3784,18 @@
            </channel>
         </instrument>
      <instrument>
+        <description>Guitar (Tablature)</description>
+        <name>Guitar</name>
+        <short-name>Guit.</short-name>
+        <clef>13</clef>
+        <stafflines tab="1">6</stafflines>
+        <aPitchRange>40-83</aPitchRange>
+        <pPitchRange>40-83</pPitchRange>
+        <channel>
+           <program>24</program>
+           </channel>
+        </instrument>
+     <instrument>
         <name>11-string Alto Guitar</name>
         <short-name>11-str. A. Guit.</short-name>
         <staves>2</staves>

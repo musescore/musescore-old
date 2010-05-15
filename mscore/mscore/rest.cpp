@@ -33,6 +33,7 @@
 #include "note.h"
 #include "measure.h"
 #include "undo.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //    Rest
@@ -64,7 +65,7 @@ Rest::Rest(Score* s, int tick, const Duration& d)
 
 void Rest::draw(QPainter& p) const
       {
-      if (generated())
+      if (staff()->tablature() || generated())
             return;
       double _spatium = spatium();
 

@@ -145,10 +145,10 @@ struct Instrument {
       Drumset* drumset() const                 { return _drumset;    }
       bool useDrumset() const                  { return _useDrumset; }
       void setUseDrumset(bool val);
-      void setAmateurPitchRange(int a, int b)       { _minPitchA = a; _maxPitchA = b; }
-      void setProfessionalPitchRange(int a, int b)  { _minPitchP = a; _maxPitchP = b; }
-      Channel& channel(int idx)                     { return _channel[idx]; }
-      const Channel& channel(int idx) const         { return _channel[idx]; }
+      void setAmateurPitchRange(int a, int b)                { _minPitchA = a; _maxPitchA = b; }
+      void setProfessionalPitchRange(int a, int b)           { _minPitchP = a; _maxPitchP = b; }
+      Channel& channel(int idx)                              { return _channel[idx]; }
+      const Channel& channel(int idx) const                  { return _channel[idx]; }
 
       const QList<NamedEventList>& midiActions() const       { return _midiActions; }
       const QList<MidiArticulation>& articulation() const    { return _articulation; }

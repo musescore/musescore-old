@@ -657,6 +657,7 @@ void ElementList::write(Xml& xml) const
 StaffLines::StaffLines(Score* s)
    : Element(s)
       {
+      _tablature = 0;
       setLines(5);
       _width = 1.0;      // dummy
       setSelectable(false);
@@ -683,7 +684,10 @@ QRectF StaffLines::bbox() const
       int l    = lines() - 1;
       qreal lw = point(score()->styleS(ST_staffLineWidth));
 
-      switch(l) {
+      if (_tablature)
+            return QRectF(0.0, -lw * .5, _width, l * _spatium * 1.5 + lw);
+
+      switch (l) {
             case 0:
                   return QRectF(0.0, - 2.0 * _spatium - lw*.5, _width, 4 * _spatium + lw);
             case 1:
@@ -713,6 +717,14 @@ void StaffLines::draw(QPainter& p) const
 
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
+
+      if (_tablature) {
+            for (int i = 0; i < lines(); ++i) {
+                  qreal y = _pos.y() + i * _spatium * 1.5;
+                  p.drawLine(QLineF(x1, y, x2, y));
+                  }
+            return;
+            }
 
       switch(lines()) {
             case 1:
@@ -774,6 +786,8 @@ double StaffLines::y2() const
       double _spatium = spatium();
 
       double y = measure()->system()->staff(staffIdx())->y();
+      if (_tablature)
+            return y + _pos.y() + (lines() - 1) * _spatium * 1.5;
       switch(lines()) {
             case 1:
                   return y + _pos.y() + 3 * _spatium;
@@ -781,7 +795,7 @@ double StaffLines::y2() const
                   return y + _pos.y() + 3 * _spatium;
             case 3:
             default:
-                  return y + _pos.y() + 4 * _spatium;
+                  return y + _pos.y() + (lines() - 1) * _spatium;
             }
       }
 
