@@ -1,3 +1,12 @@
+15.may (ws)
+      - ove import update from Rui Fan:
+        - add recognition of percussion staff
+        - read title, composer, poet, add title box
+        - add full measure rest to empty bar
+        - fix **http://musescore.org/en/node/5616*<http://musescore.org/en/node/5616>
+        - add a combo box in [Preference]->[Import] to let user select import
+          string's encoding, when import binary files like ove, midi.
+          Now ove follows this setting, see Preferences.importCharset.
 14.may (ws)
       - new preference parameter: default scale for new score views
       - do not show ledger lines if staff lines are set invisible

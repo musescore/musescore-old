@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -2185,8 +2185,7 @@ void Measure::read(QDomElement e, int idx)
                   RepeatMeasure* rm = new RepeatMeasure(score());
                   rm->setTrack(score()->curTrack);
                   rm->setTick(score()->curTick);    // set default tick position
-                  rm->setParent(this);
-                  rm->read(e);
+                  rm->read(e, _tuplets);
                   Segment* s = getSegment(SegChordRest, rm->tick());
                   s->add(rm);
                   score()->curTick = rm->tick() + tickLen();

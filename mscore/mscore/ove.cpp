@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: importove.cpp 2814 2010-03-04 18:27:09Z vanferry $
+//  $Id: importove.cpp 3075 2010-05-14 14:45:09Z vanferry $
 //
 //  Copyright (C) 2002-2009 Werner Schweer and others
 //
@@ -1860,6 +1860,20 @@ void NoteContainer::setNoteShift(int octave) {
 
 int NoteContainer::getNoteShift() const {
 	return noteShift_;
+}
+
+int NoteContainer::getOffsetStaff() const {
+	if(getIsRest())
+		return 0;
+
+	int staffMove = 0;
+	std::vector<OVE::Note*> notes = getNotesRests();
+	for (unsigned int i = 0; i < notes.size(); ++i) {
+		OVE::Note* notePtr = notes[i];
+		staffMove = notePtr->getOffsetStaff();
+	}
+
+	return staffMove;
 }
 
 int NoteContainer::getDuration() const {
@@ -3972,6 +3986,10 @@ bool TrackParse::parse() {
 	for( i=0; i<16; ++i ) {
 		if( !readBuffer(placeHolder, 1) ) { return false; }
 		nodes[i].voice_ = placeHolder.toUnsignedInt();
+	}
+
+	for( i=0; i<nodes.size(); ++i ) {
+		oveTrack->addDrum(nodes[i]);
 	}
 
 /*	if( !Jump(17) ) { return false; }

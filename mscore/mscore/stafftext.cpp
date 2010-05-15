@@ -32,6 +32,8 @@ StaffText::StaffText(Score* s)
       {
       setSubtype(TEXT_STAFF);
       setTextStyle(TEXT_STYLE_STAFF);
+      _setAeolusStops = false;
+      clearAeolusStops();
       }
 
 //---------------------------------------------------------
@@ -50,6 +52,10 @@ void StaffText::write(Xml& xml) const
             if (!_channelNames[voice].isEmpty())
                   xml.tagE(QString("channelSwitch voice=\"%1\" name=\"%2\"").arg(voice).arg(_channelNames[voice]));
             }
+      if (_setAeolusStops) {
+            for (int i = 0; i < 4; ++i)
+                  xml.tag(QString("aeolus group=\"%1\"").arg(i), aeolusStops[i]);
+            }
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -62,6 +68,7 @@ void StaffText::read(QDomElement e)
       {
       for (int voice = 0; voice < VOICES; ++voice)
             _channelNames[voice].clear();
+      clearAeolusStops();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "MidiAction") {
@@ -95,6 +102,13 @@ void StaffText::read(QDomElement e)
                               _channelNames[i] = e.attribute("name");
                         }
                   }
+            else if (tag == "aeolus") {
+                  int group = e.attribute("group", "-1").toInt();
+                  if (group >= 0 && group <= 4) {
+                        aeolusStops[group] = e.text().toInt();
+                        }
+                  _setAeolusStops = true;
+                  }
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -125,6 +139,37 @@ void StaffText::propertyAction(ScoreView* viewer, const QString& s)
             }
       else
             Text::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
+//   clearAeolusStops
+//---------------------------------------------------------
+
+void StaffText::clearAeolusStops()
+      {
+      for (int i = 0; i < 4; ++i)
+            aeolusStops[i] = 0;
+      }
+
+//---------------------------------------------------------
+//   setAeolusStop
+//---------------------------------------------------------
+
+void StaffText::setAeolusStop(int group, int idx, bool val)
+      {
+      if (val)
+            aeolusStops[group] |= (1 << idx);
+      else
+            aeolusStops[group] &= ~(1 << idx);
+      }
+
+//---------------------------------------------------------
+//   getAeolusStop
+//---------------------------------------------------------
+
+bool StaffText::getAeolusStop(int group, int idx) const
+      {
+      return aeolusStops[group] & (1 << idx);
       }
 
 //---------------------------------------------------------
@@ -241,6 +286,8 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
       //    setup aeolus stops
       //---------------------------------------------------
 
+      changeStops->setChecked(staffText->setAeolusStops());
+
       for (int i = 0; i < 4; ++i) {
             for (int k = 0; k < 16; ++k)
                   stops[i][k] = 0;
@@ -317,52 +364,22 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
 void StaffTextProperties::tabChanged(int tab)
       {
       if (tab == 2) {
-            int mode  = -1;
-            int group = 0;
-            Part* part = staffText->staff()->part();
-            foreach(const ChannelActions& ca, *staffText->channelActions()) {
-                  int channel = ca.channel;
-                  foreach(const QString& a, ca.midiActionNames) {
-                        NamedEventList* el = part->midiAction(a, channel);
-                        foreach(Event* e, el->events) {
-                              if (e->type() != ME_CONTROLLER) {
-                                    continue;
-                                    }
-                              if (e->controller() != 98) {
-                                    continue;
-                                    }
-                              if (e->value() & 0x40) {
-                                    mode  = (e->value() & 0x30) >> 4;
-                                    group = e->value() & 0x7;
-                                    }
-                              else {
-                                    int button = e->value() & 0x1f;
-                                    if (stops[group][button]) {
-                                          if (mode == 2)
-                                                stops[group][button]->setChecked(true);
-                                          }
-                                    }
-                              }
+            for (int i = 0; i < 4; ++i) {
+                  for (int k = 0; k < 16; ++k) {
+                        if (stops[i][k])
+                              stops[i][k]->setChecked(staffText->getAeolusStop(i, k));
                         }
                   }
             }
-#if 0
       if (curTabIndex == 2) {
-            foreach(const ChannelActions& ca, *staffText->channelActions()) {
-                  int channel = ca.channel;
-                  QStringList nl;
-                  foreach(const QString& a, ca.midiActionNames) {
-                        NamedEventList* el = part->midiAction(a, channel);
-                        if (el->events.isEmpty())
-                              continue;
-                        if (e->type() == ME_CONTROLLER && e->controller() == 98)
-                              continue;
-                        nl.append(a);
+            staffText->setSetAeolusStops(changeStops->isChecked());
+            for (int i = 0; i < 4; ++i) {
+                  for (int k = 0; k < 16; ++k) {
+                        if (stops[i][k])
+                              staffText->setAeolusStop(i, k, stops[i][k]->isChecked());
                         }
-
                   }
             }
-#endif
       curTabIndex = tab;
       }
 
@@ -470,6 +487,15 @@ void StaffTextProperties::saveValues()
       QTreeWidgetItem* pitem = channelList->currentItem();
       if (pitem)
             saveChannel(pitem->data(0, Qt::UserRole).toInt());
+
+      if (changeStops->isChecked()) {
+            for (int i = 0; i < 4; ++i) {
+                  for (int k = 0; k < 16; ++k) {
+                        if (stops[i][k])
+                              staffText->setAeolusStop(i, k, stops[i][k]->isChecked());
+                        }
+                  }
+            }
 
       staffText->score()->updateChannel();
       staffText->score()->setPlaylistDirty(true);
