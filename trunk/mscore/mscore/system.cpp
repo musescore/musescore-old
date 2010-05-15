@@ -234,11 +234,11 @@ void System::layout(double xo1)
             }
 
       if ((nstaves > 1 && score()->styleB(ST_startBarlineMultiple)) || (nstaves <= 1 && score()->styleB(ST_startBarlineSingle))) {
-            if(barLine == 0){
-              barLine = new Line(score(), true);
-              barLine->setLineWidth(score()->styleS(ST_barWidth));
-              barLine->setParent(this);
-              }
+            if (barLine == 0) {
+                  barLine = new Line(score(), true);
+                  barLine->setLineWidth(score()->styleS(ST_barWidth));
+                  barLine->setParent(this);
+                  }
             }
       else if (barLine) {
             delete barLine;

@@ -1279,6 +1279,15 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       }
 
 //---------------------------------------------------------
+//   elementLessThan
+//---------------------------------------------------------
+
+static bool elementLessThan(const Element* const e1, const Element* const e2)
+      {
+      return e1->type() > e2->type();
+      }
+
+//---------------------------------------------------------
 //   paint
 //---------------------------------------------------------
 
@@ -1311,6 +1320,7 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
 //      p.setClipRect(fr);
 
       QList<const Element*> ell = _score->items(fr);
+      qStableSort(ell.begin(), ell.end(), elementLessThan);
       drawElements(p, ell);
 
       if (dropRectangle.isValid())

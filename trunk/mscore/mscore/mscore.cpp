@@ -1735,7 +1735,7 @@ int main(int argc, char* av[])
 
 #ifdef OMR
       // omr display needs hardware acceleration for pixmap scaling:
-      QApplication::setGraphicsSystem(QString("opengl"));
+//      QApplication::setGraphicsSystem(QString("opengl"));
 #endif
 
 #ifdef Q_WS_MAC

@@ -347,6 +347,7 @@ void InstrumentWizard::createInstruments(Score* cs)
                   staff->setRstaff(rstaff);
                   ++rstaff;
                   staff->clefList()->setClef(0, sli->clef());
+                  staff->setTablature(t->tablature);
                   if (cidx > MAX_STAVES) {
                         staff->setLines(5);
                         staff->setSmall(false);

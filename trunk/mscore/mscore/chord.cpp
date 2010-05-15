@@ -1035,6 +1035,8 @@ void Chord::setMag(double val)
 
 void Chord::layoutStem1()
       {
+      if (staff()->tablature())
+            return;
       int istaff = staffIdx();
 
       //-----------------------------------------
@@ -1087,6 +1089,8 @@ void Chord::layoutStem1()
 
 void Chord::layoutStem()
       {
+      if (staff()->tablature())
+            return;
       System* s = segment()->measure()->system();
       if (s == 0)       //DEBUG
             return;
@@ -1261,6 +1265,8 @@ void Chord::layout()
 
       double lx = 0.0;
       _dotPosX  = 0.0;
+      double stepDistance = staff()->tablature() ? _spatium * 1.5 : _spatium * .5;
+
       foreach(Note* note, _notes) {
             note->layout();
 
@@ -1277,7 +1283,7 @@ void Chord::layout()
             if (note->mirror())
                   x += stemUp ? headWidth : - headWidth;
 
-            note->setPos(x, note->line() * _spatium * .5);
+            note->setPos(x, note->line() * stepDistance);
             double xx = x + headWidth;
             if (xx > _dotPosX)
                   _dotPosX = xx;

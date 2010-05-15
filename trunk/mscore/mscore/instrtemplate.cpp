@@ -48,6 +48,7 @@ InstrumentTemplate::InstrumentTemplate()
       useDrumset         = false;
       drumset            = 0;
       extended           = false;
+      tablature          = 0;
       }
 
 InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
@@ -57,6 +58,7 @@ InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
       shortName  = t.shortName;
       staves     = t.staves;
       extended   = t.extended;
+      tablature  = t.tablature;
 
       for (int i = 0; i < MAX_STAVES; ++i) {
             clefIdx[i]    = t.clefIdx[i];
@@ -95,21 +97,27 @@ void InstrumentTemplate::write(Xml& xml) const
       xml.tag("shortName",  shortName);
       xml.tag("description", trackName);
       xml.tag("extended", extended);
-      if (staves == 1) {
+      if (tablature) {
             xml.tag("clef", clefIdx[0]);
-            if (staffLines[0] != 5)
-                  xml.tag("stafflines", staffLines[0]);
-            if (smallStaff[0])
-                  xml.tag("smallStaff", smallStaff[0]);
+            xml.tag(QString("staffLines tab=\"%1\"").arg(tablature), staffLines[0]);
             }
       else {
-            xml.tag("staves", staves);
-            for (int i = 0; i < staves; ++i) {
-                  xml.tag(QString("clef staff=\"%1\"").arg(i), clefIdx[i]);
+            if (staves == 1) {
+                  xml.tag("clef", clefIdx[0]);
                   if (staffLines[0] != 5)
-                        xml.tag(QString("stafflines staff=\"%1\"").arg(i), staffLines[i]);
+                        xml.tag("stafflines", staffLines[0]);
                   if (smallStaff[0])
-                        xml.tag(QString("smallStaff staff=\"%1\"").arg(i), smallStaff[i]);
+                        xml.tag("smallStaff", smallStaff[0]);
+                  }
+            else {
+                  xml.tag("staves", staves);
+                  for (int i = 0; i < staves; ++i) {
+                        xml.tag(QString("clef staff=\"%1\"").arg(i), clefIdx[i]);
+                        if (staffLines[0] != 5)
+                              xml.tag(QString("stafflines staff=\"%1\"").arg(i), staffLines[i]);
+                        if (smallStaff[0])
+                              xml.tag(QString("smallStaff staff=\"%1\"").arg(i), smallStaff[i]);
+                        }
                   }
             }
       xml.tag("bracket", bracket);
@@ -235,6 +243,7 @@ void InstrumentTemplate::read(QDomElement e)
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
                   staffLines[idx] = i;
+                  tablature = e.attribute("tab", "0").toInt();
                   }
             else if (tag == "smallStaff") {
                   int idx = e.attribute("staff", "1").toInt() - 1;

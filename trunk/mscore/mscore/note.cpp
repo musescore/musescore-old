@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -51,6 +51,7 @@
 #include "measure.h"
 #include "undo.h"
 #include "part.h"
+#include "tablature.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -481,19 +482,46 @@ double Note::stemYoff(bool upFlag) const
 void Note::draw(QPainter& p) const
       {
       if (!_hidden || !userOff().isNull()) {
-            //
-            // warn if pitch extends usable range of instrument
-            // by coloring the note head
-            //
-            if (staff() && !selected() && !score()->printing() && preferences.warnPitchRange) {
-                  Part* in = staff()->part();
-                  int i = ppitch();
-                  if (i < in->minPitchP() || i > in->maxPitchP())
-                        p.setPen(Qt::red);
-                  else if (i < in->minPitchA() || i > in->maxPitchA())
-                        p.setPen(Qt::darkYellow);
+            if (chord() && chord()->staff()->tablature()) {
+                  int fret;
+                  int dummy;
+                  guitarTablature.convertPitch(_pitch, &dummy, &fret);
+                  int sym;
+                  switch(fret) {
+                        default:
+                        case 0: sym = zeroSym; break;
+                        case 1: sym = oneSym; break;
+                        case 2: sym = twoSym; break;
+                        case 3: sym = threeSym; break;
+                        case 4: sym = fourSym; break;
+                        case 5: sym = fiveSym; break;
+                        case 6: sym = sixSym; break;
+                        case 7: sym = sevenSym; break;
+                        case 8: sym = eightSym; break;
+                        case 9: sym = nineSym; break;
+                        }
+                  double mag = magS() * .7;
+                  QRectF bb = symbols[sym].bbox(mag);
+                  double y = -bb.height() * .5;
+                  double d = spatium() * .2;
+                  p.eraseRect(bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0));
+                  symbols[sym].draw(p, mag, 0.0, y);
                   }
-            symbols[noteHead()].draw(p, magS());
+            else {
+                  //
+                  // warn if pitch extends usable range of instrument
+                  // by coloring the note head
+                  //
+                  if (staff() && !selected() && !score()->printing() && preferences.warnPitchRange) {
+                        Part* in = staff()->part();
+                        int i = ppitch();
+                        if (i < in->minPitchP() || i > in->maxPitchP())
+                              p.setPen(Qt::red);
+                        else if (i < in->minPitchA() || i > in->maxPitchA())
+                              p.setPen(Qt::darkYellow);
+                        }
+                  symbols[noteHead()].draw(p, magS());
+                  }
             }
 
       if (chord()) {
@@ -526,7 +554,7 @@ void Note::draw(QPainter& p) const
             }
       }
 
-//---------------------------------------------------------
+//--------------------------------------------------
 //   Note::write
 //---------------------------------------------------------
 
@@ -1204,43 +1232,49 @@ void Note::layout()
 
 void Note::layout1(char* tversatz)
       {
-      _line          = tpc2step(_tpc) + (_pitch/12) * 7;
-      int tpcPitch   = tpc2pitch(_tpc);
-      if (tpcPitch < 0)
-            _line += 7;
-      else
-            _line -= (tpcPitch/12)*7;
-
-      int acci = ACC_NONE;
-      if (_userAccidental) {
-            acci = _userAccidental;
-            }
-      else  {
-            int accVal = tpc2alter(_tpc);
-            if ((accVal != tversatz[_line]) || hidden()) {
-                  if (_tieBack == 0)
-                        tversatz[_line] = accVal;
-                  acci = Accidental::value2subtype(accVal);
-                  if (acci == ACC_NONE)
-                        acci = ACC_NATURAL;
-                  }
-            }
-      if (acci != ACC_NONE && !_tieBack && !_hidden) {
-            if (!_accidental)
-                  add(new Accidental(score()));
-            _accidental->setSubtype(acci);
+      if (staff()->tablature()) {
+            int fret;
+            guitarTablature.convertPitch(_pitch, &_line, &fret);
             }
       else {
-            if (_accidental)
-                  score()->undoRemoveElement(_accidental);
+            _line          = tpc2step(_tpc) + (_pitch/12) * 7;
+            int tpcPitch   = tpc2pitch(_tpc);
+            if (tpcPitch < 0)
+                  _line += 7;
+            else
+                  _line -= (tpcPitch/12)*7;
+
+            int acci = ACC_NONE;
+            if (_userAccidental) {
+                  acci = _userAccidental;
+                  }
+            else  {
+                  int accVal = tpc2alter(_tpc);
+                  if ((accVal != tversatz[_line]) || hidden()) {
+                        if (_tieBack == 0)
+                              tversatz[_line] = accVal;
+                        acci = Accidental::value2subtype(accVal);
+                        if (acci == ACC_NONE)
+                              acci = ACC_NATURAL;
+                        }
+                  }
+            if (acci != ACC_NONE && !_tieBack && !_hidden) {
+                  if (!_accidental)
+                        add(new Accidental(score()));
+                  _accidental->setSubtype(acci);
+                  }
+            else {
+                  if (_accidental)
+                        score()->undoRemoveElement(_accidental);
+                  }
+            //
+            // calculate the real note line depending on clef
+            //
+            Staff* s     = score()->staff(staffIdx() + chord()->staffMove());
+            int tick     = chord()->tick();
+            int clef     = s->clefList()->clef(tick);
+            _line        = 127 - _line - 82 + clefTable[clef].yOffset;
             }
-      //
-      // calculate the real note line depending on clef
-      //
-      Staff* s     = score()->staff(staffIdx() + chord()->staffMove());
-      int tick     = chord()->tick();
-      int clef     = s->clefList()->clef(tick);
-      _line        = 127 - _line - 82 + clefTable[clef].yOffset;
       }
 
 //---------------------------------------------------------
@@ -1338,7 +1372,8 @@ void Note::setMag(double val)
 void Note::setLine(int n)
       {
       _line = n;
-      _pos.ry() = _line * spatium() * .5;
+      double step = staff()->tablature() ? spatium() * 1.5 : spatium() * .5;
+      _pos.ry() = _line * step;
       }
 
 //---------------------------------------------------------

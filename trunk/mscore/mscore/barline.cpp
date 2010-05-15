@@ -63,7 +63,7 @@ void BarLine::getY(double* y1, double* y2) const
       if (parent() && parent()->type() == SEGMENT) {
             int staffIdx1    = staffIdx();
             int staffIdx2    = staffIdx1 + _span - 1;
-            Segment* segment = (Segment*)parent();
+            Segment* segment = static_cast<Segment*>(parent());
             Measure* measure = segment->measure();
             System* system   = measure->system();
             StaffLines* l1   = measure->staffLines(staffIdx1);
@@ -479,7 +479,7 @@ void BarLine::layout()
       QRectF r(0.0, y1, dw, y2);
 
       if (score()->styleB(ST_repeatBarTips)) {
-            double mags = magS();
+            // double mags = magS();
             switch(subtype()) {
                   case START_REPEAT:
                         //r |= symbols[brackettipsRightUp].bbox(mags).translated(0, y1);

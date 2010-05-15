@@ -57,7 +57,6 @@ Part::~Part()
 
 void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       {
-      // setMidiProgram(t->midiProgram);
       setAmateurPitchRange(t->minPitchA, t->maxPitchA);
       setProfessionalPitchRange(t->minPitchP, t->maxPitchP);
 

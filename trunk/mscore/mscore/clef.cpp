@@ -263,7 +263,7 @@ void Clef::layout()
                   break;
             case CLEF_TAB:
                   symbol->setSym(tabclefSym);
-                  yoff = 2.0; //(staff()->lines() - 1) * 0.5;
+                  yoff = 3.5;
                   break;
             case CLEF_PERC:
             case CLEF_PERC2:
