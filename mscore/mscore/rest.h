@@ -54,7 +54,7 @@ class Rest : public ChordRest {
       virtual Rest* clone() const      { return new Rest(*this); }
       virtual ElementType type() const { return REST; }
 
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement, const QList<Tuplet*>&);
       virtual void add(Element*);

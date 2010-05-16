@@ -111,7 +111,7 @@ class Page : public Element {
 
       void layout();
 
-      virtual void draw(QPainter&p) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       void clear();
       };

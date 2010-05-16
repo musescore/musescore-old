@@ -164,7 +164,7 @@ class TextB : public Element {
       void setFrameRound(int val)           { textBase()->setFrameRound(val);    }
       void setCircle(bool val)              { textBase()->setCircle(val);        }
 
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
 
       virtual bool isEditable();
       virtual void startEdit(ScoreView*, const QPointF&);

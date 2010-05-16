@@ -62,7 +62,7 @@ class SlurSegment : public Element {
 
       void layout(const QPointF& p1, const QPointF& p2, qreal bow);
       virtual QPainterPath shape() const;
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
 
       virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);

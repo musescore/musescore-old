@@ -103,7 +103,7 @@ QRectF Arpeggio::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Arpeggio::draw(QPainter& p) const
+void Arpeggio::draw(QPainter& p, ScoreView*) const
       {
       double _spatium = spatium();
 

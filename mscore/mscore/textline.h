@@ -46,7 +46,7 @@ class TextLineSegment : public LineSegment {
       virtual TextLineSegment* clone() const { return new TextLineSegment(*this); }
       virtual ElementType type() const       { return TEXTLINE_SEGMENT; }
       TextLine* textLine() const             { return (TextLine*)parent(); }
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual QRectF bbox() const;
 
       virtual void layout();

@@ -36,6 +36,7 @@
       <file>fonts/mscore-20.ttf</file>
       <file>fonts/mscore1-20.ttf</file>
       <file>fonts/MuseJazz.ttf</file>
+      <file>fonts/DejaVuSerif.ttf</file>
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
       <file alias="data/demo.mscx">../demos/promenade.mscx</file>

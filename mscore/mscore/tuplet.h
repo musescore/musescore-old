@@ -111,7 +111,7 @@ class Tuplet : public DurationElement {
 
       virtual void toDefault();
 
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       int id() const                       { return _id;          }
       void setId(int i) const              { _id = i;             }
 

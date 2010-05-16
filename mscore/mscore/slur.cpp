@@ -93,7 +93,7 @@ void SlurSegment::move(const QPointF& s)
 //   draw
 //---------------------------------------------------------
 
-void SlurSegment::draw(QPainter& p) const
+void SlurSegment::draw(QPainter& p, ScoreView*) const
       {
       if (slurTie()->lineType() == 0) {
             p.setBrush(curColor());

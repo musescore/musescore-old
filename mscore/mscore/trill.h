@@ -36,7 +36,7 @@ class TrillSegment : public LineSegment {
       Trill* trill() const                { return (Trill*)parent(); }
       virtual ElementType type() const    { return TRILL_SEGMENT; }
       virtual TrillSegment* clone() const { return new TrillSegment(*this); }
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual QRectF bbox() const;
       };
 

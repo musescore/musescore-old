@@ -40,7 +40,7 @@ Tremolo::Tremolo(Score* score)
 //   draw
 //---------------------------------------------------------
 
-void Tremolo::draw(QPainter& p) const
+void Tremolo::draw(QPainter& p, ScoreView*) const
       {
       p.setBrush(p.pen().color());
       p.drawPath(path);

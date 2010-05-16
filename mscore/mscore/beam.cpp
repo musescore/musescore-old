@@ -283,7 +283,7 @@ void Beam::remove(ChordRest* a)
 //   draw
 //---------------------------------------------------------
 
-void Beam::draw(QPainter& p) const
+void Beam::draw(QPainter& p, ScoreView*) const
       {
       p.setPen(QPen(Qt::NoPen));
       p.setBrush(selected() ? preferences.selectColor[0] : preferences.defaultColor);

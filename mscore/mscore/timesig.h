@@ -60,7 +60,7 @@ class TimeSig : public Element {
       ElementType type() const { return TIMESIG; }
       QPointF canvasPos() const;      ///< position in canvas coordinates
       void setSubtype(int val);
-      void draw(QPainter&) const;
+      void draw(QPainter&, ScoreView*) const;
       void write(Xml& xml) const;
       void read(QDomElement);
       void layout();

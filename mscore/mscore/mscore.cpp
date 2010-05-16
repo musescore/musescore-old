@@ -1897,23 +1897,16 @@ int main(int argc, char* av[])
       //
       //  load internal fonts
       //
-
-      if (-1 == QFontDatabase::addApplicationFont(":/fonts/mscore-20.ttf")) {
-            fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
-            if (!debugMode)
-                  exit(-1);
+      static const char* fonts[] = {
+            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSerif"
+            };
+      for (int i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
+            if (-1 == QFontDatabase::addApplicationFont(QString(":/fonts/%1.ttf").arg(fonts[i]))) {
+                  fprintf(stderr, "Mscore: fatal error: cannot load internal font <%s>\n", fonts[i]);
+                  if (!debugMode)
+                        exit(-1);
+                  }
             }
-      if (-1 == QFontDatabase::addApplicationFont(":/fonts/mscore1-20.ttf")) {
-            fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
-            if (!debugMode)
-                  exit(-1);
-            }
-      if (-1 == QFontDatabase::addApplicationFont(":/fonts/MuseJazz.ttf")) {
-            fprintf(stderr, "Mscore: fatal error: cannot load internal font MuseJazz.ttf\n");
-            if (!debugMode)
-                  exit(-1);
-            }
-
 /*      if (converterMode) {
             noSeq = true;
             seq = 0;

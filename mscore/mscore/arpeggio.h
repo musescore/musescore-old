@@ -23,7 +23,7 @@
 
 #include "element.h"
 
-// Arpeggio types 
+// Arpeggio types
 enum { ARP_NORMAL, ARP_UP, ARP_DOWN, ARP_BRACKET};
 
 //---------------------------------------------------------
@@ -43,7 +43,7 @@ class Arpeggio : public Element {
       virtual Arpeggio* clone() const { return new Arpeggio(*this); }
       virtual ElementType type() const { return ARPEGGIO; }
       virtual QRectF bbox() const;
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;

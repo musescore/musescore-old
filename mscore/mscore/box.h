@@ -45,7 +45,7 @@ class Box : public MeasureBase {
 
    public:
       Box(Score*);
-      virtual void draw(QPainter& p) const;
+      virtual void draw(QPainter&, ScoreView*) const;
 
       virtual bool isEditable() { return true; }
       virtual void startEdit(ScoreView*, const QPointF&);

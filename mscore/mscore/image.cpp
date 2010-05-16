@@ -58,7 +58,7 @@ void Image::dereference()
 //   draw
 //---------------------------------------------------------
 
-void Image::draw(QPainter& p) const
+void Image::draw(QPainter& p, ScoreView*) const
       {
       p.drawPixmap(0, 0, buffer);
       if (selected()) {
@@ -208,7 +208,7 @@ SvgImage* SvgImage::clone() const
 //   draw
 //---------------------------------------------------------
 
-void SvgImage::draw(QPainter& p) const
+void SvgImage::draw(QPainter& p, ScoreView* v) const
       {
       if (!doc)
             return;
@@ -222,7 +222,7 @@ void SvgImage::draw(QPainter& p) const
             doc->render(&pp);
             _dirty = false;
             }
-      Image::draw(p);
+      Image::draw(p, v);
       }
 
 //---------------------------------------------------------
@@ -267,7 +267,7 @@ RasterImage* RasterImage::clone() const
 //   draw
 //---------------------------------------------------------
 
-void RasterImage::draw(QPainter& p) const
+void RasterImage::draw(QPainter& p, ScoreView* v) const
       {
       p.save();
       QTransform t = p.worldTransform();
@@ -278,7 +278,7 @@ void RasterImage::draw(QPainter& p) const
             buffer = QPixmap::fromImage(doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
             _dirty = false;
             }
-      Image::draw(p);
+      Image::draw(p, v);
       p.restore();
       }
 

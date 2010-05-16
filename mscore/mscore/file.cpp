@@ -1568,7 +1568,7 @@ void Score::print(QPrinter* printer)
                         QPointF ap(e->canvasPos() - page->pos());
                         p.translate(ap);
                         p.setPen(QPen(e->color()));
-                        e->draw(p);
+                        e->draw(p, 0);
                         p.translate(-ap);
                         }
                   }
@@ -1649,7 +1649,7 @@ bool Score::saveSvg(const QString& saveName)
                   QPointF ap(e->canvasPos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
-                  e->draw(p);
+                  e->draw(p, 0);
                   p.translate(-ap);
                   }
             foreach(const Element* e, el) {
@@ -1658,7 +1658,7 @@ bool Score::saveSvg(const QString& saveName)
                   QPointF ap(e->canvasPos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
-                  e->draw(p);
+                  e->draw(p, 0);
                   p.translate(-ap);
                   }
             }
@@ -1742,7 +1742,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                   QPointF ap(e->canvasPos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
-                  e->draw(p);
+                  e->draw(p, 0);
                   p.translate(-ap);
                   }
 
@@ -1754,7 +1754,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                   QPointF ap(e->canvasPos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
-                  e->draw(p);
+                  e->draw(p, 0);
                   p.translate(-ap);
                   }
 

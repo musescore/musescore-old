@@ -59,7 +59,7 @@ class Accidental : public Element {
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       int symbol();
       Note* note() const { return (Note*)parent(); }
 

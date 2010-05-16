@@ -247,7 +247,7 @@ int Accidental::value2subtype(int v)
 //   draw
 //---------------------------------------------------------
 
-void Accidental::draw(QPainter& painter) const
+void Accidental::draw(QPainter& painter, ScoreView*) const
       {
       double m = magS();
       foreach(const SymElement& e, el)

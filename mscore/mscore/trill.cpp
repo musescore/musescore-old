@@ -31,7 +31,7 @@
 //   draw
 //---------------------------------------------------------
 
-void TrillSegment::draw(QPainter& p) const
+void TrillSegment::draw(QPainter& p, ScoreView*) const
       {
       double mags = magS();
       QRectF b1 = symbols[trillSym].bbox(mags);

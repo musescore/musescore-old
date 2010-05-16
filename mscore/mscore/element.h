@@ -229,7 +229,7 @@ class Element {
                || type() == TRILL || type() == VOLTA || type() == TEXTLINE;
             }
 
-      virtual void draw(QPainter&) const {}
+      virtual void draw(QPainter&, ScoreView*) const {}
 
       void writeProperties(Xml& xml, const Element* proto = 0) const;
       bool readProperties(QDomElement);
@@ -425,7 +425,7 @@ class StaffLines : public Element {
       Measure* measure() const             { return (Measure*)parent(); }
       void setWidth(qreal v)               { _width = v;         }
       virtual QRectF bbox() const;
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual QPointF canvasPos() const;   ///< position in canvas coordinates
@@ -451,7 +451,7 @@ class Cursor : public Element {
       Cursor(Score*, ScoreView*);
       virtual Cursor* clone() const    { return new Cursor(*this); }
       virtual ElementType type() const { return CURSOR; }
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual QRectF bbox() const;
 
       void setOn(bool f)               { _on = f; }
@@ -472,7 +472,7 @@ class Lasso : public Element {
       Lasso(Score*);
       virtual Lasso* clone() const       { return new Lasso(*this); }
       virtual ElementType type() const   { return LASSO; }
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       };
 
 //---------------------------------------------------------
@@ -495,7 +495,7 @@ class Line : public Element {
       virtual ElementType type() const { return LINE; }
       virtual void layout();
 
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
       void dump() const;
@@ -520,7 +520,7 @@ class Compound : public Element {
       Compound(Score*);
       virtual ElementType type() const = 0;
 
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual void addElement(Element*, double x, double y);
       void clear();
       virtual void setSelected(bool f);
@@ -539,7 +539,7 @@ class RubberBand : public Element {
       RubberBand(Score* s) : Element(s) {}
       virtual RubberBand* clone() const { return new RubberBand(*this); }
       virtual ElementType type() const { return RUBBERBAND; }
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
 
       void set(const QPointF& p1, const QPointF& p2) { _p1 = p1; _p2 = p2; }
       QPointF p1() const { return _p1; }

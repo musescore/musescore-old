@@ -66,7 +66,7 @@ void TextLineSegment::setSelected(bool f)
 //   draw
 //---------------------------------------------------------
 
-void TextLineSegment::draw(QPainter& p) const
+void TextLineSegment::draw(QPainter& p, ScoreView* v) const
       {
       TextLine* tl    = textLine();
       double _spatium = spatium();
@@ -90,7 +90,7 @@ void TextLineSegment::draw(QPainter& p) const
             p.save();
             p.translate(_text->pos());
             p.setPen(QPen(_text->curColor()));
-            _text->draw(p);
+            _text->draw(p, v);
             p.restore();
             }
       else if (sym != -1) {

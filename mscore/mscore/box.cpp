@@ -62,7 +62,7 @@ void Box::layout()
 //   draw
 //---------------------------------------------------------
 
-void Box::draw(QPainter& p) const
+void Box::draw(QPainter& p, ScoreView*) const
       {
       if (score() && score()->printing())
             return;

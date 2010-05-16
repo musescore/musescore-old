@@ -116,20 +116,20 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       if (dragElement) {
             p.save();
             p.translate(dragElement->canvasPos());
-            dragElement->draw(p);
+            dragElement->draw(p, 0);
             p.restore();
             }
       foreach(Accidental* a, accidentals) {
             p.save();
             p.translate(a->canvasPos());
             p.setPen(QPen(a->curColor()));
-            a->draw(p);
+            a->draw(p, 0);
             p.restore();
             }
       clef->setPos(0.0, 0.0);
       clef->layout();
       p.translate(clef->canvasPos());
-      clef->draw(p);
+      clef->draw(p, 0);
       }
 
 //---------------------------------------------------------

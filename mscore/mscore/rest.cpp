@@ -63,7 +63,7 @@ Rest::Rest(Score* s, int tick, const Duration& d)
 //   Rest::draw
 //---------------------------------------------------------
 
-void Rest::draw(QPainter& p) const
+void Rest::draw(QPainter& p, ScoreView*) const
       {
       if (staff()->tablature() || generated())
             return;

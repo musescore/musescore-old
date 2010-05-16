@@ -49,7 +49,7 @@ class BarLine : public Element {
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual Space space() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();

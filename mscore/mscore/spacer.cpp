@@ -44,7 +44,7 @@ Spacer::Spacer(const Spacer& s)
 //   draw
 //---------------------------------------------------------
 
-void Spacer::draw(QPainter& p) const
+void Spacer::draw(QPainter& p, ScoreView*) const
       {
       if (score()->printing())
             return;

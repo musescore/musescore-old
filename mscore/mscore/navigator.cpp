@@ -163,7 +163,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
                         QRectF pbbox(page->abbox());
                         r1 -= matrix.mapRect(pbbox).toRect();
                         p.translate(page->pos());
-                        page->draw(p);
+                        page->draw(p, 0);
                         p.translate(-page->pos());
                         }
 
@@ -180,7 +180,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
                         QPointF ap(e->canvasPos());
                         p.translate(ap);
                         p.setPen(QPen(e->color()));
-                        e->draw(p);
+                        e->draw(p, 0);
                         p.translate(-ap);
                         }
 

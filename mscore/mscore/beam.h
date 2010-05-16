@@ -116,7 +116,7 @@ class Beam : public Element {
       void remove(ChordRest* a);
       void writeMusicXml(Xml& xml, ChordRest* cr) const;
       virtual void move(double, double);
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       int up() const                      { return _up; }
       void setUp(int v)                   { _up = v; }
       void setId(int i) const             { _id = i; }

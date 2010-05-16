@@ -254,7 +254,7 @@ void TimeSig::layout()
 //   draw
 //---------------------------------------------------------
 
-void TimeSig::draw(QPainter& p) const
+void TimeSig::draw(QPainter& p, ScoreView*) const
       {
       int st = subtype();
       if (st == 0)

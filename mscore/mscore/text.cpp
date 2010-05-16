@@ -694,7 +694,7 @@ void TextB::layout()
 //   draw
 //---------------------------------------------------------
 
-void TextB::draw(QPainter& p) const
+void TextB::draw(QPainter& p, ScoreView*) const
       {
       textBase()->draw(p, cursor);
       }

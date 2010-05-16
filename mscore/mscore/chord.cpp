@@ -57,7 +57,7 @@ Stem::Stem(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Stem::draw(QPainter& p) const
+void Stem::draw(QPainter& p, ScoreView*) const
       {
       qreal lw = point(score()->styleS(ST_stemWidth));
       QPen pen(p.pen());
@@ -196,7 +196,7 @@ StemSlash::StemSlash(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void StemSlash::draw(QPainter& p) const
+void StemSlash::draw(QPainter& p, ScoreView*) const
       {
       qreal lw = point(score()->styleS(ST_stemWidth));
       QPen pen(p.pen());

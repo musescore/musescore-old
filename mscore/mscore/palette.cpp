@@ -428,7 +428,7 @@ static void paintPaletteElement(void* data, Element* e)
       QPainter* p = static_cast<QPainter*>(data);
       p->save();
       p->translate(e->pos());
-      e->draw(*p);
+      e->draw(*p, 0);
       p->restore();
       }
 

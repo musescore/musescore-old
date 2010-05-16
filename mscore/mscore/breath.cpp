@@ -76,7 +76,7 @@ void Breath::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void Breath::draw(QPainter& p) const
+void Breath::draw(QPainter& p, ScoreView*) const
       {
       symbols[symList[subtype()]].draw(p, mag());
       }

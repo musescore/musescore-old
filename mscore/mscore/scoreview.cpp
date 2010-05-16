@@ -1231,18 +1231,23 @@ void ScoreView::setShadowNote(const QPointF& p)
       shadowNote->setPos(pos.pos);
       }
 
+struct ViewPainter {
+      QPainter* painter;
+      ScoreView* view;
+      };
+
 //---------------------------------------------------------
 //   paintElement
 //---------------------------------------------------------
 
 static void paintElement(void* data, Element* e)
       {
-      QPainter* p = static_cast<QPainter*>(data);
-      p->save();
-      p->setPen(QPen(e->curColor()));
-      p->translate(e->canvasPos());
-      e->draw(*p);
-      p->restore();
+      ViewPainter* p = static_cast<ViewPainter*>(data);
+      p->painter->save();
+      p->painter->setPen(QPen(e->curColor()));
+      p->painter->translate(e->canvasPos());
+      e->draw(*p->painter, p->view);
+      p->painter->restore();
       }
 
 //---------------------------------------------------------
@@ -1266,16 +1271,19 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setTransform(_matrix);
       p.setClipping(false);
 
-      cursor->draw(p);
-      lasso->draw(p);
-      shadowNote->draw(p);
+      cursor->draw(p, this);
+      lasso->draw(p, this);
+      shadowNote->draw(p, this);
       if (!dropAnchor.isNull()) {
             QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / p.worldMatrix().m11(), Qt::DotLine);
             p.setPen(pen);
             p.drawLine(dropAnchor);
             }
+      ViewPainter vp;
+      vp.painter = &p;
+      vp.view    = this;
       if (dragElement)
-            dragElement->scanElements(&p, paintElement);
+            dragElement->scanElements(&vp, paintElement);
       }
 
 //---------------------------------------------------------
@@ -1285,6 +1293,20 @@ void ScoreView::paintEvent(QPaintEvent* ev)
 static bool elementLessThan(const Element* const e1, const Element* const e2)
       {
       return e1->type() > e2->type();
+      }
+
+//---------------------------------------------------------
+//   drawBackground
+//---------------------------------------------------------
+
+void ScoreView::drawBackground(QPainter& p, QRectF r)
+      {
+      if (fgPixmap == 0 || fgPixmap->isNull())
+            p.fillRect(r, _fgColor);
+      else {
+            p.drawTiledPixmap(r, *fgPixmap, r.topLeft()
+               - QPoint(lrint(_matrix.dx()), lrint(_matrix.dy())));
+            }
       }
 
 //---------------------------------------------------------
@@ -2216,7 +2238,7 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
             p.save();
             p.translate(e->canvasPos());
             p.setPen(QPen(e->curColor()));
-            e->draw(p);
+            e->draw(p, this);
 
             if (debugMode && e->selected()) {
                   //
