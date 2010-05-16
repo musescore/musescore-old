@@ -440,7 +440,7 @@ class Score : public QObject {
       void undoChangeChordNoStem(Chord* cr, bool noStem);
       void undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t);
       void undoChangeSubtype(Element* element, int st);
-      void undoChangePitch(Note* note, int pitch, int tpc, int userAccidental);
+      void undoChangePitch(Note* note, int pitch, int tpc, int userAccidental, int line, int fret);
       void spellNotelist(QList<Note*>& notes);
       void undoChangeTpc(Note* note, int tpc);
       void undoChangeBeamMode(ChordRest* cr, BeamMode mode);

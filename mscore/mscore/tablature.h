@@ -32,7 +32,8 @@ class Tablature {
 
    public:
       Tablature(int numFrets, int numStrings, int strings[]);
-      bool convertPitch(int pitch, int* string, int* fret);
+      bool convertPitch(int pitch, int* string, int* fret) const;
+      int getPitch(int string, int fret) const;
       };
 
 extern Tablature guitarTablature;

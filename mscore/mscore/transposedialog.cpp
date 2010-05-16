@@ -332,7 +332,7 @@ void Score::transpose(Note* n, Interval interval, bool useDoubleSharpsFlats)
       int ntpc;
       transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc, interval,
         useDoubleSharpsFlats);
-      undoChangePitch(n, npitch, ntpc, 0);
+      undoChangePitch(n, npitch, ntpc, 0, n->line(), n->fret());
       }
 
 //---------------------------------------------------------

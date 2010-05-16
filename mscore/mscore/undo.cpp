@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -422,9 +422,9 @@ void Score::undoChangeSubtype(Element* element, int st)
 //   undoChangePitch
 //---------------------------------------------------------
 
-void Score::undoChangePitch(Note* note, int pitch, int tpc, int userAccidental)
+void Score::undoChangePitch(Note* note, int pitch, int tpc, int userAccidental, int line, int fret)
       {
-      _undo->push(new ChangePitch(note, pitch, tpc, userAccidental));
+      _undo->push(new ChangePitch(note, pitch, tpc, userAccidental, line, fret));
       }
 
 //---------------------------------------------------------
@@ -1042,11 +1042,14 @@ void ChangeColor::flip()
 //   ChangePitch
 //---------------------------------------------------------
 
-ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc, int _userAccidental)
+ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc,
+   int _userAccidental, int l, int f)
       {
       note  = _note;
       pitch = _pitch;
       tpc   = _tpc;
+      line  = l;
+      fret  = f;
       userAccidental = _userAccidental;
       }
 
@@ -1055,13 +1058,19 @@ void ChangePitch::flip()
       int f_pitch   = note->pitch();
       int f_tpc     = note->tpc();
       int f_userAcc = note->userAccidental();
+      int f_line    = note->line();
+      int f_fret    = note->fret();
 
       note->setPitch(pitch, tpc);
       note->setUserAccidental(userAccidental);
+      note->setLine(line);
+      note->setFret(fret);
 
       pitch          = f_pitch;
       tpc            = f_tpc;
       userAccidental = f_userAcc;
+      line           = f_line;
+      fret           = f_fret;
       }
 
 //---------------------------------------------------------
