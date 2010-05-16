@@ -1356,7 +1356,8 @@ void Score::upDown(bool up, bool octave)
             if ((oNote->pitch() != newPitch) || (oNote->tpc() != newTpc) || oNote->userAccidental()) {
                   if (oNote->accidental())            // to avoid undo() crash
                         undoRemoveElement(oNote->accidental());
-                  undoChangePitch(oNote, newPitch, newTpc, 0);
+                  undoChangePitch(oNote, newPitch, newTpc, 0, oNote->line(), oNote->fret());
+                  oNote->setFret(-1);
                   }
 
             // play new note with velocity 80 for 0.3 sec:
@@ -1642,7 +1643,7 @@ void Score::changeAccidental(Note* note, int accidental)
                   note->setUserAccidental(ACC_NONE);
                   if (note->accidental())
                         cmdRemove(note->accidental());
-                  _undo->push(new ChangePitch(note, note->pitch(), note->tpc(), ACC_NONE));
+                  undoChangePitch(note, note->pitch(), note->tpc(), ACC_NONE, note->line(), note->fret());
                   return;
                   }
             if (note->accidentalType() == ACC_NATURAL)
@@ -1662,7 +1663,7 @@ void Score::changeAccidental(Note* note, int accidental)
             accType = ACC_NATURAL;
       int user   = ((acc2 == acc) || (accType != accidental)) ? accidental : ACC_NONE;
 
-      _undo->push(new ChangePitch(note, pitch, tpc, user));
+      undoChangePitch(note, pitch, tpc, user, note->line(), note->fret());
       //
       // handle ties
       //
@@ -1675,7 +1676,7 @@ void Score::changeAccidental(Note* note, int accidental)
             Note* n = note;
             while(n->tieFor()) {
                   n = n->tieFor()->endNote();
-                  _undo->push(new ChangePitch(n, pitch, tpc, user));
+                  undoChangePitch(n, pitch, tpc, user, n->line(), n->fret());
                   }
             }
       }

@@ -39,7 +39,7 @@ Tablature::Tablature(int numFrets, int numStrings, int strings[])
 //   convertPitch
 //---------------------------------------------------------
 
-bool Tablature::convertPitch(int pitch, int* string, int* fret)
+bool Tablature::convertPitch(int pitch, int* string, int* fret) const
       {
       int strings = stringTable.size();
 
@@ -60,5 +60,14 @@ bool Tablature::convertPitch(int pitch, int* string, int* fret)
       return false;
       }
 
+//---------------------------------------------------------
+//   getPitch
+//---------------------------------------------------------
+
+int Tablature::getPitch(int string, int fret) const
+      {
+      int strings = stringTable.size();
+      return stringTable[strings - string - 1] + fret;
+      }
 
 

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -67,7 +67,8 @@ class Note : public Element {
       Q_DECLARE_TR_FUNCTIONS(Note)
 
       int _subchannel;        ///< articulation
-      int _line;              ///< y-Position; 0 - top line.
+      char _line;             ///< y-Position; 0 - top line.
+      char _fret;             ///< for tablature view
 
       bool dragMode;
       char _pitch;            ///< Note pitch as midi value (0 - 127).
@@ -157,6 +158,9 @@ class Note : public Element {
 
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n);
+
+      int fret() const                { return _fret; }
+      void setFret(int val)           { _fret = val;  }
 
       virtual void add(Element*);
       virtual void remove(Element*);

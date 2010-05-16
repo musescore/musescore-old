@@ -126,6 +126,7 @@ Note::Note(Score* s)
       _mirror            = false;
       _userMirror        = DH_AUTO;
       _line              = 0;
+      _fret              = -1;
       _lineOffset        = 0;
       _tieFor            = 0;
       _tieBack           = 0;
@@ -159,6 +160,7 @@ Note::Note(const Note& n)
       _tuning         = n._tuning;
       _tpc            = n._tpc;
       _line           = n._line;
+      _fret           = n._fret;
       _userAccidental = n._userAccidental;
       _accidental     = 0;
       if (n._accidental)
@@ -488,7 +490,6 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   int dummy;
                   if (!guitarTablature.convertPitch(_pitch, &dummy, &fret))
                         return;
-                  int sym;
                   QFont f("DejaVuSerif");
                   int size = lrint(9.0 * DPI / PPI);
                   f.setPixelSize(size);
@@ -580,6 +581,10 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
 
       xml.tag("pitch", rpitch);
       xml.tag("tpc", rtpc);
+      if (_fret >= 0) {
+            xml.tag("fret", _fret);
+            xml.tag("line", _line);
+            }
 
       if (_tuning != 0.0)
             xml.tag("tuning", _tuning);
@@ -647,6 +652,10 @@ void Note::read(QDomElement e)
                   _pitch  = i;
                   _ppitch = i;
                   }
+            else if (tag == "fret")
+                  _fret = i;
+            else if (tag == "line")
+                  _line = i;
             else if (tag == "tuning")
                   _tuning = val.toDouble();
             else if (tag == "tpc")
@@ -787,16 +796,26 @@ void Note::endDrag()
       {
       if (_lineOffset == 0)
             return;
-      setLine(_line + _lineOffset);
+      int nLine    = _line + _lineOffset;
       _lineOffset  = 0;
       dragMode     = false;
       int staffIdx = chord()->staffIdx() + chord()->staffMove();
       Staff* staff = score()->staff(staffIdx);
-      int tick     = chord()->tick();
-      int clef     = staff->clef(tick);
-      int key      = staff->key(tick).accidentalType;
-      int npitch   = line2pitch(_line, clef, key);
-      score()->undoChangePitch(this, npitch, pitch2tpc(npitch, key), 0);
+      int npitch;
+      int tpc;
+      if (staff->tablature()) {
+            npitch = guitarTablature.getPitch(_line, _fret);
+            tpc    = pitch2tpc(npitch, 0);
+            }
+      else {
+            setLine(nLine);
+            int tick     = chord()->tick();
+            int clef     = staff->clef(tick);
+            int key      = staff->key(tick).accidentalType;
+            npitch   = line2pitch(_line, clef, key);
+            tpc      = pitch2tpc(npitch, key);
+            }
+      score()->undoChangePitch(this, npitch, tpc, 0, nLine, _fret);
       score()->select(this, SELECT_SINGLE, 0);
       }
 
@@ -1246,8 +1265,13 @@ void Note::layout()
 void Note::layout1(char* tversatz)
       {
       if (staff()->tablature()) {
-            int fret;
-            guitarTablature.convertPitch(_pitch, &_line, &fret);
+            if (_fret < 0) {
+                  int line, fret;
+                  if (guitarTablature.convertPitch(_pitch, &line, &fret)) {
+                        _fret = fret;
+                        _line = line;
+                        }
+                  }
             }
       else {
             _line          = tpc2step(_tpc) + (_pitch/12) * 7;
@@ -1263,9 +1287,9 @@ void Note::layout1(char* tversatz)
                   }
             else  {
                   int accVal = tpc2alter(_tpc);
-                  if ((accVal != tversatz[_line]) || hidden()) {
+                  if ((accVal != tversatz[int(_line)]) || hidden()) {
                         if (_tieBack == 0)
-                              tversatz[_line] = accVal;
+                              tversatz[int(_line)] = accVal;
                         acci = Accidental::value2subtype(accVal);
                         if (acci == ACC_NONE)
                               acci = ACC_NATURAL;

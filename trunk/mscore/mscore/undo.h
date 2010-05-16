@@ -345,10 +345,12 @@ class ChangePitch : public UndoCommand {
       int pitch;
       int tpc;
       int userAccidental;
+      int line;
+      int fret;
       void flip();
 
    public:
-      ChangePitch(Note* note, int pitch, int tpc, int userAccidental);
+      ChangePitch(Note* note, int pitch, int tpc, int userAccidental, int l, int f);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };
