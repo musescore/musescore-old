@@ -123,7 +123,7 @@ void Glissando::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void Glissando::draw(QPainter& p) const
+void Glissando::draw(QPainter& p, ScoreView*) const
       {
       double _spatium = spatium();
 

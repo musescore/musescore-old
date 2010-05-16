@@ -27,8 +27,11 @@
 //---------------------------------------------------------
 
 class Tablature {
+      QList<int> stringTable;
+      int frets;
 
    public:
+      Tablature(int numFrets, int numStrings, int strings[]);
       bool convertPitch(int pitch, int* string, int* fret);
       };
 

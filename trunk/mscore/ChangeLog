@@ -1,3 +1,6 @@
+16.may (ws)
+      - add DejaVuSerif.ttf; used as build in standard text font for
+        tablature
 15.may (ws)
       - first code for tablature support; new test file: tab.mscx
       - ove import update from Rui Fan:

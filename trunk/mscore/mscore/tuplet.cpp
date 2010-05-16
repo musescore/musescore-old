@@ -356,12 +356,12 @@ QRectF Tuplet::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Tuplet::draw(QPainter& p) const
+void Tuplet::draw(QPainter& p, ScoreView* v) const
       {
       if (_number) {
             p.save();
             p.translate(_number->pos());
-            _number->draw(p);
+            _number->draw(p, v);
             p.restore();
             }
       if (_hasBracket) {

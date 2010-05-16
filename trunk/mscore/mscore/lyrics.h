@@ -57,7 +57,7 @@ class Lyrics : public Text {
       Syllabic syllabic() const     { return _syllabic; }
       virtual void add(Element*);
       virtual void remove(Element*);
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       int endTick() const           { return _endTick;    }
       void setEndTick(int tick)     { _endTick = tick;    }
       void clearSeparator()         { _separator.clear(); } // TODO: memory leak

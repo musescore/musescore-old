@@ -119,13 +119,13 @@ void Lyrics::remove(Element* el)
 //   draw
 //---------------------------------------------------------
 
-void Lyrics::draw(QPainter& p) const
+void Lyrics::draw(QPainter& p, ScoreView* v) const
       {
-      Text::draw(p);
+      Text::draw(p, v);
       foreach(const Line* l, _separator) {
             QPointF pt(l->pos());
             p.translate(pt);
-            l->draw(p);
+            l->draw(p, v);
             p.translate(-pt);
             }
       }

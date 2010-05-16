@@ -166,7 +166,7 @@ void Symbol::layout()
 //   Symbol::draw
 //---------------------------------------------------------
 
-void Symbol::draw(QPainter& p) const
+void Symbol::draw(QPainter& p, ScoreView*) const
       {
       symbols[_sym].draw(p, magS());
       }

@@ -197,11 +197,10 @@ void KeySig::layout()
 //   set
 //---------------------------------------------------------
 
-void KeySig::draw(QPainter& p) const
+void KeySig::draw(QPainter& p, ScoreView*) const
       {
-      foreach(const KeySym* ks, keySymbols) {
+      foreach(const KeySym* ks, keySymbols)
             symbols[ks->sym].draw(p, magS(), ks->pos.x(), ks->pos.y());
-            }
       }
 
 //---------------------------------------------------------

@@ -32,7 +32,7 @@
 //   draw
 //---------------------------------------------------------
 
-void HairpinSegment::draw(QPainter& p) const
+void HairpinSegment::draw(QPainter& p, ScoreView*) const
       {
       double h1 = point(score()->styleS(ST_hairpinHeight)) * .5;
       double h2 = point(score()->styleS(ST_hairpinContHeight)) * .5;

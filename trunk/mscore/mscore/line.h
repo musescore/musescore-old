@@ -57,7 +57,7 @@ class LineSegment : public Element {
       LineSegment(Score* s);
       LineSegment(const LineSegment&);
       virtual LineSegment* clone() const = 0;
-      virtual void draw(QPainter& p) const = 0;
+      virtual void draw(QPainter& p, ScoreView*) const = 0;
       SLine* line() const                 { return (SLine*)parent(); }
       const QPointF& userOff2() const     { return _userOff2;  }
       void setUserOff2(const QPointF& o)  { _userOff2 = o;     }

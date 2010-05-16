@@ -116,7 +116,7 @@ void Bracket::layout()
 //   draw
 //---------------------------------------------------------
 
-void Bracket::draw(QPainter& p) const
+void Bracket::draw(QPainter& p, ScoreView*) const
       {
       p.setBrush(p.pen().color());
       p.drawPath(path);

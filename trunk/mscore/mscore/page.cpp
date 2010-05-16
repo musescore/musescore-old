@@ -166,7 +166,7 @@ void Page::layout()
 //    bounding rectange fr is relative to page QPointF
 //---------------------------------------------------------
 
-void Page::draw(QPainter& p) const
+void Page::draw(QPainter& p, ScoreView*) const
       {
       QRectF r = bbox();
       qreal x1 = r.x();

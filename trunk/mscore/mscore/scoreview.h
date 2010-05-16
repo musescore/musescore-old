@@ -288,6 +288,7 @@ class ScoreView : public QWidget {
       void changeLineSegment(bool);
       void midiNoteReceived(int pitch, bool);
       void changeVoice(int voice);
+      void drawBackground(QPainter& p, QRectF r);
       };
 
 extern int searchStaff(const Element* element);

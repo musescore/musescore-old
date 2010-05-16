@@ -41,7 +41,7 @@ LayoutBreak::LayoutBreak(Score* score)
 //   draw
 //---------------------------------------------------------
 
-void LayoutBreak::draw(QPainter& p) const
+void LayoutBreak::draw(QPainter& p, ScoreView*) const
       {
       if (score()->printing())
             return;

@@ -55,7 +55,7 @@ class Stem : public Element {
 
       virtual Stem* clone() const      { return new Stem(*this); }
       virtual ElementType type() const { return STEM; }
-      virtual void draw(QPainter& p) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       void setLen(double v)            { _len = v; }
       double stemLen() const           { return _len + point(_userLen); }
       virtual QRectF bbox() const;
@@ -90,7 +90,7 @@ class StemSlash : public Element {
 
       virtual StemSlash* clone() const { return new StemSlash(*this); }
       virtual ElementType type() const { return STEM_SLASH; }
-      virtual void draw(QPainter& p) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual QRectF bbox() const;
       };
 

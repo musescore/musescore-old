@@ -703,7 +703,7 @@ QRectF StaffLines::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void StaffLines::draw(QPainter& p) const
+void StaffLines::draw(QPainter& p, ScoreView*) const
       {
       QPointF _pos(0.0, 0.0);
       double _spatium = spatium();
@@ -885,7 +885,7 @@ void Line::layout()
 //   draw
 //---------------------------------------------------------
 
-void Line::draw(QPainter& p) const
+void Line::draw(QPainter& p, ScoreView*) const
       {
       double sp = spatium();
       QPen pen(p.pen());
@@ -943,12 +943,12 @@ Compound::Compound(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Compound::draw(QPainter& p) const
+void Compound::draw(QPainter& p, ScoreView* v) const
       {
       foreach(Element* e, elemente) {
             QPointF pt(e->pos());
             p.translate(pt);
-            e->draw(p);
+            e->draw(p, v);
             p.translate(-pt);
             }
       }
@@ -1047,7 +1047,7 @@ QRectF Cursor::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Cursor::draw(QPainter& p) const
+void Cursor::draw(QPainter& p, ScoreView*) const
       {
       if (!(_on && _blink))
             return;
@@ -1073,7 +1073,7 @@ Lasso::Lasso(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Lasso::draw(QPainter& p) const
+void Lasso::draw(QPainter& p, ScoreView*) const
       {
       p.setBrush(Qt::NoBrush);
       QPen pen(QColor(preferences.selectColor[0]));
@@ -1104,7 +1104,7 @@ void Element::dump() const
 //   RubberBand::draw
 //---------------------------------------------------------
 
-void RubberBand::draw(QPainter& p) const
+void RubberBand::draw(QPainter& p, ScoreView*) const
       {
       if (!showRubberBand)
             return;

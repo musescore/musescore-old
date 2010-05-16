@@ -50,7 +50,7 @@ class KeySig : public Element {
       KeySig(const KeySig&);
       virtual KeySig* clone() const { return new KeySig(*this); }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual ElementType type() const { return KEYSIG; }
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);

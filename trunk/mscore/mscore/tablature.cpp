@@ -20,7 +20,20 @@
 
 #include "tablature.h"
 
-Tablature guitarTablature;
+static int guitarStrings[6] = { 40, 45, 50, 55, 59, 64 };
+
+Tablature guitarTablature(13, 6, guitarStrings);
+
+//---------------------------------------------------------
+//   Tablature
+//---------------------------------------------------------
+
+Tablature::Tablature(int numFrets, int numStrings, int strings[])
+      {
+      frets = numFrets;
+      for (int i = 0; i < numStrings; ++i)
+            stringTable.append(strings[i]);
+      }
 
 //---------------------------------------------------------
 //   convertPitch
@@ -28,17 +41,18 @@ Tablature guitarTablature;
 
 bool Tablature::convertPitch(int pitch, int* string, int* fret)
       {
-      static int stringTable[6] = { 40, 45, 50, 55, 59, 64 };
-      // static int frets = 13;
-      static int frets = 4;
-      static int strings = 6;
+      int strings = stringTable.size();
 
       for (int i = 0; i < strings; ++i) {
             int min = stringTable[i];
-            int max = min + frets;
+            int max;
+            if (i + 1 == strings)
+                  max = min + frets;
+            else
+                  max = stringTable[i+1] - 1;
 
             if (pitch >= min && pitch <= max) {
-                  *string = i;
+                  *string = strings - i - 1;
                   *fret   = pitch - min;
                   return true;
                   }

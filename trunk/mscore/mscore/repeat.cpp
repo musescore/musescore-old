@@ -87,7 +87,7 @@ RepeatMeasure::RepeatMeasure(Score* score)
 //   draw
 //---------------------------------------------------------
 
-void RepeatMeasure::draw(QPainter& p) const
+void RepeatMeasure::draw(QPainter& p, ScoreView*) const
       {
       p.setBrush(p.pen().color());
       p.drawPath(path);

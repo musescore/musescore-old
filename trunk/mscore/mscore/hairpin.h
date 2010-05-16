@@ -36,7 +36,7 @@ class HairpinSegment : public LineSegment {
       Hairpin* hairpin() const              { return (Hairpin*)parent(); }
       virtual HairpinSegment* clone() const { return new HairpinSegment(*this); }
       virtual ElementType type() const      { return HAIRPIN_SEGMENT; }
-      virtual void draw(QPainter&) const;
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual QRectF bbox() const;
       };
 

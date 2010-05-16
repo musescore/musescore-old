@@ -838,10 +838,10 @@ void Harmony::layout()
 //   draw
 //---------------------------------------------------------
 
-void Harmony::draw(QPainter& p) const
+void Harmony::draw(QPainter& p, ScoreView* v) const
       {
       if (_editMode || textList.isEmpty()) {
-            Text::draw(p);
+            Text::draw(p, v);
             return;
             }
       foreach(const TextSegment* ts, textList) {

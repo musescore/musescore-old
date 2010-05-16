@@ -479,33 +479,36 @@ double Note::stemYoff(bool upFlag) const
 //   draw
 //---------------------------------------------------------
 
-void Note::draw(QPainter& p) const
+void Note::draw(QPainter& p, ScoreView* v) const
       {
       if (!_hidden || !userOff().isNull()) {
             if (chord() && chord()->staff()->tablature()) {
+                  double mag = magS();
                   int fret;
                   int dummy;
-                  guitarTablature.convertPitch(_pitch, &dummy, &fret);
+                  if (!guitarTablature.convertPitch(_pitch, &dummy, &fret))
+                        return;
                   int sym;
-                  switch(fret) {
-                        default:
-                        case 0: sym = zeroSym; break;
-                        case 1: sym = oneSym; break;
-                        case 2: sym = twoSym; break;
-                        case 3: sym = threeSym; break;
-                        case 4: sym = fourSym; break;
-                        case 5: sym = fiveSym; break;
-                        case 6: sym = sixSym; break;
-                        case 7: sym = sevenSym; break;
-                        case 8: sym = eightSym; break;
-                        case 9: sym = nineSym; break;
-                        }
-                  double mag = magS() * .7;
-                  QRectF bb = symbols[sym].bbox(mag);
-                  double y = -bb.height() * .5;
+                  QFont f("DejaVuSerif");
+                  int size = lrint(9.0 * DPI / PPI);
+                  f.setPixelSize(size);
+                  double imag = 1.0 / mag;
+                  p.scale(mag, mag);
+                  p.setFont(f);
+
+                  QFontMetricsF fm(f);
+                  QString s = QString("%1").arg(fret);
+                  QRectF bb = fm.tightBoundingRect(s);
+                  bb = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
+                  double y = bb.height() * .5;
                   double d = spatium() * .2;
-                  p.eraseRect(bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0));
-                  symbols[sym].draw(p, mag, 0.0, y);
+                  if (v)
+                        v->drawBackground(p, bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0));
+                  else
+                        p.eraseRect(bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0));
+
+                  p.drawText(0.0, y, s);
+                  p.scale(imag, imag);
                   }
             else {
                   //
@@ -760,8 +763,18 @@ QRectF Note::drag(const QPointF& s)
       {
       dragMode = true;
       QRectF bb(chord()->bbox());
-      _lineOffset = lrint(s.y() * 2.0 / spatium());
 
+      double _spatium = spatium();
+      bool tab = staff()->tablature();
+      double step = tab ? _spatium * 1.5 : _spatium * .5;
+      _lineOffset = lrint(s.y() / step);
+      if (tab) {
+            int strings = staff()->lines();
+            if (_line + _lineOffset < 0)
+                  _lineOffset = -_line;
+            else if (_line + _lineOffset >= strings)
+                  _lineOffset = strings - _line - 1;
+            }
       score()->setLayout(chord()->measure());
       return bb.translated(chord()->canvasPos());
       }
@@ -812,7 +825,7 @@ void ShadowNote::setHeadGroup(int val)
 //   draw
 //---------------------------------------------------------
 
-void ShadowNote::draw(QPainter& p) const
+void ShadowNote::draw(QPainter& p, ScoreView*) const
       {
       if (!visible())
             return;

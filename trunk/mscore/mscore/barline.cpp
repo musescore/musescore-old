@@ -86,7 +86,7 @@ void BarLine::getY(double* y1, double* y2) const
 //   draw
 //---------------------------------------------------------
 
-void BarLine::draw(QPainter& p) const
+void BarLine::draw(QPainter& p, ScoreView*) const
       {
       double lw = point(score()->styleS(ST_barWidth));
       double y1, y2;
