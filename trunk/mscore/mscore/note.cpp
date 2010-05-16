@@ -486,10 +486,6 @@ void Note::draw(QPainter& p, ScoreView* v) const
       if (!_hidden || !userOff().isNull()) {
             if (chord() && chord()->staff()->tablature()) {
                   double mag = magS();
-                  int fret;
-                  int dummy;
-                  if (!guitarTablature.convertPitch(_pitch, &dummy, &fret))
-                        return;
                   QFont f("DejaVuSerif");
                   int size = lrint(9.0 * DPI / PPI);
                   f.setPixelSize(size);
@@ -498,16 +494,15 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   p.setFont(f);
 
                   QFontMetricsF fm(f);
-                  QString s = QString("%1").arg(fret);
+                  QString s = QString::number(_fret);
                   QRectF bb = fm.tightBoundingRect(s);
-                  bb = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
-                  double y = bb.height() * .5;
-                  double d = spatium() * .2;
+                  bb        = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
+                  double y  = bb.height() * .5;
+                  double d  = spatium() * .2;
                   if (v)
                         v->drawBackground(p, bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0));
                   else
                         p.eraseRect(bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0));
-
                   p.drawText(0.0, y, s);
                   p.scale(imag, imag);
                   }
@@ -804,7 +799,7 @@ void Note::endDrag()
       int npitch;
       int tpc;
       if (staff->tablature()) {
-            npitch = guitarTablature.getPitch(_line, _fret);
+            npitch = guitarTablature.getPitch(nLine, _fret);
             tpc    = pitch2tpc(npitch, 0);
             }
       else {
