@@ -1240,6 +1240,12 @@ void Chord::layout()
       if (_notes.empty())
             return;
 
+/*      if (staff() && staff()->tablature()) {
+            foreach(Note* note, _notes)
+                  note->layout();
+            return;
+            }
+  */
       double _spatium  = spatium();
 
       if (!segment()) {

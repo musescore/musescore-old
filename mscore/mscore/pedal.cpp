@@ -32,8 +32,11 @@ Pedal::Pedal(Score* s)
    : TextLine(s)
       {
       setBeginSymbol(pedalPedSym);
+      setBeginSymbolOffset(QPointF(0.0, -.2));
+
       setEndHook(true);
-      setEndHookHeight(Spatium(-1.5));
+      setBeginHookHeight(Spatium(-1.2));
+      setEndHookHeight(Spatium(-1.2));
       }
 
 //---------------------------------------------------------

@@ -162,7 +162,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
       {
       Staff* staff = Score::staff(staffIdx);
 
-      if (staff->part()->drumset())
+      if (staff->part()->drumset() || staff->tablature())
             return;
 
       int startTrack = staffIdx * VOICES;
@@ -771,7 +771,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
       {
       int tick = m->tick();
       int i = 0;
-      foreach(Staff* staff, _staves) {
+      foreach (Staff* staff, _staves) {
             if (!m->system()->staff(i)->show()) {
                   ++i;
                   continue;
@@ -1286,14 +1286,14 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                     TimeSig* ts = new TimeSig(this, sig2.fraction().denominator(),
                                        sig2.fraction().numerator());
                                     Measure* nm = m->nextMeasure();
-                                    if(nm){
-                                        Segment* tss = nm->findSegment(SegTimeSig, tick);
-                                        if(tss){
-                                            TimeSig* nts = (TimeSig*)tss->element(0);
-                                            if(nts)
-                                                ts->setSubtype(nts->subtype());
-                                            }
-                                        }
+                                    if (nm){
+                                          Segment* tss = nm->findSegment(SegTimeSig, tick);
+                                          if (tss) {
+                                                TimeSig* nts = (TimeSig*)tss->element(0);
+                                                if (nts)
+                                                      ts->setSubtype(nts->subtype());
+                                                }
+                                          }
                                     ts->setTrack(track);
                                     ts->setGenerated(true);
                                     ts->setMag(ts->staff()->mag());

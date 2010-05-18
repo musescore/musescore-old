@@ -2142,7 +2142,25 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","show omr image"),
          QT_TRANSLATE_NOOP("action","show omr image")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "enh-up",
+         QT_TRANSLATE_NOOP("action","enharmonic up"),
+         Qt::Key_J,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","enharmonic up"),
+         QT_TRANSLATE_NOOP("action","enharmonic up")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "enh-down",
+         QT_TRANSLATE_NOOP("action","enharmonic down"),
+         Qt::CTRL+Qt::Key_J,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","enharmonic down"),
+         QT_TRANSLATE_NOOP("action","enharmonic down")
+         ),
       // xml==0  marks end of list
-      Shortcut(0, 0, 0, QKeySequence::UnknownKey),
+      Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };
 

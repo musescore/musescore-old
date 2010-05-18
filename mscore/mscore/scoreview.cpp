@@ -61,6 +61,7 @@
 #include "slur.h"
 #include "harmony.h"
 #include "navigate.h"
+#include "tablature.h"
 
 //---------------------------------------------------------
 //   stateNames
@@ -2613,6 +2614,10 @@ void ScoreView::cmd(const QAction* a)
             changeVoice(2);
       else if (cmd == "voice-4")
             changeVoice(3);
+      else if (cmd == "enh-up")
+            cmdChangeEnharmonic(true);
+      else if (cmd == "enh-down")
+            cmdChangeEnharmonic(false);
       else
             _score->cmd(a);
       _score->processMidiInput();
@@ -3672,3 +3677,30 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
                   _score->endCmd();
             }
       }
+
+//---------------------------------------------------------
+//   cmdChangeEnharmonic
+//---------------------------------------------------------
+
+void ScoreView::cmdChangeEnharmonic(bool up)
+      {
+      QList<Note*> nl = _score->selection().noteList();
+      foreach(Note* n, nl) {
+            Staff* staff = n->staff();
+            if (staff->part()->useDrumset())
+                  continue;
+            if (staff->tablature()) {
+                  int string = n->line() + (up ? 1 : -1);
+                  int fret = staff->tablature()->fret(n->pitch(), string);
+                  if (fret != -1) {
+                        _score->startCmd();
+                        _score->undoChangePitch(n, n->pitch(), n->tpc(), 0, string, fret);
+                        _score->endCmd();
+                        }
+                  }
+            else {
+                  // TODO
+                  }
+            }
+      }
+

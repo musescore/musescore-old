@@ -26,6 +26,7 @@
 #include "clef.h"
 #include "bracket.h"
 #include "utils.h"
+#include "tablature.h"
 
 QList<InstrumentGroup*> instrumentGroups;
 QList<MidiArticulation*> articulation;                // global articulations
@@ -77,7 +78,6 @@ InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
       else
             drumset = 0;
       midiActions = t.midiActions;
-
       channel = t.channel;
       }
 
@@ -97,27 +97,23 @@ void InstrumentTemplate::write(Xml& xml) const
       xml.tag("shortName",  shortName);
       xml.tag("description", trackName);
       xml.tag("extended", extended);
-      if (tablature) {
+      if (tablature)
+            tablature->write(xml);
+      if (staves == 1) {
             xml.tag("clef", clefIdx[0]);
-            xml.tag(QString("staffLines tab=\"%1\"").arg(tablature), staffLines[0]);
+            if (staffLines[0] != 5)
+                  xml.tag("stafflines", staffLines[0]);
+            if (smallStaff[0])
+                  xml.tag("smallStaff", smallStaff[0]);
             }
       else {
-            if (staves == 1) {
-                  xml.tag("clef", clefIdx[0]);
+            xml.tag("staves", staves);
+            for (int i = 0; i < staves; ++i) {
+                  xml.tag(QString("clef staff=\"%1\"").arg(i), clefIdx[i]);
                   if (staffLines[0] != 5)
-                        xml.tag("stafflines", staffLines[0]);
+                        xml.tag(QString("stafflines staff=\"%1\"").arg(i), staffLines[i]);
                   if (smallStaff[0])
-                        xml.tag("smallStaff", smallStaff[0]);
-                  }
-            else {
-                  xml.tag("staves", staves);
-                  for (int i = 0; i < staves; ++i) {
-                        xml.tag(QString("clef staff=\"%1\"").arg(i), clefIdx[i]);
-                        if (staffLines[0] != 5)
-                              xml.tag(QString("stafflines staff=\"%1\"").arg(i), staffLines[i]);
-                        if (smallStaff[0])
-                              xml.tag(QString("smallStaff staff=\"%1\"").arg(i), smallStaff[i]);
-                        }
+                        xml.tag(QString("smallStaff staff=\"%1\"").arg(i), smallStaff[i]);
                   }
             }
       xml.tag("bracket", bracket);
@@ -204,8 +200,8 @@ void InstrumentTemplate::read(QDomElement e)
       bool customDrumset = false;
       staves = 1;
       for (int i = 0; i < MAX_STAVES; ++i) {
-            clefIdx[i]    = 0;
-            staffLines[i] = 5;
+            clefIdx[i]    = -1;
+            staffLines[i] = -1;
             smallStaff[i] = false;
             }
       bracket    = -1;
@@ -243,13 +239,16 @@ void InstrumentTemplate::read(QDomElement e)
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
                   staffLines[idx] = i;
-                  tablature = e.attribute("tab", "0").toInt();
                   }
             else if (tag == "smallStaff") {
                   int idx = e.attribute("staff", "1").toInt() - 1;
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
                   smallStaff[idx] = i;
+                  }
+            else if (tag == "Tablature") {
+                  tablature = new Tablature;
+                  tablature->read(e);
                   }
             else if (tag == "bracket")
                   bracket = i;
@@ -295,6 +294,20 @@ void InstrumentTemplate::read(QDomElement e)
                   }
             else
                   domError(e);
+            }
+      for (int i = 0; i < MAX_STAVES; ++i) {
+            if (tablature) {
+                  if (clefIdx[i] == -1)
+                        clefIdx[i] = 13;
+                  if (staffLines[i] == -1)
+                        staffLines[i] = tablature->strings();
+                  }
+            else {
+                  if (clefIdx[i] == -1)
+                        clefIdx[i] = 0;
+                  if (staffLines[i] == -1)
+                        staffLines[i] = 5;
+                  }
             }
       if (channel.isEmpty()) {
             Channel a;

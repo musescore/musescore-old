@@ -119,7 +119,7 @@ Measure::Measure(Score* s)
             s->lines->setTrack(staffIdx * VOICES);
             s->lines->setLines(staff->lines());
             s->lines->setParent(this);
-            s->lines->setTablature(staff->tablature());
+            s->lines->setDistance(staff->tablature() ? 1.5 : 1.0);
             s->lines->setVisible(!staff->invisible());
             staves.push_back(s);
             }
@@ -1354,6 +1354,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             ms->lines    = new StaffLines(score());
             ms->lines->setTrack(i * VOICES);
             ms->lines->setLines(staff->lines());
+            ms->lines->setDistance(staff->tablature() ? 1.5 : 1.0);
             ms->lines->setParent(this);
             ms->lines->setVisible(!staff->invisible());
 

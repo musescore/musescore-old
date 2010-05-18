@@ -31,6 +31,7 @@
 #include "segment.h"
 #include "style.h"
 #include "measure.h"
+#include "tablature.h"
 
 //---------------------------------------------------------
 //   idx
@@ -184,6 +185,7 @@ Staff::~Staff()
       {
       delete _clefList;
       delete _keymap;
+      delete _tablature;
       _keymap   = 0;      // DEBUG
       _clefList = 0;
       }
@@ -216,7 +218,7 @@ void Staff::write(Xml& xml) const
       if (lines() != 5)
             xml.tag("lines", lines());
       if (tablature())
-            xml.tag("tab", tablature());
+            _tablature->write(xml);
       if (small() && !xml.excerptmode)    // switch small staves to normal ones when extracting part
             xml.tag("small", small());
       if (invisible())
@@ -246,8 +248,10 @@ void Staff::read(QDomElement e)
             int v = e.text().toInt();
             if (tag == "lines")
                   setLines(v);
-            else if (tag == "tab")
-                  setTablature(v);
+            else if (tag == "Tablature") {
+                  _tablature = new Tablature();
+                  _tablature->read(e);
+                  }
             else if (tag == "small")
                   setSmall(v);
             else if (tag == "invisible")
@@ -508,5 +512,19 @@ int Staff::channel(int tick,  int voice) const
             return _channelList[voice].begin().value();
       --i;
       return i.value();
+      }
+
+//---------------------------------------------------------
+//   setTablature
+//---------------------------------------------------------
+
+void Staff::setTablature(Tablature* val)
+      {
+      if (val)
+            _tablature = new Tablature(*val);
+      else {
+            delete _tablature;
+            _tablature = 0;
+            }
       }
 

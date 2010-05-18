@@ -153,6 +153,24 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                         symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
                         }
                   else {
+                        double doty1, doty2;
+                        if (staff()->tablature()) {
+                              switch(staff()->lines()) {
+                                    case 4:
+                                          doty1 = .5 * 1.5;
+                                          doty2 = 2.5 * 1.5;
+                                          break;
+                                    default:
+                                    case 6:
+                                          doty1 = 1.5 * 1.5;
+                                          doty2 = 3.5 * 1.5;
+                                          break;
+                                    }
+                              }
+                        else {
+                              doty1 = 1.5;
+                              doty2 = 2.5;
+                              }
                         Segment* segment = (Segment*)parent();
                         Measure* measure = segment->measure();
                         System* system   = measure->system();
@@ -161,8 +179,8 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
                               double yy = l2->y2() - yp;
 
-                              symbols[dotSym].draw(p, mags, x0, yy - 1.5 * ld);
-                              symbols[dotSym].draw(p, mags, x0, yy - 2.5 * ld);
+                              symbols[dotSym].draw(p, mags, x0, yy - doty1 * ld);
+                              symbols[dotSym].draw(p, mags, x0, yy - doty2 * ld);
                               }
                         }
 
@@ -184,7 +202,6 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                   double lw2  = point(score()->styleS(ST_endBarWidth));
                   double d1   = point(score()->styleS(ST_endBarDistance));
                   double dotw = symbols[dotSym].width(mags);
-
                   double x1   =  dotw + d1 + lw * .5;
                   double x2   =  dotw + d1 + lw + d1 + lw2 * .5;
 
@@ -193,6 +210,24 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                         symbols[dotSym].draw(p, mags, 0.0, 2.5 * ld);
                         }
                   else {
+                        double doty1, doty2;
+                        if (staff()->tablature()) {
+                              switch(staff()->lines()) {
+                                    case 4:
+                                          doty1 = .5 * 1.5;
+                                          doty2 = 2.5 * 1.5;
+                                          break;
+                                    default:
+                                    case 6:
+                                          doty1 = 1.5 * 1.5;
+                                          doty2 = 3.5 * 1.5;
+                                          break;
+                                    }
+                              }
+                        else {
+                              doty1 = 1.5;
+                              doty2 = 2.5;
+                              }
                         Segment* segment = (Segment*)parent();
                         Measure* measure = segment->measure();
                         System* system   = measure->system();
@@ -200,9 +235,8 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
                               double yy = l2->y2() - yp;
-
-                              symbols[dotSym].draw(p, mags, 0.0, yy - 1.5 * ld);
-                              symbols[dotSym].draw(p, mags, 0.0, yy - 2.5 * ld);
+                              symbols[dotSym].draw(p, mags, 0.0, yy - doty1 * ld);
+                              symbols[dotSym].draw(p, mags, 0.0, yy - doty2 * ld);
                               }
                         }
 
@@ -236,6 +270,24 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                         symbols[dotSym].draw(p, mags, x4, 2.5 * ld);
                         }
                   else {
+                        double doty1, doty2;
+                        if (staff()->tablature()) {
+                              switch(staff()->lines()) {
+                                    case 4:
+                                          doty1 = .5 * 1.5;
+                                          doty2 = 2.5 * 1.5;
+                                          break;
+                                    default:
+                                    case 6:
+                                          doty1 = 1.5 * 1.5;
+                                          doty2 = 3.5 * 1.5;
+                                          break;
+                                    }
+                              }
+                        else {
+                              doty1 = 1.5;
+                              doty2 = 2.5;
+                              }
                         Segment* segment = (Segment*)parent();
                         Measure* measure = segment->measure();
                         System* system   = measure->system();
@@ -244,10 +296,10 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
                               double yy = l2->y2() - yp;
 
-                              symbols[dotSym].draw(p, mags, 0.0, yy - 1.5 * ld);
-                              symbols[dotSym].draw(p, mags, 0.0, yy - 2.5 * ld);
-                              symbols[dotSym].draw(p, mags, x4, yy - 1.5 * ld);
-                              symbols[dotSym].draw(p, mags, x4, yy - 2.5 * ld);
+                              symbols[dotSym].draw(p, mags, 0.0, yy - doty1 * ld);
+                              symbols[dotSym].draw(p, mags, 0.0, yy - doty2 * ld);
+                              symbols[dotSym].draw(p, mags, x4, yy - doty1 * ld);
+                              symbols[dotSym].draw(p, mags, x4, yy - doty2 * ld);
                               }
                         }
 

@@ -30,9 +30,40 @@ Tablature guitarTablature(13, 6, guitarStrings);
 
 Tablature::Tablature(int numFrets, int numStrings, int strings[])
       {
-      frets = numFrets;
+      _frets = numFrets;
       for (int i = 0; i < numStrings; ++i)
             stringTable.append(strings[i]);
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Tablature::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            int v = e.text().toInt();
+            if (tag == "frets")
+                  _frets = v;
+            else if (tag == "string")
+                  stringTable.append(v);
+            else
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Tablature::write(Xml& xml) const
+      {
+      xml.stag("Tablature");
+      xml.tag("frets", _frets);
+      foreach(int pitch, stringTable)
+            xml.tag("string", pitch);
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -47,7 +78,7 @@ bool Tablature::convertPitch(int pitch, int* string, int* fret) const
             int min = stringTable[i];
             int max;
             if (i + 1 == strings)
-                  max = min + frets;
+                  max = min + _frets;
             else
                   max = stringTable[i+1] - 1;
 
@@ -70,4 +101,21 @@ int Tablature::getPitch(int string, int fret) const
       return stringTable[strings - string - 1] + fret;
       }
 
+//---------------------------------------------------------
+//   fret
+//    return fret for given pitch and string
+//    return -1 if not possible
+//---------------------------------------------------------
+
+int Tablature::fret(int pitch, int string) const
+      {
+      int strings = stringTable.size();
+
+      if (string < 0 || string >= strings)
+            return -1;
+      int fret = pitch - stringTable[strings - string - 1];
+      if (fret < 0 || fret >= _frets)
+            return -1;
+      return fret;
+      }
 

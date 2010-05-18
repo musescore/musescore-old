@@ -1318,7 +1318,7 @@ void TextB::paste()
 //   genPropertyMenu
 //---------------------------------------------------------
 
-bool Text::genPropertyMenu(QMenu* popup) const
+bool TextB::genPropertyMenu(QMenu* popup) const
       {
       QAction* a;
       if (visible())
@@ -1335,10 +1335,10 @@ bool Text::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Text::propertyAction(ScoreView* viewer, const QString& s)
+void TextB::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
-            Text* nText = clone();
+            Text* nText = (Text*)clone();
             TextProperties tp(nText, 0);
             int rv = tp.exec();
             if (rv) {
@@ -1493,6 +1493,7 @@ void TextB::dragTo(const QPointF& p)
       score()->setUpdateAll();
       score()->end();
       }
+
 #if 0
 //---------------------------------------------------------
 //   genPropertyMenu
@@ -1593,6 +1594,5 @@ void TextC::propertyAction(ScoreView* viewer, const QString& s)
       else
             Element::propertyAction(viewer, s);
       }
-
 #endif
 

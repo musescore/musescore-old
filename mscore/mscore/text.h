@@ -203,6 +203,9 @@ class TextB : public Element {
       int textStyle() const                 { return _textStyle; }
       void dragTo(const QPointF&p);
       bool editMode() const { return _editMode; }
+
+      virtual bool genPropertyMenu(QMenu* popup) const;
+      virtual void propertyAction(ScoreView*, const QString& s);
       };
 
 //---------------------------------------------------------
@@ -221,8 +224,8 @@ class Text : public TextB {
       virtual Text* clone() const        { return new Text(*this); }
       virtual TextBase* textBase() const { return _tb; }
 
-      virtual bool genPropertyMenu(QMenu* popup) const;
-      virtual void propertyAction(ScoreView*, const QString& s);
+//      virtual bool genPropertyMenu(QMenu* popup) const;
+//      virtual void propertyAction(ScoreView*, const QString& s);
 
       void setModified(bool v)           { _tb->setModified(v); }
       };

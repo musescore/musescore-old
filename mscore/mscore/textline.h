@@ -59,6 +59,8 @@ class TextLineSegment : public LineSegment {
       virtual void propertyAction(ScoreView*, const QString&);
       };
 
+enum HookType { HOOK_90, HOOK_45 };
+
 //---------------------------------------------------------
 //   TextLine
 //    brackets
@@ -71,6 +73,7 @@ class TextLine : public SLine {
       Placement _beginTextPlace, _continueTextPlace;
 
       bool _beginHook, _endHook;
+      HookType _beginHookType, _endHookType;
       Spatium _beginHookHeight, _endHookHeight;
 
       int _beginSymbol, _continueSymbol, _endSymbol;  // -1: no symbol
@@ -101,6 +104,10 @@ class TextLine : public SLine {
       bool endHook() const                    { return _endHook;              }
       void setBeginHook(bool v)               { _beginHook = v;               }
       void setEndHook(bool v)                 { _endHook = v;                 }
+      HookType beginHookType() const          { return _beginHookType;        }
+      HookType endHookType() const            { return _endHookType;          }
+      void setBeginHookType(HookType val)     { _beginHookType = val;         }
+      void setEndHookType(HookType val)       { _endHookType = val;           }
 
       void setBeginText(const QString& s, int textStyle = TEXT_STYLE_TEXTLINE);
       void setContinueText(const QString& s, int textStyle = TEXT_STYLE_TEXTLINE);
@@ -116,6 +123,7 @@ class TextLine : public SLine {
       void setBeginSymbol(int v)              { _beginSymbol = v;             }
       void setContinueSymbol(int v)           { _continueSymbol = v;          }
       void setEndSymbol(int v)                { _endSymbol = v;               }
+
       void setBeginHookHeight(Spatium v)      { _beginHookHeight = v;         }
       void setEndHookHeight(Spatium v)        { _endHookHeight = v;           }
       Spatium beginHookHeight() const         { return _beginHookHeight;      }
