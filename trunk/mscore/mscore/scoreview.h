@@ -167,6 +167,7 @@ class ScoreView : public QWidget {
       void cmdTuplet(int n, ChordRest* cr);
       void cmdTuplet(int);
       void cmdRepeatSelection();
+      void cmdChangeEnharmonic(bool);
 
    private slots:
       void textUndoLevelAdded();

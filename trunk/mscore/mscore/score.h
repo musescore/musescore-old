@@ -483,7 +483,7 @@ class Score : public QObject {
 
       void select(Element* obj, SelectType = SELECT_SINGLE, int staff = 0);
       void deselect(Element* obj);
-      void deselectAll() { _selection.deselectAll(); }
+      void deselectAll()     { _selection.deselectAll(); }
       void updateSelection() { _selection.update(); }
 
       void searchSelectedElements();

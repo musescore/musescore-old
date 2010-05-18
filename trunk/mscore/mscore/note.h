@@ -119,7 +119,6 @@ class Note : public Element {
       ~Note();
       virtual Note* clone() const      { return new Note(*this); }
       virtual ElementType type() const { return NOTE; }
-      virtual QRectF bbox() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
       void layout1(char* tversatz);

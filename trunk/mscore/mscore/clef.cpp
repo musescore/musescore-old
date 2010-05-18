@@ -30,11 +30,11 @@
 #include "symbol.h"
 #include "score.h"
 #include "staff.h"
-// #include "scoreview.h"
 #include "system.h"
 #include "style.h"
 #include "segment.h"
 #include "measure.h"
+#include "tablature.h"
 
 // FIXME!
 // only values for CLEF_G..CLEF_G3 CLEF_F and CLEF_C3 are
@@ -262,8 +262,21 @@ void Clef::layout()
                   yoff = 0.0;
                   break;
             case CLEF_TAB:
+                  {
+                  Tablature* tab;
+                  Staff* st = staff();
+                  tab = st ? st->tablature() : 0;
                   symbol->setSym(tabclefSym);
-                  yoff = 3.5;
+                  if (tab) {
+                        switch(tab->strings()) {
+                              default:
+                              case 6: yoff = 3.5; break;
+                              case 4: yoff = 2.0; break;
+                              }
+                        }
+                  else
+                        yoff = 2.0;
+                  }
                   break;
             case CLEF_PERC:
             case CLEF_PERC2:

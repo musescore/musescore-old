@@ -305,15 +305,6 @@ double Note::headHeight() const
       }
 
 //---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Note::bbox() const
-      {
-      return symbols[noteHead()].bbox(magS());
-      }
-
-//---------------------------------------------------------
 //   totalTicks
 //---------------------------------------------------------
 
@@ -448,14 +439,20 @@ QPointF Note::stemPos(bool upFlag) const
             upFlag = !upFlag;
 
       double sw   = point(score()->styleS(ST_stemWidth)) * .5;
-      QPointF off = symbols[noteHead()].attach(magS());
-      if (upFlag) {
-            pt.rx() += off.x() - sw;
-            pt.ry() += off.y();
+      if (chord() && chord()->staff()->tablature()) {
+            double xoffset = (sw + _bbox.width() + _bbox.x()) * .5;
+            pt += QPointF(xoffset, (_bbox.height() * .5 + spatium() * .5) * (upFlag ? -1.0 : 1.0));
             }
       else {
-            pt.rx() += symbols[noteHead()].width(magS()) - off.x() + sw;
-            pt.ry() -= off.y();
+            QPointF off = symbols[noteHead()].attach(magS());
+            if (upFlag) {
+                  pt.rx() += off.x() - sw;
+                  pt.ry() += off.y();
+                  }
+            else {
+                  pt.rx() += symbols[noteHead()].width(magS()) - off.x() + sw;
+                  pt.ry() -= off.y();
+                  }
             }
       return pt + chord()->canvasPos();
       }
@@ -493,16 +490,15 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   p.scale(mag, mag);
                   p.setFont(f);
 
-                  QFontMetricsF fm(f);
                   QString s = QString::number(_fret);
-                  QRectF bb = fm.tightBoundingRect(s);
-                  bb        = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
+                  QRectF bb = bbox();
                   double y  = bb.height() * .5;
                   double d  = spatium() * .2;
+                  bb = bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0);
                   if (v)
-                        v->drawBackground(p, bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0));
+                        v->drawBackground(p, bb);
                   else
-                        p.eraseRect(bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0));
+                        p.eraseRect(bb);
                   p.drawText(0.0, y, s);
                   p.scale(imag, imag);
                   }
@@ -798,8 +794,9 @@ void Note::endDrag()
       Staff* staff = score()->staff(staffIdx);
       int npitch;
       int tpc;
-      if (staff->tablature()) {
-            npitch = guitarTablature.getPitch(nLine, _fret);
+      Tablature* tab = staff->tablature();
+      if (tab) {
+            npitch = tab->getPitch(nLine, _fret);
             tpc    = pitch2tpc(npitch, 0);
             }
       else {
@@ -1244,6 +1241,19 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
 
 void Note::layout()
       {
+      Tablature* tab = staff()->tablature();
+      if (tab) {
+            QFont f("DejaVuSerif");
+            int size = lrint(9.0 * DPI / PPI);
+            f.setPixelSize(size);
+            QFontMetricsF fm(f);
+            double mag = magS();
+            QString s  = QString::number(_fret);
+            QRectF bb(fm.tightBoundingRect(s));
+            _bbox      = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
+            }
+      else
+            _bbox = symbols[noteHead()].bbox(magS());
       if (parent() == 0)
             return;
       foreach(Element* e, _el) {
@@ -1259,10 +1269,11 @@ void Note::layout()
 
 void Note::layout1(char* tversatz)
       {
-      if (staff()->tablature()) {
+      Tablature* tab = staff()->tablature();
+      if (tab) {
             if (_fret < 0) {
                   int line, fret;
-                  if (guitarTablature.convertPitch(_pitch, &line, &fret)) {
+                  if (tab->convertPitch(_pitch, &line, &fret)) {
                         _fret = fret;
                         _line = line;
                         }

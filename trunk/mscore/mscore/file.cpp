@@ -586,7 +586,6 @@ void MuseScore::newFile()
 
       Score* score = new Score(defaultStyle);
       score->setCreated(true);
-//      score->layout();
 
       //
       //  create score from template

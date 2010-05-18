@@ -3787,8 +3787,15 @@
         <description>Guitar (Tablature)</description>
         <name>Guitar</name>
         <short-name>Guit.</short-name>
-        <clef>13</clef>
-        <stafflines tab="1">6</stafflines>
+        <Tablature>
+           <frets>13</frets>
+           <string>40</string>
+           <string>45</string>
+           <string>50</string>
+           <string>55</string>
+           <string>59</string>
+           <string>64</string>
+           </Tablature>
         <aPitchRange>40-83</aPitchRange>
         <pPitchRange>40-83</pPitchRange>
         <channel>
@@ -3867,6 +3874,23 @@
         <channel>
            <program>33</program>
            </channel>
+        </instrument>
+     <instrument>
+        <description>Electric Bass (Tablature 4 strings)</description>
+        <name>Electric Bass</name>
+        <short-name>El. B.</short-name>
+        <aPitchRange>28-65</aPitchRange>
+        <pPitchRange>28-65</pPitchRange>
+        <channel>
+           <program>33</program>
+           </channel>
+        <Tablature>
+           <frets>24</frets>
+           <string>28</string>
+           <string>33</string>
+           <string>38</string>
+           <string>43</string>
+           </Tablature>
         </instrument>
      <instrument>
         <name>Fretless Electric Bass</name>

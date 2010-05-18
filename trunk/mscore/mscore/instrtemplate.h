@@ -28,6 +28,7 @@
 class Xml;
 class Part;
 class Staff;
+class Tablature;
 
 //---------------------------------------------------------
 //   InstrumentTemplate
@@ -55,7 +56,7 @@ struct InstrumentTemplate {
       int staves;             // 1 <= MAX_STAVES
       int clefIdx[MAX_STAVES];
       int staffLines[MAX_STAVES];
-      int tablature;
+      Tablature* tablature;
       int bracket;            // bracket type (NO_BRACKET)
       bool smallStaff[MAX_STAVES];
 

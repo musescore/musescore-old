@@ -21,6 +21,7 @@
 #ifndef __TABLATURE_H__
 #define __TABLATURE_H__
 
+#include "xml.h"
 
 //---------------------------------------------------------
 //   Tablature
@@ -28,12 +29,18 @@
 
 class Tablature {
       QList<int> stringTable;
-      int frets;
+      int _frets;
 
    public:
+      Tablature() {}
       Tablature(int numFrets, int numStrings, int strings[]);
       bool convertPitch(int pitch, int* string, int* fret) const;
+      int fret(int pitch, int string) const;
       int getPitch(int string, int fret) const;
+      int strings() const { return stringTable.size(); }
+      int frets() const   { return _frets; }
+      void read(QDomElement);
+      void write(Xml&) const;
       };
 
 extern Tablature guitarTablature;

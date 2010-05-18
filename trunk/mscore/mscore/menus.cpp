@@ -300,7 +300,30 @@ void MuseScore::showPalette(bool visible)
             sp->append(ottava, tr("15mb"));
 
             Pedal* pedal = new Pedal(gscore);
-            sp->append(pedal, tr("pedal"));
+            //pedal->setLen(l);
+            sp->append(pedal, tr("Pedal"));
+
+            pedal = new Pedal(gscore);
+            //pedal->setLen(l);
+            pedal->setEndHookType(HOOK_45);
+            sp->append(pedal, tr("Pedal"));
+
+            pedal = new Pedal(gscore);
+            //pedal->setLen(l);
+            pedal->setBeginSymbol(-1);
+            pedal->setBeginHook(true);
+//            pedal->setBeginHookHeight(Spatium(-1.5));
+            pedal->setBeginHookType(HOOK_45);
+            pedal->setEndHookType(HOOK_45);
+            sp->append(pedal, tr("Pedal"));
+
+            pedal = new Pedal(gscore);
+            //pedal->setLen(l);
+            pedal->setBeginSymbol(-1);
+            pedal->setBeginHook(true);
+//            pedal->setBeginHookHeight(Spatium(-1.5));
+            pedal->setBeginHookType(HOOK_45);
+            sp->append(pedal, tr("Pedal"));
 
             Trill* trill = new Trill(gscore);
             sp->append(trill, tr("Trill line"));
@@ -308,7 +331,7 @@ void MuseScore::showPalette(bool visible)
             TextLine* textLine = new TextLine(gscore);
             textLine->setBeginText("VII");
             textLine->setEndHook(true);
-            textLine->setEndHookHeight(Spatium(1.5));
+//            textLine->setEndHookHeight(Spatium(1.5));
             sp->append(textLine, tr("Text line"));
 
             TextLine* line = new TextLine(gscore);
@@ -840,6 +863,30 @@ void MuseScore::lineMenu()
             Pedal* pedal = new Pedal(gscore);
             pedal->setLen(l);
             sp->append(pedal, tr("Pedal"));
+
+            pedal = new Pedal(gscore);
+            pedal->setLen(l);
+            pedal->setEndHookType(HOOK_45);
+            sp->append(pedal, tr("Pedal"));
+
+            pedal = new Pedal(gscore);
+            pedal->setLen(l);
+            pedal->setBeginSymbol(-1);
+            pedal->setBeginHook(true);
+            pedal->setBeginHookHeight(Spatium(-1.5));
+            pedal->setBeginHookType(HOOK_45);
+            pedal->setEndHookType(HOOK_45);
+            sp->append(pedal, tr("Pedal"));
+
+            pedal = new Pedal(gscore);
+            pedal->setLen(l);
+            pedal->setBeginSymbol(-1);
+            pedal->setBeginHook(true);
+            pedal->setBeginHookHeight(Spatium(-1.5));
+            pedal->setBeginHookType(HOOK_45);
+            sp->append(pedal, tr("Pedal"));
+
+            //-------
 
             Trill* trill = new Trill(gscore);
             trill->setLen(l);

@@ -451,12 +451,16 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
 void Score::cmdRemoveTimeSig(TimeSig* ts)
       {
       if (ts->tick() == 0) {    // cannot remove time signature at tick 0
+            undoRemoveElement(ts);
+#if 0
             QMessageBox::information(0,
                tr("MuseScore"),
                tr("The first time signature of a piece can not be removed.")
                );
+#endif
             return;
             }
+
       undoFixTicks();
       // record old tick lengths, since they will be modified when time is added/removed
       QVector<int> tickLens;
@@ -475,10 +479,10 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
 
       undoRemoveElement(ts->segment());
       AL::SigEvent prev = _sigmap->timesig(tick-1);
-      if(prev.nominalEqualActual())
-          undoChangeSig(tick, oval, AL::SigEvent());
+      if (prev.nominalEqualActual())
+            undoChangeSig(tick, oval, AL::SigEvent());
       else
-          undoChangeSig(tick, oval, AL::SigEvent(prev.getNominal()));
+            undoChangeSig(tick, oval, AL::SigEvent(prev.getNominal()));
 
       oval = _sigmap->timesig(tick);
       if (nsi->second == oval)
@@ -497,7 +501,6 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
             }
       if (s)
             undoRemoveElement(s);
-
 
       //---------------------------------------------
       // modify measures

@@ -1,3 +1,8 @@
+18.may (ws)
+      - new: more Pedal line types
+17.may (ws)
+      - tablature: <J> <Ctrl+J> shortcuts change string while pitch
+        remains constant
 16.may (ws)
       - add DejaVuSerif.ttf; used as build in standard text font for
         tablature

@@ -657,9 +657,9 @@ void ElementList::write(Xml& xml) const
 StaffLines::StaffLines(Score* s)
    : Element(s)
       {
-      _tablature = 0;
       setLines(5);
       _width = 1.0;      // dummy
+      _dist  = 1.0;
       setSelectable(false);
       }
 
@@ -680,22 +680,19 @@ QPointF StaffLines::canvasPos() const
 
 QRectF StaffLines::bbox() const
       {
-      double _spatium = spatium();
+      double d = _dist * spatium();
       int l    = lines() - 1;
       qreal lw = point(score()->styleS(ST_staffLineWidth));
 
-      if (_tablature)
-            return QRectF(0.0, -lw * .5, _width, l * _spatium * 1.5 + lw);
-
       switch (l) {
             case 0:
-                  return QRectF(0.0, - 2.0 * _spatium - lw*.5, _width, 4 * _spatium + lw);
+                  return QRectF(0.0, - 2.0 * d - lw*.5, _width, 4 * d + lw);
             case 1:
-                  return QRectF(0.0,  -lw*.5, _width, 4 * _spatium + lw);
+                  return QRectF(0.0,  -lw*.5, _width, 4 * d + lw);
             case 2:
-                  return QRectF(0.0, -lw*.5, _width, l * _spatium * 2.0 + lw);
+                  return QRectF(0.0, -lw*.5, _width, l * d * 2.0 + lw);
             default:
-                  return QRectF(0.0, -lw*.5, _width, l * _spatium + lw);
+                  return QRectF(0.0, -lw*.5, _width, l * d + lw);
             }
       }
 
@@ -706,7 +703,7 @@ QRectF StaffLines::bbox() const
 void StaffLines::draw(QPainter& p, ScoreView*) const
       {
       QPointF _pos(0.0, 0.0);
-      double _spatium = spatium();
+      double d = _dist * spatium();
 
       QPen pen(p.pen());
       pen.setWidthF(point(score()->styleS(ST_staffLineWidth)));
@@ -718,39 +715,31 @@ void StaffLines::draw(QPainter& p, ScoreView*) const
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
 
-      if (_tablature) {
-            for (int i = 0; i < lines(); ++i) {
-                  qreal y = _pos.y() + i * _spatium * 1.5;
-                  p.drawLine(QLineF(x1, y, x2, y));
-                  }
-            return;
-            }
-
       switch(lines()) {
             case 1:
                   {
-                  qreal y = _pos.y() + 2 * _spatium;
+                  qreal y = _pos.y() + 2 * d;
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
                   break;
             case 2:
                   {
-                  qreal y = _pos.y() + 1 * _spatium;
+                  qreal y = _pos.y() + 1 * d;
                   p.drawLine(QLineF(x1, y, x2, y));
-                  y += 2 * _spatium * mag();
+                  y += 2 * d;
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
                   break;
             case 3:
                   for (int i = 0; i < lines(); ++i) {
-                        qreal y = _pos.y() + i * _spatium * 2.0;
+                        qreal y = _pos.y() + i * d * 2.0;
                         p.drawLine(QLineF(x1, y, x2, y));
                         }
                   break;
 
             default:
                   for (int i = 0; i < lines(); ++i) {
-                        qreal y = _pos.y() + i * _spatium;
+                        qreal y = _pos.y() + i * d;
                         p.drawLine(QLineF(x1, y, x2, y));
                         }
                   break;
@@ -783,19 +772,16 @@ double StaffLines::y1() const
 
 double StaffLines::y2() const
       {
-      double _spatium = spatium();
-
       double y = measure()->system()->staff(staffIdx())->y();
-      if (_tablature)
-            return y + _pos.y() + (lines() - 1) * _spatium * 1.5;
+      double d = _dist * spatium();
       switch(lines()) {
             case 1:
-                  return y + _pos.y() + 3 * _spatium;
+                  return y + _pos.y() + 3 * d;
             case 2:
-                  return y + _pos.y() + 3 * _spatium;
+                  return y + _pos.y() + 3 * d;
             case 3:
             default:
-                  return y + _pos.y() + (lines() - 1) * _spatium;
+                  return y + _pos.y() + (lines() - 1) * d;
             }
       }
 

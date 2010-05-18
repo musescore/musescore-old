@@ -125,18 +125,29 @@ void TextLineSegment::draw(QPainter& p, ScoreView* v) const
             pen.setColor(tl->lineColor());
 
       p.setPen(pen);
+
+      if (tl->beginHook() && tl->beginHookType() == HOOK_45)
+            pp1.rx() += fabs(tl->beginHookHeight().val() * _spatium * .4);
+      if (tl->endHook() && tl->endHookType() == HOOK_45)
+            pp2.rx() -= fabs(tl->endHookHeight().val() * _spatium * .4);
       p.drawLine(QLineF(pp1, pp2));
 
-      if (tl->endHook()) {
-            double hh = point(textLine()->endHookHeight());
-            if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
-                  p.drawLine(QLineF(pp2, QPointF(pp2.x(), pp2.y() + hh)));
+      if (tl->beginHook()) {
+            double hh = tl->beginHookHeight().val() * _spatium;
+            if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
+                  if (tl->beginHookType() == HOOK_45)
+                        p.drawLine(QLineF(pp1, QPointF(pp1.x() - fabs(hh * .4), pp1.y() + hh)));
+                  else
+                        p.drawLine(QLineF(pp1, QPointF(pp1.x(), pp1.y() + hh)));
                   }
             }
-      if (tl->beginHook()) {
-            double hh = point(textLine()->beginHookHeight());
-            if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
-                  p.drawLine(QLineF(pp1, QPointF(pp1.x(), pp1.y() + hh)));
+      if (tl->endHook()) {
+            double hh = tl->endHookHeight().val() * _spatium;
+            if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
+                  if (tl->endHookType() == HOOK_45)
+                        p.drawLine(QLineF(pp2, QPointF(pp2.x() + fabs(hh * .4), pp2.y() + hh)));
+                  else
+                        p.drawLine(QLineF(pp2, QPointF(pp2.x(), pp2.y() + hh)));
                   }
             }
       }
@@ -257,6 +268,8 @@ TextLine::TextLine(Score* s)
       _endHookHeight     = Spatium(1.5);
       _beginHook         = false;
       _endHook           = false;
+      _beginHookType     = HOOK_90;
+      _endHookType       = HOOK_90;
 
       _lineWidth         = Spatium(0.15);
       _lineStyle         = Qt::SolidLine;
@@ -280,10 +293,14 @@ TextLine::TextLine(const TextLine& e)
       _lineStyle            = e._lineStyle;
       _beginTextPlace       = e._beginTextPlace;
       _continueTextPlace    = e._continueTextPlace;
+
       _beginHook            = e._beginHook;
       _endHook              = e._endHook;
       _beginHookHeight      = e._beginHookHeight;
       _endHookHeight        = e._endHookHeight;
+      _beginHookType        = e._beginHookType;
+      _endHookType          = e._endHookType;
+
       _beginSymbol          = e._beginSymbol;
       _continueSymbol       = e._continueSymbol;
       _endSymbol            = e._endSymbol;
@@ -362,10 +379,18 @@ void TextLine::read(QDomElement e)
 
 void TextLine::writeProperties(Xml& xml, const TextLine* proto) const
       {
-      if (_beginHook && (proto == 0 || proto->beginHookHeight() != _beginHookHeight))
-            xml.tag("beginHookHeight", _beginHookHeight.val());
-      if (_endHook && (proto == 0 || proto->endHookHeight() != _endHookHeight))
-            xml.tag("endHookHeight", _endHookHeight.val());
+      if (_beginHook) {
+            if (proto == 0 || proto->beginHookHeight() != _beginHookHeight)
+                  xml.tag("beginHookHeight", _beginHookHeight.val());
+            if (proto == 0 || proto->beginHookType() != _beginHookType)
+                  xml.tag("beginHookType", int(_beginHookType));
+            }
+      if (_endHook) {
+            if (proto == 0 || proto->endHookHeight() != _endHookHeight)
+                  xml.tag("endHookHeight", _endHookHeight.val());
+            if (proto == 0 || proto->endHookType() != _endHookType)
+                  xml.tag("endHookType", int(_endHookType));
+            }
 
       if (proto == 0 || proto->lineWidth() != _lineWidth)
             xml.tag("lineWidth", _lineWidth.val());
@@ -415,10 +440,14 @@ bool TextLine::readProperties(QDomElement e)
             _beginHookHeight = Spatium(text.toDouble());
             _beginHook = true;
             }
+      else if (tag == "beginHookType")
+            _beginHookType = HookType(text.toInt());
       else if (tag == "endHookHeight" || tag == "hookHeight") { // hookHeight is obsolete
             _endHookHeight = Spatium(text.toDouble());
             _endHook = true;
             }
+      else if (tag == "endHookType")
+            _endHookType = HookType(text.toInt());
       else if (tag == "hookUp")           // obsolete
             _endHookHeight *= -1.0;
       else if (tag == "beginSymbol" || tag == "symbol")     // "symbol" is obsolete
@@ -609,6 +638,10 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       endHook->setChecked(tl->endHook());
       beginHookHeight->setValue(tl->beginHookHeight().val());
       endHookHeight->setValue(tl->endHookHeight().val());
+      beginHookType90->setChecked(tl->beginHookType() == HOOK_90);
+      beginHookType45->setChecked(tl->beginHookType() == HOOK_45);
+      endHookType90->setChecked(tl->endHookType() == HOOK_90);
+      endHookType45->setChecked(tl->endHookType() == HOOK_45);
 
       diagonal->setChecked(tl->diagonal());
 
@@ -634,6 +667,8 @@ void LineProperties::accept()
       tl->setBeginHook(beginHook->isChecked());
       tl->setEndHookHeight(Spatium(endHookHeight->value()));
       tl->setEndHook(endHook->isChecked());
+      tl->setBeginHookType(beginHookType90->isChecked() ? HOOK_90 : HOOK_45);
+      tl->setEndHookType(endHookType90->isChecked() ? HOOK_90 : HOOK_45);
 
       if (beginTextRb->isChecked())
             tl->setBeginText(beginText->text());
