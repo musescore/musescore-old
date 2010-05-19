@@ -1898,9 +1898,9 @@ int main(int argc, char* av[])
       //  load internal fonts
       //
       static const char* fonts[] = {
-            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSerif"
+            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSans", "DejaVuSerif"
             };
-      for (int i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
+      for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
             if (-1 == QFontDatabase::addApplicationFont(QString(":/fonts/%1.ttf").arg(fonts[i]))) {
                   fprintf(stderr, "Mscore: fatal error: cannot load internal font <%s>\n", fonts[i]);
                   if (!debugMode)

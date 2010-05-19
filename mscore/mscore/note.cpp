@@ -916,6 +916,7 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || type == IMAGE
          || type == CHORD
          || type == HARMONY
+         || type == FRET_DIAGRAM
          || type == DYNAMIC
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_APPOGGIATURA)
@@ -980,16 +981,11 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   return 0;
 
             case HARMONY:
+            case FRET_DIAGRAM:
+            case LYRICS:
                   e->setParent(chord()->measure());
                   e->setTick(chord()->tick());
                   e->setTrack((track() / VOICES) * VOICES);
-                  score()->select(e, SELECT_SINGLE, 0);
-                  score()->undoAddElement(e);
-                  return e;
-            case LYRICS:
-                  e->setParent(chord()->segment());
-                  e->setTick(chord()->tick());
-                  e->setTrack(chord()->staffIdx() * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;

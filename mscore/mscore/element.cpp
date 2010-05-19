@@ -69,6 +69,7 @@
 #include "rest.h"
 #include "slur.h"
 #include "measure.h"
+#include "fret.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -106,6 +107,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Tempo"),
       QT_TRANSLATE_NOOP("elementName", "StaffText"),
       QT_TRANSLATE_NOOP("elementName", "Harmony"),
+      QT_TRANSLATE_NOOP("elementName", "FretDiagram"),
       QT_TRANSLATE_NOOP("elementName", "Volta"),
       QT_TRANSLATE_NOOP("elementName", "HairpinSegment"),
       QT_TRANSLATE_NOOP("elementName", "OttavaSegment"),
@@ -1248,6 +1250,7 @@ Element* Element::create(ElementType type, Score* score)
             case SPACER:            return new Spacer(score);
             case TEMPO_TEXT:        return new TempoText(score);
             case HARMONY:           return new Harmony(score);
+            case FRET_DIAGRAM:      return new FretDiagram(score);
             case LYRICS:            return new Lyrics(score);
             case STEM:              return new Stem(score);
             case SLUR:              return new Slur(score);
@@ -1332,6 +1335,7 @@ const char* Element::name(ElementType type)
             case TEMPO_TEXT:        return "Tempo";
             case STAFF_TEXT:        return "StaffText";
             case HARMONY:           return "Harmony";
+            case FRET_DIAGRAM:      return "FretDiagram";
             case VOLTA:             return "Volta";
             case HAIRPIN_SEGMENT:   return "HairpinSegment";
             case OTTAVA_SEGMENT:    return "OttavaSegment";

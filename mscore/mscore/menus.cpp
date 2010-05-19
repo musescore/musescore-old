@@ -58,6 +58,7 @@
 #include "drumset.h"
 #include "spacer.h"
 #include "measure.h"
+#include "fret.h"
 
 extern bool useFactorySettings;
 
@@ -668,6 +669,15 @@ void MuseScore::showPalette(bool visible)
             sp->append(accStdbaseSym);
             sp->append(accBayanbaseSym);
             sp->append(accOldEESym);
+
+            FretDiagram* fret = new FretDiagram(gscore);
+            fret->setDot(5, 1);
+            fret->setDot(2, 2);
+            fret->setDot(1, 3);
+            fret->setMarker(0, 'X');
+            fret->setMarker(3, 'O');
+            fret->setMarker(4, 'O');
+            sp->append(fret, tr("Fret Diagram"));
 
             paletteBox->addPalette(sp);
             }

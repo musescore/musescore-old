@@ -50,7 +50,7 @@ void Tremolo::draw(QPainter& p, ScoreView*) const
             pen.setWidthF(point(score()->styleS(ST_stemWidth)));
             p.setPen(pen);
             double _spatium = spatium();
-            p.drawLine(x, -_spatium*.5, x, bbox().height() + _spatium);
+            p.drawLine(QLineF(x, -_spatium*.5, x, bbox().height() + _spatium));
             }
       }
 

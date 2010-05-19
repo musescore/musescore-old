@@ -1603,6 +1603,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
+                  case FRET_DIAGRAM:
                   case MARKER:
                   case JUMP:
                   case REPEAT_MEASURE:
@@ -1730,6 +1731,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
+                  case FRET_DIAGRAM:
                   case MARKER:
                   case JUMP:
                   case REPEAT_MEASURE:
@@ -1883,6 +1885,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
+                  case FRET_DIAGRAM:
                   case MARKER:
                   case JUMP:
                   case REPEAT_MEASURE:
