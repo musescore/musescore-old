@@ -85,7 +85,7 @@ QT4_WRAP_UI (ui_headers
       glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
       dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
-      harmonyedit.ui selectinstr.ui tremolo.ui
+      harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -102,7 +102,7 @@ QT4_WRAP_CPP (mocs
       text.h sccursor.h dynamics.h undo.h textproperties.h
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
       pianoscene.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
-      harmonycanvas.h updatechecker.h
+      harmonycanvas.h updatechecker.h fret.h fretcanvas.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
