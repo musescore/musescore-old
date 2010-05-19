@@ -142,7 +142,7 @@ void Glissando::draw(QPainter& p) const
       p.rotate(-wi);
 
       if (subtype() == 0) {
-            p.drawLine(0.0, 0.0, l, 0.0);
+            p.drawLine(QLineF(0.0, 0.0, l, 0.0));
             }
       else if (subtype() == 1) {
             double mags = magS();

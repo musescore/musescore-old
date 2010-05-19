@@ -1,3 +1,8 @@
+19.may (ws)
+      - fixed some line drawings in glissando, arpeggio and rest which
+        were truncated to integer precision
+15.may (ws)
+      - update ove import from Rui Fan
 14.may (ws)
       - fix crash: loading a score with a selected measure repeat
       - fix: copy/paste of measure repeats

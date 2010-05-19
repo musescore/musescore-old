@@ -318,6 +318,7 @@ void Preferences::write()
 
       s.setValue("defaultPlayDuration", defaultPlayDuration);
       s.setValue("importStyleFile", importStyleFile);
+      s.setValue("importCharset", importCharset);
       s.setValue("warnPitchRange", warnPitchRange);
       s.setValue("followSong", followSong);
 
@@ -428,6 +429,7 @@ void Preferences::read()
 
       defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
       importStyleFile        = s.value("importStyleFile", "").toString();
+      importCharset          = s.value("importCharset", "GBK").toByteArray();
       warnPitchRange         = s.value("warnPitchRange", true).toBool();
       followSong             = s.value("followSong", true).toBool();
 
@@ -478,6 +480,8 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      characterSetGroupBox->setVisible(false);
+
       shortcutsChanged        = false;
 
 #ifndef USE_JACK
@@ -746,6 +750,19 @@ void PreferenceDialog::updateValues(Preferences* p)
       importStyleFile->setText(p->importStyleFile);
       useImportBuildinStyle->setChecked(p->importStyleFile.isEmpty());
       useImportStyleFile->setChecked(!p->importStyleFile.isEmpty());
+
+      importCharsetList->clear();
+      QList<QByteArray> charsets = QTextCodec::availableCodecs();
+      qSort(charsets.begin(), charsets.end());
+      idx = 0;
+      foreach (QByteArray charset, charsets) {
+    	  importCharsetList->addItem(charset);
+    	  if(charset == p->importCharset) {
+    		  importCharsetList->setCurrentIndex(idx);
+    	  }
+    	  idx++;
+      }
+
       warnPitchRange->setChecked(p->warnPitchRange);
 
       language->clear();
@@ -782,7 +799,7 @@ void PreferenceDialog::portaudioApiActivated(int)  {}
 
 bool ShortcutItem::operator<(const QTreeWidgetItem& item) const
       {
-      
+
       const QTreeWidget * pTree =treeWidget ();
       int column   = pTree ? pTree->sortColumn() : 0;
       return QString::localeAwareCompare(text(column).toLower(), item.text(column).toLower()) > 0;
@@ -1124,6 +1141,8 @@ void PreferenceDialog::apply()
       else
             preferences.importStyleFile.clear();
 
+      preferences.importCharset = importCharsetList->currentText().toUtf8();
+
       preferences.warnPitchRange = warnPitchRange->isChecked();
 
       if (languageChanged) {
@@ -1263,7 +1282,7 @@ QAction* getAction(Shortcut* s)
             if(!s->key.isEmpty())
                 a->setShortcut(s->key);
             else
-                a->setShortcuts(s->standardKey);                  
+                a->setShortcuts(s->standardKey);
             a->setShortcutContext(s->context);
             if (!s->help.isEmpty()) {
                   a->setToolTip(s->help);

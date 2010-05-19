@@ -139,9 +139,9 @@ void Arpeggio::draw(QPainter& p) const
                   p.setPen(pen);
 
                   double w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
-                  p.drawLine(0.0, y1, 0.0, y2);
-                  p.drawLine(0.0, y1, w, y1);
-                  p.drawLine(0.0, y2, w, y2);
+                  p.drawLine(QLineF(0.0, y1, 0.0, y2));
+                  p.drawLine(QLineF(0.0, y1, w, y1));
+                  p.drawLine(QLineF(0.0, y2, w, y2));
 
                   p.restore();
                   }
