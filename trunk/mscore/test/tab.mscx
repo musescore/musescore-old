@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.14">
-  <programVersion>0.9.6</programVersion>
+  <programVersion>0.9.7</programVersion>
   <programRevision>2613
 </programRevision>
   <Spatium>1.764</Spatium>
@@ -323,6 +323,26 @@ p, li { white-space: pre-wrap; }
         </Text>
       </VBox>
     <Measure number="1">
+      <FretDiagram>
+        <string no="0">
+          <marker>88</marker>
+          </string>
+        <string no="1">
+          <dot>3</dot>
+          </string>
+        <string no="2">
+          <dot>2</dot>
+          </string>
+        <string no="3">
+          <marker>79</marker>
+          </string>
+        <string no="4">
+          <marker>79</marker>
+          </string>
+        <string no="5">
+          <dot>1</dot>
+          </string>
+        </FretDiagram>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
@@ -931,5 +951,5 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     </Staff>
-  <cursorTrack>12</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

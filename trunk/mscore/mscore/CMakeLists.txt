@@ -186,6 +186,7 @@ add_executable ( ${ExecutableName}
       canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
       importove.cpp ove.cpp interval.cpp check.cpp synti.cpp tablature.cpp
+      fret.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

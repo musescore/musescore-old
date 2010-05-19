@@ -1053,6 +1053,7 @@ void Measure::add(Element* el)
             case TEXT:
             case TEMPO_TEXT:
             case HARMONY:
+            case FRET_DIAGRAM:
             case MARKER:
             case STAFF_TEXT:
             case HBOX:
@@ -1133,6 +1134,7 @@ marker:
             case TEXT:
             case SYMBOL:
             case HARMONY:
+            case FRET_DIAGRAM:
             case STAFF_TEXT:
             case HBOX:
                   if (el->type() == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)
@@ -2281,13 +2283,13 @@ void Measure::read(QDomElement e, int idx)
                         add(t);
                         }
                   }
-            else if (tag == "Harmony") {
-                  Harmony* h = new Harmony(score());
-                  h->setTrack(score()->curTrack);
-                  h->setTick(score()->curTick);
-                  h->read(e);
-                  add(h);
-                  score()->curTick = h->tick();
+            else if (tag == "Harmony" || tag == "FretDiagram" || tag == "Symbol") {
+                  Element* el = Element::name2Element(tag, score());
+                  el->setTrack(score()->curTrack);
+                  el->setTick(score()->curTick);
+                  el->read(e);
+                  add(el);
+                  score()->curTick = el->tick();
                   }
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
@@ -2304,14 +2306,6 @@ void Measure::read(QDomElement e, int idx)
                   t->read(e);
                   add(t);
                   score()->curTick = t->tick();
-                  }
-            else if (tag == "Symbol") {
-                  Symbol* sym = new Symbol(score());
-                  sym->setTrack(score()->curTrack);
-                  sym->setTick(score()->curTick);
-                  sym->read(e);
-                  add(sym);
-                  score()->curTick = sym->tick();
                   }
             else if (tag == "stretch")
                   _userStretch = val.toDouble();

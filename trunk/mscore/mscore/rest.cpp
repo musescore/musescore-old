@@ -88,8 +88,8 @@ void Rest::draw(QPainter& p, ScoreView*) const
 
             pen.setWidthF(_spatium * .2);
             p.setPen(pen);
-            p.drawLine(x1, y-_spatium, x1, y+_spatium);
-            p.drawLine(x2, y-_spatium, x2, y+_spatium);
+            p.drawLine(QLineF(x1, y-_spatium, x1, y+_spatium));
+            p.drawLine(QLineF(x2, y-_spatium, x2, y+_spatium));
 
             p.setFont(symbols[allabreveSym].font());
             p.scale(mag, mag);
