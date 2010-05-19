@@ -22,6 +22,7 @@
 #define __FRET_H__
 
 #include "element.h"
+#include "ui_fretdprops.h"
 
 //---------------------------------------------------------
 //   FretDiagram
@@ -37,9 +38,11 @@ class FretDiagram : public Element {
       double lw2;             // top line
       double stringDist;
       double fretDist;
+      QFont font;
 
    public:
       FretDiagram(Score* s);
+      FretDiagram(const FretDiagram&);
       ~FretDiagram();
       virtual void draw(QPainter&, ScoreView*) const;
       virtual FretDiagram* clone() const { return new FretDiagram(*this); }
@@ -50,11 +53,30 @@ class FretDiagram : public Element {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
-      int strings() const { return _strings; }
+      int strings() const    { return _strings; }
+      int frets()   const    { return _frets; }
       void setStrings(int n) { _strings = n; }
+      void setFrets(int n)   { _frets = n; }
       void setDot(int string, int fret);
       void setMarker(int string, int marker);
       void setFingering(int string, int finger);
+
+      bool genPropertyMenu(QMenu* popup) const;
+      void propertyAction(ScoreView* viewer, const QString& s);
+      char* dots()      { return _dots;   }
+      char* marker()    { return _marker; }
+      char* fingering() { return _fingering; }
+      };
+
+//---------------------------------------------------------
+//   FretDiagramProperties
+//---------------------------------------------------------
+
+class FretDiagramProperties : public QDialog, public Ui::FretDiagramProperties {
+      Q_OBJECT
+
+   public:
+      FretDiagramProperties(FretDiagram*, QWidget* parent = 0);
       };
 
 #endif
