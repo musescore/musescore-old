@@ -83,12 +83,12 @@ void Rest::draw(QPainter& p) const
             double x1 = 0.0;
             double x2 =  w;
             pw *= .5;
-            p.drawLine(x1 + pw, y, x2 - pw, y);
+            p.drawLine(QLineF(x1 + pw, y, x2 - pw, y));
 
             pen.setWidthF(_spatium * .2);
             p.setPen(pen);
-            p.drawLine(x1, y-_spatium, x1, y+_spatium);
-            p.drawLine(x2, y-_spatium, x2, y+_spatium);
+            p.drawLine(QLineF(x1, y-_spatium, x1, y+_spatium));
+            p.drawLine(QLineF(x2, y-_spatium, x2, y+_spatium));
 
             p.setFont(symbols[allabreveSym].font());
             p.scale(mag, mag);
