@@ -30,6 +30,7 @@
 
 class FretDiagram : public Element {
       int _strings;
+      int maxStrings;
       int _frets;
       char* _dots;
       char* _marker;
@@ -55,7 +56,7 @@ class FretDiagram : public Element {
 
       int strings() const    { return _strings; }
       int frets()   const    { return _frets; }
-      void setStrings(int n) { _strings = n; }
+      void setStrings(int n);
       void setFrets(int n)   { _frets = n; }
       void setDot(int string, int fret);
       void setMarker(int string, int marker);
@@ -74,6 +75,11 @@ class FretDiagram : public Element {
 
 class FretDiagramProperties : public QDialog, public Ui::FretDiagramProperties {
       Q_OBJECT
+      FretDiagram* fd;
+
+   private slots:
+      void stringsChanged(int);
+      void fretsChanged(int);
 
    public:
       FretDiagramProperties(FretDiagram*, QWidget* parent = 0);
