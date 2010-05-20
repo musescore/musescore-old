@@ -23,6 +23,7 @@
 #include "system.h"
 #include "score.h"
 #include "fretcanvas.h"
+#include "preferences.h"
 
 static const int DEFAULT_STRINGS = 6;
 static const int DEFAULT_FRETS = 5;
@@ -36,6 +37,7 @@ FretDiagram::FretDiagram(Score* score)
       {
       _strings   = DEFAULT_STRINGS;
       _frets     = DEFAULT_FRETS;
+      maxStrings = 0;
       _dots      = 0;
       _marker    = 0;
       _fingering = 0;
@@ -77,6 +79,44 @@ FretDiagram::~FretDiagram()
       delete _dots;
       delete _marker;
       delete _fingering;
+      }
+
+//---------------------------------------------------------
+//   setStrings
+//---------------------------------------------------------
+
+void FretDiagram::setStrings(int n)
+      {
+      if (n <= maxStrings) {
+            _strings = n;
+            return;
+            }
+      maxStrings = n;
+      if (_dots) {
+            char* ndots = new char[n];
+            memcpy(ndots, _dots, _strings);
+            for (int i = _strings; i < n; ++i)
+                  ndots[i] = 0;
+            delete _dots;
+            _dots = ndots;
+            }
+      if (_marker) {
+            char* nmarker = new char[n];
+            memcpy(nmarker, _marker, _strings);
+            for (int i = _strings; i < n; ++i)
+                  nmarker[i] = 0;
+            delete _marker;
+            _marker = nmarker;
+            }
+      if (_fingering) {
+            char* nfingering = new char[n];
+            memcpy(nfingering, _fingering, _strings);
+            for (int i = _strings; i < n; ++i)
+                  nfingering[i] = 0;
+            delete _fingering;
+            _fingering = nfingering;
+            }
+      _strings = n;
       }
 
 //---------------------------------------------------------
@@ -303,36 +343,68 @@ void FretDiagram::propertyAction(ScoreView* viewer, const QString& s)
 //   FretDiagramProperties
 //---------------------------------------------------------
 
-FretDiagramProperties::FretDiagramProperties(FretDiagram* fd, QWidget* parent)
+FretDiagramProperties::FretDiagramProperties(FretDiagram* _fd, QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      fd = _fd;
       frets->setValue(fd->frets());
       strings->setValue(fd->strings());
       diagram->setFretDiagram(fd);
+      connect(strings, SIGNAL(valueChanged(int)), SLOT(stringsChanged(int)));
+      connect(frets, SIGNAL(valueChanged(int)), SLOT(fretsChanged(int)));
+      }
+
+//---------------------------------------------------------
+//   fretsChanged
+//---------------------------------------------------------
+
+void FretDiagramProperties::fretsChanged(int val)
+      {
+      fd->setFrets(val);
+      diagram->update();
+      }
+
+//---------------------------------------------------------
+//   stringsChanged
+//---------------------------------------------------------
+
+void FretDiagramProperties::stringsChanged(int val)
+      {
+      fd->setStrings(val);
+      diagram->update();
       }
 
 //---------------------------------------------------------
 //   paintEvent
 //---------------------------------------------------------
 
-void FretCanvas::paintEvent(QPaintEvent*)
+void FretCanvas::paintEvent(QPaintEvent* ev)
       {
-      double _spatium = 20;
-      double lw1             = _spatium * 0.08;
-      double lw2             = _spatium * 0.2;
-      double stringDist      = _spatium * .7;
-      double fretDist        = _spatium * .8;
-      int _strings    = diagram->strings();
-      int _frets      = diagram->frets();
-      char* _dots     = diagram->dots();
-      char* _marker   = diagram->marker();
+      double mag = 1.5;
+      double _spatium   = 20.0 * mag;
+      double lw1        = _spatium * 0.08;
+      double lw2        = _spatium * 0.2;
+      double stringDist = _spatium * .7;
+      double fretDist   = _spatium * .8;
+      int _strings      = diagram->strings();
+      int _frets        = diagram->frets();
+      char* _dots       = diagram->dots();
+      char* _marker     = diagram->marker();
+
+      double w  = (_strings - 1) * stringDist;
+      double xo = (width() - w) * .5;
+      double h  = (_frets * fretDist) + fretDist * .5;
+      double yo = (height() - h) * .5;
 
       QFont font("DejaVuSans");
-      int size = lrint(20.0);
+      int size = lrint(18.0 * mag);
       font.setPixelSize(size);
 
       QPainter p(this);
+      p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+      p.translate(xo, yo);
 
       QPen pen(p.pen());
       pen.setWidthF(lw2);
@@ -340,7 +412,7 @@ void FretCanvas::paintEvent(QPaintEvent*)
       p.setPen(pen);
       p.setBrush(pen.color());
       double x2 = (_strings-1) * stringDist;
-      p.drawLine(QLineF(-lw1*.5, 0.0, x2+lw1*.5, 0.0));
+      p.drawLine(QLineF(-lw1 * .5, 0.0, x2+lw1*.5, 0.0));
 
       pen.setWidthF(lw1);
       p.setPen(pen);
@@ -354,13 +426,15 @@ void FretCanvas::paintEvent(QPaintEvent*)
             p.drawLine(QLineF(0.0, y, x2, y));
             }
       for (int i = 0; i < _strings; ++i) {
+            p.setPen(Qt::NoPen);
             if (_dots && _dots[i]) {
-                  double dotd = stringDist * .6;
+                  double dotd = stringDist * .6 + lw1;
                   int fret = _dots[i] - 1;
                   double x = stringDist * i - dotd * .5;
                   double y = fretDist * fret + fretDist * .5 - dotd * .5;
                   p.drawEllipse(QRectF(x, y, dotd, dotd));
                   }
+            p.setPen(pen);
             if (_marker && _marker[i]) {
                   p.setFont(font);
                   double x = stringDist * i;
@@ -369,22 +443,103 @@ void FretCanvas::paintEvent(QPaintEvent*)
                      Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip, QChar(_marker[i]));
                   }
             }
+      if (cfret > 0 && cfret <= _frets && cstring >= 0 && cstring < _strings) {
+            double dotd;
+            if (_dots[cstring] != cfret) {
+                  p.setPen(Qt::NoPen);
+                  dotd = stringDist * .6 + lw1;
+                  }
+            else {
+                  p.setPen(pen);
+                  dotd = stringDist * .6;
+                  }
+            double x = stringDist * cstring - dotd * .5;
+            double y = fretDist * (cfret-1) + fretDist * .5 - dotd * .5;
+            p.setBrush(Qt::lightGray);
+            p.drawEllipse(QRectF(x, y, dotd, dotd));
+            }
+      QFrame::paintEvent(ev);
+      }
+
+//---------------------------------------------------------
+//   getPosition
+//---------------------------------------------------------
+
+void FretCanvas::getPosition(const QPointF& p, int* string, int* fret)
+      {
+      double mag = 1.5;
+      double _spatium   = 20.0 * mag;
+      int _strings      = diagram->strings();
+      int _frets        = diagram->frets();
+      double stringDist = _spatium * .7;
+      double fretDist   = _spatium * .8;
+
+      double w  = (_strings - 1) * stringDist;
+      double xo = (width() - w) * .5;
+      double h  = (_frets * fretDist) + fretDist * .5;
+      double yo = (height() - h) * .5;
+      *fret  = (p.y() - yo + fretDist) / fretDist;
+      *string = (p.x() - xo + stringDist * .5) / stringDist;
       }
 
 //---------------------------------------------------------
 //   mousePressEvent
 //---------------------------------------------------------
 
-void FretCanvas::mousePressEvent(QMouseEvent*)
+void FretCanvas::mousePressEvent(QMouseEvent* ev)
       {
+      int string;
+      int fret;
+      getPosition(ev->pos(), &string, &fret);
+
+      int _strings = diagram->strings();
+      int _frets   = diagram->frets();
+      if (fret < 0 || fret > _frets || string < 0 || string >= _strings)
+            return;
+
+      char* _marker = diagram->marker();
+      char* _dots   = diagram->dots();
+      if (fret == 0) {
+            switch(_marker[string]) {
+                  case 'O':
+                        _marker[string] = 'X';
+                        break;
+                  case 'X':
+                        _marker[string] = 'O';
+                        break;
+                  default:
+                        _marker[string] = 'O';
+                        _dots[string] = 0;
+                        break;
+                  }
+            }
+      else {
+            if (_dots[string] == fret) {
+                  _dots[string] = 0;
+                  _marker[string] = 'O';
+                  }
+            else {
+                  _dots[string] = fret;
+                  _marker[string] = 0;
+                  }
+            }
+      update();
       }
 
 //---------------------------------------------------------
 //   mouseMoveEvent
 //---------------------------------------------------------
 
-void FretCanvas::mouseMoveEvent(QMouseEvent*)
+void FretCanvas::mouseMoveEvent(QMouseEvent* ev)
       {
+      int string;
+      int fret;
+      getPosition(ev->pos(), &string, &fret);
+      if (string != cstring || cfret != fret) {
+            cfret = fret;
+            cstring = string;
+            update();
+            }
       }
 
 //---------------------------------------------------------
@@ -426,6 +581,10 @@ void FretCanvas::dropEvent(QDropEvent*)
 FretCanvas::FretCanvas(QWidget* parent)
    : QFrame(parent)
       {
+      setAcceptDrops(true);
+      setFrameStyle(QFrame::Raised | QFrame::Panel);
+      cstring = -2;
+      cfret   = -2;
       }
 
 //---------------------------------------------------------

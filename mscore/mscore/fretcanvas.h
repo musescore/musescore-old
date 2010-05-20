@@ -33,6 +33,8 @@ class FretCanvas : public QFrame {
       Q_OBJECT
 
       FretDiagram* diagram;
+      int cstring;
+      int cfret;
 
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
@@ -43,7 +45,7 @@ class FretCanvas : public QFrame {
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
 
-   private slots:
+      void getPosition(const QPointF& pos, int* string, int* fret);
 
    public:
       FretCanvas(QWidget* parent = 0);
