@@ -303,6 +303,8 @@ else (MINGW)
       qtsingleapp
       fluid
       z
+      dl
+      rt
       )
 
    if (HAS_AUDIOFILE)
