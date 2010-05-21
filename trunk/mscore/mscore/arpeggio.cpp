@@ -23,6 +23,8 @@
 #include "chord.h"
 #include "note.h"
 #include "score.h"
+#include "staff.h"
+#include "part.h"
 
 //---------------------------------------------------------
 //   Arpeggio
@@ -32,6 +34,7 @@ Arpeggio::Arpeggio(Score* s)
   : Element(s)
       {
       setHeight(spatium() * 4);      // for use in palettes
+      _span = 1;
       }
 
 //---------------------------------------------------------
@@ -55,6 +58,8 @@ void Arpeggio::write(Xml& xml) const
             xml.sTag("userLen1", _userLen1);
       if (_userLen2.val() != 0.0)
             xml.sTag("userLen2", _userLen2);
+      if (_span != 1)
+            xml.tag("span", _span);
       xml.etag();
       }
 
@@ -66,10 +71,13 @@ void Arpeggio::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
+            QString val(e.text());
             if (tag == "userLen1")
-                  _userLen1 = Spatium(e.text().toDouble());
+                  _userLen1 = Spatium(val.toDouble());
             else if (tag == "userLen2")
-                  _userLen2 = Spatium(e.text().toDouble());
+                  _userLen2 = Spatium(val.toDouble());
+            else if (tag == "span")
+                  _span = val.toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -182,9 +190,62 @@ void Arpeggio::editDrag(int n, const QPointF& delta)
 
 QLineF Arpeggio::dragAnchor() const
       {
-      Chord* chord = static_cast<Chord*>(parent());
-      if (chord)
-            return QLineF(canvasPos(), chord->upNote()->canvasPos());
+      Chord* c = chord();
+      if (c)
+            return QLineF(canvasPos(), c->upNote()->canvasPos());
       return QLineF();
       }
 
+//---------------------------------------------------------
+//   gripAnchor
+//---------------------------------------------------------
+
+QPointF Arpeggio::gripAnchor(int n) const
+      {
+      Chord* c = chord();
+      if (c == 0)
+            return QPointF();
+      if (n == 0)
+            return c->upNote()->canvasPos();
+      else if (n == 1) {
+            Note* dnote = c->downNote();
+            int btrack  = track() + (_span - 1) * VOICES;
+            ChordRest* bchord = static_cast<ChordRest*>(c->segment()->element(btrack));
+            if (bchord && bchord->type() == CHORD)
+                  dnote = static_cast<Chord*>(bchord)->downNote();
+            return dnote->canvasPos();
+            }
+      return QPointF();
+      }
+
+//---------------------------------------------------------
+//   edit
+//---------------------------------------------------------
+
+bool Arpeggio::edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
+      {
+      if (curGrip != 1 || !(modifiers & Qt::ShiftModifier))
+            return false;
+
+      if (key == Qt::Key_Down) {
+            Staff* s = staff();
+            Part* part = s->part();
+            int n = part->nstaves();
+            int ridx = part->staves()->indexOf(s);
+            if (ridx >= 0) {
+                  if (_span + ridx < n)
+                        ++_span;
+                  }
+            }
+      else if (key == Qt::Key_Up) {
+            if (_span > 1)
+                  --_span;
+            }
+      else
+            return false;
+      layout();
+      Chord* c = chord();
+      rxpos() = -(width() + spatium() * .5);
+      c->layoutArpeggio2();
+      return true;
+      }

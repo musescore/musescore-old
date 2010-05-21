@@ -729,6 +729,8 @@ void Score::doLayout()
                         if (cr->beam())
                               continue;
                         cr->layoutStem();
+                        if (cr->type() == CHORD && static_cast<Chord*>(cr)->arpeggio())
+                              static_cast<Chord*>(cr)->layoutArpeggio2();
                         }
                   }
             }

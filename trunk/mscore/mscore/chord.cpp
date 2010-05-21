@@ -1344,7 +1344,7 @@ void Chord::layout()
                   }
             }
 #endif
-#if 1
+
       if (_arpeggio) {
             double headHeight = upnote->headHeight();
             _arpeggio->layout();
@@ -1353,8 +1353,12 @@ void Chord::layout()
             double h = downNote()->pos().y() - y;
             _arpeggio->setHeight(h);
             _arpeggio->setPos(lx, y);
+
+            // handle the special case of _arpeggio->span() > 1
+            // in layoutArpeggio2() after page layout has done so we
+            // know the y position of the next staves
             }
-#endif
+
       extraSpace    = -lx + _extraLeadingSpace.val() * _spatium;
       double mirror = 0.0;
       double hw     = 0.0;
@@ -1380,6 +1384,29 @@ void Chord::layout()
       if (up() && _hook)
             minSpace += _hook->width();
       extraSpace += point(_extraLeadingSpace);
+      }
+
+//---------------------------------------------------------
+//   layoutArpeggio2
+//    called after layout of page
+//---------------------------------------------------------
+
+void Chord::layoutArpeggio2()
+      {
+      if (!_arpeggio)
+            return;
+      Note* upnote      = upNote();
+      double headHeight = upnote->headHeight();
+      double y          = upNote()->canvasPos().y() - headHeight * .5;
+      int span          = _arpeggio->span();
+      Note* dnote       = downNote();
+      int btrack        = track() + (span - 1) * VOICES;
+      ChordRest* bchord = static_cast<ChordRest*>(segment()->element(btrack));
+
+      if (bchord && bchord->type() == CHORD)
+            dnote = static_cast<Chord*>(bchord)->downNote();
+      double h = dnote->canvasPos().y() - y;
+      _arpeggio->setHeight(h);
       }
 
 //---------------------------------------------------------

@@ -169,6 +169,7 @@ class Chord : public ChordRest {
 
       virtual void layoutStem1();
       virtual void layoutStem();
+      void layoutArpeggio2();
 
       QList<Note*>& notes()                  { return _notes; }
       const QList<Note*>& notes() const      { return _notes; }
