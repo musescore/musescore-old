@@ -539,7 +539,7 @@ void MuseScore::editInstrList()
                         staff->clefList()->setClef(0, sli->clef());
                         staff->setLines(t->staffLines[cidx]);
                         staff->setSmall(t->smallStaff[cidx]);
-                        staff->setTablature(t->tablature);
+                        staff->setUseTablature(t->useTablature);
                         if (cidx == 0) {
                               staff->setBracket(0, t->bracket);
                               staff->setBracketSpan(0, t->staves);

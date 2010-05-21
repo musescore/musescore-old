@@ -24,6 +24,9 @@
 #include "score.h"
 #include "fretcanvas.h"
 #include "preferences.h"
+#include "tablature.h"
+#include "chord.h"
+#include "note.h"
 
 static const int DEFAULT_STRINGS = 6;
 static const int DEFAULT_FRETS = 5;
@@ -117,6 +120,23 @@ void FretDiagram::setStrings(int n)
             _fingering = nfingering;
             }
       _strings = n;
+      }
+
+//---------------------------------------------------------
+//   init
+//---------------------------------------------------------
+
+void FretDiagram::init(Tablature* tab, Chord* chord)
+      {
+      setStrings(tab->strings());
+      for (int string = 0; string < _strings; ++string)
+            _marker[string] = 'X';
+      foreach(const Note* note, chord->notes()) {
+            int string;
+            int fret;
+            if (tab->convertPitch(note->ppitch(), &string, &fret))
+                  setDot(string, fret);
+            }
       }
 
 //---------------------------------------------------------
@@ -272,6 +292,7 @@ void FretDiagram::setDot(int string, int fret)
             memset(_dots, 0, _strings);
             }
       _dots[string] = fret;
+      setMarker(string, 0);
       }
 
 //---------------------------------------------------------

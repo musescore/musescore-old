@@ -962,11 +962,12 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             measure->setNo(number);
             score->measures()->add(measure);
       }else{
-            int pstaves = part->nstaves();
-            for (int i = 0; i < pstaves; ++i) {
-                Staff* reals = score->staff(staff+i);
-                measure->mstaff(staff+i)->lines->setLines(reals->lines());
-            }
+            // ws:
+            // int pstaves = part->nstaves();
+            // for (int i = 0; i < pstaves; ++i) {
+            //    Staff* reals = score->staff(staff+i);
+            // measure->mstaff(staff+i)->lines->setLines(reals->lines());
+            // }
       }
 
       // initialize voice list
@@ -1997,12 +1998,12 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   if (number == -1){
                       int staves = score->part(staff)->nstaves();
                       for (int i = 0; i < staves; ++i) {
-                            score->staff(staffIdx+i)->setLines(stafflines);
-                            measure->mstaff(staffIdx+i)->lines->setLines(stafflines);
+                           score->staff(staffIdx+i)->setLines(stafflines);
+                      // ws      measure->mstaff(staffIdx+i)->lines->setLines(stafflines);
                       }
                   }else{
                       score->staff(staffIdx)->setLines(stafflines);
-                      measure->mstaff(staffIdx)->lines->setLines(stafflines);
+                      // measure->mstaff(staffIdx)->lines->setLines(stafflines);
                   }
             }
             else if (e.tagName() == "instruments")

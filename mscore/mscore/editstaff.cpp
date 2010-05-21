@@ -45,6 +45,8 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
 
       lines->setValue(staff->lines());
       small->setChecked(staff->small());
+      useTablature->setChecked(staff->useTablature());
+      useTablature->setEnabled(part->tablature());
 
       useDrumset->setChecked(instrument.useDrumset());
       editDrumset->setEnabled(instrument.useDrumset());
@@ -168,10 +170,16 @@ void EditStaff::apply()
       bool s       = small->isChecked();
       bool noStems = slashStyle->isChecked();
       bool inv     = invisible->isChecked();
-      if (l != staff->lines() || s != staff->small() || noStems != staff->slashStyle()
-         || inv != staff->invisible())
-            score->undo()->push(new ChangeStaff(staff, l, s, noStems, inv));
-      score->setUpdateAll(true);
+      bool tab     = useTablature->isChecked();
+
+      if (l != staff->lines()
+         || s != staff->small()
+         || noStems != staff->slashStyle()
+         || inv != staff->invisible()
+         || tab != staff->useTablature())
+            score->undo()->push(new ChangeStaff(staff, l, s, noStems, inv, tab));
+      score->setLayoutAll(true);
+//      score->setUpdateAll(true);
       score->end();
       }
 

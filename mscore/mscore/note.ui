@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>635</width>
-    <height>329</height>
+    <width>545</width>
+    <height>248</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
      </property>
      <layout class="QGridLayout">
       <property name="spacing">
-       <number>0</number>
+       <number>2</number>
       </property>
       <item row="0" column="0">
        <widget class="QLabel" name="label">
@@ -103,6 +103,9 @@
         <property name="text">
          <string notr="true" comment="do not translate">HGrp.</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
        </widget>
       </item>
       <item row="2" column="3">
@@ -165,7 +168,7 @@
         </property>
        </widget>
       </item>
-      <item row="7" column="0" colspan="2">
+      <item row="8" column="0" colspan="2">
        <widget class="QCheckBox" name="mirror">
         <property name="text">
          <string notr="true" comment="do not translate">Mirror Head</string>
@@ -176,6 +179,9 @@
        <widget class="QLabel" name="label_5">
         <property name="text">
          <string notr="true" comment="do not translate">S-Channel</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -193,6 +199,9 @@
        <widget class="QLabel" name="label_8">
         <property name="text">
          <string notr="true" comment="do not translate">User-Acc</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -234,6 +243,9 @@
         <property name="text">
          <string notr="true">Velo</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
        </widget>
       </item>
       <item row="1" column="3">
@@ -247,6 +259,9 @@
        <widget class="QLabel" name="label_12">
         <property name="text">
          <string>OnTime:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
        </widget>
       </item>
@@ -312,6 +327,9 @@
         <property name="text">
          <string>OffTime:</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
        </widget>
       </item>
       <item row="1" column="5">
@@ -376,12 +394,15 @@
         <property name="text">
          <string notr="true" comment="do not translate">S.-ements:</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
        </widget>
       </item>
-      <item row="2" column="5" rowspan="4" colspan="3">
+      <item row="2" column="5" rowspan="5" colspan="3">
        <widget class="QListWidget" name="fingering"/>
       </item>
-      <item row="7" column="5" colspan="3">
+      <item row="8" column="5" colspan="3">
        <widget class="QComboBox" name="userMirror">
         <item>
          <property name="text">
@@ -400,7 +421,7 @@
         </item>
        </widget>
       </item>
-      <item row="7" column="2" colspan="2">
+      <item row="8" column="2" colspan="2">
        <widget class="QCheckBox" name="hidden">
         <property name="text">
          <string notr="true" comment="do not translate">Hidden</string>
@@ -426,10 +447,56 @@
       <item row="4" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Tuning</string>
+         <string notr="true">Tuning</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string notr="true">String</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QSpinBox" name="string">
+        <property name="specialValueText">
+         <string>invalid</string>
+        </property>
+        <property name="minimum">
+         <number>-1</number>
+        </property>
+        <property name="value">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="QLabel" name="label_15">
+        <property name="text">
+         <string notr="true">Fret</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="3">
+       <widget class="QSpinBox" name="fret">
+        <property name="specialValueText">
+         <string>invalid</string>
+        </property>
+        <property name="minimum">
+         <number>-1</number>
+        </property>
+        <property name="value">
+         <number>-1</number>
         </property>
        </widget>
       </item>

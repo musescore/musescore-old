@@ -35,7 +35,6 @@ class Xml;
 class Part;
 class Score;
 class KeyList;
-class Tablature;
 
 //---------------------------------------------------------
 //   BracketItem
@@ -74,13 +73,13 @@ class Staff {
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
-      int _lines;
+      uchar _lines;
       bool _show;             ///< derived from part->show()
       bool _small;
       bool _slashStyle;
       bool _invisible;
       QMap<int,int> _channelList[VOICES];
-      Tablature* _tablature;
+      bool _useTablature;
 
    public:
       Staff(Score*, Part*, int);
@@ -121,7 +120,7 @@ class Staff {
       bool invisible() const         { return _invisible;   }
       void setInvisible(bool val)    { _invisible = val;    }
       void setSlashStyle(bool val)   { _slashStyle = val;   }
-      int lines() const              { return _lines;       }
+      int lines() const;
       void setLines(int val)         { _lines = val;        }
       int barLineSpan() const        { return _barLineSpan; }
       void setBarLineSpan(int val)   { _barLineSpan = val;  }
@@ -132,8 +131,8 @@ class Staff {
       int channel(int tick, int voice) const;
       QMap<int,int>* channelList(int voice) { return  &_channelList[voice]; }
 
-      Tablature* tablature() const      { return _tablature; }
-      void setTablature(Tablature* val);
+      bool useTablature() const         { return _useTablature; }
+      void setUseTablature(bool val)    { _useTablature = val;  }
       };
 #endif
 

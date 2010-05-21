@@ -24,6 +24,7 @@
 #include "articulation.h"
 #include "utils.h"
 #include "seq.h"
+#include "tablature.h"
 
 //---------------------------------------------------------
 //   write
@@ -90,8 +91,9 @@ Instrument::Instrument()
       _maxPitchA          = 127;
       _minPitchP          = 0;
       _maxPitchP          = 127;
-      _drumset            = 0;
       _useDrumset         = false;
+      _drumset            = 0;
+      _tablature          = 0;
       }
 
 //---------------------------------------------------------
@@ -117,6 +119,8 @@ void Instrument::write(Xml& xml) const
             xml.tag("useDrumset", _useDrumset);
             _drumset->save(xml);
             }
+      if (tablature())
+            _tablature->write(xml);
       if (!_trackName.isEmpty())
             xml.tag("trackName", _trackName);
       foreach(const NamedEventList& a, _midiActions)
@@ -189,6 +193,10 @@ void Instrument::read(QDomElement e)
                         customDrumset = true;
                         }
                   _drumset->load(e);
+                  }
+            else if (tag == "Tablature") {
+                  _tablature = new Tablature();
+                  _tablature->read(e);
                   }
             else if (tag == "MidiAction") {
                   NamedEventList a;

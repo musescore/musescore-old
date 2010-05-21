@@ -154,7 +154,7 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                         }
                   else {
                         double doty1, doty2;
-                        if (staff()->tablature()) {
+                        if (staff()->useTablature()) {
                               switch(staff()->lines()) {
                                     case 4:
                                           doty1 = .5 * 1.5;
@@ -211,7 +211,7 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                         }
                   else {
                         double doty1, doty2;
-                        if (staff()->tablature()) {
+                        if (staff()->useTablature()) {
                               switch(staff()->lines()) {
                                     case 4:
                                           doty1 = .5 * 1.5;
@@ -271,7 +271,7 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                         }
                   else {
                         double doty1, doty2;
-                        if (staff()->tablature()) {
+                        if (staff()->useTablature()) {
                               switch(staff()->lines()) {
                                     case 4:
                                           doty1 = .5 * 1.5;

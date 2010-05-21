@@ -1937,13 +1937,15 @@ void ChangePageFormat::flip()
 //   ChangeStaff
 //---------------------------------------------------------
 
-ChangeStaff::ChangeStaff(Staff* _staff, int _lines, bool _small, bool _noStems, bool _invisible)
+ChangeStaff::ChangeStaff(Staff* _staff, int _lines, bool _small, bool _noStems,
+   bool _invisible, bool _useTablature)
       {
       staff   = _staff;
       lines   = _lines;
       small   = _small;
       noStems = _noStems;
       invisible = _invisible;
+      useTablature = _useTablature;
       }
 
 //---------------------------------------------------------
@@ -1959,29 +1961,31 @@ void ChangeStaff::flip()
       int oldSmall   = staff->small();
       bool oldNoStems = staff->slashStyle();
       bool oldInvisible = staff->invisible();
+      bool oldUseTablature = staff->useTablature();
 
       staff->setLines(lines);
       staff->setSmall(small);
       staff->setSlashStyle(noStems);
       staff->setInvisible(invisible);
+      staff->setUseTablature(useTablature);
 
       lines   = oldLines;
       small   = oldSmall;
       noStems = oldNoStems;
       invisible = oldInvisible;
+      useTablature = oldUseTablature;
 
       if (linesChanged || invisibleChanged) {
             Score* score = staff->score();
             int staffIdx = score->staffIdx(staff);
             for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                   MStaff* mstaff = m->mstaff(staffIdx);
-                  mstaff->lines->setLines(staff->lines());
+                  // mstaff->lines->setLines(staff->lines());
                   mstaff->lines->setVisible(!staff->invisible());
                   }
             }
       staff->score()->rebuildMidiMapping();
       staff->score()->setPlaylistDirty(true);
-printf("ChangeStaff\n");
       }
 
 //---------------------------------------------------------

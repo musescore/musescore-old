@@ -52,6 +52,7 @@
 #include "undo.h"
 #include "part.h"
 #include "tablature.h"
+#include "fret.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -127,6 +128,7 @@ Note::Note(Score* s)
       _userMirror        = DH_AUTO;
       _line              = 0;
       _fret              = -1;
+      _string            = -1;
       _lineOffset        = 0;
       _tieFor            = 0;
       _tieBack           = 0;
@@ -161,6 +163,7 @@ Note::Note(const Note& n)
       _tpc            = n._tpc;
       _line           = n._line;
       _fret           = n._fret;
+      _string         = n._string;
       _userAccidental = n._userAccidental;
       _accidental     = 0;
       if (n._accidental)
@@ -439,7 +442,7 @@ QPointF Note::stemPos(bool upFlag) const
             upFlag = !upFlag;
 
       double sw   = point(score()->styleS(ST_stemWidth)) * .5;
-      if (chord() && chord()->staff()->tablature()) {
+      if (chord() && chord()->staff()->useTablature()) {
             double xoffset = (sw + _bbox.width() + _bbox.x()) * .5;
             pt += QPointF(xoffset, (_bbox.height() * .5 + spatium() * .5) * (upFlag ? -1.0 : 1.0));
             }
@@ -481,7 +484,7 @@ double Note::stemYoff(bool upFlag) const
 void Note::draw(QPainter& p, ScoreView* v) const
       {
       if (!_hidden || !userOff().isNull()) {
-            if (chord() && chord()->staff()->tablature()) {
+            if (chord() && chord()->staff()->useTablature()) {
                   double mag = magS();
                   QFont f("DejaVuSerif");
                   int size = lrint(9.0 * DPI / PPI);
@@ -574,7 +577,7 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
       xml.tag("tpc", rtpc);
       if (_fret >= 0) {
             xml.tag("fret", _fret);
-            xml.tag("line", _line);
+            xml.tag("string", _string);
             }
 
       if (_tuning != 0.0)
@@ -645,6 +648,8 @@ void Note::read(QDomElement e)
                   }
             else if (tag == "fret")
                   _fret = i;
+            else if (tag == "string")
+                  _string = i;
             else if (tag == "line")
                   _line = i;
             else if (tag == "tuning")
@@ -765,7 +770,7 @@ QRectF Note::drag(const QPointF& s)
       QRectF bb(chord()->bbox());
 
       double _spatium = spatium();
-      bool tab = staff()->tablature();
+      bool tab = staff()->useTablature();
       double step = tab ? _spatium * 1.5 : _spatium * .5;
       _lineOffset = lrint(s.y() / step);
       if (tab) {
@@ -794,9 +799,8 @@ void Note::endDrag()
       Staff* staff = score()->staff(staffIdx);
       int npitch;
       int tpc;
-      Tablature* tab = staff->tablature();
-      if (tab) {
-            npitch = tab->getPitch(nLine, _fret);
+      if (staff->useTablature()) {
+            npitch = staff->part()->tablature()->getPitch(nLine, _fret);
             tpc    = pitch2tpc(npitch, 0);
             }
       else {
@@ -980,8 +984,16 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   view->cmdAddSlur(this, 0);
                   return 0;
 
-            case HARMONY:
             case FRET_DIAGRAM:
+                  {
+                  if (staff()->part()->tablature()) {
+                        FretDiagram* fd = static_cast<FretDiagram*>(e);
+                        fd->init(staff()->part()->tablature(), chord());
+                        }
+                  }
+                  // fall through
+
+            case HARMONY:
             case LYRICS:
                   e->setParent(chord()->measure());
                   e->setTick(chord()->tick());
@@ -1237,8 +1249,7 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
 
 void Note::layout()
       {
-      Tablature* tab = staff()->tablature();
-      if (tab) {
+      if (staff()->useTablature()) {
             QFont f("DejaVuSerif");
             int size = lrint(9.0 * DPI / PPI);
             f.setPixelSize(size);
@@ -1246,7 +1257,7 @@ void Note::layout()
             double mag = magS();
             QString s  = QString::number(_fret);
             QRectF bb(fm.tightBoundingRect(s));
-            _bbox      = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
+            _bbox = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
             }
       else
             _bbox = symbols[noteHead()].bbox(magS());
@@ -1265,13 +1276,13 @@ void Note::layout()
 
 void Note::layout1(char* tversatz)
       {
-      Tablature* tab = staff()->tablature();
-      if (tab) {
+      if (staff()->useTablature()) {
             if (_fret < 0) {
                   int line, fret;
+                  Tablature* tab = staff()->part()->tablature();
                   if (tab->convertPitch(_pitch, &line, &fret)) {
                         _fret = fret;
-                        _line = line;
+                        _string = line;
                         }
                   }
             }
@@ -1411,8 +1422,14 @@ void Note::setMag(double val)
 void Note::setLine(int n)
       {
       _line = n;
-      double step = staff()->tablature() ? spatium() * 1.5 : spatium() * .5;
-      _pos.ry() = _line * step;
+      if (staff()->useTablature()) {
+            _string  = n;
+            _pos.ry() = _string * spatium() * 1.5;
+            }
+      else {
+            _line = n;
+            _pos.ry() = _line * spatium() * .5;
+            }
       }
 
 //---------------------------------------------------------

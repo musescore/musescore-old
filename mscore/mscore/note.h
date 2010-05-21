@@ -69,6 +69,7 @@ class Note : public Element {
       int _subchannel;        ///< articulation
       char _line;             ///< y-Position; 0 - top line.
       char _fret;             ///< for tablature view
+      char _string;
 
       bool dragMode;
       char _pitch;            ///< Note pitch as midi value (0 - 127).
@@ -160,6 +161,8 @@ class Note : public Element {
 
       int fret() const                { return _fret; }
       void setFret(int val)           { _fret = val;  }
+      int string() const              { return _string; }
+      void setString(int val)         { _string = val; }
 
       virtual void add(Element*);
       virtual void remove(Element*);

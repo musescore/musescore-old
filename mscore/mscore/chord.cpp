@@ -1035,7 +1035,7 @@ void Chord::setMag(double val)
 
 void Chord::layoutStem1()
       {
-      if (staff()->tablature())
+      if (staff()->useTablature())
             return;
       int istaff = staffIdx();
 
@@ -1089,7 +1089,7 @@ void Chord::layoutStem1()
 
 void Chord::layoutStem()
       {
-      if (staff()->tablature())
+      if (staff()->useTablature())
             return;
       System* s = segment()->measure()->system();
       if (s == 0)       //DEBUG
@@ -1240,13 +1240,25 @@ void Chord::layout()
       if (_notes.empty())
             return;
 
-/*      if (staff() && staff()->tablature()) {
-            foreach(Note* note, _notes)
+      double _spatium  = spatium();
+
+      foreach(const LedgerLine* l, _ledgerLines)
+            delete l;
+      _ledgerLines.clear();
+
+      if (staff() && staff()->useTablature()) {
+            foreach(Note* note, _notes) {
                   note->layout();
+                  note->setPos(0.0, _spatium * note->string() * 1.5);
+                  }
+            delete _stem;
+            _stem = 0;
+            delete _hook;
+            _hook = 0;
+            delete _stemSlash;
+            _stemSlash = 0;
             return;
             }
-  */
-      double _spatium  = spatium();
 
       if (!segment()) {
             //
@@ -1271,7 +1283,7 @@ void Chord::layout()
 
       double lx = 0.0;
       _dotPosX  = 0.0;
-      double stepDistance = staff()->tablature() ? _spatium * 1.5 : _spatium * .5;
+      double stepDistance = _spatium * .5;
 
       foreach(Note* note, _notes) {
             note->layout();
@@ -1300,14 +1312,6 @@ void Chord::layout()
             if (x < lx)
                   lx = x;
             }
-
-      //-----------------------------------------
-      //  process ledger lines
-      //-----------------------------------------
-
-      foreach(const LedgerLine* l, _ledgerLines)
-            delete l;
-      _ledgerLines.clear();
 
       //---------------------------------------------------
       //    create ledger lines for notes moved to

@@ -70,6 +70,15 @@ p, li { white-space: pre-wrap; }
       <maxPitchP>83</maxPitchP>
       <minPitchA>40</minPitchA>
       <maxPitchA>83</maxPitchA>
+      <Tablature>
+        <frets>13</frets>
+        <string>40</string>
+        <string>45</string>
+        <string>50</string>
+        <string>55</string>
+        <string>59</string>
+        <string>64</string>
+        </Tablature>
       <trackName>Guitar</trackName>
       <Channel>
         <controller ctrl="0" value="0"/>
@@ -85,15 +94,7 @@ p, li { white-space: pre-wrap; }
   <Part>
     <Staff>
       <lines>6</lines>
-      <Tablature>
-        <frets>13</frets>
-        <string>40</string>
-        <string>45</string>
-        <string>50</string>
-        <string>55</string>
-        <string>59</string>
-        <string>64</string>
-        </Tablature>
+      <useTablature>1</useTablature>
       <cleflist>
         <clef tick="0" idx="13"/>
         </cleflist>
@@ -129,6 +130,15 @@ p, li { white-space: pre-wrap; }
       <maxPitchP>83</maxPitchP>
       <minPitchA>40</minPitchA>
       <maxPitchA>83</maxPitchA>
+      <Tablature>
+        <frets>13</frets>
+        <string>40</string>
+        <string>45</string>
+        <string>50</string>
+        <string>55</string>
+        <string>59</string>
+        <string>64</string>
+        </Tablature>
       <trackName>Guitar (Tablature)</trackName>
       <Channel>
         <controller ctrl="0" value="0"/>
@@ -179,6 +189,13 @@ p, li { white-space: pre-wrap; }
       <maxPitchP>65</maxPitchP>
       <minPitchA>28</minPitchA>
       <maxPitchA>65</maxPitchA>
+      <Tablature>
+        <frets>24</frets>
+        <string>28</string>
+        <string>33</string>
+        <string>38</string>
+        <string>43</string>
+        </Tablature>
       <trackName>Electric Bass</trackName>
       <Channel>
         <controller ctrl="0" value="0"/>
@@ -194,13 +211,7 @@ p, li { white-space: pre-wrap; }
   <Part>
     <Staff>
       <lines>4</lines>
-      <Tablature>
-        <frets>24</frets>
-        <string>28</string>
-        <string>33</string>
-        <string>38</string>
-        <string>43</string>
-        </Tablature>
+      <useTablature>1</useTablature>
       <cleflist>
         <clef tick="0" idx="13"/>
         </cleflist>
@@ -237,6 +248,13 @@ p, li { white-space: pre-wrap; }
       <maxPitchP>65</maxPitchP>
       <minPitchA>28</minPitchA>
       <maxPitchA>65</maxPitchA>
+      <Tablature>
+        <frets>24</frets>
+        <string>28</string>
+        <string>33</string>
+        <string>38</string>
+        <string>43</string>
+        </Tablature>
       <trackName>Electric Bass (Tablature 4 strings)</trackName>
       <Channel>
         <controller ctrl="0" value="0"/>
@@ -579,14 +597,14 @@ p, li { white-space: pre-wrap; }
           <pitch>50</pitch>
           <tpc>16</tpc>
           <fret>0</fret>
-          <line>3</line>
+          <string>3</string>
           </Note>
         <Note>
           <color r="233" g="10" b="253"/>
           <pitch>55</pitch>
           <tpc>15</tpc>
           <fret>0</fret>
-          <line>2</line>
+          <string>2</string>
           </Note>
         </Chord>
       <Chord>
@@ -595,7 +613,7 @@ p, li { white-space: pre-wrap; }
           <pitch>57</pitch>
           <tpc>17</tpc>
           <fret>2</fret>
-          <line>2</line>
+          <string>2</string>
           </Note>
         </Chord>
       <Beam id="1">
@@ -607,7 +625,7 @@ p, li { white-space: pre-wrap; }
           <pitch>59</pitch>
           <tpc>19</tpc>
           <fret>0</fret>
-          <line>1</line>
+          <string>1</string>
           </Note>
         </Chord>
       <Chord>
@@ -617,7 +635,7 @@ p, li { white-space: pre-wrap; }
           <pitch>60</pitch>
           <tpc>14</tpc>
           <fret>1</fret>
-          <line>1</line>
+          <string>1</string>
           </Note>
         </Chord>
       <Chord>
@@ -626,7 +644,7 @@ p, li { white-space: pre-wrap; }
           <pitch>60</pitch>
           <tpc>14</tpc>
           <fret>1</fret>
-          <line>1</line>
+          <string>1</string>
           </Note>
         </Chord>
       <BarLine>
@@ -838,7 +856,7 @@ p, li { white-space: pre-wrap; }
           <pitch>36</pitch>
           <tpc>14</tpc>
           <fret>3</fret>
-          <line>2</line>
+          <string>2</string>
           </Note>
         </Chord>
       <Chord>
@@ -847,7 +865,7 @@ p, li { white-space: pre-wrap; }
           <pitch>38</pitch>
           <tpc>16</tpc>
           <fret>0</fret>
-          <line>1</line>
+          <string>1</string>
           </Note>
         </Chord>
       <Chord>
@@ -856,7 +874,7 @@ p, li { white-space: pre-wrap; }
           <pitch>40</pitch>
           <tpc>18</tpc>
           <fret>2</fret>
-          <line>1</line>
+          <string>1</string>
           </Note>
         </Chord>
       <Chord>
@@ -865,7 +883,7 @@ p, li { white-space: pre-wrap; }
           <pitch>41</pitch>
           <tpc>13</tpc>
           <fret>3</fret>
-          <line>1</line>
+          <string>1</string>
           </Note>
         </Chord>
       <BarLine>

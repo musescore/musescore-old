@@ -74,6 +74,7 @@ class Clef : public Compound {
 */
 
 struct ClefInfo {
+      const char* tag;        ///< comprehensive name for instruments.xml
       const char* sign;       ///< Name for musicXml.
       int line;               ///< Line for musicXml.
       int octChng;            ///< Octave change for musicXml.

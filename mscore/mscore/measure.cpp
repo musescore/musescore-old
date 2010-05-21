@@ -117,9 +117,8 @@ Measure::Measure(Score* s)
             Staff* staff = score()->staff(staffIdx);
             s->lines     = new StaffLines(score());
             s->lines->setTrack(staffIdx * VOICES);
-            s->lines->setLines(staff->lines());
+            // s->lines->setLines(staff->lines());
             s->lines->setParent(this);
-            s->lines->setDistance(staff->tablature() ? 1.5 : 1.0);
             s->lines->setVisible(!staff->invisible());
             staves.push_back(s);
             }
@@ -528,8 +527,10 @@ void Measure::layout(double width)
       int nstaves = _score->nstaves();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             staves[staffIdx]->distance = 0.0;
-            if (staves[staffIdx]->lines)
-                  staves[staffIdx]->lines->setMag(score()->staff(staffIdx)->mag());
+            StaffLines* sl = staves[staffIdx]->lines;
+            if (sl) {
+                  sl->setMag(score()->staff(staffIdx)->mag());
+                  }
             }
 
       // height of boundingRect will be set in system->layout2()
@@ -1355,8 +1356,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             MStaff* ms   = new MStaff;
             ms->lines    = new StaffLines(score());
             ms->lines->setTrack(i * VOICES);
-            ms->lines->setLines(staff->lines());
-            ms->lines->setDistance(staff->tablature() ? 1.5 : 1.0);
+            // ms->lines->setLines(staff->lines());
             ms->lines->setParent(this);
             ms->lines->setVisible(!staff->invisible());
 
@@ -1427,7 +1427,7 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
 
       MStaff* ms = new MStaff;
       ms->lines  = new StaffLines(score());
-      ms->lines->setLines(staff->lines());
+      // ms->lines->setLines(staff->lines());
       ms->lines->setParent(this);
       ms->lines->setTrack(staffIdx * VOICES);
       ms->distance = point(staffIdx == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
@@ -2078,7 +2078,7 @@ void Measure::read(QDomElement e, int idx)
             MStaff* s    = new MStaff;
             Staff* staff = score()->staff(n);
             s->lines     = new StaffLines(score());
-            s->lines->setLines(staff->lines());
+//            s->lines->setLines(staff->lines());
             s->lines->setParent(this);
             s->lines->setTrack(n * VOICES);
             s->distance = point(n == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
