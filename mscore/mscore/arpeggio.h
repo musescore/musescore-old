@@ -23,6 +23,8 @@
 
 #include "element.h"
 
+class Chord;
+
 // Arpeggio types
 enum { ARP_NORMAL, ARP_UP, ARP_DOWN, ARP_BRACKET};
 
@@ -34,21 +36,28 @@ class Arpeggio : public Element {
       Spatium _userLen1;
       Spatium _userLen2;
       double _height;
+      int _span;              // spanning staves
 
       virtual bool isMovable() const          { return true; }
       virtual QLineF dragAnchor() const;
+      virtual QPointF gripAnchor(int) const;
 
    public:
       Arpeggio(Score* s);
-      virtual Arpeggio* clone() const { return new Arpeggio(*this); }
+      virtual Arpeggio* clone() const  { return new Arpeggio(*this); }
       virtual ElementType type() const { return ARPEGGIO; }
+      Chord* chord() const             { return (Chord*)parent(); }
       virtual QRectF bbox() const;
       virtual void draw(QPainter&, ScoreView*) const;
       virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
+      virtual bool edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&);
+
       void read(QDomElement e);
       void write(Xml& xml) const;
+      int span() const      { return _span; }
+      void setSpan(int val) { _span = val; }
 
       void setHeight(double);
       };

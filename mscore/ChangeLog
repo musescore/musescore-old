@@ -1,4 +1,6 @@
 21.may (ws)
+      - new: arpeggios spanning more than one staff (shift + up/down in
+        edit mode)
       - new: switch between tablature and normal staff
 20.may (ws)
       - new: fret diagram editor
