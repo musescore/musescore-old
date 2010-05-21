@@ -168,13 +168,13 @@ Staff::Staff(Score* s, Part* p, int rs)
       _clefList     = new ClefList;
       _keymap       = new KeyList;
       (*_keymap)[0] = 0;                  // default to C major
-      _show         = true;
       _lines        = 5;
-      _tablature    = 0;                  // no tablature
+      _show         = true;
+      _useTablature = false;
       _small        = false;
       _slashStyle   = false;
-      _barLineSpan  = 1;
       _invisible    = false;
+      _barLineSpan  = 1;
       }
 
 //---------------------------------------------------------
@@ -185,7 +185,6 @@ Staff::~Staff()
       {
       delete _clefList;
       delete _keymap;
-      delete _tablature;
       _keymap   = 0;      // DEBUG
       _clefList = 0;
       }
@@ -217,8 +216,8 @@ void Staff::write(Xml& xml) const
       xml.stag("Staff");
       if (lines() != 5)
             xml.tag("lines", lines());
-      if (tablature())
-            _tablature->write(xml);
+      if (useTablature())
+            xml.tag("useTablature", useTablature());
       if (small() && !xml.excerptmode)    // switch small staves to normal ones when extracting part
             xml.tag("small", small());
       if (invisible())
@@ -248,10 +247,8 @@ void Staff::read(QDomElement e)
             int v = e.text().toInt();
             if (tag == "lines")
                   setLines(v);
-            else if (tag == "Tablature") {
-                  _tablature = new Tablature();
-                  _tablature->read(e);
-                  }
+            else if (tag == "useTablature")
+                  _useTablature = v;
             else if (tag == "small")
                   setSmall(v);
             else if (tag == "invisible")
@@ -284,10 +281,10 @@ void Staff::read(QDomElement e)
 
 void Staff::changeKeySig(int tick, KeySigEvent st)
       {
-printf("Staff::changeKeySig "); st.print(); printf("\n");
+// printf("Staff::changeKeySig "); st.print(); printf("\n");
       KeySigEvent ot = _keymap->key(tick);
       if (ot == st) {
-printf("Staff::changeKeySig: no change\n");
+// printf("Staff::changeKeySig: no change\n");
             return;                 // no change
             }
 
@@ -455,7 +452,7 @@ void Staff::changeClef(int tick, int st)
 double Staff::height() const
       {
       double d = spatium();
-      if (_tablature)
+      if (_useTablature)
             d *= 1.5;
       return (_lines-1) * d;
       }
@@ -515,16 +512,13 @@ int Staff::channel(int tick,  int voice) const
       }
 
 //---------------------------------------------------------
-//   setTablature
+//   lines
 //---------------------------------------------------------
 
-void Staff::setTablature(Tablature* val)
+int Staff::lines() const
       {
-      if (val)
-            _tablature = new Tablature(*val);
-      else {
-            delete _tablature;
-            _tablature = 0;
-            }
+      if (_useTablature)
+            return part()->tablature()->strings();
+      return _lines;
       }
 

@@ -3777,16 +3777,6 @@
         <name>Guitar</name>
         <short-name>Guit.</short-name>
         <clef>3</clef>
-        <aPitchRange>40-83</aPitchRange>
-        <pPitchRange>40-83</pPitchRange>
-        <channel>
-           <program>24</program>
-           </channel>
-        </instrument>
-     <instrument>
-        <description>Guitar (Tablature)</description>
-        <name>Guitar</name>
-        <short-name>Guit.</short-name>
         <Tablature>
            <frets>13</frets>
            <string>40</string>
@@ -3801,6 +3791,11 @@
         <channel>
            <program>24</program>
            </channel>
+        </instrument>
+     <instrument>
+        <init>Guitar</init>
+        <description>Guitar (Tablature)</description>
+        <stafftype>tablature</stafftype>
         </instrument>
      <instrument>
         <name>11-string Alto Guitar</name>
@@ -3874,16 +3869,6 @@
         <channel>
            <program>33</program>
            </channel>
-        </instrument>
-     <instrument>
-        <description>Electric Bass (Tablature 4 strings)</description>
-        <name>Electric Bass</name>
-        <short-name>El. B.</short-name>
-        <aPitchRange>28-65</aPitchRange>
-        <pPitchRange>28-65</pPitchRange>
-        <channel>
-           <program>33</program>
-           </channel>
         <Tablature>
            <frets>24</frets>
            <string>28</string>
@@ -3891,6 +3876,11 @@
            <string>38</string>
            <string>43</string>
            </Tablature>
+        </instrument>
+     <instrument>
+        <init>Electric Bass</init>
+        <description>Electric Bass (Tablature 4 strings)</description>
+        <stafftype>tablature</stafftype>
         </instrument>
      <instrument>
         <name>Fretless Electric Bass</name>

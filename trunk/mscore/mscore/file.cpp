@@ -680,7 +680,7 @@ void MuseScore::newFile()
                   Duration d(Duration::V_MEASURE);
                   if (tick == 0) {
                         Staff* staff = score->staff(staffIdx);
-                        if (staff->tablature() == 0) {
+                        if (!staff->useTablature()) {
                               TimeSig* ts = new TimeSig(score, timesigN, timesigZ);
                               ts->setTick(0);
                               ts->setTrack(staffIdx * VOICES);

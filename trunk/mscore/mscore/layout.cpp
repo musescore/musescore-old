@@ -162,7 +162,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
       {
       Staff* staff = Score::staff(staffIdx);
 
-      if (staff->part()->drumset() || staff->tablature())
+      if (staff->part()->drumset() || staff->useTablature())
             return;
 
       int startTrack = staffIdx * VOICES;
@@ -812,7 +812,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         }
                   }
             bool needKeysig = keyIdx.isValid() && (isFirstSystem || styleB(ST_genKeysig));
-            if (staff->tablature())
+            if (staff->useTablature())
                   needKeysig = false;
             if (needKeysig && !hasKeysig) {
                   //

@@ -50,9 +50,19 @@ InstrumentTemplate::InstrumentTemplate()
       drumset            = 0;
       extended           = false;
       tablature          = 0;
+      useTablature       = false;
       }
 
 InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
+      {
+      init(t);
+      }
+
+//---------------------------------------------------------
+//   init
+//---------------------------------------------------------
+
+void InstrumentTemplate::init(const InstrumentTemplate& t)
       {
       trackName  = t.trackName;
       longName   = t.longName;
@@ -100,7 +110,7 @@ void InstrumentTemplate::write(Xml& xml) const
       if (tablature)
             tablature->write(xml);
       if (staves == 1) {
-            xml.tag("clef", clefIdx[0]);
+            xml.tag("clef", clefTable[clefIdx[0]].tag);
             if (staffLines[0] != 5)
                   xml.tag("stafflines", staffLines[0]);
             if (smallStaff[0])
@@ -109,7 +119,7 @@ void InstrumentTemplate::write(Xml& xml) const
       else {
             xml.tag("staves", staves);
             for (int i = 0; i < staves; ++i) {
-                  xml.tag(QString("clef staff=\"%1\"").arg(i), clefIdx[i]);
+                  xml.tag(QString("clef staff=\"%1\"").arg(i), clefTable[clefIdx[i]].tag);
                   if (staffLines[0] != 5)
                         xml.tag(QString("stafflines staff=\"%1\"").arg(i), staffLines[i]);
                   if (smallStaff[0])
@@ -232,6 +242,17 @@ void InstrumentTemplate::read(QDomElement e)
                   int idx = e.attribute("staff", "1").toInt() - 1;
                   if (idx >= MAX_STAVES)
                         idx = MAX_STAVES-1;
+                  bool ok;
+                  int i = val.toInt(&ok);
+                  if (!ok) {
+                        i = 0;
+                        for (int k = 0; k < CLEF_MAX; ++k) {
+                              if (clefTable[i].tag == val) {
+                                    i = k;
+                                    break;
+                                    }
+                              }
+                        }
                   clefIdx[idx] = i;
                   }
             else if (tag == "stafflines") {
@@ -291,6 +312,20 @@ void InstrumentTemplate::read(QDomElement e)
                   MidiArticulation a;
                   a.read(e);
                   articulation.append(a);
+                  }
+            else if (tag == "stafftype") {
+                  if (val == "tablature")
+                        useTablature = true;
+                  else {
+                        fprintf(stderr, "unknown stafftype <%s>\n", qPrintable(val));
+                        domError(e);
+                        }
+                  }
+            else if (tag == "init") {
+                  InstrumentTemplate* ttt = searchTemplate(val);
+                  if (ttt) {
+                        init(*ttt);
+                        }
                   }
             else
                   domError(e);

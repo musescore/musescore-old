@@ -56,6 +56,7 @@ struct InstrumentTemplate {
       int staves;             // 1 <= MAX_STAVES
       int clefIdx[MAX_STAVES];
       int staffLines[MAX_STAVES];
+      bool useTablature;
       Tablature* tablature;
       int bracket;            // bracket type (NO_BRACKET)
       bool smallStaff[MAX_STAVES];
@@ -65,6 +66,7 @@ struct InstrumentTemplate {
       InstrumentTemplate();
       InstrumentTemplate(const InstrumentTemplate&);
       ~InstrumentTemplate();
+      void init(const InstrumentTemplate&);
 
       void setPitchRange(const QString& s, char* a, char* b) const;
       void write(Xml& xml) const;

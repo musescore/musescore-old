@@ -3692,9 +3692,9 @@ void ScoreView::cmdChangeEnharmonic(bool up)
             Staff* staff = n->staff();
             if (staff->part()->useDrumset())
                   continue;
-            if (staff->tablature()) {
+            if (staff->useTablature()) {
                   int string = n->line() + (up ? 1 : -1);
-                  int fret = staff->tablature()->fret(n->pitch(), string);
+                  int fret = staff->part()->tablature()->fret(n->pitch(), string);
                   if (fret != -1) {
                         _score->startCmd();
                         _score->undoChangePitch(n, n->pitch(), n->tpc(), 0, string, fret);

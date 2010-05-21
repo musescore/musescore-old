@@ -980,6 +980,8 @@ void ShowNoteWidget::setElement(Element* e)
       nb.velo->setValue(note->velocity());
       nb.tuning->setValue(note->tuning());
       nb.line->setValue(note->line());
+      nb.string->setValue(note->string());
+      nb.fret->setValue(note->fret());
       nb.mirror->setChecked(note->mirror());
       nb.tpc->setValue(note->tpc());
       nb.headGroup->setValue(note->headGroup());

@@ -424,16 +424,11 @@ class StaffLines : public Element {
       virtual ElementType type() const     { return STAFF_LINES; }
       Measure* measure() const             { return (Measure*)parent(); }
       void setWidth(qreal v)               { _width = v;         }
-      virtual QRectF bbox() const;
       virtual void draw(QPainter&, ScoreView*) const;
-      virtual void write(Xml& xml) const;
-      virtual void read(QDomElement);
       virtual QPointF canvasPos() const;   ///< position in canvas coordinates
-      int lines() const                    { return subtype(); }
-      void setLines(int val)               { setSubtype(val);  }
       double y1() const;
       double y2() const;
-      void setDistance(qreal val)          { _dist = val; }
+      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------

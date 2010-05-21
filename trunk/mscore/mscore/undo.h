@@ -1036,11 +1036,12 @@ class ChangeStaff : public UndoCommand {
       bool small;
       bool noStems;
       bool invisible;
+      bool useTablature;
 
       void flip();
 
    public:
-      ChangeStaff(Staff*, int lines, bool small, bool noStems, bool invisible);
+      ChangeStaff(Staff*, int lines, bool small, bool noStems, bool invisible, bool useTab);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

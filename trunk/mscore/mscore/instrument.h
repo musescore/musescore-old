@@ -30,6 +30,7 @@ class Xml;
 class Staff;
 class Score;
 class Drumset;
+class Tablature;
 
 //---------------------------------------------------------
 //   NamedEventList
@@ -113,6 +114,8 @@ struct Instrument {
       bool _useDrumset;
       Drumset* _drumset;
 
+      Tablature* _tablature;
+
       QList<NamedEventList> _midiActions;
       QList<MidiArticulation> _articulation;
       QList<Channel> _channel;      // at least one entry
@@ -157,6 +160,7 @@ struct Instrument {
       void setMidiActions(const QList<NamedEventList>& l)    { _midiActions = l;  }
       void setArticulation(const QList<MidiArticulation>& l) { _articulation = l; }
       void setChannel(const QList<Channel>& l)               { _channel = l;      }
+      Tablature* tablature() const                           { return _tablature; }
       };
 
 #endif

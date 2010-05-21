@@ -24,6 +24,9 @@
 #include "element.h"
 #include "ui_fretdprops.h"
 
+class Tablature;
+class Chord;
+
 //---------------------------------------------------------
 //   FretDiagram
 //---------------------------------------------------------
@@ -67,6 +70,7 @@ class FretDiagram : public Element {
       char* dots()      { return _dots;   }
       char* marker()    { return _marker; }
       char* fingering() { return _fingering; }
+      void init(Tablature*, Chord*);
       };
 
 //---------------------------------------------------------

@@ -65,7 +65,7 @@ Rest::Rest(Score* s, int tick, const Duration& d)
 
 void Rest::draw(QPainter& p, ScoreView*) const
       {
-      if (staff()->tablature() || generated())
+      if (staff()->useTablature() || generated())
             return;
       double _spatium = spatium();
 

@@ -659,9 +659,8 @@ void ElementList::write(Xml& xml) const
 StaffLines::StaffLines(Score* s)
    : Element(s)
       {
-      setLines(5);
+//      setLines(5);
       _width = 1.0;      // dummy
-      _dist  = 1.0;
       setSelectable(false);
       }
 
@@ -682,8 +681,18 @@ QPointF StaffLines::canvasPos() const
 
 QRectF StaffLines::bbox() const
       {
+      double _dist;
+      int l;
+      if (staff()) {
+            _dist = staff()->useTablature() ? 1.5 : 1.0;
+            l     = staff()->lines();
+            }
+      else {
+            _dist = 1.0;
+            l     = 5;
+            }
+
       double d = _dist * spatium();
-      int l    = lines() - 1;
       qreal lw = point(score()->styleS(ST_staffLineWidth));
 
       switch (l) {
@@ -704,6 +713,16 @@ QRectF StaffLines::bbox() const
 
 void StaffLines::draw(QPainter& p, ScoreView*) const
       {
+      double _dist;
+      int l;
+      if (staff()) {
+            _dist = staff()->useTablature() ? 1.5 : 1.0;
+            l     = staff()->lines();
+            }
+      else {
+            _dist = 1.0;
+            l     = 5;
+            }
       QPointF _pos(0.0, 0.0);
       double d = _dist * spatium();
 
@@ -717,7 +736,7 @@ void StaffLines::draw(QPainter& p, ScoreView*) const
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
 
-      switch(lines()) {
+      switch(l) {
             case 1:
                   {
                   qreal y = _pos.y() + 2 * d;
@@ -733,14 +752,14 @@ void StaffLines::draw(QPainter& p, ScoreView*) const
                   }
                   break;
             case 3:
-                  for (int i = 0; i < lines(); ++i) {
+                  for (int i = 0; i < l; ++i) {
                         qreal y = _pos.y() + i * d * 2.0;
                         p.drawLine(QLineF(x1, y, x2, y));
                         }
                   break;
 
             default:
-                  for (int i = 0; i < lines(); ++i) {
+                  for (int i = 0; i < l; ++i) {
                         qreal y = _pos.y() + i * d;
                         p.drawLine(QLineF(x1, y, x2, y));
                         }
@@ -757,7 +776,8 @@ double StaffLines::y1() const
       double _spatium = spatium();
 
       double y = measure()->system()->staff(staffIdx())->y();
-      switch(lines()) {
+      int l = staff() ? staff()->lines() : 5;
+      switch(l) {
             case 1:
                   return y + _pos.y() + 1 * _spatium;
             case 2:
@@ -774,47 +794,29 @@ double StaffLines::y1() const
 
 double StaffLines::y2() const
       {
+      double _dist;
+      int l;
+      if (staff()) {
+            _dist = staff()->useTablature() ? 1.5 : 1.0;
+            l     = staff()->lines();
+            }
+      else {
+            _dist = 1.0;
+            l     = 5;
+            }
       double y = measure()->system()->staff(staffIdx())->y();
       double d = _dist * spatium();
-      switch(lines()) {
+
+      switch(l) {
             case 1:
                   return y + _pos.y() + 3 * d;
             case 2:
                   return y + _pos.y() + 3 * d;
             case 3:
             default:
-                  return y + _pos.y() + (lines() - 1) * d;
+                  return y + _pos.y() + (l - 1) * d;
             }
       }
-
-//---------------------------------------------------------
-//   StaffLines::write
-//---------------------------------------------------------
-
-void StaffLines::write(Xml& xml) const
-      {
-      xml.stag("Staff");
-      if (lines() != 5)
-            xml.tag("lines", lines());
-      Element::writeProperties(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   StaffLines::read
-//---------------------------------------------------------
-
-void StaffLines::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "lines")
-                  setLines(e.text().toInt());
-            else if (!Element::readProperties(e))
-                  domError(e);
-            }
-      }
-
 
 //---------------------------------------------------------
 //   Line
