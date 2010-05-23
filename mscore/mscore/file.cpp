@@ -1508,12 +1508,13 @@ void Score::printFile()
       {
       QPrinter* printerDev = static_cast<QPrinter*>(pdev);
 
-      printerDev->setPaperSize(paperSizes[pageFormat()->size].qtsize);
-      if (printerDev->paperSize() == QPrinter::Custom) {
+      if (paperSizes[pageFormat()->size].qtsize == QPrinter::Custom) {
             printerDev->setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
                QPrinter::Inch);
-            printf("paper size %f %f\n", pageFormat()->_width, pageFormat()->_height);
             }
+      else
+            printerDev->setPaperSize(paperSizes[pageFormat()->size].qtsize);
+
       printerDev->setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       printerDev->setCreator("MuseScore Version: " VERSION);
       printerDev->setFullPage(true);
@@ -1597,11 +1598,12 @@ void Score::print(QPrinter* printer)
 bool Score::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
       {
       QPrinter p(QPrinter::HighResolution);
-      p.setPaperSize(paperSizes[pageFormat()->size].qtsize);
-      if (p.paperSize() == QPrinter::Custom) {
+      if (paperSizes[pageFormat()->size].qtsize == QPrinter::Custom) {
             p.setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
                QPrinter::Inch);
             }
+      else
+            p.setPaperSize(paperSizes[pageFormat()->size].qtsize);
 
       p.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       p.setCreator("MuseScore Version: " VERSION);

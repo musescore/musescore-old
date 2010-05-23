@@ -481,8 +481,6 @@ void Tuplet::read(QDomElement e, const QList<Tuplet*>& tuplets)
             Duration d;
             d.setVal(bl);
             _baseLen = d;
-printf("Tuplet base len %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
-printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.numerator(), _ratio.denominator());
             d.setVal(bl * _ratio.denominator());
             setFraction(d.fraction());
             }
@@ -615,11 +613,6 @@ void Score::tupletDialog()
       Fraction f1 = cr->fraction();
       Fraction f = f1 * tuplet->ratio();
       f.reduce();
-
-      printf("len %s  ratio %s  base %s\n",
-            qPrintable(f1.print()),
-            qPrintable(tuplet->ratio().print()),
-            qPrintable(f.print()));
 
       tuplet->setBaseLen(Fraction(1, f.denominator()));
 
