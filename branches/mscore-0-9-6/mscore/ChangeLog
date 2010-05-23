@@ -1,3 +1,6 @@
+23.may (ws)
+      - fixed bug in pdf creation. Creation is now faster and Pdf's
+        are smaller escpecially for large scores.
 19.may (ws)
       - fixed some line drawings in glissando, arpeggio and rest which
         were truncated to integer precision

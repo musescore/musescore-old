@@ -1551,22 +1551,6 @@ void Score::print(QPrinter* printer)
       double mag = printer->logicalDpiX() / DPI;
       p.scale(mag, mag);
 
-      QList<Element*> el;
-      foreach (Element* element, _gel)
-            element->scanElements(&el, collectElements);
-      foreach (Beam* b, _beams)
-            b->scanElements(&el, collectElements);
-
-      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
-            // skip multi measure rests
-            if (m->type() == MEASURE) {
-                  Measure* mm = static_cast<Measure*>(m);
-                  if (mm->multiMeasure() < 0)
-                        continue;
-                  }
-            m->scanElements(&el, collectElements);
-            }
-
       for (int copy = 0; copy < printer->numCopies(); ++copy) {
             const QList<Page*> pl = pages();
             int pages = pl.size();
@@ -1580,14 +1564,16 @@ void Score::print(QPrinter* printer)
 
             bool firstPage = true;
             for (int n = fromPage; n <= toPage; ++n) {
-                  if (!firstPage) {
+                  if (!firstPage)
                         printer->newPage();
-                        }
                   firstPage = false;
                   Page* page = pl.at(n);
-                  page->scanElements(&el, collectElements);
-                  for (int i = 0; i < el.size(); ++i) {
-                        Element* e = el[i];
+
+                  QRectF fr = page->abbox();
+                  QList<const Element*> ell = items(fr);
+
+                  foreach(const Element* e, ell) {
+                        e->itemDiscovered = 0;
                         if (!e->visible())
                               continue;
                         QPointF ap(e->canvasPos() - page->pos());
