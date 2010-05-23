@@ -1,4 +1,5 @@
 23.may (ws)
+      - fix custom page size for printing and pdf output
       - fixed bug in pdf creation. Creation is now faster and Pdf's
         are smaller escpecially for large scores.
 19.may (ws)
