@@ -158,7 +158,7 @@ add_executable ( ${ExecutableName}
       bracket.cpp scoreview.cpp chord.cpp chordrest.cpp clef.cpp
       cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
       edittempo.cpp element.cpp exportxml.cpp file.cpp
-      hairpin.cpp icons.cpp importxml.cpp instrdialog.cpp
+      hairpin.cpp icons.cpp importbww.cpp importxml.cpp instrdialog.cpp
       key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp inspector.cpp
       measure.cpp menus.cpp midifile.cpp importmidi.cpp mscore.cpp
       navigate.cpp navigator.cpp note.cpp ottava.cpp
