@@ -1,6 +1,7 @@
 24.may (lv)
       - add bww files to open file dialog, actual import not implemented yet
         feature request http://musescore.org/en/node/5637
+      - add preliminary code for bww2mxml in a separate subdirectory
 21.may (ws)
       - new: arpeggios spanning more than one staff (shift + up/down in
         edit mode)
