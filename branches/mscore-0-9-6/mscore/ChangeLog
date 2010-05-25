@@ -1,3 +1,5 @@
+24.may (ws)
+      - fix remove segment
 23.may (ws)
       - fix custom page size for printing and pdf output
       - fixed bug in pdf creation. Creation is now faster and Pdf's
