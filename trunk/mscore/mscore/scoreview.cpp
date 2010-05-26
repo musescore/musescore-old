@@ -3354,23 +3354,23 @@ void ScoreView::pageEnd()
 //   adjustCanvasPosition
 //---------------------------------------------------------
 
-void ScoreView::adjustCanvasPosition(Element* el, bool playBack)
+void ScoreView::adjustCanvasPosition(const Element* el, bool playBack)
       {
-      Measure* m;
+      const Measure* m;
       if (el->type() == NOTE)
-            m = static_cast<Note*>(el)->chord()->segment()->measure();
+            m = static_cast<const Note*>(el)->chord()->segment()->measure();
       else if (el->type() == REST)
-            m = static_cast<Rest*>(el)->segment()->measure();
+            m = static_cast<const Rest*>(el)->segment()->measure();
       else if (el->type() == CHORD)
-            m = static_cast<Chord*>(el)->segment()->measure();
+            m = static_cast<const Chord*>(el)->segment()->measure();
       else if (el->type() == SEGMENT)
-            m = static_cast<Segment*>(el)->measure();
+            m = static_cast<const Segment*>(el)->measure();
       else if (el->type() == LYRICS)
-            m = static_cast<Lyrics*>(el)->measure();
+            m = static_cast<const Lyrics*>(el)->measure();
       else if (el->type() == HARMONY)
-            m = static_cast<Harmony*>(el)->measure();
+            m = static_cast<const Harmony*>(el)->measure();
       else if (el->type() == MEASURE)
-            m = static_cast<Measure*>(el);
+            m = static_cast<const Measure*>(el);
       else
             return;
 

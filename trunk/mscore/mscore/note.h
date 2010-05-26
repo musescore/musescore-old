@@ -76,17 +76,21 @@ class Note : public Element {
       char _tpc;              ///< tonal pitch class
 
       char _ppitch;           ///< played pitch (honor voltas etc.); cached value
+
+      bool _hidden;           ///< markes this note as the hidden one if there are
+                              ///< overlapping notes; hidden notes are not played
+                              ///< and heads + accidentals are not shown
+
+
       double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
 
       ValueType _veloType;
       char _velocity;         ///< midi playback velocity (0 - 127);
       int _veloOffset;        ///< velocity user offset in percent
 
-      ValueType _onTimeType;
       int _onTimeOffset;      ///< start note offset in ticks
       int _onTimeUserOffset;  ///< start note user offset
 
-      ValueType _offTimeType;
       int _offTimeOffset;     ///< stop note offset in ticks
       int _offTimeUserOffset; ///< stop note user offset
 
@@ -95,10 +99,6 @@ class Note : public Element {
 
       bool _mirror;           ///< True if note is mirrored at stem.
       DirectionH _userMirror; ///< user override of mirror
-
-      bool _hidden;           ///< markes this note as the hidden one if there are
-                              ///< overlapping notes; hidden notes are not played
-                              ///< and heads + accidentals are not shown
 
       int _userAccidental;
       Accidental* _accidental;
@@ -126,7 +126,7 @@ class Note : public Element {
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void setTrack(int val);
 
-      int totalTicks() const;
+      int playTicks() const;
 
       double headWidth() const;
       double headHeight() const;
@@ -216,15 +216,11 @@ class Note : public Element {
       int veloOffset() const           { return _veloOffset;        }
       void setVeloOffset(int v)        { _veloOffset = v;           }
 
-      ValueType onTimeType() const     { return _onTimeType;        }
-      void setOnTimeType(ValueType v)  { _onTimeType = v;           }
       int onTimeOffset() const         { return _onTimeOffset;      }
       void setOnTimeOffset(int v)      { _onTimeOffset = v;         }
       int onTimeUserOffset() const     { return _onTimeUserOffset;  }
       void setOnTimeUserOffset(int v)  { _onTimeUserOffset = v;     }
 
-      ValueType offTimeType() const    { return _offTimeType;       }
-      void setOffTimeType(ValueType v) { _offTimeType = v;          }
       int offTimeOffset() const        { return _offTimeOffset;     }
       void setOffTimeOffset(int v)     { _offTimeOffset = v;        }
       int offTimeUserOffset() const    { return _offTimeUserOffset; }

@@ -1328,6 +1328,46 @@ void Chord::layout()
             l->layout();
 
       //-----------------------------------------
+      //  Layout acciaccatura and appoggiatura
+      //-----------------------------------------
+
+      if (segment()->subtype() == SegChordRest) {
+            QList<Chord*> gl;
+            Segment* s = segment();
+            while (s->prev()) {
+                  s = s->prev();
+                  if (s->subtype() != SegGrace)
+                        break;
+                  Element* cr = s->element(track());
+                  if (cr && cr->type() == CHORD)
+                        gl.prepend(static_cast<Chord*>(cr));
+                  }
+            if (!gl.isEmpty()) {
+                  int ticks = 0;
+                  foreach(Chord* c, gl)
+                        ticks += c->tickLen();
+                  int t = ticks;
+                  if (gl.front()->noteType() == NOTE_ACCIACCATURA)
+                        t /= 2;
+                  if (t >= (tickLen() / 2))
+                        t = tickLen() / 2;
+
+                  int rt = 0;
+                  foreach(Chord* c, gl) {
+                        int len = c->tickLen() * t / ticks;
+                        foreach(Note* n, c->notes()) {
+                              n->setOnTimeOffset(rt);
+                              n->setOffTimeOffset(-(c->tickLen() - len + rt));
+                              }
+                        rt += len;
+                        }
+                  foreach(Note* n, notes())
+                        n->setOnTimeOffset(rt);
+                  }
+            }
+
+
+      //-----------------------------------------
       //  Fingering
       //-----------------------------------------
 
@@ -1387,6 +1427,40 @@ void Chord::layout()
       }
 
 //---------------------------------------------------------
+//   renderArpeggio
+//---------------------------------------------------------
+
+static void renderArpeggio(QList<Note*> notes, bool up)
+      {
+      int minLen = 1000*1000;
+
+      foreach(Note* note, notes) {
+            int len = note->playTicks();
+            if (len < minLen)
+                  minLen = len;
+            }
+      int arpOffset = minLen / notes.size();
+
+      int start, end, step;
+      if (up) {
+            start = 0;
+            end   = notes.size();
+            step  = 1;
+            }
+      else {
+            start = notes.size() - 1;
+            end   = -1;
+            step  = -1;
+            }
+      int ctick = 0;
+      for (int i = start; i != end; i += step) {
+            Note* note = notes[i];
+            note->setOnTimeOffset(ctick);
+            ctick += arpOffset;
+            }
+      }
+
+//---------------------------------------------------------
 //   layoutArpeggio2
 //    called after layout of page
 //---------------------------------------------------------
@@ -1407,6 +1481,31 @@ void Chord::layoutArpeggio2()
             dnote = static_cast<Chord*>(bchord)->downNote();
       double h = dnote->canvasPos().y() - y;
       _arpeggio->setHeight(h);
+
+      QList<Note*> notes;
+      int n = _notes.size();
+      for (int j = n - 1; j >= 0; --j) {
+            Note* note = _notes[j];
+            if (note->tieBack())
+                  continue;
+            notes.prepend(note);
+            }
+
+      for (int i = 1; i < span; ++i) {
+            ChordRest* c = static_cast<ChordRest*>(segment()->element(track() + i * VOICES));
+            if (c && c->type() == CHORD) {
+                  QList<Note*> nl = static_cast<Chord*>(c)->notes();
+                  int n = nl.size();
+                  for (int j = n - 1; j >= 0; --j) {
+                        Note* note = nl[j];
+                        if (note->tieBack())
+                              continue;
+                        notes.prepend(note);
+                        }
+                  }
+            }
+      bool up = _arpeggio->subtype() != ARP_DOWN;
+      renderArpeggio(notes, up);
       }
 
 //---------------------------------------------------------

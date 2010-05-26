@@ -305,9 +305,7 @@ class Score : public QObject {
       void moveInputPos(Segment* s);
       void moveToNextInputPos();
 
-      void collectNote(EventMap* events, int channel, Note* note, int onTime, int len);
-      void collectChord(EventMap*, Instrument*, Chord*, int tick, int gateTime);
-      void collectMeasureEvents(EventMap*, Measure*, int staffIdx, int tickOffset);
+//      void collectMeasureEvents(EventMap*, Measure*, int staff1, int staff2, int tickOffset);
 
       void padToggle(int n);
 
@@ -660,7 +658,7 @@ class Score : public QObject {
       bool isVolta(int tick, int repeat) const;
       Volta* searchVolta(int tick) const;
       void toEList(EventMap* events);
-      void toEList(EventMap* events, int staffIdx);
+      void toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx);
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
 
@@ -802,6 +800,7 @@ class Score : public QObject {
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
+      void emitSelectionChanged(int val) { emit selectionChanged(val); }
       };
 
 extern Score* gscore;

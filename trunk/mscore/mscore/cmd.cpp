@@ -631,6 +631,7 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
 
       SegmentType st = SegGrace;
       Segment* s = seg->prev();
+
       while (s && s->subtype() == st && s->element(track))
             s = s->prev();
       if (s && (s->subtype() == st) && (!s->element(track)))
@@ -2607,10 +2608,8 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             Segment* s2 = tick2segment(dstTick + tickLen);
             _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
             updateSelectedElements();
-            if (selection().state() != SEL_RANGE) {
+            if (selection().state() != SEL_RANGE)
                   _selection.setState(SEL_RANGE);
-                  emit selectionChanged(int(selection().state()));
-                  }
             }
       connectTies();
       fixPpitch();

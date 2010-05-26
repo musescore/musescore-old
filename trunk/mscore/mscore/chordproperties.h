@@ -37,16 +37,11 @@ class ChordProperties : public QDialog, Ui::ChordPropertyBase {
       int _userVelocity;
       int _veloOffset;
 
-      int _ontimeOffset;
       int _ontimeUserOffset;
-
-      int _offtimeOffset;
       int _offtimeUserOffset;
 
    private slots:
       void veloTypeChanged(int);
-      void ontimeOffsetTypeChanged(int);
-      void offtimeOffsetTypeChanged(int);
       void velocityChanged(int);
       void ontimeOffsetChanged(int);
       void offtimeOffsetChanged(int);
@@ -68,12 +63,7 @@ class ChordProperties : public QDialog, Ui::ChordPropertyBase {
       int velo() const              { return _velo;                       }
       int veloOffset() const        { return _veloOffset;                 }
 
-      ValueType onTimeType() const  { return ValueType(_ontimeOffsetType->currentIndex());}
-      int onTimeOffset() const      { return _ontimeOffset;      }
       int onTimeUserOffset() const  { return _ontimeUserOffset;  }
-
-      ValueType offTimeType() const { return ValueType(_offtimeOffsetType->currentIndex());}
-      int offTimeOffset() const     { return _offtimeOffset;     }
       int offTimeUserOffset() const { return _offtimeUserOffset; }
       };
 

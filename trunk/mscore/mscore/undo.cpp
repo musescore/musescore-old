@@ -2237,19 +2237,13 @@ void ChangeMeasureProperties::flip()
 //---------------------------------------------------------
 
 ChangeNoteProperties::ChangeNoteProperties(Note* n, ValueType v1, int v2, int v3,
-   ValueType v4, int v5, int v6, ValueType v7, int v8, int v9)
+   int v6, int v9)
       {
       note               = n;
       _veloType          = v1;
       _velocity          = v2;      ///< midi playback velocity (0 - 127);
       _veloOffset        = v3;      ///< velocity user offset in promille
-
-      _onTimeType        = v4;
-      _onTimeOffset      = v5;      ///< start note offset in ticks
       _onTimeUserOffset  = v6;      ///< start note user offset
-
-      _offTimeType       = v7;
-      _offTimeOffset     = v8;      ///< stop note offset in ticks
       _offTimeUserOffset = v9;      ///< stop note user offset
       };
 
@@ -2262,29 +2256,19 @@ void ChangeNoteProperties::flip()
       ValueType v1 = note->veloType();
       int       v2 = note->velocity();
       int       v3 = note->veloOffset();
-      ValueType v4 = note->onTimeType();
-      int       v5 = note->onTimeOffset();
       int       v6 = note->onTimeUserOffset();
-      ValueType v7 = note->offTimeType();
-      int       v8 = note->offTimeOffset();
       int       v9 = note->offTimeUserOffset();
+
       note->setVeloType(_veloType);
       note->setVelocity(_velocity);
       note->setVeloOffset(_veloOffset);
-      note->setOnTimeType(_onTimeType);
-      note->setOnTimeOffset(_onTimeOffset);
       note->setOnTimeUserOffset(_onTimeUserOffset);
-      note->setOffTimeType(_offTimeType);
-      note->setOffTimeOffset(_offTimeOffset);
       note->setOffTimeUserOffset(_offTimeUserOffset);
+
       _veloType          = v1;
       _velocity          = v2;
       _veloOffset        = v3;
-      _onTimeType        = v4;
-      _onTimeOffset      = v5;
       _onTimeUserOffset  = v6;
-      _offTimeType       = v7;
-      _offTimeOffset     = v8;
       _offTimeUserOffset = v9;
       }
 

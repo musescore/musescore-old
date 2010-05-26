@@ -1008,8 +1008,10 @@ void Score::deleteItem(Element* el)
                   else  {
                         // remove segment if empty
                         Segment* seg = chord->segment();
-                        if (seg->isEmpty())
+                        if (seg->isEmpty()) {
+printf("remove Segment %p %s\n", seg, seg->subTypeName());
                               undoRemoveElement(seg);
+                              }
                         }
                   }
                   break;
@@ -1744,7 +1746,6 @@ void Score::removeChordRest(ChordRest* cr, bool clearSegment)
 
 void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
       {
-printf("cmdDeleteTuplet\n");
       foreach(DurationElement* de, tuplet->elements()) {
             if (de->type() == CHORD || de->type() == REST)
                   removeChordRest(static_cast<ChordRest*>(de), true);

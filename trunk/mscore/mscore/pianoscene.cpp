@@ -53,12 +53,7 @@ PianoItem::PianoItem(Note* n)
       {
       setFlags(flags() | QGraphicsItem::ItemIsSelectable);
       int pitch = n->pitch();
-      int len   = 0;
-      Note* nn  = n;
-      while (nn) {      // akkumulate all tied notes
-            len += nn->chord()->tickLen();
-            nn = nn->tieFor() ? nn->tieFor()->endNote() : 0;
-            }
+      int len   = n->playTicks();
       setRect(0, 0, len, keyHeight/2);
       setBrush(QBrush());
       setSelected(n->selected());
@@ -73,29 +68,22 @@ PianoItem::PianoItem(Note* n)
 
 void PianoItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* w)
       {
-      QGraphicsRectItem::paint(painter, option, w);
-
       Chord* chord = note->chord();
-      int x1        = note->onTimeOffset();
-      if (note->onTimeType() == OFFSET_VAL)
-            x1 += note->onTimeUserOffset();
-      int len = chord->tickLen();
-      int x2 = len + note->offTimeOffset();
-      if (note->offTimeType() == OFFSET_VAL)
-            x2 += note->offTimeUserOffset();
+      int x1       = note->onTimeOffset() + note->onTimeUserOffset();
+      int x2       = note->playTicks() + note->offTimeOffset() + note->offTimeUserOffset();
       painter->setPen(pen());
-      painter->setBrush(Qt::blue);
+      painter->setBrush(isSelected() ? Qt::yellow : Qt::blue);
       painter->drawRect(x1, 0.0, x2-x1, keyHeight / 2);
-      if (x1 > 0) {
-            painter->setBrush(Qt::gray);
-            painter->drawRect(0.0, 0.0, x1, keyHeight / 2);
-            }
-      if (x2 < chord->tickLen()) {
-            painter->setBrush(Qt::gray);
-            painter->drawRect(x2, 0.0, len - x2, keyHeight / 2);
-            }
 
-      QGraphicsRectItem::paint(painter, option, w);
+      int len = chord->tickLen();
+
+      if (x1 > 0 || x2 < len) {
+            painter->setBrush(Qt::gray);
+            if (x1 > 0)
+                  painter->drawRect(0.0, 0.0, x1, keyHeight / 2);
+            if (x2 < len)
+                  painter->drawRect(x2, 0.0, len - x2, keyHeight / 2);
+            }
       }
 
 //---------------------------------------------------------
@@ -286,7 +274,7 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
 
       scene()->clear();
       for (int i = 0; i < 3; ++i) {
-            locatorLines[i] = new QGraphicsLineItem(QLineF(0.0, 0.0, 0.0, keyHeight * 75.0));
+            locatorLines[i] = new QGraphicsLineItem(QLineF(0.0, 0.0, 0.0, keyHeight * 75.0 * 5));
             QPen pen(lcColors[i]);
             pen.setWidth(2);
             locatorLines[i]->setPen(pen);

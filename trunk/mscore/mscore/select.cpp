@@ -521,9 +521,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             selState = SEL_RANGE;
             updateSelectedElements();
             }
-
       _selection.setState(selState);
-      emit selectionChanged(int(_selection.state()));
       }
 
 //---------------------------------------------------------
@@ -599,10 +597,8 @@ void Score::lassoSelectEnd()
       if (noteRestCount > 0) {
             endSegment = endSegment->nextCR(endTrack);
             _selection.setRange(startSegment, endSegment, startStaff, endStaff+1);
-            if (_selection.state() != SEL_RANGE) {
+            if (_selection.state() != SEL_RANGE)
                   _selection.setState(SEL_RANGE);
-                  emit selectionChanged(int(_selection.state()));
-                  }
             }
       _updateAll = true;
       }
@@ -692,6 +688,18 @@ void Selection::updateState()
             if (e->type() == NOTE)
                   e = e->parent();
             _score->setInputTrack(e->track());
+            }
+      }
+
+//---------------------------------------------------------
+//   setState
+//---------------------------------------------------------
+
+void Selection::setState(SelState s)
+      {
+      if (_state != s) {
+            _state = s;
+            _score->emitSelectionChanged(int(_state));
             }
       }
 

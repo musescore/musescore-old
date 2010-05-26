@@ -132,9 +132,8 @@ class Event {
       int _noquantOntime;
       int _noquantDuration;
 
-      int _channel;     // mscore channel number, not midi channel
+      int _channel;           // mscore channel number, not midi channel
       int _a, _b;
-      double _tuning;
       int _duration;
       int _tpc;               // tonal pitch class
 
@@ -145,7 +144,8 @@ class Event {
       int _len;
       int _metaType;
 
-      Note* _note;
+      const Note* _note;
+      double _tuning;
 
    public:
       Event();
@@ -196,8 +196,8 @@ class Event {
       void setMetaType(int v)        { _metaType = v;               }
       int tpc() const                { return _tpc;                 }
       void setTpc(int v)             { _tpc = v;                    }
-      Note* note() const             { return _note;                }
-      void setNote(Note* v)          { _note = v;                   }
+      const Note* note() const       { return _note;                }
+      void setNote(const Note* v)    { _note = v;                   }
       double tuning() const          { return _tuning;              }
       void setTuning(double v)       { _tuning = v;                 }
       };
@@ -210,6 +210,7 @@ class Event {
 class EventList : public QList<Event*> {
    public:
       void insert(Event*);
+      void insertNote(int channel, Note*);
       };
 
 class EventMap : public QMap<int, Event*> {};

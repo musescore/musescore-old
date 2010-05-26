@@ -307,6 +307,7 @@ void Score::setPadState(Element* e)
             _is.rest     = true;
             _is.track    = rest->track();
             _is.beamMode = rest->beamMode();
+            _is.noteType = NOTE_NORMAL;
             }
       else {
             _is.rest     = false;
@@ -314,6 +315,7 @@ void Score::setPadState(Element* e)
             _is.setDuration(Duration::V_INVALID);
             _is.noteType = NOTE_INVALID;
             _is.beamMode = BEAM_INVALID;
+            _is.noteType = NOTE_NORMAL;
             }
       if (e->type() == NOTE || e->type() == REST) {
             Part* instr   = e->staff()->part();
@@ -334,6 +336,7 @@ void Score::setPadState(Element* e)
 
 void Score::setPadState()
       {
+printf("setPadState()\n");
       getAction("pad-rest")->setChecked(_is.rest);
       getAction("pad-dot")->setChecked(_is.duration().dots() == 1);
       getAction("pad-dotdot")->setChecked(_is.duration().dots() == 2);

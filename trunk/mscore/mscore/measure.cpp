@@ -236,13 +236,16 @@ void Measure::remove(Segment* el)
       --_size;
       if (el == _first) {
             _first = _first->next();
+            if (_first)
+                  _first->setPrev(0);
             if (el == _last)
                   _last = 0;
             return;
             }
       if (el == _last) {
             _last = _last->prev();
-            _last->setNext(0);
+            if (_last)
+                  _last->setNext(0);
             return;
             }
       el->prev()->setNext(el->next());

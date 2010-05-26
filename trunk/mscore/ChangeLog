@@ -1,3 +1,6 @@
+26.may (ws)
+      - refacturing of playback architecture in progress
+      - playback of arpeggios which are spanning more than one staff
 24.may (lv)
       - add bww files to open file dialog, actual import not implemented yet
         feature request http://musescore.org/en/node/5637
