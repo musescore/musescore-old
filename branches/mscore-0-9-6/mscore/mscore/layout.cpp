@@ -1401,20 +1401,20 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   if (mb == lmb)
                         break;
                   }
-            Measure* firstMM = 0;
+
             foreach (MeasureBase* mb, ml) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = static_cast<Measure*>(mb);
-
-                  if (m->multiMeasure() > 0)
-                        firstMM = m;
-                  else if ((m->multiMeasure() < 0) &&
-                     (m->next() == 0 || m->next()->type() != MEASURE || static_cast<Measure*>(m->next())->multiMeasure() >= 0))
-                        {
-                        if (firstMM) {    // DEBUT
-                              firstMM->setMmEndBarLineType(m->endBarLineType());
-                              needRelayout |= firstMM->createEndBarLines();
+                  int nn = m->multiMeasure() - 1;
+                  if (nn > 0) {
+                        // skip to last rest measure of multi measure rest
+                        Measure* mm = m;
+                        for (int k = 0; k < nn; ++k)
+                              mm = mm->nextMeasure();
+                        if (mm) {
+                              m->setMmEndBarLineType(mm->endBarLineType());
+                              needRelayout |= m->createEndBarLines();
                               }
                         }
                   }
