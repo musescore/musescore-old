@@ -130,38 +130,10 @@ bool Score::isVolta(int tick, int repeat) const
       }
 
 //---------------------------------------------------------
-//   collectChord
-//---------------------------------------------------------
-
-void Score::collectChord(EventMap* events, Instrument* instr, Chord* chord, int tick, int len)
-      {
-      Arpeggio* arpeggio = chord->arpeggio();
-
-      int arpeggioOffset = 0;
-      static const int arpeggioNoteDistance = Duration(Duration::V_32ND).ticks();
-      if (arpeggio && chord->notes().size() * arpeggioNoteDistance <= len)
-            arpeggioOffset = arpeggioNoteDistance;
-
-      int i = 0;
-      foreach(Note* note, chord->notes()) {
-            int channel = instr->channel(note->subchannel()).channel;
-            int onTime = tick;
-            if (arpeggio){
-                if(arpeggio->subtype() != ARP_DOWN)
-                    onTime = tick + i * arpeggioOffset;
-                else
-                    onTime = tick + (chord->notes().size() - 1 - i) * arpeggioOffset;
-                }
-            collectNote(events, channel, note, onTime, len);
-            i++;
-            }
-      }
-
-//---------------------------------------------------------
 //   playNote
 //---------------------------------------------------------
 
-static void playNote(EventMap* events, Note* note, int channel, int pitch,
+static void playNote(EventMap* events, const Note* note, int channel, int pitch,
    int velo, int onTime, int offTime)
       {
       Event* ev = new Event(ME_NOTEON);
@@ -184,31 +156,14 @@ static void playNote(EventMap* events, Note* note, int channel, int pitch,
 //   collectNote
 //---------------------------------------------------------
 
-void Score::collectNote(EventMap* events, int channel, Note* note, int onTime, int len)
+static void collectNote(EventMap* events, int channel, const Note* note, int tickOffset)
       {
-      int noteTick    = note->chord()->tick();
-      int noteOffTick = noteTick + note->chord()->tickLen();
-
-      if (note->onTimeType() == AUTO_VAL)
-            note->setOnTimeOffset(onTime - noteTick);
-      else if (note->onTimeType() == USER_VAL)
-            onTime = noteTick + note->onTimeOffset();
-      else {
-            note->setOnTimeOffset(onTime - noteTick);
-            onTime += note->onTimeUserOffset();
-            }
-      int offTime = onTime + len;
-      if (note->offTimeType() == AUTO_VAL)
-            note->setOffTimeOffset(offTime - noteOffTick);
-      else if (note->offTimeType() == USER_VAL)
-            offTime = noteOffTick + note->offTimeOffset();
-      else  {
-            note->setOffTimeOffset(offTime - noteOffTick);
-            offTime += note->offTimeUserOffset();
-            }
-
       if (note->hidden() || note->tieBack())       // do not play overlapping notes
             return;
+
+      int tick    = note->chord()->tick() + tickOffset;
+      int onTime  = tick + note->onTimeOffset() + note->onTimeUserOffset();
+      int offTime = tick + note->playTicks() + note->offTimeOffset() + note->offTimeUserOffset();
 
       int pitch  = note->ppitch();
       int velo = note->velocity();
@@ -227,14 +182,14 @@ void Score::collectNote(EventMap* events, int channel, Note* note, int onTime, i
                   }
             }
       if (mordent) {
-            int l = len / 8;
+            int l = (offTime - onTime) / 8;
 
             // TODO: downstep depends on scale
             int downstep = 2;
 
             playNote(events, note, channel, pitch, velo, onTime, onTime + l);
             playNote(events, note, channel, pitch-downstep, velo, onTime+l, onTime + l+l);
-            playNote(events, note, channel, pitch, velo, onTime+l+l, onTime + len);
+            playNote(events, note, channel, pitch, velo, onTime+l+l, offTime);
             }
       else
             playNote(events, note, channel, pitch, velo, onTime, offTime);
@@ -254,248 +209,84 @@ struct OttavaShiftSegment {
 //   collectMeasureEvents
 //---------------------------------------------------------
 
-void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int tickOffset)
+static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx,
+   int nextStaffIdx, int tickOffset)
       {
-      QList<Chord*> lv;       // appoggiatura
-      QList<Chord*> sv;       // acciaccatura
+      Part* instr = m->score()->part(firstStaffIdx);
 
-      // for the purpose of knowing whether to find the playPos after repeats
-      bool playExpandRepeats = getAction("repeat")->isChecked();
-      Part* instr = part(staffIdx);
-
-      for (int voice = 0; voice < VOICES; ++voice) {
-            int track = staffIdx * VOICES + voice;
-            for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                  Element* el = seg->element(track);
-                  if (!el || el->type() != CHORD)
-                        continue;
-                  Chord* chord = static_cast<Chord*>(el);
-                  if (chord->noteType() != NOTE_NORMAL) {
-                        if (chord->noteType() == NOTE_ACCIACCATURA)
-                              sv.append(chord);
-                        else if (chord->noteType() == NOTE_APPOGGIATURA)
-                              lv.append(chord);
-                        continue;
-                        }
-                  int gateTime = 100;
-                  int tick     = chord->tick();
-                  if (playExpandRepeats && !_foundPlayPosAfterRepeats && tick == playPos()) {
-                        setPlayPos(tick + tickOffset);
-                        _foundPlayPosAfterRepeats = true;
-                        }
-                  foreach (Element* e, *m->score()->gel()) {
-                        if (e->type() == SLUR) {
-                              Slur* slur = static_cast<Slur*>(e);
-                              if (slur->startElement()->staffIdx() != staffIdx)
-                                    continue;
-                              int tick1 = slur->startElement()->tick();
-                              int tick2 = slur->endElement()->tick();
-                              int strack = slur->startElement()->track();
-                              if ((tick >= tick1) && (tick < tick2) && (strack == track)) {
-                                    gateTime = _style[ST_slurGateTime].toInt();
-                                    }
+      SegmentTypes st = SegGrace | SegChordRest;
+      int strack = firstStaffIdx * VOICES;
+      int etrack = nextStaffIdx * VOICES;
+      for (Segment* seg = m->first(st); seg; seg = seg->next(st)) {
+            for (int track = strack; track < etrack; ++track) {
+                  Element* cr = seg->element(track);
+                  if (cr && cr->type() == CHORD) {
+                        Chord* chord = static_cast<Chord*>(cr);
+                        foreach(const Note* note, chord->notes()) {
+                              int channel = instr->channel(note->subchannel()).channel;
+                              collectNote(events, channel, note, tickOffset);
                               }
                         }
-                  foreach (Articulation* a, *chord->getArticulations())
-                        gateTime = (gateTime * a->relGateTime()) / 100;
-
-                  // compute len of chord
-
-                  int len = chord->tickLen();
-                  int apl = 0;
-                  if (!lv.isEmpty()) {
-                        foreach(Chord* c, lv) {
-                              apl += c->tickLen();
-                              }
-                        // treat appogiatura as acciaccatura if it exceeds the note length
-                        if (apl >= len)
-                              sv = lv;
-                        }
-                  if (!sv.isEmpty()) {
-                        //
-                        // move acciaccatura's in front of
-                        // main note
-                        //
-                        int sl  = len / 4;
-                        int ssl = sl / sv.size();
-                        foreach(Chord* c, sv) {
-                              collectChord(events, instr,
-                                 c,
-                                 tick + tickOffset - sl,
-                                 ssl * gateTime / 100 - 1
-                                 );
-                              sl -= ssl;
-                              }
-                        }
-                  else if (!lv.isEmpty()) {
-                        //
-                        // appoggiatura's use time from main note
-                        //
-                        int sl = 0;
-                        foreach(Chord* c, lv) {
-                              int ssl = c->tickLen();
-                              collectChord(events, instr,
-                                 c,
-                                 tick + tickOffset + sl,
-                                 ssl * gateTime / 100 - 1
-                                 );
-                              sl += ssl;
-                              }
-                        len -= sl;
-                        tick += sl;
-                        }
-                  {
-                  tick += tickOffset;
-                  Arpeggio* arpeggio = chord->arpeggio();
-
-                  int arpeggioOffset = 0;
-                  static const int arpeggioNoteDistance = Duration(Duration::V_32ND).ticks();
-                  if (arpeggio && chord->notes().size() * arpeggioNoteDistance <= len)
-                        arpeggioOffset = arpeggioNoteDistance;
-
-                  int i = 0;
-
-                  // -- swing -- //
-                  double swingCoeff= swingRatio();
-
-                  //deal with odd measure in anacrusis
-                  int offSet = 0;
-                  if (!sigmap()->timesig(m->tick()).nominalEqualActual() && m->tickLen()%480 !=0) {
-                        offSet = 480 - m->tickLen() % 480;
-                        }
-
-                  //detect 8th on the offbeat
-                  bool swing = ((tick - m->tick()+offSet)%AL::division == 240 && chord->tickLen() == 240);
-
-                  if (swing)
-                        tick += (swingCoeff * AL::division /2);
-
-                  //on the beat and a 8th
-                  bool swingBeat = ((tick - m->tick()+offSet)%AL::division == 0 && chord->tickLen() == 240);
-                  if (swingBeat) {
-                        //find chord on counter beat and verify it's an 8th
-                        ChordRest* ncr = nextChordRest(chord);
-                        if (ncr) {
-                              swingBeat = ((ncr->tick() == tick + 240) && (ncr->tickLen() == 240));
-                              }
-                        else
-                              swingBeat = false;
-                        }
-
-                  // -- end swing -- //
-
-                  foreach(Note* note, chord->notes()) {
-                        int channel = instr->channel(note->subchannel()).channel;
-
-                        int tickLen = note->chord()->tickLen();
-                        int len     = note->chord()->tickLen();
-                        bool tiedNote = false;
-                        int lastNoteLen = len;
-                        if (note->tieFor()) {
-                              Note* n = note;
-                              tiedNote = true;
-                              while (n->tieFor()) {
-                                    if (n->tieFor()->endNote() == 0)
-                                          break;
-                                    n = n->tieFor()->endNote();
-                                    lastNoteLen = n->chord()->tickLen();
-                                    len += lastNoteLen;
-                                    }
-                              }
-                        if (tiedNote)
-                              len = len - lastNoteLen + ((lastNoteLen * gateTime) / 100 - 1);
-                        else
-                              len = (len * gateTime) / 100 - 1;
-
-                        //swing
-
-                        if (swing)
-                            len *= (1-swingCoeff);
-                        if (swingBeat)
-                            len *= (1+swingCoeff);
-
-                        int noteLen;
-                        if (note->offTimeType() == AUTO_VAL) {
-                              note->setOffTimeOffset(tickLen - len);
-                              noteLen = len;
-                              }
-                        else if (note->offTimeType() == USER_VAL)
-                              noteLen = tickLen + note->offTimeOffset();
-                        else  {
-                              note->setOffTimeOffset(tickLen - len);
-                              noteLen = tickLen + note->offTimeOffset() + note->offTimeUserOffset();
-                              }
-
-                        int onTime = tick;
-                        if(arpeggio){
-                            if(arpeggio->subtype() != ARP_DOWN)
-                                onTime = tick + i * arpeggioOffset;
-                            else
-                                onTime = tick + (chord->notes().size() - 1 - i) * arpeggioOffset;
-                            }
-                        collectNote(events, channel, note, onTime, noteLen);
-                        i++;
-                        }
-                  }
-                  lv.clear();
-                  sv.clear();
                   }
             }
+
       //
       // collect program changes and controller
       //
-      foreach(const Element* e, *m->el()) {
-            if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
-                  continue;
-            const StaffText* st = static_cast<const StaffText*>(e);
-            int tick = st->tick() + tickOffset;
-            foreach (const ChannelActions& ca, *st->channelActions()) {
-                  int channel = ca.channel;
-                  foreach(const QString& ma, ca.midiActionNames) {
-                        NamedEventList* nel = instr->midiAction(ma, channel);
-                        if (!nel)
-                              continue;
-                        int n = nel->events.size();
-                        for (int i = n-1; i >= 0; --i) {
-                              Event* event = new Event(*nel->events[i]);
-                              event->setOntime(tick);
-                              event->setChannel(channel);
-                              events->insertMulti(tick, event);
-                              }
-                        }
-                  }
-            if (st->setAeolusStops()) {
-                  Staff* staff = st->staff();
-                  int voice   = 0;
-                  int channel = staff->channel(tick, voice);
-
-                  for (int i = 0; i < 4; ++i) {
-                        for (int k = 0; k < 16; ++k) {
-                              if (st->getAeolusStop(i, k)) {
-                                    Event* event = new Event;
-                                    event->setType(ME_CONTROLLER);
-                                    event->setController(98);
-                                    event->setValue(k);
+      for (int staffIdx = firstStaffIdx; staffIdx < nextStaffIdx; ++staffIdx) {
+            foreach(const Element* e, *m->el()) {
+                  if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
+                        continue;
+                  const StaffText* st = static_cast<const StaffText*>(e);
+                  int tick = st->tick() + tickOffset;
+                  foreach (const ChannelActions& ca, *st->channelActions()) {
+                        int channel = ca.channel;
+                        foreach(const QString& ma, ca.midiActionNames) {
+                              NamedEventList* nel = instr->midiAction(ma, channel);
+                              if (!nel)
+                                    continue;
+                              int n = nel->events.size();
+                              for (int i = n-1; i >= 0; --i) {
+                                    Event* event = new Event(*nel->events[i]);
                                     event->setOntime(tick);
                                     event->setChannel(channel);
                                     events->insertMulti(tick, event);
                                     }
                               }
-                        Event* event = new Event;
-                        event->setType(ME_CONTROLLER);
-                        event->setController(98);
-                        event->setValue(96 + i);
-                        event->setOntime(tick);
-                        event->setChannel(channel);
-                        events->insertMulti(tick, event);
+                        }
+                  if (st->setAeolusStops()) {
+                        Staff* staff = st->staff();
+                        int voice   = 0;
+                        int channel = staff->channel(tick, voice);
 
-                        event = new Event;
-                        event->setType(ME_CONTROLLER);
-                        event->setController(98);
-                        event->setValue(64 + i);
-                        event->setOntime(tick);
-                        event->setChannel(channel);
-                        events->insertMulti(tick, event);
+                        for (int i = 0; i < 4; ++i) {
+                              for (int k = 0; k < 16; ++k) {
+                                    if (st->getAeolusStop(i, k)) {
+                                          Event* event = new Event;
+                                          event->setType(ME_CONTROLLER);
+                                          event->setController(98);
+                                          event->setValue(k);
+                                          event->setOntime(tick);
+                                          event->setChannel(channel);
+                                          events->insertMulti(tick, event);
+                                          }
+                                    }
+                              Event* event = new Event;
+                              event->setType(ME_CONTROLLER);
+                              event->setController(98);
+                              event->setValue(96 + i);
+                              event->setOntime(tick);
+                              event->setChannel(channel);
+                              events->insertMulti(tick, event);
+
+                              event = new Event;
+                              event->setType(ME_CONTROLLER);
+                              event->setController(98);
+                              event->setValue(64 + i);
+                              event->setOntime(tick);
+                              event->setChannel(channel);
+                              events->insertMulti(tick, event);
+                              }
                         }
                   }
             }
@@ -527,22 +318,26 @@ Measure* Score::searchLabel(const QString& s, Measure* start)
 //   toEList
 //---------------------------------------------------------
 
-void Score::toEList(EventMap* events, int staffIdx)
+void Score::toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx)
       {
-      Part* instr = part(staffIdx);
-      int channel = instr->channel(0).channel;
+      Part* instr = part(firstStaffIdx);
 
       foreach(const RepeatSegment* rs, *_repeatList) {
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
             int tickOffset = rs->utick - rs->tick;
             for (Measure* m = tick2measure(startTick); m; m = m->nextMeasure()) {
-                  collectMeasureEvents(events, m, staffIdx, tickOffset);
+                  collectMeasureEvents(events, m, firstStaffIdx, nextStaffIdx, tickOffset);
                   if (m->tick() + m->tickLen() >= endTick)
                         break;
                   }
+
+            int channel = instr->channel(0).channel;
+            // TODO: what if instrument has more than one channel?
+
             foreach(Element* e, _gel) {
-                  if (e->type() == PEDAL && e->staffIdx() == staffIdx) {
+                  int staffIdx = e->staffIdx();
+                  if (e->type() == PEDAL && staffIdx >= firstStaffIdx && staffIdx < nextStaffIdx) {
                         Pedal* p = static_cast<Pedal*>(e);
                         if (p->tick() >= startTick && p->tick() < endTick) {
                               Event* ev = new Event(ME_CONTROLLER);
@@ -599,8 +394,12 @@ void Score::toEList(EventMap* events)
       updateRepeatList(getAction("repeat")->isChecked());
       _foundPlayPosAfterRepeats = false;
       updateChannel();
-      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
-            toEList(events, staffIdx);
+      int staffIdx = 0;
+      foreach(Part* part, _parts) {
+            int nextStaffIdx = staffIdx + part->staves()->size();
+            toEList(events, staffIdx, nextStaffIdx);
+            staffIdx = nextStaffIdx;
+            }
       }
 
 //---------------------------------------------------------

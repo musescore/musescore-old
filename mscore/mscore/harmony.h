@@ -227,7 +227,7 @@ class Harmony : public Text {
       ~Harmony();
       virtual Harmony* clone() const           { return new Harmony(*this); }
       virtual ElementType type() const         { return HARMONY; }
-      Measure* measure()                       { return (Measure*)parent(); }
+      Measure* measure() const                 { return (Measure*)parent(); }
 
       void setId(int d)                        { _id = d; }
       int id() const                           { return _id;           }

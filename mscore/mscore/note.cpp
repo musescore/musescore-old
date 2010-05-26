@@ -143,11 +143,9 @@ Note::Note(Score* s)
       _velocity          = 80;
       _veloOffset        = 0;
 
-      _onTimeType        = AUTO_VAL;
       _onTimeOffset      = 0;
       _onTimeUserOffset  = 0;
 
-      _offTimeType       = AUTO_VAL;
       _offTimeOffset     = 0;
       _offTimeUserOffset = 0;
       }
@@ -186,11 +184,9 @@ Note::Note(const Note& n)
       _velocity          = n._velocity;
       _veloOffset        = n._veloOffset;
 
-      _onTimeType        = n._onTimeType;
       _onTimeOffset      = n._onTimeOffset;
       _onTimeUserOffset  = n._onTimeUserOffset;
 
-      _offTimeType       = n._offTimeType;
       _offTimeOffset     = n._offTimeOffset;
       _offTimeUserOffset = n._offTimeUserOffset;
       }
@@ -308,14 +304,14 @@ double Note::headHeight() const
       }
 
 //---------------------------------------------------------
-//   totalTicks
+//   playTicks
 //---------------------------------------------------------
 
 /**
  Return total tick len of tied notes
 */
 
-int Note::totalTicks() const
+int Note::playTicks() const
       {
       const Note* note = this;
       while (note->tieBack())
@@ -585,9 +581,7 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
 
       if (userAccidental())
             xml.tag("userAccidental", userAccidental());
-      if (_accidental &&
-         (!_accidental->userOff().isNull() || !_accidental->visible())
-         ) {
+      if (_accidental && (!_accidental->userOff().isNull() || !_accidental->visible())) {
             _accidental->write(xml);
             }
       _el.write(xml);
@@ -607,16 +601,10 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             int val = _veloType == USER_VAL ? _velocity : _veloOffset;
             xml.tag("velocity", val);
             }
-      if (_onTimeType != AUTO_VAL) {
-            xml.valueTypeTag("onTimeType", _onTimeType);
-            int val = _onTimeType == USER_VAL ? _onTimeOffset : _onTimeUserOffset;
-            xml.tag("onTimeOffset", val);
-            }
-      if (_offTimeType != AUTO_VAL) {
-            xml.valueTypeTag("offTimeType", _offTimeType);
-            int val = _offTimeType == USER_VAL ? _offTimeOffset : _offTimeUserOffset;
-            xml.tag("offTimeOffset", val);
-            }
+      if (_onTimeUserOffset)
+            xml.tag("onTimeOffset", _onTimeUserOffset);
+      if (_offTimeUserOffset)
+            xml.tag("offTimeOffset", _offTimeUserOffset);
       xml.etag();
       }
 
@@ -731,22 +719,14 @@ void Note::read(QDomElement e)
                   // else
                   //      ignore value;
                   }
-            else if (tag == "onTimeType")
-                  _onTimeType = readValueType(e);
-            else if (tag == "onTimeOffset") {
-                  if (_onTimeType == USER_VAL)
-                        _onTimeOffset = i;
-                  else if (_onTimeType == OFFSET_VAL)
-                        _onTimeUserOffset = i;
-                  }
-            else if (tag == "offTimeType")
-                  _offTimeType = readValueType(e);
-            else if (tag == "offTimeOffset") {
-                  if (_offTimeType == USER_VAL)
-                        _offTimeOffset = i;
-                  else if (_offTimeType == OFFSET_VAL)
-                        _offTimeUserOffset = i;
-                  }
+            else if (tag == "onTimeType")                   // obsolete
+                  ; // _onTimeType = readValueType(e);
+            else if (tag == "onTimeOffset")
+                  _onTimeUserOffset = i;
+            else if (tag == "offTimeType")                  // obsolete
+                  ; // _offTimeType = readValueType(e);
+            else if (tag == "offTimeOffset")
+                  _offTimeUserOffset = i;
 
             else if (Element::readProperties(e))
                   ;
@@ -1216,14 +1196,12 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
                         }
                   if (veloType() != vp.veloType() || velocity() != vp.velo()
                      || veloOffset() != vp.veloOffset()
-                     || onTimeType() != vp.onTimeType() || onTimeOffset() != vp.onTimeOffset()
                      || onTimeUserOffset() != vp.onTimeUserOffset()
-                     || offTimeType() != vp.offTimeType() || offTimeOffset() != vp.offTimeOffset()
                      || offTimeUserOffset() != vp.offTimeUserOffset()) {
                         score()->undo()->push(new ChangeNoteProperties(this,
                            vp.veloType(), vp.velo(), vp.veloOffset(),
-                           vp.onTimeType(), vp.onTimeOffset(), vp.onTimeUserOffset(),
-                           vp.offTimeType(), vp.offTimeOffset(), vp.offTimeUserOffset()));
+                           vp.onTimeUserOffset(),
+                           vp.offTimeUserOffset()));
                         }
                   }
             }

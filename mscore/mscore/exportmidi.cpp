@@ -287,7 +287,7 @@ bool ExportMidi::write(const QString& name)
                   track->insert(e);
                   }
             EventMap events;
-            cs->toEList(&events, staffIdx);
+            cs->toEList(&events, staffIdx, staffIdx+1);
             for (EventMap::const_iterator i = events.constBegin(); i != events.constEnd(); ++i) {
                   if (i.value()->type() == ME_NOTEON) {
                         Event* n = i.value();

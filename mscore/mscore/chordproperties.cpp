@@ -58,21 +58,10 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       _veloType->setCurrentIndex(int(vt));
       veloTypeChanged(vt);
 
-      vt                = note->onTimeType();
-      _ontimeOffset     = note->onTimeOffset();
       _ontimeUserOffset = note->onTimeUserOffset();
-      _ontimeOffsetType->setCurrentIndex(int(vt));
-      ontimeOffsetTypeChanged(vt);
-
-      vt                 = note->offTimeType();
-      _offtimeOffset     = note->offTimeOffset();
       _offtimeUserOffset = note->offTimeUserOffset();
-      _offtimeOffsetType->setCurrentIndex(int(vt));
-      offtimeOffsetTypeChanged(vt);
 
       connect(_veloType,          SIGNAL(activated(int)),    SLOT(veloTypeChanged(int)));
-      connect(_ontimeOffsetType,  SIGNAL(activated(int)),    SLOT(ontimeOffsetTypeChanged(int)));
-      connect(_offtimeOffsetType, SIGNAL(activated(int)),    SLOT(offtimeOffsetTypeChanged(int)));
       connect(velocity,           SIGNAL(valueChanged(int)), SLOT(velocityChanged(int)));
       connect(ontimeOffset,       SIGNAL(valueChanged(int)), SLOT(ontimeOffsetChanged(int)));
       connect(offtimeOffset,      SIGNAL(valueChanged(int)), SLOT(offtimeOffsetChanged(int)));
@@ -134,39 +123,7 @@ void ChordProperties::veloTypeChanged(int vt)
 
 void ChordProperties::ontimeOffsetChanged(int val)
       {
-      switch(_ontimeOffsetType->currentIndex()) {
-            case AUTO_VAL:
-            case USER_VAL:   _ontimeOffset = val; break;
-            case OFFSET_VAL: _ontimeUserOffset = val; break;
-            }
-      }
-
-//---------------------------------------------------------
-//   ontimeOffsetTypeChanged
-//---------------------------------------------------------
-
-void ChordProperties::ontimeOffsetTypeChanged(int vt)
-      {
-      switch(vt) {
-            case AUTO_VAL:
-                  ontimeOffset->setReadOnly(true);
-                  ontimeOffset->setSuffix("");
-                  ontimeOffset->setRange(0, 127);
-                  ontimeOffset->setValue(_ontimeOffset);
-                  break;
-            case USER_VAL:
-                  ontimeOffset->setReadOnly(false);
-                  ontimeOffset->setSuffix("");
-                  ontimeOffset->setRange(-1000, 1000);
-                  ontimeOffset->setValue(_ontimeOffset);
-                  break;
-            case OFFSET_VAL:
-                  ontimeOffset->setReadOnly(false);
-                  ontimeOffset->setSuffix("%");
-                  ontimeOffset->setRange(-200, 200);
-                  ontimeOffset->setValue(_ontimeUserOffset);
-                  break;
-            }
+      _ontimeUserOffset = val;
       }
 
 //---------------------------------------------------------
@@ -175,39 +132,7 @@ void ChordProperties::ontimeOffsetTypeChanged(int vt)
 
 void ChordProperties::offtimeOffsetChanged(int val)
       {
-      switch(_offtimeOffsetType->currentIndex()) {
-            case AUTO_VAL:
-            case USER_VAL:   _offtimeOffset = val; break;
-            case OFFSET_VAL: _offtimeUserOffset = val;   break;
-            }
-      }
-
-//---------------------------------------------------------
-//   offtimeOffsetTypeChanged
-//---------------------------------------------------------
-
-void ChordProperties::offtimeOffsetTypeChanged(int vt)
-      {
-      switch(vt) {
-            case AUTO_VAL:
-                  offtimeOffset->setReadOnly(true);
-                  offtimeOffset->setSuffix("");
-                  offtimeOffset->setRange(0, 127);
-                  offtimeOffset->setValue(_offtimeOffset);
-                  break;
-            case USER_VAL:
-                  offtimeOffset->setReadOnly(false);
-                  offtimeOffset->setSuffix("");
-                  offtimeOffset->setRange(-1000, +1000);
-                  offtimeOffset->setValue(_offtimeOffset);
-                  break;
-            case OFFSET_VAL:
-                  offtimeOffset->setReadOnly(false);
-                  offtimeOffset->setSuffix("%");
-                  offtimeOffset->setRange(-200, 200);
-                  offtimeOffset->setValue(_ontimeUserOffset);
-                  break;
-            }
+      _offtimeUserOffset = val;
       }
 
 //---------------------------------------------------------

@@ -67,7 +67,7 @@ class Selection {
       Selection(Score*);
       Score* score() const             { return _score; }
       SelState state() const           { return _state; }
-      void setState(SelState s)        { _state = s;    }
+      void setState(SelState s);
 
       void searchSelectedElements();
       const QList<Element*>& elements() const { return _el; }

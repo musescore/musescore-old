@@ -193,7 +193,7 @@ class ScoreView : public QWidget {
 
       void endLasso();
       void deselectAll();
-      void adjustCanvasPosition(Element* el, bool playBack);
+      void adjustCanvasPosition(const Element* el, bool playBack);
 
       void editCopy();
       void editPaste();

@@ -351,8 +351,8 @@ void Seq::guiStop()
       //
       // deselect all selected notes
       //
-      foreach(Note* n, markedNotes) {
-            n->setSelected(false);
+      foreach(const Note* n, markedNotes) {
+            ((Note*)n)->setSelected(false);     //HACK
             cs->addRefresh(n->abbox());
             }
       markedNotes.clear();
@@ -446,7 +446,7 @@ void Seq::playEvent(const Event* event)
       int type = event->type();
       if (type == ME_NOTEON) {
             bool mute;
-            Note* note = event->note();
+            const Note* note = event->note();
 
             if (note) {
                   Part* instr = note->staff()->part();
@@ -704,18 +704,18 @@ void Seq::heartBeat()
       double endTime = curTime() - startTime;
       if (pp)
             pp->heartBeat2(lrint(endTime));
-      Note* note = 0;
+      const Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {
             double f = cs->utick2utime(guiPos.key());
             if (f >= endTime)
                   break;
             if (guiPos.value()->type() == ME_NOTEON) {
                   Event* n = guiPos.value();
-                  Note* note1 = n->note();
+                  const Note* note1 = n->note();
                   if (n->velo()) {
                         note = note1;
                         while (note1) {
-                              note1->setSelected(true);
+                              ((Note*)note1)->setSelected(true);  // HACK
                               markedNotes.append(note1);
                               cs->addRefresh(note1->abbox());
                               note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
@@ -724,7 +724,7 @@ void Seq::heartBeat()
                         }
                   else {
                         while (note1) {
-                              note1->setSelected(false);
+                              ((Note*)note1)->setSelected(false);       // HACK
                               cs->addRefresh(note1->abbox());
                               markedNotes.removeOne(note1);
                               note1 = note1->tieFor() ? note1->tieFor()->endNote() : 0;
@@ -812,8 +812,8 @@ void Seq::seek(int tick)
       msg.id   = SEQ_SEEK;
       guiToSeq(msg);
       mscore->setPos(tick);
-      foreach(Note* n, markedNotes) {
-            n->setSelected(false);
+      foreach(const Note* n, markedNotes) {
+            ((Note*)n)->setSelected(false);     // HACK
             cs->addRefresh(n->abbox());
             }
       }
@@ -916,7 +916,7 @@ void Seq::sendEvent(const Event& ev)
 void Seq::nextMeasure()
       {
       EventMap::const_iterator i = playPos;
-      Note* note = 0;
+      const Note* note = 0;
       for (;;) {
             if (i.value()->type() == ME_NOTEON) {
                   Event* n = i.value();
@@ -962,7 +962,7 @@ void Seq::nextChord()
 void Seq::prevMeasure()
       {
       EventMap::const_iterator i = playPos;
-      Note* note = 0;
+      const Note* note = 0;
       for (;;) {
             if (i.value()->type() == ME_NOTEON) {
                   note = i.value()->note();

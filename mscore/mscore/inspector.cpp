@@ -993,10 +993,10 @@ void ShowNoteWidget::setElement(Element* e)
       nb.accidental->setEnabled(note->accidental());
       nb.userAccidental->setValue(note->userAccidental());
 
-      nb.onTimeType->setCurrentIndex(note->onTimeType());
+//      nb.onTimeType->setCurrentIndex(note->onTimeType());
       nb.onTimeOffset->setValue(note->onTimeOffset());
       nb.offTimeOffset->setValue(note->offTimeOffset());
-      nb.offTimeType->setCurrentIndex(note->offTimeType());
+//      nb.offTimeType->setCurrentIndex(note->offTimeType());
       nb.onTimeUserOffset->setValue(note->onTimeUserOffset());
       nb.offTimeUserOffset->setValue(note->offTimeUserOffset());
 

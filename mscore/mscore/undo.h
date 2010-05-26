@@ -1222,18 +1222,13 @@ class ChangeNoteProperties : public UndoCommand {
       char _velocity;         ///< midi playback velocity (0 - 127);
       int _veloOffset;        ///< velocity user offset in promille
 
-      ValueType _onTimeType;
-      int _onTimeOffset;      ///< start note offset in ticks
       int _onTimeUserOffset;  ///< start note user offset
-
-      ValueType _offTimeType;
-      int _offTimeOffset;     ///< stop note offset in ticks
       int _offTimeUserOffset; ///< stop note user offset
 
       void flip();
 
    public:
-      ChangeNoteProperties(Note*, ValueType, int, int, ValueType, int, int, ValueType, int, int);
+      ChangeNoteProperties(Note*, ValueType, int, int, int, int);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };
