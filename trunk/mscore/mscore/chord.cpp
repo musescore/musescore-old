@@ -1354,10 +1354,11 @@ void Chord::layout()
 
                   int rt = 0;
                   foreach(Chord* c, gl) {
-                        int len = c->tickLen() * t / ticks;
+                        int len   = c->tickLen() * t / ticks;
+                        int etick = rt + len - c->tickLen();
                         foreach(Note* n, c->notes()) {
                               n->setOnTimeOffset(rt);
-                              n->setOffTimeOffset(-(c->tickLen() - len + rt));
+                              n->setOffTimeOffset(etick);
                               }
                         rt += len;
                         }

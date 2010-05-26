@@ -123,24 +123,24 @@ Measure::Measure(Score* s)
             staves.push_back(s);
             }
 
-      _userStretch = 1.0;     // ::style->measureSpacing;
-      _lineBreak   = false;
-      _pageBreak   = false;
-      _no          = 0;
+      _userStretch           = 1.0;     // ::style->measureSpacing;
+      _lineBreak             = false;
+      _pageBreak             = false;
+      _no                    = 0;
 
       _irregular             = false;
       _breakMultiMeasureRest = false;
       _breakMMRest           = false;
       _multiMeasure          = 0;
 
-      _repeatCount = 2;
-      _repeatFlags = 0;
-      _noOffset    = 0;
-      _noText      = 0;
-      _endBarLineType = NORMAL_BAR;
-      _mmEndBarLineType = NORMAL_BAR;
-      _endBarLineGenerated = true;
-      _endBarLineVisible   = true;
+      _repeatCount           = 2;
+      _repeatFlags           = 0;
+      _noOffset              = 0;
+      _noText                = 0;
+      _endBarLineType        = NORMAL_BAR;
+      _mmEndBarLineType      = NORMAL_BAR;
+      _endBarLineGenerated   = true;
+      _endBarLineVisible     = true;
       }
 
 //---------------------------------------------------------
@@ -2607,7 +2607,6 @@ bool Measure::createEndBarLines()
                         bl->setSubtype(et);
                         changed = true;
                         }
-//                  bl->setGenerated(_endBarLineGenerated);
                   bl->setVisible(_endBarLineVisible);
                   bl->setColor(_endBarLineColor);
                   span = staff->barLineSpan();

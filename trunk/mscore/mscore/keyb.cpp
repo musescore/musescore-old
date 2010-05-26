@@ -336,7 +336,6 @@ void Score::setPadState(Element* e)
 
 void Score::setPadState()
       {
-printf("setPadState()\n");
       getAction("pad-rest")->setChecked(_is.rest);
       getAction("pad-dot")->setChecked(_is.duration().dots() == 1);
       getAction("pad-dotdot")->setChecked(_is.duration().dots() == 2);
