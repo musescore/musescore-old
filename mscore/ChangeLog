@@ -1,4 +1,5 @@
 26.may (ws)
+      - fix #5867: End Repeat disappears when creating multimeasure rests
       - refacturing of playback architecture in progress
       - playback of arpeggios which are spanning more than one staff
 24.may (lv)
