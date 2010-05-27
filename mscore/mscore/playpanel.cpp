@@ -118,10 +118,10 @@ void PlayPanel::setRelTempo(int val)
       }
 
 //---------------------------------------------------------
-//   setVolume
+//   setGain
 //---------------------------------------------------------
 
-void PlayPanel::setVolume(float val)
+void PlayPanel::setGain(float val)
       {
       volumeSlider->setValue(val);
       }

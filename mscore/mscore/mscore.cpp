@@ -1309,7 +1309,7 @@ void MuseScore::showPlayPanel(bool visible)
             connect(playPanel, SIGNAL(closed()),                 SLOT(closePlayPanel()));
             connect(seq,       SIGNAL(gainChanged(float)), playPanel, SLOT(setGain(float)));
 
-            playPanel->setVolume(seq->gain());
+            playPanel->setGain(seq->gain());
             playPanel->setScore(cs);
             playPanel->move(preferences.playPanelPos);
             }

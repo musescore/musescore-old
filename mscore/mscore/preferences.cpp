@@ -503,16 +503,15 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       shortcutsChanged        = false;
 
 #ifndef USE_JACK
-      jackDriver->setEnabled(false);
+      jackDriver->setVisible(false);
 #endif
 #ifndef USE_ALSA
-      alsaDriver->setEnabled(false);
+      alsaDriver->setVisible(false);
 #endif
 #ifndef USE_PORTAUDIO
-      portaudioDriver->setEnabled(false);
+      portaudioDriver->setVisible(false);
 #endif
 #ifndef USE_PORTMIDI
-      // portmidiDriverInput->setEnabled(false);
       portmidiDriverInput->setVisible(false);
 #endif
 

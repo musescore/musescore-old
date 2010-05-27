@@ -215,6 +215,7 @@ class Chord : public ChordRest {
       void setNoStem(bool val)            { _noStem = val;   }
       virtual void setMag(double val);
       void pitchChanged();
+      void renderPlayback();
       };
 
 #endif
