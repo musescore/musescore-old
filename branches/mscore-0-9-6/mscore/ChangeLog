@@ -1,3 +1,5 @@
+27.may (la)
+      - fix #5897: > and < are not read back from saved score
 26.may (ws)
       - fix #5867: End Repeat disappears when creating multimeasure rests
 24.may (ws)

@@ -373,7 +373,7 @@ void Xml::htmlToString(QDomElement e, int level, QString* s)
             if (ee.nodeType() == QDomNode::ElementNode)
                   htmlToString(ee.toElement(), level, s);
             else if (ee.nodeType() == QDomNode::TextNode)
-                  *s += ee.toText().data();
+                  *s += Qt::escape(ee.toText().data());
             }
       *s += QString("</%1>").arg(e.tagName());
       --level;

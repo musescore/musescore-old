@@ -2,6 +2,8 @@
       - removed PortAudio audio interface from linux version
       - Extend ALSA interface for non dma access. This should work with
         desktop PulseAudio.
+        (la)
+      - fix #5897: > and < are not read back from saved score
 26.may (ws)
       - fix #5867: End Repeat disappears when creating multimeasure rests
       - refacturing of playback architecture in progress
