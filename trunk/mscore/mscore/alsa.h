@@ -51,8 +51,6 @@ class AlsaDriver {
       int setSwpar(snd_pcm_t* handle, snd_pcm_sw_params_t* swpar);
       int recover();
 
-      bool rwAccess;
-
       unsigned int           _rate;
       snd_pcm_uframes_t      _frsize;
       unsigned int           _nfrags;
@@ -73,6 +71,7 @@ class AlsaDriver {
       bool                   _xrun;
       clear_function         _clear_func;
       play_function          _play_func;
+      bool                   mmappedInterface;
 
       static char* clear_32le(char* dst, int step, int nfrm);
       static char* clear_24le(char* dst, int step, int nfrm);

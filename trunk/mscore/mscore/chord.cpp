@@ -1327,46 +1327,7 @@ void Chord::layout()
       foreach(LedgerLine* l, _ledgerLines)
             l->layout();
 
-      //-----------------------------------------
-      //  Layout acciaccatura and appoggiatura
-      //-----------------------------------------
-
-      if (segment()->subtype() == SegChordRest) {
-            QList<Chord*> gl;
-            Segment* s = segment();
-            while (s->prev()) {
-                  s = s->prev();
-                  if (s->subtype() != SegGrace)
-                        break;
-                  Element* cr = s->element(track());
-                  if (cr && cr->type() == CHORD)
-                        gl.prepend(static_cast<Chord*>(cr));
-                  }
-            if (!gl.isEmpty()) {
-                  int ticks = 0;
-                  foreach(Chord* c, gl)
-                        ticks += c->tickLen();
-                  int t = ticks;
-                  if (gl.front()->noteType() == NOTE_ACCIACCATURA)
-                        t /= 2;
-                  if (t >= (tickLen() / 2))
-                        t = tickLen() / 2;
-
-                  int rt = 0;
-                  foreach(Chord* c, gl) {
-                        int len   = c->tickLen() * t / ticks;
-                        int etick = rt + len - c->tickLen();
-                        foreach(Note* n, c->notes()) {
-                              n->setOnTimeOffset(rt);
-                              n->setOffTimeOffset(etick);
-                              }
-                        rt += len;
-                        }
-                  foreach(Note* n, notes())
-                        n->setOnTimeOffset(rt);
-                  }
-            }
-
+      renderPlayback();
 
       //-----------------------------------------
       //  Fingering
@@ -1507,6 +1468,53 @@ void Chord::layoutArpeggio2()
             }
       bool up = _arpeggio->subtype() != ARP_DOWN;
       renderArpeggio(notes, up);
+      }
+
+//---------------------------------------------------------
+//   renderPlayback
+//---------------------------------------------------------
+
+void Chord::renderPlayback()
+      {
+      //-----------------------------------------
+      //  Layout acciaccatura and appoggiatura
+      //-----------------------------------------
+
+      if (segment()->subtype() == SegChordRest) {
+            QList<Chord*> gl;
+            Segment* s = segment();
+            while (s->prev()) {
+                  s = s->prev();
+                  if (s->subtype() != SegGrace)
+                        break;
+                  Element* cr = s->element(track());
+                  if (cr && cr->type() == CHORD)
+                        gl.prepend(static_cast<Chord*>(cr));
+                  }
+            if (!gl.isEmpty()) {
+                  int ticks = 0;
+                  foreach(Chord* c, gl)
+                        ticks += c->tickLen();
+                  int t = ticks;
+                  if (gl.front()->noteType() == NOTE_ACCIACCATURA)
+                        t /= 2;
+                  if (t >= (tickLen() / 2))
+                        t = tickLen() / 2;
+
+                  int rt = 0;
+                  foreach(Chord* c, gl) {
+                        int len   = c->tickLen() * t / ticks;
+                        int etick = rt + len - c->tickLen();
+                        foreach(Note* n, c->notes()) {
+                              n->setOnTimeOffset(rt);
+                              n->setOffTimeOffset(etick);
+                              }
+                        rt += len;
+                        }
+                  foreach(Note* n, notes())
+                        n->setOnTimeOffset(rt);
+                  }
+            }
       }
 
 //---------------------------------------------------------

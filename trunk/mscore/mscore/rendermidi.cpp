@@ -117,19 +117,6 @@ Volta* Score::searchVolta(int tick) const
       }
 
 //---------------------------------------------------------
-//   isVolta
-//    return true if no volta found
-//---------------------------------------------------------
-
-bool Score::isVolta(int tick, int repeat) const
-      {
-      Volta* volta = searchVolta(tick);
-      if (volta == 0)
-            return true;
-      return volta->hasEnding(repeat);
-      }
-
-//---------------------------------------------------------
 //   playNote
 //---------------------------------------------------------
 
