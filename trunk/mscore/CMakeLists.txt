@@ -247,7 +247,7 @@ if (NOT MINGW AND NOT APPLE)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW AND NOT APPLE)
 
-set (subdirs al awl osdabzip rtf2html mscore share manual demos
+set (subdirs al awl bww2mxml osdabzip rtf2html mscore share manual demos
      scriptgen singleapp fluid)
 
 if (MINGW OR APPLE)
