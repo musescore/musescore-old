@@ -153,12 +153,21 @@ namespace Bww {
     QRegExp rClef("&");
     QRegExp rKey("sharp[cf]");
     QRegExp rTempo("\\d+_(1|2|4|8|16|32)");
-    QRegExp rParts("I!''|I!|''!I|!I|'intro|[2-9]|'[12]|_'");
-    QRegExp rBars("!|!t|!!t");
-    QRegExp rNotes("(LG|LA|[B-F]|HG|HA)[lr]?_(1|2|4|8|16|32)");
-    QRegExp rTies("\\^t[es]");
-    QRegExp rDots("'([hl][ag]|[b-f])");
-    QRegExp rSingleGraces("[a-gt]g");
+    QRegExp rPart("I!''|I!|''!I|!I|'intro|[2-9]|'[12]|_'");
+    QRegExp rBar("!|!t|!!t");
+    QRegExp rNote("(LG|LA|[B-F]|HG|HA)[lr]?_(1|2|4|8|16|32)");
+    QRegExp rTie("\\^t[es]");
+    QRegExp rDot("'([hl][ag]|[b-f])");
+    QRegExp rSingleGrace("[a-gt]g");
+    QRegExp rStrike("str([hl][ag]|[b-f])");
+    QRegExp rDoubling("db([hl][ag]|[b-f])");
+    QRegExp rHalfDoubling("hdb([hl][ag]|[b-f])");
+    QRegExp rThumbDoubling("thdb(l[ag]|[b-f]|hg)");
+    QRegExp rSlur("l?gstd");
+    QRegExp rThrow("thrd");
+    QRegExp rBirl("abr|brl|gbrl|tbrl");
+    QRegExp rGrip("grp");
+    QRegExp rTaorluath("tar");
 
     if (rClef.exactMatch(word))
       type = CLEF;
@@ -166,18 +175,36 @@ namespace Bww {
       type = KEY;
     else if (rTempo.exactMatch(word))
       type = TEMPO;
-    else if (rParts.exactMatch(word))
+    else if (rPart.exactMatch(word))
       type = PART;
-    else if (rBars.exactMatch(word))
+    else if (rBar.exactMatch(word))
       type = BAR;
-    else if (rNotes.exactMatch(word))
+    else if (rNote.exactMatch(word))
       type = NOTE;
-    else if (rTies.exactMatch(word))
+    else if (rTie.exactMatch(word))
       type = TIE;
-    else if (rDots.exactMatch(word))
+    else if (rDot.exactMatch(word))
       type = DOT;
-    else if (rSingleGraces.exactMatch(word))
+    else if (rSingleGrace.exactMatch(word))
       type = SINGLEGRACE;
+    else if (rStrike.exactMatch(word))
+      type = STRIKE;
+    else if (rDoubling.exactMatch(word))
+      type = DOUBLING;
+    else if (rHalfDoubling.exactMatch(word))
+      type = HALFDOUBLING;
+    else if (rThumbDoubling.exactMatch(word))
+      type = THUMBDOUBLING;
+    else if (rSlur.exactMatch(word))
+      type = SLUR;
+    else if (rThrow.exactMatch(word))
+      type = THROW;
+    else if (rBirl.exactMatch(word))
+      type = BIRL;
+    else if (rGrip.exactMatch(word))
+      type = GRIP;
+    else if (rTaorluath.exactMatch(word))
+      type = TAORLUATH;
     else
     {
       type = UNKNOWN;

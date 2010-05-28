@@ -50,6 +50,9 @@ namespace Bww {
     qDebug() << "Parser::Parser()";
 
     // Initialize the grace note translation table
+    // Grace sequence definitions were taken from Lilyponds bagpipe.ly
+    // For some Lilypond sequences the bww name is unknown
+
     // Single grace notes
     graceMap["ag"] = "LA";
     graceMap["bg"] = "B";
@@ -59,6 +62,86 @@ namespace Bww {
     graceMap["fg"] = "F";
     graceMap["gg"] = "HG";
     graceMap["tg"] = "HA";
+
+    // Strikes (same as single grace notes)
+    graceMap["strlg"] = "LG";
+    graceMap["strla"] = "LA";
+    graceMap["strb"]  = "B";
+    graceMap["strc"]  = "C";
+    graceMap["strd"]  = "D";
+    graceMap["stre"]  = "E";
+    graceMap["strf"]  = "F";
+    graceMap["strhg"] = "HG";
+    graceMap["strha"] = "HA";
+
+    // Doublings
+    graceMap["dblg"] = "HG LG D";
+    graceMap["dbla"] = "HG LA D";
+    graceMap["dbb"]  = "HG B D";
+    graceMap["dbc"]  = "HG C D";
+    graceMap["dbd"]  = "HG D E";
+    graceMap["dbe"]  = "HG E F";
+    graceMap["dbf"]  = "HG F HG";
+    graceMap["dbhg"] = "HG F";
+    graceMap["dbha"] = "HA HG";
+
+    // Half doublings
+    graceMap["hdblg"] = "LG D";
+    graceMap["hdbla"] = "LA D";
+    graceMap["hdbb"]  = "B D";
+    graceMap["hdbc"]  = "C D";
+    graceMap["hdbd"]  = "D E";
+    graceMap["hdbe"]  = "E F";
+    graceMap["hdbf"]  = "F HG";
+    graceMap["hdbhg"] = "HG F";
+    graceMap["hdbha"] = "HA HG";
+
+    // Thumb doublings
+    graceMap["thdblg"] = "HA LG D";
+    graceMap["thdbla"] = "HA LA D";
+    graceMap["thdbb"]  = "HA B D";
+    graceMap["thdbc"]  = "HA C D";
+    graceMap["thdbd"]  = "HA D E";
+    graceMap["thdbe"]  = "HA E F";
+    graceMap["thdbf"]  = "HA F HG";
+    graceMap["thdbhg"] = "HA HG F";
+
+    // Shakes
+    // Half shakes
+    // Thumb shakes
+    // ???
+
+    // Slurs
+    graceMap["gstd"] = "HG D LG";
+    graceMap["lgstd"] = "HG D C";
+
+    // Half slurs
+    // Thumb slurs
+    // ???
+
+    // Catches
+    // ???
+
+    // Throws
+    graceMap["thrd"] = "LG D C";
+    //    graceMap["???"] = "D C";
+    //    graceMap["???"] = "LG D LG C";
+    //    graceMap["???"] = "F E HG E";
+
+    //  Birls
+    graceMap["abr"] = "LA LG LA LG";
+    graceMap["brl"] = "LG LA LG";
+    graceMap["gbrl"] = "HG LA LG LA LG";
+    graceMap["tbrl"] = "D LA LG LA LG";
+
+    // Grips
+    graceMap["grp"] = "LG D LG";
+
+    // Taorluaths
+    graceMap["tar"] = "LG D LG E";
+
+    // Crunluaths
+    // ???
   }
 
   /**
@@ -131,7 +214,16 @@ namespace Bww {
         parseBar();
       else if (lex.symType() == NOTE)
         parseNote();
-      else if (lex.symType() == SINGLEGRACE)
+      else if (lex.symType() == SINGLEGRACE
+               || lex.symType() == STRIKE
+               || lex.symType() == DOUBLING
+               || lex.symType() == HALFDOUBLING
+               || lex.symType() == THUMBDOUBLING
+               || lex.symType() == SLUR
+               || lex.symType() == THROW
+               || lex.symType() == BIRL
+               || lex.symType() == GRIP
+               || lex.symType() == TAORLUATH)
         parseGraces();
       else
       {
