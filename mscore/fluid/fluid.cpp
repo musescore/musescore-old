@@ -980,12 +980,13 @@ double Fluid::effectParameter(int effect, int parameter)
       return 0.0;
       }
 
-void Fluid::setEffectParameter(int effect, int parameter, double value)
+double Fluid::setEffectParameter(int effect, int parameter, double value)
       {
       if (effect == 0)
             reverb->setParameter(parameter, value);
       else if (effect == 1)
             chorus->setParameter(parameter, value);
+      return value;
       }
 
 /**

@@ -24,6 +24,7 @@
 #include "synti.h"
 #include "preferences.h"
 #include "mixer.h"
+#include "aeolus/aeolus/aeolus.h"
 
 //---------------------------------------------------------
 //   SynthControl
@@ -45,14 +46,58 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
       masterTuning->setValue(synti->masterTuning());
       setGain(synti->gain());
 
-      reverb->setValue(synti->effectParameter(0, 3));
-      roomSizeBox->setValue(synti->effectParameter(0, 0));
-      dampBox->setValue(synti->effectParameter(0, 1));
-      widthBox->setValue(synti->effectParameter(0, 2));
+      reverb->setValue(synti->effectParameter(0, 0, 3)._val);
+      roomSizeBox->setValue(synti->effectParameter(0, 0, 0)._val);
+      dampBox->setValue(synti->effectParameter(0, 0, 1)._val);
+      widthBox->setValue(synti->effectParameter(0, 0, 2)._val);
 
-      chorus->setValue(synti->effectParameter(1, 4));
-      chorusSpeed->setValue(synti->effectParameter(1, 1));
-      chorusDepth->setValue(synti->effectParameter(1, 2));
+      chorus->setValue(synti->effectParameter(0, 1, 4)._val);
+      chorusSpeed->setValue(synti->effectParameter(0, 1, 1)._val);
+      chorusDepth->setValue(synti->effectParameter(0, 1, 2)._val);
+
+      reverbDelay->init(synti->effectParameter(1, 0, AEOLUS_REVSIZE));
+      reverbDelay->setId(AEOLUS_REVSIZE);
+      connect(reverbDelay, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
+
+      reverbTime->init(synti->effectParameter(1, 0, AEOLUS_REVTIME));
+      reverbTime->setId(AEOLUS_REVTIME);
+      connect(reverbTime, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
+
+      position->init(synti->effectParameter(1, 0, AEOLUS_STPOSIT));
+      position->setId(AEOLUS_STPOSIT);
+      connect(position, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
+
+      aeolusSection[0][0] = aeolusAzimuth3;
+      aeolusSection[0][1] = aeolusWidth3;
+      aeolusSection[0][2] = aeolusDirect3;
+      aeolusSection[0][3] = aeolusReflect3;
+      aeolusSection[0][4] = aeolusReverb3;
+
+      aeolusSection[1][0] = aeolusAzimuth2;
+      aeolusSection[1][1] = aeolusWidth2;
+      aeolusSection[1][2] = aeolusDirect2;
+      aeolusSection[1][3] = aeolusReflect2;
+      aeolusSection[1][4] = aeolusReverb2;
+
+      aeolusSection[2][0] = aeolusAzimuth1;
+      aeolusSection[2][1] = aeolusWidth1;
+      aeolusSection[2][2] = aeolusDirect1;
+      aeolusSection[2][3] = aeolusReflect1;
+      aeolusSection[2][4] = aeolusReverb1;
+
+      aeolusSection[3][0] = aeolusAzimuthP;
+      aeolusSection[3][1] = aeolusWidthP;
+      aeolusSection[3][2] = aeolusDirectP;
+      aeolusSection[3][3] = aeolusReflectP;
+      aeolusSection[3][4] = aeolusReverbP;
+
+      for (int i = 0; i < 4; ++i) {
+            for (int k = 0; k < 5; ++k) {
+                  aeolusSection[i][k]->init(synti->effectParameter(1, i+1, k));
+                  aeolusSection[i][k]->setId(((i+1) << 8) + k);
+                  connect(aeolusSection[i][k], SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
+                  }
+            }
 
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
       connect(gain,     SIGNAL(valueChanged(double,int)), SLOT(gainChanged(double,int)));
@@ -207,7 +252,7 @@ void SynthControl::stop()
 
 void SynthControl::reverbValueChanged(double val, int idx)
       {
-      synti->setEffectParameter(0, idx, val);
+      synti->setEffectParameter(0, 0, idx, val);
       }
 
 //---------------------------------------------------------
@@ -216,6 +261,15 @@ void SynthControl::reverbValueChanged(double val, int idx)
 
 void SynthControl::chorusValueChanged(double val, int idx)
       {
-      synti->setEffectParameter(1, idx, val);
+      synti->setEffectParameter(0, 1, idx, val);
+      }
+
+//---------------------------------------------------------
+//   setAeolusValue
+//---------------------------------------------------------
+
+void SynthControl::setAeolusValue(double val, int idx)
+      {
+      synti->setEffectParameter(1, idx >> 8, idx & 0xff, val);
       }
 

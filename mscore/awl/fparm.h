@@ -1,9 +1,9 @@
 //=============================================================================
-//  MuseScore
+//  MusE Score
 //  Linux Music Score Editor
-//  $Id$
+//  $Id:$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,49 +18,23 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __PLAYPANEL_H__
-#define __PLAYPANEL_H__
+#ifndef __FPARM_H__
+#define __FPARM_H__
 
-#include "ui_playpanel.h"
-
-class Score;
+struct MidiPatch;
+class Event;
 
 //---------------------------------------------------------
-//   PlayPanel
+//   Fparm
 //---------------------------------------------------------
 
-class PlayPanel : public QWidget, private Ui::PlayPanelBase {
-      Q_OBJECT
-      int cachedTickPosition;
-      int cachedTimePosition;
-
-      Score* cs;
-      virtual void closeEvent(QCloseEvent*);
-
-   private slots:
-      void volumeChanged(double,int);
-      void posChanged(int);
-      void swingStyleChanged(int);
-
-   signals:
-      void relTempoChanged(double,int);
-      void posChange(int);
-      void gainChange(float);
-      void closed();
-
-   public slots:
-      void setGain(float);
-
+class Fparm {
    public:
-      PlayPanel(QWidget* parent = 0);
-      void heartBeat(int rpos, int apos);
-      void heartBeat2(int sec);
-
-      void setTempo(double);
-      void setRelTempo(int);
-
-      void setEndpos(int);
-      void setScore(Score* s);
+      Fparm() {}
+      Fparm(float a, float b, float c) : _val(a), _min(b), _max(c) {}
+      float  _val;
+      float  _min;
+      float  _max;
       };
 
 #endif

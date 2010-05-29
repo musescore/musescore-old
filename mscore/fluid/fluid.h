@@ -343,7 +343,7 @@ class Fluid : public Synth {
       virtual const QList<MidiPatch*>& getPatchInfo() const { return patches; }
 
       virtual double effectParameter(int effect, int parameter);
-      virtual void setEffectParameter(int ffect, int parameter, double value);
+      virtual double setEffectParameter(int ffect, int parameter, double value);
 
       bool log(const char* fmt, ...);
 

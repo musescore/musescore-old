@@ -92,15 +92,16 @@ enum // GLOBAL LIMITS
 #define ALL_MASK 127
 
 
-class Fparm
-{
-public:
+#if 0
+class Fparm {
+   public:
+      float  _val;
+      float  _min;
+      float  _max;
+      };
+#endif
 
-    float  _val;
-    float  _min;
-    float  _max;
-};
-
+#include "synti.h"
 
 #endif
 

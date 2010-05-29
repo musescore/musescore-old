@@ -32,9 +32,11 @@ Divis::Divis() : _flags(0), _dmask(0), _nrank(0)
       _param [SWELL]._val = SWELL_DEF;
       _param [SWELL]._min = SWELL_MIN;
       _param [SWELL]._max = SWELL_MAX;
+
       _param [TFREQ]._val = TFREQ_DEF;
       _param [TFREQ]._min = TFREQ_MIN;
       _param [TFREQ]._max = TFREQ_MAX;
+
       _param [TMODD]._val = TMODD_DEF;
       _param [TMODD]._min = TMODD_MIN;
       _param [TMODD]._max = TMODD_MAX;

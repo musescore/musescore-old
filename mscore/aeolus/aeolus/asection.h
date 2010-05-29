@@ -77,8 +77,8 @@ class Asection {
       Asection (float fsam);
       ~Asection ();
 
-      float *get_wptr (void) { return _base + _offs0; }
-      Fparm *get_apar (void) { return _apar; }
+      float *get_wptr () { return _base + _offs0; }
+      Fparm *get_apar () { return _apar; }
       void set_size (float size);
       void process (float vol, float *W, float *X, float *Y, float *R);
 

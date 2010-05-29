@@ -24,6 +24,9 @@
 #include "ui_synthcontrol.h"
 
 class MasterSynth;
+namespace Awl {
+      class AbstractSlider;
+      };
 
 //---------------------------------------------------------
 //   SynthControl
@@ -34,6 +37,8 @@ class SynthControl : public QWidget, Ui::SynthControl {
 
       MasterSynth* synti;
 
+      Awl::AbstractSlider* aeolusSection[4][5];
+
       virtual void closeEvent(QCloseEvent*);
 
    private slots:
@@ -42,6 +47,7 @@ class SynthControl : public QWidget, Ui::SynthControl {
       void masterTuningChanged(double);
       void reverbValueChanged(double val, int idx);
       void chorusValueChanged(double val, int idx);
+      void setAeolusValue(double, int);
 
    signals:
       void closed();
