@@ -24,6 +24,8 @@
 struct MidiPatch;
 class Event;
 
+#include "awl/fparm.h"
+
 //---------------------------------------------------------
 //   MidiPatch
 //---------------------------------------------------------
@@ -40,6 +42,9 @@ struct MidiPatch {
 //---------------------------------------------------------
 
 class Synth {
+
+   protected:
+      static const Fparm defaultParameter;
 
    public:
       Synth() {}
@@ -59,8 +64,10 @@ class Synth {
 
       virtual const QList<MidiPatch*>& getPatchInfo() const = 0;
 
-      virtual double effectParameter(int /*effect*/, int /*param*/)  { return 0.0; }
-      virtual void setEffectParameter(int /*effect*/, int /*param*/, double /*val*/ ) { }
+      virtual const Fparm& effectParameter(int /*effect*/, int /*param*/) const {
+            return defaultParameter;
+            }
+      virtual double setEffectParameter(int /*effect*/, int /*param*/, double /*val*/ ) { return 0.0; }
       };
 
 //---------------------------------------------------------
@@ -92,8 +99,8 @@ class MasterSynth {
       Synth* getSynth(int n);
       const QList<Synth*>& getSyntis() const;
 
-      double effectParameter(int /*effect*/, int /*param*/)  { return 0.0; }
-      void setEffectParameter(int /*effect*/, int /*param*/, double /*val*/ ) { }
+      const Fparm& effectParameter(int synti, int effect, int param) const;
+      double setEffectParameter(int synti, int effect, int param, double val);
 
       void setMasterTuning(double) {}
       double masterTuning() const { return 440.0; }

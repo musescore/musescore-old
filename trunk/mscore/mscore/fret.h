@@ -35,9 +35,12 @@ class FretDiagram : public Element {
       int _strings;
       int maxStrings;
       int _frets;
+      int _fretOffset;
+      int _maxFrets;
       char* _dots;
       char* _marker;
       char* _fingering;
+
       double lw1;
       double lw2;             // top line
       double stringDist;
@@ -64,6 +67,10 @@ class FretDiagram : public Element {
       void setDot(int string, int fret);
       void setMarker(int string, int marker);
       void setFingering(int string, int finger);
+      int fretOffset() const      { return _fretOffset; }
+      void setFretOffset(int val) { _fretOffset = val;  }
+      int maxFrets() const        { return _maxFrets;   }
+      void setMaxFrets(int val)   { _maxFrets = val;    }
 
       bool genPropertyMenu(QMenu* popup) const;
       void propertyAction(ScoreView* viewer, const QString& s);
@@ -84,6 +91,7 @@ class FretDiagramProperties : public QDialog, public Ui::FretDiagramProperties {
    private slots:
       void stringsChanged(int);
       void fretsChanged(int);
+      void fretOffsetChanged(int);
 
    public:
       FretDiagramProperties(FretDiagram*, QWidget* parent = 0);

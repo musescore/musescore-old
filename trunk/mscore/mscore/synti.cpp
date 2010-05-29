@@ -28,6 +28,8 @@
 #include "aeolus/aeolus/aeolus.h"
 #endif
 
+const Fparm Synth::defaultParameter = Fparm(0, 0, 0);
+
 //---------------------------------------------------------
 //   MasterSynth
 //---------------------------------------------------------
@@ -203,3 +205,20 @@ const QList<Synth*>& MasterSynth::getSyntis() const
       return syntis;
       }
 
+//---------------------------------------------------------
+//   effectParameter
+//---------------------------------------------------------
+
+const Fparm& MasterSynth::effectParameter(int synti, int effect, int param) const
+      {
+      return syntis[synti]->effectParameter(effect, param);
+      }
+
+//---------------------------------------------------------
+//   setEffectParameter
+//---------------------------------------------------------
+
+double MasterSynth::setEffectParameter(int synti, int effect, int param, double val)
+      {
+      return syntis[synti]->setEffectParameter(effect, param, val);
+      }

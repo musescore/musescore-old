@@ -132,7 +132,7 @@ void PlayPanel::setGain(float val)
 
 void PlayPanel::volumeChanged(double val, int)
       {
-      emit volChange(val);
+      emit gainChange(val);
       }
 
 //---------------------------------------------------------

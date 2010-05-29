@@ -89,19 +89,35 @@ Aeolus::~Aeolus()
       _reverb.fini ();
       }
 
+//---------------------------------------------------------
+//   setMasterTuning
+//---------------------------------------------------------
+
 void Aeolus::setMasterTuning(double)
       {
       }
+
+//---------------------------------------------------------
+//   masterTuning
+//---------------------------------------------------------
 
 double Aeolus::masterTuning() const
       {
       return 440.0;
       }
 
+//---------------------------------------------------------
+//   loadSoundFont
+//---------------------------------------------------------
+
 bool Aeolus::loadSoundFont(const QString&)
       {
       return true;
       }
+
+//---------------------------------------------------------
+//   soundFont
+//---------------------------------------------------------
 
 QString Aeolus::soundFont() const
       {
@@ -164,19 +180,76 @@ void Aeolus::play(const Event& event)
             }
       }
 
+//---------------------------------------------------------
+//   getPatchInfo
+//---------------------------------------------------------
+
 const QList<MidiPatch*>& Aeolus::getPatchInfo() const
       {
       return patchList;
       }
 
-double Aeolus::effectParameter(int /*effect*/, int /*parameter*/)
+//---------------------------------------------------------
+//   effectParameter
+//---------------------------------------------------------
+
+const Fparm& Aeolus::effectParameter(int effect, int parameter) const
       {
-      return 0.0;
+      switch (effect) {
+            case 0:     // audio
+                  return _audiopar[parameter];
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                  {
+                  Fparm* fp = _asectp[effect-1]->get_apar();
+                  return fp[parameter];
+                  }
+
+            default:
+                  break;
+            }
+      return defaultParameter;
       }
 
-void Aeolus::setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ )
+//---------------------------------------------------------
+//   setEffectParameter
+//---------------------------------------------------------
+
+double Aeolus::setEffectParameter(int effect, int parameter, double value)
       {
+      Fparm* p = 0;
+
+      switch(effect) {
+            case 0:     // audio
+                  p = &_audiopar[parameter];
+                  break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                  {
+                  Fparm* fp = _asectp[effect-1]->get_apar();
+                  p = &fp[parameter];
+                  }
+            default:
+                  break;
+            }
+      if (p == 0)
+            return 0.0;
+      if (value > p->_max)
+            value = p->_max;
+      else if (value < p->_min)
+            value = p->_min;
+printf("aeolus set %d %d %f\n", effect, parameter, value);
+      p->_val = value;
+      return value;
       }
+
+//---------------------------------------------------------
+//   rewrite_label
+//---------------------------------------------------------
 
 void Aeolus::rewrite_label (const char *p)
       {
@@ -210,5 +283,3 @@ void Aeolus::printGui()
                   }
             }
       }
-
-

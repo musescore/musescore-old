@@ -38,12 +38,14 @@ static const int DEFAULT_FRETS = 5;
 FretDiagram::FretDiagram(Score* score)
    : Element(score)
       {
-      _strings   = DEFAULT_STRINGS;
-      _frets     = DEFAULT_FRETS;
-      maxStrings = 0;
-      _dots      = 0;
-      _marker    = 0;
-      _fingering = 0;
+      _strings    = DEFAULT_STRINGS;
+      _frets      = DEFAULT_FRETS;
+      _maxFrets   = 24;
+      maxStrings  = 0;
+      _dots       = 0;
+      _marker     = 0;
+      _fingering  = 0;
+      _fretOffset = 0;
       font.setFamily("DejaVuSans");
       int size = lrint(4.0 * DPI * mag()/ PPI);
       font.setPixelSize(size);
@@ -52,12 +54,14 @@ FretDiagram::FretDiagram(Score* score)
 FretDiagram::FretDiagram(const FretDiagram& f)
    : Element(f)
       {
-      _strings   = f._strings;
-      _frets     = f._frets;
-      _dots      = 0;
-      _marker    = 0;
-      _fingering = 0;
-      font       = f.font;
+      _strings    = f._strings;
+      _frets      = f._frets;
+      _fretOffset = f._fretOffset;
+      _maxFrets   = f._maxFrets;
+      _dots       = 0;
+      _marker     = 0;
+      _fingering  = 0;
+      font        = f.font;
 
       if (f._dots) {
             _dots = new char[_strings];
@@ -137,6 +141,7 @@ void FretDiagram::init(Tablature* tab, Chord* chord)
             if (tab->convertPitch(note->ppitch(), &string, &fret))
                   setDot(string, fret);
             }
+      _maxFrets = tab->frets();
       }
 
 //---------------------------------------------------------
@@ -146,6 +151,7 @@ void FretDiagram::init(Tablature* tab, Chord* chord)
 void FretDiagram::draw(QPainter& p, ScoreView*) const
       {
       QPen pen(p.pen());
+      double _spatium = spatium();
       pen.setWidthF(lw2);
       pen.setCapStyle(Qt::FlatCap);
       p.setPen(pen);
@@ -158,7 +164,7 @@ void FretDiagram::draw(QPainter& p, ScoreView*) const
       double y2 = (_frets+1) * fretDist - fretDist*.5;
       for (int i = 0; i < _strings; ++i) {
             double x = stringDist * i;
-            p.drawLine(QLineF(x, 0.0, x, y2));
+            p.drawLine(QLineF(x, _fretOffset ? -_spatium*.2 : 0.0, x, y2));
             }
       for (int i = 1; i <= _frets; ++i) {
             double y = fretDist * i;
@@ -180,6 +186,11 @@ void FretDiagram::draw(QPainter& p, ScoreView*) const
                      Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip, QChar(_marker[i]));
                   }
             }
+      if (_fretOffset > 0) {
+            p.drawText(QRectF(-stringDist * .4, 0.0, 0.0, fretDist),
+               Qt::AlignVCenter|Qt::AlignRight|Qt::TextDontClip,
+               QString("%1").arg(_fretOffset+1));
+            }
       }
 
 //---------------------------------------------------------
@@ -190,7 +201,7 @@ void FretDiagram::layout()
       {
       double _spatium = spatium();
       lw1             = _spatium * 0.08;
-      lw2             = _spatium * 0.2;
+      lw2             = _fretOffset ? lw1 : _spatium * 0.2;
       stringDist      = _spatium * .7;
       fretDist        = _spatium * .8;
 
@@ -226,6 +237,8 @@ void FretDiagram::write(Xml& xml) const
             xml.tag("strings", _strings);
       if (_frets != DEFAULT_FRETS)
             xml.tag("frets", _frets);
+      if (_fretOffset)
+            xml.tag("offset", _fretOffset);
       for (int i = 0; i < _strings; ++i) {
             if ((_dots && _dots[i]) || (_marker && _marker[i]) || (_fingering && _fingering[i])) {
                   xml.stag(QString("string no=\"%1\"").arg(i));
@@ -250,9 +263,10 @@ void FretDiagram::read(QDomElement e)
       delete _dots;
       delete _marker;
       delete _fingering;
-      _dots      = 0;
-      _marker    = 0;
-      _fingering = 0;
+      _dots       = 0;
+      _marker     = 0;
+      _fingering  = 0;
+      _fretOffset = 0;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -261,6 +275,8 @@ void FretDiagram::read(QDomElement e)
                   _strings = val;
             else if (tag == "frets")
                   _frets = val;
+            else if (tag == "offset")
+                  _fretOffset = val;
             else if (tag == "string") {
                   int no = e.attribute("no").toInt();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -372,8 +388,13 @@ FretDiagramProperties::FretDiagramProperties(FretDiagram* _fd, QWidget* parent)
       frets->setValue(fd->frets());
       strings->setValue(fd->strings());
       diagram->setFretDiagram(fd);
+
+      diagramScrollBar->setRange(0, fd->maxFrets());
+      diagramScrollBar->setValue(fd->fretOffset());
+
       connect(strings, SIGNAL(valueChanged(int)), SLOT(stringsChanged(int)));
       connect(frets, SIGNAL(valueChanged(int)), SLOT(fretsChanged(int)));
+      connect(diagramScrollBar, SIGNAL(valueChanged(int)), SLOT(fretOffsetChanged(int)));
       }
 
 //---------------------------------------------------------
@@ -397,15 +418,26 @@ void FretDiagramProperties::stringsChanged(int val)
       }
 
 //---------------------------------------------------------
+//   fretOffsetChanged
+//---------------------------------------------------------
+
+void FretDiagramProperties::fretOffsetChanged(int val)
+      {
+      fd->setFretOffset(val);
+      diagram->update();
+      }
+
+//---------------------------------------------------------
 //   paintEvent
 //---------------------------------------------------------
 
 void FretCanvas::paintEvent(QPaintEvent* ev)
       {
-      double mag = 1.5;
+      double mag        = 1.5;
       double _spatium   = 20.0 * mag;
       double lw1        = _spatium * 0.08;
-      double lw2        = _spatium * 0.2;
+      int fretOffset    = diagram->fretOffset();
+      double lw2        = fretOffset ? lw1 : _spatium * 0.2;
       double stringDist = _spatium * .7;
       double fretDist   = _spatium * .8;
       int _strings      = diagram->strings();
@@ -440,7 +472,7 @@ void FretCanvas::paintEvent(QPaintEvent* ev)
       double y2 = (_frets+1) * fretDist - fretDist*.5;
       for (int i = 0; i < _strings; ++i) {
             double x = stringDist * i;
-            p.drawLine(QLineF(x, 0.0, x, y2));
+            p.drawLine(QLineF(x, fretOffset ? -_spatium*.2 : 0.0, x, y2));
             }
       for (int i = 1; i <= _frets; ++i) {
             double y = fretDist * i;
@@ -478,6 +510,11 @@ void FretCanvas::paintEvent(QPaintEvent* ev)
             double y = fretDist * (cfret-1) + fretDist * .5 - dotd * .5;
             p.setBrush(Qt::lightGray);
             p.drawEllipse(QRectF(x, y, dotd, dotd));
+            }
+      if (fretOffset > 0) {
+            p.drawText(QRectF(-stringDist * .4, 0.0, 0.0, fretDist),
+               Qt::AlignVCenter|Qt::AlignRight|Qt::TextDontClip,
+               QString("%1").arg(fretOffset+1));
             }
       QFrame::paintEvent(ev);
       }

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -106,12 +106,16 @@ class Aeolus : public Synth {
 
       virtual const QList<MidiPatch*>& getPatchInfo() const;
 
-      virtual double effectParameter(int /*effect*/, int /*parameter*/);
-      virtual void setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ );
+      virtual const Fparm& effectParameter(int /*effect*/, int /*parameter*/) const;
+      virtual double setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ );
 
       friend class Model;
       };
 
+
+enum {
+      AEOLUS_VOLUME, AEOLUS_REVSIZE, AEOLUS_REVTIME, AEOLUS_STPOSIT
+      };
 #endif
 
 
