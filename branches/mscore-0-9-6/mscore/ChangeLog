@@ -1,3 +1,6 @@
+29.may (ws)
+      - Do not update inspector if not visible. This prohibits the
+        performance decrease after using the inspector.
 27.may (la)
       - fix #5897: > and < are not read back from saved score
 26.may (ws)

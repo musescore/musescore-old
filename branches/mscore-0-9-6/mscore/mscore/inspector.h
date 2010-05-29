@@ -90,6 +90,7 @@ class Inspector : public QDialog, public Ui::InspectorBase {
       bool searchElement(QTreeWidgetItem* pi, Element* el);
       void addSymbol(ElementItem* parent, BSymbol* bs);
       void updateElement(Element*);
+      virtual void showEvent(QShowEvent*);
 
    protected:
       Score* cs;

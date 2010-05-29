@@ -649,7 +649,6 @@ class Score : public QObject {
       void spatiumChanged(double oldValue, double newValue);
 
       void pasteStaff(QDomElement, ChordRest* dst);
-      bool isVolta(int tick, int repeat) const;
       Volta* searchVolta(int tick) const;
       void toEList(EventMap* events);
       void toEList(EventMap* events, int staffIdx);
