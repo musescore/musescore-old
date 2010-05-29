@@ -265,6 +265,15 @@ static void addMeasureBaseToList(ElementItem* mi, MeasureBase* mb)
       }
 
 //---------------------------------------------------------
+//   showEvent
+//---------------------------------------------------------
+
+void Inspector::showEvent(QShowEvent*)
+      {
+      updateList(cs);
+      }
+
+//---------------------------------------------------------
 //   updateList
 //---------------------------------------------------------
 
@@ -275,10 +284,12 @@ void Inspector::updateList(Score* s)
             forwardStack.clear();
             back->setEnabled(false);
             forward->setEnabled(false);
+            cs = s;
             }
-      cs = s;
       curElement = 0;
       list->clear();
+      if (!isVisible())
+            return;
 
       QTreeWidgetItem* li = new QTreeWidgetItem(list, INVALID);
       li->setText(0, "Global");
@@ -489,7 +500,7 @@ void Inspector::itemClicked(QTreeWidgetItem* i, int)
 
 void Inspector::updateElement(Element* el)
       {
-      if (el == 0)
+      if (el == 0 || !isVisible())
             return;
       for (int i = 0;; ++i) {
             QTreeWidgetItem* item = list->topLevelItem(i);
