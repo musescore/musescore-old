@@ -22,6 +22,7 @@
 add_executable(bww2mxml
    lexer.cpp
    main.cpp
+   mxmlwriter.cpp
    parser.cpp
    symbols.cpp
    writer.cpp
