@@ -24,12 +24,14 @@ TARGET = bww2mxml
 CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
-SOURCES += main.cpp \
-    lexer.cpp \
-    symbols.cpp \
+SOURCES += lexer.cpp \
+    main.cpp \
+    mxmlwriter.cpp \
     parser.cpp \
+    symbols.cpp \
     writer.cpp
 HEADERS += lexer.h \
-    symbols.h \
+    mxmlwriter.h \
     parser.h \
+    symbols.h \
     writer.h

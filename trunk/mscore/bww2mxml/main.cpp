@@ -27,7 +27,7 @@
 
 #include "lexer.h"
 #include "parser.h"
-#include "writer.h"
+#include "mxmlwriter.h"
 
 void usage()
 {
@@ -75,7 +75,8 @@ int main(int argc, char *argv[])
   }
 
   Bww::Lexer lex(&inFile);
-  Bww::Writer wrt(&outFile);
+  Bww::MxmlWriter wrt;
+  wrt.setOutDevice(&outFile);
   Bww::Parser p(lex, wrt);
   p.parse();
 
