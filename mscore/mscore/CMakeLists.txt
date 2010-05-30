@@ -67,6 +67,7 @@ include_directories(
       ${PROJECT_SOURCE_DIR}/scriptdebug
       ${PROJECT_SOURCE_DIR}/osdabzip
       ${PROJECT_SOURCE_DIR}/fluid
+      ${PROJECT_SOURCE_DIR}/bww2mxml
       )
 
 QT4_WRAP_UI (ui_headers
@@ -235,6 +236,7 @@ if (MINGW)
       fluid
       al
       awl
+      bww
       osdabzip
       rtf2html
       qtsingleapp
@@ -298,6 +300,7 @@ else (MINGW)
       ${PORTAUDIO_LIB}
       al
       awl
+      bww
       osdabzip
       rtf2html
       qtsingleapp
