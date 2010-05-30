@@ -19,6 +19,13 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+add_library(bww STATIC
+   lexer.cpp
+   parser.cpp
+   symbols.cpp
+   writer.cpp
+   )
+
 add_executable(bww2mxml
    lexer.cpp
    main.cpp
