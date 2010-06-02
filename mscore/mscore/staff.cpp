@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,8 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include <assert.h>
-
 #include "globals.h"
 #include "staff.h"
 #include "part.h"
@@ -32,6 +30,7 @@
 #include "style.h"
 #include "measure.h"
 #include "tablature.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   idx
@@ -168,11 +167,9 @@ Staff::Staff(Score* s, Part* p, int rs)
       _clefList     = new ClefList;
       _keymap       = new KeyList;
       (*_keymap)[0] = 0;                  // default to C major
-      _lines        = 5;
+      _staffType    = _score->staffTypes()[PITCHED_STAFF_TYPE];
       _show         = true;
-      _useTablature = false;
       _small        = false;
-      _slashStyle   = false;
       _invisible    = false;
       _barLineSpan  = 1;
       }
@@ -214,21 +211,15 @@ KeySigEvent Staff::key(int tick) const
 void Staff::write(Xml& xml) const
       {
       xml.stag("Staff");
-      if (lines() != 5)
-            xml.tag("lines", lines());
-      if (useTablature())
-            xml.tag("useTablature", useTablature());
+      xml.tag("type", score()->staffTypes().indexOf(_staffType));
       if (small() && !xml.excerptmode)    // switch small staves to normal ones when extracting part
             xml.tag("small", small());
       if (invisible())
             xml.tag("invisible", invisible());
-      if (slashStyle())
-            xml.tag("slashStyle", slashStyle());
       _clefList->write(xml, "cleflist");
       _keymap->write(xml, "keylist");
-      foreach(const BracketItem& i, _brackets) {
+      foreach(const BracketItem& i, _brackets)
             xml.tagE("bracket type=\"%d\" span=\"%d\"", i._bracket, i._bracketSpan);
-            }
       if (_barLineSpan != 1)
             xml.tag("barLineSpan", _barLineSpan);
       xml.etag();
@@ -240,21 +231,23 @@ void Staff::write(Xml& xml) const
 
 void Staff::read(QDomElement e)
       {
-      setLines(5);
       setSmall(false);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int v = e.text().toInt();
-            if (tag == "lines")
-                  setLines(v);
-            else if (tag == "useTablature")
-                  _useTablature = v;
+            if (tag == "type") {
+                  StaffType* st = score()->staffTypes().value(v);
+                  if (st)
+                        _staffType = st;
+                  }
+            else if (tag == "lines")
+                  ;                       // obsolete: setLines(v);
             else if (tag == "small")
                   setSmall(v);
             else if (tag == "invisible")
                   setInvisible(v);
             else if (tag == "slashStyle")
-                  setSlashStyle(v);
+                  ;                       // obsolete: setSlashStyle(v);
             else if (tag == "cleflist")
                   _clefList->read(e, _score);
             else if (tag == "keylist")
@@ -451,10 +444,7 @@ void Staff::changeClef(int tick, int st)
 
 double Staff::height() const
       {
-      double d = spatium();
-      if (_useTablature)
-            d *= 1.5;
-      return (_lines-1) * d;
+      return (lines()-1) * spatium() * _staffType->lineDistance().val();
       }
 
 //---------------------------------------------------------
@@ -517,8 +507,53 @@ int Staff::channel(int tick,  int voice) const
 
 int Staff::lines() const
       {
-      if (_useTablature)
+      if (useTablature())
             return part()->tablature()->strings();
-      return _lines;
+      return _staffType->lines();
+      }
+
+//---------------------------------------------------------
+//   slashStyle
+//---------------------------------------------------------
+
+bool Staff::slashStyle() const
+      {
+      return _staffType->slashStyle();
+      }
+
+//---------------------------------------------------------
+//   setSlashStyle
+//---------------------------------------------------------
+
+void Staff::setSlashStyle(bool val)
+      {
+      _staffType->setSlashStyle(val);
+      }
+
+//---------------------------------------------------------
+//   setLines
+//---------------------------------------------------------
+
+void Staff::setLines(int val)
+      {
+      _staffType->setLines(val);
+      }
+
+//---------------------------------------------------------
+//   useTablature
+//---------------------------------------------------------
+
+bool Staff::useTablature() const
+      {
+      return _staffType->group() == TAB_STAFF;
+      }
+
+//---------------------------------------------------------
+//   setUseTablature
+//---------------------------------------------------------
+
+void Staff::setUseTablature(bool val)
+      {
+      _staffType = score()->staffTypes()[val ? TAB_STAFF_TYPE : PITCHED_STAFF_TYPE];
       }
 

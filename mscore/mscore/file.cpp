@@ -72,6 +72,7 @@
 #include "repeatlist.h"
 #include "scoretab.h"
 #include "beam.h"
+#include "stafftype.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -1199,7 +1200,7 @@ bool Score::read(QDomElement e)
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "museScore")
                   continue;
-            QString version = e.attribute(QString("version"));
+            QString version = e.attribute("version");
             QStringList sl = version.split('.');
             _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -1213,6 +1214,18 @@ bool Score::read(QDomElement e)
                         KeySig* ks = new KeySig(this);
                         ks->read(ee);
                         customKeysigs.append(ks);
+                        }
+                  if (tag == "StaffType") {
+                        int idx = ee.attribute("idx").toInt();
+                        StaffType* st = new StaffType;
+                        st->read(ee);
+                        if (_staffTypes.value(idx)) {           // if there is already a stafftype
+                              if (_staffTypes[idx]->modified())  // if it belongs to Score()
+                                    delete _staffTypes[idx];
+                              _staffTypes[idx] = st;
+                              }
+                        else
+                              _staffTypes.append(st);
                         }
                   else if (tag == "siglist")
                         _sigmap->read(ee, _fileDivision);
@@ -1279,6 +1292,9 @@ bool Score::read(QDomElement e)
 #endif
                   else if (tag == "showOmr")
                         _showOmr = i;
+                  else if (tag == "Synthesizer") {
+
+                        }
                   else if (tag == "Spatium")
                         setSpatium (val.toDouble() * DPMM);
                   else if (tag == "Division")

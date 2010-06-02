@@ -237,9 +237,9 @@ void AbstractSlider::setMaxLogValue(double val)
 
 void AbstractSlider::init(const Fparm& f)
       {
-      _minValue = f._min;
-      _maxValue = f._max;
-      _value    = f._val;
+      _minValue = f.min();
+      _maxValue = f.max();
+      _value    = f.val();
       _lineStep   = (_maxValue - _minValue) * 0.1;
       _pageStep   = _lineStep * 2.0;
       }

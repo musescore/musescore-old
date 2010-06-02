@@ -101,7 +101,7 @@ class Fparm {
       };
 #endif
 
-#include "synti.h"
+#include "msynth/synti.h"
 
 #endif
 

@@ -35,6 +35,7 @@ class Xml;
 class Part;
 class Score;
 class KeyList;
+class StaffType;
 
 //---------------------------------------------------------
 //   BracketItem
@@ -73,13 +74,13 @@ class Staff {
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
-      uchar _lines;
       bool _show;             ///< derived from part->show()
       bool _small;
-      bool _slashStyle;
       bool _invisible;
+
+      StaffType* _staffType;
+
       QMap<int,int> _channelList[VOICES];
-      bool _useTablature;
 
    public:
       Staff(Score*, Part*, int);
@@ -113,15 +114,15 @@ class Staff {
       void setKey(int tick, int st);
 
       bool show() const              { return _show;        }
-      bool slashStyle() const        { return _slashStyle;  }
+      bool slashStyle() const;
       void setShow(bool val)         { _show = val;         }
       bool small() const             { return _small;       }
       void setSmall(bool val)        { _small = val;        }
       bool invisible() const         { return _invisible;   }
       void setInvisible(bool val)    { _invisible = val;    }
-      void setSlashStyle(bool val)   { _slashStyle = val;   }
+      void setSlashStyle(bool val);
       int lines() const;
-      void setLines(int val)         { _lines = val;        }
+      void setLines(int val);
       int barLineSpan() const        { return _barLineSpan; }
       void setBarLineSpan(int val)   { _barLineSpan = val;  }
       Score* score() const           { return _score;       }
@@ -131,8 +132,9 @@ class Staff {
       int channel(int tick, int voice) const;
       QMap<int,int>* channelList(int voice) { return  &_channelList[voice]; }
 
-      bool useTablature() const         { return _useTablature; }
-      void setUseTablature(bool val)    { _useTablature = val;  }
+      bool useTablature() const;
+      void setUseTablature(bool val);
+      StaffType* staffType() const   { return _staffType; }
       };
 #endif
 

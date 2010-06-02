@@ -65,6 +65,7 @@
 #include "repeatlist.h"
 #include "keysig.h"
 #include "beam.h"
+#include "stafftype.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -258,7 +259,8 @@ Score::Score(const Style& s)
       startLayout     = 0;
       _undo           = new UndoStack();
       _repeatList     = new RepeatList(this);
-      _style  = s;
+      _style          = s;
+      _staffTypes     = ::staffTypes;     // init with buildin types
       _swingRatio     = 0.0;
       // deep copy of defaultTextStyles:
       for (int i = 0; i < TEXT_STYLES; ++i)
@@ -441,6 +443,9 @@ void Score::write(Xml& xml, bool /*autosave*/)
       if (_showOmr)
             xml.tag("showOmr", _showOmr);
 #endif
+      foreach(SynthesizerSettings ss, _syntiSettings)
+            ss.write(xml);
+
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", AL::division);
       xml.curTrack = -1;
@@ -454,6 +459,12 @@ void Score::write(Xml& xml, bool /*autosave*/)
       for (int i = 0; i < TEXT_STYLES; ++i) {
             if (*_textStyles[i] != defaultTextStyleArray[i])
                   _textStyles[i]->write(xml);
+            }
+      int idx = 0;
+      foreach(StaffType* st, _staffTypes) {
+            if (st->modified())
+                  st->write(xml, idx);
+            ++idx;
             }
       xml.tag("showInvisible", _showInvisible);
       xml.tag("showFrames", _showFrames);
@@ -2162,5 +2173,41 @@ Text* Score::getText(int subtype)
                   }
             }
       return 0;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void SynthesizerSettings::write(Xml& xml) const
+      {
+      if (params.isEmpty())
+            return;
+      xml.stag(QString("SynthSettings name=\"%1\"").arg(synti));
+      foreach(Parameter* p, params)
+            p->write(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void SynthesizerSettings::read(QDomElement e)
+      {
+#if 0
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
+            int i = 0;
+            for (i = 0; i < 4; ++i) {
+                  QList<Parameter*> params;
+                  if (_audiopar[i].name() == e.tagName()) {
+                        _audiopar[i].setVal(e.text().toFloat());
+                        break;
+                        }
+                  }
+            if (i == 4)
+                  domError(e);      // unknown tag
+            }
+#endif
       }
 

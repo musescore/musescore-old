@@ -150,6 +150,12 @@ int MeasureProperties::repeatCount() const
       return count->value();
       }
 
+// HACK: to reconstruct siglist
+struct MS {
+      Measure* measure;
+      AL::SigEvent se;
+      };
+
 //---------------------------------------------------------
 //   apply
 //---------------------------------------------------------
@@ -180,7 +186,20 @@ void MeasureProperties::apply()
 
       AL::SigEvent oev = sl->timesig(m->tick());
       AL::SigEvent newEvent = sig();
+
       if (!(oev == newEvent)) {
+            // HACK: buildup evList to reconstruct siglist
+            QList<MS> evList;
+            for (Measure* measure = score->firstMeasure(); measure; measure = measure->nextMeasure()) {
+                  MS ms;
+                  ms.measure = measure;
+                  if (m == measure)
+                        ms.se = newEvent;
+                  else
+                        ms.se = sl->timesig(measure->tick());
+                  evList.append(ms);
+                  }
+
             int oldLen = oev.ticks;
             int newLen = newEvent.ticks;
 
@@ -191,7 +210,6 @@ void MeasureProperties::apply()
 
             score->undoFixTicks();
             score->undoChangeSig(m->tick(), oldEvent, newEvent);
-
             //
             // change back to nominal values if there is
             // not already another TimeSig
@@ -202,6 +220,18 @@ void MeasureProperties::apply()
                   }
             // score->select(0, SELECT_SINGLE, 0);
             m->adjustToLen(oldLen, newLen);
+
+            // HACK: reconstruct siglist
+            sl->clear();
+            AL::SigEvent ev;
+            int ctick = 0;
+            foreach(MS ms, evList) {
+                  ms.measure->moveTicks(ctick - ms.measure->tick());
+                  if (!(ms.se == ev))
+                        sl->add(ctick, ms.se);
+                  ctick += sl->ticksMeasure(ctick);
+                  ev = ms.se;
+                  }
             score->undoFixTicks();
             score->select(m, SELECT_RANGE, 0);
             }

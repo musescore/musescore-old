@@ -42,18 +42,11 @@ void Aeolus::audio_init(int sampleRate)
       {
 	_nplay   = 2;
       _fsamp   = sampleRate;
-      _audiopar [VOLUME]._val  = 0.32f;
-      _audiopar [VOLUME]._min  = 0.00f;
-      _audiopar [VOLUME]._max  = 1.00f;
-      _audiopar [REVSIZE]._val = _revsize = 0.075f;
-      _audiopar [REVSIZE]._min =  0.025f;
-      _audiopar [REVSIZE]._max =  0.150f;
-      _audiopar [REVTIME]._val = _revtime = 4.0f;
-      _audiopar [REVTIME]._min =  2.0f;
-      _audiopar [REVTIME]._max =  7.0f;
-      _audiopar [STPOSIT]._val =  0.5f;
-      _audiopar [STPOSIT]._min = -1.0f;
-      _audiopar [STPOSIT]._max =  1.0f;
+      _audiopar[VOLUME].set("volume", 0.32f, 0.00f, 1.00f);
+      _audiopar[REVSIZE].set("revsize", 0.075f, 0.025f, 0.150f);
+      _revtime = 4.0f;
+      _audiopar[REVTIME].set("revtime", _revtime, 2.0f, 7.0f);
+      _audiopar[STPOSIT].set("stposit", 0.5f, -1.0f, 1.0f);
 
       _reverb.init (_fsamp);
       _reverb.set_t60mf (_revtime);
@@ -165,14 +158,14 @@ void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride, flo
       for (int d = 0; d < _ndivis; d++)
             _divisp[d]->update(_keymap);
 
-      if (fabsf(_revsize - _audiopar [REVSIZE]._val) > 0.001f) {
-            _revsize = _audiopar[REVSIZE]._val;
+      if (fabsf(_revsize - _audiopar [REVSIZE].val()) > 0.001f) {
+            _revsize = _audiopar[REVSIZE].val();
             _reverb.set_delay(_revsize);
             for (int j = 0; j < _nasect; j++)
                   _asectp[j]->set_size(_revsize);
             }
-      if (fabsf(_revtime - _audiopar [REVTIME]._val) > 0.1f) {
-            _revtime = _audiopar [REVTIME]._val;
+      if (fabsf(_revtime - _audiopar [REVTIME].val()) > 0.1f) {
+            _revtime = _audiopar [REVTIME].val();
             _reverb.set_t60mf(_revtime);
             _reverb.set_t60lo(_revtime * 1.50f, 250.0f);
             _reverb.set_t60hi(_revtime * 0.50f, 3e3f);
@@ -197,7 +190,7 @@ void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride, flo
 
                   _reverb.process(PERIOD, gain, R, W, X, Y);
 
-                  float stposit = _audiopar[STPOSIT]._val;
+                  float stposit = _audiopar[STPOSIT].val();
                   for (int j = 0; j < PERIOD; j++) {
                         loutb[j] = W[j] + stposit * X[j] + Y[j];
                         routb[j] = W[j] + stposit * X[j] - Y[j];

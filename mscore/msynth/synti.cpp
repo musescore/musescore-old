@@ -27,8 +27,9 @@
 #ifdef AEOLUS
 #include "aeolus/aeolus/aeolus.h"
 #endif
+#include "xml.h"
 
-const Fparm Synth::defaultParameter = Fparm(0, 0, 0);
+const Fparm Synth::defaultParameter = Fparm("default", 0, 0, 0);
 
 //---------------------------------------------------------
 //   MasterSynth

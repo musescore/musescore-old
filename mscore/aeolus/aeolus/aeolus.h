@@ -25,7 +25,7 @@ struct MidiPatch;
 class Event;
 
 #include "stdint.h"
-#include "synti.h"
+#include "msynth/synti.h"
 
 #include "asection.h"
 #include "division.h"
@@ -61,7 +61,7 @@ class Aeolus : public Synth {
       Division*       _divisp [NDIVIS];
       Reverb          _reverb;
       unsigned char   _keymap [NNOTES];
-      Fparm           _audiopar [4];
+      Fparm           _audiopar[4];
       float           _revsize;
       float           _revtime;
 

@@ -35,7 +35,7 @@
 #include "key.h"
 #include "select.h"
 #include "instrument.h"
-#include "synti.h"
+#include "msynth/synti.h"
 
 class ElementList;
 class Element;
