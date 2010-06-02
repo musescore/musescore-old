@@ -696,3 +696,16 @@ int pitch2tpc(int pitch, int key)
       return ptab[key+7][step];
       }
 
+//---------------------------------------------------------
+//   checkTpc
+//    return INVALID_TPC or n
+//---------------------------------------------------------
+
+int checkTpc(int n)
+      {
+      if (n < -1 || n > 33)
+            return INVALID_TPC;
+      else
+            return n;
+      }
+
