@@ -1,4 +1,5 @@
 2.jun (ws)
+      - fix #5939: Volta hook length doesn't get saved in file
       - fix #5903: Increasing actual measure lenght does not
         correctly "shift" following measures
 29.may (ws)
