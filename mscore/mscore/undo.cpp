@@ -1968,7 +1968,6 @@ void ChangeStaff::flip()
             }
       staff->score()->rebuildMidiMapping();
       staff->score()->setPlaylistDirty(true);
-printf("ChangeStaff\n");
       }
 
 //---------------------------------------------------------

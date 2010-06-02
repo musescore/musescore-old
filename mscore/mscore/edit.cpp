@@ -350,7 +350,6 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             tickLens.append(m->tickLen());
 
       Fraction ofraction(_sigmap->timesig(tick).fraction());
-//      int z, n;
       Fraction nfraction(TimeSig::getSig(timeSigSubtype));
 
       if (ofraction == nfraction) {

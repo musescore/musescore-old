@@ -467,5 +467,6 @@ Fraction TimeSigMap::measureRest(unsigned tick) const
       int stick = bar2tick(bar, 0, 0);
       return e.fraction() - Fraction::fromTicks(tick - stick);
       }
+
 }     // namespace AL
 

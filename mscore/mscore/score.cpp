@@ -618,7 +618,6 @@ void Score::fixTicks()
             int mtick = m->tick();
             int diff  = tick - mtick;
             int measureTicks = _sigmap->ticksMeasure(tick);
-// printf("move %d  -  soll %d  ist %d  len %d\n", bar, tick, mtick, measureTicks);
             tick += measureTicks;
             m->moveTicks(diff);
             }
