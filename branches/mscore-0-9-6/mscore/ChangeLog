@@ -1,3 +1,6 @@
+2.jun (ws)
+      - fix #5903: Increasing actual measure lenght does not
+        correctly "shift" following measures
 29.may (ws)
       - Do not update inspector if not visible. This prohibits the
         performance decrease after using the inspector.
