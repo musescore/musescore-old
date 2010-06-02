@@ -21,7 +21,7 @@
 #include "synthcontrol.h"
 #include "mscore.h"
 #include "seq.h"
-#include "synti.h"
+#include "msynth/synti.h"
 #include "preferences.h"
 #include "mixer.h"
 #include "aeolus/aeolus/aeolus.h"
@@ -46,14 +46,14 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
       masterTuning->setValue(synti->masterTuning());
       setGain(synti->gain());
 
-      reverb->setValue(synti->effectParameter(0, 0, 3)._val);
-      roomSizeBox->setValue(synti->effectParameter(0, 0, 0)._val);
-      dampBox->setValue(synti->effectParameter(0, 0, 1)._val);
-      widthBox->setValue(synti->effectParameter(0, 0, 2)._val);
+      reverb->setValue(synti->effectParameter(0, 0, 3).val());
+      roomSizeBox->setValue(synti->effectParameter(0, 0, 0).val());
+      dampBox->setValue(synti->effectParameter(0, 0, 1).val());
+      widthBox->setValue(synti->effectParameter(0, 0, 2).val());
 
-      chorus->setValue(synti->effectParameter(0, 1, 4)._val);
-      chorusSpeed->setValue(synti->effectParameter(0, 1, 1)._val);
-      chorusDepth->setValue(synti->effectParameter(0, 1, 2)._val);
+      chorus->setValue(synti->effectParameter(0, 1, 4).val());
+      chorusSpeed->setValue(synti->effectParameter(0, 1, 1).val());
+      chorusDepth->setValue(synti->effectParameter(0, 1, 2).val());
 
       reverbDelay->init(synti->effectParameter(1, 0, AEOLUS_REVSIZE));
       reverbDelay->setId(AEOLUS_REVSIZE);

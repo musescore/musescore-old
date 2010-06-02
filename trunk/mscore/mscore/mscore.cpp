@@ -97,6 +97,7 @@ static QString localeName;
 bool useFactorySettings = false;
 
 QString revision;
+extern void initStaffTypes();
 
 //---------------------------------------------------------
 //   NoteButton
@@ -1960,6 +1961,7 @@ int main(int argc, char* av[])
 
       initSymbols();
       genIcons();
+      initStaffTypes();
 
       if (!converterMode) {
             qApp->setWindowIcon(*icons[window_ICON]);

@@ -98,6 +98,8 @@ class Beam;
 class Lyrics;
 class Text;
 class Omr;
+class Parameter;
+class StaffType;
 
 extern bool showRubberBand;
 
@@ -179,6 +181,18 @@ class ImagePath {
       };
 
 //---------------------------------------------------------
+//   SynthesizerSettings
+//---------------------------------------------------------
+
+class SynthesizerSettings {
+   public:
+      QString synti;
+      QList<Parameter*> params;
+      void write(Xml&) const;
+      void read(QDomElement);
+      };
+
+//---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
 
@@ -195,7 +209,6 @@ class Score : public QObject {
       //
       QList<Page*> _pages;          // pages are build from systems
       QList<System*> _systems;      // measures are akkumulated to systems
-
 
       // values used during doLayout:
       int curPage;
@@ -222,6 +235,7 @@ class Score : public QObject {
 
       Style _style;
       QVector<TextStyle*> _textStyles;
+      QList<StaffType*> _staffTypes;
 
       QFileInfo info;
       bool _created;          ///< file is never saved, has generated name
@@ -280,6 +294,9 @@ class Score : public QObject {
       Omr* _omr;
       bool _showOmr;
 
+      QList<SynthesizerSettings> _syntiSettings;
+
+
       //------------------
 
       ChordRest* nextMeasure(ChordRest* element, bool selectBehavior = false);
@@ -304,8 +321,6 @@ class Score : public QObject {
 
       void moveInputPos(Segment* s);
       void moveToNextInputPos();
-
-//      void collectMeasureEvents(EventMap*, Measure*, int staff1, int staff2, int tickOffset);
 
       void padToggle(int n);
 
@@ -799,7 +814,9 @@ class Score : public QObject {
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
-      void emitSelectionChanged(int val) { emit selectionChanged(val); }
+      void emitSelectionChanged(int val)                      { emit selectionChanged(val); }
+      const QList<SynthesizerSettings>& syntiSettings() const { return _syntiSettings;      }
+      const QList<StaffType*>& staffTypes() const             { return _staffTypes; }
       };
 
 extern Score* gscore;

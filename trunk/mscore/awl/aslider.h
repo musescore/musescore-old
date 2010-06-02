@@ -21,7 +21,7 @@
 #ifndef __AWLASLIDER_H__
 #define __AWLASLIDER_H__
 
-#include "fparm.h"
+#include "msynth/fparm.h"
 
 namespace Awl {
 

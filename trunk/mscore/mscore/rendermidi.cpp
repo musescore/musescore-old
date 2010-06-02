@@ -150,7 +150,7 @@ static void collectNote(EventMap* events, int channel, const Note* note, int tic
 
       int tick    = note->chord()->tick() + tickOffset;
       int onTime  = tick + note->onTimeOffset() + note->onTimeUserOffset();
-      int offTime = tick + note->playTicks() + note->offTimeOffset() + note->offTimeUserOffset();
+      int offTime = tick + note->playTicks() + note->offTimeOffset() + note->offTimeUserOffset() - 1;
 
       int pitch  = note->ppitch();
       int velo = note->velocity();

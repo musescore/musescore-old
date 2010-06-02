@@ -51,36 +51,25 @@ float Asection::_refl [16] =
 
 
 Asection::Asection (float fsam) : _fsam (fsam)
-{
-    _base = new float [NCHANN * N];
-    memset (_base, 0, NCHANN * N * sizeof (float));
+      {
+      _base = new float [NCHANN * N];
+      memset (_base, 0, NCHANN * N * sizeof (float));
 
-    _offs0 = 0;
-    _sw = _sx = _sy = 0.0f;
-    _dif0.init ((int)(fsam * 0.017f), 0.5f);
-    _dif1.init ((int)(fsam * 0.029f), 0.5f);
-    _dif2.init ((int)(fsam * 0.023f), 0.5f);
-    _dif3.init ((int)(fsam * 0.013f), 0.5f);
+      _offs0 = 0;
+      _sw = _sx = _sy = 0.0f;
+      _dif0.init ((int)(fsam * 0.017f), 0.5f);
+      _dif1.init ((int)(fsam * 0.029f), 0.5f);
+      _dif2.init ((int)(fsam * 0.023f), 0.5f);
+      _dif3.init ((int)(fsam * 0.013f), 0.5f);
 
-    _apar [AZIMUTH]._val =  0.0f;
-    _apar [AZIMUTH]._min = -0.5f;
-    _apar [AZIMUTH]._max =  0.5f;
-    _apar [STWIDTH]._val = 0.8f;
-    _apar [STWIDTH]._min = 0.0f;
-    _apar [STWIDTH]._max = 1.0f;
-    _apar [DIRECT]._val = 0.56f;
-    _apar [DIRECT]._min = 0.00f;
-    _apar [DIRECT]._max = 1.00f;
-    _apar [REFLECT]._val = 0.25f;
-    _apar [REFLECT]._min = 0.00f;
-    _apar [REFLECT]._max = 1.00f;
-    _apar [REVERB]._val = 0.32f;
-    _apar [REVERB]._min = 0.00f;
-    _apar [REVERB]._max = 1.00f;
-}
+      _apar [AZIMUTH].set("azimuth", 0.0f, -0.5f,  0.5f);
+      _apar [STWIDTH].set("stwidth", 0.8f,  0.0f,  1.0f);
+      _apar [DIRECT].set("direct",   0.56f, 0.00f, 1.00f);
+      _apar [REFLECT].set("reflect", 0.25f, 0.00f, 1.00f);
+      _apar [REVERB].set("reverb",   0.32f, 0.00f, 1.00f);
+      }
 
-
-Asection::~Asection (void)
+Asection::~Asection()
 {
     delete[] _base;
     _dif0.fini ();
@@ -115,19 +104,19 @@ void Asection::process (float vol, float *W, float *X, float *Y, float *R)
       float x[PERIOD];
       float y[PERIOD];
 
-      float gw = vol * _apar [DIRECT]._val;
-      float g = 0.45f * _apar [STWIDTH]._val;
+      float gw = vol * _apar [DIRECT].val();
+      float g = 0.45f * _apar [STWIDTH].val();
       float s = 0.5f + g * (1 - g);
       float d = g - 0.5f;
       float gx1 = gw * (s - d);
       float gy1 = gw * (s + d);
-      g = 0.25f * _apar [STWIDTH]._val;
+      g = 0.25f * _apar [STWIDTH].val();
       s = 0.5f + g * (1 - g);
       d = g - 0.5f;
       float gx2 = gw * (s - d);
       float gy2 = gw * (s + d);
       float* p = _base + _offs0;
-      float gr = 0.5f * _apar [REVERB]._val;
+      float gr = 0.5f * _apar [REVERB].val();
 
       for (int i = 0; i < PERIOD; i++) {
             float t0 = p [0 * N];
@@ -142,7 +131,7 @@ void Asection::process (float vol, float *W, float *X, float *Y, float *R)
             y [i] = gy1 * (t3 - t0) + gy2 * (t2 - t1);
             }
 
-      gr = vol * _apar [REFLECT]._val;
+      gr = vol * _apar [REFLECT].val();
       p = _base;
 
       for (int i = 0; i < PERIOD; i++) {
@@ -160,7 +149,7 @@ void Asection::process (float vol, float *W, float *X, float *Y, float *R)
             y [i] += gr * _sy;
             }
 
-      g = 6.283184f * _apar [AZIMUTH]._val;
+      g = 6.283184f * _apar [AZIMUTH].val();
       gx1 = cosf (g);
       gy1 = sinf (g);
       for (int i = 0; i < PERIOD; i++) {

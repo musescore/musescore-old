@@ -22,7 +22,7 @@
 #ifndef __FLUID_S_H__
 #define __FLUID_S_H__
 
-#include "synti.h"
+#include "msynth/synti.h"
 #include "rev.h"
 
 namespace FluidS {

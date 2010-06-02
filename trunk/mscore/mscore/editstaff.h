@@ -46,7 +46,9 @@ class EditStaff : public QDialog, private Ui::EditStaffBase {
    private slots:
       void bboxClicked(QAbstractButton* button);
       void editDrumsetClicked();
+      void editTablatureClicked();
       void showInstrumentDialog();
+      void showEditStaffType();
 
    public:
       EditStaff(Staff*, QWidget* parent = 0);

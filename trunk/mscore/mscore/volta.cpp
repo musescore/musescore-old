@@ -60,7 +60,6 @@ void Volta::setSubtype(int val)
                   break;
             case Volta::VOLTA_CLOSED:
                   setEndHook(true);
-                  setEndHookHeight(Spatium(1.9));
                   break;
             }
       }

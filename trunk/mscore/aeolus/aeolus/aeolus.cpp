@@ -23,6 +23,7 @@ extern QString dataPath;
 extern QString mscoreGlobalShare;
 
 #include "event.h"
+#include "xml.h"
 
 //---------------------------------------------------------
 //   init
@@ -238,12 +239,12 @@ double Aeolus::setEffectParameter(int effect, int parameter, double value)
             }
       if (p == 0)
             return 0.0;
-      if (value > p->_max)
-            value = p->_max;
-      else if (value < p->_min)
-            value = p->_min;
+      if (value > p->max())
+            value = p->max();
+      else if (value < p->min())
+            value = p->min();
 printf("aeolus set %d %d %f\n", effect, parameter, value);
-      p->_val = value;
+      p->setVal(value);
       return value;
       }
 

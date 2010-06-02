@@ -18,24 +18,35 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __FPARM_H__
-#define __FPARM_H__
-
-struct MidiPatch;
-class Event;
+#include "xml.h"
+#include "fparm.h"
 
 //---------------------------------------------------------
-//   Fparm
+//   write
 //---------------------------------------------------------
 
-class Fparm {
-   public:
-      Fparm() {}
-      Fparm(float a, float b, float c) : _val(a), _min(b), _max(c) {}
-      float  _val;
-      float  _min;
-      float  _max;
-      };
+void Fparm::write(Xml& xml) const
+      {
+      xml.tag(_name, _val);
+      }
 
-#endif
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Fparm::read(QDomElement)
+      {
+      }
+
+//---------------------------------------------------------
+//   set
+//---------------------------------------------------------
+
+void Fparm::set(const QString& name, float val, float min, float max)
+      {
+      _name = name;
+      _val  = val;
+      _min  = min;
+      _max  = max;
+      }
 

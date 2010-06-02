@@ -29,6 +29,7 @@
 #include "utils.h"
 #include "instrtemplate.h"
 #include "seq.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   EditStaff
@@ -43,19 +44,21 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       Part* part = staff->part();
       instrument = *part;
 
-      lines->setValue(staff->lines());
+      Score* score = part->score();
+      int idx = 0;
+      int curIdx = 0;
+      foreach(StaffType* st, score->staffTypes()) {
+            staffType->addItem(st->name(), idx);
+            if (st == s->staffType())
+                  curIdx = idx;
+            ++idx;
+            }
+      staffType->setCurrentIndex(curIdx);
+
       small->setChecked(staff->small());
-      useTablature->setChecked(staff->useTablature());
-      useTablature->setEnabled(part->tablature());
-
-      useDrumset->setChecked(instrument.useDrumset());
-      editDrumset->setEnabled(instrument.useDrumset());
-
       setInterval(instrument.transpose());
-
       shortName->setHtml(part->shortNameHtml());
       longName->setHtml(part->longNameHtml());
-      slashStyle->setChecked(staff->slashStyle());
       invisible->setChecked(staff->invisible());
 
       aPitchMin->setValue(instrument.minPitchA());
@@ -64,8 +67,8 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       pPitchMax->setValue(instrument.maxPitchP());
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
-      connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
       connect(changeInstrument, SIGNAL(clicked()), SLOT(showInstrumentDialog()));
+      connect(editStaffType, SIGNAL(clicked()), SLOT(showEditStaffType()));
       }
 
 //---------------------------------------------------------
@@ -136,7 +139,18 @@ void EditStaff::apply()
       Score* score  = staff->score();
       Part* part    = staff->part();
 
-      instrument.setUseDrumset(useDrumset->isChecked());
+#if 0
+      if (typeTablature->isChecked()) {
+            instrument.setUseDrumset(false);
+            }
+      else if (typeDrum->isChecked()) {
+            instrument.setUseDrumset(true);
+            }
+      else {
+            instrument.setUseDrumset(false);
+            }
+#endif
+
       int intervalIdx = iList->currentIndex();
       bool upFlag     = up->isChecked();
 
@@ -166,20 +180,22 @@ void EditStaff::apply()
             score->setPlaylistDirty(true);
             }
 
-      int l        = lines->value();
+//      int l        = lines->value();
       bool s       = small->isChecked();
-      bool noStems = slashStyle->isChecked();
+//      bool noStems = slashStyle->isChecked();
       bool inv     = invisible->isChecked();
-      bool tab     = useTablature->isChecked();
+//      bool tab     = typeTablature->isChecked();
 
-      if (l != staff->lines()
-         || s != staff->small()
-         || noStems != staff->slashStyle()
+//      if (l != staff->lines()
+      if (
+         s != staff->small()
+//         || noStems != staff->slashStyle()
          || inv != staff->invisible()
-         || tab != staff->useTablature())
-            score->undo()->push(new ChangeStaff(staff, l, s, noStems, inv, tab));
+//         || tab != staff->useTablature())
+           )
+//            score->undo()->push(new ChangeStaff(staff, l, s, noStems, inv, tab));
+            score->undo()->push(new ChangeStaff(staff, 5, s, 0, inv, 0));
       score->setLayoutAll(true);
-//      score->setUpdateAll(true);
       score->end();
       }
 
@@ -221,7 +237,7 @@ void EditStaff::showInstrumentDialog()
                   }
             else
                   instrument.setUseDrumset(false);
-            useDrumset->setChecked(instrument.useDrumset());
+//            typeDrum->setChecked(instrument.useDrumset());
             instrument.setMidiActions(t->midiActions);
             instrument.setArticulation(t->articulation);
             instrument.setChannel(t->channel);
@@ -284,4 +300,24 @@ InstrumentTemplate* SelectInstrument::instrTemplate() const
       InstrumentTemplateListItem* item = (InstrumentTemplateListItem*)wi.front();
       return item->instrumentTemplate();
       }
+
+//---------------------------------------------------------
+//   editTablatureClicked
+//---------------------------------------------------------
+
+void EditStaff::editTablatureClicked()
+      {
+      printf("Edit Tablature\n");
+      }
+
+//---------------------------------------------------------
+//   showEditStaffType
+//---------------------------------------------------------
+
+void EditStaff::showEditStaffType()
+      {
+      EditStaffType* est = new EditStaffType(this, staff);
+      est->exec();
+      }
+
 

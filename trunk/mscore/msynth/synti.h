@@ -24,7 +24,7 @@
 struct MidiPatch;
 class Event;
 
-#include "awl/fparm.h"
+#include "fparm.h"
 
 //---------------------------------------------------------
 //   MidiPatch

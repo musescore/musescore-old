@@ -29,17 +29,9 @@
 Divis::Divis() : _flags(0), _dmask(0), _nrank(0)
       {
       *_label = 0;
-      _param [SWELL]._val = SWELL_DEF;
-      _param [SWELL]._min = SWELL_MIN;
-      _param [SWELL]._max = SWELL_MAX;
-
-      _param [TFREQ]._val = TFREQ_DEF;
-      _param [TFREQ]._min = TFREQ_MIN;
-      _param [TFREQ]._max = TFREQ_MAX;
-
-      _param [TMODD]._val = TMODD_DEF;
-      _param [TMODD]._min = TMODD_MIN;
-      _param [TMODD]._max = TMODD_MAX;
+      _param[SWELL].set("swell", SWELL_DEF, SWELL_MIN, SWELL_MAX);
+      _param[TFREQ].set("tfreq", TFREQ_DEF, TFREQ_MIN, TFREQ_MAX);
+      _param[TMODD].set("tmodd", TMODD_DEF, TMODD_MIN, TMODD_MAX);
       }
 
 Keybd::Keybd() : _flags(0)
@@ -365,9 +357,9 @@ void Model::init_audio()
             M->_flags = D->_flags;
             M->_dmask = D->_dmask;
             M->_asect = D->_asect;
-            M->_swell = D->_param [Divis::SWELL]._val;
-            M->_tfreq = D->_param [Divis::TFREQ]._val;
-            M->_tmodd = D->_param [Divis::TMODD]._val;
+            M->_swell = D->_param [Divis::SWELL].val();
+            M->_tfreq = D->_param [Divis::TFREQ].val();
+            M->_tmodd = D->_param [Divis::TMODD].val();
             _aeolus->newDivis(M);
             }
       }
@@ -571,11 +563,11 @@ void Model::set_state(int bank, int pres)
 void Model::set_aupar (int /*s*/, int a, int p, float v)
       {
       Fparm* P = ((a < 0) ? _aeolus->_audio->_instrpar : _aeolus->_audio->_asectpar [a]) + p;
-      if (v < P->_min)
-            v = P->_min;
-      if (v > P->_max)
-            v = P->_max;
-      P->_val = v;
+      if (v < P->min())
+            v = P->min();
+      if (v > P->max())
+            v = P->max();
+      P->setVal(v);
 //WS    send_event (TO_IFACE, new M_ifc_aupar (s, a, p, v));
       }
 
@@ -586,9 +578,11 @@ void Model::set_dipar (int /*s*/, int d, int p, float v)
 //    union { uint32_t i; float f; } u;
 
     P = _divis [d]._param + p;
-    if (v < P->_min) v = P->_min;
-    if (v > P->_max) v = P->_max;
-    P->_val = v;
+    if (v < P->min())
+            v = P->min();
+    if (v > P->max())
+            v = P->max();
+    P->setVal(v);
 printf("Model::set_dipar\n");
 #if 0
     if (_qcomm->write_avail () >= 2)
@@ -864,10 +858,13 @@ int Model::read_instr ()
         {
 	    if (D)
 	    {
-		if (sscanf (q, "%f%f%n", &(D->_param [Divis::TFREQ]._val),
-                            &(D->_param [Divis::TMODD]._val), &n) != 2) stat = ARGS;
-                else
-		{
+            float val1;
+            float val2;
+		if (sscanf (q, "%f%f%n", &val1, &val2, &n) != 2)
+               stat = ARGS;
+            else {
+                D->_param[Divis::TFREQ].setVal(val1);
+                D->_param[Divis::TMODD].setVal(val2);
 		    q += n;
 		    D->_flags |= Divis::HAS_TREM;
 		}
@@ -1068,7 +1065,7 @@ int Model::write_instr()
 	}
         if (D->_flags & Divis::HAS_SWELL) fprintf (F, "/swell\n");
         if (D->_flags & Divis::HAS_TREM) fprintf (F, "/tremul       %3.1f  %3.1f\n",
-                                                  D->_param [Divis::TFREQ]._val, D->_param [Divis::TMODD]._val);
+                                                  D->_param [Divis::TFREQ].val(), D->_param [Divis::TMODD].val());
         fprintf (F, "/divis/end\n\n");
     }
 
