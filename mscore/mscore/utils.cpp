@@ -585,7 +585,6 @@ int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
       int steps     = interval.diatonic;
       int semitones = interval.chromatic;
 
-printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
       if (semitones == 0)
             return tpc;
 
@@ -600,7 +599,6 @@ printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
             int p1 = tpc2pitch(step2tpc(step, 0));
             alter  = semitones - (p1 - pitch);
             // alter  = p1 + semitones - pitch;
-printf("alter %d, p1 %d semitones %d pitch %d\n", alter, p1, semitones, pitch);
             if (alter < 0)
                   alter = -((-alter) % 12);
             else
@@ -611,9 +609,7 @@ printf("alter %d, p1 %d semitones %d pitch %d\n", alter, p1, semitones, pitch);
                   --steps;
             else
                   break;
-            printf("  again alter %d steps %d, step %d\n", alter, steps, step);
             }
-      printf("  = step %d alter %d  tpc %d\n", step, alter, step2tpc(step, alter));
       return step2tpc(step, alter);
       }
 

@@ -492,7 +492,7 @@ void Harmony::read(QDomElement e)
             int i = e.text().toInt();
             if (tag == "base") {
                   if (score()->mscVersion() >= 106)
-                        setBaseTpc(i);
+                        setBaseTpc(checkTpc(i));
                   else
                         setBaseTpc(table[i-1]);    // obsolete
                   }
@@ -500,7 +500,7 @@ void Harmony::read(QDomElement e)
                   setId(i);
             else if (tag == "root") {
                   if (score()->mscVersion() >= 106)
-                        setRootTpc(i);
+                        setRootTpc(checkTpc(i));
                   else
                         setRootTpc(table[i-1]);    // obsolete
                   }
