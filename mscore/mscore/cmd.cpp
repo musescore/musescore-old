@@ -1866,8 +1866,10 @@ void Score::cmd(const QAction* a)
 
       if (cmd == "print")
             printFile();
-      else if (cmd == "repeat")
+      else if (cmd == "repeat"){
             preferences.playRepeats = !preferences.playRepeats;
+            seq->collectEvents();
+            }
       else if (cmd == "rewind")
             seq->rewindStart();
       else if (cmd == "play-next-measure")
