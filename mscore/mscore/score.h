@@ -817,6 +817,8 @@ class Score : public QObject {
       void emitSelectionChanged(int val)                      { emit selectionChanged(val); }
       const QList<SynthesizerSettings>& syntiSettings() const { return _syntiSettings;      }
       const QList<StaffType*>& staffTypes() const             { return _staffTypes; }
+      QList<StaffType*>& staffTypes()                         { return _staffTypes; }
+      void setStaffTypeList(const QList<StaffType*>& tl)      { _staffTypes = tl;   }
       };
 
 extern Score* gscore;

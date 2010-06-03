@@ -134,7 +134,8 @@ class Staff {
 
       bool useTablature() const;
       void setUseTablature(bool val);
-      StaffType* staffType() const   { return _staffType; }
+      StaffType* staffType() const     { return _staffType; }
+      void setStaffType(StaffType* st) { _staffType = st; }
       };
 #endif
 

@@ -83,12 +83,18 @@ class EditStaffType : public QDialog, private Ui::EditStaffType {
       Q_OBJECT
 
       Staff* staff;
+      QList<StaffType*> staffTypes;
+      bool modified;
 
    private slots:
       void typeChanged(QListWidgetItem*, QListWidgetItem*);
+      void createNewType();
+      void nameEdited(const QString&);
 
    public:
       EditStaffType(QWidget* parent, Staff*);
+      bool isModified() const                 { return modified;   }
+      QList<StaffType*> getStaffTypes() const { return staffTypes; }
       };
 
 // first three staff types in staffTypes[] are build in:
