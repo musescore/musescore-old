@@ -28,14 +28,23 @@
 #include "writer.h"
 #include "parser.h"
 
+#include "barline.h"
 #include "box.h"
+#include "chord.h"
+//#include "key.h"
+#include "keysig.h"
 #include "measure.h"
+#include "note.h"
 #include "part.h"
+#include "pitchspelling.h"
 #include "score.h"
 #include "staff.h"
+#include "timesig.h"
 
 //---------------------------------------------------------
 //   addText
+//   copied from importxml.cpp
+//   TODO: remove duplicate code
 //---------------------------------------------------------
 
 static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, int stl)
@@ -49,6 +58,41 @@ static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, int stl)
                   vbx = new VBox(s);
             vbx->add(text);
             }
+      }
+
+//---------------------------------------------------------
+//   xmlSetPitch
+//   copied and adapted from importxml.cpp
+//   TODO: remove duplicate code
+//---------------------------------------------------------
+
+/**
+ Convert MusicXML \a step / \a alter / \a octave to midi pitch,
+ set pitch and tpc.
+ */
+
+static void xmlSetPitch(Note* n, char step, int alter, int octave)
+      {
+      int istep = step - 'A';
+      //                       a  b   c  d  e  f  g
+      static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
+      if (istep < 0 || istep > 6) {
+            printf("xmlSetPitch: illegal pitch %d, <%c>\n", istep, step);
+            return;
+            }
+      int pitch = table[istep] + alter + (octave+1) * 12;
+
+      if (pitch < 0)
+            pitch = 0;
+      if (pitch > 127)
+            pitch = 127;
+
+      n->setPitch(pitch);
+
+      //                        a  b  c  d  e  f  g
+      static int table1[7]  = { 5, 6, 0, 1, 2, 3, 4 };
+      int tpc  = step2tpc(table1[istep], alter);
+      n->setTpc(tpc);
       }
 
 namespace Bww {
@@ -86,6 +130,8 @@ namespace Bww {
     QMap<QString, StepAlterOct> stepAlterOctMap;        ///< Map bww pitch to step/alter/oct
     QMap<QString, QString> typeMap;                     ///< Map bww note types to MusicXML
     unsigned int measureNumber;                         ///< Current measure number
+    unsigned int tick;                                  ///< Current tick
+    Measure* currentMeasure;                            ///< Current measure
   };
 
   /**
@@ -96,9 +142,21 @@ namespace Bww {
     : score(0),
     beats(4),
     beat(4),
-    measureNumber(0)
+    measureNumber(0),
+    tick(0),
+    currentMeasure(0)
   {
     qDebug() << "MsScWriter::MsScWriter()";
+
+    stepAlterOctMap["LG"] = StepAlterOct('G', 0, 4);
+    stepAlterOctMap["LA"] = StepAlterOct('A', 0, 4);
+    stepAlterOctMap["B"] = StepAlterOct('B', 0, 4);
+    stepAlterOctMap["C"] = StepAlterOct('C', 1, 5);
+    stepAlterOctMap["D"] = StepAlterOct('D', 0, 5);
+    stepAlterOctMap["E"] = StepAlterOct('E', 0, 5);
+    stepAlterOctMap["F"] = StepAlterOct('F', 1, 5);
+    stepAlterOctMap["HG"] = StepAlterOct('G', 0, 5);
+    stepAlterOctMap["HA"] = StepAlterOct('A', 0, 5);
 
     typeMap["1"] = "whole";
     typeMap["2"] = "half";
@@ -114,29 +172,108 @@ namespace Bww {
 
   void MsScWriter::beginMeasure()
   {
-    qDebug() << "MsScWriter::beginMeasure()";
-    ++measureNumber;
+      qDebug() << "MsScWriter::beginMeasure()";
+      ++measureNumber;
+
+      // create a new measure
+      currentMeasure  = new Measure(score);
+      currentMeasure->setTick(tick);
+      currentMeasure->setNo(measureNumber);
+      score->measures()->add(currentMeasure);
+
+      if (measureNumber == 1) {
+            // keysig
+            KeySigEvent key;
+            key.setAccidentalType(2);
+            (*score->staff(0)->keymap())[tick] = key;
+            // timesig
+            TimeSig ts = TimeSig(score, beat, beats);
+            int st = ts.subtype();
+            if (st) {
+                  score->sigmap()->add(tick, TimeSig::getSig(st));
+                  TimeSig* timesig = new TimeSig(score);
+                  timesig->setTick(tick);
+                  timesig->setSubtype(st);
+                  timesig->setTrack(0);
+                  Segment* s = currentMeasure->getSegment(timesig);
+                  s->add(timesig);
+                  }
+            }
   }
 
-  /**
-   End the current measure.
-   */
+/**
+ End the current measure.
+ */
 
-  void MsScWriter::endMeasure()
-  {
-    qDebug() << "MsScWriter::endMeasure()";
-  }
+void MsScWriter::endMeasure()
+{
+      qDebug() << "MsScWriter::endMeasure()";
+      BarLine* barLine = new BarLine(score);
+      bool visible = true;
+      barLine->setSubtype(NORMAL_BAR);
+      barLine->setTrack(0);
+      currentMeasure->setEndBarLineType(barLine->subtype(), false, visible);
+}
 
   /**
    Write a single note.
    */
 
-  void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
-                        const QString type, const int dots,
-                        bool grace)
-  {
-    qDebug() << "MsScWriter::note()";
-  }
+void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
+                      const QString type, const int dots,
+                      bool grace)
+{
+      qDebug() << "MsScWriter::note()"
+            << "type:" << type
+            << "dots:" << dots
+            << "grace" << grace
+            ;
+
+      if (grace) return; // TODO: support graces
+
+      if (!stepAlterOctMap.contains(pitch)
+          || !typeMap.contains(type)) {
+            // TODO: error message
+            return;
+            }
+      StepAlterOct sao = stepAlterOctMap.value(pitch);
+
+      int ticks = 4 * AL::division / type.toInt();
+      if (dots) ticks = 3 * ticks / 2;
+      qDebug() << "ticks:" << ticks;
+      Duration durationType(Duration::V_INVALID);
+      durationType.setVal(ticks);
+      qDebug() << "duration:" << durationType.name();
+
+      BeamMode bm  = BEAM_AUTO;
+//      Direction sd = AUTO;
+      ChordRest* cr = 0;
+      Note* note = new Note(score);
+//            note->setHeadGroup(headGroup);
+      note->setTrack(0);
+      cr = currentMeasure->findChord(tick, 0, grace);
+      if (cr == 0) {
+            SegmentType st = SegChordRest;
+            cr = new Chord(score);
+            cr->setTick(tick);
+            cr->setBeamMode(bm);
+            cr->setTrack(0);
+            if (grace) {
+                  // TODO
+                  }
+            else {
+                  if (durationType.type() == Duration::V_INVALID)
+                        durationType.setType(Duration::V_QUARTER);
+                  cr->setDuration(durationType);
+                  }
+            cr->setDots(dots);
+            Segment* s = currentMeasure->getSegment(st, cr->tick(), 0);
+            s->add(cr);
+            }
+      xmlSetPitch(note, sao.s.toAscii(), sao.a, sao.o);
+      cr->add(note);
+      tick += ticks; // may need to move this in case of grace note
+}
 
   /**
    Write the header.
@@ -221,12 +358,6 @@ bool Score::importBww(const QString& path)
       wrt.setScore(this);
       Bww::Parser p(lex, wrt);
       p.parse();
-
-            // example of how to add a measure
-            Measure* measure  = new Measure(this);
-            measure->setTick(0);
-            measure->setNo(1);
-            measures()->add(measure);
 
       _saved = false;
       _created = true;
