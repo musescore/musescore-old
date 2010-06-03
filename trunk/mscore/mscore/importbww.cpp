@@ -229,8 +229,6 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
             << "grace" << grace
             ;
 
-      if (grace) return; // TODO: support graces
-
       if (!stepAlterOctMap.contains(pitch)
           || !typeMap.contains(type)) {
             // TODO: error message
@@ -246,33 +244,35 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       qDebug() << "duration:" << durationType.name();
 
       BeamMode bm  = BEAM_AUTO;
-//      Direction sd = AUTO;
-      ChordRest* cr = 0;
-      Note* note = new Note(score);
-//            note->setHeadGroup(headGroup);
-      note->setTrack(0);
-      cr = currentMeasure->findChord(tick, 0, grace);
-      if (cr == 0) {
-            SegmentType st = SegChordRest;
-            cr = new Chord(score);
-            cr->setTick(tick);
-            cr->setBeamMode(bm);
-            cr->setTrack(0);
-            if (grace) {
-                  // TODO
-                  }
-            else {
-                  if (durationType.type() == Duration::V_INVALID)
-                        durationType.setType(Duration::V_QUARTER);
-                  cr->setDuration(durationType);
-                  }
-            cr->setDots(dots);
-            Segment* s = currentMeasure->getSegment(st, cr->tick(), 0);
-            s->add(cr);
+      Direction sd = AUTO;
+
+      // create chord
+      Chord* cr = new Chord(score);
+      cr->setTick(tick);
+      cr->setBeamMode(bm);
+      cr->setTrack(0);
+      if (grace) {
+            cr->setNoteType(NOTE_GRACE32);
+            cr->setDuration(Duration::V_32ND);
+            sd = UP;
             }
+      else {
+            if (durationType.type() == Duration::V_INVALID)
+                  durationType.setType(Duration::V_QUARTER);
+            cr->setDuration(durationType);
+            tick += ticks;
+            sd = DOWN;
+            }
+      cr->setDots(dots);
+      cr->setStemDirection(sd);
+      // add note to chord
+      Note* note = new Note(score);
+      note->setTrack(0);
       xmlSetPitch(note, sao.s.toAscii(), sao.a, sao.o);
       cr->add(note);
-      tick += ticks; // may need to move this in case of grace note
+      // add chord to measure
+      Segment* s = currentMeasure->getSegment(cr);
+      s->add(cr);
 }
 
   /**

@@ -1,3 +1,6 @@
+3.jun (lv)
+      - support reading bww files: initial (incomplete) implementation
+        feature request http://musescore.org/en/node/5637
 3.jun (ws)
       - added StaffType() and EditStaffType() classes
 27.may (ws)
