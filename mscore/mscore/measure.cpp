@@ -813,7 +813,7 @@ Segment* Measure::getSegment(Element* e)
 //---------------------------------------------------------
 
 /**
- Get a segment of type \a st at position \a t.
+ Get a segment of type \a st at tick position \a t.
  If the segment does not exist, it is created.
 */
 
@@ -832,7 +832,7 @@ Segment* Measure::getSegment(SegmentType st, int t)
 //---------------------------------------------------------
 
 /**
- Get a segment of type \a st at position \a t and grace level \a gl.
+ Get a segment of type \a st at tick position \a t and grace level \a gl.
  Grace level is 0 for a normal chord, 1 for the grace note closest
  to the normal chord, etc.
  If the segment does not exist, it is created.
@@ -981,6 +981,10 @@ void Measure::add(Element* el)
                         Segment* s;
                         for (s = first(); s && s->tick() < t; s = s->next())
                               ;
+                        if (s->tick() > t) {
+                              insert(seg, s);
+                              break;
+                              }
                         if (s && s->subtype() != SegEndBarLine) {
                               for (; s && s->subtype() != SegChordRest; s = s->next())
                                     ;
