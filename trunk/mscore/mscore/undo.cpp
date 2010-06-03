@@ -1937,15 +1937,12 @@ void ChangePageFormat::flip()
 //   ChangeStaff
 //---------------------------------------------------------
 
-ChangeStaff::ChangeStaff(Staff* _staff, int _lines, bool _small, bool _noStems,
-   bool _invisible, bool _useTablature)
+ChangeStaff::ChangeStaff(Staff* _staff, bool _small, bool _invisible, StaffType* st)
       {
-      staff   = _staff;
-      lines   = _lines;
-      small   = _small;
-      noStems = _noStems;
+      staff     = _staff;
+      small     = _small;
       invisible = _invisible;
-      useTablature = _useTablature;
+      staffType = st;
       }
 
 //---------------------------------------------------------
@@ -1954,33 +1951,26 @@ ChangeStaff::ChangeStaff(Staff* _staff, int _lines, bool _small, bool _noStems,
 
 void ChangeStaff::flip()
       {
-      bool linesChanged = staff->lines() != lines;
       bool invisibleChanged = staff->invisible() != invisible;
+      bool typeChanged      = staff->staffType() != staffType;
 
-      int oldLines   = staff->lines();
-      int oldSmall   = staff->small();
-      bool oldNoStems = staff->slashStyle();
+      int oldSmall      = staff->small();
       bool oldInvisible = staff->invisible();
-      bool oldUseTablature = staff->useTablature();
+      StaffType* st     = staff->staffType();
 
-      staff->setLines(lines);
       staff->setSmall(small);
-      staff->setSlashStyle(noStems);
       staff->setInvisible(invisible);
-      staff->setUseTablature(useTablature);
+      staff->setStaffType(staffType);
 
-      lines   = oldLines;
-      small   = oldSmall;
-      noStems = oldNoStems;
+      small     = oldSmall;
       invisible = oldInvisible;
-      useTablature = oldUseTablature;
+      staffType = st;
 
-      if (linesChanged || invisibleChanged) {
+      if (invisibleChanged || typeChanged) {
             Score* score = staff->score();
             int staffIdx = score->staffIdx(staff);
             for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                   MStaff* mstaff = m->mstaff(staffIdx);
-                  // mstaff->lines->setLines(staff->lines());
                   mstaff->lines->setVisible(!staff->invisible());
                   }
             }

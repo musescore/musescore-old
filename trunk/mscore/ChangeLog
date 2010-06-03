@@ -1,3 +1,5 @@
+3.jun (ws)
+      - added StaffType() and EditStaffType() classes
 27.may (ws)
       - removed PortAudio audio interface from linux version
       - Extend ALSA interface for non dma access. This should work with

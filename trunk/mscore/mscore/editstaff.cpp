@@ -139,18 +139,6 @@ void EditStaff::apply()
       Score* score  = staff->score();
       Part* part    = staff->part();
 
-#if 0
-      if (typeTablature->isChecked()) {
-            instrument.setUseDrumset(false);
-            }
-      else if (typeDrum->isChecked()) {
-            instrument.setUseDrumset(true);
-            }
-      else {
-            instrument.setUseDrumset(false);
-            }
-#endif
-
       int intervalIdx = iList->currentIndex();
       bool upFlag     = up->isChecked();
 
@@ -180,21 +168,16 @@ void EditStaff::apply()
             score->setPlaylistDirty(true);
             }
 
-//      int l        = lines->value();
-      bool s       = small->isChecked();
-//      bool noStems = slashStyle->isChecked();
-      bool inv     = invisible->isChecked();
-//      bool tab     = typeTablature->isChecked();
+      bool s   = small->isChecked();
+      bool inv = invisible->isChecked();
+      StaffType* st = score->staffTypes()[staffType->currentIndex()];
 
-//      if (l != staff->lines()
       if (
          s != staff->small()
-//         || noStems != staff->slashStyle()
          || inv != staff->invisible()
-//         || tab != staff->useTablature())
+         || st  != staff->staffType()
            )
-//            score->undo()->push(new ChangeStaff(staff, l, s, noStems, inv, tab));
-            score->undo()->push(new ChangeStaff(staff, 5, s, 0, inv, 0));
+            score->undo()->push(new ChangeStaff(staff, s, inv, st));
       score->setLayoutAll(true);
       score->end();
       }
@@ -317,7 +300,10 @@ void EditStaff::editTablatureClicked()
 void EditStaff::showEditStaffType()
       {
       EditStaffType* est = new EditStaffType(this, staff);
-      est->exec();
+      if (est->exec() && est->isModified()) {
+            QList<StaffType*> tl = est->getStaffTypes();
+            staff->score()->setStaffTypeList(tl);
+            }
       }
 
 

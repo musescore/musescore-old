@@ -64,6 +64,7 @@ class TextStyle;
 class Tuplet;
 class UndoGroup;
 class KeySig;
+class StaffType;
 
 //---------------------------------------------------------
 //   UndoCommand
@@ -1032,16 +1033,14 @@ class ChangePageFormat : public UndoCommand {
 
 class ChangeStaff : public UndoCommand {
       Staff* staff;
-      int lines;
       bool small;
-      bool noStems;
       bool invisible;
-      bool useTablature;
+      StaffType* staffType;
 
       void flip();
 
    public:
-      ChangeStaff(Staff*, int lines, bool small, bool noStems, bool invisible, bool useTab);
+      ChangeStaff(Staff*, bool small, bool invisible, StaffType*);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };
