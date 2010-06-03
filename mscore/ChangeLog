@@ -1,3 +1,6 @@
+3.jun (ws)
+      - changed behaviour of measure->add(Segment*) which fixes
+        #5932 overture file import error
 2.jun (ws)
       - fix crash #5917 by range checking tpc values
       - fix #5939: Volta hook length doesn't get saved in file
