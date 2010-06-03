@@ -981,7 +981,7 @@ void Measure::add(Element* el)
                         Segment* s;
                         for (s = first(); s && s->tick() < t; s = s->next())
                               ;
-                        if (s->tick() > t) {
+                        if (s && s->tick() > t) {
                               insert(seg, s);
                               break;
                               }
