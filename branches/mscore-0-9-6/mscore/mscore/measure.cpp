@@ -811,7 +811,7 @@ Segment* Measure::getSegment(Element* e)
 //---------------------------------------------------------
 
 /**
- Get a segment of type \a st at position \a t.
+ Get a segment of type \a st at tick position \a t.
  If the segment does not exist, it is created.
 */
 
@@ -830,7 +830,7 @@ Segment* Measure::getSegment(SegmentType st, int t)
 //---------------------------------------------------------
 
 /**
- Get a segment of type \a st at position \a t and grace level \a gl.
+ Get a segment of type \a st at tick position \a t and grace level \a gl.
  Grace level is 0 for a normal chord, 1 for the grace note closest
  to the normal chord, etc.
  If the segment does not exist, it is created.
@@ -883,7 +883,7 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
 
       if (gl > 0) {
             if (gl <= nGraces) {
-//                  printf("grace segment %d already exist, returning it\n", gl);
+// printf("grace segment %d already exist, returning it\n", gl);
                   int graces = 0;
                   // for (Segment* ss = last(); ss && ss->tick() <= t; ss = ss->prev()) {
                   for (Segment* ss = last(); ss && ss->tick() >= t; ss = ss->prev()) {
@@ -897,14 +897,16 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                   return 0; // should not be reached
                   }
             else {
-//                  printf("creating SegGrace at tick=%d and level=%d\n", t, gl);
+printf("creating SegGrace at tick=%d and level=%d\n", t, gl);
                   Segment* prevs = 0; // last segment inserted
                   // insert the first grace segment
                   if (nGraces == 0) {
                         ++nGraces;
                         s = createSegment(SegGrace, t);
-//                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
+printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
                         add(s);
+printf("   <%d - %d - %d>\n", s->prev() ? s->prev()->tick() : -1, s->tick(),
+                   s->next() ? s->next()->tick() : -1);
                         prevs = s;
                         // return s;
                         }
@@ -918,7 +920,7 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                   while (nGraces < gl) {
                         ++nGraces;
                         s = createSegment(SegGrace, t);
-//                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
+// printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
                         insert(s, prevs);
                         prevs = s;
                         }
@@ -979,6 +981,10 @@ void Measure::add(Element* el)
                         Segment* s;
                         for (s = first(); s && s->tick() < t; s = s->next())
                               ;
+                        if (s->tick() > t) {
+                              insert(seg, s);
+                              break;
+                              }
                         if (s && s->subtype() != SegEndBarLine) {
                               for (; s && s->subtype() != SegChordRest; s = s->next())
                                     ;
