@@ -151,6 +151,8 @@ QPointF Clef::canvasPos() const
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = segment()->measure()->system();
+      if (!system)
+            return pos();
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
