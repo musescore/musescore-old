@@ -73,6 +73,11 @@ QList<LanguageItem> languages;
 
 bool debugMode          = false;
 bool enableExperimental = false;
+#ifdef NDEBUG
+bool enableInspector    = false;
+#else
+bool enableInspector    = true;
+#endif
 
 QString dataPath;
 QPaintDevice* pdev;
@@ -647,7 +652,8 @@ MuseScore::MuseScore()
 
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("edit-meta"));
-      menuEdit->addAction(getAction("inspector"));
+      if (enableInspector)
+            menuEdit->addAction(getAction("inspector"));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Preferences..."), this, SLOT(startPreferenceDialog()));
 
@@ -1718,10 +1724,12 @@ int main(int argc, char* av[])
                         printVersion("MuseScore");
                         return 0;
                    case 'd':
-                        debugMode = true;
+                        debugMode       = true;
+                        enableInspector = true;
                         break;
                   case 'L':
                         layoutDebug = true;
+                        enableInspector = true;
                         break;
                   case 's':
                         noSeq = true;
@@ -1769,6 +1777,7 @@ int main(int argc, char* av[])
                         break;
                   case 'e':
                         enableExperimental = true;
+                        enableInspector = true;
                         break;
                   default:
                         usage();

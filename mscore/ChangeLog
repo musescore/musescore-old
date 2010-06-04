@@ -1,4 +1,5 @@
 4.jun (ws)
+      - hide inspector in production build
       - fix #5957: Play/Don't play repeat dies not have immediate effect
 3.jun (ws)
       - changed behaviour of measure->add(Segment*) which fixes
