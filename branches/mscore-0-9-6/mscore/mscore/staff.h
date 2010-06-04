@@ -108,6 +108,7 @@ class Staff {
       void setClef(int tick, int clef);
       KeySigEvent key(int tick) const;
       void setKey(int tick, int st);
+      void setKey(int tick, const KeySigEvent& st);
 
       bool show() const              { return _show;        }
       bool slashStyle() const        { return _slashStyle;  }

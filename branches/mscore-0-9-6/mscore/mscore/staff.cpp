@@ -477,6 +477,11 @@ void Staff::setKey(int tick, int st)
       (*_keymap)[tick] = ke;
       }
 
+void Staff::setKey(int tick, const KeySigEvent& st)
+      {
+      (*_keymap)[tick] = st;
+      }
+
 //---------------------------------------------------------
 //   setClef
 //---------------------------------------------------------
