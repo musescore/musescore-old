@@ -828,9 +828,11 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
       a->setData("select-dialog");
       popup->addSeparator();
       obj->genPropertyMenu(popup);
-      popup->addSeparator();
-      a = popup->addAction(tr("Object Inspector"));
-      a->setData("list");
+      if (enableInspector) {
+            popup->addSeparator();
+            a = popup->addAction(tr("Object Inspector"));
+            a->setData("list");
+            }
       a = popup->exec(pos);
       if (a == 0)
             return;
@@ -917,8 +919,10 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       if (obj->genPropertyMenu(popup))
             popup->addSeparator();
 
-      a = popup->addAction(tr("Object Inspector"));
-      a->setData("list");
+      if (enableInspector) {
+            a = popup->addAction(tr("Object Inspector"));
+            a->setData("list");
+            }
 
       a = popup->exec(gpos);
       if (a == 0)

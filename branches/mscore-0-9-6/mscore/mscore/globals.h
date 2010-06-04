@@ -42,6 +42,7 @@ extern bool debugMode;
 extern bool enableExperimental;
 extern bool scriptDebug;
 extern bool layoutDebug;
+extern bool enableInspector;
 extern bool noSeq;            ///< Dont use sequencer; cmd line option.
 extern bool noMidi;           ///< Dont use midi; cmd line option.
 extern bool midiInputTrace;   ///< debug option: dump midi input
