@@ -57,7 +57,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>Parentes</translation>
+        <translation>Runde parenteser</translation>
     </message>
 </context>
 <context>
@@ -186,7 +186,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation>bb (dobbel b)</translation>
+        <translation>bb (dobbel-b)</translation>
     </message>
     <message>
         <source>F</source>
@@ -910,11 +910,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>velocity type</source>
-        <translation>Hastighetstype</translation>
+        <translation>Type verdi</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation>Hastighet (0-127)</translation>
+        <translation>Verdi (0-127)</translation>
     </message>
     <message>
         <source>user</source>
@@ -949,7 +949,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"/>
+        <translation> Varighet</translation>
     </message>
     <message>
         <source>Note Head Group</source>
@@ -1128,7 +1128,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>part</source>
-        <translation>Stemme</translation>
+        <translation>Instrumentoppdeling</translation>
     </message>
     <message>
         <source>system</source>
@@ -1348,7 +1348,7 @@ feilet: </translation>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Rediger egenskaper for system/stemme</translation>
+        <translation>MuseScore: Rediger egenskaper for system/instrumentsoppdeling</translation>
     </message>
     <message>
         <source>Staff Properties</source>
@@ -1364,7 +1364,7 @@ feilet: </translation>
     </message>
     <message>
         <source>Part Properties</source>
-        <translation>Egenskaper for stemme</translation>
+        <translation>Egenskaper for instrumentoppdeling</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
@@ -1562,7 +1562,7 @@ feilet: </translation>
     </message>
     <message>
         <source>Score</source>
-        <translation>Partitur</translation>
+        <translation>Noteark</translation>
     </message>
     <message>
         <source>Page</source>
@@ -1582,7 +1582,7 @@ feilet: </translation>
     </message>
     <message>
         <source>Numbers</source>
-        <translation>Nummer</translation>
+        <translation>Nummerering</translation>
     </message>
     <message>
         <source>Beams</source>
@@ -1635,7 +1635,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Hide Empty Staves</source>
-        <translation>Skjul tommer notesystemer</translation>
+        <translation>Skjul tomme notesystemer</translation>
     </message>
     <message>
         <source>Page fill threshold:</source>
@@ -1792,7 +1792,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation>Akkoladeavstand</translation>
+        <translation>Klammesystemavstand</translation>
     </message>
     <message>
         <source>System distance</source>
@@ -1880,7 +1880,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Dot dot distance</source>
-        <translation>Avstand til dobbelpunkt</translation>
+        <translation>Avstand til dobbelpunktering</translation>
     </message>
     <message>
         <source>Ledger line width</source>
@@ -2020,11 +2020,11 @@ space unit</extracomment>
     <name>ExcerptsDialog</name>
     <message>
         <source>MuseScore: Parts</source>
-        <translation>MuseScore: Stemmer i partitur</translation>
+        <translation>MuseScore: Oppdeling av noteark i instrumenter</translation>
     </message>
     <message>
         <source>Select Part:</source>
-        <translation>Velg stemme fra partitur:</translation>
+        <translation>Velg instrumentoppdeling:</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -2036,7 +2036,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation>Endre stemme:</translation>
+        <translation>Endre instrumentoppdeling:</translation>
     </message>
     <message>
         <source>Instrument:</source>
@@ -2044,7 +2044,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create Part</source>
-        <translation>Opprett stemme</translation>
+        <translation>Opprett oppdeling</translation>
     </message>
     <message>
         <source>File Name:</source>
@@ -2052,7 +2052,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation>Tittel på stemme:</translation>
+        <translation>Oppdelingstittel:</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2060,7 +2060,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation>Stemme-%1</translation>
+        <translation>Instrumentoppdeling-%1</translation>
     </message>
 </context>
 <context>
@@ -2306,7 +2306,7 @@ space unit</extracomment>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
-        <translation>MuseScore: Liste over stemmer i  partitur</translation>
+        <translation>MuseScore: Liste over instrumenter i noteark</translation>
     </message>
 </context>
 <context>
@@ -2668,7 +2668,7 @@ mislykket: </translation>
     <name>MagBox</name>
     <message>
         <source>Magnification</source>
-        <translation>Forstørring</translation>
+        <translation>Zoom</translation>
     </message>
     <message>
         <source>Zoom Canvas</source>
@@ -2874,7 +2874,7 @@ mislykket: </translation>
     </message>
     <message>
         <source>Metronome</source>
-        <translation>Metronome</translation>
+        <translation>Metronom</translation>
     </message>
     <message>
         <source>Title</source>
@@ -3052,7 +3052,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Akkolade</source>
-        <translation>Akkolade</translation>
+        <translation>Krøllklamme</translation>
     </message>
     <message>
         <source>Accidentals</source>
@@ -3490,7 +3490,7 @@ Prøv istedet å velge "Online håndbok" fra "Hjelp"-menyen.</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation>Arpeggio &amp;&amp; Glissando</translation>
+        <translation>Arpeggio og Glissando</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -3506,7 +3506,7 @@ Prøv istedet å velge "Online håndbok" fra "Hjelp"-menyen.</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Artikulasjon &amp;&amp; Ornamentikk</translation>
+        <translation>Artikulasjon og Ornamentikk</translation>
     </message>
     <message>
         <source>Fingering %1</source>
@@ -3534,7 +3534,7 @@ Prøv istedet å velge "Online håndbok" fra "Hjelp"-menyen.</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation>Bruddpunkter &amp;&amp; Avstandsdeler</translation>
+        <translation>Bruddpunkter og Avstandsdeler</translation>
     </message>
     <message>
         <source>Line break</source>
@@ -3546,7 +3546,7 @@ Prøv istedet å velge "Online håndbok" fra "Hjelp"-menyen.</translation>
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation>Avstandsdeler notesystem</translation>
+        <translation>Avstandsdeler for notesystem</translation>
     </message>
     <message>
         <source>Start beam</source>
@@ -3574,7 +3574,7 @@ Prøv istedet å velge "Online håndbok" fra "Hjelp"-menyen.</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation>Artikulasjoner &amp;&amp; Ornamentikk</translation>
+        <translation>Artikulasjoner og Ornamentikk</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -3586,7 +3586,7 @@ Prøv istedet å velge "Online håndbok" fra "Hjelp"-menyen.</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation>Bruddpunkter &amp;&amp; Avstansdeler...</translation>
+        <translation>Bruddpunkter og Avstansdeler...</translation>
     </message>
     <message>
         <source>The previous session quit unexpectedly.
@@ -3606,11 +3606,11 @@ Gjenopprett økt?</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation>MuseScore: Artikulasjoner &amp; Ornamentikk</translation>
+        <translation>MuseScore: Artikulasjoner og Ornamentikk</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation>MuseScore: Bruddpunkter &amp; Avstandsdeler</translation>
+        <translation>MuseScore: Bruddpunkter og Avstandsdeler</translation>
     </message>
     <message>
         <source>Check for Update</source>
@@ -3638,7 +3638,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
-        <translation>Feil ved lasting av plugin&#13;
+        <translation>Feil ved lasting av utvidelse&#13;
 "%1" på linje %2:&#13;
 %3</translation>
     </message>
@@ -4008,7 +4008,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Part Name</source>
-        <translation>Stemmenavn</translation>
+        <translation>Oppdelingsnavn</translation>
     </message>
     <message>
         <source>Volume</source>
@@ -4060,7 +4060,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>midi sound for part</source>
-        <translation>MIDI-lyd for stemme</translation>
+        <translation>MIDI-lyd for instrumentoppdeling</translation>
     </message>
 </context>
 <context>
@@ -4071,7 +4071,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Hastighet:</translation>
+        <translation>Verdi:</translation>
     </message>
     <message>
         <source>auto</source>
@@ -4173,7 +4173,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     <name>PreferenceDialog</name>
     <message>
         <source>default</source>
-        <translation>standard</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <source>Choose Notepaper</source>
@@ -4733,7 +4733,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Built in style</source>
-        <translation>Innebygger stil</translation>
+        <translation>Innebygget stil</translation>
     </message>
     <message>
         <source>Use style file:</source>
@@ -4769,7 +4769,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation>Velg PortMidi inndatagrensesnitt</translation>
+        <translation>Velg PortMidi inndatakilde</translation>
     </message>
     <message>
         <source>Use Current Position</source>
@@ -4926,7 +4926,7 @@ Vennligst velg én enkelt note eller pause og prøv igjen
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation>MuseScore: Registrer script:</translation>
+        <translation>MuseScore: Registrer scriptutvidelse:</translation>
     </message>
 </context>
 <context>
@@ -5263,11 +5263,11 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
-        <translation type="unfinished"/>
+        <translation>Trommevirvel...</translation>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
-        <translation type="unfinished"/>
+        <translation>Pianorull...</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
@@ -5631,7 +5631,7 @@ og sjekk at stilen til fila er riktig</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Rediger egenskaper for notesystem/stemme</translation>
+        <translation>MuseScore: Rediger egenskaper for notesystem/instrumentoppdeling</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5706,7 +5706,7 @@ og sjekk at stilen til fila er riktig</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation type="unfinished">Kla</translation>
+        <translation>Klang</translation>
     </message>
     <message>
         <source>Cho</source>
@@ -5743,11 +5743,11 @@ og sjekk at stilen til fila er riktig</translation>
     </message>
     <message>
         <source>Damp:</source>
-        <translation type="unfinished"/>
+        <translation>Demping:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Bredde:</translation>
+        <translation>Dybde:</translation>
     </message>
     <message>
         <source>Preset:</source>
@@ -6595,7 +6595,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>number</source>
-        <translation>nummer</translation>
+        <translation>Nummer</translation>
     </message>
     <message>
         <source>relation</source>
@@ -6603,7 +6603,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>nothing</source>
-        <translation>ingenting</translation>
+        <translation>Ingenting</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -6698,7 +6698,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>(sharp)</source>
-        <translation>(kryss)</translation>
+        <translation>(Kryss)</translation>
     </message>
     <message>
         <source>(flat)</source>
@@ -6706,19 +6706,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>(double sharp)</source>
-        <translation>(dobbeltkryss)</translation>
+        <translation>(Dobbeltkryss)</translation>
     </message>
     <message>
         <source>(double flat)</source>
-        <translation>(dobbel-b)</translation>
+        <translation>(Dobbel-b)</translation>
     </message>
     <message>
         <source>(natural)</source>
-        <translation>(oppløsningstegn)</translation>
+        <translation>(Oppløsningstegn)</translation>
     </message>
     <message>
         <source>[sharp]</source>
-        <translation>[kryss]</translation>
+        <translation>[Kryss]</translation>
     </message>
     <message>
         <source>[flat]</source>
@@ -6726,15 +6726,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>[double sharp]</source>
-        <translation>[dobbeltkryss]</translation>
+        <translation>[Dobbeltkryss]</translation>
     </message>
     <message>
         <source>[double flat]</source>
-        <translation>[dobbel-b]</translation>
+        <translation>[Dobbel-b]</translation>
     </message>
     <message>
         <source>[natural]</source>
-        <translation>[oppløsningstegn]</translation>
+        <translation>[Oppløsningstegn]</translation>
     </message>
     <message>
         <source>flat-slash</source>
@@ -6746,19 +6746,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirrored-flat2</source>
-        <translation>speilet b</translation>
+        <translation>Speilvendt b dobbel</translation>
     </message>
     <message>
         <source>mirrored-flat</source>
-        <translation>bakvendt b</translation>
+        <translation>Speilvendt b</translation>
     </message>
     <message>
         <source>mirrored-flat-slash</source>
-        <translation>bakvendt b med strek</translation>
+        <translation>Speilvendt b med strek</translation>
     </message>
     <message>
         <source>flat-flat-slash</source>
-        <translation>dobbelt-b med strek</translation>
+        <translation>Dobbel-b med strek</translation>
     </message>
     <message>
         <source>sharp-slash</source>
@@ -7201,7 +7201,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to beginning of score</source>
-        <translation>Velg til begynnelse av partitur</translation>
+        <translation>Velg til begynnelse av noteark</translation>
     </message>
     <message>
         <source>ctrl+shift+home</source>
@@ -7209,7 +7209,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of score</source>
-        <translation>Velg til slutten av partitur</translation>
+        <translation>Velg til slutten av noteark</translation>
     </message>
     <message>
         <source>ctrl+shift+end</source>
@@ -7325,7 +7325,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation>Andre noteinndelinger</translation>
+        <translation>Andre noteoppdelinger</translation>
     </message>
     <message>
         <source>Other...</source>
@@ -8413,7 +8413,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation>Stemmer...</translation>
+        <translation>Instrumentoppdelinger...</translation>
     </message>
 </context>
 <context>
@@ -8563,11 +8563,11 @@ p, li { white-space: pre-wrap; }
     <name>clefTable</name>
     <message>
         <source>Tablature</source>
-        <translation>Tablatur</translation>
+        <translation>Tablaturnøkkel</translation>
     </message>
     <message>
         <source>Percussion</source>
-        <translation>Perkusjon</translation>
+        <translation>Perkusjonsnøkkel</translation>
     </message>
     <message>
         <source>Treble clef</source>
@@ -8627,7 +8627,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>French violin clef</source>
-        <translation>Fransknøkkel</translation>
+        <translation>Fransk nøkkel</translation>
     </message>
     <message>
         <source>Bass clef 8va</source>
@@ -8650,7 +8650,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Side Stick</source>
-        <translation type="unfinished"/>
+        <translation>Kantslag</translation>
     </message>
     <message>
         <source>Snare (Acoustic)</source>
@@ -8706,7 +8706,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished"/>
+        <translation>China-cymbal</translation>
     </message>
     <message>
         <source>Ride (Bell)</source>
@@ -8718,11 +8718,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>open high conga</source>
-        <translation type="unfinished"/>
+        <translation>Åpen høy conga</translation>
     </message>
     <message>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation>Lav conga</translation>
     </message>
 </context>
 <context>
@@ -9118,7 +9118,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>dot dot</source>
-        <translation>Dobbelpunkt</translation>
+        <translation>Dobbelpunktering</translation>
     </message>
     <message>
         <source>whole rest</source>
@@ -9834,27 +9834,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acc dot</source>
-        <translation type="unfinished"/>
+        <translation>Trekkspill punkt</translation>
     </message>
     <message>
         <source>acc freebase</source>
-        <translation type="unfinished"/>
+        <translation>Trekkspill fribase</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation type="unfinished"/>
+        <translation>Trekkspill standardbase</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished"/>
+        <translation>Trekkspill bayan-base</translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation type="unfinished"/>
+        <translation>Trekkspill gammel EE</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation type="unfinished"/>
+        <translation>Trekkspill diskant</translation>
     </message>
     <message>
         <source>zero</source>

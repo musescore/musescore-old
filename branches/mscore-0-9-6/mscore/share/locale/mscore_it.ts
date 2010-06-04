@@ -1207,7 +1207,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Write File failed: </source>
-        <translation type="unfinished"/>
+        <translation>Scrittura del file fallita: </translation>
     </message>
 </context>
 <context>
@@ -1412,7 +1412,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation>Unisono</translation>
+        <translation>Unisono giusto</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -1420,19 +1420,19 @@ fallito: </translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation>Seconda Diminuita</translation>
+        <translation>Seconda diminuita</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation>Seconda Minore</translation>
+        <translation>Seconda minore</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation>Seconda Maggiore</translation>
+        <translation>Seconda maggiore</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation>Seconda Aumentata</translation>
+        <translation>Seconda aumentata</translation>
     </message>
     <message>
         <source>Diminished Third</source>
@@ -2060,7 +2060,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation type="unfinished"/>
+        <translation>Part-%1</translation>
     </message>
 </context>
 <context>
@@ -2420,7 +2420,7 @@ fallito: </translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation>Scittura dello stile fallita: </translation>
     </message>
 </context>
 <context>
@@ -3202,7 +3202,7 @@ fallito: </translation>
     </message>
     <message>
         <source>System</source>
-        <translation>Accollatura</translation>
+        <translation>Sistema (*)</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -3643,7 +3643,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Tutti i file supportati (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;File MuseScore (*.mscz *.mscx *.msc);;File MusicXML (*.xml *.mxl);;File MIDI (*.mid *.midi *.kar);;File Muse Data (*.md);;File Capella (*.cap);;File BB &lt;sperimentale&gt; (*.mgu *.MGU *.sgu *.SGU);;File Overture &lt;sperimentale&gt; (*.ove);;Tutti i files (*)</translation>
     </message>
 </context>
 <context>
@@ -3787,7 +3787,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Tuning</source>
-        <translation type="unfinished"/>
+        <translation>Accordatura</translation>
     </message>
     <message>
         <source>OnTime:</source>
@@ -4200,7 +4200,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Instrument List (*.xml)</source>
-        <translation>Elenco strumenti</translation>
+        <translation>Elenco strumenti (*.xml)</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
@@ -4275,7 +4275,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>show splash screen</source>
-        <translation>Mostra Logo Programma</translation>
+        <translation>Schermata di caricamento</translation>
     </message>
     <message>
         <source>Misc.</source>
@@ -4467,7 +4467,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>I/O</source>
-        <translation>Sintetizzatore</translation>
+        <translation>I/O e suoni</translation>
     </message>
     <message>
         <source>Ports</source>
@@ -4768,7 +4768,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation>Seleziona l'interfaccia di input PortMIDI</translation>
+        <translation>Seleziona la periferica di input PortMIDI</translation>
     </message>
     <message>
         <source>Use Current Position</source>
@@ -5231,11 +5231,11 @@ Prova a salvare in una posizione differente</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation>Scittura dello stile fallita: </translation>
     </message>
     <message>
         <source>Load failed: </source>
-        <translation type="unfinished"/>
+        <translation>Caricamento fallito: </translation>
     </message>
 </context>
 <context>
@@ -5404,16 +5404,18 @@ Prova a salvare in una posizione differente</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Inizializzazione del driver audio fallita.&#13;
+Il sequencer sarà disabilitato.</translation>
     </message>
     <message>
         <source>MuseScore: Load SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: carica libreria di suoni (soundfont)</translation>
     </message>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Non è configurata la libreria di suoni (soundfont)&#13;
+La riproduzione sarà disabilitata</translation>
     </message>
     <message>
         <source>Loading SoundFont
@@ -5422,7 +5424,12 @@ failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation type="unfinished"/>
+        <translation>Il caricamento della libreria di suoni (soundfont)&#13;
+"%1"&#13;
+è fallito. La riproduzione sarà disabilitata.&#13;
+&#13;
+Vai a Mostra &gt; Sintetizzatore&#13;
+e verifica che la posizione del file sia corretta</translation>
     </message>
 </context>
 <context>
@@ -6206,11 +6213,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4 tempo comune</translation>
+        <translation>4/4 tempo comune</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 alla breve</translation>
+        <translation>2/2 alla breve</translation>
     </message>
 </context>
 <context>
@@ -6369,7 +6376,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Closest</source>
-        <translation type="unfinished"/>
+        <translation>Tonalità vicina</translation>
     </message>
     <message>
         <source>Transpose by Interval</source>
@@ -6377,107 +6384,107 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation>unisono perfetto</translation>
+        <translation>Unisono giusto</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation>unisono aumentato</translation>
+        <translation>Unisono aumentato</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation>seconda diminuita</translation>
+        <translation>Seconda diminuita</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation>seconda minore</translation>
+        <translation>Seconda minore</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation>seconda maggiore</translation>
+        <translation>Seconda maggiore</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation>seconda aumentata</translation>
+        <translation>Seconda aumentata</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation>terza diminuita</translation>
+        <translation>Terza diminuita</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation>terza minore</translation>
+        <translation>Terza minore</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation>terza maggiore</translation>
+        <translation>Terza maggiore</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation>terza aumentata</translation>
+        <translation>Terza aumentata</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation>quarta diminuita</translation>
+        <translation>Quarta diminuita</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation>quarta perfetta</translation>
+        <translation>Quarta giusta</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation>quarta aumentata</translation>
+        <translation>Quarta aumentata</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation>quinta diminuita</translation>
+        <translation>Quinta diminuita</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation>quinta perfetta</translation>
+        <translation>Quinta giusta</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation>quinta aumentata</translation>
+        <translation>Quinta aumentata</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation>sesta diminuita</translation>
+        <translation>Sesta diminuita</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation>sesta minore</translation>
+        <translation>Sesta minore</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation>sesta maggiore</translation>
+        <translation>Sesta maggiore</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation>sesta aumentata</translation>
+        <translation>Sesta aumentata</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation>settima diminuita</translation>
+        <translation>Settima diminuita</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation>settima minore</translation>
+        <translation>Settima minore</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation>settima maggiore</translation>
+        <translation>Settima maggiore</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation>settima aumentata</translation>
+        <translation>Settima aumentata</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation>ottava diminuita</translation>
+        <translation>Ottava diminuita</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation>ottava perfetta</translation>
+        <translation>Ottava giusta</translation>
     </message>
     <message>
         <source>Options</source>
@@ -6892,15 +6899,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Unison Above</source>
-        <translation>unisono superiore</translation>
+        <translation>Unisono superiore</translation>
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation>Inserisci unisono seperiore</translation>
+        <translation>Inserisci unisono superiore</translation>
     </message>
     <message>
         <source>Second Above</source>
-        <translation>seconda superiore</translation>
+        <translation>Seconda superiore</translation>
     </message>
     <message>
         <source>Enter second above</source>
@@ -6908,7 +6915,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Third Above</source>
-        <translation>terza superiore</translation>
+        <translation>Terza superiore</translation>
     </message>
     <message>
         <source>Enter third above</source>
@@ -6916,7 +6923,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Fourth Above</source>
-        <translation>quarta superiore</translation>
+        <translation>Quarta superiore</translation>
     </message>
     <message>
         <source>Enter fourth above</source>
@@ -6924,7 +6931,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Fifth Above</source>
-        <translation>quinta superiore</translation>
+        <translation>Quinta superiore</translation>
     </message>
     <message>
         <source>Enter fifth above</source>
@@ -6932,7 +6939,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Sixth Above</source>
-        <translation>sesta superiore</translation>
+        <translation>Sesta superiore</translation>
     </message>
     <message>
         <source>Enter sixth above</source>
@@ -6940,7 +6947,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Seventh Above</source>
-        <translation>settima superiore</translation>
+        <translation>Settima superiore</translation>
     </message>
     <message>
         <source>Enter seventh above</source>
@@ -6948,7 +6955,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Octave Above</source>
-        <translation>ottava superiore</translation>
+        <translation>Ottava superiore</translation>
     </message>
     <message>
         <source>Enter octave above</source>
@@ -6964,7 +6971,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Second Below</source>
-        <translation>seconda inferiore</translation>
+        <translation>Seconda inferiore</translation>
     </message>
     <message>
         <source>Enter second below</source>
@@ -6972,7 +6979,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Third Below</source>
-        <translation>terza inferiore</translation>
+        <translation>Terza inferiore</translation>
     </message>
     <message>
         <source>Enter third below</source>
@@ -6980,7 +6987,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Fourth Below</source>
-        <translation>quarta inferiore</translation>
+        <translation>Quarta inferiore</translation>
     </message>
     <message>
         <source>Enter fourth below</source>
@@ -6988,7 +6995,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Fifth Below</source>
-        <translation>quinta inferiore</translation>
+        <translation>Quinta inferiore</translation>
     </message>
     <message>
         <source>Enter fifth below</source>
@@ -6996,7 +7003,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Sixth Below</source>
-        <translation>sesta inferiore</translation>
+        <translation>Sesta inferiore</translation>
     </message>
     <message>
         <source>Enter sixth below</source>
@@ -7004,7 +7011,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Seventh Below</source>
-        <translation>settima inferiore</translation>
+        <translation>Settima inferiore</translation>
     </message>
     <message>
         <source>Enter seventh below</source>
@@ -7012,7 +7019,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Octave Below</source>
-        <translation>ottava inferiore</translation>
+        <translation>Ottava inferiore</translation>
     </message>
     <message>
         <source>Enter octave below</source>
@@ -7972,11 +7979,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>double duration</source>
-        <translation>durata doppia</translation>
+        <translation>raddoppia durata della nota</translation>
     </message>
     <message>
         <source>half duration</source>
-        <translation type="unfinished"/>
+        <translation>dimezza durata della nota</translation>
     </message>
     <message>
         <source>repeat selection</source>
