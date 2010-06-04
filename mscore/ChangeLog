@@ -1,3 +1,5 @@
+4.jun (ws)
+      - fix #5957: Play/Don't play repeat dies not have immediate effect
 3.jun (ws)
       - changed behaviour of measure->add(Segment*) which fixes
         #5932 overture file import error
