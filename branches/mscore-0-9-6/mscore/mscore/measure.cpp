@@ -2941,7 +2941,7 @@ void Measure::layoutX(double stretch)
       memset(rest, 0, nstaves * sizeof(double));
       //--------tick table for segments
       int ticks[segs];
-      memset(ticks, 0, (segs + 1) * sizeof(int));
+      memset(ticks, 0, segs * sizeof(int));
 
       double xpos[segs+1];
       int types[segs];

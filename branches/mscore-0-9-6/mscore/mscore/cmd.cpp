@@ -1868,7 +1868,8 @@ void Score::cmd(const QAction* a)
             printFile();
       else if (cmd == "repeat"){
             preferences.playRepeats = !preferences.playRepeats;
-            seq->collectEvents();
+            updateRepeatList(preferences.playRepeats);
+            _playlistDirty = true;
             }
       else if (cmd == "rewind")
             seq->rewindStart();
