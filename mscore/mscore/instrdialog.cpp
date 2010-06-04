@@ -540,6 +540,10 @@ void MuseScore::editInstrList()
                         staff->clefList()->setClef(0, sli->clef());
                         staff->setLines(t->staffLines[cidx]);
                         staff->setSmall(t->smallStaff[cidx]);
+
+                        // TODO: find out the right key signature
+                        // staff->setKey(0, nKey);
+
                         if (cidx == 0) {
                               staff->setBracket(0, t->bracket);
                               staff->setBracketSpan(0, t->staves);
@@ -576,10 +580,9 @@ void MuseScore::editInstrList()
                               }
                         else if (sli->op == ITEM_ADD) {
                               Staff* staff = new Staff(cs, part, rstaff);
-                              sli->staff = staff;
+                              sli->staff   = staff;
                               staff->setRstaff(rstaff);
                               ++rstaff;
-                              staff->clefList()->setClef(0, sli->clef());
 
                               cs->undoInsertStaff(staff, staffIdx);
 
@@ -591,6 +594,11 @@ void MuseScore::editInstrList()
                                     }
 
                               cs->adjustBracketsIns(staffIdx, staffIdx+1);
+
+                              staff->clefList()->setClef(0, sli->clef());
+                              KeySigEvent nKey = part->staff(0)->key(0);
+                              staff->setKey(0, nKey);
+
                               ++staffIdx;
                               }
                         else {
