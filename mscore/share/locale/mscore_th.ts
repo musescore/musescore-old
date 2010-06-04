@@ -5,15 +5,15 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation type="unfinished"/>
+        <translation>เกี่ยวกับ</translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation type="unfinished"/>
+        <translation>รุ่น: 0.9.0</translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation type="unfinished"/>
+        <translation>ปรับปรุง: 628</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -26,123 +26,132 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;!DOCTYPE  HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;line break&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;line break&#13;
+p, li { white-space: pre-wrap; }line break&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;เยี่ยมชม &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; สำหรับรุ่นใหม่และข้อมูลเพิ่มเติม&lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;สนับสนุน MuseScore โดยการ&lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;บริจาคของคุณ&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break&#13;
+line break&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;สงวนลิขสิทธื์ &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others &lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;เผยแพร่ภายใต้ลิขสิทธิ์สาธารณะทั่วไป GNU&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished"/>
+        <translation>การออกรุ่นทดลองที่ยังไม่เสถียรสำหรับรุ่น: </translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation type="unfinished"/>
+        <translation>รุ่น </translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation type="unfinished"/>
+        <translation>ปรับปรุง: %1</translation>
     </message>
 </context>
 <context>
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished"/>
+        <translation>วงเล็บ</translation>
     </message>
 </context>
 <context>
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติการออกเสียง</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: คุณสมบัติการออกเสียง</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"/>
+        <translation>ช่องสัญญาณ</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished"/>
+        <translation>การกระทำมิดิ</translation>
     </message>
 </context>
 <context>
     <name>BarLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>BarLine</source>
-        <translation type="unfinished"/>
+        <translation>เส้นกั้นห้อง</translation>
     </message>
     <message>
         <source>SubType:</source>
-        <translation type="unfinished"/>
+        <translation>ชนิดย่อย:</translation>
     </message>
 </context>
 <context>
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>up:</source>
-        <translation type="unfinished"/>
+        <translation>ขึ้น</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished"/>
+        <translation>คอร์ด/พัก</translation>
     </message>
 </context>
 <context>
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: คุณสมบัติเฟรม</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"/>
+        <translation>ขอบกระดาษ</translation>
     </message>
     <message>
         <source>left:</source>
-        <translation type="unfinished"/>
+        <translation>ซ้าย:</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"/>
+        <translation>มม</translation>
     </message>
     <message>
         <source>right:</source>
-        <translation type="unfinished"/>
+        <translation>ขวา:</translation>
     </message>
     <message>
         <source>bottom:</source>
-        <translation type="unfinished"/>
+        <translation>ล้าง:</translation>
     </message>
     <message>
         <source>top:</source>
-        <translation type="unfinished"/>
+        <translation>บน:</translation>
     </message>
 </context>
 <context>
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished"/>
+        <translation>อาร์เปจโจ</translation>
     </message>
     <message>
         <source>Tremolo</source>
@@ -157,663 +166,663 @@ p, li { white-space: pre-wrap; }
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: คุณสมบัติภาวะบรรสาน</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"/>
+        <translation>ป้ายข้อความ</translation>
     </message>
     <message>
         <source>Root</source>
-        <translation type="unfinished"/>
+        <translation>ราก</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished"/>
+        <translation>C</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished"/>
+        <translation>E</translation>
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation type="unfinished"/>
+        <translation>bb (แฟล็ตคู่)</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"/>
+        <translation>F</translation>
     </message>
     <message>
         <source>b (flat)</source>
-        <translation type="unfinished"/>
+        <translation>b (แฟล็ต)</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished"/>
+        <translation>G</translation>
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation type="unfinished"/>
+        <translation>(ไม่มีเครื่องหมายแปลงเสียง)</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished"/>
+        <translation>A</translation>
     </message>
     <message>
         <source># (sharp)</source>
-        <translation type="unfinished"/>
+        <translation># (ชาร์ป)</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"/>
+        <translation>B</translation>
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation type="unfinished"/>
+        <translation>## (ชาร์ปคู่)</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"/>
+        <translation>D</translation>
     </message>
     <message>
         <source>Extension</source>
-        <translation type="unfinished"/>
+        <translation>ส่วนขยาย</translation>
     </message>
     <message>
         <source>Maj</source>
-        <translation type="unfinished"/>
+        <translation>Maj</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"/>
+        <translation>2</translation>
     </message>
     <message>
         <source>Maj7</source>
-        <translation type="unfinished"/>
+        <translation>Maj7</translation>
     </message>
     <message>
         <source>Maj9</source>
-        <translation type="unfinished"/>
+        <translation>Maj9</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"/>
+        <translation>6</translation>
     </message>
     <message>
         <source>69</source>
-        <translation type="unfinished"/>
+        <translation>69</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"/>
+        <translation>m</translation>
     </message>
     <message>
         <source>m7</source>
-        <translation type="unfinished"/>
+        <translation>m7</translation>
     </message>
     <message>
         <source>m7b5</source>
-        <translation type="unfinished"/>
+        <translation>m7b5</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"/>
+        <translation>7</translation>
     </message>
     <message>
         <source>sus</source>
-        <translation type="unfinished"/>
+        <translation>sus</translation>
     </message>
     <message>
         <source>7Sus</source>
-        <translation type="unfinished"/>
+        <translation>7Sus</translation>
     </message>
     <message>
         <source>m6</source>
-        <translation type="unfinished"/>
+        <translation>m6</translation>
     </message>
     <message>
         <source>m9</source>
-        <translation type="unfinished"/>
+        <translation>m9</translation>
     </message>
     <message>
         <source>mMaj7</source>
-        <translation type="unfinished"/>
+        <translation>mMaj7</translation>
     </message>
     <message>
         <source>dim</source>
-        <translation type="unfinished"/>
+        <translation>dim</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"/>
+        <translation>9</translation>
     </message>
     <message>
         <source>13</source>
-        <translation type="unfinished"/>
+        <translation>13</translation>
     </message>
     <message>
         <source>7b9</source>
-        <translation type="unfinished"/>
+        <translation>7b9</translation>
     </message>
     <message>
         <source>Other:</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มเติม:</translation>
     </message>
     <message>
         <source>5b</source>
-        <translation type="unfinished"/>
+        <translation>5b</translation>
     </message>
     <message>
         <source>aug</source>
-        <translation type="unfinished"/>
+        <translation>aug</translation>
     </message>
     <message>
         <source>Maj9#11</source>
-        <translation type="unfinished"/>
+        <translation>Maj9#11</translation>
     </message>
     <message>
         <source>Maj13#11</source>
-        <translation type="unfinished"/>
+        <translation>Maj13#11</translation>
     </message>
     <message>
         <source>Maj13</source>
-        <translation type="unfinished"/>
+        <translation>Maj13</translation>
     </message>
     <message>
         <source>+</source>
-        <translation type="unfinished"/>
+        <translation>+</translation>
     </message>
     <message>
         <source>Maj7#5</source>
-        <translation type="unfinished"/>
+        <translation>Maj7#5</translation>
     </message>
     <message>
         <source>maug</source>
-        <translation type="unfinished"/>
+        <translation>maug</translation>
     </message>
     <message>
         <source>m11</source>
-        <translation type="unfinished"/>
+        <translation>m11</translation>
     </message>
     <message>
         <source>m13</source>
-        <translation type="unfinished"/>
+        <translation>m13</translation>
     </message>
     <message>
         <source>m#5</source>
-        <translation type="unfinished"/>
+        <translation>m#5</translation>
     </message>
     <message>
         <source>m7#5</source>
-        <translation type="unfinished"/>
+        <translation>m7#5</translation>
     </message>
     <message>
         <source>m69</source>
-        <translation type="unfinished"/>
+        <translation>m69</translation>
     </message>
     <message>
         <source>Maj7Lyd</source>
-        <translation type="unfinished"/>
+        <translation>Maj7Lyd</translation>
     </message>
     <message>
         <source>Maj7b5</source>
-        <translation type="unfinished"/>
+        <translation>Maj7b5</translation>
     </message>
     <message>
         <source>m9b5</source>
-        <translation type="unfinished"/>
+        <translation>m9b5</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"/>
+        <translation>5</translation>
     </message>
     <message>
         <source>7+</source>
-        <translation type="unfinished"/>
+        <translation>7+</translation>
     </message>
     <message>
         <source>9+</source>
-        <translation type="unfinished"/>
+        <translation>9+</translation>
     </message>
     <message>
         <source>13+</source>
-        <translation type="unfinished"/>
+        <translation>13+</translation>
     </message>
     <message>
         <source>(blues)</source>
-        <translation type="unfinished"/>
+        <translation>(บลูส์)</translation>
     </message>
     <message>
         <source>7(Blues)</source>
-        <translation type="unfinished"/>
+        <translation>7(บลูส์)</translation>
     </message>
     <message>
         <source>7b13</source>
-        <translation type="unfinished"/>
+        <translation>7b13</translation>
     </message>
     <message>
         <source>7#11</source>
-        <translation type="unfinished"/>
+        <translation>7#11</translation>
     </message>
     <message>
         <source>13#11</source>
-        <translation type="unfinished"/>
+        <translation>13#11</translation>
     </message>
     <message>
         <source>7#11b13</source>
-        <translation type="unfinished"/>
+        <translation>7#11b13</translation>
     </message>
     <message>
         <source>9b13</source>
-        <translation type="unfinished"/>
+        <translation>9b13</translation>
     </message>
     <message>
         <source>9#11</source>
-        <translation type="unfinished"/>
+        <translation>9#11</translation>
     </message>
     <message>
         <source>9#11b13</source>
-        <translation type="unfinished"/>
+        <translation>9#11b13</translation>
     </message>
     <message>
         <source>13b9</source>
-        <translation type="unfinished"/>
+        <translation>13b9</translation>
     </message>
     <message>
         <source>7b9b13</source>
-        <translation type="unfinished"/>
+        <translation>7b9b13</translation>
     </message>
     <message>
         <source>7b9#11</source>
-        <translation type="unfinished"/>
+        <translation>7b9#11</translation>
     </message>
     <message>
         <source>13b9#11</source>
-        <translation type="unfinished"/>
+        <translation>13b9#11</translation>
     </message>
     <message>
         <source>7b9#11b13</source>
-        <translation type="unfinished"/>
+        <translation>7b9#11b13</translation>
     </message>
     <message>
         <source>7#9</source>
-        <translation type="unfinished"/>
+        <translation>7#9</translation>
     </message>
     <message>
         <source>13#9</source>
-        <translation type="unfinished"/>
+        <translation>13#9</translation>
     </message>
     <message>
         <source>7#9b13</source>
-        <translation type="unfinished"/>
+        <translation>7#9b13</translation>
     </message>
     <message>
         <source>13#9#11</source>
-        <translation type="unfinished"/>
+        <translation>13#9#11</translation>
     </message>
     <message>
         <source>7#9#11b13</source>
-        <translation type="unfinished"/>
+        <translation>7#9#11b13</translation>
     </message>
     <message>
         <source>7b5</source>
-        <translation type="unfinished"/>
+        <translation>7b5</translation>
     </message>
     <message>
         <source>13b5</source>
-        <translation type="unfinished"/>
+        <translation>13b5</translation>
     </message>
     <message>
         <source>7b5b13</source>
-        <translation type="unfinished"/>
+        <translation>7b5b13</translation>
     </message>
     <message>
         <source>9b5</source>
-        <translation type="unfinished"/>
+        <translation>9b5</translation>
     </message>
     <message>
         <source>9b5b13</source>
-        <translation type="unfinished"/>
+        <translation>9b5b13</translation>
     </message>
     <message>
         <source>7b5b9</source>
-        <translation type="unfinished"/>
+        <translation>7b5b9</translation>
     </message>
     <message>
         <source>13b5b9</source>
-        <translation type="unfinished"/>
+        <translation>13b5b9</translation>
     </message>
     <message>
         <source>7b5b9b13</source>
-        <translation type="unfinished"/>
+        <translation>7b5b9b13</translation>
     </message>
     <message>
         <source>7b5#9</source>
-        <translation type="unfinished"/>
+        <translation>7b5#9</translation>
     </message>
     <message>
         <source>13b5#9</source>
-        <translation type="unfinished"/>
+        <translation>13b5#9</translation>
     </message>
     <message>
         <source>7b5#9b13</source>
-        <translation type="unfinished"/>
+        <translation>7b5#9b13</translation>
     </message>
     <message>
         <source>7#5</source>
-        <translation type="unfinished"/>
+        <translation>7#5</translation>
     </message>
     <message>
         <source>13#5</source>
-        <translation type="unfinished"/>
+        <translation>13#5</translation>
     </message>
     <message>
         <source>7#5#11</source>
-        <translation type="unfinished"/>
+        <translation>7#5#11</translation>
     </message>
     <message>
         <source>13#5#11</source>
-        <translation type="unfinished"/>
+        <translation>13#5#11</translation>
     </message>
     <message>
         <source>9#5</source>
-        <translation type="unfinished"/>
+        <translation>9#5</translation>
     </message>
     <message>
         <source>9#5#11</source>
-        <translation type="unfinished"/>
+        <translation>9#5#11</translation>
     </message>
     <message>
         <source>7#5b9</source>
-        <translation type="unfinished"/>
+        <translation>7#5b9</translation>
     </message>
     <message>
         <source>13#5b9</source>
-        <translation type="unfinished"/>
+        <translation>13#5b9</translation>
     </message>
     <message>
         <source>7#5b9#11</source>
-        <translation type="unfinished"/>
+        <translation>7#5b9#11</translation>
     </message>
     <message>
         <source>13#5b9#11</source>
-        <translation type="unfinished"/>
+        <translation>13#5b9#11</translation>
     </message>
     <message>
         <source>7#5#9</source>
-        <translation type="unfinished"/>
+        <translation>7#5#9</translation>
     </message>
     <message>
         <source>13#5#9#11</source>
-        <translation type="unfinished"/>
+        <translation>13#5#9#11</translation>
     </message>
     <message>
         <source>7#5#9#11</source>
-        <translation type="unfinished"/>
+        <translation>7#5#9#11</translation>
     </message>
     <message>
         <source>7alt</source>
-        <translation type="unfinished"/>
+        <translation>7alt</translation>
     </message>
     <message>
         <source>7sus</source>
-        <translation type="unfinished"/>
+        <translation>7sus</translation>
     </message>
     <message>
         <source>13sus</source>
-        <translation type="unfinished"/>
+        <translation>13sus</translation>
     </message>
     <message>
         <source>7susb13</source>
-        <translation type="unfinished"/>
+        <translation>7susb13</translation>
     </message>
     <message>
         <source>7sus#11</source>
-        <translation type="unfinished"/>
+        <translation>7sus#11</translation>
     </message>
     <message>
         <source>13sus#11</source>
-        <translation type="unfinished"/>
+        <translation>13sus#11</translation>
     </message>
     <message>
         <source>7sus#11b13</source>
-        <translation type="unfinished"/>
+        <translation>7sus#11b13</translation>
     </message>
     <message>
         <source>9sus</source>
-        <translation type="unfinished"/>
+        <translation>9sus</translation>
     </message>
     <message>
         <source>9susb13</source>
-        <translation type="unfinished"/>
+        <translation>9susb13</translation>
     </message>
     <message>
         <source>9sus#11</source>
-        <translation type="unfinished"/>
+        <translation>9sus#11</translation>
     </message>
     <message>
         <source>9sus#11b13</source>
-        <translation type="unfinished"/>
+        <translation>9sus#11b13</translation>
     </message>
     <message>
         <source>7susb9</source>
-        <translation type="unfinished"/>
+        <translation>7susb9</translation>
     </message>
     <message>
         <source>13susb9</source>
-        <translation type="unfinished"/>
+        <translation>13susb9</translation>
     </message>
     <message>
         <source>7susb9b13</source>
-        <translation type="unfinished"/>
+        <translation>7susb9b13</translation>
     </message>
     <message>
         <source>7susb9#11</source>
-        <translation type="unfinished"/>
+        <translation>7susb9#11</translation>
     </message>
     <message>
         <source>13susb9#11</source>
-        <translation type="unfinished"/>
+        <translation>13susb9#11</translation>
     </message>
     <message>
         <source>7susb9#11b13</source>
-        <translation type="unfinished"/>
+        <translation>7susb9#11b13</translation>
     </message>
     <message>
         <source>7sus#9</source>
-        <translation type="unfinished"/>
+        <translation>7sus#9</translation>
     </message>
     <message>
         <source>13sus#9</source>
-        <translation type="unfinished"/>
+        <translation>13sus#9</translation>
     </message>
     <message>
         <source>7sus#9b13</source>
-        <translation type="unfinished"/>
+        <translation>7sus#9b13</translation>
     </message>
     <message>
         <source>13sus#9#11</source>
-        <translation type="unfinished"/>
+        <translation>13sus#9#11</translation>
     </message>
     <message>
         <source>7sus#9#11b13</source>
-        <translation type="unfinished"/>
+        <translation>7sus#9#11b13</translation>
     </message>
     <message>
         <source>7susb5</source>
-        <translation type="unfinished"/>
+        <translation>7susb5</translation>
     </message>
     <message>
         <source>13susb5</source>
-        <translation type="unfinished"/>
+        <translation>13susb5</translation>
     </message>
     <message>
         <source>7susb5b13</source>
-        <translation type="unfinished"/>
+        <translation>7susb5b13</translation>
     </message>
     <message>
         <source>9susb5</source>
-        <translation type="unfinished"/>
+        <translation>9susb5</translation>
     </message>
     <message>
         <source>9susb5b13</source>
-        <translation type="unfinished"/>
+        <translation>9susb5b13</translation>
     </message>
     <message>
         <source>7susb5b9</source>
-        <translation type="unfinished"/>
+        <translation>7susb5b9</translation>
     </message>
     <message>
         <source>13susb5b9</source>
-        <translation type="unfinished"/>
+        <translation>13susb5b9</translation>
     </message>
     <message>
         <source>7susb5b9b13</source>
-        <translation type="unfinished"/>
+        <translation>7susb5b9b13</translation>
     </message>
     <message>
         <source>7susb5#9</source>
-        <translation type="unfinished"/>
+        <translation>7susb5#9</translation>
     </message>
     <message>
         <source>13susb5#9</source>
-        <translation type="unfinished"/>
+        <translation>13susb5#9</translation>
     </message>
     <message>
         <source>7susb5#9b13</source>
-        <translation type="unfinished"/>
+        <translation>7susb5#9b13</translation>
     </message>
     <message>
         <source>7sus#5</source>
-        <translation type="unfinished"/>
+        <translation>7sus#5</translation>
     </message>
     <message>
         <source>13sus#5</source>
-        <translation type="unfinished"/>
+        <translation>13sus#5</translation>
     </message>
     <message>
         <source>7sus#5#11</source>
-        <translation type="unfinished"/>
+        <translation>7sus#5#11</translation>
     </message>
     <message>
         <source>13sus#5#11</source>
-        <translation type="unfinished"/>
+        <translation>13sus#5#11</translation>
     </message>
     <message>
         <source>9sus#5</source>
-        <translation type="unfinished"/>
+        <translation>9sus#5</translation>
     </message>
     <message>
         <source>9sus#5#11</source>
-        <translation type="unfinished"/>
+        <translation>9sus#5#11</translation>
     </message>
     <message>
         <source>7sus#5b9</source>
-        <translation type="unfinished"/>
+        <translation>7sus#5b9</translation>
     </message>
     <message>
         <source>13sus#5b9</source>
-        <translation type="unfinished"/>
+        <translation>13sus#5b9</translation>
     </message>
     <message>
         <source>7sus#5b9#11</source>
-        <translation type="unfinished"/>
+        <translation>7sus#5b9#11</translation>
     </message>
     <message>
         <source>13sus#5b9#11</source>
-        <translation type="unfinished"/>
+        <translation>13sus#5b9#11</translation>
     </message>
     <message>
         <source>7sus#5#9</source>
-        <translation type="unfinished"/>
+        <translation>7sus#5#9</translation>
     </message>
     <message>
         <source>13sus#5#9#11</source>
-        <translation type="unfinished"/>
+        <translation>13sus#5#9#11</translation>
     </message>
     <message>
         <source>7sus#5#9#11</source>
-        <translation type="unfinished"/>
+        <translation>7sus#5#9#11</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"/>
+        <translation>4</translation>
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished"/>
+        <translation>องศา</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่ม</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>ลบ</translation>
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation type="unfinished"/>
+        <translation>โน้ตเบส/การผักผัน</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มี</translation>
     </message>
     <message>
         <source>/C</source>
-        <translation type="unfinished"/>
+        <translation>/C</translation>
     </message>
     <message>
         <source>/Db</source>
-        <translation type="unfinished"/>
+        <translation>/Db</translation>
     </message>
     <message>
         <source>/D</source>
-        <translation type="unfinished"/>
+        <translation>/D</translation>
     </message>
     <message>
         <source>/Eb</source>
-        <translation type="unfinished"/>
+        <translation>/Eb</translation>
     </message>
     <message>
         <source>/E</source>
-        <translation type="unfinished"/>
+        <translation>/E</translation>
     </message>
     <message>
         <source>/F</source>
-        <translation type="unfinished"/>
+        <translation>/F</translation>
     </message>
     <message>
         <source>/F#</source>
-        <translation type="unfinished"/>
+        <translation>/F#</translation>
     </message>
     <message>
         <source>/G</source>
-        <translation type="unfinished"/>
+        <translation>/G</translation>
     </message>
     <message>
         <source>/Ab</source>
-        <translation type="unfinished"/>
+        <translation>/Ab</translation>
     </message>
     <message>
         <source>/A</source>
-        <translation type="unfinished"/>
+        <translation>/A</translation>
     </message>
     <message>
         <source>/Bb</source>
-        <translation type="unfinished"/>
+        <translation>/Bb</translation>
     </message>
     <message>
         <source>/B</source>
-        <translation type="unfinished"/>
+        <translation>/B</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation>1</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"/>
+        <translation>3</translation>
     </message>
     <message>
         <source>Type</source>
@@ -839,360 +848,362 @@ p, li { white-space: pre-wrap; }
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติคอร์ด</translation>
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished"/>
+        <translation>เล็ก</translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มีขีดตั้ง</translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation type="unfinished"/>
+        <translation>ช่องว่างเริ่มต้นเพิ่มเติม </translation>
     </message>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"/>
+        <translation>sp</translation>
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation type="unfinished"/>
+        <translation>ช่องว่างท้ายสุดเพิ่มเติม</translation>
     </message>
     <message>
         <source>stem direction</source>
-        <translation type="unfinished"/>
+        <translation>ทิศทางขีดตั้ง</translation>
     </message>
     <message>
         <source>auto</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>อัตโนมัติ</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished"/>
+        <translation>ขึ้น</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished"/>
+        <translation>ลง</translation>
     </message>
     <message>
         <source>Note Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติโน้ต</translation>
     </message>
     <message>
         <source>tuning offset</source>
-        <translation type="unfinished"/>
+        <translation>ความเฉในการปรับระดับ</translation>
     </message>
     <message>
         <source>velocity type</source>
-        <translation type="unfinished"/>
+        <translation>ชนิดความเร็ว</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation type="unfinished"/>
+        <translation>ความเร็ว (0-127)</translation>
     </message>
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>ผู้ใช้</translation>
     </message>
     <message>
         <source>offset</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>ความเฉ</translation>
     </message>
     <message>
         <source>note head positon </source>
-        <translation type="unfinished"/>
+        <translation>ตำแหน่งหัวโน้ต </translation>
     </message>
     <message>
         <source>left of stem</source>
-        <translation type="unfinished"/>
+        <translation>ซ้ายของขีดตั้ง</translation>
     </message>
     <message>
         <source>right of stem</source>
-        <translation type="unfinished"/>
+        <translation>ขวาของขีดตั้ง</translation>
     </message>
     <message>
         <source>ontime offset type</source>
-        <translation type="unfinished"/>
+        <translation>ชนิดความเฉเชิงเวลา</translation>
     </message>
     <message>
         <source>ontime offset</source>
-        <translation type="unfinished"/>
+        <translation>ความเฉเชิงเวลา</translation>
     </message>
     <message>
         <source>offtime offset type</source>
-        <translation type="unfinished"/>
+        <translation>ชนิดความเฉนอกเวลา</translation>
     </message>
     <message>
         <source>offtime</source>
-        <translation type="unfinished"/>
+        <translation>นอกเวลา</translation>
     </message>
     <message>
         <source> cent</source>
         <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"/>
+        <translation> เซนต์</translation>
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"/>
+        <translation> จังหวะ</translation>
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished"/>
+        <translation>กลุ่มหัวโน้ต</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished"/>
+        <translation>ชนิดหัวโน้ต</translation>
     </message>
     <message>
         <source>normal</source>
-        <translation type="unfinished"/>
+        <translation>ปกติ</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished"/>
+        <translation>ตัดกัน</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation>เพชร</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished"/>
+        <translation>สามเหลี่ยม</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished"/>
+        <translation>ทับ</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation>วงกลม</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished"/>
+        <translation>โด</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished"/>
+        <translation>เร</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"/>
+        <translation>มี</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished"/>
+        <translation>ฟา</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished"/>
+        <translation>ลา</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished"/>
+        <translation>ที</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"/>
+        <translation>อัตโนมัติ</translation>
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished"/>
+        <translation>ตัวกลม</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished"/>
+        <translation>ตัวขาว</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished"/>
+        <translation>ตัวดำ</translation>
     </message>
     <message>
         <source>breve</source>
-        <translation type="unfinished"/>
+        <translation>เบรเว</translation>
     </message>
 </context>
 <context>
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation type="unfinished"/>
+        <translation>เชื่อมเสียงของ:</translation>
     </message>
     <message>
         <source>SlurBack:</source>
-        <translation type="unfinished"/>
+        <translation>เชื่อมเสียงกลับ:</translation>
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation type="unfinished"/>
+        <translation>ย้ายบรรทัดห้าเส้น:</translation>
     </message>
 </context>
 <context>
     <name>ChordStyleEditor</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation type="unfinished"/>
+        <translation>แฟ้มอธิบายคอร์ด:</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation>...</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"/>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อ</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"/>
+        <translation>บันทึกเป็น</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: ตัวแก้ไขรูปแบบคอร์ด</translation>
     </message>
 </context>
 <context>
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation type="unfinished"/>
+        <translation>พลศาสตร์</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"/>
+        <translation>ตั้งให้มองไม่เห็น</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"/>
+        <translation>ตั้งให้มองเห็น</translation>
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติมิดิ...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติข้อความ...</translation>
     </message>
 </context>
 <context>
     <name>DynamicBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
 </context>
 <context>
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: คุณสมบัติข้อความ</translation>
     </message>
     <message>
         <source>MIDI Values</source>
-        <translation type="unfinished"/>
+        <translation>ค่ามิดิ</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished"/>
+        <translation>ความเร็ว:</translation>
     </message>
     <message>
         <source>Apply to:</source>
-        <translation type="unfinished"/>
+        <translation>นำไปใช้กับ:</translation>
     </message>
     <message>
         <source>staff</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>part</source>
-        <translation type="unfinished"/>
+        <translation>ส่วน</translation>
     </message>
     <message>
         <source>system</source>
-        <translation type="unfinished"/>
+        <translation>ระบบ</translation>
     </message>
     <message>
         <source>align left</source>
-        <translation type="unfinished"/>
+        <translation>จัดวางทางซ้าย</translation>
     </message>
 </context>
 <context>
     <name>EditDrumset</name>
     <message>
         <source>invalid</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มีอยู่จริง</translation>
     </message>
     <message>
         <source>Normal Head</source>
-        <translation type="unfinished"/>
+        <translation>หัวธรรมดา</translation>
     </message>
     <message>
         <source>Cross Head</source>
-        <translation type="unfinished"/>
+        <translation>หัวไคว้</translation>
     </message>
     <message>
         <source>Diamond Head</source>
-        <translation type="unfinished"/>
+        <translation>หัวเพชร</translation>
     </message>
     <message>
         <source>Triangle Head</source>
-        <translation type="unfinished"/>
+        <translation>หัวสามเหลี่ยม</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"/>
+        <translation>โหลด</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation>บันทึก</translation>
     </message>
     <message>
         <source>MuseScore: Load Drumset</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: โหลดชุดกลอง</translation>
     </message>
     <message>
         <source>MuseScore drumset (*.drm)</source>
-        <translation type="unfinished"/>
+        <translation>ชุดกลอง MuseScore (*.drm)</translation>
     </message>
     <message>
         <source>MuseScore: Save Drumset</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: บันทึกชุดกลอง</translation>
     </message>
     <message>
         <source>Open File
 </source>
-        <translation type="unfinished"/>
+        <translation>เปิดแฟ้ม
+</translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation type="unfinished"/>
+        <translation>
+ล้มเหลว: </translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: เปิดแฟ้ม</translation>
     </message>
     <message>
         <source>MuseScore: Write Drumset</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: เขียนชุดกลอง</translation>
     </message>
     <message>
         <source>Write File failed: </source>
@@ -1203,130 +1214,130 @@ failed: </source>
     <name>EditDrumsetBase</name>
     <message>
         <source>MuseScore: Edit Drumset</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: แก้ไขชุดกลอง</translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation type="unfinished"/>
+        <translation>ระดับเสียง</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"/>
+        <translation>โน้ต</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"/>
+        <translation>ทางลัด</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อ</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อ:</translation>
     </message>
     <message>
         <source>Note Head:</source>
-        <translation type="unfinished"/>
+        <translation>หัวโน้ต:</translation>
     </message>
     <message>
         <source>Staff Line:</source>
-        <translation type="unfinished"/>
+        <translation>เส้นห้าบรรทัด:</translation>
     </message>
     <message>
         <source>Stem Direction:</source>
-        <translation type="unfinished"/>
+        <translation>ทิศทางขีดตั้ง:</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"/>
+        <translation>อัตโนมัติ</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation>ขึ้น</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"/>
+        <translation>ลง</translation>
     </message>
     <message>
         <source>Default Voice:</source>
-        <translation type="unfinished"/>
+        <translation>เสียงเริ่มต้น:</translation>
     </message>
     <message>
         <source>Shortcut:</source>
-        <translation type="unfinished"/>
+        <translation>ทางลัด:</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="unfinished"/>
+        <translation>A</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"/>
+        <translation>B</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="unfinished"/>
+        <translation>C</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"/>
+        <translation>D</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="unfinished"/>
+        <translation>E</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"/>
+        <translation>F</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="unfinished"/>
+        <translation>G</translation>
     </message>
     <message>
         <source>--</source>
-        <translation type="unfinished"/>
+        <translation>--</translation>
     </message>
 </context>
 <context>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: แก้ไขคุณสมบัติเครื่องดนตรี</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติเครื่องดนตรี</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อ</translation>
     </message>
     <message>
         <source>Short Name</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อสั้น</translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished"/>
+        <translation>การ สลับเปลี่ยนเสียง</translation>
     </message>
     <message>
         <source>Midi Program</source>
-        <translation type="unfinished"/>
+        <translation>โปรแกรมมิดิ</translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>ตกลง</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>ยกเลิก</translation>
     </message>
     <message>
         <source>Pitch</source>
@@ -1337,63 +1348,63 @@ failed: </source>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: แก้ไขคุณสมบัติบรรทัด/ส่วน</translation>
     </message>
     <message>
         <source>Staff Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติบรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>Lines:</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัด:</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"/>
+        <translation>เล็ก</translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"/>
+        <translation>มองไม่เห็น</translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มีขีดตั้ง</translation>
     </message>
     <message>
         <source>Part Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติส่วน</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อเครื่องดนตรียาว:</translation>
     </message>
     <message>
         <source>Short Instrument Name:</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อเครื่องดนตรีสั้น:</translation>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
-        <translation type="unfinished"/>
+        <translation>พิสัยเสียงที่ใช้ได้:</translation>
     </message>
     <message>
         <source>Amateur:</source>
-        <translation type="unfinished"/>
+        <translation>มือสมัครเล่น:</translation>
     </message>
     <message>
         <source>-</source>
-        <translation type="unfinished"/>
+        <translation>-</translation>
     </message>
     <message>
         <source>Professional:</source>
-        <translation type="unfinished"/>
+        <translation>ผู้เชียวชาญ:</translation>
     </message>
     <message>
         <source>Use Drumset</source>
-        <translation type="unfinished"/>
+        <translation>ใช้ชุดกลอง</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation type="unfinished"/>
+        <translation>แก้ไขชุดกลอง...</translation>
     </message>
     <message>
         <source>Play Transposition:</source>
@@ -1524,98 +1535,98 @@ failed: </source>
     <name>EditStyle</name>
     <message>
         <source>Symbol</source>
-        <translation type="unfinished"/>
+        <translation>สัญลักษณ์</translation>
     </message>
     <message>
         <source>Anchor</source>
-        <translation type="unfinished"/>
+        <translation>หลัก</translation>
     </message>
     <message>
         <source>TopStaff</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดบน</translation>
     </message>
     <message>
         <source>BottomStaff</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดล้าง</translation>
     </message>
     <message>
         <source>Chord</source>
-        <translation type="unfinished"/>
+        <translation>คอร์ด</translation>
     </message>
 </context>
 <context>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: แก้ไขรูปแบบ</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"/>
+        <translation>บทดนตรี</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"/>
+        <translation>หน้า</translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished"/>
+        <translation>ระบบ</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished"/>
+        <translation>ห้อง</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished"/>
+        <translation>เส้นกั้นห้อง</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"/>
+        <translation>โน้ต</translation>
     </message>
     <message>
         <source>Arpeggios</source>
-        <translation type="unfinished"/>
+        <translation>อาร์เปจโจ</translation>
     </message>
     <message>
         <source>Numbers</source>
-        <translation type="unfinished"/>
+        <translation>หมายเลข</translation>
     </message>
     <message>
         <source>Beams</source>
-        <translation type="unfinished"/>
+        <translation>เส้นรวมเขบ็ต</translation>
     </message>
     <message>
         <source>Sizes</source>
-        <translation type="unfinished"/>
+        <translation>ขนาด</translation>
     </message>
     <message>
         <source>Hairpins</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องหมายขยายเสียง</translation>
     </message>
     <message>
         <source>Chordnames</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อคอร์ด</translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation type="unfinished"/>
+        <translation>การสร้างเสียง โน้ตประดับ</translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation type="unfinished"/>
+        <translation>เสียง</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished"/>
+        <translation>แสดงในระดับเสียงคอนเสิร์ต</translation>
     </message>
     <message>
         <source>Create Multi Measure Rests</source>
-        <translation type="unfinished"/>
+        <translation>สร้างการพักหลายห้อง</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
-        <translation type="unfinished"/>
+        <translation>ความกว้างน้อยสุดของห้อง:</translation>
     </message>
     <message>
         <source>sp</source>
@@ -1624,428 +1635,428 @@ failed: </source>
 space unit
 ----------
 space unit</extracomment>
-        <translation type="unfinished"/>
+        <translation>sp</translation>
     </message>
     <message>
         <source>Minimum Number of empty measures:</source>
-        <translation type="unfinished"/>
+        <translation>จำนวนห้องว่างน้อยสุด:</translation>
     </message>
     <message>
         <source>Hide Empty Staves</source>
-        <translation type="unfinished"/>
+        <translation>ซ่อนบรรทัดว่าง</translation>
     </message>
     <message>
         <source>Page fill threshold:</source>
-        <translation type="unfinished"/>
+        <translation>ขีดแบ่งหน้าดาษ:</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"/>
+        <translation>%</translation>
     </message>
     <message>
         <source>Last system fill threshold</source>
-        <translation type="unfinished"/>
+        <translation>ขีดแบ่งระบบสุด</translation>
     </message>
     <message>
         <source>Create clef for all systems</source>
-        <translation type="unfinished"/>
+        <translation>สร้างกุญแจสำหรับทุกระบบ</translation>
     </message>
     <message>
         <source>Create key sig for all systems</source>
-        <translation type="unfinished"/>
+        <translation>สร้างเครื่องหมายประจำเสียงสำหรับทุกระบบ</translation>
     </message>
     <message>
         <source>Create time signatures</source>
-        <translation type="unfinished"/>
+        <translation>สร้างเครื่องหมายประจำจังหวะ</translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation type="unfinished"/>
+        <translation>สร้างเครื่องหมายประจำจังหวะนอบน้อม</translation>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation type="unfinished"/>
+        <translation>สร้างเครื่องหมายประจำเสียงนอบน้อม</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างวงเล็บระบบ</translation>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
-        <translation type="unfinished"/>
+        <translation>ซ่อมแซมหมายเลขห้อว/ระบบ:</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation type="unfinished"/>
+        <translation>ซ่อมแซมความกว้างห้อง</translation>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished"/>
+        <translation>เส้นกั้นห้องตอนเริ่มบรรทัด</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation type="unfinished"/>
+        <translation>เส้นกั้นห้องตอนเริ่มหลายบรรทัด</translation>
     </message>
     <message>
         <source>shorten stems</source>
-        <translation type="unfinished"/>
+        <translation>ขีดตั้งสั้น</translation>
     </message>
     <message>
         <source>Page Numbers</source>
-        <translation type="unfinished"/>
+        <translation>หมายเลขหน้า</translation>
     </message>
     <message>
         <source>show first</source>
-        <translation type="unfinished"/>
+        <translation>แสดงรายการแรก</translation>
     </message>
     <message>
         <source>odd/even</source>
-        <translation type="unfinished"/>
+        <translation>คี่/คู่_</translation>
     </message>
     <message>
         <source>Measure Numbers</source>
-        <translation type="unfinished"/>
+        <translation>หมายเลขห้อง</translation>
     </message>
     <message>
         <source>all staffs</source>
-        <translation type="unfinished"/>
+        <translation>ทุกบรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>every system</source>
-        <translation type="unfinished"/>
+        <translation>ทุกระบบ</translation>
     </message>
     <message>
         <source>interval</source>
-        <translation type="unfinished"/>
+        <translation>ขั้นคู่</translation>
     </message>
     <message>
         <source>spaces</source>
-        <translation type="unfinished"/>
+        <translation>ช่องว่าง</translation>
     </message>
     <message>
         <source>beam width units</source>
-        <translation type="unfinished"/>
+        <translation>หน่วยความกว้างเส้นรวมเขบ็ต</translation>
     </message>
     <message>
         <source>Line width</source>
-        <translation type="unfinished"/>
+        <translation>ความกว้างบรรทัด</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"/>
+        <translation>ความสูง</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation>...</translation>
     </message>
     <message>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation type="unfinished"/>
+        <translation>sp</translation>
     </message>
     <message>
         <source>Voice 1</source>
-        <translation type="unfinished"/>
+        <translation>เสียง 1</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation>ขึ้น</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"/>
+        <translation>ลง</translation>
     </message>
     <message>
         <source>Voice 2</source>
-        <translation type="unfinished"/>
+        <translation>เสียง 2</translation>
     </message>
     <message>
         <source>Voice 3</source>
-        <translation type="unfinished"/>
+        <translation>เสียง 3</translation>
     </message>
     <message>
         <source>Voice 4</source>
-        <translation type="unfinished"/>
+        <translation>เสียง 4</translation>
     </message>
     <message>
         <source>Music upper margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบบนของดนตรี</translation>
     </message>
     <message>
         <source>Music lower margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบล้างของดนตรี</translation>
     </message>
     <message>
         <source>Staff distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างบรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างอาคโคลาด</translation>
     </message>
     <message>
         <source>System distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างระบบ</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบบนเนื้อเพลง</translation>
     </message>
     <message>
         <source>Lyrics lower margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบล้างเนื้อเพลง</translation>
     </message>
     <message>
         <source>V-frame upper margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบบนเฟรม V</translation>
     </message>
     <message>
         <source>V-frame lower margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบล้างเฟรม V</translation>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation type="unfinished"/>
+        <translation>การจัดช่องว่าง (1=แน่น)</translation>
     </message>
     <message>
         <source>Left margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบซ้าย</translation>
     </message>
     <message>
         <source>Right margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบขวา</translation>
     </message>
     <message>
         <source>Min. note distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างโน้ตต่ำสุด</translation>
     </message>
     <message>
         <source>Clef left margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบกุญแจซ้าย</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบเครื่องหมายเสียงซ้าย</translation>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบเครื่องหายจังหวะซ้าย</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างกุญแจและจังหวะ</translation>
     </message>
     <message>
         <source>Clef-barline distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างกุญแจและเส้นกั้น</translation>
     </message>
     <message>
         <source>Begin repeat left margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบเริ่มซ้ำซ้าย</translation>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation type="unfinished"/>
+        <translation>แสดงเคล็ดลับเส้นเล่นซ้ำ (การซ้ำ "ติดปีก")</translation>
     </message>
     <message>
         <source>Progression</source>
-        <translation type="unfinished"/>
+        <translation>การก้าวหน้า</translation>
     </message>
     <message>
         <source>Shortest stem</source>
-        <translation type="unfinished"/>
+        <translation>ขีดตั้งสั้นสุด</translation>
     </message>
     <message>
         <source>Accidental note distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างโน้ตแปลงเสียง</translation>
     </message>
     <message>
         <source>Accidental distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างเครื่องหมายแปลงเสียง</translation>
     </message>
     <message>
         <source>Note dot distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างโน้ตและประจุด</translation>
     </message>
     <message>
         <source>Dot dot distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างประจุด</translation>
     </message>
     <message>
         <source>Ledger line width</source>
-        <translation type="unfinished"/>
+        <translation>ความกว้างเส้นน้อย</translation>
     </message>
     <message>
         <source>Distance to note</source>
-        <translation type="unfinished"/>
+        <translation>ระยะโน้ต</translation>
     </message>
     <message>
         <source>Hook length</source>
-        <translation type="unfinished"/>
+        <translation>ระยะเขบ็ต</translation>
     </message>
     <message>
         <source>Beam width</source>
-        <translation type="unfinished"/>
+        <translation>ความกว้างเส้นรวมเขบ็ต</translation>
     </message>
     <message>
         <source>Beam distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะเส้นรวมเขบ็ต</translation>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation type="unfinished"/>
+        <translation>ความยาวต่ำสุด</translation>
     </message>
     <message>
         <source>Minimum slope</source>
-        <translation type="unfinished"/>
+        <translation>ความชันต่ำสุด</translation>
     </message>
     <message>
         <source>Maximum slope</source>
-        <translation type="unfinished"/>
+        <translation>ความชันสูงสุด</translation>
     </message>
     <message>
         <source>Small staff size</source>
-        <translation type="unfinished"/>
+        <translation>ขนาดเส้นห้าบรรทัดเล็ก</translation>
     </message>
     <message>
         <source>Small note size</source>
-        <translation type="unfinished"/>
+        <translation>ขนาดโน้ตเล็ก</translation>
     </message>
     <message>
         <source>Grace note size</source>
-        <translation type="unfinished"/>
+        <translation>ขนาดโน้ตน้อย</translation>
     </message>
     <message>
         <source>Small clef size</source>
-        <translation type="unfinished"/>
+        <translation>ขนาดกุญแจเล็ก</translation>
     </message>
     <message>
         <source>Line break height</source>
-        <translation type="unfinished"/>
+        <translation>ความสูงตัวหยุดบรรทัด</translation>
     </message>
     <message>
         <source>Use German names</source>
-        <translation type="unfinished"/>
+        <translation>ใช้ชื่อเยอรมัน</translation>
     </message>
     <message>
         <source>Chord description file</source>
-        <translation type="unfinished"/>
+        <translation>แฟ้มอธิบายคอร์ด</translation>
     </message>
     <message>
         <source>Articulation - note head distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างหัวโน้ตกับการสร้างเสียง</translation>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างขีดตั้งกับการสร้างเสียง</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
-        <translation type="unfinished"/>
+        <translation>ระยะห่างการสร้างเสียง</translation>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
-        <translation type="unfinished"/>
+        <translation>ทิศทางขีดตั้งในบริบทหลายเสียง</translation>
     </message>
 </context>
 <context>
     <name>EditTempoBase</name>
     <message>
         <source>MuseScore: Tempo Text</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: ข้อความบอกจังหวะ</translation>
     </message>
     <message>
         <source>BPM:</source>
-        <translation type="unfinished"/>
+        <translation>BPM:</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"/>
+        <translation>ข้อความ:</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>ตกลง</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>ยกเลิก</translation>
     </message>
 </context>
 <context>
     <name>Element</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"/>
+        <translation>ตั้งให้มองไม่เห็น</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"/>
+        <translation>ตั้งให้มองเห็นได้</translation>
     </message>
     <message>
         <source>Color...</source>
-        <translation type="unfinished"/>
+        <translation>สี...</translation>
     </message>
 </context>
 <context>
     <name>ElementBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>selectable</source>
-        <translation type="unfinished"/>
+        <translation>เลือกได้</translation>
     </message>
     <message>
         <source>droptarget</source>
-        <translation type="unfinished"/>
+        <translation>เป้ยหมายวาง</translation>
     </message>
     <message>
         <source>invalid</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มีอยู่จริง</translation>
     </message>
 </context>
 <context>
     <name>ExcerptsDialog</name>
     <message>
         <source>MuseScore: Parts</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: ส่วน</translation>
     </message>
     <message>
         <source>Select Part:</source>
-        <translation type="unfinished"/>
+        <translation>เลือกส่วน:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>ลบ</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"/>
+        <translation>สร้างใหม่</translation>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation type="unfinished"/>
+        <translation>แก้ไขส่วน:</translation>
     </message>
     <message>
         <source>Instrument:</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องดนตรี:</translation>
     </message>
     <message>
         <source>Create Part</source>
-        <translation type="unfinished"/>
+        <translation>สร้างส่วนใหม่</translation>
     </message>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อแฟ้ม:</translation>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation type="unfinished"/>
+        <translation>หัวข้อส่วน:</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>ปิด</translation>
     </message>
     <message>
         <source>Part-%1</source>
@@ -2056,183 +2067,183 @@ space unit</extracomment>
     <name>Glissando</name>
     <message>
         <source>Glissando Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติการไล่เสียง...</translation>
     </message>
 </context>
 <context>
     <name>GlissandoProperties</name>
     <message>
         <source>MuseScore: Glissando Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: คุณสมบัติการไล่เสียง</translation>
     </message>
     <message>
         <source>Show Text</source>
-        <translation type="unfinished"/>
+        <translation>แสดงข้อความ</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"/>
+        <translation>ข้อความ:</translation>
     </message>
 </context>
 <context>
     <name>GreendotButton</name>
     <message>
         <source>record</source>
-        <translation type="unfinished"/>
+        <translation>บันทึก</translation>
     </message>
 </context>
 <context>
     <name>HBox</name>
     <message>
         <source>Add Text</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มข้อความ</translation>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติ HBox...</translation>
     </message>
 </context>
 <context>
     <name>HairpinBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>Hairpin</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องหมายแปลงระดับ</translation>
     </message>
     <message>
         <source>Tick1:</source>
-        <translation type="unfinished"/>
+        <translation>จังหวะ1:</translation>
     </message>
     <message>
         <source>Tick2:</source>
-        <translation type="unfinished"/>
+        <translation>จังหวะ2:</translation>
     </message>
 </context>
 <context>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติภาวะบรรสาน</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติข้อความ...</translation>
     </message>
 </context>
 <context>
     <name>Image</name>
     <message>
         <source>Image</source>
-        <translation type="unfinished"/>
+        <translation>รูปภาพ</translation>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติรูปภาพ...</translation>
     </message>
 </context>
 <context>
     <name>ImageProperties</name>
     <message>
         <source>Image Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติรูปภาพ</translation>
     </message>
     <message>
         <source>lock aspect ratio</source>
-        <translation type="unfinished"/>
+        <translation>อัตราส่วนแน่นอนล็อก</translation>
     </message>
 </context>
 <context>
     <name>ImportMidiDialog</name>
     <message>
         <source>MuseScore: Midi Import</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: การนำเข้ามิดิ</translation>
     </message>
     <message>
         <source>Shortest note on import:</source>
-        <translation type="unfinished"/>
+        <translation>โน้ตสั้นสุดในการนำเข้า:</translation>
     </message>
     <message>
         <source>1/4</source>
-        <translation type="unfinished"/>
+        <translation>1/4</translation>
     </message>
     <message>
         <source>1/8</source>
-        <translation type="unfinished"/>
+        <translation>1/8</translation>
     </message>
     <message>
         <source>1/16</source>
-        <translation type="unfinished"/>
+        <translation>1/16</translation>
     </message>
     <message>
         <source>1/32</source>
-        <translation type="unfinished"/>
+        <translation>1/32</translation>
     </message>
     <message>
         <source>1/64</source>
-        <translation type="unfinished"/>
+        <translation>1/64</translation>
     </message>
     <message>
         <source>1/128</source>
-        <translation type="unfinished"/>
+        <translation>1/128</translation>
     </message>
 </context>
 <context>
     <name>InsertMeasuresDialogBase</name>
     <message>
         <source>Mscore: Insert Measures</source>
-        <translation type="unfinished"/>
+        <translation>Mscore: แทรกห้อง</translation>
     </message>
     <message>
         <source>Insert empty measures:</source>
-        <translation type="unfinished"/>
+        <translation>แทรกห้องว่าง:</translation>
     </message>
     <message>
         <source>Number of measures to insert</source>
-        <translation type="unfinished"/>
+        <translation>จำนวนห้องที่จะแทรก</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>ตกลง</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>ยกเลิก</translation>
     </message>
 </context>
 <context>
     <name>Inspector</name>
     <message>
         <source>MuseScore: Object Inspector</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: ตัวตรวจสอบวัตถุ</translation>
     </message>
 </context>
 <context>
     <name>InspectorBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>ย้อนกลับ</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"/>
+        <translation>ถัดไป</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation>...</translation>
     </message>
 </context>
 <context>
     <name>InstrumentDialogBase</name>
     <message>
         <source>MuseScore: Create Instruments</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: สร้างเครื่องดนตรี</translation>
     </message>
     <message>
         <source>0</source>
@@ -2240,51 +2251,51 @@ space unit</extracomment>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่ม</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"/>
+        <translation>เอาออก</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation>ขึ้น</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"/>
+        <translation>ลง</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"/>
+        <translation>แก้ไข</translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มด้านบน</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มด้านล้าง</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation>1</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"/>
+        <translation>โหลด</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"/>
+        <translation>บันทึก</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>ตกลง</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>ยกเลิก</translation>
     </message>
     <message>
         <source>show more</source>
@@ -2295,14 +2306,14 @@ space unit</extracomment>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: รายการส่วน</translation>
     </message>
 </context>
 <context>
     <name>InstrumentWizard</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>0</source>
@@ -2310,43 +2321,43 @@ space unit</extracomment>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่ม</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"/>
+        <translation>เอาออก</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation>ขึ้น</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"/>
+        <translation>ลง</translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มด้านบน</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มด้านล้าง</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"/>
+        <translation>1</translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation type="unfinished"/>
+        <translation>รายการเครื่องดนตรี</translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>Clef</source>
-        <translation type="unfinished"/>
+        <translation>กุญแจเสียง</translation>
     </message>
     <message>
         <source>show more</source>
@@ -2357,53 +2368,55 @@ space unit</extracomment>
     <name>InstrumentsDialog</name>
     <message>
         <source>Staff %1</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดห้าเส้น %1</translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation type="unfinished"/>
+        <translation>รายการเครื่องดนตรี</translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>Clef</source>
-        <translation type="unfinished"/>
+        <translation>กุญแจเสียง</translation>
     </message>
     <message>
         <source>MuseScore: Save Instrument List</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: บันทึกรายการเครื่องดนตรี</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องดนตรี MuseScore (*.xml);;</translation>
     </message>
     <message>
         <source>Open Instruments File
 </source>
-        <translation type="unfinished"/>
+        <translation>เปิดแฟ้มเครื่องดนตรี
+</translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation type="unfinished"/>
+        <translation>
+ล้มเหลว: </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: เปิดแฟ้มเครื่องดนตรี</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: รูปแบบการเขียน</translation>
     </message>
     <message>
         <source>MuseScore: Load Instrument List</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: โหลดรายการเครื่องดนตรี</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องดนตรี MuseScore (*.xml);;แฟ้มทั้งหมด (*)</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
@@ -2414,1188 +2427,1194 @@ failed: </source>
     <name>Jump</name>
     <message>
         <source>Jump Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติการข้าม...</translation>
     </message>
 </context>
 <context>
     <name>JumpPropertyBase</name>
     <message>
         <source>Jump Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติการข้าม</translation>
     </message>
     <message>
         <source>Jump to:</source>
-        <translation type="unfinished"/>
+        <translation>ข้ามไปยัง:</translation>
     </message>
     <message>
         <source>Play until:</source>
-        <translation type="unfinished"/>
+        <translation>เล่นจนถึง:</translation>
     </message>
     <message>
         <source>Continue at:</source>
-        <translation type="unfinished"/>
+        <translation>ทำต่อไปที่:</translation>
     </message>
 </context>
 <context>
     <name>KeyEdit</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation type="unfinished"/>
+        <translation>สร้างเครื่องหมายประจำเสียง</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"/>
+        <translation>ล้าง</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มเครื่องหมายประจำจังหวะ</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่ม</translation>
     </message>
 </context>
 <context>
     <name>KeyEditor</name>
     <message>
         <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: เครื่องหมายประจำกุญแจเสียง</translation>
     </message>
 </context>
 <context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: คุณสมบัติบรรทัด</translation>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัด</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"/>
+        <translation>ความกว้าง:</translation>
     </message>
     <message>
         <source>sp</source>
-        <translation type="unfinished"/>
+        <translation>sp</translation>
     </message>
     <message>
         <source>Line style:</source>
-        <translation type="unfinished"/>
+        <translation>รูปแบบบรรทัด:</translation>
     </message>
     <message>
         <source>solid</source>
-        <translation type="unfinished"/>
+        <translation>ทึบ</translation>
     </message>
     <message>
         <source>dash</source>
-        <translation type="unfinished"/>
+        <translation>ประ</translation>
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished"/>
+        <translation>จุด</translation>
     </message>
     <message>
         <source>dash dot</source>
-        <translation type="unfinished"/>
+        <translation>ประและจุด</translation>
     </message>
     <message>
         <source>dash dot dot</source>
-        <translation type="unfinished"/>
+        <translation>ประและสองจุด</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"/>
+        <translation>สี:</translation>
     </message>
     <message>
         <source>diagonally</source>
-        <translation type="unfinished"/>
+        <translation>ทแยงมุม</translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation type="unfinished"/>
+        <translation>เริ่มต้น</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"/>
+        <translation>ข้อความ</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation>...</translation>
     </message>
     <message>
         <source>place:</source>
-        <translation type="unfinished"/>
+        <translation>ตำแหน่ง:</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"/>
+        <translation>ซ้าย</translation>
     </message>
     <message>
         <source>Above</source>
-        <translation type="unfinished"/>
+        <translation>บน</translation>
     </message>
     <message>
         <source>Symb.</source>
-        <translation type="unfinished"/>
+        <translation>สัญลักษณ์</translation>
     </message>
     <message>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished"/>
+        <translation>คันเหยียบ</translation>
     </message>
     <message>
         <source>x:</source>
-        <translation type="unfinished"/>
+        <translation>x:</translation>
     </message>
     <message>
         <source>y:</source>
-        <translation type="unfinished"/>
+        <translation>y:</translation>
     </message>
     <message>
         <source>Hook</source>
-        <translation type="unfinished"/>
+        <translation>เขบ็ต</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation>ขึ้น</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"/>
+        <translation>ทำต่อ</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"/>
+        <translation>สิ้นสุด</translation>
     </message>
 </context>
 <context>
     <name>LineSegmentBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>LineSegment</source>
-        <translation type="unfinished"/>
+        <translation>ส่วนของเส้นตรง</translation>
     </message>
     <message>
         <source>SegmentType:</source>
-        <translation type="unfinished"/>
+        <translation>ชนิดส่วนของเส้นตรง:</translation>
     </message>
     <message>
         <source>SINGLE</source>
-        <translation type="unfinished"/>
+        <translation>เดี่ยว</translation>
     </message>
     <message>
         <source>BEGIN</source>
-        <translation type="unfinished"/>
+        <translation>เริ่มต้น</translation>
     </message>
     <message>
         <source>MIDDLE</source>
-        <translation type="unfinished"/>
+        <translation>กึ่งกลาง</translation>
     </message>
     <message>
         <source>END</source>
-        <translation type="unfinished"/>
+        <translation>สิ้นสุด</translation>
     </message>
     <message>
         <source>Pos2</source>
-        <translation type="unfinished"/>
+        <translation>ตำแหน่ง2</translation>
     </message>
     <message>
         <source>Offset2</source>
-        <translation type="unfinished"/>
+        <translation>ความเฉ2</translation>
     </message>
 </context>
 <context>
     <name>LyricsBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation type="unfinished"/>
+        <translation>เนื้อเพลง</translation>
     </message>
     <message>
         <source>Syllabic:</source>
-        <translation type="unfinished"/>
+        <translation>พยางค์:</translation>
     </message>
     <message>
         <source>Single</source>
-        <translation type="unfinished"/>
+        <translation>เดี่ยว</translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation type="unfinished"/>
+        <translation>เริ่มต้น</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"/>
+        <translation>สิ้นสุด</translation>
     </message>
     <message>
         <source>Middle</source>
-        <translation type="unfinished"/>
+        <translation>กึ่งกลาง</translation>
     </message>
     <message>
         <source>Row:</source>
-        <translation type="unfinished"/>
+        <translation>แถว:</translation>
     </message>
     <message>
         <source>End Tick:</source>
-        <translation type="unfinished"/>
+        <translation>จบจังหวะ:</translation>
     </message>
 </context>
 <context>
     <name>MagBox</name>
     <message>
         <source>Magnification</source>
-        <translation type="unfinished"/>
+        <translation>การขยาย</translation>
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"/>
+        <translation>ขยายพื้นที่</translation>
     </message>
 </context>
 <context>
     <name>Marker</name>
     <message>
         <source>Marker Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติหลักเขต...</translation>
     </message>
 </context>
 <context>
     <name>MarkerPropertyBase</name>
     <message>
         <source>Marker Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติหลักเขต</translation>
     </message>
     <message>
         <source>Label:</source>
-        <translation type="unfinished"/>
+        <translation>ป้าย:</translation>
     </message>
 </context>
 <context>
     <name>Measure</name>
     <message>
         <source>Measure Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติห้อง...</translation>
     </message>
 </context>
 <context>
     <name>MeasureBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
-        <translation type="unfinished"/>
+        <translation>ตัดตัวหยุดหลายห้อง</translation>
     </message>
 </context>
 <context>
     <name>MeasureProperties</name>
     <message>
         <source>visible</source>
-        <translation type="unfinished"/>
+        <translation>มองเห็นได้</translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มีขีดตั้ง</translation>
     </message>
 </context>
 <context>
     <name>MeasurePropertiesBase</name>
     <message>
         <source>MuseScore: Measure Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: คุณสมบัติห้อง</translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>New Row</source>
-        <translation type="unfinished"/>
+        <translation>สร้างแถวใหม่</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"/>
+        <translation>มองเห็นได้</translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มีขีดตั้ง</translation>
     </message>
     <message>
         <source>a</source>
-        <translation type="unfinished"/>
+        <translation>a</translation>
     </message>
     <message>
         <source>visible</source>
-        <translation type="unfinished"/>
+        <translation>มองเห็นได้</translation>
     </message>
     <message>
         <source>c</source>
-        <translation type="unfinished"/>
+        <translation>c</translation>
     </message>
     <message>
         <source>Measure Duration</source>
-        <translation type="unfinished"/>
+        <translation>ระยะเวลาห้อง</translation>
     </message>
     <message>
         <source>nominal</source>
-        <translation type="unfinished"/>
+        <translation>นาม</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"/>
+        <translation>/</translation>
     </message>
     <message>
         <source>actual</source>
-        <translation type="unfinished"/>
+        <translation>แท้งจริง</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มเติม</translation>
     </message>
     <message>
         <source>do not count</source>
-        <translation type="unfinished"/>
+        <translation>ไม่ต้องนับ</translation>
     </message>
     <message>
         <source>irregular</source>
-        <translation type="unfinished"/>
+        <translation>ไม่สม่ำเสมอ</translation>
     </message>
     <message>
         <source>break multi measure rest</source>
-        <translation type="unfinished"/>
+        <translation>ตัดตัวหยุดหลายห้อง</translation>
     </message>
     <message>
         <source>add to measure number</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มไปยังหมายเลขห้อง</translation>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation type="unfinished"/>
+        <translation>ภาพรวมการออกแบบ</translation>
     </message>
     <message>
         <source>repeat count:</source>
-        <translation type="unfinished"/>
+        <translation>ครั้งที่ซ้ำ:</translation>
     </message>
 </context>
 <context>
     <name>MeasuresDialogBase</name>
     <message>
         <source>Mscore: Append Measures</source>
-        <translation type="unfinished"/>
+        <translation>Mscore: แนบกับห้อง</translation>
     </message>
     <message>
         <source>Append empty measures:</source>
-        <translation type="unfinished"/>
+        <translation>แนบกับห้องว่าง:</translation>
     </message>
     <message>
         <source>Number of measures to append</source>
-        <translation type="unfinished"/>
+        <translation>จำนวนห้องที่จะแนบ</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>ตกลง</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>ยกเลิก</translation>
     </message>
 </context>
 <context>
     <name>MenuNotes</name>
     <message>
         <source>&amp;Notes</source>
-        <translation type="unfinished"/>
+        <translation>โ&amp;น้ต</translation>
     </message>
 </context>
 <context>
     <name>MetaEditDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished"/>
+        <translation>กล่องโต้ตอบ</translation>
     </message>
     <message>
         <source>Work Title:</source>
-        <translation type="unfinished"/>
+        <translation>หัวข้องาน:</translation>
     </message>
     <message>
         <source>Work Number:</source>
-        <translation type="unfinished"/>
+        <translation>หมายเลขงาน:</translation>
     </message>
     <message>
         <source>Movement Title:</source>
-        <translation type="unfinished"/>
+        <translation>หัวข้อท่อนเพลง:</translation>
     </message>
     <message>
         <source>Movement Number:</source>
-        <translation type="unfinished"/>
+        <translation>หมายเลขท่อนเพลง:</translation>
     </message>
     <message>
         <source>Source:</source>
-        <translation type="unfinished"/>
+        <translation>แหล่งที่มา:</translation>
     </message>
 </context>
 <context>
     <name>MuseScore</name>
     <message>
         <source>Fingering</source>
-        <translation type="unfinished"/>
+        <translation>การจัดวางนิ้ว</translation>
     </message>
     <message>
         <source>Tempo</source>
-        <translation type="unfinished"/>
+        <translation>จังหวะ</translation>
     </message>
     <message>
         <source>Metronome</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องจับจังหวะ</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"/>
+        <translation>หัวข้อ</translation>
     </message>
     <message>
         <source>Subtitle</source>
-        <translation type="unfinished"/>
+        <translation>คำบรรยาย</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished"/>
+        <translation>ผู้ประพันธ์</translation>
     </message>
     <message>
         <source>Poet</source>
-        <translation type="unfinished"/>
+        <translation>กวี</translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="unfinished"/>
+        <translation>ลิขสิทธิ์</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องหมายการซ้อม</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation type="unfinished"/>
+        <translation>ระดับเสียงสังคีต</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"/>
+        <translation>ค้นหา</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <source>Save changes to the score "%1"
 before closing?</source>
-        <translation type="unfinished"/>
+        <translation>บันทึกการเปลี่ยนแปลงไปยังบทเพลง "%1"&#13;
+ก่อนการปิดหรือไม่</translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: โหลดบทเพลง</translation>
     </message>
     <message>
         <source>Untitled</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มีชื่อ</translation>
     </message>
     <message>
         <source>MuseScore: failure</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: ล้มเหลว</translation>
     </message>
     <message>
         <source>Load template file </source>
-        <translation type="unfinished"/>
+        <translation>โหลดแฟ้มแม่แบบ </translation>
     </message>
     <message>
         <source> failed</source>
-        <translation type="unfinished"/>
+        <translation> ล้มเหลว</translation>
     </message>
     <message>
         <source>G major, E minor</source>
-        <translation type="unfinished"/>
+        <translation>G เมเจอร์, E ไมเนอร์</translation>
     </message>
     <message>
         <source>Cb major, Ab minor</source>
-        <translation type="unfinished"/>
+        <translation>Cb เมเจอร์, Ab ไมเนอร์</translation>
     </message>
     <message>
         <source>D major, B minor</source>
-        <translation type="unfinished"/>
+        <translation>D เมเจอร์, B ไมเนอร์</translation>
     </message>
     <message>
         <source>Gb major, Eb minor</source>
-        <translation type="unfinished"/>
+        <translation>Gb เมเจอร์, Eb ไมเนอร์</translation>
     </message>
     <message>
         <source>A major, F# minor</source>
-        <translation type="unfinished"/>
+        <translation>A เมเจอร์, F# ไมเนอร์</translation>
     </message>
     <message>
         <source>Db major, Bb minor</source>
-        <translation type="unfinished"/>
+        <translation>Db เมเจอร์, Bb ไมเนอร์</translation>
     </message>
     <message>
         <source>E major, C# minor</source>
-        <translation type="unfinished"/>
+        <translation>E เมเจอร์, C# ไมเนอร์</translation>
     </message>
     <message>
         <source>Ab major, F minor</source>
-        <translation type="unfinished"/>
+        <translation>Ab เมเจอร์, F ไมเนอร์</translation>
     </message>
     <message>
         <source>B major, G# minor</source>
-        <translation type="unfinished"/>
+        <translation>B เมเจอร์, G# ไมเนอร์</translation>
     </message>
     <message>
         <source>Eb major, C minor</source>
-        <translation type="unfinished"/>
+        <translation>F# เมเจอร์, D# ไมเนอร์</translation>
     </message>
     <message>
         <source>F# major, D# minor</source>
-        <translation type="unfinished"/>
+        <translation>F# เมเจอร์, D# ไมเนอร์</translation>
     </message>
     <message>
         <source>Bb major, G minor</source>
-        <translation type="unfinished"/>
+        <translation>Bb เมเจอร์, G ไมเนอร์</translation>
     </message>
     <message>
         <source>C# major, A# minor</source>
-        <translation type="unfinished"/>
+        <translation>C# เมเจอร์, A# ไมเนอร์</translation>
     </message>
     <message>
         <source>F major,  D minor</source>
-        <translation type="unfinished"/>
+        <translation>F เมเจอร์, D ไมเนอร์</translation>
     </message>
     <message>
         <source>C major, A minor</source>
-        <translation type="unfinished"/>
+        <translation>C เมเจอร์, A ไมเนอร์</translation>
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation type="unfinished"/>
+        <translation>โน้ตน้อย</translation>
     </message>
     <message>
         <source>Drums</source>
-        <translation type="unfinished"/>
+        <translation>กลอง</translation>
     </message>
     <message>
         <source>Clefs</source>
-        <translation type="unfinished"/>
+        <translation>กุญแจเสียง</translation>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished"/>
+        <translation>4/4 อัตราจังหวะสามัญ</translation>
     </message>
     <message>
         <source>End Bar</source>
-        <translation type="unfinished"/>
+        <translation>เส้นจบ</translation>
     </message>
     <message>
         <source>Double Bar</source>
-        <translation type="unfinished"/>
+        <translation>เส้นคู่</translation>
     </message>
     <message>
         <source>Start Repeat</source>
-        <translation type="unfinished"/>
+        <translation>เริ่มซ้ำ</translation>
     </message>
     <message>
         <source>End Repeat</source>
-        <translation type="unfinished"/>
+        <translation>จบซ้ำ</translation>
     </message>
     <message>
         <source>End-Start Repeat</source>
-        <translation type="unfinished"/>
+        <translation>จบเริ่มซ้ำ</translation>
     </message>
     <message>
         <source>Lines</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัด</translation>
     </message>
     <message>
         <source>8va</source>
-        <translation type="unfinished"/>
+        <translation>8va</translation>
     </message>
     <message>
         <source>15ma</source>
-        <translation type="unfinished"/>
+        <translation>15ma</translation>
     </message>
     <message>
         <source>8vb</source>
-        <translation type="unfinished"/>
+        <translation>8vb</translation>
     </message>
     <message>
         <source>15mb</source>
-        <translation type="unfinished"/>
+        <translation>15mb</translation>
     </message>
     <message>
         <source>pedal</source>
-        <translation type="unfinished"/>
+        <translation>คันเหยียบ</translation>
     </message>
     <message>
         <source>Breath</source>
-        <translation type="unfinished"/>
+        <translation>การหายใจ</translation>
     </message>
     <message>
         <source>Brackets</source>
-        <translation type="unfinished"/>
+        <translation>วงเล็บ</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation type="unfinished"/>
+        <translation>วงเล็บ</translation>
     </message>
     <message>
         <source>Akkolade</source>
-        <translation type="unfinished"/>
+        <translation>อาคโคลาด</translation>
     </message>
     <message>
         <source>Accidentals</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องหมายแปลงเสียง</translation>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation type="unfinished"/>
+        <translation>พลศาสตร์</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished"/>
+        <translation>เสียงสั่น</translation>
     </message>
     <message>
         <source>1 through stem</source>
-        <translation type="unfinished"/>
+        <translation>1 ผ่านขีดตั้ง</translation>
     </message>
     <message>
         <source>2 through stem</source>
-        <translation type="unfinished"/>
+        <translation>2 ผ่านขีดตั้ง</translation>
     </message>
     <message>
         <source>3 through stem</source>
-        <translation type="unfinished"/>
+        <translation>3 ผ่านขีดตั้ง</translation>
     </message>
     <message>
         <source>1 between notes</source>
-        <translation type="unfinished"/>
+        <translation>1 ระหว่างโน้ต</translation>
     </message>
     <message>
         <source>2 between notes</source>
-        <translation type="unfinished"/>
+        <translation>2 ระหว่างโน้ต</translation>
     </message>
     <message>
         <source>3 between notes</source>
-        <translation type="unfinished"/>
+        <translation>3 ระหว่างโน้ต</translation>
     </message>
     <message>
         <source>Repeats</source>
-        <translation type="unfinished"/>
+        <translation>การซ้ำ</translation>
     </message>
     <message>
         <source>Segno</source>
-        <translation type="unfinished"/>
+        <translation>เซนโย</translation>
     </message>
     <message>
         <source>Coda</source>
-        <translation type="unfinished"/>
+        <translation>โคดา</translation>
     </message>
     <message>
         <source>Codetta</source>
-        <translation type="unfinished"/>
+        <translation>โคดาน้อย</translation>
     </message>
     <message>
         <source>Fine</source>
-        <translation type="unfinished"/>
+        <translation>ฟิเน</translation>
     </message>
     <message>
         <source>D.S al Coda</source>
-        <translation type="unfinished"/>
+        <translation>จากเซนโยถึงโคดา</translation>
     </message>
     <message>
         <source>D.S al Fine</source>
-        <translation type="unfinished"/>
+        <translation>จากเซนโยจนสิ้นสุด</translation>
     </message>
     <message>
         <source>D.S</source>
-        <translation type="unfinished"/>
+        <translation>จากเซนโย</translation>
     </message>
     <message>
         <source>To Coda</source>
-        <translation type="unfinished"/>
+        <translation>ไปยังโคดา</translation>
     </message>
     <message>
         <source>Beam Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติเส้นรวมเขบ็ต</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation type="unfinished"/>
+        <translation>สัญลักษณ์</translation>
     </message>
     <message>
         <source>&amp;Create</source>
-        <translation type="unfinished"/>
+        <translation>&amp;สร้าง</translation>
     </message>
     <message>
         <source>Measures</source>
-        <translation type="unfinished"/>
+        <translation>ห้อง</translation>
     </message>
     <message>
         <source>Barlines...</source>
-        <translation type="unfinished"/>
+        <translation>เส้นกั้นห้อง...</translation>
     </message>
     <message>
         <source>&amp;Lines...</source>
-        <translation type="unfinished"/>
+        <translation>&amp;ห้อง...</translation>
     </message>
     <message>
         <source>Accidentals...</source>
-        <translation type="unfinished"/>
+        <translation>เครื่อหมายแปลงเสียง...</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"/>
+        <translation>ข้อความ</translation>
     </message>
     <message>
         <source>MuseScore: Clefs</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: กุญแจเสียง</translation>
     </message>
     <message>
         <source>MuseScore: Lines</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: บรรทัด</translation>
     </message>
     <message>
         <source>MuseScore: Accidentals</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: เครื่องหมายแปลงเสียง</translation>
     </message>
     <message>
         <source>MuseScore: Dynamics</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: พลศาสตร์</translation>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: เส้นกั้นห้อง</translation>
     </message>
     <message>
         <source>MuseScore: Fingering</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: การจัดวางนิ้ว</translation>
     </message>
     <message>
         <source>File Operations</source>
-        <translation type="unfinished"/>
+        <translation>ปฏิบัติการแฟ้ม</translation>
     </message>
     <message>
         <source>Transport Tools</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องมือขนส่ง</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation type="unfinished"/>
+        <translation>การใส่โน้ต</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"/>
+        <translation>แ&amp;ฟ้ม</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished"/>
+        <translation>เปิดแฟ้ม&amp;ล่าสุด</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"/>
+        <translation>แ&amp;ก้ไข</translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation type="unfinished"/>
+        <translation>เสียง</translation>
     </message>
     <message>
         <source>Preferences...</source>
-        <translation type="unfinished"/>
+        <translation>การตั้งค่า...</translation>
     </message>
     <message>
         <source>Add Note</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มโน้ต</translation>
     </message>
     <message>
         <source>Add Interval</source>
-        <translation type="unfinished"/>
+        <translation>เพิ่มขั้นคู่</translation>
     </message>
     <message>
         <source>Tuplets</source>
-        <translation type="unfinished"/>
+        <translation>จังหวะยืม</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
-        <translation type="unfinished"/>
+        <translation>การ&amp;ออกแบบ</translation>
     </message>
     <message>
         <source>Page Settings...</source>
-        <translation type="unfinished"/>
+        <translation>การตั้งค่าหน้ากระดาษ...</translation>
     </message>
     <message>
         <source>&amp;Style</source>
-        <translation type="unfinished"/>
+        <translation>&amp;รูปแบบ</translation>
     </message>
     <message>
         <source>&amp;Display</source>
-        <translation type="unfinished"/>
+        <translation>การแสดง&amp;ผล</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"/>
+        <translation>&amp;วิธีใช้</translation>
     </message>
     <message>
         <source>Online Handbook</source>
-        <translation type="unfinished"/>
+        <translation>คู่มือออนไลน์</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"/>
+        <translation>เ&amp;กี่ยวกับ</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation type="unfinished"/>
+        <translation>เกี่ยวกั&amp;บQt</translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation type="unfinished"/>
+        <translation>สามารถหาคู่มือ MuseScore ได้ที่: 
+</translation>
     </message>
     <message>
         <source>
 
 From the "Help" menu try choosing "Online Handbook" instead.</source>
-        <translation type="unfinished"/>
+        <translation>
+
+จากเมนู "วิธีใช้" ลองเลือก "คู่มือออนไลน์" แทน</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: เปิดวิธีใช้</translation>
     </message>
     <message>
         <source>no score</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มีบทเพลง</translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation type="unfinished"/>
+        <translation>โหมดใส่โน้ต</translation>
     </message>
     <message>
         <source>edit mode</source>
-        <translation type="unfinished"/>
+        <translation>แก้ไขโหมด</translation>
     </message>
     <message>
         <source>play</source>
-        <translation type="unfinished"/>
+        <translation>เล่น</translation>
     </message>
     <message>
         <source>Go To: </source>
-        <translation type="unfinished"/>
+        <translation>ไปยัง: </translation>
     </message>
     <message>
         <source>Symbols1</source>
-        <translation type="unfinished"/>
+        <translation>สัญลักษณ์1</translation>
     </message>
     <message>
         <source>Symbols3</source>
-        <translation type="unfinished"/>
+        <translation>สัญลักษณ์3</translation>
     </message>
     <message>
         <source>Lyrics odd lines</source>
-        <translation type="unfinished"/>
+        <translation>เนื้อเพลงบรรทัดคี่</translation>
     </message>
     <message>
         <source>Lyrics even lines</source>
-        <translation type="unfinished"/>
+        <translation>เนื้อเพลงบรรทัดคู่</translation>
     </message>
     <message>
         <source>InstrumentsLong</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องดนตรียาว</translation>
     </message>
     <message>
         <source>InstrumentsShort</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องดนตรีสั้น</translation>
     </message>
     <message>
         <source>InstrumentsExcerpt</source>
-        <translation type="unfinished"/>
+        <translation>ตัวอย่างเครื่องดนตรี</translation>
     </message>
     <message>
         <source>Technik</source>
-        <translation type="unfinished"/>
+        <translation>เทคนิก</translation>
     </message>
     <message>
         <source>Measure Number</source>
-        <translation type="unfinished"/>
+        <translation>หมายเลขห้อง</translation>
     </message>
     <message>
         <source>Page Number Odd</source>
-        <translation type="unfinished"/>
+        <translation>หมายเลขหน้าคี่</translation>
     </message>
     <message>
         <source>Page Number Even</source>
-        <translation type="unfinished"/>
+        <translation>หมายเลขหน้าคู่</translation>
     </message>
     <message>
         <source>Translator</source>
-        <translation type="unfinished"/>
+        <translation>ผู้แปล</translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished"/>
+        <translation>ระบบ</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>Chordname</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อคอร์ด</translation>
     </message>
     <message>
         <source>Repeat Text</source>
-        <translation type="unfinished"/>
+        <translation>ข้อความซ้ำ</translation>
     </message>
     <message>
         <source>Volta</source>
-        <translation type="unfinished"/>
+        <translation>ครั้ง</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation type="unfinished"/>
+        <translation>เฟรม</translation>
     </message>
     <message>
         <source>TextLine</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดข้อความ</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished"/>
+        <translation>การไล่เสียง</translation>
     </message>
     <message>
         <source>String Number</source>
-        <translation type="unfinished"/>
+        <translation>หมายเลขเส้น</translation>
     </message>
     <message>
         <source>Ottava</source>
-        <translation type="unfinished"/>
+        <translation>เสียงแปดระดับ</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
-        <translation type="unfinished"/>
+        <translation>โน้ตกระแทก</translation>
     </message>
     <message>
         <source>Appoggiatura</source>
-        <translation type="unfinished"/>
+        <translation>โน้ตพิง</translation>
     </message>
     <message>
         <source>Quarter grace note</source>
-        <translation type="unfinished"/>
+        <translation>โน้ตน้อยดำ</translation>
     </message>
     <message>
         <source>16th grace note</source>
-        <translation type="unfinished"/>
+        <translation>โน้ตน้อยสองชั้น</translation>
     </message>
     <message>
         <source>32nd grace note</source>
-        <translation type="unfinished"/>
+        <translation>โน้ตน้อยสามชั้น</translation>
     </message>
     <message>
         <source>Key Signatures</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องหมายประจำกุญแจ</translation>
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องหมายประจำจังหวะ</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished"/>
+        <translation>2/2 อัลลาเบรเว</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished"/>
+        <translation>เส้นกั้นห้อง</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"/>
+        <translation>ปกติ</translation>
     </message>
     <message>
         <source>Dashed</source>
-        <translation type="unfinished"/>
+        <translation>ประ</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation type="unfinished"/>
+        <translation>เครื่องหมายเชื่อมเสียง</translation>
     </message>
     <message>
         <source>Crescendo</source>
-        <translation type="unfinished"/>
+        <translation>ดังขึ้นเรื่อยๆ</translation>
     </message>
     <message>
         <source>Diminuendo</source>
-        <translation type="unfinished"/>
+        <translation>เบาลงเรื่อยๆ</translation>
     </message>
     <message>
         <source>Prima volta</source>
-        <translation type="unfinished"/>
+        <translation>เวลาแรก</translation>
     </message>
     <message>
         <source>Seconda volta</source>
-        <translation type="unfinished"/>
+        <translation>เวลารอง</translation>
     </message>
     <message>
         <source>Terza volta</source>
-        <translation type="unfinished"/>
+        <translation>เวลาสาม</translation>
     </message>
     <message>
         <source>Seconda volta 2</source>
-        <translation type="unfinished"/>
+        <translation>เวลารอง 2</translation>
     </message>
     <message>
         <source>Trill line</source>
-        <translation type="unfinished"/>
+        <translation>เส้นเสียงสั่น</translation>
     </message>
     <message>
         <source>Text line</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัดข้อความ</translation>
     </message>
     <message>
         <source>Line</source>
-        <translation type="unfinished"/>
+        <translation>บรรทัด</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation type="unfinished"/>
+        <translation>อาร์เปจโจและการไล่เสียง</translation>
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished"/>
+        <translation>อาร์เปจโจ</translation>
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
-        <translation type="unfinished"/>
+        <translation>การหายใจและการหยุด</translation>
     </message>
     <message>
         <source>Caesura</source>
-        <translation type="unfinished"/>
+        <translation>ช่วงเว้นวรรค</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation type="unfinished"/>
+        <translation>การสร้างเสียงและโน้ตประดับ</translation>
     </message>
     <message>
         <source>Fingering %1</source>
-        <translation type="unfinished"/>
+        <translation>การจัดวางนิ้ว %1</translation>
     </message>
     <message>
         <source>String number %1</source>
-        <translation type="unfinished"/>
+        <translation>สายที่ %1</translation>
     </message>
     <message>
         <source>Repeat measure sign</source>
-        <translation type="unfinished"/>
+        <translation>สัญลักษณ์เล่นห้องซ้ำ</translation>
     </message>
     <message>
         <source>Da Capo</source>
-        <translation type="unfinished"/>
+        <translation>อีกครั้ง</translation>
     </message>
     <message>
         <source>Da Capo al Fine</source>
-        <translation type="unfinished"/>
+        <translation>อีกครั้งจนสิ้นสุด</translation>
     </message>
     <message>
         <source>Da Capo al Coda</source>
-        <translation type="unfinished"/>
+        <translation>อีกครั้งถึงโคดา</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation type="unfinished"/>
+        <translation>การตัดท่อนและเว้นวรรค</translation>
     </message>
     <message>
         <source>Line break</source>
-        <translation type="unfinished"/>
+        <translation>การตัดบรรทัด</translation>
     </message>
     <message>
         <source>Page break</source>
-        <translation type="unfinished"/>
+        <translation>การตัดหน้ากระดาษ</translation>
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation type="unfinished"/>
+        <translation>การเว้นวรรคบรรทัดห้าเส้น</translation>
     </message>
     <message>
         <source>Start beam</source>
-        <translation type="unfinished"/>
+        <translation>เริ่มเส้นรวมเขบ็ต</translation>
     </message>
     <message>
         <source>Middle of beam</source>
-        <translation type="unfinished"/>
+        <translation>ระหว่างเส้นรวมเขบ็ต</translation>
     </message>
     <message>
         <source>No beam</source>
-        <translation type="unfinished"/>
+        <translation>ไม่มีเส้นรวมเขบ็ต</translation>
     </message>
     <message>
         <source>Start subbeam</source>
-        <translation type="unfinished"/>
+        <translation>เริ่มเส้นรวมเขบ็ตย่อย</translation>
     </message>
     <message>
         <source>Auto beam</source>
-        <translation type="unfinished"/>
+        <translation>เส้นรวมเขบ็ตอัตโนมัติ</translation>
     </message>
     <message>
         <source>Brackets...</source>
-        <translation type="unfinished"/>
+        <translation>วงเล็บ...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation type="unfinished"/>
+        <translation>การสร้างเสียงและโน้ตประดับ</translation>
     </message>
     <message>
         <source>Pedal</source>
-        <translation type="unfinished"/>
+        <translation>คันเหยียบ</translation>
     </message>
     <message>
         <source>MuseScore: Brackets</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: วงเล็บ</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation type="unfinished"/>
+        <translation>การหยุดและการเว้นวรรค</translation>
     </message>
     <message>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation type="unfinished"/>
+        <translation>ได้ออกจากเซสชันก่อนหน้าอย่างไม่ได้คาดคิด&#13;
+&#13;
+ต้องการจะเรียกคืนเซสชันหรือไม่</translation>
     </message>
     <message>
         <source>Note Heads</source>
-        <translation type="unfinished"/>
+        <translation>หัวโน้ต</translation>
     </message>
     <message>
         <source>Varied coda</source>
-        <translation type="unfinished"/>
+        <translation>โคดาแปรผัน</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: การสร้างเสียงและโน้ตประดับ</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: การหยุดและการเว้นวรรค</translation>
     </message>
     <message>
         <source>Check for Update</source>
-        <translation type="unfinished"/>
+        <translation>ตรวจสอบการปรับปรุง</translation>
     </message>
     <message>
         <source>Script
@@ -3627,140 +3646,140 @@ is incompatible with current interface</source>
     <name>NewWizard</name>
     <message>
         <source>MuseScore: Create New Score</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: สร้างบทเพลงใหม่</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อเรื่อง:</translation>
     </message>
     <message>
         <source>Subtitle:</source>
-        <translation type="unfinished"/>
+        <translation>คำบรรยาย:</translation>
     </message>
     <message>
         <source>Composer:</source>
-        <translation type="unfinished"/>
+        <translation>ผู้ประพันธ์:</translation>
     </message>
     <message>
         <source>Poet:</source>
-        <translation type="unfinished"/>
+        <translation>กวี:</translation>
     </message>
     <message>
         <source>Copyright:</source>
-        <translation type="unfinished"/>
+        <translation>ลิขสิทธิ์:</translation>
     </message>
     <message>
         <source>Create new score from template</source>
-        <translation type="unfinished"/>
+        <translation>สร้างบทเพลงใหม่จากแม่แบบ</translation>
     </message>
     <message>
         <source>Create new score from scratch</source>
-        <translation type="unfinished"/>
+        <translation>สร้างบทเพลงใหม่ทั้งหมด</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage1</name>
     <message>
         <source>Create New Score</source>
-        <translation type="unfinished"/>
+        <translation>สร้างบทเพลงใหม่</translation>
     </message>
     <message>
         <source>This wizard creates a new score</source>
-        <translation type="unfinished"/>
+        <translation>ตัวช่วยสร้างนี้จะสร้างบทเพลงใหม่</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage2</name>
     <message>
         <source>Create New Score</source>
-        <translation type="unfinished"/>
+        <translation>สร้างบทเพลงใหม่</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation type="unfinished"/>
+        <translation>โปรดระบุชุดเครื่องดนตรี บรรทัดห้าเส้นหนึ่งบรรทัดหรือมากกว่าจะใช้ในการแสดงออกเครื่องดนตรีแต่ละชนิด</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation type="unfinished"/>
+        <translation>สร้างบทเพลงใหม่</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation type="unfinished"/>
+        <translation>สร้างเครื่องหมายประจำจังหวะ</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation type="unfinished"/>
+        <translation>สร้างบทเพลงใหม่</translation>
     </message>
     <message>
         <source>Select Template File:</source>
-        <translation type="unfinished"/>
+        <translation>เลือกแฟ้มแม่แบบ</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation type="unfinished"/>
+        <translation>สร้างบทเพลงใหม่</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
-        <translation type="unfinished"/>
+        <translation>เลือกเครื่องหมายประจำกุญแจ:</translation>
     </message>
 </context>
 <context>
     <name>Note</name>
     <message>
         <source>Note Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติโน้ต...</translation>
     </message>
     <message>
         <source>Tuplet...</source>
-        <translation type="unfinished"/>
+        <translation>จังหวะยืม...</translation>
     </message>
     <message>
         <source>Tuplet Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติจังหวะยืม...</translation>
     </message>
     <message>
         <source>Delete Tuplet</source>
-        <translation type="unfinished"/>
+        <translation>ลบจังหวะยืม</translation>
     </message>
 </context>
 <context>
     <name>NoteBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>head index</source>
-        <translation type="unfinished"/>
+        <translation>ดัชนีหัว</translation>
     </message>
     <message>
         <source>note head group</source>
-        <translation type="unfinished"/>
+        <translation>กลุ่มหัวโน้ต</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"/>
+        <translation>อัตโนมัติ</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"/>
+        <translation>ผู้ใช้</translation>
     </message>
     <message>
         <source>Offset</source>
-        <translation type="unfinished"/>
+        <translation>ความเฉ</translation>
     </message>
     <message>
         <source>Tuning</source>
@@ -3779,416 +3798,416 @@ is incompatible with current interface</source>
     <name>PageBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"/>
+        <translation>หน้า</translation>
     </message>
     <message>
         <source>Page No.:</source>
-        <translation type="unfinished"/>
+        <translation>หน้าที่:</translation>
     </message>
 </context>
 <context>
     <name>PageSettingsBase</name>
     <message>
         <source>MuseScore: Page Settings</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: การตั้งค่าหน้ากระดาษ</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"/>
+        <translation>ตัวอย่าง</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"/>
+        <translation>นำไปใช้</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>ตกลง</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>ยกเลิก</translation>
     </message>
     <message>
         <source>Page Size</source>
-        <translation type="unfinished"/>
+        <translation>ขนาดหน้ากระดาษ</translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation type="unfinished"/>
+        <translation>สองด้าน</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation type="unfinished"/>
+        <translation>แนวนอน</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"/>
+        <translation>ความสูง</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished"/>
+        <translation>ความกว้าง</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation type="unfinished"/>
+        <translation>การปรับเทียบ</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"/>
+        <translation>ช่องว่าง</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"/>
+        <translation>มม</translation>
     </message>
     <message>
         <source>inch</source>
-        <translation type="unfinished"/>
+        <translation>นิ้ว</translation>
     </message>
     <message>
         <source>Even Page Margins</source>
-        <translation type="unfinished"/>
+        <translation>ขอบหน้ากระดาษคู่</translation>
     </message>
     <message>
         <source>Bottom Margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบล้าง</translation>
     </message>
     <message>
         <source>Top Margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบบน</translation>
     </message>
     <message>
         <source>Right Margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบขวา</translation>
     </message>
     <message>
         <source>Left Margin</source>
-        <translation type="unfinished"/>
+        <translation>ขอบซ้าย</translation>
     </message>
     <message>
         <source>Odd Page Margins</source>
-        <translation type="unfinished"/>
+        <translation>ขอบหน้ากระดาษคี่</translation>
     </message>
 </context>
 <context>
     <name>Palette</name>
     <message>
         <source>Delete Contents</source>
-        <translation type="unfinished"/>
+        <translation>ลบเนื้อหา</translation>
     </message>
     <message>
         <source>Properties...</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติ...</translation>
     </message>
 </context>
 <context>
     <name>PaletteBox</name>
     <message>
         <source>Palettes</source>
-        <translation type="unfinished"/>
+        <translation>จานผสม</translation>
     </message>
 </context>
 <context>
     <name>PaletteBoxButton</name>
     <message>
         <source>Palette Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติจานผสม</translation>
     </message>
     <message>
         <source>Insert new Palette</source>
-        <translation type="unfinished"/>
+        <translation>แทรกจานผสมใหม่</translation>
     </message>
     <message>
         <source>Move Palette Up</source>
-        <translation type="unfinished"/>
+        <translation>ย้ายจานผสมขึ้น</translation>
     </message>
     <message>
         <source>Move Palette Down</source>
-        <translation type="unfinished"/>
+        <translation>ย้ายจานผสมลง</translation>
     </message>
     <message>
         <source>Enable Editing</source>
-        <translation type="unfinished"/>
+        <translation>เปิดการแก้ไข</translation>
     </message>
     <message>
         <source>Delete Palette</source>
-        <translation type="unfinished"/>
+        <translation>ลบจานผสม</translation>
     </message>
 </context>
 <context>
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติคอร์ด</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติเซลล์จานผสม</translation>
     </message>
     <message>
         <source>Content Offset</source>
-        <translation type="unfinished"/>
+        <translation>ความเฉเนื้อหา</translation>
     </message>
     <message>
         <source>x:</source>
-        <translation type="unfinished"/>
+        <translation>x:</translation>
     </message>
     <message>
         <source>y:</source>
-        <translation type="unfinished"/>
+        <translation>y:</translation>
     </message>
 </context>
 <context>
     <name>PaletteProperties</name>
     <message>
         <source>MuseScore: Palette Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: คุณสมบัติจานผสม</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อ:</translation>
     </message>
     <message>
         <source>Cell Size:</source>
-        <translation type="unfinished"/>
+        <translation>ขนาดเซลล์:</translation>
     </message>
     <message>
         <source>w:</source>
-        <translation type="unfinished"/>
+        <translation>ก:</translation>
     </message>
     <message>
         <source>h:</source>
-        <translation type="unfinished"/>
+        <translation>ส:</translation>
     </message>
     <message>
         <source>Show Grid</source>
-        <translation type="unfinished"/>
+        <translation>แสดงตาราง</translation>
     </message>
     <message>
         <source>Element Offset</source>
-        <translation type="unfinished"/>
+        <translation>ความเฉธาตุ</translation>
     </message>
     <message>
         <source>Scale:</source>
-        <translation type="unfinished"/>
+        <translation>การปรับเทียบ:</translation>
     </message>
 </context>
 <context>
     <name>PartEditBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>ฟอร์ม</translation>
     </message>
     <message>
         <source>Part Name</source>
-        <translation type="unfinished"/>
+        <translation>ชื่อส่วน</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"/>
+        <translation>ปริมาตร</translation>
     </message>
     <message>
         <source>Panorama Position</source>
-        <translation type="unfinished"/>
+        <translation>ตำแหน่งภาพกว้าง</translation>
     </message>
     <message>
         <source>Reverb</source>
-        <translation type="unfinished"/>
+        <translation>การสะท้อนเสียง</translation>
     </message>
     <message>
         <source>Chorus</source>
-        <translation type="unfinished"/>
+        <translation>การประสานเสียง</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished"/>
+        <translation>ปริมาตร</translation>
     </message>
     <message>
         <source>Pan</source>
-        <translation type="unfinished"/>
+        <translation>ภาพกว้าง</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation type="unfinished"/>
+        <translation>สะท้อน</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation type="unfinished"/>
+        <translation>ประสาน</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation type="unfinished"/>
+        <translation>ปิดเสียง</translation>
     </message>
     <message>
         <source>Solo</source>
-        <translation type="unfinished"/>
+        <translation>เดี่ยว</translation>
     </message>
     <message>
         <source>drumset</source>
-        <translation type="unfinished"/>
+        <translation>ชุดกลอง</translation>
     </message>
     <message>
         <source>Sound:</source>
-        <translation type="unfinished"/>
+        <translation>เสียง:</translation>
     </message>
     <message>
         <source>midi sound for part</source>
-        <translation type="unfinished"/>
+        <translation>เสียงมิดิสำหรับส่วน</translation>
     </message>
 </context>
 <context>
     <name>PianorollEditor</name>
     <message>
         <source>Cursor:</source>
-        <translation type="unfinished"/>
+        <translation>ตัวชี้เมาส์:</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished"/>
+        <translation>ความเร็ว:</translation>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished"/>
+        <translation>อัตโนมัติ</translation>
     </message>
     <message>
         <source>user</source>
-        <translation type="unfinished"/>
+        <translation>ผู้ใช้</translation>
     </message>
     <message>
         <source>offset</source>
-        <translation type="unfinished"/>
+        <translation>ความเฉ</translation>
     </message>
     <message>
         <source>Pitch:</source>
-        <translation type="unfinished"/>
+        <translation>ระดับเสียง:</translation>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: &lt;%1&gt;  บรรทัดห้าเส้น: %2</translation>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation type="unfinished"/>
+        <translation>แถบเครื่องมือ1</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation type="unfinished"/>
+        <translation>แถบเครื่องมือ2</translation>
     </message>
 </context>
 <context>
     <name>PlayPanelBase</name>
     <message>
         <source>MuseScore: Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: แผงการเล่น</translation>
     </message>
     <message>
         <source>measure.beat</source>
-        <translation type="unfinished"/>
+        <translation>ห้อง.จังหวะ</translation>
     </message>
     <message>
         <source>001.01</source>
-        <translation type="unfinished"/>
+        <translation>001.01</translation>
     </message>
     <message>
         <source>h:mm:s</source>
-        <translation type="unfinished"/>
+        <translation>h:mm:s</translation>
     </message>
     <message>
         <source>0:00:00</source>
-        <translation type="unfinished"/>
+        <translation>0:00:00</translation>
     </message>
     <message>
         <source>actual tempo</source>
-        <translation type="unfinished"/>
+        <translation>จังหวะจริง</translation>
     </message>
     <message>
         <source>120bpm</source>
-        <translation type="unfinished"/>
+        <translation>120bpm</translation>
     </message>
     <message>
         <source>relative tempo</source>
-        <translation type="unfinished"/>
+        <translation>จังหวะสัมพันธ์</translation>
     </message>
     <message>
         <source>100%</source>
-        <translation type="unfinished"/>
+        <translation>100%</translation>
     </message>
     <message>
         <source>Straight</source>
-        <translation type="unfinished"/>
+        <translation>ตรง</translation>
     </message>
     <message>
         <source>Swing</source>
-        <translation type="unfinished"/>
+        <translation>เหวี่ยง</translation>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation type="unfinished"/>
+        <translation>เล่นสลับ</translation>
     </message>
     <message>
         <source>Rewind</source>
-        <translation type="unfinished"/>
+        <translation>ย้อนกลับ</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"/>
+        <translation>เล่น</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished"/>
+        <translation>ปริมาตร</translation>
     </message>
     <message>
         <source>Tmp</source>
-        <translation type="unfinished"/>
+        <translation>จังหวะ</translation>
     </message>
 </context>
 <context>
     <name>PreferenceDialog</name>
     <message>
         <source>default</source>
-        <translation type="unfinished"/>
+        <translation>ค่าเริ่มต้น</translation>
     </message>
     <message>
         <source>Choose Notepaper</source>
-        <translation type="unfinished"/>
+        <translation>เลือกกระดาษบันทึก</translation>
     </message>
     <message>
         <source>Images (*.jpg *.gif *.png)</source>
-        <translation type="unfinished"/>
+        <translation>รูปภาพ (*.jpg *.gif *.png)</translation>
     </message>
     <message>
         <source>Choose Background Wallpaper</source>
-        <translation type="unfinished"/>
+        <translation>เลือกพื้นหลัง</translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
-        <translation type="unfinished"/>
+        <translation>เลือกตำแหน่งที่ทำงาน</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
-        <translation type="unfinished"/>
+        <translation>เลือกรายการเครื่องดนตรี</translation>
     </message>
     <message>
         <source>Instrument List (*.xml)</source>
-        <translation type="unfinished"/>
+        <translation>รายการเครื่องดนตรี (*.xml)</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
-        <translation type="unfinished"/>
+        <translation>เลือกบทเพลงเริ่มต้น</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation type="unfinished"/>
+        <translation>แฟ้ม MuseScore (*.mscz *.mscx *.msc);;ทั้งหมด (*)</translation>
     </message>
 </context>
 <context>
     <name>PrefsDialogBase</name>
     <message>
         <source>MuseScore: Preferences</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: การตั้งค่า</translation>
     </message>
     <message>
         <source>MuseScore Preferences</source>
@@ -4196,11 +4215,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"/>
+        <translation>ทั่วไป</translation>
     </message>
     <message>
         <source>Program Start</source>
-        <translation type="unfinished"/>
+        <translation>การเริ่มโปรแกรม</translation>
     </message>
     <message>
         <source>start empty</source>
@@ -4208,15 +4227,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>continue last session</source>
-        <translation type="unfinished"/>
+        <translation>ทำเซสชันสุดท้ายต่อ</translation>
     </message>
     <message>
         <source>start with new score</source>
-        <translation type="unfinished"/>
+        <translation>เริ่มด้วยบทเพลงใหม่</translation>
     </message>
     <message>
         <source>start with score:</source>
-        <translation type="unfinished"/>
+        <translation>เริ่มด้วยบทเพลง:</translation>
     </message>
     <message>
         <source>Browse...</source>
@@ -4224,11 +4243,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>show splash screen</source>
-        <translation type="unfinished"/>
+        <translation>แสดงหน้าจอลอย</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished"/>
+        <translation>ภาษา</translation>
     </message>
     <message>
         <source>cz Czech</source>
@@ -4236,19 +4255,19 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>de German</source>
-        <translation type="unfinished"/>
+        <translation>de เยอรมัน</translation>
     </message>
     <message>
         <source>en English</source>
-        <translation type="unfinished"/>
+        <translation>en อังกฤษ</translation>
     </message>
     <message>
         <source>es Spanish</source>
-        <translation type="unfinished"/>
+        <translation>es สเปน</translation>
     </message>
     <message>
         <source>fr French</source>
-        <translation type="unfinished"/>
+        <translation>fr ฝรั่งเศส</translation>
     </message>
     <message>
         <source>gl Galician</source>
@@ -4260,7 +4279,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>it Italian</source>
-        <translation type="unfinished"/>
+        <translation>it อิตาลี</translation>
     </message>
     <message>
         <source>nl Dutch</source>
@@ -4268,7 +4287,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>pt Portuguese</source>
-        <translation type="unfinished"/>
+        <translation>pt โปรตุเกส</translation>
     </message>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
@@ -4276,7 +4295,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>ru Russian</source>
-        <translation type="unfinished"/>
+        <translation>ru รัสเซีย</translation>
     </message>
     <message>
         <source>tr Turkey</source>
@@ -4288,27 +4307,27 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Paths</source>
-        <translation type="unfinished"/>
+        <translation>เส้นทาง</translation>
     </message>
     <message>
         <source>Instrument List:</source>
-        <translation type="unfinished"/>
+        <translation>รายการเครื่องดนตรี:</translation>
     </message>
     <message>
         <source>Working Directory:</source>
-        <translation type="unfinished"/>
+        <translation>ตำแหน่งที่ทำงาน:</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="unfinished"/>
+        <translation>หน้าต่าง</translation>
     </message>
     <message>
         <source>Play Panel:</source>
-        <translation type="unfinished"/>
+        <translation>แผงการเล่น:</translation>
     </message>
     <message>
         <source>show</source>
-        <translation type="unfinished"/>
+        <translation>แสดง</translation>
     </message>
     <message>
         <source>Style</source>
@@ -4316,7 +4335,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Auto Save</source>
-        <translation type="unfinished"/>
+        <translation>บันทึกอัตโนมัติ</translation>
     </message>
     <message>
         <source>Save every</source>
@@ -4324,7 +4343,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished"/>
+        <translation>นาที</translation>
     </message>
     <message>
         <source>Icons</source>
@@ -4356,43 +4375,43 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Canvas</source>
-        <translation type="unfinished"/>
+        <translation>พื้นที่</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"/>
+        <translation>พื้นหลัง</translation>
     </message>
     <message>
         <source>Wallpaper</source>
-        <translation type="unfinished"/>
+        <translation>ภาพพื้นหลัง</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="unfinished"/>
+        <translation>สี</translation>
     </message>
     <message>
         <source>Notesheet</source>
-        <translation type="unfinished"/>
+        <translation>กระดาษบันทึก</translation>
     </message>
     <message>
         <source>Misc.</source>
-        <translation type="unfinished"/>
+        <translation>จิปาถะ</translation>
     </message>
     <message>
         <source>Proximity for selecting elements</source>
-        <translation type="unfinished"/>
+        <translation>ความใกล้สำหรับการเลือกธาตุ</translation>
     </message>
     <message>
         <source>disable antialiased drawing</source>
-        <translation type="unfinished"/>
+        <translation>ปิดการวาดป้องกันสมนาม</translation>
     </message>
     <message>
         <source>uncheck this to speed up drawing</source>
-        <translation type="unfinished"/>
+        <translation>ไม่ต้องเลือกเพื่อเพิ่มความเร็วในการวาด</translation>
     </message>
     <message>
         <source>Draw Antialiased</source>
-        <translation type="unfinished"/>
+        <translation>วาดสมนาม</translation>
     </message>
     <message>
         <source>Text</source>
@@ -4400,7 +4419,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"/>
+        <translation>สี</translation>
     </message>
     <message>
         <source>Score element colors</source>
@@ -4432,15 +4451,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation type="unfinished"/>
+        <translation>การใส่โน้ต</translation>
     </message>
     <message>
         <source>Enable midi input</source>
-        <translation type="unfinished"/>
+        <translation>เปิดการนำมิดิเข้า</translation>
     </message>
     <message>
         <source>Play notes when editing</source>
-        <translation type="unfinished"/>
+        <translation>เล่นโน้ตเมื่อแก้ไข</translation>
     </message>
     <message>
         <source>Default duration:</source>
@@ -4452,7 +4471,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Alternate input method</source>
-        <translation type="unfinished"/>
+        <translation>สลับวิธีการนำเข้า</translation>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
@@ -4468,11 +4487,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Expand Repeats</source>
-        <translation type="unfinished"/>
+        <translation>ขยายการซ้ำ</translation>
     </message>
     <message>
         <source>enable midi remote control</source>
-        <translation type="unfinished"/>
+        <translation>เปิดรีโมทคอนโทรลมิดิ</translation>
     </message>
     <message>
         <source>MIDI Remote Control</source>
@@ -4480,23 +4499,23 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"/>
+        <translation>หยุด</translation>
     </message>
     <message>
         <source>is active</source>
-        <translation type="unfinished"/>
+        <translation>ทำงานอยู่</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"/>
+        <translation>...</translation>
     </message>
     <message>
         <source>record</source>
-        <translation type="unfinished"/>
+        <translation>บันทึก</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"/>
+        <translation>บันทึก</translation>
     </message>
     <message>
         <source>Rewind</source>
@@ -7505,7 +7524,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"/>
+        <translation>ขยายพื้นที่</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -8670,7 +8689,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation>คองกาต่ำ</translation>
     </message>
 </context>
 <context>
@@ -8705,7 +8724,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished"/>
+        <translation>อาร์เปจโจ</translation>
     </message>
     <message>
         <source>Accidental</source>
@@ -9570,7 +9589,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>arpeggio</source>
-        <translation type="unfinished"/>
+        <translation>อาร์เปจโจ</translation>
     </message>
     <message>
         <source>trillelement</source>
@@ -9578,11 +9597,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>arpeggio arrow down</source>
-        <translation type="unfinished"/>
+        <translation>อาร์เปจโจลง</translation>
     </message>
     <message>
         <source>arpeggio arrow up</source>
-        <translation type="unfinished"/>
+        <translation>อาร์เปจโจขึ้น</translation>
     </message>
     <message>
         <source>trill element</source>

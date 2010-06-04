@@ -3104,7 +3104,7 @@ before closing?</source>
     </message>
     <message>
         <source>Segno</source>
-        <translation>Segno</translation>
+        <translation>セーニョ</translation>
     </message>
     <message>
         <source>Coda</source>
@@ -3612,7 +3612,7 @@ Restore session?</source>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished"/>
+        <translation>スクリプト %1 は指定されたインターフェースと不適合です</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
@@ -4137,11 +4137,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished"/>
+        <translation>音量</translation>
     </message>
     <message>
         <source>Tmp</source>
-        <translation type="unfinished"/>
+        <translation>テンポ</translation>
     </message>
     <message>
         <source>Straight</source>
@@ -4227,7 +4227,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>show splash screen</source>
@@ -4327,11 +4327,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Save every</source>
-        <translation>すべて保存</translation>
+        <translation>保存間隔</translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished"/>
+        <translation>分毎</translation>
     </message>
     <message>
         <source>Icons</source>
@@ -4761,7 +4761,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Use Current Position</source>
-        <translation type="unfinished"/>
+        <translation>指定位置を使用</translation>
     </message>
 </context>
 <context>
@@ -5702,7 +5702,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Vol</source>
-        <translation type="unfinished"/>
+        <translation>音量</translation>
     </message>
     <message>
         <source>...</source>
@@ -5715,7 +5715,7 @@ and check that the file location is correct</source>
     <message>
         <source>Hz</source>
         <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"/>
+        <translation>Hz</translation>
     </message>
     <message>
         <source>Reverb</source>
@@ -8041,7 +8041,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Close current score</source>
-        <translation type="unfinished"/>
+        <translation>指定のスコアを閉じる</translation>
     </message>
     <message>
         <source>Print</source>
@@ -8404,7 +8404,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>articulation</name>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished"/>
+        <translation>下向きフェルマータ</translation>
     </message>
     <message>
         <source>thumb</source>
@@ -8512,7 +8512,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished"/>
+        <translation>上向きフェルマータ</translation>
     </message>
     <message>
         <source>ushortfermata</source>
@@ -9458,11 +9458,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished"/>
+        <translation>上向きフェルマータ</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished"/>
+        <translation>下向きフェルマータ</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -9586,11 +9586,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>segno</source>
-        <translation type="unfinished"/>
+        <translation>セーニョ</translation>
     </message>
     <message>
         <source>coda</source>
-        <translation type="unfinished"/>
+        <translation>コーダ</translation>
     </message>
     <message>
         <source>varied coda</source>
