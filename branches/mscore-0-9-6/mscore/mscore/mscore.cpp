@@ -73,7 +73,7 @@ QList<LanguageItem> languages;
 
 bool debugMode          = false;
 bool enableExperimental = false;
-#ifdef NDEBUG
+#ifdef QT_NO_DEBUG
 bool enableInspector    = false;
 #else
 bool enableInspector    = true;
