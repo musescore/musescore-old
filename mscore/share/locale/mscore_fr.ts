@@ -2300,7 +2300,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation>Afficher</translation>
+        <translation>Afficher plus d'instruments</translation>
     </message>
 </context>
 <context>
@@ -2362,7 +2362,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation>Afficher plus</translation>
+        <translation>Afficher plus d'instruments</translation>
     </message>
 </context>
 <context>
@@ -5404,7 +5404,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation>Afficher</translation>
+        <translation>Afficher plus d'instruments</translation>
     </message>
 </context>
 <context>
@@ -7127,7 +7127,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>rest</source>
-        <translation>soupir</translation>
+        <translation>silence</translation>
     </message>
     <message>
         <source>Add More Stretch</source>

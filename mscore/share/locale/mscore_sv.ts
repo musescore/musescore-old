@@ -48,7 +48,7 @@ p, li { white-space: pre-wrap; }
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished"/>
+        <translation>rund parentes</translation>
     </message>
 </context>
 <context>
@@ -1050,7 +1050,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Id</source>
@@ -1058,7 +1058,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Namn</translation>
+        <translation>Namn</translation>
     </message>
     <message>
         <source>Save As</source>
@@ -2456,7 +2456,7 @@ misslyckades: </translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished">lägg taktartssignatur till palett</translation>
+        <translation>lägg taktartssignatur till palett</translation>
     </message>
     <message>
         <source>Add</source>
@@ -3561,7 +3561,7 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Brackets...</source>
-        <translation type="unfinished"/>
+        <translation>Hakparenteser...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
@@ -4144,11 +4144,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Straight</source>
-        <translation type="unfinished"/>
+        <translation>Rakt</translation>
     </message>
     <message>
         <source>Swing</source>
-        <translation type="unfinished"/>
+        <translation>Sving</translation>
     </message>
     <message>
         <source>Shuffle</source>
@@ -4546,7 +4546,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>default</source>
-        <translation>standard</translation>
+        <translation>förval</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
@@ -4908,7 +4908,7 @@ Vänligen markera ett not- eller paustecken och försök igen
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: inläsning av språk misslyckades</translation>
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
@@ -5222,7 +5222,7 @@ Försök spara på annan plats.</translation>
     </message>
     <message>
         <source>Load failed: </source>
-        <translation type="unfinished"/>
+        <translation>Inläsning misslyckades: </translation>
     </message>
 </context>
 <context>

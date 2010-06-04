@@ -57,7 +57,7 @@ p, li { white-space: pre-wrap; }
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>圆括号</translation>
+        <translation>花连谱号</translation>
     </message>
 </context>
 <context>
@@ -109,14 +109,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>和弦/休止符</translation>
+        <translation>音符/休止符</translation>
     </message>
 </context>
 <context>
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>MuseScore：外框属性</translation>
+        <translation>MuseScore：占位框属性</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -848,7 +848,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>音符组属性</translation>
+        <translation>和弦属性</translation>
     </message>
     <message>
         <source>small</source>
@@ -1167,7 +1167,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load</source>
-        <translation>载入</translation>
+        <translation>加载</translation>
     </message>
     <message>
         <source>Save</source>
@@ -1412,11 +1412,11 @@ failed: </source>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation>纯音齐奏</translation>
+        <translation>纯一度</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation>增程齐奏</translation>
+        <translation>增一度</translation>
     </message>
     <message>
         <source>Diminished Second</source>
@@ -1508,7 +1508,7 @@ failed: </source>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation>降八度</translation>
+        <translation>减八度</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
@@ -1711,7 +1711,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System Bracket Distance:</source>
-        <translation>谱表组括号距离：</translation>
+        <translation>连谱号距离：</translation>
     </message>
     <message>
         <source>Voice 1</source>
@@ -1808,11 +1808,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>V-frame upper margin</source>
-        <translation>V-frame 上间距</translation>
+        <translation>垂直占位框上间距</translation>
     </message>
     <message>
         <source>V-frame lower margin</source>
-        <translation>V-frame 下间距</translation>
+        <translation>垂直占位框下间距</translation>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
@@ -1971,7 +1971,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1986,11 +1986,11 @@ space unit</extracomment>
     <name>Element</name>
     <message>
         <source>Set Invisible</source>
-        <translation>设定不可见</translation>
+        <translation>设为隐藏</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>设定可见</translation>
+        <translation>取消隐藏</translation>
     </message>
     <message>
         <source>Color...</source>
@@ -2005,7 +2005,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>invalid</source>
-        <translation>无效的</translation>
+        <translation>未设置</translation>
     </message>
     <message>
         <source>selectable</source>
@@ -2082,7 +2082,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text:</source>
-        <translation>文本：</translation>
+        <translation>文字：</translation>
     </message>
 </context>
 <context>
@@ -2130,7 +2130,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>文本属性</translation>
+        <translation>文字属性...</translation>
     </message>
 </context>
 <context>
@@ -2206,7 +2206,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2251,7 +2251,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Add</source>
-        <translation>增加</translation>
+        <translation>添加</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -2259,11 +2259,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Up</source>
-        <translation>上</translation>
+        <translation>向上</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>下</translation>
+        <translation>向下</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -2283,7 +2283,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Load</source>
-        <translation>装载</translation>
+        <translation>加载</translation>
     </message>
     <message>
         <source>Save</source>
@@ -2291,7 +2291,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>确定</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2321,7 +2321,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Add</source>
-        <translation>增加</translation>
+        <translation>添加</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -2333,15 +2333,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Down</source>
-        <translation>下</translation>
+        <translation>向下</translation>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>增加上面</translation>
+        <translation>加在上面</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>增加下面</translation>
+        <translation>加在下面</translation>
     </message>
     <message>
         <source>1</source>
@@ -2361,7 +2361,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation>查看更多</translation>
+        <translation>显示更多</translation>
     </message>
 </context>
 <context>
@@ -2469,7 +2469,7 @@ failed: </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>增加</translation>
+        <translation>添加</translation>
     </message>
 </context>
 <context>
@@ -2563,11 +2563,11 @@ failed: </translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation>继续</translation>
+        <translation>中点</translation>
     </message>
     <message>
         <source>End</source>
-        <translation>结束</translation>
+        <translation>终点</translation>
     </message>
     <message>
         <source>place:</source>
@@ -2645,7 +2645,7 @@ failed: </translation>
     </message>
     <message>
         <source>Begin</source>
-        <translation>开始</translation>
+        <translation>起始</translation>
     </message>
     <message>
         <source>End</source>
@@ -2886,7 +2886,7 @@ failed: </translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation>作曲者</translation>
+        <translation>作曲</translation>
     </message>
     <message>
         <source>Poet</source>
@@ -3018,7 +3018,7 @@ failed: </translation>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation>力度</translation>
+        <translation>力度记号</translation>
     </message>
     <message>
         <source>Tremolo</source>
@@ -3235,7 +3235,7 @@ failed: </translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>五线谱</translation>
+        <translation>谱表</translation>
     </message>
     <message>
         <source>Chordname</source>
@@ -3251,7 +3251,7 @@ failed: </translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>外框</translation>
+        <translation>占位框</translation>
     </message>
     <message>
         <source>TextLine</source>
@@ -3297,7 +3297,7 @@ before closing?</source>
     </message>
     <message>
         <source>Text</source>
-        <translation>文本</translation>
+        <translation>文字</translation>
     </message>
     <message>
         <source/>
@@ -3341,7 +3341,7 @@ before closing?</source>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>括线</translation>
+        <translation>连谱号</translation>
     </message>
     <message>
         <source>Akkolade</source>
@@ -3695,7 +3695,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage1</name>
     <message>
         <source>Create New Score</source>
-        <translation>创建新乐谱</translation>
+        <translation>新建乐谱</translation>
     </message>
     <message>
         <source>This wizard creates a new score</source>
@@ -3706,7 +3706,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage2</name>
     <message>
         <source>Create New Score</source>
-        <translation>建立新乐谱</translation>
+        <translation>新建乐谱</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
@@ -3717,7 +3717,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation>建立新乐谱</translation>
+        <translation>新建乐谱</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
@@ -3728,7 +3728,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation>建立新乐谱</translation>
+        <translation>新建乐谱</translation>
     </message>
     <message>
         <source>Select Template File:</source>
@@ -3739,7 +3739,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation>建立新乐谱</translation>
+        <translation>新建乐谱</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
@@ -3867,7 +3867,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Space</source>
-        <translation>线间隔</translation>
+        <translation>谱线间距（sp）</translation>
     </message>
     <message>
         <source>mm</source>
@@ -4357,7 +4357,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>附注内容</translation>
+        <translation>音符输入</translation>
     </message>
     <message>
         <source>Enable midi input</source>
@@ -4397,7 +4397,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>倒带</translation>
+        <translation>后退</translation>
     </message>
     <message>
         <source>Play</source>
@@ -4437,7 +4437,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>default</source>
-        <translation>预置值</translation>
+        <translation>默认</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
@@ -4541,7 +4541,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Action</source>
-        <translation>动作</translation>
+        <translation>命令</translation>
     </message>
     <message>
         <source>Shortcut</source>
@@ -4617,7 +4617,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation>输入音符：</translation>
+        <translation>音符输入：</translation>
     </message>
     <message>
         <source>Application Font</source>
@@ -4689,11 +4689,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Scaling</source>
-        <translation>音阶</translation>
+        <translation>缩放比例</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>间隔</translation>
+        <translation>谱线间距（sp）</translation>
     </message>
     <message>
         <source>mm</source>
@@ -4710,7 +4710,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
-        <translation>可用音高范围之外的音符用颜色标记</translation>
+        <translation>音域范围之外的音符用颜色标记</translation>
     </message>
     <message>
         <source>Export MIDI</source>
@@ -4785,7 +4785,7 @@ is incompatible with current interface</source>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>脚踏</translation>
+        <translation>Ped （踏板）</translation>
     </message>
     <message>
         <source>* (Pedal)</source>
@@ -4953,15 +4953,15 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Tuplet...</source>
-        <translation>连音</translation>
+        <translation>连音符...</translation>
     </message>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>连音属性</translation>
+        <translation>连音符属性...</translation>
     </message>
     <message>
         <source>Delete Tuplet</source>
-        <translation>删除连音</translation>
+        <translation>删除连音符</translation>
     </message>
 </context>
 <context>
@@ -4972,11 +4972,11 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>small</source>
-        <translation>缩小</translation>
+        <translation>缩小的</translation>
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation>和弦属性</translation>
+        <translation>音符组属性</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -4989,7 +4989,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>附加后缀间隔</translation>
+        <translation>附加后置间隔</translation>
     </message>
 </context>
 <context>
@@ -5088,7 +5088,7 @@ failed: </translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore:写式样</translation>
+        <translation>MuseScore：写入样式</translation>
     </message>
     <message>
         <source>MuseScore: Read File</source>
@@ -5236,7 +5236,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>写样式失败 </translation>
+        <translation>写入样式文件失败： </translation>
     </message>
     <message>
         <source>Load failed: </source>
@@ -5259,11 +5259,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Staff</source>
-        <translation>五线谱</translation>
+        <translation>谱表</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>编辑鼓组</translation>
+        <translation>编辑鼓组...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
@@ -5300,7 +5300,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Segment</source>
-        <translation>区段</translation>
+        <translation>区段（Segment）</translation>
     </message>
     <message>
         <source>Clef Segment</source>
@@ -5320,7 +5320,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>和弦/休止符</translation>
+        <translation>音符/休止符</translation>
     </message>
     <message>
         <source>Breath Segment</source>
@@ -5402,7 +5402,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>show more</source>
-        <translation>查看更多</translation>
+        <translation>显示更多</translation>
     </message>
 </context>
 <context>
@@ -5534,23 +5534,23 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>连音线开始</translation>
+        <translation>符杠起点</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>连音线中间</translation>
+        <translation>符杠中点</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation>连音线结尾</translation>
+        <translation>符杠末尾</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>无连音线</translation>
+        <translation>无符杠</translation>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation>开始 1/32</translation>
+        <translation>起始为32分音符</translation>
     </message>
     <message>
         <source>Segment:</source>
@@ -5561,11 +5561,11 @@ and check that the file location is correct</source>
     <name>SlurBase</name>
     <message>
         <source>Form</source>
-        <translation>失败的</translation>
+        <translation>表单</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation>连奏</translation>
+        <translation>连句线</translation>
     </message>
     <message>
         <source>Slur End</source>
@@ -5600,7 +5600,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>dotted</source>
-        <translation>────── (点线)</translation>
+        <translation>────── (虚线)</translation>
     </message>
 </context>
 <context>
@@ -5623,19 +5623,19 @@ and check that the file location is correct</source>
     <message>
         <source>startElement</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>起始单元</translation>
     </message>
     <message>
         <source>endElement</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>结束单元</translation>
     </message>
 </context>
 <context>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: 编辑  乐谱/分谱  属性</translation>
+        <translation>MuseScore：编辑 谱表/分谱 属性</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5739,7 +5739,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Reverb</source>
-        <translation>回转</translation>
+        <translation>混响</translation>
     </message>
     <message>
         <source>Room Size:</source>
@@ -5763,11 +5763,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Chorus</source>
-        <translation>合唱效果</translation>
+        <translation>合唱</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation>单位：</translation>
+        <translation>类型：</translation>
     </message>
     <message>
         <source>Sine</source>
@@ -5828,15 +5828,15 @@ and check that the file location is correct</source>
     <name>Text</name>
     <message>
         <source>Set Invisible</source>
-        <translation>设置隐藏</translation>
+        <translation>设为隐藏</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>设置显示</translation>
+        <translation>取消隐藏</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>文字属性</translation>
+        <translation>文字属性...</translation>
     </message>
 </context>
 <context>
@@ -5855,17 +5855,17 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Space</source>
-        <translation>空间</translation>
+        <translation>谱线间隔(sp)</translation>
     </message>
     <message>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation>文本</translation>
+        <translation>文字</translation>
     </message>
     <message>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation>文本:</translation>
+        <translation>文字：</translation>
     </message>
     <message>
         <source>Offset:</source>
@@ -5875,32 +5875,32 @@ and check that the file location is correct</source>
     <message>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation/>
+        <translation>绝对:</translation>
     </message>
     <message>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation/>
+        <translation>相对:</translation>
     </message>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation>文本格式</translation>
+        <translation>文字格式</translation>
     </message>
 </context>
 <context>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation>设置不可见</translation>
+        <translation>设为隐藏</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>设置可见</translation>
+        <translation>取消隐藏</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>文本属性</translation>
+        <translation>文字属性...</translation>
     </message>
 </context>
 <context>
@@ -5934,11 +5934,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>设置隐藏</translation>
+        <translation>设为隐藏</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>设置显示</translation>
+        <translation>取消隐藏</translation>
     </message>
 </context>
 <context>
@@ -5949,11 +5949,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Text</source>
-        <translation>文本</translation>
+        <translation>文字</translation>
     </message>
     <message>
         <source>Frame</source>
-        <translation>外框</translation>
+        <translation>占位框</translation>
     </message>
 </context>
 <context>
@@ -5973,7 +5973,7 @@ and check that the file location is correct</source>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: 文本属性</translation>
+        <translation>MuseScore: 文字属性</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
@@ -6122,7 +6122,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>MM</source>
-        <translation>MM</translation>
+        <translation>毫米</translation>
     </message>
     <message>
         <source>offset in Space units</source>
@@ -6130,7 +6130,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Space</source>
-        <translation>间隔</translation>
+        <translation>谱线间距（sp）</translation>
     </message>
     <message>
         <source>enable text frame</source>
@@ -6138,7 +6138,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Frame</source>
-        <translation>外框</translation>
+        <translation>占位框</translation>
     </message>
     <message>
         <source>draw circled frame</source>
@@ -6166,7 +6166,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>mm</source>
-        <translation>mm</translation>
+        <translation>毫米</translation>
     </message>
     <message>
         <source>Margin:</source>
@@ -6190,7 +6190,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>System Flag</source>
-        <translation>系统旗标</translation>
+        <translation>谱表组标记</translation>
     </message>
 </context>
 <context>
@@ -6219,11 +6219,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation>4/4 四四拍子</translation>
+        <translation>四四拍子（简写）</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation>2拍子</translation>
+        <translation>二二拍子（简写）</translation>
     </message>
 </context>
 <context>
@@ -6238,7 +6238,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>将拍号加入面板</translation>
+        <translation>将拍号添加到面板</translation>
     </message>
     <message>
         <source>Add</source>
@@ -6273,7 +6273,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>拍号</translation>
+        <translation>创建拍号</translation>
     </message>
     <message>
         <source>Enter Number of Measures:</source>
@@ -6526,7 +6526,7 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>六连音 属性</translation>
+        <translation>连音符属性...</translation>
     </message>
 </context>
 <context>
@@ -6568,15 +6568,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>括线</translation>
+        <translation>方括号</translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>自动括线</translation>
+        <translation>自动添加方括号</translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>括线</translation>
+        <translation>方括号</translation>
     </message>
     <message>
         <source>relation:</source>
@@ -6595,7 +6595,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Number</source>
-        <translation>编号</translation>
+        <translation>数字</translation>
     </message>
     <message>
         <source>number</source>
@@ -6603,7 +6603,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>relation</source>
-        <translation>关联</translation>
+        <translation>关系</translation>
     </message>
     <message>
         <source>nothing</source>
@@ -6615,7 +6615,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>自动括号</translation>
+        <translation>自动添加括号</translation>
     </message>
     <message>
         <source>bracket</source>
@@ -6641,7 +6641,7 @@ p, li { white-space: pre-wrap; }
     <name>VBox</name>
     <message>
         <source>Add</source>
-        <translation>增加</translation>
+        <translation>添加</translation>
     </message>
     <message>
         <source>VBox Properties...</source>
@@ -6652,11 +6652,11 @@ p, li { white-space: pre-wrap; }
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation>Volta 属性</translation>
+        <translation>数字结尾/跳房子 属性</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation>文本</translation>
+        <translation>文字：</translation>
     </message>
     <message>
         <source>Repeat List:</source>
@@ -6671,7 +6671,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Line Properties...</source>
-        <translation>线属性</translation>
+        <translation>线条符号属性...</translation>
     </message>
 </context>
 <context>
@@ -7281,19 +7281,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Insert Horizontal Frame</source>
-        <translation>插入水平框</translation>
+        <translation>插入水平占位框</translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
-        <translation>插入垂直框</translation>
+        <translation>插入垂直占位框</translation>
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation>追加水平框</translation>
+        <translation>追加水平占位框</translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation>追加垂直框</translation>
+        <translation>追加垂直占位框</translation>
     </message>
     <message>
         <source>Duplet</source>
@@ -7441,7 +7441,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation>标准</translation>
+        <translation>还原号</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -7505,11 +7505,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation>连音线中间</translation>
+        <translation>符杠中点</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>无连音线</translation>
+        <translation>无符杠</translation>
     </message>
     <message>
         <source>beam 32</source>
@@ -7589,7 +7589,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo</source>
-        <translation>节拍</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <source>Metronome</source>
@@ -7613,7 +7613,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Text</source>
-        <translation>增加文本</translation>
+        <translation>添加文字</translation>
     </message>
     <message>
         <source>Frame Text</source>
@@ -7649,7 +7649,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Composer</source>
-        <translation>作曲家</translation>
+        <translation>作曲</translation>
     </message>
     <message>
         <source>Add Composer Text</source>
@@ -7661,7 +7661,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Poet</source>
-        <translation>诗人</translation>
+        <translation>作词</translation>
     </message>
     <message>
         <source>Add Poet Text</source>
@@ -7705,7 +7705,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>预排记号</translation>
+        <translation>排练记号</translation>
     </message>
     <message>
         <source>Play</source>
@@ -7717,7 +7717,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rewind</source>
-        <translation>回转</translation>
+        <translation>后退</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -7785,7 +7785,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>display in concert pitch</source>
-        <translation>以音乐会音高显示</translation>
+        <translation>以合奏调显示</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
@@ -7793,7 +7793,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation>以音乐会音高显示</translation>
+        <translation>以合奏调显示</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -7873,11 +7873,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>show frames</source>
-        <translation>显示外框</translation>
+        <translation>显示占位框</translation>
     </message>
     <message>
         <source>Show Frames</source>
-        <translation>显示外框</translation>
+        <translation>显示占位框</translation>
     </message>
     <message>
         <source>show keyboard</source>
@@ -7937,7 +7937,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Search</source>
-        <translation>搜寻</translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -8417,7 +8417,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation>分谱</translation>
+        <translation>分谱...</translation>
     </message>
 </context>
 <context>
@@ -8428,7 +8428,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>thumb</source>
-        <translation>姆指把位</translation>
+        <translation>拇指把位</translation>
     </message>
     <message>
         <source>sforzato</source>
@@ -8738,11 +8738,11 @@ p, li { white-space: pre-wrap; }
     <name>elementName</name>
     <message>
         <source>Symbol</source>
-        <translation>系统</translation>
+        <translation>符号</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>文本</translation>
+        <translation>文字</translation>
     </message>
     <message>
         <source>SlurSegment</source>
@@ -8802,7 +8802,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Glissando</source>
-        <translation>滑奏</translation>
+        <translation>滑音</translation>
     </message>
     <message>
         <source>RepeatMeasure</source>
@@ -8834,7 +8834,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hook</source>
-        <translation>符尾</translation>
+        <translation>勾线</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -8854,7 +8854,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo</source>
-        <translation>节拍</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <source>StaffText</source>
@@ -8910,7 +8910,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>颤音</translation>
+        <translation>震音</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -8946,7 +8946,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ottava</source>
-        <translation>八音度</translation>
+        <translation>八度记号</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -8962,11 +8962,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Segment</source>
-        <translation>分段</translation>
+        <translation>区段</translation>
     </message>
     <message>
         <source>System</source>
-        <translation>系统</translation>
+        <translation>谱表组</translation>
     </message>
     <message>
         <source>Compound</source>
@@ -8974,11 +8974,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord</source>
-        <translation>音符组</translation>
+        <translation>弦</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation>连奏</translation>
+        <translation>连句线</translation>
     </message>
     <message>
         <source>Element</source>
@@ -9543,7 +9543,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tenuto</source>
-        <translation>音符持续</translation>
+        <translation>保持音</translation>
     </message>
     <message>
         <source>uportato</source>
@@ -9579,11 +9579,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reverse turn</source>
-        <translation>回音</translation>
+        <translation>逆回音</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation>顺回音</translation>
+        <translation>回音(turn)</translation>
     </message>
     <message>
         <source>trill</source>
@@ -9611,7 +9611,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>segno</source>
-        <translation>记号</translation>
+        <translation>segno记号</translation>
     </message>
     <message>
         <source>coda</source>
@@ -9651,7 +9651,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prall</source>
-        <translation>装饰音</translation>
+        <translation>逆连音</translation>
     </message>
     <message>
         <source>mordent</source>
@@ -9659,15 +9659,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prall prall</source>
-        <translation>装饰音 装饰音</translation>
+        <translation>逆连音 逆连音</translation>
     </message>
     <message>
         <source>prall mordent</source>
-        <translation>装饰音 波音</translation>
+        <translation>逆连音 波音</translation>
     </message>
     <message>
         <source>up prall</source>
-        <translation>上 装饰音</translation>
+        <translation>上 逆连音</translation>
     </message>
     <message>
         <source>up mordent</source>
@@ -9675,11 +9675,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prall down</source>
-        <translation>装饰音 下</translation>
+        <translation>下 逆连音</translation>
     </message>
     <message>
         <source>down prall</source>
-        <translation>下 装饰音</translation>
+        <translation>下 逆连音</translation>
     </message>
     <message>
         <source>down mordent</source>
@@ -9687,11 +9687,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prall up</source>
-        <translation>装饰音 上</translation>
+        <translation>逆连音 上</translation>
     </message>
     <message>
         <source>line prall</source>
-        <translation>线 装饰音</translation>
+        <translation>线 逆连音</translation>
     </message>
     <message>
         <source>caesura curved</source>
