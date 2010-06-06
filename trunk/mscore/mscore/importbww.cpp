@@ -190,12 +190,12 @@ namespace Bww {
             TimeSig ts = TimeSig(score, beat, beats);
             int st = ts.subtype();
             if (st) {
-                  score->sigmap()->add(tick, TimeSig::getSig(st));
+                  //ws score->sigmap()->add(tick, TimeSig::getSig(st));
                   TimeSig* timesig = new TimeSig(score);
-                  timesig->setTick(tick);
+                  //ws timesig->setTick(tick);
                   timesig->setSubtype(st);
                   timesig->setTrack(0);
-                  Segment* s = currentMeasure->getSegment(timesig);
+                  Segment* s = currentMeasure->getSegment(timesig, tick);
                   s->add(timesig);
                   }
             }
@@ -248,7 +248,7 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
 
       // create chord
       Chord* cr = new Chord(score);
-      cr->setTick(tick);
+      //ws cr->setTick(tick);
       cr->setBeamMode(bm);
       cr->setTrack(0);
       if (grace) {
@@ -271,7 +271,7 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       xmlSetPitch(note, sao.s.toAscii(), sao.a, sao.o);
       cr->add(note);
       // add chord to measure
-      Segment* s = currentMeasure->getSegment(cr);
+      Segment* s = currentMeasure->getSegment(SegChordRest, tick);
       s->add(cr);
 }
 
