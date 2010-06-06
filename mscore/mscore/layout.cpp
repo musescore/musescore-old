@@ -106,28 +106,24 @@ MeasureBase* Score::last()  const
 //    in staff
 //---------------------------------------------------------
 
-Element* Score::searchNote(int tick, int track) const
+ChordRest* Score::searchNote(int tick, int track) const
       {
       int startTrack = track;
       int endTrack   = startTrack + 1;
 
-      for (const MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* measure = (Measure*)mb;
-            Element* ipe = 0;
+      ChordRest* ipe = 0;
+      for (const Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             for (int track = startTrack; track < endTrack; ++track) {
-                  for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                        Element* ie  = segment->element(track);
-                        if (!ie)
+                  for (Segment* segment = m->first(SegChordRest);
+                     segment; segment = segment->next(SegChordRest)) {
+                        ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
+                        if (!cr)
                               continue;
-                        if (!ie->isChordRest())
-                              continue;
-                        if (ie->tick() == tick)
-                              return ie;
-                        if (ie->tick() >  tick)
-                              return ipe ? ipe : ie;
-                        ipe = ie;
+                        if (cr->tick() == tick)
+                              return cr;
+                        if (cr->tick() >  tick)
+                              return ipe ? ipe : cr;
+                        ipe = cr;
                         }
                   }
             }
@@ -217,7 +213,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             Chord* chord = note->chord();
             int move     = chord->staffMove();
             int line     = note->line();
-            int ticks    = chord->tickLen();
+            int ticks    = chord->ticks();
             int head     = note->noteHead();      // symbol number or note head
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
@@ -233,7 +229,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                   if (sameHead) {
                         Note* pnote = notes[idx-1];
                         if (note->userOff().isNull() && pnote->userOff().isNull()) {
-                              if (ticks > pnote->chord()->tickLen()) {
+                              if (ticks > pnote->chord()->ticks()) {
                                     pnote->setHidden(true);
                                     pnote->setAccidentalType(ACC_NONE);
                                     note->setHidden(false);
@@ -545,7 +541,8 @@ void Score::layoutStage2()
                               beamEnd = true;
                               }
                         else if (bm != BEAM_MID) {
-                              Fraction f(sigmap()->timesig(cr->tick()).fraction());
+//                              Fraction f(sigmap()->timesig(cr->tick()).fraction());
+                              Fraction f(measure->actualTimesig());
                               if (endBeam(f, cr, cr->tick() - measure->tick()))
                                     beamEnd = true;
                               }
@@ -597,7 +594,8 @@ void Score::layoutStage2()
                         if (a1 == 0)
                               a1 = cr;
                         else {
-                              Fraction f(sigmap()->timesig(cr->tick()).fraction());
+                              // Fraction f(sigmap()->timesig(cr->tick()).fraction());
+                              Fraction f(measure->actualTimesig());
                               if (bm != BEAM_MID
                                  &&
                                    (endBeam(f, cr, cr->tick() - measure->tick())
@@ -665,6 +663,9 @@ void Score::layoutStage3()
 void Score::doLayout()
       {
       _needLayout = false;
+      if (layoutFlags & LAYOUT_FIX_TICKS)
+            fixTicks();
+      _needLayout = 0;
 
 #if 0 // DEBUG
       if (startLayout) {
@@ -813,7 +814,10 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                               break;
                         }
                   }
-            bool needKeysig = keyIdx.isValid() && (isFirstSystem || styleB(ST_genKeysig));
+            bool needKeysig = keyIdx.isValid()
+               && keyIdx.accidentalType != 0
+               && (isFirstSystem || styleB(ST_genKeysig))
+               ;
             if (staff->useTablature())
                   needKeysig = false;
             if (needKeysig && !hasKeysig) {
@@ -822,10 +826,9 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   //
                   KeySig* ks = keySigFactory(keyIdx);
                   ks->setTrack(i * VOICES);
-                  ks->setTick(tick);
                   ks->setGenerated(true);
                   ks->setMag(staff->mag());
-                  Segment* seg = m->getSegment(ks);
+                  Segment* seg = m->getSegment(ks, tick);
                   seg->add(ks);
                   m->setDirty();
                   }
@@ -844,11 +847,10 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         //
                         hasClef = new Clef(this);
                         hasClef->setTrack(i * VOICES);
-                        hasClef->setTick(tick);
                         hasClef->setGenerated(true);
                         hasClef->setSmall(false);
                         hasClef->setMag(staff->mag());
-                        Segment* s = m->getSegment(hasClef);
+                        Segment* s = m->getSegment(hasClef, tick);
                         s->add(hasClef);
                         m->setDirty();
                         }
@@ -1277,16 +1279,15 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             bool hasCourtesyKeysig = false;
 
             if (m) {
-                  int tick            = lm->tick() + lm->tickLen();
-                  AL::SigEvent sig1   = _sigmap->timesig(tick - 1);
-                  AL::SigEvent sig2   = _sigmap->timesig(tick);
-                  if (styleB(ST_genCourtesyTimesig) && !sig1.nominalEqual(sig2)) {
+                  int tick        = lm->tick() + lm->ticks();
+                  Fraction sig2   = m->nominalTimesig();
+                  Fraction sig1   = m->prev() ? m->prevMeasure()->nominalTimesig() : sig2;
+                  if (styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2)) {
                         Segment* s  = m->getSegment(SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
                               if (s->element(track) == 0) {
-                                    TimeSig* ts = new TimeSig(this, sig2.fraction().denominator(),
-                                       sig2.fraction().numerator());
+                                    TimeSig* ts = new TimeSig(this, sig2);
                                     Measure* nm = m->nextMeasure();
                                     if (nm){
                                           Segment* tss = nm->findSegment(SegTimeSig, tick);
@@ -1436,7 +1437,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         if (needRelayout)
                               m->layoutX(1.0);
                         minWidth    += m->layoutWidth().stretchable;
-                        totalWeight += m->tickLen() * m->userStretch();
+                        totalWeight += m->ticks() * m->userStretch();
                         }
                   }
             minWidth += system->leftMargin();
@@ -1462,7 +1463,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               ww = rowWidth / system->measures().size();
                               }
                         else {
-                              double weight = m->tickLen() * m->userStretch();
+                              double weight = m->ticks() * m->userStretch();
                               ww            = m->layoutWidth().stretchable + rest * weight;
                               }
                         m->layout(ww);
@@ -1714,7 +1715,7 @@ bool Score::doReLayout()
             else {
                   Measure* m   = static_cast<Measure*>(mb);
                   minWidth    += m->layoutWidth().stretchable;
-                  totalWeight += m->tickLen() * m->userStretch();
+                  totalWeight += m->ticks() * m->userStretch();
                   }
             }
 
@@ -1731,7 +1732,7 @@ bool Score::doReLayout()
                         }
                   mb->setPos(pos);
                   Measure* m    = static_cast<Measure*>(mb);
-                  double weight = m->tickLen() * m->userStretch();
+                  double weight = m->ticks() * m->userStretch();
                   ww            = m->layoutWidth().stretchable + rest * weight;
                   m->layout(ww);
                   }

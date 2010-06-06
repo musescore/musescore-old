@@ -47,8 +47,8 @@ class DurationElement : public Element {
       Tuplet* tuplet() const                         { return _tuplet;   }
       virtual Beam* beam() const                     { return 0;         }
       int ticks() const;
-      int tickLen() const                            { return ticks(); }
       void convertTicks();   // for scores version < 1.12
+      virtual int tick() const = 0;
 
       virtual Fraction fraction() const = 0;
       virtual void setFraction(const Fraction&) = 0;

@@ -66,6 +66,7 @@ class BarLine : public Element {
       virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag();
       virtual void updateGrips(int*, QRectF*) const;
+      int tick() const;
       };
 
 #endif

@@ -69,7 +69,7 @@ void PlayPanel::setScore(Score* s)
       if (cs) {
             MeasureBase* lm = cs->last();
             if (lm)
-                  setEndpos(lm->tick() + lm->tickLen());
+                  setEndpos(lm->tick() + lm->ticks());
             }
       volumeSlider->setEnabled(cs != 0);
       posSlider->setEnabled(cs != 0);
@@ -78,7 +78,7 @@ void PlayPanel::setScore(Score* s)
       setTempo(cs ? cs->tempomap()->tempo(0) : 120.0);
       setRelTempo(cs ? cs->tempomap()->relTempo() : 100);
       if (cs)
-            setEndpos(cs->lastMeasure()->tick() + cs->lastMeasure()->tickLen());
+            setEndpos(cs->lastMeasure()->tick() + cs->lastMeasure()->ticks());
       else
             setEndpos(0);
       heartBeat2(seq->getCurTime());
@@ -181,6 +181,7 @@ void PlayPanel::swingStyleChanged(int index)
 
 void PlayPanel::heartBeat(int tick, int utick)
       {
+#if 0 // TODO
       if (cachedTickPosition == utick)
             return;
       if (cs == 0)
@@ -194,6 +195,7 @@ void PlayPanel::heartBeat(int tick, int utick)
       sprintf(buffer, "%03d.%02d", bar+1, beat+1);
       posLabel->setText(QString(buffer));
       posSlider->setValue(utick);
+#endif
       }
 
 //---------------------------------------------------------

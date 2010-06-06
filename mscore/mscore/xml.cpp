@@ -110,3 +110,23 @@ ValueType readValueType(QDomElement e)
       return AUTO_VAL;
       }
 
+//---------------------------------------------------------
+//   fTag
+//---------------------------------------------------------
+
+void Xml::fTag(const char* name, const Fraction& f)
+      {
+      tagE(QString("%1 z=\"%2\" n=\"%3\"").arg(name).arg(f.numerator()).arg(f.denominator()));
+      }
+
+//---------------------------------------------------------
+//   readFraction
+//---------------------------------------------------------
+
+Fraction readFraction(QDomElement e)
+      {
+      double z = e.attribute("z", "0.0").toDouble();
+      double n = e.attribute("n", "0.0").toDouble();
+      return Fraction(z, n);
+      }
+

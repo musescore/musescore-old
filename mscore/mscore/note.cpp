@@ -53,6 +53,7 @@
 #include "part.h"
 #include "tablature.h"
 #include "fret.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -318,10 +319,10 @@ int Note::playTicks() const
             note = note->tieBack()->startNote();
       int len = 0;
       while (note->tieFor() && note->tieFor()->endNote()) {
-            len += note->chord()->tickLen();
+            len += note->chord()->ticks();
             note = note->tieFor()->endNote();
             }
-      len += note->chord()->tickLen();
+      len += note->chord()->ticks();
       return len;
       }
 
@@ -974,12 +975,19 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   // fall through
 
             case HARMONY:
-            case LYRICS:
                   e->setParent(chord()->measure());
-                  e->setTick(chord()->tick());
+                  static_cast<Harmony*>(e)->setTick(chord()->tick());
                   e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
+                  return e;
+
+            case LYRICS:
+                  e->setParent(chord()->measure());
+                  e->setTrack((track() / VOICES) * VOICES);
+                  e->setParent(chord()->segment());
+                  score()->select(e, SELECT_SINGLE, 0);
+                  score()->cmdAdd(e);
                   return e;
 
             case ACCIDENTAL:
@@ -1085,7 +1093,6 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                         delete e;
                         return 0;
                         }
-                  e->setTick(cr1->tick());
                   e->setTrack(track());
                   e->setParent(cr1);
                   score()->undoAddElement(e);

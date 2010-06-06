@@ -35,7 +35,7 @@ class MeasureProperties : public QDialog, private Ui::MeasurePropertiesBase {
       Measure* m;
 
       void apply();
-      AL::SigEvent sig() const;
+      Fraction sig() const;
       bool isIrregular() const;
       int repeatCount() const;
       bool visible(int staffIdx);

@@ -243,7 +243,7 @@ double Aeolus::setEffectParameter(int effect, int parameter, double value)
             value = p->max();
       else if (value < p->min())
             value = p->min();
-printf("aeolus set %d %d %f\n", effect, parameter, value);
+// printf("aeolus set %d %d %f\n", effect, parameter, value);
       p->setVal(value);
       return value;
       }

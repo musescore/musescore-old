@@ -63,6 +63,7 @@ class StaffText : public Text  {
       bool getAeolusStop(int group, int idx) const;
       void setSetAeolusStops(bool val) { _setAeolusStops = val; }
       bool setAeolusStops() const      { return _setAeolusStops; }
+      void setTick(int val)            { _tick = val; }
       };
 
 //---------------------------------------------------------

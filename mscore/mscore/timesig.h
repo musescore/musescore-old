@@ -55,6 +55,7 @@ class TimeSig : public Element {
       TimeSig(Score*);
       TimeSig(Score*, int st);
       TimeSig(Score*, int n, int z1, int z2=0, int z3=0, int z4=0);
+      TimeSig(Score*, const Fraction&);
 
       TimeSig* clone() const   { return new TimeSig(*this); }
       ElementType type() const { return TIMESIG; }
@@ -85,6 +86,8 @@ class TimeSig : public Element {
             return (z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n;
             }
       Segment* segment() const { return (Segment*)parent(); }
+      Measure* measure() const { return (Measure*)parent()->parent(); }
+      void setTick(int v) { _tick = v; }
       };
 
 #endif

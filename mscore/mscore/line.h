@@ -83,7 +83,7 @@ class LineSegment : public Element {
 class SLine : public Element {
    protected:
       QList<LineSegment*> segments;
-      int _tick2;
+      int _tick, _tick2;
       bool _diagonal;
       Anchor _anchor;         // enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE};
 
@@ -91,7 +91,9 @@ class SLine : public Element {
       SLine(Score* s);
       SLine(const SLine&);
 
-      void setTick2(int t);
+      void setTick(int t)  { _tick = t;     }
+      int tick() const     { return _tick;  }
+      void setTick2(int t) { _tick2 = t;    }
       int tick2() const    { return _tick2; }
       virtual void layout();
       bool readProperties(QDomElement node);

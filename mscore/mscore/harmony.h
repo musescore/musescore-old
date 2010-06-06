@@ -208,6 +208,8 @@ struct TextSegment {
 class Harmony : public Text {
       Q_DECLARE_TR_FUNCTIONS(Harmony)
 
+      int _tick;
+
       int _rootTpc;                       // root note for chord
       int _baseTpc;                       // bass note or chord base; used for "slash" chords
                                           // or notation of base note in chord
@@ -271,6 +273,8 @@ class Harmony : public Text {
       const ChordDescription* fromXml(const QString& s,  const QList<HDegree>&);
       const ChordDescription* fromXml(const QString& s);
       virtual void spatiumChanged(double oldValue, double newValue);
+      int tick() const      { return _tick; }
+      void setTick(int val) { _tick = val; }
       };
 
 #endif

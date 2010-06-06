@@ -334,7 +334,7 @@ Element* Clef::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       if (e->type() == CLEF) {
             int stype  = e->subtype();
             if (subtype() != stype) {
-                  staff()->changeClef(tick(), stype);
+                  staff()->changeClef(segment()->tick(), stype);
                   clef = this;
                   }
             }
@@ -482,4 +482,12 @@ void Clef::read(QDomElement e)
             setUserOff(QPointF());
       }
 
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+
+int Clef::tick() const
+      {
+      return segment() ? segment()->tick() : 0;
+      }
 

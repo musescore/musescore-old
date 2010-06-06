@@ -96,7 +96,7 @@ Measure* Score::tick2measure(int tick) const
                   continue;
             Measure* m = static_cast<Measure*>(mb);
             int st = m->tick();
-            int l  = m->tickLen();
+            int l  = m->ticks();
             if (tick >= st && tick < (st+l))
                   return m;
             // hack:
@@ -113,7 +113,7 @@ Measure* Score::tick2measure(int tick) const
         printf("first %p\n", first());
             for (MeasureBase* m = first(); m; m = m->next()) {
                   int st = m->tick();
-                  int l  = m->tickLen();
+                  int l  = m->ticks();
                   printf("%d - %d\n", st, st+l);
                   }
 //            }
@@ -128,7 +128,7 @@ MeasureBase* Score::tick2measureBase(int tick) const
       {
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             int st = mb->tick();
-            int l  = mb->tickLen();
+            int l  = mb->ticks();
             if (tick >= st && tick < (st+l))
                   return mb;
             }

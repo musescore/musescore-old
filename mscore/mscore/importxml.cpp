@@ -1176,6 +1176,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       int measureLen = maxtick - measure->tick();
 
       if (lastMeasureLen != measureLen) {
+#if 0 // TODO
             AL::TimeSigMap* sigmap = score->sigmap();
             int tick        = measure->tick();
             AL::SigEvent se = sigmap->timesig(tick);
@@ -1202,6 +1203,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               }
                         }
                   }
+#endif
             }
       lastMeasureLen = measureLen;
       tick = maxtick;
@@ -1919,10 +1921,9 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                                     if (tick) {
                                           // apply to all staves in part
                                           KeySig* keysig = new KeySig(score);
-                                          keysig->setTick(tick);
                                           keysig->setTrack((staffIdx + i) * VOICES);
                                           keysig->setSubtype(key);
-                                          Segment* s = measure->getSegment(keysig);
+                                          Segment* s = measure->getSegment(keysig, tick);
                                           s->add(keysig);
                                           }
                                     }
@@ -1939,10 +1940,9 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               // dont generate symbol for tick 0
                               if (tick) {
                                     KeySig* keysig = new KeySig(score);
-                                    keysig->setTick(tick);
                                     keysig->setTrack(staffIdx * VOICES);
                                     keysig->setSubtype(key);
-                                    Segment* s = measure->getSegment(keysig);
+                                    Segment* s = measure->getSegment(keysig, tick);
                                     s->add(keysig);
                                     }
                               }
@@ -2069,6 +2069,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         }
                   }
             if (st) {
+#if 0 // TODO
                   // add timesig to all staves
                   score->sigmap()->add(tick, TimeSig::getSig(st));
                   Part* part = score->part(staff);
@@ -2078,9 +2079,10 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         timesig->setTick(tick);
                         timesig->setSubtype(st);
                         timesig->setTrack((staff + i) * VOICES);
-                        Segment* s = measure->getSegment(timesig);
+                        Segment* s = measure->getSegment(timesig, tick);
                         s->add(timesig);
                         }
+#endif
                   }
             else
                   printf("unknown time signature, beats=<%s> beat-type=<%s> symbol=<%s>\n",
@@ -2133,7 +2135,7 @@ void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
                   domError(e);
             }
       l->setTrack(staff * VOICES);
-      Segment* segment = measure->getSegment(l);
+      Segment* segment = measure->getSegment(l, tick);
       segment->add(l);
       }
 
@@ -2617,7 +2619,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             } // for (int s ...
       if (!found) {
             if (voicelist[relStaff].size() >= unsigned(VOICES))
-                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
+                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %zd >= %d)\n",
                          staff, relStaff, voicelist[relStaff].size(), VOICES);
             else {
                   voicelist[relStaff].push_back(voice);
@@ -2649,7 +2651,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   durationType.setType(Duration::V_MEASURE);
                   len = 0;
                   }
-            cr = new Rest(score, tick, durationType);
+            cr = new Rest(score, durationType);
             cr->setDots(dots);
             if (beamMode == BEAM_BEGIN || beamMode == BEAM_MID)
                   cr->setBeamMode(BEAM_MID);
@@ -2657,7 +2659,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   cr->setBeamMode(BEAM_NO);
             cr->setTrack(track);
             ((Rest*)cr)->setStaffMove(move);
-            Segment* s = measure->getSegment(cr);
+            Segment* s = measure->getSegment(cr, tick);
             s->add(cr);
             cr->setVisible(printObject == "yes");
             if (step != "" && 0 <= octave && octave <= 9) {
@@ -2723,7 +2725,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (cr == 0) {
                   SegmentType st = SegChordRest;
                   cr = new Chord(score);
-                  cr->setTick(tick);
                   cr->setBeamMode(bm);
                   cr->setTrack(track);
 //                  printf(" grace=%d\n", grace);
@@ -2734,7 +2735,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         ((Chord*)cr)->setNoteType(nt);
                         // the subtraction causes a grace at tick=0 to fail
                         // cr->setTick(tick - (AL::division / 2));
-                        cr->setTick(tick);
                         if (durationType.type() == Duration::V_QUARTER) {
                               ((Chord*)cr)->setNoteType(NOTE_GRACE4);
                               cr->setDuration(Duration::V_QUARTER);
@@ -2758,7 +2758,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   cr->setDots(dots);
 //                  printf(" cr->tick()=%d ", cr->tick());
-                  Segment* s = measure->getSegment(st, cr->tick(), gl);
+                  Segment* s = measure->getSegment(st, tick, gl);
                   s->add(cr);
                   }
 //            printf(" cr->tick()=%d", cr->tick());
@@ -2960,7 +2960,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             }
       if (breathmark) {
             Breath* b = new Breath(score);
-            b->setTick(tick);
             b->setTrack((staff + relStaff) * VOICES + voice);
             Segment* seg = measure->getSegment(SegBreath, tick);
             seg->add(b);
@@ -2971,7 +2970,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   tuplet->setTrack((staff + relStaff) * VOICES);
                   tuplet->setRatio(Fraction(actualNotes, normalNotes));
                   tuplet->setTick(tick);
-                  // tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
+                  // tuplet->setBaseLen(cr->ticks() * actualNotes / normalNotes);
                   // avoid rounding errors:
                   // int bl = duration * actualNotes / normalNotes;
                   // tuplet->setBaseLen((AL::division * bl) / divisions);
@@ -3325,9 +3324,8 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
       if (tick) {
             // dont generate symbol for tick 0
             Clef* clefs = new Clef(score, clef);
-            clefs->setTick(tick);
             clefs->setTrack((staffIdx + clefno) * VOICES);
-            Segment* s = measure->getSegment(clefs);
+            Segment* s = measure->getSegment(clefs, tick);
             s->add(clefs);
             ++clefno;   // ??
             }

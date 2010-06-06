@@ -328,7 +328,6 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
       if (!removeFlag) {
             KeySig* keysig = new KeySig(_score);
             keysig->setTrack(idx() * VOICES);
-            keysig->setTick(tick);
             keysig->changeType(st);
 
             SegmentType stype = Segment::segmentType(KEYSIG);
@@ -417,7 +416,6 @@ void Staff::changeClef(int tick, int st)
       if (!removeFlag) {
             Clef* clef = new Clef(_score);
             clef->setTrack(idx() * VOICES);
-            clef->setTick(tick);
             clef->setSubtype(st);
 
             //
@@ -475,6 +473,11 @@ void Staff::setKey(int tick, int st)
       ke.setAccidentalType(st);
 
       (*_keymap)[tick] = ke;
+      }
+
+void Staff::setKey(int tick, const KeySigEvent& st)
+      {
+      (*_keymap)[tick] = st;
       }
 
 //---------------------------------------------------------

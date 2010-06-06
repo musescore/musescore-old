@@ -112,6 +112,7 @@ void ExportMidi::writeHeader()
       //    write time signature
       //--------------------------------------------
 
+#if 0 // TODO
       AL::TimeSigMap* sigmap = cs->sigmap();
       foreach(const RepeatSegment* rs, *cs->repeatList()) {
             int startTick  = rs->tick;
@@ -151,6 +152,7 @@ void ExportMidi::writeHeader()
                   track->insert(ev);
                   }
             }
+#endif
 
       //---------------------------------------------------
       //    write key signatures

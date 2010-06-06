@@ -721,10 +721,10 @@ void OveToMScore::convertSignatures(){
 	const std::vector<MeasureToTick::TimeTick> tts = mtt_->getTimeTicks() ;
 	for( i=0; i<(int)tts.size(); ++i ){
 		MeasureToTick::TimeTick tt = tts[i];
-		AL::TimeSigMap* sigmap = score_->sigmap();
 		Fraction f(tt.numerator_, tt.denominator_);
 
-		sigmap->add(tt.tick_, f);
+//TODO		AL::TimeSigMap* sigmap = score_->sigmap();
+//		sigmap->add(tt.tick_, f);
 
 		Measure* measure  = score_->tick2measure(tt.tick_);
 		if(measure){
@@ -743,7 +743,7 @@ void OveToMScore::convertSignatures(){
 				}
 				ts->setSubtype(subtype);*/
 
-				Segment* seg = measure->getSegment(ts);
+				Segment* seg = measure->getSegment(ts, ts->tick());
 				seg->add(ts);
 			}
 		}
@@ -772,11 +772,10 @@ void OveToMScore::convertSignatures(){
 		                	(*score_->staff(staffCount+j)->keymap())[tick] = key;
 
 		                    KeySig* keysig = new KeySig(score_);
-		                    keysig->setTick(tick);
 		                    keysig->setTrack((staffCount+j) * VOICES);
 		                    keysig->setSubtype(key);
 
-		                	Segment* s = measure->getSegment(keysig);
+		                	Segment* s = measure->getSegment(keysig, tick);
 		                	s->add(keysig);
 
 		                	createKey = true;
@@ -798,11 +797,10 @@ void OveToMScore::convertSignatures(){
 				Measure* measure = score_->tick2measure(mtt_->getTick(0, 0));
 				if(measure){
 					KeySig* keysig = new KeySig(score_);
-			        keysig->setTick(0);
 			        keysig->setTrack((staffCount+j) * VOICES);
 			        keysig->setSubtype(0);
 
-					Segment* s = measure->getSegment(keysig);
+					Segment* s = measure->getSegment(keysig, 0);
 					s->add(keysig);
 				}
 			}
@@ -836,10 +834,9 @@ void OveToMScore::convertSignatures(){
 						int clefIndex = OveClefToClef(clefPtr->getClefType());
 
 			            Clef* clef = new Clef(score_, clefIndex);
-			            clef->setTick(absTick);
 			            clef->setTrack((staffCount+j)*VOICES);
 
-			            Segment* s = measure->getSegment(clef);
+			            Segment* s = measure->getSegment(clef, absTick);
 			            s->add(clef);
 
 						if(staff){
@@ -1334,9 +1331,9 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 		Duration duration(Duration::V_MEASURE);
 		int absTick = mtt_->getTick(measure->no(), 0);
 
-		cr = new Rest(score_, absTick, duration);
+		cr = new Rest(score_, duration);
 		cr->setTrack(track);
-		Segment* s = measure->getSegment(cr);
+		Segment* s = measure->getSegment(cr, absTick);
 		s->add(cr);
 	}
 
@@ -1349,7 +1346,7 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 			Duration duration = OveNoteType_To_Duration(container->getNoteType());
 			duration.setDots(container->getDot());
 
-			cr = new Rest(score_, tick, duration);
+			cr = new Rest(score_, duration);
 			cr->setTrack(noteTrack);
 			cr->setVisible(container->getShow());
 
@@ -1362,7 +1359,7 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 				}
 			}
 
-			Segment* s = measure->getSegment(cr);
+			Segment* s = measure->getSegment(cr, tick);
 			s->add(cr);
 		} else {
 			std::vector<OVE::Note*> notes = container->getNotesRests();
@@ -1372,7 +1369,6 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 				SegmentType st = SegChordRest;
 
 				cr = new Chord(score_);
-				cr->setTick(tick);
 				cr->setTrack(noteTrack);
 
 				// grace
@@ -1682,7 +1678,6 @@ void OveToMScore::convertArticulation(
 	}
 	case OVE::Articulation_Pause :{
         Breath* b = new Breath(score_);
-        b->setTick(absTick);
         b->setTrack(track);
         Segment* seg = measure->getSegment(SegBreath, absTick);
         seg->add(b);
@@ -1806,7 +1801,7 @@ void OveToMScore::convertLyrics(Measure* measure, int part, int staff, int track
 		lyric->setTick(tick);
 		lyric->setText(toQString(lyricPtr->getLyric()));
 		lyric->setTrack(track);
-	    Segment* segment = measure->getSegment(lyric);
+	    Segment* segment = measure->getSegment(lyric, tick);
 	    segment->add(lyric);
 	}
 }

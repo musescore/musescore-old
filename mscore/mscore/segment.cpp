@@ -269,7 +269,6 @@ void Segment::add(Element* el)
 // printf("segment add(%d, %d, %s)\n", tick(), el->track(), el->name());
       el->setParent(this);
 
-      el->setTick(tick());    //DEBUG
       int track = el->track();
       if (track == -1) {
             printf("element <%s> has invalid track\n", el->name());
@@ -414,10 +413,6 @@ SegmentType Segment::segmentType(int type)
 void Segment::setTime(int stick)
       {
       setTick(stick);
-      foreach(Element* e, _elist) {
-            if (e)
-                  e->setTick(stick);
-            }
       foreach(const LyricsList& ll, _lyrics) {
             foreach(Lyrics* l, ll) {
                   if (l)
@@ -496,4 +491,21 @@ void Segment::checkEmpty() const
             }
       }
 
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+
+int Segment::tick() const
+      {
+      return _tick + measure()->tick();
+      }
+
+//---------------------------------------------------------
+//   setTick
+//---------------------------------------------------------
+
+void Segment::setTick(int t)
+      {
+      _tick = t - measure()->tick();
+      }
 

@@ -70,6 +70,7 @@ class KeySig : public Element {
       bool operator==(const KeySig&) const;
       void changeType(KeySigEvent);
       void setSubtype(KeySigEvent e)  { Element::setSubtype(e.subtype); }
+      int tick() const;
       };
 
 extern const char* keyNames[15];

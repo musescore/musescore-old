@@ -315,7 +315,7 @@ void Score::toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx)
             int tickOffset = rs->utick - rs->tick;
             for (Measure* m = tick2measure(startTick); m; m = m->nextMeasure()) {
                   collectMeasureEvents(events, m, firstStaffIdx, nextStaffIdx, tickOffset);
-                  if (m->tick() + m->tickLen() >= endTick)
+                  if (m->tick() + m->ticks() >= endTick)
                         break;
                   }
 
@@ -359,7 +359,7 @@ void Score::updateRepeatList(bool expandRepeats)
                   return;
             RepeatSegment* s = new RepeatSegment;
             s->tick  = 0;
-            s->len   = m->tick() + m->tickLen();
+            s->len   = m->tick() + m->ticks();
             s->utick = 0;
             s->utime = 0.0;
             s->timeOffset = 0.0;

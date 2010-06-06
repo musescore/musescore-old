@@ -232,13 +232,13 @@ void RepeatList::unwind()
                   if (volta && (rstack.size() > 1 || !volta->hasEnding(n))
                      && (rstack.top().type == RepeatLoop::LOOP_REPEAT))
                         {
-                        tickOffset -= m->tickLen();   // skip this measure
+                        tickOffset -= m->ticks();   // skip this measure
                         rs->len = m->tick() - rs->tick;
                         if (rs->len) {
                               append(rs);
                               rs = new RepeatSegment;
                               }
-                        rs->tick  = m->tick() + m->tickLen();
+                        rs->tick  = m->tick() + m->ticks();
                         rs->utick = rs->tick + tickOffset;
                         }
                   }
@@ -258,9 +258,9 @@ void RepeatList::unwind()
                               Measure* nmb = _score->searchLabel(jumpTo);
                               if (nmb) {
                                     rstack.push(RepeatLoop(s->playUntil(), s->continueAt()));
-                                    tickOffset += m->tick() + m->tickLen() - nmb->tick();
+                                    tickOffset += m->tick() + m->ticks() - nmb->tick();
 
-                                    rs->len = m->tick() + m->tickLen() - rs->tick;
+                                    rs->len = m->tick() + m->ticks() - rs->tick;
                                     append(rs);
                                     rs = new RepeatSegment;
                                     rs->tick  = nmb->tick();
@@ -308,10 +308,10 @@ void RepeatList::unwind()
 
                               Measure* nm = rstack.top().m;
 
-                              rs->len = m->tick() + m->tickLen() - rs->tick;
+                              rs->len = m->tick() + m->ticks() - rs->tick;
                               append(rs);
 
-                              tickOffset += m->tick() + m->tickLen() - nm->tick();
+                              tickOffset += m->tick() + m->ticks() - nm->tick();
 
                               rs = new RepeatSegment;
                               rs->tick  = nm->tick();
@@ -339,8 +339,8 @@ void RepeatList::unwind()
                               break;
                         Measure* nmb = _score->searchLabel(rstack.top().cont, nm->nextMeasure());
                         if (nmb) {
-                              tickOffset += m->tick() + m->tickLen() - nmb->tick();
-                              rs->len = m->tick() + m->tickLen() - rs->tick;
+                              tickOffset += m->tick() + m->ticks() - nmb->tick();
+                              rs->len = m->tick() + m->ticks() - rs->tick;
                               append(rs);
                               rs = new RepeatSegment;
                               rs->tick  = nmb->tick();
@@ -349,7 +349,7 @@ void RepeatList::unwind()
                         else if (!rstack.top().cont.isEmpty())
                               printf("Cont label <%s> not found\n", qPrintable(rstack.top().cont));
                         else {
-                              rs->len = m->tick() + m->tickLen() - rs->tick;
+                              rs->len = m->tick() + m->ticks() - rs->tick;
                               append(rs);
                               rs = 0;
                               }
@@ -374,7 +374,7 @@ void RepeatList::unwind()
 
       Measure* lm = _score->lastMeasure();
       if (rs) {
-            rs->len = lm->tick() - rs->tick + lm->tickLen();
+            rs->len = lm->tick() - rs->tick + lm->ticks();
             if (rs->len)
                   append(rs);
             else

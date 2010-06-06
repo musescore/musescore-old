@@ -62,6 +62,7 @@ struct MeasureWidth {
 class MeasureBase : public Element {
       MeasureBase* _next;
       MeasureBase* _prev;
+      int _tick;
 
    protected:
       MeasureWidth _mw;
@@ -83,10 +84,10 @@ class MeasureBase : public Element {
       MeasureBase* prev() const              { return _prev;   }
       void setPrev(MeasureBase* e)           { _prev = e;      }
 
-      Measure* nextMeasure();
-      Measure* prevMeasure();
+      Measure* nextMeasure() const;
+      Measure* prevMeasure() const;
 
-      virtual int tickLen() const            { return 0;       }
+      virtual int ticks() const              { return 0;       }
       virtual void write(Xml&, int, bool) const = 0;
 
       virtual void scanElements(void* data, void (*func)(void*, Element*));
@@ -106,6 +107,9 @@ class MeasureBase : public Element {
       virtual void remove(Element*);
       void setDirty()                        { _dirty = true; }
       virtual void spatiumChanged(double oldValue, double newValue);
+
+      int tick() const                   { return _tick;         }
+      void setTick(int t)                { _tick = t;            }
       };
 
 #endif

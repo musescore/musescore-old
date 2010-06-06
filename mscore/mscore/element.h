@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -129,8 +129,6 @@ class Element {
 
       int _track;                 ///< staffIdx * VOICES + voice
                                   ///< -1 if this is a system element
-
-      int _tick;
       QColor _color;
       double _mag;                ///< standard magnification (derived value)
 
@@ -139,6 +137,7 @@ class Element {
                                   ///< depends on Spatium ("space") units!
 
    protected:
+      int _tick;
       Score* _score;
       QPointF _pos;               ///< Reference position, relative to _parent.
                                   ///< Usually set from layout().
@@ -258,6 +257,9 @@ class Element {
       void setVoice(int v)                    { _track = (_track / VOICES) + v; }
       Staff* staff() const;
 
+      virtual int tick() const      { return _tick; }
+//      virtual void setTick(int val) { _tick = val; }
+
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);
@@ -271,11 +273,6 @@ class Element {
       const char* name() const;
       virtual QString userName() const;
       void dumpQPointF(const char*) const;
-
-      bool operator>(const Element&) const;
-
-      int tick() const                { return _tick;         }
-      virtual void setTick(int t)     { _tick = t;            }
 
       virtual Space space() const     { return Space(0.0, width()); }
 
@@ -395,8 +392,8 @@ class ElementList : public QList<Element*> {
       void replace(Element* old, Element* n);
       void write(Xml&) const;
 
-      void add(Element*);
-      void move(Element* el, int tick);
+//      void add(Element*);
+//      void move(Element* el, int tick);
       void write(Xml&, const char* name) const;
       void read(QDomElement);
       };
@@ -441,6 +438,7 @@ class Cursor : public Element {
       bool _on;
       double _h;
       Segment* _seg;
+      int _tick;
 
    public:
       Cursor(Score*, ScoreView*);
@@ -456,6 +454,8 @@ class Cursor : public Element {
       virtual void setHeight(qreal v)  { _h = v; }
       void setSegment(Segment* s)      { _seg = s; }
       Segment* segment() const         { return _seg;  }
+      int tick() const                 { return _tick; }
+      void setTick(int val)            { _tick = val;  }
       };
 
 //---------------------------------------------------------

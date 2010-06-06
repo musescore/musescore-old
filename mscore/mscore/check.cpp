@@ -100,15 +100,14 @@ void Score::checkScore()
                                           Measure* m = tick2measure(ttick);
                                           int len = ticks;
                                           // split notes on measure boundary
-                                          if ((ttick + len) > m->tick() + m->tickLen())
-                                                len = m->tick() + m->tickLen() - ttick;
+                                          if ((ttick + len) > m->tick() + m->ticks())
+                                                len = m->tick() + m->ticks() - ttick;
                                           QList<Duration> dl = toDurationList(Fraction::fromTicks(len), true);
                                           foreach(Duration d, dl) {
                                                 Rest* rest = new Rest(this);
                                                 rest->setDuration(d);
-                                                rest->setTick(ttick);
                                                 rest->setTrack(track);
-                                                Segment* s = m->getSegment(rest);
+                                                Segment* s = m->getSegment(rest, ttick);
                                                 s->add(rest);
                                                 ttick += rest->ticks();
 printf("  add Rest at %d len %d\n", ttick, rest->ticks());

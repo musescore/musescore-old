@@ -54,6 +54,7 @@ class Symbol : public BSymbol {
       void setAbove(bool);
 
       virtual qreal baseLine() const { return 0.0; }
+      void setTick(int val) { _tick = val; }
       };
 
 #endif

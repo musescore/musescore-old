@@ -138,7 +138,7 @@ void MeasureBase::remove(Element* el)
 //   nextMeasure
 //---------------------------------------------------------
 
-Measure* MeasureBase::nextMeasure()
+Measure* MeasureBase::nextMeasure() const
       {
       MeasureBase* m = next();
       while (m) {
@@ -153,7 +153,7 @@ Measure* MeasureBase::nextMeasure()
 //   prevMeasure
 //---------------------------------------------------------
 
-Measure* MeasureBase::prevMeasure()
+Measure* MeasureBase::prevMeasure() const
       {
       MeasureBase* m = prev();
       while (m) {

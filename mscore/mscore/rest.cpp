@@ -34,6 +34,7 @@
 #include "measure.h"
 #include "undo.h"
 #include "staff.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //    Rest
@@ -48,14 +49,13 @@ Rest::Rest(Score* s)
       _sym       = rest4Sym;
       }
 
-Rest::Rest(Score* s, int tick, const Duration& d)
+Rest::Rest(Score* s, const Duration& d)
   : ChordRest(s)
       {
       _beamMode  = BEAM_NO;
       dotline    = -1;
       setOffsetType(OFFSET_SPATIUM);
       _sym       = rest4Sym;
-      setTick(tick);
       setDuration(d);
       }
 
@@ -248,7 +248,7 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   break;
             case HARMONY:
                   e->setParent(measure());
-                  e->setTick(tick());
+                  static_cast<Harmony*>(e)->setTick(tick());
                   e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);

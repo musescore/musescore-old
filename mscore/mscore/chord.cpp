@@ -1492,19 +1492,19 @@ void Chord::renderPlayback()
                         gl.prepend(static_cast<Chord*>(cr));
                   }
             if (!gl.isEmpty()) {
-                  int ticks = 0;
+                  int nticks = 0;
                   foreach(Chord* c, gl)
-                        ticks += c->tickLen();
-                  int t = ticks;
+                        nticks += c->ticks();
+                  int t = nticks;
                   if (gl.front()->noteType() == NOTE_ACCIACCATURA)
                         t /= 2;
-                  if (t >= (tickLen() / 2))
-                        t = tickLen() / 2;
+                  if (t >= (ticks() / 2))
+                        t = ticks() / 2;
 
                   int rt = 0;
                   foreach(Chord* c, gl) {
-                        int len   = c->tickLen() * t / ticks;
-                        int etick = rt + len - c->tickLen();
+                        int len   = c->ticks() * t / nticks;
+                        int etick = rt + len - c->ticks();
                         foreach(Note* n, c->notes()) {
                               n->setOnTimeOffset(rt);
                               n->setOffTimeOffset(etick);

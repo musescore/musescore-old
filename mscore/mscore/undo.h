@@ -492,22 +492,6 @@ class ChangeClef : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeSig
-//---------------------------------------------------------
-
-class ChangeSig : public UndoCommand {
-      Score* score;
-      int tick;
-      AL::SigEvent o;
-      AL::SigEvent n;
-
-   public:
-      ChangeSig(Score*, int tick, const AL::SigEvent& o, const AL::SigEvent& n);
-      virtual void undo();
-      virtual void redo();
-      };
-
-//---------------------------------------------------------
 //   ChangeTempo
 //---------------------------------------------------------
 
@@ -734,20 +718,6 @@ class SigInsertTime : public UndoCommand {
 
    public:
       SigInsertTime(Score*, int tick, int len);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      };
-
-//---------------------------------------------------------
-//   FixTicks
-//---------------------------------------------------------
-
-class FixTicks : public UndoCommand {
-      Score* score;
-      void flip();
-
-   public:
-      FixTicks(Score* s) : UndoCommand(), score(s) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };
@@ -1196,6 +1166,7 @@ class ChangeMStaffProperties : public UndoCommand {
 
 class ChangeMeasureProperties : public UndoCommand {
       Measure* measure;
+      Fraction sig;
       bool breakMM;
       int repeatCount;
       double stretch;
@@ -1204,7 +1175,7 @@ class ChangeMeasureProperties : public UndoCommand {
 
       void flip();
    public:
-      ChangeMeasureProperties(Measure*, bool breakMM, int repeatCount, double stretch,
+      ChangeMeasureProperties(Measure*, const Fraction&, bool breakMM, int repeatCount, double stretch,
          int noOffset, bool irregular);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }

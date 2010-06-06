@@ -164,7 +164,7 @@ void Score::transpose()
             _selection.setState(SEL_RANGE);
             _selection.setStartSegment(tick2segment(0));
             _selection.setEndSegment(
-               tick2segment(last()->tick() + last()->tickLen())
+               tick2segment(last()->tick() + last()->ticks())
                );
             _selection.setStaffStart(0);
             _selection.setStaffEnd(nstaves());

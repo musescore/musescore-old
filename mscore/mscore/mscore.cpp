@@ -2663,6 +2663,7 @@ void MuseScore::setPos(int t)
       {
       if (cs == 0 || t < 0)
             return;
+#if 0 // TODO
       AL::TimeSigMap* s = cs->sigmap();
       int bar, beat, tick;
       s->tickValues(t, &bar, &beat, &tick);
@@ -2671,6 +2672,7 @@ void MuseScore::setPos(int t)
          .arg(beat + 1, 2, 10, QLatin1Char(' '))
          .arg(tick,     3, 10, QLatin1Char('0'))
          );
+#endif
       }
 
 //---------------------------------------------------------
