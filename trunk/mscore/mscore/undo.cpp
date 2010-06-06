@@ -383,15 +383,6 @@ void Score::undoInsertTime(int tick, int len)
       }
 
 //---------------------------------------------------------
-//   undoFixTicks
-//---------------------------------------------------------
-
-void Score::undoFixTicks()
-      {
-      _undo->push(new FixTicks(this));
-      }
-
-//---------------------------------------------------------
 //   undoChangeMeasureLen
 //---------------------------------------------------------
 
@@ -569,24 +560,6 @@ void Score::undoInsertStaff(Staff* staff, int idx)
 void Score::undoMove(Element* e, const QPointF& pt)
       {
       _undo->push(new MoveElement(e, pt));
-      }
-
-//---------------------------------------------------------
-//   undoChangeSig
-//---------------------------------------------------------
-
-void Score::undoChangeSig(int tick, const AL::SigEvent& o, const AL::SigEvent& n)
-      {
-      _undo->push(new ChangeSig(this, tick, o, n));
-      }
-
-//---------------------------------------------------------
-//   undoSigInsertTime
-//---------------------------------------------------------
-
-void Score::undoSigInsertTime(int tick, int len)
-      {
-      _undo->push(new SigInsertTime(this, tick, len));
       }
 
 //---------------------------------------------------------
@@ -1339,45 +1312,6 @@ void ChangeKeySig::flip()
       }
 
 //---------------------------------------------------------
-//   ChangeSig
-//---------------------------------------------------------
-
-ChangeSig::ChangeSig(Score* s, int _tick, const AL::SigEvent& _o, const AL::SigEvent& _n)
-      {
-      score = s;
-      tick  = _tick;
-      o     = _o;
-      n     = _n;
-      }
-
-void ChangeSig::undo()
-      {
-      AL::TimeSigMap* sigmap = score->sigmap();
-      if (n.valid())
-            sigmap->del(tick);
-      if (o.valid())
-            sigmap->add(tick, o);
-      }
-
-void ChangeSig::redo()
-      {
-      AL::TimeSigMap* sigmap = score->sigmap();
-      if (o.valid())
-            sigmap->del(tick);
-      if (n.valid())
-            sigmap->add(tick, n);
-      }
-
-//---------------------------------------------------------
-//   FixTicks
-//---------------------------------------------------------
-
-void FixTicks::flip()
-      {
-      score->fixTicks();
-      }
-
-//---------------------------------------------------------
 //   ChangeTempo
 //---------------------------------------------------------
 
@@ -1434,11 +1368,8 @@ void ChangeMeasureLen::flip()
                && segment->subtype() != SegTimeSigAnnounce)
                   continue;
             segment->setTick(endTick);
-            for (int track = 0; track < staves*VOICES; ++track) {
-                  if (segment->element(track))
-                        segment->element(track)->setTick(endTick);
-                  }
             }
+      measure->score()->addLayoutFlag(LAYOUT_FIX_TICKS);
       oldTicks = ol;
       newTicks = nl;
       }
@@ -1457,27 +1388,6 @@ InsertTime::InsertTime(Score* s, int t, int l)
 void InsertTime::flip()
       {
       score->insertTime(tick, len);
-      len = -len;
-      }
-
-//---------------------------------------------------------
-//   SigInsertTime
-//---------------------------------------------------------
-
-SigInsertTime::SigInsertTime(Score* s, int t, int l)
-      {
-      score = s;
-      tick  = t;
-      len   = l;
-      }
-
-void SigInsertTime::flip()
-      {
-      AL::TimeSigMap* sigmap = score->sigmap();
-      if (len < 0)
-            sigmap->removeTime(tick, -len);
-      else
-            sigmap->insertTime(tick, len);
       len = -len;
       }
 
@@ -2185,8 +2095,21 @@ void ChangeMStaffProperties::flip()
 //   ChangeMeasureProperties
 //---------------------------------------------------------
 
-ChangeMeasureProperties::ChangeMeasureProperties(Measure* m, bool _bmm, int rc,
-   double s, int o, bool ir) : measure(m), breakMM(_bmm), repeatCount(rc), stretch(s), noOffset(o),
+ChangeMeasureProperties::ChangeMeasureProperties(
+   Measure* m,
+   const Fraction& ts,
+   bool _bmm,
+   int rc,
+   double s,
+   int o,
+   bool ir
+   ) :
+   measure(m),
+   sig(ts),
+   breakMM(_bmm),
+   repeatCount(rc),
+   stretch(s),
+   noOffset(o),
    irregular(ir)
       {
       }
@@ -2202,10 +2125,12 @@ void ChangeMeasureProperties::flip()
       double s = measure->userStretch();
       int o    = measure->noOffset();
       bool ir  = measure->irregular();
+      Fraction f = measure->actualTimesig();
 
       measure->setBreakMultiMeasureRest(breakMM);
       measure->setRepeatCount(repeatCount);
       measure->setUserStretch(stretch);
+      measure->setActualTimesig(sig);
       Score* score = measure->score();
       if (o != noOffset || ir != irregular) {
             measure->setNoOffset(noOffset);
@@ -2218,6 +2143,8 @@ void ChangeMeasureProperties::flip()
       stretch     = s;
       noOffset    = o;
       irregular   = ir;
+      sig         = f;
+
       score->setLayoutAll(true);
       score->setDirty();
       }

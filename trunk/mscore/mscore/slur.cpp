@@ -752,7 +752,7 @@ void Slur::setTick2(int val)
 
 void Slur::setStart(int t, int track)
       {
-      setTick(t);
+//TODOxx      setTick(t);
       setTrack(track);
       }
 
@@ -794,7 +794,7 @@ void Slur::read(QDomElement e)
             else if (tag == "track2")
                   _track2 = i;
             else if (tag == "startTick")        // obsolete
-                  setTick(i);
+                  ; //                  setTick(i);
             else if (tag == "endTick")          // obsolete
                   setTick2(i);
             else if (tag == "startTrack")       // obsolete
@@ -904,7 +904,7 @@ void Slur::layout()
 
                   up = !(cr1->up());
 
-                  if ((cr2->tick() - cr1->tick()) > m1->tickLen()) {
+                  if ((cr2->tick() - cr1->tick()) > m1->ticks()) {
                         // long slurs are always above
                         up = true;
                         }
@@ -1217,5 +1217,31 @@ void Tie::layout()
                   segment->setLineSegmentType(SEGMENT_END);
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   startTick
+//---------------------------------------------------------
+
+int SlurTie::startTick() const
+      {
+      if (_startElement->isChordRest())
+            return static_cast<ChordRest*>(_startElement)->tick();
+      if (_startElement->type() == NOTE)
+            return static_cast<Note*>(_startElement)->chord()->tick();
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   endTick
+//---------------------------------------------------------
+
+int SlurTie::endTick() const
+      {
+      if (_endElement->isChordRest())
+            return static_cast<ChordRest*>(_endElement)->tick();
+      if (_endElement->type() == NOTE)
+            return static_cast<Note*>(_endElement)->chord()->tick();
+      return 0;
       }
 

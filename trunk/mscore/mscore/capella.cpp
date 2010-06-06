@@ -116,7 +116,7 @@ void SimpleTextObj::read()
       align  = cap->readByte();
       _font  = cap->readFont();
       _text  = cap->readString();
-printf("read SimpletextObj(%d,%d) len %d <%s> char0: %02x\n",
+printf("read SimpletextObj(%d,%d) len %zd <%s> char0: %02x\n",
       relPos.x(), relPos.y(), strlen(_text), _text, _text[0]);
       }
 
@@ -1383,7 +1383,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                               }
 
                         int ticks  = o->ticks();
-                        int ft     = m->tickLen();
+                        int ft     = m->ticks();
                         if (o->fullMeasures) {
 // printf("full measure rests %d, invisible %d len %d %d\n",
 //    o->fullMeasures, o->invisible, ticks, ft);
@@ -1393,7 +1393,6 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                                           Measure* m = getCreateMeasure(tick + i * ft);
                                           Segment* s = m->getSegment(SegChordRest, tick + i * ft);
                                           Rest* rest = new Rest(this);
-                                          rest->setTick(tick + i * ft);
                                           rest->setDuration(Duration(Duration::V_MEASURE));
                                           rest->setTrack(staffIdx * VOICES + voice);
                                           s->add(rest);
@@ -1403,7 +1402,6 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                         if (!o->invisible || voice == 0) {
                               Segment* s = m->getSegment(SegChordRest, tick);
                               Rest* rest = new Rest(this);
-                              rest->setTick(tick);
                               Duration d;
                               if (o->fullMeasures)
                                     d.setType(Duration::V_MEASURE);
@@ -1453,7 +1451,6 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
 
                         Chord* chord = new Chord(this);
                         chord->setTuplet(tuplet);
-                        chord->setTick(tick);
                         chord->setDuration(d);
                         chord->setTrack(track);
                         switch (o->stemDir) {
@@ -1578,6 +1575,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                         break;
                   case T_METER:
                         {
+#if 0 // TODO
                         CapMeter* o = static_cast<CapMeter*>(no);
                         if (o->log2Denom > 7)
                               break;
@@ -1592,6 +1590,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                         Measure* m = getCreateMeasure(tick);
                         Segment* s = m->getSegment(SegTimeSig, tick);
                         s->add(ts);
+#endif
                         }
                         break;
                   case T_EXPL_BARLINE:
@@ -1689,7 +1688,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                   RestObj* o = static_cast<RestObj*>(no);
                   if (o->fullMeasures) {
                         Measure* m = getCreateMeasure(tick);
-                        int ft     = m->tickLen();
+                        int ft     = m->ticks();
                         ticks = ft * o->fullMeasures;
                         }
                   }
@@ -1709,8 +1708,8 @@ void Score::convertCapella(Capella* cap)
 
       int staves   = cap->systems[0]->staves.size();
       CapStaff* cs = cap->systems[0]->staves[0];
-      if (cs->log2Denom <= 7)
-            sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
+//TODO      if (cs->log2Denom <= 7)
+//            sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
 
       Part* part = new Part(this);
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {

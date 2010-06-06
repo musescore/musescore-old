@@ -1,7 +1,9 @@
+6.jun (ws)
+      - big refactoring
 3.jun (lv)
       - support reading bww files: initial (incomplete) implementation
         feature request http://musescore.org/en/node/5637
-3.jun (ws)
+      (ws)
       - added StaffType() and EditStaffType() classes
 27.may (ws)
       - removed PortAudio audio interface from linux version

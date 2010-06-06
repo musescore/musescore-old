@@ -652,24 +652,18 @@ void MuseScore::newFile()
       if (!newWizard->title().isEmpty())
             score->fileInfo()->setFile(newWizard->title());
       for (int i = 0; i < measures; ++i) {
-            Measure* measure = new Measure(score);
-            score->measures()->add(measure);
+            Measure* m = new Measure(score);
+            if (i == 0 && pickupMeasure) {
+                  m->setIrregular(true);
+                  m->setActualTimesig(Fraction(pickupTimesigZ, pickupTimesigN));
+                  }
+            m->setNominalTimesig(Fraction(timesigZ, timesigN));
+            score->measures()->add(m);
             }
 
       Measure* lastMeasure = score->lastMeasure();
       if (lastMeasure && (lastMeasure->endBarLineType() == NORMAL_BAR))
             lastMeasure->setEndBarLineType(END_BAR, false);
-
-      AL::TimeSigMap* sigmap = score->sigmap();
-      if (pickupMeasure) {
-            sigmap->add(0, AL::SigEvent(Fraction(pickupTimesigZ, pickupTimesigN), Fraction(timesigZ, timesigN)));
-            int tick = score->sigmap()->ticksMeasure(0);
-            sigmap->add(tick, AL::SigEvent(Fraction(timesigZ, timesigN)));
-            score->firstMeasure()->setIrregular(true);
-            }
-      else {
-            sigmap->add(0, AL::SigEvent(Fraction(timesigZ, timesigN)));
-            }
 
       int tick = 0;
       for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
@@ -677,7 +671,7 @@ void MuseScore::newFile()
             if (mb->type() != MEASURE)
                   continue;
             Measure* measure = static_cast<Measure*>(mb);
-            int ticks = sigmap->ticksMeasure(tick);
+            int ticks = measure->ticks();
 	      for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
                   Duration d(Duration::V_MEASURE);
                   if (tick == 0) {
@@ -686,7 +680,7 @@ void MuseScore::newFile()
                               TimeSig* ts = new TimeSig(score, timesigN, timesigZ);
                               ts->setTick(0);
                               ts->setTrack(staffIdx * VOICES);
-                              Segment* s = measure->getSegment(ts);
+                              Segment* s = measure->getSegment(ts, 0);
                               s->add(ts);
                               }
                         Part* part = staff->part();
@@ -703,18 +697,17 @@ void MuseScore::newFile()
                                     (*(staff->keymap()))[0] = nKey;
                                     KeySig* keysig = new KeySig(score);
                                     keysig->setTrack(staffIdx * VOICES);
-                                    keysig->setTick(0);
                                     keysig->setSubtype(nKey);
-                                    Segment* s = measure->getSegment(keysig);
+                                    Segment* s = measure->getSegment(keysig, 0);
                                     s->add(keysig);
                                     }
                               }
                         if (pickupMeasure)
 	                        d.setVal(ticks);
                         }
-		      Rest* rest = new Rest(score, tick, d);
+		      Rest* rest = new Rest(score, d);
       	      rest->setTrack(staffIdx * VOICES);
-	      	Segment* s = measure->getSegment(rest);
+	      	Segment* s = measure->getSegment(rest, tick);
 		      s->add(rest);
                   }
             tick += ticks;
@@ -1197,6 +1190,8 @@ bool Score::read(QDomElement e)
       {
       _fileDivision = 384;   // for compatibility with old mscore files
 
+      AL::TimeSigMap _sigmap;
+
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "museScore")
                   continue;
@@ -1209,26 +1204,28 @@ bool Score::read(QDomElement e)
                   QString val(ee.text());
                   int i = val.toInt();
                   if (tag == "Staff")
-                        readStaff(ee);
+                        readStaff(ee, &_sigmap);
                   else if (tag == "KeySig") {
                         KeySig* ks = new KeySig(this);
                         ks->read(ee);
                         customKeysigs.append(ks);
                         }
-                  if (tag == "StaffType") {
-                        int idx = ee.attribute("idx").toInt();
-                        StaffType* st = new StaffType;
+                  else if (tag == "StaffType") {
+                        int idx        = ee.attribute("idx").toInt();
+                        StaffType* ost = _staffTypes.value(idx);
+                        StaffType* st  = ost ? new StaffType(*ost) : new StaffType;
                         st->read(ee);
-                        if (_staffTypes.value(idx)) {           // if there is already a stafftype
+                        if (_staffTypes.value(idx)) {            // if there is already a stafftype
                               if (_staffTypes[idx]->modified())  // if it belongs to Score()
                                     delete _staffTypes[idx];
                               _staffTypes[idx] = st;
                               }
                         else
                               _staffTypes.append(st);
+                        st->setModified(true);
                         }
                   else if (tag == "siglist")
-                        _sigmap->read(ee, _fileDivision);
+                        _sigmap.read(ee, _fileDivision);
                   else if (tag == "tempolist")
                         _tempomap->read(ee, _fileDivision);
                   else if (tag == "programVersion") {
@@ -1246,9 +1243,6 @@ bool Score::read(QDomElement e)
                                                 rv1 = sl[1].toInt();
                                                 rv2 = sl[2].toInt();
                                                 rv3 = sl[3].toInt();
-
-//                                                printf("Version %d.%d.%d   read %d.%d.%d\n",
-//                                                   v1, v2, v3, rv1, rv2, rv3);
 
                                                 int currentVersion = v1 * 10000 + v2 * 100 + v3;
                                                 int readVersion = rv1 * 10000 + rv2 * 100 + v3;
@@ -1370,7 +1364,7 @@ bool Score::read(QDomElement e)
                         Slur* slur = new Slur(this);
                         slur->read(ee);
                         slur->setTrack(-1);     // for backward compatibility
-                        slur->setTick(-1);
+                        // slur->setTick(-1);
                         add(slur);
                         }
                   else if (tag == "HairPin") {
@@ -1446,9 +1440,6 @@ bool Score::read(QDomElement e)
                   staff->setBarLineSpan(n - idx);
                   }
             }
-//DEBUG
-//      _repeatList->unwind();
-//      _repeatList->dump();
 
       if (_omr == 0)
             _showOmr = false;

@@ -64,13 +64,13 @@ void MuseData::musicalAttribute(QString s, Part* part)
                   int z = tl[0].toInt();
                   int n = tl[1].toInt();
                   if ((z > 0) && (n > 0)) {
-                        score->sigmap()->add(curTick, Fraction(z, n));
+//TODO                        score->sigmap()->add(curTick, Fraction(z, n));
                         TimeSig* ts = new TimeSig(score);
                         ts->setTick(curTick);
                         Staff* staff = part->staff(0);
                         ts->setTrack(staff->idx() * VOICES);
                         Measure* measure = score->tick2measure(curTick);
-                        Segment* s = measure->getSegment(ts);
+                        Segment* s = measure->getSegment(ts, curTick);
                         s->add(ts);
                         }
                   }
@@ -142,7 +142,6 @@ void MuseData::readChord(Part*, const QString& s)
       note->setPitch(pitch);
       note->setTpcFromPitch();
       note->setTrack(staffIdx * VOICES + voice);
-      note->setTick(chord->tick());
       chord->add(note);
       }
 
@@ -257,7 +256,6 @@ void MuseData::readNote(Part* part, const QString& s)
             }
 
       Chord* chord = new Chord(score);
-      chord->setTick(tick);
       chordRest = chord;
       chord->setTrack(gstaff * VOICES);
       chord->setStemDirection(dir);
@@ -270,7 +268,7 @@ void MuseData::readNote(Part* part, const QString& s)
       d.setVal(ticks);
       chord->setDuration(d);
 
-      Segment* segment = measure->getSegment(chord);
+      Segment* segment = measure->getSegment(chord, tick);
 
       voice = 0;
       for (; voice < VOICES; ++voice) {
@@ -290,7 +288,6 @@ void MuseData::readNote(Part* part, const QString& s)
       note->setPitch(pitch);
       note->setTpcFromPitch();
       note->setTrack(gstaff * VOICES + voice);
-      note->setTick(tick);
       chord->add(note);
 
       QString dynamics;
@@ -455,10 +452,10 @@ void MuseData::readRest(Part* part, const QString& s)
 
       Duration d;
       d.setVal(ticks);
-      Rest* rest = new Rest(score, tick, d);
+      Rest* rest = new Rest(score, d);
       chordRest  = rest;
       rest->setTrack(staffIdx * VOICES);
-      Segment* segment = measure->getSegment(rest);
+      Segment* segment = measure->getSegment(rest, tick);
 
       voice = 0;
       for (; voice < VOICES; ++voice) {
@@ -501,14 +498,16 @@ Measure* MuseData::createMeasure()
                   continue;
             Measure* m = (Measure*)mb;
             int st = m->tick();
-            int l  = m->tickLen();
+            int l  = m->ticks();
             if (curTick == st)
                   return m;
             if (curTick > st && curTick < (st+l)) {
                   // irregular measure
+#if 0 // TODO
                   Fraction f = score->sigmap()->timesig(st).fraction();
                   score->sigmap()->add(st, curTick - st, f);
                   score->sigmap()->add(curTick, f);
+#endif
                   break;
                   }
             if (curTick < st + l) {

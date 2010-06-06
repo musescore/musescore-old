@@ -400,10 +400,12 @@ bool Score::importBB(const QString& name)
       //---------------------------------------------------
 
       for (int i = 0; i < bb.measures(); ++i) {
+#if 0 // TODO
             Measure* measure  = new Measure(this);
             int tick = sigmap()->bar2tick(i, 0, 0);
             measure->setTick(tick);
       	add(measure);
+#endif
             }
 
       //---------------------------------------------------
@@ -418,9 +420,9 @@ bool Score::importBB(const QString& name)
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* measure = (Measure*)mb;
-                  Rest* rest = new Rest(this, measure->tick(), Duration(Duration::V_MEASURE));
+                  Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
                   rest->setTrack(0);
-                  Segment* s = measure->getSegment(rest);
+                  Segment* s = measure->getSegment(rest, measure->tick());
                   s->add(rest);
                   }
             }
@@ -538,21 +540,20 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
       // split notes on measure boundary
       //
       Measure* measure = tick2measure(tick);
-      if (measure == 0 || (tick >= (measure->tick() + measure->tickLen()))) {
+      if (measure == 0 || (tick >= (measure->tick() + measure->ticks()))) {
             printf("no measure found for tick %d\n", tick);
             notes->clear();
             return len;
             }
-      if ((tick + len) > measure->tick() + measure->tickLen())
-            len = measure->tick() + measure->tickLen() - tick;
+      if ((tick + len) > measure->tick() + measure->ticks())
+            len = measure->tick() + measure->ticks() - tick;
 
       Chord* chord = new Chord(this);
-      chord->setTick(tick);
       chord->setTrack(track);
       Duration d;
       d.setVal(len);
       chord->setDuration(d);
-      Segment* s = measure->getSegment(chord);
+      Segment* s = measure->getSegment(chord, tick);
       s->add(chord);
 
       foreach (MNote* n, *notes) {
@@ -563,7 +564,6 @@ int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
                   note->setPitch(mn->pitch(), mn->tpc());
       		note->setTrack(track);
             	chord->add(note);
-                  note->setTick(tick);
 
                   if (useDrumset) {
                         if (!drumset->isValid(mn->pitch())) {
@@ -672,14 +672,14 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
                         while (restLen > 0) {
                               int len = restLen;
                   		Measure* measure = tick2measure(ctick);
-                              if (measure == 0 || (ctick >= (measure->tick() + measure->tickLen()))) {       // at end?
+                              if (measure == 0 || (ctick >= (measure->tick() + measure->ticks()))) {       // at end?
                                     ctick += len;
                                     restLen -= len;
                                     break;
                                     }
                               // split rest on measure boundary
-                              if ((ctick + len) > measure->tick() + measure->tickLen()) {
-                                    len = measure->tick() + measure->tickLen() - ctick;
+                              if ((ctick + len) > measure->tick() + measure->ticks()) {
+                                    len = measure->tick() + measure->ticks() - ctick;
                                     if (len <= 0) {
                                           printf("bad len %d\n", len);
                                           break;
@@ -687,9 +687,9 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
                                     }
                               Duration d;
                               d.setVal(len);
-                              Rest* rest = new Rest(this, ctick, d);
+                              Rest* rest = new Rest(this, d);
                               rest->setTrack(staffIdx * VOICES);
-                              Segment* s = measure->getSegment(rest);
+                              Segment* s = measure->getSegment(rest, ctick);
                               s->add(rest);
 // printf("   add rest %d\n", len);
 

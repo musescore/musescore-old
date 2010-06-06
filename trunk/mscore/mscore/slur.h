@@ -33,7 +33,6 @@ class ScoreView;
 struct UP {
       QPointF p;            // layout position relative to pos()
       QPointF off;          // user offset in spatium units
-//      QPointF pos() const { return p + off * _spatium; }
       };
 
 //---------------------------------------------------------
@@ -134,6 +133,8 @@ class SlurTie : public Element {
       void setEndElement(Element* e)      { _endElement = e;      }
       Element* startElement() const       { return _startElement; }
       Element* endElement() const         { return _endElement;   }
+      int startTick() const;
+      int endTick() const;
       virtual void toDefault();
       void setLen(double v)               { _len = v; }
       int lineType() const                { return _lineType; }
@@ -160,6 +161,8 @@ class Slur : public SlurTie {
       virtual QRectF bbox() const;
       virtual void setTrack(int val);
 
+      int tick() const        { return _tick;  }
+      void setTick(int val)   { _tick = val;   }
       int tick2() const       { return _tick2; }
       void setTick2(int val);
       int track2() const      { return _track2; }

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -37,6 +37,8 @@
 #include "tempotext.h"
 #include "note.h"
 #include "arpeggio.h"
+#include "dynamics.h"
+#include "stafftext.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -526,8 +528,7 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
                   BarLine* bl = static_cast<BarLine*>(e);
                   bl->setTrack(staffIdx() * VOICES);
 
-                  if ((bl->tick() == m->tick())
-                     || (bl->tick() == m->tick() + m->tickLen())) {
+                  if ((bl->tick() == m->tick()) || (bl->tick() == m->tick() + m->ticks())) {
                         return m->drop(view, p1, p2, e);
                         }
 
@@ -558,9 +559,10 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
 
             case DYNAMIC:
                   {
-                  e->setTick(tick());
-                  e->setTrack(staffIdx() * VOICES);
-                  e->setParent(m);
+                  Dynamic* d = static_cast<Dynamic*>(e);
+                  d->setTick(tick());
+                  d->setTrack(staffIdx() * VOICES);
+                  d->setParent(m);
                   score()->undoAddElement(e);
                   }
                   break;
@@ -575,10 +577,13 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
                   break;
 
             case STAFF_TEXT:
-                  e->setTick(tick());
+                  {
+                  StaffText* st = static_cast<StaffText*>(e);
+                  st->setTick(tick());
                   e->setTrack(staffIdx() * VOICES);
                   e->setParent(m);
                   score()->undoAddElement(e);
+                  }
                   break;
             default:
                   printf("cannot drop %s\n", e->name());
@@ -687,5 +692,14 @@ void ChordRest::setTrack(int val)
       foreach(Articulation* a, articulations)
             a->setTrack(val);
       Element::setTrack(val);
+      }
+
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+
+int ChordRest::tick() const
+      {
+      return segment() ? segment()->tick() : 0;
       }
 

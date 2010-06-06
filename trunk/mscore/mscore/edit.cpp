@@ -119,10 +119,18 @@ int Score::pos()
       Element* el = selection().element();
       if (selection().activeCR())
             el = selection().activeCR();
-      if (el && (el->type() == REST || el->type() == REPEAT_MEASURE || el->type() == NOTE || el->type() == CHORD)) {
-            if (el->type() == NOTE)
-                  el = el->parent();
-            return el->tick();
+      if (el) {
+            switch(el->type()) {
+                  case NOTE:
+                        el = el->parent();
+                        // fall through
+                  case REPEAT_MEASURE:
+                  case REST:
+                  case CHORD:
+                        return static_cast<ChordRest*>(el)->tick();
+                  default:
+                        break;
+                  }
             }
       return -1;
       }
@@ -151,7 +159,7 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
 
 Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
       {
-      Rest* rest = new Rest(this, s->tick(), d);
+      Rest* rest = new Rest(this, d);
       rest->setTrack(track);
       rest->setParent(s);
       rest->setTuplet(tuplet);
@@ -180,7 +188,6 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
       chord->setTuplet(tuplet);
       chord->setTrack(oc->track());
       chord->setDuration(d);
-      chord->setTick(tick);
       chord->setParent(seg);
       undoAddElement(chord);
 
@@ -213,7 +220,6 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
             newcr = static_cast<ChordRest*>(cr->clone());
       newcr->setDuration(d);
       newcr->setTuplet(cr->tuplet());
-      newcr->setTick(tick);
       newcr->setSelected(false);
 
       Segment* seg = cr->measure()->findSegment(SegChordRest, tick);
@@ -243,6 +249,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
             Fraction f;
             if (tuplet) {
                   int ticks = (tuplet->tick() + tuplet->ticks()) - tick;
+
                   f = Fraction::fromTicks(ticks);
                   for (Tuplet* t = tuplet; t; t = t->tuplet())
                         f *= t->ratio();
@@ -252,9 +259,10 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                   if (f < l)
                         l = f;
                   }
-            else if (measure->tick() < tick)
+/*            else if (measure->tick() < tick)
                   f = sigmap()->measureRest(tick);
             else
+TODOxx */
                   f = measure->fraction();
 
             if (f > l)
@@ -269,7 +277,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                   continue;
                   }
 
-            const AL::SigEvent ev(sigmap()->timesig(tick));
+            const AL::SigEvent ev(measure->actualTimesig());
             if (ev.nominalEqualActual()   // not in pickup measure
                && (measure->tick() == tick)
                && (measure->fraction() == f)
@@ -334,114 +342,68 @@ Note* Score::addNote(Chord* chord, int pitch)
       }
 
 //---------------------------------------------------------
-//   changeTimeSig
-//
-// change time signature at tick into subtype st for all staves
-// in response to gui command (drop timesig on measure or timesig)
+//   adjustMeasures
+//    helper routine
+//    adjust measure length until next timesig
 //---------------------------------------------------------
 
-void Score::changeTimeSig(int tick, int timeSigSubtype)
+static void adjustMeasures(Measure* m, int oticks, int nticks)
       {
-      undoFixTicks();
+      for (; m; m = m->nextMeasure()) {
+            if (m->first(SegTimeSig))
+                  break;
+            if (m->nominalTimesig().identical(m->actualTimesig()))
+                  m->adjustToLen(oticks, nticks);
+            }
+      }
 
-      // record old tick lengths, since they will be modified when time is added/removed
-      QVector<int> tickLens;
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
-            tickLens.append(m->tickLen());
+//---------------------------------------------------------
+//   addRemoveTimeSigDialog
+//---------------------------------------------------------
 
-      Fraction ofraction(_sigmap->timesig(tick).fraction());
-//      int z, n;
+static int addRemoveTimeSigDialog()
+      {
+      int n = QMessageBox::question(0, "MuseScore", "change following measures",
+         QMessageBox::Yes | QMessageBox::No | QMessageBox::Abort, QMessageBox::Yes);
+      if (n == QMessageBox::Abort)
+            return -1;
+      if (n == QMessageBox::Yes)
+            return 1;
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   cmdAddTimeSig
+//
+//    Add or change time signature at measure in response
+//    to gui command (drop timesig on measure or timesig)
+//---------------------------------------------------------
+
+void Score::cmdAddTimeSig(Measure* m, TimeSig* ts)
+      {
+      int timeSigSubtype = ts->subtype();
+      delete ts;
+
       Fraction nfraction(TimeSig::getSig(timeSigSubtype));
 
-      if (ofraction == nfraction) {
-            //
-            // check if there is already a time signature symbol
-            //
-            for (Segment* s = firstSegment(); s; s = s->next1()) {
-                  if (s->subtype() != SegTimeSig)
-                        continue;
-                  int etick = s->tick();
-                  if (etick > tick)
-                        break;
-                  if (etick == tick) {
-                        for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-                              int track = staffIdx * VOICES;
-                              Element* e = s->element(track);
-                              if (e && e->subtype() != timeSigSubtype)
-                                    undoChangeSubtype(e, timeSigSubtype);
-                              }
-                        return;
-                        }
-                  }
-            // no TimeSig: we have to add a symbol
-            addTimeSig(tick, timeSigSubtype);
-            AL::SigEvent nSig(nfraction);
-            undoChangeSig(tick, AL::SigEvent(), nSig);
+      int tick = m->tick();
+      Segment* seg = m->findSegment(SegTimeSig, tick);
+      if (seg && seg->element(0) && seg->element(0)->subtype() == timeSigSubtype)
             return;
+      int n = addRemoveTimeSigDialog();
+      if (n == -1)
+            return;
+      if (seg)
+            undoRemoveElement(seg);
+
+      seg = m->createSegment(SegTimeSig, tick);
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            TimeSig* nsig = new TimeSig(this, timeSigSubtype);
+            nsig->setTrack(staffIdx * VOICES);
+            seg->add(nsig);
             }
-
-      AL::SigEvent oSig;
-      AL::SigEvent nSig;
-      AL::iSigEvent i = _sigmap->find(tick);
-      if (i != _sigmap->end()) {
-            oSig = i->second;
-            AL::SigEvent e = _sigmap->timesig(tick - 1);
-            if ((tick == 0) || (e.getNominal() != nfraction)) {
-                  nSig = AL::SigEvent(nfraction);
-                  }
-            }
-      else {
-            nSig = AL::SigEvent(nfraction);
-            }
-
-      undoChangeSig(tick, oSig, nSig);
-
-      //---------------------------------------------
-      // remove unnessesary timesig symbols
-      //---------------------------------------------
-
-      int staves = nstaves();
-      for (Segment* segment = firstSegment(); segment;) {
-            Segment* nseg = segment->next1();
-            if (segment->subtype() != SegTimeSig) {
-                  segment = nseg;
-                  continue;
-                  }
-            int etick = segment->tick();
-            if (etick >= tick) {
-                  AL::iSigEvent i = _sigmap->find(segment->tick());
-                  if ((etick > tick) && (i->second.fraction() != nfraction))
-                        break;
-                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                        Element* e = segment->element(staffIdx * VOICES);
-                        if (e)
-                              undoRemoveElement(e);
-                        }
-                  undoRemoveElement(segment);   // segment is now empty
-                  if (etick > tick)
-                        break;
-                  }
-            segment = nseg;
-            }
-
-      //---------------------------------------------
-      // modify measures
-      //---------------------------------------------
-
-      int j = 0;
-      int ctick = 0;
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            int newLen = _sigmap->ticksMeasure(ctick);
-            ctick += newLen;
-            int oldLen = tickLens[j];
-            ++j;
-            if (newLen == oldLen)
-                  continue;
-            m->adjustToLen(oldLen, newLen);
-            }
-      if (nSig.valid())
-            addTimeSig(tick, timeSigSubtype);
-      undoFixTicks();
+      adjustMeasures(m, m->ticks(), nfraction.ticks());
+      undoAddElement(seg);
       }
 
 //---------------------------------------------------------
@@ -450,97 +412,14 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
 
 void Score::cmdRemoveTimeSig(TimeSig* ts)
       {
-      if (ts->tick() == 0) {    // cannot remove time signature at tick 0
-            undoRemoveElement(ts);
-#if 0
-            QMessageBox::information(0,
-               tr("MuseScore"),
-               tr("The first time signature of a piece can not be removed.")
-               );
-#endif
+      Fraction ofraction(ts->getSig());
+      Measure* pm = ts->measure()->prevMeasure();
+      Fraction nfraction(pm ? pm->actualTimesig() : Fraction(4,4));
+      int n = addRemoveTimeSigDialog();
+      if (n == -1)
             return;
-            }
-
-      undoFixTicks();
-      // record old tick lengths, since they will be modified when time is added/removed
-      QVector<int> tickLens;
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
-            tickLens.append(m->tickLen());
-
-      int tick = ts->tick();
-      AL::iSigEvent si = _sigmap->find(tick);
-      if (si == _sigmap->end()) {
-            printf("cmdRemoveTimeSig: cannot find SigEvent at %d\n", tick);
-            return;
-            }
-      AL::SigEvent oval = (*_sigmap)[tick];
-      AL::iSigEvent nsi = si;
-      ++nsi;
-
       undoRemoveElement(ts->segment());
-      AL::SigEvent prev = _sigmap->timesig(tick-1);
-      if (prev.nominalEqualActual())
-            undoChangeSig(tick, oval, AL::SigEvent());
-      else
-            undoChangeSig(tick, oval, AL::SigEvent(prev.getNominal()));
-
-      oval = _sigmap->timesig(tick);
-      if (nsi->second == oval)
-            undoChangeSig(nsi->first, oval, AL::SigEvent());
-
-      Segment* s = ts->segment()->next1();;
-      for (; s; s = s->next1()) {
-            if (s->subtype() != SegTimeSig)
-                  continue;
-            TimeSig* e = static_cast<TimeSig*>(s->element(0));
-            if (e) {
-                  if (e->getSig() != oval.fraction())
-                        s = 0;
-                  break;
-                  }
-            }
-      if (s)
-            undoRemoveElement(s);
-
-      //---------------------------------------------
-      // modify measures
-      //---------------------------------------------
-
-      int j = 0;
-      int ctick = 0;
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            int newLen = _sigmap->ticksMeasure(ctick);
-            ctick += newLen;
-            int oldLen = tickLens[j];
-            ++j;
-            if (newLen == oldLen)
-                  continue;
-            m->adjustToLen(oldLen, newLen);
-            }
-      undoFixTicks();
-      }
-
-//---------------------------------------------------------
-//   addTimeSig
-//---------------------------------------------------------
-
-void Score::addTimeSig(int tick, int timeSigSubtype)
-      {
-      Measure* measure = tick2measure(tick);
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-            TimeSig* nsig = new TimeSig(this, timeSigSubtype);
-            nsig->setTrack(staffIdx * VOICES);
-            nsig->setTick(tick);
-            SegmentType st = Segment::segmentType(TIMESIG);
-            Segment* seg = measure->findSegment(st, tick);
-            if (seg == 0) {
-                  seg = measure->createSegment(st, tick);
-                  undoAddElement(seg);
-                  }
-            nsig->setParent(seg);
-            undoAddElement(nsig);
-            }
-      layoutAll = true;
+      adjustMeasures(ts->measure(), ofraction.ticks(), nfraction.ticks());
       }
 
 //---------------------------------------------------------
@@ -752,7 +631,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       if (cr2)
             tick2 = cr2->tick();
       else
-            tick2 = cr1->measure()->tick() + cr1->measure()->tickLen();
+            tick2 = cr1->measure()->tick() + cr1->measure()->ticks();
 
       Hairpin* pin = new Hairpin(this);
       pin->setTick(tick1);
@@ -993,7 +872,7 @@ void Score::deleteItem(Element* el)
                   Tuplet* tuplet = chord->tuplet();
                   // if ((el->voice() == 0 || tuplet) && (chord->noteType() == NOTE_NORMAL)) {
                   if (chord->noteType() == NOTE_NORMAL) {
-                        Rest* rest = new Rest(this, chord->tick(), chord->duration());
+                        Rest* rest = new Rest(this, chord->duration());
                         rest->setDuration(chord->duration());
                         rest->setTrack(el->track());
                         rest->setParent(chord->parent());
@@ -1037,10 +916,9 @@ printf("remove Segment %p %s\n", seg, seg->subTypeName());
             case MEASURE:
                   {
                   Measure* measure = static_cast<Measure*>(el);
-                  undoFixTicks();
                   undoRemoveElement(el);
-                  cmdRemoveTime(measure->tick(), measure->tickLen());
-//                  cmdRemoveGlobals(measure->tick(), measure->tick() + measure->tickLen(), 0, staves());
+                  cmdRemoveTime(measure->tick(), measure->ticks());
+//                  cmdRemoveGlobals(measure->tick(), measure->tick() + measure->ticks(), 0, staves());
                   }
                   break;
 
@@ -1092,10 +970,10 @@ void Score::cmdRemoveTime(int tick, int len)
       foreach(Element* e, _gel) {
             if (e->type() == SLUR) {
                   Slur* slur = static_cast<Slur*>(e);
-                  Element* e1 = slur->startElement();
-                  Element* e2 = slur->endElement();
-                  if ((e1->tick() >= tick && e1->tick() < etick)
-                     || (e2->tick() >= tick && e2->tick() < etick)) {
+                  int stick = slur->startTick();
+                  int estick = slur->endTick();
+                  if ((stick >= tick && estick < etick)
+                     || (estick >= tick && estick < etick)) {
                         undoRemoveElement(e);
                         }
                   }
@@ -1106,14 +984,14 @@ void Score::cmdRemoveTime(int tick, int len)
                   }
             }
       foreach (Beam* b, _beams) {
-            Element* e1 = b->elements().front();
-            Element* e2 = b->elements().back();
+            ChordRest* e1 = b->elements().front();
+            ChordRest* e2 = b->elements().back();
             if ((e1->tick() >= tick && e1->tick() < etick)
                || (e2->tick() >= tick && e2->tick() < etick)) {
                   undoRemoveElement(b);
                   }
             }
-
+#if 0 // TODOxx
       //-----------------
       AL::SigEvent e1 = _sigmap->timesig(tick + len);
       for (AL::ciSigEvent i = _sigmap->begin(); i != _sigmap->end(); ++i) {
@@ -1130,6 +1008,7 @@ void Score::cmdRemoveTime(int tick, int len)
                   }
             }
       //-----------------
+#endif
 
       for (AL::ciTEvent i = _tempomap->begin(); i != _tempomap->end(); ++i) {
             if (i->first != 0 && i->first >= tick && (i->first < etick))
@@ -1148,7 +1027,6 @@ void Score::cmdRemoveTime(int tick, int len)
                   }
             }
       undoInsertTime(tick, -len);
-      undoFixTicks();
       }
 
 //---------------------------------------------------------
@@ -1332,9 +1210,12 @@ void ScoreView::chordTab(bool back)
       measure         = segment->measure();
       ElementList* el = measure->el();
       foreach(Element* e, *el) {
-            if (e->type() == HARMONY && e->tick() == segment->tick()) {
-                  cn = static_cast<Harmony*>(e);
-                  break;
+            if (e->type() == HARMONY) {
+                  Harmony* h = static_cast<Harmony*>(e);
+                  if (h->tick() == segment->tick()) {
+                        cn = h;
+                        break;
+                        }
                   }
             }
 
@@ -1390,7 +1271,6 @@ Lyrics* Score::addLyrics()
 
       Chord* chord     = e->chord();
       Segment* segment = chord->segment();
-      int tick         = chord->tick();
       int staff        = chord->staffIdx();
 
       Lyrics* lyrics;
@@ -1399,7 +1279,6 @@ Lyrics* Score::addLyrics()
       if (ll)
             no = ll->size();
       lyrics = new Lyrics(this);
-      lyrics->setTick(tick);
       lyrics->setTrack(chord->track());
       lyrics->setParent(segment);
       lyrics->setNo(no);
@@ -1536,7 +1415,6 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
       int actualNotes = an.numerator() / an.denominator();
             // tuplet->ratio().numerator();
 
-      cr->setTick(tick);
       cr->setTuplet(tuplet);
       cr->setTrack(track);
       cr->setDuration(tuplet->baseLen());
@@ -1558,7 +1436,6 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
       for (int i = 0; i < (actualNotes-1); ++i) {
             tick += ticks;
             Rest* rest = new Rest(this);
-            rest->setTick(tick);
             rest->setTuplet(tuplet);
             rest->setTrack(track);
             rest->setDuration(tuplet->baseLen());

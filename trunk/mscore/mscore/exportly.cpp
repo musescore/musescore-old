@@ -2228,7 +2228,7 @@ void  ExportLy::findVolta()
 		  voltarray[i].voltart = startending;
 		  voltarray[i].barno=taktnr-1; //register as last element i previous measure
 		}
-	      if (v->tick2() == m->tick() + m->tickLen()) // if it is at the end of measure
+	      if (v->tick2() == m->tick() + m->ticks()) // if it is at the end of measure
 		{
 		  i++;
 		  voltarray[i].voltart = endending;
@@ -3026,7 +3026,7 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
        ix++;
      }
 
-  writeLen(c->tickLen());
+  writeLen(c->ticks());
 
   if ((symb) and (nl.size() == 1))
     writeSymbol(symbolname);
@@ -3856,7 +3856,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
          continue;
 
        handlePreInstruction(e); // Handle instructions which are to be printed before the element itself
-       barlen=m->tickLen();
+       barlen=m->ticks();
        //handle element:
        switch(e->type())
 	 {
@@ -3956,7 +3956,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	     if (!(a.isEmpty()) ) articul = true;
 
 	     int l = ((Rest*)e)->ticks();
-	     int mlen=((Rest*)e)->segment()->measure()->tickLen();
+	     int mlen=((Rest*)e)->segment()->measure()->ticks();
 
 	     int nombarl=z1*AL::division;
 
@@ -3976,7 +3976,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 else
 		   {
 		     //wholemeasurerest: on fermata, output of * and start of new count.
-		     l = ((Rest*)e)->segment()->measure()->tickLen();
+		     l = ((Rest*)e)->segment()->measure()->ticks();
 		     if (articul)
 		       {
 			 writeRest(l,0);
@@ -4017,7 +4017,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	}
     } //end for all segments
 
-   barlen=m->tickLen();
+   barlen=m->ticks();
    if (barempty == true)
    // no stuff in this bar in this voice: fill empty bar with silent rest
     {

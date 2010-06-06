@@ -365,3 +365,12 @@ void KeySig::changeType(KeySigEvent t)
       setSubtype(t);
       }
 
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+
+int KeySig::tick() const
+      {
+      return segment() ? segment()->tick() : 0;
+      }
+

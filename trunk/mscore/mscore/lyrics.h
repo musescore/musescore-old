@@ -35,7 +35,7 @@ class Lyrics : public Text {
 
    private:
       int _no;                ///< row index
-      int _endTick;           ///< if > 0 then draw an underline to this tick position
+      int _ticks;             ///< if > 0 then draw an underline to tick() + _ticks
       Syllabic _syllabic;
       QList<Line*> _separator;
 
@@ -58,8 +58,9 @@ class Lyrics : public Text {
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void draw(QPainter&, ScoreView*) const;
-      int endTick() const           { return _endTick;    }
-      void setEndTick(int tick)     { _endTick = tick;    }
+      int ticks() const             { return _ticks;    }
+      void setTicks(int tick)       { _ticks = tick;    }
+      int endTick() const;
       void clearSeparator()         { _separator.clear(); } // TODO: memory leak
       QList<Line*>* separatorList() { return &_separator; }
       virtual void paste();

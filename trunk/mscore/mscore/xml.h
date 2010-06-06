@@ -24,6 +24,7 @@
 #include "globals.h"
 #include "spatium.h"
 #include "al/xml.h"
+#include "al/fraction.h"
 
 using AL::Prop;
 using AL::docName;
@@ -55,10 +56,12 @@ class Xml : public AL::Xml {
 
       void sTag(const char* name, Spatium sp) { AL::Xml::tag(name, QVariant(sp.val())); }
       void pTag(const char* name, Placement);
+      void fTag(const char* name, const Fraction&);
       void valueTypeTag(const char* name, ValueType t);
       };
 
-extern Placement readPlacement(QDomElement e);
-extern ValueType readValueType(QDomElement e);
+extern Placement readPlacement(QDomElement);
+extern ValueType readValueType(QDomElement);
+extern Fraction  readFraction(QDomElement);
 #endif
 

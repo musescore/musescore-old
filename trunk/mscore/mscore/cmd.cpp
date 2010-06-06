@@ -34,7 +34,6 @@
 #include "note.h"
 #include "rest.h"
 #include "chord.h"
-// #include "segment.h"
 #include "text.h"
 #include "al/sig.h"
 #include "staff.h"
@@ -77,6 +76,7 @@
 #include "textstyle.h"
 #include "timesig.h"
 #include "repeat.h"
+#include "tempotext.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -207,7 +207,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   int tick;
                   Measure* m = pos2measure3(pos, &tick);
                   volta->setTick(m->tick());
-                  volta->setTick2(m->tick() + m->tickLen());
+                  volta->setTick2(m->tick() + m->ticks());
                   volta->layout();
                   const QList<LineSegment*> lsl = volta->lineSegments();
                   if (lsl.isEmpty()) {
@@ -379,7 +379,8 @@ void Score::cmdRemove(Element* e)
                   break;
             case TEMPO_TEXT:
                   {
-                  int tick = e->tick();
+                  TempoText* tt = static_cast<TempoText*>(e);
+                  int tick = tt->tick();
                   AL::iTEvent i = _tempomap->find(tick);
                   if (i != _tempomap->end())
                         undoChangeTempo(tick, i->second, AL::TEvent());
@@ -559,11 +560,15 @@ Note* Score::addPitch(int pitch, bool addFlag)
             //
             // extend slur
             //
-            Element* e = searchNote(_is.tick(), _is.track);
+            ChordRest* e = searchNote(_is.tick(), _is.track);
             if (e) {
-                  if (e->type() == NOTE)
-                        e = e->parent();
-                  if (_is.slur->startElement()->tick() == e->tick()) {
+                  int stick = 0;
+                  Element* ee = _is.slur->startElement();
+                  if (ee->isChordRest())
+                        stick = static_cast<ChordRest*>(ee)->tick();
+                  else if (ee->type() == NOTE)
+                        stick = static_cast<Note*>(ee)->chord()->tick();
+                  if (stick == e->tick()) {
                         if (_is.slur->startElement())
                               static_cast<ChordRest*>(_is.slur->startElement())->removeSlurFor(_is.slur);
                         _is.slur->setStartElement(e);
@@ -647,7 +652,6 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       note->setMag(mag);
 
       chord = new Chord(this);
-      chord->setTick(tick);
       chord->setTrack(track);
       chord->add(note);
       note->setPitch(pitch);
@@ -715,7 +719,6 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                               note->setTieBack(tie);
                               }
                         Chord* chord = new Chord(this);
-                        chord->setTick(tick);
                         chord->setTrack(track);
                         chord->setDuration(d);
                         chord->setStemDirection(stemDirection);
@@ -1156,12 +1159,13 @@ void Score::cmdAddChordName2()
       Measure* measure = cr->measure();
       Harmony* s = 0;
 
-      foreach(Element* element, *measure->el()) {
-            if ((element->type() == HARMONY) && (element->tick() == cr->tick())) {
-                  s = static_cast<Harmony*>(element);
+      foreach(Element* e, *measure->el()) {
+            if ((e->type() == HARMONY) && (static_cast<Harmony*>(e)->tick() == cr->tick())) {
+                  s = static_cast<Harmony*>(e);
                   break;
                   }
             }
+
       bool created = false;
       if (s == 0) {
             s = new Harmony(this);
@@ -1395,7 +1399,7 @@ MeasureBase* Score::appendMeasure(int type)
       if (last) {
             tick = last->tick();
             if (last->type() == MEASURE)
-                  tick += static_cast<Measure*>(last)->tickLen();
+                  tick += static_cast<Measure*>(last)->ticks();
             }
       MeasureBase* mb = 0;
       if (type == MEASURE)
@@ -1405,22 +1409,20 @@ MeasureBase* Score::appendMeasure(int type)
       else if (type == VBOX)
             mb = new VBox(this);
       mb->setTick(tick);
-      if (!last)
-        _sigmap->add(tick, Fraction(4, 4));
 
       if (type == MEASURE) {
-            Measure* measure = (Measure*)mb;
+            Fraction ts(lastMeasure()->nominalTimesig());
+            Measure* measure = static_cast<Measure*>(mb);
+            measure->setNominalTimesig(ts);
+            measure->setActualTimesig(ts);
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                  Rest* rest = new Rest(this, tick, Duration(Duration::V_MEASURE));
+                  Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
                   rest->setTrack(staffIdx * VOICES);
-                  Segment* s = measure->getSegment(rest);
+                  Segment* s = measure->getSegment(SegChordRest, tick);
                   s->add(rest);
                   }
             }
       undoInsertMeasure(mb);
-
-      if (type == MEASURE)
-            undoFixTicks();
       layoutAll = true;
       return mb;
       }
@@ -1497,95 +1499,110 @@ void Score::insertMeasures(int n, int type)
             }
 
 	int tick  = selection().startSegment()->tick();
-	int ticks = _sigmap->ticksMeasure(tick == 0 ? 0 : tick-1);
+      Measure* m = tick2measure(tick);
+      Fraction f(m->nominalTimesig());
+	int ticks = f.ticks();
 
 	for (int i = 0; i < n; ++i) {
-            MeasureBase* m;
-            if (type == MEASURE)
-                  m = new Measure(this);
-            else if (type == HBOX)
-                  m = new HBox(this);
-            else        // if (type == VBOX)
-                  m = new VBox(this);
-		m->setTick(tick);
-            if (type == MEASURE) {
-      	      Measure* measure = static_cast<Measure*>(m);
-	      	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-    		            Rest* rest = new Rest(this, tick, Duration(Duration::V_MEASURE));
-        	      	rest->setTrack(staffIdx * VOICES);
-        		      Segment* s = measure->getSegment(rest);
-        			s->add(rest);
-		            }
-              	undoFixTicks();
+            switch(type) {
+                  case MEASURE:
+                        {
+                        Measure* measure = new Measure(this);
+                        measure->setTick(tick);
+                        measure->setNominalTimesig(f);
+                        measure->setActualTimesig(f);
+	            	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+    		                  Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
+        	            	rest->setTrack(staffIdx * VOICES);
+        	      	      Segment* s = measure->getSegment(SegChordRest, tick);
+        	      		s->add(rest);
+		                  }
+                        QList<TimeSig*> tsl;
+                        QList<KeySig*>  ksl;
 
-                  QList<TimeSig*> tsl;
-                  QList<KeySig*>  ksl;
-
-                  if (tick == 0) {
-                        //
-                        // remove time and key signatures
-                        //
-                        for (Segment* s = firstSegment(); s; s = s->next()) {
-                              if (s->subtype() == SegKeySig) {
-                                    for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                                          KeySig* e = static_cast<KeySig*>(s->element(staffIdx * VOICES));
-                                          if (e && !e->generated()) {
-                                                ksl.append(static_cast<KeySig*>(e));
-                                                undoRemoveElement(e);
-                                                if (e->segment()->isEmpty()) {
-                                                      undoRemoveElement(e->segment());
+                        if (tick == 0) {
+                              //
+                              // remove time and key signatures
+                              //
+                              for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                                    for (Segment* s = firstSegment(); s && s->tick() == 0; s = s->next()) {
+                                          if (s->subtype() == SegKeySig) {
+                                                KeySig* e = static_cast<KeySig*>(s->element(staffIdx * VOICES));
+                                                if (e) {
+                                                      if (!e->generated())
+                                                            ksl.append(static_cast<KeySig*>(e));
+                                                      undoRemoveElement(e);
+                                                      if (e->segment()->isEmpty())
+                                                            undoRemoveElement(e->segment());
+                                                      }
+                                                }
+                                          else if (s->subtype() == SegTimeSig) {
+                                                TimeSig* e = static_cast<TimeSig*>(s->element(staffIdx * VOICES));
+                                                if (e) {
+                                                      if (!e->generated())
+                                                            tsl.append(static_cast<TimeSig*>(e));
+                                                      undoRemoveElement(e);
+                                                      if (e->segment()->isEmpty())
+                                                            undoRemoveElement(e->segment());
+                                                      }
+                                                }
+                                          else if (s->subtype() == SegClef) {
+                                                Element* e = s->element(staffIdx * VOICES);
+                                                if (e) {
+                                                      undoRemoveElement(e);
+                                                      if (static_cast<Segment*>(e->parent())->isEmpty())
+                                                            undoRemoveElement(e->parent());
                                                       }
                                                 }
                                           }
                                     }
-                              else if (s->subtype() == SegTimeSig) {
-                                    for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                                          TimeSig* e = static_cast<TimeSig*>(s->element(staffIdx * VOICES));
-                                          if (e && !e->generated()) {
-                                                tsl.append(static_cast<TimeSig*>(e));
-                                                undoRemoveElement(e);
-                                                if (e->segment()->isEmpty()) {
-                                                      undoRemoveElement(e->segment());
-                                                      }
-                                                }
-                                          }
-                                    }
                               }
-                        }
-                  undoInsertMeasure(measure);
-                  undoInsertTime(tick, ticks);
-                  undoSigInsertTime(tick, ticks);
-                  undoFixTicks();
+                        undoInsertMeasure(measure);
+                        undoInsertTime(tick, ticks);
 
-                  //
-                  // if measure is inserted at tick zero,
-                  // create key and time signature
-                  //
-                  foreach(TimeSig* ts, tsl) {
-                        TimeSig* nts = new TimeSig(*ts);
-                        SegmentType st = SegTimeSig;
-                        Segment* s = measure->findSegment(st, 0);
-                        if (s == 0) {
-                              s = measure->createSegment(st, 0);
-                              undoAddElement(s);
+                        //
+                        // if measure is inserted at tick zero,
+                        // create key and time signature
+                        //
+                        foreach(TimeSig* ts, tsl) {
+                              TimeSig* nts = new TimeSig(*ts);
+                              SegmentType st = SegTimeSig;
+                              Segment* s = measure->findSegment(st, 0);
+                              if (s == 0) {
+                                    s = measure->createSegment(st, 0);
+                                    undoAddElement(s);
+                                    }
+                              nts->setParent(s);
+                              undoAddElement(nts);
                               }
-                        nts->setParent(s);
-                        undoAddElement(nts);
-                        }
-                  foreach(KeySig* ks, ksl) {
-                        KeySig* nks = new KeySig(*ks);
-                        SegmentType st = SegKeySig;
-                        Segment* s = measure->findSegment(st, 0);
-                        if (s == 0) {
-                              s = measure->createSegment(st, 0);
-                              undoAddElement(s);
+                        foreach(KeySig* ks, ksl) {
+                              KeySig* nks = new KeySig(*ks);
+                              SegmentType st = SegKeySig;
+                              Segment* s = measure->findSegment(st, 0);
+                              if (s == 0) {
+                                    s = measure->createSegment(st, 0);
+                                    undoAddElement(s);
+                                    }
+                              nks->setParent(s);
+                              undoAddElement(nks);
                               }
-                        nks->setParent(s);
-                        undoAddElement(nks);
                         }
+                        break;
+                  case HBOX:
+                        {
+                        MeasureBase* mb = new HBox(this);
+                        mb->setTick(tick);
+                        undoInsertMeasure(mb);
+                        }
+                        break;
+                  case VBOX:
+                        {
+                        MeasureBase* mb = new HBox(this);
+                        mb->setTick(tick);
+                        undoInsertMeasure(mb);
+                        }
+                        break;
                   }
-            else
-                  undoInsertMeasure(m);
             }
       select(0, SELECT_SINGLE, 0);
       layoutAll = true;
@@ -1868,9 +1885,10 @@ void Score::cmd(const QAction* a)
 
       if (cmd == "print")
             printFile();
-      else if (cmd == "repeat"){
+      else if (cmd == "repeat") {
             preferences.playRepeats = !preferences.playRepeats;
-            seq->collectEvents();
+            updateRepeatList(preferences.playRepeats);
+            _playlistDirty = true;
             }
       else if (cmd == "rewind")
             seq->rewindStart();
@@ -2100,7 +2118,7 @@ void Score::cmd(const QAction* a)
                         _selection.setState(SEL_RANGE);
                         int tick = mb->tick();
                         if (mb->type() == MEASURE)
-                              tick += static_cast<Measure*>(mb)->tickLen();
+                              tick += static_cast<Measure*>(mb)->ticks();
                         _selection.setRange(tick2segment(0), tick2segment(tick), 0, nstaves());
                         }
                   }
@@ -2428,7 +2446,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               else
                                    cr = new RepeatMeasure(this);
                               cr->setTrack(curTrack);
-                              cr->setTick(curTick);         // set default tick position
                               cr->read(eee, tuplets);
                               cr->setSelected(false);
                               int voice = cr->voice();
@@ -2439,7 +2456,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     }
                               curTick  = cr->tick();
                               int tick = cr->tick() - tickStart + dstTick;
-                              cr->setTick(tick);
 
                               if (cr->type() == CHORD) {
                                     // set note track
@@ -2486,12 +2502,12 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               cr->setParent(s);
                               curTick  += cr->ticks();
 
-                              int measureEnd = measure->tick() + measure->tickLen();
-                              if (!isGrace && (cr->tick() + cr->tickLen() > measureEnd)) {
+                              int measureEnd = measure->tick() + measure->ticks();
+                              if (!isGrace && (cr->tick() + cr->ticks() > measureEnd)) {
                                     if (cr->type() == CHORD) {
                                           // split Chord
                                           Chord* c = static_cast<Chord*>(cr);
-                                          int rest = c->tickLen();
+                                          int rest = c->ticks();
                                           int len  = measureEnd - c->tick();
                                           rest    -= len;
                                           Duration d;
@@ -2499,13 +2515,12 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           c->setDuration(d);
                                           undoAddElement(c);
                                           while (rest) {
-                                                int tick = c->tick() + c->tickLen();
+                                                int tick = c->tick() + c->ticks();
                                                 measure = tick2measure(tick);
                                                 if (measure->tick() != tick)  // last measure
                                                       break;
                                                 Chord* c2 = static_cast<Chord*>(c->clone());
-                                                c2->setTick(tick);
-                                                len = measure->tickLen() > rest ? rest : measure->tickLen();
+                                                len = measure->ticks() > rest ? rest : measure->ticks();
                                                 Duration d;
                                                 d.setVal(len);
                                                 c2->setDuration(d);
@@ -2540,7 +2555,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     else {
                                           // split Rest
                                           Rest* r  = static_cast<Rest*>(cr);
-                                          int rest = r->tickLen();
+                                          int rest = r->ticks();
                                           int len  = measureEnd - r->tick();
                                           rest    -= len;
                                           Duration d;
@@ -2549,10 +2564,9 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           undoAddElement(r);
                                           while (rest) {
                                                 Rest* r2 = static_cast<Rest*>(r->clone());
-                                                int tick = r->tick() + r->tickLen();
-                                                r2->setTick(tick);
+                                                int tick = r->tick() + r->ticks();
                                                 measure = tick2measure(tick);
-                                                len = measure->tickLen() > rest ? rest : measure->tickLen();
+                                                len = measure->ticks() > rest ? rest : measure->ticks();
                                                 Duration d;
                                                 d.setVal(len);
                                                 r2->setDuration(d);
@@ -2574,7 +2588,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               }
                         else if (tag == "Lyrics") {
                               Lyrics* lyrics = new Lyrics(this);
-                              lyrics->setTick(curTick);         // set default tick position
                               lyrics->setTrack(curTrack);
                               lyrics->read(eee);
                               lyrics->setTrack(dstStaffIdx * VOICES);

@@ -63,6 +63,7 @@ class Clef : public Compound {
 
       bool small() const                        { return _small; }
       void setSmall(bool val);
+      int tick() const;
       };
 
 //---------------------------------------------------------

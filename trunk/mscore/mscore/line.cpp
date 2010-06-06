@@ -169,7 +169,7 @@ bool LineSegment::edit(ScoreView* view, int curGrip, int key, Qt::KeyboardModifi
                         else {
                               Measure* m  = score()->tick2measure(tick1);
                               Measure* mb = m->nextMeasure();
-                              t1 = mb ? mb->tick() : m->tick() + m->tickLen();
+                              t1 = mb ? mb->tick() : m->tick() + m->ticks();
                               }
                         if (t1 >= 0)
                               tick1 = t1;
@@ -185,7 +185,7 @@ bool LineSegment::edit(ScoreView* view, int curGrip, int key, Qt::KeyboardModifi
                               Measure* m  = score()->tick2measure(tick2);
                               if (m) {
                                     Measure* mb = m->nextMeasure();
-                                    t2 = mb ? mb->tick() : m->tick() + m->tickLen();
+                                    t2 = mb ? mb->tick() : m->tick() + m->ticks();
                                     }
                               }
                         if (t2 > tick1)
@@ -268,15 +268,6 @@ SLine::SLine(const SLine& s)
       _anchor   = s._anchor;
       foreach(LineSegment* ls, s.segments)
             add(ls->clone());
-      }
-
-//---------------------------------------------------------
-//   setTick2
-//---------------------------------------------------------
-
-void SLine::setTick2(int t)
-      {
-      _tick2 = t;
       }
 
 //---------------------------------------------------------

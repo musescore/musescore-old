@@ -80,7 +80,8 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(SegmentTypes)
 class Segment : public Element {
       Segment* _next;
       Segment* _prev;
-      mutable bool empty;     // cached value
+      mutable bool empty;          // cached value
+      int _tick;
 
    private:
       QList<Element*> _elist;      ///< Element storage, size = staves * VOICES.
@@ -137,6 +138,8 @@ class Segment : public Element {
       void fixStaffIdx();
       bool isChordRest() const           { return subtype() == SegChordRest; }
       bool isGrace() const               { return subtype() == SegGrace; }
+      void setTick(int);
+      int tick() const;
       };
 
 #endif

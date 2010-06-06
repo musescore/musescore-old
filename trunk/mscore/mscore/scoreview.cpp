@@ -1485,7 +1485,7 @@ bool ScoreView::dragTimeAnchorElement(const QPointF& pos)
             QPointF anchor(seg->abbox().x(), y);
             setDropAnchor(QLineF(pos, anchor));
             dragElement->setTrack(staffIdx * VOICES);
-            dragElement->setTick(tick);
+//            dragElement->setTick(tick);
             return true;
             }
       setDropTarget(0);
@@ -1962,12 +1962,12 @@ if (debugMode)
                         s->setTrack(el->track());
                         if (el->type() == NOTE) {
                               Note* note = (Note*)el;
-                              s->setTick(note->chord()->tick());
+                              // s->setTick(note->chord()->tick());
                               s->setParent(note->chord()->segment()->measure());
                               }
                         else  {
                               Rest* rest = (Rest*)el;
-                              s->setTick(rest->tick());
+                              // s->setTick(rest->tick());
                               s->setParent(rest->segment()->measure());
                               }
                         score()->undoAddElement(s);

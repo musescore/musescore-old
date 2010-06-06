@@ -75,7 +75,7 @@ void PianoItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
       painter->setBrush(isSelected() ? Qt::yellow : Qt::blue);
       painter->drawRect(x1, 0.0, x2-x1, keyHeight / 2);
 
-      int len = chord->tickLen();
+      int len = chord->ticks();
 
       if (x1 > 0 || x2 < len) {
             painter->setBrush(Qt::gray);
@@ -95,7 +95,8 @@ AL::Pos PianoView::pix2pos(int x) const
       x -= MAP_OFFSET;
       if (x < 0)
             x = 0;
-      return AL::Pos(staff->score()->tempomap(), staff->score()->sigmap(), x, _timeType);
+//TODO      return AL::Pos(staff->score()->tempomap(), staff->score()->sigmap(), x, _timeType);
+      return AL::Pos();
       }
 
 //---------------------------------------------------------
@@ -174,6 +175,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
       bar2 = ((bar2 + n - 1) / n) * n; // round up
 
       for (int bar = bar1; bar <= bar2;) {
+#if 0 // TODO
             AL::Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
             if (magStep > 0) {
                   double x = double(pos2pix(stick));
@@ -238,6 +240,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
                   bar += (n-1);
             else
                   bar += n;
+#endif
             }
       }
 
@@ -268,7 +271,7 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
 
       staff    = s;
       _locator = l;
-      pos.setContext(s->score()->tempomap(), s->score()->sigmap());
+//TODO      pos.setContext(s->score()->tempomap(), s->score()->sigmap());
 
       scene()->blockSignals(true);
 
@@ -302,7 +305,7 @@ void PianoView::setStaff(Staff* s, AL::Pos* l)
       scene()->blockSignals(false);
 
       Measure* lm = staff->score()->lastMeasure();
-      ticks       = lm->tick() + lm->tickLen();
+      ticks       = lm->tick() + lm->ticks();
       scene()->setSceneRect(0.0, 0.0, double(ticks + 960), keyHeight * 75);
 
       for (int i = 0; i < 3; ++i)

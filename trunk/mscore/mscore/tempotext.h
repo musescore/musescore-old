@@ -42,7 +42,8 @@ class TempoText : public Text  {
       virtual void propertyAction(ScoreView*, const QString&);
       Measure* measure() const { return (Measure*)parent(); }
       double tempo() const     { return _tempo; }
-      void setTempo(double v)  { _tempo = v; }
+      void setTempo(double v)  { _tempo = v;  }
+      void setTick(int val)    { _tick = val; }
       };
 
 //---------------------------------------------------------

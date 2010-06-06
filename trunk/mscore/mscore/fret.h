@@ -78,6 +78,7 @@ class FretDiagram : public Element {
       char* marker()    { return _marker; }
       char* fingering() { return _fingering; }
       void init(Tablature*, Chord*);
+      void setTick(int v) { _tick = v; }
       };
 
 //---------------------------------------------------------

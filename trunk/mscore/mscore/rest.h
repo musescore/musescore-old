@@ -50,7 +50,7 @@ class Rest : public ChordRest {
 
    public:
       Rest(Score* s = 0);
-      Rest(Score*, int tick, const Duration&);
+      Rest(Score*, const Duration&);
       virtual Rest* clone() const      { return new Rest(*this); }
       virtual ElementType type() const { return REST; }
 

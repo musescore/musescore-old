@@ -117,7 +117,7 @@ Q_DECLARE_METATYPE(Text*);
 
 static const char* const function_names_cursor[] = {
       "rewind", "eos", "chord", "rest", "measure", "next", "nextMeasure", "putStaffText",  "isChord", "isRest",
-      "add", "tick", "time", "staff", "voice", "pageNumber", "pos", "goToSelectionStart", "goToSelectionEnd",  
+      "add", "tick", "time", "staff", "voice", "pageNumber", "pos", "goToSelectionStart", "goToSelectionEnd",
       };
 static const int function_lengths_cursor[] = {
       0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0
@@ -287,7 +287,7 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
              case 16:    // "pos"
                   if (context->argumentCount() == 0){
                         if(cursor->segment()){
-                              Page* page = (Page*)cursor->segment()->measure()->parent()->parent();	  
+                              Page* page = (Page*)cursor->segment()->measure()->parent()->parent();
                               QPointF pos(cursor->segment()->canvasPos().x() - page->canvasPos().x(),  cursor->segment()->canvasPos().y());
                               return qScriptValueFromValue(context->engine(), pos);
                             }
@@ -304,7 +304,7 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                         cursor->rewind(2);
                         return context->engine()->undefinedValue();
                         }
-                  break;                                    
+                  break;
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Cursor.%0(): bad argument count or value")
@@ -412,7 +412,7 @@ bool SCursor::nextMeasure()
       if (rs && expandRepeat()){
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
-            if ((m  && (m->tick() + m->tickLen() > endTick) ) || (!m) ){
+            if ((m  && (m->tick() + m->ticks() > endTick) ) || (!m) ){
                   int rsIdx = repeatSegmentIndex();
                   rsIdx ++;
                   if (rsIdx < score()->repeatList()->size()) {       //there is a next repeat segment
@@ -512,7 +512,7 @@ int SCursor::tick()
       else if (segment())
           return segment()->tick() + offset;
       else
-          return _score->lastMeasure()->tick() + _score->lastMeasure()->tickLen() + offset;  // end of score
+          return _score->lastMeasure()->tick() + _score->lastMeasure()->ticks() + offset;  // end of score
       }
 
 //---------------------------------------------------------

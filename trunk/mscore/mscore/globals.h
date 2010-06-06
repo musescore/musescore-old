@@ -21,9 +21,9 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.14"
+#define MSC_VERSION     "1.15"
 
-static const int MSCVERSION = 114;
+static const int MSCVERSION = 115;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -37,6 +37,7 @@ static const int MSCVERSION = 114;
 //    1.12  use durationType, remove tickLen
 //    1.13  Clefs: userOffset is not (mis)used for vertical layout position
 //    1.14  save user modified beam position as spatium value
+//    1.15  save timesig inline; Lyrics "endTick" replaced by "ticks"
 
 extern bool debugMode;
 extern bool enableExperimental;

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -85,7 +85,10 @@ class Measure : public MeasureBase {
 
       Segment* _first;        ///< First item of segment list
       Segment* _last;         ///< Last item of segment list
-      int _size;              ///< Number of items on segment list
+      int _size;              ///< Number of items in segment list
+
+      Fraction _actualTimesig;
+      Fraction _nominalTimesig;
 
       int _repeatCount;       ///< end repeat marker und repeat count
       int _repeatFlags;       ///< or'd RepeatType's
@@ -108,7 +111,7 @@ class Measure : public MeasureBase {
       int _endBarLineType;
 
       int _mmEndBarLineType;       ///< bar line type if this measure is presented
-                                    ///< as multi measure rest
+                                   ///< as multi measure rest
 
       int _multiMeasure;      // set from layout();
                               //   0 - normal measure
@@ -117,11 +120,9 @@ class Measure : public MeasureBase {
 
       QColor _endBarLineColor;
 
-      mutable int _tickLen;   // cached value
-      mutable unsigned sigSerial;
-
       void push_back(Segment* e);
       void push_front(Segment* e);
+      void setTimesig(const Fraction& nfraction);
 
    public:
       Measure(Score*);
@@ -158,8 +159,7 @@ class Measure : public MeasureBase {
       virtual Spatium userDistance(int i) const;
 
       int size() const                 { return _size;       }
-      virtual int tickLen() const;
-      virtual void setTick(int t);
+      virtual int ticks() const        { return _actualTimesig.ticks(); }
 
       Segment* first() const           { return _first;      }
       Segment* first(SegmentTypes) const;
@@ -204,7 +204,7 @@ class Measure : public MeasureBase {
       int repeatCount() const         { return _repeatCount; }
       void setRepeatCount(int val)    { _repeatCount = val; }
 
-      Segment* getSegment(Element* el);
+      Segment* getSegment(Element* el, int tick);
       Segment* getSegment(SegmentType st, int tick);
       Segment* getSegment(SegmentType st, int tick, int gl);
       Segment* findSegment(SegmentType st, int t);
@@ -223,7 +223,7 @@ class Measure : public MeasureBase {
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       void createVoice(int track);
       void adjustToLen(int, int);
-      int repeatFlags() const      { return _repeatFlags; }
+      int repeatFlags() const                   { return _repeatFlags; }
       void setRepeatFlags(int val);
       int findAccidental(Note*) const;
       int findAccidental2(Note*) const;
@@ -234,19 +234,23 @@ class Measure : public MeasureBase {
       bool visible(int staffIdx) const;
       bool slashStyle(int staffIdx) const;
 
-      bool breakMultiMeasureRest() const      { return _breakMultiMeasureRest | _breakMMRest; }
-      bool breakMMRest() const                { return _breakMMRest; }
-      void setBreakMMRest(bool v)             { _breakMMRest = v;    }
-      bool getBreakMultiMeasureRest() const   { return _breakMultiMeasureRest; }
-      void setBreakMultiMeasureRest(bool val) { _breakMultiMeasureRest = val;  }
+      bool breakMultiMeasureRest() const        { return _breakMultiMeasureRest | _breakMMRest; }
+      bool breakMMRest() const                  { return _breakMMRest; }
+      void setBreakMMRest(bool v)               { _breakMMRest = v;    }
+      bool getBreakMultiMeasureRest() const     { return _breakMultiMeasureRest; }
+      void setBreakMultiMeasureRest(bool val)   { _breakMultiMeasureRest = val;  }
 
       bool isEmpty() const;
 
-      int multiMeasure() const                { return _multiMeasure; }
-      void setMultiMeasure(int val)           { _multiMeasure = val;  }
-      Fraction fraction() const;
+      int multiMeasure() const                  { return _multiMeasure; }
+      void setMultiMeasure(int val)             { _multiMeasure = val;  }
       void layoutChords0(Segment* segment, int startTrack, char* tversatz);
       void writeTuplets(Xml&, int staff) const;
+      Fraction fraction() const                 { return _actualTimesig; }
+      Fraction actualTimesig() const            { return _actualTimesig; }
+      Fraction nominalTimesig() const           { return _nominalTimesig; }
+      void setActualTimesig(const Fraction& f)  { _actualTimesig = f; }
+      void setNominalTimesig(const Fraction& f) { _nominalTimesig = f; }
       };
 
 extern void initLineList(char* ll, int key);

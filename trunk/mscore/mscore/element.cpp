@@ -195,17 +195,6 @@ QRectF Element::abbox() const
       return bbox().translated(canvasPos());
       }
 
-//---------------------------------------------------------
-//   operator >
-//---------------------------------------------------------
-
-bool Element::operator>(const Element& el) const
-      {
-      if (tick() == el.tick())
-            return type() > el.type();
-      return tick() > el.tick();
-      }
-
 Element::~Element()
       {
 //      printf("~Element %p\n", this);
@@ -237,9 +226,9 @@ Element::Element(Score* s) :
    _systemFlag(false),
    _subtype(0),
    _track(-1),
-   _tick(-1),
    _color(preferences.defaultColor),
    _mag(1.0),
+   _tick(-1),
    _score(s),
    _align(ALIGN_LEFT | ALIGN_TOP),
    _xoff(0), _yoff(0),
@@ -456,8 +445,6 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             pl.append(Prop("selected", selected()));
       if (!visible())
             pl.append(Prop("visible", visible()));
-      if (_tick != -1 && (_tick != xml.curTick))
-            pl.append(Prop("tick", _tick));
       if (_color != preferences.defaultColor)
             pl.append(Prop("color", _color));
       if (_systemFlag && (proto == 0 || proto->systemFlag() != _systemFlag))
@@ -472,8 +459,6 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
 void Element::writeProperties(Xml& xml, const Element* proto) const
       {
       xml.prop(properties(xml, proto));
-      if ((_tick != -1) && (_tick != xml.curTick || debugMode))
-            xml.curTick = _tick;
       }
 
 //---------------------------------------------------------
@@ -486,14 +471,12 @@ bool Element::readProperties(QDomElement e)
       QString val(e.text());
       int i = val.toInt();
 
-      if (tag == "tick") {
-            setTick(score()->fileDivision(i));
-            score()->curTick = _tick;
-            }
-      else if (tag == "subtype") {
+      if (tag == "subtype") {
             // do not always call Element::setSubtype():
             this->setSubtype(val);
             }
+      else if (tag == "tick")
+            score()->curTick = score()->fileDivision(i);
       else if (tag == "offset")
             setUserOff(readPoint(e) * spatium());
       else if (tag == "visible")
@@ -613,6 +596,7 @@ void ElementList::replace(Element* o, Element* n)
 //   move
 //---------------------------------------------------------
 
+#if 0
 void ElementList::move(Element* el, int tick)
       {
       int idx = indexOf(el);
@@ -640,6 +624,7 @@ void ElementList::add(Element* e)
             }
       append(e);
       }
+#endif
 
 //---------------------------------------------------------
 //   write

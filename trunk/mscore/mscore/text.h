@@ -206,6 +206,7 @@ class TextB : public Element {
 
       virtual bool genPropertyMenu(QMenu* popup) const;
       virtual void propertyAction(ScoreView*, const QString& s);
+      void setTick(int v) { _tick = v; }
       };
 
 //---------------------------------------------------------

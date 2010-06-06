@@ -192,6 +192,12 @@ class SynthesizerSettings {
       void read(QDomElement);
       };
 
+// layoutFlags bits
+
+enum {
+      LAYOUT_FIX_TICKS = 1
+      };
+
 //---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
@@ -226,7 +232,6 @@ class Score : public QObject {
       QList<Element*> _gel;               // global elements: Slur, SLine
       QList<Beam*>    _beams;
       RepeatList* _repeatList;
-      AL::TimeSigMap* _sigmap;
       AL::TempoMap* _tempomap;
 
       InputState _is;
@@ -250,6 +255,7 @@ class Score : public QObject {
       bool _updateAll;
       Measure* startLayout;   ///< start a relayout at this measure
       bool layoutAll;         ///< do a complete relayout
+      int layoutFlags;
 
       Qt::KeyboardModifiers keyState;
 
@@ -330,8 +336,6 @@ class Score : public QObject {
       void addTempo();
       void addMetronome();
 
-      void undoSigInsertTime(int, int);
-
       void cmdAddChordName2();
       int processPendingNotes(QList<MNote*>* notes, int, int);
       void writeExcerpt(Excerpt*, Xml&);
@@ -403,9 +407,7 @@ class Score : public QObject {
       void removeStaff(Staff*);
       void addMeasure(MeasureBase*);
       void appendMeasures(int, int);
-      void readStaff(QDomElement);
-
-      void undoFixTicks();
+      void readStaff(QDomElement, AL::TimeSigMap*);
 
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
@@ -437,7 +439,6 @@ class Score : public QObject {
       Measure* pos2measure2(const QPointF&, int* tick, int* staffIdx, int* pitch, Segment**) const;
       Measure* pos2measure3(const QPointF& p, int* tick) const;
 
-      void undoChangeSig(int tick, const AL::SigEvent& o, const AL::SigEvent& n);
       void undoChangeKey(Staff* staff, int tick, KeySigEvent o, KeySigEvent n);
       void undoChangeTempo(int tick, const AL::TEvent& o, const AL::TEvent& n);
       void undoChangeClef(Staff* staff, int tick, int o, int n);
@@ -502,7 +503,7 @@ class Score : public QObject {
       void searchSelectedElements();
 
       void upDown(bool up, bool octave);
-      Element* searchNote(int tick, int track) const;
+      ChordRest* searchNote(int tick, int track) const;
 
       // undo/redo ops
       void endUndoRedo(Undo*);
@@ -512,8 +513,6 @@ class Score : public QObject {
 
       void addElement(Element*);
       void removeElement(Element*);
-
-      void addTimeSig(int tick, int keySigSubtype);
 
       void cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddBSymbol(BSymbol*, const QPointF&, const QPointF&);
@@ -538,6 +537,7 @@ class Score : public QObject {
       void cmdRemoveClef(Clef*);
       void cmdRemoveKeySig(KeySig*);
       void cmdRemoveTimeSig(TimeSig*);
+      void cmdAddTimeSig(Measure*, TimeSig*);
 
       void setUpdateAll(bool v = true) { _updateAll = v;   }
       void setLayoutAll(bool val)      { layoutAll = val;  }
@@ -608,7 +608,6 @@ class Score : public QObject {
 
       bool playlistDirty();
       void setPlaylistDirty(bool val) { _playlistDirty = val; }
-      void changeTimeSig(int tick, int st);
 
       void cmd(const QAction*);
       int fileDivision(int t) const { return (t * AL::division + _fileDivision/2) / _fileDivision; }
@@ -676,7 +675,6 @@ class Score : public QObject {
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
 
-      AL::TimeSigMap* sigmap()  { return _sigmap; }
       MeasureBase* appendMeasure(int type);
       void addLyrics(int tick, int staffIdx, const QString&);
 
@@ -819,6 +817,7 @@ class Score : public QObject {
       const QList<StaffType*>& staffTypes() const             { return _staffTypes; }
       QList<StaffType*>& staffTypes()                         { return _staffTypes; }
       void setStaffTypeList(const QList<StaffType*>& tl)      { _staffTypes = tl;   }
+      void addLayoutFlag(int val)                             { layoutFlags |= val; }
       };
 
 extern Score* gscore;

@@ -82,7 +82,7 @@ int Selection::tickEnd() const
           return _endSegment->tick();
       else{ // endsegment == 0 if end of score
           Measure* m = _score->lastMeasure();
-          return m->tick() + m->tickLen();
+          return m->tick() + m->ticks();
           }
       }
 
@@ -317,7 +317,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             if (e->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(e);
                   int tick  = m->tick();
-                  int etick = tick + m->tickLen();
+                  int etick = tick + m->ticks();
                   if (_selection.state() == SEL_NONE) {
                         _selection.setStartSegment(m->tick2segment(tick, true));
                         _selection.setEndSegment(tick2segment(etick));
@@ -354,7 +354,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             if (e->type() == MEASURE) {
                   Measure* m = static_cast<Measure*>(e);
                   int tick  = m->tick();
-                  int etick = tick + m->tickLen();
+                  int etick = tick + m->ticks();
                   activeTrack = staffIdx * VOICES;
                   if (_selection.state() == SEL_NONE) {
                         _selection.setStaffStart(staffIdx);

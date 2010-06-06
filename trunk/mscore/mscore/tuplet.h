@@ -41,6 +41,7 @@ class Text;
 
 class Tuplet : public DurationElement {
       Fraction _fraction;
+      int _tick;
 
    public:
       enum { SHOW_NUMBER, SHOW_RELATION, NO_TEXT };
@@ -126,6 +127,8 @@ class Tuplet : public DurationElement {
       void setDirection(Direction d)       { _direction = d; }
       Direction direction() const          { return _direction; }
       bool isUp() const                    { return _isUp; }
+      virtual int tick() const             { return _tick; }
+      void setTick(int val)                { _tick = val; }
       };
 
 //---------------------------------------------------------

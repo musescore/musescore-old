@@ -1440,7 +1440,7 @@ void TupletView::setElement(Element* e)
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, e->name());
             item->setText(1, QString("%1").arg(e->tick()));
-            item->setText(2, QString("%1").arg(e->tickLen()));
+            item->setText(2, QString("%1").arg(e->ticks()));
             void* p = (void*) e;
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
             tb.elements->addTopLevelItem(item);

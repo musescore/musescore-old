@@ -51,6 +51,12 @@ TimeSig::TimeSig(Score* s, int n, int z1, int z2, int z3, int z4)
       setSig(n, z1, z2, z3, z4);
       }
 
+TimeSig::TimeSig(Score* s, const Fraction& f)
+   : Element(s)
+      {
+      setSig(f.denominator(), f.numerator(), 0, 0, 0);
+      }
+
 //---------------------------------------------------------
 //   canvasPos
 //---------------------------------------------------------
@@ -118,13 +124,14 @@ bool TimeSig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 Element* TimeSig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       if (e->type() == TIMESIG) {
-            TimeSig* ts = (TimeSig*)e;
+            TimeSig* ts = static_cast<TimeSig*>(e);
             int stype   = ts->subtype();
             int st = subtype();
             if (st != stype) {
                   // change timesig applies to all staves, can't simply set subtype
                   // for this one only
-                  score()->changeTimeSig(tick(), stype);
+                  score()->cmdAddTimeSig(measure(), ts);
+                  return 0;
                   }
             }
       delete e;

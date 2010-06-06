@@ -270,6 +270,7 @@ Score::Score(const Style& s)
       _created        = false;
       _updateAll      = false;
       layoutAll       = false;
+      layoutFlags     = 0;
       keyState        = 0;
       _showInvisible  = true;
       _showFrames     = true;
@@ -288,8 +289,6 @@ Score::Score(const Style& s)
       _omr            = 0;
       _showOmr        = false;
       _tempomap       = new AL::TempoMap;
-      _sigmap         = new AL::TimeSigMap;
-      _sigmap->add(0, Fraction(4, 4));
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 
@@ -303,7 +302,6 @@ Score::~Score()
       delete rights;
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
       delete _tempomap;
-      delete _sigmap;
       delete _repeatList;
       }
 
@@ -449,12 +447,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", AL::division);
       xml.curTrack = -1;
-#if 0 // TODO-S
-      if (!autosave && editObject) {                          // in edit mode?
-            endCmd();
-            setState(STATE_NORMAL);
-            }
-#endif
+
       _style.save(xml, true);      // save only differences to buildin style
       for (int i = 0; i < TEXT_STYLES; ++i) {
             if (*_textStyles[i] != defaultTextStyleArray[i])
@@ -485,7 +478,6 @@ void Score::write(Xml& xml, bool /*autosave*/)
       foreach(KeySig* ks, customKeysigs)
             ks->write(xml);
 
-      _sigmap->write(xml);
       _tempomap->write(xml);
       foreach(const Part* part, _parts)
             part->write(xml);
@@ -506,10 +498,8 @@ void Score::write(Xml& xml, bool /*autosave*/)
                   tuplet->setId(tupletId++);
             }
       xml.curTrack = 0;
-      foreach(Beam* beam, _beams) {
+      foreach(Beam* beam, _beams)
             beam->setId(beamId++);
-//            beam->write(xml);
-            }
       foreach(Element* el, _gel)
             el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
@@ -520,7 +510,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
                   if (m->type() == MEASURE || staffIdx == 0)
                         m->write(xml, staffIdx, staffIdx == 0);
                   if (m->type() == MEASURE)
-                        xml.curTick = m->tick() + _sigmap->ticksMeasure(m->tick());
+                        xml.curTick = m->tick() + m->ticks();
                   }
             xml.etag();
             }
@@ -552,6 +542,7 @@ void Score::addMeasure(MeasureBase* m)
       if (!m->next())
             m->setNext(tick2measureBase(m->tick()));
       _measures.add(m);
+      addLayoutFlag(LAYOUT_FIX_TICKS);
       }
 
 //---------------------------------------------------------
@@ -572,7 +563,7 @@ void Score::insertTime(int tick, int len)
                   }
             foreach(Element* el, _gel) {
                   if (el->type() == SLUR) {
-                        Slur* s = (Slur*) el;
+                        Slur* s = static_cast<Slur*>(el);
                         if (s->tick() >= tick + len) {
                               s->setTick(s->tick() - len);
                               }
@@ -581,7 +572,7 @@ void Score::insertTime(int tick, int len)
                               }
                         }
                   else if (el->isSLine()) {
-                        SLine* s = (SLine*) el;
+                        SLine* s = static_cast<SLine*>(el);
                         if (s->tick() >= tick + len)
                               s->setTick(s->tick() - len);
                         if (s->tick2() >= tick + len)
@@ -600,7 +591,7 @@ void Score::insertTime(int tick, int len)
                   }
             foreach(Element* el, _gel) {
                   if (el->type() == SLUR) {
-                        Slur* s = (Slur*) el;
+                        Slur* s = static_cast<Slur*>(el);
                         if (s->tick() >= tick) {
                               s->setTick(s->tick() + len);
                               }
@@ -609,7 +600,7 @@ void Score::insertTime(int tick, int len)
                               }
                         }
                   else if (el->isSLine()) {
-                        SLine* s = (SLine*) el;
+                        SLine* s = static_cast<SLine*>(el);
                         if (s->tick() >= tick)
                               s->setTick(s->tick() + len);
                         if (s->tick2() >= tick)
@@ -617,6 +608,7 @@ void Score::insertTime(int tick, int len)
                         }
                   }
             }
+      addLayoutFlag(LAYOUT_FIX_TICKS);
       }
 
 //---------------------------------------------------------
@@ -649,8 +641,7 @@ void Score::fixTicks()
                   ++number;
             int mtick = m->tick();
             int diff  = tick - mtick;
-            int measureTicks = _sigmap->ticksMeasure(tick);
-// printf("move %d  -  soll %d  ist %d  len %d\n", bar, tick, mtick, measureTicks);
+            int measureTicks = m->ticks();
             tick += measureTicks;
             m->moveTicks(diff);
             }
@@ -955,7 +946,7 @@ Measure* Score::pos2measure3(const QPointF& p, int* tick) const
                                     return (Measure*)m;
                                     }
                               else {
-                                    *tick = pm->tick() + pm->tickLen();
+                                    *tick = pm->tick() + pm->ticks();
                                     return (Measure*) pm;
                                     }
                               }
@@ -986,7 +977,7 @@ int Score::staffIdx(const Part* part) const
 //   readStaff
 //---------------------------------------------------------
 
-void Score::readStaff(QDomElement e)
+void Score::readStaff(QDomElement e, AL::TimeSigMap* _sigmap)
       {
       MeasureBase* mb = first();
       int staff       = e.attribute("id", "1").toInt() - 1;
@@ -1002,6 +993,20 @@ void Score::readStaff(QDomElement e)
                         measure = new Measure(this);
                         measure->setTick(curTick);
                         add(measure);
+                        if (_mscVersion < 115) {
+                              const AL::SigEvent& ev = _sigmap->timesig(measure->tick());
+                              measure->setActualTimesig(ev.fraction());
+                              measure->setNominalTimesig(ev.getNominal());
+                              }
+                        else {
+                              //
+                              // inherit timesig from previous measure
+                              //
+                              Measure* m = measure->prevMeasure();
+                              Fraction f(m ? m->nominalTimesig() : Fraction(4,4));
+                              measure->setActualTimesig(f);
+                              measure->setNominalTimesig(f);
+                              }
                         }
                   else {
                         while (mb) {
@@ -1022,7 +1027,7 @@ void Score::readStaff(QDomElement e)
                               }
                         }
                   measure->read(e, staff);
-                  curTick = measure->tick() + measure->tickLen();
+                  curTick = measure->tick() + measure->ticks();
                   }
             else if (tag == "HBox") {
                   HBox* hbox = new HBox(this);
@@ -1627,7 +1632,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   }
             else {
                   x2    = pos->measure->bbox().width();
-                  ntick = pos->measure->tick() + pos->measure->tickLen();
+                  ntick = pos->measure->tick() + pos->measure->ticks();
                   d = (x2 - x1) * 2.0;
                   x = x1;
                   pos->tick = segment->tick();
@@ -1786,14 +1791,24 @@ void Score::spatiumChanged(double oldValue, double newValue)
 
 Measure* Score::getCreateMeasure(int tick)
       {
-      MeasureBase* last = _measures.last();
-      int lastTick = last ? last->tick() + last->tickLen() : 0;
+      Fraction ts;
+      int lastTick;
+      Measure* last = lastMeasure();
+      if (last) {
+            lastTick = last->tick();
+            ts = last->nominalTimesig();
+            }
+      else {
+            lastTick = 0;
+            ts = Fraction(4,4);
+            }
       while (tick >= lastTick) {
             Measure* m = new Measure(this);
             m->setTick(lastTick);
-            int ticks = _sigmap->ticksMeasure(lastTick);
+            m->setActualTimesig(ts);
+            m->setNominalTimesig(ts);
             add(m);
-            lastTick += ticks;
+            lastTick += ts.ticks();
             }
       return tick2measure(tick);
       }
@@ -1811,15 +1826,19 @@ Measure* Score::getCreateMeasure(int tick)
 
 void Score::addElement(Element* element)
       {
-      if (debugMode)
-            printf("   Score::addElement %p %s parent %s\n",
-               element, element->name(), element->parent() ? element->parent()->name() : "null");
+      if (debugMode) {
+            printf("   %d Score::addElement %p(%s) parent %p(%s)\n",
+               element->tick(),
+               element, element->name(), element->parent(),
+               element->parent() ? element->parent()->name() : "");
+            }
 
       if (element->type() == MEASURE
          || (element->type() == HBOX && element->parent()->type() != VBOX)
          || element->type() == VBOX
          ) {
             add(element);
+            addLayoutFlag(LAYOUT_FIX_TICKS);
             return;
             }
 
@@ -1879,8 +1898,8 @@ void Score::removeElement(Element* element)
       Element* parent = element->parent();
 
       if (debugMode)
-            printf("   Score::removeElement %p %s parent %p %s\n",
-               element, element->name(), parent, parent ? parent->name() : "");
+            printf("   %d Score::removeElement %p(%s) parent %p(%s)\n",
+               element->tick(), element, element->name(), parent, parent ? parent->name() : "");
 
       // special for MEASURE, HBOX, VBOX
       // their parent is not static
@@ -1889,6 +1908,7 @@ void Score::removeElement(Element* element)
          || (element->type() == HBOX && parent->type() != VBOX)
          || element->type() == VBOX) {
             remove(element);
+            addLayoutFlag(LAYOUT_FIX_TICKS);
             return;
             }
       if (element->type() == BEAM)          // beam parent does not survive layout

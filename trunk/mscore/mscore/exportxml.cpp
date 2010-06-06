@@ -769,8 +769,8 @@ static DirectionsAnchor* findSpecificMatchInMeasure(int tick, Staff* stf, bool s
                         continue;
                   if (el->isChordRest() && el->staff() == stf) {
                         ChordRest* cr = static_cast<ChordRest*>(el);
-                        if (   ( start && el->tick() == tick)
-                            || (!start && (el->tick() + cr->tickLen()) == tick)) {
+                        if ((start && cr->tick() == tick)
+                            || (!start && (cr->tick() + cr->ticks()) == tick)) {
                               return new DirectionsAnchor(el, start, tick);
                               }
                         }
@@ -903,6 +903,7 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                   case TEMPO_TEXT:
                   case TEXT:
                   case STAFF_TEXT:
+#if 0 // TODOxx
                         if (!dopart) {
                               // LVIFIX 20071110 TODO
                               // Even though they are moved to from measure to vbox, the elements
@@ -916,6 +917,7 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                                     storeAnchor(da);
                                     }
                         }
+#endif
                         break;
                   default:
                         // all others silently ignored
@@ -1068,11 +1070,11 @@ void ExportMusicXml::calcDivisions()
                               // LVIFIX: find exact cause
 //                              int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
                               // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
-//                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
+//                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->ticks(), sstaff);
                               }
                         }
                   // move to end of measure (in case of incomplete last voice)
-                  calcDivMoveToTick(m->tick() + m->tickLen());
+                  calcDivMoveToTick(m->tick() + m->ticks());
                   }
             }
 
@@ -1324,7 +1326,7 @@ static Volta* findVolta(Measure* m, bool left)
             if (el->type() == VOLTA) {
                   Volta* v = (Volta*) el;
                   if ((left && v->tick() == m->tick())
-                      || (!left && v->tick2() == (m->tick() + m->tickLen()))) {
+                      || (!left && v->tick2() == (m->tick() + m->ticks()))) {
                         return v;
                         }
                   }
@@ -1566,7 +1568,7 @@ static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& orn
                         xml.tagE("trill-mark");
                         xml.tagE("wavy-line type=\"start\"");
                         }
-                  else if (t->tick2() == chord->tick()+chord->tickLen() && t->track() == chord->track()) {
+                  else if (t->tick2() == chord->tick()+chord->ticks() && t->track() == chord->track()) {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tagE("wavy-line type=\"stop\"");
@@ -2034,7 +2036,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
 
             // duration
             if (!grace)
-                  xml.tag("duration", note->chord()->tickLen() / (div * tremCorr));
+                  xml.tag("duration", note->chord()->ticks() / (div * tremCorr));
 
             if (note->tieBack())
                   xml.tagE("tie type=\"stop\"");
@@ -2060,10 +2062,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   nrmNotes = t->ratio().denominator();
                   }
 
-            QString s = tick2xml(note->chord()->tickLen() * actNotes / (nrmNotes * tremCorr), &dots);
+            QString s = tick2xml(note->chord()->ticks() * actNotes / (nrmNotes * tremCorr), &dots);
             if (s.isEmpty()) {
                   printf("no note type found for ticks %d\n",
-                     note->chord()->tickLen());
+                     note->chord()->ticks());
                   }
             xml.tag("type", s);
             for (int ni = dots; ni > 0; ni--)
@@ -2129,7 +2131,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             if (chord->noStem() || chord->measure()->slashStyle(chord->staffIdx())){
                   xml.tag("stem", QString("none"));
             }
-            else if (note->chord()->tickLen() < 4*AL::division){
+            else if (note->chord()->ticks() < 4*AL::division){
                   xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
             }
 
@@ -2266,10 +2268,10 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             }
 
       Duration d = rest->duration();
-      int tickLen = rest->tickLen();
+      int tickLen = rest->ticks();
       if (d.type() == Duration::V_MEASURE){
             // to avoid forward since rest->ticklen=0 in this case.
-            tickLen = rest->measure()->tickLen();
+            tickLen = rest->measure()->ticks();
             }
       tick += tickLen;
       printf(" tickLen=%d newtick=%d\n", tickLen, tick);
@@ -3668,12 +3670,12 @@ foreach(Element* el, *(score->gel())) {
                               // LVIFIX: find exact cause
                               int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
                               // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
-                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
+                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->ticks(), sstaff);
                               }
                         }
                   // move to end of measure (in case of incomplete last voice)
                   printf("end of measure\n");
-                  moveToTick(m->tick() + m->tickLen());
+                  moveToTick(m->tick() + m->ticks());
                   if (idx == 0)
                         repeatAtMeasureStop(xml, m);
                   // note: don't use "m->repeatFlags() & RepeatEnd" here, because more

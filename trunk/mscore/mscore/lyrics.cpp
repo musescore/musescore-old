@@ -36,7 +36,7 @@ Lyrics::Lyrics(Score* s)
       setTextStyle(TEXT_STYLE_LYRIC1);
       _no        = 0;
       _syllabic  = SINGLE;
-      _endTick   = 0;
+      _ticks     = 0;
       }
 
 //---------------------------------------------------------
@@ -54,8 +54,8 @@ void Lyrics::write(Xml& xml) const
                   };
             xml.tag("syllabic", sl[_syllabic]);
             }
-      if (_endTick)
-            xml.tag("endTick", _endTick);
+      if (_ticks)
+            xml.tag("ticks", _ticks);
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -84,8 +84,10 @@ void Lyrics::read(QDomElement e)
                   else
                         printf("bad syllabic property\n");
                   }
-            else if (tag == "endTick")
-                  _endTick = i;
+            else if (tag == "endTick")          // obsolete
+                  _ticks = i - segment()->tick();
+            else if (tag == "ticks")
+                  _ticks = i;
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -375,7 +377,7 @@ void ScoreView::lyricsUnderscore()
       int staffIdx     = lyrics->staffIdx();
       Segment* segment = lyrics->segment();
       int verse        = lyrics->no();
-      int endTick      = lyrics->tick();
+      int endTick      = segment->tick();
 
       endEdit();
 
@@ -410,7 +412,7 @@ void ScoreView::lyricsUnderscore()
                               break;
                         }
                   if (oldLyrics->tick() < endTick)
-                        oldLyrics->setEndTick(endTick);
+                        oldLyrics->setTicks(endTick - oldLyrics->segment()->tick());
                   }
             return;
             }
@@ -439,7 +441,7 @@ void ScoreView::lyricsUnderscore()
                         break;
                   }
             if (oldLyrics->tick() < endTick)
-                  oldLyrics->setEndTick(endTick);
+                  oldLyrics->setTicks(endTick - oldLyrics->segment()->tick());
             }
       if (newLyrics)
             _score->undoAddElement(lyrics);
@@ -513,7 +515,7 @@ void ScoreView::lyricsEndEdit()
       else {
             if (oldLyrics && oldLyrics->syllabic() == Lyrics::END) {
                   if (oldLyrics->endTick() >= endTick)
-                        oldLyrics->setEndTick(0);
+                        oldLyrics->setTicks(0);
                   }
             }
       }
@@ -540,7 +542,7 @@ void Lyrics::layout()
       //
       // left align if syllable spans more than one note
       //
-      if (_endTick == 0)
+      if (_ticks == 0)
             x = noteHeadWidth2 - bbox().width() * .5;
       else
             x = 0.0;
@@ -572,5 +574,14 @@ void Lyrics::paste()
       QApplication::clipboard()->setText(txt, mode);
 
 //TODO-S      score()->lyricsTab(false, true);
+      }
+
+//---------------------------------------------------------
+//   endTick
+//---------------------------------------------------------
+
+int Lyrics::endTick() const
+      {
+      return segment()->tick() + ticks();
       }
 

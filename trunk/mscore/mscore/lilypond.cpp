@@ -260,7 +260,7 @@ void Lilypond::scanRest()
 
 void Lilypond::createMeasure()
       {
-      if (tick >= measure->tick() + measure->tickLen()) {
+      if (tick >= measure->tick() + measure->ticks()) {
             measure = new Measure(score);
             measure->setTick(tick);
             score->add(measure);
@@ -287,7 +287,6 @@ void Lilypond::addNote(const LNote& lnote)
       Duration d;
       d.setVal(lnote.len);
       chord->setDuration(d);
-      chord->setTick(tick);
 
       segment->add(chord);
 
@@ -320,8 +319,6 @@ void Lilypond::addRest()
       Duration d;
       d.setVal(curLen);
       rest->setDuration(d);
-      rest->setTick(tick);
-
       segment->add(rest);
       tick += curLen;
       }

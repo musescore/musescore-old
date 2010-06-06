@@ -766,7 +766,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
                   break;
 
             case META_TIME_SIGNATURE:
-                  cs->sigmap()->add(tick, Fraction(data[0], 1 << data[1]));
+//TODO                  cs->sigmap()->add(tick, Fraction(data[0], 1 << data[1]));
                   break;
 
             default:
@@ -786,7 +786,7 @@ void Score::convertMidi(MidiFile* mf)
       mf->process1();                    // merge noteOn/noteOff into NoteEvent etc.
       mf->changeDivision(AL::division);
 
-      *_sigmap = mf->siglist();
+//TODO      *_sigmap = mf->siglist();
 
       QList<MidiTrack*>* tracks = mf->tracks();
 
@@ -894,10 +894,12 @@ void Score::convertMidi(MidiFile* mf)
       //  remove empty measures at beginning
       //---------------------------------------------------
 
+#if 0 // TODO
       int startBar, endBar, beat, tick;
       sigmap()->tickValues(lastTick, &endBar, &beat, &tick);
       if (beat || tick)
             ++endBar;
+
       for (startBar = 0; startBar < endBar; ++startBar) {
             int tick1 = sigmap()->bar2tick(startBar, 0, 0);
             int tick2 = sigmap()->bar2tick(startBar + 1, 0, 0);
@@ -1028,6 +1030,7 @@ void Score::convertMidi(MidiFile* mf)
                   }
             }
       connectTies();
+#endif
       }
 
 //---------------------------------------------------------
@@ -1051,6 +1054,7 @@ struct MNote {
 
 void Score::convertTrack(MidiTrack* midiTrack)
 	{
+#if 0 // TODO
       int key      = findKey(midiTrack, sigmap());
       int staffIdx = midiTrack->staffIdx();
       midiTrack->findChords();
@@ -1085,8 +1089,8 @@ void Score::convertTrack(MidiTrack* midiTrack)
                               }
             		Measure* measure = tick2measure(tick);
                         // split notes on measure boundary
-                        if ((tick + len) > measure->tick() + measure->tickLen())
-                              len = measure->tick() + measure->tickLen() - tick;
+                        if ((tick + len) > measure->tick() + measure->ticks())
+                              len = measure->tick() + measure->ticks() - tick;
                         Chord* chord = new Chord(this);
                         chord->setTick(tick);
                         chord->setTrack(staffIdx * VOICES + voice);
@@ -1107,7 +1111,7 @@ void Score::convertTrack(MidiTrack* midiTrack)
                         		note->setTrack(chord->track());
                   	      	chord->add(note);
                                     note->setOnTimeUserOffset(mn->noquantOntime() - tick);
-                                    int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
+                                    int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->ticks());
                                     note->setOffTimeUserOffset(ot);
                                     note->setVeloType(USER_VAL);
                                     note->setVelocity(mn->velo());
@@ -1156,8 +1160,8 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               int len = restLen;
                   		Measure* measure = tick2measure(ctick);
                               // split rest on measure boundary
-                              if ((ctick + len) > measure->tick() + measure->tickLen())
-                                    len = measure->tick() + measure->tickLen() - ctick;
+                              if ((ctick + len) > measure->tick() + measure->ticks())
+                                    len = measure->tick() + measure->ticks() - ctick;
                               QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
                               Duration d = dl.back();
                               Rest* rest = new Rest(this, ctick, d);
@@ -1208,8 +1212,8 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               len = n->mc->duration();
                         }
                   // split notes on measure boundary
-                  if ((tick + len) > measure->tick() + measure->tickLen()) {
-                        len = measure->tick() + measure->tickLen() - tick;
+                  if ((tick + len) > measure->tick() + measure->ticks()) {
+                        len = measure->tick() + measure->ticks() - tick;
                         }
                   QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
                   Duration d = dl.front();
@@ -1226,7 +1230,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             	      	note->setTrack(staffIdx * VOICES + voice);
             	      	chord->add(note);
                               note->setOnTimeUserOffset(mn->noquantOntime() - tick);
-                              int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
+                              int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->ticks());
                               note->setOffTimeUserOffset(ot);
                               note->setVeloType(USER_VAL);
                               note->setVelocity(mn->velo());
@@ -1260,7 +1264,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             //
             // check for gap and fill with rest
             //
-            int restLen = measure->tick() + measure->tickLen() - ctick;
+            int restLen = measure->tick() + measure->ticks() - ctick;
             while (restLen > 0 && voice == 0) {
                   QList<Duration> dl = toDurationList(Fraction::fromTicks(restLen), false);
                   Duration d = dl.back();
@@ -1294,6 +1298,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             Segment* seg = m->getSegment(ks);
             seg->add(ks);
             }
+#endif
       }
 
 //---------------------------------------------------------

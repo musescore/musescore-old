@@ -41,7 +41,7 @@ static int getDots(int base, int rest, int* dots)
 #if 0
 //---------------------------------------------------------
 //   headType
-//    return for a given tickLen the baselen of a note
+//    return for a given ticks the baselen of a note
 //    (which determines the head symbol) and a number of
 //    dots (<= 2)
 //

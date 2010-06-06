@@ -51,7 +51,7 @@ class InputState {
 
       InputState();
       int voice() const                   { return track % VOICES;   }
-      int tickLen() const                 { return _duration.ticks(); }
+      int ticks() const                   { return _duration.ticks(); }
       ChordRest* cr() const;
       int tick() const;
       void setDuration(const Duration& d) { _duration = d;        }
