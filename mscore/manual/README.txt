@@ -25,6 +25,11 @@ http://code.google.com/p/xhtml2pdf/issues/detail?id=65
 To create the Japanese and Chinese handbooks see
 http://code.google.com/p/xhtml2pdf/issues/detail?id=63
 
+If you encounter
+File "C:\Python26\lib\site-packages\reportlab\platypus\doctemplate.py", line 783, in handle_flowable
+    raise LayoutError(ident)
+reportlab.platypus.doctemplate.LayoutError
+Comment line 783 in "C:\Python26\lib\site-packages\reportlab\platypus\doctemplate.py"
 
 
 USE INSTRUCTIONS
@@ -36,7 +41,7 @@ By default the script will create the English handbook.
 To create other language handbooks use the standard 
 two-letter language code as follows:
 
-> Python ProcessHTML.py fr
+> Python ProcessHTML.py -l fr
 
 To create all the language handbooks at once use "all" 
 as the command line argument.
