@@ -9,13 +9,22 @@ SET UP INSTRUCTIONS
 
 Code is written for Python 2.6. The actual PDF creation 
 has several dependencies that must be installed first. 
-See http://www.htmltopdf.org/ for details. I recommend 
-pisa 3.0.31 or later since some earlier versions of 
-pisa contain a image display bug. 
+See http://www.htmltopdf.org/ for details.
 
 A connection to the Internet is required since 
 ProcessHTML.py fetches HTML and images files from the 
 MuseScore website.
+
+
+FURTHER SETUP AND PATCHES
+
+If you get "AttributeError: 'NoneType' object has no 
+attribute 'bands'" then see 
+http://code.google.com/p/xhtml2pdf/issues/detail?id=65
+
+To create the Japanese and Chinese handbooks see
+http://code.google.com/p/xhtml2pdf/issues/detail?id=63
+
 
 
 USE INSTRUCTIONS
