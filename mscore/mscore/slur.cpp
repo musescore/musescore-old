@@ -752,7 +752,7 @@ void Slur::setTick2(int val)
 
 void Slur::setStart(int t, int track)
       {
-//TODOxx      setTick(t);
+      setTick(t);
       setTrack(track);
       }
 

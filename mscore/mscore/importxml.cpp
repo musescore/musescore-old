@@ -1176,7 +1176,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       int measureLen = maxtick - measure->tick();
 
       if (lastMeasureLen != measureLen) {
-#if 0 // TODO
+#if 0 // TODOxx
             AL::TimeSigMap* sigmap = score->sigmap();
             int tick        = measure->tick();
             AL::SigEvent se = sigmap->timesig(tick);
@@ -2069,20 +2069,17 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         }
                   }
             if (st) {
-#if 0 // TODO
                   // add timesig to all staves
-                  score->sigmap()->add(tick, TimeSig::getSig(st));
+                  //ws score->sigmap()->add(tick, TimeSig::getSig(st));
                   Part* part = score->part(staff);
                   int staves = part->nstaves();
                   for (int i = 0; i < staves; ++i) {
                         TimeSig* timesig = new TimeSig(score);
-                        timesig->setTick(tick);
                         timesig->setSubtype(st);
                         timesig->setTrack((staff + i) * VOICES);
                         Segment* s = measure->getSegment(timesig, tick);
                         s->add(timesig);
                         }
-#endif
                   }
             else
                   printf("unknown time signature, beats=<%s> beat-type=<%s> symbol=<%s>\n",
