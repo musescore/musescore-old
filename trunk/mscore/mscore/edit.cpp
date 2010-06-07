@@ -263,7 +263,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                   f = sigmap()->measureRest(tick);
             else
 TODOxx */
-                  f = measure->fraction();
+                  f = measure->len();
 
             if (f > l)
                   f = l;
@@ -277,10 +277,10 @@ TODOxx */
                   continue;
                   }
 
-            const AL::SigEvent ev(measure->actualTimesig());
+            const AL::SigEvent ev(measure->len());
             if (ev.nominalEqualActual()   // not in pickup measure
                && (measure->tick() == tick)
-               && (measure->fraction() == f)
+               && (measure->timesig() == f)
                && (f < Duration(Duration::V_BREVE).fraction())) {
                   Rest* rest = addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
                   tick += rest->ticks();
@@ -352,7 +352,7 @@ static void adjustMeasures(Measure* m, int oticks, int nticks)
       for (; m; m = m->nextMeasure()) {
             if (m->first(SegTimeSig))
                   break;
-            if (m->nominalTimesig().identical(m->actualTimesig()))
+            if (m->timesig() == m->len())
                   m->adjustToLen(oticks, nticks);
             }
       }
@@ -414,7 +414,7 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
       {
       Fraction ofraction(ts->getSig());
       Measure* pm = ts->measure()->prevMeasure();
-      Fraction nfraction(pm ? pm->actualTimesig() : Fraction(4,4));
+      Fraction nfraction(pm ? pm->len() : Fraction(4,4));
       int n = addRemoveTimeSigDialog();
       if (n == -1)
             return;

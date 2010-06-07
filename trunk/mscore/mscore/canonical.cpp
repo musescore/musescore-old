@@ -86,7 +86,7 @@ CScore::CScore(Score* s, int track, Segment* segment)
                         // fill empty voice with rest
                         //
                         xml.stag("IRest");
-                        Fraction f(cr->measure()->fraction());
+                        Fraction f(cr->measure()->len());
                         xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));
                         xml.etag();
                         }

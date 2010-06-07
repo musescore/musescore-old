@@ -969,7 +969,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
       Fraction srcF = cr->fraction();
       Fraction dstF;
       if (d.type() == Duration::V_MEASURE)
-            dstF = cr->measure()->fraction();
+            dstF = cr->measure()->timesig();
       else
             dstF = d.fraction();
 
@@ -1024,7 +1024,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                   }
             ChordRest* cr = static_cast<ChordRest*>(s->element(track));
             Duration d(cr->duration());
-            Fraction f2 = (d.type() == Duration::V_MEASURE) ? cr->measure()->fraction() : d.fraction();
+            Fraction f2 = (d.type() == Duration::V_MEASURE) ? cr->measure()->timesig() : d.fraction();
             if (f2 > f)
                   f2 = f;
             f1 += f2;
@@ -1411,10 +1411,10 @@ MeasureBase* Score::appendMeasure(int type)
       mb->setTick(tick);
 
       if (type == MEASURE) {
-            Fraction ts(lastMeasure()->nominalTimesig());
+            Fraction ts(lastMeasure()->timesig());
             Measure* measure = static_cast<Measure*>(mb);
-            measure->setNominalTimesig(ts);
-            measure->setActualTimesig(ts);
+            measure->setTimesig(ts);
+            measure->setLen(ts);
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                   Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
                   rest->setTrack(staffIdx * VOICES);
@@ -1500,7 +1500,7 @@ void Score::insertMeasures(int n, int type)
 
 	int tick  = selection().startSegment()->tick();
       Measure* m = tick2measure(tick);
-      Fraction f(m->nominalTimesig());
+      Fraction f(m->timesig());
 	int ticks = f.ticks();
 
 	for (int i = 0; i < n; ++i) {
@@ -1509,8 +1509,8 @@ void Score::insertMeasures(int n, int type)
                         {
                         Measure* measure = new Measure(this);
                         measure->setTick(tick);
-                        measure->setNominalTimesig(f);
-                        measure->setActualTimesig(f);
+                        measure->setTimesig(f);
+                        measure->setLen(f);
 	            	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
     		                  Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
         	            	rest->setTrack(staffIdx * VOICES);

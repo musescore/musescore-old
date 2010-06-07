@@ -87,8 +87,8 @@ class Measure : public MeasureBase {
       Segment* _last;         ///< Last item of segment list
       int _size;              ///< Number of items in segment list
 
-      Fraction _actualTimesig;
-      Fraction _nominalTimesig;
+      Fraction _timesig;
+      Fraction _len;          ///< actual length of measure
 
       int _repeatCount;       ///< end repeat marker und repeat count
       int _repeatFlags;       ///< or'd RepeatType's
@@ -122,7 +122,7 @@ class Measure : public MeasureBase {
 
       void push_back(Segment* e);
       void push_front(Segment* e);
-      void setTimesig(const Fraction& nfraction);
+      void setTimesig2(const Fraction&);
 
    public:
       Measure(Score*);
@@ -158,18 +158,23 @@ class Measure : public MeasureBase {
       virtual double distance(int i) const { return staves[i]->distance; }
       virtual Spatium userDistance(int i) const;
 
-      int size() const                 { return _size;       }
-      virtual int ticks() const        { return _actualTimesig.ticks(); }
+      int size() const                     { return _size;        }
 
-      Segment* first() const           { return _first;      }
+      Fraction timesig() const             { return _timesig;     }
+      void setTimesig(const Fraction& f)   { _timesig = f;        }
+      Fraction len() const                 { return _len;         }
+      void setLen(const Fraction& f)       { _len = f;            }
+      virtual int ticks() const            { return _len.ticks(); }
+
+      Segment* first() const               { return _first;       }
       Segment* first(SegmentTypes) const;
 
-      Segment* last() const            { return _last;       }
+      Segment* last() const                { return _last;        }
       Segment* firstCRSegment() const;
       void remove(Segment*);
 
-      double userStretch() const       { return _userStretch; }
-      void setUserStretch(double v)    { _userStretch = v;  }
+      double userStretch() const           { return _userStretch; }
+      void setUserStretch(double v)        { _userStretch = v;    }
 
       void layoutX(double stretch);
       void layout(double width);
@@ -212,12 +217,12 @@ class Measure : public MeasureBase {
 
       bool createEndBarLines();
       void setEndBarLineType(int val, bool g, bool visible = true, QColor color = Qt::black);
-      int endBarLineType() const          { return _endBarLineType; }
-      void setMmEndBarLineType(int v)     { _mmEndBarLineType = v;    }
+      int endBarLineType() const                { return _endBarLineType; }
+      void setMmEndBarLineType(int v)           { _mmEndBarLineType = v;    }
       bool setStartRepeatBarLine(bool);
-      bool endBarLineGenerated() const    { return _endBarLineGenerated; }
-      void setEndBarLineGenerated(bool v) { _endBarLineGenerated = v; }
-      bool endBarLineVisible() const      { return _endBarLineVisible;   }
+      bool endBarLineGenerated() const          { return _endBarLineGenerated; }
+      void setEndBarLineGenerated(bool v)       { _endBarLineGenerated = v; }
+      bool endBarLineVisible() const            { return _endBarLineVisible;   }
 
       void cmdRemoveEmptySegment(Segment* s);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
@@ -246,11 +251,6 @@ class Measure : public MeasureBase {
       void setMultiMeasure(int val)             { _multiMeasure = val;  }
       void layoutChords0(Segment* segment, int startTrack, char* tversatz);
       void writeTuplets(Xml&, int staff) const;
-      Fraction fraction() const                 { return _actualTimesig; }
-      Fraction actualTimesig() const            { return _actualTimesig; }
-      Fraction nominalTimesig() const           { return _nominalTimesig; }
-      void setActualTimesig(const Fraction& f)  { _actualTimesig = f; }
-      void setNominalTimesig(const Fraction& f) { _nominalTimesig = f; }
       };
 
 extern void initLineList(char* ll, int key);

@@ -104,7 +104,7 @@ MStaff::~MStaff()
 
 Measure::Measure(Score* s)
    : MeasureBase(s), _first(0), _last(0), _size(0),
-     _actualTimesig(4,4), _nominalTimesig(4,4)
+     _timesig(4,4), _len(4,4)
       {
       _repeatCount           = 2;
       _repeatFlags           = 0;
@@ -770,8 +770,7 @@ Segment* Measure::getSegment(Element* e, int tick)
             add(s);
             return s;
             }
-      else
-            st = Segment::segmentType(e->type());
+      st = Segment::segmentType(e->type());
       return getSegment(st, tick);
       }
 
@@ -941,23 +940,9 @@ void Measure::add(Element* el)
                               _last = seg;
                         ++_size;
                         }
-#if 1 // TODO: merge conflict
                   else {
                         if (st == SegGrace) {
                               for (s = first(); s && s->tick() < t; s = s->next())
-#else
-                  int st = el->subtype();
-                  if (st == SegGrace) {
-                        Segment* s;
-                        for (s = first(); s && s->tick() < t; s = s->next())
-                              ;
-                        if (s && s->tick() > t) {
-                              insert(seg, s);
-                              break;
-                              }
-                        if (s && s->subtype() != SegEndBarLine) {
-                              for (; s && s->subtype() != SegChordRest; s = s->next())
-#endif
                                     ;
                               if (s && (s->tick() > t)) {
                                     insert(seg, s);
@@ -997,11 +982,11 @@ void Measure::add(Element* el)
                         }
                   if ((seg->subtype() == SegTimeSig) && seg->element(0)) {
                         Fraction nfraction(static_cast<TimeSig*>(seg->element(0))->getSig());
-                        setTimesig(nfraction);
+                        setTimesig2(nfraction);
                         for (Measure* m = nextMeasure(); m; m = m->nextMeasure()) {
                               if (m->first(SegTimeSig))
                                     break;
-                              m->setTimesig(nfraction);
+                              m->setTimesig2(nfraction);
                               }
                         score()->addLayoutFlag(LAYOUT_FIX_TICKS);
                         }
@@ -1071,14 +1056,14 @@ void Measure::add(Element* el)
       }
 
 //---------------------------------------------------------
-//   setTimesig
+//   setTimesig2
 //---------------------------------------------------------
 
-void Measure::setTimesig(const Fraction& nfraction)
+void Measure::setTimesig2(const Fraction& nfraction)
       {
-      if (nominalTimesig().identical(actualTimesig()))
-            setActualTimesig(nfraction);
-      setNominalTimesig(nfraction);
+      if (_timesig == _len)
+            _len = nfraction;
+      _timesig = nfraction;
       }
 
 //---------------------------------------------------------
@@ -1100,19 +1085,19 @@ void Measure::remove(Element* el)
             case SEGMENT:
                   remove(static_cast<Segment*>(el));
                   if (el->subtype() == SegTimeSig) {
-                        Fraction nfraction(prevMeasure() ? prevMeasure()->nominalTimesig() : Fraction(4,4));
-                        setTimesig(nfraction);
+                        Fraction nfraction(prevMeasure() ? prevMeasure()->timesig() : Fraction(4,4));
+                        setTimesig2(nfraction);
                         for (Measure* m = nextMeasure(); m; m = m->nextMeasure()) {
                               Segment* s = 0;
                               for (s = m->first(SegTimeSig); s; s = s->next(SegTimeSig)) {
-                                    if (!m->nominalTimesig().identical(nfraction))
+                                    if (!m->timesig().identical(nfraction))
                                           break;
                                     // score()->undoRemoveElement(s);
                                     break;
                                     }
                               if (s)
                                     break;
-                              m->setTimesig(nfraction);
+                              m->setTimesig2(nfraction);
                               }
                         score()->addLayoutFlag(LAYOUT_FIX_TICKS);
                         }
@@ -1791,6 +1776,15 @@ void Measure::adjustToLen(int ol, int nl)
       int staves = score()->nstaves();
       int diff   = nl - ol;
 
+      if (nl > ol) {
+            // move EndBarLine
+            for (Segment* s = first(); s; s = s->next()) {
+                  if (s->subtype() & (SegEndBarLine|SegTimeSigAnnounce|SegKeySigAnnounce)) {
+                        s->setTick(tick() + nl);
+                        }
+                  }
+            }
+
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             int rests  = 0;
             int chords = 0;
@@ -1810,7 +1804,7 @@ void Measure::adjustToLen(int ol, int nl)
                   }
             if (rests == 1 && chords == 0 && rest->duration().type() == Duration::V_MEASURE)
                   continue;
-            if (_actualTimesig.identical(_nominalTimesig) && (rests == 1) && (chords == 0) && !_irregular) {
+            if ((_timesig == _len) && (rests == 1) && (chords == 0) && !_irregular) {
                   rest->setDuration(Duration::V_MEASURE);    // whole measure rest
                   }
             else {
@@ -1925,8 +1919,6 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   _noText->write(xml);
             if (_noOffset)
                   xml.tag("noOffset", _noOffset);
-            if (!_actualTimesig.identical(_nominalTimesig))
-                  xml.fTag("timesig", _actualTimesig);
             }
 
       MStaff* mstaff = staves[staff];
@@ -2063,13 +2055,13 @@ void Measure::write(Xml& xml) const
 //   Measure::read
 //---------------------------------------------------------
 
-/**
- Read Measure.
-*/
-
-void Measure::read(QDomElement e, int idx)
+void Measure::read(QDomElement e, int staffIdx)
       {
-      for (int n = staves.size(); n <= idx; ++n) {
+// printf("---Measure read %d %d\n", tick()/480, staffIdx);
+
+      if (staffIdx == 0)
+            _len = Fraction(0, 1);
+      for (int n = staves.size(); n <= staffIdx; ++n) {
             MStaff* s    = new MStaff;
             Staff* staff = score()->staff(n);
             s->lines     = new StaffLines(score());
@@ -2079,7 +2071,6 @@ void Measure::read(QDomElement e, int idx)
             s->lines->setVisible(!staff->invisible());
             staves.append(s);
             }
-
       int tck = e.attribute("tick", "-1").toInt();
       if (tck >= 0) {
             tck = score()->fileDivision(tck);
@@ -2096,7 +2087,7 @@ void Measure::read(QDomElement e, int idx)
             if (tag == "BarLine") {
                   BarLine* barLine = new BarLine(score());
                   barLine->setTrack(score()->curTrack);
-                  barLine->setParent(this);
+                  barLine->setParent(this);     //??
                   barLine->read(e);
                   if ((score()->curTick != tick()) && (score()->curTick != (tick() + ticks()))) {
                         // this is a mid measure bar line
@@ -2116,6 +2107,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->read(e, _tuplets);
+// printf("   Chord %d %d\n", score()->curTick, chord->track());
                   if (chord->tremolo() && chord->tremolo()->twoNotes()) {
                         //
                         // search first note of tremolo
@@ -2136,7 +2128,7 @@ void Measure::read(QDomElement e, int idx)
                               //int ticklen2 = chord->ticks() / 2;
                               //int tick = c1->tick() + ticklen2;
                               }
-                        Segment* s = getSegment(chord, score()->curTick);
+                        Segment* s = getSegment(SegChordRest, score()->curTick);
                         s->add(chord);
                         score()->curTick += chord->ticks() / 2;
                         }
@@ -2145,6 +2137,9 @@ void Measure::read(QDomElement e, int idx)
                         s->add(chord);
                         score()->curTick += chord->ticks();
                         }
+                  Fraction nl(Fraction::fromTicks(score()->curTick - tick()));
+                  if (nl > _len)
+                        _len = nl;
                   }
             else if (tag == "Breath") {
                   Breath* breath = new Breath(score());
@@ -2165,9 +2160,13 @@ void Measure::read(QDomElement e, int idx)
                   Rest* rest = new Rest(score());
                   rest->setTrack(score()->curTrack);
                   rest->read(e, _tuplets);
+// printf("   Rest %d %d\n", score()->curTick, rest->track());
                   Segment* s = getSegment(rest, score()->curTick);
                   s->add(rest);
                   score()->curTick += (rest->ticks() <= 0 ? ticks() : rest->ticks());
+                  Fraction nl(Fraction::fromTicks(score()->curTick - tick()));
+                  if (nl > _len)
+                        _len = nl;
                   }
             else if (tag == "RepeatMeasure") {
                   RepeatMeasure* rm = new RepeatMeasure(score());
@@ -2190,15 +2189,13 @@ void Measure::read(QDomElement e, int idx)
                   ts->read(e);
                   Segment* s = getSegment(ts, score()->curTick);
                   s->add(ts);
-                  if (_actualTimesig.identical(_nominalTimesig)) {
-                        _actualTimesig = ts->getSig();
-                        _nominalTimesig = _actualTimesig;
+                  if (_timesig == _len) {
+                        _timesig = ts->getSig();
+                        _len = _timesig;
                         }
                   else
-                        _nominalTimesig = ts->getSig();
+                        _timesig = ts->getSig();
                   }
-            else if (tag == "timesig")
-                  _actualTimesig = readFraction(e);
             else if (tag == "KeySig") {
                   KeySig* ks = new KeySig(score());
                   ks->setTrack(score()->curTrack);
@@ -2367,17 +2364,17 @@ void Measure::read(QDomElement e, int idx)
                   score()->add(slur);
                   }
             else if (tag == "vspacer") {
-                  if (staves[idx]->_vspacer == 0) {
+                  if (staves[staffIdx]->_vspacer == 0) {
                         Spacer* spacer = new Spacer(score());
-                        spacer->setTrack(idx * VOICES);
+                        spacer->setTrack(staffIdx * VOICES);
                         add(spacer);
                         }
-                  staves[idx]->_vspacer->setSpace(Spatium(val.toDouble()));
+                  staves[staffIdx]->_vspacer->setSpace(Spatium(val.toDouble()));
                   }
             else if (tag == "visible")
-                  staves[idx]->_visible = val.toInt();
+                  staves[staffIdx]->_visible = val.toInt();
             else if (tag == "slashStyle")
-                  staves[idx]->_slashStyle = val.toInt();
+                  staves[staffIdx]->_slashStyle = val.toInt();
             else if (tag == "Beam") {
                   Beam* beam = new Beam(score());
                   beam->setTrack(score()->curTrack);
@@ -2387,6 +2384,16 @@ void Measure::read(QDomElement e, int idx)
                   }
             else
                   domError(e);
+            }
+      if (staffIdx == 0) {
+            Segment* s = last();
+            if (s->subtype() == SegBarLine) {
+                  BarLine* b = static_cast<BarLine*>(s->element(0));
+                  setEndBarLineType(b->subtype(), false, b->visible(), b->color());
+                  remove(s);
+                  delete b;
+                  delete s;
+                  }
             }
       }
 
