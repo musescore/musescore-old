@@ -35,10 +35,10 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
       m = _m;
       setupUi(this);
 
-      actualZ->setValue(m->actualTimesig().numerator());
-      actualN->setValue(m->actualTimesig().denominator());
-      nominalZ->setValue(m->nominalTimesig().numerator());
-      nominalN->setValue(m->nominalTimesig().denominator());
+      actualZ->setValue(m->len().numerator());
+      actualN->setValue(m->len().denominator());
+      nominalZ->setValue(m->timesig().numerator());
+      nominalN->setValue(m->timesig().denominator());
 
       irregular->setChecked(m->irregular());
       breakMultiMeasureRest->setChecked(m->getBreakMultiMeasureRest());
@@ -162,13 +162,12 @@ void MeasureProperties::apply()
             if (ms->visible() != v || ms->slashStyle() != s)
                   score->undo()->push(new ChangeMStaffProperties(ms, v, s));
             }
-      Fraction ts(m->actualTimesig());
       if (isIrregular() != m->irregular()
          || breakMultiMeasureRest->isChecked() != m->breakMultiMeasureRest()
          || repeatCount() != m->repeatCount()
          || layoutStretch->value() != m->userStretch()
          || measureNumberOffset->value() != m->noOffset()
-         || ts != sig()
+         || m->len() != sig()
          ) {
             score->undo()->push(new ChangeMeasureProperties(
                m,
@@ -179,8 +178,8 @@ void MeasureProperties::apply()
                measureNumberOffset->value(),
                isIrregular())
                );
-            if (ts != sig()) {
-                  m->adjustToLen(ts.ticks(), sig().ticks());
+            if (m->len() != sig()) {
+                  m->adjustToLen(m->len().ticks(), sig().ticks());
                   score->select(m, SELECT_RANGE, 0);
                   }
             }

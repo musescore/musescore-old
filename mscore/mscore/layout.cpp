@@ -542,7 +542,7 @@ void Score::layoutStage2()
                               }
                         else if (bm != BEAM_MID) {
 //                              Fraction f(sigmap()->timesig(cr->tick()).fraction());
-                              Fraction f(measure->actualTimesig());
+                              Fraction f(measure->len());
                               if (endBeam(f, cr, cr->tick() - measure->tick()))
                                     beamEnd = true;
                               }
@@ -595,7 +595,7 @@ void Score::layoutStage2()
                               a1 = cr;
                         else {
                               // Fraction f(sigmap()->timesig(cr->tick()).fraction());
-                              Fraction f(measure->actualTimesig());
+                              Fraction f(measure->len());
                               if (bm != BEAM_MID
                                  &&
                                    (endBeam(f, cr, cr->tick() - measure->tick())
@@ -1280,8 +1280,8 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
 
             if (m) {
                   int tick        = lm->tick() + lm->ticks();
-                  Fraction sig2   = m->nominalTimesig();
-                  Fraction sig1   = m->prev() ? m->prevMeasure()->nominalTimesig() : sig2;
+                  Fraction sig2   = m->timesig();
+                  Fraction sig1   = m->prev() ? m->prevMeasure()->timesig() : sig2;
                   if (styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2)) {
                         Segment* s  = m->getSegment(SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();

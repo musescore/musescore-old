@@ -1361,7 +1361,6 @@ void ChangeMeasureLen::flip()
       // move EndBarLine and TimeSigAnnounce
       // to end of measure:
       //
-      int staves = measure->score()->nstaves();
       int endTick = measure->tick() + nl;
       for (Segment* segment = measure->first(); segment; segment = segment->next()) {
             if (segment->subtype() != SegEndBarLine
@@ -2125,12 +2124,12 @@ void ChangeMeasureProperties::flip()
       double s = measure->userStretch();
       int o    = measure->noOffset();
       bool ir  = measure->irregular();
-      Fraction f = measure->actualTimesig();
+      Fraction f = measure->len();
 
       measure->setBreakMultiMeasureRest(breakMM);
       measure->setRepeatCount(repeatCount);
       measure->setUserStretch(stretch);
-      measure->setActualTimesig(sig);
+      measure->setLen(sig);
       Score* score = measure->score();
       if (o != noOffset || ir != irregular) {
             measure->setNoOffset(noOffset);

@@ -995,17 +995,17 @@ void Score::readStaff(QDomElement e, AL::TimeSigMap* _sigmap)
                         add(measure);
                         if (_mscVersion < 115) {
                               const AL::SigEvent& ev = _sigmap->timesig(measure->tick());
-                              measure->setActualTimesig(ev.fraction());
-                              measure->setNominalTimesig(ev.getNominal());
+                              measure->setLen(ev.fraction());
+                              measure->setTimesig(ev.getNominal());
                               }
                         else {
                               //
                               // inherit timesig from previous measure
                               //
                               Measure* m = measure->prevMeasure();
-                              Fraction f(m ? m->nominalTimesig() : Fraction(4,4));
-                              measure->setActualTimesig(f);
-                              measure->setNominalTimesig(f);
+                              Fraction f(m ? m->timesig() : Fraction(4,4));
+                              measure->setLen(f);
+                              measure->setTimesig(f);
                               }
                         }
                   else {
@@ -1796,7 +1796,7 @@ Measure* Score::getCreateMeasure(int tick)
       Measure* last = lastMeasure();
       if (last) {
             lastTick = last->tick();
-            ts = last->nominalTimesig();
+            ts = last->timesig();
             }
       else {
             lastTick = 0;
@@ -1805,8 +1805,8 @@ Measure* Score::getCreateMeasure(int tick)
       while (tick >= lastTick) {
             Measure* m = new Measure(this);
             m->setTick(lastTick);
-            m->setActualTimesig(ts);
-            m->setNominalTimesig(ts);
+            m->setTimesig(ts);
+            m->setLen(ts);
             add(m);
             lastTick += ts.ticks();
             }

@@ -483,8 +483,10 @@ bool Element::readProperties(QDomElement e)
             setVisible(i);
       else if (tag == "voice")
             setTrack((_track/VOICES)*VOICES + i);
-      else if (tag == "track")
+      else if (tag == "track") {
+            // score()->curTrack = i;
             setTrack(i);
+            }
       else if (tag == "selected")
             setSelected(i);
       else if (tag == "color")

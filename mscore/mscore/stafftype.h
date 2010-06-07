@@ -47,8 +47,8 @@ class StaffType {
       bool _showLedgerLines;
 
    public:
-      StaffType()                              { _modified = false; }
-      StaffType(const QString& s)              { _name = s;         }
+      StaffType();
+      StaffType(const QString& s);
       QString name() const                     { return _name;      }
       void setName(const QString& val)         { _name = val;       }
       void setGroup(StaffGroup g)              { _group = g;        }

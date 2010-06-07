@@ -187,6 +187,8 @@ QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
             pl.append(Prop("dots", duration().dots()));
       if (_staffMove)
             pl.append(Prop("move", _staffMove));
+      if (tick() != xml.curTick)
+            pl.append(Prop("tick", tick()));
       pl.append(Prop("durationType", duration().name()));
       return pl;
       }
@@ -207,7 +209,7 @@ void ChordRest::writeProperties(Xml& xml) const
             xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
       if (!xml.clipboardmode && _beam)
             xml.tag("Beam", _beam->id());
-      xml.curTick = tick() + ticks();
+      xml.curTick += ticks();
       }
 
 //---------------------------------------------------------
@@ -621,7 +623,7 @@ Fraction ChordRest::fraction() const
       if (_duration.type() == Duration::V_MEASURE || _duration.type() == Duration::V_INVALID) {
             if (parent() == 0)
                   return AL::division * 4;
-            return measure()->fraction();
+            return measure()->timesig();
             }
       return _duration.fraction();
       }

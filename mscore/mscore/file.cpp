@@ -655,9 +655,9 @@ void MuseScore::newFile()
             Measure* m = new Measure(score);
             if (i == 0 && pickupMeasure) {
                   m->setIrregular(true);
-                  m->setActualTimesig(Fraction(pickupTimesigZ, pickupTimesigN));
+                  m->setLen(Fraction(pickupTimesigZ, pickupTimesigN));
                   }
-            m->setNominalTimesig(Fraction(timesigZ, timesigN));
+            m->setTimesig(Fraction(timesigZ, timesigN));
             score->measures()->add(m);
             }
 
@@ -1260,19 +1260,9 @@ bool Score::read(QDomElement e)
                         }
                   else if (tag == "programRevision")
                         ;
-                  else if (tag == "Mag")              // obsolete
+                  else if (tag == "Mag" || tag == "MagIdx" || tag == "xoff" || tag == "yoff") {
+                        // obsolete
                         ;
-                  else if (tag == "MagIdx")           // obsolete
-                        ;
-                  else if (tag == "xoff") {           // obsolete
-                        //_xoff = val.toDouble();
-                        //if (_mscVersion >= 105)
-                        //      _xoff *= DPMM;
-                        }
-                  else if (tag == "yoff") {           // obsolete
-                        //_yoff = val.toDouble();
-                        //if (_mscVersion >= 105)
-                        //      _yoff *= DPMM;
                         }
 #ifdef OMR
                   else if (tag == "Omr") {

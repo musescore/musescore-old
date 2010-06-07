@@ -714,7 +714,6 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
       if (_tremolo)
             _tremolo->write(xml);
       xml.etag();
-      xml.curTick = tick() + ticks();
       }
 
 //---------------------------------------------------------
