@@ -342,28 +342,14 @@ Note* Score::addNote(Chord* chord, int pitch)
       }
 
 //---------------------------------------------------------
-//   adjustMeasures
-//    helper routine
-//    adjust measure length until next timesig
-//---------------------------------------------------------
-
-static void adjustMeasures(Measure* m, int oticks, int nticks)
-      {
-      for (; m; m = m->nextMeasure()) {
-            if (m->first(SegTimeSig))
-                  break;
-            if (m->timesig() == m->len())
-                  m->adjustToLen(oticks, nticks);
-            }
-      }
-
-//---------------------------------------------------------
 //   addRemoveTimeSigDialog
 //---------------------------------------------------------
 
 static int addRemoveTimeSigDialog()
       {
-      int n = QMessageBox::question(0, "MuseScore", "change following measures",
+      int n = QMessageBox::question(0,
+         QT_TRANSLATE_NOOP("addRemoveTimeSig", "MuseScore"),
+         QT_TRANSLATE_NOOP("addRemoveTimeSig", "rewrite measures\nuntil next time signature?"),
          QMessageBox::Yes | QMessageBox::No | QMessageBox::Abort, QMessageBox::Yes);
       if (n == QMessageBox::Abort)
             return -1;
@@ -373,21 +359,115 @@ static int addRemoveTimeSigDialog()
       }
 
 //---------------------------------------------------------
+//   addCR
+//    tick - insert position in measure list m
+//    cr   - Chord/Rest to insert
+//    m    - list of measures starting at tick 0
+//---------------------------------------------------------
+
+static void addCR(int tick, ChordRest* cr, Measure* ml)
+      {
+      Measure* m = ml;
+      int mticks = m->ticks();
+      for (;m; m = m->nextMeasure()) {
+            if (tick >= m->tick() && tick < (m->tick() + mticks))
+                  break;
+            }
+      if (m == 0) {
+            printf("addCR: cannot insert cr: list too short\n");
+            return;
+            }
+      Segment* s = m->getSegment(SegChordRest, tick);
+      s->add(cr);
+      }
+
+//---------------------------------------------------------
+//   rewriteMeasures
+//    rewrite all measures up to the next time signature
+//---------------------------------------------------------
+
+bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
+      {
+      _undo->push(new RemoveMeasures(fm, lm));
+      int measures = 1;
+      for (Measure* m = fm; m != lm; m = m->nextMeasure())
+            ++measures;
+
+      Fraction os(fm->timesig());
+      Fraction k = (os * measures) / ns;
+      int nm = (k.numerator() + k.denominator() - 1)/ k.denominator();
+      Measure* nfm = 0;
+      Measure* nlm = 0;
+
+      int tick = 0;
+      for (int i = 0; i < nm; ++i) {
+            Measure* m = new Measure(this);
+            m->setPrev(nlm);
+            if (nlm)
+                  nlm->setNext(m);
+            m->setTimesig(ns);
+            m->setLen(ns);
+            m->setTick(tick);
+            tick += m->ticks();
+            nlm = m;
+            if (i == 0)
+                  nfm = m;
+            }
+      //
+      // rewrite notes from fm into nfm
+      //
+
+      int stick  = fm->tick();
+      int etick  = stick + measures * fm->ticks();
+      int tracks = fm->staffList()->size() * VOICES;
+      int detick = nm * ns.ticks();
+
+      for (int track = 0; track < tracks;  ++track) {
+            int tick = 0;
+            for (Segment* s = fm->first(); s; s = s->next1()) {
+                  if (s->tick() >= etick)
+                        break;
+                  if (s->subtype() != SegChordRest || s->element(track) == 0)
+                        continue;
+                  ChordRest* ncr = static_cast<ChordRest*>(s->element(track)->clone());
+                  tick = s->tick() - stick;
+                  addCR(tick, ncr, nfm);
+                  tick += ncr->ticks();
+                  }
+            if ((track % VOICES) == 0 && tick < detick) {
+                  int restTicks = detick - tick;
+                  Rest* rest = new Rest(this);
+                  rest->setTrack(track);
+                  rest->setDurationVal(restTicks);
+                  addCR(tick, rest, nfm);
+                  }
+            }
+
+      //
+      // insert new calculated measures
+      //
+      nfm->setPrev(fm->prev());
+      nlm->setNext(lm->next());
+      _undo->push(new InsertMeasures(nfm, nlm));
+      return true;
+      }
+
+//---------------------------------------------------------
 //   cmdAddTimeSig
 //
 //    Add or change time signature at measure in response
 //    to gui command (drop timesig on measure or timesig)
 //---------------------------------------------------------
 
-void Score::cmdAddTimeSig(Measure* m, TimeSig* ts)
+void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
       {
       int timeSigSubtype = ts->subtype();
       delete ts;
 
-      Fraction nfraction(TimeSig::getSig(timeSigSubtype));
+      Fraction ns(TimeSig::getSig(timeSigSubtype));
 
-      int tick = m->tick();
-      Segment* seg = m->findSegment(SegTimeSig, tick);
+      int tick = fm->tick();
+      Segment* seg = fm->findSegment(SegTimeSig, tick);
       if (seg && seg->element(0) && seg->element(0)->subtype() == timeSigSubtype)
             return;
       int n = addRemoveTimeSigDialog();
@@ -396,14 +476,47 @@ void Score::cmdAddTimeSig(Measure* m, TimeSig* ts)
       if (seg)
             undoRemoveElement(seg);
 
-      seg = m->createSegment(SegTimeSig, tick);
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-            TimeSig* nsig = new TimeSig(this, timeSigSubtype);
-            nsig->setTrack(staffIdx * VOICES);
-            seg->add(nsig);
+      Measure* lm = fm;
+      int measures = 0;
+      for (Measure* m = fm; m; m = m->nextMeasure()) {
+            if (m->first(SegTimeSig))
+                  break;
+            lm = m;
+            ++measures;
             }
-      adjustMeasures(m, m->ticks(), nfraction.ticks());
-      undoAddElement(seg);
+      if (n == 0) {
+            //
+            // Set time signature of all measures up to next
+            // time signature. Do not touch measure contents.
+            //
+            seg = fm->createSegment(SegTimeSig, tick);
+            for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+                  TimeSig* nsig = new TimeSig(this, timeSigSubtype);
+                  nsig->setTrack(staffIdx * VOICES);
+                  seg->add(nsig);
+                  }
+            undoAddElement(seg);
+            Measure* m = fm;
+            for (int i = 0; i < measures; ++i) {
+                  _undo->push(new ChangeMeasureTimesig(m, ns));
+                  m = m->nextMeasure();
+                  }
+            }
+      else {
+            //
+            // rewrite all measures up to the next time signature
+            //
+            rewriteMeasures(fm, lm, ns);
+
+            Measure* nfm = fm->prev() ? fm->prev()->nextMeasure() : firstMeasure();
+            Segment* seg = nfm->createSegment(SegTimeSig, 0);
+            for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+                  TimeSig* nsig = new TimeSig(this, timeSigSubtype);
+                  nsig->setTrack(staffIdx * VOICES);
+                  seg->add(nsig);
+                  }
+            nfm->add(seg);
+            }
       }
 
 //---------------------------------------------------------
@@ -412,14 +525,39 @@ void Score::cmdAddTimeSig(Measure* m, TimeSig* ts)
 
 void Score::cmdRemoveTimeSig(TimeSig* ts)
       {
-      Fraction ofraction(ts->getSig());
-      Measure* pm = ts->measure()->prevMeasure();
-      Fraction nfraction(pm ? pm->len() : Fraction(4,4));
       int n = addRemoveTimeSigDialog();
       if (n == -1)
             return;
+
       undoRemoveElement(ts->segment());
-      adjustMeasures(ts->measure(), ofraction.ticks(), nfraction.ticks());
+      Measure* fm = ts->measure();
+      Measure* lm = fm;
+      int measures = 0;
+      for (Measure* m = fm; m; m = m->nextMeasure()) {
+            if (m->first(SegTimeSig))
+                  break;
+            lm = m;
+            ++measures;
+            }
+      Measure* pm = fm->prevMeasure();
+      Fraction ns(pm ? pm->timesig() : Fraction(4,4));
+      if (n == 0) {
+            //
+            // Set time signature of all measures up to next
+            // time signature. Do not touch measure contents.
+            //
+            Measure* m = fm;
+            for (int i = 0; i < measures; ++i) {
+                  _undo->push(new ChangeMeasureTimesig(m, ns));
+                  m = m->nextMeasure();
+                  }
+            }
+      else {
+            //
+            // rewrite all measures up to the next time signature
+            //
+            rewriteMeasures(fm, lm, ns);
+            }
       }
 
 //---------------------------------------------------------

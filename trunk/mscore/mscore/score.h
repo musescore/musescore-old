@@ -122,6 +122,8 @@ class MeasureBaseList {
       void clear()               { _first = _last = 0; _size = 0; }
       void add(MeasureBase*);
       void remove(MeasureBase*);
+      void insert(MeasureBase*, MeasureBase*);
+      void remove(MeasureBase*, MeasureBase*);
       void change(MeasureBase* o, MeasureBase* n);
       int size() const { return _size; }
       };
@@ -377,6 +379,7 @@ class Score : public QObject {
       void checkSlurs();
       void checkTuplets();
       void checkScore();
+      bool rewriteMeasures(Measure* fm, Measure* lm, const Fraction&);
 
    signals:
       void selectionChanged(int);

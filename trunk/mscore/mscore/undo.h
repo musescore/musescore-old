@@ -1203,5 +1203,48 @@ class ChangeNoteProperties : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeMeasureTimesig
+//---------------------------------------------------------
+
+class ChangeMeasureTimesig : public UndoCommand {
+      Measure* m;
+      Fraction ts;
+
+      void flip();
+
+   public:
+      ChangeMeasureTimesig(Measure*, const Fraction&);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
+//   RemoveMeasures
+//---------------------------------------------------------
+
+class RemoveMeasures : public UndoCommand {
+      Measure* fm;
+      Measure* lm;
+
+   public:
+      RemoveMeasures(Measure*, Measure*);
+      virtual void undo();
+      virtual void redo();
+      };
+
+//---------------------------------------------------------
+//   InsertMeasures
+//---------------------------------------------------------
+
+class InsertMeasures : public UndoCommand {
+      Measure* fm;
+      Measure* lm;
+
+   public:
+      InsertMeasures(Measure*, Measure*);
+      virtual void undo();
+      virtual void redo();
+      };
 #endif
 
