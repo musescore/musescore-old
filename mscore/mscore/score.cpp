@@ -191,7 +191,7 @@ void MeasureBaseList::add(MeasureBase* e)
             return;
             }
       ++_size;
-      e->setNext(el);
+//      e->setNext(el);
       e->setPrev(el->prev());
       el->prev()->setNext(e);
       el->setPrev(e);
@@ -212,6 +212,48 @@ void MeasureBaseList::remove(MeasureBase* el)
             el->next()->setPrev(el->prev());
       else
             _last = el->prev();
+      }
+
+//---------------------------------------------------------
+//   insert
+//---------------------------------------------------------
+
+void MeasureBaseList::insert(MeasureBase* fm, MeasureBase* lm)
+      {
+      ++_size;
+      for (MeasureBase* m = fm; m != lm; m = m->next())
+            ++_size;
+      MeasureBase* pm = fm->prev();
+      if (pm)
+            pm->setNext(fm);
+      else
+            _first = fm;
+      MeasureBase* nm = lm->next();
+      if (nm)
+            nm->setPrev(lm);
+      else
+            _last = lm;
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void MeasureBaseList::remove(MeasureBase* fm, MeasureBase* lm)
+      {
+      --_size;
+      for (MeasureBase* m = fm; m != lm; m = m->next())
+            --_size;
+      MeasureBase* pm = fm->prev();
+      MeasureBase* nm = lm->next();
+      if (pm)
+            pm->setNext(nm);
+      else
+            _first = nm;
+      if (nm)
+            nm->setPrev(pm);
+      else
+            _last = pm;
       }
 
 //---------------------------------------------------------

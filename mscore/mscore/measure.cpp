@@ -981,6 +981,7 @@ void Measure::add(Element* el)
                         insert(seg, s);
                         }
                   if ((seg->subtype() == SegTimeSig) && seg->element(0)) {
+#if 0
                         Fraction nfraction(static_cast<TimeSig*>(seg->element(0))->getSig());
                         setTimesig2(nfraction);
                         for (Measure* m = nextMeasure(); m; m = m->nextMeasure()) {
@@ -988,6 +989,7 @@ void Measure::add(Element* el)
                                     break;
                               m->setTimesig2(nfraction);
                               }
+#endif
                         score()->addLayoutFlag(LAYOUT_FIX_TICKS);
                         }
                   }
@@ -1056,17 +1058,6 @@ void Measure::add(Element* el)
       }
 
 //---------------------------------------------------------
-//   setTimesig2
-//---------------------------------------------------------
-
-void Measure::setTimesig2(const Fraction& nfraction)
-      {
-      if (_timesig == _len)
-            _len = nfraction;
-      _timesig = nfraction;
-      }
-
-//---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 
@@ -1085,6 +1076,7 @@ void Measure::remove(Element* el)
             case SEGMENT:
                   remove(static_cast<Segment*>(el));
                   if (el->subtype() == SegTimeSig) {
+#if 0
                         Fraction nfraction(prevMeasure() ? prevMeasure()->timesig() : Fraction(4,4));
                         setTimesig2(nfraction);
                         for (Measure* m = nextMeasure(); m; m = m->nextMeasure()) {
@@ -1099,6 +1091,7 @@ void Measure::remove(Element* el)
                                     break;
                               m->setTimesig2(nfraction);
                               }
+#endif
                         score()->addLayoutFlag(LAYOUT_FIX_TICKS);
                         }
                   break;

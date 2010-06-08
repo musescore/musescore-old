@@ -1,3 +1,5 @@
+8.jun (ws)
+      - insert/delete time signatures: new implementation keeps all notes (incomplete)
 6.jun (ws)
       - big refactoring
 3.jun (lv)

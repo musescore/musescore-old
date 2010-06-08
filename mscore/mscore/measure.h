@@ -122,7 +122,6 @@ class Measure : public MeasureBase {
 
       void push_back(Segment* e);
       void push_front(Segment* e);
-      void setTimesig2(const Fraction&);
 
    public:
       Measure(Score*);

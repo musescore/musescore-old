@@ -958,11 +958,13 @@ InsertMeasure::InsertMeasure(MeasureBase* m)
 void InsertMeasure::undo()
       {
       measure->score()->remove(measure);
+      measure->score()->addLayoutFlag(LAYOUT_FIX_TICKS);
       }
 
 void InsertMeasure::redo()
       {
       measure->score()->addMeasure(measure);
+      measure->score()->addLayoutFlag(LAYOUT_FIX_TICKS);
       }
 
 //---------------------------------------------------------
@@ -2186,5 +2188,83 @@ void ChangeNoteProperties::flip()
       _veloOffset        = v3;
       _onTimeUserOffset  = v6;
       _offTimeUserOffset = v9;
+      }
+
+//---------------------------------------------------------
+//   ChangeMeasureTimesig
+//---------------------------------------------------------
+
+ChangeMeasureTimesig::ChangeMeasureTimesig(Measure* _m, const Fraction& f)
+   : m(_m), ts(f)
+      {
+      };
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeMeasureTimesig::flip()
+      {
+      Fraction nts = m->timesig();
+      m->setTimesig(ts);
+      ts = nts;
+      }
+
+//---------------------------------------------------------
+//   RemoveMeasures
+//---------------------------------------------------------
+
+RemoveMeasures::RemoveMeasures(Measure* m1, Measure* m2)
+   : fm(m1), lm(m2)
+      {
+      }
+
+//---------------------------------------------------------
+//   undo
+//    insert back measures
+//---------------------------------------------------------
+
+void RemoveMeasures::undo()
+      {
+      fm->score()->measures()->insert(fm, lm);
+      }
+
+//---------------------------------------------------------
+//   redo
+//    remove measures
+//---------------------------------------------------------
+
+void RemoveMeasures::redo()
+      {
+      fm->score()->measures()->remove(fm, lm);
+      }
+
+//---------------------------------------------------------
+//   InsertMeasures
+//---------------------------------------------------------
+
+InsertMeasures::InsertMeasures(Measure* m1, Measure* m2)
+   : fm(m1), lm(m2)
+      {
+      }
+
+//---------------------------------------------------------
+//   undo
+//    insert back measures
+//---------------------------------------------------------
+
+void InsertMeasures::undo()
+      {
+      fm->score()->measures()->remove(fm, lm);
+      }
+
+//---------------------------------------------------------
+//   redo
+//    remove measures
+//---------------------------------------------------------
+
+void InsertMeasures::redo()
+      {
+      fm->score()->measures()->insert(fm, lm);
       }
 
