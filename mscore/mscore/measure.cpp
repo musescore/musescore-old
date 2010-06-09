@@ -1795,10 +1795,10 @@ void Measure::adjustToLen(int ol, int nl)
                               ++chords;
                         }
                   }
-            if (rests == 1 && chords == 0 && rest->duration().type() == Duration::V_MEASURE)
+            if (rests == 1 && chords == 0 && rest->durationType().type() == Duration::V_MEASURE)
                   continue;
             if ((_timesig == _len) && (rests == 1) && (chords == 0) && !_irregular) {
-                  rest->setDuration(Duration::V_MEASURE);    // whole measure rest
+                  rest->setDurationType(Duration::V_MEASURE);    // whole measure rest
                   }
             else {
                   int strack = staffIdx * VOICES;
@@ -1813,7 +1813,7 @@ void Measure::adjustToLen(int ol, int nl)
                                     Element* e = segment->element(trk);
                                     if (e && e->isChordRest()) {
                                           ChordRest* cr = static_cast<ChordRest*>(e);
-                                          if (cr->duration() == Duration::V_MEASURE)
+                                          if (cr->durationType() == Duration::V_MEASURE)
                                                 n = nl;
                                           else
                                                 n += cr->ticks();
@@ -2156,7 +2156,7 @@ void Measure::read(QDomElement e, int staffIdx)
 // printf("   Rest %d %d\n", score()->curTick, rest->track());
                   Segment* s = getSegment(rest, score()->curTick);
                   s->add(rest);
-                  score()->curTick += (rest->ticks() <= 0 ? ticks() : rest->ticks());
+                  score()->curTick += rest->ticks();
                   Fraction nl(Fraction::fromTicks(score()->curTick - tick()));
                   if (nl > _len)
                         _len = nl;
@@ -3152,7 +3152,7 @@ void Measure::layoutX(double stretch)
                                     e->rxpos() = 0.0;
                                     }
                               }
-                        else if (rest->duration() == Duration::V_MEASURE) {
+                        else if (rest->durationType() == Duration::V_MEASURE) {
                               double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
                               double w  = xpos[segs-1] - x1;
                               e->rxpos() = (w - e->width()) * .5 + x1 - s->x();

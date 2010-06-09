@@ -58,9 +58,11 @@ class Lyrics : public Text {
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void draw(QPainter&, ScoreView*) const;
+
       int ticks() const             { return _ticks;    }
       void setTicks(int tick)       { _ticks = tick;    }
       int endTick() const;
+
       void clearSeparator()         { _separator.clear(); } // TODO: memory leak
       QList<Line*>* separatorList() { return &_separator; }
       virtual void paste();

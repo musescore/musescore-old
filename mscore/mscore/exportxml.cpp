@@ -2267,7 +2267,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             xml.etag();
             }
 
-      Duration d = rest->duration();
+      Duration d = rest->durationType();
       int tickLen = rest->ticks();
       if (d.type() == Duration::V_MEASURE){
             // to avoid forward since rest->ticklen=0 in this case.

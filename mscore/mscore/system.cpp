@@ -692,7 +692,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       TextStyle* ts = score()->textStyle(l->textStyle());
       double lmag = double(ts->size) / 11.0;
 
-      if (l->endTick()) {
+      if (l->ticks()) {
             Segment* seg = score()->tick2segment(l->endTick());
             if (seg == 0) {
                   printf("System::layoutLyrics: no segment found for tick %d\n", l->endTick());

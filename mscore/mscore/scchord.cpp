@@ -80,7 +80,7 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                         int ticks = context->argument(0).toInt32();
                         if (ticks < 1)
                               break;
-                        chord->setDurationVal(ticks);
+                        chord->setDurationType(ticks);
                         return context->engine()->undefinedValue();
                         }
                   break;

@@ -52,7 +52,7 @@ Segment* CScore::write(Xml& xml, DurationElement* cr)
             xml.etag();
             return static_cast<ChordRest*>(t->elements().back())->segment();
             }
-      Fraction f(cr->fraction());
+      Fraction f(cr->duration());
       if (cr->type() == CHORD) {
             xml.stag("Chord");
             xml.tag("len", QString("%1/%2").arg(f.numerator()).arg(f.denominator()));

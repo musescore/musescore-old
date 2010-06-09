@@ -39,7 +39,7 @@ class Articulation;
 //---------------------------------------------------------
 
 class ChordRest : public DurationElement {
-      Duration _duration;
+      Duration _durationType;
       int _staffMove;         // -1, 0, +1, used for crossbeaming
 
       QList<Slur*> _slurFor;
@@ -76,7 +76,7 @@ class ChordRest : public DurationElement {
       BeamMode beamMode() const                 { return _beamMode; }
       void setBeam(Beam* b);
       virtual Beam* beam() const                { return _beam; }
-      int beams() const                         { return duration().hooks(); }
+      int beams() const                         { return _durationType.hooks(); }
       virtual qreal upPos()   const = 0;
       virtual qreal downPos() const = 0;
       virtual qreal centerX() const = 0;
@@ -111,18 +111,15 @@ class ChordRest : public DurationElement {
       void setExtraTrailingSpace(Spatium v)     { _extraTrailingSpace = v;    }
       virtual void toDefault();
 
-      const Duration& duration() const               { return _duration;        }
+      const Duration& durationType() const               { return _durationType;        }
       void setDurationType(Duration::DurationType t);
       void setDurationType(const QString& s);
-      void setDurationVal(int ticks);
-      void setDuration(const Duration& v);
-      void setDots(int n)                            { _duration.setDots(n); }
-      int dots() const                               { return _duration.dots(); }
+      void setDurationType(int ticks);
+      void setDurationType(const Duration& v);
+      void setDots(int n)                            { _durationType.setDots(n); }
+      int dots() const                               { return _durationType.dots(); }
 
-      virtual Fraction fraction() const;
-      virtual void setFraction(const Fraction&);
       virtual void setTrack(int val);
-
       virtual int tick() const;
       };
 

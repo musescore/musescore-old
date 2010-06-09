@@ -274,7 +274,7 @@ int Note::noteHead() const
       switch(_headType) {
             default:
             case HEAD_AUTO:
-                  return noteHeads[chord()->up()][int(_headGroup)][chord()->duration().headType()];
+                  return noteHeads[chord()->up()][int(_headGroup)][chord()->durationType().headType()];
             case HEAD_WHOLE:
                   return noteHeads[chord()->up()][int(_headGroup)][0];
             case HEAD_HALF:

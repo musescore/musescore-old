@@ -1697,8 +1697,8 @@ ChangeChordRestLen::ChangeChordRestLen(ChordRest* c, const Duration& _d)
 
 void ChangeChordRestLen::flip()
       {
-      Duration od = cr->duration();
-      cr->setDuration(d);
+      Duration od = cr->durationType();
+      cr->setDurationType(d);
       d   = od;
       }
 
@@ -2146,6 +2146,7 @@ void ChangeMeasureProperties::flip()
       irregular   = ir;
       sig         = f;
 
+      score->addLayoutFlag(LAYOUT_FIX_TICKS);
       score->setLayoutAll(true);
       score->setDirty();
       }

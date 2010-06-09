@@ -56,7 +56,7 @@ Rest::Rest(Score* s, const Duration& d)
       dotline    = -1;
       setOffsetType(OFFSET_SPATIUM);
       _sym       = rest4Sym;
-      setDuration(d);
+      setDurationType(d);
       }
 
 //---------------------------------------------------------
@@ -103,7 +103,7 @@ void Rest::draw(QPainter& p, ScoreView*) const
             }
       else {
             symbols[_sym].draw(p, mag);
-            int dots = duration().dots();
+            int dots = durationType().dots();
             if (dots) {
                   double y = dotline * _spatium * .5;
                   for (int i = 1; i <= dots; ++i) {
@@ -239,7 +239,7 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   Direction dir = c->stemDirection();
                   score()->select(0, SELECT_SINGLE, 0);
                   Segment* seg = score()->setNoteRest(this, track(), n->pitch(),
-                     c->fraction(), headGroup, dir);
+                     c->duration(), headGroup, dir);
                   ChordRest* cr = static_cast<ChordRest*>(seg->element(track()));
                   if (cr)
                         score()->nextInputPos(cr, true);
@@ -280,9 +280,9 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets)
             if (!ChordRest::readProperties(e, tuplets))
                   domError(e);
             }
-      if (!duration().isValid()) {
+      if (!durationType().isValid()) {
             if (_ticks <= 0)
-                  setDuration(Duration(Duration::V_MEASURE));
+                  setDurationType(Duration(Duration::V_MEASURE));
             else
                   convertTicks();
             }
@@ -328,7 +328,7 @@ void Rest::layout()
       int line = lrint(userOff().y() / _spatium);
 
       setYoff(2.0);
-      switch(duration().type()) {
+      switch(durationType().type()) {
             case Duration::V_LONG:
                   _sym = longarestSym;
                   break;

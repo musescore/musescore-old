@@ -520,48 +520,8 @@ int searchInterval(int steps, int semitones)
 void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, Interval interval,
    bool useDoubleSharpsFlats)
       {
-      *rpitch   = pitch + interval.chromatic;
-      int steps = interval.diatonic;
-
-      int minAlter;
-      int maxAlter;
-      if (useDoubleSharpsFlats) {
-            minAlter = -2;
-            maxAlter = 2;
-            }
-      else {
-            minAlter = -1;
-            maxAlter = 1;
-            }
-
-      int step, alter;
-      for (;;) {
-            int octave = (pitch / 12);
-
-            step = tpc2step(tpc) + steps;
-            while (step < 0) {
-                  step += 7;
-                  octave -= 1;
-                  }
-            while (step >= 7) {
-                  step -= 7;
-                  octave += 1;
-                  }
-
-            int p1     = tpc2pitch(step2tpc(step, 0)) + octave * 12;
-            alter      = interval.chromatic - (p1 - pitch);
-            if (alter < 0)
-                  alter = -((-alter) % 12);
-            else
-                  alter %= 12;
-            if (alter > maxAlter)
-                  ++steps;
-            else if (alter < minAlter)
-                  --steps;
-            else
-                  break;
-            }
-      *rtpc  = step2tpc(step, alter);
+      *rpitch = pitch + interval.chromatic;
+      *rtpc   = transposeTpc(tpc, interval, useDoubleSharpsFlats);
       }
 
 //---------------------------------------------------------
@@ -601,11 +561,16 @@ printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
             int p1 = tpc2pitch(step2tpc(step, 0));
             alter  = semitones - (p1 - pitch);
             // alter  = p1 + semitones - pitch;
-printf("alter %d, p1 %d semitones %d pitch %d\n", alter, p1, semitones, pitch);
+#if 0
             if (alter < 0)
                   alter = -((-alter) % 12);
             else
                   alter %= 12;
+#else
+            alter %= 12;
+            if (alter > 6)
+                  alter -= 12;
+#endif
             if (alter > maxAlter)
                   ++steps;
             else if (alter < minAlter)

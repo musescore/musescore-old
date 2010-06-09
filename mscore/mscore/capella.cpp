@@ -1393,7 +1393,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                                           Measure* m = getCreateMeasure(tick + i * ft);
                                           Segment* s = m->getSegment(SegChordRest, tick + i * ft);
                                           Rest* rest = new Rest(this);
-                                          rest->setDuration(Duration(Duration::V_MEASURE));
+                                          rest->setDurationType(Duration(Duration::V_MEASURE));
                                           rest->setTrack(staffIdx * VOICES + voice);
                                           s->add(rest);
                                           }
@@ -1407,7 +1407,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                                     d.setType(Duration::V_MEASURE);
                               else
                                     d.setVal(ticks);
-                              rest->setDuration(d);
+                              rest->setDurationType(d);
                               rest->setTrack(track);
                               rest->setVisible(!o->invisible);
                               s->add(rest);
@@ -1441,7 +1441,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                                     tuplet->setTick(tick);
                                     // tuplet->setParent(m);
                                     int nn = ((tupletCount * ticks) * f.denominator()) / f.numerator();
-                                    tuplet->setFraction(Fraction::fromTicks(nn));
+                                    tuplet->setDuration(Fraction::fromTicks(nn));
                                     m->add(tuplet);
                                     }
 //                              printf("Tuplet at %d: count: %d  tri: %d  prolonging: %d  ticks %d objects %d\n",
@@ -1451,7 +1451,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
 
                         Chord* chord = new Chord(this);
                         chord->setTuplet(tuplet);
-                        chord->setDuration(d);
+                        chord->setDurationType(d);
                         chord->setTrack(track);
                         switch (o->stemDir) {
                               case -1:    // down
@@ -1707,7 +1707,7 @@ void Score::convertCapella(Capella* cap)
             return;
 
       int staves   = cap->systems[0]->staves.size();
-      CapStaff* cs = cap->systems[0]->staves[0];
+//      CapStaff* cs = cap->systems[0]->staves[0];
 //TODO      if (cs->log2Denom <= 7)
 //            sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
 

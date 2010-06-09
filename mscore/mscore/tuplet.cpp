@@ -476,7 +476,7 @@ void Tuplet::read(QDomElement e, const QList<Tuplet*>& tuplets)
                   domError(e);
             }
       Fraction f(_ratio.denominator(), _baseLen.fraction().denominator());
-      setFraction(f);
+      setDuration(f);
       if (bl != -1) {         // obsolete
             Duration d;
             d.setVal(bl);
@@ -484,7 +484,7 @@ void Tuplet::read(QDomElement e, const QList<Tuplet*>& tuplets)
 printf("Tuplet base len %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
 printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.numerator(), _ratio.denominator());
             d.setVal(bl * _ratio.denominator());
-            setFraction(d.fraction());
+            setDuration(d.fraction());
             }
       }
 
@@ -611,8 +611,8 @@ void Score::tupletDialog()
       tuplet->setTick(cr->tick());
       td.setupTuplet(tuplet);
 //      tuplet->setRatio(tuplet->ratio().reduced());
-      tuplet->setFraction(cr->fraction());
-      Fraction f1 = cr->fraction();
+      Fraction f1(cr->duration());
+      tuplet->setDuration(f1);
       Fraction f = f1 * tuplet->ratio();
       f.reduce();
 

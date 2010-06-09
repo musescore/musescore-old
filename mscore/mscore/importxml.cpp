@@ -2734,24 +2734,24 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         // cr->setTick(tick - (AL::division / 2));
                         if (durationType.type() == Duration::V_QUARTER) {
                               ((Chord*)cr)->setNoteType(NOTE_GRACE4);
-                              cr->setDuration(Duration::V_QUARTER);
+                              cr->setDurationType(Duration::V_QUARTER);
                               }
                         else if (durationType.type() == Duration::V_16TH) {
                               ((Chord*)cr)->setNoteType(NOTE_GRACE16);
-                              cr->setDuration(Duration::V_16TH);
+                              cr->setDurationType(Duration::V_16TH);
                               }
                         else if (durationType.type() == Duration::V_32ND) {
                               ((Chord*)cr)->setNoteType(NOTE_GRACE32);
-                              cr->setDuration(Duration::V_32ND);
+                              cr->setDurationType(Duration::V_32ND);
                               }
                         else
-                              cr->setDuration(Duration::V_EIGHT);
+                              cr->setDurationType(Duration::V_EIGHT);
                         st = SegGrace;
                         }
                   else {
                         if (durationType.type() == Duration::V_INVALID)
                               durationType.setType(Duration::V_QUARTER);
-                        cr->setDuration(durationType);
+                        cr->setDurationType(durationType);
                         }
                   cr->setDots(dots);
 //                  printf(" cr->tick()=%d ", cr->tick());

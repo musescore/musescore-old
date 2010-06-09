@@ -286,7 +286,7 @@ void Lilypond::addNote(const LNote& lnote)
       chord->setParent(segment);
       Duration d;
       d.setVal(lnote.len);
-      chord->setDuration(d);
+      chord->setDurationType(d);
 
       segment->add(chord);
 
@@ -318,7 +318,7 @@ void Lilypond::addRest()
       rest->setParent(segment);
       Duration d;
       d.setVal(curLen);
-      rest->setDuration(d);
+      rest->setDurationType(d);
       segment->add(rest);
       tick += curLen;
       }

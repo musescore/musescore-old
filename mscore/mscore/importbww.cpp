@@ -253,13 +253,13 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       cr->setTrack(0);
       if (grace) {
             cr->setNoteType(NOTE_GRACE32);
-            cr->setDuration(Duration::V_32ND);
+            cr->setDurationType(Duration::V_32ND);
             sd = UP;
             }
       else {
             if (durationType.type() == Duration::V_INVALID)
                   durationType.setType(Duration::V_QUARTER);
-            cr->setDuration(durationType);
+            cr->setDurationType(durationType);
             tick += ticks;
             sd = DOWN;
             }

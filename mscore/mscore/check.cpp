@@ -105,7 +105,7 @@ void Score::checkScore()
                                           QList<Duration> dl = toDurationList(Fraction::fromTicks(len), true);
                                           foreach(Duration d, dl) {
                                                 Rest* rest = new Rest(this);
-                                                rest->setDuration(d);
+                                                rest->setDurationType(d);
                                                 rest->setTrack(track);
                                                 Segment* s = m->getSegment(rest, ttick);
                                                 s->add(rest);

@@ -254,7 +254,7 @@ void Score::padToggle(int n)
       Element* e = selection().element();
       if (e && e->type() == REST) {
             Rest* r = static_cast<Rest*>(e);
-            Duration d = r->duration();
+            Duration d = r->durationType();
             if (d.type() == Duration::V_MEASURE) {
                   _is.setDots(0);
                   setPadState();    // updates dot state
@@ -273,7 +273,7 @@ void Score::padToggle(int n)
             //
             // handle appoggiatura and acciaccatura
             //
-            cr->setDuration(_is.duration());
+            cr->setDurationType(_is.duration());
             }
       else
             changeCRlen(cr, _is.duration());
@@ -291,7 +291,7 @@ void Score::setPadState(Element* e)
       if (e->type() == NOTE) {
             Note* note    = static_cast<Note*>(e);
             Chord* chord  = note->chord();
-            _is.setDuration(chord->duration());
+            _is.setDuration(chord->durationType());
             _is.rest      = false;
             _is.track     = note->track();
             _is.pitch     = note->pitch();
@@ -300,10 +300,10 @@ void Score::setPadState(Element* e)
             }
       else if (e->type() == REST) {
             Rest* rest   = static_cast<Rest*>(e);
-            if (rest->duration().type() == Duration::V_MEASURE)
+            if (rest->durationType().type() == Duration::V_MEASURE)
                   _is.setDuration(Duration::V_QUARTER);
             else
-                  _is.setDuration(rest->duration());
+                  _is.setDuration(rest->durationType());
             _is.rest     = true;
             _is.track    = rest->track();
             _is.beamMode = rest->beamMode();
