@@ -266,7 +266,7 @@ void MuseData::readNote(Part* part, const QString& s)
             }
       Duration d;
       d.setVal(ticks);
-      chord->setDuration(d);
+      chord->setDurationType(d);
 
       Segment* segment = measure->getSegment(chord, tick);
 

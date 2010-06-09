@@ -471,7 +471,7 @@ void SCursor::add(ChordRest* c)
             return;
             }
       int tick = chordRest->tick();
-      Fraction len(c->duration().fraction());
+      Fraction len(c->durationType().fraction());
       int track       = _staffIdx * VOICES + _voice;
       Fraction gap    = score()->makeGap(chordRest, len, chordRest->tuplet());
       if (gap < len) {

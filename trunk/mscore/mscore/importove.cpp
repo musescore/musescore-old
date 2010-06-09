@@ -1379,15 +1379,15 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 
 					if (duration.type() == Duration::V_QUARTER) {
 						((Chord*) cr)->setNoteType(NOTE_GRACE4);
-						cr->setDuration(Duration::V_QUARTER);
+						cr->setDurationType(Duration::V_QUARTER);
 					} else if (duration.type() == Duration::V_16TH) {
 						((Chord*) cr)->setNoteType(NOTE_GRACE16);
-						cr->setDuration(Duration::V_16TH);
+						cr->setDurationType(Duration::V_16TH);
 					} else if (duration.type() == Duration::V_32ND) {
 						((Chord*) cr)->setNoteType(NOTE_GRACE32);
-						cr->setDuration(Duration::V_32ND);
+						cr->setDurationType(Duration::V_32ND);
 					} else {
-						cr->setDuration(Duration::V_EIGHT);
+						cr->setDurationType(Duration::V_EIGHT);
 					}
 
 					st = SegGrace;
@@ -1397,7 +1397,7 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 
 					if (duration.type() == Duration::V_INVALID)
 						duration.setType(Duration::V_QUARTER);
-					cr->setDuration(duration);
+					cr->setDurationType(duration);
 				}
 
 				int graceLevel = getGraceLevel(containers, container->getTick(), container->start()->getOffset());

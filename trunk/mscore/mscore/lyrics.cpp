@@ -35,8 +35,8 @@ Lyrics::Lyrics(Score* s)
       {
       setTextStyle(TEXT_STYLE_LYRIC1);
       _no        = 0;
-      _syllabic  = SINGLE;
       _ticks     = 0;
+      _syllabic  = SINGLE;
       }
 
 //---------------------------------------------------------
@@ -84,8 +84,10 @@ void Lyrics::read(QDomElement e)
                   else
                         printf("bad syllabic property\n");
                   }
-            else if (tag == "endTick")          // obsolete
-                  _ticks = i - segment()->tick();
+            else if (tag == "endTick") {          // obsolete
+                  _ticks = i - score()->curTick;
+                  printf("Lyrics::endTick: %d  ticks %d\n", i, _ticks);
+                  }
             else if (tag == "ticks")
                   _ticks = i;
             else if (!Text::readProperties(e))

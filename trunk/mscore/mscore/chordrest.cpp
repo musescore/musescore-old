@@ -67,7 +67,7 @@ DurationElement::DurationElement(const DurationElement& e)
 
 int DurationElement::ticks() const
       {
-      int ticks = fraction().ticks();
+      int ticks = duration().ticks();
       for (Tuplet* t = tuplet(); t; t = t->tuplet())
             ticks = ticks * t->ratio().denominator() / t->ratio().numerator();
       return ticks;
@@ -104,7 +104,7 @@ ChordRest::ChordRest(Score* s)
 ChordRest::ChordRest(const ChordRest& cr)
    : DurationElement(cr)
       {
-      _duration           = cr._duration;
+      _durationType       = cr._durationType;
       _beam               = 0;
       _up                 = cr._up;
       _staffMove          = cr._staffMove;
@@ -183,13 +183,13 @@ QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
             pl.append(Prop("leadingSpace", _extraLeadingSpace.val()));
       if (_extraTrailingSpace.val() != 0.0)
             pl.append(Prop("trailingSpace", _extraTrailingSpace.val()));
-      if (duration().dots())
-            pl.append(Prop("dots", duration().dots()));
+      if (durationType().dots())
+            pl.append(Prop("dots", durationType().dots()));
       if (_staffMove)
             pl.append(Prop("move", _staffMove));
       if (tick() != xml.curTick)
             pl.append(Prop("tick", tick()));
-      pl.append(Prop("durationType", duration().name()));
+      pl.append(Prop("durationType", durationType().name()));
       return pl;
       }
 
@@ -201,6 +201,8 @@ void ChordRest::writeProperties(Xml& xml) const
       {
       QList<Prop> pl = properties(xml);
       xml.prop(pl);
+      if (durationType().fraction() != duration())
+            xml.fTag("duration", duration());
       for (ciArticulation ia = articulations.begin(); ia != articulations.end(); ++ia)
             (*ia)->write(xml);
       foreach(Slur* s, _slurFor)
@@ -299,8 +301,17 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
                   printf("Note::read(): Slur not found\n");
                   }
             }
-      else if (tag == "durationType")
+      else if (tag == "durationType") {
             setDurationType(val);
+            if (durationType().type() != Duration::V_MEASURE)
+                  setDuration(durationType().fraction());
+            else
+                  printf("full measure rest\n");
+            }
+      else if (tag == "duration") {
+            setDuration(readFraction(e));
+            printf("read duration %s\n", qPrintable(duration().print()));
+            }
       else if (tag == "ticklen")      // obsolete (version < 1.12)
             _ticks = i;
       else if (tag == "dots")
@@ -615,29 +626,6 @@ void ChordRest::toDefault()
       }
 
 //---------------------------------------------------------
-//   fraction
-//---------------------------------------------------------
-
-Fraction ChordRest::fraction() const
-      {
-      if (_duration.type() == Duration::V_MEASURE || _duration.type() == Duration::V_INVALID) {
-            if (parent() == 0)
-                  return AL::division * 4;
-            return measure()->timesig();
-            }
-      return _duration.fraction();
-      }
-
-//---------------------------------------------------------
-//   setFraction
-//---------------------------------------------------------
-
-void ChordRest::setFraction(const Fraction& f)
-      {
-      _duration = Duration(f);
-      }
-
-//---------------------------------------------------------
 //   convertTicks
 //---------------------------------------------------------
 
@@ -646,7 +634,7 @@ void DurationElement::convertTicks()
       if (_ticks < 0)
             return;
       if (_tuplet == 0)
-            setFraction(Fraction::fromTicks(_ticks));
+            setDuration(Fraction::fromTicks(_ticks));
       }
 
 //---------------------------------------------------------
@@ -655,33 +643,25 @@ void DurationElement::convertTicks()
 
 void ChordRest::setDurationType(Duration::DurationType t)
       {
-      _duration.setType(t);
+      _durationType.setType(t);
       _ticks = -1;
       }
 
 void ChordRest::setDurationType(const QString& s)
       {
-      _duration.setType(s);
+      _durationType.setType(s);
       _ticks = -1;
       }
 
-//---------------------------------------------------------
-//   setDurationVal
-//---------------------------------------------------------
-
-void ChordRest::setDurationVal(int ticks)
+void ChordRest::setDurationType(int ticks)
       {
-      _duration.setVal(ticks);
+      _durationType.setVal(ticks);
       _ticks = -1;
       }
 
-//---------------------------------------------------------
-//   setDuration
-//---------------------------------------------------------
-
-void ChordRest::setDuration(const Duration& v)
+void ChordRest::setDurationType(const Duration& v)
       {
-      _duration = v;
+      _durationType = v;
       _ticks = -1;
       }
 

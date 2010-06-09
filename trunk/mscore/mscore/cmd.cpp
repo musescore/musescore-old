@@ -659,7 +659,7 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
 
       Duration d;
       d.setVal(len);
-      chord->setDuration(d);
+      chord->setDurationType(d);
 
       chord->setStemDirection(UP);
       chord->setNoteType(type);
@@ -706,7 +706,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         nr = new Rest(this);
                         nr->setTrack(track);
                         ncr = (Rest*)nr;
-                        ncr->setDuration(d);
+                        ncr->setDurationType(d);
                         }
                   else {
                         Note* note = new Note(this);
@@ -720,7 +720,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                               }
                         Chord* chord = new Chord(this);
                         chord->setTrack(track);
-                        chord->setDuration(d);
+                        chord->setDurationType(d);
                         chord->setStemDirection(stemDirection);
                         chord->add(note);
                         note->setPitch(pitch);
@@ -835,7 +835,7 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
                         break;
                         }
                   }
-            Fraction td(cr->fraction());
+            Fraction td(cr->duration());
 
             Tuplet* ltuplet = cr->tuplet();
             if (cr->tuplet() != tuplet) {
@@ -849,7 +849,7 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
                         t = static_cast<Tuplet*>(t->elements().last());
                   seg = static_cast<ChordRest*>(t->elements().last())->segment();
 
-                  td = ltuplet->fraction();
+                  td = ltuplet->duration();
                   cmdDeleteTuplet(ltuplet, false);
                   tuplet = 0;
                   }
@@ -966,7 +966,7 @@ void Score::makeGap1(int tick, int staffIdx, Fraction len)
 
 void Score::changeCRlen(ChordRest* cr, const Duration& d)
       {
-      Fraction srcF = cr->fraction();
+      Fraction srcF(cr->duration());
       Fraction dstF;
       if (d.type() == Duration::V_MEASURE)
             dstF = cr->measure()->timesig();
@@ -1008,7 +1008,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
       Segment* s = cr->segment();
       int track  = cr->track();
 
-      if (tuplet && tuplet->fraction() < dstF) {
+      if (tuplet && tuplet->duration() < dstF) {
             printf("does not fit in tuplet\n");
             return;
             }
@@ -1023,7 +1023,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                   f1 = Fraction(0);
                   }
             ChordRest* cr = static_cast<ChordRest*>(s->element(track));
-            Duration d(cr->duration());
+            Duration d(cr->durationType());
             Fraction f2 = (d.type() == Duration::V_MEASURE) ? cr->measure()->timesig() : d.fraction();
             if (f2 > f)
                   f2 = f;
@@ -2512,7 +2512,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           rest    -= len;
                                           Duration d;
                                           d.setVal(len);
-                                          c->setDuration(d);
+                                          c->setDurationType(d);
                                           undoAddElement(c);
                                           while (rest) {
                                                 int tick = c->tick() + c->ticks();
@@ -2523,7 +2523,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                                 len = measure->ticks() > rest ? rest : measure->ticks();
                                                 Duration d;
                                                 d.setVal(len);
-                                                c2->setDuration(d);
+                                                c2->setDurationType(d);
                                                 rest -= len;
                                                 s     = measure->findSegment(SegChordRest, tick);
                                                 if (s == 0) {
@@ -2560,7 +2560,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           rest    -= len;
                                           Duration d;
                                           d.setVal(len);
-                                          r->setDuration(d);
+                                          r->setDurationType(d);
                                           undoAddElement(r);
                                           while (rest) {
                                                 Rest* r2 = static_cast<Rest*>(r->clone());
@@ -2569,7 +2569,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                                 len = measure->ticks() > rest ? rest : measure->ticks();
                                                 Duration d;
                                                 d.setVal(len);
-                                                r2->setDuration(d);
+                                                r2->setDurationType(d);
 								rest -= len;
                                                 s     = measure->findSegment(SegChordRest, tick);
                                                 if (s == 0) {
@@ -2838,7 +2838,7 @@ void Score::cmdHalfDuration()
             //
             // handle appoggiatura and acciaccatura
             //
-            cr->setDuration(d);
+            cr->setDurationType(d);
             }
       else
             changeCRlen(cr, d);
@@ -2869,7 +2869,7 @@ void Score::cmdDoubleDuration()
             //
             // handle appoggiatura and acciaccatura
             //
-            cr->setDuration(d);
+            cr->setDurationType(d);
             }
       else
             changeCRlen(cr, d);

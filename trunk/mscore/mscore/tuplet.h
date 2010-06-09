@@ -40,7 +40,6 @@ class Text;
 //------------------------------------------------------------------------
 
 class Tuplet : public DurationElement {
-      Fraction _fraction;
       int _tick;
 
    public:
@@ -120,9 +119,6 @@ class Tuplet : public DurationElement {
       void setBaseLen(const Duration& d)   { _baseLen = d;        }
 
       virtual void dump() const;
-
-      void setFraction(const Fraction& f)  { _fraction = f; }
-      virtual Fraction fraction() const    { return _fraction; }
 
       void setDirection(Direction d)       { _direction = d; }
       Direction direction() const          { return _direction; }

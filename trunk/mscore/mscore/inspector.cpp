@@ -823,7 +823,7 @@ void ShowChordWidget::setElement(Element* e)
       crb.beamMode->setCurrentIndex(int(chord->beamMode()));
       crb.dots->setValue(chord->dots());
       crb.ticks->setValue(chord->ticks());
-      crb.duration->setValue(int(chord->duration().type()));
+      crb.duration->setValue(int(chord->durationType().type()));
       crb.move->setValue(chord->staffMove());
 
       cb.hookButton->setEnabled(chord->hook());
@@ -1111,7 +1111,7 @@ void ShowRestWidget::setElement(Element* e)
       crb.attributes->clear();
       crb.dots->setValue(rest->dots());
       crb.ticks->setValue(rest->ticks());
-      crb.duration->setValue(int(rest->duration().type()));
+      crb.duration->setValue(int(rest->durationType().type()));
       crb.move->setValue(rest->staffMove());
 
       crb.slurFor->clear();

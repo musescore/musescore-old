@@ -32,6 +32,7 @@ class Beam;
 //---------------------------------------------------------
 
 class DurationElement : public Element {
+      Fraction _duration;
       Tuplet* _tuplet;
 
    protected:
@@ -50,8 +51,8 @@ class DurationElement : public Element {
       void convertTicks();   // for scores version < 1.12
       virtual int tick() const = 0;
 
-      virtual Fraction fraction() const = 0;
-      virtual void setFraction(const Fraction&) = 0;
+      Fraction duration() const           { return _duration; }
+      void setDuration(const Fraction& f) { _duration = f;    }
       };
 
 #endif

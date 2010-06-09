@@ -423,8 +423,8 @@ void Beam::layout1()
                   if (i > maxMove)
                         maxMove = i;
                   }
-            if (!maxDuration.isValid() || (maxDuration < cr->duration()))
-                  maxDuration = cr->duration();
+            if (!maxDuration.isValid() || (maxDuration < cr->durationType()))
+                  maxDuration = cr->durationType();
             }
       _up     = (_direction == AUTO) ? (upCount >= 0) : (_direction == UP);
       cross   = minMove < maxMove;
@@ -702,7 +702,7 @@ void Beam::layout()
                   else
                         y1 = p1dy + beamDist * nn;
 
-                  if (chord->duration().type() < d.type()) {
+                  if (chord->durationType().type() < d.type()) {
                         if (nn2) {
                               // create short segment
                               BeamSegment* bs = new BeamSegment;
@@ -718,7 +718,7 @@ void Beam::layout()
                               if (nn1 == _elements[0])
                                     toRight = true;
                               else {
-                                    Duration d = nn1->duration();
+                                    Duration d = nn1->durationType();
                                     d = d.shift(-1);
                                     int rtick = nn1->tick() - nn1->measure()->tick();
                                     if (rtick % d.ticks())

@@ -393,12 +393,12 @@ void Chord::add(Element* e)
       else if (e->type() == TREMOLO) {
             Tremolo* tr = static_cast<Tremolo*>(e);
             if (tr->twoNotes()) {
-                  Duration d = duration();
+                  Duration d = durationType();
                   d  = d.shift(-1);
                   if (tr->chord1())
-                        tr->chord1()->setDuration(d);
+                        tr->chord1()->setDurationType(d);
                   if (tr->chord2())
-                        tr->chord2()->setDuration(d);
+                        tr->chord2()->setDurationType(d);
                   }
             _tremolo = tr;
             }
@@ -438,12 +438,12 @@ void Chord::remove(Element* e)
       else if (e->type() == TREMOLO) {
             Tremolo* tremolo = static_cast<Tremolo*>(e);
             if (tremolo->twoNotes()) {
-                  Duration d = duration();
+                  Duration d = durationType();
                   d          = d.shift(1);
                   if (tremolo->chord1())
-                        tremolo->chord1()->setDuration(d);
+                        tremolo->chord1()->setDurationType(d);
                   if (tremolo->chord2())
-                        tremolo->chord2()->setDuration(d);
+                        tremolo->chord2()->setDurationType(d);
                   }
             _tremolo = 0;
             }
@@ -730,7 +730,7 @@ void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets)
       if (ticks != -1) {
             Duration d;
             d.setVal(ticks);
-            setDuration(d);
+            setDurationType(d);
             }
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -790,7 +790,7 @@ void Chord::read(QDomElement e)
       {
       QList<Tuplet*> tl;
       read(e, tl);
-      if (!duration().isValid())
+      if (!durationType().isValid())
             convertTicks();
       }
 
@@ -859,7 +859,7 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets)
             else if (!ChordRest::readProperties(e, tuplets))
                   domError(e);
             }
-      if (!duration().isValid())
+      if (!durationType().isValid())
             convertTicks();
       }
 
@@ -1042,8 +1042,8 @@ void Chord::layoutStem1()
       //  process stem
       //-----------------------------------------
 
-      bool hasStem = duration().hasStem() && !(_noStem || measure()->slashStyle(istaff));
-      int hookIdx  = hasStem ? duration().hooks() : 0;
+      bool hasStem = durationType().hasStem() && !(_noStem || measure()->slashStyle(istaff));
+      int hookIdx  = hasStem ? durationType().hooks() : 0;
 
       if (hasStem) {
             if (!_stem)
@@ -1097,7 +1097,7 @@ void Chord::layoutStem()
       if (_stem) {
             Spatium stemLen;
 
-            int hookIdx      = duration().hooks();
+            int hookIdx      = durationType().hooks();
             Note* upnote     = upNote();
             Note* downnote   = downNote();
             double ul        = upnote->line() * .5;

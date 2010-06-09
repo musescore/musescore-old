@@ -115,10 +115,10 @@ void Score::splitStaff(int staffIdx, int splitPoint)
                         SNote n;
                         n.tick     = c->tick();
                         n.pitch    = note->pitch();
-                        n.fraction = c->duration().fraction();
+                        n.fraction = c->durationType().fraction();
                         Note* nn = note;
                         while (nn && nn->tieFor()) {
-                              n.fraction += nn->chord()->duration().fraction();
+                              n.fraction += nn->chord()->durationType().fraction();
                               nn = nn->tieFor()->endNote();
                               }
                         n.note     = note;

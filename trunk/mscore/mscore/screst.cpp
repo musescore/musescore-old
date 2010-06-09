@@ -75,7 +75,7 @@ static QScriptValue prototype_Rest_call(QScriptContext* context, QScriptEngine*)
                         int ticks = context->argument(0).toInt32();
                         if (ticks < 1)
                               break;
-                        rest->setDurationVal(ticks);
+                        rest->setDurationType(ticks);
                         return context->engine()->undefinedValue();
                         }
                   break;
