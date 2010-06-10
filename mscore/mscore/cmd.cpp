@@ -642,7 +642,7 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       if (s && (s->subtype() == st) && (!s->element(track)))
             seg = s;
       else {
-            seg = measure->createSegment(st, tick);
+            seg = new Segment(measure, st, tick);
             undoAddElement(seg);
             }
       double mag = staff(track/VOICES)->mag() * styleD(ST_graceNoteMag);
@@ -738,7 +738,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                   SegmentType st = SegChordRest;
                   seg = measure->findSegment(st, tick);
                   if (seg == 0) {
-                        seg = measure->createSegment(st, tick);
+                        seg = new Segment(measure, st, tick);
                         undoAddElement(seg);
                         }
                   ncr->setParent(seg);
@@ -1409,6 +1409,7 @@ MeasureBase* Score::appendMeasure(int type)
       else if (type == VBOX)
             mb = new VBox(this);
       mb->setTick(tick);
+printf("create Measure at %d\n", tick);
 
       if (type == MEASURE) {
             Fraction ts(lastMeasure()->timesig());
@@ -1421,6 +1422,7 @@ MeasureBase* Score::appendMeasure(int type)
                   rest->setTrack(staffIdx * VOICES);
                   Segment* s = measure->getSegment(SegChordRest, tick);
                   s->add(rest);
+printf("create Segment at %d\n", s->tick());
                   }
             }
       undoInsertMeasure(mb);
@@ -1570,7 +1572,7 @@ void Score::insertMeasures(int n, int type)
                               SegmentType st = SegTimeSig;
                               Segment* s = measure->findSegment(st, 0);
                               if (s == 0) {
-                                    s = measure->createSegment(st, 0);
+                                    s = new Segment(measure, st, 0);
                                     undoAddElement(s);
                                     }
                               nts->setParent(s);
@@ -1581,7 +1583,7 @@ void Score::insertMeasures(int n, int type)
                               SegmentType st = SegKeySig;
                               Segment* s = measure->findSegment(st, 0);
                               if (s == 0) {
-                                    s = measure->createSegment(st, 0);
+                                    s = new Segment(measure, st, 0);
                                     undoAddElement(s);
                                     }
                               nks->setParent(s);
@@ -2462,7 +2464,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               Segment* s;
                               bool isGrace = false;
                               if ((cr->type() == CHORD) && (((Chord*)cr)->noteType() != NOTE_NORMAL)) {
-                                    s = measure->createSegment(SegGrace, tick);
+                                    s = new Segment(measure, SegGrace, tick);
                                     undoAddElement(s);
                                     isGrace = true;
                                     }
@@ -2471,7 +2473,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     st = Segment::segmentType(cr->type());
                                     s  = measure->findSegment(st, tick);
                                     if (!s) {
-                                          s = measure->createSegment(st, tick);
+                                          s = new Segment(measure, st, tick);
                                           undoAddElement(s);
                                           }
                                     }
@@ -2503,7 +2505,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                                 rest -= len;
                                                 s     = measure->findSegment(SegChordRest, tick);
                                                 if (s == 0) {
-                                                      s = measure->createSegment(SegChordRest, tick);
+                                                      s = new Segment(measure, SegChordRest, tick);
                                                       undoAddElement(s);
                                                       }
                                                 c2->setParent(s);
@@ -2549,7 +2551,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
 								rest -= len;
                                                 s     = measure->findSegment(SegChordRest, tick);
                                                 if (s == 0) {
-                                                      s = measure->createSegment(SegChordRest, tick);
+                                                      s = new Segment(measure, SegChordRest, tick);
                                                       undoAddElement(s);
                                                       }
                                                 r2->setParent(s);

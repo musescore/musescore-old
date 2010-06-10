@@ -40,6 +40,8 @@
 
 const char* Segment::subTypeName() const
       {
+      static char buffer[32];
+
       switch(subtype()) {
             case SegClef:                 return "Clef";
             case SegKeySig:               return "Key Signature";
@@ -53,7 +55,9 @@ const char* Segment::subTypeName() const
             case SegTimeSigAnnounce:      return "Time Sig Precaution";
             case SegKeySigAnnounce:       return "Key Sig Precaution";
             }
-      return "??";
+      abort();
+      sprintf(buffer, "<?%d>", subtype());
+      return buffer;
       }
 
 //---------------------------------------------------------
@@ -103,10 +107,11 @@ Segment::Segment(Measure* m)
       empty = true;
       }
 
-Segment::Segment(Measure* m, int t)
+Segment::Segment(Measure* m, SegmentType st, int t)
    : Element(m->score())
       {
       setParent(m);
+      setSubtype(st);
       setTick(t);
       init();
       empty = true;
@@ -506,6 +511,7 @@ int Segment::tick() const
 
 void Segment::setTick(int t)
       {
+      printf("Segment %s setTick %d (%d)\n", subTypeName(), t, t - measure()->tick());
       _tick = t - measure()->tick();
       }
 

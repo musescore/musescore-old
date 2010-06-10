@@ -482,7 +482,7 @@ void SCursor::add(ChordRest* c)
       SegmentType st = SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
-            seg = measure->createSegment(st, tick);
+            seg = new Segment(measure, st, tick);
             score()->undoAddElement(seg);
             }
       c->setScore(score());

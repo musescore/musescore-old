@@ -746,17 +746,6 @@ Segment* Measure::findSegment(SegmentType st, int t)
       }
 
 //---------------------------------------------------------
-//   createSegment
-//---------------------------------------------------------
-
-Segment* Measure::createSegment(SegmentType st, int tick)
-      {
-      Segment* newSegment = new Segment(this, tick);
-      newSegment->setSubtype(st);
-      return newSegment;
-      }
-
-//---------------------------------------------------------
 //   getSegment
 //---------------------------------------------------------
 
@@ -774,7 +763,7 @@ Segment* Measure::getSegment(Element* e, int tick)
                   else
                         return s;
                   }
-            s = createSegment(SegGrace, tick);
+            s = new Segment(this, SegGrace, tick);
             add(s);
             return s;
             }
@@ -795,7 +784,7 @@ Segment* Measure::getSegment(SegmentType st, int t)
       {
       Segment* s = findSegment(st, t);
       if (!s) {
-            s = createSegment(st, t);
+            s = new Segment(this, st, t);
             add(s);
             }
       return s;
@@ -852,7 +841,7 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                   return sCr;
             // no SegChordRest at tick = t, must create it
 //            printf("creating SegChordRest at tick=%d\n", t);
-            s = createSegment(SegChordRest, t);
+            s = new Segment(this, SegChordRest, t);
             add(s);
             return s;
             }
@@ -878,7 +867,7 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                   // insert the first grace segment
                   if (nGraces == 0) {
                         ++nGraces;
-                        s = createSegment(SegGrace, t);
+                        s = new Segment(this, SegGrace, t);
 //                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
                         add(s);
                         prevs = s;
@@ -893,7 +882,7 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                   // add the missing grace segments before the one already present
                   while (nGraces < gl) {
                         ++nGraces;
-                        s = createSegment(SegGrace, t);
+                        s = new Segment(this, SegGrace, t);
 //                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
                         insert(s, prevs);
                         prevs = s;
@@ -1179,7 +1168,7 @@ void Measure::moveTicks(int diff)
       setTick(tick() + diff);
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if (segment->subtype() & (SegEndBarLine | SegTimeSigAnnounce))
-                  segment->setTick(ticks());
+                  segment->setTick(tick() + ticks());
             }
       }
 
@@ -1336,7 +1325,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             rest->setTrack(i * VOICES);
             Segment* s = findSegment(SegChordRest, tick());
             if (s == 0) {
-                  s = createSegment(SegChordRest, tick());
+                  s = new Segment(this, SegChordRest, tick());
                   score()->undoAddElement(s);
                   }
             rest->setParent(s);
@@ -1700,7 +1689,7 @@ printf("drop staffList\n");
 
                   Segment* seg = findSegment(SegChordRest, tick());
                   if (seg == 0) {
-                        seg = createSegment(SegChordRest, tick());
+                        seg = new Segment(this, SegChordRest, tick());
                         _score->undoAddElement(seg);
                         }
                   RepeatMeasure* rm = new RepeatMeasure(_score);
@@ -1831,7 +1820,7 @@ void Measure::adjustToLen(int ol, int nl)
                               int rtick = tick() + nl - n;
                               Segment* seg = findSegment(SegChordRest, rtick);
                               if (seg == 0) {
-                                    seg = createSegment(SegChordRest, rtick);
+                                    seg = new Segment(this, SegChordRest, rtick);
                                     score()->undoAddElement(seg);
                                     }
                               Duration d;
@@ -2570,6 +2559,7 @@ bool Measure::createEndBarLines()
                         bl = new BarLine(score());
                         bl->setTrack(staffIdx * VOICES);
                         Segment* seg = getSegment(SegEndBarLine, tick() + ticks());
+printf("create BarLine at %d\n", tick() + ticks());
                         seg->add(bl);
                         changed = true;
                         bl->layout();

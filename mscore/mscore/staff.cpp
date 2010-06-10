@@ -333,7 +333,7 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
             SegmentType stype = Segment::segmentType(KEYSIG);
             Segment* s = measure->findSegment(stype, tick);
             if (!s) {
-                  s = measure->createSegment(stype, tick);
+                  s = new Segment(measure, stype, tick);
                   _score->undoAddElement(s);
                   }
             keysig->setParent(s);
@@ -427,7 +427,7 @@ void Staff::changeClef(int tick, int st)
             SegmentType stype = Segment::segmentType(CLEF);
             Segment* s = measure->findSegment(stype, tick);
             if (!s) {
-                  s = measure->createSegment(stype, tick);
+                  s = new Segment(measure, stype, tick);
                   _score->undoAddElement(s);
                   }
             clef->setParent(s);
