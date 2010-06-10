@@ -57,6 +57,8 @@ Rest::Rest(Score* s, const Duration& d)
       setOffsetType(OFFSET_SPATIUM);
       _sym       = rest4Sym;
       setDurationType(d);
+      if (d.fraction().isValid())
+            setDuration(d.fraction());
       }
 
 //---------------------------------------------------------

@@ -150,7 +150,10 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
             seg = measure->createSegment(st, tick);
             undoAddElement(seg);
             }
-      return addRest(seg, track, d, tuplet);
+      Rest* rest = addRest(seg, track, d, tuplet);
+      if (d.type() == Duration::V_MEASURE)
+            rest->setDuration(measure->len());
+      return rest;
       }
 
 //---------------------------------------------------------
@@ -239,7 +242,6 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
 
 Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tuplet)
       {
-printf("setRest at %d  fraction %s\n", tick, qPrintable(l.print()));
       Measure* measure = tick2measure(tick);
       Rest* r = 0;
 
