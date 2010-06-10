@@ -374,6 +374,19 @@ Duration::Duration(const Fraction& _f)
             case 256:   _val = V_256TH; break;
             default:    _val = V_INVALID; break;
             }
+            
+      if(f.denominator() != 0) { 
+            int v = f.numerator() / f.denominator();
+            if(v == 4) {
+                  _val = V_LONG;
+                  return;
+                  } 
+            else if (v == 2) {
+                  _val = V_BREVE;
+                  return;
+                  }
+            }                  
+            
       if (f.numerator() != 1) {
             switch(f.numerator()) {
                   case 3:
