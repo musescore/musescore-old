@@ -147,7 +147,7 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       SegmentType st = SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
-            seg = measure->createSegment(st, tick);
+            seg = new Segment(measure, st, tick);
             undoAddElement(seg);
             }
       Rest* rest = addRest(seg, track, d, tuplet);
@@ -184,7 +184,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
       SegmentType st = SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
-            seg = measure->createSegment(st, tick);
+            seg = new Segment(measure, st, tick);
             undoAddElement(seg);
             }
       Chord* chord = new Chord(this);
@@ -227,7 +227,7 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
 
       Segment* seg = cr->measure()->findSegment(SegChordRest, tick);
       if (seg == 0) {
-            seg = cr->measure()->createSegment(SegChordRest, tick);
+            seg = new Segment(cr->measure(), SegChordRest, tick);
             undoAddElement(seg);
             }
       newcr->setParent(seg);
@@ -572,7 +572,7 @@ void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
             // Set time signature of all measures up to next
             // time signature. Do not touch measure contents.
             //
-            seg = fm->createSegment(SegTimeSig, tick);
+            seg = new Segment(fm, SegTimeSig, tick);
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   TimeSig* nsig = new TimeSig(this, timeSigSubtype);
                   nsig->setTrack(staffIdx * VOICES);
@@ -592,7 +592,7 @@ void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
             rewriteMeasures(fm, lm, ns);
 
             Measure* nfm = fm->prev() ? fm->prev()->nextMeasure() : firstMeasure();
-            Segment* seg = nfm->createSegment(SegTimeSig, 0);
+            Segment* seg = new Segment(nfm, SegTimeSig, 0);
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   TimeSig* nsig = new TimeSig(this, timeSigSubtype);
                   nsig->setTrack(staffIdx * VOICES);
@@ -1646,7 +1646,7 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
       SegmentType st = Segment::segmentType(cr->type());
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
-            seg = measure->createSegment(st, tick);
+            seg = new Segment(measure, st, tick);
             undoAddElement(seg);
             }
       cr->setParent(seg);
@@ -1663,7 +1663,7 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
             SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
-                  seg = measure->createSegment(st, tick);
+                  seg = new Segment(measure, st, tick);
                   undoAddElement(seg);
                   }
             rest->setParent(seg);

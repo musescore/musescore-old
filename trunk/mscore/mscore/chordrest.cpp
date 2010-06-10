@@ -529,7 +529,7 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
 
                   Segment* seg = m->findSegment(SegBreath, tick());
                   if (seg == 0) {
-                        seg = m->createSegment(SegBreath, tick());
+                        seg = new Segment(m, SegBreath, tick());
                         score()->undoAddElement(seg);
                         }
                   b->setParent(seg);
@@ -548,7 +548,7 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
 
                   Segment* seg = m->findSegment(SegBarLine, tick());
                   if (seg == 0) {
-                        seg = m->createSegment(SegBarLine, tick());
+                        seg = new Segment(m, SegBarLine, tick());
                         score()->undoAddElement(seg);
                         }
                   bl->setParent(seg);

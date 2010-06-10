@@ -212,7 +212,6 @@ class Measure : public MeasureBase {
       Segment* getSegment(SegmentType st, int tick);
       Segment* getSegment(SegmentType st, int tick, int gl);
       Segment* findSegment(SegmentType st, int t);
-      Segment* createSegment(SegmentType st, int t);
 
       bool createEndBarLines();
       void setEndBarLineType(int val, bool g, bool visible = true, QColor color = Qt::black);
