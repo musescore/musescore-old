@@ -197,9 +197,6 @@ QRectF Element::abbox() const
 
 Element::~Element()
       {
-//      printf("~Element %p\n", this);
-      if (selected())
-            printf("===========~Element: selected\n");
       if (score()) {
             foreach(Element* e, score()->selection().elements()) {
                   if (e == this) {

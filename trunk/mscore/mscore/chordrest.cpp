@@ -201,7 +201,7 @@ void ChordRest::writeProperties(Xml& xml) const
       {
       QList<Prop> pl = properties(xml);
       xml.prop(pl);
-      if (durationType().fraction() != duration())
+      if (!durationType().fraction().isValid() || (durationType().fraction() != duration()))
             xml.fTag("duration", duration());
       for (ciArticulation ia = articulations.begin(); ia != articulations.end(); ++ia)
             (*ia)->write(xml);
