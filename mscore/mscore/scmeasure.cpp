@@ -75,21 +75,22 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                         bool lineb = measure->lineBreak();
                         if (lineb == val)
                               return context->engine()->undefinedValue();
-                        if (val){	       
-                	          LayoutBreak* lb = new LayoutBreak(score);	   
-                            lb->setSubtype(LAYOUT_BREAK_LINE);	       
-                            lb->setTrack(-1);       // this are system elements	       
-                            lb->setParent(measure);	             
-                            score->cmdAdd(lb);
-                        }else{ 	 
-                            // remove line break	 
-                            foreach(Element* e, *measure->el()) {	 
-                                if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {	 
-                                    measure->score()->cmdRemove(e); 
+                        if (val) {
+                	            LayoutBreak* lb = new LayoutBreak(score);
+                              lb->setSubtype(LAYOUT_BREAK_LINE);
+                              lb->setTrack(-1);       // this are system elements
+                              lb->setParent(measure);
+                              score->cmdAdd(lb);
+                              }
+                        else {
+                              // remove line break
+                              foreach(Element* e, *measure->el()) {
+                                    if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {
+                                          measure->score()->cmdRemove(e);
+                                          }
                                     }
-                                }
-                             }
-                          return context->engine()->undefinedValue();     
+                              }
+                        return context->engine()->undefinedValue();
                         }
                   break;
             case 1:     // "pageNumber",
@@ -102,7 +103,7 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                   break;
             case 3:     // "pos"
                   if (context->argumentCount() == 0){
-                        Page* page = (Page*)measure->parent()->parent();	  
+                        Page* page = (Page*)measure->parent()->parent();
                         QPointF pos(measure->canvasPos().x() - page->canvasPos().x(),  measure->canvasPos().y());
                         return qScriptValueFromValue(context->engine(), pos);
                         }

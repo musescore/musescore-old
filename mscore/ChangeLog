@@ -1,3 +1,6 @@
+10.jun (ws)
+      - insert/delete time signatures: split notes
+      - new: section break
 8.jun (ws)
       - insert/delete time signatures: new implementation keeps all notes (incomplete)
 6.jun (ws)

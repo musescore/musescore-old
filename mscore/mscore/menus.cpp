@@ -612,6 +612,10 @@ void MuseScore::showPalette(bool visible)
             lb->setSubtype(LAYOUT_BREAK_PAGE);
             sp->append(lb, tr("Page break"));
 
+            lb = new LayoutBreak(gscore);
+            lb->setSubtype(LAYOUT_BREAK_SECTION);
+            sp->append(lb, tr("Section break"));
+
             Spacer* spacer = new Spacer(gscore);
             spacer->setSpace(Spatium(3));
             sp->append(spacer, tr("Staff spacer"));
@@ -1166,12 +1170,19 @@ void MuseScore::showLayoutBreakPalette()
             layoutBreakPalette->setWindowTitle(tr("MuseScore: Breaks & Spacer"));
             sp->setGrid(80, 80);
             sp->resize(240,80);
+
             LayoutBreak* lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_LINE);
             sp->append(lb, tr("Line break"));
+
             lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_PAGE);
             sp->append(lb, tr("Page break"));
+
+            lb = new LayoutBreak(gscore);
+            lb->setSubtype(LAYOUT_BREAK_SECTION);
+            sp->append(lb, tr("Section break"));
+
             Spacer* spacer = new Spacer(gscore);
             spacer->setSpace(Spatium(3));
             sp->append(spacer, tr("Staff spacer"));

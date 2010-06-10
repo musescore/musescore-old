@@ -73,6 +73,7 @@ class MeasureBase : public Element {
 
       bool _lineBreak;        ///< Forced line break
       bool _pageBreak;        ///< Forced page break
+      bool _sectionBreak;
 
    public:
       MeasureBase(Score* score);
@@ -96,10 +97,14 @@ class MeasureBase : public Element {
       const ElementList* el() const          { return &_el; }
       System* system() const                 { return (System*)parent(); }
       void setSystem(System* s)              { setParent((Element*)s);   }
+
       bool lineBreak() const                 { return _lineBreak; }
       bool pageBreak() const                 { return _pageBreak; }
+      bool sectionBreak() const              { return _sectionBreak; }
       void setLineBreak(bool v)              { _lineBreak = v;    }
       void setPageBreak(bool v)              { _pageBreak = v;    }
+      void setSectionBreak(bool v)           { _sectionBreak = v; }
+
       virtual void moveTicks(int diff)       { setTick(tick() + diff); }
       virtual double distance(int) const     { return 0.0; }
       virtual Spatium userDistance(int) const { return Spatium(0.0); }

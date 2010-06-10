@@ -357,7 +357,11 @@ void Score::renumberMeasures()
       for (Measure* measure = firstMeasure(); measure; measure = measure->nextMeasure()) {
             measureNo += measure->noOffset();
             measure->setNo(measureNo);
-            if (!measure->irregular())
+            if (measure->sectionBreak())
+                  measureNo = 0;
+            else if (measure->irregular())      // dont count measure
+                  ;
+            else
                   ++measureNo;
             }
       }
@@ -679,7 +683,11 @@ void Score::fixTicks()
             number += m->noOffset();
             if (m->no() != number)
                   m->setNo(number);
-            if (!m->irregular())
+            if (m->sectionBreak())
+                  number = 0;
+            else if (m->irregular())      // dont count measure
+                  ;
+            else
                   ++number;
             int mtick = m->tick();
             int diff  = tick - mtick;

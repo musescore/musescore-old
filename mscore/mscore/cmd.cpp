@@ -1417,6 +1417,7 @@ MeasureBase* Score::appendMeasure(int type)
             measure->setLen(ts);
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                   Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
+                  rest->setDuration(ts);
                   rest->setTrack(staffIdx * VOICES);
                   Segment* s = measure->getSegment(SegChordRest, tick);
                   s->add(rest);
@@ -2152,14 +2153,22 @@ void Score::cmd(const QAction* a)
                   cmdExchangeVoice(1, 3);
             else if (cmd == "voice-x34")
                   cmdExchangeVoice(2, 3);
-            else if (cmd == "system-break") {
+            else if (cmd == "system-break" || cmd == "page-break" || cmd == "section-break") {
+                  int type;
+                  if (cmd == "system-break")
+                        type = LAYOUT_BREAK_LINE;
+                  else if (cmd == "page-break")
+                        type = LAYOUT_BREAK_PAGE;
+                  else
+                        type = LAYOUT_BREAK_SECTION;
+
                   Element* e = selection().element();
                   if (e && e->type() == BAR_LINE) {
                         BarLine* barline = static_cast<BarLine*>(e);
                         Measure* measure = barline->measure();
                         if (!measure->lineBreak()) {
                               LayoutBreak* lb = new LayoutBreak(this);
-                              lb->setSubtype(LAYOUT_BREAK_LINE);
+                              lb->setSubtype(type);
                               lb->setTrack(-1);       // this are system elements
                               lb->setParent(measure);
                               cmdAdd(lb);
@@ -2167,30 +2176,7 @@ void Score::cmd(const QAction* a)
                         else {
                               // remove line break
                               foreach(Element* e, *measure->el()) {
-                                    if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {
-                                          cmdRemove(e);
-                                          break;
-                                          }
-                                    }
-                              }
-                        }
-                  }
-            else if (cmd == "page-break") {
-                  Element* e = selection().element();
-                  if (e && e->type() == BAR_LINE) {
-                        BarLine* barline = static_cast<BarLine*>(e);
-                        Measure* measure = barline->measure();
-                        if (!measure->pageBreak()) {
-                              LayoutBreak* lb = new LayoutBreak(this);
-                              lb->setSubtype(LAYOUT_BREAK_PAGE);
-                              lb->setTrack(-1);       // this are system elements
-                              lb->setParent(measure);
-                              cmdAdd(lb);
-                              }
-                        else {
-                              // remove line break
-                              foreach(Element* e, *measure->el()) {
-                                    if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_PAGE) {
+                                    if (e->type() == LAYOUT_BREAK && e->subtype() ==type) {
                                           cmdRemove(e);
                                           break;
                                           }
@@ -2420,9 +2406,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                         if (tag == "Tuplet") {
                               Tuplet* tuplet = new Tuplet(this);
                               tuplet->setTrack(curTrack);
-                              tuplet->setTick(curTick);
                               tuplet->read(eee, tuplets);
-                              curTick  = tuplet->tick();
                               int tick = curTick - tickStart + dstTick;
                               Measure* measure = tick2measure(tick);
                               tuplet->setParent(measure);
@@ -2438,24 +2422,16 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               undoAddElement(slur);
                               }
                         else if (tag == "Chord" || tag == "Rest" || tag == "RepeatMeasure") {
-                              ChordRest* cr;
-                              if (tag == "Chord")
-                                   cr = new Chord(this);
-                              else if (tag == "Rest")
-                                   cr = new Rest(this);
-                              else
-                                   cr = new RepeatMeasure(this);
+                              ChordRest* cr = static_cast<ChordRest*>(Element::name2Element(tag, this));
                               cr->setTrack(curTrack);
                               cr->read(eee, tuplets);
                               cr->setSelected(false);
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);
-                              foreach(Articulation* a, *cr->getArticulations()) {
+                              foreach(Articulation* a, *cr->getArticulations())
                                     a->setTrack(track);
-                                    }
-                              curTick  = cr->tick();
-                              int tick = cr->tick() - tickStart + dstTick;
+                              int tick = curTick - tickStart + dstTick;
 
                               if (cr->type() == CHORD) {
                                     // set note track
@@ -2591,8 +2567,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               lyrics->setTrack(curTrack);
                               lyrics->read(eee);
                               lyrics->setTrack(dstStaffIdx * VOICES);
-                              int tick = lyrics->tick() - tickStart + dstTick;
-                              lyrics->setTick(tick);
+                              int tick = curTick - tickStart + dstTick;
                               Segment* segment = tick2segment(tick);
                               if (segment) {
                                     lyrics->setParent(segment);
@@ -2603,11 +2578,10 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               }
                         else if (tag == "Harmony") {
                               Harmony* harmony = new Harmony(this);
-                              harmony->setTick(curTick);         // set default tick position
                               harmony->setTrack(curTrack);
                               harmony->read(eee);
                               harmony->setTrack(dstStaffIdx * VOICES);
-                              int tick = harmony->tick() - tickStart + dstTick;
+                              int tick = curTick - tickStart + dstTick;
                               harmony->setTick(tick);
                               Measure* m = tick2measure(tick);
                               harmony->setParent(m);

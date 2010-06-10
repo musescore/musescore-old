@@ -328,8 +328,11 @@ Element* HBox::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
                   {
                   LayoutBreak* lb = static_cast<LayoutBreak*>(e);
                   if (_pageBreak || _lineBreak) {
-                        if ((lb->subtype() == LAYOUT_BREAK_PAGE && _pageBreak)
-                           || (lb->subtype() == LAYOUT_BREAK_LINE && _lineBreak)) {
+                        if (
+                           (lb->subtype() == LAYOUT_BREAK_PAGE && _pageBreak)
+                           || (lb->subtype() == LAYOUT_BREAK_LINE && _lineBreak)
+                           || (lb->subtype() == LAYOUT_BREAK_SECTION && _sectionBreak)
+                           ) {
                               //
                               // if break already set
                               //

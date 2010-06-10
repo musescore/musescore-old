@@ -1860,6 +1860,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Toggle Page Break")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "section-break",
+         QT_TRANSLATE_NOOP("action","toggle section break"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Toggle Section Break"),
+         QT_TRANSLATE_NOOP("action","Toggle Section Break")
+         ),
+      Shortcut(
          STATE_NORMAL,
          "edit-element",
          QT_TRANSLATE_NOOP("action","edit element"),

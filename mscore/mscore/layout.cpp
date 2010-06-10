@@ -1281,8 +1281,10 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             if (m) {
                   int tick        = lm->tick() + lm->ticks();
                   Fraction sig2   = m->timesig();
-                  Fraction sig1   = m->prev() ? m->prevMeasure()->timesig() : sig2;
-                  if (styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2)) {
+                  Measure* pm     = m->prevMeasure();
+                  Fraction sig1   = pm ? pm->timesig() : sig2;
+                  bool sectionBreak = pm ? pm->sectionBreak() : false;
+                  if (!sectionBreak && styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2)) {
                         Segment* s  = m->getSegment(SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
@@ -1305,7 +1307,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                     }
                               }
                         }
-                  if (styleB(ST_genCourtesyKeysig)) {
+                  if (!sectionBreak && styleB(ST_genCourtesyKeysig)) {
                         int n = _staves.size();
                         for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
                               Staff* staff = _staves[staffIdx];
