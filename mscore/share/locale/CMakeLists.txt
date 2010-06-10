@@ -30,6 +30,7 @@ install(FILES
       mscore_en_GB.qm
       mscore_en_US.qm
       mscore_es.qm
+      mscore_eu.qm
       mscore_fi.qm
       mscore_fr.qm
       mscore_gl.qm
