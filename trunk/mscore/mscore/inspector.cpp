@@ -670,6 +670,7 @@ void MeasureView::setElement(Element* e)
       mb.stretch->setValue(m->userStretch());
       mb.lineBreak->setChecked(m->lineBreak());
       mb.pageBreak->setChecked(m->pageBreak());
+      mb.sectionBreak->setChecked(m->sectionBreak());
       mb.irregular->setChecked(m->irregular());
       mb.endRepeat->setValue(m->repeatCount());
       mb.repeatFlags->setText(QString("0x%1").arg(m->repeatFlags(), 6, 16, QChar('0')));

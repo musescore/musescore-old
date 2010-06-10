@@ -25,7 +25,7 @@
 
 // layout break subtypes:
 
-enum { LAYOUT_BREAK_PAGE, LAYOUT_BREAK_LINE };
+enum { LAYOUT_BREAK_PAGE, LAYOUT_BREAK_LINE, LAYOUT_BREAK_SECTION };
 
 //---------------------------------------------------------
 //   LayoutBreak

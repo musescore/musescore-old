@@ -36,20 +36,22 @@ MeasureBase::MeasureBase(Score* score)
       {
       _prev = 0;
       _next = 0;
-      _lineBreak = false;
-      _pageBreak = false;
-      _dirty     = true;
+      _lineBreak    = false;
+      _pageBreak    = false;
+      _sectionBreak = false;
+      _dirty        = true;
       }
 
 MeasureBase::MeasureBase(const MeasureBase& m)
    : Element(m)
       {
-      _next      = m._next;
-      _prev      = m._prev;
-      _mw        = m._mw;
-      _dirty     = m._dirty;
-      _lineBreak = m._lineBreak;
-      _pageBreak = m._pageBreak;
+      _next         = m._next;
+      _prev         = m._prev;
+      _mw           = m._mw;
+      _dirty        = m._dirty;
+      _lineBreak    = m._lineBreak;
+      _pageBreak    = m._pageBreak;
+      _sectionBreak = m._sectionBreak;
 
       foreach(Element* e, m._el) {
             add(e->clone());
@@ -101,6 +103,9 @@ void MeasureBase::add(Element* el)
                   case LAYOUT_BREAK_LINE:
                         _lineBreak = true;
                         break;
+                  case LAYOUT_BREAK_SECTION:
+                        _sectionBreak = true;
+                        break;
                   }
             _el.push_back(el);
             }
@@ -126,6 +131,9 @@ void MeasureBase::remove(Element* el)
                         break;
                   case LAYOUT_BREAK_LINE:
                         _lineBreak = false;
+                        break;
+                  case LAYOUT_BREAK_SECTION:
+                        _sectionBreak = false;
                         break;
                   }
             }

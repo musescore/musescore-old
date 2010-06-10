@@ -582,8 +582,16 @@ void Measure::layout2()
       foreach(const MStaff* ms, staves)
             ms->lines->setWidth(width());
 
-      foreach(Element* element, _el)
+      foreach (Element* element, _el) {
             element->layout();
+            if (element->type() == LAYOUT_BREAK) {
+                  if (_sectionBreak && (_lineBreak | _pageBreak)
+                     && (element->subtype() == LAYOUT_BREAK_PAGE || element->subtype() == LAYOUT_BREAK_LINE))
+                        {
+                        element->rxpos() -= (element->width() + _spatium * .8);
+                        }
+                  }
+            }
 
       //
       //   set measure number
@@ -1019,6 +1027,9 @@ void Measure::add(Element* el)
                         case LAYOUT_BREAK_LINE:
                               _lineBreak = true;
                               break;
+                        case LAYOUT_BREAK_SECTION:
+                              _sectionBreak = true;
+                              break;
                         }
                   _el.push_back(el);
                   break;
@@ -1075,25 +1086,6 @@ void Measure::remove(Element* el)
                   break;
             case SEGMENT:
                   remove(static_cast<Segment*>(el));
-                  if (el->subtype() == SegTimeSig) {
-#if 0
-                        Fraction nfraction(prevMeasure() ? prevMeasure()->timesig() : Fraction(4,4));
-                        setTimesig2(nfraction);
-                        for (Measure* m = nextMeasure(); m; m = m->nextMeasure()) {
-                              Segment* s = 0;
-                              for (s = m->first(SegTimeSig); s; s = s->next(SegTimeSig)) {
-                                    if (!m->timesig().identical(nfraction))
-                                          break;
-                                    // score()->undoRemoveElement(s);
-                                    break;
-                                    }
-                              if (s)
-                                    break;
-                              m->setTimesig2(nfraction);
-                              }
-#endif
-                        score()->addLayoutFlag(LAYOUT_FIX_TICKS);
-                        }
                   break;
             case TUPLET:
                   {
@@ -1115,6 +1107,9 @@ void Measure::remove(Element* el)
                               break;
                         case LAYOUT_BREAK_LINE:
                               _lineBreak = false;
+                              break;
+                        case LAYOUT_BREAK_SECTION:
+                              _sectionBreak = false;
                               break;
                         }
                   if (!_el.remove(el))
@@ -1609,15 +1604,18 @@ printf("drop staffList\n");
             case LAYOUT_BREAK:
                   {
                   LayoutBreak* lb = static_cast<LayoutBreak*>(e);
-                  if (_pageBreak || _lineBreak) {
-                        if ((lb->subtype() == LAYOUT_BREAK_PAGE && _pageBreak)
-                           || (lb->subtype() == LAYOUT_BREAK_LINE && _lineBreak)) {
-                              //
-                              // if break already set
-                              //
-                              delete lb;
-                              break;
-                              }
+                  if (
+                        (lb->subtype() == LAYOUT_BREAK_PAGE && _pageBreak)
+                     || (lb->subtype() == LAYOUT_BREAK_LINE && _lineBreak)
+                     || (lb->subtype() == LAYOUT_BREAK_SECTION && _sectionBreak)
+                     ) {
+                        //
+                        // if break already set
+                        //
+                        delete lb;
+                        break;
+                        }
+                  if ((lb->subtype() != LAYOUT_BREAK_SECTION) && (_pageBreak || _lineBreak)) {
                         foreach(Element* elem, _el) {
                               if (elem->type() == LAYOUT_BREAK) {
                                     score()->undoChangeElement(elem, e);

@@ -98,6 +98,15 @@ void LayoutBreak::layout()
                   path.moveTo(w, h-w1);
                   path.lineTo(w1, h);
                   break;
+
+            case LAYOUT_BREAK_SECTION:
+                  path.lineTo(w, 0.0);
+                  path.lineTo(w,  h);
+                  path.lineTo(0.0,  h);
+                  path.moveTo(w-_spatium * .8,  0.0);
+                  path.lineTo(w-_spatium * .8,  h);
+                  break;
+
             default:
                   printf("unknown layout break symbol\n");
                   break;
@@ -116,8 +125,10 @@ void LayoutBreak::setSubtype(const QString& s)
       {
       if (s == "line")
             setSubtype(LAYOUT_BREAK_LINE);
-      else
+      else if (s == "page")
             setSubtype(LAYOUT_BREAK_PAGE);
+      else
+            setSubtype(LAYOUT_BREAK_SECTION);
       }
 
 //---------------------------------------------------------
@@ -131,6 +142,8 @@ const QString LayoutBreak::subtypeName() const
                   return "line";
             case LAYOUT_BREAK_PAGE:
                   return "page";
+            case LAYOUT_BREAK_SECTION:
+                  return "section";
             default:
                   return "??";
             }

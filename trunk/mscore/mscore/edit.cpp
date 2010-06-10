@@ -369,6 +369,7 @@ static int addRemoveTimeSigDialog()
 
 static void addCR(int tick, ChordRest* cr, Measure* ml)
       {
+// printf("addCR %d %s %s\n", tick, cr->name(), qPrintable(cr->duration().print()));
       Measure* m = ml;
       int mticks = m->ticks();
       for (;m; m = m->nextMeasure()) {
@@ -414,11 +415,11 @@ static void addCR(int tick, ChordRest* cr, Measure* ml)
                                     else {
                                           tie->setEndNote(note);
                                           note->setTieBack(tie);
-// c->score()->add(tie);
                                           ties[i] = 0;
                                           }
                                     }
                               c->setDurationType(d);
+                              c->setDuration(d.fraction());
                               Segment* s = m->getSegment(SegChordRest, tick);
                               s->add(c);
                               tick += c->ticks();
@@ -440,6 +441,7 @@ static void addCR(int tick, ChordRest* cr, Measure* ml)
                         foreach(const Duration& d, dList) {
                               ChordRest* cr1 = static_cast<ChordRest*>(cr->clone());
                               cr1->setDurationType(d);
+                              cr1->setDuration(d.fraction());
                               Segment* s = m->getSegment(SegChordRest, tick);
                               s->add(cr1);
                               tick += cr1->ticks();

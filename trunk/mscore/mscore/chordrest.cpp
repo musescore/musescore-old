@@ -59,6 +59,7 @@ DurationElement::DurationElement(const DurationElement& e)
    : Element(e)
       {
       _tuplet   = e._tuplet;
+      _duration = e._duration;
       }
 
 //---------------------------------------------------------
@@ -644,24 +645,32 @@ void DurationElement::convertTicks()
 void ChordRest::setDurationType(Duration::DurationType t)
       {
       _durationType.setType(t);
+//      if (_durationType.fraction().isValid())
+//            setDuration(_durationType.fraction());
       _ticks = -1;
       }
 
 void ChordRest::setDurationType(const QString& s)
       {
       _durationType.setType(s);
+//      if (_durationType.fraction().isValid())
+//            setDuration(_durationType.fraction());
       _ticks = -1;
       }
 
 void ChordRest::setDurationType(int ticks)
       {
       _durationType.setVal(ticks);
+//      if (_durationType.fraction().isValid())
+//            setDuration(_durationType.fraction());
       _ticks = -1;
       }
 
 void ChordRest::setDurationType(const Duration& v)
       {
       _durationType = v;
+//      if (_durationType.fraction().isValid())
+//            setDuration(_durationType.fraction());
       _ticks = -1;
       }
 
