@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -191,6 +191,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
       chord->setTuplet(tuplet);
       chord->setTrack(oc->track());
       chord->setDurationType(d);
+      chord->setDuration(d.fraction());
       chord->setParent(seg);
       undoAddElement(chord);
 
@@ -365,11 +366,12 @@ static int addRemoveTimeSigDialog()
 //    tick - insert position in measure list m
 //    cr   - Chord/Rest to insert
 //    m    - list of measures starting at tick 0
+//
+//    return true on success
 //---------------------------------------------------------
 
-static void addCR(int tick, ChordRest* cr, Measure* ml)
+static bool addCR(int tick, ChordRest* cr, Measure* ml)
       {
-// printf("addCR %d %s %s\n", tick, cr->name(), qPrintable(cr->duration().print()));
       Measure* m = ml;
       int mticks = m->ticks();
       for (;m; m = m->nextMeasure()) {
@@ -378,9 +380,14 @@ static void addCR(int tick, ChordRest* cr, Measure* ml)
             }
       if (m == 0) {
             printf("addCR: cannot insert cr: list too short\n");
-            return;
+            return false;
             }
       int etick = m->tick() + m->ticks();
+      Tuplet* tuplet = cr->tuplet();
+      while (tuplet && tuplet->tuplet())
+            tuplet = tuplet->tuplet();
+      if (tuplet && (tick + tuplet->ticks() > etick))
+            return false;
       if (tick + cr->ticks() > etick) {
             //
             // split cr
@@ -398,7 +405,7 @@ static void addCR(int tick, ChordRest* cr, Measure* ml)
                               rest = len;
                         QList<Duration> dList = toDurationList(rest, false);
                         if (dList.isEmpty())
-                              return;
+                              return true;
                         foreach(const Duration& d, dList) {
                               Chord* c = static_cast<Chord*>(chord->clone());
                               c->setSelected(false);
@@ -437,7 +444,7 @@ static void addCR(int tick, ChordRest* cr, Measure* ml)
                               rest = len;
                         QList<Duration> dList = toDurationList(rest, false);
                         if (dList.isEmpty())
-                              return;
+                              return true;
                         foreach(const Duration& d, dList) {
                               ChordRest* cr1 = static_cast<ChordRest*>(cr->clone());
                               cr1->setDurationType(d);
@@ -457,6 +464,7 @@ static void addCR(int tick, ChordRest* cr, Measure* ml)
             Segment* s = m->getSegment(SegChordRest, tick);
             s->add(cr);
             }
+      return true;
       }
 
 //---------------------------------------------------------
@@ -511,7 +519,11 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
                   ChordRest* ncr = static_cast<ChordRest*>(s->element(track)->clone());
                   tick = s->tick() - stick;
                   int ticks = ncr->ticks();
-                  addCR(tick, ncr, nfm);  // may delete ncr
+                  if (!addCR(tick, ncr, nfm)) {
+                        _undo->push(new InsertMeasures(fm, lm));
+                        // TODO: unwind creation of measures
+                        return false;
+                        }
                   tick += ticks;
                   }
             //
@@ -589,7 +601,26 @@ void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
             //
             // rewrite all measures up to the next time signature
             //
-            rewriteMeasures(fm, lm, ns);
+            if (!rewriteMeasures(fm, lm, ns)) {
+                  QMessageBox::warning(0,
+                     QT_TRANSLATE_NOOP("addRemoveTimeSig", "MuseScore"),
+                     QT_TRANSLATE_NOOP("addRemoveTimeSig", "cannot rewrite measures:\n"
+                     "tuplet would cross measure")
+                     );
+                  seg = new Segment(fm, SegTimeSig, tick);
+                  for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+                        TimeSig* nsig = new TimeSig(this, timeSigSubtype);
+                        nsig->setTrack(staffIdx * VOICES);
+                        seg->add(nsig);
+                        }
+                  undoAddElement(seg);
+                  Measure* m = fm;
+                  for (int i = 0; i < measures; ++i) {
+                        _undo->push(new ChangeMeasureTimesig(m, ns));
+                        m = m->nextMeasure();
+                        }
+                  return;
+                  }
 
             Measure* nfm = fm->prev() ? fm->prev()->nextMeasure() : firstMeasure();
             Segment* seg = new Segment(nfm, SegTimeSig, 0);
@@ -1545,14 +1576,10 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
       f.reduce();       //measure duration might not be reduced
       Fraction ratio(n, f.numerator());
       Fraction fr(1, f.denominator());
-//       while (qAbs(ratio.numerator() - ratio.denominator()) > qAbs(ratio.numerator() - ratio.denominator() * 2)) {
       while (ratio.numerator() >= ratio.denominator()*2) {
             ratio /= 2;
             fr    /= 2;
             }
-
-//      if (ratio == Fraction(1,1))   // this is not a tuplet
-//            return;
 
       Tuplet* tuplet = new Tuplet(_score);
       tuplet->setRatio(ratio);
@@ -1639,6 +1666,7 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
       cr->setTuplet(tuplet);
       cr->setTrack(track);
       cr->setDurationType(tuplet->baseLen());
+      cr->setDuration(tuplet->baseLen().fraction());
 
 printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
       qPrintable(tuplet->baseLen().name()), actualNotes, cr->ticks());
@@ -1660,6 +1688,7 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
             rest->setTuplet(tuplet);
             rest->setTrack(track);
             rest->setDurationType(tuplet->baseLen());
+            rest->setDuration(tuplet->baseLen().fraction());
             SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {

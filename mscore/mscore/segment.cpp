@@ -55,8 +55,6 @@ const char* Segment::subTypeName() const
             case SegTimeSigAnnounce:      return "Time Sig Precaution";
             case SegKeySigAnnounce:       return "Key Sig Precaution";
             }
-      abort();
-      sprintf(buffer, "<?%d>", subtype());
       return buffer;
       }
 
@@ -511,7 +509,6 @@ int Segment::tick() const
 
 void Segment::setTick(int t)
       {
-      printf("Segment %s setTick %d (%d)\n", subTypeName(), t, t - measure()->tick());
       _tick = t - measure()->tick();
       }
 

@@ -660,6 +660,7 @@ void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
       Duration d;
       d.setVal(len);
       chord->setDurationType(d);
+      chord->setDuration(d.fraction());
 
       chord->setStemDirection(UP);
       chord->setNoteType(type);
@@ -721,6 +722,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         Chord* chord = new Chord(this);
                         chord->setTrack(track);
                         chord->setDurationType(d);
+                        chord->setDuration(d.fraction());
                         chord->setStemDirection(stemDirection);
                         chord->add(note);
                         note->setPitch(pitch);
