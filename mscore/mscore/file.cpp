@@ -1190,8 +1190,6 @@ bool Score::read(QDomElement e)
       {
       _fileDivision = 384;   // for compatibility with old mscore files
 
-      AL::TimeSigMap _sigmap;
-
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "museScore")
                   continue;
@@ -1204,7 +1202,7 @@ bool Score::read(QDomElement e)
                   QString val(ee.text());
                   int i = val.toInt();
                   if (tag == "Staff")
-                        readStaff(ee, &_sigmap);
+                        readStaff(ee);
                   else if (tag == "KeySig") {
                         KeySig* ks = new KeySig(this);
                         ks->read(ee);
@@ -1225,7 +1223,7 @@ bool Score::read(QDomElement e)
                         st->setModified(true);
                         }
                   else if (tag == "siglist")
-                        _sigmap.read(ee, _fileDivision);
+                        _sigmap->read(ee, _fileDivision);
                   else if (tag == "tempolist")
                         _tempomap->read(ee, _fileDivision);
                   else if (tag == "programVersion") {

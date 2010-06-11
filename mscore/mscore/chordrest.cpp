@@ -39,6 +39,7 @@
 #include "arpeggio.h"
 #include "dynamics.h"
 #include "stafftext.h"
+#include "al/sig.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -304,15 +305,19 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
             }
       else if (tag == "durationType") {
             setDurationType(val);
-            if (durationType().type() != Duration::V_MEASURE)
+            if (durationType().type() != Duration::V_MEASURE) {
                   setDuration(durationType().fraction());
-            else
-                  printf("full measure rest\n");
+
+                  }
+            else {
+                  if (score()->mscVersion() < 115) {
+                        AL::SigEvent e = score()->sigmap()->timesig(score()->curTick);
+                        setDuration(e.timesig());
+                        }
+                  }
             }
-      else if (tag == "duration") {
+      else if (tag == "duration")
             setDuration(readFraction(e));
-            printf("read duration %s\n", qPrintable(duration().print()));
-            }
       else if (tag == "ticklen")      // obsolete (version < 1.12)
             _ticks = i;
       else if (tag == "dots")

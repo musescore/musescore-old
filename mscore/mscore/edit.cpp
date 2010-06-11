@@ -280,8 +280,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                   continue;
                   }
 
-            const AL::SigEvent ev(measure->len());
-            if (ev.nominalEqualActual()   // not in pickup measure
+            if ((measure->timesig() == measure->len())   // not in pickup measure
                && (measure->tick() == tick)
                && (measure->timesig() == f)
                && (f < Duration(Duration::V_BREVE).fraction())) {
@@ -520,7 +519,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
                   tick = s->tick() - stick;
                   int ticks = ncr->ticks();
                   if (!addCR(tick, ncr, nfm)) {
-                        _undo->push(new InsertMeasures(fm, lm));
+                        _undo->pop();
                         // TODO: unwind creation of measures
                         return false;
                         }

@@ -330,6 +330,7 @@ Score::Score(const Style& s)
       _pageOffset     = 0;
       _omr            = 0;
       _showOmr        = false;
+      _sigmap         = new AL::TimeSigMap();
       _tempomap       = new AL::TempoMap;
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
@@ -343,6 +344,7 @@ Score::~Score()
       delete _pageFormat;
       delete rights;
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
+      delete _sigmap;
       delete _tempomap;
       delete _repeatList;
       }
@@ -470,6 +472,8 @@ bool Score::read(QString name)
 
       startCmd();
       _needLayout = true;
+      layoutFlags |= LAYOUT_FIX_TICKS;
+
       endCmd();
 
       return true;
@@ -658,7 +662,7 @@ void Score::insertTime(int tick, int len)
       }
 
 //---------------------------------------------------------
-//   fixTicks
+//    fixTicks
 //---------------------------------------------------------
 
 /**
@@ -674,6 +678,10 @@ void Score::fixTicks()
       {
       int number = 0;
       int tick   = 0;
+      Measure* fm = firstMeasure();
+      _sigmap->clear();
+      Fraction sig(fm->timesig());
+      _sigmap->add(0, AL::SigEvent(sig,  number));
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE) {
                   mb->setTick(tick);
@@ -683,6 +691,10 @@ void Score::fixTicks()
             number += m->noOffset();
             if (m->no() != number)
                   m->setNo(number);
+            if (m->timesig() != sig) {
+                  sig = m->timesig();
+                  _sigmap->add(tick, AL::SigEvent(sig,  number));
+                  }
             if (m->sectionBreak())
                   number = 0;
             else if (m->irregular())      // dont count measure
@@ -1027,7 +1039,7 @@ int Score::staffIdx(const Part* part) const
 //   readStaff
 //---------------------------------------------------------
 
-void Score::readStaff(QDomElement e, AL::TimeSigMap* _sigmap)
+void Score::readStaff(QDomElement e)
       {
       MeasureBase* mb = first();
       int staff       = e.attribute("id", "1").toInt() - 1;
@@ -1045,8 +1057,8 @@ void Score::readStaff(QDomElement e, AL::TimeSigMap* _sigmap)
                         add(measure);
                         if (_mscVersion < 115) {
                               const AL::SigEvent& ev = _sigmap->timesig(measure->tick());
-                              measure->setLen(ev.fraction());
-                              measure->setTimesig(ev.getNominal());
+                              measure->setLen(ev.timesig());
+                              measure->setTimesig(ev.nominal());
                               }
                         else {
                               //
