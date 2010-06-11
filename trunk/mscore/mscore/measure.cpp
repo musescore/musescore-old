@@ -2559,7 +2559,6 @@ bool Measure::createEndBarLines()
                         bl = new BarLine(score());
                         bl->setTrack(staffIdx * VOICES);
                         Segment* seg = getSegment(SegEndBarLine, tick() + ticks());
-printf("create BarLine at %d\n", tick() + ticks());
                         seg->add(bl);
                         changed = true;
                         bl->layout();
