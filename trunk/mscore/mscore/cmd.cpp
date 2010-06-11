@@ -798,7 +798,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
 
 Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
       {
-// printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr->tick(), cr->track());
+printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr->tick(), cr->track());
       int track = cr->track();
       Measure* measure = cr->measure();
       setLayout(measure);
@@ -838,6 +838,7 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
                         }
                   }
             Fraction td(cr->duration());
+printf("remove %s\n", qPrintable(cr->duration().print()));
 
             Tuplet* ltuplet = cr->tuplet();
             if (cr->tuplet() != tuplet) {
@@ -869,7 +870,7 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
                   akkumulated = _sd;
                   Fraction rd = td - sd;
 
-// printf("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominator(), rd.numerator(), rd.denominator());
+printf("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominator(), rd.numerator(), rd.denominator());
 
                   QList<Duration> dList = toDurationList(rd, false);
                   if (dList.isEmpty())
