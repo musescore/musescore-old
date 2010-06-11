@@ -1601,8 +1601,6 @@ void Score::add(Element* el)
                   printf("remove invalid element <%s>\n", el->name());
                   delete el;
                   }
-            if (el->type() == PAGE)
-                  abort();
             }
       }
 

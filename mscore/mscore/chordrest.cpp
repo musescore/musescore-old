@@ -318,8 +318,10 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
             }
       else if (tag == "duration")
             setDuration(readFraction(e));
-      else if (tag == "ticklen")      // obsolete (version < 1.12)
-            _ticks = i;
+      else if (tag == "ticklen") {      // obsolete (version < 1.12)
+            setDuration(Fraction::fromTicks(i)); // _ticks = i;
+            setDurationType(Fraction::fromTicks(i));
+            }
       else if (tag == "dots")
             setDots(i);
       else if (tag == "move")

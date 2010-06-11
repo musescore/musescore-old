@@ -216,6 +216,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
 
 ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       {
+printf("addClone %s at %d %s\n", cr->name(), tick, qPrintable(d.fraction().print()));
       ChordRest* newcr;
       // change a RepeatMeasure() into an Rest()
       if (cr->type() == REPEAT_MEASURE)
@@ -223,6 +224,7 @@ ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       else
             newcr = static_cast<ChordRest*>(cr->clone());
       newcr->setDurationType(d);
+      newcr->setDuration(d.fraction());
       newcr->setTuplet(cr->tuplet());
       newcr->setSelected(false);
 
@@ -498,6 +500,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
             if (i == 0)
                   nfm = m;
             }
+printf("move %d measures into %d\n", measures, nm);
       //
       // rewrite notes from measure list fm into
       // measure list nfm

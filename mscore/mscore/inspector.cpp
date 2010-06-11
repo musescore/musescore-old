@@ -663,7 +663,6 @@ void MeasureView::setElement(Element* e)
 
       mb.segments->setValue(m->size());
       mb.staves->setValue(m->staffList()->size());
-//      mb.beams->setValue(m->beams()->size());
       mb.tuplets->setValue(m->tuplets()->size());
       mb.measureNo->setValue(m->no());
       mb.noOffset->setValue(m->noOffset());
@@ -680,6 +679,8 @@ void MeasureView::setElement(Element* e)
       mb.endBarLineGenerated->setChecked(m->endBarLineGenerated());
       mb.endBarLineVisible->setChecked(m->endBarLineVisible());
       mb.multiMeasure->setValue(m->multiMeasure());
+      mb.timesig->setText(m->timesig().print());
+      mb.len->setText(m->len().print());
 
       mb.sel->clear();
       foreach(const Element* e, *m->el()) {
