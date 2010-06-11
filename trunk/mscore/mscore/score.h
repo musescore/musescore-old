@@ -234,6 +234,7 @@ class Score : public QObject {
       QList<Element*> _gel;               // global elements: Slur, SLine
       QList<Beam*>    _beams;
       RepeatList* _repeatList;
+      AL::TimeSigMap* _sigmap;
       AL::TempoMap* _tempomap;
 
       InputState _is;
@@ -410,7 +411,7 @@ class Score : public QObject {
       void removeStaff(Staff*);
       void addMeasure(MeasureBase*);
       void appendMeasures(int, int);
-      void readStaff(QDomElement, AL::TimeSigMap*);
+      void readStaff(QDomElement);
 
       void cmdInsertPart(Part*, int);
       void cmdRemovePart(Part*);
@@ -697,7 +698,9 @@ class Score : public QObject {
       void updateChannel();
       void cmdTransposeStaff(int staffIdx, Interval, bool useDoubleSharpsFlats);
       void cmdConcertPitchChanged(bool, bool useSharpsFlats);
-      AL::TempoMap* tempomap() const { return _tempomap; }
+
+      AL::TempoMap* tempomap() const                 { return _tempomap; }
+      AL::TimeSigMap* sigmap() const                 { return _sigmap; }
 
       double swingRatio()                            { return _swingRatio;}
       void setSwingRatio(double d)                   { _swingRatio = d;}

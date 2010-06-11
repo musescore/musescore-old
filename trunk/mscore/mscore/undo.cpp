@@ -190,6 +190,20 @@ void UndoStack::push(UndoCommand* cmd)
       }
 
 //---------------------------------------------------------
+//   pop
+//---------------------------------------------------------
+
+void UndoStack::pop()
+      {
+      if (!curCmd) {
+            printf("UndoStack:pop(): no active command\n");
+            return;
+            }
+      UndoCommand* cmd = curCmd->removeChild();
+      cmd->undo();
+      }
+
+//---------------------------------------------------------
 //   setClean
 //---------------------------------------------------------
 

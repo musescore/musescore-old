@@ -77,8 +77,9 @@ class UndoCommand {
       virtual ~UndoCommand();
       virtual void undo();
       virtual void redo();
-      void appendChild(UndoCommand* cmd) { childList.append(cmd);   }
-      int childCount() const             { return childList.size(); }
+      void appendChild(UndoCommand* cmd) { childList.append(cmd);       }
+      UndoCommand* removeChild()         { return childList.takeLast(); }
+      int childCount() const             { return childList.size();     }
       void unwind();
       };
 
@@ -107,6 +108,7 @@ class UndoStack : public QObject {
       void beginMacro();
       void endMacro(bool rollback);
       void push(UndoCommand*);
+      void pop();
       void setClean();
       bool canUndo() const          { return curIdx > 0;           }
       bool canRedo() const          { return curIdx < list.size(); }
