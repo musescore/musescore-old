@@ -572,6 +572,9 @@ void Score::putNote(const QPointF& pos, bool replace)
                   return;
             // voice         = ds->voice(pitch);
             headGroup     = ds->noteHead(pitch);
+            if(headGroup < 0){
+                  return;
+                  }
             stemDirection = ds->stemDirection(pitch);
             }
 
