@@ -46,12 +46,14 @@ namespace Bww {
   public:
     Lexer(QIODevice *inDevice);
     void getSym();
-    Symbol symType();
-    QString symValue();
+    Symbol symType() const;
+    QString symValue() const;
+    int symLineNumber() const { return lineNumber; }
   private:
     void categorizeWord(QString word);
     QTextStream in;             ///< Input stream
-    QString line;               ///< Unprocessed part of the current line
+    QString line;               ///< The current line
+    int lineNumber;             ///< The current line number (zero-based)
     QStringList list;           ///< Unprocessed words
     Symbol type;                ///< Last symbol type
     QString value;              ///< Last symbol value

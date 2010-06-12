@@ -39,7 +39,9 @@ namespace Bww {
    */
 
   Lexer::Lexer(QIODevice *inDevice)
-    : in(inDevice), value(NONE)
+    : in(inDevice),
+    lineNumber(-1),
+    value(NONE)
   {
     qDebug() << "Lexer::Lexer() begin";
 
@@ -68,6 +70,7 @@ namespace Bww {
     do
     {
       line = in.readLine();
+      ++lineNumber;
       if (line.isNull())
       {
         // end of file
@@ -124,7 +127,7 @@ namespace Bww {
    Return the current symbols type.
    */
 
-  Symbol Lexer::symType()
+  Symbol Lexer::symType() const
   {
     return type;
   }
@@ -133,7 +136,7 @@ namespace Bww {
    Return the current symbols value.
    */
 
-  QString Lexer::symValue()
+  QString Lexer::symValue() const
   {
     return value;
   }
@@ -206,10 +209,7 @@ namespace Bww {
     else if (rTaorluath.exactMatch(word))
       type = TAORLUATH;
     else
-    {
       type = UNKNOWN;
-      value = "";
-    }
 
     qDebug()
         << " type: " << qPrintable(symbolToString(type))

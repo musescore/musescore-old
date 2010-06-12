@@ -1,3 +1,5 @@
+12.jun (lv)
+      - #5637 support reading bww files: error reporting
 10.jun (ws)
       - insert/delete time signatures: split notes
       - new: section break
