@@ -199,7 +199,7 @@ namespace Bww {
 
     // read the actual music
     if (lex.symType() != CLEF)
-      errorHandler("clef (&) expected");
+      errorHandler("clef ('&') expected");
     while (lex.symType() != NONE)
     {
       if (lex.symType() == CLEF)
@@ -225,6 +225,11 @@ namespace Bww {
                || lex.symType() == GRIP
                || lex.symType() == TAORLUATH)
         parseGraces();
+      else if (lex.symType() == UNKNOWN)
+      {
+        errorHandler("unknown symbol '" + lex.symValue() + "'");
+        lex.getSym();
+      }
       else
       {
         ; // others not implemented yet: silently ignored
@@ -242,7 +247,11 @@ namespace Bww {
 
   void Parser::errorHandler(QString s)
   {
-    std::cerr << "Parse error: " << qPrintable(s) << std::endl;
+    std::cerr << "Parse error line "
+        << lex.symLineNumber() + 1
+        << ": "
+        << qPrintable(s)
+        << std::endl;
   }
 
   /**
