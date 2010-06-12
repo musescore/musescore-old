@@ -914,7 +914,9 @@ void MuseScore::helpBrowser()
                 }
             }
       QString p = mscoreHelp.filePath();
+#ifndef __MINGW32__
       p = p.replace(" ", "%20");    // HACK: why does'nt fromLocalFile() do this?
+#endif
       QUrl url(QUrl::fromLocalFile(p));
       QDesktopServices::openUrl(url);
       }
