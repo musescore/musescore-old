@@ -58,7 +58,10 @@ void Score::updateChannel()
             for (int i = 0; i < VOICES; ++i)
                   s->channelList(i)->clear();
             }
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+      Measure* fm = firstMeasure();
+      if (!fm)
+            return;
+      for (Measure* m = fm; m; m = m->nextMeasure()) {
             foreach(const Element* e, *m->el()) {
                   if (e->type() != STAFF_TEXT)
                         continue;
@@ -75,7 +78,7 @@ void Score::updateChannel()
                   }
             }
 
-      for (Segment* s = firstMeasure()->first(SegChordRest | SegGrace); s; s = s->next1(SegChordRest | SegGrace)) {
+      for (Segment* s = fm->first(SegChordRest | SegGrace); s; s = s->next1(SegChordRest | SegGrace)) {
             foreach(Staff* st, _staves) {
                   int strack = st->idx() * VOICES;
                   int etrack = strack + VOICES;

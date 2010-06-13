@@ -211,6 +211,11 @@ void EditStyle::getValues()
       lstyle.set(ST_FixMeasureNumbers,       fixNumberMeasures->value());
       lstyle.set(ST_FixMeasureWidth,         fixMeasureWidth->isChecked());
 
+      lstyle.set(ST_SlurEndWidth,            Spatium(slurEndLineWidth->value()));
+      lstyle.set(ST_SlurMidWidth,            Spatium(slurMidLineWidth->value()));
+      lstyle.set(ST_SlurDottedWidth,         Spatium(slurDottedLineWidth->value()));
+      lstyle.set(ST_SlurBow,                 Spatium(slurBow->value()));
+
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
             lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
@@ -341,6 +346,11 @@ void EditStyle::setValues()
 
       fixNumberMeasures->setValue(lstyle[ST_FixMeasureNumbers].toInt());
       fixMeasureWidth->setChecked(lstyle[ST_FixMeasureWidth].toBool());
+
+      slurEndLineWidth->setValue(lstyle[ST_SlurEndWidth].toSpatium().val());
+      slurMidLineWidth->setValue(lstyle[ST_SlurMidWidth].toSpatium().val());
+      slurDottedLineWidth->setValue(lstyle[ST_SlurDottedWidth].toSpatium().val());
+      slurBow->setValue(lstyle[ST_SlurBow].toSpatium().val());
       }
 
 //---------------------------------------------------------

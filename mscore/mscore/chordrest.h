@@ -101,8 +101,11 @@ class ChordRest : public DurationElement {
       void addSlurBack(Slur*);
       void removeSlurFor(Slur*);
       void removeSlurBack(Slur*);
-      const QList<Slur*> slurFor() const        { return _slurFor; }
-      const QList<Slur*> slurBack() const       { return _slurBack; }
+      const QList<Slur*>& slurFor() const       { return _slurFor;  }
+      const QList<Slur*>& slurBack() const      { return _slurBack; }
+
+      void setSlurFor(const QList<Slur*>& s)    { _slurFor = s;  }
+      void setSlurBack(const QList<Slur*>& s)   { _slurBack = s;  }
 
       void layoutArticulations();
       Spatium extraLeadingSpace() const         { return _extraLeadingSpace;  }
@@ -116,8 +119,8 @@ class ChordRest : public DurationElement {
       void setDurationType(const QString& s);
       void setDurationType(int ticks);
       void setDurationType(const Duration& v);
-      void setDots(int n)                            { _durationType.setDots(n); }
-      int dots() const                               { return _durationType.dots(); }
+      void setDots(int n)                       { _durationType.setDots(n); }
+      int dots() const                          { return _durationType.dots(); }
 
       virtual void setTrack(int val);
       virtual int tick() const;

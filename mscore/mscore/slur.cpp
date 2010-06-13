@@ -70,7 +70,7 @@ void SlurSegment::updatePath()
       for (int i = 0; i < 4; ++i)
             pp[i] = ups[i].p + ups[i].off * _spatium;
       path = QPainterPath();
-      QPointF t(0.0, spatium() * .08);    // thickness of slur
+      QPointF t(0.0, score()->styleS(ST_SlurMidWidth).val() * _spatium);    // thickness of slur
 
       path.moveTo(pp[0]);
       path.cubicTo(pp[1]-t, pp[2]-t, pp[3]);
@@ -97,11 +97,17 @@ void SlurSegment::draw(QPainter& p, ScoreView*) const
       {
       if (slurTie()->lineType() == 0) {
             p.setBrush(curColor());
+            QPen pen(p.pen());
+            pen.setCapStyle(Qt::RoundCap);
+            pen.setJoinStyle(Qt::RoundJoin);
+            qreal lw = point(score()->styleS(ST_SlurEndWidth));
+            pen.setWidthF(lw);
+            p.setPen(pen);
             }
       else {
             p.setBrush(QBrush());
             QPen pen(p.pen());
-            qreal lw = point(score()->styleS(ST_barWidth));
+            qreal lw = point(score()->styleS(ST_SlurDottedWidth));
             pen.setWidthF(lw);
             pen.setStyle(Qt::DotLine);
             p.setPen(pen);
@@ -362,7 +368,7 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
             return;
             }
 
-      qreal d  = xdelta / 4.0;
+      qreal d  = xdelta / 6.0;
       qreal x1 = x0 + d;
       qreal x2 = x3 - d;
 
@@ -875,6 +881,7 @@ void Slur::layout()
                   }
             s->setLineSegmentType(SEGMENT_SINGLE);
             qreal bow = up ? 1.5 * -_spatium : 1.5 * _spatium;
+
             s->layout(QPointF(0, 0), QPointF(_len, 0), bow);
             return;
             }
@@ -972,7 +979,10 @@ void Slur::layout()
                   }
             }
 
-      qreal bow = up ? 2.0 * -_spatium : 2.0 * _spatium;
+      qreal bow = point(score()->styleS(ST_SlurBow));
+      if (up)
+            bow = -bow;
+
       for (int i = 0; is != sl->end(); ++i, ++is) {
             System* system  = *is;
             SlurSegment* segment = segments[i];

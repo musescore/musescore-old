@@ -192,8 +192,13 @@ StyleType styleTypes[] = {
       StyleType("ArpeggioNoteDistance",    ST_SPATIUM),
       StyleType("ArpeggioLineWidth",       ST_SPATIUM),
       StyleType("ArpeggioHookLen",         ST_SPATIUM),
-      StyleType("FixMeasureNumbers",     ST_INT),
-      StyleType("FixMeasureWidth",       ST_BOOL)
+      StyleType("FixMeasureNumbers",       ST_INT),
+      StyleType("FixMeasureWidth",         ST_BOOL),
+
+      StyleType("slurEndWidth",            ST_SPATIUM),
+      StyleType("slurMidWidth",            ST_SPATIUM),
+      StyleType("slurDottedWidth",         ST_SPATIUM),
+      StyleType("slurBow",                 ST_SPATIUM)
       };
 
 //---------------------------------------------------------
@@ -465,7 +470,12 @@ Style::Style()
             StyleVal(ST_ArpeggioLineWidth, Spatium(.18)),
             StyleVal(ST_ArpeggioHookLen, Spatium(.8)),
             StyleVal(ST_FixMeasureNumbers, 0),
-            StyleVal(ST_FixMeasureWidth, false)
+            StyleVal(ST_FixMeasureWidth, false),
+
+            StyleVal(ST_SlurEndWidth, Spatium(.05)),
+            StyleVal(ST_SlurMidWidth, Spatium(.08)),
+            StyleVal(ST_SlurDottedWidth, Spatium(.1)),
+            StyleVal(ST_SlurBow, Spatium(1.6))
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)
