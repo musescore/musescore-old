@@ -407,9 +407,23 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                         QList<Duration> dList = toDurationList(rest, false);
                         if (dList.isEmpty())
                               return true;
-                        foreach(const Duration& d, dList) {
+                        int n = dList.size();
+                        for (int i = 0; i < n; ++i) {
+                              const Duration& d = dList[i];
                               Chord* c = static_cast<Chord*>(chord->clone());
                               c->setSelected(false);
+                              if (i == 0) {
+                                    foreach(Slur* s, chord->slurBack()) {
+                                          c->addSlurBack(s);
+printf("addSlurBack\n");
+                                          }
+                                    }
+                              if (i == n-1) {
+                                    foreach(Slur* s, chord->slurFor()) {
+                                          c->addSlurFor(s);
+printf("addSlurFor\n");
+                                          }
+                                    }
                               for (int i = 0; i < notes; ++i) {
                                     Tie* tie = ties[i];
                                     Note* note = c->notes().at(i);
@@ -500,7 +514,6 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
             if (i == 0)
                   nfm = m;
             }
-printf("move %d measures into %d\n", measures, nm);
       //
       // rewrite notes from measure list fm into
       // measure list nfm
@@ -518,7 +531,11 @@ printf("move %d measures into %d\n", measures, nm);
                         break;
                   if (s->subtype() != SegChordRest || s->element(track) == 0)
                         continue;
-                  ChordRest* ncr = static_cast<ChordRest*>(s->element(track)->clone());
+                  ChordRest* cr = static_cast<ChordRest*>(s->element(track));
+                  ChordRest* ncr = static_cast<ChordRest*>(cr->clone());
+                  ncr->setSlurFor(cr->slurFor());
+                  ncr->setSlurBack(cr->slurBack());
+
                   tick = s->tick() - stick;
                   int ticks = ncr->ticks();
                   if (!addCR(tick, ncr, nfm)) {

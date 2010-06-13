@@ -42,6 +42,7 @@ TempoText::TempoText(Score* s)
 void TempoText::write(Xml& xml) const
       {
       xml.stag("Tempo");
+      xml.tag("tick", tick());
       xml.tag("tempo", _tempo);
       Text::writeProperties(xml);
       xml.etag();
@@ -56,10 +57,11 @@ void TempoText::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "tempo"){
-                  double tpo = e.text().toDouble();
-                  setTempo(tpo);
+                  _tempo = e.text().toDouble();
                   //Don't need to add to tempo since tempo map is read at the beginning of the file.
-            }
+                  }
+            else if (tag == "tick")
+                  setTick(e.text().toInt());
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -90,6 +92,24 @@ void TempoText::propertyAction(ScoreView* viewer, const QString& s)
             }
       else
             Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
+//   setTick
+//---------------------------------------------------------
+
+void TempoText::setTick(int val)
+      {
+      _tick = val;
+      }
+
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+
+int TempoText::tick() const
+      {
+      return _tick;
       }
 
 //---------------------------------------------------------
@@ -130,33 +150,3 @@ void TempoProperties::saveValues()
       score->undoChangeElement(tempoText, ntt);
       }
 
-//---------------------------------------------------------
-//   dragAnchor
-//---------------------------------------------------------
-
-#if 0
-QLineF TempoText::dragAnchor() const
-      {
-      Measure* m      = measure();
-      System*  system = m->system();
-      double yp       = system->y(); // system->staff(staffIdx())->y() + system->y();
-      double xp       = m->tick2pos(tick()) + m->canvasPos().x();
-      QPointF cp      = canvasPos()  + QPointF(0.0, baseLine());
-      return QLineF(cp, QPointF(xp, yp));
-      }
-
-//---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void TempoText::layout(ScoreLayout* l)
-      {
-      Measure* m = measure();
-      if (m == 0 || tick() == -1)
-            return;
-      Text::layout(l);
-      double y   = 0;  // track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
-      double x   = m->tick2pos(tick());
-      setPos(ipos() + QPointF(x, y));
-      }
-#endif

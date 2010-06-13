@@ -288,6 +288,11 @@ enum StyleIdx {
       ST_FixMeasureNumbers,
       ST_FixMeasureWidth,
 
+      ST_SlurEndWidth,
+      ST_SlurMidWidth,
+      ST_SlurDottedWidth,
+      ST_SlurBow,
+
       ST_STYLES
       };
 

@@ -43,7 +43,8 @@ class TempoText : public Text  {
       Measure* measure() const { return (Measure*)parent(); }
       double tempo() const     { return _tempo; }
       void setTempo(double v)  { _tempo = v;  }
-      void setTick(int val)    { _tick = val; }
+      void setTick(int val);
+      int tick() const;
       };
 
 //---------------------------------------------------------

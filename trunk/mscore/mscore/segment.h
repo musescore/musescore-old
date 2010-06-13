@@ -113,7 +113,9 @@ class Segment : public Element {
 
       ChordRest* nextChordRest(int track, bool backwards = false) const;
 
-      Element* element(int track) const { return _elist.value(track);  }
+      Element* element(int track) const   { return _elist.value(track);  }
+      const QList<Element*> elist() const { return _elist; }
+
       void removeElement(int track);
       void setElement(int track, Element* el);
       LyricsList* lyricsList(int staffIdx)             { return &_lyrics[staffIdx];  }

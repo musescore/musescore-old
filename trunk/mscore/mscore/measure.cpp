@@ -2260,9 +2260,9 @@ void Measure::read(QDomElement e, int staffIdx)
                   }
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
+                  t->setTick(score()->curTick);
                   t->setTrack(-1);
                   t->read(e);
-                  t->setTick(score()->curTick);
                   add(t);
                   }
             else if (tag == "StaffText") {

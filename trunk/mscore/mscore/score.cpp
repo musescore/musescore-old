@@ -233,6 +233,26 @@ void MeasureBaseList::insert(MeasureBase* fm, MeasureBase* lm)
             nm->setPrev(lm);
       else
             _last = lm;
+      for (MeasureBase* mb = fm;;) {
+            if (mb->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(mb);
+                  SegmentTypes st = SegChordRest | SegGrace;
+                  for (Segment* s = m->first(st); s; s = s->next(st)) {
+                        foreach(Element* e, s->elist()) {
+                              if (e) {
+                                    ChordRest* cr = static_cast<ChordRest*>(e);
+                                    foreach(Slur* s, cr->slurFor())
+                                          s->setStartElement(cr);
+                                    foreach(Slur* s, cr->slurBack())
+                                          s->setEndElement(cr);
+                                    }
+                              }
+                        }
+                  }
+            if (mb == lm)
+                  break;
+            mb = mb->next();
+            }
       }
 
 //---------------------------------------------------------
@@ -678,8 +698,10 @@ void Score::fixTicks()
       {
       int number = 0;
       int tick   = 0;
-      Measure* fm = firstMeasure();
       _sigmap->clear();
+      Measure* fm = firstMeasure();
+      if (fm == 0)
+            return;
       Fraction sig(fm->timesig());
       _sigmap->add(0, AL::SigEvent(sig,  number));
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
