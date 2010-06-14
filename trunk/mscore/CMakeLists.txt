@@ -38,6 +38,7 @@ set(AEOLUS TRUE)                          # pipe organ synthesizer
 set(OMR FALSE)                            # optical music recognition
 
 if (APPLE OR MINGW)
+      set(GCC_VISIBILITY FALSE)           # warnings if not, with gcc4.4 from qt
       set(SF_COMPRESSOR FALSE)
       set(AEOLUS FALSE)
       set(OMR FALSE)
