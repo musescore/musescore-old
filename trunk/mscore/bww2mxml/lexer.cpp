@@ -160,6 +160,7 @@ namespace Bww {
     QRegExp rBar("!|!t|!!t");
     QRegExp rNote("(LG|LA|[B-F]|HG|HA)[lr]?_(1|2|4|8|16|32)");
     QRegExp rTie("\\^t[es]");
+    QRegExp rTriplet("\\^3[es]");
     QRegExp rDot("'([hl][ag]|[b-f])");
     QRegExp rSingleGrace("[a-gt]g");
     QRegExp rStrike("str([hl][ag]|[b-f])");
@@ -186,6 +187,8 @@ namespace Bww {
       type = NOTE;
     else if (rTie.exactMatch(word))
       type = TIE;
+    else if (rTriplet.exactMatch(word))
+      type = TRIPLET;
     else if (rDot.exactMatch(word))
       type = DOT;
     else if (rSingleGrace.exactMatch(word))

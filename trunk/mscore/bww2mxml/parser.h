@@ -52,6 +52,7 @@ namespace Bww {
     void parseNote();
     void parseGraces();
     void parsePart();
+    void parseSeqNotes();
     void parseString();
     void parseTempo();
     Lexer& lex;                         ///< The lexer
