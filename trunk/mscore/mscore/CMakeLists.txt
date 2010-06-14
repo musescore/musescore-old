@@ -92,7 +92,7 @@ QT4_WRAP_UI (ui_headers
 QT4_WRAP_CPP (mocs
       scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h inspector.h
       mscore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
-      preferences.h measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
+      measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h
       voltaproperties.h chordproperties.h restproperties.h
@@ -104,6 +104,7 @@ QT4_WRAP_CPP (mocs
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
       pianoscene.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h stafftype.h
+      prefsdialog.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)

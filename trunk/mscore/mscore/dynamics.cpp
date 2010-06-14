@@ -111,6 +111,8 @@ void Dynamic::write(Xml& xml) const
             xml.tag("velocity", _velocity);
       if (_dynType != DYNAMIC_PART)
             xml.tag("dynType", _dynType);
+      xml.tag("tick", tick());
+      score()->curTick = tick();
       Text::writeProperties(xml, subtype() == 0);
       xml.etag();
       }
@@ -304,6 +306,24 @@ void Dynamic::propertyAction(ScoreView* viewer, const QString& s)
             }
       else
             Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
+//   setTick
+//---------------------------------------------------------
+
+void Dynamic::setTick(int val)
+      {
+      _tick = val - measure()->tick();
+      }
+
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+
+int Dynamic::tick() const
+      {
+      return _tick + (measure() ? measure()->tick() : 0);
       }
 
 //---------------------------------------------------------

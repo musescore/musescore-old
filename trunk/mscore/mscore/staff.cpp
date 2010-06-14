@@ -161,17 +161,19 @@ QString Staff::trackName() const
 
 Staff::Staff(Score* s, Part* p, int rs)
       {
-      _score        = s;
-      _rstaff       = rs;
-      _part         = p;
-      _clefList     = new ClefList;
-      _keymap       = new KeyList;
-      (*_keymap)[0] = 0;                  // default to C major
-      _staffType    = _score->staffTypes()[PITCHED_STAFF_TYPE];
-      _show         = true;
-      _small        = false;
-      _invisible    = false;
-      _barLineSpan  = 1;
+      _score          = s;
+      _rstaff         = rs;
+      _part           = p;
+      _clefList       = new ClefList;
+      _keymap         = new KeyList;
+      (*_keymap)[0]   = 0;                  // default to C major
+      _staffType      = _score->staffTypes()[PITCHED_STAFF_TYPE];
+      _show           = true;
+      _small          = false;
+      _invisible      = false;
+      _barLineSpan    = 1;
+      _updateClefList = false;
+      _updateKeymap   = false;
       }
 
 //---------------------------------------------------------

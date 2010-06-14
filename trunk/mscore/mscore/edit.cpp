@@ -413,16 +413,12 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                               Chord* c = static_cast<Chord*>(chord->clone());
                               c->setSelected(false);
                               if (i == 0) {
-                                    foreach(Slur* s, chord->slurBack()) {
+                                    foreach(Slur* s, chord->slurBack())
                                           c->addSlurBack(s);
-printf("addSlurBack\n");
-                                          }
                                     }
                               if (i == n-1) {
-                                    foreach(Slur* s, chord->slurFor()) {
+                                    foreach(Slur* s, chord->slurFor())
                                           c->addSlurFor(s);
-printf("addSlurFor\n");
-                                          }
                                     }
                               for (int i = 0; i < notes; ++i) {
                                     Tie* tie = ties[i];
@@ -492,11 +488,14 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       {
       _undo->push(new RemoveMeasures(fm, lm));
       int measures = 1;
-      for (Measure* m = fm; m != lm; m = m->nextMeasure())
+      Fraction k;
+      Measure* m;
+      for (m = fm; m != lm; m = m->nextMeasure()) {
+            k += m->len();
             ++measures;
-
-      Fraction os(fm->timesig());
-      Fraction k = (os * measures) / ns;
+            }
+      k += m->len();
+      k /= ns;
       int nm = (k.numerator() + k.denominator() - 1)/ k.denominator();
       Measure* nfm = 0;
       Measure* nlm = 0;
@@ -581,6 +580,37 @@ static void warnTupletCrossing()
       }
 
 //---------------------------------------------------------
+//   rewriteMeasures
+//    rewrite all measures up to the next time signature
+//---------------------------------------------------------
+
+void Score::rewriteMeasures(Measure* fm, const Fraction& ns)
+      {
+      Measure* lm  = fm;
+      Measure* fm1 = fm;
+      for (MeasureBase* m = fm; ; m = m->next()) {
+            if (!m || (m->type() != MEASURE) || static_cast<Measure*>(m)->first(SegTimeSig)) {
+                  if (!rewriteMeasures(fm1, lm, ns)) {
+                        warnTupletCrossing();
+                        for (Measure* m = fm1; m; m = m->nextMeasure()) {
+                              if (m->first(SegTimeSig))
+                                    break;
+                              _undo->push(new ChangeMeasureTimesig(m, ns));
+                              }
+                        return;
+                        }
+                  if (!m || m->type() == MEASURE)
+                        break;
+                  m   = m->next();
+                  fm1 = static_cast<Measure*>(m);
+                  if (fm1 == 0 || lm->first(SegTimeSig))
+                        break;
+                  }
+            lm  = static_cast<Measure*>(m);
+            }
+      }
+
+//---------------------------------------------------------
 //   cmdAddTimeSig
 //
 //    Add or change time signature at measure in response
@@ -595,9 +625,16 @@ void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
       Fraction ns(TimeSig::getSig(timeSigSubtype));
 
       int tick = fm->tick();
-      Segment* seg = fm->findSegment(SegTimeSig, tick);
-      if (seg && seg->element(0) && seg->element(0)->subtype() == timeSigSubtype)
-            return;
+      Segment* seg = fm->first(SegTimeSig);
+      if (seg && seg->element(0)) {
+            TimeSig* ots = static_cast<TimeSig*>(seg->element(0));
+            if ((ots->subtype() == timeSigSubtype)
+               && (ns == fm->timesig())
+               && (ns == fm->len())) {
+                  printf("time sig aready there\n");
+                  return;
+                  }
+            }
       int n = addRemoveTimeSigDialog();
       if (n == -1)
             return;
@@ -626,40 +663,9 @@ void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
             //
             // rewrite all measures up to the next time signature
             //
-            Measure* lm  = fm;
-            Measure* fm1 = fm;
-            for (MeasureBase* m = fm; m; m = m->next()) {
-                  if ((m->type() != MEASURE) || static_cast<Measure*>(m)->first(SegTimeSig)) {
-                        if (!rewriteMeasures(fm1, lm, ns)) {
-                              warnTupletCrossing();
-                              if (fm == fm1) {
-                                    seg = new Segment(fm, SegTimeSig, tick);
-                                    for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-                                          TimeSig* nsig = new TimeSig(this, timeSigSubtype);
-                                          nsig->setTrack(staffIdx * VOICES);
-                                          seg->add(nsig);
-                                          }
-                                    }
-                              undoAddElement(seg);
-                              for (Measure* m = fm1; m; m = m->nextMeasure()) {
-                                    if (m->first(SegTimeSig))
-                                          break;
-                                    _undo->push(new ChangeMeasureTimesig(m, ns));
-                                    }
-                              return;
-                              }
-                        if (m->type() == MEASURE)
-                              break;
-                        m   = m->next();
-                        fm1 = static_cast<Measure*>(m);
-                        lm  = static_cast<Measure*>(m);
-                        if (lm == 0 || lm->first(SegTimeSig))
-                              break;
-                        }
-                  }
-
+            rewriteMeasures(fm, ns);
             Measure* nfm = fm->prev() ? fm->prev()->nextMeasure() : firstMeasure();
-            Segment* seg = new Segment(nfm, SegTimeSig, 0);
+            Segment* seg = new Segment(nfm, SegTimeSig, nfm->tick());
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   TimeSig* nsig = new TimeSig(this, timeSigSubtype);
                   nsig->setTrack(staffIdx * VOICES);
@@ -680,13 +686,18 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
             return;
 
       undoRemoveElement(ts->segment());
+
       Measure* fm = ts->measure();
       Measure* lm = fm;
       Measure* pm = fm->prevMeasure();
       Fraction ns(pm ? pm->timesig() : Fraction(4,4));
-      if (n == 0 || !rewriteMeasures(fm, lm, ns)) {
-            if (n)
-                  warnTupletCrossing();
+      for (Measure* m = lm; m; m = m->nextMeasure()) {
+            if (m->first(SegTimeSig))
+                  break;
+            lm = m;
+            }
+
+      if (n == 0) {
             //
             // Set time signature of all measures up to next
             // time signature. Do not touch measure contents.
@@ -696,6 +707,9 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
                         break;
                   _undo->push(new ChangeMeasureTimesig(m, ns));
                   }
+            }
+      else {
+            rewriteMeasures(fm, ns);
             }
       }
 

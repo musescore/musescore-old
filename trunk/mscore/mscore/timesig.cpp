@@ -124,15 +124,10 @@ bool TimeSig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 Element* TimeSig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       if (e->type() == TIMESIG) {
-            TimeSig* ts = static_cast<TimeSig*>(e);
-            int stype   = ts->subtype();
-            int st = subtype();
-            if (st != stype) {
-                  // change timesig applies to all staves, can't simply set subtype
-                  // for this one only
-                  score()->cmdAddTimeSig(measure(), ts);
-                  return 0;
-                  }
+            // change timesig applies to all staves, can't simply set subtype
+            // for this one only
+            score()->cmdAddTimeSig(measure(), static_cast<TimeSig*>(e));
+            return 0;
             }
       delete e;
       return 0;

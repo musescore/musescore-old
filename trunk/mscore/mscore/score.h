@@ -381,6 +381,7 @@ class Score : public QObject {
       void checkTuplets();
       void checkScore();
       bool rewriteMeasures(Measure* fm, Measure* lm, const Fraction&);
+      void rewriteMeasures(Measure* fm, const Fraction& ns);
 
    signals:
       void selectionChanged(int);

@@ -22,6 +22,7 @@
 #include "tempotext.h"
 #include "al/tempo.h"
 #include "system.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   TempoText
@@ -43,6 +44,7 @@ void TempoText::write(Xml& xml) const
       {
       xml.stag("Tempo");
       xml.tag("tick", tick());
+      score()->curTick = tick();
       xml.tag("tempo", _tempo);
       Text::writeProperties(xml);
       xml.etag();
@@ -100,7 +102,7 @@ void TempoText::propertyAction(ScoreView* viewer, const QString& s)
 
 void TempoText::setTick(int val)
       {
-      _tick = val;
+      _tick = val - measure()->tick();
       }
 
 //---------------------------------------------------------
@@ -109,7 +111,7 @@ void TempoText::setTick(int val)
 
 int TempoText::tick() const
       {
-      return _tick;
+      return _tick + (measure() ? measure()->tick() : 0);
       }
 
 //---------------------------------------------------------

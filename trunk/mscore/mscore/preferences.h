@@ -21,7 +21,6 @@
 #ifndef __PREFERENCES_H__
 #define __PREFERENCES_H__
 
-#include "ui_prefsdialog.h"
 #include "globals.h"
 
 struct Shortcut;
@@ -148,52 +147,6 @@ class ShortcutItem : public QTreeWidgetItem {
 
    public:
       ShortcutItem() : QTreeWidgetItem() {}
-      };
-
-//---------------------------------------------------------
-//   PreferenceDialog
-//---------------------------------------------------------
-
-class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
-      Q_OBJECT
-
-      QMap<QString, Shortcut*> localShortcuts;
-      bool shortcutsChanged;
-      QButtonGroup* recordButtons;
-
-      void apply();
-      bool sfChanged;
-      void updateSCListView();
-      void setUseMidiOutput(bool);
-      void updateValues(Preferences*);
-
-   private slots:
-      void buttonBoxClicked(QAbstractButton*);
-      void bgClicked(bool);
-      void fgClicked(bool);
-      void selectFgWallpaper();
-      void selectBgWallpaper();
-      void selectWorkingDirectory();
-      void selectInstrumentList();
-      void selectStartWith();
-      void playPanelCurClicked();
-      void resetShortcutClicked();
-      void clearShortcutClicked();
-      void defineShortcutClicked();
-      void portaudioApiActivated(int idx);
-      void resetAllValues();
-      void paperSizeChanged(double);
-      void pageFormatSelected(int);
-      void landscapeToggled(bool);
-      void styleFileButtonClicked();
-      void recordButtonClicked(int);
-
-   signals:
-      void preferencesChanged();
-
-   public:
-      PreferenceDialog(QWidget* parent);
-      void updateRemote();
       };
 
 extern Preferences preferences;

@@ -46,7 +46,6 @@ else (APPLE OR MINGW)
 endif (APPLE OR MINGW)
 
 if (MINGW)
-      set(GCC_VISIBILITY FALSE)           # we use gcc 3.6
       set(STATIC_SCRIPT_BINDINGS TRUE)
 endif (MINGW)
 
