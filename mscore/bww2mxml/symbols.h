@@ -41,6 +41,7 @@ namespace Bww {
     BAR,
     NOTE,
     TIE,
+    TRIPLET,
     DOT,
     SINGLEGRACE,
     STRIKE,

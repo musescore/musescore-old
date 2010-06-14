@@ -35,6 +35,23 @@
 #include "parser.h"
 #include "writer.h"
 
+/** Determine if symbol is a grace sequence
+  */
+
+static bool isGrace(Bww::Symbol sym)
+{
+  return (sym == Bww::SINGLEGRACE
+          || sym == Bww::STRIKE
+          || sym == Bww::DOUBLING
+          || sym == Bww::HALFDOUBLING
+          || sym == Bww::THUMBDOUBLING
+          || sym == Bww::SLUR
+          || sym == Bww::THROW
+          || sym == Bww::BIRL
+          || sym == Bww::GRIP
+          || sym == Bww::TAORLUATH);
+}
+
 namespace Bww {
 
   /**
@@ -213,18 +230,27 @@ namespace Bww {
       else if (lex.symType() == BAR)
         parseBar();
       else if (lex.symType() == NOTE)
-        parseNote();
-      else if (lex.symType() == SINGLEGRACE
-               || lex.symType() == STRIKE
-               || lex.symType() == DOUBLING
-               || lex.symType() == HALFDOUBLING
-               || lex.symType() == THUMBDOUBLING
-               || lex.symType() == SLUR
-               || lex.symType() == THROW
-               || lex.symType() == BIRL
-               || lex.symType() == GRIP
-               || lex.symType() == TAORLUATH)
-        parseGraces();
+        parseSeqNotes();
+      else if (isGrace(lex.symType()))
+        parseSeqNotes();
+      else if (lex.symType() == TIE)
+      {
+        if (lex.symValue() == "^ts") parseSeqNotes();
+        else
+        {
+          errorHandler("tie end ('^te') unexpected");
+          lex.getSym();
+        }
+      }
+      else if (lex.symType() == TRIPLET)
+      {
+        if (lex.symValue() == "^3s") parseSeqNotes();
+        else
+        {
+          errorHandler("triplet end ('^3e') unexpected");
+          lex.getSym();
+        }
+      }
       else if (lex.symType() == UNKNOWN)
       {
         errorHandler("unknown symbol '" + lex.symValue() + "'");
@@ -332,6 +358,21 @@ namespace Bww {
     qDebug() << "Parser::parsePart() value:" << qPrintable(lex.symValue());
     endMeasure();
     lex.getSym();
+  }
+
+  /**
+   Parse a sequence of notes.
+   Includes handling ties and triplets.
+   */
+
+  void Parser::parseSeqNotes()
+  {
+    qDebug() << "Parser::parseSeqNotes() value:" << qPrintable(lex.symValue());
+    while (isGrace(lex.symType()) || lex.symType() == NOTE)
+    {
+      if (isGrace(lex.symType())) parseGraces();
+      else if (lex.symType() == NOTE) parseNote();
+    }
   }
 
   /**
