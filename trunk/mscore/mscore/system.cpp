@@ -43,6 +43,7 @@
 #include "barline.h"
 #include "lyrics.h"
 #include "system.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   SysStaff
@@ -353,6 +354,8 @@ void System::layout2()
       foreach(MeasureBase* m, ml) {
             if (m->type() == MEASURE || m->type() == HBOX)
                   m->setHeight(systemHeight);
+            if (m->type() == HBOX)
+                  static_cast<HBox*>(m)->layout2();
             }
 
       double staffY[nstaves];

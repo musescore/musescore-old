@@ -303,6 +303,16 @@ void HBox::layout()
       else {
             setbbox(QRectF(0.0, 0.0, point(boxWidth()), system()->height()));
             }
+//      Box::layout();
+      }
+
+//---------------------------------------------------------
+//   layout2
+//    height (bbox) is defined now
+//---------------------------------------------------------
+
+void HBox::layout2()
+      {
       Box::layout();
       }
 
