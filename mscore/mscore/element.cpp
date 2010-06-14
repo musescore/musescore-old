@@ -530,7 +530,7 @@ void Element::read(QDomElement e)
 bool Element::genPropertyMenu(QMenu* popup) const
       {
       QAction* a;
-      if (!_generated) {
+      if (!_generated && (type() != LAYOUT_BREAK)) {
             if (visible())
                   a = popup->addAction(tr("Set Invisible"));
             else

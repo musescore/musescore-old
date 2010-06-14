@@ -485,6 +485,7 @@ printf("addSlurFor\n");
 //---------------------------------------------------------
 //   rewriteMeasures
 //    rewrite all measures up to the next time signature
+//    or section break
 //---------------------------------------------------------
 
 bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
@@ -567,6 +568,19 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       }
 
 //---------------------------------------------------------
+//   warnTupletCrossing
+//---------------------------------------------------------
+
+static void warnTupletCrossing()
+      {
+      QMessageBox::warning(0,
+         QT_TRANSLATE_NOOP("addRemoveTimeSig", "MuseScore"),
+         QT_TRANSLATE_NOOP("addRemoveTimeSig", "cannot rewrite measures:\n"
+         "tuplet would cross measure")
+         );
+      }
+
+//---------------------------------------------------------
 //   cmdAddTimeSig
 //
 //    Add or change time signature at measure in response
@@ -590,14 +604,6 @@ void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
       if (seg)
             undoRemoveElement(seg);
 
-      Measure* lm = fm;
-      int measures = 0;
-      for (Measure* m = fm; m; m = m->nextMeasure()) {
-            if (m->first(SegTimeSig))
-                  break;
-            lm = m;
-            ++measures;
-            }
       if (n == 0) {
             //
             // Set time signature of all measures up to next
@@ -610,35 +616,46 @@ void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
                   seg->add(nsig);
                   }
             undoAddElement(seg);
-            Measure* m = fm;
-            for (int i = 0; i < measures; ++i) {
+            for (Measure* m = fm; m; m = m->nextMeasure()) {
+                  if (m->first(SegTimeSig))
+                        break;
                   _undo->push(new ChangeMeasureTimesig(m, ns));
-                  m = m->nextMeasure();
                   }
             }
       else {
             //
             // rewrite all measures up to the next time signature
             //
-            if (!rewriteMeasures(fm, lm, ns)) {
-                  QMessageBox::warning(0,
-                     QT_TRANSLATE_NOOP("addRemoveTimeSig", "MuseScore"),
-                     QT_TRANSLATE_NOOP("addRemoveTimeSig", "cannot rewrite measures:\n"
-                     "tuplet would cross measure")
-                     );
-                  seg = new Segment(fm, SegTimeSig, tick);
-                  for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-                        TimeSig* nsig = new TimeSig(this, timeSigSubtype);
-                        nsig->setTrack(staffIdx * VOICES);
-                        seg->add(nsig);
+            Measure* lm  = fm;
+            Measure* fm1 = fm;
+            for (MeasureBase* m = fm; m; m = m->next()) {
+                  if ((m->type() != MEASURE) || static_cast<Measure*>(m)->first(SegTimeSig)) {
+                        if (!rewriteMeasures(fm1, lm, ns)) {
+                              warnTupletCrossing();
+                              if (fm == fm1) {
+                                    seg = new Segment(fm, SegTimeSig, tick);
+                                    for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+                                          TimeSig* nsig = new TimeSig(this, timeSigSubtype);
+                                          nsig->setTrack(staffIdx * VOICES);
+                                          seg->add(nsig);
+                                          }
+                                    }
+                              undoAddElement(seg);
+                              for (Measure* m = fm1; m; m = m->nextMeasure()) {
+                                    if (m->first(SegTimeSig))
+                                          break;
+                                    _undo->push(new ChangeMeasureTimesig(m, ns));
+                                    }
+                              return;
+                              }
+                        if (m->type() == MEASURE)
+                              break;
+                        m   = m->next();
+                        fm1 = static_cast<Measure*>(m);
+                        lm  = static_cast<Measure*>(m);
+                        if (lm == 0 || lm->first(SegTimeSig))
+                              break;
                         }
-                  undoAddElement(seg);
-                  Measure* m = fm;
-                  for (int i = 0; i < measures; ++i) {
-                        _undo->push(new ChangeMeasureTimesig(m, ns));
-                        m = m->nextMeasure();
-                        }
-                  return;
                   }
 
             Measure* nfm = fm->prev() ? fm->prev()->nextMeasure() : firstMeasure();
@@ -665,31 +682,20 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
       undoRemoveElement(ts->segment());
       Measure* fm = ts->measure();
       Measure* lm = fm;
-      int measures = 0;
-      for (Measure* m = fm; m; m = m->nextMeasure()) {
-            if (m->first(SegTimeSig))
-                  break;
-            lm = m;
-            ++measures;
-            }
       Measure* pm = fm->prevMeasure();
       Fraction ns(pm ? pm->timesig() : Fraction(4,4));
-      if (n == 0) {
+      if (n == 0 || !rewriteMeasures(fm, lm, ns)) {
+            if (n)
+                  warnTupletCrossing();
             //
             // Set time signature of all measures up to next
             // time signature. Do not touch measure contents.
             //
-            Measure* m = fm;
-            for (int i = 0; i < measures; ++i) {
+            for (Measure* m = fm; m; m = m->nextMeasure()) {
+                  if (m->first(SegTimeSig))
+                        break;
                   _undo->push(new ChangeMeasureTimesig(m, ns));
-                  m = m->nextMeasure();
                   }
-            }
-      else {
-            //
-            // rewrite all measures up to the next time signature
-            //
-            rewriteMeasures(fm, lm, ns);
             }
       }
 
