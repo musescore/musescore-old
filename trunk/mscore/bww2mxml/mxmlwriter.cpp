@@ -24,7 +24,7 @@
  Output writer for BWW to MusicXML converter.
  */
 
-#include <QtDebug>
+#include <QtCore/QtDebug>
 
 #include "mxmlwriter.h"
 

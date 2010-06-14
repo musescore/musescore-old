@@ -27,8 +27,8 @@
  http://forums.bobdunsire.com/forums/showthread.php?t=123219
  */
 
-#include <QRegExp>
-#include <QtDebug>
+#include <QtCore/QRegExp>
+#include <QtCore/QtDebug>
 
 #include "lexer.h"
 

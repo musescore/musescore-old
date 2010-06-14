@@ -28,8 +28,8 @@
 
 #include <iostream>
 
-#include <QStringList>
-#include <QtDebug>
+#include <QtCore/QStringList>
+#include <QtCore/QtDebug>
 
 #include "lexer.h"
 #include "parser.h"

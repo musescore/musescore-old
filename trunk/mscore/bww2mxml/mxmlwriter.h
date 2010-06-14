@@ -27,9 +27,9 @@
  Definition of class MxmlWriter
  */
 
-#include <QMap>
-#include <QString>
-#include <QTextStream>
+#include <QtCore/QMap>
+#include <QtCore/QString>
+#include <QtCore/QTextStream>
 
 #include "writer.h"
 

@@ -27,8 +27,8 @@
  Definition of class Parser
  */
 
-#include <QMap>
-#include <QString>
+#include <QtCore/QMap>
+#include <QtCore/QString>
 
 namespace Bww {
 

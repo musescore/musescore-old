@@ -27,7 +27,7 @@
  Definition of class Writer
  */
 
-#include <QString>
+#include <QtCore/QString>
 
 class QIODevice;
 
