@@ -62,24 +62,43 @@ TextTools::TextTools(QWidget* parent)
       tb->addAction(showKeyboard);
       showKeyboard->setCheckable(true);
 
-      typefaceBold      = tb->addAction(QIcon(":/data/text_bold.svg"), "");
-      typefaceItalic    = tb->addAction(QIcon(":/data/text_italic.svg"), "");
-      typefaceUnderline = tb->addAction(QIcon(":/data/text_under.svg"), "");
+      typefaceBold = tb->addAction(QIcon(":/data/text_bold.svg"), "");
+      typefaceBold->setToolTip(tr("bold"));
       typefaceBold->setCheckable(true);
+
+      typefaceItalic = tb->addAction(QIcon(":/data/text_italic.svg"), "");
+      typefaceItalic->setToolTip(tr("italic"));
       typefaceItalic->setCheckable(true);
+
+      typefaceUnderline = tb->addAction(QIcon(":/data/text_under.svg"), "");
+      typefaceUnderline->setToolTip(tr("underline"));
       typefaceUnderline->setCheckable(true);
+
       tb->addSeparator();
+
       leftAlign   = tb->addAction(QIcon(":/data/text_left.svg"),   "");
-      centerAlign = tb->addAction(QIcon(":/data/text_center.svg"), "");
-      rightAlign  = tb->addAction(QIcon(":/data/text_right.svg"),  "");
+      leftAlign->setToolTip(tr("align left"));
       leftAlign->setCheckable(true);
+
+      centerAlign = tb->addAction(QIcon(":/data/text_center.svg"), "");
+      centerAlign->setToolTip(tr("align center"));
       centerAlign->setCheckable(true);
+
+      rightAlign  = tb->addAction(QIcon(":/data/text_right.svg"),  "");
+      rightAlign->setToolTip(tr("align right"));
       rightAlign->setCheckable(true);
+
       typefaceSubscript   = tb->addAction(QIcon(":/data/subscript.svg"), "");
+      typefaceSubscript->setToolTip(tr("subscript"));
+
       typefaceSuperscript = tb->addAction(QIcon(":/data/superscript.svg"), "");
+      typefaceSuperscript->setToolTip(tr("superscript"));
+
       typefaceSubscript->setCheckable(true);
       typefaceSuperscript->setCheckable(true);
+
       tb->addSeparator();
+
       typefaceFamily = new QFontComboBox(this);
       tb->addWidget(typefaceFamily);
       typefaceSize = new QDoubleSpinBox(this);

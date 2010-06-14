@@ -1278,36 +1278,36 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             Measure* m = static_cast<Measure*>(lm);
             bool hasCourtesyKeysig = false;
 
-            if (m) {
+            if (m && !m->sectionBreak()) {
                   int tick        = lm->tick() + lm->ticks();
                   Fraction sig2   = m->timesig();
-                  Measure* pm     = m->prevMeasure();
-                  Fraction sig1   = pm ? pm->timesig() : sig2;
-                  bool sectionBreak = pm ? pm->sectionBreak() : false;
-                  if (!sectionBreak && styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2)) {
+                  Measure* nm     = m->nextMeasure();
+                  Fraction sig1   = nm ? nm->timesig() : sig2;
+
+                  if (styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2)) {
                         Segment* s  = m->getSegment(SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
-                              if (s->element(track) == 0) {
-                                    TimeSig* ts = new TimeSig(this, sig2);
-                                    Measure* nm = m->nextMeasure();
-                                    if (nm){
-                                          Segment* tss = nm->findSegment(SegTimeSig, tick);
-                                          if (tss) {
-                                                TimeSig* nts = (TimeSig*)tss->element(0);
-                                                if (nts)
-                                                      ts->setSubtype(nts->subtype());
-                                                }
+                              if (s->element(track))
+                                    continue;
+                              TimeSig* ts = new TimeSig(this, sig2);
+                              Measure* nm = m->nextMeasure();
+                              if (nm){
+                                    Segment* tss = nm->findSegment(SegTimeSig, tick);
+                                    if (tss) {
+                                          TimeSig* nts = (TimeSig*)tss->element(0);
+                                          if (nts)
+                                                ts->setSubtype(nts->subtype());
                                           }
-                                    ts->setTrack(track);
-                                    ts->setGenerated(true);
-                                    ts->setMag(ts->staff()->mag());
-                                    s->add(ts);
-                                    needRelayout = true;
                                     }
+                              ts->setTrack(track);
+                              ts->setGenerated(true);
+                              ts->setMag(ts->staff()->mag());
+                              s->add(ts);
+                              needRelayout = true;
                               }
                         }
-                  if (!sectionBreak && styleB(ST_genCourtesyKeysig)) {
+                  if (styleB(ST_genCourtesyKeysig)) {
                         int n = _staves.size();
                         for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
                               Staff* staff = _staves[staffIdx];

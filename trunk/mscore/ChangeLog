@@ -1,4 +1,7 @@
+14.jun (ws)
+      - insert/delete time signatures: handle horizontal frames
 13.jun (ws)
+      - no color and invisible properties for LAYOUT_BREAK elements
       - insert/delete time signatures: handle slurs
       - new style parameters for slur line thickness
 12.jun (lv)
