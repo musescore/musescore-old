@@ -44,7 +44,7 @@ void TempoText::write(Xml& xml) const
       {
       xml.stag("Tempo");
       xml.tag("tick", tick());
-      score()->curTick = tick();
+      xml.curTick = tick();
       xml.tag("tempo", _tempo);
       Text::writeProperties(xml);
       xml.etag();

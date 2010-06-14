@@ -112,7 +112,7 @@ void Dynamic::write(Xml& xml) const
       if (_dynType != DYNAMIC_PART)
             xml.tag("dynType", _dynType);
       xml.tag("tick", tick());
-      score()->curTick = tick();
+      xml.curTick = tick();
       Text::writeProperties(xml, subtype() == 0);
       xml.etag();
       }

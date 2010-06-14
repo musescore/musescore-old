@@ -106,6 +106,7 @@ void Score::checkScore()
                                           foreach(Duration d, dl) {
                                                 Rest* rest = new Rest(this);
                                                 rest->setDurationType(d);
+                                                rest->setDuration(d.fraction());
                                                 rest->setTrack(track);
                                                 Segment* s = m->getSegment(rest, ttick);
                                                 s->add(rest);
