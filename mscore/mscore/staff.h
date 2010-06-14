@@ -78,6 +78,9 @@ class Staff {
       bool _small;
       bool _invisible;
 
+      bool _updateClefList;
+      bool _updateKeymap;
+
       StaffType* _staffType;
 
       QMap<int,int> _channelList[VOICES];
@@ -135,8 +138,12 @@ class Staff {
 
       bool useTablature() const;
       void setUseTablature(bool val);
-      StaffType* staffType() const     { return _staffType; }
-      void setStaffType(StaffType* st) { _staffType = st; }
+      StaffType* staffType() const     { return _staffType;      }
+      void setStaffType(StaffType* st) { _staffType = st;        }
+      bool updateClefList() const      { return _updateClefList; }
+      bool updateKeymap() const        { return _updateKeymap;   }
+      void setUpdateClefList(bool v)   { _updateClefList = v;    }
+      void setUpdateKeymap(bool v)     { _updateKeymap = v;      }
       };
 #endif
 

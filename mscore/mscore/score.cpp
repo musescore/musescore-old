@@ -66,6 +66,7 @@
 #include "keysig.h"
 #include "beam.h"
 #include "stafftype.h"
+#include "tempotext.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -547,8 +548,6 @@ void Score::write(Xml& xml, bool /*autosave*/)
 
       foreach(KeySig* ks, customKeysigs)
             ks->write(xml);
-
-      _tempomap->write(xml);
       foreach(const Part* part, _parts)
             part->write(xml);
       foreach(const Excerpt* excerpt, _excerpts)
@@ -683,11 +682,14 @@ void Score::insertTime(int tick, int len)
 
 //---------------------------------------------------------
 //    fixTicks
+//    update:
+//      - measure ticks
+//      - tempo map
+//      - time signature map
+//      - measure numbers
 //---------------------------------------------------------
 
 /**
- Recalculate all ticks and measure numbers.
-
  This is needed after
       - inserting or removing a measure.
       - changing the sigmap
@@ -698,31 +700,53 @@ void Score::fixTicks()
       {
       int number = 0;
       int tick   = 0;
-      _sigmap->clear();
       Measure* fm = firstMeasure();
       if (fm == 0)
             return;
+
+      _tempomap->clear();
+      _sigmap->clear();
       Fraction sig(fm->timesig());
       _sigmap->add(0, AL::SigEvent(sig,  number));
+
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+
+            foreach(const Element* e, *mb->el()) {
+                  if (e->type() == TEMPO_TEXT) {
+                        const TempoText* tt = static_cast<const TempoText*>(e);
+                        _tempomap->addTempo(tt->tick(), tt->tempo());
+                        }
+                  }
             if (mb->type() != MEASURE) {
                   mb->setTick(tick);
                   continue;
                   }
             Measure* m = static_cast<Measure*>(mb);
+
+            //
+            // calculate measure number
+            //
             number += m->noOffset();
             if (m->no() != number)
                   m->setNo(number);
-            if (m->timesig() != sig) {
-                  sig = m->timesig();
-                  _sigmap->add(tick, AL::SigEvent(sig,  number));
-                  }
             if (m->sectionBreak())
                   number = 0;
             else if (m->irregular())      // dont count measure
                   ;
             else
                   ++number;
+
+            //
+            // update time signature map
+            //
+            if (m->timesig() != sig) {
+                  sig = m->timesig();
+                  _sigmap->add(tick, AL::SigEvent(sig,  number));
+                  }
+
+            //
+            // fix ticks
+            //
             int mtick = m->tick();
             int diff  = tick - mtick;
             int measureTicks = m->ticks();

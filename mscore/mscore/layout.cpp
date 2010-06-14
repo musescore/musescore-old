@@ -665,6 +665,41 @@ void Score::doLayout()
       _needLayout = false;
       if (layoutFlags & LAYOUT_FIX_TICKS)
             fixTicks();
+      bool updateStaffLists = true;
+      foreach(Staff* st, _staves) {
+            if (st->updateClefList()) {
+                  st->clefList()->clear();
+                  updateStaffLists = true;
+                  }
+            if (st->updateKeymap()) {
+                  st->keymap()->clear();
+                  updateStaffLists = true;
+                  }
+            }
+      if (updateStaffLists) {
+            int nstaves = _staves.size();
+            for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+                  for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                        int track = staffIdx * VOICES;
+                        Staff* st = _staves[staffIdx];
+                        if (s->element(track)) {
+                              Element* e = s->element(track);
+                              if ((s->subtype() == SegClef) && st->updateClefList()) {
+                                    Clef* clef = static_cast<Clef*>(e);
+                                    st->setClef(s->tick(), clef->subtype());
+                                    }
+                              else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
+                                    KeySig* ks = static_cast<KeySig*>(e);
+                                    st->setKey(s->tick(), ks->subtype());
+                                    }
+                              }
+                        }
+                  }
+            foreach(Staff* st, _staves) {
+                  st->setUpdateClefList(false);
+                  st->setUpdateKeymap(false);
+                  }
+            }
       _needLayout = 0;
 
 #if 0 // DEBUG

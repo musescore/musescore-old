@@ -733,6 +733,8 @@ AddElement::AddElement(Element* e)
 void AddElement::undo()
       {
       element->score()->removeElement(element);
+      if (element->type() == CLEF)
+            element->staff()->setUpdateClefList(true);
       }
 
 //---------------------------------------------------------
@@ -742,6 +744,8 @@ void AddElement::undo()
 void AddElement::redo()
       {
       element->score()->addElement(element);
+      if (element->type() == CLEF)
+            element->staff()->setUpdateClefList(true);
       }
 
 //---------------------------------------------------------
@@ -777,6 +781,8 @@ RemoveElement::RemoveElement(Element* e)
 void RemoveElement::undo()
       {
       element->score()->addElement(element);
+      if (element->type() == CLEF)
+            element->staff()->setUpdateClefList(true);
       }
 
 //---------------------------------------------------------
@@ -786,6 +792,8 @@ void RemoveElement::undo()
 void RemoveElement::redo()
       {
       element->score()->removeElement(element);
+      if (element->type() == CLEF)
+            element->staff()->setUpdateClefList(true);
       }
 
 //---------------------------------------------------------

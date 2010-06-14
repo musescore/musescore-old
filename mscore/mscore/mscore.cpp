@@ -27,6 +27,7 @@
 #include "score.h"
 #include "instrdialog.h"
 #include "preferences.h"
+#include "prefsdialog.h"
 #include "icons.h"
 #include "textstyle.h"
 #include "xml.h"

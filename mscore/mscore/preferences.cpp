@@ -23,6 +23,7 @@
 #include "score.h"
 #include "mscore.h"
 #include "preferences.h"
+#include "prefsdialog.h"
 #include "msynth/synti.h"
 #include "seq.h"
 #include "note.h"

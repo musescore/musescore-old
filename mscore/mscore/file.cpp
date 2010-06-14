@@ -1224,8 +1224,8 @@ bool Score::read(QDomElement e)
                         }
                   else if (tag == "siglist")
                         _sigmap->read(ee, _fileDivision);
-                  else if (tag == "tempolist")
-                        _tempomap->read(ee, _fileDivision);
+                  else if (tag == "tempolist")        // obsolete
+                        ;           // _tempomap->read(ee, _fileDivision);
                   else if (tag == "programVersion") {
                         QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
                         int v1, v2, v3, rv1, rv2, rv3;

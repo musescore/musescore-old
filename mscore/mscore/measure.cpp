@@ -2186,10 +2186,10 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "Dynamic") {
                   Dynamic* dyn = new Dynamic(score());
                   dyn->setTrack(score()->curTrack);
-                  dyn->setTick(score()->curTick);
                   dyn->read(e);
                   dyn->resetType(); // for backward compatibility
                   add(dyn);
+                  dyn->setTick(score()->curTick);
                   }
             else if (tag == "Lyrics") {
                   Lyrics* lyrics = new Lyrics(score());
@@ -2260,10 +2260,11 @@ void Measure::read(QDomElement e, int staffIdx)
                   }
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
-                  t->setTick(score()->curTick);
+                  t->setParent(this);
                   t->setTrack(-1);
                   t->read(e);
                   add(t);
+                  t->setTick(score()->curTick);
                   }
             else if (tag == "StaffText") {
                   StaffText* t = new StaffText(score());

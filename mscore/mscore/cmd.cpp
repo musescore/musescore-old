@@ -251,8 +251,8 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
             case DYNAMIC:
                   {
                   Dynamic* dyn = static_cast<Dynamic*>(e);
-                  dyn->setTick(tick);
                   dyn->setParent(measure);
+                  dyn->setTick(tick);
                   dyn->layout();
 
                   double xx = measure->tick2pos(tick);
@@ -274,46 +274,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
 
 void Score::cmdRemoveClef(Clef* clef)
       {
-      Staff* staff  = clef->staff();
-      ClefList* cl  = staff->clefList();
-      int tick      = clef->tick();
-      iClefEvent ki = cl->find(tick);
-      if (ki == cl->end()) {
-            printf("cmdRemove(Clef): cannot find clef at %d\n", tick);
-            return;
-            }
-      int oval = (*cl)[tick];
-      iClefEvent nki = ki;
-      ++nki;
-
-      undoChangeClef(staff, tick, oval, NO_CLEF);
       undoRemoveElement(clef);
-      Segment* segment = clef->segment();
-      segment->measure()->cmdRemoveEmptySegment(segment);
-
-      oval = cl->clef(tick);
-      if (nki->second != oval)
-            return;
-
-      undoChangeClef(staff, nki->first, oval, NO_CLEF);
-
-      int track = clef->track();
-      for (segment = segment->next1(); segment; segment = segment->next1()) {
-            if (segment->subtype() != SegClef)
-                  continue;
-            //
-            // we assume clefs are only in first track (voice 0)
-            //
-            Clef* e = static_cast<Clef*>(segment->element(track));
-            if (e) {
-                  int cst = e->subtype();
-                  if (cst == oval) {
-                        undoRemoveElement(e);
-                        e->measure()->cmdRemoveEmptySegment(segment);
-                        }
-                  return;
-                  }
-            }
       }
 
 //---------------------------------------------------------
@@ -1603,7 +1564,7 @@ void Score::insertMeasures(int n, int type)
                         break;
                   case VBOX:
                         {
-                        MeasureBase* mb = new HBox(this);
+                        MeasureBase* mb = new VBox(this);
                         mb->setTick(tick);
                         undoInsertMeasure(mb);
                         }
