@@ -1409,6 +1409,47 @@ bool Score::read(QDomElement e)
       if (_mscVersion < 108)
             connectSlurs();
 
+      if (_mscVersion < 115) {
+            for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+                  Staff* s = _staves[staffIdx];
+                  int track = staffIdx * VOICES;
+                  KeyList* km = s->keymap();
+                  for (ciKeyList i = km->begin(); i != km->end(); ++i) {
+                        int tick = i->first;
+                        KeySigEvent ke = i->second;
+                        Measure* m = tick2measure(tick);
+                        Segment* seg = m->getSegment(SegKeySig, tick);
+                        if (seg->element(track))
+                              static_cast<KeySig*>(seg->element(track))->setGenerated(false);
+                        else {
+                              KeySig* ks = keySigFactory(ke);
+                              ks->setParent(seg);
+                              ks->setTrack(track);
+                              ks->setGenerated(false);
+                              seg->add(ks);
+                              }
+                        }
+                  ClefList* cl = s->clefList();
+                  for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
+                        int tick = i->first;
+                        int clefId = i->second;
+                        Measure* m = tick2measure(tick);
+                        Segment* seg = m->getSegment(SegClef, tick);
+                        if (seg->element(track))
+                              static_cast<Clef*>(seg->element(track))->setGenerated(false);
+                        else {
+                              Clef* clef = new Clef(this);
+                              clef->setSubtype(clefId);
+                              clef->setTrack(track);
+                              clef->setParent(seg);
+                              clef->setGenerated(false);
+                              seg->add(clef);
+                              }
+                        }
+
+                  }
+            }
+
       connectTies();
       setInstrumentNames();
 

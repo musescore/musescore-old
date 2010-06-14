@@ -234,7 +234,6 @@ if (MINGW)
    endif(CMAKE_BUILD_TYPE MATCHES "Debug")
 
    target_link_libraries(mscore
-      fluid
       al
       awl
       msynth
@@ -242,6 +241,7 @@ if (MINGW)
       osdabzip
       rtf2html
       qtsingleapp
+      fluid
       ${QT_mingw_LIBRARIES}
       portaudio
       portmidi
