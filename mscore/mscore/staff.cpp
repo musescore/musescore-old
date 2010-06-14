@@ -172,8 +172,8 @@ Staff::Staff(Score* s, Part* p, int rs)
       _small          = false;
       _invisible      = false;
       _barLineSpan    = 1;
-      _updateClefList = false;
-      _updateKeymap   = false;
+      _updateClefList = true;
+      _updateKeymap   = true;
       }
 
 //---------------------------------------------------------
@@ -218,7 +218,7 @@ void Staff::write(Xml& xml) const
             xml.tag("small", small());
       if (invisible())
             xml.tag("invisible", invisible());
-      _clefList->write(xml, "cleflist");
+//      _clefList->write(xml, "cleflist");
       _keymap->write(xml, "keylist");
       foreach(const BracketItem& i, _brackets)
             xml.tagE("bracket type=\"%d\" span=\"%d\"", i._bracket, i._bracketSpan);
@@ -350,92 +350,34 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
 
 void Staff::changeClef(int tick, int st)
       {
-      int ot = _clefList->clef(tick);
-      if (ot == st)
-            return;                 // no change
-
-      // automatically turn this part into a drum part
-      // if clef at tick zero is changed to percussion clef
-
       if (tick == 0 && st == CLEF_PERC)
             part()->setUseDrumset(true);
-
-      iClefEvent ki   = _clefList->find(tick);
-      int oval        = ki != _clefList->end() ? ki->second : NO_CLEF;
-      bool removeFlag = st == _clefList->clef(tick-1);
-      int nval        = removeFlag ? NO_CLEF : st;
-
-      _score->undoChangeClef(this, tick, oval, nval);
-
-      //---------------------------------------------
-      //    if the next clef has the same subtype
-      //    then its unnecessary and must be removed
-      //---------------------------------------------
 
       Measure* measure = _score->tick2measure(tick);
       if (!measure) {
             printf("measure for tick %d not found!\n", tick);
             return;
             }
-      Measure* m = measure;
-      if (m->prevMeasure())
-            m = m->prevMeasure();
-      for (; m; m = m->nextMeasure()) {
-            bool found = false;
-            //
-            // we assume Clefs are only in first track of staff (voice 0)
-            //
-            int track = idx() * VOICES;
-            for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->subtype() != SegClef)
-                        continue;
-                  int etick = segment->tick();
-                  Clef* e = static_cast<Clef*>(segment->element(track));
-                  if (!e || (etick < tick))
-                        continue;
-                  int est = e->subtype();
-                  if ((est != st) && (etick > tick) && !e->generated()) {
-                        found = true;
-                        break;
-                        }
-                  if (!e->generated()) {
-                        _score->undoRemoveElement(e);
-                        m->cmdRemoveEmptySegment(segment);
-                        }
-                  if (etick > tick) {
-                        found = true;
-                        break;
-                        }
-                  }
-            if (found)
-                  break;
+      Segment* s = measure->findSegment(SegClef, tick);
+      if (!s) {
+            s = new Segment(measure, SegClef, tick);
+            _score->undoAddElement(s);
             }
+      int track = idx() * VOICES;
+      Clef* clef = static_cast<Clef*>(s->element(track));
 
-      //---------------------------------------------
-      // insert new clef symbol
-      //---------------------------------------------
+      Clef* nclef = new Clef(score());
+      nclef->setTrack(track);
+      nclef->setSubtype(st);
+      nclef->setParent(s);
 
-      if (!removeFlag) {
-            Clef* clef = new Clef(_score);
-            clef->setTrack(idx() * VOICES);
-            clef->setSubtype(st);
+      if (clef)
+            _score->undoChangeElement(clef, nclef);
+      else
+            _score->undoAddElement(nclef);
 
-            //
-            // if clef is at measure beginning, move to end of
-            // previous measure
-            //
-            if (measure->tick() == tick && (tick != 0))
-                  measure = measure->prevMeasure();
-            SegmentType stype = Segment::segmentType(CLEF);
-            Segment* s = measure->findSegment(stype, tick);
-            if (!s) {
-                  s = new Segment(measure, stype, tick);
-                  _score->undoAddElement(s);
-                  }
-            clef->setParent(s);
-            _score->undoAddElement(clef);
-            }
       _score->setLayoutAll(true);
+
       }
 
 //---------------------------------------------------------

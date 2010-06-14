@@ -735,6 +735,8 @@ void AddElement::undo()
       element->score()->removeElement(element);
       if (element->type() == CLEF)
             element->staff()->setUpdateClefList(true);
+      else if (element->type() == KEYSIG)
+            element->staff()->setUpdateKeymap(true);
       }
 
 //---------------------------------------------------------
@@ -746,6 +748,8 @@ void AddElement::redo()
       element->score()->addElement(element);
       if (element->type() == CLEF)
             element->staff()->setUpdateClefList(true);
+      else if (element->type() == KEYSIG)
+            element->staff()->setUpdateKeymap(true);
       }
 
 //---------------------------------------------------------
@@ -1191,6 +1195,10 @@ void ChangeElement::flip()
       Element* e = oldElement;
       oldElement = newElement;
       newElement = e;
+      if (e->type() == CLEF)
+            e->staff()->setUpdateClefList(true);
+      else if (e->type() == KEYSIG)
+            e->staff()->setUpdateKeymap(true);
       }
 
 //---------------------------------------------------------
