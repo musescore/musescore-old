@@ -21,9 +21,9 @@
 
 #include <iostream>
 
-#include <QCoreApplication>
-#include <QFile>
-#include <QStringList>
+#include <QtCore/QCoreApplication>
+#include <QtCore/QFile>
+#include <QtCore/QStringList>
 
 #include "lexer.h"
 #include "parser.h"

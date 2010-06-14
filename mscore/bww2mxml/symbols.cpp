@@ -23,7 +23,7 @@
  Symbol type to text translation.
  */
 
-#include <QString>
+#include <QtCore/QString>
 
 #include "symbols.h"
 

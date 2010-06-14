@@ -27,9 +27,9 @@
  Definition of class Lexer
  */
 
-#include <QString>
-#include <QStringList>
-#include <QTextStream>
+#include <QtCore/QString>
+#include <QtCore/QStringList>
+#include <QtCore/QTextStream>
 
 #include "symbols.h"
 

@@ -20,10 +20,6 @@
 
 #include <stdio.h>
 
-#include <QMap>
-#include <QString>
-#include <QtDebug>
-
 #include "lexer.h"
 #include "writer.h"
 #include "parser.h"

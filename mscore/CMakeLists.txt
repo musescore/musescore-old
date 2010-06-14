@@ -40,6 +40,7 @@ set(OMR FALSE)                            # optical music recognition
 if (APPLE OR MINGW)
       set(SF_COMPRESSOR FALSE)
       set(AEOLUS FALSE)
+      set(OMR FALSE)
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)             # build sfconvert, require ogg, vorbis, vorbisenc
 endif (APPLE OR MINGW)
