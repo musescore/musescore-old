@@ -294,6 +294,8 @@ enum StyleIdx {
       ST_SlurDottedWidth,
       ST_SlurBow,
 
+      ST_SectionPause,
+
       ST_STYLES
       };
 

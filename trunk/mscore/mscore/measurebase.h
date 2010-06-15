@@ -66,14 +66,14 @@ class MeasureBase : public Element {
 
    protected:
       MeasureWidth _mw;
-      bool _dirty;
-
       ElementList _el;        ///< Measure(/tick) relative -elements: with defined start time
                               ///< but outside the staff
 
+      bool _dirty;
       bool _lineBreak;        ///< Forced line break
       bool _pageBreak;        ///< Forced page break
       bool _sectionBreak;
+      double _pause;          ///< section break playback rest (sec)
 
    public:
       MeasureBase(Score* score);
@@ -113,8 +113,11 @@ class MeasureBase : public Element {
       void setDirty()                        { _dirty = true; }
       virtual void spatiumChanged(double oldValue, double newValue);
 
-      int tick() const                   { return _tick;         }
-      void setTick(int t)                { _tick = t;            }
+      int tick() const                       { return _tick;         }
+      void setTick(int t)                    { _tick = t;            }
+
+      double pause() const                   { return _pause;        }
+      void setPause(double v)                { _pause = v;           }
       };
 
 #endif

@@ -111,7 +111,6 @@ void Score::checkScore()
                                                 Segment* s = m->getSegment(rest, ttick);
                                                 s->add(rest);
                                                 ttick += rest->ticks();
-printf("  add Rest at %d len %d\n", ttick, rest->ticks());
                                                 }
                                           ticks -= len;
                                           }

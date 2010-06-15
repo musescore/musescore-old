@@ -595,6 +595,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         nr->setTrack(track);
                         ncr = (Rest*)nr;
                         ncr->setDurationType(d);
+                        ncr->setDuration(d.fraction());
                         }
                   else {
                         Note* note = new Note(this);
@@ -1299,7 +1300,6 @@ MeasureBase* Score::appendMeasure(int type)
       else if (type == VBOX)
             mb = new VBox(this);
       mb->setTick(tick);
-printf("create Measure at %d\n", tick);
 
       if (type == MEASURE) {
             Fraction ts(lastMeasure()->timesig());
@@ -1312,7 +1312,6 @@ printf("create Measure at %d\n", tick);
                   rest->setTrack(staffIdx * VOICES);
                   Segment* s = measure->getSegment(SegChordRest, tick);
                   s->add(rest);
-printf("create Segment at %d\n", s->tick());
                   }
             }
       undoInsertMeasure(mb);
@@ -1406,6 +1405,7 @@ void Score::insertMeasures(int n, int type)
                         measure->setLen(f);
 	            	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
     		                  Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
+                              rest->setDuration(measure->len());
         	            	rest->setTrack(staffIdx * VOICES);
         	      	      Segment* s = measure->getSegment(SegChordRest, tick);
         	      		s->add(rest);

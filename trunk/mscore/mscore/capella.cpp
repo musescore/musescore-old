@@ -1394,6 +1394,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                                           Segment* s = m->getSegment(SegChordRest, tick + i * ft);
                                           Rest* rest = new Rest(this);
                                           rest->setDurationType(Duration(Duration::V_MEASURE));
+                                          rest->setDuration(m->len());
                                           rest->setTrack(staffIdx * VOICES + voice);
                                           s->add(rest);
                                           }
@@ -1403,10 +1404,14 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                               Segment* s = m->getSegment(SegChordRest, tick);
                               Rest* rest = new Rest(this);
                               Duration d;
-                              if (o->fullMeasures)
+                              if (o->fullMeasures) {
                                     d.setType(Duration::V_MEASURE);
-                              else
+                                    rest->setDuration(m->len());
+                                    }
+                              else {
                                     d.setVal(ticks);
+                                    rest->setDuration(d.fraction());
+                                    }
                               rest->setDurationType(d);
                               rest->setTrack(track);
                               rest->setVisible(!o->invisible);

@@ -163,6 +163,7 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
 Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
       {
       Rest* rest = new Rest(this, d);
+      rest->setDuration(d.fraction());
       rest->setTrack(track);
       rest->setParent(s);
       rest->setTuplet(tuplet);
@@ -553,6 +554,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
                   Rest* rest = new Rest(this);
                   rest->setTrack(track);
                   rest->setDurationType(restTicks);
+                  rest->setDuration(Fraction::fromTicks(restTicks));
                   addCR(tick, rest, nfm);
                   }
             }
@@ -1168,6 +1170,7 @@ void Score::deleteItem(Element* el)
                   if (chord->noteType() == NOTE_NORMAL) {
                         Rest* rest = new Rest(this, chord->durationType());
                         rest->setDurationType(chord->durationType());
+                        rest->setDuration(chord->duration());
                         rest->setTrack(el->track());
                         rest->setParent(chord->parent());
                         undoAddElement(rest);
