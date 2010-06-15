@@ -90,7 +90,7 @@ void Score::checkScore()
                         if (!s->element(track))
                               continue;
                         ChordRest* cr = static_cast<ChordRest*>(s->element(track));
-                        if (cr->tick() != tick) {
+                        if (s->tick() != tick) {
                               printf("Chord/Rest at tick %d staff %d is missing (len = %d)\n",
                                  tick, staffIdx, cr->tick() - tick);
                               if (cr->tick() > tick) {
@@ -115,7 +115,7 @@ void Score::checkScore()
                                           ticks -= len;
                                           }
                                     }
-                              tick = cr->tick();
+                              tick = s->tick();
                               }
                         Tuplet* t = cr->tuplet();
                         int ticks;

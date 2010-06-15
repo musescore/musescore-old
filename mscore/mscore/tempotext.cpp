@@ -43,8 +43,10 @@ TempoText::TempoText(Score* s)
 void TempoText::write(Xml& xml) const
       {
       xml.stag("Tempo");
-      xml.tag("tick", tick());
-      xml.curTick = tick();
+      if (tick() != xml.curTick) {
+            xml.tag("tick", tick());
+            xml.curTick = tick();
+            }
       xml.tag("tempo", _tempo);
       Text::writeProperties(xml);
       xml.etag();

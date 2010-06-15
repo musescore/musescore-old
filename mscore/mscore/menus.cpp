@@ -1138,11 +1138,11 @@ void Score::addTempo()
             double bps = editTempo->bpm() / 60.0;
             _tempomap->addTempo(tick, bps);
             TempoText* tt = new TempoText(this);
+            tt->setParent(m);
             tt->setTick(tick);
             tt->setTrack(cr->track());
             tt->setText(editTempo->text());
             tt->setTempo(bps);
-            tt->setParent(m);
             cmdAdd(tt);
             refresh |= tt->abbox();
             }

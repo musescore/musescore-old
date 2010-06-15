@@ -107,12 +107,14 @@ int Dynamic::velocity() const
 void Dynamic::write(Xml& xml) const
       {
       xml.stag("Dynamic");
+      if (tick() != xml.curTick) {
+            xml.tag("tick", tick());
+            xml.curTick = tick();
+            }
       if (_velocity > 0)
             xml.tag("velocity", _velocity);
       if (_dynType != DYNAMIC_PART)
             xml.tag("dynType", _dynType);
-      xml.tag("tick", tick());
-      xml.curTick = tick();
       Text::writeProperties(xml, subtype() == 0);
       xml.etag();
       }

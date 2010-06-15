@@ -188,8 +188,6 @@ QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
             pl.append(Prop("dots", durationType().dots()));
       if (_staffMove)
             pl.append(Prop("move", _staffMove));
-      if (tick() != xml.curTick)
-            pl.append(Prop("tick", tick()));
       pl.append(Prop("durationType", durationType().name()));
       return pl;
       }

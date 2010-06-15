@@ -51,8 +51,6 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             }
       static const int sampleRate = 44100;
 
-      MasterSynth* synti = seq->getSynti();
-
       if (soundFont.isEmpty()) {
             if (!preferences.soundFont.isEmpty())
                   soundFont = preferences.soundFont;
@@ -63,9 +61,11 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                   return false;
                   }
             }
+      MasterSynth* synti = new MasterSynth();
       bool rv = synti->loadSoundFont(soundFont);
       if (!rv) {
             fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
+            delete synti;
             return false;
             }
       EventMap events;
@@ -79,6 +79,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
       SNDFILE* sf     = sf_open(qPrintable(name), SFM_WRITE, &info);
       if (sf == 0) {
             fprintf(stderr, "open soundfile failed: %s\n", sf_strerror(sf));
+            delete synti;
             return false;
             }
 
@@ -167,6 +168,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
 
       mscore->hideProgressBar();
 
+      delete synti;
       if (sf_close(sf)) {
             fprintf(stderr, "close soundfile failed\n");
             return false;
