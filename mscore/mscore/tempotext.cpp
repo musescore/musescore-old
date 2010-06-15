@@ -137,16 +137,6 @@ void TempoProperties::saveValues()
       double newTempo = tempo->value() / 60.0;
       if (newTempo == tempoText->tempo())
             return;
-      int tick        = tempoText->tick();
-      AL::TempoMap* tl   = score->tempomap();
-
-      AL::iTEvent o = tl->find(tick);
-      if (o == tl->end()) {
-            printf("TempoProperties: cannot find tempo at %d\n", tick);
-            return;
-            }
-      AL::TEvent n(newTempo);
-      score->undoChangeTempo(tick, o->second, n);
       TempoText* ntt = new TempoText(*tempoText);
       ntt->setTempo(newTempo);
       score->undoChangeElement(tempoText, ntt);

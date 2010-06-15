@@ -116,10 +116,10 @@ StyleType styleTypes[] = {
       StyleType("genClef",                 ST_BOOL),           // create clef for all systems, not only for first
       StyleType("genKeysig",               ST_BOOL),         // create key signature for all systems
 
-      // 70
       StyleType("genTimesig",              ST_BOOL),
       StyleType("genCourtesyTimesig",      ST_BOOL),
       StyleType("genCourtesyKeysig",       ST_BOOL),
+      StyleType("genCourtesyClef",         ST_BOOL),
       StyleType("useGermanNoteNames",      ST_BOOL),
       StyleType("chordDescriptionFile",    ST_STRING),
       StyleType("concertPitch",            ST_BOOL),            // display transposing instruments in concert pitch
@@ -128,7 +128,6 @@ StyleType styleTypes[] = {
       StyleType("minMMRestWidth",          ST_SPATIUM),       // minimum width of multi measure rest
       StyleType("hideEmptyStaves",         ST_BOOL),
 
-      // 80
       StyleType("stemDir1",                ST_DIRECTION),
       StyleType("stemDir2",                ST_DIRECTION),
       StyleType("stemDir3",                ST_DIRECTION),
@@ -150,7 +149,6 @@ StyleType styleTypes[] = {
       StyleType("UfermataAnchor",          ST_INT),
       StyleType("DfermataAnchor",          ST_INT),
 
-      // 90
       StyleType("UshortfermataAnchor",     ST_INT),
       StyleType("DshortfermataAnchor",     ST_INT),
       StyleType("UlongfermataAnchor",      ST_INT),
@@ -162,7 +160,6 @@ StyleType styleTypes[] = {
       StyleType("EspressivoAnchor",        ST_INT),
       StyleType("StaccatoAnchor",          ST_INT),
 
-      // 100
       StyleType("UstaccatissimoAnchor",    ST_INT),
       StyleType("DstaccatissimoAnchor",    ST_INT),
       StyleType("TenutoAnchor",            ST_INT),
@@ -185,7 +182,6 @@ StyleType styleTypes[] = {
       StyleType("UpPrallAnchor",           ST_INT),
       StyleType("DownPrallAnchor",         ST_INT),
 
-      // 120
       StyleType("UpMordentAnchor",         ST_INT),
       StyleType("DownMordentAnchor",       ST_INT),
       StyleType("SnappizzicatorAnchor",    ST_INT),
@@ -410,6 +406,7 @@ Style::Style()
             StyleVal(ST_genTimesig,true),
             StyleVal(ST_genCourtesyTimesig, true),
             StyleVal(ST_genCourtesyKeysig, true),
+            StyleVal(ST_genCourtesyClef, true),
 
             StyleVal(ST_useGermanNoteNames, false),
 //            StyleVal(ST_warnPitchRange, true),

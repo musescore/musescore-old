@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -1363,6 +1363,28 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                           }
                                     // change bar line to double bar line
                                     m->setEndBarLineType(DOUBLE_BAR, true);
+                                    }
+                              }
+                        }
+                  if (styleB(ST_genCourtesyClef)) {
+                        int n = _staves.size();
+                        for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
+                              Staff* staff = _staves[staffIdx];
+                              int c1 = staff->clef(tick - 1);
+                              int c2 = staff->clef(tick);
+                              if (c1 != c2) {
+                                    Segment* s  = m->getSegment(SegClef, tick);
+                                    int track = staffIdx * VOICES;
+                                    if (!s->element(track)) {
+                                          Clef* c = new Clef(this);
+                                          c->setSubtype(c2);
+                                          c->setTrack(track);
+                                          c->setGenerated(true);
+                                          c->setSmall(true);
+                                          c->setMag(staff->mag());
+                                          s->add(c);
+                                          needRelayout = true;
+                                          }
                                     }
                               }
                         }

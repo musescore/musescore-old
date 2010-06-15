@@ -263,6 +263,7 @@ SLine::SLine(Score* s)
 SLine::SLine(const SLine& s)
    : Element(s)
       {
+      _tick     = s._tick;
       _tick2    = s._tick2;
       _diagonal = s._diagonal;
       _anchor   = s._anchor;
@@ -431,6 +432,8 @@ void SLine::layout()
 
 void SLine::writeProperties(Xml& xml, const SLine* proto) const
       {
+      xml.tag("tick", tick());
+      xml.curTick = tick();
       Element::writeProperties(xml, proto);
       if (_diagonal && (proto == 0 || proto->diagonal() != _diagonal))
             xml.tag("diagonal", _diagonal);
@@ -482,6 +485,7 @@ bool SLine::readProperties(QDomElement e)
       {
       if (Element::readProperties(e))
             return true;
+      setTick(score()->curTick);
       QString tag(e.tagName());
       QString val(e.text());
       int i = val.toInt();

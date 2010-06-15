@@ -219,7 +219,7 @@ void Staff::write(Xml& xml) const
       if (invisible())
             xml.tag("invisible", invisible());
 //      _clefList->write(xml, "cleflist");
-      _keymap->write(xml, "keylist");
+//      _keymap->write(xml, "keylist");
       foreach(const BracketItem& i, _brackets)
             xml.tagE("bracket type=\"%d\" span=\"%d\"", i._bracket, i._bracketSpan);
       if (_barLineSpan != 1)
@@ -277,71 +277,29 @@ void Staff::read(QDomElement e)
 void Staff::changeKeySig(int tick, KeySigEvent st)
       {
 // printf("Staff::changeKeySig "); st.print(); printf("\n");
-      KeySigEvent ot = _keymap->key(tick);
-      if (ot == st) {
-// printf("Staff::changeKeySig: no change\n");
-            return;                 // no change
-            }
-
-      iKeyList ki     = _keymap->find(tick);
-      KeySigEvent oval = ki != _keymap->end() ? ki->second : KeySigEvent();
-      bool removeFlag  = st == _keymap->key(tick-1);
-      KeySigEvent nval = removeFlag ? KeySigEvent() : st;
-
-      _score->undoChangeKey(this, tick, oval, nval);
-
-      //---------------------------------------------
-      //    if the next keysig has the same subtype
-      //    then its unnecessary and must be removed
-      //---------------------------------------------
 
       Measure* measure = _score->tick2measure(tick);
       if (!measure) {
             printf("measure for tick %d not found!\n", tick);
             return;
             }
-      Measure* m = measure;
-      if (m->prevMeasure())
-            m = m->prevMeasure();
+      Segment* s = measure->findSegment(SegKeySig, tick);
+      if (!s) {
+            s = new Segment(measure, SegKeySig, tick);
+            _score->undoAddElement(s);
+            }
       int track = idx() * VOICES;
-      for (Segment* segment = measure->first(); segment; segment = segment->next1()) {
-            if (segment->subtype() != SegKeySig)
-                  continue;
-            //
-            // we assume keySigs are only in first track (voice 0)
-            //
-            KeySig* e = static_cast<KeySig*>(segment->element(track));
-            int etick = segment->tick();
-            if (!e || (etick < tick))
-                  continue;
-            KeySigEvent cst = e->keySignature();
-            if ((cst != st) && (etick > tick))
-                  break;
-            _score->undoRemoveElement(e);
-            m->cmdRemoveEmptySegment(segment);
-            if (etick > tick)
-                  break;
-            }
+      KeySig* ks = static_cast<KeySig*>(s->element(track));
 
-      //---------------------------------------------
-      // insert new keysig symbols
-      //---------------------------------------------
+      KeySig* nks = new KeySig(score());
+      nks->setTrack(track);
+      nks->changeType(st);
+      nks->setParent(s);
 
-      if (!removeFlag) {
-            KeySig* keysig = new KeySig(_score);
-            keysig->setTrack(idx() * VOICES);
-            keysig->changeType(st);
-
-            SegmentType stype = Segment::segmentType(KEYSIG);
-            Segment* s = measure->findSegment(stype, tick);
-            if (!s) {
-                  s = new Segment(measure, stype, tick);
-                  _score->undoAddElement(s);
-                  }
-            keysig->setParent(s);
-            _score->undoAddElement(keysig);
-            }
-      _score->setLayoutAll(true);
+      if (ks)
+            _score->undoChangeElement(ks, nks);
+      else
+            _score->undoAddElement(nks);
       }
 
 //---------------------------------------------------------
@@ -375,9 +333,6 @@ void Staff::changeClef(int tick, int st)
             _score->undoChangeElement(clef, nclef);
       else
             _score->undoAddElement(nclef);
-
-      _score->setLayoutAll(true);
-
       }
 
 //---------------------------------------------------------

@@ -181,6 +181,40 @@ class EditTransition : public QMouseEventTransition
       };
 
 //---------------------------------------------------------
+//   SeekTransition
+//---------------------------------------------------------
+
+class SeekTransition : public QMouseEventTransition
+      {
+      ScoreView* canvas;
+      ChordRest* cr;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QMouseEventTransition::eventTest(event))
+                  return false;
+            QMouseEvent* me = static_cast<QMouseEvent*>(static_cast<QStateMachine::WrappedEvent*>(event)->event());
+            QPointF p = canvas->toLogical(me->pos());
+            Element* e = canvas->elementNear(p);
+            if (e && (e->type() == NOTE || e->type() == REST)) {
+                  if (e->type() == NOTE)
+                        e = e->parent();
+                  cr = static_cast<ChordRest*>(e);
+                  return true;
+                  }
+            return false;
+            }
+      virtual void onTransition(QEvent* e) {
+            seq->seek(cr->tick());
+            }
+   public:
+      SeekTransition(ScoreView* c, QState* target)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
 //   EditKeyTransition
 //---------------------------------------------------------
 
@@ -705,6 +739,7 @@ ScoreView::ScoreView(QWidget* parent)
       s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
       s->addTransition(new CommandTransition("play", states[NORMAL]));
       s->addTransition(new CommandTransition("escape", states[NORMAL]));
+      s->addTransition(new SeekTransition(this, states[PLAY]));
       QSignalTransition* st = new QSignalTransition(seq, SIGNAL(stopped()));
       st->setTargetState(states[NORMAL]);
       s->addTransition(st);

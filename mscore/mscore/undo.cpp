@@ -577,33 +577,6 @@ void Score::undoMove(Element* e, const QPointF& pt)
       }
 
 //---------------------------------------------------------
-//   undoChangeTempo
-//---------------------------------------------------------
-
-void Score::undoChangeTempo(int tick, const AL::TEvent& o, const AL::TEvent& n)
-      {
-      _undo->push(new ChangeTempo(this, tick, o, n));
-      }
-
-//---------------------------------------------------------
-//   undoChangeKey
-//---------------------------------------------------------
-
-void Score::undoChangeKey(Staff* staff, int tick, KeySigEvent o, KeySigEvent n)
-      {
-      _undo->push(new ChangeKey(staff, tick, o, n));
-      }
-
-//---------------------------------------------------------
-//   undoChangeClef
-//---------------------------------------------------------
-
-void Score::undoChangeClef(Staff* staff, int tick, int o, int n)
-      {
-      _undo->push(new ChangeClef(staff, tick, o, n));
-      }
-
-//---------------------------------------------------------
 //   undoChangeRepeatFlags
 //---------------------------------------------------------
 
@@ -732,11 +705,15 @@ AddElement::AddElement(Element* e)
 
 void AddElement::undo()
       {
-      element->score()->removeElement(element);
+      Score* score = element->score();
+      score->removeElement(element);
       if (element->type() == CLEF)
             element->staff()->setUpdateClefList(true);
       else if (element->type() == KEYSIG)
             element->staff()->setUpdateKeymap(true);
+      else if (element->type() == DYNAMIC)
+            score->fixPpitch();
+      score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -745,11 +722,15 @@ void AddElement::undo()
 
 void AddElement::redo()
       {
-      element->score()->addElement(element);
+      Score* score = element->score();
+      score->addElement(element);
       if (element->type() == CLEF)
             element->staff()->setUpdateClefList(true);
       else if (element->type() == KEYSIG)
             element->staff()->setUpdateKeymap(true);
+      else if (element->type() == DYNAMIC)
+            score->fixPpitch();
+      score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -787,6 +768,10 @@ void RemoveElement::undo()
       element->score()->addElement(element);
       if (element->type() == CLEF)
             element->staff()->setUpdateClefList(true);
+      else if (element->type() == DYNAMIC)
+            element->score()->fixPpitch();
+      else if (element->type() == KEYSIG)
+            element->staff()->setUpdateKeymap(true);
       }
 
 //---------------------------------------------------------
@@ -798,6 +783,10 @@ void RemoveElement::redo()
       element->score()->removeElement(element);
       if (element->type() == CLEF)
             element->staff()->setUpdateClefList(true);
+      else if (element->type() == DYNAMIC)
+            element->score()->fixPpitch();
+      else if (element->type() == KEYSIG)
+            element->staff()->setUpdateKeymap(true);
       }
 
 //---------------------------------------------------------
@@ -1199,6 +1188,9 @@ void ChangeElement::flip()
             e->staff()->setUpdateClefList(true);
       else if (e->type() == KEYSIG)
             e->staff()->setUpdateKeymap(true);
+      else if (e->type() == DYNAMIC)
+            e->score()->fixPpitch();
+      score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -1244,85 +1236,6 @@ void RemoveStaves::redo()
       }
 
 //---------------------------------------------------------
-//   ChangeClef
-//---------------------------------------------------------
-
-ChangeClef::ChangeClef(Staff* s, int _tick, int _o, int _n)
-      {
-      staff = s;
-      tick  = _tick;
-      o     = _o;
-      n     = _n;
-      }
-
-void ChangeClef::undo()
-      {
-      ClefList* kl = staff->clefList();
-      // remove new value if there is any
-      if (n != NO_CLEF) {
-            iClefEvent ik = kl->find(tick);
-            kl->erase(ik);
-            }
-      if (o != NO_CLEF)
-            (*kl)[tick] = o;
-      }
-
-void ChangeClef::redo()
-      {
-      ClefList* kl = staff->clefList();
-      if (o != NO_CLEF) {
-            iClefEvent ik = kl->find(tick);
-            if (ik == kl->end())
-                  printf("ChangeClef::redo: cannot find clef at %d\n", tick);
-            else
-                  kl->erase(ik);
-            }
-      if (n != NO_CLEF)
-            (*kl)[tick] = n;
-      }
-
-//---------------------------------------------------------
-//   ChangeKey
-//---------------------------------------------------------
-
-ChangeKey::ChangeKey(Staff* s, int _tick, KeySigEvent _o, KeySigEvent _n)
-      {
-      staff = s;
-      tick  = _tick;
-      o     = _o;
-      n     = _n;
-      }
-
-void ChangeKey::undo()
-      {
-      KeyList* kl = staff->keymap();
-      // remove new value if there is any
-      if (n.isValid()) {
-            iKeyList ik = kl->find(tick);
-            if (ik == kl->end())
-                  printf("UndoOp::ChangeKey1 %d: not found\n", tick);
-            else
-                  kl->erase(ik);
-            }
-      if (o.isValid())
-            (*kl)[tick] = o;
-      }
-
-void ChangeKey::redo()
-      {
-      KeyList* kl = staff->keymap();
-      if (o.isValid()) {
-            iKeyList ik = kl->find(tick);
-            if (ik == kl->end())
-                  printf("UndoOp::ChangeKey2 %d: not found\n", tick);
-            else
-                  kl->erase(ik);
-            }
-      if (n.isValid())
-            (*kl)[tick] = n;
-      }
-
-//---------------------------------------------------------
 //   ChangeKeySig
 //---------------------------------------------------------
 
@@ -1341,36 +1254,6 @@ void ChangeKeySig::flip()
       KeySigEvent oe = keysig->keySigEvent();
       keysig->setSubtype(ks);
       ks = oe;
-      }
-
-//---------------------------------------------------------
-//   ChangeTempo
-//---------------------------------------------------------
-
-ChangeTempo::ChangeTempo(Score* s, int t, const AL::TEvent& _o, const AL::TEvent& _n)
-      {
-      score = s;
-      tick  = t;
-      o     = _o;
-      n     = _n;
-      }
-
-void ChangeTempo::undo()
-      {
-      AL::TempoMap* tempomap = score->tempomap();
-      if (n.valid())
-            tempomap->delTempo(tick);
-      if (o.valid())
-            tempomap->addTempo(tick, o);
-      }
-
-void ChangeTempo::redo()
-      {
-      AL::TempoMap* tempomap = score->tempomap();
-      if (o.valid())
-            tempomap->delTempo(tick);
-      if (n.valid())
-            tempomap->addTempo(tick, n);
       }
 
 //---------------------------------------------------------
