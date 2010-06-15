@@ -234,7 +234,10 @@ void SvgImage::setPath(const QString& s)
       Image::setPath(s);
       if (doc == 0)
             doc = new QSvgRenderer;
-      doc->load(path());
+      if (_ip->loaded())
+            doc->load(_ip->buffer().buffer());
+      else
+            doc->load(path());  
       if (doc->isValid()) {
             sz = doc->defaultSize();
             _dirty = true;
