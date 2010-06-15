@@ -40,7 +40,7 @@ set(OMR FALSE)                            # optical music recognition
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)           # warnings if not, with gcc4.4 from qt
       set(SF_COMPRESSOR FALSE)
-      set(AEOLUS FALSE)
+      set(AEOLUS TRUE)
       set(OMR FALSE)
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)             # build sfconvert, require ogg, vorbis, vorbisenc
