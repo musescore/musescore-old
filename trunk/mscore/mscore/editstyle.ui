@@ -607,7 +607,7 @@
          </property>
         </widget>
        </item>
-       <item row="10" column="0">
+       <item row="11" column="0">
         <spacer>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -666,6 +666,13 @@
          </property>
          <property name="decimals">
           <number>1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
+        <widget class="QCheckBox" name="genCourtesyClef">
+         <property name="text">
+          <string>Create courtesy clefs</string>
          </property>
         </widget>
        </item>

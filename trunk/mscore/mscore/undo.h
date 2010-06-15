@@ -432,36 +432,6 @@ class FlipBeamDirection : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   FlipTupletDirection
-//---------------------------------------------------------
-
-class FlipTupletDirection : public UndoCommand {
-      Tuplet* tuplet;
-      void flip();
-
-   public:
-      FlipTupletDirection(Tuplet*);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      };
-
-//---------------------------------------------------------
-//   ChangeKey
-//---------------------------------------------------------
-
-class ChangeKey : public UndoCommand {
-      Staff* staff;
-      int tick;
-      KeySigEvent o;
-      KeySigEvent n;
-
-   public:
-      ChangeKey(Staff*, int tick, KeySigEvent oldKeySig, KeySigEvent newKeySig);
-      virtual void undo();
-      virtual void redo();
-      };
-
-//---------------------------------------------------------
 //   ChangeKeySig
 //---------------------------------------------------------
 
@@ -478,35 +448,17 @@ class ChangeKeySig : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeClef
+//   FlipTupletDirection
 //---------------------------------------------------------
 
-class ChangeClef : public UndoCommand {
-      Staff* staff;
-      int tick;
-      int o;
-      int n;
+class FlipTupletDirection : public UndoCommand {
+      Tuplet* tuplet;
+      void flip();
 
    public:
-      ChangeClef(Staff*, int tick, int o, int n);
-      virtual void undo();
-      virtual void redo();
-      };
-
-//---------------------------------------------------------
-//   ChangeTempo
-//---------------------------------------------------------
-
-class ChangeTempo : public UndoCommand {
-      Score* score;
-      int tick;
-      AL::TEvent o;
-      AL::TEvent n;
-
-   public:
-      ChangeTempo(Score*, int tick, const AL::TEvent& o, const AL::TEvent& n);
-      virtual void undo();
-      virtual void redo();
+      FlipTupletDirection(Tuplet*);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
       };
 
 //---------------------------------------------------------

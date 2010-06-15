@@ -1285,41 +1285,6 @@ void Score::cmdRemoveTime(int tick, int len)
                   undoRemoveElement(b);
                   }
             }
-#if 0 // TODOxx
-      //-----------------
-      AL::SigEvent e1 = _sigmap->timesig(tick + len);
-      for (AL::ciSigEvent i = _sigmap->begin(); i != _sigmap->end(); ++i) {
-            if (i->first != 0 && i->first >= tick && (i->first < etick)) {
-                  undoChangeSig(i->first, i->second, AL::SigEvent());
-                  }
-            }
-      undoSigInsertTime(tick, -len);
-      AL::SigEvent e2 = _sigmap->timesig(tick);
-      if (!(e1 == e2)) {
-            AL::ciSigEvent i = _sigmap->find(tick);
-            if (i == _sigmap->end()) {
-                  undoChangeSig(tick, AL::SigEvent(), e1);
-                  }
-            }
-      //-----------------
-#endif
-
-      for (AL::ciTEvent i = _tempomap->begin(); i != _tempomap->end(); ++i) {
-            if (i->first != 0 && i->first >= tick && (i->first < etick))
-                  undoChangeTempo(i->first, i->second, AL::TEvent());
-            }
-      foreach(Staff* staff, _staves) {
-            ClefList* cl = staff->clefList();
-            KeyList*  kl = staff->keymap();
-            for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
-                  if (i->first >= tick && (i->first < etick) && i->first != 0)
-                        undoChangeClef(staff, i->first, i->second, NO_CLEF);
-                  }
-            for (ciKeyList i = kl->begin(); i != kl->end(); ++i) {
-                  if (i->first >= tick && (i->first < etick) && i->first != 0)
-                        undoChangeKey(staff, i->first, i->second, KeySigEvent());
-                  }
-            }
       undoInsertTime(tick, -len);
       }
 

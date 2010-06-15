@@ -282,6 +282,12 @@ void Score::updateSelectedElements()
 
 void Score::select(Element* e, SelectType type, int staffIdx)
       {
+      if (e && (e->type() == NOTE || e->type() == REST)) {
+            Element* ee = e;
+            if (ee->type() == NOTE)
+                  ee = ee->parent();
+            setPlayPos(static_cast<ChordRest*>(ee)->tick());
+            }
       if (debugMode)
             printf("select element <%s> type %d(state %d) staff %d\n",
                e ? e->name() : "", type, selection().state(), e ? e->staffIdx() : -1);

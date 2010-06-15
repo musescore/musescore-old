@@ -3,7 +3,7 @@
 //  Linux Music Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,12 +24,15 @@
 namespace AL {
 class Xml;
 
+enum TempoEventType { TEMPO_CHANGE, TEMPO_PAUSE };
+
 //---------------------------------------------------------
 //   Tempo Event
 //---------------------------------------------------------
 
 struct TEvent {
       double tempo;     // beats per second
+      double pause;     // pause in seconds
       double time;      // precomputed time for tick in sec
 
       int read(QDomElement);
@@ -40,11 +43,13 @@ struct TEvent {
             }
       TEvent(const TEvent& e) {
             tempo = e.tempo;
+            pause = e.pause;
             time  = e.time;
             }
-      TEvent(double t) {
+      TEvent(double t, double p = 0.0) {
             tempo = t;
-            time = 0.0;
+            pause = p;
+            time  = 0.0;
             }
       bool valid() const { return tempo != 0.0; }
       };
@@ -60,13 +65,13 @@ typedef std::map<int, TEvent>::const_reverse_iterator criTEvent;
 
 class TempoMap : public std::map<int, TEvent> {
       int _tempoSN;           // serial no to track tempo changes
-      bool useList;
       double _tempo;          // tempo if not using tempo list (beats per second)
       int _relTempo;          // rel. tempo (100 == 1.0)
 
       void normalize();
-      void add(int tick, double tempo);
-      void change(int tick, double newTempo);
+      void add(int tick, double);
+      void addP(int tick, double);
+      void change(int tick, double);
       void del(iTEvent);
       void del(int tick);
       void add(int t, const TEvent&);
@@ -87,12 +92,11 @@ class TempoMap : public std::map<int, TEvent> {
       int time2tick(double time, int* sn = 0) const;
       int time2tick(double time, int tick, int* sn) const;
       int tempoSN() const { return _tempoSN; }
-      void setTempo(int tick, double newTempo);
-      void addTempo(int t, double tempo);
+      void addTempo(int t, double);
+      void addPause(int t, double);
       void addTempo(int tick, const TEvent& ev);
       void delTempo(int tick);
       void changeTempo(int tick, double newTempo);
-      bool setMasterFlag(int tick, bool val);
       int tick2samples(int tick);
       int samples2tick(int samples);
       void setRelTempo(int val);

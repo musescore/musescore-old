@@ -444,9 +444,6 @@ class Score : public QObject {
       Measure* pos2measure2(const QPointF&, int* tick, int* staffIdx, int* pitch, Segment**) const;
       Measure* pos2measure3(const QPointF& p, int* tick) const;
 
-      void undoChangeKey(Staff* staff, int tick, KeySigEvent o, KeySigEvent n);
-      void undoChangeTempo(int tick, const AL::TEvent& o, const AL::TEvent& n);
-      void undoChangeClef(Staff* staff, int tick, int o, int n);
       void undoAddElement(Element* element);
       void undoRemoveElement(Element* element);
       void undoChangeMeasureLen(Measure* m, int oldTicks, int newTicks);
@@ -539,8 +536,6 @@ class Score : public QObject {
 
       void cmdAdd(Element*);
       void cmdRemove(Element*);
-      void cmdRemoveClef(Clef*);
-      void cmdRemoveKeySig(KeySig*);
       void cmdRemoveTimeSig(TimeSig*);
       void cmdAddTimeSig(Measure*, TimeSig*);
 

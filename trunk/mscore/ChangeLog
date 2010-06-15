@@ -1,3 +1,7 @@
+15.jun (ws)
+      - implement short playback pause for breath
+      - implement fermata as tempo change
+      - implement playback pause for section break
 14.jun (ws)
       - insert/delete time signatures: handle horizontal frames
 13.jun (ws)

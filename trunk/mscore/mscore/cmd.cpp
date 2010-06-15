@@ -269,86 +269,14 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       }
 
 //---------------------------------------------------------
-//   cmdRemoveClef
-//---------------------------------------------------------
-
-void Score::cmdRemoveClef(Clef* clef)
-      {
-      undoRemoveElement(clef);
-      }
-
-//---------------------------------------------------------
-//   cmdRemoveKeySig
-//---------------------------------------------------------
-
-void Score::cmdRemoveKeySig(KeySig* ks)
-      {
-      Staff* staff = ks->staff();
-      KeyList* kl  = staff->keymap();
-      int tick     = ks->tick();
-      iKeyList ki = kl->find(tick);
-      if (ki == kl->end()) {
-            printf("cmdRemove(KeySig): cannot find keysig at %d\n", tick);
-            return;
-            }
-      KeySigEvent oval = ki->second;
-      iKeyList nki = ki;
-      ++nki;
-
-      undoChangeKey(staff, tick, oval, KeySigEvent());
-
-      undoRemoveElement(ks);
-      Segment* segment = ks->segment()->next1();
-      ks->measure()->cmdRemoveEmptySegment(ks->segment());
-
-      oval = kl->key(tick);
-      if ((nki != kl->end()) && (nki->second == oval))
-            undoChangeKey(staff, nki->first, oval, KeySigEvent());
-
-      int track = ks->track();
-      for (; segment; segment = segment->next1()) {
-            if (segment->subtype() != SegKeySig)
-                  continue;
-            KeySig* e = static_cast<KeySig*>(segment->element(track));
-            if (e) {
-                  KeySigEvent cst = e->keySigEvent();
-                  if (cst == oval) {
-                        // remove redundant key signature
-                        undoRemoveElement(e);
-                        segment->measure()->cmdRemoveEmptySegment(segment);
-                        }
-                  return;
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   cmdRemove
 //---------------------------------------------------------
 
 void Score::cmdRemove(Element* e)
       {
       switch(e->type()) {
-            case CLEF:
-                  cmdRemoveClef(static_cast<Clef*>(e));
-                  break;
-            case KEYSIG:
-                  cmdRemoveKeySig(static_cast<KeySig*>(e));
-                  break;
             case TIMESIG:
                   cmdRemoveTimeSig(static_cast<TimeSig*>(e));
-                  break;
-            case TEMPO_TEXT:
-                  {
-                  TempoText* tt = static_cast<TempoText*>(e);
-                  int tick = tt->tick();
-                  AL::iTEvent i = _tempomap->find(tick);
-                  if (i != _tempomap->end())
-                        undoChangeTempo(tick, i->second, AL::TEvent());
-                  else
-                        printf("remove tempotext: tempo event at %d not found\n", tick);
-                  undoRemoveElement(e);
-                  }
                   break;
 
             default:
@@ -359,8 +287,6 @@ void Score::cmdRemove(Element* e)
                   undoRemoveElement(e);
                   if (seg && seg->isEmpty())
                         undoRemoveElement(seg);
-                  if (e->type() == DYNAMIC)
-                        fixPpitch();      // recalculate all velocities
                   }
                   break;
             }

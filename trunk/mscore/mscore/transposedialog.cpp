@@ -342,19 +342,7 @@ void Score::transpose(Note* n, Interval interval, bool useDoubleSharpsFlats)
 
 void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int semitones)
       {
-printf("transpose keys %d\n", semitones);
-
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
-            KeyList* km = staff(staffIdx)->keymap();
-            for (iKeyList ke = km->lower_bound(tickStart);
-               ke != km->lower_bound(tickEnd); ++ke) {
-                  KeySigEvent oKey  = ke->second;
-                  int tick  = ke->first;
-                  int nKeyType = transposeKey(oKey.accidentalType, semitones);
-                  KeySigEvent nKey;
-                  nKey.setAccidentalType(nKeyType);
-                  undoChangeKey(staff(staffIdx), tick, oKey, nKey);
-                  }
             for (Segment* s = firstSegment(); s; s = s->next1()) {
                   if (s->subtype() != SegKeySig)
                         continue;
@@ -364,6 +352,7 @@ printf("transpose keys %d\n", semitones);
                         break;
                   KeySig* ks = static_cast<KeySig*>(s->element(staffIdx * VOICES));
                   if (ks) {
+                        KeyList* km      = staff(staffIdx)->keymap();
                         KeySigEvent key  = km->key(s->tick());
                         KeySigEvent okey = km->key(s->tick() - 1);
                         key.naturalType  = okey.accidentalType;

@@ -67,6 +67,7 @@
 #include "beam.h"
 #include "stafftype.h"
 #include "tempotext.h"
+#include "articulation.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -721,7 +722,71 @@ void Score::fixTicks()
                   mb->setTick(tick);
                   continue;
                   }
+
             Measure* m = static_cast<Measure*>(mb);
+
+            //
+            // fix ticks
+            //
+            int mtick = m->tick();
+            int diff  = tick - mtick;
+            int measureTicks = m->ticks();
+            tick += measureTicks;
+            m->moveTicks(diff);
+
+            //
+            //  implement section break rest
+            //
+            if (m->sectionBreak()) {
+                  _tempomap->addPause(m->tick() + m->ticks(), 3.0);
+                  }
+
+            //
+            // implement fermata as a tempo change
+            //
+            SegmentTypes st = SegChordRest | SegBreath;
+
+            for (Segment* s = m->first(st); s; s = s->next(st)) {
+                  if (s->subtype() == SegBreath) {
+                        _tempomap->addPause(s->tick(), .15);
+                        continue;
+                        }
+                  foreach(Element* e, s->elist()) {
+                        if (!e)
+                              continue;
+                        ChordRest* cr = static_cast<ChordRest*>(e);
+                        double stretch = -1.0;
+                        foreach(Articulation* a, *cr->getArticulations()) {
+                              switch(a->subtype()) {
+                                    case UshortfermataSym:
+                                    case DshortfermataSym:
+                                          stretch = 1.5;
+                                          break;
+                                    case UfermataSym:
+                                    case DfermataSym:
+                                          stretch = 2.0;
+                                          break;
+                                    case UlongfermataSym:
+                                    case DlongfermataSym:
+                                          stretch = 3.0;
+                                          break;
+                                    case UverylongfermataSym:
+                                    case DverylongfermataSym:
+                                          stretch = 4.0;
+                                          break;
+                                    default:
+                                          break;
+                                    }
+                              }
+                        if (stretch > 0.0) {
+                              double otempo = _tempomap->tempo(cr->tick());
+                              double ntempo = otempo / stretch;
+                              _tempomap->addTempo(cr->tick(), ntempo);
+                              _tempomap->addTempo(cr->tick() + cr->ticks(), otempo);
+                              break;      // do not consider more staves/voices
+                              }
+                        }
+                  }
 
             //
             // calculate measure number
@@ -743,15 +808,6 @@ void Score::fixTicks()
                   sig = m->timesig();
                   _sigmap->add(tick, AL::SigEvent(sig,  number));
                   }
-
-            //
-            // fix ticks
-            //
-            int mtick = m->tick();
-            int diff  = tick - mtick;
-            int measureTicks = m->ticks();
-            tick += measureTicks;
-            m->moveTicks(diff);
             }
       }
 
