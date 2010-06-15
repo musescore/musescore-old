@@ -1951,6 +1951,10 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                               if (beam && beam->elements().front() == cr)
                                     beam->write(xml);
                               }
+                        if (segment->tick() != xml.curTick) {
+                              xml.tag("tick", segment->tick());
+                              xml.curTick = segment->tick();
+                              }
                         if (segment->subtype() == SegEndBarLine && _multiMeasure > 0) {
                               xml.stag("BarLine");
                               xml.tag("subtype", _endBarLineType);
@@ -2012,6 +2016,10 @@ void Measure::write(Xml& xml) const
                                           tuplet->write(xml);
                                           }
                                     }
+                              if (segment->tick() != xml.curTick) {
+                                    xml.tag("tick", segment->tick());
+                                    xml.curTick = segment->tick();
+                                    }
                               if (segment->subtype() == SegEndBarLine && _multiMeasure > 0) {
                                     xml.stag("BarLine");
                                     xml.tag("subtype", _endBarLineType);
@@ -2069,7 +2077,9 @@ void Measure::read(QDomElement e, int staffIdx)
             QString tag(e.tagName());
             QString val(e.text());
 
-            if (tag == "BarLine") {
+            if (tag == "tick")
+                  score()->curTick = val.toInt();
+            else if (tag == "BarLine") {
                   BarLine* barLine = new BarLine(score());
                   barLine->setTrack(score()->curTrack);
                   barLine->setParent(this);     //??
@@ -2173,12 +2183,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   ts->read(e);
                   Segment* s = getSegment(ts, score()->curTick);
                   s->add(ts);
-                  if (_timesig == _len) {
-                        _timesig = ts->getSig();
-                        _len = _timesig;
-                        }
-                  else
-                        _timesig = ts->getSig();
+                  _timesig = ts->getSig();
                   }
             else if (tag == "KeySig") {
                   KeySig* ks = new KeySig(score());
