@@ -39,6 +39,7 @@ MeasureBase::MeasureBase(Score* score)
       _lineBreak    = false;
       _pageBreak    = false;
       _sectionBreak = false;
+      _pause        = 0.0;
       _dirty        = true;
       }
 
@@ -52,6 +53,7 @@ MeasureBase::MeasureBase(const MeasureBase& m)
       _lineBreak    = m._lineBreak;
       _pageBreak    = m._pageBreak;
       _sectionBreak = m._sectionBreak;
+      _pause        = m._pause;
 
       foreach(Element* e, m._el) {
             add(e->clone());

@@ -1,4 +1,5 @@
 15.jun (ws)
+      - configurable playback pause for section break
       - implement short playback pause for breath
       - implement fermata as tempo change
       - implement playback pause for section break

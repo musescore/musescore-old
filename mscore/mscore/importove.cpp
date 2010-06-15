@@ -1332,6 +1332,7 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 		int absTick = mtt_->getTick(measure->no(), 0);
 
 		cr = new Rest(score_, duration);
+            cr->setDuration(duration.fraction());
 		cr->setTrack(track);
 		Segment* s = measure->getSegment(cr, absTick);
 		s->add(cr);
@@ -1347,6 +1348,7 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 			duration.setDots(container->getDot());
 
 			cr = new Rest(score_, duration);
+                  cr->setDuration(duration.fraction());
 			cr->setTrack(noteTrack);
 			cr->setVisible(container->getShow());
 

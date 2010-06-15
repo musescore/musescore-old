@@ -194,7 +194,8 @@ StyleType styleTypes[] = {
       StyleType("slurEndWidth",            ST_SPATIUM),
       StyleType("slurMidWidth",            ST_SPATIUM),
       StyleType("slurDottedWidth",         ST_SPATIUM),
-      StyleType("slurBow",                 ST_SPATIUM)
+      StyleType("slurBow",                 ST_SPATIUM),
+      StyleType("sectionPause",            ST_DOUBLE)
       };
 
 //---------------------------------------------------------
@@ -472,7 +473,9 @@ Style::Style()
             StyleVal(ST_SlurEndWidth, Spatium(.05)),
             StyleVal(ST_SlurMidWidth, Spatium(.08)),
             StyleVal(ST_SlurDottedWidth, Spatium(.1)),
-            StyleVal(ST_SlurBow, Spatium(1.6))
+            StyleVal(ST_SlurBow, Spatium(1.6)),
+
+            StyleVal(ST_SectionPause, 3.0)
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)

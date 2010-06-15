@@ -737,9 +737,8 @@ void Score::fixTicks()
             //
             //  implement section break rest
             //
-            if (m->sectionBreak()) {
-                  _tempomap->addPause(m->tick() + m->ticks(), 3.0);
-                  }
+            if (m->sectionBreak())
+                  _tempomap->addPause(m->tick() + m->ticks(), m->pause());
 
             //
             // implement fermata as a tempo change
@@ -748,7 +747,7 @@ void Score::fixTicks()
 
             for (Segment* s = m->first(st); s; s = s->next(st)) {
                   if (s->subtype() == SegBreath) {
-                        _tempomap->addPause(s->tick(), .15);
+                        _tempomap->addPause(s->tick(), .1);
                         continue;
                         }
                   foreach(Element* e, s->elist()) {

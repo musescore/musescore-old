@@ -706,6 +706,7 @@ void MuseScore::newFile()
 	                        d.setVal(ticks);
                         }
 		      Rest* rest = new Rest(score, d);
+                  rest->setDuration(d.fraction());
       	      rest->setTrack(staffIdx * VOICES);
 	      	Segment* s = measure->getSegment(rest, tick);
 		      s->add(rest);

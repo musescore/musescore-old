@@ -22,6 +22,7 @@
 #define __LAYOUTBREAK_H__
 
 #include "element.h"
+#include "ui_sectionbreak.h"
 
 // layout break subtypes:
 
@@ -35,6 +36,7 @@ enum { LAYOUT_BREAK_PAGE, LAYOUT_BREAK_LINE, LAYOUT_BREAK_SECTION };
 class LayoutBreak : public Element {
       qreal lw;
       QPainterPath path;
+      double _pause;
 
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void layout();
@@ -48,6 +50,28 @@ class LayoutBreak : public Element {
       virtual const QString subtypeName() const;
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(ScoreView*, const QString&);
+      virtual void write(Xml&) const;
+      virtual void read(QDomElement);
+      double pause() const    { return _pause; }
+      void setPause(double v) { _pause = v; }
       };
+
+
+//---------------------------------------------------------
+//   SectionBreakProperties
+//---------------------------------------------------------
+
+class SectionBreakProperties : public QDialog, public Ui::SectionBreakProperties {
+      Q_OBJECT
+
+   public:
+      SectionBreakProperties(LayoutBreak*, QWidget* parent = 0);
+      double pause() const;
+      };
+
+
+
 
 #endif

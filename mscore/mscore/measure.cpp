@@ -1018,6 +1018,7 @@ void Measure::add(Element* el)
                               break;
                         case LAYOUT_BREAK_SECTION:
                               _sectionBreak = true;
+                              _pause = static_cast<LayoutBreak*>(el)->pause();
                               break;
                         }
                   _el.push_back(el);
@@ -1099,6 +1100,7 @@ void Measure::remove(Element* el)
                               break;
                         case LAYOUT_BREAK_SECTION:
                               _sectionBreak = false;
+                              _pause = 0.0;
                               break;
                         }
                   if (!_el.remove(el))
@@ -1323,6 +1325,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
 
             Rest* rest = new Rest(score(), Duration(Duration::V_MEASURE));
             rest->setTrack(i * VOICES);
+            rest->setDuration(len());
             Segment* s = findSegment(SegChordRest, tick());
             if (s == 0) {
                   s = new Segment(this, SegChordRest, tick());
@@ -1826,6 +1829,7 @@ void Measure::adjustToLen(int ol, int nl)
                               Duration d;
                               d.setVal(n);
                               rest = new Rest(score(), d);
+                              rest->setDuration(d.fraction());
                               rest->setTrack(staffIdx * VOICES + voice);
                               rest->setParent(seg);
                               score()->undoAddElement(rest);
@@ -2477,6 +2481,7 @@ void Measure::createVoice(int track)
                   continue;
             if (s->element(track) == 0) {
                   Rest* rest = new Rest(score(), Duration(Duration::V_MEASURE));
+                  rest->setDuration(len());
                   rest->setTrack(track);
                   rest->setParent(s);
                   score()->undoAddElement(rest);

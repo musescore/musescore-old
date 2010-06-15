@@ -453,6 +453,7 @@ void MuseData::readRest(Part* part, const QString& s)
       Duration d;
       d.setVal(ticks);
       Rest* rest = new Rest(score, d);
+      rest->setDuration(d.fraction());
       chordRest  = rest;
       rest->setTrack(staffIdx * VOICES);
       Segment* segment = measure->getSegment(rest, tick);

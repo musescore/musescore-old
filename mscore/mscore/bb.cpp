@@ -421,6 +421,7 @@ bool Score::importBB(const QString& name)
                         continue;
                   Measure* measure = (Measure*)mb;
                   Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
+                  rest->setDuration(measure->len());
                   rest->setTrack(0);
                   Segment* s = measure->getSegment(rest, measure->tick());
                   s->add(rest);
@@ -688,6 +689,7 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
                               Duration d;
                               d.setVal(len);
                               Rest* rest = new Rest(this, d);
+                              rest->setDuration(d.fraction());
                               rest->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(rest, ctick);
                               s->add(rest);

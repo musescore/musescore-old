@@ -35,6 +35,35 @@ LayoutBreak::LayoutBreak(Score* score)
       setYoff(-2.0);
       setOffsetType(OFFSET_SPATIUM);
       setAlign(ALIGN_RIGHT | ALIGN_BOTTOM);
+      _pause = score->styleD(ST_SectionPause);
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void LayoutBreak::write(Xml& xml) const
+      {
+      xml.stag(name());
+      Element::writeProperties(xml);
+      if (score()->styleD(ST_SectionPause) != _pause)
+            xml.tag("pause", _pause);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void LayoutBreak::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "pause")
+                  _pause = e.text().toDouble();
+            else if (!Element::readProperties(e))
+                  domError(e);
+            }
       }
 
 //---------------------------------------------------------
@@ -170,4 +199,63 @@ Element* LayoutBreak::drop(ScoreView*, const QPointF& /*p1*/, const QPointF& /*p
       return e;
       }
 
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool LayoutBreak::genPropertyMenu(QMenu* popup) const
+      {
+      if (subtype() == LAYOUT_BREAK_SECTION) {
+            QAction* a;
+            a = popup->addAction(tr("Section Break Properties..."));
+            a->setData("props");
+            return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void LayoutBreak::propertyAction(ScoreView* viewer, const QString& s)
+      {
+      if (subtype() != LAYOUT_BREAK_SECTION) {
+            Element::propertyAction(viewer, s);
+            return;
+            }
+      if (s == "props") {
+            SectionBreakProperties sbp(this, 0);
+            if (sbp.exec()) {
+                  if (pause() != sbp.pause()) {
+                        LayoutBreak* nlb = new LayoutBreak(*this);
+                        nlb->setParent(parent());
+                        nlb->setPause(sbp.pause());
+                        score()->undoChangeElement(this, nlb);
+                        }
+                  }
+            }
+      else
+            Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
+//   SectionBreakProperties
+//---------------------------------------------------------
+
+SectionBreakProperties::SectionBreakProperties(LayoutBreak* lb, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      _pause->setValue(lb->pause());
+      }
+
+//---------------------------------------------------------
+//   pause
+//---------------------------------------------------------
+
+double SectionBreakProperties::pause() const
+      {
+      return _pause->value();
+      }
 
