@@ -31,9 +31,9 @@ install(FILES
       MuseScore-nb.pdf
       MuseScore-nl.pdf
       MuseScore-pl.pdf
-      MuseScore-pt-br.pdf
+      MuseScore-pt_BR.pdf
       MuseScore-ro.pdf
       MuseScore-ru.pdf
-      MuseScore-zh-hans.pdf
+      MuseScore-zh_CN.pdf
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}man
       )
