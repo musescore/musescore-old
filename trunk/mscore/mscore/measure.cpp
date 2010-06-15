@@ -2041,7 +2041,8 @@ void Measure::write(Xml& xml) const
 
 void Measure::read(QDomElement e, int staffIdx)
       {
-// printf("---Measure read %d %d\n", tick()/480, staffIdx);
+// printf("---Measure read tick: %d(beat %d) staffIdx: %d  %s %s\n",
+//      tick(), tick()/480, staffIdx, qPrintable(timesig().print()), qPrintable(len().print()));
 
       if (staffIdx == 0)
             _len = Fraction(0, 1);
@@ -2091,7 +2092,6 @@ void Measure::read(QDomElement e, int staffIdx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->read(e, _tuplets);
-// printf("   Chord %d %d\n", score()->curTick, chord->track());
                   if (chord->tremolo() && chord->tremolo()->twoNotes()) {
                         //
                         // search first note of tremolo

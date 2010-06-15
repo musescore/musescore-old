@@ -790,8 +790,6 @@ void Chord::read(QDomElement e)
       {
       QList<Tuplet*> tl;
       read(e, tl);
-      if (!durationType().isValid())
-            convertTicks();
       }
 
 //---------------------------------------------------------
@@ -859,8 +857,6 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets)
             else if (!ChordRest::readProperties(e, tuplets))
                   domError(e);
             }
-      if (!durationType().isValid())
-            convertTicks();
       }
 
 //---------------------------------------------------------

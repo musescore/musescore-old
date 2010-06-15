@@ -728,6 +728,8 @@ void Note::read(QDomElement e)
                   ; // _offTimeType = readValueType(e);
             else if (tag == "offTimeOffset")
                   _offTimeUserOffset = i;
+            else if (tag == "tick")                   // bad input file
+                  ;
 
             else if (Element::readProperties(e))
                   ;
