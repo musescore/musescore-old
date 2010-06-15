@@ -49,7 +49,6 @@ DurationElement::DurationElement(Score* s)
    : Element(s)
       {
       _tuplet = 0;
-      _ticks  = -1;
       }
 
 //---------------------------------------------------------
@@ -319,8 +318,9 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
       else if (tag == "duration")
             setDuration(readFraction(e));
       else if (tag == "ticklen") {      // obsolete (version < 1.12)
-            setDuration(Fraction::fromTicks(i)); // _ticks = i;
-            setDurationType(Fraction::fromTicks(i));
+            Fraction f = Fraction::fromTicks(i);
+            setDuration(f);
+            setDurationType(Duration(f));
             }
       else if (tag == "dots")
             setDots(i);
@@ -634,51 +634,27 @@ void ChordRest::toDefault()
       }
 
 //---------------------------------------------------------
-//   convertTicks
-//---------------------------------------------------------
-
-void DurationElement::convertTicks()
-      {
-      if (_ticks < 0)
-            return;
-      if (_tuplet == 0)
-            setDuration(Fraction::fromTicks(_ticks));
-      }
-
-//---------------------------------------------------------
 //   setDurationType
 //---------------------------------------------------------
 
 void ChordRest::setDurationType(Duration::DurationType t)
       {
       _durationType.setType(t);
-//      if (_durationType.fraction().isValid())
-//            setDuration(_durationType.fraction());
-      _ticks = -1;
       }
 
 void ChordRest::setDurationType(const QString& s)
       {
       _durationType.setType(s);
-//      if (_durationType.fraction().isValid())
-//            setDuration(_durationType.fraction());
-      _ticks = -1;
       }
 
 void ChordRest::setDurationType(int ticks)
       {
       _durationType.setVal(ticks);
-//      if (_durationType.fraction().isValid())
-//            setDuration(_durationType.fraction());
-      _ticks = -1;
       }
 
 void ChordRest::setDurationType(const Duration& v)
       {
       _durationType = v;
-//      if (_durationType.fraction().isValid())
-//            setDuration(_durationType.fraction());
-      _ticks = -1;
       }
 
 //---------------------------------------------------------

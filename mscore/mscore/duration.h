@@ -35,10 +35,6 @@ class DurationElement : public Element {
       Fraction _duration;
       Tuplet* _tuplet;
 
-   protected:
-      int _ticks;       // for reading obsolete scores version < 1.12
-                        // must be converted to _duration
-
    public:
       DurationElement(Score* s);
       DurationElement(const DurationElement& e);
@@ -48,7 +44,6 @@ class DurationElement : public Element {
       Tuplet* tuplet() const                         { return _tuplet;   }
       virtual Beam* beam() const                     { return 0;         }
       int ticks() const;
-      void convertTicks();   // for scores version < 1.12
       virtual int tick() const = 0;
 
       Fraction duration() const           { return _duration; }

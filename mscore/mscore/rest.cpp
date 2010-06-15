@@ -282,12 +282,6 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets)
             if (!ChordRest::readProperties(e, tuplets))
                   domError(e);
             }
-      if (!durationType().isValid()) {
-            if (_ticks <= 0)
-                  setDurationType(Duration(Duration::V_MEASURE));
-            else
-                  convertTicks();
-            }
       QPointF off(userOff());
       setUserOffset(off.x(), off.y());
       }
