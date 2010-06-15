@@ -525,7 +525,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     url = ''
     internal = ''
     language_code = language_code.lower()
-    
+    language_code_pdf = language_code;
     if language_code == 'en':
         url = 'http://musescore.org/en/print/book/export/html/51'
         internal = 'http://musescore.org/en/handbook'
@@ -571,6 +571,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'pt-br':
         url = 'http://musescore.org/pt-br/print/book/export/html/1248'
         internal = 'http://musescore.org/pt-br/manual-pt-br' #podr%C4%99cznik'
+        language_code_pdf = "pt_BR";
     elif language_code == 'ro':
         url = 'http://musescore.org/ro/print/book/export/html/3081'
         internal = 'http://musescore.org/ro/manual'
@@ -580,7 +581,8 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'zh-hans':
         url = 'http://musescore.org/zh-hans/print/book/export/html/5541'
         internal = 'http://musescore.org/zh-hans/用户手册' #%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C'
-
+        language_code_pdf = "zh_CN";
+        
     print "Create handbook for",language_code
 
     if not offline:
@@ -616,7 +618,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     
     saveHTML(html, language_code)
     if pdf != 'nopdf':
-        generatePDF(html, verbose, language_code, pdf)
+        generatePDF(html, verbose, language_code_pdf, pdf)
 
     print ''
 
