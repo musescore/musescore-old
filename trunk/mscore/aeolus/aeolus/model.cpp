@@ -693,10 +693,19 @@ int Model::read_instr ()
       D = 0;
       G = 0;
       d = k = r = s = 0;
-
+#ifdef WIN32
+      QByteArray bb;
+      while (!stat) {
+            line++;
+            bb = f.readLine(1024);
+            if(bb.isEmpty())
+                  break;
+            p = bb.data();
+#else
       while (!stat && f.readLine(buff, 1024)) {
             line++;
             p = buff;
+#endif            
             if (*p != '/') {
                   while (isspace (*p))
                         p++;
