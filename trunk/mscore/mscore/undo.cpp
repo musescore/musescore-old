@@ -1612,6 +1612,7 @@ void ChangeChordRestLen::flip()
       {
       Duration od = cr->durationType();
       cr->setDurationType(d);
+      cr->setDuration(d.fraction());
       d   = od;
       }
 
