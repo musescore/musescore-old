@@ -858,11 +858,7 @@ void Score::makeGap1(int tick, int staffIdx, Fraction len)
 void Score::changeCRlen(ChordRest* cr, const Duration& d)
       {
       Fraction srcF(cr->duration());
-      Fraction dstF;
-      if (d.type() == Duration::V_MEASURE)
-            dstF = cr->measure()->timesig();
-      else
-            dstF = d.fraction();
+      Fraction dstF = d.type() == Duration::V_MEASURE ? cr->measure()->timesig() : d.fraction();
 
       if (srcF == dstF)
             return;
@@ -881,7 +877,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                               undoRemoveElement(n->tieFor());
                         }
                   }
-            undoChangeChordRestLen(cr, d);
+            undoChangeChordRestLen(cr, Duration(dstF));
             setRest(cr->tick() + cr->ticks(), cr->track(), srcF - dstF, false, tuplet);
             select(cr, SELECT_SINGLE, 0);
             return;
