@@ -270,8 +270,10 @@ if (MINGW)
    install_files ( /bin .dll
       ${CROSS}/bin/mingwm10.dll
       ${CROSS}/bin/libgcc_s_dw2-1.dll
-      ${CROSS}/bin/portaudio.dll
-      ${CROSS}/bin/libsndfile-1.dll
+      ${CROSS}/lib/portaudio.dll
+      ${CROSS}/lib/libsndfile-1.dll
+      ${CROSS}/lib/libogg-0.dll
+      ${CROSS}/lib/libvorbis-0.dll
       ${CROSSQT}/bin/QtCore4.dll
       ${CROSSQT}/bin/QtGui4.dll
       ${CROSSQT}/bin/QtXml4.dll
