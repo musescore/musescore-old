@@ -66,6 +66,8 @@ namespace Bww {
     QMap<QString, QString> graceMap;    ///< Map bww embellishments to separate grace notes
     bool inMeasure;                     ///< State: writing the notes in a measure
     int measureNr;                      ///< Current measure number
+    bool tieStart;                      ///< Tie start pending
+    bool inTie;                         ///< In a tie
   };
 
 } // namespace Bww
