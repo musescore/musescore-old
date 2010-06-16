@@ -1138,13 +1138,12 @@ void Chord::layoutStem()
 
             if (_stemSlash) {
                   // TODO: does not work for chords
-                  double x = _stem->pos().x();
-                  double y = _stem->pos().y();
-                  double l = point(stemLen) * .5;
-                  y += l;
-                  double h2 = l * .5;
+                  double l = spatium() * 1.0;
+                  double x = _stem->pos().x() + l * .1;
+                  double y = _stem->pos().y() + point(stemLen) + l * 1.2;
+                  double h2 = l * .4;
                   double w  = upnote->headWidth() * .7;
-                  _stemSlash->setLine(QLineF(QPointF(x + w, y + h2), QPointF(x - w, y - h2)));
+                  _stemSlash->setLine(QLineF(QPointF(x + w, y - h2), QPointF(x - w, y + h2)));
                   }
 
             if (hookIdx) {

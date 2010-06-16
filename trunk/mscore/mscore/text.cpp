@@ -46,7 +46,7 @@ TextBase::TextBase()
       {
       _refCount     = 1;
       _doc          = new QTextDocument(0);
-//      _doc->setUseDesignMetrics(true);
+//_doc->setUseDesignMetrics(true);
       _doc->setUndoRedoEnabled(true);
 
       _hasFrame     = false;
@@ -58,7 +58,7 @@ TextBase::TextBase()
       _layoutWidth  = -1;
 
       QTextOption to = _doc->defaultTextOption();
-//      to.setUseDesignMetrics(true);
+//to.setUseDesignMetrics(true);
       to.setWrapMode(QTextOption::NoWrap);
       _doc->setDefaultTextOption(to);
       }
@@ -305,7 +305,7 @@ void TextBase::layout(double w)
             w = _doc->idealWidth();
       else {
             QTextOption to = _doc->defaultTextOption();
-//            to.setUseDesignMetrics(true);
+// to.setUseDesignMetrics(true);
             to.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
             _doc->setDefaultTextOption(to);
             }
@@ -760,6 +760,7 @@ void TextB::read(QDomElement e)
             if (!readProperties(e))
                   domError(e);
             }
+//      textBase()->doc()->setModified(true);
       cursorPos = 0;
       }
 
