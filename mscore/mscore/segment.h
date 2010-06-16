@@ -103,6 +103,7 @@ class Segment : public Element {
 
       void setNext(Segment* e)          { _next = e;      }
       Segment* prev() const             { return _prev;   }
+      Segment* prev(SegmentTypes) const;
       void setPrev(Segment* e)          { _prev = e;      }
 
       Segment* next1() const;
@@ -142,6 +143,7 @@ class Segment : public Element {
       bool isGrace() const               { return subtype() == SegGrace; }
       void setTick(int);
       int tick() const;
+      int rtick() const { return _tick; } // tickposition relative to measure start
       };
 
 #endif

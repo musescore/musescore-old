@@ -1284,7 +1284,7 @@ void MuseScore::drumPaletteSelected(int idx)
                   continue;
             if (i == idx) {
                   padState.setDrumNote(pitch);
-                  padState.track    = (padState.track / VOICES) * VOICES + ds->voice(pitch);
+                  padState.setTrack((padState.track() / VOICES) * VOICES + ds->voice(pitch));
                   cs->setPadState();
                   break;
                   }

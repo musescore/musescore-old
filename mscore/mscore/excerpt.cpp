@@ -261,6 +261,6 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             xml.etag();
             isFirstStaff = false;
             }
-      xml.tag("cursorTrack", _is.track);
+      xml.tag("cursorTrack", _is.track());
       }
 

@@ -654,7 +654,7 @@ class Score : public QObject {
 
       bool noteEntryMode() const               { return _is.noteEntryMode; }
       int inputPos() const;
-      int inputTrack() const                   { return _is.track;   }
+      int inputTrack() const                   { return _is.track(); }
       InputState& inputState()                 { return _is;         }
       void setInputState(const InputState& st) { _is = st;           }
       void setInputTrack(int);
