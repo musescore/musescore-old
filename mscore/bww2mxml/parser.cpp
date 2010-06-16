@@ -35,8 +35,9 @@
 #include "parser.h"
 #include "writer.h"
 
-/** Determine if symbol is a grace sequence
-  */
+/**
+ Determine if symbol is a grace sequence
+ */
 
 static bool isGrace(Bww::Symbol sym)
 {
@@ -62,7 +63,9 @@ namespace Bww {
     : lex(l),
     wrt(w),
     inMeasure(false),
-    measureNr(0)
+    measureNr(0),
+    tieStart(false),
+    inTie(false)
   {
     qDebug() << "Parser::Parser()";
 
@@ -234,14 +237,7 @@ namespace Bww {
       else if (isGrace(lex.symType()))
         parseSeqNotes();
       else if (lex.symType() == TIE)
-      {
-        if (lex.symValue() == "^ts") parseSeqNotes();
-        else
-        {
-          errorHandler("tie end ('^te') unexpected");
-          lex.getSym();
-        }
-      }
+        parseSeqNotes();
       else if (lex.symType() == TRIPLET)
       {
         if (lex.symValue() == "^3s") parseSeqNotes();
@@ -318,14 +314,36 @@ namespace Bww {
     lex.getSym();
 
     int dots = 0;
+    bool tieStop = false;
+    if (tieStart) inTie = true;
     if (lex.symType() == DOT)
     {
       qDebug() << " dot" << qPrintable(lex.symValue());
       ++dots;
       lex.getSym();
     }
+    else if (lex.symType() == TIE)
+    {
+      qDebug() << " tie" << qPrintable(lex.symValue());
+      if (lex.symValue() == "^ts")
+      {
+        if (inTie) errorHandler("tie start ('^ts') unexpected");
+      }
+      else
+      {
+        if (!inTie || tieStart) errorHandler("tie end ('^te') unexpected");
+        else
+        {
+          tieStop = true;
+          inTie = false;
+        }
+      }
+      lex.getSym();
+    }
+    qDebug() << " tie start" << tieStart << " tie stop" << tieStop;
     beginMeasure();
-    wrt.note(caps[1], caps[2], caps[3], dots);
+    wrt.note(caps[1], caps[2], caps[3], dots, tieStart, tieStop);
+    tieStart = false;
   }
 
   /**
@@ -344,7 +362,7 @@ namespace Bww {
       beginMeasure();
       QStringList graces = graceMap.value(lex.symValue()).split(" ");
       for (int i = 0; i < graces.size(); ++i)
-        wrt.note(graces.at(i), beam, type, dots, true);
+        wrt.note(graces.at(i), beam, type, dots, false, false, true);
     }
     lex.getSym();
   }
@@ -368,10 +386,25 @@ namespace Bww {
   void Parser::parseSeqNotes()
   {
     qDebug() << "Parser::parseSeqNotes() value:" << qPrintable(lex.symValue());
-    while (isGrace(lex.symType()) || lex.symType() == NOTE)
+    while (isGrace(lex.symType()) || lex.symType() == NOTE || lex.symType() == TIE || lex.symType() == TRIPLET)
     {
       if (isGrace(lex.symType())) parseGraces();
       else if (lex.symType() == NOTE) parseNote();
+      else if (lex.symType() == TIE)
+      {
+        if (lex.symValue() == "^ts")
+        {
+          if (inTie) errorHandler("tie start ('^ts') unexpected");
+          else tieStart = true;
+        }
+        else
+        {
+          errorHandler("tie end ('^te') unexpected");
+          lex.getSym();
+        }
+        lex.getSym();
+      }
+      else if (lex.symType() == TRIPLET) lex.getSym();
     }
   }
 

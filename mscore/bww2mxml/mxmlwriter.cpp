@@ -104,6 +104,7 @@ namespace Bww {
 
   void MxmlWriter::note(const QString pitch, const QString /*TODO beam */,
                         const QString type, const int dots,
+                        bool tieStart, bool tieStop,
                         bool grace)
   {
     qDebug() << "MxmlWriter::note()";
@@ -127,12 +128,25 @@ namespace Bww {
     out << "        </pitch>" << endl;
     if (!grace)
       out << "        <duration>" << dur << "</duration>" << endl;
+    if (tieStart)
+      out << "        <tie type=\"start\"/>" << endl;
+    if (tieStop)
+      out << "        <tie type=\"stop\"/>" << endl;
     out << "        <type>" << typeMap.value(type) << "</type>" << endl;
     if (dots == 1) out << "        <dot/>" << endl;
     if (grace)
       out << "        <stem>up</stem>" << endl;
     else
       out << "        <stem>down</stem>" << endl;
+    if (tieStart || tieStop)
+    {
+      out << "        <notations>" << endl;
+      if (tieStart)
+        out << "          <tied type=\"start\"/>" << endl;
+      if (tieStop)
+        out << "          <tied type=\"stop\"/>" << endl;
+      out << "        </notations>" << endl;
+    }
     out << "      </note>" << endl;
   }
 

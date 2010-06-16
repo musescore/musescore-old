@@ -48,6 +48,7 @@ namespace Bww {
     virtual void endMeasure() = 0;
     virtual void note(const QString pitch, const QString beam,
                       const QString type, const int dots,
+                      bool tieStart = false, bool tieStop = false,
                       bool grace = false) = 0;
   };
 
