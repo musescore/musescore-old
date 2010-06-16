@@ -293,7 +293,7 @@ void Score::setPadState(Element* e)
             Chord* chord  = note->chord();
             _is.setDuration(chord->durationType());
             _is.rest      = false;
-            _is.track     = note->track();
+            _is.setTrack(note->track());
             _is.pitch     = note->pitch();
             _is.noteType  = note->noteType();
             _is.beamMode  = chord->beamMode();
@@ -305,7 +305,7 @@ void Score::setPadState(Element* e)
             else
                   _is.setDuration(rest->durationType());
             _is.rest     = true;
-            _is.track    = rest->track();
+            _is.setTrack(rest->track());
             _is.beamMode = rest->beamMode();
             _is.noteType = NOTE_NORMAL;
             }

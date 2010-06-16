@@ -307,12 +307,12 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         }
                   refresh |= e->abbox();
                   _selection.add(e);
-                  _is.track = e->track();
+                  _is.setTrack(e->track());
                   selState = SEL_LIST;
                   if (e->type() == NOTE || e->type() == REST || e->type() == CHORD) {
                         if (e->type() == NOTE)
                               e = e->parent();
-                        _is._segment = static_cast<ChordRest*>(e)->segment();
+                        _is.setSegment(static_cast<ChordRest*>(e)->segment());
                         emit posChanged(_is.tick());
                         }
                   }

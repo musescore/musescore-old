@@ -183,6 +183,20 @@ Segment* Segment::next(SegmentTypes types) const
       }
 
 //---------------------------------------------------------
+//   prev
+//    got to previous segment which has subtype in types
+//---------------------------------------------------------
+
+Segment* Segment::prev(SegmentTypes types) const
+      {
+      for (Segment* s = prev(); s; s = s->prev()) {
+            if (s->subtype() & types)
+                  return s;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   prev1
 //---------------------------------------------------------
 

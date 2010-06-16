@@ -736,7 +736,7 @@ void Score::putNote(const QPointF& pos, bool replace)
       int clef                = st->clef(tick);
       int pitch               = line2pitch(line, clef, key.accidentalType);
       Part* instr             = st->part();
-      _is.track               = staffIdx * VOICES + (_is.track % VOICES);
+      _is.setTrack(staffIdx * VOICES + (_is.track() % VOICES));
       _is.pitch               = pitch;
       int headGroup           = 0;
       Direction stemDirection = AUTO;
@@ -759,7 +759,7 @@ void Score::putNote(const QPointF& pos, bool replace)
             printf("cannot put note here, no segment found\n");
             return;
             }
-      _is._segment = s;
+      _is.setSegment(s);
       expandVoice();
       ChordRest* cr = _is.cr();
       if (cr == 0)
@@ -789,13 +789,13 @@ void Score::putNote(const QPointF& pos, bool replace)
                   addNote(static_cast<Chord*>(cr), pitch);
                   }
             else
-                  setNoteRest(cr, _is.track, pitch, _is.duration().fraction(), headGroup, stemDirection);
+                  setNoteRest(cr, _is.track(), pitch, _is.duration().fraction(), headGroup, stemDirection);
             }
       else {
             // replace chord
             if (_is.rest)
                   pitch = -1;
-            setNoteRest(cr, _is.track, pitch, _is.duration().fraction(), headGroup, stemDirection);
+            setNoteRest(cr, _is.track(), pitch, _is.duration().fraction(), headGroup, stemDirection);
             }
       moveToNextInputPos();
       }
@@ -1339,7 +1339,7 @@ void Score::cmdDeleteSelectedMeasures()
             }
 //      selection().clearElements();
       select(0, SELECT_SINGLE, 0);
-      _is._segment = 0;        // invalidate position
+      _is.setSegment(0);        // invalidate position
       layoutAll = true;
       }
 
@@ -1718,10 +1718,10 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
 void ScoreView::changeVoice(int voice)
       {
       InputState* is = &score()->inputState();
-      if ((is->track % VOICES) == voice)
+      if ((is->track() % VOICES) == voice)
             return;
 
-      is->track = (is->track / VOICES) * VOICES + voice;
+      is->setTrack((is->track() / VOICES) * VOICES + voice);
       //
       // in note entry mode search for a valid input
       // position
@@ -1729,11 +1729,11 @@ void ScoreView::changeVoice(int voice)
       if (!is->noteEntryMode || is->cr())
             return;
 
-      is->_segment = is->_segment->measure()->firstCRSegment();
+      is->setSegment(is->segment()->measure()->firstCRSegment());
       moveCursor();
       score()->setUpdateAll(true);
       score()->end();
-      mscore->setPos(is->_segment->tick());
+      mscore->setPos(is->segment()->tick());
       }
 
 //---------------------------------------------------------
@@ -1839,7 +1839,7 @@ void Score::cmdEnterRest(const Duration& d)
             return;
             }
 
-      int track = _is.track;
+      int track = _is.track();
       Segment* seg  = setNoteRest(_is.cr(), track, -1, d.fraction(), 0, AUTO);
       ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
       if (cr)
@@ -1906,12 +1906,12 @@ void Score::cmdDeleteTuplet(Tuplet* tuplet, bool replaceWithRest)
 void Score::nextInputPos(ChordRest* cr, bool doSelect)
       {
       ChordRest* ncr = nextChordRest(cr);
-      if ((ncr == 0) && (_is.track % VOICES)) {
+      if ((ncr == 0) && (_is.track() % VOICES)) {
             Segment* s = tick2segment(cr->tick() + cr->ticks());
             int track = (cr->track() / VOICES) * VOICES;
             ncr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
-      _is._segment = ncr ? ncr->segment() : 0;
+      _is.setSegment(ncr ? ncr->segment() : 0);
       if (doSelect)
             select(ncr, SELECT_SINGLE, 0);
       if (ncr)

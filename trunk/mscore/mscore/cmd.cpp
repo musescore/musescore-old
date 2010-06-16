@@ -322,7 +322,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
       else {
             KeySigEvent key;
             if (!preferences.alternateNoteEntryMethod)
-                  key = _score->staff(is.track / VOICES)->keymap()->key(is.tick());
+                  key = _score->staff(is.track() / VOICES)->keymap()->key(is.tick());
             int octave = is.pitch / 12;
             pitch      = pitchKeyAdjust(note, key.accidentalType);
             int delta  = is.pitch - (octave*12 + pitch);
@@ -349,7 +349,7 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
       {
       InputState& is = _score->inputState();
 
-      if (is._segment == 0) {
+      if (is.segment() == 0) {
             printf("cannot enter notes here (no chord rest at current position)\n");
             return;
             }
@@ -382,30 +382,36 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
 
 void Score::expandVoice()
       {
-      if (_is.voice() && (_is.cr() == 0)) {
-#if 0
-            Measure* measure = _is.segment()->measure();
-            bool emptyVoice = true;
-            Segment* ls = 0;
-            for (Segment* s = measure->first(SegChordRest); s; s = s->next(SegChordRest)) {
-                  Element* e = s->element(_is.voice());
-                  if (!e) {
-                        if (s == _is.segment()) {
-                              if (ls == 0) {
-                                    }
-                              break;
-                              }
-                        continue;
-                        }
-                  ls = s;
-                  emptyVoice = false;
-                  if (s == _is.segment())
-                        break;
-                  }
-            if (emptyVoice)
-#endif
-                  addRest(_is._segment, _is.track, Duration(Duration::V_MEASURE), 0);
+      Segment* s = _is.segment();
+      int track  = _is.track();
+
+      if (s->element(track))
+            return;
+
+      Segment* ps;
+      for (ps = s; ps; ps = ps->prev(SegChordRest)) {
+            if (ps->element(track))
+                  break;
             }
+      if (ps) {
+            ChordRest* cr = static_cast<ChordRest*>(ps->element(track));
+            if (cr->tick() + cr->ticks() > s->tick()) {
+                  printf("expandVoice: cannot insert element here\n");
+                  return;
+                  }
+            }
+      Segment* ns;
+      for (ns = s->next(SegChordRest); ns; ns = ns->next(SegChordRest)) {
+            if (ns->element(track))
+                  break;
+            }
+      Measure* m  = s->measure();
+      Fraction f;
+      if (ns)
+            f = Fraction::fromTicks(ns->tick() - s->tick());
+      else
+            f = Fraction::fromTicks(m->ticks() - s->rtick());
+      addRest(_is.segment(), _is.track(), Duration(f), 0);
       }
 
 //---------------------------------------------------------
@@ -430,13 +436,13 @@ Note* Score::addPitch(int pitch, bool addFlag)
       // insert note
       Direction stemDirection = AUTO;
       int headGroup           = 0;
-      int track               = _is.track;
+      int track               = _is.track();
       if (_is.drumNote() != -1) {
             int pitch     = _is.drumNote();
             Drumset* ds   = _is.drumset();
             headGroup     = ds->noteHead(pitch);
             stemDirection = ds->stemDirection(pitch);
-            track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
+            track         = ds->voice(pitch) + (_is.track() / VOICES) * VOICES;
             }
 
       Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration().fraction(), headGroup, stemDirection);
@@ -447,7 +453,7 @@ Note* Score::addPitch(int pitch, bool addFlag)
             //
             // extend slur
             //
-            ChordRest* e = searchNote(_is.tick(), _is.track);
+            ChordRest* e = searchNote(_is.tick(), _is.track());
             if (e) {
                   int stick = 0;
                   Element* ee = _is.slur->startElement();
@@ -2500,14 +2506,14 @@ void Score::moveInputPos(Segment* s)
       {
       if (s == 0)
             return;
-      _is._segment = s;
+      _is.setSegment(s);
       emit posChanged(s->tick());
 #if 0 // TODO-S
       Element* el;
-      if (s->element(_is.track))
-            el = s->element(_is.track);
+      if (s->element(_is.track()))
+            el = s->element(_is.track());
       else
-            el = s->element(_is.track / VOICES * VOICES);
+            el = s->element(_is.track() / VOICES * VOICES);
       if (el->type() == CHORD)
             el = static_cast<Chord*>(el)->upNote();
       emit adjustCanvasPosition(el, false);
@@ -2521,9 +2527,9 @@ void Score::moveInputPos(Segment* s)
 
 void Score::moveToNextInputPos()
       {
-      Segment* s = _is._segment;
+      Segment* s = _is.segment();
       Measure* m = s->measure();
-      int track  = _is.track;
+      int track  = _is.track();
       for (s = s->next1(SegChordRest); s; s = s->next1(SegChordRest)) {
             if (s->element(track) || s->measure() != m)
                   break;
@@ -2554,7 +2560,7 @@ Element* Score::move(const QString& cmd)
             }
       else if (cmd == "prev-chord") {
             if (noteEntryMode()) {
-                  Segment* s = _is._segment->prev1();
+                  Segment* s = _is.segment()->prev1();
                   //
                   // if _is._segment is first chord/rest segment in measure
                   // make sure "m" points to previous measure
@@ -2565,7 +2571,7 @@ Element* Score::move(const QString& cmd)
                         return 0;
                   Measure* m = s->measure();
 
-                  int track  = _is.track;
+                  int track  = _is.track();
                   for (; s; s = s->prev1()) {
                         if (s->subtype() != SegChordRest)
                               continue;

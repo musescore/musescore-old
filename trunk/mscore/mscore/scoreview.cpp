@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -2768,11 +2768,11 @@ void ScoreView::textUndoLevelAdded()
 
 void ScoreView::startNoteEntry()
       {
-      _score->inputState()._segment = 0;
+      _score->inputState().setSegment(0);
       Note* note  = 0;
       Element* el = _score->selection().activeCR() ? _score->selection().activeCR() : _score->selection().element();
       if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
-            int track = _score->inputState().track == -1 ? 0 : _score->inputState().track;
+            int track = _score->inputState().track() == -1 ? 0 : _score->inputState().track();
             el = static_cast<ChordRest*>(_score->searchNote(0, track));
             if (el == 0) {
                   return;
@@ -2809,7 +2809,7 @@ void ScoreView::startNoteEntry()
 
 void ScoreView::endNoteEntry()
       {
-      _score->inputState()._segment = 0;
+      _score->inputState().setSegment(0);
       _score->inputState().noteEntryMode = false;
       if (_score->inputState().slur) {
             QList<SlurSegment*>* el = _score->inputState().slur->slurSegments();
@@ -3620,7 +3620,7 @@ void ScoreView::startUndoRedo()
 
 void ScoreView::endUndoRedo()
       {
-      if (_score->inputState()._segment)
+      if (_score->inputState().segment())
             mscore->setPos(_score->inputState().tick());
       if (_score->noteEntryMode() && !noteEntryMode()) {
             // enter note entry mode

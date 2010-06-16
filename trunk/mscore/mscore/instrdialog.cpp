@@ -487,7 +487,7 @@ void MuseScore::editInstrList()
             return;
 
 //TODO-S      cs->setNoteEntry(false);
-  	cs->inputState().track = -1;
+  	cs->inputState().setTrack(-1);
       //
       // process modified partitur list
       //

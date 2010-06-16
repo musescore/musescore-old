@@ -95,13 +95,13 @@ InputState::InputState() :
    _duration(Duration::V_INVALID),
    _drumNote(-1),
    _drumset(0),
+   _track(0),
+   _segment(0),
    rest(false),
    pad(0),
    pitch(72),
    noteType(NOTE_NORMAL),
    beamMode(BEAM_AUTO),
-   track(0),
-   _segment(0),
    noteEntryMode(false),
    slur(0)
       {
@@ -113,7 +113,7 @@ InputState::InputState() :
 
 ChordRest* InputState::cr() const
       {
-      return _segment ? (static_cast<ChordRest*>(_segment->element(track))) : 0;
+      return _segment ? static_cast<ChordRest*>(_segment->element(_track)) : 0;
       }
 
 //---------------------------------------------------------
@@ -585,7 +585,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
             xml.etag();
             }
       xml.curTrack = -1;
-      xml.tag("cursorTrack", _is.track);
+      xml.tag("cursorTrack", _is.track());
       }
 
 //---------------------------------------------------------
@@ -1546,7 +1546,7 @@ void Score::setInputTrack(int v)
             printf("setInputTrack: bad value: %d\n", v);
             return;
             }
-      _is.track = v;
+      _is.setTrack(v);
       }
 
 //---------------------------------------------------------
@@ -1688,6 +1688,30 @@ static Segment* getNextCRSegment(Segment* s, int track)
       }
 
 //---------------------------------------------------------
+//   isStaffElement
+//---------------------------------------------------------
+
+static bool isStaffElement(Segment* s, int t)
+      {
+      for (int voice = 0; voice < VOICES; ++voice) {
+            if (s->element(t+voice))
+                  return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   getNextCRSegment2
+//---------------------------------------------------------
+
+static Segment* getNextCRSegment2(Segment* s, int track)
+      {
+      while (s && ((s->subtype() != SegChordRest) || !isStaffElement(s, track)))
+            s = s->next();
+      return s;
+      }
+
+//---------------------------------------------------------
 //   getPosition
 //    return true if valid position found
 //---------------------------------------------------------
@@ -1777,12 +1801,15 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       Segment* segment = 0;
       pos->tick        = -1;
 
-      int track = pos->staffIdx * VOICES + voice;
+      // int track = pos->staffIdx * VOICES + voice;
+      int track = pos->staffIdx * VOICES;
       for (segment = pos->measure->first(); segment;) {
-            segment = getNextCRSegment(segment, track);
+            //segment = getNextCRSegment(segment, track);
+            segment = getNextCRSegment2(segment, track);
             if (segment == 0)
                   break;
-            Segment* ns = getNextCRSegment(segment->next(), track);
+            //Segment* ns = getNextCRSegment(segment->next(), track);
+            Segment* ns = getNextCRSegment2(segment->next(), track);
 
             double x1 = segment->x();
             double x2;
@@ -1802,7 +1829,8 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   break;      ///?
                   }
 
-            if (x < (x1 + d * .5) && segment->element(track)) {
+//            if (x < (x1 + d * .5) && segment->element(track)) {
+            if (x < (x1 + d * .5) && isStaffElement(segment, track)) {
                   x = x1;
                   pos->tick = segment->tick();
                   break;
@@ -1815,12 +1843,11 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   // first chord/rest segment of measure is a valid position
                   // for voice > 0 even if there is no chord/rest
                   //
-                  for (segment = pos->measure->first(); segment;) {
-                        if (segment->subtype() == SegChordRest)
-                              break;
-                        segment = segment->next();
+                  segment = pos->measure->first(SegChordRest);
+                  if (segment == 0) {
+                        printf("no CR segment in measure\n");
+                        return false;
                         }
-                  x = segment->x();
                   pos->tick = pos->measure->tick();
                   }
             else {
