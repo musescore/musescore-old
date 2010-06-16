@@ -254,7 +254,7 @@ if (MINGW)
    endif (HAS_AUDIOFILE)
 
    if (OGGVORBIS)
-      target_link_libraries(mscore vorbis ogg)
+      target_link_libraries(mscore vorbis-0 ogg-0)
    endif (OGGVORBIS)
 
    if (AEOLUS)
