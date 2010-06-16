@@ -431,12 +431,8 @@ void Score::layoutStage1()
                                     m->setBreakMMRest(true);
                               }
 
-                        if ((segment->subtype() == SegChordRest) || (segment->subtype() == SegGrace))
+                        if (segment->subtype() & (SegChordRest | SegGrace))
                               m->layoutChords0(segment, staffIdx * VOICES, tversatz);
-                        if (e && e->type() == KEYSIG) {
-                              KeySigEvent oval = staff(staffIdx)->keymap()->key(e->tick() - 1);
-                              static_cast<KeySig*>(e)->setOldSig(oval.accidentalType);
-                              }
                         }
                   }
             MeasureBase* mb = m->prev();
@@ -678,21 +674,31 @@ void Score::doLayout()
             }
       if (updateStaffLists) {
             int nstaves = _staves.size();
-            for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
-                  for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                        int track = staffIdx * VOICES;
-                        Staff* st = _staves[staffIdx];
-                        if (s->element(track)) {
+            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                  int track = staffIdx * VOICES;
+                  Staff* st = _staves[staffIdx];
+                  KeySig* key1 = 0;
+                  for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+                        for (Segment* s = m->first(); s; s = s->next()) {
+                              if (!s->element(track))
+                                    continue;
                               Element* e = s->element(track);
+                              if (e->generated())
+                                    continue;
                               if ((s->subtype() == SegClef) && st->updateClefList()) {
                                     Clef* clef = static_cast<Clef*>(e);
                                     st->setClef(s->tick(), clef->subtype());
                                     }
                               else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                                     KeySig* ks = static_cast<KeySig*>(e);
+                                    int naturals = key1 ? key1->keySigEvent().accidentalType : 0;
+                                    ks->setOldSig(naturals);
                                     st->setKey(s->tick(), ks->subtype());
+                                    key1 = ks;
                                     }
                               }
+                        if (m->sectionBreak())
+                              key1 = 0;
                         }
                   }
             foreach(Staff* st, _staves) {

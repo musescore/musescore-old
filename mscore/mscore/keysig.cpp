@@ -221,7 +221,6 @@ Element* KeySig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       if (e->type() == KEYSIG) {
             KeySig* ks    = static_cast<KeySig*>(e);
             KeySigEvent k = ks->keySigEvent();
-// printf("drop ");k.print(); printf("\n");
             if (k.custom) {
                   int customIdx = score()->customKeySigIdx(ks);
                   if (customIdx == -1)
