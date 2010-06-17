@@ -36,12 +36,12 @@ enum SymbolType {
 //---------------------------------------------------------
 
 struct SymCode {
-      QChar code;
+      int code;
       int fontId;
       const char* text;
       SymbolType type;
       bool show;
-      SymCode(QChar c, int id, const char* t = 0, SymbolType type = SYMBOL_UNKNOWN, bool show = true)
+      SymCode(int c, int id, const char* t = 0, SymbolType type = SYMBOL_UNKNOWN, bool show = true)
          : code(c), fontId(id), text(t), type(type), show(show) {}
       };
 
@@ -54,7 +54,7 @@ extern SymCode pSymbols[];
 //---------------------------------------------------------
 
 class Sym {
-      QChar _code;
+      int _code;
       int fontId;
       const char* _name;
       QFont _font;

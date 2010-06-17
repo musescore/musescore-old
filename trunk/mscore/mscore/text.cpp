@@ -1239,11 +1239,18 @@ void TextB::addSymbol(const SymCode& s, QTextCursor* cur)
             QTextCharFormat nFormat(oFormat);
             nFormat.setFontFamily(fontId2font(s.fontId).family());
             cur->setCharFormat(nFormat);
-            cur->insertText(s.code);
+            QString ss;
+            if (s.code & 0xffff0000) {
+                  ss = QChar(QChar::highSurrogate(s.code));
+                  ss += QChar(QChar::lowSurrogate(s.code));
+                  }
+            else
+                  ss = QChar(s.code);
+            cur->insertText(ss);
             cur->setCharFormat(oFormat);
             }
       else
-            cur->insertText(s.code);
+            cur->insertText(QChar(s.code));
       score()->setLayoutAll(true);
       score()->end();
       }

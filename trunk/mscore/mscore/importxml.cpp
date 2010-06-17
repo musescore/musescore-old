@@ -1265,11 +1265,11 @@ static void addSymbolToText(const SymCode& s, QTextCursor* cur)
             QTextCharFormat nFormat(oFormat);
             nFormat.setFontFamily(fontId2font(s.fontId).family());
             cur->setCharFormat(nFormat);
-            cur->insertText(s.code);
+            cur->insertText(QChar(s.code));
             cur->setCharFormat(oFormat);
             }
       else
-            cur->insertText(s.code);
+            cur->insertText(QChar(s.code));
       }
 
 /**
