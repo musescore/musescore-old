@@ -108,6 +108,7 @@ namespace Bww {
     void note(const QString pitch, const QString beam,
               const QString type, const int dots,
               bool tieStart = false, bool tieStop = false,
+              StartStop triplet = ST_NONE,
               bool grace = false);
     void setScore(Score* s) { score = s; }
     void tempo(const int beats, const int beat);
@@ -219,6 +220,7 @@ void MsScWriter::endMeasure()
 void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
                       const QString type, const int dots,
                       bool /*TODO tieStart */, bool /*TODO tieStop */,
+                      StartStop /*TODO triplet */,
                       bool grace)
 {
       qDebug() << "MsScWriter::note()"

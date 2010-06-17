@@ -29,6 +29,8 @@
 
 #include <QtCore/QString>
 
+#include "symbols.h"
+
 class QIODevice;
 
 namespace Bww {
@@ -49,6 +51,7 @@ namespace Bww {
     virtual void note(const QString pitch, const QString beam,
                       const QString type, const int dots,
                       bool tieStart = false, bool tieStop = false,
+                      StartStop triplet = ST_NONE,
                       bool grace = false) = 0;
   };
 
