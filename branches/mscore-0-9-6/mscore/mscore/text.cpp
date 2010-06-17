@@ -778,17 +778,21 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
 
       TextStyle* st = score()->textStyle(_textStyle);
       if (st == 0 || _align != st->align) {
-            if (_align & (ALIGN_RIGHT | ALIGN_HCENTER)) {          // default is ALIGN_LEFT
-                  xml.tag("halign", (_align & ALIGN_RIGHT) ? "right" : "center");
-                  }
-            if (_align & (ALIGN_BOTTOM | ALIGN_VCENTER | ALIGN_BASELINE)) {        // default is ALIGN_TOP
-                  if (_align & ALIGN_BOTTOM)
-                        xml.tag("valign", "bottom");
-                  else if (_align & ALIGN_VCENTER)
-                        xml.tag("valign", "center");
-                  else if (_align & ALIGN_BASELINE)
-                        xml.tag("valign", "baseline");
-                  }
+            if (_align & ALIGN_HCENTER)
+                  xml.tag("halign", "center");
+            else if (_align & ALIGN_RIGHT)
+                  xml.tag("halign", "right");
+            else
+                  xml.tag("halign", "left");
+                  
+            if (_align & ALIGN_BOTTOM)
+                  xml.tag("valign", "bottom");
+            else if (_align & ALIGN_VCENTER)
+                  xml.tag("valign", "center");
+            else if (_align & ALIGN_BASELINE)
+                  xml.tag("valign", "baseline");
+            else
+                  xml.tag("valign", "top");
             }
       if (st == 0 || _xoff != st->xoff)
             xml.tag("xoffset", _xoff);
@@ -802,7 +806,7 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
       if (st == 0 || _offsetType != st->offsetType) {
             const char* p = 0;
             switch(_offsetType) {
-                  case OFFSET_SPATIUM:                    break;
+                  case OFFSET_SPATIUM:    p = "spatium"; break;
                   case OFFSET_ABS:        p = "absolute"; break;
                   }
             if (p)
@@ -847,20 +851,26 @@ bool TextB::readProperties(QDomElement e)
       else if (tag == "align")            // obsolete
             _align = Align(val.toInt());
       else if (tag == "halign") {
+            _align &= ~(ALIGN_HCENTER | ALIGN_RIGHT);
             if (val == "center")
-                  _align |= ALIGN_HCENTER;
+                _align |= ALIGN_HCENTER;
             else if (val == "right")
-                  _align |= ALIGN_RIGHT;
+                _align |= ALIGN_RIGHT;
+            else if (val == "left")
+                  ;
             else
                   printf("Text::readProperties: unknown alignment: <%s>\n", qPrintable(val));
             }
       else if (tag == "valign") {
+            _align &= ~(ALIGN_VCENTER | ALIGN_BOTTOM | ALIGN_BASELINE);
             if (val == "center")
                   _align |= ALIGN_VCENTER;
             else if (val == "bottom")
                   _align |= ALIGN_BOTTOM;
             else if (val == "baseline")
                   _align |= ALIGN_BASELINE;
+            else if (val == "top")
+                  ;
             else
                   printf("Text::readProperties: unknown alignment: <%s>\n", qPrintable(val));
             }
