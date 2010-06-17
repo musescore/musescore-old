@@ -785,7 +785,7 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
                   xml.tag("halign", "right");
             else
                   xml.tag("halign", "left");
-                  
+
             if (_align & ALIGN_BOTTOM)
                   xml.tag("valign", "bottom");
             else if (_align & ALIGN_VCENTER)
@@ -857,6 +857,8 @@ bool TextB::readProperties(QDomElement e)
                 _align |= ALIGN_HCENTER;
             else if (val == "right")
                 _align |= ALIGN_RIGHT;
+            else if (val == "left")
+                  ;
             else if (val == "left")
                   ;
             else

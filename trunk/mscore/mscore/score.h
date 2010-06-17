@@ -154,7 +154,7 @@ struct MidiInputEvent {
 
 struct Position {
       Measure* measure;
-      int tick;
+      Segment* segment;
       int staffIdx;
       int line;
       QPointF pos;
