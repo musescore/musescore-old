@@ -663,7 +663,7 @@ void Seq::collectEvents()
 
 int Seq::getCurTime()
       {
-          return (startTime > 0? lrint(curTime() - startTime) :0);
+      return (startTime > 0? lrint(curTime() - startTime) :0);
       }
 
 //---------------------------------------------------------

@@ -1677,17 +1677,6 @@ Page* Score::searchPage(const QPointF& p) const
       }
 
 //---------------------------------------------------------
-//   getNextCRSegment
-//---------------------------------------------------------
-
-static Segment* getNextCRSegment(Segment* s, int track)
-      {
-      while (s && ((s->subtype() != SegChordRest) || !s->element(track)))
-            s = s->next();
-      return s;
-      }
-
-//---------------------------------------------------------
 //   isStaffElement
 //---------------------------------------------------------
 
@@ -1701,13 +1690,49 @@ static bool isStaffElement(Segment* s, int t)
       }
 
 //---------------------------------------------------------
-//   getNextCRSegment2
+//    getNextValidInputSegment
+//    - s is of type SegChordRest
 //---------------------------------------------------------
 
-static Segment* getNextCRSegment2(Segment* s, int track)
+static Segment* getNextValidInputSegment(Segment* s, int track, int voice)
       {
-      while (s && ((s->subtype() != SegChordRest) || !isStaffElement(s, track)))
-            s = s->next();
+      static const SegmentTypes st = SegChordRest;
+      while (s) {
+            if (s->element(track + voice))
+                  break;
+            int v;
+            for (v = 0; v < VOICES; ++v) {
+                  if (s->element(track + v))
+                        break;
+                  }
+            if ((v != VOICES) && voice) {
+                  Segment* s1;
+                  Measure* m = s->measure();
+                  int ntick;
+                  bool skipChord = false;
+                  bool ns        = false;
+                  for (s1 = s->measure()->first(st); s1; s1 = s1->next(st)) {
+                        ChordRest* cr = static_cast<ChordRest*>(s1->element(track + voice));
+                        if (cr) {
+                              if (ns)
+                                    return s1;
+                              ntick = s1->tick() + cr->ticks();
+                              skipChord = true;
+                              }
+                        if (s1 == s)
+                              ns = true;
+                        if (skipChord) {
+                              if (s->tick() >= ntick)
+                                    skipChord = false;
+                              }
+                        if (!skipChord && ns)
+                              return s1;
+                        }
+                  if (!skipChord)
+                        return s;
+                  }
+            s = s->next(st);
+            }
       return s;
       }
 
@@ -1723,18 +1748,28 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
             return false;
       //
       //    search system
+      //    note: there may be more than one system in a row
       //
       QPointF pp               = p - page->pos();  // transform to page relative
       const QList<System*>* sl = page->systems();
-      int n                    = sl->size();
       System* system           = 0;
       double y2;
-      for (int i = 0; i < n; ++i) {
-            System* s = (*sl)[i];
-            if ((i+1) == n)
+      int nsystems = 0;
+      int n        = sl->size();
+      int i;
+      for (i = 0; i < n; ++i) {
+            System* s = sl->at(i);
+            System* ns = 0;               // next system row
+            nsystems = 1;
+            for (int ii = i+1; ii < n; ++ii) {
+                  ns = sl->at(ii);
+                  if (ns->y() != s->y())
+                        break;
+                  ++nsystems;
+                  }
+            if (ns == 0)
                   y2 = page->height();
             else  {
-                  System* ns = (*sl)[i+1];
                   double sy2 = s->y() + s->bbox().height();
                   y2         = sy2 + (ns->y() - sy2) * .5;
                   }
@@ -1743,28 +1778,35 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   break;
                   }
             }
-      if (system == 0) {
-//            printf("no system\n");
+      if (system == 0)
             return false;
-            }
 
       //
       //    search measure
       //
-      QPointF ppp  = pp - system->pos();   // system relative
-      pos->measure = 0;
-      foreach(MeasureBase* mb, system->measures()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            if (ppp.x() < (mb->x() + mb->bbox().width())) {
-                  pos->measure = static_cast<Measure*>(mb);
-                  break;
+      QPointF ppp;
+      int end = i + nsystems;
+      if (end > n)
+            end = n;
+      for (; i < end; ++i) {
+            system = sl->at(i);
+            ppp  = pp - system->pos();   // system relative
+            pos->measure = 0;
+            bool found = false;
+            foreach(MeasureBase* mb, system->measures()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  if (ppp.x() < (mb->x() + mb->bbox().width())) {
+                        pos->measure = static_cast<Measure*>(mb);
+                        found = true;
+                        break;
+                        }
                   }
+            if (found)
+                  break;
             }
-      if (pos->measure == 0) {
-//            printf("no measure\n");
+      if (pos->measure == 0)
             return false;
-            }
 
       //
       //    search staff
@@ -1788,28 +1830,24 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   }
             sy1 = sy2;
             }
-      if (sstaff == 0) {
-// printf("no sys staff\n");
+      if (sstaff == 0)
             return false;
-            }
 
       //
       //    search segment
       //
-      QPointF pppp     = ppp - pos->measure->pos();
+      QPointF pppp(ppp - pos->measure->pos());
       double x         = pppp.x();
       Segment* segment = 0;
-      pos->tick        = -1;
+      pos->segment     = 0;
 
       // int track = pos->staffIdx * VOICES + voice;
       int track = pos->staffIdx * VOICES;
-      for (segment = pos->measure->first(); segment;) {
-            //segment = getNextCRSegment(segment, track);
-            segment = getNextCRSegment2(segment, track);
+      for (segment = pos->measure->first(SegChordRest); segment;) {
+            segment = getNextValidInputSegment(segment, track, voice);
             if (segment == 0)
                   break;
-            //Segment* ns = getNextCRSegment(segment->next(), track);
-            Segment* ns = getNextCRSegment2(segment->next(), track);
+            Segment* ns = getNextValidInputSegment(segment->next(SegChordRest), track, voice);
 
             double x1 = segment->x();
             double x2;
@@ -1818,43 +1856,28 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
             if (ns) {
                   x2    = ns->x();
                   ntick = ns->tick();
-                  d = x2 - x1;
+                  d     = x2 - x1;
                   }
             else {
                   x2    = pos->measure->bbox().width();
                   ntick = pos->measure->tick() + pos->measure->ticks();
-                  d = (x2 - x1) * 2.0;
-                  x = x1;
-                  pos->tick = segment->tick();
-                  break;      ///?
+                  d     = (x2 - x1) * 2.0;
+                  x     = x1;
+                  pos->segment = segment;
+                  break;
                   }
 
 //            if (x < (x1 + d * .5) && segment->element(track)) {
-            if (x < (x1 + d * .5) && isStaffElement(segment, track)) {
+//            if (x < (x1 + d * .5) && isStaffElement(segment, track)) {
+            if (x < (x1 + d * .5)) {
                   x = x1;
-                  pos->tick = segment->tick();
+                  pos->segment = segment;
                   break;
                   }
             segment = ns;
             }
-      if (segment == 0) {
-            if (voice) {
-                  //
-                  // first chord/rest segment of measure is a valid position
-                  // for voice > 0 even if there is no chord/rest
-                  //
-                  segment = pos->measure->first(SegChordRest);
-                  if (segment == 0) {
-                        printf("no CR segment in measure\n");
-                        return false;
-                        }
-                  pos->tick = pos->measure->tick();
-                  }
-            else {
-// printf("no segment+ track %d voice %d itrack %d\n", track, voice, _is.track);
-                  return false;
-                  }
-            }
+      if (segment == 0)
+            return false;
       //
       // TODO: restrict to reasonable values (pitch 0-127)
       //
@@ -1863,6 +1886,18 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       double y   = pos->measure->canvasPos().y() + sstaff->y();
       y         += pos->line * _spatium * .5 * mag;
       pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
+
+      int minLine = pitch2line(0);
+      Staff* s    = staff(pos->staffIdx);
+      int clef    = s->clefList()->clef(pos->segment->tick());
+      minLine     = 127 - minLine - 82 + clefTable[clef].yOffset;
+      int maxLine = pitch2line(127);
+      maxLine     = 127 - maxLine - 82 + clefTable[clef].yOffset;
+
+printf("line %d  minLine %d\n", pos->line, minLine);
+      if (pos->line > minLine || pos->line < maxLine)
+            return false;
+
       return true;
       }
 

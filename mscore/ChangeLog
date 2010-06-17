@@ -1,3 +1,9 @@
+17.jun (ws)
+      - enable more possible input positions when inputting notes
+        with voice > 1
+      - limit pitch range when inputting notes with mouse
+      - fix mouse note input when there are horizontal boxes in a
+        system rom
 15.jun (ws)
       - add pictures.mscx as demo for new section break
       - configurable playback pause for section break

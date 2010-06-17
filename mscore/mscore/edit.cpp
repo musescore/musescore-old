@@ -728,7 +728,7 @@ void Score::putNote(const QPointF& pos, bool replace)
             return;
             }
 
-      int tick                = p.tick;
+      int tick                = p.segment->tick();
       int staffIdx            = p.staffIdx;
       int line                = p.line;
       Staff* st               = staff(staffIdx);
@@ -746,19 +746,14 @@ void Score::putNote(const QPointF& pos, bool replace)
             pitch         = _is.drumNote();
             if (pitch < 0)
                   return;
-            // voice         = ds->voice(pitch);
-            headGroup     = ds->noteHead(pitch);
+            headGroup = ds->noteHead(pitch);
             if(headGroup < 0) {
                   return;
                   }
             stemDirection = ds->stemDirection(pitch);
             }
 
-      Segment* s = p.measure->tick2segment(tick);
-      if (s == 0) {
-            printf("cannot put note here, no segment found\n");
-            return;
-            }
+      Segment* s = p.segment;
       _is.setSegment(s);
       expandVoice();
       ChordRest* cr = _is.cr();
