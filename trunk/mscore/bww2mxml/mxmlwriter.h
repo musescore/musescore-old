@@ -52,6 +52,7 @@ namespace Bww {
     void note(const QString pitch, const QString beam,
               const QString type, const int dots,
               bool tieStart = false, bool tieStop = false,
+              StartStop triplet = ST_NONE,
               bool grace = false);
     void setOutDevice(QIODevice *outDevice) { out.setDevice(outDevice); }
     void tempo(const int beats, const int beat);

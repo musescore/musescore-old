@@ -105,6 +105,7 @@ namespace Bww {
   void MxmlWriter::note(const QString pitch, const QString /*TODO beam */,
                         const QString type, const int dots,
                         bool tieStart, bool tieStop,
+                        StartStop triplet,
                         bool grace)
   {
     qDebug() << "MxmlWriter::note()";
@@ -134,17 +135,28 @@ namespace Bww {
       out << "        <tie type=\"stop\"/>" << endl;
     out << "        <type>" << typeMap.value(type) << "</type>" << endl;
     if (dots == 1) out << "        <dot/>" << endl;
+    if (triplet != ST_NONE)
+    {
+      out << "        <time-modification>" << endl;
+      out << "          <actual-notes>3</actual-notes>" << endl;
+      out << "          <normal-notes>2</normal-notes>" << endl;
+      out << "        </time-modification>" << endl;
+    }
     if (grace)
       out << "        <stem>up</stem>" << endl;
     else
       out << "        <stem>down</stem>" << endl;
-    if (tieStart || tieStop)
+    if (tieStart || tieStop || triplet == ST_START || triplet == ST_STOP)
     {
       out << "        <notations>" << endl;
       if (tieStart)
         out << "          <tied type=\"start\"/>" << endl;
       if (tieStop)
         out << "          <tied type=\"stop\"/>" << endl;
+      if (triplet == ST_START)
+        out << "          <tuplet type=\"start\"/>" << endl;
+      if (triplet == ST_STOP)
+        out << "          <tuplet type=\"stop\"/>" << endl;
       out << "        </notations>" << endl;
     }
     out << "      </note>" << endl;

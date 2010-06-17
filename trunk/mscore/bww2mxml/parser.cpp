@@ -350,17 +350,28 @@ namespace Bww {
         else
         {
           tripletStop = true;
-          inTriplet = false;
         }
       }
       lex.getSym();
     }
+    StartStop triplet = ST_NONE;
+    if (inTriplet)
+    {
+      if (tripletStart) triplet = ST_START;
+      else if (tripletStop) triplet = ST_STOP;
+      else triplet = ST_CONTINUE;
+    }
     qDebug() << " tie start" << tieStart << " tie stop" << tieStop;
     qDebug() << " triplet start" << tripletStart << " triplet stop" << tripletStop;
     beginMeasure();
-    wrt.note(caps[1], caps[2], caps[3], dots, tieStart, tieStop);
+    wrt.note(caps[1], caps[2], caps[3], dots, tieStart, tieStop, triplet);
     tieStart = false;
     tripletStart = false;
+    if (tripletStop)
+    {
+      inTriplet = false;
+      tripletStop = false;
+    }
   }
 
   /**
@@ -379,7 +390,7 @@ namespace Bww {
       beginMeasure();
       QStringList graces = graceMap.value(lex.symValue()).split(" ");
       for (int i = 0; i < graces.size(); ++i)
-        wrt.note(graces.at(i), beam, type, dots, false, false, true);
+        wrt.note(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
     }
     lex.getSym();
   }

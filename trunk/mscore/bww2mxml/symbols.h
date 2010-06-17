@@ -57,6 +57,14 @@ namespace Bww {
     NONE
   };
 
+  enum StartStop
+  {
+    ST_NONE,
+    ST_START,
+    ST_CONTINUE,
+    ST_STOP
+  };
+
   extern QString symbolToString(Symbol s);
 
 } // namespace Bww
