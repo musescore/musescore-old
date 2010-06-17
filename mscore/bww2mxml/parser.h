@@ -68,6 +68,8 @@ namespace Bww {
     int measureNr;                      ///< Current measure number
     bool tieStart;                      ///< Tie start pending
     bool inTie;                         ///< In a tie
+    bool tripletStart;                  ///< Triplet start pending
+    bool inTriplet;                     ///< In a triplet
   };
 
 } // namespace Bww
