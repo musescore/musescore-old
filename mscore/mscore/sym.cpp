@@ -265,8 +265,13 @@ SymCode pSymbols[] = {
       SymCode(0xe10c, 1),    // sharp
       SymCode(0xe10d, 1),    // flat
       SymCode(0xe104, 1),    // note2_Sym
-      SymCode(0xe105, 1),    // note4_Sym
-      SymCode(0xe106, 1),    // note8_Sym
+
+//      SymCode(0xe105, 1),    // note4_Sym
+      SymCode(0x1d15f, 1),    // note4_Sym
+
+//      SymCode(0xe106, 1),    // note8_Sym
+      SymCode(0xe1d6, 1),    // note8_Sym
+
       SymCode(0xe107, 1),    // note16_Sym
       SymCode(0xe108, 1),    // note32_Sym
       SymCode(0xe109, 1),    // note64_Sym
@@ -316,7 +321,7 @@ SymCode pSymbols[] = {
       SymCode(0x011c, -1),
       SymCode(0x0124, -1),
       SymCode(0x0134, -1),
-      SymCode(0x015c, -1),            
+      SymCode(0x015c, -1),
       SymCode(0x016c, -1),
 
       SymCode(0x00e0, -1),
@@ -357,10 +362,10 @@ SymCode pSymbols[] = {
       SymCode(0x011d, -1),
       SymCode(0x0125, -1),
       SymCode(0x0135, -1),
-      SymCode(0x015d, -1),            
+      SymCode(0x015d, -1),
       SymCode(0x016d, -1),
-      
-      
+
+
       SymCode(0x00BC, -1, "1/4", SYMBOL_FRACTION),
       SymCode(0x00BD, -1, "1/2", SYMBOL_FRACTION),
       SymCode(0x00BE, -1, "3/4", SYMBOL_FRACTION),
@@ -403,7 +408,7 @@ QFont fontId2font(int fontId)
             _font.setStyleStrategy(QFont::NoFontMerging);
             }
       else if (fontId == 1) {
-            _font.setFamily("MScore1");
+            _font.setFamily("MScore1_new");
             }
       else if (fontId == 2) {
             _font.setFamily("Times New Roman");
@@ -427,7 +432,7 @@ Sym::Sym(const char* name, int c, int fid, double ax, double ay)
       {
       QFontMetricsF fm(_font);
       if (!fm.inFont(_code))
-            printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", _code.unicode(),c, _name, qPrintable(_font.family()));
+            printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", _code, c, _name, qPrintable(_font.family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
       createTextLayout();
@@ -450,7 +455,13 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
 
 void Sym::createTextLayout()
       {
-      tl = new QTextLayout(QString(_code), _font);
+      if (_code & 0xffff0000) {
+            QString s = QChar(QChar::highSurrogate(_code));
+            s += QChar(QChar::lowSurrogate(_code));
+            tl = new QTextLayout(s, _font);
+            }
+      else
+            tl = new QTextLayout(QString(_code), _font);
       tl->beginLayout();
       QTextLine l = tl->createLine();
       l.setNumColumns(1);

@@ -1902,7 +1902,8 @@ int main(int argc, char* av[])
       //  load internal fonts
       //
       static const char* fonts[] = {
-            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSans", "DejaVuSerif"
+//            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSans", "DejaVuSerif"
+            "mscore-20", "MScore1-20_new", "MuseJazz", "DejaVuSans", "DejaVuSerif"
             };
       for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
             if (-1 == QFontDatabase::addApplicationFont(QString(":/fonts/%1.ttf").arg(fonts[i]))) {

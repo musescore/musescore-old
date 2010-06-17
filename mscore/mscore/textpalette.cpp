@@ -377,9 +377,9 @@ TextPalette::TextPalette(QWidget* parent)
 
             SymCode sc(pSymbols[i]);
             if (sc.fontId == -1)
-                  tb->setText(sc.code);
+                  tb->setText(QChar(sc.code));
             else {
-                  Sym sym("", sc.code.unicode(), sc.fontId);
+                  Sym sym("", sc.code, sc.fontId);
                   QIcon* icon = symIcon(sym, 25, 35, 35);
                   tb->setIconSize(QSize(35, 35));
                   tb->setIcon(*icon);
