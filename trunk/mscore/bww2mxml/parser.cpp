@@ -65,7 +65,9 @@ namespace Bww {
     inMeasure(false),
     measureNr(0),
     tieStart(false),
-    inTie(false)
+    inTie(false),
+    tripletStart(false),
+    inTriplet(false)
   {
     qDebug() << "Parser::Parser()";
 
@@ -239,14 +241,7 @@ namespace Bww {
       else if (lex.symType() == TIE)
         parseSeqNotes();
       else if (lex.symType() == TRIPLET)
-      {
-        if (lex.symValue() == "^3s") parseSeqNotes();
-        else
-        {
-          errorHandler("triplet end ('^3e') unexpected");
-          lex.getSym();
-        }
-      }
+        parseSeqNotes();
       else if (lex.symType() == UNKNOWN)
       {
         errorHandler("unknown symbol '" + lex.symValue() + "'");
@@ -316,6 +311,8 @@ namespace Bww {
     int dots = 0;
     bool tieStop = false;
     if (tieStart) inTie = true;
+    bool tripletStop = false;
+    if (tripletStart) inTriplet = true;
     if (lex.symType() == DOT)
     {
       qDebug() << " dot" << qPrintable(lex.symValue());
@@ -331,7 +328,7 @@ namespace Bww {
       }
       else
       {
-        if (!inTie || tieStart) errorHandler("tie end ('^te') unexpected");
+        if (!inTie) errorHandler("tie end ('^te') unexpected");
         else
         {
           tieStop = true;
@@ -340,10 +337,30 @@ namespace Bww {
       }
       lex.getSym();
     }
+    else if (lex.symType() == TRIPLET)
+    {
+      qDebug() << " triplet" << qPrintable(lex.symValue());
+      if (lex.symValue() == "^3s")
+      {
+        if (inTriplet) errorHandler("triplet start ('^3s') unexpected");
+      }
+      else
+      {
+        if (!inTriplet) errorHandler("triplet end ('^3e') unexpected");
+        else
+        {
+          tripletStop = true;
+          inTriplet = false;
+        }
+      }
+      lex.getSym();
+    }
     qDebug() << " tie start" << tieStart << " tie stop" << tieStop;
+    qDebug() << " triplet start" << tripletStart << " triplet stop" << tripletStop;
     beginMeasure();
     wrt.note(caps[1], caps[2], caps[3], dots, tieStart, tieStop);
     tieStart = false;
+    tripletStart = false;
   }
 
   /**
@@ -380,7 +397,8 @@ namespace Bww {
 
   /**
    Parse a sequence of notes.
-   Includes handling ties and triplets.
+   Includes handling ties and triplets, but without extensive error checking.
+   May break on invalid input.
    */
 
   void Parser::parseSeqNotes()
@@ -400,11 +418,22 @@ namespace Bww {
         else
         {
           errorHandler("tie end ('^te') unexpected");
-          lex.getSym();
         }
         lex.getSym();
       }
-      else if (lex.symType() == TRIPLET) lex.getSym();
+      else if (lex.symType() == TRIPLET)
+      {
+        if (lex.symValue() == "^3s")
+        {
+          if (inTriplet) errorHandler("triplet start ('^3s') unexpected");
+          else tripletStart = true;
+        }
+        else
+        {
+          errorHandler("triplet end ('^3e') unexpected");
+        }
+        lex.getSym();
+      }
     }
   }
 
