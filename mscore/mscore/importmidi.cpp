@@ -1102,15 +1102,31 @@ void Score::convertTrack(MidiTrack* midiTrack)
                               QList<Event*>& nl = n->mc->notes();
                               for (int i = 0; i < nl.size(); ++i) {
                                     Event* mn = nl[i];
-                        		Note* note = new Note(this);
+                        		        Note* note = new Note(this);
                                     note->setPitch(mn->pitch(), mn->tpc());
-                        		note->setTrack(chord->track());
-                  	      	chord->add(note);
-                                    note->setOnTimeType(USER_VAL);
-                                    note->setOnTimeOffset(mn->noquantOntime() - tick);
-                                    note->setOffTimeType(USER_VAL);
-                                    int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
-                                    note->setOffTimeOffset(ot);
+                        		        note->setTrack(chord->track());
+                  	      	        chord->add(note);
+                  	      	        
+                                    int ont = mn->noquantOntime() - tick;
+                                    if(ont != 0) {
+                                          note->setOnTimeType(USER_VAL);
+                                          note->setOnTimeUserOffset(ont);
+                                          }
+                                    else {
+                                          note->setOnTimeType(AUTO_VAL);
+                                          note->setOnTimeOffset(0);
+                                          }
+
+                                    int offt = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
+                                    if(offt != 0) {
+                                          note->setOffTimeType(USER_VAL);
+                                          note->setOffTimeUserOffset(offt);
+                                          }
+                                    else {
+                                          note->setOffTimeType(AUTO_VAL);
+                                          note->setOffTimeOffset(0);
+                                          }
+                                    
                                     note->setVeloType(USER_VAL);
                                     note->setVelocity(mn->velo());
 
@@ -1223,15 +1239,31 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                         QList<Event*>& nl = n->mc->notes();
                         for (int i = 0; i < nl.size(); ++i) {
                               Event* mn = nl[i];
-                  		Note* note = new Note(this);
+                  		        Note* note = new Note(this);
                               note->setPitch(mn->pitch(), mn->tpc());
-            	      	note->setTrack(staffIdx * VOICES + voice);
-            	      	chord->add(note);
-                              note->setOnTimeType(USER_VAL);
-                              note->setOnTimeOffset(mn->noquantOntime() - tick);
-                              note->setOffTimeType(USER_VAL);
-                              int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
-                              note->setOffTimeOffset(ot);
+            	      	        note->setTrack(staffIdx * VOICES + voice);
+            	      	        chord->add(note);
+            	      	
+                              int ont = mn->noquantOntime() - tick;
+                              if(ont != 0) {
+                                    note->setOnTimeType(USER_VAL);
+                                    note->setOnTimeUserOffset(ont);
+                                    }
+                              else {
+                                    note->setOnTimeType(AUTO_VAL);
+                                    note->setOnTimeOffset(0);
+                                    }
+
+                              int offt = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
+                              if(offt != 0) {
+                                    note->setOffTimeType(USER_VAL);
+                                    note->setOffTimeUserOffset(offt);
+                                    }
+                              else {
+                                    note->setOffTimeType(AUTO_VAL);
+                                    note->setOffTimeOffset(0);
+                                    }
+                              
                               note->setVeloType(USER_VAL);
                               note->setVelocity(mn->velo());
 
