@@ -1,3 +1,5 @@
+18.jun (la)
+      - fix #6144 : Notes (and other signs) in small staves are smaller than they should
 17.jun (ws)
       - enable more possible input positions when inputting notes
         with voice > 1

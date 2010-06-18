@@ -335,7 +335,7 @@ class Element {
       virtual void toDefault() {  setUserOff(QPointF()); }
 
       double mag() const                        { return _mag;   }
-      double magS() const                       { return _mag * (spatium() /(DPI * SPATIUM20));   }
+      double magS() const;
       virtual void setMag(double val)           { _mag = val;    }
 
 /**

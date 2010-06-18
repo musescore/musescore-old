@@ -1,5 +1,6 @@
 18.jun (la)
       - fix #5949 : MIDI import gives unexpectedly silent notes
+      - fix #6144 : Notes (and other signs) in small staves are smaller than they should
 17.jun (la)
       - fix #6134 : Fingering text offset does not save units and alignment
 15.jun (la)
