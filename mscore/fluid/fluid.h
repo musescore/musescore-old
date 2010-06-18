@@ -345,6 +345,9 @@ class Fluid : public Synth {
       virtual double effectParameter(int effect, int parameter);
       virtual double setEffectParameter(int ffect, int parameter, double value);
 
+      virtual SynthParams getParams() const;
+      virtual void setParams(const SynthParams&);
+
       bool log(const char* fmt, ...);
 
       bool set_reverb_preset(int num);

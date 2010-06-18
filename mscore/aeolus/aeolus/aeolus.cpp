@@ -284,3 +284,24 @@ void Aeolus::printGui()
                   }
             }
       }
+
+//---------------------------------------------------------
+//   getParams
+//---------------------------------------------------------
+
+SynthParams Aeolus::getParams() const
+      {
+      SynthParams sp;
+      sp.synth = (Aeolus*)this;
+      return sp;
+      }
+
+//---------------------------------------------------------
+//   setParams
+//---------------------------------------------------------
+
+void Aeolus::setParams(const SynthParams&)
+      {
+      }
+
+

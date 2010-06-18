@@ -144,7 +144,6 @@ void Dynamic::setSubtype(int idx)
       {
       Element::setSubtype(idx);
       if (idx) {
-            Element::setSubtype(idx);
             doc()->clear();
             QTextCursor cursor(doc());
             cursor.movePosition(QTextCursor::Start);
@@ -156,9 +155,10 @@ void Dynamic::setSubtype(int idx)
                   m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
 
-            QFont font("MScore1");
+            QFont font("MScore1-test");
             font.setPixelSize(lrint(m));
             font.setKerning(true);
+            font.setStyleStrategy(QFont::NoFontMerging);
             tf.setFont(font);
             tf.setProperty(QTextFormat::FontKerning, true);
             // tf.setProperty(QTextFormat::FontLetterSpacing, 100);

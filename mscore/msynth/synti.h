@@ -23,6 +23,7 @@
 
 struct MidiPatch;
 class Event;
+class Synth;
 
 #include "fparm.h"
 
@@ -68,6 +69,9 @@ class Synth {
             return defaultParameter;
             }
       virtual double setEffectParameter(int /*effect*/, int /*param*/, double /*val*/ ) { return 0.0; }
+
+      virtual SynthParams getParams() const = 0;
+      virtual void setParams(const SynthParams&) = 0;
       };
 
 //---------------------------------------------------------
@@ -89,21 +93,21 @@ class MasterSynth {
       double gain() const     { return _gain; }
       void setGain(float val) { _gain = val;  }
 
-      bool loadSoundFont(const QString&);
-      QString soundFont() const;
+      void setMasterTuning(double) {}
+      double masterTuning() const { return 440.0; }
 
       int synthNameToIndex(const QString&) const;
       QString synthIndexToName(int) const;
 
       QList<MidiPatch*> getPatchInfo() const;
-      Synth* getSynth(int n);
-      const QList<Synth*>& getSyntis() const;
 
       const Fparm& effectParameter(int synti, int effect, int param) const;
       double setEffectParameter(int synti, int effect, int param, double val);
 
-      void setMasterTuning(double) {}
-      double masterTuning() const { return 440.0; }
+      SyntiSettings synthParams() const;
+      void setSynthParams(const SyntiSettings&);
+
+      Synth* synth(const QString& name);
       };
 
 #endif

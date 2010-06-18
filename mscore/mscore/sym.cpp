@@ -270,7 +270,7 @@ SymCode pSymbols[] = {
       SymCode(0x1d15f, 1),    // note4_Sym
 
 //      SymCode(0xe106, 1),    // note8_Sym
-      SymCode(0xe1d6, 1),    // note8_Sym
+      SymCode(0xe106, 1),    // note8_Sym
 
       SymCode(0xe107, 1),    // note16_Sym
       SymCode(0xe108, 1),    // note32_Sym
@@ -280,6 +280,7 @@ SymCode pSymbols[] = {
       SymCode(0xe167, 1),    // coda
       SymCode(0xe168, 1),    // varcoda
       SymCode(0xe169, 1),    // segno
+
       SymCode(0, 0),
       SymCode(0xa9,   -1, "(C)", SYMBOL_COPYRIGHT),
       SymCode(0x00c0, -1),
@@ -403,22 +404,19 @@ QFont fontId2font(int fontId)
       // rastral size is 20pt = 20/72 inch
       //
       int size = lrint(20.0 * DPI / PPI);
-      if (fontId == 0) {
+      if (fontId == 0)
             _font.setFamily("MScore");
-            _font.setStyleStrategy(QFont::NoFontMerging);
-            }
-      else if (fontId == 1) {
-            _font.setFamily("MScore1_new");
-            }
+      else if (fontId == 1)
+            _font.setFamily("MScore1-test");
       else if (fontId == 2) {
             _font.setFamily("Times New Roman");
-            _font.setStyleStrategy(QFont::NoFontMerging);
             size = lrint(8 * DPI / PPI);
             }
       else {
             printf("illegal font id %d\n", fontId);
             abort();
             }
+      _font.setStyleStrategy(QFont::NoFontMerging);
       _font.setPixelSize(size);
       return _font;
       }
@@ -428,11 +426,11 @@ QFont fontId2font(int fontId)
 //---------------------------------------------------------
 
 Sym::Sym(const char* name, int c, int fid, double ax, double ay)
-   : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId)), _attach(ax * DPI/PPI, ay * DPI/PPI)
+   : _code(c), fontId(fid), _name(name), _font(fontId2font(fid)), _attach(ax * DPI/PPI, ay * DPI/PPI)
       {
       QFontMetricsF fm(_font);
       if (!fm.inFont(_code))
-            printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", _code, c, _name, qPrintable(_font.family()));
+            printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", c, c, _name, qPrintable(_font.family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
       createTextLayout();
@@ -455,19 +453,25 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
 
 void Sym::createTextLayout()
       {
+#if 0
       if (_code & 0xffff0000) {
-            QString s = QChar(QChar::highSurrogate(_code));
-            s += QChar(QChar::lowSurrogate(_code));
+            QChar ss[2];
+            ss[0] = QChar(QChar::highSurrogate(_code));
+            ss[1] = QChar(QChar::lowSurrogate(_code));
+            QString s(ss, 2);
             tl = new QTextLayout(s, _font);
             }
-      else
+      else {
             tl = new QTextLayout(QString(_code), _font);
+            }
+      tl->setCacheEnabled(true);
       tl->beginLayout();
       QTextLine l = tl->createLine();
-      l.setNumColumns(1);
+      // l.setNumColumns(1);
+      l.setLineWidth(1000);
       l.setPosition(QPointF(0.0, -l.ascent()));
       tl->endLayout();
-      tl->setCacheEnabled(true);
+#endif
       }
 
 //---------------------------------------------------------
@@ -500,7 +504,21 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       {
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
+
+#if 1
+      QString s;
+      painter.setFont(_font);
+      if (_code & 0xffff0000) {
+            s = QChar(QChar::highSurrogate(_code));
+            s += QChar(QChar::lowSurrogate(_code));
+            }
+      else
+            s = QChar(_code);
+      painter.drawText(x * imag, y * imag, s);
+#else
+      // does not work with surrogates?
       tl->draw(&painter, QPointF(x * imag, y * imag));
+#endif
       painter.scale(imag, imag);
       }
 
@@ -510,6 +528,7 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
 
 void Sym::draw(QPainter& painter, double mag, qreal x, qreal y, int n) const
       {
+printf("DRAW %d\n", n);
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
       painter.setFont(_font);
@@ -543,7 +562,7 @@ QString symToHtml(const Sym& s, int leftMargin)
               "</p>"
             "</body>"
           "</html>"
-      "</data>").arg(family).arg(size).arg(leftMargin).arg(s.code().unicode());
+      "</data>").arg(family).arg(size).arg(leftMargin).arg(s.code());
       }
 
 QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
@@ -568,7 +587,7 @@ QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
               "</p>"
             "</body>"
           "</html>"
-      "</data>").arg(family).arg(size).arg(leftMargin).arg(s1.code().unicode()).arg(s2.code().unicode());
+      "</data>").arg(family).arg(size).arg(leftMargin).arg(s1.code()).arg(s2.code());
       }
 
 //---------------------------------------------------------
@@ -577,18 +596,18 @@ QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
 
 void initSymbols()
       {
-      symbols[clefEightSym] = Sym(QT_TRANSLATE_NOOP("symbol", "clef eight"),                 0x38, 2);
-      symbols[clefOneSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "clef one"),                   0x31, 2);
-      symbols[clefFiveSym]  = Sym(QT_TRANSLATE_NOOP("symbol", "clef five"),                  0x35, 2);
-      symbols[letterfSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "f"),                          0x66, 1);
-      symbols[lettermSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "m"),                          0x6d, 1);
-      symbols[letterpSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "p"),                          0x70, 1);
-      symbols[letterrSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "r"),                          0x72, 1);
-      symbols[lettersSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "s"),                          0x73, 1);
-      symbols[letterzSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "z"),                          0x7a, 1);
+      symbols[clefEightSym] = Sym(QT_TRANSLATE_NOOP("symbol", "clef eight"), 0x38, 2);
+      symbols[clefOneSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "clef one"),   0x31, 2);
+      symbols[clefFiveSym]  = Sym(QT_TRANSLATE_NOOP("symbol", "clef five"),  0x35, 2);
+      symbols[letterfSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "f"),          0x66, 1);
+      symbols[lettermSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "m"),          0x6d, 1);
+      symbols[letterpSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "p"),          0x70, 1);
+      symbols[letterrSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "r"),          0x72, 1);
+      symbols[lettersSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "s"),          0x73, 1);
+      symbols[letterzSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "z"),          0x7a, 1);
       // used for GUI:
       symbols[note2Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/2"),   0xe104, 1);
-      symbols[note4Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/4"),   0xe105, 1);
+      symbols[note4Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/4"),   0x1d15f, 1);
       symbols[note8Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/8"),   0xe106, 1);
       symbols[note16Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/16"),  0xe107, 1);
       symbols[note32Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/32"),  0xe108, 1);

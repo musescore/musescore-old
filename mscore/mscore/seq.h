@@ -181,10 +181,9 @@ class Seq : public QObject {
 
       float gain() const;
 
-      void loadSoundFont(const QString&);
+//      void loadSoundFont(const QString&);
 
-      Synth* getSynth(int n);
-      const QList<Synth*>& getSyntis() const;
+//      const QList<Synth*>& getSyntis() const;
       MasterSynth* getSynti() const { return synti; }
 
       int synthNameToIndex(const QString&) const;

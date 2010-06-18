@@ -73,6 +73,7 @@
 #include "scoretab.h"
 #include "beam.h"
 #include "stafftype.h"
+#include "seq.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -219,6 +220,7 @@ void MuseScore::loadFile()
 
 void MuseScore::saveFile()
       {
+      cs->setSyntiSettings(seq->getSynti()->synthParams());
       if (cs->saveFile(false)) {
             setWindowTitle("MuseScore: " + cs->name());
             int idx = scoreList.indexOf(cs);
@@ -1275,9 +1277,8 @@ bool Score::read(QDomElement e)
 #endif
                   else if (tag == "showOmr")
                         _showOmr = i;
-                  else if (tag == "Synthesizer") {
-
-                        }
+                  else if (tag == "SyntiSettings")
+                        _syntiSettings.read(ee);
                   else if (tag == "Spatium")
                         setSpatium (val.toDouble() * DPMM);
                   else if (tag == "Division")

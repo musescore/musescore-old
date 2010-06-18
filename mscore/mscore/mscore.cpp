@@ -195,6 +195,8 @@ static const int RECENT_LIST_SIZE = 10;
 
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
+      if (cs)
+            cs->setSyntiSettings(seq->getSynti()->synthParams());
       unloadPlugins();
       QList<Score*> removeList;
       foreach(Score* score, scoreList) {
@@ -1156,6 +1158,11 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       {
       cv = view;
       if (view) {
+            if (view->score() && cs != view->score()) {
+                  if (cs)
+                        cs->setSyntiSettings(seq->getSynti()->synthParams());
+                  seq->getSynti()->setSynthParams(view->score()->syntiSettings());
+                  }
             cs = view->score();
             view->setFocusRect();
             }
@@ -2186,12 +2193,16 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "file-close")
             removeTab(scoreList.indexOf(cs));
       else if (cmd == "file-save-as") {
-            if (cs)
+            if (cs) {
+                  cs->setSyntiSettings(seq->getSynti()->synthParams());
                   cs->saveAs(false);
+                  }
             }
       else if (cmd == "file-save-a-copy") {
-            if (cs)
+            if (cs) {
+                  cs->setSyntiSettings(seq->getSynti()->synthParams());
                   cs->saveAs(true);
+                  }
             }
       else if (cmd == "file-new")
             newFile();

@@ -203,7 +203,7 @@ void SynthControl::selectSoundFont()
          );
       if (!s.isNull()) {
             soundFont->setText(s);
-            synti->loadSoundFont(s);
+//TODOB            synti->loadSoundFont(s);
             emit soundFontChanged();
             }
       }

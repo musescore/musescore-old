@@ -22,6 +22,7 @@
 #define __FPARM_H__
 
 class Xml;
+class Synth;
 
 enum ParameterType { P_FLOAT, P_STRING };
 
@@ -38,7 +39,6 @@ class Parameter {
       Parameter(const QString& n) : _name(n) {}
       virtual ParameterType type() const = 0;
       virtual void write(Xml&) const = 0;
-      virtual void read(QDomElement) = 0;
       const QString& name() const { return _name; }
       };
 
@@ -53,9 +53,9 @@ class Fparm : public Parameter {
       Fparm() : Parameter() {}
       Fparm(const QString& n, float val, float min, float max)
          : Parameter(n), _val(val), _min(min), _max(max) {}
+      Fparm(const QString& n, float val) : Parameter(n), _val(val) {}
       ParameterType type() const { return P_FLOAT; }
       virtual void write(Xml&) const;
-      virtual void read(QDomElement);
       float val() const      { return _val; }
       float min() const      { return _min; }
       float max() const      { return _max; }
@@ -63,6 +63,46 @@ class Fparm : public Parameter {
       void setMin(float val) { _min = val; }
       void setMax(float val) { _max = val; }
       void set(const QString& name, float val, float min, float max);
+      };
+
+//---------------------------------------------------------
+//   Sparm
+//---------------------------------------------------------
+
+class Sparm : public Parameter {
+      QString _val;
+
+   public:
+      Sparm() : Parameter() {}
+      Sparm(const QString& n, const QString& v) : Parameter(n), _val(v) {}
+      ParameterType type() const { return P_STRING; }
+      virtual void write(Xml&) const;
+      QString val() const      { return _val; }
+      void set(const QString& n, const QString& s) { _name = n; _val = s; }
+      };
+
+//---------------------------------------------------------
+//   SynthParams
+//    Synthesizer parameter as saved in score.
+//---------------------------------------------------------
+
+struct SynthParams {
+      Synth* synth;
+      QList<Parameter*> params;
+
+      void write(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   SyntiSettings
+//---------------------------------------------------------
+
+class SyntiSettings : public QList<SynthParams> {
+
+   public:
+      SyntiSettings() {}
+      void write(Xml&) const;
+      void read(QDomElement);
       };
 
 #endif

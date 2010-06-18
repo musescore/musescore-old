@@ -124,6 +124,7 @@ void MasterSynth::play(const Event& event, int syntiIdx)
       syntis[syntiIdx]->play(event);
       }
 
+#if 0
 //---------------------------------------------------------
 //   loadSoundFont
 //---------------------------------------------------------
@@ -143,6 +144,7 @@ QString MasterSynth::soundFont() const
       {
       return "";
       }
+#endif
 
 //---------------------------------------------------------
 //   synthNameToIndex
@@ -188,6 +190,7 @@ QList<MidiPatch*> MasterSynth::getPatchInfo() const
       return pl;
       }
 
+#if 0
 //---------------------------------------------------------
 //   getSynth
 //---------------------------------------------------------
@@ -205,6 +208,7 @@ const QList<Synth*>& MasterSynth::getSyntis() const
       {
       return syntis;
       }
+#endif
 
 //---------------------------------------------------------
 //   effectParameter
@@ -222,4 +226,45 @@ const Fparm& MasterSynth::effectParameter(int synti, int effect, int param) cons
 double MasterSynth::setEffectParameter(int synti, int effect, int param, double val)
       {
       return syntis[synti]->setEffectParameter(effect, param, val);
+      }
+
+//---------------------------------------------------------
+//   synthParams
+//---------------------------------------------------------
+
+SyntiSettings MasterSynth::synthParams() const
+      {
+printf("get synthParams\n");
+      SyntiSettings ss;
+      foreach(Synth* s, syntis) {
+            SynthParams sp = s->getParams();
+printf("  get %p <%s>  %p <%s>\n", s, s->name(), sp.synth, sp.synth->name());
+            ss.append(sp);
+            }
+      return ss;
+      }
+
+//---------------------------------------------------------
+//   setSynthParams
+//---------------------------------------------------------
+
+void MasterSynth::setSynthParams(const SyntiSettings& ss)
+      {
+printf("set synthParams %d\n", ss.size());
+      foreach(const SynthParams& sp, ss) {
+            sp.synth->setParams(sp);
+            }
+      }
+
+//---------------------------------------------------------
+//   synth
+//---------------------------------------------------------
+
+Synth* MasterSynth::synth(const QString& s)
+      {
+      foreach(Synth* synti, syntis) {
+            if (synti->name() == s)
+                  return synti;
+            }
+      return 0;
       }

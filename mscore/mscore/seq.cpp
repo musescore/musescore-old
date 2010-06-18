@@ -1118,15 +1118,6 @@ float Seq::gain() const
       }
 
 //---------------------------------------------------------
-//   loadSoundFont
-//---------------------------------------------------------
-
-void Seq::loadSoundFont(const QString& s)
-      {
-      synti->loadSoundFont(s);
-      }
-
-//---------------------------------------------------------
 //   putEvent
 //---------------------------------------------------------
 
@@ -1154,6 +1145,7 @@ QString Seq::synthIndexToName(int idx) const
       return synti->synthIndexToName(idx);
       }
 
+#if 0
 //---------------------------------------------------------
 //   getSynth
 //---------------------------------------------------------
@@ -1162,13 +1154,4 @@ Synth* Seq::getSynth(int n)
       {
       return synti->getSynth(n);
       }
-
-//---------------------------------------------------------
-//   getSyntis
-//---------------------------------------------------------
-
-const QList<Synth*>& Seq::getSyntis() const
-      {
-      return synti->getSyntis();
-      }
-
+#endif

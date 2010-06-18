@@ -1256,7 +1256,7 @@ void PreferenceDialog::apply()
                   }
             if (seq->isRunning()) {
                   sfChanged = false;
-                  seq->loadSoundFont(preferences.soundFont);
+//                  seq->loadSoundFont(preferences.soundFont);
                   }
             }
       mscore->startAutoSave();
