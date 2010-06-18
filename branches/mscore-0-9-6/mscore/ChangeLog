@@ -1,3 +1,20 @@
+18.jun (la)
+      - fix #5949 : MIDI import gives unexpectedly silent notes
+17.jun (la)
+      - fix #6134 : Fingering text offset does not save units and alignment
+15.jun (la)
+      - fix #6060 for composed locale names  
+      - fix #6114 : SVG graphics disappear after reload
+12.jun (la)
+      - fix #6072 : Crash when adding note to wrong percussion staff
+      - patch by Aaron Epstein for #5923 : Transpose chordnames does not preserve pitch spelling
+      - fix #6060 : Help > Local Handbook doesn't work on windows
+10.jun (la)
+      - add files for Basque translation
+      - fix #6049 : 0.9.5 file with breve or longa cannot be opened with MuseScore 0.9.6
+9.jun (la)
+      - update qt_cs.ts
+      ======== Version 0.9.6 released =============          
 4.jun (ws)
       - hide inspector in production build
       - fix #5957: Play/Don't play repeat dies not have immediate effect
