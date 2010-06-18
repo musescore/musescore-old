@@ -140,7 +140,7 @@ static void parseInstrName(QTextDocument* doc, const QString& name)
       QTextCharFormat f = cursor.charFormat();
       QTextCharFormat sf(f);
 
-      QFont font("MScore1");
+      QFont font("MScore1-test");
       sf.setFont(font);
 
       QDomDocument dom;

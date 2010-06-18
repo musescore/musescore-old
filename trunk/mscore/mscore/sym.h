@@ -76,7 +76,7 @@ class Sym {
       double height(double mag) const      { return _bbox.height() * mag; }
       double width(double mag) const       { return w * mag;  }
       QPointF attach(double mag) const     { return _attach * mag;   }
-      QChar code() const                   { return _code;    }
+      int code() const                     { return _code;    }
       int getFontId() const                { return fontId;   }
       int setFontId(int v)                 { return fontId = v;   }
       QFont font() const                   { return _font;    }
@@ -329,7 +329,7 @@ enum {
       lastSym
       };
 
-extern const Sym* findSymbol(QChar code, int fontId);
+extern const Sym* findSymbol(int code, int fontId);
 extern QString symToHtml(const Sym&, int leftMargin=0);
 extern QString symToHtml(const Sym&, const Sym&, int leftMargin=0);
 extern QFont fontId2font(int id);

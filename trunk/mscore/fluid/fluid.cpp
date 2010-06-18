@@ -1007,4 +1007,38 @@ bool Fluid::log(const char* fmt, ...)
       return false;
       }
 
+//---------------------------------------------------------
+//   getParams
+//---------------------------------------------------------
+
+SynthParams Fluid::getParams() const
+      {
+      SynthParams sp;
+      sp.synth = (Fluid*)this;
+      Sparm* p = new Sparm("soundfont", soundFont());
+      sp.params.append(p);
+      return sp;
+      }
+
+//---------------------------------------------------------
+//   setParams
+//---------------------------------------------------------
+
+void Fluid::setParams(const SynthParams& sp)
+      {
+      foreach(const Parameter* p, sp.params) {
+            if (p->name() == "soundfont") {
+                  const Sparm* sp = static_cast<const Sparm*>(p);
+                  printf("Fluid::setParams: <%s>=<%s>\n",
+                     qPrintable(p->name()),
+                     qPrintable(sp->val()));
+                  loadSoundFont(sp->val());
+                  }
+            else {
+                  printf("Fluid: unknown parameter <%s>\n",
+                     qPrintable(p->name()));
+                  }
+            }
+      }
+
 }

@@ -62,12 +62,13 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                   }
             }
       MasterSynth* synti = new MasterSynth();
-      bool rv = synti->loadSoundFont(soundFont);
+/*      bool rv = synti->loadSoundFont(soundFont);
       if (!rv) {
             fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
             delete synti;
             return false;
             }
+      */
       EventMap events;
       toEList(&events);
 

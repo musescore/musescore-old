@@ -513,8 +513,8 @@ void Score::write(Xml& xml, bool /*autosave*/)
       if (_showOmr)
             xml.tag("showOmr", _showOmr);
 #endif
-      foreach(SynthesizerSettings ss, _syntiSettings)
-            ss.write(xml);
+
+      _syntiSettings.write(xml);
 
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", AL::division);
@@ -2418,41 +2418,5 @@ Text* Score::getText(int subtype)
                   }
             }
       return 0;
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void SynthesizerSettings::write(Xml& xml) const
-      {
-      if (params.isEmpty())
-            return;
-      xml.stag(QString("SynthSettings name=\"%1\"").arg(synti));
-      foreach(Parameter* p, params)
-            p->write(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void SynthesizerSettings::read(QDomElement e)
-      {
-#if 0
-      for (; !e.isNull(); e = e.nextSiblingElement()) {
-            int i = 0;
-            for (i = 0; i < 4; ++i) {
-                  QList<Parameter*> params;
-                  if (_audiopar[i].name() == e.tagName()) {
-                        _audiopar[i].setVal(e.text().toFloat());
-                        break;
-                        }
-                  }
-            if (i == 4)
-                  domError(e);      // unknown tag
-            }
-#endif
       }
 

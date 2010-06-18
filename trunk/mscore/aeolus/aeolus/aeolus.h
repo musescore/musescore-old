@@ -109,6 +109,9 @@ class Aeolus : public Synth {
       virtual const Fparm& effectParameter(int /*effect*/, int /*parameter*/) const;
       virtual double setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ );
 
+      virtual SynthParams getParams() const;
+      virtual void setParams(const SynthParams&);
+
       friend class Model;
       };
 

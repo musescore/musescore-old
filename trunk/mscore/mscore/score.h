@@ -40,6 +40,7 @@
 #include "key.h"
 #include "interval.h"
 #include "segment.h"
+#include "msynth/fparm.h"
 
 namespace AL {
       class TempoMap;
@@ -182,18 +183,6 @@ class ImagePath {
       bool isUsed() const              { return _references > 0;  }
       };
 
-//---------------------------------------------------------
-//   SynthesizerSettings
-//---------------------------------------------------------
-
-class SynthesizerSettings {
-   public:
-      QString synti;
-      QList<Parameter*> params;
-      void write(Xml&) const;
-      void read(QDomElement);
-      };
-
 // layoutFlags bits
 
 enum {
@@ -303,8 +292,7 @@ class Score : public QObject {
       Omr* _omr;
       bool _showOmr;
 
-      QList<SynthesizerSettings> _syntiSettings;
-
+      SyntiSettings _syntiSettings;
 
       //------------------
 
@@ -814,12 +802,13 @@ class Score : public QObject {
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
-      void emitSelectionChanged(int val)                      { emit selectionChanged(val); }
-      const QList<SynthesizerSettings>& syntiSettings() const { return _syntiSettings;      }
-      const QList<StaffType*>& staffTypes() const             { return _staffTypes; }
-      QList<StaffType*>& staffTypes()                         { return _staffTypes; }
-      void setStaffTypeList(const QList<StaffType*>& tl)      { _staffTypes = tl;   }
-      void addLayoutFlag(int val)                             { layoutFlags |= val; }
+      void emitSelectionChanged(int val)                 { emit selectionChanged(val); }
+      const SyntiSettings& syntiSettings() const         { return _syntiSettings;      }
+      void setSyntiSettings(const SyntiSettings& s)      { _syntiSettings = s;      }
+      const QList<StaffType*>& staffTypes() const        { return _staffTypes; }
+      QList<StaffType*>& staffTypes()                    { return _staffTypes; }
+      void setStaffTypeList(const QList<StaffType*>& tl) { _staffTypes = tl;   }
+      void addLayoutFlag(int val)                        { layoutFlags |= val; }
       };
 
 extern Score* gscore;
