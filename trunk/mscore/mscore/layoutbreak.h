@@ -58,7 +58,6 @@ class LayoutBreak : public Element {
       void setPause(double v) { _pause = v; }
       };
 
-
 //---------------------------------------------------------
 //   SectionBreakProperties
 //---------------------------------------------------------
@@ -70,8 +69,5 @@ class SectionBreakProperties : public QDialog, public Ui::SectionBreakProperties
       SectionBreakProperties(LayoutBreak*, QWidget* parent = 0);
       double pause() const;
       };
-
-
-
 
 #endif

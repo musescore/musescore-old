@@ -69,7 +69,8 @@
 
 static const char* stateNames[] = {
       "Normal", "Drag", "DragObject", "Edit", "DragEdit",
-      "Lasso",  "NoteEntry", "Mag", "Play", "Search", "EntryPlay"
+      "Lasso",  "NoteEntry", "Mag", "Play", "Search", "EntryPlay",
+      "DragPlay"
       };
 
 //---------------------------------------------------------
@@ -734,9 +735,9 @@ ScoreView::ScoreView(QWidget* parent)
       connect(s, SIGNAL(entered()), SLOT(deselectAll()));
       s->addTransition(new DragTransition(this));
 
-      // setup play state
+      //----------------------setup play state
       s = states[PLAY];
-      s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
+      // s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
       s->addTransition(new CommandTransition("play", states[NORMAL]));
       s->addTransition(new CommandTransition("escape", states[NORMAL]));
       s->addTransition(new SeekTransition(this, states[PLAY]));
@@ -747,7 +748,30 @@ ScoreView::ScoreView(QWidget* parent)
       connect(s, SIGNAL(entered()), seq, SLOT(start()));
       connect(s, SIGNAL(exited()), seq, SLOT(stop()));
 
-      // setup search state
+      QState* s1 = new QState(s);
+      s1->setObjectName("play-normal");
+      connect(s1, SIGNAL(entered()), SLOT(enterState()));
+      connect(s1, SIGNAL(exited()), SLOT(exitState()));
+      QState* s2 = new QState(s);
+      connect(s2, SIGNAL(entered()), SLOT(enterState()));
+      connect(s2, SIGNAL(exited()), SLOT(exitState()));
+      s2->setObjectName("play-drag");
+
+      s1->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
+      s1->addTransition(new ScoreViewDragTransition(this, s2));      // ->stateDrag
+
+      // drag during play state
+      s2->assignProperty(this, "cursor", QCursor(Qt::SizeAllCursor));
+      cl = new QEventTransition(this, QEvent::MouseButtonRelease);
+      cl->setTargetState(s1);
+      s2->addTransition(cl);
+      connect(s2, SIGNAL(entered()), SLOT(deselectAll()));
+      s2->addTransition(new DragTransition(this));
+
+      s->setInitialState(s1);
+
+      s->addTransition(new ScoreViewDragTransition(this, s2));
+      //----------------------setup search state
       s = states[SEARCH];
       s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
       s->addTransition(new CommandTransition("escape", states[NORMAL]));
@@ -765,7 +789,6 @@ ScoreView::ScoreView(QWidget* parent)
       connect(s, SIGNAL(entered()), mscore, SLOT(setPlayState()));
       connect(s, SIGNAL(entered()), seq, SLOT(start()));
       connect(s, SIGNAL(exited()),  seq, SLOT(stop()));
-
 
       sm->addState(stateActive);
       stateActive->setInitialState(states[NORMAL]);
