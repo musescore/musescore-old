@@ -1125,6 +1125,7 @@ void Score::deleteItem(Element* el)
             case SPACER:
             case KEYSIG:
             case TIMESIG:
+            case FRET_DIAGRAM:
                   cmdRemove(el);
                   break;
 

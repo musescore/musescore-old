@@ -89,6 +89,53 @@ FretDiagram::~FretDiagram()
       }
 
 //---------------------------------------------------------
+//   setTick
+//---------------------------------------------------------
+
+void FretDiagram::setTick(int val)
+      {
+      _tick = val - measure()->tick();
+      }
+
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+
+int FretDiagram::tick() const
+      {
+      return _tick + (measure() ? measure()->tick() : 0);
+      }
+
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF FretDiagram::dragAnchor() const
+      {
+      Measure* m     = static_cast<Measure*>(parent());
+      System* system = m->system();
+      double yp      = system->staff(staffIdx())->y() + system->y();
+      double xp      = m->tick2pos(tick()) + m->canvasPos().x();
+      QPointF p1(xp, yp);
+
+      double tw = width();
+      double th = height();
+      double x  = 0.0;
+      double y  = 0.0;
+      if (_align & ALIGN_BOTTOM)
+            y = th;
+      else if (_align & ALIGN_VCENTER)
+            y = (th * .5);
+      else if (_align & ALIGN_BASELINE)
+            y = baseLine();
+      if (_align & ALIGN_RIGHT)
+            x = tw;
+      else if (_align & ALIGN_HCENTER)
+            x = (tw * .5);
+      return QLineF(p1, abbox().topLeft() + QPointF(x, y));
+      }
+
+//---------------------------------------------------------
 //   setStrings
 //---------------------------------------------------------
 
@@ -132,16 +179,23 @@ void FretDiagram::setStrings(int n)
 
 void FretDiagram::init(Tablature* tab, Chord* chord)
       {
-      setStrings(tab->strings());
-      for (int string = 0; string < _strings; ++string)
-            _marker[string] = 'X';
-      foreach(const Note* note, chord->notes()) {
-            int string;
-            int fret;
-            if (tab->convertPitch(note->ppitch(), &string, &fret))
-                  setDot(string, fret);
+      if (tab == 0)
+            setStrings(6);
+      else
+            setStrings(tab->strings());
+      if (tab) {
+            for (int string = 0; string < _strings; ++string)
+                  _marker[string] = 'X';
+            foreach(const Note* note, chord->notes()) {
+                  int string;
+                  int fret;
+                  if (tab->convertPitch(note->ppitch(), &string, &fret))
+                        setDot(string, fret);
+                  }
+            _maxFrets = tab->frets();
             }
-      _maxFrets = tab->frets();
+      else
+            _maxFrets = 6;
       }
 
 //---------------------------------------------------------

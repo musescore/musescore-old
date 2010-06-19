@@ -70,6 +70,7 @@
 #include "slur.h"
 #include "measure.h"
 #include "fret.h"
+#include "staffstate.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -117,6 +118,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "VoltaSegment"),
       QT_TRANSLATE_NOOP("elementName", "LayoutBreak"),
       QT_TRANSLATE_NOOP("elementName", "Spacer"),
+      QT_TRANSLATE_NOOP("elementName", "StaffState"),
       QT_TRANSLATE_NOOP("elementName", "LedgerLine"),
       QT_TRANSLATE_NOOP("elementName", "NoteHead"),
       QT_TRANSLATE_NOOP("elementName", "Tremolo"),
@@ -173,7 +175,7 @@ double Element::spatium() const
 //---------------------------------------------------------
 double Element::magS() const
       {
-      return _mag * (_score->spatium() /(DPI * SPATIUM20));   
+      return _mag * (_score->spatium() /(DPI * SPATIUM20));
       }
 
 //---------------------------------------------------------
@@ -1242,6 +1244,7 @@ Element* Element::create(ElementType type, Score* score)
             case CHORD:             return new Chord(score);
             case REST:              return new Rest(score);
             case SPACER:            return new Spacer(score);
+            case STAFF_STATE:       return new StaffState(score);
             case TEMPO_TEXT:        return new TempoText(score);
             case HARMONY:           return new Harmony(score);
             case FRET_DIAGRAM:      return new FretDiagram(score);
@@ -1339,6 +1342,7 @@ const char* Element::name(ElementType type)
             case VOLTA_SEGMENT:     return "VoltaSegment";
             case LAYOUT_BREAK:      return "LayoutBreak";
             case SPACER:            return "Spacer";
+            case STAFF_STATE:       return "StaffState";
             case LEDGER_LINE:       return "LedgerLine";
             case NOTEHEAD:          return "NoteHead";
             case TREMOLO:           return "Tremolo";

@@ -1789,7 +1789,6 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
-                  case FRET_DIAGRAM:
                   case MARKER:
                   case JUMP:
                   case REPEAT_MEASURE:
@@ -1798,6 +1797,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case SPACER:
                   case SLUR:
                   case ACCIDENTAL_BRACKET:
+                  case FRET_DIAGRAM:
                         {
                         QList<const Element*> el = elementsAt(pos);
                         bool found = false;
