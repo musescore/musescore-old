@@ -267,7 +267,7 @@ void Clef::layout()
                   symbol->setSym(tabclefSym);
                   Staff* st = staff();
                   if (st && st->useTablature()) {
-                        Tablature* tab = st->part()->tablature();
+                        Tablature* tab = st->part()->instr()->tablature();
                         switch(tab->strings()) {
                               default:
                               case 6: yoff = 3.5; break;

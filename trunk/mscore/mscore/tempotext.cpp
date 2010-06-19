@@ -104,7 +104,7 @@ void TempoText::propertyAction(ScoreView* viewer, const QString& s)
 
 void TempoText::setTick(int val)
       {
-      _tick = val - measure()->tick();
+      _tick = val - (measure() ? measure()->tick() : 0);
       }
 
 //---------------------------------------------------------

@@ -53,7 +53,7 @@ void PartEdit::setPart(Part* p, Channel* a)
       {
       channel = a;
       part    = p;
-      QString s = part->trackName();
+      QString s = part->instr()->trackName();
       if (!a->name.isEmpty())
             s += "-" + a->name;
       partName->setText(s);
@@ -63,16 +63,14 @@ void PartEdit::setPart(Part* p, Channel* a)
       reverb->setValue(a->reverb);
       chorus->setValue(a->chorus);
       pan->setValue(a->pan);
-printf("setPart %d %d %d\n", a->synti, a->bank, a->program);
       for (int i = 0; i < patch->count(); ++i) {
             MidiPatch* p = (MidiPatch*)patch->itemData(i, Qt::UserRole).value<void*>();
             if (a->synti == p->synti && a->program == p->prog && a->bank == p->bank) {
                   patch->setCurrentIndex(i);
-printf("   setPart found %d <%s>\n", i, qPrintable(p->name));
                   break;
                   }
             }
-      drumset->setChecked(p->useDrumset());
+      drumset->setChecked(p->instr()->useDrumset());
       }
 
 //---------------------------------------------------------
@@ -142,7 +140,7 @@ void InstrumentListEditor::patchListChanged()
       foreach (const MidiMapping& m, *mm) {
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(idx));
             PartEdit* pe    = (PartEdit*)(wi->widget());
-            bool drum       = m.part->useDrumset();
+            bool drum       = m.part->instr()->useDrumset();
             const QList<MidiPatch*> pl = seq->getPatchInfo();
             pe->patch->clear();
             foreach(const MidiPatch* p, pl) {
@@ -248,8 +246,8 @@ void PartEdit::soloToggled(bool val)
       if (val) {
             mute->setChecked(false);
             foreach(Part* part, *part->score()->parts()) {
-                  for (int i = 0; i < part->channel().size(); ++i) {
-                        Channel* a = &part->channel(i);
+                  for (int i = 0; i < part->instr()->channel().size(); ++i) {
+                        Channel* a = &part->instr()->channel(i);
                         a->soloMute = (channel != a && !a->solo);
                         a->solo     = (channel == a || a->solo);
                         }
@@ -259,8 +257,8 @@ void PartEdit::soloToggled(bool val)
       else { //do nothing except if it's the last solo to be switched off
             bool found = false;
             foreach(Part* part, *part->score()->parts()) {
-                  for (int i = 0; i < part->channel().size(); ++i) {
-                        Channel* a = &part->channel(i);
+                  for (int i = 0; i < part->instr()->channel().size(); ++i) {
+                        Channel* a = &part->instr()->channel(i);
                         if(a->solo){
                             found = true;
                             break;
@@ -269,8 +267,8 @@ void PartEdit::soloToggled(bool val)
                   }
             if(!found){
                 foreach(Part* part, *part->score()->parts()) {
-                  for (int i = 0; i < part->channel().size(); ++i) {
-                        Channel* a = &part->channel(i);
+                  for (int i = 0; i < part->instr()->channel().size(); ++i) {
+                        Channel* a = &part->instr()->channel(i);
                         a->soloMute = false;
                         a->solo     = false;
                         }
@@ -286,7 +284,7 @@ void PartEdit::soloToggled(bool val)
 
 void PartEdit::drumsetToggled(bool val)
       {
-      part->setUseDrumset(val);
+      part->instr()->setUseDrumset(val);
       patch->clear();
       const QList<MidiPatch*> pl = seq->getPatchInfo();
       foreach(MidiPatch* p, pl) {

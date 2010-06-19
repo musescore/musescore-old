@@ -25,7 +25,10 @@
 
 // staff state change subtypes:
 
-enum { STAFF_STATE_INSTRUMENT, STAFF_STATE_TYPE, STAFF_STATE_VISIBLE };
+enum {
+      STAFF_STATE_INSTRUMENT, STAFF_STATE_TYPE,
+      STAFF_STATE_VISIBLE, STAFF_STATE_INVISIBLE
+      };
 
 //---------------------------------------------------------
 //   StaffState

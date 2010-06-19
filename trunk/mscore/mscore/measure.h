@@ -248,6 +248,7 @@ class Measure : public MeasureBase {
       int multiMeasure() const                  { return _multiMeasure; }
       void setMultiMeasure(int val)             { _multiMeasure = val;  }
       void layoutChords0(Segment* segment, int startTrack, char* tversatz);
+      void layoutStage1();
       void writeTuplets(Xml&, int staff) const;
       };
 

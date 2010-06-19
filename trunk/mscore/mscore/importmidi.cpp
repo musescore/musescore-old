@@ -852,7 +852,7 @@ void Score::convertMidi(MidiFile* mf)
 
             if (track->isDrumTrack()) {
                   s->clefList()->setClef(0, CLEF_PERC);
-                  part->setDrumset(smDrumset);
+                  part->instr()->setDrumset(smDrumset);
                   }
             else {
                   if ((i < (ntracks-1)) && (tracks->at(i+1)->outChannel() == track->outChannel()

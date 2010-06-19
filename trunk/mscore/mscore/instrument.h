@@ -130,23 +130,23 @@ struct Instrument {
 
       bool operator==(const Instrument&) const;
 
-      int minPitchP() const                    { return _minPitchP;  }
-      int maxPitchP() const                    { return _maxPitchP;  }
-      int minPitchA() const                    { return _minPitchA;  }
-      int maxPitchA() const                    { return _maxPitchA;  }
-      void setMinPitchP(int v)                 { _minPitchP = v;     }
-      void setMaxPitchP(int v)                 { _maxPitchP = v;     }
-      void setMinPitchA(int v)                 { _minPitchA = v;     }
-      void setMaxPitchA(int v)                 { _maxPitchA = v;     }
-      Interval transpose() const               { return _transpose; }
-      void setTranspose(const Interval& v)     { _transpose = v; }
+      int minPitchP() const                                  { return _minPitchP;  }
+      int maxPitchP() const                                  { return _maxPitchP;  }
+      int minPitchA() const                                  { return _minPitchA;  }
+      int maxPitchA() const                                  { return _maxPitchA;  }
+      void setMinPitchP(int v)                               { _minPitchP = v;     }
+      void setMaxPitchP(int v)                               { _maxPitchP = v;     }
+      void setMinPitchA(int v)                               { _minPitchA = v;     }
+      void setMaxPitchA(int v)                               { _maxPitchA = v;     }
+      Interval transpose() const                             { return _transpose; }
+      void setTranspose(const Interval& v)                   { _transpose = v; }
 
-      QString trackName() const                { return _trackName;  }
-      void setTrackName(const QString& s)      { _trackName = s; }
+      QString trackName() const                              { return _trackName;  }
+      void setTrackName(const QString& s)                    { _trackName = s; }
 
       void setDrumset(Drumset* ds);
-      Drumset* drumset() const                 { return _drumset;    }
-      bool useDrumset() const                  { return _useDrumset; }
+      Drumset* drumset() const                               { return _drumset;    }
+      bool useDrumset() const                                { return _useDrumset; }
       void setUseDrumset(bool val);
       void setAmateurPitchRange(int a, int b)                { _minPitchA = a; _maxPitchA = b; }
       void setProfessionalPitchRange(int a, int b)           { _minPitchP = a; _maxPitchP = b; }
@@ -160,6 +160,7 @@ struct Instrument {
       void setMidiActions(const QList<NamedEventList>& l)    { _midiActions = l;  }
       void setArticulation(const QList<MidiArticulation>& l) { _articulation = l; }
       void setChannel(const QList<Channel>& l)               { _channel = l;      }
+      void setChannel(int i, const Channel& c)               { _channel[i] = c;   }
       Tablature* tablature() const                           { return _tablature; }
       };
 

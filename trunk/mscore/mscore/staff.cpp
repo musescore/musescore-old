@@ -152,7 +152,7 @@ void Staff::cleanupBrackets()
 
 QString Staff::trackName() const
       {
-      return _part->trackName();
+      return _part->instr()->trackName();
       }
 
 //---------------------------------------------------------
@@ -309,7 +309,7 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
 void Staff::changeClef(int tick, int st)
       {
       if (tick == 0 && st == CLEF_PERC)
-            part()->setUseDrumset(true);
+            part()->instr()->setUseDrumset(true);
 
       Measure* measure = _score->tick2measure(tick);
       if (!measure) {
@@ -410,7 +410,7 @@ int Staff::channel(int tick,  int voice) const
 int Staff::lines() const
       {
       if (useTablature())
-            return part()->tablature()->strings();
+            return part()->instr()->tablature()->strings();
       return _staffType->lines();
       }
 

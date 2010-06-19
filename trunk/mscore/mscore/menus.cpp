@@ -59,6 +59,7 @@
 #include "spacer.h"
 #include "measure.h"
 #include "fret.h"
+#include "staffstate.h"
 
 extern bool useFactorySettings;
 
@@ -619,6 +620,34 @@ void MuseScore::showPalette(bool visible)
             Spacer* spacer = new Spacer(gscore);
             spacer->setSpace(Spatium(3));
             sp->append(spacer, tr("Staff spacer"));
+
+            paletteBox->addPalette(sp);
+
+            //-----------------------------------
+            //    staff state changes
+            //-----------------------------------
+
+            sp = new Palette;
+            sp->setName(tr("Layout Changes"));
+            sp->setMag(.7);
+            sp->setGrid(42, 36);
+            sp->setDrawGrid(true);
+
+            StaffState* st = new StaffState(gscore);
+            st->setSubtype(STAFF_STATE_VISIBLE);
+            sp->append(st, tr("set visible"));
+
+            st = new StaffState(gscore);
+            st->setSubtype(STAFF_STATE_INVISIBLE);
+            sp->append(st, tr("set invisible"));
+
+            st = new StaffState(gscore);
+            st->setSubtype(STAFF_STATE_TYPE);
+            sp->append(st, tr("change staff type"));
+
+            st = new StaffState(gscore);
+            st->setSubtype(STAFF_STATE_INSTRUMENT);
+            sp->append(st, tr("change instrument"));
 
             paletteBox->addPalette(sp);
 

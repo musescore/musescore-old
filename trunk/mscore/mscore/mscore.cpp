@@ -2560,7 +2560,7 @@ void MuseScore::play(Element* e, int pitch) const
       if (mscore->playEnabled() && e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
             Part* part = note->staff()->part();
-            seq->startNote(part->channel(note->subchannel()), pitch, 80,
+            seq->startNote(part->instr()->channel(note->subchannel()), pitch, 80,
                preferences.defaultPlayDuration, note->tuning());
             }
       }

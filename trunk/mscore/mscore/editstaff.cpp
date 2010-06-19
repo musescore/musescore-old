@@ -42,7 +42,7 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       setupUi(this);
 
       Part* part = staff->part();
-      instrument = *part;
+      instrument = *part->instr();
 
       Score* score = part->score();
       int idx = 0;
@@ -161,7 +161,7 @@ void EditStaff::apply()
       instrument.setMinPitchP(pPitchMin->value());
       instrument.setMaxPitchP(pPitchMax->value());
 
-      if (snd || lnd || !(instrument == *part)) {
+      if (snd || lnd || !(instrument == *part->instr())) {
             score->undo()->push(new ChangePart(part, ln, sn, instrument));
             score->rebuildMidiMapping();
             seq->initInstruments();
@@ -188,7 +188,7 @@ void EditStaff::apply()
 
 void EditStaff::editDrumsetClicked()
       {
-      EditDrumset dse(staff->part()->drumset(), this);
+      EditDrumset dse(staff->part()->instr()->drumset(), this);
       dse.exec();
       }
 

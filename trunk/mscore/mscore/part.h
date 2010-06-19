@@ -34,9 +34,9 @@ class InstrumentTemplate;
 //   Part
 //---------------------------------------------------------
 
-class Part : public Instrument {
+class Part {
       Score* _score;
-
+      Instrument* _instr;
       TextC* _longName;
       TextC* _shortName;
       QList<Staff*> _staves;
@@ -88,6 +88,7 @@ class Part : public Instrument {
       bool show() const                        { return _show;        }
       void setShow(bool val);
       Score* score() const                     { return _score; }
+      Instrument* instr() const                { return _instr; }
       void setInstrument(const Instrument&);
       };
 

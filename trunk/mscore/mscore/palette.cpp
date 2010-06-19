@@ -185,7 +185,7 @@ void Palette::mousePressEvent(QMouseEvent* ev)
 
                   int ticks   = preferences.defaultPlayDuration;
                   int pitch   = note->pitch();
-                  seq->startNote(part->channel(0), pitch, 80, ticks, 0.0);
+                  seq->startNote(part->instr()->channel(0), pitch, 80, ticks, 0.0);
                   }
             }
       }

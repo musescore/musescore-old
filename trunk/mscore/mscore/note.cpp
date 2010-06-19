@@ -201,7 +201,7 @@ bool Note::isMovable() const
       //
       // drumset notes are not movable
       //
-      return !staff()->part()->useDrumset();
+      return !staff()->part()->instr()->useDrumset();
       }
 
 //---------------------------------------------------------
@@ -219,7 +219,7 @@ void Note::setPitch(int val)
       if (score()) {
             Part* part = score()->part(staffIdx());
             if (part)
-                  pitchOffset = score()->styleB(ST_concertPitch) ? 0 : part->transpose().chromatic;
+                  pitchOffset = score()->styleB(ST_concertPitch) ? 0 : part->instr()->transpose().chromatic;
             }
       _ppitch = _pitch + pitchOffset;
       if (chord())
@@ -508,7 +508,7 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   // by coloring the note head
                   //
                   if (staff() && !selected() && !score()->printing() && preferences.warnPitchRange) {
-                        Part* in = staff()->part();
+                        Instrument* in = staff()->part()->instr();
                         int i = ppitch();
                         if (i < in->minPitchP() || i > in->maxPitchP())
                               p.setPen(Qt::red);
@@ -566,8 +566,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
 
       if (xml.clipboardmode && !score()->styleB(ST_concertPitch)) {
             Part* part = staff()->part();
-            if (part->transpose().chromatic)
-                  transposeInterval(pitch(), tpc(), &rpitch, &rtpc, part->transpose(), true);
+            if (part->instr()->transpose().chromatic)
+                  transposeInterval(pitch(), tpc(), &rpitch, &rtpc, part->instr()->transpose(), true);
             }
 
       xml.tag("pitch", rpitch);
@@ -783,7 +783,7 @@ void Note::endDrag()
       int npitch;
       int tpc;
       if (staff->useTablature()) {
-            npitch = staff->part()->tablature()->getPitch(nLine, _fret);
+            npitch = staff->part()->instr()->tablature()->getPitch(nLine, _fret);
             tpc    = pitch2tpc(npitch, 0);
             }
       else {
@@ -970,8 +970,8 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
             case FRET_DIAGRAM:
                   {
                   FretDiagram* fd = static_cast<FretDiagram*>(e);
-                  if (staff()->part()->tablature())
-                        fd->init(staff()->part()->tablature(), chord());
+                  if (staff()->part()->instr()->tablature())
+                        fd->init(staff()->part()->instr()->tablature(), chord());
                   fd->setParent(chord()->measure());
                   fd->setTick(chord()->tick());
                   fd->setTrack((track() / VOICES) * VOICES);
@@ -999,6 +999,9 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
             case ACCIDENTAL:
                   score()->changeAccidental(this, e->subtype());
                   delete e;
+                  ch->segment()->measure()->layoutStage1(); // create actual accidental
+                  if (_accidental)
+                        score()->select(_accidental);
                   break;
 
             case ARPEGGIO:
@@ -1270,7 +1273,7 @@ void Note::layout1(char* tversatz)
       if (staff()->useTablature()) {
             if (_fret < 0) {
                   int line, fret;
-                  Tablature* tab = staff()->part()->tablature();
+                  Tablature* tab = staff()->part()->instr()->tablature();
                   if (tab->convertPitch(_pitch, &line, &fret)) {
                         _fret = fret;
                         _string = line;
