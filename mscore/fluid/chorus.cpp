@@ -356,11 +356,11 @@ void Chorus::setParameter(int idx, double value)
 double Chorus::parameter(int idx) const
       {
       switch (idx) {
-            case 0:     return type;
-            case 1:     return (speed_Hz-MIN_SPEED_HZ) / MAX_SPEED_HZ;
-            case 2:     return depth_ms / MAX_DEPTH;
-            case 3:     return number_blocks / 100.0;
-            case 4:     return level;
+            case 0: return type;
+            case 1: return (speed_Hz-MIN_SPEED_HZ) / MAX_SPEED_HZ;
+            case 2: return depth_ms / MAX_DEPTH;
+            case 3: return number_blocks / 100.0;
+            case 4: return level;
             }
       return 0.0;
       }

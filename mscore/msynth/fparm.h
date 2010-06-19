@@ -32,14 +32,16 @@ enum ParameterType { P_FLOAT, P_STRING };
 
 class Parameter {
    protected:
+      int _id;
       QString _name;
 
    public:
       Parameter() {}
-      Parameter(const QString& n) : _name(n) {}
+      Parameter(int i, const QString& n) : _id(i), _name(n) {}
       virtual ParameterType type() const = 0;
       virtual void write(Xml&) const = 0;
       const QString& name() const { return _name; }
+      int id() const { return _id; }
       };
 
 //---------------------------------------------------------
@@ -51,9 +53,9 @@ class Fparm : public Parameter {
 
    public:
       Fparm() : Parameter() {}
-      Fparm(const QString& n, float val, float min, float max)
-         : Parameter(n), _val(val), _min(min), _max(max) {}
-      Fparm(const QString& n, float val) : Parameter(n), _val(val) {}
+      Fparm(int i, const QString& n, float val, float min, float max)
+         : Parameter(i, n), _val(val), _min(min), _max(max) {}
+      Fparm(int i, const QString& n, float val) : Parameter(i, n), _val(val) {}
       ParameterType type() const { return P_FLOAT; }
       virtual void write(Xml&) const;
       float val() const      { return _val; }
@@ -74,10 +76,12 @@ class Sparm : public Parameter {
 
    public:
       Sparm() : Parameter() {}
-      Sparm(const QString& n, const QString& v) : Parameter(n), _val(v) {}
+      Sparm(int i, const QString& n, const QString& v)
+         : Parameter(i, n), _val(v) {}
       ParameterType type() const { return P_STRING; }
       virtual void write(Xml&) const;
-      QString val() const      { return _val; }
+      QString val() const                          { return _val; }
+      void setVal(const QString& s)                { _val = s; }
       void set(const QString& n, const QString& s) { _name = n; _val = s; }
       };
 

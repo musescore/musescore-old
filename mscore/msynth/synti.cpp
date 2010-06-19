@@ -29,7 +29,7 @@
 #endif
 #include "xml.h"
 
-const Fparm Synth::defaultParameter = Fparm("default", 0, 0, 0);
+const Fparm Synth::defaultParameter = Fparm(0, "default", 0, 0, 0);
 
 //---------------------------------------------------------
 //   MasterSynth

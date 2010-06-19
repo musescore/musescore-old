@@ -31,9 +31,7 @@ extern Seq* seq;
 
 void Fparm::write(Xml& xml) const
       {
-      xml.stag(QString("f name=\"%1\"").arg(name()));
-      xml.tag("val", _val);
-      xml.etag();
+      xml.tagE(QString("f name=\"%1\" id=\"%2\" val=\"%3\"").arg(_name).arg(_id).arg(_val));
       }
 
 //---------------------------------------------------------
@@ -42,9 +40,8 @@ void Fparm::write(Xml& xml) const
 
 void Sparm::write(Xml& xml) const
       {
-      xml.stag(QString("s name=\"%1\"").arg(name()));
-      xml.tag("val", _val);
-      xml.etag();
+      xml.tagE(QString("s name=\"%1\" id=\"%2\" val=\"%3\"")
+         .arg(_name).arg(_id).arg(Xml::xmlString(_val)));
       }
 
 //---------------------------------------------------------
@@ -104,14 +101,14 @@ void SyntiSettings::read(QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         QString pm = ee.attribute("name");
+                        int id     = ee.attribute("id").toInt();
                         if (tag == "f") {
-                              Fparm* p = new Fparm(pm, ee.text().toFloat());
+                              double d = ee.attribute("val").toDouble();
+                              Fparm* p = new Fparm(id, pm, float(d));
                               sp.params.append(p);
                               }
-                        else if (tag == "s") {
-                              Sparm* p = new Sparm(pm, ee.text());
-                              sp.params.append(p);
-                              }
+                        else if (tag == "s")
+                              sp.params.append(new Sparm(id, pm, ee.attribute("val")));
                         else
                               domError(ee);
                         }
