@@ -2019,7 +2019,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         else
                               domError(ee);
                         }
-                  score->part(staff)->setTranspose(interval);
+                  score->part(staff)->instr()->setTranspose(interval);
                   }
             else if (e.tagName() == "measure-style")
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {

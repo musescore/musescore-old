@@ -566,9 +566,9 @@ void OveToMScore::convertTrackHeader(OVE::Track* track, Part* part){
 	part->setMidiProgram(track->getPatch());
 
 	if (ove_->getShowTransposeTrack() && track->getTranspose() != 0 ) {
-        Interval interval = part->transpose();
+        Interval interval = part->instr()->transpose();
         interval.diatonic = -track->getTranspose();
-        part->setTranspose(interval);
+        part->instr()->setTranspose(interval);
 	}
 
 	// DrumSet
@@ -594,10 +594,10 @@ void OveToMScore::convertTrackHeader(OVE::Track* track, Part* part){
         	}
         }
 
-		part->channel(0).bank = 128;
+		part->instr()->channel(0).bank = 128;
 		part->setMidiProgram(0);
-		part->setUseDrumset(true);
-        part->setDrumset(drumset);
+		part->instr()->setUseDrumset(true);
+        part->instr()->setDrumset(drumset);
 	}
 }
 
@@ -1313,7 +1313,7 @@ bool isRestDefaultLine(OVE::Note* rest, OVE::NoteType noteType) {
 
 Drumset* getDrumset(Score* score, int part) {
 	Part* p = score->part(part);
-	return p->drumset();
+	return p->instr()->drumset();
 }
 
 void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track){

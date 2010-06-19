@@ -949,9 +949,9 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       a->setText(tr("Staff"));
       a = popup->addAction(tr("Edit Drumset..."));
       a->setData("edit-drumset");
-      a->setEnabled(staff->part()->drumset() != 0);
+      a->setEnabled(staff->part()->instr()->drumset() != 0);
 
-      if (staff->part()->drumset()) {
+      if (staff->part()->instr()->drumset()) {
             if (enableExperimental) {
                   a = popup->addAction(tr("Drumroll Editor..."));
                   a->setData("drumroll");
@@ -1005,7 +1005,7 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
                   }
             }
       else if (cmd == "edit-drumset") {
-            EditDrumset drumsetEdit(staff->part()->drumset(), this);
+            EditDrumset drumsetEdit(staff->part()->instr()->drumset(), this);
             drumsetEdit.exec();
             }
       else if (cmd == "drumroll") {
@@ -1271,7 +1271,7 @@ void ScoreView::setShadowNote(const QPointF& p)
       shadowNote->setVisible(true);
       Staff* staff      = score()->staff(pos.staffIdx);
       shadowNote->setMag(staff->mag());
-      Part* instr       = staff->part();
+      Instrument* instr       = staff->part()->instr();
       int noteheadGroup = 0;
       int line          = pos.line;
       int noteHead      = score()->inputState().duration().headType();
@@ -2984,7 +2984,7 @@ void ScoreView::select(QMouseEvent* ev)
                   Note* note = static_cast<Note*>(curElement);
                   Part* part = note->staff()->part();
                   int pitch = note->ppitch();
-                  seq->startNote(part->channel(note->subchannel()), pitch, 60, 1000, note->tuning());
+                  seq->startNote(part->instr()->channel(note->subchannel()), pitch, 60, 1000, note->tuning());
                   }
             }
       else
@@ -3748,11 +3748,11 @@ void ScoreView::cmdChangeEnharmonic(bool up)
       QList<Note*> nl = _score->selection().noteList();
       foreach(Note* n, nl) {
             Staff* staff = n->staff();
-            if (staff->part()->useDrumset())
+            if (staff->part()->instr()->useDrumset())
                   continue;
             if (staff->useTablature()) {
                   int string = n->line() + (up ? 1 : -1);
-                  int fret = staff->part()->tablature()->fret(n->pitch(), string);
+                  int fret = staff->part()->instr()->tablature()->fret(n->pitch(), string);
                   if (fret != -1) {
                         _score->startCmd();
                         _score->undoChangePitch(n, n->pitch(), n->tpc(), 0, string, fret);

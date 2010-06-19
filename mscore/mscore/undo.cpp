@@ -1828,7 +1828,7 @@ ChangePart::~ChangePart()
 
 void ChangePart::flip()
       {
-      Instrument oi         = *part;
+      Instrument oi         = *part->instr();
       part->setInstrument(instrument);
       longName              = part->longName()->swapDoc(longName);
       shortName             = part->shortName()->swapDoc(shortName);

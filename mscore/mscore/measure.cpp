@@ -309,8 +309,8 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
       double staffMag  = staff->mag();
       Drumset* drumset = 0;
 
-      if (staff->part()->useDrumset())
-            drumset = staff->part()->drumset();
+      if (staff->part()->instr()->useDrumset())
+            drumset = staff->part()->instr()->drumset();
 
       int endTrack = startTrack + VOICES;
       for (int track = startTrack; track < endTrack; ++track) {
@@ -383,8 +383,8 @@ int Measure::findAccidental(Note* note) const
                   Chord* chord = static_cast<Chord*>(e);
 
                   Drumset* drumset = 0;
-                  if (chord->staff()->part()->useDrumset())
-                        drumset = chord->staff()->part()->drumset();
+                  if (chord->staff()->part()->instr()->useDrumset())
+                        drumset = chord->staff()->part()->instr()->drumset();
 
                   foreach(Note* note1, chord->notes()) {
                         int pitch   = note1->pitch();
@@ -453,8 +453,8 @@ int Measure::findAccidental2(Note* note) const
                   Chord* chord = static_cast<Chord*>(e);
 
                   Drumset* drumset = 0;
-                  if (chord->staff()->part()->useDrumset())
-                        drumset = chord->staff()->part()->drumset();
+                  if (chord->staff()->part()->instr()->useDrumset())
+                        drumset = chord->staff()->part()->instr()->drumset();
 
                   foreach(Note* note1, chord->notes()) {
                         int pitch   = note1->pitch();
@@ -3177,6 +3177,63 @@ void Measure::layoutX(double stretch)
                   else {
                         e->setPos(-e->bbox().x(), 0.0);
                         }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   layoutStage1
+//---------------------------------------------------------
+
+void Measure::layoutStage1()
+      {
+      setDirty();
+      for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
+            KeySigEvent key = score()->staff(staffIdx)->keymap()->key(tick());
+
+            char tversatz[75];      // list of already set accidentals for this measure
+            initLineList(tversatz, key.accidentalType);
+
+            setBreakMMRest(false);
+            if (score()->styleB(ST_createMultiMeasureRests)) {
+                  if ((repeatFlags() & RepeatStart) || (prevMeasure() && (prevMeasure()->repeatFlags() & RepeatEnd)))
+                        setBreakMMRest(true);
+                  else {
+                        foreach (Element* e, *el()) {
+                              if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
+                                    setBreakMMRest(true);
+                              else if (e->type() == TEMPO_TEXT)
+                                    setBreakMMRest(true);
+                              }
+                        if (!breakMMRest()) {
+                              // TODO: this is slow!
+                              foreach(const Element* el, *score()->gel()) {
+                                    if (el->type() == VOLTA) {
+                                          const Volta* volta = static_cast<const Volta*>(el);
+                                          if (tick() >= volta->tick() && tick() <= volta->tick2()) {
+                                                setBreakMMRest(true);
+                                                break;
+                                                }
+                                          }
+                                    }
+                              }
+                        }
+                  }
+
+            int track = staffIdx * VOICES;
+
+            for (Segment* segment = first(); segment; segment = segment->next()) {
+                  Element* e = segment->element(track);
+
+                  if (segment->subtype() == SegKeySig
+                     || segment->subtype() == SegStartRepeatBarLine
+                     || segment->subtype() == SegTimeSig) {
+                        if (e && !e->generated())
+                              setBreakMMRest(true);
+                        }
+
+                  if (segment->subtype() & (SegChordRest | SegGrace))
+                        layoutChords0(segment, staffIdx * VOICES, tversatz);
                   }
             }
       }

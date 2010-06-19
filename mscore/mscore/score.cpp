@@ -1614,10 +1614,10 @@ void Score::rebuildMidiMapping()
       int channel = 0;
       int idx     = 0;
       foreach(Part* part, _parts) {
-            bool drum = part->useDrumset();
+            bool drum = part->instr()->useDrumset();
 
-            for (int k = 0; k < part->channel().size(); ++k) {
-                  Channel* a = &part->channel(k);
+            for (int k = 0; k < part->instr()->channel().size(); ++k) {
+                  Channel* a = &part->instr()->channel(k);
                   MidiMapping mm;
                   if (drum) {
                         mm.port    = port;
@@ -1680,6 +1680,7 @@ Page* Score::searchPage(const QPointF& p) const
 //   isStaffElement
 //---------------------------------------------------------
 
+#if 0
 static bool isStaffElement(Segment* s, int t)
       {
       for (int voice = 0; voice < VOICES; ++voice) {
@@ -1688,6 +1689,7 @@ static bool isStaffElement(Segment* s, int t)
             }
       return false;
       }
+#endif
 
 //---------------------------------------------------------
 //    getNextValidInputSegment
@@ -1707,7 +1709,7 @@ static Segment* getNextValidInputSegment(Segment* s, int track, int voice)
                   }
             if ((v != VOICES) && voice) {
                   Segment* s1;
-                  Measure* m = s->measure();
+                  // Measure* m = s->measure();
                   int ntick;
                   bool skipChord = false;
                   bool ns        = false;

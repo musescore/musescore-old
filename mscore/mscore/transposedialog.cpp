@@ -312,7 +312,7 @@ void Score::cmdConcertPitchChanged(bool flag, bool useDoubleSharpsFlats)
       _undo->push(new ChangeConcertPitch(this, flag));
 
       foreach(Staff* staff, _staves) {
-            Part* instr = staff->part();
+            Instrument* instr = staff->part()->instr();
             Interval interval = instr->transpose();
             if (interval.isZero())
                   continue;

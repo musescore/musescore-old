@@ -35,6 +35,7 @@
 
 Part::Part(Score* s)
       {
+      _instr = new Instrument;
       _longName  = new TextC(s);
       _longName->setSubtype(TEXT_INSTRUMENT_LONG);
       _longName->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
@@ -47,6 +48,7 @@ Part::Part(Score* s)
 
 Part::~Part()
       {
+      delete _instr;
       delete _longName;
       delete _shortName;
       }
@@ -57,21 +59,21 @@ Part::~Part()
 
 void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       {
-      setAmateurPitchRange(t->minPitchA, t->maxPitchA);
-      setProfessionalPitchRange(t->minPitchP, t->maxPitchP);
+      _instr->setAmateurPitchRange(t->minPitchA, t->maxPitchA);
+      _instr->setProfessionalPitchRange(t->minPitchP, t->maxPitchP);
 
       setShortNameEncoded(t->shortName);
-      setTrackName(t->trackName);
+      _instr->setTrackName(t->trackName);
       setLongNameEncoded(t->longName);
 
-      setTranspose(t->transpose);
+      _instr->setTranspose(t->transpose);
       if (t->useDrumset) {
-            setUseDrumset(true);
-            setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
+            _instr->setUseDrumset(true);
+            _instr->setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
             }
-      setMidiActions(t->midiActions);
-      setArticulation(t->articulation);
-      setChannel(t->channel);
+      _instr->setMidiActions(t->midiActions);
+      _instr->setArticulation(t->articulation);
+      _instr->setChannel(t->channel);
       }
 
 //---------------------------------------------------------
@@ -101,7 +103,7 @@ void Part::read(QDomElement e)
                   ++rstaff;
                   }
             else if (tag == "Instrument")
-                  Instrument::read(e);
+                  _instr->read(e);
             else if (tag == "name") {
                   if (_score->mscVersion() <= 101)
                         _longName->setHtml(val);
@@ -119,7 +121,7 @@ void Part::read(QDomElement e)
                         _shortName->read(e);
                   }
             else if (tag == "trackName") {
-                  setTrackName(val);
+                  _instr->setTrackName(val);
                   }
             else if (tag == "show")
                   _show = val.toInt();
@@ -255,7 +257,7 @@ void Part::write(Xml& xml) const
             _shortName->write(xml, "shortName");
       if (!_show)
             xml.tag("show", _show);
-      Instrument::write(xml);
+      _instr->write(xml);
       xml.etag();
       }
 
@@ -333,33 +335,35 @@ void Part::setMidiProgram(int p)
       {
       // LVIFIX: check if this is correct
       // at least it fixes the MIDI program handling in the MusicXML regression test
-      _channel[0].program = p;
-      _channel[0].updateInitList();
+      Channel c = _instr->channel(0);
+      c.program = p;
+      c.updateInitList();
+      _instr->setChannel(0, c);
       }
 
 int Part::volume() const
       {
-      return channel(0).volume;
+      return _instr->channel(0).volume;
       }
 
 int Part::reverb() const
       {
-      return channel(0).reverb;
+      return _instr->channel(0).reverb;
       }
 
 int Part::chorus() const
       {
-      return channel(0).chorus;
+      return _instr->channel(0).chorus;
       }
 
 int Part::pan() const
       {
-      return channel(0).pan;
+      return _instr->channel(0).pan;
       }
 
 int Part::midiProgram() const
       {
-      return channel(0).program;
+      return _instr->channel(0).program;
       }
 
 //---------------------------------------------------------
@@ -368,7 +372,7 @@ int Part::midiProgram() const
 
 int Part::midiChannel() const
       {
-      return score()->midiChannel(channel(0).channel);
+      return score()->midiChannel(_instr->channel(0).channel);
       }
 
 //---------------------------------------------------------
@@ -386,28 +390,20 @@ void Part::setMidiChannel(int) const
 
 void Part::setInstrument(const Instrument& i)
       {
-      setTrackName(i.trackName());
-      setMinPitchA(i.minPitchA());
-      setMaxPitchA(i.maxPitchA());
-      setMinPitchP(i.minPitchP());
-      setMaxPitchP(i.maxPitchP());
-      if (!_score->styleB(ST_concertPitch) && transpose().chromatic) {
+      delete _instr;
+      _instr = new Instrument(i);
+
+      if (!_score->styleB(ST_concertPitch) && _instr->transpose().chromatic) {
             foreach(Staff* staff, _staves) {
-                  _score->cmdTransposeStaff(staff->idx(), transpose(), false);
+                  _score->cmdTransposeStaff(staff->idx(), _instr->transpose(), false);
                   }
             }
-      setTranspose(i.transpose());
-      if (!_score->styleB(ST_concertPitch) && transpose().chromatic) {
+      if (!_score->styleB(ST_concertPitch) && _instr->transpose().chromatic) {
             foreach(Staff* staff, _staves) {
-                  Interval iv(transpose());
+                  Interval iv(_instr->transpose());
                   iv.flip();
                   _score->cmdTransposeStaff(staff->idx(), iv, false);
                   }
             }
-      setDrumset(i.drumset());
-      setUseDrumset(i.useDrumset());
-      setMidiActions(i.midiActions());
-      setArticulation(i.articulation());
-      setChannel(i.channel());
       }
 

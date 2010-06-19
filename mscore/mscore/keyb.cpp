@@ -318,7 +318,7 @@ void Score::setPadState(Element* e)
             _is.noteType = NOTE_NORMAL;
             }
       if (e->type() == NOTE || e->type() == REST) {
-            Part* instr   = e->staff()->part();
+            Instrument* instr   = e->staff()->part()->instr();
             if (instr->useDrumset()) {
                   if (e->type() == NOTE)
                         _is.setDrumNote(static_cast<Note*>(e)->pitch());

@@ -179,7 +179,7 @@ bool StaffText::getAeolusStop(int group, int idx) const
 static void initChannelCombo(QComboBox* cb, StaffText* st)
       {
       Part* part = st->staff()->part();
-      foreach(const Channel& a, part->channel()) {
+      foreach(const Channel& a, part->instr()->channel()) {
             if (a.name.isEmpty())
                   cb->addItem(cb->tr("normal"));
             else
@@ -230,13 +230,13 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
             initChannelCombo(channelCombo[i], st);
 
       Part* part = st->staff()->part();
-      int n = part->channel().size();
+      int n = part->instr()->channel().size();
       int rows = 0;
       for (int voice = 0; voice < VOICES; ++voice) {
             if (st->channelName(voice).isEmpty())
                   continue;
             for (int i = 0; i < n; ++i) {
-                  const Channel& a = part->channel(i);
+                  const Channel& a = part->instr()->channel(i);
                   if (a.name != st->channelName(voice))
                         continue;
                   int row = 0;
@@ -269,7 +269,7 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
 
       QTreeWidgetItem* selectedItem = 0;
       for (int i = 0; i < n; ++i) {
-            const Channel& a = part->channel(i);
+            const Channel& a = part->instr()->channel(i);
             QTreeWidgetItem* item = new QTreeWidgetItem(channelList);
             item->setData(0, Qt::UserRole, i);
             item->setText(0, a.name);
@@ -439,10 +439,10 @@ void StaffTextProperties::channelItemChanged(QTreeWidgetItem* item, QTreeWidgetI
       Part* part = staffText->staff()->part();
 
       int channelIdx      = item->data(0, Qt::UserRole).toInt();
-      Channel& channel    = part->channel(channelIdx);
+      Channel& channel    = part->instr()->channel(channelIdx);
       QString channelName = channel.name;
 
-      foreach(const NamedEventList& e, part->midiActions()) {
+      foreach(const NamedEventList& e, part->instr()->midiActions()) {
             QTreeWidgetItem* item = new QTreeWidgetItem(actionList);
             item->setText(0, e.name);
             item->setText(1, e.descr);
@@ -478,7 +478,7 @@ void StaffTextProperties::saveValues()
             for (int row = 0; row < VOICES; ++row) {
                   if (vb[voice][row]->isChecked()) {
                         int idx = channelCombo[row]->currentIndex();
-                        staffText->setChannelName(voice, part->channel()[idx].name);
+                        staffText->setChannelName(voice, part->instr()->channel()[idx].name);
                         break;
                         }
                   }

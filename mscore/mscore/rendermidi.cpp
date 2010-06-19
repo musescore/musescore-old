@@ -71,7 +71,7 @@ void Score::updateChannel()
                         if (an.isEmpty())
                               continue;
                         Staff* staff = _staves[st->staffIdx()];
-                        int a = staff->part()->channelIdx(an);
+                        int a = staff->part()->instr()->channelIdx(an);
                         if (a != -1)
                               staff->channelList(voice)->insert(st->tick(), a);
                         }
@@ -202,7 +202,7 @@ struct OttavaShiftSegment {
 static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx,
    int nextStaffIdx, int tickOffset)
       {
-      Part* instr = m->score()->part(firstStaffIdx);
+      Instrument* instr = m->score()->part(firstStaffIdx)->instr();
 
       SegmentTypes st = SegGrace | SegChordRest;
       int strack = firstStaffIdx * VOICES;
@@ -310,7 +310,7 @@ Measure* Score::searchLabel(const QString& s, Measure* start)
 
 void Score::toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx)
       {
-      Part* instr = part(firstStaffIdx);
+      Instrument* instr = part(firstStaffIdx)->instr();
 
       foreach(const RepeatSegment* rs, *_repeatList) {
             int startTick  = rs->tick;
@@ -456,8 +456,8 @@ void Score::fixPpitch()
             }
 
       for (int staffIdx = 0; staffIdx < ns; ++staffIdx) {
-            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->transpose().chromatic;
-            Instrument* instr = part(staffIdx);
+            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instr()->transpose().chromatic;
+            Instrument* instr = part(staffIdx)->instr();
 
             for (Segment* seg = firstSegment(); seg; seg = seg->next1()) {
                   if (seg->subtype() != SegChordRest && seg->subtype() != SegGrace)

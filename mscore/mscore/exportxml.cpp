@@ -3519,10 +3519,11 @@ foreach(Element* el, *(score->gel())) {
                             xml.etag();
                           }
                         }
-                        if (part->transpose().chromatic) {
+                        Instrument* instrument = part->instr();
+                        if (instrument->transpose().chromatic) {
                           xml.stag("transpose");
-                          xml.tag("diatonic",  part->transpose().diatonic);
-                          xml.tag("chromatic", part->transpose().chromatic);
+                          xml.tag("diatonic",  instrument->transpose().diatonic);
+                          xml.tag("chromatic", instrument->transpose().chromatic);
                           xml.etag();
                         }
                       }
@@ -3637,7 +3638,7 @@ foreach(Element* el, *(score->gel())) {
                                           // (too) simple solution: output lyrics only for the first voice
                                           const LyricsList* ll = 0;
                                           if ((st % VOICES) == 0) ll = seg->lyricsList(st / VOICES);
-                                          chord((Chord*)el, sstaff, ll, part->useDrumset());
+                                          chord((Chord*)el, sstaff, ll, part->instr()->useDrumset());
                                           break;
                                           }
                                     case REST:

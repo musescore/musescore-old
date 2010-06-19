@@ -1226,8 +1226,8 @@ void Score::upDown(bool up, bool octave)
             int pitch   = oNote->pitch();
             int newTpc;
             int newPitch;
-            if (part->useDrumset()) {
-                  Drumset* ds = part->drumset();
+            if (part->instr()->useDrumset()) {
+                  Drumset* ds = part->instr()->drumset();
                   newPitch    = up ? ds->prevPitch(pitch) : ds->nextPitch(pitch);
                   newTpc      = oNote->tpc();
                   }
@@ -2135,7 +2135,7 @@ void Score::processMidiInput()
                               p = staff(staffIdx)->part();
                               }
                         if(p)
-                              seq->startNote(p->channel(0), ev.pitch, 80, preferences.defaultPlayDuration, 0.0);
+                              seq->startNote(p->instr()->channel(0), ev.pitch, 80, preferences.defaultPlayDuration, 0.0);
                               }
                         else{
                               startCmd();
@@ -2338,10 +2338,10 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     if (nn < 0 || nn >= nstaves())
                                           c->setStaffMove(0);
                                     foreach(Note* n, c->notes()) {
-                                          if (!styleB(ST_concertPitch) && part->transpose().chromatic) {
+                                          if (!styleB(ST_concertPitch) && part->instr()->transpose().chromatic) {
                                                 int npitch;
                                                 int ntpc;
-                                                Interval interval = part->transpose();
+                                                Interval interval = part->instr()->transpose();
                                                 interval.flip();
                                                 transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc,
                                                    interval, true);

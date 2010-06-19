@@ -102,33 +102,27 @@ void StaffState::layout()
                   path.lineTo(w, h);
                   path.lineTo(0.0, h);
                   path.lineTo(0.0, 0.0);
-
-                  path.moveTo(w * .8, w * .7);
-                  path.lineTo(w * .8, w);
-                  path.lineTo(w * .2, w);
-
-                  path.moveTo(w * .4, w * .8);
-                  path.lineTo(w * .2, w);
-                  path.lineTo(w * .4, w * 1.2);
                   break;
 
             case STAFF_STATE_TYPE:
                   path.lineTo(w, 0.0);
-                  path.lineTo(w, h-w1);
-                  path.lineTo(w1, h-w1);
-                  path.lineTo(w1, h);
+                  path.lineTo(w, h);
                   path.lineTo(0.0, h);
                   path.lineTo(0.0, 0.0);
-                  path.moveTo(w, h-w1);
-                  path.lineTo(w1, h);
                   break;
 
             case STAFF_STATE_VISIBLE:
                   path.lineTo(w, 0.0);
-                  path.lineTo(w,  h);
-                  path.lineTo(0.0,  h);
-                  path.moveTo(w-_spatium * .8,  0.0);
-                  path.lineTo(w-_spatium * .8,  h);
+                  path.lineTo(w, h);
+                  path.lineTo(0.0, h);
+                  path.lineTo(0.0, 0.0);
+                  break;
+
+            case STAFF_STATE_INVISIBLE:
+                  path.lineTo(w, 0.0);
+                  path.lineTo(w, h);
+                  path.lineTo(0.0, h);
+                  path.lineTo(0.0, 0.0);
                   break;
 
             default:

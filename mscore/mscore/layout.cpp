@@ -158,7 +158,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
       {
       Staff* staff = Score::staff(staffIdx);
 
-      if (staff->part()->drumset() || staff->useTablature())
+      if (staff->part()->instr()->drumset() || staff->useTablature())
             return;
 
       int startTrack = staffIdx * VOICES;
@@ -386,55 +386,7 @@ void Score::layoutStage1()
       int idx = 0;
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             ++idx;
-            m->setDirty();
-            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                  KeySigEvent key = staff(staffIdx)->keymap()->key(m->tick());
-
-                  char tversatz[75];      // list of already set accidentals for this measure
-                  initLineList(tversatz, key.accidentalType);
-
-                  m->setBreakMMRest(false);
-                  if (styleB(ST_createMultiMeasureRests)) {
-                        if ((m->repeatFlags() & RepeatStart) || (m->prevMeasure() && (m->prevMeasure()->repeatFlags() & RepeatEnd)))
-                              m->setBreakMMRest(true);
-                        else {
-                              foreach (Element* e, *m->el()) {
-                                    if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
-                                          m->setBreakMMRest(true);
-                                    else if (e->type() == TEMPO_TEXT)
-                                          m->setBreakMMRest(true);
-                                    }
-                              if (!m->breakMMRest()) {
-                                    // TODO: this is slow!
-                                    foreach(const Element* el, _gel) {
-                                          if (el->type() == VOLTA) {
-                                                const Volta* volta = static_cast<const Volta*>(el);
-                                                if (m->tick() >= volta->tick() && m->tick() <= volta->tick2()) {
-                                                      m->setBreakMMRest(true);
-                                                      break;
-                                                      }
-                                                }
-                                          }
-                                    }
-                              }
-                        }
-
-                  int track = staffIdx * VOICES;
-
-                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                        Element* e = segment->element(track);
-
-                        if (segment->subtype() == SegKeySig
-                           || segment->subtype() == SegStartRepeatBarLine
-                           || segment->subtype() == SegTimeSig) {
-                              if (e && !e->generated())
-                                    m->setBreakMMRest(true);
-                              }
-
-                        if (segment->subtype() & (SegChordRest | SegGrace))
-                              m->layoutChords0(segment, staffIdx * VOICES, tversatz);
-                        }
-                  }
+            m->layoutStage1();
             MeasureBase* mb = m->prev();
             if (mb && mb->type() == MEASURE) {
                   Measure* prev = static_cast<Measure*>(mb);

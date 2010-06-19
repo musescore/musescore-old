@@ -525,8 +525,8 @@ bool Score::importBB(const QString& name)
 int Score::processPendingNotes(QList<MNote*>* notes, int len, int track)
       {
       Staff* cstaff    = staff(track/VOICES);
-      Drumset* drumset = cstaff->part()->drumset();
-      bool useDrumset  = cstaff->part()->useDrumset();
+      Drumset* drumset = cstaff->part()->instr()->drumset();
+      bool useDrumset  = cstaff->part()->instr()->useDrumset();
       int tick         = notes->at(0)->mc->ontime();
 
       //
