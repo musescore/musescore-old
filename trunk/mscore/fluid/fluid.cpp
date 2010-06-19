@@ -61,6 +61,24 @@ static const Mod defaultMod[] = {
         12700.0 },
       };
 
+//
+// list of fluid paramters as saved in score
+//
+static Parameter* params[] = {
+      new Sparm(0x00000, "soundfont", ""),
+      new Fparm(0x10000, "RevRoomsize", 0.0),
+      new Fparm(0x10001, "RevDamp",   0.0),
+      new Fparm(0x10002, "RevWidth",  0.0),
+      new Fparm(0x10003, "RevGain",   0.0),
+
+      new Fparm(0x20000, "ChoType",   0.0),
+      new Fparm(0x20001, "ChoSpeed",  0.0),
+      new Fparm(0x20002, "ChoDepth",  0.0),
+      new Fparm(0x20003, "ChoBlocks", 0.0),
+      new Fparm(0x20004, "ChoGain",   0.0),
+      0
+      };
+
 //---------------------------------------------------------
 //   Fluid
 //---------------------------------------------------------
@@ -1015,8 +1033,26 @@ SynthParams Fluid::getParams() const
       {
       SynthParams sp;
       sp.synth = (Fluid*)this;
-      Sparm* p = new Sparm("soundfont", soundFont());
-      sp.params.append(p);
+
+      //
+      // fill in struct with actual values
+      //
+      for (int i = 0;; ++i) {
+            Parameter* p = params[i];
+            if (p == 0)
+                  break;
+            int id    = p->id();
+            int group = (id & 0xffff0000) >> 16;
+            int no    = id & 0xffff;
+
+            if (group == 0)
+                  static_cast<Sparm*>(p)->setVal(soundFont());
+            else if (group == 1)
+                  static_cast<Fparm*>(p)->setVal(reverb->parameter(no));
+            else if (group == 2)
+                  static_cast<Fparm*>(p)->setVal(chorus->parameter(no));
+            sp.params.append(p);
+            }
       return sp;
       }
 
@@ -1027,18 +1063,16 @@ SynthParams Fluid::getParams() const
 void Fluid::setParams(const SynthParams& sp)
       {
       foreach(const Parameter* p, sp.params) {
-            if (p->name() == "soundfont") {
-                  const Sparm* sp = static_cast<const Sparm*>(p);
-                  printf("Fluid::setParams: <%s>=<%s>\n",
-                     qPrintable(p->name()),
-                     qPrintable(sp->val()));
-                  loadSoundFont(sp->val());
-                  }
-            else {
-                  printf("Fluid: unknown parameter <%s>\n",
-                     qPrintable(p->name()));
-                  }
+            int id    = p->id();
+            int group = (id & 0xffff0000) >> 16;
+            int no    = id & 0xffff;
+
+            if (group == 0)
+                  loadSoundFont(static_cast<const Sparm*>(p)->val());
+            else if (group == 1)
+                  reverb->setParameter(no, static_cast<const Fparm*>(p)->val());
+            else if (group == 2)
+                  chorus->setParameter(no, static_cast<const Fparm*>(p)->val());
             }
       }
-
 }
