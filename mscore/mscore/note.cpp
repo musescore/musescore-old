@@ -969,12 +969,16 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
 
             case FRET_DIAGRAM:
                   {
-                  if (staff()->part()->tablature()) {
-                        FretDiagram* fd = static_cast<FretDiagram*>(e);
+                  FretDiagram* fd = static_cast<FretDiagram*>(e);
+                  if (staff()->part()->tablature())
                         fd->init(staff()->part()->tablature(), chord());
-                        }
+                  fd->setParent(chord()->measure());
+                  fd->setTick(chord()->tick());
+                  fd->setTrack((track() / VOICES) * VOICES);
+                  score()->select(e, SELECT_SINGLE, 0);
+                  score()->undoAddElement(e);
+                  return e;
                   }
-                  // fall through
 
             case HARMONY:
                   e->setParent(chord()->measure());
