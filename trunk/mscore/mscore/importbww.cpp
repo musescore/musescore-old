@@ -179,21 +179,24 @@ namespace Bww {
       currentMeasure->setNo(measureNumber);
       score->measures()->add(currentMeasure);
 
+      // set key and time signature in the first measure
       if (measureNumber == 1) {
             // keysig
             KeySigEvent key;
             key.setAccidentalType(2);
-            (*score->staff(0)->keymap())[tick] = key;
+            KeySig* keysig = new KeySig(score);
+            keysig->setSubtype(key);
+            keysig->setTrack(0);
+            Segment* s = currentMeasure->getSegment(keysig, tick);
+            s->add(keysig);
             // timesig
             TimeSig ts = TimeSig(score, beat, beats);
             int st = ts.subtype();
             if (st) {
-                  //ws score->sigmap()->add(tick, TimeSig::getSig(st));
                   TimeSig* timesig = new TimeSig(score);
-                  //ws timesig->setTick(tick);
                   timesig->setSubtype(st);
                   timesig->setTrack(0);
-                  Segment* s = currentMeasure->getSegment(timesig, tick);
+                  s = currentMeasure->getSegment(timesig, tick);
                   s->add(timesig);
                   }
             }

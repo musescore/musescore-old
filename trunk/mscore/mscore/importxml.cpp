@@ -1916,16 +1916,11 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               KeySigEvent oldkey = score->staff(staffIdx+i)->keymap()->key(tick);
                               if (oldkey != key) {
                                     // new key differs from key in effect at this tick
-                                    (*score->staff(staffIdx+i)->keymap())[tick] = key;
-                                    // dont generate symbol for tick 0
-                                    if (tick) {
-                                          // apply to all staves in part
-                                          KeySig* keysig = new KeySig(score);
-                                          keysig->setTrack((staffIdx + i) * VOICES);
-                                          keysig->setSubtype(key);
-                                          Segment* s = measure->getSegment(keysig, tick);
-                                          s->add(keysig);
-                                          }
+                                    KeySig* keysig = new KeySig(score);
+                                    keysig->setTrack((staffIdx + i) * VOICES);
+                                    keysig->setSubtype(key);
+                                    Segment* s = measure->getSegment(keysig, tick);
+                                    s->add(keysig);
                                     }
                               }
                         }
@@ -1936,15 +1931,11 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         KeySigEvent oldkey = score->staff(staffIdx)->keymap()->key(tick);
                         if (oldkey != key) {
                               // new key differs from key in effect at this tick
-                              (*score->staff(staffIdx)->keymap())[tick] = key;
-                              // dont generate symbol for tick 0
-                              if (tick) {
-                                    KeySig* keysig = new KeySig(score);
-                                    keysig->setTrack(staffIdx * VOICES);
-                                    keysig->setSubtype(key);
-                                    Segment* s = measure->getSegment(keysig, tick);
-                                    s->add(keysig);
-                                    }
+                              KeySig* keysig = new KeySig(score);
+                              keysig->setTrack(staffIdx * VOICES);
+                              keysig->setSubtype(key);
+                              Segment* s = measure->getSegment(keysig, tick);
+                              s->add(keysig);
                               }
                         }
                   }
