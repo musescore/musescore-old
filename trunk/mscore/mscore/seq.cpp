@@ -154,8 +154,9 @@ void Seq::selectionChanged(int mode)
 
       if ((mode != SEL_LIST) || (state == STOP))
             cs->setPlayPos(tick);
-      else
+      else {
             seek(tick);
+            }
       }
 
 //---------------------------------------------------------
@@ -806,6 +807,8 @@ void Seq::seek(int tick)
             }
       cs->setPlayPos(tick);
       cs->end();
+
+      tick = cs->repeatList()->tick2utick(tick);
 
       SeqMsg msg;
       msg.data = tick;
