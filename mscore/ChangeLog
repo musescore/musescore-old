@@ -1,3 +1,5 @@
+20.jun (db)
+      - remove incompatible "temperament tuning" plugin
 18.jun (la)
       - fix #5949 : MIDI import gives unexpectedly silent notes
       - fix #6144 : Notes (and other signs) in small staves are smaller than they should
