@@ -595,6 +595,12 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
             for (int i = 0; i < n; ++i) {
                   Duration d = dl[i];
 
+                  SegmentType st = SegChordRest;
+                  seg = measure->findSegment(st, tick);
+                  if (seg == 0) {
+                        seg = new Segment(measure, st, tick);
+                        undoAddElement(seg);
+                        }
                   ChordRest* ncr;
                   if (pitch == -1) {
                         nr = new Rest(this);
@@ -602,6 +608,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         ncr = (Rest*)nr;
                         ncr->setDurationType(d);
                         ncr->setDuration(d.fraction());
+                        ncr->setParent(seg);
                         }
                   else {
                         Note* note = new Note(this);
@@ -620,9 +627,10 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         chord->setStemDirection(stemDirection);
                         chord->add(note);
                         note->setPitch(pitch);
-                        note->setTpcFromPitch();
-                        mscore->play(note);
                         ncr = chord;
+                        ncr->setParent(seg);
+                        note->setTpcFromPitch();      // chord->tick() must be known
+                        mscore->play(note);
                         if (i+1 < n) {
                               tie = new Tie(this);
                               tie->setStartNote((Note*)nr);
@@ -631,13 +639,6 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                               }
                         }
                   ncr->setTuplet(cr->tuplet());
-                  SegmentType st = SegChordRest;
-                  seg = measure->findSegment(st, tick);
-                  if (seg == 0) {
-                        seg = new Segment(measure, st, tick);
-                        undoAddElement(seg);
-                        }
-                  ncr->setParent(seg);
                   undoAddElement(ncr);
                   tick += ncr->ticks();
                   }

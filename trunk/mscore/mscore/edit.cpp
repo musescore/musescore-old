@@ -728,13 +728,18 @@ void Score::putNote(const QPointF& pos, bool replace)
             return;
             }
 
-      int tick                = p.segment->tick();
+      Segment* s              = p.segment;
+      int tick                = s->tick();
       int staffIdx            = p.staffIdx;
       int line                = p.line;
       Staff* st               = staff(staffIdx);
       KeySigEvent key         = st->keymap()->key(tick);
       int clef                = st->clef(tick);
       int pitch               = line2pitch(line, clef, key.accidentalType);
+
+printf("putNote at tick %d staff %d line %d accidental %d clef %d pitch %d\n",
+   tick, staffIdx, line, key.accidentalType, clef, pitch);
+
       Instrument* instr       = st->part()->instr();
       _is.setTrack(staffIdx * VOICES + (_is.track() % VOICES));
       _is.pitch               = pitch;
@@ -753,7 +758,6 @@ void Score::putNote(const QPointF& pos, bool replace)
             stemDirection = ds->stemDirection(pitch);
             }
 
-      Segment* s = p.segment;
       _is.setSegment(s);
       expandVoice();
       ChordRest* cr = _is.cr();
@@ -779,13 +783,8 @@ void Score::putNote(const QPointF& pos, bool replace)
                   }
             addToChord = true;
             }
-      if (addToChord) {
-            if (cr->type() == CHORD) {
-                  addNote(static_cast<Chord*>(cr), pitch);
-                  }
-            else
-                  setNoteRest(cr, _is.track(), pitch, _is.duration().fraction(), headGroup, stemDirection);
-            }
+      if (addToChord && cr->type() == CHORD)
+            addNote(static_cast<Chord*>(cr), pitch);
       else {
             // replace chord
             if (_is.rest)

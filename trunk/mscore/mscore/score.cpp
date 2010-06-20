@@ -1896,7 +1896,6 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       int maxLine = pitch2line(127);
       maxLine     = 127 - maxLine - 82 + clefTable[clef].yOffset;
 
-printf("line %d  minLine %d\n", pos->line, minLine);
       if (pos->line > minLine || pos->line < maxLine)
             return false;
 
