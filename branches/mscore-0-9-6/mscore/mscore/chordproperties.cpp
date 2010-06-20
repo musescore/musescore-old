@@ -46,10 +46,16 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
             HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
             HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_MI, HEAD_FA, HEAD_LA, HEAD_TI
             };
-      for (int i = 0; i < HEAD_GROUPS; ++i)
+      int headGroup = note->headGroup();
+      int headGroupIndex = 0;
+      for (int i = 0; i < HEAD_GROUPS; ++i) {
             noteHeadGroup->setItemData(i, QVariant(heads[i]));
+            if(headGroup == heads[i]) {
+                  headGroupIndex = i;
+                  }
+            }
 
-      noteHeadGroup->setCurrentIndex(note->headGroup());
+      noteHeadGroup->setCurrentIndex(headGroupIndex);
       noteHeadType->setCurrentIndex(int(note->headType()));
 
       ValueType vt  = note->veloType();
