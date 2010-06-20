@@ -240,6 +240,7 @@ void Note::setTpcFromPitch()
       {
       KeySigEvent key = (staff() && chord()) ? staff()->key(chord()->tick()) : KeySigEvent();
       _tpc    = pitch2tpc(_pitch, key.accidentalType);
+printf("setTpcFromPitch pitch %d tick %d key %d tpc %d\n", pitch(), chord()->tick(), key.accidentalType, _tpc);
       }
 
 //---------------------------------------------------------

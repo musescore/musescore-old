@@ -3,6 +3,22 @@
   <programVersion>0.9.7</programVersion>
   <programRevision>2613
 </programRevision>
+  <SyntiSettings>
+    <Synth name="Fluid">
+      <s name="soundfont" id="0" val="/home/ws/sfont/Splendid_72M.sf2"/>
+      <f name="RevRoomsize" id="65536" val="0.5"/>
+      <f name="RevDamp" id="65537" val="0.5"/>
+      <f name="RevWidth" id="65538" val="0.5"/>
+      <f name="RevGain" id="65539" val="0"/>
+      <f name="ChoType" id="131072" val="0"/>
+      <f name="ChoSpeed" id="131073" val="0.002"/>
+      <f name="ChoDepth" id="131074" val="0.8"/>
+      <f name="ChoBlocks" id="131075" val="0.03"/>
+      <f name="ChoGain" id="131076" val="2"/>
+      </Synth>
+    <Synth name="Aeolus">
+      </Synth>
+    </SyntiSettings>
   <Spatium>1.425</Spatium>
   <Division>480</Division>
   <Style>
@@ -476,6 +492,100 @@ p, li { white-space: pre-wrap; }
     <SlurSegment no="0">
       <o2 x="-1.12207" y="4.76878"/>
       <o3 x="2.33764" y="1.30908"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="72">
+    <SlurSegment no="0">
+      <o1 x="-0.273803" y="1.50592"/>
+      <o2 x="-0.966524" y="1.16777"/>
+      <o3 x="2.22807" y="1.33684"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="73">
+    <SlurSegment no="0">
+      <o1 x="2.77556e-17" y="1.36901"/>
+      <o2 x="-1.09521" y="1.50592"/>
+      <o3 x="1.36901" y="1.09521"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Ottava>
+    <endHookHeight>1.5</endHookHeight>
+    <endHookType>0</endHookType>
+    <lineWidth>0.15</lineWidth>
+    <lineStyle>3</lineStyle>
+    <lineColor r="0" g="0" b="0"/>
+    <beginTextPlace>left</beginTextPlace>
+    <continueTextPlace>left</continueTextPlace>
+    <tick>251520</tick>
+    <tick2>254400</tick2>
+    <Segment>
+      <off1 x="-1.5499" y="-5.70221"/>
+      <off2 x="0" y="0"/>
+      <offset x="-1.5499" y="-5.70221"/>
+      </Segment>
+    <beginText>
+      <style>32</style>
+      <subtype>TextLine</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:italic;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">8</span></p></body></html>
+        </html-data>
+      </beginText>
+    <continueText>
+      <style>32</style>
+      <subtype>TextLine</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:italic;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">(8va)</span></p></body></html>
+        </html-data>
+      </continueText>
+    </Ottava>
+  <Slur id="74">
+    <SlurSegment no="0">
+      <o4 x="0" y="-2.22807"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="75">
+    <SlurSegment no="0">
+      <o4 x="0" y="-2.07953"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="76">
+    <SlurSegment no="0">
+      <o4 x="0" y="-2.22807"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="77">
+    <SlurSegment no="0">
+      <o4 x="0" y="-2.07953"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="78">
+    </Slur>
+  <Slur id="79">
+    <SlurSegment no="0">
+      <offset x="-0.136901" y="-1.36901"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="80">
+    <SlurSegment no="0">
+      <o2 x="-0.684507" y="-2.60113"/>
+      <o3 x="1.36901" y="-1.99808"/>
+      <o4 x="0" y="-0.891228"/>
+      </SlurSegment>
+    </Slur>
+  <Slur id="81">
+    </Slur>
+  <Slur id="82">
+    <SlurSegment no="0">
+      <offset x="0.191932" y="-0.863696"/>
       </SlurSegment>
     </Slur>
   <Staff id="1">
@@ -3579,11 +3689,13 @@ p, li { white-space: pre-wrap; }
       <bottomMargin>5</bottomMargin>
       <Text>
         <subtype>Frame</subtype>
+        <halign>left</halign>
         <valign>center</valign>
         <xoffset>0</xoffset>
         <yoffset>0</yoffset>
         <rxoffset>0</rxoffset>
         <ryoffset>50</ryoffset>
+        <offsetType>spatium</offsetType>
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <frame>0</frame>
         <html-data>
@@ -6078,11 +6190,12 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>3</nom1>
         </TimeSig>
-      <Beam id="86">
+      <Beam id="52">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>86</Beam>
+        <Slur type="start" number="72"/>
+        <Beam>52</Beam>
         <Note>
           <pitch>64</pitch>
           <tpc>6</tpc>
@@ -6090,7 +6203,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>86</Beam>
+        <Beam>52</Beam>
         <Note>
           <pitch>56</pitch>
           <tpc>10</tpc>
@@ -6099,7 +6212,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>86</Beam>
+        <Beam>52</Beam>
         <Note>
           <pitch>55</pitch>
           <tpc>3</tpc>
@@ -6107,7 +6220,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>86</Beam>
+        <Beam>52</Beam>
         <Note>
           <pitch>64</pitch>
           <tpc>6</tpc>
@@ -6116,7 +6229,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>86</Beam>
+        <Beam>52</Beam>
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
@@ -6124,7 +6237,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>86</Beam>
+        <Beam>52</Beam>
         <Note>
           <pitch>57</pitch>
           <tpc>17</tpc>
@@ -6136,6 +6249,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="55">
       <Chord>
         <durationType>quarter</durationType>
+        <Slur type="stop" number="72"/>
         <Note>
           <pitch>59</pitch>
           <tpc>7</tpc>
@@ -6240,12 +6354,12 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>3</nom1>
         </TimeSig>
-      <Beam id="88">
+      <Beam id="53">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="71"/>
-        <Beam>88</Beam>
+        <Beam>53</Beam>
         <Note>
           <pitch>71</pitch>
           <tpc>7</tpc>
@@ -6253,7 +6367,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>88</Beam>
+        <Beam>53</Beam>
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
@@ -6262,7 +6376,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>88</Beam>
+        <Beam>53</Beam>
         <Note>
           <pitch>62</pitch>
           <tpc>16</tpc>
@@ -6270,7 +6384,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>88</Beam>
+        <Beam>53</Beam>
         <Note>
           <pitch>71</pitch>
           <tpc>7</tpc>
@@ -6279,7 +6393,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>88</Beam>
+        <Beam>53</Beam>
         <Note>
           <pitch>70</pitch>
           <tpc>12</tpc>
@@ -6287,7 +6401,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>88</Beam>
+        <Beam>53</Beam>
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
@@ -6307,6 +6421,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Rest>
         <durationType>quarter</durationType>
+        <Articulation>
+          <offset x="1.64282" y="1.64282"/>
+          </Articulation>
         </Rest>
       <Rest>
         <durationType>quarter</durationType>
@@ -6431,58 +6548,265 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         <subtype>MeasureNumber</subtype>
         </Text>
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>75</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>87</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        <Note>
+          <pitch>86</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        <Note>
+          <pitch>80</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
       <BarLine>
         </BarLine>
       </Measure>
     <Measure number="63">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>73</pitch>
+          <tpc>9</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        <Note>
+          <pitch>85</pitch>
+          <tpc>9</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>8</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        <Note>
+          <pitch>78</pitch>
+          <tpc>8</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        <Note>
+          <pitch>84</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
       <BarLine>
         </BarLine>
       </Measure>
     <Measure number="64">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>7</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        <Note>
+          <pitch>83</pitch>
+          <tpc>7</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          <userAccidental>32770</userAccidental>
+          </Note>
+        <Note>
+          <pitch>82</pitch>
+          <tpc>12</tpc>
+          <userAccidental>32770</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>75</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
       <BarLine>
         </BarLine>
       </Measure>
     <Measure number="65">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>5</tpc>
+          </Note>
+        <Note>
+          <pitch>81</pitch>
+          <tpc>5</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        <Note>
+          <pitch>80</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          </Note>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
       <BarLine>
         </BarLine>
       </Measure>
     <Measure number="66">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>75</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>87</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>4</tpc>
+          </Note>
+        <Note>
+          <pitch>86</pitch>
+          <tpc>4</tpc>
+          </Note>
+        </Chord>
       <BarLine>
         </BarLine>
       </Measure>
     <Measure number="67">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>73</pitch>
+          <tpc>9</tpc>
+          </Note>
+        <Note>
+          <pitch>85</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        <Note>
+          <pitch>84</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
       <BarLine>
         </BarLine>
       </Measure>
     <Measure number="68">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>7</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        <Note>
+          <pitch>83</pitch>
+          <tpc>7</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        <Note>
+          <pitch>82</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
       <BarLine>
         </BarLine>
       </Measure>
@@ -6490,10 +6814,34 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>5</tpc>
+          </Note>
+        <Note>
+          <pitch>81</pitch>
+          <tpc>5</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        <Note>
+          <pitch>80</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
       <BarLine>
         </BarLine>
       </Measure>
@@ -6502,17 +6850,70 @@ p, li { white-space: pre-wrap; }
         <style>17</style>
         <subtype>MeasureNumber</subtype>
         </Text>
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>3</tpc>
+          </Note>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>3</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>66</pitch>
+          <tpc>8</tpc>
+          </Note>
+        <Note>
+          <pitch>78</pitch>
+          <tpc>8</tpc>
+          </Note>
+        </Chord>
       <BarLine>
         </BarLine>
       </Measure>
     <Measure number="71">
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          <userAccidental>5</userAccidental>
+          </Note>
+        <Note>
+          <pitch>77</pitch>
+          <tpc>13</tpc>
+          <userAccidental>5</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>6</tpc>
+          </Note>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>6</tpc>
+          </Note>
+        </Chord>
       <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
+        <durationType>quarter</durationType>
         </Rest>
       <BarLine>
         <subtype>1</subtype>
@@ -7368,10 +7769,13 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
+          <Tie>
+            </Tie>
           </Note>
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
@@ -7383,7 +7787,7 @@ p, li { white-space: pre-wrap; }
       <BarLine>
         <subtype>1</subtype>
         </BarLine>
-      <Beam id="52">
+      <Beam id="54">
         <track>1</track>
         <StemDirection>up</StemDirection>
         </Beam>
@@ -7391,7 +7795,8 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <durationType>eighth</durationType>
-        <Beam>52</Beam>
+        <Slur type="start" number="74"/>
+        <Beam>54</Beam>
         <Note>
           <track>1</track>
           <pitch>67</pitch>
@@ -7406,13 +7811,34 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <durationType>eighth</durationType>
-        <Beam>52</Beam>
+        <Beam>54</Beam>
         <Note>
           <track>1</track>
           <pitch>75</pitch>
           <tpc>11</tpc>
           </Note>
         </Chord>
+      <Chord>
+        <track>1</track>
+        <BeamMode>no</BeamMode>
+        <durationType>eighth</durationType>
+        <Slur type="stop" number="74"/>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <track>1</track>
+          <pitch>68</pitch>
+          <tpc>10</tpc>
+          </Note>
+        <Note>
+          <track>1</track>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <track>1</track>
+        <durationType>eighth</durationType>
+        </Rest>
       </Measure>
     <Measure number="10">
       <TimeSig>
@@ -7507,14 +7933,15 @@ p, li { white-space: pre-wrap; }
       <BarLine>
         <subtype>1</subtype>
         </BarLine>
-      <Beam id="53">
+      <Beam id="55">
         <track>1</track>
         </Beam>
       <tick>246240</tick>
       <Chord>
         <track>1</track>
         <durationType>eighth</durationType>
-        <Beam>53</Beam>
+        <Slur type="start" number="75"/>
+        <Beam>55</Beam>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -7525,7 +7952,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <durationType>eighth</durationType>
-        <Beam>53</Beam>
+        <Beam>55</Beam>
         <Note>
           <track>1</track>
           <pitch>75</pitch>
@@ -7535,6 +7962,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>1</track>
         <durationType>quarter</durationType>
+        <Slur type="stop" number="75"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>1</track>
@@ -7542,10 +7970,6 @@ p, li { white-space: pre-wrap; }
           <tpc>14</tpc>
           </Note>
         </Chord>
-      <Rest>
-        <track>1</track>
-        <durationType>whole</durationType>
-        </Rest>
       </Measure>
     <Measure number="11">
       <TimeSig>
@@ -7594,6 +8018,7 @@ p, li { white-space: pre-wrap; }
         </TimeSig>
       <Chord>
         <durationType>half</durationType>
+        <Slur type="start" number="78"/>
         <Note>
           <pitch>67</pitch>
           <tpc>15</tpc>
@@ -7616,10 +8041,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>half</durationType>
+        <Slur type="stop" number="78"/>
         <Note>
           <pitch>70</pitch>
           <tpc>12</tpc>
           <Tie>
+            <up>2</up>
             </Tie>
           </Note>
         <Note>
@@ -7685,11 +8112,13 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>Frame</subtype>
         <offset x="-0.148538" y="0"/>
+        <halign>left</halign>
         <valign>center</valign>
         <xoffset>0</xoffset>
         <yoffset>0</yoffset>
         <rxoffset>0</rxoffset>
         <ryoffset>50</ryoffset>
+        <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <frame>0</frame>
         <html-data>
@@ -7701,6 +8130,29 @@ p, li { white-space: pre-wrap; }
         </Text>
       </HBox>
     <Measure number="1">
+      <KeySig>
+        <subtype>5</subtype>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="4" y="2.5"/>
+          </KeySym>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="3" y="1"/>
+          </KeySym>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="2" y="-0.5"/>
+          </KeySym>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="1" y="1.5"/>
+          </KeySym>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="0" y="0"/>
+          </KeySym>
+        </KeySig>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -8271,11 +8723,11 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="10">
-      <Beam id="54">
+      <Beam id="56">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>54</Beam>
+        <Beam>56</Beam>
         <Note>
           <pitch>41</pitch>
           <tpc>13</tpc>
@@ -8287,7 +8739,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>54</Beam>
+        <Beam>56</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -8308,11 +8760,11 @@ p, li { white-space: pre-wrap; }
           <tpc>9</tpc>
           </Note>
         </Chord>
-      <Beam id="55">
+      <Beam id="57">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>55</Beam>
+        <Beam>57</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -8324,7 +8776,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>55</Beam>
+        <Beam>57</Beam>
         <Note>
           <pitch>41</pitch>
           <tpc>13</tpc>
@@ -8487,11 +8939,11 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="13">
-      <Beam id="56">
+      <Beam id="58">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>56</Beam>
+        <Beam>58</Beam>
         <StemDirection>down</StemDirection>
         <Note>
           <pitch>45</pitch>
@@ -8504,7 +8956,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>56</Beam>
+        <Beam>58</Beam>
         <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
@@ -8526,11 +8978,11 @@ p, li { white-space: pre-wrap; }
           <tpc>13</tpc>
           </Note>
         </Chord>
-      <Beam id="57">
+      <Beam id="59">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>57</Beam>
+        <Beam>59</Beam>
         <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
@@ -8543,7 +8995,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>57</Beam>
+        <Beam>59</Beam>
         <Note>
           <pitch>45</pitch>
           <tpc>17</tpc>
@@ -8845,11 +9297,11 @@ p, li { white-space: pre-wrap; }
           <tpc>15</tpc>
           </Note>
         </Chord>
-      <Beam id="58">
+      <Beam id="60">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>58</Beam>
+        <Beam>60</Beam>
         <Note>
           <pitch>33</pitch>
           <tpc>17</tpc>
@@ -8861,7 +9313,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>58</Beam>
+        <Beam>60</Beam>
         <Note>
           <pitch>34</pitch>
           <tpc>12</tpc>
@@ -8963,11 +9415,11 @@ p, li { white-space: pre-wrap; }
           <tpc>15</tpc>
           </Note>
         </Chord>
-      <Beam id="59">
+      <Beam id="61">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>59</Beam>
+        <Beam>61</Beam>
         <Note>
           <pitch>33</pitch>
           <tpc>17</tpc>
@@ -8979,7 +9431,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>59</Beam>
+        <Beam>61</Beam>
         <Note>
           <pitch>34</pitch>
           <tpc>12</tpc>
@@ -9394,12 +9846,12 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>3</nom1>
         </TimeSig>
-      <Beam id="60">
+      <Beam id="62">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="12"/>
-        <Beam>60</Beam>
+        <Beam>62</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9407,7 +9859,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>60</Beam>
+        <Beam>62</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -9416,7 +9868,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>60</Beam>
+        <Beam>62</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>16</tpc>
@@ -9424,7 +9876,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>60</Beam>
+        <Beam>62</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9433,7 +9885,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>60</Beam>
+        <Beam>62</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -9441,7 +9893,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>60</Beam>
+        <Beam>62</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>16</tpc>
@@ -9486,12 +9938,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="4">
-      <Beam id="61">
+      <Beam id="63">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="13"/>
-        <Beam>61</Beam>
+        <Beam>63</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9499,7 +9951,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>61</Beam>
+        <Beam>63</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -9508,7 +9960,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>61</Beam>
+        <Beam>63</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>16</tpc>
@@ -9516,7 +9968,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>61</Beam>
+        <Beam>63</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9525,7 +9977,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>61</Beam>
+        <Beam>63</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -9533,7 +9985,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>61</Beam>
+        <Beam>63</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>16</tpc>
@@ -9564,12 +10016,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="7">
-      <Beam id="62">
+      <Beam id="64">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="14"/>
-        <Beam>62</Beam>
+        <Beam>64</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9577,7 +10029,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>62</Beam>
+        <Beam>64</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -9586,7 +10038,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>62</Beam>
+        <Beam>64</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>4</tpc>
@@ -9594,7 +10046,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>62</Beam>
+        <Beam>64</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9603,7 +10055,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>62</Beam>
+        <Beam>64</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -9611,7 +10063,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>62</Beam>
+        <Beam>64</Beam>
         <Note>
           <pitch>37</pitch>
           <tpc>9</tpc>
@@ -9627,12 +10079,12 @@ p, li { white-space: pre-wrap; }
           <tpc>6</tpc>
           </Note>
         </Chord>
-      <Beam id="63">
+      <Beam id="65">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="18"/>
-        <Beam>63</Beam>
+        <Beam>65</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -9640,7 +10092,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>63</Beam>
+        <Beam>65</Beam>
         <Note>
           <pitch>35</pitch>
           <tpc>7</tpc>
@@ -9656,12 +10108,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="9">
-      <Beam id="64">
+      <Beam id="66">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="23"/>
-        <Beam>64</Beam>
+        <Beam>66</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -9670,7 +10122,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="stop" number="23"/>
-        <Beam>64</Beam>
+        <Beam>66</Beam>
         <Note>
           <pitch>34</pitch>
           <tpc>12</tpc>
@@ -9730,12 +10182,12 @@ p, li { white-space: pre-wrap; }
         </Clef>
       </Measure>
     <Measure number="11">
-      <Beam id="65">
+      <Beam id="67">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="26"/>
-        <Beam>65</Beam>
+        <Beam>67</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9743,7 +10195,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>65</Beam>
+        <Beam>67</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -9752,7 +10204,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>65</Beam>
+        <Beam>67</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>16</tpc>
@@ -9760,7 +10212,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>65</Beam>
+        <Beam>67</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9769,7 +10221,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>65</Beam>
+        <Beam>67</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -9777,7 +10229,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>65</Beam>
+        <Beam>67</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>16</tpc>
@@ -9822,12 +10274,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="14">
-      <Beam id="66">
+      <Beam id="68">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="28"/>
-        <Beam>66</Beam>
+        <Beam>68</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9835,7 +10287,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>66</Beam>
+        <Beam>68</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -9844,7 +10296,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>66</Beam>
+        <Beam>68</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>4</tpc>
@@ -9852,7 +10304,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>66</Beam>
+        <Beam>68</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -9861,7 +10313,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>66</Beam>
+        <Beam>68</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -9869,7 +10321,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>66</Beam>
+        <Beam>68</Beam>
         <Note>
           <pitch>37</pitch>
           <tpc>9</tpc>
@@ -9885,12 +10337,12 @@ p, li { white-space: pre-wrap; }
           <tpc>6</tpc>
           </Note>
         </Chord>
-      <Beam id="67">
+      <Beam id="69">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="20"/>
-        <Beam>67</Beam>
+        <Beam>69</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -9898,7 +10350,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>67</Beam>
+        <Beam>69</Beam>
         <Note>
           <pitch>35</pitch>
           <tpc>7</tpc>
@@ -9914,12 +10366,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="16">
-      <Beam id="68">
+      <Beam id="70">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="29"/>
-        <Beam>68</Beam>
+        <Beam>70</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -9928,7 +10380,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="stop" number="29"/>
-        <Beam>68</Beam>
+        <Beam>70</Beam>
         <Note>
           <pitch>34</pitch>
           <tpc>12</tpc>
@@ -10177,12 +10629,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="29">
-      <Beam id="69">
+      <Beam id="71">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="40"/>
-        <Beam>69</Beam>
+        <Beam>71</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -10190,7 +10642,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>69</Beam>
+        <Beam>71</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -10199,7 +10651,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>69</Beam>
+        <Beam>71</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>16</tpc>
@@ -10207,7 +10659,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>69</Beam>
+        <Beam>71</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -10216,7 +10668,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>69</Beam>
+        <Beam>71</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -10224,7 +10676,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>69</Beam>
+        <Beam>71</Beam>
         <Note>
           <pitch>37</pitch>
           <tpc>9</tpc>
@@ -10284,12 +10736,12 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="32">
-      <Beam id="70">
+      <Beam id="72">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="42"/>
-        <Beam>70</Beam>
+        <Beam>72</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -10297,7 +10749,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>70</Beam>
+        <Beam>72</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -10306,7 +10758,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>70</Beam>
+        <Beam>72</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>4</tpc>
@@ -10314,7 +10766,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>70</Beam>
+        <Beam>72</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -10323,7 +10775,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>70</Beam>
+        <Beam>72</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -10331,7 +10783,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>70</Beam>
+        <Beam>72</Beam>
         <Note>
           <pitch>37</pitch>
           <tpc>9</tpc>
@@ -10347,12 +10799,12 @@ p, li { white-space: pre-wrap; }
           <tpc>6</tpc>
           </Note>
         </Chord>
-      <Beam id="71">
+      <Beam id="73">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="46"/>
-        <Beam>71</Beam>
+        <Beam>73</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -10360,7 +10812,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>71</Beam>
+        <Beam>73</Beam>
         <Note>
           <pitch>35</pitch>
           <tpc>7</tpc>
@@ -10376,12 +10828,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="34">
-      <Beam id="72">
+      <Beam id="74">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="47"/>
-        <Beam>72</Beam>
+        <Beam>74</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -10390,7 +10842,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="stop" number="47"/>
-        <Beam>72</Beam>
+        <Beam>74</Beam>
         <Note>
           <pitch>34</pitch>
           <tpc>12</tpc>
@@ -10753,12 +11205,12 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>3</nom1>
         </TimeSig>
-      <Beam id="73">
+      <Beam id="75">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="62"/>
-        <Beam>73</Beam>
+        <Beam>75</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -10766,7 +11218,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>73</Beam>
+        <Beam>75</Beam>
         <Note>
           <pitch>39</pitch>
           <tpc>11</tpc>
@@ -10775,7 +11227,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>73</Beam>
+        <Beam>75</Beam>
         <Note>
           <pitch>38</pitch>
           <tpc>16</tpc>
@@ -10783,7 +11235,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>73</Beam>
+        <Beam>75</Beam>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -10792,7 +11244,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>73</Beam>
+        <Beam>75</Beam>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -10800,7 +11252,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>73</Beam>
+        <Beam>75</Beam>
         <Note>
           <pitch>41</pitch>
           <tpc>13</tpc>
@@ -11093,11 +11545,12 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>3</nom1>
         </TimeSig>
-      <Beam id="87">
+      <Beam id="76">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>87</Beam>
+        <Slur type="start" number="73"/>
+        <Beam>76</Beam>
         <Note>
           <pitch>52</pitch>
           <tpc>6</tpc>
@@ -11105,7 +11558,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>87</Beam>
+        <Beam>76</Beam>
         <Note>
           <pitch>44</pitch>
           <tpc>10</tpc>
@@ -11114,7 +11567,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>87</Beam>
+        <Beam>76</Beam>
         <Note>
           <pitch>43</pitch>
           <tpc>3</tpc>
@@ -11122,7 +11575,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>87</Beam>
+        <Beam>76</Beam>
         <Note>
           <pitch>52</pitch>
           <tpc>6</tpc>
@@ -11131,7 +11584,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>87</Beam>
+        <Beam>76</Beam>
         <Note>
           <pitch>51</pitch>
           <tpc>11</tpc>
@@ -11139,7 +11592,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>87</Beam>
+        <Beam>76</Beam>
         <Note>
           <pitch>45</pitch>
           <tpc>17</tpc>
@@ -11149,6 +11602,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="55">
       <Chord>
         <durationType>quarter</durationType>
+        <Slur type="stop" number="73"/>
         <Note>
           <pitch>47</pitch>
           <tpc>7</tpc>
@@ -11235,12 +11689,12 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>3</nom1>
         </TimeSig>
-      <Beam id="89">
+      <Beam id="77">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="start" number="70"/>
-        <Beam>89</Beam>
+        <Beam>77</Beam>
         <Note>
           <pitch>59</pitch>
           <tpc>7</tpc>
@@ -11248,7 +11702,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>89</Beam>
+        <Beam>77</Beam>
         <Note>
           <pitch>51</pitch>
           <tpc>11</tpc>
@@ -11257,7 +11711,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>89</Beam>
+        <Beam>77</Beam>
         <Note>
           <pitch>50</pitch>
           <tpc>16</tpc>
@@ -11265,7 +11719,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>89</Beam>
+        <Beam>77</Beam>
         <Note>
           <pitch>59</pitch>
           <tpc>7</tpc>
@@ -11274,7 +11728,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <BeamMode>mid</BeamMode>
         <durationType>eighth</durationType>
-        <Beam>89</Beam>
+        <Beam>77</Beam>
         <Note>
           <pitch>58</pitch>
           <tpc>12</tpc>
@@ -11282,7 +11736,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>89</Beam>
+        <Beam>77</Beam>
         <Note>
           <pitch>51</pitch>
           <tpc>11</tpc>
@@ -11300,6 +11754,9 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Rest>
         <durationType>quarter</durationType>
+        <Articulation>
+          <offset x="1.23211" y="1.64282"/>
+          </Articulation>
         </Rest>
       <Rest>
         <durationType>quarter</durationType>
@@ -11390,63 +11847,355 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="62">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>48</pitch>
+          <tpc>14</tpc>
+          </Note>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>47</pitch>
+          <tpc>7</tpc>
+          </Note>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>7</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="63">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>46</pitch>
+          <tpc>12</tpc>
+          </Note>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>45</pitch>
+          <tpc>5</tpc>
+          </Note>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>5</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="64">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>44</pitch>
+          <tpc>10</tpc>
+          </Note>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
+          </Note>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="65">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>42</pitch>
+          <tpc>8</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        <Note>
+          <pitch>54</pitch>
+          <tpc>8</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>41</pitch>
+          <tpc>13</tpc>
+          </Note>
+        <Note>
+          <pitch>53</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="66">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>27</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>39</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>40</pitch>
+          <tpc>6</tpc>
+          </Note>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>6</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>47</pitch>
+          <tpc>7</tpc>
+          </Note>
+        <Note>
+          <pitch>59</pitch>
+          <tpc>7</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="67">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>46</pitch>
+          <tpc>12</tpc>
+          </Note>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>39</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>45</pitch>
+          <tpc>5</tpc>
+          </Note>
+        <Note>
+          <pitch>57</pitch>
+          <tpc>5</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="68">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>44</pitch>
+          <tpc>10</tpc>
+          </Note>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>43</pitch>
+          <tpc>15</tpc>
+          </Note>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>37</pitch>
+          <tpc>9</tpc>
+          </Note>
+        <Note>
+          <pitch>49</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="69">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>36</pitch>
+          <tpc>14</tpc>
+          </Note>
+        <Note>
+          <pitch>48</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>42</pitch>
+          <tpc>8</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        <Note>
+          <pitch>54</pitch>
+          <tpc>8</tpc>
+          <userAccidental>2</userAccidental>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>41</pitch>
+          <tpc>13</tpc>
+          </Note>
+        <Note>
+          <pitch>53</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="70">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
-        </Rest>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>40</pitch>
+          <tpc>6</tpc>
+          </Note>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>6</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>35</pitch>
+          <tpc>7</tpc>
+          </Note>
+        <Note>
+          <pitch>47</pitch>
+          <tpc>7</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>half</durationType>
+        <Articulation>
+          <subtype>sforzato</subtype>
+          </Articulation>
+        <Note>
+          <pitch>39</pitch>
+          <tpc>11</tpc>
+          </Note>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>11</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="71">
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>38</pitch>
+          <tpc>4</tpc>
+          </Note>
+        <Note>
+          <pitch>50</pitch>
+          <tpc>4</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>34</pitch>
+          <tpc>12</tpc>
+          </Note>
+        <Note>
+          <pitch>46</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>37</pitch>
+          <tpc>9</tpc>
+          </Note>
+        <Note>
+          <pitch>49</pitch>
+          <tpc>9</tpc>
+          </Note>
+        </Chord>
       <Rest>
-        <durationType>measure</durationType>
-        <duration z="1" n="1"/>
+        <durationType>quarter</durationType>
         </Rest>
       </Measure>
     <Measure number="72">
@@ -11669,11 +12418,11 @@ p, li { white-space: pre-wrap; }
           <tpc>10</tpc>
           </Note>
         </Chord>
-      <Beam id="74">
+      <Beam id="78">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>74</Beam>
+        <Beam>78</Beam>
         <Note>
           <pitch>58</pitch>
           <tpc>12</tpc>
@@ -11681,7 +12430,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>74</Beam>
+        <Beam>78</Beam>
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
@@ -11701,11 +12450,11 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>6</nom1>
         </TimeSig>
-      <Beam id="75">
+      <Beam id="79">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>75</Beam>
+        <Beam>79</Beam>
         <Note>
           <pitch>58</pitch>
           <tpc>12</tpc>
@@ -11713,7 +12462,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>75</Beam>
+        <Beam>79</Beam>
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
@@ -11784,11 +12533,11 @@ p, li { white-space: pre-wrap; }
           <tpc>10</tpc>
           </Note>
         </Chord>
-      <Beam id="76">
+      <Beam id="80">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>76</Beam>
+        <Beam>80</Beam>
         <Note>
           <pitch>58</pitch>
           <tpc>12</tpc>
@@ -11796,7 +12545,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>76</Beam>
+        <Beam>80</Beam>
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
@@ -11816,11 +12565,11 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>6</nom1>
         </TimeSig>
-      <Beam id="77">
+      <Beam id="81">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>77</Beam>
+        <Beam>81</Beam>
         <Note>
           <pitch>58</pitch>
           <tpc>12</tpc>
@@ -11828,7 +12577,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>77</Beam>
+        <Beam>81</Beam>
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
@@ -11882,6 +12631,7 @@ p, li { white-space: pre-wrap; }
         </TimeSig>
       <Chord>
         <durationType>quarter</durationType>
+        <Slur type="start" number="79"/>
         <Note>
           <pitch>51</pitch>
           <tpc>11</tpc>
@@ -11901,11 +12651,11 @@ p, li { white-space: pre-wrap; }
           <tpc>14</tpc>
           </Note>
         </Chord>
-      <Beam id="78">
+      <Beam id="82">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>78</Beam>
+        <Beam>82</Beam>
         <Note>
           <pitch>51</pitch>
           <tpc>11</tpc>
@@ -11913,7 +12663,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>78</Beam>
+        <Beam>82</Beam>
         <Note>
           <pitch>53</pitch>
           <tpc>13</tpc>
@@ -11921,6 +12671,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>quarter</durationType>
+        <Slur type="stop" number="79"/>
         <Note>
           <pitch>46</pitch>
           <tpc>12</tpc>
@@ -11933,11 +12684,12 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>6</nom1>
         </TimeSig>
-      <Beam id="79">
+      <Beam id="83">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>79</Beam>
+        <Slur type="start" number="80"/>
+        <Beam>83</Beam>
         <Note>
           <pitch>53</pitch>
           <tpc>13</tpc>
@@ -11945,7 +12697,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>79</Beam>
+        <Beam>83</Beam>
         <Note>
           <pitch>55</pitch>
           <tpc>15</tpc>
@@ -11972,11 +12724,11 @@ p, li { white-space: pre-wrap; }
           <tpc>14</tpc>
           </Note>
         </Chord>
-      <Beam id="80">
+      <Beam id="84">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>80</Beam>
+        <Beam>84</Beam>
         <Note>
           <pitch>58</pitch>
           <tpc>12</tpc>
@@ -11984,7 +12736,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>80</Beam>
+        <Beam>84</Beam>
         <Note>
           <pitch>56</pitch>
           <tpc>10</tpc>
@@ -11992,6 +12744,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>quarter</durationType>
+        <Slur type="stop" number="80"/>
         <Note>
           <pitch>51</pitch>
           <tpc>11</tpc>
@@ -12026,11 +12779,11 @@ p, li { white-space: pre-wrap; }
           <tpc>14</tpc>
           </Note>
         </Chord>
-      <Beam id="81">
+      <Beam id="85">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>81</Beam>
+        <Beam>85</Beam>
         <Note>
           <pitch>51</pitch>
           <tpc>11</tpc>
@@ -12038,7 +12791,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>81</Beam>
+        <Beam>85</Beam>
         <Note>
           <pitch>53</pitch>
           <tpc>13</tpc>
@@ -12058,11 +12811,11 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>6</nom1>
         </TimeSig>
-      <Beam id="82">
+      <Beam id="86">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>82</Beam>
+        <Beam>86</Beam>
         <Note>
           <pitch>53</pitch>
           <tpc>13</tpc>
@@ -12070,7 +12823,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>82</Beam>
+        <Beam>86</Beam>
         <Note>
           <pitch>55</pitch>
           <tpc>15</tpc>
@@ -12097,11 +12850,11 @@ p, li { white-space: pre-wrap; }
           <tpc>14</tpc>
           </Note>
         </Chord>
-      <Beam id="83">
+      <Beam id="87">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>83</Beam>
+        <Beam>87</Beam>
         <Note>
           <pitch>58</pitch>
           <tpc>12</tpc>
@@ -12109,7 +12862,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>83</Beam>
+        <Beam>87</Beam>
         <Note>
           <pitch>56</pitch>
           <tpc>10</tpc>
@@ -12118,7 +12871,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <durationType>eighth</durationType>
         <Slur type="stop" number="69"/>
-        <Beam>83</Beam>
+        <Beam>87</Beam>
         <Note>
           <pitch>51</pitch>
           <tpc>11</tpc>
@@ -12234,6 +12987,8 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>63</pitch>
           <tpc>11</tpc>
+          <Tie>
+            </Tie>
           </Note>
         </Chord>
       <Chord>
@@ -12247,14 +13002,15 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <durationType>eighth</durationType>
         </Rest>
-      <Beam id="84">
+      <Beam id="88">
         <track>5</track>
         </Beam>
       <tick>250560</tick>
       <Chord>
         <track>5</track>
         <durationType>eighth</durationType>
-        <Beam>84</Beam>
+        <Slur type="start" number="76"/>
+        <Beam>88</Beam>
         <StemDirection>up</StemDirection>
         <Note>
           <track>5</track>
@@ -12270,7 +13026,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <track>5</track>
         <durationType>eighth</durationType>
-        <Beam>84</Beam>
+        <Beam>88</Beam>
         <Note>
           <track>5</track>
           <pitch>75</pitch>
@@ -12281,6 +13037,7 @@ p, li { white-space: pre-wrap; }
         <track>5</track>
         <BeamMode>no</BeamMode>
         <durationType>eighth</durationType>
+        <Slur type="stop" number="76"/>
         <StemDirection>up</StemDirection>
         <Note>
           <track>5</track>
@@ -12300,11 +13057,12 @@ p, li { white-space: pre-wrap; }
         <den>4</den>
         <nom1>6</nom1>
         </TimeSig>
-      <Beam id="85">
+      <Beam id="89">
         </Beam>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>85</Beam>
+        <Slur type="start" number="77"/>
+        <Beam>89</Beam>
         <Note>
           <pitch>65</pitch>
           <tpc>13</tpc>
@@ -12316,7 +13074,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>eighth</durationType>
-        <Beam>85</Beam>
+        <Beam>89</Beam>
         <Note>
           <pitch>75</pitch>
           <tpc>11</tpc>
@@ -12324,6 +13082,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <durationType>quarter</durationType>
+        <Slur type="stop" number="77"/>
         <Note>
           <pitch>67</pitch>
           <tpc>15</tpc>
@@ -12417,44 +13176,333 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="1">
+      <Clef>
+        <subtype>4</subtype>
+        </Clef>
+      <KeySig>
+        <subtype>5</subtype>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="4" y="3.5"/>
+          </KeySym>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="3" y="2"/>
+          </KeySym>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="2" y="0.5"/>
+          </KeySym>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="1" y="2.5"/>
+          </KeySym>
+        <KeySym>
+          <sym>32</sym>
+          <pos x="0" y="1"/>
+          </KeySym>
+        </KeySig>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
         <nom1>6</nom1>
         </TimeSig>
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="3" n="4"/>
-        </Rest>
+      <Chord>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>23</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      <tick>254400</tick>
+      <Chord>
+        <track>5</track>
+        <dots>1</dots>
+        <durationType>half</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          <Tie>
+            <track>5</track>
+            <SlurSegment no="0">
+              <o1 x="0" y="1.09521"/>
+              <o4 x="-0.565708" y="0.67885"/>
+              </SlurSegment>
+            </Tie>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="2">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="3" n="4"/>
-        </Rest>
+      <Chord>
+        <durationType>quarter</durationType>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>23</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>no</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>staccato</subtype>
+          <offset x="0.575797" y="-5.56604"/>
+          </Articulation>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>23</tpc>
+          </Note>
+        </Chord>
+      <Beam id="90">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>staccato</subtype>
+          <offset x="0.479831" y="-5.90192"/>
+          </Articulation>
+        <Beam>90</Beam>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>23</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>staccato</subtype>
+          <offset x="0.671763" y="-5.99789"/>
+          </Articulation>
+        <Beam>90</Beam>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>23</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>staccato</subtype>
+          <offset x="0.431848" y="-5.99789"/>
+          </Articulation>
+        <Beam>90</Beam>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>23</tpc>
+          </Note>
+        </Chord>
+      <tick>255840</tick>
+      <Chord>
+        <track>5</track>
+        <dots>1</dots>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <dots>1</dots>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="3">
-      <Rest>
-        <durationType>measure</durationType>
-        <duration z="3" n="4"/>
-        </Rest>
+      <Beam id="91">
+        </Beam>
+      <Chord>
+        <dots>1</dots>
+        <durationType>eighth</durationType>
+        <Slur type="start" number="81"/>
+        <Beam>91</Beam>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>23</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>16th</durationType>
+        <Slur type="stop" number="81"/>
+        <Beam>91</Beam>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>staccato</subtype>
+          <offset x="0.479831" y="-6.66965"/>
+          </Articulation>
+        <Beam>91</Beam>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>23</tpc>
+          </Note>
+        </Chord>
+      <Beam id="92">
+        </Beam>
+      <Chord>
+        <BeamMode>begin</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>staccato</subtype>
+          <offset x="0.62378" y="-5.75797"/>
+          </Articulation>
+        <Slur type="start" number="82"/>
+        <Beam>92</Beam>
+        <Note>
+          <pitch>54</pitch>
+          <tpc>20</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <BeamMode>mid</BeamMode>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>staccato</subtype>
+          <offset x="0.62378" y="-5.32612"/>
+          </Articulation>
+        <Beam>92</Beam>
+        <Note>
+          <pitch>52</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <durationType>eighth</durationType>
+        <Articulation>
+          <subtype>staccato</subtype>
+          <offset x="0.575797" y="-5.80596"/>
+          </Articulation>
+        <Slur type="stop" number="82"/>
+        <Beam>92</Beam>
+        <Note>
+          <pitch>51</pitch>
+          <tpc>23</tpc>
+          </Note>
+        </Chord>
+      <tick>257280</tick>
+      <Chord>
+        <track>5</track>
+        <dots>1</dots>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <dots>1</dots>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="4">
       <Rest>
         <durationType>measure</durationType>
         <duration z="3" n="4"/>
         </Rest>
+      <tick>258720</tick>
+      <Chord>
+        <track>5</track>
+        <dots>1</dots>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <dots>1</dots>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="5">
       <Rest>
         <durationType>measure</durationType>
         <duration z="3" n="4"/>
         </Rest>
+      <tick>260160</tick>
+      <Chord>
+        <track>5</track>
+        <dots>1</dots>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <track>5</track>
+        <durationType>eighth</durationType>
+        </Rest>
       </Measure>
     <Measure number="6">
       <Rest>
         <durationType>measure</durationType>
         <duration z="3" n="4"/>
+        </Rest>
+      <tick>261600</tick>
+      <Chord>
+        <track>5</track>
+        <dots>1</dots>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <track>5</track>
+        <durationType>quarter</durationType>
+        <Note>
+          <track>5</track>
+          <pitch>44</pitch>
+          <tpc>22</tpc>
+          </Note>
+        </Chord>
+      <Rest>
+        <track>5</track>
+        <durationType>eighth</durationType>
         </Rest>
       </Measure>
     <Measure number="7">
@@ -12567,5 +13615,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-1</cursorTrack>
   </museScore>
