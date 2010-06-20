@@ -785,10 +785,7 @@ QByteArray Selection::staffMimeData() const
       for (int staffIdx = staffStart(); staffIdx < staffEnd(); ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx));
 
-            for (MeasureBase* mb = seg1->measure(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* m = static_cast<Measure*>(mb);
+            for (Measure* m = seg1->measure(); m; m = m->nextMeasure()) {
                   if (seg2 && m->tick() >= seg2->tick())
                         break;
                   foreach(Element* e, *m->el()) {
@@ -804,15 +801,15 @@ QByteArray Selection::staffMimeData() const
 
             int startTrack = staffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
-            for (Segment* seg = seg1; seg && seg != seg2; seg = seg->next1()) {
-                  if (seg->subtype() == SegEndBarLine)
-                        continue;
-                  if (seg->subtype() == SegTimeSig)
-                        continue;
-                  for (int track = startTrack; track < endTrack; ++track) {
+            for (int track = startTrack; track < endTrack; ++track) {
+                  for (Segment* seg = seg1; seg && seg != seg2; seg = seg->next1()) {
                         Element* e = seg->element(track);
-                        if (e == 0 || e->generated())
+                        if (!e || e->generated() || (seg->subtype() & (SegEndBarLine | SegTimeSig)))
                               continue;
+                        if (seg->tick() != xml.curTick) {
+                              xml.tag("tick", seg->tick());
+                              xml.curTick = seg->tick();
+                              }
                         if (e->isChordRest()) {
                               ChordRest* cr = static_cast<ChordRest*>(e);
                               Tuplet* tuplet = cr->tuplet();
@@ -837,6 +834,7 @@ QByteArray Selection::staffMimeData() const
                                           slur->write(xml);
                                           }
                                     }
+                              xml.curTick += cr->ticks();
                               }
                         if (e->type() == CHORD) {
                               Chord* c = static_cast<Chord*>(e);

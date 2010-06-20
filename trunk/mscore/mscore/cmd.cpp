@@ -2266,7 +2266,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             }
 
       int dstStaffStart = dst->staffIdx();
-      curTick = 0;
+//      curTick = 0;
       int dstTick = dst->tick();
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "StaffList") {
@@ -2277,6 +2277,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             int tickLen       = e.attribute("len", "0").toInt();
             int srcStaffStart = e.attribute("staff", "0").toInt();
             int staves        = e.attribute("staves", "0").toInt();
+            curTick           = tickStart;
 
             for (int i = 0; i < staves; ++i) {
                   int staffIdx = i + dstStaffStart;
@@ -2298,7 +2299,9 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   QList<Tuplet*> tuplets;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                         const QString& tag(eee.tagName());
-                        if (tag == "Tuplet") {
+                        if (tag == "tick")
+                              curTick = eee.text().toInt();
+                        else if (tag == "Tuplet") {
                               Tuplet* tuplet = new Tuplet(this);
                               tuplet->setTrack(curTrack);
                               tuplet->read(eee, tuplets);
