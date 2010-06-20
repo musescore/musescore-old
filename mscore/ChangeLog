@@ -1,5 +1,7 @@
 20.jun (lv)
       - fix key signature and note duration on MusicXML and BWW import
+     (db)
+      - remove incompatible "temperament tuning" plugin
 18.jun (la)
       - fix #6144 : Notes (and other signs) in small staves are smaller than they should
 17.jun (ws)
