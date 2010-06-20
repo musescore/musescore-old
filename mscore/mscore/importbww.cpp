@@ -260,9 +260,9 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
             if (durationType.type() == Duration::V_INVALID)
                   durationType.setType(Duration::V_QUARTER);
             cr->setDurationType(durationType);
-            tick += ticks;
             sd = DOWN;
             }
+      cr->setDuration(durationType.fraction());
       cr->setDots(dots);
       cr->setStemDirection(sd);
       // add note to chord
@@ -273,6 +273,7 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       // add chord to measure
       Segment* s = currentMeasure->getSegment(SegChordRest, tick);
       s->add(cr);
+      if (!grace) tick += ticks;
 }
 
   /**
