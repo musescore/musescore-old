@@ -24,6 +24,7 @@
 #include "line.h"
 
 class Trill;
+class Accidental;
 
 //---------------------------------------------------------
 //   TrillSegment
@@ -38,6 +39,8 @@ class TrillSegment : public LineSegment {
       virtual TrillSegment* clone() const { return new TrillSegment(*this); }
       virtual void draw(QPainter&, ScoreView*) const;
       virtual QRectF bbox() const;
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       };
 
 //---------------------------------------------------------
@@ -45,13 +48,21 @@ class TrillSegment : public LineSegment {
 //---------------------------------------------------------
 
 class Trill : public SLine {
+      Accidental* _accidental;
+
    public:
       Trill(Score* s);
-      virtual Trill* clone() const { return new Trill(*this); }
+      virtual Trill* clone() const     { return new Trill(*this); }
       virtual ElementType type() const { return TRILL; }
 
       virtual void layout();
       virtual LineSegment* createLineSegment();
+      virtual void add(Element*);
+      virtual void remove(Element*);
+      Accidental* accidental() const    { return _accidental; }
+      void setAccidental(Accidental* a) { _accidental = a; }
+      virtual void write(Xml&) const;
+      virtual void read(QDomElement);
       };
 
 #endif
