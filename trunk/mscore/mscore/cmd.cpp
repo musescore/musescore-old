@@ -167,7 +167,9 @@ void Score::cmdAdd(Element* e)
       }
 
 //---------------------------------------------------------
-//   cmdAdd
+//   cmdAdd1
+//    add VOLTA, OTTAVA, TRILL, PEDAL, DYNAMIC
+//        case HAIRPIN, TEXTLINE
 //---------------------------------------------------------
 
 void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
@@ -183,19 +185,17 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
             }
 
       int track = staffIdx == -1 ? -1 : staffIdx * VOICES;
-      Measure* measure = (Measure*)mb;
+      Measure* measure = static_cast<Measure*>(mb);
       e->setTrack(track);
       e->setParent(0);
 
       // calculate suitable endposition
       int tick2 = measure->last()->tick();
-      MeasureBase* m2 = measure;
+      Measure* m2 = measure;
       while (tick2 <= tick) {
-            m2 = m2->next();
+            m2 = m2->nextMeasure();
             if (m2 == 0)
                   break;
-            if (m2->type() != MEASURE)
-                  continue;
             tick2 = m2->tick();
             }
 
@@ -203,9 +203,8 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
             case VOLTA:
                   {
                   Volta* volta = static_cast<Volta*>(e);
-                  Measure* m   = searchMeasure(pos);
-                  volta->setTick(m->tick());
-                  volta->setTick2(m->tick() + m->ticks());
+                  volta->setTick(measure->tick());
+                  volta->setTick2(measure->tick() + measure->ticks());
                   volta->layout();
                   const QList<LineSegment*> lsl = volta->lineSegments();
                   if (lsl.isEmpty()) {

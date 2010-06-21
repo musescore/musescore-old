@@ -26,12 +26,13 @@
 #include "utils.h"
 #include "sym.h"
 #include "score.h"
+#include "accidental.h"
 
 //---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
-void TrillSegment::draw(QPainter& p, ScoreView*) const
+void TrillSegment::draw(QPainter& p, ScoreView* v) const
       {
       double mags = magS();
       QRectF b1 = symbols[trillSym].bbox(mags);
@@ -43,6 +44,12 @@ void TrillSegment::draw(QPainter& p, ScoreView*) const
 
       symbols[trillSym].draw(p, mags, -b1.x(), 0);
       symbols[trillelementSym].draw(p, mags,  -b1.x() + b1.width(), b2.y() * .9, n);
+      if (trill()->accidental()) {
+            p.save();
+            p.translate(trill()->accidental()->canvasPos());
+            trill()->accidental()->draw(p, v);
+            p.restore();
+            }
       }
 
 //---------------------------------------------------------
@@ -57,13 +64,70 @@ QRectF TrillSegment::bbox() const
       }
 
 //---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool TrillSegment::acceptDrop(ScoreView*, const QPointF&, int type, int /*subtype*/) const
+      {
+      if (type == ACCIDENTAL)
+            return true;
+      return false;
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* TrillSegment::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+      {
+      switch(e->type()) {
+            case ACCIDENTAL:
+                  e->setParent(trill());
+                  score()->cmdAdd(e);
+                  break;
+
+            default:
+                  delete e;
+                  break;
+            }
+      return 0;
+      }
+
+
+
+//---------------------------------------------------------
 //   Trill
 //---------------------------------------------------------
 
 Trill::Trill(Score* s)
   : SLine(s)
       {
+      _accidental = 0;
       setLen(spatium() * 7);   // for use in palettes
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void Trill::add(Element* e)
+      {
+      if (e->type() == ACCIDENTAL)
+            _accidental = static_cast<Accidental*>(e);
+      else
+            SLine::add(e);
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void Trill::remove(Element* e)
+      {
+      if (e->type() == ACCIDENTAL)
+            _accidental = 0;
+      else
+            SLine::remove(e);
       }
 
 //---------------------------------------------------------
@@ -73,8 +137,14 @@ Trill::Trill(Score* s)
 void Trill::layout()
       {
       SLine::layout();
-      qreal y = -2.0 * spatium();
+      double _spatium = spatium();
+      qreal y = -2.0 * _spatium;
       setPos(ipos().x(), y);
+      if (_accidental) {
+            _accidental->setMag(.6);
+            _accidental->layout();
+            _accidental->setPos(_spatium*1.3, -2.2*_spatium);
+            }
       }
 
 //---------------------------------------------------------
@@ -88,4 +158,38 @@ LineSegment* Trill::createLineSegment()
       return seg;
       }
 
+//---------------------------------------------------------
+//   Trill::write
+//---------------------------------------------------------
+
+void Trill::write(Xml& xml) const
+      {
+      xml.stag(name());
+      if (_accidental)
+            _accidental->write(xml);
+      SLine::writeProperties(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   Trill::read
+//---------------------------------------------------------
+
+void Trill::read(QDomElement e)
+      {
+      foreach(LineSegment* seg, segments)
+            delete seg;
+      segments.clear();
+      setTrack(0);  // set default track
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "Accidental") {
+                  _accidental = new Accidental(score());
+                  _accidental->read(e);
+                  }
+            else if (!SLine::readProperties(e))
+                  domError(e);
+            }
+      }
 
