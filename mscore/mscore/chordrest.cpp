@@ -136,7 +136,7 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
 QPointF ChordRest::canvasPos() const
       {
       if (parent() == 0)
-            return QPointF(x(), 0.0);
+            return QPointF(x(), y());
       double xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
