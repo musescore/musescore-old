@@ -409,10 +409,18 @@ static const char* valu[] = {
             "C","C#","D","D#","E","F","F#","G","G#","A","A#","H"
             };
 
-//---------------------------------------------------------
-//   pitch2string
-//---------------------------------------------------------
-
+/*!
+ * Returns the string representation of the given pitch.
+ *
+ * Returns the latin letter name, accidental, and octave numeral.
+ * Uses upper case only for pitches 0-24.
+ *
+ * @param v
+ *  The pitch number of the note.
+ *
+ * @return
+ *  The string representation of the note.
+ */
 QString pitch2string(int v)
       {
       if (v < 0 || v > 127)
@@ -423,11 +431,13 @@ QString pitch2string(int v)
       return QString("%1%2").arg(octave < 0 ? valu[i] : vall[i]).arg(octave);
       }
 
-//---------------------------------------------------------
-//   Interval
-//    steps - semitones
-//---------------------------------------------------------
-
+/*!
+ * An array of all supported interval sorted by size.
+ *
+ * Because intervals can be spelled differently, this array
+ * tracks all the different valid intervals. They are arranged
+ * in diatonic then chromatic order.
+ */
 Interval intervalList[26] = {
       Interval(0, 0),         //  0 Perfect Unison
       Interval(0, 1),         //  1 Augmented Unison
@@ -464,11 +474,18 @@ Interval intervalList[26] = {
       Interval(7, 12)         // 25 Perfect Octave
       };
 
-//---------------------------------------------------------
-//   chromatic2diatonic
-//    find the most likely interval for an
-//    semitone distance
-//---------------------------------------------------------
+/*!
+ * Finds the most likely diatonic interval for a semitone distance.
+ *
+ * Uses the most common diatonic intervals.
+ *
+ * @param
+ *  The number of semitones in the chromatic interval.
+ *  Negative semitones will simply be made positive.
+ *
+ * @return
+ *  The number of diatonic steps in the interval.
+ */
 
 int chromatic2diatonic(int semitones)
       {
@@ -512,20 +529,53 @@ int searchInterval(int steps, int semitones)
       return -1;
       }
 
-//---------------------------------------------------------
-//   transposeInterval
-//---------------------------------------------------------
+/*!
+ * Transposes both pitch and spelling for a note given an interval.
+ *
+ * Uses addition for pitch and transposeTpc() for spelling.
+ *
+ * @param pitch
+ *  The initial (current) pitch. (pitch)
+ * @param tpc
+ *  The initial spelling. (tpc)
+ * @param rpitch
+ *  A pointer to the transposed pitch, calculated by this function. (pitch)
+ * @param rtpc
+ *  A pointer to the transposed spelling. (tcp)
+ * @param interval
+ *  The interval to transpose by.
+ * @param useDoubleSharpsFlats
+ *  Determines whether the output may include double sharbs or flats (Abb)
+ *  or should use an enharmonic pitch (Abb = G).
+ */
 
 void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, Interval interval,
    bool useDoubleSharpsFlats)
       {
-      *rpitch = pitch + interval.chromatic;
-      *rtpc   = transposeTpc(tpc, interval, useDoubleSharpsFlats);
+      *rpitch   = pitch + interval.chromatic;
+      *rtpc = transposeTpc(tpc, interval, useDoubleSharpsFlats);
+      
       }
 
-//---------------------------------------------------------
-//   transposeTpc
-//---------------------------------------------------------
+/*!
+ * Transposes a pitch spelling given an interval.
+ * 
+ * This function transposes a pitch spelling using first
+ * a diatonic transposition and then calculating any accidentals.
+ * This insures that the note is changed by the correct number of
+ * scale degrees unless it would require too many accidentals.
+ *
+ * @param tpc
+ *  The initial pitch spelling.
+ * @param interval
+ *  The interval to be transposed by.
+ * @param useDoubleSharpsFlats
+ *  Determines whether the output may include double sharps or flats (Abb)
+ *  or should use an enharmonic pitch (Abb = G).
+ *
+ * @return
+ *  The transposed pitch spelling (tpc).
+ */
 
 int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
       {
@@ -559,17 +609,10 @@ int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
             int p1 = tpc2pitch(step2tpc(step, 0));
             alter  = semitones - (p1 - pitch);
             // alter  = p1 + semitones - pitch;
-#if 0
-            if (alter < 0)
-                  alter = -((-alter) % 12);
-            else
-                  alter %= 12;
-#else
             alter %= 12;
-            if (alter > 6)
-                  alter -= 12;
-#endif
-            if (alter > maxAlter)
+	    if (alter > 6)
+	      alter -= 12;
+	    if (alter > maxAlter)
                   ++steps;
             else if (alter < minAlter)
                   --steps;
@@ -583,9 +626,13 @@ int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
 
 static int _majorVersion, _minorVersion, _updateVersion;
 
-//---------------------------------------------------------
-//   version
-//---------------------------------------------------------
+/*!
+ * Returns the program version
+ *
+ * @return
+ *  Version in the format: MMmmuu
+ *  Where M=Major, m=minor, and u=update
+ */
 
 int version()
       {
