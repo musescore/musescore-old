@@ -817,303 +817,87 @@ void Score::fixTicks()
 /**
  Return measure for canvas relative position \a p.
 
- If *rst != -1, then staff is fixed.
 */
 
 MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitch,
    Segment** seg, QPointF* offset) const
       {
-      foreach (const Page* page, pages()) {
-            if (!page->abbox().contains(p))
+      Measure* m = searchMeasure(p);
+      if (m == 0)
+            return 0;
+
+      System* s = m->system();
+      double sy1 = 0;
+      double y   = p.y() - s->canvasPos().y();
+
+      int i;
+      for (i = 0; i < nstaves();) {
+            SysStaff* staff = s->staff(i);
+            if (!staff->show()) {
+                  ++i;
                   continue;
-
-            QPointF pp = p - page->pos();  // transform to page relative
-            const QList<System*>* sl = page->systems();
-            double y1 = 0.0;
-            for (ciSystem is = sl->begin(); is != sl->end();) {
-                  double y2;
-                  System* s = *is;
-                  ++is;
-                  if (is != sl->end()) {
-                        double sy2 = s->y() + s->bbox().height();
-                        y2 = sy2 + ((*is)->y() - sy2)/2;
-                        }
-                  else
-                        y2 = page->height();
-                  if (pp.y() > y2) {
-                        y1 = y2;
-                        continue;
-                        }
-                  QPointF ppp = pp - s->pos();   // system relative
-                  foreach(MeasureBase* mb, s->measures()) {
-                        if (ppp.x() >= (mb->x() + mb->bbox().width()))
-                              continue;
-                        if (mb->type() != MEASURE)
-                              return mb;
-                        Measure* m = static_cast<Measure*>(mb);
-                        double sy1 = 0;
-                        if (rst && *rst == -1) {
-                              for (int i = 0; i < nstaves();) {
-                                    SysStaff* staff = s->staff(i);
-                                    if (!staff->show()) {
-                                          ++i;
-                                          continue;
-                                          }
-
-                                    int ni = i;
-                                    for (;;) {
-                                          ++ni;
-                                          if (ni == nstaves() || s->staff(ni)->show())
-                                                break;
-                                          }
-
-                                    double sy2;
-                                    if (ni != nstaves()) {
-                                          SysStaff* nstaff = s->staff(ni);
-                                          double s1y2 = staff->bbox().y() + staff->bbox().height();
-                                          sy2 = s1y2 + (nstaff->bbox().y() - s1y2)/2;
-                                          }
-                                    else
-                                          sy2 = y2 - s->pos().y();   // s->height();
-                                    if (ppp.y() > sy2) {
-                                          sy1 = sy2;
-                                          i = ni;
-                                          continue;
-                                          }
-                                    // search for segment + offset
-                                    QPointF pppp = ppp - m->pos();
-                                    int track = i * VOICES;
-                                    for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                                          if (segment->subtype() != SegChordRest)
-                                                continue;
-                                          if ((segment->element(track) == 0)
-                                             && (segment->element(track+1) == 0)
-                                             && (segment->element(track+2) == 0)
-                                             && (segment->element(track+3) == 0)
-                                             )
-                                                continue;
-                                          Segment* ns = segment->next();
-                                          for (; ns; ns = ns->next()) {
-                                                if (ns->subtype() != SegChordRest)
-                                                      continue;
-                                                if (ns->element(track)
-                                                   || ns->element(track+1)
-                                                   || ns->element(track+2)
-                                                   || ns->element(track+3))
-                                                      break;
-                                                }
-                                          if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
-                                                *rst = i;
-                                                if (tick)
-                                                      *tick = segment->tick();
-                                                if (pitch) {
-                                                      Staff* s = _staves[i];
-                                                      int clef = s->clefList()->clef(*tick);
-                                                      *pitch = y2pitch(pppp.y() - staff->bbox().y(), clef, s->spatium());
-                                                      }
-                                                if (offset)
-                                                      *offset = pppp - QPointF(segment->x(), staff->bbox().y());
-                                                if (seg)
-                                                      *seg = segment;
-                                                return m;
-                                                }
-                                          }
-                                    break;
-                                    }
-                              }
-                        else {
-                              //
-                              // staff is fixed
-                              //
-                              // search for segment + offset
-                              QPointF pppp = ppp - m->pos();
-                              for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                                    if (segment->subtype() != SegChordRest)
-                                          continue;
-                                    Segment* ns = segment->next();
-                                    while (ns && ns->subtype() != SegChordRest)
-                                          ns = ns->next();
-                                    if (ns) {
-                                          double x1 = segment->x();
-                                          double x2 = ns->x();
-                                          if (pppp.x() >= (x1 + (x2 - x1) / 2))
-                                                continue;
-                                          }
-                                    if (tick)
-                                          *tick = segment->tick();
-                                    if (pitch) {
-                                          Staff* s = staff(*rst);
-                                          // int clef = staff(*rst)->clefList()->clef(*tick);
-                                          int clef = s->clefList()->clef(*tick);
-                                          *pitch = y2pitch(pppp.y(), clef, s->spatium());
-                                          }
-                                    if (offset) {
-                                          SysStaff* staff = s->staff(*rst);
-                                          *offset = pppp - QPointF(segment->x(), staff->bbox().y());
-                                          }
-                                    if (seg)
-                                          *seg = segment;
-                                    return m;
-                                    }
-                              break;
-                              }
-                        }
                   }
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   pos2measure2
-//---------------------------------------------------------
-
-/**
- Return measure for canvas relative position \a p.
-
- Sets \a *tick to the nearest notes tick,
- \a *rst to the nearest staff,
- \a *line to the nearest staff line.
-*/
-
-Measure* Score::pos2measure2(const QPointF& p, int* tick, int* rst, int* line,
-   Segment** seg) const
-      {
-      int voice = _is.voice();
-
-      foreach(const Page* page, pages()) {
-            if (!page->contains(p))
-                  continue;
-            QPointF pp = p - page->pos();  // transform to page relative
-
-            const QList<System*>* sl = page->systems();
-            double y1 = 0;
-            for (ciSystem is = sl->begin(); is != sl->end();) {
-                  double y2;
-                  System* s = *is;
-                  ++is;
-                  if (is != sl->end()) {
-                        double sy2 = s->y() + s->bbox().height();
-                        y2 = sy2 + ((*is)->y() - sy2)/2;
-                        }
-                  else
-                        y2 = page->height();
-                  if (pp.y() > y2) {
-                        y1 = y2;
-                        continue;
-                        }
-                  QPointF ppp = pp - s->pos();   // system relative
-                  foreach(MeasureBase* mb, s->measures()) {
-                        if (mb->type() != MEASURE)
-                              continue;
-                        Measure* m = static_cast<Measure*>(mb);
-                        if (ppp.x() > (m->x() + m->bbox().width()))
-                              continue;
-                        double sy1 = 0;
-                        for (int i = 0; i < nstaves();) {
-                              double sy2;
-
-                              SysStaff* staff = s->staff(i);
-                              ++i;
-                              if (i != nstaves()) {
-                                    SysStaff* nstaff = s->staff(i);
-                                    double s1y2 = staff->bbox().y() + staff->bbox().height();
-                                    sy2 = s1y2 + (nstaff->bbox().y() - s1y2)/2;
-                                    }
-                              else
-                                    sy2 = y2 - s->pos().y();   // s->height();
-                              if (ppp.y() > sy2) {
-                                    sy1 = sy2;
-                                    continue;
-                                    }
-                              // search for segment + offset
-                              QPointF pppp = ppp - m->pos();
-                              int track = (i-1) * VOICES + voice;
-                              for (Segment* segment = m->first(); segment;) {
-                                    if (segment->subtype() != SegChordRest || (segment->element(track) == 0 && voice == 0)) {
-                                          segment = segment->next();
-                                          continue;
-                                          }
-                                    Segment* ns = segment->next();
-                                    for (; ns; ns = ns->next()) {
-                                          if (ns->subtype() == SegChordRest && (ns->element(track) || voice))
-                                                break;
-                                          }
-                                    if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
-                                          i     -= 1;
-                                          *rst   = i;
-                                          *tick  = segment->tick();
-                                          //
-                                          // TODO: restrict to reasonable values (pitch 0-127)
-                                          //
-                                          *line  = lrint((pppp.y()-staff->bbox().y())/_spatium * 2);
-                                          *seg   = segment;
-                                          return m;
-                                          }
-                                    segment = ns;
-                                    }
-                              break;
-                              }
-                        }
+            int ni = i;
+            for (;;) {
+                  ++ni;
+                  if (ni == nstaves() || s->staff(ni)->show())
+                        break;
                   }
-            }
-      return 0;
-      }
 
-//---------------------------------------------------------
-//   pos2measure3
-//---------------------------------------------------------
-
-/**
- Return nearest measure start for canvas relative position \a p.
-*/
-
-Measure* Score::pos2measure3(const QPointF& p, int* tick) const
-      {
-      foreach(const Page* page, pages()) {
-            if (!page->contains(p))
+            double sy2;
+            if (ni != nstaves()) {
+                  SysStaff* nstaff = s->staff(ni);
+                  double s1y2 = staff->bbox().y() + staff->bbox().height();
+                  sy2 = s1y2 + (nstaff->bbox().y() - s1y2)/2;
+                  }
+            else
+                  sy2 = s->page()->height() - s->pos().y();   // s->height();
+            if (y > sy2) {
+                  sy1 = sy2;
+                  i   = ni;
                   continue;
-            QPointF pp = p - page->pos();  // transform to page relative
+                  }
+            break;
+            }
 
-            const QList<System*>* sl = page->systems();
-            double y1 = 0;
-            for (ciSystem is = sl->begin(); is != sl->end();) {
-                  double y2;
-                  System* s = *is;
-                  ++is;
-                  if (is != sl->end()) {
-                        double sy2 = s->y() + s->bbox().height();
-                        y2 = sy2 + ((*is)->y() - sy2)/2;
-                        }
-                  else
-                        y2 = page->height();
-                  if (pp.y() > y2) {
-                        y1 = y2;
+      // search for segment + offset
+      QPointF pppp = p - m->canvasPos();
+      int track = i * VOICES;
+
+      SysStaff* sstaff = m->system()->staff(i);
+      for (Segment* segment = m->first(); segment; segment = segment->next()) {
+            if (segment->subtype() != SegChordRest)
+                  continue;
+            if ((segment->element(track) == 0)
+               && (segment->element(track+1) == 0)
+               && (segment->element(track+2) == 0)
+               && (segment->element(track+3) == 0)
+               )
+                  continue;
+            Segment* ns = segment->next();
+            for (; ns; ns = ns->next()) {
+                  if (ns->subtype() != SegChordRest)
                         continue;
+                  if (ns->element(track)
+                     || ns->element(track+1)
+                     || ns->element(track+2)
+                     || ns->element(track+3))
+                        break;
+                  }
+            if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
+                  *rst = i;
+                  if (tick)
+                        *tick = segment->tick();
+                  if (pitch) {
+                        Staff* s = _staves[i];
+                        int clef = s->clefList()->clef(*tick);
+                        *pitch = y2pitch(pppp.y() - sstaff->bbox().y(), clef, s->spatium());
                         }
-                  QPointF ppp = pp - s->pos();   // system relative
-                  foreach(MeasureBase* m, s->measures()) {
-                        if (m->type() != MEASURE)
-                              continue;
-                        if (ppp.x() > (m->x() + m->bbox().width()))
-                              continue;
-                        if (ppp.x() < (m->x() + m->bbox().width()*.5)) {
-                              *tick = m->tick();
-                              return (Measure*)m;
-                              }
-                        else {
-                              MeasureBase* pm = m;
-                              while (m && m->next() && m->next()->type() != MEASURE)
-                                    m = m->next();
-                              if (m) {
-                                    *tick = m->tick();
-                                    return (Measure*)m;
-                                    }
-                              else {
-                                    *tick = pm->tick() + pm->ticks();
-                                    return (Measure*) pm;
-                                    }
-                              }
-                        }
+                  if (offset)
+                        *offset = pppp - QPointF(segment->x(), sstaff->bbox().y());
+                  if (seg)
+                        *seg = segment;
+                  return m;
                   }
             }
       return 0;
@@ -1325,28 +1109,6 @@ bool Score::playlistDirty()
       bool val = _playlistDirty;
       _playlistDirty = false;
       return val;
-      }
-
-//---------------------------------------------------------
-//   pos2TickAnchor
-//    Calculates anchor position and tick for a
-//    given position+staff in global coordinates.
-//
-//    return false if no anchor found
-//---------------------------------------------------------
-
-bool Score::pos2TickAnchor(const QPointF& pos, int staffIdx, int* tick, QPointF* anchor) const
-      {
-      Segment* seg = 0;
-      MeasureBase* m = pos2measure(pos, tick, &staffIdx, 0, &seg, 0);
-      if (!m || m->type() != MEASURE) {
-            printf("pos2TickAnchor: no measure found\n");
-            return false;
-            }
-      System* system = m->system();
-      qreal y = system->staff(staffIdx)->bbox().y();
-      *anchor = QPointF(seg->abbox().x(), y + system->canvasPos().y());
-      return true;
       }
 
 //---------------------------------------------------------
@@ -1677,19 +1439,69 @@ Page* Score::searchPage(const QPointF& p) const
       }
 
 //---------------------------------------------------------
-//   isStaffElement
+//   searchSystem
+//    return list of systems as there may be more than
+//    one system in a row
 //---------------------------------------------------------
 
-#if 0
-static bool isStaffElement(Segment* s, int t)
+QList<System*> Score::searchSystem(const QPointF& pos) const
       {
-      for (int voice = 0; voice < VOICES; ++voice) {
-            if (s->element(t+voice))
-                  return true;
+      QList<System*> systems;
+      Page* page = searchPage(pos);
+      if (page == 0)
+            return systems;
+      double y = pos.y() - page->pos().y();  // transform to page relative
+      const QList<System*>* sl = page->systems();
+      double y2;
+      int n = sl->size();
+      for (int i = 0; i < n; ++i) {
+            System* s = sl->at(i);
+            System* ns = 0;               // next system row
+            for (int ii = i+1; ii < n; ++ii) {
+                  ns = sl->at(ii);
+                  if (ns->y() != s->y())
+                        break;
+                  }
+            if (ns == 0)
+                  y2 = page->height();
+            else  {
+                  double sy2 = s->y() + s->bbox().height();
+                  y2         = sy2 + (ns->y() - sy2) * .5;
+                  }
+            if (y < y2) {
+                  systems.append(s);
+                  for (int ii = i+1; ii < n; ++ii) {
+                        if (sl->at(ii)->y() != s->y())
+                              break;
+                        systems.append(sl->at(ii));
+                        }
+                  return systems;
+                  }
             }
-      return false;
+      return systems;
       }
-#endif
+
+//---------------------------------------------------------
+//   searchMeasure
+//---------------------------------------------------------
+
+Measure* Score::searchMeasure(const QPointF& p) const
+      {
+      QList<System*> systems = searchSystem(p);
+      if (systems.isEmpty())
+            return 0;
+
+      foreach(System* system, systems) {
+            double x = p.x() - system->canvasPos().x();
+            foreach(MeasureBase* mb, system->measures()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  if (x < (mb->x() + mb->bbox().width()))
+                        return static_cast<Measure*>(mb);
+                  }
+            }
+      return 0;
+      }
 
 //---------------------------------------------------------
 //    getNextValidInputSegment
@@ -1745,68 +1557,7 @@ static Segment* getNextValidInputSegment(Segment* s, int track, int voice)
 
 bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       {
-      const Page* page = searchPage(p);
-      if (page == 0 || voice == -1)
-            return false;
-      //
-      //    search system
-      //    note: there may be more than one system in a row
-      //
-      QPointF pp               = p - page->pos();  // transform to page relative
-      const QList<System*>* sl = page->systems();
-      System* system           = 0;
-      double y2;
-      int nsystems = 0;
-      int n        = sl->size();
-      int i;
-      for (i = 0; i < n; ++i) {
-            System* s = sl->at(i);
-            System* ns = 0;               // next system row
-            nsystems = 1;
-            for (int ii = i+1; ii < n; ++ii) {
-                  ns = sl->at(ii);
-                  if (ns->y() != s->y())
-                        break;
-                  ++nsystems;
-                  }
-            if (ns == 0)
-                  y2 = page->height();
-            else  {
-                  double sy2 = s->y() + s->bbox().height();
-                  y2         = sy2 + (ns->y() - sy2) * .5;
-                  }
-            if (pp.y() < y2) {
-                  system = s;
-                  break;
-                  }
-            }
-      if (system == 0)
-            return false;
-
-      //
-      //    search measure
-      //
-      QPointF ppp;
-      int end = i + nsystems;
-      if (end > n)
-            end = n;
-      for (; i < end; ++i) {
-            system = sl->at(i);
-            ppp  = pp - system->pos();   // system relative
-            pos->measure = 0;
-            bool found = false;
-            foreach(MeasureBase* mb, system->measures()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  if (ppp.x() < (mb->x() + mb->bbox().width())) {
-                        pos->measure = static_cast<Measure*>(mb);
-                        found = true;
-                        break;
-                        }
-                  }
-            if (found)
-                  break;
-            }
+      pos->measure = searchMeasure(p);
       if (pos->measure == 0)
             return false;
 
@@ -1816,6 +1567,8 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       double sy1         = 0;
       pos->staffIdx      = 0;
       SysStaff* sstaff   = 0;
+      System* system     = pos->measure->system();
+      double y           = p.y() - system->canvasPos().y();
       for (; pos->staffIdx < nstaves(); ++pos->staffIdx) {
             double sy2;
             SysStaff* ss = system->staff(pos->staffIdx);
@@ -1825,8 +1578,8 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   sy2         = s1y2 + (nstaff->bbox().y() - s1y2) * .5;
                   }
             else
-                  sy2 = y2 - system->pos().y();   // system->height();
-            if (ppp.y() < sy2) {
+                  sy2 = system->page()->height() - system->pos().y();   // system->height();
+            if (y < sy2) {
                   sstaff = ss;
                   break;
                   }
@@ -1838,7 +1591,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //
       //    search segment
       //
-      QPointF pppp(ppp - pos->measure->pos());
+      QPointF pppp(p - pos->measure->canvasPos());
       double x         = pppp.x();
       Segment* segment = 0;
       pos->segment     = 0;
@@ -1885,7 +1638,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //
       double mag = staff(pos->staffIdx)->mag();
       pos->line  = lrint((pppp.y() - sstaff->bbox().y()) / (_spatium * mag) * 2.0);
-      double y   = pos->measure->canvasPos().y() + sstaff->y();
+      y          = pos->measure->canvasPos().y() + sstaff->y();
       y         += pos->line * _spatium * .5 * mag;
       pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
 

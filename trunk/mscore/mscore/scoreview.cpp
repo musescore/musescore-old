@@ -928,7 +928,7 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
 
 void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       {
-      int staffIdx = -1;
+      int staffIdx;
       int pitch;
       Segment* seg;
       QPointF offset;
@@ -1532,7 +1532,7 @@ void ScoreView::setViewRect(const QRectF& r)
 
 bool ScoreView::dragTimeAnchorElement(const QPointF& pos)
       {
-      int staffIdx = -1;
+      int staffIdx;
       Segment* seg;
       int tick;
       MeasureBase* mb = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, 0);
@@ -1543,7 +1543,8 @@ bool ScoreView::dragTimeAnchorElement(const QPointF& pos)
             QPointF anchor(seg->abbox().x(), y);
             setDropAnchor(QLineF(pos, anchor));
             dragElement->setTrack(staffIdx * VOICES);
-//            dragElement->setTick(tick);
+            if (dragElement->type() == SYMBOL)
+                  static_cast<Symbol*>(dragElement)->setTick(tick);
             return true;
             }
       setDropTarget(0);
@@ -1556,11 +1557,12 @@ bool ScoreView::dragTimeAnchorElement(const QPointF& pos)
 
 bool ScoreView::dragMeasureAnchorElement(const QPointF& pos)
       {
-      int tick;
-      Measure* m = _score->pos2measure3(pos, &tick);
+      Measure* m = _score->searchMeasure(pos);
       if (m) {
+            QRectF b(m->abbox());
+
             QPointF anchor;
-            if (m->tick() == tick)
+            if (pos.x() < (b.x() + b.width() * .5))
                   anchor = m->abbox().topLeft();
             else
                   anchor = m->abbox().topRight();
@@ -1906,7 +1908,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                         {
                         Element* el = elementAt(pos);
                         if (el == 0) {
-                              int staffIdx = -1;
+                              int staffIdx;
                               Segment* seg;
                               int tick;
                               el = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, 0);

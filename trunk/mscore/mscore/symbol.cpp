@@ -268,6 +268,7 @@ QLineF Symbol::dragAnchor() const
       if (parent()->type() == MEASURE) {
             Measure* measure = static_cast<Measure*>(parent());
             Segment* segment = measure->tick2segment(tick());
+
             System* s        = measure->system();
             double y         = measure->canvasPos().y() + s->staff(staffIdx())->y();
             QPointF anchor(segment->abbox().x(), y);

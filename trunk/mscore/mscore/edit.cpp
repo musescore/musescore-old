@@ -1018,60 +1018,35 @@ void Score::cmdFlip()
 void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
       {
       s->setSelected(false);
-#if 0
-      if (s->anchor() == ANCHOR_STAFF) {
-            int staffIdx = -1;
-            int pitch, tick;
-            QPointF offset;
-            Segment* segment;
-
-            MeasureBase* measure = pos2measure(pos, &tick, &staffIdx, &pitch, &segment, &offset);
-            if (measure == 0 || measure->type() != MEASURE) {
-                  printf("addSymbol: cannot put symbol here: no measure\n");
-                  delete s;
-                  return;
-                  }
-            offset -= off;
-            s->setPos(segment->x(), 0.0);
-            s->setUserOff(offset);
-            s->setTick(segment->tick());
-            s->setTrack(staffIdx * VOICES);
-            s->setParent(measure);
-            }
-      else if (s->anchor() == ANCHOR_PARENT) {
-#endif
-            bool foundPage = false;
-            foreach (Page* page, pages()) {
-                  if (page->contains(pos)) {
-                        const QList<System*>* sl = page->systems();
-                        if (sl->isEmpty()) {
-                              printf("addSymbol: cannot put symbol here: no system on page\n");
-                              delete s;
-                              return;
-                              }
-                        System* system = sl->front();
-                        MeasureBase* m = system->measures().front();
-                        if (m == 0) {
-                              printf("addSymbol: cannot put symbol here: no measure in system\n");
-                              delete s;
-                              return;
-                              }
-                        s->setPos(0.0, 0.0);
-                        s->setUserOff(pos - m->canvasPos() - off);
-                        s->setTrack(0);
-                        s->setParent(m);
-                        foundPage = true;
-                        break;
+      bool foundPage = false;
+      foreach (Page* page, pages()) {
+            if (page->contains(pos)) {
+                  const QList<System*>* sl = page->systems();
+                  if (sl->isEmpty()) {
+                        printf("addSymbol: cannot put symbol here: no system on page\n");
+                        delete s;
+                        return;
                         }
+                  System* system = sl->front();
+                  MeasureBase* m = system->measures().front();
+                  if (m == 0) {
+                        printf("addSymbol: cannot put symbol here: no measure in system\n");
+                        delete s;
+                        return;
+                        }
+                  s->setPos(0.0, 0.0);
+                  s->setUserOff(pos - m->canvasPos() - off);
+                  s->setTrack(0);
+                  s->setParent(m);
+                  foundPage = true;
+                  break;
                   }
-            if (!foundPage) {
-                  printf("addSymbol: cannot put symbol here: no page\n");
-                  delete s;
-                  return;
-                  }
-#if 0
             }
-#endif
+      if (!foundPage) {
+            printf("addSymbol: cannot put symbol here: no page\n");
+            delete s;
+            return;
+            }
       undoAddElement(s);
       addRefresh(s->abbox());
       select(s, SELECT_SINGLE, 0);

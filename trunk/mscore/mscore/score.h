@@ -429,8 +429,6 @@ class Score : public QObject {
 
       MeasureBase* pos2measure(const QPointF&, int* tick, int* staffIdx, int* pitch,
          Segment**, QPointF* offset) const;
-      Measure* pos2measure2(const QPointF&, int* tick, int* staffIdx, int* pitch, Segment**) const;
-      Measure* pos2measure3(const QPointF& p, int* tick) const;
 
       void undoAddElement(Element* element);
       void undoRemoveElement(Element* element);
@@ -617,7 +615,6 @@ class Score : public QObject {
       void setAutosaveDirty(bool v)  { _autosaveDirty = v;    }
       bool autosaveDirty() const     { return _autosaveDirty; }
 
-      bool pos2TickAnchor(const QPointF&, int staffIdx, int* tick, QPointF* anchor) const;
       void spell();
       void spell(int startStaff, int endStaff, Segment* startSegment, Segment* endSegment);
       void spell(Note*);
@@ -714,6 +711,9 @@ class Score : public QObject {
       void lassoSelectEnd();
 
       Page* searchPage(const QPointF&) const;
+      QList<System*> searchSystem(const QPointF& p) const;
+      Measure* searchMeasure(const QPointF& p) const;
+
       bool getPosition(Position* pos, const QPointF&, int voice) const;
 
       void cmdDeleteTuplet(Tuplet*, bool replaceWithRest);

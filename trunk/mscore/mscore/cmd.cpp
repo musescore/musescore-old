@@ -172,8 +172,7 @@ void Score::cmdAdd(Element* e)
 
 void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       {
-      int staffIdx = -1;
-      int pitch, tick;
+      int pitch, tick, staffIdx;
       QPointF offset;
       Segment* segment;
       MeasureBase* mb = pos2measure(pos, &tick, &staffIdx, &pitch, &segment, &offset);
@@ -204,8 +203,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
             case VOLTA:
                   {
                   Volta* volta = static_cast<Volta*>(e);
-                  int tick;
-                  Measure* m = pos2measure3(pos, &tick);
+                  Measure* m   = searchMeasure(pos);
                   volta->setTick(m->tick());
                   volta->setTick2(m->tick() + m->ticks());
                   volta->layout();
