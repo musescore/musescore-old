@@ -36,6 +36,7 @@
 #include "score.h"
 #include "staff.h"
 #include "timesig.h"
+#include "tuplet.h"
 
 //---------------------------------------------------------
 //   addText
@@ -114,6 +115,7 @@ namespace Bww {
     void tempo(const int beats, const int beat);
     void trailer();
   private:
+    void doTriplet(Chord* cr, StartStop triplet = ST_NONE);
     static const int WHOLE_DUR = 64;                    ///< Whole note duration
     struct StepAlterOct {                               ///< MusicXML step/alter/oct values
       QChar s;
@@ -130,6 +132,7 @@ namespace Bww {
     unsigned int measureNumber;                         ///< Current measure number
     unsigned int tick;                                  ///< Current tick
     Measure* currentMeasure;                            ///< Current measure
+    Tuplet* tuplet;                                     ///< Current tuplet
   };
 
   /**
@@ -142,7 +145,8 @@ namespace Bww {
     beat(4),
     measureNumber(0),
     tick(0),
-    currentMeasure(0)
+    currentMeasure(0),
+    tuplet(0)
   {
     qDebug() << "MsScWriter::MsScWriter()";
 
@@ -223,7 +227,7 @@ void MsScWriter::endMeasure()
 void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
                       const QString type, const int dots,
                       bool /*TODO tieStart */, bool /*TODO tieStop */,
-                      StartStop /*TODO triplet */,
+                      StartStop triplet,
                       bool grace)
 {
       qDebug() << "MsScWriter::note()"
@@ -276,6 +280,7 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       // add chord to measure
       Segment* s = currentMeasure->getSegment(SegChordRest, tick);
       s->add(cr);
+      doTriplet(cr, triplet);
       if (!grace) tick += ticks;
 }
 
@@ -332,6 +337,48 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
         ;
 
   }
+
+  /**
+   Handle the triplet.
+   */
+
+  void MsScWriter::doTriplet(Chord* cr, StartStop triplet)
+  {
+    qDebug() << "MsScWriter::doTriplet(" << triplet << ")"
+        ;
+
+      if (triplet == ST_START) {
+            tuplet = new Tuplet(score);
+            tuplet->setTrack(0);
+            tuplet->setRatio(Fraction(3, 2));
+            tuplet->setTick(tick);
+            currentMeasure->add(tuplet);
+            }
+      else if (triplet == ST_STOP) {
+            if (tuplet) {
+                  cr->setTuplet(tuplet);
+                  tuplet->add(cr);
+                  tuplet = 0;
+                  }
+            else
+                  printf("BWW::import: triplet stop without triplet start\n");
+            }
+      else if (triplet == ST_CONTINUE) {
+            if (!tuplet)
+                  printf("BWW::import: triplet continue without triplet start\n");
+            }
+      else if (triplet == ST_NONE) {
+            if (tuplet)
+                  printf("BWW::import: triplet none inside triplet\n");
+            }
+      else
+            printf("unknown triplet type %d\n", triplet);
+      if (tuplet) {
+            cr->setTuplet(tuplet);
+            tuplet->add(cr);
+            }
+  }
+
 
 } // namespace Bww
 
