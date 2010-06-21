@@ -37,10 +37,12 @@ void TrillSegment::draw(QPainter& p, ScoreView*) const
       QRectF b1 = symbols[trillSym].bbox(mags);
       QRectF b2 = symbols[trillelementSym].bbox(mags);
       qreal w2  = symbols[trillelementSym].width(mags);
-      int n     = lrint((pos2().x() - (b1.width() - b2.x())) / w2);
+      int n     = lrint((pos2().x() - (b1.width() - b1.x())) / w2);
+
+      QPointF a = symbols[trillSym].attach(mags);
 
       symbols[trillSym].draw(p, mags, -b1.x(), 0);
-      symbols[trillelementSym].draw(p, mags, b1.width() - b2.x(), b2.y(), n);
+      symbols[trillelementSym].draw(p, mags,  -b1.x() + b1.width(), b2.y() * .9, n);
       }
 
 //---------------------------------------------------------

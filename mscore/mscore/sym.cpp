@@ -528,7 +528,6 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
 
 void Sym::draw(QPainter& painter, double mag, qreal x, qreal y, int n) const
       {
-printf("DRAW %d\n", n);
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
       painter.setFont(_font);
