@@ -34,6 +34,7 @@
 #include "part.h"
 #include "pitchspelling.h"
 #include "score.h"
+#include "slur.h"
 #include "staff.h"
 #include "timesig.h"
 #include "tuplet.h"
@@ -226,7 +227,7 @@ void MsScWriter::endMeasure()
 
 void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
                       const QString type, const int dots,
-                      bool /*TODO tieStart */, bool /*TODO tieStop */,
+                      bool tieStart, bool /*TODO tieStop */,
                       StartStop triplet,
                       bool grace)
 {
@@ -254,6 +255,7 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       Direction sd = AUTO;
 
       // create chord
+      SegmentType st = SegChordRest;
       Chord* cr = new Chord(score);
       //ws cr->setTick(tick);
       cr->setBeamMode(bm);
@@ -262,6 +264,7 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
             cr->setNoteType(NOTE_GRACE32);
             cr->setDurationType(Duration::V_32ND);
             sd = UP;
+            st = SegGrace;
             }
       else {
             if (durationType.type() == Duration::V_INVALID)
@@ -276,9 +279,15 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       Note* note = new Note(score);
       note->setTrack(0);
       xmlSetPitch(note, sao.s.toAscii(), sao.a, sao.o);
+      if (tieStart) {
+            Tie* tie = new Tie(score);
+            note->setTieFor(tie);
+            tie->setStartNote(note);
+            tie->setTrack(0);
+            }
       cr->add(note);
       // add chord to measure
-      Segment* s = currentMeasure->getSegment(SegChordRest, tick);
+      Segment* s = currentMeasure->getSegment(st, tick);
       s->add(cr);
       doTriplet(cr, triplet);
       if (!grace) tick += ticks;
@@ -412,6 +421,7 @@ bool Score::importBww(const QString& path)
 
       _saved = false;
       _created = true;
+      connectTies();
       printf("Score::importBww() done\n");
 //      return false;	// error
       return true;	// OK

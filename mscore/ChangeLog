@@ -1,3 +1,5 @@
+22.jun (lv)
+      - #5637 support reading bww files: ties and triplets
 20.jun (lv)
       - fix key signature and note duration on MusicXML and BWW import
      (db)
