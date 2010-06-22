@@ -34,6 +34,7 @@ install(FILES
       mscore_fi.qm
       mscore_fr.qm
       mscore_gl.qm
+      mscore_he.qm
       mscore_hi_IN.qm
       mscore_hu.qm
       mscore_id.qm      
@@ -46,6 +47,7 @@ install(FILES
       mscore_pt_BR.qm
       mscore_ro.qm
       mscore_ru.qm
+      mscore_sl.qm
       mscore_sv.qm
       mscore_th.qm
       mscore_tr.qm

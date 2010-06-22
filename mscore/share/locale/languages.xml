@@ -15,6 +15,7 @@
   <language code="fi" name="Finnish" handbook="http://www.musescore.org/fi/käsikirja" />
   <language code="fr" name="Français" handbook="http://www.musescore.org/fr/manuel" />
   <language code="gl" name="Galego" handbook="http://www.musescore.org/gl/manual" />
+  <language code="he" name="עברית" />
   <language code="hi_IN" name="Hindi" />
   <language code="hu" name="Hungary" handbook="http://musescore.org/hu/kézikönyv" />
   <language code="id" name="Bahasa Indonesia" handbook="http://musescore.org/id/buku-panduan" />
@@ -27,7 +28,8 @@
   <language code="pt_BR" name="Português brasileiro" handbook="http://www.musescore.org/pt-br/manual" />
   <language code="ro" name="Română" handbook="http://musescore.org/ro/manual" />
   <language code="ru" name="Русский" handbook="http://www.musescore.org/ru/cправочник" />
-  <language code="sv" name="Svenska" />
+  <language code="sl" name="Slovenščina" />
+  <language code="sv" name="Svenska" /> 
   <language code="th" name="ภาษาไทย" />
   <language code="tr" name="Türkçe" handbook="http://www.musescore.org/tr/kullanım"/>
   <language code="uk" name="Ukrajina" handbook="http://musescore.org/uk/підручник"/>
