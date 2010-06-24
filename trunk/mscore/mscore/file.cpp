@@ -708,7 +708,7 @@ void MuseScore::newFile()
 	                        d.setVal(ticks);
                         }
 		      Rest* rest = new Rest(score, d);
-                  rest->setDuration(d.fraction());
+                  rest->setDuration(measure->len());
       	      rest->setTrack(staffIdx * VOICES);
 	      	Segment* s = measure->getSegment(rest, tick);
 		      s->add(rest);
@@ -1191,6 +1191,7 @@ bool Score::loadMsc(QString name)
 
 bool Score::read(QDomElement e)
       {
+      spanner.clear();
       _fileDivision = 384;   // for compatibility with old mscore files
 
       for (; !e.isNull(); e = e.nextSiblingElement()) {
@@ -1199,6 +1200,15 @@ bool Score::read(QDomElement e)
             QString version = e.attribute("version");
             QStringList sl = version.split('.');
             _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+            if (_mscVersion > MSCVERSION) {
+                  // incompatible version
+                  QMessageBox::critical(0, tr("MuseScore"),
+                     QT_TRANSLATE_NOOP("score", "Cannot read this score:\n"
+                        "your version of MuseScore is too old.")
+                     );
+                  return false;
+                  }
+
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   curTrack = -1;
                   QString tag(ee.tagName());
@@ -1357,41 +1367,18 @@ bool Score::read(QDomElement e)
                         // slur->setTick(-1);
                         add(slur);
                         }
-                  else if (tag == "HairPin") {
-                        Hairpin* hairpin = new Hairpin(this);
-                        hairpin->setTick(curTick);
-                        hairpin->read(ee);
-                        add(hairpin);
-                        }
-                  else if (tag == "Ottava") {
-                        Ottava* ottava = new Ottava(this);
-                        ottava->setTick(curTick);
-                        ottava->read(ee);
-                        add(ottava);
-                        }
-                  else if (tag == "TextLine") {
-                        TextLine* textLine = new TextLine(this);
-                        textLine->setTick(curTick);
-                        textLine->read(ee);
-                        add(textLine);
-                        }
-                  else if (tag == "Volta") {
-                        Volta* volta = new Volta(this);
-                        volta->setTick(curTick);
-                        volta->read(ee);
-                        add(volta);
-                        }
-                  else if (tag == "Trill") {
-                        Trill* trill = new Trill(this);
-                        trill->setTick(curTick);
-                        trill->read(ee);
-                        add(trill);
-                        }
-                  else if (tag == "Pedal") {
-                        Pedal* pedal = new Pedal(this);
-                        pedal->setTick(curTick);
-                        pedal->read(ee);
-                        add(pedal);
+                  else if ((_mscVersion < 116) &&
+                     ((tag == "HairPin")
+                      || (tag == "Ottava")
+                      || (tag == "TextLine")
+                      || (tag == "Volta")
+                      || (tag == "Trill")
+                      || (tag == "Pedal"))) {
+                        Spanner* s = static_cast<Spanner*>(Element::name2Element(tag, this));
+                        s->setTrack(0);
+                        s->read(ee);
+                        s->__setTick1(curTick);
+                        spanner.append(s);
                         }
                   else if (tag == "Excerpt") {
                         Excerpt* e = new Excerpt(this);
@@ -1449,6 +1436,21 @@ bool Score::read(QDomElement e)
                               }
                         }
 
+                  }
+            }
+      if (_mscVersion < 116) {
+            foreach(Spanner* s, spanner) {
+                  Segment* s1 = tick2segment(s->__tick1());
+                  Segment* s2 = tick2segment(s->__tick2());
+
+                  if (s1 == 0 || s2 == 0) {
+                        printf("cannot place %s at tick %d - %d\n",
+                           s->name(), s->__tick1(), s->__tick2());
+                        continue;
+                        }
+                  s->setStartElement(s1);
+                  s->setEndElement(s2);
+                  s1->add(s);
                   }
             }
 

@@ -726,6 +726,8 @@ void Score::doLayout()
                         if (cr->type() == CHORD && static_cast<Chord*>(cr)->arpeggio())
                               static_cast<Chord*>(cr)->layoutArpeggio2();
                         }
+                  foreach(Spanner* s, segment->spannerFor())
+                        s->layout();
                   }
             }
 

@@ -120,12 +120,12 @@ class System : public Element {
       QRectF bboxStaff(int staff) const;
       QList<SysStaff*>* staves()             { return &_staves;   }
       const QList<SysStaff*>* staves() const { return &_staves;   }
-      double staffY(int staffIdx)            { return _staves[staffIdx]->y(); }
-      SysStaff* staff(int staffIdx) const    { return _staves[staffIdx]; }
+      double staffY(int idx) const;
+      SysStaff* staff(int idx) const         { return _staves[idx]; }
 
-      Spatium distance(int n) const        { return _staves[n]->distance(); }
-      bool pageBreak() const               { return _pageBreak; }
-      void setPageBreak(bool val)          { _pageBreak = val; }
+      Spatium distance(int idx) const        { return _staves[idx]->distance(); }
+      bool pageBreak() const                 { return _pageBreak; }
+      void setPageBreak(bool val)            { _pageBreak = val; }
 
       SysStaff* insertStaff(int);
       SysStaff* removeStaff(int);

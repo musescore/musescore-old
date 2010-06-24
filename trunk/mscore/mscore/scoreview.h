@@ -286,7 +286,6 @@ class ScoreView : public QWidget {
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       void setFocusRect();
       Element* getDragElement() const { return dragElement; }
-      void changeLineSegment(bool);
       void midiNoteReceived(int pitch, bool);
       void changeVoice(int voice);
       void drawBackground(QPainter& p, QRectF r);

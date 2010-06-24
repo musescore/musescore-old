@@ -109,6 +109,7 @@ void Score::updateChannel()
 
 Volta* Score::searchVolta(int tick) const
       {
+#if 0 // TODO
       foreach(Element* el, *gel()) {
             if (el->type() == VOLTA) {
                   Volta* volta = (Volta*)el;
@@ -116,6 +117,7 @@ Volta* Score::searchVolta(int tick) const
                         return volta;
                   }
             }
+#endif
       return 0;
       }
 

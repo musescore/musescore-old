@@ -645,7 +645,7 @@ void OveToMScore::convertTrackElements(int track) {
 					int absTick = mtt_->getTick(i, octave->getTick());
 					ottava = new Ottava(score_);
                     ottava->setTrack(track * VOICES);
-                    ottava->setTick(absTick);
+//TODO-WS                    ottava->setTick(absTick);
                     ottava->setSubtype(OctaveShiftTypeToInt(octave->getOctaveShiftType()));
 
                     int y_off = 0;
@@ -676,7 +676,7 @@ void OveToMScore::convertTrackElements(int track) {
 			} else if (octave->getOctaveShiftPosition() == OVE::OctavePosition_Stop) {
 				if(ottava != 0) {
 					int absTick = mtt_->getTick(i, octave->getEndTick());
-                    ottava->setTick2(absTick);
+//TODO-WS                    ottava->setTick2(absTick);
                     if(ottava->tick2() > ottava->tick()){
                     	score_->add(ottava);
                     } else {
@@ -1761,13 +1761,13 @@ void OveToMScore::convertArticulation(
 		if(pedal_ == NULL) {
 			pedal_ = new Pedal(score_);
 			pedal_->setTrack(track);
-			pedal_->setTick(absTick);
+//TODO-WS			pedal_->setTick(absTick);
 		}
 		break;
 	}
 	case OVE::Articulation_Pedal_Up :{
 		if(pedal_ != NULL){
-			pedal_->setTick2(absTick);
+//TODO-WS			pedal_->setTick2(absTick);
 			if(pedal_->tick2() > pedal_->tick()){
 				score_->add(pedal_);
 			} else {
@@ -2042,8 +2042,8 @@ void OveToMScore::convertRepeats(Measure* measure, int part, int staff, int trac
 
         Volta* volta = new Volta(score_);
         volta->setTrack(track);
-        volta->setTick(absTick1);
-        volta->setTick2(absTick2);
+//TODO-WS        volta->setTick(absTick1);
+//TODO-WS        volta->setTick2(absTick2);
         volta->setSubtype(Volta::VOLTA_CLOSED);
         volta->setText(toQString(ending->getText()));
 
@@ -2286,8 +2286,8 @@ void OveToMScore::convertWedges(Measure* measure, int part, int staff, int track
 		if(absTick2 > absTick) {
 			Hairpin* hp = new Hairpin(score_);
 
-			hp->setTick(absTick);
-			hp->setTick2(absTick2);
+//TODO-WS			hp->setTick(absTick);
+//TODO-WS			hp->setTick2(absTick2);
 			hp->setSubtype(OveWedgeType_To_Type(wedgePtr->getWedgeType()));
 			//hp->setYoff(wedgePtr->getYOffset());
 			hp->setTrack(track);

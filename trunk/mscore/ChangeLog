@@ -1,4 +1,13 @@
-24.jun (la)
+24.jun (ws)
+      - undo should now (mostly) work for changes made in edit mode
+        for Spanner elements.
+      - Changed implementation of HairPin, Otta, TextLine, Volta
+        Trill and Pedal. They move from the global list in Score
+        to the Segment of their startElement. Position is determined
+        by startElement-endElement instead of tick positions.
+        Introduced class Spanner as base class for this elements.
+        Import/Export modules need to be adapted to this new scheme.
+      (la)
       - fix #6163: Export MIDI in wrong preference tab
 22.jun (lv)
       - #5637 support reading bww files: ties and triplets

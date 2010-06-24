@@ -214,7 +214,7 @@ static const QEvent::Type qtscript_QEvent_Type_values[] = {
     , QEvent::UngrabMouse
     , QEvent::GrabKeyboard
     , QEvent::UngrabKeyboard
-    , QEvent::CocoaRequestModal
+//    , QEvent::CocoaRequestModal
     , QEvent::User
     , QEvent::MaxUser
 };

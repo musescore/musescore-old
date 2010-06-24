@@ -384,8 +384,11 @@ class Score : public QObject {
       void setDirty(bool val = true) { setClean(!val); }
 
    public:
+
+      // read context
       int curTick;                  // for read optimizations
       int curTrack;
+      QList<Spanner*> spanner;      // needed for reading old file versions
 
       TextC* rights;                ///< Copyright printed at bottom of page
       int _pageOffset;              ///< Offset for page numbers.
@@ -502,7 +505,7 @@ class Score : public QObject {
       void addElement(Element*);
       void removeElement(Element*);
 
-      void cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset);
+      void cmdAddSpanner(Spanner* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddBSymbol(BSymbol*, const QPointF&, const QPointF&);
 
       Note* addNote(Chord*, int pitch);
@@ -528,8 +531,6 @@ class Score : public QObject {
       void setUpdateAll(bool v = true) { _updateAll = v;   }
       void setLayoutAll(bool val)      { layoutAll = val;  }
       void addRefresh(const QRectF& r) { refresh |= r;     }
-
-      void changeLineSegment(bool);
 
       void changeVoice(int);
 
@@ -619,8 +620,6 @@ class Score : public QObject {
       void spell(int startStaff, int endStaff, Segment* startSegment, Segment* endSegment);
       void spell(Note*);
       int nextSeg(int tick, int track);
-      int nextSeg1(int tick, int& track);
-      int prevSeg1(int tick, int& track);
 
       Style& style()                           { return _style;                   }
       const Style& style() const               { return _style;                   }

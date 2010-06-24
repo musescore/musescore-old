@@ -167,102 +167,62 @@ void Score::cmdAdd(Element* e)
       }
 
 //---------------------------------------------------------
-//   cmdAdd1
-//    add VOLTA, OTTAVA, TRILL, PEDAL, DYNAMIC
-//        case HAIRPIN, TEXTLINE
+//   cmdAddSpanner
+//   drop VOLTA, OTTAVA, TRILL, PEDAL, DYNAMIC
+//        HAIRPIN, and TEXTLINE
 //---------------------------------------------------------
 
-void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
+void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& dragOffset)
       {
       int pitch, tick, staffIdx;
       QPointF offset;
       Segment* segment;
       MeasureBase* mb = pos2measure(pos, &tick, &staffIdx, &pitch, &segment, &offset);
       if (mb == 0 || mb->type() != MEASURE) {
-            printf("cmdAdd: cannot put object here\n");
-            delete e;
+            printf("cmdAddSpanner: cannot put object here\n");
+            delete spanner;
             return;
             }
 
       int track = staffIdx == -1 ? -1 : staffIdx * VOICES;
       Measure* measure = static_cast<Measure*>(mb);
-      e->setTrack(track);
-      e->setParent(0);
+      spanner->setTrack(track);
+      spanner->setStartElement(segment);
+      spanner->setParent(segment);
 
-      // calculate suitable endposition
-      int tick2 = measure->last()->tick();
-      Measure* m2 = measure;
-      while (tick2 <= tick) {
-            m2 = m2->nextMeasure();
-            if (m2 == 0)
-                  break;
-            tick2 = m2->tick();
-            }
-
-      switch(e->type()) {
-            case VOLTA:
-                  {
-                  Volta* volta = static_cast<Volta*>(e);
-                  volta->setTick(measure->tick());
-                  volta->setTick2(measure->tick() + measure->ticks());
-                  volta->layout();
-                  const QList<LineSegment*> lsl = volta->lineSegments();
-                  if (lsl.isEmpty()) {
-                        delete e;
-                        return;
-                        }
-                  else {
-                        LineSegment* ls = lsl.front();
-                        ls->setScore(this);
-                        QPointF uo(pos - ls->canvasPos() - dragOffset);
-                        ls->setUserOff(uo);
-                        }
+      if (spanner->anchor() == ANCHOR_SEGMENT) {
+            Measure* m = segment->measure();
+            static const SegmentType st = SegChordRest;
+            Segment* s = segment;
+            for (;;) {
+                  Segment* sn = s->next1(st);
+                  if (sn == 0)
+                        break;
+                  s = sn;
+                  if (s->measure() != segment->measure())
+                        break;
                   }
-                  break;
-
-            case PEDAL:
-            case OTTAVA:
-            case TRILL:
-            case HAIRPIN:
-            case TEXTLINE:
-                  {
-                  SLine* line = static_cast<SLine*>(e);
-                  if (e->type() == TEXTLINE) {
-                        TextLine* tl = static_cast<TextLine*>(e);
-                        if (!tl->beginText()) {
-                              Segment* seg = tick2segment(tick);
-                              if (seg && seg->nextCR())
-                                    tick2 = seg->nextCR()->tick();
-                              }
-                        }
-                  line->setTick(tick);
-                  line->setTick2(tick2);
-                  line->layout();
-                  LineSegment* ls = line->lineSegments().front();
-                  ls->setScore(this);
-                  QPointF uo(pos - ls->canvasPos() - dragOffset);
-                  ls->setUserOff(uo);
-                  }
-                  break;
-
-            case DYNAMIC:
-                  {
-                  Dynamic* dyn = static_cast<Dynamic*>(e);
-                  dyn->setParent(measure);
-                  dyn->setTick(tick);
-                  dyn->layout();
-
-                  double xx = measure->tick2pos(tick);
-                  QPointF uo(pos - measure->canvasPos() - QPointF(xx, 0.0) - dragOffset);
-                  uo -= QPointF(0.0, dyn->ipos().y());
-                  dyn->setUserOff(uo);
-                  }
-                  break;
-            default:
+            if (s == segment) {
+                  printf("cmdAddSpanner: cannot put object on last segment\n");
+                  delete spanner;
                   return;
+                  }
+            spanner->setEndElement(s);
             }
-      cmdAdd(e);
-      select(e, SELECT_SINGLE, 0);
+      else {      // ANCHOR_MEASURE
+            Measure* m = segment->measure();
+            spanner->setEndElement(segment->measure()->last());
+            }
+
+#if 0
+      LineSegment* ls = line->lineSegments().front();
+      ls->setScore(this);
+      QPointF uo(pos - ls->canvasPos() - dragOffset);
+      ls->setUserOff(uo);
+#endif
+
+      cmdAdd(spanner);
+      select(spanner, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------

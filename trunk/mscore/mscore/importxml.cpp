@@ -1129,7 +1129,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                     if (endingType == "start") {
                                           Volta* volta = new Volta(score);
                                           volta->setTrack(staff * VOICES);
-                                          volta->setTick(tick);
+//TODO-WS                                          volta->setTick(tick);
                                           volta->setText(endingNumber);
                                           // LVIFIX TODO also support endings "1, 2" and "1 - 3"
                                           volta->endings().clear();
@@ -1138,10 +1138,10 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           }
                                     else if (endingType == "stop") {
                                           if (lastVolta) {
-												lastVolta->setTick2(tick);
-												lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+//TODO-WS 							lastVolta->setTick2(tick);
+								lastVolta->setSubtype(Volta::VOLTA_CLOSED);
                                                 score->add(lastVolta);
-												lastVolta = 0;
+								lastVolta = 0;
                                                 }
                                           else {
                                                 printf("lastVolta == 0 on stop\n");
@@ -1149,9 +1149,9 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           }
                                     else if (endingType == "discontinue") {
                                           if (lastVolta) {
-                                                lastVolta->setTick2(tick);
+//TODO-WS                                                lastVolta->setTick2(tick);
                                                 lastVolta->setSubtype(Volta::VOLTA_OPEN);
-												score->add(lastVolta);
+								score->add(lastVolta);
                                                 lastVolta = 0;
                                                 }
                                           else {
@@ -1655,7 +1655,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         else {
                               pedal = new Pedal(score);
                               pedal->setTrack((staff + rstaff) * VOICES);
-                              pedal->setTick(tick);
+//TODO-WS                              pedal->setTick(tick);
                               if (placement == "") placement = "below";
                               setSLinePlacement(pedal,
                                           score->spatium(), placement,
@@ -1667,7 +1667,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               printf("pedal line stop without start\n");
                               }
                         else {
-                              pedal->setTick2(tick);
+//TODO-WS                              pedal->setTick2(tick);
                               score->add(pedal);
                               pedal = 0;
                               }
@@ -1760,7 +1760,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               printf("unsupported line-type: %s\n", lineType.toLatin1().data());
 
                         b->setTrack((staff + rstaff) * VOICES);
-                        b->setTick(tick);
+//TODO-WS                        b->setTick(tick);
                         bracket[n] = b;
                         }
                   }
@@ -1769,7 +1769,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         printf("bracket stop without start, number %d\n", number);
                         }
                   else {
-                        b->setTick2(tick);
+//TODO-WS                        b->setTick2(tick);
                         // TODO: MuseScore doesn't support lines which start and end on different staves
                         /*
                         QPointF userOff = b->userOff();
@@ -1802,7 +1802,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   else {
                         ottava = new Ottava(score);
                         ottava->setTrack((staff + rstaff) * VOICES);
-                        ottava->setTick(tick);
+//TODO-WS                        ottava->setTick(tick);
                         if (ottavasize == 8)
                               ottava->setSubtype(0);
                         else if (ottavasize == 15)
@@ -1827,7 +1827,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   else {
                         ottava = new Ottava(score);
                         ottava->setTrack((staff + rstaff) * VOICES);
-                        ottava->setTick(tick);
+//TODO-WS                        ottava->setTick(tick);
                         if (ottavasize == 8)
                               ottava->setSubtype(2);
                         else if (ottavasize == 15)
@@ -1848,7 +1848,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         printf("octave-shift stop without start\n");
                         }
                   else {
-                        ottava->setTick2(tick);
+//TODO-WS                        ottava->setTick2(tick);
                         score->add(ottava);
                         ottava = 0;
                         }
@@ -2868,7 +2868,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else {
                         trill = new Trill(score);
                         trill->setTrack((staff + relStaff) * VOICES);
-                        trill->setTick(tick);
+//TODO-WS                        trill->setTick(tick);
                         wavyLineStart = true;
                         }
                   }
@@ -2877,7 +2877,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         printf("wavy-line stop without start\n");
                         }
                   else {
-                        trill->setTick2(tick+ticks);
+//TODO-WS                        trill->setTick2(tick+ticks);
                         score->add(trill);
                         trill = 0;
                         }
@@ -3064,8 +3064,8 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       {
       Hairpin* hp = new Hairpin(score);
 
-      hp->setTick(wedgeList[no].startTick);
-      hp->setTick2(endTick);
+//TODO-WS      hp->setTick(wedgeList[no].startTick);
+//TODO-WS      hp->setTick2(endTick);
       hp->setSubtype(wedgeList[no].subType);
       if (wedgeList[no].hasYoffset) hp->setYoff(wedgeList[no].yoffset);
       else hp->setYoff(wedgeList[no].above ? -3 : 8);

@@ -912,23 +912,17 @@ void Score::cmdAddHairpin(bool decrescendo)
       getSelectedChordRest2(&cr1, &cr2);
       if (!cr1)
             return;
-
-      int tick1 = cr1->tick();
-
       if (cr2 == 0)
             cr2 = nextChordRest(cr1);
-      int tick2;
-      if (cr2)
-            tick2 = cr2->tick();
-      else
-            tick2 = cr1->measure()->tick() + cr1->measure()->ticks();
+      if (cr2 == 0)
+            return;
 
       Hairpin* pin = new Hairpin(this);
-      pin->setTick(tick1);
-      pin->setTick2(tick2);
       pin->setSubtype(decrescendo ? 1 : 0);
       pin->setTrack(cr1->track());
-      pin->layout();
+      pin->setStartElement(cr1->segment());
+      pin->setEndElement(cr2->segment());
+//      pin->layout();
       cmdAdd(pin);
       if (!noteEntryMode())
             select(pin, SELECT_SINGLE, 0);
@@ -1244,11 +1238,13 @@ void Score::cmdRemoveTime(int tick, int len)
                         undoRemoveElement(e);
                         }
                   }
+#if 0
             else if (e->isSLine()) {
                   SLine* s = static_cast<SLine*>(e);
                   if (s->tick() >= tick && s->tick2() < etick)
                         undoRemoveElement(e);
                   }
+#endif
             }
       foreach (Beam* b, _beams) {
             ChordRest* e1 = b->elements().front();
@@ -1464,29 +1460,6 @@ void ScoreView::chordTab(bool back)
       adjustCanvasPosition(cn, false);
       ((Harmony*)editObject)->moveCursorToEnd();
 
-      _score->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
-//   changeLineSegment
-//    switch to first/last LineSegment while editing
-//---------------------------------------------------------
-
-void ScoreView::changeLineSegment(bool last)
-      {
-      LineSegment* segment = static_cast<LineSegment*>(editObject);
-
-      LineSegment* newSegment;
-      if (last)
-            newSegment = segment->line()->lineSegments().back();
-      else
-            newSegment = segment->line()->lineSegments().front();
-
-      endEdit();
-      _score->endCmd();
-
-      _score->startCmd();
-      startEdit(newSegment, -2);      // do not change curGrip
       _score->setLayoutAll(true);
       }
 

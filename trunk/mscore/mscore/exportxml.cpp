@@ -861,7 +861,7 @@ void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
                               da->setDirect(dir);
                               storeAnchor(da);
                               }
-                        da = findMatchInPart(sl->tick2(), sl->staff(), false, cs, p, strack, etrack);
+//TODO-WS                        da = findMatchInPart(sl->tick2(), sl->staff(), false, cs, p, strack, etrack);
                         if (da) {
                               da->setDirect(dir);
                               storeAnchor(da);
@@ -1322,6 +1322,7 @@ static QString tick2xml(const int ticks, int* dots)
 
 static Volta* findVolta(Measure* m, bool left)
       {
+#if 0 // TODO-WS
       foreach(Element* el, *(m->score()->gel())) {
             if (el->type() == VOLTA) {
                   Volta* v = (Volta*) el;
@@ -1331,6 +1332,7 @@ static Volta* findVolta(Measure* m, bool left)
                         }
                   }
             }
+#endif
       return 0;
       }
 
@@ -1568,11 +1570,13 @@ static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& orn
                         xml.tagE("trill-mark");
                         xml.tagE("wavy-line type=\"start\"");
                         }
+#if 0 // TODO-WS
                   else if (t->tick2() == chord->tick()+chord->ticks() && t->track() == chord->track()) {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tagE("wavy-line type=\"stop\"");
                         }
+#endif
                   }
             }
       }
@@ -2343,7 +2347,8 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                                seg->userOff().y());
 */
                         System* sys = 0;
-                        QPointF pnt = sl->tick2pos(0, el->tick(), el->staffIdx(), &sys);
+#if 0 //TODO-WS
+                        sl->tick2pos(0, el->tick(), el->staffIdx(), &sys);
                         if (sys) {
                               QRectF bb = sys->staff(el->staffIdx())->bbox();
 /*
@@ -2364,6 +2369,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                               else
                                      tagname += " placement=\"below\"";
                               }
+#endif //TODO-WS
                          }
                   }
             Element* pel = el->parent();
