@@ -1,4 +1,5 @@
 24.jun (ws)
+      - fix #6076: crash on pla a new score after exiting a playing score
       - refuse to open incompatible score files (file version number > current
         versione number); this adds new translatable strings
 21.jun (ws)

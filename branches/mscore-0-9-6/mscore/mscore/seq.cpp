@@ -115,8 +115,8 @@ void Seq::setScoreView(ScoreView* v)
       {
       if (cv !=v && cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
-            cs = v ? v->score() : 0;
             stop();
+            cs = v ? v->score() : 0;
 #ifndef __MINGW32__
             while (state != STOP)
                   usleep(100000);
@@ -368,10 +368,13 @@ void MuseScore::seqStopped()
 
 void Seq::guiStop()
       {
-      if (!cs)
-            return;
       QAction* a = getAction("play");
       a->setChecked(false);
+
+      if (!cs) {
+            markedNotes.clear();
+            return;
+            }
 
       //
       // deselect all selected notes
@@ -1022,7 +1025,7 @@ void Seq::prevChord()
                   break;
             --i;
             }
-      //go the previous chord      
+      //go the previous chord
       if (i != events.constBegin()) {
             i = playPos;
             for (;;) {
