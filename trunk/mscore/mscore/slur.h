@@ -22,7 +22,7 @@
 #define __SLUR_H__
 
 #include "globals.h"
-#include "element.h"
+#include "spanner.h"
 
 class Note;
 class System;
@@ -89,9 +89,7 @@ class SlurSegment : public Element {
 //   SlurTie
 //---------------------------------------------------------
 
-class SlurTie : public Element {
-      Element* _startElement;
-      Element* _endElement;
+class SlurTie : public Spanner {
       int _lineType;          // 0 = solid, 1 = dotted
 
    protected:
@@ -129,10 +127,6 @@ class SlurTie : public Element {
       QPointF slurPos(Element*, System*& s);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
 
-      void setStartElement(Element* e)    { _startElement = e;    }
-      void setEndElement(Element* e)      { _endElement = e;      }
-      Element* startElement() const       { return _startElement; }
-      Element* endElement() const         { return _endElement;   }
       int startTick() const;
       int endTick() const;
       virtual void toDefault();

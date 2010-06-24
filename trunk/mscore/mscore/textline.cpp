@@ -352,7 +352,7 @@ void TextLine::setContinueText(const QString& s, int textStyle)
 
 void TextLine::write(Xml& xml) const
       {
-      xml.stag(name());
+      xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
       writeProperties(xml);
       xml.etag();
       }
@@ -366,6 +366,7 @@ void TextLine::read(QDomElement e)
       foreach(LineSegment* seg, segments)
             delete seg;
       segments.clear();
+      setId(e.attribute("id", "-1").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!readProperties(e))
                   domError(e);
