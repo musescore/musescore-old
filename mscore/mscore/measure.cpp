@@ -2212,6 +2212,7 @@ void Measure::read(QDomElement e, int staffIdx)
                || tag == "TextLine"
                || tag == "Volta") {
                   Spanner* sp = static_cast<Spanner*>(Element::name2Element(tag, score()));
+                  sp->setTrack(score()->curTrack);
                   sp->read(e);
                   Segment* s = getSegment(SegChordRest, score()->curTick);
                   sp->setStartElement(s);

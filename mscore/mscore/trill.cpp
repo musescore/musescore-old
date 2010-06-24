@@ -167,7 +167,7 @@ LineSegment* Trill::createLineSegment()
 
 void Trill::write(Xml& xml) const
       {
-      xml.stag(name());
+      xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
       if (_accidental)
             _accidental->write(xml);
       SLine::writeProperties(xml);
@@ -184,6 +184,7 @@ void Trill::read(QDomElement e)
             delete seg;
       segments.clear();
       setTrack(0);  // set default track
+      setId(e.attribute("id", "-1").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());

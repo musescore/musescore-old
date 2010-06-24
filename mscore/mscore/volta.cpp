@@ -102,6 +102,7 @@ void Volta::read(QDomElement e)
       foreach(LineSegment* seg, segments)
             delete seg;
       segments.clear();
+      setId(e.attribute("id", "-1").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "text")            // obsolete
@@ -131,7 +132,7 @@ void Volta::write(Xml& xml) const
       Volta proto(score());
       proto.setSubtype(subtype());
 
-      xml.stag(name());
+      xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
       TextLine::writeProperties(xml, &proto);
       QString s;
       foreach(int i, _endings) {

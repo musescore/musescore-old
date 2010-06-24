@@ -443,23 +443,19 @@ void SlurSegment::propertyAction(ScoreView* viewer, const QString& s)
 //---------------------------------------------------------
 
 SlurTie::SlurTie(Score* s)
-   : Element(s)
+   : Spanner(s)
       {
       _slurDirection = AUTO;
       up             = true;
-      _startElement  = 0;
-      _endElement    = 0;
       _len           = 0;
       _lineType      = 0;     // default is solid
       }
 
 SlurTie::SlurTie(const SlurTie& t)
-   : Element(t)
+   : Spanner(t)
       {
       up             = t.up;
       _slurDirection = t._slurDirection;
-      _startElement  = t._startElement;
-      _endElement    = t._endElement;
       _len           = t._len;
       _lineType      = t._lineType;
 
@@ -1235,10 +1231,10 @@ void Tie::layout()
 
 int SlurTie::startTick() const
       {
-      if (_startElement->isChordRest())
-            return static_cast<ChordRest*>(_startElement)->tick();
-      if (_startElement->type() == NOTE)
-            return static_cast<Note*>(_startElement)->chord()->tick();
+      if (startElement()->isChordRest())
+            return static_cast<ChordRest*>(startElement())->tick();
+      if (startElement()->type() == NOTE)
+            return static_cast<Note*>(startElement())->chord()->tick();
       return 0;
       }
 
@@ -1248,10 +1244,10 @@ int SlurTie::startTick() const
 
 int SlurTie::endTick() const
       {
-      if (_endElement->isChordRest())
-            return static_cast<ChordRest*>(_endElement)->tick();
-      if (_endElement->type() == NOTE)
-            return static_cast<Note*>(_endElement)->chord()->tick();
+      if (endElement()->isChordRest())
+            return static_cast<ChordRest*>(endElement())->tick();
+      if (endElement()->type() == NOTE)
+            return static_cast<Note*>(endElement())->chord()->tick();
       return 0;
       }
 
