@@ -360,7 +360,7 @@ void Channel::read(QDomElement e)
 void Channel::updateInitList() const
       {
       for (int i = 0; i < A_INIT_COUNT; ++i) {
-            delete init[i];
+            // delete init[i];            // memory leak
             init[i] = 0;
             }
       Event* e;
