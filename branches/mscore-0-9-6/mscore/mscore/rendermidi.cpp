@@ -370,8 +370,6 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               swingBeat = false;
                         }
 
-printf("swing %d  swingBeat %d coeff %f\n", swing, swingBeat, swingCoeff);
-
                   // -- end swing -- //
 
                   foreach(Note* note, chord->notes()) {
