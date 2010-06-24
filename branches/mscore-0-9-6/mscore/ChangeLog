@@ -1,3 +1,6 @@
+24.jun (ws)
+      - refuse to open incompatible score files (file version number > current
+        versione number); this adds new translatable strings
 21.jun (ws)
       - fix dragging from palette of measure repeat symbol
 20.jun (db)
