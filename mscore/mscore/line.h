@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,7 +21,7 @@
 #ifndef __LINE_H__
 #define __LINE_H__
 
-#include "element.h"
+#include "spanner.h"
 #include "globals.h"
 
 class SLine;
@@ -30,11 +30,12 @@ class ScoreView;
 
 //---------------------------------------------------------
 //   LineSegment
-//    Virtual base class for OttavaSegment, PedalSegment
-//    HairpinSegment and TrillSegment.
-//    This class describes part of a line object. Line objects
-//    can span multiple staves. For every staff an Segment
-//    is created.
+//    Virtual base class for segmented lines segments
+//    (OttavaSegment, PedalSegment, HairpinSegment, TrillSegment...)
+//
+//    This class describes one segment of an segmented
+//    line object. Line objects can span multiple staves.
+//    For every staff a segment is created.
 //---------------------------------------------------------
 
 class LineSegment : public Element {
@@ -48,6 +49,7 @@ class LineSegment : public Element {
       virtual bool isMovable() const { return true; }
       virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
+      virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int) const;
@@ -58,16 +60,15 @@ class LineSegment : public Element {
       LineSegment(const LineSegment&);
       virtual LineSegment* clone() const = 0;
       virtual void draw(QPainter& p, ScoreView*) const = 0;
-      SLine* line() const                 { return (SLine*)parent(); }
-      const QPointF& userOff2() const     { return _userOff2;  }
-      void setUserOff2(const QPointF& o)  { _userOff2 = o;     }
-      void setUserXoffset2(qreal x)       { _userOff2.setX(x); }
-      void setPos2(const QPointF& p)      { _p2 = p;     }
-      void setXpos2(qreal x)              { _p2.setX(x); }
-      QPointF pos2() const;
-      void setLineSegmentType(LineSegmentType s)  { _segmentType = s;  }
-      LineSegmentType segmentType() const { return _segmentType;       }
-      void setSystem(System* s)           { _system = s;               }
+      SLine* line() const                         { return (SLine*)parent(); }
+      const QPointF& userOff2() const             { return _userOff2;       }
+      void setUserOff2(const QPointF& o)          { _userOff2 = o;          }
+      void setUserXoffset2(qreal x)               { _userOff2.setX(x);      }
+      void setPos2(const QPointF& p)              { _p2 = p;                }
+      QPointF pos2() const                        { return _p2 + _userOff2; }
+      void setLineSegmentType(LineSegmentType s)  { _segmentType = s;       }
+      LineSegmentType segmentType() const         { return _segmentType;    }
+      void setSystem(System* s)                   { _system = s;            }
       virtual void toDefault();
       virtual void spatiumChanged(double, double);
 
@@ -80,21 +81,15 @@ class LineSegment : public Element {
 //    Trill and TextLine
 //---------------------------------------------------------
 
-class SLine : public Element {
+class SLine : public Spanner {
    protected:
       QList<LineSegment*> segments;
-      int _tick, _tick2;
       bool _diagonal;
-      Anchor _anchor;         // enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE};
 
    public:
       SLine(Score* s);
       SLine(const SLine&);
 
-      void setTick(int t)  { _tick = t;     }
-      int tick() const     { return _tick;  }
-      void setTick2(int t) { _tick2 = t;    }
-      int tick2() const    { return _tick2; }
       virtual void layout();
       bool readProperties(QDomElement node);
       void writeProperties(Xml& xml, const SLine* proto = 0) const;
@@ -105,15 +100,17 @@ class SLine : public Element {
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);
       virtual QRectF bbox() const;
-      QList<LineSegment*> lineSegments() { return segments; }
-      virtual QPointF tick2pos(int grip, int tick, int staff, System** system);
+      const QList<LineSegment*>& lineSegments() { return segments; }
+
+      virtual QPointF tick2pos(int grip, System** system);
+
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
+
       bool diagonal() const         { return _diagonal; }
       void setDiagonal(bool v)      { _diagonal = v;    }
-      Anchor anchor() const         { return _anchor;   }
-      void setAnchor(Anchor a)      { _anchor = a;      }
-      virtual bool check() const;
+      int tick() const;
+      int tick2() const;
       };
 
 typedef QList<LineSegment*>::iterator iLineSegment;

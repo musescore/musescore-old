@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,7 @@
 #include "xml.h"
 #include "scoreview.h"
 #include "system.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   LineSegment
@@ -35,7 +36,7 @@ LineSegment::LineSegment(Score* s)
    : Element(s)
       {
       _segmentType = SEGMENT_SINGLE;
-      _system = 0;
+      _system      = 0;
       }
 
 LineSegment::LineSegment(const LineSegment& s)
@@ -62,49 +63,13 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
       }
 
 //---------------------------------------------------------
-//   pos2
-//---------------------------------------------------------
-
-QPointF LineSegment::pos2() const
-      {
-      return _p2 + _userOff2;
-      }
-
-//---------------------------------------------------------
 //   gripAnchor
 //---------------------------------------------------------
 
 QPointF LineSegment::gripAnchor(int grip) const
       {
-      int staffIdx = parent()->staffIdx();
-      QRectF sbb(_system->staff(staffIdx)->bbox());
-      QPointF sp(sbb.topLeft() + _system->canvasPos());
-
-      int tck = _system->measures().front()->tick();
-
       System* s;  // dummy
-
-      if (grip == 0) {
-            switch(_segmentType) {
-                  case SEGMENT_SINGLE:
-                  case SEGMENT_BEGIN:
-                        return line()->tick2pos(grip, line()->tick(), staffIdx, &s);
-                  case SEGMENT_MIDDLE:
-                  case SEGMENT_END:
-                        return line()->tick2pos(grip, tck, staffIdx, &s);
-                  }
-            }
-      else {
-            switch(_segmentType) {
-                  case SEGMENT_SINGLE:
-                  case SEGMENT_END:
-                        return line()->tick2pos(grip, line()->tick2(), staffIdx, &s);
-                  case SEGMENT_BEGIN:
-                  case SEGMENT_MIDDLE:
-                        return QPointF(sbb.x() + sbb.width() + _system->canvasPos().x(), sp.y());
-                  }
-            }
-      return QPointF();
+      return line()->tick2pos(grip, &s);
       }
 
 //---------------------------------------------------------
@@ -112,97 +77,92 @@ QPointF LineSegment::gripAnchor(int grip) const
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool LineSegment::edit(ScoreView* view, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool LineSegment::edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
-      if ((modifiers & Qt::ShiftModifier)
+      if (!((modifiers & Qt::ShiftModifier)
          && ((_segmentType == SEGMENT_SINGLE)
               || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
-              || (_segmentType == SEGMENT_END && curGrip == 1)
-         )) {
-            int segments = line()->lineSegments().size();
-            int track = line()->track();
-            int tick1 = line()->tick();
-            int tick2 = line()->tick2();
-            bool snapSegment = line()->anchor() == ANCHOR_SEGMENT;
+              || (_segmentType == SEGMENT_END && curGrip == 1))))
+            return false;
 
-            if (key == Qt::Key_Left) {
-                  if (curGrip == 0) {
-                        int t1;
-                        if (snapSegment) {
-                              t1 = score()->prevSeg1(tick1, track);
-                              }
-                        else {
-                              Measure* m = score()->tick2measure(tick1)->prevMeasure();
-                              t1 = m ? m->tick() : 0;
-                              }
-                        if (t1 >= 0)
-                              tick1 = t1;
-                        }
-                  else if (curGrip == 1) {
-                        int t2;
-                        if (snapSegment) {
-                              t2 = score()->prevSeg1(tick2, track);
-                              }
-                        else {
-                              Measure* m = score()->tick2measure(tick2);
-                              if (m->tick() == tick2) {
-                                    Measure* mm = m->prevMeasure();
-                                    t2 = mm ? mm->tick() : 0;
-                                    }
-                              else {
-                                    // at end of score?
-                                    t2 = m->tick();
-                                    }
-                              }
-                        if (t2 >= 0)
-                              tick2 = t2;
-                        if (tick1 >= tick2)
-                              return true;
+      Segment* s1 = static_cast<Segment*>(line()->startElement());
+      Segment* s2 = static_cast<Segment*>(line()->endElement());
+
+      int segments     = line()->lineSegments().size();
+      int track        = line()->track();
+      bool snapSegment = line()->anchor() == ANCHOR_SEGMENT;
+
+      if (key == Qt::Key_Left) {
+            if (curGrip == 0) {
+                  if (snapSegment)
+                        s1 = prevSeg1(s1, track);
+                  else {
+                        Measure* m = s1->measure()->prevMeasure();
+                        s1 = m ? m->first(SegChordRest) : s1;
                         }
                   }
-            else if (key == Qt::Key_Right) {
-                  if (curGrip == 0) {
-                        int t1;
-                        if (snapSegment) {
-                              t1 = score()->nextSeg1(tick1, track);
-                              }
+            else if (curGrip == 1) {
+                  if (snapSegment)
+                        s2 = prevSeg1(s2, track);
+                  else {
+                        Measure* m = s2->measure()->prevMeasure();
+                        if (m)
+                              s2 = m->last();
                         else {
-                              Measure* m  = score()->tick2measure(tick1);
-                              Measure* mb = m->nextMeasure();
-                              t1 = mb ? mb->tick() : m->tick() + m->ticks();
+                              // at end of score?
+                              s2 = m->first(SegChordRest);
                               }
-                        if (t1 >= 0)
-                              tick1 = t1;
-                        if (tick1 >= tick2)
-                              return true;
-                        }
-                  else if (curGrip == 1) {
-                        int t2 = 0;
-                        if (snapSegment) {
-                              t2 = score()->nextSeg1(tick2, track);
-                              }
-                        else {
-                              Measure* m  = score()->tick2measure(tick2);
-                              if (m) {
-                                    Measure* mb = m->nextMeasure();
-                                    t2 = mb ? mb->tick() : m->tick() + m->ticks();
-                                    }
-                              }
-                        if (t2 > tick1)
-                              tick2 = t2;
                         }
                   }
-            line()->setTick(tick1);
-            line()->setTick2(tick2);
-
-            line()->layout();
-            if (line()->lineSegments().size() != segments)
-                  view->changeLineSegment(curGrip == 1);
-            if (line()->type() == OTTAVA)
-                  score()->fixPpitch();
-            return true;
             }
-      return false;
+      else if (key == Qt::Key_Right) {
+            if (curGrip == 0) {
+                  if (snapSegment)
+                        s1 = nextSeg1(s1, track);
+                  else {
+                        Measure* m  = s1->measure()->nextMeasure();
+                        s1 = m ? m->first(SegChordRest) : s1;
+                        }
+                  }
+            else if (curGrip == 1) {
+                  if (snapSegment)
+                        s2 = nextSeg1(s2, track);
+                  else {
+                        Measure* m = s2->measure()->nextMeasure();
+                        if (m)
+                              s2 = m->last();
+                        }
+                  }
+            }
+      if (s1 == 0 || s2 == 0 || s1->tick() >= s2->tick())
+            return true;
+
+      if (line()->startElement() != s1) {
+            static_cast<Segment*>(line()->startElement())->removeSpannerFor(line());
+            line()->setStartElement(s1);
+            s1->addSpannerFor(line());
+            }
+      if (line()->endElement() != s2) {
+            static_cast<Segment*>(line()->endElement())->removeSpannerBack(line());
+            line()->setEndElement(s2);
+            s2->addSpannerBack(line());
+            }
+      line()->layout();
+
+      if (line()->lineSegments().size() != segments) {
+            LineSegment* nls = 0;
+            if (_segmentType == SEGMENT_BEGIN)
+                  nls = line()->lineSegments().front();
+            else if (_segmentType == SEGMENT_END)
+                  nls = line()->lineSegments().back();
+            if (nls && (nls != this)) {
+                  //view->changeLineSegment(curGrip == 1);
+                  LineSegment* nnls = nls->clone();
+                  nnls->setParent(line());
+                  _score->undoChangeElement(nls, nnls);
+                  }
+            }
+      return true;
       }
 
 //---------------------------------------------------------
@@ -252,79 +212,46 @@ void LineSegment::toDefault()
 //---------------------------------------------------------
 
 SLine::SLine(Score* s)
-   : Element(s)
+   : Spanner(s)
       {
-      setTick(0);
-      _tick2 = 0;
       _diagonal = false;
-      _anchor = ANCHOR_SEGMENT;
       }
 
 SLine::SLine(const SLine& s)
-   : Element(s)
+   : Spanner(s)
       {
-      _tick     = s._tick;
-      _tick2    = s._tick2;
       _diagonal = s._diagonal;
-      _anchor   = s._anchor;
       foreach(LineSegment* ls, s.segments)
-            add(ls->clone());
+            add(ls);
       }
 
 //---------------------------------------------------------
 //   tick2pos
 //---------------------------------------------------------
 
-QPointF SLine::tick2pos(int grip, int tick, int staffIdx, System** system)
+QPointF SLine::tick2pos(int grip, System** sys)
       {
-      Segment* seg = _score->tick2segment(tick);
-      if (seg == 0) {
-            // this never should be triggered because tick2segment
-            // always returns the last segment for tick > score end
-            MeasureBase* mb = score()->measures()->last();;
-            while (mb) {
-                  if (mb->type() == MEASURE)
-                        break;
-                  mb = mb->prev();
-                  }
-            if (mb == 0 || mb->type() != MEASURE) {
-                  *system = 0;
-                  return QPointF();
-                  }
-            Measure* m = (Measure*)mb;
-            seg = m->last();
-            }
-      System* sys = seg->measure()->system();
-
-      if (_anchor == ANCHOR_SEGMENT) {
-            // do not go into next system when tick2 is start of system
-            if (grip == 1 && sys->firstMeasure()->tick() == seg->tick()) {
-                  Measure* m = sys->firstMeasure()->prevMeasure();
-                  if (m) {
-                        seg = m->last();
-                        sys = seg->measure()->system();
-                        }
-                  }
-            *system = sys;
-            return QPointF(seg->canvasPos().x(), sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y());
+      int si = staffIdx();
+      Segment* seg = static_cast<Segment*>(grip == 0 ? startElement() : endElement());
+      *sys = seg->measure()->system();
+      if (anchor() == ANCHOR_SEGMENT) {
+            return QPointF(seg->canvasPos().x(), (*sys)->staffY(si));
             }
       else {
             Measure* m = seg->measure();
-            double y   = sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y();
+            double y   = (*sys)->staffY(si);
             double x   = m->canvasPos().x();
             if (m->tick() < seg->tick()) {      // to end of last measure?
                   x += m->bbox().width();
                   }
-            else if (grip == 1 && sys->firstMeasure() == m) {
+            else if (grip == 1 && (*sys)->firstMeasure() == m) {
                   m = m->prevMeasure();
                   if (m) {
-                        seg = m->last();
-                        sys = seg->measure()->system();
-                        x   = m->canvasPos().x() + m->bbox().width();
-                        y   = sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y();
+                        *sys = m->system();
+                        x    = m->canvasPos().x() + m->bbox().width();
+                        y    = (*sys)->staffY(si);
                         }
                   }
-            *system = sys;
             return QPointF(x, y);
             }
       }
@@ -336,7 +263,7 @@ QPointF SLine::tick2pos(int grip, int tick, int staffIdx, System** system)
 
 void SLine::layout()
       {
-      if (score() == gscore) {
+      if (parent() == 0) {
             //
             // when used in a palette, SLine has no parent and
             // tick and tick2 has no meaning so no layout is
@@ -352,18 +279,24 @@ void SLine::layout()
 
       setPos(QPointF());
       setUserOff(QPointF());
+
+      QPointF pp(canvasPos());
       System* s1;
       System* s2;
-      int staffI = staffIdx();
-      QPointF p1 = tick2pos(0, tick(), staffI, &s1);
-      QPointF p2 = tick2pos(1, _tick2, staffI, &s2);
+      QPointF p1 = tick2pos(0, &s1) - pp;
+      QPointF p2 = tick2pos(1, &s2) - pp;
 
       QList<System*>* systems = score()->systems();
       int sysIdx1        = systems->indexOf(s1);
       int sysIdx2        = systems->indexOf(s2);
-      int segmentsNeeded = sysIdx2 - sysIdx1 + 1;
+      int segmentsNeeded = 0;
+      for (int i = sysIdx1; i < sysIdx2+1;  ++i) {
+            if (systems->at(i)->isVbox())
+                  continue;
+            ++segmentsNeeded;
+            }
+      int segCount = segments.size();
 
-      int segCount       = segments.size();
       if (segmentsNeeded != segCount) {
             if (segmentsNeeded > segCount) {
                   int n = segmentsNeeded - segCount;
@@ -389,37 +322,45 @@ void SLine::layout()
                               }
                         }
                   }
-            segCount = segmentsNeeded;
             }
+
       int segIdx = 0;
-      for (int i = sysIdx1; i <= sysIdx2; ++i, ++segIdx) {
-            System* system   = (*systems)[i];
+      int si  = staffIdx();
+      for (int i = sysIdx1; i <= sysIdx2; ++i) {
+            System* system = systems->at(i);
+            if (system->isVbox())
+                  continue;
             LineSegment* seg = segments[segIdx];
+            ++segIdx;
             seg->setSystem(system);
+            double x1 = system->firstMeasure()->first(SegChordRest)->canvasPos().x();
+            double x2 = system->abbox().right();
+            double y  = system->staffY(si) - pp.y();
 
             if (sysIdx1 == sysIdx2) {
                   // single segment
                   seg->setLineSegmentType(SEGMENT_SINGLE);
+                  QPointF pp(canvasPos());
                   seg->setPos(p1);
-                  seg->setXpos2(p2.x() - p1.x());
+                  seg->setPos2(QPointF(p2.x() - p1.x(), 0.0));
                   }
             else if (i == sysIdx1) {
                   // start segment
                   seg->setLineSegmentType(SEGMENT_BEGIN);
                   seg->setPos(p1);
-                  seg->setXpos2(seg->gripAnchor(1).x() - p1.x());
+                  seg->setPos2(QPointF(x2 - p1.x() - pp.x(), 0.0));
                   }
             else if (i > 0 && i != sysIdx2) {
                   // middle segment
                   seg->setLineSegmentType(SEGMENT_MIDDLE);
-                  seg->setPos(seg->gripAnchor(0));
-                  seg->setXpos2(seg->gripAnchor(1).x() - seg->ipos().x());
+                  seg->setPos(QPointF(x1 - pp.x(), y));
+                  seg->setPos2(QPointF(x2 - x1, 0.0));
                   }
             else if (i == sysIdx2) {
                   // end segment
                   seg->setLineSegmentType(SEGMENT_END);
-                  seg->setPos(seg->gripAnchor(0));
-                  seg->setXpos2(p2.x() - seg->ipos().x());
+                  seg->setPos(QPointF(x1 - pp.x(), y));
+                  seg->setPos2(QPointF(endElement()->canvasPos().x() - x1, 0.0));
                   }
             seg->layout();
             }
@@ -432,13 +373,11 @@ void SLine::layout()
 
 void SLine::writeProperties(Xml& xml, const SLine* proto) const
       {
-      xml.tag("tick", tick());
-      xml.curTick = tick();
       Element::writeProperties(xml, proto);
       if (_diagonal && (proto == 0 || proto->diagonal() != _diagonal))
             xml.tag("diagonal", _diagonal);
-      if (_anchor != ANCHOR_SEGMENT && (proto == 0 || proto->anchor() != _anchor))
-            xml.tag("anchor", _anchor);
+      if (anchor() != ANCHOR_SEGMENT && (proto == 0 || proto->anchor() != anchor()))
+            xml.tag("anchor", anchor());
       if (score() == gscore) {
             // when used as icon
             if (!segments.isEmpty()) {
@@ -449,7 +388,6 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
                   xml.tag("length", spatium() * 4);
             return;
             }
-      xml.tag("tick2", _tick2);
       //
       // check if user has modified the default layout
       //
@@ -485,13 +423,15 @@ bool SLine::readProperties(QDomElement e)
       {
       if (Element::readProperties(e))
             return true;
-      setTick(score()->curTick);
+      // setTick(score()->curTick);
       QString tag(e.tagName());
       QString val(e.text());
       int i = val.toInt();
 
       if (tag == "tick2")
-            _tick2 = score()->fileDivision(i);
+            __setTick2(score()->fileDivision(i));
+      else if (tag == "tick")
+            __setTick1(score()->fileDivision(i));
       else if (tag == "Segment") {
             LineSegment* ls = createLineSegment();
             for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -595,7 +535,7 @@ QRectF SLine::bbox() const
 
 void SLine::write(Xml& xml) const
       {
-      xml.stag(name());
+      xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
       SLine::writeProperties(xml);
       xml.etag();
       }
@@ -610,6 +550,8 @@ void SLine::read(QDomElement e)
             delete seg;
       segments.clear();
       setTrack(0);  // set default track
+      setId(e.attribute("id", "-1").toInt());
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!SLine::readProperties(e))
                   domError(e);
@@ -617,14 +559,35 @@ void SLine::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   check
-//    check for consistency; return false if element is
-//    invalid
+//   startEdit
 //---------------------------------------------------------
 
-bool SLine::check() const
+void LineSegment::startEdit(ScoreView*, const QPointF&)
       {
-      if (tick2() <= tick())
-            return false;
-      return true;
+      SLine* l = line();
+      SLine* nl = static_cast<SLine*>(l->clone());
+      score()->undoChangeElement(l, nl);
       }
+
+//---------------------------------------------------------
+//   tick
+//---------------------------------------------------------
+
+int SLine::tick() const
+      {
+      if (startElement()->type() != SEGMENT)
+            return -1;
+      return static_cast<Segment*>(startElement())->tick();
+      }
+
+//---------------------------------------------------------
+//   tick2
+//---------------------------------------------------------
+
+int SLine::tick2() const
+      {
+      if (endElement()->type() != SEGMENT)
+            return -1;
+      return static_cast<Segment*>(endElement())->tick();
+      }
+

@@ -1324,8 +1324,8 @@ void HairpinView::setElement(Element* e)
       {
       Hairpin* hairpin = (Hairpin*)e;
       ShowElementBase::setElement(e);
-      hp.tick1->setValue(hairpin->tick());
-      hp.tick2->setValue(hairpin->tick2());
+//      hp.tick1->setValue(hairpin->tick());
+//      hp.tick2->setValue(hairpin->tick2());
       }
 
 //---------------------------------------------------------
@@ -1789,7 +1789,7 @@ void VoltaView::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       tlb.lineWidth->setValue(volta->lineWidth().val());
-      lb.tick2->setValue(volta->tick2());
+//      lb.tick2->setValue(volta->tick2());
       lb.anchor->setCurrentIndex(int(volta->anchor()));
       lb.diagonal->setChecked(volta->diagonal());
 

@@ -988,7 +988,7 @@ void ExportLy::hairpin(Hairpin* hp, int tick)
 	      out << "\\> ";
 	    if (art > 1 ) out << "\\!x ";
 	  }
-       if (hp->tick2() == tick) out << "\\! "; //end of hairpin
+//TODO-WS       if (hp->tick2() == tick) out << "\\! "; //end of hairpin
       }
 
 //---------------------------------------------------------
@@ -1194,6 +1194,7 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
 	  textspanswitch=true;
 	}// end if post: after note, start of textline
     }//end of start-of-textline
+#if 0 // TODO-WS
   else if  (sl->tick2() == tick)  //at end of textline.
     {
       if (pre)
@@ -1210,6 +1211,7 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
 	  //just relax for the moment.
 	}
     }// end if tick2()
+#endif
 }// end of textLine()
 
 
@@ -1908,7 +1910,7 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 		storeAnchor(anker);
 	      }
 	    //end of instruction:
-	    found=findMatchInPart(sl->tick2(), sl->staff(), score, strack, etrack, rehearsalm);
+//TODO-WS	    found=findMatchInPart(sl->tick2(), sl->staff(), score, strack, etrack, rehearsalm);
 	    if (found)
 	      {
 		anker.instruct=instruction;
@@ -2228,6 +2230,7 @@ void  ExportLy::findVolta()
 		  voltarray[i].voltart = startending;
 		  voltarray[i].barno=taktnr-1; //register as last element i previous measure
 		}
+#if 0 // TODO-WS
 	      if (v->tick2() == m->tick() + m->ticks()) // if it is at the end of measure
 		{
 		  i++;
@@ -2240,6 +2243,7 @@ void  ExportLy::findVolta()
 		  // 		    {// see comment above.
 		  // 		    }
 		}
+#endif
 	    }//if volta
 	}// for all global elements
       i=voltaCheckBar((Measure *) m, i);

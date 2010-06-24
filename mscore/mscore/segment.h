@@ -33,6 +33,7 @@ class Segment;
 class ChordRest;
 class Lyrics;
 class Painter;
+class Spanner;
 
 typedef QList<Lyrics*> LyricsList;
 typedef LyricsList::iterator iLyrics;
@@ -78,12 +79,15 @@ typedef QFlags<SegmentType> SegmentTypes;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SegmentTypes)
 
 class Segment : public Element {
-      Segment* _next;
+      Segment* _next;               // linked list of segments inside a measure
       Segment* _prev;
-      mutable bool empty;          // cached value
+
+      mutable bool empty;           // cached value
       int _tick;
 
-   private:
+      QList<Spanner*> _spannerFor;
+      QList<Spanner*> _spannerBack;
+
       QList<Element*> _elist;      ///< Element storage, size = staves * VOICES.
       QList<LyricsList> _lyrics;   ///< Lyrics storage, size  = staves.
 
@@ -109,6 +113,7 @@ class Segment : public Element {
       Segment* next1() const;
       Segment* next1(SegmentTypes) const;
       Segment* prev1() const;
+      Segment* prev1(SegmentTypes) const;
 
       Segment* nextCR(int track = -1) const;
 
@@ -144,6 +149,13 @@ class Segment : public Element {
       void setTick(int);
       int tick() const;
       int rtick() const { return _tick; } // tickposition relative to measure start
+
+      QList<Spanner*> spannerFor() const { return _spannerFor;  }
+      QList<Spanner*> spannerBack() const { return _spannerBack;       }
+      void addSpannerBack(Spanner* e)     { _spannerBack.append(e);    }
+      void removeSpannerBack(Spanner* e)  { _spannerBack.removeOne(e); }
+      void addSpannerFor(Spanner* e)      { _spannerFor.append(e);    }
+      void removeSpannerFor(Spanner* e)   { _spannerFor.removeOne(e); }
       };
 
 #endif

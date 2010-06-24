@@ -199,69 +199,42 @@ int Score::nextSeg(int tick, int track)
 //   nextSeg1
 //---------------------------------------------------------
 
-int Score::nextSeg1(int tick, int& track)
+Segment* nextSeg1(Segment* seg, int& track)
       {
-      Segment* seg   = tick2segment(tick);
-      if (seg == 0)
-            return -1;
       int staffIdx   = track / VOICES;
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
-      while ((seg = seg->next1())) {
-            if (seg->subtype() != SegChordRest)
-                  continue;
-            if (seg->element(track))
-                  break;
-            int t = startTrack;
-            for (; t < endTrack; ++t) {
-                  if (seg->element(t))
-                        break;
-                  }
-            if (t < endTrack) {
-                  track = t;
-                  break;
+      while ((seg = seg->next1(SegChordRest))) {
+            for (int t = startTrack; t < endTrack; ++t) {
+                  if (seg->element(t)) {
+                        track = t;
+printf("seg %s measure %p system %p\n",
+                           seg->subTypeName(), seg->measure(), seg->measure()->system());
+                        return seg;
+                        }
                   }
             }
-      if (seg == 0) {
-//            printf("no seg found\n");
-            return -1;
-            }
-      return seg->tick();
+      return 0;
       }
 
 //---------------------------------------------------------
 //   prevSeg1
 //---------------------------------------------------------
 
-int Score::prevSeg1(int tick, int& track)
+Segment* prevSeg1(Segment* seg, int& track)
       {
-      Segment* seg   = tick2segment(tick);
       int staffIdx   = track / VOICES;
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
-      while (seg) {
-            seg = seg->prev1();
-            if (seg == 0)
-                  break;
-            if (seg->subtype() != SegChordRest)
-                  continue;
-            if (seg->element(track))
-                  break;
-            int t = startTrack;
-            for (; t < endTrack; ++t) {
-                  if (seg->element(t))
-                        break;
-                  }
-            if (t < endTrack) {
-                  track = t;
-                  break;
+      while ((seg = seg->prev1(SegChordRest))) {
+            for (int t = startTrack; t < endTrack; ++t) {
+                  if (seg->element(t)) {
+                        track = t;
+                        return seg;
+                        }
                   }
             }
-      if (seg == 0) {
-//            printf("no seg found\n");
-            return -1;
-            }
-      return seg->tick();
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -555,12 +528,12 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, Interval inte
       {
       *rpitch   = pitch + interval.chromatic;
       *rtpc = transposeTpc(tpc, interval, useDoubleSharpsFlats);
-      
+
       }
 
 /*!
  * Transposes a pitch spelling given an interval.
- * 
+ *
  * This function transposes a pitch spelling using first
  * a diatonic transposition and then calculating any accidentals.
  * This insures that the note is changed by the correct number of

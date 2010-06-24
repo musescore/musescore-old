@@ -1928,6 +1928,7 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   // special case: - barline span > 1
                   //               - part (excerpt) staff starts after
                   //                 barline element
+                  bool needTick = segment->tick() != xml.curTick;
                   if ((segment->subtype() == SegEndBarLine)
                      && (e == 0)
                      && writeSystemElements
@@ -1943,17 +1944,38 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                                     }
                               }
                         }
-
+                  foreach(Spanner* e, segment->spannerFor()) {
+                        if (e->track() == track && !e->generated()) {
+                              if (needTick) {
+                                    xml.tag("tick", segment->tick());
+                                    xml.curTick = segment->tick();
+                                    needTick = false;
+                                    }
+                              e->setId(++xml.spannerId);
+                              e->write(xml);
+                              }
+                        }
+                  foreach(Spanner* e, segment->spannerBack()) {
+                        if (e->track() == track && !e->generated()) {
+                              if (needTick) {
+                                    xml.tag("tick", segment->tick());
+                                    xml.curTick = segment->tick();
+                                    needTick = false;
+                                    }
+                              xml.tagE(QString("endSpanner id=\"%1\"").arg(e->id()));
+                              }
+                        }
                   if (e && !e->generated()) {
+                        if (needTick) {
+                              xml.tag("tick", segment->tick());
+                              xml.curTick = segment->tick();
+                              needTick = false;
+                              }
                         if (e->isChordRest()) {
                               ChordRest* cr = static_cast<ChordRest*>(e);
                               Beam* beam = cr->beam();
                               if (beam && beam->elements().front() == cr)
                                     beam->write(xml);
-                              }
-                        if (segment->tick() != xml.curTick) {
-                              xml.tag("tick", segment->tick());
-                              xml.curTick = segment->tick();
                               }
                         if (segment->subtype() == SegEndBarLine && _multiMeasure > 0) {
                               xml.stag("BarLine");
@@ -1964,13 +1986,20 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                         else
                               e->write(xml);
                         }
-                  }
-            }
-      for (Segment* segment = first(); segment; segment = segment->next()) {
-            const LyricsList* ll = segment->lyricsList(staff);
-            for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-                  if (*i)
-                        (*i)->write(xml);
+                  if ((track % VOICES) == 0) {
+                        int staff = track / VOICES;
+                        const LyricsList* ll = segment->lyricsList(staff);
+                        for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
+                              if (*i) {
+                                    if (needTick) {
+                                          xml.tag("tick", segment->tick());
+                                          xml.curTick = segment->tick();
+                                          needTick = false;
+                                          }
+                                    (*i)->write(xml);
+                                    }
+                              }
+                        }
                   }
             }
       xml.etag();
@@ -2161,6 +2190,32 @@ void Measure::read(QDomElement e, int staffIdx)
                   Fraction nl(Fraction::fromTicks(score()->curTick - tick()));
                   if (nl > _len)
                         _len = nl;
+                  }
+            else if (tag == "endSpanner") {
+                  int id = e.attribute("id").toInt();
+                  static const SegmentTypes st = SegChordRest;
+                  for (Segment* s = score()->firstMeasure()->first(st); s; s = s->next1(st)) {
+                        foreach(Spanner* e, s->spannerFor()) {
+                              if (e->id() == id) {
+                                    Segment* s = getSegment(SegChordRest, score()->curTick);
+                                    e->setEndElement(s);
+                                    s->addSpannerBack(e);
+                                    break;
+                                    }
+                              }
+                        }
+                  }
+            else if (tag == "HairPin"
+               || tag == "Pedal"
+               || tag == "Ottava"
+               || tag == "Trill"
+               || tag == "TextLine"
+               || tag == "Volta") {
+                  Spanner* sp = static_cast<Spanner*>(Element::name2Element(tag, score()));
+                  sp->read(e);
+                  Segment* s = getSegment(SegChordRest, score()->curTick);
+                  sp->setStartElement(s);
+                  s->add(sp);
                   }
             else if (tag == "RepeatMeasure") {
                   RepeatMeasure* rm = new RepeatMeasure(score());
@@ -2461,6 +2516,8 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
                   else
                         func(data, e);
                   }
+            foreach(Spanner* e, s->spannerFor())
+                  e->scanElements(data,  func);
             }
       foreach(Tuplet* tuplet, _tuplets) {
             if (visible(tuplet->staffIdx()))
@@ -3207,6 +3264,7 @@ void Measure::layoutStage1()
                               }
                         if (!breakMMRest()) {
                               // TODO: this is slow!
+#if 0  // TODO
                               foreach(const Element* el, *score()->gel()) {
                                     if (el->type() == VOLTA) {
                                           const Volta* volta = static_cast<const Volta*>(el);
@@ -3216,6 +3274,7 @@ void Measure::layoutStage1()
                                                 }
                                           }
                                     }
+#endif
                               }
                         }
                   }

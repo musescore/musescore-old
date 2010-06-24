@@ -1219,9 +1219,8 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
             }
       cursor->setSegment(segment);
       int idx         = staffIdx == -1 ? 0 : staffIdx;
-      double systemY  = system->canvasPos().y();
       double x        = segment->canvasPos().x();
-      double y        = system->staffY(idx) + systemY;
+      double y        = system->staffY(idx);
       double _spatium = cursor->spatium();
       double d        = _spatium * .5;
 
@@ -1896,15 +1895,18 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case OTTAVA:
                   case TRILL:
                   case PEDAL:
-                  case DYNAMIC:
                   case HAIRPIN:
                   case TEXTLINE:
+                        {
                         dragElement->setScore(score());
-                        score()->cmdAdd1(dragElement, pos, dragOffset);
+                        Spanner* spanner = static_cast<Spanner*>(dragElement);
+                        score()->cmdAddSpanner(spanner, pos, dragOffset);
                         event->acceptProposedAction();
+                        }
                         break;
                   case SYMBOL:
                   case IMAGE:
+                  case DYNAMIC:
                         {
                         Element* el = elementAt(pos);
                         if (el == 0) {

@@ -636,7 +636,8 @@ int System::snapNote(int tick, const QPointF p, int staff) const
 //   firstMeasure
 //---------------------------------------------------------
 
-Measure* System::firstMeasure() const {
+Measure* System::firstMeasure() const
+      {
       for (MeasureBase* mb = ml.front(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
@@ -649,7 +650,8 @@ Measure* System::firstMeasure() const {
 //   lastMeasure
 //---------------------------------------------------------
 
-Measure* System::lastMeasure() const {
+Measure* System::lastMeasure() const
+      {
       for (MeasureBase* mb = ml.back(); mb; mb = mb->prev()) {
             if (mb->type() != MEASURE)
                   continue;
@@ -828,4 +830,16 @@ void System::scanElements(void* data, void (*func)(void*, Element*))
             }
       }
 
+//---------------------------------------------------------
+//   staffY
+//---------------------------------------------------------
+
+double System::staffY(int idx) const
+      {
+      if (_staves.size() == 0) {
+            printf("staffY: n = %d measures %d vbox %d\n", _staves.size(), ml.size(), _vbox);
+            return canvasPos().y();
+            }
+      return _staves[idx]->y() + canvasPos().y();
+      }
 

@@ -641,6 +641,7 @@ void Score::insertTime(int tick, int len)
                               s->setTick2(s->tick2() - len);
                               }
                         }
+#if 0
                   else if (el->isSLine()) {
                         SLine* s = static_cast<SLine*>(el);
                         if (s->tick() >= tick + len)
@@ -648,6 +649,7 @@ void Score::insertTime(int tick, int len)
                         if (s->tick2() >= tick + len)
                               s->setTick2(s->tick2() - len);
                         }
+#endif
                   }
             }
       else {
@@ -669,6 +671,7 @@ void Score::insertTime(int tick, int len)
                               s->setTick2(s->tick2() + len);
                               }
                         }
+#if 0
                   else if (el->isSLine()) {
                         SLine* s = static_cast<SLine*>(el);
                         if (s->tick() >= tick)
@@ -676,6 +679,7 @@ void Score::insertTime(int tick, int len)
                         if (s->tick2() >= tick)
                               s->setTick2(s->tick2() + len);
                         }
+#endif
                   }
             }
       addLayoutFlag(LAYOUT_FIX_TICKS);

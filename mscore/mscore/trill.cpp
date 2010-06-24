@@ -44,11 +44,14 @@ void TrillSegment::draw(QPainter& p, ScoreView* v) const
 
       symbols[trillSym].draw(p, mags, -b1.x(), 0);
       symbols[trillelementSym].draw(p, mags,  -b1.x() + b1.width(), b2.y() * .9, n);
-      if (trill()->accidental()) {
-            p.save();
-            p.translate(trill()->accidental()->canvasPos());
-            trill()->accidental()->draw(p, v);
-            p.restore();
+
+      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
+            if (trill()->accidental()) {
+                  p.save();
+                  p.translate(trill()->accidental()->canvasPos());
+                  trill()->accidental()->draw(p, v);
+                  p.restore();
+                  }
             }
       }
 

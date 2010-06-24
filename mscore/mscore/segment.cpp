@@ -33,6 +33,7 @@
 #include "lyrics.h"
 #include "repeat.h"
 #include "staff.h"
+#include "spanner.h"
 
 //---------------------------------------------------------
 //   subTypeName
@@ -219,6 +220,15 @@ Segment* Segment::prev1() const
             }
       }
 
+Segment* Segment::prev1(SegmentTypes types) const
+      {
+      for (Segment* s = prev1(); s; s = s->prev1()) {
+            if (s->subtype() & types)
+                  return s;
+            }
+      return 0;
+      }
+
 //---------------------------------------------------------
 //   nextCR
 //    get next ChordRest Segment
@@ -288,7 +298,7 @@ void Segment::add(Element* el)
 
       int track = el->track();
       if (track == -1) {
-            printf("element <%s> has invalid track\n", el->name());
+            printf("element <%s> has invalid track -1\n", el->name());
             abort();
             }
       int staffIdx = track / VOICES;
@@ -311,6 +321,22 @@ void Segment::add(Element* el)
                   measure()->setRepeatFlags(measure()->repeatFlags() | RepeatMeasureFlag);
                   _elist[track] = el;
                   empty = false;
+                  break;
+
+            case VOLTA:
+            case OTTAVA:
+            case TRILL:
+            case PEDAL:
+            case DYNAMIC:
+            case TEXTLINE:
+            case HAIRPIN:
+                  {
+                  Spanner* l = static_cast<Spanner*>(el);
+                  Element* e = l->endElement();
+                  if (e)
+                        static_cast<Segment*>(e)->addSpannerBack(l);
+                  _spannerFor.append(l);
+                  }
                   break;
 
             case CHORD:
@@ -387,6 +413,20 @@ void Segment::remove(Element* el)
             case REPEAT_MEASURE:
                   measure()->setRepeatFlags(measure()->repeatFlags() & ~RepeatMeasureFlag);
                   _elist[track] = 0;
+                  break;
+
+            case VOLTA:
+            case OTTAVA:
+            case TRILL:
+            case PEDAL:
+            case DYNAMIC:
+            case TEXTLINE:
+            case HAIRPIN:
+                  {
+                  Spanner* l = static_cast<Spanner*>(el);
+                  static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
+                  _spannerFor.removeOne(l);
+                  }
                   break;
 
             default:

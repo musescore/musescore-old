@@ -21,9 +21,9 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.15"
+#define MSC_VERSION     "1.16"
 
-static const int MSCVERSION = 115;
+static const int MSCVERSION = 116;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -38,6 +38,7 @@ static const int MSCVERSION = 115;
 //    1.13  Clefs: userOffset is not (mis)used for vertical layout position
 //    1.14  save user modified beam position as spatium value
 //    1.15  save timesig inline; Lyrics "endTick" replaced by "ticks"
+//    1.16  spanners (hairpin, trill etc.) are now inline and have no ticks anymore
 
 extern bool debugMode;
 extern bool enableExperimental;
