@@ -1,3 +1,5 @@
+25.jun (la)
+      - fix #6079: problem in multimeasure rests with 2 staves score
 24.jun (ws)
       - undo should now (mostly) work for changes made in edit mode
         for Spanner elements.
