@@ -210,7 +210,6 @@ class Event {
 class EventList : public QList<Event*> {
    public:
       EventList() : QList<Event*>() {}
-      EventList(const EventList& e);
       void insert(Event*);
       };
 
