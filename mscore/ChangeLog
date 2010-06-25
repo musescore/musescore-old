@@ -1,3 +1,5 @@
+25.jun (ws)
+      - fix #5903: Duration arithmentic with longa and brevis
 24.jun (ws)
       - fix #6138: crash on creating new score (after some steps)
       - fix #6076: crash on pla a new score after exiting a playing score
