@@ -1,8 +1,9 @@
 25.jun (ws)
+      - fix regression introduced in fixing #6138
       - fix #5903: Duration arithmentic with longa and brevis
 24.jun (ws)
       - fix #6138: crash on creating new score (after some steps)
-      - fix #6076: crash on pla a new score after exiting a playing score
+      - fix #6076: crash on play a new score after exiting a playing score
       - refuse to open incompatible score files (file version number > current
         versione number); this adds new translatable strings
         (la)

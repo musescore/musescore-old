@@ -269,15 +269,3 @@ void Event::write(MidiFile* mf) const
             }
       }
 
-//---------------------------------------------------------
-//   EventList
-//---------------------------------------------------------
-
-EventList::EventList(const EventList& el)
-   : QList<Event*>(el)
-      {
-      int n = el.size();
-      for (int i = 0; i < n; ++i)
-            append(el[i]);
-      }
-
