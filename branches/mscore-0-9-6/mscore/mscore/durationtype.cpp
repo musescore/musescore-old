@@ -346,9 +346,10 @@ Fraction Duration::fraction() const
             default:          n = 0;        break;
             }
       Fraction a(z, n);
+      Fraction b(a);
       for (int i = 0; i < _dots; ++i) {
-            n *= 2;
-            a += Fraction(1, n);
+            b /= 2;
+            a += b;
             }
       return a;
       }
@@ -374,19 +375,19 @@ Duration::Duration(const Fraction& _f)
             case 256:   _val = V_256TH; break;
             default:    _val = V_INVALID; break;
             }
-            
-      if(f.denominator() != 0) { 
+
+      if (f.denominator()) {
             int v = f.numerator() / f.denominator();
-            if(v == 4) {
+            if (v == 4) {
                   _val = V_LONG;
                   return;
-                  } 
+                  }
             else if (v == 2) {
                   _val = V_BREVE;
                   return;
                   }
-            }                  
-            
+            }
+
       if (f.numerator() != 1) {
             switch(f.numerator()) {
                   case 3:
@@ -503,6 +504,7 @@ void Duration::print() const
             case V_256TH:     s = "256th"; break;
             case V_ZERO:      s = "Zero"; break;
             case V_MEASURE:   s = "Measure"; break;
+            default:
             case V_INVALID:   s = "Invalid"; break;
             };
       printf("%s,dots=%d)", s, _dots);
