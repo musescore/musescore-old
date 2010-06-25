@@ -2818,11 +2818,11 @@ bool Measure::isEmpty() const
       const Segment* s = _first;
       for (int i = 0; i < _size; ++i) {
             if (s->subtype() == SegChordRest) {
-                  for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
-                        if (s->element(staffIdx) && s->element(staffIdx)->type() != REST)
+                  for (int track = 0; track < staves.size()*VOICES; ++track) {
+                        if (s->element(track) && s->element(track)->type() != REST)
                               return false;
                         }
-                  if (n >= 2)
+                  if (n > 0)
                         return false;
                   ++n;
                   }
