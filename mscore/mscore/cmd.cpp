@@ -2572,6 +2572,10 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               lyrics->setTrack(dstStaffIdx * VOICES);
                               int tick = lyrics->tick() - tickStart + dstTick;
                               lyrics->setTick(tick);
+                              if(lyrics->endTick() > 0) {
+                                    int endTick = lyrics->endTick() - tickStart + dstTick;
+                                    lyrics->setEndTick(endTick);
+                                    }                              
                               Segment* segment = tick2segment(tick);
                               if (segment) {
                                     lyrics->setParent(segment);

@@ -1,3 +1,6 @@
+26.jun (la)
+      - fix #6245: Underscores in Lyrics are not copied badly/not at all
+      - Page numbers are no more editable in the score since formatting does not stick
 25.jun (ws)
       - fix regression introduced in fixing #6138
       - fix #5903: Duration arithmentic with longa and brevis
