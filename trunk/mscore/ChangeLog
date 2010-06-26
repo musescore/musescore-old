@@ -1,6 +1,7 @@
 26.jun (la)
       - Page numbers are no more editable in the score since formatting does not stick
       - fix #5906: Tick value shown in Object Inspector limited to 999999
+      - fix #6253: High CPU usage when idle if reverb is on
 25.jun (la)
       - fix #6079: problem in multimeasure rests with 2 staves score
 24.jun (ws)
