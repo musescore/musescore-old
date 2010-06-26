@@ -2,6 +2,7 @@
       - fix #6245: Underscores in Lyrics are not copied badly/not at all
       - Page numbers are no more editable in the score since formatting does not stick
       - fix #5906: Tick value shown in Object Inspector limited to 999999
+      - fix #6253: High CPU usage when idle if reverb is on
 25.jun (ws)
       - fix regression introduced in fixing #6138
       - fix #5903: Duration arithmentic with longa and brevis

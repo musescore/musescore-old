@@ -73,6 +73,7 @@ Fluid::Fluid()
       fx_buf[1] = new float[FLUID_MAX_BUFSIZE];
       reverb    = 0;
       chorus    = 0;
+      silentBlocks = 0;
       }
 
 //---------------------------------------------------------
@@ -508,7 +509,7 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride)
 
       if (mutex.tryLock()) {
             if (activeVoices.isEmpty())
-                  --silentBlocks;
+                  silentBlocks = 0;
             else {
                   silentBlocks = SILENT_BLOCKS;
                   foreach (Voice* v, activeVoices)
