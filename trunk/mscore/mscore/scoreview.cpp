@@ -205,7 +205,7 @@ class SeekTransition : public QMouseEventTransition
                   }
             return false;
             }
-      virtual void onTransition(QEvent* e) {
+      virtual void onTransition(QEvent*) {
             seq->seek(cr->tick());
             }
    public:
@@ -932,9 +932,8 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       int pitch;
       Segment* seg;
       QPointF offset;
-      int tick = 0;
 
-      _score->pos2measure(startMove, &tick, &staffIdx, &pitch, &seg, &offset);
+      _score->pos2measure(startMove, &staffIdx, &pitch, &seg, &offset);
       if (staffIdx == -1) {
             printf("ScoreView::measurePopup: staffIdx == -1!\n");
             return;
@@ -1533,8 +1532,7 @@ bool ScoreView::dragTimeAnchorElement(const QPointF& pos)
       {
       int staffIdx;
       Segment* seg;
-      int tick;
-      MeasureBase* mb = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, 0);
+      MeasureBase* mb = _score->pos2measure(pos, &staffIdx, 0, &seg, 0);
       if (mb && mb->type() == MEASURE) {
             Measure* m = static_cast<Measure*>(mb);
             System* s  = m->system();
@@ -1913,8 +1911,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                         if (el == 0) {
                               int staffIdx;
                               Segment* seg;
-                              int tick;
-                              el = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, 0);
+                              el = _score->pos2measure(pos, &staffIdx, 0, &seg, 0);
                               if (el == 0) {
                                     printf("cannot drop here\n");
                                     delete dragElement;

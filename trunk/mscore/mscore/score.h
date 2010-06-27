@@ -429,7 +429,7 @@ class Score : public QObject {
 
       Part* part(int staffIdx);
 
-      MeasureBase* pos2measure(const QPointF&, int* tick, int* staffIdx, int* pitch,
+      MeasureBase* pos2measure(const QPointF&, int* staffIdx, int* pitch,
          Segment**, QPointF* offset) const;
 
       void undoAddElement(Element* element);
