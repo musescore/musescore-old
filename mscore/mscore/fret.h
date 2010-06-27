@@ -62,6 +62,7 @@ class FretDiagram : public Element {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual QLineF dragAnchor() const;
+      virtual QPointF canvasPos() const;
 
       int strings() const    { return _strings; }
       int frets()   const    { return _frets; }

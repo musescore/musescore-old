@@ -1497,25 +1497,19 @@ bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) con
 
 Element* Measure::drop(ScoreView*, const QPointF& p, const QPointF& dragOffset, Element* e)
       {
-      // determine staff
-      System* s = system();
-      int staffIdx = s->y2staff(p.y());
-      if (staffIdx == -1 || e->systemFlag())
+      int staffIdx;
+      Segment* seg;
+      _score->pos2measure(p, &staffIdx, 0, &seg, 0);
+
+      if (e->systemFlag())
             staffIdx = 0;
       QPointF mrp(p - canvasPos());
       double mrpx = mrp.x();
       Staff* staff = score()->staff(staffIdx);
-      Segment* seg;
-      for (seg = _first; seg; seg = seg->next()) {
-            if (seg->subtype() == SegChordRest) {
-                  if (mrpx < seg->pos().x())
-                        break;
-                  }
-            }
 
       switch(e->type()) {
             case MEASURE_LIST:
-                  printf("drop measureList or StaffList\n");
+printf("drop measureList or StaffList\n");
                   delete e;
                   break;
 
@@ -1527,8 +1521,8 @@ printf("drop staffList\n");
 
             case MARKER:
             case JUMP:
-                  e->setParent(this);
-                  e->setTrack(-1);        // this are system elements
+                  e->setParent(seg);
+                  e->setTrack(0);
                   score()->cmdAdd(e);
                   break;
 
@@ -1985,6 +1979,20 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                                     }
                               }
                         }
+                  if ((track % VOICES) == 0) {
+                        int staff = track / VOICES;
+                        const LyricsList* ll = segment->lyricsList(staff);
+                        for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
+                              if (*i) {
+                                    if (needTick) {
+                                          xml.tag("tick", segment->tick());
+                                          xml.curTick = segment->tick();
+                                          needTick = false;
+                                          }
+                                    (*i)->write(xml);
+                                    }
+                              }
+                        }
                   if (e && !e->generated()) {
                         if (needTick) {
                               xml.tag("tick", segment->tick());
@@ -2005,20 +2013,6 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                               }
                         else
                               e->write(xml);
-                        }
-                  if ((track % VOICES) == 0) {
-                        int staff = track / VOICES;
-                        const LyricsList* ll = segment->lyricsList(staff);
-                        for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-                              if (*i) {
-                                    if (needTick) {
-                                          xml.tag("tick", segment->tick());
-                                          xml.curTick = segment->tick();
-                                          needTick = false;
-                                          }
-                                    (*i)->write(xml);
-                                    }
-                              }
                         }
                   }
             }
@@ -2250,14 +2244,14 @@ void Measure::read(QDomElement e, int staffIdx)
                   Clef* clef = new Clef(score());
                   clef->setTrack(score()->curTrack);
                   clef->read(e);
-                  Segment* s = getSegment(clef, score()->curTick);
+                  Segment* s = getSegment(SegClef, score()->curTick);
                   s->add(clef);
                   }
             else if (tag == "TimeSig") {
                   TimeSig* ts = new TimeSig(score());
                   ts->setTrack(score()->curTrack);
                   ts->read(e);
-                  Segment* s = getSegment(ts, score()->curTick);
+                  Segment* s = getSegment(SegTimeSig, score()->curTick);
                   s->add(ts);
                   _timesig = ts->getSig();
                   }
@@ -2265,18 +2259,15 @@ void Measure::read(QDomElement e, int staffIdx)
                   KeySig* ks = new KeySig(score());
                   ks->setTrack(score()->curTrack);
                   ks->read(e);
-                  Segment* s = getSegment(ks, score()->curTick);
+                  Segment* s = getSegment(SegKeySig, score()->curTick);
                   s->add(ks);
                   }
             else if (tag == "Lyrics") {
                   Lyrics* lyrics = new Lyrics(score());
                   lyrics->setTrack(score()->curTrack);
                   lyrics->read(e);
-                  Segment* segment = tick2segment(score()->curTick);
-                  if (segment == 0)
-                        printf("no segment for lyrics at %d\n", score()->curTick);
-                  else
-                        segment->add(lyrics);
+                  Segment* s = getSegment(SegChordRest, score()->curTick);
+                  s->add(lyrics);
                   }
             else if (tag == "Text") {
                   Text* t = new Text(score());

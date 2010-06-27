@@ -819,7 +819,7 @@ void Score::fixTicks()
 
 */
 
-MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitch,
+MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
    Segment** seg, QPointF* offset) const
       {
       Measure* m = searchMeasure(p);
@@ -886,11 +886,9 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitc
                   }
             if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
                   *rst = i;
-                  if (tick)
-                        *tick = segment->tick();
                   if (pitch) {
                         Staff* s = _staves[i];
-                        int clef = s->clefList()->clef(*tick);
+                        int clef = s->clefList()->clef(segment->tick());
                         *pitch = y2pitch(pppp.y() - sstaff->bbox().y(), clef, s->spatium());
                         }
                   if (offset)

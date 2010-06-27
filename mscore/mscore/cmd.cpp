@@ -174,10 +174,10 @@ void Score::cmdAdd(Element* e)
 
 void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& dragOffset)
       {
-      int pitch, tick, staffIdx;
+      int pitch, staffIdx;
       QPointF offset;
       Segment* segment;
-      MeasureBase* mb = pos2measure(pos, &tick, &staffIdx, &pitch, &segment, &offset);
+      MeasureBase* mb = pos2measure(pos, &staffIdx, &pitch, &segment, &offset);
       if (mb == 0 || mb->type() != MEASURE) {
             printf("cmdAddSpanner: cannot put object here\n");
             delete spanner;

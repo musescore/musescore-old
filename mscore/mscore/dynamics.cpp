@@ -311,6 +311,38 @@ void Dynamic::propertyAction(ScoreView* viewer, const QString& s)
       }
 
 //---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF Dynamic::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = measure()->system();
+      double yp = y();
+      if (system)
+            yp += system->staffY(staffIdx());
+      return QPointF(xp, yp);
+      }
+
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Dynamic::dragAnchor() const
+      {
+      double xp = 0.0;
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      double yp = measure()->system()->staffY(staffIdx());
+      QPointF p(xp, yp);
+      return QLineF(p, canvasPos());
+      }
+
+//---------------------------------------------------------
 //   DynamicProperties
 //---------------------------------------------------------
 

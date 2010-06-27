@@ -89,12 +89,30 @@ FretDiagram::~FretDiagram()
       }
 
 //---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF FretDiagram::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = measure()->system();
+      double yp = y();
+      if (system)
+            yp += system->staffY(staffIdx());
+      return QPointF(xp, yp);
+      }
+
+//---------------------------------------------------------
 //   dragAnchor
 //---------------------------------------------------------
 
 QLineF FretDiagram::dragAnchor() const
       {
-      Measure* m     = static_cast<Measure*>(parent());
+      Measure* m     = measure();
       System* system = m->system();
       double yp      = system->staff(staffIdx())->y() + system->y();
       double xp      = m->tick2pos(segment()->tick()) + m->canvasPos().x();
@@ -254,12 +272,7 @@ void FretDiagram::layout()
             }
       setbbox(QRectF(x, y, w, h));
       Element::layout();      // alignment & offset
-      if (parent()) {
-            double yy = measure()->system()->staff(track() / VOICES)->y();
-            yy -= h + _spatium * 1.5;
-            double xx = -w * .5;
-            setPos(ipos() + QPointF(xx, yy));
-            }
+      setPos(ipos() + QPointF(-w * .5, - (h + _spatium * 1.5)));
       }
 
 //---------------------------------------------------------
@@ -269,12 +282,14 @@ void FretDiagram::layout()
 void FretDiagram::write(Xml& xml) const
       {
       xml.stag("FretDiagram");
+      Element::writeProperties(xml, 0);
+
       if (_strings != DEFAULT_STRINGS)
             xml.tag("strings", _strings);
       if (_frets != DEFAULT_FRETS)
             xml.tag("frets", _frets);
       if (_fretOffset)
-            xml.tag("offset", _fretOffset);
+            xml.tag("fretOffset", _fretOffset);
       for (int i = 0; i < _strings; ++i) {
             if ((_dots && _dots[i]) || (_marker && _marker[i]) || (_fingering && _fingering[i])) {
                   xml.stag(QString("string no=\"%1\"").arg(i));
@@ -311,7 +326,7 @@ void FretDiagram::read(QDomElement e)
                   _strings = val;
             else if (tag == "frets")
                   _frets = val;
-            else if (tag == "offset")
+            else if (tag == "fretOffset")
                   _fretOffset = val;
             else if (tag == "string") {
                   int no = e.attribute("no").toInt();

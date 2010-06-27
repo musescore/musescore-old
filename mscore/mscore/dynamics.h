@@ -24,6 +24,9 @@
 #include "text.h"
 #include "ui_dynamicproperties.h"
 
+class Measure;
+class Segment;
+
 //---------------------------------------------------------
 //   Dyn
 //---------------------------------------------------------
@@ -54,7 +57,8 @@ class Dynamic : public Text {
       Dynamic(const Dynamic&);
       virtual Dynamic* clone() const   { return new Dynamic(*this); }
       virtual ElementType type() const { return DYNAMIC; }
-      Measure* measure() const         { return (Measure*)parent(); }
+      Segment* segment() const         { return (Segment*)parent(); }
+      Measure* measure() const         { return (Measure*)parent()->parent(); }
 
       virtual void layout();
 
@@ -80,6 +84,9 @@ class Dynamic : public Text {
 
       virtual bool genPropertyMenu(QMenu* popup) const;
       virtual void propertyAction(ScoreView*, const QString& s);
+
+      virtual QPointF canvasPos() const;
+      virtual QLineF dragAnchor() const;
       };
 
 //---------------------------------------------------------
