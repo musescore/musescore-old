@@ -54,9 +54,10 @@ class FretDiagram : public Element {
       virtual void draw(QPainter&, ScoreView*) const;
       virtual FretDiagram* clone() const { return new FretDiagram(*this); }
       virtual bool isMovable() const     { return true; }
-      Measure* measure() const           { return (Measure*)parent(); }
+      Segment* segment() const           { return (Segment*)parent(); }
+      Measure* measure() const           { return (Measure*)parent()->parent(); }
 
-      virtual ElementType type() const { return FRET_DIAGRAM; }
+      virtual ElementType type() const   { return FRET_DIAGRAM; }
       virtual void layout();
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
@@ -80,8 +81,6 @@ class FretDiagram : public Element {
       char* marker()    { return _marker; }
       char* fingering() { return _fingering; }
       void init(Tablature*, Chord*);
-      void setTick(int v);
-      int tick() const;
       };
 
 //---------------------------------------------------------
@@ -102,6 +101,3 @@ class FretDiagramProperties : public QDialog, public Ui::FretDiagramProperties {
       };
 
 #endif
-
-
-

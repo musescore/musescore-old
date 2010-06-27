@@ -1229,6 +1229,7 @@ void Score::cmdRemoveTime(int tick, int len)
       {
       int etick = tick + len;
       foreach(Element* e, _gel) {
+#if 0 // TODO1
             if (e->type() == SLUR) {
                   Slur* slur = static_cast<Slur*>(e);
                   int stick = slur->startTick();
@@ -1238,7 +1239,6 @@ void Score::cmdRemoveTime(int tick, int len)
                         undoRemoveElement(e);
                         }
                   }
-#if 0
             else if (e->isSLine()) {
                   SLine* s = static_cast<SLine*>(e);
                   if (s->tick() >= tick && s->tick2() < etick)
@@ -1406,7 +1406,7 @@ void ScoreView::chordTab(bool back)
       {
       Harmony* cn      = (Harmony*)editObject;
       Measure* measure = (Measure*)cn->parent();
-      Segment* segment = measure->tick2segment(cn->tick());
+      Segment* segment = cn->segment();
       int track        = cn->track();
       if (segment == 0) {
             printf("chordTab: no segment\n");
@@ -1437,6 +1437,7 @@ void ScoreView::chordTab(bool back)
       cn              = 0;
       measure         = segment->measure();
       ElementList* el = measure->el();
+#if 0 // TODO1
       foreach(Element* e, *el) {
             if (e->type() == HARMONY) {
                   Harmony* h = static_cast<Harmony*>(e);
@@ -1446,10 +1447,10 @@ void ScoreView::chordTab(bool back)
                         }
                   }
             }
-
+#endif
       if (!cn) {
             cn = new Harmony(_score);
-            cn->setTick(segment->tick());
+//TODO1            cn->setTick(segment->tick());
             cn->setTrack(track);
             cn->setParent(measure);
             _score->undoAddElement(cn);

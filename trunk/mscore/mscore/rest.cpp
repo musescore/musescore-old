@@ -227,7 +227,7 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   s->setSystemFlag(false);
 //                  s->setSubtype(STAFF_TEXT);
                   s->setParent(measure());
-                  s->setTick(tick());
+//TODO1                  s->setTick(tick());
                   score()->undoAddElement(s);
                   score()->setLayoutAll(true);
                   }
@@ -250,7 +250,7 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   break;
             case HARMONY:
                   e->setParent(measure());
-                  static_cast<Harmony*>(e)->setTick(tick());
+//TODO1                  static_cast<Harmony*>(e)->setTick(tick());
                   e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);

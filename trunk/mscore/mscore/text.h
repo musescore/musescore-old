@@ -206,7 +206,6 @@ class TextB : public Element {
 
       virtual bool genPropertyMenu(QMenu* popup) const;
       virtual void propertyAction(ScoreView*, const QString& s);
-      void setTick(int v) { _tick = v; }
       };
 
 //---------------------------------------------------------
@@ -224,10 +223,6 @@ class Text : public TextB {
       ~Text();
       virtual Text* clone() const        { return new Text(*this); }
       virtual TextBase* textBase() const { return _tb; }
-
-//      virtual bool genPropertyMenu(QMenu* popup) const;
-//      virtual void propertyAction(ScoreView*, const QString& s);
-
       void setModified(bool v)           { _tb->setModified(v); }
       };
 

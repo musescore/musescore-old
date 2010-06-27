@@ -1046,9 +1046,9 @@ void ExportMusicXml::calcDivisions()
                               if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
                                     continue;
 
-                              if (tick != el->tick()) {
+                              if (tick != seg->tick()) {
 //                                    attr.doAttr(xml, false);
-                                    calcDivMoveToTick(el->tick());
+                                    calcDivMoveToTick(seg->tick());
                                     }
                               if (el->isChordRest()) {
                                     int l = static_cast<ChordRest*>(el)->ticks();
@@ -3501,8 +3501,9 @@ foreach(Element* el, *(score->gel())) {
                                     if (el && el->type() == CLEF) {
                                           // output only clef changes, not generated clefs
                                           // at line beginning
-                                          int ti = el->tick();
-                                          int ct = ((Clef*)el)->subtype();
+                                          Clef* cle = static_cast<Clef*>(el);
+                                          int ti = cle->segment()->tick();
+                                          int ct = cle->subtype();
                                           printf("exportxml: clef ti=%d ct=%d\n", ti, ct);
                                           ClefList* cl = score->staff(st/VOICES)->clefList();
                                           ciClefEvent ci = cl->find(ti);
@@ -3564,12 +3565,14 @@ foreach(Element* el, *(score->gel())) {
                               if (el->isChordRest()) {
                                     QList<Element*> list;
 
+#if 0 // TODO-WS
                                     foreach(Element* he, *m->el()) {
                                           if ((he->type() == HARMONY) && (he->staffIdx() == sstaff)
                                              && (he->tick() == el->tick())) {
                                                 list << he;
                                                 }
                                           }
+#endif
 
                                     qSort(list.begin(), list.end(), elementRighter);
 
@@ -3582,9 +3585,10 @@ foreach(Element* el, *(score->gel())) {
                               // generate backup or forward to the start time of the element
                               // but not for breath, which has the same start time as the
                               // previous note, while tick is already at the end of that note
-                              if (tick != el->tick()) {
+                              if (tick != seg->tick()) {
                                     attr.doAttr(xml, false);
-                                    if (el->type() != BREATH) moveToTick(el->tick());
+                                    if (el->type() != BREATH)
+                                          moveToTick(seg->tick());
                                     }
 /*
                               if (el->isChordRest()) {
@@ -3601,11 +3605,11 @@ foreach(Element* el, *(score->gel())) {
                                           // at line beginning
                                           // also ignore clefs at the start o a measure,
                                           // these have already been output
-                                          int ti = el->tick();
+                                          int ti = seg->tick();
                                           int ct = ((Clef*)el)->subtype();
                                           ClefList* cl = score->staff(st/VOICES)->clefList();
                                           ciClefEvent ci = cl->find(ti);
-                                          if (ci != cl->end() && el->tick() != m->tick()) {
+                                          if (ci != cl->end() && seg->tick() != m->tick()) {
                                                 clef(sstaff, ct);
                                                 }
                                           }

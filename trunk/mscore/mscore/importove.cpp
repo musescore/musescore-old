@@ -730,7 +730,6 @@ void OveToMScore::convertSignatures(){
 		if(measure){
 			for(int staffIdx = 0; staffIdx < score_->nstaves(); ++staffIdx) {
 				TimeSig* ts = new TimeSig(score_);
-				ts->setTick(tt.tick_);
 				ts->setSig(tt.denominator_, tt.numerator_);
 				ts->setTrack(staffIdx * VOICES);
 
@@ -743,7 +742,7 @@ void OveToMScore::convertSignatures(){
 				}
 				ts->setSubtype(subtype);*/
 
-				Segment* seg = measure->getSegment(ts, ts->tick());
+				Segment* seg = measure->getSegment(ts, tt.tick_);
 				seg->add(ts);
 			}
 		}
@@ -1219,7 +1218,7 @@ void OveToMScore::convertMeasureMisc(Measure* measure, int part, int staff, int 
 			Text* text = new Text(score_);
 			text->setSubtype(TEXT_REHEARSAL_MARK);
 			text->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
-			text->setTick(mtt_->getTick(measure->no(), 0));
+//TODO-WS			text->setTick(mtt_->getTick(measure->no(), 0));
             text->setText(toQString(textPtr->getText()));
             text->setAbove(true);
             text->setTrack(track);
@@ -1241,7 +1240,7 @@ void OveToMScore::convertMeasureMisc(Measure* measure, int part, int staff, int 
         }
 
         t->setTempo(tpo);
-        t->setTick(absTick);
+//TODO-WS        t->setTick(absTick);
         t->setText(toQString(tempoPtr->getRightText()));
         t->setAbove(true);
         t->setTrack(track);
@@ -1800,7 +1799,6 @@ void OveToMScore::convertLyrics(Measure* measure, int part, int staff, int track
 
 		Lyrics* lyric = new Lyrics(score_);
 		lyric->setNo(lyricPtr->getVerse());
-		lyric->setTick(tick);
 		lyric->setText(toQString(lyricPtr->getLyric()));
 		lyric->setTrack(track);
 	    Segment* segment = measure->getSegment(lyric, tick);
@@ -1898,7 +1896,7 @@ void OveToMScore::convertHarmonys(Measure* measure, int part, int staff, int tra
 
 		Harmony* harmony = new Harmony(score_);
 
-		harmony->setTick(absTick);
+//TODO-WS		harmony->setTick(absTick);
 		harmony->setTrack(track);
 		harmony->setRootTpc(pitch2tpc(harmonyPtr->getRoot()));
 		if(harmonyPtr->getBass() != OVE::INVALID_NOTE && harmonyPtr->getBass() != harmonyPtr->getRoot()){
@@ -2182,7 +2180,7 @@ void OveToMScore::convertDynamics(Measure* measure, int part, int staff, int tra
 
 		dynamic->setSubtype(OveDynamics_To_Dynamics(dynamicPtr->getDynamicsType()));
 		dynamic->setTrack(track);
-		dynamic->setTick(absTick);
+//TODO-WS		dynamic->setTick(absTick);
 
         measure->add(dynamic);
 	}
@@ -2204,7 +2202,7 @@ void OveToMScore::convertExpressions(Measure* measure, int part, int staff, int 
 
 		t->setText(toQString(expressionPtr->getText()));
 		t->setTrack(track);
-		t->setTick(absTick);
+//TODO-WS		t->setTick(absTick);
 
         measure->add(t);
 	}

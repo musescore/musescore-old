@@ -80,8 +80,6 @@ class Dynamic : public Text {
 
       virtual bool genPropertyMenu(QMenu* popup) const;
       virtual void propertyAction(ScoreView*, const QString& s);
-      void setTick(int val);
-      int tick() const;
       };
 
 //---------------------------------------------------------

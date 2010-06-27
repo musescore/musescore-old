@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>523</width>
-    <height>276</height>
+    <width>535</width>
+    <height>297</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -170,20 +170,20 @@
       </item>
       <item row="3" column="0" colspan="3">
        <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
            <string notr="true">durationType:</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="1">
          <widget class="QSpinBox" name="durationType"/>
         </item>
-        <item row="0" column="2">
+        <item row="1" column="2">
          <widget class="QLabel" name="label_3">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -196,10 +196,10 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="3" colspan="2">
+        <item row="1" column="3" colspan="2">
          <widget class="QSpinBox" name="dots">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -212,7 +212,57 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="6">
+        <item row="2" column="5">
+         <widget class="QCheckBox" name="upFlag">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string notr="true">Up</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3" colspan="2">
+         <widget class="QSpinBox" name="move"/>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>StaffMove:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>duration:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="duration"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>tick:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="tick">
+          <property name="maximum">
+           <number>2000000000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
          <widget class="QLabel" name="label_5">
           <property name="text">
            <string notr="true">ticks:</string>
@@ -222,14 +272,14 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="7">
+        <item row="0" column="3" colspan="2">
          <widget class="QSpinBox" name="ticks">
           <property name="maximum">
            <number>9999999</number>
           </property>
          </widget>
         </item>
-        <item row="1" column="6">
+        <item row="1" column="5">
          <widget class="QLabel" name="label">
           <property name="toolTip">
            <string notr="true"/>
@@ -241,36 +291,6 @@
         </item>
         <item row="1" column="7">
          <widget class="QComboBox" name="beamMode"/>
-        </item>
-        <item row="1" column="5">
-         <widget class="QCheckBox" name="upFlag">
-          <property name="toolTip">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string notr="true">Up</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3" colspan="2">
-         <widget class="QSpinBox" name="move"/>
-        </item>
-        <item row="1" column="2">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>StaffMove:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>duration</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="duration"/>
         </item>
        </layout>
       </item>

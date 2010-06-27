@@ -87,7 +87,6 @@ class TimeSig : public Element {
             }
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
-      void setTick(int v) { _tick = v; }
       };
 
 #endif

@@ -87,6 +87,7 @@ class Segment : public Element {
 
       QList<Spanner*> _spannerFor;
       QList<Spanner*> _spannerBack;
+      QList<Element*> _annotations;
 
       QList<Element*> _elist;      ///< Element storage, size = staves * VOICES.
       QList<LyricsList> _lyrics;   ///< Lyrics storage, size  = staves.
@@ -140,7 +141,6 @@ class Segment : public Element {
       void sortStaves(QList<int>& dst);
       const char* subTypeName() const;
       static SegmentType segmentType(int type);
-      void setTime(int tick);
       void removeGeneratedElements();
       bool isEmpty() const               { return empty; }
       void fixStaffIdx();
@@ -156,6 +156,8 @@ class Segment : public Element {
       void removeSpannerBack(Spanner* e)  { _spannerBack.removeOne(e); }
       void addSpannerFor(Spanner* e)      { _spannerFor.append(e);    }
       void removeSpannerFor(Spanner* e)   { _spannerFor.removeOne(e); }
+
+      const QList<Element*>& annotations() const  { return _annotations;  }
       };
 
 #endif

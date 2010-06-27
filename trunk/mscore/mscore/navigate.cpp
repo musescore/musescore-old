@@ -100,7 +100,7 @@ Note* Score::upAlt(Element* element)
             if (_is.track() <= 0)
                   return 0;
             _is.setTrack(_is.track() - 1);
-            re = searchNote(element->tick(), _is.track());
+            re = searchNote(static_cast<Rest*>(element)->tick(), _is.track());
             }
       else if (element->type() == NOTE) {
             // find segment
@@ -153,7 +153,7 @@ Note* Score::downAlt(Element* element)
             if ((_is.track() + 1) >= staves * VOICES)
                   return 0;
             _is.setTrack(_is.track() + 1);
-            re = searchNote(element->tick(), _is.track());
+            re = searchNote(static_cast<Rest*>(element)->tick(), _is.track());
             }
       else if (element->type() == NOTE) {
             // find segment

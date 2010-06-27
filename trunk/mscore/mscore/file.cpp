@@ -680,7 +680,6 @@ void MuseScore::newFile()
                         Staff* staff = score->staff(staffIdx);
                         if (!staff->useTablature()) {
                               TimeSig* ts = new TimeSig(score, timesigN, timesigZ);
-                              ts->setTick(0);
                               ts->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(ts, 0);
                               s->add(ts);
@@ -1191,8 +1190,9 @@ bool Score::loadMsc(QString name)
 
 bool Score::read(QDomElement e)
       {
-      spanner.clear();
       _fileDivision = 384;   // for compatibility with old mscore files
+
+      QDomElement dScore;
 
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "museScore")
@@ -1208,8 +1208,8 @@ bool Score::read(QDomElement e)
                      );
                   return false;
                   }
-
-            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+            dScore = e.firstChildElement();
+            for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
                   curTrack = -1;
                   QString tag(ee.tagName());
                   QString val(ee.text());
@@ -1363,22 +1363,16 @@ bool Score::read(QDomElement e)
                   else if (tag == "Slur") {
                         Slur* slur = new Slur(this);
                         slur->read(ee);
-                        slur->setTrack(-1);     // for backward compatibility
-                        // slur->setTick(-1);
-                        add(slur);
+                        _gel.append(slur);
                         }
-                  else if ((_mscVersion < 116) &&
+                  else if ((_mscVersion < 116) &&     // skip and process in II. pass
                      ((tag == "HairPin")
                       || (tag == "Ottava")
                       || (tag == "TextLine")
                       || (tag == "Volta")
                       || (tag == "Trill")
                       || (tag == "Pedal"))) {
-                        Spanner* s = static_cast<Spanner*>(Element::name2Element(tag, this));
-                        s->setTrack(0);
-                        s->read(ee);
-                        s->__setTick1(curTick);
-                        spanner.append(s);
+                        ;
                         }
                   else if (tag == "Excerpt") {
                         Excerpt* e = new Excerpt(this);
@@ -1439,21 +1433,54 @@ bool Score::read(QDomElement e)
                   }
             }
       if (_mscVersion < 116) {
-            foreach(Spanner* s, spanner) {
-                  Segment* s1 = tick2segment(s->__tick1());
-                  Segment* s2 = tick2segment(s->__tick2());
-
-                  if (s1 == 0 || s2 == 0) {
-                        printf("cannot place %s at tick %d - %d\n",
-                           s->name(), s->__tick1(), s->__tick2());
-                        continue;
+            //
+            // scan spanner in a II. pass
+            //
+            for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  QString tag(ee.tagName());
+                  QString val(ee.text());
+                  if (   (tag == "HairPin")
+                      || (tag == "Ottava")
+                      || (tag == "TextLine")
+                      || (tag == "Volta")
+                      || (tag == "Trill")
+                      || (tag == "Pedal")) {
+                        Spanner* s = static_cast<Spanner*>(Element::name2Element(tag, this));
+                        s->setTrack(0);
+                        s->read(ee);
+                        Segment* s1 = tick2segment(curTick);
+                        Segment* s2 = tick2segment(s->__tick2());
+                        if (s1 == 0 || s2 == 0) {
+                              printf("cannot place %s at tick %d - %d\n",
+                                 s->name(), s->__tick1(), s->__tick2());
+                              }
+                        else {
+                              s->setStartElement(s1);
+                              s->setEndElement(s2);
+                              s1->add(s);
+                              }
                         }
-                  s->setStartElement(s1);
-                  s->setEndElement(s2);
-                  s1->add(s);
                   }
             }
 
+      // check slurs
+      foreach(Element* e, _gel) {
+            if (e->type() != SLUR)
+                  continue;
+            Slur* slur = static_cast<Slur*>(e);
+            if (!slur->startElement() || !slur->endElement()) {
+printf("incomplete Slur\n");
+                  if (slur->startElement()) {
+                        printf("  front %d\n", static_cast<ChordRest*>(slur->startElement())->tick());
+                        static_cast<ChordRest*>(slur->startElement())->removeSlurFor(slur);
+                        }
+                  if (slur->endElement()) {
+                        printf("  back %d\n", static_cast<ChordRest*>(slur->endElement())->tick());
+                        static_cast<ChordRest*>(slur->endElement())->removeSlurBack(slur);
+                        }
+                  }
+            _gel.removeOne(slur);
+            }
       connectTies();
       setInstrumentNames();
 
@@ -1488,6 +1515,7 @@ bool Score::read(QDomElement e)
 
 void Score::connectSlurs()
       {
+#if 0 //TODO1
       foreach (Element* e, _gel) {
             if (e->type() != SLUR)
                   continue;
@@ -1513,6 +1541,7 @@ void Score::connectSlurs()
                         printf("connectSlurs: n2 is %s\n", n2->name());
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------

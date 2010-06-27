@@ -51,6 +51,7 @@ class Xml : public AL::Xml {
       int tupletId;
       int beamId;
       int spannerId;
+      int slurId;
 
       Xml(QIODevice* dev);
       Xml();

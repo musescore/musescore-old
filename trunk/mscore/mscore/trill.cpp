@@ -141,8 +141,11 @@ void Trill::layout()
       {
       SLine::layout();
       double _spatium = spatium();
-      qreal y = -2.0 * _spatium;
+
+      double y = segment() ? segment()->measure()->system()->staff(staffIdx())->y() : 0.0;
+      y -= 2.0 * _spatium;
       setPos(ipos().x(), y);
+
       if (_accidental) {
             _accidental->setMag(.6);
             _accidental->layout();
@@ -183,7 +186,6 @@ void Trill::read(QDomElement e)
       foreach(LineSegment* seg, segments)
             delete seg;
       segments.clear();
-      setTrack(0);  // set default track
       setId(e.attribute("id", "-1").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());

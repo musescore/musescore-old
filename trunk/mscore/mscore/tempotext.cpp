@@ -43,10 +43,6 @@ TempoText::TempoText(Score* s)
 void TempoText::write(Xml& xml) const
       {
       xml.stag("Tempo");
-      if (tick() != xml.curTick) {
-            xml.tag("tick", tick());
-            xml.curTick = tick();
-            }
       xml.tag("tempo", _tempo);
       Text::writeProperties(xml);
       xml.etag();
@@ -64,8 +60,6 @@ void TempoText::read(QDomElement e)
                   _tempo = e.text().toDouble();
                   //Don't need to add to tempo since tempo map is read at the beginning of the file.
                   }
-            else if (tag == "tick")
-                  setTick(e.text().toInt());
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -96,24 +90,6 @@ void TempoText::propertyAction(ScoreView* viewer, const QString& s)
             }
       else
             Element::propertyAction(viewer, s);
-      }
-
-//---------------------------------------------------------
-//   setTick
-//---------------------------------------------------------
-
-void TempoText::setTick(int val)
-      {
-      _tick = val - (measure() ? measure()->tick() : 0);
-      }
-
-//---------------------------------------------------------
-//   tick
-//---------------------------------------------------------
-
-int TempoText::tick() const
-      {
-      return _tick + (measure() ? measure()->tick() : 0);
       }
 
 //---------------------------------------------------------

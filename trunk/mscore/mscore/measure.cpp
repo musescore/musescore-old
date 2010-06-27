@@ -613,6 +613,7 @@ void Measure::layout2()
       if (!ns.isEmpty()) {
             if (_noText == 0) {
                   _noText = new Text(score());
+                  _noText->setGenerated(true);
                   _noText->setSubtype(TEXT_MEASURE_NUMBER);
                   _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
                   _noText->setParent(this);
@@ -642,6 +643,19 @@ void Measure::layout2()
                               }
                         else if (el->type() == BAR_LINE)
                               el->layout();
+                        }
+                  }
+            }
+
+      //
+      // slur layout needs articulation layout first
+      //
+      for (Segment* s = first(); s; s = s->next()) {
+            for (int track = 0; track < tracks; ++track) {
+                  Element* el = s->element(track);
+                  if (el && el->isChordRest()) {
+                        foreach(Slur* slur, static_cast<ChordRest*>(el)->slurFor())
+                              slur->layout();
                         }
                   }
             }
@@ -907,7 +921,7 @@ void Measure::add(Element* el)
       _dirty = true;
 
       el->setParent(this);
-      int t = el->tick();
+//TODO1      int t = el->tick();
       ElementType type = el->type();
 
 
@@ -921,6 +935,7 @@ void Measure::add(Element* el)
             case SEGMENT:
                   {
                   Segment* seg = static_cast<Segment*>(el);
+                  int t = seg->tick();
                   int st = el->subtype();
                   Segment* s;
                   if (seg->prev() || seg->next()) {
@@ -1029,17 +1044,6 @@ void Measure::add(Element* el)
                   _el.append(el);
                   break;
 
-            case IMAGE:
-                  static_cast<Image*>(el)->reference();
-
-            case DYNAMIC:
-            case SYMBOL:
-            case TEXT:
-            case TEMPO_TEXT:
-            case HARMONY:
-            case FRET_DIAGRAM:
-            case MARKER:
-            case STAFF_TEXT:
             case HBOX:
                   if (type == TEXT && el->subtype() == TEXT_MEASURE_NUMBER) {
                         _noText = static_cast<Text*>(el);
@@ -1054,6 +1058,7 @@ void Measure::add(Element* el)
 
             default:
                   printf("Measure::add(%s) not impl.\n", el->name());
+                  abort();
                   break;
             }
       }
@@ -1110,20 +1115,7 @@ void Measure::remove(Element* el)
 
             case JUMP:
                   _repeatFlags &= ~RepeatJump;
-                  goto marker;
 
-            case IMAGE:
-                  static_cast<Image*>(el)->dereference();
-
-marker:
-            case MARKER:
-            case DYNAMIC:
-            case TEMPO_TEXT:
-            case TEXT:
-            case SYMBOL:
-            case HARMONY:
-            case FRET_DIAGRAM:
-            case STAFF_TEXT:
             case HBOX:
                   if (el->type() == TEXT && el->subtype() == TEXT_MEASURE_NUMBER)
                         break;
@@ -1508,19 +1500,16 @@ Element* Measure::drop(ScoreView*, const QPointF& p, const QPointF& dragOffset, 
       // determine staff
       System* s = system();
       int staffIdx = s->y2staff(p.y());
-      if (staffIdx == -1 || e->systemFlag()) {
+      if (staffIdx == -1 || e->systemFlag())
             staffIdx = 0;
-            }
       QPointF mrp(p - canvasPos());
       double mrpx = mrp.x();
       Staff* staff = score()->staff(staffIdx);
-      int t = tick();
-      for (Segment* seg = _first; seg; seg = seg->next()) {
+      Segment* seg;
+      for (seg = _first; seg; seg = seg->next()) {
             if (seg->subtype() == SegChordRest) {
-                  if (mrpx < seg->pos().x()) {
-                        t = seg->tick();
+                  if (mrpx < seg->pos().x())
                         break;
-                        }
                   }
             }
 
@@ -1543,8 +1532,15 @@ printf("drop staffList\n");
                   score()->cmdAdd(e);
                   break;
 
+            case DYNAMIC:
+            case FRET_DIAGRAM:
+                  e->setParent(seg);
+                  e->setTrack(staffIdx * VOICES);
+                  score()->cmdAdd(e);
+                  break;
+
             case SYMBOL:
-                  e->setParent(this);
+                  e->setParent(seg);
                   e->setTrack(staffIdx * VOICES);
                   e->layout();
                   {
@@ -1555,17 +1551,14 @@ printf("drop staffList\n");
                   break;
 
             case BRACKET:
-                  {
-                  Bracket* b = static_cast<Bracket*>(e);
-                  b->setTrack(staffIdx * VOICES);
-                  b->setParent(system());
-                  b->setLevel(-1);  // add bracket
-                  score()->cmdAdd(b);
-                  }
+                  e->setTrack(staffIdx * VOICES);
+                  e->setParent(system());
+                  static_cast<Bracket*>(e)->setLevel(-1);  // add bracket
+                  score()->cmdAdd(e);
                   break;
 
             case CLEF:
-                  staff->changeClef(t, e->subtype());
+                  staff->changeClef(seg->tick(), e->subtype());
                   delete e;
                   break;
 
@@ -1899,8 +1892,8 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   xml.tagE("breakMultiMeasureRest");
             if (_userStretch != 1.0)
                   xml.tag("stretch", _userStretch);
-            if (_noText)
-                  _noText->write(xml);
+//            if (_noText)
+//                  _noText->write(xml);
             if (_noOffset)
                   xml.tag("noOffset", _noOffset);
             }
@@ -1944,6 +1937,16 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                                     }
                               }
                         }
+                  foreach(Element* e, segment->annotations()) {
+                        if (e->track() != track || e->generated())
+                              continue;
+                        if (needTick) {
+                              xml.tag("tick", segment->tick());
+                              xml.curTick = segment->tick();
+                              needTick = false;
+                              }
+                        e->write(xml);
+                        }
                   foreach(Spanner* e, segment->spannerFor()) {
                         if (e->track() == track && !e->generated()) {
                               if (needTick) {
@@ -1963,6 +1966,23 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                                     needTick = false;
                                     }
                               xml.tagE(QString("endSpanner id=\"%1\"").arg(e->id()));
+                              }
+                        }
+                  //
+                  // write new slurs for all voices
+                  // (this allows for slurs crossing voices)
+                  //
+                  if (((track % VOICES) == 0)
+                     && (segment->subtype() & (SegChordRest | SegGrace))) {
+                        for (int i = 0; i < VOICES; ++i) {
+                              Element* e = segment->element(track + i);
+                              if (e) {
+                                    ChordRest* cr = static_cast<ChordRest*>(e);
+                                    foreach(Slur* slur, cr->slurFor()) {
+                                          slur->setId(xml.slurId++);
+                                          slur->write(xml);
+                                          }
+                                    }
                               }
                         }
                   if (e && !e->generated()) {
@@ -2024,8 +2044,8 @@ void Measure::write(Xml& xml) const
             xml.tagE("breakMultiMeasureRest");
       xml.tag("stretch", _userStretch);
 
-      if (_noText)
-            _noText->write(xml);
+//      if (_noText)
+//            _noText->write(xml);
 
       for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
             xml.stag("Staff");
@@ -2212,7 +2232,7 @@ void Measure::read(QDomElement e, int staffIdx)
                || tag == "TextLine"
                || tag == "Volta") {
                   Spanner* sp = static_cast<Spanner*>(Element::name2Element(tag, score()));
-                  sp->setTrack(score()->curTrack);
+                  sp->setTrack(staffIdx * VOICES);
                   sp->read(e);
                   Segment* s = getSegment(SegChordRest, score()->curTick);
                   sp->setStartElement(s);
@@ -2248,14 +2268,6 @@ void Measure::read(QDomElement e, int staffIdx)
                   Segment* s = getSegment(ks, score()->curTick);
                   s->add(ks);
                   }
-            else if (tag == "Dynamic") {
-                  Dynamic* dyn = new Dynamic(score());
-                  dyn->setTrack(score()->curTrack);
-                  dyn->read(e);
-                  dyn->resetType(); // for backward compatibility
-                  add(dyn);
-                  dyn->setTick(score()->curTick);
-                  }
             else if (tag == "Lyrics") {
                   Lyrics* lyrics = new Lyrics(score());
                   lyrics->setTrack(score()->curTrack);
@@ -2269,114 +2281,42 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "Text") {
                   Text* t = new Text(score());
                   t->setTrack(score()->curTrack);
-                  t->setTick(score()->curTick);
                   t->read(e);
 
-                  int st = t->subtype();
-                  if (st == TEXT_TITLE || st == TEXT_SUBTITLE || st == TEXT_COMPOSER
-                     || st == TEXT_POET) {
-                        if (st == TEXT_TITLE)
-                              t->setTextStyle(TEXT_STYLE_TITLE);
-                        else if (st == TEXT_SUBTITLE)
-                              t->setTextStyle(TEXT_STYLE_SUBTITLE);
-                        else if (st == TEXT_COMPOSER)
-                              t->setTextStyle(TEXT_STYLE_COMPOSER);
-                        else if (st == TEXT_POET)
-                              t->setTextStyle(TEXT_STYLE_POET);
-                        // for backward compatibility:
-                        MeasureBase* measure = score()->first();
-                        if (measure->type() != VBOX) {
-                              measure = new VBox(score());
-                              measure->setTick(0);
-                              measure->setNext(score()->first());
-                              score()->add(measure);
-                              }
-                        measure->add(t);
-                        }
-                  else {
-                        if (st == TEXT_MEASURE_NUMBER) {
-                              t->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
-                              t->setTick(-1);   // layout to start of measure
-                              t->setTrack(-1);
-                              }
-                        add(t);
+                  // TODO: measure numbers are generated and should no be
+                  //       in msc file (discard?)
+
+                  if (t->subtype() == TEXT_MEASURE_NUMBER) {
+                        t->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
+                        t->setTrack(-1);
+                        _noText = t;
                         }
                   }
-            else if (tag == "Harmony") {
-                  Harmony* el = new Harmony(score());
+
+            //----------------------------------------------------
+            // Annotation
+
+            else if (tag == "Dynamic") {
+                  Dynamic* dyn = new Dynamic(score());
+                  dyn->setTrack(score()->curTrack);
+                  dyn->read(e);
+                  dyn->resetType(); // for backward compatibility
+                  Segment* s = getSegment(SegChordRest, score()->curTick);
+                  s->add(dyn);
+                  }
+            else if (tag == "Harmony"
+               || tag == "FretDiagram"
+               || tag == "Symbol"
+               || tag == "Tempo"
+               || tag == "StaffText"
+               || tag == "Marker"
+               || tag == "Jump"
+               ) {
+                  Element* el = Element::name2Element(tag, score());
                   el->setTrack(score()->curTrack);
                   el->read(e);
-                  el->setTick(score()->curTick);
-                  add(el);
-                  }
-            else if (tag == "FretDiagram") {
-                  FretDiagram* el = new FretDiagram(score());
-                  el->setTrack(score()->curTrack);
-                  el->read(e);
-                  el->setTick(score()->curTick);
-                  add(el);
-                  }
-            else if (tag == "Symbol") {
-                  Symbol* el = new Symbol(score());
-                  el->setTrack(score()->curTrack);
-                  el->read(e);
-                  el->setTick(score()->curTick);
-                  add(el);
-                  }
-            else if (tag == "Tempo") {
-                  TempoText* t = new TempoText(score());
-                  t->setParent(this);
-                  t->setTrack(-1);
-                  t->read(e);
-                  add(t);
-                  t->setTick(score()->curTick);
-                  }
-            else if (tag == "StaffText") {
-                  StaffText* t = new StaffText(score());
-                  t->setTrack(score()->curTrack);
-                  t->read(e);
-                  t->setTick(score()->curTick);
-                  add(t);
-                  }
-            else if (tag == "stretch")
-                  _userStretch = val.toDouble();
-            else if (tag == "LayoutBreak") {
-                  LayoutBreak* lb = new LayoutBreak(score());
-                  lb->read(e);
-                  add(lb);
-                  }
-            else if (tag == "noOffset")
-                  _noOffset = val.toInt();
-            else if (tag == "irregular")
-                  _irregular = true;
-            else if (tag == "breakMultiMeasureRest")
-                  _breakMultiMeasureRest = true;
-            else if (tag == "Tuplet") {
-                  Tuplet* tuplet = new Tuplet(score());
-                  tuplet->setTrack(score()->curTrack);
-                  tuplet->setTick(score()->curTick);
-                  tuplet->setTrack(score()->curTrack);
-                  tuplet->setParent(this);
-                  tuplet->read(e, _tuplets);
-                  add(tuplet);
-                  }
-            else if (tag == "Marker") {
-                  Marker* marker = new Marker(score());
-                  marker->setTrack(score()->curTrack);
-                  marker->read(e);
-                  add(marker);
-                  }
-            else if (tag == "Jump") {
-                  Jump* jump = new Jump(score());
-                  jump->setTrack(score()->curTrack);
-                  jump->read(e);
-                  add(jump);
-                  }
-            else if (tag == "startRepeat")
-                  _repeatFlags |= RepeatStart;
-            else if (tag == "endRepeat") {
-                  _repeatCount = val.toInt();
-                  _repeatFlags |= RepeatEnd;
+                  Segment* s = getSegment(SegChordRest, score()->curTick);
+                  s->add(el);
                   }
             else if (tag == "Image") {
                   // look ahead for image type
@@ -2400,8 +2340,39 @@ void Measure::read(QDomElement e, int staffIdx)
                   if (image) {
                         image->setTrack(score()->curTrack);
                         image->read(e);
-                        add(image);
+                        Segment* s = getSegment(SegChordRest, score()->curTick);
+                        s->add(image);
                         }
+                  }
+
+            //----------------------------------------------------
+            else if (tag == "stretch")
+                  _userStretch = val.toDouble();
+            else if (tag == "LayoutBreak") {
+                  LayoutBreak* lb = new LayoutBreak(score());
+                  lb->read(e);
+                  add(lb);
+                  }
+            else if (tag == "noOffset")
+                  _noOffset = val.toInt();
+            else if (tag == "irregular")
+                  _irregular = true;
+            else if (tag == "breakMultiMeasureRest")
+                  _breakMultiMeasureRest = true;
+            else if (tag == "Tuplet") {
+                  Tuplet* tuplet = new Tuplet(score());
+                  tuplet->setTrack(score()->curTrack);
+                  tuplet->setTick(score()->curTick);
+                  tuplet->setTrack(score()->curTrack);
+                  tuplet->setParent(this);
+                  tuplet->read(e, _tuplets);
+                  add(tuplet);
+                  }
+            else if (tag == "startRepeat")
+                  _repeatFlags |= RepeatStart;
+            else if (tag == "endRepeat") {
+                  _repeatCount = val.toInt();
+                  _repeatFlags |= RepeatEnd;
                   }
             else if (tag == "Slur") {           // obsolete
                   Slur* slur = new Slur(score());
@@ -2518,6 +2489,8 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
                         func(data, e);
                   }
             foreach(Spanner* e, s->spannerFor())
+                  e->scanElements(data,  func);
+            foreach(Element* e, s->annotations())
                   e->scanElements(data,  func);
             }
       foreach(Tuplet* tuplet, _tuplets) {

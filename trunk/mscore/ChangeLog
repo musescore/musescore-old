@@ -1,3 +1,6 @@
+27.jun (ws)
+      - more refactoring of spanner & slur elements eleminating
+        element->tick
 26.jun (la)
       - Page numbers are no more editable in the score since formatting does not stick
       - fix #5906: Tick value shown in Object Inspector limited to 999999

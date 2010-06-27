@@ -1158,17 +1158,14 @@ void Score::addTempo()
       ChordRest* cr = getSelectedChordRest();
       if (!cr)
             return;
-      Measure* m = cr->segment()->measure();
-      int tick = cr->tick();
       if (editTempo == 0)
             editTempo = new EditTempo(0);
       int rv = editTempo->exec();
       if (rv == 1) {
             double bps = editTempo->bpm() / 60.0;
-            _tempomap->addTempo(tick, bps);
+            _tempomap->addTempo(cr->tick(), bps);
             TempoText* tt = new TempoText(this);
-            tt->setParent(m);
-            tt->setTick(tick);
+            tt->setParent(cr->segment());
             tt->setTrack(cr->track());
             tt->setText(editTempo->text());
             tt->setTempo(bps);

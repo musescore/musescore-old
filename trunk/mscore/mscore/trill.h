@@ -63,6 +63,8 @@ class Trill : public SLine {
       void setAccidental(Accidental* a) { _accidental = a; }
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
+
+      Segment* segment() const          { return (Segment*)parent(); }
       };
 
 #endif

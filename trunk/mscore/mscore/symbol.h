@@ -23,6 +23,8 @@
 
 #include "bsymbol.h"
 
+class Segment;
+
 //---------------------------------------------------------
 //   Symbol
 //    score symbol
@@ -53,8 +55,9 @@ class Symbol : public BSymbol {
       virtual void layout();
       void setAbove(bool);
 
+      Segment* segment() const { return (Segment*)parent(); }
+
       virtual qreal baseLine() const { return 0.0; }
-      void setTick(int val) { _tick = val; }
       };
 
 #endif

@@ -233,8 +233,8 @@ void Inspector::writeSettings()
 
 void Inspector::layoutScore()
       {
-      cs->setLayoutAll(true);
-      cs->end();
+//      cs->setLayoutAll(true);
+//      cs->end();
       }
 
 //---------------------------------------------------------
@@ -406,7 +406,16 @@ void Inspector::updateList(Score* s)
                                                       }
                                                 }
                                           }
+                                    if (e->isChordRest()) {
+                                          ChordRest* cr = static_cast<ChordRest*>(e);
+                                          foreach(Slur* slur, cr->slurFor())
+                                                new ElementItem(sei, slur);
+                                          }
                                     }
+                              foreach(Spanner* s, segment->spannerFor())
+                                    new ElementItem(segItem, s);
+                              foreach(Element* s, segment->annotations())
+                                    new ElementItem(segItem, s);
                               for (int i = 0; i < staves; ++i) {
                                     foreach(Lyrics* l, *(segment->lyricsList(i))) {
                                           if (l)
@@ -728,6 +737,10 @@ SegmentView::SegmentView()
       sb.segmentType->addItem("SegEndBarLine",         0x100);
       sb.segmentType->addItem("SegTimeSigAnnounce",    0x200);
       sb.segmentType->addItem("SegKeySigAnnounce",     0x400);
+      connect(sb.lyrics, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(sb.spannerFor, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(sb.spannerBack, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(sb.annotations, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       }
 
 //---------------------------------------------------------
@@ -760,6 +773,27 @@ void SegmentView::setElement(Element* e)
                         sb.lyrics->addItem(item);
                         }
                   }
+            }
+      sb.spannerFor->clear();
+      sb.spannerBack->clear();
+      sb.annotations->clear();
+      foreach(Spanner* sp, s->spannerFor()) {
+            QString s;
+            s.setNum(long(sp), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(sp));
+            sb.spannerFor->addItem(item);
+            }
+      foreach(Spanner* sp, s->spannerBack()) {
+            QString s;
+            s.setNum(long(sp), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(sp));
+            sb.spannerBack->addItem(item);
+            }
+      foreach(Element* sp, s->annotations()) {
+            QString s;
+            s.setNum(long(sp), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(sp));
+            sb.annotations->addItem(item);
             }
       }
 
@@ -819,6 +853,7 @@ void ShowChordWidget::setElement(Element* e)
       Chord* chord = (Chord*)e;
       ShowElementBase::setElement(e);
 
+      crb.tick->setValue(chord->tick());
       crb.beamButton->setEnabled(chord->beam());
       crb.tupletButton->setEnabled(chord->tuplet());
       crb.upFlag->setChecked(chord->up());
@@ -1107,6 +1142,7 @@ void ShowRestWidget::setElement(Element* e)
       Rest* rest = (Rest*)e;
       ShowElementBase::setElement(e);
 
+      crb.tick->setValue(rest->tick());
       crb.beamButton->setEnabled(rest->beam());
       crb.tupletButton->setEnabled(rest->tuplet());
       crb.upFlag->setChecked(rest->up());
@@ -1533,7 +1569,7 @@ void ShowElementBase::setElement(Element* e)
       eb.generated->setChecked(e->generated());
       eb.visible->setChecked(e->visible());
       eb.track->setValue(e->track());
-      eb.time->setValue(e->tick());
+//TODO1      eb.time->setValue(e->tick());
       eb.posx->setValue(e->ipos().x());
       eb.posy->setValue(e->ipos().y());
       eb.cposx->setValue(e->canvasPos().x());
@@ -1667,7 +1703,7 @@ void SlurView::setElement(Element* e)
       st.startElement->setEnabled(slur->startElement());
       st.endElement->setEnabled(slur->endElement());
 
-      sb.tick2->setValue(slur->tick2());
+//TODO1      sb.tick2->setValue(slur->tick2());
       sb.staff2->setValue(slur->track2() / VOICES);
       sb.voice2->setValue(slur->track2() % VOICES);
       }

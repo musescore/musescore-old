@@ -141,7 +141,7 @@ ChordRest* Selection::firstChordRest(int track) const
                   if (track != -1 && el->track() != track)
                         continue;
                   if (cr) {
-                        if (el->tick() < cr->tick())
+                        if (static_cast<ChordRest*>(el)->tick() < cr->tick())
                               cr = static_cast<ChordRest*>(el);
                         }
                   else
@@ -395,12 +395,14 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         int ticks = 0;
                         if (oe->isChordRest())
                               ticks = static_cast<ChordRest*>(oe)->ticks();
+#if 0 //TODO1
                         if (tick < oe->tick())
                               seg = m->first();
                         else if (etick >= oe->tick() + ticks) {
                               seg = m->last();
                               reverse = true;
                               }
+#endif
                         int track = staffIdx * VOICES;
                         Element* el = 0;
                         // find first or last chord/rest in measure
@@ -588,9 +590,9 @@ void Score::lassoSelectEnd()
             if (e->type() == NOTE)
                   e = e->parent();
             Segment* seg = static_cast<const ChordRest*>(e)->segment();
-            if ((startSegment == 0) || (e->tick() < startSegment->tick()))
+            if ((startSegment == 0) || (seg->tick() < startSegment->tick()))
                   startSegment = seg;
-            if ((endSegment == 0) || (e->tick() > endSegment->tick())) {
+            if ((endSegment == 0) || (seg->tick() > endSegment->tick())) {
                   endSegment = seg;
                   endTrack = e->track();
                   }
@@ -788,6 +790,7 @@ QByteArray Selection::staffMimeData() const
             for (Measure* m = seg1->measure(); m; m = m->nextMeasure()) {
                   if (seg2 && m->tick() >= seg2->tick())
                         break;
+#if 0 // TODO1
                   foreach(Element* e, *m->el()) {
                         if (e->type() == HARMONY) {
                               if ((e->staffIdx() != staffIdx) || (e->tick() < seg1->tick()))
@@ -797,6 +800,7 @@ QByteArray Selection::staffMimeData() const
                               e->write(xml);
                               }
                         }
+#endif
                   }
 
             int startTrack = staffIdx * VOICES;
@@ -828,12 +832,14 @@ QByteArray Selection::staffMimeData() const
                                                 }
                                           }
                                     }
+#if 0 //TODO1
                               foreach(Slur* slur, cr->slurFor()) {
                                     if (slur->startElement()->tick() >= tickStart()
                                        && slur->endElement()->tick() < tickEnd()) {
                                           slur->write(xml);
                                           }
                                     }
+#endif
                               xml.curTick += cr->ticks();
                               }
                         if (e->type() == CHORD) {

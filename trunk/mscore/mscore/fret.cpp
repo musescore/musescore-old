@@ -89,24 +89,6 @@ FretDiagram::~FretDiagram()
       }
 
 //---------------------------------------------------------
-//   setTick
-//---------------------------------------------------------
-
-void FretDiagram::setTick(int val)
-      {
-      _tick = val - measure()->tick();
-      }
-
-//---------------------------------------------------------
-//   tick
-//---------------------------------------------------------
-
-int FretDiagram::tick() const
-      {
-      return _tick + (measure() ? measure()->tick() : 0);
-      }
-
-//---------------------------------------------------------
 //   dragAnchor
 //---------------------------------------------------------
 
@@ -115,7 +97,7 @@ QLineF FretDiagram::dragAnchor() const
       Measure* m     = static_cast<Measure*>(parent());
       System* system = m->system();
       double yp      = system->staff(staffIdx())->y() + system->y();
-      double xp      = m->tick2pos(tick()) + m->canvasPos().x();
+      double xp      = m->tick2pos(segment()->tick()) + m->canvasPos().x();
       QPointF p1(xp, yp);
 
       double tw = width();
@@ -272,12 +254,12 @@ void FretDiagram::layout()
             }
       setbbox(QRectF(x, y, w, h));
       Element::layout();      // alignment & offset
-      Measure* m = static_cast<Measure*>(parent());
-      double yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
-      yy -= _bbox.height() + _spatium * 1.5;
-      double xx = (tick() < 0) ? 0.0 : m->tick2pos(tick());
-
-      setPos(ipos() + QPointF(xx, yy));
+      if (parent()) {
+            double yy = measure()->system()->staff(track() / VOICES)->y();
+            yy -= h + _spatium * 1.5;
+            double xx = -w * .5;
+            setPos(ipos() + QPointF(xx, yy));
+            }
       }
 
 //---------------------------------------------------------

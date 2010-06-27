@@ -981,7 +981,7 @@ void ScoreView::cmdAddChordName()
       Harmony* s = new Harmony(_score);
       s->setTrack(cr->track());
       s->setParent(measure);
-      s->setTick(cr->tick());
+//TODO1      s->setTick(cr->tick());
       _score->undoAddElement(s);
 
       _score->setLayoutAll(true);
@@ -1010,19 +1010,19 @@ void Score::cmdAddChordName2()
       Measure* measure = cr->measure();
       Harmony* s = 0;
 
-      foreach(Element* e, *measure->el()) {
-            if ((e->type() == HARMONY) && (static_cast<Harmony*>(e)->tick() == cr->tick())) {
-                  s = static_cast<Harmony*>(e);
-                  break;
-                  }
-            }
+//TODO1      foreach(Element* e, *measure->el()) {
+//            if ((e->type() == HARMONY) && (static_cast<Harmony*>(e)->tick() == cr->tick())) {
+//                  s = static_cast<Harmony*>(e);
+//                  break;
+//                  }
+//            }
 
       bool created = false;
       if (s == 0) {
             s = new Harmony(this);
             s->setTrack(cr->track());
             s->setParent(measure);
-            s->setTick(cr->tick());
+//TODO1            s->setTick(cr->tick());
             s->setRootTpc(rootTpc);
             created = true;
             }
@@ -1105,7 +1105,7 @@ void ScoreView::cmdAddText(int subtype)
                   s->setSubtype(subtype);
                   s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
                   s->setParent(cr->measure());
-                  s->setTick(cr->tick());
+//TODO1                  s->setTick(cr->tick());
                   }
                   break;
             case TEXT_STAFF:
@@ -1127,7 +1127,7 @@ void ScoreView::cmdAddText(int subtype)
                         }
                   s->setSubtype(subtype);
                   s->setParent(cr->measure());
-                  s->setTick(cr->tick());
+//TODO1                  s->setTick(cr->tick());
                   }
                   break;
             }
@@ -1688,29 +1688,24 @@ void Score::cmdResetBeamMode()
             }
       int startTick = selection().tickStart();
       int endTick   = selection().tickEnd();
-      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
-            if (m->type() != MEASURE)
+
+      SegmentTypes st = SegChordRest | SegGrace;
+      for (Segment* seg = firstMeasure()->first(st); seg; seg = seg->next1(st)) {
+            if (seg->tick() < startTick)
                   continue;
-            if (m->tick() < startTick)
-                  continue;
-            if (m->tick() >= endTick)
+            if (seg->tick() >= endTick)
                   break;
-            Measure* measure = (Measure*)m;
-            for (Segment* seg = measure->first(); seg; seg = seg->next()) {
-                  if (seg->subtype() != SegChordRest)
+            for (int track = 0; track < nstaves() * VOICES; ++track) {
+                  ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+                  if (cr == 0)
                         continue;
-                  for (int track = 0; track < nstaves() * VOICES; ++track) {
-                        ChordRest* cr = (ChordRest*)seg->element(track);
-                        if (cr == 0)
-                              continue;
-                        if (cr->type() == CHORD) {
-                              if (cr->beamMode() != BEAM_AUTO)
-                                    undoChangeBeamMode(cr, BEAM_AUTO);
-                              }
-                        else if (cr->type() == REST) {
-                              if (cr->beamMode() != BEAM_NO)
-                                    undoChangeBeamMode(cr, BEAM_NO);
-                              }
+                  if (cr->type() == CHORD) {
+                        if (cr->beamMode() != BEAM_AUTO)
+                              undoChangeBeamMode(cr, BEAM_AUTO);
+                        }
+                  else if (cr->type() == REST) {
+                        if (cr->beamMode() != BEAM_NO)
+                              undoChangeBeamMode(cr, BEAM_NO);
                         }
                   }
             }
@@ -2273,7 +2268,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               Slur* slur = new Slur(this);
                               slur->read(eee);
                               slur->setTrack(-1);
-                              slur->setTick(-1);
+//TODO1                              slur->setTick(-1);
                               undoAddElement(slur);
                               }
                         else if (tag == "Chord" || tag == "Rest" || tag == "RepeatMeasure") {
@@ -2437,7 +2432,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               harmony->read(eee);
                               harmony->setTrack(dstStaffIdx * VOICES);
                               int tick = curTick - tickStart + dstTick;
-                              harmony->setTick(tick);
+//TODO1                              harmony->setTick(tick);
                               Measure* m = tick2measure(tick);
                               harmony->setParent(m);
                               undoAddElement(harmony);

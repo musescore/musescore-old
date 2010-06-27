@@ -85,7 +85,7 @@ static QScriptValue prototype_Rest_call(QScriptContext* context, QScriptEngine*)
                         if (!h)
                               break;
                         h->setParent(rest->measure());
-                        h->setTick(rest->tick());
+//TODO1                        h->setTick(rest->tick());
                         Score* score = rest->score();
                         if (score) {
                               h->setScore(score);

@@ -685,7 +685,8 @@ void TextB::layout()
       if (parent()->type() == MEASURE) {
             Measure* m = static_cast<Measure*>(parent());
             double y = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
-            double x = (tick() < 0) ? 0.0 : m->tick2pos(tick());
+            // TODO1 double x = (tick() < 0) ? 0.0 : m->tick2pos(tick());
+            double x = 0.0;
             setPos(ipos() + QPointF(x, y));
             }
       }
@@ -1441,7 +1442,8 @@ QLineF TextB::dragAnchor() const
             Measure* m     = static_cast<Measure*>(parent());
             System* system = m->system();
             double yp      = system->staff(staffIdx())->y() + system->y();
-            double xp      = m->tick2pos(tick()) + m->canvasPos().x();
+            // TODO1 double xp      = m->tick2pos(tick()) + m->canvasPos().x();
+            double xp = 0.0;
             p1 = QPointF(xp, yp);
             }
       else {

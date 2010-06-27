@@ -1542,8 +1542,8 @@ bool ScoreView::dragTimeAnchorElement(const QPointF& pos)
             QPointF anchor(seg->abbox().x(), y);
             setDropAnchor(QLineF(pos, anchor));
             dragElement->setTrack(staffIdx * VOICES);
-            if (dragElement->type() == SYMBOL)
-                  static_cast<Symbol*>(dragElement)->setTick(tick);
+//TODO1            if (dragElement->type() == SYMBOL)
+//                  static_cast<Symbol*>(dragElement)->setTick(tick);
             return true;
             }
       setDropTarget(0);
@@ -1768,6 +1768,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case TRILL:
                   case HAIRPIN:
                   case TEXTLINE:
+                  case FRET_DIAGRAM:
                         dragTimeAnchorElement(pos);
                         break;
                   case IMAGE:
@@ -1798,7 +1799,6 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case SPACER:
                   case SLUR:
                   case ACCIDENTAL_BRACKET:
-                  case FRET_DIAGRAM:
                         {
                         QList<const Element*> el = elementsAt(pos);
                         bool found = false;
@@ -1907,6 +1907,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case SYMBOL:
                   case IMAGE:
                   case DYNAMIC:
+                  case FRET_DIAGRAM:
                         {
                         Element* el = elementAt(pos);
                         if (el == 0) {
@@ -1947,7 +1948,6 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
-                  case FRET_DIAGRAM:
                   case MARKER:
                   case JUMP:
                   case REPEAT_MEASURE:

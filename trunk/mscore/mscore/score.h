@@ -388,7 +388,6 @@ class Score : public QObject {
       // read context
       int curTick;                  // for read optimizations
       int curTrack;
-      QList<Spanner*> spanner;      // needed for reading old file versions
 
       TextC* rights;                ///< Copyright printed at bottom of page
       int _pageOffset;              ///< Offset for page numbers.

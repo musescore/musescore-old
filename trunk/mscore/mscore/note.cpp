@@ -904,7 +904,6 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || type == IMAGE
          || type == CHORD
          || type == HARMONY
-         || type == FRET_DIAGRAM
          || type == DYNAMIC
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_APPOGGIATURA)
@@ -968,22 +967,9 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   view->cmdAddSlur(this, 0);
                   return 0;
 
-            case FRET_DIAGRAM:
-                  {
-                  FretDiagram* fd = static_cast<FretDiagram*>(e);
-                  if (staff()->part()->instr()->tablature())
-                        fd->init(staff()->part()->instr()->tablature(), chord());
-                  fd->setParent(chord()->measure());
-                  fd->setTick(chord()->tick());
-                  fd->setTrack((track() / VOICES) * VOICES);
-                  score()->select(e, SELECT_SINGLE, 0);
-                  score()->undoAddElement(e);
-                  return e;
-                  }
-
             case HARMONY:
                   e->setParent(chord()->measure());
-                  static_cast<Harmony*>(e)->setTick(chord()->tick());
+//TODO1                  static_cast<Harmony*>(e)->setTick(chord()->tick());
                   e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
