@@ -235,7 +235,6 @@ Element::Element(Score* s) :
    _track(-1),
    _color(preferences.defaultColor),
    _mag(1.0),
-   _tick(-1),
    _score(s),
    _align(ALIGN_LEFT | ALIGN_TOP),
    _xoff(0), _yoff(0),
@@ -256,7 +255,6 @@ Element::Element(const Element& e)
       _systemFlag = e._systemFlag;
       _subtype    = e._subtype;
       _track      = e._track;
-      _tick       = e._tick;
       _color      = e._color;
       _mag        = e._mag;
       _score      = e._score;

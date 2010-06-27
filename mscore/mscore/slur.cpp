@@ -359,8 +359,8 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
 
       qreal xdelta = x3 - x0;
       if (xdelta == 0.0) {
-            printf("warning: slur has zero width at %d-%d\n",
-               slurTie()->startElement()->tick(), slurTie()->endElement()->tick());
+//TODO1            printf("warning: slur has zero width at %d-%d\n",
+//               slurTie()->startElement()->tick(), slurTie()->endElement()->tick());
             return;
             }
       if (x0 > x3) {
@@ -723,8 +723,7 @@ void SlurSegment::toDefault()
 Slur::Slur(Score* s)
    : SlurTie(s)
       {
-      setTick(0);
-      _tick2  = 0;
+      _id = -1;
       _track2 = 0;
       }
 
@@ -736,36 +735,6 @@ Slur::~Slur()
       {
       foreach(SlurSegment* ss, segments)
             delete ss;
-      }
-
-//---------------------------------------------------------
-//   setTick2
-//---------------------------------------------------------
-
-void Slur::setTick2(int val)
-      {
-      if (val != -1)
-            _tick2 = val;
-      }
-
-//---------------------------------------------------------
-//   setStart
-//---------------------------------------------------------
-
-void Slur::setStart(int t, int track)
-      {
-      setTick(t);
-      setTrack(track);
-      }
-
-//---------------------------------------------------------
-//   setEnd
-//---------------------------------------------------------
-
-void Slur::setEnd(int t, int track)
-      {
-      _tick2  = t;
-      _track2 = track;
       }
 
 //---------------------------------------------------------
@@ -786,19 +755,19 @@ void Slur::write(Xml& xml) const
 void Slur::read(QDomElement e)
       {
       setTrack(0);      // set staff
-      _id = e.attribute("id").toInt() - 1;
+      _id = e.attribute("id").toInt();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
-            if (tag == "tick2")
-                  _tick2 = score()->fileDivision(i);
-            else if (tag == "track2")
+//            if (tag == "tick2")
+//                  _tick2 = score()->fileDivision(i);
+            if (tag == "track2")
                   _track2 = i;
-            else if (tag == "startTick")        // obsolete
-                  ; //                  setTick(i);
-            else if (tag == "endTick")          // obsolete
-                  setTick2(i);
+//            else if (tag == "startTick")        // obsolete
+//                  ; //                  setTick(i);
+//            else if (tag == "endTick")          // obsolete
+//                  setTick2(i);
             else if (tag == "startTrack")       // obsolete
                   setTrack(i);
             else if (tag == "endTrack")         // obsolete
@@ -1225,6 +1194,7 @@ void Tie::layout()
             }
       }
 
+#if 0 //TODO1
 //---------------------------------------------------------
 //   startTick
 //---------------------------------------------------------
@@ -1250,4 +1220,5 @@ int SlurTie::endTick() const
             return static_cast<Note*>(endElement())->chord()->tick();
       return 0;
       }
+#endif
 

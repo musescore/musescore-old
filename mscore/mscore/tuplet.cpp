@@ -509,8 +509,9 @@ void Tuplet::add(Element* e)
                   {
                   int i;
                   for (i = 0; i < _elements.size(); ++i) {
-                        if (_elements[i]->tick() > e->tick()) {
-                              _elements.insert(i, static_cast<DurationElement*>(e));
+                        DurationElement* de = static_cast<DurationElement*>(e);
+                        if (_elements[i]->tick() > de->tick()) {
+                              _elements.insert(i, de);
                               break;
                               }
                         }

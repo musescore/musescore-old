@@ -1610,7 +1610,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   t = new Text(score);
                   t->setTextStyle(TEXT_STYLE_TECHNIK);
                   }
-            t->setTick(tick);
+//TODO-WS            t->setTick(tick);
             if (fontSize != "" || fontStyle != "" || fontWeight != "") {
                   QFont f = t->defaultFont();
                   if (fontSize != "") {
@@ -1635,7 +1635,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             Text* t = new Text(score);
             t->setSubtype(TEXT_REHEARSAL_MARK);
             t->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
-            t->setTick(tick);
+//TODO-WS            t->setTick(tick);
             t->setText(rehearsal);
             if (hasYoffset) t->setYoff(yoffset);
             else t->setAbove(placement == "above");
@@ -1679,7 +1679,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   Symbol* s = new Symbol(score);
                   s->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
                   s->setOffsetType(OFFSET_SPATIUM);
-                  s->setTick(tick);
+//TODO-WS                  s->setTick(tick);
                   if (type == "start")
                         s->setSym(pedalPedSym);
                   else if (type == "stop")
@@ -1706,7 +1706,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   dyn->setMxmlOff(offset);
 
                   dyn->setTrack((staff + rstaff) * VOICES);
-                  dyn->setTick(tick);
+//TODO-WS                  dyn->setTick(tick);
                   measure->add(dyn);
                   }
             }
@@ -2090,7 +2090,7 @@ void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
             printf("too much lyrics (>%d)\n", MAX_LYRICS);
       Lyrics* l = new Lyrics(score);
       l->setNo(lyricNo);
-      l->setTick(tick);
+//TODO-WS      l->setTick(tick);
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "syllabic") {
@@ -3060,7 +3060,7 @@ void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, b
  Called when the wedge stop is read. Wedge stop tick was unknown until this time.
  */
 
-void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
+void MusicXml::genWedge(int no, int /*endTick*/, Measure* /*measure*/, int staff)
       {
       Hairpin* hp = new Hairpin(score);
 
@@ -3204,7 +3204,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                   domError(e);
             }
 
-      ha->setTick(tick);
+//TODO-WS      ha->setTick(tick);
 
       const ChordDescription* d = ha->fromXml(kind, degreeList);
       if (d == 0) {

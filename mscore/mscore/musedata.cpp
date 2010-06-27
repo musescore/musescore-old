@@ -66,7 +66,6 @@ void MuseData::musicalAttribute(QString s, Part* part)
                   if ((z > 0) && (n > 0)) {
 //TODO                        score->sigmap()->add(curTick, Fraction(z, n));
                         TimeSig* ts = new TimeSig(score);
-                        ts->setTick(curTick);
                         Staff* staff = part->staff(0);
                         ts->setTrack(staff->idx() * VOICES);
                         Measure* measure = score->tick2measure(curTick);
@@ -381,8 +380,8 @@ void MuseData::readNote(Part* part, const QString& s)
             Dynamic* dyn = new Dynamic(score);
             dyn->setSubtype(dynamics);
             dyn->setTrack(gstaff * VOICES);
-            dyn->setTick(tick);
-            measure->add(dyn);
+            Segment* s = measure->getSegment(SegChordRest, tick);
+            s->add(dyn);
             }
 
       QString txt = s.mid(43, 36);
@@ -393,7 +392,6 @@ void MuseData::readNote(Part* part, const QString& s)
                   w = diacritical(w);
                   Lyrics* l = new Lyrics(score);
                   l->setText(w);
-                  l->setTick(tick);
                   l->setNo(no++);
                   l->setTrack(gstaff * VOICES);
                   Segment* segment = measure->tick2segment(tick);

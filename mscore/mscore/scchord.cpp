@@ -90,7 +90,7 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                         if (!h)
                               break;
                         h->setParent(chord->measure());
-                        h->setTick(chord->tick());
+//TODO1                        h->setTick(chord->tick());
                         Score* score = chord->score();
                         if (score) {
                               h->setScore(score);

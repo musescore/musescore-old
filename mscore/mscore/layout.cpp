@@ -708,7 +708,7 @@ void Score::doLayout()
             }
 
       //---------------------------------------------------
-      //   place ties & slurs & hairpins & beams
+      //   place Spanner & beams
       //---------------------------------------------------
 
       foreach(Beam* beam, _beams)
@@ -728,6 +728,8 @@ void Score::doLayout()
                         }
                   foreach(Spanner* s, segment->spannerFor())
                         s->layout();
+                  foreach(Element* e, segment->annotations())
+                        e->layout();
                   }
             }
 
@@ -738,6 +740,7 @@ void Score::doLayout()
             }
 
       foreach (Element* el, _gel) {
+//            if (el && el->type() != SLUR)
             if (el)
                   el->layout();
             }

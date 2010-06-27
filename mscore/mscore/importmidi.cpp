@@ -665,7 +665,7 @@ void Score::addLyrics(int tick, int staffIdx, const QString& txt)
             }
       Lyrics* l = new Lyrics(this);
       l->setText(txt);
-      l->setTick(seg->tick());
+//TODO1      l->setTick(seg->tick());
       l->setTrack(staffIdx * VOICES);
       if (debugMode)
             printf("Meta Lyric <%s>\n", qPrintable(txt));

@@ -127,8 +127,6 @@ class SlurTie : public Spanner {
       QPointF slurPos(Element*, System*& s);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
 
-      int startTick() const;
-      int endTick() const;
       virtual void toDefault();
       void setLen(double v)               { _len = v; }
       int lineType() const                { return _lineType; }
@@ -141,8 +139,7 @@ class SlurTie : public Spanner {
 
 class Slur : public SlurTie {
       int _track2;      // obsolete used temporarily for reading old version
-      int _tick2;       // obsolete
-      int _id;          // used temporarily on write()
+      int _id;
 
    public:
       Slur(Score*);
@@ -155,17 +152,13 @@ class Slur : public SlurTie {
       virtual QRectF bbox() const;
       virtual void setTrack(int val);
 
-      int tick() const        { return _tick;  }
-      void setTick(int val)   { _tick = val;   }
-      int tick2() const       { return _tick2; }
-      void setTick2(int val);
       int track2() const      { return _track2; }
       int staffIdx2() const   { return _track2 / VOICES; }
       void setTrack2(int val) { _track2 = val; }
 
       // obsolete:
-      void setStart(int t, int track);
-      void setEnd(int t,   int track);
+      void setStart(int /*tick*/, int /*track*/) {}
+      void setEnd(int /*tick*/,   int /*track*/) {}
 
       int id() const    { return _id; }
       void setId(int i) { _id = i;    }

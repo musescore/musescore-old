@@ -262,6 +262,7 @@ void Score::transpose()
             int etick   = _selection.tickEnd();
 
             for (Measure* m = sm; m; m = m->nextMeasure()) {
+#if 0 //TODO1
                   foreach (Element* e, *m->el()) {
                         if ((e->type() != HARMONY) || (e->tick() < stick))
                               continue;
@@ -274,6 +275,7 @@ void Score::transpose()
                         }
                   if (m == em)
                         break;
+#endif
                   }
             }
       setLayoutAll(true);

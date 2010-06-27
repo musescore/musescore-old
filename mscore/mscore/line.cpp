@@ -215,6 +215,7 @@ SLine::SLine(Score* s)
    : Spanner(s)
       {
       _diagonal = false;
+      setTrack(0);
       }
 
 SLine::SLine(const SLine& s)
@@ -549,7 +550,6 @@ void SLine::read(QDomElement e)
       foreach(LineSegment* seg, segments)
             delete seg;
       segments.clear();
-      setTrack(0);  // set default track
       setId(e.attribute("id", "-1").toInt());
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {

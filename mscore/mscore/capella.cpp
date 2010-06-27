@@ -1653,9 +1653,9 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                                     printf("  segment at %d not found\n", tick);
                               if (tick2 >= 0) {
                                     Slur* slur = new Slur(this);
-                                    slur->setTick(tick);
+                                    // TODO1 slur->setTick(tick);
                                     slur->setTrack(track);
-                                    slur->setTick2(tick2);
+                                    // TODO1 slur->setTick2(tick2);
                                     slur->setTrack2(track);
                                     add(slur);
                                     }

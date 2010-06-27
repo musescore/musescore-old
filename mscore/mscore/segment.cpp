@@ -327,7 +327,6 @@ void Segment::add(Element* el)
             case OTTAVA:
             case TRILL:
             case PEDAL:
-            case DYNAMIC:
             case TEXTLINE:
             case HAIRPIN:
                   {
@@ -337,6 +336,18 @@ void Segment::add(Element* el)
                         static_cast<Segment*>(e)->addSpannerBack(l);
                   _spannerFor.append(l);
                   }
+                  break;
+
+            case DYNAMIC:
+            case HARMONY:
+            case SYMBOL:
+            case FRET_DIAGRAM:
+            case TEMPO_TEXT:
+            case STAFF_TEXT:
+            case MARKER:
+            case JUMP:
+            case IMAGE:
+                  _annotations.append(el);
                   break;
 
             case CHORD:
@@ -419,7 +430,6 @@ void Segment::remove(Element* el)
             case OTTAVA:
             case TRILL:
             case PEDAL:
-            case DYNAMIC:
             case TEXTLINE:
             case HAIRPIN:
                   {
@@ -427,6 +437,18 @@ void Segment::remove(Element* el)
                   static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
                   _spannerFor.removeOne(l);
                   }
+                  break;
+
+            case DYNAMIC:
+            case HARMONY:
+            case SYMBOL:
+            case FRET_DIAGRAM:
+            case TEMPO_TEXT:
+            case STAFF_TEXT:
+            case MARKER:
+            case JUMP:
+            case IMAGE:
+                  _annotations.removeOne(el);
                   break;
 
             default:
@@ -460,21 +482,6 @@ SegmentType Segment::segmentType(int type)
             default:
                   printf("Segment:segmentType()  bad type!\n");
                   return (SegmentType)-1;
-            }
-      }
-
-//---------------------------------------------------------
-//   setTime
-//---------------------------------------------------------
-
-void Segment::setTime(int stick)
-      {
-      setTick(stick);
-      foreach(const LyricsList& ll, _lyrics) {
-            foreach(Lyrics* l, ll) {
-                  if (l)
-                        l->setTick(stick);
-                  }
             }
       }
 

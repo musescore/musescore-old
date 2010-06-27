@@ -40,11 +40,10 @@ class TempoText : public Text  {
       virtual void read(QDomElement);
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
-      Measure* measure() const { return (Measure*)parent(); }
+      Segment* segment() const { return (Segment*)parent(); }
+      Measure* measure() const { return (Measure*)parent()->parent(); }
       double tempo() const     { return _tempo; }
       void setTempo(double v)  { _tempo = v;  }
-      void setTick(int val);
-      int tick() const;
       };
 
 //---------------------------------------------------------

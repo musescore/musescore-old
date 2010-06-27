@@ -37,6 +37,7 @@ Xml::Xml()
       tupletId      = 1;
       beamId        = 1;
       spannerId     = 0;
+      slurId        = 1;
       }
 
 Xml::Xml(QIODevice* device)
@@ -50,6 +51,7 @@ Xml::Xml(QIODevice* device)
       tupletId      = 1;
       beamId        = 1;
       spannerId     = 0;
+      slurId        = 1;
       }
 
 //---------------------------------------------------------

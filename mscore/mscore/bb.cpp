@@ -468,6 +468,7 @@ bool Score::importBB(const QString& name)
                   printf("import BB: measure for tick %d not found\n", tick);
                   continue;
                   }
+#if 0 //TODO1
             Harmony* h = new Harmony(this);
             h->setTick(tick);
             h->setTrack(0);
@@ -479,6 +480,7 @@ bool Score::importBB(const QString& name)
             h->setId(c.extension);
             h->render();
             m->add(h);
+#endif
             }
 
       //---------------------------------------------------

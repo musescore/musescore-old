@@ -61,6 +61,7 @@ void Score::updateChannel()
       Measure* fm = firstMeasure();
       if (!fm)
             return;
+#if 0 // TODO1
       for (Measure* m = fm; m; m = m->nextMeasure()) {
             foreach(const Element* e, *m->el()) {
                   if (e->type() != STAFF_TEXT)
@@ -77,6 +78,7 @@ void Score::updateChannel()
                         }
                   }
             }
+#endif
 
       for (Segment* s = fm->first(SegChordRest | SegGrace); s; s = s->next1(SegChordRest | SegGrace)) {
             foreach(Staff* st, _staves) {
@@ -225,6 +227,7 @@ static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx
       //
       // collect program changes and controller
       //
+#if 0 // TODO1
       for (int staffIdx = firstStaffIdx; staffIdx < nextStaffIdx; ++staffIdx) {
             foreach(const Element* e, *m->el()) {
                   if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
@@ -282,6 +285,7 @@ static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx
                         }
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -422,6 +426,7 @@ void Score::fixPpitch()
       //
       VeloList velo[ns];
 
+#if 0 // TODO1
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             velo[staffIdx].setVelo(0, 80);
             Part* prt      = part(staffIdx);
@@ -456,6 +461,7 @@ void Score::fixPpitch()
                         }
                   }
             }
+#endif
 
       for (int staffIdx = 0; staffIdx < ns; ++staffIdx) {
             int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instr()->transpose().chromatic;

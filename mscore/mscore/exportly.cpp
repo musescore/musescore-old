@@ -893,7 +893,7 @@ void ExportLy::storeChord(struct InstructionAnchor chordanchor)
       aux->cd.chrName = chord2Name(chordroot);
       n=thisHarmony.chrName;
 
-      aux->cd.tickpos = harmelm->tick();
+      aux->cd.tickpos = harmelm->segment()->tick();
       if (!harmelm->xmlKind().isEmpty())
 	{
 	  aux->cd.extName = harmelm->extensionName();
@@ -1125,7 +1125,7 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
   QString type;
   //  int lineoffset;
   QString lineType;
-  SLine* sl = (SLine*) instruction;
+//  SLine* sl = (SLine*) instruction;
   int fontsize=0;
   TextLine* tekstlinje = (TextLine *) instruction;
   bool post = false;
@@ -1827,16 +1827,16 @@ bool ExportLy::findMatchInMeasure(int tick, Staff* stf, Measure* m, int strack, 
 	  Element* el = seg->element(st);
 	  if (!el) continue;
 
-	  if ((el->isChordRest()) and ((el->staff() == stf) or (rehearsalmark==true)) && ((el->tick() >= tick)))
+	  if ((el->isChordRest()) and ((el->staff() == stf) or (rehearsalmark==true)) && ((seg->tick() >= tick)))
 	    {
-	      if (el->tick() > tick) tick=prevElTick;
+	      if (seg->tick() > tick) tick=prevElTick;
 	      anker.anchor=el;
 	      found=true;
 	      anker.tick=tick;
 	      anker.start=true;
 	      goto fertig;
 	    }
-	    prevElTick=el->tick();
+	    prevElTick = seg->tick();
 	 }
     }
  fertig:
@@ -1882,9 +1882,10 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
       switch(instruction->type())
 	{
 	case JUMP:
-	   printf("score JUMP found at tick: %d\n", instruction->tick());
+//TODO-WS	   printf("score JUMP found at tick: %d\n", instruction->tick());
+            break;
 	case MARKER:
-	    printf("score MARKER found at tick: %d\n", instruction->tick());
+/*TODO-WS	    printf("score MARKER found at tick: %d\n", instruction->tick()); */ break;
 	case HAIRPIN:
 	case HARMONY:
 	case OTTAVA:
@@ -1964,6 +1965,7 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	case OTTAVA:
 	case PEDAL:
 	case STAFF_TEXT:
+#if 0 // TODO-WS
 	  { 	    //	    if (instruction->subtypeName() == "Staff") printf("stafftekst i measure\n");
 	    //   if (instruction->subtypeName() == "System") printf("systemtekst i measure\n");
 	    if (instruction->subtypeName() == "RehearsalMark") rehearsal=true;
@@ -1973,11 +1975,12 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
 	      anker.instruct=instruction;
 	      storeAnchor(anker);
 	    }
+       }
+#endif
 	  break;
-	  }
 	case HARMONY:
 	  {
-	    found = findMatchInMeasure(instruction->tick(), instruction->staff(), m, strack, etrack, false);
+	    found = findMatchInMeasure(((Harmony*)instruction)->segment()->tick(), instruction->staff(), m, strack, etrack, false);
 	    if ((found) && (staffInd == 0)) //only save chords in first staff.
 	      {
 		anker.instruct=instruction;
@@ -3513,7 +3516,7 @@ void ExportLy::findLyrics()
 		      vox = track - (staffno*VOICES);
 
 		      thisLyrics->lyrdat.segmentnumber[verse]++;
-		      thisLyrics->lyrdat.tick[verse] = (*lix)->tick();
+		      thisLyrics->lyrdat.tick[verse] = (*lix)->segment()->tick();
 
 		      if (verse > thisLyrics->numberofverses)
 			{
@@ -3537,7 +3540,7 @@ void ExportLy::findLyrics()
 		      thisLyrics->lyrdat.staffname =  staffname[staffno].staffid;
 		      thisLyrics->lyrdat.voicename[verse] = staffname[staffno].voicename[vox];
 
-		      thisLyrics->lyrdat.tick[verse] = (*lix)->tick();
+		      thisLyrics->lyrdat.tick[verse] = (*lix)->segment()->tick();
 
 		      int syl   = (*lix)->syllabic();
 		      switch(syl)
@@ -3933,7 +3936,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	 case CHORD:
 	     {
 		 if (wholemeasurerest >=1) writeMeasuRestNum();
-		 int ntick = e->tick() - tick;
+		 int ntick = static_cast<Chord*>(e)->tick() - tick;
 		 if (ntick > 0)
 		     {
 			 writeRest(ntick, 2);//invisible rest: s

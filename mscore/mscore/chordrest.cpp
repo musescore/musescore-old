@@ -275,7 +275,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
       else if (tag == "small")
             _small = i;
       else if (tag == "Slur") {
-            int id = e.attribute("number").toInt() - 1;
+            int id = e.attribute("number").toInt();
             QString type = e.attribute("type");
             Slur* slur = 0;
             foreach(Element* e, *score()->gel()) {
@@ -297,7 +297,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
                         printf("Note::read(): unknown Slur type <%s>\n", qPrintable(type));
                   }
             else {
-                  printf("Note::read(): Slur not found\n");
+                  printf("Note::read(): Slur id %d not found\n", id);
                   }
             }
       else if (tag == "durationType") {
@@ -569,7 +569,7 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
                   {
                   TempoText* tt = static_cast<TempoText*>(e);
                   score()->tempomap()->addTempo(tick(), tt->tempo());
-                  tt->setTick(tick());
+//TODO1                  tt->setTick(tick());
                   tt->setTrack(0);
                   tt->setParent(m);
                   score()->undoAddElement(tt);
@@ -579,7 +579,7 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
             case DYNAMIC:
                   {
                   Dynamic* d = static_cast<Dynamic*>(e);
-                  d->setTick(tick());
+//TODO1                  d->setTick(tick());
                   d->setTrack(staffIdx() * VOICES);
                   d->setParent(m);
                   score()->undoAddElement(e);
@@ -598,7 +598,7 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
             case STAFF_TEXT:
                   {
                   StaffText* st = static_cast<StaffText*>(e);
-                  st->setTick(tick());
+//TODO1                  st->setTick(tick());
                   e->setTrack(staffIdx() * VOICES);
                   e->setParent(m);
                   score()->undoAddElement(e);

@@ -178,7 +178,7 @@ void ScoreView::lyricsUpDown(bool up, bool end)
       lyrics = ll->value(verse);
       if (!lyrics) {
             lyrics = new Lyrics(_score);
-            lyrics->setTick(segment->tick());
+//TODO1            lyrics->setTick(segment->tick());
             lyrics->setTrack(track);
             lyrics->setParent(segment);
             lyrics->setNo(verse);
@@ -251,7 +251,7 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
       bool newLyrics = (lyrics == 0);
       if (!lyrics) {
             lyrics = new Lyrics(_score);
-            lyrics->setTick(nextSegment->tick());
+//TODO1            lyrics->setTick(nextSegment->tick());
             lyrics->setTrack(track);
             lyrics->setParent(nextSegment);
             lyrics->setNo(verse);
@@ -331,7 +331,7 @@ void ScoreView::lyricsMinus()
       bool newLyrics = (lyrics == 0);
       if (!lyrics) {
             lyrics = new Lyrics(_score);
-            lyrics->setTick(nextSegment->tick());
+//TODO1            lyrics->setTick(nextSegment->tick());
             lyrics->setTrack(track);
             lyrics->setParent(nextSegment);
             lyrics->setNo(verse);
@@ -413,7 +413,7 @@ void ScoreView::lyricsUnderscore()
                               oldLyrics->setSyllabic(Lyrics::END);
                               break;
                         }
-                  if (oldLyrics->tick() < endTick)
+                  if (oldLyrics->segment()->tick() < endTick)
                         oldLyrics->setTicks(endTick - oldLyrics->segment()->tick());
                   }
             return;
@@ -425,7 +425,7 @@ void ScoreView::lyricsUnderscore()
       bool newLyrics = (lyrics == 0);
       if (!lyrics) {
             lyrics = new Lyrics(_score);
-            lyrics->setTick(nextSegment->tick());
+//TODO1            lyrics->setTick(nextSegment->tick());
             lyrics->setTrack(track);
             lyrics->setParent(nextSegment);
             lyrics->setNo(verse);
@@ -442,7 +442,7 @@ void ScoreView::lyricsUnderscore()
                         oldLyrics->setSyllabic(Lyrics::END);
                         break;
                   }
-            if (oldLyrics->tick() < endTick)
+            if (oldLyrics->segment()->tick() < endTick)
                   oldLyrics->setTicks(endTick - oldLyrics->segment()->tick());
             }
       if (newLyrics)
@@ -472,7 +472,7 @@ void ScoreView::lyricsReturn()
       Lyrics* oldLyrics = lyrics;
 
       lyrics = new Lyrics(_score);
-      lyrics->setTick(segment->tick());
+//TODO1      lyrics->setTick(segment->tick());
       lyrics->setTrack(oldLyrics->track());
       lyrics->setParent(segment);
       lyrics->setNo(oldLyrics->no() + 1);
@@ -491,7 +491,7 @@ void ScoreView::lyricsEndEdit()
       {
       Lyrics* lyrics = (Lyrics*)editObject;
       Lyrics* origL  = (Lyrics*)origEditObject;
-      int endTick    = lyrics->tick();
+      int endTick    = lyrics->segment()->tick();
 
       // search previous lyric:
       int verse    = lyrics->no();

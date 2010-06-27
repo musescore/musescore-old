@@ -629,7 +629,7 @@ void Harmony::parseHarmony(const QString& ss, int* root, int* base)
       _userName = s;
       int n = s.size();
       if (n < 1) {
-            printf("harmony is empty %d\n", tick());
+            printf("harmony is empty %d\n", segment()->tick());
             return;
             }
       bool germanNames = score()->styleB(ST_useGermanNoteNames);
@@ -824,7 +824,7 @@ void Harmony::layout()
       Element::layout();
       Measure* m = static_cast<Measure*>(parent());
       double yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
-      double xx = (tick() < 0) ? 0.0 : m->tick2pos(tick());
+      double xx = (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());
 
       setPos(ipos() + QPointF(xx, yy));
 

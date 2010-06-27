@@ -119,7 +119,8 @@ void BSymbol::layout()
       if (parent() && parent()->type() == MEASURE) {
             Measure* m = static_cast<Measure*>(parent());
             double y = track() != -1 ? m->system()->staff(track() / VOICES)->y() : 0.0;
-            double x = (tick() != -1) ? m->tick2pos(tick()) : 0.0;
+//TODO1            double x = (tick() != -1) ? m->tick2pos(tick()) : 0.0;
+            double x = 0.0;
             setPos(ipos() + QPointF(x, y));
             }
       }
@@ -266,12 +267,11 @@ void Symbol::read(QDomElement e)
 QLineF Symbol::dragAnchor() const
       {
       if (parent()->type() == MEASURE) {
-            Measure* measure = static_cast<Measure*>(parent());
-            Segment* segment = measure->tick2segment(tick());
-
+            Segment* seg     = segment();
+            Measure* measure = seg->measure();
             System* s        = measure->system();
             double y         = measure->canvasPos().y() + s->staff(staffIdx())->y();
-            QPointF anchor(segment->abbox().x(), y);
+            QPointF anchor(seg->abbox().x(), y);
             return QLineF(canvasPos(), anchor);
             }
       else {

@@ -495,7 +495,6 @@ bool Score::read(QString name)
       startCmd();
       _needLayout = true;
       layoutFlags |= LAYOUT_FIX_TICKS;
-
       endCmd();
 
       return true;
@@ -556,20 +555,17 @@ void Score::write(Xml& xml, bool /*autosave*/)
 
       // to serialize slurs/tuplets/beams, they need an id; this id is referenced
       // in begin-end elements
-      int slurId   = 0;
-      int tupletId = 0;
-      int beamId   = 0;
-      foreach(Element* el, _gel) {
-            if (el->type() == SLUR)
-                  static_cast<Slur*>(el)->setId(slurId++);
-            }
+//      foreach(Element* el, _gel) {
+//            if (el->type() == SLUR)
+//                  static_cast<Slur*>(el)->setId(slurId++);
+//            }
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
-                  tuplet->setId(tupletId++);
+                  tuplet->setId(xml.tupletId++);
             }
       xml.curTrack = 0;
       foreach(Beam* beam, _beams)
-            beam->setId(beamId++);
+            beam->setId(xml.beamId++);
       foreach(Element* el, _gel)
             el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
@@ -632,6 +628,7 @@ void Score::insertTime(int tick, int len)
                   staff->keymap()->removeTime(tick, len);
                   }
             foreach(Element* el, _gel) {
+#if 0  // WS1
                   if (el->type() == SLUR) {
                         Slur* s = static_cast<Slur*>(el);
                         if (s->tick() >= tick + len) {
@@ -641,7 +638,6 @@ void Score::insertTime(int tick, int len)
                               s->setTick2(s->tick2() - len);
                               }
                         }
-#if 0
                   else if (el->isSLine()) {
                         SLine* s = static_cast<SLine*>(el);
                         if (s->tick() >= tick + len)
@@ -662,6 +658,7 @@ void Score::insertTime(int tick, int len)
                   staff->keymap()->insertTime(tick, len);
                   }
             foreach(Element* el, _gel) {
+#if 0 // WS1
                   if (el->type() == SLUR) {
                         Slur* s = static_cast<Slur*>(el);
                         if (s->tick() >= tick) {
@@ -671,7 +668,6 @@ void Score::insertTime(int tick, int len)
                               s->setTick2(s->tick2() + len);
                               }
                         }
-#if 0
                   else if (el->isSLine()) {
                         SLine* s = static_cast<SLine*>(el);
                         if (s->tick() >= tick)
@@ -719,7 +715,7 @@ void Score::fixTicks()
             foreach(const Element* e, *mb->el()) {
                   if (e->type() == TEMPO_TEXT) {
                         const TempoText* tt = static_cast<const TempoText*>(e);
-                        _tempomap->addTempo(tt->tick(), tt->tempo());
+                        _tempomap->addTempo(tt->segment()->tick(), tt->tempo());
                         }
                   }
             if (mb->type() != MEASURE) {
@@ -932,9 +928,9 @@ void Score::readStaff(QDomElement e)
       {
       MeasureBase* mb = first();
       int staff       = e.attribute("id", "1").toInt() - 1;
+      curTick         = 0;
+      curTrack        = staff * VOICES;
 
-      curTick  = 0;
-      curTrack = staff * VOICES;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
 
@@ -1810,8 +1806,7 @@ Measure* Score::getCreateMeasure(int tick)
 void Score::addElement(Element* element)
       {
       if (debugMode) {
-            printf("   %d Score::addElement %p(%s) parent %p(%s)\n",
-               element->tick(),
+            printf("   Score::addElement %p(%s) parent %p(%s)\n",
                element, element->name(), element->parent(),
                element->parent() ? element->parent()->name() : "");
             }
@@ -1845,7 +1840,7 @@ void Score::addElement(Element* element)
                   int endTrack   = startTrack + VOICES;
                   for (int track = startTrack; track < endTrack; ++track) {
                         Element* ie = segment->element(track);
-                        if (ie && ie->type() == CLEF && ie->tick() > tick) {
+                        if (ie && ie->type() == CLEF && segment->tick() > tick) {
                               endFound = true;
                               break;
                               }
@@ -1881,8 +1876,8 @@ void Score::removeElement(Element* element)
       Element* parent = element->parent();
 
       if (debugMode)
-            printf("   %d Score::removeElement %p(%s) parent %p(%s)\n",
-               element->tick(), element, element->name(), parent, parent ? parent->name() : "");
+            printf("   Score::removeElement %p(%s) parent %p(%s)\n",
+               element, element->name(), parent, parent ? parent->name() : "");
 
       // special for MEASURE, HBOX, VBOX
       // their parent is not static
@@ -1932,7 +1927,7 @@ void Score::removeElement(Element* element)
                         int endTrack   = startTrack + VOICES;
                         for (int track = startTrack; track < endTrack; ++track) {
                               Element* ie = segment->element(track);
-                              if (ie && ie->type() == CLEF && ie->tick() > tick) {
+                              if (ie && ie->type() == CLEF && segment->tick() > tick) {
                                     endFound = true;
                                     break;
                                     }

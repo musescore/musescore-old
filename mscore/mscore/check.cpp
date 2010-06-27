@@ -32,6 +32,7 @@
 
 void Score::checkSlurs()
       {
+#if 0 //TODO1
       foreach(Element* e, _gel) {
             if (e->type() != SLUR)
                   continue;
@@ -54,6 +55,7 @@ void Score::checkSlurs()
                   _gel.removeAt(idx);
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------

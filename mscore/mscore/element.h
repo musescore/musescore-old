@@ -137,7 +137,6 @@ class Element {
                                   ///< depends on Spatium ("space") units!
 
    protected:
-      int _tick;
       Score* _score;
       QPointF _pos;               ///< Reference position, relative to _parent.
                                   ///< Usually set from layout().
@@ -256,9 +255,6 @@ class Element {
       int voice() const                       { return _track % VOICES; }
       void setVoice(int v)                    { _track = (_track / VOICES) + v; }
       Staff* staff() const;
-
-      virtual int tick() const      { return _tick; }
-//      virtual void setTick(int val) { _tick = val; }
 
       virtual void add(Element*);
       virtual void remove(Element*);
@@ -391,9 +387,6 @@ class ElementList : public QList<Element*> {
       bool remove(Element*);
       void replace(Element* old, Element* n);
       void write(Xml&) const;
-
-//      void add(Element*);
-//      void move(Element* el, int tick);
       void write(Xml&, const char* name) const;
       void read(QDomElement);
       };
