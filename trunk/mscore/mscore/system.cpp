@@ -90,6 +90,8 @@ System::System(Score* s)
 System::~System()
       {
       delete barLine;
+      foreach(SysStaff* s, _staves)
+            delete s;
       }
 
 //---------------------------------------------------------
@@ -836,8 +838,9 @@ void System::scanElements(void* data, void (*func)(void*, Element*))
 
 double System::staffY(int idx) const
       {
-      if (_staves.size() == 0) {
-            printf("staffY: n = %d measures %d vbox %d\n", _staves.size(), ml.size(), _vbox);
+      if (_staves.size() <= idx) {
+            printf("staffY: staves %d <= staff %d, vbox %d\n",
+               _staves.size(), idx, _vbox);
             return canvasPos().y();
             }
       return _staves[idx]->y() + canvasPos().y();

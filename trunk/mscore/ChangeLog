@@ -1,3 +1,5 @@
+28.jun (ws)
+      - applied page offset patch from Miwarre
 27.jun (ws)
       - more refactoring of spanner & slur elements eleminating
         element->tick

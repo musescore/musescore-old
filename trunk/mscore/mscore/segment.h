@@ -158,6 +158,7 @@ class Segment : public Element {
       void removeSpannerFor(Spanner* e)   { _spannerFor.removeOne(e); }
 
       const QList<Element*>& annotations() const  { return _annotations;  }
+      void removeAnnotation(Element* e)           { _annotations.removeOne(e); }
       };
 
 #endif

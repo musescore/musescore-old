@@ -63,6 +63,11 @@ TextBase::TextBase()
       _doc->setDefaultTextOption(to);
       }
 
+TextBase::~TextBase()
+      {
+      delete _doc;
+      }
+
 //---------------------------------------------------------
 //   TextBase
 //---------------------------------------------------------

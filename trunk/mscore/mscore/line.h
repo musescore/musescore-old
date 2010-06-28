@@ -71,6 +71,7 @@ class LineSegment : public Element {
       void setSystem(System* s)                   { _system = s;            }
       virtual void toDefault();
       virtual void spatiumChanged(double, double);
+      virtual QPointF canvasPos() const;
 
       friend class SLine;
       };
