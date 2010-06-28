@@ -309,6 +309,11 @@ Chord::~Chord()
       delete _glissando;
       delete _stemSlash;
       delete _stem;
+      delete _hook;
+      foreach(LedgerLine* h, _ledgerLines)
+            delete h;
+      foreach(Note* n, _notes)
+            delete n;
       }
 
 //---------------------------------------------------------

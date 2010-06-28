@@ -149,6 +149,15 @@ Measure::Measure(Score* s)
 
 Measure::~Measure()
       {
+      for (Segment* s = first(); s;) {
+            Segment* ns = s->next();
+            delete s;
+            s = ns;
+            }
+      foreach(MStaff* m, staves)
+            delete m;
+      foreach(Tuplet* t, _tuplets)
+            delete t;
       delete _noText;
       }
 

@@ -260,6 +260,9 @@ void Note::setTpc(int v)
 Note::~Note()
       {
       delete _accidental;
+      delete _tieFor;
+      foreach(Element* e, _el)
+            delete e;
       }
 
 //---------------------------------------------------------
