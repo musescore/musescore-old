@@ -1393,6 +1393,7 @@ void Score::cmdDeleteSelection()
             QList<Element*> el(selection().elements());
             foreach(Element* e, el) {
                   deleteItem(e);
+                  deselect(e);
                   }
             }
       layoutAll = true;
