@@ -74,6 +74,9 @@ class Marker : public Text {
       virtual Marker* clone() const    { return new Marker(*this); }
       virtual ElementType type() const { return MARKER; }
 
+      Segment* segment() const         { return (Segment*)parent(); }
+      Measure* measure() const         { return (Measure*)parent()->parent(); }
+
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
 
@@ -82,6 +85,10 @@ class Marker : public Text {
 
       QString label() const            { return _label; }
       void setLabel(const QString& s)  { _label = s; }
+
+      virtual void layout();
+      virtual QPointF canvasPos() const;
+      virtual QLineF dragAnchor() const;
       };
 
 enum {

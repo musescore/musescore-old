@@ -349,7 +349,6 @@ Score::Score(const Style& s)
       _creditsRead    = false;
       _defaultsRead   = false;
       rights          = 0;
-      _pageOffset     = 0;
       _omr            = 0;
       _showOmr        = false;
       _sigmap         = new AL::TimeSigMap();
@@ -533,6 +532,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
       xml.tag("showInvisible", _showInvisible);
       xml.tag("showFrames", _showFrames);
       pageFormat()->write(xml);
+
       if (rights)
             rights->write(xml, "copyright");
       if (!_movementNumber.isEmpty())
