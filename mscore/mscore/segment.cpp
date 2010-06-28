@@ -118,6 +118,13 @@ Segment::Segment(Measure* m, SegmentType st, int t)
 
 Segment::~Segment()
       {
+      foreach(Element* e, _elist)
+            delete e;
+      foreach(LyricsList ll, _lyrics) {
+            foreach(Lyrics* l, ll) {
+                  delete l;
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -284,6 +291,17 @@ void Segment::removeStaff(int staff)
       int track = staff * VOICES;
       _elist.erase(_elist.begin() + track, _elist.begin() + track + VOICES);
       _lyrics.removeAt(staff);
+
+      foreach(Spanner* sp, _spannerFor) {
+            }
+      foreach(Spanner* sp, _spannerBack) {
+            }
+      foreach(Element* e, _annotations) {
+            int staffIdx = e->staffIdx();
+            if (staffIdx > staff)
+                  e->setTrack(e->track() - VOICES);
+            }
+
       fixStaffIdx();
       }
 

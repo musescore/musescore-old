@@ -700,29 +700,6 @@ void Score::cmdRemovePart(Part* part)
 // printf("cmdRemovePart %d-%d\n", sidx, eidx);
 
       //
-      //    remove/adjust slurs in _gel
-      //
-#if 0
-      int strack = sidx * VOICES;
-      int etrack = eidx * VOICES;
-      foreach(Element* e, _gel) {
-            if (e->type() != SLUR) {
-                  printf("gel element %s %d\n", e->name(), e->track());
-                  continue;
-                  }
-            Slur* slur = (Slur*)e;
-            if (((slur->track() >= strack) && (slur->track() < etrack)
-               || ((slur->track2() >= strack) && (slur->track2() < etrack))))
-                  undoRemoveElement(slur);
-            else {
-                  if (slur->track() >= etrack)
-                        slur->setTrack(slur->track() - VOICES);
-                  if (slur->track2() >= etrack)
-                        slur->setTrack2(slur->track2() - VOICES);
-                  }
-            }
-#endif
-      //
       //    adjust measures
       //
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
@@ -768,36 +745,7 @@ void Score::insertStaff(Staff* staff, int idx)
       _staves.insert(idx, staff);
 
       staff->part()->insertStaff(staff);
-
       int track = idx * VOICES;
-      foreach (Element* e, _gel) {
-            switch(e->type()) {
-                  case SLUR:
-                        {
-                        Slur* slur = static_cast<Slur*>(e);
-                        if (slur->track() >= track)
-                              slur->setTrack(slur->track() + VOICES);
-                        if (slur->track2() >= track)
-                              slur->setTrack2(slur->track2() + VOICES);
-                        }
-                        break;
-                  case VOLTA: //volta alway attached to top staff
-                        break;
-                  case OTTAVA:
-                  case TRILL:
-                  case PEDAL:
-                  case HAIRPIN:
-                  case TEXTLINE:
-                        {
-                        SLine* line = static_cast<SLine*>(e);
-                        if (line->track() >= track)
-                              line->setTrack(line->track() + VOICES);
-                        }
-                        break;
-                  default:
-                        break;
-                  }
-            }
       foreach (Beam* b, _beams) {
             if (b->track() >= track)
                   b->setTrack(b->track() + VOICES);
@@ -859,30 +807,6 @@ void Score::adjustBracketsIns(int sidx, int eidx)
 
 void Score::cmdRemoveStaff(int staffIdx)
       {
-      foreach(Element* e, _gel) {
-            switch(e->type()) {
-                  case VOLTA: //volta always attached to top staff
-                    break;
-                  case OTTAVA:
-                  case TRILL:
-                  case PEDAL:
-                  case HAIRPIN:
-                  case TEXTLINE:
-                        if (e->staffIdx() == staffIdx) {
-                              undoRemoveElement(e);
-                              }
-                        break;
-                  case SLUR:
-                        {
-                        Slur* slur = static_cast<Slur*>(e);
-                        if ((slur->staffIdx() == staffIdx) || (slur->staffIdx2() == staffIdx))
-                              undoRemoveElement(slur);
-                        }
-                        break;
-                  default:
-                        break;
-                  }
-            }
       adjustBracketsDel(staffIdx, staffIdx+1);
       Staff* s = staff(staffIdx);
       undoRemoveStaff(s, staffIdx);
@@ -898,34 +822,6 @@ void Score::removeStaff(Staff* staff)
       _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
       int track = idx * VOICES;
-      foreach(Element* e, _gel) {
-            switch(e->type()) {
-                  case SLUR:
-                        {
-                        Slur* slur = static_cast<Slur*>(e);
-                        if (slur->track() > track)
-                              slur->setTrack(slur->track() - VOICES);
-                        if (slur->track2() > track)
-                              slur->setTrack2(slur->track2() - VOICES);
-                        }
-                        break;
-                  case VOLTA:  //volta always attached to top staff
-                        break;
-                  case OTTAVA:
-                  case TRILL:
-                  case PEDAL:
-                  case HAIRPIN:
-                  case TEXTLINE:
-                        {
-                        SLine* line = static_cast<SLine*>(e);
-                        if (line->track() > track)
-                              line->setTrack(line->track() - VOICES);
-                        }
-                        break;
-                  default:
-                        break;
-                  }
-            }
       foreach(Beam* e, beams()) {
             if (e->track() > track)
                   e->setTrack(e->track() - VOICES);

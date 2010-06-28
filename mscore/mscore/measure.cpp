@@ -140,6 +140,15 @@ Measure::Measure(Score* s)
 
 Measure::~Measure()
       {
+      for (Segment* s = first(); s;) {
+            Segment* ns = s->next();
+            delete s;
+            s = ns;
+            }
+      foreach(MStaff* m, staves)
+            delete m;
+      foreach(Tuplet* t, _tuplets)
+            delete t;
       delete _noText;
       }
 
@@ -1187,16 +1196,6 @@ void Measure::removeStaves(int sStaff, int eStaff)
                   e->setTrack(staffIdx * VOICES + voice);
                   }
             }
-#if 0
-      foreach(Beam* e, _beams) {
-            int staffIdx = e->staffIdx();
-            if (staffIdx >= eStaff) {
-                  int voice    = e->voice();
-                  staffIdx -= eStaff - sStaff;
-                  e->setTrack(staffIdx * VOICES + voice);
-                  }
-            }
-#endif
       foreach(Tuplet* e, _tuplets) {
             int staffIdx = e->staffIdx();
             if (staffIdx >= eStaff) {
@@ -1265,6 +1264,11 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
                   Element* el = s->element(track);
                   if (el && !el->generated())
                         _score->undoRemoveElement(el);
+                  }
+            foreach(Element* e, s->annotations()) {
+                  int staffIdx = e->staffIdx();
+                  if ((staffIdx >= sStaff) && (staffIdx < eStaff))
+                        _score->undoRemoveElement(e);
                   }
             if (s->isEmpty())
                   _score->undoRemoveElement(s);

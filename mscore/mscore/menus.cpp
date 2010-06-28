@@ -314,7 +314,6 @@ void MuseScore::showPalette(bool visible)
             //pedal->setLen(l);
             pedal->setBeginSymbol(-1);
             pedal->setBeginHook(true);
-//            pedal->setBeginHookHeight(Spatium(-1.5));
             pedal->setBeginHookType(HOOK_45);
             pedal->setEndHookType(HOOK_45);
             sp->append(pedal, tr("Pedal"));
@@ -323,7 +322,6 @@ void MuseScore::showPalette(bool visible)
             //pedal->setLen(l);
             pedal->setBeginSymbol(-1);
             pedal->setBeginHook(true);
-//            pedal->setBeginHookHeight(Spatium(-1.5));
             pedal->setBeginHookType(HOOK_45);
             sp->append(pedal, tr("Pedal"));
 
@@ -333,7 +331,6 @@ void MuseScore::showPalette(bool visible)
             TextLine* textLine = new TextLine(gscore);
             textLine->setBeginText("VII");
             textLine->setEndHook(true);
-//            textLine->setEndHookHeight(Spatium(1.5));
             sp->append(textLine, tr("Text line"));
 
             TextLine* line = new TextLine(gscore);

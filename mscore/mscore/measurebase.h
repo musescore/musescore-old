@@ -77,6 +77,7 @@ class MeasureBase : public Element {
 
    public:
       MeasureBase(Score* score);
+      ~MeasureBase();
       MeasureBase(const MeasureBase&);
       virtual MeasureBase* clone() const = 0;
 

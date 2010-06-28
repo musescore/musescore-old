@@ -63,6 +63,19 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
       }
 
 //---------------------------------------------------------
+//   canvasPos
+//    return position in canvas coordinates
+//---------------------------------------------------------
+
+QPointF LineSegment::canvasPos() const
+      {
+      QPointF p(pos());
+      if (parent())
+            p += parent()->canvasPos();
+      return p;
+      }
+
+//---------------------------------------------------------
 //   gripAnchor
 //---------------------------------------------------------
 
