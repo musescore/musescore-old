@@ -584,10 +584,14 @@ printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
             int p1 = tpc2pitch(step2tpc(step, 0));
             alter  = semitones - (p1 - pitch);
             // alter  = p1 + semitones - pitch;
+            if (alter < 0) {
+                  alter *= -1;
+                  alter = 12 - alter;
+                  }
             alter %= 12;
-	    if (alter > 6)
-	      alter -= 12;
-	    if (alter > maxAlter)
+	          if (alter > 6)
+	               alter -= 12;
+	          if (alter > maxAlter)
                   ++steps;
             else if (alter < minAlter)
                   --steps;
