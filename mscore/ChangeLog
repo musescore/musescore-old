@@ -2,6 +2,7 @@
       - free memory after removing score (#6164)
 27.jun (la)
       - fix #6254: Concert pitch lossy transposition (Patch by Aaron Epstein)
+      - fix #6275: Remove the last inserted vertical frame make musecore hangs
 26.jun (la)
       - fix #6245: Underscores in Lyrics are not copied badly/not at all
       - Page numbers are no more editable in the score since formatting does not stick
