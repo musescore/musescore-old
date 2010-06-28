@@ -114,6 +114,13 @@ Segment::Segment(Measure* m, int t)
 
 Segment::~Segment()
       {
+      foreach(Element* e, _elist)
+            delete e;
+      foreach(LyricsList ll, _lyrics) {
+            foreach(Lyrics* l, ll) {
+                  delete l;
+                  }
+            }
       }
 
 //---------------------------------------------------------

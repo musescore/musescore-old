@@ -291,12 +291,35 @@ Score::Score(const Style& s)
 
 Score::~Score()
       {
+      for (MeasureBase* m = _measures.first(); m;) {
+            MeasureBase* nm = m->next();
+            delete m;
+            m = nm;
+            }
+      foreach(Element* e, _gel)
+            delete e;
+      foreach(Beam* b, _beams)
+            delete b;
+      foreach(Part* p, _parts)
+            delete p;
+      foreach(Staff* staff, _staves)
+            delete staff;
+      foreach(Page* page, _pages)
+            delete page;
+      foreach(System* s, _systems)
+            delete s;
+      foreach(Excerpt* e, _excerpts)
+            delete e;
+
       delete _pageFormat;
       delete rights;
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
       delete _tempomap;
       delete _sigmap;
       delete _repeatList;
+
+      foreach(TextStyle* ts, _textStyles)
+            delete ts;
       }
 
 //---------------------------------------------------------

@@ -89,6 +89,8 @@ System::System(Score* s)
 System::~System()
       {
       delete barLine;
+      foreach(SysStaff* s, _staves)
+            delete s;
       }
 
 //---------------------------------------------------------

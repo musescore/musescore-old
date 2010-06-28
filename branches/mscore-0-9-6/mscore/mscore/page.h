@@ -84,6 +84,7 @@ class Page : public Element {
 
    public:
       Page(Score*);
+      ~Page();
       virtual Page* clone() const        { return new Page(*this); }
       virtual ElementType type() const   { return PAGE; }
 

@@ -66,6 +66,7 @@ class TextBase {
 
    public:
       TextBase();
+      ~TextBase();
       TextBase(const TextBase&);
 
       int refCount() const                  { return _refCount; }

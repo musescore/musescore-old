@@ -63,6 +63,11 @@ TextBase::TextBase()
       _doc->setDefaultTextOption(to);
       }
 
+TextBase::~TextBase()
+      {
+      delete _doc;
+      }
+
 //---------------------------------------------------------
 //   TextBase
 //---------------------------------------------------------
@@ -784,7 +789,7 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
                   xml.tag("halign", "right");
             else
                   xml.tag("halign", "left");
-                  
+
             if (_align & ALIGN_BOTTOM)
                   xml.tag("valign", "bottom");
             else if (_align & ALIGN_VCENTER)

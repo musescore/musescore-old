@@ -48,6 +48,11 @@ Page::Page(Score* s)
    _no(0), _pageNo(0), _copyright(0)
       {
       }
+Page::~Page()
+      {
+      delete _pageNo;
+      delete _copyright;
+      }
 
 //---------------------------------------------------------
 //   tm
