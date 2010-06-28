@@ -114,7 +114,7 @@ void Page::layout()
       setbbox(QRectF(0.0, 0.0, loWidth(), loHeight()));
 
       // add page number
-      int n = no() + 1 + _score->_pageOffset;
+      int n = no() + 1 + _score->pageFormat()->_pageOffset;
       if (score()->styleB(ST_showPageNumber) && ((n > 1) || score()->styleB(ST_showPageNumberOne))) {
             int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
             int style   = (n & 1) ? TEXT_STYLE_PAGE_NUMBER_ODD : TEXT_STYLE_PAGE_NUMBER_EVEN;
@@ -277,7 +277,8 @@ PageFormat::PageFormat()
    oddTopMargin(10.0 / INCH),
    oddBottomMargin(20.0 / INCH),
    landscape(preferences.landscape),
-   twosided(preferences.twosided)
+   twosided(preferences.twosided),
+   _pageOffset(0)
       {
       }
 
@@ -452,6 +453,8 @@ void PageFormat::readMusicXML(QDomElement e, double conversion)
                   size = paperSizeNameToIndex("Custom");
                   _width = val.toDouble() * conversion;
                   }
+            else if (tag == "page-offset")
+                  _pageOffset = val.toInt();
             else
                   domError(e);
             }
@@ -501,6 +504,7 @@ void PageFormat::write(Xml& xml)
       xml.tag("right-margin",  oddRightMargin * t);
       xml.tag("top-margin",    oddTopMargin * t);
       xml.tag("bottom-margin", oddBottomMargin * t);
+      xml.tag("page-offset", _pageOffset);
       xml.etag();
 
       xml.etag();

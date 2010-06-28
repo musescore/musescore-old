@@ -1504,7 +1504,7 @@ Element* Measure::drop(ScoreView*, const QPointF& p, const QPointF& dragOffset, 
       if (e->systemFlag())
             staffIdx = 0;
       QPointF mrp(p - canvasPos());
-      double mrpx = mrp.x();
+//      double mrpx  = mrp.x();
       Staff* staff = score()->staff(staffIdx);
 
       switch(e->type()) {

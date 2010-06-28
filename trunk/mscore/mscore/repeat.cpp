@@ -120,24 +120,6 @@ void RepeatMeasure::layout()
       setbbox(path.boundingRect());
       }
 
-#if 0
-//---------------------------------------------------------
-//   canvasPos
-//---------------------------------------------------------
-
-QPointF RepeatMeasure::canvasPos() const
-      {
-      if (parent() == 0)
-            return pos();
-      double xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
-      System* system = segment()->measure()->system();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(xp, yp);
-      }
-#endif
-
 //---------------------------------------------------------
 //   Marker
 //---------------------------------------------------------
@@ -159,37 +141,31 @@ void Marker::setMarkerType(int t)
             case MARKER_SEGNO:
                   setHtml(symToHtml(symbols[segnoSym], 80));
                   setLabel("segno");
-                  _reloff.rx() = 0.0;           // move to start of measure
                   break;
 
             case MARKER_CODA:
                   setHtml(symToHtml(symbols[codaSym], 80));
                   setLabel("codab");
-                  _reloff.rx() = 0.0;           // move to start of measure
                   break;
 
             case MARKER_VARCODA:
                   setHtml(symToHtml(symbols[varcodaSym], 80));
                   setLabel("varcoda");
-                  _reloff.rx() = 0.0;           // move to start of measure
                   break;
 
             case MARKER_CODETTA:
                   setHtml(symToHtml(symbols[codaSym], symbols[codaSym], 80));
                   setLabel("codetta");
-                  _reloff.rx() = 0.0;           // move to start of measure
                   break;
 
             case MARKER_FINE:
                   setText("Fine");
                   setLabel("fine");
-                  _reloff.rx() = 100.0;         // move to end of measure
                   break;
 
             case MARKER_TOCODA:
                   setText("To Coda");
                   setLabel("coda");
-                  _reloff.rx() = 100.0;         // move to end of measure
                   break;
 
             case MARKER_USER:
@@ -199,6 +175,55 @@ void Marker::setMarkerType(int t)
                   printf("unknown marker type %d\n", t);
                   break;
             }
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Marker::layout()
+      {
+      switch(markerType()) {
+            case MARKER_SEGNO:
+            case MARKER_CODA:
+            case MARKER_VARCODA:
+            case MARKER_CODETTA:
+                  _reloff.rx() = 0.0;           // move to start of measure
+                  break;
+
+            case MARKER_FINE:
+            case MARKER_TOCODA:
+                  _reloff.rx() = 100.0;         // move to end of measure
+                  break;
+
+            case MARKER_USER:
+                  break;
+
+            default:
+                  printf("unknown marker type %d\n", markerType());
+                  break;
+            }
+      Text::layout();
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF Marker::canvasPos() const
+      {
+      if (parent())
+            return measure()->canvasPos() + pos();
+      return pos();
+      }
+
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Marker::dragAnchor() const
+      {
+      return Element::dragAnchor();
       }
 
 //---------------------------------------------------------

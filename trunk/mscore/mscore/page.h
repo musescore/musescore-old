@@ -60,6 +60,7 @@ struct PageFormat {
       double oddBottomMargin;
       bool landscape;
       bool twosided;
+      int _pageOffset;              ///< Offset for page numbers.
 
    public:
       PageFormat();
