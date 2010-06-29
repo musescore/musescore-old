@@ -2431,6 +2431,18 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               harmony->setTrack(curTrack);
                               harmony->read(eee);
                               harmony->setTrack(dstStaffIdx * VOICES);
+                              //transpose
+                              Part* partDest = staff(dstStaffIdx)->part();
+                              Part* partSrc = staff(srcStaffIdx)->part();
+                              Interval intervalDest = partDest->transpose();
+                              Interval intervalSrc = partSrc->transpose();
+                              Interval interval = Interval(intervalSrc.diatonic - intervalDest.diatonic, intervalSrc.chromatic - intervalDest.chromatic);
+                              if (!styleB(ST_concertPitch)) {
+                                    int rootTpc = transposeTpc(harmony->rootTpc(), interval, false);
+                                    int baseTpc = transposeTpc(harmony->baseTpc(), interval, false);
+                                    undoTransposeHarmony(harmony, rootTpc, baseTpc);
+                                    }
+                              
                               int tick = curTick - tickStart + dstTick;
 //TODO1                              harmony->setTick(tick);
                               Measure* m = tick2measure(tick);
