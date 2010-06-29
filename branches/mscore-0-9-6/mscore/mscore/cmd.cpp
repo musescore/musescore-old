@@ -430,6 +430,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
                   printf("  shortcut %c not defined in drumset\n", note1);
                   return;
                   }
+            is.setDrumNote(pitch);
             }
       else {
             KeySigEvent key;
@@ -474,6 +475,8 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
       if (!noteEntryMode()) {
             sm->postEvent(new CommandEvent("note-input"));
             qApp->processEvents();
+            if(is.drumset())
+                  is.setDrumNote(pitch);
             }
 
       _score->addPitch(pitch, addFlag);
@@ -544,13 +547,16 @@ Note* Score::addPitch(int pitch, bool addFlag)
       int headGroup           = 0;
       int track               = _is.track;
       if (_is.drumNote() != -1) {
-            int pitch     = _is.drumNote();
+            pitch     = _is.drumNote();
             Drumset* ds   = _is.drumset();
             headGroup     = ds->noteHead(pitch);
             stemDirection = ds->stemDirection(pitch);
             track         = ds->voice(pitch) + (_is.track / VOICES) * VOICES;
+            _is.track = track;
+            expandVoice();
             }
-
+      if(!_is.cr())
+            return 0;
       Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration().fraction(), headGroup, stemDirection);
       Note* note = static_cast<Chord*>(seg->element(track))->upNote();
       setLayout(note->chord()->measure());
