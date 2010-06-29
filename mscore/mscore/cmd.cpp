@@ -275,6 +275,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
                   printf("  shortcut %c not defined in drumset\n", note1);
                   return;
                   }
+            is.setDrumNote(pitch);
             }
       else {
             KeySigEvent key;
@@ -319,6 +320,8 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
       if (!noteEntryMode()) {
             sm->postEvent(new CommandEvent("note-input"));
             qApp->processEvents();
+            if(is.drumset())
+                  is.setDrumNote(pitch);
             }
 
       _score->addPitch(pitch, addFlag);
@@ -395,13 +398,16 @@ Note* Score::addPitch(int pitch, bool addFlag)
       int headGroup           = 0;
       int track               = _is.track();
       if (_is.drumNote() != -1) {
-            int pitch     = _is.drumNote();
+            pitch     = _is.drumNote();
             Drumset* ds   = _is.drumset();
             headGroup     = ds->noteHead(pitch);
             stemDirection = ds->stemDirection(pitch);
             track         = ds->voice(pitch) + (_is.track() / VOICES) * VOICES;
+            _is.setTrack(track);
+            expandVoice();
             }
-
+      if(!_is.cr())
+            return 0;
       Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration().fraction(), headGroup, stemDirection);
       Note* note = static_cast<Chord*>(seg->element(track))->upNote();
       setLayout(note->chord()->measure());
@@ -2434,8 +2440,8 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               //transpose
                               Part* partDest = staff(dstStaffIdx)->part();
                               Part* partSrc = staff(srcStaffIdx)->part();
-                              Interval intervalDest = partDest->transpose();
-                              Interval intervalSrc = partSrc->transpose();
+                              Interval intervalDest = partDest->instr()->transpose();
+                              Interval intervalSrc = partSrc->instr()->transpose();
                               Interval interval = Interval(intervalSrc.diatonic - intervalDest.diatonic, intervalSrc.chromatic - intervalDest.chromatic);
                               if (!styleB(ST_concertPitch)) {
                                     int rootTpc = transposeTpc(harmony->rootTpc(), interval, false);
