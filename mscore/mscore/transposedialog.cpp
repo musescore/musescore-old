@@ -292,15 +292,29 @@ void Score::cmdTransposeStaff(int staffIdx, Interval interval, bool useDoubleSha
 
       for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
            for (int st = startTrack; st < endTrack; ++st) {
-                 Element* e = segment->element(st);
-                 if (!e || e->type() != CHORD)
-                       continue;
-                 Chord* chord = static_cast<Chord*>(e);
-                 QList<Note*> nl = chord->notes();
-                 foreach(Note* n, nl)
-                        transpose(n, interval, useDoubleSharpsFlats);
-                 }
-           }
+                  Element* e = segment->element(st);
+                  if (!e || e->type() != CHORD)
+                      continue;
+                
+                  Chord* chord = static_cast<Chord*>(e);
+                  QList<Note*> nl = chord->notes();
+                  foreach(Note* n, nl)
+                      transpose(n, interval, useDoubleSharpsFlats);
+                  }
+            }
+            
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            foreach (Element* e, *m->el()) {
+                  if (e->type() != HARMONY)
+                        continue;
+                  if (e->track() >= startTrack && e->track() < endTrack) {  
+                        Harmony* h  = static_cast<Harmony*>(e);
+                        int rootTpc = transposeTpc(h->rootTpc(), interval, false);
+                        int baseTpc = transposeTpc(h->baseTpc(), interval, false);
+                        undoTransposeHarmony(h, rootTpc, baseTpc);
+                        }
+                  }
+            }       
       }
 
 //---------------------------------------------------------
