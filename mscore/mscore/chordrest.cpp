@@ -337,20 +337,6 @@ void ChordRest::layoutArticulations()
       System* s        = m->system();
       int idx          = staff()->rstaff() + staffMove();   // DEBUG
 
-#if 0 // moved to chord()->layout()
-      if (type() == CHORD && static_cast<Chord*>(this)->arpeggio()) {
-            Chord* c          = static_cast<Chord*>(this);
-            double distance   = score()->styleS(ST_ArpeggioNoteDistance).val() * _spatium;
-            double headHeight = c->upNote()->headHeight();
-            c->arpeggio()->layout();
-            double x  = -(c->arpeggio()->width() + distance);
-            double y  = c->upNote()->pos().y() - headHeight * .5;
-            double h  = c->downNote()->pos().y() - y;
-            y        += s->staff(staffIdx() + staffMove())->y() - s->staff(staffIdx())->y();
-            c->arpeggio()->setHeight(h);
-            c->arpeggio()->setPos(x, y);
-            }
-#endif
       qreal x          = centerX();
 
       double distance1 = point(score()->styleS(ST_propertyDistanceHead));
@@ -359,7 +345,7 @@ void ChordRest::layoutArticulations()
       qreal chordTopY = upPos();
       qreal chordBotY = downPos();
 
-      qreal staffTopY = s->bboxStaff(idx).y() - pos().y();
+      qreal staffTopY = 0.0; // s->bboxStaff(idx).y() - pos().y();
       qreal staffBotY = staffTopY + 4.0 * _spatium + distance2;
       staffTopY      -= distance2;
 
