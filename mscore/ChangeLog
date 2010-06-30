@@ -1,4 +1,5 @@
 30.jun (ws)
+      - fix #6289: crash on loading score where a key signature is selected
       - fix layout of fermata if in staff > 1
 29.jun (la)
       - fix #6264: Chordnames not transposed on copy-paste or concert pitch
