@@ -65,7 +65,9 @@ QPointF KeySig::canvasPos() const
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = segment()->measure()->system();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      double yp = y();
+      if (system)
+            yp += system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
 
