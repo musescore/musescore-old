@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2008-2010 Werner Schweer and others
 //
 //  Some Code inspired by "The JAZZ++ Midi Sequencer"
 //  Copyright (C) 1994-2000 Andreas Voss and Per Sigmond, all rights reserved.
@@ -822,7 +822,7 @@ void Harmony::layout()
             return;
             }
       Element::layout();
-      Measure* m = static_cast<Measure*>(parent());
+      Measure* m = measure();
       double yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
       double xx = (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());
 
@@ -1302,6 +1302,38 @@ void Harmony::spatiumChanged(double oldValue, double newValue)
       {
       Text::spatiumChanged(oldValue, newValue);
       render();
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF Harmony::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = measure()->system();
+      double yp = y();
+      if (system)
+            yp += system->staffY(staffIdx());
+      return QPointF(xp, yp);
+      }
+
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Harmony::dragAnchor() const
+      {
+      double xp = 0.0;
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      double yp = measure()->system()->staffY(staffIdx());
+      QPointF p(xp, yp);
+      return QLineF(p, canvasPos());
       }
 
 

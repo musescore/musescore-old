@@ -151,6 +151,14 @@ Note::Note(Score* s)
       _offTimeUserOffset = 0;
       }
 
+Note::~Note()
+      {
+      delete _accidental;
+      foreach(Element* e, _el)
+            delete e;
+      delete _tieFor;
+      }
+
 Note::Note(const Note& n)
    : Element(n)
       {
@@ -255,18 +263,6 @@ void Note::setTpc(int v)
             }
       _tpc = v;
       _userAccidental = 0;
-      }
-
-//---------------------------------------------------------
-//   Note
-//---------------------------------------------------------
-
-Note::~Note()
-      {
-      delete _accidental;
-      delete _tieFor;
-      foreach(Element* e, _el)
-            delete e;
       }
 
 //---------------------------------------------------------

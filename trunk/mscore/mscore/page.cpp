@@ -509,8 +509,9 @@ void PageFormat::write(Xml& xml)
       xml.tag("right-margin",  oddRightMargin * t);
       xml.tag("top-margin",    oddTopMargin * t);
       xml.tag("bottom-margin", oddBottomMargin * t);
-      xml.tag("page-offset", _pageOffset);
       xml.etag();
+
+      xml.tag("page-offset", _pageOffset);
 
       xml.etag();
       }

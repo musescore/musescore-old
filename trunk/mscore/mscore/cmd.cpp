@@ -983,11 +983,9 @@ void ScoreView::cmdAddChordName()
       if (!cr)
             return;
       _score->startCmd();
-      Measure* measure = cr->measure();
       Harmony* s = new Harmony(_score);
       s->setTrack(cr->track());
-      s->setParent(measure);
-//TODO1      s->setTick(cr->tick());
+      s->setParent(cr->segment());
       _score->undoAddElement(s);
 
       _score->setLayoutAll(true);
@@ -1013,22 +1011,21 @@ void Score::cmdAddChordName2()
             Chord* chord = static_cast<Chord*>(cr);
             rootTpc = chord->downNote()->tpc();
             }
-      Measure* measure = cr->measure();
       Harmony* s = 0;
+      Segment* segment = cr->segment();
 
-//TODO1      foreach(Element* e, *measure->el()) {
-//            if ((e->type() == HARMONY) && (static_cast<Harmony*>(e)->tick() == cr->tick())) {
-//                  s = static_cast<Harmony*>(e);
-//                  break;
-//                  }
-//            }
+      foreach(Element* e, segment->annotations()) {
+            if (e->type() == HARMONY && (e->track() == cr->track())) {
+                  s = static_cast<Harmony*>(e);
+                  break;
+                  }
+            }
 
       bool created = false;
       if (s == 0) {
             s = new Harmony(this);
             s->setTrack(cr->track());
-            s->setParent(measure);
-//TODO1            s->setTick(cr->tick());
+            s->setParent(segment);
             s->setRootTpc(rootTpc);
             created = true;
             }
@@ -1110,8 +1107,7 @@ void ScoreView::cmdAddText(int subtype)
                   s->setTrack(0);
                   s->setSubtype(subtype);
                   s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
-                  s->setParent(cr->measure());
-//TODO1                  s->setTick(cr->tick());
+                  s->setParent(cr->segment());
                   }
                   break;
             case TEXT_STAFF:
@@ -1132,8 +1128,7 @@ void ScoreView::cmdAddText(int subtype)
                         s->setTextStyle(TEXT_STYLE_STAFF);
                         }
                   s->setSubtype(subtype);
-                  s->setParent(cr->measure());
-//TODO1                  s->setTick(cr->tick());
+                  s->setParent(cr->segment());
                   }
                   break;
             }
@@ -2270,6 +2265,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               tuplets.append(tuplet);
                               undoAddElement(tuplet);
                               }
+#if 0
                         else if (tag == "Slur") {
                               Slur* slur = new Slur(this);
                               slur->read(eee);
@@ -2277,6 +2273,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
 //TODO1                              slur->setTick(-1);
                               undoAddElement(slur);
                               }
+#endif
                         else if (tag == "Chord" || tag == "Rest" || tag == "RepeatMeasure") {
                               ChordRest* cr = static_cast<ChordRest*>(Element::name2Element(tag, this));
                               cr->setTrack(curTrack);
@@ -2429,8 +2426,10 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     lyrics->setParent(segment);
                                     undoAddElement(lyrics);
                                     }
-                              else
+                              else {
+                                    delete lyrics;
                                     printf("no segment found for lyrics\n");
+                                    }
                               }
                         else if (tag == "Harmony") {
                               Harmony* harmony = new Harmony(this);
@@ -2450,10 +2449,15 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     }
                               
                               int tick = curTick - tickStart + dstTick;
-//TODO1                              harmony->setTick(tick);
-                              Measure* m = tick2measure(tick);
-                              harmony->setParent(m);
-                              undoAddElement(harmony);
+                              Segment* segment = tick2segment(tick);
+                              if (segment) {
+                                    harmony->setParent(segment);
+                                    undoAddElement(harmony);
+                                    }
+                              else {
+                                    delete harmony;
+                                    printf("no segment found for harmony\n");
+                                    }
                               }
                         else {
                               domError(eee);

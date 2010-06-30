@@ -1228,24 +1228,6 @@ printf("remove Segment %p %s\n", seg, seg->subTypeName());
 void Score::cmdRemoveTime(int tick, int len)
       {
       int etick = tick + len;
-      foreach(Element* e, _gel) {
-#if 0 // TODO1
-            if (e->type() == SLUR) {
-                  Slur* slur = static_cast<Slur*>(e);
-                  int stick = slur->startTick();
-                  int estick = slur->endTick();
-                  if ((stick >= tick && estick < etick)
-                     || (estick >= tick && estick < etick)) {
-                        undoRemoveElement(e);
-                        }
-                  }
-            else if (e->isSLine()) {
-                  SLine* s = static_cast<SLine*>(e);
-                  if (s->tick() >= tick && s->tick2() < etick)
-                        undoRemoveElement(e);
-                  }
-#endif
-            }
       foreach (Beam* b, _beams) {
             ChordRest* e1 = b->elements().front();
             ChordRest* e2 = b->elements().back();
@@ -1406,7 +1388,6 @@ void Score::cmdDeleteSelection()
 void ScoreView::chordTab(bool back)
       {
       Harmony* cn      = (Harmony*)editObject;
-      Measure* measure = (Measure*)cn->parent();
       Segment* segment = cn->segment();
       int track        = cn->track();
       if (segment == 0) {
@@ -1415,18 +1396,10 @@ void ScoreView::chordTab(bool back)
             }
 
       // search next chord
-      if (back) {
-            while ((segment = segment->prev1())) {
-                  if (segment->subtype() == SegChordRest)
-                        break;
-                  }
-            }
-      else {
-            while ((segment = segment->next1())) {
-                  if (segment->subtype() == SegChordRest)
-                        break;
-                  }
-            }
+      if (back)
+            segment = segment->prev1(SegChordRest);
+      else
+            segment = segment->next1(SegChordRest);
       if (segment == 0) {
             printf("no next segment\n");
             return;
@@ -1435,25 +1408,19 @@ void ScoreView::chordTab(bool back)
       _score->startCmd();
 
       // search for next chord name
-      cn              = 0;
-      measure         = segment->measure();
-      ElementList* el = measure->el();
-#if 0 // TODO1
-      foreach(Element* e, *el) {
-            if (e->type() == HARMONY) {
+      cn = 0;
+      foreach(Element* e, segment->annotations()) {
+            if (e->type() == HARMONY && e->track() == track) {
                   Harmony* h = static_cast<Harmony*>(e);
-                  if (h->tick() == segment->tick()) {
-                        cn = h;
-                        break;
-                        }
+                  cn = h;
+                  break;
                   }
             }
-#endif
+
       if (!cn) {
             cn = new Harmony(_score);
-//TODO1            cn->setTick(segment->tick());
             cn->setTrack(track);
-            cn->setParent(measure);
+            cn->setParent(segment);
             _score->undoAddElement(cn);
             }
 
