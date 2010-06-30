@@ -69,10 +69,13 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
 
 QPointF LineSegment::canvasPos() const
       {
+      return pos();
+#if 0
       QPointF p(pos());
       if (parent())
             p += parent()->canvasPos();
       return p;
+#endif
       }
 
 //---------------------------------------------------------
@@ -294,11 +297,10 @@ void SLine::layout()
       setPos(QPointF());
       setUserOff(QPointF());
 
-      QPointF pp(canvasPos());
       System* s1;
       System* s2;
-      QPointF p1 = tick2pos(0, &s1) - pp;
-      QPointF p2 = tick2pos(1, &s2) - pp;
+      QPointF p1 = tick2pos(0, &s1);
+      QPointF p2 = tick2pos(1, &s2);
 
       QList<System*>* systems = score()->systems();
       int sysIdx1        = systems->indexOf(s1);
@@ -349,12 +351,11 @@ void SLine::layout()
             seg->setSystem(system);
             double x1 = system->firstMeasure()->first(SegChordRest)->canvasPos().x();
             double x2 = system->abbox().right();
-            double y  = system->staffY(si) - pp.y();
+            double y  = system->staffY(si);
 
             if (sysIdx1 == sysIdx2) {
                   // single segment
                   seg->setLineSegmentType(SEGMENT_SINGLE);
-                  QPointF pp(canvasPos());
                   seg->setPos(p1);
                   seg->setPos2(QPointF(p2.x() - p1.x(), 0.0));
                   }
@@ -362,18 +363,18 @@ void SLine::layout()
                   // start segment
                   seg->setLineSegmentType(SEGMENT_BEGIN);
                   seg->setPos(p1);
-                  seg->setPos2(QPointF(x2 - p1.x() - pp.x(), 0.0));
+                  seg->setPos2(QPointF(x2 - p1.x(), 0.0));
                   }
             else if (i > 0 && i != sysIdx2) {
                   // middle segment
                   seg->setLineSegmentType(SEGMENT_MIDDLE);
-                  seg->setPos(QPointF(x1 - pp.x(), y));
+                  seg->setPos(QPointF(x1, y));
                   seg->setPos2(QPointF(x2 - x1, 0.0));
                   }
             else if (i == sysIdx2) {
                   // end segment
                   seg->setLineSegmentType(SEGMENT_END);
-                  seg->setPos(QPointF(x1 - pp.x(), y));
+                  seg->setPos(QPointF(x1, y));
                   seg->setPos2(QPointF(endElement()->canvasPos().x() - x1, 0.0));
                   }
             seg->layout();

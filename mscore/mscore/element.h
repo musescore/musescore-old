@@ -132,7 +132,7 @@ class Element {
       QColor _color;
       double _mag;                ///< standard magnification (derived value)
 
-      QPointF _userOff;           ///< Offset from normal layout position:
+      QPointF _userOff;           ///< offset from normal layout position:
                                   ///< user dragged object this amount.
                                   ///< depends on Spatium ("space") units!
 

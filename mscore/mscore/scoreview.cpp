@@ -3417,11 +3417,11 @@ void ScoreView::adjustCanvasPosition(const Element* el, bool playBack)
       {
       const Measure* m;
       if (el->type() == NOTE)
-            m = static_cast<const Note*>(el)->chord()->segment()->measure();
+            m = static_cast<const Note*>(el)->chord()->measure();
       else if (el->type() == REST)
-            m = static_cast<const Rest*>(el)->segment()->measure();
+            m = static_cast<const Rest*>(el)->measure();
       else if (el->type() == CHORD)
-            m = static_cast<const Chord*>(el)->segment()->measure();
+            m = static_cast<const Chord*>(el)->measure();
       else if (el->type() == SEGMENT)
             m = static_cast<const Segment*>(el)->measure();
       else if (el->type() == LYRICS)

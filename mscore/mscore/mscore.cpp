@@ -419,20 +419,24 @@ MuseScore::MuseScore()
 
       QWidget* mainScore = new QWidget;
       mainScore->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      mainWindow->addWidget(mainScore);
+
       layout = new QVBoxLayout;
       layout->setMargin(0);
       layout->setSpacing(0);
       mainScore->setLayout(layout);
+
       navigator = new Navigator;
       navigator->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      navigator->setMinimumHeight(40);
       mainWindow->addWidget(navigator);
       navigator->setShown(preferences.showNavigator);
+
       QList<int> sizes;
       sizes << 500 << 100;
       mainWindow->setSizes(sizes);
 
       splitter = new QSplitter;
-      mainWindow->addWidget(mainScore);
 
       tab1 = new ScoreTab(&scoreList);
       tab1->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
