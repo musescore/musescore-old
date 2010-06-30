@@ -390,6 +390,8 @@ void PageFormat::read(QDomElement e)
                   size = paperSizeNameToIndex("Custom");
                   _width = val.toDouble() * .5 / PPI;
                   }
+            else if (tag == "page-offset")
+                  _pageOffset = val.toInt();
             else
                   domError(e);
             }
@@ -458,8 +460,6 @@ void PageFormat::readMusicXML(QDomElement e, double conversion)
                   size = paperSizeNameToIndex("Custom");
                   _width = val.toDouble() * conversion;
                   }
-            else if (tag == "page-offset")
-                  _pageOffset = val.toInt();
             else
                   domError(e);
             }
