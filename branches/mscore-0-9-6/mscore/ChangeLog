@@ -1,3 +1,5 @@
+30.jun (ws)
+      - fix layout of fermata if in staff > 1
 29.jun (la)
       - fix #6264: Chordnames not transposed on copy-paste or concert pitch
       - fix #6283: R key does not work as expected in drum staff
