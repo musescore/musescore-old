@@ -251,17 +251,29 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
             lyrics->setTrack(track);
             lyrics->setParent(nextSegment);
             lyrics->setNo(verse);
+            lyrics->setSyllabic(Lyrics::SINGLE);
             }
 
       _score->startCmd();
 
       if (oldLyrics && !moveOnly) {
+            switch(lyrics->syllabic()) {
+                  case Lyrics::SINGLE:
+                  case Lyrics::BEGIN:
+                        break;
+                  case Lyrics::END:
+                        lyrics->setSyllabic(Lyrics::SINGLE);
+                        break;
+                  case Lyrics::MIDDLE:
+                        lyrics->setSyllabic(Lyrics::BEGIN);
+                        break;
+                  }
             switch(oldLyrics->syllabic()) {
                   case Lyrics::SINGLE:
                   case Lyrics::END:
                         break;
                   case Lyrics::BEGIN:
-                        oldLyrics->setSyllabic(Lyrics::END);
+                        oldLyrics->setSyllabic(Lyrics::SINGLE);
                         break;
                   case Lyrics::MIDDLE:
                         oldLyrics->setSyllabic(Lyrics::END);
@@ -331,24 +343,26 @@ void ScoreView::lyricsMinus()
             lyrics->setTrack(track);
             lyrics->setParent(nextSegment);
             lyrics->setNo(verse);
+            lyrics->setSyllabic(Lyrics::END);
             }
-
-      //lyrics->setSyllabic(Lyrics::END);
-
+      
+      if(lyrics->syllabic()==Lyrics::BEGIN) {
+            lyrics->setSyllabic(Lyrics::MIDDLE);
+            }
+      else if(lyrics->syllabic()==Lyrics::SINGLE) {
+            lyrics->setSyllabic(Lyrics::END);
+            }
+      
       if (oldLyrics) {
             switch(oldLyrics->syllabic()) {
+                  case Lyrics::BEGIN:
+                  case Lyrics::MIDDLE:
+                        break;
                   case Lyrics::SINGLE:
                         oldLyrics->setSyllabic(Lyrics::BEGIN);
-                        //lyrics->setSyllabic(Lyrics::MIDDLE);
-                        break;
-                  case Lyrics::BEGIN:
-                        //lyrics->setSyllabic(Lyrics::MIDDLE);
-                        break;
-                  case Lyrics::MIDDLE:
                         break;
                   case Lyrics::END:
                         oldLyrics->setSyllabic(Lyrics::MIDDLE);
-                        //lyrics->setSyllabic(Lyrics::MIDDLE);
                         break;
                   }
             }

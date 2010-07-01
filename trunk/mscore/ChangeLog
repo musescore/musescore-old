@@ -1,6 +1,8 @@
 1.jul (ws)
       - add patch from Miwarre: Hide/show naturals and courtesy keys
         for individual key sigs
+      (la)
+      - fix #6318: MusicXML export of syllabic is broken
 29.jun (la)
       - fix #6264: Chordnames not transposed on copy-paste or concert pitch
       - fix #6283: R key does not work as expected in drum staff
