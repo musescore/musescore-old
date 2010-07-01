@@ -438,11 +438,13 @@ class FlipBeamDirection : public UndoCommand {
 class ChangeKeySig : public UndoCommand {
       KeySig* keysig;
       KeySigEvent ks;
+      bool showCourtesy;
+      bool showNaturals;
 
       void flip();
 
    public:
-      ChangeKeySig(KeySig*, KeySigEvent newKeySig);
+      ChangeKeySig(KeySig*, KeySigEvent newKeySig, bool sc, bool sn);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

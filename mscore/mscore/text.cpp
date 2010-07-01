@@ -687,11 +687,10 @@ void TextB::layout()
 
       if (parent() == 0)
             return;
-      if (parent()->type() == MEASURE) {
-            Measure* m = static_cast<Measure*>(parent());
-            double y = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
-            // TODO1 double x = (tick() < 0) ? 0.0 : m->tick2pos(tick());
-            double x = 0.0;
+      if (parent()->type() == SEGMENT) {
+            Segment* s = static_cast<Segment*>(parent());
+            double y = s ? s->measure()->system()->staff(track() / VOICES)->y() : 0.0;
+            double x = s->pos().x();
             setPos(ipos() + QPointF(x, y));
             }
       }

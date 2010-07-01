@@ -228,7 +228,8 @@ void Score::transpose()
                         KeySigEvent key  = km->key(ks->tick());
                         KeySigEvent okey = km->key(ks->tick() - 1);
                         key.naturalType  = okey.accidentalType;
-                        _undo->push(new ChangeKeySig(ks, key));
+                        _undo->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
+                           ks->showNaturals()));
                         }
                   }
             return;
@@ -297,19 +298,19 @@ void Score::cmdTransposeStaff(int staffIdx, Interval interval, bool useDoubleSha
                   Element* e = segment->element(st);
                   if (!e || e->type() != CHORD)
                       continue;
-                
+
                   Chord* chord = static_cast<Chord*>(e);
                   QList<Note*> nl = chord->notes();
                   foreach(Note* n, nl)
                       transpose(n, interval, useDoubleSharpsFlats);
                   }
             }
-            
+
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach (Element* e, *m->el()) {
                   if (e->type() != HARMONY)
                         continue;
-                  if (e->track() >= startTrack && e->track() < endTrack) {  
+                  if (e->track() >= startTrack && e->track() < endTrack) {
                         Harmony* h  = static_cast<Harmony*>(e);
                         int rootTpc = transposeTpc(h->rootTpc(), interval, false);
                         int baseTpc = transposeTpc(h->baseTpc(), interval, false);
@@ -372,7 +373,8 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
                         KeySigEvent key  = km->key(s->tick());
                         KeySigEvent okey = km->key(s->tick() - 1);
                         key.naturalType  = okey.accidentalType;
-                        _undo->push(new ChangeKeySig(ks, key));
+                        _undo->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
+                           ks->showNaturals()));
                         }
                   }
             }

@@ -26,6 +26,7 @@
 #include "segment.h"
 #include "measure.h"
 #include "score.h"
+#include "undo.h"
 
 const char* keyNames[15] = {
       QT_TRANSLATE_NOOP("MuseScore", "G major, E minor"),   QT_TRANSLATE_NOOP("MuseScore", "Cb major, Ab minor"),
@@ -45,11 +46,16 @@ const char* keyNames[15] = {
 KeySig::KeySig(Score* s)
   : Element(s)
       {
+      _showCourtesySig = true;
+	_showNaturals = true;
       }
+
 KeySig::KeySig(const KeySig& k)
    : Element(k)
       {
-      foreach(KeySym* ks, k.keySymbols)
+	_showCourtesySig = k.showCourtesySig();
+	_showNaturals = k.showNaturals();
+	foreach(KeySym* ks, k.keySymbols)
             keySymbols.append(new KeySym(*ks));
       }
 
@@ -64,8 +70,10 @@ QPointF KeySig::canvasPos() const
       double xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
+      double yp = y();
       System* system = segment()->measure()->system();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      if (system)
+            yp += system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
 
@@ -159,12 +167,13 @@ void KeySig::layout()
       if (!((t1 > 0) ^ (t2 > 0)))
             naturals &= ~accidentals;
 
-      for (int i = 0; i < 7; ++i) {
-            if (naturals & (1 << i)) {
-                  addLayout(naturalSym, xo, clefTable[clef].lines[i + coffset]);
-                  xo += 1.0;
-                  }
-            }
+	  if(_showNaturals)
+		  for (int i = 0; i < 7; ++i) {
+				if (naturals & (1 << i)) {
+					  addLayout(naturalSym, xo, clefTable[clef].lines[i + coffset]);
+					  xo += 1.0;
+					  }
+				}
       switch(t1) {
             case 7:  addLayout(sharpSym, xo + 6.0, clefTable[clef].lines[6]);
             case 6:  addLayout(sharpSym, xo + 5.0, clefTable[clef].lines[5]);
@@ -240,6 +249,36 @@ Element* KeySig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       }
 
 //---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool KeySig::genPropertyMenu(QMenu* popup) const
+      {
+	Element::genPropertyMenu(popup);
+	if (!generated()) {
+            QAction* a = popup->addAction(_showCourtesySig ? tr("Hide courtesy sig.") : tr("Show courtesy sig.") );
+            a->setData("courtesy");
+		a = popup->addAction(_showNaturals ? tr("Hide naturals") : tr("Show naturals") );
+		a->setData("naturals");
+	      }
+	return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void KeySig::propertyAction(ScoreView* viewer, const QString& s)
+      {
+	if (s == "courtesy")
+            score()->undo()->push(new ChangeKeySig(this, keySigEvent(), !_showCourtesySig, _showNaturals));
+	else if (s == "naturals")
+            score()->undo()->push(new ChangeKeySig(this, keySigEvent(), _showCourtesySig, !_showNaturals));
+	else
+		Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
 //   setSig
 //---------------------------------------------------------
 
@@ -277,6 +316,9 @@ Space KeySig::space() const
 //   write
 //---------------------------------------------------------
 
+#define KEYSIG_SHOWNATURALSTAG		"showNaturals"
+#define KEYSIG_SHOWCOURTESYTAG		"showCourtesySig"
+
 void KeySig::write(Xml& xml) const
       {
       xml.stag(name());
@@ -287,7 +329,9 @@ void KeySig::write(Xml& xml) const
             xml.tag("pos", ks->spos);
             xml.etag();
             }
-      xml.etag();
+	  xml.tag(KEYSIG_SHOWCOURTESYTAG, _showCourtesySig);
+	  xml.tag(KEYSIG_SHOWNATURALSTAG, _showNaturals);
+	  xml.etag();
       }
 
 //---------------------------------------------------------
@@ -312,7 +356,11 @@ void KeySig::read(QDomElement e)
                         }
                   keySymbols.append(ks);
                   }
-            else if (!Element::readProperties(e))
+			else if (tag == KEYSIG_SHOWCOURTESYTAG)
+				_showCourtesySig = e.text().toInt();
+			else if (tag == KEYSIG_SHOWNATURALSTAG)
+				_showNaturals = e.text().toInt();
+			else if (!Element::readProperties(e))
                   domError(e);
             }
       }
