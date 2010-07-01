@@ -1258,11 +1258,20 @@ void MuseScore::dropEvent(QDropEvent* event)
             foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
                         Score* score = new Score(defaultStyle);
-                        score->read(u.toLocalFile());
-                        view = appendScore(score);
+                        if(score->read(u.toLocalFile()))
+                              view = appendScore(score);
+                        else
+                              delete score;
                         }
                   }
-            setCurrentScoreView(view);
+            if(view != -1)
+                  setCurrentScoreView(view);
+            else {
+                  QMessageBox::critical(0,
+                        tr("MuseScore: Load error"),
+                        tr("Open failed: unknown file extension or broken file"));
+                  }
+                
             event->acceptProposedAction();
             }
       }

@@ -202,10 +202,17 @@ void MuseScore::loadFile()
       if (fn.isEmpty())
             return;
       Score* score = new Score(defaultStyle);
-      score->read(fn);
-      setCurrentScoreView(appendScore(score));
-      lastOpenPath = score->fileInfo()->path();
-      writeSessionFile(false);
+      if(score->read(fn)) {
+            setCurrentScoreView(appendScore(score));
+            lastOpenPath = score->fileInfo()->path();
+            writeSessionFile(false);
+            }
+      else {
+            QMessageBox::critical(0,
+               tr("MuseScore: Load error"),
+               tr("Open failed: unknown file extension or broken file"));
+            delete score;
+            }
       }
 
 //---------------------------------------------------------
