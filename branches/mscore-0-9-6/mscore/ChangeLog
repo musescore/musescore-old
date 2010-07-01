@@ -1,5 +1,6 @@
 1.jul  (la)
       - fix #6318: MusicXML export of syllabic is broken
+      - no empty tab if user tries to open a file with unknown extension
 30.jun (ws)
       - fix #6289: crash on loading score where a key signature is selected
       - fix layout of fermata if in staff > 1

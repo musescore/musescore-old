@@ -473,9 +473,9 @@ bool Score::read(QString name)
                   connectSlurs();
                   }
             else if (cs.toLower() == "ove") {
-            	if(!importOve(name))
-            		return false;
-			}
+            	    if(!importOve(name))
+            		        return false;
+			            }
 #ifdef OMR
             else if (cs.toLower() == "pdf") {
                   if (!importPdf(name))
@@ -488,6 +488,7 @@ bool Score::read(QString name)
                   }
             else {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
+                  return false;
                   }
             }
 
