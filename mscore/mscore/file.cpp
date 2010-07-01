@@ -194,10 +194,14 @@ void MuseScore::loadFile()
       if (fn.isEmpty())
             return;
       Score* score = new Score(defaultStyle);
-      score->read(fn);
-      setCurrentScoreView(appendScore(score));
-      lastOpenPath = score->fileInfo()->path();
-      writeSessionFile(false);
+      if(score->read(fn)) {
+            setCurrentScoreView(appendScore(score));
+            lastOpenPath = score->fileInfo()->path();
+            writeSessionFile(false);
+            }
+      else {
+            delete score;
+            }
       }
 
 //---------------------------------------------------------

@@ -1240,11 +1240,14 @@ void MuseScore::dropEvent(QDropEvent* event)
             foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
                         Score* score = new Score(defaultStyle);
-                        score->read(u.toLocalFile());
-                        view = appendScore(score);
+                        if(score->read(u.toLocalFile()))
+                              view = appendScore(score);
+                        else
+                              delete score;
                         }
                   }
-            setCurrentScoreView(view);
+            if(view != -1)
+                  setCurrentScoreView(view);
             event->acceptProposedAction();
             }
       }
