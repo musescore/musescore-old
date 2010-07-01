@@ -60,6 +60,7 @@
 #include "measure.h"
 #include "fret.h"
 #include "staffstate.h"
+#include "fingering.h"
 
 extern bool useFactorySettings;
 
@@ -470,19 +471,17 @@ void MuseScore::showPalette(bool visible)
 
             const char finger[] = "012345pimac";
             for (unsigned i = 0; i < strlen(finger); ++i) {
-                  Text* k = new Text(gscore);
-                  k->setSubtype(TEXT_FINGERING);
-                  k->setTextStyle(TEXT_STYLE_FINGERING);
-                  k->setText(QString(finger[i]));
-                  sp->append(k, tr("Fingering %1").arg(finger[i]));
+                  Fingering* f = new Fingering(gscore);
+                  f->setText(QString(finger[i]));
+                  sp->append(f, tr("Fingering %1").arg(finger[i]));
                   }
             const char stringnumber[] = "0123456";
             for (unsigned i = 0; i < strlen(stringnumber); ++i) {
-                  Text* k = new Text(gscore);
-                  k->setSubtype(TEXT_STRING_NUMBER);
-                  k->setTextStyle(TEXT_STYLE_STRING_NUMBER);
-                  k->setText(QString(stringnumber[i]));
-                  sp->append(k, tr("String number %1").arg(stringnumber[i]));
+                  Fingering* f = new Fingering(gscore);
+                  f->setSubtype(TEXT_STRING_NUMBER);
+                  f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
+                  f->setText(QString(stringnumber[i]));
+                  sp->append(f, tr("String number %1").arg(stringnumber[i]));
                   }
 
             paletteBox->addPalette(sp);

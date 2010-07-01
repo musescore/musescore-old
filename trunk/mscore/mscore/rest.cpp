@@ -307,11 +307,8 @@ void Rest::remove(Element* e)
       {
       if (e->type() != ARTICULATION)
             return;
-      int idx = articulations.indexOf((Articulation*)e);
-      if (idx == -1)
-            printf("Rest::remove(): attribute not found\n");
-      else
-            articulations.removeAt(idx);
+      if (!articulations.removeOne(static_cast<Articulation*>(e)))
+            printf("Rest::remove(): articulation not found\n");
       }
 
 //---------------------------------------------------------

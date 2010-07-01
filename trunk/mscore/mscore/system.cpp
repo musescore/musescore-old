@@ -95,19 +95,6 @@ System::~System()
       }
 
 //---------------------------------------------------------
-//   bboxStaff
-//---------------------------------------------------------
-
-QRectF System::bboxStaff(int staff) const
-      {
-      if (staff >= int(_staves.size())) {
-            printf("System: bad sysStaff idx %d, size %d, vbox %d\n", staff, _staves.size(), _vbox);
-            abort();
-            }
-      return _staves[staff]->bbox();
-      }
-
-//---------------------------------------------------------
 //   insertStaff
 //---------------------------------------------------------
 

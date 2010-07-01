@@ -117,7 +117,7 @@ class System : public Element {
 
       QList<MeasureBase*>& measures()      { return ml; }
 
-      QRectF bboxStaff(int staff) const;
+      QRectF bboxStaff(int staff) const      { return _staves[staff]->bbox(); }
       QList<SysStaff*>* staves()             { return &_staves;   }
       const QList<SysStaff*>* staves() const { return &_staves;   }
       double staffY(int idx) const;

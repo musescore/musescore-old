@@ -59,6 +59,7 @@ enum ElementType {
       IMAGE,
 /*18*/TIE,
       ARTICULATION, DYNAMIC, PAGE, BEAM, HOOK, LYRICS, MARKER, JUMP,
+      FINGERING,
       TUPLET,
       TEMPO_TEXT,
       STAFF_TEXT,
@@ -216,12 +217,8 @@ class Element {
       virtual ElementType type() const = 0;
       int subtype() const                     { return _subtype;        }
       virtual void setSubtype(int val)        { _subtype = val;         }
-      bool isChordRest() const {
-            return type() == REST || type() == CHORD;
-            }
-      bool isDurationElement() const {
-            return isChordRest() || (type() == TUPLET);
-            }
+      bool isChordRest() const                { return type() == REST || type() == CHORD;   }
+      bool isDurationElement() const          { return isChordRest() || (type() == TUPLET); }
       bool isSLine() const {
             return type() == HAIRPIN || type() == OTTAVA || type() == PEDAL
                || type() == TRILL || type() == VOLTA || type() == TEXTLINE;

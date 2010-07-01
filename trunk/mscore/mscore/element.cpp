@@ -71,6 +71,7 @@
 #include "measure.h"
 #include "fret.h"
 #include "staffstate.h"
+#include "fingering.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -104,6 +105,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Lyrics"),
       QT_TRANSLATE_NOOP("elementName", "Marker"),
       QT_TRANSLATE_NOOP("elementName", "Jump"),
+      QT_TRANSLATE_NOOP("elementName", "Fingering"),
       QT_TRANSLATE_NOOP("elementName", "Tuplet"),
       QT_TRANSLATE_NOOP("elementName", "Tempo"),
       QT_TRANSLATE_NOOP("elementName", "StaffText"),
@@ -1250,6 +1252,7 @@ Element* Element::create(ElementType type, Score* score)
             case STEM:              return new Stem(score);
             case SLUR:              return new Slur(score);
             case ACCIDENTAL_BRACKET: return new AccidentalBracket(score);
+            case FINGERING:          return new Fingering(score);
 
             case SLUR_SEGMENT:
             case STEM_SLASH:
@@ -1326,6 +1329,7 @@ const char* Element::name(ElementType type)
             case LYRICS:            return "Lyrics";
             case MARKER:            return "Marker";
             case JUMP:              return "Jump";
+            case FINGERING:         return "Fingering";
             case TUPLET:            return "Tuplet";
             case TEMPO_TEXT:        return "Tempo";
             case STAFF_TEXT:        return "StaffText";

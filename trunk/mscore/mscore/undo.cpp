@@ -183,6 +183,7 @@ void UndoStack::push(UndoCommand* cmd)
             printf("UndoStack:push(): no active command\n");
             cmd->redo();
             delete cmd;
+abort();
             return;
             }
       curCmd->appendChild(cmd);
@@ -1239,10 +1240,12 @@ void RemoveStaves::redo()
 //   ChangeKeySig
 //---------------------------------------------------------
 
-ChangeKeySig::ChangeKeySig(KeySig* _keysig, KeySigEvent _ks)
+ChangeKeySig::ChangeKeySig(KeySig* _keysig, KeySigEvent _ks, bool sc, bool sn)
       {
       keysig = _keysig;
       ks     = _ks;
+      showCourtesy = sc;
+      showNaturals = sn;
       }
 
 //---------------------------------------------------------
@@ -1252,8 +1255,16 @@ ChangeKeySig::ChangeKeySig(KeySig* _keysig, KeySigEvent _ks)
 void ChangeKeySig::flip()
       {
       KeySigEvent oe = keysig->keySigEvent();
+      bool sc        = keysig->showCourtesySig();
+      bool sn        = keysig->showNaturals();
+
       keysig->setSubtype(ks);
-      ks = oe;
+      keysig->setShowCourtesySig(showCourtesy);
+      keysig->setShowNaturals(showNaturals);
+
+      showCourtesy = sc;
+      showNaturals = sn;
+      ks           = oe;
       }
 
 //---------------------------------------------------------

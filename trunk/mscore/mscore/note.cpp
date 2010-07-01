@@ -894,6 +894,7 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
       {
       if (type == ARTICULATION
          || type == TEXT
+         || type == FINGERING
          || type == ACCIDENTAL
          || type == BREATH
          || type == ARPEGGIO
@@ -956,6 +957,7 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
             case TEXT:
             case SYMBOL:
             case IMAGE:
+            case FINGERING:
                   e->setParent(this);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
@@ -1289,13 +1291,16 @@ void Note::layout1(char* tversatz)
                         }
                   }
             if (acci != ACC_NONE && !_tieBack && !_hidden) {
-                  if (!_accidental)
-                        add(new Accidental(score()));
+                  _accidental = new Accidental(score());
+                  _accidental->setGenerated(true);
+                  _accidental->setParent(this);
                   _accidental->setSubtype(acci);
                   }
             else {
-                  if (_accidental)
-                        score()->undoRemoveElement(_accidental);
+                  if (_accidental) {
+                        delete _accidental;
+                        _accidental = 0;
+                        }
                   }
             //
             // calculate the real note line depending on clef

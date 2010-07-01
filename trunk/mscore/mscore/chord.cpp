@@ -436,7 +436,7 @@ void Chord::remove(Element* e)
             }
       else if (e->type() == ARTICULATION) {
             if (!articulations.removeOne(static_cast<Articulation*>(e)))
-                  printf("Chord::remove(): attribute not found\n");
+                  printf("Chord::remove(): articulation not found\n");
             }
       else if (e->type() == ARPEGGIO)
             _arpeggio = 0;
@@ -1290,12 +1290,10 @@ void Chord::layout()
             double x = 0.0;
 
             bool stemUp = up();
-#if 1
             if (staffMove() < 0)
                   stemUp = false;
             else if (staffMove() > 0)
                   stemUp = true;
-#endif
 
             if (note->mirror())
                   x += stemUp ? headWidth : - headWidth;
@@ -1328,23 +1326,30 @@ void Chord::layout()
 
       renderPlayback();
 
-      //-----------------------------------------
-      //  Fingering
-      //-----------------------------------------
+      //---------------------------------------------------
+      //    layout fingering
+      //---------------------------------------------------
 
-#if 0 // TODO
       foreach(Note* note, _notes) {
-            QList<Text*>& fingering = note->fingering();
-            double x = _spatium * 0.8 + note->headWidth();
-            foreach(const Text* f, fingering) {
-                  f->setPos(x, 0.0);
-                  // TODO: x += _spatium;
-                  // if we have two fingerings and move the first,
-                  // the second will also change position because their
-                  // position in this list changes
+            foreach(Element* e, *note->el()) {
+                  if (e->type() == TEXT && e->subtype() == TEXT_FINGERING) {
+                        Text* t = dynamic_cast<Text*>(e);
+                        if (_notes.size() > 1) {
+
+                              }
+                        else {
+                              double x = note->headWidth() * .5;
+                              x -= t->width() * .5;
+                              double y;
+                              if (up())
+                                    y = _spatium * .4;     // below
+                              else
+                                    y = -_spatium * 2.4;
+                              t->setPos(x, y);
+                              }
+                        }
                   }
             }
-#endif
 
       if (_arpeggio) {
             double headHeight = upnote->headHeight();
