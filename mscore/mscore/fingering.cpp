@@ -27,7 +27,6 @@
 Fingering::Fingering(Score* s)
   : Text(s)
       {
-      setSubtype(TEXT_FINGERING);
       setTextStyle(TEXT_STYLE_FINGERING);
       }
 
@@ -52,7 +51,7 @@ void Fingering::write(Xml& xml) const
       }
 
 //---------------------------------------------------------
-//   Trill::read
+//   read
 //---------------------------------------------------------
 
 void Fingering::read(QDomElement e)
@@ -60,9 +59,7 @@ void Fingering::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
-            if (tag == "Accidental") {
-                  }
-            else if (!Text::readProperties(e))
+            if (!Text::readProperties(e))
                   domError(e);
             }
       }

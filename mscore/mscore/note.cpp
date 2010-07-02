@@ -54,6 +54,7 @@
 #include "tablature.h"
 #include "fret.h"
 #include "harmony.h"
+#include "fingering.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -119,6 +120,7 @@ void NoteHead::write(Xml& xml) const
 Note::Note(Score* s)
    : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       dragMode           = false;
       _pitch             = 0;
       _ppitch            = 0;
@@ -198,18 +200,6 @@ Note::Note(const Note& n)
 
       _offTimeOffset     = n._offTimeOffset;
       _offTimeUserOffset = n._offTimeUserOffset;
-      }
-
-//---------------------------------------------------------
-//   isMovable
-//---------------------------------------------------------
-
-bool Note::isMovable() const
-      {
-      //
-      // drumset notes are not movable
-      //
-      return !staff()->part()->instr()->useDrumset();
       }
 
 //---------------------------------------------------------
@@ -359,6 +349,7 @@ void Note::add(Element* e)
                   _el.append(e);
                   }
                   break;
+            case FINGERING:
             case TEXT:
                   _el.append(e);
                   break;
@@ -402,6 +393,7 @@ void Note::remove(Element* e)
             case TEXT:
             case SYMBOL:
             case IMAGE:
+            case FINGERING:
                   if (!_el.remove(e))
                         printf("Note::remove(): cannot find %s\n", e->name());
                   break;
@@ -651,17 +643,16 @@ void Note::read(QDomElement e)
                   _tieFor->read(e);
                   _tieFor->setStartNote(this);
                   }
-            else if (tag == "Text") {
-                  Text* f = new Text(score());
-                  f->setSubtype(TEXT_FINGERING);
+            else if (tag == "Text") {                       // obsolete
+                  Fingering* f = new Fingering(score());
                   f->setTextStyle(TEXT_STYLE_FINGERING);
                   f->read(e);
-                  // DEBUG:   convert to plain
-#if 0
-                  QString s = f->getText();
-                  f->setText(s);
-#endif
-                  //
+                  add(f);
+                  }
+            else if (tag == "Fingering") {
+                  Fingering* f = new Fingering(score());
+                  f->setTextStyle(TEXT_STYLE_FINGERING);
+                  f->read(e);
                   add(f);
                   }
             else if (tag == "Symbol") {
@@ -1409,11 +1400,11 @@ void Note::setLine(int n)
       _line = n;
       if (staff()->useTablature()) {
             _string  = n;
-            _pos.ry() = _string * spatium() * 1.5;
+            rypos() = _string * spatium() * 1.5;
             }
       else {
             _line = n;
-            _pos.ry() = _line * spatium() * .5;
+            rypos() = _line * spatium() * .5;
             }
       }
 

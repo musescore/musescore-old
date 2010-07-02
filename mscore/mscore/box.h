@@ -92,7 +92,6 @@ class HBox : public Box {
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
-      virtual bool isMovable() const;
       virtual QRectF drag(const QPointF& s);
       void layout2();
       };

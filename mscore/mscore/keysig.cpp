@@ -256,9 +256,13 @@ bool KeySig::genPropertyMenu(QMenu* popup) const
       {
 	Element::genPropertyMenu(popup);
 	if (!generated()) {
-            QAction* a = popup->addAction(_showCourtesySig ? tr("Hide courtesy sig.") : tr("Show courtesy sig.") );
+            QAction* a = popup->addAction(_showCourtesySig
+               ? QT_TRANSLATE_NOOP("KeySig", "Hide courtesy sig.")
+               : QT_TRANSLATE_NOOP("KeySig", "Show courtesy sig.") );
             a->setData("courtesy");
-		a = popup->addAction(_showNaturals ? tr("Hide naturals") : tr("Show naturals") );
+		a = popup->addAction(_showNaturals
+               ? QT_TRANSLATE_NOOP("KeySig", "Hide naturals")
+               : QT_TRANSLATE_NOOP("KeySig", "Show naturals") );
 		a->setData("naturals");
 	      }
 	return true;
@@ -316,9 +320,6 @@ Space KeySig::space() const
 //   write
 //---------------------------------------------------------
 
-#define KEYSIG_SHOWNATURALSTAG		"showNaturals"
-#define KEYSIG_SHOWCOURTESYTAG		"showCourtesySig"
-
 void KeySig::write(Xml& xml) const
       {
       xml.stag(name());
@@ -329,9 +330,9 @@ void KeySig::write(Xml& xml) const
             xml.tag("pos", ks->spos);
             xml.etag();
             }
-	  xml.tag(KEYSIG_SHOWCOURTESYTAG, _showCourtesySig);
-	  xml.tag(KEYSIG_SHOWNATURALSTAG, _showNaturals);
-	  xml.etag();
+	xml.tag("showNaturals", _showCourtesySig);
+	xml.tag("showCourtesySig", _showNaturals);
+	xml.etag();
       }
 
 //---------------------------------------------------------
@@ -356,11 +357,11 @@ void KeySig::read(QDomElement e)
                         }
                   keySymbols.append(ks);
                   }
-			else if (tag == KEYSIG_SHOWCOURTESYTAG)
-				_showCourtesySig = e.text().toInt();
-			else if (tag == KEYSIG_SHOWNATURALSTAG)
-				_showNaturals = e.text().toInt();
-			else if (!Element::readProperties(e))
+            else if (tag == "showCourtesySig")
+		      _showCourtesySig = e.text().toInt();
+            else if (tag == "showNaturals")
+		      _showNaturals = e.text().toInt();
+            else if (!Element::readProperties(e))
                   domError(e);
             }
       }

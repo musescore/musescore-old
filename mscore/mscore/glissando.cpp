@@ -33,6 +33,7 @@
 Glissando::Glissando(Score* s)
   : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _text = "gliss.";
       _showText = true;
       double _spatium = spatium();

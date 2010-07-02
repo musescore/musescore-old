@@ -101,7 +101,6 @@ class Articulation : public Symbol {
       QString _channelName;
       ArticulationAnchor _anchor;
 
-      virtual bool isMovable() const { return true; }
 
    public:
       Articulation(Score*);

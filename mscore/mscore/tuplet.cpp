@@ -38,6 +38,7 @@
 Tuplet::Tuplet(Score* s)
   : DurationElement(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _numberType   = SHOW_NUMBER;
       _bracketType  = AUTO_BRACKET;
       _number       = 0;

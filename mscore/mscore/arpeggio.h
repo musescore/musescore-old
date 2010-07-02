@@ -38,7 +38,6 @@ class Arpeggio : public Element {
       double _height;
       int _span;              // spanning staves
 
-      virtual bool isMovable() const          { return true; }
       virtual QLineF dragAnchor() const;
       virtual QPointF gripAnchor(int) const;
 

@@ -69,6 +69,7 @@ Dyn dynList[] = {
 Dynamic::Dynamic(Score* s)
    : Text(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _velocity = -1;
       setTextStyle(TEXT_STYLE_DYNAMICS);
       _dynType  = DYNAMIC_PART;

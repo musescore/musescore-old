@@ -79,7 +79,6 @@ class Tuplet : public DurationElement {
       virtual Tuplet* clone() const    { return new Tuplet(*this); }
       virtual ElementType type() const { return TUPLET; }
       virtual QRectF bbox() const;
-      virtual bool isMovable() const   { return true; }
 
       virtual void add(Element*);
       virtual void remove(Element*);

@@ -38,6 +38,7 @@ int Breath::symList[Breath::breathSymbols] = {
 Breath::Breath(Score* s)
   : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       }
 
 //---------------------------------------------------------

@@ -112,8 +112,6 @@ class TextBase {
 //---------------------------------------------------------
 
 class TextB : public Element {
-      bool _movable;
-
    protected:
       bool _sizeIsSpatiumDependent;       // font size depends on _spatium unit
       bool _editMode;
@@ -133,9 +131,6 @@ class TextB : public Element {
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);
       virtual void setSubtype(int val)      { Element::setSubtype(val);    }
-
-      virtual bool isMovable() const        { return _movable;             }
-      void setMovable(bool val)             { _movable = val;              }
 
       virtual TextBase* textBase() const = 0;
       void clear()                          { textBase()->clear();          }

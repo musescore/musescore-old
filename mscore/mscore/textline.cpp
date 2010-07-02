@@ -216,7 +216,7 @@ void TextLineSegment::layout()
                   if (tl->beginText()) {
                         if (_text == 0) {
                               _text = new TextC(*tl->beginText());
-                              _text->setMovable(false);
+                              _text->setFlag(ELEMENT_MOVABLE, false);
                               _text->setParent(this);
                               }
                         }
@@ -230,7 +230,7 @@ void TextLineSegment::layout()
                   if (tl->continueText()) {
                         if (_text == 0) {
                               _text = new TextC(*tl->continueText());
-                              _text->setMovable(false);
+                              _text->setFlag(ELEMENT_MOVABLE, false);
                               _text->setParent(this);
                               }
                         }

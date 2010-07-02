@@ -44,7 +44,6 @@ class Breath : public Element {
       virtual void layout();
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      virtual bool isMovable() const   { return true; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       };
 

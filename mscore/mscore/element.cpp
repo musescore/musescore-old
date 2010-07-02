@@ -228,11 +228,9 @@ Element::~Element()
 Element::Element(Score* s) :
    _parent(0),
    _selected(false),
-   _selectable(true),
-   _dropTarget(false),
    _generated(false),
    _visible(true),
-   _systemFlag(false),
+   _flags(ELEMENT_SELECTABLE),
    _subtype(0),
    _track(-1),
    _color(preferences.defaultColor),
@@ -250,11 +248,9 @@ Element::Element(const Element& e)
       {
       _parent     = e._parent;
       _selected   = e._selected;
-      _selectable = e._selectable;
-      _dropTarget = e._dropTarget;
       _generated  = e._generated;
       _visible    = e._visible;
-      _systemFlag = e._systemFlag;
+      _flags      = e._flags;
       _subtype    = e._subtype;
       _track      = e._track;
       _color      = e._color;
@@ -270,6 +266,28 @@ Element::Element(const Element& e)
       _mxmlOff    = e._mxmlOff;
       _bbox       = e._bbox;
       itemDiscovered = 0;
+      }
+
+//---------------------------------------------------------
+//   setPos
+//---------------------------------------------------------
+
+void Element::setPos(double x, double y)
+      {
+      _pos.rx() = x;
+      _pos.ry() = y;
+      }
+
+//---------------------------------------------------------
+//   adjustReadPos
+//---------------------------------------------------------
+
+void Element::adjustReadPos()
+      {
+      if (!_readPos.isNull()) {
+            setUserOff(_readPos - _pos);
+            _readPos = QPointF();
+            }
       }
 
 //---------------------------------------------------------
@@ -304,7 +322,7 @@ QColor Element::curColor() const
       if (score() && score()->printing())
             return (_color == preferences.defaultColor) ? Qt::black : _color;
 
-      if (_dropTarget)
+      if (flag(ELEMENT_DROP_TARGET))
             return preferences.dropColor;
       if (_selected) {
             if (track() == -1)
@@ -441,8 +459,13 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             if (!s.isEmpty())
                   pl.append(Prop("subtype", subtypeName()));
             }
-      if (!_userOff.isNull())
-            pl.append(Prop("offset", _userOff / spatium()));
+//      if (!_userOff.isNull())     // obsolete
+//            pl.append(Prop("offset", _userOff / spatium()));
+      if (flag(ELEMENT_MOVABLE)) {
+            pl.append(Prop("pos", pos() / spatium()));
+if (type() == FINGERING)
+printf("write props pos: %f %f\n", pos().x(), pos().y());
+            }
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
             t = track() + xml.trackDiff;
@@ -454,8 +477,8 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             pl.append(Prop("visible", visible()));
       if (_color != preferences.defaultColor)
             pl.append(Prop("color", _color));
-      if (_systemFlag && (proto == 0 || proto->systemFlag() != _systemFlag))
-            pl.append(Prop("systemFlag", _systemFlag));
+      if (flag(ELEMENT_SYSTEM_FLAG) && (proto == 0 || proto->systemFlag() != flag(ELEMENT_SYSTEM_FLAG)))
+            pl.append(Prop("systemFlag", flag(ELEMENT_SYSTEM_FLAG)));
       return pl;
       }
 
@@ -484,8 +507,13 @@ bool Element::readProperties(QDomElement e)
             }
       else if (tag == "tick")
             score()->curTick = score()->fileDivision(i);
-      else if (tag == "offset")
-            setUserOff(readPoint(e) * spatium());
+      else if (tag == "offset") {         // obsolete
+            QPointF pt(readPoint(e) * spatium());
+            setUserOff(pt);
+            _readPos = QPointF();
+            }
+      else if (tag == "pos")
+            _readPos = readPoint(e) * spatium();
       else if (tag == "visible")
             setVisible(i);
       else if (tag == "voice")
@@ -499,8 +527,8 @@ bool Element::readProperties(QDomElement e)
       else if (tag == "color")
             _color = readColor(e);
       else if (tag == "systemFlag") {
-            _systemFlag = i;
-            if (_systemFlag)
+            setFlag(ELEMENT_SYSTEM_FLAG, i);
+            if (i)
                   _track = 0;
             }
       else
@@ -773,12 +801,12 @@ double StaffLines::y1() const
       int l = staff() ? staff()->lines() : 5;
       switch(l) {
             case 1:
-                  return y + _pos.y() + 1 * _spatium;
+                  return y + ipos().y() + _spatium;
             case 2:
-                  return y + _pos.y() + 1 * _spatium;
+                  return y + ipos().y() + _spatium;
             case 3:
             default:
-                  return y + _pos.y();
+                  return y + ipos().y();
             }
       }
 
@@ -803,12 +831,12 @@ double StaffLines::y2() const
 
       switch(l) {
             case 1:
-                  return y + _pos.y() + 3 * d;
+                  return y + ipos().y() + 3 * d;
             case 2:
-                  return y + _pos.y() + 3 * d;
+                  return y + ipos().y() + 3 * d;
             case 3:
             default:
-                  return y + _pos.y() + (l - 1) * d;
+                  return y + ipos().y() + (l - 1) * d;
             }
       }
 
@@ -1078,7 +1106,7 @@ void Element::dump() const
          "   bbox(%g,%g,%g,%g)\n"
          "   abox(%g,%g,%g,%g)\n"
          "  parent: %p\n",
-         name(), _pos.x(), _pos.y(),
+         name(), ipos().x(), ipos().y(),
          _bbox.x(), _bbox.y(), _bbox.width(), _bbox.height(),
          abbox().x(), abbox().y(), abbox().width(), abbox().height(),
          parent());

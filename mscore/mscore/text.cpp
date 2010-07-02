@@ -401,14 +401,13 @@ TextB::TextB(Score* s)
       _editMode   = false;
       cursorPos  = 0;
       cursor     = 0;
-      _movable   = true;
+      setFlag(ELEMENT_MOVABLE, true);
       _textStyle = -1;
       }
 
 TextB::TextB(const TextB& e)
    : Element(e)
       {
-      _movable                = e._movable;
       _sizeIsSpatiumDependent = e._sizeIsSpatiumDependent;
       _editMode               = e._editMode;
       cursorPos               = e.cursorPos;
@@ -682,7 +681,7 @@ void TextB::layout()
             TextLineSegment* tls = (TextLineSegment*)parent();
             TextLine* tl = (TextLine*)(tls->line());
             qreal textlineLineWidth = point(tl->lineWidth());
-            _pos.ry() = pos().y() - textlineLineWidth * .5;
+            rypos() = ipos().y() - textlineLineWidth * .5;
             }
 
       if (parent() == 0)
@@ -821,7 +820,7 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
 
       if (st == 0 || (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent))
             xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
-      if (subtype() == TEXT_MEASURE_NUMBER)
+      if (_textStyle == TEXT_STYLE_MEASURE_NUMBER)
             return;
       textBase()->writeProperties(xml, st, score()->spatium(), writeText);
       }

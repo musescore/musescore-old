@@ -86,6 +86,20 @@ enum ElementType {
       };
 
 //---------------------------------------------------------
+//   ElementFlag
+//---------------------------------------------------------
+
+enum ElementFlag {
+      ELEMENT_SYSTEM_FLAG = 0x1,
+      ELEMENT_DROP_TARGET = 0x2,
+      ELEMENT_SELECTABLE  = 0x4,
+      ELEMENT_MOVABLE     = 0x8
+      };
+
+typedef QFlags<ElementFlag> ElementFlags;
+Q_DECLARE_OPERATORS_FOR_FLAGS(ElementFlags)
+
+//---------------------------------------------------------
 ///   \brief Unit of horizontal measure
 //---------------------------------------------------------
 
@@ -120,26 +134,25 @@ class Element {
       Element* _parent;
 
       bool _selected:1;           ///< set if element is selected
-      bool _selectable:1;         ///< true if element is selectable
-      mutable bool _dropTarget:1; ///< true, if element accepts drops
       bool _generated:1;          ///< automatically generated Element
       bool _visible:1;            ///< visibility attribute
-      bool _systemFlag:1;         ///< system elements appear on all excerpts
+
+      mutable ElementFlags _flags;
 
       int _subtype;
-
       int _track;                 ///< staffIdx * VOICES + voice
                                   ///< -1 if this is a system element
       QColor _color;
       double _mag;                ///< standard magnification (derived value)
 
+      QPointF _pos;               ///< Reference position, relative to _parent.
       QPointF _userOff;           ///< offset from normal layout position:
                                   ///< user dragged object this amount.
                                   ///< depends on Spatium ("space") units!
+      QPointF _readPos;
 
    protected:
       Score* _score;
-      QPointF _pos;               ///< Reference position, relative to _parent.
                                   ///< Usually set from layout().
       Align  _align;
       double _xoff, _yoff;
@@ -171,22 +184,18 @@ class Element {
 
       bool selected() const                   { return _selected;   }
       virtual void setSelected(bool f)        { _selected = f;      }
-      bool selectable() const                 { return _selectable; }
-      void setSelectable(bool val)            { _selectable = val;  }
 
       bool visible() const                    { return _visible;    }
       virtual void setVisible(bool f)         { _visible = f;       }
       bool generated() const                  { return _generated;  }
       void setGenerated(bool val)             { _generated = val;   }
-      bool dropTarget() const                 { return _dropTarget; }
-      void setDropTarget(bool f) const        { _dropTarget = f;    }
 
       const QPointF& ipos() const             { return _pos;                    }
       virtual QPointF pos() const             { return _pos + _userOff;         }
       virtual double x() const                { return _pos.x() + _userOff.x(); }
       virtual double y() const                { return _pos.y() + _userOff.y(); }
-      void setPos(const QPointF& p)           { _pos = p;                }
-      void setPos(double x, double y)         { _pos.rx() = x; _pos.ry() = y;    }
+      void setPos(double x, double y);
+      void setPos(const QPointF& p)           { setPos(p.x(), p.y());           }
       void movePos(const QPointF& p)          { _pos += p;               }
       double& rxpos()                         { return _pos.rx();        }
       double& rypos()                         { return _pos.ry();        }
@@ -201,6 +210,10 @@ class Element {
       void setUserYoffset(qreal v)            { _userOff.setY(v); }
       int mxmlOff() const                     { return _mxmlOff;  }
       void setMxmlOff(int o)                  { _mxmlOff = o;     }
+
+      QPointF readPos() const                 { return _readPos;           }
+      void setReadPos(const QPointF& p)       { _readPos = p;              }
+      void adjustReadPos();
 
       virtual QRectF bbox() const             { return _bbox;              }
       virtual double height() const           { return bbox().height();    }
@@ -232,7 +245,6 @@ class Element {
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
 
-      virtual bool isMovable() const          { return false; }
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag()                  {}
       virtual QLineF dragAnchor() const       { return QLineF(); }
@@ -344,9 +356,6 @@ class Element {
       void setYoff(double val)              { _yoff   = val;        }
       void setOffsetType(OffsetType val)    { _offsetType = val;    }
 
-      bool systemFlag() const               { return _systemFlag;   }
-      void setSystemFlag(bool f)            { _systemFlag = f;      }
-
       bool isTextB() { return
                   type()  == TEXT
                 || type() == LYRICS
@@ -372,6 +381,28 @@ class Element {
       static Element* create(ElementType type, Score*);
       static ElementType name2type(const QString&);
       static Element* name2Element(const QString&, Score*);
+
+      void setFlag(ElementFlag f, bool v)  {
+            if (v)
+                  _flags |= f;
+            else
+                  _flags &= ~f;
+            }
+      bool flag(ElementFlag f) const   { return _flags & f; }
+      void setFlags(ElementFlags f)    { _flags = f;    }
+      ElementFlags flags() const       { return _flags; }
+      bool systemFlag() const          { return flag(ELEMENT_SYSTEM_FLAG); }
+      void setSystemFlag(bool f)       { setFlag(ELEMENT_SYSTEM_FLAG, f);  }
+      bool selectable() const          { return flag(ELEMENT_SELECTABLE);  }
+      void setSelectable(bool val)     { setFlag(ELEMENT_SELECTABLE, val); }
+      bool dropTarget() const          { return flag(ELEMENT_DROP_TARGET); }
+      void setDropTarget(bool v) const {
+            if (v)
+                  _flags |= ELEMENT_DROP_TARGET;
+            else
+                  _flags &= ~ELEMENT_DROP_TARGET;
+            }
+      bool isMovable() const           { return flag(ELEMENT_MOVABLE);     }
       };
 
 //---------------------------------------------------------
