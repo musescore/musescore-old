@@ -1,6 +1,8 @@
 2.jul (ws)
       - instead of saving the _userOff value, the actual screen position
         of movable elements is saved.
+      (la)
+      - fix #6335: Crash on creating triplet on a chord  
 1.jul (ws)
       - add patch from Miwarre: Hide/show naturals and courtesy keys
         for individual key sigs

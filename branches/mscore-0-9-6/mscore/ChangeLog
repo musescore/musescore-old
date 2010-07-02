@@ -1,3 +1,5 @@
+2.jul  (la)
+      - fix #6335: Crash on creating triplet on a chord
 1.jul  (la)
       - fix #6318: MusicXML export of syllabic is broken
       - no empty tab if user tries to open a file with unknown extension

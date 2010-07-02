@@ -1420,11 +1420,17 @@ void ScoreView::cmdTuplet(int n)
                   cmdTuplet(n, _score->inputState().cr());
             }
       else {
+            QSet<ChordRest*> set;
             foreach(Element* e, _score->selection().elements()) {
                   if (e->type() == NOTE)
                         e = static_cast<Note*>(e)->chord();
-                  if (e->isChordRest())
-                        cmdTuplet(n, static_cast<ChordRest*>(e));
+                  if (e->isChordRest()) {
+                        ChordRest* cr = static_cast<ChordRest*>(e);
+                        if(!set.contains(cr)) {
+                              cmdTuplet(n, cr);
+                              set.insert(cr);
+                              }
+                        }
                   }
             }
       _score->endCmd();
@@ -1522,10 +1528,12 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
       ChordRest* cr;
       if (ocr->type() == CHORD) {
             cr = new Chord(this);
-            Note* note = new Note(this);
-            note->setPitch(static_cast<Chord*>(ocr)->upNote()->pitch(), static_cast<Chord*>(ocr)->upNote()->tpc());
-            note->setTrack(track);
-            cr->add(note);
+            foreach(Note* oldNote, static_cast<Chord*>(ocr)->notes()) {
+                  Note* note = new Note(this);
+                  note->setPitch(oldNote->pitch(), oldNote->tpc());
+                  note->setTrack(track);
+                  cr->add(note);
+                  }
             }
       else
             cr = new Rest(this);
