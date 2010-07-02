@@ -32,7 +32,7 @@ class BSymbol : public Element {
       QList<Element*> _leafs;
 
    public:
-      BSymbol(Score* s) : Element(s) {}
+      BSymbol(Score* s) : Element(s) { setFlags(ELEMENT_MOVABLE); }
       BSymbol(const BSymbol&);
 
       BSymbol &operator=(const BSymbol&);
@@ -44,7 +44,6 @@ class BSymbol : public Element {
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual QRectF drag(const QPointF& pos);
-      virtual bool isMovable() const { return true; }
 
       const QList<Element*>& getLeafs() const { return _leafs; }
       };

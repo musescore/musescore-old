@@ -43,6 +43,7 @@
 SlurSegment::SlurSegment(Score* score)
    : Element(score)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _segmentType = SEGMENT_SINGLE;
       _system      = 0;
       }
@@ -84,7 +85,7 @@ void SlurSegment::updatePath()
 
 void SlurSegment::move(const QPointF& s)
       {
-      _pos += s;
+      movePos(s);
       for (int k = 0; k < 4; ++k)
             ups[k].p += s;
       }

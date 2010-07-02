@@ -74,6 +74,7 @@ ArticulationInfo Articulation::articulationList[ARTICULATIONS] = {
 Articulation::Articulation(Score* s)
    : Symbol(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       }
 
 //---------------------------------------------------------

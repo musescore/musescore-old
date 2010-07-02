@@ -127,6 +127,7 @@ void RepeatMeasure::layout()
 Marker::Marker(Score* s)
    : Text(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       setSubtype(TEXT_REPEAT);
       setTextStyle(TEXT_STYLE_REPEAT);
       }
@@ -309,6 +310,7 @@ void Marker::propertyAction(ScoreView* viewer, const QString& s)
 Jump::Jump(Score* s)
    : Text(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       setSubtype(TEXT_REPEAT);
       setTextStyle(TEXT_STYLE_REPEAT);
       }

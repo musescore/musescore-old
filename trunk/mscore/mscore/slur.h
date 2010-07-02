@@ -55,7 +55,6 @@ class SlurSegment : public Element {
       SlurSegment(const SlurSegment&);
       virtual SlurSegment* clone() const { return new SlurSegment(*this); }
       virtual ElementType type() const   { return SLUR_SEGMENT; }
-      virtual bool isMovable() const     { return true; }
 
       virtual QRectF bbox() const;
 

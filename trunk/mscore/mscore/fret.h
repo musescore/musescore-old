@@ -53,7 +53,6 @@ class FretDiagram : public Element {
       ~FretDiagram();
       virtual void draw(QPainter&, ScoreView*) const;
       virtual FretDiagram* clone() const { return new FretDiagram(*this); }
-      virtual bool isMovable() const     { return true; }
       Segment* segment() const           { return (Segment*)parent(); }
       Measure* measure() const           { return (Measure*)parent()->parent(); }
 

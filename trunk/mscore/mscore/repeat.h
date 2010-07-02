@@ -63,7 +63,6 @@ class Marker : public Text {
       Q_DECLARE_TR_FUNCTIONS(Marker)
 
       QString _label;               ///< referenced from Jump() element
-      virtual bool isMovable() const   { return true; }
 
    public:
       Marker(Score*);
@@ -112,7 +111,6 @@ class Jump : public Text {
       QString _playUntil;
       QString _continueAt;
 
-      virtual bool isMovable() const { return true; }
 
    public:
       Jump(Score*);

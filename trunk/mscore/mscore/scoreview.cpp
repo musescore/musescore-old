@@ -1655,6 +1655,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   case ACCIDENTAL:
                   case DYNAMIC:
                   case TEXT:
+                  case FINGERING:
                   case TEMPO_TEXT:
                   case STAFF_TEXT:
                   case NOTEHEAD:
@@ -1784,6 +1785,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case ARTICULATION:
                   case ACCIDENTAL:
                   case TEXT:
+                  case FINGERING:
                   case TEMPO_TEXT:
                   case STAFF_TEXT:
                   case NOTEHEAD:
@@ -1940,6 +1942,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case ARTICULATION:
                   case ACCIDENTAL:
                   case TEXT:
+                  case FINGERING:
                   case TEMPO_TEXT:
                   case STAFF_TEXT:
                   case NOTEHEAD:
@@ -2279,7 +2282,7 @@ Element* ScoreView::elementNear(const QPointF& p)
 
 #if 0
       printf("elementNear ========= %f\n", w);
-      foreach(const Element* e, el)
+      foreach(const Element* e, ll)
             printf("  %s %d\n", e->name(), e->selected());
 #endif
       Element* e = const_cast<Element*>(ll.at(level % ll.size()));

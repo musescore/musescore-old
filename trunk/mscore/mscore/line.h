@@ -46,7 +46,6 @@ class LineSegment : public Element {
       LineSegmentType _segmentType;
       System* _system;
 
-      virtual bool isMovable() const { return true; }
       virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void startEdit(ScoreView*, const QPointF&);

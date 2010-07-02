@@ -136,7 +136,6 @@ class Measure : public MeasureBase {
       void readBox(QDomElement);
       virtual bool isEditable() { return false; }
 
-      virtual bool isMovable() const { return false; }
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual bool genPropertyMenu(QMenu*) const;

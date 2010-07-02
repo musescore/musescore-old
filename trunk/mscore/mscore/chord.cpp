@@ -51,6 +51,7 @@
 Stem::Stem(Score* s)
    : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       }
 
 //---------------------------------------------------------
@@ -1228,6 +1229,31 @@ void Chord::layout2()
                   h->setPos(x, y);
                   }
             }
+
+      //---------------------------------------------------
+      //    layout fingering
+      //---------------------------------------------------
+
+      foreach(Note* note, _notes) {
+            foreach(Element* e, *note->el()) {
+                  if ((e->type() == TEXT && e->subtype() == TEXT_FINGERING)
+                     || (e->type() == FINGERING)) {
+                        if (_notes.size() > 1) {
+                              }
+                        else {
+                              double x = note->headWidth() * .5;
+                              x -= e->width() * .5;
+                              double y;
+                              if (up())
+                                    y = _spatium * .4;     // below
+                              else
+                                    y = -_spatium * 2.4;
+                              e->setPos(x, y);
+                              }
+                        }
+                  }
+            }
+
       }
 
 //---------------------------------------------------------
@@ -1325,31 +1351,6 @@ void Chord::layout()
             l->layout();
 
       renderPlayback();
-
-      //---------------------------------------------------
-      //    layout fingering
-      //---------------------------------------------------
-
-      foreach(Note* note, _notes) {
-            foreach(Element* e, *note->el()) {
-                  if (e->type() == TEXT && e->subtype() == TEXT_FINGERING) {
-                        Text* t = dynamic_cast<Text*>(e);
-                        if (_notes.size() > 1) {
-
-                              }
-                        else {
-                              double x = note->headWidth() * .5;
-                              x -= t->width() * .5;
-                              double y;
-                              if (up())
-                                    y = _spatium * .4;     // below
-                              else
-                                    y = -_spatium * 2.4;
-                              t->setPos(x, y);
-                              }
-                        }
-                  }
-            }
 
       if (_arpeggio) {
             double headHeight = upnote->headHeight();

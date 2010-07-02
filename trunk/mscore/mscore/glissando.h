@@ -47,7 +47,6 @@ class Glissando : public Element {
       virtual void layout();
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      virtual bool isMovable() const   { return false; }
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);

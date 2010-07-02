@@ -129,8 +129,8 @@ class Segment : public Element {
       const LyricsList* lyricsList(int staffIdx) const { return &_lyrics[staffIdx];  }
 
       Measure* measure() const            { return (Measure*)parent(); }
-      double x() const                    { return _pos.x();           }
-      void setX(double v)                 { _pos.setX(v);              }
+      double x() const                    { return ipos().x();         }
+      void setX(double v)                 { rxpos() = v;               }
 
       void insertStaff(int staff);
       void removeStaff(int staff);

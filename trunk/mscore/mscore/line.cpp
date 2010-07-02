@@ -35,6 +35,7 @@
 LineSegment::LineSegment(Score* s)
    : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _segmentType = SEGMENT_SINGLE;
       _system      = 0;
       }

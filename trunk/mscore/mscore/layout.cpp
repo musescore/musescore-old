@@ -1270,17 +1270,14 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   printf("system %p is empty\n", system);
                   abort();
                   }
-            MeasureBase* lm = system->measures().back();
-            while (lm && lm->type() != MEASURE)
-                  lm = lm->prev();
-            Measure* m = static_cast<Measure*>(lm);
+            Measure* m = system->lastMeasure();
             bool hasCourtesyKeysig = false;
+            Measure* nm = m ? m->nextMeasure() : 0;
 
-            if (m && !m->sectionBreak()) {
-                  int tick        = lm->tick() + lm->ticks();
+            if (m && nm && !m->sectionBreak()) {
+                  int tick        = m->tick() + m->ticks();
                   Fraction sig2   = m->timesig();
-                  Measure* nm     = m->nextMeasure();
-                  Fraction sig1   = nm ? nm->timesig() : sig2;
+                  Fraction sig1   = nm->timesig();
 
                   if (styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2)) {
                         Segment* s  = m->getSegment(SegTimeSigAnnounce, tick);
@@ -1289,14 +1286,11 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               if (s->element(track))
                                     continue;
                               TimeSig* ts = new TimeSig(this, sig2);
-//                              Measure* nm = m->nextMeasure();				// useless?
-                              if (nm){
-                                    Segment* tss = nm->findSegment(SegTimeSig, tick);
-                                    if (tss) {
-                                          TimeSig* nts = (TimeSig*)tss->element(0);
-                                          if (nts)
-                                                ts->setSubtype(nts->subtype());
-                                          }
+                              Segment* tss = nm->findSegment(SegTimeSig, tick);
+                              if (tss) {
+                                    TimeSig* nts = (TimeSig*)tss->element(0);
+                                    if (nts)
+                                          ts->setSubtype(nts->subtype());
                                     }
                               ts->setTrack(track);
                               ts->setGenerated(true);
@@ -1312,18 +1306,17 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               KeySigEvent key1 = staff->key(tick - 1);
                               KeySigEvent key2 = staff->key(tick);
 
-							  // locate a key sig. in next measure and, if found, check if it has court. sig turned off
-//							  Measure * nm = m->nextMeasure();				//useless?
-							  Segment * pKeySigSegm;
-							  Element * pKeySigElem;
-							  bool bShowCourtesySig = true;	// assume this key change has court. sig turned on
-							  if(nm && (pKeySigSegm = nm->findSegment(SegKeySig, tick)) != 0)
-								{	pKeySigElem = pKeySigSegm->element(staffIdx*VOICES);
-									if(pKeySigElem != 0 && !((KeySig*)pKeySigElem)->showCourtesySig())
-										bShowCourtesySig = false;				// this key change has court. sig turned off
-								}
+                              // locate a key sig. in next measure and, if found,
+                              // check if it has court. sig turned off
+					Segment* s = nm->findSegment(SegKeySig, tick);
+					bool showCourtesySig = true;	// assume this key change has court. sig turned on
+					if (s) {
+                                    KeySig* ks = static_cast<KeySig*>(s->element(staffIdx*VOICES));
+						if (ks && !ks->showCourtesySig())
+						      showCourtesySig = false;     // this key change has court. sig turned off
+                                    }
 
-							  if (key1 != key2 && bShowCourtesySig) {
+                              if (key1 != key2 && showCourtesySig) {
                                     hasCourtesyKeysig = true;
                                     Segment* s  = m->getSegment(SegKeySigAnnounce, tick);
                                     int track = staffIdx * VOICES;

@@ -478,7 +478,6 @@ void MuseScore::showPalette(bool visible)
             const char stringnumber[] = "0123456";
             for (unsigned i = 0; i < strlen(stringnumber); ++i) {
                   Fingering* f = new Fingering(gscore);
-                  f->setSubtype(TEXT_STRING_NUMBER);
                   f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
                   f->setText(QString(stringnumber[i]));
                   sp->append(f, tr("String number %1").arg(stringnumber[i]));

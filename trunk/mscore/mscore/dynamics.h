@@ -66,8 +66,6 @@ class Dynamic : public Text {
       virtual void setSubtype(const QString&);
       virtual const QString subtypeName() const;
 
-      virtual bool isMovable() const   { return true; }
-
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
