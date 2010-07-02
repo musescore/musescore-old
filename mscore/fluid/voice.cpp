@@ -1206,7 +1206,7 @@ void Voice::modulate(bool _cc, int _ctrl)
                    * value of its associated generator
                    */
                   for (int k = 0; k < mod_count; k++) {
-                        if (fluid_mod_has_dest(&mod[k], g)) {
+                        if (mod[k].has_dest(g)) {
                               modval += mod[k].get_value(channel, this);
                               }
                         }
@@ -1247,7 +1247,7 @@ void Voice::modulate_all()
              * destination generator 'gen'
              */
             for (int k = 0; k < mod_count; k++) {
-                  if (fluid_mod_has_dest(&mod[k], g))
+                  if (mod[k].has_dest(g))
                         modval += mod[k].get_value(channel, this);
                   }
 
@@ -1366,6 +1366,11 @@ void Voice::add_mod(const Mod* _mod, int mode)
        * sound card.  Discard them, maybe print a warning.
        */
 
+      if (_mod->amount == 0) {
+//            printf("Voice::add_mod: amount == zero\n");
+            return;
+            }
+
       if (((_mod->flags1 & FLUID_MOD_CC) == 0)
          && ((_mod->src1 != 0)      /* SF2.01 section 8.2.1: Constant value */
 	   && (_mod->src1 != 2)       /* Note-on velocity */
@@ -1382,7 +1387,6 @@ void Voice::add_mod(const Mod* _mod, int mode)
             /* if identical modulator exists, add them */
             for (int i = 0; i < mod_count; i++) {
                   if (test_identity(&mod[i], _mod)) {
-                        //		printf("Adding modulator...\n");
                         mod[i].amount += _mod->amount;
                         return;
                         }
@@ -1392,7 +1396,6 @@ void Voice::add_mod(const Mod* _mod, int mode)
             /* if identical modulator exists, replace it (only the amount has to be changed) */
             for (int i = 0; i < mod_count; i++) {
                   if (test_identity(&mod[i], _mod)) {
-                        //  printf("Replacing modulator...amount is %f\n",mod->amount);
                         mod[i].amount = _mod->amount;
                         return;
                         }
@@ -1403,7 +1406,7 @@ void Voice::add_mod(const Mod* _mod, int mode)
          checking, if the same modulator already exists.
          */
       if (mod_count < FLUID_NUM_MOD)
-            _mod->clone(&mod[mod_count++]);
+            mod[mod_count++] = *_mod;
       }
 
 /*

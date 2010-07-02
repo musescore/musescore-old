@@ -24,39 +24,18 @@
 
 namespace FluidS {
 
-#undef FLUID_LOG
-#define FLUID_LOG(a, ...)
-
 //---------------------------------------------------------
-//   clone
+//   Mod
 //---------------------------------------------------------
 
-void Mod::clone(Mod* mod) const
+Mod::Mod()
       {
-      mod->dest   = dest;
-      mod->src1   = src1;
-      mod->flags1 = flags1;
-      mod->src2   = src2;
-      mod->flags2 = flags2;
-      mod->amount = amount;
-      }
-
-/*
- * fluid_mod_set_source1
- */
-void Mod::set_source1(int src, int flags)
-      {
-      src1   = src;
-      flags1 = flags;
-      }
-
-/*
- * fluid_mod_set_source2
- */
-void Mod::set_source2(int src, int flags)
-      {
-      src2 = src;
-      flags2 = flags;
+      dest   = 0;
+      src1   = 0;
+      flags1 = 0;
+      src2   = 0;
+      flags2 = 0;
+      amount = 0.0;
       }
 
 /*
@@ -64,7 +43,6 @@ void Mod::set_source2(int src, int flags)
  */
 float Mod::get_value(Channel* chan, Voice* voice)
       {
-      Mod* mod = this;
       float v1 = 0.0, v2 = 1.0;
       float range1 = 127.0, range2 = 127.0;
 
@@ -92,27 +70,29 @@ float Mod::get_value(Channel* chan, Voice* voice)
        * described in section 8.4.2, but it matches the definition used in
        * several SF2.1 sound fonts (where it is used only to turn it off).
        */
+
+      if ((src2 == FLUID_MOD_VELOCITY) && (src1 == FLUID_MOD_VELOCITY)
+         && (flags1 == (FLUID_MOD_GC | FLUID_MOD_NEGATIVE))
+         && (flags2 == (FLUID_MOD_GC | FLUID_MOD_SWITCH))
+         && (dest == GEN_FILTERFC)
+         ) {
 #if 0
-      if ((mod->src2 == FLUID_MOD_VELOCITY) &&
-         (mod->src1 == FLUID_MOD_VELOCITY) &&
-         (mod->flags1 == (FLUID_MOD_GC | FLUID_MOD_UNIPOLAR
-            | FLUID_MOD_NEGATIVE | FLUID_MOD_LINEAR)) &&
-         (mod->flags2 == (FLUID_MOD_GC | FLUID_MOD_UNIPOLAR
-            | FLUID_MOD_POSITIVE | FLUID_MOD_SWITCH)) &&
-         (mod->dest == GEN_FILTERFC)) {
+            // S. Christian Collins' mod, to stop forcing velocity based filtering
+
             if (voice->vel < 64)
                   return (float) mod->amount / 2.0;
             else
                   return (float) mod->amount * (127 - voice->vel) / 127;
-            }
 #endif
+            return 0.0;
+            }
+
       /* get the initial value of the first source */
-      if (mod->src1 > 0) {
-            if (mod->flags1 & FLUID_MOD_CC) {
-                  v1 = chan->getCC(mod->src1);
-                  }
+      if (src1 > 0) {
+            if (flags1 & FLUID_MOD_CC)
+                  v1 = chan->getCC(src1);
             else {  /* source 1 is one of the direct controllers */
-                  switch (mod->src1) {
+                  switch (src1) {
                         case FLUID_MOD_NONE:         /* SF 2.01 8.2.1 item 0: src enum=0 => value is 1 */
                               v1 = range1;
                               break;
@@ -141,7 +121,7 @@ float Mod::get_value(Channel* chan, Voice* voice)
                   }
 
             /* transform the input value */
-            switch (mod->flags1 & 0x0f) {
+            switch (flags1 & 0x0f) {
                   case 0: /* linear, unipolar, positive */
                         v1 /= range1;
                         break;
@@ -200,12 +180,11 @@ float Mod::get_value(Channel* chan, Voice* voice)
             return 0.0f;
 
       /* get the second input source */
-      if (mod->src2 > 0) {
-            if (mod->flags2 & FLUID_MOD_CC) {
-                  v2 = chan->getCC(mod->src2);
-                  }
+      if (src2 > 0) {
+            if (flags2 & FLUID_MOD_CC)
+                  v2 = chan->getCC(src2);
             else {
-                  switch (mod->src2) {
+                  switch (src2) {
                         case FLUID_MOD_NONE:         /* SF 2.01 8.2.1 item 0: src enum=0 => value is 1 */
                               v2 = range2;
                               break;
@@ -233,7 +212,7 @@ float Mod::get_value(Channel* chan, Voice* voice)
                   }
 
             /* transform the second input value */
-            switch (mod->flags2 & 0x0f) {
+            switch (flags2 & 0x0f) {
                   case 0: /* linear, unipolar, positive */
                         v2 /= range2;
                         break;
@@ -287,8 +266,12 @@ float Mod::get_value(Channel* chan, Voice* voice)
       else
             v2 = 1.0f;
 
+//      if (src1 == FLUID_MOD_VELOCITY) {
+//            printf("%p mod velo %f * %f * %f\n", this, amount, v1, v2);
+//            }
+
       /* it's as simple as that: */
-      return mod->amount * v1 * v2;
+      return amount * v1 * v2;
       }
 
 /*
