@@ -565,23 +565,27 @@ enum fluid_mod_flags {
 
 struct Mod
       {
-      unsigned char dest;
-      unsigned char src1;
-      unsigned char flags1;
-      unsigned char src2;
-      unsigned char flags2;
+      uchar dest;
+      uchar src1;
+      uchar flags1;
+      uchar src2;
+      uchar flags2;
       double amount;
 
-      void clone(Mod* mod) const;
+      Mod();
+      Mod(uchar a, uchar b, uchar c, uchar d, uchar e, double f)
+         : dest(a), src1(b), flags1(c), src2(d), flags2(e), amount(f) {}
+
       void dump() const;
-      int has_source(bool cc, int ctrl) {
-            return (((src1 == ctrl) && (flags1 & FLUID_MOD_CC)    && cc)
+      bool has_source(bool cc, int ctrl) const {
+            return (((src1 == ctrl) &&   (flags1 & FLUID_MOD_CC)  && cc)
                 || (((src1 == ctrl) && (!(flags1 & FLUID_MOD_CC)) && !cc)))
-                || (((src2 == ctrl) && (flags2 & FLUID_MOD_CC)    && cc)
+                || (((src2 == ctrl) &&   (flags2 & FLUID_MOD_CC)  && cc)
                 || (((src2 == ctrl) && (!(flags2 & FLUID_MOD_CC)) && !cc)));
             }
-      void set_source1(int src, int flags);
-      void set_source2(int src, int flags);
+      bool has_dest(uchar gen) const            { return dest == gen; }
+      void set_source1(int src, int flags)      { src1 = src; flags1 = flags; }
+      void set_source2(int src, int flags)      { src2 = src; flags2 = flags; }
       void set_dest(int val)                    { dest = val;    }
       void set_amount(double val)               { amount = val;  }
       int get_source1() const                   { return src1;   }
@@ -611,14 +615,6 @@ enum fluid_mod_src {
 bool test_identity(const Mod * mod1, const Mod * mod2);
 
 void fluid_dump_modulator(Mod * mod);
-
-#define fluid_mod_has_source(mod,cc,ctrl)  \
-( ((((mod)->src1 == ctrl) && (((mod)->flags1 & FLUID_MOD_CC) != 0) && (cc != 0)) \
-   || ((((mod)->src1 == ctrl) && (((mod)->flags1 & FLUID_MOD_CC) == 0) && (cc == 0)))) \
-|| ((((mod)->src2 == ctrl) && (((mod)->flags2 & FLUID_MOD_CC) != 0) && (cc != 0)) \
-    || ((((mod)->src2 == ctrl) && (((mod)->flags2 & FLUID_MOD_CC) == 0) && (cc == 0)))))
-
-#define fluid_mod_has_dest(mod,gen)  ((mod)->dest == gen)
 
 /*
  *  phase

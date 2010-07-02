@@ -158,9 +158,6 @@ void Preset::loadSamples()
 
 bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, double nt)
       {
-      Mod* mod;
-      Mod* mod_list[FLUID_NUM_MOD]; /* list for 'sorting' preset modulators */
-
       Zone* global_preset_zone = global_zone();
 
       /* run thru all the zones of this preset */
@@ -200,7 +197,7 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
 
 	                              if (inst_zone->genlist[i].flags)
                                           voice->gen_set(i, inst_zone->genlist[i].val);
-                                    else if ((global_inst_zone != 0) && (global_inst_zone->genlist[i].flags))
+                                    else if ((global_inst_zone) && (global_inst_zone->genlist[i].flags))
                                           voice->gen_set(i, global_inst_zone->genlist[i].val);
                                     else {
                                           /* The generator has not been defined in this instrument.
@@ -213,9 +210,10 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
                               /* global instrument zone, modulators: Put them all into a
                                  * list. */
 
+                              Mod* mod_list[FLUID_NUM_MOD]; /* list for 'sorting' preset modulators */
                               int mod_list_count = 0;
 
-                              if (global_inst_zone){
+                              if (global_inst_zone) {
                                     foreach(Mod* mod, global_inst_zone->modlist)
                                           mod_list[mod_list_count++] = mod;
                                     }
@@ -242,7 +240,7 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
 
                               /* Add instrument modulators (global / local) to the voice. */
                               for (int i = 0; i < mod_list_count; i++){
-                                    mod = mod_list[i];
+                                    Mod* mod = mod_list[i];
                                     if (mod) {  // disabled modulators CANNOT be skipped.
                                           /* Instrumentrument modulators -supersede- existing (default)
 	                                     * modulators.  SF 2.01 page 69, 'bullet' 6 */
@@ -312,7 +310,7 @@ bool Preset::noteon(Fluid* synth, unsigned id, int chan, int key, int vel, doubl
 
                               /* Add preset modulators (global / local) to the voice. */
                               for (int i = 0; i < mod_list_count; i++){
-                                    mod = mod_list[i];
+                                    Mod* mod = mod_list[i];
                                     if ((mod != 0) && (mod->amount != 0)) { /* disabled modulators can be skipped. */
                                           /* Preset modulators -add- to existing instrument /
 	                                     * default modulators.  SF2.01 page 70 first bullet on
@@ -456,41 +454,32 @@ bool Zone::importZone()
                         break;
                   }
             }
-
       // Import the modulators (only SF2.1 and higher)
       foreach(SFMod* mod_src, mod) {
             Mod* mod_dest = new Mod;
-            int type;
-            // mod_dest->next = 0; /* pointer to next modulator, this is the end of the list now.*/
 
             /* *** Amount *** */
             mod_dest->amount = mod_src->amount;
 
             /* *** Source *** */
-            mod_dest->src1 = mod_src->src & 127; /* index of source 1, seven-bit value, SF2.01 section 8.2, page 50 */
+            mod_dest->src1 = mod_src->src & 0x7f; /* index of source 1, seven-bit value, SF2.01 section 8.2, page 50 */
             mod_dest->flags1 = 0;
 
             /* Bit 7: CC flag SF 2.01 section 8.2.1 page 50*/
             if (mod_src->src & (1<<7))
                   mod_dest->flags1 |= FLUID_MOD_CC;
-            else
-                  mod_dest->flags1 |= FLUID_MOD_GC;
 
             /* Bit 8: D flag SF 2.01 section 8.2.2 page 51*/
             if (mod_src->src & (1<<8))
                   mod_dest->flags1 |= FLUID_MOD_NEGATIVE;
-            else
-                  mod_dest->flags1 |= FLUID_MOD_POSITIVE;
 
             /* Bit 9: P flag SF 2.01 section 8.2.3 page 51*/
             if (mod_src->src & (1<<9))
                   mod_dest->flags1 |= FLUID_MOD_BIPOLAR;
-            else
-                  mod_dest->flags1 |= FLUID_MOD_UNIPOLAR;
 
             /* modulator source types: SF2.01 section 8.2.1 page 52 */
-            type = (mod_src->src) >> 10;
-            type &= 63; /* type is a 6-bit value */
+            int type = (mod_src->src) >> 10;
+            type &= 0x3f; /* type is a 6-bit value */
             if (type == 0)
                   mod_dest->flags1 |= FLUID_MOD_LINEAR;
             else if (type == 1)
@@ -503,6 +492,7 @@ bool Zone::importZone()
                   /* This shouldn't happen - unknown type!
                    * Deactivate the modulator by setting the amount to 0.
                    */
+                  // printf("unknown mod type\n");
                   mod_dest->amount=0;
                   }
 
@@ -516,20 +506,14 @@ bool Zone::importZone()
             /* Bit 7: CC flag SF 2.01 section 8.2.1 page 50*/
             if (mod_src->amtsrc & (1<<7))
                   mod_dest->flags2 |= FLUID_MOD_CC;
-            else
-                  mod_dest->flags2 |= FLUID_MOD_GC;
 
             /* Bit 8: D flag SF 2.01 section 8.2.2 page 51*/
             if (mod_src->amtsrc & (1<<8))
                   mod_dest->flags2 |= FLUID_MOD_NEGATIVE;
-            else
-                  mod_dest->flags2 |= FLUID_MOD_POSITIVE;
 
             /* Bit 9: P flag SF 2.01 section 8.2.3 page 51*/
             if (mod_src->amtsrc & (1<<9))
                   mod_dest->flags2 |= FLUID_MOD_BIPOLAR;
-            else
-                  mod_dest->flags2 |= FLUID_MOD_UNIPOLAR;
 
             /* modulator source types: SF2.01 section 8.2.1 page 52 */
             type = (mod_src->amtsrc) >> 10;
@@ -545,6 +529,7 @@ bool Zone::importZone()
             else {
                   /* This shouldn't happen - unknown type!
                    * Deactivate the modulator by setting the amount to 0. */
+                  // printf("unknown mod type\n");
                   mod_dest->amount=0;
                   }
 
@@ -552,7 +537,7 @@ bool Zone::importZone()
             /* SF2.01 only uses the 'linear' transform (0).
              * Deactivate the modulator by setting the amount to 0 in any other case.
              */
-            if (mod_src->trans !=0)
+            if (mod_src->trans != 0)
                   mod_dest->amount = 0;
 
             /* Store the new modulator in the zone The order of modulators
@@ -1086,8 +1071,10 @@ void SFont::load_pmod (int size)
      If there isn't even a terminal record
      Hmmm, the specs say there should be one, but..
    */
-      if (size == 0)
+      if (size == 0) {
+            printf("===============================no term record\n");
             return;
+            }
 
       size -= SFMODSIZE;
       if (size != 0)
@@ -1417,8 +1404,10 @@ void SFont::load_imod(int size)
         If there isn't even a terminal record
         Hmmm, the specs say there should be one, but..
       */
-      if (size == 0)
+      if (size == 0) {
+            printf("===============================no term record\n");
             return;
+            }
       size -= SFMODSIZE;
       if (size != 0)
             throw(QString("Instrumentrument modulator chunk size mismatch"));
