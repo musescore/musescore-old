@@ -1072,7 +1072,6 @@ void SFont::load_pmod (int size)
      Hmmm, the specs say there should be one, but..
    */
       if (size == 0) {
-            printf("===============================no term record\n");
             return;
             }
 
@@ -1405,7 +1404,6 @@ void SFont::load_imod(int size)
         Hmmm, the specs say there should be one, but..
       */
       if (size == 0) {
-            printf("===============================no term record\n");
             return;
             }
       size -= SFMODSIZE;

@@ -1366,11 +1366,6 @@ void Voice::add_mod(const Mod* _mod, int mode)
        * sound card.  Discard them, maybe print a warning.
        */
 
-      if (_mod->amount == 0) {
-//            printf("Voice::add_mod: amount == zero\n");
-            return;
-            }
-
       if (((_mod->flags1 & FLUID_MOD_CC) == 0)
          && ((_mod->src1 != 0)      /* SF2.01 section 8.2.1: Constant value */
 	   && (_mod->src1 != 2)       /* Note-on velocity */

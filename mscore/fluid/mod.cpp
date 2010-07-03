@@ -266,10 +266,6 @@ float Mod::get_value(Channel* chan, Voice* voice)
       else
             v2 = 1.0f;
 
-//      if (src1 == FLUID_MOD_VELOCITY) {
-//            printf("%p mod velo %f * %f * %f\n", this, amount, v1, v2);
-//            }
-
       /* it's as simple as that: */
       return amount * v1 * v2;
       }
@@ -283,11 +279,11 @@ float Mod::get_value(Channel* chan, Voice* voice)
  */
 bool test_identity(const Mod * mod1, const Mod * mod2)
       {
-      return (mod1->dest != mod2->dest)
-            || (mod1->src1 != mod2->src1)
-            || (mod1->src2 != mod2->src2)
-            || (mod1->flags1 != mod2->flags1)
-            || (mod1->flags2 != mod2->flags2);
+      return (mod1->dest == mod2->dest)
+            && (mod1->src1 == mod2->src1)
+            && (mod1->src2 == mod2->src2)
+            && (mod1->flags1 == mod2->flags1)
+            && (mod1->flags2 == mod2->flags2);
       }
 
 //---------------------------------------------------------
