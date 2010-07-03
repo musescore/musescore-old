@@ -1,5 +1,8 @@
-2.jul  (la)
+3.jul  (ws)
+      - fix #6093
+2.jul  (ws)
       - attempt to fix #6093
+      (la)
       - fix #6335: Crash on creating triplet on a chord
 1.jul  (la)
       - fix #6318: MusicXML export of syllabic is broken
