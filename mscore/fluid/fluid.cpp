@@ -102,7 +102,7 @@ void Fluid::init(int sr)
             _tuning[i] = i * 100.0;
       _masterTuning = 440.0;
 
-      for (int i = 0; i < 256; i++)
+      for (int i = 0; i < 512; i++)
             freeVoices.append(new Voice(this));
 
       reverb = new Reverb();
@@ -530,7 +530,7 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride)
  * of the algorithm previously in fluid_synth_alloc_voice.
  */
 
-Voice* Fluid::free_voice_by_kill()
+void Fluid::free_voice_by_kill()
       {
       float best_prio = 999999.;
       float this_voice_prio;
@@ -583,14 +583,13 @@ Voice* Fluid::free_voice_by_kill()
                   }
 
             /* check if this voice has less priority than the previous candidate. */
-            if (this_voice_prio < best_prio)
+            if (this_voice_prio < best_prio) {
                   best_voice = v;
-            best_prio = this_voice_prio;
+                  best_prio = this_voice_prio;
+                  }
             }
-      if (!best_voice)
-            return 0;
-      best_voice->off();
-      return best_voice;
+      if (best_voice)
+            best_voice->off();
       }
 
 //---------------------------------------------------------
@@ -599,20 +598,18 @@ Voice* Fluid::free_voice_by_kill()
 
 Voice* Fluid::alloc_voice(unsigned id, Sample* sample, int chan, int key, int vel, double vt)
       {
-      Voice* v   = 0;
       Channel* c = 0;
 
       /* check if there's an available synthesis process */
-      if (!freeVoices.isEmpty())
-            v = freeVoices.takeLast();
-      else
-            v = free_voice_by_kill();
+      if (freeVoices.isEmpty())
+            free_voice_by_kill();
 
-      if (v == 0) {
+      if (freeVoices.isEmpty()) {
             log("Failed to allocate a synthesis process. (chan=%d,key=%d)", chan, key);
             return 0;
             }
 
+      Voice* v = freeVoices.takeLast();
       activeVoices.append(v);
 
       if (chan >= 0)
