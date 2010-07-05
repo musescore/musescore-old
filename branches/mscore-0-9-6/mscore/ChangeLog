@@ -1,3 +1,5 @@
+5.jul  (la)
+      - fix #6388: Crash on importing a MusicXML file (beam problem)
 3.jul  (ws)
       - fix #5162: Artefacts in "Strings CLP" sound
       - fix #6093
