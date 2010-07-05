@@ -34,6 +34,7 @@
 #include "repeat.h"
 #include "staff.h"
 #include "spanner.h"
+#include "line.h"
 
 //---------------------------------------------------------
 //   subTypeName
@@ -292,10 +293,11 @@ void Segment::removeStaff(int staff)
       _elist.erase(_elist.begin() + track, _elist.begin() + track + VOICES);
       _lyrics.removeAt(staff);
 
-      foreach(Spanner* sp, _spannerFor) {
+/*      foreach(Spanner* sp, _spannerFor) {
             }
       foreach(Spanner* sp, _spannerBack) {
             }
+      */
       foreach(Element* e, _annotations) {
             int staffIdx = e->staffIdx();
             if (staffIdx > staff)
@@ -311,7 +313,7 @@ void Segment::removeStaff(int staff)
 
 void Segment::add(Element* el)
       {
-// printf("segment add(%d, %d, %s)\n", tick(), el->track(), el->name());
+// printf("%p segment add(%d, %d, %s %p)\n", this, tick(), el->track(), el->name(), el);
       el->setParent(this);
 
       int track = el->track();
@@ -396,7 +398,7 @@ void Segment::add(Element* el)
 
 void Segment::remove(Element* el)
       {
-// printf("Segment::remove %s\n", el->name());
+// printf("%p Segment::remove %s %p\n", this, el->name(), el);
 
       int track = el->track();
 
@@ -453,7 +455,8 @@ void Segment::remove(Element* el)
                   {
                   Spanner* l = static_cast<Spanner*>(el);
                   static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
-                  _spannerFor.removeOne(l);
+                  if (!_spannerFor.removeOne(l))
+                        printf("%p cannot remove spanner %p, size %d\n", this, l, _spannerFor.size());
                   }
                   break;
 

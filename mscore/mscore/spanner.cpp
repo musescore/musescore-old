@@ -30,8 +30,6 @@ Spanner::Spanner(Score* s)
       _startElement = 0;
       _endElement   = 0;
       _anchor       = ANCHOR_SEGMENT;
-//      _tick         = 0;
-//      _tick2        = 0;
       }
 
 Spanner::Spanner(const Spanner& s)
@@ -39,8 +37,6 @@ Spanner::Spanner(const Spanner& s)
       {
       _startElement = s._startElement;
       _endElement   = s._endElement;
-//      _tick         = s._tick;
-//      _tick2        = s._tick2;
       _anchor       = s._anchor;
       }
 

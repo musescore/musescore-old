@@ -106,8 +106,8 @@ Hairpin::Hairpin(Score* s)
 
 void Hairpin::layout()
       {
-      SLine::layout();
       Element::layout();
+      SLine::layout();
       }
 
 //---------------------------------------------------------

@@ -31,25 +31,46 @@
 
 int main(int argc, char* argv[])
       {
-      fprintf(stderr, "%s: compress sound file\n", argv[0]);
-      if (argc != 3) {
-            fprintf(stderr, "usage: %s infile outfile\n", argv[0]);
+      bool xml = false;
+
+      fprintf(stderr, "%s: convert sound file\n", argv[0]);
+
+      int c;
+      while ((c = getopt(argc, argv, "x")) != EOF) {
+            switch(c) {
+                  case 'x':
+                        xml = true;
+                        break;
+                  default:
+                        fprintf(stderr, "usage: %s [-flags] infile outfile\n", argv[0]);
+                        exit(1);
+                  }
+            }
+
+      argc -= optind;
+      argv += optind;
+
+      if (argc != 2) {
+            fprintf(stderr, "usage: %s [-flags] infile outfile\n", argv[0]);
             exit(1);
             }
-      SoundFont sf(argv[1]);
+
+      SoundFont sf(argv[0]);
 
       if (!sf.read()) {
             fprintf(stderr, "sf read error\n");
             exit(3);
             }
 
-      QFile fo(argv[2]);
+      QFile fo(argv[1]);
       if (!fo.open(QIODevice::WriteOnly)) {
             fprintf(stderr, "cannot open <%s>\n", argv[2]);
             exit(2);
             }
-//      sf.writeXml(&fo);
-      sf.write(&fo);
+      if (xml)
+            sf.writeXml(&fo);
+      else
+            sf.write(&fo);
       fo.close();
       return 0;
       }

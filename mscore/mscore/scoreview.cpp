@@ -1172,9 +1172,17 @@ void ScoreView::startEdit()
             textUndoLevel = 0;
             connect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
             }
+      else if (origEditObject->isSegment()) {
+            origEditObject->resetMode();
+            LineSegment* ols = (LineSegment*)origEditObject;
+            SLine* ohp       = (SLine*)ols->parent();
+            SLine* hp        = (SLine*)ohp->clone();
+            int idx          = ohp->lineSegments().indexOf(ols);
+            editObject       = hp->lineSegments().at(idx);
+            _score->undoChangeElement(ohp, hp);
+            }
       else {
             editObject = origEditObject->clone();
-            origEditObject->resetMode();
             editObject->setSelected(true);
             _score->undoChangeElement(origEditObject, editObject);
             }
