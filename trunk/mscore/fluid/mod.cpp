@@ -300,11 +300,11 @@ float Mod::get_value(Channel* chan, Voice* voice)
  */
 bool test_identity(const Mod * mod1, const Mod * mod2)
       {
-      return (mod1->dest != mod2->dest)
-            || (mod1->src1 != mod2->src1)
-            || (mod1->src2 != mod2->src2)
-            || (mod1->flags1 != mod2->flags1)
-            || (mod1->flags2 != mod2->flags2);
+      return (mod1->dest == mod2->dest)
+            && (mod1->src1 == mod2->src1)
+            && (mod1->src2 == mod2->src2)
+            && (mod1->flags1 == mod2->flags1)
+            && (mod1->flags2 == mod2->flags2);
       }
 
 //---------------------------------------------------------

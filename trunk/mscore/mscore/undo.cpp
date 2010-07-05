@@ -1181,7 +1181,6 @@ void ChangeElement::flip()
       else {
             oldElement->parent()->change(oldElement, newElement);
             }
-      // swap
       Element* e = oldElement;
       oldElement = newElement;
       newElement = e;

@@ -208,8 +208,6 @@ Segment* nextSeg1(Segment* seg, int& track)
             for (int t = startTrack; t < endTrack; ++t) {
                   if (seg->element(t)) {
                         track = t;
-printf("seg %s measure %p system %p\n",
-                           seg->subTypeName(), seg->measure(), seg->measure()->system());
                         return seg;
                         }
                   }

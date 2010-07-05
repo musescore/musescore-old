@@ -48,7 +48,6 @@ class LineSegment : public Element {
 
       virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
-      virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int) const;
@@ -65,7 +64,7 @@ class LineSegment : public Element {
       void setUserXoffset2(qreal x)               { _userOff2.setX(x);      }
       void setPos2(const QPointF& p)              { _p2 = p;                }
       QPointF pos2() const                        { return _p2 + _userOff2; }
-      void setLineSegmentType(LineSegmentType s)  { _segmentType = s;       }
+      void setSegmentType(LineSegmentType s)      { _segmentType = s;       }
       LineSegmentType segmentType() const         { return _segmentType;    }
       void setSystem(System* s)                   { _system = s;            }
       virtual void toDefault();
@@ -100,7 +99,8 @@ class SLine : public Spanner {
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);
       virtual QRectF bbox() const;
-      const QList<LineSegment*>& lineSegments() { return segments; }
+      const QList<LineSegment*>& lineSegments() const { return segments; }
+      QList<LineSegment*>& lineSegments() { return segments; }
 
       virtual QPointF tick2pos(int grip, System** system);
 

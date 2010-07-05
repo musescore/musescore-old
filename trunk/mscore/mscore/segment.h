@@ -34,6 +34,7 @@ class ChordRest;
 class Lyrics;
 class Painter;
 class Spanner;
+class System;
 
 typedef QList<Lyrics*> LyricsList;
 typedef LyricsList::iterator iLyrics;
@@ -129,6 +130,7 @@ class Segment : public Element {
       const LyricsList* lyricsList(int staffIdx) const { return &_lyrics[staffIdx];  }
 
       Measure* measure() const            { return (Measure*)parent(); }
+      System* system() const              { return (System*)parent()->parent(); }
       double x() const                    { return ipos().x();         }
       void setX(double v)                 { rxpos() = v;               }
 

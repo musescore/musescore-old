@@ -1610,7 +1610,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   t = new Text(score);
                   t->setTextStyle(TEXT_STYLE_TECHNIK);
                   }
-//TODO-WS            t->setTick(tick);
+            Segment* s = measure->getSegment(SegChordRest, tick);
             if (fontSize != "" || fontStyle != "" || fontWeight != "") {
                   QFont f = t->defaultFont();
                   if (fontSize != "") {
@@ -1629,20 +1629,20 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             t->setUserOff(QPointF(rx, ry));
             t->setMxmlOff(offset);
             t->setTrack((staff + rstaff) * VOICES);
-            measure->add(t);
+            s->add(t);
             }
       else if (dirType == "rehearsal") {
             Text* t = new Text(score);
             t->setSubtype(TEXT_REHEARSAL_MARK);
             t->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
-//TODO-WS            t->setTick(tick);
             t->setText(rehearsal);
             if (hasYoffset) t->setYoff(yoffset);
             else t->setAbove(placement == "above");
             t->setUserOff(QPointF(rx, ry));
             t->setMxmlOff(offset);
             t->setTrack((staff + rstaff) * VOICES);
-            measure->add(t);
+            Segment* s = measure->getSegment(SegChordRest, tick);
+            s->add(t);
             }
       else if (dirType == "pedal") {
             if (pedalLine) {
@@ -1706,8 +1706,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   dyn->setMxmlOff(offset);
 
                   dyn->setTrack((staff + rstaff) * VOICES);
-//TODO-WS                  dyn->setTick(tick);
-                  measure->add(dyn);
+                  Segment* s = measure->getSegment(SegChordRest, tick);
+                  s->add(dyn);
                   }
             }
       else if (dirType == "wedge") {

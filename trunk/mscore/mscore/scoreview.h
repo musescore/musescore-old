@@ -102,6 +102,9 @@ class ScoreView : public QWidget {
       int curGrip;
       QRectF grip[4];         // edit "grips"
       int grips;              // number of used grips
+      Element* origEditObject;
+      Element* editObject;         ///< Valid in edit mode
+      int textUndoLevel;
 
       //--input state:
       Cursor* cursor;
@@ -114,10 +117,6 @@ class ScoreView : public QWidget {
       QColor _fgColor;
       QPixmap* bgPixmap;
       QPixmap* fgPixmap;
-
-      Element* origEditObject;
-      Element* editObject;          ///< Valid in edit mode
-      int textUndoLevel;
 
       virtual void paintEvent(QPaintEvent*);
       void paint(const QRect&, QPainter&);
@@ -289,6 +288,7 @@ class ScoreView : public QWidget {
       void midiNoteReceived(int pitch, bool);
       void changeVoice(int voice);
       void drawBackground(QPainter& p, QRectF r);
+      void changeEditElement(Element* e) { editObject = e; }
       };
 
 extern int searchStaff(const Element* element);

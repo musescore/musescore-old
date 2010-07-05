@@ -412,8 +412,12 @@ void Inspector::updateList(Score* s)
                                                 new ElementItem(sei, slur);
                                           }
                                     }
-                              foreach(Spanner* s, segment->spannerFor())
-                                    new ElementItem(segItem, s);
+                              foreach(Spanner* s, segment->spannerFor()) {
+                                    SLine* sl = (SLine*)s;
+                                    ElementItem* si = new ElementItem(segItem, s);
+                                    foreach(LineSegment* ls, sl->lineSegments())
+                                          new ElementItem(si, ls);
+                                    }
                               foreach(Element* s, segment->annotations())
                                     new ElementItem(segItem, s);
                               for (int i = 0; i < staves; ++i) {

@@ -57,11 +57,11 @@ enum ElementType {
       BREATH, GLISSANDO,
       REPEAT_MEASURE,
       IMAGE,
-/*18*/TIE,
+/*19*/TIE,
       ARTICULATION, DYNAMIC, PAGE, BEAM, HOOK, LYRICS, MARKER, JUMP,
       FINGERING,
       TUPLET,
-      TEMPO_TEXT,
+/*30*/TEMPO_TEXT,
       STAFF_TEXT,
       HARMONY, FRET_DIAGRAM,
       VOLTA,
@@ -93,7 +93,8 @@ enum ElementFlag {
       ELEMENT_SYSTEM_FLAG = 0x1,
       ELEMENT_DROP_TARGET = 0x2,
       ELEMENT_SELECTABLE  = 0x4,
-      ELEMENT_MOVABLE     = 0x8
+      ELEMENT_MOVABLE     = 0x8,
+      ELEMENT_SEGMENT     = 0x10
       };
 
 typedef QFlags<ElementFlag> ElementFlags;
@@ -403,6 +404,7 @@ class Element {
                   _flags &= ~ELEMENT_DROP_TARGET;
             }
       bool isMovable() const           { return flag(ELEMENT_MOVABLE);     }
+      bool isSegment() const           { return flag(ELEMENT_SEGMENT);     }
       };
 
 //---------------------------------------------------------
