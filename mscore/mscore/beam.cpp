@@ -462,7 +462,7 @@ void Beam::layout1()
 
 void Beam::layout()
       {
-      if (_elements.isEmpty()) {
+      if (_elements.isEmpty() || !c1 || !c2) {
             printf("Beam::layout: no notes\n");
             return;
             }
