@@ -817,3 +817,15 @@ void TextLine::setContinueText(TextC* v)
       _continueText = v;
       }
 
+//---------------------------------------------------------
+//   layout
+//    compute segments from tick() to _tick2
+//---------------------------------------------------------
+
+void TextLine::layout()
+      {
+      Element::layout();
+      SLine::layout();
+      }
+
+

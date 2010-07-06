@@ -33,6 +33,7 @@ class Pedal : public TextLine {
       virtual Pedal* clone() const     { return new Pedal(*this); }
       virtual ElementType type() const { return PEDAL; }
       virtual void read(QDomElement);
+//      virtual void layout();
       };
 #endif
 

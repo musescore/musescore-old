@@ -33,6 +33,9 @@
       <file>data/viewmag.xpm</file>
       <file>data/subscript.svg</file>
       <file>data/superscript.svg</file>
+      <file>data/symbols.xml</file>
+      <file>data/gonville.xml</file>
+      <file>fonts/gonville-20.otf</file>
       <file>fonts/mscore-20.ttf</file>
       <file>fonts/MScore1-20_new.ttf</file>
       <file>fonts/MuseJazz.ttf</file>
@@ -66,7 +69,6 @@
       <file>data/cancel.png</file>
       <file>data/keyboard.svg</file>
       <file>data/noteentry.svg</file>
-      <file>data/symbols.xml</file>
       <file>data/tie.svg</file>
       <file alias="images/bookmark.svg">data/bookmark.svg</file>
       <file alias="images/pending.svg">data/pending.svg</file>

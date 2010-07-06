@@ -37,6 +37,9 @@ Pedal::Pedal(Score* s)
       setEndHook(true);
       setBeginHookHeight(Spatium(-1.2));
       setEndHookHeight(Spatium(-1.2));
+
+      setOffsetType(OFFSET_SPATIUM);
+      setYoff(8.0);
       }
 
 //---------------------------------------------------------
@@ -51,4 +54,17 @@ void Pedal::read(QDomElement e)
             }
       TextLine::read(e);
       }
+#if 0
+//---------------------------------------------------------
+//   layout
+//    compute segments from tick() to _tick2
+//---------------------------------------------------------
+
+void Pedal::layout()
+      {
+      Element::layout();
+      SLine::layout();
+      }
+
+#endif
 

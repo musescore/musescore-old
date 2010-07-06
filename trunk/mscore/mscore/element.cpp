@@ -114,7 +114,6 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Volta"),
       QT_TRANSLATE_NOOP("elementName", "HairpinSegment"),
       QT_TRANSLATE_NOOP("elementName", "OttavaSegment"),
-      QT_TRANSLATE_NOOP("elementName", "PedalSegment"),
       QT_TRANSLATE_NOOP("elementName", "TrillSegment"),
       QT_TRANSLATE_NOOP("elementName", "TextLineSegment"),
       QT_TRANSLATE_NOOP("elementName", "VoltaSegment"),
@@ -1293,7 +1292,6 @@ Element* Element::create(ElementType type, Score* score)
             case TUPLET:
             case HAIRPIN_SEGMENT:
             case OTTAVA_SEGMENT:
-            case PEDAL_SEGMENT:
             case TRILL_SEGMENT:
             case TEXTLINE_SEGMENT:
             case VOLTA_SEGMENT:
@@ -1366,7 +1364,6 @@ const char* Element::name(ElementType type)
             case VOLTA:             return "Volta";
             case HAIRPIN_SEGMENT:   return "HairpinSegment";
             case OTTAVA_SEGMENT:    return "OttavaSegment";
-            case PEDAL_SEGMENT:     return "PedalSegment";
             case TRILL_SEGMENT:     return "TrillSegment";
             case TEXTLINE_SEGMENT:  return "TextLineSegment";
             case VOLTA_SEGMENT:     return "VoltaSegment";
