@@ -1273,20 +1273,33 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             Measure* m = system->lastMeasure();
             bool hasCourtesyKeysig = false;
             Measure* nm = m ? m->nextMeasure() : 0;
+            Segment* s;
 
             if (m && nm && !m->sectionBreak()) {
                   int tick        = m->tick() + m->ticks();
                   Fraction sig2   = m->timesig();
                   Fraction sig1   = nm->timesig();
 
-                  if (styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2)) {
-                        Segment* s  = m->getSegment(SegTimeSigAnnounce, tick);
+                  // locate a time sig. in the next measure and, if found,
+                  // check if it has cout. sig. turned off
+                  TimeSig* ts;
+                  Segment* tss = nm->findSegment(SegTimeSig, tick);
+                  bool showCourtesySig = true;              // assume this time time change has court. sig turned on
+                  if (tss) {
+                        ts = static_cast<TimeSig*>(tss->element(0));
+                        if (ts && !ts->showCourtesySig())
+                              showCourtesySig = false;     // this key change has court. sig turned off
+                        }
+
+                  // if due, create a new courtesy time signature for each staff
+                  if (styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2) && showCourtesySig) {
+                        s  = m->getSegment(SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
                               if (s->element(track))
                                     continue;
-                              TimeSig* ts = new TimeSig(this, sig2);
-                              Segment* tss = nm->findSegment(SegTimeSig, tick);
+                              ts = new TimeSig(this, sig2);
+                              tss = nm->findSegment(SegTimeSig, tick);
                               if (tss) {
                                     TimeSig* nts = (TimeSig*)tss->element(0);
                                     if (nts)
@@ -1299,6 +1312,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               needRelayout = true;
                               }
                         }
+                  // courtesy key signatures
                   if (styleB(ST_genCourtesyKeysig)) {
                         int n = _staves.size();
                         for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
@@ -1308,17 +1322,17 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
 
                               // locate a key sig. in next measure and, if found,
                               // check if it has court. sig turned off
-					Segment* s = nm->findSegment(SegKeySig, tick);
-					bool showCourtesySig = true;	// assume this key change has court. sig turned on
-					if (s) {
+                              s = nm->findSegment(SegKeySig, tick);
+                              showCourtesySig = true;	// assume this key change has court. sig turned on
+                              if (s) {
                                     KeySig* ks = static_cast<KeySig*>(s->element(staffIdx*VOICES));
-						if (ks && !ks->showCourtesySig())
-						      showCourtesySig = false;     // this key change has court. sig turned off
+                                    if (ks && !ks->showCourtesySig())
+                                          showCourtesySig = false;     // this key change has court. sig turned off
                                     }
 
                               if (key1 != key2 && showCourtesySig) {
                                     hasCourtesyKeysig = true;
-                                    Segment* s  = m->getSegment(SegKeySigAnnounce, tick);
+                                    s  = m->getSegment(SegKeySigAnnounce, tick);
                                     int track = staffIdx * VOICES;
                                     if (!s->element(track)) {
                                           KeySig* ks = new KeySig(this);
@@ -1334,17 +1348,29 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                     }
                               }
                         }
+                  // courtesy clefs
                   if (styleB(ST_genCourtesyClef)) {
+                        Clef* c;
                         int n = _staves.size();
                         for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
                               Staff* staff = _staves[staffIdx];
                               int c1 = staff->clef(tick - 1);
                               int c2 = staff->clef(tick);
                               if (c1 != c2) {
-                                    Segment* s  = m->getSegment(SegClef, tick);
+                                    // locate a clef in next measure and, if found,
+                                    // check if it has court. sig turned off
+                                    s = nm->findSegment(SegClef, tick);
+                                    showCourtesySig = true;	// assume this clef change has court. sig turned on
+                                    if (s) {
+                                          c = static_cast<Clef*>(s->element(staffIdx*VOICES));
+                                          if (c && !c->showCourtesyClef())
+                                                continue;   // this key change has court. sig turned off
+                                          }
+
+                                    s  = m->getSegment(SegClef, tick);
                                     int track = staffIdx * VOICES;
                                     if (!s->element(track)) {
-                                          Clef* c = new Clef(this);
+                                          c = new Clef(this);
                                           c->setSubtype(c2);
                                           c->setTrack(track);
                                           c->setGenerated(true);

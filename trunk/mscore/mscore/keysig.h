@@ -74,8 +74,8 @@ class KeySig : public Element {
       void setSubtype(KeySigEvent e)  { Element::setSubtype(e.subtype); }
       int tick() const;
 
-      bool showCourtesySig() const		{ return _showCourtesySig; };
-	bool showNaturals() const		{ return _showNaturals;    };
+      bool showCourtesySig() const        { return _showCourtesySig; };
+      bool showNaturals() const           { return _showNaturals;    };
       void setShowCourtesySig(bool v)     { _showCourtesySig = v;    };
 	void setShowNaturals(bool v)        { _showNaturals = v;       };
 	virtual bool genPropertyMenu(QMenu*) const;

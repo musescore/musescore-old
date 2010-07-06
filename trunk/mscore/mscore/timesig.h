@@ -48,6 +48,7 @@ enum {
 */
 class TimeSig : public Element {
 
+      bool	_showCourtesySig;
       QString sz, sn;   // cached values, set in layout()
       QPointF pz, pn;
 
@@ -87,6 +88,11 @@ class TimeSig : public Element {
             }
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
+
+      bool showCourtesySig() const        { return _showCourtesySig; };
+      void setShowCourtesySig(bool v)     { _showCourtesySig = v;    };
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(ScoreView*, const QString&);
       };
 
 #endif

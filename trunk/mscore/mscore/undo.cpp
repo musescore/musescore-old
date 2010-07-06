@@ -58,6 +58,7 @@
 #include "seq.h"
 #include "page.h"
 #include "keysig.h"
+#include "timesig.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -2136,6 +2137,27 @@ void ChangeMeasureTimesig::flip()
       }
 
 //---------------------------------------------------------
+//   ChangeTimesig
+//---------------------------------------------------------
+
+ChangeTimesig::ChangeTimesig(TimeSig* _timesig, bool sc)
+      {
+      timesig = _timesig;
+      showCourtesy = sc;
+      };
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeTimesig::flip()
+      {
+      bool sc        = timesig->showCourtesySig();
+      timesig->setShowCourtesySig(showCourtesy);
+      showCourtesy = sc;
+      }
+
+//---------------------------------------------------------
 //   RemoveMeasures
 //---------------------------------------------------------
 
@@ -2191,5 +2213,26 @@ void InsertMeasures::undo()
 void InsertMeasures::redo()
       {
       fm->score()->measures()->insert(fm, lm);
+      }
+
+//---------------------------------------------------------
+//   ChangeClef
+//---------------------------------------------------------
+
+ChangeClef::ChangeClef(Clef * _clef, bool sc)
+      {
+      clef = _clef;
+      showCourtesy = sc;
+      };
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeClef::flip()
+      {
+      bool sc = clef->showCourtesyClef();
+      clef->setShowCourtesyClef(showCourtesy);
+      showCourtesy = sc;
       }
 

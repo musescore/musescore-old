@@ -36,84 +36,36 @@
 #include "measure.h"
 #include "tablature.h"
 #include "part.h"
+#include "undo.h"
 
 // FIXME!
-// only values for CLEF_G..CLEF_G3 CLEF_F and CLEF_C3 are
-// checked
+// all checked excepted TAB, PERC, PERC2
 
 const ClefInfo clefTable[] = {
-//               MusicXml
-//      tag xmlName line octave  yoffset pitchoffset  name
-      { "G", "G",   2,  0,   0, 45,
-            { 0, 3, -1, 2, 5, 1, 4 , 4, 1,  5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Treble clef")
-            },
-      { "G8va", "G",   2,  1,   7, 52,
-            { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Treble clef 8va") },
-      { "G15ma",   "G", 2,  2,  14, 59,
-            { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Treble clef 15ma") },
-      { "G8vb", "G", 2, -1,  -7, 38,
-            { 0, 3, -1, 2, 5, 1, 4, 4, 1,  5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Treble clef 8vb") },
-      { "F", "F", 4,  0, -12, 33,
-            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass clef") },
-      { "F8vb", "F",  4, -1, -19, 26,
-            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass clef 8vb") },
-      { "F15mb", "F",  4, -2, -26, 19,
-            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass clef 15mb") },
-
-      { "F3", "F",  3,  0, -10, 35,
-            { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
-            QT_TRANSLATE_NOOP("clefTable", "Baritone clef (F clef)") },
-      { "F5",  "F", 5,  0, -14, 31,
-            { 1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
-            QT_TRANSLATE_NOOP("clefTable", "Subbass clef") },
-
-      { "C1", "C",  1,  0,  -2, 43,
-            { 5, 1, 4, 0, 3, -1, 2, 2, -1, 3, 0, 4, 1, 5 },
-            QT_TRANSLATE_NOOP("clefTable", "Soprano clef") },        // CLEF_C1
-      { "C2", "C",  2,  0,  -4, 41,
-            { 3, 6, 2, 5, 1, 4, 0, 0, 4, 1, 5, 2, 6, 3 },
-            QT_TRANSLATE_NOOP("clefTable", "Mezzo-soprano clef") },  // CLEF_C2
-      { "C3", "C",  3,  0,  -6, 39,
-            { 1, 4, 0, 3, 6, 2, 5, 5, 2, 6, 3, 7, 4, 8 },
-            QT_TRANSLATE_NOOP("clefTable", "Alto clef") },           // CLEF_C3
-      { "C4", "C",  4,  0,  -8, 37,
-            { 6, 2, 5, 1, 4, 0, 3, 3, 0, 4, 1, 5, 2, 6 },
-            QT_TRANSLATE_NOOP("clefTable", "Tenor clef")  },          // CLEF_C4
-
-      { "TAB", "TAB", 5,  0,   0,  0,
-            { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Tablature") },
-
-      { "PERC", "percussion", 2,  0,   0, 45,
-            { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Percussion") },
-
-      { "C5", "C",  5,  0, -10, 35,
-            { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
-            QT_TRANSLATE_NOOP("clefTable", "Baritone clef (C clef)") },   // CLEF_C5
-
-      { "G1", "G", 1,  0,   2, 47,
-            { 2, 5, 1, 4, 0, 3, -1, 6, 3, 7, 4, 1, 5, 2 },
-            QT_TRANSLATE_NOOP("clefTable", "French violin clef") },       // CLEF_G4
-
-      { "F8va",  "F", 4,  1, -5, 40,                                         // CLEF_F_8VA
-            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass clef 8va") },
-
-      { "F15ma", "F",  4,  2,  2, 47,                                         // CLEF_F_15MA
-            { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 },
-            QT_TRANSLATE_NOOP("clefTable", "Bass clef 15ma") },
-
-      { "PERC2", "percussion", 2,  0,   0, 45,                            // CLEF_PERC2 placeholder
-            { 0, 3, -1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 },
-            QT_TRANSLATE_NOOP("clefTable", "Percussion") },
+//   MusicXml           octchng  pitchoffset
+// tag  xmlName     line      yoffs     |-lines for sharps--||--lines for flats--|   name
+{ "G",    "G",         2,  0,   0, 45, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, QT_TRANSLATE_NOOP("clefTable", "Treble clef")            },
+{ "G8va", "G",         2,  1,   7, 52, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, QT_TRANSLATE_NOOP("clefTable", "Treble clef 8va")        },
+{ "G15ma","G",         2,  2,  14, 59, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, QT_TRANSLATE_NOOP("clefTable", "Treble clef 15ma")       },
+{ "G8vb", "G",         2, -1,  -7, 38, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, QT_TRANSLATE_NOOP("clefTable", "Treble clef 8vb")        },
+{ "F",    "F",         4,  0, -12, 33, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, QT_TRANSLATE_NOOP("clefTable", "Bass clef")              },
+{ "F8vb", "F",         4, -1, -19, 26, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, QT_TRANSLATE_NOOP("clefTable", "Bass clef 8vb")          },
+{ "F15mb","F",         4, -2, -26, 19, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, QT_TRANSLATE_NOOP("clefTable", "Bass clef 15mb")         },
+{ "F3",   "F",         3,  0, -10, 35, { 4, 0, 3,-1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 }, QT_TRANSLATE_NOOP("clefTable", "Baritone clef (F clef)") },
+//{ "F5", "F",         5,  0, -14, 31, { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, QT_TRANSLATE_NOOP("clefTable", "Subbass clef")           },
+{ "F5",   "F",         5,  0, -14, 31, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, QT_TRANSLATE_NOOP("clefTable", "Subbass clef")           },
+{ "C1",   "C",         1,  0,  -2, 43, { 5, 1, 4, 0, 3,-1, 2, 2,-1, 3, 0, 4, 1, 5 }, QT_TRANSLATE_NOOP("clefTable", "Soprano clef")           }, // CLEF_C1
+{ "C2",   "C",         2,  0,  -4, 41, { 3, 6, 2, 5, 1, 4, 0, 0, 4, 1, 5, 2, 6, 3 }, QT_TRANSLATE_NOOP("clefTable", "Mezzo-soprano clef")     }, // CLEF_C2
+{ "C3",   "C",         3,  0,  -6, 39, { 1, 4, 0, 3, 6, 2, 5, 5, 2, 6, 3, 7, 4, 8 }, QT_TRANSLATE_NOOP("clefTable", "Alto clef")              }, // CLEF_C3
+{ "C4",   "C",         4,  0,  -8, 37, { 6, 2, 5, 1, 4, 0, 3, 3, 0, 4, 1, 5, 2, 6 }, QT_TRANSLATE_NOOP("clefTable", "Tenor clef")             }, // CLEF_C4
+{ "TAB",  "TAB",       5,  0,   0,  0, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, QT_TRANSLATE_NOOP("clefTable", "Tablature")              },
+{ "PERC", "percussion",2,  0,   0, 45, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, QT_TRANSLATE_NOOP("clefTable", "Percussion")             },
+{ "C5",   "C",         5,  0, -10, 35, { 4, 0, 3,-1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 }, QT_TRANSLATE_NOOP("clefTable", "Baritone clef (C clef)") }, // CLEF_C5
+//{ "G1", "G",         1,  0,   2, 47, { 2, 5, 1, 4, 0, 3,-1, 6, 3, 7, 4, 1, 5, 2 }, QT_TRANSLATE_NOOP("clefTable", "French violin clef")     }, // CLEF_G4
+{ "G1",   "G",         1,  0,   2, 47, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, QT_TRANSLATE_NOOP("clefTable", "French violin clef")     }, // CLEF_G4
+{ "F8va", "F",         4,  1,  -5, 40, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, QT_TRANSLATE_NOOP("clefTable", "Bass clef 8va")          }, // CLEF_F_8VA
+{ "F15ma","F",         4,  2,   2, 47, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, QT_TRANSLATE_NOOP("clefTable", "Bass clef 15ma")         }, // CLEF_F_15MA
+{ "PERC2","percussion",2,  0,   0, 45, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, QT_TRANSLATE_NOOP("clefTable", "Percussion")             }, // CLEF_PERC2 placeholder
 
       };
 
@@ -124,18 +76,21 @@ const ClefInfo clefTable[] = {
 Clef::Clef(Score* s)
   : Compound(s)
       {
+      _showCourtesyClef = true;
       _small = false;
       }
 
 Clef::Clef(const Clef& c)
    : Compound(c)
       {
+      _showCourtesyClef = c._showCourtesyClef;
       _small = c._small;
       }
 
 Clef::Clef(Score* s, int i)
   : Compound(s)
       {
+      _showCourtesyClef = true;
       _small = false;
       setSubtype(i);
       }
@@ -343,6 +298,35 @@ Element* Clef::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       }
 
 //---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Clef::genPropertyMenu(QMenu* popup) const
+      {
+      Element::genPropertyMenu(popup);
+      // if the clef is not generated (= not courtesy) add the specific menu item
+      if (!generated()) {
+            QAction* a = popup->addAction(_showCourtesyClef
+               ? QT_TRANSLATE_NOOP("Clef", "Hide courtesy clef")
+               : QT_TRANSLATE_NOOP("Clef", "Show courtesy clef") );
+            a->setData("courtesy");
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Clef::propertyAction(ScoreView* viewer, const QString& s)
+      {
+      if (s == "courtesy")
+            score()->undo()->push(new ChangeClef(this, !_showCourtesyClef));
+      else
+            Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
 //   clef
 //---------------------------------------------------------
 
@@ -473,7 +457,10 @@ void Clef::setSmall(bool val)
 void Clef::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!Element::readProperties(e))
+//          if (tag == "showCourtesyClef")
+//                _showCourtesyClef = e.text().toInt();
+//          else
+                  if (!Element::readProperties(e))
                   domError(e);
             }
       if (subtype() == 0)      // make sure setSubtype() is called at least once

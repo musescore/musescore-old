@@ -43,6 +43,7 @@ static const int NO_CLEF = -1000;
 */
 
 class Clef : public Compound {
+      bool _showCourtesyClef;
       bool _small;
 
    public:
@@ -64,6 +65,11 @@ class Clef : public Compound {
       bool small() const                        { return _small; }
       void setSmall(bool val);
       int tick() const;
+
+      bool showCourtesyClef() const       { return _showCourtesyClef; };
+      void setShowCourtesyClef(bool v)    { _showCourtesyClef = v;    };
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(ScoreView*, const QString&);
       };
 
 //---------------------------------------------------------

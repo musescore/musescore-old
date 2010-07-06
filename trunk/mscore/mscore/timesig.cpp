@@ -37,23 +37,27 @@
 TimeSig::TimeSig(Score* s)
   : Element(s)
       {
+      _showCourtesySig = true;
       }
 
 TimeSig::TimeSig(Score* s, int st)
   : Element(s)
       {
+      _showCourtesySig = true;
       setSubtype(st);
       }
 
 TimeSig::TimeSig(Score* s, int n, int z1, int z2, int z3, int z4)
   : Element(s)
       {
+      _showCourtesySig = true;
       setSig(n, z1, z2, z3, z4);
       }
 
 TimeSig::TimeSig(Score* s, const Fraction& f)
    : Element(s)
       {
+      _showCourtesySig = true;
       setSig(f.denominator(), f.numerator(), 0, 0, 0);
       }
 
@@ -134,6 +138,37 @@ Element* TimeSig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       }
 
 //---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool TimeSig::genPropertyMenu(QMenu* popup) const
+      {
+      Element::genPropertyMenu(popup);
+      int _track = track();
+      // if the time sig. is not generated (= not courtesy) and is in track 0
+      // add the specific menu item
+      if (!generated() && !_track) {
+            QAction* a = popup->addAction(_showCourtesySig
+               ? QT_TRANSLATE_NOOP("TimeSig", "Hide courtesy sig.")
+               : QT_TRANSLATE_NOOP("TimeSig", "Show courtesy sig.") );
+            a->setData("courtesy");
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void TimeSig::propertyAction(ScoreView* viewer, const QString& s)
+      {
+      if (s == "courtesy")
+            score()->undo()->push(new ChangeTimesig(this, !_showCourtesySig));
+      else
+            Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
 //   write TimeSig
 //---------------------------------------------------------
 
@@ -154,6 +189,7 @@ void TimeSig::write(Xml& xml) const
                         xml.tag("nom4", z4);
                   }
             }
+      xml.tag("showCourtesySig", _showCourtesySig);
       xml.etag();
       }
 
@@ -179,6 +215,8 @@ void TimeSig::read(QDomElement e)
                   z3 = val;
             else if (tag == "nom4")
                   z4 = val;
+            else if (tag == "showCourtesySig")
+                  _showCourtesySig = e.text().toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
