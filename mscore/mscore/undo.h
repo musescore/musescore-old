@@ -65,6 +65,8 @@ class Tuplet;
 class UndoGroup;
 class KeySig;
 class StaffType;
+class TimeSig;
+class Clef;
 
 //---------------------------------------------------------
 //   UndoCommand
@@ -1176,6 +1178,22 @@ class ChangeMeasureTimesig : public UndoCommand {
       };
 
 //---------------------------------------------------------
+//   ChangeTimesig
+//---------------------------------------------------------
+
+class ChangeTimesig : public UndoCommand {
+      TimeSig* timesig;
+      bool showCourtesy;
+
+      void flip();
+
+   public:
+      ChangeTimesig(TimeSig * _timesig, bool sc);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
 //   RemoveMeasures
 //---------------------------------------------------------
 
@@ -1203,4 +1221,20 @@ class InsertMeasures : public UndoCommand {
       virtual void redo();
       };
 #endif
+
+//---------------------------------------------------------
+//   ChangeClef
+//---------------------------------------------------------
+
+class ChangeClef : public UndoCommand {
+      Clef* clef;
+      bool showCourtesy;
+
+      void flip();
+
+   public:
+      ChangeClef(Clef*, bool sc);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
 

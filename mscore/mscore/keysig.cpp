@@ -330,8 +330,8 @@ void KeySig::write(Xml& xml) const
             xml.tag("pos", ks->spos);
             xml.etag();
             }
-	xml.tag("showNaturals", _showCourtesySig);
-	xml.tag("showCourtesySig", _showNaturals);
+      xml.tag("showCourtesySig", _showCourtesySig);
+      xml.tag("showNaturals",    _showNaturals);
 	xml.etag();
       }
 
