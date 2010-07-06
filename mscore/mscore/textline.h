@@ -94,6 +94,7 @@ class TextLine : public SLine {
       virtual TextLine* clone() const           { return new TextLine(*this); }
       virtual ElementType type() const          { return TEXTLINE; }
       virtual LineSegment* createLineSegment();
+      virtual void layout();
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

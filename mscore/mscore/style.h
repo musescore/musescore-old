@@ -295,6 +295,7 @@ enum StyleIdx {
       ST_SlurBow,
 
       ST_SectionPause,
+      ST_MusicalSymboFont,
 
       ST_STYLES
       };

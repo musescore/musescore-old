@@ -1103,15 +1103,14 @@ void Score::deleteItem(Element* el)
                   undoRemoveElement(el);
                   break;
 
-            case OTTAVA_SEGMENT:
-            case HAIRPIN_SEGMENT:
-            case TRILL_SEGMENT:
-            case PEDAL_SEGMENT:
-            case TEXTLINE_SEGMENT:
-            case VOLTA_SEGMENT:
-            case SLUR_SEGMENT:
-                  undoRemoveElement(el->parent());
-                  break;
+//            case OTTAVA_SEGMENT:
+//            case HAIRPIN_SEGMENT:
+//            case TRILL_SEGMENT:
+//            case TEXTLINE_SEGMENT:
+//            case VOLTA_SEGMENT:
+//            case SLUR_SEGMENT:
+//                  undoRemoveElement(el->parent());
+//                  break;
 
             case NOTE:
                   {

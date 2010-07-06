@@ -195,7 +195,9 @@ StyleType styleTypes[] = {
       StyleType("slurMidWidth",            ST_SPATIUM),
       StyleType("slurDottedWidth",         ST_SPATIUM),
       StyleType("slurBow",                 ST_SPATIUM),
-      StyleType("sectionPause",            ST_DOUBLE)
+      StyleType("sectionPause",            ST_DOUBLE),
+
+      StyleType("musicalSymboFont",        ST_STRING)
       };
 
 //---------------------------------------------------------
@@ -475,7 +477,9 @@ Style::Style()
             StyleVal(ST_SlurDottedWidth, Spatium(.1)),
             StyleVal(ST_SlurBow, Spatium(1.6)),
 
-            StyleVal(ST_SectionPause, 3.0)
+            StyleVal(ST_SectionPause, 3.0),
+
+            StyleVal(ST_MusicalSymboFont, "emmentaler")
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)
