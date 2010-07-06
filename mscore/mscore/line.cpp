@@ -137,6 +137,8 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
                               }
                         }
                   else {
+                        if (s2 && (s2->system()->firstMeasure() == s2->measure()))
+                              removeSegment = true;
                         Measure* m = s2->measure()->prevMeasure();
                         if (m)
                               s2 = m->last();
@@ -158,16 +160,17 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
                   }
             else if (curGrip == 1) {
                   if (snapSegment) {
-                        if (s2 && (s2->system()->firstMeasure() == s2->measure())
-                           && (s2->tick() == s2->measure()->tick())) {
+                        if ((s2->system()->firstMeasure() == s2->measure())
+                           && (s2->tick() == s2->measure()->tick()))
                               bspDirty = true;
-                              }
                         s2 = nextSeg1(s2, track);
                         }
                   else {
                         Measure* m = s2->measure()->nextMeasure();
                         if (m)
                               s2 = m->last();
+                        if (s2->system()->firstMeasure() == s2->measure())
+                              bspDirty = true;
                         }
                   }
             }

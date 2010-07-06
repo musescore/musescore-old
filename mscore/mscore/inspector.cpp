@@ -763,6 +763,7 @@ void SegmentView::setElement(Element* e)
             if ((1 << idx) == st)
                   break;
             }
+      sb.tick->setNum(s->tick());
       sb.segmentType->setCurrentIndex(idx);
       sb.lyrics->clear();
 
@@ -1829,9 +1830,10 @@ void VoltaView::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       tlb.lineWidth->setValue(volta->lineWidth().val());
-//      lb.tick2->setValue(volta->tick2());
       lb.anchor->setCurrentIndex(int(volta->anchor()));
       lb.diagonal->setChecked(volta->diagonal());
+      lb.leftElement->setText(QString("%1").arg((unsigned long)volta->startElement()));
+      lb.rightElement->setText(QString("%1").arg((unsigned long)volta->endElement()));
 
       lb.segments->clear();
       const QList<LineSegment*>& el = volta->lineSegments();

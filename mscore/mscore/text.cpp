@@ -688,9 +688,7 @@ void TextB::layout()
             return;
       if (parent()->type() == SEGMENT) {
             Segment* s = static_cast<Segment*>(parent());
-            double y = s ? s->measure()->system()->staff(track() / VOICES)->y() : 0.0;
-            double x = s->pos().x();
-            setPos(ipos() + QPointF(x, y));
+            rypos() += s ? s->measure()->system()->staff(track() / VOICES)->y() : 0.0;
             }
       }
 

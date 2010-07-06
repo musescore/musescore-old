@@ -69,6 +69,7 @@ class Ottava : public TextLine {
       virtual ElementType type() const { return OTTAVA; }
       virtual void setSubtype(int val);
       virtual LineSegment* createLineSegment();
+      virtual void layout();
       int pitchShift() const { return _pitchShift; }
       };
 

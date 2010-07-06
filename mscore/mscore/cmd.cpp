@@ -2447,7 +2447,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     int baseTpc = transposeTpc(harmony->baseTpc(), interval, false);
                                     undoTransposeHarmony(harmony, rootTpc, baseTpc);
                                     }
-                              
+
                               int tick = curTick - tickStart + dstTick;
                               Segment* segment = tick2segment(tick);
                               if (segment) {
