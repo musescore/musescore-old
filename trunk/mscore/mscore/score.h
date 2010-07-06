@@ -356,7 +356,6 @@ class Score : public QObject {
       System* getNextSystem(bool, bool);
       void getCurPage();
       bool doReLayout();
-      void rebuildBspTree();
       Measure* skipEmptyMeasures(Measure*, System*);
 
       void layoutStage1();
@@ -391,6 +390,7 @@ class Score : public QObject {
 
       TextC* rights;                ///< Copyright printed at bottom of page
 
+      void rebuildBspTree();
       void cmdAppendMeasures(int);
       void cmdInsertMeasures(int);
       bool noStaves() const         { return _staves.empty(); }
