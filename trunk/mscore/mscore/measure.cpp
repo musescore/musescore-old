@@ -1890,8 +1890,6 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   xml.tagE("breakMultiMeasureRest");
             if (_userStretch != 1.0)
                   xml.tag("stretch", _userStretch);
-//            if (_noText)
-//                  _noText->write(xml);
             if (_noOffset)
                   xml.tag("noOffset", _noOffset);
             }

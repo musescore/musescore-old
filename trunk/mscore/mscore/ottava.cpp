@@ -35,6 +35,18 @@ Ottava::Ottava(Score* s)
    : TextLine(s)
       {
       setSubtype(0);
+      setOffsetType(OFFSET_SPATIUM);
+      setYoff(-3.5);    // default position
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Ottava::layout()
+      {
+      Element::layout();
+      SLine::layout();
       }
 
 //---------------------------------------------------------
@@ -81,3 +93,4 @@ LineSegment* Ottava::createLineSegment()
       {
       return new OttavaSegment(score());
       }
+

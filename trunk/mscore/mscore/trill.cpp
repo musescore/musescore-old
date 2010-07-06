@@ -96,8 +96,6 @@ Element* TrillSegment::drop(ScoreView*, const QPointF&, const QPointF&, Element*
       return 0;
       }
 
-
-
 //---------------------------------------------------------
 //   Trill
 //---------------------------------------------------------
@@ -107,6 +105,8 @@ Trill::Trill(Score* s)
       {
       _accidental = 0;
       setLen(spatium() * 7);   // for use in palettes
+      setOffsetType(OFFSET_SPATIUM);
+      setYoff(-1.0);    // default position
       }
 
 //---------------------------------------------------------
@@ -139,12 +139,9 @@ void Trill::remove(Element* e)
 
 void Trill::layout()
       {
+      Element::layout();
       SLine::layout();
       double _spatium = spatium();
-
-      double y = segment() ? segment()->measure()->system()->staff(staffIdx())->y() : 0.0;
-      y -= 2.0 * _spatium;
-      setPos(ipos().x(), y);
 
       if (_accidental) {
             _accidental->setMag(.6);

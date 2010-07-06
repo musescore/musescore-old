@@ -108,10 +108,6 @@ int Dynamic::velocity() const
 void Dynamic::write(Xml& xml) const
       {
       xml.stag("Dynamic");
-//TODO1      if (tick() != xml.curTick) {
-//            xml.tag("tick", tick());
-//            xml.curTick = tick();
-//            }
       if (_velocity > 0)
             xml.tag("velocity", _velocity);
       if (_dynType != DYNAMIC_PART)
@@ -255,6 +251,7 @@ void Dynamic::toDefault()
 
 void Dynamic::layout()
       {
+      Element::layout();
       setSubtype(subtype());  // re-apply style
       Text::layout();
       }
