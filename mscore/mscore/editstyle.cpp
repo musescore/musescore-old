@@ -68,7 +68,7 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       for (int i = 0; i < ARTICULATIONS; ++i) {
             ArticulationInfo* ai = &Articulation::articulationList[i];
 
-            QTableWidgetItem* item = new QTableWidgetItem(*symIcon(symbols[ai->sym], 50, 25, 25), qApp->translate("articulation", qPrintable(ai->name)));
+            QTableWidgetItem* item = new QTableWidgetItem(*symIcon(symbols[s->symIdx()][ai->sym], 50, 25, 25), qApp->translate("articulation", qPrintable(ai->name)));
             item->setFlags(item->flags() & ~Qt::ItemIsEditable);
             articulationTable->setItem(i, 0, item);
 
@@ -217,6 +217,8 @@ void EditStyle::getValues()
       lstyle.set(ST_SlurDottedWidth,         Spatium(slurDottedLineWidth->value()));
       lstyle.set(ST_SlurBow,                 Spatium(slurBow->value()));
 
+      lstyle.set(ST_MusicalSymbolFont,       musicalSymbolFont->currentText());
+
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
             lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
@@ -353,6 +355,8 @@ void EditStyle::setValues()
       slurMidLineWidth->setValue(lstyle[ST_SlurMidWidth].toSpatium().val());
       slurDottedLineWidth->setValue(lstyle[ST_SlurDottedWidth].toSpatium().val());
       slurBow->setValue(lstyle[ST_SlurBow].toSpatium().val());
+//      ST_SectionPause,
+      musicalSymbolFont->setCurrentIndex(lstyle[ST_MusicalSymbolFont].toString() == "Emmentaler" ? 0 : 1);
       }
 
 //---------------------------------------------------------

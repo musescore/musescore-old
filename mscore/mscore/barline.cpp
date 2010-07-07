@@ -144,13 +144,15 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                   double lw2  = point(score()->styleS(ST_endBarWidth));
                   double d1   = point(score()->styleS(ST_endBarDistance));
 
+                  const Sym& dotsym = symbols[score()->symIdx()][dotSym];
+
                   double x2   =  lw2 * .5;                               // thick line (lw2)
                   double x1   =  lw2 + d1 + lw * .5;                     // thin line (lw)
                   double x0   =  lw2 + d1 + lw + d1;                     // dot position
 
                   if (parent() == 0) {    // for use in palette
-                        symbols[dotSym].draw(p, mags, x0, 1.5 * ld);
-                        symbols[dotSym].draw(p, mags, x0, 2.5 * ld);
+                        dotsym.draw(p, mags, x0, 1.5 * ld);
+                        dotsym.draw(p, mags, x0, 2.5 * ld);
                         }
                   else {
                         double doty1, doty2;
@@ -179,8 +181,8 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
                               double yy = l2->y2() - yp;
 
-                              symbols[dotSym].draw(p, mags, x0, yy - doty1 * ld);
-                              symbols[dotSym].draw(p, mags, x0, yy - doty2 * ld);
+                              dotsym.draw(p, mags, x0, yy - doty1 * ld);
+                              dotsym.draw(p, mags, x0, yy - doty2 * ld);
                               }
                         }
 
@@ -191,8 +193,8 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                   p.drawLine(QLineF(x2, y1, x2, y2));
 
                   if (score()->styleB(ST_repeatBarTips)) {
-                        symbols[brackettipsRightUp].draw(p, mags, 0.0, y1);
-                        symbols[brackettipsRightDown].draw(p, mags, 0.0, y2);
+                        symbols[score()->symIdx()][brackettipsRightUp].draw(p, mags, 0.0, y1);
+                        symbols[score()->symIdx()][brackettipsRightDown].draw(p, mags, 0.0, y2);
                         }
                   }
                   break;
@@ -201,13 +203,14 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                   {
                   double lw2  = point(score()->styleS(ST_endBarWidth));
                   double d1   = point(score()->styleS(ST_endBarDistance));
-                  double dotw = symbols[dotSym].width(mags);
+                  const Sym& dotsym = symbols[score()->symIdx()][dotSym];
+                  double dotw = dotsym.width(mags);
                   double x1   =  dotw + d1 + lw * .5;
                   double x2   =  dotw + d1 + lw + d1 + lw2 * .5;
 
                   if (parent() == 0) {    // for use in palette
-                        symbols[dotSym].draw(p, mags, 0.0, 1.5 * ld);
-                        symbols[dotSym].draw(p, mags, 0.0, 2.5 * ld);
+                        dotsym.draw(p, mags, 0.0, 1.5 * ld);
+                        dotsym.draw(p, mags, 0.0, 2.5 * ld);
                         }
                   else {
                         double doty1, doty2;
@@ -235,8 +238,8 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
                               double yy = l2->y2() - yp;
-                              symbols[dotSym].draw(p, mags, 0.0, yy - doty1 * ld);
-                              symbols[dotSym].draw(p, mags, 0.0, yy - doty2 * ld);
+                              dotsym.draw(p, mags, 0.0, yy - doty1 * ld);
+                              dotsym.draw(p, mags, 0.0, yy - doty2 * ld);
                               }
                         }
 
@@ -246,8 +249,8 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                   p.drawLine(QLineF(x2, y1, x2, y2));
                   if (score()->styleB(ST_repeatBarTips)) {
                         double x = x2 + lw2 * .5;
-                        symbols[brackettipsLeftUp].draw(p, mags, x, y1);
-                        symbols[brackettipsLeftDown].draw(p, mags, x, y2);
+                        symbols[score()->symIdx()][brackettipsLeftUp].draw(p, mags, x, y1);
+                        symbols[score()->symIdx()][brackettipsLeftDown].draw(p, mags, x, y2);
                         }
                   }
                   break;
@@ -256,7 +259,8 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                   {
                   double lw2  = point(score()->styleS(ST_endBarWidth));
                   double d1   = point(score()->styleS(ST_endBarDistance));
-                  double dotw = symbols[dotSym].width(mags);
+                  const Sym& dotsym = symbols[score()->symIdx()][dotSym];
+                  double dotw = dotsym.width(mags);
 
                   double x1   =  dotw + d1 + lw * .5;                                // thin bar
                   double x2   =  dotw + d1 + lw + d1 + lw2 * .5;                     // thick bar
@@ -264,10 +268,10 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                   double x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + dotw * .5;    // dots
 
                   if (parent() == 0) {    // for use in palette
-                        symbols[dotSym].draw(p, mags, .0, 1.5 * ld);
-                        symbols[dotSym].draw(p, mags, .0, 2.5 * ld);
-                        symbols[dotSym].draw(p, mags, x4, 1.5 * ld);
-                        symbols[dotSym].draw(p, mags, x4, 2.5 * ld);
+                        dotsym.draw(p, mags, .0, 1.5 * ld);
+                        dotsym.draw(p, mags, .0, 2.5 * ld);
+                        dotsym.draw(p, mags, x4, 1.5 * ld);
+                        dotsym.draw(p, mags, x4, 2.5 * ld);
                         }
                   else {
                         double doty1, doty2;
@@ -296,10 +300,10 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
                               double yy = l2->y2() - yp;
 
-                              symbols[dotSym].draw(p, mags, 0.0, yy - doty1 * ld);
-                              symbols[dotSym].draw(p, mags, 0.0, yy - doty2 * ld);
-                              symbols[dotSym].draw(p, mags, x4, yy - doty1 * ld);
-                              symbols[dotSym].draw(p, mags, x4, yy - doty2 * ld);
+                              dotsym.draw(p, mags, 0.0, yy - doty1 * ld);
+                              dotsym.draw(p, mags, 0.0, yy - doty2 * ld);
+                              dotsym.draw(p, mags, x4, yy - doty1 * ld);
+                              dotsym.draw(p, mags, x4, yy - doty2 * ld);
                               }
                         }
 
@@ -499,6 +503,7 @@ void BarLine::layout()
       Spatium w = score()->styleS(ST_barWidth);
       double dw  = 0.0;
 
+      double dotwidth = symbols[score()->symIdx()][dotSym].width(magS());
       switch(subtype()) {
             case DOUBLE_BAR:
                   w  = score()->styleS(ST_doubleBarWidth) * 2 + score()->styleS(ST_doubleBarDistance);
@@ -506,11 +511,11 @@ void BarLine::layout()
                   break;
             case START_REPEAT:
                   w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
-                  dw = point(w) + symbols[dotSym].width(magS());
+                  dw = point(w) + dotwidth;
                   break;
             case END_REPEAT:
                   w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
-                  dw = point(w) + symbols[dotSym].width(magS());
+                  dw = point(w) + dotwidth;
                   break;
             case END_BAR:
                   w += score()->styleS(ST_endBarWidth) + score()->styleS(ST_endBarDistance);
@@ -518,7 +523,7 @@ void BarLine::layout()
                   break;
             case  END_START_REPEAT:
                   w  += score()->styleS(ST_endBarWidth) + 3 * score()->styleS(ST_endBarDistance);
-                  dw = point(w) + 2 * symbols[dotSym].width(magS());
+                  dw = point(w) + 2 * dotwidth;
                   break;
             case BROKEN_BAR:
             case NORMAL_BAR:

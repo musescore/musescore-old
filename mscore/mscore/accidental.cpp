@@ -188,21 +188,21 @@ void Accidental::layout()
       if (i & 0x8000) {
             SymElement e(leftparenSym, 0.0);
             el.append(e);
-            r |= symbols[leftparenSym].bbox(m);
-            pos = symbols[leftparenSym].attach(m);
+            r |= symbols[score()->symIdx()][leftparenSym].bbox(m);
+            pos = symbols[score()->symIdx()][leftparenSym].attach(m);
             }
 
       int s = symbol();
       SymElement e(s, pos.x());
       el.append(e);
-      r |= symbols[s].bbox(m);
-      pos += symbols[s].attach(m);
+      r |= symbols[score()->symIdx()][s].bbox(m);
+      pos += symbols[score()->symIdx()][s].attach(m);
 
       if (i & 0x8000) {
             double x = pos.x();     // symbols[s].width(m) + symbols[s].bbox(m).x();
             SymElement e(rightparenSym, x);
             el.append(e);
-            r |= symbols[rightparenSym].bbox(m).translated(x, 0.0);
+            r |= symbols[score()->symIdx()][rightparenSym].bbox(m).translated(x, 0.0);
             }
       setbbox(r);
       }
@@ -251,7 +251,7 @@ void Accidental::draw(QPainter& painter, ScoreView*) const
       {
       double m = magS();
       foreach(const SymElement& e, el)
-            symbols[e.sym].draw(painter, m, e.x, 0.0);
+            symbols[score()->symIdx()][e.sym].draw(painter, m, e.x, 0.0);
       }
 
 //---------------------------------------------------------

@@ -140,22 +140,22 @@ void Marker::setMarkerType(int t)
       {
       switch(t) {
             case MARKER_SEGNO:
-                  setHtml(symToHtml(symbols[segnoSym], 80));
+                  setHtml(symToHtml(symbols[score()->symIdx()][segnoSym], 80));
                   setLabel("segno");
                   break;
 
             case MARKER_CODA:
-                  setHtml(symToHtml(symbols[codaSym], 80));
+                  setHtml(symToHtml(symbols[score()->symIdx()][codaSym], 80));
                   setLabel("codab");
                   break;
 
             case MARKER_VARCODA:
-                  setHtml(symToHtml(symbols[varcodaSym], 80));
+                  setHtml(symToHtml(symbols[score()->symIdx()][varcodaSym], 80));
                   setLabel("varcoda");
                   break;
 
             case MARKER_CODETTA:
-                  setHtml(symToHtml(symbols[codaSym], symbols[codaSym], 80));
+                  setHtml(symToHtml(symbols[score()->symIdx()][codaSym], symbols[score()->symIdx()][codaSym], 80));
                   setLabel("codetta");
                   break;
 

@@ -39,13 +39,12 @@ struct UP {
 //   SlurSegment
 //---------------------------------------------------------
 
-class SlurSegment : public Element {
+class SlurSegment : public SpannerSegment {
       Q_DECLARE_TR_FUNCTIONS(SlurSegment)
 
       struct UP ups[4];
       QPainterPath path;
       qreal bow;
-      LineSegmentType _segmentType;
       System* _system;
 
       void updatePath();
@@ -79,7 +78,6 @@ class SlurSegment : public Element {
       void write(Xml& xml, int no) const;
       void read(QDomElement);
       void dump() const;
-      void setLineSegmentType(LineSegmentType s)  { _segmentType = s;  }
       void setSystem(System* s)                   { _system = s;       }
       virtual void toDefault();
       };
@@ -94,11 +92,8 @@ class SlurTie : public Spanner {
    protected:
       double _len;
       bool up;
-      QList<SlurSegment*> segments;
       QQueue<SlurSegment*> delSegments;   // "deleted" segments
-
       Direction _slurDirection;
-
       double firstNoteRestSegmentX(System* system);
 
    public:
@@ -114,22 +109,23 @@ class SlurTie : public Spanner {
 
       virtual void layout2(const QPointF, int, struct UP&)  {}
       virtual void setSelected(bool f);
-      virtual bool contains(const QPointF&) const { return false; }  // not selectable
+      virtual bool contains(const QPointF&) const     { return false; }  // not selectable
 
-      QList<SlurSegment*>* slurSegments()             { return &segments;      }
-      virtual void add(Element* s);
-      virtual void remove(Element* s);
-      virtual void change(Element* o, Element* n);
+//      virtual void change(Element* o, Element* n);
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
       QPointF slurPos(Element*, System*& s);
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
 
       virtual void toDefault();
       void setLen(double v)               { _len = v; }
       int lineType() const                { return _lineType; }
       void setLineType(int val)           { _lineType = val;  }
+      SlurSegment* frontSegment() const   { return (SlurSegment*)spannerSegments().front(); }
+      SlurSegment* backSegment() const    { return (SlurSegment*)spannerSegments().back();  }
+      SlurSegment* takeFirstSegment()     { return (SlurSegment*)spannerSegments().takeFirst(); }
+      SlurSegment* takeLastSegment()      { return (SlurSegment*)spannerSegments().takeLast(); }
+      SlurSegment* segmentAt(int n) const { return (SlurSegment*)spannerSegments().at(n); }
       };
 
 //---------------------------------------------------------
@@ -138,7 +134,6 @@ class SlurTie : public Spanner {
 
 class Slur : public SlurTie {
       int _track2;      // obsolete used temporarily for reading old version
-      int _id;
 
    public:
       Slur(Score*);
@@ -158,9 +153,6 @@ class Slur : public SlurTie {
       // obsolete:
       void setStart(int /*tick*/, int /*track*/) {}
       void setEnd(int /*tick*/,   int /*track*/) {}
-
-      int id() const    { return _id; }
-      void setId(int i) { _id = i;    }
       };
 
 //---------------------------------------------------------

@@ -108,7 +108,7 @@ NoteHead::NoteHead(Score* s)
 void NoteHead::write(Xml& xml) const
       {
       xml.stag("NoteHead");
-      xml.tag("name", symbols[_sym].name());
+      xml.tag("name", symbols[0][_sym].name());
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -282,7 +282,7 @@ int Note::noteHead() const
 
 double Note::headWidth() const
       {
-      return symbols[noteHead()].width(magS());
+      return symbols[score()->symIdx()][noteHead()].width(magS());
       }
 
 //---------------------------------------------------------
@@ -291,7 +291,7 @@ double Note::headWidth() const
 
 double Note::headHeight() const
       {
-      return symbols[noteHead()].height(magS());
+      return symbols[score()->symIdx()][noteHead()].height(magS());
       }
 
 //---------------------------------------------------------
@@ -436,13 +436,13 @@ QPointF Note::stemPos(bool upFlag) const
             pt += QPointF(xoffset, (_bbox.height() * .5 + spatium() * .5) * (upFlag ? -1.0 : 1.0));
             }
       else {
-            QPointF off = symbols[noteHead()].attach(magS());
+            QPointF off = symbols[score()->symIdx()][noteHead()].attach(magS());
             if (upFlag) {
                   pt.rx() += off.x() - sw;
                   pt.ry() += off.y();
                   }
             else {
-                  pt.rx() += symbols[noteHead()].width(magS()) - off.x() + sw;
+                  pt.rx() += symbols[score()->symIdx()][noteHead()].width(magS()) - off.x() + sw;
                   pt.ry() -= off.y();
                   }
             }
@@ -507,7 +507,7 @@ void Note::draw(QPainter& p, ScoreView* v) const
                         else if (i < in->minPitchA() || i > in->maxPitchA())
                               p.setPen(Qt::darkYellow);
                         }
-                  symbols[noteHead()].draw(p, magS());
+                  symbols[score()->symIdx()][noteHead()].draw(p, magS());
                   }
             }
 
@@ -536,7 +536,7 @@ void Note::draw(QPainter& p, ScoreView* v) const
                         }
 
                   for (int i = 0; i < dots; ++i)
-                        symbols[dotSym].draw(p, magS(), x + d + dd * i, y);
+                        symbols[score()->symIdx()][dotSym].draw(p, magS(), x + d + dd * i, y);
                   }
             }
       }
@@ -835,11 +835,11 @@ void ShadowNote::draw(QPainter& p, ScoreView*) const
       pen.setWidthF(lw);
       p.setPen(pen);
 
-      symbols[noteHeads[0][_headGroup][_head]].draw(p, magS());
+      symbols[score()->symIdx()][noteHeads[0][_headGroup][_head]].draw(p, magS());
 
       double ms = spatium();
 
-      double x1 = symbols[noteHeads[0][_headGroup][_head]].width(magS())*.5 - ms;
+      double x1 = symbols[score()->symIdx()][noteHeads[0][_headGroup][_head]].width(magS())*.5 - ms;
       double x2 = x1 + 2 * ms;
 
       ms *= .5;
@@ -862,7 +862,7 @@ void ShadowNote::draw(QPainter& p, ScoreView*) const
 
 QRectF ShadowNote::bbox() const
       {
-      QRectF b = symbols[noteHeads[0][_headGroup][_head]].bbox(magS());
+      QRectF b = symbols[score()->symIdx()][noteHeads[0][_headGroup][_head]].bbox(magS());
       double _spatium = spatium();
       double x  = b.width()/2 - _spatium;
       double lw = point(score()->styleS(ST_ledgerLineWidth));
@@ -1233,7 +1233,7 @@ void Note::layout()
             _bbox = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
             }
       else
-            _bbox = symbols[noteHead()].bbox(magS());
+            _bbox = symbols[score()->symIdx()][noteHead()].bbox(magS());
       if (parent() == 0)
             return;
       foreach(Element* e, _el) {
@@ -1360,7 +1360,7 @@ void Note::setTrack(int val)
       Element::setTrack(val);
       if (_tieFor) {
             _tieFor->setTrack(val);
-            foreach(SlurSegment* seg, *_tieFor->slurSegments())
+            foreach(SpannerSegment* seg, _tieFor->spannerSegments())
                   seg->setTrack(val);
             }
       foreach(Element* e, _el)

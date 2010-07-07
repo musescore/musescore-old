@@ -38,13 +38,11 @@ class ScoreView;
 //    For every staff a segment is created.
 //---------------------------------------------------------
 
-class LineSegment : public Element {
+class LineSegment : public SpannerSegment {
    protected:
       QPointF _p2;
       QPointF _userOff2;            // depends on spatium
       QRectF r1, r2;
-      LineSegmentType _segmentType;
-      System* _system;
 
       virtual bool isEditable() { return true; }
       virtual void editDrag(int, const QPointF&);
@@ -64,9 +62,6 @@ class LineSegment : public Element {
       void setUserXoffset2(qreal x)               { _userOff2.setX(x);      }
       void setPos2(const QPointF& p)              { _p2 = p;                }
       QPointF pos2() const                        { return _p2 + _userOff2; }
-      void setSegmentType(LineSegmentType s)      { _segmentType = s;       }
-      LineSegmentType segmentType() const         { return _segmentType;    }
-      void setSystem(System* s)                   { _system = s;            }
       virtual void toDefault();
       virtual void spatiumChanged(double, double);
       virtual QPointF canvasPos() const;
@@ -82,7 +77,6 @@ class LineSegment : public Element {
 
 class SLine : public Spanner {
    protected:
-      QList<LineSegment*> segments;
       bool _diagonal;
 
    public:
@@ -94,13 +88,7 @@ class SLine : public Spanner {
       void writeProperties(Xml& xml, const SLine* proto = 0) const;
       virtual LineSegment* createLineSegment() = 0;
       void setLen(double l);
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
-      virtual void add(Element*);
-      virtual void remove(Element*);
-      virtual void change(Element* o, Element* n);
       virtual QRectF bbox() const;
-      const QList<LineSegment*>& lineSegments() const { return segments; }
-      QList<LineSegment*>& lineSegments() { return segments; }
 
       virtual QPointF tick2pos(int grip, System** system);
 
@@ -109,12 +97,15 @@ class SLine : public Spanner {
 
       bool diagonal() const         { return _diagonal; }
       void setDiagonal(bool v)      { _diagonal = v;    }
-      int tick() const;
+      int tick()  const;
       int tick2() const;
-      };
 
-typedef QList<LineSegment*>::iterator iLineSegment;
-typedef QList<LineSegment*>::const_iterator ciLineSegment;
+      LineSegment* frontSegment() const { return (LineSegment*)spannerSegments().front(); }
+      LineSegment* backSegment() const  { return (LineSegment*)spannerSegments().back();  }
+      LineSegment* takeFirstSegment()   { return (LineSegment*)spannerSegments().takeFirst(); }
+      LineSegment* takeLastSegment()    { return (LineSegment*)spannerSegments().takeLast(); }
+      LineSegment* segmentAt(int n) const { return (LineSegment*)spannerSegments().at(n); }
+      };
 
 #endif
 

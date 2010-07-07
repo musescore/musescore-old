@@ -1174,11 +1174,11 @@ void ScoreView::startEdit()
             }
       else if (origEditObject->isSegment()) {
             origEditObject->resetMode();
-            LineSegment* ols = (LineSegment*)origEditObject;
-            SLine* ohp       = (SLine*)ols->parent();
-            SLine* hp        = (SLine*)ohp->clone();
-            int idx          = ohp->lineSegments().indexOf(ols);
-            editObject       = hp->lineSegments().at(idx);
+            SpannerSegment* ols = (SpannerSegment*)origEditObject;
+            Spanner* ohp        = ols->spanner();
+            Spanner* hp         = (Spanner*)ohp->clone();
+            int idx             = ohp->spannerSegments().indexOf(ols);
+            editObject          = hp->spannerSegments().at(idx);
             _score->undoChangeElement(ohp, hp);
             }
       else {
@@ -2847,9 +2847,9 @@ void ScoreView::endNoteEntry()
       _score->inputState().setSegment(0);
       _score->inputState().noteEntryMode = false;
       if (_score->inputState().slur) {
-            QList<SlurSegment*>* el = _score->inputState().slur->slurSegments();
-            if (!el->isEmpty())
-                  el->front()->setSelected(false);
+            const QList<SpannerSegment*>& el = _score->inputState().slur->spannerSegments();
+            if (!el.isEmpty())
+                  el.front()->setSelected(false);
             static_cast<ChordRest*>(_score->inputState().slur->endElement())->addSlurBack(_score->inputState().slur);
             _score->inputState().slur = 0;
             }
@@ -3682,9 +3682,9 @@ void ScoreView::cmdAddSlur()
       {
       InputState& is = _score->inputState();
       if (noteEntryMode() && is.slur) {
-            QList<SlurSegment*>* el = is.slur->slurSegments();
-            if (!el->isEmpty())
-                  el->front()->setSelected(false);
+            const QList<SpannerSegment*>& el = is.slur->spannerSegments();
+            if (!el.isEmpty())
+                  el.front()->setSelected(false);
             static_cast<ChordRest*>(is.slur->endElement())->addSlurBack(is.slur);
             is.slur = 0;
             return;
@@ -3726,12 +3726,12 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
       _score->cmdAdd(slur);
 
       slur->layout();
-      QList<SlurSegment*>* el = slur->slurSegments();
+      const QList<SpannerSegment*>& el = slur->spannerSegments();
 
       if (noteEntryMode()) {
             _score->inputState().slur = slur;
-            if (!el->isEmpty())
-                  el->front()->setSelected(true);
+            if (!el.isEmpty())
+                  el.front()->setSelected(true);
             else
                   printf("addSlur: no segment\n");
             // set again when leaving slur mode:
@@ -3742,8 +3742,8 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
             //
             // start slur in edit mode if lastNote is not given
             //
-            if ((lastNote == 0) && !el->isEmpty()) {
-                  origEditObject = el->front();
+            if ((lastNote == 0) && !el.isEmpty()) {
+                  origEditObject = el.front();
                   sm->postEvent(new CommandEvent("edit"));  // calls startCmd()
                   }
             else

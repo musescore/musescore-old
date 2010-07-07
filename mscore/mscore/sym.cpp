@@ -25,7 +25,9 @@
 #include "mscore.h"
 #include "score.h"
 
-QVector<Sym> symbols(lastSym);
+QVector<Sym> symbols[2];
+static bool symbolsInitialized[2] = { false, false };
+
 QMap<const char*, SymCode*> charReplaceMap;
 
 struct SymbolNames {
@@ -412,6 +414,9 @@ QFont fontId2font(int fontId)
             _font.setFamily("Times New Roman");
             size = lrint(8 * DPI / PPI);
             }
+      else if (fontId == 3) {
+            _font.setFamily("Gonville-20");
+            }
       else {
             printf("illegal font id %d\n", fontId);
             abort();
@@ -472,19 +477,6 @@ void Sym::createTextLayout()
       l.setPosition(QPointF(0.0, -l.ascent()));
       tl->endLayout();
 #endif
-      }
-
-//---------------------------------------------------------
-//   findSymbol
-//---------------------------------------------------------
-
-const Sym* findSymbol(QChar code, int fontId)
-      {
-      foreach(const Sym& s, symbols) {
-            if (s.code() == code && s.getFontId() == fontId)
-                  return &s;
-            }
-      return 0;
       }
 
 //---------------------------------------------------------
@@ -593,32 +585,38 @@ QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
 //   initSymbols
 //---------------------------------------------------------
 
-void initSymbols()
+void initSymbols(int idx)
       {
-      symbols[clefEightSym] = Sym(QT_TRANSLATE_NOOP("symbol", "clef eight"), 0x38, 2);
-      symbols[clefOneSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "clef one"),   0x31, 2);
-      symbols[clefFiveSym]  = Sym(QT_TRANSLATE_NOOP("symbol", "clef five"),  0x35, 2);
-      symbols[letterfSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "f"),          0x66, 1);
-      symbols[lettermSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "m"),          0x6d, 1);
-      symbols[letterpSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "p"),          0x70, 1);
-      symbols[letterrSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "r"),          0x72, 1);
-      symbols[lettersSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "s"),          0x73, 1);
-      symbols[letterzSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "z"),          0x7a, 1);
+      if (symbolsInitialized[idx])
+            return;
+      symbolsInitialized[idx] = true;
+
+      symbols[idx] = QVector<Sym>(lastSym);
+      symbols[idx][clefEightSym] = Sym(QT_TRANSLATE_NOOP("symbol", "clef eight"), 0x38, 2);
+      symbols[idx][clefOneSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "clef one"),   0x31, 2);
+      symbols[idx][clefFiveSym]  = Sym(QT_TRANSLATE_NOOP("symbol", "clef five"),  0x35, 2);
+      symbols[idx][letterfSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "f"),          0x66, 1);
+      symbols[idx][lettermSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "m"),          0x6d, 1);
+      symbols[idx][letterpSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "p"),          0x70, 1);
+      symbols[idx][letterrSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "r"),          0x72, 1);
+      symbols[idx][lettersSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "s"),          0x73, 1);
+      symbols[idx][letterzSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "z"),          0x7a, 1);
       // used for GUI:
-      symbols[note2Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/2"),   0xe104, 1);
-      symbols[note4Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/4"),   0x1d15f, 1);
-      symbols[note8Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/8"),   0xe106, 1);
-      symbols[note16Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/16"),  0xe107, 1);
-      symbols[note32Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/32"),  0xe108, 1);
-      symbols[note64Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/64"),  0xe109, 1);
-      symbols[dotdotSym]    = Sym(QT_TRANSLATE_NOOP("symbol", "dot dot"),    0xe10b, 1);
+      symbols[idx][note2Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/2"),   0xe104, 1);
+      symbols[idx][note4Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/4"),   0x1d15f, 1);
+      symbols[idx][note8Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/8"),   0xe106, 1);
+      symbols[idx][note16Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/16"),  0xe107, 1);
+      symbols[idx][note32Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/32"),  0xe108, 1);
+      symbols[idx][note64Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/64"),  0xe109, 1);
+      symbols[idx][dotdotSym]    = Sym(QT_TRANSLATE_NOOP("symbol", "dot dot"),    0xe10b, 1);
 
 
       QHash<QString, int> lnhash;
       for (unsigned int i = 0; i < sizeof(lilypondNames)/sizeof(*lilypondNames); ++i)
             lnhash[QString(lilypondNames[i].name)] = lilypondNames[i].msIndex;
 
-      QFile f(":/data/symbols.xml");
+      QString path = idx == 0 ? ":/data/symbols.xml" : ":/data/gonville.xml";
+      QFile f(path);
       if (!f.open(QFile::ReadOnly)) {
             printf("cannot open symbols file\n");
             exit(-1);
@@ -638,6 +636,7 @@ void initSymbols()
             }
       f.close();
       docName = f.fileName();
+      int fid = idx == 0 ? 0 : 3;
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
@@ -666,9 +665,9 @@ void initSymbols()
                                     }
                               if (code == -1)
                                     printf("no code for glyph <%s>\n", qPrintable(name));
-                              int idx = lnhash[name];
-                              if (idx > 0)
-                                    symbols[idx] = Sym(strdup(qPrintable(name)), code, 0, p, b);
+                              int idx1 = lnhash[name];
+                              if (idx1 > 0)
+                                    symbols[idx][idx1] = Sym(strdup(qPrintable(name)), code, fid, p, b);
                               else if (idx == 0)
                                     printf("symbol <%s> not found\n", qPrintable(name));
                               }
@@ -681,9 +680,9 @@ void initSymbols()
             }
 
       for (unsigned int i = 0; i < sizeof(lilypondNames)/sizeof(*lilypondNames); ++i) {
-            int idx = lilypondNames[i].msIndex;
-            if (idx != -1)
-                  symbols[idx].setName(lilypondNames[i].mname);
+            int idx1 = lilypondNames[i].msIndex;
+            if (idx1 != -1)
+                  symbols[idx][idx1].setName(lilypondNames[i].mname);
             }
       if (charReplaceMap.isEmpty()) {
             for (unsigned i = 0; pSymbols[i].code != -1; ++i) {

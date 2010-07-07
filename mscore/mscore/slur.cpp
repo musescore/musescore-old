@@ -41,22 +41,17 @@
 //---------------------------------------------------------
 
 SlurSegment::SlurSegment(Score* score)
-   : Element(score)
+   : SpannerSegment(score)
       {
-      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
-      _segmentType = SEGMENT_SINGLE;
-      _system      = 0;
       }
 
 SlurSegment::SlurSegment(const SlurSegment& b)
-   : Element(b)
+   : SpannerSegment(b)
       {
       for (int i = 0; i < 4; ++i)
             ups[i] = b.ups[i];
       path         = b.path;
       bow          = b.bow;
-      _segmentType = b._segmentType;
-      _system      = b._system;
       }
 
 //---------------------------------------------------------
@@ -146,13 +141,13 @@ bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModi
             return true;
             }
       if (!((modifiers & Qt::ShiftModifier)
-         && ((_segmentType == SEGMENT_SINGLE)
-              || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
-              || (_segmentType == SEGMENT_END && curGrip == 3)
+         && ((spannerSegmentType() == SEGMENT_SINGLE)
+              || (spannerSegmentType() == SEGMENT_BEGIN && curGrip == 0)
+              || (spannerSegmentType() == SEGMENT_END && curGrip == 3)
             )))
             return false;
 
-      int segments  = sl->slurSegments()->size();
+      int segments  = sl->spannerSegments().size();
       ChordRest* cr = 0;
       Element* e    = curGrip == 0 ? sl->startElement() : sl->endElement();
       Element* e1   = curGrip == 0 ? sl->endElement() : sl->startElement();
@@ -177,10 +172,8 @@ bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModi
 
       ups[curGrip].off = QPointF();
       sl->layout();
-      if (sl->slurSegments()->size() != segments) {
-            QList<SlurSegment*>* ss = sl->slurSegments();
-            SlurSegment* newSegment = curGrip == 3 ? ss->back() : ss->front();
-//TODO-S            score()->changeState(Canvas::NORMAL);
+      if (sl->spannerSegments().size() != segments) {
+            SlurSegment* newSegment = curGrip == 3 ? sl->backSegment() : sl->frontSegment();
             score()->endCmd();
             score()->startCmd();
             viewer->startEdit(newSegment, curGrip);
@@ -199,7 +192,7 @@ QPointF SlurSegment::gripAnchor(int grip) const
 
       QPointF sp(_system->canvasPos());
       System* s;  // dummy
-      switch(_segmentType) {
+      switch(spannerSegmentType()) {
             case SEGMENT_SINGLE:
                   if (grip == 0)
                         return sl->slurPos(sl->startElement(), s);
@@ -343,7 +336,6 @@ void SlurSegment::read(QDomElement e)
 
 void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
       {
-// printf("SlurSegment %p %p layout\n", slur, this);
       bow      = b;
       ups[0].p = p1;
       ups[3].p = p2;
@@ -359,12 +351,7 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
       qreal y3 = ups[3].p.y() + ups[3].off.y() * _spatium;
 
       qreal xdelta = x3 - x0;
-      if (xdelta == 0.0) {
-//TODO1            printf("warning: slur has zero width at %d-%d\n",
-//               slurTie()->startElement()->tick(), slurTie()->endElement()->tick());
-            return;
-            }
-      if (x0 > x3) {
+      if (xdelta == 0.0 || (x0 > x3)) {
             printf("illegal slurSegment\n");
             return;
             }
@@ -459,17 +446,7 @@ SlurTie::SlurTie(const SlurTie& t)
       _slurDirection = t._slurDirection;
       _len           = t._len;
       _lineType      = t._lineType;
-
       delSegments    = t.delSegments;
-
-      //
-      // duplicate segments
-      //
-      foreach(const Element* s, t.segments) {
-            SlurSegment* ss = new SlurSegment(*(const SlurSegment*)s);
-            ss->setParent(this);
-            segments.append(ss);
-            }
       }
 
 //---------------------------------------------------------
@@ -480,31 +457,7 @@ SlurTie::~SlurTie()
       {
       }
 
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void SlurTie::add(Element* s)
-      {
-//      printf("SlurTie: %d vor add %p\n", segments.size(), s);
-      s->setParent(this);
-      segments.push_back((SlurSegment*)s);
-      }
-
-//---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void SlurTie::remove(Element* s)
-      {
-      int idx = segments.indexOf((SlurSegment*)s);
-      if (idx == -1)
-            printf("SlurTie: cannot remove %p\n", s);
-      else
-            segments.removeAt(idx);
-//      printf("SlurTie: %d nach remove %p\n", segments.size(), s);
-      }
-
+#if 0
 //---------------------------------------------------------
 //   change
 //---------------------------------------------------------
@@ -519,6 +472,7 @@ void SlurTie::change(Element* o, Element* n)
       n->setParent(this);
       segments[idx] = (SlurSegment*)n;
       }
+#endif
 
 //---------------------------------------------------------
 //   slurPos
@@ -644,8 +598,8 @@ void SlurTie::writeProperties(Xml& xml) const
       {
       Element::writeProperties(xml);
       int idx = 0;
-      foreach(SlurSegment* ss, segments)
-            ss->write(xml, idx++);
+      foreach(const SpannerSegment* ss, spannerSegments())
+            ((SlurSegment*)ss)->write(xml, idx++);
       if (_slurDirection)
             xml.tag("up", _slurDirection);
       if (_lineType)
@@ -658,7 +612,7 @@ void SlurTie::writeProperties(Xml& xml) const
 
 void SlurTie::setSelected(bool f)
       {
-      foreach(SlurSegment* ss, segments)
+      foreach(SpannerSegment* ss, spannerSegments())
             ss->setSelected(f);
       Element::setSelected(f);
       }
@@ -674,7 +628,7 @@ bool SlurTie::readProperties(QDomElement e)
 
       if (tag == "SlurSegment") {
             int idx = e.attribute("no", 0).toInt();
-            int n = segments.size();
+            int n = spannerSegments().size();
             for (int i = n; i < idx; ++i)
                   add(new SlurSegment(score()));
             SlurSegment* segment = new SlurSegment(score());
@@ -688,16 +642,6 @@ bool SlurTie::readProperties(QDomElement e)
       else if (!Element::readProperties(e))
             return false;
       return true;
-      }
-
-//---------------------------------------------------------
-//   scanElements
-//---------------------------------------------------------
-
-void SlurTie::scanElements(void* data, void (*func)(void*, Element*))
-      {
-      foreach(SlurSegment* seg, segments)
-            func(data, seg);
       }
 
 //---------------------------------------------------------
@@ -724,7 +668,7 @@ void SlurSegment::toDefault()
 Slur::Slur(Score* s)
    : SlurTie(s)
       {
-      _id = -1;
+      setId(-1);
       _track2 = 0;
       }
 
@@ -734,8 +678,6 @@ Slur::Slur(Score* s)
 
 Slur::~Slur()
       {
-      foreach(SlurSegment* ss, segments)
-            delete ss;
       }
 
 //---------------------------------------------------------
@@ -744,7 +686,7 @@ Slur::~Slur()
 
 void Slur::write(Xml& xml) const
       {
-      xml.stag(QString("Slur id=\"%1\"").arg(_id + 1));
+      xml.stag(QString("Slur id=\"%1\"").arg(id() + 1));
       SlurTie::writeProperties(xml);
       xml.etag();
       }
@@ -756,7 +698,7 @@ void Slur::write(Xml& xml) const
 void Slur::read(QDomElement e)
       {
       setTrack(0);      // set staff
-      _id = e.attribute("id").toInt();
+      setId(e.attribute("id").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -837,15 +779,15 @@ void Slur::layout()
             //
             setLen(_spatium * 7);
             SlurSegment* s;
-            if (segments.isEmpty()) {
+            if (spannerSegments().isEmpty()) {
                   s = new SlurSegment(score());
                   s->setTrack(track());
                   add(s);
                   }
             else {
-                  s = segments.front();
+                  s = frontSegment();
                   }
-            s->setLineSegmentType(SEGMENT_SINGLE);
+            s->setSpannerSegmentType(SEGMENT_SINGLE);
             qreal bow = up ? 1.5 * -_spatium : 1.5 * _spatium;
 
             s->layout(QPointF(0, 0), QPointF(_len, 0), bow);
@@ -925,7 +867,7 @@ void Slur::layout()
             ++nsegs;
             }
 
-      unsigned onsegs = segments.size();
+      unsigned onsegs = spannerSegments().size();
       if (nsegs > onsegs) {
             for (unsigned i = onsegs; i < nsegs; ++i) {
                   SlurSegment* s;
@@ -940,7 +882,7 @@ void Slur::layout()
             }
       else if (nsegs < onsegs) {
             for (unsigned i = nsegs; i < onsegs; ++i) {
-                  SlurSegment* s = (SlurSegment*)(segments.takeLast());
+                  SlurSegment* s = takeLastSegment();
                   delSegments.enqueue(s);  // cannot delete: used in SlurSegment->edit()
                   }
             }
@@ -951,7 +893,7 @@ void Slur::layout()
 
       for (int i = 0; is != sl->end(); ++i, ++is) {
             System* system  = *is;
-            SlurSegment* segment = segments[i];
+            SlurSegment* segment = segmentAt(i);
             segment->setSystem(system);
             ChordRest* cr1 = (ChordRest*)startElement();
             SysStaff* ss = system->staff(cr1->staffIdx());
@@ -960,28 +902,27 @@ void Slur::layout()
 
             // case 1: one segment
             if (s1 == s2) {
+                  segment->setSubtype(SEGMENT_SINGLE);
                   segment->layout(p1, p2, bow);
-                  segment->setLineSegmentType(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
+                  segment->setSubtype(SEGMENT_BEGIN);
                   qreal x = sp.x() + system->bbox().width();
                   segment->layout(p1, QPointF(x, p1.y()), bow);
-                  segment->setLineSegmentType(SEGMENT_BEGIN);
                   }
             // case 3: middle segment
             else if (i != 0 && system != s2) {
+                  segment->setSubtype(SEGMENT_MIDDLE);
                   qreal x1 = firstNoteRestSegmentX(system) - _spatium;
                   qreal x2 = sp.x() + system->bbox().width();
                   segment->layout(QPointF(x1, sp.y()), QPointF(x2, sp.y()), bow);
-                  segment->setLineSegmentType(SEGMENT_MIDDLE);
                   }
             // case 4: end segment
             else {
-                  //qreal x = sp.x();
+                  segment->setSubtype(SEGMENT_END);
                   qreal x = firstNoteRestSegmentX(system) - _spatium;
                   segment->layout(QPointF(x, p2.y()), p2, bow);
-                  segment->setLineSegmentType(SEGMENT_END);
                   }
             if (system == s2)
                   break;
@@ -1015,10 +956,10 @@ double SlurTie::firstNoteRestSegmentX(System* system)
 
 QRectF Slur::bbox() const
       {
-      if (segments.isEmpty())
+      if (spannerSegments().isEmpty())
             return QRectF();
       else
-            return segments[0]->bbox();
+            return frontSegment()->bbox();
       }
 
 //---------------------------------------------------------
@@ -1028,7 +969,7 @@ QRectF Slur::bbox() const
 void Slur::setTrack(int n)
       {
       Element::setTrack(n);
-      foreach(SlurSegment* ss, segments)
+      foreach(SpannerSegment* ss, spannerSegments())
             ss->setTrack(n);
       }
 
@@ -1133,7 +1074,7 @@ void Tie::layout()
       int sysIdx1      = systems->indexOf(s1);
       int sysIdx2      = systems->indexOf(s2, sysIdx1);
       unsigned nsegs   = sysIdx2 - sysIdx1 + 1;
-      unsigned onsegs  = segments.size();
+      unsigned onsegs  = spannerSegments().size();
 
 
       if (nsegs != onsegs) {
@@ -1142,13 +1083,13 @@ void Tie::layout()
                   for (int i = 0; i < n; ++i) {
                         SlurSegment* s = new SlurSegment(score());
                         s->setParent(this);
-                        segments.append(s);
+                        spannerSegments().append(s);
                         }
                   }
             else {
                   int n = onsegs - nsegs;
                   for (int i = 0; i < n; ++i) {
-                        /* LineSegment* seg = */ segments.takeLast();
+                        /* LineSegment* seg = */ takeLastSegment();
                         // delete seg;   // DEBUG: will be used later
                         }
                   }
@@ -1160,20 +1101,20 @@ void Tie::layout()
       p2 -= canvasPos();
       for (unsigned int i = 0; i < nsegs; ++i) {
             System* system       = (*systems)[sysIdx1++];
-            SlurSegment* segment = segments[i];
+            SlurSegment* segment = segmentAt(i);
             segment->setSystem(system);
             QPointF sp(system->canvasPos() - canvasPos());
 
             // case 1: one segment
             if (s1 == s2) {
                   segment->layout(p1, p2, bow);
-                  segment->setLineSegmentType(SEGMENT_SINGLE);
+                  segment->setSpannerSegmentType(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
                   qreal x = sp.x() + system->bbox().width();
                   segment->layout(p1, QPointF(x, p1.y()), bow);
-                  segment->setLineSegmentType(SEGMENT_BEGIN);
+                  segment->setSpannerSegmentType(SEGMENT_BEGIN);
                   }
             // case 3: middle segment
             else if (i != 0 && system != s2) {
@@ -1190,36 +1131,8 @@ void Tie::layout()
                   qreal x = firstNoteRestSegmentX(system) - 2 * _spatium - canvasPos().x();
 
                   segment->layout(QPointF(x, p2.y()), p2, bow);
-                  segment->setLineSegmentType(SEGMENT_END);
+                  segment->setSpannerSegmentType(SEGMENT_END);
                   }
             }
       }
-
-#if 0 //TODO1
-//---------------------------------------------------------
-//   startTick
-//---------------------------------------------------------
-
-int SlurTie::startTick() const
-      {
-      if (startElement()->isChordRest())
-            return static_cast<ChordRest*>(startElement())->tick();
-      if (startElement()->type() == NOTE)
-            return static_cast<Note*>(startElement())->chord()->tick();
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   endTick
-//---------------------------------------------------------
-
-int SlurTie::endTick() const
-      {
-      if (endElement()->isChordRest())
-            return static_cast<ChordRest*>(endElement())->tick();
-      if (endElement()->type() == NOTE)
-            return static_cast<Note*>(endElement())->chord()->tick();
-      return 0;
-      }
-#endif
 

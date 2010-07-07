@@ -33,22 +33,17 @@
 //---------------------------------------------------------
 
 LineSegment::LineSegment(Score* s)
-   : Element(s)
+   : SpannerSegment(s)
       {
-      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE | ELEMENT_SEGMENT);
-      _segmentType = SEGMENT_SINGLE;
-      _system      = 0;
       }
 
 LineSegment::LineSegment(const LineSegment& s)
-   : Element(s)
+   : SpannerSegment(s)
       {
-      _p2          = s._p2;
-      _userOff2    = s._userOff2;
-      r1           = s.r1;
-      r2           = s.r2;
-      _segmentType = s._segmentType;
-      _system      = s._system;
+      _p2       = s._p2;
+      _userOff2 = s._userOff2;
+      r1        = s.r1;
+      r2        = s.r2;
       }
 
 //---------------------------------------------------------
@@ -79,7 +74,7 @@ QPointF LineSegment::canvasPos() const
 
 QPointF LineSegment::gripAnchor(int grip) const
       {
-      if (_segmentType == SEGMENT_MIDDLE) {
+      if (spannerSegmentType() == SEGMENT_MIDDLE) {
             double y = _system->staffY(staffIdx());
             double x;
             if (grip == 0)
@@ -102,12 +97,12 @@ QPointF LineSegment::gripAnchor(int grip) const
 bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (!((modifiers & Qt::ShiftModifier)
-         && ((_segmentType == SEGMENT_SINGLE)
-              || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
-              || (_segmentType == SEGMENT_END && curGrip == 1))))
+         && ((spannerSegmentType() == SEGMENT_SINGLE)
+              || (spannerSegmentType() == SEGMENT_BEGIN && curGrip == 0)
+              || (spannerSegmentType() == SEGMENT_END && curGrip == 1))))
             return false;
 
-      LineSegmentType st = _segmentType;
+      SpannerSegmentType st = spannerSegmentType();
       SLine* l    = line();
       Segment* s1 = static_cast<Segment*>(l->startElement());
       Segment* s2 = static_cast<Segment*>(l->endElement());
@@ -182,7 +177,7 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
             if (s1->system() != (static_cast<Segment*>(l->startElement())->system())) {
                   bspDirty = true;
                   if (key == Qt::Key_Right)
-                        ls = l->lineSegments().takeFirst();
+                        ls = l->takeFirstSegment();
                   }
             static_cast<Segment*>(l->startElement())->remove(l);
             l->setStartElement(s1);
@@ -192,7 +187,7 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
             if (removeSegment) {
                   bspDirty = true;
                   if (key == Qt::Key_Left)
-                        ls = l->lineSegments().takeLast();
+                        ls = l->takeLastSegment();
                   }
             static_cast<Segment*>(l->endElement())->removeSpannerBack(line());
             l->setEndElement(s2);
@@ -202,11 +197,11 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
 
       LineSegment* nls = 0;
       if (st == SEGMENT_SINGLE)
-            nls = curGrip ? l->lineSegments().back() : l->lineSegments().front();
+            nls = curGrip ? l->backSegment() : l->frontSegment();
       else if (st == SEGMENT_BEGIN)
-            nls = l->lineSegments().front();
+            nls = l->frontSegment();
       else if (st == SEGMENT_END)
-            nls = l->lineSegments().back();
+            nls = l->backSegment();
       if (nls && (nls != this))
             sv->changeEditElement(nls);
 
@@ -273,8 +268,6 @@ SLine::SLine(const SLine& s)
    : Spanner(s)
       {
       _diagonal = s._diagonal;
-      foreach(LineSegment* ls, s.segments)
-            add(ls->clone());
       }
 
 //---------------------------------------------------------
@@ -331,8 +324,8 @@ void SLine::layout()
             // tick and tick2 has no meaning so no layout is
             // possible and needed
             //
-            if (!segments.isEmpty()) {
-                  LineSegment* s = segments.front();
+            if (!spannerSegments().isEmpty()) {
+                  LineSegment* s = frontSegment();
                   s->layout();
                   setbbox(s->bbox());
                   }
@@ -353,7 +346,7 @@ void SLine::layout()
                   continue;
             ++segmentsNeeded;
             }
-      int segCount = segments.size();
+      int segCount = spannerSegments().size();
 
       if (segmentsNeeded != segCount) {
             if (segmentsNeeded > segCount) {
@@ -363,19 +356,19 @@ void SLine::layout()
                         add(ls);
                         // set user offset to previous segment's offset
                         if (segCount > 0)
-                              ls->setUserOff(QPointF(0, segments[segCount+i-1]->userOff().y()));
+                              ls->setUserOff(QPointF(0, segmentAt(segCount+i-1)->userOff().y()));
                         }
                   }
             else {
                   int n = segCount - segmentsNeeded;
                   printf("SLine: segments %d needed %d, remove %d\n", segCount, segmentsNeeded, n);
                   for (int i = 0; i < n; ++i) {
-                        if (segments.isEmpty()) {
+                        if (spannerSegments().isEmpty()) {
                               printf("SLine::layout(): no segment %d, %d expected\n", i, n);
                               break;
                               }
                         else {
-                              LineSegment* seg = segments.takeLast();
+                              LineSegment* seg = takeLastSegment();
                               delete seg;
                               }
                         }
@@ -388,7 +381,7 @@ void SLine::layout()
             System* system = systems->at(i);
             if (system->isVbox())
                   continue;
-            LineSegment* seg = segments[segIdx++];
+            LineSegment* seg = segmentAt(segIdx++);
             seg->setSystem(system);
             double x1 = system->firstMeasure()->first(SegChordRest)->canvasPos().x();
             double x2 = system->abbox().right();
@@ -396,36 +389,31 @@ void SLine::layout()
 
             if (sysIdx1 == sysIdx2) {
                   // single segment
-                  seg->setSegmentType(SEGMENT_SINGLE);
+                  seg->setSubtype(SEGMENT_SINGLE);
                   seg->setPos(p1);
                   seg->setPos2(QPointF(p2.x() - p1.x(), 0.0));
                   }
             else if (i == sysIdx1) {
                   // start segment
-                  seg->setSegmentType(SEGMENT_BEGIN);
+                  seg->setSubtype(SEGMENT_BEGIN);
                   seg->setPos(p1);
                   seg->setPos2(QPointF(x2 - p1.x(), 0.0));
                   }
             else if (i > 0 && i != sysIdx2) {
                   // middle segment
-                  seg->setSegmentType(SEGMENT_MIDDLE);
+                  seg->setSubtype(SEGMENT_MIDDLE);
                   seg->setPos(QPointF(x1, y));
                   seg->setPos2(QPointF(x2 - x1, 0.0));
                   }
             else if (i == sysIdx2) {
                   // end segment
-                  seg->setSegmentType(SEGMENT_END);
+                  seg->setSubtype(SEGMENT_END);
                   seg->setPos(QPointF(x1, y));
                   seg->setPos2(QPointF(p2.x() - x1, 0.0));
                   }
             seg->layout();
             seg->move(ipos());
             }
-/*      printf("layout:\n");
-      foreach(LineSegment* ls, segments) {
-            printf("  %p %d\n", ls, int(ls->segmentType()));
-            }
-      */
       }
 
 //---------------------------------------------------------
@@ -442,8 +430,8 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
             xml.tag("anchor", anchor());
       if (score() == gscore) {
             // when used as icon
-            if (!segments.isEmpty()) {
-                  LineSegment* s = segments.front();
+            if (!spannerSegments().isEmpty()) {
+                  LineSegment* s = frontSegment();
                   xml.tag("length", s->pos2().x());
                   }
             else
@@ -454,7 +442,9 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
       // check if user has modified the default layout
       //
       bool modified = false;
-      foreach(LineSegment* seg, segments) {
+      int n = spannerSegments().size();
+      for (int i = 0; i < n; ++i) {
+            const LineSegment* seg = segmentAt(i);
             if (!seg->userOff().isNull()
                || !seg->userOff2().isNull()
                || !seg->visible()) {
@@ -468,7 +458,8 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
       //
       // write user modified layout
       //
-      foreach(LineSegment* seg, segments) {
+      for (int i = 0; i < n; ++i) {
+            const LineSegment* seg = segmentAt(i);
             xml.stag("Segment");
             xml.tag("off1", seg->userOff() / spatium());
             xml.tag("off2", seg->userOff2() / spatium());
@@ -526,43 +517,14 @@ bool SLine::readProperties(QDomElement e)
 
 void SLine::setLen(double l)
       {
-      if (segments.isEmpty())
+      if (spannerSegments().isEmpty())
             add(createLineSegment());
-      LineSegment* s = segments.front();
+      LineSegment* s = frontSegment();
       s->setPos(QPointF());
       s->setPos2(QPointF(l, 0));
       }
 
-//---------------------------------------------------------
-//   scanElements
-//---------------------------------------------------------
-
-void SLine::scanElements(void* data, void (*func)(void*, Element*))
-      {
-      foreach(LineSegment* seg, segments)
-            seg->scanElements(data, func);
-      }
-
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void SLine::add(Element* e)
-      {
-      LineSegment* ls = static_cast<LineSegment*>(e);
-      ls->setParent(this);
-      segments.append(ls);
-      }
-
-//---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void SLine::remove(Element* e)
-      {
-      segments.clear();
-      }
-
+#if 0
 //---------------------------------------------------------
 //   change
 //---------------------------------------------------------
@@ -577,6 +539,7 @@ void SLine::change(Element* o, Element* n)
       n->setParent(this);
       segments[idx] = (LineSegment*)n;
       }
+#endif
 
 //---------------------------------------------------------
 //   bbox
@@ -585,10 +548,10 @@ void SLine::change(Element* o, Element* n)
 
 QRectF SLine::bbox() const
       {
-      if (segments.isEmpty())
+      if (spannerSegments().isEmpty())
             return QRectF();
       else
-            return segments[0]->bbox();
+            return segmentAt(0)->bbox();
       }
 
 //---------------------------------------------------------
@@ -608,9 +571,9 @@ void SLine::write(Xml& xml) const
 
 void SLine::read(QDomElement e)
       {
-      foreach(LineSegment* seg, segments)
+      foreach(SpannerSegment* seg, spannerSegments())
             delete seg;
-      segments.clear();
+      spannerSegments().clear();
       setId(e.attribute("id", "-1").toInt());
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {

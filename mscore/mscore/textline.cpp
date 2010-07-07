@@ -53,7 +53,7 @@ void TextLineSegment::setSelected(bool f)
       {
       Element::setSelected(f);
       if (_text) {
-            if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
+            if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
                   if (textLine()->beginText())
                         _text->setSelected(f);
                   }
@@ -77,12 +77,12 @@ void TextLineSegment::draw(QPainter& p, ScoreView* v) const
       QPointF pp2(pos2());
 
       qreal l = 0.0;
-      int sym = _segmentType == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
+      int sym = spannerSegmentType() == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
       if (_text) {
             QFont f = _text->defaultFont();
             if (
-               ((_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) && (tl->beginTextPlace() == PLACE_LEFT))
-               || ((_segmentType == SEGMENT_MIDDLE || _segmentType == SEGMENT_END) && (tl->continueTextPlace() == PLACE_LEFT))
+               ((spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) && (tl->beginTextPlace() == PLACE_LEFT))
+               || ((spannerSegmentType() == SEGMENT_MIDDLE || spannerSegmentType() == SEGMENT_END) && (tl->continueTextPlace() == PLACE_LEFT))
                ) {
                   QRectF bb(_text->bbox());
                   l = _text->pos().x() + bb.width() + textlineTextDistance;
@@ -94,20 +94,20 @@ void TextLineSegment::draw(QPainter& p, ScoreView* v) const
             p.restore();
             }
       else if (sym != -1) {
-            const QRectF& bb = symbols[sym].bbox(magS());
+            const QRectF& bb = symbols[score()->symIdx()][sym].bbox(magS());
             qreal h = bb.height() * .5;
             QPointF o = tl->beginSymbolOffset() * _spatium;
-            symbols[sym].draw(p, 1.0, o.x(), h + o.y());
+            symbols[score()->symIdx()][sym].draw(p, 1.0, o.x(), h + o.y());
             l = bb.width() + textlineTextDistance;
             }
-      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
+      if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END) {
             if (tl->endSymbol() != -1) {
                   int sym = tl->endSymbol();
-                  const QRectF& bb = symbols[sym].bbox(magS());
+                  const QRectF& bb = symbols[score()->symIdx()][sym].bbox(magS());
                   qreal h = bb.height() * .5;
                   QPointF o = tl->endSymbolOffset() * _spatium;
                   pp2.setX(pp2.x() - bb.width() + textlineTextDistance);
-                  symbols[sym].draw(p, 1.0, pp2.x() + textlineTextDistance + o.x(), h + o.y());
+                  symbols[score()->symIdx()][sym].draw(p, 1.0, pp2.x() + textlineTextDistance + o.x(), h + o.y());
                   }
             }
 
@@ -134,7 +134,7 @@ void TextLineSegment::draw(QPainter& p, ScoreView* v) const
 
       if (tl->beginHook()) {
             double hh = tl->beginHookHeight().val() * _spatium;
-            if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
+            if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
                   if (tl->beginHookType() == HOOK_45)
                         p.drawLine(QLineF(pp1, QPointF(pp1.x() - fabs(hh * .4), pp1.y() + hh)));
                   else
@@ -143,7 +143,7 @@ void TextLineSegment::draw(QPainter& p, ScoreView* v) const
             }
       if (tl->endHook()) {
             double hh = tl->endHookHeight().val() * _spatium;
-            if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END) {
+            if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END) {
                   if (tl->endHookType() == HOOK_45)
                         p.drawLine(QLineF(pp2, QPointF(pp2.x() + fabs(hh * .4), pp2.y() + hh)));
                   else
@@ -180,7 +180,7 @@ QRectF TextLineSegment::bbox() const
                   }
             }
       else if (sym != -1) {
-            double hh = symbols[sym].height(magS()) * .5;
+            double hh = symbols[score()->symIdx()][sym].height(magS()) * .5;
             y1 = -hh;
             y2 = hh;
             }
@@ -210,7 +210,7 @@ void TextLineSegment::layout()
       TextLine* tl = (TextLine*)line();
       if (!tl->diagonal())
             _userOff2.setY(0);
-      switch (_segmentType) {
+      switch (spannerSegmentType()) {
             case SEGMENT_SINGLE:
             case SEGMENT_BEGIN:
                   if (tl->beginText()) {
@@ -363,9 +363,9 @@ void TextLine::write(Xml& xml) const
 
 void TextLine::read(QDomElement e)
       {
-      foreach(LineSegment* seg, segments)
+      foreach(SpannerSegment* seg, spannerSegments())
             delete seg;
-      segments.clear();
+      spannerSegments().clear();
       setId(e.attribute("id", "-1").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!readProperties(e))
@@ -532,7 +532,7 @@ void TextLineSegment::propertyAction(ScoreView* viewer, const QString& s)
             if (lp.exec()) {
                   score()->undoChangeElement(textLine(), nTl);
                   // force new text
-                  foreach(LineSegment* l, nTl->lineSegments()) {
+                  foreach(SpannerSegment* l, nTl->spannerSegments()) {
                         static_cast<TextLineSegment*>(l)->clearText();
                         }
                   }
@@ -763,8 +763,8 @@ void LineProperties::beginTextProperties()
             return;
       TextProperties t(tl->beginText(), this);
       if (t.exec()) {
-            foreach(LineSegment* ls, tl->lineSegments()) {
-                  if (ls->segmentType() != SEGMENT_SINGLE && ls->segmentType() != SEGMENT_BEGIN)
+            foreach(SpannerSegment* ls, tl->spannerSegments()) {
+                  if (ls->spannerSegmentType() != SEGMENT_SINGLE && ls->spannerSegmentType() != SEGMENT_BEGIN)
                         continue;
                   TextLineSegment* tls = static_cast<TextLineSegment*>(ls);
                   if (!tls->text())
@@ -785,8 +785,8 @@ void LineProperties::continueTextProperties()
             return;
       TextProperties t(tl->continueText(), this);
       if (t.exec()) {
-            foreach(LineSegment* ls, tl->lineSegments()) {
-                  if (ls->segmentType() != SEGMENT_MIDDLE)
+            foreach(SpannerSegment* ls, tl->spannerSegments()) {
+                  if (ls->spannerSegmentType() != SEGMENT_MIDDLE)
                         continue;
                   TextLineSegment* tls = static_cast<TextLineSegment*>(ls);
                   if (!tls->text())

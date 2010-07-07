@@ -2337,8 +2337,8 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
             if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == TEXTLINE) {
                   SLine* sl = static_cast<const SLine*>(el);
 //                  printf("slin segsz=%d", sl->lineSegments().size());
-                  if (sl->lineSegments().size() > 0) {
-                        LineSegment* seg = sl->lineSegments().at(0);
+                  if (sl->spannerSegments().size() > 0) {
+                        LineSegment* seg = (LineSegment*)sl->spannerSegments().at(0);
 /*
                         printf(" x=%g y=%g w=%g h=%g cpx=%g cpy=%g userOff.y=%g\n",
                                seg->x(), seg->y(),
@@ -2764,7 +2764,7 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
                         lineType = "solid";
                   }
             rest += QString(" line-type=\"%1\"").arg(lineType);
-            p = tl->lineSegments().first()->userOff();
+            p = tl->spannerSegments().first()->userOff();
             offs = tl->mxmlOff();
             type = "start";
             }
@@ -2780,7 +2780,7 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
                         }
                   rest += QString(" end-length=\"%1\"").arg(h * 10);
                   }
-            p = tl->lineSegments().last()->userOff2();
+            p = ((LineSegment*)tl->spannerSegments().last())->userOff2();
             offs = tl->mxmlOff2();
             type = "stop";
             }
@@ -2855,7 +2855,7 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
 
 void ExportMusicXml::symbol(Symbol* sym, int staff)
       {
-      QString name = symbols[sym->sym()].name();
+      QString name = symbols[score->symIdx()][sym->sym()].name();
       const char* mxmlName = "";
       if (name == "pedal ped")
             mxmlName = "pedal type=\"start\"";

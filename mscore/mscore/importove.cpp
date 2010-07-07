@@ -666,7 +666,7 @@ void OveToMScore::convertTrackElements(int track) {
                 	}
 
                 	if(y_off != 0) {
-                		ottava->lineSegments().front()->setUserOff(QPointF(0, y_off * score_->spatium()));
+                		ottava->frontSegment()->setUserOff(QPointF(0, y_off * score_->spatium()));
                 	}
 				} else {
 					printf("overlapping octave-shift not supported\n");

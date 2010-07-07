@@ -498,7 +498,7 @@ void MuseScore::showPalette(bool visible)
                   int sym = noteHeads[0][i][1];
                   NoteHead* nh = new NoteHead(gscore);
                   nh->setSym(sym);
-                  sp->append(nh, qApp->translate("symbol", symbols[sym].name()));
+                  sp->append(nh, qApp->translate("symbol", symbols[0][sym].name()));
                   }
 
             paletteBox->addPalette(sp);

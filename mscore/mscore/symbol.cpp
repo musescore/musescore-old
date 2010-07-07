@@ -168,7 +168,7 @@ void Symbol::layout()
 
 void Symbol::draw(QPainter& p, ScoreView*) const
       {
-      symbols[_sym].draw(p, magS());
+      symbols[score()->symIdx()][_sym].draw(p, magS());
       }
 
 //---------------------------------------------------------
@@ -177,7 +177,7 @@ void Symbol::draw(QPainter& p, ScoreView*) const
 
 QRectF Symbol::bbox() const
       {
-      return symbols[_sym].bbox(magS());
+      return symbols[score()->symIdx()][_sym].bbox(magS());
       }
 
 //---------------------------------------------------------
@@ -187,7 +187,7 @@ QRectF Symbol::bbox() const
 void Symbol::write(Xml& xml) const
       {
       xml.stag("Symbol");
-      xml.tag("name", symbols[_sym].name());
+      xml.tag("name", symbols[score()->symIdx()][_sym].name());
       Element::writeProperties(xml);
       foreach(const Element* e, getLeafs())
             e->write(xml);
@@ -207,15 +207,15 @@ void Symbol::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "name") {
-                  for (int i = 0; i < symbols.size(); ++i) {
-                        if (val == symbols[i].name()) {
+                  for (int i = 0; i < symbols[0].size(); ++i) {
+                        if (val == symbols[0][i].name()) {
                               s = i;
                               break;
                               }
                         }
                   if (s == -1) {
                         printf("unknown symbol <%s>, symbols %d\n",
-                           qPrintable(val), symbols.size());
+                           qPrintable(val), symbols[0].size());
                         s = 0;
                         }
                   }

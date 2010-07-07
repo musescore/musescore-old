@@ -24,6 +24,33 @@
 #include "element.h"
 
 class Segment;
+class Spanner;
+class System;
+
+enum SpannerSegmentType {
+      SEGMENT_SINGLE, SEGMENT_BEGIN, SEGMENT_MIDDLE, SEGMENT_END
+      };
+
+//---------------------------------------------------------
+//   SpannerSegment
+//---------------------------------------------------------
+
+class SpannerSegment : public Element {
+
+      virtual bool isEditable() { return true; }
+
+   protected:
+      System* _system;
+
+   public:
+      SpannerSegment(Score* s);
+      SpannerSegment(const SpannerSegment&);
+      virtual SpannerSegment* clone() const = 0;
+      Spanner* spanner() const                         { return (Spanner*)parent();  }
+      void setSpannerSegmentType(SpannerSegmentType s) { setSubtype(s);              }
+      SpannerSegmentType spannerSegmentType() const    { return SpannerSegmentType(subtype()); }
+      void setSystem(System* s)                        { _system = s;                }
+      };
 
 //---------------------------------------------------------
 //   Spanner
@@ -34,20 +61,22 @@ class Spanner : public Element {
       Element* _endElement;
       Anchor _anchor;         // enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE};
 
-      int _tick1, _tick2;       // used for backward compatibility
+      QList<SpannerSegment*> segments;
 
-      int _id;    // used for xml serialization
+      int _tick1, _tick2;     // used for backward compatibility
+      int _id;                // used for xml serialization
 
    public:
       Spanner(Score*);
       Spanner(const Spanner&);
+      ~Spanner();
 
       virtual ElementType type() const = 0;
 
-      void setStartElement(Element* e)    { _startElement = e;    }
-      void setEndElement(Element* e)      { _endElement = e;      }
-      Element* startElement() const       { return _startElement; }
-      Element* endElement() const         { return _endElement;   }
+      void setStartElement(Element* e) { _startElement = e;    }
+      void setEndElement(Element* e)   { _endElement = e;      }
+      Element* startElement() const    { return _startElement; }
+      Element* endElement() const      { return _endElement;   }
 
       //
       // used for backward compatibility:
@@ -62,7 +91,14 @@ class Spanner : public Element {
 
       Anchor anchor() const    { return _anchor;   }
       void setAnchor(Anchor a) { _anchor = a;      }
+
+      const QList<SpannerSegment*>& spannerSegments() const { return segments; }
+      QList<SpannerSegment*>& spannerSegments()             { return segments; }
+
+      virtual void add(Element*);
+      virtual void remove(Element*);
+      // virtual void change(Element* o, Element* n);
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
       };
 #endif
-
 

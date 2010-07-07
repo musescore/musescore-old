@@ -46,6 +46,7 @@
 #include "volta.h"
 #include "beam.h"
 #include "tuplet.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   rebuildBspTree
@@ -610,6 +611,11 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
+      _symIdx = 0;
+      if (_style[ST_MusicalSymbolFont].toString() == "Gonville")
+            _symIdx = 1;
+      initSymbols(_symIdx);
+
       _needLayout = false;
       if (layoutFlags & LAYOUT_FIX_TICKS)
             fixTicks();
