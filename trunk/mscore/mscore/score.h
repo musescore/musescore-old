@@ -204,6 +204,7 @@ class Score : public QObject {
       //
       // generated objects during layout:
       //
+      int _symIdx;                  // used symbol set, derived from style
       QList<Page*> _pages;          // pages are build from systems
       QList<System*> _systems;      // measures are akkumulated to systems
 
@@ -806,6 +807,7 @@ class Score : public QObject {
       QList<StaffType*>& staffTypes()                    { return _staffTypes; }
       void setStaffTypeList(const QList<StaffType*>& tl) { _staffTypes = tl;   }
       void addLayoutFlag(int val)                        { layoutFlags |= val; }
+      int symIdx() const                                 { return _symIdx; }
       };
 
 extern Score* gscore;

@@ -316,6 +316,7 @@ void Score::setSpatium(double v)
 Score::Score(const Style& s)
    : _selection(this)
       {
+      _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
       _paintDevice    = 0;

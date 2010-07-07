@@ -1249,7 +1249,7 @@ static void setSLinePlacement(SLine* sli, float s, const QString pl, bool hasYof
             else
                   printf("setSLinePlacement invalid placement '%s'\n", qPrintable(pl));
             }
-      LineSegment* ls = sli->lineSegments().front();
+      LineSegment* ls = (LineSegment*)sli->spannerSegments().front();
       ls->setUserOff(QPointF(0, offs * s));
       }
 

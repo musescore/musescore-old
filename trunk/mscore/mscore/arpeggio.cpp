@@ -98,7 +98,7 @@ QRectF Arpeggio::bbox() const
             case ARP_UP:
             case ARP_DOWN:
             default:
-                  return QRectF(0.0, y1, symbols[arpeggioSym].width(magS()), y2-y1);
+                  return QRectF(0.0, y1, symbols[score()->symIdx()][arpeggioSym].width(magS()), y2-y1);
             case ARP_BRACKET:
                   {
                   double lw = score()->styleS(ST_ArpeggioLineWidth).val() * _spatium;
@@ -121,19 +121,19 @@ void Arpeggio::draw(QPainter& p, ScoreView*) const
       switch (subtype()) {
             case ARP_NORMAL:
                   for (double y = y1; y < y2; y += _spatium)
-                        symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
+                        symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, 0.0, y);
                   break;
             case ARP_UP:
-                  symbols[arpeggioarrowupSym].draw(p, 1.0, 0.0, y1);
+                  symbols[score()->symIdx()][arpeggioarrowupSym].draw(p, 1.0, 0.0, y1);
                   for (double y = y1 + _spatium; y < y2; y += _spatium)
-                        symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
+                        symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, 0.0, y);
                   break;
             case ARP_DOWN:
                   {
                   double y = y1;
                   for (; y < y2 - _spatium; y += _spatium)
-                        symbols[arpeggioSym].draw(p, 1.0, 0.0, y);
-                  symbols[arpeggioarrowdownSym].draw(p, 1.0, 0.0, y);
+                        symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, 0.0, y);
+                  symbols[score()->symIdx()][arpeggioarrowdownSym].draw(p, 1.0, 0.0, y);
                   }
                   break;
             case ARP_BRACKET:

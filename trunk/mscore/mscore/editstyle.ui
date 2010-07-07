@@ -163,12 +163,12 @@
            </property>
            <item>
             <property name="text">
-             <string>Emmentaler</string>
+             <string notr="true">Emmentaler</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Gonville</string>
+             <string notr="true">Gonville</string>
             </property>
            </item>
           </widget>

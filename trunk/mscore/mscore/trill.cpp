@@ -35,17 +35,17 @@
 void TrillSegment::draw(QPainter& p, ScoreView* v) const
       {
       double mags = magS();
-      QRectF b1 = symbols[trillSym].bbox(mags);
-      QRectF b2 = symbols[trillelementSym].bbox(mags);
-      qreal w2  = symbols[trillelementSym].width(mags);
+      QRectF b1 = symbols[score()->symIdx()][trillSym].bbox(mags);
+      QRectF b2 = symbols[score()->symIdx()][trillelementSym].bbox(mags);
+      qreal w2  = symbols[score()->symIdx()][trillelementSym].width(mags);
       int n     = lrint((pos2().x() - (b1.width() - b1.x())) / w2);
 
-      QPointF a = symbols[trillSym].attach(mags);
+      QPointF a = symbols[score()->symIdx()][trillSym].attach(mags);
 
-      symbols[trillSym].draw(p, mags, -b1.x(), 0);
-      symbols[trillelementSym].draw(p, mags,  -b1.x() + b1.width(), b2.y() * .9, n);
+      symbols[score()->symIdx()][trillSym].draw(p, mags, -b1.x(), 0);
+      symbols[score()->symIdx()][trillelementSym].draw(p, mags,  -b1.x() + b1.width(), b2.y() * .9, n);
 
-      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
+      if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
             if (trill()->accidental()) {
                   p.save();
                   p.translate(trill()->accidental()->canvasPos());
@@ -61,7 +61,7 @@ void TrillSegment::draw(QPainter& p, ScoreView* v) const
 
 QRectF TrillSegment::bbox() const
       {
-      QRectF rr(symbols[trillSym].bbox(magS()));
+      QRectF rr(symbols[score()->symIdx()][trillSym].bbox(magS()));
       QRectF r(0.0, rr.y(), pos2().x(), rr.height());
       return r;
       }
@@ -180,9 +180,9 @@ void Trill::write(Xml& xml) const
 
 void Trill::read(QDomElement e)
       {
-      foreach(LineSegment* seg, segments)
+      foreach(SpannerSegment* seg, spannerSegments())
             delete seg;
-      segments.clear();
+      spannerSegments().clear();
       setId(e.attribute("id", "-1").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());

@@ -113,7 +113,7 @@ void KeySig::layout()
       if (isCustom()) {
             foreach(KeySym* ks, keySymbols) {
                   ks->pos = ks->spos * _spatium;
-                  _bbox |= symbols[ks->sym].bbox(magS()).translated(ks->pos);
+                  _bbox |= symbols[score()->symIdx()][ks->sym].bbox(magS()).translated(ks->pos);
                   }
             return;
             }
@@ -198,7 +198,7 @@ void KeySig::layout()
             }
       foreach(KeySym* ks, keySymbols) {
             ks->pos = ks->spos * _spatium;
-            _bbox |= symbols[ks->sym].bbox(magS()).translated(ks->pos);
+            _bbox |= symbols[score()->symIdx()][ks->sym].bbox(magS()).translated(ks->pos);
             }
       }
 
@@ -209,7 +209,7 @@ void KeySig::layout()
 void KeySig::draw(QPainter& p, ScoreView*) const
       {
       foreach(const KeySym* ks, keySymbols)
-            symbols[ks->sym].draw(p, magS(), ks->pos.x(), ks->pos.y());
+            symbols[score()->symIdx()][ks->sym].draw(p, magS(), ks->pos.x(), ks->pos.y());
       }
 
 //---------------------------------------------------------

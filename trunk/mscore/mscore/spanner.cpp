@@ -21,6 +21,24 @@
 #include "spanner.h"
 
 //---------------------------------------------------------
+//   SpannerSegment
+//---------------------------------------------------------
+
+SpannerSegment::SpannerSegment(Score* s)
+   : Element(s)
+      {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE | ELEMENT_SEGMENT);
+      setSubtype(SEGMENT_SINGLE);
+      _system = 0;
+      }
+
+SpannerSegment::SpannerSegment(const SpannerSegment& s)
+   : Element(s)
+      {
+      _system = s._system;
+      }
+
+//---------------------------------------------------------
 //   Spanner
 //---------------------------------------------------------
 
@@ -38,5 +56,44 @@ Spanner::Spanner(const Spanner& s)
       _startElement = s._startElement;
       _endElement   = s._endElement;
       _anchor       = s._anchor;
+      foreach(SpannerSegment* ss, s.segments)
+            add(ss->clone());
       }
+
+Spanner::~Spanner()
+      {
+      foreach(SpannerSegment* ss, spannerSegments())
+            delete ss;
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void Spanner::add(Element* e)
+      {
+      SpannerSegment* ls = static_cast<SpannerSegment*>(e);
+      ls->setParent(this);
+      segments.append(ls);
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void Spanner::remove(Element* e)
+      {
+      segments.removeOne(static_cast<SpannerSegment*>(e));
+      }
+
+//---------------------------------------------------------
+//   scanElements
+//---------------------------------------------------------
+
+void Spanner::scanElements(void* data, void (*func)(void*, Element*))
+      {
+      foreach(SpannerSegment* seg, segments)
+            seg->scanElements(data, func);
+      }
+
 

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -197,7 +197,7 @@ StyleType styleTypes[] = {
       StyleType("slurBow",                 ST_SPATIUM),
       StyleType("sectionPause",            ST_DOUBLE),
 
-      StyleType("musicalSymboFont",        ST_STRING)
+      StyleType("musicalSymbolFont",       ST_STRING)
       };
 
 //---------------------------------------------------------
@@ -479,7 +479,7 @@ Style::Style()
 
             StyleVal(ST_SectionPause, 3.0),
 
-            StyleVal(ST_MusicalSymboFont, "emmentaler")
+            StyleVal(ST_MusicalSymbolFont, "Emmentaler")
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)

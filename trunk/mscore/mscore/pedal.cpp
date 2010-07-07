@@ -54,17 +54,3 @@ void Pedal::read(QDomElement e)
             }
       TextLine::read(e);
       }
-#if 0
-//---------------------------------------------------------
-//   layout
-//    compute segments from tick() to _tick2
-//---------------------------------------------------------
-
-void Pedal::layout()
-      {
-      Element::layout();
-      SLine::layout();
-      }
-
-#endif
-

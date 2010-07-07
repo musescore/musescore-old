@@ -99,9 +99,9 @@ QString Volta::text() const
 
 void Volta::read(QDomElement e)
       {
-      foreach(LineSegment* seg, segments)
+      foreach(SpannerSegment* seg, spannerSegments())
             delete seg;
-      segments.clear();
+      spannerSegments().clear();
       setId(e.attribute("id", "-1").toInt());
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -206,7 +206,7 @@ void VoltaSegment::propertyAction(ScoreView* viewer, const QString& s)
             if (lp.exec()) {
                   score()->undoChangeElement(textLine(), nTl);
                   // force new text
-                  foreach(LineSegment* l, nTl->lineSegments()) {
+                  foreach(SpannerSegment* l, nTl->spannerSegments()) {
                         static_cast<TextLineSegment*>(l)->clearText();
                         }
                   }

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -295,7 +295,7 @@ enum StyleIdx {
       ST_SlurBow,
 
       ST_SectionPause,
-      ST_MusicalSymboFont,
+      ST_MusicalSymbolFont,
 
       ST_STYLES
       };

@@ -23,6 +23,7 @@
 #include "system.h"
 #include "segment.h"
 #include "measure.h"
+#include "score.h"
 
 int Breath::symList[Breath::breathSymbols] = {
       rcommaSym,
@@ -47,7 +48,7 @@ Breath::Breath(Score* s)
 
 void Breath::layout()
       {
-      _bbox = symbols[symList[subtype()]].bbox(mag());
+      _bbox = symbols[score()->symIdx()][symList[subtype()]].bbox(mag());
       }
 
 //---------------------------------------------------------
@@ -79,7 +80,7 @@ void Breath::read(QDomElement e)
 
 void Breath::draw(QPainter& p, ScoreView*) const
       {
-      symbols[symList[subtype()]].draw(p, mag());
+      symbols[score()->symIdx()][symList[subtype()]].draw(p, mag());
       }
 
 //---------------------------------------------------------

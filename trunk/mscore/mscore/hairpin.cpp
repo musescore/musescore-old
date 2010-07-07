@@ -45,7 +45,7 @@ void HairpinSegment::draw(QPainter& p, ScoreView*) const
       qreal y = pos2().y();
 
       if (hairpin()->subtype() == 0) {
-            switch(_segmentType) {
+            switch(spannerSegmentType()) {
                   case SEGMENT_SINGLE:
                   case SEGMENT_BEGIN:
                         p.drawLine(QLineF(.0, .0, x, y + h1));
@@ -59,7 +59,7 @@ void HairpinSegment::draw(QPainter& p, ScoreView*) const
                   }
             }
       else {
-            switch(_segmentType) {
+            switch(spannerSegmentType()) {
                   case SEGMENT_SINGLE:
                   case SEGMENT_END:
                         p.drawLine(QLineF(.0,  h1, x, y));

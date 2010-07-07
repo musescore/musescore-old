@@ -1175,7 +1175,7 @@ void ExportLy::textLine(Element* instruction, int tick, bool pre)
 	      out << tekststyle<< "\"" << linetext <<"\"} \n";
 	      indent();
 	    }
-	  point = tekstlinje->lineSegments().first()->userOff();
+	  point = tekstlinje->frontSegment()->userOff();
 	  if (point.y() > 0.0) //below
 	    {
 	      out <<"\\textSpannerDown ";
@@ -1523,7 +1523,7 @@ void ExportLy::handleElement(Element* el)
 			{
 			    cout << "symbol in anchorlist tick: " << anchors[i].tick << "  \n";
 			    sym = (Symbol*) instruction;
-			    name = symbols[sym->sym()].name();
+			    name = symbols[0][sym->sym()].name();
 			    writeSymbol(name);
 			    break;
 			}
@@ -2918,7 +2918,7 @@ bool ExportLy::findNoteSymbol(Note* n, QString &symbolname)
 	{
 	  found = true;
 	  Symbol * symb = (Symbol*) symbol;
-	  symbolname = symbols[symb->sym()].name();
+	  symbolname = symbols[0][symb->sym()].name();
 	  break; // what about more symbols connected to one note? Return array of names?
 	}
     }

@@ -23,7 +23,7 @@
 
 #include "style.h"
 
-extern void initSymbols();
+extern void initSymbols(int);
 
 enum SymbolType {
       SYMBOL_UNKNOWN,
@@ -85,8 +85,6 @@ class Sym {
       void setAttach(const QPointF& r)       { _attach = r; }
       bool isValid() const                   { return tl != 0; }
       };
-
-extern QVector<Sym> symbols;
 
 enum {
       clefEightSym,
@@ -329,7 +327,8 @@ enum {
       lastSym
       };
 
-extern const Sym* findSymbol(int code, int fontId);
+extern QVector<Sym> symbols[2];
+
 extern QString symToHtml(const Sym&, int leftMargin=0);
 extern QString symToHtml(const Sym&, const Sym&, int leftMargin=0);
 extern QFont fontId2font(int id);

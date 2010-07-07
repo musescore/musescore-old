@@ -1271,7 +1271,7 @@ void MuseScore::dropEvent(QDropEvent* event)
                         tr("MuseScore: Load error"),
                         tr("Open failed: unknown file extension or broken file"));
                   }
-                
+
             event->acceptProposedAction();
             }
       }
@@ -1923,13 +1923,16 @@ int main(int argc, char* av[])
       //
       static const char* fonts[] = {
 //            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSans", "DejaVuSerif"
-            "mscore-20", "MScore1-20_new", "MuseJazz", "DejaVuSans", "DejaVuSerif"
+            "mscore-20", "MScore1-20_new", "MuseJazz", "DejaVuSans", "DejaVuSerif",
+            "gonville-20",
             };
       for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
             if (-1 == QFontDatabase::addApplicationFont(QString(":/fonts/%1.ttf").arg(fonts[i]))) {
-                  fprintf(stderr, "Mscore: fatal error: cannot load internal font <%s>\n", fonts[i]);
-                  if (!debugMode)
-                        exit(-1);
+                  if (-1 == QFontDatabase::addApplicationFont(QString(":/fonts/%1.otf").arg(fonts[i]))) {
+                        fprintf(stderr, "Mscore: fatal error: cannot load internal font <%s>\n", fonts[i]);
+                        if (!debugMode)
+                              exit(-1);
+                        }
                   }
             }
 /*      if (converterMode) {
@@ -1983,7 +1986,7 @@ int main(int argc, char* av[])
       //   staff has 5 lines = 4 * _spatium
       //   _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
-      initSymbols();
+      initSymbols(0);   // init emmentaler symbols
       genIcons();
       initStaffTypes();
 

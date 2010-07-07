@@ -91,10 +91,6 @@ enum Placement {
       PLACE_AUTO, PLACE_ABOVE, PLACE_BELOW, PLACE_LEFT
       };
 
-enum LineSegmentType {
-      SEGMENT_SINGLE, SEGMENT_BEGIN, SEGMENT_MIDDLE, SEGMENT_END
-      };
-
 enum AlignmentFlags {
       ALIGN_LEFT     = 0,
       ALIGN_RIGHT    = 1,

@@ -259,9 +259,9 @@ void TimeSig::layout()
       if (st == 0)
             bb = QRectF(0, 0,0, 0);
       else if (st ==  TSIG_FOUR_FOUR)
-            bb = symbols[fourfourmeterSym].bbox(magS()).translated(0.0, 2.0 * _spatium);
+            bb = symbols[score()->symIdx()][fourfourmeterSym].bbox(magS()).translated(0.0, 2.0 * _spatium);
       else if (st == TSIG_ALLA_BREVE)
-            bb = symbols[allabreveSym].bbox(magS()).translated(0.0, 2.0 * _spatium);
+            bb = symbols[score()->symIdx()][allabreveSym].bbox(magS()).translated(0.0, 2.0 * _spatium);
       else {
             int n, z1, z2, z3, z4;
             getSig(&n, &z1, &z2, &z3, &z4);
@@ -301,11 +301,11 @@ void TimeSig::draw(QPainter& p, ScoreView*) const
             return;
       double _spatium = spatium();
       if (st ==  TSIG_FOUR_FOUR)
-            symbols[fourfourmeterSym].draw(p, magS(), 0.0, 2.0 * _spatium);
+            symbols[score()->symIdx()][fourfourmeterSym].draw(p, magS(), 0.0, 2.0 * _spatium);
       else if (st == TSIG_ALLA_BREVE)
-            symbols[allabreveSym].draw(p, magS(), 0.0, 2.0 * _spatium);
+            symbols[score()->symIdx()][allabreveSym].draw(p, magS(), 0.0, 2.0 * _spatium);
       else {
-            p.setFont(symbols[allabreveSym].font());
+            p.setFont(symbols[score()->symIdx()][allabreveSym].font());
             double m  = _spatium / (DPI * SPATIUM20);
             double im = 1.0 / m;
             p.scale(m, m);

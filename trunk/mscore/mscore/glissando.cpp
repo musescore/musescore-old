@@ -147,10 +147,10 @@ void Glissando::draw(QPainter& p, ScoreView*) const
             }
       else if (subtype() == 1) {
             double mags = magS();
-            QRectF b = symbols[trillelementSym].bbox(mags);
-            qreal w  = symbols[trillelementSym].width(mags);
+            QRectF b = symbols[score()->symIdx()][trillelementSym].bbox(mags);
+            qreal w  = symbols[score()->symIdx()][trillelementSym].width(mags);
             int n    = lrint(l / w);
-            symbols[trillelementSym].draw(p, mags, 0.0, b.height()*.5, n);
+            symbols[score()->symIdx()][trillelementSym].draw(p, mags, 0.0, b.height()*.5, n);
             }
       if (_showText) {
             TextStyle* st = score()->textStyle(TEXT_STYLE_GLISSANDO);

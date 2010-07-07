@@ -94,7 +94,7 @@ void Rest::draw(QPainter& p, ScoreView*) const
             p.drawLine(QLineF(x1, y-_spatium, x1, y+_spatium));
             p.drawLine(QLineF(x2, y-_spatium, x2, y+_spatium));
 
-            p.setFont(symbols[allabreveSym].font());
+            p.setFont(symbols[score()->symIdx()][allabreveSym].font());
             p.scale(mag, mag);
             double imag = 1.0 / mag;
 
@@ -105,14 +105,14 @@ void Rest::draw(QPainter& p, ScoreView*) const
             p.scale(imag, imag);
             }
       else {
-            symbols[_sym].draw(p, mag);
+            symbols[score()->symIdx()][_sym].draw(p, mag);
             int dots = durationType().dots();
             if (dots) {
                   double y = dotline * _spatium * .5;
                   for (int i = 1; i <= dots; ++i) {
-                        double x = symbols[_sym].width(magS())
+                        double x = symbols[score()->symIdx()][_sym].width(magS())
                                    + point(score()->styleS(ST_dotNoteDistance)) * i;
-                        symbols[dotSym].draw(p, magS(), x, y);
+                        symbols[score()->symIdx()][dotSym].draw(p, magS(), x, y);
                         }
                   }
             }
@@ -378,7 +378,7 @@ QRectF Rest::bbox() const
             double w = point(score()->styleS(ST_minMMRestWidth));
             return QRectF(-w * .5, -h + 2 * spatium(), w, h);
             }
-      return symbols[_sym].bbox(mag());
+      return symbols[score()->symIdx()][_sym].bbox(mag());
       }
 
 //---------------------------------------------------------
@@ -387,7 +387,7 @@ QRectF Rest::bbox() const
 
 qreal Rest::centerX() const
       {
-      return symbols[_sym].width(magS())*.5;
+      return symbols[score()->symIdx()][_sym].width(magS())*.5;
       }
 
 //---------------------------------------------------------
@@ -396,7 +396,7 @@ qreal Rest::centerX() const
 
 qreal Rest::upPos() const
       {
-      return symbols[_sym].bbox(magS()).y();
+      return symbols[score()->symIdx()][_sym].bbox(magS()).y();
       }
 
 //---------------------------------------------------------
@@ -405,7 +405,7 @@ qreal Rest::upPos() const
 
 qreal Rest::downPos() const
       {
-      return symbols[_sym].bbox(magS()).y() + symbols[_sym].height(magS());
+      return symbols[score()->symIdx()][_sym].bbox(magS()).y() + symbols[score()->symIdx()][_sym].height(magS());
       }
 
 //---------------------------------------------------------

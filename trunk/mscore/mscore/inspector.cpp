@@ -297,7 +297,7 @@ void Inspector::updateList(Score* s)
             if (el->type() == SLUR) {
                   ElementItem* se = new ElementItem(li, el);
                   Slur* slur = (Slur*)el;
-                  foreach(Element* el1, *slur->slurSegments())
+                  foreach(Element* el1, slur->spannerSegments())
                         new ElementItem(se, el1);
                   }
             else if (el->type() == VOLTA) {
@@ -308,7 +308,7 @@ void Inspector::updateList(Score* s)
                   if (volta->continueText())
                         new ElementItem(ei, volta->continueText());
                   SLine* line = static_cast<SLine*>(el);
-                  foreach(LineSegment* ls, line->lineSegments()) {
+                  foreach(Element* ls, line->spannerSegments()) {
                         ElementItem* sse = new ElementItem(ei, ls);
                         if (ls->type() == TEXTLINE_SEGMENT) {
                               if (static_cast<TextLineSegment*>(ls)->text())
@@ -319,7 +319,7 @@ void Inspector::updateList(Score* s)
             else if (el->isSLine()) {
                   ElementItem* se = new ElementItem(li, el);
                   SLine* line = static_cast<SLine*>(el);
-                  foreach(LineSegment* ls, line->lineSegments()) {
+                  foreach(Element* ls, line->spannerSegments()) {
                         ElementItem* sse = new ElementItem(se, ls);
                         if (ls->type() == TEXTLINE_SEGMENT) {
                               if (static_cast<TextLineSegment*>(ls)->text())
@@ -401,7 +401,7 @@ void Inspector::updateList(Score* s)
                                                 if (note->tieFor()) {
                                                       Tie* tie = note->tieFor();
                                                       ElementItem* ti = new ElementItem(ni, tie);
-                                                      foreach(Element* el1, *tie->slurSegments())
+                                                      foreach(Element* el1, tie->spannerSegments())
                                                             new ElementItem(ti, el1);
                                                       }
                                                 }
@@ -415,7 +415,7 @@ void Inspector::updateList(Score* s)
                               foreach(Spanner* s, segment->spannerFor()) {
                                     SLine* sl = (SLine*)s;
                                     ElementItem* si = new ElementItem(segItem, s);
-                                    foreach(LineSegment* ls, sl->lineSegments())
+                                    foreach(Element* ls, sl->spannerSegments())
                                           new ElementItem(si, ls);
                                     }
                               foreach(Element* s, segment->annotations())
@@ -1696,8 +1696,8 @@ void SlurView::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       st.segments->clear();
-      QList<SlurSegment*>* el = slur->slurSegments();
-      foreach(const Element* e, *el) {
+      const QList<SpannerSegment*>& el = slur->spannerSegments();
+      foreach(const Element* e, el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
@@ -1757,8 +1757,8 @@ void TieView::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       st.segments->clear();
-      QList<SlurSegment*>* el = tie->slurSegments();
-      foreach(const Element* e, *el) {
+      const QList<SpannerSegment*>& el = tie->spannerSegments();
+      foreach(const Element* e, el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
 item->setText(1, "klops");
@@ -1836,8 +1836,8 @@ void VoltaView::setElement(Element* e)
       lb.rightElement->setText(QString("%1").arg((unsigned long)volta->endElement()));
 
       lb.segments->clear();
-      const QList<LineSegment*>& el = volta->lineSegments();
-      foreach(const Element* e, el) {
+      const QList<SpannerSegment*>& el = volta->spannerSegments();
+      foreach(const SpannerSegment* e, el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
