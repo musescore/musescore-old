@@ -487,15 +487,27 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
 
 bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       {
-      _undo->push(new RemoveMeasures(fm, lm));
       int measures = 1;
-      Fraction k;
-      Measure* m;
-      for (m = fm; m != lm; m = m->nextMeasure()) {
-            k += m->len();
+      bool empty = true;
+      for (Measure* m = fm; m != lm; m = m->nextMeasure()) {
+            if (!m->isFullMeasureRest())
+                  empty = true;
             ++measures;
             }
-      k += m->len();
+      if (empty) {
+            //
+            // only change measure len
+            //
+            Measure* m = fm;
+            for (int i = 0; i < measures; ++i, m = m->nextMeasure()) {
+                  undo()->push(new ChangeMeasureProperties(
+                     m, ns, ns, m->getBreakMultiMeasureRest(), m->repeatCount(),
+                     m->userStretch(), m->noOffset(), m->irregular()));
+                  }
+            return true;
+            }
+      _undo->push(new RemoveMeasures(fm, lm));
+      Fraction k = fm->len() * measures;
       k /= ns;
       int nm = (k.numerator() + k.denominator() - 1)/ k.denominator();
       Measure* nfm = 0;
@@ -568,6 +580,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       return true;
       }
 
+
 //---------------------------------------------------------
 //   warnTupletCrossing
 //---------------------------------------------------------
@@ -619,11 +632,8 @@ void Score::rewriteMeasures(Measure* fm, const Fraction& ns)
 //    to gui command (drop timesig on measure or timesig)
 //---------------------------------------------------------
 
-void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
+void Score::cmdAddTimeSig(Measure* fm, int timeSigSubtype)
       {
-      int timeSigSubtype = ts->subtype();
-      delete ts;
-
       Fraction ns(TimeSig::getSig(timeSigSubtype));
 
       int tick = fm->tick();

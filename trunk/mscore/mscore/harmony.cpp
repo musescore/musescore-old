@@ -824,7 +824,7 @@ void Harmony::layout()
       Element::layout();
       Measure* m = measure();
       double yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
-      double xx = (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());
+      double xx = 0.0;  // (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());
 
       setPos(ipos() + QPointF(xx, yy));
 

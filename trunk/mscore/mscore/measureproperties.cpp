@@ -172,6 +172,7 @@ void MeasureProperties::apply()
             score->undo()->push(new ChangeMeasureProperties(
                m,
                sig(),
+               m->len(),
                breakMultiMeasureRest->isChecked(),
                repeatCount(),
                layoutStretch->value(),

@@ -2023,7 +2023,8 @@ void ChangeMStaffProperties::flip()
 
 ChangeMeasureProperties::ChangeMeasureProperties(
    Measure* m,
-   const Fraction& ts,
+   const Fraction& _sig,
+   const Fraction& _len,
    bool _bmm,
    int rc,
    double s,
@@ -2031,7 +2032,8 @@ ChangeMeasureProperties::ChangeMeasureProperties(
    bool ir
    ) :
    measure(m),
-   sig(ts),
+   sig(_sig),
+   len(_len),
    breakMM(_bmm),
    repeatCount(rc),
    stretch(s),
@@ -2051,12 +2053,14 @@ void ChangeMeasureProperties::flip()
       double s = measure->userStretch();
       int o    = measure->noOffset();
       bool ir  = measure->irregular();
-      Fraction f = measure->len();
+      Fraction _sig = measure->timesig();
+      Fraction _len = measure->len();
 
       measure->setBreakMultiMeasureRest(breakMM);
       measure->setRepeatCount(repeatCount);
       measure->setUserStretch(stretch);
-      measure->setLen(sig);
+      measure->setTimesig(sig);
+      measure->setLen(len);
       Score* score = measure->score();
       if (o != noOffset || ir != irregular) {
             measure->setNoOffset(noOffset);
@@ -2069,7 +2073,8 @@ void ChangeMeasureProperties::flip()
       stretch     = s;
       noOffset    = o;
       irregular   = ir;
-      sig         = f;
+      sig         = _sig;
+      len         = _len;
 
       score->addLayoutFlag(LAYOUT_FIX_TICKS);
       score->setLayoutAll(true);
