@@ -525,7 +525,7 @@ class Score : public QObject {
       void cmdAdd(Element*);
       void cmdRemove(Element*);
       void cmdRemoveTimeSig(TimeSig*);
-      void cmdAddTimeSig(Measure*, TimeSig*);
+      void cmdAddTimeSig(Measure*, int);
 
       void setUpdateAll(bool v = true) { _updateAll = v;   }
       void setLayoutAll(bool val)      { layoutAll = val;  }

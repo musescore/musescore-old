@@ -1581,7 +1581,8 @@ printf("drop staffList\n");
                   }
 
             case TIMESIG:
-                  score()->cmdAddTimeSig(this, static_cast<TimeSig*>(e));
+                  score()->cmdAddTimeSig(this, e->subtype());
+                  delete e;
                   break;
 
             case LAYOUT_BREAK:
@@ -2766,22 +2767,54 @@ bool Measure::hasVoice(int track) const
 
 /**
  Check if the measure is filled by a full-measure rest or full of rests on
- this staff
+ this staff. If staff is -1, then check for all staves
 */
 
 bool Measure::isMeasureRest(int staffIdx)
       {
-      int strack = staffIdx * VOICES;
-      int etrack = staffIdx * VOICES + VOICES;
-      for (Segment* s = first(); s; s = s->next()) {
-            if (s->subtype() == SegChordRest)
-                for (int track = strack; track < etrack; ++track) {
-                      Element* e = s->element(track);
-    				          if(e && e->type() != REST)
-    					           return false;
-                      }
+      int strack;
+      int etrack;
+      if (staffIdx < 0) {
+            strack = 0;
+            etrack = score()->nstaves() * VOICES;
             }
-            return true;
+      else {
+            strack = staffIdx * VOICES;
+            etrack = staffIdx * VOICES + VOICES;
+            }
+      for (Segment* s = first(SegChordRest); s; s = s->next(SegChordRest)) {
+            for (int track = strack; track < etrack; ++track) {
+                  Element* e = s->element(track);
+                  if (e && e->type() != REST)
+                        return false;
+                  }
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   isFullMeasureRest
+//    Check for an empty measure, filled with full measure
+//    rests.
+//---------------------------------------------------------
+
+bool Measure::isFullMeasureRest()
+      {
+      int strack = 0;
+      int etrack = score()->nstaves() * VOICES;
+
+      Segment* s = first(SegChordRest);
+      for (int track = strack; track < etrack; ++track) {
+            Element* e = s->element(track);
+            if (e) {
+                  if (e->type() != REST)
+                        return false;
+                  Rest* rest = static_cast<Rest*>(e);
+                  if (rest->durationType().type() != Duration::V_MEASURE)
+                        return false;
+                  }
+            }
+      return true;
       }
 
 //---------------------------------------------------------

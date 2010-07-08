@@ -1125,6 +1125,7 @@ class ChangeMStaffProperties : public UndoCommand {
 class ChangeMeasureProperties : public UndoCommand {
       Measure* measure;
       Fraction sig;
+      Fraction len;
       bool breakMM;
       int repeatCount;
       double stretch;
@@ -1133,8 +1134,8 @@ class ChangeMeasureProperties : public UndoCommand {
 
       void flip();
    public:
-      ChangeMeasureProperties(Measure*, const Fraction&, bool breakMM, int repeatCount, double stretch,
-         int noOffset, bool irregular);
+      ChangeMeasureProperties(Measure*, const Fraction&, const Fraction&, bool breakMM,
+         int repeatCount, double stretch, int noOffset, bool irregular);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

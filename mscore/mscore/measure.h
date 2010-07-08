@@ -233,6 +233,7 @@ class Measure : public MeasureBase {
       void checkMultiVoices(int staffIdx);
       bool hasVoice(int track) const;
       bool isMeasureRest(int staffIdx);
+      bool isFullMeasureRest();
       bool visible(int staffIdx) const;
       bool slashStyle(int staffIdx) const;
 
