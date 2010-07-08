@@ -68,6 +68,7 @@ class Rest : public ChordRest {
 
       void setMMWidth(double val)   { _mmWidth = val; }
       double mmWidth() const        { return _mmWidth; }
+      static int getSymbol(Duration::DurationType type, int line, int* yoffset);
       };
 
 #endif

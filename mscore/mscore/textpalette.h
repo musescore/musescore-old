@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -33,11 +33,15 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       Q_OBJECT
 
       TextB* _textElement;
+      QPushButton* buttons[256];;
+      QButtonGroup* sg;
+      int curPage;
 
       void closeEvent(QCloseEvent* ev);
 
    private slots:
       void symbolClicked(int);
+      void populate();
 
    public:
       TextPalette(QWidget* parent);

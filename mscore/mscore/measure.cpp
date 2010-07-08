@@ -2401,9 +2401,8 @@ void Measure::read(QDomElement e, int staffIdx)
             if (s->subtype() == SegBarLine) {
                   BarLine* b = static_cast<BarLine*>(s->element(0));
                   setEndBarLineType(b->subtype(), false, b->visible(), b->color());
-                  remove(s);
+                  s->remove(b);
                   delete b;
-                  delete s;
                   }
             }
       }

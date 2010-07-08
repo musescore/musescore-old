@@ -204,7 +204,7 @@ StyleType styleTypes[] = {
 //   textStyles
 //---------------------------------------------------------
 
-static const QString ff("Times New Roman");
+static const QString ff("DejaVu Sans");
 
 #define MM(x) ((x)/INCH)
 #define OA     OFFSET_ABS

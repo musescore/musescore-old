@@ -1258,6 +1258,27 @@ void TextB::addSymbol(const SymCode& s, QTextCursor* cur)
       }
 
 //---------------------------------------------------------
+//   addChar
+//---------------------------------------------------------
+
+void TextB::addChar(int code, QTextCursor* cur)
+      {
+      if (cur == 0)
+            cur = cursor;
+
+      QString ss;
+      if (code & 0xffff0000) {
+            ss = QChar(QChar::highSurrogate(code));
+            ss += QChar(QChar::lowSurrogate(code));
+            }
+      else
+            ss = QChar(code);
+      cur->insertText(ss);
+      score()->setLayoutAll(true);
+      score()->end();
+      }
+
+//---------------------------------------------------------
 //   setCharFormat
 //---------------------------------------------------------
 

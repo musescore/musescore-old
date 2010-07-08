@@ -411,7 +411,7 @@ QFont fontId2font(int fontId)
       else if (fontId == 1)
             _font.setFamily("MScore1-test");
       else if (fontId == 2) {
-            _font.setFamily("Times New Roman");
+            _font.setFamily("DejaVu Serif");
             size = lrint(8 * DPI / PPI);
             }
       else if (fontId == 3) {
@@ -610,7 +610,6 @@ void initSymbols(int idx)
       symbols[idx][note64Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/64"),  0xe109, 1);
       symbols[idx][dotdotSym]    = Sym(QT_TRANSLATE_NOOP("symbol", "dot dot"),    0xe10b, 1);
 
-
       QHash<QString, int> lnhash;
       for (unsigned int i = 0; i < sizeof(lilypondNames)/sizeof(*lilypondNames); ++i)
             lnhash[QString(lilypondNames[i].name)] = lilypondNames[i].msIndex;
@@ -668,8 +667,10 @@ void initSymbols(int idx)
                               int idx1 = lnhash[name];
                               if (idx1 > 0)
                                     symbols[idx][idx1] = Sym(strdup(qPrintable(name)), code, fid, p, b);
-                              else if (idx == 0)
-                                    printf("symbol <%s> not found\n", qPrintable(name));
+                              else { // if (idx == 0)
+//                                    printf("symbol <%s> for symbol set %d not found in %s\n",
+//                                       qPrintable(name), idx, qPrintable(path));
+                                    }
                               }
                         else
                               domError(ee);
