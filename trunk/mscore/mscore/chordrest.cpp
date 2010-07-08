@@ -188,7 +188,8 @@ QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
             pl.append(Prop("dots", durationType().dots()));
       if (_staffMove)
             pl.append(Prop("move", _staffMove));
-      pl.append(Prop("durationType", durationType().name()));
+      if (durationType().isValid())
+            pl.append(Prop("durationType", durationType().name()));
       return pl;
       }
 
@@ -200,7 +201,8 @@ void ChordRest::writeProperties(Xml& xml) const
       {
       QList<Prop> pl = properties(xml);
       xml.prop(pl);
-      if (!durationType().fraction().isValid() || (durationType().fraction() != duration()))
+      if (!durationType().fraction().isValid()
+         || ((durationType().fraction() != duration()) && !duration().isZero()))
             xml.fTag("duration", duration());
       for (ciArticulation ia = articulations.begin(); ia != articulations.end(); ++ia)
             (*ia)->write(xml);

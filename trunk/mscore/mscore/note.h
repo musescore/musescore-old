@@ -226,33 +226,7 @@ class Note : public Element {
       void setOffTimeUserOffset(int v) { _offTimeUserOffset = v;    }
       };
 
-//---------------------------------------------------------
-//   ShadowNote
-//---------------------------------------------------------
-
-/**
- Graphic representation of a shadow note,
- which shows the note insert position in note entry mode.
-*/
-
-class ShadowNote : public Element {
-      int _line;
-      int _headGroup;
-      int _head;
-
-   public:
-      ShadowNote(Score*);
-      virtual ShadowNote* clone() const { return new ShadowNote(*this); }
-      virtual ElementType type() const  { return SHADOW_NOTE; }
-      int line() const                  { return _line;   }
-      void setLine(int n)               { _line = n;      }
-      virtual QRectF bbox() const;
-      virtual void draw(QPainter&, ScoreView*) const;
-      int headGroup() const            { return _headGroup; }
-      void setHeadGroup(int val);
-      void setHead(int val)            { _head = val; }
-      int head() const                 { return _head; }
-      };
+extern Sym* noteHeadSym(bool up, int group, int n);
 
 #endif
 

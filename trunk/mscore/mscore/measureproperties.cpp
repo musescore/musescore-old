@@ -37,8 +37,8 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
 
       actualZ->setValue(m->len().numerator());
       actualN->setValue(m->len().denominator());
-      nominalZ->setValue(m->timesig().numerator());
-      nominalN->setValue(m->timesig().denominator());
+      nominalZ->setNum(m->timesig().numerator());
+      nominalN->setNum(m->timesig().denominator());
 
       irregular->setChecked(m->irregular());
       breakMultiMeasureRest->setChecked(m->getBreakMultiMeasureRest());

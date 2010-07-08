@@ -93,6 +93,15 @@ const int noteHeads[2][HEAD_GROUPS][4] = {
       };
 
 //---------------------------------------------------------
+//   noteHeadSym
+//---------------------------------------------------------
+
+Sym* noteHeadSym(bool up, int group, int n)
+      {
+      return &symbols[0][noteHeads[up][group][n]];
+      }
+
+//---------------------------------------------------------
 //   NoteHead
 //---------------------------------------------------------
 
@@ -787,94 +796,6 @@ void Note::endDrag()
             }
       score()->undoChangePitch(this, npitch, tpc, 0, nLine, _fret);
       score()->select(this, SELECT_SINGLE, 0);
-      }
-
-//---------------------------------------------------------
-//   ShadowNote
-//---------------------------------------------------------
-
-ShadowNote::ShadowNote(Score* s)
-   : Element(s)
-      {
-      _line = 1000;
-      _headGroup = 0;
-      _head      = 2;   // 1/4 note
-      }
-
-void ShadowNote::setHeadGroup(int val)
-      {
-      if (val >= HEAD_GROUPS) {
-            printf("wrong head group %d\n", val);
-            abort();
-            }
-      _headGroup = val;
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void ShadowNote::draw(QPainter& p, ScoreView*) const
-      {
-      if (!visible())
-            return;
-
-      QPointF ap(canvasPos());
-      QRect r(abbox().toRect());
-
-      p.translate(ap);
-      qreal lw = point(score()->styleS(ST_ledgerLineWidth));
-      InputState ps = score()->inputState();
-      int voice;
-      if (ps.drumNote() != -1 && ps.drumset())
-            voice = ps.drumset()->voice(ps.drumNote());
-      else
-            voice = ps.voice();
-
-      QPen pen(preferences.selectColor[voice].light(140));  // was 160
-      pen.setWidthF(lw);
-      p.setPen(pen);
-
-      symbols[score()->symIdx()][noteHeads[0][_headGroup][_head]].draw(p, magS());
-
-      double ms = spatium();
-
-      double x1 = symbols[score()->symIdx()][noteHeads[0][_headGroup][_head]].width(magS())*.5 - ms;
-      double x2 = x1 + 2 * ms;
-
-      ms *= .5;
-      if (_line < 100 && _line > -100) {
-            for (int i = -2; i >= _line; i -= 2) {
-                  double y = ms * (i - _line);
-                  p.drawLine(QLineF(x1, y, x2, y));
-                  }
-            for (int i = 10; i <= _line; i += 2) {
-                  double y = ms * (i - _line);
-                  p.drawLine(QLineF(x1, y, x2, y));
-                  }
-            }
-      p.translate(-ap);
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF ShadowNote::bbox() const
-      {
-      QRectF b = symbols[score()->symIdx()][noteHeads[0][_headGroup][_head]].bbox(magS());
-      double _spatium = spatium();
-      double x  = b.width()/2 - _spatium;
-      double lw = point(score()->styleS(ST_ledgerLineWidth));
-
-      if (_line < 100 && _line > -100) {
-            QRectF r(0, -lw/2.0, 2 * _spatium, lw);
-            for (int i = -2; i >= _line; i -= 2)
-                  b |= r.translated(QPointF(x, _spatium * .5 * (i - _line)));
-            for (int i = 10; i <= _line; i += 2)
-                  b |= r.translated(QPointF(x, _spatium * .5 * (i - _line)));
-            }
-      return b;
       }
 
 //---------------------------------------------------------

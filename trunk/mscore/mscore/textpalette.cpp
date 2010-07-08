@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -28,6 +28,34 @@
 #include "scoreview.h"
 
 extern TextPalette* textPalette;
+
+//---------------------------------------------------------
+//   codeIcon
+//---------------------------------------------------------
+
+static QIcon codeIcon(const QString& s, QFont f)
+      {
+      f.setPixelSize(35);
+      int w = 40;
+      int h = 40;
+
+      QWidget wi;
+
+      QPixmap image(w, h);
+      QColor bg(wi.palette().brush(QPalette::Normal, QPalette::Window).color());
+
+      image.fill(QColor(255, 255, 255, 0));
+      QPainter painter(&image);
+      painter.setRenderHint(QPainter::TextAntialiasing, true);
+      painter.setFont(f);
+
+      QPen pen(wi.palette().brush(QPalette::Normal, QPalette::Text).color());
+
+      painter.setPen(pen);
+      painter.drawText(0, 0, w, h, Qt::AlignCenter, s);
+      painter.end();
+      return QIcon(image);
+      }
 
 //---------------------------------------------------------
 //   textTools
@@ -349,6 +377,26 @@ void TextTools::showKeyboardClicked(bool val)
       }
 
 //---------------------------------------------------------
+//   setupPalette
+//---------------------------------------------------------
+
+static void setupPalette(QFrame* f, QButtonGroup* sg, int offset)
+      {
+      QGridLayout* gl = new QGridLayout;
+      gl->setMargin(5);
+      gl->setSpacing(1);
+      f->setLayout(gl);
+      for (unsigned i = 0; i < 256; ++i) {
+            QToolButton* tb = new QToolButton;
+            tb->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+            tb->setFixedSize(40, 40);
+            tb->setText(QChar(i + offset));
+            gl->addWidget(tb, i / 16, i % 16);
+            sg->addButton(tb, i + offset);
+            }
+      }
+
+//---------------------------------------------------------
 //   TextPalette
 //---------------------------------------------------------
 
@@ -361,35 +409,105 @@ TextPalette::TextPalette(QWidget* parent)
       gl->setMargin(5);
       gl->setSpacing(1);
       symbolBox->setLayout(gl);
-      QButtonGroup* sg = new QButtonGroup(this);
+      sg = new QButtonGroup(this);
 
-      unsigned int buttonIndex = 0;
-      for (unsigned i = 0; pSymbols[i].code != -1; ++i) {
-            if (!pSymbols[i].show)
-                  continue;
-            if (pSymbols[i].code == 0) {    // empty slot?
-                  ++buttonIndex;
-                  continue;
-                  }
-            QToolButton* tb = new QToolButton;
+      musicalSymbols->setChecked(true);
+
+      for (unsigned i = 0; i < 256; ++i) {
+            QPushButton* tb = new QPushButton;
+            buttons[i] = tb;
             tb->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
             tb->setFixedSize(40, 40);
-
-            SymCode sc(pSymbols[i]);
-            if (sc.fontId == -1)
-                  tb->setText(QChar(sc.code));
-            else {
-                  Sym sym("", sc.code, sc.fontId);
-                  QIcon* icon = symIcon(sym, 25, 35, 35);
-                  tb->setIconSize(QSize(35, 35));
-                  tb->setIcon(*icon);
-                  }
-            gl->addWidget(tb, buttonIndex / 16, buttonIndex % 16);
+            gl->addWidget(tb, i / 16, i % 16);
             sg->addButton(tb, i);
-            ++buttonIndex;
             }
+      curPage = 0;
+      populate();
       connect(sg, SIGNAL(buttonClicked(int)), SLOT(symbolClicked(int)));
+      connect(musicalSymbols, SIGNAL(toggled(bool)), SLOT(populate()));
+      connect(codePage, SIGNAL(valueChanged(int)), SLOT(populate()));
       setFocusPolicy(Qt::NoFocus);
+      }
+
+//---------------------------------------------------------
+//   populate
+//---------------------------------------------------------
+
+void TextPalette::populate()
+      {
+      bool musical = musicalSymbols->isChecked();
+
+      QFont f(musical ? "MScore1-test" : "DejaVuSerif");
+      codePage->setEnabled(!musical);
+
+// f.setStyleStrategy(QFont::NoFontMerging);
+      QFontMetrics fm(f);
+      int page = musical ? 0x1d1 : codePage->value();
+
+      int rowOffset = 0;
+      bool pageEmpty = true;
+
+      for (int row = 0; row < 16; ++row) {
+            bool rowEmpty = true;
+            for (int col = 0; col < 16; ++col) {
+                  int idx = (row - rowOffset) * 16 + col;
+                  int code = row * 16 + col + page * 256;
+                  QPushButton* tb = buttons[idx];
+                  //
+                  // Font->inFont(QChar) does only work
+                  // for unicode plane 0, as QChar is only
+                  // 16 bit
+                  //
+                  if ((code & 0xffff0000) || fm.inFont(QChar(code))) {
+                        tb->setFont(f);
+                        rowEmpty = false;
+                        QString ss;
+                        if (code & 0xffff0000) {
+                              ss = QChar(QChar::highSurrogate(code));
+                              ss += QChar(QChar::lowSurrogate(code));
+                              tb->setToolTip(QString("0x%1").arg(code, 5, 16, QLatin1Char('0')));
+                              QIcon icon(codeIcon(ss, f));
+                              tb->setText("");
+                              tb->setIcon(icon);
+                              }
+                        else {
+                              ss = QChar(code);
+                              tb->setToolTip(QString("0x%1").arg(code, 4, 16, QLatin1Char('0')));
+                              tb->setText(ss);
+                              tb->setIcon(QIcon());
+                              }
+                        }
+                  else {
+                        tb->setText("");
+                        tb->setIcon(QIcon());
+                        }
+                  sg->setId(tb, code);
+                  }
+            if (rowEmpty)
+                  ++rowOffset;
+            else
+                  pageEmpty = false;
+            }
+      for (int row = 16-rowOffset; row < 16; ++row) {
+            for (int col = 0; col < 16; ++col) {
+                  int idx = row * 16 + col;
+                  QPushButton* tb = buttons[idx];
+                  tb->setText("");
+                  tb->setIcon(QIcon());
+                  sg->setId(tb, -1);
+                  tb->setToolTip(QString(""));
+                  }
+            }
+      if (pageEmpty) {
+            int diff = 1;
+            if (curPage > page)
+                  diff = -1;
+            curPage = page;
+            page += diff;
+            codePage->setValue(page);
+            }
+      else
+            curPage = page;
       }
 
 //---------------------------------------------------------
@@ -398,7 +516,9 @@ TextPalette::TextPalette(QWidget* parent)
 
 void TextPalette::symbolClicked(int n)
       {
-      _textElement->addSymbol(pSymbols[n]);
+      if (n == -1)
+            return;
+      _textElement->addChar(n);
       mscore->activateWindow();
       }
 

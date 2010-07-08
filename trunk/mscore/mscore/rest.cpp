@@ -313,55 +313,50 @@ void Rest::remove(Element* e)
       }
 
 //---------------------------------------------------------
+//   getSymbol
+//---------------------------------------------------------
+
+int Rest::getSymbol(Duration::DurationType type, int line, int* yoffset)
+      {
+      *yoffset = 2;
+      switch(type) {
+            case Duration::V_LONG:
+                  return longarestSym;
+            case Duration::V_BREVE:
+                  return breverestSym;
+            case Duration::V_MEASURE:
+            case Duration::V_WHOLE:
+                  *yoffset = 1;
+                  return (line <= -2 || line >= 4) ? outsidewholerestSym : wholerestSym;
+            case Duration::V_HALF:
+                  return (line <= -3 || line >= 3) ? outsidehalfrestSym : halfrestSym;
+            case Duration::V_EIGHT:
+                  return rest8Sym;
+            case Duration::V_16TH:
+                  return rest16Sym;
+            case Duration::V_32ND:
+                  return rest32Sym;
+            case Duration::V_64TH:
+                  return rest64Sym;
+            case Duration::V_256TH:
+printf("Rest: no symbol for 1/256\n");
+            case Duration::V_128TH:
+                  return rest128Sym;
+            default:
+                  return rest4Sym;
+            }
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void Rest::layout()
       {
-      double _spatium = spatium();
-      int line = lrint(userOff().y() / _spatium);
-
-      setYoff(2.0);
-      switch(durationType().type()) {
-            case Duration::V_LONG:
-                  _sym = longarestSym;
-                  break;
-            case Duration::V_BREVE:
-                  _sym = breverestSym;
-                  break;
-            case Duration::V_MEASURE:
-            case Duration::V_WHOLE:
-                  _sym = (line <= -2 || line >= 4) ? outsidewholerestSym : wholerestSym;
-                  setYoff(1.0);
-                  break;
-            case Duration::V_HALF:
-                  _sym = (line <= -3 || line >= 3) ? outsidehalfrestSym : halfrestSym;
-                  break;
-            case Duration::V_INVALID:
-            case Duration::V_QUARTER:
-            case Duration::V_ZERO:
-                  _sym = rest4Sym;
-                  break;
-            case Duration::V_EIGHT:
-                  _sym = rest8Sym;
-                  break;
-            case Duration::V_16TH:
-                  _sym = rest16Sym;
-                  break;
-            case Duration::V_32ND:
-                  _sym = rest32Sym;
-                  break;
-            case Duration::V_64TH:
-                  _sym = rest64Sym;
-                  break;
-            case Duration::V_128TH:
-                  _sym = rest128Sym;
-                  break;
-            case Duration::V_256TH:
-printf("Rest: no symbol for 1/256\n");
-                  _sym = rest128Sym;  // TODO
-                  break;
-            }
+      int line = lrint(userOff().y() / spatium());
+      int yo;
+      _sym = getSymbol(durationType().type(), line, &yo);
+      setYoff(double(yo));
       layoutArticulations();
       Element::layout();
       }

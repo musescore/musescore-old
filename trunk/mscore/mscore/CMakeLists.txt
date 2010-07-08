@@ -190,6 +190,7 @@ add_executable ( ${ExecutableName}
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
       importove.cpp ove.cpp interval.cpp check.cpp tablature.cpp
       fret.cpp stafftype.cpp staffstate.cpp spanner.cpp fingering.cpp
+      shadownote.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

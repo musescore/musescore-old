@@ -62,6 +62,8 @@
 #include "harmony.h"
 #include "navigate.h"
 #include "tablature.h"
+#include "shadownote.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   stateNames
@@ -1207,7 +1209,6 @@ void ScoreView::moveCursor()
       if (track == -1)
             track = 0;
 
-//      double d = cursor->spatium() * .5;
       cursor->setTrack(track);
       cursor->setTick(_score->inputPos());
 
@@ -1277,7 +1278,7 @@ void ScoreView::setShadowNote(const QPointF& p)
       shadowNote->setVisible(true);
       Staff* staff      = score()->staff(pos.staffIdx);
       shadowNote->setMag(staff->mag());
-      Instrument* instr       = staff->part()->instr();
+      Instrument* instr = staff->part()->instr();
       int noteheadGroup = 0;
       int line          = pos.line;
       int noteHead      = score()->inputState().duration().headType();
@@ -1291,8 +1292,15 @@ void ScoreView::setShadowNote(const QPointF& p)
                   }
             }
       shadowNote->setLine(line);
-      shadowNote->setHeadGroup(noteheadGroup);
-      shadowNote->setHead(noteHead);
+      Sym* s;
+      if (score()->inputState().rest) {
+            int yo;
+            int id = Rest::getSymbol(score()->inputState().duration().type(), 0, &yo);
+            s = &symbols[0][id];
+            }
+      else
+            s = noteHeadSym(true, noteheadGroup, noteHead);
+      shadowNote->setSym(s);
       shadowNote->setPos(pos.pos);
       }
 
