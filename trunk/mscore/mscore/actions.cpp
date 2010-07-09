@@ -1620,6 +1620,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Add Rehearsal Mark")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "picture",
+         QT_TRANSLATE_NOOP("action","Add Picture"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Picture"),
+         QT_TRANSLATE_NOOP("action","Add Picture")
+         ),
+      Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "play",
          QT_TRANSLATE_NOOP("action","Player play"),

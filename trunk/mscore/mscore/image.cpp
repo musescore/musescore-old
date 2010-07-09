@@ -362,3 +362,24 @@ void ImageProperties::clicked(QAbstractButton* b)
             }
       }
 
+//---------------------------------------------------------
+//   addImage
+//---------------------------------------------------------
+
+void Score::addImage(Element*)
+      {
+      QString fn = QFileDialog::getOpenFileName(
+         mscore,
+         tr("MuseScore: InsertImage"),
+         "",            // lastOpenPath,
+         tr("All Supported Files (*.svg *.jpg *.png *.xpm);;"
+            "Scalable vector graphics (*.svg);;"
+            "JPEG (*.jpg);;"
+            "PNG (*.png);;"
+            "XPM (*.xpm);;"
+            "All Files (*)"
+            )
+         );
+      if (fn.isEmpty())
+            return;
+      }

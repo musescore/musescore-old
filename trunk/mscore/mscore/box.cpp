@@ -377,9 +377,12 @@ Element* HBox::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
 
 bool HBox::genPropertyMenu(QMenu* popup) const
       {
-      QMenu* textMenu = popup->addMenu(tr("Add Text"));
+      QMenu* textMenu = popup->addMenu(tr("Add"));
       QAction* a = getAction("frame-text");
       textMenu->addAction(a);
+      a = getAction("picture");
+      textMenu->addAction(a);
+
       a = popup->addAction(tr("HBox Properties..."));
       a->setData("props");
       return true;
@@ -403,6 +406,9 @@ void HBox::propertyAction(ScoreView* viewer, const QString& cmd)
             score()->select(s, SELECT_SINGLE, 0);
             viewer->startEdit(s);
             score()->setLayoutAll(true);
+            }
+      else if (cmd == "picture") {
+            score()->addImage(this);
             }
       }
 
