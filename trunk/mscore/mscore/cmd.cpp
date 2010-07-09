@@ -2055,7 +2055,7 @@ void Score::cmd(const QAction* a)
                       setLayoutAll(false);
                   }
             else
-                  printf("unknown cmd <%s>\n", qPrintable(cmd));
+                  printf("1unknown cmd <%s>\n", qPrintable(cmd));
 
             endCmd();
             }

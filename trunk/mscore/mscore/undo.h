@@ -67,6 +67,7 @@ class KeySig;
 class StaffType;
 class TimeSig;
 class Clef;
+class Image;
 
 //---------------------------------------------------------
 //   UndoCommand
@@ -1217,11 +1218,10 @@ class InsertMeasures : public UndoCommand {
       Measure* lm;
 
    public:
-      InsertMeasures(Measure*, Measure*);
+      InsertMeasures(Measure* m1, Measure* m2) : fm(m1), lm(m2) {}
       virtual void undo();
       virtual void redo();
       };
-#endif
 
 //---------------------------------------------------------
 //   ChangeClef
@@ -1234,8 +1234,28 @@ class ChangeClef : public UndoCommand {
       void flip();
 
    public:
-      ChangeClef(Clef*, bool sc);
+      ChangeClef(Clef* _clef, bool sc) : clef(_clef), showCourtesy(sc) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };
+
+//---------------------------------------------------------
+//   ChangeImage
+//---------------------------------------------------------
+
+class ChangeImage : public UndoCommand {
+      Image* image;
+      bool lockAspectRatio;
+      bool autoScale;
+
+      void flip();
+
+   public:
+      ChangeImage(Image* i, bool l, bool a) : image(i), lockAspectRatio(l), autoScale(a) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+#endif
+
 

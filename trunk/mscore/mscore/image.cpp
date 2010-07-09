@@ -23,6 +23,7 @@
 #include "mscore.h"
 #include "preferences.h"
 #include "score.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   Image
@@ -34,6 +35,7 @@ Image::Image(Score* s)
       _ip              = 0;
       _dirty           = false;
       _lockAspectRatio = true;
+      _autoScale       = false;
       }
 
 //---------------------------------------------------------
@@ -77,9 +79,12 @@ void Image::write(Xml& xml) const
       xml.stag("Image");
       Element::writeProperties(xml);
       xml.tag("path", path());
-      xml.tag("size", sz / DPMM);
+      if (!_autoScale)
+            xml.tag("size", sz / DPMM);
       if (!_lockAspectRatio)
             xml.tag("lockAspectRatio", _lockAspectRatio);
+      if (_autoScale)
+            xml.tag("autoScale", _autoScale);
       xml.etag();
       }
 
@@ -100,6 +105,8 @@ void Image::read(QDomElement e)
                   }
             else if (tag == "lockAspectRatio")
                   _lockAspectRatio = e.text().toInt();
+            else if (tag == "autoScale")
+                  _autoScale = e.text().toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -326,6 +333,11 @@ void Image::propertyAction(ScoreView* viewer, const QString& s)
             ImageProperties vp(this);
             int rv = vp.exec();
             if (rv) {
+                  if (vp.getLockAspectRatio() != lockAspectRatio()
+                     || vp.getAutoScale() != autoScale()) {
+                        score()->undo()->push(new ChangeImage(this,
+                           vp.getLockAspectRatio(), vp.getAutoScale()));
+                        }
                   }
             }
       else
@@ -342,31 +354,14 @@ ImageProperties::ImageProperties(Image* i, QWidget* parent)
       img = i;
       setupUi(this);
       lockAspectRatio->setChecked(img->lockAspectRatio());
-      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(clicked(QAbstractButton*)));
-      }
-
-//---------------------------------------------------------
-//   clicked
-//---------------------------------------------------------
-
-void ImageProperties::clicked(QAbstractButton* b)
-      {
-      switch (buttonBox->buttonRole(b)) {
-            case QDialogButtonBox::AcceptRole:
-            case QDialogButtonBox::ApplyRole:
-                  if (img->lockAspectRatio() != lockAspectRatio->isChecked())
-                        img->setLockAspectRatio(lockAspectRatio->isChecked());
-                  break;
-            default:
-                  break;
-            }
+      autoScale->setChecked(img->autoScale());
       }
 
 //---------------------------------------------------------
 //   addImage
 //---------------------------------------------------------
 
-void Score::addImage(Element*)
+void Score::addImage(Element* e)
       {
       QString fn = QFileDialog::getOpenFileName(
          mscore,
@@ -382,4 +377,47 @@ void Score::addImage(Element*)
          );
       if (fn.isEmpty())
             return;
+
+      QFileInfo fi(fn);
+      Image* s = 0;
+      QString suffix(fi.suffix().toLower());
+
+      if (suffix == "svg")
+            s = new SvgImage(this);
+      else if (suffix == "jpg" || suffix == "png" || suffix == "xpm")
+            s = new RasterImage(this);
+      else
+            return;
+      s->setPath(fn);
+      s->setSize(QSizeF(200, 200));
+      s->setParent(e);
+      undoAddElement(s);
       }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void Image::layout()
+      {
+      if (!autoScale() || !parent() || (parent()->type() != HBOX && parent()->type() != VBOX))
+            return;
+
+      if (_lockAspectRatio) {
+            QSizeF size(imageSize());
+            double ratio = size.width() / size.height();
+            double w = parent()->width();
+            double h = parent()->height();
+            if ((w / h) < ratio) {
+                  sz.setWidth(w);
+                  sz.setHeight(w / ratio);
+                  }
+            else {
+                  sz.setHeight(h);
+                  sz.setWidth(h * ratio);
+                  }
+            }
+      else
+            sz = parent()->bbox().size();
+      }
+

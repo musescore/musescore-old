@@ -39,6 +39,7 @@ class Image : public BSymbol {
       mutable QPixmap buffer;        ///< cached rendering
       QSizeF sz;
       bool _lockAspectRatio;
+      bool _autoScale;              ///< fill parent frame
       mutable bool _dirty;
 
       virtual bool isEditable() { return true; }
@@ -47,6 +48,7 @@ class Image : public BSymbol {
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
+      virtual QSizeF imageSize() const = 0;
 
    public:
       Image(Score*);
@@ -54,11 +56,15 @@ class Image : public BSymbol {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void setPath(const QString& s);
+      virtual void layout();
+
       QString path() const;
       virtual QRectF bbox() const;
       void setSize(QSizeF s)          { sz = s; }
       bool lockAspectRatio() const    { return _lockAspectRatio; }
       void setLockAspectRatio(bool v) { _lockAspectRatio = v; }
+      bool autoScale() const          { return _autoScale; }
+      void setAutoScale(bool v)       { _autoScale = v; }
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
@@ -79,6 +85,7 @@ class RasterImage : public Image {
       virtual RasterImage* clone() const;
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void setPath(const QString& s);
+      virtual QSizeF imageSize() const { return doc.size(); }
       };
 
 //---------------------------------------------------------
@@ -94,6 +101,7 @@ class SvgImage : public Image {
       virtual SvgImage* clone() const;
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void setPath(const QString& s);
+      virtual QSizeF imageSize() const { return doc->defaultSize(); }
       };
 
 //---------------------------------------------------------
@@ -105,11 +113,10 @@ class ImageProperties : public QDialog, public Ui::ImageProperties {
 
       Image* img;
 
-   private slots:
-      void clicked(QAbstractButton*);
-
    public:
       ImageProperties(Image*, QWidget* parent = 0);
+      bool getLockAspectRatio() const { return lockAspectRatio->isChecked();}
+      bool getAutoScale() const       { return autoScale->isChecked(); }
       };
 
 #endif

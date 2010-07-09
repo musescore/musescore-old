@@ -112,9 +112,6 @@ class VBox : public Box {
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
-
-      virtual void add(Element*);
-      virtual void remove(Element*);
       };
 
 #endif
