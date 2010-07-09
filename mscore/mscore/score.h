@@ -808,6 +808,7 @@ class Score : public QObject {
       void setStaffTypeList(const QList<StaffType*>& tl) { _staffTypes = tl;   }
       void addLayoutFlag(int val)                        { layoutFlags |= val; }
       int symIdx() const                                 { return _symIdx; }
+      void addImage(Element*);
       };
 
 extern Score* gscore;
