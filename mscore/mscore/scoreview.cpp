@@ -1888,9 +1888,9 @@ void ScoreView::dropEvent(QDropEvent* event)
                         delete dragElement;
                         break;
                   }
-            score()->endCmd();
             dragElement = 0;
             setDropTarget(0); // this also resets dropRectangle and dropAnchor
+            score()->endCmd();
             return;
             }
 
