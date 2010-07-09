@@ -411,7 +411,7 @@ int Measure::findAccidental(Note* note) const
       {
       char tversatz[75];      // list of already set accidentals for this measure
       KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
-      initLineList(tversatz, key.accidentalType);
+      initLineList(tversatz, key.accidentalType());
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != SegChordRest) && (segment->subtype() != SegGrace))
@@ -481,7 +481,7 @@ int Measure::findAccidental2(Note* note) const
       {
       char tversatz[75];      // list of already set accidentals for this measure
       KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
-      initLineList(tversatz, key.accidentalType);
+      initLineList(tversatz, key.accidentalType());
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != SegChordRest) && (segment->subtype() != SegGrace))
@@ -1626,11 +1626,11 @@ printf("drop staffList\n");
                   KeySig* ks    = static_cast<KeySig*>(e);
                   KeySigEvent k = ks->keySigEvent();
                   //add custom key to score if not exist
-                  if (k.custom) {
+                  if (k.custom()) {
                         int customIdx = score()->customKeySigIdx(ks);
                         if (customIdx == -1) {
                               customIdx = score()->addCustomKeySig(ks);
-                              k.customType = customIdx;
+                              k.setCustomType(customIdx);
                               }
                         else
                               delete ks;

@@ -78,7 +78,7 @@ QPointF KeySig::canvasPos() const
 void KeySig::setCustom(const QList<KeySym*>& symbols)
       {
       KeySigEvent k = subtype();
-      k.custom = true;
+      k.setCustom(true);
       setSubtype(k);
       keySymbols = symbols;
       }
@@ -123,8 +123,8 @@ void KeySig::layout()
             yoff = clefTable[clef].yOffset;
             }
 
-      char t1  = keySigEvent().accidentalType;
-      char t2  = keySigEvent().naturalType;
+      char t1  = keySigEvent().accidentalType();
+      char t2  = keySigEvent().naturalType();
       qreal xo = 0.0;
 
       int accidentals = 0, naturals = 0;
@@ -225,7 +225,7 @@ Element* KeySig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
             KeySig* ks    = static_cast<KeySig*>(e);
             KeySigEvent k = ks->keySigEvent();
 // printf("drop ");k.print(); printf("\n");
-            if (k.custom) {
+            if (k.custom()) {
                   int customIdx = score()->customKeySigIdx(ks);
                   if (customIdx == -1)
                         customIdx = score()->addCustomKeySig(ks);
@@ -250,10 +250,8 @@ Element* KeySig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
 void KeySig::setSig(int old, int newSig)
       {
       KeySigEvent ks;
-      ks.naturalType = old;
-      ks.accidentalType = newSig;
-      ks.invalid = false;
-      ks.custom = false;
+      ks.setNaturalType(old);
+      ks.setAccidentalType(newSig);
       setSubtype(ks);
       }
 
@@ -264,7 +262,7 @@ void KeySig::setSig(int old, int newSig)
 void KeySig::setOldSig(int old)
       {
       KeySigEvent ks(subtype());
-      ks.naturalType = old;
+      ks.setNaturalType(old);
       setSubtype(ks);
       }
 
@@ -357,8 +355,8 @@ void KeySig::changeType(KeySigEvent t)
       {
       if (keySigEvent() == t)
             return;
-      if (t.custom) {
-            KeySig* ks = _score->customKeySig(t.customType);
+      if (t.custom()) {
+            KeySig* ks = _score->customKeySig(t.customType());
             foreach(KeySym* k, keySymbols)
                   delete k;
             keySymbols.clear();

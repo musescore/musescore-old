@@ -3788,7 +3788,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	  out << "%staffkeysig\n";
 	  indent();
 	  //done in first measure anyway: ??
-	  writeKeySig(staff->keymap()->key(0).accidentalType);
+	  writeKeySig(staff->keymap()->key(0).accidentalType());
 // 	  score->sigmap->timesig(0, z1, timedenom);
 // 	  out << "\\time " << z1<< "/" << timedenom << " \n";
 	}
@@ -3917,9 +3917,9 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 //
 		 //		 if (ci != kl->end())
 		 //     {
-			 cout << "barkeysig: " << key.accidentalType << " measureno: " << measurenumber << "\n";
+			 cout << "barkeysig: " << key.accidentalType() << " measureno: " << measurenumber << "\n";
 			 indent();
-			 writeKeySig(key.accidentalType);
+			 writeKeySig(key.accidentalType());
 		 //    }
 
 		 indent();

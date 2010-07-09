@@ -3454,7 +3454,7 @@ foreach(Element* el, *(score->gel())) {
                         KeySigEvent key = kl->key(ti);
                         ciKeyList ci = kl->find(ti);
                         if (ci != kl->end()) {
-                              keysig(key.accidentalType);
+                              keysig(key.accidentalType());
                               }
                         }
                   else if (tick == 0)

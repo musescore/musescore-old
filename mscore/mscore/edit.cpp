@@ -558,7 +558,7 @@ void Score::putNote(const QPointF& pos, bool replace)
       Staff* st               = staff(staffIdx);
       KeySigEvent key         = st->keymap()->key(tick);
       int clef                = st->clef(tick);
-      int pitch               = line2pitch(line, clef, key.accidentalType);
+      int pitch               = line2pitch(line, clef, key.accidentalType());
       Part* instr             = st->part();
       _is.track               = staffIdx * VOICES + (_is.track % VOICES);
       _is.pitch               = pitch;

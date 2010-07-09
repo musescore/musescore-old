@@ -466,7 +466,7 @@ int computeWindow(const QList<Note*>& notes, int start, int end)
       while (i < end) {
             pitch[k] = notes[i]->pitch() % 12;
             int tick = notes[i]->chord()->tick();
-            key[k]   = notes[i]->staff()->keymap()->key(tick).accidentalType + 7;
+            key[k]   = notes[i]->staff()->keymap()->key(tick).accidentalType() + 7;
             if (key[k] < 0 || key[k] > 14) {
                   printf("illegal key at tick %d: %d, window %d-%d\n",
                      tick, key[k] - 7, start, end);
