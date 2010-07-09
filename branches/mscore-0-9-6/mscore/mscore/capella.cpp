@@ -1433,7 +1433,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               }
                         s->add(chord);
                         int clef = staff(staffIdx)->clef(tick);
-                        int key  = staff(staffIdx)->key(tick).accidentalType;
+                        int key  = staff(staffIdx)->key(tick).accidentalType();
                         int off;
                         switch(clef) {
                               case CLEF_F:    off = -14; break;
@@ -1516,7 +1516,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         {
                         CapKey* o = static_cast<CapKey*>(no);
                         // printf("%d:%d <Key> %d\n", tick, staffIdx, o->signature);
-                        int key = staff(staffIdx)->key(tick).accidentalType;
+                        int key = staff(staffIdx)->key(tick).accidentalType();
                         if (key != o->signature) {
                               staff(staffIdx)->setKey(tick, o->signature);
                               KeySig* ks = new KeySig(this);

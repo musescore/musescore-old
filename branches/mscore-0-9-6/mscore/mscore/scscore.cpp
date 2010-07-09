@@ -382,14 +382,14 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                             Staff* st = score->staff(0);
                             KeyList* kl = st->keymap();
                             KeySigEvent key = kl->key(0);
-                            if(key.custom){
+                            if(key.custom()){
                                  QString s = "undefined";
                                  return qScriptValueFromValue(context->engine(), s);
                                  }
-                            result = key.accidentalType;
+                            result = key.accidentalType();
                             int tr =  st->part()->transpose().chromatic;
                             if (tr){
-                                result = transposeKey(key.accidentalType, tr);
+                                result = transposeKey(key.accidentalType(), tr);
                                 }
                             }
                         return qScriptValueFromValue(context->engine(), result);

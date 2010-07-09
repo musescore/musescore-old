@@ -236,7 +236,7 @@ void Note::setPitch(int a, int b)
 void Note::setTpcFromPitch()
       {
       KeySigEvent key = (staff() && chord()) ? staff()->key(chord()->tick()) : KeySigEvent();
-      _tpc    = pitch2tpc(_pitch, key.accidentalType);
+      _tpc    = pitch2tpc(_pitch, key.accidentalType());
       }
 
 //---------------------------------------------------------
@@ -756,7 +756,7 @@ void Note::endDrag()
       Staff* staff = score()->staff(staffIdx);
       int tick     = chord()->tick();
       int clef     = staff->clef(tick);
-      int key      = staff->key(tick).accidentalType;
+      int key      = staff->key(tick).accidentalType();
       int npitch   = line2pitch(_line, clef, key);
       score()->undoChangePitch(this, npitch, pitch2tpc(npitch, key), 0);
       score()->select(this, SELECT_SINGLE, 0);

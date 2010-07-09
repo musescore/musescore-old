@@ -2128,8 +2128,8 @@ KeySig* Score::keySigFactory(KeySigEvent e)
       KeySig* ks;
       if (!e.isValid())
             return 0;
-      if (e.custom) {
-            ks = new KeySig(*customKeysigs[e.customType]);
+      if (e.custom()) {
+            ks = new KeySig(*customKeysigs[e.customType()]);
             }
       else {
             ks = new KeySig(this);

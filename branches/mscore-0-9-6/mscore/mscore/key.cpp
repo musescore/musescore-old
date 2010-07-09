@@ -30,7 +30,7 @@
 KeySigEvent::KeySigEvent()
       {
       subtype = 0;
-      invalid = true;
+      _invalid = true;
       }
 
 KeySigEvent::KeySigEvent(int v)
@@ -39,15 +39,157 @@ KeySigEvent::KeySigEvent(int v)
       }
 
 //---------------------------------------------------------
+//   accidentalType
+//---------------------------------------------------------
+
+int KeySigEvent::accidentalType()  const
+      {
+#ifdef Q_WS_MAC
+      return QSysInfo::ByteOrder == QSysInfo::BigEndian ? _accidentalTypeR : _accidentalType;
+#else
+      return _accidentalType;
+#endif
+      }
+
+//---------------------------------------------------------
+//   naturalType
+//---------------------------------------------------------
+
+int KeySigEvent::naturalType() const
+      {
+#ifdef Q_WS_MAC
+      return QSysInfo::ByteOrder == QSysInfo::BigEndian ? _naturalTypeR : _naturalType;
+#else
+      return _naturalType;
+#endif
+      }
+
+//---------------------------------------------------------
+//   customType
+//---------------------------------------------------------
+
+unsigned KeySigEvent::customType() const
+      {
+#ifdef Q_WS_MAC
+      return QSysInfo::ByteOrder == QSysInfo::BigEndian ? _customTypeR : _customType;
+#else
+      return _customType;
+#endif
+      }
+
+//---------------------------------------------------------
+//   custom
+//---------------------------------------------------------
+
+bool KeySigEvent::custom() const
+      {
+#ifdef Q_WS_MAC
+      return QSysInfo::ByteOrder == QSysInfo::BigEndian ? _customR : _custom;
+#else
+      return _custom;
+#endif
+      }
+
+//---------------------------------------------------------
+//   isValid
+//---------------------------------------------------------
+
+bool KeySigEvent::isValid() const
+      {
+#ifdef Q_WS_MAC
+      return QSysInfo::ByteOrder == QSysInfo::BigEndian ? !_invalidR : !_invalid;
+#else
+      return !_invalid;
+#endif
+      }
+
+
+  
+//---------------------------------------------------------
 //   setCustomType
 //---------------------------------------------------------
 
 void KeySigEvent::setCustomType(int v)
       {
-      accidentalType = 0;
-      customType     = v;
-      custom         = true;
-      invalid        = false;
+#ifdef Q_WS_MAC
+      if(QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            _accidentalTypeR = 0;
+            _customTypeR     = v;
+            _customR         = true;
+            _invalidR        = false;
+            }
+      else {
+            _accidentalType = 0;
+            _customType     = v;
+            _custom         = true;
+            _invalid        = false;
+            }
+#else
+      _accidentalType = 0;
+      _customType     = v;
+      _custom         = true;
+      _invalid        = false;
+#endif
+      }
+
+//---------------------------------------------------------
+//   setAccidentalType
+//---------------------------------------------------------
+
+void KeySigEvent::setAccidentalType(int v)
+      {
+#ifdef Q_WS_MAC
+      if(QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            _accidentalTypeR = v;
+            _customR         = false;
+            _invalidR        = false;
+            }
+      else {
+            _accidentalType = v;
+            _custom         = false;
+            _invalid        = false;
+            }
+#else
+      _accidentalType = v;
+      _custom         = false;
+      _invalid        = false;
+#endif
+      }
+
+//---------------------------------------------------------
+//   setNaturalType
+//---------------------------------------------------------
+
+void KeySigEvent::setNaturalType(int v)
+      {
+#ifdef Q_WS_MAC
+      if(QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            _naturalTypeR = v;
+            }
+      else {
+            _naturalType = v;
+            }
+#else
+      _naturalType = v;
+#endif
+      }
+      
+//---------------------------------------------------------
+//   setCustom
+//---------------------------------------------------------
+
+void KeySigEvent::setCustom(bool v)
+      {
+#ifdef Q_WS_MAC
+      if(QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            _customR = v;
+            }
+      else {
+            _custom = v;
+            }
+#else
+      _custom = v;
+#endif
       }
 
 //---------------------------------------------------------
@@ -57,25 +199,37 @@ void KeySigEvent::setCustomType(int v)
 void KeySigEvent::print() const
       {
       printf("<KeySigEvent: ");
-      if (invalid)
+#ifdef Q_WS_MAC
+      if(QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            if (_invalidR)
+                  printf("invalid>");
+            else {
+                  if (_customR)
+                        printf("nat %d custom %d>", _naturalTypeR, _customTypeR);
+                  else
+                        printf("nat %d accidental %d>", _naturalTypeR, _accidentalTypeR);
+                  }
+            }
+      else {
+            if (_invalid)
+                  printf("invalid>");
+            else {
+                  if (_custom)
+                        printf("nat %d custom %d>", _naturalType, _customType);
+                  else
+                        printf("nat %d accidental %d>", _naturalType, _accidentalType);
+                  }
+            }
+#else
+      if (_invalid)
             printf("invalid>");
       else {
-            if (custom)
-                  printf("nat %d custom %d>", naturalType, customType);
+            if (_custom)
+                  printf("nat %d custom %d>",_naturalType, _customType);
             else
-                  printf("nat %d accidental %d>", naturalType, accidentalType);
+                  printf("nat %d accidental %d>", _naturalType, _accidentalType);
             }
-      }
-
-//---------------------------------------------------------
-//   setAccidentalType
-//---------------------------------------------------------
-
-void KeySigEvent::setAccidentalType(int v)
-      {
-      accidentalType = v;
-      custom         = false;
-      invalid        = false;
+#endif
       }
 
 //---------------------------------------------------------
@@ -84,12 +238,32 @@ void KeySigEvent::setAccidentalType(int v)
 
 bool KeySigEvent::operator==(const KeySigEvent& e) const
       {
-      if (e.invalid || invalid || (e.custom != custom))
+#ifdef Q_WS_MAC
+      if(QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            if (e._invalidR || _invalidR || (e._customR != _customR))
+                  return false;
+            if (_customR)
+                  return e._customTypeR== _customTypeR;
+            else
+                  return e._accidentalTypeR == _accidentalTypeR;
+            }
+      else {
+            if (e._invalid || _invalid || (e._custom != _custom))
+                  return false;
+            if (_custom)
+                  return e._customType == _customType;
+            else
+                  return e._accidentalType == _accidentalType;
+            }
+#else
+      if (e._invalid || _invalid || (e._custom != _custom))
             return false;
-      if (custom)
-            return e.customType == customType;
+      if (_custom)
+            return e._customType == _customType;
       else
-            return e.accidentalType == accidentalType;
+            return e._accidentalType == _accidentalType;
+#endif
+
       }
 
 //---------------------------------------------------------
@@ -98,12 +272,32 @@ bool KeySigEvent::operator==(const KeySigEvent& e) const
 
 bool KeySigEvent::operator!=(const KeySigEvent& e) const
       {
-      if (e.invalid || invalid || (e.custom != custom))
+#ifdef Q_WS_MAC
+      if(QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            if (e._invalidR || _invalidR || (e._customR != _customR))
+                  return true;
+            if (_customR)
+                  return e._customTypeR != _customTypeR;
+            else
+                  return e._accidentalTypeR != _accidentalTypeR;
+            }
+      else {
+            if (e._invalid || _invalid || (e._custom != _custom))
+                  return true;
+            if (_custom)
+                  return e._customType != _customType;
+            else
+                  return e._accidentalType != _accidentalType;
+            }
+#else
+      if (e._invalid || _invalid || (e._custom != _custom))
             return true;
-      if (custom)
-            return e.customType != customType;
+      if (_custom)
+            return e._customType != _customType;
       else
-            return e.accidentalType != accidentalType;
+            return e._accidentalType != _accidentalType;
+#endif      
+
       }
 
 //---------------------------------------------------------
@@ -129,10 +323,10 @@ void KeyList::write(Xml& xml, const char* name) const
       {
       xml.stag(name);
       for (ciKeyList i = begin(); i != end(); ++i) {
-            if (i->second.custom)
-                  xml.tagE("key tick=\"%d\" custom=\"%d\"", i->first, i->second.customType);
+            if (i->second.custom())
+                  xml.tagE("key tick=\"%d\" custom=\"%d\"", i->first, i->second.customType());
             else
-                  xml.tagE("key tick=\"%d\" idx=\"%d\"", i->first, i->second.accidentalType);
+                  xml.tagE("key tick=\"%d\" idx=\"%d\"", i->first, i->second.accidentalType());
             }
       xml.etag();
       }

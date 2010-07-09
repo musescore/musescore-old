@@ -437,7 +437,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
             if (!preferences.alternateNoteEntryMethod)
                   key = _score->staff(is.track / VOICES)->keymap()->key(is.tick());
             int octave = is.pitch / 12;
-            pitch      = pitchKeyAdjust(note, key.accidentalType);
+            pitch      = pitchKeyAdjust(note, key.accidentalType());
             int delta  = is.pitch - (octave*12 + pitch);
             if (delta > 6)
                   is.pitch = (octave+1)*12 + pitch;
@@ -603,7 +603,7 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
             int tick   = chord->tick();
             Staff* estaff = staff(on->staffIdx() + chord->staffMove());
             int clef   = estaff->clef(tick);
-            int key    = estaff->key(tick).accidentalType;
+            int key    = estaff->key(tick).accidentalType();
             int npitch = line2pitch(line, clef, key);
             int ntpc   = pitch2tpc(npitch, key);
             note->setPitch(npitch, ntpc);

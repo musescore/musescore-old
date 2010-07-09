@@ -692,9 +692,9 @@ void MuseScore::newFile()
                               KeySigEvent nKey = ks;
                               if (part->transpose().chromatic && !newWizard->useTemplate()) {
                                     int diff = -part->transpose().chromatic;
-                                    nKey.accidentalType = transposeKey(nKey.accidentalType, diff);
+                                    nKey.setAccidentalType(transposeKey(nKey.accidentalType(), diff));
                                     }
-                              if (nKey.accidentalType) {
+                              if (nKey.accidentalType()) {
                                     (*(staff->keymap()))[0] = nKey;
                                     KeySig* keysig = new KeySig(score);
                                     keysig->setTrack(staffIdx * VOICES);

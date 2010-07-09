@@ -395,7 +395,7 @@ void Score::layoutStage1()
                   KeySigEvent key = staff(staffIdx)->keymap()->key(m->tick());
 
                   char tversatz[75];      // list of already set accidentals for this measure
-                  initLineList(tversatz, key.accidentalType);
+                  initLineList(tversatz, key.accidentalType());
 
                   m->setBreakMMRest(false);
                   if (styleB(ST_createMultiMeasureRests)) {
@@ -439,7 +439,7 @@ void Score::layoutStage1()
                               m->layoutChords0(segment, staffIdx * VOICES, tversatz);
                         if (e && e->type() == KEYSIG) {
                               KeySigEvent oval = staff(staffIdx)->keymap()->key(e->tick() - 1);
-                              static_cast<KeySig*>(e)->setOldSig(oval.accidentalType);
+                              static_cast<KeySig*>(e)->setOldSig(oval.accidentalType());
                               }
                         }
                   }
@@ -1312,7 +1312,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                     int track = staffIdx * VOICES;
                                     if (!s->element(track)) {
                                           KeySig* ks = new KeySig(this);
-                                          ks->setSig(key1.accidentalType, key2.accidentalType);
+                                          ks->setSig(key1.accidentalType(), key2.accidentalType());
                                           ks->setTrack(track);
                                           ks->setGenerated(true);
                                           ks->setMag(staff->mag());
