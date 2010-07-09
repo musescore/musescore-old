@@ -61,6 +61,7 @@
 #include "keyedit.h"
 #include "harmonyedit.h"
 #include "navigator.h"
+#include "chord.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -2288,7 +2289,7 @@ void MuseScore::cmd(QAction* a)
                   cv->cmd(a);
                   }
             else
-                  printf("unknown cmd <%s>\n", qPrintable(cmd));
+                  printf("2:unknown cmd <%s>\n", qPrintable(cmd));
             }
       if (inspector)
             inspector->reloadClicked();
@@ -2565,9 +2566,21 @@ void MuseScore::readSettings()
 
 void MuseScore::play(Element* e) const
       {
-      if (mscore->playEnabled() && e->type() == NOTE) {
-            Note* note = static_cast<Note*>(e);
-            play(e, note->ppitch());
+      if (mscore->playEnabled()) {
+            if (e->type() == NOTE) {
+                  Note* note = static_cast<Note*>(e);
+                  play(e, note->ppitch());
+                  }
+            else if (e->type() == CHORD) {
+                  seq->stopNotes();
+                  Chord* c = static_cast<Chord*>(e);
+                  Part* part = c->staff()->part();
+                  foreach(Note* n, c->notes()) {
+                        seq->startNote(part->instr()->channel(n->subchannel()), n->ppitch(), 80,
+                           n->tuning());
+                        }
+                  seq->startNoteTimer(preferences.defaultPlayDuration);
+                  }
             }
       }
 

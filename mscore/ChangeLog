@@ -1,3 +1,7 @@
+9.jul (ws)
+      - play whole chord if note is added
+      - new image property: auto scale to fill parent frame
+      - new function: add image to frames (from context menu)
 7.jul (ws)
       - gonville font integration
 6.jul (ws)

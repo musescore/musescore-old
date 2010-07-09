@@ -32,7 +32,7 @@ class BSymbol : public Element {
       QList<Element*> _leafs;
 
    public:
-      BSymbol(Score* s) : Element(s) { setFlags(ELEMENT_MOVABLE); }
+      BSymbol(Score* s) : Element(s) { setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE); }
       BSymbol(const BSymbol&);
 
       BSymbol &operator=(const BSymbol&);

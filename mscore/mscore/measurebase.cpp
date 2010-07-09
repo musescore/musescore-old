@@ -26,6 +26,7 @@
 #include "chord.h"
 #include "note.h"
 #include "layoutbreak.h"
+#include "image.h"
 
 //---------------------------------------------------------
 //   MeasureBase
@@ -119,11 +120,10 @@ void MeasureBase::add(Element* el)
                         _sectionBreak = true;
                         break;
                   }
-            _el.push_back(el);
             }
-      else {
-            _el.append(el);
-            }
+      _el.append(el);
+      if (el->type() == IMAGE)
+            static_cast<Image*>(el)->reference();
       }
 
 //---------------------------------------------------------
@@ -151,6 +151,8 @@ void MeasureBase::remove(Element* el)
             }
       if (!_el.remove(el))
             printf("MeasureBase(%p)::remove(%s,%p) not found\n", this, el->name(), el);
+      if (el->type() == IMAGE)
+            static_cast<Image*>(el)->dereference();
       }
 
 

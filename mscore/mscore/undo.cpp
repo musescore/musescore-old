@@ -59,6 +59,7 @@
 #include "page.h"
 #include "keysig.h"
 #include "timesig.h"
+#include "image.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -2192,15 +2193,6 @@ void RemoveMeasures::redo()
       }
 
 //---------------------------------------------------------
-//   InsertMeasures
-//---------------------------------------------------------
-
-InsertMeasures::InsertMeasures(Measure* m1, Measure* m2)
-   : fm(m1), lm(m2)
-      {
-      }
-
-//---------------------------------------------------------
 //   undo
 //    insert back measures
 //---------------------------------------------------------
@@ -2221,16 +2213,6 @@ void InsertMeasures::redo()
       }
 
 //---------------------------------------------------------
-//   ChangeClef
-//---------------------------------------------------------
-
-ChangeClef::ChangeClef(Clef * _clef, bool sc)
-      {
-      clef = _clef;
-      showCourtesy = sc;
-      };
-
-//---------------------------------------------------------
 //   flip
 //---------------------------------------------------------
 
@@ -2241,3 +2223,16 @@ void ChangeClef::flip()
       showCourtesy = sc;
       }
 
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeImage::flip()
+      {
+      bool _lockAspectRatio = image->lockAspectRatio();
+      bool _autoScale       = image->autoScale();
+      image->setLockAspectRatio(lockAspectRatio);
+      image->setAutoScale(autoScale);
+      lockAspectRatio = _lockAspectRatio;
+      autoScale       = _autoScale;
+      }

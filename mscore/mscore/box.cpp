@@ -383,7 +383,7 @@ bool HBox::genPropertyMenu(QMenu* popup) const
       a = getAction("picture");
       textMenu->addAction(a);
 
-      a = popup->addAction(tr("HBox Properties..."));
+      a = popup->addAction(tr("Frame Properties..."));
       a->setData("props");
       return true;
       }
@@ -451,7 +451,10 @@ bool VBox::genPropertyMenu(QMenu* popup) const
       a->blockSignals(true);
       textMenu->addAction(a);
 
-      a = popup->addAction(tr("VBox Properties..."));
+      a = getAction("picture");
+      textMenu->addAction(a);
+
+      a = popup->addAction(tr("Frame Properties..."));
       a->setData("props");
       return true;
       }
@@ -497,6 +500,8 @@ void VBox::propertyAction(ScoreView* viewer, const QString& cmd)
             double w = width() - leftMargin() * DPMM - rightMargin() * DPMM;
             static_cast<HBox*>(s)->setBoxWidth(Spatium(w / spatium()));
             }
+      else if (cmd == "picture")
+            score()->addImage(this);
       else {
             printf("VBox::propertyAction: %s unknown\n", qPrintable(cmd));
             return;
@@ -525,26 +530,3 @@ void VBox::layout()
       setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
       Box::layout();
       }
-
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void VBox::add(Element* e)
-      {
-      MeasureBase::add(e);
-      if (e->type() == IMAGE)
-            static_cast<Image*>(e)->reference();
-      }
-
-//---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void VBox::remove(Element* e)
-      {
-      MeasureBase::remove(e);
-      if (e->type() == IMAGE)
-            static_cast<Image*>(e)->dereference();
-      }
-

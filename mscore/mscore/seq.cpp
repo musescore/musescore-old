@@ -841,7 +841,7 @@ void Seq::startNote(const Channel& a, int pitch, int velo, double nt)
       // sending a note off event
       //
       foreach(const Event* event, eventList) {
-            if (event->channel() == a.channel && event->pitch() == pitch) {
+            if ((event->channel() == a.channel) && (event->pitch() == pitch)) {
                   sendEvent(*event);
                   active = true;
                   break;
@@ -868,6 +868,18 @@ void Seq::startNote(const Channel& a, int pitch, int velo, int duration, double 
       {
       stopNotes();
       startNote(a, pitch, velo, nt);
+      if (duration) {
+            noteTimer->setInterval(duration);
+            noteTimer->start();
+            }
+      }
+
+//---------------------------------------------------------
+//   startNoteTimer
+//---------------------------------------------------------
+
+void Seq::startNoteTimer(int duration)
+      {
       if (duration) {
             noteTimer->setInterval(duration);
             noteTimer->start();
