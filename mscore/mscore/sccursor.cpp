@@ -472,13 +472,13 @@ void SCursor::add(ChordRest* c)
             if(_voice > 0) { //create rests
                 int t = tick();
                 //trick : go to the start if we don't have segment nor chord.
-                if(t == _score->lastMeasure()->tick() + _score->lastMeasure()->tickLen())
+                if(t == _score->lastMeasure()->tick() + _score->lastMeasure()->ticks())
                       t = 0;
                 Measure* measure = score()->tick2measure(t);
                 SegmentType st = SegChordRest;
                 Segment* seg = measure->findSegment(st, t);
                 if (seg == 0) {
-                      seg = measure->createSegment(st, t);
+                      seg = new Segment(measure, st, t);
                       score()->undoAddElement(seg);
                       }
                 chordRest = score()->addRest(seg, track, Duration(Duration::V_MEASURE), 0);
@@ -489,7 +489,7 @@ void SCursor::add(ChordRest* c)
                   }
             }
       int tick = chordRest->tick();
-      Fraction len(c->duration().fraction());
+      Fraction len(c->durationType().fraction());
       
       Fraction gap    = score()->makeGap(chordRest, len, chordRest->tuplet());
       if (gap < len) {
