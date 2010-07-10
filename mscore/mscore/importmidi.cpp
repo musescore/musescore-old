@@ -1110,7 +1110,7 @@ void Score::convertTrack(MidiTrack* midiTrack)
                                     int ont = mn->noquantOntime() - tick;
                                     if(ont != 0) {
                                           note->setOnTimeType(USER_VAL);
-                                          note->setOnTimeUserOffset(ont);
+                                          note->setOnTimeOffset(ont);
                                           }
                                     else {
                                           note->setOnTimeType(AUTO_VAL);
@@ -1120,7 +1120,7 @@ void Score::convertTrack(MidiTrack* midiTrack)
                                     int offt = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
                                     if(offt != 0) {
                                           note->setOffTimeType(USER_VAL);
-                                          note->setOffTimeUserOffset(offt);
+                                          note->setOffTimeOffset(offt);
                                           }
                                     else {
                                           note->setOffTimeType(AUTO_VAL);
@@ -1247,7 +1247,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               int ont = mn->noquantOntime() - tick;
                               if(ont != 0) {
                                     note->setOnTimeType(USER_VAL);
-                                    note->setOnTimeUserOffset(ont);
+                                    note->setOnTimeOffset(ont);
                                     }
                               else {
                                     note->setOnTimeType(AUTO_VAL);
@@ -1257,7 +1257,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               int offt = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->tickLen());
                               if(offt != 0) {
                                     note->setOffTimeType(USER_VAL);
-                                    note->setOffTimeUserOffset(offt);
+                                    note->setOffTimeOffset(offt);
                                     }
                               else {
                                     note->setOffTimeType(AUTO_VAL);

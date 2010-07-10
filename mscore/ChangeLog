@@ -1,3 +1,6 @@
+10.jul (la)
+      - fix #5949 again
+      - fix : adding notes on voice > 0 from plugin framework
 9.jul (ws)
       - fix #6425: Crash loading score with breath mark selected
 5.jul  (la)
