@@ -1,3 +1,5 @@
+10.jul (la)
+      - fix : adding notes on voice > 0 from plugin framework
 9.jul (ws)
       - play whole chord if note is added
       - new image property: auto scale to fill parent frame

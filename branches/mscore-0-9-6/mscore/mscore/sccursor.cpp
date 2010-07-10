@@ -389,8 +389,8 @@ bool SCursor::next()
             }
 
       if (_staffIdx >= 0) {
-            int track = _staffIdx * VOICES + _voice;
-            while (seg && (!(seg->subtype() & (SegChordRest | SegGrace)) || !seg->element(track))) {
+            //int track = _staffIdx * VOICES + _voice;
+            while (seg && (!(seg->subtype() & (SegChordRest | SegGrace)) /*|| !seg->element(track)*/)) {
                   seg = seg->next1();
                   }
             }
@@ -466,13 +466,31 @@ void SCursor::putStaffText(Text* s)
 void SCursor::add(ChordRest* c)
       {
       ChordRest* chordRest = cr();
+      int track       = _staffIdx * VOICES + _voice;
+      
       if (!chordRest) {
-            printf("SCursor::add: no cr\n");
-            return;
+            if(_voice > 0) { //create rests
+                int t = tick();
+                //trick : go to the start if we don't have segment nor chord.
+                if(t == _score->lastMeasure()->tick() + _score->lastMeasure()->tickLen())
+                      t = 0;
+                Measure* measure = score()->tick2measure(t);
+                SegmentType st = SegChordRest;
+                Segment* seg = measure->findSegment(st, t);
+                if (seg == 0) {
+                      seg = measure->createSegment(st, t);
+                      score()->undoAddElement(seg);
+                      }
+                chordRest = score()->addRest(seg, track, Duration(Duration::V_MEASURE), 0);
+                }
+            if (!chordRest) {
+                  printf("SCursor::add: no cr\n");    
+                  return;
+                  }
             }
       int tick = chordRest->tick();
       Fraction len(c->duration().fraction());
-      int track       = _staffIdx * VOICES + _voice;
+      
       Fraction gap    = score()->makeGap(chordRest, len, chordRest->tuplet());
       if (gap < len) {
             printf("cannot make gap\n");
