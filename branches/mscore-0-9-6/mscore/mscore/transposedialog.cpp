@@ -183,7 +183,7 @@ void Score::transpose()
             startTick     = selection().tickStart();
             }
       KeyList* km = staff(startStaffIdx)->keymap();
-      int key     = km->key(startTick).accidentalType;
+      int key     = km->key(startTick).accidentalType();
       td.setKey(key);
       if (!td.exec())
             return;
@@ -192,7 +192,7 @@ void Score::transpose()
       if (td.mode() == TRANSPOSE_BY_KEY) {
             // calculate interval from "transpose by key"
             km       = staff(startStaffIdx)->keymap();
-            int oKey = km->key(startTick).accidentalType;
+            int oKey = km->key(startTick).accidentalType();
             interval = keydiff2Interval(oKey, td.transposeKey(), td.direction());
             }
       else {
@@ -227,7 +227,7 @@ void Score::transpose()
                         KeySig* ks = static_cast<KeySig*>(e);
                         KeySigEvent key  = km->key(ks->tick());
                         KeySigEvent okey = km->key(ks->tick() - 1);
-                        key.naturalType  = okey.accidentalType;
+                        key.setNaturalType(okey.accidentalType());
                         _undo->push(new ChangeKeySig(ks, key));
                         }
                   }
@@ -364,7 +364,7 @@ printf("transpose keys %d\n", semitones);
                ke != km->lower_bound(tickEnd); ++ke) {
                   KeySigEvent oKey  = ke->second;
                   int tick  = ke->first;
-                  int nKeyType = transposeKey(oKey.accidentalType, semitones);
+                  int nKeyType = transposeKey(oKey.accidentalType(), semitones);
                   KeySigEvent nKey;
                   nKey.setAccidentalType(nKeyType);
                   undoChangeKey(staff(staffIdx), tick, oKey, nKey);
@@ -380,7 +380,7 @@ printf("transpose keys %d\n", semitones);
                   if (ks) {
                         KeySigEvent key  = km->key(s->tick());
                         KeySigEvent okey = km->key(s->tick() - 1);
-                        key.naturalType  = okey.accidentalType;
+                        key.setNaturalType(okey.accidentalType());
                         _undo->push(new ChangeKeySig(ks, key));
                         }
                   }
