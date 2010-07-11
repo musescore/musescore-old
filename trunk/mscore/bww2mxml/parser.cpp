@@ -53,6 +53,31 @@ static bool isGrace(Bww::Symbol sym)
           || sym == Bww::TAORLUATH);
 }
 
+/**
+ Determine if symbol is part of a note sequence
+ */
+
+static bool isNote(Bww::Symbol sym)
+{
+  return (sym == Bww::NOTE
+          || sym == Bww::TIE
+          || sym == Bww::TRIPLET
+          || isGrace(sym));
+}
+
+/**
+ Determine if symbol is part of a non-note sequence
+ */
+
+static bool isNonNote(Bww::Symbol sym)
+{
+  return (sym == Bww::CLEF
+          || sym == Bww::KEY
+          || sym == Bww::TEMPO
+          || sym == Bww::PART
+          || sym == Bww::BAR);
+}
+
 namespace Bww {
 
   /**
@@ -224,23 +249,9 @@ namespace Bww {
       errorHandler("clef ('&') expected");
     while (lex.symType() != NONE)
     {
-      if (lex.symType() == CLEF)
-        lex.getSym(); // ignore
-      else if (lex.symType() == KEY)
-        lex.getSym(); // ignore
-      else if (lex.symType() == TEMPO)
-        parseTempo();
-      else if (lex.symType() == PART)
-        parsePart();
-      else if (lex.symType() == BAR)
-        parseBar();
-      else if (lex.symType() == NOTE)
-        parseSeqNotes();
-      else if (isGrace(lex.symType()))
-        parseSeqNotes();
-      else if (lex.symType() == TIE)
-        parseSeqNotes();
-      else if (lex.symType() == TRIPLET)
+      if (isNonNote(lex.symType()))
+        parseSeqNonNotes();
+      else if (isNote(lex.symType()))
         parseSeqNotes();
       else if (lex.symType() == UNKNOWN)
       {
@@ -404,6 +415,28 @@ namespace Bww {
     qDebug() << "Parser::parsePart() value:" << qPrintable(lex.symValue());
     endMeasure();
     lex.getSym();
+  }
+
+  /**
+   Parse a sequence of non-notes.
+   */
+
+  void Parser::parseSeqNonNotes()
+  {
+    qDebug() << "Parser::parseSeqNonNotes() value:" << qPrintable(lex.symValue());
+    while (isNonNote(lex.symType()))
+    {
+      if (lex.symType() == CLEF)
+        lex.getSym(); // ignore
+      else if (lex.symType() == KEY)
+        lex.getSym(); // ignore
+      else if (lex.symType() == TEMPO)
+        parseTempo();
+      else if (lex.symType() == PART)
+        parsePart();
+      else if (lex.symType() == BAR)
+        parseBar();
+    }
   }
 
   /**
