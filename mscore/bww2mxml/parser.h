@@ -52,6 +52,7 @@ namespace Bww {
     void parseNote();
     void parseGraces();
     void parsePart();
+    void parseSeqNonNotes();
     void parseSeqNotes();
     void parseString();
     void parseTempo();
