@@ -314,7 +314,7 @@ OVE::Staff* getStaff(const OVE::OveSong* ove, int track) {
 }
 
 QString toQString(const std::string& str) {
-	QTextCodec* codec = QTextCodec::codecForName(preferences.importCharset);
+	QTextCodec* codec = QTextCodec::codecForName(preferences.importCharset.toUtf8());
 	return codec->toUnicode(str.c_str());
 }
 
