@@ -69,7 +69,11 @@ void BarLine::getY(double* y1, double* y2) const
             StaffLines* l1   = measure->staffLines(staffIdx1);
             StaffLines* l2   = measure->staffLines(staffIdx2);
 
-            double yp = system->staff(staffIdx())->y();
+            double yp;
+            if (system)
+                  yp = system->staff(staffIdx())->y();
+            else
+                  yp = 0.0;
 
             *y1 = l1->y1() - yp;
             *y2 = l2->y2() - yp;
