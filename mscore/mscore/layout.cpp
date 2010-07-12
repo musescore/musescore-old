@@ -1417,9 +1417,6 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   if (mb->type() != MEASURE) {
                         if (mb == lmb)
                               break;
-                        mb = mb->next();
-                        if (!mb)
-                              break;
                         continue;
                         }
                   Measure* m = static_cast<Measure*>(mb);

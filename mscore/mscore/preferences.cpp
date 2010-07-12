@@ -225,6 +225,7 @@ void Preferences::init()
       defaultPlayDuration     = 300;      // ms
       warnPitchRange          = true;
       followSong              = true;
+      importCharset           = "GBK";
 
       //update
       checkUpdateStartup      = 0;
@@ -444,7 +445,7 @@ void Preferences::read()
 
       defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
       importStyleFile        = s.value("importStyleFile", "").toString();
-      importCharset          = s.value("importCharset", "GBK").toByteArray();
+      importCharset          = s.value("importCharset", "GBK").toString();
       warnPitchRange         = s.value("warnPitchRange", true).toBool();
       followSong             = s.value("followSong", true).toBool();
 
@@ -1227,7 +1228,7 @@ void PreferenceDialog::apply()
       else
             preferences.importStyleFile.clear();
 
-      preferences.importCharset = importCharsetList->currentText().toUtf8();
+      preferences.importCharset = importCharsetList->currentText();
 
       preferences.warnPitchRange = warnPitchRange->isChecked();
 
