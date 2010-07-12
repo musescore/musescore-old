@@ -1,3 +1,6 @@
+12.jul (ws)
+      - fix: File containing a horizontal frame directly before a bar
+        with a line break cannot be opened
 10.jul (la)
       - fix #5949 again
       - fix : adding notes on voice > 0 from plugin framework

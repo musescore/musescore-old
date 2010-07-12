@@ -171,7 +171,7 @@ double Element::spatium() const
 //---------------------------------------------------------
 double Element::magS() const
       {
-      return _mag * (_score->spatium() /(DPI * SPATIUM20));   
+      return _mag * (_score->spatium() /(DPI * SPATIUM20));
       }
 
 //---------------------------------------------------------
@@ -757,9 +757,11 @@ void StaffLines::draw(QPainter& p) const
 
 double StaffLines::y1() const
       {
+      System* system = measure()->system();
+      if (system == 0)
+            return 0.0;
       double _spatium = spatium();
-
-      double y = measure()->system()->staff(staffIdx())->y();
+      double y = system->staff(staffIdx())->y();
       switch(lines()) {
             case 1:
                   return y + _pos.y() + 1 * _spatium;
@@ -777,9 +779,12 @@ double StaffLines::y1() const
 
 double StaffLines::y2() const
       {
-      double _spatium = spatium();
+      System* system = measure()->system();
+      if (system == 0)
+            return 0.0;
 
-      double y = measure()->system()->staff(staffIdx())->y();
+      double _spatium = spatium();
+      double y = system->staff(staffIdx())->y();
       switch(lines()) {
             case 1:
                   return y + _pos.y() + 3 * _spatium;

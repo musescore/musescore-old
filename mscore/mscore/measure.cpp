@@ -2631,7 +2631,7 @@ bool Measure::createEndBarLines()
                   bl->setVisible(_endBarLineVisible);
                   bl->setColor(_endBarLineColor);
                   span = staff->barLineSpan();
-                  if (!system()->staff(staffIdx + span - 1)->show()) {
+                  if (system() && !system()->staff(staffIdx + span - 1)->show()) {
                         //
                         // if the barline ends on an invisible staff
                         // find last visible staff in barline
