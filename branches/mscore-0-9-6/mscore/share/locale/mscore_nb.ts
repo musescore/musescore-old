@@ -1128,7 +1128,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>part</source>
-        <translation>Instrumentoppdeling</translation>
+        <translation>Oppdeling</translation>
     </message>
     <message>
         <source>system</source>
@@ -1348,7 +1348,7 @@ feilet: </translation>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Rediger egenskaper for system/instrumentsoppdeling</translation>
+        <translation>MuseScore: Rediger egenskaper for notesystem/oppdeling</translation>
     </message>
     <message>
         <source>Staff Properties</source>
@@ -1364,7 +1364,7 @@ feilet: </translation>
     </message>
     <message>
         <source>Part Properties</source>
-        <translation>Egenskaper for instrumentoppdeling</translation>
+        <translation>Egenskaper for oppdeling av noteark</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
@@ -1570,7 +1570,7 @@ feilet: </translation>
     </message>
     <message>
         <source>System</source>
-        <translation>Notesytem</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -1651,15 +1651,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create clef for all systems</source>
-        <translation>Vis nøkler på alle notesystemer</translation>
+        <translation>Vis nøkler på alle systemer</translation>
     </message>
     <message>
         <source>Create time signatures</source>
-        <translation>Vis taktart på alle notesystemer</translation>
+        <translation>Vis taktart på alle systemer</translation>
     </message>
     <message>
         <source>Create key sig for all systems</source>
-        <translation>Vis faste fortegn på alle notesystemer</translation>
+        <translation>Vis faste fortegn på alle systemer</translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
@@ -1691,7 +1691,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>every system</source>
-        <translation>Hvert notesystem</translation>
+        <translation>Hvert system</translation>
     </message>
     <message>
         <source>interval</source>
@@ -1772,11 +1772,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation>Taktstrek ved start, enslig notesystem</translation>
+        <translation>Taktstrek i starten ved enslig notesystem</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation>Taktstrek ved start, flere notesystemer</translation>
+        <translation>Taktstrek i starten ved flere notesystemer</translation>
     </message>
     <message>
         <source>Music upper margin</source>
@@ -2024,7 +2024,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Select Part:</source>
-        <translation>Velg instrumentoppdeling:</translation>
+        <translation>Velg oppdeling:</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -2036,7 +2036,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation>Endre instrumentoppdeling:</translation>
+        <translation>Endre oppdeling:</translation>
     </message>
     <message>
         <source>Instrument:</source>
@@ -2060,7 +2060,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation>Instrumentoppdeling-%1</translation>
+        <translation>Oppdeling-%1</translation>
     </message>
 </context>
 <context>
@@ -2299,7 +2299,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation>Vis mer</translation>
+        <translation>Vis flere</translation>
     </message>
 </context>
 <context>
@@ -2361,7 +2361,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation>Vis mer</translation>
+        <translation>Vis flere</translation>
     </message>
 </context>
 <context>
@@ -2734,7 +2734,7 @@ mislykket: </translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>System</translation>
+        <translation>Notesystem</translation>
     </message>
     <message>
         <source>Visible</source>
@@ -3240,7 +3240,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>no score</source>
-        <translation>Intet notesystem</translation>
+        <translation>Intet noteark</translation>
     </message>
     <message>
         <source>note entry mode</source>
@@ -4060,7 +4060,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>midi sound for part</source>
-        <translation>MIDI-lyd for instrumentoppdeling</translation>
+        <translation>MIDI-lyd for oppdeling</translation>
     </message>
 </context>
 <context>
@@ -4424,7 +4424,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation>Farger på elementer i notesystem</translation>
+        <translation>Farger til elementer på noteark</translation>
     </message>
     <message>
         <source>Default foreground</source>
@@ -5032,9 +5032,9 @@ Vennligst velg én enkelt note eller pause og prøv igjen
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Ingen notesystemer funnet:
-vennligst bruk dialogboksen for instrumenter for
-å opprette noen systemer</translation>
+        <translation>Ingen notesystemer funnet:&#13;
+vennligst bruk dialogboksen for instrumenter for&#13;
+å opprette noen notesystemer</translation>
     </message>
     <message>
         <source>No Measure selected:
@@ -5355,7 +5355,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>same staff</source>
-        <translation>samme notesystem</translation>
+        <translation>Samme notesystem</translation>
     </message>
     <message>
         <source>same voice</source>
@@ -5363,7 +5363,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>same system</source>
-        <translation>samme system</translation>
+        <translation>Samme system</translation>
     </message>
     <message>
         <source>Action</source>
@@ -5390,7 +5390,7 @@ Prøv å lagre en annen plass.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation>Dialogboks</translation>
+        <translation>MuseScore: Velg instrument</translation>
     </message>
     <message>
         <source>0</source>
@@ -5398,7 +5398,7 @@ Prøv å lagre en annen plass.</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation>Vis mer</translation>
+        <translation>Vis flere</translation>
     </message>
 </context>
 <context>
@@ -5631,7 +5631,7 @@ og sjekk at stilen til fila er riktig</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Rediger egenskaper for notesystem/instrumentoppdeling</translation>
+        <translation>MuseScore: Rediger egenskaper for notesystem/oppdeling</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5646,7 +5646,7 @@ og sjekk at stilen til fila er riktig</translation>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation>Egenskaper for tekst til notesystem...</translation>
+        <translation>Egenskaper for notesystemtekst...</translation>
     </message>
 </context>
 <context>
@@ -5657,7 +5657,7 @@ og sjekk at stilen til fila er riktig</translation>
     </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
-        <translation>MuseScore: Egenskaper for tekst til notesystem</translation>
+        <translation>MuseScore: Egenskaper for notesystemtekst</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -6284,10 +6284,10 @@ og sjekk at stilen til fila er riktig</translation>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: Du kan også legge til eller fjerne takter etter at notesystemet er opprettet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: Du kan også legge til eller fjerne takter etter at notearket er opprettet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -7217,11 +7217,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation>Legg til notesystem over til utvalg</translation>
+        <translation>Legg notesystem over til utvalg</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation>Legg til notesystem under til utvalg</translation>
+        <translation>Legg notesystem under til utvalg</translation>
     </message>
     <message>
         <source>page-prev</source>
@@ -8017,7 +8017,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load score from file</source>
-        <translation>Last notesystem fra fil</translation>
+        <translation>Åpne noteark fra fil</translation>
     </message>
     <message>
         <source>File save</source>
@@ -8025,7 +8025,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save score to file</source>
-        <translation>Lagre notesystem til fil</translation>
+        <translation>Lagre noteark til fil</translation>
     </message>
     <message>
         <source>File save as</source>
@@ -8033,7 +8033,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save score under a new file name</source>
-        <translation>Lagre notesystem til ny fil</translation>
+        <translation>Lagre noteark til ny fil</translation>
     </message>
     <message>
         <source>File save a copy</source>
@@ -8041,7 +8041,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
-        <translation>Lagre en kopi av notesystemet i tillegg til nåværenede fil</translation>
+        <translation>Lagre en kopi av notearket i tillegg til nåværenede fil</translation>
     </message>
     <message>
         <source>File reload</source>
@@ -8049,7 +8049,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reload score from file</source>
-        <translation>Last inn notesystem fra fil på ny</translation>
+        <translation>Last inn noteark fra fil på ny</translation>
     </message>
     <message>
         <source>File close</source>
@@ -8057,7 +8057,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Close current score</source>
-        <translation>Lukk nåværende notesystem</translation>
+        <translation>Lukk nåværende noteark</translation>
     </message>
     <message>
         <source>Print</source>
@@ -8065,7 +8065,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Print score</source>
-        <translation>Skriv ut notesystem</translation>
+        <translation>Skriv ut noteark</translation>
     </message>
     <message>
         <source>Undo last change</source>
@@ -8193,11 +8193,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Flip direction</source>
-        <translation>Snu retning</translation>
+        <translation>Snu retning på notehals</translation>
     </message>
     <message>
         <source>Flip Direction</source>
-        <translation>Snu retning</translation>
+        <translation>Snu retning på notehals</translation>
     </message>
     <message>
         <source>Pitch up</source>
@@ -8413,7 +8413,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation>Instrumentoppdelinger...</translation>
+        <translation>Del opp noteark...</translation>
     </message>
 </context>
 <context>
@@ -8905,7 +8905,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffLines</source>
-        <translation>Notelinje</translation>
+        <translation>Notelinjer</translation>
     </message>
     <message>
         <source>Cursor</source>

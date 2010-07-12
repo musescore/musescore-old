@@ -4211,7 +4211,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MuseScore Preferences</source>
-        <translation type="unfinished"/>
+        <translation>การตั้งค่า MuseScore</translation>
     </message>
     <message>
         <source>General</source>
@@ -4223,7 +4223,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>start empty</source>
-        <translation type="unfinished"/>
+        <translation>เริ่มว่าง</translation>
     </message>
     <message>
         <source>continue last session</source>
@@ -4239,7 +4239,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Browse...</source>
-        <translation type="unfinished"/>
+        <translation>เรียกดู...</translation>
     </message>
     <message>
         <source>show splash screen</source>
@@ -4251,7 +4251,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>cz Czech</source>
-        <translation type="unfinished"/>
+        <translation>cz เช็ก</translation>
     </message>
     <message>
         <source>de German</source>
@@ -4271,11 +4271,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>gl Galician</source>
-        <translation type="unfinished"/>
+        <translation>gl กาลิเซีย</translation>
     </message>
     <message>
         <source>hi_IN Hindi</source>
-        <translation type="unfinished"/>
+        <translation>hi_IN ฮินดู</translation>
     </message>
     <message>
         <source>it Italian</source>
@@ -4283,7 +4283,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>nl Dutch</source>
-        <translation type="unfinished"/>
+        <translation>nl ดัตช์</translation>
     </message>
     <message>
         <source>pt Portuguese</source>
@@ -4291,7 +4291,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>pt_BR Brasilian Portuguese</source>
-        <translation type="unfinished"/>
+        <translation>pt_BR โปรตุเกสบราซิล</translation>
     </message>
     <message>
         <source>ru Russian</source>
@@ -4299,11 +4299,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>tr Turkey</source>
-        <translation type="unfinished"/>
+        <translation>tr ตุรกี</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
-        <translation type="unfinished"/>
+        <translation>ระวัง: คุณจะต้องเริ่ม MuseScore ใหม่เมื่อเปลี่ยนภาษา</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -4331,7 +4331,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished"/>
+        <translation>รูปแบบ</translation>
     </message>
     <message>
         <source>Auto Save</source>
@@ -4339,7 +4339,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Save every</source>
-        <translation type="unfinished"/>
+        <translation>บันทึกทุก</translation>
     </message>
     <message>
         <source>minutes</source>
@@ -4347,31 +4347,31 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"/>
+        <translation>ไอคอน</translation>
     </message>
     <message>
         <source>General:</source>
-        <translation type="unfinished"/>
+        <translation>ทั่วไป:</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="unfinished"/>
+        <translation>ความกว้าง:</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"/>
+        <translation>ความสูง:</translation>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation type="unfinished"/>
+        <translation>การใส่โน้ต:</translation>
     </message>
     <message>
         <source>Application Font</source>
-        <translation type="unfinished"/>
+        <translation>แบบอักษรโปรแกรมประยุกต์</translation>
     </message>
     <message>
         <source>pt</source>
-        <translation type="unfinished"/>
+        <translation>พ.</translation>
     </message>
     <message>
         <source>Canvas</source>
@@ -4415,7 +4415,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"/>
+        <translation>ข้อความ</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -4423,31 +4423,31 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation type="unfinished"/>
+        <translation>สีธาตุแหล่ง</translation>
     </message>
     <message>
         <source>Default foreground</source>
-        <translation type="unfinished"/>
+        <translation>พื้นหน้าเริ่มต้น</translation>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation type="unfinished"/>
+        <translation>บันทึกเสียง 1</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation type="unfinished"/>
+        <translation>บันทึกเสียง 2</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation type="unfinished"/>
+        <translation>บันทึกเสียง 3</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation type="unfinished"/>
+        <translation>บันทึกเสียง 4</translation>
     </message>
     <message>
         <source>Drop Target</source>
-        <translation type="unfinished"/>
+        <translation>จุดวาง</translation>
     </message>
     <message>
         <source>Note Entry</source>
@@ -4463,11 +4463,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Default duration:</source>
-        <translation type="unfinished"/>
+        <translation>ระยะเวลาเริ่มต้น:</translation>
     </message>
     <message>
         <source>ms</source>
-        <translation type="unfinished"/>
+        <translation>ms</translation>
     </message>
     <message>
         <source>Alternate input method</source>
@@ -4475,15 +4475,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation type="unfinished"/>
+        <translation>ถ้าคุณเลือกวิธีป้อนค่าพื้นฐาน ความสูงของโน้ตที่สร้างขึ้นจะขึ้นอยู่กับสัญลักษณ์ประจำกุญแจปัจจุบัน อาทิเช่น การกดปุ่ม F ใน G เมเจอร์จะสร้างตัวโน้ต F ชาร์ป หากคุณเลือกที่จะใช้วิธีการป้อนค่าทางเลือก สัญลักษณ์ประจำกุญแจจะไม่เกี่ยวข้อง อาทิเช่นคุณกดปุ่ม F จะสร้างโน้ตตัว F เนเชอรัลเสมอ</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
-        <translation type="unfinished"/>
+        <translation>สีโน้ตภายนอกพิสัยที่ใช้ได้</translation>
     </message>
     <message>
         <source>Export MIDI</source>
-        <translation type="unfinished"/>
+        <translation>ส่งออกมิดิ</translation>
     </message>
     <message>
         <source>Expand Repeats</source>
@@ -4495,7 +4495,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MIDI Remote Control</source>
-        <translation type="unfinished"/>
+        <translation>รีโมทคอนโทรลมิดิ</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -4519,248 +4519,248 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Rewind</source>
-        <translation type="unfinished"/>
+        <translation>ย้อนกลับ</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"/>
+        <translation>เล่น</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"/>
+        <translation>เส้นห้าบรรทัด</translation>
     </message>
     <message>
         <source>Default Paper Size</source>
-        <translation type="unfinished"/>
+        <translation>ขนาดกระดาษเริ่มต้น</translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation type="unfinished"/>
+        <translation>สองหน้า</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation type="unfinished"/>
+        <translation>แนวนอน</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation type="unfinished"/>
+        <translation>การจัดอัตราส่วน</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"/>
+        <translation>เว้นวรรค</translation>
     </message>
     <message>
         <source>mm</source>
         <extracomment>millimeter</extracomment>
-        <translation type="unfinished"/>
+        <translation>มม.</translation>
     </message>
     <message>
         <source>I/O</source>
-        <translation type="unfinished"/>
+        <translation>I/O</translation>
     </message>
     <message>
         <source>Ports</source>
-        <translation type="unfinished"/>
+        <translation>พอร์ต</translation>
     </message>
     <message>
         <source>Use internal synthesizer</source>
-        <translation type="unfinished"/>
+        <translation>ใช้ตัวสังเคราะห์ภายใน</translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
-        <translation type="unfinished"/>
+        <translation>เซิร์ฟเวอร์เสียง JACK</translation>
     </message>
     <message>
         <source>Left-Port:</source>
-        <translation type="unfinished"/>
+        <translation>พอร์ตซ้าย:</translation>
     </message>
     <message>
         <source>Right-Port:</source>
-        <translation type="unfinished"/>
+        <translation>พอร์ตขวา:</translation>
     </message>
     <message>
         <source>ALSA Audio</source>
-        <translation type="unfinished"/>
+        <translation>เสียง ALSA</translation>
     </message>
     <message>
         <source>Device:</source>
-        <translation type="unfinished"/>
+        <translation>อุปกรณ์:</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"/>
+        <translation>ค่าเริ่มต้น</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation type="unfinished"/>
+        <translation>อัตราตัวอย่าง:</translation>
     </message>
     <message>
         <source>192000</source>
-        <translation type="unfinished"/>
+        <translation>192000</translation>
     </message>
     <message>
         <source>96000</source>
-        <translation type="unfinished"/>
+        <translation>96000</translation>
     </message>
     <message>
         <source>88200</source>
-        <translation type="unfinished"/>
+        <translation>88200</translation>
     </message>
     <message>
         <source>48000</source>
-        <translation type="unfinished"/>
+        <translation>48000</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished"/>
+        <translation>44100</translation>
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished"/>
+        <translation>32000</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished"/>
+        <translation>22050</translation>
     </message>
     <message>
         <source>Fragments:</source>
-        <translation type="unfinished"/>
+        <translation>ส่วนกระจาย:</translation>
     </message>
     <message>
         <source>Period Size:</source>
-        <translation type="unfinished"/>
+        <translation>ขนาดช่วง:</translation>
     </message>
     <message>
         <source>4096</source>
-        <translation type="unfinished"/>
+        <translation>4096</translation>
     </message>
     <message>
         <source>2048</source>
-        <translation type="unfinished"/>
+        <translation>2048</translation>
     </message>
     <message>
         <source>1024</source>
-        <translation type="unfinished"/>
+        <translation>1024</translation>
     </message>
     <message>
         <source>512</source>
-        <translation type="unfinished"/>
+        <translation>512</translation>
     </message>
     <message>
         <source>256</source>
-        <translation type="unfinished"/>
+        <translation>256</translation>
     </message>
     <message>
         <source>128</source>
-        <translation type="unfinished"/>
+        <translation>128</translation>
     </message>
     <message>
         <source>64</source>
-        <translation type="unfinished"/>
+        <translation>64</translation>
     </message>
     <message>
         <source>Portaudio</source>
-        <translation type="unfinished"/>
+        <translation>พอร์ตเสียง</translation>
     </message>
     <message>
         <source>Api:</source>
-        <translation type="unfinished"/>
+        <translation>Api:</translation>
     </message>
     <message>
         <source>Attention: Any changes on this page require a restart of MuseScore.</source>
-        <translation type="unfinished"/>
+        <translation>ระวัง: คุณต้องเริ่ม MuseScore ใหม่เพื่อทำให้การเปลี่ยนแปลงในหน้านี้มีผล</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"/>
+        <translation>นำเข้า</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"/>
+        <translation>ส่งออก</translation>
     </message>
     <message>
         <source>PNG</source>
-        <translation type="unfinished"/>
+        <translation>PNG</translation>
     </message>
     <message>
         <source>screen shot function</source>
-        <translation type="unfinished"/>
+        <translation>คุณลักษณะจับภาพ</translation>
     </message>
     <message>
         <source>Shortcuts</source>
-        <translation type="unfinished"/>
+        <translation>ทางลัด</translation>
     </message>
     <message>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>การกระทำ</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"/>
+        <translation>ทางลัด</translation>
     </message>
     <message>
         <source>Reset to Default</source>
-        <translation type="unfinished"/>
+        <translation>ตั้งค่าเริ่มต้น</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"/>
+        <translation>ล้าง</translation>
     </message>
     <message>
         <source>Define...</source>
-        <translation type="unfinished"/>
+        <translation>จำกัดความ...</translation>
     </message>
     <message>
         <source>Auto-correction</source>
-        <translation type="unfinished"/>
+        <translation>การแก้ไขอัตโนมัติ</translation>
     </message>
     <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
-        <translation type="unfinished"/>
+        <translation>แทนที่ 1/2 ด้วยอักขระ ½</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation type="unfinished"/>
+        <translation>แทนที่ (C) ด้วยสัญลักษณ์สงวนลิขสิทธิ์ © (ใช้ได้ในข้อความในส่วนลิขสิทธิ์เท่านั้น)</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
-        <translation type="unfinished"/>
+        <translation>รูปแบบที่ใช้สำหรับการส่งออก</translation>
     </message>
     <message>
         <source>Built in style</source>
-        <translation type="unfinished"/>
+        <translation>รูปแบบภายใน</translation>
     </message>
     <message>
         <source>Use style file:</source>
-        <translation type="unfinished"/>
+        <translation>ใช้แฟ้มรูปแบบ:</translation>
     </message>
     <message>
         <source>System</source>
-        <translation type="unfinished"/>
+        <translation>ระบบ</translation>
     </message>
     <message>
         <source>Navigator:</source>
-        <translation type="unfinished"/>
+        <translation>ตัวนำทาง:</translation>
     </message>
     <message>
         <source>Use JACK MIDI output</source>
-        <translation type="unfinished"/>
+        <translation>ใช้ขาออก JACK MIDI</translation>
     </message>
     <message>
         <source>Remember last connection(s)</source>
-        <translation type="unfinished"/>
+        <translation>จำการเชื่อมต่อล่าสุด</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"/>
+        <translation>ปรับปรุง</translation>
     </message>
     <message>
         <source>Automatic Update Check</source>
-        <translation type="unfinished"/>
+        <translation>การตรวจสอบการปรับปรุงอัตโนมัติ</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation type="unfinished"/>
+        <translation>ตรวจสอบรุ่นใหม่ของ MuseScore เมื่อเริ่มต้น</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
@@ -4775,52 +4775,58 @@ is incompatible with current interface</source>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished"/>
+        <translation>Ped (ขาเหยียบ)</translation>
     </message>
     <message>
         <source>* (Pedal)</source>
-        <translation type="unfinished"/>
+        <translation>* (ขาเหยียบ)</translation>
     </message>
     <message>
         <source>. (Pedal)</source>
-        <translation type="unfinished"/>
+        <translation>. (ขาเหยียบ)</translation>
     </message>
     <message>
         <source>dash (Pedal)</source>
-        <translation type="unfinished"/>
+        <translation>dash (ขาเหยียบ)</translation>
     </message>
     <message>
         <source>tr (Trill)</source>
-        <translation type="unfinished"/>
+        <translation>tr (เสียงสั่น)</translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
     <message>
         <source>MuseScore:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore:</translation>
     </message>
     <message>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation type="unfinished"/>
+        <translation>ไม่ได้เลือกโน้ต:&#13;
+กรุณาเลือกโน้ตตัวเดียวแล้วลองปฏิบัติการใหม่
+</translation>
     </message>
     <message>
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation type="unfinished"/>
+        <translation>ไม่ได้เลือกโน้ต:&#13;
+กรุณาเลือกโน้ตหรือเครื่องหมายหยุดตัวเดียวแล้วลองปฏิบัติการใหม่
+</translation>
     </message>
     <message>
         <source>Please select a single note or slur and retry operation
 </source>
-        <translation type="unfinished"/>
+        <translation>กรุณาเลือกโน้ตตัวเดียวหรือเครื่องหมายเชื่อมเสียงแล้วลองปฏิบัติการใหม่
+</translation>
     </message>
     <message>
         <source>Please select one or more staves and retry operation
 </source>
-        <translation type="unfinished"/>
+        <translation>กรุณาเลือกหนึ่งห้องหรือมากกว่าแล้วลองปฏิบัติการใหม่
+</translation>
     </message>
 </context>
 <context>
@@ -4831,7 +4837,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"/>
+        <translation>ออก</translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
@@ -4847,15 +4853,15 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: load failed:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: การโหลดล้มเหลว:</translation>
     </message>
     <message>
         <source>MuseScore: Load Style</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: โหลดรูปแบบ</translation>
     </message>
     <message>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>รูปแบบ MuseScore (*.mss);;แฟ้มทั้งหมด (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load Style failed:</source>
@@ -4871,27 +4877,27 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: load midi</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: โหลดมิดิ</translation>
     </message>
     <message>
         <source>MuseScore: load Style failed:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: การโหลดรูปแบบล้มเหลว:</translation>
     </message>
     <message>
         <source>MuseScore</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <source>reading file &lt;</source>
-        <translation type="unfinished"/>
+        <translation>กำลังอ่านแฟ้ม &lt;</translation>
     </message>
     <message>
         <source>MuseScore: invalid command</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: คำสั่งที่ไม่มีอยู่จริง</translation>
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: การโหลดจานสีล้มเหลว:</translation>
     </message>
     <message>
         <source>MuseScore: Load font symbols failed:</source>
@@ -4952,19 +4958,19 @@ Please select a single note or rest and retry operation
     <name>RestPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสมบัติคอร์ด</translation>
     </message>
     <message>
         <source>Rest Properties</source>
-        <translation type="unfinished"/>
+        <translation>คุณสัมบัติการหยุด</translation>
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished"/>
+        <translation>เล็ก</translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation type="unfinished"/>
+        <translation>วรรคเริ่มต้นเพิ่มเติม </translation>
     </message>
     <message>
         <source>sp</source>

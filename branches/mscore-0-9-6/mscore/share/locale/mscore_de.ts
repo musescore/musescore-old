@@ -826,7 +826,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1117,7 +1117,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Tempo:</translation>
+        <translation>Anschlag:</translation>
     </message>
     <message>
         <source>align left</source>
@@ -4072,7 +4072,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Tempo:</translation>
+        <translation>Anschlag:</translation>
     </message>
     <message>
         <source>auto</source>
@@ -4690,7 +4690,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>leertaste</translation>
+        <translation>Leertaste</translation>
     </message>
     <message>
         <source>mm</source>
@@ -5850,7 +5850,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Space</source>
-        <translation>leertaste</translation>
+        <translation>Leertaste</translation>
     </message>
     <message>
         <source>Text</source>
@@ -6125,7 +6125,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Space</source>
-        <translation>leertaste</translation>
+        <translation>Leertaste</translation>
     </message>
     <message>
         <source>enable text frame</source>
@@ -6506,12 +6506,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>1. Akkord</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>2. Akkord</translation>
     </message>
 </context>
 <context>
@@ -7513,7 +7513,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Palette</source>
-        <translation>Sammlung</translation>
+        <translation>Paletten</translation>
     </message>
     <message>
         <source>Play Panel</source>
@@ -8484,7 +8484,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished"/>
+        <translation>umkehren</translation>
     </message>
     <message>
         <source>trill</source>
@@ -8638,11 +8638,11 @@ p, li { white-space: pre-wrap; }
     <name>drumset</name>
     <message>
         <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Akkustische Basstrommel</translation>
     </message>
     <message>
         <source>Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Basstrommel</translation>
     </message>
     <message>
         <source>Side Stick</source>
@@ -9682,11 +9682,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>caesura curved</source>
-        <translation type="unfinished"/>
+        <translation>gebogene Zäsur</translation>
     </message>
     <message>
         <source>caesura straight</source>
-        <translation type="unfinished"/>
+        <translation>gerade Zäsur</translation>
     </message>
     <message>
         <source>eight flag</source>
