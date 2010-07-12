@@ -1,6 +1,7 @@
 12.jul (ws)
-      - fix: File containing a horizontal frame directly before a bar
-        with a line break cannot be opened
+      - fix #6453: File containing a horizontal frame directly before a bar with a line break cannot be opened
+        (la)
+      - fix ove charset preferences init (patch by Van Ferry)
 10.jul (la)
       - fix #5949 again
       - fix : adding notes on voice > 0 from plugin framework

@@ -125,7 +125,7 @@ struct Preferences {
 
       int defaultPlayDuration;      // len of note play during note entry
       QString importStyleFile;
-      QByteArray importCharset;
+      QString importCharset;
       bool warnPitchRange;
       bool followSong;
 
