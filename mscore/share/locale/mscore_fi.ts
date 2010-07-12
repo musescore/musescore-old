@@ -57,7 +57,7 @@ line break&#13;
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>kaarisulje</translation>
+        <translation>kaarisulku</translation>
     </message>
 </context>
 <context>
@@ -1067,7 +1067,7 @@ line break&#13;
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nimi</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <source>Save As</source>
@@ -1082,7 +1082,7 @@ line break&#13;
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation>Dynamiikka</translation>
+        <translation>Voimakkuudet</translation>
     </message>
     <message>
         <source>Set Invisible</source>
@@ -1321,7 +1321,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Transponoi</translation>
+        <translation>Siirrä sävelkorkeudet</translation>
     </message>
     <message>
         <source>Midi Program</source>
@@ -1631,7 +1631,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create time signatures</source>
-        <translation>Luo tahtilajit</translation>
+        <translation>Luo tahtilajimerkintä</translation>
     </message>
     <message>
         <source>Create key sig for all systems</source>
@@ -1756,7 +1756,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation type="unfinished"/>
+        <translation>Luo kohteliaisuudesta näytettävä sävellajimerkintä</translation>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
@@ -2457,7 +2457,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation>Luo sävellaji</translation>
+        <translation>Luo sävellajimerkintä</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -2465,7 +2465,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished">lisää tahtilaji palettiin</translation>
+        <translation>lisää tahtilajimerkintä palettiin</translation>
     </message>
     <message>
         <source>Add</source>
@@ -3022,7 +3022,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Dynamics</source>
-        <translation>Dynamiikka</translation>
+        <translation>Voimakkuudet</translation>
     </message>
     <message>
         <source>Tremolo</source>
@@ -3162,7 +3162,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation>Nuotinkirjoitustila</translation>
+        <translation>Nuottien syöttötila</translation>
     </message>
     <message>
         <source>edit mode</source>
@@ -3360,7 +3360,7 @@ ennen sulkemista?</translation>
     </message>
     <message>
         <source>MuseScore: Dynamics</source>
-        <translation>MuseScore: Dynamiikat</translation>
+        <translation>MuseScore: Voimakkuudet</translation>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
@@ -3430,11 +3430,11 @@ Yritä sen sijaan valitsemalla "Ohje"-valikosta "Online-käsikirja".</translatio
     </message>
     <message>
         <source>Key Signatures</source>
-        <translation>Etumerkinnät</translation>
+        <translation>Sävellajimerkinnät</translation>
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation>Tahtilajit</translation>
+        <translation>Tahtilajimerkinnät</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
@@ -3502,7 +3502,7 @@ Yritä sen sijaan valitsemalla "Ohje"-valikosta "Online-käsikirja".</translatio
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
-        <translation type="unfinished"/>
+        <translation>Hengitykset &amp;&amp; Tauot</translation>
     </message>
     <message>
         <source>Caesura</source>
@@ -3574,7 +3574,7 @@ Yritä sen sijaan valitsemalla "Ohje"-valikosta "Online-käsikirja".</translatio
     </message>
     <message>
         <source>Brackets...</source>
-        <translation type="unfinished"/>
+        <translation>Sulkumerkit...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
@@ -3586,7 +3586,7 @@ Yritä sen sijaan valitsemalla "Ohje"-valikosta "Online-käsikirja".</translatio
     </message>
     <message>
         <source>MuseScore: Brackets</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Sulkumerkit...</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
@@ -3714,7 +3714,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Luo tahtilaji</translation>
+        <translation>Luo tahtilajimerkintä</translation>
     </message>
 </context>
 <context>
@@ -3736,7 +3736,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Select Key Signature:</source>
-        <translation>Valitse etumerkintä:</translation>
+        <translation>Valitse sävellajimerkintä:</translation>
     </message>
 </context>
 <context>
@@ -4662,7 +4662,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>Jos käytät standardia syöttömenetelmää niin luotu nuotin sävelkorkeus riippuu nykyisestä sävellajista. Esimerkisi F sävelen painaminen G-duurissa luo nuotin Fis. Jos vaihtoehtoinen menetelmä on käytössä niin nykyisellä sävellajilla ei ole merkitystä. Esimerkiksi F sävelen panaminen luo luonnollisesti nuotin F.</translation>
+        <translation>Jos käytät standardia syöttömenetelmää niin luotu nuotin sävelkorkeus riippuu nykyisestä sävellajista. Esimerkiksi F-sävelen syöttäminen G-duurissa luo nuotin Fis. Jos vaihtoehtoinen syöttömenetelmä on käytössä, niin nykyisellä sävellajilla ei ole merkitystä. Esimerkiksi F sävelen syöttäminen luo tällöin luonnollisesti nuotin F.</translation>
     </message>
     <message>
         <source>Score</source>
@@ -5090,11 +5090,11 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>MuseScore: transpose</source>
-        <translation>MuseScore: Transponoi</translation>
+        <translation>MuseScore: siirrä sävelkorkeudet</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation>Mitään ei ole valittu. Transponoitko koko partituurin?</translation>
+        <translation>Mitään ei ole valittu. Siirrätkö koko partituurin uuteen sävellajiin?</translation>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
@@ -5298,11 +5298,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Key Signature</source>
-        <translation>Etumerkintä</translation>
+        <translation>Sävellajimerkintä</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Tahtilaji</translation>
+        <translation>Tahtilajimerkintä</translation>
     </message>
     <message>
         <source>Begin Repeat</source>
@@ -6198,7 +6198,7 @@ and check that the file location is correct</source>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Tahtilajimerkinnät</translation>
     </message>
     <message>
         <source>4/4 common time</source>
@@ -6221,7 +6221,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>lisää tahtilaji palettiin</translation>
+        <translation>lisää tahtilajimerkintä palettiin</translation>
     </message>
     <message>
         <source>Add</source>
@@ -6229,7 +6229,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation type="unfinished">Valitse tahtilaji</translation>
+        <translation>Luo tahtilajimerkintä</translation>
     </message>
 </context>
 <context>
@@ -6281,19 +6281,19 @@ p, li { white-space: pre-wrap; }
     <name>TransposeDialogBase</name>
     <message>
         <source>Transpose key signatures</source>
-        <translation>Transponoi etumerkinnät</translation>
+        <translation>Siirrä sävellajimerkinnät uuteen sävellajiin</translation>
     </message>
     <message>
         <source>Transpose chord names</source>
-        <translation>Transponoi sointumerkinnät</translation>
+        <translation>Siirrä sointumerkinnät uuteen sävellajiin</translation>
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation>MuseScore: Transponointi</translation>
+        <translation>MuseScore: Siirrä sävelkorkeudet uuteen sävellajiin</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation>Transponoi sävellaji</translation>
+        <translation>Siirrä sävelkorkeudet uuteen sävellajiin</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
@@ -6369,7 +6369,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose by Interval</source>
-        <translation>Transponoi intervalleja</translation>
+        <translation>Siirrä sävelkorkeudet intervallin päähän</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
@@ -6598,7 +6598,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>automaattinen sulkumerkki</translation>
+        <translation>automaattiset sulkumerkit</translation>
     </message>
     <message>
         <source>bracket</source>
@@ -6876,7 +6876,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation type="unfinished"/>
+        <translation>Voimakkuudet</translation>
     </message>
     <message>
         <source>Note Input</source>
@@ -7128,7 +7128,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset Beam Mode</source>
-        <translation type="unfinished"/>
+        <translation>Palauta palkkitila alkuperäisiksi</translation>
     </message>
     <message>
         <source>up+shift+ctrl</source>
@@ -7728,11 +7728,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose...</source>
-        <translation type="unfinished"/>
+        <translation>Siirrä sävelkorkeudet...</translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished">Transponoi</translation>
+        <translation>Siirrä sävelkorkeudet</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -8080,11 +8080,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Key Signatures...</source>
-        <translation type="unfinished"/>
+        <translation>Sävellajimerkinnät...</translation>
     </message>
     <message>
         <source>Show key signatures palette</source>
-        <translation type="unfinished"/>
+        <translation>Näytä sävellajimerkintöjen paletti</translation>
     </message>
     <message>
         <source>Show symbols palette</source>
@@ -8092,19 +8092,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Show time signatures palette</source>
-        <translation type="unfinished"/>
+        <translation>Näytä tahtilajimerkintöjen paletti</translation>
     </message>
     <message>
         <source>Time Signatures...</source>
-        <translation type="unfinished"/>
+        <translation>Tahtilajimerkintä...</translation>
     </message>
     <message>
         <source>Show dynamics palette</source>
-        <translation type="unfinished"/>
+        <translation>Näytä voimakkuuksien paletti</translation>
     </message>
     <message>
         <source>Note input mode</source>
-        <translation type="unfinished"/>
+        <translation>Nuottien syöttötila</translation>
     </message>
     <message>
         <source>Pitch spell</source>
@@ -8176,7 +8176,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
-        <translation type="unfinished"/>
+        <translation>Palauta valittujen tahtien palkkitilat alkuperäisiksi</translation>
     </message>
     <message>
         <source>Flip direction</source>
@@ -8740,7 +8740,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Sulkumerkki</translation>
+        <translation>Sulkumerkit</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -8776,7 +8776,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Breath</source>
-        <translation>Hengitysmerkki</translation>
+        <translation>Hengitys</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -8992,7 +8992,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>AccidentalBracket</source>
-        <translation type="unfinished"/>
+        <translation>Etumerkkisulkeet</translation>
     </message>
 </context>
 <context>
@@ -9805,11 +9805,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bracket tips up</source>
-        <translation type="unfinished"/>
+        <translation>Sulkumerkin piikit ylös</translation>
     </message>
     <message>
         <source>bracket tips down</source>
-        <translation type="unfinished"/>
+        <translation>Sulkumerkin piikit alas</translation>
     </message>
     <message>
         <source>bracket tips left up</source>

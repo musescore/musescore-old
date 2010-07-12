@@ -434,7 +434,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Root</source>
-        <translation>Grondnoot</translation>
+        <translation>Grondtoon</translation>
     </message>
     <message>
         <source>m7#5</source>
@@ -498,7 +498,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation>Basnoot / Inversie</translation>
+        <translation>Basnoot / Omkering</translation>
     </message>
     <message>
         <source>b (flat)</source>
@@ -702,7 +702,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Degrees</source>
-        <translation>Graden</translation>
+        <translation>Trappen</translation>
     </message>
     <message>
         <source>13sus#5b9</source>
@@ -841,7 +841,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation>Schrijven van akkoord beschrijving gefaald: </translation>
+        <translation>Schrijven van akkoordbeschrijving mislukt: </translation>
     </message>
 </context>
 <context>
@@ -935,7 +935,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>note head positon </source>
-        <translation>nootkop positie </translation>
+        <translation>positie nootkop </translation>
     </message>
     <message>
         <source>sp</source>
@@ -953,11 +953,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation>Notenkoppen Groep</translation>
+        <translation>Nootkoppen Groep</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation>Notenkop Type</translation>
+        <translation>Nootkop Type</translation>
     </message>
     <message>
         <source>normal</source>
@@ -973,11 +973,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>triangle</source>
-        <translation>triangel</translation>
+        <translation>driehoek</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation>schuin</translation>
+        <translation>slash</translation>
     </message>
     <message>
         <source>xcircle</source>
@@ -1025,7 +1025,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>breve</source>
-        <translation>breve</translation>
+        <translation>brevis</translation>
     </message>
 </context>
 <context>
@@ -1055,7 +1055,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation>Akkoord beschrijvingsbestand:</translation>
+        <translation>Akkoordbeschrijvingsbestand:</translation>
     </message>
     <message>
         <source>...</source>
@@ -1075,7 +1075,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: Akkoord Stijlbewerker</translation>
+        <translation>MuseScore: Akkoordstijl-bewerker</translation>
     </message>
 </context>
 <context>
@@ -1400,7 +1400,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
-        <translation>Bruikbare toonhoogte bereik:</translation>
+        <translation>Bruikbaar toonhoogtebereik:</translation>
     </message>
     <message>
         <source>Part Properties</source>
@@ -1416,19 +1416,19 @@ mislukt: </translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation>Verhoog Prime</translation>
+        <translation>Overmatige Prime</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation>Verlaag Secunde</translation>
+        <translation>Verminderde Secunde</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation>Verlaag Tweede</translation>
+        <translation>Kleine Secunde</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation>Majeur Tweede</translation>
+        <translation>Grote Secunde</translation>
     </message>
     <message>
         <source>Augmented Second</source>
@@ -1472,47 +1472,47 @@ mislukt: </translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation>Verhoog Kwint</translation>
+        <translation>Overmatige Kwint</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation>Verlaag Sext</translation>
+        <translation>Verminderde Sext</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation>Mineur Zesde</translation>
+        <translation>Kleine Sext</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation>Majeur Zesde</translation>
+        <translation>Grote Sext</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation>Verhoog Sext</translation>
+        <translation>Overmatige Sext</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation>Verlaag Septime</translation>
+        <translation>Verminderd Septiem</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation>Mineur Zevende</translation>
+        <translation>Klein Septiem</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation>Majeur Zevende</translation>
+        <translation>Groot Septiem</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation>Verhoog Septime</translation>
+        <translation>Overmatig Septime</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation>Verlaag Octaaf</translation>
+        <translation>Verminderd Octaaf</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation>Volledig Octaaf</translation>
+        <translation>Rein Octaaf</translation>
     </message>
     <message>
         <source>up</source>
@@ -1587,15 +1587,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Line break height</source>
-        <translation>Regeleinde hoogte</translation>
+        <translation>Hoogte regeleinde</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation>Toon reële toonhoogte</translation>
+        <translation>Toon werkelijke toonhoogte</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
-        <translation>Articulatie - articulatie afstand</translation>
+        <translation>Afstand articulatie - articulatie</translation>
     </message>
     <message>
         <source>Beams</source>
@@ -1643,7 +1643,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
-        <translation>Sokrichting bij gebruik van meerdere stemmen</translation>
+        <translation>Stokrichting bij gebruik van meerdere stemmen</translation>
     </message>
     <message>
         <source>V-frame lower margin</source>
@@ -1711,7 +1711,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Clef-key distance</source>
-        <translation>Sleutel-maatsoort afstand</translation>
+        <translation>Afstand sleutel-maatsoort</translation>
     </message>
     <message>
         <source>beam width units</source>
@@ -1775,7 +1775,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Last system fill threshold</source>
-        <translation>Systeem opvullen drempel</translation>
+        <translation>Drempel opvullen systeem</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
@@ -1803,7 +1803,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation>Minumum lengte</translation>
+        <translation>Minimum lengte</translation>
     </message>
     <message>
         <source>spaces</source>
@@ -1859,7 +1859,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulation - note head distance</source>
-        <translation>Articulatie - notenkop afstand</translation>
+        <translation>Afstand articulatie - nootkop</translation>
     </message>
     <message>
         <source>shorten stems</source>
@@ -1867,11 +1867,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Page fill threshold:</source>
-        <translation>Pagina opvullen drempel:</translation>
+        <translation>Drempel opvullen pagina:</translation>
     </message>
     <message>
         <source>Clef-barline distance</source>
-        <translation>Sleutel-maatlijn afstand</translation>
+        <translation>Afstand sleutel-maatstreep</translation>
     </message>
     <message>
         <source>System distance</source>
@@ -1879,7 +1879,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation>Toon herhalen bar tips</translation>
+        <translation>Herhalingsmaatstrepen met "vleugels"</translation>
     </message>
     <message>
         <source>odd/even</source>
@@ -1899,7 +1899,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Minimum slope</source>
-        <translation>Minumum helling</translation>
+        <translation>Minimum schuinte</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
@@ -1907,7 +1907,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Maximum slope</source>
-        <translation>Maximum helling</translation>
+        <translation>Maximum schuinte</translation>
     </message>
     <message>
         <source>Measure Numbers</source>
@@ -1931,7 +1931,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation>Articulatie - notenstok afstand</translation>
+        <translation>Afstand articulatie - nootstok</translation>
     </message>
     <message>
         <source>Grace note size</source>
@@ -1979,7 +1979,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>MuseScore: Tempo Text</source>
-        <translation>MuseScore: Tempo Tekst</translation>
+        <translation>MuseScore: Tempoaanduiding</translation>
     </message>
 </context>
 <context>
@@ -2074,7 +2074,7 @@ space unit</extracomment>
     <name>GlissandoProperties</name>
     <message>
         <source>Text:</source>
-        <translation>Tekst</translation>
+        <translation>Tekst:</translation>
     </message>
     <message>
         <source>Show Text</source>
@@ -2126,7 +2126,7 @@ space unit</extracomment>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>Harmonie-eigenschappen...</translation>
+        <translation>Akkoord-eigenschappen...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -2141,7 +2141,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation>Afbeeldings-eigenschappen...</translation>
+        <translation>Eigenschappen afbeelding...</translation>
     </message>
 </context>
 <context>
@@ -2152,7 +2152,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties</source>
-        <translation>Afbeeldings Eigenschappen</translation>
+        <translation>Eigenschappen afbeelding</translation>
     </message>
 </context>
 <context>
@@ -2412,7 +2412,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Instrumentelijst</translation>
+        <translation>Instrumentenlijst</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
@@ -2778,7 +2778,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>actual</source>
-        <translation>actueel</translation>
+        <translation>werkelijk</translation>
     </message>
     <message>
         <source>irregular</source>
@@ -3050,7 +3050,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Beam Properties</source>
-        <translation>Waardestreep-eigenschappen</translation>
+        <translation>Eigenschappen Waardestreep</translation>
     </message>
     <message>
         <source>Bb major, G minor</source>
@@ -3248,7 +3248,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation>Voorslag Noten</translation>
+        <translation>Voorslagen</translation>
     </message>
     <message>
         <source>End-Start Repeat</source>
@@ -3264,7 +3264,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Note Heads</source>
-        <translation>Notenkoppen</translation>
+        <translation>Nootkoppen</translation>
     </message>
     <message>
         <source>Note Entry</source>
@@ -3324,7 +3324,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation>Barlijnen</translation>
+        <translation>Maatstrepen</translation>
     </message>
     <message>
         <source>1 between notes</source>
@@ -3514,7 +3514,7 @@ Sessie herstellen?</translation>
 From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
+Probeer "Online handboek" in het menu "Help".</translation>
     </message>
     <message>
         <source>Tuplets</source>
@@ -3530,7 +3530,7 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation>Reële Toonhoogte</translation>
+        <translation>Werkelijke Toonhoogte</translation>
     </message>
     <message>
         <source>Fingering %1</source>
@@ -3538,11 +3538,11 @@ Probeer van het "Help" menu te kiezen voor "Online handboek".</translation>
     </message>
     <message>
         <source>End Bar</source>
-        <translation>Eindigende maatstreep</translation>
+        <translation>Eindstreep</translation>
     </message>
     <message>
         <source>MuseScore: Accidentals</source>
-        <translation>MuseScore: Voortekens</translation>
+        <translation>MuseScore: Toevallige Voortekens</translation>
     </message>
     <message>
         <source>D major, B minor</source>
@@ -3784,11 +3784,11 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>head index</source>
-        <translation>hoofd index</translation>
+        <translation>hoofdindex</translation>
     </message>
     <message>
         <source>note head group</source>
-        <translation>nootkoppen-groep</translation>
+        <translation>nootkop-groep</translation>
     </message>
     <message>
         <source>Tuning</source>
@@ -4028,7 +4028,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Mute</source>
-        <translation>Geluid Uit</translation>
+        <translation>Dempen</translation>
     </message>
     <message>
         <source>Solo</source>
@@ -4036,7 +4036,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>midi sound for part</source>
-        <translation>midi geluid voor partij</translation>
+        <translation>midigeluid voor partij</translation>
     </message>
     <message>
         <source>Chorus</source>
@@ -4099,11 +4099,11 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation>gereedschapsbalk1</translation>
+        <translation>werkbalk1</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation>gereedschapsbalk2</translation>
+        <translation>werkbalk2</translation>
     </message>
 </context>
 <context>
@@ -4150,11 +4150,11 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>actual tempo</source>
-        <translation>actueel tempo</translation>
+        <translation>werkelijk tempo</translation>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation>Dooreenschudden</translation>
+        <translation>Shuffle</translation>
     </message>
     <message>
         <source>MuseScore: Play Panel</source>
@@ -4166,7 +4166,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Straight</source>
-        <translation>Rechtstreeks</translation>
+        <translation>Recht</translation>
     </message>
     <message>
         <source>measure.beat</source>
@@ -4177,15 +4177,15 @@ is niet compactibel met de huidige interface</translation>
     <name>PreferenceDialog</name>
     <message>
         <source>Instrument List (*.xml)</source>
-        <translation>Instrumenten Liist (*.xml)</translation>
+        <translation>Instrumentenlijst (*.xml)</translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
-        <translation>Kies Wekmap</translation>
+        <translation>Kies Werkmap</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
-        <translation>Kies Start Partituur</translation>
+        <translation>Kies Startpartituur</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
@@ -4333,11 +4333,11 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Misc.</source>
-        <translation>Diverse</translation>
+        <translation>Diversen</translation>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Paden</translation>
+        <translation>Mappen</translation>
     </message>
     <message>
         <source>Ports</source>
@@ -4457,7 +4457,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Attention: Any changes on this page require a restart of MuseScore.</source>
-        <translation>Aandacht: vereist het opnieuw opstarten van MuseScore.</translation>
+        <translation>Let op: vereist het opnieuw opstarten van MuseScore.</translation>
     </message>
     <message>
         <source>Canvas</source>
@@ -4513,7 +4513,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>enable midi remote control</source>
-        <translation>Midi afstandsbediening inschakelen</translation>
+        <translation>Midi-afstandsbediening inschakelen</translation>
     </message>
     <message>
         <source>System</source>
@@ -4637,7 +4637,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>uncheck this to speed up drawing</source>
-        <translation>schakel dit selectievakje uit voor meer snelheid</translation>
+        <translation>deselecteer voor meer snelheid</translation>
     </message>
     <message>
         <source>Notesheet</source>
@@ -4705,7 +4705,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
-        <translation>LET OP: nieuwe taalinstellingen worden pas van kracht nadat MuseScore opnieuw opgestart wordt.</translation>
+        <translation>LET OP: nieuwe taalinstellingen worden pas van kracht nadat MuseScore opnieuw opgestart is.</translation>
     </message>
     <message>
         <source>continue last session</source>
@@ -4765,7 +4765,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Automatic Update Check</source>
-        <translation>Automatische update Check</translation>
+        <translation>Automatische Updatecheck</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
@@ -4819,16 +4819,16 @@ is niet compactibel met de huidige interface</translation>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation>Geen noot geselecteerd:
-Selecteer één enkele noot en probeer het opnieuw
+        <translation>Geen noot geselecteerd:&#13;
+Selecteer één noot en probeer het opnieuw
 </translation>
     </message>
     <message>
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation>Geen noot of rust geselecteerd:
-Selecteer één enkele noot of rust en probeer het opnieuw
+        <translation>Geen noot of rust geselecteerd:&#13;
+Selecteer één noot of rust en probeer het opnieuw
 </translation>
     </message>
     <message>
@@ -4870,7 +4870,7 @@ Selecteer één enkele noot of rust en probeer het opnieuw
     </message>
     <message>
         <source>MuseScore: load Style failed:</source>
-        <translation>MuseScore: laad Stijl mislukt:</translation>
+        <translation>MuseScore: Stijl laden mislukt:</translation>
     </message>
     <message>
         <source>MuseScore</source>
@@ -4922,7 +4922,7 @@ Selecteer één enkele noot of rust en probeer het opnieuw
     </message>
     <message>
         <source>MuseScore: Save Chord Description File</source>
-        <translation>Musescore: Opslaan Akkoord Beschrijvingsbestand</translation>
+        <translation>Musescore: Opslaan Akkoordbeschrijvingsbestand</translation>
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
@@ -5237,11 +5237,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Schrijven van Stijl gefaald: </translation>
+        <translation>Stijl schrijven mislukt: </translation>
     </message>
     <message>
         <source>Load failed: </source>
-        <translation>Laden gefaald: </translation>
+        <translation>Laden mislukt: </translation>
     </message>
 </context>
 <context>
@@ -5256,7 +5256,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
-        <translation>Drumrol bewerker...</translation>
+        <translation>Drumroll bewerker...</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -5348,7 +5348,7 @@ mislukt: </translation>
     <name>SelectDialog</name>
     <message>
         <source>subtract from selection</source>
-        <translation>onttrek van selectie</translation>
+        <translation>onttrek aan selectie</translation>
     </message>
     <message>
         <source>Action</source>
@@ -5411,7 +5411,7 @@ mislukt: </translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Initialisatie van audio driver gefaald.&#13;
+        <translation>Initialisatie van audiostuurprogramma mislukt.&#13;
 De sequencer wordt uitgeschakeld..</translation>
     </message>
     <message>
@@ -5636,7 +5636,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Bewerk balk/partij eigenschappen</translation>
+        <translation>MuseScore: Bewerk balk-/partijeigenschappen</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5764,7 +5764,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation>Hoofd Stemming</translation>
+        <translation>Hoofdstemming</translation>
     </message>
     <message>
         <source>Preset:</source>
@@ -5776,7 +5776,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation>Triangel</translation>
+        <translation>Driehoek</translation>
     </message>
     <message>
         <source>Choose Synthesizer SoundFont</source>
@@ -5807,7 +5807,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     </message>
     <message>
         <source>Tempo Properties</source>
-        <translation>Tempo Eigenschappen</translation>
+        <translation>Tempo-eigenschappen</translation>
     </message>
     <message>
         <source>Tempo:</source>
@@ -5815,7 +5815,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     </message>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
-        <translation>MuseScore: Tempo Tekst-eigenschappen</translation>
+        <translation>MuseScore: Tempotekst-eigenschappen</translation>
     </message>
 </context>
 <context>
@@ -5886,7 +5886,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     <message>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation>Teskst Stijl;</translation>
+        <translation>TekstStijl;</translation>
     </message>
 </context>
 <context>
@@ -6139,7 +6139,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     </message>
     <message>
         <source>italic</source>
-        <translation>schuin</translation>
+        <translation>cursief</translation>
     </message>
     <message>
         <source>offset is absolute</source>
@@ -6247,7 +6247,7 @@ en controleer dat de bestandslocatie juist is.</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>voeg maatsoort toe aan pallet</translation>
+        <translation>voeg maatsoort toe aan palet</translation>
     </message>
 </context>
 <context>
@@ -6303,15 +6303,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose key signatures</source>
-        <translation>Transponeer voortekeningen</translation>
+        <translation>Transponeer voortekens</translation>
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation>MuseScore: Transporteer</translation>
+        <translation>MuseScore: Transponeer</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation>Transponeer bij Voortekening</translation>
+        <translation>Transponeer via Toonsoort</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
@@ -6387,111 +6387,111 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose by Interval</source>
-        <translation>Transponeren door Interval</translation>
+        <translation>Transponeren via Interval</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation>Reine Eenstemmig</translation>
+        <translation>Reine Prime</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation>Verhoog Eenstemmig</translation>
+        <translation>Overmatige Prime</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation>Verlaag Tweede</translation>
+        <translation>Verminderde Secunde</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation>Mineur Tweede</translation>
+        <translation>Kleine Secunde</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation>Majeur Tweede</translation>
+        <translation>Grote Secunde</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation>Verhoog Tweede</translation>
+        <translation>Overmatige Secunde</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation>Verlaag Derde</translation>
+        <translation>Verminderde Terts</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation>Mineur Derde</translation>
+        <translation>Kleine Terts</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation>Majeur Derde</translation>
+        <translation>Grote Terts</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation>Verhoog Derde</translation>
+        <translation>Overmatige Terts</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation>Verlaag Vierde</translation>
+        <translation>Verminderde Kwart</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation>Reine Vierde</translation>
+        <translation>Reine Kwart</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation>Verhoog Vierde</translation>
+        <translation>Overmatige Kwart</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation>Verlaag Kwint</translation>
+        <translation>Verminderde Kwint</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation>Reine Vijfde</translation>
+        <translation>Reine Kwint</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation>Verhoog Vijfde</translation>
+        <translation>Overmatige Kwint</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation>Verlaag Zesde</translation>
+        <translation>Verminderde Sext</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation>Mineur Zesde</translation>
+        <translation>Kleine Sext</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation>Majeur Zesde</translation>
+        <translation>Grote Sext</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation>Verhoog Zesde</translation>
+        <translation>Overmatige Sext</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation>Verlaag Zevende</translation>
+        <translation>Verminderd Septiem</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation>Mineur Zevende</translation>
+        <translation>Klein Septiem</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation>Majeur Zevende</translation>
+        <translation>Groot Septiem</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation>Verhoog Zevende</translation>
+        <translation>Overmatig Septiem</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation>Verlaag Octaaf</translation>
+        <translation>Verminderd Octaaf</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation>Reine octaaf</translation>
+        <translation>Rein Octaaf</translation>
     </message>
     <message>
         <source>Options</source>
@@ -6499,11 +6499,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Single sharps and flats only</source>
-        <translation>Enkel enkele kruisen en mollen</translation>
+        <translation>Alleen enkele kruisen en mollen</translation>
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation>Gebruik dubbele kruisen en mollen</translation>
+        <translation>Gebruik dubbelkruisen en -mollen</translation>
     </message>
 </context>
 <context>
@@ -6918,7 +6918,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation>Toon Reëele Toonhoogte</translation>
+        <translation>Toon Werkelijke Toonhoogte</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
@@ -7022,7 +7022,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transport Toolbar</source>
-        <translation>Afspeel Gereedschapsbalk</translation>
+        <translation>Werkbalk Afspelen</translation>
     </message>
     <message>
         <source>File save a copy</source>
@@ -7138,7 +7138,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>1/2 rest</source>
-        <translation>p1/2 rust</translation>
+        <translation>1/2 rust</translation>
     </message>
     <message>
         <source>Enter third above</source>
@@ -7158,7 +7158,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Input Toolbar</source>
-        <translation>Noten invoer Gereedschapsbalk</translation>
+        <translation>Werkbalk Noteninvoer</translation>
     </message>
     <message>
         <source>1/4 rest</source>
@@ -7166,7 +7166,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset Stretch</source>
-        <translation>Afstanden standaardwaarden</translation>
+        <translation>Standaardwaarden Afstanden</translation>
     </message>
     <message>
         <source>File open</source>
@@ -7186,7 +7186,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation>Dubbele hele noot</translation>
+        <translation>Dubbele hele noot (brevis)</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
@@ -7294,7 +7294,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation>Priem (Unisono) erboven toevoegen</translation>
+        <translation>Prime (Unisono) erboven toevoegen</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
@@ -7326,11 +7326,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>show invisible</source>
-        <translation>toon onzichtbaar</translation>
+        <translation>onzichtbare objecten tonen</translation>
     </message>
     <message>
         <source>Show Invisible</source>
-        <translation>Toon Onzichtbaar</translation>
+        <translation>Onzichtbare Objecten Tonen</translation>
     </message>
     <message>
         <source>Move up</source>
@@ -7402,7 +7402,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>no beam</source>
-        <translation>geen boog</translation>
+        <translation>geen waardestreep</translation>
     </message>
     <message>
         <source>Key Signatures...</source>
@@ -7454,7 +7454,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Unison Above</source>
-        <translation>Priem (Unisono) Erboven</translation>
+        <translation>Prime (Unisono) Erboven</translation>
     </message>
     <message>
         <source>Reload</source>
@@ -7582,7 +7582,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Palette</source>
-        <translation>Pallet</translation>
+        <translation>Palet</translation>
     </message>
     <message>
         <source>Close current score</source>
@@ -7602,7 +7602,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Staff Text</source>
-        <translation>Tekst notenbalk toevoegen</translation>
+        <translation>Notenbalktekst toevoegen</translation>
     </message>
     <message>
         <source>Next Measure</source>
@@ -7642,7 +7642,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Noten Invoer</translation>
+        <translation>Noteninvoer</translation>
     </message>
     <message>
         <source>Save As...</source>
@@ -7662,7 +7662,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>note breve</source>
-        <translation>noot breve</translation>
+        <translation>noot brevis</translation>
     </message>
     <message>
         <source>File close</source>
@@ -7726,7 +7726,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
-        <translation>Terug zetten waardestreep mode van geselecteerde maten</translation>
+        <translation>Waardestreep-modus van geselecteerde maten terugzetten</translation>
     </message>
     <message>
         <source>Copyright</source>
@@ -7766,7 +7766,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Rehearsal Mark</source>
-        <translation>Cijfer, Letter toevoegen</translation>
+        <translation>Repetitiecijfer/-letter toevoegen</translation>
     </message>
     <message>
         <source>grace-32</source>
@@ -7822,7 +7822,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Symbols...</source>
-        <translation>Symbolen...</translation>
+        <translation>Symbool...</translation>
     </message>
     <message>
         <source>Enable MIDI Input</source>
@@ -7898,7 +7898,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add slur</source>
-        <translation>verbindingsboog toevoegen</translation>
+        <translation>bindingsboog toevoegen</translation>
     </message>
     <message>
         <source>Inspector</source>
@@ -7918,7 +7918,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Fingering Palette</source>
-        <translation>Vingerzettingpallet</translation>
+        <translation>Vingerzettingpalet</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
@@ -7930,7 +7930,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>auto beam</source>
-        <translation>automatisch paatsen van waardestrepen</translation>
+        <translation>automatisch plaatsen van waardestrepen</translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
@@ -8034,7 +8034,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Noteer Herhaling</translation>
+        <translation>Repetitiecijfer/-letter</translation>
     </message>
     <message>
         <source>Show local handbook</source>
@@ -8042,7 +8042,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation>Reële Toonhoogte</translation>
+        <translation>Werkelijke Toonhoogte</translation>
     </message>
     <message>
         <source>Fingering...</source>
@@ -8066,7 +8066,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Staff Text</source>
-        <translation>Notenbalk Tekst</translation>
+        <translation>Notenbalktekst</translation>
     </message>
     <message>
         <source>All Similar Elements</source>
@@ -8110,7 +8110,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo Palette</source>
-        <translation>Tempo-pallet</translation>
+        <translation>Tempo-palet</translation>
     </message>
     <message>
         <source>decrescendo</source>
@@ -8210,7 +8210,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>display in concert pitch</source>
-        <translation>toon reëele toonhoogte</translation>
+        <translation>toon werkelijke toonhoogte</translation>
     </message>
     <message>
         <source>Reset Beam Mode</source>
@@ -8382,7 +8382,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play repeats on/off</source>
-        <translation>Afspelen herhalen aan/uit</translation>
+        <translation>Herhalingen afspelen aan/uit</translation>
     </message>
     <message>
         <source>Load style</source>
@@ -8425,7 +8425,7 @@ p, li { white-space: pre-wrap; }
     <name>articulation</name>
     <message>
         <source>turn</source>
-        <translation>draai</translation>
+        <translation>dubbelslag</translation>
     </message>
     <message>
         <source>ushortfermata</source>
@@ -8445,7 +8445,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upbow</source>
-        <translation>up-bow</translation>
+        <translation>opstreek</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
@@ -8537,7 +8537,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>downbow</source>
-        <translation>down-bow</translation>
+        <translation>afstreek</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -8655,27 +8655,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Side Stick</source>
-        <translation type="unfinished"/>
+        <translation>Side Stick</translation>
     </message>
     <message>
         <source>Snare (Acoustic)</source>
-        <translation>Trommel (Akoestisch)</translation>
+        <translation>Snare (Akoestisch)</translation>
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation>Trommel (Elektrisch)</translation>
+        <translation>Snare (Elektrisch)</translation>
     </message>
     <message>
         <source>Tom 5</source>
-        <translation>Trommel 5</translation>
+        <translation>Tom 5</translation>
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation>Hi Hat Gesloten</translation>
+        <translation>Hi-Hat Gesloten</translation>
     </message>
     <message>
         <source>Tom 4</source>
-        <translation>Trommel 4</translation>
+        <translation>Tom 4</translation>
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
@@ -8683,7 +8683,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 3</source>
-        <translation>Trommel 3</translation>
+        <translation>Tom 3</translation>
     </message>
     <message>
         <source>Hi-Hat Open</source>
@@ -8691,11 +8691,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 2</source>
-        <translation>Trommel 2</translation>
+        <translation>Tom 2</translation>
     </message>
     <message>
         <source>Tom 1</source>
-        <translation>Trommel 1</translation>
+        <translation>Tom 1</translation>
     </message>
     <message>
         <source>Crash 1</source>
@@ -9219,11 +9219,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>herstelling pijl omlaag</translation>
+        <translation>herstellingsteken met pijl omlaag</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation>herstelling met pijl omlaag</translation>
+        <translation>herstellingsteken met pijl omlaag</translation>
     </message>
     <message>
         <source>flat</source>
@@ -9519,7 +9519,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation>sforza tot accent</translation>
+        <translation>accent</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -9571,7 +9571,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>down bow</source>
-        <translation>neerw boog</translation>
+        <translation>afstreek</translation>
     </message>
     <message>
         <source>reverse turn</source>

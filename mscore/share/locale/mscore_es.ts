@@ -5795,7 +5795,7 @@ y comprueba que la ruta al archivo es correcta.</translation>
     </message>
     <message>
         <source>BPM</source>
-        <translation>Batidas por Minuto</translation>
+        <translation>BPM</translation>
     </message>
     <message>
         <source>Tempo Properties</source>
@@ -7334,7 +7334,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation>cuadrada</translation>
+        <translation>Cuadrada</translation>
     </message>
     <message>
         <source>pad note 1/1</source>
@@ -7342,7 +7342,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Whole note (semibreve)</source>
-        <translation>redonda</translation>
+        <translation>Redonda</translation>
     </message>
     <message>
         <source>pad note 1/2</source>
@@ -7350,7 +7350,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Half note (minim)</source>
-        <translation>blanca</translation>
+        <translation>Blanca</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
@@ -7358,7 +7358,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quarter note (crochet)</source>
-        <translation>negra</translation>
+        <translation>Negra</translation>
     </message>
     <message>
         <source>pad note 1/8</source>
@@ -7366,7 +7366,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Eighth note (quaver)</source>
-        <translation>corchea</translation>
+        <translation>Corchea</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
@@ -7374,7 +7374,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>16th note (semiquaver)</source>
-        <translation>semicorchea</translation>
+        <translation>Semicorchea</translation>
     </message>
     <message>
         <source>pad note 1/32</source>
@@ -7382,7 +7382,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
-        <translation>fusa</translation>
+        <translation>Fusa</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
@@ -7390,7 +7390,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation>semifusa</translation>
+        <translation>Semifusa</translation>
     </message>
     <message>
         <source>pad dot</source>
@@ -7418,19 +7418,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation>doble sostenido</translation>
+        <translation>Doble sostenido</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation>sostenido</translation>
+        <translation>Sostenido</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>becuadro</translation>
+        <translation>Becuadro</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>doble bemol</translation>
+        <translation>Doble bemol</translation>
     </message>
     <message>
         <source>acciaccatura</source>
