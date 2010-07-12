@@ -519,6 +519,69 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-a",
+         QT_TRANSLATE_NOOP("action","Insert note A"),
+         Qt::CTRL + Qt::SHIFT + Qt::Key_A,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert A"),
+         QT_TRANSLATE_NOOP("action","Insert note A")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-b",
+         QT_TRANSLATE_NOOP("action","Insert note B"),
+         Qt::CTRL + Qt::SHIFT + Qt::Key_B,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert B"),
+         QT_TRANSLATE_NOOP("action","Insert note B")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-c",
+         QT_TRANSLATE_NOOP("action","Insert note C"),
+         Qt::CTRL + Qt::SHIFT + Qt::Key_C,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert C"),
+         QT_TRANSLATE_NOOP("action","Insert note C")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-d",
+         QT_TRANSLATE_NOOP("action","Insert note D"),
+         Qt::CTRL + Qt::SHIFT + Qt::Key_D,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert D"),
+         QT_TRANSLATE_NOOP("action","Insert note D")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-e",
+         QT_TRANSLATE_NOOP("action","Insert note E"),
+         Qt::CTRL + Qt::SHIFT + Qt::Key_E,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert E"),
+         QT_TRANSLATE_NOOP("action","Insert note E")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-f",
+         QT_TRANSLATE_NOOP("action","Insert note F"),
+         Qt::CTRL + Qt::SHIFT + Qt::Key_F,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert F"),
+         QT_TRANSLATE_NOOP("action","Insert note F")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-g",
+         QT_TRANSLATE_NOOP("action","Insert note G"),
+         Qt::CTRL + Qt::SHIFT + Qt::Key_G,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert G"),
+         QT_TRANSLATE_NOOP("action","Insert note G")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest",
          QT_TRANSLATE_NOOP("action","Enter rest"),
          Qt::Key_Space,

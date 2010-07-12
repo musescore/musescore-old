@@ -794,11 +794,13 @@ void StaffLines::draw(QPainter& p, ScoreView*) const
 
 double StaffLines::y1() const
       {
+     System* system = measure()->system();
+     if (system == 0)
+           return 0.0;
       double _spatium = spatium();
-
-      double y = measure()->system()->staff(staffIdx())->y();
+      double y = system->staff(staffIdx())->y();
       int l = staff() ? staff()->lines() : 5;
-      switch(l) {
+      switch (l) {
             case 1:
                   return y + ipos().y() + _spatium;
             case 2:
@@ -825,10 +827,13 @@ double StaffLines::y2() const
             _dist = 1.0;
             l     = 5;
             }
-      double y = measure()->system()->staff(staffIdx())->y();
+      System* system = measure()->system();
+      if (system == 0)
+            return 0.0;
+      double y = system->staff(staffIdx())->y();
       double d = _dist * spatium();
 
-      switch(l) {
+      switch (l) {
             case 1:
                   return y + ipos().y() + 3 * d;
             case 2:
