@@ -2,6 +2,7 @@
 <languages>
   <language code="af" name="Afrikaans" />
   <language code="ar" name="العربية" handbook="http://musescore.org/ar/الكتيّب"/>
+  <language code="ast" name="Asturianu" />
   <language code="bg" name="български" />
   <language code="ca" name="Català" handbook="http://musescore.org/ca/manual" />
   <language code="cs" name="Czech" />
