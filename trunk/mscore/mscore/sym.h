@@ -23,6 +23,10 @@
 
 #include "style.h"
 
+#if QT_VERSION >= 0x040700
+// does not work now #define USE_STATIC_TEXT
+#endif
+
 extern void initSymbols(int);
 
 enum SymbolType {
@@ -61,12 +65,13 @@ class Sym {
       double w;
       QRectF _bbox;
       QPointF _attach;
-      QTextLayout* tl;
-
-      void createTextLayout();
+#ifdef USE_STATIC_TEXT
+      QStaticText st;
+      void createStaticText();
+#endif
 
    public:
-      Sym() { _code = 0; tl = 0; }
+      Sym() { _code = 0; }
       Sym(const char* name, int c, int fid, double x=0.0, double y=0.0);
       Sym(const char* name, int c, int fid, const QPointF&, const QRectF&);
 
@@ -83,7 +88,7 @@ class Sym {
       void draw(QPainter& painter, double mag, qreal x, qreal y, int n) const;
       void draw(QPainter& painter, double mag, qreal x = 0.0, qreal y = 0.0) const;
       void setAttach(const QPointF& r)       { _attach = r; }
-      bool isValid() const                   { return tl != 0; }
+      bool isValid() const                   { return _code != 0; }
       };
 
 enum {

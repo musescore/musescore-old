@@ -60,7 +60,11 @@ QIcon* symIcon(const Sym& sc, int size, int width, int height)
       QPen pen(wi.palette().brush(QPalette::Normal, QPalette::Text).color());
 
       painter.setPen(pen);
+#ifdef USE_STATIC_TEXT
+      sc.draw(painter, mag, 0, 0);
+#else
       sc.draw(painter, mag, x, y);
+#endif
       painter.end();
       return new QIcon(image);
       }

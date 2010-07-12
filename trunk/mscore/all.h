@@ -45,7 +45,9 @@
 #if QT_VERSION >= 0x040400
 #include <QtCore/QAtomicInt>
 #endif
-
+#if QT_VERSION >= 0x040700
+#include <QtGui/QStaticText>
+#endif
 #include <QtGui/QPainterPath>
 #include <QtGui/QScrollArea>
 #include <QtGui/QScrollBar>

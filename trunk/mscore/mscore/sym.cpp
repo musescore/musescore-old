@@ -438,7 +438,9 @@ Sym::Sym(const char* name, int c, int fid, double ax, double ay)
             printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", c, c, _name, qPrintable(_font.family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
-      createTextLayout();
+#ifdef USE_STATIC_TEXT
+      createStaticText();
+#endif
       }
 
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
@@ -448,36 +450,34 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
       _bbox.setRect(b.x() * s, b.y() * s, b.width() * s, b.height() * s);
       _attach = a * s;
       w = _bbox.width();
-      createTextLayout();
+#ifdef USE_STATIC_TEXT
+      createStaticText();
+#endif
       }
 
 //---------------------------------------------------------
-//   createTextLayout
+//   createStaticText
 //    create a cached text layout to speedup drawing
 //---------------------------------------------------------
 
-void Sym::createTextLayout()
+#ifdef USE_STATIC_TEXT
+void Sym::createStaticText()
       {
-#if 0
+      st.setTextFormat(Qt::PlainText);
+      st.setTextWidth(0);
+      st.setTextOption(QTextOption(Qt::AlignLeft | Qt::AlignTop));
       if (_code & 0xffff0000) {
             QChar ss[2];
             ss[0] = QChar(QChar::highSurrogate(_code));
             ss[1] = QChar(QChar::lowSurrogate(_code));
             QString s(ss, 2);
-            tl = new QTextLayout(s, _font);
+            st.setText(s);
             }
       else {
-            tl = new QTextLayout(QString(_code), _font);
+            st.setText(QString(_code));
             }
-      tl->setCacheEnabled(true);
-      tl->beginLayout();
-      QTextLine l = tl->createLine();
-      // l.setNumColumns(1);
-      l.setLineWidth(1000);
-      l.setPosition(QPointF(0.0, -l.ascent()));
-      tl->endLayout();
-#endif
       }
+#endif
 
 //---------------------------------------------------------
 //   bbox
@@ -497,7 +497,11 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
 
-#if 1
+#ifdef USE_STATIC_TEXT
+      painter.setFont(_font);
+      painter.drawStaticText(x * imag, y * imag, st);
+#else
+
       QString s;
       painter.setFont(_font);
       if (_code & 0xffff0000) {
@@ -507,9 +511,6 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       else
             s = QChar(_code);
       painter.drawText(x * imag, y * imag, s);
-#else
-      // does not work with surrogates?
-      tl->draw(&painter, QPointF(x * imag, y * imag));
 #endif
       painter.scale(imag, imag);
       }
