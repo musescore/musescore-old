@@ -68,6 +68,7 @@ class StaffType;
 class TimeSig;
 class Clef;
 class Image;
+class Hairpin;
 
 //---------------------------------------------------------
 //   UndoCommand
@@ -1252,6 +1253,22 @@ class ChangeImage : public UndoCommand {
 
    public:
       ChangeImage(Image* i, bool l, bool a) : image(i), lockAspectRatio(l), autoScale(a) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
+//---------------------------------------------------------
+//   ChangeHairpin
+//---------------------------------------------------------
+
+class ChangeHairpin : public UndoCommand {
+      Hairpin* hairpin;
+      int veloChange;
+
+      void flip();
+
+   public:
+      ChangeHairpin(Hairpin* h, int c) : hairpin(h), veloChange(c) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

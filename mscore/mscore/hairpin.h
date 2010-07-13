@@ -21,6 +21,7 @@
 #ifndef __HAIRPIN_H__
 
 #include "line.h"
+#include "ui_hairpinproperties.h"
 
 class Score;
 class Hairpin;
@@ -38,6 +39,8 @@ class HairpinSegment : public LineSegment {
       virtual ElementType type() const      { return HAIRPIN_SEGMENT; }
       virtual void draw(QPainter&, ScoreView*) const;
       virtual QRectF bbox() const;
+      virtual bool genPropertyMenu(QMenu* popup) const;
+      virtual void propertyAction(ScoreView*, const QString& s);
       };
 
 //---------------------------------------------------------
@@ -47,12 +50,31 @@ class HairpinSegment : public LineSegment {
 //---------------------------------------------------------
 
 class Hairpin : public SLine {
+      int _veloChange;
+
    public:
       Hairpin(Score* s);
-      virtual Hairpin* clone() const { return new Hairpin(*this); }
+      virtual Hairpin* clone() const   { return new Hairpin(*this); }
       virtual ElementType type() const { return HAIRPIN; }
       virtual void layout();
       virtual LineSegment* createLineSegment();
+      int veloChange() const           { return _veloChange; }
+      void setVeloChange(int v)        { _veloChange = v;    }
+      virtual void write(Xml&) const;
+      virtual void read(QDomElement);
+      };
+
+//---------------------------------------------------------
+//   HairpinProperties
+//---------------------------------------------------------
+
+class HairpinProperties : public QDialog, public Ui::HairpinProperties {
+      Q_OBJECT
+      Hairpin* hairpin;
+
+   public:
+      HairpinProperties(Hairpin*, QWidget* parent = 0);
+      int changeVelo() { return veloChange->value(); }
       };
 
 #define __HAIRPIN_H__

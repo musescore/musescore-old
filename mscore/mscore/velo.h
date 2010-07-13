@@ -27,21 +27,31 @@
 */
 
 //---------------------------------------------------------
-//   VeloList
+///   VeloEvent
+///   item in VeloList
 //---------------------------------------------------------
 
-typedef std::map<const int, int>::iterator iVeloEvent;
-typedef std::map<const int, int>::const_iterator ciVeloEvent;
+enum VeloType { VELO_FIX, VELO_INTERPOLATE };
 
-/**
- List of note velocity changes
-*/
+struct VeloEvent {
+      VeloType type;
+      char val;
 
-class VeloList : public std::map<const int, int> {
+      VeloEvent() {}
+      VeloEvent(VeloType t, char v) : type(t), val(v) {}
+      };
+
+//---------------------------------------------------------
+///  VeloList
+///  List of note velocity changes
+//---------------------------------------------------------
+
+class VeloList : public QMap<int, VeloEvent> {
    public:
       VeloList() {}
       int velo(int tick) const;
-      void setVelo(int tick, int velo);
+      void setVelo(int tick, VeloEvent velo);
+      void setVelo(int tick, int velocity);
       };
 
 #endif

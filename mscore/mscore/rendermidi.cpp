@@ -47,6 +47,7 @@
 #include "navigate.h"
 #include "pedal.h"
 #include "staff.h"
+#include "hairpin.h"
 
 //---------------------------------------------------------
 //   updateChannel
@@ -109,7 +110,7 @@ void Score::updateChannel()
 //    return volta at tick
 //---------------------------------------------------------
 
-Volta* Score::searchVolta(int tick) const
+Volta* Score::searchVolta(int /*tick*/) const
       {
 #if 0 // TODO
       foreach(Element* el, *gel()) {
@@ -424,44 +425,62 @@ void Score::fixPpitch()
       //
       //    collect Dynamics
       //
-      VeloList velo[ns];
 
-#if 0 // TODO1
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-            velo[staffIdx].setVelo(0, 80);
-            Part* prt      = part(staffIdx);
+            Staff* st      = staff(staffIdx);
+            VeloList& velo = st->velocities();
+            velo.clear();
+            velo.setVelo(0, 80);
+            Part* prt      = st->part();
             int partStaves = prt->nstaves();
             int partStaff  = Score::staffIdx(prt);
 
-            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-                  foreach(const Element* e, *m->el()) {
+            for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+                  int tick = s->tick();
+                  foreach(const Element* e, s->annotations()) {
                         if (e->type() != DYNAMIC)
                               continue;
                         const Dynamic* d = static_cast<const Dynamic*>(e);
-                        int v = d->velocity();
-                        int dStaffIdx = d->staffIdx();
+                        int v            = d->velocity();
                         if (v < 1)     //  illegal value
                               continue;
+                        int dStaffIdx = d->staffIdx();
                         switch(d->dynType()) {
                               case DYNAMIC_STAFF:
                                     if( dStaffIdx == staffIdx)
-                                        velo[staffIdx].setVelo(d->tick(), v);
+                                        velo.setVelo(tick, v);
                                     break;
                               case DYNAMIC_PART:
-                                    if(dStaffIdx >= partStaff && dStaffIdx < partStaff+partStaves){
+                                    if (dStaffIdx >= partStaff && dStaffIdx < partStaff+partStaves){
                                         for (int i = partStaff; i < partStaff+partStaves; ++i)
-                                              velo[i].setVelo(d->tick(), v);
+                                              staff(i)->velocities().setVelo(tick, v);
                                     }
                                     break;
                               case DYNAMIC_SYSTEM:
                                     for (int i = 0; i < nstaves(); ++i)
-                                          velo[i].setVelo(d->tick(), v);
+                                          staff(i)->velocities().setVelo(tick, v);
                                     break;
                               }
                         }
+                  foreach(Element* e, s->spannerFor()) {
+                        if (e->type() != HAIRPIN)
+                              continue;
+                        Hairpin* h = static_cast<Hairpin*>(e);
+                        int velo = st->velocities().velo(tick);
+                        int incr = h->veloChange();
+                        int endVelo = velo + incr;
+                        if (endVelo > 127)
+                              endVelo = 127;
+                        else if (endVelo < 1)
+                              endVelo = 1;
+                        Segment* es = static_cast<Segment*>(h->endElement());
+                        int tick2 = es->tick();
+printf("=============hairpin %d(%d) + %d(%d)\n", velo, tick, incr, tick2);
+                        st->velocities().setVelo(tick, VeloEvent(VELO_INTERPOLATE, velo));
+                        st->velocities().setVelo(tick2, VeloEvent(VELO_FIX, endVelo));
+                        }
                   }
             }
-#endif
 
       for (int staffIdx = 0; staffIdx < ns; ++staffIdx) {
             int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instr()->transpose().chromatic;
@@ -489,7 +508,7 @@ void Score::fixPpitch()
                         // get velocity depending on dynamic marks as "p" of "sfz"
                         // crescendo and diminuendo
                         //
-                        int velocity = velo[staffIdx].velo(chord->tick());
+                        int velocity = staff(staffIdx)->velocities().velo(seg->tick());
                         foreach(Note* note, chord->notes()) {
 
                               //

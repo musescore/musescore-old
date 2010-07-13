@@ -36,7 +36,7 @@
    <item row="0" column="1">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>MIDI Values</string>
+      <string>Midi Playback Parameter</string>
      </property>
      <property name="flat">
       <bool>true</bool>

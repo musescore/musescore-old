@@ -27,37 +27,35 @@
 
 //---------------------------------------------------------
 //   velo
+//    return velocity at tick position
 //---------------------------------------------------------
 
 int VeloList::velo(int tick) const
       {
       if (empty())
             return 80;
-      ciVeloEvent i = upper_bound(tick);
-      if (i == begin())
+      VeloList::const_iterator i = upperBound(tick);
+      if (i == constBegin())
             return 80;
-      --i;
-      return i->second;
+      VeloList::const_iterator ii = i - 1;
+      if (ii.value().type == VELO_FIX)
+            return ii.value().val;
+      int tickDelta = i.key() - ii.key();
+      int veloDelta = i.value().val - ii.value().val;
+      return ii.value().val + ((tick-ii.key()) * veloDelta) / tickDelta;
       }
 
 //---------------------------------------------------------
 //   setVelo
 //---------------------------------------------------------
 
-void VeloList::setVelo(int tick, int v)
+void VeloList::setVelo(int tick, VeloEvent ve)
       {
-      std::pair<int, int> velo(tick, v);
-      std::pair<iVeloEvent,bool> p = insert(velo);
-      if (!p.second)
-            (*this)[tick] = v;
-      iVeloEvent i = p.first;
-      for (++i; i != end();) {
-            if (i->second != v)
-                  break;
-            iVeloEvent ii = i;
-            ++ii;
-            erase(i);
-            i = ii;
-            }
+      insert(tick, ve);
+      }
+
+void VeloList::setVelo(int tick, int velo)
+      {
+      insert(tick, VeloEvent(VELO_FIX, velo));
       }
 

@@ -33,7 +33,7 @@
 #include "select.h"
 #include "config.h"
 #include "element.h"
-#include "bsp.h"
+// #include "bsp.h"
 #include "al/fraction.h"
 #include "al/al.h"
 #include "scoreview.h"
@@ -199,7 +199,7 @@ class Score : public QObject {
       double _spatium;
       PageFormat* _pageFormat;
       QPaintDevice* _paintDevice;
-      BspTree bspTree;
+//      BspTree bspTree;
 
       //
       // generated objects during layout:
@@ -755,11 +755,10 @@ class Score : public QObject {
 
       void setPaintDevice(QPaintDevice* d)          { _paintDevice = d; }
       QPaintDevice* paintDevice() const             { return _paintDevice; }
-      QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
-      QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
-
-      void insertBsp(Element* e)                    { bspTree.insert(e); }
-      void removeBsp(Element* e)                    { bspTree.remove(e); }
+//      QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
+//      QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
+//      void insertBsp(Element* e)                    { bspTree.insert(e); }
+//      void removeBsp(Element* e)                    { bspTree.remove(e); }
 
       void setInstrumentNames();
       void connectTies();

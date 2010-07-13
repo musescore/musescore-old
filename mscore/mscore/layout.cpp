@@ -54,17 +54,9 @@
 
 void Score::rebuildBspTree()
       {
-      QRectF r;
-      QList<Element*> el;
-      for (MeasureBase* m = first(); m; m = m->next()) {
-            if (m->type() == MEASURE && static_cast<const Measure*>(m)->multiMeasure() < 0)
-                  continue;
-            m->scanElements(&el, collectElements);
-            }
-      foreach(Page* page, _pages) {
-            r |= page->abbox();
-            page->scanElements(&el, collectElements);
-            }
+      foreach(Page* page, _pages)
+            page->rebuildBspTree();
+#if 0 // TODO2
       foreach (Element* element, _gel) {
             if (element->type() == SLUR)
                   continue;
@@ -76,11 +68,7 @@ void Score::rebuildBspTree()
             }
       foreach(Beam* b, _beams)
             el.append(b);
-
-      int n = el.size();
-      bspTree.initialize(r, n);
-      for (int i = 0; i < n; ++i)
-            bspTree.insert(el.at(i));
+#endif
       }
 
 //---------------------------------------------------------
@@ -685,9 +673,7 @@ void Score::doLayout()
             page->layout();
             page->setNo(0);
             page->setPos(0.0, 0.0);
-
-            QRectF r = page->abbox();
-            bspTree.initialize(r, 0);     // clear bspTree
+            page->rebuildBspTree();
             return;
             }
 

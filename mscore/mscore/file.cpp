@@ -1622,7 +1622,7 @@ void Score::print(QPrinter* printer)
                   Page* page = pl.at(n);
 
                   QRectF fr = page->abbox();
-                  QList<const Element*> ell = items(fr);
+                  QList<const Element*> ell = page->items(fr);
 
                   foreach(const Element* e, ell) {
                         e->itemDiscovered = 0;

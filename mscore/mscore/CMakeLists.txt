@@ -105,7 +105,7 @@ QT4_WRAP_CPP (mocs
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
       pianoscene.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h stafftype.h
-      prefsdialog.h layoutbreak.h
+      prefsdialog.h layoutbreak.h hairpin.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)

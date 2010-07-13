@@ -161,12 +161,14 @@ class ScoreView : public QWidget {
       void cmdAddPitch1(int, bool);
       void cmdAddChordName();
       void cmdAddText(int style);
-      void cmdEnterRest(const Duration& d);
+      void cmdEnterRest(const Duration&);
       void cmdEnterRest();
-      void cmdTuplet(int n, ChordRest* cr);
+      void cmdTuplet(int n, ChordRest*);
       void cmdTuplet(int);
       void cmdRepeatSelection();
       void cmdChangeEnharmonic(bool);
+
+      Page* point2page(const QPointF&);
 
    private slots:
       void textUndoLevelAdded();

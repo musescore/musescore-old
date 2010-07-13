@@ -538,6 +538,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
 
 void Score::lassoSelect(const QRectF& bbox)
       {
+#if 0 // TODO2
       select(0, SELECT_SINGLE, 0);
       QRectF lr(bbox.normalized());
       QList<const Element*> el = items(lr);
@@ -549,6 +550,7 @@ void Score::lassoSelect(const QRectF& bbox)
                         select(const_cast<Element*>(e), SELECT_ADD, 0);
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------

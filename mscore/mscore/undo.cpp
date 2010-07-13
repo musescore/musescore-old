@@ -60,6 +60,7 @@
 #include "keysig.h"
 #include "timesig.h"
 #include "image.h"
+#include "hairpin.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -2236,3 +2237,15 @@ void ChangeImage::flip()
       lockAspectRatio = _lockAspectRatio;
       autoScale       = _autoScale;
       }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeHairpin::flip()
+      {
+      int vc = hairpin->veloChange();
+      hairpin->setVeloChange(veloChange);
+      veloChange = vc;
+      }
+
