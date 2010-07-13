@@ -22,6 +22,7 @@
 #define __PAGE_H__
 
 #include "element.h"
+#include "bsp.h"
 
 class System;
 class Text;
@@ -82,6 +83,7 @@ class Page : public Element {
       int _no;                      // page number
       Text* _pageNo;
       TextC* _copyright;
+      BspTree bspTree;
 
    public:
       Page(Score*);
@@ -116,6 +118,12 @@ class Page : public Element {
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       void clear();
+
+      QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
+      QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
+      void insertBsp(Element* e)                    { bspTree.insert(e); }
+      void removeBsp(Element* e)                    { bspTree.remove(e); }
+      void rebuildBspTree();
       };
 
 extern const PaperSize paperSizes[];

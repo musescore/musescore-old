@@ -48,6 +48,7 @@ Page::Page(Score* s)
    _no(0), _pageNo(0), _copyright(0)
       {
       }
+
 Page::~Page()
       {
       delete _pageNo;
@@ -587,4 +588,44 @@ void Page::remove(Element* e)
             printf("cannot remove %s from %s\n", e->name(), name());
             }
       }
+
+//---------------------------------------------------------
+//   rebuildBspTree
+//---------------------------------------------------------
+
+void Page::rebuildBspTree()
+      {
+      QList<Element*> el;
+      foreach(System* s, _systems) {
+            foreach(MeasureBase* m, s->measures()) {
+                  m->scanElements(&el, collectElements);
+                  }
+            }
+      scanElements(&el, collectElements);
+
+// TODO2: needs to be optimized away:
+
+      QRectF bb(abbox());
+      foreach (Element* element, *score()->gel()) {
+            if (element->type() == SLUR)
+                  continue;
+            if (element->track() != -1) {
+                  if (!element->staff()->show())
+                        continue;
+                  }
+            if (element->abbox().intersects(bb))
+                  element->scanElements(&el, collectElements);
+            }
+      foreach(Beam* b, score()->beams()) {
+            if (b->abbox().intersects(bb))
+                  el.append(b);
+            }
+//
+
+      int n = el.size();
+      bspTree.initialize(abbox(), n);
+      for (int i = 0; i < n; ++i)
+            bspTree.insert(el.at(i));
+      }
+
 

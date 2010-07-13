@@ -27,6 +27,7 @@
 #include "measure.h"
 #include "segment.h"
 #include "system.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   draw
@@ -88,6 +89,44 @@ QRectF HairpinSegment::bbox() const
       }
 
 //---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool HairpinSegment::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addSeparator();
+      a->setText(tr("Dynamics"));
+      if (visible())
+            a = popup->addAction(tr("Set Invisible"));
+      else
+            a = popup->addAction(tr("Set Visible"));
+      a->setData("invisible");
+
+      a = popup->addAction(tr("MIDI Properties..."));
+      a->setData("dynamics");
+
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void HairpinSegment::propertyAction(ScoreView* viewer, const QString& s)
+      {
+      if (s == "dynamics") {
+            HairpinProperties dp(hairpin());
+            int rv = dp.exec();
+            if (rv) {
+                  score()->undo()->push(new ChangeHairpin(hairpin(), dp.changeVelo()));
+                  }
+            }
+      else
+            Element::propertyAction(viewer, s);
+      }
+
+
+//---------------------------------------------------------
 //   Hairpin
 //---------------------------------------------------------
 
@@ -97,6 +136,7 @@ Hairpin::Hairpin(Score* s)
       setOffsetType(OFFSET_SPATIUM);
       setYoff(8.0);
       setLen(spatium() * 7);   // for use in palettes
+      _veloChange = 10;
       }
 
 //---------------------------------------------------------
@@ -119,3 +159,46 @@ LineSegment* Hairpin::createLineSegment()
       return new HairpinSegment(score());
       }
 
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Hairpin::write(Xml& xml) const
+      {
+      xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
+      xml.tag("veloChange", _veloChange);
+      SLine::writeProperties(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Hairpin::read(QDomElement e)
+      {
+      foreach(SpannerSegment* seg, spannerSegments())
+            delete seg;
+      spannerSegments().clear();
+      setId(e.attribute("id", "-1").toInt());
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "veloChange")
+                  _veloChange = val.toInt();
+            else if (!SLine::readProperties(e))
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   HairpinProperties
+//---------------------------------------------------------
+
+HairpinProperties::HairpinProperties(Hairpin* h, QWidget* parent)
+   : QDialog(parent)
+      {
+      setupUi(this);
+      hairpin = h;
+      veloChange->setValue(hairpin->veloChange());
+      }

@@ -1400,8 +1400,12 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
       QRectF fr = imatrix.mapRect(QRectF(rr));
 
       QRegion r1(rr);
-      foreach (const Page* page, _score->pages()) {
+      foreach (Page* page, _score->pages()) {
             QRectF pr(page->abbox());
+            if (pr.right() < fr.left())
+                  continue;
+            if (pr.left() > fr.right())
+                  break;
             if (debugMode) {
                   //
                   // show page margins
@@ -1410,13 +1414,12 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                   p.setPen(QPen(Qt::gray));
                   p.drawRect(bpr);
                   }
+            QList<const Element*> ell = page->items(fr);
+            qStableSort(ell.begin(), ell.end(), elementLessThan);
+            drawElements(p, ell);
             r1 -= _matrix.mapRect(pr).toAlignedRect();
             }
 //      p.setClipRect(fr);
-
-      QList<const Element*> ell = _score->items(fr);
-      qStableSort(ell.begin(), ell.end(), elementLessThan);
-      drawElements(p, ell);
 
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
@@ -2237,13 +2240,31 @@ static bool elementLower(const Element* e1, const Element* e2)
       }
 
 //---------------------------------------------------------
+//   point2page
+//---------------------------------------------------------
+
+Page* ScoreView::point2page(const QPointF& p)
+      {
+      foreach(Page* page, score()->pages()) {
+            if (page->abbox().contains(p))
+                  return page;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   elementsAt
 //---------------------------------------------------------
 
 const QList<const Element*> ScoreView::elementsAt(const QPointF& p)
       {
-      QList<const Element*> el = _score->items(p);
-      qSort(el.begin(), el.end(), elementLower);
+      QList<const Element*> el;
+
+      Page* page = point2page(p);
+      if (page) {
+            el = page->items(p);
+            qSort(el.begin(), el.end(), elementLower);
+            }
       return el;
       }
 
@@ -2273,7 +2294,11 @@ Element* ScoreView::elementNear(const QPointF& p)
       double w  = (preferences.proximity * .5) / matrix().m11();
       QRectF r(p.x() - w, p.y() - w, 3.0 * w, 3.0 * w);
 
-      QList<const Element*> el = _score->items(r);
+      Page* page = point2page(p);
+      if (!page)
+            return 0;
+
+      QList<const Element*> el = page->items(r);
       QList<const Element*> ll;
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
@@ -2762,8 +2787,8 @@ void ScoreView::startDrag()
             e->setStartDragPosition(e->userOff());
       QList<Element*> el;
       dragElement->scanElements(&el, collectElements);
-      foreach(Element* e, el)
-            _score->removeBsp(e);
+//TODO2      foreach(Element* e, el)
+//            _score->removeBsp(e);
       _score->end();
       }
 

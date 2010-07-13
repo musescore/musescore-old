@@ -1,3 +1,5 @@
+13.jul (ws)
+      - implement playback of hairpins (crescendo/decrescendo)
 12.jul (ws)
       - fix #6453: File containing a horizontal frame directly before a bar with a line break cannot be opened
         (la)

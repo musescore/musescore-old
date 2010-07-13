@@ -124,7 +124,7 @@ void PagePreview::paintEvent(QPaintEvent* ev)
       r1 -= matrix.mapRect(pbbox).toRect();
       p.translate(page->pos());
       page->draw(p, 0);
-
+#if 0 // TODO2
       QRectF fr = matrix.inverted().mapRect(QRectF(rr));
       QList<const Element*> ell = _score->items(fr);
 
@@ -141,6 +141,7 @@ void PagePreview::paintEvent(QPaintEvent* ev)
             e->draw(p, 0);
             p.translate(-ap);
             }
+#endif
 
       p.setMatrixEnabled(false);
       p.setClipRegion(r1);

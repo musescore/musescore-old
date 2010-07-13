@@ -135,60 +135,59 @@ void Navigator::paintEvent(QPaintEvent* ev)
       {
       QPainter p;
       QRect r(ev->rect());
-      if (redraw) {
-            if (_cv) {
-                  redraw = false;
-                  qreal m = (height()-10.0) / (_score->pageFormat()->height() * DPI);
-                  matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
-                     matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
+      if (redraw && _cv) {
+            redraw = false;
+            qreal m = (height()-10.0) / (_score->pageFormat()->height() * DPI);
+            matrix.setMatrix(m, matrix.m12(), matrix.m13(), matrix.m21(), m,
+               matrix.m23(), matrix.m31(), matrix.m32(), matrix.m33());
 
-                  QRectF r(0.0, 0.0, _cv->width(), _cv->height());
-                  viewRect = matrix.mapRect(_cv->toLogical(r)).toRect();
+            QRectF r(0.0, 0.0, _cv->width(), _cv->height());
+            viewRect = matrix.mapRect(_cv->toLogical(r)).toRect();
 
-                  QColor _fgColor(Qt::white);
-                  QColor _bgColor(Qt::gray);
-                  int dx = lrint(matrix.m11());
-                  int dy = lrint(matrix.m22());
+            QColor _fgColor(Qt::white);
+            QColor _bgColor(Qt::gray);
+            int dx = lrint(matrix.m11());
+            int dy = lrint(matrix.m22());
 
-                  r.setRect(0, 0, width(), height());
-                  QRect rr(r.x()-dx, r.y()-dy, r.width()+2*dx, r.height()+2*dy);
+            r.setRect(0, 0, width(), height());
+            QRect rr(r.x()-dx, r.y()-dy, r.width()+2*dx, r.height()+2*dy);
 
-                  p.begin(&pm);
-                  p.setRenderHint(QPainter::Antialiasing, false);
+            p.begin(&pm);
+            p.setRenderHint(QPainter::Antialiasing, false);
 
-                  p.fillRect(rr, _fgColor);
-                  p.setTransform(matrix);
-                  QRegion r1(rr);
-                  foreach(const Page* page, _score->pages()) {
-                        QRectF pbbox(page->abbox());
-                        r1 -= matrix.mapRect(pbbox).toRect();
-                        p.translate(page->pos());
-                        page->draw(p, 0);
-                        p.translate(-page->pos());
-                        }
-
-                  QRectF fr = matrix.inverted().mapRect(QRectF(rr));
-                  QList<const Element*> ell = _score->items(fr);
-
-                  for (int i = 0; i < ell.size(); ++i) {
-                        const Element* e = ell.at(i);
-                        e->itemDiscovered = 0;
-
-                        if (!(e->visible() || _score->showInvisible()))
-                              continue;
-
-                        QPointF ap(e->canvasPos());
-                        p.translate(ap);
-                        p.setPen(QPen(e->color()));
-                        e->draw(p, 0);
-                        p.translate(-ap);
-                        }
-
-                  p.setMatrixEnabled(false);
-                  p.setClipRegion(r1);
-                  p.fillRect(rr, _bgColor);
-                  p.end();
+            p.fillRect(rr, _fgColor);
+            p.setTransform(matrix);
+            QRegion r1(rr);
+            foreach(const Page* page, _score->pages()) {
+                  QRectF pbbox(page->abbox());
+                  r1 -= matrix.mapRect(pbbox).toRect();
+                  p.translate(page->pos());
+                  page->draw(p, 0);
+                  p.translate(-page->pos());
                   }
+#if 0 // TODO2
+            QRectF fr = matrix.inverted().mapRect(QRectF(rr));
+            QList<const Element*> ell = _score->items(fr);
+
+            for (int i = 0; i < ell.size(); ++i) {
+                  const Element* e = ell.at(i);
+                  e->itemDiscovered = 0;
+
+                  if (!(e->visible() || _score->showInvisible()))
+                        continue;
+
+                  QPointF ap(e->canvasPos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p, 0);
+                  p.translate(-ap);
+                  }
+#endif
+
+            p.setMatrixEnabled(false);
+            p.setClipRegion(r1);
+            p.fillRect(rr, _bgColor);
+            p.end();
             }
       p.begin(this);
       p.drawPixmap(r.topLeft(), pm, r);
