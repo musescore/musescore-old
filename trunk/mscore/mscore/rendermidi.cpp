@@ -430,23 +430,22 @@ void Score::updateHairpin(Hairpin* h)
       else if (endVelo < 1)
             endVelo = 1;
 
-      st->velocities().setVelo(tick,    VeloEvent(VELO_INTERPOLATE, velo));
-      st->velocities().setVelo(tick2-1, VeloEvent(VELO_FIX, endVelo));
-
       switch(h->dynType()) {
             case DYNAMIC_STAFF:
-                  if (dStaffIdx == staffIdx)
-                        velo.setVelo(tick, v);
+                  st->velocities().setVelo(tick,    VeloEvent(VELO_INTERPOLATE, velo));
+                  st->velocities().setVelo(tick2-1, VeloEvent(VELO_FIX, endVelo));
                   break;
             case DYNAMIC_PART:
-                  if (dStaffIdx >= partStaff && dStaffIdx < partStaff+partStaves){
-                        for (int i = partStaff; i < partStaff+partStaves; ++i)
-                              staff(i)->velocities().setVelo(tick, v);
+                  foreach(Staff* s, *st->part()->staves()) {
+                        s->velocities().setVelo(tick,    VeloEvent(VELO_INTERPOLATE, velo));
+                        s->velocities().setVelo(tick2-1, VeloEvent(VELO_FIX, endVelo));
                         }
                   break;
             case DYNAMIC_SYSTEM:
-                  for (int i = 0; i < nstaves(); ++i)
-                        staff(i)->velocities().setVelo(tick, v);
+                  foreach(Staff* s, _staves) {
+                        s->velocities().setVelo(tick,    VeloEvent(VELO_INTERPOLATE, velo));
+                        s->velocities().setVelo(tick2-1, VeloEvent(VELO_FIX, endVelo));
+                        }
                   break;
             }
       }
