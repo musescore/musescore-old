@@ -48,7 +48,6 @@ void VolSlider::mouseDoubleClickEvent(QMouseEvent* ev)
       else
       	_value = _minValue;
       valueChange();
-      update();
       }
 
 

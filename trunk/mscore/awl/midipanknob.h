@@ -37,14 +37,11 @@ namespace Awl {
 class MidiPanKnob : public Knob {
       Q_OBJECT
 
-      virtual void valueChange() {
-            emit valueChanged(_value + 64.0f, _id);
-            }
+      virtual void valueChange();
 
    public slots:
-      virtual void setValue(double v) {
-            AbstractSlider::setValue(v - 64.0f);
-            }
+      virtual void setValue(double v) { AbstractSlider::setValue(v - 64.0f); }
+
    public:
       MidiPanKnob(QWidget* parent = 0);
       virtual double value() const { return _value + 64.0f; }
