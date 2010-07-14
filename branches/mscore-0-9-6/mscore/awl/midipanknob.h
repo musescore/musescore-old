@@ -39,6 +39,7 @@ class MidiPanKnob : public Knob {
 
       virtual void valueChange() {
             emit valueChanged(_value + 64.0f, _id);
+            update();
             }
 
    public slots:

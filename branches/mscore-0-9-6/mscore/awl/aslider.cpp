@@ -175,6 +175,7 @@ void AbstractSlider::setValue(double val)
 void AbstractSlider::valueChange()
       {
       emit valueChanged(value(), _id);
+      update();
       }
 
 //---------------------------------------------------------
