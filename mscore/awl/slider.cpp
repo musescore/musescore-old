@@ -186,7 +186,6 @@ void Slider::mouseMoveEvent(QMouseEvent* ev)
             ppos = pixel;
       int pos = _invert ? (pixel - ppos) : ppos;
       _value  = (pos * (maxValue() - minValue()) / pixel) + minValue() - 0.000001;
-      update();
       valueChange();
       }
 
