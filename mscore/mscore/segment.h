@@ -95,6 +95,8 @@ class Segment : public Element {
 
       void init();
       void checkEmpty() const;
+      void addSpanner(Spanner*);
+      void removeSpanner(Spanner*);
 
    public:
       Segment(Measure*);
