@@ -118,6 +118,7 @@ enum BeamMode { BEAM_AUTO, BEAM_BEGIN, BEAM_MID, BEAM_END,
 
 enum TransposeDirection { TRANSPOSE_UP, TRANSPOSE_DOWN, TRANSPOSE_CLOSEST };
 enum TransposeMode      { TRANSPOSE_BY_KEY, TRANSPOSE_BY_INTERVAL };
+enum DynamicType        { DYNAMIC_STAFF, DYNAMIC_PART, DYNAMIC_SYSTEM };
 
 //---------------------------------------------------------
 //   NoteType

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,6 +21,7 @@
 #ifndef __HAIRPIN_H__
 
 #include "line.h"
+#include "globals.h"
 #include "ui_hairpinproperties.h"
 
 class Score;
@@ -51,15 +52,19 @@ class HairpinSegment : public LineSegment {
 
 class Hairpin : public SLine {
       int _veloChange;
+      DynamicType _dynType;
 
    public:
       Hairpin(Score* s);
       virtual Hairpin* clone() const   { return new Hairpin(*this); }
       virtual ElementType type() const { return HAIRPIN; }
+      Segment* segment() const         { return (Segment*)parent(); }
       virtual void layout();
       virtual LineSegment* createLineSegment();
       int veloChange() const           { return _veloChange; }
       void setVeloChange(int v)        { _veloChange = v;    }
+      DynamicType dynType() const      { return _dynType; }
+      void setDynType(DynamicType t)   { _dynType = t;    }
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
       };
@@ -74,7 +79,8 @@ class HairpinProperties : public QDialog, public Ui::HairpinProperties {
 
    public:
       HairpinProperties(Hairpin*, QWidget* parent = 0);
-      int changeVelo() { return veloChange->value(); }
+      int changeVelo() const { return veloChange->value(); }
+      DynamicType dynamicType() const;
       };
 
 #define __HAIRPIN_H__

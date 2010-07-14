@@ -29,6 +29,7 @@
 #include "globals.h"
 #include "key.h"
 #include "velo.h"
+#include "pitch.h"
 
 class Instrument;
 class ClefList;
@@ -85,7 +86,9 @@ class Staff {
       StaffType* _staffType;
 
       QMap<int,int> _channelList[VOICES];
-      VeloList _velocities;
+
+      VeloList _velocities;         ///< cached value
+      PitchList _pitchOffsets;      ///< cached value
 
    public:
       Staff(Score*, Part*, int);
@@ -147,6 +150,7 @@ class Staff {
       void setUpdateClefList(bool v)   { _updateClefList = v;    }
       void setUpdateKeymap(bool v)     { _updateKeymap = v;      }
       VeloList& velocities()           { return _velocities;     }
+      PitchList& pitchOffsets()        { return _pitchOffsets;   }
       };
 #endif
 

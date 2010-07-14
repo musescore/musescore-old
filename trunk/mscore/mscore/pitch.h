@@ -1,9 +1,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id$
+//  $Id: velo.h 3281 2010-07-13 13:34:19Z wschweer $
 //
-//  Copyright (C) 2009-2010 Werner Schweer and others
+//  Copyright (C) 2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,41 +18,19 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __VELO_H__
-#define __VELO_H__
-
-/**
- \file
- Definition of classes VeloList.
-*/
+#ifndef __PITCH_H__
+#define __PITCH_H__
 
 //---------------------------------------------------------
-///   VeloEvent
-///   item in VeloList
+///  PitchList
+///  List of note pitch offsets
 //---------------------------------------------------------
 
-enum VeloType { VELO_FIX, VELO_INTERPOLATE };
-
-struct VeloEvent {
-      VeloType type;
-      char val;
-
-      VeloEvent() {}
-      VeloEvent(VeloType t, char v) : type(t), val(v) {}
-      };
-
-//---------------------------------------------------------
-///  VeloList
-///  List of note velocity changes
-//---------------------------------------------------------
-
-class VeloList : public QMap<int, VeloEvent> {
+class PitchList : public QMap<int, int> {
    public:
-      VeloList() {}
-      int velo(int tick) const;
-      int nextVelo(int tick) const;
-      void setVelo(int tick, VeloEvent velo);
-      void setVelo(int tick, int velocity);
+      PitchList() {}
+      int pitchOffset(int tick) const;
+      void setPitchOffset(int tick, int offset) { insert(tick, offset); }
       };
 
 #endif

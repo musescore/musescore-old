@@ -115,10 +115,14 @@ bool HairpinSegment::genPropertyMenu(QMenu* popup) const
 void HairpinSegment::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "dynamics") {
-            HairpinProperties dp(hairpin());
+            Hairpin* hp = hairpin();
+            HairpinProperties dp(hp);
             int rv = dp.exec();
-            if (rv) {
-                  score()->undo()->push(new ChangeHairpin(hairpin(), dp.changeVelo()));
+
+            int vo = dp.changeVelo();
+            DynamicType dt = dp.dynamicType();
+            if (rv && ((vo != hp->veloChange()) || (dt != hp->dynType()))) {
+                  score()->undo()->push(new ChangeHairpin(hp, vo, dt));
                   }
             }
       else
@@ -137,6 +141,7 @@ Hairpin::Hairpin(Score* s)
       setYoff(8.0);
       setLen(spatium() * 7);   // for use in palettes
       _veloChange = 10;
+      _dynType    = DYNAMIC_PART;
       }
 
 //---------------------------------------------------------
@@ -167,6 +172,8 @@ void Hairpin::write(Xml& xml) const
       {
       xml.stag(QString("%1 id=\"%2\"").arg(name()).arg(id()));
       xml.tag("veloChange", _veloChange);
+      if (_dynType != DYNAMIC_PART)
+            xml.tag("dynType", _dynType);
       SLine::writeProperties(xml);
       xml.etag();
       }
@@ -186,6 +193,8 @@ void Hairpin::read(QDomElement e)
             QString val(e.text());
             if (tag == "veloChange")
                   _veloChange = val.toInt();
+            else if (e.tagName() == "dynType")
+                  _dynType = DynamicType(e.text().toInt());
             else if (!SLine::readProperties(e))
                   domError(e);
             }
@@ -202,3 +211,18 @@ HairpinProperties::HairpinProperties(Hairpin* h, QWidget* parent)
       hairpin = h;
       veloChange->setValue(hairpin->veloChange());
       }
+
+//---------------------------------------------------------
+//   dynamicType
+//---------------------------------------------------------
+
+DynamicType HairpinProperties::dynamicType() const
+      {
+      if (staffButton->isChecked())
+            return DYNAMIC_STAFF;
+      if (systemButton->isChecked())
+            return DYNAMIC_SYSTEM;
+      // default:
+      return DYNAMIC_PART;
+      }
+

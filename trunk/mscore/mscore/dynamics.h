@@ -22,6 +22,7 @@
 #define __DYNAMICS_H__
 
 #include "text.h"
+#include "globals.h"
 #include "ui_dynamicproperties.h"
 
 class Measure;
@@ -38,8 +39,6 @@ struct Dyn {
       Dyn(int velo, const char* t)
          : velocity(velo), tag(t) {}
       };
-
-enum DynamicType { DYNAMIC_STAFF, DYNAMIC_PART, DYNAMIC_SYSTEM };
 
 //---------------------------------------------------------
 //   Dynamic

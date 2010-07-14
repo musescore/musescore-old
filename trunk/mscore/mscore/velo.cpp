@@ -46,6 +46,19 @@ int VeloList::velo(int tick) const
       }
 
 //---------------------------------------------------------
+//   nextVelo
+//    return next velocity event after tick position
+//---------------------------------------------------------
+
+int VeloList::nextVelo(int tick) const
+      {
+      if (empty())
+            return 80;
+      VeloList::const_iterator i = upperBound(tick);
+      return i.value().val;
+      }
+
+//---------------------------------------------------------
 //   setVelo
 //---------------------------------------------------------
 
