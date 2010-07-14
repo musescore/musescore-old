@@ -411,7 +411,9 @@ void Score::updateHairpin(Hairpin* h)
       int incr  = h->veloChange();
 
       Segment* es = static_cast<Segment*>(h->endElement());
-      int tick2 = es->tick();
+      if (!es)
+            return;
+      int tick2 = es->tick() - 1;
 
       //
       // If velocity increase/decrease is zero, then assume
@@ -421,7 +423,7 @@ void Score::updateHairpin(Hairpin* h)
 
       int endVelo = velo;
       if (incr == 0)
-            endVelo = st->velocities().nextVelo(tick2);
+            endVelo = st->velocities().nextVelo(tick2+1);
       else
             endVelo += incr;
 
@@ -432,19 +434,52 @@ void Score::updateHairpin(Hairpin* h)
 
       switch(h->dynType()) {
             case DYNAMIC_STAFF:
-                  st->velocities().setVelo(tick,    VeloEvent(VELO_INTERPOLATE, velo));
-                  st->velocities().setVelo(tick2-1, VeloEvent(VELO_FIX, endVelo));
+                  st->velocities().setVelo(tick,  VeloEvent(VELO_INTERPOLATE, velo));
+                  st->velocities().setVelo(tick2, VeloEvent(VELO_FIX, endVelo));
                   break;
             case DYNAMIC_PART:
                   foreach(Staff* s, *st->part()->staves()) {
-                        s->velocities().setVelo(tick,    VeloEvent(VELO_INTERPOLATE, velo));
-                        s->velocities().setVelo(tick2-1, VeloEvent(VELO_FIX, endVelo));
+                        s->velocities().setVelo(tick,  VeloEvent(VELO_INTERPOLATE, velo));
+                        s->velocities().setVelo(tick2, VeloEvent(VELO_FIX, endVelo));
                         }
                   break;
             case DYNAMIC_SYSTEM:
                   foreach(Staff* s, _staves) {
-                        s->velocities().setVelo(tick,    VeloEvent(VELO_INTERPOLATE, velo));
-                        s->velocities().setVelo(tick2-1, VeloEvent(VELO_FIX, endVelo));
+                        s->velocities().setVelo(tick,  VeloEvent(VELO_INTERPOLATE, velo));
+                        s->velocities().setVelo(tick2, VeloEvent(VELO_FIX, endVelo));
+                        }
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   removeHairpin
+//---------------------------------------------------------
+
+void Score::removeHairpin(Hairpin* h)
+      {
+      Staff* st = h->staff();
+      int tick  = h->segment()->tick();
+      Segment* es = static_cast<Segment*>(h->endElement());
+      if (!es)
+            return;
+      int tick2 = es->tick() - 1;
+
+      switch(h->dynType()) {
+            case DYNAMIC_STAFF:
+                  st->velocities().remove(tick);
+                  st->velocities().remove(tick2);
+                  break;
+            case DYNAMIC_PART:
+                  foreach(Staff* s, *st->part()->staves()) {
+                        s->velocities().remove(tick);
+                        s->velocities().remove(tick2);
+                        }
+                  break;
+            case DYNAMIC_SYSTEM:
+                  foreach(Staff* s, _staves) {
+                        s->velocities().remove(tick);
+                        s->velocities().remove(tick2);
                         }
                   break;
             }
@@ -460,6 +495,8 @@ void Score::fixPpitch()
       //
       //    collect Dynamics & Ottava
       //
+
+printf("fixPpitch\n");
 
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             Staff* st      = staff(staffIdx);
@@ -506,7 +543,7 @@ void Score::fixPpitch()
                               Hairpin* h = static_cast<Hairpin*>(e);
                               updateHairpin(h);
                               }
-                        else if (e->type() == OTTAVA) {
+/*                        else if (e->type() == OTTAVA) {
                               Ottava* o = static_cast<Ottava*>(e);
                               Segment* es = static_cast<Segment*>(o->endElement());
                               int tick2 = es->tick();
@@ -514,6 +551,7 @@ void Score::fixPpitch()
                               st->pitchOffsets().setPitchOffset(tick, shift);
                               st->pitchOffsets().setPitchOffset(tick2, 0);
                               }
+ */
                         }
                   }
             }

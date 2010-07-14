@@ -2217,6 +2217,20 @@ void Measure::read(QDomElement e, int staffIdx)
                                     Segment* s = getSegment(SegChordRest, score()->curTick);
                                     e->setEndElement(s);
                                     s->addSpannerBack(e);
+
+                                    if (e->type() == OTTAVA) {
+                                          Ottava* o = static_cast<Ottava*>(e);
+                                          int shift = o->pitchShift();
+                                          Staff* st = o->staff();
+                                          int tick1 = static_cast<Segment*>(o->startElement())->tick();
+                                          st->pitchOffsets().setPitchOffset(tick1, shift);
+                                          st->pitchOffsets().setPitchOffset(s->tick(), 0);
+                                          }
+                                    else if (e->type() == HAIRPIN) {
+                                          Hairpin* hp = static_cast<Hairpin*>(e);
+                                          score()->updateHairpin(hp);
+                                          }
+
                                     break;
                                     }
                               }

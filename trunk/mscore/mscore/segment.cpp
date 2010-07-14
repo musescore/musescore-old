@@ -35,6 +35,8 @@
 #include "staff.h"
 #include "spanner.h"
 #include "line.h"
+#include "hairpin.h"
+#include "ottava.h"
 
 //---------------------------------------------------------
 //   subTypeName
@@ -308,6 +310,29 @@ void Segment::removeStaff(int staff)
       }
 
 //---------------------------------------------------------
+//   addSpanner
+//---------------------------------------------------------
+
+void Segment::addSpanner(Spanner* l)
+      {
+      Element* e = l->endElement();
+      if (e)
+            static_cast<Segment*>(e)->addSpannerBack(l);
+      _spannerFor.append(l);
+      }
+
+//---------------------------------------------------------
+//   removeSpanner
+//---------------------------------------------------------
+
+void Segment::removeSpanner(Spanner* l)
+      {
+      static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
+      if (!_spannerFor.removeOne(l))
+            printf("%p cannot remove spanner %p, size %d\n", this, l, _spannerFor.size());
+      }
+
+//---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
@@ -343,19 +368,33 @@ void Segment::add(Element* el)
                   empty = false;
                   break;
 
-            case VOLTA:
+            case HAIRPIN:
+                  addSpanner(static_cast<Spanner*>(el));
+                  score()->updateHairpin(static_cast<Hairpin*>(el));
+                  score()->setPlaylistDirty(true);
+                  break;
+
             case OTTAVA:
+                  {
+                  addSpanner(static_cast<Spanner*>(el));
+                  Ottava* o   = static_cast<Ottava*>(el);
+                  Segment* es = static_cast<Segment*>(o->endElement());
+                  if (es) {
+                        int tick2   = es->tick();
+                        int shift   = o->pitchShift();
+                        Staff* st = o->staff();
+                        st->pitchOffsets().setPitchOffset(tick(), shift);
+                        st->pitchOffsets().setPitchOffset(tick2, 0);
+                        }
+                  score()->setPlaylistDirty(true);
+                  }
+                  break;
+
+            case VOLTA:
             case TRILL:
             case PEDAL:
             case TEXTLINE:
-            case HAIRPIN:
-                  {
-                  Spanner* l = static_cast<Spanner*>(el);
-                  Element* e = l->endElement();
-                  if (e)
-                        static_cast<Segment*>(e)->addSpannerBack(l);
-                  _spannerFor.append(l);
-                  }
+                  addSpanner(static_cast<Spanner*>(el));
                   break;
 
             case DYNAMIC:
@@ -446,18 +485,30 @@ void Segment::remove(Element* el)
                   _elist[track] = 0;
                   break;
 
-            case VOLTA:
             case OTTAVA:
+                  {
+                  Ottava* o   = static_cast<Ottava*>(el);
+                  Segment* es = static_cast<Segment*>(o->endElement());
+                  int tick2   = es->tick();
+                  Staff* st   = o->staff();
+                  st->pitchOffsets().remove(tick());
+                  st->pitchOffsets().remove(tick2);
+                  removeSpanner(static_cast<Spanner*>(el));
+                  score()->setPlaylistDirty(true);
+                  }
+                  break;
+
+            case HAIRPIN:
+                  score()->removeHairpin(static_cast<Hairpin*>(el));
+                  removeSpanner(static_cast<Spanner*>(el));
+                  score()->setPlaylistDirty(true);
+                  break;
+
+            case VOLTA:
             case TRILL:
             case PEDAL:
             case TEXTLINE:
-            case HAIRPIN:
-                  {
-                  Spanner* l = static_cast<Spanner*>(el);
-                  static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
-                  if (!_spannerFor.removeOne(l))
-                        printf("%p cannot remove spanner %p, size %d\n", this, l, _spannerFor.size());
-                  }
+                  removeSpanner(static_cast<Spanner*>(el));
                   break;
 
             case DYNAMIC:

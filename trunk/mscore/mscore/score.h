@@ -755,10 +755,6 @@ class Score : public QObject {
 
       void setPaintDevice(QPaintDevice* d)          { _paintDevice = d; }
       QPaintDevice* paintDevice() const             { return _paintDevice; }
-//      QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
-//      QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
-//      void insertBsp(Element* e)                    { bspTree.insert(e); }
-//      void removeBsp(Element* e)                    { bspTree.remove(e); }
 
       void setInstrumentNames();
       void connectTies();
@@ -808,7 +804,8 @@ class Score : public QObject {
       void addLayoutFlag(int val)                        { layoutFlags |= val; }
       int symIdx() const                                 { return _symIdx; }
       void addImage(Element*);
-      void updateHairpin(Hairpin* h);
+      void updateHairpin(Hairpin*);       // add/modify hairpin to pitchOffset list
+      void removeHairpin(Hairpin*);       // remove hairpin from pitchOffset list
       };
 
 extern Score* gscore;
