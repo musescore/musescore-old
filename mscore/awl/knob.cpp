@@ -113,7 +113,6 @@ void Knob::mousePressEvent(QMouseEvent* ev)
             if (r.contains(ev->pos())) {
                   setValue(.0f);
                   valueChange();
-                  update();
                   }
             }
       }
@@ -144,7 +143,6 @@ void Knob::mouseMoveEvent(QMouseEvent* ev)
             _value = _maxValue;
       startY    = y;
       valueChange();
-      update();
       }
 
 //---------------------------------------------------------
