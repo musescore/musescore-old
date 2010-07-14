@@ -657,11 +657,11 @@ class ChangeUserOffset : public UndoCommand {
 class ChangeDynamic : public UndoCommand {
       Dynamic* dynamic;
       int velocity;
-      int dynType;
+      DynamicType dynType;
       void flip();
 
    public:
-      ChangeDynamic(Dynamic*, int velocity, int dt);
+      ChangeDynamic(Dynamic*, int velocity, DynamicType dt);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };
@@ -1264,11 +1264,13 @@ class ChangeImage : public UndoCommand {
 class ChangeHairpin : public UndoCommand {
       Hairpin* hairpin;
       int veloChange;
+      DynamicType dynType;
 
       void flip();
 
    public:
-      ChangeHairpin(Hairpin* h, int c) : hairpin(h), veloChange(c) {}
+      ChangeHairpin(Hairpin* h, int c, DynamicType t)
+         : hairpin(h), veloChange(c), dynType(t) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       };

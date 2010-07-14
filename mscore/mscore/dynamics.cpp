@@ -301,7 +301,7 @@ void Dynamic::propertyAction(ScoreView* viewer, const QString& s)
                   DynamicType nt = _dynType;
                   _velocity      = oldVelo;
                   _dynType       = ot;
-                  score()->undoChangeDynamic(this, newVelo, int(nt));
+                  score()->undoChangeDynamic(this, newVelo, nt);
                   }
             }
       else

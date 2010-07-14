@@ -494,7 +494,7 @@ void Score::undoChangeUserOffset(Element* e, const QPointF& offset)
 //   undoChangeDynamic
 //---------------------------------------------------------
 
-void Score::undoChangeDynamic(Dynamic* e, int velocity, int type)
+void Score::undoChangeDynamic(Dynamic* e, int velocity, DynamicType type)
       {
       _undo->push(new ChangeDynamic(e, velocity, type));
       }
@@ -1496,7 +1496,7 @@ void ChangeUserOffset::flip()
 //   ChangeDynamic
 //---------------------------------------------------------
 
-ChangeDynamic::ChangeDynamic(Dynamic* d, int v, int dt)
+ChangeDynamic::ChangeDynamic(Dynamic* d, int v, DynamicType dt)
       {
       dynamic  = d;
       velocity = v;
@@ -1508,8 +1508,8 @@ void ChangeDynamic::flip()
       int v = dynamic->velocity();
       DynamicType t = dynamic->dynType();
       dynamic->setVelocity(velocity);
-      dynamic->setDynType(DynamicType(dynType));
-      dynType  = int(t);
+      dynamic->setDynType(dynType);
+      dynType  = t;
       velocity = v;
       dynamic->score()->fixPpitch();
       }
@@ -2244,8 +2244,12 @@ void ChangeImage::flip()
 
 void ChangeHairpin::flip()
       {
-      int vc = hairpin->veloChange();
+      int vc        = hairpin->veloChange();
+      DynamicType t = hairpin->dynType();
       hairpin->setVeloChange(veloChange);
+      hairpin->setDynType(dynType);
       veloChange = vc;
+      dynType    = t;
+      hairpin->score()->updateHairpin(hairpin);
       }
 

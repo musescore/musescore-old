@@ -400,30 +400,66 @@ void Score::toEList(EventMap* events)
       }
 
 //---------------------------------------------------------
+//   updateHairpin
+//---------------------------------------------------------
+
+void Score::updateHairpin(Hairpin* h)
+      {
+      Staff* st = h->staff();
+      int tick  = h->segment()->tick();
+      int velo  = st->velocities().velo(tick);
+      int incr  = h->veloChange();
+
+      Segment* es = static_cast<Segment*>(h->endElement());
+      int tick2 = es->tick();
+
+      //
+      // If velocity increase/decrease is zero, then assume
+      // the end velocity is taken from the next velocity
+      // event (the next dynamics symbol after the hairpin).
+      //
+
+      int endVelo = velo;
+      if (incr == 0)
+            endVelo = st->velocities().nextVelo(tick2);
+      else
+            endVelo += incr;
+
+      if (endVelo > 127)
+            endVelo = 127;
+      else if (endVelo < 1)
+            endVelo = 1;
+
+      st->velocities().setVelo(tick,    VeloEvent(VELO_INTERPOLATE, velo));
+      st->velocities().setVelo(tick2-1, VeloEvent(VELO_FIX, endVelo));
+
+      switch(h->dynType()) {
+            case DYNAMIC_STAFF:
+                  if (dStaffIdx == staffIdx)
+                        velo.setVelo(tick, v);
+                  break;
+            case DYNAMIC_PART:
+                  if (dStaffIdx >= partStaff && dStaffIdx < partStaff+partStaves){
+                        for (int i = partStaff; i < partStaff+partStaves; ++i)
+                              staff(i)->velocities().setVelo(tick, v);
+                        }
+                  break;
+            case DYNAMIC_SYSTEM:
+                  for (int i = 0; i < nstaves(); ++i)
+                        staff(i)->velocities().setVelo(tick, v);
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
 //   fixPpitch
 //    calculate play pitch and velocity for all notes
 //---------------------------------------------------------
 
 void Score::fixPpitch()
       {
-      int ns = nstaves();
-      QList<OttavaShiftSegment> osl[ns];
-
       //
-      //    collect ottavas
-      //
-      foreach(Element* e, _gel) {
-            if (e->type() == OTTAVA) {
-                  Ottava* ottava = static_cast<Ottava*>(e);
-                  OttavaShiftSegment ss;
-                  ss.stick = ottava->tick();
-                  ss.etick = ottava->tick2();
-                  ss.shift = ottava->pitchShift();
-                  osl[e->staffIdx()].append(ss);
-                  }
-            }
-      //
-      //    collect Dynamics
+      //    collect Dynamics & Ottava
       //
 
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
@@ -438,6 +474,8 @@ void Score::fixPpitch()
             for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
                   int tick = s->tick();
                   foreach(const Element* e, s->annotations()) {
+                        if (e->staffIdx() != staffIdx)
+                              continue;
                         if (e->type() != DYNAMIC)
                               continue;
                         const Dynamic* d = static_cast<const Dynamic*>(e);
@@ -463,41 +501,36 @@ void Score::fixPpitch()
                               }
                         }
                   foreach(Element* e, s->spannerFor()) {
-                        if (e->type() != HAIRPIN)
+                        if (e->staffIdx() != staffIdx)
                               continue;
-                        Hairpin* h = static_cast<Hairpin*>(e);
-                        int velo = st->velocities().velo(tick);
-                        int incr = h->veloChange();
-                        int endVelo = velo + incr;
-                        if (endVelo > 127)
-                              endVelo = 127;
-                        else if (endVelo < 1)
-                              endVelo = 1;
-                        Segment* es = static_cast<Segment*>(h->endElement());
-                        int tick2 = es->tick();
-printf("=============hairpin %d(%d) + %d(%d)\n", velo, tick, incr, tick2);
-                        st->velocities().setVelo(tick, VeloEvent(VELO_INTERPOLATE, velo));
-                        st->velocities().setVelo(tick2, VeloEvent(VELO_FIX, endVelo));
+                        if (e->type() == HAIRPIN) {
+                              Hairpin* h = static_cast<Hairpin*>(e);
+                              updateHairpin(h);
+                              }
+                        else if (e->type() == OTTAVA) {
+                              Ottava* o = static_cast<Ottava*>(e);
+                              Segment* es = static_cast<Segment*>(o->endElement());
+                              int tick2 = es->tick();
+                              int shift = o->pitchShift();
+                              st->pitchOffsets().setPitchOffset(tick, shift);
+                              st->pitchOffsets().setPitchOffset(tick2, 0);
+                              }
                         }
                   }
             }
 
-      for (int staffIdx = 0; staffIdx < ns; ++staffIdx) {
-            int pitchOffset = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instr()->transpose().chromatic;
-            Instrument* instr = part(staffIdx)->instr();
+      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+            int pitchOffset   = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instr()->transpose().chromatic;
+            Staff* st         = staff(staffIdx);
+            Instrument* instr = st->part()->instr();
+            int strack        = staffIdx * VOICES;
+            int etrack        = strack + VOICES;
 
             for (Segment* seg = firstSegment(); seg; seg = seg->next1()) {
                   if (seg->subtype() != SegChordRest && seg->subtype() != SegGrace)
                         continue;
-                  int ottavaShift = 0;
-                  foreach(const OttavaShiftSegment& ss, osl[staffIdx]) {
-                        if (seg->tick() >= ss.stick && seg->tick() < ss.etick) {
-                              ottavaShift = ss.shift;
-                              break;
-                              }
-                        }
-                  int strack = staffIdx * VOICES;
-                  int etrack = strack + VOICES;
+                  int tick        = seg->tick();
+                  int ottavaShift = st->pitchOffsets().pitchOffset(tick);
                   for (int track = strack; track < etrack; ++track) {
                         Element* el = seg->element(track);
                         if (!el || el->type() != CHORD)
