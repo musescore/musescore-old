@@ -522,13 +522,12 @@ bool Score::read(QString name)
 
       rebuildMidiMapping();
       updateChannel();
-      fixPpitch();
 
       mscore->updateRecentScores(this);
 
       startCmd();
       _needLayout = true;
-      layoutFlags |= LAYOUT_FIX_TICKS;
+      layoutFlags |= LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO;
       endCmd();
 
       // adjust readPos
@@ -1861,41 +1860,25 @@ void Score::addElement(Element* element)
       else
             element->parent()->add(element);
 
-      if (element->type() == CLEF) {
-            int staffIdx = element->staffIdx();
-            Clef* clef   = (Clef*) element;
-            int tick     = clef->tick();
-
-            //-----------------------------------------------
-            //   move notes
-            //-----------------------------------------------
-
-            bool endFound = false;
-            for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
-                  int startTrack = staffIdx * VOICES;
-                  int endTrack   = startTrack + VOICES;
-                  for (int track = startTrack; track < endTrack; ++track) {
-                        Element* ie = segment->element(track);
-                        if (ie && ie->type() == CLEF && segment->tick() > tick) {
-                              endFound = true;
-                              break;
-                              }
-                        }
-                  if (endFound)
-                        break;
-                  }
-            }
-      else if (element->type() == KEYSIG)
-            layoutAll = true;
-      else if (element->type() == SLUR) {
+      if (element->type() == SLUR) {
             Slur* s = static_cast<Slur*>(element);
             if (s->startElement())
                   static_cast<ChordRest*>(s->startElement())->addSlurFor(s);
             if (s->endElement())
                   static_cast<ChordRest*>(s->endElement())->addSlurBack(s);
             }
-      else if ((element->type() == OTTAVA) || (element->type() == DYNAMIC)) {
-            fixPpitch();      // recalculate all velocities
+      else if (element->type() == OTTAVA) {
+            Ottava* o = static_cast<Ottava*>(element);
+            Staff* s  = o->staff();
+            int tick1 = static_cast<Segment*>(o->startElement())->tick();
+            int tick2 = static_cast<Segment*>(o->endElement())->tick();
+            s->pitchOffsets().setPitchOffset(tick1, o->pitchShift());
+            s->pitchOffsets().setPitchOffset(tick2, 0);
+            layoutFlags |= LAYOUT_FIX_PITCH_VELO;
+            _playlistDirty = true;
+            }
+      else if (element->type() == DYNAMIC) {
+            layoutFlags |= LAYOUT_FIX_PITCH_VELO;
             _playlistDirty = true;
             }
       }
@@ -1935,8 +1918,20 @@ void Score::removeElement(Element* element)
 
       switch(element->type()) {
             case OTTAVA:
+                  {
+                  Ottava* o = static_cast<Ottava*>(element);
+                  Staff* s = o->staff();
+                  int tick1 = static_cast<Segment*>(o->startElement())->tick();
+                  int tick2 = static_cast<Segment*>(o->endElement())->tick();
+                  s->pitchOffsets().remove(tick1);
+                  s->pitchOffsets().remove(tick2);
+                  layoutFlags |= LAYOUT_FIX_PITCH_VELO;
+                  _playlistDirty = true;
+                  }
+                  break;
+
             case DYNAMIC:
-                  fixPpitch();
+                  layoutFlags |= LAYOUT_FIX_PITCH_VELO;
                   _playlistDirty = true;
                   break;
 
@@ -1946,35 +1941,6 @@ void Score::removeElement(Element* element)
                   ChordRest* cr = static_cast<ChordRest*>(element);
                   cr->setBeam(0);
                   }
-                  break;
-            case CLEF:
-                  {
-                  Clef* clef   = static_cast<Clef*>(element);
-                  int tick     = clef->tick();
-                  int staffIdx = clef->staffIdx();
-
-                  //-----------------------------------------------
-                  //   move notes
-                  //-----------------------------------------------
-
-                  bool endFound = false;
-                  for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
-                        int startTrack = staffIdx * VOICES;
-                        int endTrack   = startTrack + VOICES;
-                        for (int track = startTrack; track < endTrack; ++track) {
-                              Element* ie = segment->element(track);
-                              if (ie && ie->type() == CLEF && segment->tick() > tick) {
-                                    endFound = true;
-                                    break;
-                                    }
-                              }
-                        if (endFound)
-                              break;
-                        }
-                  }
-                  break;
-            case KEYSIG:
-                  layoutAll = true;
                   break;
             case SLUR:
                   {

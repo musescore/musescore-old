@@ -96,4 +96,14 @@ void Spanner::scanElements(void* data, void (*func)(void*, Element*))
             seg->scanElements(data, func);
       }
 
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+void Spanner::startEdit(ScoreView*, const QPointF&)
+      {
+      oStartElement = _startElement;
+      oEndElement   = _endElement;
+      }
+
 

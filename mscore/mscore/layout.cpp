@@ -605,8 +605,13 @@ void Score::doLayout()
       initSymbols(_symIdx);
 
       _needLayout = false;
+
       if (layoutFlags & LAYOUT_FIX_TICKS)
             fixTicks();
+      if (layoutFlags & LAYOUT_FIX_PITCH_VELO)
+            updatePitchVelo();
+      layoutFlags = 0;
+
       bool updateStaffLists = true;
       foreach(Staff* st, _staves) {
             if (st->updateClefList()) {

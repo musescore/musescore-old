@@ -71,6 +71,7 @@ class Ottava : public TextLine {
       virtual LineSegment* createLineSegment();
       virtual void layout();
       int pitchShift() const { return _pitchShift; }
+      virtual void endEdit();
       };
 
 #endif

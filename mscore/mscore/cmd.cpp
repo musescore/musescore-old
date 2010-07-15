@@ -2473,7 +2473,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   _selection.setState(SEL_RANGE);
             }
       connectTies();
-      fixPpitch();
+      layoutFlags |= LAYOUT_FIX_PITCH_VELO;
       }
 
 //---------------------------------------------------------

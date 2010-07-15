@@ -486,17 +486,15 @@ void Score::removeHairpin(Hairpin* h)
       }
 
 //---------------------------------------------------------
-//   fixPpitch
+//   updatePitchVelo
 //    calculate play pitch and velocity for all notes
 //---------------------------------------------------------
 
-void Score::fixPpitch()
+void Score::updatePitchVelo()
       {
       //
-      //    collect Dynamics & Ottava
+      //    collect Dynamics & Ottava & Hairpins
       //
-
-printf("fixPpitch\n");
 
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             Staff* st      = staff(staffIdx);
@@ -521,8 +519,8 @@ printf("fixPpitch\n");
                         int dStaffIdx = d->staffIdx();
                         switch(d->dynType()) {
                               case DYNAMIC_STAFF:
-                                    if( dStaffIdx == staffIdx)
-                                        velo.setVelo(tick, v);
+                                    if (dStaffIdx == staffIdx)
+                                          velo.setVelo(tick, v);
                                     break;
                               case DYNAMIC_PART:
                                     if (dStaffIdx >= partStaff && dStaffIdx < partStaff+partStaves){
