@@ -261,7 +261,7 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       Score* nscore = score->createExcerpt(excerpt);
       nscore->rebuildMidiMapping();
       nscore->updateChannel();
-      nscore->fixPpitch();
+      nscore->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
       nscore->layout();
 
       mscore->appendScore(nscore);

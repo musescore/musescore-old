@@ -185,9 +185,13 @@ class ImagePath {
 
 // layoutFlags bits
 
-enum {
-      LAYOUT_FIX_TICKS = 1
+enum LayoutFlag {
+      LAYOUT_FIX_TICKS = 1,
+      LAYOUT_FIX_PITCH_VELO = 2
       };
+
+typedef QFlags<LayoutFlag> LayoutFlags;
+Q_DECLARE_OPERATORS_FOR_FLAGS(LayoutFlags)
 
 //---------------------------------------------------------
 //   Score
@@ -199,7 +203,6 @@ class Score : public QObject {
       double _spatium;
       PageFormat* _pageFormat;
       QPaintDevice* _paintDevice;
-//      BspTree bspTree;
 
       //
       // generated objects during layout:
@@ -248,7 +251,7 @@ class Score : public QObject {
       bool _updateAll;
       Measure* startLayout;   ///< start a relayout at this measure
       bool layoutAll;         ///< do a complete relayout
-      int layoutFlags;
+      LayoutFlags layoutFlags;
 
       Qt::KeyboardModifiers keyState;
 
@@ -370,6 +373,7 @@ class Score : public QObject {
       void checkScore();
       bool rewriteMeasures(Measure* fm, Measure* lm, const Fraction&);
       void rewriteMeasures(Measure* fm, const Fraction& ns);
+      void updatePitchVelo();
 
    signals:
       void selectionChanged(int);
@@ -733,7 +737,6 @@ class Score : public QObject {
       double utick2utime(int tick) const;
       int utime2utick(double utime);
       void updateRepeatList(bool expandRepeats);
-      void fixPpitch();
 
       void nextInputPos(ChordRest* cr, bool);
       void cmdMirrorNoteHead();
@@ -801,7 +804,7 @@ class Score : public QObject {
       const QList<StaffType*>& staffTypes() const        { return _staffTypes; }
       QList<StaffType*>& staffTypes()                    { return _staffTypes; }
       void setStaffTypeList(const QList<StaffType*>& tl) { _staffTypes = tl;   }
-      void addLayoutFlag(int val)                        { layoutFlags |= val; }
+      void addLayoutFlag(LayoutFlag val)                 { layoutFlags |= val; }
       int symIdx() const                                 { return _symIdx; }
       void addImage(Element*);
       void updateHairpin(Hairpin*);       // add/modify hairpin to pitchOffset list

@@ -42,6 +42,7 @@
 #include "ui_lyrics.h"
 #include "ui_beam.h"
 #include "ui_tremolo.h"
+#include "ui_spanner.h"
 
 class ShowElementBase;
 class Element;
@@ -86,6 +87,7 @@ class Inspector : public QDialog, public Ui::InspectorBase {
       ShowElementBase* lyricsView;
       ShowElementBase* beamView;
       ShowElementBase* tremoloView;
+      ShowElementBase* ottavaView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
       void addSymbol(ElementItem* parent, BSymbol* bs);
@@ -551,6 +553,25 @@ class TremoloView : public ShowElementBase {
 
    public:
       TremoloView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   OttavaView
+//---------------------------------------------------------
+
+class OttavaView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::SpannerBase sb;
+//      Ui::OttavaBase ob;
+
+   private slots:
+      void startElementClicked();
+      void endElementClicked();
+
+   public:
+      OttavaView();
       virtual void setElement(Element*);
       };
 

@@ -50,6 +50,8 @@ class SpannerSegment : public Element {
       void setSpannerSegmentType(SpannerSegmentType s) { setSubtype(s);              }
       SpannerSegmentType spannerSegmentType() const    { return SpannerSegmentType(subtype()); }
       void setSystem(System* s)                        { _system = s;                }
+      virtual void startEdit(ScoreView*s , const QPointF& p) { parent()->startEdit(s, p); }
+      virtual void endEdit()                           { parent()->endEdit(); }
       };
 
 //---------------------------------------------------------
@@ -65,6 +67,10 @@ class Spanner : public Element {
 
       int _tick1, _tick2;     // used for backward compatibility
       int _id;                // used for xml serialization
+
+   protected:
+      Element* oStartElement; // start/end element at startEdit()
+      Element* oEndElement;
 
    public:
       Spanner(Score*);
@@ -97,8 +103,8 @@ class Spanner : public Element {
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      // virtual void change(Element* o, Element* n);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
+      virtual void startEdit(ScoreView*, const QPointF&);
       };
 #endif
 

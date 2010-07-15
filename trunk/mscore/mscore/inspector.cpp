@@ -48,6 +48,7 @@
 #include "glissando.h"
 #include "tremolo.h"
 #include "articulation.h"
+#include "ottava.h"
 
 extern bool useFactorySettings;
 
@@ -143,6 +144,7 @@ Inspector::Inspector(QWidget* parent)
       lyricsView   = new LyricsView;
       beamView     = new BeamView;
       tremoloView  = new TremoloView;
+      ottavaView   = new OttavaView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -167,6 +169,7 @@ Inspector::Inspector(QWidget* parent)
       stack->addWidget(lyricsView);
       stack->addWidget(beamView);
       stack->addWidget(tremoloView);
+      stack->addWidget(ottavaView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -191,6 +194,7 @@ Inspector::Inspector(QWidget* parent)
       connect(lyricsView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(beamView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tremoloView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(ottavaView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
       connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
@@ -557,6 +561,7 @@ void Inspector::updateElement(Element* el)
             case LYRICS:        ew = lyricsView;   break;
             case BEAM:          ew = beamView;     break;
             case TREMOLO:       ew = tremoloView;  break;
+            case OTTAVA:        ew = ottavaView;   break;
             case MARKER:
             case JUMP:
             case TEXT:
@@ -2033,3 +2038,49 @@ void TremoloView::chord2Clicked()
       emit elementChanged(static_cast<Tremolo*>(element())->chord2());
       }
 
+//---------------------------------------------------------
+//   OttavaView
+//---------------------------------------------------------
+
+OttavaView::OttavaView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      sb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      connect(sb.startElement, SIGNAL(clicked()), SLOT(startElementClicked()));
+      connect(sb.endElement,   SIGNAL(clicked()), SLOT(endElementClicked()));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void OttavaView::setElement(Element* e)
+      {
+      Ottava* o = static_cast<Ottava*>(e);
+      ShowElementBase::setElement(e);
+
+      sb.startElement->setEnabled(o->startElement());
+      sb.endElement->setEnabled(o->endElement());
+      sb.anchor->setCurrentIndex(int(o->anchor()));
+      }
+
+//---------------------------------------------------------
+//   startElementClicked
+//---------------------------------------------------------
+
+void OttavaView::startElementClicked()
+      {
+      emit elementChanged(static_cast<Ottava*>(element())->startElement());
+      }
+
+//---------------------------------------------------------
+//   endElementClicked
+//---------------------------------------------------------
+
+void OttavaView::endElementClicked()
+      {
+      emit elementChanged(static_cast<Ottava*>(element())->endElement());
+      }

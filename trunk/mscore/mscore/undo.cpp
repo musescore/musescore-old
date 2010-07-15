@@ -704,10 +704,10 @@ AddElement::AddElement(Element* e)
       }
 
 //---------------------------------------------------------
-//   undo
+//   undoRemoveElement
 //---------------------------------------------------------
 
-void AddElement::undo()
+static void undoRemoveElement(Element* element)
       {
       Score* score = element->score();
       score->removeElement(element);
@@ -715,9 +715,31 @@ void AddElement::undo()
             element->staff()->setUpdateClefList(true);
       else if (element->type() == KEYSIG)
             element->staff()->setUpdateKeymap(true);
-      else if (element->type() == DYNAMIC)
-            score->fixPpitch();
       score->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   undoAddElement
+//---------------------------------------------------------
+
+static void undoAddElement(Element* element)
+      {
+      Score* score = element->score();
+      score->addElement(element);
+      if (element->type() == CLEF)
+            element->staff()->setUpdateClefList(true);
+      else if (element->type() == KEYSIG)
+            element->staff()->setUpdateKeymap(true);
+      score->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   undo
+//---------------------------------------------------------
+
+void AddElement::undo()
+      {
+      undoRemoveElement(element);
       }
 
 //---------------------------------------------------------
@@ -726,15 +748,7 @@ void AddElement::undo()
 
 void AddElement::redo()
       {
-      Score* score = element->score();
-      score->addElement(element);
-      if (element->type() == CLEF)
-            element->staff()->setUpdateClefList(true);
-      else if (element->type() == KEYSIG)
-            element->staff()->setUpdateKeymap(true);
-      else if (element->type() == DYNAMIC)
-            score->fixPpitch();
-      score->setLayoutAll(true);
+      undoAddElement(element);
       }
 
 //---------------------------------------------------------
@@ -769,13 +783,7 @@ RemoveElement::RemoveElement(Element* e)
 
 void RemoveElement::undo()
       {
-      element->score()->addElement(element);
-      if (element->type() == CLEF)
-            element->staff()->setUpdateClefList(true);
-      else if (element->type() == DYNAMIC)
-            element->score()->fixPpitch();
-      else if (element->type() == KEYSIG)
-            element->staff()->setUpdateKeymap(true);
+      undoAddElement(element);
       }
 
 //---------------------------------------------------------
@@ -784,13 +792,7 @@ void RemoveElement::undo()
 
 void RemoveElement::redo()
       {
-      element->score()->removeElement(element);
-      if (element->type() == CLEF)
-            element->staff()->setUpdateClefList(true);
-      else if (element->type() == DYNAMIC)
-            element->score()->fixPpitch();
-      else if (element->type() == KEYSIG)
-            element->staff()->setUpdateKeymap(true);
+      undoRemoveElement(element);
       }
 
 //---------------------------------------------------------
@@ -1192,7 +1194,7 @@ void ChangeElement::flip()
       else if (e->type() == KEYSIG)
             e->staff()->setUpdateKeymap(true);
       else if (e->type() == DYNAMIC)
-            e->score()->fixPpitch();
+            e->score()->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
       score->setLayoutAll(true);
       }
 
@@ -1511,7 +1513,7 @@ void ChangeDynamic::flip()
       dynamic->setDynType(dynType);
       dynType  = t;
       velocity = v;
-      dynamic->score()->fixPpitch();
+      dynamic->score()->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
       }
 
 //---------------------------------------------------------

@@ -26,6 +26,7 @@
 #include "utils.h"
 #include "score.h"
 #include "text.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //   Ottava
@@ -92,5 +93,27 @@ void Ottava::setSubtype(int val)
 LineSegment* Ottava::createLineSegment()
       {
       return new OttavaSegment(score());
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void Ottava::endEdit()
+      {
+      if (oStartElement != startElement() || oEndElement != endElement()) {
+            Staff* s = staff();
+            int tick1 = static_cast<Segment*>(oStartElement)->tick();
+            int tick2 = static_cast<Segment*>(oEndElement)->tick();
+            s->pitchOffsets().remove(tick1);
+            s->pitchOffsets().remove(tick2);
+
+            tick1 = static_cast<Segment*>(startElement())->tick();
+            tick2 = static_cast<Segment*>(endElement())->tick();
+            s->pitchOffsets().setPitchOffset(tick1, _pitchShift);
+            s->pitchOffsets().setPitchOffset(tick2, 0);
+
+            score()->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+            }
       }
 

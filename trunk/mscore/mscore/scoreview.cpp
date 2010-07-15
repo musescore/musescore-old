@@ -1162,7 +1162,6 @@ void ScoreView::startEdit()
             score()->startCmd();
       score()->setLayoutAll(false);
       curElement  = 0;
-      origEditObject->startEdit(this, startMove);
       setFocus();
       if (origEditObject->isTextB()) {
             editObject = origEditObject;
@@ -1188,6 +1187,8 @@ void ScoreView::startEdit()
             editObject->setSelected(true);
             _score->undoChangeElement(origEditObject, editObject);
             }
+      editObject->startEdit(this, startMove);
+
       qreal w = 8.0 / _matrix.m11();
       qreal h = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
@@ -2770,7 +2771,7 @@ void ScoreView::endEdit()
       _score->setLayoutAll(true);
       _score->endCmd();
       editObject = 0;
-      grips = 0;
+      grips      = 0;
       }
 
 //---------------------------------------------------------
