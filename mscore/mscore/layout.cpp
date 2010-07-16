@@ -56,19 +56,6 @@ void Score::rebuildBspTree()
       {
       foreach(Page* page, _pages)
             page->rebuildBspTree();
-#if 0 // TODO2
-      foreach (Element* element, _gel) {
-            if (element->type() == SLUR)
-                  continue;
-            if (element->track() != -1) {
-                  if (!element->staff()->show())
-                        continue;
-                  }
-            element->scanElements(&el, collectElements);
-            }
-      foreach(Beam* b, _beams)
-            el.append(b);
-#endif
       }
 
 //---------------------------------------------------------
