@@ -1361,15 +1361,6 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       }
 
 //---------------------------------------------------------
-//   elementLessThan
-//---------------------------------------------------------
-
-static bool elementLessThan(const Element* const e1, const Element* const e2)
-      {
-      return e1->type() > e2->type();
-      }
-
-//---------------------------------------------------------
 //   drawBackground
 //---------------------------------------------------------
 
@@ -2383,15 +2374,6 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
                   }
             p.restore();
             }
-#if 0
-      if (editObject && !editObject->isTextB()) {
-            p.save();
-            p.translate(editObject->canvasPos());
-            p.setPen(QPen(editObject->curColor()));
-            editObject->draw(p);
-            p.restore();
-            }
-#endif
       }
 
 //---------------------------------------------------------

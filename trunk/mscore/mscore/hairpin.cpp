@@ -28,6 +28,7 @@
 #include "segment.h"
 #include "system.h"
 #include "undo.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //   draw
@@ -210,6 +211,9 @@ HairpinProperties::HairpinProperties(Hairpin* h, QWidget* parent)
       setupUi(this);
       hairpin = h;
       veloChange->setValue(hairpin->veloChange());
+      int tick1 = static_cast<Segment*>(hairpin->startElement())->tick();
+      int velo = hairpin->staff()->velocities().velo(tick1);
+      beginVelocity->setNum(velo);
       }
 
 //---------------------------------------------------------

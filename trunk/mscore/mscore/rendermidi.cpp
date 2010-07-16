@@ -434,18 +434,18 @@ void Score::updateHairpin(Hairpin* h)
 
       switch(h->dynType()) {
             case DYNAMIC_STAFF:
-                  st->velocities().setVelo(tick,  VeloEvent(VELO_INTERPOLATE, velo));
+                  st->velocities().setVelo(tick,  VeloEvent(VELO_RAMP, velo));
                   st->velocities().setVelo(tick2, VeloEvent(VELO_FIX, endVelo));
                   break;
             case DYNAMIC_PART:
                   foreach(Staff* s, *st->part()->staves()) {
-                        s->velocities().setVelo(tick,  VeloEvent(VELO_INTERPOLATE, velo));
+                        s->velocities().setVelo(tick,  VeloEvent(VELO_RAMP, velo));
                         s->velocities().setVelo(tick2, VeloEvent(VELO_FIX, endVelo));
                         }
                   break;
             case DYNAMIC_SYSTEM:
                   foreach(Staff* s, _staves) {
-                        s->velocities().setVelo(tick,  VeloEvent(VELO_INTERPOLATE, velo));
+                        s->velocities().setVelo(tick,  VeloEvent(VELO_RAMP, velo));
                         s->velocities().setVelo(tick2, VeloEvent(VELO_FIX, endVelo));
                         }
                   break;

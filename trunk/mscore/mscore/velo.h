@@ -31,7 +31,7 @@
 ///   item in VeloList
 //---------------------------------------------------------
 
-enum VeloType { VELO_FIX, VELO_INTERPOLATE };
+enum VeloType { VELO_FIX, VELO_RAMP };
 
 struct VeloEvent {
       VeloType type;
