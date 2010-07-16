@@ -138,8 +138,7 @@ class Note : public Element {
       int pitch() const               { return _pitch;    }
       void setPitch(int val);
       void setPitch(int a, int b);
-      int ppitch() const              { return _ppitch;   }
-      void setPpitch(int v)           { _ppitch = v;      }
+      int ppitch() const;
       double tuning() const           { return _tuning;   }
       void setTuning(double v)        { _tuning = v;      }
 

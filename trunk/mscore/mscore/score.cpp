@@ -749,18 +749,19 @@ void Score::fixTicks()
 
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
 
-            foreach(const Element* e, *mb->el()) {
-                  if (e->type() == TEMPO_TEXT) {
-                        const TempoText* tt = static_cast<const TempoText*>(e);
-                        _tempomap->addTempo(tt->segment()->tick(), tt->tempo());
-                        }
-                  }
             if (mb->type() != MEASURE) {
                   mb->setTick(tick);
                   continue;
                   }
-
             Measure* m = static_cast<Measure*>(mb);
+            for (Segment* s = m->first(SegChordRest); s; s = s->next(SegChordRest)) {
+                  foreach(Element* e, s->annotations()) {
+                        if (e->type() == TEMPO_TEXT) {
+                              const TempoText* tt = static_cast<const TempoText*>(e);
+                              _tempomap->addTempo(tt->segment()->tick(), tt->tempo());
+                              }
+                        }
+                  }
 
             //
             // fix ticks

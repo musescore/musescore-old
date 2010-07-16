@@ -596,7 +596,7 @@ void Score::doLayout()
       if (layoutFlags & LAYOUT_FIX_TICKS)
             fixTicks();
       if (layoutFlags & LAYOUT_FIX_PITCH_VELO)
-            updatePitchVelo();
+            updateVelo();
       layoutFlags = 0;
 
       bool updateStaffLists = true;

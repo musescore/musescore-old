@@ -373,7 +373,7 @@ class Score : public QObject {
       void checkScore();
       bool rewriteMeasures(Measure* fm, Measure* lm, const Fraction&);
       void rewriteMeasures(Measure* fm, const Fraction& ns);
-      void updatePitchVelo();
+      void updateVelo();
 
    signals:
       void selectionChanged(int);
@@ -656,7 +656,6 @@ class Score : public QObject {
       void spatiumChanged(double oldValue, double newValue);
 
       void pasteStaff(QDomElement, ChordRest* dst);
-      Volta* searchVolta(int tick) const;
       void toEList(EventMap* events);
       void toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx);
       int mscVersion() const    { return _mscVersion; }
@@ -809,6 +808,7 @@ class Score : public QObject {
       void addImage(Element*);
       void updateHairpin(Hairpin*);       // add/modify hairpin to pitchOffset list
       void removeHairpin(Hairpin*);       // remove hairpin from pitchOffset list
+      Volta* searchVolta(int tick) const;
       };
 
 extern Score* gscore;

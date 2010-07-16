@@ -491,7 +491,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       bool empty = true;
       for (Measure* m = fm; m != lm; m = m->nextMeasure()) {
             if (!m->isFullMeasureRest())
-                  empty = true;
+                  empty = false;
             ++measures;
             }
       if (empty) {
@@ -616,9 +616,11 @@ void Score::rewriteMeasures(Measure* fm, const Fraction& ns)
                         }
                   if (!m || m->type() == MEASURE)
                         break;
-                  m   = m->next();
+                  while (m->type() != MEASURE)
+                        m = m->next();
                   fm1 = static_cast<Measure*>(m);
-                  if (fm1 == 0 || lm->first(SegTimeSig))
+//                  if (fm1 == 0 || lm->first(SegTimeSig))
+                  if (fm1 == 0)
                         break;
                   }
             lm  = static_cast<Measure*>(m);
