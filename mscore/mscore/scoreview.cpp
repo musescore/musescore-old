@@ -1165,6 +1165,7 @@ void ScoreView::startEdit()
       setFocus();
       if (origEditObject->isTextB()) {
             editObject = origEditObject;
+            editObject->startEdit(this, startMove);
             TextB* t = static_cast<TextB*>(editObject);
             _editText = t;
             mscore->textTools()->setText(t);
@@ -1186,8 +1187,8 @@ void ScoreView::startEdit()
             editObject = origEditObject->clone();
             editObject->setSelected(true);
             _score->undoChangeElement(origEditObject, editObject);
+            editObject->startEdit(this, startMove);
             }
-      editObject->startEdit(this, startMove);
 
       qreal w = 8.0 / _matrix.m11();
       qreal h = 8.0 / _matrix.m22();

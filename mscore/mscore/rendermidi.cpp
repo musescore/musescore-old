@@ -50,6 +50,27 @@
 #include "hairpin.h"
 
 //---------------------------------------------------------
+//   searchVolta
+//    return volta at tick
+//---------------------------------------------------------
+
+Volta* Score::searchVolta(int tick) const
+      {
+      Measure* fm = firstMeasure();
+      for (Segment* s = fm->first(SegChordRest); s; s = s->next1(SegChordRest)) {
+            foreach(Spanner* e, s->spannerFor()) {
+                  if (e->type() != VOLTA)
+                        continue;
+                  int tick1 = static_cast<Segment*>(e->startElement())->tick();
+                  int tick2 = static_cast<Segment*>(e->endElement())->tick();
+                  if (tick >= tick1 && tick < tick2)
+                        return static_cast<Volta*>(e);
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   updateChannel
 //---------------------------------------------------------
 
@@ -62,9 +83,8 @@ void Score::updateChannel()
       Measure* fm = firstMeasure();
       if (!fm)
             return;
-#if 0 // TODO1
-      for (Measure* m = fm; m; m = m->nextMeasure()) {
-            foreach(const Element* e, *m->el()) {
+      for (Segment* s = fm->first(SegChordRest); s; s = s->next1(SegChordRest)) {
+            foreach(const Element* e, s->annotations()) {
                   if (e->type() != STAFF_TEXT)
                         continue;
                   const StaffText* st = static_cast<const StaffText*>(e);
@@ -75,11 +95,10 @@ void Score::updateChannel()
                         Staff* staff = _staves[st->staffIdx()];
                         int a = staff->part()->instr()->channelIdx(an);
                         if (a != -1)
-                              staff->channelList(voice)->insert(st->tick(), a);
+                              staff->channelList(voice)->insert(s->tick(), a);
                         }
                   }
             }
-#endif
 
       for (Segment* s = fm->first(SegChordRest | SegGrace); s; s = s->next1(SegChordRest | SegGrace)) {
             foreach(Staff* st, _staves) {
@@ -103,25 +122,6 @@ void Score::updateChannel()
                         }
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   searchVolta
-//    return volta at tick
-//---------------------------------------------------------
-
-Volta* Score::searchVolta(int /*tick*/) const
-      {
-#if 0 // TODO
-      foreach(Element* el, *gel()) {
-            if (el->type() == VOLTA) {
-                  Volta* volta = (Volta*)el;
-                  if (tick >= volta->tick() && tick < volta->tick2())
-                        return volta;
-                  }
-            }
-#endif
-      return 0;
       }
 
 //---------------------------------------------------------
@@ -228,13 +228,14 @@ static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx
       //
       // collect program changes and controller
       //
-#if 0 // TODO1
-      for (int staffIdx = firstStaffIdx; staffIdx < nextStaffIdx; ++staffIdx) {
-            foreach(const Element* e, *m->el()) {
-                  if (e->type() != STAFF_TEXT || e->staffIdx() != staffIdx)
+      for (Segment* s = m->first(SegChordRest); s; s = s->next(SegChordRest)) {
+            foreach(Element* e, s->annotations()) {
+                  if (e->type() != STAFF_TEXT
+                     || e->staffIdx() < firstStaffIdx
+                     || e->staffIdx() >= nextStaffIdx)
                         continue;
                   const StaffText* st = static_cast<const StaffText*>(e);
-                  int tick = st->tick() + tickOffset;
+                  int tick = s->tick() + tickOffset;
                   foreach (const ChannelActions& ca, *st->channelActions()) {
                         int channel = ca.channel;
                         foreach(const QString& ma, ca.midiActionNames) {
@@ -286,7 +287,6 @@ static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx
                         }
                   }
             }
-#endif
       }
 
 //---------------------------------------------------------
@@ -486,11 +486,11 @@ void Score::removeHairpin(Hairpin* h)
       }
 
 //---------------------------------------------------------
-//   updatePitchVelo
-//    calculate play pitch and velocity for all notes
+//   updateVelo
+//    calculate velocity for all notes
 //---------------------------------------------------------
 
-void Score::updatePitchVelo()
+void Score::updateVelo()
       {
       //
       //    collect Dynamics & Ottava & Hairpins
@@ -541,21 +541,11 @@ void Score::updatePitchVelo()
                               Hairpin* h = static_cast<Hairpin*>(e);
                               updateHairpin(h);
                               }
-/*                        else if (e->type() == OTTAVA) {
-                              Ottava* o = static_cast<Ottava*>(e);
-                              Segment* es = static_cast<Segment*>(o->endElement());
-                              int tick2 = es->tick();
-                              int shift = o->pitchShift();
-                              st->pitchOffsets().setPitchOffset(tick, shift);
-                              st->pitchOffsets().setPitchOffset(tick2, 0);
-                              }
- */
                         }
                   }
             }
 
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-            int pitchOffset   = styleB(ST_concertPitch) ? 0 : part(staffIdx)->instr()->transpose().chromatic;
             Staff* st         = staff(staffIdx);
             Instrument* instr = st->part()->instr();
             int strack        = staffIdx * VOICES;
@@ -564,8 +554,6 @@ void Score::updatePitchVelo()
             for (Segment* seg = firstSegment(); seg; seg = seg->next1()) {
                   if (seg->subtype() != SegChordRest && seg->subtype() != SegGrace)
                         continue;
-                  int tick        = seg->tick();
-                  int ottavaShift = st->pitchOffsets().pitchOffset(tick);
                   for (int track = strack; track < etrack; ++track) {
                         Element* el = seg->element(track);
                         if (!el || el->type() != CHORD)
@@ -588,7 +576,6 @@ void Score::updatePitchVelo()
                               foreach(Articulation* a, *chord->getArticulations())
                                     instr->updateVelocity(&velocity, channel, a->subtypeName());
 
-                              note->setPpitch(note->pitch() + pitchOffset + ottavaShift);
                               switch (note->veloType()) {
                                     case OFFSET_VAL:
                                           velocity += (velocity * note->veloOffset()) / 100;

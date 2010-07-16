@@ -24,13 +24,14 @@
 namespace AL {
 class Xml;
 
-enum TempoEventType { TEMPO_CHANGE, TEMPO_PAUSE };
+enum TempoType { TEMPO_FIX, TEMPO_RAMP };
 
 //---------------------------------------------------------
 //   Tempo Event
 //---------------------------------------------------------
 
 struct TEvent {
+      TempoType type;
       double tempo;     // beats per second
       double pause;     // pause in seconds
       double time;      // precomputed time for tick in sec
