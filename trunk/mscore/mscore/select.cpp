@@ -538,19 +538,25 @@ void Score::select(Element* e, SelectType type, int staffIdx)
 
 void Score::lassoSelect(const QRectF& bbox)
       {
-#if 0 // TODO2
       select(0, SELECT_SINGLE, 0);
-      QRectF lr(bbox.normalized());
-      QList<const Element*> el = items(lr);
-      for (int i = 0; i < el.size(); ++i) {
-            const Element* e = el.at(i);
-            e->itemDiscovered = 0;
-            if (lr.contains(e->abbox())) {
-                  if (e->type() != MEASURE && e->selectable())
-                        select(const_cast<Element*>(e), SELECT_ADD, 0);
+      QRectF fr(bbox.normalized());
+      foreach(Page* page, _pages) {
+            QRectF pr(page->abbox());
+            if (pr.right() < fr.left())
+                  continue;
+            if (pr.left() > fr.right())
+                  break;
+
+            QList<const Element*> el = page->items(fr);
+            for (int i = 0; i < el.size(); ++i) {
+                  const Element* e = el.at(i);
+                  e->itemDiscovered = 0;
+                  if (fr.contains(e->abbox())) {
+                        if (e->type() != MEASURE && e->selectable())
+                              select(const_cast<Element*>(e), SELECT_ADD, 0);
+                        }
                   }
             }
-#endif
       }
 
 //---------------------------------------------------------

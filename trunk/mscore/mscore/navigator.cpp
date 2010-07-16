@@ -177,29 +177,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
                         e->draw(p, 0);
                         p.restore();
                         }
-
-//                  p.translate(page->pos());
-//                  page->draw(p, 0);
-//                  p.translate(-page->pos());
                   }
-#if 0 // TODO2
-            QList<const Element*> ell = _score->items(fr);
-
-            for (int i = 0; i < ell.size(); ++i) {
-                  const Element* e = ell.at(i);
-                  e->itemDiscovered = 0;
-
-                  if (!(e->visible() || _score->showInvisible()))
-                        continue;
-
-                  QPointF ap(e->canvasPos());
-                  p.translate(ap);
-                  p.setPen(QPen(e->color()));
-                  e->draw(p, 0);
-                  p.translate(-ap);
-                  }
-#endif
-
             p.setMatrixEnabled(false);
             p.setClipRegion(r1);
             p.fillRect(rr, _bgColor);
