@@ -157,16 +157,32 @@ void Navigator::paintEvent(QPaintEvent* ev)
 
             p.fillRect(rr, _fgColor);
             p.setTransform(matrix);
+            QRectF fr = matrix.inverted().mapRect(QRectF(rr));
+
             QRegion r1(rr);
-            foreach(const Page* page, _score->pages()) {
+            foreach(Page* page, _score->pages()) {
                   QRectF pbbox(page->abbox());
                   r1 -= matrix.mapRect(pbbox).toRect();
-                  p.translate(page->pos());
-                  page->draw(p, 0);
-                  p.translate(-page->pos());
+
+                  QList<const Element*> ell = page->items(fr);
+                  qStableSort(ell.begin(), ell.end(), elementLessThan);
+
+                  foreach(const Element* e, ell) {
+                        e->itemDiscovered = 0;
+                        if (!e->visible())
+                              continue;
+                        p.save();
+                        p.translate(e->canvasPos());
+                        p.setPen(QPen(e->curColor()));
+                        e->draw(p, 0);
+                        p.restore();
+                        }
+
+//                  p.translate(page->pos());
+//                  page->draw(p, 0);
+//                  p.translate(-page->pos());
                   }
 #if 0 // TODO2
-            QRectF fr = matrix.inverted().mapRect(QRectF(rr));
             QList<const Element*> ell = _score->items(fr);
 
             for (int i = 0; i < ell.size(); ++i) {
