@@ -195,9 +195,13 @@ namespace Bww {
    Transition to the "in measure" state.
    */
 
-  void Parser::beginMeasure()
+  void Parser::beginMeasure(Bww::MeasureBeginFlags mbf)
   {
-    qDebug() << "Parser::beginMeasure()";
+    qDebug() << "Parser::beginMeasure("
+        << "repeatBegin:" << mbf.repeatBegin
+        << "endingFirst:" << mbf.endingFirst
+        << "endingSecond:" << mbf.endingSecond
+        << ")";
 
     if (!inMeasure)
     {
@@ -211,9 +215,12 @@ namespace Bww {
    Transition out of the "in measure" state.
    */
 
-  void Parser::endMeasure()
+  void Parser::endMeasure(Bww::MeasureEndFlags mef)
   {
-    qDebug() << "Parser::endMeasure()";
+    qDebug() << "Parser::endMeasure("
+        << "repeatEnd:" << mef.repeatEnd
+        << "endingEnd:" << mef.endingEnd
+        << ")";
 
     if (inMeasure)
     {
@@ -373,7 +380,6 @@ namespace Bww {
     }
     qDebug() << " tie start" << tieStart << " tie stop" << tieStop;
     qDebug() << " triplet start" << tripletStart << " triplet stop" << tripletStop;
-    beginMeasure();
     wrt.note(caps[1], caps[2], caps[3], dots, tieStart, tieStop, triplet);
     tieStart = false;
     tripletStart = false;
@@ -397,7 +403,6 @@ namespace Bww {
     const int dots = 0;
     if (graceMap.contains(lex.symValue()))
     {
-      beginMeasure();
       QStringList graces = graceMap.value(lex.symValue()).split(" ");
       for (int i = 0; i < graces.size(); ++i)
         wrt.note(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
@@ -461,7 +466,11 @@ namespace Bww {
       else if (lex.symType() == BAR)
         parseBar();
     }
-    endMeasure();
+    // First end the previous measure
+    // Note: endMeasure does not do anything for the first measure
+    endMeasure(mef);
+    // Then start a new measure, if necessary
+    if (isNote(lex.symType())) beginMeasure(mbf);
   }
 
   /**
