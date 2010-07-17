@@ -30,10 +30,11 @@
 #include <QtCore/QMap>
 #include <QtCore/QString>
 
+#include "writer.h"
+
 namespace Bww {
 
   class Lexer;
-  class Writer;
 
   /**
    The bww parser.
@@ -51,7 +52,7 @@ namespace Bww {
     void parseBar();
     void parseNote();
     void parseGraces();
-    void parsePart();
+    void parsePart(Bww::MeasureBeginFlags& mbf, Bww::MeasureEndFlags& mef);
     void parseSeqNonNotes();
     void parseSeqNotes();
     void parseString();
