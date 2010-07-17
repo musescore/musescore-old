@@ -289,7 +289,6 @@ namespace Bww {
   void Parser::parseBar()
   {
     qDebug() << "Parser::parseBar() value:" << qPrintable(lex.symValue());
-    endMeasure();
     lex.getSym();
   }
 
@@ -410,10 +409,33 @@ namespace Bww {
    Parse a bww part symbol.
    */
 
-  void Parser::parsePart()
+  void Parser::parsePart(Bww::MeasureBeginFlags& mbf, Bww::MeasureEndFlags& mef)
   {
     qDebug() << "Parser::parsePart() value:" << qPrintable(lex.symValue());
-    endMeasure();
+    if (lex.symValue() == "I!''")
+    {
+      mbf.repeatBegin = true;
+    }
+    else if (lex.symValue() == "'1")
+    {
+      mbf.endingFirst = true;
+    }
+    else if (lex.symValue() == "'2")
+    {
+      mbf.endingSecond = true;
+    }
+    else if (lex.symValue() == "''!I")
+    {
+      mef.repeatEnd = true;
+    }
+    else if (lex.symValue() == "_'")
+    {
+      mef.endingEnd = true;
+    }
+    else
+    {
+      ; // other silently ignored
+    }
     lex.getSym();
   }
 
@@ -424,6 +446,8 @@ namespace Bww {
   void Parser::parseSeqNonNotes()
   {
     qDebug() << "Parser::parseSeqNonNotes() value:" << qPrintable(lex.symValue());
+    MeasureBeginFlags mbf;
+    MeasureEndFlags mef;
     while (isNonNote(lex.symType()))
     {
       if (lex.symType() == CLEF)
@@ -433,10 +457,11 @@ namespace Bww {
       else if (lex.symType() == TEMPO)
         parseTempo();
       else if (lex.symType() == PART)
-        parsePart();
+        parsePart(mbf, mef);
       else if (lex.symType() == BAR)
         parseBar();
     }
+    endMeasure();
   }
 
   /**

@@ -36,6 +36,34 @@ class QIODevice;
 namespace Bww {
 
   /**
+   The flags that need to be handled at the beginning of a measure.
+   */
+
+  struct MeasureBeginFlags {
+    bool repeatBegin;
+    bool endingFirst;
+    bool endingSecond;
+    MeasureBeginFlags() :
+        repeatBegin(false),
+        endingFirst(false),
+        endingSecond(false)
+    {}
+  };
+
+  /**
+   The flags that need to be handled at the end of a measure.
+   */
+
+  struct MeasureEndFlags {
+    bool repeatEnd;
+    bool endingEnd;
+    MeasureEndFlags() :
+        repeatEnd(false),
+        endingEnd(false)
+    {}
+  };
+
+  /**
    The writer that generates the output.
    */
 
