@@ -68,6 +68,7 @@
 #include "stafftype.h"
 #include "tempotext.h"
 #include "articulation.h"
+#include "importgtp.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -439,6 +440,7 @@ bool Score::read(QString name)
       info.setFile(name);
 
       QString cs = info.suffix();
+      QString csl = cs.toLower();
 
       if (cs == "mscz") {
             if (!loadCompressedMsc(name))
@@ -463,7 +465,7 @@ bool Score::read(QString name)
                   }
             else if (cs == "mxl")
                   importCompressedMusicXml(name);
-            else if (cs.toLower() == "mid" || cs.toLower() == "midi" || cs.toLower() == "kar") {
+            else if (csl == "mid" || csl == "midi" || csl == "kar") {
                   if (!importMidi(name))
                         return false;
                   }
@@ -475,27 +477,31 @@ bool Score::read(QString name)
                   if (!importLilypond(name))
                         return false;
                   }
-            else if (cs.toLower() == "mgu" || cs.toLower() == "sgu") {
+            else if (csl == "mgu" || csl == "sgu") {
                   if (!importBB(name))
                         return false;
                   }
-            else if (cs.toLower() == "cap") {
+            else if (csl == "cap") {
                   if (!importCapella(name))
                         return false;
                   connectSlurs();
                   }
-            else if (cs.toLower() == "ove") {
+            else if (csl == "ove") {
             	    if(!importOve(name))
             		        return false;
 			            }
 #ifdef OMR
-            else if (cs.toLower() == "pdf") {
+            else if (csl == "pdf") {
                   if (!importPdf(name))
                         return false;
                   }
 #endif
-            else if (cs.toLower() == "bww") {
+            else if (csl == "bww") {
                   if (!importBww(name))
+                        return false;
+                  }
+            else if (csl == "gtp" || csl == "gp3" || csl == "gp4") {
+                  if (!importGTP(name))
                         return false;
                   }
             else {
