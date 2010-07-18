@@ -124,7 +124,7 @@ bool MeasureProperties::slashStyle(int staffIdx)
 //   sig
 //---------------------------------------------------------
 
-Fraction MeasureProperties::sig() const
+Fraction MeasureProperties::len() const
       {
       return Fraction(actualZ->value(), actualN->value());
       }
@@ -167,20 +167,21 @@ void MeasureProperties::apply()
          || repeatCount() != m->repeatCount()
          || layoutStretch->value() != m->userStretch()
          || measureNumberOffset->value() != m->noOffset()
-         || m->len() != sig()
+         || m->len() != len()
          ) {
+            Fraction oLen(m->len());
             score->undo()->push(new ChangeMeasureProperties(
                m,
-               sig(),
-               m->len(),
+               m->timesig(),
+               len(),
                breakMultiMeasureRest->isChecked(),
                repeatCount(),
                layoutStretch->value(),
                measureNumberOffset->value(),
                isIrregular())
                );
-            if (m->len() != sig()) {
-                  m->adjustToLen(m->len().ticks(), sig().ticks());
+            if (oLen != len()) {
+                  m->adjustToLen(oLen.ticks(), len().ticks());
                   score->select(m, SELECT_RANGE, 0);
                   }
             }

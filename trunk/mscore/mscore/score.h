@@ -563,6 +563,8 @@ class Score : public QObject {
       bool importOve(const QString& name);
       bool importPdf(const QString& name);
       bool importBww(const QString& name);
+      bool importGTP(const QString& name);
+
       void saveFile(QFileInfo& info, bool autosave);
       void saveFile(QIODevice* f, bool autosave);
       void saveCompressedFile(QFileInfo&, bool autosave);

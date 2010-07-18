@@ -1135,8 +1135,10 @@ class ChangeMeasureProperties : public UndoCommand {
       bool irregular;
 
       void flip();
+
    public:
-      ChangeMeasureProperties(Measure*, const Fraction&, const Fraction&, bool breakMM,
+      ChangeMeasureProperties(Measure*, const Fraction& sig, const Fraction& len,
+         bool breakMM,
          int repeatCount, double stretch, int noOffset, bool irregular);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
