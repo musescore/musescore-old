@@ -103,8 +103,8 @@ namespace Bww {
   {
   public:
     MsScWriter();
-    void beginMeasure();
-    void endMeasure();
+    void beginMeasure(const Bww::MeasureBeginFlags mbf);
+    void endMeasure(const Bww::MeasureEndFlags mef);
     void header(const QString title, const QString type,
                 const QString composer, const QString footer);
     void note(const QString pitch, const QString beam,
@@ -173,7 +173,7 @@ namespace Bww {
    Begin a new measure.
    */
 
-  void MsScWriter::beginMeasure()
+  void MsScWriter::beginMeasure(const Bww::MeasureBeginFlags mbf)
   {
       qDebug() << "MsScWriter::beginMeasure()";
       ++measureNumber;
@@ -211,7 +211,7 @@ namespace Bww {
  End the current measure.
  */
 
-void MsScWriter::endMeasure()
+void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
 {
       qDebug() << "MsScWriter::endMeasure()";
       BarLine* barLine = new BarLine(score);

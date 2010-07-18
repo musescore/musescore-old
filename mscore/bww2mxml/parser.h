@@ -46,8 +46,8 @@ namespace Bww {
     Parser(Lexer& l, Writer& w);
     void parse();
   private:
-    void beginMeasure(Bww::MeasureBeginFlags mbf);
-    void endMeasure(Bww::MeasureEndFlags mef);
+    void beginMeasure(const Bww::MeasureBeginFlags mbf);
+    void endMeasure(const Bww::MeasureEndFlags mef);
     void errorHandler(QString s);
     void parseBar();
     void parseNote();

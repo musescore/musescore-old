@@ -195,7 +195,7 @@ namespace Bww {
    Transition to the "in measure" state.
    */
 
-  void Parser::beginMeasure(Bww::MeasureBeginFlags mbf)
+  void Parser::beginMeasure(const Bww::MeasureBeginFlags mbf)
   {
     qDebug() << "Parser::beginMeasure("
         << "repeatBegin:" << mbf.repeatBegin
@@ -207,7 +207,7 @@ namespace Bww {
     {
       inMeasure = true;
       ++measureNr;
-      wrt.beginMeasure();
+      wrt.beginMeasure(mbf);
     }
   }
 
@@ -215,7 +215,7 @@ namespace Bww {
    Transition out of the "in measure" state.
    */
 
-  void Parser::endMeasure(Bww::MeasureEndFlags mef)
+  void Parser::endMeasure(const Bww::MeasureEndFlags mef)
   {
     qDebug() << "Parser::endMeasure("
         << "repeatEnd:" << mef.repeatEnd
@@ -225,7 +225,7 @@ namespace Bww {
     if (inMeasure)
     {
       inMeasure = false;
-      wrt.endMeasure();
+      wrt.endMeasure(mef);
     }
   }
 

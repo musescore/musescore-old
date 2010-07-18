@@ -63,11 +63,29 @@ namespace Bww {
    Begin a new measure.
    */
 
-  void MxmlWriter::beginMeasure()
+  void MxmlWriter::beginMeasure(const Bww::MeasureBeginFlags mbf)
   {
     qDebug() << "MxmlWriter::beginMeasure()";
     ++measureNumber;
     out << "    <measure number=\"" << measureNumber << "\">" << endl;
+    if (mbf.repeatBegin || mbf.endingFirst || mbf.endingSecond)
+    {
+      out << "      <barline location=\"left\">" << endl;
+      if (mbf.repeatBegin)
+      {
+        out << "        <bar-style>heavy-light</bar-style>" << endl;
+        out << "        <repeat direction=\"forward\"/>" << endl;
+      }
+      if (mbf.endingFirst)
+      {
+        out << "        <ending number=\"1\" type=\"start\"/>" << endl;
+      }
+      if (mbf.endingSecond)
+      {
+        out << "        <ending number=\"2\" type=\"start\"/>" << endl;
+      }
+      out << "      </barline>" << endl;
+    }
     if (measureNumber == 1)
     {
       out << "      <attributes>" << endl;
@@ -92,9 +110,23 @@ namespace Bww {
    End the current measure.
    */
 
-  void MxmlWriter::endMeasure()
+  void MxmlWriter::endMeasure(const Bww::MeasureEndFlags mef)
   {
     qDebug() << "MxmlWriter::endMeasure()";
+    if (mef.repeatEnd || mef.endingEnd)
+    {
+      out << "      <barline location=\"right\">" << endl;
+      if (mef.repeatEnd)
+      {
+        out << "        <bar-style>light-heavy</bar-style>" << endl;
+        out << "        <repeat direction=\"backward\"/>" << endl;
+      }
+      if (mef.endingEnd)
+      {
+        out << "        <ending type=\"stop\"/>" << endl;
+      }
+      out << "      </barline>" << endl;
+    }
     out << "    </measure>" << endl;
   }
 
