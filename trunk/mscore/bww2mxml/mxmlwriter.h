@@ -45,8 +45,8 @@ namespace Bww {
   {
   public:
     MxmlWriter();
-    void beginMeasure();
-    void endMeasure();
+    void beginMeasure(const Bww::MeasureBeginFlags mbf);
+    void endMeasure(const Bww::MeasureEndFlags mef);
     void header(const QString title, const QString type,
                 const QString composer, const QString footer);
     void note(const QString pitch, const QString beam,

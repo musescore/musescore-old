@@ -74,8 +74,8 @@ namespace Bww {
                         const QString composer, const QString footer) = 0;
     virtual void tempo(const int beats, const int beat) = 0;
     virtual void trailer() = 0;
-    virtual void beginMeasure() = 0;
-    virtual void endMeasure() = 0;
+    virtual void beginMeasure(const Bww::MeasureBeginFlags mbf) = 0;
+    virtual void endMeasure(const Bww::MeasureEndFlags mef) = 0;
     virtual void note(const QString pitch, const QString beam,
                       const QString type, const int dots,
                       bool tieStart = false, bool tieStop = false,
