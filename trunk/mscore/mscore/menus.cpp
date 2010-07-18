@@ -240,7 +240,8 @@ void MuseScore::showPalette(bool visible)
             sp = new Palette;
             sp->setName(tr("Lines"));
             sp->setMag(.8);
-            sp->setGrid(84, 23);
+//            sp->setGrid(84, 23);
+            sp->setGrid(82, 23);
 
             Slur* slur = new Slur(gscore);
             slur->setId(0);
