@@ -503,6 +503,16 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
                   undo()->push(new ChangeMeasureProperties(
                      m, ns, ns, m->getBreakMultiMeasureRest(), m->repeatCount(),
                      m->userStretch(), m->noOffset(), m->irregular()));
+                  int strack = 0;
+                  int etrack = nstaves() * VOICES;
+                  Segment* s = m->first(SegChordRest);
+                  for (int track = strack; track < etrack; ++track) {
+                        Element* e = s->element(track);
+                        if (e) {
+                              Rest* rest = static_cast<Rest*>(e);
+                              undo()->push(new ChangeDuration(rest, ns));
+                              }
+                        }
                   }
             return true;
             }

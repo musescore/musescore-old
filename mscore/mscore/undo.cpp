@@ -2255,3 +2255,15 @@ void ChangeHairpin::flip()
       hairpin->score()->updateHairpin(hairpin);
       }
 
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeDuration::flip()
+      {
+      Fraction od = cr->duration();
+      cr->setDuration(d);
+      d = od;
+      }
+
+

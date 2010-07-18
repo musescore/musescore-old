@@ -2622,6 +2622,7 @@ bool Measure::createEndBarLines()
                         }
                   bl->setVisible(_endBarLineVisible);
                   bl->setColor(_endBarLineColor);
+                  bl->setGenerated(_endBarLineGenerated);
                   span = staff->barLineSpan();
                   if (system() && !system()->staff(staffIdx + span - 1)->show()) {
                         //

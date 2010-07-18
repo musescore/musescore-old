@@ -1275,6 +1275,22 @@ class ChangeHairpin : public UndoCommand {
       virtual void redo() { flip(); }
       };
 
+//---------------------------------------------------------
+//   ChangeDuration
+//---------------------------------------------------------
+
+class ChangeDuration : public UndoCommand {
+      ChordRest* cr;
+      Fraction d;
+
+      void flip();
+
+   public:
+      ChangeDuration(ChordRest* _cr, Fraction _d) : cr(_cr), d(_d) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      };
+
 #endif
 
 
