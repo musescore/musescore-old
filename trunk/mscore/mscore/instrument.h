@@ -162,6 +162,7 @@ struct Instrument {
       void setChannel(const QList<Channel>& l)               { _channel = l;      }
       void setChannel(int i, const Channel& c)               { _channel[i] = c;   }
       Tablature* tablature() const                           { return _tablature; }
+      void setTablature(Tablature* t)                        { _tablature = t;    }
       };
 
 #endif

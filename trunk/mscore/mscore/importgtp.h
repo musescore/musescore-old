@@ -21,6 +21,11 @@
 #ifndef __IMPORTGTP_H__
 #define __IMPORTGTP_H__
 
+#include "al/fraction.h"
+
+class Score;
+class Note;
+
 static const int GP_MAX_LYRIC_LINES = 5;
 static const int GP_MAX_TRACK_NUMBER = 32;
 static const int GP_MAX_STRING_NUMBER = 7;
@@ -28,6 +33,11 @@ static const int GP_MAX_STRING_NUMBER = 7;
 struct GpTrack {
       int patch;
       uchar volume, pan, chorus, reverb, phase, tremolo;
+      };
+
+struct GpBar {
+      Fraction timesig;
+      int keysig;
       };
 
 //---------------------------------------------------------
@@ -38,6 +48,7 @@ class GuitarPro {
       static const char* errmsg[];
       int version;
 
+      Score* score;
       QFile* f;
       int curPos;
 
@@ -49,6 +60,8 @@ class GuitarPro {
       QString readWordPascalString();
       int readDelphiInteger();
       QString readDelphiString();
+      void readNote(int string, Note*);
+      void readChromaticGraph();
 
    public:
       QString title, subtitle, artist, album, composer, copyright;
@@ -57,11 +70,13 @@ class GuitarPro {
       GpTrack trackDefaults[GP_MAX_TRACK_NUMBER * 2];
       int numTracks;
       int numBars;
+      QList<GpBar> bars;
 
       enum GuitarProError { GP_NO_ERROR, GP_UNKNOWN_FORMAT,
-         GP_EOF };
+         GP_EOF, GP_BAD_NUMBER_OF_STRINGS
+            };
 
-      GuitarPro();
+      GuitarPro(Score*);
       ~GuitarPro();
       void read(QFile*);
       QString error(GuitarProError n) const { return QString(errmsg[int(n)]); }

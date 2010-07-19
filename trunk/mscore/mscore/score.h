@@ -539,6 +539,7 @@ class Score : public QObject {
 
       void colorItem(Element*);
       const QList<Part*>* parts() const  { return &_parts; }
+      Part* part(int n) const            { return _parts[n]; }
       void appendPart(Part* p);
       void updateStaffIndex();
       void sortStaves(QList<int>& dst);
