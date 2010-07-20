@@ -229,7 +229,7 @@ void Event::write(MidiFile* mf) const
                   switch(controller()) {
                         case CTRL_PROGRAM:
                               mf->writeStatus(ME_PROGRAM, channel());
-                              mf->put(value());
+                              mf->put(value() & 0x7f);
                               break;
                         case CTRL_PITCH:
                               {
@@ -241,12 +241,12 @@ void Event::write(MidiFile* mf) const
                               break;
                         case CTRL_PRESS:
                               mf->writeStatus(ME_AFTERTOUCH, channel());
-                              mf->put(value());
+                              mf->put(value() & 0x7f);
                               break;
                         default:
                               mf->writeStatus(ME_CONTROLLER, channel());
                               mf->put(controller());
-                              mf->put(value());
+                              mf->put(value() & 0x7f);
                               break;
                         }
                   break;
