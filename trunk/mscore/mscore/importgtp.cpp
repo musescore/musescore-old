@@ -200,7 +200,8 @@ void GuitarPro::readNote(int string, Note* note)
       uchar noteBits = readUChar();
 
       bool tieNote = false;
-      if ((noteBits & 0x20) && (version >= 400)) {
+//      if ((noteBits & 0x20) && (version >= 400)) {
+      if (noteBits & 0x20) {
             uchar variant = readUChar();
             if (variant == 2)
                   tieNote = true;
@@ -309,17 +310,17 @@ void GuitarPro::readMixChange()
       char tremolo = readChar();
       int tempo    = readDelphiInteger();
 
-      if (volume != -1)
+      if (volume >= 0)
             readChar();
-      if (pan != -1)
+      if (pan >= 0)
             readChar();
-      if (chorus != -1)
+      if (chorus >= 0)
             readChar();
-      if (reverb != -1)
+      if (reverb >= 0)
             readChar();
-      if (tremolo != -1)
+      if (tremolo >= 0)
             readChar();
-      if (tempo != -1)
+      if (tempo >= 0)
             readChar();
       if (version >= 400)
             readChar();       // bitmask: what should be applied to all tracks
@@ -369,6 +370,66 @@ void GuitarPro::readColumnEffects()
       if (fxBits1 & 0x01) {         // GP3 column-wide vibrato
             }
       if (fxBits1 & 0x2) {          // GP3 column-wide wide vibrato (="tremolo" in GP3)
+            }
+      }
+
+
+//---------------------------------------------------------
+//   readChordDiagram
+//---------------------------------------------------------
+
+void GuitarPro::readChordDiagram()
+      {
+      int header = readUChar();
+
+      printf("read chord diagram %x\n", header);
+
+      if ((header & 1) == 0) {
+            printf("no version4 chord diagram\n");
+            abort();
+            }
+      if (version >= 400) {
+            readChar(); // sharp or flat
+            skip(3);
+            readChar();             // root -1 - custom, 0 - C, 1 - C#...
+            readChar();             // chord type
+            readChar();             // chord goes until ninth, eleventh, or thirteenth
+            readDelphiInteger();    // lowest note of chord. It gives the chord inversions.
+            readDelphiInteger();    // tonality linked with 9/11/13:  0:perfect, 1:augmented, 2:diminished
+            readChar();             // allows to determine if a 'add' (added note) is present in the chord
+            readPascalString(20);   // chord name
+            skip(2);
+            readChar();
+            readChar();
+            readChar();
+            readDelphiInteger();    // first fret
+            for (int i = 0; i < 7; ++i)
+                  readDelphiInteger();
+            readChar();       // number of barres
+            for (int i = 0; i < 5; ++i)
+                  readChar();
+            for (int i = 0; i < 5; ++i)
+                  readChar();
+            for (int i = 0; i < 5; ++i)
+                  readChar();
+            readChar();
+            readChar();
+            readChar();
+            readChar();
+            readChar();
+            readChar();
+            readChar();
+            skip(1);
+            for (int i = 0; i < 7; ++i)
+                  readChar();
+            readChar();
+            }
+      else {
+            printf("=============pos 0x%x\n", int(f->pos()));
+            skip(25);
+            readPascalString(34);
+            skip(28);
+            skip(36);
             }
       }
 
@@ -606,20 +667,16 @@ printf("doubleBar=============================================\n");
                   for (int beat = 0; beat < beats; ++beat) {
                         int pause = 0;
                         uchar beatBits = readUChar();
+printf("beat bits %02x\n", beatBits);
                         bool dotted = beatBits & 0x1;
                         if (beatBits & 0x40)
                               pause = readUChar();
                         int len = readChar();
-                        if (version >= 400) {
-                              if (beatBits & 0x20) {
-                                    int tuple = readDelphiInteger();
-                                    }
+                        if (beatBits & 0x20) {
+                              int tuple = readDelphiInteger();
                               }
-                        if (beatBits & 0x2) {
-                              // readChordDiagram();
-                              printf("readChordDiagram\n");
-                              abort();
-                              }
+                        if (beatBits & 0x2)
+                              readChordDiagram();
                         Segment* s = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
@@ -643,8 +700,11 @@ printf("doubleBar=============================================\n");
                               case  3: l.set(1, 32);   break;
                               case  4: l.set(1, 64);   break;
                               case  5: l.set(1, 128);  break;
+                              //case  6: l.set(1, 512);  break;
+                              //case  7: l.set(1, 1024);  break;
+                              //case  8: l.set(1, 2048);  break;
                               default:
-                                    printf("unknown beat len\n");
+                                    printf("unknown beat len: %d\n", len);
                                     abort();
                               }
 
@@ -671,6 +731,7 @@ printf("doubleBar=============================================\n");
                                     static_cast<Chord*>(cr)->add(note);
 
                                     readNote(6-i, note);
+printf("Note %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
                                     note->setTpcFromPitch();
                                     }
                               }
