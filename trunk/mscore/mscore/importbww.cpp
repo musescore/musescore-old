@@ -38,6 +38,7 @@
 #include "staff.h"
 #include "timesig.h"
 #include "tuplet.h"
+#include "volta.h"
 
 //---------------------------------------------------------
 //   addText
@@ -134,6 +135,7 @@ namespace Bww {
     unsigned int tick;                                  ///< Current tick
     Measure* currentMeasure;                            ///< Current measure
     Tuplet* tuplet;                                     ///< Current tuplet
+    Volta* lastVolta;                                   ///< Current volta
   };
 
   /**
@@ -147,7 +149,8 @@ namespace Bww {
     measureNumber(0),
     tick(0),
     currentMeasure(0),
-    tuplet(0)
+    tuplet(0),
+    lastVolta(0)
   {
     qDebug() << "MsScWriter::MsScWriter()";
 
@@ -184,6 +187,25 @@ namespace Bww {
       currentMeasure->setNo(measureNumber);
       score->measures()->add(currentMeasure);
 
+      if (mbf.repeatBegin)
+            currentMeasure->setRepeatFlags(RepeatStart);
+
+      if (mbf.endingFirst || mbf.endingSecond) {
+            Volta* volta = new Volta(score);
+            volta->setTrack(0);
+// TODO            volta->setTick(tick);
+            volta->endings().clear();
+            if (mbf.endingFirst) {
+                  volta->setText("1");
+                  volta->endings().append(1);
+                  }
+            else {
+                  volta->setText("2");
+                  volta->endings().append(2);
+                  }
+            lastVolta = volta;
+            }
+
       // set key and time signature in the first measure
       if (measureNumber == 1) {
             // keysig
@@ -214,11 +236,26 @@ namespace Bww {
 void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
 {
       qDebug() << "MsScWriter::endMeasure()";
-      BarLine* barLine = new BarLine(score);
-      bool visible = true;
-      barLine->setSubtype(NORMAL_BAR);
-      barLine->setTrack(0);
-      currentMeasure->setEndBarLineType(barLine->subtype(), false, visible);
+//      BarLine* barLine = new BarLine(score);
+//      bool visible = true;
+      if (mef.repeatEnd)
+            currentMeasure->setRepeatFlags(RepeatEnd);
+//      barLine->setSubtype(NORMAL_BAR);
+//      barLine->setTrack(0);
+//      currentMeasure->setEndBarLineType(barLine->subtype(), false, visible);
+
+      if (mef.endingEnd) {
+            if (lastVolta) {
+                  printf("adding volta\n");
+                  lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+// TODO                  lastVolta->setTick2(tick);
+                  score->add(lastVolta);
+                  lastVolta = 0;
+                  }
+            else {
+                  printf("lastVolta == 0 on stop\n");
+                  }
+            }
 }
 
   /**
