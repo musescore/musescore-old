@@ -34,6 +34,7 @@
 #include "clef.h"
 #include "lyrics.h"
 #include "tempotext.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -197,7 +198,16 @@ printf("readChromaticGraph()\n");
 void GuitarPro::readNote(int string, Note* note)
       {
       uchar noteBits = readUChar();
-      uchar variant  = readUChar();
+
+      bool tieNote = false;
+      if ((noteBits & 0x20) && (version >= 400)) {
+            uchar variant = readUChar();
+            if (variant == 2)
+                  tieNote = true;
+            else if (variant == 3) {                 // dead notes
+                  printf("DeathNotes===============\n");
+                  }
+            }
 
       if (noteBits & 0x1) {               // note != beat
             readUChar();                  // length
@@ -207,16 +217,13 @@ void GuitarPro::readNote(int string, Note* note)
             }
 
       if (noteBits & 0x10) {
-            readUChar();                  // dynamic
+            int d = readUChar();                  // dynamic
+            printf("Dynamic=========%d\n", d);
             }
       int fretNumber = 0;
-      if (noteBits & 0x20) {
+      if (noteBits & 0x20)
             fretNumber = readUChar();
-            }
-      if (variant == 2) {                  // link with previous beat
-            }
-      if (variant == 3) {                 // dead notes
-            }
+
       if (noteBits & 0x80) {              // fingering
             readUChar();
             readUChar();
@@ -261,6 +268,30 @@ void GuitarPro::readNote(int string, Note* note)
       note->setFret(fretNumber);
       note->setString(string);
       note->setPitch(pitch);
+
+      if (tieNote) {
+            Chord* chord     = note->chord();
+            Segment* segment = chord->segment()->prev(SegChordRest);
+            int track        = note->track();
+            while (segment) {
+                  Element* e = segment->element(track);
+                  if (e) {
+                        if (e->type() == CHORD) {
+                              Chord* chord2 = static_cast<Chord*>(e);
+                              foreach(Note* note2, chord2->notes()) {
+                                    if (note2->pitch() == pitch) {
+                                          Tie* tie = new Tie(score);
+                                          tie->setEndNote(note);
+                                          note2->add(tie);
+                                          break;
+                                          }
+                                    }
+                              }
+                        break;
+                        }
+                  segment = segment->prev(SegChordRest);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -290,7 +321,7 @@ void GuitarPro::readMixChange()
             readChar();
       if (tempo != -1)
             readChar();
-      if (version != 400)
+      if (version >= 400)
             readChar();       // bitmask: what should be applied to all tracks
       }
 
@@ -370,7 +401,7 @@ printf("found GTP format version %d\n", version);
       artist       = readDelphiString();
       album        = readDelphiString();
       composer     = readDelphiString();
-      copyright    = readDelphiString();
+      QString copyright = readDelphiString();
       score->setCopyright(QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
 
       transcriber  = readDelphiString();
@@ -388,13 +419,17 @@ printf("found GTP format version %d\n", version);
                   }
             }
       int tempo = readDelphiInteger();
+      int key = 0;
+      int octave = 0;
       if (version >= 400) {
-            uchar num;
-            read(&num, 1);          // key
-            readDelphiInteger();    // octave
+            key = readChar();
+            octave = readDelphiInteger();    // octave
             }
-      else
-            readDelphiInteger();    // key
+      else {
+            key = readDelphiInteger();    // key
+            }
+
+printf("key %d octave %d\n", key, octave);
 
       for (int i = 0; i < GP_MAX_TRACK_NUMBER * 2; ++i) {
             channelDefaults[i].patch   = readDelphiInteger();
@@ -406,6 +441,10 @@ printf("found GTP format version %d\n", version);
             channelDefaults[i].tremolo = readUChar() * 8 - 1;
             readUChar();      // padding
             readUChar();
+//            printf("Channel %d patch vol %d pan %d\n", i,
+//               channelDefaults[i].patch,
+//               channelDefaults[i].volume,
+//               channelDefaults[i].pan);
             }
       numBars   = readDelphiInteger();
       numTracks = readDelphiInteger();
@@ -420,6 +459,7 @@ printf("found GTP format version %d\n", version);
             if (barBits & 0x2)
                   tdenominator = readUChar();
             if (barBits & 0x4) {                // begin reapeat
+printf("BeginRepeat=============================================\n");
                   }
             if (barBits & 0x8)                  // number of repeats
                   uchar c = readUChar();
@@ -434,6 +474,7 @@ printf("found GTP format version %d\n", version);
                   uchar c    = readUChar();        // minor
                   }
             if (barBits & 0x80) {
+printf("doubleBar=============================================\n");
                   // double bar
                   }
             bar.timesig = Fraction(tnumerator, tdenominator);
@@ -490,9 +531,9 @@ printf("found GTP format version %d\n", version);
                   tuning[j] = readDelphiInteger();
             for (int j = strings; j < GP_MAX_STRING_NUMBER; ++j)
                   readDelphiInteger();
-            int midiPort     = readDelphiInteger();
-            int midiChannel  = readDelphiInteger();
-            int midiChannel2 = readDelphiInteger();
+            int midiPort     = readDelphiInteger() - 1;
+            int midiChannel  = readDelphiInteger() - 1;
+            int midiChannel2 = readDelphiInteger() - 1;
             int frets        = readDelphiInteger();
             int capo         = readDelphiInteger();
             int color        = readDelphiInteger();
@@ -505,9 +546,13 @@ printf("found GTP format version %d\n", version);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
             instr->setTrackName(name);
+
+            //
+            // determine clef
+            //
             Staff* staff = score->staff(i);
             int patch = channelDefaults[midiChannel].patch;
-            int clefId = CLEF_F;
+            int clefId = CLEF_G;
             if (c & 0x1) {
                   clefId = CLEF_PERC;
                   instr->setUseDrumset(true);
@@ -521,6 +566,8 @@ printf("found GTP format version %d\n", version);
             clef->setTrack(i * VOICES);
             Segment* segment = measure->getSegment(SegClef, 0);
             segment->add(clef);
+
+
             Channel& ch = instr->channel(0);
             if (c & 1) {
                   ch.program = 0;
@@ -583,12 +630,9 @@ printf("found GTP format version %d\n", version);
                               }
                         if (beatBits & 0x8)
                               readColumnEffects();
-                        if (beatBits & 0x10) {
+                        if (beatBits & 0x10)
                               readMixChange();
-                              if (version >= 400) {  // what should be applied to all tracks
-                                    uchar num = readUChar();
-                                    }
-                              }
+
                         Fraction l;
                         switch(len) {
                               case -2: l.set(1, 1);    break;
@@ -715,6 +759,8 @@ bool Score::importGTP(const QString& name)
 
 //      album
 //      copyright
+
+//      connectTies();
 
 
       _saved = false;

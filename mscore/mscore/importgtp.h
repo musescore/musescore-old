@@ -67,7 +67,7 @@ class GuitarPro {
       void readColumnEffects();
 
    public:
-      QString title, subtitle, artist, album, composer, copyright;
+      QString title, subtitle, artist, album, composer;
       QString transcriber, instructions;
       QStringList comments;
       GpTrack channelDefaults[GP_MAX_TRACK_NUMBER * 2];
