@@ -406,6 +406,7 @@ void Segment::add(Element* el)
             case MARKER:
             case JUMP:
             case IMAGE:
+            case TEXT:
                   _annotations.append(el);
                   break;
 
@@ -520,6 +521,7 @@ void Segment::remove(Element* el)
             case MARKER:
             case JUMP:
             case IMAGE:
+            case TEXT:
                   _annotations.removeOne(el);
                   break;
 

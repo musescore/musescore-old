@@ -38,6 +38,7 @@ struct GpTrack {
 struct GpBar {
       Fraction timesig;
       int keysig;
+      QString marker;
       };
 
 //---------------------------------------------------------

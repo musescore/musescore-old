@@ -481,8 +481,9 @@ double Note::stemYoff(bool upFlag) const
 
 void Note::draw(QPainter& p, ScoreView* v) const
       {
+      bool tablature = staff() && staff()->useTablature();
       if (!_hidden || !userOff().isNull()) {
-            if (chord() && chord()->staff()->useTablature()) {
+            if (tablature) {
                   double mag = magS();
                   QFont f("DejaVuSerif");
                   int size = lrint(9.0 * DPI / PPI);
@@ -520,7 +521,7 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   }
             }
 
-      if (chord()) {
+      if (chord() && !tablature) {
             double _spatium = spatium();
             int dots = chord()->dots();
             double x = chord()->dotPosX() - ipos().x();
@@ -1171,6 +1172,10 @@ void Note::layout()
 void Note::layout1(char* tversatz)
       {
       if (staff()->useTablature()) {
+            if (_accidental) {
+                  delete _accidental;
+                  _accidental = 0;
+                  }
             if (_fret < 0) {
                   int line, fret;
                   Tablature* tab = staff()->part()->instr()->tablature();
