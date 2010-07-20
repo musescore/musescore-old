@@ -22,7 +22,7 @@
 #include "symbol.h"
 #include "sym.h"
 #include "score.h"
-// #include "note.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //   Acc

@@ -124,7 +124,9 @@ void Clef::layout()
       clear();
       Symbol* symbol = new Symbol(score());
 
-      switch (subtype()) {
+      int st = staff()->useTablature() ? CLEF_TAB : subtype();
+
+      switch (st) {
             case CLEF_G:
                   symbol->setSym(trebleclefSym);
                   yoff = 3.0;

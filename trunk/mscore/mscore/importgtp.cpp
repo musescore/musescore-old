@@ -32,6 +32,7 @@
 #include "note.h"
 #include "tablature.h"
 #include "clef.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -207,7 +208,11 @@ void GuitarPro::readNote(int string, Note* note)
       if (noteBits & 0x10) {
             readUChar();                  // dynamic
             }
-      int fretNumber = readUChar();
+      int fretNumber = 0;
+      if (noteBits & 0x20) {
+            fretNumber = readUChar();
+printf("         fret %d\n", fretNumber);
+            }
       if (variant == 2) {                  // link with previous beat
             }
       if (variant == 3) {                 // dead notes
@@ -253,6 +258,8 @@ void GuitarPro::readNote(int string, Note* note)
       Staff* staff = note->staff();
       int pitch = staff->part()->instr()->tablature()->getPitch(string, fretNumber);
 // printf("pitch %d  string %d fret %d\n", pitch, string, fretNumber);
+      note->setFret(fretNumber);
+      note->setString(string);
       note->setPitch(pitch);
       }
 
@@ -262,7 +269,6 @@ void GuitarPro::readNote(int string, Note* note)
 
 void GuitarPro::readMixChange()
       {
-      printf("readMixChange\n");
       char patch   = readChar();
       char volume  = readChar();
       char pan     = readChar();
@@ -419,7 +425,8 @@ printf("found GTP format version %d\n", version);
             if (barBits & 0x10)                 // alternative ending to
                   uchar c = readUChar();
             if (barBits & 0x20) {
-                  QString s = readDelphiString();     // new section?
+                  bar.marker = readDelphiString();     // new section?
+printf("======section %s\n", qPrintable(bar.marker));
                   int color = readDelphiInteger();    // color?
                   }
             if (barBits & 0x40) {
@@ -529,6 +536,19 @@ printf("Instr: channel %d program %d vol %d pan %d\n",
 
       Measure* measure = score->firstMeasure();
       for (int bar = 0; bar < numBars; ++bar, measure = measure->nextMeasure()) {
+printf("Bar %d\n", bar);
+            const GpBar& gpbar = bars[bar];
+
+            if (!gpbar.marker.isEmpty()) {
+                  Text* s = new Text(score);
+                  s->setText(gpbar.marker.trimmed());
+                  s->setTrack(0);
+                  s->setSubtype(TEXT_REHEARSAL_MARK);
+                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
+                  Segment* segment = measure->getSegment(SegChordRest, measure->tick());
+                  segment->add(s);
+                  }
+
             for (int staffIdx = 0; staffIdx < numTracks; ++staffIdx) {
                   int tick  = measure->tick();
                   int beats = readDelphiInteger();
@@ -550,8 +570,14 @@ printf("Instr: channel %d program %d vol %d pan %d\n",
                               printf("readChordDiagram\n");
                               abort();
                               }
+                        Segment* s = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x4) {
-                              QString s = readDelphiString();
+                              QString txt = readDelphiString();
+                              Lyrics* l = new Lyrics(score);
+                              l->setText(txt);
+                              l->setTrack(staffIdx * VOICES);
+printf("add Lyrics <%s>\n", qPrintable(txt));
+                              s->add(l);
                               }
                         if (beatBits & 0x8)
                               readColumnEffects();
@@ -577,7 +603,6 @@ printf("Instr: channel %d program %d vol %d pan %d\n",
                               }
 
                         ChordRest* cr;
-                        Segment* s = measure->getSegment(SegChordRest, tick);
                         if (pause)
                               cr = new Rest(score);
                         else
@@ -592,16 +617,16 @@ printf("Instr: channel %d program %d vol %d pan %d\n",
                         cr->setDurationType(d);
                         s->add(cr);
                         int strings = readUChar();   // used strings mask
-                        for (int i = 0; i < GP_MAX_STRING_NUMBER; ++i) {
-                              if (strings & (1 << i)) {
+printf("      Staff %d Beat %d 0x%x\n", staffIdx, beat, strings);
+                        Staff* staff = cr->staff();
+                        int numStrings = staff->part()->instr()->tablature()->strings();
+                        for (int i = 6; i >= 0; --i) {
+                              if (strings & (1 << i) && ((6-i) < numStrings)) {
+printf("         string %d\n", i);
                                     Note* note = new Note(score);
                                     static_cast<Chord*>(cr)->add(note);
 
-                                    Staff* staff = note->staff();
-                                    int numStrings = staff->part()->instr()->tablature()->strings();
-                                    int string = i - (GP_MAX_STRING_NUMBER - numStrings);
-                                    string = numStrings - string - 1;
-                                    readNote(string, note);
+                                    readNote(6-i, note);
                                     note->setTpcFromPitch();
                                     }
                               }
