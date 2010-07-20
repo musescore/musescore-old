@@ -33,6 +33,7 @@
 #include "tablature.h"
 #include "clef.h"
 #include "lyrics.h"
+#include "tempotext.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -111,12 +112,12 @@ int GuitarPro::readUChar()
 
 QString GuitarPro::readPascalString(int n)
       {
-      uchar l;
-      read(&l, 1);
+      uchar l = readUChar();
       char s[l + 1];
       read(s, l);
       s[l] = 0;
       skip(n - l);
+printf("1read string %d <%s>\n", l, s);
       return QString(s);
       }
 
@@ -130,6 +131,7 @@ QString GuitarPro::readWordPascalString()
       char c[l+1];
       read(c, l);
       c[l] = 0;
+printf("2read string %d <%s>\n", l, c);
       return QString::fromLocal8Bit(c);
       }
 
@@ -158,15 +160,14 @@ int GuitarPro::readDelphiInteger()
 QString GuitarPro::readDelphiString()
       {
       int maxl = readDelphiInteger();
-      uchar l;
-      read(&l, 1);
+      uchar l = readUChar();
       if (maxl != l + 1)
             printf("readDelphiString: first word doesn't match second byte");
-      char c[l + 5];
+      char c[l + 1];
       read(c, l);
       c[l] = 0;
 
-      printf("read string <%s>\n", c);
+printf("3read string %d <%s>\n", l, c);
       return QString::fromLocal8Bit(c);
       }
 
@@ -211,7 +212,6 @@ void GuitarPro::readNote(int string, Note* note)
       int fretNumber = 0;
       if (noteBits & 0x20) {
             fretNumber = readUChar();
-printf("         fret %d\n", fretNumber);
             }
       if (variant == 2) {                  // link with previous beat
             }
@@ -371,6 +371,8 @@ printf("found GTP format version %d\n", version);
       album        = readDelphiString();
       composer     = readDelphiString();
       copyright    = readDelphiString();
+      score->setCopyright(QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
+
       transcriber  = readDelphiString();
       instructions = readDelphiString();
       int n = readDelphiInteger();
@@ -386,7 +388,6 @@ printf("found GTP format version %d\n", version);
                   }
             }
       int tempo = readDelphiInteger();
-      printf("Tempo: %d\n", tempo);
       if (version >= 400) {
             uchar num;
             read(&num, 1);          // key
@@ -426,7 +427,6 @@ printf("found GTP format version %d\n", version);
                   uchar c = readUChar();
             if (barBits & 0x20) {
                   bar.marker = readDelphiString();     // new section?
-printf("======section %s\n", qPrintable(bar.marker));
                   int color = readDelphiInteger();    // color?
                   }
             if (barBits & 0x40) {
@@ -522,21 +522,24 @@ printf("======section %s\n", qPrintable(bar.marker));
             Segment* segment = measure->getSegment(SegClef, 0);
             segment->add(clef);
             Channel& ch = instr->channel(0);
-            ch.program = (c & 0x1) ? -1 : patch;
-            ch.bank    = 0;
+            if (c & 1) {
+                  ch.program = 0;
+                  ch.bank    = 128;
+                  }
+            else {
+                  ch.program = patch;
+                  ch.bank    = 0;
+                  }
             ch.volume  = channelDefaults[midiChannel].volume;
             ch.pan     = channelDefaults[midiChannel].pan;
             ch.chorus  = channelDefaults[midiChannel].chorus;
             ch.reverb  = channelDefaults[midiChannel].reverb;
-printf("Instr: channel %d program %d vol %d pan %d\n",
-   midiChannel, ch.program, ch.volume, ch.pan);
             // missing: phase, tremolo
             ch.updateInitList();
             }
 
       Measure* measure = score->firstMeasure();
       for (int bar = 0; bar < numBars; ++bar, measure = measure->nextMeasure()) {
-printf("Bar %d\n", bar);
             const GpBar& gpbar = bars[bar];
 
             if (!gpbar.marker.isEmpty()) {
@@ -576,7 +579,6 @@ printf("Bar %d\n", bar);
                               Lyrics* l = new Lyrics(score);
                               l->setText(txt);
                               l->setTrack(staffIdx * VOICES);
-printf("add Lyrics <%s>\n", qPrintable(txt));
                               s->add(l);
                               }
                         if (beatBits & 0x8)
@@ -617,12 +619,10 @@ printf("add Lyrics <%s>\n", qPrintable(txt));
                         cr->setDurationType(d);
                         s->add(cr);
                         int strings = readUChar();   // used strings mask
-printf("      Staff %d Beat %d 0x%x\n", staffIdx, beat, strings);
                         Staff* staff = cr->staff();
                         int numStrings = staff->part()->instr()->tablature()->strings();
                         for (int i = 6; i >= 0; --i) {
                               if (strings & (1 << i) && ((6-i) < numStrings)) {
-printf("         string %d\n", i);
                                     Note* note = new Note(score);
                                     static_cast<Chord*>(cr)->add(note);
 
@@ -634,6 +634,13 @@ printf("         string %d\n", i);
                         }
                   }
             }
+      TempoText* tt = new TempoText(score);
+      tt->setTempo(double(tempo)/60.0);
+      tt->setText(QString("%1%2 = %3").arg(QChar(QChar::highSurrogate(0x1d15f))).arg(QChar(QChar::lowSurrogate(0x1d15f))).arg(tempo));
+      tt->setTrack(0);
+      measure = score->firstMeasure();
+      Segment* segment = measure->getSegment(SegChordRest, 0);
+      segment->add(tt);
       }
 
 //---------------------------------------------------------
