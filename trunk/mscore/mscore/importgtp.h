@@ -62,12 +62,14 @@ class GuitarPro {
       QString readDelphiString();
       void readNote(int string, Note*);
       void readChromaticGraph();
+      void readMixChange();
+      void readColumnEffects();
 
    public:
       QString title, subtitle, artist, album, composer, copyright;
       QString transcriber, instructions;
       QStringList comments;
-      GpTrack trackDefaults[GP_MAX_TRACK_NUMBER * 2];
+      GpTrack channelDefaults[GP_MAX_TRACK_NUMBER * 2];
       int numTracks;
       int numBars;
       QList<GpBar> bars;

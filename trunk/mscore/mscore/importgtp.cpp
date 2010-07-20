@@ -176,8 +176,16 @@ QString GuitarPro::readDelphiString()
 
 void GuitarPro::readChromaticGraph()
       {
-      printf("readChromaticGraph()\n");
-      abort();
+printf("readChromaticGraph()\n");
+
+      readUChar();                        // icon
+      readDelphiInteger();                // shown aplitude
+      int n = readDelphiInteger();
+      for (int i = 0; i < n; ++i) {
+            readDelphiInteger();          // time
+            readDelphiInteger();          // pitch
+            readUChar();                  // vibrato
+            }
       }
 
 //---------------------------------------------------------
@@ -190,8 +198,8 @@ void GuitarPro::readNote(int string, Note* note)
       uchar variant  = readUChar();
 
       if (noteBits & 0x1) {               // note != beat
-            uchar num = readUChar();      // length
-            num = readUChar();            // t
+            readUChar();                  // length
+            readUChar();                  // t
             }
       if (noteBits & 0x2) {               // note is dotted
             }
@@ -244,8 +252,87 @@ void GuitarPro::readNote(int string, Note* note)
             }
       Staff* staff = note->staff();
       int pitch = staff->part()->instr()->tablature()->getPitch(string, fretNumber);
-printf("pitch %d  string %d fret %d\n", pitch, string, fretNumber);
+// printf("pitch %d  string %d fret %d\n", pitch, string, fretNumber);
       note->setPitch(pitch);
+      }
+
+//---------------------------------------------------------
+//   readMixChange
+//---------------------------------------------------------
+
+void GuitarPro::readMixChange()
+      {
+      printf("readMixChange\n");
+      char patch   = readChar();
+      char volume  = readChar();
+      char pan     = readChar();
+      char chorus  = readChar();
+      char reverb  = readChar();
+      char phase   = readChar();
+      char tremolo = readChar();
+      int tempo    = readDelphiInteger();
+
+      if (volume != -1)
+            readChar();
+      if (pan != -1)
+            readChar();
+      if (chorus != -1)
+            readChar();
+      if (reverb != -1)
+            readChar();
+      if (tremolo != -1)
+            readChar();
+      if (tempo != -1)
+            readChar();
+      if (version != 400)
+            readChar();       // bitmask: what should be applied to all tracks
+      }
+
+//---------------------------------------------------------
+//   readColumnEffects
+//---------------------------------------------------------
+
+void GuitarPro::readColumnEffects()
+      {
+      uchar fxBits1 = readUChar();
+      uchar fxBits2 = 0;
+      if (version >= 400)
+            fxBits2 = readUChar();
+      if (fxBits1 & 0x20) {
+            uchar num = readUChar();
+            switch(num) {
+                  case 0:
+                        if (version < 400)
+                              readDelphiInteger();
+                        break;
+                  case 1:
+                        if (version < 400)
+                              readDelphiInteger();
+                        break;
+                  case 2:
+                        if (version < 400)
+                              readDelphiInteger();
+                        break;
+                  case 3:
+                        if (version < 400)
+                              readDelphiInteger();
+                        break;
+                  default:
+                        break;
+                  }
+            }
+      if (fxBits2 & 0x04)
+            readChromaticGraph();
+      if (fxBits1 & 0x40) {
+            readUChar();            // down stroke length
+            readUChar();            // up stroke length
+            }
+      if (fxBits1 & 0x02)
+            readUChar();            // stroke pick direction
+      if (fxBits1 & 0x01) {         // GP3 column-wide vibrato
+            }
+      if (fxBits1 & 0x2) {          // GP3 column-wide wide vibrato (="tremolo" in GP3)
+            }
       }
 
 //---------------------------------------------------------
@@ -303,20 +390,15 @@ printf("found GTP format version %d\n", version);
             readDelphiInteger();    // key
 
       for (int i = 0; i < GP_MAX_TRACK_NUMBER * 2; ++i) {
-            trackDefaults[i].patch   = readDelphiInteger();
-printf("patch==== %d %d\n", i, trackDefaults[i].patch);
-            trackDefaults[i].volume  = readUChar();
-            trackDefaults[i].pan     = readUChar();
-            trackDefaults[i].chorus  = readUChar();
-            trackDefaults[i].reverb  = readUChar();
-            trackDefaults[i].phase   = readUChar();
-            trackDefaults[i].tremolo = readUChar();
-            uchar a, b;
-            read(&a, 1);
-            read(&b, 1);
-            if (a != 0 || b != 0) {
-                  printf("wrong byte padding\n");
-                  }
+            channelDefaults[i].patch   = readDelphiInteger();
+            channelDefaults[i].volume  = readUChar() * 8 - 1;
+            channelDefaults[i].pan     = readUChar() * 8 - 1;
+            channelDefaults[i].chorus  = readUChar() * 8 - 1;
+            channelDefaults[i].reverb  = readUChar() * 8 - 1;
+            channelDefaults[i].phase   = readUChar() * 8 - 1;
+            channelDefaults[i].tremolo = readUChar() * 8 - 1;
+            readUChar();      // padding
+            readUChar();
             }
       numBars   = readDelphiInteger();
       numTracks = readDelphiInteger();
@@ -389,9 +471,6 @@ printf("patch==== %d %d\n", i, trackDefaults[i].patch);
             int tuning[GP_MAX_STRING_NUMBER];
 
             uchar c      = readUChar();   // simulations bitmask
-            if (c & 0x1) {                // drum track
-printf("Drum Track\n");
-                  }
             if (c & 0x2) {                // 12 stringed guitar
                   }
             if (c & 0x4) {                // banjo track
@@ -420,9 +499,13 @@ printf("Drum Track\n");
             instr->setTablature(tab);
             instr->setTrackName(name);
             Staff* staff = score->staff(i);
-            int patch = trackDefaults[i * 2].patch;
+            int patch = channelDefaults[midiChannel].patch;
             int clefId = CLEF_F;
-            if (patch >= 24 && patch < 32)
+            if (c & 0x1) {
+                  clefId = CLEF_PERC;
+                  instr->setUseDrumset(true);
+                  }
+            else if (patch >= 24 && patch < 32)
                   clefId = CLEF_G3;
             else if (patch >= 32 && patch < 40)
                   clefId = CLEF_F8;
@@ -431,6 +514,17 @@ printf("Drum Track\n");
             clef->setTrack(i * VOICES);
             Segment* segment = measure->getSegment(SegClef, 0);
             segment->add(clef);
+            Channel& ch = instr->channel(0);
+            ch.program = (c & 0x1) ? -1 : patch;
+            ch.bank    = 0;
+            ch.volume  = channelDefaults[midiChannel].volume;
+            ch.pan     = channelDefaults[midiChannel].pan;
+            ch.chorus  = channelDefaults[midiChannel].chorus;
+            ch.reverb  = channelDefaults[midiChannel].reverb;
+printf("Instr: channel %d program %d vol %d pan %d\n",
+   midiChannel, ch.program, ch.volume, ch.pan);
+            // missing: phase, tremolo
+            ch.updateInitList();
             }
 
       Measure* measure = score->firstMeasure();
@@ -438,7 +532,7 @@ printf("Drum Track\n");
             for (int staffIdx = 0; staffIdx < numTracks; ++staffIdx) {
                   int tick  = measure->tick();
                   int beats = readDelphiInteger();
-printf("bar %d beats %d\n", bar, beats);
+// printf("bar %d beats %d\n", bar, beats);
                   for (int beat = 0; beat < beats; ++beat) {
                         int pause = 0;
                         uchar beatBits = readUChar();
@@ -446,22 +540,23 @@ printf("bar %d beats %d\n", bar, beats);
                         if (beatBits & 0x40)
                               pause = readUChar();
                         int len = readChar();
-                        if (beatBits & 0x20) {
-                              int tuple = readDelphiInteger();
+                        if (version >= 400) {
+                              if (beatBits & 0x20) {
+                                    int tuple = readDelphiInteger();
+                                    }
                               }
                         if (beatBits & 0x2) {
                               // readChordDiagram();
+                              printf("readChordDiagram\n");
                               abort();
                               }
                         if (beatBits & 0x4) {
                               QString s = readDelphiString();
                               }
-                        if (beatBits & 0x8) {
-                              // readColumnEffects();
-                              abort();
-                              }
+                        if (beatBits & 0x8)
+                              readColumnEffects();
                         if (beatBits & 0x10) {
-                              ;
+                              readMixChange();
                               if (version >= 400) {  // what should be applied to all tracks
                                     uchar num = readUChar();
                                     }
@@ -586,8 +681,8 @@ bool Score::importGTP(const QString& name)
             m->add(s);
             }
 
-//      album        = readDelphiString();
-//      copyright    = readDelphiString();
+//      album
+//      copyright
 
 
       _saved = false;
