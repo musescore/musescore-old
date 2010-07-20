@@ -65,6 +65,7 @@ class GuitarPro {
       void readChromaticGraph();
       void readMixChange();
       void readColumnEffects();
+      void readChordDiagram();
 
    public:
       QString title, subtitle, artist, album, composer;
