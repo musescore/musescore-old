@@ -314,9 +314,12 @@ else (MINGW)
       fluid
       z
       dl
-      rt
       )
-
+   
+   if (NOT APPLE)
+       target_link_libraries(mscore rt)
+   endif (NOT APPLE)
+   
    if (HAS_AUDIOFILE)
        target_link_libraries(mscore sndfile)
    endif (HAS_AUDIOFILE)

@@ -168,7 +168,7 @@ void N_func::read (QFile* f)
 
       f->read (d, sizeof (int32_t));
       swap4 ((char *)(&_b), d);
-      f-read (d, N_NOTE * sizeof (float));
+      f->read (d, N_NOTE * sizeof (float));
       for (i = 0; i < N_NOTE; i++)
             swap4 ((char *)(_v + i), d + i * sizeof (float));
 
