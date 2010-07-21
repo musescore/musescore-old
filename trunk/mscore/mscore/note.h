@@ -70,6 +70,7 @@ class Note : public Element {
       char _line;             ///< y-Position; 0 - top line.
       char _fret;             ///< for tablature view
       char _string;
+      bool _ghost;            ///< ghost note (death note)
 
       bool dragMode;
       char _pitch;            ///< Note pitch as midi value (0 - 127).
@@ -80,7 +81,6 @@ class Note : public Element {
       bool _hidden;           ///< markes this note as the hidden one if there are
                               ///< overlapping notes; hidden notes are not played
                               ///< and heads + accidentals are not shown
-
 
       double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
 
@@ -157,10 +157,12 @@ class Note : public Element {
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n);
 
-      int fret() const                { return _fret; }
-      void setFret(int val)           { _fret = val;  }
+      int fret() const                { return _fret;   }
+      void setFret(int val)           { _fret = val;    }
       int string() const              { return _string; }
-      void setString(int val)         { _string = val; }
+      void setString(int val)         { _string = val;  }
+      bool ghost() const              { return _ghost;  }
+      void setGhost(bool val)         { _ghost = val;   }
 
       virtual void add(Element*);
       virtual void remove(Element*);

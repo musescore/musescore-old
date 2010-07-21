@@ -141,6 +141,7 @@ Note::Note(Score* s)
       _line              = 0;
       _fret              = -1;
       _string            = -1;
+      _ghost             = false;
       _lineOffset        = 0;
       _tieFor            = 0;
       _tieBack           = 0;
@@ -182,6 +183,7 @@ Note::Note(const Note& n)
       _line           = n._line;
       _fret           = n._fret;
       _string         = n._string;
+      _ghost          = n._ghost;
       _userAccidental = n._userAccidental;
       _accidental     = 0;
       if (n._accidental)
@@ -485,14 +487,14 @@ void Note::draw(QPainter& p, ScoreView* v) const
       if (!_hidden || !userOff().isNull()) {
             if (tablature) {
                   double mag = magS();
-                  QFont f("DejaVuSerif");
+                  QFont f("DejaVuSans");
                   int size = lrint(9.0 * DPI / PPI);
                   f.setPixelSize(size);
                   double imag = 1.0 / mag;
                   p.scale(mag, mag);
                   p.setFont(f);
 
-                  QString s = QString::number(_fret);
+                  QString s = _ghost ? "X" : QString::number(_fret);
                   QRectF bb = bbox();
                   double y  = bb.height() * .5;
                   double d  = spatium() * .2;
@@ -578,6 +580,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             xml.tag("fret", _fret);
             xml.tag("string", _string);
             }
+      if (_ghost)
+            xml.tag("ghost", _ghost);
 
       if (_tuning != 0.0)
             xml.tag("tuning", _tuning);
@@ -641,6 +645,8 @@ void Note::read(QDomElement e)
                   _fret = i;
             else if (tag == "string")
                   _string = i;
+            else if (tag == "ghost")
+                  _ghost = i;
             else if (tag == "line")
                   _line = i;
             else if (tag == "tuning")

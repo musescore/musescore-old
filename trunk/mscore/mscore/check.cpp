@@ -81,6 +81,7 @@ printf("empty tuplet: removing\n");
 
 void Score::checkScore()
       {
+return;
       checkSlurs();
       checkTuplets();
 
@@ -93,8 +94,8 @@ void Score::checkScore()
                               continue;
                         ChordRest* cr = static_cast<ChordRest*>(s->element(track));
                         if (s->tick() != tick) {
-                              printf("Chord/Rest at tick %d staff %d is missing (len = %d)\n",
-                                 tick, staffIdx, cr->tick() - tick);
+                              printf("Chord/Rest at tick %d(%d) staff %d is missing (len = %d)\n",
+                                 tick, s->tick(), staffIdx, cr->tick() - tick);
                               if (cr->tick() > tick) {
                                     int ttick = tick;
                                     int ticks = cr->tick() - tick;

@@ -497,7 +497,7 @@ void Tuplet::add(Element* e)
       {
       foreach(DurationElement* el, _elements) {
             if (el == e)
-                  printf("Tuplet::add: %s already there\n", el->name());
+                  printf("Tuplet::add: %p %s already there\n", e, e->name());
             }
 
       switch(e->type()) {

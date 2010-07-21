@@ -35,6 +35,7 @@
 #include "lyrics.h"
 #include "tempotext.h"
 #include "slur.h"
+#include "tuplet.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -200,14 +201,18 @@ void GuitarPro::readNote(int string, Note* note)
       uchar noteBits = readUChar();
 
       bool tieNote = false;
-//      if ((noteBits & 0x20) && (version >= 400)) {
+      uchar variant = 1;
       if (noteBits & 0x20) {
-            uchar variant = readUChar();
-            if (variant == 2)
+            variant = readUChar();
+            if (variant == 1) {     // normal note
+                  }
+            else if (variant == 2)
                   tieNote = true;
             else if (variant == 3) {                 // dead notes
-                  printf("DeathNotes===============\n");
+                  //printf("DeathNote tick %d pitch %d\n", note->chord()->segment()->tick(), note->pitch());
                   }
+            else
+                  printf("unknown note variant: %d\n", variant);
             }
 
       if (noteBits & 0x1) {               // note != beat
@@ -264,11 +269,19 @@ void GuitarPro::readNote(int string, Note* note)
                   }
             }
       Staff* staff = note->staff();
+      if (fretNumber == 255) {
+            fretNumber = 0;
+            note->setHeadGroup(1);
+            note->setGhost(true);
+            }
       int pitch = staff->part()->instr()->tablature()->getPitch(string, fretNumber);
 // printf("pitch %d  string %d fret %d\n", pitch, string, fretNumber);
       note->setFret(fretNumber);
       note->setString(string);
       note->setPitch(pitch);
+      if (variant == 3)
+            printf("DeathNote tick %d pitch %d string %d fret %d\n",
+               note->chord()->segment()->tick(), note->pitch(), string, fretNumber);
 
       if (tieNote) {
             Chord* chord     = note->chord();
@@ -382,7 +395,7 @@ void GuitarPro::readChordDiagram()
       {
       int header = readUChar();
 
-      printf("read chord diagram %x\n", header);
+//      printf("read chord diagram %x\n", header);
 
       if ((header & 1) == 0) {
             printf("no version4 chord diagram\n");
@@ -425,7 +438,6 @@ void GuitarPro::readChordDiagram()
             readChar();
             }
       else {
-            printf("=============pos 0x%x\n", int(f->pos()));
             skip(25);
             readPascalString(34);
             skip(28);
@@ -660,6 +672,10 @@ printf("doubleBar=============================================\n");
                   segment->add(s);
                   }
 
+            Tuplet* tuplets[numTracks];
+            for (int staffIdx = 0; staffIdx < numTracks; ++staffIdx)
+                  tuplets[staffIdx] = 0;
+
             for (int staffIdx = 0; staffIdx < numTracks; ++staffIdx) {
                   int tick  = measure->tick();
                   int beats = readDelphiInteger();
@@ -667,28 +683,29 @@ printf("doubleBar=============================================\n");
                   for (int beat = 0; beat < beats; ++beat) {
                         int pause = 0;
                         uchar beatBits = readUChar();
-printf("beat bits %02x\n", beatBits);
+// printf("beat bits %02x\n", beatBits);
                         bool dotted = beatBits & 0x1;
                         if (beatBits & 0x40)
                               pause = readUChar();
                         int len = readChar();
-                        if (beatBits & 0x20) {
-                              int tuple = readDelphiInteger();
-                              }
+                        int tuple = 0;
+                        if (beatBits & 0x20)
+                              tuple = readDelphiInteger();
                         if (beatBits & 0x2)
                               readChordDiagram();
-                        Segment* s = measure->getSegment(SegChordRest, tick);
+                        Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
                               Lyrics* l = new Lyrics(score);
                               l->setText(txt);
                               l->setTrack(staffIdx * VOICES);
-                              s->add(l);
+                              segment->add(l);
                               }
                         if (beatBits & 0x8)
                               readColumnEffects();
                         if (beatBits & 0x10)
                               readMixChange();
+                        int strings = readUChar();   // used strings mask
 
                         Fraction l;
                         switch(len) {
@@ -709,11 +726,33 @@ printf("beat bits %02x\n", beatBits);
                               }
 
                         ChordRest* cr;
-                        if (pause)
+                        if (pause || (strings == 0))
                               cr = new Rest(score);
                         else
                               cr = new Chord(score);
                         cr->setTrack(staffIdx * VOICES);
+                        if (tuple) {
+// printf("%d: Tuplet note beat %d  tuplet %d  len %s\n", tick, beat, tuple, qPrintable(l.print()));
+
+                              Tuplet* tuplet = tuplets[staffIdx];
+                              if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
+                                    tuplet = new Tuplet(score);
+                                    tuplets[staffIdx] = tuplet;
+                                    measure->add(tuplet);
+                                    }
+                              tuplet->setTrack(staffIdx * VOICES);
+                              switch(tuple) {
+                                    case 3:
+                                          tuplet->setRatio(Fraction(3,2));
+                                          tuplet->setBaseLen(l);
+                                          break;
+                                    default:
+                                          printf("unsupported tuplet %d\n", tuple);
+                                          abort();
+                                    }
+                              cr->setTuplet(tuplet);
+                              }
+
                         Duration d(l);
                         d.setDots(dotted ? 1 : 0);
 
@@ -721,8 +760,9 @@ printf("beat bits %02x\n", beatBits);
                               l = l + (l/2);
                         cr->setDuration(l);
                         cr->setDurationType(d);
-                        s->add(cr);
-                        int strings = readUChar();   // used strings mask
+                        segment->add(cr);
+// printf("%d: add cr %p <%s>\n", tick, cr, qPrintable(l.print()));
+
                         Staff* staff = cr->staff();
                         int numStrings = staff->part()->instr()->tablature()->strings();
                         for (int i = 6; i >= 0; --i) {
@@ -731,11 +771,10 @@ printf("beat bits %02x\n", beatBits);
                                     static_cast<Chord*>(cr)->add(note);
 
                                     readNote(6-i, note);
-printf("Note %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
                                     note->setTpcFromPitch();
                                     }
                               }
-                        tick += l.ticks();
+                        tick += cr->ticks();
                         }
                   }
             }
