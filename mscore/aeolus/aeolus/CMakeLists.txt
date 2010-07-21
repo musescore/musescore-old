@@ -17,8 +17,12 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
+if (APPLE)
+      set(CMAKE_CXX_FLAGS         "-include all.h -g -Wall -Wextra -Winvalid-pch -DVERSION=\"\\\\\"0.8.4\\\\\"\" -D_REENTRANT")
+else (APPLE)
+      set(CMAKE_CXX_FLAGS         "-include all.h -g -Wall -Wextra -Winvalid-pch -DVERSION=\"\\\"0.8.4\\\"\" -D_REENTRANT")
+endif (APPLE)
 
-set(CMAKE_CXX_FLAGS         "-include all.h -g -Wall -Wextra -Winvalid-pch -DVERSION=\"\\\"0.8.4\\\"\" -D_REENTRANT")
 set(CMAKE_CXX_FLAGS_RELEASE "-DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
