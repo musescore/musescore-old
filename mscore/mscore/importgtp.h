@@ -25,6 +25,7 @@
 
 class Score;
 class Note;
+class Segment;
 
 static const int GP_MAX_LYRIC_LINES = 5;
 static const int GP_MAX_TRACK_NUMBER = 32;
@@ -59,13 +60,13 @@ class GuitarPro {
       int readChar();
       QString readPascalString(int);
       QString readWordPascalString();
-      int readDelphiInteger();
+      int readInt();
       QString readDelphiString();
       void readNote(int string, Note*);
       void readChromaticGraph();
       void readMixChange();
       void readColumnEffects();
-      void readChordDiagram();
+      void readChordDiagram(Segment*);
 
    public:
       QString title, subtitle, artist, album, composer;

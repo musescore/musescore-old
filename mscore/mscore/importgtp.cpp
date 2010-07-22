@@ -119,7 +119,6 @@ QString GuitarPro::readPascalString(int n)
       read(s, l);
       s[l] = 0;
       skip(n - l);
-printf("1read string %d <%s>\n", l, s);
       return QString(s);
       }
 
@@ -129,19 +128,18 @@ printf("1read string %d <%s>\n", l, s);
 
 QString GuitarPro::readWordPascalString()
       {
-      int l = readDelphiInteger();
+      int l = readInt();
       char c[l+1];
       read(c, l);
       c[l] = 0;
-printf("2read string %d <%s>\n", l, c);
       return QString::fromLocal8Bit(c);
       }
 
 //---------------------------------------------------------
-//   readDelphiInteger
+//   readInt
 //---------------------------------------------------------
 
-int GuitarPro::readDelphiInteger()
+int GuitarPro::readInt()
       {
       uchar x;
       read(&x, 1);
@@ -161,15 +159,13 @@ int GuitarPro::readDelphiInteger()
 
 QString GuitarPro::readDelphiString()
       {
-      int maxl = readDelphiInteger();
+      int maxl = readInt();
       uchar l = readUChar();
       if (maxl != l + 1)
             printf("readDelphiString: first word doesn't match second byte");
       char c[l + 1];
       read(c, l);
       c[l] = 0;
-
-printf("3read string %d <%s>\n", l, c);
       return QString::fromLocal8Bit(c);
       }
 
@@ -183,11 +179,11 @@ void GuitarPro::readChromaticGraph()
 printf("readChromaticGraph()\n");
 
       readUChar();                        // icon
-      readDelphiInteger();                // shown aplitude
-      int n = readDelphiInteger();
+      readInt();                          // shown aplitude
+      int n = readInt();
       for (int i = 0; i < n; ++i) {
-            readDelphiInteger();          // time
-            readDelphiInteger();          // pitch
+            readInt();                    // time
+            readInt();                    // pitch
             readUChar();                  // vibrato
             }
       }
@@ -226,7 +222,7 @@ void GuitarPro::readNote(int string, Note* note)
             int d = readUChar();                  // dynamic
             printf("Dynamic=========%d\n", d);
             }
-      int fretNumber = 0;
+      int fretNumber = -1;
       if (noteBits & 0x20)
             fretNumber = readUChar();
 
@@ -268,6 +264,9 @@ void GuitarPro::readNote(int string, Note* note)
                         }
                   }
             }
+      if (fretNumber == -1) {
+            printf("Note: no fret number, tie %d\n", tieNote);
+            }
       Staff* staff = note->staff();
       if (fretNumber == 255) {
             fretNumber = 0;
@@ -279,13 +278,11 @@ void GuitarPro::readNote(int string, Note* note)
       note->setFret(fretNumber);
       note->setString(string);
       note->setPitch(pitch);
-      if (variant == 3)
-            printf("DeathNote tick %d pitch %d string %d fret %d\n",
-               note->chord()->segment()->tick(), note->pitch(), string, fretNumber);
 
       if (tieNote) {
+            bool found = false;
             Chord* chord     = note->chord();
-            Segment* segment = chord->segment()->prev(SegChordRest);
+            Segment* segment = chord->segment()->prev1(SegChordRest);
             int track        = note->track();
             while (segment) {
                   Element* e = segment->element(track);
@@ -293,18 +290,24 @@ void GuitarPro::readNote(int string, Note* note)
                         if (e->type() == CHORD) {
                               Chord* chord2 = static_cast<Chord*>(e);
                               foreach(Note* note2, chord2->notes()) {
-                                    if (note2->pitch() == pitch) {
+                                    if (note2->string() == string) {
                                           Tie* tie = new Tie(score);
                                           tie->setEndNote(note);
                                           note2->add(tie);
+                                          note->setFret(note2->fret());
+                                          note->setPitch(note2->pitch());
+                                          found = true;
                                           break;
                                           }
                                     }
                               }
-                        break;
+                        if (found)
+                              break;
                         }
-                  segment = segment->prev(SegChordRest);
+                  segment = segment->prev1(SegChordRest);
                   }
+            if (!found)
+                  printf("tied note not found, pitch %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
             }
       }
 
@@ -321,7 +324,7 @@ void GuitarPro::readMixChange()
       char reverb  = readChar();
       char phase   = readChar();
       char tremolo = readChar();
-      int tempo    = readDelphiInteger();
+      int tempo    = readInt();
 
       if (volume >= 0)
             readChar();
@@ -354,19 +357,19 @@ void GuitarPro::readColumnEffects()
             switch(num) {
                   case 0:
                         if (version < 400)
-                              readDelphiInteger();
+                              readInt();
                         break;
                   case 1:
                         if (version < 400)
-                              readDelphiInteger();
+                              readInt();
                         break;
                   case 2:
                         if (version < 400)
-                              readDelphiInteger();
+                              readInt();
                         break;
                   case 3:
                         if (version < 400)
-                              readDelphiInteger();
+                              readInt();
                         break;
                   default:
                         break;
@@ -391,7 +394,7 @@ void GuitarPro::readColumnEffects()
 //   readChordDiagram
 //---------------------------------------------------------
 
-void GuitarPro::readChordDiagram()
+void GuitarPro::readChordDiagram(Segment*)
       {
       int header = readUChar();
 
@@ -407,17 +410,17 @@ void GuitarPro::readChordDiagram()
             readChar();             // root -1 - custom, 0 - C, 1 - C#...
             readChar();             // chord type
             readChar();             // chord goes until ninth, eleventh, or thirteenth
-            readDelphiInteger();    // lowest note of chord. It gives the chord inversions.
-            readDelphiInteger();    // tonality linked with 9/11/13:  0:perfect, 1:augmented, 2:diminished
+            readInt();              // lowest note of chord. It gives the chord inversions.
+            readInt();              // tonality linked with 9/11/13:  0:perfect, 1:augmented, 2:diminished
             readChar();             // allows to determine if a 'add' (added note) is present in the chord
             readPascalString(20);   // chord name
             skip(2);
             readChar();
             readChar();
             readChar();
-            readDelphiInteger();    // first fret
+            readInt();              // first fret
             for (int i = 0; i < 7; ++i)
-                  readDelphiInteger();
+                  readInt();
             readChar();       // number of barres
             for (int i = 0; i < 5; ++i)
                   readChar();
@@ -440,7 +443,10 @@ void GuitarPro::readChordDiagram()
       else {
             skip(25);
             readPascalString(34);
-            skip(28);
+            int firstFret = readInt();
+            for (int i = 0; i < 6; ++i) {
+                  int fret = readInt();
+                  }
             skip(36);
             }
       }
@@ -479,33 +485,33 @@ printf("found GTP format version %d\n", version);
 
       transcriber  = readDelphiString();
       instructions = readDelphiString();
-      int n = readDelphiInteger();
+      int n = readInt();
       for (int i = 0; i < n; ++i)
             comments.append(readDelphiString());
       uchar num;
       read(&num, 1);    // Shuffle rhythm feel
       if (version >= 400) {
-            readDelphiInteger();
+            readInt();
             for (int i = 0; i < GP_MAX_LYRIC_LINES; ++i) {
-                  readDelphiInteger();
+                  readInt();
                   readWordPascalString();
                   }
             }
-      int tempo = readDelphiInteger();
+      int tempo = readInt();
       int key = 0;
       int octave = 0;
       if (version >= 400) {
             key = readChar();
-            octave = readDelphiInteger();    // octave
+            octave = readInt();    // octave
             }
       else {
-            key = readDelphiInteger();    // key
+            key = readInt();    // key
             }
 
 printf("key %d octave %d\n", key, octave);
 
       for (int i = 0; i < GP_MAX_TRACK_NUMBER * 2; ++i) {
-            channelDefaults[i].patch   = readDelphiInteger();
+            channelDefaults[i].patch   = readInt();
             channelDefaults[i].volume  = readUChar() * 8 - 1;
             channelDefaults[i].pan     = readUChar() * 8 - 1;
             channelDefaults[i].chorus  = readUChar() * 8 - 1;
@@ -519,8 +525,8 @@ printf("key %d octave %d\n", key, octave);
 //               channelDefaults[i].volume,
 //               channelDefaults[i].pan);
             }
-      numBars   = readDelphiInteger();
-      numTracks = readDelphiInteger();
+      numBars   = readInt();
+      numTracks = readInt();
 
       int tnumerator   = 4;
       int tdenominator = 4;
@@ -540,7 +546,7 @@ printf("BeginRepeat=============================================\n");
                   uchar c = readUChar();
             if (barBits & 0x20) {
                   bar.marker = readDelphiString();     // new section?
-                  int color = readDelphiInteger();    // color?
+                  int color = readInt();    // color?
                   }
             if (barBits & 0x40) {
                   bar.keysig = readUChar();
@@ -597,19 +603,19 @@ printf("doubleBar=============================================\n");
             if (c & 0x4) {                // banjo track
                   }
             QString name = readPascalString(40);
-            int strings  = readDelphiInteger();
+            int strings  = readInt();
             if (strings <= 0 || strings > GP_MAX_STRING_NUMBER)
                   throw GP_BAD_NUMBER_OF_STRINGS ;
             for (int j = 0; j < strings; ++j)
-                  tuning[j] = readDelphiInteger();
+                  tuning[j] = readInt();
             for (int j = strings; j < GP_MAX_STRING_NUMBER; ++j)
-                  readDelphiInteger();
-            int midiPort     = readDelphiInteger() - 1;
-            int midiChannel  = readDelphiInteger() - 1;
-            int midiChannel2 = readDelphiInteger() - 1;
-            int frets        = readDelphiInteger();
-            int capo         = readDelphiInteger();
-            int color        = readDelphiInteger();
+                  readInt();
+            int midiPort     = readInt() - 1;
+            int midiChannel  = readInt() - 1;
+            int midiChannel2 = readInt() - 1;
+            int frets        = readInt();
+            int capo         = readInt();
+            int color        = readInt();
 
             int tuning2[strings];
             for (int k = 0; k < strings; ++k)
@@ -678,7 +684,7 @@ printf("doubleBar=============================================\n");
 
             for (int staffIdx = 0; staffIdx < numTracks; ++staffIdx) {
                   int tick  = measure->tick();
-                  int beats = readDelphiInteger();
+                  int beats = readInt();
 // printf("bar %d beats %d\n", bar, beats);
                   for (int beat = 0; beat < beats; ++beat) {
                         int pause = 0;
@@ -690,10 +696,10 @@ printf("doubleBar=============================================\n");
                         int len = readChar();
                         int tuple = 0;
                         if (beatBits & 0x20)
-                              tuple = readDelphiInteger();
-                        if (beatBits & 0x2)
-                              readChordDiagram();
+                              tuple = readInt();
                         Segment* segment = measure->getSegment(SegChordRest, tick);
+                        if (beatBits & 0x2)
+                              readChordDiagram(segment);
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
                               Lyrics* l = new Lyrics(score);
