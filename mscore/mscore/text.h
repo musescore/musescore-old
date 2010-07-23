@@ -59,7 +59,6 @@ class TextBase {
       int _frameRound;
       bool _circle;
       bool _hasFrame;
-      double _layoutWidth;
 
       QRectF frame;
       QRectF _bbox;

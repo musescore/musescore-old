@@ -63,7 +63,6 @@ TextBase::TextBase()
       _frameColor   = preferences.defaultColor;
       _frameRound   = 25;
       _circle       = false;
-      _layoutWidth  = -1;
       }
 
 TextBase::~TextBase()
@@ -85,10 +84,8 @@ TextBase::TextBase(const TextBase& t)
       _frameRound   = t._frameRound;
       _circle       = t._circle;
       _hasFrame     = t._hasFrame;
-      _layoutWidth  = t._layoutWidth;
       frame         = t.frame;
       _bbox         = t._bbox;
-      layout(t._layoutWidth);
       }
 
 //---------------------------------------------------------
@@ -306,9 +303,9 @@ bool TextBase::readProperties(QDomElement e)
 
 void TextBase::layout(double w)
       {
-      _layoutWidth = w;
-
       const double mag = DPI / PDPI;
+      w /= mag;
+
       if (w <= 0.0)
             w = _doc->idealWidth();
 
@@ -333,6 +330,7 @@ void TextBase::layout(double w)
                         frame.setWidth(frame.height());
                         }
                   }
+            frame = QRectF(frame.x() * mag, frame.y() * mag, frame.width() * mag, frame.height() * mag);
             double w = (_paddingWidth + _frameWidth * .5) * DPMM;
             frame.adjust(-w, -w, w, w);
             w = _frameWidth * DPMM;
