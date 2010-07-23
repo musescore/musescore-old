@@ -1182,6 +1182,7 @@ void ScoreView::startEdit()
             int idx             = ohp->spannerSegments().indexOf(ols);
             editObject          = hp->spannerSegments().at(idx);
             _score->undoChangeElement(ohp, hp);
+            editObject->startEdit(this, startMove);
             }
       else {
             editObject = origEditObject->clone();

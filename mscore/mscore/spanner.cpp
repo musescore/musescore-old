@@ -39,6 +39,15 @@ SpannerSegment::SpannerSegment(const SpannerSegment& s)
       }
 
 //---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+void SpannerSegment::startEdit(ScoreView*s , const QPointF& p)
+      {
+      parent()->startEdit(s, p);
+      }
+
+//---------------------------------------------------------
 //   Spanner
 //---------------------------------------------------------
 

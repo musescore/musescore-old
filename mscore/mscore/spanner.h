@@ -50,7 +50,7 @@ class SpannerSegment : public Element {
       void setSpannerSegmentType(SpannerSegmentType s) { setSubtype(s);              }
       SpannerSegmentType spannerSegmentType() const    { return SpannerSegmentType(subtype()); }
       void setSystem(System* s)                        { _system = s;                }
-      virtual void startEdit(ScoreView*s , const QPointF& p) { parent()->startEdit(s, p); }
+      virtual void startEdit(ScoreView*, const QPointF&);
       virtual void endEdit()                           { parent()->endEdit(); }
       };
 
