@@ -1579,13 +1579,31 @@ void ShowElementBase::setElement(Element* e)
       eb.generated->setChecked(e->generated());
       eb.visible->setChecked(e->visible());
       eb.track->setValue(e->track());
-//TODO1      eb.time->setValue(e->tick());
       eb.posx->setValue(e->ipos().x());
       eb.posy->setValue(e->ipos().y());
       eb.cposx->setValue(e->canvasPos().x());
       eb.cposy->setValue(e->canvasPos().y());
       eb.offsetx->setValue(e->userOff().x());
       eb.offsety->setValue(e->userOff().y());
+      eb.layoutXoff->setValue(e->xoff());
+      eb.layoutYoff->setValue(e->yoff());
+      eb.layoutRXoff->setValue(e->reloff().x());
+      eb.layoutRYoff->setValue(e->reloff().y());
+      eb.readPosX->setValue(e->readPos().x());
+      eb.readPosY->setValue(e->readPos().y());
+
+      Align a = e->align();
+      QString s;
+      s += a & ALIGN_LEFT ? "L" : "-";
+      s += a & ALIGN_HCENTER ? "C" : "-";
+      s += a & ALIGN_RIGHT ? "R" : "-";
+      s += " ";
+      s += a & ALIGN_TOP ? "T" : "-";
+      s += a & ALIGN_VCENTER ? "C" : "-";
+      s += a & ALIGN_BOTTOM ? "B" : "-";
+      s += a & ALIGN_BASELINE ? "L" : "-";
+      eb.alignment->setText(s);
+
       eb.bboxx->setValue(e->bbox().x());
       eb.bboxy->setValue(e->bbox().y());
       eb.bboxw->setValue(e->bbox().width());

@@ -75,6 +75,8 @@ void TextProp::set(TextB* tb)
             alignVCenter->setChecked(true);
       else if (a & ALIGN_BOTTOM)
             alignBottom->setChecked(true);
+      else if (a & ALIGN_BASELINE)
+            alignBaseline->setChecked(true);
       else
             alignTop->setChecked(true);
 
@@ -134,12 +136,14 @@ void TextProp::get(TextB* tb)
       int a = 0;
       if (alignHCenter->isChecked())
             a |= ALIGN_HCENTER;
-      if (alignRight->isChecked())
+      else if (alignRight->isChecked())
             a |= ALIGN_RIGHT;
       if (alignVCenter->isChecked())
             a |= ALIGN_VCENTER;
-      if (alignBottom->isChecked())
+      else if (alignBottom->isChecked())
             a |= ALIGN_BOTTOM;
+      else if (alignBaseline->isChecked())
+            a |= ALIGN_BASELINE;
       tb->setAlign(Align(a));
       tb->doc()->setModified(true);       // force relayout
 
@@ -174,6 +178,8 @@ void TextProp::set(TextStyle* s)
             alignVCenter->setChecked(true);
       else if (a & ALIGN_BOTTOM)
             alignBottom->setChecked(true);
+      else if (a & ALIGN_BASELINE)
+            alignBaseline->setChecked(true);
       else
             alignTop->setChecked(true);
 
@@ -236,5 +242,18 @@ void TextProp::get(TextStyle* s)
       s->hasFrame     = frame->isChecked();
       s->systemFlag   = systemFlag->isChecked();
       s->foregroundColor = color->color();
+
+      s->align = 0;
+      if (alignHCenter->isChecked())
+            s->align |= ALIGN_HCENTER;
+      else if (alignRight->isChecked())
+            s->align |= ALIGN_RIGHT;
+
+      if (alignVCenter->isChecked())
+            s->align |= ALIGN_VCENTER;
+      else if (alignBottom->isChecked())
+            s->align |= ALIGN_BOTTOM;
+      else if (alignBaseline->isChecked())
+            s->align |= ALIGN_BASELINE;
       }
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>592</width>
-    <height>242</height>
+    <height>266</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,6 +42,9 @@
         </property>
         <item>
          <widget class="QPushButton" name="parentButton">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true">Parent</string>
           </property>
@@ -79,6 +82,9 @@
         </property>
         <item row="0" column="0">
          <widget class="QCheckBox" name="selected">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true" comment="do not translate">selected</string>
           </property>
@@ -86,6 +92,9 @@
         </item>
         <item row="0" column="2">
          <widget class="QCheckBox" name="generated">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true" comment="do not translate">generated</string>
           </property>
@@ -93,6 +102,9 @@
         </item>
         <item row="0" column="3">
          <widget class="QCheckBox" name="visible">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true" comment="do not translate">visible</string>
           </property>
@@ -138,6 +150,9 @@
         </item>
         <item row="1" column="0">
          <widget class="QCheckBox" name="selectable">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>selectable</string>
           </property>
@@ -145,6 +160,9 @@
         </item>
         <item row="1" column="2">
          <widget class="QCheckBox" name="droptarget">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string>droptarget</string>
           </property>
@@ -162,6 +180,9 @@
         </item>
         <item row="1" column="6">
          <widget class="QDoubleSpinBox" name="mag">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="value">
            <double>1.000000000000000</double>
           </property>
@@ -169,6 +190,9 @@
         </item>
         <item row="1" column="5">
          <widget class="QLabel" name="label_11">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true" comment="do not translate">Mag</string>
           </property>
@@ -239,6 +263,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
          </widget>
         </item>
        </layout>
@@ -269,6 +296,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true">relative x position</string>
+          </property>
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -285,6 +315,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true">relative y position</string>
+          </property>
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -293,52 +326,20 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="label_10">
           <property name="text">
-           <string notr="true" comment="do not translate">CPos</string>
+           <string notr="true" comment="do not translate">Uoff</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QDoubleSpinBox" name="cposx">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="toolTip">
-           <string notr="true">canvas x position</string>
-          </property>
-          <property name="maximum">
-           <double>1000000.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QDoubleSpinBox" name="cposy">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="toolTip">
-           <string notr="true">canvas y position</string>
-          </property>
-          <property name="maximum">
-           <double>1000000.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string notr="true" comment="do not translate">Offset</string>
+           <string notr="true" comment="do not translate">Loff</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -348,51 +349,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <widget class="QDoubleSpinBox" name="offsetx">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="suffix">
-           <string comment="do not translate"/>
-          </property>
-          <property name="minimum">
-           <double>-100000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100000.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.100000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QDoubleSpinBox" name="offsety">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="suffix">
-           <string comment="do not translate"/>
-          </property>
-          <property name="minimum">
-           <double>-100000.000000000000000</double>
-          </property>
-          <property name="maximum">
-           <double>100000.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.100000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
+        <item row="4" column="0">
          <widget class="QLabel" name="label_7">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -408,13 +365,16 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="4" column="1">
          <widget class="QDoubleSpinBox" name="bboxx">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
           </property>
           <property name="readOnly">
            <bool>true</bool>
@@ -427,7 +387,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="2">
+        <item row="4" column="2">
          <widget class="QDoubleSpinBox" name="bboxy">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -435,8 +395,157 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="readOnly">
            <bool>true</bool>
+          </property>
+          <property name="minimum">
+           <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QDoubleSpinBox" name="bboxw">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="minimum">
+           <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="4">
+         <widget class="QDoubleSpinBox" name="bboxh">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="minimum">
+           <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QDoubleSpinBox" name="cposx">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true">canvas x position</string>
+          </property>
+          <property name="maximum">
+           <double>1000000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QDoubleSpinBox" name="offsetx">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true">user x offset</string>
+          </property>
+          <property name="suffix">
+           <string comment="do not translate"/>
+          </property>
+          <property name="minimum">
+           <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QDoubleSpinBox" name="cposy">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true">canvas y position</string>
+          </property>
+          <property name="maximum">
+           <double>1000000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QDoubleSpinBox" name="layoutXoff">
+          <property name="toolTip">
+           <string notr="true">layout x offset</string>
+          </property>
+          <property name="minimum">
+           <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QDoubleSpinBox" name="offsety">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="suffix">
+           <string comment="do not translate"/>
+          </property>
+          <property name="minimum">
+           <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QDoubleSpinBox" name="layoutYoff">
+          <property name="toolTip">
+           <string notr="true">layout y offset</string>
           </property>
           <property name="minimum">
            <double>-100000.000000000000000</double>
@@ -447,15 +556,9 @@
          </widget>
         </item>
         <item row="3" column="3">
-         <widget class="QDoubleSpinBox" name="bboxw">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
+         <widget class="QDoubleSpinBox" name="layoutRXoff">
+          <property name="toolTip">
+           <string notr="true">layout relative x offset</string>
           </property>
           <property name="minimum">
            <double>-100000.000000000000000</double>
@@ -466,15 +569,144 @@
          </widget>
         </item>
         <item row="3" column="4">
-         <widget class="QDoubleSpinBox" name="bboxh">
-          <property name="readOnly">
-           <bool>true</bool>
+         <widget class="QDoubleSpinBox" name="layoutRYoff">
+          <property name="toolTip">
+           <string notr="true">layout relative y offset</string>
           </property>
           <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
           <property name="maximum">
            <double>100000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLabel" name="label_2">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>alignment:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QLabel" name="alignment">
+          <property name="palette">
+           <palette>
+            <active>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="Window">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </active>
+            <inactive>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="Window">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </inactive>
+            <disabled>
+             <colorrole role="Base">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="Window">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>255</red>
+                <green>255</green>
+                <blue>255</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </disabled>
+           </palette>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="autoFillBackground">
+           <bool>true</bool>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="readPosX">
+          <property name="toolTip">
+           <string notr="true">read x position</string>
+          </property>
+          <property name="minimum">
+           <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QDoubleSpinBox" name="readPosY">
+          <property name="toolTip">
+           <string notr="true">read y position</string>
+          </property>
+          <property name="minimum">
+           <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string notr="true">Rpos</string>
           </property>
          </widget>
         </item>
