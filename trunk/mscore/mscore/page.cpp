@@ -155,6 +155,7 @@ void Page::layout()
             if (_score->rights) {
                   if (_copyright == 0) {
                         _copyright = new TextC(*_score->rights);
+                        _copyright->setFlag(ELEMENT_MOVABLE, false);
                         _copyright->setParent(this);
                         _copyright->setTextStyle(TEXT_STYLE_COPYRIGHT);
                         _copyright->setLayoutToParentWidth(true);
