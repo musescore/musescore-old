@@ -119,6 +119,7 @@ class TextB : public Element {
       bool setCursor(const QPointF& p, QTextCursor::MoveMode mm = QTextCursor::MoveAnchor);
       int cursorPos;
       int _textStyle;
+      bool _layoutToParentWidth;
 
    public:
       TextB(Score*);
@@ -203,6 +204,9 @@ class TextB : public Element {
 
       virtual bool genPropertyMenu(QMenu* popup) const;
       virtual void propertyAction(ScoreView*, const QString& s);
+
+      bool layoutToParentWidth() const    { return _layoutToParentWidth; }
+      void setLayoutToParentWidth(bool v) { _layoutToParentWidth = v;   }
       };
 
 //---------------------------------------------------------
@@ -218,9 +222,9 @@ class Text : public TextB {
       Text(Score*);
       Text(const Text&);
       ~Text();
-      virtual Text* clone() const        { return new Text(*this); }
-      virtual TextBase* textBase() const { return _tb; }
-      void setModified(bool v)           { _tb->setModified(v); }
+      virtual Text* clone() const         { return new Text(*this); }
+      virtual TextBase* textBase() const  { return _tb; }
+      void setModified(bool v)            { _tb->setModified(v); }
       };
 
 //---------------------------------------------------------

@@ -458,13 +458,8 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             if (!s.isEmpty())
                   pl.append(Prop("subtype", subtypeName()));
             }
-//      if (!_userOff.isNull())     // obsolete
-//            pl.append(Prop("offset", _userOff / spatium()));
-      if (flag(ELEMENT_MOVABLE)) {
+      if (flag(ELEMENT_MOVABLE))
             pl.append(Prop("pos", pos() / spatium()));
-if (type() == FINGERING)
-printf("write props pos: %f %f\n", pos().x(), pos().y());
-            }
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
             t = track() + xml.trackDiff;
@@ -1455,4 +1450,13 @@ bool elementLessThan(const Element* const e1, const Element* const e2)
       return e1->type() > e2->type();
       }
 
+
+//---------------------------------------------------------
+//   setAlign
+//---------------------------------------------------------
+
+void Element::setAlign(Align val)
+      {
+      _align = val;
+      }
 

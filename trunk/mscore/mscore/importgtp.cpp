@@ -481,7 +481,8 @@ printf("found GTP format version %d\n", version);
       album        = readDelphiString();
       composer     = readDelphiString();
       QString copyright = readDelphiString();
-      score->setCopyright(QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
+      if (!copyright.isEmpty())
+            score->setCopyright(QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
 
       transcriber  = readDelphiString();
       instructions = readDelphiString();

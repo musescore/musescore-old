@@ -207,6 +207,10 @@ void Box::read(QDomElement e)
             else if (tag == "Text") {
                   Text* t = new Text(score());
                   t->read(e);
+#if 0
+                  does not work as setTextStyle overwrites all
+                  kind of information (align...)
+
                   // for backward compatibility
                   QColor c = t->color();
                   int st = t->subtype();
@@ -219,6 +223,7 @@ void Box::read(QDomElement e)
                   else if (st == TEXT_POET)
                         t->setTextStyle(TEXT_STYLE_POET);
                   t->setColor(c);
+#endif
                   add(t);
                   }
             else if (tag == "Symbol") {

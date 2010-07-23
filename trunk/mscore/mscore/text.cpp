@@ -46,8 +46,16 @@ TextBase::TextBase()
       {
       _refCount     = 1;
       _doc          = new QTextDocument(0);
-//_doc->setUseDesignMetrics(true);
+      _doc->setDocumentMargin(1.0);
+
+      _doc->setUseDesignMetrics(true);
       _doc->setUndoRedoEnabled(true);
+      _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0))));
+
+      QTextOption to = _doc->defaultTextOption();
+      to.setUseDesignMetrics(true);
+      to.setWrapMode(QTextOption::NoWrap);
+      _doc->setDefaultTextOption(to);
 
       _hasFrame     = false;
       _frameWidth   = 0.35;         // default line width
@@ -56,11 +64,6 @@ TextBase::TextBase()
       _frameRound   = 25;
       _circle       = false;
       _layoutWidth  = -1;
-
-      QTextOption to = _doc->defaultTextOption();
-//to.setUseDesignMetrics(true);
-      to.setWrapMode(QTextOption::NoWrap);
-      _doc->setDefaultTextOption(to);
       }
 
 TextBase::~TextBase()
@@ -85,8 +88,7 @@ TextBase::TextBase(const TextBase& t)
       _layoutWidth  = t._layoutWidth;
       frame         = t.frame;
       _bbox         = t._bbox;
-      _doc->documentLayout()->setPaintDevice(pdev);
-      layout(_layoutWidth);
+      layout(t._layoutWidth);
       }
 
 //---------------------------------------------------------
@@ -185,9 +187,11 @@ void TextBase::setText(const QString& s, Align align)
       if (align & (ALIGN_HCENTER | ALIGN_RIGHT)) {
             Qt::Alignment a;
             if (align & ALIGN_HCENTER)
-                  a = Qt::AlignHCenter;
+                  a |= Qt::AlignHCenter;
+            else if (align & ALIGN_LEFT)
+                  a |= Qt::AlignLeft;
             else if (align & ALIGN_RIGHT)
-                  a = Qt::AlignRight;
+                  a |= Qt::AlignRight;
             QTextBlockFormat bf = cursor.blockFormat();
             bf.setAlignment(a);
             cursor.setBlockFormat(bf);
@@ -196,6 +200,8 @@ void TextBase::setText(const QString& s, Align align)
       tf.setFont(_doc->defaultFont());
       cursor.setBlockCharFormat(tf);
       cursor.insertText(s);
+      double w = _doc->idealWidth();
+      _doc->setTextWidth(w);   // to make alignment work
       }
 
 //---------------------------------------------------------
@@ -301,19 +307,11 @@ bool TextBase::readProperties(QDomElement e)
 void TextBase::layout(double w)
       {
       _layoutWidth = w;
-      if (!_doc->isModified())
-            return;
 
-      _doc->documentLayout()->setPaintDevice(pdev);
-
+      const double mag = DPI / PDPI;
       if (w <= 0.0)
             w = _doc->idealWidth();
-      else {
-            QTextOption to = _doc->defaultTextOption();
-// to.setUseDesignMetrics(true);
-            to.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
-            _doc->setDefaultTextOption(to);
-            }
+
       _doc->setTextWidth(w);   // to make alignment work
 
       if (_hasFrame) {
@@ -342,8 +340,7 @@ void TextBase::layout(double w)
             }
       else {
             _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
-//            double m = DPI / PDPI;
-//            _bbox.adjust(_bbox.x() * m, _bbox.y() * m, _bbox.width() * m, _bbox.height() * m);
+            _bbox = QRectF(_bbox.x() * mag, _bbox.y() * mag, _bbox.width() * mag, _bbox.height() * mag);
             }
       _doc->setModified(false);
       }
@@ -369,9 +366,11 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
 
-      _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0*DPI/PDPI))));
-//    p.scale(DPI/PDPI, DPI/PDPI);
+      p.save();
+      p.scale(DPI/PDPI, DPI/PDPI);
       _doc->documentLayout()->draw(&p, c);
+
+      p.restore();
 
       // draw frame
       if (_hasFrame) {
@@ -403,6 +402,7 @@ TextB::TextB(Score* s)
       cursor     = 0;
       setFlag(ELEMENT_MOVABLE, true);
       _textStyle = -1;
+      _layoutToParentWidth = false;
       }
 
 TextB::TextB(const TextB& e)
@@ -412,6 +412,7 @@ TextB::TextB(const TextB& e)
       _editMode               = e._editMode;
       cursorPos               = e.cursorPos;
       _textStyle              = e._textStyle;
+      _layoutToParentWidth    = e._layoutToParentWidth;
       cursor                  = 0;
       }
 
@@ -666,7 +667,7 @@ bool TextB::isEmpty() const
 
 void TextB::layout()
       {
-      if (parent() && parent()->type() == HBOX)
+      if (parent() && _layoutToParentWidth)
             textBase()->layout(parent()->width());
       else
             textBase()->layout(-1.0);
@@ -675,7 +676,7 @@ void TextB::layout()
 
       Element::layout();      // process alignment
 
-      if (_align & ALIGN_VCENTER && subtype() == TEXT_TEXTLINE) {
+      if ((_align & ALIGN_VCENTER) && (subtype() == TEXT_TEXTLINE)) {
             // special case: vertically centered text with TextLine needs to
             // take into account the line width
             TextLineSegment* tls = (TextLineSegment*)parent();
@@ -762,7 +763,6 @@ void TextB::read(QDomElement e)
             if (!readProperties(e))
                   domError(e);
             }
-//      textBase()->doc()->setModified(true);
       cursorPos = 0;
       }
 
@@ -859,8 +859,6 @@ bool TextB::readProperties(QDomElement e)
                 _align |= ALIGN_HCENTER;
             else if (val == "right")
                 _align |= ALIGN_RIGHT;
-            else if (val == "left")
-                  ;
             else if (val == "left")
                   ;
             else
@@ -1038,13 +1036,15 @@ bool TextB::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers m
                   break;
 
             case Qt::Key_Left:
-                  if (!cursor->movePosition(QTextCursor::Left, mm))
-                        return false;
+                  cursor->movePosition(QTextCursor::Left, mm);
+                  // if (!cursor->movePosition(QTextCursor::Left, mm))
+                  //      return false;
                   break;
 
             case Qt::Key_Right:
-                  if (!cursor->movePosition(QTextCursor::Right, mm))
-                        return false;
+                  cursor->movePosition(QTextCursor::Right, mm);
+                  // if (!cursor->movePosition(QTextCursor::Right, mm))
+                  //      return false;
                   break;
 
             case Qt::Key_Up:
@@ -1182,11 +1182,15 @@ QPainterPath TextB::shape() const
       {
       QPainterPath pp;
 
+      const double mag = DPI / PDPI;
       for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
             QTextLayout* tl = tb.layout();
             int n = tl->lineCount();
-            for (int i = 0; i < n; ++i)
-                  pp.addRect(tl->lineAt(0).naturalTextRect().translated(tl->position()));
+            for (int i = 0; i < n; ++i) {
+                  QRectF r(tl->lineAt(0).naturalTextRect().translated(tl->position()));
+                  r = QRectF(r.x() * mag, r.y() * mag, r.width() * mag, r.height() * mag);
+                  pp.addRect(r);
+                  }
             }
       return pp;
       }
@@ -1310,6 +1314,10 @@ bool TextB::setCursor(const QPointF& p, QTextCursor::MoveMode mode)
       QPointF pt  = p - canvasPos();
       if (!bbox().contains(pt))
             return false;
+
+      const double mag = DPI / PDPI;
+      pt /= mag;
+
       int idx = doc()->documentLayout()->hitTest(pt, Qt::FuzzyHit);
       if (idx == -1)
             return true;
@@ -1537,106 +1545,4 @@ void TextB::dragTo(const QPointF& p)
       score()->setUpdateAll();
       score()->end();
       }
-
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool TextC::genPropertyMenu(QMenu* popup) const
-      {
-      QAction* a;
-      if (visible())
-            a = popup->addAction(tr("Set Invisible"));
-      else
-            a = popup->addAction(tr("Set Visible"));
-      a->setData("invisible");
-      a = popup->addAction(tr("Text Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void TextC::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            TextC* nText = clone();
-            TextProperties tp(nText, 0);
-            int rv = tp.exec();
-            if (!rv) {
-                  delete nText;
-                  return;
-                  }
-            if (nText->defaultFont() != defaultFont()) {      // was font changed?
-                  QFont a = nText->defaultFont();
-                  QFont b = defaultFont();
-                  QFont f = defaultFont();
-                  if (a.family() != b.family())
-                        f.setFamily(a.family());
-                  if (a.pointSizeF() != b.pointSizeF())
-                        f.setPointSizeF(a.pointSizeF());
-                  if (a.bold() != b.bold())
-                        f.setBold(a.bold());
-                  if (a.italic() != b.italic())
-                        f.setItalic(a.italic());
-                  if (a.underline() != b.underline())
-                        f.setUnderline(a.underline());
-                  setDefaultFont(f);
-                  }
-#if 0
-            if (nText->textBase()->hasFrame() != textBase()->hasFrame())
-                  tt->textBase()->setHasFrame(nText->textBase()->hasFrame());
-            if (nText->frameWidth() != frameWidth())
-                  tt->setFrameWidth(nText->frameWidth());
-            if (nText->paddingWidth() != paddingWidth())
-                  tt->setPaddingWidth(nText->paddingWidth());
-            if (nText->frameColor() != frameColor())
-                  tt->setFrameColor(nText->frameColor());
-            if (nText->frameRound() != frameRound())
-                  tt->setFrameRound(nText->frameRound());
-            if (nText->circle() != circle())
-                  tt->setCircle(nText->circle());
-            if (nText->color() != color())
-                  tt->setColor(nText->color());
-            if (nText->defaultFont() != defaultFont()) {      // was font changed?
-                  QFont a = nText->defaultFont();
-                  QFont b = defaultFont();
-                  QFont f = t->defaultFont();
-                  if (a.family() != b.family())
-                        f.setFamily(a.family());
-                  if (a.pointSizeF() != b.pointSizeF())
-                        f.setPointSizeF(a.pointSizeF());
-                  if (a.bold() != b.bold())
-                        f.setBold(a.bold());
-                  if (a.italic() != b.italic())
-                        f.setItalic(a.italic());
-                  if (a.underline() != b.underline())
-                        f.setUnderline(a.underline());
-                  tt->setDefaultFont(f);
-                  }
-            if (nText->align() != align())
-                  tt->setAlign(nText->align());
-            if (nText->xoff() != xoff())
-                  tt->setXoff(nText->xoff());
-            if (nText->yoff() != yoff())
-                  tt->setYoff(nText->yoff());
-            if (nText->reloff() != _reloff)
-                  tt->setReloff(nText->reloff());
-            if (nText->offsetType() != offsetType())
-                  tt->setOffsetType(nText->offsetType());
-
-            tt->doc()->setModified(true);
-            if (t->selected())
-                  selectedElements.append(tt);
-#endif
-            delete nText;
-            score()->setLayoutAll(true);
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
 

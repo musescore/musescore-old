@@ -352,7 +352,7 @@ class Element {
       double yoff() const                   { return _yoff;         }
       QPointF reloff() const                { return _reloff;       }
       void setReloff(const QPointF& val)    { _reloff = val;        }
-      void setAlign(Align val)              { _align  = val;        }
+      void setAlign(Align val);
       void setXoff(double val)              { _xoff   = val;        }
       void setYoff(double val)              { _yoff   = val;        }
       void setOffsetType(OffsetType val)    { _offsetType = val;    }
