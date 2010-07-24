@@ -27,7 +27,9 @@
 class Staff;
 class Xml;
 
-enum StaffGroup { PITCHED_STAFF, PERCUSSION_STAFF, TAB_STAFF };
+enum StaffGroup {
+      PITCHED_STAFF, PERCUSSION_STAFF, TAB_STAFF
+      };
 
 //---------------------------------------------------------
 //   StaffType
@@ -99,7 +101,9 @@ class EditStaffType : public QDialog, private Ui::EditStaffType {
 
 // first three staff types in staffTypes[] are build in:
 
-enum { PITCHED_STAFF_TYPE, TAB_STAFF_TYPE, PERCUSSION_STAFF_TYPE };
+enum {
+      PITCHED_STAFF_TYPE, TAB_STAFF_TYPE, PERCUSSION_STAFF_TYPE
+      };
 
 extern void initStaffTypes();
 extern QList<StaffType*> staffTypes;

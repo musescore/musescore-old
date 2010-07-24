@@ -168,6 +168,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _keymap         = new KeyList;
       (*_keymap)[0]   = 0;                  // default to C major
       _staffType      = _score->staffTypes()[PITCHED_STAFF_TYPE];
+      _linkTo         = 0;
       _show           = true;
       _small          = false;
       _invisible      = false;

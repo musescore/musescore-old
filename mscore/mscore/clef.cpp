@@ -124,7 +124,7 @@ void Clef::layout()
       clear();
       Symbol* symbol = new Symbol(score());
 
-      int st = staff()->useTablature() ? CLEF_TAB : subtype();
+      int st = (staff() && staff()->useTablature()) ? CLEF_TAB : subtype();
 
       switch (st) {
             case CLEF_G:

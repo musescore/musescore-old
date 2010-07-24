@@ -26,6 +26,8 @@
 class Score;
 class Note;
 class Segment;
+class Measure;
+class Tuplet;
 
 static const int GP_MAX_LYRIC_LINES = 5;
 static const int GP_MAX_TRACK_NUMBER = 32;
@@ -47,6 +49,7 @@ struct GpBar {
 //---------------------------------------------------------
 
 class GuitarPro {
+   protected:
       static const char* errmsg[];
       int version;
 
@@ -60,20 +63,23 @@ class GuitarPro {
       int readChar();
       QString readPascalString(int);
       QString readWordPascalString();
+      QString readBytePascalString();
       int readInt();
       QString readDelphiString();
-      void readNote(int string, Note*);
-      void readChromaticGraph();
-      void readMixChange();
-      void readColumnEffects();
+      virtual void readNote(int string, Note*);
+      virtual void readChromaticGraph();
+      virtual void readMixChange();
+      virtual void readColumnEffects();
       void readChordDiagram(Segment*);
+      void readLyrics();
+      void readChannels();
 
    public:
       QString title, subtitle, artist, album, composer;
       QString transcriber, instructions;
       QStringList comments;
       GpTrack channelDefaults[GP_MAX_TRACK_NUMBER * 2];
-      int numTracks;
+      int staves;
       int numBars;
       QList<GpBar> bars;
 
@@ -81,14 +87,55 @@ class GuitarPro {
          GP_EOF, GP_BAD_NUMBER_OF_STRINGS
             };
 
-      GuitarPro(Score*);
+      GuitarPro(Score*, int v);
       ~GuitarPro();
-      void read(QFile*);
+      virtual void read(QFile*) = 0;
       QString error(GuitarProError n) const { return QString(errmsg[int(n)]); }
       };
 
+//---------------------------------------------------------
+//   GuitarPro3
+//---------------------------------------------------------
+
+class GuitarPro3 : public GuitarPro {
+
+
+   public:
+      GuitarPro3(Score* s, int v) : GuitarPro(s, v) {}
+      virtual void read(QFile*);
+      };
+
+//---------------------------------------------------------
+//   GuitarPro4
+//---------------------------------------------------------
+
+class GuitarPro4 : public GuitarPro {
+
+      void readInfo();
+      virtual void readNote(int string, Note* note);
+
+   public:
+      GuitarPro4(Score* s, int v) : GuitarPro(s, v) {}
+      virtual void read(QFile*);
+      };
+
+//---------------------------------------------------------
+//   GuitarPro5
+//---------------------------------------------------------
+
+class GuitarPro5 : public GuitarPro {
+
+      void readInfo();
+      void readPageSetup();
+      virtual void readColumnEffects();
+      virtual void readChromaticGraph();
+      virtual void readNote(int string, Note* note);
+      virtual void readMixChange();
+      void readMeasure(Measure* measure, int staffIdx, Tuplet*[]);
+
+   public:
+      GuitarPro5(Score* s, int v) : GuitarPro(s, v) {}
+      virtual void read(QFile*);
+      };
 
 #endif
-
-
-
