@@ -382,12 +382,12 @@ printf("readMixChange\n");
       }
 
 //---------------------------------------------------------
-//   readColumnEffects
+//   readBeatEffects
 //---------------------------------------------------------
 
-void GuitarPro::readColumnEffects()
+void GuitarPro::readBeatEffects()
       {
-printf("readColumnEffects\n");
+printf("readBeatEffects\n");
       uchar fxBits1 = readUChar();
       uchar fxBits2 = 0;
       if (version >= 400)
@@ -431,10 +431,10 @@ printf("readColumnEffects\n");
 
 
 //---------------------------------------------------------
-//   readChordDiagram
+//   readChord
 //---------------------------------------------------------
 
-void GuitarPro::readChordDiagram(Segment*)
+void GuitarPro::readChord(Segment*)
       {
       int header = readUChar();
 
@@ -713,7 +713,7 @@ printf("doubleBar=============================================\n");
                               tuple = readInt();
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
-                              readChordDiagram(segment);
+                              readChord(segment);
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
                               Lyrics* l = new Lyrics(score);
@@ -722,7 +722,7 @@ printf("doubleBar=============================================\n");
                               segment->add(l);
                               }
                         if (beatBits & 0x8)
-                              readColumnEffects();
+                              readBeatEffects();
                         if (beatBits & 0x10)
                               readMixChange();
                         int strings = readUChar();   // used strings mask
@@ -1191,7 +1191,7 @@ printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
                               tuple = readInt();
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
-                              readChordDiagram(segment);
+                              readChord(segment);
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
                               Lyrics* l = new Lyrics(score);
@@ -1200,7 +1200,7 @@ printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
                               segment->add(l);
                               }
                         if (beatBits & 0x8)
-                              readColumnEffects();
+                              readBeatEffects();
                         if (beatBits & 0x10)
                               readMixChange();
                         int strings = readUChar();   // used strings mask
@@ -1315,22 +1315,6 @@ void GuitarPro5::readInfo()
 void GuitarPro5::readNote(int string, Note* note)
       {
       uchar noteBits = readUChar();
-
-      bool tieNote = false;
-      uchar variant = 1;
-      if (noteBits & 0x20) {
-            variant = readUChar();
-            if (variant == 1) {     // normal note
-                  }
-            else if (variant == 2)
-                  tieNote = true;
-            else if (variant == 3) {                 // dead notes
-                  //printf("DeathNote tick %d pitch %d\n", note->chord()->segment()->tick(), note->pitch());
-                  }
-            else
-                  printf("unknown note variant: %d\n", variant);
-            }
-
       //
       // noteBits:
       //    7 - Right hand or left hand fingering;
@@ -1342,9 +1326,24 @@ void GuitarPro5::readNote(int string, Note* note)
       //    1 - Dotted note;  ?
       //    0 - Time-independent duration
 
-      printf("note bits %d  %02x\n", note->chord()->segment()->tick(), noteBits);
+      printf("   note bits %d  %02x\n", note->chord()->segment()->tick(), noteBits);
 
-      if (noteBits & 0x10)
+
+      bool tieNote = false;
+      if (noteBits & 0x20) {
+            uchar noteType = readUChar();
+            if (noteType == 1) {     // normal note
+                  }
+            else if (noteType == 2)
+                  tieNote = true;
+            else if (noteType == 3) {                 // dead notes
+                  //printf("DeathNote tick %d pitch %d\n", note->chord()->segment()->tick(), note->pitch());
+                  }
+            else
+                  printf("unknown note type: %d\n", noteType);
+            }
+
+      if (noteBits & 0x10)          // velocity
             readChar();
       int fretNumber = -1;
       if (noteBits & 0x20)
@@ -1355,12 +1354,13 @@ void GuitarPro5::readNote(int string, Note* note)
       if (noteBits & 0x80) {              // fingering
             int a = readUChar();
             int b = readUChar();
-            printf("Fingering=========%d %d\n", a, b);
+            printf("   Fingering=========%d %d\n", a, b);
             }
       if (noteBits & 0x1)
             skip(8);
       skip(1);
       if (noteBits & 0x8) {
+            // noteEffects:
             uchar modMask1 = readUChar();
             uchar modMask2 = readUChar();
             if (modMask1 & 0x1)
@@ -1375,6 +1375,9 @@ void GuitarPro5::readNote(int string, Note* note)
                   readUChar();            // grace dynamic
                   readUChar();            // grace transition
                   readUChar();            // grace length
+                  int flags = readUChar();
+                        // 1  -  dead
+                        // 2  - on beat
                   }
             if (modMask2 & 0x1) {   // staccato - palm mute
                   }
@@ -1385,10 +1388,21 @@ void GuitarPro5::readNote(int string, Note* note)
             if (modMask2 & 0x8)
                   readUChar();      // slide kind
             if (modMask2 & 0x10)
-                  readUChar();      // harmonic kind
+                  readArtificialHarmonic();
             if (modMask2 & 0x20) {
                   readUChar();      // trill fret
-                  readUChar();      // trill length
+                  int period = readUChar();      // trill length
+                  switch(period) {
+                        case 1:           // 16
+                              break;
+                        case 2:           // 32
+                              break;
+                        case 3:           // 64
+                              break;
+                        default:
+                              printf("unknown trill period %d\n", period);
+                              break;
+                        }
                   }
             }
       Staff* staff = note->staff();
@@ -1434,16 +1448,39 @@ printf("   pitch %d  string %d fret %d\n", pitch, string, fretNumber);
                   printf("tied note not found, pitch %d fret %d string %d\n", note->pitch(), note->fret(), note->string());
             }
       }
+
+//---------------------------------------------------------
+//   readArtificialHarmonic
+//---------------------------------------------------------
+
+void GuitarPro5::readArtificialHarmonic()
+      {
+      int type = readChar();
+      switch(type) {
+            case 1:           // natural
+                  break;
+            case 2:           // artificial
+                  skip(3);
+                  break;
+            case 3:           // tapped
+                  skip(1);
+                  break;
+            case 4:           // pinch
+                  break;
+            case 5:           // semi
+                  break;
+            }
+      }
+
 //---------------------------------------------------------
 //   readChromaticGraph
 //---------------------------------------------------------
 
 void GuitarPro5::readChromaticGraph()
       {
-printf("5readChromaticGraph()\n");
-
       skip(5);
       int n = readInt();
+printf("5readChromaticGraph() n=%d\n", n);
       for (int i = 0; i < n; ++i) {
             readInt();                    // time
             readInt();                    // pitch
@@ -1452,14 +1489,14 @@ printf("5readChromaticGraph()\n");
       }
 
 //---------------------------------------------------------
-//   readColumnEffects
+//   readBeatEffects
 //---------------------------------------------------------
 
-void GuitarPro5::readColumnEffects()
+void GuitarPro5::readBeatEffects()
       {
-printf("5readColumnEffects\n");
       uchar fxBits1 = readUChar();
       uchar fxBits2 = readUChar();
+printf("5readBeatEffects %02x %02x\n", fxBits1, fxBits2);
       if (fxBits1 & 0x20) {
             uchar num = readUChar();
             // 1 - tapping
@@ -1499,13 +1536,13 @@ void GuitarPro5::readPageSetup()
 
 void GuitarPro5::readMeasure(Measure* measure, int staffIdx, Tuplet** tuplets)
       {
+printf("5:readMEasure\n");
       for (int voice = 0; voice < 2; ++voice) {
             int tick  = measure->tick();
             int beats = readInt();
             for (int beat = 0; beat < beats; ++beat) {
                   int pause = 0;
                   uchar beatBits = readUChar();
-// printf("bar %d beat %d(%d) beat bits %02x\n", bar, beat, beatBits);
                   bool dotted = beatBits & 0x1;
                   if (beatBits & 0x40)
                         pause = readUChar();
@@ -1517,7 +1554,7 @@ void GuitarPro5::readMeasure(Measure* measure, int staffIdx, Tuplet** tuplets)
                         }
                   Segment* segment = measure->getSegment(SegChordRest, tick);
                   if (beatBits & 0x2)
-                        readChordDiagram(segment);
+                        readChord(segment);
                   if (beatBits & 0x4) {
                         QString txt = readDelphiString();
                         Lyrics* l = new Lyrics(score);
@@ -1526,11 +1563,11 @@ void GuitarPro5::readMeasure(Measure* measure, int staffIdx, Tuplet** tuplets)
                         segment->add(l);
                         }
                   if (beatBits & 0x8)
-                        readColumnEffects();
+                        readBeatEffects();
                   if (beatBits & 0x10)
                         readMixChange();
                   int strings = readUChar();   // used strings mask
-printf("voice %d beat %d(%d) len %d bits %02x stringMask 0x%02x\n", voice, beat, beats, len, beatBits, strings);
+printf(" voice %d beat %d(%d) len %d bits %02x stringMask 0x%02x\n", voice, beat, beats, len, beatBits, strings);
 
                   Fraction l;
                   switch(len) {
@@ -1651,6 +1688,24 @@ printf("5readMixChange\n");
             readDelphiString();
             readDelphiString();
             }
+      }
+
+//---------------------------------------------------------
+//   readChord
+//---------------------------------------------------------
+
+void GuitarPro5::readChord(Segment*)
+      {
+printf("5:readChord\n");
+
+      skip(17);
+      readPascalString(21);
+      skip(4);
+      int firstFret = readInt();
+      for (int i = 0; i < 7; ++i) {
+            int fret = readInt();
+            }
+      skip(32);
       }
 
 //---------------------------------------------------------
@@ -1858,7 +1913,7 @@ printf("midi %d %d %d  frets %d capo %d color %d\n", midiPort, midiChannel,
                   tuplets[track] = 0;
 
             for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-// printf("measure %d(%d), staff %d(%d)\n", bar, numBars, staffIdx, staves);
+printf("measure %d(%d), staff %d(%d)\n", bar, numBars, staffIdx, staves);
                   readMeasure(measure, staffIdx, tuplets);
                   if (!(((bar == (numBars-1)) && (staffIdx == (staves-1))))) {
                         int a = readChar();
