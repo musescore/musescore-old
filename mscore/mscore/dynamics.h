@@ -82,7 +82,6 @@ class Dynamic : public Text {
       virtual bool genPropertyMenu(QMenu* popup) const;
       virtual void propertyAction(ScoreView*, const QString& s);
 
-      virtual QPointF canvasPos() const;
       virtual QLineF dragAnchor() const;
       };
 

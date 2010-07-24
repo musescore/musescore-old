@@ -47,7 +47,7 @@ FretDiagram::FretDiagram(Score* score)
       _marker     = 0;
       _fingering  = 0;
       _fretOffset = 0;
-      font.setFamily("DejaVuSans");
+      font.setFamily("FreeSans");
       int size = lrint(4.0 * DPI * mag()/ PPI);
       font.setPixelSize(size);
       }
@@ -502,7 +502,7 @@ void FretCanvas::paintEvent(QPaintEvent* ev)
       double h  = (_frets * fretDist) + fretDist * .5;
       double yo = (height() - h) * .5;
 
-      QFont font("DejaVuSans");
+      QFont font("FreeSans");
       int size = lrint(18.0 * mag);
       font.setPixelSize(size);
 

@@ -1,3 +1,6 @@
+24.jul (ws)
+      - replace buildin DejaVu fonts with FSF freefont
+      - new: import of GuitarPro *.gtp *.gp3 *.gp4 *.gp5 files
 13.jul (ws)
       - implement playback of hairpins (crescendo/decrescendo)
 12.jul (ws)

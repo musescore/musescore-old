@@ -364,11 +364,12 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
 
-      p.save();
+//      p.save();
+      p.setViewTransformEnabled(false);
       p.scale(DPI/PDPI, DPI/PDPI);
       _doc->documentLayout()->draw(&p, c);
-
-      p.restore();
+      p.setViewTransformEnabled(true);
+//      p.restore();
 
       // draw frame
       if (_hasFrame) {
@@ -1202,8 +1203,10 @@ qreal TextB::baseLine() const
       {
       for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
             const QTextLayout* tl = tb.layout();
-            if (tl->lineCount())
-                  return tl->lineAt(0).ascent() + tl->position().y();
+            if (tl->lineCount()) {
+                  const double mag = DPI / PDPI;
+                  return (tl->lineAt(0).ascent() + tl->position().y()) * mag;
+                  }
             }
       return 0.0;
       }

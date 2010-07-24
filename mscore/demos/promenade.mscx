@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.14">
   <programVersion>0.9.6</programVersion>
-  <programRevision>2811 
+  <programRevision>2811
 </programRevision>
   <Spatium>1.425</Spatium>
   <Division>480</Division>
@@ -196,7 +196,7 @@
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'FreeSerif'; font-size:24pt; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Bilder einer Ausstellung</p></body></html>
           </html-data>
         </Text>
@@ -207,7 +207,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'FreeSerif'; font-size:12pt; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Modeste Moussorgsky</p></body></html>
           </html-data>
         </Text>
@@ -218,7 +218,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:14pt; font-weight:400; font-style:normal;">
+</style></head><body style=" font-family:'FreeSerif'; font-size:14pt; font-weight:400; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Promenade</p></body></html>
           </html-data>
         </Text>
@@ -247,7 +247,7 @@ p, li { white-space: pre-wrap; }
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:600; font-style:normal;">
+</style></head><body style=" font-family:'FreeSerif'; font-size:9.69449pt; font-weight:600; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:10pt;">Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</span></p></body></html>
           </html-data>
         </Tempo>

@@ -1924,7 +1924,7 @@ int main(int argc, char* av[])
       //
       static const char* fonts[] = {
 //            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSans", "DejaVuSerif"
-            "mscore-20", "MScore1-20_new", "MuseJazz", "DejaVuSans", "DejaVuSerif",
+            "mscore-20", "MScore1-20_new", "MuseJazz", "FreeSans", "FreeSerif",
             "gonville-20",
             };
       for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {

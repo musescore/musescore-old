@@ -147,14 +147,13 @@ void Dynamic::setSubtype(int idx)
             QTextCharFormat tf = cursor.charFormat();
             TextStyle* ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
             double size = ts->size;
-//            double m = size * DPI / PPI;
             double m = size;
             if (ts->sizeIsSpatiumDependent)
                   m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
 
             QFont font("MScore1-test");
-            font.setPixelSize(lrint(m));
+            font.setPointSizeF(m);
             font.setKerning(true);
             font.setStyleStrategy(QFont::NoFontMerging);
             tf.setFont(font);
@@ -284,7 +283,7 @@ bool Dynamic::genPropertyMenu(QMenu* popup) const
 void Dynamic::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "props") {
-            Text* nText = new Text(*this);
+            Dynamic* nText = new Dynamic(*this);
             TextProperties tp(nText, 0);
             int rv = tp.exec();
             if (rv)
@@ -307,24 +306,6 @@ void Dynamic::propertyAction(ScoreView* viewer, const QString& s)
             }
       else
             Element::propertyAction(viewer, s);
-      }
-
-//---------------------------------------------------------
-//   canvasPos
-//---------------------------------------------------------
-
-QPointF Dynamic::canvasPos() const
-      {
-      if (parent() == 0)
-            return pos();
-      double xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
-      System* system = measure()->system();
-      double yp = y();
-      if (system)
-            yp += system->staffY(staffIdx());
-      return QPointF(xp, yp);
       }
 
 //---------------------------------------------------------

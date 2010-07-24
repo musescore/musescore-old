@@ -170,7 +170,7 @@ QString GuitarPro::readDelphiString()
       read(c, l);
       c[l] = 0;
 printf("readDelphiString <%s>\n", c);
-      return QString::fromLocal8Bit(c);
+      return QString::fromLatin1(c);
       }
 
 //---------------------------------------------------------

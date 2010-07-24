@@ -437,7 +437,7 @@ void TextPalette::populate()
       {
       bool musical = musicalSymbols->isChecked();
 
-      QFont f(musical ? "MScore1-test" : "DejaVuSerif");
+      QFont f(musical ? "MScore1-test" : "FreeSerif");
       codePage->setEnabled(!musical);
 
 // f.setStyleStrategy(QFont::NoFontMerging);
