@@ -500,7 +500,7 @@ bool Score::read(QString name)
                   if (!importBww(name))
                         return false;
                   }
-            else if (csl == "gtp" || csl == "gp3" || csl == "gp4") {
+            else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
                   if (!importGTP(name))
                         return false;
                   }

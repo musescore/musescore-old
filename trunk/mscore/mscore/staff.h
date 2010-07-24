@@ -63,9 +63,6 @@ struct BracketItem {
 
 /**
  Global staff data not directly related to drawing.
-
- Most functions actually return data of the part the staff is
- associated with.
 */
 
 class Staff {
@@ -84,6 +81,8 @@ class Staff {
       bool _updateKeymap;
 
       StaffType* _staffType;
+      Staff* _linkTo;               ///< set if this staff is linked to _linkTo
+      QList<Staff*> _linkedFrom;
 
       QMap<int,int> _channelList[VOICES];
 
