@@ -487,7 +487,7 @@ void Note::draw(QPainter& p, ScoreView* v) const
       if (!_hidden || !userOff().isNull()) {
             if (tablature) {
                   double mag = magS();
-                  QFont f("DejaVuSans");
+                  QFont f("FreeSans");
                   int size = lrint(9.0 * DPI / PPI);
                   f.setPixelSize(size);
                   double imag = 1.0 / mag;
@@ -1151,7 +1151,7 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
 void Note::layout()
       {
       if (staff()->useTablature()) {
-            QFont f("DejaVuSerif");
+            QFont f("FreeSerif");
             int size = lrint(9.0 * DPI / PPI);
             f.setPixelSize(size);
             QFontMetricsF fm(f);

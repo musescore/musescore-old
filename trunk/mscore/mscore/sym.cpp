@@ -411,7 +411,7 @@ QFont fontId2font(int fontId)
       else if (fontId == 1)
             _font.setFamily("MScore1-test");
       else if (fontId == 2) {
-            _font.setFamily("DejaVu Serif");
+            _font.setFamily("FreeSerif");
             size = lrint(8 * DPI / PPI);
             }
       else if (fontId == 3) {

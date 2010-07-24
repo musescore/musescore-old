@@ -39,8 +39,8 @@
       <file>fonts/mscore-20.ttf</file>
       <file>fonts/MScore1-20_new.ttf</file>
       <file>fonts/MuseJazz.ttf</file>
-      <file>fonts/DejaVuSerif.ttf</file>
-      <file>fonts/DejaVuSans.ttf</file>
+      <file>fonts/FreeSerif.ttf</file>
+      <file>fonts/FreeSans.ttf</file>
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
       <file alias="data/Promenade_Example.mscx">../demos/promenade.mscx</file>
