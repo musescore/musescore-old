@@ -364,12 +364,10 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
 
-//      p.save();
-      p.setViewTransformEnabled(false);
+      p.save();
       p.scale(DPI/PDPI, DPI/PDPI);
       _doc->documentLayout()->draw(&p, c);
-      p.setViewTransformEnabled(true);
-//      p.restore();
+      p.restore();
 
       // draw frame
       if (_hasFrame) {
