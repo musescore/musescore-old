@@ -429,7 +429,6 @@ printf("readBeatEffects\n");
             }
       }
 
-
 //---------------------------------------------------------
 //   readChord
 //---------------------------------------------------------
@@ -992,6 +991,36 @@ void GuitarPro::readChannels()
             channelDefaults[i].phase   = readUChar() * 8 - 1;
             channelDefaults[i].tremolo = readUChar() * 8 - 1;
             skip(2);
+            }
+      }
+
+//---------------------------------------------------------
+//   readChord
+//---------------------------------------------------------
+
+void GuitarPro4::readChord(Segment*)
+      {
+      int header = readUChar();
+
+//      printf("read chord diagram %x\n", header);
+
+      if ((header & 1) == 0) {
+            readDelphiString();
+            int firstFret = readInt();
+            if (firstFret != 0) {
+                  for (int i = 0; i < 6; ++i) {
+                        readInt();
+                        }
+                  }
+            }
+      else {
+            skip(16);
+            readPascalString(21);   // chord name
+            skip(4);
+            int firstFret = readInt();
+            for (int i = 0; i < 7; ++i)
+                  readInt();
+            skip(32);
             }
       }
 

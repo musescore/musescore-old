@@ -49,8 +49,8 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
       void on_upButton_clicked();
       void on_downButton_clicked();
       void on_editButton_clicked();
-      void on_aboveButton_clicked();
       void on_belowButton_clicked();
+      void on_linkedButton_clicked();
       void on_saveButton_clicked();
       void on_loadButton_clicked();
       void buildTemplateList();

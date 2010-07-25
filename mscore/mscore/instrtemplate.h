@@ -125,6 +125,7 @@ class PartListItem : public QTreeWidgetItem {
 class StaffListItem : public QTreeWidgetItem {
       int _clef;
       int _partIdx;
+      bool _linked;
 
    public:
       StaffListItem();
@@ -137,7 +138,9 @@ class StaffListItem : public QTreeWidgetItem {
       int staffIdx;
 
       void setClef(int val);
-      int clef() const { return _clef; }
+      int clef() const         { return _clef;   }
+      void setLinked(bool val);
+      bool linked() const      { return _linked; }
       };
 
 extern QList<InstrumentGroup*> instrumentGroups;
