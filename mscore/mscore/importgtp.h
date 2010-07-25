@@ -70,7 +70,6 @@ class GuitarPro {
       virtual void readChromaticGraph();
       virtual void readMixChange();
       virtual void readBeatEffects();
-      virtual void readChord(Segment*);
       void readLyrics();
       void readChannels();
 
@@ -99,6 +98,7 @@ class GuitarPro {
 
 class GuitarPro3 : public GuitarPro {
 
+      virtual void readChord(Segment*);
 
    public:
       GuitarPro3(Score* s, int v) : GuitarPro(s, v) {}

@@ -373,6 +373,8 @@ printf("readMixChange\n");
             readChar();
       if (reverb >= 0)
             readChar();
+      if (phase >= 0)
+            readChar();
       if (tremolo >= 0)
             readChar();
       if (tempo >= 0)
@@ -433,51 +435,19 @@ printf("readBeatEffects\n");
 //   readChord
 //---------------------------------------------------------
 
-void GuitarPro::readChord(Segment*)
+void GuitarPro3::readChord(Segment*)
       {
       int header = readUChar();
 
 //      printf("read chord diagram %x\n", header);
 
       if ((header & 1) == 0) {
-            printf("no version4 chord diagram\n");
-            abort();
-            }
-      if (version >= 400) {
-            readChar(); // sharp or flat
-            skip(3);
-            readChar();             // root -1 - custom, 0 - C, 1 - C#...
-            readChar();             // chord type
-            readChar();             // chord goes until ninth, eleventh, or thirteenth
-            readInt();              // lowest note of chord. It gives the chord inversions.
-            readInt();              // tonality linked with 9/11/13:  0:perfect, 1:augmented, 2:diminished
-            readChar();             // allows to determine if a 'add' (added note) is present in the chord
-            readPascalString(20);   // chord name
-            skip(2);
-            readChar();
-            readChar();
-            readChar();
-            readInt();              // first fret
-            for (int i = 0; i < 7; ++i)
-                  readInt();
-            readChar();       // number of barres
-            for (int i = 0; i < 5; ++i)
-                  readChar();
-            for (int i = 0; i < 5; ++i)
-                  readChar();
-            for (int i = 0; i < 5; ++i)
-                  readChar();
-            readChar();
-            readChar();
-            readChar();
-            readChar();
-            readChar();
-            readChar();
-            readChar();
-            skip(1);
-            for (int i = 0; i < 7; ++i)
-                  readChar();
-            readChar();
+            readDelphiString();
+            int firstFret = readInt();
+            if (firstFret) {
+                  for (int i = 0; i < 6; ++i)
+                        readInt();
+                  }
             }
       else {
             skip(25);
@@ -763,6 +733,18 @@ printf("doubleBar=============================================\n");
                               switch(tuple) {
                                     case 3:
                                           tuplet->setRatio(Fraction(3,2));
+                                          tuplet->setBaseLen(l);
+                                          break;
+                                    case 5:
+                                          tuplet->setRatio(Fraction(5,4));
+                                          tuplet->setBaseLen(l);
+                                          break;
+                                    case 6:
+                                          tuplet->setRatio(Fraction(6,4));
+                                          tuplet->setBaseLen(l);
+                                          break;
+                                    case 7:
+                                          tuplet->setRatio(Fraction(7,4));
                                           tuplet->setBaseLen(l);
                                           break;
                                     default:
@@ -1273,6 +1255,10 @@ printf("%d: Tuplet note beat %d  tuplet %d  len %s\n", tick, beat, tuple, qPrint
                                           tuplet->setRatio(Fraction(3,2));
                                           tuplet->setBaseLen(l);
                                           break;
+                                    case 5:
+                                          tuplet->setRatio(Fraction(5,4));
+                                          tuplet->setBaseLen(l);
+                                          break;
                                     default:
                                           printf("unsupported tuplet %d\n", tuple);
                                           abort();
@@ -1635,6 +1621,10 @@ printf(" voice %d beat %d(%d) len %d bits %02x stringMask 0x%02x\n", voice, beat
                         switch(tuple) {
                               case 3:
                                     tuplet->setRatio(Fraction(3,2));
+                                    tuplet->setBaseLen(l);
+                                    break;
+                              case 5:
+                                    tuplet->setRatio(Fraction(5,4));
                                     tuplet->setBaseLen(l);
                                     break;
                               default:
