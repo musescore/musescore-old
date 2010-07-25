@@ -113,6 +113,7 @@ class GuitarPro4 : public GuitarPro {
 
       void readInfo();
       virtual void readNote(int string, Note* note);
+      virtual void readChord(Segment*);
 
    public:
       GuitarPro4(Score* s, int v) : GuitarPro(s, v) {}

@@ -34,7 +34,7 @@
          </property>
          <column>
           <property name="text">
-           <string>0</string>
+           <string>Instrument List</string>
           </property>
          </column>
         </widget>
@@ -177,19 +177,6 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="aboveButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Add Above</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="belowButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -198,7 +185,14 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Add Below</string>
+          <string>Add Staff</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="linkedButton">
+         <property name="text">
+          <string>Add linked Staff</string>
          </property>
         </widget>
        </item>
@@ -226,16 +220,24 @@
         <bool>true</bool>
        </property>
        <property name="columnCount">
-        <number>2</number>
+        <number>3</number>
        </property>
        <column>
         <property name="text">
-         <string>0</string>
+         <string>Staves</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>1</string>
+         <string>Clef</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>linked</string>
+        </property>
+        <property name="toolTip">
+         <string>staff linked to previous</string>
         </property>
        </column>
       </widget>

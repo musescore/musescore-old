@@ -50,6 +50,7 @@ StaffListItem::StaffListItem(PartListItem* li)
       staff    = 0;
       setPartIdx(0);
       staffIdx = 0;
+      setLinked(false);
       setClef(0);
       }
 
@@ -61,6 +62,7 @@ StaffListItem::StaffListItem()
       setPartIdx(0);
       staffIdx = 0;
       setClef(0);
+      setLinked(false);
       }
 
 //---------------------------------------------------------
@@ -81,6 +83,16 @@ void StaffListItem::setClef(int val)
       {
       _clef = val;
       setText(1, qApp->translate("clefTable", clefTable[_clef].name));
+      }
+
+//---------------------------------------------------------
+//   setLinked
+//---------------------------------------------------------
+
+void StaffListItem::setLinked(bool val)
+      {
+      _linked = val;
+      setText(2, _linked ? InstrumentsDialog::tr("linked") : "");
       }
 
 //---------------------------------------------------------
@@ -157,10 +169,6 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       instrumentList->setSelectionMode(QAbstractItemView::SingleSelection);
       partiturList->setSelectionMode(QAbstractItemView::SingleSelection);
 
-      instrumentList->setHeaderLabels(QStringList(tr("Instrument List")));
-      QStringList header = (QStringList() << tr("Staves") << tr("Clef"));
-      partiturList->setHeaderLabels(header);
-
       buildTemplateList();
 
       addButton->setEnabled(false);
@@ -171,8 +179,8 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
             editButton->setEnabled(false);
       else
             editButton->setVisible(false);
-      aboveButton->setEnabled(false);
       belowButton->setEnabled(false);
+      linkedButton->setEnabled(false);
       connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
       }
 
@@ -232,8 +240,8 @@ void InstrumentsDialog::on_partiturList_itemSelectionChanged()
       removeButton->setEnabled(flag);
       upButton->setEnabled(flag);
       downButton->setEnabled(flag);
-      aboveButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
       belowButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
+      linkedButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
       }
 
 //---------------------------------------------------------
@@ -412,32 +420,6 @@ void InstrumentsDialog::on_editButton_clicked()
       }
 
 //---------------------------------------------------------
-//   on_aboveButton_clicked
-//---------------------------------------------------------
-
-void InstrumentsDialog::on_aboveButton_clicked()
-      {
-      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
-      if (wi.isEmpty())
-            return;
-      QTreeWidgetItem* item = wi.front();
-      if (item->type() != STAFF_LIST_ITEM)
-            return;
-
-      StaffListItem* sli  = (StaffListItem*)item;
-      Staff* staff        = sli->staff;
-      PartListItem* pli   = (PartListItem*)sli->parent();
-      StaffListItem* nsli = new StaffListItem();
-      nsli->staff         = staff;
-      nsli->setClef(sli->clef());
-      if (staff)
-            nsli->op = ITEM_ADD;
-      pli->insertChild(pli->indexOfChild(sli), nsli);
-      partiturList->clearSelection();     // should not be necessary
-      partiturList->setItemSelected(nsli, true);
-      }
-
-//---------------------------------------------------------
 //   on_belowButton_clicked
 //---------------------------------------------------------
 
@@ -456,6 +438,33 @@ void InstrumentsDialog::on_belowButton_clicked()
       StaffListItem* nsli = new StaffListItem();
       nsli->staff         = staff;
       nsli->setClef(sli->clef());
+      if (staff)
+            nsli->op = ITEM_ADD;
+      pli->insertChild(pli->indexOfChild(sli)+1, nsli);
+      partiturList->clearSelection();     // should not be necessary
+      partiturList->setItemSelected(nsli, true);
+      }
+
+//---------------------------------------------------------
+//   on_linkedButton_clicked
+//---------------------------------------------------------
+
+void InstrumentsDialog::on_linkedButton_clicked()
+      {
+      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
+      if (wi.isEmpty())
+            return;
+      QTreeWidgetItem* item = wi.front();
+      if (item->type() != STAFF_LIST_ITEM)
+            return;
+
+      StaffListItem* sli  = (StaffListItem*)item;
+      Staff* staff        = sli->staff;
+      PartListItem* pli   = (PartListItem*)sli->parent();
+      StaffListItem* nsli = new StaffListItem();
+      nsli->staff         = staff;
+      nsli->setClef(sli->clef());
+      nsli->setLinked(true);
       if (staff)
             nsli->op = ITEM_ADD;
       pli->insertChild(pli->indexOfChild(sli)+1, nsli);
@@ -549,6 +558,11 @@ void MuseScore::editInstrList()
                               staff->setBracketSpan(0, t->staves);
                               }
                         cs->undoInsertStaff(staff, staffIdx + rstaff);
+                        if (sli->linked()) {
+                              // TODO: link staff
+                              printf("TODO: link staff\n");
+                              }
+
                         ++rstaff;
                         }
                   part->staves()->front()->setBarLineSpan(part->nstaves());
@@ -594,6 +608,11 @@ void MuseScore::editInstrList()
                               staff->clefList()->setClef(0, sli->clef());
                               KeySigEvent nKey = part->staff(0)->key(0);
                               staff->setKey(0, nKey);
+
+                              if (sli->linked()) {
+                                    // TODO: link staff
+                                    printf("TODO: link staff\n");
+                                    }
 
                               ++staffIdx;
                               }
