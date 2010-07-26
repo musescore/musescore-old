@@ -36,6 +36,7 @@
 #include "tempotext.h"
 #include "slur.h"
 #include "tuplet.h"
+#include "barline.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -192,6 +193,43 @@ int GuitarPro::readInt()
       }
 
 //---------------------------------------------------------
+//   setTuplet
+//---------------------------------------------------------
+
+void GuitarPro::setTuplet(Tuplet* tuplet, int tuple)
+      {
+      switch(tuple) {
+            case 3:
+                  tuplet->setRatio(Fraction(3,2));
+                  break;
+            case 5:
+                  tuplet->setRatio(Fraction(5,4));
+                  break;
+            case 6:
+                  tuplet->setRatio(Fraction(6,4));
+                  break;
+            case 7:
+                  tuplet->setRatio(Fraction(7,4));
+                  break;
+            case 9:
+                  tuplet->setRatio(Fraction(9,8));
+                  break;
+            case 10:
+                  tuplet->setRatio(Fraction(10,8));
+                  break;
+            case 11:
+                  tuplet->setRatio(Fraction(11,8));
+                  break;
+            case 12:
+                  tuplet->setRatio(Fraction(12,8));
+                  break;
+            default:
+                  printf("unsupported tuplet %d\n", tuple);
+                  abort();
+            }
+      }
+
+//---------------------------------------------------------
 //   readChromaticGraph
 //    bend graph
 //---------------------------------------------------------
@@ -211,10 +249,577 @@ printf("readChromaticGraph()\n");
       }
 
 //---------------------------------------------------------
+//   readLyrics
+//---------------------------------------------------------
+
+void GuitarPro::readLyrics()
+      {
+      readInt();        // lyric track
+      for (int i = 0; i < 5; ++i) {
+            readInt();
+            readWordPascalString();
+            }
+      }
+
+//---------------------------------------------------------
+//   readChannels
+//---------------------------------------------------------
+
+void GuitarPro::readChannels()
+      {
+      for (int i = 0; i < GP_MAX_TRACK_NUMBER * 2; ++i) {
+            channelDefaults[i].patch   = readInt();
+            channelDefaults[i].volume  = readUChar() * 8 - 1;
+            channelDefaults[i].pan     = readUChar() * 8 - 1;
+            channelDefaults[i].chorus  = readUChar() * 8 - 1;
+            channelDefaults[i].reverb  = readUChar() * 8 - 1;
+            channelDefaults[i].phase   = readUChar() * 8 - 1;
+            channelDefaults[i].tremolo = readUChar() * 8 - 1;
+            skip(2);
+            }
+      }
+
+//---------------------------------------------------------
+//   len2fraction
+//---------------------------------------------------------
+
+Fraction GuitarPro::len2fraction(int len)
+      {
+      Fraction l;
+      switch(len) {
+            case -2: l.set(1, 1);    break;
+            case -1: l.set(1, 2);    break;
+            case  0: l.set(1, 4);    break;
+            case  1: l.set(1, 8);    break;
+            case  2: l.set(1, 16);   break;
+            case  3: l.set(1, 32);   break;
+            case  4: l.set(1, 64);   break;
+            case  5: l.set(1, 128);  break;
+            //case  6: l.set(1, 512);  break;
+            //case  7: l.set(1, 1024);  break;
+            //case  8: l.set(1, 2048);  break;
+            default:
+                  printf("unknown beat len: %d\n", len);
+                  abort();
+            }
+      return l;
+      }
+
+//---------------------------------------------------------
+//   readMixChange
+//---------------------------------------------------------
+
+void GuitarPro::readMixChange()
+      {
+printf("readMixChange\n");
+      char patch   = readChar();
+      char volume  = readChar();
+      char pan     = readChar();
+      char chorus  = readChar();
+      char reverb  = readChar();
+      char phase   = readChar();
+      char tremolo = readChar();
+      int tempo    = readInt();
+
+      if (volume >= 0)
+            readChar();
+      if (pan >= 0)
+            readChar();
+      if (chorus >= 0)
+            readChar();
+      if (reverb >= 0)
+            readChar();
+      if (phase >= 0)
+            readChar();
+      if (tremolo >= 0)
+            readChar();
+      if (tempo >= 0)
+            readChar();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void GuitarPro1::read(QFile* fp)
+      {
+      f      = fp;
+      curPos = 30;
+
+      title  = readDelphiString();
+      artist = readDelphiString();
+      readDelphiString();
+
+      int tempo = readInt();
+      uchar num = readUChar();      // Shuffle rhythm feel
+
+printf("Tempo %d\n", tempo);
+
+      int octave = 0;
+      int key    = 0;
+      if (version > 102)
+            key = readInt();    // key
+
+printf("key %d octave %d\n", key, octave);
+
+      staves  = version > 102 ? 8 : 1;
+
+      int tnumerator   = 4;
+      int tdenominator = 4;
+
+      //
+      // create a part for every staff
+      //
+      for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+            Part* part = new Part(score);
+            Staff* s = new Staff(score, part, staffIdx);
+            part->insertStaff(s);
+            score->staves().push_back(s);
+            score->appendPart(part);
+            }
+
+      int tick = 0;
+      Fraction ts;
+
+      for (int i = 0; i < staves; ++i) {
+            int tuning[GP_MAX_STRING_NUMBER];
+
+            int strings  = version > 101 ? readInt() : 6;
+            for (int j = 0; j < strings; ++j)
+                  tuning[j] = readInt();
+            int tuning2[strings];
+            for (int k = 0; k < strings; ++k)
+                  tuning2[strings-k-1] = tuning[k];
+
+            int frets = 32;   // TODO
+            Tablature* tab = new Tablature(frets, strings, tuning2);
+            Part* part = score->part(i);
+            Instrument* instr = part->instr();
+            instr->setTablature(tab);
+            }
+
+      numBars = readInt();
+
+      for (int i = 0; i < numBars; ++i) {
+            Fraction nts = bars[i].timesig;
+            Measure* m = new Measure(score);
+            m->setTick(tick);
+            m->setTimesig(nts);
+            m->setLen(nts);
+
+            if (i == 0 || ts != nts) {
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        TimeSig* t = new TimeSig(score, nts);
+                        t->setTrack(staffIdx * VOICES);
+                        Segment* s = m->getSegment(SegTimeSig, tick);
+                        s->add(t);
+                        }
+                  }
+
+            score->add(m);
+            tick += nts.ticks();
+            ts = nts;
+            }
+
+      Measure* measure = score->firstMeasure();
+      for (int bar = 0; bar < numBars; ++bar, measure = measure->nextMeasure()) {
+            const GpBar& gpbar = bars[bar];
+
+            if (!gpbar.marker.isEmpty()) {
+                  Text* s = new Text(score);
+                  s->setText(gpbar.marker.trimmed());
+                  s->setTrack(0);
+                  s->setSubtype(TEXT_REHEARSAL_MARK);
+                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
+                  Segment* segment = measure->getSegment(SegChordRest, measure->tick());
+                  segment->add(s);
+                  }
+
+            Tuplet* tuplets[staves];
+            for (int staffIdx = 0; staffIdx < staves; ++staffIdx)
+                  tuplets[staffIdx] = 0;
+
+            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                  int tick  = measure->tick();
+                  int beats = readInt();
+                  for (int beat = 0; beat < beats; ++beat) {
+                        int pause = 0;
+                        uchar beatBits = readUChar();
+// printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
+                        bool dotted = beatBits & 0x1;
+                        if (beatBits & 0x40)
+                              pause = readUChar();
+                        int len = readChar();
+                        int tuple = 0;
+                        if (beatBits & 0x20)
+                              tuple = readInt();
+                        Segment* segment = measure->getSegment(SegChordRest, tick);
+                        if (beatBits & 0x2)
+                              readChord(segment);
+                        if (beatBits & 0x4) {
+                              QString txt = readDelphiString();
+                              Lyrics* l = new Lyrics(score);
+                              l->setText(txt);
+                              l->setTrack(staffIdx * VOICES);
+                              segment->add(l);
+                              }
+                        if (beatBits & 0x8)
+                              readBeatEffects();
+                        if (beatBits & 0x10)
+                              readMixChange();
+                        int strings = readUChar();   // used strings mask
+
+                        Fraction l = len2fraction(len);
+                        ChordRest* cr;
+                        if (strings)
+                              cr = new Chord(score);
+                        else
+                              cr = new Rest(score);
+                        cr->setTrack(staffIdx * VOICES);
+                        if (tuple) {
+// printf("%d: Tuplet note beat %d  tuplet %d  len %s\n", tick, beat, tuple, qPrintable(l.print()));
+
+                              Tuplet* tuplet = tuplets[staffIdx];
+                              if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
+                                    tuplet = new Tuplet(score);
+                                    tuplets[staffIdx] = tuplet;
+                                    measure->add(tuplet);
+                                    }
+                              tuplet->setTrack(staffIdx * VOICES);
+                              tuplet->setBaseLen(l);
+                              setTuplet(tuplet, tuple);
+                              cr->setTuplet(tuplet);
+                              }
+
+                        Duration d(l);
+                        d.setDots(dotted ? 1 : 0);
+
+                        if (dotted)
+                              l = l + (l/2);
+                        cr->setDuration(l);
+                        cr->setDurationType(d);
+                        segment->add(cr);
+// printf("%d: add cr %p <%s>\n", tick, cr, qPrintable(l.print()));
+
+                        Staff* staff = cr->staff();
+                        int numStrings = staff->part()->instr()->tablature()->strings();
+                        for (int i = 6; i >= 0; --i) {
+                              if (strings & (1 << i) && ((6-i) < numStrings)) {
+                                    Note* note = new Note(score);
+                                    static_cast<Chord*>(cr)->add(note);
+                                    readNote(6-i, note);
+                                    note->setTpcFromPitch();
+                                    }
+                              }
+                        tick += cr->ticks();
+                        }
+                  }
+            }
+      TempoText* tt = new TempoText(score);
+      tt->setTempo(double(tempo)/60.0);
+      tt->setText(QString("%1%2 = %3").arg(QChar(QChar::highSurrogate(0x1d15f))).arg(QChar(QChar::lowSurrogate(0x1d15f))).arg(tempo));
+      tt->setTrack(0);
+      measure = score->firstMeasure();
+      Segment* segment = measure->getSegment(SegChordRest, 0);
+      segment->add(tt);
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void GuitarPro2::read(QFile* fp)
+      {
+      f      = fp;
+      curPos = 30;
+
+      title        = readDelphiString();
+      subtitle     = readDelphiString();
+      artist       = readDelphiString();
+      album        = readDelphiString();
+      composer     = readDelphiString();
+      QString copyright = readDelphiString();
+      if (!copyright.isEmpty())
+            score->setCopyright(QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
+
+      transcriber  = readDelphiString();
+      instructions = readDelphiString();
+      int n = readInt();
+      for (int i = 0; i < n; ++i)
+            comments.append(readDelphiString());
+
+      uchar num = readUChar();      // Shuffle rhythm feel
+
+      int tempo = readInt();
+printf("Tempo %d\n", tempo);
+
+      int octave = 0;
+      int key = readInt();    // key
+
+printf("key %d octave %d\n", key, octave);
+
+      for (int i = 0; i < GP_MAX_TRACK_NUMBER * 2; ++i) {
+            channelDefaults[i].patch   = readInt();
+            channelDefaults[i].volume  = readUChar() * 8 - 1;
+            channelDefaults[i].pan     = readUChar() * 8 - 1;
+            channelDefaults[i].chorus  = readUChar() * 8 - 1;
+            channelDefaults[i].reverb  = readUChar() * 8 - 1;
+            channelDefaults[i].phase   = readUChar() * 8 - 1;
+            channelDefaults[i].tremolo = readUChar() * 8 - 1;
+            readUChar();      // padding
+            readUChar();
+//            printf("Channel %d patch vol %d pan %d\n", i,
+//               channelDefaults[i].patch,
+//               channelDefaults[i].volume,
+//               channelDefaults[i].pan);
+            }
+      numBars   = readInt();
+      staves = readInt();
+
+      int tnumerator   = 4;
+      int tdenominator = 4;
+      for (int i = 0; i < numBars; ++i) {
+            GpBar bar;
+            uchar barBits = readUChar();
+            if (barBits & 0x1)
+                  tnumerator = readUChar();
+            if (barBits & 0x2)
+                  tdenominator = readUChar();
+            if (barBits & 0x4) {                // begin reapeat
+printf("BeginRepeat=============================================\n");
+                  }
+            if (barBits & 0x8)                  // number of repeats
+                  uchar c = readUChar();
+            if (barBits & 0x10)                 // alternative ending to
+                  uchar c = readUChar();
+            if (barBits & 0x20) {
+                  bar.marker = readDelphiString();     // new section?
+                  int color = readInt();    // color?
+                  }
+            if (barBits & 0x40) {
+                  bar.keysig = readUChar();
+                  uchar c    = readUChar();        // minor
+                  }
+            if (barBits & 0x80) {
+printf("doubleBar=============================================\n");
+                  // double bar
+                  }
+            bar.timesig = Fraction(tnumerator, tdenominator);
+            bars.append(bar);
+            }
+
+      //
+      // create a part for every staff
+      //
+      for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+            Part* part = new Part(score);
+            Staff* s = new Staff(score, part, staffIdx);
+            part->insertStaff(s);
+            score->staves().push_back(s);
+            score->appendPart(part);
+            }
+
+      int tick = 0;
+      Fraction ts;
+      for (int i = 0; i < numBars; ++i) {
+            Fraction nts = bars[i].timesig;
+            Measure* m = new Measure(score);
+            m->setTick(tick);
+            m->setTimesig(nts);
+            m->setLen(nts);
+
+            if (i == 0 || ts != nts) {
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        TimeSig* t = new TimeSig(score, nts);
+                        t->setTrack(staffIdx * VOICES);
+                        Segment* s = m->getSegment(SegTimeSig, tick);
+                        s->add(t);
+                        }
+                  }
+
+            score->add(m);
+            tick += nts.ticks();
+            ts = nts;
+            }
+
+      for (int i = 0; i < staves; ++i) {
+            int tuning[GP_MAX_STRING_NUMBER];
+
+            uchar c      = readUChar();   // simulations bitmask
+            if (c & 0x2) {                // 12 stringed guitar
+                  }
+            if (c & 0x4) {                // banjo track
+                  }
+            QString name = readPascalString(40);
+            int strings  = readInt();
+            if (strings <= 0 || strings > GP_MAX_STRING_NUMBER)
+                  throw GP_BAD_NUMBER_OF_STRINGS ;
+            for (int j = 0; j < strings; ++j)
+                  tuning[j] = readInt();
+            for (int j = strings; j < GP_MAX_STRING_NUMBER; ++j)
+                  readInt();
+            int midiPort     = readInt() - 1;
+            int midiChannel  = readInt() - 1;
+            int midiChannel2 = readInt() - 1;
+            int frets        = readInt();
+            int capo         = readInt();
+            int color        = readInt();
+
+            int tuning2[strings];
+            for (int k = 0; k < strings; ++k)
+                  tuning2[strings-k-1] = tuning[k];
+            Tablature* tab = new Tablature(frets, strings, tuning2);
+            Part* part = score->part(i);
+            Instrument* instr = part->instr();
+            instr->setTablature(tab);
+            instr->setTrackName(name);
+
+            //
+            // determine clef
+            //
+            Staff* staff = score->staff(i);
+            int patch = channelDefaults[midiChannel].patch;
+            int clefId = CLEF_G;
+            if (c & 0x1) {
+                  clefId = CLEF_PERC;
+                  instr->setUseDrumset(true);
+                  }
+            else if (patch >= 24 && patch < 32)
+                  clefId = CLEF_G3;
+            else if (patch >= 32 && patch < 40)
+                  clefId = CLEF_F8;
+            Measure* measure = score->firstMeasure();
+            Clef* clef = new Clef(score, clefId);
+            clef->setTrack(i * VOICES);
+            Segment* segment = measure->getSegment(SegClef, 0);
+            segment->add(clef);
+
+
+            Channel& ch = instr->channel(0);
+            if (c & 1) {
+                  ch.program = 0;
+                  ch.bank    = 128;
+                  }
+            else {
+                  ch.program = patch;
+                  ch.bank    = 0;
+                  }
+            ch.volume  = channelDefaults[midiChannel].volume;
+            ch.pan     = channelDefaults[midiChannel].pan;
+            ch.chorus  = channelDefaults[midiChannel].chorus;
+            ch.reverb  = channelDefaults[midiChannel].reverb;
+            // missing: phase, tremolo
+            ch.updateInitList();
+            }
+
+      Measure* measure = score->firstMeasure();
+      for (int bar = 0; bar < numBars; ++bar, measure = measure->nextMeasure()) {
+            const GpBar& gpbar = bars[bar];
+
+            if (!gpbar.marker.isEmpty()) {
+                  Text* s = new Text(score);
+                  s->setText(gpbar.marker.trimmed());
+                  s->setTrack(0);
+                  s->setSubtype(TEXT_REHEARSAL_MARK);
+                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
+                  Segment* segment = measure->getSegment(SegChordRest, measure->tick());
+                  segment->add(s);
+                  }
+
+            Tuplet* tuplets[staves];
+            for (int staffIdx = 0; staffIdx < staves; ++staffIdx)
+                  tuplets[staffIdx] = 0;
+
+            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                  int tick  = measure->tick();
+                  int beats = readInt();
+                  for (int beat = 0; beat < beats; ++beat) {
+                        int pause = 0;
+                        uchar beatBits = readUChar();
+// printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
+                        bool dotted = beatBits & 0x1;
+                        if (beatBits & 0x40)
+                              pause = readUChar();
+                        int len = readChar();
+                        int tuple = 0;
+                        if (beatBits & 0x20)
+                              tuple = readInt();
+                        Segment* segment = measure->getSegment(SegChordRest, tick);
+                        if (beatBits & 0x2)
+                              readChord(segment);
+                        if (beatBits & 0x4) {
+                              QString txt = readDelphiString();
+                              Lyrics* l = new Lyrics(score);
+                              l->setText(txt);
+                              l->setTrack(staffIdx * VOICES);
+                              segment->add(l);
+                              }
+                        if (beatBits & 0x8)
+                              readBeatEffects();
+                        if (beatBits & 0x10)
+                              readMixChange();
+                        int strings = readUChar();   // used strings mask
+
+                        Fraction l = len2fraction(len);
+                        ChordRest* cr;
+                        if (strings)
+                              cr = new Chord(score);
+                        else
+                              cr = new Rest(score);
+                        cr->setTrack(staffIdx * VOICES);
+                        if (tuple) {
+// printf("%d: Tuplet note beat %d  tuplet %d  len %s\n", tick, beat, tuple, qPrintable(l.print()));
+
+                              Tuplet* tuplet = tuplets[staffIdx];
+                              if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
+                                    tuplet = new Tuplet(score);
+                                    tuplets[staffIdx] = tuplet;
+                                    measure->add(tuplet);
+                                    }
+                              tuplet->setTrack(staffIdx * VOICES);
+                              tuplet->setBaseLen(l);
+                              setTuplet(tuplet, tuple);
+                              cr->setTuplet(tuplet);
+                              }
+
+                        Duration d(l);
+                        d.setDots(dotted ? 1 : 0);
+
+                        if (dotted)
+                              l = l + (l/2);
+                        cr->setDuration(l);
+                        cr->setDurationType(d);
+                        segment->add(cr);
+// printf("%d: add cr %p <%s>\n", tick, cr, qPrintable(l.print()));
+
+                        Staff* staff = cr->staff();
+                        int numStrings = staff->part()->instr()->tablature()->strings();
+                        for (int i = 6; i >= 0; --i) {
+                              if (strings & (1 << i) && ((6-i) < numStrings)) {
+                                    Note* note = new Note(score);
+                                    static_cast<Chord*>(cr)->add(note);
+                                    readNote(6-i, note);
+                                    note->setTpcFromPitch();
+                                    }
+                              }
+                        tick += cr->ticks();
+                        }
+                  }
+            }
+      TempoText* tt = new TempoText(score);
+      tt->setTempo(double(tempo)/60.0);
+      tt->setText(QString("%1%2 = %3").arg(QChar(QChar::highSurrogate(0x1d15f))).arg(QChar(QChar::lowSurrogate(0x1d15f))).arg(tempo));
+      tt->setTrack(0);
+      measure = score->firstMeasure();
+      Segment* segment = measure->getSegment(SegChordRest, 0);
+      segment->add(tt);
+      }
+
+//---------------------------------------------------------
 //   readNote
 //---------------------------------------------------------
 
-void GuitarPro::readNote(int string, Note* note)
+void GuitarPro1::readNote(int string, Note* note)
       {
       uchar noteBits = readUChar();
 
@@ -350,92 +955,39 @@ void GuitarPro::readNote(int string, Note* note)
       }
 
 //---------------------------------------------------------
-//   readMixChange
-//---------------------------------------------------------
-
-void GuitarPro::readMixChange()
-      {
-printf("readMixChange\n");
-      char patch   = readChar();
-      char volume  = readChar();
-      char pan     = readChar();
-      char chorus  = readChar();
-      char reverb  = readChar();
-      char phase   = readChar();
-      char tremolo = readChar();
-      int tempo    = readInt();
-
-      if (volume >= 0)
-            readChar();
-      if (pan >= 0)
-            readChar();
-      if (chorus >= 0)
-            readChar();
-      if (reverb >= 0)
-            readChar();
-      if (phase >= 0)
-            readChar();
-      if (tremolo >= 0)
-            readChar();
-      if (tempo >= 0)
-            readChar();
-      if (version >= 400)
-            readChar();       // bitmask: what should be applied to all tracks
-      }
-
-//---------------------------------------------------------
 //   readBeatEffects
 //---------------------------------------------------------
 
-void GuitarPro::readBeatEffects()
+void GuitarPro1::readBeatEffects()
       {
-printf("readBeatEffects\n");
+printf("1readBeatEffects\n");
       uchar fxBits1 = readUChar();
-      uchar fxBits2 = 0;
-      if (version >= 400)
-            fxBits2 = readUChar();
       if (fxBits1 & 0x20) {
             uchar num = readUChar();
             switch(num) {
-                  case 0:
-                        if (version < 400)
-                              readInt();
-                        break;
-                  case 1:
-                        if (version < 400)
-                              readInt();
-                        break;
-                  case 2:
-                        if (version < 400)
-                              readInt();
-                        break;
-                  case 3:
-                        if (version < 400)
-                              readInt();
+                  case 0:           // tremolo bar
+                        readInt();
                         break;
                   default:
+                        readInt();
                         break;
                   }
             }
-      if (fxBits2 & 0x04)
-            readChromaticGraph();
       if (fxBits1 & 0x40) {
             readUChar();            // down stroke length
             readUChar();            // up stroke length
             }
-      if (fxBits1 & 0x02)
-            readUChar();            // stroke pick direction
-      if (fxBits1 & 0x01) {         // GP3 column-wide vibrato
-            }
-      if (fxBits1 & 0x2) {          // GP3 column-wide wide vibrato (="tremolo" in GP3)
-            }
+//      if (fxBits1 & 0x02)
+//            readUChar();            // stroke pick direction
+//      if (fxBits1 & 0x01) {         // GP3 column-wide vibrato
+//            }
       }
 
 //---------------------------------------------------------
 //   readChord
 //---------------------------------------------------------
 
-void GuitarPro3::readChord(Segment*)
+void GuitarPro1::readChord(Segment*)
       {
       int header = readUChar();
 
@@ -672,14 +1224,16 @@ printf("doubleBar=============================================\n");
                   for (int beat = 0; beat < beats; ++beat) {
                         int pause = 0;
                         uchar beatBits = readUChar();
-// printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
+printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
                         bool dotted = beatBits & 0x1;
                         if (beatBits & 0x40)
                               pause = readUChar();
+
                         int len = readChar();
                         int tuple = 0;
                         if (beatBits & 0x20)
                               tuple = readInt();
+
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
                               readChord(segment);
@@ -715,10 +1269,11 @@ printf("doubleBar=============================================\n");
                               }
 
                         ChordRest* cr;
-                        if (pause || (strings == 0))
-                              cr = new Rest(score);
-                        else
+                        // if (!pause || strings)
+                        if (strings)
                               cr = new Chord(score);
+                        else
+                              cr = new Rest(score);
                         cr->setTrack(staffIdx * VOICES);
                         if (tuple) {
 // printf("%d: Tuplet note beat %d  tuplet %d  len %s\n", tick, beat, tuple, qPrintable(l.print()));
@@ -730,27 +1285,7 @@ printf("doubleBar=============================================\n");
                                     measure->add(tuplet);
                                     }
                               tuplet->setTrack(staffIdx * VOICES);
-                              switch(tuple) {
-                                    case 3:
-                                          tuplet->setRatio(Fraction(3,2));
-                                          tuplet->setBaseLen(l);
-                                          break;
-                                    case 5:
-                                          tuplet->setRatio(Fraction(5,4));
-                                          tuplet->setBaseLen(l);
-                                          break;
-                                    case 6:
-                                          tuplet->setRatio(Fraction(6,4));
-                                          tuplet->setBaseLen(l);
-                                          break;
-                                    case 7:
-                                          tuplet->setRatio(Fraction(7,4));
-                                          tuplet->setBaseLen(l);
-                                          break;
-                                    default:
-                                          printf("unsupported tuplet %d\n", tuple);
-                                          abort();
-                                    }
+                              tuplet->setBaseLen(l);
                               cr->setTuplet(tuplet);
                               }
 
@@ -770,7 +1305,6 @@ printf("doubleBar=============================================\n");
                               if (strings & (1 << i) && ((6-i) < numStrings)) {
                                     Note* note = new Note(score);
                                     static_cast<Chord*>(cr)->add(note);
-
                                     readNote(6-i, note);
                                     note->setTpcFromPitch();
                                     }
@@ -789,12 +1323,100 @@ printf("doubleBar=============================================\n");
       }
 
 //---------------------------------------------------------
+//   readChromaticGraph
+//    bend graph
+//---------------------------------------------------------
+
+void GuitarPro4::readChromaticGraph()
+      {
+printf("4:readChromaticGraph()\n");
+
+      skip(5);
+      int n = readInt();
+      for (int i = 0; i < n; ++i) {
+            readInt();                    // time position
+            readInt();                    // pitch
+            readUChar();                  // vibrato
+            }
+      }
+
+//---------------------------------------------------------
+//   readMixChange
+//---------------------------------------------------------
+
+void GuitarPro4::readMixChange()
+      {
+printf("4:readMixChange\n");
+      char patch   = readChar();
+      char volume  = readChar();
+      char pan     = readChar();
+      char chorus  = readChar();
+      char reverb  = readChar();
+      char phase   = readChar();
+      char tremolo = readChar();
+      int tempo    = readInt();
+
+      if (volume >= 0)
+            readChar();
+      if (pan >= 0)
+            readChar();
+      if (chorus >= 0)
+            readChar();
+      if (reverb >= 0)
+            readChar();
+      if (phase >= 0)
+            readChar();
+      if (tremolo >= 0)
+            readChar();
+      if (tempo >= 0)
+            readChar();
+      readChar();       // bitmask: what should be applied to all tracks
+      }
+
+//---------------------------------------------------------
+//   readBeatEffects
+//---------------------------------------------------------
+
+void GuitarPro4::readBeatEffects()
+      {
+printf("readBeatEffects\n");
+      uchar fxBits1 = readUChar();
+      uchar fxBits2 = readUChar();
+      if (fxBits1 & 0x20) {
+            uchar num = readUChar();      // effect 1-tapping, 2-slapping, 3-popping
+            }
+      if (fxBits2 & 0x04)
+            readChromaticGraph();
+      if (fxBits1 & 0x40) {
+            readUChar();            // down stroke length
+            readUChar();            // up stroke length
+            }
+      if (fxBits1 & 0x02)
+            readUChar();            // stroke pick direction
+      if (fxBits1 & 0x01) {         // GP3 column-wide vibrato
+            }
+      if (fxBits1 & 0x2) {          // GP3 column-wide wide vibrato (="tremolo" in GP3)
+            }
+      }
+
+//---------------------------------------------------------
 //   readNote
 //---------------------------------------------------------
 
 void GuitarPro4::readNote(int string, Note* note)
       {
       uchar noteBits = readUChar();
+
+      //
+      // noteBits:
+      //    7 - Right hand or left hand fingering;
+      //    6 - Accentuated note
+      //    5 - Note type (rest, empty note, normal note);
+      //    4 - note dynamic;
+      //    3 - Presence of effects linked to the note;
+      //    2 - Ghost note;
+      //    1 - Dotted note;  ?
+      //    0 - Time-independent duration
 
       bool tieNote = false;
       uchar variant = 1;
@@ -810,17 +1432,6 @@ void GuitarPro4::readNote(int string, Note* note)
             else
                   printf("unknown note variant: %d\n", variant);
             }
-
-      //
-      // noteBits:
-      //    7 - Right hand or left hand fingering;
-      //    6 - Accentuated note
-      //    5 - Note type (rest, empty note, normal note);
-      //    4 - note dynamic;
-      //    3 - Presence of effects linked to the note;
-      //    2 - Ghost note;
-      //    1 - Dotted note;  ?
-      //    0 - Time-independent duration
 
       printf("note bits %d  %02x\n", note->chord()->segment()->tick(), noteBits);
 
@@ -943,37 +1554,6 @@ void GuitarPro4::readInfo()
       int n = readInt();
       for (int i = 0; i < n; ++i)
             comments.append(readDelphiString());
-      }
-
-//---------------------------------------------------------
-//   readLyrics
-//---------------------------------------------------------
-
-void GuitarPro::readLyrics()
-      {
-      readInt();        // lyric track
-      for (int i = 0; i < 5; ++i) {
-            readInt();
-            readWordPascalString();
-            }
-      }
-
-//---------------------------------------------------------
-//   readChannels
-//---------------------------------------------------------
-
-void GuitarPro::readChannels()
-      {
-      for (int i = 0; i < GP_MAX_TRACK_NUMBER * 2; ++i) {
-            channelDefaults[i].patch   = readInt();
-            channelDefaults[i].volume  = readUChar() * 8 - 1;
-            channelDefaults[i].pan     = readUChar() * 8 - 1;
-            channelDefaults[i].chorus  = readUChar() * 8 - 1;
-            channelDefaults[i].reverb  = readUChar() * 8 - 1;
-            channelDefaults[i].phase   = readUChar() * 8 - 1;
-            channelDefaults[i].tremolo = readUChar() * 8 - 1;
-            skip(2);
-            }
       }
 
 //---------------------------------------------------------
@@ -1192,7 +1772,6 @@ printf("read measures\n");
                   for (int beat = 0; beat < beats; ++beat) {
                         int pause = 0;
                         uchar beatBits = readUChar();
-printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
                         bool dotted = beatBits & 0x1;
                         if (beatBits & 0x40)
                               pause = readUChar();
@@ -1216,33 +1795,18 @@ printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
                               readMixChange();
                         int strings = readUChar();   // used strings mask
 
-                        Fraction l;
-                        switch(len) {
-                              case -2: l.set(1, 1);    break;
-                              case -1: l.set(1, 2);    break;
-                              case  0: l.set(1, 4);    break;
-                              case  1: l.set(1, 8);    break;
-                              case  2: l.set(1, 16);   break;
-                              case  3: l.set(1, 32);   break;
-                              case  4: l.set(1, 64);   break;
-                              case  5: l.set(1, 128);  break;
-                              //case  6: l.set(1, 512);  break;
-                              //case  7: l.set(1, 1024);  break;
-                              //case  8: l.set(1, 2048);  break;
-                              default:
-                                    printf("unknown beat len: %d\n", len);
-                                    abort();
-                              }
+printf("bar %d beat %d(%d) beat bits %02x len %d tuple %d strings %d\n",
+         bar, beat, beats, beatBits, len, tuple, strings);
 
+                        Fraction l = len2fraction(len);
                         ChordRest* cr;
-                        if (pause || (strings == 0))
+                        if (strings == 0)
                               cr = new Rest(score);
                         else
                               cr = new Chord(score);
                         cr->setTrack(staffIdx * VOICES);
                         if (tuple) {
 printf("%d: Tuplet note beat %d  tuplet %d  len %s\n", tick, beat, tuple, qPrintable(l.print()));
-
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
                                     tuplet = new Tuplet(score);
@@ -1250,19 +1814,8 @@ printf("%d: Tuplet note beat %d  tuplet %d  len %s\n", tick, beat, tuple, qPrint
                                     measure->add(tuplet);
                                     }
                               tuplet->setTrack(staffIdx * VOICES);
-                              switch(tuple) {
-                                    case 3:
-                                          tuplet->setRatio(Fraction(3,2));
-                                          tuplet->setBaseLen(l);
-                                          break;
-                                    case 5:
-                                          tuplet->setRatio(Fraction(5,4));
-                                          tuplet->setBaseLen(l);
-                                          break;
-                                    default:
-                                          printf("unsupported tuplet %d\n", tuple);
-                                          abort();
-                                    }
+                              tuplet->setBaseLen(l);
+                              setTuplet(tuplet, tuple);
                               cr->setTuplet(tuplet);
                               }
 
@@ -1584,26 +2137,9 @@ printf("5:readMEasure\n");
                   int strings = readUChar();   // used strings mask
 printf(" voice %d beat %d(%d) len %d bits %02x stringMask 0x%02x\n", voice, beat, beats, len, beatBits, strings);
 
-                  Fraction l;
-                  switch(len) {
-                        case -2: l.set(1, 1);    break;
-                        case -1: l.set(1, 2);    break;
-                        case  0: l.set(1, 4);    break;
-                        case  1: l.set(1, 8);    break;
-                        case  2: l.set(1, 16);   break;
-                        case  3: l.set(1, 32);   break;
-                        case  4: l.set(1, 64);   break;
-                        case  5: l.set(1, 128);  break;
-                        //case  6: l.set(1, 512);  break;
-                        //case  7: l.set(1, 1024);  break;
-                        //case  8: l.set(1, 2048);  break;
-                        default:
-                              printf("unknown beat len: %d\n", len);
-                              abort();
-                        }
-
+                  Fraction l    = len2fraction(len);
                   ChordRest* cr;
-                  if (pause || (strings == 0))
+                  if (strings == 0)
                         cr = new Rest(score);
                   else
                         cr = new Chord(score);
@@ -1618,19 +2154,8 @@ printf(" voice %d beat %d(%d) len %d bits %02x stringMask 0x%02x\n", voice, beat
                               measure->add(tuplet);
                               }
                         tuplet->setTrack(cr->track());
-                        switch(tuple) {
-                              case 3:
-                                    tuplet->setRatio(Fraction(3,2));
-                                    tuplet->setBaseLen(l);
-                                    break;
-                              case 5:
-                                    tuplet->setRatio(Fraction(5,4));
-                                    tuplet->setBaseLen(l);
-                                    break;
-                              default:
-                                    printf("unsupported tuplet %d\n", tuple);
-                                    abort();
-                              }
+                        tuplet->setBaseLen(l);
+                        setTuplet(tuplet, tuple);
                         cr->setTuplet(tuplet);
                         }
 
@@ -1966,18 +2491,25 @@ bool Score::importGTP(const QString& name)
       fp.read(ss, 30);
       ss[l] = 0;
       QString s(ss);
-      if (!s.startsWith("FICHIER GUITAR PRO ")) {
-            printf("unknown gtp format %s\n", ss);
+      if (s.startsWith("FICHIER GUITAR PRO "))
+            s = s.mid(20);
+      else if (s.startsWith("FICHIER GUITARE PRO "))
+            s = s.mid(21);
+      else {
+            printf("unknown gtp format <%s>\n", ss);
             return false;
             }
-      s = s.mid(20);
 
       int a = s.left(1).toInt();
       int b = s.mid(2).toInt();
       int version = a * 100 + b;
       GuitarPro* gp;
 
-      if (a == 1 || a == 2 || a == 3)
+      if (a == 1)
+            gp = new GuitarPro1(this, version);
+      if (a == 2)
+            gp = new GuitarPro2(this, version);
+      if (a == 1)
             gp = new GuitarPro3(this, version);
       else if (a == 4)
             gp = new GuitarPro4(this, version);
@@ -2044,6 +2576,7 @@ bool Score::importGTP(const QString& name)
             m->add(s);
             }
       delete gp;
+      lastMeasure()->setEndBarLineType(END_BAR, false);
 
 //      album
 //      copyright

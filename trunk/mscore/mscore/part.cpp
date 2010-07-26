@@ -97,9 +97,9 @@ void Part::read(QDomElement e)
             QString val(e.text());
             if (tag == "Staff") {
                   Staff* staff = new Staff(_score, this, rstaff);
-                  staff->read(e);
                   _score->staves().push_back(staff);
                   _staves.push_back(staff);
+                  staff->read(e);
                   ++rstaff;
                   }
             else if (tag == "Instrument")

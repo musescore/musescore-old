@@ -38,6 +38,22 @@ class Part;
 class Score;
 class KeyList;
 class StaffType;
+class Staff;
+
+//---------------------------------------------------------
+//   LinkedStaves
+//---------------------------------------------------------
+
+class LinkedStaves {
+      QList<Staff*> _staves;
+
+   public:
+      LinkedStaves() {}
+      QList<Staff*>& staves() { return _staves; }
+      void add(Staff*);
+      void remove(Staff*);
+      bool isEmpty() const { return _staves.isEmpty(); }
+      };
 
 //---------------------------------------------------------
 //   BracketItem
@@ -81,8 +97,8 @@ class Staff {
       bool _updateKeymap;
 
       StaffType* _staffType;
-      Staff* _linkTo;               ///< set if this staff is linked to _linkTo
-      QList<Staff*> _linkedFrom;
+
+      LinkedStaves* _linkedStaves;
 
       QMap<int,int> _channelList[VOICES];
 
@@ -150,6 +166,9 @@ class Staff {
       void setUpdateKeymap(bool v)     { _updateKeymap = v;      }
       VeloList& velocities()           { return _velocities;     }
       PitchList& pitchOffsets()        { return _pitchOffsets;   }
+
+      LinkedStaves* linkedStaves() const { return _linkedStaves; }
+      void linkTo(Staff* staff);
       };
 #endif
 
