@@ -168,13 +168,13 @@ Staff::Staff(Score* s, Part* p, int rs)
       _keymap         = new KeyList;
       (*_keymap)[0]   = 0;                  // default to C major
       _staffType      = _score->staffTypes()[PITCHED_STAFF_TYPE];
-      _linkTo         = 0;
       _show           = true;
       _small          = false;
       _invisible      = false;
       _barLineSpan    = 1;
       _updateClefList = true;
       _updateKeymap   = true;
+      _linkedStaves   = 0;
       }
 
 //---------------------------------------------------------
@@ -183,6 +183,11 @@ Staff::Staff(Score* s, Part* p, int rs)
 
 Staff::~Staff()
       {
+      if (_linkedStaves) {
+            _linkedStaves->remove(this);
+            if (_linkedStaves->isEmpty())
+                  delete _linkedStaves;
+            }
       delete _clefList;
       delete _keymap;
       _keymap   = 0;      // DEBUG
@@ -213,14 +218,18 @@ KeySigEvent Staff::key(int tick) const
 
 void Staff::write(Xml& xml) const
       {
-      xml.stag("Staff");
+      int idx = score()->staffIdx(this);
+      xml.stag(QString("Staff id=\"%1\"").arg(idx));
+      if (linkedStaves()) {
+            foreach(Staff* staff, linkedStaves()->staves()) {
+                  xml.tag("linkedTo", score()->staffIdx(staff));
+                  }
+            }
       xml.tag("type", score()->staffTypes().indexOf(_staffType));
       if (small() && !xml.excerptmode)    // switch small staves to normal ones when extracting part
             xml.tag("small", small());
       if (invisible())
             xml.tag("invisible", invisible());
-//      _clefList->write(xml, "cleflist");
-//      _keymap->write(xml, "keylist");
       foreach(const BracketItem& i, _brackets)
             xml.tagE("bracket type=\"%d\" span=\"%d\"", i._bracket, i._bracketSpan);
       if (_barLineSpan != 1)
@@ -263,6 +272,11 @@ void Staff::read(QDomElement e)
                   }
             else if (tag == "barLineSpan")
                   _barLineSpan = v;
+            else if (tag == "linkedTo") {
+                  int idx = score()->staffIdx(this);
+                  if (v < idx)
+                        linkTo(score()->staff(v));
+                  }
             else
                   domError(e);
             }
@@ -460,5 +474,45 @@ bool Staff::useTablature() const
 void Staff::setUseTablature(bool val)
       {
       _staffType = score()->staffTypes()[val ? TAB_STAFF_TYPE : PITCHED_STAFF_TYPE];
+      }
+
+//---------------------------------------------------------
+//   linkTo
+//---------------------------------------------------------
+
+void Staff::linkTo(Staff* staff)
+      {
+      if (!_linkedStaves) {
+            if (staff->linkedStaves()) {
+                  _linkedStaves = staff->linkedStaves();
+                  _linkedStaves->add(this);
+                  }
+            else {
+                  _linkedStaves = new LinkedStaves;
+                  _linkedStaves->add(staff);
+                  _linkedStaves->add(this);
+                  }
+            }
+      else {
+            _linkedStaves->add(staff);
+            }
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void LinkedStaves::add(Staff* staff)
+      {
+      _staves.append(staff);
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void LinkedStaves::remove(Staff* staff)
+      {
+      _staves.removeOne(staff);
       }
 

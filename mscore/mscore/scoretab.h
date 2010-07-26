@@ -32,10 +32,12 @@ class ScoreTab : public QWidget {
       Q_OBJECT
       QList<Score*>* scoreList;
       QTabBar* tab;
+      QTabBar* tab2;
       QStackedLayout* stack;
 
    private slots:
       void setCurrent(int);
+      void setExcerpt(int);
 
    signals:
       void currentScoreViewChanged(ScoreView*);

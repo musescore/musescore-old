@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -27,6 +27,7 @@
 #include "omr/omr.h"
 #include "omr/omrview.h"
 #endif
+#include "excerpt.h"
 
 //---------------------------------------------------------
 //   ScoreTab
@@ -45,11 +46,21 @@ ScoreTab::ScoreTab(QList<Score*>* sl, QWidget* parent)
       tab->setExpanding(false);
       tab->setSelectionBehaviorOnRemove(QTabBar::SelectRightTab);
       tab->setFocusPolicy(Qt::StrongFocus);
+
+      tab2 = new QTabBar;
+      tab2->setExpanding(false);
+      tab2->setSelectionBehaviorOnRemove(QTabBar::SelectRightTab);
+      tab2->setFocusPolicy(Qt::StrongFocus);
+      tab2->setVisible(false);
+      tab2->setTabsClosable(false);
+
       stack = new QStackedLayout;
       layout->addWidget(tab);
+      layout->addWidget(tab2);
       layout->addLayout(stack);
       tab->setTabsClosable(true);
       connect(tab, SIGNAL(currentChanged(int)), this, SLOT(setCurrent(int)));
+      connect(tab2, SIGNAL(currentChanged(int)), this, SLOT(setExcerpt(int)));
       connect(tab, SIGNAL(tabCloseRequested(int)), this, SIGNAL(tabCloseRequested(int)));
       }
 
@@ -121,7 +132,36 @@ void ScoreTab::setCurrent(int n)
       else
             v = static_cast<ScoreView*>(vs->widget(0));
       stack->setCurrentWidget(vs);
+      if (v) {
+            Score* score = v->score();
+            QList<Excerpt*>* excerpts = score->excerpts();
+            if (excerpts && !excerpts->isEmpty()) {
+                  int n = tab2->count();
+                  for (int i = 0; i < n; ++i)
+                        tab2->removeTab(0);
+                  tab2->addTab(score->name());
+                  foreach(Excerpt* excerpt, *excerpts) {
+                        tab2->addTab(excerpt->name());
+                        }
+                  tab2->setVisible(true);
+                  }
+            else {
+                  tab2->setVisible(false);
+                  }
+            }
+      else {
+            tab2->setVisible(false);
+            }
       emit currentScoreViewChanged(v);
+      }
+
+//---------------------------------------------------------
+//   setExcerpt
+//---------------------------------------------------------
+
+void ScoreTab::setExcerpt(int idx)
+      {
+      printf("setExcerpt %d\n", idx);
       }
 
 //---------------------------------------------------------

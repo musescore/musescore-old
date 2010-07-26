@@ -66,12 +66,14 @@ class GuitarPro {
       QString readBytePascalString();
       int readInt();
       QString readDelphiString();
-      virtual void readNote(int string, Note*);
+      virtual void readNote(int string, Note*) = 0;
       virtual void readChromaticGraph();
       virtual void readMixChange();
-      virtual void readBeatEffects();
+      virtual void readBeatEffects() = 0;
       void readLyrics();
       void readChannels();
+      void setTuplet(Tuplet* tuplet, int tuple);
+      Fraction len2fraction(int len);
 
    public:
       QString title, subtitle, artist, album, composer;
@@ -93,15 +95,40 @@ class GuitarPro {
       };
 
 //---------------------------------------------------------
+//   GuitarPro1
+//---------------------------------------------------------
+
+class GuitarPro1 : public GuitarPro {
+
+   protected:
+      virtual void readChord(Segment*);
+      virtual void readNote(int string, Note* note);
+      virtual void readBeatEffects();
+
+   public:
+      GuitarPro1(Score* s, int v) : GuitarPro(s, v) {}
+      virtual void read(QFile*);
+      };
+
+//---------------------------------------------------------
+//   GuitarPro2
+//---------------------------------------------------------
+
+class GuitarPro2 : public GuitarPro1 {
+
+   public:
+      GuitarPro2(Score* s, int v) : GuitarPro1(s, v) {}
+      virtual void read(QFile*);
+      };
+
+//---------------------------------------------------------
 //   GuitarPro3
 //---------------------------------------------------------
 
-class GuitarPro3 : public GuitarPro {
-
-      virtual void readChord(Segment*);
+class GuitarPro3 : public GuitarPro1 {
 
    public:
-      GuitarPro3(Score* s, int v) : GuitarPro(s, v) {}
+      GuitarPro3(Score* s, int v) : GuitarPro1(s, v) {}
       virtual void read(QFile*);
       };
 
@@ -114,6 +141,9 @@ class GuitarPro4 : public GuitarPro {
       void readInfo();
       virtual void readNote(int string, Note* note);
       virtual void readChord(Segment*);
+      virtual void readBeatEffects();
+      virtual void readMixChange();
+      virtual void readChromaticGraph();
 
    public:
       GuitarPro4(Score* s, int v) : GuitarPro(s, v) {}
