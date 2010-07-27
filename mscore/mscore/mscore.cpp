@@ -1033,9 +1033,9 @@ int MuseScore::appendScore(Score* score)
       tab1->blockSignals(true);
       if (tab2)
             tab2->blockSignals(true);
-      tab1->insertTab(index, score->name());
+      tab1->insertTab(score);
       if (tab2)
-            tab2->insertTab(index, score->name());
+            tab2->insertTab(score);
       _undoGroup->addStack(score->undo());
       tab1->blockSignals(false);
       if (tab2)

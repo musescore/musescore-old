@@ -21,9 +21,9 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.16"
+#define MSC_VERSION     "1.17"
 
-static const int MSCVERSION = 116;
+static const int MSCVERSION = 117;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -39,6 +39,7 @@ static const int MSCVERSION = 116;
 //    1.14  save user modified beam position as spatium value
 //    1.15  save timesig inline; Lyrics "endTick" replaced by "ticks"
 //    1.16  spanners (hairpin, trill etc.) are now inline and have no ticks anymore
+//    1.17  new <Score> toplevel structure to support linked parts (excerpts)
 
 extern bool debugMode;
 extern bool enableExperimental;

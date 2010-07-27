@@ -317,6 +317,7 @@ void Score::setSpatium(double v)
 Score::Score(const Style& s)
    : _selection(this)
       {
+      _parentScore    = 0;
       _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
@@ -442,103 +443,81 @@ bool Score::read(QString name)
       QString cs = info.suffix();
       QString csl = cs.toLower();
 
-      if (cs == "mscz") {
-            if (!loadCompressedMsc(name))
+      if (cs == "mscz")
+            return loadCompressedMsc(name);
+      if (cs.toLower() == "msc" || cs.toLower() == "mscx")
+            return loadMsc(name);
+
+      // import
+      if (!preferences.importStyleFile.isEmpty()) {
+            QFile f(preferences.importStyleFile);
+            // silently ignore style file on error
+            if (f.open(QIODevice::ReadOnly))
+                  loadStyle(&f);
+            }
+
+      if (cs == "xml") {
+            importMusicXml(name);
+            connectSlurs();
+            }
+      else if (cs == "mxl")
+            importCompressedMusicXml(name);
+      else if (csl == "mid" || csl == "midi" || csl == "kar") {
+            if (!importMidi(name))
                   return false;
             }
-      else if (cs.toLower() == "msc" || cs.toLower() == "mscx") {
-            if (!loadMsc(name))
+      else if (cs == "md") {
+            if (!importMuseData(name))
+                  return false;
+            }
+      else if (cs == "ly") {
+            if (!importLilypond(name))
+                  return false;
+            }
+      else if (csl == "mgu" || csl == "sgu") {
+            if (!importBB(name))
+                  return false;
+            }
+      else if (csl == "cap") {
+            if (!importCapella(name))
+                  return false;
+            connectSlurs();
+            }
+      else if (csl == "ove") {
+      	    if(!importOve(name))
+      		        return false;
+		            }
+#ifdef OMR
+      else if (csl == "pdf") {
+            if (!importPdf(name))
+                  return false;
+            }
+#endif
+      else if (csl == "bww") {
+            if (!importBww(name))
+                  return false;
+            }
+      else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
+            if (!importGTP(name))
                   return false;
             }
       else {
-            // import
-            if (!preferences.importStyleFile.isEmpty()) {
-                  QFile f(preferences.importStyleFile);
-                  // silently ignore style file on error
-                  if (f.open(QIODevice::ReadOnly))
-                        loadStyle(&f);
-                  }
-
-            if (cs == "xml") {
-                  importMusicXml(name);
-                  connectSlurs();
-                  }
-            else if (cs == "mxl")
-                  importCompressedMusicXml(name);
-            else if (csl == "mid" || csl == "midi" || csl == "kar") {
-                  if (!importMidi(name))
-                        return false;
-                  }
-            else if (cs == "md") {
-                  if (!importMuseData(name))
-                        return false;
-                  }
-            else if (cs == "ly") {
-                  if (!importLilypond(name))
-                        return false;
-                  }
-            else if (csl == "mgu" || csl == "sgu") {
-                  if (!importBB(name))
-                        return false;
-                  }
-            else if (csl == "cap") {
-                  if (!importCapella(name))
-                        return false;
-                  connectSlurs();
-                  }
-            else if (csl == "ove") {
-            	    if(!importOve(name))
-            		        return false;
-			            }
-#ifdef OMR
-            else if (csl == "pdf") {
-                  if (!importPdf(name))
-                        return false;
-                  }
-#endif
-            else if (csl == "bww") {
-                  if (!importBww(name))
-                        return false;
-                  }
-            else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
-                  if (!importGTP(name))
-                        return false;
-                  }
-            else {
-                  printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
-                  return false;
-                  }
+            printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
+            return false;
             }
 
       renumberMeasures();
-      if (_mscVersion < 103) {
-            foreach(Staff* staff, _staves) {
-                  Part* part = staff->part();
-                  if (part->staves()->size() == 1)
-                        staff->setBarLineSpan(1);
-                  else {
-                        if (staff == part->staves()->front())
-                              staff->setBarLineSpan(part->staves()->size());
-                        else
-                              staff->setBarLineSpan(0);
-                        }
-                  }
-            }
       checkScore();
-
       rebuildMidiMapping();
       updateChannel();
-
       mscore->updateRecentScores(this);
 
-      startCmd();
       _needLayout = true;
       layoutFlags |= LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO;
-      endCmd();
+      doLayout();
 
       // adjust readPos
       scanElements(0, elementAdjustReadPos);
-
       return true;
       }
 
@@ -555,6 +534,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
             xml.tag("showOmr", _showOmr);
 #endif
 
+      xml.stag("Score");
       _syntiSettings.write(xml);
 
       xml.tag("Spatium", _spatium / DPMM);
@@ -625,6 +605,11 @@ void Score::write(Xml& xml, bool /*autosave*/)
             }
       xml.curTrack = -1;
       xml.tag("cursorTrack", _is.track());
+      foreach(Excerpt* excerpt, _excerpts)
+            excerpt->score()->write(xml, false);       // recursion
+      if (parentScore())
+            xml.tag("name", name());
+      xml.etag();
       }
 
 //---------------------------------------------------------

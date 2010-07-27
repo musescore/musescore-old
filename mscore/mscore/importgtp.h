@@ -42,6 +42,9 @@ struct GpBar {
       Fraction timesig;
       int keysig;
       QString marker;
+      int barLine;
+
+      GpBar();
       };
 
 //---------------------------------------------------------

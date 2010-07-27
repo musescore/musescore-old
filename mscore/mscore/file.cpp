@@ -1188,21 +1188,8 @@ bool Score::loadMsc(QString name)
             }
       f.close();
       docName = f.fileName();
-      return read(doc.documentElement());
-      }
 
-//---------------------------------------------------------
-//   read
-//    return false on error
-//---------------------------------------------------------
-
-bool Score::read(QDomElement e)
-      {
-      _fileDivision = 384;   // for compatibility with old mscore files
-
-      QDomElement dScore;
-
-      for (; !e.isNull(); e = e.nextSiblingElement()) {
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "museScore")
                   continue;
             QString version = e.attribute("version");
@@ -1212,42 +1199,21 @@ bool Score::read(QDomElement e)
                   // incompatible version
                   QMessageBox::critical(0, tr("MuseScore"),
                      QT_TRANSLATE_NOOP("score", "Cannot read this score:\n"
-                        "your version of MuseScore is too old.")
+                     "your version of MuseScore is too old.")
                      );
                   return false;
                   }
-            dScore = e.firstChildElement();
-            for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
-                  curTrack = -1;
+            if (_mscVersion < 117) {
+                  bool rv = read(e);
+                  if (rv)
+                        mscore->updateRecentScores(this);
+                  return rv;
+                  }
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   QString tag(ee.tagName());
+printf("tag <%s>\n", qPrintable(tag));
                   QString val(ee.text());
-                  int i = val.toInt();
-                  if (tag == "Staff")
-                        readStaff(ee);
-                  else if (tag == "KeySig") {
-                        KeySig* ks = new KeySig(this);
-                        ks->read(ee);
-                        customKeysigs.append(ks);
-                        }
-                  else if (tag == "StaffType") {
-                        int idx        = ee.attribute("idx").toInt();
-                        StaffType* ost = _staffTypes.value(idx);
-                        StaffType* st  = ost ? new StaffType(*ost) : new StaffType;
-                        st->read(ee);
-                        if (_staffTypes.value(idx)) {            // if there is already a stafftype
-                              if (_staffTypes[idx]->modified())  // if it belongs to Score()
-                                    delete _staffTypes[idx];
-                              _staffTypes[idx] = st;
-                              }
-                        else
-                              _staffTypes.append(st);
-                        st->setModified(true);
-                        }
-                  else if (tag == "siglist")
-                        _sigmap->read(ee, _fileDivision);
-                  else if (tag == "tempolist")        // obsolete
-                        ;           // _tempomap->read(ee, _fileDivision);
-                  else if (tag == "programVersion") {
+                  if (tag == "programVersion") {
                         QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
                         int v1, v2, v3, rv1, rv2, rv3;
                         if (re.indexIn(VERSION) != -1) {
@@ -1279,124 +1245,228 @@ bool Score::read(QDomElement e)
                         }
                   else if (tag == "programRevision")
                         ;
-                  else if (tag == "Mag" || tag == "MagIdx" || tag == "xoff" || tag == "yoff") {
-                        // obsolete
-                        ;
-                        }
-#ifdef OMR
-                  else if (tag == "Omr") {
-                        _omr = new Omr(this);
-                        _omr->read(ee);
-                        if (!_omr->read()) {
-                              delete _omr;
-                              _omr = 0;
-                              }
-                        }
-#endif
-                  else if (tag == "showOmr")
-                        _showOmr = i;
-                  else if (tag == "SyntiSettings")
-                        _syntiSettings.read(ee);
-                  else if (tag == "Spatium")
-                        setSpatium (val.toDouble() * DPMM);
-                  else if (tag == "Division")
-                        _fileDivision = i;
-                  else if (tag == "showInvisible")
-                        _showInvisible = i;
-                  else if (tag == "showFrames")
-                        _showFrames = i;
-                  else if (tag == "Style")
-                        _style.load(ee, _mscVersion);
-                  else if (tag == "TextStyle") {
-                        QString name = ee.attribute("name");
-                        TextStyle* s = 0;
-                        foreach(TextStyle* ts, textStyles()) {
-                              if (ts->name == name) {
-                                    s = ts;
-                                    break;
-                                    }
-                              }
-                        if (s == 0) {
-                              printf("new TextStyle <%s>\n", qPrintable(name));
-                              }
-                        else
-                              s->read(ee);
-                        }
-                  else if (tag == "page-layout")
-                        pageFormat()->read(ee);
-                  else if (tag == "rights") {   // obsolete
-                        if (rights == 0) {
-                              rights = new TextC(this);
-                              rights->setSubtype(TEXT_COPYRIGHT);
-                              rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
-                              }
-                        if (mscVersion() <= 103)
-                              rights->setHtml(val);
-                        else
-                              rights->setHtml(Xml::htmlToString(ee.firstChildElement()));
-                        }
-                  else if (tag == "copyright") {
-                        if (rights == 0) {
-                              rights = new TextC(this);
-                              rights->setSubtype(TEXT_COPYRIGHT);
-                              rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
-                              rights->read(ee);
-                              }
-                        }
-                  else if (tag == "movement-number")
-                        _movementNumber = val;
-                  else if (tag == "movement-title")
-                        _movementTitle = val;
-                  else if (tag == "work-number")
-                        _workNumber = val;
-                  else if (tag == "work-title")
-                        _workTitle = val;
-                  else if (tag == "source")
-                        _source = val;
-                  else if (tag == "Part") {
-                        Part* part = new Part(this);
-                        part->read(ee);
-                        _parts.push_back(part);
-                        }
-                  else if (tag == "showInvisible")
-                        _showInvisible = i;
-                  else if (tag == "showFrames")
-                        _showFrames = i;
-                  else if (tag == "Symbols")    // obsolete
-                        ;
-                  else if (tag == "cursorTrack") {
-                        if (i >= 0)
-                              setInputTrack(i);
-                        }
-                  else if (tag == "Slur") {
-                        Slur* slur = new Slur(this);
-                        slur->read(ee);
-                        _gel.append(slur);
-                        }
-                  else if ((_mscVersion < 116) &&     // skip and process in II. pass
-                     ((tag == "HairPin")
-                      || (tag == "Ottava")
-                      || (tag == "TextLine")
-                      || (tag == "Volta")
-                      || (tag == "Trill")
-                      || (tag == "Pedal"))) {
-                        ;
-                        }
-                  else if (tag == "Excerpt") {
-                        Excerpt* e = new Excerpt(this);
-                        e->read(ee);
-                        _excerpts.append(e);
-                        }
-                  else if (tag == "Beam") {
-                        Beam* beam = new Beam(this);
-                        beam->read(ee);
-                        beam->setParent(0);
-                        _beams.append(beam);
-                        }
+                  else if (tag == "Score")
+                        return read(ee);
                   else
                         domError(ee);
                   }
             }
+      mscore->updateRecentScores(this);
+      return false;
+      }
+
+//---------------------------------------------------------
+//   elementAdjustReadPos
+//---------------------------------------------------------
+
+static void elementAdjustReadPos(void*, Element* e)
+      {
+      if (e->isMovable())
+            e->adjustReadPos();
+      }
+
+//---------------------------------------------------------
+//   read
+//    return false on error
+//---------------------------------------------------------
+
+bool Score::read(QDomElement dScore)
+      {
+      _fileDivision = 384;   // for compatibility with old mscore files
+
+      if (parentScore())
+            setMscVersion(parentScore()->mscVersion());
+      dScore = dScore.firstChildElement();
+      for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
+            curTrack = -1;
+            QString tag(ee.tagName());
+            QString val(ee.text());
+            int i = val.toInt();
+            if (tag == "Staff")
+                  readStaff(ee);
+            else if (tag == "KeySig") {
+                  KeySig* ks = new KeySig(this);
+                  ks->read(ee);
+                  customKeysigs.append(ks);
+                  }
+            else if (tag == "StaffType") {
+                  int idx        = ee.attribute("idx").toInt();
+                  StaffType* ost = _staffTypes.value(idx);
+                  StaffType* st  = ost ? new StaffType(*ost) : new StaffType;
+                  st->read(ee);
+                  if (_staffTypes.value(idx)) {            // if there is already a stafftype
+                        if (_staffTypes[idx]->modified())  // if it belongs to Score()
+                              delete _staffTypes[idx];
+                        _staffTypes[idx] = st;
+                        }
+                  else
+                        _staffTypes.append(st);
+                  st->setModified(true);
+                  }
+            else if (tag == "siglist")
+                  _sigmap->read(ee, _fileDivision);
+            else if (tag == "tempolist")        // obsolete
+                  ;           // _tempomap->read(ee, _fileDivision);
+            else if (tag == "programVersion") {
+                  QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
+                  int v1, v2, v3, rv1, rv2, rv3;
+                  if (re.indexIn(VERSION) != -1) {
+                        QStringList sl = re.capturedTexts();
+                        if (sl.size() == 4) {
+                              v1 = sl[1].toInt();
+                              v2 = sl[2].toInt();
+                              v3 = sl[3].toInt();
+                              if (re.indexIn(val) != -1) {
+                                    sl = re.capturedTexts();
+                                    if (sl.size() == 4) {
+                                          rv1 = sl[1].toInt();
+                                          rv2 = sl[2].toInt();
+                                          rv3 = sl[3].toInt();
+
+                                          int currentVersion = v1 * 10000 + v2 * 100 + v3;
+                                          int readVersion = rv1 * 10000 + rv2 * 100 + v3;
+                                          if (readVersion > currentVersion) {
+                                                printf("read future version\n");
+                                                }
+                                          }
+                                    }
+                              else
+                                    printf("1cannot parse <%s>\n", qPrintable(val));
+                              }
+                        }
+                  else
+                        printf("2cannot parse <%s>\n", VERSION);
+                  }
+            else if (tag == "programRevision")
+                  ;
+            else if (tag == "Mag" || tag == "MagIdx" || tag == "xoff" || tag == "yoff") {
+                  // obsolete
+                  ;
+                  }
+#ifdef OMR
+            else if (tag == "Omr") {
+                  _omr = new Omr(this);
+                  _omr->read(ee);
+                  if (!_omr->read()) {
+                        delete _omr;
+                        _omr = 0;
+                        }
+                  }
+#endif
+            else if (tag == "showOmr")
+                  _showOmr = i;
+            else if (tag == "SyntiSettings")
+                  _syntiSettings.read(ee);
+            else if (tag == "Spatium")
+                  setSpatium (val.toDouble() * DPMM);
+            else if (tag == "Division")
+                  _fileDivision = i;
+            else if (tag == "showInvisible")
+                  _showInvisible = i;
+            else if (tag == "showFrames")
+                  _showFrames = i;
+            else if (tag == "Style")
+                  _style.load(ee, _mscVersion);
+            else if (tag == "TextStyle") {
+                  QString name = ee.attribute("name");
+                  TextStyle* s = 0;
+                  foreach(TextStyle* ts, textStyles()) {
+                        if (ts->name == name) {
+                              s = ts;
+                              break;
+                              }
+                        }
+                  if (s == 0) {
+                        printf("new TextStyle <%s>\n", qPrintable(name));
+                        }
+                  else
+                        s->read(ee);
+                  }
+            else if (tag == "page-layout")
+                  pageFormat()->read(ee);
+            else if (tag == "rights") {   // obsolete
+                  if (rights == 0) {
+                        rights = new TextC(this);
+                        rights->setSubtype(TEXT_COPYRIGHT);
+                        rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
+                        }
+                  if (mscVersion() <= 103)
+                        rights->setHtml(val);
+                  else
+                        rights->setHtml(Xml::htmlToString(ee.firstChildElement()));
+                  }
+            else if (tag == "copyright") {
+                  if (rights == 0) {
+                        rights = new TextC(this);
+                        rights->setSubtype(TEXT_COPYRIGHT);
+                        rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
+                        rights->read(ee);
+                        }
+                  }
+            else if (tag == "movement-number")
+                  _movementNumber = val;
+            else if (tag == "movement-title")
+                  _movementTitle = val;
+            else if (tag == "work-number")
+                  _workNumber = val;
+            else if (tag == "work-title")
+                  _workTitle = val;
+            else if (tag == "source")
+                  _source = val;
+            else if (tag == "Part") {
+                  Part* part = new Part(this);
+                  part->read(ee);
+                  _parts.push_back(part);
+                  }
+            else if (tag == "showInvisible")
+                  _showInvisible = i;
+            else if (tag == "showFrames")
+                  _showFrames = i;
+            else if (tag == "Symbols")    // obsolete
+                  ;
+            else if (tag == "cursorTrack") {
+                  if (i >= 0)
+                        setInputTrack(i);
+                  }
+            else if (tag == "Slur") {
+                  Slur* slur = new Slur(this);
+                  slur->read(ee);
+                  _gel.append(slur);
+                  }
+            else if ((_mscVersion < 116) &&     // skip and process in II. pass
+               ((tag == "HairPin")
+                || (tag == "Ottava")
+                || (tag == "TextLine")
+                || (tag == "Volta")
+                || (tag == "Trill")
+                || (tag == "Pedal"))) {
+                  ;
+                  }
+            else if (tag == "Excerpt") {
+                  Excerpt* e = new Excerpt(this);
+                  e->read(ee);
+                  _excerpts.append(e);
+                  }
+            else if (tag == "Beam") {
+                  Beam* beam = new Beam(this);
+                  beam->read(ee);
+                  beam->setParent(0);
+                  _beams.append(beam);
+                  }
+            else if (tag == "Score") {          // recursion
+                  Score* s = new Score(style());
+                  s->setParentScore(this);
+                  Excerpt* ex = new Excerpt(s);
+                  _excerpts.append(ex);
+                  s->read(ee);
+printf("add excerpt <%s>\n", qPrintable(s->name()));
+                  }
+            else if (tag == "name")
+                  setName(val);
+            else
+                  domError(ee);
+            }
+
       if (_mscVersion < 108)
             connectSlurs();
 
@@ -1511,6 +1581,32 @@ printf("incomplete Slur\n");
 
       if (_omr == 0)
             _showOmr = false;
+
+      renumberMeasures();
+      if (_mscVersion < 103) {
+            foreach(Staff* staff, _staves) {
+                  Part* part = staff->part();
+                  if (part->staves()->size() == 1)
+                        staff->setBarLineSpan(1);
+                  else {
+                        if (staff == part->staves()->front())
+                              staff->setBarLineSpan(part->staves()->size());
+                        else
+                              staff->setBarLineSpan(0);
+                        }
+                  }
+            }
+      checkScore();
+
+      rebuildMidiMapping();
+      updateChannel();
+
+      _needLayout = true;
+      layoutFlags |= LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO;
+      doLayout();
+
+      // adjust readPos
+      scanElements(0, elementAdjustReadPos);
 
       return true;
       }
