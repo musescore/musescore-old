@@ -200,6 +200,9 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(LayoutFlags)
 class Score : public QObject {
       Q_OBJECT
 
+      Score* _parentScore;          // set if score is an excerpt (part)
+      QList<Excerpt*> _excerpts;
+
       double _spatium;
       PageFormat* _pageFormat;
       QPaintDevice* _paintDevice;
@@ -231,8 +234,6 @@ class Score : public QObject {
       AL::TempoMap* _tempomap;
 
       InputState _is;
-
-      QList<Excerpt*> _excerpts;
 
       Style _style;
       QVector<TextStyle*> _textStyles;
@@ -333,7 +334,7 @@ class Score : public QObject {
 
       void cmdAddChordName2();
       int processPendingNotes(QList<MNote*>* notes, int, int);
-      void writeExcerpt(Excerpt*, Xml&);
+//      void writeExcerpt(Excerpt*, Xml&);
       void cmdResetBeamMode();
       void connectSlurs();
       void tupletDialog();
@@ -669,7 +670,7 @@ class Score : public QObject {
       void addLyrics(int tick, int staffIdx, const QString&);
 
       QList<Excerpt*>* excerpts()  { return &_excerpts; }
-      Score* createExcerpt(Excerpt*);
+//      Score* createExcerpt(Excerpt*);
       MeasureBaseList* measures()  { return &_measures; }
 
       bool checkHasMeasures() const;
@@ -813,6 +814,8 @@ class Score : public QObject {
       void updateHairpin(Hairpin*);       // add/modify hairpin to pitchOffset list
       void removeHairpin(Hairpin*);       // remove hairpin from pitchOffset list
       Volta* searchVolta(int tick) const;
+      Score* parentScore() const    { return _parentScore; }
+      void setParentScore(Score* s) { _parentScore = s;    }
       };
 
 extern Score* gscore;

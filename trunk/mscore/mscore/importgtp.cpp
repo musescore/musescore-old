@@ -37,6 +37,7 @@
 #include "slur.h"
 #include "tuplet.h"
 #include "barline.h"
+#include "excerpt.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -48,6 +49,17 @@ const char* GuitarPro::errmsg[] = {
       "unexpected end of file",
       "bad number of strings",
       };
+
+//---------------------------------------------------------
+//   GpBar
+//---------------------------------------------------------
+
+GpBar::GpBar()
+      {
+      barLine = NORMAL_BAR;
+      keysig  = 0;
+      timesig = Fraction(4,4);
+      }
 
 //---------------------------------------------------------
 //   GuitarPro
@@ -600,10 +612,8 @@ printf("BeginRepeat=============================================\n");
                   bar.keysig = readUChar();
                   uchar c    = readUChar();        // minor
                   }
-            if (barBits & 0x80) {
-printf("doubleBar=============================================\n");
-                  // double bar
-                  }
+            if (barBits & 0x80)
+                  bar.barLine = DOUBLE_BAR;
             bar.timesig = Fraction(tnumerator, tdenominator);
             bars.append(bar);
             }
@@ -1088,10 +1098,8 @@ printf("BeginRepeat=============================================\n");
                   bar.keysig = readUChar();
                   uchar c    = readUChar();        // minor
                   }
-            if (barBits & 0x80) {
-printf("doubleBar=============================================\n");
-                  // double bar
-                  }
+            if (barBits & 0x80)
+                  bar.barLine = DOUBLE_BAR;
             bar.timesig = Fraction(tnumerator, tdenominator);
             bars.append(bar);
             }
@@ -1635,10 +1643,8 @@ printf("BeginRepeat=============================================\n");
                   bar.keysig = readUChar();
                   uchar c    = readUChar();        // minor
                   }
-            if (barBits & 0x80) {
-printf("doubleBar=============================================\n");
-                  // double bar
-                  }
+            if (barBits & 0x80)
+                  bar.barLine = DOUBLE_BAR;
             bar.timesig = Fraction(tnumerator, tdenominator);
             bars.append(bar);
             }
@@ -2306,10 +2312,8 @@ printf("BeginRepeat=============================================\n");
                   bar.keysig = readUChar();
                   uchar c    = readUChar();        // minor
                   }
-            if (barBits & 0x80) {
-printf("doubleBar=============================================\n");
-                  // double bar
-                  }
+            if (barBits & 0x80)
+                  bar.barLine = DOUBLE_BAR;
             if (barBits & 0x3)
                   skip(4);
             if ((barBits & 0x10) == 0)
@@ -2355,15 +2359,17 @@ printf("doubleBar=============================================\n");
 
       for (int i = 0; i < staves; ++i) {
             int tuning[GP_MAX_STRING_NUMBER];
+            Staff* staff = score->staff(i);
+            Part* part = staff->part();
 
-            uchar c      = readUChar();   // simulations bitmask
+            uchar c = readUChar();   // simulations bitmask
             if (c & 0x2) {                // 12 stringed guitar
                   }
             if (c & 0x4) {                // banjo track
                   }
-            if (i == 0 || version == 500)
-                  skip(1);
+            skip(1);
             QString name = readPascalString(40);
+
             int strings  = readInt();
             if (strings <= 0 || strings > GP_MAX_STRING_NUMBER)
                   throw GP_BAD_NUMBER_OF_STRINGS ;
@@ -2394,15 +2400,14 @@ printf("midi %d %d %d  frets %d capo %d color %d\n", midiPort, midiChannel,
             for (int k = 0; k < strings; ++k)
                   tuning2[strings-k-1] = tuning[k];
             Tablature* tab = new Tablature(frets, strings, tuning2);
-            Part* part = score->part(i);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
             instr->setTrackName(name);
+            part->setLongName(name);
 
             //
             // determine clef
             //
-            Staff* staff = score->staff(i);
             int patch = channelDefaults[midiChannel].patch;
             int clefId = CLEF_G;
             if (c & 0x1) {
@@ -2575,7 +2580,30 @@ bool Score::importGTP(const QString& name)
             s->setText(gp->artist);
             m->add(s);
             }
-      delete gp;
+      int idx = 0;
+
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure(), ++idx) {
+            const GpBar& bar = gp->bars[idx];
+            if (bar.barLine != NORMAL_BAR)
+                  m->setEndBarLineType(bar.barLine, false);
+            }
+      //
+      // create excerpts
+      //
+      foreach(Part* part, _parts) {
+            QList<Part*> partList;
+            partList.append(part);
+
+            Score* score = createExcerpt(partList);
+#if 0
+            Instrument* instr = part->instr();
+            QString name      = instr->trackName();
+            e->setName(name);
+            e->setTitle(part->longName()->getText());
+            e->parts()->append(part);
+            _excerpts.append(e);
+#endif
+            }
       lastMeasure()->setEndBarLineType(END_BAR, false);
 
 //      album
@@ -2583,6 +2611,7 @@ bool Score::importGTP(const QString& name)
 
       _saved = false;
       _created = true;
+      delete gp;
       return true;
       }
 

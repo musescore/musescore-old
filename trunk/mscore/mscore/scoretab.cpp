@@ -76,9 +76,20 @@ ScoreView* ScoreTab::view(int n) const
       return 0;
       }
 
+//---------------------------------------------------------
+//   viewSplitter
+//---------------------------------------------------------
+
 QSplitter* ScoreTab::viewSplitter(int n) const
       {
-      Score* score = scoreList->value(n);
+      TabScoreView* tsv = static_cast<TabScoreView*>(tab->tabData(n).value<void*>());
+      Score* score = tsv->score;
+      if (tsv->part) {
+            QList<Excerpt*>* excerpts = score->excerpts();
+            if (excerpts && !excerpts->isEmpty())
+                  score = excerpts->at(tsv->part - 1)->score();
+            }
+
       for (int i = 0; i < stack->count(); ++i) {
             QSplitter* sp = static_cast<QSplitter*>(stack->widget(i));
             ScoreView* v = static_cast<ScoreView*>(sp->widget(0));
@@ -98,6 +109,7 @@ void ScoreTab::setCurrent(int n)
             emit currentScoreViewChanged(0);
             return;
             }
+      TabScoreView* tsv = static_cast<TabScoreView*>(tab->tabData(n).value<void*>());
       QSplitter* vs = viewSplitter(n);
 
       ScoreView* v;
@@ -105,6 +117,9 @@ void ScoreTab::setCurrent(int n)
             Score* score = scoreList->value(n);
             vs = new QSplitter;
             v = new ScoreView;
+            tab2->blockSignals(true);
+            tab2->setCurrentIndex(0);
+            tab2->blockSignals(false);
             vs->addWidget(v);
             v->setScore(scoreList->value(n));
             stack->addWidget(vs);
@@ -134,24 +149,26 @@ void ScoreTab::setCurrent(int n)
       stack->setCurrentWidget(vs);
       if (v) {
             Score* score = v->score();
+            if (score->parentScore())
+                  score = score->parentScore();
             QList<Excerpt*>* excerpts = score->excerpts();
-            if (excerpts && !excerpts->isEmpty()) {
+            if (v && excerpts && !excerpts->isEmpty()) {
                   int n = tab2->count();
+                  tab2->blockSignals(true);
                   for (int i = 0; i < n; ++i)
                         tab2->removeTab(0);
                   tab2->addTab(score->name());
-                  foreach(Excerpt* excerpt, *excerpts) {
-                        tab2->addTab(excerpt->name());
-                        }
+                  foreach(Excerpt* excerpt, *excerpts)
+                        tab2->addTab(excerpt->score()->name());
                   tab2->setVisible(true);
+                  tab2->setCurrentIndex(tsv->part);
+                  tab2->blockSignals(false);
                   }
-            else {
+            else
                   tab2->setVisible(false);
-                  }
             }
-      else {
+      else
             tab2->setVisible(false);
-            }
       emit currentScoreViewChanged(v);
       }
 
@@ -159,19 +176,47 @@ void ScoreTab::setCurrent(int n)
 //   setExcerpt
 //---------------------------------------------------------
 
-void ScoreTab::setExcerpt(int idx)
+void ScoreTab::setExcerpt(int n)
       {
-      printf("setExcerpt %d\n", idx);
+      if (n == -1)
+            return;
+      int idx           = tab->currentIndex();
+      TabScoreView* tsv = static_cast<TabScoreView*>(tab->tabData(idx).value<void*>());
+      tsv->part         = n;
+      QSplitter* vs     = viewSplitter(idx);
+      ScoreView* v;
+      Score* score = tsv->score;
+      if (n) {
+            QList<Excerpt*>* excerpts = score->excerpts();
+            if (excerpts && !excerpts->isEmpty()) {
+                  score = excerpts->at(n - 1)->score();
+                  }
+            }
+
+      if (!vs) {
+            vs = new QSplitter;
+            v = new ScoreView;
+            vs->addWidget(v);
+            v->setScore(score);
+            stack->addWidget(vs);
+            }
+      else
+            v = static_cast<ScoreView*>(vs->widget(0));
+      stack->setCurrentWidget(vs);
+      emit currentScoreViewChanged(v);
       }
 
 //---------------------------------------------------------
 //   insertTab
 //---------------------------------------------------------
 
-void ScoreTab::insertTab(int idx, const QString& s)
+void ScoreTab::insertTab(Score* s)
       {
-      tab->insertTab(idx, s);
-      tab->setTabData(idx, QVariant::fromValue<void*>(scoreList->value(idx)));
+      int idx = scoreList->indexOf(s);
+      tab->blockSignals(true);
+      tab->insertTab(idx, s->name());
+      tab->setTabData(idx, QVariant::fromValue<void*>(new TabScoreView(s)));
+      tab->blockSignals(false);
       }
 
 //---------------------------------------------------------
@@ -210,7 +255,9 @@ void ScoreTab::setCurrentIndex(int idx)
 
 void ScoreTab::removeTab(int idx)
       {
-      Score* score = static_cast<Score*>(tab->tabData(idx).value<void*>());
+      TabScoreView* tsv = static_cast<TabScoreView*>(tab->tabData(idx).value<void*>());
+      Score* score = tsv->score;
+
       for (int i = 0; i < stack->count(); ++i) {
             ScoreView* v = static_cast<ScoreView*>(stack->widget(i));
             if (v->score() == score) {

@@ -32,7 +32,7 @@ ExcerptItem::ExcerptItem(Excerpt* e, QListWidget* parent)
    : QListWidgetItem(parent)
       {
       _excerpt = e;
-      setText(e->name());
+      setText(e->score()->name());
       }
 
 //---------------------------------------------------------
@@ -161,19 +161,21 @@ void ExcerptsDialog::deleteClicked()
 
 void ExcerptsDialog::newClicked()
       {
-      Excerpt* e = new Excerpt(score);
+      Score* nscore = new Score(score->style());
+      nscore->setParentScore(score);
+      Excerpt* e = new Excerpt(nscore);
       QString name;
       for (int i = 1;; ++i) {
             name = tr("Part-%1").arg(i);
             Excerpt* ee = 0;
             foreach(ee, el) {
-                  if (ee->name() == name)
+                  if (ee->score()->name() == name)
                         break;
                   }
-            if ((ee == 0) || (ee->name() != name))
+            if ((ee == 0) || (ee->score()->name() != name))
                   break;
             }
-      e->setName(name);
+      nscore->setName(name);
       el.append(e);
       ExcerptItem* ei = new ExcerptItem(e);
       excerptList->addItem(ei);
@@ -190,8 +192,8 @@ void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev)
       if (prev) {
             Excerpt* pex = ((ExcerptItem*)prev)->excerpt();
             prev->setText(name->text());
-            pex->setName(name->text());
-            pex->setTitle(title->text());
+//TODOx            pex->setName(name->text());
+//TODOx            pex->setTitle(title->text());
             int n = partList->count();
             pex->parts()->clear();
             for (int i = 0; i < n; ++i) {
@@ -202,8 +204,8 @@ void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev)
             }
       if (cur) {
             Excerpt* e = ((ExcerptItem*)cur)->excerpt();
-            name->setText(e->name());
-            title->setText(e->title());
+            name->setText(e->score()->name());
+//TODOx            title->setText(e->title());
 
             // set selection:
             QList<Part*>* pl = e->parts();
@@ -256,6 +258,7 @@ void ExcerptsDialog::createExcerptClicked()
 
 void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       {
+#if 0       //TODO-x
       excerptChanged(cur, cur);
       Excerpt* excerpt = ((ExcerptItem*)cur)->excerpt();
       Score* nscore = score->createExcerpt(excerpt);
@@ -265,6 +268,7 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       nscore->layout();
 
       mscore->appendScore(nscore);
+#endif
       }
 
 

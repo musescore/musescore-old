@@ -219,10 +219,14 @@ KeySigEvent Staff::key(int tick) const
 void Staff::write(Xml& xml) const
       {
       int idx = score()->staffIdx(this);
-      xml.stag(QString("Staff id=\"%1\"").arg(idx));
+      xml.stag(QString("Staff id=\"%1\"").arg(idx+1));
       if (linkedStaves()) {
+            Score* s = score();
+            if (s->parentScore())
+                  s = s->parentScore();
             foreach(Staff* staff, linkedStaves()->staves()) {
-                  xml.tag("linkedTo", score()->staffIdx(staff));
+                  if (staff->score() == s)
+                        xml.tag("linkedTo", s->staffIdx(staff) + 1);
                   }
             }
       xml.tag("type", score()->staffTypes().indexOf(_staffType));
@@ -273,9 +277,18 @@ void Staff::read(QDomElement e)
             else if (tag == "barLineSpan")
                   _barLineSpan = v;
             else if (tag == "linkedTo") {
-                  int idx = score()->staffIdx(this);
-                  if (v < idx)
-                        linkTo(score()->staff(v));
+                  v -= 1;
+                  //
+                  // if this is an excerpt, link staff to parentScore()
+                  //
+                  if (score()->parentScore()) {
+                        linkTo(score()->parentScore()->staff(v));
+                        }
+                  else {
+                        int idx = score()->staffIdx(this);
+                        if (v < idx)
+                              linkTo(score()->staff(v));
+                        }
                   }
             else
                   domError(e);

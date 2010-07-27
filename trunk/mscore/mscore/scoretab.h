@@ -25,6 +25,19 @@ class ScoreView;
 class Score;
 
 //---------------------------------------------------------
+//   TabScoreView
+//---------------------------------------------------------
+
+struct TabScoreView {
+      Score* score;
+      int part;
+      TabScoreView(Score* s) {
+            score = s;
+            part  = 0;
+            }
+      };
+
+//---------------------------------------------------------
 //   ScoreTab
 //---------------------------------------------------------
 
@@ -45,7 +58,7 @@ class ScoreTab : public QWidget {
 
    public:
       ScoreTab(QList<Score*>*, QWidget* parent = 0);
-      void insertTab(int idx, const QString&);
+      void insertTab(Score*);
       void setTabText(int, const QString&);
       int currentIndex() const;
       void setCurrentIndex(int);

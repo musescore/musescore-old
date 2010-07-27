@@ -38,6 +38,7 @@
 
 void Excerpt::read(QDomElement e)
       {
+#if 0
       const QList<Part*>* pl = score->parts();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag = e.tagName();
@@ -53,6 +54,7 @@ void Excerpt::read(QDomElement e)
                         _parts.append(pl->at(partIdx));
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -61,6 +63,7 @@ void Excerpt::read(QDomElement e)
 
 void Excerpt::write(Xml& xml) const
       {
+#if 0
       xml.stag("Excerpt");
       xml.tag("name", _name);
       xml.tag("title", _title);
@@ -68,6 +71,7 @@ void Excerpt::write(Xml& xml) const
       foreach(Part* const part, _parts)
             xml.tag("part", pl->indexOf(part));
       xml.etag();
+#endif
       }
 
 //---------------------------------------------------------
@@ -76,7 +80,7 @@ void Excerpt::write(Xml& xml) const
 
 bool Excerpt::operator!=(const Excerpt& e) const
       {
-      if (e.score != score)
+      if (e._score != _score)
             return true;
       if (e._name != _name)
             return true;
@@ -87,6 +91,7 @@ bool Excerpt::operator!=(const Excerpt& e) const
       return false;
       }
 
+#if 0
 //---------------------------------------------------------
 //   createExcerpt
 //---------------------------------------------------------
@@ -263,4 +268,17 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
             }
       xml.tag("cursorTrack", _is.track());
       }
+#endif
 
+//---------------------------------------------------------
+//   createExcerpt
+//---------------------------------------------------------
+
+Score* createExcerpt(const QList<Part*>& parts)
+      {
+      if (parts.isEmpty())
+            return 0;
+      Score* oscore = parts.front()->score();
+      Score* score = new Score(oscore->style());
+      score->setParentScore(oscore);
+      }

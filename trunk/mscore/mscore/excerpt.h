@@ -30,24 +30,23 @@ class Xml;
 //---------------------------------------------------------
 
 class Excerpt {
-      Score* score;
+      Score* _score;
       QString _name;
       QString _title;
       QList<Part*> _parts;
 
    public:
-      Excerpt(Score* s)               { score = s; }
-      QString name() const            { return _name;   }
-      QString title() const           { return _title;  }
+      Excerpt(Score* s)               { _score = s; }
       QList<Part*>* parts()           { return &_parts; }
-      void setName(const QString& s)  { _name = s;      }
-      void setTitle(const QString& s) { _title = s;     }
+      Score* score() const            { return _score;  }
 
       void write(Xml&) const;
       void read(QDomElement);
 
       bool operator!=(const Excerpt&) const;
       };
+
+extern Score* createExcerpt(const QList<Part*>&);
 
 #endif
 
