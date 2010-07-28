@@ -218,8 +218,9 @@ class Measure : public MeasureBase {
       void setMmEndBarLineType(int v)           { _mmEndBarLineType = v;    }
       bool setStartRepeatBarLine(bool);
       bool endBarLineGenerated() const          { return _endBarLineGenerated; }
-      void setEndBarLineGenerated(bool v)       { _endBarLineGenerated = v; }
+      void setEndBarLineGenerated(bool v)       { _endBarLineGenerated = v;    }
       bool endBarLineVisible() const            { return _endBarLineVisible;   }
+      QColor endBarLineColor() const            { return _endBarLineColor;     }
 
       void cmdRemoveEmptySegment(Segment* s);
       virtual void scanElements(void* data, void (*func)(void*, Element*));

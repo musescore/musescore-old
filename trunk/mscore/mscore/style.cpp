@@ -245,7 +245,8 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_RIGHT | ALIGN_VCENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsExcerpt"), ff, 18, false, false, false,
-         ALIGN_LEFT | ALIGN_BOTTOM, 0.0, 0.0, OA, 0, 100),
+//         ALIGN_LEFT | ALIGN_BOTTOM, 0.0, 0.0, OA, 0, 100),
+         ALIGN_LEFT | ALIGN_TOP, 0.0, 0.0, OA, 0, 0),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Dynamics"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS, 0, 0, true),

@@ -1169,6 +1169,7 @@ printf("BeginRepeat=============================================\n");
             Instrument* instr = part->instr();
             instr->setTablature(tab);
             instr->setTrackName(name);
+            part->setLongName(name);
 
             //
             // determine clef
@@ -1715,6 +1716,7 @@ printf("track %d strings %d <%s>\n", i, strings, qPrintable(name));
             Instrument* instr = part->instr();
             instr->setTablature(tab);
             instr->setTrackName(name);
+            part->setLongName(name);
 
             //
             // determine clef
@@ -2587,6 +2589,7 @@ bool Score::importGTP(const QString& name)
             if (bar.barLine != NORMAL_BAR)
                   m->setEndBarLineType(bar.barLine, false);
             }
+      lastMeasure()->setEndBarLineType(END_BAR, false);
       //
       // create excerpts
       //
@@ -2595,16 +2598,10 @@ bool Score::importGTP(const QString& name)
             partList.append(part);
 
             Score* score = createExcerpt(partList);
-#if 0
-            Instrument* instr = part->instr();
-            QString name      = instr->trackName();
-            e->setName(name);
-            e->setTitle(part->longName()->getText());
-            e->parts()->append(part);
-            _excerpts.append(e);
-#endif
+            score->setName(part->instr()->trackName());
+            Excerpt* excerpt = new Excerpt(score);
+            _excerpts.append(excerpt);
             }
-      lastMeasure()->setEndBarLineType(END_BAR, false);
 
 //      album
 //      copyright
