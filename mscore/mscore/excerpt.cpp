@@ -310,6 +310,7 @@ Score* createExcerpt(const QList<Part*>& parts)
                   int idx = score->staffTypes().indexOf(st);
                   if (idx == -1)
                         score->staffTypes().append(st);
+                  printf("staff type %s\n", qPrintable(st->name()));
 
                   s->linkTo(staff);
                   p->staves()->append(s);
@@ -319,6 +320,43 @@ Score* createExcerpt(const QList<Part*>& parts)
                   }
             score->appendPart(p);
             }
+      cloneStaves(oscore, score, srcStaves);
+
+      //
+      // create excerpt title
+      //
+      MeasureBase* measure = score->first();
+      if (!measure || (measure->type() != VBOX)) {
+            measure = new VBox(score);
+            measure->setTick(0);
+            score->addMeasure(measure);
+            }
+      Text* txt = new Text(score);
+      txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
+      txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
+      txt->setText(parts.front()->longName()->getText());
+      measure->add(txt);
+
+      //
+      // layout score
+      //
+      score->setPlaylistDirty(true);
+      score->rebuildMidiMapping();
+      score->updateChannel();
+
+      score->setLayoutAll(true);
+      score->addLayoutFlag(LAYOUT_FIX_TICKS);
+      score->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+      score->doLayout();
+      return score;
+      }
+
+//---------------------------------------------------------
+//   cloneStaves
+//---------------------------------------------------------
+
+void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
+      {
       MeasureBaseList* nmbl = score->measures();
       for(MeasureBase* mb = oscore->measures()->first(); mb; mb = mb->next()) {
             MeasureBase* nmb = 0;
@@ -348,7 +386,7 @@ Score* createExcerpt(const QList<Part*>& parts)
                   Fraction ts = nm->len();
                   int tracks = score->nstaves() * VOICES;
                   for (int track = 0; track < tracks; ++track) {
-                        int srcTrack = srcStaves[track/VOICES] * VOICES + (track % VOICES);
+                        int srcTrack = map[track/VOICES] * VOICES + (track % VOICES);
                         for (Segment* seg = m->first(); seg; seg = seg->next()) {
                               Element* e = seg->element(srcTrack);
                               if (e == 0)
@@ -356,7 +394,7 @@ Score* createExcerpt(const QList<Part*>& parts)
                               Element* el = e->clone();
                               el->setTrack(track);
                               el->scanElements(score, localSetScore);
-//                              el->setScore(score);
+                              el->setScore(score);
                               Segment* s = nm->getSegment(SegmentType(seg->subtype()), seg->tick());
                               s->add(el);
                               }
@@ -369,33 +407,5 @@ Score* createExcerpt(const QList<Part*>& parts)
                   }
             nmbl->add(nmb);
             }
-
-      //
-      // create excerpt title
-      //
-      MeasureBase* measure = score->first();
-      if (!measure || (measure->type() != VBOX)) {
-            measure = new VBox(score);
-            measure->setTick(0);
-            score->addMeasure(measure);
-            }
-      Text* txt = new Text(score);
-      txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
-      txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
-      txt->setText(parts.front()->longName()->getText());
-      measure->add(txt);
-
-      //
-      // layout score
-      //
-      score->setPlaylistDirty(true);
-      score->rebuildMidiMapping();
-      score->updateChannel();
-
-      score->setLayoutAll(true);
-      score->addLayoutFlag(LAYOUT_FIX_TICKS);
-      score->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
-      score->doLayout();
-      return score;
       }
 

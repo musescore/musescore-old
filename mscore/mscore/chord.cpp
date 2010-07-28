@@ -265,13 +265,14 @@ Chord::Chord(const Chord& c)
       foreach(Note* n, c.notes())
             add(new Note(*n));
 
+#if 0
       foreach(const LedgerLine* ll, c._ledgerLines) {
             LedgerLine* l = new LedgerLine(*ll);
             l->setParent(this);
             l->setTrack(track());
             _ledgerLines.append(new LedgerLine(*ll));
             }
-
+#endif
       _stem          = 0;
       _hook          = 0;
       _glissando     = 0;
