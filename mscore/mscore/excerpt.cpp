@@ -31,6 +31,9 @@
 #include "slur.h"
 #include "al/sig.h"
 #include "al/tempo.h"
+#include "measure.h"
+#include "rest.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   read
@@ -271,6 +274,15 @@ void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
 #endif
 
 //---------------------------------------------------------
+//   localSetScore
+//---------------------------------------------------------
+
+static void localSetScore(void* score, Element* element)
+      {
+      element->setScore((Score*)score);
+      }
+
+//---------------------------------------------------------
 //   createExcerpt
 //---------------------------------------------------------
 
@@ -278,7 +290,112 @@ Score* createExcerpt(const QList<Part*>& parts)
       {
       if (parts.isEmpty())
             return 0;
+      QList<int> srcStaves;
+
       Score* oscore = parts.front()->score();
       Score* score = new Score(oscore->style());
       score->setParentScore(oscore);
+      foreach (Part* part, parts) {
+            Part* p = new Part(score);
+            p->setInstrument(*part->instr());
+            int idx = 0;
+            foreach(Staff* staff, *part->staves()) {
+                  Staff* s = new Staff(score, p, idx);
+                  s->setUpdateClefList(true);
+                  s->setUpdateKeymap(true);
+                  StaffType* st = staff->staffType();
+                  if (st->modified())
+                        st = new StaffType(*st);
+                  s->setStaffType(staff->staffType());
+                  int idx = score->staffTypes().indexOf(st);
+                  if (idx == -1)
+                        score->staffTypes().append(st);
+
+                  s->linkTo(staff);
+                  p->staves()->append(s);
+                  score->staves().append(s);
+                  srcStaves.append(oscore->staffIdx(staff));
+                  ++idx;
+                  }
+            score->appendPart(p);
+            }
+      MeasureBaseList* nmbl = score->measures();
+      for(MeasureBase* mb = oscore->measures()->first(); mb; mb = mb->next()) {
+            MeasureBase* nmb = 0;
+            if (mb->type() == HBOX)
+                  nmb = new HBox(score);
+            else if (mb->type() == VBOX)
+                  nmb = new VBox(score);
+            else if (mb->type() == MEASURE) {
+                  Measure* m  = static_cast<Measure*>(mb);
+                  Measure* nm = new Measure(score);
+                  nmb = nm;
+                  nm->setTick(m->tick());
+                  nm->setLen(m->len());
+                  nm->setTimesig(m->timesig());
+                  nm->setRepeatCount(m->repeatCount());
+                  nm->setRepeatFlags(m->repeatFlags());
+                  nm->setIrregular(m->irregular());
+                  nm->setNo(m->no());
+                  nm->setNoOffset(m->noOffset());
+                  nm->setBreakMultiMeasureRest(m->breakMultiMeasureRest());
+                  nm->setEndBarLineType(
+                     m->endBarLineType(),
+                     m->endBarLineGenerated(),
+                     m->endBarLineVisible(),
+                     m->endBarLineColor());
+
+                  Fraction ts = nm->len();
+                  int tracks = score->nstaves() * VOICES;
+                  for (int track = 0; track < tracks; ++track) {
+                        int srcTrack = srcStaves[track/VOICES] * VOICES + (track % VOICES);
+                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                              Element* e = seg->element(srcTrack);
+                              if (e == 0)
+                                    continue;
+                              Element* el = e->clone();
+                              el->setTrack(track);
+                              el->scanElements(score, localSetScore);
+//                              el->setScore(score);
+                              Segment* s = nm->getSegment(SegmentType(seg->subtype()), seg->tick());
+                              s->add(el);
+                              }
+                        }
+                  }
+            foreach(Element* e, *mb->el()) {
+                  Element* ne = e->clone();
+                  ne->setScore(score);
+                  nmb->add(ne);
+                  }
+            nmbl->add(nmb);
+            }
+
+      //
+      // create excerpt title
+      //
+      MeasureBase* measure = score->first();
+      if (!measure || (measure->type() != VBOX)) {
+            measure = new VBox(score);
+            measure->setTick(0);
+            score->addMeasure(measure);
+            }
+      Text* txt = new Text(score);
+      txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
+      txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
+      txt->setText(parts.front()->longName()->getText());
+      measure->add(txt);
+
+      //
+      // layout score
+      //
+      score->setPlaylistDirty(true);
+      score->rebuildMidiMapping();
+      score->updateChannel();
+
+      score->setLayoutAll(true);
+      score->addLayoutFlag(LAYOUT_FIX_TICKS);
+      score->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+      score->doLayout();
+      return score;
       }
+
