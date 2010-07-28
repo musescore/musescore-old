@@ -47,6 +47,7 @@ class Excerpt {
       };
 
 extern Score* createExcerpt(const QList<Part*>&);
+extern void cloneStaves(Score* oscore, Score* score, const QList<int>& map);
 
 #endif
 

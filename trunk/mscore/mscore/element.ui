@@ -64,6 +64,13 @@
          </spacer>
         </item>
         <item>
+         <widget class="QLabel" name="score">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="address">
           <property name="toolTip">
            <string notr="true"/>

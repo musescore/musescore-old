@@ -1228,10 +1228,10 @@ void Note::layout1(char* tversatz)
             //
             // calculate the real note line depending on clef
             //
-            Staff* s     = score()->staff(staffIdx() + chord()->staffMove());
-            int tick     = chord()->tick();
-            int clef     = s->clefList()->clef(tick);
-            _line        = 127 - _line - 82 + clefTable[clef].yOffset;
+            Staff* s = score()->staff(staffIdx() + chord()->staffMove());
+            int tick = chord()->tick();
+            int clef = s->clefList()->clef(tick);
+            _line    = 127 - _line - 82 + clefTable[clef].yOffset;
             }
       }
 

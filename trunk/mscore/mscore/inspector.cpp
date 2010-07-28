@@ -1571,6 +1571,7 @@ void ShowElementBase::setElement(Element* e)
       el = e;
 
       eb.address->setText(QString("%1").arg((unsigned long)e, 0, 16));
+      eb.score->setText(QString("%1").arg((unsigned long)(e->score()), 0, 16));
 
       eb.subtype->setValue(e->subtype());
       eb.selected->setChecked(e->selected());

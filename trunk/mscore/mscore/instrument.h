@@ -113,7 +113,6 @@ struct Instrument {
 
       bool _useDrumset;
       Drumset* _drumset;
-
       Tablature* _tablature;
 
       QList<NamedEventList> _midiActions;

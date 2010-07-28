@@ -38,6 +38,8 @@
 #include "tuplet.h"
 #include "barline.h"
 #include "excerpt.h"
+#include "stafftype.h"
+#include "bracket.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -693,6 +695,7 @@ printf("BeginRepeat=============================================\n");
             if (c & 0x1) {
                   clefId = CLEF_PERC;
                   instr->setUseDrumset(true);
+                  staff->setStaffType(score->staffTypes().at(PERCUSSION_STAFF_TYPE));
                   }
             else if (patch >= 24 && patch < 32)
                   clefId = CLEF_G3;
@@ -1180,6 +1183,7 @@ printf("BeginRepeat=============================================\n");
             if (c & 0x1) {
                   clefId = CLEF_PERC;
                   instr->setUseDrumset(true);
+                  staff->setStaffType(score->staffTypes().at(PERCUSSION_STAFF_TYPE));
                   }
             else if (patch >= 24 && patch < 32)
                   clefId = CLEF_G3;
@@ -1727,6 +1731,7 @@ printf("track %d strings %d <%s>\n", i, strings, qPrintable(name));
             if (c & 0x1) {
                   clefId = CLEF_PERC;
                   instr->setUseDrumset(true);
+                  staff->setStaffType(score->staffTypes().at(PERCUSSION_STAFF_TYPE));
                   }
             else if (patch >= 24 && patch < 32)
                   clefId = CLEF_G3;
@@ -2415,6 +2420,7 @@ printf("midi %d %d %d  frets %d capo %d color %d\n", midiPort, midiChannel,
             if (c & 0x1) {
                   clefId = CLEF_PERC;
                   instr->setUseDrumset(true);
+                  staff->setStaffType(score->staffTypes().at(PERCUSSION_STAFF_TYPE));
                   }
             else if (patch >= 24 && patch < 32)
                   clefId = CLEF_G3;
@@ -2594,13 +2600,78 @@ bool Score::importGTP(const QString& name)
       // create excerpts
       //
       foreach(Part* part, _parts) {
-            QList<Part*> partList;
-            partList.append(part);
+            Score* score = new Score(style());
+            score->setParentScore(this);
+            QList<int> stavesMap;
+            Part* p = new Part(score);
+            p->setInstrument(*part->instr());
 
-            Score* score = createExcerpt(partList);
+            Staff* staff = part->staves()->front();
+
+            Staff* s = new Staff(score, p, 0);
+            s->setUpdateClefList(true);
+            s->setUpdateKeymap(true);
+            StaffType* st = staff->staffType();
+            if (st->modified())
+                  st = new StaffType(*st);
+            s->setStaffType(st);
+            int idx = score->staffTypes().indexOf(st);
+            if (idx == -1)
+                  score->staffTypes().append(st);
+            s->linkTo(staff);
+            p->staves()->append(s);
+            score->staves().append(s);
+            stavesMap.append(staffIdx(staff));
+            if (part->staves()->front()->staffType()->group() == PITCHED_STAFF) {
+                  s = new Staff(score, p, 1);
+                  s->setUpdateClefList(true);
+                  s->setUpdateKeymap(true);
+                  StaffType* st = score->staffTypes().at(TAB_STAFF_TYPE);
+                  s->setStaffType(st);
+                  s->linkTo(staff);
+                  p->staves()->append(s);
+                  score->staves().append(s);
+                  stavesMap.append(staffIdx(staff));
+                  p->staves()->front()->addBracket(BracketItem(BRACKET_NORMAL, 2));
+                  }
+            score->appendPart(p);
+
+            cloneStaves(this, score, stavesMap);
+
             score->setName(part->instr()->trackName());
             Excerpt* excerpt = new Excerpt(score);
             _excerpts.append(excerpt);
+            if (part->staves()->front()->staffType()->group() == PITCHED_STAFF) {
+                  Staff* staff2 = score->staff(1);
+                  staff2->setStaffType(score->staffTypes().at(TAB_STAFF_TYPE));
+                  }
+
+            //
+            // create excerpt title
+            //
+            MeasureBase* measure = score->first();
+            if (!measure || (measure->type() != VBOX)) {
+                  measure = new VBox(score);
+                  measure->setTick(0);
+                  score->addMeasure(measure);
+                  }
+            Text* txt = new Text(score);
+            txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
+            txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
+            txt->setText(part->longName()->getText());
+            measure->add(txt);
+
+            //
+            // layout score
+            //
+            score->setPlaylistDirty(true);
+            score->rebuildMidiMapping();
+            score->updateChannel();
+
+            score->setLayoutAll(true);
+            score->addLayoutFlag(LAYOUT_FIX_TICKS);
+            score->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+            score->doLayout();
             }
 
 //      album
