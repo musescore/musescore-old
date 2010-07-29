@@ -69,6 +69,7 @@
 #include "tempotext.h"
 #include "articulation.h"
 #include "importgtp.h"
+#include "revisions.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -318,6 +319,7 @@ Score::Score(const Style& s)
    : _selection(this)
       {
       _parentScore    = 0;
+      _revisions      = new Revisions;
       _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
@@ -370,6 +372,7 @@ Score::Score(Score* parent)
    : _selection(this)
       {
       _parentScore    = parent;
+      _revisions      = 0;
       _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
@@ -435,6 +438,7 @@ Score::~Score()
             delete s;
       foreach(Excerpt* e, _excerpts)
             delete e;
+      delete _revisions;
       delete _pageFormat;
       delete rights;
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup

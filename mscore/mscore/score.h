@@ -100,6 +100,7 @@ class Text;
 class Omr;
 class Parameter;
 class StaffType;
+class Revisions;
 
 extern bool showRubberBand;
 
@@ -200,6 +201,7 @@ class Score : public QObject {
       Q_OBJECT
 
       Score* _parentScore;          // set if score is an excerpt (part)
+      Revisions* _revisions;
       QList<Excerpt*> _excerpts;
 
       double _spatium;

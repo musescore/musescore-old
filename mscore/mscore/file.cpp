@@ -74,6 +74,7 @@
 #include "beam.h"
 #include "stafftype.h"
 #include "seq.h"
+#include "revisions.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -1053,6 +1054,9 @@ void Score::saveFile(QIODevice* f, bool autosave)
       xml.tag("programRevision", revision);
       write(xml, autosave);
       xml.etag();
+      if (!parentScore())
+            _revisions->write(xml);
+
       }
 
 //---------------------------------------------------------
@@ -1190,66 +1194,72 @@ bool Score::loadMsc(QString name)
       docName = f.fileName();
 
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() != "museScore")
-                  continue;
-            QString version = e.attribute("version");
-            QStringList sl = version.split('.');
-            _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
-            if (_mscVersion > MSCVERSION) {
-                  // incompatible version
-                  QMessageBox::critical(0, tr("MuseScore"),
-                     QT_TRANSLATE_NOOP("score", "Cannot read this score:\n"
-                     "your version of MuseScore is too old.")
-                     );
-                  return false;
-                  }
-            if (_mscVersion < 117) {
-                  bool rv = read(e);
-                  if (rv)
-                        mscore->updateRecentScores(this);
-                  return rv;
-                  }
-            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                  QString tag(ee.tagName());
-printf("tag <%s>\n", qPrintable(tag));
-                  QString val(ee.text());
-                  if (tag == "programVersion") {
-                        QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
-                        int v1, v2, v3, rv1, rv2, rv3;
-                        if (re.indexIn(VERSION) != -1) {
-                              QStringList sl = re.capturedTexts();
-                              if (sl.size() == 4) {
-                                    v1 = sl[1].toInt();
-                                    v2 = sl[2].toInt();
-                                    v3 = sl[3].toInt();
-                                    if (re.indexIn(val) != -1) {
-                                          sl = re.capturedTexts();
-                                          if (sl.size() == 4) {
-                                                rv1 = sl[1].toInt();
-                                                rv2 = sl[2].toInt();
-                                                rv3 = sl[3].toInt();
+            if (e.tagName() == "museScore") {
+                  QString version = e.attribute("version");
+                  QStringList sl = version.split('.');
+                  _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+                  if (_mscVersion > MSCVERSION) {
+                        // incompatible version
+                        QMessageBox::critical(0, tr("MuseScore"),
+                           QT_TRANSLATE_NOOP("score", "Cannot read this score:\n"
+                           "your version of MuseScore is too old.")
+                           );
+                        return false;
+                        }
+                  if (_mscVersion < 117) {
+                        bool rv = read(e);
+                        if (rv)
+                              mscore->updateRecentScores(this);
+                        return rv;
+                        }
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        QString val(ee.text());
+                        if (tag == "programVersion") {
+                              QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
+                              int v1, v2, v3, rv1, rv2, rv3;
+                              if (re.indexIn(VERSION) != -1) {
+                                    QStringList sl = re.capturedTexts();
+                                    if (sl.size() == 4) {
+                                          v1 = sl[1].toInt();
+                                          v2 = sl[2].toInt();
+                                          v3 = sl[3].toInt();
+                                          if (re.indexIn(val) != -1) {
+                                                sl = re.capturedTexts();
+                                                if (sl.size() == 4) {
+                                                      rv1 = sl[1].toInt();
+                                                      rv2 = sl[2].toInt();
+                                                      rv3 = sl[3].toInt();
 
-                                                int currentVersion = v1 * 10000 + v2 * 100 + v3;
-                                                int readVersion = rv1 * 10000 + rv2 * 100 + v3;
-                                                if (readVersion > currentVersion) {
-                                                      printf("read future version\n");
+                                                      int currentVersion = v1 * 10000 + v2 * 100 + v3;
+                                                      int readVersion = rv1 * 10000 + rv2 * 100 + v3;
+                                                      if (readVersion > currentVersion) {
+                                                            printf("read future version\n");
+                                                            }
                                                       }
                                                 }
+                                          else
+                                                printf("1cannot parse <%s>\n", qPrintable(val));
                                           }
-                                    else
-                                          printf("1cannot parse <%s>\n", qPrintable(val));
                                     }
+                              else
+                                    printf("2cannot parse <%s>\n", VERSION);
                               }
+                        else if (tag == "programRevision")
+                              ;
+                        else if (tag == "Score")
+                              return read(ee);
                         else
-                              printf("2cannot parse <%s>\n", VERSION);
+                              domError(ee);
                         }
-                  else if (tag == "programRevision")
-                        ;
-                  else if (tag == "Score")
-                        return read(ee);
-                  else
-                        domError(ee);
                   }
+            else if (e.tagName() == "Revision") {
+                  Revision* revision = new Revision;
+                  revision->read(e);
+                  _revisions->add(revision);
+                  }
+            else
+                  domError(e);
             }
       mscore->updateRecentScores(this);
       return false;
