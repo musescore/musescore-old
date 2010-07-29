@@ -1334,6 +1334,8 @@ static void paintElement(void* data, Element* e)
 
 void ScoreView::paintEvent(QPaintEvent* ev)
       {
+      if (_score->needLayout())
+            _score->doLayout();
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
       p.setRenderHint(QPainter::TextAntialiasing, true);

@@ -33,7 +33,6 @@
 #include "select.h"
 #include "config.h"
 #include "element.h"
-// #include "bsp.h"
 #include "al/fraction.h"
 #include "al/al.h"
 #include "scoreview.h"
@@ -418,6 +417,7 @@ class Score : public QObject {
       void transpose(Note* n, Interval, bool useSharpsFlats);
 
       Score(const Style&);
+      Score(Score*);                // used for excerpts
       ~Score();
 
       Score* clone();
@@ -670,7 +670,6 @@ class Score : public QObject {
       void addLyrics(int tick, int staffIdx, const QString&);
 
       QList<Excerpt*>* excerpts()  { return &_excerpts; }
-//      Score* createExcerpt(Excerpt*);
       MeasureBaseList* measures()  { return &_measures; }
 
       bool checkHasMeasures() const;
@@ -686,8 +685,8 @@ class Score : public QObject {
       void cmdTransposeStaff(int staffIdx, Interval, bool useDoubleSharpsFlats);
       void cmdConcertPitchChanged(bool, bool useSharpsFlats);
 
-      AL::TempoMap* tempomap() const                 { return _tempomap; }
-      AL::TimeSigMap* sigmap() const                 { return _sigmap; }
+      AL::TempoMap* tempomap() const;
+      AL::TimeSigMap* sigmap() const;
 
       double swingRatio()                            { return _swingRatio;}
       void setSwingRatio(double d)                   { _swingRatio = d;}
@@ -731,13 +730,13 @@ class Score : public QObject {
       void adjustBracketsDel(int sidx, int eidx);
       void adjustBracketsIns(int sidx, int eidx);
       void renumberMeasures();
-      UndoStack* undo() const { return _undo; }
+      UndoStack* undo() const;
       TextC* copyright() { return rights; }
       void setCopyright(const QString& s);
       void setCopyrightHtml(const QString& s);
       void endUndoRedo();
       Measure* searchLabel(const QString& s, Measure* start = 0);
-      RepeatList* repeatList() { return _repeatList; }
+      RepeatList* repeatList() const;
       double utick2utime(int tick) const;
       int utime2utick(double utime);
       void updateRepeatList(bool expandRepeats);

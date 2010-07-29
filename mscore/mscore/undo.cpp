@@ -109,7 +109,6 @@ void UndoCommand::unwind()
             }
       }
 
-
 //---------------------------------------------------------
 //   UndoStack
 //---------------------------------------------------------
@@ -397,7 +396,7 @@ void SaveState::redo()
 
 void Score::undoInsertTime(int tick, int len)
       {
-      _undo->push(new InsertTime(this, tick, len));
+      undo()->push(new InsertTime(this, tick, len));
       }
 
 //---------------------------------------------------------
@@ -406,7 +405,7 @@ void Score::undoInsertTime(int tick, int len)
 
 void Score::undoChangeMeasureLen(Measure* m, int oldTicks, int newTicks)
       {
-      _undo->push(new ChangeMeasureLen(m, oldTicks, newTicks));
+      undo()->push(new ChangeMeasureLen(m, oldTicks, newTicks));
       }
 
 //---------------------------------------------------------
@@ -415,7 +414,7 @@ void Score::undoChangeMeasureLen(Measure* m, int oldTicks, int newTicks)
 
 void Score::undoChangeElement(Element* oldElement, Element* newElement)
       {
-      _undo->push(new ChangeElement(oldElement, newElement));
+      undo()->push(new ChangeElement(oldElement, newElement));
       }
 
 //---------------------------------------------------------
@@ -424,7 +423,7 @@ void Score::undoChangeElement(Element* oldElement, Element* newElement)
 
 void Score::undoChangeSubtype(Element* element, int st)
       {
-      _undo->push(new ChangeSubtype(element, st));
+      undo()->push(new ChangeSubtype(element, st));
       }
 
 //---------------------------------------------------------
@@ -433,7 +432,26 @@ void Score::undoChangeSubtype(Element* element, int st)
 
 void Score::undoChangePitch(Note* note, int pitch, int tpc, int userAccidental, int line, int fret)
       {
-      _undo->push(new ChangePitch(note, pitch, tpc, userAccidental, line, fret));
+      Staff* ostaff = note->staff();
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves) {
+            Chord* chord = note->chord();
+            Segment* segment = chord->segment();
+            Measure* measure = segment->measure();
+            foreach(Staff* staff, linkedStaves->staves()) {
+                  printf("     staff %p - %p\n", ostaff, staff);
+                  if (staff == ostaff)
+                        continue;
+                  Score* score = staff->score();
+                  Measure* m   = score->tick2measure(measure->tick());
+                  Segment* s   = m->findSegment(segment->segmentType(), segment->tick());
+                  int staffIdx = score->staffIdx(staff);
+                  Chord* c     = static_cast<Chord*>(s->element(staffIdx * VOICES + chord->voice()));
+                  Note* n      = c->findNote(note->pitch());
+                  undo()->push(new ChangePitch(n, pitch, tpc, userAccidental, line, fret));
+                  }
+            }
+      undo()->push(new ChangePitch(note, pitch, tpc, userAccidental, line, fret));
       }
 
 //---------------------------------------------------------
@@ -442,7 +460,7 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc, int userAccidental, 
 
 void Score::undoChangeTpc(Note* note, int tpc)
       {
-      _undo->push(new ChangeTpc(note, tpc));
+      undo()->push(new ChangeTpc(note, tpc));
       }
 
 //---------------------------------------------------------
@@ -451,7 +469,7 @@ void Score::undoChangeTpc(Note* note, int tpc)
 
 void Score::undoChangeBeamMode(ChordRest* cr, BeamMode mode)
       {
-      _undo->push(new ChangeBeamMode(cr, mode));
+      undo()->push(new ChangeBeamMode(cr, mode));
       }
 
 //---------------------------------------------------------
@@ -460,7 +478,7 @@ void Score::undoChangeBeamMode(ChordRest* cr, BeamMode mode)
 
 void Score::undoChangeChordRestLen(ChordRest* cr, const Duration& d)
       {
-      _undo->push(new ChangeChordRestLen(cr, d));
+      undo()->push(new ChangeChordRestLen(cr, d));
       }
 
 //---------------------------------------------------------
@@ -469,7 +487,7 @@ void Score::undoChangeChordRestLen(ChordRest* cr, const Duration& d)
 
 void Score::undoChangeEndBarLineType(Measure* m, int subtype)
       {
-      _undo->push(new ChangeEndBarLineType(m, subtype));
+      undo()->push(new ChangeEndBarLineType(m, subtype));
       }
 
 //---------------------------------------------------------
@@ -478,7 +496,7 @@ void Score::undoChangeEndBarLineType(Measure* m, int subtype)
 
 void Score::undoChangeBarLineSpan(Staff* staff, int span)
       {
-      _undo->push(new ChangeBarLineSpan(staff, span));
+      undo()->push(new ChangeBarLineSpan(staff, span));
       }
 
 //---------------------------------------------------------
@@ -487,7 +505,7 @@ void Score::undoChangeBarLineSpan(Staff* staff, int span)
 
 void Score::undoChangeUserOffset(Element* e, const QPointF& offset)
       {
-      _undo->push(new ChangeUserOffset(e, offset));
+      undo()->push(new ChangeUserOffset(e, offset));
       }
 
 //---------------------------------------------------------
@@ -496,7 +514,7 @@ void Score::undoChangeUserOffset(Element* e, const QPointF& offset)
 
 void Score::undoChangeDynamic(Dynamic* e, int velocity, DynamicType type)
       {
-      _undo->push(new ChangeDynamic(e, velocity, type));
+      undo()->push(new ChangeDynamic(e, velocity, type));
       }
 
 //---------------------------------------------------------
@@ -505,7 +523,7 @@ void Score::undoChangeDynamic(Dynamic* e, int velocity, DynamicType type)
 
 void Score::undoChangeCopyright(const QString& s)
       {
-      _undo->push(new ChangeCopyright(this, s));
+      undo()->push(new ChangeCopyright(this, s));
       }
 
 //---------------------------------------------------------
@@ -514,7 +532,7 @@ void Score::undoChangeCopyright(const QString& s)
 
 void Score::undoTransposeHarmony(Harmony* h, int rootTpc, int baseTpc)
       {
-      _undo->push(new TransposeHarmony(h, rootTpc, baseTpc));
+      undo()->push(new TransposeHarmony(h, rootTpc, baseTpc));
       }
 
 //---------------------------------------------------------
@@ -523,7 +541,7 @@ void Score::undoTransposeHarmony(Harmony* h, int rootTpc, int baseTpc)
 
 void Score::undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2)
       {
-      _undo->push(new ExchangeVoice(measure, val1, val2, staff1, staff2));
+      undo()->push(new ExchangeVoice(measure, val1, val2, staff1, staff2));
       }
 
 //---------------------------------------------------------
@@ -532,7 +550,7 @@ void Score::undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, 
 
 void Score::undoRemovePart(Part* part, int idx)
       {
-      _undo->push(new RemovePart(part, idx));
+      undo()->push(new RemovePart(part, idx));
       }
 
 //---------------------------------------------------------
@@ -541,7 +559,7 @@ void Score::undoRemovePart(Part* part, int idx)
 
 void Score::undoInsertPart(Part* part, int idx)
       {
-      _undo->push(new InsertPart(part, idx));
+      undo()->push(new InsertPart(part, idx));
       }
 
 //---------------------------------------------------------
@@ -550,7 +568,7 @@ void Score::undoInsertPart(Part* part, int idx)
 
 void Score::undoInsertMeasure(MeasureBase* m)
       {
-      _undo->push(new InsertMeasure(m));
+      undo()->push(new InsertMeasure(m));
       }
 
 //---------------------------------------------------------
@@ -559,7 +577,7 @@ void Score::undoInsertMeasure(MeasureBase* m)
 
 void Score::undoRemoveStaff(Staff* staff, int idx)
       {
-      _undo->push(new RemoveStaff(staff, idx));
+      undo()->push(new RemoveStaff(staff, idx));
       }
 
 //---------------------------------------------------------
@@ -568,7 +586,7 @@ void Score::undoRemoveStaff(Staff* staff, int idx)
 
 void Score::undoInsertStaff(Staff* staff, int idx)
       {
-      _undo->push(new InsertStaff(staff, idx));
+      undo()->push(new InsertStaff(staff, idx));
       }
 
 //---------------------------------------------------------
@@ -577,7 +595,7 @@ void Score::undoInsertStaff(Staff* staff, int idx)
 
 void Score::undoMove(Element* e, const QPointF& pt)
       {
-      _undo->push(new MoveElement(e, pt));
+      undo()->push(new MoveElement(e, pt));
       }
 
 //---------------------------------------------------------
@@ -586,7 +604,7 @@ void Score::undoMove(Element* e, const QPointF& pt)
 
 void Score::undoChangeRepeatFlags(Measure* m, int flags)
       {
-      _undo->push(new ChangeRepeatFlags(m, flags));
+      undo()->push(new ChangeRepeatFlags(m, flags));
       }
 
 //---------------------------------------------------------
@@ -595,7 +613,7 @@ void Score::undoChangeRepeatFlags(Measure* m, int flags)
 
 void Score::undoChangeVoltaEnding(Volta* volta, const QList<int>& l)
       {
-      _undo->push(new ChangeVoltaEnding(volta, l));
+      undo()->push(new ChangeVoltaEnding(volta, l));
       }
 
 //---------------------------------------------------------
@@ -604,7 +622,7 @@ void Score::undoChangeVoltaEnding(Volta* volta, const QList<int>& l)
 
 void Score::undoChangeVoltaText(Volta* volta, const QString& s)
       {
-      _undo->push(new ChangeVoltaText(volta, s));
+      undo()->push(new ChangeVoltaText(volta, s));
       }
 
 //---------------------------------------------------------
@@ -613,7 +631,7 @@ void Score::undoChangeVoltaText(Volta* volta, const QString& s)
 
 void Score::undoChangeChordRestSize(ChordRest* cr, bool small)
       {
-      _undo->push(new ChangeChordRestSize(cr, small));
+      undo()->push(new ChangeChordRestSize(cr, small));
       }
 
 //---------------------------------------------------------
@@ -622,7 +640,7 @@ void Score::undoChangeChordRestSize(ChordRest* cr, bool small)
 
 void Score::undoChangeChordNoStem(Chord* cr, bool noStem)
       {
-      _undo->push(new ChangeChordNoStem(cr, noStem));
+      undo()->push(new ChangeChordNoStem(cr, noStem));
       }
 
 //---------------------------------------------------------
@@ -631,7 +649,7 @@ void Score::undoChangeChordNoStem(Chord* cr, bool noStem)
 
 void Score::undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t)
       {
-      _undo->push(new ChangeChordRestSpace(cr, l, t));
+      undo()->push(new ChangeChordRestSpace(cr, l, t));
       }
 
 //---------------------------------------------------------
@@ -640,7 +658,7 @@ void Score::undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t)
 
 void Score::undoChangeBracketSpan(Staff* staff, int column, int span)
       {
-      _undo->push(new ChangeBracketSpan(staff, column, span));
+      undo()->push(new ChangeBracketSpan(staff, column, span));
       }
 
 //---------------------------------------------------------
@@ -649,7 +667,7 @@ void Score::undoChangeBracketSpan(Staff* staff, int column, int span)
 
 void Score::undoToggleInvisible(Element* e)
       {
-      _undo->push(new ToggleInvisible(e));
+      undo()->push(new ToggleInvisible(e));
       }
 
 //---------------------------------------------------------
@@ -659,7 +677,7 @@ void Score::undoToggleInvisible(Element* e)
 void Score::undoAddElement(Element* element)
       {
       element->setScore(this);
-      _undo->push(new AddElement(element));
+      undo()->push(new AddElement(element));
       }
 
 //---------------------------------------------------------
@@ -668,7 +686,7 @@ void Score::undoAddElement(Element* element)
 
 void Score::undoRemoveElement(Element* element)
       {
-      _undo->push(new RemoveElement(element));
+      undo()->push(new RemoveElement(element));
       }
 
 //---------------------------------------------------------
@@ -677,12 +695,12 @@ void Score::undoRemoveElement(Element* element)
 
 void Score::undoChangeTuning(Note* n, double v)
       {
-      _undo->push(new ChangeTuning(n, v));
+      undo()->push(new ChangeTuning(n, v));
       }
 
 void Score::undoChangeUserMirror(Note* n, DirectionH d)
       {
-      _undo->push(new ChangeUserMirror(n, d));
+      undo()->push(new ChangeUserMirror(n, d));
       }
 
 //---------------------------------------------------------
@@ -691,7 +709,7 @@ void Score::undoChangeUserMirror(Note* n, DirectionH d)
 
 void Score::undoChangePageFormat(PageFormat* p, double v)
       {
-      _undo->push(new ChangePageFormat(this, p, v));
+      undo()->push(new ChangePageFormat(this, p, v));
       }
 
 //---------------------------------------------------------
@@ -1067,6 +1085,8 @@ void ChangePitch::flip()
       userAccidental = f_userAcc;
       line           = f_line;
       fret           = f_fret;
+
+      note->score()->setLayout(note->chord()->segment()->measure());
       }
 
 //---------------------------------------------------------

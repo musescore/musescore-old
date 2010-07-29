@@ -91,13 +91,13 @@ void Score::startCmd()
       // Start collecting low-level undo operations for a
       // user-visible undo action.
 
-      if (_undo->active()) {
+      if (undo()->active()) {
             // if (debugMode)
             fprintf(stderr, "Score::startCmd(): cmd already active\n");
             return;
             }
-      _undo->beginMacro();
-      _undo->push(new SaveState(this));
+      undo()->beginMacro();
+      undo()->push(new SaveState(this));
       }
 
 //---------------------------------------------------------
@@ -108,17 +108,17 @@ void Score::startCmd()
 
 void Score::endCmd()
       {
-      if (!_undo->active()) {
+      if (!undo()->active()) {
             // if (debugMode)
                   fprintf(stderr, "Score::endCmd(): no cmd active\n");
             end();
             return;
             }
-      bool noUndo = _undo->current()->childCount() <= 1;
+      bool noUndo = undo()->current()->childCount() <= 1;
       if (!noUndo)
             setClean(noUndo);
       end();
-      _undo->endMacro(noUndo);
+      undo()->endMacro(noUndo);
       }
 
 //---------------------------------------------------------
@@ -137,8 +137,8 @@ void Score::end()
             _updateAll = true;
             _needLayout = true;
             }
-      if (_needLayout)
-            doLayout();
+//      if (_needLayout)
+//            doLayout();
 
       if (_updateAll)
             emit updateAll();
@@ -154,6 +154,8 @@ void Score::end()
       startLayout = 0;
       if (!noteEntryMode())
             setPadState();
+      if (parentScore())
+            parentScore()->end();
       }
 
 //---------------------------------------------------------
@@ -1621,7 +1623,7 @@ void Score::moveUp(Chord* chord)
 
       if ((staffMove == -1) || (rstaff + staffMove <= 0))
             return;
-      _undo->push(new ChangeChordStaffMove(chord, staffMove - 1));
+      undo()->push(new ChangeChordStaffMove(chord, staffMove - 1));
       layoutAll = true;
       }
 
@@ -1639,7 +1641,7 @@ void Score::moveDown(Chord* chord)
 
       if ((staffMove == 1) || (rstaff + staffMove >= rstaves - 1))
             return;
-      _undo->push(new ChangeChordStaffMove(chord, staffMove + 1));
+      undo()->push(new ChangeChordStaffMove(chord, staffMove + 1));
       layoutAll = true;
       }
 
@@ -1660,7 +1662,7 @@ void Score::cmdAddStretch(double val)
                   break;
             double stretch = m->userStretch();
             stretch += val;
-            _undo->push(new ChangeStretch(m, stretch));
+            undo()->push(new ChangeStretch(m, stretch));
             }
       layoutAll = true;
       }
@@ -1770,7 +1772,7 @@ void Score::cmd(const QAction* a)
             end();
             }
       else {
-            if (_undo->active()) {
+            if (undo()->active()) {
                   printf("Score::cmd(): cmd already active\n");
                   return;
                   }

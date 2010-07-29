@@ -359,6 +359,57 @@ Score::Score(const Style& s)
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 
+//
+//  a linked score shares some properties with parentScore():
+//    _undo
+//    _sigmap
+//    _tempomap
+//    _repeatList
+//
+Score::Score(Score* parent)
+   : _selection(this)
+      {
+      _parentScore    = parent;
+      _symIdx         = 0;
+      _spatium        = preferences.spatium * DPI;
+      _pageFormat     = new PageFormat;
+      _paintDevice    = 0;
+      _needLayout     = false;
+      startLayout     = 0;
+      _undo           = 0;
+      _repeatList     = 0;
+      _style          = parent->style();
+      _staffTypes     = ::staffTypes;     // init with buildin types
+      _swingRatio     = 0.0;
+      // deep copy of defaultTextStyles:
+      for (int i = 0; i < TEXT_STYLES; ++i)
+            _textStyles.append(new TextStyle(defaultTextStyles[i]));
+
+      _mscVersion     = MSCVERSION;
+      _created        = false;
+      _updateAll      = false;
+      layoutAll       = false;
+      layoutFlags     = 0;
+      keyState        = 0;
+      _showInvisible  = true;
+      _showFrames     = true;
+      editTempo       = 0;
+      _printing       = false;
+      _playlistDirty  = false;
+      _autosaveDirty  = false;
+      _dirty          = false;
+      _saved          = false;
+      _playPos        = 0;
+      _fileDivision   = AL::division;
+      _creditsRead    = false;
+      _defaultsRead   = false;
+      rights          = 0;
+      _omr            = 0;
+      _showOmr        = false;
+      _sigmap         = 0;
+      _tempomap       = 0;
+      }
+
 //---------------------------------------------------------
 //   ~Score
 //---------------------------------------------------------
@@ -650,7 +701,7 @@ void Score::insertTime(int tick, int len)
             // remove time
             //
             len = -len;
-            _tempomap->removeTime(tick, len);
+            tempomap()->removeTime(tick, len);
             foreach(Staff* staff, _staves) {
                   staff->clefList()->removeTime(tick, len);
                   staff->keymap()->removeTime(tick, len);
@@ -680,7 +731,7 @@ void Score::insertTime(int tick, int len)
             //
             // insert time
             //
-            _tempomap->insertTime(tick, len);
+            tempomap()->insertTime(tick, len);
             foreach(Staff* staff, _staves) {
                   staff->clefList()->insertTime(tick, len);
                   staff->keymap()->insertTime(tick, len);
@@ -733,23 +784,26 @@ void Score::fixTicks()
       if (fm == 0)
             return;
 
-      _tempomap->clear();
-      _sigmap->clear();
       Fraction sig(fm->timesig());
-      _sigmap->add(0, AL::SigEvent(sig,  number));
+      if (!parentScore()) {
+            _tempomap->clear();
+            _sigmap->clear();
+            _sigmap->add(0, AL::SigEvent(sig,  number));
+            }
 
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
-
             if (mb->type() != MEASURE) {
                   mb->setTick(tick);
                   continue;
                   }
             Measure* m = static_cast<Measure*>(mb);
-            for (Segment* s = m->first(SegChordRest); s; s = s->next(SegChordRest)) {
-                  foreach(Element* e, s->annotations()) {
-                        if (e->type() == TEMPO_TEXT) {
-                              const TempoText* tt = static_cast<const TempoText*>(e);
-                              _tempomap->addTempo(tt->segment()->tick(), tt->tempo());
+            if (!parentScore()) {
+                  for (Segment* s = m->first(SegChordRest); s; s = s->next(SegChordRest)) {
+                        foreach(Element* e, s->annotations()) {
+                              if (e->type() == TEMPO_TEXT) {
+                                    const TempoText* tt = static_cast<const TempoText*>(e);
+                                    _tempomap->addTempo(tt->segment()->tick(), tt->tempo());
+                                    }
                               }
                         }
                   }
@@ -763,55 +817,57 @@ void Score::fixTicks()
             tick += measureTicks;
             m->moveTicks(diff);
 
-            //
-            //  implement section break rest
-            //
-            if (m->sectionBreak())
-                  _tempomap->addPause(m->tick() + m->ticks(), m->pause());
+            if (!parentScore()) {
+                  //
+                  //  implement section break rest
+                  //
+                  if (m->sectionBreak())
+                        _tempomap->addPause(m->tick() + m->ticks(), m->pause());
 
-            //
-            // implement fermata as a tempo change
-            //
-            SegmentTypes st = SegChordRest | SegBreath;
+                  //
+                  // implement fermata as a tempo change
+                  //
+                  SegmentTypes st = SegChordRest | SegBreath;
 
-            for (Segment* s = m->first(st); s; s = s->next(st)) {
-                  if (s->subtype() == SegBreath) {
-                        _tempomap->addPause(s->tick(), .1);
-                        continue;
-                        }
-                  foreach(Element* e, s->elist()) {
-                        if (!e)
+                  for (Segment* s = m->first(st); s; s = s->next(st)) {
+                        if (s->subtype() == SegBreath) {
+                              _tempomap->addPause(s->tick(), .1);
                               continue;
-                        ChordRest* cr = static_cast<ChordRest*>(e);
-                        double stretch = -1.0;
-                        foreach(Articulation* a, *cr->getArticulations()) {
-                              switch(a->subtype()) {
-                                    case UshortfermataSym:
-                                    case DshortfermataSym:
-                                          stretch = 1.5;
-                                          break;
-                                    case UfermataSym:
-                                    case DfermataSym:
-                                          stretch = 2.0;
-                                          break;
-                                    case UlongfermataSym:
-                                    case DlongfermataSym:
-                                          stretch = 3.0;
-                                          break;
-                                    case UverylongfermataSym:
-                                    case DverylongfermataSym:
-                                          stretch = 4.0;
-                                          break;
-                                    default:
-                                          break;
-                                    }
                               }
-                        if (stretch > 0.0) {
-                              double otempo = _tempomap->tempo(cr->tick());
-                              double ntempo = otempo / stretch;
-                              _tempomap->addTempo(cr->tick(), ntempo);
-                              _tempomap->addTempo(cr->tick() + cr->ticks(), otempo);
-                              break;      // do not consider more staves/voices
+                        foreach(Element* e, s->elist()) {
+                              if (!e)
+                                    continue;
+                              ChordRest* cr = static_cast<ChordRest*>(e);
+                              double stretch = -1.0;
+                              foreach(Articulation* a, *cr->getArticulations()) {
+                                    switch(a->subtype()) {
+                                          case UshortfermataSym:
+                                          case DshortfermataSym:
+                                                stretch = 1.5;
+                                                break;
+                                          case UfermataSym:
+                                          case DfermataSym:
+                                                stretch = 2.0;
+                                                break;
+                                          case UlongfermataSym:
+                                          case DlongfermataSym:
+                                                stretch = 3.0;
+                                                break;
+                                          case UverylongfermataSym:
+                                          case DverylongfermataSym:
+                                                stretch = 4.0;
+                                                break;
+                                          default:
+                                                break;
+                                          }
+                                    }
+                              if (stretch > 0.0) {
+                                    double otempo = _tempomap->tempo(cr->tick());
+                                    double ntempo = otempo / stretch;
+                                    _tempomap->addTempo(cr->tick(), ntempo);
+                                    _tempomap->addTempo(cr->tick() + cr->ticks(), otempo);
+                                    break;      // do not consider more staves/voices
+                                    }
                               }
                         }
                   }
@@ -832,7 +888,7 @@ void Score::fixTicks()
             //
             // update time signature map
             //
-            if (m->timesig() != sig) {
+            if (!parentScore() && (m->timesig() != sig)) {
                   sig = m->timesig();
                   _sigmap->add(tick, AL::SigEvent(sig,  number));
                   }
@@ -2165,5 +2221,53 @@ Text* Score::getText(int subtype)
                   }
             }
       return 0;
+      }
+
+//---------------------------------------------------------
+//   undo
+//---------------------------------------------------------
+
+UndoStack* Score::undo() const
+      {
+      const Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      return score->_undo;
+      }
+
+//---------------------------------------------------------
+//   repeatList
+//---------------------------------------------------------
+
+RepeatList* Score::repeatList()  const
+      {
+      const Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      return score->_repeatList;
+      }
+
+//---------------------------------------------------------
+//   tempomap
+//---------------------------------------------------------
+
+AL::TempoMap* Score::tempomap() const
+      {
+      const Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      return score->_tempomap;
+      }
+
+//---------------------------------------------------------
+//   sigmap
+//---------------------------------------------------------
+
+AL::TimeSigMap* Score::sigmap() const
+      {
+      const Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      return score->_sigmap;
       }
 
