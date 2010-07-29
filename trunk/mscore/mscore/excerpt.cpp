@@ -34,6 +34,7 @@
 #include "measure.h"
 #include "rest.h"
 #include "stafftype.h"
+#include "tuplet.h"
 
 //---------------------------------------------------------
 //   read
@@ -352,6 +353,42 @@ Score* createExcerpt(const QList<Part*>& parts)
       }
 
 //---------------------------------------------------------
+//   Tuplet2
+//---------------------------------------------------------
+
+struct Tuplet2 {
+      Tuplet* o;
+      Tuplet* n;
+      Tuplet2(Tuplet* a, Tuplet* b) : o(a), n(b) {}
+      };
+
+//---------------------------------------------------------
+//   TupletMap
+//---------------------------------------------------------
+
+class TupletMap {
+      QList<Tuplet2> map;
+
+   public:
+      TupletMap() {}
+      Tuplet* findNew(Tuplet* o);
+      void add(Tuplet* _o, Tuplet* _n) { map.append(Tuplet2(_o, _n));}
+      };
+
+//---------------------------------------------------------
+//   findNew
+//---------------------------------------------------------
+
+Tuplet* TupletMap::findNew(Tuplet* o)
+      {
+      foreach(const Tuplet2& t2, map) {
+            if (t2.o == o)
+                  return t2.n;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   cloneStaves
 //---------------------------------------------------------
 
@@ -365,6 +402,8 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
             else if (mb->type() == VBOX)
                   nmb = new VBox(score);
             else if (mb->type() == MEASURE) {
+                  TupletMap tupletMap;
+
                   Measure* m  = static_cast<Measure*>(mb);
                   Measure* nm = new Measure(score);
                   nmb = nm;
@@ -397,6 +436,21 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                               el->setScore(score);
                               Segment* s = nm->getSegment(SegmentType(seg->subtype()), seg->tick());
                               s->add(el);
+                              if (e->isChordRest()) {
+                                    ChordRest* cr = static_cast<ChordRest*>(e);
+                                    if (cr->tuplet()) {
+                                          ChordRest* ncr = static_cast<ChordRest*>(el);
+                                          Tuplet* nt = tupletMap.findNew(cr->tuplet());
+                                          if (nt == 0) {
+                                                nt = new Tuplet(*cr->tuplet());
+                                                nt->setScore(score);
+                                                nt->clear();
+                                                tupletMap.add(cr->tuplet(), nt);
+                                                }
+                                          nt->add(ncr);
+                                          ncr->setTuplet(nt);
+                                          }
+                                    }
                               }
                         }
                   }

@@ -228,7 +228,7 @@ void Score::transpose()
                         KeySigEvent key  = km->key(ks->tick());
                         KeySigEvent okey = km->key(ks->tick() - 1);
                         key.naturalType  = okey.accidentalType;
-                        _undo->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
+                        undo()->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
                            ks->showNaturals()));
                         }
                   }
@@ -326,7 +326,7 @@ void Score::cmdTransposeStaff(int staffIdx, Interval interval, bool useDoubleSha
 
 void Score::cmdConcertPitchChanged(bool flag, bool useDoubleSharpsFlats)
       {
-      _undo->push(new ChangeConcertPitch(this, flag));
+      undo()->push(new ChangeConcertPitch(this, flag));
 
       foreach(Staff* staff, _staves) {
             Instrument* instr = staff->part()->instr();
@@ -373,7 +373,7 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
                         KeySigEvent key  = km->key(s->tick());
                         KeySigEvent okey = km->key(s->tick() - 1);
                         key.naturalType  = okey.accidentalType;
-                        _undo->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
+                        undo()->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
                            ks->showNaturals()));
                         }
                   }

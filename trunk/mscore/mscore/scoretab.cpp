@@ -59,6 +59,10 @@ ScoreTab::ScoreTab(QList<Score*>* sl, QWidget* parent)
       layout->addWidget(tab2);
       layout->addLayout(stack);
       tab->setTabsClosable(true);
+
+      foreach(Score* s, *sl)
+            insertTab(s);
+
       connect(tab, SIGNAL(currentChanged(int)), this, SLOT(setCurrent(int)));
       connect(tab2, SIGNAL(currentChanged(int)), this, SLOT(setExcerpt(int)));
       connect(tab, SIGNAL(tabCloseRequested(int)), this, SIGNAL(tabCloseRequested(int)));
@@ -83,6 +87,10 @@ ScoreView* ScoreTab::view(int n) const
 QSplitter* ScoreTab::viewSplitter(int n) const
       {
       TabScoreView* tsv = static_cast<TabScoreView*>(tab->tabData(n).value<void*>());
+      if (tsv == 0) {
+            printf("ScoreTab::viewSplitter %d is zero\n", n);
+            return 0;
+            }
       Score* score = tsv->score;
       if (tsv->part) {
             QList<Excerpt*>* excerpts = score->excerpts();

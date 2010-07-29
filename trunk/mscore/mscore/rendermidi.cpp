@@ -319,7 +319,7 @@ void Score::toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx)
       {
       Instrument* instr = part(firstStaffIdx)->instr();
 
-      foreach(const RepeatSegment* rs, *_repeatList) {
+      foreach(const RepeatSegment* rs, *repeatList()) {
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
             int tickOffset = rs->utick - rs->tick;
@@ -361,9 +361,9 @@ void Score::toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx)
 void Score::updateRepeatList(bool expandRepeats)
       {
       if (!expandRepeats) {
-            foreach(RepeatSegment* s, *_repeatList)
+            foreach(RepeatSegment* s, *repeatList())
                   delete s;
-            _repeatList->clear();
+            repeatList()->clear();
             Measure* m = lastMeasure();
             if (m == 0)
                   return;
@@ -373,12 +373,12 @@ void Score::updateRepeatList(bool expandRepeats)
             s->utick = 0;
             s->utime = 0.0;
             s->timeOffset = 0.0;
-            _repeatList->append(s);
+            repeatList()->append(s);
             }
       else
-            _repeatList->unwind();
+            repeatList()->unwind();
       if (debugMode)
-            _repeatList->dump();
+            repeatList()->dump();
       }
 
 //---------------------------------------------------------

@@ -516,7 +516,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
                   }
             return true;
             }
-      _undo->push(new RemoveMeasures(fm, lm));
+      undo()->push(new RemoveMeasures(fm, lm));
       Fraction k = fm->len() * measures;
       k /= ns;
       int nm = (k.numerator() + k.denominator() - 1)/ k.denominator();
@@ -562,7 +562,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
                   tick = s->tick() - stick;
                   int ticks = ncr->ticks();
                   if (!addCR(tick, ncr, nfm)) {
-                        _undo->pop();
+                        undo()->pop();
                         // TODO: unwind creation of measures
                         return false;
                         }
@@ -586,7 +586,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
       //
       nfm->setPrev(fm->prev());
       nlm->setNext(lm->next());
-      _undo->push(new InsertMeasures(nfm, nlm));
+      undo()->push(new InsertMeasures(nfm, nlm));
       return true;
       }
 
@@ -620,7 +620,7 @@ void Score::rewriteMeasures(Measure* fm, const Fraction& ns)
                         for (Measure* m = fm1; m; m = m->nextMeasure()) {
                               if (m->first(SegTimeSig))
                                     break;
-                              _undo->push(new ChangeMeasureTimesig(m, ns));
+                              undo()->push(new ChangeMeasureTimesig(m, ns));
                               }
                         return;
                         }
@@ -680,7 +680,7 @@ void Score::cmdAddTimeSig(Measure* fm, int timeSigSubtype)
             for (Measure* m = fm; m; m = m->nextMeasure()) {
                   if (m->first(SegTimeSig))
                         break;
-                  _undo->push(new ChangeMeasureTimesig(m, ns));
+                  undo()->push(new ChangeMeasureTimesig(m, ns));
                   }
             }
       else {
@@ -729,7 +729,7 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
             for (Measure* m = fm; m; m = m->nextMeasure()) {
                   if (m->first(SegTimeSig))
                         break;
-                  _undo->push(new ChangeMeasureTimesig(m, ns));
+                  undo()->push(new ChangeMeasureTimesig(m, ns));
                   }
             }
       else {
@@ -978,27 +978,27 @@ void Score::cmdFlip()
             if (e->type() == NOTE) {
                   Chord* chord = static_cast<Note*>(e)->chord();
                   if (chord->beam())
-                        _undo->push(new FlipBeamDirection(chord->beam()));
+                        undo()->push(new FlipBeamDirection(chord->beam()));
                   else {
                         Direction dir = chord->stemDirection();
                         if (dir == AUTO)
                               dir = chord->up() ? DOWN : UP;
                         else
                               dir = dir == UP ? DOWN : UP;
-                        _undo->push(new SetStemDirection(chord, dir));
+                        undo()->push(new SetStemDirection(chord, dir));
                         }
                   }
             else if (e->type() == SLUR_SEGMENT) {
                   SlurTie* slur = static_cast<SlurSegment*>(e)->slurTie();
-                  _undo->push(new FlipSlurDirection(slur));
+                  undo()->push(new FlipSlurDirection(slur));
                   }
             else if (e->type() == BEAM) {
                   Beam* beam = static_cast<Beam*>(e);
-                  _undo->push(new FlipBeamDirection(beam));
+                  undo()->push(new FlipBeamDirection(beam));
                   }
             else if (e->type() == HAIRPIN_SEGMENT) {
                   Hairpin* hp = static_cast<HairpinSegment*>(e)->hairpin();
-                  _undo->push(new ChangeSubtype(hp, hp->subtype() == 0 ? 1 : 0));
+                  undo()->push(new ChangeSubtype(hp, hp->subtype() == 0 ? 1 : 0));
                   }
             else if (e->type() == ARTICULATION) {
                   int newSubtype = -1;
@@ -1021,7 +1021,7 @@ void Score::cmdFlip()
                         undoChangeSubtype(e, newSubtype);
                   }
             else if (e->type() == TUPLET)
-                  _undo->push(new FlipTupletDirection(static_cast<Tuplet*>(e)));
+                  undo()->push(new FlipTupletDirection(static_cast<Tuplet*>(e)));
             }
       layoutAll = true;
       }
@@ -1077,11 +1077,11 @@ void Score::deleteItem(Element* el)
       switch(el->type()) {
             case TEXT:
                   if (el->subtype() == TEXT_INSTRUMENT_LONG) {
-                        _undo->push(new ChangeInstrumentLong(el->staff()->part(), ""));
+                        undo()->push(new ChangeInstrumentLong(el->staff()->part(), ""));
                         break;
                         }
                   else if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
-                        _undo->push(new ChangeInstrumentShort(el->staff()->part(), ""));
+                        undo()->push(new ChangeInstrumentShort(el->staff()->part(), ""));
                         break;
                         }
                   else if (el->subtype() == TEXT_COPYRIGHT) {
@@ -1718,7 +1718,7 @@ void Score::colorItem(Element* element)
 
       foreach(Element* e, selection().elements()) {
             if (e->color() != c) {
-                  _undo->push(new ChangeColor(e, c));
+                  undo()->push(new ChangeColor(e, c));
                   e->setGenerated(false);
                   refresh |= e->abbox();
                   if (e->type() == BAR_LINE) {

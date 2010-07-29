@@ -307,7 +307,7 @@ bool Score::saveFile(bool autosave)
                   QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
                   return false;
                   }
-            _undo->setClean();
+            undo()->setClean();
             setClean(true);
             return true;
             }
@@ -379,7 +379,7 @@ bool Score::saveFile(bool autosave)
       QFile::setPermissions(name, QFile::ReadOwner | QFile::WriteOwner | QFile::ReadUser
          | QFile::ReadGroup | QFile::ReadOther);
 
-      _undo->setClean();
+      undo()->setClean();
       setClean(true);
       setSaved(true);
       return true;
@@ -497,7 +497,7 @@ bool Score::saveAs(bool saveCopy, const QString& path, const QString& ext)
             if (rv && !saveCopy) {
                   fileInfo()->setFile(fn);
                   mscore->setWindowTitle("MuseScore: " + name());
-                  _undo->setClean();
+                  undo()->setClean();
                   mscore->dirtyChanged(this);
                   setCreated(false);
                   mscore->updateRecentScores(this);
@@ -1306,7 +1306,7 @@ bool Score::read(QDomElement dScore)
             else if (tag == "siglist")
                   _sigmap->read(ee, _fileDivision);
             else if (tag == "tempolist")        // obsolete
-                  ;           // _tempomap->read(ee, _fileDivision);
+                  ;           // tempomap()->read(ee, _fileDivision);
             else if (tag == "programVersion") {
                   QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
                   int v1, v2, v3, rv1, rv2, rv3;

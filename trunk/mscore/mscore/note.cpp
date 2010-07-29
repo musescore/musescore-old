@@ -1352,8 +1352,10 @@ void Note::setAccidentalType(int pre)
             _accidental->setSubtype(pre);
             }
       else {
-            if (_accidental)
-                  score()->undoRemoveElement(_accidental);
+//            if (_accidental)
+//                  score()->undoRemoveElement(_accidental);
+            delete _accidental;
+            _accidental = 0;  // TODOx
             }
       }
 

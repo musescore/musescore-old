@@ -1151,7 +1151,9 @@ void MuseScore::setCurrentView(int tabIdx, int idx)
       if (idx == -1)
             setCurrentScoreView((ScoreView*)0);
       else {
-            (tabIdx ? tab2 : tab1)->setCurrentIndex(idx);
+            ScoreTab* tab = tabIdx ? tab2 : tab1;
+            if (tab)
+                  tab->setCurrentIndex(idx);
             }
       }
 
@@ -1657,6 +1659,7 @@ static void loadScores(const QStringList& argv)
       if (mscore->noScore())
             currentScoreView = -1;
       mscore->setCurrentView(0, currentScoreView);
+      mscore->setCurrentView(1, currentScoreView);
       }
 
 //---------------------------------------------------------

@@ -498,16 +498,17 @@ void Staff::linkTo(Staff* staff)
       if (!_linkedStaves) {
             if (staff->linkedStaves()) {
                   _linkedStaves = staff->linkedStaves();
-                  _linkedStaves->add(this);
                   }
             else {
                   _linkedStaves = new LinkedStaves;
                   _linkedStaves->add(staff);
-                  _linkedStaves->add(this);
+                  staff->setLinkedStaves(_linkedStaves);
                   }
+            _linkedStaves->add(this);
             }
       else {
-            _linkedStaves->add(staff);
+            printf("Staff::linkTo: staff already linked\n");
+            abort();
             }
       }
 

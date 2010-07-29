@@ -144,6 +144,7 @@ class Segment : public Element {
 
       void sortStaves(QList<int>& dst);
       const char* subTypeName() const;
+      SegmentType segmentType() const     { return SegmentType(subtype()); }
       static SegmentType segmentType(int type);
       void removeGeneratedElements();
       bool isEmpty() const               { return empty; }

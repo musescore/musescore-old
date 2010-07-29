@@ -98,7 +98,6 @@ void GuitarPro::read(void* p, qint64 len)
             return;
       qint64 rv = f->read((char*)p, len);
       if (rv != len) {
-            abort();
             throw GP_EOF;
             }
       curPos += len;
@@ -1195,7 +1194,6 @@ printf("BeginRepeat=============================================\n");
             Segment* segment = measure->getSegment(SegClef, 0);
             segment->add(clef);
 
-
             Channel& ch = instr->channel(0);
             if (c & 1) {
                   ch.program = 0;
@@ -1299,6 +1297,7 @@ printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
                                     }
                               tuplet->setTrack(staffIdx * VOICES);
                               tuplet->setBaseLen(l);
+                              setTuplet(tuplet, tuple);
                               cr->setTuplet(tuplet);
                               }
 
@@ -2522,7 +2521,7 @@ bool Score::importGTP(const QString& name)
             gp = new GuitarPro1(this, version);
       if (a == 2)
             gp = new GuitarPro2(this, version);
-      if (a == 1)
+      if (a == 3)
             gp = new GuitarPro3(this, version);
       else if (a == 4)
             gp = new GuitarPro4(this, version);
@@ -2600,8 +2599,7 @@ bool Score::importGTP(const QString& name)
       // create excerpts
       //
       foreach(Part* part, _parts) {
-            Score* score = new Score(style());
-            score->setParentScore(this);
+            Score* score = new Score(this);
             QList<int> stavesMap;
             Part* p = new Part(score);
             p->setInstrument(*part->instr());

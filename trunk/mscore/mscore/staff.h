@@ -167,7 +167,8 @@ class Staff {
       VeloList& velocities()           { return _velocities;     }
       PitchList& pitchOffsets()        { return _pitchOffsets;   }
 
-      LinkedStaves* linkedStaves() const { return _linkedStaves; }
+      LinkedStaves* linkedStaves() const    { return _linkedStaves; }
+      void setLinkedStaves(LinkedStaves* l) { _linkedStaves = l;    }
       void linkTo(Staff* staff);
       };
 #endif
