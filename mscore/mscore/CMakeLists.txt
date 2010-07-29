@@ -238,6 +238,7 @@ if (MINGW)
    target_link_libraries(mscore
       al
       awl
+      diff_match_patch
       msynth
       bww
       osdabzip
@@ -304,6 +305,7 @@ else (MINGW)
       ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
       ${ALSA_LIB}
       ${PORTAUDIO_LIB}
+      diff_match_patch
       al
       awl
       msynth
@@ -315,11 +317,11 @@ else (MINGW)
       z
       dl
       )
-   
+
    if (NOT APPLE)
        target_link_libraries(mscore rt)
    endif (NOT APPLE)
-   
+
    if (HAS_AUDIOFILE)
        target_link_libraries(mscore sndfile)
    endif (HAS_AUDIOFILE)
