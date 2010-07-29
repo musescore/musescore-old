@@ -1,3 +1,6 @@
+29.jul (ws)
+      - added google-diff-match-patch library to build
+      - implemented basic functionality for linked parts
 24.jul (ws)
       - replace buildin DejaVu fonts with FSF freefont
       - new: import of GuitarPro *.gtp *.gp3 *.gp4 *.gp5 files
