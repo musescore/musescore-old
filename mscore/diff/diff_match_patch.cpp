@@ -20,7 +20,6 @@
  */
 
 // Code known to compile and run with Qt 4.3.3 and Qt 4.4.0.
-#include <QtCore>
 #include "diff_match_patch.h"
 
 
