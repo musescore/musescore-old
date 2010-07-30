@@ -86,7 +86,7 @@ class GuitarPro {
       QStringList comments;
       GpTrack channelDefaults[GP_MAX_TRACK_NUMBER * 2];
       int staves;
-      int numBars;
+      int measures;
       QList<GpBar> bars;
 
       enum GuitarProError { GP_NO_ERROR, GP_UNKNOWN_FORMAT,
@@ -170,6 +170,11 @@ class GuitarPro5 : public GuitarPro {
       virtual void readChord(Segment*);
       void readMeasure(Measure* measure, int staffIdx, Tuplet*[]);
       void readArtificialHarmonic();
+      void readTracks();
+      void readMeasures();
+      int readBeat(int tick, int voice, Measure* measure, int staffIdx, Tuplet** tuplets);
+      void readNoteEffects();
+      void readTremoloBar();
 
    public:
       GuitarPro5(Score* s, int v) : GuitarPro(s, v) {}
