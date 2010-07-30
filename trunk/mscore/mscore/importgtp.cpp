@@ -40,6 +40,7 @@
 #include "excerpt.h"
 #include "stafftype.h"
 #include "bracket.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -239,6 +240,22 @@ void GuitarPro::setTuplet(Tuplet* tuplet, int tuple)
             default:
                   printf("unsupported tuplet %d\n", tuple);
                   abort();
+            }
+      }
+
+//---------------------------------------------------------
+//   addDynamic
+//---------------------------------------------------------
+
+void GuitarPro::addDynamic(Note* note, int d)
+      {
+      if (d == 8) {
+            Articulation* a = new Articulation(note->score());
+            a->setSubtype(SforzatoaccentSym);
+            note->chord()->add(a);
+            }
+      else {
+            printf("dynamic %d\n", d);
             }
       }
 
@@ -873,7 +890,7 @@ void GuitarPro1::readNote(int string, Note* note)
 
       if (noteBits & 0x10) {
             int d = readUChar();                  // dynamic
-            printf("Dynamic=========%d\n", d);
+            addDynamic(note, d);
             }
       int fretNumber = -1;
       if (noteBits & 0x20)
@@ -1457,7 +1474,7 @@ void GuitarPro4::readNote(int string, Note* note)
 
       if (noteBits & 0x10) {
             int d = readUChar();                  // dynamic
-            printf("Dynamic=========%d\n", d);
+            addDynamic(note, d);
             }
       int fretNumber = -1;
       if (noteBits & 0x20)
@@ -1923,8 +1940,10 @@ void GuitarPro5::readNote(int string, Note* note)
                   printf("unknown note type: %d\n", noteType);
             }
 
-      if (noteBits & 0x10)          // velocity
-            readChar();
+      if (noteBits & 0x10) {          // velocity
+            int d = readChar();
+            addDynamic(note, d);
+            }
       int fretNumber = -1;
       if (noteBits & 0x20)
             fretNumber = readChar();
@@ -2600,6 +2619,8 @@ bool Score::importGTP(const QString& name)
       //
       foreach(Part* part, _parts) {
             Score* score = new Score(this);
+            score->style().set(ST_createMultiMeasureRests, true);
+
             QList<int> stavesMap;
             Part* p = new Part(score);
             p->setInstrument(*part->instr());

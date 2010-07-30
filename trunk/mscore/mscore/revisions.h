@@ -28,15 +28,20 @@ class Xml;
 //---------------------------------------------------------
 
 class Revision {
-      int _id;
-      QString _diff;           // diff to parent
+      QString _id;
+      QString _diff;          // diff to parent
+      QDateTime _dateTime;
       Revision* _parent;
       QList<Revision*> _branches;
-      QDateTime _dateTime;
 
    public:
       Revision();
       void read(QDomElement);
+      void write(Xml&) const;
+      void setParent(Revision* r)              { _parent = r; }
+      Revision* parent() const                 { return _parent; }
+      const QList<Revision*>& branches() const { return _branches; }
+      void setId(const QString& s)             { _id = s; }
       };
 
 //---------------------------------------------------------
@@ -50,12 +55,14 @@ class Revision {
 class Revisions {
       Revision* _trunk;
 
+      void write(Xml&, const Revision*) const;
+
    public:
       Revisions();
       void add(Revision*);
       QString getRevision(QString id);
       Revision* trunk() { return _trunk; }
-      void write(Xml&);
+      void write(Xml&) const;
       };
 
 #endif
