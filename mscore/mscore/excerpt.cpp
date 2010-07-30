@@ -359,7 +359,7 @@ Score* createExcerpt(const QList<Part*>& parts)
 struct Tuplet2 {
       Tuplet* o;
       Tuplet* n;
-      Tuplet2(Tuplet* a, Tuplet* b) : o(a), n(b) {}
+      Tuplet2(Tuplet* _o, Tuplet* _n) : o(_o), n(_n) {}
       };
 
 //---------------------------------------------------------
@@ -372,7 +372,7 @@ class TupletMap {
    public:
       TupletMap() {}
       Tuplet* findNew(Tuplet* o);
-      void add(Tuplet* _o, Tuplet* _n) { map.append(Tuplet2(_o, _n));}
+      void add(Tuplet* _o, Tuplet* _n) { map.append(Tuplet2(_o, _n)); }
       };
 
 //---------------------------------------------------------
@@ -402,8 +402,6 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
             else if (mb->type() == VBOX)
                   nmb = new VBox(score);
             else if (mb->type() == MEASURE) {
-                  TupletMap tupletMap;
-
                   Measure* m  = static_cast<Measure*>(mb);
                   Measure* nm = new Measure(score);
                   nmb = nm;
@@ -425,32 +423,36 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                   Fraction ts = nm->len();
                   int tracks = score->nstaves() * VOICES;
                   for (int track = 0; track < tracks; ++track) {
+                        TupletMap tupletMap;
                         int srcTrack = map[track/VOICES] * VOICES + (track % VOICES);
-                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                              Element* e = seg->element(srcTrack);
-                              if (e == 0)
+                        for (Segment* oseg = m->first(); oseg; oseg = oseg->next()) {
+                              Element* oe = oseg->element(srcTrack);
+                              if (oe == 0)
                                     continue;
-                              Element* el = e->clone();
-                              el->setTrack(track);
-                              el->scanElements(score, localSetScore);
-                              el->setScore(score);
-                              Segment* s = nm->getSegment(SegmentType(seg->subtype()), seg->tick());
-                              s->add(el);
-                              if (e->isChordRest()) {
-                                    ChordRest* cr = static_cast<ChordRest*>(e);
-                                    if (cr->tuplet()) {
-                                          ChordRest* ncr = static_cast<ChordRest*>(el);
-                                          Tuplet* nt = tupletMap.findNew(cr->tuplet());
+                              Element* ne = oe->clone();
+                              ne->setTrack(track);
+                              ne->scanElements(score, localSetScore);
+                              ne->setScore(score);
+                              Segment* s = nm->getSegment(SegmentType(oseg->subtype()), oseg->tick());
+                              if (oe->isChordRest()) {
+                                    ChordRest* ocr = static_cast<ChordRest*>(oe);
+                                    ChordRest* ncr = static_cast<ChordRest*>(ne);
+                                    Tuplet* ot     = ocr->tuplet();
+                                    if (ot) {
+                                          Tuplet* nt = tupletMap.findNew(ot);
                                           if (nt == 0) {
-                                                nt = new Tuplet(*cr->tuplet());
-                                                nt->setScore(score);
+                                                nt = new Tuplet(*ot);
                                                 nt->clear();
-                                                tupletMap.add(cr->tuplet(), nt);
+                                                nt->setTrack(track);
+                                                nt->setScore(score);
+                                                nm->add(nt);
+                                                tupletMap.add(ot, nt);
                                                 }
-                                          nt->add(ncr);
+                                          // nt->add(ncr);
                                           ncr->setTuplet(nt);
                                           }
                                     }
+                              s->add(ne);
                               }
                         }
                   }

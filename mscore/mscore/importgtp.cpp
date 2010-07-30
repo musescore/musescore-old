@@ -512,6 +512,7 @@ printf("key %d octave %d\n", key, octave);
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
                                     tuplet = new Tuplet(score);
+                                    tuplet->setTrack(cr->track());
                                     tuplets[staffIdx] = tuplet;
                                     measure->add(tuplet);
                                     }
@@ -545,11 +546,24 @@ printf("key %d octave %d\n", key, octave);
                         }
                   }
             }
+      setTempo(tempo);
+      }
+
+//---------------------------------------------------------
+//   setTempo
+//---------------------------------------------------------
+
+void GuitarPro::setTempo(int tempo)
+      {
       TempoText* tt = new TempoText(score);
       tt->setTempo(double(tempo)/60.0);
-      tt->setText(QString("%1%2 = %3").arg(QChar(QChar::highSurrogate(0x1d15f))).arg(QChar(QChar::lowSurrogate(0x1d15f))).arg(tempo));
+      int uc = 0x1d15f;
+      QChar h(QChar::highSurrogate(uc));
+      QChar l(QChar::lowSurrogate(uc));
+      tt->setText(QString("%1%2 = %3 ").arg(h).arg(l).arg(tempo));
+
       tt->setTrack(0);
-      measure = score->firstMeasure();
+      Measure* measure = score->firstMeasure();
       Segment* segment = measure->getSegment(SegChordRest, 0);
       segment->add(tt);
       }
@@ -802,6 +816,7 @@ printf("BeginRepeat=============================================\n");
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
                                     tuplet = new Tuplet(score);
+                                    tuplet->setTrack(cr->track());
                                     tuplets[staffIdx] = tuplet;
                                     measure->add(tuplet);
                                     }
@@ -835,13 +850,7 @@ printf("BeginRepeat=============================================\n");
                         }
                   }
             }
-      TempoText* tt = new TempoText(score);
-      tt->setTempo(double(tempo)/60.0);
-      tt->setText(QString("%1%2 = %3").arg(QChar(QChar::highSurrogate(0x1d15f))).arg(QChar(QChar::lowSurrogate(0x1d15f))).arg(tempo));
-      tt->setTrack(0);
-      measure = score->firstMeasure();
-      Segment* segment = measure->getSegment(SegChordRest, 0);
-      segment->add(tt);
+      setTempo(tempo);
       }
 
 //---------------------------------------------------------
@@ -1309,6 +1318,7 @@ printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
                                     tuplet = new Tuplet(score);
+                                    tuplet->setTrack(cr->track());
                                     tuplets[staffIdx] = tuplet;
                                     measure->add(tuplet);
                                     }
@@ -1342,13 +1352,7 @@ printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
                         }
                   }
             }
-      TempoText* tt = new TempoText(score);
-      tt->setTempo(double(tempo)/60.0);
-      tt->setText(QString("%1%2 = %3").arg(QChar(QChar::highSurrogate(0x1d15f))).arg(QChar(QChar::lowSurrogate(0x1d15f))).arg(tempo));
-      tt->setTrack(0);
-      measure = score->firstMeasure();
-      Segment* segment = measure->getSegment(SegChordRest, 0);
-      segment->add(tt);
+      setTempo(tempo);
       }
 
 //---------------------------------------------------------
@@ -1839,6 +1843,7 @@ printf("%d: Tuplet note beat %d  tuplet %d  len %s\n", tick, beat, tuple, qPrint
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
                                     tuplet = new Tuplet(score);
+                                    tuplet->setTrack(cr->track());
                                     tuplets[staffIdx] = tuplet;
                                     measure->add(tuplet);
                                     }
@@ -1873,13 +1878,7 @@ printf("%d: add cr %p <%s>\n", tick, cr, qPrintable(l.print()));
                         }
                   }
             }
-      TempoText* tt = new TempoText(score);
-      tt->setTempo(double(tempo)/60.0);
-      tt->setText(QString("%1%2 = %3").arg(QChar(QChar::highSurrogate(0x1d15f))).arg(QChar(QChar::lowSurrogate(0x1d15f))).arg(tempo));
-      tt->setTrack(0);
-      measure = score->firstMeasure();
-      Segment* segment = measure->getSegment(SegChordRest, 0);
-      segment->add(tt);
+      setTempo(tempo);
       }
 
 //---------------------------------------------------------
@@ -2181,7 +2180,9 @@ printf(" voice %d beat %d(%d) len %d bits %02x stringMask 0x%02x\n", voice, beat
                         Tuplet* tuplet = tuplets[staffIdx * 2 + voice];
                         if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
                               tuplet = new Tuplet(score);
+                              int track = staffIdx * 2 + voice;
                               tuplets[staffIdx * 2 + voice] = tuplet;
+                              tuplet->setTrack(cr->track());
                               measure->add(tuplet);
                               }
                         tuplet->setTrack(cr->track());
@@ -2496,13 +2497,7 @@ printf("measure %d(%d), staff %d(%d)\n", bar, numBars, staffIdx, staves);
                         }
                   }
             }
-      TempoText* tt = new TempoText(score);
-      tt->setTempo(double(tempo)/60.0);
-      tt->setText(QString("%1%2 = %3").arg(QChar(QChar::highSurrogate(0x1d15f))).arg(QChar(QChar::lowSurrogate(0x1d15f))).arg(tempo));
-      tt->setTrack(0);
-      measure = score->firstMeasure();
-      Segment* segment = measure->getSegment(SegChordRest, 0);
-      segment->add(tt);
+      setTempo(tempo);
       }
 
 //---------------------------------------------------------
@@ -2585,11 +2580,24 @@ bool Score::importGTP(const QString& name)
             s->setText(gp->title);
             m->add(s);
             }
-      if (!gp->subtitle.isEmpty()) {
+      if (!gp->subtitle.isEmpty() && !gp->artist.isEmpty() && !gp->album.isEmpty()) {
             Text* s = new Text(this);
             s->setSubtype(TEXT_SUBTITLE);
             s->setTextStyle(TEXT_STYLE_SUBTITLE);
-            s->setText(gp->subtitle);
+            QString str;
+            if (!gp->subtitle.isEmpty())
+                  str.append(gp->subtitle);
+            if (!gp->artist.isEmpty()) {
+                  if (!str.isEmpty())
+                        str.append("\n");
+                  str.append(gp->artist);
+                  }
+            if (!gp->album.isEmpty()) {
+                  if (!str.isEmpty())
+                        str.append("\n");
+                  str.append(gp->album);
+                  }
+            s->setText(str);
             m->add(s);
             }
       if (!gp->composer.isEmpty()) {
@@ -2597,13 +2605,6 @@ bool Score::importGTP(const QString& name)
             s->setSubtype(TEXT_COMPOSER);
             s->setTextStyle(TEXT_STYLE_COMPOSER);
             s->setText(gp->composer);
-            m->add(s);
-            }
-      if (!gp->artist.isEmpty()) {
-            Text* s = new Text(this);
-            s->setSubtype(TEXT_POET);
-            s->setTextStyle(TEXT_STYLE_POET);
-            s->setText(gp->artist);
             m->add(s);
             }
       int idx = 0;
@@ -2614,6 +2615,7 @@ bool Score::importGTP(const QString& name)
                   m->setEndBarLineType(bar.barLine, false);
             }
       lastMeasure()->setEndBarLineType(END_BAR, false);
+#if 1
       //
       // create excerpts
       //
@@ -2692,6 +2694,7 @@ bool Score::importGTP(const QString& name)
             score->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
             score->doLayout();
             }
+#endif
 
 //      album
 //      copyright
