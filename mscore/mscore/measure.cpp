@@ -2501,8 +2501,6 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
                   e->scanElements(data,  func);
             }
       foreach(Tuplet* tuplet, _tuplets) {
-            printf("tuplet %p score %p track %d staves %d\n",
-               tuplet, tuplet->score(), tuplet->track(), tuplet->score()->nstaves());
             if (visible(tuplet->staffIdx()))
                   func(data, tuplet);
             }
