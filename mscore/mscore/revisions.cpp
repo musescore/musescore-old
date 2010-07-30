@@ -21,23 +21,47 @@
 #include "revisions.h"
 #include "xml.h"
 
-
 //---------------------------------------------------------
 //   Revision
 //---------------------------------------------------------
 
 Revision::Revision()
       {
-      _id     = 0;
       _parent = 0;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Revision::write(Xml& xml) const
+      {
+      xml.stag("Revision");
+      xml.tag("id",   _id);
+      xml.tag("date", _dateTime.toString());
+      xml.tag("diff", _diff);
+      xml.etag();
       }
 
 //---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
-void Revision::read(QDomElement)
+void Revision::read(QDomElement e)
       {
+      _dateTime = QDateTime::currentDateTime();
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "id")
+                  _id = val;
+            else if (tag == "diff")
+                  _diff = val;
+            else if (tag == "date")
+                  _dateTime = QDateTime::fromString(val);
+            else
+                  domError(e);
+            }
       }
 
 //---------------------------------------------------------
@@ -53,16 +77,30 @@ Revisions::Revisions()
 //   write
 //---------------------------------------------------------
 
-void Revisions::write(Xml&)
+void Revisions::write(Xml& xml) const
       {
+      for (Revision* r = _trunk; r; r = r->parent())
+            write(xml, r);
+      }
+
+void Revisions::write(Xml& xml, const Revision* r) const
+      {
+      r->write(xml);
+      foreach(const Revision* rr, r->branches())
+            write(xml, rr);
       }
 
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
-void Revisions::add(Revision*)
+void Revisions::add(Revision* r)
       {
+      if (_trunk == 0) {
+            _trunk = r;
+            _trunk->setParent(0);
+            return;
+            }
       }
 
 //---------------------------------------------------------
