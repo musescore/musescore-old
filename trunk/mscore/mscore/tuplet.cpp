@@ -780,3 +780,12 @@ void Tuplet::dump() const
       printf("ratio %s\n", qPrintable(_ratio.print()));
       }
 
+//---------------------------------------------------------
+//   setTrack
+//---------------------------------------------------------
+
+void Tuplet::setTrack(int val)
+      {
+      Element::setTrack(val);
+      }
+

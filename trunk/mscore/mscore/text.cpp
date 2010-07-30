@@ -180,6 +180,7 @@ void TextBase::setText(const QString& s, Align align)
       {
       _doc->clear();
       QTextCursor cursor(_doc);
+      cursor.setVisualNavigation(true);
       cursor.movePosition(QTextCursor::Start);
       if (align & (ALIGN_HCENTER | ALIGN_RIGHT)) {
             Qt::Alignment a;
@@ -471,6 +472,7 @@ void TextC::baseChanged()
       if (_editMode) {
             delete cursor;
             cursor = new QTextCursor(textBase()->doc());
+            cursor->setVisualNavigation(true);
             cursor->setPosition(cursorPos);
             }
       else {
@@ -496,6 +498,7 @@ Text::Text(const Text& e)
       _tb = new TextBase(*(e._tb));
       if (_editMode) {
             cursor = new QTextCursor(textBase()->doc());
+            cursor->setVisualNavigation(true);
             cursor->setPosition(cursorPos);
             cursor->setBlockFormat(e.cursor->blockFormat());
             cursor->setCharFormat(e.cursor->charFormat());
@@ -907,6 +910,7 @@ void TextB::startEdit(ScoreView* view, const QPointF& p)
       {
       mscore->textTools()->show();
       cursor = new QTextCursor(doc());
+      cursor->setVisualNavigation(true);
       cursor->setPosition(cursorPos);
       _editMode = true;
       setCursor(p);
@@ -1237,22 +1241,17 @@ void TextB::addSymbol(const SymCode& s, QTextCursor* cur)
       {
       if (cur == 0)
             cur = cursor;
-// printf("Text: addSymbol(%x)\n", s.code);
-      QTextCharFormat oFormat = cur->charFormat();
       if (s.fontId >= 0) {
-            QTextCharFormat oFormat = cur->charFormat();
-            QTextCharFormat nFormat(oFormat);
+            QTextCharFormat nFormat(cur->charFormat());
             nFormat.setFontFamily(fontId2font(s.fontId).family());
-            cur->setCharFormat(nFormat);
             QString ss;
-            if (s.code & 0xffff0000) {
+            if (s.code >= 0x10000) {
                   ss = QChar(QChar::highSurrogate(s.code));
                   ss += QChar(QChar::lowSurrogate(s.code));
                   }
             else
                   ss = QChar(s.code);
-            cur->insertText(ss);
-            cur->setCharFormat(oFormat);
+            cur->insertText(ss, nFormat);
             }
       else
             cur->insertText(QChar(s.code));

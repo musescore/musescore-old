@@ -78,6 +78,7 @@ class GuitarPro {
       void setTuplet(Tuplet* tuplet, int tuple);
       Fraction len2fraction(int len);
       void addDynamic(Note*, int d);
+      void setTempo(int n);
 
    public:
       QString title, subtitle, artist, album, composer;
