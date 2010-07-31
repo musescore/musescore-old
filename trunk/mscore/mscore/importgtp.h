@@ -47,6 +47,10 @@ struct GpBar {
       GpBar();
       };
 
+struct GpNote {
+      bool slur;
+      };
+
 //---------------------------------------------------------
 //   GuitarPro
 //---------------------------------------------------------
@@ -69,7 +73,6 @@ class GuitarPro {
       QString readBytePascalString();
       int readInt();
       QString readDelphiString();
-      virtual void readNote(int string, Note*) = 0;
       virtual void readChromaticGraph();
       virtual void readMixChange();
       virtual void readBeatEffects() = 0;
@@ -107,7 +110,7 @@ class GuitarPro1 : public GuitarPro {
 
    protected:
       virtual void readChord(Segment*);
-      virtual void readNote(int string, Note* note);
+      void readNote(int string, Note* note);
       virtual void readBeatEffects();
 
    public:
@@ -144,7 +147,7 @@ class GuitarPro3 : public GuitarPro1 {
 class GuitarPro4 : public GuitarPro {
 
       void readInfo();
-      virtual void readNote(int string, Note* note);
+      void readNote(int string, Note* note, GpNote*);
       virtual void readChord(Segment*);
       virtual void readBeatEffects();
       virtual void readMixChange();
@@ -165,7 +168,7 @@ class GuitarPro5 : public GuitarPro {
       void readPageSetup();
       virtual void readBeatEffects();
       virtual void readChromaticGraph();
-      virtual void readNote(int string, Note* note);
+      void readNote(int string, Note* note);
       virtual void readMixChange();
       virtual void readChord(Segment*);
       void readMeasure(Measure* measure, int staffIdx, Tuplet*[]);

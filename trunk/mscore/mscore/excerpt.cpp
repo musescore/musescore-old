@@ -389,11 +389,67 @@ Tuplet* TupletMap::findNew(Tuplet* o)
       }
 
 //---------------------------------------------------------
+//   Slur2
+//---------------------------------------------------------
+
+struct Slur2 {
+      Slur* o;
+      Slur* n;
+      Slur2(Slur* _o, Slur* _n) : o(_o), n(_n) {}
+      };
+
+//---------------------------------------------------------
+//   SlurMap
+//---------------------------------------------------------
+
+class SlurMap {
+      QList<Slur2> map;
+
+   public:
+      SlurMap() {}
+      Slur* findNew(Slur* o);
+      void add(Slur* _o, Slur* _n) { map.append(Slur2(_o, _n)); }
+      void check();
+      };
+
+//---------------------------------------------------------
+//   findNew
+//---------------------------------------------------------
+
+Slur* SlurMap::findNew(Slur* o)
+      {
+      foreach(const Slur2& s2, map) {
+            if (s2.o == o)
+                  return s2.n;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   check
+//---------------------------------------------------------
+
+void SlurMap::check()
+      {
+      foreach(const Slur2& s2, map) {
+            Slur* slur = s2.n;
+            if (slur->endElement() == 0) {
+                  printf("slur end element missing %p new %p\n", s2.o, s2.n);
+                  static_cast<ChordRest*>(slur->startElement())->removeSlurFor(slur);
+                  delete slur;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   cloneStaves
 //---------------------------------------------------------
 
 void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       {
+      int tracks = score->nstaves() * VOICES;
+      SlurMap slurMap[tracks];
+
       MeasureBaseList* nmbl = score->measures();
       for(MeasureBase* mb = oscore->measures()->first(); mb; mb = mb->next()) {
             MeasureBase* nmb = 0;
@@ -421,7 +477,6 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                      m->endBarLineColor());
 
                   Fraction ts = nm->len();
-                  int tracks = score->nstaves() * VOICES;
                   for (int track = 0; track < tracks; ++track) {
                         TupletMap tupletMap;
                         int srcTrack = map[track/VOICES] * VOICES + (track % VOICES);
@@ -451,6 +506,22 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                           // nt->add(ncr);
                                           ncr->setTuplet(nt);
                                           }
+                                    foreach(Slur* s, ocr->slurFor()) {
+                                          Slur* slur = new Slur(score);
+                                          slur->setStartElement(ncr);
+                                          ncr->addSlurFor(slur);
+                                          slurMap[track].add(s, slur);
+                                          }
+                                    foreach(Slur* s, ocr->slurBack()) {
+                                          Slur* slur = slurMap[track].findNew(s);
+                                          if (slur) {
+                                                slur->setEndElement(ncr);
+                                                ncr->addSlurBack(slur);
+                                                }
+                                          else {
+                                                printf("cloneStave: cannot find slur\n");
+                                                }
+                                          }
                                     }
                               s->add(ne);
                               }
@@ -463,5 +534,8 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                   }
             nmbl->add(nmb);
             }
+      //DEBUG:
+      for (int track = 0; track < tracks; ++track)
+            slurMap[track].check();
       }
 

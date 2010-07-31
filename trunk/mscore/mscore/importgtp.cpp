@@ -1441,7 +1441,7 @@ printf("readBeatEffects 0x%02x 0x%02x\n", fxBits1, fxBits2);
 //   readNote
 //---------------------------------------------------------
 
-void GuitarPro4::readNote(int string, Note* note)
+void GuitarPro4::readNote(int string, Note* note, GpNote* gpNote)
       {
       uchar noteBits = readUChar();
 
@@ -1494,23 +1494,25 @@ void GuitarPro4::readNote(int string, Note* note)
             int b = readUChar();
             printf("Fingering=========%d %d\n", a, b);
             }
+      gpNote->slur = false;
       if (noteBits & 0x8) {
             uchar modMask1 = readUChar();
             uchar modMask2 = readUChar();
             if (modMask1 & 0x1)
                   readChromaticGraph();
             if (modMask1 & 0x2) {         // hammer on / pull off
+                  gpNote->slur = true;
                   }
             if (modMask1 & 0x8) {         // let ring
                   }
-           printf("          0x%02x 0x%02x\n", modMask1, modMask2);
+           printf("          modulation 0x%02x 0x%02x\n", modMask1, modMask2);
             if (modMask1 & 0x10) {
                   readUChar();            // grace fret
                   readUChar();            // grace dynamic
                   readUChar();            // grace transition
                   readUChar();            // grace length
                   }
-            if (modMask2 & 0x1) {   // staccato - palm mute
+            if (modMask2 & 0x1) {   // staccato
                   }
             if (modMask2 & 0x2) {   // palm mute - mute the whole column
                   }
@@ -1716,7 +1718,7 @@ printf("BeginRepeat=============================================\n");
       for (int i = 0; i < staves; ++i) {
             int tuning[GP_MAX_STRING_NUMBER];
 
-            uchar c      = readUChar();   // simulations bitmask
+            uchar c = readUChar();   // simulations bitmask
             if (c & 0x2) {                // 12 stringed guitar
                   }
             if (c & 0x4) {                // banjo track
@@ -1786,6 +1788,9 @@ printf("track %d strings %d <%s>\n", i, strings, qPrintable(name));
             ch.updateInitList();
             }
 
+      Slur* slurs[staves];
+      for (int i = 0; i < staves; ++i)
+            slurs[i] = 0;
       Measure* measure = score->firstMeasure();
       for (int bar = 0; bar < measures; ++bar, measure = measure->nextMeasure()) {
 printf("  read measure %d(%d)\n", bar, measures);
@@ -1877,14 +1882,36 @@ printf("      add cr %p <%s>\n", cr, qPrintable(l.print()));
 
                         Staff* staff = cr->staff();
                         int numStrings = staff->part()->instr()->tablature()->strings();
+                        bool hasSlur = false;
                         for (int i = 6; i >= 0; --i) {
                               if (strings & (1 << i) && ((6-i) < numStrings)) {
                                     Note* note = new Note(score);
                                     static_cast<Chord*>(cr)->add(note);
 
-                                    readNote(6-i, note);
+                                    GpNote gpNote;
+                                    readNote(6-i, note, &gpNote);
+                                    if (gpNote.slur)
+                                          hasSlur = true;
                                     note->setTpcFromPitch();
                                     }
+                              }
+                        if (hasSlur && (slurs[staffIdx] == 0)) {
+                              Slur* slur = new Slur(score);
+                              slur->setParent(0);
+                              slur->setTrack(staffIdx * VOICES);
+                              slur->setStartElement(cr);
+                              slur->setEndElement(cr);
+                              slurs[staffIdx] = slur;
+                              }
+                        else if (slurs[staffIdx] && !hasSlur) {
+                              // TODO: check slur
+                              Slur* s = slurs[staffIdx];
+                              slurs[staffIdx] = 0;
+                              s->setEndElement(cr);
+                              static_cast<Chord*>(s->startElement())->addSlurFor(s);
+                              static_cast<Chord*>(s->endElement())->addSlurBack(s);
+                              }
+                        else if (slurs[staffIdx] && hasSlur) {
                               }
                         tick += cr->ticks();
                         }
