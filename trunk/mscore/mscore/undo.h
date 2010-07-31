@@ -70,6 +70,14 @@ class Clef;
 class Image;
 class Hairpin;
 
+#define DEBUG_UNDO
+
+#ifdef DEBUG_UNDO
+#define UNDO_NAME(a)  virtual const char* name() const { return a; }
+#else
+#define UNDO_NAME(a)
+#endif
+
 //---------------------------------------------------------
 //   UndoCommand
 //---------------------------------------------------------
@@ -85,6 +93,9 @@ class UndoCommand {
       UndoCommand* removeChild()         { return childList.takeLast(); }
       int childCount() const             { return childList.size();     }
       void unwind();
+#ifdef DEBUG_UNDO
+      virtual const char* name() const  { return "UndoCommand"; }
+#endif
       };
 
 //---------------------------------------------------------
@@ -167,6 +178,7 @@ class SaveState : public UndoCommand {
       SaveState(Score*);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("SaveState");
       };
 
 //---------------------------------------------------------
@@ -181,6 +193,7 @@ class InsertPart : public UndoCommand {
       InsertPart(Part* p, int i);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("InsertPart");
       };
 
 //---------------------------------------------------------
@@ -195,6 +208,7 @@ class RemovePart : public UndoCommand {
       RemovePart(Part*, int idx);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("RemovePart");
       };
 
 //---------------------------------------------------------
@@ -209,6 +223,7 @@ class InsertStaff : public UndoCommand {
       InsertStaff(Staff*, int idx);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("InsertStaff");
       };
 
 //---------------------------------------------------------
@@ -223,6 +238,7 @@ class RemoveStaff : public UndoCommand {
       RemoveStaff(Staff*, int idx);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("RemoveStaff");
       };
 
 //---------------------------------------------------------
@@ -238,6 +254,7 @@ class InsertMStaff : public UndoCommand {
       InsertMStaff(Measure*, MStaff*, int);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("InsertMStaff");
       };
 
 //---------------------------------------------------------
@@ -253,6 +270,7 @@ class RemoveMStaff : public UndoCommand {
       RemoveMStaff(Measure*, MStaff*, int);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("RemoveMStaff");
       };
 
 //---------------------------------------------------------
@@ -266,6 +284,7 @@ class InsertMeasure : public UndoCommand {
       InsertMeasure(MeasureBase*);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("InsertMeasure");
       };
 
 //---------------------------------------------------------
@@ -281,6 +300,7 @@ class InsertStaves : public UndoCommand {
       InsertStaves(Measure*, int, int);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("InsertStaves");
       };
 
 //---------------------------------------------------------
@@ -296,6 +316,7 @@ class RemoveStaves : public UndoCommand {
       RemoveStaves(Measure*, int, int);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("RemoveStaves");
       };
 
 //---------------------------------------------------------
@@ -312,6 +333,7 @@ class SortStaves : public UndoCommand {
       SortStaves(Score*, QList<int>);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("SortStaves");
       };
 
 //---------------------------------------------------------
@@ -326,6 +348,7 @@ class ToggleInvisible : public UndoCommand {
       ToggleInvisible(Element*);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ToggleInvisible");
       };
 
 //---------------------------------------------------------
@@ -341,6 +364,7 @@ class ChangeColor : public UndoCommand {
       ChangeColor(Element*, QColor);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeColor");
       };
 
 //---------------------------------------------------------
@@ -360,6 +384,7 @@ class ChangePitch : public UndoCommand {
       ChangePitch(Note* note, int pitch, int tpc, int userAccidental, int l, int f);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangePitch");
       };
 
 //---------------------------------------------------------
@@ -375,6 +400,7 @@ class ChangeTpc : public UndoCommand {
       ChangeTpc(Note* note, int tpc);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeTpc");
       };
 
 //---------------------------------------------------------
@@ -390,6 +416,7 @@ class ChangeSubtype : public UndoCommand {
       ChangeSubtype(Element*, int subtype);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeSubtype");
       };
 
 //---------------------------------------------------------
@@ -405,6 +432,7 @@ class SetStemDirection : public UndoCommand {
       SetStemDirection(Chord*, Direction);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("SetStemDirection");
       };
 
 //---------------------------------------------------------
@@ -419,6 +447,7 @@ class FlipSlurDirection : public UndoCommand {
       FlipSlurDirection(SlurTie*);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("FlipSlurDirection");
       };
 
 //---------------------------------------------------------
@@ -433,6 +462,7 @@ class FlipBeamDirection : public UndoCommand {
       FlipBeamDirection(Beam*);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("FlipBeamDirection");
       };
 
 //---------------------------------------------------------
@@ -451,6 +481,7 @@ class ChangeKeySig : public UndoCommand {
       ChangeKeySig(KeySig*, KeySigEvent newKeySig, bool sc, bool sn);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeKeySig");
       };
 
 //---------------------------------------------------------
@@ -465,6 +496,7 @@ class FlipTupletDirection : public UndoCommand {
       FlipTupletDirection(Tuplet*);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("FlipTupletDirection");
       };
 
 //---------------------------------------------------------
@@ -481,6 +513,7 @@ class ChangeMeasureLen : public UndoCommand {
       ChangeMeasureLen(Measure*, int oldTicks, int newTicks);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeMeasureLen");
       };
 
 //---------------------------------------------------------
@@ -496,6 +529,7 @@ class ChangeElement : public UndoCommand {
       ChangeElement(Element* oldElement, Element* newElement);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeElement");
       };
 
 //---------------------------------------------------------
@@ -512,6 +546,7 @@ class InsertTime : public UndoCommand {
       InsertTime(Score*, int tick, int len);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("InsertTime");
       };
 
 //---------------------------------------------------------
@@ -527,6 +562,7 @@ class ChangeRepeatFlags : public UndoCommand {
       ChangeRepeatFlags(Measure*, int flags);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeRepeatFlags");
       };
 
 //---------------------------------------------------------
@@ -542,6 +578,7 @@ class ChangeVoltaEnding : public UndoCommand {
       ChangeVoltaEnding(Volta*, const QList<int>&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeVoltaEnding");
       };
 
 //---------------------------------------------------------
@@ -557,6 +594,7 @@ class ChangeVoltaText : public UndoCommand {
       ChangeVoltaText(Volta*, const QString&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeVoltaText");
       };
 
 //---------------------------------------------------------
@@ -572,6 +610,7 @@ class ChangeChordRestSize : public UndoCommand {
       ChangeChordRestSize(ChordRest*, bool small);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeChordRestSize");
       };
 
 //---------------------------------------------------------
@@ -587,6 +626,7 @@ class ChangeChordNoStem : public UndoCommand {
       ChangeChordNoStem(Chord*, bool noStem);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeChordNoStem");
       };
 
 //---------------------------------------------------------
@@ -603,6 +643,7 @@ class ChangeChordRestSpace : public UndoCommand {
       ChangeChordRestSpace(ChordRest*, Spatium l, Spatium t);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeChordRestSpace");
       };
 
 //---------------------------------------------------------
@@ -618,6 +659,7 @@ class ChangeEndBarLineType : public UndoCommand {
       ChangeEndBarLineType(Measure*, int subtype);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeEndBarLineType");
       };
 
 //---------------------------------------------------------
@@ -633,6 +675,7 @@ class ChangeBarLineSpan : public UndoCommand {
       ChangeBarLineSpan(Staff*, int span);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeBarLineSpan");
       };
 
 //---------------------------------------------------------
@@ -648,6 +691,7 @@ class ChangeUserOffset : public UndoCommand {
       ChangeUserOffset(Element*, const QPointF& offset);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeUserOffset");
       };
 
 //---------------------------------------------------------
@@ -664,6 +708,7 @@ class ChangeDynamic : public UndoCommand {
       ChangeDynamic(Dynamic*, int velocity, DynamicType dt);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeDynamic");
       };
 
 //---------------------------------------------------------
@@ -680,6 +725,7 @@ class SigInsertTime : public UndoCommand {
       SigInsertTime(Score*, int tick, int len);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("SigInsertTime");
       };
 
 //---------------------------------------------------------
@@ -695,6 +741,7 @@ class ChangeBeamMode : public UndoCommand {
       ChangeBeamMode(ChordRest*, BeamMode mode);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeBeamMode");
       };
 
 //---------------------------------------------------------
@@ -710,6 +757,7 @@ class ChangeCopyright : public UndoCommand {
       ChangeCopyright(Score*, const QString&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeCopyright");
       };
 
 //---------------------------------------------------------
@@ -725,6 +773,7 @@ class TransposeHarmony : public UndoCommand {
       TransposeHarmony(Harmony*, int rootTpc, int baseTpc);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("TransposeHarmony");
       };
 
 //---------------------------------------------------------
@@ -740,6 +789,7 @@ class ExchangeVoice : public UndoCommand {
       ExchangeVoice(Measure*, int val1, int val2, int staff1, int staff2);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("ExchangeVoice");
       };
 
 //---------------------------------------------------------
@@ -755,6 +805,7 @@ class ChangeInstrumentShort : public UndoCommand {
       ChangeInstrumentShort(Part*, const QString&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeInstrumentShort");
       };
 
 //---------------------------------------------------------
@@ -770,6 +821,7 @@ class ChangeInstrumentLong : public UndoCommand {
       ChangeInstrumentLong(Part*, const QString&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeInstrumentLong");
       };
 
 //---------------------------------------------------------
@@ -785,6 +837,7 @@ class ChangeChordRestLen : public UndoCommand {
       ChangeChordRestLen(ChordRest*, const Duration& d);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeChordRestLen");
       };
 
 //---------------------------------------------------------
@@ -800,6 +853,7 @@ class MoveElement : public UndoCommand {
       MoveElement(Element*, const QPointF&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("MoveElement");
       };
 
 //---------------------------------------------------------
@@ -816,6 +870,7 @@ class ChangeBracketSpan : public UndoCommand {
       ChangeBracketSpan(Staff*, int column, int span);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeBracketSpan");
       };
 
 //---------------------------------------------------------
@@ -829,6 +884,9 @@ class AddElement : public UndoCommand {
       AddElement(Element*);
       virtual void undo();
       virtual void redo();
+#ifdef DEBUG_UNDO
+      virtual const char* name() const;
+#endif
       };
 
 //---------------------------------------------------------
@@ -842,6 +900,9 @@ class RemoveElement : public UndoCommand {
       RemoveElement(Element*);
       virtual void undo();
       virtual void redo();
+#ifdef DEBUG_UNDO
+      virtual const char* name() const;
+#endif
       };
 
 //---------------------------------------------------------
@@ -858,6 +919,7 @@ class ChangeNoteHead : public UndoCommand {
       ChangeNoteHead(Note* note, int group, NoteHeadType type);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeNoteHead");
       };
 
 //---------------------------------------------------------
@@ -873,6 +935,7 @@ class ChangeConcertPitch : public UndoCommand {
       ChangeConcertPitch(Score* s, bool val);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeConcertPitch");
       };
 
 //---------------------------------------------------------
@@ -887,6 +950,7 @@ class EditText : public UndoCommand {
       EditText(TextB* t, int l) : text(t), undoLevel(l) {}
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("EditText");
       };
 
 //---------------------------------------------------------
@@ -905,6 +969,7 @@ class ChangePatch : public UndoCommand {
          : part(p), channel(c), patch(*pt) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangePitch");
       };
 
 //---------------------------------------------------------
@@ -921,6 +986,7 @@ class ChangeTuning : public UndoCommand {
       ChangeTuning(Note* n, double t) : note(n), tuning(t) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeTuning");
       };
 
 //---------------------------------------------------------
@@ -937,6 +1003,7 @@ class ChangeUserMirror : public UndoCommand {
       ChangeUserMirror(Note* n, DirectionH d) : note(n), dir(d) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeUserMirror");
       };
 
 //---------------------------------------------------------
@@ -955,6 +1022,7 @@ class ChangePageFormat : public UndoCommand {
       ~ChangePageFormat();
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangePageFormat");
       };
 
 //---------------------------------------------------------
@@ -973,6 +1041,7 @@ class ChangeStaff : public UndoCommand {
       ChangeStaff(Staff*, bool small, bool invisible, StaffType*);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeStaff");
       };
 
 //---------------------------------------------------------
@@ -993,6 +1062,7 @@ class ChangePart : public UndoCommand {
 
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangePart");
       };
 
 //---------------------------------------------------------
@@ -1009,6 +1079,7 @@ class ChangeTextStyles : public UndoCommand {
       ~ChangeTextStyles();
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeTextStyles");
       };
 
 //---------------------------------------------------------
@@ -1024,6 +1095,7 @@ class ChangeStretch : public UndoCommand {
       ChangeStretch(Measure*, double);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeStretch");
       };
 
 //---------------------------------------------------------
@@ -1039,6 +1111,7 @@ class ChangeStyle : public UndoCommand {
       ChangeStyle(Score*, const Style&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeStyle");
       };
 
 //---------------------------------------------------------
@@ -1054,6 +1127,7 @@ class ChangeSlurProperties : public UndoCommand {
       ChangeSlurProperties(SlurTie*, int);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeSlurProperties");
       };
 
 //---------------------------------------------------------
@@ -1069,6 +1143,7 @@ class ChangeChordStaffMove : public UndoCommand {
       ChangeChordStaffMove(Chord*, int);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeChordStaffMove");
       };
 
 //---------------------------------------------------------
@@ -1085,6 +1160,7 @@ class ChangeTupletProperties : public UndoCommand {
       ChangeTupletProperties(Tuplet*, int numberType, int bracketType);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeTupletProperties");
       };
 
 //---------------------------------------------------------
@@ -1102,6 +1178,7 @@ class ChangeVelocity : public UndoCommand {
       ChangeVelocity(Note*, ValueType, int, int);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeVelocity");
       };
 
 //---------------------------------------------------------
@@ -1118,6 +1195,7 @@ class ChangeMStaffProperties : public UndoCommand {
       ChangeMStaffProperties(MStaff*, bool visible, bool slashStyle);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeMStaffProperties");
       };
 
 //---------------------------------------------------------
@@ -1142,6 +1220,7 @@ class ChangeMeasureProperties : public UndoCommand {
          int repeatCount, double stretch, int noOffset, bool irregular);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeMeasureProperties");
       };
 
 //---------------------------------------------------------
@@ -1164,6 +1243,7 @@ class ChangeNoteProperties : public UndoCommand {
       ChangeNoteProperties(Note*, ValueType, int, int, int, int);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeNoteProperties");
       };
 
 //---------------------------------------------------------
@@ -1180,6 +1260,7 @@ class ChangeMeasureTimesig : public UndoCommand {
       ChangeMeasureTimesig(Measure*, const Fraction&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeMeasureTimesig");
       };
 
 //---------------------------------------------------------
@@ -1196,6 +1277,7 @@ class ChangeTimesig : public UndoCommand {
       ChangeTimesig(TimeSig * _timesig, bool sc);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeTimesig");
       };
 
 //---------------------------------------------------------
@@ -1210,6 +1292,7 @@ class RemoveMeasures : public UndoCommand {
       RemoveMeasures(Measure*, Measure*);
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("RemoveMeasures");
       };
 
 //---------------------------------------------------------
@@ -1224,6 +1307,7 @@ class InsertMeasures : public UndoCommand {
       InsertMeasures(Measure* m1, Measure* m2) : fm(m1), lm(m2) {}
       virtual void undo();
       virtual void redo();
+      UNDO_NAME("InsertMeasures");
       };
 
 //---------------------------------------------------------
@@ -1240,6 +1324,7 @@ class ChangeClef : public UndoCommand {
       ChangeClef(Clef* _clef, bool sc) : clef(_clef), showCourtesy(sc) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeClef");
       };
 
 //---------------------------------------------------------
@@ -1257,6 +1342,7 @@ class ChangeImage : public UndoCommand {
       ChangeImage(Image* i, bool l, bool a) : image(i), lockAspectRatio(l), autoScale(a) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeImage");
       };
 
 //---------------------------------------------------------
@@ -1275,6 +1361,7 @@ class ChangeHairpin : public UndoCommand {
          : hairpin(h), veloChange(c), dynType(t) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeHairpin");
       };
 
 //---------------------------------------------------------
@@ -1291,6 +1378,7 @@ class ChangeDuration : public UndoCommand {
       ChangeDuration(ChordRest* _cr, Fraction _d) : cr(_cr), d(_d) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
+      UNDO_NAME("ChangeDuration");
       };
 
 #endif

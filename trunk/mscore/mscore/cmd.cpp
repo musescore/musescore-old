@@ -77,6 +77,7 @@
 #include "timesig.h"
 #include "repeat.h"
 #include "tempotext.h"
+#include "excerpt.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -137,9 +138,6 @@ void Score::end()
             _updateAll = true;
             _needLayout = true;
             }
-//      if (_needLayout)
-//            doLayout();
-
       if (_updateAll)
             emit updateAll();
       else {
@@ -154,8 +152,11 @@ void Score::end()
       startLayout = 0;
       if (!noteEntryMode())
             setPadState();
+      Score* score = this;
       if (parentScore())
-            parentScore()->end();
+            score = this;
+      foreach (Excerpt* e, *score->excerpts())
+            e->score()->end();
       }
 
 //---------------------------------------------------------
@@ -560,12 +561,12 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
             for (int i = 0; i < n; ++i) {
                   Duration d = dl[i];
 
-                  SegmentType st = SegChordRest;
-                  seg = measure->findSegment(st, tick);
-                  if (seg == 0) {
-                        seg = new Segment(measure, st, tick);
-                        undoAddElement(seg);
-                        }
+                  //SegmentType st = SegChordRest;
+                  //seg = measure->findSegment(st, tick);
+                  //if (seg == 0) {
+                  //      seg = new Segment(measure, st, tick);
+                  //      undoAddElement(seg);
+                  //      }
                   ChordRest* ncr;
                   if (pitch == -1) {
                         nr = new Rest(this);
@@ -573,7 +574,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         ncr = (Rest*)nr;
                         ncr->setDurationType(d);
                         ncr->setDuration(d.fraction());
-                        ncr->setParent(seg);
+                        // ncr->setParent(seg);
                         }
                   else {
                         Note* note = new Note(this);
@@ -593,9 +594,8 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         chord->add(note);
                         note->setPitch(pitch);
                         ncr = chord;
-                        ncr->setParent(seg);
+                        // ncr->setParent(seg);
                         note->setTpcFromPitch();      // chord->tick() must be known
-                        mscore->play(note);
                         if (i+1 < n) {
                               tie = new Tie(this);
                               tie->setStartNote((Note*)nr);
@@ -604,7 +604,11 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                               }
                         }
                   ncr->setTuplet(cr->tuplet());
-                  undoAddElement(ncr);
+                  undoAddCR(ncr, measure, tick);
+                  if (ncr->type() == CHORD)
+                        mscore->play(ncr);
+                  // undoAddElement(ncr);
+                  seg = ncr->segment();
                   tick += ncr->ticks();
                   }
 

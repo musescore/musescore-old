@@ -61,6 +61,7 @@
 #include "timesig.h"
 #include "image.h"
 #include "hairpin.h"
+#include "rest.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -185,9 +186,11 @@ void UndoStack::push(UndoCommand* cmd)
             printf("UndoStack:push(): no active command\n");
             cmd->redo();
             delete cmd;
-abort();
             return;
             }
+#ifdef DEBUG_UNDO
+      printf("UndoStack::push <%s>\n", cmd->name());
+#endif
       curCmd->appendChild(cmd);
       cmd->redo();
       }
@@ -676,8 +679,52 @@ void Score::undoToggleInvisible(Element* e)
 
 void Score::undoAddElement(Element* element)
       {
-      element->setScore(this);
       undo()->push(new AddElement(element));
+      }
+
+//---------------------------------------------------------
+//   undoAddCR
+//---------------------------------------------------------
+
+void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
+      {
+printf("undoAddCR %s %p\n", cr->name(), cr->score());
+      Staff* ostaff = cr->staff();
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves) {
+            foreach(Staff* staff, linkedStaves->staves()) {
+                  if (staff == cr->staff())
+                        continue;
+                  Score* score = staff->score();
+                  Measure* m   = score->tick2measure(tick);
+                  Segment* seg = m->findSegment(SegChordRest, tick);
+                  if (seg == 0) {
+                        seg = new Segment(m, SegChordRest, tick);
+printf("   add linked %s %p\n", seg->name(), seg->score());
+                        undoAddElement(seg);
+                        }
+                  ChordRest* newcr = static_cast<ChordRest*>(cr->clone());
+                  newcr->setScore(score);
+                  int staffIdx = score->staffIdx(staff);
+                  newcr->setTrack(staffIdx * VOICES + cr->voice());
+                  newcr->setParent(seg);
+printf("   add linked %s %p\n", newcr->name(), newcr->score());
+                  undoAddElement(newcr);
+                  score->setLayout(m);
+                  score->setUpdateAll(true);
+                  }
+            }
+      Segment* seg = measure->findSegment(SegChordRest, tick);
+      if (seg == 0) {
+            seg = new Segment(measure, SegChordRest, tick);
+printf("   add %s measure %p %p\n", seg->name(), seg->measure(), seg->score());
+            undoAddElement(seg);
+            }
+      cr->setParent(seg);
+printf("   add %s %p\n", cr->name(), cr->score());
+      undoAddElement(cr);
+      cr->score()->setLayout(measure);
+      cr->score()->setUpdateAll(true);
       }
 
 //---------------------------------------------------------
@@ -686,6 +733,25 @@ void Score::undoAddElement(Element* element)
 
 void Score::undoRemoveElement(Element* element)
       {
+      if (element->isChordRest()) {
+            Staff* ostaff = element->staff();
+            LinkedStaves* linkedStaves = ostaff->linkedStaves();
+            if (linkedStaves) {
+                  foreach(Staff* staff, linkedStaves->staves()) {
+                        if (staff == ostaff)
+                              continue;
+                        Score* score = staff->score();
+                        ChordRest* cr = static_cast<ChordRest*>(element);
+                        Segment* segment = cr->segment();
+                        Measure* measure = segment->measure();
+                        Measure* m = score->tick2measure(measure->tick());
+                        Segment* s = m->findSegment(segment->segmentType(), segment->tick());
+                        int staffIdx = score->staffIdx(staff);
+                        Element* e = s->element(staffIdx * VOICES + e->voice());
+                        undo()->push(new RemoveElement(e));
+                        }
+                  }
+            }
       undo()->push(new RemoveElement(element));
       }
 
@@ -722,42 +788,12 @@ AddElement::AddElement(Element* e)
       }
 
 //---------------------------------------------------------
-//   undoRemoveElement
-//---------------------------------------------------------
-
-static void undoRemoveElement(Element* element)
-      {
-      Score* score = element->score();
-      score->removeElement(element);
-      if (element->type() == CLEF)
-            element->staff()->setUpdateClefList(true);
-      else if (element->type() == KEYSIG)
-            element->staff()->setUpdateKeymap(true);
-      score->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
-//   undoAddElement
-//---------------------------------------------------------
-
-static void undoAddElement(Element* element)
-      {
-      Score* score = element->score();
-      score->addElement(element);
-      if (element->type() == CLEF)
-            element->staff()->setUpdateClefList(true);
-      else if (element->type() == KEYSIG)
-            element->staff()->setUpdateKeymap(true);
-      score->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
 //   undo
 //---------------------------------------------------------
 
 void AddElement::undo()
       {
-      undoRemoveElement(element);
+      element->score()->removeElement(element);
       }
 
 //---------------------------------------------------------
@@ -766,8 +802,22 @@ void AddElement::undo()
 
 void AddElement::redo()
       {
-      undoAddElement(element);
+      element->score()->addElement(element);
       }
+
+//---------------------------------------------------------
+//   name
+//---------------------------------------------------------
+
+#ifdef DEBUG_UNDO
+const char* AddElement::name() const
+      {
+      static char buffer[64];
+      sprintf(buffer, "Add: %s", element->name());
+      return buffer;
+      }
+#endif
+
 
 //---------------------------------------------------------
 //   RemoveElement
@@ -801,7 +851,7 @@ RemoveElement::RemoveElement(Element* e)
 
 void RemoveElement::undo()
       {
-      undoAddElement(element);
+      element->score()->addElement(element);
       }
 
 //---------------------------------------------------------
@@ -810,8 +860,21 @@ void RemoveElement::undo()
 
 void RemoveElement::redo()
       {
-      undoRemoveElement(element);
+      element->score()->removeElement(element);
       }
+
+//---------------------------------------------------------
+//   name
+//---------------------------------------------------------
+
+#ifdef DEBUG_UNDO
+const char* RemoveElement::name() const
+      {
+      static char buffer[64];
+      sprintf(buffer, "Remove: %s", element->name());
+      return buffer;
+      }
+#endif
 
 //---------------------------------------------------------
 //   ChangeNoteHead

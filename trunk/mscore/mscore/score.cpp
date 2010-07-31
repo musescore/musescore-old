@@ -1909,8 +1909,9 @@ void Score::addElement(Element* element)
 
       if (element->parent() == 0)
             add(element);
-      else
+      else {
             element->parent()->add(element);
+            }
 
       if (element->type() == SLUR) {
             Slur* s = static_cast<Slur*>(element);
@@ -1933,6 +1934,11 @@ void Score::addElement(Element* element)
             layoutFlags |= LAYOUT_FIX_PITCH_VELO;
             _playlistDirty = true;
             }
+      else if (element->type() == CLEF)
+            element->staff()->setUpdateClefList(true);
+      else if (element->type() == KEYSIG)
+            element->staff()->setUpdateKeymap(true);
+      setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -2004,6 +2010,11 @@ void Score::removeElement(Element* element)
             default:
                   break;
             }
+      if (element->type() == CLEF)
+            element->staff()->setUpdateClefList(true);
+      else if (element->type() == KEYSIG)
+            element->staff()->setUpdateKeymap(true);
+      setLayoutAll(true);
       }
 
 //---------------------------------------------------------

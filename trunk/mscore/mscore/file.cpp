@@ -1249,14 +1249,14 @@ bool Score::loadMsc(QString name)
                               ;
                         else if (tag == "Score")
                               return read(ee);
+                        else if (tag == "Revision") {
+                              Revision* revision = new Revision;
+                              revision->read(e);
+                              _revisions->add(revision);
+                              }
                         else
                               domError(ee);
                         }
-                  }
-            else if (e.tagName() == "Revision") {
-                  Revision* revision = new Revision;
-                  revision->read(e);
-                  _revisions->add(revision);
                   }
             else
                   domError(e);
