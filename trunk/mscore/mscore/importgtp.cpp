@@ -238,6 +238,9 @@ void GuitarPro::setTuplet(Tuplet* tuplet, int tuple)
             case 12:
                   tuplet->setRatio(Fraction(12,8));
                   break;
+            case 13:
+                  tuplet->setRatio(Fraction(13,8));
+                  break;
             default:
                   printf("unsupported tuplet %d\n", tuple);
                   abort();
@@ -1864,7 +1867,11 @@ printf("      Tuplet note beat %d  tuplet %d  len %s\n", beat, tuple, qPrintable
                         if (dotted)
                               l = l + (l/2);
                         cr->setDuration(l);
-                        cr->setDurationType(d);
+                        if (cr->type() == REST && pause == 0)
+                              cr->setDurationType(Duration::V_MEASURE);
+                        else
+                              cr->setDurationType(d);
+
                         segment->add(cr);
 printf("      add cr %p <%s>\n", cr, qPrintable(l.print()));
 
