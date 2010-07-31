@@ -41,6 +41,7 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QtGlobal>
 #include <QtCore/QtDebug>
+#include <QtCore/QSharedData>
 
 #if QT_VERSION >= 0x040400
 #include <QtCore/QAtomicInt>

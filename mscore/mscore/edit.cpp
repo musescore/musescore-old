@@ -229,13 +229,7 @@ printf("addClone %s at %d %s\n", cr->name(), tick, qPrintable(d.fraction().print
       newcr->setTuplet(cr->tuplet());
       newcr->setSelected(false);
 
-      Segment* seg = cr->measure()->findSegment(SegChordRest, tick);
-      if (seg == 0) {
-            seg = new Segment(cr->measure(), SegChordRest, tick);
-            undoAddElement(seg);
-            }
-      newcr->setParent(seg);
-      undoAddElement(newcr);
+      undoAddCR(newcr, cr->measure(), tick);
       return newcr;
       }
 
