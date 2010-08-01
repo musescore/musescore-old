@@ -35,6 +35,8 @@
 #include "rest.h"
 #include "stafftype.h"
 #include "tuplet.h"
+#include "chord.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   read
@@ -442,6 +444,53 @@ void SlurMap::check()
       }
 
 //---------------------------------------------------------
+//   Element2
+//---------------------------------------------------------
+
+struct Element2 {
+      Element* o;
+      Element* n;
+      Element2(Element* _o, Element* _n) : o(_o), n(_n) {}
+      };
+
+//---------------------------------------------------------
+//   ElementMap
+//---------------------------------------------------------
+
+class ElementMap {
+      QList<Element2> map;
+
+   public:
+      ElementMap() {}
+      Element* findNew(Element* o) const;
+      void add(Element* _o, Element* _n) { map.append(Element2(_o, _n)); }
+      };
+
+//---------------------------------------------------------
+//   findNew
+//---------------------------------------------------------
+
+Element* ElementMap::findNew(Element* o) const
+      {
+      foreach(const Element2& s2, map) {
+            if (s2.o == o)
+                  return s2.n;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   TieMap
+//---------------------------------------------------------
+
+class TieMap : public ElementMap {
+   public:
+      TieMap() {}
+      Tie* findNew(Tie* o) const { return static_cast<Tie*>(ElementMap::findNew(o)); }
+      void add(Tie* _o, Tie* _n) { ElementMap::add(_o, _n); }
+      };
+
+//---------------------------------------------------------
 //   cloneStaves
 //---------------------------------------------------------
 
@@ -449,6 +498,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       {
       int tracks = score->nstaves() * VOICES;
       SlurMap slurMap[tracks];
+      TieMap tieMap[tracks];
 
       MeasureBaseList* nmbl = score->measures();
       for(MeasureBase* mb = oscore->measures()->first(); mb; mb = mb->next()) {
@@ -478,7 +528,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
 
                   Fraction ts = nm->len();
                   for (int track = 0; track < tracks; ++track) {
-                        TupletMap tupletMap;
+                        TupletMap tupletMap;    // tuplets cannot cross measure boundaries
                         int srcTrack = map[track/VOICES] * VOICES + (track % VOICES);
                         for (Segment* oseg = m->first(); oseg; oseg = oseg->next()) {
                               Element* oe = oseg->element(srcTrack);
@@ -520,6 +570,31 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                                 }
                                           else {
                                                 printf("cloneStave: cannot find slur\n");
+                                                }
+                                          }
+                                    if (oe->type() == CHORD) {
+                                          Chord* och = static_cast<Chord*>(ocr);
+                                          Chord* nch = static_cast<Chord*>(ncr);
+                                          int n = och->notes().size();
+                                          for (int i = 0; i < n; ++i) {
+                                                Note* on = och->notes().at(i);
+                                                Note* nn = nch->notes().at(i);
+                                                if (on->tieFor()) {
+                                                      Tie* tie = new Tie(score);
+                                                      nn->setTieFor(tie);
+                                                      tie->setStartNote(nn);
+                                                      tieMap[track].add(on->tieFor(), tie);
+                                                      }
+                                                if (on->tieBack()) {
+                                                      Tie* tie = tieMap[track].findNew(on->tieBack());
+                                                      if (tie) {
+                                                            nn->setTieBack(tie);
+                                                            tie->setEndNote(nn);
+                                                            }
+                                                      else {
+                                                            printf("cloneStave: cannot find tie\n");
+                                                            }
+                                                      }
                                                 }
                                           }
                                     }
