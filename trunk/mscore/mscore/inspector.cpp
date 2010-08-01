@@ -699,7 +699,7 @@ void MeasureView::setElement(Element* e)
       mb.multiMeasure->setValue(m->multiMeasure());
       mb.timesig->setText(m->timesig().print());
       mb.len->setText(m->len().print());
-
+      mb.tick->setText(QString("%1").arg(m->tick()));
       mb.sel->clear();
       foreach(const Element* e, *m->el()) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
