@@ -41,6 +41,7 @@
 #include "stafftype.h"
 #include "bracket.h"
 #include "articulation.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -1164,6 +1165,15 @@ printf("BeginRepeat=============================================\n");
                         s->add(t);
                         }
                   }
+            if (i == 0 && key) {
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        KeySig* t = new KeySig(score);
+                        t->setSig(0, key);
+                        t->setTrack(staffIdx * VOICES);
+                        Segment* s = m->getSegment(SegKeySig, tick);
+                        s->add(t);
+                        }
+                  }
 
             score->add(m);
             tick += nts.ticks();
@@ -1639,7 +1649,7 @@ void GuitarPro4::read(QFile* fp)
       readUChar();      // triplet feeling
       readLyrics();
 
-      int tempo = readInt();
+      int tempo  = readInt();
       int key    = readInt();
       int octave = readUChar();    // octave
 
@@ -1706,6 +1716,15 @@ printf("BeginRepeat=============================================\n");
                         TimeSig* t = new TimeSig(score, nts);
                         t->setTrack(staffIdx * VOICES);
                         Segment* s = m->getSegment(SegTimeSig, tick);
+                        s->add(t);
+                        }
+                  }
+            if (i == 0 && key) {
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        KeySig* t = new KeySig(score);
+                        t->setSig(0, key);
+                        t->setTrack(staffIdx * VOICES);
+                        Segment* s = m->getSegment(SegKeySig, tick);
                         s->add(t);
                         }
                   }
@@ -2589,6 +2608,15 @@ printf("BeginRepeat=============================================\n");
                         TimeSig* t = new TimeSig(score, nts);
                         t->setTrack(staffIdx * VOICES);
                         Segment* s = m->getSegment(SegTimeSig, tick);
+                        s->add(t);
+                        }
+                  }
+            if (i == 0 && key) {
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        KeySig* t = new KeySig(score);
+                        t->setSig(0, key);
+                        t->setTrack(staffIdx * VOICES);
+                        Segment* s = m->getSegment(SegKeySig, tick);
                         s->add(t);
                         }
                   }
