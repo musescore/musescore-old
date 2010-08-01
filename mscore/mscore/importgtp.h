@@ -43,6 +43,8 @@ struct GpBar {
       int keysig;
       QString marker;
       int barLine;
+      int repeatFlags;
+      int repeats;
 
       GpBar();
       };
@@ -59,6 +61,7 @@ class GuitarPro {
    protected:
       static const char* errmsg[];
       int version;
+      int key;
 
       Score* score;
       QFile* f;
@@ -82,6 +85,7 @@ class GuitarPro {
       Fraction len2fraction(int len);
       void addDynamic(Note*, int d);
       void setTempo(int n);
+      void createMeasures();
 
    public:
       QString title, subtitle, artist, album, composer;

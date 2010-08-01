@@ -63,6 +63,8 @@ GpBar::GpBar()
       barLine = NORMAL_BAR;
       keysig  = 0;
       timesig = Fraction(4,4);
+      repeatFlags = 0;
+      repeats = 2;
       }
 
 //---------------------------------------------------------
@@ -373,6 +375,46 @@ printf("readMixChange\n");
       }
 
 //---------------------------------------------------------
+//   createMeasures
+//---------------------------------------------------------
+
+void GuitarPro::createMeasures()
+      {
+      int tick = 0;
+      Fraction ts;
+      for (int i = 0; i < measures; ++i) {
+            Fraction nts = bars[i].timesig;
+            Measure* m = new Measure(score);
+            m->setTick(tick);
+            m->setTimesig(nts);
+            m->setLen(nts);
+
+            if (i == 0 || ts != nts) {
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        TimeSig* t = new TimeSig(score, nts);
+                        t->setTrack(staffIdx * VOICES);
+                        Segment* s = m->getSegment(SegTimeSig, tick);
+                        s->add(t);
+                        }
+                  }
+            if (i == 0 && key) {
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        KeySig* t = new KeySig(score);
+                        t->setSig(0, key);
+                        t->setTrack(staffIdx * VOICES);
+                        Segment* s = m->getSegment(SegKeySig, tick);
+                        s->add(t);
+                        }
+                  }
+            m->setRepeatFlags(bars[i].repeatFlags);
+            m->setRepeatCount(bars[i].repeats);       // supported in gp5
+            score->add(m);
+            tick += nts.ticks();
+            ts = nts;
+            }
+      }
+
+//---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
@@ -391,7 +433,7 @@ void GuitarPro1::read(QFile* fp)
 printf("Tempo %d\n", tempo);
 
       int octave = 0;
-      int key    = 0;
+      key    = 0;
       if (version > 102)
             key = readInt();    // key
 
@@ -1085,7 +1127,7 @@ void GuitarPro3::read(QFile* fp)
 printf("Tempo %d\n", tempo);
 
       int octave = 0;
-      int key = readInt();    // key
+      key = readInt();    // key
 
 printf("key %d octave %d\n", key, octave);
 
@@ -1650,7 +1692,7 @@ void GuitarPro4::read(QFile* fp)
       readLyrics();
 
       int tempo  = readInt();
-      int key    = readInt();
+      key    = readInt();
       int octave = readUChar();    // octave
 
 printf("tempo %d key %d octave %d\n", tempo, key, octave);
@@ -1670,16 +1712,18 @@ printf("bars %d tracks %d\n", measures, staves);
                   tnumerator = readUChar();
             if (barBits & 0x2)
                   tdenominator = readUChar();
-            if (barBits & 0x4) {                // begin reapeat
-printf("BeginRepeat=============================================\n");
+            if (barBits & 0x4)
+                  bar.repeatFlags |= RepeatStart;
+            if (barBits & 0x8) {                // number of repeats
+                  bar.repeatFlags |= RepeatEnd;
+                  bar.repeats = readUChar();
+printf("read repeats %d\n", bar.repeats);
                   }
-            if (barBits & 0x8)                  // number of repeats
-                  uchar c = readUChar();
             if (barBits & 0x10)                 // alternative ending to
                   uchar c = readUChar();
             if (barBits & 0x20) {
                   bar.marker = readDelphiString();     // new section?
-                  int color = readInt();    // color?
+                  /*int color = */ readInt();    // color?
                   }
             if (barBits & 0x40) {
                   bar.keysig = readUChar();
@@ -1702,37 +1746,7 @@ printf("BeginRepeat=============================================\n");
             score->appendPart(part);
             }
 
-      int tick = 0;
-      Fraction ts;
-      for (int i = 0; i < measures; ++i) {
-            Fraction nts = bars[i].timesig;
-            Measure* m = new Measure(score);
-            m->setTick(tick);
-            m->setTimesig(nts);
-            m->setLen(nts);
-
-            if (i == 0 || ts != nts) {
-                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                        TimeSig* t = new TimeSig(score, nts);
-                        t->setTrack(staffIdx * VOICES);
-                        Segment* s = m->getSegment(SegTimeSig, tick);
-                        s->add(t);
-                        }
-                  }
-            if (i == 0 && key) {
-                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                        KeySig* t = new KeySig(score);
-                        t->setSig(0, key);
-                        t->setTrack(staffIdx * VOICES);
-                        Segment* s = m->getSegment(SegKeySig, tick);
-                        s->add(t);
-                        }
-                  }
-
-            score->add(m);
-            tick += nts.ticks();
-            ts = nts;
-            }
+      createMeasures();
 
       for (int i = 0; i < staves; ++i) {
             int tuning[GP_MAX_STRING_NUMBER];
@@ -2326,7 +2340,7 @@ void GuitarPro5::readMeasure(Measure* measure, int staffIdx, Tuplet** tuplets)
             int beats = readInt();
             for (int beat = 0; beat < beats; ++beat) {
 printf("readBeat staff%d voice %d(%d) beat %d(%d)\n", staffIdx, voice, 2, beat, beats);
-                  tick += readBeat(beat, voice, measure, staffIdx, tuplets);
+                  tick += readBeat(tick, voice, measure, staffIdx, tuplets);
                   }
             }
       }
@@ -2535,7 +2549,7 @@ void GuitarPro5::read(QFile* fp)
       if (version > 500)
             skip(1);
 
-      int key    = readInt();
+      key    = readInt();
       int octave = readChar();    // octave
 
       readChannels();
@@ -2557,11 +2571,13 @@ printf("bars %d tracks %d\n", measures, staves);
                   tnumerator = readUChar();
             if (barBits & 0x2)
                   tdenominator = readUChar();
-            if (barBits & 0x4) {                // begin reapeat
-printf("BeginRepeat=============================================\n");
+            if (barBits & 0x4)
+                  bar.repeatFlags |= RepeatStart;
+            if (barBits & 0x8) {                // number of repeats
+                  bar.repeatFlags |= RepeatEnd;
+                  bar.repeats = readUChar();
+printf("read repeats %d\n", bar.repeats);
                   }
-            if (barBits & 0x8)                  // number of repeats
-                  uchar c = readUChar();
             if (barBits & 0x20) {
                   bar.marker = readDelphiString();     // new section?
                   int color = readInt();    // color?
@@ -2594,38 +2610,7 @@ printf("BeginRepeat=============================================\n");
             score->appendPart(part);
             }
 
-      int tick = 0;
-      Fraction ts;
-      for (int i = 0; i < measures; ++i) {
-            Fraction nts = bars[i].timesig;
-            Measure* m = new Measure(score);
-            m->setTick(tick);
-            m->setTimesig(nts);
-            m->setLen(nts);
-
-            if (i == 0 || ts != nts) {
-                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                        TimeSig* t = new TimeSig(score, nts);
-                        t->setTrack(staffIdx * VOICES);
-                        Segment* s = m->getSegment(SegTimeSig, tick);
-                        s->add(t);
-                        }
-                  }
-            if (i == 0 && key) {
-                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                        KeySig* t = new KeySig(score);
-                        t->setSig(0, key);
-                        t->setTrack(staffIdx * VOICES);
-                        Segment* s = m->getSegment(SegKeySig, tick);
-                        s->add(t);
-                        }
-                  }
-
-            score->add(m);
-            tick += nts.ticks();
-            ts = nts;
-            }
-
+      createMeasures();
       readTracks();
       readMeasures();
       setTempo(tempo);

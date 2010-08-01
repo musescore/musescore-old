@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -197,7 +197,7 @@ void MuseScore::loadFile()
             "PDF Files <experimental omr> (*.pdf);;"
         	"Overture Files <experimental> (*.ove);;"
             "Bagpipe Music Writer Files <experimental> (*.bww);;"
-            "Guitar Pro <experimental> (*.GTP *.GP3 *.GP4);;"
+            "Guitar Pro <experimental> (*.GTP *.GP3 *.GP4 *.GP5);;"
             "All Files (*)"
             )
          );
