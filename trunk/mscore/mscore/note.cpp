@@ -486,6 +486,8 @@ void Note::draw(QPainter& p, ScoreView* v) const
       bool tablature = staff() && staff()->useTablature();
       if (!_hidden || !userOff().isNull()) {
             if (tablature) {
+                  if (tieBack())
+                        return;
                   double mag = magS();
                   QFont f("FreeSans");
                   int size = lrint(9.0 * DPI / PPI);
@@ -1275,7 +1277,7 @@ QPointF Note::canvasPos() const
 void Note::scanElements(void* data, void (*func)(void*, Element*))
       {
       func(data, this);
-      if (_tieFor)
+      if (_tieFor && !staff()->useTablature())  // no ties in tablature
             _tieFor->scanElements(data, func);
       foreach(Element* e, _el)
             e->scanElements(data, func);
