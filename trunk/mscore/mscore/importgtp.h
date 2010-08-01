@@ -33,6 +33,8 @@ static const int GP_MAX_LYRIC_LINES = 5;
 static const int GP_MAX_TRACK_NUMBER = 32;
 static const int GP_MAX_STRING_NUMBER = 7;
 
+static const int GP_INVALID_KEYSIG = 127;
+
 struct GpTrack {
       int patch;
       uchar volume, pan, chorus, reverb, phase, tremolo;
