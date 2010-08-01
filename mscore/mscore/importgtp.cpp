@@ -61,7 +61,7 @@ const char* GuitarPro::errmsg[] = {
 GpBar::GpBar()
       {
       barLine = NORMAL_BAR;
-      keysig  = 0;
+      keysig  = GP_INVALID_KEYSIG;
       timesig = Fraction(4,4);
       repeatFlags = 0;
       repeats = 2;
@@ -397,10 +397,11 @@ void GuitarPro::createMeasures()
                         s->add(t);
                         }
                   }
-            if (i == 0 && key) {
+            if (i == 0 || (bars[i].keysig != GP_INVALID_KEYSIG)) {
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
                         KeySig* t = new KeySig(score);
-                        t->setSig(0, key);
+                        int keysig = bars[i].keysig != GP_INVALID_KEYSIG ? bars[i].keysig : key;
+                        t->setSig(0, keysig);
                         t->setTrack(staffIdx * VOICES);
                         Segment* s = m->getSegment(SegKeySig, tick);
                         s->add(t);
@@ -1717,7 +1718,6 @@ printf("bars %d tracks %d\n", measures, staves);
             if (barBits & 0x8) {                // number of repeats
                   bar.repeatFlags |= RepeatEnd;
                   bar.repeats = readUChar();
-printf("read repeats %d\n", bar.repeats);
                   }
             if (barBits & 0x10)                 // alternative ending to
                   uchar c = readUChar();
