@@ -747,7 +747,7 @@ void Score::undoRemoveElement(Element* element)
                         Measure* m = score->tick2measure(measure->tick());
                         Segment* s = m->findSegment(segment->segmentType(), segment->tick());
                         int staffIdx = score->staffIdx(staff);
-                        Element* e = s->element(staffIdx * VOICES + e->voice());
+                        Element* e = s->element(staffIdx * VOICES + element->voice());
                         undo()->push(new RemoveElement(e));
                         }
                   }
