@@ -42,6 +42,7 @@
 #include "bracket.h"
 #include "articulation.h"
 #include "keysig.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -533,7 +534,7 @@ printf("key %d octave %d\n", key, octave);
                               tuple = readInt();
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
-                              readChord(segment);
+                              readChord(segment, staffIdx * VOICES);
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
                               Lyrics* l = new Lyrics(score);
@@ -839,7 +840,7 @@ printf("BeginRepeat=============================================\n");
                               tuple = readInt();
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
-                              readChord(segment);
+                              readChord(segment, staffIdx * VOICES);
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
                               Lyrics* l = new Lyrics(score);
@@ -1075,14 +1076,15 @@ printf("1readBeatEffects\n");
 //   readChord
 //---------------------------------------------------------
 
-void GuitarPro1::readChord(Segment*)
+void GuitarPro1::readChord(Segment* seg, int track)
       {
       int header = readUChar();
 
 //      printf("read chord diagram %x\n", header);
 
+      QString name;
       if ((header & 1) == 0) {
-            readDelphiString();
+            name = readDelphiString();
             int firstFret = readInt();
             if (firstFret) {
                   for (int i = 0; i < 6; ++i)
@@ -1091,13 +1093,19 @@ void GuitarPro1::readChord(Segment*)
             }
       else {
             skip(25);
-            readPascalString(34);
+            name = readPascalString(34);
             int firstFret = readInt();
             for (int i = 0; i < 6; ++i) {
                   int fret = readInt();
                   }
             skip(36);
             }
+      if (name.isEmpty())
+            return;
+      Harmony* harmony = new Harmony(seg->score());
+      harmony->setHarmony(name);
+      harmony->setTrack(track);
+      seg->add(harmony);
       }
 
 //---------------------------------------------------------
@@ -1333,7 +1341,7 @@ printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
 
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
-                              readChord(segment);
+                              readChord(segment, staffIdx * VOICES);
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
                               Lyrics* l = new Lyrics(score);
@@ -1656,14 +1664,16 @@ void GuitarPro4::readInfo()
 //   readChord
 //---------------------------------------------------------
 
-void GuitarPro4::readChord(Segment*)
+void GuitarPro4::readChord(Segment* seg, int track)
       {
       int header = readUChar();
 
-//      printf("read chord diagram %x\n", header);
+// printf("read chord diagram %x\n", header);
+
+      QString name;
 
       if ((header & 1) == 0) {
-            readDelphiString();
+            name = readDelphiString();
             int firstFret = readInt();
             if (firstFret != 0) {
                   for (int i = 0; i < 6; ++i) {
@@ -1673,13 +1683,19 @@ void GuitarPro4::readChord(Segment*)
             }
       else {
             skip(16);
-            readPascalString(21);   // chord name
+            name = readPascalString(21);
             skip(4);
             int firstFret = readInt();
             for (int i = 0; i < 7; ++i)
                   readInt();
             skip(32);
             }
+      if (name.isEmpty())
+            return;
+      Harmony* harmony = new Harmony(seg->score());
+      harmony->setHarmony(name);
+      harmony->setTrack(track);
+      seg->add(harmony);
       }
 
 //---------------------------------------------------------
@@ -1865,7 +1881,7 @@ printf("bars %d tracks %d\n", measures, staves);
                               tuple = readInt();
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
-                              readChord(segment);
+                              readChord(segment, staffIdx * VOICES);
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
                               Lyrics* l = new Lyrics(score);
@@ -2247,7 +2263,7 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
 
       Segment* segment = measure->getSegment(SegChordRest, tick);
       if (beatBits & 0x2)
-            readChord(segment);
+            readChord(segment, staffIdx * VOICES);
       if (beatBits & 0x4) {
             QString txt = readDelphiString();
             Lyrics* l = new Lyrics(score);
@@ -2397,16 +2413,22 @@ void GuitarPro5::readMixChange()
 //   readChord
 //---------------------------------------------------------
 
-void GuitarPro5::readChord(Segment*)
+void GuitarPro5::readChord(Segment* seg, int track)
       {
       skip(17);
-      readPascalString(21);
+      QString name = readPascalString(21);
       skip(4);
       int firstFret = readInt();
       for (int i = 0; i < 7; ++i) {
             int fret = readInt();
             }
       skip(32);
+      if (name.isEmpty())
+            return;
+      Harmony* harmony = new Harmony(seg->score());
+      harmony->setHarmony(name);
+      harmony->setTrack(track);
+      seg->add(harmony);
       }
 
 //---------------------------------------------------------

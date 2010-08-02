@@ -790,9 +790,9 @@ void Score::fixTicks()
 
       Fraction sig(fm->timesig());
       if (!parentScore()) {
-            _tempomap->clear();
-            _sigmap->clear();
-            _sigmap->add(0, AL::SigEvent(sig,  number));
+            tempomap()->clear();
+            sigmap()->clear();
+            sigmap()->add(0, AL::SigEvent(sig,  number));
             }
 
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
@@ -806,7 +806,7 @@ void Score::fixTicks()
                         foreach(Element* e, s->annotations()) {
                               if (e->type() == TEMPO_TEXT) {
                                     const TempoText* tt = static_cast<const TempoText*>(e);
-                                    _tempomap->addTempo(tt->segment()->tick(), tt->tempo());
+                                    tempomap()->addTempo(tt->segment()->tick(), tt->tempo());
                                     }
                               }
                         }
@@ -826,7 +826,7 @@ void Score::fixTicks()
                   //  implement section break rest
                   //
                   if (m->sectionBreak())
-                        _tempomap->addPause(m->tick() + m->ticks(), m->pause());
+                        tempomap()->addPause(m->tick() + m->ticks(), m->pause());
 
                   //
                   // implement fermata as a tempo change
@@ -835,7 +835,7 @@ void Score::fixTicks()
 
                   for (Segment* s = m->first(st); s; s = s->next(st)) {
                         if (s->subtype() == SegBreath) {
-                              _tempomap->addPause(s->tick(), .1);
+                              tempomap()->addPause(s->tick(), .1);
                               continue;
                               }
                         foreach(Element* e, s->elist()) {
@@ -866,10 +866,10 @@ void Score::fixTicks()
                                           }
                                     }
                               if (stretch > 0.0) {
-                                    double otempo = _tempomap->tempo(cr->tick());
+                                    double otempo = tempomap()->tempo(cr->tick());
                                     double ntempo = otempo / stretch;
-                                    _tempomap->addTempo(cr->tick(), ntempo);
-                                    _tempomap->addTempo(cr->tick() + cr->ticks(), otempo);
+                                    tempomap()->addTempo(cr->tick(), ntempo);
+                                    tempomap()->addTempo(cr->tick() + cr->ticks(), otempo);
                                     break;      // do not consider more staves/voices
                                     }
                               }
@@ -894,7 +894,7 @@ void Score::fixTicks()
             //
             if (!parentScore() && (m->timesig() != sig)) {
                   sig = m->timesig();
-                  _sigmap->add(tick, AL::SigEvent(sig,  number));
+                  sigmap()->add(tick, AL::SigEvent(sig,  number));
                   }
             }
       }
@@ -1028,7 +1028,7 @@ void Score::readStaff(QDomElement e)
                         measure->setTick(curTick);
                         add(measure);
                         if (_mscVersion < 115) {
-                              const AL::SigEvent& ev = _sigmap->timesig(measure->tick());
+                              const AL::SigEvent& ev = sigmap()->timesig(measure->tick());
                               measure->setLen(ev.timesig());
                               measure->setTimesig(ev.nominal());
                               }
@@ -2067,7 +2067,7 @@ Segment* Score::lastSegment() const
 
 double Score::utick2utime(int tick) const
       {
-      return _repeatList->utick2utime(tick);
+      return repeatList()->utick2utime(tick);
       }
 
 //---------------------------------------------------------
@@ -2076,7 +2076,7 @@ double Score::utick2utime(int tick) const
 
 int Score::utime2utick(double utime)
       {
-      return _repeatList->utime2utick(utime);
+      return repeatList()->utime2utick(utime);
       }
 
 StyleVal Score::style(StyleIdx idx) const

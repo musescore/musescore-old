@@ -230,6 +230,7 @@ class Score : public QObject {
       MeasureBaseList _measures;          // here are the notes
       QList<Element*> _gel;               // global elements: Slur, SLine
       QList<Beam*>    _beams;
+
       RepeatList* _repeatList;
       AL::TimeSigMap* _sigmap;
       AL::TempoMap* _tempomap;
