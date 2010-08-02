@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "interval.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   Interval
@@ -32,6 +33,12 @@ Interval::Interval()
 Interval::Interval(int a, int b)
    : diatonic(a), chromatic(b)
       {
+      }
+
+Interval::Interval(int c)
+      {
+      chromatic = c;
+      diatonic = chromatic2diatonic(c);
       }
 
 //---------------------------------------------------------
