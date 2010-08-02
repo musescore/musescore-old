@@ -1153,7 +1153,9 @@ void Score::deleteItem(Element* el)
                         rest->setDuration(chord->duration());
                         rest->setTrack(el->track());
                         rest->setParent(chord->parent());
-                        undoAddElement(rest);
+                        Segment* segment = chord->segment();
+                        undoAddCR(rest, segment->measure(), segment->tick());
+                        // undoAddElement(rest);
                         if (tuplet) {
                               tuplet->add(rest);
                               rest->setTuplet(tuplet);

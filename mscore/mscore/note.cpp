@@ -442,7 +442,7 @@ QPointF Note::stemPos(bool upFlag) const
             upFlag = !upFlag;
 
       double sw   = point(score()->styleS(ST_stemWidth)) * .5;
-      if (chord() && chord()->staff()->useTablature()) {
+      if (chord() && chord()->staff() && chord()->staff()->useTablature()) {
             double xoffset = (sw + _bbox.width() + _bbox.x()) * .5;
             pt += QPointF(xoffset, (_bbox.height() * .5 + spatium() * .5) * (upFlag ? -1.0 : 1.0));
             }
@@ -1152,7 +1152,7 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
 
 void Note::layout()
       {
-      if (staff()->useTablature()) {
+      if (staff() && staff()->useTablature()) {
             QFont f("FreeSerif");
             int size = lrint(9.0 * DPI / PPI);
             f.setPixelSize(size);
@@ -1332,7 +1332,7 @@ void Note::setMag(double val)
 void Note::setLine(int n)
       {
       _line = n;
-      if (staff()->useTablature()) {
+      if (staff() && staff()->useTablature()) {
             _string  = n;
             rypos() = _string * spatium() * 1.5;
             }

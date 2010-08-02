@@ -29,6 +29,25 @@
 enum { COL_PITCH, COL_NOTE, COL_SHORTCUT, COL_NAME };
 
 //---------------------------------------------------------
+//   noteHeadNames
+//---------------------------------------------------------
+
+const char* noteHeadNames[HEAD_GROUPS] = {
+      QT_TRANSLATE_NOOP("noteheadnames", "normal"),
+      QT_TRANSLATE_NOOP("noteheadnames", "cross"),
+      QT_TRANSLATE_NOOP("noteheadnames", "diamond"),
+      QT_TRANSLATE_NOOP("noteheadnames", "triangle"),
+      QT_TRANSLATE_NOOP("noteheadnames", "mi"),
+      QT_TRANSLATE_NOOP("noteheadnames", "slash"),
+      QT_TRANSLATE_NOOP("noteheadnames", "xcircle"),
+      QT_TRANSLATE_NOOP("noteheadnames", "do"),
+      QT_TRANSLATE_NOOP("noteheadnames", "re"),
+      QT_TRANSLATE_NOOP("noteheadnames", "fa"),
+      QT_TRANSLATE_NOOP("noteheadnames", "la"),
+      QT_TRANSLATE_NOOP("noteheadnames", "ti")
+      };
+
+//---------------------------------------------------------
 //   EditDrumset
 //---------------------------------------------------------
 
@@ -55,10 +74,8 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
       updateList();
 
       noteHead->addItem(tr("invalid"));
-      noteHead->addItem(tr("Normal Head"));
-      noteHead->addItem(tr("Cross Head"));
-      noteHead->addItem(tr("Diamond Head"));
-      noteHead->addItem(tr("Triangle Head"));
+      for (int i = 0; i < HEAD_GROUPS; ++i)
+            noteHead->addItem(noteHeadNames[i]);
 
       loadButton = new QPushButton(tr("Load"));
       saveButton = new QPushButton(tr("Save"));
