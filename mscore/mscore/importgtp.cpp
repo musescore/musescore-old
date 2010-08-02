@@ -763,6 +763,8 @@ printf("BeginRepeat=============================================\n");
             Instrument* instr = part->instr();
             instr->setTablature(tab);
             instr->setTrackName(name);
+            instr->setTranspose(Interval(capo));
+            part->setLongName(name);
 
             //
             // determine clef
@@ -1255,6 +1257,7 @@ printf("BeginRepeat=============================================\n");
             instr->setTablature(tab);
             instr->setTrackName(name);
             part->setLongName(name);
+            instr->setTranspose(Interval(capo));
 
             //
             // determine clef
@@ -1524,7 +1527,7 @@ void GuitarPro4::readNote(int string, Note* note, GpNote* gpNote)
                   printf("unknown note variant: %d\n", variant);
             }
 
-      printf("        note bits %02x\n", noteBits);
+//      printf("        note bits %02x\n", noteBits);
 
       if (noteBits & 0x1) {               // note != beat
             int a = readUChar();          // length
@@ -1590,7 +1593,7 @@ void GuitarPro4::readNote(int string, Note* note, GpNote* gpNote)
             note->setGhost(true);
             }
       int pitch = staff->part()->instr()->tablature()->getPitch(string, fretNumber);
-printf("          pitch %d  string %d fret %d\n", pitch, string, fretNumber);
+// printf("          pitch %d  string %d fret %d\n", pitch, string, fretNumber);
       note->setFret(fretNumber);
       note->setString(string);
       note->setPitch(pitch);
@@ -1693,14 +1696,14 @@ void GuitarPro4::read(QFile* fp)
       readLyrics();
 
       int tempo  = readInt();
-      key    = readInt();
+      key        = readInt();
       int octave = readUChar();    // octave
 
 printf("tempo %d key %d octave %d\n", tempo, key, octave);
 
       readChannels();
-      measures   = readInt();
-      staves = readInt();
+      measures = readInt();
+      staves   = readInt();
 
 printf("bars %d tracks %d\n", measures, staves);
 
@@ -1727,7 +1730,7 @@ printf("bars %d tracks %d\n", measures, staves);
                   }
             if (barBits & 0x40) {
                   bar.keysig = readUChar();
-                  uchar c    = readUChar();        // minor
+                  readUChar();        // minor
                   }
             if (barBits & 0x80)
                   bar.barLine = DOUBLE_BAR;
@@ -1758,7 +1761,7 @@ printf("bars %d tracks %d\n", measures, staves);
                   }
             QString name = readPascalString(40);
             int strings  = readInt();
-printf("track %d strings %d <%s>\n", i, strings, qPrintable(name));
+// printf("track %d strings %d <%s>\n", i, strings, qPrintable(name));
             if (strings <= 0 || strings > GP_MAX_STRING_NUMBER)
                   throw GP_BAD_NUMBER_OF_STRINGS ;
             for (int j = 0; j < strings; ++j)
@@ -1769,6 +1772,7 @@ printf("track %d strings %d <%s>\n", i, strings, qPrintable(name));
             int midiChannel  = readInt() - 1;
             int midiChannel2 = readInt() - 1;
             int frets        = readInt();
+
             int capo         = readInt();
             int color        = readInt();
 
@@ -1780,6 +1784,7 @@ printf("track %d strings %d <%s>\n", i, strings, qPrintable(name));
             Instrument* instr = part->instr();
             instr->setTablature(tab);
             instr->setTrackName(name);
+            instr->setTranspose(Interval(capo));
             part->setLongName(name);
 
             //
@@ -1826,7 +1831,7 @@ printf("track %d strings %d <%s>\n", i, strings, qPrintable(name));
             slurs[i] = 0;
       Measure* measure = score->firstMeasure();
       for (int bar = 0; bar < measures; ++bar, measure = measure->nextMeasure()) {
-printf("  read measure %d(%d)\n", bar, measures);
+// printf("  read measure %d(%d)\n", bar, measures);
             const GpBar& gpbar = bars[bar];
 
             if (!gpbar.marker.isEmpty()) {
@@ -1846,10 +1851,10 @@ printf("  read measure %d(%d)\n", bar, measures);
             for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
                   int tick  = measure->tick();
                   int beats = readInt();
-printf("    readStaff %d(%d)\n", staffIdx, staves);
+// printf("    readStaff %d(%d)\n", staffIdx, staves);
                   for (int beat = 0; beat < beats; ++beat) {
                         uchar beatBits = readUChar();
-printf("      readBeat %d(%d) flags 0x%02x\n", beat, beats, beatBits);
+// printf("      readBeat %d(%d) flags 0x%02x\n", beat, beats, beatBits);
                         bool dotted = beatBits & 0x1;
                         int pause = -1;
                         if (beatBits & 0x40)
@@ -1875,8 +1880,8 @@ printf("      readBeat %d(%d) flags 0x%02x\n", beat, beats, beatBits);
                         int strings = readUChar();   // used strings mask
                         Fraction l = len2fraction(len);
 
-printf("      bar %d beat %d(%d) beat bits %02x len %d(%s) tuple %d strings %d\n",
-         bar, beat, beats, beatBits, len, qPrintable(l.print()), tuple, strings);
+// printf("      bar %d beat %d(%d) beat bits %02x len %d(%s) tuple %d strings %d\n",
+//         bar, beat, beats, beatBits, len, qPrintable(l.print()), tuple, strings);
 
                         ChordRest* cr;
                         if (strings == 0)
@@ -1885,7 +1890,7 @@ printf("      bar %d beat %d(%d) beat bits %02x len %d(%s) tuple %d strings %d\n
                               cr = new Chord(score);
                         cr->setTrack(staffIdx * VOICES);
                         if (tuple) {
-printf("      Tuplet note beat %d  tuplet %d  len %s\n", beat, tuple, qPrintable(l.print()));
+// printf("      Tuplet note beat %d  tuplet %d  len %s\n", beat, tuple, qPrintable(l.print()));
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
                                     tuplet = new Tuplet(score);
@@ -1911,7 +1916,7 @@ printf("      Tuplet note beat %d  tuplet %d  len %s\n", beat, tuple, qPrintable
                               cr->setDurationType(d);
 
                         segment->add(cr);
-printf("      add cr %p <%s>\n", cr, qPrintable(l.print()));
+// printf("      add cr %p <%s>\n", cr, qPrintable(l.print()));
 
                         Staff* staff = cr->staff();
                         int numStrings = staff->part()->instr()->tablature()->strings();
@@ -2458,6 +2463,7 @@ printf("midi %d %d %d  frets %d capo %d color %d\n", midiPort, midiChannel,
             instr->setTablature(tab);
             instr->setTrackName(name);
             part->setLongName(name);
+            instr->setTranspose(Interval(capo));
 
             //
             // determine clef

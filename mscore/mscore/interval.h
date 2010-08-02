@@ -31,6 +31,7 @@ struct Interval {
 
       Interval();
       Interval(int a, int b);
+      Interval(int _chromatic);
       void flip();
       bool isZero() const;
       };
