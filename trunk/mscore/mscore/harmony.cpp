@@ -681,9 +681,16 @@ void Harmony::startEdit(ScoreView* view, const QPointF& p)
 void Harmony::endEdit()
       {
       Text::endEdit();
+      setHarmony(getText());
+      }
+//---------------------------------------------------------
+//   setHarmony
+//---------------------------------------------------------
 
+void Harmony::setHarmony(const QString& s)
+      {
       int r, b;
-      parseHarmony(getText(), &r, &b);
+      parseHarmony(s, &r, &b);
       if (_id != -1) {
             setRootTpc(r);
             setBaseTpc(b);
