@@ -66,6 +66,9 @@ enum ArticulationIdx {
       UpMordentSym,
       DownMordentSym,
       SnappizzicatoSym,
+      Tapping,
+      Slapping,
+      Popping,
       ARTICULATIONS
       };
 
@@ -82,11 +85,14 @@ enum ArticulationAnchor {
       A_BOTTOM_CHORD,   // attribute is placed at bottom of chord
       };
 
+enum { ARTICULATION_SHOW_IN_PITCHED_STAFF = 1, ARTICULATION_SHOW_IN_TABLATURE = 2 };
+
 struct ArticulationInfo {
       int sym;
       QString name;
       int relVelocity;        // add velocity to note/chord in percent
       int relGateTime;        // add to gateTime in percent;
+      int flags;
       static int name2index();
       };
 
@@ -100,7 +106,7 @@ class Articulation : public Symbol {
 
       QString _channelName;
       ArticulationAnchor _anchor;
-
+      virtual void draw(QPainter&, ScoreView*) const;
 
    public:
       Articulation(Score*);

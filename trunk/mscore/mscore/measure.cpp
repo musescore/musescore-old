@@ -2480,20 +2480,7 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
                   Element* e = s->element(track);
                   if (e == 0)
                         continue;
-                  if (e->isChordRest()) {
-                        if (e->type() == CHORD)
-                              e->scanElements(data, func);
-                        else
-                              func(data, e);
-                        ChordRest* cr = (ChordRest*)e;
-                        QList<Articulation*>* al = cr->getArticulations();
-                        for (ciArticulation i = al->begin(); i != al->end(); ++i) {
-                              Articulation* a = *i;
-                              func(data, a);
-                              }
-                        }
-                  else
-                        func(data, e);
+                  e->scanElements(data, func);
                   }
             foreach(Spanner* e, s->spannerFor())
                   e->scanElements(data,  func);

@@ -283,6 +283,10 @@ enum StyleIdx {
       ST_UpMordentAnchor,
       ST_DownMordentAnchor,
       ST_SnappizzicatoAnchor,
+      ST_TappingAnchor,
+      ST_SlappingAnchor,
+      ST_PoppingAnchor,
+
       ST_ArpeggioNoteDistance,
       ST_ArpeggioLineWidth,
       ST_ArpeggioHookLen,

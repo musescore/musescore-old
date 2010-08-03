@@ -466,6 +466,9 @@ Style::Style()
             StyleVal(ST_UpMordentAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_DownMordentAnchor, int(A_TOP_STAFF)),
             StyleVal(ST_SnappizzicatoAnchor, int(A_CHORD)),
+            StyleVal(ST_TappingAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_SlappingAnchor, int(A_TOP_STAFF)),
+            StyleVal(ST_PoppingAnchor, int(A_TOP_STAFF)),
 
             StyleVal(ST_ArpeggioNoteDistance, Spatium(.5)),
             StyleVal(ST_ArpeggioLineWidth, Spatium(.18)),

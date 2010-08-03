@@ -405,12 +405,11 @@ void MuseScore::showPalette(bool visible)
             //    Attributes, Ornaments
             //-----------------------------------
 
-            unsigned nn = ARTICULATIONS;
             sp = new Palette;
             sp->setName(tr("Articulations && Ornaments"));
             sp->setGrid(42, 25);
 
-            for (unsigned i = 0; i < nn; ++i) {
+            for (int i = 0; i < ARTICULATIONS; ++i) {
                   Articulation* s = new Articulation(gscore);
                   s->setSubtype(i);
                   sp->append(s, qApp->translate("articulation", qPrintable(s->subtypeName())));

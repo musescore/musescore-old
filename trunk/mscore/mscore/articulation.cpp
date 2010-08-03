@@ -24,47 +24,90 @@
 #include "chordrest.h"
 #include "system.h"
 #include "measure.h"
+#include "staff.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   Articulation::articulationList
 //---------------------------------------------------------
 
 ArticulationInfo Articulation::articulationList[ARTICULATIONS] = {
-      { ufermataSym,       QT_TRANSLATE_NOOP("articulation", "ufermata"),        100, 100  },
-      { dfermataSym,       QT_TRANSLATE_NOOP("articulation", "dfermata"),        100, 100  },
-      { ushortfermataSym,    QT_TRANSLATE_NOOP("articulation", "ushortfermata"),    100, 100  },
-      { dshortfermataSym,    QT_TRANSLATE_NOOP("articulation", "dshortfermata"),    100, 100  },
-      { ulongfermataSym,     QT_TRANSLATE_NOOP("articulation", "ulongfermata"),     100, 100  },
-      { dlongfermataSym,     QT_TRANSLATE_NOOP("articulation", "dlongfermata"),     100, 100  },
-      { uverylongfermataSym, QT_TRANSLATE_NOOP("articulation", "uverylongfermata"), 100, 100  },
-      { dverylongfermataSym, QT_TRANSLATE_NOOP("articulation", "dverylongfermata"), 100, 100  },
-      { thumbSym,          QT_TRANSLATE_NOOP("articulation", "thumb"),           100, 100  },
-      { sforzatoaccentSym, QT_TRANSLATE_NOOP("articulation", "sforzato"),        120, 100  },
-      { esprSym,           QT_TRANSLATE_NOOP("articulation", "espressivo"),      100, 100  },
-      { staccatoSym,       QT_TRANSLATE_NOOP("articulation", "staccato"),        100,  50  },
-      { ustaccatissimoSym, QT_TRANSLATE_NOOP("articulation", "ustaccatissimo"),  100, 100  },
-      { dstaccatissimoSym, QT_TRANSLATE_NOOP("articulation", "dstaccatissimo"),  100, 100  },
-      { tenutoSym,         QT_TRANSLATE_NOOP("articulation", "tenuto"),          100, 100  },
-      { uportatoSym,       QT_TRANSLATE_NOOP("articulation", "uportato"),        100, 100  },
-      { dportatoSym,       QT_TRANSLATE_NOOP("articulation", "dportato"),        100, 100  },
-      { umarcatoSym,       QT_TRANSLATE_NOOP("articulation", "umarcato"),        110, 100  },
-      { dmarcatoSym,       QT_TRANSLATE_NOOP("articulation", "dmarcato"),        110, 100  },
-      { ouvertSym,         QT_TRANSLATE_NOOP("articulation", "ouvert"),          100, 100  },
-      { plusstopSym,       QT_TRANSLATE_NOOP("articulation", "plusstop"),        100, 100  },
-      { upbowSym,          QT_TRANSLATE_NOOP("articulation", "upbow"),           100, 100  },
-      { downbowSym,        QT_TRANSLATE_NOOP("articulation", "downbow"),         100, 100  },
-      { reverseturnSym,    QT_TRANSLATE_NOOP("articulation", "reverseturn"),     100, 100  },
-      { turnSym,           QT_TRANSLATE_NOOP("articulation", "turn"),            100, 100  },
-      { trillSym,          QT_TRANSLATE_NOOP("articulation", "trill"),           100, 100  },
-      { prallSym,          QT_TRANSLATE_NOOP("articulation", "prall"),           100, 100  },
-      { mordentSym,        QT_TRANSLATE_NOOP("articulation", "mordent"),         100, 100  },
-      { prallprallSym,     QT_TRANSLATE_NOOP("articulation", "prallprall"),      100, 100  },
-      { prallmordentSym,   QT_TRANSLATE_NOOP("articulation", "prallmordent"),    100, 100  },
-      { upprallSym,        QT_TRANSLATE_NOOP("articulation", "upprall"),         100, 100  },
-	{ downprallSym,      QT_TRANSLATE_NOOP("articulation", "downprall"),       100, 100  },
-	{ upmordentSym,      QT_TRANSLATE_NOOP("articulation", "upmordent"),       100, 100  },
-	{ downmordentSym,    QT_TRANSLATE_NOOP("articulation", "downmordent"),     100, 100  },
-      { snappizzicatoSym,  QT_TRANSLATE_NOOP("articulation", "snappizzicato"),   100, 100  },
+      { ufermataSym,         QT_TRANSLATE_NOOP("articulation", "ufermata"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE },
+      { dfermataSym,         QT_TRANSLATE_NOOP("articulation", "dfermata"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { ushortfermataSym,    QT_TRANSLATE_NOOP("articulation", "ushortfermata"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { dshortfermataSym,    QT_TRANSLATE_NOOP("articulation", "dshortfermata"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { ulongfermataSym,     QT_TRANSLATE_NOOP("articulation", "ulongfermata"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { dlongfermataSym,     QT_TRANSLATE_NOOP("articulation", "dlongfermata"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { uverylongfermataSym, QT_TRANSLATE_NOOP("articulation", "uverylongfermata"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { dverylongfermataSym, QT_TRANSLATE_NOOP("articulation", "dverylongfermata"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { thumbSym,            QT_TRANSLATE_NOOP("articulation", "thumb"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { sforzatoaccentSym,   QT_TRANSLATE_NOOP("articulation", "sforzato"),
+            120, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { esprSym,             QT_TRANSLATE_NOOP("articulation", "espressivo"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { staccatoSym,         QT_TRANSLATE_NOOP("articulation", "staccato"),
+            100,  50, ARTICULATION_SHOW_IN_PITCHED_STAFF  },
+      { ustaccatissimoSym,   QT_TRANSLATE_NOOP("articulation", "ustaccatissimo"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF  },
+      { dstaccatissimoSym,   QT_TRANSLATE_NOOP("articulation", "dstaccatissimo"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF  },
+      { tenutoSym,           QT_TRANSLATE_NOOP("articulation", "tenuto"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { uportatoSym,         QT_TRANSLATE_NOOP("articulation", "uportato"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { dportatoSym,         QT_TRANSLATE_NOOP("articulation", "dportato"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { umarcatoSym,         QT_TRANSLATE_NOOP("articulation", "umarcato"),
+            110, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { dmarcatoSym,         QT_TRANSLATE_NOOP("articulation", "dmarcato"),
+            110, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { ouvertSym,           QT_TRANSLATE_NOOP("articulation", "ouvert"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { plusstopSym,         QT_TRANSLATE_NOOP("articulation", "plusstop"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { upbowSym,            QT_TRANSLATE_NOOP("articulation", "upbow"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { downbowSym,          QT_TRANSLATE_NOOP("articulation", "downbow"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { reverseturnSym,      QT_TRANSLATE_NOOP("articulation", "reverseturn"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { turnSym,             QT_TRANSLATE_NOOP("articulation", "turn"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { trillSym,            QT_TRANSLATE_NOOP("articulation", "trill"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { prallSym,            QT_TRANSLATE_NOOP("articulation", "prall"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { mordentSym,          QT_TRANSLATE_NOOP("articulation", "mordent"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { prallprallSym,       QT_TRANSLATE_NOOP("articulation", "prallprall"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { prallmordentSym,     QT_TRANSLATE_NOOP("articulation", "prallmordent"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { upprallSym,          QT_TRANSLATE_NOOP("articulation", "upprall"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+	{ downprallSym,        QT_TRANSLATE_NOOP("articulation", "downprall"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+	{ upmordentSym,        QT_TRANSLATE_NOOP("articulation", "upmordent"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+	{ downmordentSym,      QT_TRANSLATE_NOOP("articulation", "downmordent"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { snappizzicatoSym,    QT_TRANSLATE_NOOP("articulation", "snappizzicato"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+      { letterTSym,    QT_TRANSLATE_NOOP("articulation", "tapping"),
+            100, 100, ARTICULATION_SHOW_IN_TABLATURE  },
+      { letterSSym,    QT_TRANSLATE_NOOP("articulation", "slapping"),
+            100, 100, ARTICULATION_SHOW_IN_TABLATURE  },
+      { letterPSym,    QT_TRANSLATE_NOOP("articulation", "popping"),
+            100, 100, ARTICULATION_SHOW_IN_TABLATURE  },
 	};
 
 //---------------------------------------------------------
@@ -282,3 +325,26 @@ QPointF Articulation::canvasPos() const
       double yp = y() + system->staff(staffIdx() + cr->staffMove())->y() + system->y();
       return QPointF(xp, yp);
       }
+
+//---------------------------------------------------------
+//   Symbol::draw
+//---------------------------------------------------------
+
+void Articulation::draw(QPainter& p, ScoreView*) const
+      {
+      int flags = articulationList[subtype()].flags;
+      if (staff()) {
+            bool tab = staff()->useTablature();
+            if (tab) {
+                  if (!(flags & ARTICULATION_SHOW_IN_TABLATURE))
+                        return;
+                  }
+            else {
+                  if (!(flags & ARTICULATION_SHOW_IN_PITCHED_STAFF))
+                        return;
+                  }
+            }
+      symbols[score()->symIdx()][_sym].draw(p, magS());
+      }
+
+
