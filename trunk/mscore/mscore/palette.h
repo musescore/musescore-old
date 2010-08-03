@@ -124,6 +124,7 @@ class PaletteBox : public QDockWidget {
    private slots:
       void paletteCmd(int, int);
       void setDirty() { _dirty = true; }
+      void contextMenu(const QPoint&);
 
    signals:
       void paletteVisible(bool);

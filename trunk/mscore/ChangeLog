@@ -1,3 +1,6 @@
+3.aug (ws)
+      - new context menu for palettes: new function: revert to
+        factory settings
 29.jul (ws)
       - added google-diff-match-patch library to build
       - implemented basic functionality for linked parts

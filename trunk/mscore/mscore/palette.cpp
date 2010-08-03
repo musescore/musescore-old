@@ -1115,7 +1115,38 @@ PaletteBox::PaletteBox(QWidget* parent)
       vbox->addStretch(1);
       mainWidget->setLayout(vbox);
       setWidget(mainWidget);
+      connect(mainWidget, SIGNAL(customContextMenuRequested(const QPoint&)), SLOT(contextMenu(const QPoint&)));
+      mainWidget->setContextMenuPolicy(Qt::CustomContextMenu);
       _dirty = false;
+      }
+
+//---------------------------------------------------------
+//   contextMenu
+//---------------------------------------------------------
+
+void PaletteBox::contextMenu(const QPoint& pt)
+      {
+      QMenu menu;
+      QAction* a = menu.addAction("Reset to factory defaults");
+      QString s(dataPath + "/" + "mscore-palette.xml");
+      QFile f(s);
+      if (!f.exists() && !_dirty)
+            a->setEnabled(false);
+
+      QAction* b = menu.exec(mapToGlobal(pt));
+      if (a == b) {
+            if (f.exists())
+                  QFile::remove(s);
+            int n = vbox->count() - 1;    // do not delete last spacer item
+            while (n--) {
+                  QLayoutItem* item = vbox->takeAt(0);
+                  if (item->widget())
+                        item->widget()->hide();
+                  delete item;
+                  }
+            vbox->invalidate();
+            mscore->populatePalette();      // hack
+            }
       }
 
 //---------------------------------------------------------
