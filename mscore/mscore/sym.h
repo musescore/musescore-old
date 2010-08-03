@@ -315,6 +315,9 @@ enum {
       letterrSym,
       lettersSym,
       letterzSym,
+      letterTSym,
+      letterSSym,
+      letterPSym,
 
       plusSym,
       note2Sym,

@@ -417,6 +417,32 @@ void GuitarPro::createMeasures()
       }
 
 //---------------------------------------------------------
+//   applyBeatEffects
+//---------------------------------------------------------
+
+void GuitarPro::applyBeatEffects(Chord* chord, int beatEffect)
+      {
+      if (beatEffect == 0)
+            return;
+
+      Articulation* a = new Articulation(chord->score());
+      chord->add(a);
+      switch (beatEffect) {
+            case 1:
+                  a->setSubtype(Tapping);
+                  break;
+            case 2:
+                  a->setSubtype(Slapping);
+                  break;
+            case 3:
+                  a->setSubtype(Popping);
+                  break;
+            default:
+                  printf("GuitarPro import: unknown beat effect %d\n", beatEffect);
+            }
+      }
+
+//---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
@@ -1047,7 +1073,7 @@ void GuitarPro1::readNote(int string, Note* note)
 //   readBeatEffects
 //---------------------------------------------------------
 
-void GuitarPro1::readBeatEffects()
+int GuitarPro1::readBeatEffects()
       {
 printf("1readBeatEffects\n");
       uchar fxBits1 = readUChar();
@@ -1066,10 +1092,7 @@ printf("1readBeatEffects\n");
             readUChar();            // down stroke length
             readUChar();            // up stroke length
             }
-//      if (fxBits1 & 0x02)
-//            readUChar();            // stroke pick direction
-//      if (fxBits1 & 0x01) {         // GP3 column-wide vibrato
-//            }
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -1479,13 +1502,14 @@ printf("readMixChange patch:%d vol:%d pan:%d chorus:%d reverb:%d phase:%d tremol
 //   readBeatEffects
 //---------------------------------------------------------
 
-void GuitarPro4::readBeatEffects()
+int GuitarPro4::readBeatEffects()
       {
+      int effects = 0;
       uchar fxBits1 = readUChar();
       uchar fxBits2 = readUChar();
 printf("readBeatEffects 0x%02x 0x%02x\n", fxBits1, fxBits2);
       if (fxBits1 & 0x20) {
-            uchar num = readUChar();      // effect 1-tapping, 2-slapping, 3-popping
+            effects = readUChar();      // effect 1-tapping, 2-slapping, 3-popping
             }
       if (fxBits2 & 0x04)
             readChromaticGraph();
@@ -1499,6 +1523,7 @@ printf("readBeatEffects 0x%02x 0x%02x\n", fxBits1, fxBits2);
             }
       if (fxBits1 & 0x2) {          // GP3 column-wide wide vibrato (="tremolo" in GP3)
             }
+      return effects;
       }
 
 //---------------------------------------------------------
@@ -2001,7 +2026,7 @@ void GuitarPro5::readInfo()
 //   readNoteEffects
 //---------------------------------------------------------
 
-void GuitarPro5::readNoteEffects()
+void GuitarPro5::readNoteEffects(Note* note)
       {
       uchar modMask1 = readUChar();
       uchar modMask2 = readUChar();
@@ -2022,6 +2047,10 @@ void GuitarPro5::readNoteEffects()
                   // 2  - on beat
             }
       if (modMask2 & 0x1) {   // staccato - palm mute
+            Chord* chord = note->chord();
+            Articulation* a = new Articulation(chord->score());
+            a->setSubtype(StaccatoSym);
+            chord->add(a);
             }
       if (modMask2 & 0x2) {   // palm mute - mute the whole column
             }
@@ -2103,7 +2132,7 @@ void GuitarPro5::readNote(int string, Note* note)
       printf("    note 0x%02x\n", aa);
 
       if (noteBits & 0x8) {
-            readNoteEffects();
+            readNoteEffects(note);
             }
       Staff* staff = note->staff();
       if (fretNumber == 255) {
@@ -2208,13 +2237,15 @@ printf("5readTremoloBar() n=%d\n", n);
 //   readBeatEffects
 //---------------------------------------------------------
 
-void GuitarPro5::readBeatEffects()
+int GuitarPro5::readBeatEffects()
       {
+      int effects = 0;
+
       uchar fxBits1 = readUChar();
       uchar fxBits2 = readUChar();
 printf("5readBeatEffects %02x %02x\n", fxBits1, fxBits2);
       if (fxBits1 & 0x20) {
-            uchar num = readUChar();
+            effects = readUChar();
             // 1 - tapping
             // 2 - slapping
             // 3 - popping
@@ -2222,11 +2253,15 @@ printf("5readBeatEffects %02x %02x\n", fxBits1, fxBits2);
       if (fxBits2 & 0x04)
             readTremoloBar();       // readChromaticGraph();
       if (fxBits1 & 0x40) {
-            readChar();            // down stroke length
-            readChar();            // up stroke length
+            int a = readChar();     // down stroke length
+            int b = readChar();     // up stroke length
+            printf("  0x40: 0x%02x 0x%02x\n", a, b);
             }
-      if (fxBits2 & 0x02)
-            readChar();            // stroke pick direction
+      if (fxBits2 & 0x02) {
+            int a = readChar();            // stroke pick direction
+            printf("  0x02: 0x%02x\n", a);
+            }
+      return effects;
       }
 
 //---------------------------------------------------------
@@ -2256,7 +2291,7 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
             pause = readUChar();
 
       // readDuration
-      int len = readChar();
+      int len   = readChar();
       int tuple = 0;
       if (beatBits & 0x20)
             tuple = readInt();
@@ -2271,8 +2306,9 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
             l->setTrack(staffIdx * VOICES);
             segment->add(l);
             }
+      int beatEffects = 0;
       if (beatBits & 0x8)
-            readBeatEffects();
+            beatEffects = readBeatEffects();
       if (beatBits & 0x10)
             readMixChange();
 
@@ -2334,6 +2370,7 @@ printf("voice %d bits 0x%02x strings %d pause %d len %d, %s\n",
       int rr = readChar();
       if (cr && (cr->type() == CHORD)) {
             Chord* chord = static_cast<Chord*>(cr);
+            applyBeatEffects(chord, beatEffects);
             if (rr == 0x2)
                   chord->setStemDirection(DOWN);
             else if (rr == 0xa)

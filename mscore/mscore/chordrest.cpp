@@ -130,6 +130,11 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
       {
       foreach(Slur* slur, _slurFor)
             slur->scanElements(data, func);
+      for (ciArticulation i = articulations.begin(); i != articulations.end(); ++i) {
+            Articulation* a = *i;
+            func(data, a);
+            }
+      func(data, this);
       }
 
 //---------------------------------------------------------

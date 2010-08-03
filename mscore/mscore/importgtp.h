@@ -24,6 +24,7 @@
 #include "al/fraction.h"
 
 class Score;
+class Chord;
 class Note;
 class Segment;
 class Measure;
@@ -80,7 +81,7 @@ class GuitarPro {
       QString readDelphiString();
       virtual void readChromaticGraph();
       virtual void readMixChange();
-      virtual void readBeatEffects() = 0;
+      virtual int readBeatEffects() = 0;
       void readLyrics();
       void readChannels();
       void setTuplet(Tuplet* tuplet, int tuple);
@@ -88,6 +89,7 @@ class GuitarPro {
       void addDynamic(Note*, int d);
       void setTempo(int n);
       void createMeasures();
+      void applyBeatEffects(Chord*, int beatEffects);
 
    public:
       QString title, subtitle, artist, album, composer;
@@ -117,7 +119,7 @@ class GuitarPro1 : public GuitarPro {
    protected:
       virtual void readChord(Segment*, int track);
       void readNote(int string, Note* note);
-      virtual void readBeatEffects();
+      virtual int readBeatEffects();
 
    public:
       GuitarPro1(Score* s, int v) : GuitarPro(s, v) {}
@@ -155,7 +157,7 @@ class GuitarPro4 : public GuitarPro {
       void readInfo();
       void readNote(int string, Note* note, GpNote*);
       virtual void readChord(Segment*, int track);
-      virtual void readBeatEffects();
+      virtual int readBeatEffects();
       virtual void readMixChange();
       virtual void readChromaticGraph();
 
@@ -172,7 +174,7 @@ class GuitarPro5 : public GuitarPro {
 
       void readInfo();
       void readPageSetup();
-      virtual void readBeatEffects();
+      virtual int readBeatEffects();
       virtual void readChromaticGraph();
       void readNote(int string, Note* note);
       virtual void readMixChange();
@@ -182,7 +184,7 @@ class GuitarPro5 : public GuitarPro {
       void readTracks();
       void readMeasures();
       int readBeat(int tick, int voice, Measure* measure, int staffIdx, Tuplet** tuplets);
-      void readNoteEffects();
+      void readNoteEffects(Note*);
       void readTremoloBar();
 
    public:

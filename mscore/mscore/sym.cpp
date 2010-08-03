@@ -602,6 +602,10 @@ void initSymbols(int idx)
       symbols[idx][letterrSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "r"),          0x72, 1);
       symbols[idx][lettersSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "s"),          0x73, 1);
       symbols[idx][letterzSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "z"),          0x7a, 1);
+      symbols[idx][letterTSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "T"),          'T', 2);
+      symbols[idx][letterSSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "S"),          'S', 2);
+      symbols[idx][letterPSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "P"),          'P', 2);
+
       // used for GUI:
       symbols[idx][note2Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/2"),   0xe104, 1);
       symbols[idx][note4Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/4"),   0x1d15f, 1);
