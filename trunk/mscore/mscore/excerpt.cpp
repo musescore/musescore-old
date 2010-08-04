@@ -44,14 +44,14 @@
 
 void Excerpt::read(QDomElement e)
       {
-#if 0
-      const QList<Part*>* pl = score->parts();
+      const QList<Part*>* pl = _score->parts();
+      QString name;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag = e.tagName();
             if (tag == "name")
-                  _name = e.text();
+                  name = e.text();
             else if (tag == "title")
-                  _title = e.text();
+                  _title = e.text().trimmed();
             else if (tag == "part") {
                   int partIdx = e.text().toInt();
                   if (partIdx < 0 || partIdx >= pl->size())
@@ -60,7 +60,8 @@ void Excerpt::read(QDomElement e)
                         _parts.append(pl->at(partIdx));
                   }
             }
-#endif
+      if (_title.isEmpty())
+            _title = name.trimmed();
       }
 
 //---------------------------------------------------------
