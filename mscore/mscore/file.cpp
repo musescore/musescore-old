@@ -1605,6 +1605,20 @@ printf("incomplete Slur\n");
             }
       checkScore();
 
+      if (_mscVersion < 117) {
+            // create excerpts
+            foreach(Excerpt* excerpt, _excerpts) {
+                  Score* nscore = ::createExcerpt(*excerpt->parts());
+                  nscore->setParentScore(this);
+                  nscore->setName(excerpt->title());
+                  nscore->rebuildMidiMapping();
+                  nscore->updateChannel();
+                  nscore->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+                  nscore->layout();
+                  excerpt->setScore(nscore);
+                  }
+            }
+
       rebuildMidiMapping();
       updateChannel();
 

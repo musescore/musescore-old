@@ -235,6 +235,7 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
                   }
 
             Score* nscore = ::createExcerpt(parts);
+            nscore->setParentScore(score);
             nscore->setName(e->title());
             nscore->rebuildMidiMapping();
             nscore->updateChannel();
