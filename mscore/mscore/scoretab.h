@@ -56,6 +56,9 @@ class ScoreTab : public QWidget {
       void currentScoreViewChanged(ScoreView*);
       void tabCloseRequested(int);
 
+   public slots:
+      void updateExcerpts();
+
    public:
       ScoreTab(QList<Score*>*, QWidget* parent = 0);
       void insertTab(Score*);

@@ -2349,4 +2349,39 @@ void ChangeDuration::flip()
       d = od;
       }
 
+//---------------------------------------------------------
+//   AddExcerpt::undo
+//---------------------------------------------------------
+
+void AddExcerpt::undo()
+      {
+      score->parentScore()->removeExcerpt(score);
+      }
+
+//---------------------------------------------------------
+//   AddExcerpt::redo
+//---------------------------------------------------------
+
+void AddExcerpt::redo()
+      {
+      score->parentScore()->addExcerpt(score);
+      }
+
+//---------------------------------------------------------
+//   RemoveExcerpt::undo()
+//---------------------------------------------------------
+
+void RemoveExcerpt::undo()
+      {
+      score->parentScore()->addExcerpt(score);
+      }
+
+//---------------------------------------------------------
+//   RemoveExcerpt::redo()
+//---------------------------------------------------------
+
+void RemoveExcerpt::redo()
+      {
+      score->parentScore()->removeExcerpt(score);
+      }
 

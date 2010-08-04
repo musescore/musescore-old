@@ -155,8 +155,9 @@ void Score::end()
       Score* score = this;
       if (parentScore())
             score = this;
-      foreach (Excerpt* e, *score->excerpts())
+      foreach (Excerpt* e, score->_excerpts) {
             e->score()->end();
+            }
       }
 
 //---------------------------------------------------------

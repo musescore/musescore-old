@@ -144,7 +144,7 @@ class MagTransition2 : public QEventTransition
 //   ContextTransition
 //---------------------------------------------------------
 
-class ContextTransition : public QMouseEventTransition
+class ContextTransition : public QEventTransition
       {
       ScoreView* canvas;
 
@@ -155,7 +155,7 @@ class ContextTransition : public QMouseEventTransition
             }
    public:
       ContextTransition(ScoreView* c)
-         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::RightButton), canvas(c) {}
+         : QEventTransition(c, QEvent::ContextMenu), canvas(c) {}
       };
 
 //---------------------------------------------------------
@@ -584,6 +584,8 @@ ScoreView::ScoreView(QWidget* parent)
       _score      = 0;
       dropTarget  = 0;
       _editText   = 0;
+
+      setContextMenuPolicy(Qt::DefaultContextMenu);
 
       double mag  = preferences.mag * PDPI / DPI;
       _matrix     = QTransform(mag, 0.0, 0.0, mag, 0.0, 0.0);

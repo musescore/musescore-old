@@ -1381,6 +1381,34 @@ class ChangeDuration : public UndoCommand {
       UNDO_NAME("ChangeDuration");
       };
 
+//---------------------------------------------------------
+//   AddExcerpt
+//---------------------------------------------------------
+
+class AddExcerpt : public UndoCommand {
+      Score* score;
+
+   public:
+      AddExcerpt(Score* s) : score(s) {}
+      virtual void undo();
+      virtual void redo();
+      UNDO_NAME("AddExcerpt");
+      };
+
+//---------------------------------------------------------
+//   RemoveExcerpt
+//---------------------------------------------------------
+
+class RemoveExcerpt : public UndoCommand {
+      Score* score;
+
+   public:
+      RemoveExcerpt(Score* s) : score(s) {}
+      virtual void undo();
+      virtual void redo();
+      UNDO_NAME("RemoveExcerpt");
+      };
+
 #endif
 
 

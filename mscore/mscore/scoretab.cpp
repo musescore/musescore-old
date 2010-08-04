@@ -181,11 +181,41 @@ void ScoreTab::setCurrent(int n)
       }
 
 //---------------------------------------------------------
+//   updateExcerpts
+//    number of excerpts in score changed
+//---------------------------------------------------------
+
+void ScoreTab::updateExcerpts()
+      {
+      int idx = currentIndex();
+      if (idx == -1)
+            return;
+      ScoreView* v = view(idx);
+      Score* score = v->score();
+      QList<Excerpt*>* excerpts = score->excerpts();
+      if (v && excerpts && !excerpts->isEmpty()) {
+printf("ScoreTab::updateExcerpts()\n");
+            int n = tab2->count();
+            tab2->blockSignals(true);
+            for (int i = 0; i < n; ++i)
+                  tab2->removeTab(0);
+            tab2->addTab(score->name());
+            foreach(Excerpt* excerpt, *excerpts)
+                  tab2->addTab(excerpt->score()->name());
+            tab2->setVisible(true);
+            tab2->blockSignals(false);
+            }
+      else
+            tab2->setVisible(false);
+      }
+
+//---------------------------------------------------------
 //   setExcerpt
 //---------------------------------------------------------
 
 void ScoreTab::setExcerpt(int n)
       {
+printf("ScoreTab::setExcerpt %d\n", n);
       if (n == -1)
             return;
       int idx           = tab->currentIndex();
@@ -196,11 +226,11 @@ void ScoreTab::setExcerpt(int n)
       Score* score = tsv->score;
       if (n) {
             QList<Excerpt*>* excerpts = score->excerpts();
-            if (excerpts && !excerpts->isEmpty()) {
+printf("  excerpts(%p) %d\n", score, excerpts->size());
+            if (!excerpts->isEmpty()) {
                   score = excerpts->at(n - 1)->score();
                   }
             }
-
       if (!vs) {
             vs = new QSplitter;
             v = new ScoreView;

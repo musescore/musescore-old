@@ -819,6 +819,8 @@ class Score : public QObject {
       Volta* searchVolta(int tick) const;
       Score* parentScore() const    { return _parentScore; }
       void setParentScore(Score* s) { _parentScore = s;    }
+      void addExcerpt(Score*);
+      void removeExcerpt(Score*);
       };
 
 extern Score* gscore;

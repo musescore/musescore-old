@@ -1056,7 +1056,6 @@ void Score::saveFile(QIODevice* f, bool autosave)
       xml.etag();
       if (!parentScore())
             _revisions->write(xml);
-
       }
 
 //---------------------------------------------------------
@@ -1466,10 +1465,8 @@ bool Score::read(QDomElement dScore)
             else if (tag == "Score") {          // recursion
                   Score* s = new Score(style());
                   s->setParentScore(this);
-                  Excerpt* ex = new Excerpt(s);
-                  _excerpts.append(ex);
                   s->read(ee);
-printf("add excerpt <%s>\n", qPrintable(s->name()));
+                  addExcerpt(s);
                   }
             else if (tag == "name")
                   setName(val);
