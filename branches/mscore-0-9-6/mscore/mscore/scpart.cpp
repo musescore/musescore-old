@@ -69,7 +69,7 @@ static QScriptValue prototype_Part_call(QScriptContext* context, QScriptEngine*)
       switch(_id) {
             case 0:     // "longName",
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), part->longName()->getText());
+                        return qScriptValueFromValue(context->engine(), part->longName()->getText().replace(QString(0xe10d), QString(0x266D)));
                   else if (context->argumentCount() == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         part->setLongName(s);
@@ -78,7 +78,7 @@ static QScriptValue prototype_Part_call(QScriptContext* context, QScriptEngine*)
                   break;
             case 1:     // "shortName",
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), part->shortName()->getText());
+                        return qScriptValueFromValue(context->engine(), part->shortName()->getText().replace(QString(0xe10d), QString(0x266D)));
                   else if (context->argumentCount() == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         part->setShortName(s);

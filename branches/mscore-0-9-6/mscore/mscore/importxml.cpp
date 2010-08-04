@@ -2970,10 +2970,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   tuplet->setTrack((staff + relStaff) * VOICES);
                   tuplet->setRatio(Fraction(actualNotes, normalNotes));
                   tuplet->setTick(tick);
-                  // tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
-                  // avoid rounding errors:
-                  // int bl = duration * actualNotes / normalNotes;
-                  // tuplet->setBaseLen((AL::division * bl) / divisions);
 
                   // type, placement
 
@@ -2983,7 +2979,24 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   if (tuplet) {
                         cr->setTuplet(tuplet);
                         tuplet->add(cr);
-                        tuplet = 0;
+                        int totalDuration = 0;
+                        foreach(DurationElement* de, tuplet->elements()) {
+                              if (de->type() == CHORD || de->type() == REST){
+                                    totalDuration+=de->tickLen();
+                                    }
+                              }
+                        if(totalDuration && normalNotes){                              
+                              Duration d;
+                              d.setVal(totalDuration);      
+                              tuplet->setFraction(d.fraction()); 
+                              Duration d2;     
+                              d2.setVal(totalDuration/normalNotes);
+                              tuplet->setBaseLen(d2.fraction());
+                              tuplet = 0;
+                              }
+                        else{
+                              printf("MusicXML::import: tuplet stop but bad duration\n");
+                              }
                         }
                   else
                         printf("MusicXML::import: tuplet stop without tuplet start\n");
