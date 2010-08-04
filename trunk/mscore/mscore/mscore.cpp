@@ -3166,3 +3166,24 @@ const char* stateName(ScoreState s)
             }
       }
 
+//---------------------------------------------------------
+//   excerptsChanged
+//---------------------------------------------------------
+
+void MuseScore::excerptsChanged(Score* s)
+      {
+printf("excerptsChanged\n");
+      if (tab2) {
+            ScoreView* v = tab2->view();
+            if (v && v->score() == s) {
+                  tab2->updateExcerpts();
+                  }
+            }
+      if (tab1) {
+            ScoreView* v = tab1->view();
+            if (v && v->score() == s) {
+                  tab1->updateExcerpts();
+                  }
+            }
+      }
+

@@ -628,8 +628,8 @@ void Score::write(Xml& xml, bool /*autosave*/)
             ks->write(xml);
       foreach(const Part* part, _parts)
             part->write(xml);
-      foreach(const Excerpt* excerpt, _excerpts)
-            excerpt->write(xml);
+//      foreach(const Excerpt* excerpt, *excerpts())
+//            excerpt->write(xml);
 
       // to serialize slurs/tuplets/beams, they need an id; this id is referenced
       // in begin-end elements
@@ -660,8 +660,8 @@ void Score::write(Xml& xml, bool /*autosave*/)
             }
       xml.curTrack = -1;
       xml.tag("cursorTrack", _is.track());
-      foreach(Excerpt* excerpt, _excerpts)
-            excerpt->score()->write(xml, false);       // recursion
+//      foreach(Excerpt* excerpt, _excerpts)
+//            excerpt->score()->write(xml, false);       // recursion
       if (parentScore())
             xml.tag("name", name());
       xml.etag();
@@ -2284,5 +2284,52 @@ AL::TimeSigMap* Score::sigmap() const
       while (score->parentScore())
             score = parentScore();
       return score->_sigmap;
+      }
+
+//---------------------------------------------------------
+//   addExcerpt
+//---------------------------------------------------------
+
+void Score::addExcerpt(Score* score)
+      {
+printf("Score::addExcerpt %p\n", score);
+
+      Excerpt* ex = new Excerpt(score);
+      excerpts()->append(ex);
+      ex->setTitle(score->name());
+      foreach(Staff* s, score->staves()) {
+            LinkedStaves* ls = s->linkedStaves();
+            if (ls == 0)
+                  continue;
+            foreach(Staff* ps, ls->staves()) {
+                  if (ps->score() == this) {
+                        ex->parts()->append(ps->part());
+                        break;
+                        }
+                  }
+            }
+      mscore->excerptsChanged(this);
+      }
+
+//---------------------------------------------------------
+//   removeExcerpt
+//---------------------------------------------------------
+
+void Score::removeExcerpt(Score* score)
+      {
+printf("Score::removeExcerpt %p\n", score);
+
+      foreach (Excerpt* ex, *excerpts()) {
+            if (ex->score() == score) {
+                  if (excerpts()->removeOne(ex)) {
+                        delete ex;
+                        mscore->excerptsChanged(this);
+                        return;
+                        }
+                  else
+                        printf("removeExcerpt:: ex not found\n");
+                  }
+            }
+      printf("Score::removeExcerpt: excerpt not found\n");
       }
 

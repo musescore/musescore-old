@@ -88,8 +88,6 @@ bool Excerpt::operator!=(const Excerpt& e) const
       {
       if (e._score != _score)
             return true;
-      if (e._name != _name)
-            return true;
       if (e._title != _title)
             return true;
       if (e._parts != _parts)

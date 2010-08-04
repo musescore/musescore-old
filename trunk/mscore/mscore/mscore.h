@@ -428,6 +428,7 @@ class MuseScore : public QMainWindow {
       void setMidiRecordId(int id) { _midiRecordId = id; }
       int midiRecordId() const { return _midiRecordId; }
       void populatePalette();
+      void excerptsChanged(Score*);
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);
