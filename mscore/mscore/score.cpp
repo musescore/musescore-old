@@ -298,8 +298,8 @@ Score::~Score()
             }
       foreach(Element* e, _gel)
             delete e;
-      foreach(Beam* b, _beams)
-            delete b;
+      /*foreach(Beam* b, _beams)
+            delete b;*/
       foreach(Part* p, _parts)
             delete p;
       foreach(Staff* staff, _staves)

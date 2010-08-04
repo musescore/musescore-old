@@ -67,8 +67,8 @@ ChordRest* SCursor::cr() const
       if (_segment) {
             int track = _staffIdx * VOICES + _voice;
             Element* e = _segment->element(track);
-            if (e && e->isChordRest())
-                  return static_cast<ChordRest*>(e);
+            if (e && (e->isChordRest() || e->type() == REPEAT_MEASURE)) 
+                  return static_cast<ChordRest*>(e);  
             }
       return 0;
       }
