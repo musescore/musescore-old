@@ -3,6 +3,7 @@
       - fix #6597: Close/reload crash on XP
       - fix cursor move on repeatmeasure in plugin framework
       - fix instrument name containing flats for plugin framework
+      - fix #6505: Mixer is not refreshed when scores are switched
 3.aug (ws)
       - new context menu for palettes: new function: revert to
         factory settings
