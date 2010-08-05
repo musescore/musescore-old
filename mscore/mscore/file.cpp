@@ -80,6 +80,8 @@
 #include "omr/omr.h"
 #endif
 
+#include "diff/diff_match_patch.h"
+
 //---------------------------------------------------------
 //   load
 //    return true on error
@@ -197,7 +199,7 @@ void MuseScore::loadFile()
             "PDF Files <experimental omr> (*.pdf);;"
         	"Overture Files <experimental> (*.ove);;"
             "Bagpipe Music Writer Files <experimental> (*.bww);;"
-            "Guitar Pro <experimental> (*.GTP *.GP3 *.GP4 *.GP5);;"
+            "Guitar Pro (*.GTP *.GP3 *.GP4 *.GP5);;"
             "All Files (*)"
             )
          );
@@ -1964,4 +1966,136 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
       _printing = false;
       return rv;
       }
+
+//---------------------------------------------------------
+//   readCompressedToBuffer
+//---------------------------------------------------------
+
+QByteArray Score::readCompressedToBuffer()
+      {
+      QBuffer cbuf;
+      UnZip uz;
+      UnZip::ErrorCode ec = uz.openArchive(filePath());
+      if (ec != UnZip::Ok)
+            return QByteArray();
+
+      cbuf.open(QIODevice::WriteOnly);
+      ec = uz.extractFile("META-INF/container.xml", &cbuf);
+
+      QDomDocument container;
+      int line, column;
+      QString err;
+      if (!container.setContent(cbuf.data(), false, &err, &line, &column)) {
+            QString col, ln;
+            col.setNum(column);
+            ln.setNum(line);
+            QString error = err + "\n at line " + ln + " column " + col;
+            printf("error: %s\n", qPrintable(error));
+            return QByteArray();
+            }
+
+      // extract first rootfile
+      QString rootfile = "";
+      for (QDomElement e = container.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() != "container") {
+                  domError(e);
+                  continue;
+                  }
+            for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  if (ee.tagName() != "rootfiles") {
+                        domError(ee);
+                        continue;
+                        }
+                  for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        QString tag(eee.tagName());
+                        QString val(eee.text());
+
+                        if (tag == "rootfile") {
+                              if (rootfile.isEmpty())
+                                    rootfile = eee.attribute(QString("full-path"));
+                              }
+                        else if (tag == "file") {
+                              ImagePath* ip = new ImagePath(val);
+                              imagePathList.append(ip);
+                              }
+                        else
+                              domError(eee);
+                        }
+                  }
+            }
+      //
+      // load images
+      //
+      foreach(ImagePath* ip, imagePathList) {
+            QBuffer& dbuf = ip->buffer();
+            dbuf.open(QIODevice::WriteOnly);
+            ec = uz.extractFile(ip->path(), &dbuf);
+            if (ec != UnZip::Ok) {
+                  printf("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
+                  }
+            else
+                  ip->setLoaded(true);
+            }
+
+      if (rootfile.isEmpty()) {
+            printf("can't find rootfile in: %s\n", qPrintable(filePath()));
+            return QByteArray();
+            }
+
+      QBuffer dbuf;
+      dbuf.open(QIODevice::WriteOnly);
+      ec = uz.extractFile(rootfile, &dbuf);
+      dbuf.close();
+      return dbuf.data();
+      }
+
+//---------------------------------------------------------
+//   readToBuffer
+//---------------------------------------------------------
+
+QByteArray Score::readToBuffer()
+      {
+      QByteArray ba;
+      QString cs  = info.suffix();
+
+      if (cs == "mscz") {
+            ba = readCompressedToBuffer();
+            }
+      if (cs.toLower() == "msc" || cs.toLower() == "mscx") {
+            QFile f(filePath());
+            if (!f.open(QIODevice::ReadOnly))
+                  return false;
+            ba = f.readAll();
+            f.close();
+            }
+      return ba;
+      }
+
+//---------------------------------------------------------
+//   createRevision
+//---------------------------------------------------------
+
+void Score::createRevision()
+      {
+printf("createRevision\n");
+      QBuffer dbuf;
+      dbuf.open(QIODevice::ReadWrite);
+      saveFile(&dbuf, false);
+      dbuf.close();
+
+      QByteArray ba1 = readToBuffer();
+
+      QString os = QString::fromUtf8(ba1.data(), ba1.size());
+      QString ns = QString::fromUtf8(dbuf.buffer().data(), dbuf.buffer().size());
+
+      diff_match_patch dmp;
+      Revision* r = new Revision();
+      r->setDiff(dmp.patch_toText(dmp.patch_make(ns, os)));
+      r->setId("1");
+      _revisions->add(r);
+
+//      printf("patch:\n%s\n==========\n", qPrintable(patch));
+      //
+      }
+
 

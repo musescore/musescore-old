@@ -821,6 +821,9 @@ class Score : public QObject {
       void setParentScore(Score* s) { _parentScore = s;    }
       void addExcerpt(Score*);
       void removeExcerpt(Score*);
+      void createRevision();
+      QByteArray readCompressedToBuffer();
+      QByteArray readToBuffer();
       };
 
 extern Score* gscore;

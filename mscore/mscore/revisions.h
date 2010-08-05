@@ -42,6 +42,7 @@ class Revision {
       Revision* parent() const                 { return _parent; }
       const QList<Revision*>& branches() const { return _branches; }
       void setId(const QString& s)             { _id = s; }
+      void setDiff(const QString& s)           { _diff = s; }
       };
 
 //---------------------------------------------------------

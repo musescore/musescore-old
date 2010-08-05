@@ -1669,6 +1669,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   case BREATH:
                   case GLISSANDO:
                   case ARTICULATION:
+                  case BEND:
                   case ACCIDENTAL:
                   case DYNAMIC:
                   case TEXT:
@@ -1697,7 +1698,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                         el->setHeight(_spatium * 5);
                         break;
                   default:
-                        printf("dragEnter %s\n", Element::name(type));
+                        printf("-dragEnter %s\n", Element::name(type));
                         break;
                   }
             if (el) {
@@ -1800,6 +1801,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case GLISSANDO:
                   case BRACKET:
                   case ARTICULATION:
+                  case BEND:
                   case ACCIDENTAL:
                   case TEXT:
                   case FINGERING:
@@ -1957,6 +1959,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case GLISSANDO:
                   case BRACKET:
                   case ARTICULATION:
+                  case BEND:
                   case ACCIDENTAL:
                   case TEXT:
                   case FINGERING:
@@ -2713,6 +2716,12 @@ void ScoreView::cmd(const QAction* a)
             cmdChangeEnharmonic(true);
       else if (cmd == "enh-down")
             cmdChangeEnharmonic(false);
+      else if (cmd == "revision") {
+            Score* s = _score;
+            if (s->parentScore())
+                  s = s->parentScore();
+            s->createRevision();
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();

@@ -268,13 +268,13 @@ void GuitarPro::addDynamic(Note* note, int d)
       }
 
 //---------------------------------------------------------
-//   readChromaticGraph
+//   readBend
 //    bend graph
 //---------------------------------------------------------
 
-void GuitarPro::readChromaticGraph()
+void GuitarPro::readBend()
       {
-printf("readChromaticGraph()\n");
+printf("readBend()\n");
 
       readUChar();                        // icon
       readInt();                          // shown aplitude
@@ -993,7 +993,7 @@ void GuitarPro1::readNote(int string, Note* note)
             if (version >= 400)
                   modMask2 = readUChar();
             if (modMask1 & 0x1)
-                  readChromaticGraph();
+                  readBend();
             if (modMask1 & 0x2) {         // hammer on / pull off
                   }
             if (modMask1 & 0x8) {         // let ring
@@ -1447,13 +1447,13 @@ printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
       }
 
 //---------------------------------------------------------
-//   readChromaticGraph
+//   readBend
 //    bend graph
 //---------------------------------------------------------
 
-void GuitarPro4::readChromaticGraph()
+void GuitarPro4::readBend()
       {
-printf("4:readChromaticGraph()\n");
+printf("4:readBend()\n");
 
       skip(5);
       int n = readInt();
@@ -1512,7 +1512,7 @@ printf("readBeatEffects 0x%02x 0x%02x\n", fxBits1, fxBits2);
             effects = readUChar();      // effect 1-tapping, 2-slapping, 3-popping
             }
       if (fxBits2 & 0x04)
-            readChromaticGraph();
+            readBend();
       if (fxBits1 & 0x40) {
             readUChar();            // down stroke length
             readUChar();            // up stroke length
@@ -1588,7 +1588,7 @@ void GuitarPro4::readNote(int string, Note* note, GpNote* gpNote)
             uchar modMask1 = readUChar();
             uchar modMask2 = readUChar();
             if (modMask1 & 0x1)
-                  readChromaticGraph();
+                  readBend();
             if (modMask1 & 0x2) {         // hammer on / pull off
                   gpNote->slur = true;
                   }
@@ -2031,7 +2031,7 @@ void GuitarPro5::readNoteEffects(Note* note)
       uchar modMask1 = readUChar();
       uchar modMask2 = readUChar();
       if (modMask1 & 0x1)
-            readChromaticGraph();
+            readBend();
       if (modMask1 & 0x2) {         // hammer on / pull off
             }
       if (modMask1 & 0x8) {         // let ring
@@ -2202,18 +2202,24 @@ void GuitarPro5::readArtificialHarmonic()
       }
 
 //---------------------------------------------------------
-//   readChromaticGraph
+//   readBend
 //---------------------------------------------------------
 
-void GuitarPro5::readChromaticGraph()
+void GuitarPro5::readBend()
       {
-      skip(5);
-      int n = readInt();
-printf("5readChromaticGraph() n=%d\n", n);
+      int a1 = readChar();
+      int a2 = readChar();
+      int a3 = readChar();
+      int a4 = readChar();
+      int a5 = readChar();
+      int n  = readInt();
+
+printf("readBend() n=%d  %d %d %d %d %d\n", n, a1, a2, a3, a4, a5);
       for (int i = 0; i < n; ++i) {
-            readInt();                    // time
-            readInt();                    // pitch
-            readUChar();                  // vibrato
+            int time  = readInt();                    // time
+            int pitch = readInt();                    // pitch
+            int vibrato = readUChar();                // vibrato
+            printf("  %d: %2d %2d vibrato %d\n", i, time, pitch, vibrato);
             }
       }
 
@@ -2251,7 +2257,7 @@ printf("5readBeatEffects %02x %02x\n", fxBits1, fxBits2);
             // 3 - popping
             }
       if (fxBits2 & 0x04)
-            readTremoloBar();       // readChromaticGraph();
+            readTremoloBar();       // readBend();
       if (fxBits1 & 0x40) {
             int a = readChar();     // down stroke length
             int b = readChar();     // up stroke length

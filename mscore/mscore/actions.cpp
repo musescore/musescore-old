@@ -2241,6 +2241,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","enharmonic down"),
          QT_TRANSLATE_NOOP("action","enharmonic down")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         "revision",
+         QT_TRANSLATE_NOOP("action","create new revision"),
+	   Qt::CTRL+Qt::Key_F11,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","create new revision"),
+         QT_TRANSLATE_NOOP("action","create new reivsion")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };
