@@ -1,3 +1,8 @@
+5.aug (la)
+      - fix #6479: Crash when closing score during playback
+      - fix #6597: Close/reload crash on XP
+      - fix cursor move on repeatmeasure in plugin framework
+      - fix instrument name containing flats for plugin framework
 3.aug (ws)
       - new context menu for palettes: new function: revert to
         factory settings
