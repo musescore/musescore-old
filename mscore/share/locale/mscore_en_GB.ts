@@ -5252,11 +5252,11 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation>Stave Prperties</translation>
+        <translation>Stave Properties...</translation>
     </message>
     <message>
         <source>Split Staff...</source>
-        <translation>Split Stave:</translation>
+        <translation>Split Stave...</translation>
     </message>
     <message>
         <source>Measure</source>

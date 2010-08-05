@@ -8409,7 +8409,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Delete element and duration</source>
-        <translation type="unfinished"/>
+        <translation>Usuń element i wartość</translation>
     </message>
     <message>
         <source>Parts...</source>

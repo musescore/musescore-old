@@ -1594,7 +1594,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Artikulation, ornamenteringer</translation>
+        <translation>Artikulation, triller</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -3502,7 +3502,7 @@ Prøv at vælge "Online Håndbog" fra "Hjælp"-menuen i stedet.</translation>
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
-        <translation>Vejrtrækninger &amp;&amp; pauser</translation>
+        <translation>Vejrtrækning</translation>
     </message>
     <message>
         <source>Caesura</source>
@@ -3510,7 +3510,7 @@ Prøv at vælge "Online Håndbog" fra "Hjælp"-menuen i stedet.</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Artikulationer &amp;&amp; ornamentering</translation>
+        <translation>Artikulationer &amp;&amp; triller</translation>
     </message>
     <message>
         <source>Fingering %1</source>

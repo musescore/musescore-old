@@ -48,7 +48,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/mscore.cpp" line="2576"/>
         <source>Revision: %1</source>
-        <translation type="unfinished"/>
+        <translation>Berrikustea: %1</translation>
     </message>
 </context>
 <context>
@@ -395,7 +395,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordedit.ui" line="317"/>
         <source>aug</source>
-        <translation type="unfinished"/>
+        <translation>aug</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="337"/>
@@ -425,7 +425,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordedit.ui" line="377"/>
         <source>maug</source>
-        <translation type="unfinished"/>
+        <translation>maug</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="397"/>
@@ -490,12 +490,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordedit.ui" line="472"/>
         <source>(blues)</source>
-        <translation type="unfinished"/>
+        <translation>(blues)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="477"/>
         <source>7(Blues)</source>
-        <translation type="unfinished"/>
+        <translation>7(Blues)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="492"/>
@@ -708,7 +708,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordedit.ui" line="722"/>
         <source>7alt</source>
-        <translation type="unfinished"/>
+        <translation>7alt</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="727"/>
@@ -1145,7 +1145,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordproperties.ui" line="230"/>
         <source>velocity (0-127)</source>
-        <translation type="unfinished"/>
+        <translation>abiadura (0-127)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="249"/>
@@ -1904,7 +1904,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/dynamics.cpp" line="264"/>
         <source>Dynamics</source>
-        <translation type="unfinished"/>
+        <translation>Dinamikak</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamics.cpp" line="266"/>
@@ -1950,7 +1950,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="50"/>
         <source>Velocity:</source>
-        <translation type="unfinished"/>
+        <translation>Abiadura:</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="69"/>
@@ -2178,12 +2178,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="14"/>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Editatu Instrumentuen Propietateak</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="20"/>
         <source>Instrument Properties</source>
-        <translation type="unfinished"/>
+        <translation>Instrumentuen Propietateak</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="26"/>
@@ -2286,7 +2286,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/editstaff.ui" line="201"/>
         <source>Amateur:</source>
-        <translation type="unfinished"/>
+        <translation>Amateur:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="215"/>
@@ -2628,7 +2628,7 @@ failed: </source>
         <location filename="../../mscore/editstyle.ui" line="97"/>
         <location filename="../../mscore/editstyle.ui" line="1776"/>
         <source>Chordnames</source>
-        <translation type="unfinished"/>
+        <translation>Akordeen Izenak</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="102"/>
@@ -3122,7 +3122,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/edittempo.ui" line="55"/>
         <source>BPM:</source>
-        <translation type="unfinished"/>
+        <translation>BPM:</translation>
     </message>
     <message>
         <location filename="../../mscore/edittempo.ui" line="65"/>
@@ -3373,7 +3373,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/image.cpp" line="311"/>
         <source>Image Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Irudiaren Propietateak...</translation>
     </message>
 </context>
 <context>
@@ -3437,17 +3437,17 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/insertmeasuresdialog.ui" line="13"/>
         <source>Mscore: Insert Measures</source>
-        <translation type="unfinished"/>
+        <translation>Mscore: Konpasak Txertatu</translation>
     </message>
     <message>
         <location filename="../../mscore/insertmeasuresdialog.ui" line="52"/>
         <source>Insert empty measures:</source>
-        <translation type="unfinished"/>
+        <translation>Konpas hutsak txertatu:</translation>
     </message>
     <message>
         <location filename="../../mscore/insertmeasuresdialog.ui" line="77"/>
         <source>Number of measures to insert</source>
-        <translation type="unfinished"/>
+        <translation>Txertatzeko konpas kopurua</translation>
     </message>
     <message>
         <location filename="../../mscore/insertmeasuresdialog.ui" line="120"/>
@@ -4080,7 +4080,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/markerproperties.ui" line="41"/>
         <source>Label:</source>
-        <translation type="unfinished"/>
+        <translation>Etiketa:</translation>
     </message>
 </context>
 <context>
@@ -4088,7 +4088,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/measure.cpp" line="1742"/>
         <source>Measure Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Konpasen Propietateak...</translation>
     </message>
 </context>
 <context>
@@ -4127,7 +4127,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="17"/>
         <source>MuseScore: Measure Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Konpasen Propietateak...</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="46"/>
@@ -4231,17 +4231,17 @@ failed: </source>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="13"/>
         <source>Mscore: Append Measures</source>
-        <translation type="unfinished"/>
+        <translation>Mscore: Konpasak Erantsi</translation>
     </message>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="38"/>
         <source>Append empty measures:</source>
-        <translation type="unfinished"/>
+        <translation>Konpas hutsak erantsi:</translation>
     </message>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="53"/>
         <source>Number of measures to append</source>
-        <translation type="unfinished"/>
+        <translation>Erantsi beharreko konpas kopurua</translation>
     </message>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="106"/>
@@ -4548,25 +4548,25 @@ itxi aurretik?</translation>
         <location filename="../../mscore/menus.cpp" line="261"/>
         <location filename="../../mscore/menus.cpp" line="824"/>
         <source>Prima volta</source>
-        <translation type="unfinished"/>
+        <translation>Prima volta</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="269"/>
         <location filename="../../mscore/menus.cpp" line="833"/>
         <location filename="../../mscore/menus.cpp" line="851"/>
         <source>Seconda volta</source>
-        <translation type="unfinished"/>
+        <translation>Seconda volta</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="277"/>
         <location filename="../../mscore/menus.cpp" line="842"/>
         <source>Terza volta</source>
-        <translation type="unfinished"/>
+        <translation>Terza volta</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="285"/>
         <source>Seconda volta 2</source>
-        <translation type="unfinished"/>
+        <translation>Seconda volta 2</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="289"/>
@@ -4684,7 +4684,7 @@ itxi aurretik?</translation>
         <location filename="../../mscore/menus.cpp" line="448"/>
         <location filename="../../mscore/style.cpp" line="246"/>
         <source>Dynamics</source>
-        <translation type="unfinished"/>
+        <translation>Dinamikak</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="468"/>
@@ -4886,7 +4886,7 @@ itxi aurretik?</translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="698"/>
         <source>&amp;Create</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Sortu</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="703"/>
@@ -4951,7 +4951,7 @@ itxi aurretik?</translation>
     <message>
         <location filename="../../mscore/menus.cpp" line="1026"/>
         <source>MuseScore: Dynamics</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Dinamikak</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="1061"/>
@@ -5229,7 +5229,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/style.cpp" line="253"/>
         <source>Tempo</source>
-        <translation type="unfinished"/>
+        <translation>Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="256"/>
@@ -5284,7 +5284,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/style.cpp" line="295"/>
         <source>Volta</source>
-        <translation type="unfinished"/>
+        <translation>Volta</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="298"/>
@@ -5425,7 +5425,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/note.cpp" line="1162"/>
         <source>Note Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Noten Propietateak...</translation>
     </message>
     <message>
         <location filename="../../mscore/note.cpp" line="1165"/>
@@ -5825,7 +5825,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="90"/>
         <source>Velocity:</source>
-        <translation type="unfinished"/>
+        <translation>Abiadura:</translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="92"/>
@@ -5888,7 +5888,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2048"/>
         <source>120bpm</source>
-        <translation type="unfinished"/>
+        <translation>120bpm</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2548"/>
@@ -5995,7 +5995,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="17"/>
         <source>MuseScore Preferences</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore Hobespenak</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="39"/>
@@ -6222,7 +6222,7 @@ is incompatible with current interface</source>
     <message utf8="true">
         <location filename="../../mscore/prefsdialog.ui" line="847"/>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation type="unfinished"/>
+        <translation>(C) © sinboloarengatik ordezkatu (Copyright atalean bakarrik)</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="859"/>
@@ -6631,7 +6631,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2122"/>
         <source>Api:</source>
-        <translation type="unfinished"/>
+        <translation>Api:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2193"/>
@@ -6646,7 +6646,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2295"/>
         <source>Import</source>
-        <translation type="unfinished"/>
+        <translation>Inportatu</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2301"/>
@@ -6676,12 +6676,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2397"/>
         <source>Export</source>
-        <translation type="unfinished"/>
+        <translation>Esportatu</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2403"/>
         <source>PNG</source>
-        <translation type="unfinished"/>
+        <translation>PNG</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2412"/>
@@ -6822,7 +6822,7 @@ Please select a single note or rest and retry operation
         <location filename="../../mscore/palette.cpp" line="1301"/>
         <location filename="../../mscore/sym.cpp" line="607"/>
         <source>Quit</source>
-        <translation type="unfinished"/>
+        <translation>Irten</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.cpp" line="354"/>
@@ -7241,7 +7241,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/file.cpp" line="404"/>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"/>
+        <translation>Wave Audio (*.wav)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="405"/>
@@ -7458,7 +7458,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/select.ui" line="14"/>
         <source>MuseScore: Select</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Aukeratu</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="47"/>
@@ -7721,7 +7721,7 @@ Sequencer will be disabled.</source>
     <message>
         <location filename="../../mscore/slurproperties.ui" line="14"/>
         <source>Volta Properties</source>
-        <translation type="unfinished"/>
+        <translation>Volta Propietateak</translation>
     </message>
     <message>
         <location filename="../../mscore/slurproperties.ui" line="38"/>
@@ -8436,12 +8436,12 @@ altera</source>
     <message>
         <location filename="../../mscore/tempoproperties.ui" line="65"/>
         <source>Tempo:</source>
-        <translation type="unfinished"/>
+        <translation>Tempo:</translation>
     </message>
     <message>
         <location filename="../../mscore/tempoproperties.ui" line="72"/>
         <source>BPM</source>
-        <translation type="unfinished"/>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
@@ -8679,7 +8679,7 @@ altera</source>
     <message>
         <location filename="../../mscore/textproperties.ui" line="111"/>
         <source>B</source>
-        <translation type="unfinished"/>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="144"/>
@@ -8689,7 +8689,7 @@ altera</source>
     <message>
         <location filename="../../mscore/textproperties.ui" line="147"/>
         <source>I</source>
-        <translation type="unfinished"/>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="174"/>
@@ -8699,7 +8699,7 @@ altera</source>
     <message>
         <location filename="../../mscore/textproperties.ui" line="177"/>
         <source>U</source>
-        <translation type="unfinished"/>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="200"/>
@@ -8828,7 +8828,7 @@ altera</source>
     <message>
         <location filename="../../mscore/textproperties.ui" line="575"/>
         <source>MM</source>
-        <translation type="unfinished"/>
+        <translation>MM</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="582"/>
@@ -9586,7 +9586,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/voltaproperties.ui" line="13"/>
         <location filename="../../mscore/voltaproperties.ui" line="37"/>
         <source>Volta Properties</source>
-        <translation type="unfinished"/>
+        <translation>Volta Propietateak</translation>
     </message>
     <message>
         <location filename="../../mscore/voltaproperties.ui" line="48"/>
@@ -9604,7 +9604,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/volta.cpp" line="175"/>
         <source>Volta Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Volta Propietateak...</translation>
     </message>
     <message>
         <location filename="../../mscore/volta.cpp" line="177"/>
@@ -10088,7 +10088,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="219"/>
         <source>Dynamics...</source>
-        <translation type="unfinished"/>
+        <translation>Dinamikak...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="225"/>
@@ -10852,12 +10852,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="849"/>
         <source>crescendo</source>
-        <translation type="unfinished"/>
+        <translation>crescendo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="858"/>
         <source>decrescendo</source>
-        <translation type="unfinished"/>
+        <translation>decrescendo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="867"/>
@@ -10900,42 +10900,42 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="903"/>
         <source>Append measure</source>
-        <translation type="unfinished"/>
+        <translation>Konpasa erantsi</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="906"/>
         <source>Append Measure</source>
-        <translation type="unfinished"/>
+        <translation>Konpasa Erantsi</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="911"/>
         <source>Append measures</source>
-        <translation type="unfinished"/>
+        <translation>Konpasak erantsi</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="914"/>
         <source>Append Measures...</source>
-        <translation type="unfinished"/>
+        <translation>Konpasak Erantsi...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="919"/>
         <source>Insert measure</source>
-        <translation type="unfinished"/>
+        <translation>Konpasa txertatu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="922"/>
         <source>Insert Measure</source>
-        <translation type="unfinished"/>
+        <translation>Konpasa Txertatu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="927"/>
         <source>Insert measures</source>
-        <translation type="unfinished"/>
+        <translation>Konpasak txertatu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="930"/>
         <source>Insert Measures...</source>
-        <translation type="unfinished"/>
+        <translation>Konpasak Txertatu...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="935"/>
@@ -11411,12 +11411,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1509"/>
         <source>Tempo...</source>
-        <translation type="unfinished"/>
+        <translation>Tempo...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1510"/>
         <source>Tempo</source>
-        <translation type="unfinished"/>
+        <translation>Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1516"/>
@@ -11445,7 +11445,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1538"/>
         <source>Staff Text</source>
-        <translation type="unfinished"/>
+        <translation>Pentagramako Testua</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1544"/>
@@ -11546,7 +11546,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="1602"/>
         <source>Add Chord Text</source>
-        <translation type="unfinished"/>
+        <translation>Akorde Testua Gehitu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1607"/>
@@ -12180,17 +12180,17 @@ until next time signature?</source>
     <message>
         <location filename="../../mscore/articulation.cpp" line="42"/>
         <source>sforzato</source>
-        <translation type="unfinished"/>
+        <translation>sforzato</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="43"/>
         <source>espressivo</source>
-        <translation type="unfinished"/>
+        <translation>espressivo</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="44"/>
         <source>staccato</source>
-        <translation type="unfinished"/>
+        <translation>staccato</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="45"/>
@@ -12205,7 +12205,7 @@ until next time signature?</source>
     <message>
         <location filename="../../mscore/articulation.cpp" line="47"/>
         <source>tenuto</source>
-        <translation type="unfinished"/>
+        <translation>tenuto</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="48"/>
@@ -12669,7 +12669,7 @@ until next time signature?</source>
     <message>
         <location filename="../../mscore/element.cpp" line="107"/>
         <source>Tempo</source>
-        <translation type="unfinished"/>
+        <translation>Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="108"/>
@@ -12689,7 +12689,7 @@ until next time signature?</source>
     <message>
         <location filename="../../mscore/element.cpp" line="111"/>
         <source>Volta</source>
-        <translation type="unfinished"/>
+        <translation>Volta</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="112"/>
@@ -12719,7 +12719,7 @@ until next time signature?</source>
     <message>
         <location filename="../../mscore/element.cpp" line="117"/>
         <source>VoltaSegment</source>
-        <translation type="unfinished"/>
+        <translation>Volta Segmentua</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="118"/>
@@ -12744,7 +12744,7 @@ until next time signature?</source>
     <message>
         <location filename="../../mscore/element.cpp" line="122"/>
         <source>Tremolo</source>
-        <translation type="unfinished"/>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="123"/>
@@ -13435,12 +13435,12 @@ until next time signature?</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="150"/>
         <source>espressivo</source>
-        <translation type="unfinished"/>
+        <translation>espressivo</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="151"/>
         <source>staccato</source>
-        <translation type="unfinished"/>
+        <translation>staccato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="152"/>
@@ -13455,7 +13455,7 @@ until next time signature?</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="154"/>
         <source>tenuto</source>
-        <translation type="unfinished"/>
+        <translation>tenuto</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="155"/>
