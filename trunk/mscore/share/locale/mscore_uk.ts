@@ -151,15 +151,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished">Арпеджіо</translation>
+        <translation>Арпеджіо</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished">Тремоло</translation>
+        <translation>Тремоло</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished">Ґлісандо</translation>
+        <translation>Ґлісандо</translation>
     </message>
 </context>
 <context>
@@ -1234,7 +1234,7 @@ failed: </source>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Авто</translation>
+        <translation>автоматично</translation>
     </message>
     <message>
         <source>Up</source>
@@ -2225,7 +2225,7 @@ space unit</extracomment>
     <name>InspectorBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Back</source>
@@ -2421,7 +2421,7 @@ failed: </source>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation>Записати стиль не вдалася: </translation>
     </message>
 </context>
 <context>
@@ -2454,7 +2454,7 @@ failed: </source>
     <name>KeyEdit</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Create Key Signature</source>
@@ -2492,7 +2492,7 @@ failed: </source>
     </message>
     <message>
         <source>sp</source>
-        <translation type="unfinished">пр</translation>
+        <translation>пр</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -3775,7 +3775,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Авто</translation>
+        <translation>автоматично</translation>
     </message>
     <message>
         <source>User</source>
@@ -4074,7 +4074,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished">авто</translation>
+        <translation>автоматично</translation>
     </message>
     <message>
         <source>user</source>
@@ -4979,7 +4979,7 @@ Please select a single note or rest and retry operation
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">пр</translation>
+        <translation>пр</translation>
     </message>
     <message>
         <source>additional trailing space</source>
@@ -4990,7 +4990,7 @@ Please select a single note or rest and retry operation
     <name>SLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>SLine</source>
@@ -5231,11 +5231,11 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation>Записати стиль не вдалося: </translation>
     </message>
     <message>
         <source>Load failed: </source>
-        <translation type="unfinished"/>
+        <translation>Завантажити не вдалося: </translation>
     </message>
 </context>
 <context>
@@ -5290,7 +5290,7 @@ Try saving to a different location.</source>
     <name>SegmentBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -5477,7 +5477,7 @@ and check that the file location is correct</source>
     <name>ShowChordWidget</name>
     <message>
         <source>auto</source>
-        <translation>авто</translation>
+        <translation>автоматично</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -5501,7 +5501,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Авто</translation>
+        <translation>автоматично</translation>
     </message>
     <message>
         <source>Up</source>
@@ -5527,7 +5527,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>auto</source>
-        <translation type="unfinished">авто</translation>
+        <translation>автоматично</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -5554,7 +5554,7 @@ and check that the file location is correct</source>
     <name>SlurBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Staff:</source>
@@ -5727,7 +5727,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation type="unfinished"/>
+        <translation>Настроювальна частота</translation>
     </message>
     <message>
         <source>Hz</source>
@@ -5748,7 +5748,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Damp:</source>
-        <translation type="unfinished"/>
+        <translation>Ослаблення:</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -5756,7 +5756,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Preset:</source>
-        <translation type="unfinished"/>
+        <translation>Попереднє налаштування:</translation>
     </message>
     <message>
         <source>not implemented</source>
@@ -5772,11 +5772,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Sine</source>
-        <translation type="unfinished"/>
+        <translation>Синусоїдальна хвиля</translation>
     </message>
     <message>
         <source>Triangle</source>
-        <translation type="unfinished"/>
+        <translation>Трикутна хвиля</translation>
     </message>
     <message>
         <source>Number:</source>
@@ -5903,7 +5903,7 @@ and check that the file location is correct</source>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>TextLine</source>
@@ -5962,7 +5962,7 @@ and check that the file location is correct</source>
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished">пр</translation>
+        <translation>пр</translation>
     </message>
 </context>
 <context>
@@ -6249,7 +6249,7 @@ and check that the file location is correct</source>
     <name>TimesigWizard</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
@@ -6505,7 +6505,7 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Форма</translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>firstChord</source>
@@ -8902,7 +8902,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished">Тремоло</translation>
+        <translation>Тремоло</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -9319,23 +9319,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole triangle head</source>
-        <translation type="unfinished"/>
+        <translation>трикутна головка цілої ноти</translation>
     </message>
     <message>
         <source>down half triangle head</source>
-        <translation type="unfinished"/>
+        <translation>нижня трикутна головка половинної ноти</translation>
     </message>
     <message>
         <source>up half triangle head</source>
-        <translation type="unfinished"/>
+        <translation>верхня трикутна головка половинної ноти</translation>
     </message>
     <message>
         <source>up quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation>верхня трикутна головка четвертної ноти</translation>
     </message>
     <message>
         <source>down quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation>нижня трикутна головка четвертної ноти</translation>
     </message>
     <message>
         <source>whole slash head</source>

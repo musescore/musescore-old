@@ -8418,7 +8418,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>articulation</name>
     <message>
         <source>dfermata</source>
-        <translation>fermata-giù</translation>
+        <translation>corona-giù</translation>
     </message>
     <message>
         <source>thumb</source>
@@ -8526,7 +8526,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ufermata</source>
-        <translation>fermata-su</translation>
+        <translation>corona-su</translation>
     </message>
     <message>
         <source>ushortfermata</source>
@@ -9472,11 +9472,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished">fermata-su</translation>
+        <translation>corona-su</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished">fermata-giù</translation>
+        <translation>corona-giù</translation>
     </message>
     <message>
         <source>snappizzicato</source>
