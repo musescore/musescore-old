@@ -119,7 +119,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mm</source>
-        <translation/>
+        <translation>mm</translation>
     </message>
     <message>
         <source>right:</source>
@@ -142,15 +142,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished">アルペジオ</translation>
+        <translation>アルペジオ</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished">トレモロ</translation>
+        <translation>トレモロ</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished">グリッサンド</translation>
+        <translation>グリッサンド</translation>
     </message>
 </context>
 <context>
@@ -936,7 +936,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source> cent</source>
         <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"/>
+        <translation> セント</translation>
     </message>
     <message>
         <source> ticks</source>
@@ -1027,11 +1027,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation type="unfinished"/>
+        <translation>スラー先:</translation>
     </message>
     <message>
         <source>SlurBack:</source>
-        <translation type="unfinished"/>
+        <translation>スラー元:</translation>
     </message>
     <message>
         <source>StaffMove:</source>
@@ -1764,11 +1764,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished"/>
+        <translation>単一譜表の始めの縦線を描画する</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation type="unfinished"/>
+        <translation>複合譜表の始めの縦線を描画する</translation>
     </message>
     <message>
         <source>Music upper margin</source>
@@ -1848,7 +1848,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation type="unfinished"/>
+        <translation>反復線に先端を付ける</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -2001,7 +2001,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>droptarget</source>
-        <translation>記号反映の目標</translation>
+        <translation>記号反映の対象</translation>
     </message>
     <message>
         <source>invalid</source>
@@ -2118,7 +2118,7 @@ space unit</extracomment>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>ハーモニープロパティ...</translation>
+        <translation>和音のプロパティ...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -2831,7 +2831,7 @@ failed: </source>
     <name>MetaEditDialog</name>
     <message>
         <source>Dialog</source>
-        <translation>ダイアログ</translation>
+        <translation>作品情報の編集</translation>
     </message>
     <message>
         <source>Work Title:</source>
@@ -3100,7 +3100,7 @@ before closing?</source>
     </message>
     <message>
         <source>Repeats</source>
-        <translation type="unfinished"/>
+        <translation>反復</translation>
     </message>
     <message>
         <source>Segno</source>
@@ -3510,7 +3510,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Repeat measure sign</source>
-        <translation type="unfinished"/>
+        <translation>小節反復記号</translation>
     </message>
     <message>
         <source>Da Capo</source>
@@ -3594,7 +3594,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Varied coda</source>
-        <translation>コーダを変更</translation>
+        <translation>変格コーダ</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
@@ -3617,11 +3617,12 @@ is incompatible with current interface</source>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished"/>
+        <translation>このスクリプトを実行するには新しいバージョンのMuseScoreが必要です。&#13;
+%1</translation>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
-        <translation type="unfinished"/>
+        <translation>小節 %1 拍%2.%3</translation>
     </message>
     <message>
         <source>Error loading plugin
@@ -3845,7 +3846,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Scaling</source>
-        <translation type="unfinished"/>
+        <translation>比例尺</translation>
     </message>
     <message>
         <source>Space</source>
@@ -3980,7 +3981,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Element Offset</source>
-        <translation type="unfinished"/>
+        <translation>要素オフセット</translation>
     </message>
     <message>
         <source>Scale:</source>
@@ -4307,7 +4308,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="unfinished"/>
+        <translation>ウィンドウ</translation>
     </message>
     <message>
         <source>Play Panel:</source>
@@ -4387,7 +4388,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Proximity for selecting elements</source>
-        <translation type="unfinished"/>
+        <translation>選択されている要素に対する接近</translation>
     </message>
     <message>
         <source>disable antialiased drawing</source>
@@ -4435,7 +4436,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Drop Target</source>
-        <translation>記号反映の目標となった時</translation>
+        <translation>記号反映の対象となった時</translation>
     </message>
     <message>
         <source>Note Entry</source>
@@ -4516,7 +4517,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Scaling</source>
-        <translation type="unfinished"/>
+        <translation>比例尺</translation>
     </message>
     <message>
         <source>Space</source>
@@ -4525,7 +4526,7 @@ is incompatible with current interface</source>
     <message>
         <source>mm</source>
         <extracomment>millimeter</extracomment>
-        <translation type="unfinished">ミリメートル</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -4657,7 +4658,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>screen shot function</source>
-        <translation>スクリーンショットの要素</translation>
+        <translation>機能要素も描画する</translation>
     </message>
     <message>
         <source>Shortcuts</source>
@@ -5941,7 +5942,7 @@ and check that the file location is correct</source>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation type="unfinished">ミリメートル</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>sp</source>
@@ -6012,7 +6013,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Align:</source>
-        <translation type="unfinished"/>
+        <translation>整列</translation>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
@@ -6126,7 +6127,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"/>
+        <translation>円形</translation>
     </message>
     <message>
         <source>draw boxed frame</source>
@@ -6134,7 +6135,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Box</source>
-        <translation type="unfinished"/>
+        <translation>四角</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -6146,7 +6147,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished">ミリメートル</translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>Margin:</source>
@@ -6786,15 +6787,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation>上矢印付きナチュラル</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation>下矢印付きナチュラル</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation>上下矢印付きナチュラル</translation>
     </message>
 </context>
 <context>
@@ -6885,7 +6886,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Unison Above</source>
-        <translation type="unfinished"/>
+        <translation>一度上</translation>
     </message>
     <message>
         <source>Enter unison above</source>
@@ -6893,131 +6894,131 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Second Above</source>
-        <translation type="unfinished"/>
+        <translation>二度上</translation>
     </message>
     <message>
         <source>Enter second above</source>
-        <translation type="unfinished"/>
+        <translation>二度上を入力</translation>
     </message>
     <message>
         <source>Third Above</source>
-        <translation type="unfinished"/>
+        <translation>三度上</translation>
     </message>
     <message>
         <source>Enter third above</source>
-        <translation type="unfinished"/>
+        <translation>三度上を入力</translation>
     </message>
     <message>
         <source>Fourth Above</source>
-        <translation type="unfinished"/>
+        <translation>四度上</translation>
     </message>
     <message>
         <source>Enter fourth above</source>
-        <translation type="unfinished"/>
+        <translation>四度上を入力</translation>
     </message>
     <message>
         <source>Fifth Above</source>
-        <translation type="unfinished"/>
+        <translation>五度上</translation>
     </message>
     <message>
         <source>Enter fifth above</source>
-        <translation type="unfinished"/>
+        <translation>五度上を入力</translation>
     </message>
     <message>
         <source>Sixth Above</source>
-        <translation type="unfinished"/>
+        <translation>六度上</translation>
     </message>
     <message>
         <source>Enter sixth above</source>
-        <translation type="unfinished"/>
+        <translation>六度上を入力</translation>
     </message>
     <message>
         <source>Seventh Above</source>
-        <translation type="unfinished"/>
+        <translation>七度上</translation>
     </message>
     <message>
         <source>Enter seventh above</source>
-        <translation type="unfinished"/>
+        <translation>七度上を入力</translation>
     </message>
     <message>
         <source>Octave Above</source>
-        <translation type="unfinished"/>
+        <translation>オクターブ上</translation>
     </message>
     <message>
         <source>Enter octave above</source>
-        <translation type="unfinished"/>
+        <translation>オクターブ上を入力</translation>
     </message>
     <message>
         <source>Ninth Above</source>
-        <translation type="unfinished"/>
+        <translation>九度上</translation>
     </message>
     <message>
         <source>Enter ninth above</source>
-        <translation type="unfinished"/>
+        <translation>九度上を入力</translation>
     </message>
     <message>
         <source>Second Below</source>
-        <translation type="unfinished"/>
+        <translation>二度下</translation>
     </message>
     <message>
         <source>Enter second below</source>
-        <translation type="unfinished"/>
+        <translation>二度下を入力</translation>
     </message>
     <message>
         <source>Third Below</source>
-        <translation type="unfinished"/>
+        <translation>三度下</translation>
     </message>
     <message>
         <source>Enter third below</source>
-        <translation type="unfinished"/>
+        <translation>三度下を入力</translation>
     </message>
     <message>
         <source>Fourth Below</source>
-        <translation type="unfinished"/>
+        <translation>四度下</translation>
     </message>
     <message>
         <source>Enter fourth below</source>
-        <translation type="unfinished"/>
+        <translation>四度下を入力</translation>
     </message>
     <message>
         <source>Fifth Below</source>
-        <translation type="unfinished"/>
+        <translation>五度下</translation>
     </message>
     <message>
         <source>Enter fifth below</source>
-        <translation type="unfinished"/>
+        <translation>五度下を入力</translation>
     </message>
     <message>
         <source>Sixth Below</source>
-        <translation type="unfinished"/>
+        <translation>六度下</translation>
     </message>
     <message>
         <source>Enter sixth below</source>
-        <translation type="unfinished"/>
+        <translation>六度下を入力</translation>
     </message>
     <message>
         <source>Seventh Below</source>
-        <translation type="unfinished"/>
+        <translation>七度下</translation>
     </message>
     <message>
         <source>Enter seventh below</source>
-        <translation type="unfinished"/>
+        <translation>七度下を入力</translation>
     </message>
     <message>
         <source>Octave Below</source>
-        <translation type="unfinished"/>
+        <translation>オクターブ下</translation>
     </message>
     <message>
         <source>Enter octave below</source>
-        <translation type="unfinished"/>
+        <translation>オクターブ下を入力</translation>
     </message>
     <message>
         <source>Ninth Below</source>
-        <translation type="unfinished"/>
+        <translation>九度下</translation>
     </message>
     <message>
         <source>Enter ninth below</source>
-        <translation type="unfinished"/>
+        <translation>九度下を入力</translation>
     </message>
     <message>
         <source>A</source>
@@ -7325,11 +7326,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>note breve</source>
-        <translation>二全音符</translation>
+        <translation>倍全音符</translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation>二全音符</translation>
+        <translation>倍全音符</translation>
     </message>
     <message>
         <source>pad note 1/1</source>
@@ -7429,11 +7430,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>acciaccatura</source>
-        <translation type="unfinished">アッチャカトゥーラ</translation>
+        <translation>短前打音</translation>
     </message>
     <message>
         <source>appoggiatura</source>
-        <translation type="unfinished">アッポジャトゥーラ</translation>
+        <translation>全前音</translation>
     </message>
     <message>
         <source>grace-4</source>
@@ -7485,19 +7486,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>beam mid</source>
-        <translation type="unfinished">符尾途中</translation>
+        <translation>連桁(中間)</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation type="unfinished">符尾無し</translation>
+        <translation>連桁解除</translation>
     </message>
     <message>
         <source>beam 32</source>
-        <translation type="unfinished"/>
+        <translation>32分連桁</translation>
     </message>
     <message>
         <source>auto beam</source>
-        <translation type="unfinished">自動符尾</translation>
+        <translation>自動連桁</translation>
     </message>
     <message>
         <source>Palette</source>
@@ -7601,7 +7602,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Title</source>
-        <translation type="unfinished"/>
+        <translation>タイトルの追加</translation>
     </message>
     <message>
         <source>Title</source>
@@ -7613,7 +7614,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Subtitle</source>
-        <translation type="unfinished"/>
+        <translation>サブタイトルの追加</translation>
     </message>
     <message>
         <source>Subtitle</source>
@@ -7625,7 +7626,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Composer</source>
-        <translation type="unfinished"/>
+        <translation>作曲者の追加</translation>
     </message>
     <message>
         <source>Composer</source>
@@ -7637,7 +7638,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Poet</source>
-        <translation type="unfinished"/>
+        <translation>作詞者の追加</translation>
     </message>
     <message>
         <source>Poet</source>
@@ -7649,7 +7650,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Copyright</source>
-        <translation type="unfinished"/>
+        <translation>著作権の追加</translation>
     </message>
     <message>
         <source>Copyright</source>
@@ -7677,11 +7678,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Harmony Properties</source>
-        <translation type="unfinished"/>
+        <translation>和音のプロパティ</translation>
     </message>
     <message>
         <source>Add Rehearsal Mark</source>
-        <translation type="unfinished"/>
+        <translation>リハーサルマークの追加</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
@@ -7701,7 +7702,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Repeat</source>
-        <translation type="unfinished"/>
+        <translation>反復</translation>
     </message>
     <message>
         <source>Load Style...</source>
@@ -7765,15 +7766,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>display in concert pitch</source>
-        <translation type="unfinished"/>
+        <translation>合奏調における表示</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation type="unfinished">合奏調</translation>
+        <translation>合奏調</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished">合奏調（実音）で表示</translation>
+        <translation>合奏調における表示</translation>
     </message>
     <message>
         <source>repeat last command</source>
@@ -7785,15 +7786,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>edit score meta data</source>
-        <translation>メタデータを編集</translation>
+        <translation>作品情報の編集</translation>
     </message>
     <message>
         <source>Meta Data...</source>
-        <translation>メタデータ...</translation>
+        <translation>作品情報...</translation>
     </message>
     <message>
         <source>Meta Data</source>
-        <translation type="unfinished"/>
+        <translation>作品情報</translation>
     </message>
     <message>
         <source>toggle system break</source>
@@ -7965,11 +7966,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>double duration</source>
-        <translation type="unfinished"/>
+        <translation>2倍の持続時間</translation>
     </message>
     <message>
         <source>half duration</source>
-        <translation type="unfinished"/>
+        <translation>半分の持続時間</translation>
     </message>
     <message>
         <source>repeat selection</source>
@@ -8145,7 +8146,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add staccato</source>
-        <translation type="unfinished"/>
+        <translation>スタッカートの追加</translation>
     </message>
     <message>
         <source>Staccato</source>
@@ -8157,7 +8158,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add trill</source>
-        <translation type="unfinished"/>
+        <translation>トリルの追加</translation>
     </message>
     <message>
         <source>Trill</source>
@@ -8185,7 +8186,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch up</source>
-        <translation type="unfinished"/>
+        <translation>音程を上へ移動</translation>
     </message>
     <message>
         <source>Up</source>
@@ -8193,7 +8194,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch up octave</source>
-        <translation type="unfinished"/>
+        <translation>音程をオクターブ上へ移動</translation>
     </message>
     <message>
         <source>Up Octave</source>
@@ -8229,7 +8230,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch down</source>
-        <translation type="unfinished"/>
+        <translation>音程を下へ移動</translation>
     </message>
     <message>
         <source>Down</source>
@@ -8237,7 +8238,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch down octave</source>
-        <translation type="unfinished"/>
+        <translation>音程をオクターブ下へ移動</translation>
     </message>
     <message>
         <source>Down octave</source>
@@ -8393,7 +8394,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Delete element and duration</source>
-        <translation type="unfinished"/>
+        <translation>要素と持続時間の消去</translation>
     </message>
     <message>
         <source>Parts...</source>
@@ -8424,11 +8425,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation type="unfinished"/>
+        <translation>上向きスタッカーティッシモ</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished"/>
+        <translation>下向きスタッカーティッシモ</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -8444,11 +8445,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>umarcato</source>
-        <translation type="unfinished"/>
+        <translation>上向きマルカート</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation type="unfinished"/>
+        <translation>下向きマルカート</translation>
     </message>
     <message>
         <source>ouvert</source>
@@ -8460,11 +8461,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>upbow</source>
-        <translation type="unfinished"/>
+        <translation>上げ弓</translation>
     </message>
     <message>
         <source>downbow</source>
-        <translation type="unfinished"/>
+        <translation>下げ弓</translation>
     </message>
     <message>
         <source>reverseturn</source>
@@ -8472,7 +8473,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished"/>
+        <translation>ターン</translation>
     </message>
     <message>
         <source>trill</source>
@@ -8480,11 +8481,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>prall</source>
-        <translation type="unfinished"/>
+        <translation>プラルトリラー</translation>
     </message>
     <message>
         <source>mordent</source>
-        <translation type="unfinished"/>
+        <translation>モルデント</translation>
     </message>
     <message>
         <source>prallprall</source>
@@ -8516,27 +8517,27 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished"/>
+        <translation>上向き三角フェルマータ（短い）</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished"/>
+        <translation>下向き三角フェルマータ（短い）</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished"/>
+        <translation>上向き方形フェルマータ（長い）</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished"/>
+        <translation>下向き方形フェルマータ（長い）</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation>上向き方形フェルマータ（とても長い）</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation>下向き方形フェルマータ（とても長い）</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -8599,7 +8600,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Tablature</source>
-        <translation type="unfinished"/>
+        <translation>タブ記号</translation>
     </message>
     <message>
         <source>Percussion</source>
@@ -8837,7 +8838,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Harmony</source>
-        <translation>ハーモニー</translation>
+        <translation>和音</translation>
     </message>
     <message>
         <source>Volta</source>
@@ -9078,27 +9079,27 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>note 1/2</source>
-        <translation type="unfinished"/>
+        <translation>2分音符</translation>
     </message>
     <message>
         <source>note 1/4</source>
-        <translation type="unfinished"/>
+        <translation>4分音符</translation>
     </message>
     <message>
         <source>note 1/8</source>
-        <translation type="unfinished"/>
+        <translation>8分音符</translation>
     </message>
     <message>
         <source>note 1/16</source>
-        <translation type="unfinished"/>
+        <translation>16分音符</translation>
     </message>
     <message>
         <source>note 1/32</source>
-        <translation type="unfinished"/>
+        <translation>32分音符</translation>
     </message>
     <message>
         <source>note 1/64</source>
-        <translation type="unfinished"/>
+        <translation>64分音符</translation>
     </message>
     <message>
         <source>dot dot</source>
@@ -9134,7 +9135,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>quart rest</source>
-        <translation type="unfinished"/>
+        <translation>4分休符</translation>
     </message>
     <message>
         <source>clas quart rest</source>
@@ -9142,23 +9143,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>eight rest</source>
-        <translation type="unfinished"/>
+        <translation>8分休符</translation>
     </message>
     <message>
         <source>16' rest</source>
-        <translation type="unfinished"/>
+        <translation>16分休符</translation>
     </message>
     <message>
         <source>32' rest</source>
-        <translation type="unfinished"/>
+        <translation>32分休符</translation>
     </message>
     <message>
         <source>64' rest</source>
-        <translation type="unfinished"/>
+        <translation>64分休符</translation>
     </message>
     <message>
         <source>128' rest</source>
-        <translation type="unfinished"/>
+        <translation>128分休符</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -9190,19 +9191,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">ナチュラル</translation>
+        <translation>ナチュラル</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation>上矢印付きナチュラル</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation>下矢印付きナチュラル</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation>上下矢印付きナチュラル</translation>
     </message>
     <message>
         <source>flat</source>
@@ -9238,7 +9239,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>flat flat</source>
-        <translation type="unfinished"/>
+        <translation>ダブルフラット</translation>
     </message>
     <message>
         <source>flat flat slash</source>
@@ -9246,7 +9247,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sharp sharp</source>
-        <translation type="unfinished"/>
+        <translation>ダブルシャープ</translation>
     </message>
     <message>
         <source>right parenthesis</source>
@@ -9510,11 +9511,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation type="unfinished"/>
+        <translation>上向きスタッカーティッシモ</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished"/>
+        <translation>下向きスタッカーティッシモ</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -9530,11 +9531,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>umarcato</source>
-        <translation type="unfinished"/>
+        <translation>上向きマルカート</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation type="unfinished"/>
+        <translation>下向きマルカート</translation>
     </message>
     <message>
         <source>ouvert</source>
@@ -9546,11 +9547,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>up bow</source>
-        <translation type="unfinished"/>
+        <translation>上げ弓</translation>
     </message>
     <message>
         <source>down bow</source>
-        <translation type="unfinished"/>
+        <translation>下げ弓</translation>
     </message>
     <message>
         <source>reverse turn</source>
@@ -9610,7 +9611,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>trillelement</source>
-        <translation type="unfinished"/>
+        <translation>トリル要素</translation>
     </message>
     <message>
         <source>arpeggio arrow down</source>
@@ -9622,7 +9623,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>trill element</source>
-        <translation type="unfinished"/>
+        <translation>トリル要素</translation>
     </message>
     <message>
         <source>prall</source>
@@ -9846,39 +9847,39 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>one</source>
-        <translation type="unfinished"/>
+        <translation>1</translation>
     </message>
     <message>
         <source>two</source>
-        <translation type="unfinished"/>
+        <translation>2</translation>
     </message>
     <message>
         <source>three</source>
-        <translation type="unfinished"/>
+        <translation>3</translation>
     </message>
     <message>
         <source>four</source>
-        <translation type="unfinished"/>
+        <translation>4</translation>
     </message>
     <message>
         <source>five</source>
-        <translation type="unfinished"/>
+        <translation>5</translation>
     </message>
     <message>
         <source>six</source>
-        <translation type="unfinished"/>
+        <translation>6</translation>
     </message>
     <message>
         <source>seven</source>
-        <translation type="unfinished"/>
+        <translation>7</translation>
     </message>
     <message>
         <source>eight</source>
-        <translation type="unfinished"/>
+        <translation>8</translation>
     </message>
     <message>
         <source>nine</source>
-        <translation type="unfinished"/>
+        <translation>9</translation>
     </message>
     <message>
         <source>plus</source>

@@ -830,18 +830,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"/>
+        <translation>Hodnota</translation>
     </message>
     <message>
         <source>Alter</source>
-        <translation type="unfinished"/>
+        <translation>Změnit</translation>
     </message>
 </context>
 <context>
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation type="unfinished"/>
+        <translation>Zápis popisu akordu se nezdařil: </translation>
     </message>
 </context>
 <context>
@@ -1207,7 +1207,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>Write File failed: </source>
-        <translation type="unfinished"/>
+        <translation>Zápis souboru se nezdařil: </translation>
     </message>
 </context>
 <context>
@@ -1524,11 +1524,11 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation type="unfinished"/>
+        <translation>Změnit nástroj...</translation>
     </message>
     <message>
         <source>+octave</source>
-        <translation type="unfinished"/>
+        <translation>+oktáva</translation>
     </message>
 </context>
 <context>
@@ -2060,7 +2060,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation type="unfinished"/>
+        <translation>Hlas-%1</translation>
     </message>
 </context>
 <context>
@@ -2299,7 +2299,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation>Ukázat více</translation>
     </message>
 </context>
 <context>
@@ -2420,7 +2420,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation>Zápis stylu se nezdařil: </translation>
     </message>
 </context>
 <context>
@@ -3622,26 +3622,31 @@ Restore session?</source>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished"/>
+        <translation>Skript
+%1
+není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore je příliš staré na spuštění scriptu
+%1</translation>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
-        <translation type="unfinished"/>
+        <translation>Takt %1 Doba %2.%3</translation>
     </message>
     <message>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
-        <translation type="unfinished"/>
+        <translation>Chyba při nahrávání přídavného modulu
+"%1" řádek %2:
+%3</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Všechny podporované soubory (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Soubory MuseScore (*.mscz *.mscx *.msc);;Soubory MusicXML (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Soubory Muse Data (*.md);;Capella Files (*.cap);; Files BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);; Soubory Overture &lt;experimental&gt; (*.ove);;Všechny soubory (*)</translation>
     </message>
 </context>
 <context>
@@ -3785,7 +3790,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Tuning</source>
-        <translation type="unfinished"/>
+        <translation>Ladění</translation>
     </message>
     <message>
         <source>OnTime:</source>
@@ -4771,7 +4776,7 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
     </message>
     <message>
         <source>Use Current Position</source>
-        <translation type="unfinished"/>
+        <translation>Použít nynější polohu</translation>
     </message>
 </context>
 <context>
@@ -4924,7 +4929,7 @@ Vyberte, prosím, nějakou notu nebo pomlku a zkuste to ještě jednou
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Zapsat přídavný modul se skriptem:</translation>
     </message>
 </context>
 <context>
@@ -5226,7 +5231,7 @@ Zkuste uložení do jiného umístění.</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
-        <translation type="unfinished"/>
+        <translation>Nelze rozpoznat typ souboru</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
@@ -5234,7 +5239,7 @@ Zkuste uložení do jiného umístění.</translation>
     </message>
     <message>
         <source>Load failed: </source>
-        <translation type="unfinished"/>
+        <translation>Nahrání se nezdařilo: </translation>
     </message>
 </context>
 <context>
@@ -5282,7 +5287,8 @@ Zkuste uložení do jiného umístění.</translation>
     <message>
         <source>unknown drop format: formats %1:
 </source>
-        <translation type="unfinished"/>
+        <translation>Neznámý odkládací formát: formáty %1:
+</translation>
     </message>
 </context>
 <context>
@@ -5403,16 +5409,18 @@ Zkuste uložení do jiného umístění.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Spuštění ovladače zvuku se nezdařilo.
+Sekvencer bude vypnut.</translation>
     </message>
     <message>
         <source>MuseScore: Load SoundFont</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Nahrát zvukové písmo</translation>
     </message>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Nenastaveno žádné zvukové písmo.
+Přehrávání není možné.</translation>
     </message>
     <message>
         <source>Loading SoundFont
@@ -5421,7 +5429,12 @@ failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation type="unfinished"/>
+        <translation>Nahrání zvukového písma
+"%1"
+se nezdařilo. Přehrávání není možné.
+
+Jděte na Zobrazit -&gt; Syntetizér
+a zaškrtněte, že umístění souboru je správné</translation>
     </message>
 </context>
 <context>
@@ -8633,87 +8646,87 @@ p, li { white-space: pre-wrap; }
     <name>drumset</name>
     <message>
         <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Akustický velký buben</translation>
     </message>
     <message>
         <source>Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Velký buben</translation>
     </message>
     <message>
         <source>Side Stick</source>
-        <translation type="unfinished"/>
+        <translation>Postranní palička</translation>
     </message>
     <message>
         <source>Snare (Acoustic)</source>
-        <translation type="unfinished"/>
+        <translation>Malý buden (akustický)</translation>
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation type="unfinished"/>
+        <translation>Malý buden (elektrický)</translation>
     </message>
     <message>
         <source>Tom 5</source>
-        <translation type="unfinished"/>
+        <translation>Tom 5</translation>
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation type="unfinished"/>
+        <translation>Zavřená hajtka</translation>
     </message>
     <message>
         <source>Tom 4</source>
-        <translation type="unfinished"/>
+        <translation>Tom 4</translation>
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
-        <translation type="unfinished"/>
+        <translation>Pedál hajtky</translation>
     </message>
     <message>
         <source>Tom 3</source>
-        <translation type="unfinished"/>
+        <translation>Tom 3</translation>
     </message>
     <message>
         <source>Hi-Hat Open</source>
-        <translation type="unfinished"/>
+        <translation>Otevřená hajtka</translation>
     </message>
     <message>
         <source>Tom 2</source>
-        <translation type="unfinished"/>
+        <translation>Tom 2</translation>
     </message>
     <message>
         <source>Tom 1</source>
-        <translation type="unfinished"/>
+        <translation>Tom 1</translation>
     </message>
     <message>
         <source>Crash 1</source>
-        <translation type="unfinished"/>
+        <translation>Rána 1</translation>
     </message>
     <message>
         <source>Tom</source>
-        <translation type="unfinished"/>
+        <translation>Tom</translation>
     </message>
     <message>
         <source>Ride</source>
-        <translation type="unfinished"/>
+        <translation>Jízda</translation>
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished"/>
+        <translation>Porcelán</translation>
     </message>
     <message>
         <source>Ride (Bell)</source>
-        <translation type="unfinished"/>
+        <translation>Jízda (zvonek)</translation>
     </message>
     <message>
         <source>Tambourine</source>
-        <translation type="unfinished"/>
+        <translation>Tamburína</translation>
     </message>
     <message>
         <source>open high conga</source>
-        <translation type="unfinished"/>
+        <translation>Otevřená vysoká konga</translation>
     </message>
     <message>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation>Hluboká konga</translation>
     </message>
 </context>
 <context>
@@ -9709,11 +9722,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace dash</source>
-        <translation type="unfinished"/>
+        <translation>Tah ozdoby</translation>
     </message>
     <message>
         <source>dgrace dash</source>
-        <translation type="unfinished"/>
+        <translation>Tah ozdoby dolů</translation>
     </message>
     <message>
         <source>dsixteenth flag</source>
@@ -9765,11 +9778,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tab clef</source>
-        <translation type="unfinished"/>
+        <translation>Klíč tabulatury</translation>
     </message>
     <message>
         <source>ctab clef</source>
-        <translation type="unfinished"/>
+        <translation>Klíč tabulatury malý</translation>
     </message>
     <message>
         <source>four four meter</source>
@@ -9797,15 +9810,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pedald</source>
-        <translation type="unfinished"/>
+        <translation>Pedál d</translation>
     </message>
     <message>
         <source>pedale</source>
-        <translation type="unfinished"/>
+        <translation>Pedál e</translation>
     </message>
     <message>
         <source>pedal ped</source>
-        <translation type="unfinished"/>
+        <translation>Pedál Ped</translation>
     </message>
     <message>
         <source>bracket tips up</source>

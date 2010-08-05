@@ -5,7 +5,7 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation>Névjegy...</translation>
+        <translation>AboutBox</translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
@@ -151,15 +151,15 @@ line break&#13;
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished">Arpeggio</translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished">Tremolo</translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished">Glissando</translation>
+        <translation>Glissando</translation>
     </message>
 </context>
 <context>
@@ -1195,7 +1195,7 @@ line break&#13;
         <source>
 failed: </source>
         <translation>
-hiba: </translation>
+sikertelen: </translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
@@ -3064,7 +3064,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Összekapcsolás</translation>
+        <translation>Zárójel</translation>
     </message>
     <message>
         <source>Akkolade</source>
@@ -3620,12 +3620,16 @@ Helyreállítsa a munkamenetet?</translation>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished"/>
+        <translation>A&#13;
+%1&#13;
+szkript nem kompatibilis a jelenlegi interfésszel.</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished"/>
+        <translation>A MuseScore túl régi a&#13;
+%1&#13;
+szkript futtatásához</translation>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
@@ -4923,7 +4927,7 @@ Válassz ki egyetlen hangjegyet vagy szünetet és próbáld újra
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: szkript plugin regisztrálása</translation>
     </message>
 </context>
 <context>
@@ -6677,7 +6681,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat</source>
-        <translation>bé</translation>
+        <translation>b</translation>
     </message>
     <message>
         <source>double sharp</source>
@@ -6685,11 +6689,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double flat</source>
-        <translation>kettős bé</translation>
+        <translation>kétszeres b</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>feloldójel</translation>
+        <translation>feloldott</translation>
     </message>
     <message>
         <source>(sharp)</source>
@@ -7944,7 +7948,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit General Style...</source>
-        <translation>Általános stíílus szerkesztése...</translation>
+        <translation>Általános stílus szerkesztése...</translation>
     </message>
     <message>
         <source>Edit Text Style...</source>

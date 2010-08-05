@@ -79,7 +79,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Midi Aktion</translation>
+        <translation>Midi-Aktion</translation>
     </message>
 </context>
 <context>
@@ -826,7 +826,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished">Typ</translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>Value</source>
@@ -911,7 +911,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>velocity type</source>
-        <translation>Anschlag Typ</translation>
+        <translation>Anschlagtyp</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
@@ -933,7 +933,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ontime offset</source>
-        <translation type="unfinished">Ein-Zeit Versatz</translation>
+        <translation>Ein-Zeit Versatz</translation>
     </message>
     <message>
         <source>offtime offset type</source>
@@ -1022,7 +1022,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>quarter</source>
-        <translation>viertel Note</translation>
+        <translation>Viertelnote</translation>
     </message>
     <message>
         <source>breve</source>
@@ -1117,7 +1117,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Tempo:</translation>
+        <translation>Anschlag:</translation>
     </message>
     <message>
         <source>align left</source>
@@ -3793,11 +3793,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>Ein-Zeit:</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>Aus-Zeit:</translation>
     </message>
 </context>
 <context>
@@ -4072,7 +4072,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation>Tempo:</translation>
+        <translation>Anschlag:</translation>
     </message>
     <message>
         <source>auto</source>
@@ -4690,7 +4690,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>leertaste</translation>
+        <translation>Leertaste</translation>
     </message>
     <message>
         <source>mm</source>
@@ -5430,6 +5430,7 @@ and check that the file location is correct</source>
         <translation>Klangmuster laden&#13;
 "%1"&#13;
 abgebrochen. Abspielen nicht möglich.&#13;
+&#13;
 Überprüfe die Pfadeinstellungen: ANSICHT - Synthesizer!</translation>
     </message>
 </context>
@@ -5850,7 +5851,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Space</source>
-        <translation>leertaste</translation>
+        <translation>Leertaste</translation>
     </message>
     <message>
         <source>Text</source>
@@ -6125,7 +6126,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Space</source>
-        <translation>leertaste</translation>
+        <translation>Leertaste</translation>
     </message>
     <message>
         <source>enable text frame</source>
@@ -6214,7 +6215,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4</translation>
+        <translation>4/4</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
@@ -6501,17 +6502,17 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formular</translation>
+        <translation>Formular</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>1. Akkord</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>2. Akkord</translation>
     </message>
 </context>
 <context>
@@ -7513,7 +7514,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Palette</source>
-        <translation>Sammlung</translation>
+        <translation>Paletten</translation>
     </message>
     <message>
         <source>Play Panel</source>
@@ -8357,7 +8358,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Seek to begin</source>
-        <translation type="unfinished"/>
+        <translation>Zum Anfang spulen</translation>
     </message>
     <message>
         <source>Player rewind</source>
@@ -8484,7 +8485,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished"/>
+        <translation>umkehren</translation>
     </message>
     <message>
         <source>trill</source>
@@ -8492,7 +8493,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>prall</source>
-        <translation type="unfinished"/>
+        <translation>Pralltriller</translation>
     </message>
     <message>
         <source>mordent</source>
@@ -8638,11 +8639,11 @@ p, li { white-space: pre-wrap; }
     <name>drumset</name>
     <message>
         <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Akkustische Basstrommel</translation>
     </message>
     <message>
         <source>Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Basstrommel</translation>
     </message>
     <message>
         <source>Side Stick</source>
@@ -9514,7 +9515,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>espressivo</source>
-        <translation type="unfinished">Espressivo</translation>
+        <translation>Espressivo</translation>
     </message>
     <message>
         <source>staccato</source>
@@ -9682,11 +9683,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>caesura curved</source>
-        <translation type="unfinished"/>
+        <translation>gebogene Zäsur</translation>
     </message>
     <message>
         <source>caesura straight</source>
-        <translation type="unfinished"/>
+        <translation>gerade Zäsur</translation>
     </message>
     <message>
         <source>eight flag</source>
