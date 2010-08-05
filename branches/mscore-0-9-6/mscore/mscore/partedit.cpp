@@ -103,9 +103,11 @@ void InstrumentListEditor::closeEvent(QCloseEvent* ev)
 void InstrumentListEditor::updateAll(Score* score)
       {
       cs = score;
-      QList<MidiMapping>* mm = cs->midiMapping();
-
-      int n = mm->size() - vb->count();
+      int n = -vb->count();
+      if(cs) {
+            QList<MidiMapping>* mm = cs->midiMapping();
+            n = mm->size() - vb->count();
+            }
       while (n < 0) {
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(0));
             vb->removeItem(wi);
@@ -128,6 +130,8 @@ void InstrumentListEditor::updateAll(Score* score)
 
 void InstrumentListEditor::patchListChanged()
       {
+      if(!cs)
+            return;
       QString s;
       int idx = 0;
       QList<MidiMapping>* mm = cs->midiMapping();

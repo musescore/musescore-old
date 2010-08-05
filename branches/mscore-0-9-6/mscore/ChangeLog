@@ -1,5 +1,6 @@
 5.aug (la)
       - fix #6479: Crash when closing score during playback
+      - fix #6505: Mixer is not refreshed when scores are switched
 4.aug (la)
       - fix #6597: Close/reload crash on XP
       - fix #6624: Crash when deleting a tuplet from a MusicXML import
