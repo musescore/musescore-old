@@ -53,6 +53,7 @@ class Bend : public Element {
 
 class BendProperties : public QDialog, public Ui::BendDialog {
       Q_OBJECT
+      Bend* bend;
 
    public:
       BendProperties(Bend*, QWidget* parent = 0);
