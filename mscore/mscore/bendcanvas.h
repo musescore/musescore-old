@@ -45,6 +45,7 @@ class BendCanvas : public QFrame {
       QList<PitchValue> _points;
 
       virtual void paintEvent(QPaintEvent*);
+      virtual void mousePressEvent(QMouseEvent*);
 
    public:
       BendCanvas(QWidget* parent = 0);
