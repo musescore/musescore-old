@@ -61,6 +61,7 @@
 #include "fret.h"
 #include "staffstate.h"
 #include "fingering.h"
+#include "bend.h"
 
 extern bool useFactorySettings;
 
@@ -425,6 +426,12 @@ void MuseScore::populatePalette()
             s->setSubtype(i);
             sp->append(s, qApp->translate("articulation", qPrintable(s->subtypeName())));
             }
+      Bend* bend = new Bend(gscore);
+      bend->points().append(PitchValue(0,    0, false));
+      bend->points().append(PitchValue(15, 100, false));
+      bend->points().append(PitchValue(60, 100, false));
+
+      sp->append(bend, qApp->translate("articulation", "Bend"));
       paletteBox->addPalette(sp);
 
       //-----------------------------------

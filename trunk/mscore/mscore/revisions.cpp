@@ -28,6 +28,7 @@
 Revision::Revision()
       {
       _parent = 0;
+      _dateTime = QDateTime::currentDateTime();
       }
 
 //---------------------------------------------------------

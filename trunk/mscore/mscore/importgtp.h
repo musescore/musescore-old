@@ -79,7 +79,7 @@ class GuitarPro {
       QString readBytePascalString();
       int readInt();
       QString readDelphiString();
-      virtual void readChromaticGraph();
+      virtual void readBend();
       virtual void readMixChange();
       virtual int readBeatEffects() = 0;
       void readLyrics();
@@ -159,7 +159,7 @@ class GuitarPro4 : public GuitarPro {
       virtual void readChord(Segment*, int track);
       virtual int readBeatEffects();
       virtual void readMixChange();
-      virtual void readChromaticGraph();
+      virtual void readBend();
 
    public:
       GuitarPro4(Score* s, int v) : GuitarPro(s, v) {}
@@ -175,7 +175,7 @@ class GuitarPro5 : public GuitarPro {
       void readInfo();
       void readPageSetup();
       virtual int readBeatEffects();
-      virtual void readChromaticGraph();
+      virtual void readBend();
       void readNote(int string, Note* note);
       virtual void readMixChange();
       virtual void readChord(Segment*, int track);

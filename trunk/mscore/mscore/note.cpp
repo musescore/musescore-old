@@ -55,6 +55,7 @@
 #include "fret.h"
 #include "harmony.h"
 #include "fingering.h"
+#include "bend.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -842,6 +843,7 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || (type == GLISSANDO)
          || (type == SLUR)
          || (type == STAFF_TEXT)
+         || (type == BEND)
          ) {
             return true;
             }
@@ -890,17 +892,17 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   return 0;
 
             case HARMONY:
-                  e->setParent(chord()->measure());
-//TODO1                  static_cast<Harmony*>(e)->setTick(chord()->tick());
+                  e->setParent(ch->measure());
+//TODO1                  static_cast<Harmony*>(e)->setTick(ch->tick());
                   e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;
 
             case LYRICS:
-                  e->setParent(chord()->measure());
+                  e->setParent(ch->measure());
                   e->setTrack((track() / VOICES) * VOICES);
-                  e->setParent(chord()->segment());
+                  e->setParent(ch->segment());
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->cmdAdd(e);
                   return e;
@@ -915,12 +917,21 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
 
             case ARPEGGIO:
                   {
-                  Arpeggio* a = (Arpeggio*)e;
+                  Arpeggio* a = static_cast<Arpeggio*>(e);
                   a->setParent(ch);
                   a->setHeight(spatium() * 5);   //DEBUG
                   score()->undoAddElement(a);
                   }
                   break;
+
+            case BEND:
+                  {
+                  Bend* b = static_cast<Bend*>(e);
+                  b->setParent(ch);
+                  score()->undoAddElement(b);
+                  }
+                  break;
+
             case NOTEHEAD:
                   {
                   Symbol* s = (Symbol*)e;

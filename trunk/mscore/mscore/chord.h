@@ -35,6 +35,7 @@ class Arpeggio;
 class Tremolo;
 class Chord;
 class Glissando;
+class Bend;
 
 //---------------------------------------------------------
 //   Stem
@@ -126,16 +127,19 @@ class LedgerLine : public Line {
 class Chord : public ChordRest {
       QList<Note*> _notes;
       QList<LedgerLine*> _ledgerLines;
-      Stem* _stem;
-      Hook* _hook;
+
+      Stem*      _stem;
+      Hook*      _hook;
       StemSlash* _stemSlash;
-      Direction _stemDirection;
-      Arpeggio* _arpeggio;
-      Tremolo* _tremolo;
+      Direction  _stemDirection;
+      Arpeggio*  _arpeggio;
+      Tremolo*   _tremolo;
       Glissando* _glissando;
-      NoteType _noteType;           ///< mark grace notes: acciaccatura and appoggiatura
-      bool _noStem;
-      double _dotPosX;
+      Bend*      _bend;
+
+      NoteType   _noteType;         ///< mark grace notes: acciaccatura and appoggiatura
+      bool       _noStem;
+      double     _dotPosX;
       double minSpace, extraSpace;  ///< cached values
 
       virtual qreal upPos()   const;
@@ -215,6 +219,8 @@ class Chord : public ChordRest {
       virtual void setMag(double val);
       void pitchChanged();
       void renderPlayback();
+      Bend* bend() const    { return _bend; }
+      void setBend(Bend* b) { _bend = b; }
       };
 
 #endif
