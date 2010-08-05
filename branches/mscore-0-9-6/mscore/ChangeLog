@@ -1,7 +1,10 @@
+5.aug (la)
+      - fix #6479: Crash when closing score during playback
 4.aug (la)
       - fix #6597: Close/reload crash on XP
       - fix #6624: Crash when deleting a tuplet from a MusicXML import
       - fix cursor move on repeatmeasure in plugin framework
+      - fix instrument name containing flats for plugin framework
 14.jul (ws)
       - fix mouse wheel handling for mixer elements
 ======== MuseScore 0.9.6.2 released ==============
