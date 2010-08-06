@@ -147,7 +147,7 @@ void Dynamic::setSubtype(int idx)
             QTextCharFormat tf = cursor.charFormat();
             TextStyle* ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
             double size = ts->size;
-            double m = size * DPI / PPI;
+            double m = size;
             if (ts->sizeIsSpatiumDependent)
                   m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
