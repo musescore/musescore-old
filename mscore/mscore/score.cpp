@@ -479,7 +479,6 @@ static void elementAdjustReadPos(void*, Element* e)
             e->adjustReadPos();
       }
 
-
 //---------------------------------------------------------
 //   read
 //    return false on error
@@ -1824,28 +1823,33 @@ void Score::moveBracket(int staffIdx, int srcCol, int dstCol)
       }
 
 //---------------------------------------------------------
+//   spatiumHasChanged
+//---------------------------------------------------------
+
+static void spatiumHasChanged(void* data, Element* e)
+      {
+      double* val = (double*)data;
+      e->spatiumChanged(val[0], val[1]);
+      }
+
+//---------------------------------------------------------
 //   spatiumChanged
 //---------------------------------------------------------
 
 void Score::spatiumChanged(double oldValue, double newValue)
       {
-      foreach(Element* e, _gel)
-            e->spatiumChanged(oldValue, newValue);
-      for(MeasureBase* mb = _measures.first(); mb; mb = mb->next())
-            mb->spatiumChanged(oldValue, newValue);
-
+      double data[2];
+      data[0] = oldValue;
+      data[1] = newValue;
       foreach(Part* part, _parts) {
             if (part->longName())
                   part->longName()->spatiumChanged(oldValue, newValue);
-            if (part->shortName())
+            if (part->shortName()) {
+                  printf("ShortName: spatiumChanged\n");
                   part->shortName()->spatiumChanged(oldValue, newValue);
+                  }
             }
-      if (rights)
-            rights->spatiumChanged(oldValue, newValue);
-      foreach(Page* p, pages()) {
-            if (p->pageNo())
-                  p->pageNo()->spatiumChanged(oldValue, newValue);
-            }
+      scanElements(data, spatiumHasChanged);
       }
 
 //---------------------------------------------------------

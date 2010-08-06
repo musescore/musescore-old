@@ -1586,7 +1586,10 @@ static Note* searchTieNote(Note* note, Segment* segment, int track)
 void Score::connectTies()
       {
       int tracks = nstaves() * VOICES;
-      for (Segment* s = firstMeasure()->first(); s; s = s->next1()) {
+      Measure* m = firstMeasure();
+      if (!m)
+            return;
+      for (Segment* s = m->first(); s; s = s->next1()) {
             for (int i = 0; i < tracks; ++i) {
                   Element* el = s->element(i);
                   if (el == 0 || el->type() != CHORD)

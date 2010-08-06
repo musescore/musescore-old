@@ -63,6 +63,7 @@ TextBase::TextBase()
       _frameColor   = preferences.defaultColor;
       _frameRound   = 25;
       _circle       = false;
+      _sp           = 0.0;
       }
 
 TextBase::~TextBase()
@@ -86,44 +87,31 @@ TextBase::TextBase(const TextBase& t)
       _hasFrame     = t._hasFrame;
       frame         = t.frame;
       _bbox         = t._bbox;
+      _sp = 0.0;
       }
 
 //---------------------------------------------------------
-//   isSimpleText
-//    Return true if this is simple text and conforms to
-//    the text style.
-//    This kind of text is reponsive to style changes and
-//    can be saved as simple text string.
+//   scale
 //---------------------------------------------------------
 
-bool TextBase::isSimpleText(TextStyle* style, double spatium) const
+void TextBase::scale(double oldVal, double newVal)
       {
-      if (!style)
-            return false;
-
-      if (_doc->blockCount() > 1) {
-//            printf(" blocks > 1\n");
-            return false;
+      if (newVal == _sp)
+            return;
+      _sp = newVal;
+      double v = newVal / oldVal;
+      QTextCursor cursor(_doc);
+      cursor.movePosition(QTextCursor::Start);
+      for (;;) {
+            cursor.select(QTextCursor::BlockUnderCursor);
+            QTextCharFormat cf = cursor.charFormat();
+            QFont font = cf.font();
+            font.setPointSizeF(font.pointSizeF() * v);
+            cf.setFont(font);
+            cursor.setCharFormat(cf);
+            if (!cursor.movePosition(QTextCursor::NextBlock))
+                  break;
             }
-
-      int fragments = 0;
-      QTextBlock b = _doc->begin();
-      QTextCharFormat cf;
-      for (QTextBlock::iterator i = b.begin(); !i.atEnd(); ++i) {
-            if (i.fragment().isValid())
-                  ++fragments;
-            if (fragments > 1) {
-//                  printf("  fragments > 1\n");
-                  return false;
-                  }
-            cf = i.fragment().charFormat();
-            }
-      double d = fabs(style->font(spatium).pointSizeF() - cf.font().pointSizeF());
-      if (d < 0.1)
-            return true;
-//      printf("  font changed from style %f -> %f\n", style->font(spatium).pointSizeF(),
-//         cf.font().pointSizeF());
-      return false;
       }
 
 //---------------------------------------------------------
@@ -832,9 +820,7 @@ void TextB::spatiumChanged(double oldValue, double newValue)
       Element::spatiumChanged(oldValue, newValue);
       if (!_sizeIsSpatiumDependent)
             return;
-      TextStyle* style = score()->textStyle(_textStyle);
-      if (textBase()->isSimpleText(style, oldValue))
-            setDefaultFont(style->font(newValue));
+      textBase()->scale(oldValue, newValue);
       }
 
 //---------------------------------------------------------

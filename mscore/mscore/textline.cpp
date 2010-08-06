@@ -283,6 +283,7 @@ TextLine::TextLine(Score* s)
       _endSymbol         = -1;
 
       setLen(spatium() * 7);   // for use in palettes
+      _sp  = 0;
       }
 
 TextLine::TextLine(const TextLine& e)
@@ -314,6 +315,7 @@ TextLine::TextLine(const TextLine& e)
             _beginText = e._beginText->clone(); // deep copy
       if (e._continueText)
             _continueText = e._continueText->clone();
+      _sp = 0;
       }
 
 //---------------------------------------------------------
@@ -828,4 +830,24 @@ void TextLine::layout()
       SLine::layout();
       }
 
+//---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void TextLineSegment::spatiumChanged(double ov, double nv)
+      {
+      parent()->spatiumChanged(ov, nv);
+      }
+
+//---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void TextLine::spatiumChanged(double ov, double nv)
+      {
+      if (_beginText)
+            _beginText->spatiumChanged(ov, nv);
+      if (_continueText)
+            _continueText->spatiumChanged(ov, nv);
+      }
 

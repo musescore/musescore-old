@@ -59,6 +59,7 @@ class TextBase {
       int _frameRound;
       bool _circle;
       bool _hasFrame;
+      double _sp;
 
       QRectF frame;
       QRectF _bbox;
@@ -103,7 +104,7 @@ class TextBase {
       void setHtml(const QString& s);
       bool isEmpty() const                  { return _doc->isEmpty(); }
       void setModified(bool v)              { _doc->setModified(v);   }
-      bool isSimpleText(TextStyle*, double) const;
+      void scale(double, double);
       };
 
 //---------------------------------------------------------
