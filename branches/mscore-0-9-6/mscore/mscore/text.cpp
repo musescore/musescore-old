@@ -48,6 +48,7 @@ TextBase::TextBase()
       _doc          = new QTextDocument(0);
       _doc->setUseDesignMetrics(true);
       _doc->setUndoRedoEnabled(true);
+      _doc->documentLayout()->setProperty("cursorWidth", QVariant(2));
 
       _hasFrame     = false;
       _frameWidth   = 0.35;         // default line width
@@ -85,8 +86,8 @@ TextBase::TextBase(const TextBase& t)
       _layoutWidth  = t._layoutWidth;
       frame         = t.frame;
       _bbox         = t._bbox;
-      _doc->documentLayout()->setPaintDevice(pdev);
-      layout(_layoutWidth);
+//      _doc->documentLayout()->setPaintDevice(pdev);
+//      layout(_layoutWidth);
       }
 
 //---------------------------------------------------------
@@ -196,6 +197,7 @@ void TextBase::setText(const QString& s, Align align)
       tf.setFont(_doc->defaultFont());
       cursor.setBlockCharFormat(tf);
       cursor.insertText(s);
+      _doc->setTextWidth(_doc->idealWidth());  // to make alignment work
       }
 
 //---------------------------------------------------------
@@ -300,20 +302,12 @@ bool TextBase::readProperties(QDomElement e)
 
 void TextBase::layout(double w)
       {
-      _layoutWidth = w;
-      if (!_doc->isModified())
-            return;
-
-      _doc->documentLayout()->setPaintDevice(pdev);
+      const double mag = DPI / PDPI;
+      w /= mag;
 
       if (w <= 0.0)
             w = _doc->idealWidth();
-      else {
-            QTextOption to = _doc->defaultTextOption();
-            to.setUseDesignMetrics(true);
-            to.setWrapMode(QTextOption::WrapAtWordBoundaryOrAnywhere);
-            _doc->setDefaultTextOption(to);
-            }
+
       _doc->setTextWidth(w);   // to make alignment work
 
       if (_hasFrame) {
@@ -335,6 +329,7 @@ void TextBase::layout(double w)
                         frame.setWidth(frame.height());
                         }
                   }
+            frame = QRectF(frame.x() * mag, frame.y() * mag, frame.width() * mag, frame.height() * mag);
             double w = (_paddingWidth + _frameWidth * .5) * DPMM;
             frame.adjust(-w, -w, w, w);
             w = _frameWidth * DPMM;
@@ -342,8 +337,7 @@ void TextBase::layout(double w)
             }
       else {
             _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
-//            double m = DPI / PDPI;
-//            _bbox.adjust(_bbox.x() * m, _bbox.y() * m, _bbox.width() * m, _bbox.height() * m);
+            _bbox = QRectF(_bbox.x() * mag, _bbox.y() * mag, _bbox.width() * mag, _bbox.height() * mag);
             }
       _doc->setModified(false);
       }
@@ -369,9 +363,10 @@ void TextBase::draw(QPainter& p, QTextCursor* cursor) const
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
 
-      _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0*DPI/PDPI))));
-// p.scale(DPI/PDPI, DPI/PDPI);
+      p.save();
+      p.scale(DPI/PDPI, DPI/PDPI);
       _doc->documentLayout()->draw(&p, c);
+      p.restore();
 
       // draw frame
       if (_hasFrame) {
@@ -1182,11 +1177,15 @@ QPainterPath TextB::shape() const
       {
       QPainterPath pp;
 
+      const double mag = DPI / PDPI;
       for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
             QTextLayout* tl = tb.layout();
             int n = tl->lineCount();
-            for (int i = 0; i < n; ++i)
-                  pp.addRect(tl->lineAt(0).naturalTextRect().translated(tl->position()));
+            for (int i = 0; i < n; ++i) {
+                  QRectF r(tl->lineAt(0).naturalTextRect().translated(tl->position()));
+                  r = QRectF(r.x() * mag, r.y() * mag, r.width() * mag, r.height() * mag);
+                  pp.addRect(r);
+                  }
             }
       return pp;
       }
@@ -1198,10 +1197,11 @@ QPainterPath TextB::shape() const
 
 qreal TextB::baseLine() const
       {
+      const double mag = DPI / PDPI;
       for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
             const QTextLayout* tl = tb.layout();
             if (tl->lineCount())
-                  return tl->lineAt(0).ascent() + tl->position().y();
+                  return (tl->lineAt(0).ascent() + tl->position().y()) * mag;;
             }
       return 0.0;
       }
@@ -1282,6 +1282,10 @@ bool TextB::setCursor(const QPointF& p, QTextCursor::MoveMode mode)
       QPointF pt  = p - canvasPos();
       if (!bbox().contains(pt))
             return false;
+
+      const double mag = DPI / PDPI;
+      pt /= mag;
+
       int idx = doc()->documentLayout()->hitTest(pt, Qt::FuzzyHit);
       if (idx == -1)
             return true;
