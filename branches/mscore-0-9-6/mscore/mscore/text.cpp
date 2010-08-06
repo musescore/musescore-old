@@ -46,6 +46,7 @@ TextBase::TextBase()
       {
       _refCount     = 1;
       _doc          = new QTextDocument(0);
+      _doc->setDocumentMargin(1.0);
       _doc->setUseDesignMetrics(true);
       _doc->setUndoRedoEnabled(true);
       _doc->documentLayout()->setProperty("cursorWidth", QVariant(2));

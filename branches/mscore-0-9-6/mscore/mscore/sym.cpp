@@ -316,7 +316,7 @@ SymCode pSymbols[] = {
       SymCode(0x011c, -1),
       SymCode(0x0124, -1),
       SymCode(0x0134, -1),
-      SymCode(0x015c, -1),            
+      SymCode(0x015c, -1),
       SymCode(0x016c, -1),
 
       SymCode(0x00e0, -1),
@@ -357,10 +357,10 @@ SymCode pSymbols[] = {
       SymCode(0x011d, -1),
       SymCode(0x0125, -1),
       SymCode(0x0135, -1),
-      SymCode(0x015d, -1),            
+      SymCode(0x015d, -1),
       SymCode(0x016d, -1),
-      
-      
+
+
       SymCode(0x00BC, -1, "1/4", SYMBOL_FRACTION),
       SymCode(0x00BD, -1, "1/2", SYMBOL_FRACTION),
       SymCode(0x00BE, -1, "3/4", SYMBOL_FRACTION),
@@ -514,6 +514,8 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y, int n) const
 
 QString symToHtml(const Sym& s, int leftMargin)
       {
+      leftMargin = int((leftMargin * PDPI) / DPI);
+
       double size    = s.font().pixelSize() * 72.0 / DPI;
       QString family = s.font().family();
       return QString(
@@ -537,6 +539,8 @@ QString symToHtml(const Sym& s, int leftMargin)
 
 QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
       {
+      leftMargin = (leftMargin * PDPI) / DPI;
+
       QFont f        = s1.font();
       double size    = s1.font().pixelSize() * 72.0 / DPI;
       QString family = f.family();
