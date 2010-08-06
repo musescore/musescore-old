@@ -20,6 +20,8 @@
 
 #include "bend.h"
 #include "bendcanvas.h"
+#include "score.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   Bend
@@ -28,6 +30,9 @@
 Bend::Bend(Score* s)
    : Element(s)
       {
+      setYoff(-1.0);
+      setOffsetType(OFFSET_SPATIUM);
+      setAlign(ALIGN_HCENTER | ALIGN_BOTTOM);
       }
 
 //---------------------------------------------------------
@@ -131,6 +136,7 @@ void Bend::propertyAction(ScoreView* viewer, const QString& s)
             BendProperties bp(this, 0);
             if (bp.exec()) {
                   printf("bend properties\n");
+                  score()->undo()->push(new ChangeBend(this, bp.points()));
                   }
             }
       else
@@ -147,6 +153,68 @@ BendProperties::BendProperties(Bend* b, QWidget* parent)
       setupUi(this);
       bend = b;
       bendCanvas->setPoints(bend->points());
+      bendTypes = new QButtonGroup(this);
+      bendTypes->addButton(bend1, 0);
+      bendTypes->addButton(bend2, 1);
+      bendTypes->addButton(bend3, 2);
+      bendTypes->addButton(bend4, 3);
+      bendTypes->addButton(bend5, 4);
+      bendTypes->setExclusive(true);
+      connect(bendTypes, SIGNAL(buttonClicked(int)), SLOT(bendTypeChanged(int)));
+      }
+
+//---------------------------------------------------------
+//   points
+//---------------------------------------------------------
+
+const QList<PitchValue>& BendProperties::points() const
+      {
+      return bendCanvas->points();
+      }
+
+//---------------------------------------------------------
+//   bendTypeChanged
+//---------------------------------------------------------
+
+void BendProperties::bendTypeChanged(int n)
+      {
+      QList<PitchValue>& points = bendCanvas->points();
+
+      points.clear();
+      switch(n) {
+            case 0:
+                  points.append(PitchValue(0,0));
+                  points.append(PitchValue(15,100));
+                  points.append(PitchValue(60,100));
+                  break;
+            case 1:
+                  points.append(PitchValue(0,0));
+                  points.append(PitchValue(10,100));
+                  points.append(PitchValue(20,100));
+                  points.append(PitchValue(30,0));
+                  points.append(PitchValue(60,0));
+                  break;
+            case 2:
+                  points.append(PitchValue(0,0));
+                  points.append(PitchValue(10,100));
+                  points.append(PitchValue(20,100));
+                  points.append(PitchValue(30,0));
+                  points.append(PitchValue(40,0));
+                  points.append(PitchValue(50,100));
+                  points.append(PitchValue(60,100));
+                  break;
+            case 3:
+                  points.append(PitchValue(0,100));
+                  points.append(PitchValue(60,100));
+                  break;
+            case 4:
+                  points.append(PitchValue(0,100));
+                  points.append(PitchValue(15,100));
+                  points.append(PitchValue(30,0));
+                  points.append(PitchValue(60,0));
+                  break;
+            }
+      update();
       }
 
 //---------------------------------------------------------
@@ -251,12 +319,9 @@ void BendCanvas::mousePressEvent(QMouseEvent* ev)
       int time = x * 5;
       int pitch = y * 25;
 
-      printf("mouse: %d %d   %d %d\n", x, y, time, pitch);
-
       int n = _points.size();
       bool found = false;
       for (int i = 0; i < n; ++i) {
-            printf("  %d %d\n", _points[i].time, _points[i].pitch);
             if (_points[i].time > time) {
                   _points.insert(i, PitchValue(time, pitch, false));
                   found = true;

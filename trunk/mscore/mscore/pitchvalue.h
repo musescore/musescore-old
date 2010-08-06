@@ -18,27 +18,24 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __BENDCANVAS_H__
-#define __BENDCANVAS_H__
-
-#include "pitchvalue.h"
+#ifndef __PITCHVALUE_H__
+#define __PITCHVALUE_H__
 
 //---------------------------------------------------------
-//   BendCanvas
+//   PitchValue
+//    used in class Bend, BendCanvas
+//
+//    - time is 0 - 60 for 0-100% of the chord duration the
+//      bend is attached to
+//    - pitch is 100 for one semitone
 //---------------------------------------------------------
 
-class BendCanvas : public QFrame {
-      Q_OBJECT
-      QList<PitchValue> _points;
-
-      virtual void paintEvent(QPaintEvent*);
-      virtual void mousePressEvent(QMouseEvent*);
-
-   public:
-      BendCanvas(QWidget* parent = 0);
-      const QList<PitchValue>& points() const { return _points; }
-      QList<PitchValue>& points()             { return _points; }
-      void setPoints(const QList<PitchValue>& p) { _points = p; }
+struct PitchValue {
+      int time;
+      int pitch;
+      bool vibrato;
+      PitchValue() {}
+      PitchValue(int a, int b, bool c = false) : time(a), pitch(b), vibrato(c) {}
       };
 
 #endif

@@ -50,7 +50,7 @@ TextBase::TextBase()
 
       _doc->setUseDesignMetrics(true);
       _doc->setUndoRedoEnabled(true);
-      _doc->documentLayout()->setProperty("cursorWidth", QVariant(int(lrint(2.0))));
+      _doc->documentLayout()->setProperty("cursorWidth", QVariant(2));
 
       QTextOption to = _doc->defaultTextOption();
       to.setUseDesignMetrics(true);
