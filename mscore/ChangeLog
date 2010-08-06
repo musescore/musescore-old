@@ -1,3 +1,5 @@
+6.aug (ws)
+      - attempt to fix font problem (quarternote looks too big in text)
 5.aug (la)
       - fix #6479: Crash when closing score during playback
       - fix #6505: Mixer is not refreshed when scores are switched
