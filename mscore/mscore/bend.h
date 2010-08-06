@@ -23,6 +23,7 @@
 
 #include "element.h"
 #include "ui_bend.h"
+#include "pitchvalue.h"
 
 //---------------------------------------------------------
 //   Bend
@@ -41,8 +42,9 @@ class Bend : public Element {
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void write(Xml&) const;
       virtual void read(QDomElement e);
-      QList<PitchValue>& points()             { return _points; }
-      const QList<PitchValue>& points() const { return _points; }
+      QList<PitchValue>& points()                { return _points; }
+      const QList<PitchValue>& points() const    { return _points; }
+      void setPoints(const QList<PitchValue>& p) { _points = p;    }
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
       };
@@ -54,9 +56,14 @@ class Bend : public Element {
 class BendProperties : public QDialog, public Ui::BendDialog {
       Q_OBJECT
       Bend* bend;
+      QButtonGroup* bendTypes;
+
+   private slots:
+      void bendTypeChanged(int);
 
    public:
       BendProperties(Bend*, QWidget* parent = 0);
+      const QList<PitchValue>& points() const;
       };
 
 #endif

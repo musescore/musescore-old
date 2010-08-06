@@ -36,6 +36,7 @@
 #include "select.h"
 #include "instrument.h"
 #include "msynth/synti.h"
+#include "pitchvalue.h"
 
 class ElementList;
 class Element;
@@ -69,6 +70,7 @@ class TimeSig;
 class Clef;
 class Image;
 class Hairpin;
+class Bend;
 
 #define DEBUG_UNDO
 
@@ -1409,6 +1411,22 @@ class RemoveExcerpt : public UndoCommand {
       UNDO_NAME("RemoveExcerpt");
       };
 
-#endif
+//---------------------------------------------------------
+//   ChangeBend
+//---------------------------------------------------------
 
+class ChangeBend : public UndoCommand {
+      Bend* bend;
+      QList<PitchValue> points;
+
+      void flip();
+
+   public:
+      ChangeBend(Bend* b, QList<PitchValue> p) : bend(b), points(p) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeBend");
+      };
+
+#endif
 
