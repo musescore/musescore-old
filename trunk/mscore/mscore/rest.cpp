@@ -373,7 +373,8 @@ QRectF Rest::bbox() const
             double w = point(score()->styleS(ST_minMMRestWidth));
             return QRectF(-w * .5, -h + 2 * spatium(), w, h);
             }
-      return symbols[score()->symIdx()][_sym].bbox(mag());
+//      return symbols[score()->symIdx()][_sym].bbox(mag());
+      return symbols[score()->symIdx()][_sym].bbox(magS());
       }
 
 //---------------------------------------------------------

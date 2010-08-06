@@ -275,17 +275,25 @@ void TimeSig::layout()
             sn = QString("%1").arg(n);
 
             // QFontMetricsF fm(fontId2font(0), pdev);
+
             QFontMetricsF fm(fontId2font(0));
             QRectF rz = fm.tightBoundingRect(sz);
             QRectF rn = fm.tightBoundingRect(sn);
 
-            double m = _spatium / (DPI * SPATIUM20);
-            double im = 1.0 / m;
-            pz = QPointF(0.0, 2.0 * _spatium) * im;
-            pn = QPointF((rz.width() - rn.width())*.5, 4.0 * _spatium) * im;
+            double m  = magS();
+            double im = (DPI * SPATIUM20) / _spatium;
+
+            rz = QRectF(rz.x() * m, rz.y() * m, rz.width() * m, rz.height() * m);
+            rn = QRectF(rn.x() * m, rn.y() * m, rn.width() * m, rn.height() * m);
+
+            pz = QPointF(0.0, 2.0 * _spatium);
+            pn = QPointF((rz.width() - rn.width())*.5, 4.0 * _spatium);
 
             bb |= rz.translated(pz);
             bb |= rn.translated(pn);
+
+            pz *= im;
+            pn *= im;
             }
       setbbox(bb);
       }

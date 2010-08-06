@@ -454,7 +454,7 @@ void System::setInstrumentName(int staffIdx)
       if (isVbox())                 // ignore vbox
             return;
 
-      Staff* s   = score()->staff(staffIdx);
+      Staff* s = score()->staff(staffIdx);
       if (!s->isTop())
             return;
 
@@ -466,6 +466,10 @@ void System::setInstrumentName(int staffIdx)
       //
       TextC* iname = staff->instrumentName;
       Part* part = s->part();
+
+      delete iname;           // DEBUG
+      iname = 0;
+
       if (!iname) {
             Part* part = s->part();
             iname = new TextC(_firstSystem ? (*part->longName()) : (*part->shortName()));

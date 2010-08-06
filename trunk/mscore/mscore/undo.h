@@ -72,7 +72,7 @@ class Image;
 class Hairpin;
 class Bend;
 
-#define DEBUG_UNDO
+// #define DEBUG_UNDO
 
 #ifdef DEBUG_UNDO
 #define UNDO_NAME(a)  virtual const char* name() const { return a; }
