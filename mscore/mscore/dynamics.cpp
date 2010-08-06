@@ -153,7 +153,7 @@ void Dynamic::setSubtype(int idx)
             m *= mag();
 
             QFont font("MScore1");
-            font.setPixelSize(lrint(m));
+            font.setPointSize(m);
             font.setKerning(true);
             tf.setFont(font);
             tf.setProperty(QTextFormat::FontKerning, true);
