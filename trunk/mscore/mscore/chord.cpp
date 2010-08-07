@@ -42,7 +42,6 @@
 #include "utils.h"
 #include "articulation.h"
 #include "preferences.h"
-#include "bend.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -253,7 +252,6 @@ Chord::Chord(Score* s)
       _arpeggio      = 0;
       _tremolo       = 0;
       _glissando     = 0;
-      _bend          = 0;
       _noteType      = NOTE_NORMAL;
       _stemSlash     = 0;
       _noStem        = false;
@@ -278,7 +276,6 @@ Chord::Chord(const Chord& c)
       _stem          = 0;
       _hook          = 0;
       _glissando     = 0;
-      _bend          = 0;
       _arpeggio      = 0;
       _stemSlash     = 0;
 
@@ -289,8 +286,6 @@ Chord::Chord(const Chord& c)
             add(new Hook(*(c._hook)));
       if (c._glissando)
             add(new Glissando(*(c._glissando)));
-      if (c._bend)
-            add(new Bend(*c._bend));
       if (c._arpeggio)
             add(new Arpeggio(*(c._arpeggio)));
       if (c._stemSlash) {
@@ -314,7 +309,6 @@ Chord::~Chord()
       delete _arpeggio;
       delete _tremolo;
       delete _glissando;
-      delete _bend;
       delete _stemSlash;
       delete _stem;
       delete _hook;
@@ -421,8 +415,6 @@ void Chord::add(Element* e)
             _stem = static_cast<Stem*>(e);
       else if (e->type() == HOOK)
             _hook = static_cast<Hook*>(e);
-      else if (e->type() == BEND)
-            _bend = static_cast<Bend*>(e);
       else
             printf("Chord::add: unknown element\n");
       }
@@ -468,8 +460,6 @@ void Chord::remove(Element* e)
             _stem = 0;
       else if (e->type() == HOOK)
             _hook = 0;
-      else if (e->type() == BEND)
-            _bend = 0;
       else
             printf("Chord::remove: unknown element\n");
       }
@@ -495,8 +485,6 @@ QRectF Chord::bbox() const
             _bbox |= _arpeggio->bbox().translated(_arpeggio->pos());
       if (_glissando)
             _bbox |= _glissando->bbox().translated(_glissando->pos());
-      if (_bend)
-            _bbox |= _bend->bbox().translated(_bend->pos());
       if (_stemSlash)
             _bbox |= _stemSlash->bbox().translated(_stemSlash->pos());
       if (_tremolo)
@@ -730,8 +718,6 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
             _arpeggio->write(xml);
       if (_glissando)
             _glissando->write(xml);
-      if (_bend)
-            _bend->write(xml);
       if (_tremolo)
             _tremolo->write(xml);
       xml.etag();
@@ -862,12 +848,6 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets)
                   _glissando->read(e);
                   _glissando->setParent(this);
                   }
-            else if (tag == "Bend") {
-                  _bend = new Bend(score());
-                  _bend->setTrack(track());
-                  _bend->read(e);
-                  _bend->setParent(this);
-                  }
             else if (tag == "Tremolo") {
                   _tremolo = new Tremolo(score());
                   _tremolo->setTrack(track());
@@ -947,8 +927,6 @@ void Chord::scanElements(void* data, void (*func)(void*, Element*))
             func(data, _tremolo);
       if (_glissando)
             func(data, _glissando);
-      if (_bend)
-            func(data, _bend);
 
       foreach(LedgerLine* h, _ledgerLines)
             func(data, h);
@@ -974,8 +952,6 @@ void Chord::setTrack(int val)
             _arpeggio->setTrack(val);
       if (_glissando)
             _glissando->setTrack(val);
-      if (_bend)
-            _bend->setTrack(val);
       if (_tremolo)
             _tremolo->setTrack(val);
 
@@ -1044,8 +1020,6 @@ void Chord::setMag(double val)
             _tremolo->setMag(val);
       if (_glissando)
             _glissando->setMag(val);
-      if (_bend)
-            _bend->setMag(val);
       foreach (Note* n, _notes)
             n->setMag(val);
       }
@@ -1293,9 +1267,6 @@ void Chord::layout()
             return;
 
       double _spatium  = spatium();
-
-      if (_bend)
-            _bend->layout();
 
       foreach(const LedgerLine* l, _ledgerLines)
             delete l;

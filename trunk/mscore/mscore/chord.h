@@ -35,7 +35,6 @@ class Arpeggio;
 class Tremolo;
 class Chord;
 class Glissando;
-class Bend;
 
 //---------------------------------------------------------
 //   Stem
@@ -135,7 +134,6 @@ class Chord : public ChordRest {
       Arpeggio*  _arpeggio;
       Tremolo*   _tremolo;
       Glissando* _glissando;
-      Bend*      _bend;
 
       NoteType   _noteType;         ///< mark grace notes: acciaccatura and appoggiatura
       bool       _noStem;
@@ -219,8 +217,6 @@ class Chord : public ChordRest {
       virtual void setMag(double val);
       void pitchChanged();
       void renderPlayback();
-      Bend* bend() const    { return _bend; }
-      void setBend(Bend* b) { _bend = b; }
       };
 
 #endif

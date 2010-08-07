@@ -1518,3 +1518,18 @@ int MidiTrack::separateVoices(int /*maxVoices*/)
       return 1;
 #endif
       }
+
+//---------------------------------------------------------
+//   addCtrl
+//---------------------------------------------------------
+
+void MidiTrack::addCtrl(int tick, int channel, int type, int value)
+      {
+      Event* e = new Event(ME_CONTROLLER);
+      e->setOntime(tick);
+      e->setChannel(channel);
+      e->setController(type);
+      e->setValue(value);
+      insert(e);
+      }
+

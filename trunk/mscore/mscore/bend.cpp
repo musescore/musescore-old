@@ -22,6 +22,9 @@
 #include "bendcanvas.h"
 #include "score.h"
 #include "undo.h"
+#include "staff.h"
+#include "chord.h"
+#include "note.h"
 
 //---------------------------------------------------------
 //   Bend
@@ -30,9 +33,6 @@
 Bend::Bend(Score* s)
    : Element(s)
       {
-      setYoff(-1.0);
-      setOffsetType(OFFSET_SPATIUM);
-      setAlign(ALIGN_HCENTER | ALIGN_BOTTOM);
       }
 
 //---------------------------------------------------------
@@ -42,27 +42,76 @@ Bend::Bend(Score* s)
 void Bend::layout()
       {
       double _spatium = spatium();
-      path      = QPainterPath();
 
-      // dummy
-      _lw       = _spatium * 0.3;
-      double h  = _spatium * 4;
-      double w  = _spatium * 2.5;
-      double w1 = w * .6;
+      if (staff() && !staff()->useTablature()) {
+            setbbox(QRectF());
+            if (!parent()) {
+                  noteWidth = -_spatium*2;
+                  notePos   = QPointF(0.0, _spatium*3);
+                  }
+            return;
+            }
 
-      path.lineTo(w, 0.0);
-      path.lineTo(w, h-w1);
-      path.lineTo(w1, h-w1);
-      path.lineTo(w1, h);
-      path.lineTo(0.0, h);
-      path.lineTo(0.0, 0.0);
-      path.moveTo(w, h-w1);
-      path.lineTo(w1, h);
+      QPainterPath path;
+      _lw             = _spatium * 0.1;
+      Note* note      = static_cast<Note*>(parent());
+      if (note == 0) {
+            noteWidth = 0.0;
+            notePos = QPointF();
+            return;
+            }
+      noteWidth = note->width();
+      int n    = _points.size();
+      int pt   = 0;
+      double x = noteWidth * .5;
+      notePos  = note->pos();
+      double y = notePos.y() - _spatium;
+      double x2, y2;
+      QPolygonF arrowUp;
+      double aw = _spatium * .5;
+      arrowUp << QPointF(0, 0) << QPointF(aw, aw) << QPointF(-aw, aw);
+
+      for (int pt = 0; pt < n; ++pt) {
+            if (pt == (n-1))
+                  break;
+            if (_points[pt].pitch == _points[pt+1].pitch) {
+                  if (pt == (n-2))
+                        break;
+                  path.moveTo(x, y);
+                  x2 = x + _spatium;
+                  y2 = y;
+                  path.lineTo(x2, y2);
+                  }
+            else if (_points[pt].pitch < _points[pt+1].pitch) {
+                  // up
+                  x2 = x + _spatium*.5;
+                  y2 = -_spatium * 2;
+                  double dx = x2 - x;
+                  double dy = y2 - y;
+                  path.moveTo(x, y);
+                  path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
+                  path.cubicTo(x+dx/2, y, x2, y+dy/4, x, y);
+                  path.closeSubpath();
+
+                  path.addPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
+                  path.closeSubpath();
+                  }
+            else {
+                  // down
+                  path.moveTo(x, y);
+                  x2 = x + _spatium*.5;
+                  y2 = y + _spatium * 3;
+                  double dx = x2 - x;
+                  double dy = y2 - y;
+                  path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
+                  }
+            x = x2;
+            y = y2;
+            }
 
       QRectF bb = path.boundingRect();
       bb.adjust(-_lw, -_lw, _lw, _lw);
       setbbox(bb);
-      Element::layout();
       }
 
 //---------------------------------------------------------
@@ -71,13 +120,111 @@ void Bend::layout()
 
 void Bend::draw(QPainter& p, ScoreView*) const
       {
+      if (staff() && !staff()->useTablature())
+            return;
       QPen pen = p.pen();
       pen.setWidthF(_lw);
       pen.setCapStyle(Qt::RoundCap);
       pen.setJoinStyle(Qt::RoundJoin);
       p.setPen(pen);
-      // p.setBrush(Qt::black);
-      p.drawPath(path);
+      p.setBrush(Qt::black);
+
+      double _spatium = spatium();
+      TextStyle* st = score()->textStyle(TEXT_STYLE_BENCH);
+      QFont f = st->fontPx(_spatium);
+      p.setFont(f);
+
+      int n    = _points.size();
+      int pt   = 0;
+      double x = noteWidth;
+      double y = -_spatium * .8;
+      double x2, y2;
+
+      double aw = _spatium * .5;
+      QPolygonF arrowUp;
+      arrowUp << QPointF(0, 0) << QPointF(aw*.5, aw) << QPointF(-aw*.5, aw);
+      QPolygonF arrowDown;
+      arrowDown << QPointF(0, 0) << QPointF(aw*.5, -aw) << QPointF(-aw*.5, -aw);
+
+      static const char* label[] = {
+            "", "1/4", "1/2", "3/4", "full",
+            "1 1/4", "1 1/2", "1 3/4", "2",
+            "2 1/4", "2 1/2", "2 3/4", "3"
+            };
+
+      for (int pt = 0; pt < n; ++pt) {
+            if (pt == (n-1))
+                  break;
+            int pitch = _points[pt].pitch;
+            if (pt == 0 && pitch) {
+                  y2 = -notePos.y() -_spatium * 2;
+                  x2 = x;
+                  p.drawLine(x, y, x2, y2);
+
+                  p.setBrush(Qt::black);
+                  p.drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
+
+                  int idx = (pitch + 12)/25;
+                  const char* l = label[idx];
+                  QRectF r;
+                  p.drawText(QRectF(x2, y2, 0, 0),
+                     Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip,
+                     QString(l),
+                     &r
+                     );
+                  y = y2;
+                  }
+            if (pitch == _points[pt+1].pitch) {
+                  if (pt == (n-2))
+                        break;
+                  x2 = x + _spatium;
+                  y2 = y;
+                  p.drawLine(x, y, x2, y2);
+                  }
+            else if (pitch < _points[pt+1].pitch) {
+                  // up
+                  x2 = x + _spatium*.5;
+                  y2 = -notePos.y() -_spatium * 2;
+                  double dx = x2 - x;
+                  double dy = y2 - y;
+
+                  QPainterPath path;
+                  path.moveTo(x, y);
+                  path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
+                  p.setBrush(Qt::NoBrush);
+                  p.drawPath(path);
+
+                  p.setBrush(Qt::black);
+                  p.drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
+
+                  int idx = (_points[pt+1].pitch + 12)/25;
+                  const char* l = label[idx];
+                  QRectF r;
+                  p.drawText(QRectF(x2, y2, 0, 0),
+                     Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip,
+                     QString(l),
+                     &r
+                     );
+                  }
+            else {
+                  // down
+                  x2 = x + _spatium*.5;
+                  y2 = y + _spatium * 3;
+                  double dx = x2 - x;
+                  double dy = y2 - y;
+
+                  QPainterPath path;
+                  path.moveTo(x, y);
+                  path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
+                  p.setBrush(Qt::NoBrush);
+                  p.drawPath(path);
+
+                  p.setBrush(Qt::black);
+                  p.drawPolygon(arrowDown.translated(x2, y2 - _spatium * .2));
+                  }
+            x = x2;
+            y = y2;
+            }
       }
 
 //---------------------------------------------------------
@@ -238,7 +385,7 @@ void BendCanvas::paintEvent(QPaintEvent* ev)
       QPainter p(this);
       p.fillRect(rect(), Qt::white);
 
-      static const int ROWS = 13;
+      static const int ROWS    = 13;
       static const int COLUMNS = 13;
 
       int xs = w / (COLUMNS);
@@ -250,14 +397,17 @@ void BendCanvas::paintEvent(QPaintEvent* ev)
 
       QPen pen = p.pen();
       pen.setWidth(1);
-      p.setPen(pen);
       for (int x = 0; x < COLUMNS; ++x) {
             int xx = lm + x * xs;
+            pen.setColor(x % 3 ? Qt::gray : Qt::black);
+            p.setPen(pen);
             p.drawLine(xx, tm, xx, tm + th);
             }
 
       for (int y = 0; y < ROWS; ++y) {
             int yy = tm + y * ys;
+            pen.setColor(y % 4 ? Qt::gray : Qt::black);
+            p.setPen(pen);
             p.drawLine(lm, yy, lm + tw, yy);
             }
 

@@ -252,41 +252,26 @@ bool ExportMidi::write(const QString& name)
             track->setOutChannel(channel);
 
             if (staff->isTop()) {
-                  if (part->midiProgram() != -1) {
-                        Event* ce = new Event(ME_CONTROLLER);
-                        ce->setOntime(0);
-                        ce->setController(CTRL_PROGRAM);
-                        ce->setChannel(channel);
-                        ce->setValue(part->midiProgram());
-                        track->insert(ce);
-                        }
-                  Event* e = new Event(ME_CONTROLLER);
-                  e->setOntime(2);
-                  e->setChannel(channel);
-                  e->setController(CTRL_VOLUME);
-                  e->setValue(part->volume());
-                  track->insert(e);
+                  // set pitch bend sensitivity to 12 semitones:
+                  track->addCtrl(0, channel, CTRL_LRPN, 0);
+                  track->addCtrl(0, channel, CTRL_HRPN, 0);
+                  track->addCtrl(0, channel, CTRL_HDATA, 12);
 
-                  e = new Event(ME_CONTROLLER);
-                  e->setOntime(4);
-                  e->setChannel(channel);
-                  e->setController(CTRL_PANPOT);
-                  e->setValue(part->pan());
-                  track->insert(e);
+                  // reset fine tuning
+                  track->addCtrl(0, channel, CTRL_LRPN, 1);
+                  track->addCtrl(0, channel, CTRL_HRPN, 0);
+                  track->addCtrl(0, channel, CTRL_HDATA, 64);
 
-                  e = new Event(ME_CONTROLLER);
-                  e->setOntime(6);
-                  e->setChannel(channel);
-                  e->setController(CTRL_REVERB_SEND);
-                  e->setValue(part->reverb());
-                  track->insert(e);
+                  // deactivate rpn
+                  track->addCtrl(0, channel, CTRL_LRPN, 127);
+                  track->addCtrl(0, channel, CTRL_HRPN, 127);
 
-                  e = new Event(ME_CONTROLLER);
-                  e->setOntime(8);
-                  e->setChannel(channel);
-                  e->setController(CTRL_CHORUS_SEND);
-                  e->setValue(part->chorus());
-                  track->insert(e);
+                  if (part->midiProgram() != -1)
+                        track->addCtrl(0, channel, CTRL_PROGRAM, part->midiProgram());
+                  track->addCtrl(0, channel, CTRL_VOLUME, part->volume());
+                  track->addCtrl(0, channel, CTRL_PANPOT, part->pan());
+                  track->addCtrl(0, channel, CTRL_REVERB_SEND, part->reverb());
+                  track->addCtrl(0, channel, CTRL_CHORUS_SEND, part->chorus());
                   }
             EventMap events;
             cs->toEList(&events, staffIdx, staffIdx+1);
@@ -302,12 +287,7 @@ bool ExportMidi::write(const QString& name)
                         }
                   else if (i.value()->type() == ME_CONTROLLER) {
                         Event* n = i.value();
-                        Event* ne = new Event(ME_CONTROLLER);
-                        ne->setOntime(i.key());
-                        ne->setChannel(n->channel());
-                        ne->setController(n->controller());
-                        ne->setValue(n->value());
-                        track->insert(ne);
+                        track->addCtrl(i.key(), n->channel(), n->controller(), n->value());
                         }
                   else {
                         printf("writeMidi: unknown midi event 0x%02x\n", i.value()->type());

@@ -43,6 +43,7 @@
 #include "articulation.h"
 #include "keysig.h"
 #include "harmony.h"
+#include "bend.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -2031,7 +2032,7 @@ void GuitarPro5::readNoteEffects(Note* note)
       uchar modMask1 = readUChar();
       uchar modMask2 = readUChar();
       if (modMask1 & 0x1)
-            readBend();
+            readBend(note);
       if (modMask1 & 0x2) {         // hammer on / pull off
             }
       if (modMask1 & 0x8) {         // let ring
@@ -2205,7 +2206,7 @@ void GuitarPro5::readArtificialHarmonic()
 //   readBend
 //---------------------------------------------------------
 
-void GuitarPro5::readBend()
+void GuitarPro5::readBend(Note* note)
       {
       int a1 = readChar();
       int a2 = readChar();
@@ -2214,13 +2215,19 @@ void GuitarPro5::readBend()
       int a5 = readChar();
       int n  = readInt();
 
-printf("readBend() n=%d  %d %d %d %d %d\n", n, a1, a2, a3, a4, a5);
+// printf("readBend() n=%d  %d %d %d %d %d\n", n, a1, a2, a3, a4, a5);
+
+      QList<PitchValue> points;
       for (int i = 0; i < n; ++i) {
             int time  = readInt();                    // time
             int pitch = readInt();                    // pitch
             int vibrato = readUChar();                // vibrato
-            printf("  %d: %2d %2d vibrato %d\n", i, time, pitch, vibrato);
+            points.append(PitchValue(time, pitch, vibrato));
             }
+      Bend* b = new Bend(note->score());
+      b->setPoints(points);
+      b->setTrack(note->track());
+      note->add(b);
       }
 
 //---------------------------------------------------------
