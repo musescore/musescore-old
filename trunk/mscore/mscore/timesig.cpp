@@ -305,7 +305,7 @@ void TimeSig::layout()
 void TimeSig::draw(QPainter& p, ScoreView*) const
       {
       int st = subtype();
-      if (st == 0 || staff()->useTablature())
+      if (st == 0 || (staff() && staff()->useTablature()))
             return;
       double _spatium = spatium();
       if (st ==  TSIG_FOUR_FOUR)
