@@ -175,7 +175,7 @@ class GuitarPro5 : public GuitarPro {
       void readInfo();
       void readPageSetup();
       virtual int readBeatEffects();
-      virtual void readBend();
+      virtual void readBend(Note*);
       void readNote(int string, Note* note);
       virtual void readMixChange();
       virtual void readChord(Segment*, int track);

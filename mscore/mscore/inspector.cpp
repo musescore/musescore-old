@@ -49,6 +49,7 @@
 #include "tremolo.h"
 #include "articulation.h"
 #include "ottava.h"
+#include "bend.h"
 
 extern bool useFactorySettings;
 
@@ -1018,11 +1019,12 @@ ShowNoteWidget::ShowNoteWidget()
       layout->addWidget(note);
       layout->addStretch(10);
 
-      connect(nb.tieFor, SIGNAL(clicked()), SLOT(tieForClicked()));
-      connect(nb.tieBack, SIGNAL(clicked()), SLOT(tieBackClicked()));
+      connect(nb.tieFor,     SIGNAL(clicked()), SLOT(tieForClicked()));
+      connect(nb.tieBack,    SIGNAL(clicked()), SLOT(tieBackClicked()));
       connect(nb.accidental, SIGNAL(clicked()), SLOT(accidentalClicked()));
-      connect(nb.fingering, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
-      connect(nb.tpc, SIGNAL(valueChanged(int)), SLOT(tpcChanged(int)));
+      connect(nb.bend,       SIGNAL(clicked()), SLOT(bendClicked()));
+      connect(nb.fingering,  SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(nb.tpc,        SIGNAL(valueChanged(int)), SLOT(tpcChanged(int)));
       }
 
 //---------------------------------------------------------
@@ -1050,6 +1052,7 @@ void ShowNoteWidget::setElement(Element* e)
       nb.tieFor->setEnabled(note->tieFor());
       nb.tieBack->setEnabled(note->tieBack());
       nb.accidental->setEnabled(note->accidental());
+      nb.bend->setEnabled(note->bend());
       nb.userAccidental->setValue(note->userAccidental());
 
 //      nb.onTimeType->setCurrentIndex(note->onTimeType());
@@ -1102,6 +1105,15 @@ void ShowNoteWidget::tieBackClicked()
 void ShowNoteWidget::accidentalClicked()
       {
       emit elementChanged(((Note*)element())->accidental());
+      }
+
+//---------------------------------------------------------
+//   bendClicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::bendClicked()
+      {
+      emit elementChanged(((Note*)element())->bend());
       }
 
 //---------------------------------------------------------
@@ -1368,7 +1380,7 @@ HairpinView::HairpinView()
 
 void HairpinView::setElement(Element* e)
       {
-      Hairpin* hairpin = (Hairpin*)e;
+//      Hairpin* hairpin = (Hairpin*)e;
       ShowElementBase::setElement(e);
 //      hp.tick1->setValue(hairpin->tick());
 //      hp.tick2->setValue(hairpin->tick2());

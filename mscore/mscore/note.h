@@ -38,6 +38,7 @@ class Text;
 class Score;
 class Sym;
 class ScoreView;
+class Bend;
 
 extern const int noteHeads[2][HEAD_GROUPS][4];
 
@@ -106,6 +107,7 @@ class Note : public Element {
       ElementList _el;        ///< fingering, other text, symbols or images
       Tie* _tieFor;
       Tie* _tieBack;
+      Bend* _bend;
 
       int _lineOffset;        ///< Used during mouse dragging.
 
@@ -225,6 +227,9 @@ class Note : public Element {
       void setOffTimeOffset(int v)     { _offTimeOffset = v;        }
       int offTimeUserOffset() const    { return _offTimeUserOffset; }
       void setOffTimeUserOffset(int v) { _offTimeUserOffset = v;    }
+
+      Bend* bend() const               { return _bend; }
+      void setBend(Bend* b)            { _bend = b;    }
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);

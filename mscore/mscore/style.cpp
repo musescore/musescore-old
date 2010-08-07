@@ -315,6 +315,8 @@ const TextStyle defaultTextStyleArray[] = {
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Ottava"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_VCENTER, 0.0, 0.0, OS, 0, 0, true),
 
+      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Bend"), ff, 8, false, false, false,
+         ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true),
       };
 
 #undef MM

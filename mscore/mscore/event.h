@@ -83,12 +83,16 @@ enum {
 enum {
       CTRL_HBANK              = 0x00,
       CTRL_LBANK              = 0x20,
+
       CTRL_HDATA              = 0x06,
       CTRL_LDATA              = 0x26,
+
       CTRL_HNRPN              = 0x63,
       CTRL_LNRPN              = 0x62,
+
       CTRL_HRPN               = 0x65,
       CTRL_LRPN               = 0x64,
+
       CTRL_MODULATION         = 0x01,
       CTRL_PORTAMENTO_TIME    = 0x05,
       CTRL_VOLUME             = 0x07,

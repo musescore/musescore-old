@@ -56,6 +56,7 @@
 #include "harmony.h"
 #include "fingering.h"
 #include "bend.h"
+#include "bend.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -162,6 +163,7 @@ Note::Note(Score* s)
 
       _offTimeOffset     = 0;
       _offTimeUserOffset = 0;
+      _bend               = 0;
       }
 
 Note::~Note()
@@ -170,6 +172,7 @@ Note::~Note()
       foreach(Element* e, _el)
             delete e;
       delete _tieFor;
+      delete _bend;
       }
 
 Note::Note(const Note& n)
@@ -199,6 +202,9 @@ Note::Note(const Note& n)
 
       _tieFor            = 0;
       _tieBack           = 0;
+      _bend              = 0;
+      if (n._bend)
+            add(new Bend(*n._bend));
 
       _lineOffset        = n._lineOffset;
       _hidden            = n._hidden;
@@ -378,6 +384,9 @@ void Note::add(Element* e)
             case ACCIDENTAL:
                   _accidental = static_cast<Accidental*>(e);
                   break;
+            case BEND:
+                  _bend = static_cast<Bend*>(e);
+                  break;
             default:
                   printf("Note::add() not impl. %s\n", e->name());
                   break;
@@ -420,6 +429,10 @@ void Note::remove(Element* e)
 
             case ACCIDENTAL:
                   _accidental = 0;
+                  break;
+
+            case BEND:
+                  _bend = 0;
                   break;
 
             default:
@@ -615,6 +628,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             xml.tag("onTimeOffset", _onTimeUserOffset);
       if (_offTimeUserOffset)
             xml.tag("offTimeOffset", _offTimeUserOffset);
+      if (_bend)
+            _bend->write(xml);
       xml.etag();
       }
 
@@ -730,6 +745,12 @@ void Note::read(QDomElement e)
                   // else
                   //      ignore value;
                   }
+            else if (tag == "Bend") {
+                  _bend = new Bend(score());
+                  _bend->setTrack(track());
+                  _bend->read(e);
+                  _bend->setParent(this);
+                  }
             else if (tag == "onTimeType")                   // obsolete
                   ; // _onTimeType = readValueType(e);
             else if (tag == "onTimeOffset")
@@ -843,7 +864,7 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || (type == GLISSANDO)
          || (type == SLUR)
          || (type == STAFF_TEXT)
-         || (type == BEND)
+         || (type == BEND && (staff()->useTablature()))
          ) {
             return true;
             }
@@ -927,7 +948,8 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
             case BEND:
                   {
                   Bend* b = static_cast<Bend*>(e);
-                  b->setParent(ch);
+                  b->setParent(this);
+                  b->setTrack(track());
                   score()->undoAddElement(b);
                   }
                   break;
@@ -1181,6 +1203,8 @@ void Note::layout()
             e->setMag(mag());
             e->layout();
             }
+      if (_bend)
+            _bend->layout();
       }
 
 //---------------------------------------------------------
@@ -1294,6 +1318,8 @@ void Note::scanElements(void* data, void (*func)(void*, Element*))
             e->scanElements(data, func);
       if (!dragMode && _accidental)
             func(data, _accidental);
+      if (_bend)
+            func(data, _bend);
       }
 
 //---------------------------------------------------------
@@ -1312,6 +1338,8 @@ void Note::setTrack(int val)
             e->setTrack(val);
       if (_accidental)
             _accidental->setTrack(val);
+      if (_bend)
+            _bend->setTrack(val);
       }
 
 //---------------------------------------------------------
@@ -1334,6 +1362,8 @@ void Note::setMag(double val)
       Element::setMag(val);
       if (_accidental)
             _accidental->setMag(val);
+      if (_bend)
+            _bend->setMag(val);
       }
 
 //---------------------------------------------------------

@@ -80,6 +80,9 @@ class MidiTrack {
       void setComment(const QString& s) { _comment = s;       }
       void insert(Event* e)             { _events.insert(e);  }
       void append(Event* e)             { _events.append(e);  }
+
+      void addCtrl(int tick, int channel, int type, int value);
+
       void mergeNoteOnOff();
       void cleanup();
       inline int division() const;

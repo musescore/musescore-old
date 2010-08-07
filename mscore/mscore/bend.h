@@ -31,8 +31,9 @@
 
 class Bend : public Element {
       QList<PitchValue> _points;
-      QPainterPath path;
       double _lw;
+      QPointF notePos;
+      double noteWidth;
 
    public:
       Bend(Score* s);
