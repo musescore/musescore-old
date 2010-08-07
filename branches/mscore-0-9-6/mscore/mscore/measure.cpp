@@ -156,8 +156,8 @@ Measure::~Measure()
             }
       foreach(MStaff* m, staves)
             delete m;
-      foreach(Tuplet* t, _tuplets)
-            delete t;
+      /*foreach(Tuplet* t, _tuplets)
+            delete t;*/
       delete _noText;
       }
 
