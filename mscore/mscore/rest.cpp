@@ -53,6 +53,7 @@ Rest::Rest(Score* s)
 Rest::Rest(Score* s, const Duration& d)
   : ChordRest(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _beamMode  = BEAM_NO;
       dotline    = -1;
       setOffsetType(OFFSET_SPATIUM);
