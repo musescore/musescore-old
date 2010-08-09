@@ -34,10 +34,11 @@ class Segment;
 
 struct Dyn {
       int velocity;           ///< associated midi velocity (0-127, -1 = none)
+      bool accent;            ///< if true add velocity to current chord velocity
       const char* tag;
 
-      Dyn(int velo, const char* t)
-         : velocity(velo), tag(t) {}
+      Dyn(int velo, bool a, const char* t)
+         : velocity(velo), accent(a), tag(t) {}
       };
 
 //---------------------------------------------------------
