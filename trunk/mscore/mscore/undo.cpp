@@ -689,7 +689,6 @@ void Score::undoAddElement(Element* element)
 
 void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
       {
-printf("undoAddCR %s %p\n", cr->name(), cr->score());
       Staff* ostaff = cr->staff();
       LinkedStaves* linkedStaves = ostaff->linkedStaves();
       if (linkedStaves) {
@@ -701,7 +700,6 @@ printf("undoAddCR %s %p\n", cr->name(), cr->score());
                   Segment* seg = m->findSegment(SegChordRest, tick);
                   if (seg == 0) {
                         seg = new Segment(m, SegChordRest, tick);
-printf("   add linked %s %p\n", seg->name(), seg->score());
                         undoAddElement(seg);
                         }
                   ChordRest* newcr = static_cast<ChordRest*>(cr->clone());
@@ -709,7 +707,6 @@ printf("   add linked %s %p\n", seg->name(), seg->score());
                   int staffIdx = score->staffIdx(staff);
                   newcr->setTrack(staffIdx * VOICES + cr->voice());
                   newcr->setParent(seg);
-printf("   add linked %s %p\n", newcr->name(), newcr->score());
                   undoAddElement(newcr);
                   score->setLayout(m);
                   score->setUpdateAll(true);
@@ -718,11 +715,9 @@ printf("   add linked %s %p\n", newcr->name(), newcr->score());
       Segment* seg = measure->findSegment(SegChordRest, tick);
       if (seg == 0) {
             seg = new Segment(measure, SegChordRest, tick);
-printf("   add %s measure %p %p\n", seg->name(), seg->measure(), seg->score());
             undoAddElement(seg);
             }
       cr->setParent(seg);
-printf("   add %s %p\n", cr->name(), cr->score());
       undoAddElement(cr);
       cr->score()->setLayout(measure);
       cr->score()->setUpdateAll(true);

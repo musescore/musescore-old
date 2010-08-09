@@ -52,6 +52,7 @@ SlurSegment::SlurSegment(const SlurSegment& b)
             ups[i] = b.ups[i];
       path         = b.path;
       bow          = b.bow;
+      _system      = b._system;
       }
 
 //---------------------------------------------------------

@@ -1633,7 +1633,7 @@ void Score::add(Element* el)
             else if (el->check())
                   _gel.append(el);
             else {
-                  printf("remove invalid element <%s>\n", el->name());
+                  printf("add invalid element <%s>\n", el->name());
                   delete el;
                   }
             }

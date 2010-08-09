@@ -2216,7 +2216,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
       {
       foreach(Element* el, _gel) {
             if (el->type() == SLUR)
-                  static_cast<Slur*>(el)->setId(0);
+                  static_cast<Slur*>(el)->setId(-1);
             }
       foreach(Beam* beam, _beams)
             beam->setId(-1);
@@ -2272,15 +2272,12 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               tuplets.append(tuplet);
                               undoAddElement(tuplet);
                               }
-#if 0
                         else if (tag == "Slur") {
                               Slur* slur = new Slur(this);
                               slur->read(eee);
-                              slur->setTrack(-1);
-//TODO1                              slur->setTick(-1);
+                              slur->setTrack(dstStaffIdx * VOICES);
                               undoAddElement(slur);
                               }
-#endif
                         else if (tag == "Chord" || tag == "Rest" || tag == "RepeatMeasure") {
                               ChordRest* cr = static_cast<ChordRest*>(Element::name2Element(tag, this));
                               cr->setTrack(curTrack);
@@ -2465,6 +2462,22 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     delete harmony;
                                     printf("no segment found for harmony\n");
                                     }
+                              }
+                        else if (tag == "Clef") {
+                              Clef* clef = new Clef(this);
+                              clef->read(eee);
+                              clef->setTrack(dstStaffIdx * VOICES);
+                              int tick = curTick - tickStart + dstTick;
+                              Measure* m = tick2measure(tick);
+                              if (m->tick() && m->tick() == tick)
+                                    m = m->prevMeasure();
+                              Segment* segment = m->findSegment(SegClef, tick);
+                              if (!segment) {
+                                    segment = new Segment(m, SegClef, tick);
+                                    undoAddElement(segment);
+                                    }
+                              segment->add(clef);
+                              clef->staff()->setClef(segment->tick(), clef->subtype());
                               }
                         else {
                               domError(eee);
