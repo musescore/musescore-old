@@ -571,9 +571,8 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
             case DYNAMIC:
                   {
                   Dynamic* d = static_cast<Dynamic*>(e);
-//TODO1                  d->setTick(tick());
-                  d->setTrack(staffIdx() * VOICES);
-                  d->setParent(m);
+                  d->setTrack(track());
+                  d->setParent(segment());
                   score()->undoAddElement(e);
                   }
                   break;
