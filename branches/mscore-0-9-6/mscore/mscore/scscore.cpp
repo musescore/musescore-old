@@ -141,7 +141,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   {
                   Text* t = score->getText(TEXT_TITLE);
                   if (argc == 0) {
-                        QString s = t ? t->getText() : "";
+                        QString s = t ? t->getText().replace(QString(0xe10d), QString(0x266D)) : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
                   else if (argc == 1) {
@@ -158,7 +158,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   {
                   Text* t = score->getText(TEXT_SUBTITLE);
                   if (argc == 0) {
-                        QString s = t ? t->getText() : "";
+                        QString s = t ? t->getText().replace(QString(0xe10d), QString(0x266D)) : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
                   else if (argc == 1) {
@@ -175,7 +175,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   {
                   Text* t = score->getText(TEXT_COMPOSER);
                   if (argc == 0) {
-                        QString s = t ? t->getText() : "";
+                        QString s = t ? t->getText().replace(QString(0xe10d), QString(0x266D)) : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
                   else if (argc == 1) {
@@ -192,7 +192,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   {
                   Text* t = score->getText(TEXT_POET);
                   if (argc == 0) {
-                        QString s = t ? t->getText() : "";
+                        QString s = t ? t->getText().replace(QString(0xe10d), QString(0x266D)) : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
                   else if (argc == 1) {
