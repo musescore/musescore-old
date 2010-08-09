@@ -465,14 +465,14 @@ void Palette::paintEvent(QPaintEvent*)
       // draw symbols
       //
 
-      QPen pen(palette().brush(QPalette::Normal, QPalette::Text).color());
+      QPen pen(palette().color(QPalette::Normal, QPalette::Text));
       pen.setWidthF(defaultStyle[ST_staffLineWidth].toSpatium().val() * PALETTE_SPATIUM * extraMag);
 
       for (int idx = 0; idx < cells.size(); ++idx) {
             QRect r = idxRect(idx);
             p.setPen(pen);
             if (idx == selectedIdx)
-                  p.fillRect(r, palette().brush(QPalette::Normal, QPalette::Highlight).color());
+                  p.fillRect(r, palette().color(QPalette::Normal, QPalette::Highlight));
             else if (idx == currentIdx)
                   p.fillRect(r, p.background().color().light(118));
             if (cells.isEmpty() || cells[idx] == 0)
@@ -522,8 +522,8 @@ void Palette::paintEvent(QPaintEvent*)
                   cells[idx]->x = sx;
                   cells[idx]->y = sy;
 
-                  p.setPen(QPen(palette().brush(QPalette::Normal,
-                     (idx == selectedIdx) ? QPalette::HighlightedText : QPalette::Text).color()));
+                  p.setPen(QPen(palette().color(QPalette::Normal,
+                     (idx == selectedIdx) ? QPalette::HighlightedText : QPalette::Text)));
                   el->scanElements(&p, paintPaletteElement);
                   p.restore();
                   }

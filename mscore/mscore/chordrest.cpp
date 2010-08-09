@@ -206,8 +206,8 @@ void ChordRest::writeProperties(Xml& xml) const
       {
       QList<Prop> pl = properties(xml);
       xml.prop(pl);
-      if (!durationType().fraction().isValid()
-         || ((durationType().fraction() != duration()) && !duration().isZero()))
+      if (!duration().isZero() && (!durationType().fraction().isValid()
+         || (durationType().fraction() != duration())))
             xml.fTag("duration", duration());
       for (ciArticulation ia = articulations.begin(); ia != articulations.end(); ++ia)
             (*ia)->write(xml);
@@ -286,8 +286,8 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
             QString type = e.attribute("type");
             Slur* slur = 0;
             foreach(Element* e, *score()->gel()) {
-                  if (e->type() == SLUR && ((Slur*)e)->id() == id) {
-                        slur = (Slur*)e;
+                  if (e->type() == SLUR && static_cast<Slur*>(e)->id() == id) {
+                        slur = static_cast<Slur*>(e);
                         break;
                         }
                   }
@@ -301,17 +301,16 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
                         _slurBack.append(slur);
                         }
                   else
-                        printf("Note::read(): unknown Slur type <%s>\n", qPrintable(type));
+                        printf("ChordRest::read(): unknown Slur type <%s>\n", qPrintable(type));
                   }
             else {
-                  printf("Note::read(): Slur id %d not found\n", id);
+                  printf("ChordRest::read(): Slur id %d not found\n", id);
                   }
             }
       else if (tag == "durationType") {
             setDurationType(val);
             if (durationType().type() != Duration::V_MEASURE) {
                   setDuration(durationType().fraction());
-
                   }
             else {
                   if (score()->mscVersion() < 115) {

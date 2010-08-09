@@ -390,19 +390,20 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         }
                   else if (_selection.isSingle()) {
                         Segment* seg = 0;
-                        Element* oe = _selection.element();
+                        Element* oe  = _selection.element();
                         bool reverse = false;
-                        int ticks = 0;
+                        int ticks    = 0;
                         if (oe->isChordRest())
                               ticks = static_cast<ChordRest*>(oe)->ticks();
-#if 0 //TODO1
-                        if (tick < oe->tick())
+                        int oetick = 0;
+                        if (oe->parent()->type() == SEGMENT)
+                              oetick = static_cast<Segment*>(oe->parent())->tick();
+                        if (tick < oetick)
                               seg = m->first();
-                        else if (etick >= oe->tick() + ticks) {
+                        else if (etick >= oetick + ticks) {
                               seg = m->last();
                               reverse = true;
                               }
-#endif
                         int track = staffIdx * VOICES;
                         Element* el = 0;
                         // find first or last chord/rest in measure
@@ -840,14 +841,11 @@ QByteArray Selection::staffMimeData() const
                                                 }
                                           }
                                     }
-#if 0 //TODO1
                               foreach(Slur* slur, cr->slurFor()) {
-                                    if (slur->startElement()->tick() >= tickStart()
-                                       && slur->endElement()->tick() < tickEnd()) {
+                                    ChordRest* cr = static_cast<ChordRest*>(slur->endElement());
+                                    if (cr->segment()->tick() < tickEnd())
                                           slur->write(xml);
-                                          }
                                     }
-#endif
                               xml.curTick += cr->ticks();
                               }
                         if (e->type() == CHORD) {

@@ -111,8 +111,6 @@ class SlurTie : public Spanner {
       virtual void setSelected(bool f);
       virtual bool contains(const QPointF&) const     { return false; }  // not selectable
 
-//      virtual void change(Element* o, Element* n);
-
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
       QPointF slurPos(Element*, System*& s);

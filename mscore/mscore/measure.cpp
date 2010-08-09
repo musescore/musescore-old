@@ -197,6 +197,16 @@ void Measure::dump() const
 
 void Measure::remove(Segment* el)
       {
+      int tracks = staves.size() * VOICES;
+      for (int track = 0; track < tracks; track += VOICES) {
+            if (!el->element(track))
+                  continue;
+            if (el->type() == SegClef)
+                  score()->staff(track/VOICES)->setUpdateClefList(true);
+            if (el->type() == SegKeySig)
+                  score()->staff(track/VOICES)->setUpdateKeymap(true);
+            }
+
       // debug:
       bool found = false;
       for (Segment* s = _first; s; s = s->next()) {
@@ -944,6 +954,15 @@ void Measure::add(Element* el)
             case SEGMENT:
                   {
                   Segment* seg = static_cast<Segment*>(el);
+                  int tracks = staves.size() * VOICES;
+                  for (int track = 0; track < tracks; track += VOICES) {
+                        if (!seg->element(track))
+                              continue;
+                        if (seg->type() == SegClef)
+                              score()->staff(track/VOICES)->setUpdateClefList(true);
+                        if (seg->type() == SegKeySig)
+                              score()->staff(track/VOICES)->setUpdateKeymap(true);
+                        }
                   int t = seg->tick();
                   int st = el->subtype();
                   Segment* s;
@@ -969,8 +988,9 @@ void Measure::add(Element* el)
                                     insert(seg, s);
                                     break;
                                     }
-                              if (s && s->subtype() != SegEndBarLine) {
-                                    for (; s && s->subtype() != SegChordRest; s = s->next())
+                              if (s && s->subtype() != SegChordRest) {
+                                    for (; s && s->subtype() != SegEndBarLine
+                                       && s->subtype() != SegChordRest; s = s->next())
                                           ;
                                     }
                               }
@@ -3210,7 +3230,11 @@ void Measure::layoutX(double stretch)
                               }
                         else if (rest->durationType() == Duration::V_MEASURE) {
                               double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
-                              double w  = xpos[segs-1] - x1;
+                              double w;
+                              if ((segs > 2) && types[segs-2] == SegClef)
+                                    w  = xpos[segs-2] - x1;
+                              else
+                                    w  = xpos[segs-1] - x1;
                               e->rxpos() = (w - e->width()) * .5 + x1 - s->x();
                               }
                         }
@@ -3229,7 +3253,7 @@ void Measure::layoutX(double stretch)
                         double w   = 0.0;
                         if (types[seg+1] != SegChordRest)
                               w = xpos[seg+1] - xpos[seg];
-                        double m   = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
+                        double m  = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
                         e->rxpos() = w - e->width() - m;
                         }
                   else {
