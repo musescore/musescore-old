@@ -239,7 +239,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   break;
             case 6:    // "setExpandRepeat",
                   if (argc == 1) {
-                        bool f = context->argument(1).toBool();
+                        bool f = context->argument(0).toBool();
                         getAction("repeat")->setChecked(f);
                         preferences.midiExpandRepeats = f;
                         score->updateRepeatList(f);
