@@ -40,6 +40,7 @@
 #include "dynamics.h"
 #include "stafftext.h"
 #include "al/sig.h"
+#include "clef.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -561,7 +562,6 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
                   {
                   TempoText* tt = static_cast<TempoText*>(e);
                   score()->tempomap()->addTempo(tick(), tt->tempo());
-//TODO1                  tt->setTick(tick());
                   tt->setTrack(0);
                   tt->setParent(m);
                   score()->undoAddElement(tt);
