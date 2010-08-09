@@ -344,8 +344,10 @@ void Staff::changeClef(int tick, int st)
             printf("measure for tick %d not found!\n", tick);
             return;
             }
-      if (measure->prevMeasure())
-            measure = measure->prevMeasure();
+      if (measure->tick() == tick) {
+            if (measure->prevMeasure())
+                  measure = measure->prevMeasure();
+            }
       Segment* s = measure->findSegment(SegClef, tick);
       if (!s) {
             s = new Segment(measure, SegClef, tick);
