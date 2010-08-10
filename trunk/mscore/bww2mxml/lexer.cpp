@@ -85,15 +85,28 @@ namespace Bww {
     qDebug() << "getSym: read line" << line;
     QRegExp rHeaderIgnore("^Bagpipe Reader|^MIDINoteMappings|^FrequencyMappings"
                           "|^InstrumentMappings|^GracenoteDurations|^FontSizes"
-                          "|^TuneFormat|^TuneTempo");
+                          "|^TuneFormat");
+    QRegExp rTuneTempo("^TuneTempo");
     if (rHeaderIgnore.indexIn(line) == 0)
     {
       type = COMMENT;
       value = "";
       qDebug()
           << "-> header ignore,"
-          << " type: " << symbolToString(type)
-          << " value: " << value
+          << "type:" << symbolToString(type)
+          << "value:" << value
+          ;
+      line = "";
+      return;
+    }
+    else if (rTuneTempo.indexIn(line) == 0)
+    {
+      type = TEMPO;
+      value = line;
+      qDebug()
+          << "-> tempo,"
+          << "type:" << symbolToString(type)
+          << "value:" << value
           ;
       line = "";
       return;
@@ -104,8 +117,8 @@ namespace Bww {
       value = line;
       qDebug()
           << "-> quoted string,"
-          << " type: " << symbolToString(type)
-          << " value: " << value
+          << "type:" << symbolToString(type)
+          << "value:" << value
           ;
       line = "";
     }
@@ -155,7 +168,7 @@ namespace Bww {
 
     QRegExp rClef("&");
     QRegExp rKey("sharp[cf]");
-    QRegExp rTempo("\\d+_(1|2|4|8|16|32)");
+    QRegExp rTSig("\\d+_(1|2|4|8|16|32)");
     QRegExp rPart("I!''|I!|''!I|!I|'intro|[2-9]|'[12]|_'");
     QRegExp rBar("!|!t|!!t");
     QRegExp rNote("(LG|LA|[B-F]|HG|HA)[lr]?_(1|2|4|8|16|32)");
@@ -177,8 +190,8 @@ namespace Bww {
       type = CLEF;
     else if (rKey.exactMatch(word))
       type = KEY;
-    else if (rTempo.exactMatch(word))
-      type = TEMPO;
+    else if (rTSig.exactMatch(word))
+      type = TSIG;
     else if (rPart.exactMatch(word))
       type = PART;
     else if (rBar.exactMatch(word))

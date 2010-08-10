@@ -21,9 +21,9 @@
 
 /**
  \file
- A very simple parser for bww files. The file header is handled one line at a time,
+ A simple parser for bww files. The file header is handled one line at a time,
  until a line starting with "&" is found. The parser then builds measures from
- uinterrupted sequences of notes. Any non-note symbol ends the current measure.
+ uinterrupted sequences of notes.
  */
 
 #include <iostream>
@@ -73,7 +73,7 @@ static bool isNonNote(Bww::Symbol sym)
 {
   return (sym == Bww::CLEF
           || sym == Bww::KEY
-          || sym == Bww::TEMPO
+          || sym == Bww::TSIG
           || sym == Bww::PART
           || sym == Bww::BAR);
 }
@@ -87,6 +87,7 @@ namespace Bww {
   Parser::Parser(Lexer& l, Writer& w)
     : lex(l),
     wrt(w),
+    tempo(0),
     inMeasure(false),
     measureNr(0),
     tieStart(false),
@@ -235,11 +236,15 @@ namespace Bww {
 
   void Parser::parse()
   {
-    // read the header, handling only the strings
-    while (lex.symType() == COMMENT || lex.symType() == STRING)
+    // read the header, handling only strings and tune tempo
+    while (lex.symType() == COMMENT
+           || lex.symType() == STRING
+           || lex.symType() == TEMPO)
     {
       if (lex.symType() == STRING)
         parseString();
+      else if (lex.symType() == TEMPO)
+        parseTempo();
       else if (lex.symType() == COMMENT)
         lex.getSym();
     }
@@ -459,8 +464,8 @@ namespace Bww {
         lex.getSym(); // ignore
       else if (lex.symType() == KEY)
         lex.getSym(); // ignore
-      else if (lex.symType() == TEMPO)
-        parseTempo();
+      else if (lex.symType() == TSIG)
+        parseTSig();
       else if (lex.symType() == PART)
         parsePart(mbf, mef);
       else if (lex.symType() == BAR)
@@ -548,16 +553,36 @@ namespace Bww {
   {
     qDebug() << "Parser::parseTempo() value:" << qPrintable(lex.symValue());
 
-    QRegExp rTempo("(\\d+)_(1|2|4|8|16|32)");
+    QRegExp rTempo("^TuneTempo,(\\d+)");
 
     if (rTempo.exactMatch(lex.symValue()))
     {
       QStringList caps = rTempo.capturedTexts();
+      if (caps.size() == 2)
+      {
+        tempo = caps.at(1).toInt();
+      }
+    }
+    lex.getSym();
+  }
+  /**
+   Parse a bww tsig symbol.
+   */
+
+  void Parser::parseTSig()
+  {
+    qDebug() << "Parser::parseTSig() value:" << qPrintable(lex.symValue());
+
+    QRegExp rTSig("(\\d+)_(1|2|4|8|16|32)");
+
+    if (rTSig.exactMatch(lex.symValue()))
+    {
+      QStringList caps = rTSig.capturedTexts();
       if (caps.size() == 3)
       {
         beats = caps.at(1).toInt();
         beat  = caps.at(2).toInt();
-        wrt.tempo(beats, beat);
+        wrt.tsig(beats, beat);
       }
     }
     lex.getSym();

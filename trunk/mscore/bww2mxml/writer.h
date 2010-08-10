@@ -72,7 +72,7 @@ namespace Bww {
   public:
     virtual void header(const QString title, const QString type,
                         const QString composer, const QString footer) = 0;
-    virtual void tempo(const int beats, const int beat) = 0;
+    virtual void tsig(const int beats, const int beat) = 0;
     virtual void trailer() = 0;
     virtual void beginMeasure(const Bww::MeasureBeginFlags mbf) = 0;
     virtual void endMeasure(const Bww::MeasureEndFlags mef) = 0;
