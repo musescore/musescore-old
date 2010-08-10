@@ -2581,7 +2581,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               if(lyrics->endTick() > 0) {
                                     int endTick = lyrics->endTick() - tickStart + dstTick;
                                     lyrics->setEndTick(endTick);
-                                    }                              
+                                    }
                               Segment* segment = tick2segment(tick);
                               if (segment) {
                                     lyrics->setParent(segment);
@@ -2606,7 +2606,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     int rootTpc = transposeTpc(harmony->rootTpc(), interval, false);
                                     int baseTpc = transposeTpc(harmony->baseTpc(), interval, false);
                                     undoTransposeHarmony(harmony, rootTpc, baseTpc);
-                                    }  
+                                    }
                               int tick = harmony->tick() - tickStart + dstTick;
                               harmony->setTick(tick);
                               Measure* m = tick2measure(tick);
@@ -2926,7 +2926,7 @@ void ScoreView::cmdRepeatSelection()
 
       int dStaff = selection.staffStart();
       Segment* endSegment = selection.endSegment();
-      if (endSegment && endSegment->element(dStaff)) {
+      if (endSegment && endSegment->element(dStaff * VOICES)) {
             Element* e = endSegment->element(dStaff * VOICES);
             if (e && e->isChordRest()) {
                   ChordRest* cr = static_cast<ChordRest*>(e);
