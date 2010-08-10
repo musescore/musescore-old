@@ -1,3 +1,5 @@
+10.aug (ws)
+      - fix repeat command (ctrl+r) for staves > 1
 6.aug (ws)
       - attempt to fix font problem (quarternote looks too big in text)
 5.aug (la)
