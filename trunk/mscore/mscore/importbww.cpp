@@ -114,7 +114,7 @@ namespace Bww {
               StartStop triplet = ST_NONE,
               bool grace = false);
     void setScore(Score* s) { score = s; }
-    void tempo(const int beats, const int beat);
+    void tsig(const int beats, const int beat);
     void trailer();
   private:
     void doTriplet(Chord* cr, StartStop triplet = ST_NONE);
@@ -362,9 +362,9 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
    Store beats and beat type for later use.
    */
 
-  void MsScWriter::tempo(const int bts, const int bt)
+  void MsScWriter::tsig(const int bts, const int bt)
   {
-    qDebug() << "MsScWriter::tempo()"
+    qDebug() << "MsScWriter::tsig()"
         << "beats:" << bts
         << "beat:" << bt
         ;
