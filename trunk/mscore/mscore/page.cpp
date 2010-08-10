@@ -514,7 +514,8 @@ void PageFormat::write(Xml& xml)
       xml.tag("bottom-margin", oddBottomMargin * t);
       xml.etag();
 
-      xml.tag("page-offset", _pageOffset);
+      if (_pageOffset)
+            xml.tag("page-offset", _pageOffset);
 
       xml.etag();
       }

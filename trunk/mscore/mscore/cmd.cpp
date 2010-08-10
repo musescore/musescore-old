@@ -2790,7 +2790,7 @@ void ScoreView::cmdRepeatSelection()
 
       int dStaff = selection.staffStart();
       Segment* endSegment = selection.endSegment();
-      if (endSegment && endSegment->element(dStaff)) {
+      if (endSegment && endSegment->element(dStaff * VOICES)) {
             Element* e = endSegment->element(dStaff * VOICES);
             if (e && e->isChordRest()) {
                   ChordRest* cr = static_cast<ChordRest*>(e);
@@ -2802,8 +2802,9 @@ void ScoreView::cmdRepeatSelection()
             else
                   printf("??? %p <%s>\n", e, e ? e->name() : "");
             }
-      else
-            printf("?? %p\n", endSegment);
+      else {
+            printf("cmdRepeatSelection: endSegment: %p dStaff %d\n", endSegment, dStaff);
+            }
       }
 
 //---------------------------------------------------------

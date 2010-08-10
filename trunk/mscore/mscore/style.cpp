@@ -185,6 +185,11 @@ StyleType styleTypes[] = {
       StyleType("UpMordentAnchor",         ST_INT),
       StyleType("DownMordentAnchor",       ST_INT),
       StyleType("SnappizzicatorAnchor",    ST_INT),
+
+      StyleType("TappingAnchor",           ST_INT),
+      StyleType("SlappingAnchor",          ST_INT),
+      StyleType("PoppingAnchor",           ST_INT),
+
       StyleType("ArpeggioNoteDistance",    ST_SPATIUM),
       StyleType("ArpeggioLineWidth",       ST_SPATIUM),
       StyleType("ArpeggioHookLen",         ST_SPATIUM),
