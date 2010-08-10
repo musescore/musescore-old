@@ -32,3 +32,9 @@ Usage:
 Status:
       This is a very preliminary version. It basically extracts only the notes
       and the measure structure.
+      Supported:
+        clef, key, time signature, (dotted) notes, ties, triplets,
+        (some) strikes, doublings, slurs, throws, birls, grips and taorluaths
+      Not supported:
+        MIDINoteMappings, FrequencyMappings, InstrumentMappings, 
+        GracenoteDurations, FontSizes, TuneFormat, TuneTempo, parts

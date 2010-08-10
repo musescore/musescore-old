@@ -55,7 +55,7 @@ namespace Bww {
               StartStop triplet = ST_NONE,
               bool grace = false);
     void setOutDevice(QIODevice *outDevice) { out.setDevice(outDevice); }
-    void tempo(const int beats, const int beat);
+    void tsig(const int beats, const int beat);
     void trailer();
   private:
     static const int WHOLE_DUR = 64;                    ///< Whole note duration

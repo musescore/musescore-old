@@ -37,6 +37,7 @@ namespace Bww {
     CLEF,
     KEY,
     TEMPO,
+    TSIG,
     PART,
     BAR,
     NOTE,

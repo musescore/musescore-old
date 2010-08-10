@@ -246,9 +246,9 @@ namespace Bww {
    Store beats and beat type for later use.
    */
 
-  void MxmlWriter::tempo(const int bts, const int bt)
+  void MxmlWriter::tsig(const int bts, const int bt)
   {
-    qDebug() << "MxmlWriter::tempo()"
+    qDebug() << "MxmlWriter::tsig()"
         << "beats:" << bts
         << "beat:" << bt
         ;
