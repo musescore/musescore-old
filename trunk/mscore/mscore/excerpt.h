@@ -40,7 +40,6 @@ class Excerpt {
       Score* score() const            { return _score;  }
       void setScore(Score* s)         { _score = s; }
 
-      void write(Xml&) const;
       void read(QDomElement);
 
       bool operator!=(const Excerpt&) const;

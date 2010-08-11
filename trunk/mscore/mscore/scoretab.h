@@ -50,7 +50,6 @@ class ScoreTab : public QWidget {
 
    private slots:
       void setCurrent(int);
-      void setExcerpt(int);
 
    signals:
       void currentScoreViewChanged(ScoreView*);
@@ -58,6 +57,7 @@ class ScoreTab : public QWidget {
 
    public slots:
       void updateExcerpts();
+      void setExcerpt(int);
 
    public:
       ScoreTab(QList<Score*>*, QWidget* parent = 0);
