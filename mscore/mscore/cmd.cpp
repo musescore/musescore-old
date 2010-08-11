@@ -1821,6 +1821,8 @@ void Score::cmd(const QAction* a)
                   }
 	      else if (cmd == "add-staccato")
                   addArticulation(StaccatoSym);
+	      else if (cmd == "add-tenuto")
+                  addArticulation(TenutoSym);
 	      else if (cmd == "add-trill")
                   addArticulation(TrillSym);
             else if (cmd == "add-hairpin")

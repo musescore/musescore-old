@@ -601,6 +601,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "add-tenuto",
+         QT_TRANSLATE_NOOP("action","Add tenuto"),
+         Qt::Key_Underscore,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Tenuto"),
+         QT_TRANSLATE_NOOP("action","Add tenuto")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "add-trill",
          QT_TRANSLATE_NOOP("action","Add trill"),
 	   0,
