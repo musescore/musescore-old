@@ -627,15 +627,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
             ks->write(xml);
       foreach(const Part* part, _parts)
             part->write(xml);
-//      foreach(const Excerpt* excerpt, *excerpts())
-//            excerpt->write(xml);
 
-      // to serialize slurs/tuplets/beams, they need an id; this id is referenced
-      // in begin-end elements
-//      foreach(Element* el, _gel) {
-//            if (el->type() == SLUR)
-//                  static_cast<Slur*>(el)->setId(slurId++);
-//            }
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(xml.tupletId++);
@@ -659,8 +651,8 @@ void Score::write(Xml& xml, bool /*autosave*/)
             }
       xml.curTrack = -1;
       xml.tag("cursorTrack", _is.track());
-//      foreach(Excerpt* excerpt, _excerpts)
-//            excerpt->score()->write(xml, false);       // recursion
+      foreach(Excerpt* excerpt, _excerpts)
+            excerpt->score()->write(xml, false);       // recursion
       if (parentScore())
             xml.tag("name", name());
       xml.etag();
@@ -2298,6 +2290,7 @@ void Score::addExcerpt(Score* score)
       {
 printf("Score::addExcerpt %p\n", score);
 
+      score->setParentScore(this);
       Excerpt* ex = new Excerpt(score);
       excerpts()->append(ex);
       ex->setTitle(score->name());

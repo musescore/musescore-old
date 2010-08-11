@@ -81,6 +81,7 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
          SLOT(createExcerptClicked(QListWidgetItem*)));
       connect(partList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
          SLOT(partDoubleClicked(QListWidgetItem*)));
+      connect(partList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(partClicked(QListWidgetItem*)));
       connect(createExcerpt, SIGNAL(clicked()), SLOT(createExcerptClicked()));
       connect(title, SIGNAL(textChanged(const QString&)), SLOT(titleChanged(const QString&)));
 
@@ -202,15 +203,46 @@ void ExcerptsDialog::partDoubleClicked(QListWidgetItem* item)
       }
 
 //---------------------------------------------------------
+//   partClicked
+//---------------------------------------------------------
+
+void ExcerptsDialog::partClicked(QListWidgetItem* item)
+      {
+      QListWidgetItem* cur = excerptList->currentItem();
+      if (cur == 0)
+            return;
+      Excerpt* excerpt = static_cast<ExcerptItem*>(cur)->excerpt();
+
+      PartItem* pi = static_cast<PartItem*>(item);
+      if (item->checkState() == Qt::Checked) {
+            foreach(Part* p, *excerpt->parts()) {
+                  if (p == pi->part())
+                        return;
+                  }
+            excerpt->parts()->append(pi->part());
+           }
+      else {
+            excerpt->parts()->removeOne(pi->part());
+            }
+      }
+
+//---------------------------------------------------------
 //   createExcerptClicked
 //---------------------------------------------------------
 
 void ExcerptsDialog::createExcerptClicked()
       {
-      QListWidgetItem* cur = excerptList->currentItem();
-      if (cur == 0)
-            return;
-      createExcerptClicked(cur);
+      int n = excerptList->count();
+      for (int i = 0; i < n; ++i) {
+            QListWidgetItem* item = excerptList->item(i);
+            Excerpt* excerpt = static_cast<ExcerptItem*>(item)->excerpt();
+            if (excerpt->score()) {
+printf("  already there %d %d\n", i, n);
+                  continue;
+                  }
+printf("create %d %d\n", i, n);
+            createExcerptClicked(item);
+            }
       }
 
 //---------------------------------------------------------
@@ -219,35 +251,23 @@ void ExcerptsDialog::createExcerptClicked()
 
 void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       {
-      int n = excerptList->count();
+      Excerpt* e = static_cast<ExcerptItem*>(cur)->excerpt();
+      if (e->score())
+            return;
+      Score* nscore = ::createExcerpt(*e->parts());
+      if (nscore == 0)
+            return;
+      nscore->setParentScore(score);
+      e->setScore(score);
+      nscore->setName(e->title());
+      nscore->rebuildMidiMapping();
+      nscore->updateChannel();
+      nscore->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+      nscore->layout();
+      score->startCmd();
+      score->undo()->push(new AddExcerpt(nscore));
+      score->endCmd();
 
-      for (int k = 0; k < n; ++k) {
-            Excerpt* e = static_cast<ExcerptItem*>(excerptList->item(k))->excerpt();
-            if (e->score())
-                  continue;
-            QList<Part*> parts;
-            int n = partList->count();
-            for (int i = 0; i < n; ++i) {
-                  PartItem* pi = (PartItem*)partList->item(i);
-                  if (pi->checkState() == Qt::Checked)
-                        parts.append(pi->part());
-                  pi->setCheckState(Qt::Unchecked);
-                  }
-
-            Score* nscore = ::createExcerpt(parts);
-            if (nscore == 0)
-                  return;
-            nscore->setParentScore(score);
-            nscore->setName(e->title());
-            nscore->rebuildMidiMapping();
-            nscore->updateChannel();
-            nscore->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
-            nscore->layout();
-            score->startCmd();
-            score->undo()->push(new AddExcerpt(nscore));
-            score->endCmd();
-            e->setScore(score);
-            }
       partList->setEnabled(false);
       title->setEnabled(false);
       }
