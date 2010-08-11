@@ -1,3 +1,6 @@
+11.aug (ws)
+      - updated linked parts dialog
+      - new shortcut: underscore to enter tenuto articulation
 5.aug (la)
       - fix #6479: Crash when closing score during playback
       - fix #6597: Close/reload crash on XP
