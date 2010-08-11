@@ -37,7 +37,8 @@ namespace Bww {
   MxmlWriter::MxmlWriter()
     : beats(4),
     beat(4),
-    measureNumber(0)
+    measureNumber(0),
+    tempo(0)
   {
     qDebug() << "MxmlWriter::MxmlWriter()";
 
@@ -103,6 +104,10 @@ namespace Bww {
       out << "          <line>2</line>" << endl;
       out << "        </clef>" << endl;
       out << "      </attributes>" << endl;
+      if (tempo)
+      {
+        out << "      <sound tempo=\"" << tempo << "\"/>" << endl;
+      }
     }
   }
 
@@ -199,15 +204,21 @@ namespace Bww {
    */
 
   void MxmlWriter::header(const QString title, const QString type,
-                          const QString composer, const QString footer)
+                          const QString composer, const QString footer,
+                          const unsigned int temp)
   {
     qDebug() << "MxmlWriter::header()"
         << "title:" << title
         << "type:" << type
         << "composer:" << composer
         << "footer:" << footer
+        << "temp:" << temp
         ;
 
+    // save tempo for later use
+    tempo = temp;
+
+    // write the header
     out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
     out << "<!DOCTYPE score-partwise PUBLIC "
         << "\"-//Recordare//DTD MusicXML 2.0 Partwise//EN\" "

@@ -48,7 +48,8 @@ namespace Bww {
     void beginMeasure(const Bww::MeasureBeginFlags mbf);
     void endMeasure(const Bww::MeasureEndFlags mef);
     void header(const QString title, const QString type,
-                const QString composer, const QString footer);
+                const QString composer, const QString footer,
+                const unsigned int temp);
     void note(const QString pitch, const QString beam,
               const QString type, const int dots,
               bool tieStart = false, bool tieStop = false,
@@ -72,6 +73,7 @@ namespace Bww {
     QMap<QString, StepAlterOct> stepAlterOctMap;        ///< Map bww pitch to step/alter/oct
     QMap<QString, QString> typeMap;                     ///< Map bww note types to MusicXML
     unsigned int measureNumber;                         ///< Current measure number
+    unsigned int tempo;                                 ///< Tempo (0 = not specified)
   };
 
 } // namespace Bww

@@ -107,7 +107,8 @@ namespace Bww {
     void beginMeasure(const Bww::MeasureBeginFlags mbf);
     void endMeasure(const Bww::MeasureEndFlags mef);
     void header(const QString title, const QString type,
-                const QString composer, const QString footer);
+                        const QString composer, const QString footer,
+                        const unsigned int temp);
     void note(const QString pitch, const QString beam,
               const QString type, const int dots,
               bool tieStart = false, bool tieStop = false,
@@ -335,13 +336,15 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
    */
 
   void MsScWriter::header(const QString title, const QString type,
-                          const QString composer, const QString footer)
+                          const QString composer, const QString footer,
+                          const unsigned int temp)
   {
     qDebug() << "MsScWriter::header()"
         << "title:" << title
         << "type:" << type
         << "composer:" << composer
         << "footer:" << footer
+        << "temp:" << temp
         ;
 
 //  score->setWorkTitle(title);

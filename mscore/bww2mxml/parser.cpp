@@ -254,7 +254,7 @@ namespace Bww {
         << "composer:" << composer
         << "footer:" << footer
         ;
-    wrt.header(title, type, composer, footer);
+    wrt.header(title, type, composer, footer, tempo);
 
     // read the actual music
     if (lex.symType() != CLEF)
