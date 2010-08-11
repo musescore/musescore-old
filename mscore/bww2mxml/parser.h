@@ -57,12 +57,14 @@ namespace Bww {
     void parseSeqNotes();
     void parseString();
     void parseTempo();
+    void parseTSig();
     Lexer& lex;                         ///< The lexer
     Writer& wrt;                        ///< The writer
     QString title;                      ///< Title read from the header
     QString type;                       ///< Type read from the header
     QString composer;                   ///< Composer read from the header
     QString footer;                     ///< Footer read from the header
+    int tempo;                          ///< Tune tempo read from the header
     int beat;                           ///< Beat type, read from the clef line
     int beats;                          ///< Number of beats, read from the clef line
     QMap<QString, QString> graceMap;    ///< Map bww embellishments to separate grace notes
