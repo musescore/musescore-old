@@ -201,9 +201,9 @@ void Measure::remove(Segment* el)
       for (int track = 0; track < tracks; track += VOICES) {
             if (!el->element(track))
                   continue;
-            if (el->type() == SegClef)
+            if (el->subtype() == SegClef)
                   score()->staff(track/VOICES)->setUpdateClefList(true);
-            if (el->type() == SegKeySig)
+            if (el->subtype() == SegKeySig)
                   score()->staff(track/VOICES)->setUpdateKeymap(true);
             }
 
@@ -958,9 +958,9 @@ void Measure::add(Element* el)
                   for (int track = 0; track < tracks; track += VOICES) {
                         if (!seg->element(track))
                               continue;
-                        if (seg->type() == SegClef)
+                        if (seg->subtype() == SegClef)
                               score()->staff(track/VOICES)->setUpdateClefList(true);
-                        if (seg->type() == SegKeySig)
+                        if (seg->subtype() == SegKeySig)
                               score()->staff(track/VOICES)->setUpdateKeymap(true);
                         }
                   int t = seg->tick();
@@ -3280,26 +3280,31 @@ void Measure::layoutStage1()
             if (score()->styleB(ST_createMultiMeasureRests)) {
                   if ((repeatFlags() & RepeatStart) || (prevMeasure() && (prevMeasure()->repeatFlags() & RepeatEnd)))
                         setBreakMMRest(true);
-                  else {
-                        foreach (Element* e, *el()) {
-                              if ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
-                                    setBreakMMRest(true);
-                              else if (e->type() == TEMPO_TEXT)
-                                    setBreakMMRest(true);
-                              }
-                        if (!breakMMRest()) {
-                              // TODO: this is slow!
-#if 0  // TODO
-                              foreach(const Element* el, *score()->gel()) {
-                                    if (el->type() == VOLTA) {
-                                          const Volta* volta = static_cast<const Volta*>(el);
-                                          if (tick() >= volta->tick() && tick() <= volta->tick2()) {
-                                                setBreakMMRest(true);
-                                                break;
-                                                }
+                  else if (!breakMMRest()) {
+                        for (Segment* s = first(); s; s = s->next()) {
+                              foreach(Element* e, s->annotations()) {
+                                    if (
+                                       ((e->type() == TEXT) && (e->subtype() == TEXT_REHEARSAL_MARK))
+                                       || (e->type() == TEMPO_TEXT)
+                                       ) {
+                                          setBreakMMRest(true);
+                                          break;
                                           }
                                     }
-#endif
+                              foreach(Spanner* sp, s->spannerFor()) {
+                                    if (sp->type() == VOLTA) {
+                                          setBreakMMRest(true);
+                                          break;
+                                          }
+                                    }
+                              foreach(Spanner* sp, s->spannerBack()) {
+                                    if (sp->type() == VOLTA) {
+                                          setBreakMMRest(true);
+                                          break;
+                                          }
+                                    }
+                              if (breakMMRest())      // optimize
+                                    break;
                               }
                         }
                   }

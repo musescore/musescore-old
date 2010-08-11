@@ -37,6 +37,7 @@
 #include "tuplet.h"
 #include "chord.h"
 #include "note.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   read
@@ -65,23 +66,6 @@ void Excerpt::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Excerpt::write(Xml& xml) const
-      {
-#if 0
-      xml.stag("Excerpt");
-      xml.tag("name", _name);
-      xml.tag("title", _title);
-      const QList<Part*>* pl = score->parts();
-      foreach(Part* const part, _parts)
-            xml.tag("part", pl->indexOf(part));
-      xml.etag();
-#endif
-      }
-
-//---------------------------------------------------------
 //   operator!=
 //---------------------------------------------------------
 
@@ -95,185 +79,6 @@ bool Excerpt::operator!=(const Excerpt& e) const
             return true;
       return false;
       }
-
-#if 0
-//---------------------------------------------------------
-//   createExcerpt
-//---------------------------------------------------------
-
-Score* Score::createExcerpt(Excerpt* excerpt)
-      {
-      Score* s      = new Score(_style);
-      QFileInfo* fi = s->fileInfo();
-      QString name  = fileInfo()->path() + "/" + excerpt->name() + ".msc";
-      fi->setFile(name);
-
-      QBuffer buffer;
-      buffer.open(QIODevice::WriteOnly);
-      Xml xml(&buffer);
-      xml.excerptmode = true;
-      xml.header();
-      xml.stag("museScore version=\"" MSC_VERSION "\"");
-      writeExcerpt(excerpt, xml);
-      xml << "</museScore>\n";
-      buffer.close();
-#if 0
-      QFile mops("mops");
-      mops.open(QIODevice::WriteOnly);
-      mops.write(buffer.data());
-      mops.close();
-#endif
-      QDomDocument doc;
-      int line, column;
-      QString err;
-      if (!doc.setContent(buffer.data(), &err, &line, &column)) {
-            printf("error reading excerpt data at %d/%d\n<%s>\n",
-            line, column, err.toLatin1().data());
-            return 0;
-            }
-      docName = "--";
-      QDomElement e = doc.documentElement();
-      s->read(e);
-      if (!excerpt->title().isEmpty()) {
-            MeasureBase* measure = s->first();
-            if (!measure || (measure->type() != VBOX)) {
-                  measure = new VBox(s);
-                  measure->setTick(0);
-                  s->addMeasure(measure);
-                  }
-            Text* txt = new Text(s);
-            txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
-            txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
-            txt->setText(excerpt->title());
-            measure->add(txt);
-            }
-
-      if ((s->parts()->size() == 1)) {
-             if (!excerpt->title().isEmpty()) {
-                  // remove long instrument name and replace with 10 spaces
-                  s->parts()->front()->setLongName(QString("          "));
-                  }
-            s->parts()->front()->setShortName("");
-            }
-      //
-      // remove all brackets with span <= 1
-      //
-      foreach (Staff* staff, s->staves()) {
-            staff->cleanupBrackets();
-            }
-
-      s->renumberMeasures();
-      s->setCreated(true);
-      s->rebuildMidiMapping();
-      s->updateChannel();
-      s->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
-      s->doLayout();
-      return s;
-      }
-
-//---------------------------------------------------------
-//   writeExcerpt
-//---------------------------------------------------------
-
-void Score::writeExcerpt(Excerpt* excerpt, Xml& xml)
-      {
-      xml.tag("Division", AL::division);
-      xml.tag("Spatium", _spatium / DPMM);
-      xml.curTrack  = -1;
-      xml.trackDiff = 0;
-
-      _style.save(xml, true);
-      for (int i = 0; i < TEXT_STYLES; ++i) {
-            if (*_textStyles[i] != defaultTextStyleArray[i])
-                  _textStyles[i]->write(xml);
-            }
-      xml.tag("showInvisible", _showInvisible);
-      xml.tag("showFrames", _showFrames);
-      pageFormat()->write(xml);
-      if (rights) {
-            xml.stag("rights");
-            xml.writeHtml(rights->getHtml());
-            xml.etag();
-            }
-      if (!_movementNumber.isEmpty())
-            xml.tag("movement-number", _movementNumber);
-      if (!_movementTitle.isEmpty())
-            xml.tag("movement-title", _movementTitle);
-
-//      sigmap()->write(xml);
-      tempomap()->write(xml);
-      foreach(const Part* part, _parts) {
-            int idx = excerpt->parts()->indexOf((Part*)part);
-            if (idx != -1)
-                  part->write(xml);
-            }
-      int trackOffset[_staves.size()];
-      int idx = 0, didx = 0;
-
-      static const int HIDDEN = 100000;
-
-      foreach(Staff* staff, _staves) {
-            int i = excerpt->parts()->indexOf(staff->part());
-            if (i == -1) {
-                  trackOffset[idx] = HIDDEN;
-                  ++idx;
-                  continue;
-                  }
-            trackOffset[idx] = (didx - idx) * VOICES;
-            ++idx;
-            ++didx;
-            }
-
-      // to serialize slurs, they get an id; this id is referenced
-      // in begin-end elements
-      int slurId = 0;
-
-      xml.trackDiff = 0;
-      foreach(Element* el, _gel) {
-            int staffIdx = el->staffIdx();
-            if (el->type() == SLUR) {
-                  Slur* slur = static_cast<Slur*>(el);
-                  int staffIdx1 = slur->startElement()->staffIdx();
-                  int staffIdx2 = slur->endElement()->staffIdx();
-                  if (trackOffset[staffIdx1] == HIDDEN || trackOffset[staffIdx2] == HIDDEN)
-                        continue;
-                  xml.trackDiff = staffIdx; // slur staffIdx is always zero
-                  slur->setId(slurId++);
-                  }
-            else {
-                  if (el->track() != -1) {
-//                        if (el->type() != VOLTA) {                      // HACK
-                              if (trackOffset[staffIdx] == HIDDEN)
-                                    continue;
-                              xml.trackDiff = trackOffset[staffIdx];
-//                              }
-                        }
-                  }
-            el->write(xml);
-            }
-      xml.trackDiff = 0;
-      bool isFirstStaff = true;
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-            Part* part = staff(staffIdx)->part();
-            int idx = excerpt->parts()->indexOf(part);
-            if (idx == -1)
-                  continue;
-            xml.curTick   = 0;
-            xml.curTrack  = staffIdx * VOICES;
-            xml.trackDiff = trackOffset[staffIdx];
-            xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1 + xml.trackDiff/4));
-            for (MeasureBase* m = first(); m; m = m->next()) {
-                  if (isFirstStaff || m->type() == MEASURE)
-                        m->write(xml, staffIdx, isFirstStaff);
-                  if (m->type() == MEASURE)
-                        xml.curTick = m->tick() + m->ticks();
-                  }
-            xml.etag();
-            isFirstStaff = false;
-            }
-      xml.tag("cursorTrack", _is.track());
-      }
-#endif
 
 //---------------------------------------------------------
 //   localSetScore
@@ -571,6 +376,28 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                                 printf("cloneStave: cannot find slur\n");
                                                 }
                                           }
+                                    foreach(Element* e, oseg->annotations()) {
+                                          if (e->generated())
+                                                continue;
+                                          if ((e->track() != track) && !(e->systemFlag() && track == 0))
+                                                continue;
+                                          Element* ne = e->clone();
+                                          s->add(ne);
+                                          }
+                                    if ((track % VOICES) == 0) {
+                                          int ostaffIdx = srcTrack / VOICES;
+                                          Staff* nstaff = score->staff(track/VOICES);
+                                          if (!nstaff->useTablature()) {
+                                                const LyricsList* ll = oseg->lyricsList(ostaffIdx);
+                                                for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
+                                                      if (*i) {
+                                                            Lyrics* ly = new Lyrics(**i);
+                                                            s->add(ly);
+                                                            }
+                                                      }
+                                                }
+                                          }
+
                                     if (oe->type() == CHORD) {
                                           Chord* och = static_cast<Chord*>(ocr);
                                           Chord* nch = static_cast<Chord*>(ncr);

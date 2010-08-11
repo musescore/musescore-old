@@ -2790,9 +2790,11 @@ void ScoreView::cmdRepeatSelection()
 
       int dStaff = selection.staffStart();
       Segment* endSegment = selection.endSegment();
+      if (endSegment && endSegment->subtype() != SegChordRest)
+            endSegment = endSegment->next(SegChordRest);
       if (endSegment && endSegment->element(dStaff * VOICES)) {
             Element* e = endSegment->element(dStaff * VOICES);
-            if (e && e->isChordRest()) {
+            if (e) {
                   ChordRest* cr = static_cast<ChordRest*>(e);
                   _score->startCmd();
                   _score->pasteStaff(doc.documentElement(), cr);

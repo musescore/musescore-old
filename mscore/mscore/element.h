@@ -536,6 +536,7 @@ class Compound : public Element {
 
    public:
       Compound(Score*);
+      Compound(const Compound&);
       virtual ElementType type() const = 0;
 
       virtual void draw(QPainter&, ScoreView*) const;

@@ -460,7 +460,7 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             if (!s.isEmpty())
                   pl.append(Prop("subtype", subtypeName()));
             }
-      if (flag(ELEMENT_MOVABLE))
+      if (flag(ELEMENT_MOVABLE) && !userOff().isNull())
             pl.append(Prop("pos", pos() / spatium()));
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;
@@ -950,6 +950,14 @@ bool Line::readProperties(QDomElement e)
 Compound::Compound(Score* s)
    : Element(s)
       {
+      }
+
+Compound::Compound(const Compound& c)
+   : Element(c)
+      {
+      elemente.clear();
+      foreach(Element* e, c.elemente)
+            elemente.append(e->clone());
       }
 
 //---------------------------------------------------------

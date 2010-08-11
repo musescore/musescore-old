@@ -259,9 +259,9 @@ void GuitarPro::setTuplet(Tuplet* tuplet, int tuple)
 void GuitarPro::addDynamic(Note* note, int d)
       {
       if (d == 8) {
-            Articulation* a = new Articulation(note->score());
-            a->setSubtype(SforzatoaccentSym);
-            note->chord()->add(a);
+            // Articulation* a = new Articulation(note->score());
+            // a->setSubtype(SforzatoaccentSym);
+            // note->chord()->add(a);
             }
       else {
             printf("dynamic %d\n", d);

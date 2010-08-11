@@ -235,6 +235,8 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
                   }
 
             Score* nscore = ::createExcerpt(parts);
+            if (nscore == 0)
+                  return;
             nscore->setParentScore(score);
             nscore->setName(e->title());
             nscore->rebuildMidiMapping();
@@ -257,6 +259,8 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
 void ExcerptsDialog::titleChanged(const QString& s)
       {
       QListWidgetItem* cur = excerptList->currentItem();
+      if (cur == 0)
+            return;
       Excerpt* excerpt = ((ExcerptItem*)cur)->excerpt();
       excerpt->setTitle(s);
       cur->setText(s);

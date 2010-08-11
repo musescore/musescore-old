@@ -220,6 +220,8 @@ printf("ScoreTab::setExcerpt %d\n", n);
             return;
       int idx           = tab->currentIndex();
       TabScoreView* tsv = static_cast<TabScoreView*>(tab->tabData(idx).value<void*>());
+      if (tsv == 0)
+            return;
       tsv->part         = n;
       QSplitter* vs     = viewSplitter(idx);
       ScoreView* v;
