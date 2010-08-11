@@ -166,6 +166,10 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       setupUi(this);
       cs = 0;
 
+      QAction* a = getAction("instruments");
+      connect(a, SIGNAL(triggered()), SLOT(reject()));
+      addAction(a);
+
       instrumentList->setSelectionMode(QAbstractItemView::SingleSelection);
       partiturList->setSelectionMode(QAbstractItemView::SingleSelection);
 
@@ -208,7 +212,12 @@ void InstrumentsDialog::genPartList()
                   sli->staff    = s;
                   sli->setPartIdx(s->rstaff());
                   sli->staffIdx = s->idx();
-                  sli->setClef(s->clefList()->clef(0));
+                  if (s->useTablature())
+                        sli->setClef(CLEF_TAB);
+                  else
+                        sli->setClef(s->clefList()->clef(0));
+                  const LinkedStaves* ls = s->linkedStaves();
+                  sli->setLinked(ls && !ls->isEmpty());
                   }
             partiturList->setItemExpanded(pli, true);
             }
@@ -495,7 +504,6 @@ void MuseScore::editInstrList()
       if (rv == 0)
             return;
 
-//TODO-S      cs->setNoteEntry(false);
   	cs->inputState().setTrack(-1);
       //
       // process modified partitur list

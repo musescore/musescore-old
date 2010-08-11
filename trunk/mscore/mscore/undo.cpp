@@ -63,6 +63,7 @@
 #include "hairpin.h"
 #include "rest.h"
 #include "bend.h"
+#include "articulation.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -680,6 +681,33 @@ void Score::undoToggleInvisible(Element* e)
 
 void Score::undoAddElement(Element* element)
       {
+      if (element->type() == ARTICULATION) {
+            Articulation* a  = static_cast<Articulation*>(element);
+            Staff* ostaff    = a->staff();
+            LinkedStaves* linkedStaves = ostaff->linkedStaves();
+            if (linkedStaves) {
+                  foreach(Staff* staff, linkedStaves->staves()) {
+                        if (staff == element->staff())
+                              continue;
+                        Score* score = staff->score();
+                        Articulation* a  = static_cast<Articulation*>(element);
+                        ChordRest* cr    = static_cast<ChordRest*>(a->parent());
+                        Segment* segment = cr->segment();
+                        int tick         = segment->tick();
+                        Measure* m       = score->tick2measure(tick);
+                        Segment* seg     = m->findSegment(SegChordRest, tick);
+                        Articulation* na = a->clone();
+                        int ntrack       = score->staffIdx(staff) * VOICES + a->voice();
+                        na->setScore(score);
+                        na->setTrack(ntrack);
+                        ChordRest* ncr   = static_cast<ChordRest*>(seg->element(ntrack));
+                        na->setParent(ncr);
+                        undo()->push(new AddElement(na));
+                        score->setLayout(m);
+                        score->setUpdateAll(true);
+                        }
+                  }
+            }
       undo()->push(new AddElement(element));
       }
 
@@ -707,7 +735,7 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
                   int staffIdx = score->staffIdx(staff);
                   newcr->setTrack(staffIdx * VOICES + cr->voice());
                   newcr->setParent(seg);
-                  undoAddElement(newcr);
+                  undo()->push(new AddElement(newcr));
                   score->setLayout(m);
                   score->setUpdateAll(true);
                   }
@@ -715,10 +743,10 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
       Segment* seg = measure->findSegment(SegChordRest, tick);
       if (seg == 0) {
             seg = new Segment(measure, SegChordRest, tick);
-            undoAddElement(seg);
+            undo()->push(new AddElement(seg));
             }
       cr->setParent(seg);
-      undoAddElement(cr);
+      undo()->push(new AddElement(cr));
       cr->score()->setLayout(measure);
       cr->score()->setUpdateAll(true);
       }
@@ -729,22 +757,37 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
 
 void Score::undoRemoveElement(Element* element)
       {
-      if (element->isChordRest()) {
-            Staff* ostaff = element->staff();
-            LinkedStaves* linkedStaves = ostaff->linkedStaves();
-            if (linkedStaves) {
-                  foreach(Staff* staff, linkedStaves->staves()) {
-                        if (staff == ostaff)
-                              continue;
-                        Score* score = staff->score();
+      Staff* ostaff = element->staff();
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves) {
+            foreach(Staff* staff, linkedStaves->staves()) {
+                  if (staff == ostaff)
+                        continue;
+                  Score* score = staff->score();
+                  int staffIdx = score->staffIdx(staff);
+                  if (element->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(element);
                         Segment* segment = cr->segment();
                         Measure* measure = segment->measure();
                         Measure* m = score->tick2measure(measure->tick());
                         Segment* s = m->findSegment(segment->segmentType(), segment->tick());
-                        int staffIdx = score->staffIdx(staff);
                         Element* e = s->element(staffIdx * VOICES + element->voice());
                         undo()->push(new RemoveElement(e));
+                        }
+                  else if (element->type() == ARTICULATION) {
+                        Articulation* a  = static_cast<Articulation*>(element);
+                        Segment* segment = a->chordRest()->segment();
+                        Measure* measure = segment->measure();
+                        Measure* m       = score->tick2measure(measure->tick());
+                        Segment* s       = m->findSegment(segment->segmentType(), segment->tick());
+                        ChordRest* cr    = static_cast<ChordRest*>(s->element(staffIdx * VOICES + element->voice()));
+                        Articulation* aa;
+                        foreach(aa, *cr->getArticulations()) {
+                              if (aa->subtype() == a->subtype()) {
+                                    undo()->push(new RemoveElement(aa));
+                                    break;
+                                    }
+                              }
                         }
                   }
             }
