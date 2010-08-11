@@ -2545,8 +2545,37 @@ Element* Score::move(const QString& cmd)
       ChordRest* cr = selection().lastChordRest();
       if (selection().activeCR())
             cr = selection().activeCR();
-      if (!cr)
-            return 0;
+      if (!cr) {
+            if (selection().elements().isEmpty())
+                  return 0;
+            Element* ee = selection().elements().front();
+            Element* e = ee->parent();
+            if (e->type() == NOTE)
+                  cr = static_cast<Note*>(e)->chord();
+            else if (e->isChordRest())
+                  cr = static_cast<ChordRest*>(e);
+            else if (e->type() == SEGMENT) {
+                  Segment* segment = static_cast<Segment*>(e);
+                  if (segment->subtype() != SegChordRest) {
+                        segment = segment->next1(SegChordRest);
+                        Element* el = segment->element(ee->track());
+                        if (el == 0)
+                              return 0;
+                        if (el->type() == CHORD) {
+                              // el = static_cast<Chord*>(el)->upNote();
+                              // mscore->play(static_cast<Note*>(el));
+                              mscore->play(static_cast<Chord*>(el));
+                              }
+                        select(el, SELECT_SINGLE, 0);
+                        return el;
+                        }
+                  cr = static_cast<ChordRest*>(segment->element(ee->track()));
+                  if (cr == 0)
+                        return 0;
+                  }
+            else
+                  return 0;
+            }
 
       Element* el = 0;
       if (cmd == "next-chord") {
