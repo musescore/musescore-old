@@ -62,6 +62,7 @@
 #include "staffstate.h"
 #include "fingering.h"
 #include "bend.h"
+#include "tremolobar.h"
 
 extern bool useFactorySettings;
 
@@ -430,8 +431,14 @@ void MuseScore::populatePalette()
       bend->points().append(PitchValue(0,    0, false));
       bend->points().append(PitchValue(15, 100, false));
       bend->points().append(PitchValue(60, 100, false));
-
       sp->append(bend, qApp->translate("articulation", "Bend"));
+
+      TremoloBar* tb = new TremoloBar(gscore);
+      tb->points().append(PitchValue(0,    0, false));
+      tb->points().append(PitchValue(15, 100, false));
+      tb->points().append(PitchValue(60, 100, false));
+      sp->append(tb, qApp->translate("articulation", "Tremolo Bar"));
+
       paletteBox->addPalette(sp);
 
       //-----------------------------------

@@ -63,6 +63,7 @@
 #include "hairpin.h"
 #include "rest.h"
 #include "bend.h"
+#include "tremolobar.h"
 #include "articulation.h"
 
 extern Measure* tick2measure(int tick);
@@ -2429,6 +2430,17 @@ void RemoveExcerpt::redo()
 //---------------------------------------------------------
 
 void ChangeBend::flip()
+      {
+      QList<PitchValue> pv = bend->points();
+      bend->setPoints(points);
+      points = pv;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeTremoloBar::flip()
       {
       QList<PitchValue> pv = bend->points();
       bend->setPoints(points);

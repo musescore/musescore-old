@@ -81,7 +81,7 @@ class GuitarPro {
       QString readDelphiString();
       virtual void readBend();
       virtual void readMixChange();
-      virtual int readBeatEffects() = 0;
+      virtual int readBeatEffects(int track, Segment*) = 0;
       void readLyrics();
       void readChannels();
       void setTuplet(Tuplet* tuplet, int tuple);
@@ -119,7 +119,7 @@ class GuitarPro1 : public GuitarPro {
    protected:
       virtual void readChord(Segment*, int track);
       void readNote(int string, Note* note);
-      virtual int readBeatEffects();
+      virtual int readBeatEffects(int track, Segment*);
 
    public:
       GuitarPro1(Score* s, int v) : GuitarPro(s, v) {}
@@ -157,7 +157,7 @@ class GuitarPro4 : public GuitarPro {
       void readInfo();
       void readNote(int string, Note* note, GpNote*);
       virtual void readChord(Segment*, int track);
-      virtual int readBeatEffects();
+      virtual int readBeatEffects(int track, Segment*);
       virtual void readMixChange();
       virtual void readBend();
 
@@ -174,7 +174,7 @@ class GuitarPro5 : public GuitarPro {
 
       void readInfo();
       void readPageSetup();
-      virtual int readBeatEffects();
+      virtual int readBeatEffects(int track, Segment*);
       virtual void readBend(Note*);
       void readNote(int string, Note* note);
       virtual void readMixChange();
@@ -185,7 +185,7 @@ class GuitarPro5 : public GuitarPro {
       void readMeasures();
       int readBeat(int tick, int voice, Measure* measure, int staffIdx, Tuplet** tuplets);
       void readNoteEffects(Note*);
-      void readTremoloBar();
+      void readTremoloBar(int track, Segment*);
 
    public:
       GuitarPro5(Score* s, int v) : GuitarPro(s, v) {}
