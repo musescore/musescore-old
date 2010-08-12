@@ -1,4 +1,6 @@
-12.aug (ws)
+12.aug (lv)
+      - #5637 support reading bww files: TuneTempo
+       (ws)
       - new elements TremoloBar, Bend()
 11.aug (ws)
       - updated linked parts dialog

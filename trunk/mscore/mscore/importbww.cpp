@@ -36,6 +36,7 @@
 #include "score.h"
 #include "slur.h"
 #include "staff.h"
+#include "tempotext.h"
 #include "timesig.h"
 #include "tuplet.h"
 #include "volta.h"
@@ -94,6 +95,27 @@ static void xmlSetPitch(Note* n, char step, int alter, int octave)
       n->setTpc(tpc);
       }
 
+//---------------------------------------------------------
+//   setTempo
+//   copied and adapted from importgtp.cpp
+//   TODO: remove duplicate code
+//---------------------------------------------------------
+
+static void setTempo(Score* score, int tempo)
+      {
+      TempoText* tt = new TempoText(score);
+      tt->setTempo(double(tempo)/60.0);
+      int uc = 0x1d15f;
+      QChar h(QChar::highSurrogate(uc));
+      QChar l(QChar::lowSurrogate(uc));
+      tt->setText(QString("%1%2 = %3 ").arg(h).arg(l).arg(tempo));
+
+      tt->setTrack(0);
+      Measure* measure = score->firstMeasure();
+      Segment* segment = measure->getSegment(SegChordRest, 0);
+      segment->add(tt);
+      }
+
 namespace Bww {
 
   /**
@@ -137,6 +159,7 @@ namespace Bww {
     Measure* currentMeasure;                            ///< Current measure
     Tuplet* tuplet;                                     ///< Current tuplet
     Volta* lastVolta;                                   ///< Current volta
+    unsigned int tempo;                                 ///< Tempo (0 = not specified)
   };
 
   /**
@@ -151,7 +174,8 @@ namespace Bww {
     tick(0),
     currentMeasure(0),
     tuplet(0),
-    lastVolta(0)
+    lastVolta(0),
+    tempo(0)
   {
     qDebug() << "MsScWriter::MsScWriter()";
 
@@ -339,13 +363,16 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
                           const QString composer, const QString footer,
                           const unsigned int temp)
   {
-    qDebug() << "MsScWriter::header()"
+      qDebug() << "MsScWriter::header()"
         << "title:" << title
         << "type:" << type
         << "composer:" << composer
         << "footer:" << footer
         << "temp:" << temp
         ;
+
+      // save tempo for later use
+      tempo = temp;
 
 //  score->setWorkTitle(title);
       VBox* vbox  = 0;
@@ -367,13 +394,13 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
 
   void MsScWriter::tsig(const int bts, const int bt)
   {
-    qDebug() << "MsScWriter::tsig()"
+      qDebug() << "MsScWriter::tsig()"
         << "beats:" << bts
         << "beat:" << bt
         ;
 
-    beats = bts;
-    beat  = bt;
+      beats = bts;
+      beat  = bt;
   }
 
   /**
@@ -382,9 +409,10 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
 
   void MsScWriter::trailer()
   {
-    qDebug() << "MsScWriter::trailer()"
+      qDebug() << "MsScWriter::trailer()"
         ;
 
+      if (tempo) setTempo(score, tempo);
   }
 
   /**
@@ -393,7 +421,7 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
 
   void MsScWriter::doTriplet(Chord* cr, StartStop triplet)
   {
-    qDebug() << "MsScWriter::doTriplet(" << triplet << ")"
+      qDebug() << "MsScWriter::doTriplet(" << triplet << ")"
         ;
 
       if (triplet == ST_START) {
