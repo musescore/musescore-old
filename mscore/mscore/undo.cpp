@@ -479,11 +479,36 @@ void Score::undoChangeBeamMode(ChordRest* cr, BeamMode mode)
       }
 
 //---------------------------------------------------------
+//   findLinkedCr
+//---------------------------------------------------------
+
+static ChordRest* findLinkedCr(ChordRest* ocr, Staff* nstaff)
+      {
+      Score* score = nstaff->score();
+      Segment* segment = ocr->segment();
+      Measure* measure = segment->measure();
+      Measure* m = score->tick2measure(measure->tick());
+      Segment* s = m->findSegment(segment->segmentType(), segment->tick());
+      int staffIdx = score->staffIdx(nstaff);
+      return static_cast<ChordRest*>(s->element(staffIdx * VOICES + ocr->voice()));
+      }
+
+//---------------------------------------------------------
 //   undoChangeChordRestLen
 //---------------------------------------------------------
 
 void Score::undoChangeChordRestLen(ChordRest* cr, const Duration& d)
       {
+      Staff* ostaff = cr->staff();
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves) {
+            foreach(Staff* staff, linkedStaves->staves()) {
+                  if (staff == cr->staff())
+                        continue;
+                  ChordRest* ncr = findLinkedCr(cr, staff);
+                  undo()->push(new ChangeChordRestLen(ncr, d));
+                  }
+            }
       undo()->push(new ChangeChordRestLen(cr, d));
       }
 
@@ -705,7 +730,6 @@ void Score::undoAddElement(Element* element)
                         na->setParent(ncr);
                         undo()->push(new AddElement(na));
                         score->setLayout(m);
-                        score->setUpdateAll(true);
                         }
                   }
             }
@@ -759,31 +783,21 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
 void Score::undoRemoveElement(Element* element)
       {
       Staff* ostaff = element->staff();
-      LinkedStaves* linkedStaves = ostaff->linkedStaves();
-      if (linkedStaves) {
+      if (ostaff && ostaff->linkedStaves()) {
+            LinkedStaves* linkedStaves = ostaff->linkedStaves();
             foreach(Staff* staff, linkedStaves->staves()) {
                   if (staff == ostaff)
                         continue;
-                  Score* score = staff->score();
-                  int staffIdx = score->staffIdx(staff);
                   if (element->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(element);
-                        Segment* segment = cr->segment();
-                        Measure* measure = segment->measure();
-                        Measure* m = score->tick2measure(measure->tick());
-                        Segment* s = m->findSegment(segment->segmentType(), segment->tick());
-                        Element* e = s->element(staffIdx * VOICES + element->voice());
-                        undo()->push(new RemoveElement(e));
+                        ChordRest* ncr = findLinkedCr(cr, staff);
+                        undo()->push(new RemoveElement(ncr));
                         }
                   else if (element->type() == ARTICULATION) {
                         Articulation* a  = static_cast<Articulation*>(element);
-                        Segment* segment = a->chordRest()->segment();
-                        Measure* measure = segment->measure();
-                        Measure* m       = score->tick2measure(measure->tick());
-                        Segment* s       = m->findSegment(segment->segmentType(), segment->tick());
-                        ChordRest* cr    = static_cast<ChordRest*>(s->element(staffIdx * VOICES + element->voice()));
+                        ChordRest* ncr   = findLinkedCr(a->chordRest(), staff);
                         Articulation* aa;
-                        foreach(aa, *cr->getArticulations()) {
+                        foreach(aa, *ncr->getArticulations()) {
                               if (aa->subtype() == a->subtype()) {
                                     undo()->push(new RemoveElement(aa));
                                     break;
@@ -1752,6 +1766,7 @@ void ChangeChordRestLen::flip()
       cr->setDurationType(d);
       cr->setDuration(d.fraction());
       d   = od;
+      cr->score()->setLayout(cr->measure());
       }
 
 //---------------------------------------------------------

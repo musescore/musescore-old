@@ -144,15 +144,11 @@ int Score::pos()
 Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
-      SegmentType st = SegChordRest;
-      Segment* seg = measure->findSegment(st, tick);
-      if (seg == 0) {
-            seg = new Segment(measure, st, tick);
-            undoAddElement(seg);
-            }
-      Rest* rest = addRest(seg, track, d, tuplet);
-      if (d.type() == Duration::V_MEASURE)
-            rest->setDuration(measure->len());
+      Rest* rest       = new Rest(this, d);
+      rest->setDuration(d.type() == Duration::V_MEASURE ? measure->len() : d.fraction());
+      rest->setTrack(track);
+      rest->setTuplet(tuplet);
+      undoAddCR(rest, measure, tick);
       return rest;
       }
 

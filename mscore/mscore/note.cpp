@@ -511,15 +511,13 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   p.setFont(f);
 
                   QString s = _ghost ? "X" : QString::number(_fret);
-                  QRectF bb = bbox();
-                  double y  = bb.height() * .5;
                   double d  = spatium() * .2;
-                  bb = bb.translated(0.0, y).adjusted(-d, 0.0, d, 0.0);
+                  QRectF bb = bbox().adjusted(-d, 0.0, d, 0.0);
                   if (v)
                         v->drawBackground(p, bb);
                   else
                         p.eraseRect(bb);
-                  p.drawText(0.0, y, s);
+                  p.drawText(0.0, bbox().height() * .5, s);
                   p.scale(imag, imag);
                   }
             else {
@@ -1193,6 +1191,7 @@ void Note::layout()
             double mag = magS();
             QString s  = QString::number(_fret);
             QRectF bb(fm.tightBoundingRect(s));
+            bb = bb.translated(0.0, bb.height() * .5);
             _bbox = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
             }
       else

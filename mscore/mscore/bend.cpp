@@ -27,6 +27,16 @@
 #include "note.h"
 
 //---------------------------------------------------------
+//   label
+//---------------------------------------------------------
+
+static const char* label[] = {
+      "", "1/4", "1/2", "3/4", "full",
+      "1 1/4", "1 1/2", "1 3/4", "2",
+      "2 1/4", "2 1/2", "2 3/4", "3"
+      };
+
+//---------------------------------------------------------
 //   Bend
 //---------------------------------------------------------
 
@@ -49,67 +59,98 @@ void Bend::layout()
                   noteWidth = -_spatium*2;
                   notePos   = QPointF(0.0, _spatium*3);
                   }
-            return;
             }
 
-      QPainterPath path;
-      _lw             = _spatium * 0.1;
-      Note* note      = static_cast<Note*>(parent());
+      _lw        = _spatium * 0.1;
+      Note* note = static_cast<Note*>(parent());
       if (note == 0) {
             noteWidth = 0.0;
             notePos = QPointF();
-            return;
             }
-      noteWidth = note->width();
+      else {
+            notePos = note->pos();
+            noteWidth = note->width();
+            }
+      QRectF bb;
+
+      TextStyle* st = score()->textStyle(TEXT_STYLE_BENCH);
+      QFont f = st->fontPx(_spatium);
+      QFontMetricsF fm(f);
+
       int n    = _points.size();
       int pt   = 0;
-      double x = noteWidth * .5;
-      notePos  = note->pos();
-      double y = notePos.y() - _spatium;
+      double x = noteWidth;
+      double y = -_spatium * .8;
       double x2, y2;
-      QPolygonF arrowUp;
+
       double aw = _spatium * .5;
-      arrowUp << QPointF(0, 0) << QPointF(aw, aw) << QPointF(-aw, aw);
+      QPolygonF arrowUp;
+      arrowUp << QPointF(0, 0) << QPointF(aw*.5, aw) << QPointF(-aw*.5, aw);
+      QPolygonF arrowDown;
+      arrowDown << QPointF(0, 0) << QPointF(aw*.5, -aw) << QPointF(-aw*.5, -aw);
 
       for (int pt = 0; pt < n; ++pt) {
             if (pt == (n-1))
                   break;
-            if (_points[pt].pitch == _points[pt+1].pitch) {
+            int pitch = _points[pt].pitch;
+            if (pt == 0 && pitch) {
+                  y2 = -notePos.y() -_spatium * 2;
+                  x2 = x;
+                  bb |= QRectF(x, y, x2-x, y2-y);
+
+                  bb |= arrowUp.translated(x2, y2 + _spatium * .2).boundingRect();
+
+                  int idx = (pitch + 12)/25;
+                  const char* l = label[idx];
+                  bb |= fm.boundingRect(QRectF(x2, y2, 0, 0),
+                     Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip, QString(l));
+                  y = y2;
+                  }
+            if (pitch == _points[pt+1].pitch) {
                   if (pt == (n-2))
                         break;
-                  path.moveTo(x, y);
                   x2 = x + _spatium;
                   y2 = y;
-                  path.lineTo(x2, y2);
+                  bb |= QRectF(x, y, x2-x, y2-y);
                   }
-            else if (_points[pt].pitch < _points[pt+1].pitch) {
+            else if (pitch < _points[pt+1].pitch) {
                   // up
                   x2 = x + _spatium*.5;
-                  y2 = -_spatium * 2;
+                  y2 = -notePos.y() -_spatium * 2;
                   double dx = x2 - x;
                   double dy = y2 - y;
+
+                  QPainterPath path;
                   path.moveTo(x, y);
                   path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
-                  path.cubicTo(x+dx/2, y, x2, y+dy/4, x, y);
-                  path.closeSubpath();
+                  bb |= path.boundingRect();
 
-                  path.addPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
-                  path.closeSubpath();
+                  bb |= arrowUp.translated(x2, y2 + _spatium * .2).boundingRect();
+
+                  int idx = (_points[pt+1].pitch + 12)/25;
+                  const char* l = label[idx];
+                  QRectF r;
+                  bb |= fm.boundingRect(QRectF(x2, y2, 0, 0),
+                     Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip, QString(l));
                   }
             else {
                   // down
-                  path.moveTo(x, y);
                   x2 = x + _spatium*.5;
                   y2 = y + _spatium * 3;
                   double dx = x2 - x;
                   double dy = y2 - y;
+
+                  QPainterPath path;
+                  path.moveTo(x, y);
                   path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
+                  bb |= path.boundingRect();
+
+                  bb |= arrowDown.translated(x2, y2 - _spatium * .2).boundingRect();
                   }
             x = x2;
             y = y2;
             }
 
-      QRectF bb = path.boundingRect();
       bb.adjust(-_lw, -_lw, _lw, _lw);
       setbbox(bb);
       }
@@ -145,12 +186,6 @@ void Bend::draw(QPainter& p, ScoreView*) const
       arrowUp << QPointF(0, 0) << QPointF(aw*.5, aw) << QPointF(-aw*.5, aw);
       QPolygonF arrowDown;
       arrowDown << QPointF(0, 0) << QPointF(aw*.5, -aw) << QPointF(-aw*.5, -aw);
-
-      static const char* label[] = {
-            "", "1/4", "1/2", "3/4", "full",
-            "1 1/4", "1 1/2", "1 3/4", "2",
-            "2 1/4", "2 1/2", "2 3/4", "3"
-            };
 
       for (int pt = 0; pt < n; ++pt) {
             if (pt == (n-1))
