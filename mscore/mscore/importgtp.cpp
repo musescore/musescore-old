@@ -44,6 +44,7 @@
 #include "keysig.h"
 #include "harmony.h"
 #include "bend.h"
+#include "tremolobar.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -570,7 +571,7 @@ printf("key %d octave %d\n", key, octave);
                               segment->add(l);
                               }
                         if (beatBits & 0x8)
-                              readBeatEffects();
+                              readBeatEffects(staffIdx * VOICES, segment);
                         if (beatBits & 0x10)
                               readMixChange();
                         int strings = readUChar();   // used strings mask
@@ -876,7 +877,7 @@ printf("BeginRepeat=============================================\n");
                               segment->add(l);
                               }
                         if (beatBits & 0x8)
-                              readBeatEffects();
+                              readBeatEffects(staffIdx * VOICES, segment);
                         if (beatBits & 0x10)
                               readMixChange();
                         int strings = readUChar();   // used strings mask
@@ -1074,7 +1075,7 @@ void GuitarPro1::readNote(int string, Note* note)
 //   readBeatEffects
 //---------------------------------------------------------
 
-int GuitarPro1::readBeatEffects()
+int GuitarPro1::readBeatEffects(int, Segment*)
       {
 printf("1readBeatEffects\n");
       uchar fxBits1 = readUChar();
@@ -1374,7 +1375,7 @@ printf("bar %d beat %d beat bits %02x\n", bar, beat, beatBits);
                               segment->add(l);
                               }
                         if (beatBits & 0x8)
-                              readBeatEffects();
+                              readBeatEffects(staffIdx * VOICES, segment);
                         if (beatBits & 0x10)
                               readMixChange();
                         int strings = readUChar();   // used strings mask
@@ -1503,7 +1504,7 @@ printf("readMixChange patch:%d vol:%d pan:%d chorus:%d reverb:%d phase:%d tremol
 //   readBeatEffects
 //---------------------------------------------------------
 
-int GuitarPro4::readBeatEffects()
+int GuitarPro4::readBeatEffects(int, Segment*)
       {
       int effects = 0;
       uchar fxBits1 = readUChar();
@@ -1916,7 +1917,7 @@ printf("bars %d tracks %d\n", measures, staves);
                               segment->add(l);
                               }
                         if (beatBits & 0x8)
-                              readBeatEffects();
+                              readBeatEffects(staffIdx * VOICES, segment);
                         if (beatBits & 0x10)
                               readMixChange();
                         int strings = readUChar();   // used strings mask
@@ -2219,9 +2220,9 @@ void GuitarPro5::readBend(Note* note)
 
       QList<PitchValue> points;
       for (int i = 0; i < n; ++i) {
-            int time  = readInt();                    // time
-            int pitch = readInt();                    // pitch
-            int vibrato = readUChar();                // vibrato
+            int time  = readInt();
+            int pitch = readInt();
+            int vibrato = readUChar();
             points.append(PitchValue(time, pitch, vibrato));
             }
       Bend* b = new Bend(note->score());
@@ -2234,23 +2235,34 @@ void GuitarPro5::readBend(Note* note)
 //   readTremoloBar
 //---------------------------------------------------------
 
-void GuitarPro5::readTremoloBar()
+void GuitarPro5::readTremoloBar(int track, Segment* segment)
       {
-      skip(5);
-      int n = readInt();
-printf("5readTremoloBar() n=%d\n", n);
+      int a1 = readChar();
+      int a2 = readChar();
+      int a3 = readChar();
+      int a4 = readChar();
+      int a5 = readChar();
+      int n  = readInt();
+printf("readTremoloBar() n=%d  %d %d %d %d %d\n", n, a1, a2, a3, a4, a5);
+
+      QList<PitchValue> points;
       for (int i = 0; i < n; ++i) {
-            readInt();                    // time
-            readInt();                    // pitch
-            readUChar();
+            int time    = readInt();
+            int pitch   = readInt();
+            int vibrato = readUChar();
+            points.append(PitchValue(time, pitch, vibrato));
             }
+      TremoloBar* b = new TremoloBar(segment->score());
+      b->setPoints(points);
+      b->setTrack(track);
+      segment->add(b);
       }
 
 //---------------------------------------------------------
 //   readBeatEffects
 //---------------------------------------------------------
 
-int GuitarPro5::readBeatEffects()
+int GuitarPro5::readBeatEffects(int track, Segment* segment)
       {
       int effects = 0;
 
@@ -2264,7 +2276,7 @@ printf("5readBeatEffects %02x %02x\n", fxBits1, fxBits2);
             // 3 - popping
             }
       if (fxBits2 & 0x04)
-            readTremoloBar();       // readBend();
+            readTremoloBar(track, segment);       // readBend();
       if (fxBits1 & 0x40) {
             int a = readChar();     // down stroke length
             int b = readChar();     // up stroke length
@@ -2321,7 +2333,7 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
             }
       int beatEffects = 0;
       if (beatBits & 0x8)
-            beatEffects = readBeatEffects();
+            beatEffects = readBeatEffects(staffIdx * VOICES + voice, segment);
       if (beatBits & 0x10)
             readMixChange();
 

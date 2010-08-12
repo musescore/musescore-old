@@ -73,6 +73,7 @@
 #include "staffstate.h"
 #include "fingering.h"
 #include "bend.h"
+#include "tremolobar.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -113,6 +114,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Harmony"),
       QT_TRANSLATE_NOOP("elementName", "FretDiagram"),
       QT_TRANSLATE_NOOP("elementName", "Bend"),
+      QT_TRANSLATE_NOOP("elementName", "TremoloBar"),
       QT_TRANSLATE_NOOP("elementName", "Volta"),
       QT_TRANSLATE_NOOP("elementName", "HairpinSegment"),
       QT_TRANSLATE_NOOP("elementName", "OttavaSegment"),
@@ -1286,6 +1288,7 @@ Element* Element::create(ElementType type, Score* score)
             case HARMONY:           return new Harmony(score);
             case FRET_DIAGRAM:      return new FretDiagram(score);
             case BEND:              return new Bend(score);
+            case TREMOLOBAR:        return new TremoloBar(score);
             case LYRICS:            return new Lyrics(score);
             case STEM:              return new Stem(score);
             case SLUR:              return new Slur(score);
@@ -1373,6 +1376,7 @@ const char* Element::name(ElementType type)
             case HARMONY:           return "Harmony";
             case FRET_DIAGRAM:      return "FretDiagram";
             case BEND:              return "Bend";
+            case TREMOLOBAR:        return "TremoloBar";
             case VOLTA:             return "Volta";
             case HAIRPIN_SEGMENT:   return "HairpinSegment";
             case OTTAVA_SEGMENT:    return "OttavaSegment";

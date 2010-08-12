@@ -87,7 +87,7 @@ QT4_WRAP_UI (ui_headers
       dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
       harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
-      sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui
+      sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -105,7 +105,7 @@ QT4_WRAP_CPP (mocs
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
       pianoscene.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h stafftype.h
-      prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h
+      prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -190,7 +190,7 @@ add_executable ( ${ExecutableName}
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
       importove.cpp ove.cpp interval.cpp check.cpp tablature.cpp
       fret.cpp stafftype.cpp staffstate.cpp spanner.cpp fingering.cpp
-      shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp
+      shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp tremolobar.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

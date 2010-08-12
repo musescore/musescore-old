@@ -71,6 +71,7 @@ class Clef;
 class Image;
 class Hairpin;
 class Bend;
+class TremoloBar;
 
 // #define DEBUG_UNDO
 
@@ -1426,6 +1427,23 @@ class ChangeBend : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeBend");
+      };
+
+//---------------------------------------------------------
+//   ChangeTremoloBar
+//---------------------------------------------------------
+
+class ChangeTremoloBar : public UndoCommand {
+      TremoloBar* bend;
+      QList<PitchValue> points;
+
+      void flip();
+
+   public:
+      ChangeTremoloBar(TremoloBar* b, QList<PitchValue> p) : bend(b), points(p) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeTremoloBar");
       };
 
 #endif
