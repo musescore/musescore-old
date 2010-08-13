@@ -760,8 +760,7 @@ MuseScore::MuseScore()
       menuStyle->setObjectName("Style");
       menuStyle->addAction(getAction("edit-style"));
       menuStyle->addAction(getAction("edit-text-style"));
-      if (enableExperimental)
-            menuStyle->addAction(getAction("edit-harmony"));
+      menuStyle->addAction(getAction("edit-harmony"));
       menuStyle->addSeparator();
       menuStyle->addAction(getAction("load-style"));
       menuStyle->addAction(getAction("save-style"));
@@ -3031,17 +3030,17 @@ bool MuseScore::restoreSession(bool always)
                                     else if (tag == "dirty")
                                           dirty = val.toInt();
                                     else if (tag == "path") {
-//                                          printf("restore <%s>\n", qPrintable(val));
+printf("restore <%s>\n", qPrintable(val));
                                           Score* score = new Score(defaultStyle);
                                           if (!score->read(val)) {
-                                                printf("failed to restore <%s>\n", qPrintable(val));
+printf("failed to restore <%s>\n", qPrintable(val));
                                                 delete score;
                                                 f.close();
                                                 return false;
                                                 }
                                           else {
                                                 if (!name.isEmpty()) {
-//                                                      printf("set name <%s>\n", qPrintable(name));
+printf("set name <%s>\n", qPrintable(name));
                                                       score->setName(name);
                                                       }
                                                 appendScore(score);
@@ -3102,7 +3101,9 @@ bool MuseScore::restoreSession(bool always)
                   return false;
                   }
             }
-      setCurrentView(tab, idx);
+printf("setCurrentView noScore %d  tab %d idx %d\n", mscore->noScore(), tab, idx);
+//      setCurrentView(tab, idx);
+      setCurrentView(tab, -1);
       f.close();
       return true;
       }

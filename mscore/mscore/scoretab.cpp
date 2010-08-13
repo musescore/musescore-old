@@ -98,8 +98,13 @@ QSplitter* ScoreTab::viewSplitter(int n) const
                   score = excerpts->at(tsv->part - 1)->score();
             }
 
-      for (int i = 0; i < stack->count(); ++i) {
+      int nn = stack->count();
+      for (int i = 0; i < nn; ++i) {
             QSplitter* sp = static_cast<QSplitter*>(stack->widget(i));
+            if (sp->count() == 0) {
+                  printf("splitter count == 0\n");
+                  return 0;
+                  }
             ScoreView* v = static_cast<ScoreView*>(sp->widget(0));
             if (v->score() == score)
                   return sp;
@@ -299,7 +304,8 @@ void ScoreTab::removeTab(int idx)
       Score* score = tsv->score;
 
       for (int i = 0; i < stack->count(); ++i) {
-            ScoreView* v = static_cast<ScoreView*>(stack->widget(i));
+            QSplitter* vs = static_cast<QSplitter*>(stack->widget(i));
+            ScoreView* v = static_cast<ScoreView*>(vs->widget(0));
             if (v->score() == score) {
                   stack->takeAt(i);
                   delete v;
@@ -322,9 +328,11 @@ void ScoreTab::initScoreView(int idx, double mag, int magIdx, double xoffset, do
       {
       ScoreView* v = view(idx);
       if (!v)  {
+            QSplitter* vs = new QSplitter;
             v = new ScoreView;
+            vs->addWidget(v);
             v->setScore(scoreList->value(idx));
-            stack->addWidget(v);
+            stack->addWidget(vs);
             }
       v->setMag(magIdx, mag);
       v->setOffset(xoffset, yoffset);

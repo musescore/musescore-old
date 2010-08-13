@@ -955,10 +955,8 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       a->setEnabled(staff->part()->instr()->drumset() != 0);
 
       if (staff->part()->instr()->drumset()) {
-            if (enableExperimental) {
-                  a = popup->addAction(tr("Drumroll Editor..."));
-                  a->setData("drumroll");
-                  }
+            a = popup->addAction(tr("Drumroll Editor..."));
+            a->setData("drumroll");
             }
       else {
             a = popup->addAction(tr("Pianoroll Editor..."));
