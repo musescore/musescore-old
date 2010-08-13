@@ -163,7 +163,7 @@ Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
       rest->setTrack(track);
       rest->setParent(s);
       rest->setTuplet(tuplet);
-      cmdAdd(rest);
+      undoAddElement(rest);
       return rest;
       }
 
@@ -329,7 +329,7 @@ Note* Score::addNote(Chord* chord, int pitch)
       note->setTrack(chord->track());
       note->setPitch(pitch);
       note->setTpcFromPitch();
-      cmdAdd(note);
+      undoAddElement(note);
       mscore->play(chord);
       setLayout(chord->measure());
       select(note, SELECT_SINGLE, 0);
@@ -935,7 +935,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       pin->setStartElement(cr1->segment());
       pin->setEndElement(cr2->segment());
 //      pin->layout();
-      cmdAdd(pin);
+      undoAddElement(pin);
       if (!noteEntryMode())
             select(pin, SELECT_SINGLE, 0);
       }
@@ -1082,6 +1082,10 @@ void Score::deleteItem(Element* el)
                         break;
                         }
 
+            case TIMESIG:
+                  cmdRemoveTimeSig(static_cast<TimeSig*>(el));
+                  break;
+
             case SYMBOL:
             case COMPOUND:
             case DYNAMIC:
@@ -1104,11 +1108,10 @@ void Score::deleteItem(Element* el)
             case STAFF_TEXT:
             case SPACER:
             case KEYSIG:
-            case TIMESIG:
             case FRET_DIAGRAM:
             case BEND:
             case FINGERING:
-                  cmdRemove(el);
+                  undoRemoveElement(el);
                   break;
 
             case HBOX:
@@ -1194,7 +1197,6 @@ printf("remove Segment %p %s\n", seg, seg->subTypeName());
                   Measure* measure = static_cast<Measure*>(el);
                   undoRemoveElement(el);
                   cmdRemoveTime(measure->tick(), measure->ticks());
-//                  cmdRemoveGlobals(measure->tick(), measure->tick() + measure->ticks(), 0, staves());
                   }
                   break;
 

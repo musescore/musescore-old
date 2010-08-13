@@ -364,13 +364,13 @@ Element* HBox::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
                         }
                   lb->setTrack(-1);       // this are system elements
                   lb->setParent(this);
-                  score()->cmdAdd(lb);
+                  score()->undoAddElement(lb);
                   return lb;
                   }
             default:
                   e->setParent(this);
                   score()->select(e, SELECT_SINGLE, 0);
-                  score()->cmdAdd(e);
+                  score()->undoAddElement(e);
                   return e;
             }
       return 0;

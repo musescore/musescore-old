@@ -407,7 +407,6 @@ void Segment::add(Element* el)
             case JUMP:
             case IMAGE:
             case TEXT:
-            case TREMOLOBAR:
                   _annotations.append(el);
                   break;
 
@@ -523,7 +522,6 @@ void Segment::remove(Element* el)
             case JUMP:
             case IMAGE:
             case TEXT:
-            case TREMOLOBAR:
                   _annotations.removeOne(el);
                   break;
 

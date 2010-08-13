@@ -287,8 +287,8 @@ Element* Bracket::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
             b->setTrack(track());
             b->setSpan(span());
             b->setLevel(level());
-            score()->cmdRemove(this);
-            score()->cmdAdd(b);
+            score()->undoRemoveElement(this);
+            score()->undoAddElement(b);
             return b;
             }
       delete e;

@@ -27,6 +27,7 @@
 #include "ui_tupletproperties.h"
 
 class Text;
+class Slur;
 
 //------------------------------------------------------------------------
 //   Tuplet
@@ -106,7 +107,7 @@ class Tuplet : public DurationElement {
       virtual void layout();
       Text* number() const { return _number; }
 
-      void read(QDomElement, const QList<Tuplet*>&);
+      void read(QDomElement, const QList<Tuplet*>&, const QList<Slur*>&);
       void write(Xml&) const;
 
       virtual void toDefault();

@@ -2250,6 +2250,7 @@ printf("readTremoloBar() n=%d  %d %d %d %d %d\n", n, a1, a2, a3, a4, a5);
             int time    = readInt();
             int pitch   = readInt();
             int vibrato = readUChar();
+            printf("   time %d  pitch %d vibrato %d\n", time, pitch, vibrato);
             points.append(PitchValue(time, pitch, vibrato));
             }
       TremoloBar* b = new TremoloBar(segment->score());

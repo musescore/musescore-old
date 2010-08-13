@@ -892,7 +892,7 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                         atr->setParent(ch);
                         atr->setTrack(track());
                         score()->select(atr, SELECT_SINGLE, 0);
-                        score()->cmdAdd(atr);
+                        score()->undoAddElement(atr);
                         }
                   return atr;
                   }
@@ -923,7 +923,7 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   e->setTrack((track() / VOICES) * VOICES);
                   e->setParent(ch->segment());
                   score()->select(e, SELECT_SINGLE, 0);
-                  score()->cmdAdd(e);
+                  score()->undoAddElement(e);
                   return e;
 
             case ACCIDENTAL:

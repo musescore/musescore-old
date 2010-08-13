@@ -80,13 +80,13 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                               lb->setSubtype(LAYOUT_BREAK_LINE);
                               lb->setTrack(-1);       // this are system elements
                               lb->setParent(measure);
-                              score->cmdAdd(lb);
+                              score->undoAddElement(lb);
                               }
                         else {
                               // remove line break
                               foreach(Element* e, *measure->el()) {
                                     if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {
-                                          measure->score()->cmdRemove(e);
+                                          measure->score()->undoRemoveElement(e);
                                           }
                                     }
                               }

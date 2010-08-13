@@ -1547,14 +1547,14 @@ printf("drop staffList\n");
             case JUMP:
                   e->setParent(seg);
                   e->setTrack(0);
-                  score()->cmdAdd(e);
+                  score()->undoAddElement(e);
                   break;
 
             case DYNAMIC:
             case FRET_DIAGRAM:
                   e->setParent(seg);
                   e->setTrack(staffIdx * VOICES);
-                  score()->cmdAdd(e);
+                  score()->undoAddElement(e);
                   break;
 
             case SYMBOL:
@@ -1565,14 +1565,14 @@ printf("drop staffList\n");
                   QPointF uo(p - e->canvasPos() - dragOffset);
                   e->setUserOff(uo);
                   }
-                  score()->cmdAdd(e);
+                  score()->undoAddElement(e);
                   break;
 
             case BRACKET:
                   e->setTrack(staffIdx * VOICES);
                   e->setParent(system());
                   static_cast<Bracket*>(e)->setLevel(-1);  // add bracket
-                  score()->cmdAdd(e);
+                  score()->undoAddElement(e);
                   break;
 
             case CLEF:
@@ -1630,7 +1630,7 @@ printf("drop staffList\n");
                         }
                   lb->setTrack(-1);       // this are system elements
                   lb->setParent(this);
-                  score()->cmdAdd(lb);
+                  score()->undoAddElement(lb);
                   return lb;
                   }
 
@@ -1639,7 +1639,7 @@ printf("drop staffList\n");
                   Spacer* spacer = static_cast<Spacer*>(e);
                   spacer->setTrack(staffIdx * VOICES);
                   spacer->setParent(this);
-                  score()->cmdAdd(spacer);
+                  score()->undoAddElement(spacer);
                   return spacer;
                   }
 
@@ -2167,7 +2167,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "Chord") {
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
-                  chord->read(e, _tuplets);
+                  chord->read(e, _tuplets, score()->slurs);
                   if (chord->tremolo() && chord->tremolo()->twoNotes()) {
                         //
                         // search first note of tremolo
@@ -2211,7 +2211,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "Note") {
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
-                  chord->readNote(e, _tuplets);
+                  chord->readNote(e, _tuplets, score()->slurs);
                   Segment* s = getSegment(chord, score()->curTick);
                   s->add(chord);
                   score()->curTick += chord->ticks();
@@ -2219,7 +2219,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "Rest") {
                   Rest* rest = new Rest(score());
                   rest->setTrack(score()->curTrack);
-                  rest->read(e, _tuplets);
+                  rest->read(e, _tuplets, score()->slurs);
 // printf("   Rest %d %d\n", score()->curTick, rest->track());
                   Segment* s = getSegment(rest, score()->curTick);
                   s->add(rest);
@@ -2272,7 +2272,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "RepeatMeasure") {
                   RepeatMeasure* rm = new RepeatMeasure(score());
                   rm->setTrack(score()->curTrack);
-                  rm->read(e, _tuplets);
+                  rm->read(e, _tuplets, score()->slurs);
                   Segment* s = getSegment(SegChordRest, score()->curTick);
                   s->add(rm);
                   score()->curTick += ticks();
@@ -2393,7 +2393,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   tuplet->setTick(score()->curTick);
                   tuplet->setTrack(score()->curTrack);
                   tuplet->setParent(this);
-                  tuplet->read(e, _tuplets);
+                  tuplet->read(e, _tuplets, score()->slurs);
                   add(tuplet);
                   }
             else if (tag == "startRepeat")

@@ -161,16 +161,6 @@ void Score::end()
       }
 
 //---------------------------------------------------------
-//   cmdAdd
-//---------------------------------------------------------
-
-void Score::cmdAdd(Element* e)
-      {
-      undoAddElement(e);
-      layoutAll = true;
-      }
-
-//---------------------------------------------------------
 //   cmdAddSpanner
 //   drop VOLTA, OTTAVA, TRILL, PEDAL, DYNAMIC
 //        HAIRPIN, and TEXTLINE
@@ -225,32 +215,8 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& d
       ls->setUserOff(uo);
 #endif
 
-      cmdAdd(spanner);
+      undoAddElement(spanner);
       select(spanner, SELECT_SINGLE, 0);
-      }
-
-//---------------------------------------------------------
-//   cmdRemove
-//---------------------------------------------------------
-
-void Score::cmdRemove(Element* e)
-      {
-      switch(e->type()) {
-            case TIMESIG:
-                  cmdRemoveTimeSig(static_cast<TimeSig*>(e));
-                  break;
-
-            default:
-                  {
-                  Segment* seg = 0;
-                  if (e->parent()->type() == SEGMENT)
-                        seg = (Segment*) e->parent();
-                  undoRemoveElement(e);
-                  if (seg && seg->isEmpty())
-                        undoRemoveElement(seg);
-                  }
-                  break;
-            }
       }
 
 //---------------------------------------------------------
@@ -467,7 +433,7 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
             int ntpc   = pitch2tpc(npitch, key);
             note->setPitch(npitch, ntpc);
 
-            cmdAdd(note);
+            undoAddElement(note);
             mscore->play(note);
             setLayout(on->chord()->measure());
 
@@ -487,48 +453,60 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
 ///   \len is the visual duration of the grace note (1/16 or 1/32)
 //---------------------------------------------------------
 
-void Score::setGraceNote(Chord* chord, int pitch, NoteType type, int len)
+void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
       {
-      Segment* seg     = chord->segment();
-      Measure* measure = seg->measure();
-      int tick         = chord->tick();
-      int track        = chord->track();
+      Staff* ostaff = ch->staff();
+      QList<Staff*> staffList;
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves)
+            staffList = linkedStaves->staves();
+      else
+            staffList.append(ostaff);
 
-      SegmentType st = SegGrace;
-      Segment* s = seg->prev();
+      int tick = ch->segment()->tick();
 
-      while (s && s->subtype() == st && s->element(track))
-            s = s->prev();
-      if (s && (s->subtype() == st) && (!s->element(track)))
-            seg = s;
-      else {
-            seg = new Segment(measure, st, tick);
-            undoAddElement(seg);
+      foreach(Staff* staff, staffList) {
+            Score* score     = staff->score();
+            Measure* measure = score->tick2measure(tick);
+            Segment* seg     = measure->findSegment(SegChordRest, tick);
+            int track        = score->staffIdx(staff) * VOICES + ch->voice();
+
+            SegmentType st = SegGrace;
+            Segment* s     = seg->prev();
+
+            while (s && s->subtype() == st && s->element(track))
+                  s = s->prev();
+            if (s && (s->subtype() == st) && (!s->element(track)))
+                  seg = s;
+            else {
+                  seg = new Segment(measure, st, tick);
+                  undo()->push(new AddElement(seg));
+                  }
+            double mag = staff->mag() * styleD(ST_graceNoteMag);
+
+            Note* note = new Note(score);
+            note->setTrack(track);
+            note->setMag(mag);
+            note->setPitch(pitch);
+            note->setTpcFromPitch();
+
+            Chord* chord = new Chord(score);
+            chord->setTrack(track);
+            chord->add(note);
+
+            Duration d;
+            d.setVal(len);
+            chord->setDurationType(d);
+            chord->setDuration(d.fraction());
+            chord->setStemDirection(UP);
+            chord->setNoteType(type);
+            chord->setParent(seg);
+            chord->setMag(mag);
+
+            undoAddElement(chord);
+            if (staff == ostaff)
+                  select(note, SELECT_SINGLE, 0);
             }
-      double mag = staff(track/VOICES)->mag() * styleD(ST_graceNoteMag);
-
-      Note* note = new Note(this);
-      note->setTrack(track);
-      note->setMag(mag);
-
-      chord = new Chord(this);
-      chord->setTrack(track);
-      chord->add(note);
-      note->setPitch(pitch);
-      note->setTpcFromPitch();
-
-      Duration d;
-      d.setVal(len);
-      chord->setDurationType(d);
-      chord->setDuration(d.fraction());
-
-      chord->setStemDirection(UP);
-      chord->setNoteType(type);
-      chord->setParent(seg);
-      chord->setMag(mag);
-
-      undoAddElement(chord);
-      select(note, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------
@@ -1521,14 +1499,14 @@ void Score::changeAccidental(Note* note, int accidental)
             if (note->userAccidental() != ACC_NONE) {
                   note->setUserAccidental(ACC_NONE);
                   if (note->accidental())
-                        cmdRemove(note->accidental());
+                        undoRemoveElement(note->accidental());
                   undoChangePitch(note, note->pitch(), note->tpc(), ACC_NONE, note->line(), note->fret());
                   return;
                   }
             if (note->accidentalType() == ACC_NATURAL)
                   acc = chord->measure()->findAccidental2(note);
             if (note->accidental())
-                  cmdRemove(note->accidental());
+                  undoRemoveElement(note->accidental());
             }
       //
       // accidental change may result in pitch change
@@ -1547,9 +1525,9 @@ void Score::changeAccidental(Note* note, int accidental)
       // handle ties
       //
       if (note->tieBack()) {
-            cmdRemove(note->tieBack());
+            undoRemoveElement(note->tieBack());
             if (note->tieFor())
-                  cmdRemove(note->tieFor());
+                  undoRemoveElement(note->tieFor());
             }
       else {
             Note* n = note;
@@ -1582,10 +1560,10 @@ void Score::addArticulation(Element* el, Articulation* atr)
       if (oa) {
             delete atr;
             atr = 0;
-            cmdRemove(oa);
+            undoRemoveElement(oa);
             }
       else
-            cmdAdd(atr);
+            undoAddElement(atr);
       }
 
 //---------------------------------------------------------
@@ -2028,13 +2006,13 @@ void Score::cmd(const QAction* a)
                               lb->setSubtype(type);
                               lb->setTrack(-1);       // this are system elements
                               lb->setParent(measure);
-                              cmdAdd(lb);
+                              undoAddElement(lb);
                               }
                         else {
                               // remove line break
                               foreach(Element* e, *measure->el()) {
                                     if (e->type() == LAYOUT_BREAK && e->subtype() ==type) {
-                                          cmdRemove(e);
+                                          undoRemoveElement(e);
                                           break;
                                           }
                                     }
@@ -2228,7 +2206,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             }
 
       int dstStaffStart = dst->staffIdx();
-//      curTick = 0;
       int dstTick = dst->tick();
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() != "StaffList") {
@@ -2259,6 +2236,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   if (dstStaffIdx >= nstaves())
                         break;
                   QList<Tuplet*> tuplets;
+                  QList<Slur*> slurs;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                         const QString& tag(eee.tagName());
                         if (tag == "tick")
@@ -2266,7 +2244,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                         else if (tag == "Tuplet") {
                               Tuplet* tuplet = new Tuplet(this);
                               tuplet->setTrack(curTrack);
-                              tuplet->read(eee, tuplets);
+                              tuplet->read(eee, tuplets, slurs);
                               int tick = curTick - tickStart + dstTick;
                               Measure* measure = tick2measure(tick);
                               tuplet->setParent(measure);
@@ -2278,12 +2256,14 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               Slur* slur = new Slur(this);
                               slur->read(eee);
                               slur->setTrack(dstStaffIdx * VOICES);
-                              undoAddElement(slur);
+                              slurs.append(slur);
+
+                              // undoAddElement(slur);
                               }
                         else if (tag == "Chord" || tag == "Rest" || tag == "RepeatMeasure") {
                               ChordRest* cr = static_cast<ChordRest*>(Element::name2Element(tag, this));
                               cr->setTrack(curTrack);
-                              cr->read(eee, tuplets);
+                              cr->read(eee, tuplets, slurs);
                               cr->setSelected(false);
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
@@ -2317,26 +2297,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     }
 
                               Measure* measure = tick2measure(tick);
-
-                              Segment* s;
-                              bool isGrace = false;
-                              if ((cr->type() == CHORD) && (((Chord*)cr)->noteType() != NOTE_NORMAL)) {
-                                    s = new Segment(measure, SegGrace, tick);
-                                    undoAddElement(s);
-                                    isGrace = true;
-                                    }
-                              else {
-                                    SegmentType st;
-                                    st = Segment::segmentType(cr->type());
-                                    s  = measure->findSegment(st, tick);
-                                    if (!s) {
-                                          s = new Segment(measure, st, tick);
-                                          undoAddElement(s);
-                                          }
-                                    }
-                              cr->setParent(s);
-                              curTick  += cr->ticks();
-
+                              bool isGrace = (cr->type() == CHORD) && (((Chord*)cr)->noteType() != NOTE_NORMAL);
                               int measureEnd = measure->tick() + measure->ticks();
                               if (!isGrace && (cr->tick() + cr->ticks() > measureEnd)) {
                                     if (cr->type() == CHORD) {
@@ -2348,7 +2309,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           Duration d;
                                           d.setVal(len);
                                           c->setDurationType(d);
-                                          undoAddElement(c);
+                                          undoAddCR(c, measure, tick);
                                           while (rest) {
                                                 int tick = c->tick() + c->ticks();
                                                 measure = tick2measure(tick);
@@ -2360,13 +2321,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                                 d.setVal(len);
                                                 c2->setDurationType(d);
                                                 rest -= len;
-                                                s     = measure->findSegment(SegChordRest, tick);
-                                                if (s == 0) {
-                                                      s = new Segment(measure, SegChordRest, tick);
-                                                      undoAddElement(s);
-                                                      }
-                                                c2->setParent(s);
-                                                undoAddElement(c2);
+                                                undoAddCR(c2, measure, tick);
 
                                                 QList<Note*> nl1 = c->notes();
                                                 QList<Note*> nl2 = c2->notes();
@@ -2396,7 +2351,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           Duration d;
                                           d.setVal(len);
                                           r->setDurationType(d);
-                                          undoAddElement(r);
+                                          undoAddCR(r, measure, tick);
                                           while (rest) {
                                                 Rest* r2 = static_cast<Rest*>(r->clone());
                                                 int tick = r->tick() + r->ticks();
@@ -2406,19 +2361,13 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                                 d.setVal(len);
                                                 r2->setDurationType(d);
 								rest -= len;
-                                                s     = measure->findSegment(SegChordRest, tick);
-                                                if (s == 0) {
-                                                      s = new Segment(measure, SegChordRest, tick);
-                                                      undoAddElement(s);
-                                                      }
-                                                r2->setParent(s);
-                                                undoAddElement(r2);
+                                                undoAddCR(r2, measure, tick);
                                                 r = r2;
                                                 }
                                           }
                                     }
                               else {
-                                    undoAddElement(cr);
+                                    undoAddCR(cr, measure, tick);
                                     }
                               }
                         else if (tag == "Lyrics") {
@@ -2486,6 +2435,8 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               continue;
                               }
                         }
+                  foreach(Slur* slur, slurs)
+                        undoAddElement(slur);
                   }
             Segment* s1 = tick2segment(dstTick);
             Segment* s2 = tick2segment(dstTick + tickLen);
