@@ -61,13 +61,13 @@ bool Score::importPdf(const QString& path)
       for (int i = 0; i < numMeasures; ++i) {
             int tick = i * AL::division * 4;
             Measure* measure = new Measure(this);
-		Rest* rest = new Rest(this, tick, d);
-            rest->setDuration(d.fraction());
+		Rest* rest = new Rest(this, d);
+            rest->setDuration(Fraction(4,4));
             rest->setTrack(0);
-            Segment* s = measure->getSegment(rest);
+            Segment* s = measure->getSegment(SegChordRest, tick);
 		s->add(rest);
-		rest = new Rest(this, tick, d);
-            rest->setDuration(d.fraction());
+		rest = new Rest(this, d);
+            rest->setDuration(Fraction(4,4));
             rest->setTrack(4);
 		s->add(rest);
 

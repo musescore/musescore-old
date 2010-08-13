@@ -1769,6 +1769,10 @@ printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2
 
 void Score::cmdEnterRest(const Duration& d)
       {
+      if (_is.track() == -1) {
+            printf("cmdEnterRest: track -1\n");
+            return;
+            }
       startCmd();
       expandVoice();
       if (_is.cr() == 0) {
