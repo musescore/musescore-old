@@ -86,7 +86,7 @@ Element* TrillSegment::drop(ScoreView*, const QPointF&, const QPointF&, Element*
       switch(e->type()) {
             case ACCIDENTAL:
                   e->setParent(trill());
-                  score()->cmdAdd(e);
+                  score()->undoAddElement(e);
                   break;
 
             default:

@@ -434,9 +434,9 @@ void MuseScore::populatePalette()
       sp->append(bend, qApp->translate("articulation", "Bend"));
 
       TremoloBar* tb = new TremoloBar(gscore);
-      tb->points().append(PitchValue(0,    0, false));
-      tb->points().append(PitchValue(15, 100, false));
-      tb->points().append(PitchValue(60, 100, false));
+      tb->points().append(PitchValue(0,     0, false));     // "Dip"
+      tb->points().append(PitchValue(30, -100, false));
+      tb->points().append(PitchValue(60,    0, false));
       sp->append(tb, qApp->translate("articulation", "Tremolo Bar"));
 
       paletteBox->addPalette(sp);
@@ -1186,7 +1186,7 @@ void Score::addTempo()
             tt->setTrack(cr->track());
             tt->setText(editTempo->text());
             tt->setTempo(bps);
-            cmdAdd(tt);
+            undoAddElement(tt);
             refresh |= tt->abbox();
             }
       }

@@ -395,6 +395,7 @@ class Score : public QObject {
       // read context
       int curTick;                  // for read optimizations
       int curTrack;
+      QList<Slur*> slurs;
 
       TextC* rights;                ///< Copyright printed at bottom of page
 
@@ -532,8 +533,7 @@ class Score : public QObject {
       void endCmd();          // end undoable command
       void end();             // layout & update canvas
 
-      void cmdAdd(Element*);
-      void cmdRemove(Element*);
+//      void cmdRemove(Element*);
       void cmdRemoveTimeSig(TimeSig*);
       void cmdAddTimeSig(Measure*, int);
 

@@ -3750,11 +3750,12 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
             printf("cannot create slur: at end\n");
             return;
             }
+
       Slur* slur = new Slur(_score);
       slur->setStartElement(cr1);
       slur->setEndElement(cr2);
       slur->setParent(0);
-      _score->cmdAdd(slur);
+      _score->undoAddElement(slur);
 
       slur->layout();
       const QList<SpannerSegment*>& el = slur->spannerSegments();

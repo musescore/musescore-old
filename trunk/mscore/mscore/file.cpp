@@ -1284,6 +1284,7 @@ static void elementAdjustReadPos(void*, Element* e)
 bool Score::read(QDomElement dScore)
       {
       _fileDivision = 384;   // for compatibility with old mscore files
+      slurs.clear();
 
       if (parentScore())
             setMscVersion(parentScore()->mscVersion());

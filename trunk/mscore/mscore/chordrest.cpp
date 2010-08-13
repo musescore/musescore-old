@@ -225,7 +225,7 @@ void ChordRest::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
+bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*>& slurs)
       {
       if (Element::readProperties(e))
             return true;
@@ -286,9 +286,9 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets)
             int id = e.attribute("number").toInt();
             QString type = e.attribute("type");
             Slur* slur = 0;
-            foreach(Element* e, *score()->gel()) {
-                  if (e->type() == SLUR && static_cast<Slur*>(e)->id() == id) {
-                        slur = static_cast<Slur*>(e);
+            foreach(Slur* s, slurs) {
+                  if (s->id() == id) {
+                        slur = s;
                         break;
                         }
                   }

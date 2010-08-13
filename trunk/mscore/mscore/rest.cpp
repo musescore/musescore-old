@@ -278,10 +278,10 @@ void Rest::write(Xml& xml) const
 //   Rest::read
 //---------------------------------------------------------
 
-void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets)
+void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*>& slurs)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!ChordRest::readProperties(e, tuplets))
+            if (!ChordRest::readProperties(e, tuplets, slurs))
                   domError(e);
             }
       QPointF off(userOff());
