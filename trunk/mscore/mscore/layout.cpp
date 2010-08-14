@@ -631,7 +631,7 @@ void Score::doLayout()
                                     KeySig* ks = static_cast<KeySig*>(e);
                                     int naturals = key1 ? key1->keySigEvent().accidentalType : 0;
                                     ks->setOldSig(naturals);
-                                    st->setKey(s->tick(), ks->subtype());
+                                    st->setKey(s->tick(), ks->keySigEvent());
                                     key1 = ks;
                                     }
                               }
@@ -781,7 +781,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   switch (el->type()) {
                         case KEYSIG:
                               hasKeysig = static_cast<KeySig*>(el);
-                              hasKeysig->changeType(keyIdx);
+                              hasKeysig->changeKeySigEvent(keyIdx);
                               hasKeysig->setMag(staff->mag());
                               break;
                         case CLEF:

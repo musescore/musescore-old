@@ -56,6 +56,7 @@
 #include "undo.h"
 #include "synthcontrol.h"
 #include "pianoroll.h"
+#include "drumroll.h"
 #include "scoretab.h"
 #include "timedialog.h"
 #include "keyedit.h"
@@ -376,6 +377,7 @@ MuseScore::MuseScore()
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
       pianorollEditor       = 0;
+      drumrollEditor        = 0;
       _splitScreen          = false;
       _horizontalSplit      = true;
       chordStyleEditor      = 0;
@@ -2820,6 +2822,21 @@ void MuseScore::editInPianoroll(Staff* staff)
       pianorollEditor->setStaff(staff);
       pianorollEditor->show();
       connect(staff->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
+      }
+
+//---------------------------------------------------------
+//   editInDrumroll
+//---------------------------------------------------------
+
+void MuseScore::editInDrumroll(Staff* staff)
+      {
+      if (drumrollEditor == 0)
+            drumrollEditor = new DrumrollEditor;
+      else
+            disconnect(drumrollEditor->score(), SIGNAL(selectionChanged(int)), drumrollEditor, SLOT(changeSelection(int)));
+      drumrollEditor->setStaff(staff);
+      drumrollEditor->show();
+      connect(staff->score(), SIGNAL(selectionChanged(int)), drumrollEditor, SLOT(changeSelection(int)));
       }
 
 //---------------------------------------------------------

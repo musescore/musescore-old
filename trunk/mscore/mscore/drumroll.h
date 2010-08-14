@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,20 +21,59 @@
 #ifndef __DRUMROLL_H__
 #define __DRUMROLL_H__
 
+class Score;
 class Staff;
+class DrumView;
+class Note;
+class Ruler;
+class Seq;
+
+#include "al/pos.h"
+
+namespace Awl {
+      class PitchEdit;
+      class PosLabel;
+      };
 
 //---------------------------------------------------------
 //   DrumrollEditor
 //---------------------------------------------------------
 
-class DrumrollEditor : public QDialog {
+class DrumrollEditor : public QMainWindow {
       Q_OBJECT
 
+      DrumView* gv;
+      Score* _score;
       Staff* staff;
+      Awl::PitchEdit* pitch;
+      QSpinBox* velocity;
+      AL::Pos locator[3];
+      QComboBox* veloType;
+      Awl::PosLabel* pos;
+      Ruler* ruler;
+
+      void updateVelocity(Note* note);
+      void updateSelection();
+
+   private slots:
+      void selectionChanged();
+      void veloTypeChanged(int);
+      void velocityChanged(int);
+      void keyPressed(int);
+      void keyReleased(int);
+      void moveLocator(int);
+      void cmd(QAction*);
+
+   public slots:
+      void changeSelection(int);
 
    public:
-      DrumrollEditor(Staff* staff, QWidget* parent = 0);
+      DrumrollEditor(QWidget* parent = 0);
+      void setStaff(Staff* staff);
+      Score* score() const { return _score; }
+      void heartBeat(Seq*);
       };
+
 
 #endif
 

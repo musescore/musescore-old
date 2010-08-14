@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "pianoscene.h"
+#include "pianoview.h"
 #include "staff.h"
 #include "piano.h"
 #include "measure.h"

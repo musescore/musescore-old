@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -57,6 +57,7 @@ KeySig::KeySig(const KeySig& k)
 	_showNaturals = k.showNaturals();
 	foreach(KeySym* ks, k.keySymbols)
             keySymbols.append(new KeySym(*ks));
+      _sig = k._sig;
       }
 
 //---------------------------------------------------------
@@ -83,9 +84,7 @@ QPointF KeySig::canvasPos() const
 
 void KeySig::setCustom(const QList<KeySym*>& symbols)
       {
-      KeySigEvent k = subtype();
-      k.custom = true;
-      setSubtype(k);
+      _sig.custom = true;
       keySymbols = symbols;
       }
 
@@ -129,8 +128,8 @@ void KeySig::layout()
             yoff = clefTable[clef].yOffset;
             }
 
-      char t1  = keySigEvent().accidentalType;
-      char t2  = keySigEvent().naturalType;
+      char t1  = _sig.accidentalType;
+      char t2  = _sig.naturalType;
       qreal xo = 0.0;
 
       int accidentals = 0, naturals = 0;
@@ -144,7 +143,7 @@ void KeySig::layout()
             case 1: accidentals = 0x1;  break;
             case 0: accidentals = 0;    break;
             default:
-                  printf("illegal t2 key %d (t1=%d) subtype 0x%04x\n", t2, t1, subtype());
+                  printf("illegal t1 key %d (t2=%d)\n", t1, t2);
                   break;
             }
       switch(qAbs(t2)) {
@@ -157,7 +156,7 @@ void KeySig::layout()
             case 1: naturals = 0x1;  break;
             case 0: naturals = 0;    break;
             default:
-                  printf("illegal t2 key %d (t1=%d) subtype 0x%04x\n", t2, t1, subtype());
+                  printf("illegal t2 key %d (t1=%d)\n", t2, t1);
                   break;
             }
 
@@ -167,13 +166,14 @@ void KeySig::layout()
       if (!((t1 > 0) ^ (t2 > 0)))
             naturals &= ~accidentals;
 
-	  if(_showNaturals)
-		  for (int i = 0; i < 7; ++i) {
-				if (naturals & (1 << i)) {
-					  addLayout(naturalSym, xo, clefTable[clef].lines[i + coffset]);
-					  xo += 1.0;
-					  }
+      if(_showNaturals) {
+	      for (int i = 0; i < 7; ++i) {
+                  if (naturals & (1 << i)) {
+                        addLayout(naturalSym, xo, clefTable[clef].lines[i + coffset]);
+				xo += 1.0;
 				}
+                  }
+            }
       switch(t1) {
             case 7:  addLayout(sharpSym, xo + 6.0, clefTable[clef].lines[6]);
             case 6:  addLayout(sharpSym, xo + 5.0, clefTable[clef].lines[5]);
@@ -193,7 +193,7 @@ void KeySig::layout()
             case 0:
                   break;
             default:
-                  printf("illegal t1 key %d (t2=%d) subtype 0x%04x\n", t1, t2, subtype());
+                  printf("illegal t1 key %d (t2=%d)\n", t1, t2);
                   break;
             }
       foreach(KeySym* ks, keySymbols) {
@@ -293,7 +293,7 @@ void KeySig::setSig(int old, int newSig)
       ks.accidentalType = newSig;
       ks.invalid = false;
       ks.custom = false;
-      setSubtype(ks);
+      setKeySigEvent(ks);
       }
 
 //---------------------------------------------------------
@@ -302,9 +302,7 @@ void KeySig::setSig(int old, int newSig)
 
 void KeySig::setOldSig(int old)
       {
-      KeySigEvent ks(subtype());
-      ks.naturalType = old;
-      setSubtype(ks);
+      _sig.naturalType = old;
       }
 
 //---------------------------------------------------------
@@ -324,6 +322,14 @@ void KeySig::write(Xml& xml) const
       {
       xml.stag(name());
       Element::writeProperties(xml);
+      if (_sig.custom) {
+            xml.tag("custom", _sig.customType);
+            }
+      else {
+            xml.tag("accidental", _sig.accidentalType);
+            if (_sig.naturalType)
+                  xml.tag("natural", _sig.naturalType);
+            }
       foreach(const KeySym* ks, keySymbols) {
             xml.stag("KeySym");
             xml.tag("sym", ks->sym);
@@ -341,8 +347,11 @@ void KeySig::write(Xml& xml) const
 
 void KeySig::read(QDomElement e)
       {
+      _sig = KeySigEvent();   // invalidate _sig
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
+            int val = e.text().toInt();
             if (tag == "KeySym") {
                   KeySym* ks = new KeySym;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -358,11 +367,40 @@ void KeySig::read(QDomElement e)
                   keySymbols.append(ks);
                   }
             else if (tag == "showCourtesySig")
-		      _showCourtesySig = e.text().toInt();
+		      _showCourtesySig = val;
             else if (tag == "showNaturals")
-		      _showNaturals = e.text().toInt();
+		      _showNaturals = val;
+            else if (tag == "accidental")
+                  _sig.setAccidentalType(val);
+            else if (tag == "natural")
+                  _sig.naturalType = val;
+            else if (tag == "custom")
+                  _sig.setCustomType(val);
             else if (!Element::readProperties(e))
                   domError(e);
+            }
+      if (_sig.invalid && subtype()) {
+            //
+            // for backward compatibility:
+            //
+            union U {
+                  int subtype;
+                  struct {
+                        int _accidentalType:4;
+                        int _naturalType:4;
+                        unsigned _customType:16;
+                        bool _custom : 1;
+                        bool _invalid : 1;
+                        };
+                  };
+            U a;
+            a.subtype = subtype();
+            _sig.accidentalType = a._accidentalType;
+            _sig.naturalType    = a._naturalType;
+            _sig.customType     = a._customType;
+            _sig.custom         = a._custom;
+            _sig.invalid        = a._invalid;
+            setSubtype(0);
             }
       }
 
@@ -391,16 +429,20 @@ bool KeySig::operator==(const KeySig& k) const
                   }
             return true;
             }
-      return subtype() != k.subtype();
+      return _sig.accidentalType != k._sig.accidentalType
+         || _sig.naturalType != k._sig.naturalType
+         || _sig.customType != k._sig.customType
+         || _sig.custom != k._sig.custom
+         || _sig.invalid != k._sig.invalid;
       }
 
 //---------------------------------------------------------
-//   changeType
+//   changeKeySigEvent
 //---------------------------------------------------------
 
-void KeySig::changeType(KeySigEvent t)
+void KeySig::changeKeySigEvent(const KeySigEvent& t)
       {
-      if (keySigEvent() == t)
+      if (_sig == t)
             return;
       if (t.custom) {
             KeySig* ks = _score->customKeySig(t.customType);
@@ -410,7 +452,7 @@ void KeySig::changeType(KeySigEvent t)
             foreach(KeySym* k, ks->keySymbols)
                   keySymbols.append(new KeySym(*k));
             }
-      setSubtype(t);
+      setKeySigEvent(t);
       }
 
 //---------------------------------------------------------

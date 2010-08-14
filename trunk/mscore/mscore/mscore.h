@@ -52,6 +52,7 @@ class NewWizard;
 class ExcerptsDialog;
 class SynthControl;
 class PianorollEditor;
+class DrumrollEditor;
 class Staff;
 class ScoreView;
 class ScoreTab;
@@ -275,6 +276,7 @@ class MuseScore : public QMainWindow {
       QSignalMapper* pluginMapper;
 
       PianorollEditor* pianorollEditor;
+      DrumrollEditor* drumrollEditor;
       bool _splitScreen;
       bool _horizontalSplit;
 
@@ -408,7 +410,9 @@ class MuseScore : public QMainWindow {
       QString lastSaveDirectory;
       SynthControl* getSynthControl() const { return synthControl; }
       void editInPianoroll(Staff* staff);
+      void editInDrumroll(Staff* staff);
       PianorollEditor* getPianorollEditor() const { return pianorollEditor; }
+      DrumrollEditor* getDrumrollEditor() const   { return drumrollEditor; }
       void writeSessionFile(bool);
       bool restoreSession(bool);
       ScoreView* currentScoreView() const { return cv; }

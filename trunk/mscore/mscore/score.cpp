@@ -2172,9 +2172,8 @@ int Score::addCustomKeySig(KeySig* ks)
       int idx = customKeysigs.size() - 1;
       KeySigEvent k = ks->keySigEvent();
       k.setCustomType(idx);
-      ks->setSubtype(k);
+      ks->setKeySigEvent(k);
       ks->setScore(this);
-printf("Score::addCustomKeySig idx %d\n", idx);
       return idx;
       }
 
@@ -2201,7 +2200,7 @@ KeySig* Score::keySigFactory(KeySigEvent e)
             }
       else {
             ks = new KeySig(this);
-            ks->setSubtype(e);
+            ks->setKeySigEvent(e);
             }
       return ks;
       }

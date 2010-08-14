@@ -238,7 +238,7 @@ namespace Bww {
             KeySigEvent key;
             key.setAccidentalType(2);
             KeySig* keysig = new KeySig(score);
-            keysig->setSubtype(key);
+            keysig->setKeySigEvent(key);
             keysig->setTrack(0);
             Segment* s = currentMeasure->getSegment(keysig, tick);
             s->add(keysig);
