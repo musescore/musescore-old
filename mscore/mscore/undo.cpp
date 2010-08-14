@@ -1421,7 +1421,7 @@ void ChangeKeySig::flip()
       bool sc        = keysig->showCourtesySig();
       bool sn        = keysig->showNaturals();
 
-      keysig->setSubtype(ks);
+      keysig->setKeySigEvent(ks);
       keysig->setShowCourtesySig(showCourtesy);
       keysig->setShowNaturals(showNaturals);
 

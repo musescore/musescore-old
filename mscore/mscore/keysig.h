@@ -46,6 +46,7 @@ class KeySig : public Element {
 	bool	_showNaturals;
       QList<KeySym*> keySymbols;
       void addLayout(int sym, double x, int y);
+      KeySigEvent _sig;
 
    public:
       KeySig(Score*);
@@ -59,19 +60,19 @@ class KeySig : public Element {
       virtual void layout();
       void setSig(int oldSig, int newSig);
       void setOldSig(int oldSig);
-      Segment* segment() const { return (Segment*)parent(); }
-      Measure* measure() const { return (Measure*)parent()->parent(); }
+      Segment* segment() const            { return (Segment*)parent(); }
+      Measure* measure() const            { return (Measure*)parent()->parent(); }
       Space space() const;
       void setCustom(const QList<KeySym*>& symbols);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      int keySignature() const        { return KeySigEvent(subtype()).accidentalType; }    // -7 - +7
-      int customType() const          { return KeySigEvent(subtype()).customType; }
-      bool isCustom() const           { return KeySigEvent(subtype()).custom; }
-      KeySigEvent keySigEvent() const { return KeySigEvent(subtype()); }
+      int keySignature() const            { return _sig.accidentalType; }    // -7 - +7
+      int customType() const              { return _sig.customType; }
+      bool isCustom() const               { return _sig.custom; }
+      KeySigEvent keySigEvent() const     { return _sig; }
       bool operator==(const KeySig&) const;
-      void changeType(KeySigEvent);
-      void setSubtype(KeySigEvent e)  { Element::setSubtype(e.subtype); }
+      void changeKeySigEvent(const KeySigEvent&);
+      void setKeySigEvent(const KeySigEvent& e)      { _sig = e; }
       int tick() const;
 
       bool showCourtesySig() const        { return _showCourtesySig; };

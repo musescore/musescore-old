@@ -103,7 +103,7 @@ QT4_WRAP_CPP (mocs
       script.h articulation.h metaedit.h magbox.h voiceselector.h
       text.h sccursor.h dynamics.h undo.h textproperties.h
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
-      pianoscene.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
+      pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h stafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
       )
@@ -186,7 +186,7 @@ add_executable ( ${ExecutableName}
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp scmeasure.cpp scpageformat.cpp
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
       screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
-      canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoscene.cpp
+      canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoview.cpp drumview.cpp
       splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
       importove.cpp ove.cpp interval.cpp check.cpp tablature.cpp
       fret.cpp stafftype.cpp staffstate.cpp spanner.cpp fingering.cpp

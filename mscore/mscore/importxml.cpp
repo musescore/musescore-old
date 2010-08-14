@@ -1918,7 +1918,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                                     // new key differs from key in effect at this tick
                                     KeySig* keysig = new KeySig(score);
                                     keysig->setTrack((staffIdx + i) * VOICES);
-                                    keysig->setSubtype(key);
+                                    keysig->setKeySigEvent(key);
                                     Segment* s = measure->getSegment(keysig, tick);
                                     s->add(keysig);
                                     }
@@ -1933,7 +1933,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               // new key differs from key in effect at this tick
                               KeySig* keysig = new KeySig(score);
                               keysig->setTrack(staffIdx * VOICES);
-                              keysig->setSubtype(key);
+                              keysig->setKeySigEvent(key);
                               Segment* s = measure->getSegment(keysig, tick);
                               s->add(keysig);
                               }

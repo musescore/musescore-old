@@ -1010,8 +1010,8 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
             drumsetEdit.exec();
             }
       else if (cmd == "drumroll") {
-            DrumrollEditor drumrollEditor(staff);
-            drumrollEditor.exec();
+            _score->endCmd();
+            mscore->editInDrumroll(staff);
             }
       else if (cmd == "pianoroll") {
             _score->endCmd();

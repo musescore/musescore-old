@@ -22,7 +22,7 @@
 #include "pianoroll.h"
 #include "piano.h"
 #include "ruler.h"
-#include "pianoscene.h"
+#include "pianoview.h"
 #include "staff.h"
 #include "score.h"
 #include "measure.h"

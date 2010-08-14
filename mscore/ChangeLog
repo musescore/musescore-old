@@ -1,4 +1,8 @@
-14.aug (lv)
+14.aug (ws)
+      - infrastructure for new drumroll editor
+      - changed implementation of KeySig + KeySigEvent: do not pack
+        all information in subtype()
+      (lv)
       - #5637 support reading bww files: line breaks
 12.aug (lv)
       - #5637 support reading bww files: TuneTempo

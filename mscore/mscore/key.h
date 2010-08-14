@@ -29,18 +29,14 @@ class Score;
 //---------------------------------------------------------
 
 struct KeySigEvent {
-      union {
-            int subtype;
-            struct {
-                  int accidentalType:4;
-                  int naturalType:4;
-                  unsigned customType:16;
-                  bool custom : 1;
-                  bool invalid : 1;
-                  };
-            };
+      int accidentalType;
+      int naturalType;
+      int customType;
+      bool custom;
+      bool invalid;
+
       KeySigEvent();
-      KeySigEvent(int v);
+      KeySigEvent(int);
 
       bool isValid() const { return !invalid; }
       bool operator==(const KeySigEvent& e) const;

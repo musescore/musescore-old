@@ -772,7 +772,7 @@ void OveToMScore::convertSignatures(){
 
 		                    KeySig* keysig = new KeySig(score_);
 		                    keysig->setTrack((staffCount+j) * VOICES);
-		                    keysig->setSubtype(key);
+		                    keysig->setKeySigEvent(key);
 
 		                	Segment* s = measure->getSegment(keysig, tick);
 		                	s->add(keysig);
@@ -797,7 +797,7 @@ void OveToMScore::convertSignatures(){
 				if(measure){
 					KeySig* keysig = new KeySig(score_);
 			        keysig->setTrack((staffCount+j) * VOICES);
-			        keysig->setSubtype(0);
+			        keysig->setKeySigEvent(KeySigEvent());
 
 					Segment* s = measure->getSegment(keysig, 0);
 					s->add(keysig);

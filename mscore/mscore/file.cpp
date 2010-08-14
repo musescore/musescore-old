@@ -709,7 +709,7 @@ void MuseScore::newFile()
                                     (*(staff->keymap()))[0] = nKey;
                                     KeySig* keysig = new KeySig(score);
                                     keysig->setTrack(staffIdx * VOICES);
-                                    keysig->setSubtype(nKey);
+                                    keysig->setKeySigEvent(nKey);
                                     Segment* s = measure->getSegment(keysig, 0);
                                     s->add(keysig);
                                     }

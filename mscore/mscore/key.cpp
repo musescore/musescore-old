@@ -29,13 +29,20 @@
 
 KeySigEvent::KeySigEvent()
       {
-      subtype = 0;
+      accidentalType = 0;
+      naturalType = 0;
+      customType = 0;
+      custom = false;
       invalid = true;
       }
 
-KeySigEvent::KeySigEvent(int v)
+KeySigEvent::KeySigEvent(int n)
       {
-      subtype = v;
+      accidentalType = n;
+      naturalType = 0;
+      customType = 0;
+      custom = false;
+      invalid = false;
       }
 
 //---------------------------------------------------------
@@ -113,10 +120,10 @@ bool KeySigEvent::operator!=(const KeySigEvent& e) const
 KeySigEvent KeyList::key(int tick) const
       {
       if (empty())
-            return 0;
+            return KeySigEvent();
       ciKeyList i = upper_bound(tick);
       if (i == begin())
-            return 0;
+            return KeySigEvent();
       --i;
       return i->second;
       }

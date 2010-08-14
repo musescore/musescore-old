@@ -166,7 +166,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _part           = p;
       _clefList       = new ClefList;
       _keymap         = new KeyList;
-      (*_keymap)[0]   = 0;                  // default to C major
+      (*_keymap)[0]   = KeySigEvent(0);                  // default to C major
       _staffType      = _score->staffTypes()[PITCHED_STAFF_TYPE];
       _show           = true;
       _small          = false;
@@ -321,7 +321,7 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
 
       KeySig* nks = new KeySig(score());
       nks->setTrack(track);
-      nks->changeType(st);
+      nks->changeKeySigEvent(st);
       nks->setParent(s);
 
       if (ks)
