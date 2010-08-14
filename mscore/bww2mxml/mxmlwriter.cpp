@@ -69,6 +69,10 @@ namespace Bww {
     qDebug() << "MxmlWriter::beginMeasure()";
     ++measureNumber;
     out << "    <measure number=\"" << measureNumber << "\">" << endl;
+    if (measureNumber != 1 && mbf.firstOfSystem)
+    {
+      out << "      <print new-system=\"yes\"/>" << endl;
+    }
     if (mbf.repeatBegin || mbf.endingFirst || mbf.endingSecond)
     {
       out << "      <barline location=\"left\">" << endl;
@@ -106,7 +110,15 @@ namespace Bww {
       out << "      </attributes>" << endl;
       if (tempo)
       {
-        out << "      <sound tempo=\"" << tempo << "\"/>" << endl;
+        out << "      <direction placement=\"above\">" << endl;
+        out << "        <direction-type>" << endl;
+        out << "          <metronome>" << endl;
+        out << "            <beat-unit>quarter</beat-unit>" << endl;
+        out << "            <per-minute>" << tempo << "</per-minute>" << endl;
+        out << "          </metronome>" << endl;
+        out << "        </direction-type>" << endl;
+        out << "        <sound tempo=\"" << tempo << "\"/>" << endl;
+        out << "      </direction>" << endl;
       }
     }
   }

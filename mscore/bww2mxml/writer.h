@@ -43,10 +43,12 @@ namespace Bww {
     bool repeatBegin;
     bool endingFirst;
     bool endingSecond;
+    bool firstOfSystem;
     MeasureBeginFlags() :
         repeatBegin(false),
         endingFirst(false),
-        endingSecond(false)
+        endingSecond(false),
+        firstOfSystem(false)
     {}
   };
 
@@ -57,9 +59,11 @@ namespace Bww {
   struct MeasureEndFlags {
     bool repeatEnd;
     bool endingEnd;
+    bool lastOfSystem;
     MeasureEndFlags() :
         repeatEnd(false),
-        endingEnd(false)
+        endingEnd(false),
+        lastOfSystem(false)
     {}
   };
 
