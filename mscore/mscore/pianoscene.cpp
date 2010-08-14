@@ -95,8 +95,7 @@ AL::Pos PianoView::pix2pos(int x) const
       x -= MAP_OFFSET;
       if (x < 0)
             x = 0;
-//TODO      return AL::Pos(staff->score()->tempomap(), staff->score()->sigmap(), x, _timeType);
-      return AL::Pos();
+      return AL::Pos(staff->score()->tempomap(), staff->score()->sigmap(), x, _timeType);
       }
 
 //---------------------------------------------------------
@@ -114,6 +113,8 @@ int PianoView::pos2pix(const AL::Pos& p) const
 
 void PianoView::drawBackground(QPainter* p, const QRectF& r)
       {
+      if (staff == 0)
+            return;
       Score* _score = staff->score();
 
       QRectF r1;
@@ -175,7 +176,6 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
       bar2 = ((bar2 + n - 1) / n) * n; // round up
 
       for (int bar = bar1; bar <= bar2;) {
-#if 0 // TODO
             AL::Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
             if (magStep > 0) {
                   double x = double(pos2pix(stick));
@@ -189,7 +189,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
                         }
                   }
             else {
-                  int z = stick.timesig().fraction().numerator();
+                  int z = stick.timesig().timesig().numerator();
                   for (int beat = 0; beat < z; beat++) {
                         if (magStep == 0) {
                               AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
@@ -218,7 +218,7 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
                               else
                                     k = 32;
 
-                              int n = (AL::division * 4) / stick.timesig().fraction().denominator();
+                              int n = (AL::division * 4) / stick.timesig().timesig().denominator();
                               for (int i = 0; i < k; ++i) {
                                     AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, (n * i)/ k);
                                     int xp = pos2pix(xx);
@@ -240,7 +240,6 @@ void PianoView::drawBackground(QPainter* p, const QRectF& r)
                   bar += (n-1);
             else
                   bar += n;
-#endif
             }
       }
 
@@ -267,11 +266,12 @@ PianoView::PianoView()
 
 void PianoView::setStaff(Staff* s, AL::Pos* l)
       {
+printf("PianoView::setStaff\n");
       static const QColor lcColors[3] = { Qt::red, Qt::blue, Qt::blue };
 
       staff    = s;
       _locator = l;
-//TODO      pos.setContext(s->score()->tempomap(), s->score()->sigmap());
+      pos.setContext(s->score()->tempomap(), s->score()->sigmap());
 
       scene()->blockSignals(true);
 
@@ -502,5 +502,4 @@ void PianoView::ensureVisible(int tick)
       QPointF pt = mapToScene(0, height() / 2);
       QGraphicsView::ensureVisible(qreal(tick), pt.y(), 240.0, 1.0);
       }
-
 

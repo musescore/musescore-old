@@ -161,7 +161,6 @@ void PianorollEditor::setStaff(Staff* st)
       staff = st;
       _score = staff->score();
       setWindowTitle(QString(tr("MuseScore: <%1> Staff: %2")).arg(_score->name()).arg(st->idx()));
-#if 0 // TODO
       AL::TempoMap* tl = _score->tempomap();
       AL::TimeSigMap*  sl = _score->sigmap();
       for (int i = 0; i < 3; ++i)
@@ -174,7 +173,6 @@ void PianorollEditor::setStaff(Staff* st)
       gv->setStaff(staff, locator);
       ruler->setScore(_score, locator);
       pos->setContext(tl, sl);
-#endif
       updateSelection();
       }
 
