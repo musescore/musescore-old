@@ -123,7 +123,7 @@ void Ruler::setScore(Score* s, AL::Pos* lc)
       {
       _score = s;
       _locator = lc;
-//TODO      _cursor.setContext(s->tempomap(), s->sigmap());
+      _cursor.setContext(s->tempomap(), s->sigmap());
       }
 
 //---------------------------------------------------------
@@ -172,8 +172,7 @@ AL::Pos Ruler::pix2pos(int x) const
       int val = lrint((x + _xpos - MAP_OFFSET)/_xmag - 480);
       if (val < 0)
             val = 0;
-//TODO      return AL::Pos(_score->tempomap(), _score->sigmap(), val, _timeType);
-      return AL::Pos();
+      return AL::Pos(_score->tempomap(), _score->sigmap(), val, _timeType);
       }
 
 //---------------------------------------------------------
@@ -233,7 +232,6 @@ void Ruler::paintEvent(QPaintEvent* e)
       bar2 = ((bar2 + n - 1) / n) * n; // round up
 
       for (int bar = bar1; bar <= bar2;) {
-#if 0
             AL::Pos stick(_score->tempomap(), _score->sigmap(), bar, 0, 0);
             if (magStep) {
                   p.setFont(_font2);
@@ -251,7 +249,7 @@ void Ruler::paintEvent(QPaintEvent* e)
                   }
             else {
                   AL::SigEvent sig = stick.timesig();
-                  int z = sig.fraction().numerator();
+                  int z = sig.timesig().numerator();
                   for (int beat = 0; beat < z; beat++) {
                         AL::Pos xx(_score->tempomap(), _score->sigmap(), bar, beat, 0);
                         int xp = pos2pix(xx);
@@ -281,7 +279,6 @@ void Ruler::paintEvent(QPaintEvent* e)
                               p.drawLine(xp, y1, xp, y2);
                         }
                   }
-#endif
             if (bar == 0 && n >= 2)
                   bar += (n-1);
             else
