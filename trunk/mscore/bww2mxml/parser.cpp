@@ -461,7 +461,11 @@ namespace Bww {
     while (isNonNote(lex.symType()))
     {
       if (lex.symType() == CLEF)
-        lex.getSym(); // ignore
+      {
+        mbf.firstOfSystem = true;
+        mef.lastOfSystem = true;
+        lex.getSym();
+      }
       else if (lex.symType() == KEY)
         lex.getSym(); // ignore
       else if (lex.symType() == TSIG)

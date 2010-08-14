@@ -29,6 +29,7 @@
 #include "chord.h"
 //#include "key.h"
 #include "keysig.h"
+#include "layoutbreak.h"
 #include "measure.h"
 #include "note.h"
 #include "part.h"
@@ -280,6 +281,13 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
             else {
                   printf("lastVolta == 0 on stop\n");
                   }
+            }
+
+      if (mef.lastOfSystem) {
+            LayoutBreak* lb = new LayoutBreak(score);
+            lb->setTrack(0);
+            lb->setSubtype(LAYOUT_BREAK_LINE);
+            currentMeasure->add(lb);
             }
 }
 
