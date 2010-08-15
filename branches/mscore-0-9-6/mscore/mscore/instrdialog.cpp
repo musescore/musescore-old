@@ -789,8 +789,7 @@ void Score::insertStaff(Staff* staff, int idx)
                               slur->setTrack2(slur->track2() + VOICES);
                         }
                         break;
-                  case VOLTA: //volta alway attached to top staff
-                        break;
+                  case VOLTA:
                   case OTTAVA:
                   case TRILL:
                   case PEDAL:
@@ -869,8 +868,7 @@ void Score::cmdRemoveStaff(int staffIdx)
       {
       foreach(Element* e, _gel) {
             switch(e->type()) {
-                  case VOLTA: //volta always attached to top staff
-                    break;
+                  case VOLTA:
                   case OTTAVA:
                   case TRILL:
                   case PEDAL:
@@ -917,8 +915,7 @@ void Score::removeStaff(Staff* staff)
                               slur->setTrack2(slur->track2() - VOICES);
                         }
                         break;
-                  case VOLTA:  //volta always attached to top staff
-                        break;
+                  case VOLTA:
                   case OTTAVA:
                   case TRILL:
                   case PEDAL:
@@ -991,8 +988,7 @@ printf("  beam set track %d %d\n", beam->track(), idx * VOICES + voice);
                         slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
                         }
                     break;
-                  case VOLTA:  //volta always attached to top staff
-                        break;
+                  case VOLTA:
                   case OTTAVA:
                   case TRILL:
                   case PEDAL:
