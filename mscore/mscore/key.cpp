@@ -30,7 +30,16 @@
 KeySigEvent::KeySigEvent()
       {
       subtype = 0;
-      _invalid = true;
+#ifdef Q_WS_MAC
+      if(QSysInfo::ByteOrder == QSysInfo::BigEndian) {
+            _invalidR        = true;
+            }
+      else {
+            _invalid        = true;
+            }
+#else
+      _invalid        = true;
+#endif
       }
 
 KeySigEvent::KeySigEvent(int v)
