@@ -2406,7 +2406,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   Slur* slur = new Slur(score());
                   slur->setTrack(score()->curTrack);
                   slur->read(e);
-                  score()->add(slur);
+                  score()->slurs.append(slur);
                   }
             else if (tag == "vspacer") {
                   if (staves[staffIdx]->_vspacer == 0) {
