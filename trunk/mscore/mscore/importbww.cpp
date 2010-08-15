@@ -120,7 +120,7 @@ static void setTempo(Score* score, int tempo)
 namespace Bww {
 
   /**
-   The writer that generates MusicXML output.
+   The writer that imports into MuseScore.
    */
 
   class MsScWriter : public Writer
@@ -394,6 +394,10 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
             score->measures()->add(vbox);
             }
       if (footer != "") score->setCopyright(footer);
+
+      Part* part = score->part(0);
+      part->setLongName(Bww::instrumentName);
+      part->setMidiProgram(Bww::midiProgram - 1);
   }
 
   /**

@@ -252,13 +252,13 @@ namespace Bww {
     out << "  </identification>" << endl;
     out << "  <part-list>" << endl;
     out << "    <score-part id=\"P1\">" << endl;
-    out << "      <part-name>Music</part-name>" << endl;
+    out << "      <part-name>" << instrumentName << "</part-name>" << endl;
     out << "      <score-instrument id=\"P1-I1\">" << endl;
-    out << "        <instrument-name>Music</instrument-name>" << endl;
+    out << "        <instrument-name>" << instrumentName << "</instrument-name>" << endl;
     out << "      </score-instrument>" << endl;
     out << "      <midi-instrument id=\"P1-I1\">" << endl;
     out << "        <midi-channel>1</midi-channel>" << endl;
-    out << "        <midi-program>1</midi-program>" << endl;
+    out << "        <midi-program>" << midiProgram << "</midi-program>" << endl;
     out << "      </midi-instrument>" << endl;
     out << "    </score-part>" << endl;
     out << "  </part-list>" << endl;
