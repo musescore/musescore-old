@@ -35,6 +35,9 @@ class QIODevice;
 
 namespace Bww {
 
+  static const char* instrumentName = "Bagpipe";
+  static const int midiProgram = 72;
+
   /**
    The flags that need to be handled at the beginning of a measure.
    */
