@@ -38,12 +38,12 @@ void TrillSegment::draw(QPainter& p, ScoreView* v) const
       QRectF b1 = symbols[score()->symIdx()][trillSym].bbox(mags);
       QRectF b2 = symbols[score()->symIdx()][trillelementSym].bbox(mags);
       qreal w2  = symbols[score()->symIdx()][trillelementSym].width(mags);
-      int n     = lrint((pos2().x() - (b1.width() - b1.x())) / w2);
+      int n     = lrint((pos2().x() - b1.width()) / w2);
 
       QPointF a = symbols[score()->symIdx()][trillSym].attach(mags);
 
       symbols[score()->symIdx()][trillSym].draw(p, mags, -b1.x(), 0);
-      symbols[score()->symIdx()][trillelementSym].draw(p, mags,  -b1.x() + b1.width(), b2.y() * .9, n);
+      symbols[score()->symIdx()][trillelementSym].draw(p, mags,  b1.width(), b2.y() * .9, n);
 
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
             if (trill()->accidental()) {
@@ -56,14 +56,19 @@ void TrillSegment::draw(QPainter& p, ScoreView* v) const
       }
 
 //---------------------------------------------------------
-//   bbox
+//   layout
 //---------------------------------------------------------
 
-QRectF TrillSegment::bbox() const
+void TrillSegment::layout()
       {
       QRectF rr(symbols[score()->symIdx()][trillSym].bbox(magS()));
       QRectF r(0.0, rr.y(), pos2().x(), rr.height());
-      return r;
+      if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
+            if (trill()->accidental()) {
+                  r |= trill()->accidental()->bbox().translated(trill()->accidental()->pos());
+                  }
+            }
+      setbbox(r);
       }
 
 //---------------------------------------------------------

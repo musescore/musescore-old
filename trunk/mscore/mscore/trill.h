@@ -38,9 +38,9 @@ class TrillSegment : public LineSegment {
       virtual ElementType type() const    { return TRILL_SEGMENT; }
       virtual TrillSegment* clone() const { return new TrillSegment(*this); }
       virtual void draw(QPainter&, ScoreView*) const;
-      virtual QRectF bbox() const;
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual void layout();
       };
 
 //---------------------------------------------------------
