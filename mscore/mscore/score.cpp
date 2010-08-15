@@ -1132,11 +1132,12 @@ void Score::setClean(bool val)
       if (_dirty != val) {
             _dirty         = val;
             _playlistDirty = true;
-            _autosaveDirty = true;
             emit dirtyChanged(this);
             }
-      if (_dirty)
+      if (_dirty) {
+            _autosaveDirty = true;
             _playlistDirty = true;
+            }
       }
 
 //---------------------------------------------------------
