@@ -13,13 +13,13 @@
   </identification>
   <part-list>
     <score-part id="P1">
-      <part-name>Music</part-name>
+      <part-name>Bagpipe</part-name>
       <score-instrument id="P1-I1">
-        <instrument-name>Music</instrument-name>
+        <instrument-name>Bagpipe</instrument-name>
       </score-instrument>
       <midi-instrument id="P1-I1">
         <midi-channel>1</midi-channel>
-        <midi-program>1</midi-program>
+        <midi-program>72</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
@@ -40,6 +40,15 @@
           <line>2</line>
         </clef>
       </attributes>
+      <direction placement="above">
+        <direction-type>
+          <metronome>
+            <beat-unit>quarter</beat-unit>
+            <per-minute>90</per-minute>
+          </metronome>
+        </direction-type>
+        <sound tempo="90"/>
+      </direction>
       <note>
         <pitch>
           <step>G</step>
@@ -140,6 +149,7 @@
       </note>
     </measure>
     <measure number="4">
+      <print new-system="yes"/>
       <note>
         <grace/>
         <pitch>
