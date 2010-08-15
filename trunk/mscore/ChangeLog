@@ -1,5 +1,6 @@
 15.aug (lv)
       - #5637 support reading bww files: set midi instrument to 72
+      - #5637 support reading bww files: fix multiple grace notes
       - #5637 support reading bww files: iotest
       (la)
       - fix #6706: Crash when inserting slurs from palette while editing text
