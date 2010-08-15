@@ -1,6 +1,8 @@
 15.aug (lv)
       - #5637 support reading bww files: set midi instrument to 72
       - #5637 support reading bww files: iotest
+      (la)
+      - fix #6706: Crash when inserting slurs from palette while editing text
 14.aug (ws)
       - infrastructure for new drumroll editor
       - changed implementation of KeySig + KeySigEvent: do not pack
