@@ -4,6 +4,7 @@
       - #5637 support reading bww files: iotest
       (la)
       - fix #6706: Crash when inserting slurs from palette while editing text
+      - fix #6740: Autosave works only the first time
 14.aug (ws)
       - infrastructure for new drumroll editor
       - changed implementation of KeySig + KeySigEvent: do not pack

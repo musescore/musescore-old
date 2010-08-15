@@ -2,6 +2,7 @@
       - fix #6658: Natural in every keysig on mac PPC
       - fix #6508: Crash removing instrument with volta
       - fix #6706: Crash when inserting slurs from palette while editing text
+      - fix #6740: Autosave works only the first time
 10.aug (ws)
       - fix repeat command (ctrl+r) for staves > 1
 6.aug (ws)
