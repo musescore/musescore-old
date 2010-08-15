@@ -83,8 +83,7 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       ChordList* cl = score->style().chordList();
       foreach (const ChordDescription* cd, *cl) {
             QString p(cd->name);
-            if (!p.isEmpty())
-            	extOtherCombo->addItem(p, cd->id);
+            extOtherCombo->addItem(p, cd->id);
             }
       connect(rootGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
       connect(extensionGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
