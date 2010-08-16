@@ -1,7 +1,9 @@
+16.aug (lv)
+      - #5637 support reading bww files: iotest (mscore)
 15.aug (lv)
       - #5637 support reading bww files: set midi instrument to 72
       - #5637 support reading bww files: fix multiple grace notes
-      - #5637 support reading bww files: iotest
+      - #5637 support reading bww files: iotest (bww2mxml)
       (la)
       - fix #6706: Crash when inserting slurs from palette while editing text
       - fix #6740: Autosave works only the first time
