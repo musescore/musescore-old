@@ -125,7 +125,7 @@ unix:
 	if test ! -d linux;                          \
          then                                      \
             mkdir linux;                           \
-            cd linux
+            cd linux; \
             cmake -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
             make -j${CPUS} -f Makefile;            \
             make package;                          \
