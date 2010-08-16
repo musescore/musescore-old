@@ -774,11 +774,13 @@ QByteArray Selection::staffMimeData() const
       xml.header();
       xml.clipboardmode = true;
 
+#if 0
       int slurId = 1;
       foreach(Element* el, *_score->gel()) {
             if (el->type() == SLUR)
                   static_cast<Slur*>(el)->setId(slurId++);
             }
+#endif
       int beamId = 0;
       foreach(Beam* beam, _score->beams())
             beam->setId(beamId++);

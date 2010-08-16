@@ -890,6 +890,7 @@ printf("  beam set track %d %d\n", beam->track(), idx * VOICES + voice);
             beam->setTrack(idx * VOICES + voice);
             }
 
+#if 0 // imlementation changed
       foreach(Element* e, _gel) {
             switch(e->type()) {
                   case SLUR:
@@ -922,6 +923,7 @@ printf("  beam set track %d %d\n", beam->track(), idx * VOICES + voice);
                         break;
                 }
             }
+#endif
       }
 
 //---------------------------------------------------------

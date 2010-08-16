@@ -1875,6 +1875,7 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 
   // part-level elements stored in the score layout: at the global level
   prevElTick=0;
+#if 0 // TODO-WS implementation changed
   foreach(Element* instruction, *(score->gel()))
     {
       bool found=false;
@@ -1925,6 +1926,7 @@ void ExportLy::buildInstructionListPart(int strack, int etrack)
 	  break;
 	}
     }// end foreach element....
+#endif
 
   // part-level elements stored in measures:
   for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next())
@@ -2204,6 +2206,7 @@ void  ExportLy::findVolta()
       Measure* meas = (Measure*)m;
       findStartRepNoBarline(i,meas);
 
+#if 0 // TODO-WS implementation changed
       foreach(Element* el, *(m->score()->gel()))
 	//for each element at the global level relevant for this measure
 	{
@@ -2249,6 +2252,7 @@ void  ExportLy::findVolta()
 #endif
 	    }//if volta
 	}// for all global elements
+#endif
       i=voltaCheckBar((Measure *) m, i);
     }//for all measures
   lastind=i;

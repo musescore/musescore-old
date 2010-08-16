@@ -166,7 +166,7 @@ void Score::end()
 //        HAIRPIN, and TEXTLINE
 //---------------------------------------------------------
 
-void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& dragOffset)
+void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /*dragOffset*/)
       {
       int pitch, staffIdx;
       QPointF offset;
@@ -179,13 +179,11 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& d
             }
 
       int track = staffIdx == -1 ? -1 : staffIdx * VOICES;
-      Measure* measure = static_cast<Measure*>(mb);
       spanner->setTrack(track);
       spanner->setStartElement(segment);
       spanner->setParent(segment);
 
       if (spanner->anchor() == ANCHOR_SEGMENT) {
-            Measure* m = segment->measure();
             static const SegmentType st = SegChordRest;
             Segment* s = segment;
             for (;;) {
@@ -204,7 +202,6 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& d
             spanner->setEndElement(s);
             }
       else {      // ANCHOR_MEASURE
-            Measure* m = segment->measure();
             spanner->setEndElement(segment->measure()->last());
             }
 
@@ -2194,10 +2191,6 @@ printf("paste <%s>\n", data.data());
 
 void Score::pasteStaff(QDomElement e, ChordRest* dst)
       {
-      foreach(Element* el, _gel) {
-            if (el->type() == SLUR)
-                  static_cast<Slur*>(el)->setId(-1);
-            }
       foreach(Beam* beam, _beams)
             beam->setId(-1);
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {

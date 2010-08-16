@@ -424,8 +424,8 @@ Score::~Score()
             delete m;
             m = nm;
             }
-      foreach(Element* e, _gel)
-            delete e;
+//      foreach(Element* e, _gel)
+//            delete e;
       /*foreach(Beam* b, _beams)
             delete b;*/
       foreach(Part* p, _parts)
@@ -635,8 +635,8 @@ void Score::write(Xml& xml, bool /*autosave*/)
       xml.curTrack = 0;
       foreach(Beam* beam, _beams)
             beam->setId(xml.beamId++);
-      foreach(Element* el, _gel)
-            el->write(xml);
+//      foreach(Element* el, _gel)
+//            el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
             xml.curTick  = 0;
@@ -701,8 +701,8 @@ void Score::insertTime(int tick, int len)
                   staff->clefList()->removeTime(tick, len);
                   staff->keymap()->removeTime(tick, len);
                   }
-            foreach(Element* el, _gel) {
 #if 0  // WS1
+            foreach(Element* el, _gel) {
                   if (el->type() == SLUR) {
                         Slur* s = static_cast<Slur*>(el);
                         if (s->tick() >= tick + len) {
@@ -719,8 +719,8 @@ void Score::insertTime(int tick, int len)
                         if (s->tick2() >= tick + len)
                               s->setTick2(s->tick2() - len);
                         }
-#endif
                   }
+#endif
             }
       else {
             //
@@ -731,8 +731,8 @@ void Score::insertTime(int tick, int len)
                   staff->clefList()->insertTime(tick, len);
                   staff->keymap()->insertTime(tick, len);
                   }
-            foreach(Element* el, _gel) {
 #if 0 // WS1
+            foreach(Element* el, _gel) {
                   if (el->type() == SLUR) {
                         Slur* s = static_cast<Slur*>(el);
                         if (s->tick() >= tick) {
@@ -749,8 +749,8 @@ void Score::insertTime(int tick, int len)
                         if (s->tick2() >= tick)
                               s->setTick2(s->tick2() + len);
                         }
-#endif
                   }
+#endif
             }
       addLayoutFlag(LAYOUT_FIX_TICKS);
       }
@@ -2118,11 +2118,11 @@ int Score::inputPos() const
 
 void Score::scanElements(void* data, void (*func)(void*, Element*))
       {
-      foreach (Element* element, _gel) {
-            if (element->type() == SLUR)
-                  continue;
-            element->scanElements(data, func);
-            }
+//      foreach (Element* element, _gel) {
+//            if (element->type() == SLUR)
+//                  continue;
+//            element->scanElements(data, func);
+//            }
       foreach(Beam* b, _beams)
             func(data, b);
       for(MeasureBase* m = first(); m; m = m->next())

@@ -716,6 +716,11 @@ void MuseScore::newFile()
                               }
                         if (pickupMeasure)
 	                        d.setVal(ticks);
+                        Clef* clef = new Clef(cs);
+                        clef->setSubtype(staff->clef(0));
+                        clef->setTrack(staffIdx * VOICES);
+                        Segment* segment = measure->getSegment(SegClef, 0);
+                        segment->add(clef);
                         }
 		      Rest* rest = new Rest(score, d);
                   rest->setDuration(measure->len());
@@ -1443,7 +1448,7 @@ bool Score::read(QDomElement dScore)
             else if (tag == "Slur") {
                   Slur* slur = new Slur(this);
                   slur->read(ee);
-                  _gel.append(slur);
+                  slurs.append(slur);
                   }
             else if ((_mscVersion < 116) &&     // skip and process in II. pass
                ((tag == "HairPin")
@@ -1552,10 +1557,7 @@ bool Score::read(QDomElement dScore)
             }
 
       // check slurs
-      foreach(Element* e, _gel) {
-            if (e->type() != SLUR)
-                  continue;
-            Slur* slur = static_cast<Slur*>(e);
+      foreach(Slur* slur, slurs) {
             if (!slur->startElement() || !slur->endElement()) {
 printf("incomplete Slur\n");
                   if (slur->startElement()) {
@@ -1567,8 +1569,8 @@ printf("incomplete Slur\n");
                         static_cast<ChordRest*>(slur->endElement())->removeSlurBack(slur);
                         }
                   }
-            _gel.removeOne(slur);
             }
+      slurs.clear();
       connectTies();
       setInstrumentNames();
 
@@ -1811,8 +1813,8 @@ bool Score::saveSvg(const QString& saveName)
       p.scale(mag, mag);
 
       QList<Element*> eel;
-      foreach (Element* element, _gel)
-            element->scanElements(&eel, collectElements);
+//      foreach (Element* element, _gel)
+//            element->scanElements(&eel, collectElements);
       foreach (Beam* b, _beams)
             b->scanElements(&eel, collectElements);
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
@@ -1885,8 +1887,8 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
       int pages = pl.size();
 
       QList<Element*> eel;
-      foreach (Element* element, _gel)
-            element->scanElements(&eel, collectElements);
+//      foreach (Element* element, _gel)
+//            element->scanElements(&eel, collectElements);
       foreach (Beam* b, _beams)
             b->scanElements(&eel, collectElements);
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {

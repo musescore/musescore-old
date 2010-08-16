@@ -342,11 +342,13 @@ void InstrumentWizard::createInstruments(Score* cs)
             int rstaff = 0;
             for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
                   StaffListItem* sli = (StaffListItem*)ci;
-                  Staff* staff = new Staff(cs, part, rstaff);
-                  sli->staff = staff;
+                  Staff* staff       = new Staff(cs, part, rstaff);
+                  sli->staff         = staff;
                   staff->setRstaff(rstaff);
                   ++rstaff;
+
                   staff->clefList()->setClef(0, sli->clef());
+
                   staff->setUseTablature(t->useTablature);
                   if (cidx > MAX_STAVES) {
                         staff->setLines(5);
@@ -369,12 +371,8 @@ void InstrumentWizard::createInstruments(Score* cs)
             cs->insertPart(part, staffIdx);
             int sidx = cs->staffIdx(part);
             int eidx = sidx + part->nstaves();
-            for (MeasureBase* mb = cs->measures()->first(); mb; mb = mb->next()) {
-                  if (mb->type() != MEASURE)
-                        continue;
-                  Measure* m = (Measure*)mb;
+            for (Measure* m = cs->firstMeasure(); m; m = m->nextMeasure())
                   m->cmdAddStaves(sidx, eidx);
-                  }
             staffIdx += rstaff;
             }
       //

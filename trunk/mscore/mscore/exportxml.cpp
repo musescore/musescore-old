@@ -846,6 +846,7 @@ static DirectionsAnchor* findMatchInPart(int tick, Staff* st, bool start, Score*
 
 void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
       {
+#if 0 // TODO-WS: implementation has changed
       // part-level elements stored in the score layout
       foreach(Element* dir, *(cs->gel())) {
             DirectionsAnchor* da = 0;
@@ -882,6 +883,7 @@ void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
             Measure* m = (Measure*)mb;
             buildDirectionsList(m, true, p, strack, etrack);
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -1559,6 +1561,7 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
 
 static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml)
       {
+#if 0 // TODO-WS implementation has changed
       // search for trill starting at this chord
       foreach(Element* el, *(chord->score()->gel())) {
             if (el->type() == TRILL) {
@@ -1579,6 +1582,7 @@ static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& orn
 #endif
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------
