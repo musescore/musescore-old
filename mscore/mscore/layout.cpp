@@ -723,11 +723,11 @@ void Score::doLayout()
                   m->layout2();
             }
 
-      foreach (Element* el, _gel) {
+//      foreach (Element* el, _gel) {
 //            if (el && el->type() != SLUR)
-            if (el)
-                  el->layout();
-            }
+//            if (el)
+//                  el->layout();
+//            }
 
       //---------------------------------------------------
       //    remove remaining pages and systems
@@ -1630,8 +1630,6 @@ void Score::add(Element* el)
                   foreach(ChordRest* cr, b->elements())
                         cr->setBeam(b);
                   }
-            else if (el->check())
-                  _gel.append(el);
             else {
                   printf("add invalid element <%s>\n", el->name());
                   delete el;
@@ -1658,8 +1656,7 @@ void Score::remove(Element* el)
                   printf("Score::remove(): cannot find Beam\n");
             }
       else {
-            if (!_gel.removeOne(el))
-                  printf("Score::remove(): element %s not found\n", el->name());
+            printf("Score::remove(): element %s\n", el->name());
             }
       }
 

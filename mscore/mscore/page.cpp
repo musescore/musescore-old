@@ -609,6 +609,7 @@ void Page::rebuildBspTree()
 // TODO2: needs to be optimized away:
 
       QRectF bb(abbox());
+#if 0
       foreach (Element* element, *score()->gel()) {
             if (element->type() == SLUR)
                   continue;
@@ -619,6 +620,7 @@ void Page::rebuildBspTree()
             if (element->abbox().intersects(bb))
                   element->scanElements(&el, collectElements);
             }
+#endif
       foreach(Beam* b, score()->beams()) {
             if (b->abbox().intersects(bb))
                   el.append(b);

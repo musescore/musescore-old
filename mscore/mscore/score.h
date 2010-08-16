@@ -228,7 +228,7 @@ class Score : public QObject {
       QList<MidiMapping> _midiMapping;
 
       MeasureBaseList _measures;          // here are the notes
-      QList<Element*> _gel;               // global elements: Slur, SLine
+//      QList<Element*> _gel;               // global elements: Slur, SLine
       QList<Beam*>    _beams;
 
       RepeatList* _repeatList;
@@ -678,8 +678,8 @@ class Score : public QObject {
 
       bool checkHasMeasures() const;
 
-      QList<Element*>* gel()                  { return &_gel; }
-      const QList<Element*>* gel() const      { return &_gel; }
+//      QList<Element*>* gel()                  { return &_gel; }
+//      const QList<Element*>* gel() const      { return &_gel; }
       void setLayout(Measure* m);
       int midiPort(int idx) const;
       int midiChannel(int idx) const;

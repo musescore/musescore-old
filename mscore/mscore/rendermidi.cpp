@@ -383,7 +383,7 @@ void Score::toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx)
 
             int channel = instr->channel(0).channel;
             // TODO: what if instrument has more than one channel?
-
+#if 0
             foreach(Element* e, _gel) {
                   int staffIdx = e->staffIdx();
                   if (e->type() == PEDAL && staffIdx >= firstStaffIdx && staffIdx < nextStaffIdx) {
@@ -403,6 +403,7 @@ void Score::toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx)
                               }
                         }
                   }
+#endif
             }
       }
 

@@ -298,6 +298,7 @@ void Inspector::updateList(Score* s)
 
       QTreeWidgetItem* li = new QTreeWidgetItem(list, INVALID);
       li->setText(0, "Global");
+#if 0 // implementation changed
       foreach(Element* el, *cs->gel()) {
             if (el->type() == SLUR) {
                   ElementItem* se = new ElementItem(li, el);
@@ -335,6 +336,7 @@ void Inspector::updateList(Score* s)
             else
                   new ElementItem(li, el);
             }
+#endif
       foreach(Beam* beam, cs->beams())
 	      new ElementItem(li, beam);
 
