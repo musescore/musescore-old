@@ -4224,11 +4224,11 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Program Start</source>
-        <translation>Program start</translation>
+        <translation>Program opstart</translation>
     </message>
     <message>
         <source>continue last session</source>
-        <translation>fortsæt forrige session</translation>
+        <translation>Fortsæt forrige session</translation>
     </message>
     <message>
         <source>start with new score</source>
@@ -4244,7 +4244,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>show splash screen</source>
-        <translation>vis opstartsbillede</translation>
+        <translation>Vis opstartsbillede</translation>
     </message>
     <message>
         <source>Language</source>
@@ -4364,7 +4364,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Wallpaper</source>
-        <translation>Wallpaper</translation>
+        <translation>Baggrundsbillede</translation>
     </message>
     <message>
         <source>Color</source>
@@ -4596,7 +4596,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Reset to Default</source>
-        <translation>Reset til standard</translation>
+        <translation>Genskab standardværdier</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -4612,7 +4612,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>start empty</source>
-        <translation>start tom</translation>
+        <translation>Start tomt</translation>
     </message>
     <message>
         <source>gl Galician</source>
@@ -4624,7 +4624,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation>Stykke element farver</translation>
+        <translation>Stykkets farver</translation>
     </message>
     <message>
         <source>Default foreground</source>
@@ -4721,7 +4721,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Auto-correction</source>
-        <translation>Auto-rettelser</translation>
+        <translation>Automatiske rettelser</translation>
     </message>
     <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
@@ -4729,7 +4729,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation>Erstat (C) med copyright symbolet © (kun gældende for tekst i copyright sektionen)</translation>
+        <translation>Erstat (C) med CopyRight symbolet © (gælder kun i CopyRight sektionen)</translation>
     </message>
     <message>
         <source>Style Used for Import</source>

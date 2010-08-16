@@ -949,7 +949,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"/>
+        <translation> одиниць часу MIDI</translation>
     </message>
     <message>
         <source>Note Head Group</source>
@@ -2131,7 +2131,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Властивості тексту...</translation>
+        <translation>Властивості тексту…</translation>
     </message>
 </context>
 <context>
@@ -2237,7 +2237,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">…</translation>
+        <translation>…</translation>
     </message>
 </context>
 <context>
@@ -3779,7 +3779,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"/>
+        <translation>Користувач</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -6674,7 +6674,7 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation type="unfinished">ні</translation>
+        <translation>немає</translation>
     </message>
     <message>
         <source>sharp</source>
@@ -6766,15 +6766,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp-slash2</source>
-        <translation type="unfinished">півтора дієза {2?}</translation>
+        <translation>5/4-тоновий дієз</translation>
     </message>
     <message>
         <source>sharp-slash3</source>
-        <translation type="unfinished">півтора дієза {3?}</translation>
+        <translation>3/4-тоновий дієз</translation>
     </message>
     <message>
         <source>sharp-slash4</source>
-        <translation>півтора дієза</translation>
+        <translation>7/4-тоновий дієз</translation>
     </message>
     <message>
         <source>sharp arrow up</source>

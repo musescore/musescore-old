@@ -79,7 +79,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Krok MIDI</translation>
+        <translation>Činnost MIDI</translation>
     </message>
 </context>
 <context>
@@ -109,7 +109,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation type="unfinished">Akord/Pomlka</translation>
+        <translation>Akord/Pomlka</translation>
     </message>
 </context>
 <context>
@@ -214,7 +214,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>B</source>
-        <translation>H</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>## (double sharp)</source>
@@ -861,7 +861,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation>sp</translation>
+        <translation>sp (jednotka mezery)</translation>
     </message>
     <message>
         <source>additional trailing space</source>
@@ -882,7 +882,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>auto</source>
         <extracomment>velocity type</extracomment>
-        <translation>auto</translation>
+        <translation>Automaticky</translation>
     </message>
     <message>
         <source>up</source>
@@ -919,12 +919,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation>uživatel</translation>
+        <translation>Uživatel</translation>
     </message>
     <message>
         <source>offset</source>
         <extracomment>velocity type</extracomment>
-        <translation>posun</translation>
+        <translation>Posun</translation>
     </message>
     <message>
         <source>ontime offset type</source>
@@ -961,7 +961,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>normal</source>
-        <translation>normální</translation>
+        <translation>Normální</translation>
     </message>
     <message>
         <source>cross</source>
@@ -1082,7 +1082,7 @@ p, li { white-space: pre-wrap; }
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation>Hudební značka určující hlasitost</translation>
+        <translation>Hudební značky určující hlasitost</translation>
     </message>
     <message>
         <source>Set Invisible</source>
@@ -1586,7 +1586,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>Hairpins</source>
-        <translation>Sponky pro Cresc./Decrescendo</translation>
+        <translation>Sponky pro crescendo/decrescendo</translation>
     </message>
     <message>
         <source>Chordnames</source>
@@ -1663,7 +1663,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>odd/even</source>
-        <translation>Lichá/sudá</translation>
+        <translation>Lichá/Sudá</translation>
     </message>
     <message>
         <source>Measure Numbers</source>
@@ -1719,7 +1719,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System</source>
-        <translation>Osnova</translation>
+        <translation>Systém</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
@@ -2255,7 +2255,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Odstranit</translation>
+        <translation>Odebrat</translation>
     </message>
     <message>
         <source>Up</source>
@@ -2465,7 +2465,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished">Přidat taktové označení do palety</translation>
+        <translation>Přidat taktové označení do palety</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2511,7 +2511,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>solid</source>
-        <translation>plný</translation>
+        <translation>Plný</translation>
     </message>
     <message>
         <source>dash</source>
@@ -2519,7 +2519,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>dot</source>
-        <translation>tečka</translation>
+        <translation>Tečka</translation>
     </message>
     <message>
         <source>dash dot</source>
@@ -2531,7 +2531,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>Hook</source>
-        <translation>Háček</translation>
+        <translation>Praporek</translation>
     </message>
     <message>
         <source>Up</source>
@@ -3006,11 +3006,11 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>Otevřít &amp;nedávný</translation>
+        <translation>Naposledy o&amp;tevřené soubory</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Upravit</translation>
+        <translation>&amp;Úpravy</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -3242,7 +3242,7 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>&amp;Create</source>
-        <translation>&amp;Vytvořit</translation>
+        <translation>&amp;Tvorba</translation>
     </message>
     <message>
         <source>Measures</source>
@@ -3344,7 +3344,7 @@ do notového zápisu "%1"?</translation>
     </message>
     <message>
         <source>Akkolade</source>
-        <translation>Složená závorka (svorka, akoláda)</translation>
+        <translation>Složená závorka (akoláda)</translation>
     </message>
     <message>
         <source>Search</source>
@@ -3454,7 +3454,7 @@ Z nabídky "Nápověda" zkuste místo toho vybrat "Příručka dostupná na inte
     </message>
     <message>
         <source>Slur</source>
-        <translation type="unfinished">Oblouček</translation>
+        <translation>Oblouček</translation>
     </message>
     <message>
         <source>Crescendo</source>
@@ -3494,7 +3494,7 @@ Z nabídky "Nápověda" zkuste místo toho vybrat "Příručka dostupná na inte
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation>Arpeggio &amp;&amp; Glissando</translation>
+        <translation>Arpeggio a &amp;glissando</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -3502,7 +3502,7 @@ Z nabídky "Nápověda" zkuste místo toho vybrat "Příručka dostupná na inte
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
-        <translation>Nadechnutí &amp;&amp; Přestávky</translation>
+        <translation>Nadechnutí a &amp;přestávky</translation>
     </message>
     <message>
         <source>Caesura</source>
@@ -3510,7 +3510,7 @@ Z nabídky "Nápověda" zkuste místo toho vybrat "Příručka dostupná na inte
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Artikulace &amp;&amp; Melodické ozdoby</translation>
+        <translation>Artikulace a &amp;melodické ozdoby</translation>
     </message>
     <message>
         <source>Fingering %1</source>
@@ -3538,7 +3538,7 @@ Z nabídky "Nápověda" zkuste místo toho vybrat "Příručka dostupná na inte
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation>Zalomení &amp;&amp; Vymezovač odstupu</translation>
+        <translation>Zalomení a vymeze&amp;ní odstupu</translation>
     </message>
     <message>
         <source>Line break</source>
@@ -3550,7 +3550,7 @@ Z nabídky "Nápověda" zkuste místo toho vybrat "Příručka dostupná na inte
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation>Vymezovač odstupu řádků v notové osnově</translation>
+        <translation>Vymezení odstupu řádků v notové osnově</translation>
     </message>
     <message>
         <source>Start beam</source>
@@ -3578,11 +3578,11 @@ Z nabídky "Nápověda" zkuste místo toho vybrat "Příručka dostupná na inte
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation>Artikulace &amp;&amp; Melodické ozdoby...</translation>
+        <translation>Artikulace a &amp;melodické ozdoby...</translation>
     </message>
     <message>
         <source>Pedal</source>
-        <translation type="unfinished">Prodleva (držený bas)</translation>
+        <translation>Pedál (prodleva, držený bas)</translation>
     </message>
     <message>
         <source>MuseScore: Brackets</source>
@@ -3590,7 +3590,7 @@ Z nabídky "Nápověda" zkuste místo toho vybrat "Příručka dostupná na inte
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation>Zalomení &amp;&amp; Vymezovač odstupu...</translation>
+        <translation>Zalomení a &amp;vymezení odstupu...</translation>
     </message>
     <message>
         <source>The previous session quit unexpectedly.
@@ -3608,11 +3608,11 @@ Restore session?</source>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation>MuseScore: Artikulace &amp; Melodické ozdoby</translation>
+        <translation>MuseScore: Artikulace a m&amp;elodické ozdoby</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation>MuseScore: Zalomení &amp; Vymezovač odstupu</translation>
+        <translation>MuseScore: Zalomení a vyme&amp;zení odstupu</translation>
     </message>
     <message>
         <source>Check for Update</source>
@@ -3848,7 +3848,7 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation>na šířku</translation>
+        <translation>Na šířku</translation>
     </message>
     <message>
         <source>Height</source>
@@ -3872,7 +3872,7 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>inch</source>
-        <translation>palec</translation>
+        <translation>palce</translation>
     </message>
     <message>
         <source>Even Page Margins</source>
@@ -3880,7 +3880,7 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>Bottom Margin</source>
-        <translation>Spodní okraj</translation>
+        <translation>Dolní okraj</translation>
     </message>
     <message>
         <source>Top Margin</source>
@@ -4030,19 +4030,19 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Hla</translation>
+        <translation>Hlasitost</translation>
     </message>
     <message>
         <source>Pan</source>
-        <translation>Vyr</translation>
+        <translation>Vyrovnání</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation>Ozv</translation>
+        <translation>Ozvěna</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation>Sbo</translation>
+        <translation>Sbor</translation>
     </message>
     <message>
         <source>Mute</source>
@@ -4058,7 +4058,7 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>midi sound for part</source>
-        <translation>Zvukové písmo MIDI pro hlas</translation>
+        <translation>Zvukové písmo MIDI pro hlas/nástroj</translation>
     </message>
     <message>
         <source>drumset</source>
@@ -4108,7 +4108,7 @@ není slučitelný se současným rozhraním</translation>
     <name>PlayPanelBase</name>
     <message>
         <source>MuseScore: Play Panel</source>
-        <translation>MuseScore: Přehrávací deska</translation>
+        <translation>MuseScore: Přehrávací panel</translation>
     </message>
     <message>
         <source>measure.beat</source>
@@ -4144,7 +4144,7 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Ukazatel přehrávání o takt zpět</translation>
+        <translation>Přetočit</translation>
     </message>
     <message>
         <source>Play</source>
@@ -4156,19 +4156,19 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>Tmp</source>
-        <translation>Tmp</translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <source>Straight</source>
-        <translation>Po sobě jdoucí</translation>
+        <translation>Přímý</translation>
     </message>
     <message>
         <source>Swing</source>
-        <translation>Houpat</translation>
+        <translation>Houpání</translation>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation>Zamíchat</translation>
+        <translation>Míchání</translation>
     </message>
 </context>
 <context>
@@ -4302,7 +4302,7 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>Play Panel:</source>
-        <translation>Přehrávací deska:</translation>
+        <translation>Přehrávací panel:</translation>
     </message>
     <message>
         <source>show</source>
@@ -4451,7 +4451,7 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
     </message>
     <message>
         <source>I/O</source>
-        <translation>Vstup/Výstup (I/O)</translation>
+        <translation>Vstup/Výstup</translation>
     </message>
     <message>
         <source>Ports</source>
@@ -4728,11 +4728,11 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation>Nahradit (C) symbolem pro autorské právo © (týká se pouze textu v oddíle s autorským právem - copyright)</translation>
+        <translation>Nahradit (C) symbolem autorského práva © (pouze text v oddíle s autorským právem)</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
-        <translation>Styl pro import</translation>
+        <translation>Styl používaný pro zavedení</translation>
     </message>
     <message>
         <source>Built in style</source>
@@ -4925,7 +4925,7 @@ Vyberte, prosím, nějakou notu nebo pomlku a zkuste to ještě jednou
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
-        <translation>MuseScore: Nahrání překladůy se nezdařilo:</translation>
+        <translation>MuseScore: Nahrání překladů se nezdařilo:</translation>
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
@@ -5687,7 +5687,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation>Praporek systému</translation>
+        <translation>Systémový příznak</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -5730,7 +5730,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation>Řídící ladění</translation>
+        <translation>Hlavní ladění</translation>
     </message>
     <message>
         <source>Hz</source>
@@ -6178,7 +6178,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation>Zaoblení</translation>
+        <translation>Zaoblení:</translation>
     </message>
     <message>
         <source>corner round</source>
@@ -6682,7 +6682,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp</source>
-        <translation>křížek</translation>
+        <translation>Křížek</translation>
     </message>
     <message>
         <source>flat</source>
@@ -6690,15 +6690,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation>dvojitý křížek</translation>
+        <translation>Dvojitý křížek</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>dvojité béčko</translation>
+        <translation>Dvojité béčko</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>bez předznamenání</translation>
+        <translation>Bez předznamenání</translation>
     </message>
     <message>
         <source>(sharp)</source>
@@ -6782,7 +6782,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation>křížek šipka nahoru</translation>
+        <translation>Křížek šipka nahoru</translation>
     </message>
     <message>
         <source>sharp arrow down</source>
@@ -6790,11 +6790,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation>křížek šipka obě</translation>
+        <translation>Křížek šipka obě</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation>béčko šipka nahoru</translation>
+        <translation>Béčko šipka nahoru</translation>
     </message>
     <message>
         <source>flat arrow down</source>
@@ -6802,19 +6802,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation>béčko šipka obě</translation>
+        <translation>Béčko šipka obě</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>bez předznamenání šipka nahoru</translation>
+        <translation>Bez předznamenání šipka nahoru</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>bez předznamenání šipka dolů</translation>
+        <translation>Bez předznamenání šipka dolů</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation>bez předznamenání šipka obě</translation>
+        <translation>Bez předznamenání šipka obě</translation>
     </message>
 </context>
 <context>
@@ -7125,7 +7125,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>rest</source>
-        <translation>pomlka</translation>
+        <translation>Pomlka</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
@@ -7297,7 +7297,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Duplet</source>
-        <translation>Dvojče</translation>
+        <translation>Duola</translation>
     </message>
     <message>
         <source>Triplet</source>
@@ -7305,27 +7305,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Quadruplet</source>
-        <translation>Čtyřče</translation>
+        <translation>Kvartola</translation>
     </message>
     <message>
         <source>Quintuplet</source>
-        <translation>Paterče</translation>
+        <translation>Kvintola</translation>
     </message>
     <message>
         <source>Sextuplet</source>
-        <translation>Šesterče</translation>
+        <translation>Sextola</translation>
     </message>
     <message>
         <source>Septuplet</source>
-        <translation>Sedmerče</translation>
+        <translation>Septola</translation>
     </message>
     <message>
         <source>Octuplet</source>
-        <translation>Osmerče</translation>
+        <translation>Oktola</translation>
     </message>
     <message>
         <source>Nonuplet</source>
-        <translation>Devítče</translation>
+        <translation>Nonola</translation>
     </message>
     <message>
         <source>Other Tuplets</source>
@@ -7525,7 +7525,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play Panel</source>
-        <translation>Přehrávací deska</translation>
+        <translation>Přehrávací panel</translation>
     </message>
     <message>
         <source>Navigator</source>
@@ -8021,7 +8021,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load score from file</source>
-        <translation>Načíst notovou osnovu ze souboru</translation>
+        <translation>Načíst notový zápis ze souboru</translation>
     </message>
     <message>
         <source>File save</source>
@@ -8029,7 +8029,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save score to file</source>
-        <translation>Uložit notovou osnovu do souboru</translation>
+        <translation>Uložit notový zápis do souboru</translation>
     </message>
     <message>
         <source>File save as</source>
@@ -8037,7 +8037,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save score under a new file name</source>
-        <translation>Uložit notovou osnovu pod novým jménem</translation>
+        <translation>Uložit notový zápis pod novým souborovým názvem</translation>
     </message>
     <message>
         <source>File save a copy</source>
@@ -8065,11 +8065,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Print</source>
-        <translation>Tisknout</translation>
+        <translation>Tisk</translation>
     </message>
     <message>
         <source>Print score</source>
-        <translation>tisknout notovou osnovu</translation>
+        <translation>Vytisknout notovou osnovu</translation>
     </message>
     <message>
         <source>Undo last change</source>
@@ -8365,7 +8365,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Seek to begin</source>
-        <translation>Posunout nazačátek</translation>
+        <translation>Posunout na začátek</translation>
     </message>
     <message>
         <source>Player rewind</source>
@@ -8397,7 +8397,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation>Upravit styl akordu</translation>
+        <translation>Upravit styl akordu...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -8516,23 +8516,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upprall</source>
-        <translation>Nahoru náraz (nahoru prall)</translation>
+        <translation>Náraz nahoru (prall nahoru)</translation>
     </message>
     <message>
         <source>downprall</source>
-        <translation>Dolů náraz (dolů prall)</translation>
+        <translation>Náraz dolů (prall dolů)</translation>
     </message>
     <message>
         <source>upmordent</source>
-        <translation>Nahoru mordent</translation>
+        <translation>Mordent nahoru</translation>
     </message>
     <message>
         <source>downmordent</source>
-        <translation>Dolů mordent</translation>
+        <translation>Mordent dolů</translation>
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished">Fermata nahoře</translation>
+        <translation>Fermata nahoře</translation>
     </message>
     <message>
         <source>ushortfermata</source>
@@ -9750,7 +9750,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>calto clef</source>
-        <translation>Violový klíč C</translation>
+        <translation>Violový klíč malý</translation>
     </message>
     <message>
         <source>bass clef</source>
@@ -9758,7 +9758,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cbass clef</source>
-        <translation>Basový klíč C</translation>
+        <translation>Basový klíč malý</translation>
     </message>
     <message>
         <source>trebleclef</source>
@@ -9766,7 +9766,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ctrebleclef</source>
-        <translation>Houslový klíč C</translation>
+        <translation>Houslový klíč malý</translation>
     </message>
     <message>
         <source>percussion clef</source>
@@ -9774,7 +9774,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cpercussion clef</source>
-        <translation>Bicí klíč C</translation>
+        <translation>Bicí klíč malý</translation>
     </message>
     <message>
         <source>tab clef</source>
@@ -9806,7 +9806,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pedalP</source>
-        <translation>PedalP</translation>
+        <translation>Pedal P</translation>
     </message>
     <message>
         <source>pedald</source>
@@ -9862,47 +9862,47 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>zero</source>
-        <translation>nula</translation>
+        <translation>Nula</translation>
     </message>
     <message>
         <source>one</source>
-        <translation>jedna</translation>
+        <translation>Jedna</translation>
     </message>
     <message>
         <source>two</source>
-        <translation>dvě</translation>
+        <translation>Dvě</translation>
     </message>
     <message>
         <source>three</source>
-        <translation>tři</translation>
+        <translation>Tři</translation>
     </message>
     <message>
         <source>four</source>
-        <translation>čtyři</translation>
+        <translation>Čtyři</translation>
     </message>
     <message>
         <source>five</source>
-        <translation>pět</translation>
+        <translation>Pět</translation>
     </message>
     <message>
         <source>six</source>
-        <translation>šest</translation>
+        <translation>Šest</translation>
     </message>
     <message>
         <source>seven</source>
-        <translation>sedm</translation>
+        <translation>Sedm</translation>
     </message>
     <message>
         <source>eight</source>
-        <translation>osm</translation>
+        <translation>Osm</translation>
     </message>
     <message>
         <source>nine</source>
-        <translation>devět</translation>
+        <translation>Devět</translation>
     </message>
     <message>
         <source>plus</source>
-        <translation>plus</translation>
+        <translation>Plus</translation>
     </message>
 </context>
 </TS>

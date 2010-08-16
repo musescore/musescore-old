@@ -1210,7 +1210,7 @@ failed: </source>
     </message>
     <message>
         <source>Pitch</source>
-        <translation>音程</translation>
+        <translation>音高</translation>
     </message>
     <message>
         <source>Note</source>
@@ -1699,7 +1699,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>interval</source>
-        <translation>インターバル</translation>
+        <translation>音程</translation>
     </message>
     <message>
         <source>spaces</source>
@@ -3108,7 +3108,7 @@ before closing?</source>
     </message>
     <message>
         <source>Coda</source>
-        <translation>Coda</translation>
+        <translation>コーダ</translation>
     </message>
     <message>
         <source>Codetta</source>
@@ -3228,7 +3228,7 @@ before closing?</source>
     </message>
     <message>
         <source>Add Interval</source>
-        <translation>インターバルを追加</translation>
+        <translation>音程を追加</translation>
     </message>
     <message>
         <source>Tuplets</source>
@@ -4075,7 +4075,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Pitch:</source>
-        <translation>音程</translation>
+        <translation>音高</translation>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
@@ -8214,7 +8214,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
-        <translation type="unfinished"/>
+        <translation>和音の中のより高い音へ移動</translation>
     </message>
     <message>
         <source>Go to top note in chord</source>
@@ -8238,7 +8238,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch down octave</source>
-        <translation>音程をオクターブ下へ移動</translation>
+        <translation>音高をオクターブ下へ移動</translation>
     </message>
     <message>
         <source>Down octave</source>
