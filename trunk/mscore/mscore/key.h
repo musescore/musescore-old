@@ -28,22 +28,31 @@ class Score;
 //   KeySigEvent
 //---------------------------------------------------------
 
-struct KeySigEvent {
-      int accidentalType;
-      int naturalType;
-      int customType;
-      bool custom;
-      bool invalid;
+class KeySigEvent {
+      int _accidentalType;
+      int _naturalType;
+      int _customType;
+      bool _custom;
+      bool _invalid;
 
+   public:
       KeySigEvent();
       KeySigEvent(int);
 
-      bool isValid() const { return !invalid; }
+      bool isValid() const { return !_invalid; }
       bool operator==(const KeySigEvent& e) const;
       bool operator!=(const KeySigEvent& e) const;
       void setCustomType(int v);
       void setAccidentalType(int v);
       void print() const;
+
+      int accidentalType() const { return _accidentalType; }
+      int naturalType() const    { return _naturalType;    }
+      void setNaturalType(int v) { _naturalType = v;       }
+      int customType() const     { return _customType;     }
+      bool custom() const        { return _custom;         }
+      bool invalid() const       { return _invalid;        }
+      void initFromSubtype(int);    // for backward compatibility
       };
 
 //---------------------------------------------------------

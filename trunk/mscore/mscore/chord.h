@@ -182,6 +182,7 @@ class Chord : public ChordRest {
       void setStem(Stem* s);
       Arpeggio* arpeggio() const             { return _arpeggio;  }
       Tremolo* tremolo() const               { return _tremolo;   }
+      void setTremolo(Tremolo* t)            { _tremolo = t;      }
       Glissando* glissando() const           { return _glissando; }
       StemSlash* stemSlash() const           { return _stemSlash; }
 

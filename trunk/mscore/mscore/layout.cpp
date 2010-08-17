@@ -629,7 +629,7 @@ void Score::doLayout()
                                     }
                               else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                                     KeySig* ks = static_cast<KeySig*>(e);
-                                    int naturals = key1 ? key1->keySigEvent().accidentalType : 0;
+                                    int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
                                     ks->setOldSig(naturals);
                                     st->setKey(s->tick(), ks->keySigEvent());
                                     key1 = ks;
@@ -797,7 +797,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         }
                   }
             bool needKeysig = keyIdx.isValid()
-               && keyIdx.accidentalType != 0
+               && keyIdx.accidentalType() != 0
                && (isFirstSystem || styleB(ST_genKeysig))
                ;
             if (staff->useTablature())
@@ -1320,7 +1320,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                     int track = staffIdx * VOICES;
                                     if (!s->element(track)) {
                                           KeySig* ks = new KeySig(this);
-                                          ks->setSig(key1.accidentalType, key2.accidentalType);
+                                          ks->setSig(key1.accidentalType(), key2.accidentalType());
                                           ks->setTrack(track);
                                           ks->setGenerated(true);
                                           ks->setMag(staff->mag());
@@ -1620,20 +1620,24 @@ void Score::connectTies()
 
 void Score::add(Element* el)
       {
-      if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX) {
-            measures()->add((MeasureBase*)el);
-            }
-      else {
-            if (el->type() == BEAM) {
+      switch(el->type()) {
+            case MEASURE:
+            case HBOX:
+            case VBOX:
+                  measures()->add((MeasureBase*)el);
+                  break;
+            case BEAM:
+                  {
                   Beam* b = static_cast<Beam*>(el);
                   _beams.append(b);
                   foreach(ChordRest* cr, b->elements())
                         cr->setBeam(b);
                   }
-            else {
-                  printf("add invalid element <%s>\n", el->name());
+                  break;
+            default:
+                  printf("Score::add() invalid element <%s>\n", el->name());
                   delete el;
-                  }
+                  break;
             }
       }
 
@@ -1643,20 +1647,26 @@ void Score::add(Element* el)
 
 void Score::remove(Element* el)
       {
-      if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX) {
-            measures()->remove(static_cast<MeasureBase*>(el));
-            }
-      else if (el->type() == BEAM) {
-            Beam* b = static_cast<Beam*>(el);
-            if (_beams.removeOne(b)) {
-                  foreach(ChordRest* cr, b->elements())
-                        cr->setBeam(0);
+      switch(el->type()) {
+            case MEASURE:
+            case HBOX:
+            case VBOX:
+                  measures()->remove(static_cast<MeasureBase*>(el));
+                  break;
+            case BEAM:
+                  {
+                  Beam* b = static_cast<Beam*>(el);
+                  if (_beams.removeOne(b)) {
+                        foreach(ChordRest* cr, b->elements())
+                              cr->setBeam(0);
+                        }
+                  else
+                        printf("Score::remove(): cannot find Beam\n");
                   }
-            else
-                  printf("Score::remove(): cannot find Beam\n");
-            }
-      else {
-            printf("Score::remove(): element %s\n", el->name());
+                  break;
+            default:
+                  printf("Score::remove(): invalid element %s\n", el->name());
+                  break;
             }
       }
 

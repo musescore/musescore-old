@@ -1574,20 +1574,25 @@ void OveToMScore::convertArticulation(
 //	case OVE::Articulation_Natural_Accidental_For_Trill :
 	case OVE::Articulation_Tremolo_Eighth :{
 		Tremolo* t = new Tremolo(score_);
-		t->setSubtype(TREMOLO_1);
+		t->setSubtype(TREMOLO_R8);
 		cr->add(t);
 		break;
 	}
 	case OVE::Articulation_Tremolo_Sixteenth :{
 		Tremolo* t = new Tremolo(score_);
-		t->setSubtype(TREMOLO_2);
+		t->setSubtype(TREMOLO_R16);
 		cr->add(t);
 		break;
 	}
-	case OVE::Articulation_Tremolo_Thirty_Second :
+	case OVE::Articulation_Tremolo_Thirty_Second :{
+		Tremolo* t = new Tremolo(score_);
+		t->setSubtype(TREMOLO_R32);
+		cr->add(t);
+		break;
+	}
 	case OVE::Articulation_Tremolo_Sixty_Fourth :{
 		Tremolo* t = new Tremolo(score_);
-		t->setSubtype(TREMOLO_3);
+		t->setSubtype(TREMOLO_R64);
 		cr->add(t);
 		break;
 	}

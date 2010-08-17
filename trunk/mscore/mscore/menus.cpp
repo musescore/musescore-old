@@ -537,18 +537,20 @@ void MuseScore::populatePalette()
       sp->setGrid(27, 40);
       sp->setDrawGrid(true);
       const char* tremoloName[] = {
-            QT_TR_NOOP("1 through stem"),
-            QT_TR_NOOP("2 through stem"),
-            QT_TR_NOOP("3 through stem"),
-            QT_TR_NOOP("1 between notes"),
-            QT_TR_NOOP("2 between notes"),
-            QT_TR_NOOP("3 between notes")
+            QT_TR_NOOP("1/8 through stem"),
+            QT_TR_NOOP("1/16 through stem"),
+            QT_TR_NOOP("1/32 through stem"),
+            QT_TR_NOOP("1/64 through stem"),
+            QT_TR_NOOP("1/8 between notes"),
+            QT_TR_NOOP("1/16 between notes"),
+            QT_TR_NOOP("1/32 between notes"),
+            QT_TR_NOOP("1/64 between notes")
             };
 
-      for (int i = 0; i < 6; ++i) {
+      for (int i = TREMOLO_R8; i <= TREMOLO_C64; ++i) {
             Tremolo* tremolo = new Tremolo(gscore);
-            tremolo->setSubtype(i);
-            sp->append(tremolo, tr(tremoloName[i]));
+            tremolo->setSubtype(TremoloType(i));
+            sp->append(tremolo, tr(tremoloName[i - TREMOLO_R8]));
             }
       paletteBox->addPalette(sp);
 

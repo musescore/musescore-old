@@ -388,7 +388,7 @@ int Measure::findAccidental(Note* note) const
       {
       char tversatz[75];      // list of already set accidentals for this measure
       KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
-      initLineList(tversatz, key.accidentalType);
+      initLineList(tversatz, key.accidentalType());
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != SegChordRest) && (segment->subtype() != SegGrace))
@@ -458,7 +458,7 @@ int Measure::findAccidental2(Note* note) const
       {
       char tversatz[75];      // list of already set accidentals for this measure
       KeySigEvent key = note->chord()->staff()->keymap()->key(tick());
-      initLineList(tversatz, key.accidentalType);
+      initLineList(tversatz, key.accidentalType());
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != SegChordRest) && (segment->subtype() != SegGrace))
@@ -1585,11 +1585,11 @@ printf("drop staffList\n");
                   KeySig* ks    = static_cast<KeySig*>(e);
                   KeySigEvent k = ks->keySigEvent();
                   //add custom key to score if not exist
-                  if (k.custom) {
+                  if (k.custom()) {
                         int customIdx = score()->customKeySigIdx(ks);
                         if (customIdx == -1) {
                               customIdx = score()->addCustomKeySig(ks);
-                              k.customType = customIdx;
+                              k.setCustomType(customIdx);
                               }
                         else
                               delete ks;
@@ -2061,35 +2061,55 @@ void Measure::read(QDomElement e, int staffIdx)
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
                   chord->read(e, _tuplets, score()->slurs);
-                  if (chord->tremolo() && chord->tremolo()->twoNotes()) {
+
+                  int track = chord->track();
+                  Segment* ss = 0;
+                  for (Segment* ps = first(SegChordRest); ps; ps = ps->next(SegChordRest)) {
+                        if (ps->tick() >= score()->curTick)
+                              break;
+                        if (ps->element(track))
+                              ss = ps;
+                        }
+
+                  Chord* pch = 0;       // previous chord
+                  if (ss) {
+                        ChordRest* cr = static_cast<ChordRest*>(ss->element(track));
+                        if (cr && cr->type() == CHORD)
+                              pch = static_cast<Chord*>(cr);
+                        }
+
+                  if (chord->tremolo() && chord->tremolo()->subtype() < 6) {
                         //
-                        // search first note of tremolo
+                        // old style tremolo found
                         //
-                        Chord* c1 = 0;
-                        int track = score()->curTrack;
-                        for (Segment* s = first(SegChordRest); s; s = s->next(SegChordRest)) {
-                              if (s->tick() >= chord->tick())
-                                    break;
-                              if (s->element(track) && s->element(track)->type() == CHORD)
-                                    c1 = static_cast<Chord*>(s->element(track));
+                        Tremolo* tremolo = chord->tremolo();
+                        TremoloType st;
+                        switch(tremolo->subtype()) {
+                              case 0: st = TREMOLO_R8;  break;
+                              case 1: st = TREMOLO_R16; break;
+                              case 2: st = TREMOLO_R32; break;
+                              case 3: st = TREMOLO_C8;  break;
+                              case 4: st = TREMOLO_C16; break;
+                              case 5: st = TREMOLO_C32; break;
                               }
-                        if (c1 && (chord->tick() != c1->tick() + c1->ticks() / 2)) {
-                              //
-                              // fixup some tremolo quirks
-                              // chord tick position is wrong
-                              //
-                              //int ticklen2 = chord->ticks() / 2;
-                              //int tick = c1->tick() + ticklen2;
+                        tremolo->setSubtype(st);
+                        if (pch) {
+                              tremolo->setParent(pch);
+                              pch->setTremolo(tremolo);
+                              chord->setTremolo(0);
                               }
-                        Segment* s = getSegment(SegChordRest, score()->curTick);
-                        s->add(chord);
+                        score()->curTick -= chord->ticks() / 2;
+                        }
+                  Segment* s = getSegment(chord, score()->curTick);
+                  s->add(chord);
+
+                  if ((chord->tremolo() && chord->tremolo()->twoNotes())
+                     || (pch && pch->tremolo() && pch->tremolo()->twoNotes())) {
                         score()->curTick += chord->ticks() / 2;
                         }
-                  else {
-                        Segment* s = getSegment(chord, score()->curTick);
-                        s->add(chord);
+                  else
                         score()->curTick += chord->ticks();
-                        }
+
                   Fraction nl(Fraction::fromTicks(score()->curTick - tick()));
                   if (nl > _len)
                         _len = nl;
@@ -3160,7 +3180,7 @@ void Measure::layoutStage1()
             KeySigEvent key = score()->staff(staffIdx)->keymap()->key(tick());
 
             char tversatz[75];      // list of already set accidentals for this measure
-            initLineList(tversatz, key.accidentalType);
+            initLineList(tversatz, key.accidentalType());
 
             setBreakMMRest(false);
             if (score()->styleB(ST_createMultiMeasureRests)) {

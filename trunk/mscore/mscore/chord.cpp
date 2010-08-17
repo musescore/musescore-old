@@ -159,7 +159,7 @@ void Stem::toDefault()
 
 bool Stem::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
       {
-      if ((type == TREMOLO) && (subtype <= TREMOLO_3)) {
+      if ((type == TREMOLO) && (subtype <= TREMOLO_R64)) {
             return true;
             }
       return false;

@@ -1474,7 +1474,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                               }
                         s->add(chord);
                         int clef = staff(staffIdx)->clef(tick);
-                        int key  = staff(staffIdx)->key(tick).accidentalType;
+                        int key  = staff(staffIdx)->key(tick).accidentalType();
                         int off;
                         switch(clef) {
                               case CLEF_F:    off = -14; break;
@@ -1566,7 +1566,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                   case T_KEY:
                         {
                         CapKey* o = static_cast<CapKey*>(no);
-                        int key = staff(staffIdx)->key(tick).accidentalType;
+                        int key = staff(staffIdx)->key(tick).accidentalType();
                         if (key != o->signature) {
                               staff(staffIdx)->setKey(tick, o->signature);
                               KeySig* ks = new KeySig(this);

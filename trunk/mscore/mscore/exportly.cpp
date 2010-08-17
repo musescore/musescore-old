@@ -2685,14 +2685,17 @@ void ExportLy::writeTremolo(Chord * chord)
       int st = tr->subtype();
       switch (st)
 	{
-	case TREMOLO_1:
+	case TREMOLO_R8:
 	  out << ":8 ";
 	  break;
-	case TREMOLO_2:
+	case TREMOLO_R16:
 	  out << ":16 ";
 	  break;
-	case TREMOLO_3:
+	case TREMOLO_R32:
 	  out << ":32 ";
+	  break;
+	case TREMOLO_R64:
+	  out << ":64 ";
 	  break;
 	default:
 	  printf("unknown tremolo %d\n", st);
@@ -3799,7 +3802,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	  out << "%staffkeysig\n";
 	  indent();
 	  //done in first measure anyway: ??
-	  writeKeySig(staff->keymap()->key(0).accidentalType);
+	  writeKeySig(staff->keymap()->key(0).accidentalType());
 // 	  score->sigmap->timesig(0, z1, timedenom);
 // 	  out << "\\time " << z1<< "/" << timedenom << " \n";
 	}
@@ -3928,9 +3931,9 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 //
 		 //		 if (ci != kl->end())
 		 //     {
-			 cout << "barkeysig: " << key.accidentalType << " measureno: " << measurenumber << "\n";
+			 cout << "barkeysig: " << key.accidentalType() << " measureno: " << measurenumber << "\n";
 			 indent();
-			 writeKeySig(key.accidentalType);
+			 writeKeySig(key.accidentalType());
 		 //    }
 
 		 indent();

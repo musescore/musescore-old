@@ -37,6 +37,7 @@
 #include "line.h"
 #include "hairpin.h"
 #include "ottava.h"
+#include "al/sig.h"
 
 //---------------------------------------------------------
 //   subTypeName
@@ -419,9 +420,10 @@ void Segment::add(Element* el)
                         cr->tuplet()->setTrack(track);      // debug
                         }
                   }
-                  if (_elist[track])
+                  if (_elist[track]) {
                         printf("Segment::add(%s) there is already an %s at %d track %d\n",
                            el->name(), _elist[track]->name(), tick(), track);
+                        }
                   if (track % VOICES)
                         measure()->mstaff(staffIdx)->hasVoices = true;
 

@@ -1894,8 +1894,12 @@ void Score::addElement(Element* element)
                element, element->name(), element->parent(),
                element->parent() ? element->parent()->name() : "");
             }
+      if (element->type() == TREMOLO) {
+            Chord* chord = static_cast<Chord*>(element->parent());
+            setLayout(chord->measure());
+            }
 
-      if (element->type() == MEASURE
+      else if (element->type() == MEASURE
          || (element->type() == HBOX && element->parent()->type() != VBOX)
          || element->type() == VBOX
          ) {
@@ -1956,7 +1960,11 @@ void Score::removeElement(Element* element)
       // special for MEASURE, HBOX, VBOX
       // their parent is not static
 
-      if (element->type() == MEASURE
+      if (element->type() == TREMOLO) {
+            Chord* chord = static_cast<Chord*>(element->parent());
+            setLayout(chord->measure());
+            }
+      else if (element->type() == MEASURE
          || (element->type() == HBOX && parent->type() != VBOX)
          || element->type() == VBOX) {
             remove(element);
@@ -2196,8 +2204,8 @@ KeySig* Score::keySigFactory(KeySigEvent e)
       KeySig* ks;
       if (!e.isValid())
             return 0;
-      if (e.custom) {
-            ks = new KeySig(*customKeysigs[e.customType]);
+      if (e.custom()) {
+            ks = new KeySig(*customKeysigs[e.customType()]);
             }
       else {
             ks = new KeySig(this);
