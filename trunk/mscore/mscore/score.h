@@ -344,7 +344,6 @@ class Score : public QObject {
       void cmdInsertClef(int type);
       void cmdExchangeVoice(int, int);
 
-      void updateSelectedElements();
       void removeChordRest(ChordRest* cr, bool clearSegment);
       void cmdMove(Element* e, QPointF delta);
       void cmdMoveRest(Rest* rest, Direction dir);
@@ -824,6 +823,8 @@ class Score : public QObject {
       void createRevision();
       QByteArray readCompressedToBuffer();
       QByteArray readToBuffer();
+      void writeSegments(Xml& xml, const Measure*, int strack, int etrack, Segment* first, Segment* last, bool);
+      Spanner* findSpanner(int id) const;
       };
 
 extern Score* gscore;

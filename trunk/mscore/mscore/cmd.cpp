@@ -2198,6 +2198,10 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   tuplet->setId(-1);
             }
 
+      for (Segment* s = firstMeasure()->first(SegChordRest); s; s = s->next1(SegChordRest)) {
+            foreach(Spanner* e, s->spannerFor())
+                  e->setId(-1);
+            }
       int dstStaffStart = dst->staffIdx();
       int dstTick = dst->tick();
       for (; !e.isNull(); e = e.nextSiblingElement()) {
@@ -2261,8 +2265,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);
-                              foreach(Articulation* a, *cr->getArticulations())
-                                    a->setTrack(track);
                               int tick = curTick - tickStart + dstTick;
 
                               if (cr->type() == CHORD) {
@@ -2362,7 +2364,56 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               else {
                                     undoAddCR(cr, measure, tick);
                                     }
+                              curTick += cr->ticks();
                               }
+                        else if (tag == "HairPin"
+                           || tag == "Pedal"
+                           || tag == "Ottava"
+                           || tag == "Trill"
+                           || tag == "TextLine"
+                           || tag == "Volta") {
+                              Spanner* sp = static_cast<Spanner*>(Element::name2Element(tag, this));
+                              sp->setTrack(dstStaffIdx * VOICES);
+                              sp->read(eee);
+                              int tick = curTick - tickStart + dstTick;
+                              Measure* m = tick2measure(tick);
+                              Segment* segment = m->findSegment(SegChordRest, tick);
+                              if (segment == 0) {
+                                    segment = new Segment(m, SegChordRest, tick);
+                                    undoAddElement(segment);
+                                    }
+                              sp->setStartElement(segment);
+                              sp->setParent(segment);
+                              undoAddElement(sp);
+                              }
+                        else if (tag == "endSpanner") {
+                              int id = eee.attribute("id").toInt();
+                              Spanner* e = findSpanner(id);
+                              if (e) {
+                                    int tick = curTick - tickStart + dstTick;
+                                    Measure* m = tick2measure(tick);
+                                    Segment* seg = m->findSegment(SegChordRest, tick);
+                                    if (seg == 0) {
+                                          seg = new Segment(m, SegChordRest, tick);
+                                          undoAddElement(seg);
+                                          }
+                                    e->setEndElement(seg);
+                                    seg->addSpannerBack(e);
+                                    if (e->type() == OTTAVA) {
+                                          Ottava* o = static_cast<Ottava*>(e);
+                                          int shift = o->pitchShift();
+                                          Staff* st = o->staff();
+                                          int tick1 = static_cast<Segment*>(o->startElement())->tick();
+                                          st->pitchOffsets().setPitchOffset(tick1, shift);
+                                          st->pitchOffsets().setPitchOffset(tick, 0);
+                                          }
+                                    else if (e->type() == HAIRPIN) {
+                                          Hairpin* hp = static_cast<Hairpin*>(e);
+                                          updateHairpin(hp);
+                                          }
+                                    }
+                              }
+
                         else if (tag == "Lyrics") {
                               Lyrics* lyrics = new Lyrics(this);
                               lyrics->setTrack(curTrack);
@@ -2434,7 +2485,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             Segment* s1 = tick2segment(dstTick);
             Segment* s2 = tick2segment(dstTick + tickLen);
             _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
-            updateSelectedElements();
+            _selection.updateSelectedElements();
             if (selection().state() != SEL_RANGE)
                   _selection.setState(SEL_RANGE);
             }

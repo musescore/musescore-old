@@ -2330,3 +2330,21 @@ printf("Score::removeExcerpt %p\n", score);
       printf("Score::removeExcerpt: excerpt not found\n");
       }
 
+//---------------------------------------------------------
+//   findSpanner
+//---------------------------------------------------------
+
+Spanner* Score::findSpanner(int id) const
+      {
+      static const SegmentTypes st = SegChordRest;
+      for (Segment* s = firstMeasure()->first(st); s; s = s->next1(st)) {
+            foreach(Spanner* e, s->spannerFor()) {
+                  if (e->id() == id)
+                        return e;
+                  }
+            }
+      printf("Score::findSpanner() id %d not found\n", id);
+      return 0;
+      }
+
+

@@ -105,6 +105,7 @@ class Spanner : public Element {
       virtual void remove(Element*);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void startEdit(ScoreView*, const QPointF&);
+      virtual void setSelected(bool f);
       };
 #endif
 

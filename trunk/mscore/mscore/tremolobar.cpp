@@ -62,20 +62,21 @@ void TremoloBar::layout()
             noteWidth = note->width();
             notePos = note->pos();
             }
-      int n    = _points.size();
-      int pt   = 0;
-      double x = noteWidth * .5;
-      double y = notePos.y() - _spatium;
-      double x2, y2;
+//      int n    = _points.size();
+//      int pt   = 0;
+//      double x = noteWidth * .5;
+//      double y = notePos.y() - _spatium;
+//      double x2, y2;
 
       QRectF bb (0, 0, _spatium*3, -_spatium * 4);
+#if 0
       for (int pt = 0; pt < n; ++pt) {
             if (pt == (n-1))
                   break;
             x = x2;
             y = y2;
             }
-
+#endif
       bb.adjust(-_lw, -_lw, _lw, _lw);
       setbbox(bb);
       }
@@ -101,15 +102,15 @@ void TremoloBar::draw(QPainter& p, ScoreView*) const
       p.setFont(f);
 
       int n    = _points.size();
-      int pt   = 0;
-      double x = noteWidth;
-      double y = -_spatium * .8;
-      double x2, y2;
+//      int pt   = 0;
+//      double x = noteWidth;
+//      double y = -_spatium * .8;
+//      double x2, y2;
 
       for (int pt = 0; pt < n; ++pt) {
             if (pt == (n-1))
                   break;
-            int pitch = _points[pt].pitch;
+//            int pitch = _points[pt].pitch;
             }
       //debug:
       p.drawLine(0.0, 0.0, _spatium*1.5, _spatium*3);
@@ -342,8 +343,8 @@ void TremoloBarCanvas::mousePressEvent(QMouseEvent* ev)
       int ys = height() / (ROWS);
       int lm = xs / 2;
       int tm = ys / 2;
-      int tw = (COLUMNS - 1) * xs;
-      int th = (ROWS - 1)    * ys;
+//      int tw = (COLUMNS - 1) * xs;
+//      int th = (ROWS - 1)    * ys;
 
       int x = ev->x() - lm;
       int y = ev->y() - tm;

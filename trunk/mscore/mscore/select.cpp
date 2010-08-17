@@ -238,41 +238,52 @@ void Score::deselect(Element* el)
 //   updateSelectedElements
 //---------------------------------------------------------
 
-void Score::updateSelectedElements()
+void Selection::updateSelectedElements()
       {
-      setUpdateAll();
-      foreach(Element* e, _selection.elements())
+      foreach(Element* e, _el)
             e->setSelected(false);
-      _selection.clearElements();
+      _el.clear();
 
       // assert:
-      if (_selection.staffStart() < 0 || _selection.staffStart() >= nstaves() || _selection.staffEnd() < 0 || _selection.staffEnd() > nstaves()
-         || _selection.staffStart() >= _selection.staffEnd()) {
-            printf("updateSelectedElements: bad staff selection %d - %d\n", _selection.staffStart(), _selection.staffEnd());
-            _selection.setStaffStart(0);
-            _selection.setStaffEnd(1);
+      int staves = _score->nstaves();
+      if (_staffStart < 0 || _staffStart >= staves || _staffEnd < 0 || _staffEnd > staves
+         || _staffStart >= _staffEnd) {
+            printf("updateSelectedElements: bad staff selection %d - %d\n", _staffStart, _staffEnd);
+            _staffStart = 0;
+            _staffEnd   = 0;
             }
-      int startTrack = _selection.staffStart() * VOICES;
-      int endTrack   = _selection.staffEnd() * VOICES;
+      int startTrack = _staffStart * VOICES;
+      int endTrack   = _staffEnd * VOICES;
 
       for (int st = startTrack; st < endTrack; ++st) {
-            for (Segment* s = _selection.startSegment(); s && (s != _selection.endSegment()); s = s->next1()) {
+            for (Segment* s = _startSegment; s && (s != _endSegment); s = s->next1()) {
                   Element* e = s->element(st);
                   if (!e)
                         continue;
                   if (e->type() == CHORD) {
                         Chord* chord = static_cast<Chord*>(e);
                         foreach(Note* note, chord->notes()) {
-                              note->setSelected(true);
-                              _selection.append(note);
+                              _el.append(note);
                               }
                         }
                   else {
-                        e->setSelected(true);
-                        _selection.append(e);
+                        _el.append(e);
+                        }
+                  foreach(Element* e, s->annotations()) {
+                        if (e->track() < startTrack || e->track() >= endTrack)
+                              continue;
+                        _el.append(e);
+                        }
+                  foreach(Spanner* sp, s->spannerFor()) {
+                        if (sp->track() < startTrack || sp->track() >= endTrack)
+                              continue;
+                        Segment* s2 = static_cast<Segment*>(sp->endElement());
+                        if (s2->tick() < _endSegment->tick())
+                              _el.append(sp);
                         }
                   }
             }
+      update();
       }
 
 //---------------------------------------------------------
@@ -336,7 +347,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   selState = SEL_RANGE;
                   _selection.setStaffStart(0);
                   _selection.setStaffEnd(nstaves());
-                  updateSelectedElements();
+                  _selection.updateSelectedElements();
                   }
             else {
                   if (_selection.state() == SEL_RANGE) {
@@ -528,7 +539,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             _selection.setActiveTrack(activeTrack);
 
             selState = SEL_RANGE;
-            updateSelectedElements();
+            _selection.updateSelectedElements();
             }
       _selection.setState(selState);
       }
@@ -658,8 +669,8 @@ void Selection::searchSelectedElements()
 
 void Selection::update()
       {
-      for (ciElement i = _el.begin(); i != _el.end(); ++i)
-            (*i)->setSelected(true);
+      foreach (Element* e, _el)
+            e->setSelected(true);
       updateState();
       }
 
@@ -774,13 +785,6 @@ QByteArray Selection::staffMimeData() const
       xml.header();
       xml.clipboardmode = true;
 
-#if 0
-      int slurId = 1;
-      foreach(Element* el, *_score->gel()) {
-            if (el->type() == SLUR)
-                  static_cast<Slur*>(el)->setId(slurId++);
-            }
-#endif
       int beamId = 0;
       foreach(Beam* beam, _score->beams())
             beam->setId(beamId++);
@@ -797,81 +801,12 @@ QByteArray Selection::staffMimeData() const
 
       for (int staffIdx = staffStart(); staffIdx < staffEnd(); ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx));
-
-            for (Measure* m = seg1->measure(); m; m = m->nextMeasure()) {
-                  if (seg2 && m->tick() >= seg2->tick())
-                        break;
-#if 0 // TODO1
-                  foreach(Element* e, *m->el()) {
-                        if (e->type() == HARMONY) {
-                              if ((e->staffIdx() != staffIdx) || (e->tick() < seg1->tick()))
-                                    continue;
-                              if (seg2 && (e->tick() >= seg2->tick()))
-                                    continue;
-                              e->write(xml);
-                              }
-                        }
-#endif
-                  }
-
             int startTrack = staffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
-            for (int track = startTrack; track < endTrack; ++track) {
-                  for (Segment* seg = seg1; seg && seg != seg2; seg = seg->next1()) {
-                        Element* e = seg->element(track);
-                        if (!e || e->generated() || (seg->subtype() & (SegEndBarLine | SegTimeSig)))
-                              continue;
-                        if (seg->tick() != xml.curTick) {
-                              xml.tag("tick", seg->tick());
-                              xml.curTick = seg->tick();
-                              }
-                        if (e->isChordRest()) {
-                              ChordRest* cr = static_cast<ChordRest*>(e);
-                              Tuplet* tuplet = cr->tuplet();
-                              if (tuplet && tuplet->elements().front() == cr) {
-                                    QList<Tuplet*> tl;
-                                    tl.prepend(tuplet);
-                                    Tuplet* t = tuplet;
-                                    while (t->tuplet()) {
-                                          t = t->tuplet();
-                                          tl.prepend(t);
-                                          }
-                                    foreach(Tuplet* t, tl) {
-                                          if (t->id() == -1) {
-                                                tuplet->setId(xml.tupletId++);
-                                                tuplet->write(xml);
-                                                }
-                                          }
-                                    }
-                              foreach(Slur* slur, cr->slurFor()) {
-                                    ChordRest* cr = static_cast<ChordRest*>(slur->endElement());
-                                    if (cr->segment()->tick() < tickEnd())
-                                          slur->write(xml);
-                                    }
-                              xml.curTick += cr->ticks();
-                              }
-                        if (e->type() == CHORD) {
-                              Chord* c = static_cast<Chord*>(e);
-                              c->write(xml, tickStart(), tickEnd());
-                              }
-                        else if (e->type() == REST) {
-                              Rest* r = static_cast<Rest*>(e);
-                              r->write(xml);
-                              }
-                        else
-                              e->write(xml);
-                        if ((track % VOICES) == 0) {
-                              int staffIdx = track / VOICES;
-                              LyricsList* ll = seg->lyricsList(staffIdx);
-                              foreach(Lyrics* l, *ll) {
-                                    if (l)
-                                          l->write(xml);
-                                    }
-                              }
-                        }
-                  }
+            score()->writeSegments(xml, 0, startTrack, endTrack, seg1, seg2, false);
             xml.etag();
             }
+
       xml.etag();
       buffer.close();
       return buffer.buffer();
