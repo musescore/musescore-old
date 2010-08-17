@@ -115,4 +115,14 @@ void Spanner::startEdit(ScoreView*, const QPointF&)
       oEndElement   = _endElement;
       }
 
+//---------------------------------------------------------
+//   setSelected
+//---------------------------------------------------------
+
+void Spanner::setSelected(bool f)
+      {
+      foreach(SpannerSegment* ss, segments)
+            ss->setSelected(f);
+      Element::setSelected(f);
+      }
 

@@ -71,11 +71,9 @@ class Selection {
 
       void searchSelectedElements();
       const QList<Element*>& elements() const { return _el; }
-      void clearElements()                    { _el.clear(); }
       bool isSingle() const                   { return (_state == SEL_LIST) && (_el.size() == 1); }
       QList<Note*> noteList() const;
       void add(Element*);
-      void append(Element* el)         { _el.append(el); }
       void deselectAll();
       void remove(Element*);
       void clear();
@@ -107,6 +105,7 @@ class Selection {
       void setStaffEnd(int v)           { _staffEnd = v;    }
       void setActiveTrack(int v)        { _activeTrack = v; }
       bool canCopy() const;
+      void updateSelectedElements();
       };
 
 //---------------------------------------------------------

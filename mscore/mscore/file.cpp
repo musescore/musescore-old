@@ -75,6 +75,7 @@
 #include "stafftype.h"
 #include "seq.h"
 #include "revisions.h"
+#include "lyrics.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -2101,4 +2102,120 @@ printf("createRevision\n");
       //
       }
 
+//---------------------------------------------------------
+//   writeSegments
+//---------------------------------------------------------
+
+void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Segment* fs, Segment* ls,
+   bool writeSystemElements)
+      {
+      for (int track = strack; track < etrack; ++track) {
+            for (Segment* segment = fs; segment && segment != ls; segment = segment->next1()) {
+                  Element* e = segment->element(track);
+                  //
+                  // special case: - barline span > 1
+                  //               - part (excerpt) staff starts after
+                  //                 barline element
+                  bool needTick = segment->tick() != xml.curTick;
+                  if ((segment->subtype() == SegEndBarLine)
+                     && (e == 0)
+                     && writeSystemElements
+                     && ((track % VOICES) == 0)) {
+                        // search barline:
+                        for (int idx = track - VOICES; idx >= 0; idx -= VOICES) {
+                              if (segment->element(idx)) {
+                                    int oDiff = xml.trackDiff;
+                                    xml.trackDiff = idx;          // staffIdx should be zero
+                                    segment->element(idx)->write(xml);
+                                    xml.trackDiff = oDiff;
+                                    break;
+                                    }
+                              }
+                        }
+                  foreach(Element* e, segment->annotations()) {
+                        if (e->track() != track || e->generated())
+                              continue;
+                        if (needTick) {
+                              xml.tag("tick", segment->tick());
+                              xml.curTick = segment->tick();
+                              needTick = false;
+                              }
+                        e->write(xml);
+                        }
+                  foreach(Spanner* e, segment->spannerFor()) {
+                        if (e->track() == track && !e->generated()) {
+                              if (needTick) {
+                                    xml.tag("tick", segment->tick());
+                                    xml.curTick = segment->tick();
+                                    needTick = false;
+                                    }
+                              e->setId(++xml.spannerId);
+                              e->write(xml);
+                              }
+                        }
+                  foreach(Spanner* e, segment->spannerBack()) {
+                        if (e->track() == track && !e->generated()) {
+                              if (needTick) {
+                                    xml.tag("tick", segment->tick());
+                                    xml.curTick = segment->tick();
+                                    needTick = false;
+                                    }
+                              xml.tagE(QString("endSpanner id=\"%1\"").arg(e->id()));
+                              }
+                        }
+                  //
+                  // write new slurs for all voices
+                  // (this allows for slurs crossing voices)
+                  //
+                  if (((track % VOICES) == 0)
+                     && (segment->subtype() & (SegChordRest | SegGrace))) {
+                        for (int i = 0; i < VOICES; ++i) {
+                              Element* e = segment->element(track + i);
+                              if (e) {
+                                    ChordRest* cr = static_cast<ChordRest*>(e);
+                                    foreach(Slur* slur, cr->slurFor()) {
+                                          slur->setId(xml.slurId++);
+                                          slur->write(xml);
+                                          }
+                                    }
+                              }
+                        }
+                  if ((track % VOICES) == 0) {
+                        int staff = track / VOICES;
+                        const LyricsList* ll = segment->lyricsList(staff);
+                        for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
+                              if (*i) {
+                                    if (needTick) {
+                                          xml.tag("tick", segment->tick());
+                                          xml.curTick = segment->tick();
+                                          needTick = false;
+                                          }
+                                    (*i)->write(xml);
+                                    }
+                              }
+                        }
+                  if (e && !e->generated()) {
+                        if (needTick) {
+                              xml.tag("tick", segment->tick());
+                              xml.curTick = segment->tick();
+                              needTick = false;
+                              }
+                        if (e->isChordRest()) {
+                              ChordRest* cr = static_cast<ChordRest*>(e);
+                              Beam* beam = cr->beam();
+                              if (beam && beam->elements().front() == cr)
+                                    beam->write(xml);
+                              }
+                        if ((segment->subtype() == SegEndBarLine) && m && (m->multiMeasure() > 0)) {
+                              xml.stag("BarLine");
+                              xml.tag("subtype", m->endBarLineType());
+                              xml.tag("visible", m->endBarLineVisible());
+                              xml.etag();
+                              }
+                        else
+                              e->write(xml);
+                        }
+                  }
+            }
+      }
 

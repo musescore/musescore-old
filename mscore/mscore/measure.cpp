@@ -1930,115 +1930,8 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
             }
 
       writeTuplets(xml, staff);
-
-      for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {
-            for (Segment* segment = first(); segment; segment = segment->next()) {
-                  Element* e = segment->element(track);
-                  //
-                  // special case: - barline span > 1
-                  //               - part (excerpt) staff starts after
-                  //                 barline element
-                  bool needTick = segment->tick() != xml.curTick;
-                  if ((segment->subtype() == SegEndBarLine)
-                     && (e == 0)
-                     && writeSystemElements
-                     && ((track % VOICES) == 0)) {
-                        // search barline:
-                        for (int idx = track - VOICES; idx >= 0; idx -= VOICES) {
-                              if (segment->element(idx)) {
-                                    int oDiff = xml.trackDiff;
-                                    xml.trackDiff = idx;          // staffIdx should be zero
-                                    segment->element(idx)->write(xml);
-                                    xml.trackDiff = oDiff;
-                                    break;
-                                    }
-                              }
-                        }
-                  foreach(Element* e, segment->annotations()) {
-                        if (e->track() != track || e->generated())
-                              continue;
-                        if (needTick) {
-                              xml.tag("tick", segment->tick());
-                              xml.curTick = segment->tick();
-                              needTick = false;
-                              }
-                        e->write(xml);
-                        }
-                  foreach(Spanner* e, segment->spannerFor()) {
-                        if (e->track() == track && !e->generated()) {
-                              if (needTick) {
-                                    xml.tag("tick", segment->tick());
-                                    xml.curTick = segment->tick();
-                                    needTick = false;
-                                    }
-                              e->setId(++xml.spannerId);
-                              e->write(xml);
-                              }
-                        }
-                  foreach(Spanner* e, segment->spannerBack()) {
-                        if (e->track() == track && !e->generated()) {
-                              if (needTick) {
-                                    xml.tag("tick", segment->tick());
-                                    xml.curTick = segment->tick();
-                                    needTick = false;
-                                    }
-                              xml.tagE(QString("endSpanner id=\"%1\"").arg(e->id()));
-                              }
-                        }
-                  //
-                  // write new slurs for all voices
-                  // (this allows for slurs crossing voices)
-                  //
-                  if (((track % VOICES) == 0)
-                     && (segment->subtype() & (SegChordRest | SegGrace))) {
-                        for (int i = 0; i < VOICES; ++i) {
-                              Element* e = segment->element(track + i);
-                              if (e) {
-                                    ChordRest* cr = static_cast<ChordRest*>(e);
-                                    foreach(Slur* slur, cr->slurFor()) {
-                                          slur->setId(xml.slurId++);
-                                          slur->write(xml);
-                                          }
-                                    }
-                              }
-                        }
-                  if ((track % VOICES) == 0) {
-                        int staff = track / VOICES;
-                        const LyricsList* ll = segment->lyricsList(staff);
-                        for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-                              if (*i) {
-                                    if (needTick) {
-                                          xml.tag("tick", segment->tick());
-                                          xml.curTick = segment->tick();
-                                          needTick = false;
-                                          }
-                                    (*i)->write(xml);
-                                    }
-                              }
-                        }
-                  if (e && !e->generated()) {
-                        if (needTick) {
-                              xml.tag("tick", segment->tick());
-                              xml.curTick = segment->tick();
-                              needTick = false;
-                              }
-                        if (e->isChordRest()) {
-                              ChordRest* cr = static_cast<ChordRest*>(e);
-                              Beam* beam = cr->beam();
-                              if (beam && beam->elements().front() == cr)
-                                    beam->write(xml);
-                              }
-                        if (segment->subtype() == SegEndBarLine && _multiMeasure > 0) {
-                              xml.stag("BarLine");
-                              xml.tag("subtype", _endBarLineType);
-                              xml.tag("visible", _endBarLineVisible);
-                              xml.etag();
-                              }
-                        else
-                              e->write(xml);
-                        }
-                  }
-            }
+      int track = staff * VOICES;
+      score()->writeSegments(xml, this, track, track+VOICES, first(), last()->next1(), writeSystemElements);
       xml.etag();
       }
 
@@ -2230,29 +2123,22 @@ void Measure::read(QDomElement e, int staffIdx)
                   }
             else if (tag == "endSpanner") {
                   int id = e.attribute("id").toInt();
-                  static const SegmentTypes st = SegChordRest;
-                  for (Segment* s = score()->firstMeasure()->first(st); s; s = s->next1(st)) {
-                        foreach(Spanner* e, s->spannerFor()) {
-                              if (e->id() == id) {
-                                    Segment* s = getSegment(SegChordRest, score()->curTick);
-                                    e->setEndElement(s);
-                                    s->addSpannerBack(e);
-
-                                    if (e->type() == OTTAVA) {
-                                          Ottava* o = static_cast<Ottava*>(e);
-                                          int shift = o->pitchShift();
-                                          Staff* st = o->staff();
-                                          int tick1 = static_cast<Segment*>(o->startElement())->tick();
-                                          st->pitchOffsets().setPitchOffset(tick1, shift);
-                                          st->pitchOffsets().setPitchOffset(s->tick(), 0);
-                                          }
-                                    else if (e->type() == HAIRPIN) {
-                                          Hairpin* hp = static_cast<Hairpin*>(e);
-                                          score()->updateHairpin(hp);
-                                          }
-
-                                    break;
-                                    }
+                  Spanner* e = score()->findSpanner(id);
+                  if (e) {
+                        Segment* s = getSegment(SegChordRest, score()->curTick);
+                        e->setEndElement(s);
+                        s->addSpannerBack(e);
+                        if (e->type() == OTTAVA) {
+                              Ottava* o = static_cast<Ottava*>(e);
+                              int shift = o->pitchShift();
+                              Staff* st = o->staff();
+                              int tick1 = static_cast<Segment*>(o->startElement())->tick();
+                              st->pitchOffsets().setPitchOffset(tick1, shift);
+                              st->pitchOffsets().setPitchOffset(s->tick(), 0);
+                              }
+                        else if (e->type() == HAIRPIN) {
+                              Hairpin* hp = static_cast<Hairpin*>(e);
+                              score()->updateHairpin(hp);
                               }
                         }
                   }
