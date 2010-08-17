@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,7 +26,10 @@
 class Chord;
 
 // Tremolo subtypes:
-enum { TREMOLO_1, TREMOLO_2, TREMOLO_3 };
+enum TremoloType {
+      TREMOLO_R8=6, TREMOLO_R16, TREMOLO_R32, TREMOLO_R64,    // one note tremolo (repeat)
+      TREMOLO_C8, TREMOLO_C16, TREMOLO_C32, TREMOLO_C64     // two note tremolo (change)
+      };
 
 //---------------------------------------------------------
 //   Tremolo
@@ -40,8 +43,12 @@ class Tremolo : public Element {
    public:
       Tremolo(Score*);
       Tremolo &operator=(const Tremolo&);
-      virtual Tremolo* clone() const  { return new Tremolo(*this); }
+      virtual Tremolo* clone() const   { return new Tremolo(*this); }
       virtual ElementType type() const { return TREMOLO; }
+      virtual const QString subtypeName() const;
+      virtual void setSubtype(const QString& s);
+      void setSubtype(TremoloType t)   { Element::setSubtype(int(t)); }
+
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void layout();
       virtual void write(Xml& xml) const;
@@ -54,8 +61,8 @@ class Tremolo : public Element {
             _chord1 = c1;
             _chord2 = c2;
             }
-
-      bool twoNotes() const { return subtype() > 2; } // is it a two note tremolo?
+      Fraction tremoloLen() const;
+      bool twoNotes() const { return subtype() > TREMOLO_R64; } // is it a two note tremolo?
       };
 
 #endif

@@ -255,7 +255,7 @@ void Note::setPitch(int a, int b)
 void Note::setTpcFromPitch()
       {
       KeySigEvent key = (staff() && chord()) ? staff()->key(chord()->tick()) : KeySigEvent();
-      _tpc    = pitch2tpc(_pitch, key.accidentalType);
+      _tpc    = pitch2tpc(_pitch, key.accidentalType());
 // printf("setTpcFromPitch pitch %d tick %d key %d tpc %d\n", pitch(), chord()->tick(), key.accidentalType, _tpc);
       }
 
@@ -817,9 +817,9 @@ void Note::endDrag()
             }
       else {
             setLine(nLine);
-            int tick     = chord()->tick();
-            int clef     = staff->clef(tick);
-            int key      = staff->key(tick).accidentalType;
+            int tick = chord()->tick();
+            int clef = staff->clef(tick);
+            int key  = staff->key(tick).accidentalType();
             npitch   = line2pitch(_line, clef, key);
             tpc      = pitch2tpc(npitch, key);
             }
@@ -1066,14 +1066,11 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                               }
                         Chord* ch1 = static_cast<Chord*>(s->element(track()));
                         tremolo->setChords(ch, ch1);
-                        score()->setLayout(ch1->measure());
-                        tremolo->setParent(ch1);
                         }
-                  else {
-                        e->setParent(ch);
-                        score()->setLayout(ch->measure());
-                        }
+                  e->setParent(ch);
+                  e->setTrack(track());
                   score()->undoAddElement(e);
+printf("add tremolo %d\n", e->subtype());
                   }
                   break;
 

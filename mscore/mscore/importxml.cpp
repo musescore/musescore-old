@@ -2989,9 +2989,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             if (tremolo == 1 || tremolo == 2 || tremolo == 3) {
                   if (tremoloType == "" || tremoloType == "single") {
                         Tremolo * t = new Tremolo(score);
-                        if (tremolo == 1) t->setSubtype(TREMOLO_1);
-                        if (tremolo == 2) t->setSubtype(TREMOLO_2);
-                        if (tremolo == 3) t->setSubtype(TREMOLO_3);
+                        switch(tremolo) {
+                              case 1: t->setSubtype(TREMOLO_R8); break;
+                              case 2: t->setSubtype(TREMOLO_R16); break;
+                              case 3: t->setSubtype(TREMOLO_R32); break;
+                              case 4: t->setSubtype(TREMOLO_R64); break;
+                              }
                         cr->add(t);
                         }
                   else if (tremoloType == "start") {
@@ -3001,9 +3004,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else if (tremoloType == "stop") {
                         if (tremStart) {
                               Tremolo * t = new Tremolo(score);
-                              if (tremolo == 1) t->setSubtype(3);
-                              if (tremolo == 2) t->setSubtype(4);
-                              if (tremolo == 3) t->setSubtype(5);
+                              switch(tremolo) {
+                                    case 1: t->setSubtype(TREMOLO_C8); break;
+                                    case 2: t->setSubtype(TREMOLO_C16); break;
+                                    case 3: t->setSubtype(TREMOLO_C32); break;
+                                    case 4: t->setSubtype(TREMOLO_C64); break;
+                                    }
                               t->setChords(tremStart, static_cast<Chord*>(cr));
                               cr->add(t);
                               }

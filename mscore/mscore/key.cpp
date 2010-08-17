@@ -29,20 +29,20 @@
 
 KeySigEvent::KeySigEvent()
       {
-      accidentalType = 0;
-      naturalType = 0;
-      customType = 0;
-      custom = false;
-      invalid = true;
+      _accidentalType = 0;
+      _naturalType    = 0;
+      _customType     = 0;
+      _custom         = false;
+      _invalid        = true;
       }
 
 KeySigEvent::KeySigEvent(int n)
       {
-      accidentalType = n;
-      naturalType = 0;
-      customType = 0;
-      custom = false;
-      invalid = false;
+      _accidentalType = n;
+      _naturalType    = 0;
+      _customType     = 0;
+      _custom         = false;
+      _invalid        = false;
       }
 
 //---------------------------------------------------------
@@ -51,10 +51,10 @@ KeySigEvent::KeySigEvent(int n)
 
 void KeySigEvent::setCustomType(int v)
       {
-      accidentalType = 0;
-      customType     = v;
-      custom         = true;
-      invalid        = false;
+      _accidentalType = 0;
+      _customType     = v;
+      _custom         = true;
+      _invalid        = false;
       }
 
 //---------------------------------------------------------
@@ -64,13 +64,13 @@ void KeySigEvent::setCustomType(int v)
 void KeySigEvent::print() const
       {
       printf("<KeySigEvent: ");
-      if (invalid)
+      if (_invalid)
             printf("invalid>");
       else {
-            if (custom)
-                  printf("nat %d custom %d>", naturalType, customType);
+            if (_custom)
+                  printf("nat %d custom %d>", _naturalType, _customType);
             else
-                  printf("nat %d accidental %d>", naturalType, accidentalType);
+                  printf("nat %d accidental %d>", _naturalType, _accidentalType);
             }
       }
 
@@ -80,9 +80,9 @@ void KeySigEvent::print() const
 
 void KeySigEvent::setAccidentalType(int v)
       {
-      accidentalType = v;
-      custom         = false;
-      invalid        = false;
+      _accidentalType = v;
+      _custom         = false;
+      _invalid        = false;
       }
 
 //---------------------------------------------------------
@@ -91,12 +91,12 @@ void KeySigEvent::setAccidentalType(int v)
 
 bool KeySigEvent::operator==(const KeySigEvent& e) const
       {
-      if (e.invalid || invalid || (e.custom != custom))
+      if ((e._invalid != _invalid) || (e._custom != _custom))
             return false;
-      if (custom)
-            return e.customType == customType;
+      if (_custom)
+            return e._customType == _customType;
       else
-            return e.accidentalType == accidentalType;
+            return e._accidentalType == _accidentalType;
       }
 
 //---------------------------------------------------------
@@ -105,12 +105,12 @@ bool KeySigEvent::operator==(const KeySigEvent& e) const
 
 bool KeySigEvent::operator!=(const KeySigEvent& e) const
       {
-      if (e.invalid || invalid || (e.custom != custom))
+      if ((e._invalid != _invalid) || (e._custom != _custom))
             return true;
-      if (custom)
-            return e.customType != customType;
+      if (_custom)
+            return e._customType != _customType;
       else
-            return e.accidentalType != accidentalType;
+            return e._accidentalType != _accidentalType;
       }
 
 //---------------------------------------------------------
@@ -136,10 +136,10 @@ void KeyList::write(Xml& xml, const char* name) const
       {
       xml.stag(name);
       for (ciKeyList i = begin(); i != end(); ++i) {
-            if (i->second.custom)
-                  xml.tagE("key tick=\"%d\" custom=\"%d\"", i->first, i->second.customType);
+            if (i->second.custom())
+                  xml.tagE("key tick=\"%d\" custom=\"%d\"", i->first, i->second.customType());
             else
-                  xml.tagE("key tick=\"%d\" idx=\"%d\"", i->first, i->second.accidentalType);
+                  xml.tagE("key tick=\"%d\" idx=\"%d\"", i->first, i->second.accidentalType());
             }
       xml.etag();
       }
@@ -245,5 +245,31 @@ printf("transposeKey key %d semitones %d\n", key, semitones);
       key = kp1[kpitch] - 6;
 printf("  key %d\n", key);
       return key;
+      }
+
+//---------------------------------------------------------
+//   initFromSubtype
+//    for backward compatibility
+//---------------------------------------------------------
+
+void KeySigEvent::initFromSubtype(int st)
+      {
+      union U {
+            int subtype;
+            struct {
+                  int _accidentalType:4;
+                  int _naturalType:4;
+                  unsigned _customType:16;
+                  bool _custom : 1;
+                  bool _invalid : 1;
+                  };
+            };
+      U a;
+      a.subtype       = st;
+      _accidentalType = a._accidentalType;
+      _naturalType    = a._naturalType;
+      _customType     = a._customType;
+      _custom         = a._custom;
+      _invalid        = a._invalid;
       }
 

@@ -249,7 +249,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
             if (!preferences.alternateNoteEntryMethod)
                   key = _score->staff(is.track() / VOICES)->keymap()->key(is.tick());
             int octave = is.pitch / 12;
-            pitch      = pitchKeyAdjust(note, key.accidentalType);
+            pitch      = pitchKeyAdjust(note, key.accidentalType());
             int delta  = is.pitch - (octave*12 + pitch);
             if (delta > 6)
                   is.pitch = (octave+1)*12 + pitch;
@@ -425,7 +425,7 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
             int tick   = chord->tick();
             Staff* estaff = staff(on->staffIdx() + chord->staffMove());
             int clef   = estaff->clef(tick);
-            int key    = estaff->key(tick).accidentalType;
+            int key    = estaff->key(tick).accidentalType();
             int npitch = line2pitch(line, clef, key);
             int ntpc   = pitch2tpc(npitch, key);
             note->setPitch(npitch, ntpc);
@@ -2229,7 +2229,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                         }
                   int srcStaffIdx = ee.attribute("id", "0").toInt();
                   int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
-// printf("srcStaffIDx %d  dstStaffIdx %d  staves %d\n", srcStaffIdx, dstStaffIdx, nstaves());
                   if (dstStaffIdx >= nstaves())
                         break;
                   QList<Tuplet*> tuplets;
@@ -2254,8 +2253,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               slur->read(eee);
                               slur->setTrack(dstStaffIdx * VOICES);
                               slurs.append(slur);
-
-                              // undoAddElement(slur);
                               }
                         else if (tag == "Chord" || tag == "Rest" || tag == "RepeatMeasure") {
                               ChordRest* cr = static_cast<ChordRest*>(Element::name2Element(tag, this));
@@ -2448,15 +2445,37 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     }
 
                               int tick = curTick - tickStart + dstTick;
-                              Segment* segment = tick2segment(tick);
-                              if (segment) {
-                                    harmony->setParent(segment);
-                                    undoAddElement(harmony);
+                              Measure* m = tick2measure(tick);
+                              Segment* seg = m->findSegment(SegChordRest, tick);
+                              if (seg == 0) {
+                                    seg = new Segment(m, SegChordRest, tick);
+                                    undoAddElement(seg);
                                     }
-                              else {
-                                    delete harmony;
-                                    printf("no segment found for harmony\n");
+                              harmony->setParent(seg);
+                              undoAddElement(harmony);
+                              }
+                        else if (tag == "Dynamic"
+                           || tag == "Symbol"
+                           || tag == "FretDiagram"
+                           || tag == "Marker"
+                           || tag == "Jump"
+                           || tag == "Image"
+                           || tag == "Text"
+                           || tag == "StaffText"
+                           || tag == "TempoText"
+                           ) {
+                              Element* e = Element::name2Element(tag, this);
+                              e->read(eee);
+                              e->setTrack(dstStaffIdx * VOICES);
+                              int tick = curTick - tickStart + dstTick;
+                              Measure* m = tick2measure(tick);
+                              Segment* seg = m->findSegment(SegChordRest, tick);
+                              if (seg == 0) {
+                                    seg = new Segment(m, SegChordRest, tick);
+                                    undoAddElement(seg);
                                     }
+                              e->setParent(seg);
+                              undoAddElement(e);
                               }
                         else if (tag == "Clef") {
                               Clef* clef = new Clef(this);

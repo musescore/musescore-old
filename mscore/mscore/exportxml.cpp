@@ -1634,25 +1634,31 @@ static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments
             Tremolo * tr = nextChord->tremolo();
             int st = tr->subtype();
             switch (st) {
-                  case TREMOLO_1:
-                  case TREMOLO_2:
-                  case TREMOLO_3:
+                  case TREMOLO_R8:
+                  case TREMOLO_R16:
+                  case TREMOLO_R32:
+                  case TREMOLO_R64:
                         // ignore
                         break;
-                  case 3:
+                  case TREMOLO_C8:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"start\"", "1");
                         break;
-                  case 4:
+                  case TREMOLO_C16:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"start\"", "2");
                         break;
-                  case 5:
+                  case TREMOLO_C32:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"start\"", "3");
+                        break;
+                  case TREMOLO_C64:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"start\"", "4");
                         break;
                   default:
                         printf("unknown tremolo %d\n", st);
@@ -1663,35 +1669,45 @@ static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments
             Tremolo * tr = chord->tremolo();
             int st = tr->subtype();
             switch (st) {
-                  case TREMOLO_1:
+                  case TREMOLO_R8:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"single\"", "1");
                         break;
-                  case TREMOLO_2:
+                  case TREMOLO_R16:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"single\"", "2");
                         break;
-                  case TREMOLO_3:
+                  case TREMOLO_R32:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"single\"", "3");
                         break;
-                  case 3:
+                  case TREMOLO_R64:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"single\"", "4");
+                        break;
+                  case TREMOLO_C8:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"stop\"", "1");
                         break;
-                  case 4:
+                  case TREMOLO_C16:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"stop\"", "2");
                         break;
-                  case 5:
+                  case TREMOLO_C32:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"stop\"", "3");
+                        break;
+                  case TREMOLO_C64:
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tag("tremolo type=\"stop\"", "4");
                         break;
                   default:
                         printf("unknown tremolo %d\n", st);
@@ -3466,7 +3482,7 @@ foreach(Element* el, *(score->gel())) {
                         KeySigEvent key = kl->key(ti);
                         ciKeyList ci = kl->find(ti);
                         if (ci != kl->end()) {
-                              keysig(key.accidentalType);
+                              keysig(key.accidentalType());
                               }
                         }
                   else if (tick == 0)

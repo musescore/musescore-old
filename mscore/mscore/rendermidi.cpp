@@ -49,6 +49,7 @@
 #include "staff.h"
 #include "hairpin.h"
 #include "bend.h"
+#include "tremolo.h"
 
 //---------------------------------------------------------
 //   searchVolta
@@ -269,9 +270,55 @@ static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx
                   Element* cr = seg->element(track);
                   if (cr && cr->type() == CHORD) {
                         Chord* chord = static_cast<Chord*>(cr);
-                        foreach(const Note* note, chord->notes()) {
-                              int channel = instr->channel(note->subchannel()).channel;
-                              collectNote(events, channel, note, tickOffset);
+                        Tremolo* tremolo = chord->tremolo();
+                        if (tremolo) {
+                              Fraction tl = tremolo->tremoloLen();
+                              Fraction cl = chord->durationType().fraction();
+                              Fraction r = cl / tl;
+                              int repeats = r.numerator() / r.denominator();
+
+printf("play tremolo repeats %d %s %s %d\n", repeats, qPrintable(cl.print()), qPrintable(tl.print()), tl.ticks() );
+
+                              if (tremolo->twoNotes()) {
+                                    repeats /= 2;
+                                    Segment* seg2 = seg->next(st);
+                                    while (seg2 && !seg2->element(track))
+                                          seg2 = seg2->next(st);
+                                    ChordRest* cr = static_cast<ChordRest*>(seg2->element(track));
+                                    if (cr && cr->type() == CHORD) {
+                                          Chord* c2 = static_cast<Chord*>(cr);
+                                          int tick = chord->tick() + tickOffset;
+                                          for (int i = 0; i < repeats; ++i) {
+                                                foreach (const Note* note, chord->notes()) {
+                                                      int channel = instr->channel(note->subchannel()).channel;
+                                                      playNote(events, note, channel, note->ppitch(), note->velocity(), tick, tick + tl.ticks() - 1);
+                                                      }
+                                                tick += tl.ticks();
+                                                foreach (const Note* note, c2->notes()) {
+                                                      int channel = instr->channel(note->subchannel()).channel;
+                                                      playNote(events, note, channel, note->ppitch(), note->velocity(), tick, tick + tl.ticks() - 1);
+                                                      }
+                                                tick += tl.ticks();
+                                                }
+                                          }
+                                    else
+                                          printf("Tremolo: cannot find 2. chord\n");
+                                    }
+                              else {
+                                    for (int i = 0; i < repeats; ++i) {
+                                          int tick = chord->tick() + tickOffset + i * tl.ticks();
+                                          foreach (const Note* note, chord->notes()) {
+                                                int channel = instr->channel(note->subchannel()).channel;
+                                                playNote(events, note, channel, note->ppitch(), note->velocity(), tick, tick + tl.ticks() - 1);
+                                                }
+                                          }
+                                    }
+                              }
+                        else {
+                              foreach(const Note* note, chord->notes()) {
+                                    int channel = instr->channel(note->subchannel()).channel;
+                                    collectNote(events, channel, note, tickOffset);
+                                    }
                               }
                         }
                   }
@@ -381,29 +428,7 @@ void Score::toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx)
                         break;
                   }
 
-            int channel = instr->channel(0).channel;
-            // TODO: what if instrument has more than one channel?
-#if 0
-            foreach(Element* e, _gel) {
-                  int staffIdx = e->staffIdx();
-                  if (e->type() == PEDAL && staffIdx >= firstStaffIdx && staffIdx < nextStaffIdx) {
-                        Pedal* p = static_cast<Pedal*>(e);
-                        if (p->tick() >= startTick && p->tick() < endTick) {
-                              Event* ev = new Event(ME_CONTROLLER);
-                              ev->setChannel(channel);
-                              ev->setController(CTRL_SUSTAIN);
-                              ev->setValue(127);
-                              events->insertMulti(p->tick() + tickOffset, ev);
-
-                              ev = new Event(ME_CONTROLLER);
-                              ev->setChannel(channel);
-                              ev->setController(CTRL_SUSTAIN);
-                              ev->setValue(0);
-                              events->insertMulti(p->tick2() + tickOffset, ev);
-                              }
-                        }
-                  }
-#endif
+            //int channel = instr->channel(0).channel;
             }
       }
 

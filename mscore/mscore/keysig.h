@@ -66,9 +66,9 @@ class KeySig : public Element {
       void setCustom(const QList<KeySym*>& symbols);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      int keySignature() const            { return _sig.accidentalType; }    // -7 - +7
-      int customType() const              { return _sig.customType; }
-      bool isCustom() const               { return _sig.custom; }
+      int keySignature() const            { return _sig.accidentalType(); }    // -7 - +7
+      int customType() const              { return _sig.customType(); }
+      bool isCustom() const               { return _sig.custom(); }
       KeySigEvent keySigEvent() const     { return _sig; }
       bool operator==(const KeySig&) const;
       void changeKeySigEvent(const KeySigEvent&);
