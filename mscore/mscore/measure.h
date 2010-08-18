@@ -134,7 +134,7 @@ class Measure : public MeasureBase {
       virtual void write(Xml&) const;
       void writeBox(Xml&) const;
       void readBox(QDomElement);
-      virtual bool isEditable() { return false; }
+      virtual bool isEditable() const { return false; }
 
       virtual void add(Element*);
       virtual void remove(Element*);

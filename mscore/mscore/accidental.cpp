@@ -78,6 +78,16 @@ Acc accList[] = {
       };
 
 //---------------------------------------------------------
+//   Accidental
+//---------------------------------------------------------
+
+Accidental::Accidental(Score* s)
+   : Element(s)
+      {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      }
+
+//---------------------------------------------------------
 //   subtypeName
 //---------------------------------------------------------
 
@@ -313,4 +323,3 @@ void AccidentalBracket::setSubtype(int i)
       addElement(s1, -s1->bbox().x(), 0.0);
       addElement(s2, s2->bbox().width() - s2->bbox().x(), 0.0);
       }
-

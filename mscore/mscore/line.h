@@ -44,7 +44,7 @@ class LineSegment : public SpannerSegment {
       QPointF _userOff2;            // depends on spatium
       QRectF r1, r2;
 
-      virtual bool isEditable() { return true; }
+      virtual bool isEditable() const { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;

@@ -922,7 +922,7 @@ void TextB::startEdit(ScoreView* view, const QPointF& p)
 //   isEditable
 //---------------------------------------------------------
 
-bool TextB::isEditable()
+bool TextB::isEditable() const
       {
       return !((type() == TEXT) && ((subtype() == TEXT_MEASURE_NUMBER) || (subtype() == TEXT_PAGE_NUMBER_ODD) || (subtype() == TEXT_PAGE_NUMBER_EVEN)));
       }

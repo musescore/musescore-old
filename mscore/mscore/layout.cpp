@@ -1634,6 +1634,8 @@ void Score::add(Element* el)
                         cr->setBeam(b);
                   }
                   break;
+            case SLUR:
+                  break;
             default:
                   printf("Score::add() invalid element <%s>\n", el->name());
                   delete el;
@@ -1663,6 +1665,8 @@ void Score::remove(Element* el)
                   else
                         printf("Score::remove(): cannot find Beam\n");
                   }
+                  break;
+            case SLUR:
                   break;
             default:
                   printf("Score::remove(): invalid element %s\n", el->name());

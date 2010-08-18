@@ -50,7 +50,7 @@ class Accidental : public Element {
       QList<SymElement> el;
 
    public:
-      Accidental(Score* s) : Element(s) {}
+      Accidental(Score* s);
       virtual Accidental* clone() const { return new Accidental(*this); }
       virtual ElementType type() const  { return ACCIDENTAL; }
       virtual void setSubtype(int v);
@@ -60,6 +60,7 @@ class Accidental : public Element {
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual void draw(QPainter&, ScoreView*) const;
+
       int symbol();
       Note* note() const { return (Note*)parent(); }
 

@@ -163,7 +163,7 @@ class TextB : public Element {
 
       virtual void draw(QPainter&, ScoreView*) const;
 
-      virtual bool isEditable();
+      virtual bool isEditable() const;
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();

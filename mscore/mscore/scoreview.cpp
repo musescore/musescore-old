@@ -3722,7 +3722,7 @@ void ScoreView::cmdAddSlur()
       _score->startCmd();
       QList<Note*> nl = _score->selection().noteList();
       Note* firstNote = 0;
-      Note* lastNote = 0;
+      Note* lastNote  = 0;
       foreach(Note* n, nl) {
             if (firstNote == 0 || firstNote->chord()->tick() > n->chord()->tick())
                   firstNote = n;

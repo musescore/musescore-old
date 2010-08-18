@@ -1247,9 +1247,11 @@ void Note::layout1(char* tversatz)
                         }
                   }
             if (acci != ACC_NONE && !_tieBack && !_hidden) {
-                  _accidental = new Accidental(score());
-                  _accidental->setGenerated(true);
-                  _accidental->setParent(this);
+                  if (_accidental == 0) {
+                        _accidental = new Accidental(score());
+                        _accidental->setGenerated(true);
+                        _accidental->setParent(this);
+                        }
                   _accidental->setSubtype(acci);
                   }
             else {

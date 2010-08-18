@@ -238,7 +238,7 @@ class Harmony : public Text {
       virtual void propertyAction(ScoreView*, const QString&);
       virtual void layout();
 
-      virtual bool isEditable() { return true; }
+      virtual bool isEditable() const { return true; }
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual void endEdit();
 

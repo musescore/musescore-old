@@ -37,7 +37,7 @@ enum SpannerSegmentType {
 
 class SpannerSegment : public Element {
 
-      virtual bool isEditable() { return true; }
+      virtual bool isEditable() const { return true; }
 
    protected:
       System* _system;

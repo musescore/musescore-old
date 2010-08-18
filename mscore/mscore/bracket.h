@@ -61,7 +61,7 @@ class Bracket : public Element {
       virtual void read(QDomElement);
       virtual void layout();
 
-      virtual bool isEditable() { return true; }
+      virtual bool isEditable() const { return true; }
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int, int, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();
