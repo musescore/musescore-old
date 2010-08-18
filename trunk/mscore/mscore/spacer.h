@@ -45,7 +45,7 @@ class Spacer : public Element {
       Spatium getSpace() const         { return _space; }
       virtual void layout();
       virtual void draw(QPainter&, ScoreView*) const;
-      virtual bool isEditable() { return true; }
+      virtual bool isEditable() const { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QRectF bbox() const;

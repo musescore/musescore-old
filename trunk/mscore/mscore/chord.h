@@ -59,7 +59,7 @@ class Stem : public Element {
       void setLen(double v)            { _len = v; }
       double stemLen() const           { return _len + point(_userLen); }
       virtual QRectF bbox() const;
-      virtual bool isEditable() { return true; }
+      virtual bool isEditable() const { return true; }
 
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;

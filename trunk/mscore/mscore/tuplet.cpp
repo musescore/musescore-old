@@ -727,7 +727,7 @@ int TupletProperties::bracketType() const
 //   isEditable
 //---------------------------------------------------------
 
-bool Tuplet::isEditable()
+bool Tuplet::isEditable() const
       {
       return _hasBracket;
       }

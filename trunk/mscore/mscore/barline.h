@@ -61,7 +61,7 @@ class BarLine : public Element {
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
 
-      virtual bool isEditable() { return true; }
+      virtual bool isEditable() const { return true; }
       virtual void endEdit();
       virtual void editDrag(int, const QPointF&);
       virtual void endEditDrag();

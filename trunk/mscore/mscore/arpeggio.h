@@ -48,7 +48,7 @@ class Arpeggio : public Element {
       Chord* chord() const             { return (Chord*)parent(); }
       virtual QRectF bbox() const;
       virtual void draw(QPainter&, ScoreView*) const;
-      virtual bool isEditable() { return true; }
+      virtual bool isEditable() const { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
       virtual bool edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&);

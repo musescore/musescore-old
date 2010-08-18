@@ -182,12 +182,12 @@ void MuseScore::populatePalette()
 
       for (int i = 0; i < 7; ++i) {
             KeySig* k = new KeySig(gscore);
-            k->setSubtype(i+1);
+            k->setKeySigEvent(KeySigEvent(i+1));
             sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
             }
       for (int i = -7; i < 0; ++i) {
             KeySig* k = new KeySig(gscore);
-            k->setSubtype(i & 0xff);
+            k->setKeySigEvent(KeySigEvent(i));
             sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
             }
       KeySig* k = new KeySig(gscore);

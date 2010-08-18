@@ -42,7 +42,7 @@ class Image : public BSymbol {
       bool _autoScale;              ///< fill parent frame
       mutable bool _dirty;
 
-      virtual bool isEditable() { return true; }
+      virtual bool isEditable() const { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void endEdit();
       virtual void draw(QPainter&, ScoreView*) const;
