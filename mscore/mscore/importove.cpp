@@ -1414,7 +1414,8 @@ void OveToMScore::convertNotes(Measure* measure, int part, int staff, int track)
 				int pitch = notePtr->getNote();
 
 				note->setTrack(noteTrack);
-				note->setVelocity(notePtr->getOnVelocity());
+                        note->setVeloType(USER_VAL);
+				note->setVeloOffset(notePtr->getOnVelocity());
 				//note->setUserAccidental(OveAccidental_to_Accidental(notePtr->getAccidental()));
 				note->setPitch(pitch);
 

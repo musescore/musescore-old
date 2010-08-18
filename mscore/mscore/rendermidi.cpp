@@ -133,6 +133,7 @@ void Score::updateChannel()
 static void playNote(EventMap* events, const Note* note, int channel, int pitch,
    int velo, int onTime, int offTime)
       {
+      velo = note->customizeVelocity(velo);
       Event* ev = new Event(ME_NOTEON);
       ev->setChannel(channel);
       ev->setPitch(pitch);
@@ -153,24 +154,31 @@ static void playNote(EventMap* events, const Note* note, int channel, int pitch,
 //   collectNote
 //---------------------------------------------------------
 
-static void collectNote(EventMap* events, int channel, const Note* note, int tickOffset)
+static void collectNote(EventMap* events, int channel, const Note* note, int velo, int tickOffset)
       {
       if (note->hidden() || note->tieBack())       // do not play overlapping notes
             return;
 
+#if 0
+      Staff* st = staff(staffIdx);
+      Instrument* instr = st->part()->instr();
+      int strack        = staffIdx * VOICES;
+      int etrack        = strack + VOICES;
+      //
+      // adjust velocity for instrument, channel and
+      // depending on articulation marks
+      //
+      int channel = note->subchannel();
+      instr->updateVelocity(&velocity, channel, "");
+      foreach(Articulation* a, *chord->getArticulations())
+            instr->updateVelocity(&velocity, channel, a->subtypeName());
+#endif
+
+      int pitch   = note->ppitch();
       int tick    = note->chord()->tick() + tickOffset;
       int onTime  = tick + note->onTimeOffset() + note->onTimeUserOffset();
       int offTime = tick + note->playTicks() + note->offTimeOffset() + note->offTimeUserOffset() - 1;
 
-      int pitch  = note->ppitch();
-      int velo = note->velocity();
-      if (note->veloType() == OFFSET_VAL) {
-            velo = velo + (velo * note->veloOffset()) / 100;
-            if (velo < 1)
-                  velo = 1;
-            else if (velo > 127)
-                  velo = 127;
-            }
       bool mordent = false;
       foreach(Articulation* a, *note->chord()->getArticulations()) {
             if (a->subtype() == MordentSym) {
@@ -270,6 +278,8 @@ static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx
                   Element* cr = seg->element(track);
                   if (cr && cr->type() == CHORD) {
                         Chord* chord = static_cast<Chord*>(cr);
+                        Staff* staff = chord->staff();
+                        int velocity = staff->velocities().velo(seg->tick());
                         Tremolo* tremolo = chord->tremolo();
                         if (tremolo) {
                               Fraction tl = tremolo->tremoloLen();
@@ -291,12 +301,12 @@ printf("play tremolo repeats %d %s %s %d\n", repeats, qPrintable(cl.print()), qP
                                           for (int i = 0; i < repeats; ++i) {
                                                 foreach (const Note* note, chord->notes()) {
                                                       int channel = instr->channel(note->subchannel()).channel;
-                                                      playNote(events, note, channel, note->ppitch(), note->velocity(), tick, tick + tl.ticks() - 1);
+                                                      playNote(events, note, channel, note->ppitch(), velocity, tick, tick + tl.ticks() - 1);
                                                       }
                                                 tick += tl.ticks();
                                                 foreach (const Note* note, c2->notes()) {
                                                       int channel = instr->channel(note->subchannel()).channel;
-                                                      playNote(events, note, channel, note->ppitch(), note->velocity(), tick, tick + tl.ticks() - 1);
+                                                      playNote(events, note, channel, note->ppitch(), velocity, tick, tick + tl.ticks() - 1);
                                                       }
                                                 tick += tl.ticks();
                                                 }
@@ -309,7 +319,7 @@ printf("play tremolo repeats %d %s %s %d\n", repeats, qPrintable(cl.print()), qP
                                           int tick = chord->tick() + tickOffset + i * tl.ticks();
                                           foreach (const Note* note, chord->notes()) {
                                                 int channel = instr->channel(note->subchannel()).channel;
-                                                playNote(events, note, channel, note->ppitch(), note->velocity(), tick, tick + tl.ticks() - 1);
+                                                playNote(events, note, channel, note->ppitch(), velocity, tick, tick + tl.ticks() - 1);
                                                 }
                                           }
                                     }
@@ -317,7 +327,7 @@ printf("play tremolo repeats %d %s %s %d\n", repeats, qPrintable(cl.print()), qP
                         else {
                               foreach(const Note* note, chord->notes()) {
                                     int channel = instr->channel(note->subchannel()).channel;
-                                    collectNote(events, channel, note, tickOffset);
+                                    collectNote(events, channel, note, velocity, tickOffset);
                                     }
                               }
                         }
@@ -622,57 +632,4 @@ void Score::updateVelo()
                         }
                   }
             }
-
-      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-            Staff* st         = staff(staffIdx);
-            Instrument* instr = st->part()->instr();
-            int strack        = staffIdx * VOICES;
-            int etrack        = strack + VOICES;
-
-            for (Segment* seg = firstSegment(); seg; seg = seg->next1()) {
-                  if (seg->subtype() != SegChordRest && seg->subtype() != SegGrace)
-                        continue;
-                  for (int track = strack; track < etrack; ++track) {
-                        Element* el = seg->element(track);
-                        if (!el || el->type() != CHORD)
-                              continue;
-                        Chord* chord = static_cast<Chord*>(el);
-
-                        //
-                        // get velocity depending on dynamic marks as "p" of "sfz"
-                        // crescendo and diminuendo
-                        //
-                        int velocity = staff(staffIdx)->velocities().velo(seg->tick());
-                        foreach(Note* note, chord->notes()) {
-
-                              //
-                              // adjust velocity for instrument, channel and
-                              // depending on articulation marks
-                              //
-                              int channel = note->subchannel();
-                              instr->updateVelocity(&velocity, channel, "");
-                              foreach(Articulation* a, *chord->getArticulations())
-                                    instr->updateVelocity(&velocity, channel, a->subtypeName());
-
-                              switch (note->veloType()) {
-                                    case OFFSET_VAL:
-                                          velocity += (velocity * note->veloOffset()) / 100;
-                                          // fall through
-
-                                    case AUTO_VAL:
-                                          if (velocity > 127)
-                                                velocity = 127;
-                                          else if (velocity < 1)
-                                                velocity = 1;
-                                          note->setVelocity(velocity);
-                                          break;
-                                    case USER_VAL:
-                                          break;
-                                    }
-                              }
-                        }
-                  }
-            }
       }
-
-

@@ -1040,7 +1040,7 @@ void ShowNoteWidget::setElement(Element* e)
 
       nb.pitch->setValue(note->pitch());
       nb.ppitch->setValue(note->ppitch());
-      nb.velo->setValue(note->velocity());
+//      nb.velo->setValue(note->velocity());
       nb.tuning->setValue(note->tuning());
       nb.line->setValue(note->line());
       nb.string->setValue(note->string());

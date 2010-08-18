@@ -2140,21 +2140,18 @@ void ChangeTupletProperties::flip()
 //   ChangeVelocity
 //---------------------------------------------------------
 
-ChangeVelocity::ChangeVelocity(Note* n, ValueType t, int v, int o)
-   : note(n), veloType(t), velocity(v), veloOffset(o)
+ChangeVelocity::ChangeVelocity(Note* n, ValueType t, int o)
+   : note(n), veloType(t), veloOffset(o)
       {
       }
 
 void ChangeVelocity::flip()
       {
       ValueType t = note->veloType();
-      int v       = note->velocity();
       int o       = note->veloOffset();
       note->setVeloType(veloType);
-      note->setVelocity(velocity);
       note->setVeloOffset(veloOffset);
       veloType   = t;
-      velocity   = v;
       veloOffset = o;
       }
 
@@ -2249,12 +2246,11 @@ void ChangeMeasureProperties::flip()
 //   ChangeNoteProperties
 //---------------------------------------------------------
 
-ChangeNoteProperties::ChangeNoteProperties(Note* n, ValueType v1, int v2, int v3,
+ChangeNoteProperties::ChangeNoteProperties(Note* n, ValueType v1, int v3,
    int v6, int v9)
       {
       note               = n;
       _veloType          = v1;
-      _velocity          = v2;      ///< midi playback velocity (0 - 127);
       _veloOffset        = v3;      ///< velocity user offset in promille
       _onTimeUserOffset  = v6;      ///< start note user offset
       _offTimeUserOffset = v9;      ///< stop note user offset
@@ -2267,19 +2263,16 @@ ChangeNoteProperties::ChangeNoteProperties(Note* n, ValueType v1, int v2, int v3
 void ChangeNoteProperties::flip()
       {
       ValueType v1 = note->veloType();
-      int       v2 = note->velocity();
       int       v3 = note->veloOffset();
       int       v6 = note->onTimeUserOffset();
       int       v9 = note->offTimeUserOffset();
 
       note->setVeloType(_veloType);
-      note->setVelocity(_velocity);
       note->setVeloOffset(_veloOffset);
       note->setOnTimeUserOffset(_onTimeUserOffset);
       note->setOffTimeUserOffset(_offTimeUserOffset);
 
       _veloType          = v1;
-      _velocity          = v2;
       _veloOffset        = v3;
       _onTimeUserOffset  = v6;
       _offTimeUserOffset = v9;

@@ -155,7 +155,6 @@ Note::Note(Score* s)
       _subchannel        = 0;
 
       _veloType          = AUTO_VAL;
-      _velocity          = 80;
       _veloOffset        = 0;
 
       _onTimeOffset      = 0;
@@ -210,7 +209,6 @@ Note::Note(const Note& n)
       _hidden            = n._hidden;
 
       _veloType          = n._veloType;
-      _velocity          = n._velocity;
       _veloOffset        = n._veloOffset;
 
       _onTimeOffset      = n._onTimeOffset;
@@ -443,6 +441,7 @@ void Note::remove(Element* e)
 
 //---------------------------------------------------------
 //   stemPos
+//    return in canvas coordinates
 //---------------------------------------------------------
 
 QPointF Note::stemPos(bool upFlag) const
@@ -619,8 +618,7 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             xml.tag("mirror", _userMirror);
       if (_veloType != AUTO_VAL) {
             xml.valueTypeTag("veloType", _veloType);
-            int val = _veloType == USER_VAL ? _velocity : _veloOffset;
-            xml.tag("velocity", val);
+            xml.tag("velocity", _veloOffset);
             }
       if (_onTimeUserOffset)
             xml.tag("onTimeOffset", _onTimeUserOffset);
@@ -735,14 +733,8 @@ void Note::read(QDomElement e)
                   _userMirror = DirectionH(i);
             else if (tag == "veloType")
                   _veloType = readValueType(e);
-            else if (tag == "velocity") {
-                  if (_veloType == USER_VAL)
-                        _velocity = i;
-                  else if (_veloType == OFFSET_VAL)
-                        _veloOffset = i;
-                  // else
-                  //      ignore value;
-                  }
+            else if (tag == "velocity")
+                  _veloOffset = i;
             else if (tag == "Bend") {
                   _bend = new Bend(score());
                   _bend->setTrack(track());
@@ -1069,8 +1061,9 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                         }
                   e->setParent(ch);
                   e->setTrack(track());
+                  if (ch->tremolo())
+                        score()->undoRemoveElement(ch->tremolo());
                   score()->undoAddElement(e);
-printf("add tremolo %d\n", e->subtype());
                   }
                   break;
 
@@ -1147,12 +1140,11 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
                         if (vp.getHeadType() != note->headType() || vp.getHeadGroup() != note->headGroup())
                               score()->undo()->push(new ChangeNoteHead(note, vp.getHeadGroup(), vp.getHeadType()));
                         }
-                  if (veloType() != vp.veloType() || velocity() != vp.velo()
-                     || veloOffset() != vp.veloOffset()
+                  if (veloType() != vp.veloType() || veloOffset() != vp.veloOffset()
                      || onTimeUserOffset() != vp.onTimeUserOffset()
                      || offTimeUserOffset() != vp.offTimeUserOffset()) {
                         score()->undo()->push(new ChangeNoteProperties(this,
-                           vp.veloType(), vp.velo(), vp.veloOffset(),
+                           vp.veloType(), vp.veloOffset(),
                            vp.onTimeUserOffset(),
                            vp.offTimeUserOffset()));
                         }
@@ -1432,5 +1424,26 @@ int Note::ppitch() const
       int tick        = chord()->segment()->tick();
       int pitchOffset = score()->styleB(ST_concertPitch) ? 0 : staff()->part()->instr()->transpose().chromatic;
       return _pitch + staff()->pitchOffsets().pitchOffset(tick) + pitchOffset;
+      }
+
+//---------------------------------------------------------
+//   customizeVelocity
+//    Input is the global velocity determined by dynamic
+//    signs and crescende/decrescendo etc.
+//    Returns the actual play velocity for this note
+//    modified by veloOffset
+//---------------------------------------------------------
+
+int Note::customizeVelocity(int velo) const
+      {
+      if (veloType() == OFFSET_VAL)
+            velo = velo + (velo * veloOffset()) / 100;
+      else if (veloType() == USER_VAL)
+            velo = veloOffset();
+      if (velo < 1)
+            velo = 1;
+      else if (velo > 127)
+            velo = 127;
+      return velo;
       }
 

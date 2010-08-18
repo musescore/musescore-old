@@ -34,6 +34,7 @@ Tremolo::Tremolo(Score* score)
       {
       _chord1 = 0;
       _chord2 = 0;
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       }
 
 //---------------------------------------------------------
@@ -136,12 +137,10 @@ void Tremolo::layout()
             return;
             }
       _chord2       = static_cast<Chord*>(s->element(track()));
-      Note* anchor2 = _chord2->upNote();
-      double x1     = anchor2->canvasPos().x();
-      double x2     = anchor1->canvasPos().x();
-      x             = anchor1->pos().x() + (x1 - x2) * .5;
-      if (_chord2->up())
-            x += anchor2->headWidth();
+
+      double x2     = _chord2->stemPos(_chord2->up(), true).x();
+      double x1     = _chord1->stemPos(_chord1->up(), true).x();
+      x             = x1 - _chord1->canvasPos().x() + (x2 - x1) * .5;
       setPos(x, y);
       }
 

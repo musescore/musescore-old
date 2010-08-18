@@ -108,7 +108,6 @@ class SlurTie : public Spanner {
       void setSlurDirection(Direction d) { _slurDirection = d; }
 
       virtual void layout2(const QPointF, int, struct UP&)  {}
-      virtual void setSelected(bool f);
       virtual bool contains(const QPointF&) const     { return false; }  // not selectable
 
       void writeProperties(Xml& xml) const;
