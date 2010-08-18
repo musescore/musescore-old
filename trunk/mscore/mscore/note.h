@@ -86,8 +86,8 @@ class Note : public Element {
       double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
 
       ValueType _veloType;
-      char _velocity;         ///< midi playback velocity (0 - 127);
-      int _veloOffset;        ///< velocity user offset in percent
+//      char _velocity;         ///< midi playback velocity (0 - 127);
+      int _veloOffset;        ///< velocity user offset in percent, or absolute velocity for this note
 
       int _onTimeOffset;      ///< start note offset in ticks
       int _onTimeUserOffset;  ///< start note user offset
@@ -213,8 +213,8 @@ class Note : public Element {
 
       ValueType veloType() const       { return _veloType;          }
       void setVeloType(ValueType v)    { _veloType = v;             }
-      int velocity() const             { return _velocity;          }
-      void setVelocity(int v)          { _velocity = v;             }
+//      int velocity() const             { return _velocity;          }
+//      void setVelocity(int v)          { _velocity = v;             }
       int veloOffset() const           { return _veloOffset;        }
       void setVeloOffset(int v)        { _veloOffset = v;           }
 
@@ -230,6 +230,7 @@ class Note : public Element {
 
       Bend* bend() const               { return _bend; }
       void setBend(Bend* b)            { _bend = b;    }
+      int customizeVelocity(int velo) const;
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);

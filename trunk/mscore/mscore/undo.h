@@ -1173,12 +1173,11 @@ class ChangeTupletProperties : public UndoCommand {
 class ChangeVelocity : public UndoCommand {
       Note* note;
       ValueType veloType;
-      int velocity;
       int veloOffset;
       void flip();
 
    public:
-      ChangeVelocity(Note*, ValueType, int, int);
+      ChangeVelocity(Note*, ValueType, int);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeVelocity");
@@ -1234,7 +1233,6 @@ class ChangeNoteProperties : public UndoCommand {
       Note* note;
 
       ValueType _veloType;
-      char _velocity;         ///< midi playback velocity (0 - 127);
       int _veloOffset;        ///< velocity user offset in promille
 
       int _onTimeUserOffset;  ///< start note user offset
@@ -1243,7 +1241,7 @@ class ChangeNoteProperties : public UndoCommand {
       void flip();
 
    public:
-      ChangeNoteProperties(Note*, ValueType, int, int, int, int);
+      ChangeNoteProperties(Note*, ValueType, int, int, int);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeNoteProperties");

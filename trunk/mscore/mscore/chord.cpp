@@ -349,6 +349,7 @@ void Chord::setStem(Stem* s)
 
 //---------------------------------------------------------
 //   stemPos
+//    return canvas coordinates
 //---------------------------------------------------------
 
 QPointF Chord::stemPos(bool upFlag, bool top) const
@@ -399,7 +400,7 @@ void Chord::add(Element* e)
             _arpeggio = static_cast<Arpeggio*>(e);
       else if (e->type() == TREMOLO) {
             Tremolo* tr = static_cast<Tremolo*>(e);
-            if (tr->twoNotes()) {
+            if (tr->twoNotes() && !(_tremolo && _tremolo->twoNotes())) {
                   Duration d = durationType();
                   d  = d.shift(-1);
                   if (tr->chord1())

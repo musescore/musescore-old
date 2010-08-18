@@ -608,17 +608,6 @@ void SlurTie::writeProperties(Xml& xml) const
       }
 
 //---------------------------------------------------------
-//   setSelected
-//---------------------------------------------------------
-
-void SlurTie::setSelected(bool f)
-      {
-      foreach(SpannerSegment* ss, spannerSegments())
-            ss->setSelected(f);
-      Element::setSelected(f);
-      }
-
-//---------------------------------------------------------
 //   readProperties
 //---------------------------------------------------------
 

@@ -275,7 +275,7 @@ void PianorollEditor::veloTypeChanged(int val)
             return;
 
       _score->undo()->beginMacro();
-      _score->undo()->push(new ChangeVelocity(note, ValueType(val), note->velocity(), note->veloOffset()));
+      _score->undo()->push(new ChangeVelocity(note, ValueType(val), note->veloOffset()));
       _score->undo()->endMacro(_score->undo()->current()->childCount() == 0);
       updateVelocity(note);
       }
@@ -310,7 +310,7 @@ void PianorollEditor::updateVelocity(Note* note)
       switch(vt) {
             case AUTO_VAL:
             case USER_VAL:
-                  velocity->setValue(note->velocity());
+                  // TODO velocity->setValue(note->velocity());
                   break;
             case OFFSET_VAL:
                   velocity->setValue(note->veloOffset());
@@ -336,16 +336,8 @@ void PianorollEditor::velocityChanged(int val)
       if (vt == AUTO_VAL)
             return;
 
-      int velocity = note->velocity();
-      int offset   = note->veloOffset();
-
-      if (vt == USER_VAL)
-            velocity = val;
-      else
-            offset = val;
-
       _score->undo()->beginMacro();
-      _score->undo()->push(new ChangeVelocity(note, vt, velocity, offset));
+      _score->undo()->push(new ChangeVelocity(note, vt, val));
       _score->undo()->endMacro(_score->undo()->current()->childCount() == 0);
       }
 

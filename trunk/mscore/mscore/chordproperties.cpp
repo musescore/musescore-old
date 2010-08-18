@@ -59,7 +59,6 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       noteHeadType->setCurrentIndex(int(note->headType()));
 
       ValueType vt  = note->veloType();
-      _velo         = note->velocity();
       _veloOffset   = note->veloOffset();
       _veloType->setCurrentIndex(int(vt));
       veloTypeChanged(vt);
@@ -88,11 +87,7 @@ int ChordProperties::getHeadGroup() const
 
 void ChordProperties::velocityChanged(int val)
       {
-      switch(_veloType->currentIndex()) {
-            case AUTO_VAL:
-            case USER_VAL:   _velo = val; break;
-            case OFFSET_VAL: _veloOffset = val; break;
-            }
+      _veloOffset = val;
       }
 
 //---------------------------------------------------------
