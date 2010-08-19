@@ -25,7 +25,7 @@
 #include "ui_measuresdialog.h"
 #include "ui_insertmeasuresdialog.h"
 #include "ui_aboutbox.h"
-#include "singleapp/src/qtsingleapplication.h"
+#include <QtSingleApplication>
 #include "updatechecker.h"
 
 class ScoreView;

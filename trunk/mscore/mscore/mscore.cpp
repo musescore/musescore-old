@@ -1870,7 +1870,7 @@ int main(int argc, char* av[])
                         return 0;
                   }
             else
-                  if (app->sendMessage("")) {
+                  if (app->sendMessage(QString(""))) {
                       return 0;
                       }
             }
