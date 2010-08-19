@@ -65,6 +65,8 @@ if (APPLE)
       set(OsxFrameworks ${AudioToolboxFW} ${AudioUnitFW} ${CoreAudioFW} ${CoreMidiFW} ${SystemConfigurationFW} ${CoreServicesFW})
 endif (APPLE)
 
+option(USE_SYSTEM_QTSINGLEAPPLICATION "Use system QtSingleApplication" OFF)
+
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
@@ -249,7 +251,16 @@ if (NOT MINGW AND NOT APPLE)
 endif (NOT MINGW AND NOT APPLE)
 
 set (subdirs al awl bww2mxml osdabzip rtf2html mscore share manual demos
-     scriptgen singleapp fluid msynth diff)
+     scriptgen fluid msynth diff)
+
+if(USE_SYSTEM_QTSINGLEAPPLICATION)
+      find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
+      find_library(QTSINGLEAPPLICATION_LIBRARIES QtSolutions_SingleApplication-2.6)
+else(USE_SYSTEM_QTSINGLEAPPLICATION)
+      set (subdirs ${subdirs} singleapp)
+      set(QTSINGLEAPPLICATION_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/singleapp/src)
+      set(QTSINGLEAPPLICATION_LIBRARIES qtsingleapp)
+endif(USE_SYSTEM_QTSINGLEAPPLICATION)
 
 if (MINGW OR APPLE)
       set (subdirs ${subdirs} portmidi)

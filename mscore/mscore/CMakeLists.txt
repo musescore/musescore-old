@@ -68,6 +68,7 @@ include_directories(
       ${PROJECT_SOURCE_DIR}/osdabzip
       ${PROJECT_SOURCE_DIR}/fluid
       ${PROJECT_SOURCE_DIR}/bww2mxml
+      ${QTSINGLEAPPLICATION_INCLUDE_DIRS}
       )
 
 QT4_WRAP_UI (ui_headers
@@ -243,7 +244,7 @@ if (MINGW)
       bww
       osdabzip
       rtf2html
-      qtsingleapp
+      ${QTSINGLEAPPLICATION_LIBRARIES}
       fluid
       ${QT_mingw_LIBRARIES}
       portaudio
@@ -312,7 +313,7 @@ else (MINGW)
       bww
       osdabzip
       rtf2html
-      qtsingleapp
+      ${QTSINGLEAPPLICATION_LIBRARIES}
       fluid
       z
       dl

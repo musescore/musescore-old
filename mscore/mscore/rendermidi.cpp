@@ -280,6 +280,16 @@ static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx
                         Chord* chord = static_cast<Chord*>(cr);
                         Staff* staff = chord->staff();
                         int velocity = staff->velocities().velo(seg->tick());
+                        Instrument* instr = chord->staff()->part()->instr();
+                        //
+                        // adjust velocity for instrument, channel and
+                        // depending on articulation marks
+                        //
+                        int channel = 0;  // note->subchannel();
+                        instr->updateVelocity(&velocity, channel, "");
+                        foreach(Articulation* a, *chord->getArticulations())
+                              instr->updateVelocity(&velocity, channel, a->subtypeName());
+
                         Tremolo* tremolo = chord->tremolo();
                         if (tremolo) {
                               Fraction tl = tremolo->tremoloLen();
