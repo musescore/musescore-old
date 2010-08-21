@@ -42,6 +42,8 @@
 #include "utils.h"
 #include "articulation.h"
 #include "preferences.h"
+#include "noteevent.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -179,6 +181,7 @@ Element* Stem::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
                   score()->undoAddElement(e);
                   break;
             default:
+                  delete e;
                   break;
             }
       return 0;
@@ -400,14 +403,21 @@ void Chord::add(Element* e)
             _arpeggio = static_cast<Arpeggio*>(e);
       else if (e->type() == TREMOLO) {
             Tremolo* tr = static_cast<Tremolo*>(e);
-            if (tr->twoNotes() && !(_tremolo && _tremolo->twoNotes())) {
-                  Duration d = durationType();
-                  d  = d.shift(-1);
-                  if (tr->chord1())
-                        tr->chord1()->setDurationType(d);
-                  if (tr->chord2())
-                        tr->chord2()->setDurationType(d);
+            if (tr->twoNotes()) {
+                  if (!(_tremolo && _tremolo->twoNotes())) {
+                        Duration d = durationType();
+                        d  = d.shift(-1);
+                        if (tr->chord1())
+                              tr->chord1()->setDurationType(d);
+                        if (tr->chord2())
+                              tr->chord2()->setDurationType(d);
+                        }
+                  _tremoloChordType = TremoloFirstNote;
+                  tr->chord2()->setTremolo(tr);
+                  tr->chord2()->setTremoloChordType(TremoloSecondNote);
                   }
+            else
+                  _tremoloChordType = TremoloSingle;
             _tremolo = tr;
             }
       else if (e->type() == GLISSANDO)
@@ -452,6 +462,7 @@ void Chord::remove(Element* e)
                         tremolo->chord1()->setDurationType(d);
                   if (tremolo->chord2())
                         tremolo->chord2()->setDurationType(d);
+                  tremolo->chord2()->setTremolo(0);
                   }
             _tremolo = 0;
             }
@@ -721,6 +732,12 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
             _glissando->write(xml);
       if (_tremolo)
             _tremolo->write(xml);
+      if (!_playEvents.isEmpty()) {
+            xml.stag("Events");
+            foreach(const NoteEvent* e, _playEvents)
+                  e->write(xml);
+            xml.etag();
+            }
       xml.etag();
       }
 
@@ -863,6 +880,18 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*
                   _stem->read(e);
                   add(_stem);
                   }
+            else if (tag == "Events") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "Event") {
+                              NoteEvent* ne = new NoteEvent;
+                              ne->read(ee);
+                              _playEvents.append(ne);
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
             else if (!ChordRest::readProperties(e, tuplets, slurs))
                   domError(e);
             }
@@ -925,7 +954,7 @@ void Chord::scanElements(void* data, void (*func)(void*, Element*))
             func(data, _stemSlash);
       if (_arpeggio)
             func(data, _arpeggio);
-      if (_tremolo)
+      if (_tremolo && (_tremoloChordType != TremoloSecondNote))
             func(data, _tremolo);
       if (_glissando)
             func(data, _glissando);
@@ -1564,4 +1593,58 @@ void Chord::pitchChanged()
       {
       qSort(_notes.begin(), _notes.end(), noteLessThan);
       }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+      {
+      Measure* m  = measure();
+      switch (e->type()) {
+            case ARTICULATION:
+                  {
+                  Articulation* atr = static_cast<Articulation*>(e);
+                  Articulation* oa = hasArticulation(atr);
+                  if (oa) {
+                        delete atr;
+                        atr = 0;
+                        // if attribute is already there, remove
+                        // score()->cmdRemove(oa); // unexpected behaviour?
+                        score()->select(oa, SELECT_SINGLE, 0);
+                        }
+                  else {
+                        atr->setParent(this);
+                        atr->setTrack(track());
+                        score()->select(atr, SELECT_SINGLE, 0);
+                        score()->undoAddElement(atr);
+                        }
+                  if (atr->subtype() == MordentSym)
+                        createMordentEvents();
+                  return atr;
+                  }
+            default:
+                  delete e;
+                  return 0;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   createMordentEvents
+//---------------------------------------------------------
+
+void Chord::createMordentEvents()
+      {
+      QList<NoteEvent*> events;
+
+      // TODO: downstep (-2) depends on scale
+
+      events.append(new NoteEvent(0, 0, 128));
+      events.append(new NoteEvent(-2, 128, 128));
+      events.append(new NoteEvent(0, 256, 744));
+
+      score()->undo()->push(new ChangeNoteEvents(this, events));
+      }
+
 

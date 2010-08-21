@@ -2078,11 +2078,13 @@ void Measure::read(QDomElement e, int staffIdx)
                               pch = static_cast<Chord*>(cr);
                         }
 
+                  Segment* s = getSegment(chord, score()->curTick);
                   if (chord->tremolo() && chord->tremolo()->subtype() < 6) {
                         //
                         // old style tremolo found
                         //
                         Tremolo* tremolo = chord->tremolo();
+printf("old style tremolo %d\n", tremolo->subtype());
                         TremoloType st;
                         switch(tremolo->subtype()) {
                               case 0: st = TREMOLO_R8;  break;
@@ -2093,22 +2095,28 @@ void Measure::read(QDomElement e, int staffIdx)
                               case 5: st = TREMOLO_C32; break;
                               }
                         tremolo->setSubtype(st);
-                        if (pch) {
-                              tremolo->setParent(pch);
-                              pch->setTremolo(tremolo);
-                              chord->setTremolo(0);
+                        if (tremolo->twoNotes()) {
+printf("  two notes\n");
+                              if (pch) {
+                                    tremolo->setParent(pch);
+                                    pch->setTremolo(tremolo);
+                                    chord->setTremolo(0);
+                                    }
+                              else {
+                                    printf("tremolo: first note not found\n");
+                                    }
+                              score()->curTick += chord->ticks() / 2;
                               }
-                        score()->curTick -= chord->ticks() / 2;
+                        else {
+printf("  single note\n");
+                              tremolo->setParent(chord);
+                              score()->curTick += chord->ticks();
+                              }
                         }
-                  Segment* s = getSegment(chord, score()->curTick);
-                  s->add(chord);
-
-                  if ((chord->tremolo() && chord->tremolo()->twoNotes())
-                     || (pch && pch->tremolo() && pch->tremolo()->twoNotes())) {
-                        score()->curTick += chord->ticks() / 2;
-                        }
-                  else
+                  else {
                         score()->curTick += chord->ticks();
+                        }
+                  s->add(chord);
 
                   Fraction nl(Fraction::fromTicks(score()->curTick - tick()));
                   if (nl > _len)

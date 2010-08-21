@@ -751,7 +751,6 @@ void Note::read(QDomElement e)
                   _offTimeUserOffset = i;
             else if (tag == "tick")                   // bad input file
                   ;
-
             else if (Element::readProperties(e))
                   ;
             else
@@ -869,25 +868,6 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
       {
       Chord* ch = chord();
       switch(e->type()) {
-            case ARTICULATION:
-                  {
-                  Articulation* atr = static_cast<Articulation*>(e);
-                  Articulation* oa = ch->hasArticulation(atr);
-                  if (oa) {
-                        delete atr;
-                        atr = 0;
-                        // if attribute is already there, remove
-                        // score()->cmdRemove(oa); // unexpected behaviour?
-                        score()->select(oa, SELECT_SINGLE, 0);
-                        }
-                  else {
-                        atr->setParent(ch);
-                        atr->setTrack(track());
-                        score()->select(atr, SELECT_SINGLE, 0);
-                        score()->undoAddElement(atr);
-                        }
-                  return atr;
-                  }
             case TEXT:
             case SYMBOL:
             case IMAGE:
@@ -1056,8 +1036,8 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                               delete e;
                               return 0;
                               }
-                        Chord* ch1 = static_cast<Chord*>(s->element(track()));
-                        tremolo->setChords(ch, ch1);
+                        Chord* ch2 = static_cast<Chord*>(s->element(track()));
+                        tremolo->setChords(ch, ch2);
                         }
                   e->setParent(ch);
                   e->setTrack(track());
@@ -1446,4 +1426,3 @@ int Note::customizeVelocity(int velo) const
             velo = 127;
       return velo;
       }
-

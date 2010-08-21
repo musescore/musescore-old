@@ -72,6 +72,7 @@ class Image;
 class Hairpin;
 class Bend;
 class TremoloBar;
+class NoteEvent;
 
 // #define DEBUG_UNDO
 
@@ -1443,6 +1444,24 @@ class ChangeTremoloBar : public UndoCommand {
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeTremoloBar");
       };
+
+//---------------------------------------------------------
+//   ChangeNoteEvents
+//---------------------------------------------------------
+
+class ChangeNoteEvents : public UndoCommand {
+      Chord* chord;
+      QList<NoteEvent*> events;
+
+      void flip();
+
+   public:
+      ChangeNoteEvents(Chord* n, const QList<NoteEvent*>& l) : chord(n), events(l) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeNoteEvents");
+      };
+
 
 #endif
 

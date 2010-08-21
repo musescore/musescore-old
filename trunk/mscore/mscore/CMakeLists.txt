@@ -192,6 +192,7 @@ add_executable ( ${ExecutableName}
       importove.cpp ove.cpp interval.cpp check.cpp tablature.cpp
       fret.cpp stafftype.cpp staffstate.cpp spanner.cpp fingering.cpp
       shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp tremolobar.cpp
+      noteevent.cpp
       ${OMR_FILES}
       ${AUDIO}
       )
