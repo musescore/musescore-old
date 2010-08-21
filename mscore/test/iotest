@@ -62,6 +62,7 @@ rwtestXml() {
       }
 
 rwtestAllBww() {
+      rwtestBww testGraces.bww
       rwtestBww testHello.bww
       rwtestBww testNotes.bww
       rwtestBww testTempo60.bww

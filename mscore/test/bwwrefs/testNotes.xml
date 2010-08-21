@@ -31,6 +31,10 @@
           <beats>4</beats>
           <beat-type>4</beat-type>
           </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+          </clef>
         </attributes>
       <note>
         <pitch>
