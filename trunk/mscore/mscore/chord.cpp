@@ -1619,8 +1619,26 @@ Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Elem
                         score()->select(atr, SELECT_SINGLE, 0);
                         score()->undoAddElement(atr);
                         }
-                  if (atr->subtype() == MordentSym)
-                        createMordentEvents();
+                  int clef = staff()->clef(segment()->tick());
+
+                  if (atr->subtype() == MordentSym) {
+                        QList<NoteEvent*> events;
+                        int pitch = upNote()->ppitch();
+                        int pitch2 = diatonicUpDown(clef, pitch, -1);
+                        events.append(new NoteEvent(0, 0, 128));
+                        events.append(new NoteEvent(pitch2 - pitch, 128, 128));
+                        events.append(new NoteEvent(0, 256, 744));
+                        score()->undo()->push(new ChangeNoteEvents(this, events));
+                        }
+                  else if (atr->subtype() == PrallSym) {
+                        QList<NoteEvent*> events;
+                        int pitch = upNote()->ppitch();
+                        int pitch2 = diatonicUpDown(clef, pitch, 1);
+                        events.append(new NoteEvent(0, 0, 128));
+                        events.append(new NoteEvent(pitch2 - pitch, 128, 128));
+                        events.append(new NoteEvent(0, 256, 744));
+                        score()->undo()->push(new ChangeNoteEvents(this, events));
+                        }
                   return atr;
                   }
             default:
@@ -1629,22 +1647,4 @@ Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Elem
             }
       return 0;
       }
-
-//---------------------------------------------------------
-//   createMordentEvents
-//---------------------------------------------------------
-
-void Chord::createMordentEvents()
-      {
-      QList<NoteEvent*> events;
-
-      // TODO: downstep (-2) depends on scale
-
-      events.append(new NoteEvent(0, 0, 128));
-      events.append(new NoteEvent(-2, 128, 128));
-      events.append(new NoteEvent(0, 256, 744));
-
-      score()->undo()->push(new ChangeNoteEvents(this, events));
-      }
-
 

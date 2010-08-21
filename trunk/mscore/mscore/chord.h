@@ -224,7 +224,6 @@ class Chord : public ChordRest {
       virtual void setMag(double val);
       void pitchChanged();
       void renderPlayback();
-      void createMordentEvents();
       QList<NoteEvent*>& playEvents()                { return _playEvents; }
       const QList<NoteEvent*>& playEvents() const    { return _playEvents; }
       void setPlayEvents(const QList<NoteEvent*>& v) { _playEvents = v;    }

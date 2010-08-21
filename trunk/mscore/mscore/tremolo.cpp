@@ -61,7 +61,6 @@ void Tremolo::draw(QPainter& p, ScoreView*) const
 
 void Tremolo::layout()
       {
-printf("Tremolo::layout\n");
       double sp  = spatium();
       double w   = sp * 1.2;
       double h   = sp * .8;
@@ -138,7 +137,6 @@ printf("Tremolo::layout\n");
             printf("no second note of tremolo found\n");
             return;
             }
-printf("   Tremolo::layout 2\n");
 
       _chord1->setTremoloChordType(TremoloFirstNote);
       _chord2 = static_cast<Chord*>(s->element(track()));
