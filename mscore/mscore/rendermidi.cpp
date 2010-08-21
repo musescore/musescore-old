@@ -50,6 +50,7 @@
 #include "hairpin.h"
 #include "bend.h"
 #include "tremolo.h"
+#include "noteevent.h"
 
 //---------------------------------------------------------
 //   searchVolta
@@ -159,42 +160,23 @@ static void collectNote(EventMap* events, int channel, const Note* note, int vel
       if (note->hidden() || note->tieBack())       // do not play overlapping notes
             return;
 
-#if 0
-      Staff* st = staff(staffIdx);
-      Instrument* instr = st->part()->instr();
-      int strack        = staffIdx * VOICES;
-      int etrack        = strack + VOICES;
-      //
-      // adjust velocity for instrument, channel and
-      // depending on articulation marks
-      //
-      int channel = note->subchannel();
-      instr->updateVelocity(&velocity, channel, "");
-      foreach(Articulation* a, *chord->getArticulations())
-            instr->updateVelocity(&velocity, channel, a->subtypeName());
-#endif
-
       int pitch   = note->ppitch();
       int tick    = note->chord()->tick() + tickOffset;
       int onTime  = tick + note->onTimeOffset() + note->onTimeUserOffset();
       int offTime = tick + note->playTicks() + note->offTimeOffset() + note->offTimeUserOffset() - 1;
 
-      bool mordent = false;
-      foreach(Articulation* a, *note->chord()->getArticulations()) {
-            if (a->subtype() == MordentSym) {
-                  mordent = true;
-                  break;
+      if (!note->chord()->playEvents().isEmpty()) {
+            int ticks = note->playTicks();
+            foreach(NoteEvent* e, note->chord()->playEvents()) {
+                  int p = pitch + e->pitch();
+                  if (p < 0)
+                        p = 0;
+                  else if (p > 127)
+                        p = 127;
+                  int on  = tick + (ticks * e->ontime())/1000;
+                  int off = on + (ticks * e->len())/1000;
+                  playNote(events, note, channel, p, velo, on, off);
                   }
-            }
-      if (mordent) {
-            int l = (offTime - onTime) / 8;
-
-            // TODO: downstep depends on scale
-            int downstep = 2;
-
-            playNote(events, note, channel, pitch, velo, onTime, onTime + l);
-            playNote(events, note, channel, pitch-downstep, velo, onTime+l, onTime + l+l);
-            playNote(events, note, channel, pitch, velo, onTime+l+l, offTime);
             }
       else
             playNote(events, note, channel, pitch, velo, onTime, offTime);
@@ -297,9 +279,7 @@ static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx
                               Fraction r = cl / tl;
                               int repeats = r.numerator() / r.denominator();
 
-printf("play tremolo repeats %d %s %s %d\n", repeats, qPrintable(cl.print()), qPrintable(tl.print()), tl.ticks() );
-
-                              if (tremolo->twoNotes()) {
+                              if (chord->tremoloChordType() == TremoloFirstNote) {
                                     repeats /= 2;
                                     Segment* seg2 = seg->next(st);
                                     while (seg2 && !seg2->element(track))
@@ -324,7 +304,7 @@ printf("play tremolo repeats %d %s %s %d\n", repeats, qPrintable(cl.print()), qP
                                     else
                                           printf("Tremolo: cannot find 2. chord\n");
                                     }
-                              else {
+                              else if (chord->tremoloChordType() == TremoloSingle) {
                                     for (int i = 0; i < repeats; ++i) {
                                           int tick = chord->tick() + tickOffset + i * tl.ticks();
                                           foreach (const Note* note, chord->notes()) {
@@ -333,6 +313,8 @@ printf("play tremolo repeats %d %s %s %d\n", repeats, qPrintable(cl.print()), qP
                                                 }
                                           }
                                     }
+                              // else if (chord->tremoloChordType() == TremoloSecondNote)
+                              //    ignore second note of two note tremolo
                               }
                         else {
                               foreach(const Note* note, chord->notes()) {

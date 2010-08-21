@@ -65,6 +65,7 @@
 #include "bend.h"
 #include "tremolobar.h"
 #include "articulation.h"
+#include "noteevent.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -2475,5 +2476,16 @@ void ChangeTremoloBar::flip()
       QList<PitchValue> pv = bend->points();
       bend->setPoints(points);
       points = pv;
+      }
+
+//---------------------------------------------------------
+//   ChangeNoteEvents::flip
+//---------------------------------------------------------
+
+void ChangeNoteEvents::flip()
+      {
+      QList<NoteEvent*> e = chord->playEvents();
+      chord->setPlayEvents(events);
+      events = e;
       }
 

@@ -61,6 +61,7 @@ void Tremolo::draw(QPainter& p, ScoreView*) const
 
 void Tremolo::layout()
       {
+printf("Tremolo::layout\n");
       double sp  = spatium();
       double w   = sp * 1.2;
       double h   = sp * .8;
@@ -121,6 +122,7 @@ void Tremolo::layout()
             if (_chord1->hook())
                   y -= spatium() * .5 * (_chord1->up() ? -1.0 : 1.0);
             setPos(x, y);
+            _chord1->setTremoloChordType(TremoloSingle);
             return;
             }
       //
@@ -133,10 +135,15 @@ void Tremolo::layout()
             s = s->next();
             }
       if (s == 0) {
-            printf("no first note of tremolo found\n");
+            printf("no second note of tremolo found\n");
             return;
             }
-      _chord2       = static_cast<Chord*>(s->element(track()));
+printf("   Tremolo::layout 2\n");
+
+      _chord1->setTremoloChordType(TremoloFirstNote);
+      _chord2 = static_cast<Chord*>(s->element(track()));
+      _chord2->setTremolo(this);
+      _chord2->setTremoloChordType(TremoloSecondNote);
 
       double x2     = _chord2->stemPos(_chord2->up(), true).x();
       double x1     = _chord1->stemPos(_chord1->up(), true).x();
@@ -209,6 +216,8 @@ void Tremolo::setSubtype(const QString& s)
             t = TREMOLO_C32;
       else if (s == "c64")
             t = TREMOLO_C64;
+      else
+            t = s.toInt();    // for compatibility with old tremolo type
       Element::setSubtype(t);
       }
 

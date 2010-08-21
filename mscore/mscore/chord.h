@@ -35,6 +35,9 @@ class Arpeggio;
 class Tremolo;
 class Chord;
 class Glissando;
+class NoteEvent;
+
+enum TremoloChordType { TremoloSingle, TremoloFirstNote, TremoloSecondNote };
 
 //---------------------------------------------------------
 //   Stem
@@ -133,7 +136,9 @@ class Chord : public ChordRest {
       Direction  _stemDirection;
       Arpeggio*  _arpeggio;
       Tremolo*   _tremolo;
+      TremoloChordType _tremoloChordType;
       Glissando* _glissando;
+      QList<NoteEvent*> _playEvents;
 
       NoteType   _noteType;         ///< mark grace notes: acciaccatura and appoggiatura
       bool       _noStem;
@@ -161,6 +166,7 @@ class Chord : public ChordRest {
       virtual void read(QDomElement);
       virtual void setSelected(bool f);
       virtual void dump() const;
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
 
       virtual QRectF bbox() const;
       void setStemDirection(Direction d)     { _stemDirection = d; }
@@ -218,6 +224,12 @@ class Chord : public ChordRest {
       virtual void setMag(double val);
       void pitchChanged();
       void renderPlayback();
+      void createMordentEvents();
+      QList<NoteEvent*>& playEvents()                { return _playEvents; }
+      const QList<NoteEvent*>& playEvents() const    { return _playEvents; }
+      void setPlayEvents(const QList<NoteEvent*>& v) { _playEvents = v;    }
+      TremoloChordType tremoloChordType() const      { return _tremoloChordType; }
+      void setTremoloChordType(TremoloChordType t)   { _tremoloChordType = t; }
       };
 
 #endif

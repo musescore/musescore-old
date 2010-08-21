@@ -71,7 +71,7 @@ class Note : public Element {
       char _line;             ///< y-Position; 0 - top line.
       char _fret;             ///< for tablature view
       char _string;
-      bool _ghost;            ///< ghost note (death note)
+      bool _ghost;            ///< ghost note (guitar: death note)
 
       bool dragMode;
       char _pitch;            ///< Note pitch as midi value (0 - 127).
@@ -86,7 +86,6 @@ class Note : public Element {
       double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
 
       ValueType _veloType;
-//      char _velocity;         ///< midi playback velocity (0 - 127);
       int _veloOffset;        ///< velocity user offset in percent, or absolute velocity for this note
 
       int _onTimeOffset;      ///< start note offset in ticks
@@ -213,8 +212,6 @@ class Note : public Element {
 
       ValueType veloType() const       { return _veloType;          }
       void setVeloType(ValueType v)    { _veloType = v;             }
-//      int velocity() const             { return _velocity;          }
-//      void setVelocity(int v)          { _velocity = v;             }
       int veloOffset() const           { return _veloOffset;        }
       void setVeloOffset(int v)        { _veloOffset = v;           }
 
