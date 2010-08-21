@@ -208,8 +208,10 @@ namespace Bww {
       ++measureNumber;
 
       // create a new measure
+      TimeSig ts = TimeSig(score, beat, beats);
       currentMeasure  = new Measure(score);
       currentMeasure->setTick(tick);
+      currentMeasure->setTimesig(ts.getSig());
       currentMeasure->setNo(measureNumber);
       score->measures()->add(currentMeasure);
 
@@ -358,7 +360,17 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       Segment* s = currentMeasure->getSegment(cr, tick);
       s->add(cr);
       doTriplet(cr, triplet);
-      if (!grace) tick += ticks;
+      if (!grace) {
+            int tickBefore = tick;
+            tick += ticks;
+            Fraction nl(Fraction::fromTicks(tick - currentMeasure->tick()));
+            currentMeasure->setLen(nl);
+            qDebug() << "MsScWriter::note()"
+              << "tickBefore:" << tickBefore
+              << "tick:" << tick
+              << "nl:" << nl.print()
+              ;
+            }
 }
 
   /**
