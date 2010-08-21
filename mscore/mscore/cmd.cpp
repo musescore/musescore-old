@@ -78,6 +78,8 @@
 #include "repeat.h"
 #include "tempotext.h"
 #include "excerpt.h"
+#include "clef.h"
+#include "noteevent.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -205,15 +207,41 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
             spanner->setEndElement(segment->measure()->last());
             }
 
-#if 0
-      LineSegment* ls = line->lineSegments().front();
-      ls->setScore(this);
-      QPointF uo(pos - ls->canvasPos() - dragOffset);
-      ls->setUserOff(uo);
-#endif
-
       undoAddElement(spanner);
       select(spanner, SELECT_SINGLE, 0);
+
+      if (spanner->type() == TRILL) {
+            Element* e = segment->element(staffIdx * VOICES);
+            if (e && e->type() == CHORD) {
+                  printf("add trill line to chord\n");
+                  Segment* s = segment->next1(SegChordRest);
+                  while (s) {
+                        Element* e = s->element(staffIdx * VOICES);
+                        if (e) {
+                              // TODO: handle tied notes
+                              break;
+                              }
+                        s = s->next1(SegChordRest);
+                        }
+                  if (s)
+                        spanner->setEndElement(s);
+                  Chord* chord = static_cast<Chord*>(e);
+                  Fraction l = chord->duration();
+                  Fraction d(1,32);
+                  Fraction e = l / d;
+                  int n = e.numerator() / e.denominator();
+                  QList<NoteEvent*> events;
+                  int pitch  = chord->upNote()->ppitch();
+                  int clef   = chord->staff()->clef(segment->tick());
+                  int pitch2 = diatonicUpDown(clef, pitch, 1);
+                  int dpitch = pitch2 - pitch;
+                  for (int i = 0; i < n; i += 2) {
+                        events.append(new NoteEvent(0,      i * 1000 / n,    1000/n));
+                        events.append(new NoteEvent(dpitch, (i+1) *1000 / n, 1000/n));
+                        }
+                  undo()->push(new ChangeNoteEvents(chord, events));
+                  }
+            }
       }
 
 //---------------------------------------------------------

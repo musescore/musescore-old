@@ -63,8 +63,10 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       _veloType->setCurrentIndex(int(vt));
       veloTypeChanged(vt);
 
-      _ontimeUserOffset = note->onTimeUserOffset();
+      _ontimeUserOffset  = note->onTimeUserOffset();
       _offtimeUserOffset = note->offTimeUserOffset();
+      ontimeOffset->setValue(_ontimeUserOffset);
+      offtimeOffset->setValue(_offtimeUserOffset);
 
       connect(_veloType,          SIGNAL(activated(int)),    SLOT(veloTypeChanged(int)));
       connect(velocity,           SIGNAL(valueChanged(int)), SLOT(velocityChanged(int)));

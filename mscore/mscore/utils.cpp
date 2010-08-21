@@ -655,3 +655,14 @@ int updateVersion()
       version();
       return _updateVersion;
       }
+
+//---------------------------------------------------------
+//   diatonicUpDown
+//    used to find the second note of a trill, mordent etc.
+//---------------------------------------------------------
+
+int diatonicUpDown(int /*clef*/, int pitch, int steps)
+      {
+      return pitch + steps * 2;     // TODO: dummy
+      }
+

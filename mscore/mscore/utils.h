@@ -62,6 +62,8 @@ extern Interval intervalList[26];
 extern int searchInterval(int steps, int semitones);
 extern int chromatic2diatonic(int val);
 
+int diatonicUpDown(int /*clef*/, int pitch, int steps);
+
 extern int version();
 extern int majorVersion();
 extern int minorVersion();
