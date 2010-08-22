@@ -353,7 +353,6 @@ Score::Score(const Style& s)
       _fileDivision   = AL::division;
       _creditsRead    = false;
       _defaultsRead   = false;
-      rights          = 0;
       _omr            = 0;
       _showOmr        = false;
       _sigmap         = new AL::TimeSigMap();
@@ -406,7 +405,6 @@ Score::Score(Score* parent)
       _fileDivision   = AL::division;
       _creditsRead    = false;
       _defaultsRead   = false;
-      rights          = 0;
       _omr            = 0;
       _showOmr        = false;
       _sigmap         = 0;
@@ -440,7 +438,6 @@ Score::~Score()
             delete e;
       delete _revisions;
       delete _pageFormat;
-      delete rights;
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
       delete _tempomap;
       delete _sigmap;
@@ -610,18 +607,11 @@ void Score::write(Xml& xml, bool /*autosave*/)
       xml.tag("showFrames", _showFrames);
       pageFormat()->write(xml);
 
-      if (rights)
-            rights->write(xml, "copyright");
-      if (!_movementNumber.isEmpty())
-            xml.tag("movement-number", _movementNumber);
-      if (!_movementTitle.isEmpty())
-            xml.tag("movement-title", _movementTitle);
-      if (!_workNumber.isEmpty())
-            xml.tag("work-number", _workNumber);
-      if (!_workTitle.isEmpty())
-            xml.tag("work-title", _workTitle);
-      if (!_source.isEmpty())
-            xml.tag("source", _source);
+      QMapIterator<QString, QString> i(_metaTags);
+      while (i.hasNext()) {
+            i.next();
+            xml.tag(QString("metaTag name=\"%1\"").arg(i.key()), i.value());
+            }
 
       foreach(KeySig* ks, customKeysigs)
             ks->write(xml);
@@ -1350,34 +1340,6 @@ QVector<TextStyle*> Score::swapTextStyles(QVector<TextStyle*> s)
       }
 
 //---------------------------------------------------------
-//   setCopyright
-//---------------------------------------------------------
-
-void Score::setCopyright(const QString& s)
-      {
-      if (rights == 0) {
-            rights = new TextC(this);
-            rights->setSubtype(TEXT_COPYRIGHT);
-            rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
-            }
-      rights->setText(s);
-      }
-
-//---------------------------------------------------------
-//   setCopyrightHtml
-//---------------------------------------------------------
-
-void Score::setCopyrightHtml(const QString& s)
-      {
-      if (rights == 0) {
-            rights = new TextC(this);
-            rights->setSubtype(TEXT_COPYRIGHT);
-            rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
-            }
-      rights->setHtml(s);
-      }
-
-//---------------------------------------------------------
 //   setInputTrack
 //---------------------------------------------------------
 
@@ -2092,6 +2054,11 @@ StyleVal Score::style(StyleIdx idx) const
 Spatium Score::styleS(StyleIdx idx) const
       {
       return _style[idx].toSpatium();
+      }
+
+QString Score::styleSt(StyleIdx idx) const
+      {
+      return _style[idx].toString();
       }
 
 bool Score::styleB(StyleIdx idx) const

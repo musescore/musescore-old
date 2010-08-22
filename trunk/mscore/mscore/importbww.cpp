@@ -403,7 +403,8 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
             vbox->setTick(0);
             score->measures()->add(vbox);
             }
-      if (footer != "") score->setCopyright(footer);
+      if (!footer.isEmpty())
+            score->style().set(ST_oddFooter, footer);
 
       Part* part = score->part(0);
       part->setLongName(Bww::instrumentName);

@@ -144,9 +144,6 @@ void EditStyle::getValues()
       lstyle.set(ST_minNoteDistance,         Spatium(minNoteDistance->value()));
       lstyle.set(ST_barNoteDistance,         Spatium(barNoteDistance->value()));
       lstyle.set(ST_noteBarDistance,         Spatium(noteBarDistance->value()));
-//      lstyle.set(ST_showPageNumber,          showPageNumber->isChecked());
-//      lstyle.set(ST_showPageNumberOne,       showFirstPageNumber->isChecked());
-//      lstyle.set(ST_pageNumberOddEven,       showOddEvenPageNumber->isChecked());
       lstyle.set(ST_showMeasureNumber,       showMeasureNumber->isChecked());
       lstyle.set(ST_showMeasureNumberOne,    showFirstMeasureNumber->isChecked());
       lstyle.set(ST_measureNumberInterval,   intervalMeasureNumber->value());
@@ -219,6 +216,18 @@ void EditStyle::getValues()
 
       lstyle.set(ST_MusicalSymbolFont,       musicalSymbolFont->currentText());
 
+      lstyle.set(ST_showHeader,              showHeader->isChecked());
+      lstyle.set(ST_headerFirstPage,         showHeaderFirstPage->isChecked());
+      lstyle.set(ST_headerOddEven,           headerOddEven->isChecked());
+      lstyle.set(ST_evenHeader,              evenHeader->toHtml());
+      lstyle.set(ST_oddHeader,               oddHeader->toHtml());
+
+      lstyle.set(ST_showFooter,              showFooter->isChecked());
+      lstyle.set(ST_footerFirstPage,         showFooterFirstPage->isChecked());
+      lstyle.set(ST_footerOddEven,           footerOddEven->isChecked());
+      lstyle.set(ST_evenFooter,              evenFooter->toHtml());
+      lstyle.set(ST_oddFooter,               oddFooter->toHtml());
+
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
             lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
@@ -253,9 +262,6 @@ void EditStyle::setValues()
       barNoteDistance->setValue(lstyle[ST_barNoteDistance].toSpatium().val());
       noteBarDistance->setValue(lstyle[ST_noteBarDistance].toSpatium().val());
 
-//      showPageNumber->setChecked(lstyle[ST_showPageNumber].toBool());
-//      showFirstPageNumber->setChecked(lstyle[ST_showPageNumberOne].toBool());
-//      showOddEvenPageNumber->setChecked(lstyle[ST_pageNumberOddEven].toBool());
       showMeasureNumber->setChecked(lstyle[ST_showMeasureNumber].toBool());
       showFirstMeasureNumber->setChecked(lstyle[ST_showMeasureNumberOne].toBool());
       intervalMeasureNumber->setValue(lstyle[ST_measureNumberInterval].toInt());
@@ -357,6 +363,18 @@ void EditStyle::setValues()
       slurBow->setValue(lstyle[ST_SlurBow].toSpatium().val());
 //      ST_SectionPause,
       musicalSymbolFont->setCurrentIndex(lstyle[ST_MusicalSymbolFont].toString() == "Emmentaler" ? 0 : 1);
+
+      showHeader->setChecked(lstyle[ST_showHeader].toBool());
+      showHeaderFirstPage->setChecked(lstyle[ST_headerFirstPage].toBool());
+      headerOddEven->setChecked(lstyle[ST_headerOddEven].toBool());
+      evenHeader->setHtml(lstyle[ST_evenHeader].toString());
+      oddHeader->setHtml(lstyle[ST_oddHeader].toString());
+
+      showFooter->setChecked(lstyle[ST_showFooter].toBool());
+      showFooterFirstPage->setChecked(lstyle[ST_footerFirstPage].toBool());
+      footerOddEven->setChecked(lstyle[ST_footerOddEven].toBool());
+      evenFooter->setHtml(lstyle[ST_evenFooter].toString());
+      oddFooter->setHtml(lstyle[ST_oddFooter].toString());
       }
 
 //---------------------------------------------------------

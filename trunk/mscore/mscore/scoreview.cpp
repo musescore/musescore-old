@@ -2274,14 +2274,15 @@ const QList<const Element*> ScoreView::elementsAt(const QPointF& p)
 Element* ScoreView::elementAt(const QPointF& p)
       {
       QList<const Element*> el = elementsAt(p);
-      if (el.empty())
-            return 0;
 #if 0
       printf("elementAt\n");
       foreach(const Element* e, el)
             printf("  %s %d\n", e->name(), e->selected());
 #endif
-      return const_cast<Element*>(el.at(0));
+      const Element* e = el.value(0);
+      if (e && (e->type() == PAGE))
+            e = el.value(1);
+      return const_cast<Element*>(e);
       }
 
 //---------------------------------------------------------
@@ -2302,7 +2303,7 @@ Element* ScoreView::elementNear(const QPointF& p)
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
             e->itemDiscovered = 0;
-            if (e->selectable() && e->contains(p))
+            if (e->selectable() && e->contains(p) && (e->type() != PAGE))
                   ll.append(e);
             }
       int n = ll.size();
@@ -2312,7 +2313,7 @@ Element* ScoreView::elementNear(const QPointF& p)
             //
             for (int i = 0; i < el.size(); ++i) {
                   const Element* e = el.at(i);
-                  if (e->abbox().intersects(r) && e->selectable())
+                  if ((e->type() != PAGE) && e->abbox().intersects(r) && e->selectable())
                         ll.append(e);
                   }
             }

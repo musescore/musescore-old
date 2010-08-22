@@ -789,8 +789,8 @@ void MuseScore::newFile()
                   measure->add(s);
                   }
             }
-      if (!copyright.isEmpty())
-            score->setCopyright(copyright);
+//      if (!copyright.isEmpty())
+//            score->setCopyright(copyright);
 
       score->rebuildMidiMapping();
       score->doLayout();
@@ -1403,6 +1403,7 @@ bool Score::read(QDomElement dScore)
             else if (tag == "page-layout")
                   pageFormat()->read(ee);
             else if (tag == "rights") {   // obsolete
+#if 0 // TODO: compatibility
                   if (rights == 0) {
                         rights = new TextC(this);
                         rights->setSubtype(TEXT_COPYRIGHT);
@@ -1412,25 +1413,28 @@ bool Score::read(QDomElement dScore)
                         rights->setHtml(val);
                   else
                         rights->setHtml(Xml::htmlToString(ee.firstChildElement()));
+#endif
                   }
             else if (tag == "copyright") {
+#if 0 // TODO: compatibility
                   if (rights == 0) {
                         rights = new TextC(this);
                         rights->setSubtype(TEXT_COPYRIGHT);
                         rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
                         rights->read(ee);
                         }
+#endif
                   }
-            else if (tag == "movement-number")
-                  _movementNumber = val;
+            else if (tag == "movement-number")              // obsolete, replaced with <metaTag>
+                  setMetaTag("movementNumber", val);
             else if (tag == "movement-title")
-                  _movementTitle = val;
+                  setMetaTag("movementTitle", val);
             else if (tag == "work-number")
-                  _workNumber = val;
+                  setMetaTag("workNumber", val);
             else if (tag == "work-title")
-                  _workTitle = val;
+                  setMetaTag("workTitle", val);
             else if (tag == "source")
-                  _source = val;
+                  setMetaTag("source", val);
             else if (tag == "Part") {
                   Part* part = new Part(this);
                   part->read(ee);

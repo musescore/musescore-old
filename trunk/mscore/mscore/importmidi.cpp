@@ -762,7 +762,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
                   break;
 
             case META_COPYRIGHT:
-                  cs->setCopyright(QString((char*)(mm->data())));
+                  cs->setMetaTag("Copyright", QString((char*)(mm->data())));
                   break;
 
             case META_TIME_SIGNATURE:

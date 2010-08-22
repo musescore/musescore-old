@@ -549,6 +549,7 @@ void Score::undoChangeDynamic(Dynamic* e, int velocity, DynamicType type)
       undo()->push(new ChangeDynamic(e, velocity, type));
       }
 
+#if 0
 //---------------------------------------------------------
 //   undoChangeCopyright
 //---------------------------------------------------------
@@ -557,6 +558,7 @@ void Score::undoChangeCopyright(const QString& s)
       {
       undo()->push(new ChangeCopyright(this, s));
       }
+#endif
 
 //---------------------------------------------------------
 //   undoTransposeHarmony
@@ -1676,6 +1678,7 @@ void ChangeDynamic::flip()
       dynamic->score()->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
       }
 
+#if 0
 //---------------------------------------------------------
 //   ChangeCopyright
 //---------------------------------------------------------
@@ -1688,12 +1691,11 @@ ChangeCopyright::ChangeCopyright(Score* s, const QString& t)
 
 void ChangeCopyright::flip()
       {
-      QString s;
-      if (score->copyright())
-            s = score->copyright()->getHtml();
-      score->setCopyrightHtml(text);
+      QString s = score->rights();
+      score->setRights(text);
       text = s;
       }
+#endif
 
 //---------------------------------------------------------
 //   TransposeHarmony

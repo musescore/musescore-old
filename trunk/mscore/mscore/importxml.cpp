@@ -477,15 +477,15 @@ void MusicXml::doCredits()
             if (crwPoet) strPoet = crwPoet->words;
             }
       else {
-            if (!(score->movementTitle().isEmpty() && score->workTitle().isEmpty())) {
-                  strTitle = score->movementTitle();
+            if (!(score->metaTag("movementTitle").isEmpty() && score->metaTag("workTitle").isEmpty())) {
+                  strTitle = score->metaTag("movementTitle");
                   if (strTitle.isEmpty())
-                        strTitle = score->workTitle();
+                        strTitle = score->metaTag("workTitle");
                   }
-            if (!(score->movementNumber().isEmpty() && score->workNumber().isEmpty())) {
-                  strSubTitle = score->movementNumber();
+            if (!(score->metaTag("movementNumber").isEmpty() && score->metaTag("workNumber").isEmpty())) {
+                  strSubTitle = score->metaTag("movementNumber");
                   if (strSubTitle.isEmpty())
-                        strSubTitle = score->workNumber();
+                        strSubTitle = score->metaTag("workNumber");
                   }
             if (!composer.isEmpty()) strComposer = composer;
             if (!poet.isEmpty()) strPoet = poet;
@@ -493,16 +493,17 @@ void MusicXml::doCredits()
             }
 
       VBox* vbox  = 0;
-      addText(vbox, score, strTitle, TEXT_TITLE, TEXT_STYLE_TITLE);
-      addText(vbox, score, strSubTitle, TEXT_SUBTITLE, TEXT_STYLE_SUBTITLE);
-      addText(vbox, score, strComposer, TEXT_COMPOSER, TEXT_STYLE_COMPOSER);
-      addText(vbox, score, strPoet, TEXT_POET, TEXT_STYLE_POET);
+      addText(vbox, score, strTitle,      TEXT_TITLE, TEXT_STYLE_TITLE);
+      addText(vbox, score, strSubTitle,   TEXT_SUBTITLE, TEXT_STYLE_SUBTITLE);
+      addText(vbox, score, strComposer,   TEXT_COMPOSER, TEXT_STYLE_COMPOSER);
+      addText(vbox, score, strPoet,       TEXT_POET, TEXT_STYLE_POET);
       addText(vbox, score, strTranslator, TEXT_TRANSLATOR, TEXT_STYLE_TRANSLATOR);
       if (vbox) {
             vbox->setTick(0);
             score->measures()->add(vbox);
             }
-      if (crwCopyRight) score->setCopyright(crwCopyRight->words);
+      if (crwCopyRight)
+            score->setMetaTag("Copyright", crwCopyRight->words);
       }
 
 //---------------------------------------------------------
@@ -539,9 +540,9 @@ void MusicXml::scorePartwise(QDomElement ee)
             else if (tag == "work") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "work-number")
-                              score->setWorkNumber(ee.text());
+                              score->setMetaTag("workNumber", ee.text());
                         else if (ee.tagName() == "work-title")
-                              score->setWorkTitle(ee.text());
+                              score->setMetaTag("workTitle", ee.text());
                         else
                               domError(ee);
                         }
@@ -569,11 +570,11 @@ void MusicXml::scorePartwise(QDomElement ee)
                                     printf("unknown creator <%s>\n", type.toLatin1().data());
                               }
                         else if (ee.tagName() == "rights")
-                              score->setmxmlRights(ee.text());
+                              score->setMetaTag("Copyright", ee.text());
                         else if (ee.tagName() == "encoding")
-                              domNotImplemented(ee);
+                              score->setMetaTag("encoding", ee.text());
                         else if (ee.tagName() == "source")
-                              score->setSource(ee.text());
+                              score->setMetaTag("source", ee.text());
                         else
                               domError(ee);
                         }
@@ -644,9 +645,9 @@ void MusicXml::scorePartwise(QDomElement ee)
                 score->setDefaultsRead(true); // TODO only if actually succeeded ?
             }
             else if (tag == "movement-number")
-                  score->setMovementNumber(e.text());
+                  score->setMetaTag("movementNumber", e.text());
             else if (tag == "movement-title")
-                  score->setMovementTitle(e.text());
+                  score->setMetaTag("movementTitle", e.text());
             else if (tag == "credit") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());

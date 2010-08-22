@@ -345,10 +345,10 @@ void Inspector::updateList(Score* s)
       foreach(Page* page, cs->pages()) {
             ElementItem* pi = new ElementItem(list, page);
 
-            if (page->copyright())
-                  new ElementItem(pi, page->copyright());
-            if (page->pageNo())
-                  new ElementItem(pi, page->pageNo());
+//            if (page->copyright())
+//                  new ElementItem(pi, page->copyright());
+//            if (page->pageNo())
+//                  new ElementItem(pi, page->pageNo());
 
             foreach(System* system, *page->systems()) {
                   ElementItem* si = new ElementItem(pi, system);

@@ -31,11 +31,11 @@ MetaEditDialog::MetaEditDialog(Score* s, QWidget* parent)
       setupUi(this);
       score = s;
 
-      movementNumber->setText(score->movementNumber());
-      movementTitle->setText(score->movementTitle());
-      workNumber->setText(score->workNumber());
-      workTitle->setText(score->workTitle());
-      source->setText(score->source());
+      movementNumber->setText(score->metaTag("movementNumber"));
+      movementTitle->setText(score->metaTag("movementTitle"));
+      workNumber->setText(score->metaTag("workNumber"));
+      workTitle->setText(score->metaTag("workTitle"));
+      source->setText(score->metaTag("source"));
       }
 
 //---------------------------------------------------------
@@ -44,11 +44,11 @@ MetaEditDialog::MetaEditDialog(Score* s, QWidget* parent)
 
 void MetaEditDialog::accept()
       {
-      score->setMovementNumber(movementNumber->text());
-      score->setMovementTitle(movementTitle->text());
-      score->setWorkNumber(workNumber->text());
-      score->setWorkTitle(workTitle->text());
-      score->setSource(source->text());
+      score->setMetaTag("movementNumber", movementNumber->text());
+      score->setMetaTag("movementTitle", movementTitle->text());
+      score->setMetaTag("workNumber", workNumber->text());
+      score->setMetaTag("workTitle", workTitle->text());
+      score->setMetaTag("source", source->text());
       score->setDirty(true);
       QDialog::accept();
       }

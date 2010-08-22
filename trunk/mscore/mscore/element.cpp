@@ -101,7 +101,6 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Tie"),
       QT_TRANSLATE_NOOP("elementName", "Articulation"),     // 20
       QT_TRANSLATE_NOOP("elementName", "Dynamic"),
-      QT_TRANSLATE_NOOP("elementName", "Page"),
       QT_TRANSLATE_NOOP("elementName", "Beam"),
       QT_TRANSLATE_NOOP("elementName", "Hook"),
       QT_TRANSLATE_NOOP("elementName", "Lyrics"),
@@ -134,6 +133,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Lasso"),
       QT_TRANSLATE_NOOP("elementName", "ShadowNote"),
       QT_TRANSLATE_NOOP("elementName", "RubberBand"),
+      QT_TRANSLATE_NOOP("elementName", "Page"),
       QT_TRANSLATE_NOOP("elementName", "HairPin"),
       QT_TRANSLATE_NOOP("elementName", "Ottava"),
       QT_TRANSLATE_NOOP("elementName", "Pedal"),

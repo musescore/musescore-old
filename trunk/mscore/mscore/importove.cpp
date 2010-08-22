@@ -336,7 +336,7 @@ void OveToMScore::convertHeader() {
 	std::vector<std::string> titles = ove_->getTitles();
 	if( !titles.empty() && titles[0] != std::string() ) {
 		QString title = toQString(titles[0]);
-		score_->setMovementTitle(title);
+		score_->setMetaTag("movementTitle", title);
 		addText(vbox, score_, title, TEXT_TITLE, TEXT_STYLE_TITLE);
 	}
 

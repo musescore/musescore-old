@@ -661,7 +661,7 @@ void GuitarPro2::read(QFile* fp)
       composer     = readDelphiString();
       QString copyright = readDelphiString();
       if (!copyright.isEmpty())
-            score->setCopyright(QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
+            score->setMetaTag("Copyright", QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
 
       transcriber  = readDelphiString();
       instructions = readDelphiString();
@@ -1149,7 +1149,7 @@ void GuitarPro3::read(QFile* fp)
       composer     = readDelphiString();
       QString copyright = readDelphiString();
       if (!copyright.isEmpty())
-            score->setCopyright(QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
+            score->setMetaTag("Copyright", QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
 
       transcriber  = readDelphiString();
       instructions = readDelphiString();
@@ -1678,7 +1678,7 @@ void GuitarPro4::readInfo()
       composer     = readDelphiString();
       QString copyright = readDelphiString();
       if (!copyright.isEmpty())
-            score->setCopyright(QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
+            score->setMetaTag("Copyright", QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
 
       transcriber  = readDelphiString();
       instructions = readDelphiString();
@@ -2015,7 +2015,7 @@ void GuitarPro5::readInfo()
       readDelphiString();
       QString copyright = readDelphiString();
       if (!copyright.isEmpty())
-            score->setCopyright(QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
+            score->setMetaTag("Copyright", QString("Copyright %1\nAll Rights Reserved - International Copyright Secured").arg(copyright));
 
       transcriber  = readDelphiString();
       instructions = readDelphiString();
