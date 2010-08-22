@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -45,14 +45,14 @@
 
 Page::Page(Score* s)
    : Element(s),
-   _no(0), _pageNo(0), _copyright(0)
+   _no(0), _footer(0), _header(0)
       {
       }
 
 Page::~Page()
       {
-      delete _pageNo;
-      delete _copyright;
+      delete _footer;
+      delete _header;
       }
 
 //---------------------------------------------------------
@@ -65,11 +65,19 @@ double Page::tm() const
       return ((!pf->twosided || isOdd()) ? pf->oddTopMargin : pf->evenTopMargin) * DPI;
       }
 
+//---------------------------------------------------------
+//   bm
+//---------------------------------------------------------
+
 double Page::bm() const
       {
       PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddBottomMargin : pf->evenBottomMargin) * DPI;
       }
+
+//---------------------------------------------------------
+//   lm
+//---------------------------------------------------------
 
 double Page::lm() const
       {
@@ -77,16 +85,29 @@ double Page::lm() const
       return ((!pf->twosided || isOdd()) ? pf->oddLeftMargin : pf->evenLeftMargin) * DPI;
       }
 
+//---------------------------------------------------------
+//   rm
+//---------------------------------------------------------
+
 double Page::rm() const
       {
       PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddRightMargin : pf->evenRightMargin) * DPI;
       }
 
+//---------------------------------------------------------
+//   loWidth
+//---------------------------------------------------------
+
 double Page::loWidth() const
       {
       return score()->pageFormat()->width() * DPI;
       }
+
+//---------------------------------------------------------
+//   loHeight
+//---------------------------------------------------------
+
 double Page::loHeight() const
       {
       return score()->pageFormat()->height() * DPI;
@@ -121,51 +142,51 @@ void Page::layout()
 
       // add page number
       int n = no() + 1 + _score->pageFormat()->_pageOffset;
-      if (score()->styleB(ST_showPageNumber) && ((n > 1) || score()->styleB(ST_showPageNumberOne))) {
-            int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
-            int style   = (n & 1) ? TEXT_STYLE_PAGE_NUMBER_ODD : TEXT_STYLE_PAGE_NUMBER_EVEN;
-            if (_pageNo == 0) {
-                  _pageNo = new Text(score());
-                  _pageNo->setParent(this);
+
+      if (_score->styleB(ST_showHeader) && (n != 0 || _score->styleB(ST_headerFirstPage))) {
+            if (_header == 0) {
+                  _header = new Text(score());
+                  _header->setFlag(ELEMENT_MOVABLE, false);
+                  _header->setGenerated(true);
+                  _header->setParent(this);
+                  _header->setTextStyle(TEXT_STYLE_HEADER);
+                  _header->setSubtype(TEXT_FOOTER);
+                  _header->setLayoutToParentWidth(true);
                   }
-            if (subtype != _pageNo->subtype()) {
-                  _pageNo->setSubtype(subtype);
-                  _pageNo->setTextStyle(style);
-                  }
-            QString s = QString("%1").arg(n);
-            if (_pageNo->getText() != s) {
-                  _pageNo->setText(s);
-                  _pageNo->layout();
-                  }
+            QString s;
+            if (_score->styleB(ST_headerOddEven))
+                  s = _score->styleSt(n & 0x1 ? ST_oddHeader : ST_evenHeader);
+            else
+                  s = _score->styleSt(ST_evenHeader);
+            _header->setHtml(replaceTextMacros(s));
+            _header->layout();
             }
       else {
-            delete _pageNo;
-            _pageNo = 0;
+            delete _header;
+            _header = 0;
             }
 
-      // add copyright to page
-#if 0 // TODO-S
-      if (score()->state() == STATE_EDIT) {      // for special case: edit copyright
-            if (_copyright)
-                  _copyright->layout();
+      if (_score->styleB(ST_showFooter) && (n != 0 || _score->styleB(ST_footerFirstPage))) {
+            if (_footer == 0) {
+                  _footer = new Text(score());
+                  _footer->setFlag(ELEMENT_MOVABLE, false);
+                  _footer->setGenerated(true);
+                  _footer->setParent(this);
+                  _footer->setTextStyle(TEXT_STYLE_FOOTER);
+                  _footer->setSubtype(TEXT_FOOTER);
+                  _footer->setLayoutToParentWidth(true);
+                  }
+            QString s;
+            if (_score->styleB(ST_footerOddEven))
+                  s = _score->styleSt(n & 0x1 ? ST_oddFooter : ST_evenFooter);
+            else
+                  s = _score->styleSt(ST_evenFooter);
+            _footer->setHtml(replaceTextMacros(s));
+            _footer->layout();
             }
-      else
-#endif
-            {
-            if (_score->rights) {
-                  if (_copyright == 0) {
-                        _copyright = new TextC(*_score->rights);
-                        _copyright->setFlag(ELEMENT_MOVABLE, false);
-                        _copyright->setParent(this);
-                        _copyright->setTextStyle(TEXT_STYLE_COPYRIGHT);
-                        _copyright->setLayoutToParentWidth(true);
-                        }
-                  _copyright->layout();
-                  }
-            else {
-                  delete _copyright;
-                  _copyright = 0;
-                  }
+      else {
+            delete _footer;
+            _footer = 0;
             }
       }
 
@@ -260,12 +281,13 @@ void Page::draw(QPainter& p, ScoreView*) const
 
 void Page::scanElements(void* data, void (*func)(void*, Element*))
       {
-      if (_copyright)
-            func(data, _copyright);
-      if (_pageNo)
-            func(data, _pageNo);
+      if (_header)
+            func(data, _header);
+      if (_footer)
+            func(data, _footer);
       foreach(System* s, _systems)
             s->scanElements(data, func);
+      func(data, this);
       }
 
 //---------------------------------------------------------
@@ -563,74 +585,65 @@ void Page::clear()
       }
 
 //---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void Page::add(Element* e)
-      {
-      if (e->type() == TEXT && e->subtype() == TEXT_COPYRIGHT) {
-            e->setParent(this);
-            _copyright = static_cast<TextC*>(e);
-            }
-      else {
-            printf("cannot add %s to %s\n", e->name(), name());
-            }
-      }
-
-//---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void Page::remove(Element* e)
-      {
-      if (e->type() == TEXT && e->subtype() == TEXT_COPYRIGHT) {
-            if (_copyright == e)
-                  _copyright = 0;
-            }
-      else {
-            printf("cannot remove %s from %s\n", e->name(), name());
-            }
-      }
-
-//---------------------------------------------------------
 //   rebuildBspTree
 //---------------------------------------------------------
 
 void Page::rebuildBspTree()
       {
       QList<Element*> el;
-      foreach(System* s, _systems) {
+      foreach(System* s, _systems)
             foreach(MeasureBase* m, s->measures()) {
                   m->scanElements(&el, collectElements);
-                  }
             }
       scanElements(&el, collectElements);
 
-// TODO2: needs to be optimized away:
-
+      // TODO: optimize away:
       QRectF bb(abbox());
-#if 0
-      foreach (Element* element, *score()->gel()) {
-            if (element->type() == SLUR)
-                  continue;
-            if (element->track() != -1) {
-                  if (!element->staff()->show())
-                        continue;
-                  }
-            if (element->abbox().intersects(bb))
-                  element->scanElements(&el, collectElements);
-            }
-#endif
       foreach(Beam* b, score()->beams()) {
             if (b->abbox().intersects(bb))
                   el.append(b);
             }
-//
 
       int n = el.size();
       bspTree.initialize(abbox(), n);
       for (int i = 0; i < n; ++i)
             bspTree.insert(el.at(i));
+      }
+
+//---------------------------------------------------------
+//   replaceTextMacros
+//---------------------------------------------------------
+
+QString Page::replaceTextMacros(const QString& s)
+      {
+      int pageno = no() + 1 + _score->pageFormat()->_pageOffset;
+      QString d;
+      int n = s.size();
+      for (int i = 0; i < n; ++i) {
+            QChar c = s[i];
+            if (c == '$' && (i < (n-1))) {
+                  QChar c = s[i+1];
+                  switch(c.toAscii()) {
+                        case 'p':
+                              d += QString("%1").arg(pageno);
+                              break;
+                        case 'n':
+                              d += QString("%1").arg(_score->pages().size());
+                              break;
+                        case '$':
+                              d += '$';
+                              break;
+                        default:
+                              d += '$';
+                              d += c;
+                              break;
+                        }
+                  ++i;
+                  }
+            else
+                  d += c;
+            }
+      return d;
       }
 
 

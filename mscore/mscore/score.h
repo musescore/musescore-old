@@ -228,7 +228,6 @@ class Score : public QObject {
       QList<MidiMapping> _midiMapping;
 
       MeasureBaseList _measures;          // here are the notes
-//      QList<Element*> _gel;               // global elements: Slur, SLine
       QList<Beam*>    _beams;
 
       RepeatList* _repeatList;
@@ -284,12 +283,8 @@ class Score : public QObject {
       int _fileDivision; ///< division of current loading *.msc file
       int _mscVersion;   ///< version of current loading *.msc file
 
-      QString _movementNumber;       // some meta data; used for musicXML
-      QString _movementTitle;
-      QString _workNumber;
-      QString _workTitle;
-      QString _source;
-      QString _rights;
+      QMap<QString, QString> _metaTags;
+
       QList<MusicXmlCreator*> _creators;
       bool _creditsRead;             ///< credits were read at MusicXML import
       bool _defaultsRead;            ///< defaults were read at MusicXML import, allow export of defaults in convertermode
@@ -336,7 +331,6 @@ class Score : public QObject {
 
       void cmdAddChordName2();
       int processPendingNotes(QList<MNote*>* notes, int, int);
-//      void writeExcerpt(Excerpt*, Xml&);
       void cmdResetBeamMode();
       void connectSlurs();
       void tupletDialog();
@@ -395,8 +389,6 @@ class Score : public QObject {
       int curTick;                  // for read optimizations
       int curTrack;
       QList<Slur*> slurs;
-
-      TextC* rights;                ///< Copyright printed at bottom of page
 
       void rebuildBspTree();
       void cmdAppendMeasures(int);
@@ -463,7 +455,7 @@ class Score : public QObject {
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeUserOffset(Element* e, const QPointF& offset);
       void undoChangeDynamic(Dynamic* e, int velocity, DynamicType type);
-      void undoChangeCopyright(const QString&);
+//      void undoChangeCopyright(const QString&);
       void undoTransposeHarmony(Harmony*, int, int);
       void undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2);
       void undoRemovePart(Part* part, int idx);
@@ -532,7 +524,6 @@ class Score : public QObject {
       void endCmd();          // end undoable command
       void end();             // layout & update canvas
 
-//      void cmdRemove(Element*);
       void cmdRemoveTimeSig(TimeSig*);
       void cmdAddTimeSig(Measure*, int);
 
@@ -635,11 +626,13 @@ class Score : public QObject {
       Style& style()                           { return _style;                   }
       const Style& style() const               { return _style;                   }
       void setStyle(const Style& s)            { _style = s;                      }
+
       StyleVal style(StyleIdx idx) const;
       Spatium styleS(StyleIdx idx) const;
-      bool styleB(StyleIdx idx) const;
-      double styleD(StyleIdx idx) const;
-      int styleI(StyleIdx idx) const;
+      QString styleSt(StyleIdx idx) const;
+      bool    styleB(StyleIdx idx) const;
+      double  styleD(StyleIdx idx) const;
+      int     styleI(StyleIdx idx) const;
       void setStyle(StyleIdx idx, const StyleVal& v);
 
       void insertTime(int tick, int len);
@@ -677,8 +670,6 @@ class Score : public QObject {
 
       bool checkHasMeasures() const;
 
-//      QList<Element*>* gel()                  { return &_gel; }
-//      const QList<Element*>* gel() const      { return &_gel; }
       void setLayout(Measure* m);
       int midiPort(int idx) const;
       int midiChannel(int idx) const;
@@ -694,21 +685,9 @@ class Score : public QObject {
       double swingRatio()                            { return _swingRatio;}
       void setSwingRatio(double d)                   { _swingRatio = d;}
 
-      QString movementNumber() const                 { return _movementNumber;  }
-      QString movementTitle() const                  { return _movementTitle;   }
-      QString workNumber() const                     { return _workNumber;      }
-      QString workTitle() const                      { return _workTitle;       }
-      QString source() const                         { return _source;          }
-      QString mxmlRights() const                     { return _rights;          }
       bool creditsRead() const                       { return _creditsRead;     }
+      void setCreditsRead(bool val)                  { _creditsRead = val;      }
       bool defaultsRead() const                      { return _defaultsRead;    }
-      void setMovementNumber(const QString& s)       { _movementNumber = s;     }
-      void setMovementTitle(const QString& s)        { _movementTitle = s;      }
-      void setWorkNumber(const QString& s)           { _workNumber = s;         }
-      void setWorkTitle(const QString& s)            { _workTitle = s;          }
-      void setSource(const QString& s)               { _source = s;             }
-      void setmxmlRights(const QString& s)           { _rights = s;             }
-      void setCreditsRead(bool b)                    { _creditsRead = b;        }
       void setDefaultsRead(bool b)                   { _defaultsRead = b;       }
       void addCreator(MusicXmlCreator* c)            { _creators.append(c);     }
       const MusicXmlCreator* getCreator(int i) const { return _creators.at(i);  }
@@ -734,9 +713,7 @@ class Score : public QObject {
       void adjustBracketsIns(int sidx, int eidx);
       void renumberMeasures();
       UndoStack* undo() const;
-      TextC* copyright() { return rights; }
-      void setCopyright(const QString& s);
-      void setCopyrightHtml(const QString& s);
+
       void endUndoRedo();
       Measure* searchLabel(const QString& s, Measure* start = 0);
       RepeatList* repeatList() const;
@@ -825,6 +802,11 @@ class Score : public QObject {
       QByteArray readToBuffer();
       void writeSegments(Xml& xml, const Measure*, int strack, int etrack, Segment* first, Segment* last, bool);
       Spanner* findSpanner(int id) const;
+
+      const QMap<QString, QString> metaTags() const           { return _metaTags; }
+      QMap<QString, QString> metaTags()                       { return _metaTags; }
+      QString metaTag(const QString& s) const                 { return _metaTags.value(s);}
+      void setMetaTag(const QString& tag, const QString& val) { _metaTags.insert(tag, val); }
       };
 
 extern Score* gscore;

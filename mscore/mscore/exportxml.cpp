@@ -1167,7 +1167,9 @@ void ExportMusicXml::credits(Xml& xml)
                                        );
                   }
             }
-      if (score->copyright()) printf("copyright '%s'\n", score->copyright()->getText().toUtf8().data());
+      QString rights = score->metaTag("Copyright");
+      if (!rights.isEmpty())
+            printf("copyright '%s'\n", qPrintable(rights));
       printf("end credits\n");
       // determine formatting
       PageFormat* pf = score->pageFormat();
@@ -1215,9 +1217,9 @@ void ExportMusicXml::credits(Xml& xml)
                         }
                   }
             }
-      if (score->copyright()) {
-            const int fs = score->copyright()->defaultFont().pointSize();
-            creditWords(xml, w / 2, bm, fs, "center", "bottom", score->copyright()->getText());
+      if (!rights.isEmpty()) {
+            const int fs = 8; // score->copyright()->defaultFont().pointSize();
+            creditWords(xml, w / 2, bm, fs, "center", "bottom", rights);
             }
 /**/
       }
@@ -3129,18 +3131,20 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m)
 
 void ExportMusicXml::work(const MeasureBase* /*measure*/)
       {
-      if (!(score->workTitle().isEmpty() && score->workNumber().isEmpty())) {
+      QString workTitle  = score->metaTag("workTitle");
+      QString workNumber = score->metaTag("workNumber");
+      if (!(workTitle.isEmpty() && workNumber.isEmpty())) {
             xml.stag("work");
-            if (!score->workNumber().isEmpty())
-                  xml.tag("work-number", score->workNumber());
-            if (!score->workTitle().isEmpty())
-                  xml.tag("work-title", score->workTitle());
+            if (!workNumber.isEmpty())
+                  xml.tag("work-number", workNumber);
+            if (!workTitle.isEmpty())
+                  xml.tag("work-title", workTitle);
             xml.etag();
             }
-      if (!score->movementNumber().isEmpty())
-            xml.tag("movement-number", score->movementNumber());
-      if (!score->movementTitle().isEmpty())
-            xml.tag("movement-title", score->movementTitle());
+      if (!score->metaTag("movementNumber").isEmpty())
+            xml.tag("movement-number", score->metaTag("movementNumber"));
+      if (!score->metaTag("movementTitle").isEmpty())
+            xml.tag("movement-title", score->metaTag("movementTitle"));
       }
 
 
@@ -3231,8 +3235,8 @@ foreach(Element* el, *(score->gel())) {
             const MusicXmlCreator* crt = score->getCreator(i);
             xml.tag(QString("creator type=\"%1\"").arg(crt->crType()), crt->crText());
             }
-      if (!score->mxmlRights().isEmpty())
-            xml.tag("rights", score->mxmlRights());
+      if (!score->metaTag("Copyright").isEmpty())
+            xml.tag("rights", score->metaTag("Copyright"));
       xml.stag("encoding");
       if (debugMode) {
             xml.tag("software", QString("MuseScore 0.7.0"));
@@ -3243,8 +3247,8 @@ foreach(Element* el, *(score->gel())) {
             xml.tag("encoding-date", QDate::currentDate().toString(Qt::ISODate));
             }
       xml.etag();
-      if (!score->source().isEmpty())
-            xml.tag("source", score->source());
+      if (!score->metaTag("source").isEmpty())
+            xml.tag("source", score->metaTag("source"));
       xml.etag();
 
       // to keep most regression testfiles simple, write defaults and credits

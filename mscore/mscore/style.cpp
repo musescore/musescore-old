@@ -202,7 +202,19 @@ StyleType styleTypes[] = {
       StyleType("slurBow",                 ST_SPATIUM),
       StyleType("sectionPause",            ST_DOUBLE),
 
-      StyleType("musicalSymbolFont",       ST_STRING)
+      StyleType("musicalSymbolFont",       ST_STRING),
+
+      StyleType("showHeader",              ST_BOOL),
+      StyleType("headerFirstPage",         ST_BOOL),
+      StyleType("headerOddEven",           ST_BOOL),
+      StyleType("evenHeader",              ST_STRING),
+      StyleType("oddHeader",               ST_STRING),
+
+      StyleType("showFooter",              ST_BOOL),
+      StyleType("footerFirstPage",         ST_BOOL),
+      StyleType("footerOddEven",           ST_BOOL),
+      StyleType("evenFooter",              ST_STRING),
+      StyleType("oddFooter",               ST_STRING)
       };
 
 //---------------------------------------------------------
@@ -214,119 +226,122 @@ static const QString ff("FreeSerif");
 #define MM(x) ((x)/INCH)
 #define OA     OFFSET_ABS
 #define OS     OFFSET_SPATIUM
+#define TR(x)  QT_TRANSLATE_NOOP("MuseScore", x)
 
 const TextStyle defaultTextStyleArray[] = {
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Symbols1"), QString("MScore"), 20, false, false, false,
-         ALIGN_LEFT),
+      TextStyle(TR("Symbols1"), QString("MScore"), 20, false, false, false, ALIGN_LEFT),
+      TextStyle(TR("Symbols3"), QString("MScore"), 14, false, false, false, ALIGN_LEFT),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Symbols3"), QString("MScore"), 14, false, false, false,
-         ALIGN_LEFT),
+      TextStyle(TR("Title"), ff, 24, false, false, false, ALIGN_HCENTER | ALIGN_TOP, 0, 0, OA, 50, 0),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Title"), ff, 24, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, 0, OA, 50, 0),
-
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Subtitle"), ff, 14, false, false, false,
+      TextStyle(TR( "Subtitle"), ff, 14, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, MM(10), OA, 50, 0),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Composer"), ff, 12, false, false, false,
+      TextStyle(TR( "Composer"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_BOTTOM, 0, 0, OA, 100, 100),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Poet"), ff, 12, false, false, false,
+      TextStyle(TR( "Poet"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Lyrics odd lines"), ff, 11, false, false, false,
+      TextStyle(TR( "Lyrics odd lines"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Lyrics even lines"), ff, 11, false, false, false,
+      TextStyle(TR( "Lyrics even lines"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Fingering"), ff,  8, false, false, false,
+      TextStyle(TR( "Fingering"), ff,  8, false, false, false,
          ALIGN_CENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsLong"),   ff, 12, false, false, false,
+      TextStyle(TR( "InstrumentsLong"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsShort"),   ff, 12, false, false, false,
+      TextStyle(TR( "InstrumentsShort"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "InstrumentsExcerpt"), ff, 18, false, false, false,
-//         ALIGN_LEFT | ALIGN_BOTTOM, 0.0, 0.0, OA, 0, 100),
+      TextStyle(TR( "InstrumentsExcerpt"), ff, 18, false, false, false,
          ALIGN_LEFT | ALIGN_TOP, 0.0, 0.0, OA, 0, 0),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Dynamics"), ff, 12, false, true, false,
+      TextStyle(TR( "Dynamics"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS, 0, 0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Technik"), ff, 12, false, true, false,
+      TextStyle(TR( "Technik"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS),
 
 /*13*/
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Tempo"), ff, 12, true, false, false,
+      TextStyle(TR( "Tempo"), ff, 12, true, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Metronome"), ff, 12, true, false, false,
+      TextStyle(TR( "Metronome"), ff, 12, true, false, false,
          ALIGN_LEFT),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Copyright"), ff, 8, false, false, false,
+      TextStyle(TR( "Copyright"), ff, 8, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Measure Number"), ff, 8, false, false, false,
+      TextStyle(TR( "Measure Number"), ff, 8, false, false, false,
          ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Page Number Odd"), ff, 12, false, false, false,
+      TextStyle(TR( "Page Number Odd"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_BASELINE, MM(-10), MM(-10), OA, 100.0, 100.0),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Page Number Even"), ff, 12, false, false, false,
+      TextStyle(TR( "Page Number Even"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, MM(10), MM(-10), OA, 0.0, 100.0),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Translator"), ff, 11, false, false, false,
+      TextStyle(TR( "Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 6),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Tuplets"), ff,  8, false, false, false,
+      TextStyle(TR( "Tuplets"), ff,  8, false, false, false,
          ALIGN_CENTER),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "System"), ff,  10, false, false, false,
+      TextStyle(TR( "System"), ff,  10, false, false, false,
          ALIGN_LEFT, 0, -4.0, OS, 0, 0, true,
          0.0, 0.0, 25, Qt::black, false, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Staff"), ff,  10, false, false, false,
+      TextStyle(TR( "Staff"), ff,  10, false, false, false,
          ALIGN_LEFT, 0, -4.0, OS, 0, 0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Chordname"), ff,  12, false, false, false,
+      TextStyle(TR( "Chordname"), ff,  12, false, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Rehearsal Mark"), ff,  14, true, false, false,
+      TextStyle(TR( "Rehearsal Mark"), ff,  14, true, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -3.0, OS, 0, 0, true,
          0.3, 1.0, 20, Qt::black, false, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Repeat Text"), ff,  12, false, false, false,
+      TextStyle(TR( "Repeat Text"), ff,  12, false, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true,
          0.0, 0.0, 25, Qt::black, false, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Volta"), ff, 11, true, false, false,
+      TextStyle(TR( "Volta"), ff, 11, true, false, false,
          ALIGN_LEFT, 0.5, .0, OS, 0, 0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Frame"), ff, 11, true, false, false,
+      TextStyle(TR( "Frame"), ff, 11, true, false, false,
          ALIGN_LEFT, 0, 0, OS, 0, 0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "TextLine"), ff,  12, false, false, false,
+      TextStyle(TR( "TextLine"), ff,  12, false, false, false,
          ALIGN_LEFT | ALIGN_VCENTER, 0, 0, OS, 0, 0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Glissando"), ff, 8, false, true, false,
+      TextStyle(TR( "Glissando"), ff, 8, false, true, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0.0, 0.0, OS, 0, 0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "String Number"), ff,  8, false, false, false,
+      TextStyle(TR( "String Number"), ff,  8, false, false, false,
          ALIGN_CENTER, 0, -5.0, OS, 100, 0, true, 0.2, -0.2, 0, Qt::black, true, false),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Ottava"), ff, 12, false, true, false,
+      TextStyle(TR( "Ottava"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_VCENTER, 0.0, 0.0, OS, 0, 0, true),
 
-      TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Bend"), ff, 8, false, false, false,
+      TextStyle(TR( "Bend"), ff, 8, false, false, false,
          ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true),
+
+      TextStyle(TR( "Header"), ff, 8, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 0.0),
+
+      TextStyle(TR( "Footer"), ff, 8, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0),
       };
 
 #undef MM
 #undef OA
 #undef OS
+#undef TR
 
 //---------------------------------------------------------
 //   Style
@@ -420,7 +435,6 @@ Style::Style()
             StyleVal(ST_genCourtesyClef, true),
 
             StyleVal(ST_useGermanNoteNames, false),
-//            StyleVal(ST_warnPitchRange, true),
             StyleVal(ST_chordDescriptionFile, QString("stdchords.xml")),
             StyleVal(ST_concertPitch, false),
             StyleVal(ST_createMultiMeasureRests, false),
@@ -490,7 +504,47 @@ Style::Style()
 
             StyleVal(ST_SectionPause, 3.0),
 
-            StyleVal(ST_MusicalSymbolFont, "Emmentaler")
+            StyleVal(ST_MusicalSymbolFont, "Emmentaler"),
+
+            StyleVal(ST_showHeader, false),
+            StyleVal(ST_headerFirstPage, false),
+            StyleVal(ST_headerOddEven,  true),
+            StyleVal(ST_evenHeader,  ""),
+            StyleVal(ST_oddHeader,   ""),
+
+            StyleVal(ST_showFooter,  true),
+            StyleVal(ST_footerFirstPage, true),
+            StyleVal(ST_footerOddEven, true),
+            StyleVal(ST_evenFooter,
+               QString("<html>"
+                 "<head>"
+                   "<meta name=\"qrichtext\" content=\"1\" >"
+                   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
+                   "<style type=\"text/css\">"
+                     "p, li { white-space: pre-wrap; }"
+                     "</style>"
+                   "</head>"
+                 "<body style=\" font-family:'%1'; font-size:%2pt;\">"
+                   "<p align=\"left\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                       "    $p"
+                     "</p>"
+                   "</body>"
+                 "</html>")),
+            StyleVal(ST_oddFooter,
+               QString("<html>"
+                 "<head>"
+                   "<meta name=\"qrichtext\" content=\"1\" >"
+                   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
+                   "<style type=\"text/css\">"
+                     "p, li { white-space: pre-wrap; }"
+                     "</style>"
+                   "</head>"
+                 "<body style=\" font-family:'%1'; font-size:%2pt;\">"
+                   "<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                       "$p    "
+                     "</p>"
+                   "</body>"
+                 "</html>")),
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)

@@ -49,8 +49,8 @@ enum TEXT_STYLE {
       TEXT_STYLE_MEASURE_NUMBER,
       TEXT_STYLE_PAGE_NUMBER_ODD,
       TEXT_STYLE_PAGE_NUMBER_EVEN,
-      TEXT_STYLE_TRANSLATOR,
 
+      TEXT_STYLE_TRANSLATOR,  // 20
       TEXT_STYLE_TUPLET,
       TEXT_STYLE_SYSTEM,
       TEXT_STYLE_STAFF,
@@ -64,6 +64,8 @@ enum TEXT_STYLE {
       TEXT_STYLE_STRING_NUMBER,
       TEXT_STYLE_OTTAVA,
       TEXT_STYLE_BENCH,
+      TEXT_STYLE_HEADER,
+      TEXT_STYLE_FOOTER,
       TEXT_STYLES
       };
 
@@ -301,6 +303,18 @@ enum StyleIdx {
 
       ST_SectionPause,
       ST_MusicalSymbolFont,
+
+      ST_showHeader,
+      ST_headerFirstPage,
+      ST_headerOddEven,
+      ST_evenHeader,
+      ST_oddHeader,
+
+      ST_showFooter,
+      ST_footerFirstPage,
+      ST_footerOddEven,
+      ST_evenFooter,
+      ST_oddFooter,
 
       ST_STYLES
       };

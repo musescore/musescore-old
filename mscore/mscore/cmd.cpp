@@ -1099,6 +1099,7 @@ void ScoreView::cmdAddText(int subtype)
                   s->setParent(measure);
                   }
                   break;
+#if 0
             case TEXT_COPYRIGHT:
                   if (_score->rights == 0)
                         _score->rights = new TextC(_score);
@@ -1107,7 +1108,7 @@ void ScoreView::cmdAddText(int subtype)
                   s->setTextStyle(TEXT_STYLE_COPYRIGHT);
                   s->setSubtype(subtype);
                   break;
-
+#endif
             case TEXT_REHEARSAL_MARK:
                   {
                   ChordRest* cr = _score->getSelectedChordRest();

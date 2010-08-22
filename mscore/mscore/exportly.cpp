@@ -4645,10 +4645,10 @@ void ExportLy::writeScoreTitles()
     os << "\"" << s << "\"\n";
   }
 
-  if (score->rights)
+  if (!score->metaTag("Copyright").isEmpty())
     {
       indentF();
-      os << "copyright = \"" << score->rights->getText() << "\"\n";
+      os << "copyright = \"" << score->metaTag("Copyright") << "\"\n";
     }
 
   indentF();

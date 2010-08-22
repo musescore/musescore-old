@@ -748,6 +748,7 @@ class ChangeBeamMode : public UndoCommand {
       UNDO_NAME("ChangeBeamMode");
       };
 
+#if 0
 //---------------------------------------------------------
 //   ChangeCopyright
 //---------------------------------------------------------
@@ -763,6 +764,7 @@ class ChangeCopyright : public UndoCommand {
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeCopyright");
       };
+#endif
 
 //---------------------------------------------------------
 //   TransposeHarmony

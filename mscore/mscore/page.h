@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -81,19 +81,17 @@ struct PageFormat {
 class Page : public Element {
       QList<System*> _systems;
       int _no;                      // page number
-      Text* _pageNo;
-      TextC* _copyright;
+      Text* _footer;
+      Text* _header;
       BspTree bspTree;
+
+      QString replaceTextMacros(const QString&);
 
    public:
       Page(Score*);
       ~Page();
-      virtual Page* clone() const        { return new Page(*this); }
-      virtual ElementType type() const   { return PAGE; }
-
-      virtual void add(Element*);
-      virtual void remove(Element*);
-
+      virtual Page* clone() const            { return new Page(*this); }
+      virtual ElementType type() const       { return PAGE; }
       const QList<System*>* systems() const  { return &_systems;   }
       QList<System*>* systems()              { return &_systems;   }
 
@@ -110,8 +108,8 @@ class Page : public Element {
       double loWidth() const;
       double loHeight() const;
 
-      Text* pageNo() const               { return _pageNo;    }
-      TextC* copyright() const           { return _copyright; }
+      Text* footer() const { return _footer; }
+      Text* header() const { return _header; }
 
       void layout();
 
@@ -121,8 +119,8 @@ class Page : public Element {
 
       QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
       QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
-      void insertBsp(Element* e)                    { bspTree.insert(e); }
-      void removeBsp(Element* e)                    { bspTree.remove(e); }
+      void insertBsp(Element* e)                    { bspTree.insert(e);       }
+      void removeBsp(Element* e)                    { bspTree.remove(e);       }
       void rebuildBspTree();
       };
 
