@@ -1,3 +1,5 @@
+22.aug (db)
+      - fix #6735: C# for AltoSax in default soundfont is silent
 15.aug (la)
       - fix #6658: Natural in every keysig on mac PPC
       - fix #6508: Crash removing instrument with volta
