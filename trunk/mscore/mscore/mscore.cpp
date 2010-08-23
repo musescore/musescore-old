@@ -78,6 +78,7 @@ bool debugMode          = false;
 bool enableExperimental = false;
 
 QString dataPath;
+QString iconPath;
 QPaintDevice* pdev;
 double PDPI, DPI, DPMM;
 double SPATIUM;
@@ -89,6 +90,7 @@ Shortcut* midiActionMap[128];
 QMap<QString, Shortcut*> shortcuts;
 
 bool converterMode = false;
+bool externalIcons = false;
 static bool pluginMode = false;
 static bool startWithNewScore = false;
 double converterDpi = 300;
@@ -1083,13 +1085,14 @@ static void usage()
       {
       printVersion("MuseScore");
       fprintf(stderr, "usage: mscore flags scorefile\n   Flags:\n");
-      fprintf(stderr, "   -v        print version\n"
+      fprintf(stderr,
+        "   -v        print version\n"
         "   -d        debug mode\n"
+        "   -L        layout debug\n"
         "   -D        enable plugin script debugger\n"
         "   -s        no internal synthesizer\n"
         "   -m        no midi\n"
         "   -n        start with new score\n"
-        "   -L        layout debug\n"
         "   -I        dump midi input\n"
         "   -O        dump midi output\n"
         "   -o file   export to 'file'; format depends on file extension\n"
@@ -1097,6 +1100,7 @@ static void usage()
         "   -S style  load style file\n"
         "   -p name   execute named plugin\n"
         "   -F        use factory settings\n"
+        "   -i        load icons from INSTALLPATH/icons\n"
         "   -e        enable experimental features\n"
         );
       exit(-1);
@@ -1804,6 +1808,8 @@ int main(int argc, char* av[])
                         startWithNewScore = true;
                         break;
                   case 'i':
+                        externalIcons = true;
+                        break;
                   case 'I':
                         midiInputTrace = true;
                         break;
@@ -1846,6 +1852,8 @@ int main(int argc, char* av[])
                   }
             argv.removeAt(i);
             }
+
+      iconPath = externalIcons ? QString(INSTPREFIX "/share/" INSTALL_NAME) + QString("icons/") :  QString(":/data/");
 
       QSettings::setDefaultFormat(QSettings::IniFormat);
 

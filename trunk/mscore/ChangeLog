@@ -1,3 +1,8 @@
+23.aug (ws)
+      - replace dynamic generated icons by static files
+      - make icon files installable
+      - new command line option "-i" to load icons from filesystem
+        (icons can be edited and tested without compiling mscore)
 22.aug (db)
       - fix #6735: C# for AltoSax in default soundfont is silent
 21.aug (lv)

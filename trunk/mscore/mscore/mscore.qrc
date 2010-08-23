@@ -76,6 +76,69 @@
       <file alias="images/location.svg">data/location.svg</file>
       <file>revision.h</file>
       <file>data/musescore_logo_full.png</file>
+      <file>data/brevis.png</file>
+      <file>data/clef.png</file>
+      <file>data/dfermata.png</file>
+      <file>data/dlongfermata.png</file>
+      <file>data/dmarcato.png</file>
+      <file>data/dotdot.png</file>
+      <file>data/dot.png</file>
+      <file>data/downbow.png</file>
+      <file>data/downmordent.png</file>
+      <file>data/downprall.png</file>
+      <file>data/dportato.png</file>
+      <file>data/dshortfermata.png</file>
+      <file>data/dstaccatissimo.png</file>
+      <file>data/dverylongfermata.png</file>
+      <file>data/espressivo.png</file>
+      <file>data/flatflat.png</file>
+      <file>data/flat.png</file>
+      <file>data/longaUp.png</file>
+      <file>data/mordent.png</file>
+      <file>data/natural.png</file>
+      <file>data/note16.png</file>
+      <file>data/note2.png</file>
+      <file>data/note32.png</file>
+      <file>data/note4.png</file>
+      <file>data/note64.png</file>
+      <file>data/note8.png</file>
+      <file>data/note.png</file>
+      <file>data/ouvert.png</file>
+      <file>data/plus.png</file>
+      <file>data/plusstop.png</file>
+      <file>data/popping.png</file>
+      <file>data/prallmordent.png</file>
+      <file>data/prall.png</file>
+      <file>data/prallprall.png</file>
+      <file>data/quartrest.png</file>
+      <file>data/reverseturn.png</file>
+      <file>data/sforzatoaccent.png</file>
+      <file>data/sforzato.png</file>
+      <file>data/sharp.png</file>
+      <file>data/sharpsharp.png</file>
+      <file>data/slapping.png</file>
+      <file>data/snappizzicato.png</file>
+      <file>data/staccato.png</file>
+      <file>data/tapping.png</file>
+      <file>data/tenuto.png</file>
+      <file>data/thumb.png</file>
+      <file>data/trill.png</file>
+      <file>data/turn.png</file>
+      <file>data/ufermata.png</file>
+      <file>data/ulongfermata.png</file>
+      <file>data/umarcato.png</file>
+      <file>data/upbow.png</file>
+      <file>data/upmordent.png</file>
+      <file>data/uportato.png</file>
+      <file>data/upprall.png</file>
+      <file>data/ushortfermata.png</file>
+      <file>data/ustaccatissimo.png</file>
+      <file>data/uverylongfermata.png</file>
+      <file>data/editcut.svg</file>
+      <file>data/editcopy.svg</file>
+      <file>data/editpaste.svg</file>
+      <file>data/fileprint.svg</file>
+
    </qresource>
 </RCC>
 
