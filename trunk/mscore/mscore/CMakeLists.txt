@@ -409,3 +409,15 @@ if (NOT MINGW AND NOT APPLE)
       )
 endif (NOT MINGW AND NOT APPLE)
 
+#======================================
+#     install icons if not embedded
+#======================================
+
+# if (NOT EMBED_ICONS)
+   install (FILES
+      data/minus.svg
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons
+      )
+# endif (NOT EMBED_ICONS)
+
+
