@@ -740,16 +740,16 @@ void Score::putNote(const QPointF& pos, bool replace)
             return;
             }
 
-      Segment* s              = p.segment;
-      int tick                = s->tick();
-      int staffIdx            = p.staffIdx;
-      int line                = p.line;
-      Staff* st               = staff(staffIdx);
-      KeySigEvent key         = st->keymap()->key(tick);
-      int clef                = st->clef(tick);
-      int pitch               = line2pitch(line, clef, key.accidentalType());
+      Segment* s      = p.segment;
+      int tick        = s->tick();
+      int staffIdx    = p.staffIdx;
+      int line        = p.line;
+      Staff* st       = staff(staffIdx);
+      KeySigEvent key = st->keymap()->key(tick);
+      int clef        = st->clef(tick);
+      int pitch       = line2pitch(line, clef, key.accidentalType());
 
-printf("putNote at tick %d staff %d line %d accidental %d clef %d pitch %d\n",
+printf("putNote at tick %d staff %d line %d key %d clef %d pitch %d\n",
    tick, staffIdx, line, key.accidentalType(), clef, pitch);
 
       Instrument* instr       = st->part()->instr();
