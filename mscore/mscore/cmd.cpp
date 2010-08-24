@@ -513,7 +513,6 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
             note->setTrack(track);
             note->setMag(mag);
             note->setPitch(pitch);
-            note->setTpcFromPitch();
 
             Chord* chord = new Chord(score);
             chord->setTrack(track);
@@ -529,6 +528,7 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
             chord->setMag(mag);
 
             undoAddElement(chord);
+            note->setTpcFromPitch();      // tick must be known
             if (staff == ostaff)
                   select(note, SELECT_SINGLE, 0);
             }
@@ -572,6 +572,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                   //      undoAddElement(seg);
                   //      }
                   ChordRest* ncr;
+                  Note* note = 0;
                   if (pitch == -1) {
                         nr = new Rest(this);
                         nr->setTrack(track);
@@ -581,7 +582,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         // ncr->setParent(seg);
                         }
                   else {
-                        Note* note = new Note(this);
+                        note = new Note(this);
                         nr = note;
                         note->setTrack(track);
                         note->setHeadGroup(headGroup);
@@ -598,8 +599,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         chord->add(note);
                         note->setPitch(pitch);
                         ncr = chord;
-                        // ncr->setParent(seg);
-                        note->setTpcFromPitch();      // chord->tick() must be known
+//                        note->setTpcFromPitch();      // chord->tick() must be known
                         if (i+1 < n) {
                               tie = new Tie(this);
                               tie->setStartNote((Note*)nr);
@@ -609,8 +609,11 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         }
                   ncr->setTuplet(cr->tuplet());
                   undoAddCR(ncr, measure, tick);
-                  if (ncr->type() == CHORD)
+                  if (ncr->type() == CHORD) {
                         mscore->play(ncr);
+                        if (note)
+                              note->setTpcFromPitch();      // chord->tick() must be known
+                        }
                   // undoAddElement(ncr);
                   seg = ncr->segment();
                   tick += ncr->ticks();

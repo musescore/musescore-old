@@ -289,8 +289,6 @@ int line2pitch(int line, int clef, int key)
             l += 7;
             octave++;
             }
-//      if (l > 74)
-//            l = 74;
       octave += l / 7;
       l       = l % 7;
 
