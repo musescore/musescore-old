@@ -497,6 +497,7 @@ TextEditor::TextEditor(QWidget* parent)
       typefaceSuperscript->setCheckable(true);
 
       typefaceSize = new QDoubleSpinBox(this);
+      typefaceFamily = new QFontComboBox(this);
 
       hl->addWidget(typefaceBold);
       hl->addWidget(typefaceItalic);
@@ -509,6 +510,7 @@ TextEditor::TextEditor(QWidget* parent)
       hl->addWidget(typefaceSubscript);
       hl->addWidget(typefaceSuperscript);
       hl->addStretch(10);
+      hl->addWidget(typefaceFamily);
       hl->addWidget(typefaceSize);
       hl->addStretch(10);
 
@@ -530,6 +532,7 @@ TextEditor::TextEditor(QWidget* parent)
       connect(edit, SIGNAL(currentCharFormatChanged(const QTextCharFormat&)), SLOT(charFormatChanged(const QTextCharFormat&)));
       connect(edit, SIGNAL(cursorPositionChanged()), SLOT(cursorPositionChanged()));
       connect(typefaceSize,        SIGNAL(valueChanged(double)), SLOT(sizeChanged(double)));
+      connect(typefaceFamily,      SIGNAL(currentFontChanged(const QFont&)), SLOT(fontChanged(const QFont&)));
       }
 
 //---------------------------------------------------------
@@ -680,6 +683,17 @@ void TextEditor::sizeChanged(double size)
       }
 
 //---------------------------------------------------------
+//   fontChanged
+//---------------------------------------------------------
+
+void TextEditor::fontChanged(const QFont& f)
+      {
+      QTextCharFormat cf = edit->currentCharFormat();
+      cf.setFontFamily(f.family());
+      edit->setCurrentCharFormat(cf);
+      }
+
+//---------------------------------------------------------
 //   charFormatChanged
 //---------------------------------------------------------
 
@@ -701,6 +715,7 @@ void TextEditor::charFormatChanged(const QTextCharFormat& f)
             typefaceSubscript->setChecked(false);
             }
       typefaceSize->setValue(f.fontPointSize());
+      typefaceFamily->setCurrentFont(f.font());
       }
 
 //---------------------------------------------------------
