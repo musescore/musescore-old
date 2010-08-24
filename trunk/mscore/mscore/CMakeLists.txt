@@ -474,35 +474,35 @@ endif (NOT MINGW AND NOT APPLE)
       data/note.svg
       data/ouvert.svg
       data/plus.svg
-      data/plusstop.png
-      data/popping.png
-      data/prallmordent.png
-      data/prall.png
-      data/prallprall.png
-      data/quartrest.png
-      data/reverseturn.png
-      data/sforzatoaccent.png
-      data/sforzato.png
-      data/sharp.png
-      data/sharpsharp.png
-      data/slapping.png
-      data/snappizzicato.png
-      data/staccato.png
-      data/tapping.png
-      data/tenuto.png
-      data/thumb.png
-      data/trill.png
-      data/turn.png
-      data/ufermata.png
-      data/ulongfermata.png
-      data/umarcato.png
-      data/upbow.png
-      data/upmordent.png
-      data/uportato.png
-      data/upprall.png
-      data/ushortfermata.png
-      data/ustaccatissimo.png
-      data/uverylongfermata.png
+      data/plusstop.svg
+      data/popping.svg
+      data/prallmordent.svg
+      data/prall.svg
+      data/prallprall.svg
+      data/quartrest.svg
+      data/reverseturn.svg
+      data/sforzatoaccent.svg
+      data/sforzato.svg
+      data/sharp.svg
+      data/sharpsharp.svg
+      data/slapping.svg
+      data/snappizzicato.svg
+      data/staccato.svg
+      data/tapping.svg
+      data/tenuto.svg
+      data/thumb.svg
+      data/trill.svg
+      data/turn.svg
+      data/ufermata.svg
+      data/ulongfermata.svg
+      data/umarcato.svg
+      data/upbow.svg
+      data/upmordent.svg
+      data/uportato.svg
+      data/upprall.svg
+      data/ushortfermata.svg
+      data/ustaccatissimo.svg
+      data/uverylongfermata.svg
       data/editcut.svg
       data/editcopy.svg
       data/editpaste.svg
