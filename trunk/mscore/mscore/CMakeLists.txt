@@ -445,35 +445,35 @@ endif (NOT MINGW AND NOT APPLE)
       data/acciaccatura.svg
       data/appoggiatura.svg
 
-      data/brevis.png
-      data/clef.png
-      data/dfermata.png
-      data/dlongfermata.png
-      data/dmarcato.png
-      data/dotdot.png
-      data/dot.png
-      data/downbow.png
-      data/downmordent.png
-      data/downprall.png
-      data/dportato.png
-      data/dshortfermata.png
-      data/dstaccatissimo.png
-      data/dverylongfermata.png
-      data/espressivo.png
-      data/flatflat.png
-      data/flat.png
-      data/longaUp.png
-      data/mordent.png
-      data/natural.png
-      data/note16.png
-      data/note2.png
-      data/note32.png
-      data/note4.png
-      data/note64.png
-      data/note8.png
-      data/note.png
-      data/ouvert.png
-      data/plus.png
+      data/brevis.svg
+      data/clef.svg
+      data/dfermata.svg
+      data/dlongfermata.svg
+      data/dmarcato.svg
+      data/dotdot.svg
+      data/dot.svg
+      data/downbow.svg
+      data/downmordent.svg
+      data/downprall.svg
+      data/dportato.svg
+      data/dshortfermata.svg
+      data/dstaccatissimo.svg
+      data/dverylongfermata.svg
+      data/espressivo.svg
+      data/flatflat.svg
+      data/flat.svg
+      data/longaUp.svg
+      data/mordent.svg
+      data/natural.svg
+      data/note16.svg
+      data/note2.svg
+      data/note32.svg
+      data/note4.svg
+      data/note64.svg
+      data/note8.svg
+      data/note.svg
+      data/ouvert.svg
+      data/plus.svg
       data/plusstop.png
       data/popping.png
       data/prallmordent.png
