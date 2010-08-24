@@ -28,6 +28,7 @@
 #include "scoreview.h"
 
 extern TextPalette* textPalette;
+extern QString iconPath;
 
 //---------------------------------------------------------
 //   codeIcon
@@ -90,36 +91,36 @@ TextTools::TextTools(QWidget* parent)
       tb->addAction(showKeyboard);
       showKeyboard->setCheckable(true);
 
-      typefaceBold = tb->addAction(QIcon(":/data/text_bold.svg"), "");
+      typefaceBold = tb->addAction(*icons[textBold_ICON], "");
       typefaceBold->setToolTip(tr("bold"));
       typefaceBold->setCheckable(true);
 
-      typefaceItalic = tb->addAction(QIcon(":/data/text_italic.svg"), "");
+      typefaceItalic = tb->addAction(*icons[textItalic_ICON], "");
       typefaceItalic->setToolTip(tr("italic"));
       typefaceItalic->setCheckable(true);
 
-      typefaceUnderline = tb->addAction(QIcon(":/data/text_under.svg"), "");
+      typefaceUnderline = tb->addAction(*icons[textUnderline_ICON], "");
       typefaceUnderline->setToolTip(tr("underline"));
       typefaceUnderline->setCheckable(true);
 
       tb->addSeparator();
 
-      leftAlign   = tb->addAction(QIcon(":/data/text_left.svg"),   "");
+      leftAlign   = tb->addAction(*icons[textLeft_ICON],   "");
       leftAlign->setToolTip(tr("align left"));
       leftAlign->setCheckable(true);
 
-      centerAlign = tb->addAction(QIcon(":/data/text_center.svg"), "");
+      centerAlign = tb->addAction(*icons[textCenter_ICON], "");
       centerAlign->setToolTip(tr("align center"));
       centerAlign->setCheckable(true);
 
-      rightAlign  = tb->addAction(QIcon(":/data/text_right.svg"),  "");
+      rightAlign  = tb->addAction(*icons[textRight_ICON],  "");
       rightAlign->setToolTip(tr("align right"));
       rightAlign->setCheckable(true);
 
-      typefaceSubscript   = tb->addAction(QIcon(":/data/subscript.svg"), "");
+      typefaceSubscript   = tb->addAction(*icons[textSub_ICON], "");
       typefaceSubscript->setToolTip(tr("subscript"));
 
-      typefaceSuperscript = tb->addAction(QIcon(":/data/superscript.svg"), "");
+      typefaceSuperscript = tb->addAction(*icons[textSuper_ICON], "");
       typefaceSuperscript->setToolTip(tr("superscript"));
 
       typefaceSubscript->setCheckable(true);
