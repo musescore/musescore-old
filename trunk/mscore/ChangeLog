@@ -1,3 +1,5 @@
+24.aug (ws)
+      - header/footer replacing page number and copyright
 23.aug (ws)
       - replace dynamic generated icons by static files
       - make icon files installable

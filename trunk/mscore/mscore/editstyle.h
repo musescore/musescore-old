@@ -44,13 +44,54 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
       void setValues();
 
       void apply();
+      QString editText(const QString&);
 
    private slots:
       void selectChordDescriptionFile();
       void buttonClicked(QAbstractButton*);
+      void editEvenHeaderClicked();
+      void editOddHeaderClicked();
+      void editEvenFooterClicked();
+      void editOddFooterClicked();
 
    public:
       EditStyle(Score*, QWidget*);
+      };
+
+//---------------------------------------------------------
+//   TextEditor
+//---------------------------------------------------------
+
+class TextEditor : public QDialog {
+      Q_OBJECT
+      QTextEdit* edit;
+      QToolButton* typefaceBold;
+      QToolButton* typefaceItalic;
+      QToolButton* typefaceUnderline;
+      QToolButton* leftAlign;
+      QToolButton* centerAlign;
+      QToolButton* rightAlign;
+      QToolButton* typefaceSubscript;
+      QToolButton* typefaceSuperscript;
+      QDoubleSpinBox* typefaceSize;
+
+   private slots:
+      void toggleBold(bool);
+      void toggleUnderline(bool);
+      void toggleItalic(bool);
+      void toggleLeftAlign(bool);
+      void toggleCenterAlign(bool);
+      void toggleRightAlign(bool);
+      void toggleTypefaceSubscript(bool);
+      void toggleTypefaceSuperscript(bool);
+      void charFormatChanged(const QTextCharFormat& f);
+      void cursorPositionChanged();
+      void sizeChanged(double);
+
+   public:
+      TextEditor(QWidget* parent = 0);
+      QString text() const;
+      void setText(const QString&);
       };
 
 

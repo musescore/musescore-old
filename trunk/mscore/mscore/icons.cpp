@@ -118,5 +118,14 @@ void genIcons()
       icons[keys_ICON]       = new QIcon(iconPath + "keyboard.svg");
       icons[tie_ICON]        = new QIcon(iconPath + "tie.svg");
       icons[window_ICON]     = new QIcon(iconPath + "mscore.xpm");
+
+      icons[textBold_ICON]      = new QIcon(iconPath + "text_bold.svg");
+      icons[textItalic_ICON]    = new QIcon(iconPath + "text_italic.svg");
+      icons[textUnderline_ICON] = new QIcon(iconPath + "text_under.svg");
+      icons[textLeft_ICON]      = new QIcon(iconPath + "text_left.svg");
+      icons[textCenter_ICON]    = new QIcon(iconPath + "text_center.svg");
+      icons[textRight_ICON]     = new QIcon(iconPath + "text_right.svg");
+      icons[textSuper_ICON]     = new QIcon(iconPath + "superscript.svg");
+      icons[textSub_ICON]       = new QIcon(iconPath + "subscript.svg");
       }
 

@@ -508,6 +508,15 @@ endif (NOT MINGW AND NOT APPLE)
       data/editpaste.svg
       data/fileprint.svg
 
+      data/text_bold.svg
+      data/text_italic.svg
+      data/text_under.svg
+      data/text_left.svg
+      data/text_center.svg
+      data/text_right.svg
+      data/subscript.svg
+      data/superscript.svg
+
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons
       )
 # endif (NOT EMBED_ICONS)

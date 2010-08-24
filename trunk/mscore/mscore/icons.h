@@ -37,6 +37,8 @@ enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON,
       nbeam_ICON, beam32_ICON, abeam_ICON, fileOpen_ICON, fileNew_ICON, fileSave_ICON,
       fileSaveAs_ICON, exit_ICON, viewmag_ICON, window_ICON, acciaccatura_ICON, appoggiatura_ICON,
       grace4_ICON, grace16_ICON, grace32_ICON, noteEntry_ICON, keys_ICON, tie_ICON,
+      textBold_ICON, textItalic_ICON, textUnderline_ICON,
+      textLeft_ICON, textCenter_ICON, textRight_ICON, textSuper_ICON, textSub_ICON,
       ICONS
       };
 extern QIcon* icons[ICONS];
