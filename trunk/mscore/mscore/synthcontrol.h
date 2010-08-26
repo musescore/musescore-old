@@ -28,6 +28,8 @@ namespace Awl {
       class AbstractSlider;
       };
 
+class Score;
+
 //---------------------------------------------------------
 //   SynthControl
 //---------------------------------------------------------
@@ -58,11 +60,12 @@ class SynthControl : public QWidget, Ui::SynthControl {
       void setGain(float);
 
    public:
-      MasterSynth* getSynth() const { return synti; }
       SynthControl(MasterSynth*, QWidget* parent);
+      MasterSynth* getSynth() const { return synti; }
       void updatePreferences();
       void setMeter(float, float, float, float);
       void stop();
+      void setScore(Score*);
       };
 
 #endif
