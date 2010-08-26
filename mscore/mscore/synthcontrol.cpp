@@ -25,6 +25,7 @@
 #include "preferences.h"
 #include "mixer.h"
 #include "aeolus/aeolus/aeolus.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   SynthControl
@@ -114,6 +115,15 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void SynthControl::setScore(Score* cs)
+      {
+      setWindowTitle("MuseScore:Synthesizer " + cs->name());
+      }
+
+//---------------------------------------------------------
 //   setGain
 //---------------------------------------------------------
 
@@ -140,6 +150,7 @@ void MuseScore::showSynthControl(bool val)
       {
       if (synthControl == 0) {
             synthControl = new SynthControl(seq->getSynti(), this);
+            synthControl->setScore(cs);
             connect(synthControl, SIGNAL(closed()), SLOT(closeSynthControl()));
             connect(seq, SIGNAL(gainChanged(float)), synthControl, SLOT(setGain(float)));
             connect(synthControl, SIGNAL(gainChanged(float)), seq, SLOT(setGain(float)));

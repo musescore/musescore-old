@@ -1202,7 +1202,9 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             seq->setScoreView(cv);
       if (playPanel)
             playPanel->setScore(cs);
-      if(iledit)
+      if (synthControl)
+            synthControl->setScore(cs);
+      if (iledit)
             iledit->updateAll(cs);
       if (!enable) {
             changeState(STATE_DISABLED);
