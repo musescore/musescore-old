@@ -1854,8 +1854,8 @@ int main(int argc, char* av[])
                   }
             argv.removeAt(i);
             }
-
-      iconPath = externalIcons ? QString(INSTPREFIX "/share/" INSTALL_NAME) + QString("icons/") :  QString(":/data/");
+      mscoreGlobalShare = getSharePath();
+      iconPath = externalIcons ? mscoreGlobalShare + QString("/icons/") :  QString(":/data/");
 
       QSettings::setDefaultFormat(QSettings::IniFormat);
 
@@ -1894,7 +1894,7 @@ int main(int argc, char* av[])
       dir.mkpath(dataPath + "/plugins");
 
       setDefaultStyle();
-      mscoreGlobalShare = getSharePath();
+      
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
 

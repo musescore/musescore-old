@@ -2,6 +2,9 @@
       - new element ChordLine: editable bezier line attached to
         top note of chord (for fall, doit, "plop" and bend)
       - implemented beams over systems
+      (la)
+      - fix get keysig from plugin when concert pitch mode is set
+      - make command line option "-i" cross platform
 27.aug (ws)
       - make note dot position editable
 26.aug (ws)
