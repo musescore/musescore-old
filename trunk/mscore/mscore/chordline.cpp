@@ -39,7 +39,8 @@ ChordLine::ChordLine(Score* s)
 ChordLine::ChordLine(const ChordLine& cl)
    : Element(cl)
       {
-      path = cl.path;
+      path     = cl.path;
+      modified = cl.modified;
       }
 
 //---------------------------------------------------------
@@ -48,23 +49,24 @@ ChordLine::ChordLine(const ChordLine& cl)
 
 void ChordLine::setSubtype(int st)
       {
-      double x1, y1, x2, y2;
-      x1 = 0.0;
-      y1 = 0.0;
+      double x2, y2;
       switch(st) {
-            default:
-            case 0:                 // fall
-                  x2 = x1 + 2;
-                  y2 = y1 + 2;
+            case 0:
                   break;
-            case 1:                 // doit
-                  x2 = x1 + 2;
-                  y2 = y1 - 2;
+            case 1:                 // fall
+                  x2 = 2;
+                  y2 = 2;
+                  break;
+            default:
+            case 2:                 // doit
+                  x2 = 2;
+                  y2 = -2;
                   break;
             }
-      path = QPainterPath();
-      path.moveTo(x1, y1);
-      path.cubicTo(x1 + (x2-x1)/2, y1, x2, y1 - (y1-y2)/2, x2, y2);
+      if (st) {
+            path = QPainterPath();
+            path.cubicTo(x2/2, 0.0, x2, y2/2, x2, y2);
+            }
       Element::setSubtype(st);
       }
 
@@ -76,8 +78,9 @@ void ChordLine::layout()
       {
       double _spatium = spatium();
       if (parent()) {
-            QPointF p(chord()->upNote()->pos());
-            setPos(p.x() + _spatium * .5, p.y());
+            Note* note = chord()->upNote();
+            QPointF p(note->pos());
+            setPos(p.x() + note->headWidth() + _spatium * .2, p.y());
             }
       else
             setPos(0.0, 0.0);
@@ -133,6 +136,7 @@ void ChordLine::read(QDomElement e)
                               domError(ee);
                         }
                   modified = true;
+                  setSubtype(0);
                   }
             else if (!Element::readProperties(e))
                   domError(e);
@@ -228,6 +232,7 @@ void ChordLine::editDrag(int grip, const QPointF& delta)
             }
       path = p;
       modified = true;
+      setSubtype(0);
       }
 
 //---------------------------------------------------------

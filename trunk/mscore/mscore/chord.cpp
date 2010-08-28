@@ -1458,8 +1458,14 @@ void Chord::layout()
 
       _space.setLw(extraSpace);
       _space.setRw(minSpace);
-      foreach(Element* e, _el)
+      foreach(Element* e, _el) {
             e->layout();
+            if (e->type() == CHORDLINE) {
+                  int x = bbox().translated(e->pos()).right();
+                  if (x > _space.rw())
+                        _space.setRw(x);
+                  }
+            }
       }
 
 //---------------------------------------------------------
