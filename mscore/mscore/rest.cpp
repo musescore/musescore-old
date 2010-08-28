@@ -225,11 +225,10 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
             case STAFF_TEXT:
                   {
                   StaffText* s = static_cast<StaffText*>(e);
-                  s->setTrack(track());
+                  s->setTrack((track() / VOICES) * VOICES);
                   s->setSystemFlag(false);
 //                  s->setSubtype(STAFF_TEXT);
-                  s->setParent(measure());
-//TODO1                  s->setTick(tick());
+                  s->setParent(segment());
                   score()->undoAddElement(s);
                   score()->setLayoutAll(true);
                   }
@@ -251,8 +250,7 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   }
                   break;
             case HARMONY:
-                  e->setParent(measure());
-//TODO1                  static_cast<Harmony*>(e)->setTick(tick());
+                  e->setParent(segment());
                   e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
@@ -354,12 +352,79 @@ printf("Rest: no symbol for 1/256\n");
 
 void Rest::layout()
       {
-      int line = lrint(userOff().y() / spatium());
+      switch(durationType().type()) {
+            case Duration::V_64TH:
+            case Duration::V_32ND:
+                  dotline = -3;
+                  break;
+            case Duration::V_256TH:
+            case Duration::V_128TH:
+                  dotline = -5;
+                  break;
+            default:
+                  dotline = -1;
+                  break;
+            }
+
+      int line       = lrint(userOff().y() / spatium());
+      int lineOffset = 0;
+      if (measure()->mstaff(staffIdx())->hasVoices) {
+            // move rests in a multi voice context
+            bool up = (voice() == 0) || (voice() == 2);       // TODO: use style values
+            switch(durationType().type()) {
+                  case Duration::V_LONG:
+                        lineOffset = up ? -3 : 5;
+                        break;
+                  case Duration::V_BREVE:
+                        lineOffset = up ? -3 : 5;
+                        break;
+                  case Duration::V_MEASURE:
+                        lineOffset = up ? -4 : 6;
+                        break;
+                  case Duration::V_WHOLE:
+                        lineOffset = up ? -4 : 6;
+                        break;
+                  case Duration::V_HALF:
+                        lineOffset = up ? -4 : 4;
+                        break;
+                  case Duration::V_QUARTER:
+                        lineOffset = up ? -4 : 4;
+                        break;
+                  case Duration::V_EIGHT:
+                        lineOffset = up ? -4 : 4;
+                        break;
+                  case Duration::V_16TH:
+                        lineOffset = up ? -6 : 4;
+                        break;
+                  case Duration::V_32ND:
+                        lineOffset = up ? -6 : 6;
+                        break;
+                  case Duration::V_64TH:
+                        lineOffset = up ? -8 : 6;
+                        break;
+                  case Duration::V_128TH:
+                        lineOffset = up ? -8 : 8;
+                        break;
+                  case Duration::V_256TH:             // not available
+                        lineOffset = up ? -10 : 6;
+                        break;
+                  default:
+                        break;
+                  }
+            }
       int yo;
-      _sym = getSymbol(durationType().type(), line, &yo);
-      setYoff(double(yo));
+      _sym = getSymbol(durationType().type(), line + lineOffset/2, &yo);
+      setYoff(double(yo) + double(lineOffset) * .5);
       layoutArticulations();
       Element::layout();
+
+      Spatium rs;
+      if (dots()) {
+            rs = Spatium(score()->styleS(ST_dotNoteDistance)
+               + dots() * score()->styleS(ST_dotDotDistance));
+            }
+      _space.setLw(point(_extraLeadingSpace));
+      _space.setRw(width() + point(_extraTrailingSpace + rs));
       }
 
 //---------------------------------------------------------
@@ -374,7 +439,6 @@ QRectF Rest::bbox() const
             double w = point(score()->styleS(ST_minMMRestWidth));
             return QRectF(-w * .5, -h + 2 * spatium(), w, h);
             }
-//      return symbols[score()->symIdx()][_sym].bbox(mag());
       return symbols[score()->symIdx()][_sym].bbox(magS());
       }
 
@@ -475,14 +539,5 @@ void Rest::propertyAction(ScoreView* viewer, const QString& s)
             }
       else
             Element::propertyAction(viewer, s);
-      }
-
-//---------------------------------------------------------
-//   space
-//---------------------------------------------------------
-
-Space Rest::space() const
-      {
-      return Space(point(_extraLeadingSpace), width() + point(_extraTrailingSpace));
       }
 

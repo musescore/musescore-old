@@ -104,15 +104,6 @@ Sym* noteHeadSym(bool up, int group, int n)
       }
 
 //---------------------------------------------------------
-//   NoteHead
-//---------------------------------------------------------
-
-NoteHead::NoteHead(Score* s)
-   : Symbol(s)
-      {
-      }
-
-//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
@@ -122,6 +113,15 @@ void NoteHead::write(Xml& xml) const
       xml.tag("name", symbols[0][_sym].name());
       Element::writeProperties(xml);
       xml.etag();
+      }
+
+//---------------------------------------------------------
+//   NoteDot
+//---------------------------------------------------------
+
+NoteDot::NoteDot(Score* s)
+   : Symbol(s, dotSym)
+      {
       }
 
 //---------------------------------------------------------
@@ -162,7 +162,10 @@ Note::Note(Score* s)
 
       _offTimeOffset     = 0;
       _offTimeUserOffset = 0;
-      _bend               = 0;
+      _bend              = 0;
+      _dots[0]           = 0;
+      _dots[1]           = 0;
+      _dots[2]           = 0;
       }
 
 Note::~Note()
@@ -172,6 +175,9 @@ Note::~Note()
             delete e;
       delete _tieFor;
       delete _bend;
+      delete _dots[0];
+      delete _dots[1];
+      delete _dots[2];
       }
 
 Note::Note(const Note& n)
@@ -202,6 +208,13 @@ Note::Note(const Note& n)
       _tieFor            = 0;
       _tieBack           = 0;
       _bend              = 0;
+      for (int i = 0; i < 3; ++i) {
+            _dots[i] = 0;
+            if (n._dots[i]) {
+                  _dots[i] = new NoteDot(*n._dots[i]);
+                  _dots[i]->setIdx(i);
+                  }
+            }
       if (n._bend)
             add(new Bend(*n._bend));
 
@@ -216,6 +229,7 @@ Note::Note(const Note& n)
 
       _offTimeOffset     = n._offTimeOffset;
       _offTimeUserOffset = n._offTimeUserOffset;
+
       }
 
 //---------------------------------------------------------
@@ -356,6 +370,12 @@ void Note::add(Element* e)
       {
 	e->setParent(this);
       switch(e->type()) {
+            case NOTEDOT:
+                  {
+                  NoteDot* dot = static_cast<NoteDot*>(e);
+                  _dots[dot->idx()] = dot;
+                  }
+                  break;
             case SYMBOL:
             case IMAGE:
                   {
@@ -409,6 +429,15 @@ void Note::setTieBack(Tie* t)
 void Note::remove(Element* e)
       {
       switch(e->type()) {
+            case NOTEDOT:
+                  for (int i = 0; i < 3; ++i) {
+                        if (_dots[i] == e) {
+                              _dots[i] = 0;
+                              break;
+                              }
+                        }
+                  break;
+
             case TEXT:
             case SYMBOL:
             case IMAGE:
@@ -537,32 +566,9 @@ void Note::draw(QPainter& p, ScoreView* v) const
             }
 
       if (chord() && !tablature) {
-            double _spatium = spatium();
             int dots = chord()->dots();
-            double x = chord()->dotPosX() - ipos().x();
-            if (dots) {
-                  double d  = point(score()->styleS(ST_dotNoteDistance));
-                  double dd = point(score()->styleS(ST_dotDotDistance));
-                  double y = 0;
-
-                  // do not draw dots on staff line
-                  if ((_line & 1) == 0) {
-                        Measure* m = chord()->measure();
-                        if (m->mstaff(staffIdx())->hasVoices) {
-                              if (voice() == 0 || voice() == 2) {
-                                    y = -_spatium *.5;
-                                    }
-                              else {
-                                    y = _spatium *.5;
-                                    }
-                              }
-                        else
-                              y = -_spatium *.5;
-                        }
-
-                  for (int i = 0; i < dots; ++i)
-                        symbols[score()->symIdx()][dotSym].draw(p, magS(), x + d + dd * i, y);
-                  }
+            for (int i = 0; i < dots; ++i)
+                  _dots[i]->draw(p, v);
             }
       }
 
@@ -605,6 +611,19 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             _accidental->write(xml);
             }
       _el.write(xml);
+      int dots = chord()->dots();
+      bool hasUserModifiedDots = false;
+      for (int i = 0; i < dots; ++i) {
+            if (!_dots[i]->userOff().isNull()) {
+                  hasUserModifiedDots = true;
+                  break;
+                  }
+            }
+      if (hasUserModifiedDots) {
+            for (int i = 0; i < dots; ++i)
+                  _dots[i]->write(xml);
+            }
+
       if (_tieFor) {
             // in clipboardmode write tie only if the next note is < endTick
             if (!xml.clipboardmode || _tieFor->endNote()->chord()->tick() < endTick)
@@ -741,6 +760,23 @@ void Note::read(QDomElement e)
                   _bend->read(e);
                   _bend->setParent(this);
                   }
+            else if (tag == "NoteDot") {
+                  NoteDot* dot = new NoteDot(score());
+                  dot->setParent(this);
+                  dot->read(e);
+                  for (int i = 0; i < 3; ++i) {
+                        if (_dots[i] == 0) {
+                              _dots[i] = dot;
+                              dot->setIdx(i);
+                              dot = 0;
+                              break;
+                              }
+                        }
+                  if (dot) {
+                        printf("too many dots\n");
+                        delete dot;
+                        }
+                  }
             else if (tag == "onTimeType")                   // obsolete
                   ; // _onTimeType = readValueType(e);
             else if (tag == "onTimeOffset")
@@ -825,6 +861,7 @@ void Note::endDrag()
 bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
       {
       if (type == ARTICULATION
+         || type == CHORDLINE
          || type == TEXT
          || type == FINGERING
          || type == ACCIDENTAL
@@ -883,8 +920,7 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   return 0;
 
             case HARMONY:
-                  e->setParent(ch->measure());
-//TODO1                  static_cast<Harmony*>(e)->setTick(ch->tick());
+                  e->setParent(ch->segment());
                   e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
@@ -1173,6 +1209,42 @@ void Note::layout()
             }
       if (_bend)
             _bend->layout();
+      int dots = chord()->dots();
+      for (int i = 0; i < 3; ++i) {
+            if (i < dots) {
+                  if (_dots[i] == 0) {
+                        _dots[i] = new NoteDot(score());
+                        _dots[i]->setIdx(i);
+                        _dots[i]->setParent(this);
+                        }
+                  _dots[i]->layout();
+                  }
+            else {
+                  delete _dots[i];
+                  }
+            }
+      if (dots) {
+            double _spatium = spatium();
+            double d  = point(score()->styleS(ST_dotNoteDistance));
+            double dd = point(score()->styleS(ST_dotDotDistance));
+            double y  = 0;
+            double x  = chord()->dotPosX() - pos().x();
+
+            // do not draw dots on staff line
+            if ((_line & 1) == 0) {
+                  Measure* m = chord()->measure();
+                  if (m->mstaff(staffIdx())->hasVoices) {
+                        if (voice() == 0 || voice() == 2)
+                              y = -_spatium *.5;
+                        else
+                              y = _spatium *.5;
+                        }
+                  else
+                        y = -_spatium *.5;
+                  }
+            for (int i = 0; i < dots; ++i)
+                  _dots[i]->setPos(x + d + dd * i, y);
+            }
       }
 
 //---------------------------------------------------------
@@ -1290,6 +1362,10 @@ void Note::scanElements(void* data, void (*func)(void*, Element*))
             func(data, _accidental);
       if (_bend)
             func(data, _bend);
+      for (int i = 0; i < chord()->dots(); ++i) {
+            if (_dots[i])
+                  func(data, _dots[i]);
+            }
       }
 
 //---------------------------------------------------------

@@ -298,45 +298,7 @@ void Inspector::updateList(Score* s)
 
       QTreeWidgetItem* li = new QTreeWidgetItem(list, INVALID);
       li->setText(0, "Global");
-#if 0 // implementation changed
-      foreach(Element* el, *cs->gel()) {
-            if (el->type() == SLUR) {
-                  ElementItem* se = new ElementItem(li, el);
-                  Slur* slur = (Slur*)el;
-                  foreach(Element* el1, slur->spannerSegments())
-                        new ElementItem(se, el1);
-                  }
-            else if (el->type() == VOLTA) {
-                  ElementItem* ei = new ElementItem(li, el);
-                  Volta* volta = static_cast<Volta*>(el);
-                  if (volta->beginText())
-                        new ElementItem(ei, volta->beginText());
-                  if (volta->continueText())
-                        new ElementItem(ei, volta->continueText());
-                  SLine* line = static_cast<SLine*>(el);
-                  foreach(Element* ls, line->spannerSegments()) {
-                        ElementItem* sse = new ElementItem(ei, ls);
-                        if (ls->type() == TEXTLINE_SEGMENT) {
-                              if (static_cast<TextLineSegment*>(ls)->text())
-                                    new ElementItem(sse, static_cast<TextLineSegment*>(ls)->text());
-                              }
-                        }
-                  }
-            else if (el->isSLine()) {
-                  ElementItem* se = new ElementItem(li, el);
-                  SLine* line = static_cast<SLine*>(el);
-                  foreach(Element* ls, line->spannerSegments()) {
-                        ElementItem* sse = new ElementItem(se, ls);
-                        if (ls->type() == TEXTLINE_SEGMENT) {
-                              if (static_cast<TextLineSegment*>(ls)->text())
-                                    new ElementItem(sse, static_cast<TextLineSegment*>(ls)->text());
-                              }
-                        }
-                  }
-            else
-                  new ElementItem(li, el);
-            }
-#endif
+
       foreach(Beam* beam, cs->beams())
 	      new ElementItem(li, beam);
 
@@ -344,11 +306,6 @@ void Inspector::updateList(Score* s)
       int tracks = staves * VOICES;
       foreach(Page* page, cs->pages()) {
             ElementItem* pi = new ElementItem(list, page);
-
-//            if (page->copyright())
-//                  new ElementItem(pi, page->copyright());
-//            if (page->pageNo())
-//                  new ElementItem(pi, page->pageNo());
 
             foreach(System* system, *page->systems()) {
                   ElementItem* si = new ElementItem(pi, system);
@@ -412,6 +369,8 @@ void Inspector::updateList(Score* s)
                                                             new ElementItem(ti, el1);
                                                       }
                                                 }
+                                          foreach(Element* e, chord->el())
+                                                new ElementItem(sei, e);
                                           }
                                     if (e->isChordRest()) {
                                           ChordRest* cr = static_cast<ChordRest*>(e);

@@ -63,6 +63,7 @@
 #include "fingering.h"
 #include "bend.h"
 #include "tremolobar.h"
+#include "chordline.h"
 
 extern bool useFactorySettings;
 
@@ -552,6 +553,29 @@ void MuseScore::populatePalette()
             tremolo->setSubtype(TremoloType(i));
             sp->append(tremolo, tr(tremoloName[i - TREMOLO_R8]));
             }
+      paletteBox->addPalette(sp);
+
+      //-----------------------------------
+      //    Fall, Doit
+      //-----------------------------------
+
+      sp = new Palette;
+      sp->setName(tr("Fall/Doit"));
+      sp->setGrid(27, 40);
+      sp->setDrawGrid(true);
+      const char* scorelineNames[] = {
+            QT_TR_NOOP("fall"),
+            QT_TR_NOOP("doit"),
+            };
+
+      ChordLine* cl = new ChordLine(gscore);
+      cl->setSubtype(0);
+      sp->append(cl, tr(scorelineNames[0]));
+
+      cl = new ChordLine(gscore);
+      cl->setSubtype(1);
+      sp->append(cl, tr(scorelineNames[1]));
+
       paletteBox->addPalette(sp);
 
       //-----------------------------------

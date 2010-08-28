@@ -112,8 +112,7 @@ ChordRest::ChordRest(const ChordRest& cr)
       _staffMove          = cr._staffMove;
       _small              = cr._small;
       _beamMode           = cr._beamMode;
-      _extraLeadingSpace  = cr._extraLeadingSpace;
-      _extraTrailingSpace = cr._extraTrailingSpace;
+      _space              = cr._space;
 
       foreach(Articulation* a, cr.articulations) {            // make deep copy
             Articulation* na = new Articulation(*a);
@@ -430,20 +429,25 @@ void ChordRest::layoutArticulations()
       //    pass 2
       //    now place all articulations with staff top or bottom anchor
       //
-      qreal dyTop = 0.0;
-      qreal dyBot = 0.0;
+      qreal dyTop = staffTopY;
+      qreal dyBot = staffBotY;
+
+      if ((upPos() - _spatium) < dyTop)
+            dyTop = upPos() - _spatium;
+      if ((downPos() + _spatium) > dyBot)
+            dyBot = downPos() + _spatium;
 
       for (iArticulation ia = articulations.begin(); ia != articulations.end(); ++ia) {
             Articulation* a = *ia;
             qreal y = 0;
             ArticulationAnchor aa = a->anchor();
             if (aa == A_TOP_STAFF) {
-                  y = staffTopY - dyTop;
+                  y = dyTop;
                   a->setPos(x, y);
-                  dyTop += point(score()->styleS(ST_propertyDistance)) + a->bbox().height();
+                  dyTop -= point(score()->styleS(ST_propertyDistance)) + a->bbox().height();
                   }
             else if (aa == A_BOTTOM_STAFF) {
-                  y = staffBotY + dyBot;
+                  y = dyBot;
                   a->setPos(x, y);
                   dyBot += point(score()->styleS(ST_propertyDistance)) + a->bbox().height();
                   }

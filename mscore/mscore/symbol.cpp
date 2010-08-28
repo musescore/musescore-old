@@ -186,7 +186,7 @@ QRectF Symbol::bbox() const
 
 void Symbol::write(Xml& xml) const
       {
-      xml.stag("Symbol");
+      xml.stag(name());
       xml.tag("name", symbols[score()->symIdx()][_sym].name());
       Element::writeProperties(xml);
       foreach(const Element* e, getLeafs())

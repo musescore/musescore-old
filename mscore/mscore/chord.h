@@ -139,11 +139,11 @@ class Chord : public ChordRest {
       TremoloChordType _tremoloChordType;
       Glissando* _glissando;
       QList<NoteEvent*> _playEvents;
+      ElementList _el;        ///< chordline
 
       NoteType   _noteType;         ///< mark grace notes: acciaccatura and appoggiatura
       bool       _noStem;
       double     _dotPosX;
-      double minSpace, extraSpace;  ///< cached values
 
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
@@ -206,7 +206,6 @@ class Chord : public ChordRest {
 
       virtual int upLine() const;
       virtual int downLine() const;
-      virtual Space space() const;
       void readNote(QDomElement node, const QList<Tuplet*>&, const QList<Slur*>&);
 
       NoteType noteType() const         { return _noteType; }
@@ -229,6 +228,9 @@ class Chord : public ChordRest {
       void setPlayEvents(const QList<NoteEvent*>& v) { _playEvents = v;    }
       TremoloChordType tremoloChordType() const      { return _tremoloChordType; }
       void setTremoloChordType(TremoloChordType t)   { _tremoloChordType = t; }
+
+      ElementList& el()                { return _el; }
+      const ElementList& el() const    { return _el; }
       };
 
 #endif
