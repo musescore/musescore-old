@@ -1,3 +1,13 @@
+28.aug (ws)
+      - new element ChordLine: editable bezier line attached to
+        top note of chord (for fall, doit, "plop" and bend)
+      - implemented beams over systems
+27.aug (ws)
+      - make note dot position editable
+26.aug (ws)
+      - fix layout of dottet rests
+      - fix dot position of rests <= 1/32 (dots have to be raised)
+      - layout y position of rests in a multi voice context
 24.aug (ws)
       - header/footer replacing page number and copyright
 23.aug (ws)

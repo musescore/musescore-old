@@ -44,6 +44,7 @@
 #include "preferences.h"
 #include "noteevent.h"
 #include "undo.h"
+#include "chordline.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -258,8 +259,6 @@ Chord::Chord(Score* s)
       _noteType      = NOTE_NORMAL;
       _stemSlash     = 0;
       _noStem        = false;
-      minSpace       = 0.0;
-      extraSpace     = 0.0;
       }
 
 Chord::Chord(const Chord& c)
@@ -299,8 +298,6 @@ Chord::Chord(const Chord& c)
       _stemDirection = c._stemDirection;
       _tremolo       = 0;
       _noteType      = c._noteType;
-      minSpace       = c.minSpace;
-      extraSpace     = c.extraSpace;
       }
 
 //---------------------------------------------------------
@@ -380,54 +377,68 @@ void Chord::add(Element* e)
       {
       e->setParent(this);
       e->setTrack(track());
-      if (e->type() == NOTE) {
-            Note* note = static_cast<Note*>(e);
-            bool found = false;
-            for (int idx = 0; idx < _notes.size(); ++idx) {
-                  if (note->pitch() < _notes[idx]->pitch()) {
-                        _notes.insert(idx, note);
-                        found = true;
-                        break;
+      switch(e->type()) {
+            case NOTE:
+                  {
+                  Note* note = static_cast<Note*>(e);
+                  bool found = false;
+                  for (int idx = 0; idx < _notes.size(); ++idx) {
+                        if (note->pitch() < _notes[idx]->pitch()) {
+                              _notes.insert(idx, note);
+                              found = true;
+                              break;
+                              }
+                        }
+                  if (!found)
+                        _notes.append(note);
+                  if (note->tieFor()) {
+                        if (note->tieFor()->endNote())
+                              note->tieFor()->endNote()->setTieBack(note->tieFor());
                         }
                   }
-            if (!found)
-                  _notes.append(note);
-            if (note->tieFor()) {
-                  if (note->tieFor()->endNote())
-                        note->tieFor()->endNote()->setTieBack(note->tieFor());
-                  }
-            }
-      else if (e->type() == ARTICULATION)
-            articulations.push_back(static_cast<Articulation*>(e));
-      else if (e->type() == ARPEGGIO)
-            _arpeggio = static_cast<Arpeggio*>(e);
-      else if (e->type() == TREMOLO) {
-            Tremolo* tr = static_cast<Tremolo*>(e);
-            if (tr->twoNotes()) {
-                  if (!(_tremolo && _tremolo->twoNotes())) {
-                        Duration d = durationType();
-                        d  = d.shift(-1);
-                        if (tr->chord1())
-                              tr->chord1()->setDurationType(d);
-                        if (tr->chord2())
-                              tr->chord2()->setDurationType(d);
+                  break;
+            case ARTICULATION:
+                  articulations.push_back(static_cast<Articulation*>(e));
+                  break;
+            case ARPEGGIO:
+                  _arpeggio = static_cast<Arpeggio*>(e);
+                  break;
+            case TREMOLO:
+                  {
+                  Tremolo* tr = static_cast<Tremolo*>(e);
+                  if (tr->twoNotes()) {
+                        if (!(_tremolo && _tremolo->twoNotes())) {
+                              Duration d = durationType();
+                              d  = d.shift(-1);
+                              if (tr->chord1())
+                                    tr->chord1()->setDurationType(d);
+                              if (tr->chord2())
+                                    tr->chord2()->setDurationType(d);
+                              }
+                        _tremoloChordType = TremoloFirstNote;
+                        tr->chord2()->setTremolo(tr);
+                        tr->chord2()->setTremoloChordType(TremoloSecondNote);
                         }
-                  _tremoloChordType = TremoloFirstNote;
-                  tr->chord2()->setTremolo(tr);
-                  tr->chord2()->setTremoloChordType(TremoloSecondNote);
+                  else
+                        _tremoloChordType = TremoloSingle;
+                  _tremolo = tr;
                   }
-            else
-                  _tremoloChordType = TremoloSingle;
-            _tremolo = tr;
+                  break;
+            case GLISSANDO:
+                  _glissando = static_cast<Glissando*>(e);
+                  break;
+            case STEM:
+                  _stem = static_cast<Stem*>(e);
+            case HOOK:
+                  _hook = static_cast<Hook*>(e);
+                  break;
+            case CHORDLINE:
+                  _el.append(e);
+                  break;
+            default:
+                  printf("Chord::add: unknown element\n");
+                  break;
             }
-      else if (e->type() == GLISSANDO)
-            _glissando = static_cast<Glissando*>(e);
-      else if (e->type() == STEM)
-            _stem = static_cast<Stem*>(e);
-      else if (e->type() == HOOK)
-            _hook = static_cast<Hook*>(e);
-      else
-            printf("Chord::add: unknown element\n");
       }
 
 //---------------------------------------------------------
@@ -436,44 +447,58 @@ void Chord::add(Element* e)
 
 void Chord::remove(Element* e)
       {
-      if (e->type() == NOTE) {
-            Note* note = static_cast<Note*>(e);
-            if (_notes.removeOne(note)) {
-                  if (note->tieFor()) {
-                        if (note->tieFor()->endNote())
-                              note->tieFor()->endNote()->setTieBack(0);
+      switch(e->type()) {
+            case NOTE:
+                  {
+                  Note* note = static_cast<Note*>(e);
+                  if (_notes.removeOne(note)) {
+                        if (note->tieFor()) {
+                              if (note->tieFor()->endNote())
+                                    note->tieFor()->endNote()->setTieBack(0);
+                              }
                         }
+                  else
+                        printf("Chord::remove() note %p not found!\n", e);
                   }
-            else
-                  printf("Chord::remove() note %p not found!\n", e);
-            }
-      else if (e->type() == ARTICULATION) {
-            if (!articulations.removeOne(static_cast<Articulation*>(e)))
-                  printf("Chord::remove(): articulation not found\n");
-            }
-      else if (e->type() == ARPEGGIO)
-            _arpeggio = 0;
-      else if (e->type() == TREMOLO) {
-            Tremolo* tremolo = static_cast<Tremolo*>(e);
-            if (tremolo->twoNotes()) {
-                  Duration d = durationType();
-                  d          = d.shift(1);
-                  if (tremolo->chord1())
-                        tremolo->chord1()->setDurationType(d);
-                  if (tremolo->chord2())
-                        tremolo->chord2()->setDurationType(d);
-                  tremolo->chord2()->setTremolo(0);
+                  break;
+
+            case ARTICULATION:
+                  if (!articulations.removeOne(static_cast<Articulation*>(e)))
+                        printf("Chord::remove(): articulation not found\n");
+                  break;
+            case ARPEGGIO:
+                  _arpeggio = 0;
+                  break;
+            case TREMOLO:
+                  {
+                  Tremolo* tremolo = static_cast<Tremolo*>(e);
+                  if (tremolo->twoNotes()) {
+                        Duration d = durationType();
+                        d          = d.shift(1);
+                        if (tremolo->chord1())
+                              tremolo->chord1()->setDurationType(d);
+                        if (tremolo->chord2())
+                              tremolo->chord2()->setDurationType(d);
+                        tremolo->chord2()->setTremolo(0);
+                        }
+                  _tremolo = 0;
                   }
-            _tremolo = 0;
+                  break;
+            case GLISSANDO:
+                  _glissando = 0;
+                  break;
+            case STEM:
+                  _stem = 0;
+                  break;
+            case HOOK:
+                  _hook = 0;
+                  break;
+            case CHORDLINE:
+                  _el.removeOne(e);
+                  break;
+            default:
+                  printf("Chord::remove: unknown element\n");
             }
-      else if (e->type() == GLISSANDO)
-            _glissando = 0;
-      else if (e->type() == STEM)
-            _stem = 0;
-      else if (e->type() == HOOK)
-            _hook = 0;
-      else
-            printf("Chord::remove: unknown element\n");
       }
 
 //---------------------------------------------------------
@@ -738,6 +763,8 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
                   e->write(xml);
             xml.etag();
             }
+      foreach(Element* e, _el)
+            e->write(xml);
       xml.etag();
       }
 
@@ -892,6 +919,11 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*
                               domError(ee);
                         }
                   }
+            else if (tag == "ChordLine") {
+                  ChordLine* cl = new ChordLine(score());
+                  cl->read(e);
+                  add(cl);
+                  }
             else if (!ChordRest::readProperties(e, tuplets, slurs))
                   domError(e);
             }
@@ -964,6 +996,8 @@ void Chord::scanElements(void* data, void (*func)(void*, Element*))
 
       foreach(Note* n, _notes)
             n->scanElements(data, func);
+      foreach(Element* e, _el)
+            e->scanElements(data, func);
       ChordRest::scanElements(data, func);
       }
 
@@ -1297,6 +1331,8 @@ void Chord::layout()
       if (_notes.empty())
             return;
 
+      double extraSpace, minSpace;
+
       double _spatium  = spatium();
 
       foreach(const LedgerLine* l, _ledgerLines)
@@ -1339,7 +1375,6 @@ void Chord::layout()
       //-----------------------------------------
 
       double lx = 0.0;
-      _dotPosX  = 0.0;
       double stepDistance = _spatium * .5;
 
       foreach(Note* note, _notes) {
@@ -1357,9 +1392,6 @@ void Chord::layout()
                   x += stemUp ? headWidth : - headWidth;
 
             note->setPos(x, note->line() * stepDistance);
-            double xx = x + headWidth;
-            if (xx > _dotPosX)
-                  _dotPosX = xx;
 
             Accidental* accidental = note->accidental();
             if (accidental)
@@ -1423,6 +1455,11 @@ void Chord::layout()
       if (up() && _hook)
             minSpace += _hook->width();
       extraSpace += point(_extraLeadingSpace);
+
+      _space.setLw(extraSpace);
+      _space.setRw(minSpace);
+      foreach(Element* e, _el)
+            e->layout();
       }
 
 //---------------------------------------------------------
@@ -1555,15 +1592,6 @@ void Chord::renderPlayback()
       }
 
 //---------------------------------------------------------
-//   space
-//---------------------------------------------------------
-
-Space Chord::space() const
-      {
-      return Space(extraSpace, minSpace);
-      }
-
-//---------------------------------------------------------
 //   findNote
 //---------------------------------------------------------
 
@@ -1598,9 +1626,9 @@ void Chord::pitchChanged()
 //   drop
 //---------------------------------------------------------
 
-Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+Element* Chord::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
-      Measure* m  = measure();
+//      Measure* m  = measure();
       switch (e->type()) {
             case ARTICULATION:
                   {
@@ -1641,6 +1669,10 @@ Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Elem
                         }
                   return atr;
                   }
+            case CHORDLINE:
+                  e->setParent(this);
+                  score()->undoAddElement(e);
+                  break;
             default:
                   delete e;
                   return 0;

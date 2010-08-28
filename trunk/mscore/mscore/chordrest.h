@@ -53,6 +53,7 @@ class ChordRest : public DurationElement {
       bool _small;
       Spatium _extraLeadingSpace;
       Spatium _extraTrailingSpace;
+      Space _space;
 
    public:
       ChordRest(Score*);
@@ -124,6 +125,7 @@ class ChordRest : public DurationElement {
 
       virtual void setTrack(int val);
       virtual int tick() const;
+      virtual Space space() const               { return _space; }
       };
 
 #endif

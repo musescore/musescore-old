@@ -23,6 +23,7 @@
 
 #include "element.h"
 #include "durationtype.h"
+#include "spanner.h"
 
 class ChordRest;
 class ScoreView;
@@ -45,25 +46,13 @@ struct BeamHint {
          : noteLen(a, b), timeSig(c, d), pos(e, f) {}
       };
 
-//---------------------------------------------------------
-//   BeamSegment
-//---------------------------------------------------------
-
-struct BeamSegment {
-      QPointF p1, p2;
-
-      BeamSegment() {}
-      BeamSegment(const QPointF& a, const QPointF& b) : p1(a), p2(b) {}
-      void move(double x, double y) {
-            QPointF m(x, y);
-            p1 += m;
-            p2 += m;
-            }
+//
+// user offsets for beam or beam fragment
+//
+struct BeamFragment {
+      QPointF p1[2];
+      QPointF p2[2];
       };
-
-typedef QList<BeamSegment*> BeamSegmentList;
-typedef BeamSegmentList::iterator iBeamSegment;
-typedef BeamSegmentList::const_iterator ciBeamSegment;
 
 //---------------------------------------------------------
 //   Beam
@@ -72,12 +61,14 @@ typedef BeamSegmentList::const_iterator ciBeamSegment;
 
 class Beam : public Element {
       QList<ChordRest*> _elements;
-      BeamSegmentList beamSegments;
+      QList<QLineF*> beamSegments;
       Direction _direction;
       int _up;                  // -1: unknown  0: down   1: up
 
+      QList<BeamFragment*> fragments;
+
       bool _userModified[2];    // 0: auto/down  1: up
-      QPointF _p1[2], _p2[2];
+
       mutable int _id;          // used in read()/write()
 
       int minMove;              // set in layout1()
@@ -88,6 +79,11 @@ class Beam : public Element {
       bool cross;
       Duration maxDuration;
       qreal slope;
+      int cut;
+
+      int editFragment;       // valid in edit mode
+
+      void layout2(QList<ChordRest*>, SpannerSegmentType, int frag);
 
    public:
       Beam(Score* s);
@@ -98,6 +94,7 @@ class Beam : public Element {
       virtual QPointF canvasPos() const;  ///< position in canvas coordinates
 
       virtual bool isEditable() const { return true; }
+      virtual void startEdit(ScoreView*, const QPointF&);
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
 
@@ -120,9 +117,11 @@ class Beam : public Element {
       void setUp(int v)                   { _up = v; }
       void setId(int i) const             { _id = i; }
       int id() const                      { return _id; }
+      bool isUp() const                   { return _up; }
 
       void setBeamDirection(Direction d);
-      bool isUp();
+      virtual QPainterPath shape() const;
+      virtual bool contains(const QPointF& p) const;
       };
 
 extern bool endBeam(const Fraction&, ChordRest* cr, int p);

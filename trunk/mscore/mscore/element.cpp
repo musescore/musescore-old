@@ -74,6 +74,7 @@
 #include "fingering.h"
 #include "bend.h"
 #include "tremolobar.h"
+#include "chordline.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -100,6 +101,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Image"),
       QT_TRANSLATE_NOOP("elementName", "Tie"),
       QT_TRANSLATE_NOOP("elementName", "Articulation"),     // 20
+      QT_TRANSLATE_NOOP("elementName", "ChordLine"),
       QT_TRANSLATE_NOOP("elementName", "Dynamic"),
       QT_TRANSLATE_NOOP("elementName", "Beam"),
       QT_TRANSLATE_NOOP("elementName", "Hook"),
@@ -108,7 +110,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Jump"),
       QT_TRANSLATE_NOOP("elementName", "Fingering"),
       QT_TRANSLATE_NOOP("elementName", "Tuplet"),
-      QT_TRANSLATE_NOOP("elementName", "Tempo"),            // 30
+      QT_TRANSLATE_NOOP("elementName", "Tempo"),
       QT_TRANSLATE_NOOP("elementName", "StaffText"),
       QT_TRANSLATE_NOOP("elementName", "Harmony"),
       QT_TRANSLATE_NOOP("elementName", "FretDiagram"),
@@ -125,6 +127,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "StaffState"),
       QT_TRANSLATE_NOOP("elementName", "LedgerLine"),
       QT_TRANSLATE_NOOP("elementName", "NoteHead"),
+      QT_TRANSLATE_NOOP("elementName", "NoteDot"),
       QT_TRANSLATE_NOOP("elementName", "Tremolo"),
       QT_TRANSLATE_NOOP("elementName", "Measure"),
       QT_TRANSLATE_NOOP("elementName", "StaffLines"),
@@ -178,6 +181,7 @@ double Element::spatium() const
 //---------------------------------------------------------
 //   magS
 //---------------------------------------------------------
+
 double Element::magS() const
       {
       return _mag * (_score->spatium() /(DPI * SPATIUM20));
@@ -416,7 +420,8 @@ bool Element::intersects(const QRectF& rr) const
       {
       QRectF r(rr);
       r.translate(pos());
-      return bbox().intersects(r);
+//      return bbox().intersects(r);
+      return shape().intersects(r);
       }
 
 //---------------------------------------------------------
@@ -626,40 +631,6 @@ void ElementList::replace(Element* o, Element* n)
             }
       QList<Element*>::replace(idx, n);
       }
-
-//---------------------------------------------------------
-//   move
-//---------------------------------------------------------
-
-#if 0
-void ElementList::move(Element* el, int tick)
-      {
-      int idx = indexOf(el);
-      if (idx == -1) {
-            printf("ElementList::move: element not found\n");
-            return;
-            }
-      QList<Element*>::removeAt(idx);
-      el->setTick(tick);
-      add(el);
-      }
-
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void ElementList::add(Element* e)
-      {
-      int tick = e->tick();
-      for (iElement ie = begin(); ie != end(); ++ie) {
-            if ((*ie)->tick() > tick) {
-                  insert(ie, e);
-                  return;
-                  }
-            }
-      append(e);
-      }
-#endif
 
 //---------------------------------------------------------
 //   write
@@ -1267,11 +1238,13 @@ Element* Element::create(ElementType type, Score* score)
             case GLISSANDO:         return new Glissando(score);
             case BRACKET:           return new Bracket(score);
             case ARTICULATION:      return new Articulation(score);
+            case CHORDLINE:         return new ChordLine(score);
             case ACCIDENTAL:        return new Accidental(score);
             case DYNAMIC:           return new Dynamic(score);
             case TEXT:              return new Text(score);
             case STAFF_TEXT:        return new StaffText(score);
             case NOTEHEAD:          return new NoteHead(score);
+            case NOTEDOT:           return new NoteDot(score);
             case TREMOLO:           return new Tremolo(score);
             case LAYOUT_BREAK:      return new LayoutBreak(score);
             case MARKER:            return new Marker(score);
@@ -1362,6 +1335,7 @@ const char* Element::name(ElementType type)
             case IMAGE:             return "Image";
             case TIE:               return "Tie";
             case ARTICULATION:      return "Articulation";
+            case CHORDLINE:         return "ChordLine";
             case DYNAMIC:           return "Dynamic";
             case PAGE:              return "Page";
             case BEAM:              return "Beam";
@@ -1388,6 +1362,7 @@ const char* Element::name(ElementType type)
             case STAFF_STATE:       return "StaffState";
             case LEDGER_LINE:       return "LedgerLine";
             case NOTEHEAD:          return "NoteHead";
+            case NOTEDOT:           return "NoteDot";
             case TREMOLO:           return "Tremolo";
             case MEASURE:           return "Measure";
             case STAFF_LINES:       return "StaffLines";
@@ -1465,7 +1440,6 @@ bool elementLessThan(const Element* const e1, const Element* const e2)
       {
       return e1->type() > e2->type();
       }
-
 
 //---------------------------------------------------------
 //   setAlign

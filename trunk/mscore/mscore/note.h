@@ -49,11 +49,28 @@ extern const int noteHeads[2][HEAD_GROUPS][4];
 class NoteHead : public Symbol {
 
    public:
-      NoteHead(Score*);
+      NoteHead(Score* s) : Symbol(s) {}
       NoteHead &operator=(const NoteHead&);
       virtual NoteHead* clone() const  { return new NoteHead(*this); }
       virtual ElementType type() const { return NOTEHEAD; }
       virtual void write(Xml& xml) const;
+      };
+
+//---------------------------------------------------------
+//   NoteDot
+//---------------------------------------------------------
+
+class NoteDot : public Symbol {
+
+      int _idx;
+
+   public:
+      NoteDot(Score*);
+      NoteDot &operator=(const NoteHead&);
+      virtual NoteDot* clone() const  { return new NoteDot(*this); }
+      virtual ElementType type() const { return NOTEDOT; }
+      int idx() const      { return _idx; }
+      void setIdx(int val) { _idx = val; }
       };
 
 //---------------------------------------------------------
@@ -107,6 +124,8 @@ class Note : public Element {
       Tie* _tieFor;
       Tie* _tieBack;
       Bend* _bend;
+
+      NoteDot* _dots[3];
 
       int _lineOffset;        ///< Used during mouse dragging.
 

@@ -60,6 +60,8 @@ class Accidental : public Element {
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual void draw(QPainter&, ScoreView*) const;
+      virtual bool isEditable() const                    { return true; }
+      virtual void startEdit(ScoreView*, const QPointF&) { setGenerated(false); }
 
       int symbol();
       Note* note() const { return (Note*)parent(); }

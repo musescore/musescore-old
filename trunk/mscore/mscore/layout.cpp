@@ -143,10 +143,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
       QList<Note*> notes;
       for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
-            if (!e)
-                 continue;
-            // ++voices;
-            if (e->type() == CHORD) {
+            if (e && (e->type() == CHORD)) {
                   ++voices;
                   notes.append(static_cast<Chord*>(e)->notes());
                   }
@@ -249,11 +246,14 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
       //---------------------------------------------------
       //    layout accidentals
+      //    find column for dots
       //---------------------------------------------------
 
       QList<AcEl> aclist;
 
+      double dotPosX  = 0.0;
       int nNotes = notes.size();
+      double headWidth = notes[0]->headWidth();
       for (int i = nNotes-1; i >= 0; --i) {
             Note* note     = notes[i];
             Accidental* ac = note->accidental();
@@ -265,7 +265,18 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                   acel.x    = 0.0;
                   aclist.append(acel);
                   }
+            // double xx = note->canvasPos().x() + headWidth;
+            double xx = note->pos().x() + headWidth;
+            if (xx > dotPosX)
+                  dotPosX = xx;
             }
+      for (int track = startTrack; track < endTrack; ++track) {
+            Element* e = segment->element(track);
+            if (e && e->type() == CHORD)
+                  // static_cast<Chord*>(e)->setDotPosX(dotPosX - e->canvasPos().x());
+                  static_cast<Chord*>(e)->setDotPosX(dotPosX - e->pos().x());
+            }
+
       int nAcc = aclist.size();
       if (nAcc == 0)
             return;

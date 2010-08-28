@@ -1667,6 +1667,7 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   case BREATH:
                   case GLISSANDO:
                   case ARTICULATION:
+                  case CHORDLINE:
                   case BEND:
                   case ACCIDENTAL:
                   case DYNAMIC:
@@ -1799,6 +1800,7 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case GLISSANDO:
                   case BRACKET:
                   case ARTICULATION:
+                  case CHORDLINE:
                   case BEND:
                   case ACCIDENTAL:
                   case TEXT:
@@ -1957,6 +1959,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case GLISSANDO:
                   case BRACKET:
                   case ARTICULATION:
+                  case CHORDLINE:
                   case BEND:
                   case ACCIDENTAL:
                   case TEXT:
@@ -2303,7 +2306,7 @@ Element* ScoreView::elementNear(const QPointF& p)
       for (int i = 0; i < el.size(); ++i) {
             const Element* e = el.at(i);
             e->itemDiscovered = 0;
-            if (e->selectable() && e->contains(p) && (e->type() != PAGE))
+            if (e->selectable() && (e->type() != PAGE) && e->contains(p))
                   ll.append(e);
             }
       int n = ll.size();
@@ -2313,7 +2316,7 @@ Element* ScoreView::elementNear(const QPointF& p)
             //
             for (int i = 0; i < el.size(); ++i) {
                   const Element* e = el.at(i);
-                  if ((e->type() != PAGE) && e->abbox().intersects(r) && e->selectable())
+                  if ((e->type() != PAGE) && e->selectable() && e->intersects(r))
                         ll.append(e);
                   }
             }
