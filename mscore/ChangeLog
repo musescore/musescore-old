@@ -1,3 +1,5 @@
+28.aug (la)
+      - fix get keysig from plugin when concert pitch mode is set
 22.aug (db)
       - fix #6735: C# for AltoSax in default soundfont is silent
 15.aug (la)

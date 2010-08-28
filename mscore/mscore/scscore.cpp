@@ -388,7 +388,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                                  }
                             result = key.accidentalType();
                             int tr =  st->part()->transpose().chromatic;
-                            if (tr){
+                            if (!score->styleB(ST_concertPitch) && tr){
                                 result = transposeKey(key.accidentalType(), tr);
                                 }
                             }
