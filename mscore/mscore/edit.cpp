@@ -1086,39 +1086,6 @@ void Score::deleteItem(Element* el)
                   cmdRemoveTimeSig(static_cast<TimeSig*>(el));
                   break;
 
-            case SYMBOL:
-            case COMPOUND:
-            case DYNAMIC:
-            case LYRICS:
-            case ARTICULATION:
-            case BRACKET:
-            case VOLTA:
-            case LAYOUT_BREAK:
-            case CLEF:
-            case IMAGE:
-            case TIE:
-            case TEMPO_TEXT:
-            case MARKER:
-            case JUMP:
-            case BREATH:
-            case ARPEGGIO:
-            case HARMONY:
-            case TREMOLO:
-            case GLISSANDO:
-            case STAFF_TEXT:
-            case SPACER:
-            case KEYSIG:
-            case FRET_DIAGRAM:
-            case BEND:
-            case FINGERING:
-                  undoRemoveElement(el);
-                  break;
-
-            case HBOX:
-            case VBOX:
-                  undoRemoveElement(el);
-                  break;
-
             case OTTAVA_SEGMENT:
             case HAIRPIN_SEGMENT:
             case TRILL_SEGMENT:
@@ -1233,7 +1200,7 @@ printf("remove Segment %p %s\n", seg, seg->subTypeName());
                   break;
 
             default:
-                  printf("deleteItem: %s: not implemented\n", el->name());
+                  undoRemoveElement(el);
                   break;
             }
       }

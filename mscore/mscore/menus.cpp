@@ -569,11 +569,11 @@ void MuseScore::populatePalette()
             };
 
       ChordLine* cl = new ChordLine(gscore);
-      cl->setSubtype(0);
+      cl->setSubtype(1);
       sp->append(cl, tr(scorelineNames[0]));
 
       cl = new ChordLine(gscore);
-      cl->setSubtype(1);
+      cl->setSubtype(2);
       sp->append(cl, tr(scorelineNames[1]));
 
       paletteBox->addPalette(sp);
