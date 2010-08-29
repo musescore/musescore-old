@@ -1440,6 +1440,16 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "beam64",
+         QT_TRANSLATE_NOOP("action","beam 64"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","beam 64"),
+         QT_TRANSLATE_NOOP("action","beam 64"),
+          beam64_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "auto-beam",
          QT_TRANSLATE_NOOP("action","auto beam"),
          0,

@@ -1,4 +1,5 @@
 29.aug (ws)
+      - implemented subbeam control (1/32 & 1/64)
       - feathered beams
       (la)
       - fix #6775: Seg. fault by double clicking any element twice
