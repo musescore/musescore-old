@@ -1,4 +1,6 @@
-29.aug (la)
+29.aug (ws)
+      - feathered beams
+      (la)
       - fix #6775: Seg. fault by double clicking any element twice
       - fix #6888: When exchanging voice, voice 1 is removed
 28.aug (ws)

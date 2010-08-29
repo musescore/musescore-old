@@ -64,6 +64,8 @@ class Beam : public Element {
       QList<QLineF*> beamSegments;
       Direction _direction;
       int _up;                  // -1: unknown  0: down   1: up
+      double _grow1;             // define "feather" beams
+      double _grow2;
 
       QList<BeamFragment*> fragments;
 
@@ -122,6 +124,13 @@ class Beam : public Element {
       void setBeamDirection(Direction d);
       virtual QPainterPath shape() const;
       virtual bool contains(const QPointF& p) const;
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+
+      double grow1() const      { return _grow1; }
+      double grow2() const      { return _grow2; }
+      void setGrow1(double val) { _grow1 = val; }
+      void setGrow2(double val) { _grow2 = val; }
       };
 
 extern bool endBeam(const Fraction&, ChordRest* cr, int p);

@@ -2491,3 +2491,18 @@ void ChangeNoteEvents::flip()
       events = e;
       }
 
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeBeamProperties::flip()
+      {
+      double g1 = beam->grow1();
+      double g2 = beam->grow2();
+      beam->setGrow1(grow1);
+      beam->setGrow2(grow2);
+      grow1 = g1;
+      grow2 = g2;
+      }
+
+

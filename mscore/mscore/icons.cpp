@@ -104,6 +104,8 @@ void genIcons()
       icons[nbeam_ICON]      = new QIcon(iconPath + "nbeam.svg");
       icons[beam32_ICON]     = new QIcon(iconPath + "beam32.svg");
       icons[abeam_ICON]      = new QIcon(iconPath + "abeam.svg");
+      icons[fbeam1_ICON]     = new QIcon(iconPath + "fbeam1.svg");
+      icons[fbeam2_ICON]     = new QIcon(iconPath + "fbeam2.svg");
       icons[fileOpen_ICON]   = new QIcon(iconPath + "fileopen.svg");
       icons[fileNew_ICON]    = new QIcon(iconPath + "filenew.svg");
       icons[fileSave_ICON]   = new QIcon(iconPath + "filesave.svg");

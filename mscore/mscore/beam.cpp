@@ -34,6 +34,8 @@
 #include "tremolo.h"
 #include "measure.h"
 #include "al/al.h"
+#include "icons.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   endBeam
@@ -189,6 +191,8 @@ Beam::Beam(Score* s)
       _up              = -1;
       _userModified[0] = false;
       _userModified[1] = false;
+      _grow1           = 1.0;
+      _grow2           = 1.0;
       editFragment     = 0;
       }
 
@@ -206,9 +210,10 @@ Beam::Beam(const Beam& b)
       _up              = b._up;
       _userModified[0] = b._userModified[0];
       _userModified[1] = b._userModified[1];
+      _grow1           = b._grow1;
+      _grow2           = b._grow2;
       foreach(BeamFragment* f, b.fragments)
             fragments.append(new BeamFragment(*f));
-
       minMove          = b.minMove;
       maxMove          = b.maxMove;
       c1               = b.c1;
@@ -277,8 +282,9 @@ void Beam::remove(ChordRest* a)
 
 void Beam::draw(QPainter& p, ScoreView*) const
       {
+      QColor color(p.pen().color());
       p.setPen(QPen(Qt::NoPen));
-      p.setBrush(selected() ? preferences.selectColor[0] : preferences.defaultColor);
+      p.setBrush(color);
       qreal lw2 = point(score()->styleS(ST_beamWidth)) * .5 * mag();
       foreach (const QLineF* bs, beamSegments) {
             QPolygonF a(4);
@@ -547,9 +553,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       double p2x      = c2->upNote()->canvasPos().x();
       cut             = 0;
 
-//printf("layout2 frag %d type %d idx %d modified %d cross %d  %f %f\n",
-//      frag, int(st), idx, _userModified[idx], cross, f->p1[idx].y(), f->p2[idx].y());
-
       f->p1[idx] += cp;
       f->p2[idx] += cp;
 
@@ -751,16 +754,13 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       for (int i = 0; i < n; ++i) {
             double x1 = f->p1[idx].x();
             double x2 = f->p2[idx].x();
-            double y1 = f->p1[idx].y();
-            double y2 = f->p2[idx].y();
+            double y1 = f->p1[idx].y() + beamDist * i * _grow1;
+            double y2 = f->p2[idx].y() + beamDist * i * _grow2;
             if (st == SEGMENT_BEGIN)
                   x2 += _spatium * 2;
             else if (st == SEGMENT_END)
                   x1 -= _spatium * 2;
-
-            QLineF* bs = new QLineF(x1, y1, x2, y2);
-            bs->translate(0, beamDist * i);
-            beamSegments.push_back(bs);
+            beamSegments.push_back(new QLineF(x1, y1, x2, y2));
             }
       double p1dy = f->p1[idx].y() + beamDist * (n-1);
 
@@ -922,6 +922,10 @@ void Beam::write(Xml& xml) const
                   xml.etag();
                   }
             }
+      if (_grow1 != 1.0)
+            xml.tag("growLeft", _grow1);
+      if (_grow2 != 1.0)
+            xml.tag("growRight", _grow2);
       xml.etag();
       }
 
@@ -932,7 +936,6 @@ void Beam::write(Xml& xml) const
 void Beam::read(QDomElement e)
       {
       QPointF p1, p2;
-      bool modified = false;
       _id = e.attribute("id").toInt();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -982,6 +985,10 @@ void Beam::read(QDomElement e)
                   else
                         domError(e);
                   }
+            else if (tag == "growLeft")
+                  _grow1 = val.toDouble();
+            else if (tag == "growRight")
+                  _grow2 = val.toDouble();
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -1047,7 +1054,6 @@ void Beam::toDefault()
 
 void Beam::startEdit(ScoreView*, const QPointF& p)
       {
-printf("startEdit\n");
       QPointF pt(p - canvasPos());
       double ydiff = 100000000.0;
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
@@ -1062,4 +1068,37 @@ printf("startEdit\n");
             ++i;
             }
       }
+
+//---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool Beam::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
+      {
+      return (type == ICON && subtype == ICON_FBEAM1)
+         || (type == ICON && subtype == ICON_FBEAM2);
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* Beam::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+      {
+      double g1;
+      double g2;
+      if (e->subtype() == ICON_FBEAM1) {
+            g1 = 1.0;
+            g2 = 0.0;
+            }
+      else if (e->subtype() == ICON_FBEAM2) {
+            g1 = 0.0;
+            g2 = 1.0;
+            }
+      else
+            return 0;
+      score()->undo()->push(new ChangeBeamProperties(this, g1, g2));
+      return 0;
+      }
+
 

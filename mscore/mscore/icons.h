@@ -23,7 +23,7 @@
 
 enum {
       ICON_ACCIACCATURA, ICON_APPOGGIATURA, ICON_GRACE4, ICON_GRACE16, ICON_GRACE32,
-      ICON_SBEAM, ICON_MBEAM, ICON_NBEAM, ICON_BEAM32, ICON_AUTOBEAM
+      ICON_SBEAM, ICON_MBEAM, ICON_NBEAM, ICON_BEAM32, ICON_AUTOBEAM, ICON_FBEAM1, ICON_FBEAM2
       };
 
 extern void genIcons();
@@ -33,9 +33,10 @@ enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON,
       staccato_ICON, quartrest_ICON, dot_ICON, dotdot_ICON, sforzatoaccent_ICON,
       tenuto_ICON, plus_ICON, flip_ICON, voice1_ICON, voice2_ICON, voice3_ICON, voice4_ICON,
       undo_ICON, redo_ICON, cut_ICON, copy_ICON, paste_ICON, print_ICON, clef_ICON,
-      midiin_ICON, speaker_ICON, start_ICON, play_ICON, repeat_ICON, sbeam_ICON, mbeam_ICON,
-      nbeam_ICON, beam32_ICON, abeam_ICON, fileOpen_ICON, fileNew_ICON, fileSave_ICON,
-      fileSaveAs_ICON, exit_ICON, viewmag_ICON, window_ICON, acciaccatura_ICON, appoggiatura_ICON,
+      midiin_ICON, speaker_ICON, start_ICON, play_ICON, repeat_ICON,
+      sbeam_ICON, mbeam_ICON, nbeam_ICON, beam32_ICON, abeam_ICON, fbeam1_ICON, fbeam2_ICON,
+      fileOpen_ICON, fileNew_ICON, fileSave_ICON, fileSaveAs_ICON, exit_ICON,
+      viewmag_ICON, window_ICON, acciaccatura_ICON, appoggiatura_ICON,
       grace4_ICON, grace16_ICON, grace32_ICON, noteEntry_ICON, keys_ICON, tie_ICON,
       textBold_ICON, textItalic_ICON, textUnderline_ICON,
       textLeft_ICON, textCenter_ICON, textRight_ICON, textSuper_ICON, textSub_ICON,
