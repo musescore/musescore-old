@@ -2624,7 +2624,6 @@ void ScoreView::endEdit()
       _score->setLayoutAll(true);
       _score->endCmd();
       editObject = 0;
-      origEditObject = 0;
       grips = 0;
       }
 
@@ -3623,11 +3622,15 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
             //
             // start slur in edit mode if lastNote is not given
             //
-            if ((lastNote == 0) && !el->isEmpty() && !origEditObject) {
+            if (origEditObject && origEditObject->isTextB()) {
+                  _score->endCmd();
+                  return;
+                  }
+            if ((lastNote == 0) && !el->isEmpty()) {
                   origEditObject = el->front();
                   sm->postEvent(new CommandEvent("edit"));  // calls startCmd()
                   }
             else
-                  _score->endCmd();
+                   _score->endCmd();
             }
       }
