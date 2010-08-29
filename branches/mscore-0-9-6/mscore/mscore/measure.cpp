@@ -2721,12 +2721,26 @@ void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
                   else if (s->element(strack) && !s->element(dtrack)) {
                         s->setElement(dtrack, s->element(strack));
                         s->element(dtrack)->setTrack(dtrack);
-                        s->setElement(strack, 0);
+                        if(v1 != 0)
+                              s->setElement(strack, 0);
+                        else {
+                              ChordRest* cr = static_cast<ChordRest*>(s->element(strack));
+                              Rest* r = new Rest(score(), s->tick(), cr->duration());
+                              r->setTrack(strack);
+                              s->setElement(strack, r);
+                              }
                         }
                   else if (!s->element(strack) && s->element(dtrack)) {
                         s->setElement(strack, s->element(dtrack));
                         s->element(strack)->setTrack(strack);
-                        s->setElement(dtrack, 0);
+                        if(v2 != 0)
+                              s->setElement(dtrack, 0);
+                        else {
+                              ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
+                              Rest* r = new Rest(score(), s->tick(), cr->duration());
+                              r->setTrack(dtrack);
+                              s->setElement(dtrack, r);
+                              }
                         }
                   LyricsList* ll = s->lyricsList(staffIdx);
                   foreach(Lyrics* l, *ll) {

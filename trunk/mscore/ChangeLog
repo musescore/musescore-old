@@ -1,3 +1,6 @@
+29.aug (la)
+      - fix #6775: Seg. fault by double clicking any element twice
+      - fix #6888: When exchanging voice, voice 1 is removed
 28.aug (ws)
       - new element ChordLine: editable bezier line attached to
         top note of chord (for fall, doit, "plop" and bend)
