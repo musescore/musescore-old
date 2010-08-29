@@ -177,6 +177,7 @@ QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
                   case BEAM_END:     s = "end"; break;
                   case BEAM_NO:      s = "no"; break;
                   case BEAM_BEGIN32: s = "begin32"; break;
+                  case BEAM_BEGIN64: s = "begin64"; break;
                   case BEAM_INVALID: s = "?"; break;
                   }
             pl.append(Prop("BeamMode", s));
@@ -246,6 +247,8 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, con
                   bm = BEAM_NO;
             else if (val == "begin32")
                   bm = BEAM_BEGIN32;
+            else if (val == "begin64")
+                  bm = BEAM_BEGIN64;
             else
                   bm = i;
             _beamMode = BeamMode(bm);

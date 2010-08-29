@@ -171,6 +171,7 @@ bool Rest::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || (type == ICON && subtype == ICON_MBEAM)
          || (type == ICON && subtype == ICON_NBEAM)
          || (type == ICON && subtype == ICON_BEAM32)
+         || (type == ICON && subtype == ICON_BEAM64)
          || (type == ICON && subtype == ICON_AUTOBEAM)
          || (type == ARTICULATION && subtype == UfermataSym)
          || (type == ARTICULATION && subtype == DfermataSym)
@@ -213,6 +214,9 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                               break;
                         case ICON_BEAM32:
                               score()->undoChangeBeamMode(this, BEAM_BEGIN32);
+                              break;
+                        case ICON_BEAM64:
+                              score()->undoChangeBeamMode(this, BEAM_BEGIN64);
                               break;
                         case ICON_AUTOBEAM:
                               score()->undoChangeBeamMode(this, BEAM_AUTO);

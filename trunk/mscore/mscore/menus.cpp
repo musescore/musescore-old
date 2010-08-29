@@ -724,7 +724,12 @@ void MuseScore::populatePalette()
       ik = new Icon(gscore);
       ik->setSubtype(ICON_BEAM32);
       ik->setAction(getAction("beam32"));
-      sp->append(ik, tr("Start subbeam"));
+      sp->append(ik, tr("Start 1/32 subbeam"));
+
+      ik = new Icon(gscore);
+      ik->setSubtype(ICON_BEAM64);
+      ik->setAction(getAction("beam64"));
+      sp->append(ik, tr("Start 1/64 subbeam"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_AUTOBEAM);

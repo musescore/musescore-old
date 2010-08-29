@@ -427,6 +427,7 @@ endif (NOT MINGW AND NOT APPLE)
       data/mbeam.svg
       data/nbeam.svg
       data/beam32.svg
+      data/beam64.svg
       data/abeam.svg
       data/fbeam1.svg
       data/fbeam2.svg

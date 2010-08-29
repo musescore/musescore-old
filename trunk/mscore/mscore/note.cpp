@@ -883,6 +883,7 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || (type == ICON && subtype == ICON_MBEAM)
          || (type == ICON && subtype == ICON_NBEAM)
          || (type == ICON && subtype == ICON_BEAM32)
+         || (type == ICON && subtype == ICON_BEAM64)
          || (type == ICON && subtype == ICON_AUTOBEAM)
          || (type == SYMBOL)
          || (type == CLEF)
@@ -1008,6 +1009,9 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                               break;
                         case ICON_BEAM32:
                               score()->undoChangeBeamMode(ch, BEAM_BEGIN32);
+                              break;
+                        case ICON_BEAM64:
+                              score()->undoChangeBeamMode(ch, BEAM_BEGIN64);
                               break;
                         case ICON_AUTOBEAM:
                               score()->undoChangeBeamMode(ch, BEAM_AUTO);

@@ -750,112 +750,82 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       else
             setMag(1.0);
 
-      int n = maxDuration.hooks();
-      for (int i = 0; i < n; ++i) {
-            double x1 = f->p1[idx].x();
-            double x2 = f->p2[idx].x();
-            double y1 = f->p1[idx].y() + beamDist * i * _grow1;
-            double y2 = f->p2[idx].y() + beamDist * i * _grow2;
-            if (st == SEGMENT_BEGIN)
-                  x2 += _spatium * 2;
-            else if (st == SEGMENT_END)
-                  x1 -= _spatium * 2;
-            beamSegments.push_back(new QLineF(x1, y1, x2, y2));
-            }
-      double p1dy = f->p1[idx].y() + beamDist * (n-1);
-
       //---------------------------------------------
-      //   create broken/short beam segments
+      //   create beam segments
       //---------------------------------------------
 
-      for (Duration d(maxDuration.shift(1)); d >= Duration(Duration::V_64TH); d = d.shift(1)) {
-            int nn     = d.hooks() - n;
-            Chord* nn1 = 0;
-            Chord* nn2 = 0;
-            bool nn1r  = false;
-            double y1  = 0.0;
+      double p1dy = f->p1[idx].y();
+      int beamNo = 0;
+      for (Duration d(Duration::V_EIGHT); d >= Duration(Duration::V_256TH); d = d.shift(1)) {
+            Chord* cr1 = 0;
+            Chord* cr2 = 0;
+
+            double dist = beamDist * beamNo;
+            double y1   = p1dy + dist;
 
             foreach (ChordRest* cr, crl) {
                   if (cr->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(cr);
-                  bool cup = chord->up();
-                  if (cross) {
-                        if (!cup)
-                              y1 = f->p1[idx].y() - beamDist * nn;
-                        else
-                              y1 = p1dy + beamDist * nn;
+                  bool cup     = chord->up();
+
+                  bool b32 = (beamNo >= 1) && (chord->beamMode() == BEAM_BEGIN32);
+                  bool b64 = (beamNo >= 2) && (chord->beamMode() == BEAM_BEGIN64);
+                  if ((chord->durationType() > d) || b32 || b64) {
+                        if (cr2) {
+                              // create short segment
+                              double x2 = cr1->stemPos(cr1->up(), false).x();
+                              double x3 = cr2->stemPos(cr2->up(), false).x();
+                              beamSegments.push_back(new QLineF(x2 - cp.x(), (x2 - x1) * slope + y1,
+                                 x3 - cp.x(), (x3 - x1) * slope + y1));
+                              }
+                        else if (cr1) {
+                              // create broken segment
+                              double len = beamMinLen;
+                              if (cr1 != crl[0]) {
+                                    Duration d = cr1->durationType();
+                                    d = d.shift(-1);
+                                    int rtick = cr1->tick() - cr1->measure()->tick();
+                                    if (rtick % d.ticks())
+                                          len = -len;
+                                    }
+                              double x2 = cr1->stemPos(cr1->up(), false).x();
+                              double x3 = x2 + len;
+                              beamSegments.push_back(new QLineF(x2 - cp.x(), (x2 - x1) * slope + y1,
+                                 x3 - cp.x(), (x3 - x1) * slope + y1));
+                              }
+                        if (chord->durationType() <= d) {
+                              cr1 = chord;
+                              cr2 = 0;
+                              }
+                        else {
+                              cr1 = cr2 = 0;
+                              }
                         }
                   else
-                        y1 = p1dy + beamDist * nn;
-
-                  if (chord->durationType().type() < d.type()) {
-                        if (nn2) {
-                              // create short segment
-                              QLineF* bs = new QLineF;
-                              beamSegments.push_back(bs);
-                              double x2 = nn1->stemPos(cup, false).x();
-                              double x3 = nn2->stemPos(cup, false).x();
-                              bs->setP1(QPointF(x2 - cp.x(), (x2 - x1) * slope + y1));
-                              bs->setP2(QPointF(x3 - cp.x(), (x3 - x1) * slope + y1));
-                              }
-                        else if (nn1) {
-                              // create broken segment
-                              bool toRight;
-                              if (nn1 == crl[0])
-                                    toRight = true;
-                              else {
-                                    Duration d = nn1->durationType();
-                                    d = d.shift(-1);
-                                    int rtick = nn1->tick() - nn1->measure()->tick();
-                                    if (rtick % d.ticks())
-                                          toRight = false;
-                                    else
-                                          toRight = true;
-                                    }
-                              QLineF* bs = new QLineF;
-                              beamSegments.push_back(bs);
-                              double x2 = nn1->stemPos(cup, false).x();
-                              double x3 = x2 + (toRight ? beamMinLen : -beamMinLen);
-                              bs->setP1(QPointF(x2 - cp.x(), (x2 - x1) * slope + y1));
-                              bs->setP2(QPointF(x3 - cp.x(), (x3 - x1) * slope + y1));
-                              }
-                        nn1r = false;
-                        nn1 = nn2 = 0;
-                        continue;
-                        }
-                  nn1r = false;
-                  if (nn1)
-                        nn2 = chord;
-                  else {
-                        nn1 = chord;
-                        nn1r = cr == crl.front();
-                        }
+                        (cr1 ? cr2 : cr1) = chord;
                   }
-            if (nn2) {
-                  // create short segment
-                  QLineF* bs = new QLineF;
-                  beamSegments.push_back(bs);
-                  double x2 = nn1->stemPos(nn1->up(), false).x();
-                  double x3 = nn2->stemPos(nn2->up(), false).x();
+            if (cr2) {
+                  // create segment
+                  double x2 = cr1->stemPos(cr1->up(), false).x();
+                  double x3 = cr2->stemPos(cr2->up(), false).x();
 
                   if (st == SEGMENT_BEGIN)
-                        x2 -= _spatium * 2;
-                  else if (st == SEGMENT_END)
                         x3 += _spatium * 2;
+                  else if (st == SEGMENT_END)
+                        x2 -= _spatium * 2;
 
-                  bs->setP1(QPointF(x2 - cp.x(), (x2 - x1) * slope + y1));
-                  bs->setP2(QPointF(x3 - cp.x(), (x3 - x1) * slope + y1));
+                  beamSegments.push_back(new QLineF(x2 - cp.x(), (x2 - x1) * slope + p1dy + dist * _grow1,
+                     x3 - cp.x(), (x3 - x1) * slope + p1dy + dist  * _grow2));
                   }
-           else if (nn1) {
+            else if (cr1) {
                   // create broken segment
-                  QLineF* bs = new QLineF;
-                  beamSegments.push_back(bs);
-                  double x3 = nn1->stemPos(nn1->up(), false).x();
-                  double x2 = x3 - point(score()->styleS(ST_beamMinLen));
-                  bs->setP1(QPointF(x2 - cp.x(), (x2 - x1) * slope + y1));
-                  bs->setP2(QPointF(x3 - cp.x(), (x3 - x1) * slope + y1));
+                  double x3 = cr1->stemPos(cr1->up(), false).x();
+                  double x2 = x3 - beamMinLen;
+                  beamSegments.push_back(new QLineF(x2 - cp.x(), (x2 - x1) * slope + p1dy + dist,
+                     x3 - cp.x(), (x3 - x1) * slope + p1dy + dist));
                   }
+            ++beamNo;
             }
 
       //---------------------------------------------------
