@@ -428,6 +428,8 @@ endif (NOT MINGW AND NOT APPLE)
       data/nbeam.svg
       data/beam32.svg
       data/abeam.svg
+      data/fbeam1.svg
+      data/fbeam2.svg
       data/fileopen.svg
       data/filenew.svg
       data/filesave.svg

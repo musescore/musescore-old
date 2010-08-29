@@ -1449,6 +1449,26 @@ Shortcut MuseScore::sc[] = {
           abeam_ICON
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "fbeam1",
+         QT_TRANSLATE_NOOP("action","feathered beam, slower"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","feathered beam, slower"),
+         QT_TRANSLATE_NOOP("action","feathered beam, slower"),
+          fbeam1_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "fbeam2",
+         QT_TRANSLATE_NOOP("action","feathered beam, faster"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","feathered beam, faster"),
+         QT_TRANSLATE_NOOP("action","feathered beam, faster"),
+          fbeam2_ICON
+         ),
+      Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-palette",
          QT_TRANSLATE_NOOP("action","Palette"),

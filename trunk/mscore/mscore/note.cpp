@@ -860,7 +860,7 @@ void Note::endDrag()
 
 bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
       {
-      if (type == ARTICULATION
+      return (type == ARTICULATION
          || type == CHORDLINE
          || type == TEXT
          || type == FINGERING
@@ -890,11 +890,7 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || (type == GLISSANDO)
          || (type == SLUR)
          || (type == STAFF_TEXT)
-         || (type == BEND && (staff()->useTablature()))
-         ) {
-            return true;
-            }
-      return false;
+         || (type == BEND && (staff()->useTablature())));
       }
 
 //---------------------------------------------------------

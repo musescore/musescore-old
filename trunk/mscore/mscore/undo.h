@@ -1464,6 +1464,23 @@ class ChangeNoteEvents : public UndoCommand {
       UNDO_NAME("ChangeNoteEvents");
       };
 
+//---------------------------------------------------------
+//   ChangeBeamProperties
+//---------------------------------------------------------
+
+class ChangeBeamProperties : public UndoCommand {
+      Beam* beam;
+      double grow1, grow2;
+
+      void flip();
+
+   public:
+      ChangeBeamProperties(Beam* b, double g1, double g2) : beam(b), grow1(g1), grow2(g2) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeBeamProperties");
+      };
+
 
 #endif
 

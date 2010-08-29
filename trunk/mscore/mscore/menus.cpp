@@ -731,6 +731,16 @@ void MuseScore::populatePalette()
       ik->setAction(getAction("auto-beam"));
       sp->append(ik, tr("Auto beam"));
 
+      ik = new Icon(gscore);
+      ik->setSubtype(ICON_FBEAM1);
+      ik->setAction(getAction("fbeam1"));
+      sp->append(ik, tr("feathered beam"));
+
+      ik = new Icon(gscore);
+      ik->setSubtype(ICON_FBEAM2);
+      ik->setAction(getAction("fbeam2"));
+      sp->append(ik, tr("feathered beam"));
+
       paletteBox->addPalette(sp);
 
       //-----------------------------------
