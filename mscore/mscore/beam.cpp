@@ -754,6 +754,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       //   create beam segments
       //---------------------------------------------
 
+      qreal stemWidth2 = point(score()->styleS(ST_stemWidth)) * .5;
       double p1dy = f->p1[idx].y();
       int beamNo = 0;
       for (Duration d(Duration::V_EIGHT); d >= Duration(Duration::V_256TH); d = d.shift(1)) {
@@ -814,6 +815,10 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         x3 += _spatium * 2;
                   else if (st == SEGMENT_END)
                         x2 -= _spatium * 2;
+                  else {
+                        x2 -= stemWidth2;
+                        x3 += stemWidth2;
+                        }
 
                   beamSegments.push_back(new QLineF(x2 - cp.x(), (x2 - x1) * slope + p1dy + dist * _grow1,
                      x3 - cp.x(), (x3 - x1) * slope + p1dy + dist  * _grow2));
