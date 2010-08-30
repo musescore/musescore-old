@@ -385,7 +385,9 @@ namespace Bww {
     }
     qDebug() << " tie start" << tieStart << " tie stop" << tieStop;
     qDebug() << " triplet start" << tripletStart << " triplet stop" << tripletStop;
-    wrt.note(caps[1], caps[2], caps[3], dots, tieStart, tieStop, triplet);
+    // wrt.note(caps[1], caps[2], caps[3], dots, tieStart, tieStop, triplet);
+    NoteDescription noteDesc(caps[1], caps[2], caps[3], dots, tieStart, tieStop, triplet);
+    notes.append(noteDesc);
     tieStart = false;
     tripletStart = false;
     if (tripletStop)
@@ -410,7 +412,11 @@ namespace Bww {
     {
       QStringList graces = graceMap.value(lex.symValue()).split(" ");
       for (int i = 0; i < graces.size(); ++i)
-        wrt.note(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
+      {
+        // wrt.note(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
+        NoteDescription noteDesc(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
+        notes.append(noteDesc);
+      }
     }
     lex.getSym();
   }
@@ -491,6 +497,7 @@ namespace Bww {
   void Parser::parseSeqNotes()
   {
     qDebug() << "Parser::parseSeqNotes() value:" << qPrintable(lex.symValue());
+    notes.clear();
     while (isGrace(lex.symType()) || lex.symType() == NOTE || lex.symType() == TIE || lex.symType() == TRIPLET)
     {
       if (isGrace(lex.symType())) parseGraces();
@@ -521,6 +528,17 @@ namespace Bww {
         }
         lex.getSym();
       }
+    }
+    for (int i = 0; i < notes.size(); ++i)
+    {
+      wrt.note(notes.at(i).pitch,
+               notes.at(i).beam,
+               notes.at(i).type,
+               notes.at(i).dots,
+               notes.at(i).tieStart,
+               notes.at(i).tieStop,
+               notes.at(i).triplet,
+               notes.at(i).grace);
     }
   }
 
