@@ -27,6 +27,7 @@
  Definition of class Parser
  */
 
+#include <QtCore/QList>
 #include <QtCore/QMap>
 #include <QtCore/QString>
 
@@ -35,6 +36,29 @@
 namespace Bww {
 
   class Lexer;
+
+  struct NoteDescription
+  {
+    QString pitch;
+    QString beam;
+    QString type;
+    int dots;
+    bool tieStart;
+    bool tieStop;
+    StartStop triplet;
+    bool grace;
+    NoteDescription(const QString _pitch, const QString _beam,
+                    const QString _type, const int _dots,
+                    bool _tieStart = false, bool _tieStop = false,
+                    StartStop _triplet = ST_NONE,
+                    bool _grace = false)
+                      : pitch(_pitch), beam(_beam),
+                      type(_type), dots(_dots),
+                      tieStart(_tieStart), tieStop(_tieStop),
+                      triplet(_triplet),
+                      grace(_grace)
+    {}
+  };
 
   /**
    The bww parser.
@@ -74,6 +98,7 @@ namespace Bww {
     bool inTie;                         ///< In a tie
     bool tripletStart;                  ///< Triplet start pending
     bool inTriplet;                     ///< In a triplet
+    QList<NoteDescription> notes;       ///< Notes in the current measure
   };
 
 } // namespace Bww
