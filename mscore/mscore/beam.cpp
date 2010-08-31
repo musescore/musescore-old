@@ -768,8 +768,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   if (cr->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(cr);
-                  bool cup     = chord->up();
-
                   bool b32 = (beamNo >= 1) && (chord->beamMode() == BEAM_BEGIN32);
                   bool b64 = (beamNo >= 2) && (chord->beamMode() == BEAM_BEGIN64);
                   if ((chord->durationType() > d) || b32 || b64) {

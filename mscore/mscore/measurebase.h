@@ -107,8 +107,12 @@ class MeasureBase : public Element {
       void setSectionBreak(bool v)           { _sectionBreak = v; }
 
       virtual void moveTicks(int diff)       { setTick(tick() + diff); }
-      virtual double distance(int) const     { return 0.0; }
-      virtual Spatium userDistance(int) const { return Spatium(0.0); }
+
+      virtual double distanceUp(int) const        { return 0.0; }
+      virtual double distanceDown(int) const      { return 0.0; }
+      virtual Spatium userDistanceUp(int) const   { return Spatium(0.0); }
+      virtual Spatium userDistanceDown(int) const { return Spatium(0.0); }
+
       virtual void add(Element*);
       virtual void remove(Element*);
       void setDirty()                        { _dirty = true; }

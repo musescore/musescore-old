@@ -578,6 +578,7 @@ bool Score::read(QString name)
 
 void Score::write(Xml& xml, bool /*autosave*/)
       {
+      xml.stag("Score");
 #ifdef OMR
       if (_omr)
             _omr->write(xml);
@@ -585,7 +586,6 @@ void Score::write(Xml& xml, bool /*autosave*/)
             xml.tag("showOmr", _showOmr);
 #endif
 
-      xml.stag("Score");
       _syntiSettings.write(xml);
 
       xml.tag("Spatium", _spatium / DPMM);

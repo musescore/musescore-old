@@ -734,12 +734,6 @@ void Score::doLayout()
                   m->layout2();
             }
 
-//      foreach (Element* el, _gel) {
-//            if (el && el->type() != SLUR)
-//            if (el)
-//                  el->layout();
-//            }
-
       //---------------------------------------------------
       //    remove remaining pages and systems
       //---------------------------------------------------
@@ -926,6 +920,8 @@ bool Score::layoutPage()
       bool firstSystemOnPage = true;
 
       while (curMeasure) {
+            double h;
+            QList<System*> sl;
             if (curMeasure->type() == VBOX) {
                   System* system = getNextSystem(false, true);
 
@@ -937,21 +933,23 @@ bool Score::layoutPage()
                   VBox* vbox = static_cast<VBox*>(curMeasure);
                   vbox->setParent(system);
                   vbox->layout();
-                  double bh = vbox->height();
+                  h = vbox->height();
 
                   // put at least one system on page
-                  if (((y + bh) > ey) && !firstSystemOnPage)
+                  if (((y + h) > ey) && !firstSystemOnPage)
                         break;
 
                   system->setPos(x, y);
-                  system->setHeight(bh);
+                  system->setHeight(h);
+                  system->setPageBreak(vbox->pageBreak());
+                  sl.append(system);
 
                   system->measures().push_back(vbox);
                   page->appendSystem(system);
 
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += bh + point(styleS(ST_frameSystemDistance));
+                  y += h + point(styleS(ST_frameSystemDistance));
                   if (y > ey) {
                         ++rows;
                         break;
@@ -962,19 +960,40 @@ bool Score::layoutPage()
                         y += sub;
                   int cs          = curSystem;
                   MeasureBase* cm = curMeasure;
-                  double h;
-                  QList<System*> sl = layoutSystemRow(x, y, w, firstSystem, &h);
+                  sl = layoutSystemRow(x, y, w, firstSystem, &h);
                   if (sl.isEmpty()) {
                         printf("layoutSystemRow returns zero systems\n");
                         abort();
                         }
+                  double moveY = 0.0;
+                  if (!page->systems()->isEmpty()) {
+                        System* ps = page->systems()->back();
+                        double b1;
+                        if (ps->staves()->isEmpty())
+                              b1 = 0.0;
+                        else
+                              b1 = ps->distanceDown(ps->staves()->size() - 1).val() * _spatium;
+                        double b2  = 0.0;
+                        foreach(System* s, sl) {
+                              if (s->distanceUp(0).val() * _spatium > b2)
+                                    b2 = s->distanceUp(0).val() * _spatium;
+                              }
+                        if (b2 > b1)
+                              moveY = b2 - b1;
+                        }
 
                   // a page contains at least one system
-                  if (rows && (y + h > ey)) {
+                  if (rows && (y + h + moveY > ey)) {
                         // system does not fit on page: rollback
                         curMeasure = cm;
                         curSystem  = cs;
                         break;
+                        }
+                  if (moveY > 0.0) {
+                        y += moveY;
+                        foreach(System* s, sl) {
+                              s->rypos() = y;
+                              }
                         }
 
                   foreach (System* system, sl) {
@@ -984,12 +1003,10 @@ bool Score::layoutPage()
                   firstSystem       = false;
                   firstSystemOnPage = false;
                   y += h;
-                  if (sl.back()->pageBreak()) {
-                        ++rows;
-                        break;
-                        }
                   }
             ++rows;
+            if (sl.back()->pageBreak())
+                  break;
             }
 
       //-----------------------------------------------------------------------
@@ -1529,7 +1546,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         mb->setHeight(system->height());
                   }
             xx += w;
-            double hh = system->height() + point(system->staves()->back()->distance());
+            double hh = system->height() + point(system->staves()->back()->distanceDown());
             if (hh > *h)
                   *h = hh;
             }

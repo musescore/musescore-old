@@ -1772,7 +1772,7 @@ int main(int argc, char* av[])
 
 #ifdef OMR
       // omr display needs hardware acceleration for pixmap scaling:
-//      QApplication::setGraphicsSystem(QString("opengl"));
+      QApplication::setGraphicsSystem(QString("opengl"));
 #endif
 
 #ifdef Q_WS_MAC
@@ -1894,7 +1894,7 @@ int main(int argc, char* av[])
       dir.mkpath(dataPath + "/plugins");
 
       setDefaultStyle();
-      
+
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
 

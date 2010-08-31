@@ -124,8 +124,6 @@ void MeasureBase::add(Element* el)
       _el.append(el);
       if (el->type() == IMAGE)
             static_cast<Image*>(el)->reference();
-//      if ((el->type() == TEXT) && (type() == VBOX || type() == HBOX))
-//            static_cast<Text*>(el)->setLayoutToParentWidth(true);
       }
 
 //---------------------------------------------------------

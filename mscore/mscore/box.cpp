@@ -54,8 +54,11 @@ Box::Box(Score* score)
 
 void Box::layout()
       {
-      foreach (Element* el, _el)
+      foreach (Element* el, _el) {
+            if ((el->type() == TEXT))
+                  static_cast<Text*>(el)->setLayoutToParentWidth(true);
             el->layout();
+            }
       }
 
 //---------------------------------------------------------
@@ -308,7 +311,6 @@ void HBox::layout()
       else {
             setbbox(QRectF(0.0, 0.0, point(boxWidth()), system()->height()));
             }
-//      Box::layout();
       }
 
 //---------------------------------------------------------
@@ -325,7 +327,7 @@ void HBox::layout2()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool HBox::acceptDrop(ScoreView*, const QPointF&, int type, int) const
+bool Box::acceptDrop(ScoreView*, const QPointF&, int type, int) const
       {
       if (type == LAYOUT_BREAK)
             return true;
@@ -336,7 +338,7 @@ bool HBox::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* HBox::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* Box::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       switch(e->type()) {
             case LAYOUT_BREAK:
@@ -436,7 +438,11 @@ bool VBox::genPropertyMenu(QMenu* popup) const
       {
       QMenu* textMenu = popup->addMenu(tr("Add"));
 
-      QAction* a = getAction("title-text");
+      QAction* a = getAction("frame-text");
+      a->blockSignals(true);
+      textMenu->addAction(a);
+
+      a = getAction("title-text");
       a->blockSignals(true);
       textMenu->addAction(a);
 
@@ -476,7 +482,12 @@ void VBox::propertyAction(ScoreView* viewer, const QString& cmd)
             return;
             }
       Element* s = 0;
-      if (cmd == "title-text") {
+      if (cmd == "frame-text") {
+            Text* t = new Text(score());
+            s->setSubtype(TEXT_FRAME);
+            s = t;
+            }
+      else if (cmd == "title-text") {
             Text* t = new Text(score());
             t->setSubtype(TEXT_TITLE);
             t->setTextStyle(TEXT_STYLE_TITLE);

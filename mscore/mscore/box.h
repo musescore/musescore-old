@@ -58,6 +58,8 @@ class Box : public MeasureBase {
       virtual void write(Xml&) const;
       virtual void write(Xml& xml, int, bool) const { write(xml); }
       virtual void read(QDomElement);
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
 
       Spatium boxWidth() const         { return _boxWidth;     }
       void setBoxWidth(Spatium val)    { _boxWidth = val;      }
@@ -87,8 +89,6 @@ class HBox : public Box {
       virtual ElementType type() const { return HBOX;       }
 
       virtual void layout();
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);

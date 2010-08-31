@@ -798,7 +798,6 @@ ScoreView::ScoreView(QWidget* parent)
       stateActive->setInitialState(states[NORMAL]);
       sm->setInitialState(stateActive);
 
-
       sm->start();
       //-----------------------------------------------------------------------
 
@@ -937,7 +936,8 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       Segment* seg;
       QPointF offset;
 
-      _score->pos2measure(startMove, &staffIdx, &pitch, &seg, &offset);
+      if (!_score->pos2measure(startMove, &staffIdx, &pitch, &seg, &offset))
+            return;
       if (staffIdx == -1) {
             printf("ScoreView::measurePopup: staffIdx == -1!\n");
             return;
@@ -1186,6 +1186,7 @@ void ScoreView::startEdit()
             }
       else {
             editObject = origEditObject->clone();
+printf("startEdit %p -> %p\n", origEditObject, editObject);
             editObject->setSelected(true);
             _score->undoChangeElement(origEditObject, editObject);
             editObject->startEdit(this, startMove);
@@ -2746,6 +2747,7 @@ void ScoreView::startEdit(Element* e)
 
 void ScoreView::endEdit()
       {
+printf("endEdit %p\n", editObject);
       setDropTarget(0);
       setEditText(0);
       if (!editObject)
@@ -2997,6 +2999,11 @@ void ScoreView::doDragElement(QMouseEvent* ev)
 void ScoreView::select(QMouseEvent* ev)
       {
       Qt::KeyboardModifiers keyState = ev->modifiers();
+      if (keyState == (Qt::ShiftModifier | Qt::ControlModifier)) {
+            cloneElement(curElement);
+            return;
+            }
+
       ElementType type = curElement->type();
       int dragStaff = 0;
       if (type == MEASURE) {
@@ -3035,6 +3042,7 @@ void ScoreView::select(QMouseEvent* ev)
       else
             curElement = 0;
       _score->setLayoutAll(false);
+      _score->setUpdateAll(true);   //DEBUG
       _score->end();    // update
       }
 
@@ -3813,5 +3821,21 @@ void ScoreView::cmdChangeEnharmonic(bool up)
                   // TODO
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   cloneElement
+//---------------------------------------------------------
+
+void ScoreView::cloneElement(Element* e)
+      {
+      if (!e->isMovable())
+            return;
+      printf("clone element %s\n", e->name());
+      QDrag* drag = new QDrag(this);
+      QMimeData* mimeData = new QMimeData;
+      mimeData->setData(mimeSymbolFormat, e->mimeData(QPointF()));
+      drag->setMimeData(mimeData);
+      drag->start(Qt::CopyAction);
       }
 

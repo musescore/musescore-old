@@ -23,6 +23,9 @@
 
 #include "element.h"
 
+// spacer subtypes
+enum { SPACER_UP, SPACER_DOWN };
+
 //---------------------------------------------------------
 //   Spacer
 //---------------------------------------------------------
@@ -48,7 +51,6 @@ class Spacer : public Element {
       virtual bool isEditable() const { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
-      virtual QRectF bbox() const;
       };
 
 #endif

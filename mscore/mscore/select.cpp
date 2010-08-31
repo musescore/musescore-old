@@ -257,6 +257,8 @@ void Selection::updateSelectedElements()
 
       for (int st = startTrack; st < endTrack; ++st) {
             for (Segment* s = _startSegment; s && (s != _endSegment); s = s->next1()) {
+                  if (s->subtype() == SegEndBarLine)  // do not select end bar line
+                        continue;
                   Element* e = s->element(st);
                   if (!e)
                         continue;

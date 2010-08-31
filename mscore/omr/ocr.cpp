@@ -37,7 +37,7 @@ Ocr::Ocr()
 
 void Ocr::init()
       {
-      setlocale(LC_NUMERIC, "C");
+//      setlocale(LC_NUMERIC, "C");
       // TessBaseAPI::SimpleInit("/usr/share/tesseract-ocr/tessdata", "eng", false);
       TessBaseAPI::SimpleInit("/usr/share/tesseract-ocr/tessdata", 0, false);
       }

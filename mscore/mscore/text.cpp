@@ -295,6 +295,11 @@ void TextBase::layout(double w)
       const double mag = DPI / PDPI;
       w /= mag;
 
+      QTextOption to = _doc->defaultTextOption();
+      to.setUseDesignMetrics(true);
+      to.setWrapMode(w <= 0.0 ? QTextOption::NoWrap : QTextOption::WrapAtWordBoundaryOrAnywhere);
+      _doc->setDefaultTextOption(to);
+
       if (w <= 0.0)
             w = _doc->idealWidth();
 

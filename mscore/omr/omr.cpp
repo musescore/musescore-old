@@ -161,5 +161,3 @@ double Omr::systemDistance() const
       }
 
 
-
-
