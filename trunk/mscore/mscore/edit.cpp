@@ -1074,13 +1074,8 @@ void Score::deleteItem(Element* el)
                         undo()->push(new ChangeInstrumentShort(el->staff()->part(), ""));
                         break;
                         }
-//                  else if (el->subtype() == TEXT_COPYRIGHT) {
-//                        undoChangeCopyright(QString(""));
-//                        break;
-//                        }
-                  else if (el->subtype() == TEXT_MEASURE_NUMBER) {
-                        break;
-                        }
+                  undoRemoveElement(el->parent());
+                  break;
 
             case TIMESIG:
                   cmdRemoveTimeSig(static_cast<TimeSig*>(el));

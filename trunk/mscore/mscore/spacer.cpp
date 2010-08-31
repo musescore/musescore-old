@@ -68,16 +68,33 @@ void Spacer::layout()
       {
       double _spatium = spatium();
 
-      path = QPainterPath();
-      double a = _spatium;
-      double b = _spatium * .5;
+      path     = QPainterPath();
+      double w = _spatium;
+      double b = w * .5;
       double h = _space.val() * _spatium;
 
-      path.lineTo(a, 0.0);
-      path.moveTo(b, 0.0);
-      path.lineTo(b, h);
-      path.moveTo(0.0, h);
-      path.lineTo(a, h);
+      if (subtype() == SPACER_DOWN) {
+            path.lineTo(w, 0.0);
+            path.moveTo(b, 0.0);
+            path.lineTo(b, h);
+            path.lineTo(0.0, h-b);
+            path.moveTo(b, h);
+            path.lineTo(w, h-b);
+            }
+      else if (subtype() == SPACER_UP) {
+            path.moveTo(b, 0.0);
+            path.lineTo(0.0, b);
+            path.moveTo(b, 0.0);
+            path.lineTo(w, b);
+            path.moveTo(b, 0.0);
+            path.lineTo(b, h);
+            path.moveTo(0.0, h);
+            path.lineTo(w, h);
+            }
+      double lw = spatium() * 0.4;
+      QRectF bb(0, 0, w, h);
+      bb.adjust(-lw, -lw, lw, lw);
+      setbbox(bb);
       }
 
 //---------------------------------------------------------
@@ -104,9 +121,14 @@ Element* Spacer::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
 
 void Spacer::editDrag(int, const QPointF& delta)
       {
-      _space += Spatium(delta.y() / spatium());
+      Spatium s(delta.y() / spatium());
+      if (subtype() == SPACER_DOWN)
+            _space += s;
+      else if (subtype() == SPACER_UP)
+            _space -= s;
       if (_space.val() < 2.0)
             _space = Spatium(2.0);
+      layout();
       score()->setLayoutAll(true);
       }
 
@@ -118,18 +140,12 @@ void Spacer::updateGrips(int* grips, QRectF* grip) const
       {
       *grips   = 1;
       double _spatium = spatium();
-      QPointF p(_spatium * .5, _space.val() * _spatium);
+      QPointF p;
+      if (subtype() == SPACER_DOWN)
+            p = QPointF(_spatium * .5, _space.val() * _spatium);
+      else if (subtype() == SPACER_UP)
+            p = QPointF(_spatium * .5, 0.0);
       grip[0].translate(canvasPos() + p);
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Spacer::bbox() const
-      {
-      double _spatium = spatium();
-      return QRectF(-_spatium * .2, -_spatium * .2, _spatium * 1.4, (_space.val() + .4) * _spatium);
       }
 
 //---------------------------------------------------------
@@ -159,5 +175,3 @@ void Spacer::read(QDomElement e)
                   domError(e);
             }
       }
-
-

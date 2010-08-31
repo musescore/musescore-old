@@ -52,9 +52,11 @@ class Spacer;
 */
 
 struct MStaff {
-      double distance;
+      double distanceUp;
+      double distanceDown;
       StaffLines*  lines;
-      Spacer* _vspacer;
+      Spacer* _vspacerUp;
+      Spacer* _vspacerDown;
       bool hasVoices;         ///< indicates that MStaff contains more than one voice,
                               ///< this changes some layout rules
       bool _visible;
@@ -153,8 +155,10 @@ class Measure : public MeasureBase {
       Text* noText() const                 { return _noText;      }
       void setNo(int n)                    { _no = n;             }
       void setNoOffset(int n)              { _noOffset = n;       }
-      virtual double distance(int i) const { return staves[i]->distance; }
-      virtual Spatium userDistance(int i) const;
+      virtual double distanceUp(int i) const   { return staves[i]->distanceUp; }
+      virtual double distanceDown(int i) const { return staves[i]->distanceDown; }
+      virtual Spatium userDistanceUp(int i) const;
+      virtual Spatium userDistanceDown(int i) const;
 
       int size() const                     { return _size;        }
 

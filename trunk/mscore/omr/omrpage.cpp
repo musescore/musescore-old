@@ -353,7 +353,7 @@ void OmrPage::deSkew()
                   }
             }
       memcpy(_image.bits(), db, wl * h * sizeof(uint));
-      delete[] db;
+//??crash      delete[] db;
       }
 
 struct ScanLine {

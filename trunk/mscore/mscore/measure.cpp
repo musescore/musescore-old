@@ -84,10 +84,12 @@
 
 MStaff::MStaff()
       {
-      distance     = .0;
+      distanceUp   = .0;
+      distanceDown = .0;
       lines        = 0;
       hasVoices    = false;
-      _vspacer     = 0;
+      _vspacerUp   = 0;
+      _vspacerDown = 0;
       _visible     = true;
       _slashStyle  = false;
       }
@@ -95,7 +97,8 @@ MStaff::MStaff()
 MStaff::~MStaff()
       {
       delete lines;
-      delete _vspacer;
+      delete _vspacerUp;
+      delete _vspacerDown;
       }
 
 //---------------------------------------------------------
@@ -515,11 +518,11 @@ void Measure::layout(double width)
       {
       int nstaves = _score->nstaves();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            staves[staffIdx]->distance = 0.0;
+            staves[staffIdx]->distanceUp = 0.0;
+            staves[staffIdx]->distanceDown = 0.0;
             StaffLines* sl = staves[staffIdx]->lines;
-            if (sl) {
+            if (sl)
                   sl->setMag(score()->staff(staffIdx)->mag());
-                  }
             }
 
       // height of boundingRect will be set in system->layout2()
@@ -591,10 +594,17 @@ void Measure::layout2()
                         system()->layoutLyrics(l, s, staffIdx);
                         }
                   }
-            if (staves[staffIdx]->_vspacer) {
-                  staves[staffIdx]->_vspacer->layout();
-                  double y = system()->staff(staffIdx)->y();
-                  staves[staffIdx]->_vspacer->setPos(_spatium * .5, y + 4 * _spatium);
+            double y = system()->staff(staffIdx)->y();
+            Spacer* sp = staves[staffIdx]->_vspacerDown;
+            if (sp) {
+                  sp->layout();
+                  int n = score()->staff(staffIdx)->lines() - 1;
+                  sp->setPos(_spatium * .5, y + n * _spatium);
+                  }
+            sp = staves[staffIdx]->_vspacerUp;
+            if (sp) {
+                  sp->layout();
+                  sp->setPos(_spatium * .5, y - sp->getSpace().val() * _spatium);
                   }
             }
 
@@ -940,7 +950,6 @@ void Measure::add(Element* el)
       _dirty = true;
 
       el->setParent(this);
-//TODO1      int t = el->tick();
       ElementType type = el->type();
 
 
@@ -949,7 +958,13 @@ void Measure::add(Element* el)
 
       switch (type) {
             case SPACER:
-                  staves[el->staffIdx()]->_vspacer = static_cast<Spacer*>(el);
+                  {
+                  Spacer* sp = static_cast<Spacer*>(el);
+                  if (sp->subtype() == SPACER_UP)
+                        staves[el->staffIdx()]->_vspacerUp = sp;
+                  else if (sp->subtype() == SPACER_DOWN)
+                        staves[el->staffIdx()]->_vspacerDown = sp;
+                  }
                   break;
             case SEGMENT:
                   {
@@ -1106,7 +1121,10 @@ void Measure::remove(Element* el)
 
       switch(el->type()) {
             case SPACER:
-                  staves[el->staffIdx()]->_vspacer = 0;
+                  if (el->subtype() == SPACER_DOWN)
+                        staves[el->staffIdx()]->_vspacerDown = 0;
+                  else if (el->subtype() == SPACER_UP)
+                        staves[el->staffIdx()]->_vspacerUp = 0;
                   break;
             case SEGMENT:
                   remove(static_cast<Segment*>(el));
@@ -1405,10 +1423,10 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
 
       MStaff* ms = new MStaff;
       ms->lines  = new StaffLines(score());
-      // ms->lines->setLines(staff->lines());
       ms->lines->setParent(this);
       ms->lines->setTrack(staffIdx * VOICES);
-      ms->distance = point(staffIdx == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
+      ms->distanceUp  = 0.0;
+      ms->distanceDown = point(staffIdx == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
       ms->lines->setVisible(!staff->invisible());
       insertMStaff(ms, staffIdx);
       }
@@ -1916,8 +1934,10 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
             }
 
       MStaff* mstaff = staves[staff];
-      if (mstaff->_vspacer)
-            xml.tag("vspacer", mstaff->_vspacer->getSpace().val());
+      if (mstaff->_vspacerUp)
+            xml.tag("vspacerUp", mstaff->_vspacerUp->getSpace().val());
+      if (mstaff->_vspacerDown)
+            xml.tag("vspacerDown", mstaff->_vspacerDown->getSpace().val());
       if (!mstaff->_visible)
             xml.tag("visible", mstaff->_visible);
       if (mstaff->_slashStyle)
@@ -2019,7 +2039,8 @@ void Measure::read(QDomElement e, int staffIdx)
             s->lines     = new StaffLines(score());
             s->lines->setParent(this);
             s->lines->setTrack(n * VOICES);
-            s->distance = point(n == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
+            s->distanceUp = 0.0;
+            s->distanceDown = point(n == 0 ? score()->styleS(ST_systemDistance) : score()->styleS(ST_staffDistance));
             s->lines->setVisible(!staff->invisible());
             staves.append(s);
             }
@@ -2322,13 +2343,23 @@ printf("  single note\n");
                   slur->read(e);
                   score()->slurs.append(slur);
                   }
-            else if (tag == "vspacer") {
-                  if (staves[staffIdx]->_vspacer == 0) {
+            else if (tag == "vspacer" || tag == "vspacerDown") {
+                  if (staves[staffIdx]->_vspacerDown == 0) {
                         Spacer* spacer = new Spacer(score());
+                        spacer->setSubtype(SPACER_DOWN);
                         spacer->setTrack(staffIdx * VOICES);
                         add(spacer);
                         }
-                  staves[staffIdx]->_vspacer->setSpace(Spatium(val.toDouble()));
+                  staves[staffIdx]->_vspacerDown->setSpace(Spatium(val.toDouble()));
+                  }
+            else if (tag == "vspacer" || tag == "vspacerUp") {
+                  if (staves[staffIdx]->_vspacerUp == 0) {
+                        Spacer* spacer = new Spacer(score());
+                        spacer->setSubtype(SPACER_UP);
+                        spacer->setTrack(staffIdx * VOICES);
+                        add(spacer);
+                        }
+                  staves[staffIdx]->_vspacerUp->setSpace(Spatium(val.toDouble()));
                   }
             else if (tag == "visible")
                   staves[staffIdx]->_visible = val.toInt();
@@ -2391,8 +2422,10 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
             MStaff* ms = staves[staffIdx];
             if (ms->lines)
                   func(data, ms->lines);
-            if (ms->_vspacer)
-                  func(data, ms->_vspacer);
+            if (ms->_vspacerUp)
+                  func(data, ms->_vspacerUp);
+            if (ms->_vspacerDown)
+                  func(data, ms->_vspacerDown);
             }
 
       int tracks = nstaves * VOICES;
@@ -2767,12 +2800,21 @@ bool Measure::isFullMeasureRest()
       }
 
 //---------------------------------------------------------
-//   userDistance
+//   userDistanceDown
 //---------------------------------------------------------
 
-Spatium Measure::userDistance(int i) const
+Spatium Measure::userDistanceDown(int i) const
       {
-      return staves[i]->_vspacer ? staves[i]->_vspacer->getSpace() : Spatium(0);
+      return staves[i]->_vspacerDown ? staves[i]->_vspacerDown->getSpace() : Spatium(0);
+      }
+
+//---------------------------------------------------------
+//   userDistanceUp
+//---------------------------------------------------------
+
+Spatium Measure::userDistanceUp(int i) const
+      {
+      return staves[i]->_vspacerUp ? staves[i]->_vspacerUp->getSpace() : Spatium(0);
       }
 
 //---------------------------------------------------------
@@ -2979,8 +3021,8 @@ void Measure::layoutX(double stretch)
                               found = true;
                               double y = lyrics->ipos().y() + lyrics->lineHeight()
                                  + point(score()->styleS(ST_lyricsMinBottomDistance));
-                              if (y > staves[staffIdx]->distance)
-                                 staves[staffIdx]->distance = y;
+                              if (y > staves[staffIdx]->distanceDown)
+                                 staves[staffIdx]->distanceDown = y;
                               }
                         space.max(Space(llw, rrw));
                         }

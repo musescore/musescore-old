@@ -3437,7 +3437,7 @@ foreach(Element* el, *(score->gel())) {
                           // Staff layout elements.
                           for (int staffIdx = (staffCount == 0) ? 1 : 0; staffIdx < staves; staffIdx++) {
                               xml.stag(QString("staff-layout number=\"%1\"").arg(staffIdx + 1));
-                              xml.tag("staff-distance", QString("%1").arg(QString::number(getTenthsFromDots(mb->score()->point(mb->system()->staff(staffCount + staffIdx - 1)->distance())),'f',2)));
+                              xml.tag("staff-distance", QString("%1").arg(QString::number(getTenthsFromDots(mb->score()->point(mb->system()->staff(staffCount + staffIdx - 1)->distanceDown())),'f',2)));
                               xml.etag();
                               }
 

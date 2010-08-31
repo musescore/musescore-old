@@ -309,33 +309,38 @@ void System::layout2()
       double _spatium = spatium();
 
       qreal y = 0.0;
-      int lastStaffIdx = 0;   // last visible staff
+      int lastStaffIdx  = 0;   // last visible staff
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Staff* staff = score()->staff(staffIdx);
-            if ((staffIdx + 1) == nstaves) {
-                  setDistance(staffIdx, score()->styleS(ST_systemDistance));
-                  }
-            else if (staff->rstaff() < (staff->part()->staves()->size()-1)) {
-                  setDistance(staffIdx, score()->styleS(ST_akkoladeDistance));
-                  }
-            else {
-                  setDistance(staffIdx, score()->styleS(ST_staffDistance));
-                  }
-            double dist = 0.0;
+            SysStaff* s  = _staves[staffIdx];
+            if ((staffIdx + 1) == nstaves)
+                  s->setDistanceDown(score()->styleS(ST_systemDistance));
+            else if (staff->rstaff() < (staff->part()->staves()->size()-1))
+                  s->setDistanceDown(score()->styleS(ST_akkoladeDistance));
+            else
+                  s->setDistanceDown(score()->styleS(ST_staffDistance));
+
+            double distDown = 0.0;
+            double distUp   = 0.0;
             foreach(MeasureBase* m, ml) {
-                  dist = std::max(dist, m->distance(staffIdx));
-                  dist = std::max(dist, point(m->userDistance(staffIdx)));
+                  distDown = std::max(distDown, m->distanceDown(staffIdx));
+                  distDown = std::max(distDown, point(m->userDistanceDown(staffIdx)));
+                  distUp   = std::max(distUp, m->distanceUp(staffIdx));
+                  distUp   = std::max(distUp, point(m->userDistanceUp(staffIdx)));
                   }
-            if (dist > (distance(staffIdx).val() * _spatium))
-                  setDistance(staffIdx, Spatium(dist/_spatium));
-            SysStaff* s = _staves[staffIdx];
+            Spatium sdistDown(distDown / _spatium);
+            if (sdistDown > s->distanceDown())
+                  s->setDistanceDown(sdistDown);
+            Spatium sdistUp(distUp / _spatium);
+            s->setDistanceUp(sdistUp);
+
             if (!s->show()) {
                   s->setbbox(QRectF());  // already done in layout() ?
                   continue;
                   }
             double sHeight = staff->height();   // (staff->lines() - 1) * _spatium * staffMag;
             s->setbbox(QRectF(_leftMargin, y, width() - _leftMargin, sHeight));
-            y += sHeight + (s->distance().val() * _spatium);
+            y += sHeight + (s->distanceDown().val() * _spatium);
             lastStaffIdx = staffIdx;
             }
       qreal systemHeight = staff(lastStaffIdx)->bbox().bottom();

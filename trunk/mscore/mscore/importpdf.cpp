@@ -46,7 +46,7 @@ bool Score::importPdf(const QString& path)
       setStyle(ST_akkoladeDistance,
          StyleVal(ST_akkoladeDistance, Spatium(_omr->staffDistance())));
 
-      Part* part = new Part(this);
+      Part* part   = new Part(this);
       Staff* staff = new Staff(this, part, 0);
       part->staves()->push_back(staff);
       staves().insert(0, staff);
@@ -61,6 +61,7 @@ bool Score::importPdf(const QString& path)
       for (int i = 0; i < numMeasures; ++i) {
             int tick = i * AL::division * 4;
             Measure* measure = new Measure(this);
+            measure->setTick(tick);
 		Rest* rest = new Rest(this, d);
             rest->setDuration(Fraction(4,4));
             rest->setTrack(0);

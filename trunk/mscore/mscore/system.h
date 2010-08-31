@@ -49,7 +49,8 @@ class MeasureBase;
 
 class SysStaff {
       QRectF _bbox;           ///< Bbox of StaffLines.
-      Spatium _distance;      ///< distance to next staff
+      Spatium _distanceUp;    ///< distance to previous staff
+      Spatium _distanceDown;  ///< distance to next staff
       bool _show;             ///< derived from Staff or false if empty
                               ///< staff is hidden
    public:
@@ -64,11 +65,13 @@ class SysStaff {
       void setbbox(const QRectF& r)  { _bbox = r; }
       void move(double x, double y);
 
-      Spatium distance() const       { return _distance; }
-      void setDistance(Spatium v)    { _distance = v; }
+      Spatium distanceUp() const      { return _distanceUp;   }
+      void setDistanceUp(Spatium v)   { _distanceUp = v;      }
+      Spatium distanceDown() const    { return _distanceDown; }
+      void setDistanceDown(Spatium v) { _distanceDown = v;    }
 
-      bool show() const              { return _show; }
-      void setShow(bool v)           { _show = v; }
+      bool show() const               { return _show; }
+      void setShow(bool v)            { _show = v; }
 
       SysStaff();
       ~SysStaff();
@@ -95,7 +98,8 @@ class System : public Element {
       bool _vbox;             ///< contains only one VBox in ml
 
       void setInstrumentName(int staff);
-      void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
+      void setDistanceUp(int n, Spatium v)   { _staves[n]->setDistanceUp(v); }
+      void setDistanceDown(int n, Spatium v) { _staves[n]->setDistanceDown(v); }
 
    public:
       System(Score*);
@@ -123,7 +127,8 @@ class System : public Element {
       double staffY(int idx) const;
       SysStaff* staff(int idx) const         { return _staves[idx]; }
 
-      Spatium distance(int idx) const        { return _staves[idx]->distance(); }
+      Spatium distanceUp(int idx) const      { return _staves[idx]->distanceUp(); }
+      Spatium distanceDown(int idx) const    { return _staves[idx]->distanceDown(); }
       bool pageBreak() const                 { return _pageBreak; }
       void setPageBreak(bool val)            { _pageBreak = val; }
 

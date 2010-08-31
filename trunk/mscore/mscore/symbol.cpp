@@ -36,9 +36,11 @@
 BSymbol::BSymbol(const BSymbol& s)
    : Element(s)
       {
-      _leafs = s._leafs;
-      foreach(Element* e, _leafs)
-            e->setParent(this);
+      foreach(Element* e, s._leafs) {
+            Element* ee = e->clone();
+            ee->setParent(this);
+            _leafs.append(ee);
+            }
       }
 
 //---------------------------------------------------------

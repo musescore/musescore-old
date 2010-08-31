@@ -203,6 +203,8 @@ class ScoreView : public QWidget {
       void normalCopy();
       void normalPaste();
 
+      void cloneElement(Element* e);
+
    signals:
       void viewRectChanged();
       void scaleChanged(double);

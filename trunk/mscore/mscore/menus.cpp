@@ -665,7 +665,13 @@ void MuseScore::populatePalette()
 
       Spacer* spacer = new Spacer(gscore);
       spacer->setSpace(Spatium(3));
-      sp->append(spacer, tr("Staff spacer"));
+      spacer->setSubtype(SPACER_DOWN);
+      sp->append(spacer, tr("Staff spacer down"));
+
+      spacer = new Spacer(gscore);
+      spacer->setSpace(Spatium(3));
+      spacer->setSubtype(SPACER_UP);
+      sp->append(spacer, tr("Staff spacer up"));
 
       paletteBox->addPalette(sp);
 

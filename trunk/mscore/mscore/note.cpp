@@ -891,6 +891,7 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || (type == GLISSANDO)
          || (type == SLUR)
          || (type == STAFF_TEXT)
+         || (type == TEMPO_TEXT)
          || (type == BEND && (staff()->useTablature())));
       }
 
