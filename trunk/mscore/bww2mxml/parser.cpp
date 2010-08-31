@@ -540,6 +540,27 @@ namespace Bww {
                notes.at(i).triplet,
                notes.at(i).grace);
     }
+    qDebug() << "Measure contents:";
+    int measureDuration = 0;
+    for (int i = 0; i < notes.size(); ++i)
+    {
+      int ticks = 64 / notes.at(i).type.toInt();
+      if (notes.at(i).dots) ticks = 3 * ticks / 2;
+      if (notes.at(i).grace) ticks = 0; // grace notes don't count
+      measureDuration += ticks;
+      qDebug()
+          << notes.at(i).pitch
+          << notes.at(i).beam
+          << notes.at(i).type
+          << notes.at(i).dots
+          << notes.at(i).tieStart
+          << notes.at(i).tieStop
+          << notes.at(i).triplet
+          << notes.at(i).grace
+          << "->" << ticks
+          ;
+    }
+    qDebug() << "measureDuration:" << measureDuration;
   }
 
   /**
