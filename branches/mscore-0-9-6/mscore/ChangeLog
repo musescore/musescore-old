@@ -1,3 +1,5 @@
+30.aug (db)
+      - Fix #6937: Measure Properties should be modal dialog
 29.aug (la)
       - fix #6775: Seg. fault by double clicking any element twice
       - fix #6888: When exchanging voice, voice 1 is removed
