@@ -344,9 +344,9 @@ static int addRemoveTimeSigDialog()
       {
       int n = QMessageBox::question(0,
          QT_TRANSLATE_NOOP("addRemoveTimeSig", "MuseScore"),
-         QT_TRANSLATE_NOOP("addRemoveTimeSig", "rewrite measures\nuntil next time signature?"),
-         QMessageBox::Yes | QMessageBox::No | QMessageBox::Abort, QMessageBox::Yes);
-      if (n == QMessageBox::Abort)
+         QT_TRANSLATE_NOOP("addRemoveTimeSig", "Rewrite measures\nuntil next time signature?"),
+         QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
+      if (n == QMessageBox::Cancel)
             return -1;
       if (n == QMessageBox::Yes)
             return 1;

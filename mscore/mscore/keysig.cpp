@@ -257,12 +257,12 @@ bool KeySig::genPropertyMenu(QMenu* popup) const
 	Element::genPropertyMenu(popup);
 	if (!generated()) {
             QAction* a = popup->addAction(_showCourtesySig
-               ? QT_TRANSLATE_NOOP("KeySig", "Hide courtesy sig.")
-               : QT_TRANSLATE_NOOP("KeySig", "Show courtesy sig.") );
+               ? QT_TRANSLATE_NOOP("KeySig", "Hide Courtesy Key Signature")
+               : QT_TRANSLATE_NOOP("KeySig", "Show Courtesy Key Signature") );
             a->setData("courtesy");
 		a = popup->addAction(_showNaturals
-               ? QT_TRANSLATE_NOOP("KeySig", "Hide naturals")
-               : QT_TRANSLATE_NOOP("KeySig", "Show naturals") );
+               ? QT_TRANSLATE_NOOP("KeySig", "Hide Naturals")
+               : QT_TRANSLATE_NOOP("KeySig", "Show Naturals") );
 		a->setData("naturals");
 	      }
 	return true;
