@@ -1,3 +1,5 @@
+30.aug (db)
+      - Fix #6937: Measure Properties should be modal dialog
 29.aug (ws)
       - implemented subbeam control (1/32 & 1/64)
       - feathered beams

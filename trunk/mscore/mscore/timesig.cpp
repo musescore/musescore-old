@@ -149,8 +149,8 @@ bool TimeSig::genPropertyMenu(QMenu* popup) const
       // add the specific menu item
       if (!generated() && !_track) {
             QAction* a = popup->addAction(_showCourtesySig
-               ? QT_TRANSLATE_NOOP("TimeSig", "Hide courtesy sig.")
-               : QT_TRANSLATE_NOOP("TimeSig", "Show courtesy sig.") );
+               ? QT_TRANSLATE_NOOP("TimeSig", "Hide Courtesy Time Signature")
+               : QT_TRANSLATE_NOOP("TimeSig", "Show Courtesy Time Signature") );
             a->setData("courtesy");
             }
       return true;
