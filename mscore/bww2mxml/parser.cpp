@@ -194,10 +194,12 @@ namespace Bww {
 
   /**
    Transition to the "in measure" state.
+   TODO: remove
    */
 
   void Parser::beginMeasure(const Bww::MeasureBeginFlags mbf)
   {
+    /*
     qDebug() << "Parser::beginMeasure("
         << "repeatBegin:" << mbf.repeatBegin
         << "endingFirst:" << mbf.endingFirst
@@ -210,14 +212,17 @@ namespace Bww {
       ++measureNr;
       wrt.beginMeasure(mbf);
     }
+    */
   }
 
   /**
    Transition out of the "in measure" state.
+   TODO: remove
    */
 
   void Parser::endMeasure(const Bww::MeasureEndFlags mef)
   {
+    /*
     qDebug() << "Parser::endMeasure("
         << "repeatEnd:" << mef.repeatEnd
         << "endingEnd:" << mef.endingEnd
@@ -228,6 +233,7 @@ namespace Bww {
       inMeasure = false;
       wrt.endMeasure(mef);
     }
+    */
   }
 
   /**
@@ -275,6 +281,63 @@ namespace Bww {
         ; // others not implemented yet: silently ignored
         lex.getSym();
       }
+    }
+
+    qDebug() << "Parser::parse() finished, #measures" << measures.size()
+        ;
+    for (int j = 0; j < measures.size(); ++j)
+    {
+      qDebug() << "measure #" << j + 1;
+      qDebug() << "Measure contents:";
+      qDebug() << "mbf:"
+          << "repeatBegin" << measures.at(j).mbf.repeatBegin
+          << "endingFirst" << measures.at(j).mbf.endingFirst
+          << "endingSecond" << measures.at(j).mbf.endingSecond
+          << "firstOfSystem" << measures.at(j).mbf.firstOfSystem
+          ;
+      int measureDuration = 0;
+      for (int i = 0; i < measures.at(j).notes.size(); ++i)
+      {
+        int ticks = 64 / measures.at(j).notes.at(i).type.toInt();
+        if (measures.at(j).notes.at(i).dots) ticks = 3 * ticks / 2;
+        if (measures.at(j).notes.at(i).grace) ticks = 0; // grace notes don't count
+        measureDuration += ticks;
+        qDebug()
+            << measures.at(j).notes.at(i).pitch
+            << measures.at(j).notes.at(i).beam
+            << measures.at(j).notes.at(i).type
+            << measures.at(j).notes.at(i).dots
+            << measures.at(j).notes.at(i).tieStart
+            << measures.at(j).notes.at(i).tieStop
+            << measures.at(j).notes.at(i).triplet
+            << measures.at(j).notes.at(i).grace
+            << "->" << ticks
+            ;
+      }
+      qDebug() << "measureDuration:" << measureDuration;
+      qDebug() << "mef:"
+          << "repeatEnd" << measures.at(j).mef.repeatEnd
+          << "endingEnd" << measures.at(j).mef.endingEnd
+          << "lastOfSystem" << measures.at(j).mef.lastOfSystem
+          ;
+    }
+
+    for (int j = 0; j < measures.size(); ++j)
+    {
+      wrt.beginMeasure(measures.at(j).mbf);
+      for (int i = 0; i < measures.at(j).notes.size(); ++i)
+      {
+        wrt.note(measures.at(j).notes.at(i).pitch,
+                 measures.at(j).notes.at(i).beam,
+                 measures.at(j).notes.at(i).type,
+                 measures.at(j).notes.at(i).dots,
+                 measures.at(j).notes.at(i).tieStart,
+                 measures.at(j).notes.at(i).tieStop,
+                 measures.at(j).notes.at(i).triplet,
+                 measures.at(j).notes.at(i).grace
+                 );
+      }
+      wrt.endMeasure(measures.at(j).mef);
     }
 
     // trailer
@@ -385,9 +448,15 @@ namespace Bww {
     }
     qDebug() << " tie start" << tieStart << " tie stop" << tieStop;
     qDebug() << " triplet start" << tripletStart << " triplet stop" << tripletStop;
-    // wrt.note(caps[1], caps[2], caps[3], dots, tieStart, tieStop, triplet);
     NoteDescription noteDesc(caps[1], caps[2], caps[3], dots, tieStart, tieStop, triplet);
-    notes.append(noteDesc);
+    if (measures.isEmpty())
+    {
+      errorHandler("cannot append note: no measure");
+    }
+    else
+    {
+      measures.last().notes.append(noteDesc);
+    }
     tieStart = false;
     tripletStart = false;
     if (tripletStop)
@@ -413,9 +482,15 @@ namespace Bww {
       QStringList graces = graceMap.value(lex.symValue()).split(" ");
       for (int i = 0; i < graces.size(); ++i)
       {
-        // wrt.note(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
         NoteDescription noteDesc(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
-        notes.append(noteDesc);
+        if (measures.isEmpty())
+        {
+          errorHandler("cannot append note: no measure");
+        }
+        else
+        {
+          measures.last().notes.append(noteDesc);
+        }
       }
     }
     lex.getSym();
@@ -462,14 +537,14 @@ namespace Bww {
   void Parser::parseSeqNonNotes()
   {
     qDebug() << "Parser::parseSeqNonNotes() value:" << qPrintable(lex.symValue());
-    MeasureBeginFlags mbf;
-    MeasureEndFlags mef;
+    MeasureBeginFlags mbfl;
+    MeasureEndFlags mefl;
     while (isNonNote(lex.symType()))
     {
       if (lex.symType() == CLEF)
       {
-        mbf.firstOfSystem = true;
-        mef.lastOfSystem = true;
+        mbfl.firstOfSystem = true;
+        mefl.lastOfSystem = true;
         lex.getSym();
       }
       else if (lex.symType() == KEY)
@@ -477,15 +552,22 @@ namespace Bww {
       else if (lex.symType() == TSIG)
         parseTSig();
       else if (lex.symType() == PART)
-        parsePart(mbf, mef);
+        parsePart(mbfl, mefl);
       else if (lex.symType() == BAR)
         parseBar();
     }
     // First end the previous measure
-    // Note: endMeasure does not do anything for the first measure
-    endMeasure(mef);
+    if (!measures.isEmpty())
+    {
+      measures.last().mef = mefl;
+    }
     // Then start a new measure, if necessary
-    if (isNote(lex.symType())) beginMeasure(mbf);
+    if (isNote(lex.symType()))
+    {
+      MeasureDescription md;
+      md.mbf = mbfl;
+      measures.append(md);
+    }
   }
 
   /**
@@ -497,7 +579,6 @@ namespace Bww {
   void Parser::parseSeqNotes()
   {
     qDebug() << "Parser::parseSeqNotes() value:" << qPrintable(lex.symValue());
-    notes.clear();
     while (isGrace(lex.symType()) || lex.symType() == NOTE || lex.symType() == TIE || lex.symType() == TRIPLET)
     {
       if (isGrace(lex.symType())) parseGraces();
@@ -529,38 +610,6 @@ namespace Bww {
         lex.getSym();
       }
     }
-    for (int i = 0; i < notes.size(); ++i)
-    {
-      wrt.note(notes.at(i).pitch,
-               notes.at(i).beam,
-               notes.at(i).type,
-               notes.at(i).dots,
-               notes.at(i).tieStart,
-               notes.at(i).tieStop,
-               notes.at(i).triplet,
-               notes.at(i).grace);
-    }
-    qDebug() << "Measure contents:";
-    int measureDuration = 0;
-    for (int i = 0; i < notes.size(); ++i)
-    {
-      int ticks = 64 / notes.at(i).type.toInt();
-      if (notes.at(i).dots) ticks = 3 * ticks / 2;
-      if (notes.at(i).grace) ticks = 0; // grace notes don't count
-      measureDuration += ticks;
-      qDebug()
-          << notes.at(i).pitch
-          << notes.at(i).beam
-          << notes.at(i).type
-          << notes.at(i).dots
-          << notes.at(i).tieStart
-          << notes.at(i).tieStop
-          << notes.at(i).triplet
-          << notes.at(i).grace
-          << "->" << ticks
-          ;
-    }
-    qDebug() << "measureDuration:" << measureDuration;
   }
 
   /**
