@@ -60,6 +60,13 @@ namespace Bww {
     {}
   };
 
+  struct MeasureDescription
+  {
+    MeasureBeginFlags mbf;
+    QList<NoteDescription> notes;
+    MeasureEndFlags mef;
+  };
+
   /**
    The bww parser.
    */
@@ -98,7 +105,7 @@ namespace Bww {
     bool inTie;                         ///< In a tie
     bool tripletStart;                  ///< Triplet start pending
     bool inTriplet;                     ///< In a triplet
-    QList<NoteDescription> notes;       ///< Notes in the current measure
+    QList<MeasureDescription> measures; ///< Parsed measures
   };
 
 } // namespace Bww
