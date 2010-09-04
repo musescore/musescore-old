@@ -1457,6 +1457,7 @@ bool MuseScore::processMidiRemote(MidiRemoteType type, int data)
                         case RMIDI_DOT:     a = getAction("dot");  break;
                         case RMIDI_DOTDOT:  a = getAction("dotdot");  break;
                         case RMIDI_TIE:     a = getAction("tie");  break;
+                        case RMIDI_NOTE_EDIT_MODE: a = getAction("note-input");  break;
                         }
                   if (a)
                         a->trigger();
@@ -1493,7 +1494,6 @@ void MuseScore::midiNoteReceived(int pitch, bool chord)
 
 void MuseScore::midiCtrlReceived(int controller, int value)
       {
-printf("midiCtrlReceived %d %d\n", controller, value);
       if (_midiRecordId != -1) {
             preferences.midiRemote[_midiRecordId].type = MIDI_REMOTE_TYPE_CTRL;
             preferences.midiRemote[_midiRecordId].data = controller;

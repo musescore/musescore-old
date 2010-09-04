@@ -583,6 +583,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       recordButtons->addButton(rcr10,        RMIDI_DOT);
       recordButtons->addButton(rcr11,        RMIDI_DOTDOT);
       recordButtons->addButton(rcr12,        RMIDI_TIE);
+      recordButtons->addButton(recordEditMode, RMIDI_NOTE_EDIT_MODE);
 
       connect(recordButtons, SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
       updateRemote();
@@ -621,6 +622,8 @@ void PreferenceDialog::updateRemote()
       rca10->setChecked(preferences.midiRemote[RMIDI_DOTDOT].type      != -1);
       rca11->setChecked(preferences.midiRemote[RMIDI_REST].type        != -1);
       rca12->setChecked(preferences.midiRemote[RMIDI_TIE].type        != -1);
+      editModeActive->setChecked(preferences.midiRemote[RMIDI_NOTE_EDIT_MODE].type != -1);
+
 
       int id = mscore->midiRecordId();
       recordRewind->setChecked(id == RMIDI_REWIND);
@@ -638,6 +641,7 @@ void PreferenceDialog::updateRemote()
       rcr10->setChecked(id      == RMIDI_DOT);
       rcr11->setChecked(id      == RMIDI_DOTDOT);
       rcr12->setChecked(id      == RMIDI_TIE);
+      recordEditMode->setChecked(id == RMIDI_NOTE_EDIT_MODE);
       }
 
 //---------------------------------------------------------
@@ -652,13 +656,6 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       fgColorLabel->setColor(p->fgColor);
       bgColorLabel->setColor(p->bgColor);
-
-      selectColorLabel1->setColor(p->selectColor[0]);
-      selectColorLabel2->setColor(p->selectColor[1]);
-      selectColorLabel3->setColor(p->selectColor[2]);
-      selectColorLabel4->setColor(p->selectColor[3]);
-      selectColorDefault->setColor(p->defaultColor);
-      selectColorDrop->setColor(p->dropColor);
 
       bgColorButton->setChecked(p->bgUseColor);
       bgWallpaperButton->setChecked(!p->bgUseColor);
@@ -729,7 +726,6 @@ void PreferenceDialog::updateValues(Preferences* p)
       showSplashScreen->setChecked(p->showSplashScreen);
       expandRepeats->setChecked(p->midiExpandRepeats);
       instrumentList->setText(p->instrumentList);
-      alternateInput->setChecked(p->alternateNoteEntryMethod);
 
       midiPorts->setValue(p->midiPorts);
       rememberLastMidiConnections->setChecked(p->rememberLastMidiConnections);
@@ -743,10 +739,6 @@ void PreferenceDialog::updateValues(Preferences* p)
                   break;
                   }
             }
-      iconHeight->setValue(p->iconHeight);
-      iconWidth->setValue(p->iconWidth);
-      noteEntryIconHeight->setValue(p->noteEntryIconHeight);
-      noteEntryIconWidth->setValue(p->noteEntryIconWidth);
       {
       QFont ff;
       ff.fromString(p->applicationFont);
@@ -764,20 +756,6 @@ void PreferenceDialog::updateValues(Preferences* p)
             localShortcuts[s->xml] = ns;
             }
       updateSCListView();
-
-      QStringList sl = QStyleFactory::keys();
-      styleCombo->addItem(tr("default"));
-      styleCombo->addItems(sl);
-      int idx = 1;
-      foreach(const QString& s, sl) {
-            if (s == p->style)
-                  break;
-            ++idx;
-            }
-      if (idx > sl.size())
-            idx = 0;
-      styleCombo->setCurrentIndex(idx);
-
 
       //
       // initialize portaudio
@@ -864,7 +842,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       importCharsetList->clear();
       QList<QByteArray> charsets = QTextCodec::availableCodecs();
       qSort(charsets.begin(), charsets.end());
-      idx = 0;
+      int idx = 0;
       foreach (QByteArray charset, charsets) {
             importCharsetList->addItem(charset);
             if (charset == p->importCharset)
@@ -1116,12 +1094,6 @@ void PreferenceDialog::buttonBoxClicked(QAbstractButton* button)
 void PreferenceDialog::apply()
       {
       preferences.useMidiRemote  = rcGroup->isChecked();
-      preferences.selectColor[0] = selectColorLabel1->color();
-      preferences.selectColor[1] = selectColorLabel2->color();
-      preferences.selectColor[2] = selectColorLabel3->color();
-      preferences.selectColor[3] = selectColorLabel4->color();
-      preferences.dropColor      = selectColorDrop->color();
-      preferences.defaultColor   = selectColorDefault->color();
       preferences.fgWallpaper    = fgWallpaper->text();
       preferences.bgWallpaper    = bgWallpaper->text();
       preferences.fgColor        = fgColorLabel->color();
@@ -1194,7 +1166,6 @@ void PreferenceDialog::apply()
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();
       preferences.instrumentList     = instrumentList->text();
-      preferences.alternateNoteEntryMethod = alternateInput->isChecked();
 
       preferences.midiPorts          = midiPorts->value();
       preferences.rememberLastMidiConnections = rememberLastMidiConnections->isChecked();
@@ -1219,10 +1190,6 @@ void PreferenceDialog::apply()
       bool languageChanged = l != preferences.language;
       preferences.language = l;
 
-      preferences.iconHeight          = iconHeight->value();
-      preferences.iconWidth           = iconWidth->value();
-      preferences.noteEntryIconHeight = noteEntryIconHeight->value();
-      preferences.noteEntryIconWidth  = noteEntryIconWidth->value();
       QFont fff = applicationFont->currentFont();
       fff.setPointSize(applicationFontSize->value());
       preferences.applicationFont     = fff.toString();
@@ -1263,13 +1230,7 @@ void PreferenceDialog::apply()
 
       qApp->setStyleSheet(appStyleSheet());
 
-      if (styleCombo->currentIndex() != 0) {
-            QString s = styleCombo->currentText();
-            QApplication::setStyle(s);
-            preferences.style = s;
-            }
-      else
-            preferences.style = QString();
+      preferences.style = QString();
       genIcons();
 
       emit preferencesChanged();

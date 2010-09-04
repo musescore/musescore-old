@@ -340,10 +340,6 @@ else (MINGW)
       target_link_libraries(mscore omr poppler gsl gslcblas tesseract_full tiff)
    endif (OMR)
 
-   if (OSC)
-      target_link_libraries(mscore ofqf)
-   endif (OSC)
-
    if (APPLE)
      if (USE_PORTMIDI)
        target_link_libraries(mscore portmidi)
@@ -365,6 +361,10 @@ else (MINGW)
      install( FILES   data/mscore.xpm DESTINATION share/pixmaps)
    endif (APPLE)
 endif (MINGW)
+
+if (OSC)
+    target_link_libraries(mscore ofqf)
+endif (OSC)
 
 if (NOT MINGW AND NOT APPLE)
 # command line utilities are not build for windows/apple
