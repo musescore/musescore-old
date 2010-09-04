@@ -149,6 +149,25 @@ enum ScoreState {
       STATE_PLAY = 16, STATE_SEARCH = 32
       };
 
+//---------------------------------------------------------
+//   MidiRemoteType
+//---------------------------------------------------------
+
+enum MidiRemoteType {
+      MIDI_REMOTE_TYPE_INACTIVE = -1,
+      MIDI_REMOTE_TYPE_NOTEON = 0, MIDI_REMOTE_TYPE_CTRL
+      };
+
+//---------------------------------------------------------
+//   MidiRemote
+//---------------------------------------------------------
+
+struct MidiRemote {
+      int channel;
+      MidiRemoteType type;
+      int data;         // pitch or controller number
+      };
+
 extern const char* stateName(ScoreState);
 
 static const int VOICES = 4;

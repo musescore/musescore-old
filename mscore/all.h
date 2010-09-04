@@ -121,6 +121,8 @@
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QHostAddress>
+#include <QtNetwork/QUdpSocket>
 
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptValueIterator>

@@ -2088,33 +2088,31 @@ void Score::processMidiInput()
       if (midiInputQueue.isEmpty())
             return;
 
+      bool cmdActive = false;
       while (!midiInputQueue.isEmpty()) {
-                MidiInputEvent ev = midiInputQueue.dequeue();
-                if (debugMode)
-                    printf("<-- !noteentry dequeue %i\n", ev.pitch);
-                if (midiActionMap[ev.pitch] && midiActionMap[ev.pitch]->action)
-                    midiActionMap[ev.pitch]->action->activate(QAction::Trigger);
-                else{
-                    if (!noteEntryMode()){
-                        int staffIdx = selection().staffStart();
-                        Part* p;
-                        if (staffIdx < 0 || staffIdx >= nstaves()){
-                              p = part(0);
-                              }
-                        else{
-                              p = staff(staffIdx)->part();
-                              }
-                        if(p)
-                              seq->startNote(p->instr()->channel(0), ev.pitch, 80, preferences.defaultPlayDuration, 0.0);
-                              }
-                        else{
-                              startCmd();
-                              addPitch(ev.pitch, ev.chord);
-                              mscore->currentScoreView()->moveCursor();
-                              layoutAll = true;
-                              endCmd();
-                              }
-                    }
+            MidiInputEvent ev = midiInputQueue.dequeue();
+            if (debugMode)
+                  printf("<-- !noteentry dequeue %i\n", ev.pitch);
+            if (!noteEntryMode()) {
+                  int staffIdx = selection().staffStart();
+                  Part* p;
+                  if (staffIdx < 0 || staffIdx >= nstaves())
+                        p = part(0);
+                  else
+                        p = staff(staffIdx)->part();
+                  if (p)
+                        seq->startNote(p->instr()->channel(0), ev.pitch, 80, preferences.defaultPlayDuration, 0.0);
+                  }
+            else  {
+                  startCmd();
+                  cmdActive = true;
+                  addPitch(ev.pitch, ev.chord);
+                  mscore->currentScoreView()->moveCursor();
+                  }
+            }
+      if (cmdActive) {
+            layoutAll = true;
+            endCmd();
             }
       }
 

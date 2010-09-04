@@ -64,6 +64,11 @@
 #include "navigator.h"
 #include "chord.h"
 
+#ifdef OSC
+#include "ofqf/qoscserver.h"
+static int oscPort = 5282;
+#endif
+
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_core_ScriptPlugin)
@@ -86,7 +91,6 @@ double SPATIUM;
 QString mscoreGlobalShare;
 static QStringList recentScores;
 
-Shortcut* midiActionMap[128];
 QMap<QString, Shortcut*> shortcuts;
 
 bool converterMode = false;
@@ -338,7 +342,7 @@ MuseScore::MuseScore()
       setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
 
-      ucheck = new UpdateChecker();
+      ucheck                = new UpdateChecker();
 
       setAcceptDrops(true);
       _undoGroup            = new UndoGroup();
@@ -482,7 +486,6 @@ MuseScore::MuseScore()
       a->setChecked(_speakerEnabled);
 
       getAction("play")->setCheckable(true);
-      //getAction("pause")->setCheckable(true);
       a = getAction("repeat");
       a->setCheckable(true);
       a->setChecked(true);
@@ -875,6 +878,7 @@ MuseScore::MuseScore()
       autoSaveTimer = new QTimer(this);
       autoSaveTimer->setSingleShot(true);
       connect(autoSaveTimer, SIGNAL(timeout()), this, SLOT(autoSaveTimerTimeout()));
+      initOsc();
       startAutoSave();
       }
 
@@ -1416,36 +1420,90 @@ bool MuseScore::midiinEnabled() const
       }
 
 //---------------------------------------------------------
+//   processMidiRemote
+//    return if midi remote command detected
+//---------------------------------------------------------
+
+bool MuseScore::processMidiRemote(MidiRemoteType type, int data)
+      {
+      if (!preferences.useMidiRemote)
+            return false;
+      for (int i = 0; i < MIDI_REMOTES; ++i) {
+            if (preferences.midiRemote[i].type == type && preferences.midiRemote[i].data == data) {
+                  if (cv == 0)
+                        return false;
+                  QAction* a;
+                  switch (i) {
+                        case RMIDI_REWIND:      a = getAction("rewind"); break;
+                        case RMIDI_TOGGLE_PLAY: a = getAction("play");  break;
+                        case RMIDI_PLAY:
+                              a = getAction("play");
+                              if (a->isChecked())
+                                    return true;
+                              break;
+                        case RMIDI_STOP:
+                              a = getAction("play");
+                              if (!a->isChecked())
+                                    return true;
+                              break;
+                        case RMIDI_NOTE1:   a = getAction("pad-note-1");  break;
+                        case RMIDI_NOTE2:   a = getAction("pad-note-2");  break;
+                        case RMIDI_NOTE4:   a = getAction("pad-note-4");  break;
+                        case RMIDI_NOTE8:   a = getAction("pad-note-8");  break;
+                        case RMIDI_NOTE16:  a = getAction("pad-note-16");  break;
+                        case RMIDI_NOTE32:  a = getAction("pad-note-32");  break;
+                        case RMIDI_NOTE64:  a = getAction("pad-note-64");  break;
+                        case RMIDI_REST:    a = getAction("rest");  break;
+                        case RMIDI_DOT:     a = getAction("dot");  break;
+                        case RMIDI_DOTDOT:  a = getAction("dotdot");  break;
+                        case RMIDI_TIE:     a = getAction("tie");  break;
+                        }
+                  if (a)
+                        a->trigger();
+                  return true;
+                  }
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
 //   midiNoteReceived
 //---------------------------------------------------------
 
 void MuseScore::midiNoteReceived(int pitch, bool chord)
       {
       if (_midiRecordId != -1) {
-            preferences.midiRemote[_midiRecordId].type = 0;
+            preferences.midiRemote[_midiRecordId].type = MIDI_REMOTE_TYPE_NOTEON;
             preferences.midiRemote[_midiRecordId].data = pitch;
-            printf("learned id %d pitch %d\n", _midiRecordId, pitch);
             _midiRecordId = -1;
             if (preferenceDialog)
                   preferenceDialog->updateRemote();
             return;
             }
-      if (preferences.useMidiRemote) {
-            for (int i = 0; i < MIDI_REMOTES; ++i) {
-                  if (preferences.midiRemote[i].type == 0 && preferences.midiRemote[i].data == pitch) {
-                        if (cv == 0)
-                              return;
-                        switch(i) {
-                              case 0: cv->cmd(getAction("rewind")); break;
-                              case 1: cv->cmd(getAction("play")); break;
-                              }
-                        return;
-                        }
-                  }
-            }
+      if (processMidiRemote(MIDI_REMOTE_TYPE_NOTEON, pitch))
+            return;
       QWidget* w = QApplication::activeModalWidget();
       if (cv && w == 0)
             cv->midiNoteReceived(pitch, chord);
+      }
+
+//---------------------------------------------------------
+//   midiCtrlReceived
+//---------------------------------------------------------
+
+void MuseScore::midiCtrlReceived(int controller, int value)
+      {
+printf("midiCtrlReceived %d %d\n", controller, value);
+      if (_midiRecordId != -1) {
+            preferences.midiRemote[_midiRecordId].type = MIDI_REMOTE_TYPE_CTRL;
+            preferences.midiRemote[_midiRecordId].data = controller;
+            _midiRecordId = -1;
+            if (preferenceDialog)
+                  preferenceDialog->updateRemote();
+            return;
+            }
+      if (processMidiRemote(MIDI_REMOTE_TYPE_CTRL, controller))
+            return;
       }
 
 //---------------------------------------------------------
@@ -1858,9 +1916,6 @@ int main(int argc, char* av[])
       iconPath = externalIcons ? mscoreGlobalShare + QString("/icons/") :  QString(":/data/");
 
       QSettings::setDefaultFormat(QSettings::IniFormat);
-
-      for (int i = 0; i < 128; ++i)
-            midiActionMap[i] = 0;
 
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
@@ -3220,4 +3275,63 @@ printf("excerptsChanged\n");
                   }
             }
       }
+
+//---------------------------------------------------------
+//   initOsc
+//---------------------------------------------------------
+
+#ifndef OSC
+void MuseScore::initOsc()
+      {
+
+      }
+
+#else // #ifndef OSC
+
+//---------------------------------------------------------
+//   initOsc
+//---------------------------------------------------------
+
+void MuseScore::initOsc()
+      {
+      QOscServer* osc = new QOscServer(oscPort, qApp);
+      PathObject* oo = new PathObject( "/mscore", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscIntMessage(int)));
+      oo = new PathObject( "/play", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscPlay()));
+      oo = new PathObject( "/stop", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscStop()));
+      }
+
+//---------------------------------------------------------
+//   oscIntMessage
+//---------------------------------------------------------
+
+void MuseScore::oscIntMessage(int val)
+      {
+      printf("OSC: int %d\n", val);
+      if (val < 128)
+            midiNoteReceived(val, false);
+      else
+            midiCtrlReceived(val-128, 22);
+      }
+
+void MuseScore::oscPlay()
+      {
+      printf("osc Play\n");
+      QAction* a = getAction("play");
+      if (!a->isChecked())
+            a->trigger();
+      }
+
+void MuseScore::oscStop()
+      {
+      printf("osc Stop\n");
+      QAction* a = getAction("play");
+      if (a->isChecked())
+            a->trigger();
+      }
+
+
+#endif // #ifndef OSC
 

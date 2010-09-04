@@ -340,6 +340,10 @@ else (MINGW)
       target_link_libraries(mscore omr poppler gsl gslcblas tesseract_full tiff)
    endif (OMR)
 
+   if (OSC)
+      target_link_libraries(mscore ofqf)
+   endif (OSC)
+
    if (APPLE)
      if (USE_PORTMIDI)
        target_link_libraries(mscore portmidi)

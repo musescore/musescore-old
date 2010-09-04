@@ -1102,6 +1102,7 @@ void ScoreView::midiNoteReceived(int pitch, bool chord)
       ev.pitch = pitch;
       ev.chord = chord;
 
+printf("midiNoteReceived %d chord %d\n", pitch, chord);
       score()->enqueueMidiEvent(ev);
       if (!score()->undo()->active())
             cmd(0);

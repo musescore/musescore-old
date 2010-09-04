@@ -3831,7 +3831,7 @@ void ScoreView::cloneElement(Element* e)
       {
       if (!e->isMovable())
             return;
-      printf("clone element %s\n", e->name());
+printf("clone element %s\n", e->name());
       QDrag* drag = new QDrag(this);
       QMimeData* mimeData = new QMimeData;
       mimeData->setData(mimeSymbolFormat, e->mimeData(QPointF()));

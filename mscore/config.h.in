@@ -36,4 +36,5 @@
 
 #cmakedefine AEOLUS
 #cmakedefine OMR
+#cmakedefine OSC
 

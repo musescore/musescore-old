@@ -320,6 +320,7 @@ class MuseScore : public QMainWindow {
       void removeSessionFile();
       void editChordStyle();
       void startExcerptsDialog();
+      void initOsc();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -352,6 +353,9 @@ class MuseScore : public QMainWindow {
       void endSearch();
       void closeSynthControl();
       void loadPluginDir(const QString& pluginPath);
+      void oscIntMessage(int);
+      void oscPlay();
+      void oscStop();
 
    public slots:
       void dirtyChanged(Score*);
@@ -377,6 +381,7 @@ class MuseScore : public QMainWindow {
       QMenu* genCreateMenu(QWidget* parent = 0);
       int appendScore(Score*);
       void midiNoteReceived(int pitch, bool chord);
+      void midiCtrlReceived(int controller, int value);
       void showElementContext(Element* el);
 	    void cmdAppendMeasures(int);
       bool midiinEnabled() const;
@@ -433,6 +438,7 @@ class MuseScore : public QMainWindow {
       int midiRecordId() const { return _midiRecordId; }
       void populatePalette();
       void excerptsChanged(Score*);
+      bool processMidiRemote(MidiRemoteType type, int data);
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

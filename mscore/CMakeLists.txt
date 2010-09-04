@@ -35,8 +35,9 @@ set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE FALSE)
 set(SOUNDFONT3 TRUE)                      # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS TRUE)                          # pipe organ synthesizer
-set(OMR TRUE)                             # optical music recognition
+set(OMR    FALSE)                         # optical music recognition
 set(EMBED_ICONS FALSE)                    # do not load icons from share/icons
+set(OSC TRUE)                             # osc remote control
 
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)           # warnings if not, with gcc4.4 from qt
@@ -278,6 +279,10 @@ endif (AEOLUS)
 if (OMR)
       set (subdirs ${subdirs} omr)
 endif (OMR)
+
+if (OSC)
+      set (subdirs ${subdirs} ofqf)
+endif (OSC)
 
 subdirs(${subdirs})
 
