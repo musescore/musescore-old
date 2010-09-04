@@ -29,17 +29,24 @@ enum SessionStart {
       EMPTY_SESSION, LAST_SESSION, NEW_SESSION, SCORE_SESSION
       };
 
-//---------------------------------------------------------
-//   MidiRemote
-//---------------------------------------------------------
-
-struct MidiRemote {
-      int channel;
-      int type;         // -1 : inactive, 0 : noteOn, 1 : ctrl
-      int data;         // pitch or controller number
+enum {
+      RMIDI_REWIND,
+      RMIDI_TOGGLE_PLAY,
+      RMIDI_PLAY,
+      RMIDI_STOP,
+      RMIDI_NOTE1,
+      RMIDI_NOTE2,
+      RMIDI_NOTE4,
+      RMIDI_NOTE8,
+      RMIDI_NOTE16,
+      RMIDI_NOTE32,
+      RMIDI_NOTE64,
+      RMIDI_REST,
+      RMIDI_DOT,
+      RMIDI_DOTDOT,
+      RMIDI_TIE,
+      MIDI_REMOTES
       };
-
-static const int MIDI_REMOTES = 13;
 
 //---------------------------------------------------------
 //   Preferences

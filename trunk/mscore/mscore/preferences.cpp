@@ -36,6 +36,7 @@
 #include "pa.h"
 #include "pm.h"
 #include "page.h"
+// #include "globals.h"
 
 extern void writeShortcuts();
 extern void readShortcuts();
@@ -60,10 +61,10 @@ struct PeriodItem {
 static PeriodItem updatePeriods[] = {
   PeriodItem(24,      QT_TRANSLATE_NOOP("preferences","Every day")),
   PeriodItem(72,      QT_TRANSLATE_NOOP("preferences","Every 3 days")),
-  PeriodItem(7*24,      QT_TRANSLATE_NOOP("preferences","Every week")),
-  PeriodItem(2*7*24,      QT_TRANSLATE_NOOP("preferences","Every 2 weeks")),
-  PeriodItem(30*24,      QT_TRANSLATE_NOOP("preferences","Every month")),
-  PeriodItem(2*30*24,      QT_TRANSLATE_NOOP("preferences","Every 2 months")),
+  PeriodItem(7*24,    QT_TRANSLATE_NOOP("preferences","Every week")),
+  PeriodItem(2*7*24,  QT_TRANSLATE_NOOP("preferences","Every 2 weeks")),
+  PeriodItem(30*24,   QT_TRANSLATE_NOOP("preferences","Every month")),
+  PeriodItem(2*30*24, QT_TRANSLATE_NOOP("preferences","Every 2 months")),
   PeriodItem(-1,      QT_TRANSLATE_NOOP("preferences","Never")),
 };
 
@@ -185,7 +186,7 @@ void Preferences::init()
 
       useMidiRemote      = false;
       for (int i = 0; i < MIDI_REMOTES; ++i)
-            midiRemote[i].type = -1;
+            midiRemote[i].type = MIDI_REMOTE_TYPE_INACTIVE;
 
       midiExpandRepeats        = true;
       playRepeats              = true;
@@ -336,8 +337,15 @@ void Preferences::write()
 
       s.setValue("useMidiRemote", useMidiRemote);
       for (int i = 0; i < MIDI_REMOTES; ++i) {
-            if (midiRemote[i].type != -1)
-                  s.setValue(QString("remote%1").arg(i), midiRemote[i].data);
+            if (midiRemote[i].type != MIDI_REMOTE_TYPE_INACTIVE) {
+                  QChar t;
+                  if (midiRemote[i].type == MIDI_REMOTE_TYPE_NOTEON)
+                        t = QChar('P');
+                  else
+                        t = QChar('C');
+                  s.setValue(QString("remote%1").arg(i),
+                     QString("%1%2").arg(t).arg(midiRemote[i].data));
+                  }
             }
 
       s.beginGroup("PlayPanel");
@@ -450,9 +458,9 @@ void Preferences::read()
       followSong             = s.value("followSong", true).toBool();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
-      if (checkUpdateStartup == 0){
-          checkUpdateStartup = UpdateChecker::defaultPeriod();
-      }
+      if (checkUpdateStartup == 0) {
+            checkUpdateStartup = UpdateChecker::defaultPeriod();
+            }
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -469,8 +477,18 @@ void Preferences::read()
 
       useMidiRemote  = s.value("useMidiRemote", false).toBool();
       for (int i = 0; i < MIDI_REMOTES; ++i) {
-            midiRemote[i].data = s.value(QString("remote%1").arg(i), -1).toInt();
-            midiRemote[i].type = (midiRemote[i].data == -1) ? -1 : 0;
+            QString data = s.value(QString("remote%1").arg(i)).toString();
+            if (data.isEmpty())
+                  midiRemote[i].type = MIDI_REMOTE_TYPE_INACTIVE;
+            else {
+                  midiRemote[i].data = data.mid(1).toInt();
+                  if (data[0] == QChar('P')) {
+                        midiRemote[i].type = MIDI_REMOTE_TYPE_NOTEON;
+                        }
+                  else if (data[0] == QChar('C')) {
+                        midiRemote[i].type = MIDI_REMOTE_TYPE_CTRL;
+                        }
+                  }
             }
 
       s.beginGroup("PlayPanel");
@@ -550,19 +568,21 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       recordButtons = new QButtonGroup(this);
       recordButtons->setExclusive(false);
-      recordButtons->addButton(recordRewind, 0);
-      recordButtons->addButton(recordPlay,   1);
-      recordButtons->addButton(rcr2,   2);
-      recordButtons->addButton(rcr3,   3);
-      recordButtons->addButton(rcr4,   4);
-      recordButtons->addButton(rcr5,   5);
-      recordButtons->addButton(rcr6,   6);
-      recordButtons->addButton(rcr7,   7);
-      recordButtons->addButton(rcr8,   8);
-      recordButtons->addButton(rcr9,   9);
-      recordButtons->addButton(rcr10, 10);
-      recordButtons->addButton(rcr11, 11);
-      recordButtons->addButton(rcr12, 12);
+      recordButtons->addButton(recordRewind, RMIDI_REWIND);
+      recordButtons->addButton(recordTogglePlay,   RMIDI_TOGGLE_PLAY);
+      recordButtons->addButton(recordPlay,   RMIDI_PLAY);
+      recordButtons->addButton(recordStop,   RMIDI_STOP);
+      recordButtons->addButton(rcr2,         RMIDI_NOTE1);
+      recordButtons->addButton(rcr3,         RMIDI_NOTE2);
+      recordButtons->addButton(rcr4,         RMIDI_NOTE4);
+      recordButtons->addButton(rcr5,         RMIDI_NOTE8);
+      recordButtons->addButton(rcr6,         RMIDI_NOTE16);
+      recordButtons->addButton(rcr7,         RMIDI_NOTE32);
+      recordButtons->addButton(rcr8,         RMIDI_NOTE64);
+      recordButtons->addButton(rcr9,         RMIDI_REST);
+      recordButtons->addButton(rcr10,        RMIDI_DOT);
+      recordButtons->addButton(rcr11,        RMIDI_DOTDOT);
+      recordButtons->addButton(rcr12,        RMIDI_TIE);
 
       connect(recordButtons, SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
       updateRemote();
@@ -586,34 +606,38 @@ void PreferenceDialog::recordButtonClicked(int val)
 
 void PreferenceDialog::updateRemote()
       {
-      rewindActive->setChecked(preferences.midiRemote[0].type != -1);
-      playActive->setChecked(preferences.midiRemote[1].type   != -1);
-      rca2->setChecked(preferences.midiRemote[2].type != -1);
-      rca3->setChecked(preferences.midiRemote[3].type != -1);
-      rca4->setChecked(preferences.midiRemote[4].type != -1);
-      rca5->setChecked(preferences.midiRemote[5].type != -1);
-      rca6->setChecked(preferences.midiRemote[6].type != -1);
-      rca7->setChecked(preferences.midiRemote[7].type != -1);
-      rca8->setChecked(preferences.midiRemote[8].type != -1);
-      rca9->setChecked(preferences.midiRemote[9].type != -1);
-      rca10->setChecked(preferences.midiRemote[10].type != -1);
-      rca11->setChecked(preferences.midiRemote[11].type != -1);
-      rca12->setChecked(preferences.midiRemote[12].type != -1);
+      rewindActive->setChecked(preferences.midiRemote[RMIDI_REWIND].type != -1);
+      togglePlayActive->setChecked(preferences.midiRemote[RMIDI_TOGGLE_PLAY].type   != -1);
+      playActive->setChecked(preferences.midiRemote[RMIDI_PLAY].type         != -1);
+      stopActive->setChecked(preferences.midiRemote[RMIDI_STOP].type         != -1);
+      rca2->setChecked(preferences.midiRemote[RMIDI_NOTE1].type        != -1);
+      rca3->setChecked(preferences.midiRemote[RMIDI_NOTE2].type        != -1);
+      rca4->setChecked(preferences.midiRemote[RMIDI_NOTE4].type        != -1);
+      rca5->setChecked(preferences.midiRemote[RMIDI_NOTE8].type        != -1);
+      rca6->setChecked(preferences.midiRemote[RMIDI_NOTE16].type       != -1);
+      rca7->setChecked(preferences.midiRemote[RMIDI_NOTE32].type       != -1);
+      rca8->setChecked(preferences.midiRemote[RMIDI_NOTE64].type      != -1);
+      rca9->setChecked(preferences.midiRemote[RMIDI_DOT].type         != -1);
+      rca10->setChecked(preferences.midiRemote[RMIDI_DOTDOT].type      != -1);
+      rca11->setChecked(preferences.midiRemote[RMIDI_REST].type        != -1);
+      rca12->setChecked(preferences.midiRemote[RMIDI_TIE].type        != -1);
 
       int id = mscore->midiRecordId();
-      recordRewind->setChecked(id == 0);
-      recordPlay->setChecked(id == 1);
-      rcr2->setChecked(id == 2);
-      rcr3->setChecked(id == 3);
-      rcr4->setChecked(id == 4);
-      rcr5->setChecked(id == 5);
-      rcr6->setChecked(id == 6);
-      rcr7->setChecked(id == 7);
-      rcr8->setChecked(id == 8);
-      rcr9->setChecked(id == 9);
-      rcr10->setChecked(id == 10);
-      rcr11->setChecked(id == 11);
-      rcr12->setChecked(id == 12);
+      recordRewind->setChecked(id == RMIDI_REWIND);
+      recordTogglePlay->setChecked(id == RMIDI_TOGGLE_PLAY);
+      recordPlay->setChecked(id == RMIDI_PLAY);
+      recordStop->setChecked(id == RMIDI_STOP);
+      rcr2->setChecked(id       == RMIDI_NOTE1);
+      rcr3->setChecked(id       == RMIDI_NOTE2);
+      rcr4->setChecked(id       == RMIDI_NOTE4);
+      rcr5->setChecked(id       == RMIDI_NOTE8);
+      rcr6->setChecked(id       == RMIDI_NOTE16);
+      rcr7->setChecked(id       == RMIDI_NOTE32);
+      rcr8->setChecked(id       == RMIDI_NOTE64);
+      rcr9->setChecked(id       == RMIDI_REST);
+      rcr10->setChecked(id      == RMIDI_DOT);
+      rcr11->setChecked(id      == RMIDI_DOTDOT);
+      rcr12->setChecked(id      == RMIDI_TIE);
       }
 
 //---------------------------------------------------------

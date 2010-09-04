@@ -1,3 +1,6 @@
+4.sep (ws)
+      - more code for midi remote control
+      - framework for osc support
 30.aug (db)
       - Fix #6937: Measure Properties should be modal dialog
 29.aug (ws)

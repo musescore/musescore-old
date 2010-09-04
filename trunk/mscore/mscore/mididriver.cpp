@@ -375,6 +375,10 @@ void AlsaMidiDriver::read()
                   }
             else if (ev->type == SND_SEQ_EVENT_NOTEOFF)     // "Virtual Keyboard" sends this
                   --active;
+            else if (ev->type == SND_SEQ_EVENT_CONTROLLER) {
+                  mscore->midiCtrlReceived(ev->data.control.param,
+                     ev->data.control.value);
+                  }
 
             if (midiInputTrace) {
                   printf("MidiIn: ");
