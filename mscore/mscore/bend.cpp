@@ -43,6 +43,7 @@ static const char* label[] = {
 Bend::Bend(Score* s)
    : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       }
 
 //---------------------------------------------------------

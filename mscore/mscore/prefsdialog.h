@@ -63,6 +63,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void landscapeToggled(bool);
       void styleFileButtonClicked();
       void recordButtonClicked(int);
+      void midiRemoteControlClearClicked();
 
    signals:
       void preferencesChanged();

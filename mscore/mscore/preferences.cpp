@@ -586,6 +586,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       recordButtons->addButton(recordEditMode, RMIDI_NOTE_EDIT_MODE);
 
       connect(recordButtons, SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
+      connect(midiRemoteControlClear, SIGNAL(clicked()), SLOT(midiRemoteControlClearClicked()));
       updateRemote();
       }
 
@@ -623,7 +624,6 @@ void PreferenceDialog::updateRemote()
       rca11->setChecked(preferences.midiRemote[RMIDI_REST].type        != -1);
       rca12->setChecked(preferences.midiRemote[RMIDI_TIE].type        != -1);
       editModeActive->setChecked(preferences.midiRemote[RMIDI_NOTE_EDIT_MODE].type != -1);
-
 
       int id = mscore->midiRecordId();
       recordRewind->setChecked(id == RMIDI_REWIND);
@@ -1470,6 +1470,17 @@ void PreferenceDialog::styleFileButtonClicked()
       if (fn.isEmpty())
             return;
       importStyleFile->setText(fn);
+      }
+
+//---------------------------------------------------------
+//   midiRemoteControlClearClicked
+//---------------------------------------------------------
+
+void PreferenceDialog::midiRemoteControlClearClicked()
+      {
+      for (int i = 0; i < MIDI_REMOTES; ++i)
+            preferences.midiRemote[i].type = MIDI_REMOTE_TYPE_INACTIVE;
+      updateRemote();
       }
 
 
