@@ -3301,6 +3301,10 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscPlay()));
       oo = new PathObject( "/stop", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscStop()));
+      oo = new PathObject( "/tempo", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscTempo(int)));
+      oo = new PathObject( "/volume", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscVolume(int)));
       }
 
 //---------------------------------------------------------
@@ -3332,6 +3336,35 @@ void MuseScore::oscStop()
             a->trigger();
       }
 
+//---------------------------------------------------------
+//   oscTempo
+//---------------------------------------------------------
+
+void MuseScore::oscTempo(int val)
+      {
+      if (val < 0)
+            val = 0;
+      if (val > 127)
+            val = 127;
+      val = (val * 240) / 128;
+printf("oscTempo %d\n", val);
+      if (playPanel)
+            playPanel->setRelTempo(val);
+      if (seq)
+            seq->setRelTempo(double(val));
+      }
+
+//---------------------------------------------------------
+//   oscVolume
+//---------------------------------------------------------
+
+void MuseScore::oscVolume(int val)
+      {
+printf("oscVolume %d\n", val);
+      double v = val / 128.0;
+      if (seq)
+            seq->setGain(v);
+      }
 
 #endif // #ifndef OSC
 
