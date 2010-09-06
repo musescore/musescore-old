@@ -230,6 +230,9 @@ void Preferences::init()
 
       //update
       checkUpdateStartup      = 0;
+
+      useOsc                  = false;
+      oscPort                 = 5282;
       };
 
 //---------------------------------------------------------
@@ -331,6 +334,9 @@ void Preferences::write()
       s.setValue("importCharset", importCharset);
       s.setValue("warnPitchRange", warnPitchRange);
       s.setValue("followSong", followSong);
+
+      s.setValue("useOsc", useOsc);
+      s.setValue("oscPort", oscPort);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -456,6 +462,9 @@ void Preferences::read()
       importCharset          = s.value("importCharset", "GBK").toString();
       warnPitchRange         = s.value("warnPitchRange", true).toBool();
       followSong             = s.value("followSong", true).toBool();
+
+      useOsc                 = s.value("useOsc", false).toBool();
+      oscPort                = s.value("oscPort", 5282).toInt();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {
@@ -861,6 +870,9 @@ void PreferenceDialog::updateValues(Preferences* p)
             }
       language->setCurrentIndex(curIdx);
 
+      oscServer->setChecked(p->useOsc);
+      oscPort->setValue(p->oscPort);
+
       sfChanged = false;
       }
 
@@ -1220,8 +1232,10 @@ void PreferenceDialog::apply()
             preferences.importStyleFile.clear();
 
       preferences.importCharset = importCharsetList->currentText();
-
       preferences.warnPitchRange = warnPitchRange->isChecked();
+
+      preferences.useOsc  = oscServer->isChecked();
+      preferences.oscPort = oscPort->value();
 
       if (languageChanged) {
             setMscoreLocale(preferences.language);

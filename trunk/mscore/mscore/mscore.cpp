@@ -3283,7 +3283,6 @@ printf("excerptsChanged\n");
 #ifndef OSC
 void MuseScore::initOsc()
       {
-
       }
 
 #else // #ifndef OSC
@@ -3294,7 +3293,14 @@ void MuseScore::initOsc()
 
 void MuseScore::initOsc()
       {
-      QOscServer* osc = new QOscServer(oscPort, qApp);
+      if (!preferences.useOsc)
+            return;
+      int port;
+      if (oscPort)
+            port = oscPort;
+      else
+            port = preferences.oscPort;
+      QOscServer* osc = new QOscServer(port, qApp);
       PathObject* oo = new PathObject( "/mscore", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscIntMessage(int)));
       oo = new PathObject( "/play", QVariant::Int, osc);
