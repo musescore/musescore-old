@@ -29,6 +29,7 @@ enum SessionStart {
       EMPTY_SESSION, LAST_SESSION, NEW_SESSION, SCORE_SESSION
       };
 
+// midi remote control values:
 enum {
       RMIDI_REWIND,
       RMIDI_TOGGLE_PLAY,
@@ -136,6 +137,8 @@ struct Preferences {
       QString importCharset;
       bool warnPitchRange;
       bool followSong;
+      bool useOsc;
+      int oscPort;
 
       bool dirty;
 
