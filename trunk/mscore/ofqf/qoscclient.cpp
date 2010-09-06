@@ -18,8 +18,6 @@
 
 #include "qoscclient.h"
 
-#include <lo/lo.h>
-
 QOscClient::QOscClient( const QHostAddress& address, quint16 port, QObject* p )
 	: QOscBase( p )
 	, _address( address )
