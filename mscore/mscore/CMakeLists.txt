@@ -210,6 +210,10 @@ if (APPLE)
       set_target_properties (mscore PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/packaging/MacOSXBundleInfo.plist.in)
 endif(APPLE)
 
+if (OSC)
+    target_link_libraries(mscore ofqf)
+endif (OSC)
+
 if (MINGW)
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
@@ -361,10 +365,6 @@ else (MINGW)
      install( FILES   data/mscore.xpm DESTINATION share/pixmaps)
    endif (APPLE)
 endif (MINGW)
-
-if (OSC)
-    target_link_libraries(mscore ofqf)
-endif (OSC)
 
 if (NOT MINGW AND NOT APPLE)
 # command line utilities are not build for windows/apple
