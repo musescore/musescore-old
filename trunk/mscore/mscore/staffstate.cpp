@@ -147,6 +147,8 @@ void StaffState::setSubtype(const QString& s)
             setSubtype(STAFF_STATE_TYPE);
       else if (s == "visible")
             setSubtype(STAFF_STATE_VISIBLE);
+      else if (s == "invisible")
+            setSubtype(STAFF_STATE_INVISIBLE);
       }
 
 //---------------------------------------------------------
@@ -162,6 +164,8 @@ const QString StaffState::subtypeName() const
                   return "type";
             case STAFF_STATE_VISIBLE:
                   return "visible";
+            case STAFF_STATE_INVISIBLE:
+                  return "invisible";
             default:
                   return "??";
             }

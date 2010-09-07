@@ -81,7 +81,6 @@
         <Text>
           <style>2</style>
           <subtype>Title</subtype>
-          <pos x="37.4246" y="0"/>
           <frame>0</frame>
           <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -94,7 +93,6 @@ p, li { white-space: pre-wrap; }
         <Text>
           <style>4</style>
           <subtype>Composer</subtype>
-          <pos x="105.032" y="12.0241"/>
           <frame>0</frame>
           <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -3745,9 +3743,9 @@ p, li { white-space: pre-wrap; }
           <beginTextPlace>left</beginTextPlace>
           <continueTextPlace>left</continueTextPlace>
           <Segment>
-            <off1 x="1.11901" y="-0.68849"/>
+            <off1 x="1.53501" y="-0.68849"/>
             <off2 x="0" y="0"/>
-            <pos x="192.508" y="57.2162"/>
+            <pos x="192.924" y="57.2162"/>
             </Segment>
           <beginText>
             <style>32</style>
@@ -5036,9 +5034,9 @@ p, li { white-space: pre-wrap; }
           <veloChange>10</veloChange>
           <subtype>1</subtype>
           <Segment>
-            <off1 x="3.82148" y="0.119324"/>
+            <off1 x="4.15748" y="0.119324"/>
             <off2 x="0" y="0"/>
-            <pos x="185.193" y="151.41"/>
+            <pos x="185.529" y="151.41"/>
             </Segment>
           </HairPin>
         <Slur id="30">
@@ -5216,9 +5214,9 @@ p, li { white-space: pre-wrap; }
           <veloChange>10</veloChange>
           <subtype>1</subtype>
           <Segment>
-            <off1 x="113.021" y="-0.793676"/>
+            <off1 x="115.42" y="-0.793676"/>
             <off2 x="2.03655" y="0"/>
-            <pos x="348.064" y="150.497"/>
+            <pos x="350.463" y="150.497"/>
             </Segment>
           </HairPin>
         <Slur id="31">
@@ -7045,7 +7043,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="85">
         <Rest>
-          <pos x="8.25692" y="1"/>
+          <pos x="8.16665" y="1"/>
           <durationType>measure</durationType>
           <duration z="3" n="4"/>
           </Rest>
@@ -7104,7 +7102,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="87">
         <Rest>
-          <pos x="13.4525" y="1"/>
+          <pos x="13.3622" y="1"/>
           <durationType>measure</durationType>
           <duration z="3" n="4"/>
           </Rest>
@@ -7163,7 +7161,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="89">
         <Rest>
-          <pos x="3.22237" y="1"/>
+          <pos x="3.1321" y="1"/>
           <durationType>measure</durationType>
           <duration z="3" n="4"/>
           </Rest>
@@ -7237,7 +7235,7 @@ p, li { white-space: pre-wrap; }
           <subtype>line</subtype>
           </LayoutBreak>
         <Rest>
-          <pos x="2.52176" y="1"/>
+          <pos x="2.43149" y="1"/>
           <durationType>measure</durationType>
           <duration z="3" n="4"/>
           </Rest>
@@ -7789,9 +7787,9 @@ p, li { white-space: pre-wrap; }
         <HairPin id="6">
           <veloChange>30</veloChange>
           <Segment>
-            <off1 x="4.86958" y="-1.04726"/>
+            <off1 x="6.02158" y="-1.04726"/>
             <off2 x="-3.1193" y="0"/>
-            <pos x="536.254" y="42.3621"/>
+            <pos x="537.406" y="42.3621"/>
             </Segment>
           </HairPin>
         <Chord>
@@ -11735,7 +11733,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="24.8301" y="1"/>
+          <pos x="25.1245" y="1"/>
           <durationType>measure</durationType>
           <duration z="5" n="4"/>
           </Rest>
@@ -11751,7 +11749,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="29.871" y="1"/>
+          <pos x="30.2243" y="1"/>
           <durationType>measure</durationType>
           <duration z="3" n="2"/>
           </Rest>
@@ -11770,7 +11768,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="-9.5275" y="1"/>
+          <pos x="-10.1753" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -11786,7 +11784,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="30.7043" y="1"/>
+          <pos x="31.0576" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -11802,7 +11800,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="27.9749" y="1"/>
+          <pos x="28.3282" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -11821,7 +11819,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="-11.0061" y="1"/>
+          <pos x="-11.7128" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12118,7 +12116,7 @@ p, li { white-space: pre-wrap; }
           </BarLine>
         <tick>626880</tick>
         <Rest>
-          <pos x="2.228" y="1"/>
+          <pos x="2.14706" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12127,7 +12125,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="16">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12136,7 +12134,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="17">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12145,7 +12143,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="18">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12154,7 +12152,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="19">
         <Rest>
-          <pos x="2.778" y="1"/>
+          <pos x="2.69706" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12163,7 +12161,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="20">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12172,7 +12170,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="21">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12185,7 +12183,7 @@ p, li { white-space: pre-wrap; }
           <subtype>line</subtype>
           </LayoutBreak>
         <Rest>
-          <pos x="25.206" y="1"/>
+          <pos x="25.7726" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12200,7 +12198,7 @@ p, li { white-space: pre-wrap; }
           <subtype>2</subtype>
           </BarLine>
         <Rest>
-          <pos x="2.27769" y="1"/>
+          <pos x="2.19675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12209,7 +12207,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="24">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12218,7 +12216,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="25">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12227,7 +12225,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="26">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12236,7 +12234,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="27">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12245,7 +12243,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="28">
         <Rest>
-          <pos x="2.55269" y="1"/>
+          <pos x="2.47175" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12254,7 +12252,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="29">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12267,7 +12265,7 @@ p, li { white-space: pre-wrap; }
           <subtype>line</subtype>
           </LayoutBreak>
         <Rest>
-          <pos x="25.2557" y="1"/>
+          <pos x="25.8223" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12282,7 +12280,7 @@ p, li { white-space: pre-wrap; }
           <subtype>2</subtype>
           </BarLine>
         <Rest>
-          <pos x="3.38302" y="1"/>
+          <pos x="3.28001" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12291,7 +12289,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="32">
         <Rest>
-          <pos x="3.93302" y="1"/>
+          <pos x="3.83001" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12300,7 +12298,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="33">
         <Rest>
-          <pos x="3.93302" y="1"/>
+          <pos x="3.83001" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12309,7 +12307,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="34">
         <Rest>
-          <pos x="3.65802" y="1"/>
+          <pos x="3.55501" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -12318,7 +12316,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="35">
         <Rest>
-          <pos x="2.04757" y="1"/>
+          <pos x="1.98871" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12327,7 +12325,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="36">
         <Rest>
-          <pos x="2.04757" y="1"/>
+          <pos x="1.98871" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12336,7 +12334,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="37">
         <Rest>
-          <pos x="2.04757" y="1"/>
+          <pos x="1.98871" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12349,7 +12347,7 @@ p, li { white-space: pre-wrap; }
           <subtype>line</subtype>
           </LayoutBreak>
         <Rest>
-          <pos x="23.7991" y="1"/>
+          <pos x="24.3877" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12747,7 +12745,7 @@ p, li { white-space: pre-wrap; }
           <subtype>2</subtype>
           </BarLine>
         <Rest>
-          <pos x="16.3661" y="1"/>
+          <pos x="16.0423" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12760,7 +12758,7 @@ p, li { white-space: pre-wrap; }
           <subtype>line</subtype>
           </LayoutBreak>
         <Rest>
-          <pos x="38.3955" y="1"/>
+          <pos x="38.7193" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12771,7 +12769,7 @@ p, li { white-space: pre-wrap; }
           <subtype>2</subtype>
           </BarLine>
         <Rest>
-          <pos x="16.3661" y="1"/>
+          <pos x="16.0423" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12784,7 +12782,7 @@ p, li { white-space: pre-wrap; }
           <subtype>line</subtype>
           </LayoutBreak>
         <Rest>
-          <pos x="38.3955" y="1"/>
+          <pos x="38.7193" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12967,7 +12965,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="19.8822" y="1"/>
+          <pos x="20.1472" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12983,7 +12981,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="19.8822" y="1"/>
+          <pos x="20.1472" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -12999,7 +12997,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="19.8822" y="1"/>
+          <pos x="20.1472" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -13018,7 +13016,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="-17.0432" y="1"/>
+          <pos x="-17.8382" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -13200,7 +13198,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="17">
         <Rest>
-          <pos x="21.2597" y="1"/>
+          <pos x="21.5247" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -13216,7 +13214,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="21.2597" y="1"/>
+          <pos x="21.5247" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -13225,7 +13223,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="19">
         <Rest>
-          <pos x="21.5347" y="1"/>
+          <pos x="21.7997" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -13244,7 +13242,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="-15.6657" y="1"/>
+          <pos x="-16.4607" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -16489,7 +16487,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="206">
         <Rest>
-          <pos x="28.8954" y="1"/>
+          <pos x="29.5102" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
@@ -16498,7 +16496,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="207">
         <Rest>
-          <pos x="29.1704" y="1"/>
+          <pos x="29.7852" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
@@ -16507,7 +16505,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="208">
         <Rest>
-          <pos x="29.1704" y="1"/>
+          <pos x="29.7852" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
@@ -16516,7 +16514,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="209">
         <Rest>
-          <pos x="29.1704" y="1"/>
+          <pos x="29.7852" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
@@ -16525,7 +16523,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="210">
         <Rest>
-          <pos x="29.1704" y="1"/>
+          <pos x="29.7852" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
@@ -16536,7 +16534,7 @@ p, li { white-space: pre-wrap; }
         <LayoutBreak>
           </LayoutBreak>
         <Rest>
-          <pos x="-99.2232" y="1"/>
+          <pos x="-102.297" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
@@ -19131,7 +19129,7 @@ p, li { white-space: pre-wrap; }
           <subtype>line</subtype>
           </LayoutBreak>
         <Rest>
-          <pos x="10.3269" y="1"/>
+          <pos x="10.6031" y="1"/>
           <durationType>measure</durationType>
           <duration z="4" n="4"/>
           </Rest>
@@ -20313,7 +20311,7 @@ p, li { white-space: pre-wrap; }
           <beginTextPlace>left</beginTextPlace>
           <continueTextPlace>left</continueTextPlace>
           <Segment>
-            <off1 x="-1.87219" y="-2.86123"/>
+            <off1 x="-1.8714" y="-2.86123"/>
             <off2 x="0" y="0"/>
             <subtype>1</subtype>
             <pos x="4220.9" y="39.4472"/>
@@ -21873,9 +21871,9 @@ p, li { white-space: pre-wrap; }
           <beginTextPlace>left</beginTextPlace>
           <continueTextPlace>left</continueTextPlace>
           <Segment>
-            <off1 x="0.178534" y="-0.626004"/>
+            <off1 x="-0.137398" y="-0.626004"/>
             <off2 x="-1.93099" y="0"/>
-            <pos x="4168.21" y="166.46"/>
+            <pos x="4167.89" y="166.46"/>
             </Segment>
           <beginText>
             <style>32</style>
@@ -26387,7 +26385,7 @@ p, li { white-space: pre-wrap; }
         <Chord>
           <durationType>whole</durationType>
           <Articulation>
-            <pos x="18.7347" y="-0.5"/>
+            <pos x="19.923" y="-0.5"/>
             </Articulation>
           <Note>
             <pos x="1.1883" y="4"/>
@@ -26440,7 +26438,7 @@ p, li { white-space: pre-wrap; }
         <Chord>
           <durationType>whole</durationType>
           <Articulation>
-            <pos x="18.7347" y="-1.06898"/>
+            <pos x="19.923" y="-1.06898"/>
             </Articulation>
           <Note>
             <pos x="1.1883" y="3.5"/>
@@ -26839,7 +26837,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="15.9343" y="1"/>
+          <pos x="16.1752" y="1"/>
           <durationType>measure</durationType>
           <duration z="5" n="4"/>
           </Rest>
@@ -26852,7 +26850,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="19.2021" y="1"/>
+          <pos x="19.4912" y="1"/>
           <durationType>measure</durationType>
           <duration z="3" n="2"/>
           </Rest>
@@ -32127,9 +32125,9 @@ p, li { white-space: pre-wrap; }
       <Measure number="86">
         <Trill id="28">
           <Segment>
-            <off1 x="0.120288" y="1.23239"/>
+            <off1 x="-0.0602448" y="1.23239"/>
             <off2 x="-2.82222" y="0"/>
-            <pos x="337.862" y="151.224"/>
+            <pos x="337.681" y="151.224"/>
             </Segment>
           </Trill>
         <Chord>
@@ -32277,9 +32275,9 @@ p, li { white-space: pre-wrap; }
       <Measure number="88">
         <Trill id="29">
           <Segment>
-            <off1 x="-0.221141" y="0.000390136"/>
+            <off1 x="-0.762739" y="0.000390136"/>
             <off2 x="-4.15906" y="0"/>
-            <pos x="383.308" y="149.992"/>
+            <pos x="382.766" y="149.992"/>
             </Segment>
           </Trill>
         <Chord>
@@ -32295,9 +32293,9 @@ p, li { white-space: pre-wrap; }
       <Measure number="89">
         <Trill id="30">
           <Segment>
-            <off1 x="-0.136212" y="0.000390136"/>
+            <off1 x="-0.858342" y="0.000390136"/>
             <off2 x="-3.26784" y="0"/>
-            <pos x="398.496" y="149.992"/>
+            <pos x="397.774" y="149.992"/>
             </Segment>
           </Trill>
         <endSpanner id="29"/>
@@ -32357,7 +32355,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="91">
         <Rest>
-          <pos x="2.52176" y="1"/>
+          <pos x="2.43149" y="1"/>
           <durationType>measure</durationType>
           <duration z="3" n="4"/>
           </Rest>
@@ -32438,7 +32436,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="94">
         <Rest>
-          <pos x="2.80322" y="1"/>
+          <pos x="2.64525" y="1"/>
           <durationType>measure</durationType>
           <duration z="3" n="4"/>
           </Rest>
@@ -36130,7 +36128,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="24.8301" y="1"/>
+          <pos x="25.1245" y="1"/>
           <durationType>measure</durationType>
           <duration z="5" n="4"/>
           </Rest>
@@ -36143,7 +36141,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="29.871" y="1"/>
+          <pos x="30.2243" y="1"/>
           <durationType>measure</durationType>
           <duration z="3" n="2"/>
           </Rest>
@@ -36156,7 +36154,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="-9.5275" y="1"/>
+          <pos x="-10.1753" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -36169,7 +36167,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="30.7043" y="1"/>
+          <pos x="31.0576" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -36182,7 +36180,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="27.9749" y="1"/>
+          <pos x="28.3282" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -36195,7 +36193,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="-11.0061" y="1"/>
+          <pos x="-11.7128" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
@@ -36368,168 +36366,168 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="15">
         <Rest>
-          <pos x="2.228" y="1"/>
+          <pos x="2.14706" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="16">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="17">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="18">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="19">
         <Rest>
-          <pos x="2.778" y="1"/>
+          <pos x="2.69706" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="20">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="21">
         <Rest>
-          <pos x="2.503" y="1"/>
+          <pos x="2.42206" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="22">
         <Rest>
-          <pos x="25.206" y="1"/>
+          <pos x="25.7726" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="23">
         <Rest>
-          <pos x="2.27769" y="1"/>
+          <pos x="2.19675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="24">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="25">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="26">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="27">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="28">
         <Rest>
-          <pos x="2.55269" y="1"/>
+          <pos x="2.47175" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="29">
         <Rest>
-          <pos x="2.82769" y="1"/>
+          <pos x="2.74675" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="30">
         <Rest>
-          <pos x="25.2557" y="1"/>
+          <pos x="25.8223" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="31">
         <Rest>
-          <pos x="3.38302" y="1"/>
+          <pos x="3.28001" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="32">
         <Rest>
-          <pos x="3.93302" y="1"/>
+          <pos x="3.83001" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="33">
         <Rest>
-          <pos x="3.93302" y="1"/>
+          <pos x="3.83001" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="34">
         <Rest>
-          <pos x="3.65802" y="1"/>
+          <pos x="3.55501" y="1"/>
           <durationType>measure</durationType>
           <duration z="7" n="4"/>
           </Rest>
         </Measure>
       <Measure number="35">
         <Rest>
-          <pos x="2.04757" y="1"/>
+          <pos x="1.98871" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
         </Measure>
       <Measure number="36">
         <Rest>
-          <pos x="2.04757" y="1"/>
+          <pos x="1.98871" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
         </Measure>
       <Measure number="37">
         <Rest>
-          <pos x="2.04757" y="1"/>
+          <pos x="1.98871" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
         </Measure>
       <Measure number="38">
         <Rest>
-          <pos x="23.7991" y="1"/>
+          <pos x="24.3877" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -36807,28 +36805,28 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="10">
         <Rest>
-          <pos x="16.3661" y="1"/>
+          <pos x="16.0423" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
         </Measure>
       <Measure number="11">
         <Rest>
-          <pos x="38.3955" y="1"/>
+          <pos x="38.7193" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
         </Measure>
       <Measure number="12">
         <Rest>
-          <pos x="16.3661" y="1"/>
+          <pos x="16.0423" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
         </Measure>
       <Measure number="13">
         <Rest>
-          <pos x="38.3955" y="1"/>
+          <pos x="38.7193" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -36939,7 +36937,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="19.8822" y="1"/>
+          <pos x="20.1472" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -36952,7 +36950,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="19.8822" y="1"/>
+          <pos x="20.1472" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -36965,7 +36963,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="19.8822" y="1"/>
+          <pos x="20.1472" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -36978,7 +36976,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="-17.0432" y="1"/>
+          <pos x="-17.8382" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -37117,7 +37115,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="17">
         <Rest>
-          <pos x="21.2597" y="1"/>
+          <pos x="21.5247" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -37130,14 +37128,14 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="21.2597" y="1"/>
+          <pos x="21.5247" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
         </Measure>
       <Measure number="19">
         <Rest>
-          <pos x="21.5347" y="1"/>
+          <pos x="21.7997" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -37150,7 +37148,7 @@ p, li { white-space: pre-wrap; }
           <showCourtesySig>1</showCourtesySig>
           </TimeSig>
         <Rest>
-          <pos x="-15.6657" y="1"/>
+          <pos x="-16.4607" y="1"/>
           <durationType>measure</durationType>
           <duration z="2" n="2"/>
           </Rest>
@@ -39317,42 +39315,42 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="206">
         <Rest>
-          <pos x="28.8954" y="1"/>
+          <pos x="29.5102" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
         </Measure>
       <Measure number="207">
         <Rest>
-          <pos x="29.1704" y="1"/>
+          <pos x="29.7852" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
         </Measure>
       <Measure number="208">
         <Rest>
-          <pos x="29.1704" y="1"/>
+          <pos x="29.7852" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
         </Measure>
       <Measure number="209">
         <Rest>
-          <pos x="29.1704" y="1"/>
+          <pos x="29.7852" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
         </Measure>
       <Measure number="210">
         <Rest>
-          <pos x="29.1704" y="1"/>
+          <pos x="29.7852" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
         </Measure>
       <Measure number="211">
         <Rest>
-          <pos x="-99.2232" y="1"/>
+          <pos x="-102.297" y="1"/>
           <durationType>measure</durationType>
           <duration z="6" n="4"/>
           </Rest>
@@ -41208,7 +41206,7 @@ p, li { white-space: pre-wrap; }
         </Measure>
       <Measure number="266">
         <Rest>
-          <pos x="9.47332" y="1"/>
+          <pos x="10.0675" y="1"/>
           <visible>0</visible>
           <durationType>measure</durationType>
           <duration z="4" n="4"/>
@@ -42373,7 +42371,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1714080</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42397,7 +42394,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1716000</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42421,7 +42417,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1717920</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42445,7 +42440,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1719840</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42478,7 +42472,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1721760</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42510,7 +42503,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1723680</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42543,7 +42535,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1725600</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42575,7 +42566,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1727520</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42608,7 +42598,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1729440</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42640,7 +42629,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1731360</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42673,7 +42661,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1733280</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42705,7 +42692,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1735200</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42729,7 +42715,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1737120</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42753,7 +42738,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1739040</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42777,7 +42761,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1740960</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42801,7 +42784,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1742880</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42825,7 +42807,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1744800</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42849,7 +42830,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1746720</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42873,7 +42853,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1748640</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42897,7 +42876,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1750560</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42939,7 +42917,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1756320</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42963,7 +42940,6 @@ p, li { white-space: pre-wrap; }
           </Chord>
         <tick>1758240</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -42991,7 +42967,6 @@ p, li { white-space: pre-wrap; }
           </Rest>
         <tick>1760160</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -43021,7 +42996,6 @@ p, li { white-space: pre-wrap; }
           </Clef>
         <tick>1762080</tick>
         <Rest>
-          <pos x="0" y="4"/>
           <track>5</track>
           <durationType>half</durationType>
           </Rest>
@@ -46280,7 +46254,7 @@ p, li { white-space: pre-wrap; }
         <Chord>
           <durationType>whole</durationType>
           <Articulation>
-            <pos x="18.7347" y="-0.5"/>
+            <pos x="19.923" y="-0.5"/>
             </Articulation>
           <Note>
             <pos x="1.1883" y="4"/>
@@ -46341,7 +46315,7 @@ p, li { white-space: pre-wrap; }
         <Chord>
           <durationType>whole</durationType>
           <Articulation>
-            <pos x="18.7347" y="-0.5"/>
+            <pos x="19.923" y="-0.5"/>
             </Articulation>
           <Note>
             <pos x="1.1883" y="4.5"/>
@@ -46705,6 +46679,6 @@ p, li { white-space: pre-wrap; }
           </Rest>
         </Measure>
       </Staff>
-    <cursorTrack>4</cursorTrack>
+    <cursorTrack>-1</cursorTrack>
     </Score>
   </museScore>

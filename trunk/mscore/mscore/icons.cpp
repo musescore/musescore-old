@@ -63,13 +63,13 @@ void genIcons()
       icons[staccato_ICON]       = new QIcon(iconPath + "staccato.svg");
 
       static const char* vtext[VOICES] = { "1","2","3","4" };
-
       for (int i = 0; i < VOICES; ++i) {
             icons[voice1_ICON + i] = new QIcon;
             QPixmap image(iw, ih);
             QColor c(preferences.selectColor[i].light(180));
             image.fill(c);
             QPainter painter(&image);
+            painter.setFont(QFont("FreeSans", 8));
             painter.setRenderHint(QPainter::Antialiasing);
             painter.setPen(QPen(Qt::black));
             painter.drawText(QRect(0, 0, iw, ih), Qt::AlignCenter, vtext[i]);
@@ -84,44 +84,41 @@ void genIcons()
             painter.end();
             icons[voice1_ICON + i]->addPixmap(image, QIcon::Normal, QIcon::On);
             }
-
-      icons[cut_ICON]        = new QIcon(iconPath + "editcut.svg");
-      icons[copy_ICON]       = new QIcon(iconPath + "editcopy.svg");
-      icons[paste_ICON]      = new QIcon(iconPath + "editpaste.svg");
-      icons[print_ICON]      = new QIcon(iconPath + "fileprint.svg");
-
-      icons[acciaccatura_ICON] = new QIcon(iconPath + "acciaccatura.svg");
-      icons[appoggiatura_ICON] = new QIcon(iconPath + "appoggiatura.svg");
-      icons[flip_ICON]       = new QIcon(iconPath + "flip.svg");
-      icons[undo_ICON]       = new QIcon(iconPath + "undo.svg");
-      icons[redo_ICON]       = new QIcon(iconPath + "redo.svg");
-      icons[midiin_ICON]     = new QIcon(iconPath + "midiin.svg");
-      icons[speaker_ICON]    = new QIcon(iconPath + "speaker.svg");
-      icons[start_ICON]      = new QIcon(iconPath + "start.svg");
-      icons[play_ICON]       = new QIcon(iconPath + "play.svg");
-      icons[sbeam_ICON]      = new QIcon(iconPath + "sbeam.svg");
-      icons[mbeam_ICON]      = new QIcon(iconPath + "mbeam.svg");
-      icons[nbeam_ICON]      = new QIcon(iconPath + "nbeam.svg");
-      icons[beam32_ICON]     = new QIcon(iconPath + "beam32.svg");
-      icons[beam64_ICON]     = new QIcon(iconPath + "beam64.svg");
-      icons[abeam_ICON]      = new QIcon(iconPath + "abeam.svg");
-      icons[fbeam1_ICON]     = new QIcon(iconPath + "fbeam1.svg");
-      icons[fbeam2_ICON]     = new QIcon(iconPath + "fbeam2.svg");
-      icons[fileOpen_ICON]   = new QIcon(iconPath + "fileopen.svg");
-      icons[fileNew_ICON]    = new QIcon(iconPath + "filenew.svg");
-      icons[fileSave_ICON]   = new QIcon(iconPath + "filesave.svg");
-      icons[fileSaveAs_ICON] = new QIcon(iconPath + "filesaveas.svg");
-      icons[exit_ICON]       = new QIcon(iconPath + "exit.svg");
-      icons[viewmag_ICON]    = new QIcon(iconPath + "viewmag.xpm");
-      icons[repeat_ICON]     = new QIcon(iconPath + "repeat.svg");
-      icons[noteEntry_ICON]  = new QIcon(iconPath + "noteentry.svg");
-      icons[grace4_ICON]     = new QIcon(iconPath + "grace4.svg");
-      icons[grace16_ICON]    = new QIcon(iconPath + "grace16.svg");
-      icons[grace32_ICON]    = new QIcon(iconPath + "grace32.svg");
-      icons[keys_ICON]       = new QIcon(iconPath + "keyboard.svg");
-      icons[tie_ICON]        = new QIcon(iconPath + "tie.svg");
-      icons[window_ICON]     = new QIcon(iconPath + "mscore.xpm");
-
+      icons[cut_ICON]           = new QIcon(iconPath + "editcut.svg");
+      icons[copy_ICON]          = new QIcon(iconPath + "editcopy.svg");
+      icons[paste_ICON]         = new QIcon(iconPath + "editpaste.svg");
+      icons[print_ICON]         = new QIcon(iconPath + "fileprint.svg");
+      icons[acciaccatura_ICON]  = new QIcon(iconPath + "acciaccatura.svg");
+      icons[appoggiatura_ICON]  = new QIcon(iconPath + "appoggiatura.svg");
+      icons[flip_ICON]          = new QIcon(iconPath + "flip.svg");
+      icons[undo_ICON]          = new QIcon(iconPath + "undo.svg");
+      icons[redo_ICON]          = new QIcon(iconPath + "redo.svg");
+      icons[midiin_ICON]        = new QIcon(iconPath + "midiin.svg");
+      icons[speaker_ICON]       = new QIcon(iconPath + "speaker.svg");
+      icons[start_ICON]         = new QIcon(iconPath + "start.svg");
+      icons[play_ICON]          = new QIcon(iconPath + "play.svg");
+      icons[sbeam_ICON]         = new QIcon(iconPath + "sbeam.svg");
+      icons[mbeam_ICON]         = new QIcon(iconPath + "mbeam.svg");
+      icons[nbeam_ICON]         = new QIcon(iconPath + "nbeam.svg");
+      icons[beam32_ICON]        = new QIcon(iconPath + "beam32.svg");
+      icons[beam64_ICON]        = new QIcon(iconPath + "beam64.svg");
+      icons[abeam_ICON]         = new QIcon(iconPath + "abeam.svg");
+      icons[fbeam1_ICON]        = new QIcon(iconPath + "fbeam1.svg");
+      icons[fbeam2_ICON]        = new QIcon(iconPath + "fbeam2.svg");
+      icons[fileOpen_ICON]      = new QIcon(iconPath + "fileopen.svg");
+      icons[fileNew_ICON]       = new QIcon(iconPath + "filenew.svg");
+      icons[fileSave_ICON]      = new QIcon(iconPath + "filesave.svg");
+      icons[fileSaveAs_ICON]    = new QIcon(iconPath + "filesaveas.svg");
+      icons[exit_ICON]          = new QIcon(iconPath + "exit.svg");
+      icons[viewmag_ICON]       = new QIcon(iconPath + "viewmag.xpm");
+      icons[repeat_ICON]        = new QIcon(iconPath + "repeat.svg");
+      icons[noteEntry_ICON]     = new QIcon(iconPath + "noteentry.svg");
+      icons[grace4_ICON]        = new QIcon(iconPath + "grace4.svg");
+      icons[grace16_ICON]       = new QIcon(iconPath + "grace16.svg");
+      icons[grace32_ICON]       = new QIcon(iconPath + "grace32.svg");
+      icons[keys_ICON]          = new QIcon(iconPath + "keyboard.svg");
+      icons[tie_ICON]           = new QIcon(iconPath + "tie.svg");
+      icons[window_ICON]        = new QIcon(iconPath + "mscore.xpm");
       icons[textBold_ICON]      = new QIcon(iconPath + "text_bold.svg");
       icons[textItalic_ICON]    = new QIcon(iconPath + "text_italic.svg");
       icons[textUnderline_ICON] = new QIcon(iconPath + "text_under.svg");

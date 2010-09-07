@@ -505,7 +505,7 @@ bool Element::readProperties(QDomElement e)
       int i = val.toInt();
 
       if (tag == "subtype") {
-            // do not always call Element::setSubtype():
+            // does not always call Element::setSubtype():
             this->setSubtype(val);
             }
       else if (tag == "tick")
