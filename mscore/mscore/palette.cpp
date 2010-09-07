@@ -436,7 +436,7 @@ static void paintPaletteElement(void* data, Element* e)
 //   paintEvent
 //---------------------------------------------------------
 
-void Palette::paintEvent(QPaintEvent*)
+void Palette::paintEvent(QPaintEvent* event)
       {
       qreal _spatium = gscore->spatium();
       qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
@@ -468,6 +468,7 @@ void Palette::paintEvent(QPaintEvent*)
       QPen pen(palette().color(QPalette::Normal, QPalette::Text));
       pen.setWidthF(defaultStyle[ST_staffLineWidth].toSpatium().val() * PALETTE_SPATIUM * extraMag);
 
+      p.fillRect(event->rect(), p.background().color());
       for (int idx = 0; idx < cells.size(); ++idx) {
             QRect r = idxRect(idx);
             p.setPen(pen);
@@ -1111,7 +1112,7 @@ PaletteBox::PaletteBox(QWidget* parent)
       QWidget* mainWidget = new QWidget;
       vbox = new QVBoxLayout;
       vbox->setMargin(0);
-      vbox->setSpacing(0);
+      vbox->setSpacing(2);
       vbox->addStretch(1);
       mainWidget->setLayout(vbox);
       setWidget(mainWidget);
