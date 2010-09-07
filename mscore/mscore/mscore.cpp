@@ -1949,7 +1949,6 @@ int main(int argc, char* av[])
       dir.mkpath(dataPath + "/plugins");
 
       setDefaultStyle();
-
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
 

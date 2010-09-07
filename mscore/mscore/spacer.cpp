@@ -171,7 +171,7 @@ void Spacer::read(QDomElement e)
             QString val(e.text());
             if (tag == "space")
                   _space = Spatium(val.toDouble());
-            else if (Element::readProperties(e))
+            else if (!Element::readProperties(e))
                   domError(e);
             }
       }
