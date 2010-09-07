@@ -44,6 +44,7 @@ extern void readShortcuts();
 bool useALSA = false, useJACK = false, usePortaudio = false;
 
 extern bool useFactorySettings;
+extern bool externalStyle;
 
 //---------------------------------------------------------
 //   PeriodItem
@@ -74,13 +75,23 @@ static PeriodItem updatePeriods[] = {
 
 QString appStyleSheet()
       {
+      if (externalStyle) {
+            QString path = mscoreGlobalShare + "/styles/appstyle.st";
+            QFile f(path);
+            if (f.open(QIODevice::ReadOnly)) {
+                  QString s = f.readAll();
+                  f.close();
+                  return s;
+                  }
+            }
+
       QFont fff;
       if (preferences.applicationFont.isEmpty())
             fff = QApplication::font();
       else
             fff.fromString(preferences.applicationFont);
       return QString(
-      "* { font-size: %1pt; font-family: \"%2\"}\n"
+
 //      "PaletteBoxButton  { font-size: 8px; background-color: rgb(215, 215, 215) }\n"
 //      "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
 //      "PaletteBox        { background-color: rgb(230, 230, 230) }\n"

@@ -31,11 +31,6 @@ VoiceButton::VoiceButton(int v, QWidget* parent)
       {
       voice = v;
       setToolButtonStyle(Qt::ToolButtonIconOnly);
-      setAutoFillBackground(true);
-      QPalette pal = palette();
-      pal.setColor(QPalette::Window, preferences.selectColor[voice].light(170));
-      pal.setColor(QPalette::Button, preferences.selectColor[voice].light(100));
-      setPalette(pal);
       }
 
 //---------------------------------------------------------
@@ -45,13 +40,11 @@ VoiceButton::VoiceButton(int v, QWidget* parent)
 void VoiceButton::paintEvent(QPaintEvent* e)
       {
       QPainter p(this);
-      if (isChecked()) {
-            p.fillRect(e->rect(), palette().color(isChecked() ? QPalette::Button : QPalette::Window));
-            p.setPen(1);
+      QColor c(preferences.selectColor[voice]);
+      p.fillRect(e->rect(), isChecked() ? c.light(170) : c.light(100));
+      p.setPen(QPen(palette().color(QPalette::Normal, QPalette::Text)));
+      if (isChecked())
             p.drawRect(0, 0, width()-1, height()-1);
-            }
-      else
-            p.fillRect(e->rect(), palette().color(QPalette::Window));
       QFont f = font();
       f.setPixelSize(preferences.iconHeight / 2);
       p.setFont(f);

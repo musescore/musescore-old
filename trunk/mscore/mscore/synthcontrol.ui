@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>676</width>
-    <height>328</height>
+    <width>653</width>
+    <height>324</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Synthesizer</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_4">
    <item>
     <widget class="QTabWidget" name="tabWidget_2">
      <property name="currentIndex">
@@ -27,8 +27,112 @@
        <item row="0" column="0">
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
+         <widget class="QWidget" name="tab">
+          <attribute name="title">
+           <string>Soundfonts</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="0">
+            <widget class="QListWidget" name="soundFonts"/>
+           </item>
+           <item row="0" column="1">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="soundFontUp">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Up</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="soundFontDown">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Down</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="soundFontDelete">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Delete</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="soundFontAdd">
+               <property name="text">
+                <string>Add</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="soundFont">
+               <property name="statusTip">
+                <string>Loaded SoundFont</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="sfButton">
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="mscore.qrc">
+                 <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
          <widget class="QWidget" name="reverbTab">
           <attribute name="title">
            <string>Reverb</string>
@@ -411,38 +515,14 @@
        </item>
        <item row="1" column="0">
         <layout class="QGridLayout" name="gridLayout_4">
-         <item row="0" column="1" colspan="2">
-          <widget class="QLineEdit" name="soundFont">
-           <property name="statusTip">
-            <string>Loaded SoundFont</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QToolButton" name="sfButton">
-           <property name="text">
-            <string>...</string>
-           </property>
-           <property name="icon">
-            <iconset resource="mscore.qrc">
-             <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
+         <item row="0" column="0">
           <widget class="QLabel" name="label_39">
            <property name="text">
             <string>Master Tuning</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
+         <item row="0" column="2">
           <spacer name="horizontalSpacer_5">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -455,7 +535,7 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="1">
+         <item row="0" column="1">
           <widget class="QDoubleSpinBox" name="masterTuning">
            <property name="suffix">
             <string extracomment="Frequency Herz">Hz</string>
@@ -471,16 +551,6 @@
            </property>
            <property name="value">
             <double>440.000000000000000</double>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>SoundFont</string>
-           </property>
-           <property name="textFormat">
-            <enum>Qt::PlainText</enum>
            </property>
           </widget>
          </item>
@@ -952,6 +1022,7 @@
    </item>
   </layout>
  </widget>
+ <pixmapfunction>getIconPixmap</pixmapfunction>
  <customwidgets>
   <customwidget>
    <class>Awl::Slider</class>

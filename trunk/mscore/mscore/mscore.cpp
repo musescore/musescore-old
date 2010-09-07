@@ -95,6 +95,7 @@ QMap<QString, Shortcut*> shortcuts;
 
 bool converterMode = false;
 bool externalIcons = false;
+bool externalStyle = false;
 static bool pluginMode = false;
 static bool startWithNewScore = false;
 double converterDpi = 300;
@@ -1105,6 +1106,7 @@ static void usage()
         "   -p name   execute named plugin\n"
         "   -F        use factory settings\n"
         "   -i        load icons from INSTALLPATH/icons\n"
+        "             application stylesheet from INSTALLPATH/styles/appstyle.st\n"
         "   -e        enable experimental features\n"
         );
       exit(-1);
@@ -1175,9 +1177,10 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       cv = view;
       if (view) {
             if (view->score() && cs != view->score()) {
+                  MasterSynth* ms = seq->getSynti();
                   if (cs)
-                        cs->setSyntiSettings(seq->getSynti()->synthParams());
-                  seq->getSynti()->setSynthParams(view->score()->syntiSettings());
+                        cs->setSyntiSettings(ms->synthParams());
+                  ms->setSynthParams(view->score()->syntiSettings());
                   }
             cs = view->score();
             view->setFocusRect();
@@ -1869,6 +1872,7 @@ int main(int argc, char* av[])
                         break;
                   case 'i':
                         externalIcons = true;
+                        externalStyle = true;
                         break;
                   case 'I':
                         midiInputTrace = true;

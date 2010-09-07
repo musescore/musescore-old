@@ -1,3 +1,7 @@
+7.sep (ws)
+      - command line option "-i" also loads the application style
+        sheet from INSTALLPATH/styles/appstyle.st
+        (see http://doc.qt.nokia.com/4.7-snapshot/stylesheet.html)
 6.sep (ws)
       - add preferences for osc support (enable/disable, port number)
 4.sep (ws)
