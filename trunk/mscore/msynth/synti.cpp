@@ -83,7 +83,9 @@ void MasterSynth::init(int sampleRate)
       else {
             if (debugMode)
                   printf("load soundfont <%s>\n", qPrintable(p));
-            bool rv = syntis[0]->loadSoundFont(p);
+            QStringList sfs;
+            sfs.append(p);
+            bool rv = syntis[0]->loadSoundFonts(sfs);
             if (!rv) {
                   QString s = QWidget::tr("Loading SoundFont\n"
                      "\"%1\"\n"
@@ -234,11 +236,9 @@ double MasterSynth::setEffectParameter(int synti, int effect, int param, double 
 
 SyntiSettings MasterSynth::synthParams() const
       {
-printf("get synthParams\n");
       SyntiSettings ss;
       foreach(Synth* s, syntis) {
             SynthParams sp = s->getParams();
-printf("  get %p <%s>  %p <%s>\n", s, s->name(), sp.synth, sp.synth->name());
             ss.append(sp);
             }
       return ss;
@@ -250,10 +250,8 @@ printf("  get %p <%s>  %p <%s>\n", s, s->name(), sp.synth, sp.synth->name());
 
 void MasterSynth::setSynthParams(const SyntiSettings& ss)
       {
-printf("set synthParams %d\n", ss.size());
-      foreach(const SynthParams& sp, ss) {
+      foreach(const SynthParams& sp, ss)
             sp.synth->setParams(sp);
-            }
       }
 
 //---------------------------------------------------------

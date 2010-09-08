@@ -100,18 +100,36 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
                   }
             }
 
-      connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
-      connect(gain,     SIGNAL(valueChanged(double,int)), SLOT(gainChanged(double,int)));
-      connect(masterTuning, SIGNAL(valueChanged(double)),       SLOT(masterTuningChanged(double)));
+      Synth* sy = synti->synth("Fluid");
+      if (sy) {
+            QStringList sfonts = sy->soundFonts();
+            foreach(const QString& s, sfonts)
+                  soundFonts->addItem(s);
+            }
 
-      connect(reverb,         SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
-      connect(reverbRoomSize, SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
-      connect(reverbDamp, SIGNAL(valueChanged(double,int)),     SLOT(reverbValueChanged(double,int)));
-      connect(reverbWidth, SIGNAL(valueChanged(double,int)),    SLOT(reverbValueChanged(double,int)));
+      soundFontUp->setEnabled(false);
+      soundFontDown->setEnabled(false);
+      soundFontDelete->setEnabled(false);
+      soundFontAdd->setEnabled(false);
 
-      connect(chorus,      SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
-      connect(chorusSpeed, SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
-      connect(chorusDepth, SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
+      connect(sfButton,        SIGNAL(clicked()),                SLOT(selectSoundFont()));
+      connect(gain,            SIGNAL(valueChanged(double,int)), SLOT(gainChanged(double,int)));
+      connect(masterTuning,    SIGNAL(valueChanged(double)),     SLOT(masterTuningChanged(double)));
+
+      connect(reverb,          SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
+      connect(reverbRoomSize,  SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
+      connect(reverbDamp,      SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
+      connect(reverbWidth,     SIGNAL(valueChanged(double,int)), SLOT(reverbValueChanged(double,int)));
+
+      connect(chorus,          SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
+      connect(chorusSpeed,     SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
+      connect(chorusDepth,     SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
+
+      connect(soundFontUp,     SIGNAL(clicked()),                SLOT(sfUpClicked()));
+      connect(soundFontDown,   SIGNAL(clicked()),                SLOT(sfDownClicked()));
+      connect(soundFontDelete, SIGNAL(clicked()),                SLOT(sfDeleteClicked()));
+      connect(soundFontAdd,    SIGNAL(clicked()),                SLOT(sfAddClicked()));
+      connect(soundFont,       SIGNAL(textChanged(const QString&)), SLOT(sfChanged(const QString&)));
       }
 
 //---------------------------------------------------------
@@ -212,11 +230,55 @@ void SynthControl::selectSoundFont()
          soundFont->text(),
          tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
          );
-      if (!s.isNull()) {
+      if (!s.isEmpty()) {
             soundFont->setText(s);
-//TODOB            synti->loadSoundFont(s);
-            emit soundFontChanged();
+            soundFontAdd->setEnabled(true);
             }
+      }
+
+//---------------------------------------------------------
+//   sfChanged
+//---------------------------------------------------------
+
+void SynthControl::sfChanged(const QString& s)
+      {
+      if (!s.isEmpty())
+            soundFontAdd->setEnabled(true);
+      }
+
+//---------------------------------------------------------
+//   sfUpClicked
+//---------------------------------------------------------
+
+void SynthControl::sfUpClicked()
+      {
+      }
+
+//---------------------------------------------------------
+//   sfDownClicked
+//---------------------------------------------------------
+
+void SynthControl::sfDownClicked()
+      {
+      }
+
+//---------------------------------------------------------
+//   sfDeleteClicked
+//---------------------------------------------------------
+
+void SynthControl::sfDeleteClicked()
+      {
+      }
+
+//---------------------------------------------------------
+//   sfAddClicked
+//---------------------------------------------------------
+
+void SynthControl::sfAddClicked()
+      {
+      QString s(soundFont->text());
+      if (!s.isEmpty())
+            soundFonts->addItem(s);
       }
 
 //---------------------------------------------------------

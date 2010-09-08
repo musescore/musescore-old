@@ -58,7 +58,7 @@ class SFont {
       QList<Preset*> presets;
       QList<Sample*> sample;
 
-      unsigned _id;
+      int _id;
       SFVersion _version;		// sound font version
       SFVersion romver;		      // ROM version
       QList<unsigned char*> infos;	// list of info strings (1st byte is ID)
@@ -107,8 +107,8 @@ class SFont {
 
       int load_sampledata();
       unsigned int samplePos() const            { return samplepos;  }
-      unsigned id() const                       { return _id; }
-      void setId(unsigned i)                    { _id = i;    }
+      int id() const                            { return _id; }
+      void setId(int i)                         { _id = i;    }
       void setSamplepos(unsigned v)             { samplepos = v; }
       void setSamplesize(unsigned v)            { samplesize = v; }
       unsigned getSamplesize() const            { return samplesize; }

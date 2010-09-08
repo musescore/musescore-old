@@ -37,6 +37,7 @@ class Parameter {
 
    public:
       Parameter() {}
+      virtual Parameter* clone() const = 0;
       Parameter(int i, const QString& n) : _id(i), _name(n) {}
       virtual ParameterType type() const = 0;
       virtual void write(Xml&) const = 0;
@@ -56,6 +57,8 @@ class Fparm : public Parameter {
       Fparm(int i, const QString& n, float val, float min, float max)
          : Parameter(i, n), _val(val), _min(min), _max(max) {}
       Fparm(int i, const QString& n, float val) : Parameter(i, n), _val(val) {}
+      virtual Parameter* clone() const { return new Fparm(*this); }
+
       ParameterType type() const { return P_FLOAT; }
       virtual void write(Xml&) const;
       float val() const      { return _val; }
@@ -76,6 +79,7 @@ class Sparm : public Parameter {
 
    public:
       Sparm() : Parameter() {}
+      virtual Parameter* clone() const { return new Sparm(*this); }
       Sparm(int i, const QString& n, const QString& v)
          : Parameter(i, n), _val(v) {}
       ParameterType type() const { return P_STRING; }

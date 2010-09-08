@@ -47,7 +47,7 @@ PianorollEditor::PianorollEditor(QWidget* parent)
    : QMainWindow(parent)
       {
       setWindowTitle(QString("MuseScore"));
-      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
+//      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
 
       QWidget* mainWidget = new QWidget;
       QGridLayout* layout = new QGridLayout;

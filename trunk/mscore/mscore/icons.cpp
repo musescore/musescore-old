@@ -35,9 +35,6 @@ QIcon* icons[ICONS];
 
 void genIcons()
       {
-      int iw = preferences.noteEntryIconWidth;
-      int ih = preferences.noteEntryIconHeight;
-
       icons[longaUp_ICON]        = new QIcon(iconPath + "longaUp.svg");
       icons[brevis_ICON]         = new QIcon(iconPath + "brevis.svg");
       icons[note_ICON]           = new QIcon(iconPath + "note.svg");
@@ -63,6 +60,8 @@ void genIcons()
       icons[staccato_ICON]       = new QIcon(iconPath + "staccato.svg");
 
       static const char* vtext[VOICES] = { "1","2","3","4" };
+      int iw = 16;
+      int ih = 24;
       for (int i = 0; i < VOICES; ++i) {
             icons[voice1_ICON + i] = new QIcon;
             QPixmap image(iw, ih);
@@ -84,6 +83,7 @@ void genIcons()
             painter.end();
             icons[voice1_ICON + i]->addPixmap(image, QIcon::Normal, QIcon::On);
             }
+
       icons[cut_ICON]           = new QIcon(iconPath + "editcut.svg");
       icons[copy_ICON]          = new QIcon(iconPath + "editcopy.svg");
       icons[paste_ICON]         = new QIcon(iconPath + "editpaste.svg");

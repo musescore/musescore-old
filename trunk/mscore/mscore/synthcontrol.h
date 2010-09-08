@@ -45,6 +45,12 @@ class SynthControl : public QWidget, Ui::SynthControl {
 
    private slots:
       void selectSoundFont();
+      void sfUpClicked();
+      void sfDownClicked();
+      void sfDeleteClicked();
+      void sfAddClicked();
+      void sfChanged(const QString&);
+
       void gainChanged(double, int);
       void masterTuningChanged(double);
       void reverbValueChanged(double val, int idx);

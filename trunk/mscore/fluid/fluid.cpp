@@ -65,7 +65,6 @@ static const Mod defaultMod[] = {
 // list of fluid paramters as saved in score
 //
 static Parameter* params[] = {
-      new Sparm(0x00000, "soundfont", ""),
       new Fparm(0x10000, "RevRoomsize", 0.0),
       new Fparm(0x10001, "RevDamp",   0.0),
       new Fparm(0x10002, "RevWidth",  0.0),
@@ -700,51 +699,6 @@ void Fluid::start_voice(Voice* voice)
       }
 
 //---------------------------------------------------------
-//   loadSoundFont
-//    return false on error
-//---------------------------------------------------------
-
-bool Fluid::loadSoundFont(const QString& s)
-      {
-      mutex.lock();
-      system_reset();
-      foreach(SFont* sf, sfonts)
-            sfunload(sf->id(), true);
-      bool rv = sfload(s, true) != -1;
-      mutex.unlock();
-      return rv;
-      }
-
-//---------------------------------------------------------
-//   sfload
-//---------------------------------------------------------
-
-int Fluid::sfload(const QString& filename, int reset_presets)
-      {
-      if (filename.isEmpty())
-            return -1;
-
-      SFont* sf = new SFont(this);
-      if (!sf->read(filename)) {
-            delete sf;
-            sf = 0;
-            return -1;
-            }
-
-      sf->setId(++sfont_id);
-
-      /* insert the sfont as the first one on the list */
-      sfonts.prepend(sf);
-
-      /* reset the presets for all channels */
-      if (reset_presets)
-            program_reset();
-
-      updatePatchList();
-      return (int) sf->id();
-      }
-
-//---------------------------------------------------------
 //   updatePatchList
 //---------------------------------------------------------
 
@@ -769,10 +723,74 @@ void Fluid::updatePatchList()
       }
 
 //---------------------------------------------------------
+//   soundFonts
+//---------------------------------------------------------
+
+QStringList Fluid::soundFonts() const
+      {
+      QStringList sf;
+      foreach (SFont* f, sfonts)
+            sf.append(f->get_name());
+      return sf;
+      }
+
+//---------------------------------------------------------
+//   loadSoundFont
+//    return false on error
+//---------------------------------------------------------
+
+bool Fluid::loadSoundFonts(const QStringList& sl)
+      {
+      QStringList ol = soundFonts();
+      if (ol == sl)
+            return true;
+      mutex.lock();
+      system_reset();
+      foreach (SFont* sf, sfonts)
+            sfunload(sf->id(), true);
+      bool ok = true;
+      foreach (QString s, sl) {
+            if (sfload(s, true) == -1)
+                  ok = false;
+            }
+      mutex.unlock();
+      return ok;
+      }
+
+//---------------------------------------------------------
+//   sfload
+//---------------------------------------------------------
+
+int Fluid::sfload(const QString& filename, bool reset_presets)
+      {
+      if (filename.isEmpty())
+            return -1;
+
+      SFont* sf = new SFont(this);
+      if (!sf->read(filename)) {
+            delete sf;
+            sf = 0;
+            return -1;
+            }
+
+      sf->setId(++sfont_id);
+
+      /* insert the sfont as the first one on the list */
+      sfonts.prepend(sf);
+
+      /* reset the presets for all channels */
+      if (reset_presets)
+            program_reset();
+
+      updatePatchList();
+      return sf->id();
+      }
+
+//---------------------------------------------------------
 //   sfunload
 //---------------------------------------------------------
 
-bool Fluid::sfunload(unsigned int id, int reset_presets)
+bool Fluid::sfunload(int id, bool reset_presets)
       {
       SFont* sf = get_sfont_by_id(id);
 
@@ -793,40 +811,10 @@ bool Fluid::sfunload(unsigned int id, int reset_presets)
       return true;
       }
 
-/* fluid_synth_sfreload
- *
- */
-int Fluid::sfreload(unsigned int id)
-      {
-      SFont* sf = get_sfont_by_id(id);
-      if (!sf) {
-            log("No SoundFont with id = %d", id);
-            return -1;
-            }
+//---------------------------------------------------------
+//   add_sfont
+//---------------------------------------------------------
 
-      int index = sfonts.indexOf(sf);
-
-      /* keep a copy of the SoundFont's filename */
-      QString filename = sf->get_name();
-
-      if (!sfunload(id, 0))
-            return -1;
-
-      if (!sf->read(filename)) {
-            delete sf;
-            sf = 0;
-            log("Failed to load SoundFont \"%s\"", qPrintable(filename));
-            return -1;
-            }
-      sf->setId(id);
-      sfonts.insert(index, sf);
-      update_presets();       // reset the presets for all channels
-      return sf->id();
-      }
-
-/*
- * fluid_synth_add_sfont
- */
 int Fluid::add_sfont(SFont* sf)
       {
 	sf->setId(++sfont_id);
@@ -839,9 +827,10 @@ int Fluid::add_sfont(SFont* sf)
 	return sf->id();
       }
 
-/*
- * fluid_synth_remove_sfont
- */
+//---------------------------------------------------------
+//   remove_sfont
+//---------------------------------------------------------
+
 void Fluid::remove_sfont(SFont* sf)
       {
 	int sfont_id = sf->id();
@@ -851,10 +840,11 @@ void Fluid::remove_sfont(SFont* sf)
 	program_reset();              /* reset the presets for all channels */
       }
 
-/* fluid_synth_get_sfont_by_id
- *
- */
-SFont* Fluid::get_sfont_by_id(unsigned int id)
+//---------------------------------------------------------
+//   get_sfont_by_id
+//---------------------------------------------------------
+
+SFont* Fluid::get_sfont_by_id(int id)
       {
       foreach(SFont* sf, sfonts) {
             if (sf->id() == id)
@@ -863,9 +853,10 @@ SFont* Fluid::get_sfont_by_id(unsigned int id)
       return 0;
       }
 
-/* fluid_synth_get_sfont_by_name
- *
- */
+//---------------------------------------------------------
+//   get_sfont_by_name
+//---------------------------------------------------------
+
 SFont* Fluid::get_sfont_by_name(const QString& name)
       {
       foreach(SFont* sf, sfonts) {
@@ -875,9 +866,12 @@ SFont* Fluid::get_sfont_by_name(const QString& name)
       return 0;
       }
 
-/* Sets the interpolation method to use on channel chan.
- * If chan is < 0, then set the interpolation method on all channels.
- */
+//---------------------------------------------------------
+//   set_interp_method
+//    Sets the interpolation method to use on channel chan.
+//    If chan is < 0, then set the interpolation method on all channels.
+//---------------------------------------------------------
+
 void Fluid::set_interp_method(int chan, int interp_method)
       {
       foreach(Channel* c, channel) {
@@ -980,13 +974,6 @@ void Fluid::remove_bank_offset(int sfont_id)
 		bank_offsets.removeAll(bank_offset);
       }
 
-QString Fluid::soundFont() const
-      {
-      if (sfonts.isEmpty())
-            return "";
-      return sfonts[0]->get_name();
-      }
-
 double Fluid::effectParameter(int effect, int parameter)
       {
       if (effect == 0)
@@ -1032,6 +1019,12 @@ SynthParams Fluid::getParams() const
       SynthParams sp;
       sp.synth = (Fluid*)this;
 
+      QStringList sfl = soundFonts();
+      int id = 0;
+      foreach(QString sf, sfl) {
+            Sparm* s = new Sparm(id++, "soundfont", sf);
+            sp.params.append(s);
+            }
       //
       // fill in struct with actual values
       //
@@ -1043,13 +1036,11 @@ SynthParams Fluid::getParams() const
             int group = (id & 0xffff0000) >> 16;
             int no    = id & 0xffff;
 
-            if (group == 0)
-                  static_cast<Sparm*>(p)->setVal(soundFont());
-            else if (group == 1)
+            if (group == 1)
                   static_cast<Fparm*>(p)->setVal(reverb->parameter(no));
             else if (group == 2)
                   static_cast<Fparm*>(p)->setVal(chorus->parameter(no));
-            sp.params.append(p);
+            sp.params.append(p->clone());
             }
       return sp;
       }
@@ -1060,17 +1051,19 @@ SynthParams Fluid::getParams() const
 
 void Fluid::setParams(const SynthParams& sp)
       {
+      QStringList sfs;
       foreach(const Parameter* p, sp.params) {
             int id    = p->id();
             int group = (id & 0xffff0000) >> 16;
             int no    = id & 0xffff;
 
             if (group == 0)
-                  loadSoundFont(static_cast<const Sparm*>(p)->val());
+                  sfs.append(static_cast<const Sparm*>(p)->val());
             else if (group == 1)
                   reverb->setParameter(no, static_cast<const Fparm*>(p)->val());
             else if (group == 2)
                   chorus->setParameter(no, static_cast<const Fparm*>(p)->val());
             }
+      loadSoundFonts(sfs);
       }
 }
