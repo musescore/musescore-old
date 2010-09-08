@@ -75,54 +75,13 @@ static PeriodItem updatePeriods[] = {
 
 QString appStyleSheet()
       {
-      if (externalStyle) {
-            QString path = mscoreGlobalShare + "/styles/appstyle.st";
-            QFile f(path);
-            if (f.open(QIODevice::ReadOnly)) {
-                  QString s = f.readAll();
-                  f.close();
-                  return s;
-                  }
+      QString s;
+      QFile f(preferences.appStyleFile);
+      if (f.open(QIODevice::ReadOnly)) {
+            s = f.readAll();
+            f.close();
             }
-
-      QFont fff;
-      if (preferences.applicationFont.isEmpty())
-            fff = QApplication::font();
-      else
-            fff.fromString(preferences.applicationFont);
-      return QString(
-
-//      "PaletteBoxButton  { font-size: 8px; background-color: rgb(215, 215, 215) }\n"
-//      "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
-//      "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
-      "PlayPanel QLabel#posLabel   { font-size: 28pt; font-family: \"San Serif\" }\n"
-      "PlayPanel QLabel#timeLabel      { font-size: 28pt; font-family: \"San Serif\" }\n"
-      "SynthControl QLabel#titleLabel  { font-size: 24pt; font-family: \"San Serif\" }\n"
-      "ChordEdit QLabel#chordLabel { font-size: 24pt; font-family: \"San Serif\" }\n"
-      "PlayPanel QLabel#tempoLabel { font-size: 10pt; font-family: \"San Serif\" }\n"
-      "PlayPanel QLabel#relTempo   { font-size: 10pt; font-family: \"San Serif\" }\n"
-      "QGroupBox#changeStops > QPushButton { background-color: rgb(32, 32, 64);\n"
-         " color: white }\n"
-      "QGroupBox#changeStops > QPushButton:checked { border: none; background: white; color: black }\n"
-      "QGroupBox#changeStops QPushButton#stop_3_11         { background: rgb(32,64,32); color: white }\n"
-      "QGroupBox#changeStops QPushButton#stop_3_11:checked { border: none; background: white; color: black }\n"
-      "QGroupBox#changeStops QPushButton#stop_2_11         { background: rgb(32,64,32); color: white }\n"
-      "QGroupBox#changeStops QPushButton#stop_2_11:checked { border: none; background: white; color: black }\n"
-      "QGroupBox#changeStops QPushButton#stop_2_12         { background: rgb(64,48,32); color: white }\n"
-      "QGroupBox#changeStops QPushButton#stop_2_12:checked { border: none; background: white; color: black }\n"
-      "QGroupBox#changeStops QPushButton#stop_1_14         { background: rgb(64,48,32); color: white }\n"
-      "QGroupBox#changeStops QPushButton#stop_1_14:checked { border: none; background: white; color: black }\n"
-      "QGroupBox#changeStops QPushButton#stop_1_15         { background: rgb(64,48,32); color: white }\n"
-      "QGroupBox#changeStops QPushButton#stop_1_15:checked { border: none; background: white; color: black }\n"
-      "QGroupBox#changeStops QPushButton#stop_p_13         { background: rgb(64,48,32); color: white }\n"
-      "QGroupBox#changeStops QPushButton#stop_p_13:checked { border: none; background: white; color: black }\n"
-      "QGroupBox#changeStops QPushButton#stop_p_14         { background: rgb(64,48,32); color: white }\n"
-      "QGroupBox#changeStops QPushButton#stop_p_14:checked { border: none; background: white; color: black }\n"
-      "QGroupBox#changeStops QPushButton#stop_p_15         { background: rgb(64,48,32); color: white }\n"
-      "QGroupBox#changeStops QPushButton#stop_p_15:checked { border: none; background: white; color: black }\n"
-      "AboutBoxDialog QLabel#titleLabel { font-size: 28pt  }\n")
-         .arg(fff.pointSize())
-         .arg(fff.family());
+      return s;
       }
 
 //---------------------------------------------------------
@@ -209,11 +168,6 @@ void Preferences::init()
       autoSaveTime             = 2;       // minutes
       pngScreenShot            = false;
       language                 = "system";
-      iconWidth                = 24;
-      iconHeight               = 24;
-      noteEntryIconWidth       = ICON_WIDTH;
-      noteEntryIconHeight      = ICON_HEIGHT;
-      applicationFont          = "";
       style                    = "";
 
       replaceCopyrightSymbol  = true;
@@ -244,6 +198,7 @@ void Preferences::init()
 
       useOsc                  = false;
       oscPort                 = 5282;
+      appStyleFile            = ":/data/appstyle.st";
       };
 
 //---------------------------------------------------------
@@ -316,11 +271,6 @@ void Preferences::write()
       s.setValue("autoSaveTime",       autoSaveTime);
       s.setValue("pngScreenShot",      pngScreenShot);
       s.setValue("language",           language);
-      s.setValue("iconHeight",          iconHeight);
-      s.setValue("iconWidth",           iconWidth);
-      s.setValue("noteEntryIconHeight", noteEntryIconHeight);
-      s.setValue("noteEntryIconWidth",  noteEntryIconWidth);
-      s.setValue("applicationFont", applicationFont);
       s.setValue("style", style);
 
       s.setValue("replaceFractions", replaceFractions);
@@ -348,6 +298,7 @@ void Preferences::write()
 
       s.setValue("useOsc", useOsc);
       s.setValue("oscPort", oscPort);
+      s.setValue("appStyle", appStyleFile);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -444,11 +395,6 @@ void Preferences::read()
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
       pngScreenShot            = s.value("pngScreenShot", false).toBool();
       language                 = s.value("language", "system").toString();
-      iconHeight               = s.value("iconHeight", 24).toInt();
-      iconWidth                = s.value("iconHeight", 24).toInt();
-      noteEntryIconHeight      = s.value("noteEntryIconHeight", ICON_HEIGHT).toInt();
-      noteEntryIconWidth       = s.value("noteEntryIconWidth", ICON_WIDTH).toInt();
-      applicationFont          = s.value("applicationFont", "").toString();
       style                    = s.value("style", "").toString();
 
       replaceFractions = s.value("replaceFractions", true).toBool();
@@ -476,6 +422,7 @@ void Preferences::read()
 
       useOsc                 = s.value("useOsc", false).toBool();
       oscPort                = s.value("oscPort", 5282).toInt();
+      appStyleFile           = s.value("appStyle", ":/data/appstyle.st").toString();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {
@@ -568,16 +515,16 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       updateValues(&preferences);
 
-      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
+      connect(buttonBox,          SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
       connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
       connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
-      connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
-      connect(shortcutList, SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
-      connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
-      connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));
+      connect(playPanelCur,   SIGNAL(clicked()), SLOT(playPanelCurClicked()));
+      connect(shortcutList,   SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
+      connect(resetShortcut,  SIGNAL(clicked()), SLOT(resetShortcutClicked()));
+      connect(clearShortcut,  SIGNAL(clicked()), SLOT(clearShortcutClicked()));
       connect(defineShortcut, SIGNAL(clicked()), SLOT(defineShortcutClicked()));
       connect(resetToDefault, SIGNAL(clicked()), SLOT(resetAllValues()));
 
@@ -605,8 +552,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       recordButtons->addButton(rcr12,        RMIDI_TIE);
       recordButtons->addButton(recordEditMode, RMIDI_NOTE_EDIT_MODE);
 
-      connect(recordButtons, SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
+      connect(recordButtons,          SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
       connect(midiRemoteControlClear, SIGNAL(clicked()), SLOT(midiRemoteControlClearClicked()));
+      connect(appStyleFileButton,     SIGNAL(clicked()), SLOT(appStyleFileButtonClicked()));
       updateRemote();
       }
 
@@ -759,12 +707,6 @@ void PreferenceDialog::updateValues(Preferences* p)
                   break;
                   }
             }
-      {
-      QFont ff;
-      ff.fromString(p->applicationFont);
-      applicationFont->setCurrentFont(ff);
-      applicationFontSize->setValue(ff.pointSize());
-      }
       //
       // initialize local shortcut table
       //    we need a deep copy to be able to rewind all
@@ -883,6 +825,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       oscServer->setChecked(p->useOsc);
       oscPort->setValue(p->oscPort);
+      styleFile->setText(p->appStyleFile);
 
       sfChanged = false;
       }
@@ -1213,10 +1156,6 @@ void PreferenceDialog::apply()
       bool languageChanged = l != preferences.language;
       preferences.language = l;
 
-      QFont fff = applicationFont->currentFont();
-      fff.setPointSize(applicationFontSize->value());
-      preferences.applicationFont     = fff.toString();
-
       preferences.replaceFractions       = replaceFractions->isChecked();
       preferences.replaceCopyrightSymbol = replaceCopyrightSymbol->isChecked();
 
@@ -1495,6 +1434,24 @@ void PreferenceDialog::styleFileButtonClicked()
       if (fn.isEmpty())
             return;
       importStyleFile->setText(fn);
+      }
+
+//---------------------------------------------------------
+//   appStyleFileButtonClicked
+//---------------------------------------------------------
+
+void PreferenceDialog::appStyleFileButtonClicked()
+      {
+      QString fn = QFileDialog::getOpenFileName(
+         0, QWidget::tr("MuseScore: Load Application Style"),
+         mscoreGlobalShare + "/styles/",
+            QWidget::tr("MuseScore Application Styles (*.st);;"
+            "All Files (*)"
+            )
+         );
+      if (fn.isEmpty())
+            return;
+      styleFile->setText(fn);
       }
 
 //---------------------------------------------------------

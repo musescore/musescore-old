@@ -101,17 +101,13 @@ struct Preferences {
       bool midiExpandRepeats;
 
       bool playRepeats;
-      QString instrumentList;  // file path of instrument templates
+      QString instrumentList; // file path of instrument templates
       bool alternateNoteEntryMethod;
-      int proximity;    // proximity for selecting elements on canvas
+      int proximity;          // proximity for selecting elements on canvas
       bool autoSave;
       int autoSaveTime;
       bool pngScreenShot;
       QString language;
-      int iconWidth, iconHeight;
-      int noteEntryIconWidth, noteEntryIconHeight;
-      QString applicationFont;
-      QString style;
       bool replaceFractions;
       bool replaceCopyrightSymbol;
       QPrinter::PageSize paperSize;
@@ -121,11 +117,13 @@ struct Preferences {
       double spatium;
       double mag;
 
+      QString style;
+
       //update
       int checkUpdateStartup;
 
       float tuning;                 // synthesizer master tuning offset (440Hz)
-      float masterGain;            // synthesizer master gain
+      float masterGain;             // synthesizer master gain
       float chorusGain;
       float reverbGain;
       float reverbRoomSize;
@@ -139,6 +137,7 @@ struct Preferences {
       bool followSong;
       bool useOsc;
       int oscPort;
+      QString appStyleFile;
 
       bool dirty;
 

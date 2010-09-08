@@ -141,6 +141,7 @@
       <file>data/editcopy.svg</file>
       <file>data/editpaste.svg</file>
       <file>data/fileprint.svg</file>
+      <file alias="data/appstyle.st">../share/styles/appstyle.st</file>
 
    </qresource>
 </RCC>

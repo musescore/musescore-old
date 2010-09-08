@@ -133,18 +133,6 @@ class MeasuresDialog : public QDialog, public Ui::MeasuresDialogBase {
       };
 
 //---------------------------------------------------------
-//   NoteButton
-//---------------------------------------------------------
-
-class NoteButton : public QToolButton {
-      Q_OBJECT
-      virtual QSize sizeHint() const;
-
-   public:
-      NoteButton(QWidget* parent = 0);
-      };
-
-//---------------------------------------------------------
 //   Shortcut
 //    hold the basic values for configurable shortcuts
 //---------------------------------------------------------

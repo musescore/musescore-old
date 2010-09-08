@@ -95,7 +95,6 @@ QMap<QString, Shortcut*> shortcuts;
 
 bool converterMode = false;
 bool externalIcons = false;
-bool externalStyle = false;
 static bool pluginMode = false;
 static bool startWithNewScore = false;
 double converterDpi = 300;
@@ -108,26 +107,6 @@ bool useFactorySettings = false;
 
 QString revision;
 extern void initStaffTypes();
-
-//---------------------------------------------------------
-//   NoteButton
-//---------------------------------------------------------
-
-NoteButton::NoteButton(QWidget* parent)
-   : QToolButton(parent)
-      {
-      }
-
-//---------------------------------------------------------
-//   sizeHint
-//---------------------------------------------------------
-
-QSize NoteButton::sizeHint() const
-      {
-      int w = preferences.noteEntryIconWidth;
-      int h = preferences.noteEntryIconHeight;
-      return QSize(w, h);
-      }
 
 //---------------------------------------------------------
 // cmdInsertMeasure
@@ -340,7 +319,7 @@ MuseScore::MuseScore()
    : QMainWindow()
       {
       _sstate = STATE_INIT;
-      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
+//      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
 
       ucheck                = new UpdateChecker();
@@ -552,7 +531,7 @@ MuseScore::MuseScore()
 
       entryTools = addToolBar(tr("Note Entry"));
       entryTools->setObjectName("entry-tools");
-      entryTools->setIconSize(QSize(preferences.noteEntryIconWidth, preferences.noteEntryIconHeight));
+//      entryTools->setIconSize(QSize(preferences.noteEntryIconWidth, preferences.noteEntryIconHeight));
 
       a = getAction("note-input");
       a->setCheckable(true);
@@ -565,7 +544,7 @@ MuseScore::MuseScore()
          << "pad-dotdot" << "tie" << "pad-rest";
 
       foreach(const QString& s, sl1) {
-            NoteButton* nb = new NoteButton;
+            QToolButton* nb = new QToolButton;
             QAction* a = getAction(qPrintable(s));
             if (s != "tie")
                   a->setCheckable(true);
@@ -577,7 +556,7 @@ MuseScore::MuseScore()
       QStringList sl2;
       sl2 << "sharp2" << "sharp" << "nat" << "flat"  <<"flat2";
       foreach(const QString& s, sl2) {
-            NoteButton* nb = new NoteButton;
+            QToolButton* nb = new QToolButton;
             QAction* a = getAction(qPrintable(s));
             nb->setDefaultAction(a);
             entryTools->addWidget(nb);
@@ -1106,7 +1085,6 @@ static void usage()
         "   -p name   execute named plugin\n"
         "   -F        use factory settings\n"
         "   -i        load icons from INSTALLPATH/icons\n"
-        "             application stylesheet from INSTALLPATH/styles/appstyle.st\n"
         "   -e        enable experimental features\n"
         );
       exit(-1);
@@ -1872,7 +1850,6 @@ int main(int argc, char* av[])
                         break;
                   case 'i':
                         externalIcons = true;
-                        externalStyle = true;
                         break;
                   case 'I':
                         midiInputTrace = true;

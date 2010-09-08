@@ -98,8 +98,8 @@ class Aeolus : public Synth {
       virtual void setMasterTuning(double);
       virtual double masterTuning() const;
 
-      virtual bool loadSoundFont(const QString&);
-      virtual QString soundFont() const;
+      virtual bool loadSoundFonts(const QStringList&) { return true; }
+      virtual QStringList soundFonts() const { return QStringList(); }
 
       virtual void process(unsigned, float*, float*, int, float);
       virtual void play(const Event&);

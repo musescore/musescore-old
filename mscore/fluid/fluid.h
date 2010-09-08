@@ -329,15 +329,20 @@ class Fluid : public Synth {
       Reverb* reverb;
       Chorus* chorus;
 
+      SFont* get_sfont_by_name(const QString& name);
+      SFont* get_sfont_by_id(int id);
+      SFont* get_sfont(int idx) const     { return sfonts[idx];   }
+      void remove_sfont(SFont* sf);
+      int add_sfont(SFont* sf);
+      bool sfunload(int id, bool reset_presets);
+      int sfload(const QString& filename, bool reset_presets);
+
    public:
       Fluid();
       ~Fluid();
       virtual void init(int sampleRate);
 
       virtual const char* name() const { return "Fluid"; }
-
-      virtual bool loadSoundFont(const QString& s);
-      virtual QString soundFont() const;
 
       virtual void play(const Event&);
       virtual const QList<MidiPatch*>& getPatchInfo() const { return patches; }
@@ -383,16 +388,9 @@ class Fluid : public Synth {
       void set_interp_method(int chan, int interp_method);
 
       Preset* get_channel_preset(int chan) const { return channel[chan]->preset(); }
-      SFont* get_sfont_by_name(const QString& name);
-      SFont* get_sfont_by_id(unsigned int id);
-      SFont* get_sfont(unsigned int num)             { return sfonts[num];   }
-      const SFont* get_sfont(unsigned int num) const { return sfonts[num];   }
-      int sfcount() const                            { return sfonts.size(); }
-      void remove_sfont(SFont* sf);
-      int add_sfont(SFont* sf);
-      int sfreload(unsigned int id);
-      bool sfunload(unsigned int id, int reset_presets);
-      int sfload(const QString& filename, int reset_presets);
+
+      virtual bool loadSoundFonts(const QStringList& s);
+      virtual QStringList soundFonts() const;
 
       void start_voice(Voice* voice);
       Voice* alloc_voice(unsigned id, Sample* sample, int chan, int key, int vel, double vt);

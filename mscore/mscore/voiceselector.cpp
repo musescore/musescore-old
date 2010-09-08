@@ -31,6 +31,7 @@ VoiceButton::VoiceButton(int v, QWidget* parent)
       {
       voice = v;
       setToolButtonStyle(Qt::ToolButtonIconOnly);
+      setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
       }
 
 //---------------------------------------------------------
@@ -46,20 +47,9 @@ void VoiceButton::paintEvent(QPaintEvent* e)
       if (isChecked())
             p.drawRect(0, 0, width()-1, height()-1);
       QFont f = font();
-      f.setPixelSize(preferences.iconHeight / 2);
+      f.setPixelSize(height() * 3 / 4);
       p.setFont(f);
       p.drawText(rect(), Qt::AlignCenter, QString("%1").arg(voice+1));
-      }
-
-//---------------------------------------------------------
-//   sizeHint
-//---------------------------------------------------------
-
-QSize VoiceButton::sizeHint() const
-      {
-      int w = preferences.iconWidth / 2;
-      int h = preferences.iconHeight / 2;
-      return QSize((w * 3)/2, h);
       }
 
 //---------------------------------------------------------
@@ -89,6 +79,7 @@ VoiceSelector::VoiceSelector(QWidget* parent)
             ++i;
             }
       setLayout(vwl);
+//      setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
       connect(vag, SIGNAL(triggered(QAction*)), this, SIGNAL(triggered(QAction*)));
       }
 

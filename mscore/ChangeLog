@@ -1,3 +1,5 @@
+8.sep (ws)
+      - add application style file to preferences
 7.sep (ws)
       - command line option "-i" also loads the application style
         sheet from INSTALLPATH/styles/appstyle.st
