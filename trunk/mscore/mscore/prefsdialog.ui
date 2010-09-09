@@ -2404,6 +2404,7 @@
    </item>
   </layout>
  </widget>
+ <pixmapfunction>getPixmap</pixmapfunction>
  <customwidgets>
   <customwidget>
    <class>Awl::ColorLabel</class>

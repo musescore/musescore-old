@@ -1109,6 +1109,7 @@ PaletteBox::PaletteBox(QWidget* parent)
    : QDockWidget(tr("Palettes"), parent)
       {
       setObjectName("palette-box");
+      setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
       QWidget* mainWidget = new QWidget;
       vbox = new QVBoxLayout;
       vbox->setMargin(0);

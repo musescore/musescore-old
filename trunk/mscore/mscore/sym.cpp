@@ -271,7 +271,6 @@ SymCode pSymbols[] = {
 //      SymCode(0xe105, 1),    // note4_Sym
       SymCode(0x1d15f, 1),    // note4_Sym
 
-//      SymCode(0xe106, 1),    // note8_Sym
       SymCode(0xe106, 1),    // note8_Sym
 
       SymCode(0xe107, 1),    // note16_Sym
@@ -441,6 +440,9 @@ Sym::Sym(const char* name, int c, int fid, double ax, double ay)
 #ifdef USE_STATIC_TEXT
       createStaticText();
 #endif
+#ifdef USE_PIXMAP
+      setupPixmap();
+#endif
       }
 
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
@@ -453,6 +455,9 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
 #ifdef USE_STATIC_TEXT
       createStaticText();
 #endif
+#ifdef USE_PIXMAP
+      setupPixmap();
+#endif
       }
 
 //---------------------------------------------------------
@@ -464,8 +469,10 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
 void Sym::createStaticText()
       {
       st.setTextFormat(Qt::PlainText);
-      st.setTextWidth(0);
-      st.setTextOption(QTextOption(Qt::AlignLeft | Qt::AlignTop));
+      st.setTextWidth(10000.0);
+      QTextOption to(Qt::AlignLeft | Qt::AlignVCenter);
+      to.setWrapMode(QTextOption::NoWrap);
+      st.setTextOption(to);
       if (_code & 0xffff0000) {
             QChar ss[2];
             ss[0] = QChar(QChar::highSurrogate(_code));
@@ -476,6 +483,42 @@ void Sym::createStaticText()
       else {
             st.setText(QString(_code));
             }
+      }
+#endif
+#ifdef USE_PIXMAP
+//---------------------------------------------------------
+//   setupPixmap
+//---------------------------------------------------------
+
+void Sym::setupPixmap()
+      {
+      scale = 0.0;
+      }
+
+//---------------------------------------------------------
+//   preparePixmap
+//---------------------------------------------------------
+
+void Sym::preparePixmap(double sc) const
+      {
+      QRectF bb(bbox(sc));
+      pixmap = QPixmap(int(bb.width())+1, int(bb.height())+1);
+
+      pixmap.fill(QColor(Qt::transparent));
+      QString s;
+      QPainter painter(&pixmap);
+      painter.scale(sc, sc);
+      painter.setFont(_font);
+      if (_code & 0xffff0000) {
+            s = QChar(QChar::highSurrogate(_code));
+            s += QChar(QChar::lowSurrogate(_code));
+            }
+      else
+            s = QChar(_code);
+      dx    = bb.x();
+      dy    = bb.y();
+      scale = sc;
+      painter.drawText(-_bbox.x(), -_bbox.y(), s);
       }
 #endif
 
@@ -494,14 +537,26 @@ const QRectF Sym::bbox(double mag) const
 
 void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       {
+#ifdef USE_STATIC_TEXT
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
-
-#ifdef USE_STATIC_TEXT
       painter.setFont(_font);
       painter.drawStaticText(x * imag, y * imag, st);
+      painter.scale(imag, imag);
 #else
-
+#ifdef USE_PIXMAP
+      double m = painter.worldTransform().m11();
+      double ddx = painter.worldTransform().dx();
+      double ddy = painter.worldTransform().dy();
+      double mm = m * mag;
+      if (scale != mm)
+            preparePixmap(mm);
+      painter.setWorldMatrixEnabled(false);
+      painter.drawPixmap(ddx + dx, ddy + dy, pixmap);
+      painter.setWorldMatrixEnabled(true);
+#else
+      double imag = 1.0 / mag;
+      painter.scale(mag, mag);
       QString s;
       painter.setFont(_font);
       if (_code & 0xffff0000) {
@@ -511,8 +566,9 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       else
             s = QChar(_code);
       painter.drawText(x * imag, y * imag, s);
-#endif
       painter.scale(imag, imag);
+#endif
+#endif
       }
 
 //---------------------------------------------------------

@@ -581,6 +581,15 @@ bool CommandTransition::eventTest(QEvent* e)
 ScoreView::ScoreView(QWidget* parent)
    : QWidget(parent)
       {
+      setAcceptDrops(true);
+      setAttribute(Qt::WA_OpaquePaintEvent);
+      setAttribute(Qt::WA_NoSystemBackground);
+      setFocusPolicy(Qt::StrongFocus);
+      setAttribute(Qt::WA_InputMethodEnabled);
+      setAttribute(Qt::WA_KeyCompression);
+      setAttribute(Qt::WA_StaticContents);
+      setAutoFillBackground(false);
+
       _score      = 0;
       dropTarget  = 0;
       _editText   = 0;
@@ -800,14 +809,6 @@ ScoreView::ScoreView(QWidget* parent)
 
       sm->start();
       //-----------------------------------------------------------------------
-
-      setAcceptDrops(true);
-      setAttribute(Qt::WA_NoSystemBackground);
-      setFocusPolicy(Qt::StrongFocus);
-      setAttribute(Qt::WA_InputMethodEnabled);
-      setAttribute(Qt::WA_KeyCompression);
-      setAttribute(Qt::WA_StaticContents);
-      setAutoFillBackground(true);
 
       if (debugMode)
             setMouseTracking(true);

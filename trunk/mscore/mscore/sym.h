@@ -24,8 +24,10 @@
 #include "style.h"
 
 #if QT_VERSION >= 0x040700
-// does not work now #define USE_STATIC_TEXT
+// does not work now    #define USE_STATIC_TEXT
 #endif
+
+// #define USE_PIXMAP   // uncomplete: does not handle color
 
 extern void initSymbols(int);
 
@@ -68,6 +70,13 @@ class Sym {
 #ifdef USE_STATIC_TEXT
       QStaticText st;
       void createStaticText();
+#endif
+#ifdef USE_PIXMAP
+      mutable QPixmap pixmap;
+      mutable double scale;
+      mutable double dx, dy;
+      void setupPixmap();
+      void preparePixmap(double) const;
 #endif
 
    public:
