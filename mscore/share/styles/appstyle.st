@@ -1,10 +1,8 @@
-/* demo application style for MuseScore
- * "dark theme"
- */
-
 * {
       font-size: 10pt; font-family: "freeSans";
-      background: #525252; color: white
+      background: #525252;
+      alternate-background-color: #626262;
+      color: white
       }
 QToolTip {
       color: black;
@@ -80,9 +78,14 @@ Palette {
       alternate-background-color: blue;
       }
 VoiceSelector VoiceButton {
+      color: black;
+      }
+VoiceSelector > VoiceButton:checked {
       color: white;
       }
-VoiceSelector VoiceButton:checked {
-      color: black;
+VoiceSelector {
+      border-style: outset;
+      border: 1px solid #787878;
+      border-radius: 4px;
       }
 

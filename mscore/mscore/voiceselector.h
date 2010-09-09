@@ -25,7 +25,7 @@
 //   VoiceSelector
 //---------------------------------------------------------
 
-class VoiceSelector : public QWidget {
+class VoiceSelector : public QFrame {
       Q_OBJECT
 
    signals:

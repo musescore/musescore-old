@@ -1186,6 +1186,7 @@ void PreferenceDialog::apply()
 
       preferences.useOsc  = oscServer->isChecked();
       preferences.oscPort = oscPort->value();
+      preferences.appStyleFile = styleFile->text();
 
       if (languageChanged) {
             setMscoreLocale(preferences.language);

@@ -32,6 +32,7 @@ VoiceButton::VoiceButton(int v, QWidget* parent)
       voice = v;
       setToolButtonStyle(Qt::ToolButtonIconOnly);
       setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+      setCheckable(true);
       }
 
 //---------------------------------------------------------
@@ -47,7 +48,7 @@ void VoiceButton::paintEvent(QPaintEvent* e)
       if (isChecked())
             p.drawRect(0, 0, width()-1, height()-1);
       QFont f = font();
-      f.setPixelSize(height() * 3 / 4);
+      f.setPixelSize(height());
       p.setFont(f);
       p.drawText(rect(), Qt::AlignCenter, QString("%1").arg(voice+1));
       }
@@ -57,7 +58,7 @@ void VoiceButton::paintEvent(QPaintEvent* e)
 //---------------------------------------------------------
 
 VoiceSelector::VoiceSelector(QWidget* parent)
-   : QWidget(parent)
+   : QFrame(parent)
       {
       QGridLayout* vwl = new QGridLayout;
       vwl->setSpacing(0);
@@ -79,7 +80,6 @@ VoiceSelector::VoiceSelector(QWidget* parent)
             ++i;
             }
       setLayout(vwl);
-//      setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Expanding);
       connect(vag, SIGNAL(triggered(QAction*)), this, SIGNAL(triggered(QAction*)));
       }
 
