@@ -63,6 +63,7 @@
 #include "harmonyedit.h"
 #include "navigator.h"
 #include "chord.h"
+#include "mstyle/mstyle.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -1804,6 +1805,8 @@ static bool processNonGui()
 
 int main(int argc, char* av[])
       {
+printf("===========load style\n");
+      QApplication::setStyle(new MStyle);
       QFile f(":/revision.h");
       f.open(QIODevice::ReadOnly);
       revision = QString(f.readAll());

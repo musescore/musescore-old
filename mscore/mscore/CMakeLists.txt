@@ -244,6 +244,7 @@ if (MINGW)
    target_link_libraries(mscore
       al
       awl
+      mstyle
       diff_match_patch
       msynth
       bww
@@ -314,6 +315,7 @@ else (MINGW)
       diff_match_patch
       al
       awl
+      mstyle
       msynth
       bww
       osdabzip
