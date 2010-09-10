@@ -35,6 +35,10 @@ StyleHelper::StyleHelper()
       _contrast = 1.0;
       }
 
+//---------------------------------------------------------
+//   checkAutoFillBackground
+//---------------------------------------------------------
+
 const QWidget* StyleHelper::checkAutoFillBackground(const QWidget* w) const
       {
       if (!w)
@@ -51,6 +55,10 @@ const QWidget* StyleHelper::checkAutoFillBackground(const QWidget* w) const
             }
       return 0;
       }
+
+//---------------------------------------------------------
+//   backgroundColor
+//---------------------------------------------------------
 
 const QColor& StyleHelper::backgroundColor(const QColor &color, qreal ratio) const
       {
@@ -70,6 +78,10 @@ const QColor& StyleHelper::backgroundColor(const QColor &color, qreal ratio) con
       return *out;
       }
 
+//---------------------------------------------------------
+//   backgroundTopColor
+//---------------------------------------------------------
+
 const QColor& StyleHelper::backgroundTopColor(const QColor &color) const
       {
       const quint64 key( color.rgba() );
@@ -86,6 +98,10 @@ const QColor& StyleHelper::backgroundTopColor(const QColor &color) const
             }
       return *out;
       }
+
+//---------------------------------------------------------
+//   backgroundBottomColor
+//---------------------------------------------------------
 
 const QColor& StyleHelper::backgroundBottomColor(const QColor &color) const
       {
@@ -105,8 +121,12 @@ const QColor& StyleHelper::backgroundBottomColor(const QColor &color) const
       return *out;
       }
 
+//---------------------------------------------------------
+//   lowThreshold
+//---------------------------------------------------------
+
 bool StyleHelper::lowThreshold(const QColor &color) const
-    {
+      {
       const quint32 key( color.rgba() );
       ColorMap::iterator iter( m_lowThreshold.find( key ) );
       if (iter != m_lowThreshold.end())
@@ -119,8 +139,12 @@ bool StyleHelper::lowThreshold(const QColor &color) const
             }
       }
 
+//---------------------------------------------------------
+//   highThreshold
+//---------------------------------------------------------
+
 bool StyleHelper::highThreshold(const QColor &color) const
-    {
+      {
       const quint32 key( color.rgba() );
       ColorMap::iterator iter( m_highThreshold.find( key ) );
       if (iter != m_highThreshold.end() )
@@ -133,7 +157,11 @@ bool StyleHelper::highThreshold(const QColor &color) const
             }
       }
 
-TileSet *StyleHelper::hole(const QColor &color, qreal shade, int size, bool outline)
+//---------------------------------------------------------
+//   hole
+//---------------------------------------------------------
+
+TileSet* StyleHelper::hole(const QColor &color, qreal shade, int size, bool outline)
     {
       const quint64 key( (quint64(color.rgba()) << 32) | (quint64(256.0 * shade) << 24) | size << 1 | outline );
       TileSet *tileSet = m_holeCache.object(key);
@@ -177,6 +205,9 @@ TileSet *StyleHelper::hole(const QColor &color, qreal shade, int size, bool outl
       return tileSet;
       }
 
+//---------------------------------------------------------
+//   holeFlat
+//---------------------------------------------------------
 
 TileSet* StyleHelper::holeFlat(const QColor& color, qreal shade, int size) const
       {
@@ -207,6 +238,10 @@ TileSet* StyleHelper::holeFlat(const QColor& color, qreal shade, int size) const
             }
       return tileSet;
       }
+
+//---------------------------------------------------------
+//   drawHole
+//---------------------------------------------------------
 
 void StyleHelper::drawHole(QPainter &p, const QColor &color, qreal shade, int r) const
       {
@@ -274,8 +309,12 @@ void StyleHelper::renderHole(QPainter *p, const QColor &base, const QRect &r, bo
             }
       }
 
+//---------------------------------------------------------
+//   holeFocused
+//---------------------------------------------------------
+
 TileSet* StyleHelper::holeFocused(const QColor &color, const QColor &glowColor, qreal shade, int size, bool outline)
-    {
+      {
       // FIXME must move to s/slabcache/cache/ b/c key is wrong
       Cache<TileSet>::Value* cache( m_holeFocusedCache.get(glowColor) );
 
@@ -310,6 +349,9 @@ TileSet* StyleHelper::holeFocused(const QColor &color, const QColor &glowColor, 
       return tileSet;
       }
 
+//---------------------------------------------------------
+//   calcLightColor
+//---------------------------------------------------------
 
 const QColor& StyleHelper::calcLightColor(const QColor &color) const
       {
@@ -321,6 +363,10 @@ const QColor& StyleHelper::calcLightColor(const QColor &color) const
             }
       return *out;
       }
+
+//---------------------------------------------------------
+//   calcDarkColor
+//---------------------------------------------------------
 
 const QColor& StyleHelper::calcDarkColor(const QColor &color) const
       {
@@ -335,6 +381,10 @@ const QColor& StyleHelper::calcDarkColor(const QColor &color) const
       return *out;
       }
 
+//---------------------------------------------------------
+//   alphaColor
+//---------------------------------------------------------
+
 QColor StyleHelper::alphaColor(QColor color, qreal alpha)
       {
       if (alpha >= 0 && alpha < 1.0) {
@@ -342,6 +392,10 @@ QColor StyleHelper::alphaColor(QColor color, qreal alpha)
             }
       return color;
       }
+
+//---------------------------------------------------------
+//   drawInverseShadow
+//---------------------------------------------------------
 
 void StyleHelper::drawInverseShadow(
         QPainter &p, const QColor &color,
@@ -365,6 +419,10 @@ void StyleHelper::drawInverseShadow(
               p.drawEllipse(QRectF(pad-fuzz, pad-fuzz, size+fuzz*2.0, size+fuzz*2.0));
           }
 
+
+//---------------------------------------------------------
+//   drawInverseGlow
+//---------------------------------------------------------
 
 void StyleHelper::drawInverseGlow(
         QPainter &p, const QColor &color,
@@ -392,141 +450,144 @@ void StyleHelper::drawInverseGlow(
               p.drawEllipse(r);
           }
 
-     //____________________________________________________________________
+//---------------------------------------------------------
+//   calcShadowColor
+//---------------------------------------------------------
+
 const QColor& StyleHelper::calcShadowColor(const QColor &color)
-    {
+      {
+      const quint64 key( color.rgba() );
+      QColor* out( m_shadowColorCache.object( key ) );
+      if( !out ) {
+            out = new QColor( (lowThreshold(color)) ?
+            ColorUtils::mix( Qt::black, color, color.alphaF() ) :
+            ColorScheme::shade(ColorUtils::mix( Qt::black, color, color.alphaF() ),
+               ColorScheme::ShadowShade, _contrast) );
+            m_shadowColorCache.insert(key, out );
+            }
+      return *out;
+      }
 
-              const quint64 key( color.rgba() );
-              QColor* out( m_shadowColorCache.object( key ) );
-              if( !out )
-                    {
-                        out = new QColor( (lowThreshold(color)) ?
-                        ColorUtils::mix( Qt::black, color, color.alphaF() ) :
-                        ColorScheme::shade(
-                            ColorUtils::mix( Qt::black, color, color.alphaF() ),
-                            ColorScheme::ShadowShade,
-                            _contrast) );
-                        m_shadowColorCache.insert(key, out );
-                    }
+//---------------------------------------------------------
+//   renderMenuBackground
+//---------------------------------------------------------
 
-              return *out;
+void StyleHelper::renderMenuBackground(QPainter* p, const QRect& clipRect, const QWidget* widget, const QColor& color)
+      {
+      // get coordinates relative to the client area
+      // this is stupid. One could use mapTo if this was taking const QWidget* and not
+      // QWidget* as argument.
+      const QWidget* w( widget );
+      int x(0);
+      int y(0);
 
-          }
+      while( !w->isWindow() && w != w->parentWidget() ) {
+            x += w->geometry().x();
+            y += w->geometry().y();
+            w = w->parentWidget();
+            }
 
-    void StyleHelper::renderMenuBackground( QPainter* p, const QRect& clipRect, const QWidget* widget, const QColor& color )
-    {
+      if (clipRect.isValid()) {
+            p->save();
+            p->setClipRegion(clipRect,Qt::IntersectClip);
+            }
 
-              // get coordinates relative to the client area
-              // this is stupid. One could use mapTo if this was taking const QWidget* and not
-              // QWidget* as argument.
-              const QWidget* w( widget );
-              int x(0);
-              int y(0);
+      // calculate upper part height
+      // special tricks are needed
+      // to handle both window contents and window decoration
+      QRect r = w->rect();
+      const int height( w->frameGeometry().height() );
+      const int splitY( qMin(200, (3*height)/4) );
 
-              while( !w->isWindow() && w != w->parentWidget() )
-                    {
-                        x += w->geometry().x();
-                        y += w->geometry().y();
-                        w = w->parentWidget();
-                    }
+      const QRect upperRect( QRect(0, 0, r.width(), splitY) );
+      const QPixmap tile( verticalGradient(color, splitY) );
+      p->drawTiledPixmap(upperRect, tile);
 
-              if (clipRect.isValid()) {
-                        p->save();
-                        p->setClipRegion(clipRect,Qt::IntersectClip);
-                    }
+      const QRect lowerRect( 0,splitY, r.width(), r.height() - splitY );
+      p->fillRect(lowerRect, backgroundBottomColor(color));
 
-              // calculate upper part height
-              // special tricks are needed
-              // to handle both window contents and window decoration
-              QRect r = w->rect();
-              const int height( w->frameGeometry().height() );
-              const int splitY( qMin(200, (3*height)/4) );
+      if (clipRect.isValid()) {
+            p->restore();
+            }
+      }
 
-              const QRect upperRect( QRect(0, 0, r.width(), splitY) );
-              const QPixmap tile( verticalGradient(color, splitY) );
-              p->drawTiledPixmap(upperRect, tile);
-
-              const QRect lowerRect( 0,splitY, r.width(), r.height() - splitY );
-              p->fillRect(lowerRect, backgroundBottomColor(color));
-
-              if (clipRect.isValid())
-                    { p->restore(); }
-
-          }
+//---------------------------------------------------------
+//   verticalGradient
+//---------------------------------------------------------
 
 QPixmap StyleHelper::verticalGradient(const QColor &color, int height, int offset)
       {
-              const quint64 key( (quint64(color.rgba()) << 32) | height | 0x8000 );
-              QPixmap *pixmap( m_backgroundCache.object( key ) );
+      const quint64 key( (quint64(color.rgba()) << 32) | height | 0x8000 );
+      QPixmap *pixmap( m_backgroundCache.object( key ) );
 
-              if (!pixmap)
-                    {
-                        pixmap = new QPixmap(1, height);
-                        pixmap->fill( Qt::transparent );
+      if (!pixmap) {
+            pixmap = new QPixmap(1, height);
+            pixmap->fill( Qt::transparent );
 
-                        QLinearGradient gradient(0, offset, 0, height+offset);
-                        gradient.setColorAt(0.0, backgroundTopColor(color));
-                        gradient.setColorAt(0.5, color);
-                        gradient.setColorAt(1.0, backgroundBottomColor(color));
+            QLinearGradient gradient(0, offset, 0, height+offset);
+            gradient.setColorAt(0.0, backgroundTopColor(color));
+            gradient.setColorAt(0.5, color);
+            gradient.setColorAt(1.0, backgroundBottomColor(color));
 
-                        QPainter p(pixmap);
-                        p.setCompositionMode(QPainter::CompositionMode_Source);
-                        p.fillRect(pixmap->rect(), gradient);
+            QPainter p(pixmap);
+            p.setCompositionMode(QPainter::CompositionMode_Source);
+            p.fillRect(pixmap->rect(), gradient);
 
-                        p.end();
+            p.end();
 
-                        m_backgroundCache.insert(key, pixmap);
-                    }
+            m_backgroundCache.insert(key, pixmap);
+            }
+      return *pixmap;
+      }
 
-              return *pixmap;
-          }
+//---------------------------------------------------------
+//   radialGradient
+//---------------------------------------------------------
 
 QPixmap StyleHelper::radialGradient(const QColor &color, int width, int height)
-    {
-              const quint64 key( ( quint64(color.rgba()) << 32) | width | 0xb000 );
-              QPixmap *pixmap( m_backgroundCache.object( key ) );
+      {
+      const quint64 key( ( quint64(color.rgba()) << 32) | width | 0xb000 );
+      QPixmap *pixmap( m_backgroundCache.object( key ) );
 
-              if (!pixmap)
-                    {
-                        pixmap = new QPixmap(width, height);
-                        pixmap->fill(Qt::transparent);
+      if (!pixmap) {
+            pixmap = new QPixmap(width, height);
+            pixmap->fill(Qt::transparent);
+            QColor radialColor = backgroundRadialColor(color);
+            radialColor.setAlpha(255);
+            QRadialGradient gradient(64, height-64, 64);
+            gradient.setColorAt(0, radialColor);
+            radialColor.setAlpha(101);
+            gradient.setColorAt(0.5, radialColor);
+            radialColor.setAlpha(37);
+            gradient.setColorAt(0.75, radialColor);
+            radialColor.setAlpha(0);
+            gradient.setColorAt(1, radialColor);
+            QPainter p(pixmap);
+            p.scale(width/128.0,1);
+            p.fillRect(QRect(0,0,128,height), gradient);
+            p.end();
+            m_backgroundCache.insert(key, pixmap);
+            }
+      return *pixmap;
+      }
 
-                        QColor radialColor = backgroundRadialColor(color);
-                        radialColor.setAlpha(255);
-                        QRadialGradient gradient(64, height-64, 64);
-                        gradient.setColorAt(0, radialColor);
-                        radialColor.setAlpha(101);
-                        gradient.setColorAt(0.5, radialColor);
-                        radialColor.setAlpha(37);
-                        gradient.setColorAt(0.75, radialColor);
-                        radialColor.setAlpha(0);
-                        gradient.setColorAt(1, radialColor);
-
-                        QPainter p(pixmap);
-                        p.scale(width/128.0,1);
-                        p.fillRect(QRect(0,0,128,height), gradient);
-
-                        p.end();
-
-                        m_backgroundCache.insert(key, pixmap);
-                    }
-
-              return *pixmap;
-          }
+//---------------------------------------------------------
+//   backgroundRadialColor
+//---------------------------------------------------------
 
 const QColor& StyleHelper::backgroundRadialColor(const QColor &color)
-    {
-              const quint64 key( color.rgba() );
-              QColor* out( m_backgroundRadialColorCache.object( key ) );
-              if( !out )
-                    {
-                        if( lowThreshold(color) ) out = new QColor(ColorScheme::shade(color, ColorScheme::LightShade, 0.0) );
-                              else if( highThreshold( color ) ) out = new QColor( color );
-                              else out = new QColor(ColorScheme::shade(color, ColorScheme::LightShade, _bgcontrast) );
-                              m_backgroundRadialColorCache.insert( key, out );
-                    }
-
-              return *out;
-          }
+      {
+      const quint64 key( color.rgba() );
+      QColor* out( m_backgroundRadialColorCache.object( key ) );
+      if (!out) {
+            if( lowThreshold(color) )
+                  out = new QColor(ColorScheme::shade(color, ColorScheme::LightShade, 0.0) );
+            else if( highThreshold(color))
+                  out = new QColor(color);
+            else out = new QColor(ColorScheme::shade(color, ColorScheme::LightShade, _bgcontrast) );
+                  m_backgroundRadialColorCache.insert( key, out );
+            }
+      return *out;
+      }
 
 

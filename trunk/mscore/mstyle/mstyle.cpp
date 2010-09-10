@@ -29,7 +29,9 @@ enum MenuHighlightMode {
 
 MenuHighlightMode menuHighlightMode = MM_DARK;
 
-#define OxygenStyleConfigData_scrollBarWidth 8
+#define OxygenStyleConfigData_scrollBarWidth          8
+#define OxygenStyleConfigData_toolTipDrawStyledFrames true
+#define OxygenStyleConfigData_toolTipTransparent     true
 
 //---------------------------------------------------------
 //   Animations
@@ -353,8 +355,12 @@ QSize MStyle::sizeFromContents(ContentsType element, const QStyleOption* option,
             }
       }
 
-QSize MStyle::checkBoxSizeFromContents( const QStyleOption*, const QSize& contentsSize, const QWidget* ) const
-    {
+//---------------------------------------------------------
+//   checkBoxSizeFromContents
+//---------------------------------------------------------
+
+QSize MStyle::checkBoxSizeFromContents(const QStyleOption*, const QSize& contentsSize, const QWidget*) const
+      {
       //Add size for indicator
       const int indicator( CheckBox_Size );
 
@@ -369,7 +375,11 @@ QSize MStyle::checkBoxSizeFromContents( const QStyleOption*, const QSize& conten
       return size;
       }
 
-QSize MStyle::comboBoxSizeFromContents( const QStyleOption* option, const QSize& contentsSize, const QWidget* ) const
+//---------------------------------------------------------
+//   comboBoxSizeFromContents
+//---------------------------------------------------------
+
+QSize MStyle::comboBoxSizeFromContents( const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
       {
       QSize size = expandSize( contentsSize,
          ComboBox_ContentsMargin,
@@ -396,7 +406,11 @@ QSize MStyle::comboBoxSizeFromContents( const QStyleOption* option, const QSize&
       return size;
       }
 
-QSize MStyle::headerSectionSizeFromContents( const QStyleOption* option, const QSize& contentsSize, const QWidget* ) const
+//---------------------------------------------------------
+//   headerSectionSizeFromContents
+//---------------------------------------------------------
+
+QSize MStyle::headerSectionSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
       {
       const QStyleOptionHeader* headerOpt( qstyleoption_cast<const QStyleOptionHeader *>( option ));
       if( !headerOpt )
@@ -413,7 +427,11 @@ QSize MStyle::headerSectionSizeFromContents( const QStyleOption* option, const Q
       return expandSize( QSize(w, h), Header_ContentsMargin );
       }
 
-QSize MStyle::menuItemSizeFromContents( const QStyleOption* option, const QSize& contentsSize, const QWidget* widget ) const
+//---------------------------------------------------------
+//   menuItemSizeFromContents
+//---------------------------------------------------------
+
+QSize MStyle::menuItemSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
       {
       const QStyleOptionMenuItem* menuItemOption = qstyleoption_cast<const QStyleOptionMenuItem*>(option);
       if( !menuItemOption)
@@ -480,7 +498,11 @@ QSize MStyle::menuItemSizeFromContents( const QStyleOption* option, const QSize&
       return expandSize(insideSize, MenuItem_Margin );
       }
 
-QSize MStyle::pushButtonSizeFromContents( const QStyleOption* option, const QSize& contentsSize, const QWidget* ) const
+//---------------------------------------------------------
+//   pushButtonSizeFromContents
+//---------------------------------------------------------
+
+QSize MStyle::pushButtonSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
       {
       const QStyleOptionButton* bOpt = qstyleoption_cast<const QStyleOptionButton*>(option);
       if( !bOpt)
@@ -506,7 +528,11 @@ QSize MStyle::pushButtonSizeFromContents( const QStyleOption* option, const QSiz
       return size;
       }
 
-QSize MStyle::tabBarTabSizeFromContents( const QStyleOption* option, const QSize& contentsSize, const QWidget* widget ) const
+//---------------------------------------------------------
+//   tabBarTabSizeFromContents
+//---------------------------------------------------------
+
+QSize MStyle::tabBarTabSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
       {
       const QStyleOptionTab *tabOpt( qstyleoption_cast<const QStyleOptionTab*>(option) );
 
@@ -555,8 +581,12 @@ QSize MStyle::tabBarTabSizeFromContents( const QStyleOption* option, const QSize
       return size;
       }
 
-QSize MStyle::toolButtonSizeFromContents( const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
-    {
+//---------------------------------------------------------
+//   toolButtonSizeFromContents
+//---------------------------------------------------------
+
+QSize MStyle::toolButtonSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget* widget) const
+      {
       QSize size = contentsSize;
       const QStyleOptionToolButton* tbOpt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
       if( tbOpt && !tbOpt->icon.isNull() && !tbOpt->text.isEmpty() && tbOpt->toolButtonStyle == Qt::ToolButtonTextUnderIcon) {
@@ -936,6 +966,86 @@ void MStyle::polishScrollArea( QAbstractScrollArea* scrollArea ) const
                   child->setAutoFillBackground( false );
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   drawPrimitive
+//---------------------------------------------------------
+
+void MStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option,
+   QPainter* painter, const QWidget* widget) const
+      {
+      painter->save();
+      StylePrimitive fcn(0);
+
+      switch(element) {
+            case PE_PanelTipLabel: fcn = &MStyle::drawPanelTipLabelPrimitive; break;
+            default:
+                  break;
+            }
+
+      // try find primitive in map, and run.
+      // exit if result is true, otherwise fallback to generic case
+      if (!(fcn && (this->*fcn)(option, painter, widget))) {
+            QCommonStyle::drawPrimitive( element, option, painter, widget );
+            }
+      painter->restore();
+      }
+
+bool MStyle::drawPanelTipLabelPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+      {
+      // parent style painting if frames should not be styled
+      if (!OxygenStyleConfigData_toolTipDrawStyledFrames)
+            return false;
+
+      const QRect& r( option->rect );
+      const QColor color( option->palette.brush(QPalette::ToolTipBase).color() );
+      QColor topColor( _helper.backgroundTopColor(color) );
+      QColor bottomColor( _helper.backgroundBottomColor(color) );
+
+      // make tooltip semi transparents when possible
+      // alpha is copied from "kdebase/apps/dolphin/tooltips/filemetadatatooltip.cpp"
+      const bool hasAlpha( _helper.hasAlphaChannel( widget ) );
+      if ( hasAlpha && OxygenStyleConfigData_toolTipTransparent) {
+            topColor.setAlpha(220);
+            bottomColor.setAlpha(220);
+            }
+
+      QLinearGradient gr( 0, r.top(), 0, r.bottom() );
+      gr.setColorAt(0, topColor );
+      gr.setColorAt(1, bottomColor );
+
+      // contrast pixmap
+      QLinearGradient gr2( 0, r.top(), 0, r.bottom() );
+      gr2.setColorAt(0.5, _helper.calcLightColor( bottomColor ) );
+      gr2.setColorAt(0.9, bottomColor );
+
+      painter->save();
+
+      if( hasAlpha ) {
+            painter->setRenderHint(QPainter::Antialiasing);
+            QRectF local( r );
+            local.adjust( 0.5, 0.5, -0.5, -0.5 );
+
+            painter->setPen( Qt::NoPen );
+            painter->setBrush( gr );
+            painter->drawRoundedRect( local, 4, 4 );
+
+            painter->setBrush( Qt::NoBrush );
+            painter->setPen(QPen( gr2, 1.1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+            painter->drawRoundedRect( local, 4, 4 );
+            }
+      else {
+            painter->setPen( Qt::NoPen );
+            painter->setBrush( gr );
+            painter->drawRect( r );
+
+            painter->setBrush( Qt::NoBrush );
+            painter->setPen(QPen( gr2, 1.1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+            painter->drawRect( r );
+            }
+      painter->restore();
+      return true;
       }
 
 
