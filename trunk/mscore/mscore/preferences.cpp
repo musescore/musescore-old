@@ -622,13 +622,26 @@ void PreferenceDialog::updateValues(Preferences* p)
       fgWallpaper->setText(p->fgWallpaper);
       bgWallpaper->setText(p->bgWallpaper);
 
-      fgColorLabel->setColor(p->fgColor);
-      bgColorLabel->setColor(p->bgColor);
-
       bgColorButton->setChecked(p->bgUseColor);
       bgWallpaperButton->setChecked(!p->bgUseColor);
       fgColorButton->setChecked(p->fgUseColor);
       fgWallpaperButton->setChecked(!p->fgUseColor);
+
+      if (p->bgUseColor) {
+            bgColorLabel->setColor(p->bgColor);
+            bgColorLabel->setPixmap(0);
+            }
+      else {
+            bgColorLabel->setPixmap(new QPixmap(bgWallpaper->text()));
+            }
+
+      if (p->fgUseColor) {
+            fgColorLabel->setColor(p->fgColor);
+            fgColorLabel->setPixmap(0);
+            }
+      else {
+            fgColorLabel->setPixmap(new QPixmap(fgWallpaper->text()));
+            }
 
       replaceFractions->setChecked(p->replaceFractions);
       replaceCopyrightSymbol->setChecked(p->replaceCopyrightSymbol);
@@ -1018,9 +1031,16 @@ void PreferenceDialog::selectStartWith()
 
 void PreferenceDialog::fgClicked(bool id)
       {
-      fgColorLabel->setEnabled(id);
       fgWallpaper->setEnabled(!id);
       fgWallpaperSelect->setEnabled(!id);
+
+      if (id) {
+            // fgColorLabel->setColor(p->fgColor);
+            fgColorLabel->setPixmap(0);
+            }
+      else {
+            fgColorLabel->setPixmap(new QPixmap(fgWallpaper->text()));
+            }
       }
 
 //---------------------------------------------------------
@@ -1029,9 +1049,16 @@ void PreferenceDialog::fgClicked(bool id)
 
 void PreferenceDialog::bgClicked(bool id)
       {
-      bgColorLabel->setEnabled(id);
       bgWallpaper->setEnabled(!id);
       bgWallpaperSelect->setEnabled(!id);
+
+      if (id) {
+            // bgColorLabel->setColor(p->bgColor);
+            bgColorLabel->setPixmap(0);
+            }
+      else {
+            bgColorLabel->setPixmap(new QPixmap(bgWallpaper->text()));
+            }
       }
 
 //---------------------------------------------------------

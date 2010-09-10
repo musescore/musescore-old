@@ -29,7 +29,7 @@
       <string/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <property name="accessibleName">
@@ -478,7 +478,7 @@
           <string>Background</string>
          </property>
          <property name="flat">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <layout class="QGridLayout">
           <property name="margin">
@@ -547,7 +547,7 @@
           <string>Notesheet</string>
          </property>
          <property name="flat">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <layout class="QGridLayout">
           <property name="margin">
@@ -616,7 +616,7 @@
           <string>Misc.</string>
          </property>
          <property name="flat">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
          <layout class="QGridLayout">
           <item row="1" column="0">

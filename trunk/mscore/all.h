@@ -115,6 +115,12 @@
 #include <QtGui/QLabel>
 #include <QtGui/QFocusFrame>
 #include <QtGui/QMouseEventTransition>
+#include <QtGui/QCommonStyle>
+#include <QtGui/QLineEdit>
+#include <QtGui/QGroupBox>
+#include <QtGui/QDial>
+#include <QtGui/QTextEdit>
+#include <QtGui/QMdiSubWindow>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>

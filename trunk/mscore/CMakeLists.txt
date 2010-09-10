@@ -253,7 +253,7 @@ if (NOT MINGW AND NOT APPLE)
 endif (NOT MINGW AND NOT APPLE)
 
 set (subdirs al awl bww2mxml osdabzip rtf2html mscore share manual demos
-     scriptgen fluid msynth diff)
+     scriptgen fluid msynth diff mstyle)
 
 if(USE_SYSTEM_QTSINGLEAPPLICATION)
       find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)

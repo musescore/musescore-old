@@ -858,6 +858,8 @@ ScoreView::~ScoreView()
       {
       delete lasso;
       delete cursor;
+      delete bgPixmap;
+      delete fgPixmap;
       delete shadowNote;
       }
 
