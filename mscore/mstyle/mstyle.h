@@ -217,6 +217,7 @@ class MStyle : public QCommonStyle {
       bool isVerticalTab(const QStyleOptionTab* option) const { return isVerticalTab(option->shape); }
       bool isVerticalTab(const QTabBar::Shape& shape) const;
       void polishScrollArea(QAbstractScrollArea* scrollArea) const;
+      bool drawPanelTipLabelPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const;
 
    public:
       MStyle();
@@ -226,6 +227,7 @@ class MStyle : public QCommonStyle {
       QSize sizeFromContents(ContentsType, const QStyleOption*, const QSize&, const QWidget*) const;
       virtual void polish(QWidget* widget);
       void unpolish(QWidget* widget);
+      void drawPrimitive(PrimitiveElement, const QStyleOption*, QPainter*, const QWidget*) const;
 
       Animations& animations() const                 { return *_animations; }
       Transitions& transitions() const               { return *_transitions; }
@@ -234,6 +236,7 @@ class MStyle : public QCommonStyle {
       };
 
 typedef bool (MStyle::*StyleControl)(const QStyleOption*, QPainter*, const QWidget*) const;
+typedef bool (MStyle::*StylePrimitive)(const QStyleOption*, QPainter*, const QWidget*) const;
 
 #endif
 

@@ -213,6 +213,8 @@ class StyleHelper {
       void renderMenuBackground(QPainter*, const QRect&, const QWidget*, const QColor&);
       QPixmap verticalGradient(const QColor &color, int height, int offset = 0);
       QPixmap radialGradient(const QColor &color, int width, int height = 64);
+      inline bool hasAlphaChannel(const QWidget*) const;
+      bool compositingActive() const { return false; } // return KWindowSystem::compositingActive();
       };
 
 //---------------------------------------------------------
@@ -228,6 +230,22 @@ const QColor& StyleHelper::calcMidColor(const QColor& color) const
             m_midColorCache.insert(key, out);
             }
       return *out;
+      }
+
+bool StyleHelper::hasAlphaChannel( const QWidget* widget ) const
+      {
+#ifdef Q_WS_X11
+      if (compositingActive()) {
+            if (widget)
+                  return widget->x11Info().depth() == 32;
+            else
+                  return QX11Info().appDepth() == 32;
+            }
+      else
+            return false;
+#else
+      return compositingActive();
+#endif
       }
 
 
