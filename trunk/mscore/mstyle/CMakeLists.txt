@@ -19,8 +19,16 @@
 #=============================================================================
 
 QT4_WRAP_CPP (mocs
-      mstyle.h
-      frameshadow.h
+      mstyle.h frameshadow.h animation.h animations.h baseengine.h
+      menubardata.h menubarengine.h widgetstateengine.h widgetstatedata.h
+      genericdata.h toolboxengine.h toolbarengine.h toolbardata.h
+      tabbarengine.h tabbardata.h splitterengine.h spinboxengine.h
+      spinboxdata.h sliderengine.h sliderdata.h scrollbarengine.h
+      scrollbardata.h progressbarengine.h progressbardata.h
+      menuengine.h menudata.h mdiwindowengine.h mdiwindowdata.h
+      headerviewengine.h headerviewdata.h enabledata.h
+      dockseparatorengine.h dockseparatordata.h
+      animationdata.h
       )
 
 add_custom_command(
@@ -52,12 +60,15 @@ add_library (
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
       ${mocs}
-      mstyle.cpp
-      colorscheme.cpp
-      colorutils.cpp
-      tileset.cpp
-      stylehelper.cpp
-      frameshadow.cpp
+      mstyle.cpp colorscheme.cpp colorutils.cpp tileset.cpp stylehelper.cpp frameshadow.cpp
+      animations.cpp animationdata.cpp dockseparatordata.cpp
+      dockseparatorengine.cpp enabledata.cpp genericdata.cpp headerviewdata.cpp
+      headerviewengine.cpp mdiwindowdata.cpp mdiwindowengine.cpp menubardata.cpp
+      menubarengine.cpp menuengine.cpp progressbardata.cpp
+      progressbarengine.cpp scrollbardata.cpp scrollbarengine.cpp sliderdata.cpp
+      sliderengine.cpp spinboxdata.cpp spinboxengine.cpp splitterengine.cpp
+      tabbardata.cpp tabbarengine.cpp toolbardata.cpp toolbarengine.cpp
+      toolboxengine.cpp widgetstatedata.cpp widgetstateengine.cpp mconfig.cpp
       )
 
 set_target_properties( mstyle
