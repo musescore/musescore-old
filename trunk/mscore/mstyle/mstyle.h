@@ -531,17 +531,6 @@ class MStyle : public QCommonStyle {
             return visualPos(opt->direction, opt->rect, pos);
             }
 
-      QRect toolBoxTabContentsRect(const QStyleOption* option, const QWidget*) const {
-            return insideMargin( option->rect, 0, 5, 0, 5, 0 );
-            }
-
-      QRect checkBoxContentsRect( const QStyleOption* option, const QWidget* ) const {
-            return handleRTL( option, option->rect.adjusted( CheckBox_Size + CheckBox_BoxTextSpace, 0, 0, 0 ) );
-            }
-
-      QRect progressBarContentsRect( const QStyleOption* option, const QWidget* ) const {
-            return insideMargin( option->rect, ProgressBar_GrooveMargin );
-            }
       //! tiles from tab orientation
       inline TileSet::Tiles tilesByShape( const QTabBar::Shape& shape) const;
 
@@ -579,11 +568,71 @@ class MStyle : public QCommonStyle {
       void renderTitleBarButton( QPainter*, const QStyleOptionTitleBar*, const QWidget*, const SubControl& ) const;
       void renderTitleBarIcon( QPainter*, const QRectF&, const SubControl& ) const;
       void renderSpinBoxArrow( QPainter*, const QStyleOptionSpinBox*, const QWidget*, const SubControl& ) const;
+      //! default implementation. Does not change anything
+      QRect defaultSubElementRect( const QStyleOption* option, const QWidget* ) const { return option->rect; }
+
+      //! pushbutton contents
+      QRect pushButtonContentsRect( const QStyleOption* option, const QWidget* ) const {
+            return insideMargin( option->rect,
+               PushButton_ContentsMargin,
+               PushButton_ContentsMargin_Left,
+               PushButton_ContentsMargin_Top,
+               PushButton_ContentsMargin_Right,
+               PushButton_ContentsMargin_Bottom );
+               }
+
+      //! toolbox tab
+      QRect toolBoxTabContentsRect( const QStyleOption* option, const QWidget* ) const {
+            return insideMargin( option->rect, 0, 5, 0, 5, 0 );
+            }
+
+      QRect checkBoxContentsRect( const QStyleOption* option, const QWidget* ) const {
+            return handleRTL( option, option->rect.adjusted( CheckBox_Size + CheckBox_BoxTextSpace, 0, 0, 0 ) );
+            }
+
+      QRect progressBarContentsRect( const QStyleOption* option, const QWidget* ) const {
+            return insideMargin( option->rect, ProgressBar_GrooveMargin );
+            }
+
+      //! tabBar buttons
+      QRect tabBarTabLeftButtonRect( const QStyleOption* option, const QWidget* widget ) const {
+            return tabBarTabButtonRect( SE_TabBarTabLeftButton, option, widget );
+            }
+
+      QRect tabBarTabRightButtonRect( const QStyleOption* option, const QWidget* widget ) const {
+            return tabBarTabButtonRect( SE_TabBarTabRightButton, option, widget );
+            }
+
+      QRect tabBarTabButtonRect( SubElement, const QStyleOption*, const QWidget* ) const;
+
+      // tabbar tab text
+      QRect tabBarTabTextRect( const QStyleOption* option, const QWidget* widget ) const {
+            return QCommonStyle::subElementRect( SE_TabBarTabText, option, widget ).adjusted( 6, 0, -6, 0 );
+            }
+
+      // tab widgets
+      QRect tabWidgetTabContentsRect( const QStyleOption*, const QWidget* ) const;
+      QRect tabWidgetTabPaneRect( const QStyleOption*, const QWidget* ) const;
+
+      QRect tabWidgetLeftCornerRect( const QStyleOption* option, const QWidget* widget ) const;
+      QRect tabWidgetRightCornerRect( const QStyleOption* option, const QWidget* widget ) const;
+      bool emptyPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const { return true; }
+
 
    public:
       MStyle();
       virtual int pixelMetric(PixelMetric metric, const QStyleOption* option = 0, const QWidget* widget = 0) const;
+      virtual int styleHint(StyleHint, const QStyleOption* = 0, const QWidget* = 0, QStyleHintReturn* = 0) const;
+      //! returns rect corresponding to one widget's subelement
+      virtual QRect subElementRect( SubElement subRect, const QStyleOption*, const QWidget* ) const;
+
+      //! returns rect corresponding to one widget's subcontrol
+      virtual QRect subControlRect( ComplexControl, const QStyleOptionComplex*, SubControl, const QWidget* ) const;
+
       QSize sizeFromContents(ContentsType, const QStyleOption*, const QSize&, const QWidget*) const;
+      //! returns which subcontrol given QPoint corresponds to
+      SubControl hitTestComplexControl(ComplexControl, const QStyleOptionComplex*, const QPoint&, const QWidget*) const;
+
       virtual void polish(QWidget* widget);
       void unpolish(QWidget* widget);
       void drawPrimitive(PrimitiveElement, const QStyleOption*, QPainter*, const QWidget*) const;
@@ -599,6 +648,9 @@ class MStyle : public QCommonStyle {
       Transitions& transitions() const               { return *_transitions; }
       WindowManager& windowManager() const           { return *_windowManager; }
       FrameShadowFactory& frameShadowFactory() const { return *_frameShadowFactory; }
+
+   public slots:
+      void configurationChanged();
       };
 
 bool MStyle::preceeds( const QPoint& point, const QRect& bound, const QStyleOption* option ) const

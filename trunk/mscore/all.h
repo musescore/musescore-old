@@ -33,6 +33,7 @@
 #include <QtCore/QModelIndex>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QSpinBox>
+#include <QtGui/QFormLayout>
 
 #include <QtXml/QtXml>
 

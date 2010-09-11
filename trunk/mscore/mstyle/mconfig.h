@@ -42,6 +42,10 @@ struct MStyleConfigData {
             MM_STRONG,
             MM_SUBTLE,
             };
+      enum {
+            TS_SINGLE,
+            TS_PLAIN
+            };
 
       static bool genericAnimationsEnabled;
       static int genericAnimationsDuration;
@@ -64,6 +68,16 @@ struct MStyleConfigData {
 
       static int menuHighlightMode;
       static bool tabSubtleShadow;
+      static bool showMnemonics;
+      static int scrollBarAddLineButtons;
+      static int scrollBarSubLineButtons;
+      static int scrollBarWidth;
+      static int tabStyle;
+      static bool viewDrawFocusIndicator;
+      static bool cacheEnabled;
+      static int maxCacheSize;
+      static bool widgetExplorerEnabled;
+      static bool drawWidgetRects;
       };
 #endif
 
