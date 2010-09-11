@@ -29,60 +29,41 @@
 
 #include "animation.h"
 
-    //! base class
-    class AnimationData: public QObject
-    {
+class AnimationData: public QObject
+      {
+      Q_OBJECT
 
-        Q_OBJECT
+   public:
 
-        public:
+      //! constructor
+      AnimationData(QObject* parent, QWidget* target)
+         : QObject(parent), target_(target), enabled_(true) {
+            Q_ASSERT(target_);
+            }
+      virtual ~AnimationData() {}
+      virtual void setDuration(int) = 0;
+      virtual bool enabled() const        { return enabled_; }
+      virtual void setEnabled(bool value) { enabled_ = value; }
 
-        //! constructor
-        AnimationData( QObject* parent, QWidget* target ):
-        QObject( parent ),
-        target_( target ),
-        enabled_( true )
-        { Q_ASSERT( target_ ); }
+      const QWeakPointer<QWidget>& target( void ) const {
+            return target_;
+            }
+      static qreal OpacityInvalid;
 
-        //! destructor
-        virtual ~AnimationData( void )
-        {}
+   protected:
+      //! setup animation
+      virtual void setupAnimation(const Animation::Pointer& animation, const QByteArray& property);
 
-        //! duration
-        virtual void setDuration( int ) = 0;
+      //! trigger target update
+      virtual void setDirty() const {
+            if (target_)
+                  target_.data()->update();
+            }
 
-        //! enability
-        virtual bool enabled( void ) const
-        { return enabled_; }
-
-        //! enability
-        virtual void setEnabled( bool value )
-        { enabled_ = value; }
-
-        //! target
-        const QWeakPointer<QWidget>& target( void ) const
-        { return target_; }
-
-        //! invalid opacity
-        static qreal OpacityInvalid;
-
-        protected:
-
-        //! setup animation
-        virtual void setupAnimation( const Animation::Pointer& animation, const QByteArray& property );
-
-        //! trigger target update
-        virtual void setDirty( void ) const
-        { if( target_ ) target_.data()->update(); }
-
-        private:
-
-        //! guarded target
-        QWeakPointer<QWidget> target_;
-
-        //! enability
-        bool enabled_;
-
-    };
+   private:
+      //! guarded target
+      QWeakPointer<QWidget> target_;
+      bool enabled_;
+      };
 
 #endif
