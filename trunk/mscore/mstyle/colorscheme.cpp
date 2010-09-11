@@ -640,6 +640,10 @@ StatefulBrush::~StatefulBrush()
       delete[] d;
       }
 
+//---------------------------------------------------------
+//   operator=
+//---------------------------------------------------------
+
 StatefulBrush& StatefulBrush::operator=(const StatefulBrush &other)
       {
       d[0] = other.d[0];
@@ -664,10 +668,18 @@ QBrush StatefulBrush::brush(QPalette::ColorGroup state) const
             }
       }
 
+//---------------------------------------------------------
+//   brush
+//---------------------------------------------------------
+
 QBrush StatefulBrush::brush(const QPalette &pal) const
       {
       return brush(pal.currentColorGroup());
       }
+
+//---------------------------------------------------------
+//   brush
+//---------------------------------------------------------
 
 QBrush StatefulBrush::brush(const QWidget *widget) const
       {

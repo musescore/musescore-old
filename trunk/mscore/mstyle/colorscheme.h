@@ -512,9 +512,9 @@ class StatefulBrush {
      * @note If you pass an invalid widget, you will get a default brush (i.e.
      * <tt>QBrush()</tt>).
      */
-    QBrush brush(const QWidget*) const;
+      QBrush brush(const QWidget*) const;
 
-private:
+   private:
       class StatefulBrushPrivate *d;
       };
 

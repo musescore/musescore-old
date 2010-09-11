@@ -270,7 +270,6 @@ bool StyleHelper::hasAlphaChannel( const QWidget* widget ) const
       }
 
 
-
 #endif
 
 

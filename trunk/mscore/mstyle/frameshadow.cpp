@@ -28,7 +28,6 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "frameshadow.h"
-
 #include "colorutils.h"
 
 //---------------------------------------------------------
@@ -266,9 +265,8 @@ QWidget* FrameShadowBase::viewport() const
       if (!parentWidget())
             return 0;
 
-      if( QAbstractScrollArea *widget = qobject_cast<QAbstractScrollArea *>(parentWidget()) ) {
+      if (QAbstractScrollArea *widget = qobject_cast<QAbstractScrollArea *>(parentWidget()))
             return widget->viewport();
-            }
       else
             return 0;
       }
@@ -283,7 +281,7 @@ bool FrameShadowBase::event(QEvent *e)
       if (e->type() == QEvent::Paint)
             return QWidget::event(e);
 
-      QWidget *viewport( FrameShadowBase::viewport() );
+      QWidget *viewport(FrameShadowBase::viewport());
 
       switch (e->type()) {
             case QEvent::DragEnter:
@@ -471,7 +469,7 @@ void SunkenFrameShadow::paintEvent(QPaintEvent *event )
 void FlatFrameShadow::updateGeometry()
       {
       QWidget *widget = parentWidget();
-      if( !widget )
+      if (!widget)
             return;
 
       QRect cr = widget->contentsRect();
