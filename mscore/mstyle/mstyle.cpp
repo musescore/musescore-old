@@ -34,7 +34,6 @@ enum MenuHighlightMode {
 
 MenuHighlightMode menuHighlightMode = MM_DARK;
 
-#define MStyleConfigData_scrollBarWidth                8
 #define MStyleConfigData_toolTipDrawStyledFrames       true
 #define MStyleConfigData_toolTipTransparent            true
 #define MStyleConfigData_toolBarDrawItemSeparator      true
@@ -44,7 +43,6 @@ MenuHighlightMode menuHighlightMode = MM_DARK;
 #define MStyleConfigData_checkBoxStyle_CS_CHECK        false
 #define MStyleConfigData_scrollBarColored              true
 #define MStyleConfigData_scrollBarBevel                true
-
 
 //---------------------------------------------------------
 //   MStyle
@@ -71,6 +69,7 @@ MStyle::MStyle()
       _transitions   = new Transitions(this);
       _windowManager = new WindowManager(this);
       _frameShadowFactory = new FrameShadowFactory(this);
+      configurationChanged();
       }
 
 //---------------------------------------------------------
@@ -216,7 +215,7 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
                   }
 
             case PM_ScrollBarExtent:
-                  return MStyleConfigData_scrollBarWidth + 2;
+                  return MStyleConfigData::scrollBarWidth + 2;
 
                         // tooltip label
             case PM_ToolTipLabelFrameWidth:
@@ -399,7 +398,7 @@ QSize MStyle::comboBoxSizeFromContents( const QStyleOption* option, const QSize&
             size.rheight()+=1;
 
       // also expand to account for scrollbar
-      size.rwidth() += MStyleConfigData_scrollBarWidth - 6;
+      size.rwidth() += MStyleConfigData::scrollBarWidth - 6;
       return size;
       }
 
@@ -7946,8 +7945,501 @@ QRegion MStyle::tabBarClipRegion( const QTabBar* tabBar ) const
 
           }
 
+int MStyle::styleHint(StyleHint hint, const QStyleOption* option, const QWidget* widget, QStyleHintReturn* returnData ) const
+      {
+      // handles SH_KCustomStyleElement out of switch statement,
+      // to avoid warning at compilation
+/* ws: KDE specific?
+      if (hint == SH_KCustomStyleElement ) {
+            if( widget )
+                  return _styleElements.value(widget->objectName(), 0);
+            else
+                  return 0;
+            }
+  */
+      /*
+      special cases, that cannot be registered in styleHint map,
+      because of conditional statements
+      */
+      switch( hint ) {
+            case SH_DialogButtonBox_ButtonsHaveIcons:
+                  return 0; // KGlobalSettings::showIconsOnPushButtons();
+
+            case SH_GroupBox_TextLabelColor:
+                        if( option ) return option->palette.color( QPalette::WindowText ).rgba();
+                              else return qApp->palette().color( QPalette::WindowText ).rgba();
+
+                        case SH_ItemView_ActivateItemOnSingleClick:
+                              // return _helper.config()->group("KDE").readEntry("SingleClick", KDE_DEFAULT_SINGLECLICK );
+                              return false;
+
+                        case SH_RubberBand_Mask:
+                        {
+
+                                  const QStyleOptionRubberBand *opt = qstyleoption_cast<const QStyleOptionRubberBand *>(option);
+                                  if( !opt) return false;
+
+                                  if( QStyleHintReturnMask *mask = qstyleoption_cast<QStyleHintReturnMask*>(returnData))
+                                        {
+
+                                            mask->region = option->rect;
+
+                                            // need to check on widget before removing inner region
+                                            // in order to still preserve rubberband in MainWindow and QGraphicsView
+                                            // in QMainWindow because it looks better
+                                            // in QGraphicsView because the painting fails completely otherwise
+                                            if( !( widget && (
+                                                      qobject_cast<const QGraphicsView*>( widget->parent() ) ||
+                                                qobject_cast<const QMainWindow*>( widget->parent() ) ) ) )
+                                                { mask->region -= option->rect.adjusted(1,1,-1,-1); }
+
+                                                return true;
+                                        }
+                                  return false;
+                              }
+
+                        case SH_ToolTip_Mask:
+                        case SH_Menu_Mask:
+                        {
+
+                                  if( !_helper.hasAlphaChannel( widget ) && (!widget || widget->isWindow() ) )
+                                        {
+
+                                            // mask should be set only if compositing is disabled
+                                            if( QStyleHintReturnMask *mask = qstyleoption_cast<QStyleHintReturnMask *>(returnData))
+                                                  { mask->region = _helper.roundedMask( option->rect ); }
+
+                                        }
+
+                                  return true;
+
+                              }
+
+                        // mouse tracking
+                        case SH_ComboBox_ListMouseTracking: return true;
+                        case SH_MenuBar_MouseTracking: return true;
+                        case SH_Menu_MouseTracking: return true;
+
+                        case SH_Menu_SubMenuPopupDelay: return 96;
+                        case SH_TitleBar_NoBorder: return 0;
+                        case SH_GroupBox_TextLabelVerticalAlignment: return Qt::AlignVCenter;
+                        case SH_DialogButtonLayout: return QDialogButtonBox::KdeLayout;
+                        case SH_ScrollBar_MiddleClickAbsolutePosition: return true;
+                        case SH_ItemView_ShowDecorationSelected: return false;
+                        case SH_ItemView_ArrowKeysNavigateIntoChildren: return true;
+                        case SH_ScrollView_FrameOnlyAroundContents: return true;
+                        case SH_FormLayoutFormAlignment: return Qt::AlignLeft | Qt::AlignTop;
+                        case SH_FormLayoutLabelAlignment: return Qt::AlignRight;
+                        case SH_FormLayoutFieldGrowthPolicy: return QFormLayout::ExpandingFieldsGrow;
+                        case SH_FormLayoutWrapPolicy: return QFormLayout::DontWrapRows;
+                        case SH_MessageBox_TextInteractionFlags: return true;
+                        case SH_WindowFrame_Mask: return false;
+
+                        default: return QCommonStyle::styleHint(hint, option, widget, returnData);
+                    }
+
+          }
+
+QRect MStyle::subElementRect(SubElement element, const QStyleOption* option, const QWidget* widget) const
+    {
 
 
+              switch( element )
+              {
+
+                        // push buttons
+                        case SE_PushButtonContents: return pushButtonContentsRect( option, widget );
+                        case SE_PushButtonFocusRect: return defaultSubElementRect( option, widget );
+
+                        // checkboxes
+                        case SE_CheckBoxContents: return checkBoxContentsRect( option, widget );
+                        case SE_CheckBoxFocusRect: return defaultSubElementRect( option, widget );
+
+                        // progress bars
+                        case SE_ProgressBarGroove: return defaultSubElementRect( option, widget );
+                        case SE_ProgressBarContents: return progressBarContentsRect( option, widget );
+                        case SE_ProgressBarLabel: return defaultSubElementRect( option, widget );
+
+                        // radio buttons
+                        case SE_RadioButtonContents: return checkBoxContentsRect( option, widget );
+                        case SE_RadioButtonFocusRect: return defaultSubElementRect( option, widget );
+
+                        // tab widget
+                        case SE_TabBarTabLeftButton: return tabBarTabLeftButtonRect( option, widget );
+                        case SE_TabBarTabRightButton: return tabBarTabRightButtonRect( option, widget );
+                        case SE_TabBarTabText: return tabBarTabTextRect( option, widget );
+                        case SE_TabWidgetTabContents: return tabWidgetTabContentsRect( option, widget );
+                        case SE_TabWidgetTabPane: return tabWidgetTabPaneRect( option, widget );
+                        case SE_TabWidgetLeftCorner: return tabWidgetLeftCornerRect( option, widget );
+                        case SE_TabWidgetRightCorner: return tabWidgetRightCornerRect( option, widget );
+
+                        // toolboxes
+                        case SE_ToolBoxTabContents: return toolBoxTabContentsRect( option, widget );
+
+                        default: return QCommonStyle::subElementRect( element, option, widget );
+
+                    }
+
+          }
+
+//---------------------------------------------------------
+//   subControlRect
+//---------------------------------------------------------
+
+QRect MStyle::subControlRect(ComplexControl element, const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
+      {
+      switch(element) {
+            case CC_GroupBox: return groupBoxSubControlRect( option, subControl, widget );
+            case CC_ComboBox: return comboBoxSubControlRect( option, subControl, widget );
+            case CC_Slider: return sliderSubControlRect( option, subControl, widget );
+            case CC_ScrollBar: return scrollBarSubControlRect( option, subControl, widget );
+            case CC_SpinBox: return spinBoxSubControlRect( option, subControl, widget );
+            default: return QCommonStyle::subControlRect( element, option, subControl, widget );
+            }
+      }
+
+QRect MStyle::tabWidgetTabContentsRect( const QStyleOption* option, const QWidget* widget ) const
+      {
+      // cast option and check
+      const QStyleOptionTabWidgetFrame* tabOpt = qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option);
+      if( !tabOpt) return option->rect;
+
+              // do nothing if tabbar is hidden
+              if( tabOpt->tabBarSize.isEmpty() ) return option->rect;
+
+              QRect r( option->rect );
 
 
+              // include margins
+              r = subElementRect(SE_TabWidgetTabPane, option, widget);
+
+              // document mode
+              const bool documentMode( tabOpt->lineWidth == 0 );
+
+              if( !documentMode )
+                    {
+                        r = insideMargin( r, TabWidget_ContentsMargin );
+                        r.translate( 0, -1 );
+                    }
+
+              return r;
+
+          }
+
+QRect MStyle::tabWidgetTabPaneRect( const QStyleOption* option, const QWidget* ) const
+      {
+      const QStyleOptionTabWidgetFrame* tabOpt = qstyleoption_cast<const QStyleOptionTabWidgetFrame*>(option);
+              if( !tabOpt) return option->rect;
+
+              QRect r( option->rect );
+              const bool documentMode( tabOpt->lineWidth == 0 );
+              int overlap( TabBar_BaseOverlap );
+              if( documentMode ) overlap -= TabWidget_ContentsMargin;
+
+              switch( tabOpt->shape )
+              {
+                        case QTabBar::RoundedNorth:
+                        case QTabBar::TriangularNorth:
+                        {
+                                  if( documentMode ) overlap++;
+                                        r.setTop( r.top() + qMax( tabOpt->tabBarSize.height() - overlap, 0) );
+                                  break;
+                              }
+
+                        case QTabBar::RoundedSouth:
+                        case QTabBar::TriangularSouth:
+                        {
+                                  if( documentMode ) overlap--;
+                                        r.setBottom( r.bottom() - qMax( tabOpt->tabBarSize.height() - overlap, 0 ) );
+                                  break;
+                              }
+
+                        case QTabBar::RoundedWest:
+                        case QTabBar::TriangularWest:
+                        {
+                                  r.setLeft( r.left() + qMax( tabOpt->tabBarSize.width() - overlap, 0) );
+                                  break;
+                              }
+
+                        case QTabBar::RoundedEast:
+                        case QTabBar::TriangularEast:
+                        {
+                                  r.setRight( r.right() - qMax( tabOpt->tabBarSize.width() - overlap, 0) );
+                                  break;
+                              }
+
+                    }
+
+              return r;
+
+          }
+
+QRect MStyle::tabWidgetLeftCornerRect( const QStyleOption* option, const QWidget* widget ) const
+      {
+      const QStyleOptionTabWidgetFrame *tabOpt = qstyleoption_cast<const QStyleOptionTabWidgetFrame *>(option);
+      if(!tabOpt) return QRect();
+
+              QRect r( option->rect );
+              const QRect paneRect( subElementRect(SE_TabWidgetTabPane, option, widget) );
+
+              const QTabWidget* tabWidget( qobject_cast<const QTabWidget*>( widget ) );
+              const bool documentMode( tabWidget ? tabWidget->documentMode() : false );
+
+              const QSize& size( tabOpt->leftCornerWidgetSize );
+              const int h( size.height() );
+              const int w( size.width() );
+
+              switch( tabOpt->shape )
+              {
+                        case QTabBar::RoundedNorth:
+                        case QTabBar::TriangularNorth:
+                        r = QRect(QPoint(paneRect.x(), paneRect.y() - h ), size);
+                        r = visualRect(tabOpt->direction, tabOpt->rect, r);
+                        if( !documentMode ) r.translate( 0, 3 );
+                              break;
+
+                        case QTabBar::RoundedSouth:
+                        case QTabBar::TriangularSouth:
+                        r = QRect(QPoint(paneRect.x(), paneRect.height() ), size);
+                        r = visualRect(tabOpt->direction, tabOpt->rect, r);
+                        if( !documentMode ) r.translate( 0, -3 );
+                              else r.translate( 0, 2 );
+                              break;
+
+                        case QTabBar::RoundedWest:
+                        case QTabBar::TriangularWest:
+                        r = QRect(QPoint(paneRect.x() - w, paneRect.y()), size);
+                        r = visualRect(tabOpt->direction, tabOpt->rect, r);
+                        if( !documentMode ) r.translate( 2, 0 );
+                              else r.translate( -2, 0 );
+                              break;
+
+                        case QTabBar::RoundedEast:
+                        case QTabBar::TriangularEast:
+                        r = QRect(QPoint(paneRect.x() + paneRect.width(), paneRect.y()), size);
+                        r = visualRect(tabOpt->direction, tabOpt->rect, r);
+                        if( !documentMode ) r.translate( -2, 0 );
+                              else r.translate( 2, 0 );
+                              break;
+
+                        default:
+                        break;
+                    }
+
+              return r;
+
+          }
+
+QRect MStyle::tabWidgetRightCornerRect( const QStyleOption* option, const QWidget* widget ) const
+      {
+
+              const QStyleOptionTabWidgetFrame *tabOpt = qstyleoption_cast<const QStyleOptionTabWidgetFrame *>(option);
+              if(!tabOpt) return QRect();
+
+              QRect r( option->rect );
+              const QRect paneRect( subElementRect(SE_TabWidgetTabPane, option, widget) );
+
+              const QTabWidget* tabWidget( qobject_cast<const QTabWidget*>( widget ) );
+              const bool documentMode( tabWidget ? tabWidget->documentMode() : false );
+
+              const QSize& size( tabOpt->rightCornerWidgetSize );
+              const int h( size.height() );
+              const int w( size.width() );
+
+              switch( tabOpt->shape )
+              {
+                        case QTabBar::RoundedNorth:
+                        case QTabBar::TriangularNorth:
+                        r = QRect(QPoint(paneRect.right() - w + 1, paneRect.y() - h ), size);
+                        r = visualRect(tabOpt->direction, tabOpt->rect, r);
+                        if( !documentMode ) r.translate( 0, 3 );
+                              break;
+
+                        case QTabBar::RoundedSouth:
+                        case QTabBar::TriangularSouth:
+                        r = QRect(QPoint(paneRect.right() - w + 1, paneRect.height() ), size);
+                        r = visualRect(tabOpt->direction, tabOpt->rect, r);
+                        if( !documentMode ) r.translate( 0, -3 );
+                              else r.translate( 0, 2 );
+                              break;
+
+                        case QTabBar::RoundedWest:
+                        case QTabBar::TriangularWest:
+                        r = QRect(QPoint(paneRect.x() - w, paneRect.bottom() - h + 1 ), size);
+                        r = visualRect(tabOpt->direction, tabOpt->rect, r);
+                        if( !documentMode ) r.translate( 2, 0 );
+                              else r.translate( -2, 0 );
+                              break;
+
+                        case QTabBar::RoundedEast:
+                        case QTabBar::TriangularEast:
+                        r = QRect(QPoint(paneRect.x() + paneRect.width(), paneRect.bottom() - h + 1 ), size);
+                        r = visualRect(tabOpt->direction, tabOpt->rect, r);
+                        if( !documentMode ) r.translate( -2, 0 );
+                              else r.translate( 2, 0 );
+                              break;
+
+                        default:
+                        break;
+                    }
+
+              return r;
+          }
+
+QStyle::SubControl MStyle::hitTestComplexControl(ComplexControl control, const QStyleOptionComplex* option, const QPoint& point, const QWidget* widget) const
+      {
+      switch( control ) {
+            case CC_ScrollBar:
+                        {
+
+                                  QRect groove = scrollBarSubControlRect( option, SC_ScrollBarGroove, widget );
+                                  if (groove.contains(point))
+                                        {
+                                            //Must be either page up/page down, or just click on the slider.
+                                            //Grab the slider to compare
+                                            QRect slider = scrollBarSubControlRect( option, SC_ScrollBarSlider, widget );
+
+                                            if( slider.contains(point) ) return SC_ScrollBarSlider;
+                                                  else if( preceeds( point, slider, option ) ) return SC_ScrollBarSubPage;
+                                                  else return SC_ScrollBarAddPage;
+
+                                        }
+
+                                  //This is one of the up/down buttons. First, decide which one it is.
+                                  if( preceeds( point, groove, option ) )
+                                        {
+
+                                            if( _subLineButtons == DoubleButton )
+                                                  {
+                                                      QRect buttonRect = scrollBarInternalSubControlRect( option, SC_ScrollBarSubLine );
+                                                      return scrollBarHitTest( buttonRect, point, option );
+                                                  } else return SC_ScrollBarSubLine;
+
+                                        }
+
+                                  if( _addLineButtons == DoubleButton )
+                                        {
+
+                                            QRect buttonRect = scrollBarInternalSubControlRect( option, SC_ScrollBarAddLine );
+                                            return scrollBarHitTest( buttonRect, point, option );
+
+                                        } else return SC_ScrollBarAddLine;
+                              }
+
+                        default: return QCommonStyle::hitTestComplexControl( control, option, point, widget );
+                    }
+
+          }
+
+QRect MStyle::tabBarTabButtonRect( SubElement element, const QStyleOption* option, const QWidget* widget ) const
+      {
+
+              const QStyleOptionTab* tabOpt( qstyleoption_cast<const QStyleOptionTab*>(option) );
+              if (!tabOpt) return QRect();
+
+              QRect r( QCommonStyle::subElementRect( element, option, widget ) );
+              const bool selected( option->state&State_Selected );
+
+              switch( tabOpt->shape )
+              {
+
+                        case QTabBar::RoundedNorth:
+                        case QTabBar::TriangularNorth:
+                        r.translate( 0, -1 );
+                        if( selected ) r.translate( 0, -1 );
+                              break;
+
+                        case QTabBar::RoundedSouth:
+                        case QTabBar::TriangularSouth:
+                        r.translate( 0, -1 );
+                        if( selected ) r.translate( 0, 1 );
+                              break;
+
+                        case QTabBar::RoundedWest:
+                        case QTabBar::TriangularWest:
+                        r.translate( 0, 1 );
+                        if( selected )  r.translate( -1, 0 );
+                              break;
+
+                        case QTabBar::RoundedEast:
+                        case QTabBar::TriangularEast:
+                        r.translate( 0, -2 );
+                        if( selected ) r.translate( 1, 0 );
+                              break;
+
+                        default: break;
+
+                    }
+              return r;
+          }
+
+//---------------------------------------------------------
+//   configurationChanged
+//---------------------------------------------------------
+
+void MStyle::configurationChanged()
+      {
+      // reset helper configuration
+//      _helper.reloadConfig();
+
+      // reset config
+      // MStyleConfigData::self()->readConfig();
+
+      // update caches size
+      int cacheSize = MStyleConfigData::cacheEnabled ? MStyleConfigData::maxCacheSize : 0;
+
+//TODO      _helper.setMaxCacheSize( cacheSize );
+
+      // reinitialize engines
+      animations().setupEngines();
+//TODO      transitions().setupEngines();
+//TODO      windowManager().initialize();
+
+      // widget explorer
+//      widgetExplorer().setEnabled(MStyleConfigData::widgetExplorerEnabled);
+//      widgetExplorer().setDrawWidgetRects(MStyleConfigData::drawWidgetRects);
+
+      // scrollbar button dimentions.
+      /* it has to be reinitialized here because scrollbar width might have changed */
+      _noButtonHeight = 0;
+      _singleButtonHeight = qMax(MStyleConfigData::scrollBarWidth * 7 / 10, 14 );
+      _doubleButtonHeight = 2*_singleButtonHeight;
+
+      _mnemonic = MStyleConfigData::showMnemonics ? Qt::TextShowMnemonic : Qt::TextHideMnemonic;
+
+      // scrollbar buttons
+      switch(MStyleConfigData::scrollBarAddLineButtons) {
+            case 0: _addLineButtons = NoButton; break;
+            case 1: _addLineButtons = SingleButton; break;
+            default:
+            case 2: _addLineButtons = DoubleButton; break;
+            }
+
+      switch(MStyleConfigData::scrollBarSubLineButtons) {
+            case 0: _subLineButtons = NoButton; break;
+            case 1: _subLineButtons = SingleButton; break;
+
+            default:
+            case 2: _subLineButtons = DoubleButton; break;
+            }
+
+      // tabbar shape
+      switch (MStyleConfigData::tabStyle) {
+            case MStyleConfigData::TS_PLAIN:
+                  _tabBarTabShapeControl = &MStyle::drawTabBarTabShapeControl_Plain;
+                  break;
+
+            default:
+            case MStyleConfigData::TS_SINGLE:
+                  _tabBarTabShapeControl = &MStyle::drawTabBarTabShapeControl_Single;
+                  break;
+            }
+
+      // frame focus
+
+      if (MStyleConfigData::viewDrawFocusIndicator)
+            _frameFocusPrimitive = &MStyle::drawFrameFocusRectPrimitive;
+      else
+            _frameFocusPrimitive = &MStyle::emptyPrimitive;
+      }
 
