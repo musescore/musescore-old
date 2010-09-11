@@ -1,4 +1,7 @@
 
+#ifndef __COLORUTILS_H__
+#define __COLORUTILS_H__
+
 static const qreal yc[3] = {0.2126, 0.7152, 0.0722};
 
 // normalize: like qBound(a, 0.0, 1.0) but without needing the args and with
@@ -36,4 +39,5 @@ class ColorUtils {
       static QColor lighten(const QColor&, qreal amount = 0.5, qreal chromaInverseGain = 1.0);
       };
 
+#endif
 

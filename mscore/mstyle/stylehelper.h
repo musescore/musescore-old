@@ -23,88 +23,8 @@
 
 #include "tileset.h"
 #include "colorscheme.h"
-
-enum AnimationMode {
-      AnimationNone = 0,
-      AnimationHover = 1<<0,
-      AnimationFocus = 1<<1,
-      AnimationEnable = 1<<2
-      };
-
-Q_DECLARE_FLAGS(AnimationModes, AnimationMode)
-
-//---------------------------------------------------------
-//   BaseCache
-//---------------------------------------------------------
-
-template<typename T> class BaseCache: public QCache<quint64, T> {
-      bool _enabled;
-
-   public:
-      //! constructor
-      BaseCache(int maxCost) : QCache<quint64, T>(maxCost), _enabled(true) {}
-      explicit BaseCache() : _enabled(true) { }
-      ~BaseCache() {}
-
-      //! enable
-      void setEnabled(bool value) { _enabled = value; }
-
-      //! enable state
-      bool enabled() const { return _enabled; }
-
-      //! access
-      T* object(const quint64& key) { return _enabled ? QCache<quint64, T>::object(key) : 0; }
-
-      //! max cost
-      void setMaxCost( int cost ) {
-            if( cost <= 0 ) {
-                  QCache<quint64, T>::clear();
-                  QCache<quint64, T>::setMaxCost(1);
-                  setEnabled( false );
-                  }
-            else {
-                  setEnabled(true);
-                  QCache<quint64, T>::setMaxCost(cost);
-                  }
-            }
-      };
-
-//---------------------------------------------------------
-//   Cache
-//---------------------------------------------------------
-
-template<typename T> class Cache {
-   public:
-      Cache() {}
-      ~Cache() {}
-
-      //! return cache matching a given key
-      //typedef QCache<quint64, T> Value;
-      typedef BaseCache<T> Value;
-
-      Value* get(const QColor& color) {
-            quint64 key = (quint64(color.rgba()) << 32);
-            Value *cache = data_.object(key);
-            if (!cache) {
-                  cache = new Value( data_.maxCost() );
-                  data_.insert(key, cache);
-                  }
-            return cache;
-            }
-
-      void clear() { data_.clear(); }
-
-      //! max cache size
-      void setMaxCacheSize(int value) {
-            data_.setMaxCost(value);
-            foreach(quint64 key, data_.keys()) {
-                  data_.object(key)->setMaxCost(value);
-                  }
-            }
-   private:
-      BaseCache<Value> data_;
-      };
-
+#include "animationmodes.h"
+#include "cache.h"
 
 typedef BaseCache<QColor> ColorCache;
 typedef BaseCache<TileSet> TileSetCache;
@@ -140,11 +60,15 @@ class StyleHelper {
       mutable TileSetCache m_scrollHoleCache;
       mutable TileSetCache m_selectionCache;
 
-      Cache<QPixmap> m_dialSlabCache;
-      Cache<QPixmap> m_roundSlabCache;
-      Cache<TileSet> m_holeFocusedCache;
-      PixmapCache m_backgroundCache;
-      PixmapCache m_dotCache;
+      mutable Cache<QPixmap> m_dialSlabCache;
+      mutable Cache<QPixmap> m_roundSlabCache;
+      mutable Cache<TileSet> m_holeFocusedCache;
+      mutable Cache<TileSet> m_slabCache;
+      mutable PixmapCache m_backgroundCache;
+      mutable PixmapCache m_progressBarCache;
+      mutable PixmapCache m_windecoButtonCache;
+      mutable PixmapCache m_windecoButtonGlowCache;
+      mutable PixmapCache m_dotCache;
 
       qreal _bgcontrast;
       qreal _contrast;
@@ -154,6 +78,8 @@ class StyleHelper {
 
       StatefulBrush _viewHoverBrush;
       StatefulBrush _viewFocusBrush;
+      StatefulBrush _viewNegativeTextBrush;
+
       mutable ColorMap m_highThreshold;
       mutable ColorMap m_lowThreshold;
 
@@ -164,19 +90,21 @@ class StyleHelper {
       StatefulBrush viewHoverBrush() const { return _viewHoverBrush; }
       StatefulBrush viewFocusBrush() const { return _viewFocusBrush; }
 
-      TileSet* hole(const QColor &color, qreal shade, int size, bool outline);
+      TileSet* hole(const QColor &color, qreal shade, int size, bool outline) const;
       TileSet* holeFlat(const QColor&, qreal shade, int size = 7) const;
+
+      void fillHole(QPainter&, const QRect&, int size = 7) const;
+
       //! generic hole
       void renderHole(QPainter *p, const QColor& color, const QRect &r, bool focus=false, bool hover=false,
-         TileSet::Tiles posFlags = TileSet::Ring, bool outline = false) {
+         TileSet::Tiles posFlags = TileSet::Ring, bool outline = false) const {
             renderHole(p, color, r, focus, hover, -1, AnimationNone, posFlags, outline);
             }
       //! generic hole (with animated glow)
       void renderHole(QPainter *p, const QColor&, const QRect &r,
-         bool focus, bool hover,
-         qreal opacity, AnimationMode animationMode,
-         TileSet::Tiles posFlags = TileSet::Ring, bool outline = false);
-      TileSet* holeFocused(const QColor&, const QColor &glowColor, qreal shade, int size=7, bool outline=false);
+         bool focus, bool hover, qreal opacity, AnimationMode animationMode,
+         TileSet::Tiles posFlags = TileSet::Ring, bool outline = false) const;
+      TileSet* holeFocused(const QColor&, const QColor &glowColor, qreal shade, int size=7, bool outline=false) const;
 
       inline const QColor& calcMidColor(const QColor& color) const;
       const QWidget* checkAutoFillBackground( const QWidget* ) const;
@@ -194,7 +122,7 @@ class StyleHelper {
                   return backgroundColor(color, w->window()->height(), w->mapTo(w->window(), point).y());
             }
 
-      const QColor& backgroundRadialColor(const QColor &color);
+      const QColor& backgroundRadialColor(const QColor &color) const;
       const QColor& backgroundTopColor(const QColor &color) const;
       const QColor& backgroundBottomColor(const QColor &color) const;
 
@@ -203,18 +131,107 @@ class StyleHelper {
       static QColor alphaColor(QColor color, qreal alpha);
       const QColor& calcLightColor(const QColor &color) const;
       const QColor& calcDarkColor(const QColor &color) const;
-      void drawInverseShadow(QPainter&, const QColor&, int pad, int size, qreal fuzz);
+      void drawInverseShadow(QPainter&, const QColor&, int pad, int size, qreal fuzz) const;
       void drawInverseGlow(QPainter&, const QColor&, int pad, int size, int rsize) const;
-      const QColor& calcShadowColor(const QColor &color);
-      void renderMenuBackground(QPainter* p, const QRect& clipRect, const QWidget* widget, const QPalette& pal) {
+      const QColor& calcShadowColor(const QColor &color) const;
+      void renderMenuBackground(QPainter* p, const QRect& clipRect, const QWidget* widget, const QPalette& pal) const {
             renderMenuBackground(p, clipRect, widget, pal.color(widget->window()->backgroundRole()));
             }
       // render menu background
-      void renderMenuBackground(QPainter*, const QRect&, const QWidget*, const QColor&);
-      QPixmap verticalGradient(const QColor &color, int height, int offset = 0);
-      QPixmap radialGradient(const QColor &color, int width, int height = 64);
+      void renderMenuBackground(QPainter*, const QRect&, const QWidget*, const QColor&) const;
+      QPixmap verticalGradient(const QColor &color, int height, int offset = 0) const;
+      QPixmap radialGradient(const QColor &color, int width, int height = 64) const;
       inline bool hasAlphaChannel(const QWidget*) const;
       bool compositingActive() const { return false; } // return KWindowSystem::compositingActive();
+      void renderWindowBackground(QPainter *p, const QRect &clipRect, const QWidget *widget,
+         const QPalette & pal, int y_shift=-23, int gradientHeight = 64) const {
+            renderWindowBackground( p, clipRect, widget, pal.color( widget->window()->backgroundRole() ), y_shift, gradientHeight );
+            }
+      /*!
+      y_shift: shift the background gradient upwards, to fit with the windec
+      gradientHeight: the height of the generated gradient.
+      for different heights, the gradient is translated so that it is always at the same position from the bottom
+      */
+      void renderWindowBackground(QPainter *p, const QRect &clipRect, const QWidget *widget,
+         const QWidget* window, const QPalette & pal, int y_shift=-23, int gradientHeight = 64) const {
+            renderWindowBackground( p, clipRect, widget, window, pal.color( window->backgroundRole() ), y_shift, gradientHeight );
+            }
+
+      //! render window background using a given color as a reference
+      void renderWindowBackground(QPainter *p, const QRect &clipRect, const QWidget *widget,
+         const QColor& color, int y_shift=-23, int gradientHeight = 64) const {
+            renderWindowBackground( p, clipRect, widget, widget->window(), color, y_shift, gradientHeight );
+            }
+
+      //! render window background using a given color as a reference
+      void renderWindowBackground(QPainter *p, const QRect &clipRect, const QWidget *widget,
+         const QWidget* window, const QColor& color, int y_shift=-23, int gradientHeight = 64) const;
+      void renderDot(QPainter*, const QPoint&, const QColor&) const;
+      void drawSeparator(QPainter *p, const QRect &r, const QColor &color, Qt::Orientation orientation) const;
+      const QColor& decoColor(const QColor &background, const QColor &color) const;
+      //! returns a region matching given rect, with rounded corners, based on the multipliers
+      /*! setting any of the multipliers to zero will result in no corners shown on the corresponding side */
+      QRegion roundedMask( const QRect&, int left = 1, int right = 1, int top = 1, int bottom = 1 ) const;
+
+      //!@name slabs
+      //@{
+
+      void fillSlab(QPainter&, const QRect&, int size = 7) const;
+
+      // progressbar
+      QPixmap progressBarIndicator(const QPalette&, const QRect&) const;
+
+      QPixmap dialSlab(const QColor&, qreal shade, int size = 7) const;
+      QPixmap dialSlabFocused(const QColor&, const QColor&, qreal shade, int size = 7) const;
+      QPixmap roundSlab(const QColor&, qreal shade, int size = 7) const;
+      QPixmap roundSlabFocused(const QColor&, const QColor &glowColor, qreal shade, int size = 7) const;
+
+      TileSet *slabFocused(const QColor&, const QColor &glowColor, qreal shade, int size = 7) const;
+      TileSet *slabSunken(const QColor&, qreal shade, int size = 7) const;
+      TileSet *slabInverted(const QColor&, qreal shade, int size = 7) const;
+      TileSet *slab(const QColor&, qreal shade, int size = 7) const;
+
+      //! draw frame that mimics some sort of shadows around a panel
+      /*! it is used for menus, detached dock panels and toolbar, as well as window decoration when compositing is disabled */
+      void drawFloatFrame(
+         QPainter *p, const QRect r, const QColor &color,
+         bool drawUglyShadow=true, bool isActive=false,
+         const QColor &frameColor=QColor(),
+         TileSet::Tiles tiles = TileSet::Ring) const;
+      TileSet *scrollHole(const QColor&, Qt::Orientation orientation, bool smallShadow = false) const;
+      //! round corners (used for Menus, combobox drop-down, detached toolbars and dockwidgets
+      TileSet *roundCorner(const QColor&, int size = 5) const;
+
+      //! groupbox background
+      TileSet *slope(const QColor&, qreal shade, int size = 7) const;
+      TileSet *selection( const QColor&, int height, bool custom) const;
+      //! focus rect for flat toolbuttons
+      TileSet *slitFocused(const QColor&) const;
+      void drawSlab(QPainter&, const QColor&, qreal shade) const;
+      void drawShadow(QPainter&, const QColor&, int size) const;
+      void drawOuterGlow(QPainter&, const QColor&, int size) const;
+      void drawRoundSlab( QPainter&, const QColor&, qreal ) const;
+
+      //! returns menu background color matching position in a given menu widget
+      const QColor& menuBackgroundColor(const QColor &color, const QWidget* w, const QPoint& point) const {
+            if( !( w && w->window() ) || checkAutoFillBackground( w ) )
+                  return color;
+            else
+                  return menuBackgroundColor( color, w->window()->height(), w->mapTo( w->window(), point ).y() );
+            }
+      //! returns menu background color matching position in a menu widget of given height
+      const QColor& menuBackgroundColor(const QColor &color, int height, int y) const {
+            return backgroundColor( color, qMin(qreal(1.0), qreal(y)/qMin(200, 3*height/4) ) );
+            }
+      //! scrollbar groove
+      TileSet *groove(const QColor&, qreal shade, int size = 7) const;
+      QPalette mergePalettes( const QPalette&, qreal ratio ) const;
+      TileSet *dockFrame(const QColor&, int size);
+      QPixmap windecoButton(const QColor &color, bool pressed, int size = 21) const;
+      //! negative text brush (used for close button hover)
+      const StatefulBrush& viewNegativeTextBrush( void ) const {
+            return _viewNegativeTextBrush;
+            }
       };
 
 //---------------------------------------------------------
@@ -231,6 +248,10 @@ const QColor& StyleHelper::calcMidColor(const QColor& color) const
             }
       return *out;
       }
+
+//---------------------------------------------------------
+//   hasAlphaChannel
+//---------------------------------------------------------
 
 bool StyleHelper::hasAlphaChannel( const QWidget* widget ) const
       {

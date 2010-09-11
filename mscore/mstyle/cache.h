@@ -1,3 +1,7 @@
+
+#ifndef __CACHE_H__
+#define __CACHE_H__
+
 //---------------------------------------------------------
 //   BaseCache
 //---------------------------------------------------------
@@ -70,4 +74,5 @@ template<typename T> class Cache {
       BaseCache<Value> data_;
       };
 
+#endif
 
