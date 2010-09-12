@@ -28,17 +28,7 @@ class StyleHelper;
 class FrameShadowFactory;
 class WidgetExplorer;
 class Animations;
-
-//---------------------------------------------------------
-//   Transitions
-//---------------------------------------------------------
-
-class Transitions {
-   public:
-      Transitions(QStyle*) {}
-      void registerWidget(QWidget*) {}
-      void unregisterWidget(QWidget*) {}
-      };
+class Transitions;
 
 //---------------------------------------------------------
 //   WindowManager
@@ -621,16 +611,11 @@ class MStyle : public QCommonStyle {
 
    public:
       MStyle();
-      virtual int pixelMetric(PixelMetric metric, const QStyleOption* option = 0, const QWidget* widget = 0) const;
+      virtual int pixelMetric(PixelMetric, const QStyleOption* = 0, const QWidget* = 0) const;
       virtual int styleHint(StyleHint, const QStyleOption* = 0, const QWidget* = 0, QStyleHintReturn* = 0) const;
-      //! returns rect corresponding to one widget's subelement
-      virtual QRect subElementRect( SubElement subRect, const QStyleOption*, const QWidget* ) const;
-
-      //! returns rect corresponding to one widget's subcontrol
-      virtual QRect subControlRect( ComplexControl, const QStyleOptionComplex*, SubControl, const QWidget* ) const;
-
+      virtual QRect subElementRect(SubElement, const QStyleOption*, const QWidget*) const;
+      virtual QRect subControlRect(ComplexControl, const QStyleOptionComplex*, SubControl, const QWidget*) const;
       QSize sizeFromContents(ContentsType, const QStyleOption*, const QSize&, const QWidget*) const;
-      //! returns which subcontrol given QPoint corresponds to
       SubControl hitTestComplexControl(ComplexControl, const QStyleOptionComplex*, const QPoint&, const QWidget*) const;
 
       virtual void polish(QWidget* widget);
@@ -638,8 +623,7 @@ class MStyle : public QCommonStyle {
       void drawPrimitive(PrimitiveElement, const QStyleOption*, QPainter*, const QWidget*) const;
       void drawControl(ControlElement, const QStyleOption*, QPainter*, const QWidget*) const;
       void drawComplexControl(ComplexControl, const QStyleOptionComplex*, QPainter*, const QWidget*) const;
-      virtual void drawItemText(
-         QPainter*, const QRect&, int alignment, const QPalette&, bool enabled,
+      virtual void drawItemText(QPainter*, const QRect&, int alignment, const QPalette&, bool enabled,
          const QString&, QPalette::ColorRole = QPalette::NoRole) const;
 
       virtual bool eventFilter(QObject *, QEvent *);
@@ -653,6 +637,10 @@ class MStyle : public QCommonStyle {
       void configurationChanged();
       };
 
+//---------------------------------------------------------
+//   preceeds
+//---------------------------------------------------------
+
 bool MStyle::preceeds( const QPoint& point, const QRect& bound, const QStyleOption* option ) const
       {
       if (option->state&QStyle::State_Horizontal) {
@@ -664,6 +652,10 @@ bool MStyle::preceeds( const QPoint& point, const QRect& bound, const QStyleOpti
       else
             return point.y() < bound.y();
       }
+
+//---------------------------------------------------------
+//   scrollBarHitTest
+//---------------------------------------------------------
 
 QStyle::SubControl MStyle::scrollBarHitTest(const QRect& rect, const QPoint& point, const QStyleOption* option) const
       {
@@ -677,6 +669,9 @@ QStyle::SubControl MStyle::scrollBarHitTest(const QRect& rect, const QPoint& poi
             return point.y() < rect.center().y() ? QStyle::SC_ScrollBarSubLine : QStyle::SC_ScrollBarAddLine;
       }
 
+//---------------------------------------------------------
+//   tilesByShape
+//---------------------------------------------------------
 
 TileSet::Tiles MStyle::tilesByShape( const QTabBar::Shape& shape ) const
       {

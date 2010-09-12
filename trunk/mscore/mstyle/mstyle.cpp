@@ -26,15 +26,9 @@
 #include "animations.h"
 #include "menubarengine.h"
 #include "widgetstateengine.h"
+#include "transitions.h"
 #include "mconfig.h"
 
-enum MenuHighlightMode {
-      MM_STRONG, MM_DARK
-      };
-
-MenuHighlightMode menuHighlightMode = MM_DARK;
-
-#define MStyleConfigData_toolTipDrawStyledFrames       true
 #define MStyleConfigData_toolTipTransparent            true
 #define MStyleConfigData_toolBarDrawItemSeparator      true
 #define MStyleConfigData_viewDrawTriangularExpander    true
@@ -102,15 +96,15 @@ bool MStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
             // do nothing in case of empty intersection between animated rect and current
             if ((intersected || !animated || animatedRect.isNull()) && (active || animated || timerIsActive)) {
                   QColor color(palette.color(QPalette::Window));
-                  if (menuHighlightMode != MM_DARK) {
+                  if (MStyleConfigData::menuHighlightMode != MStyleConfigData::MM_DARK) {
                         if (flags & State_Sunken) {
-                              if (menuHighlightMode == MM_STRONG)
+                              if (MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG)
                                     color = palette.color(QPalette::Highlight);
                               else
                                     color = ColorUtils::mix(color, ColorUtils::tint(color, palette.color(QPalette::Highlight), 0.6));
                               }
                         else {
-                              if (menuHighlightMode == MM_STRONG)
+                              if (MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG)
                                     color = ColorUtils::tint(color, _helper.viewHoverBrush().brush(palette).color());
                               else
                                     color = ColorUtils::mix(color, ColorUtils::tint(color, _helper.viewHoverBrush().brush(palette).color()));
@@ -138,7 +132,7 @@ bool MStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
 
       // text
       QPalette::ColorRole role(QPalette::WindowText);
-      if (menuHighlightMode == MM_STRONG && (flags & State_Sunken) && enabled)
+      if (MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG && (flags & State_Sunken) && enabled)
             role = QPalette::HighlightedText;
       drawItemText(painter, r, Qt::AlignCenter | Qt::TextShowMnemonic, palette, enabled, menuOpt->text, role);
       return true;
@@ -219,7 +213,7 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
 
                         // tooltip label
             case PM_ToolTipLabelFrameWidth:
-                  if (MStyleConfigData_toolTipDrawStyledFrames)
+                  if (MStyleConfigData::toolTipDrawStyledFrames)
                         return 3;
                   else
                         break;
@@ -1010,9 +1004,8 @@ void MStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option,
 
       // try find primitive in map, and run.
       // exit if result is true, otherwise fallback to generic case
-      if (!(fcn && (this->*fcn)(option, painter, widget))) {
+      if (!(fcn && (this->*fcn)(option, painter, widget)))
             QCommonStyle::drawPrimitive( element, option, painter, widget );
-            }
       painter->restore();
       }
 
@@ -1020,36 +1013,35 @@ void MStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option,
 //   drawPanelTipLabelPrimitive
 //---------------------------------------------------------
 
-bool MStyle::drawPanelTipLabelPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+bool MStyle::drawPanelTipLabelPrimitive(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // parent style painting if frames should not be styled
-      if (!MStyleConfigData_toolTipDrawStyledFrames)
+      if (!MStyleConfigData::toolTipDrawStyledFrames)
             return false;
 
       const QRect& r( option->rect );
       const QColor color( option->palette.brush(QPalette::ToolTipBase).color() );
-      QColor topColor( _helper.backgroundTopColor(color) );
-      QColor bottomColor( _helper.backgroundBottomColor(color) );
+      QColor topColor(_helper.backgroundTopColor(color));
+      QColor bottomColor(_helper.backgroundBottomColor(color));
 
       // make tooltip semi transparents when possible
       // alpha is copied from "kdebase/apps/dolphin/tooltips/filemetadatatooltip.cpp"
-      const bool hasAlpha( _helper.hasAlphaChannel( widget ) );
-      if ( hasAlpha && MStyleConfigData_toolTipTransparent) {
+      const bool hasAlpha = _helper.hasAlphaChannel(widget);
+      if (hasAlpha && MStyleConfigData_toolTipTransparent) {
             topColor.setAlpha(220);
             bottomColor.setAlpha(220);
             }
 
-      QLinearGradient gr( 0, r.top(), 0, r.bottom() );
-      gr.setColorAt(0, topColor );
-      gr.setColorAt(1, bottomColor );
+      QLinearGradient gr(0, r.top(), 0, r.bottom());
+      gr.setColorAt(0, topColor);
+      gr.setColorAt(1, bottomColor);
 
       // contrast pixmap
-      QLinearGradient gr2( 0, r.top(), 0, r.bottom() );
-      gr2.setColorAt(0.5, _helper.calcLightColor( bottomColor ) );
-      gr2.setColorAt(0.9, bottomColor );
+      QLinearGradient gr2(0, r.top(), 0, r.bottom());
+      gr2.setColorAt(0.5, _helper.calcLightColor(bottomColor));
+      gr2.setColorAt(0.9, bottomColor);
 
       painter->save();
-
       if (hasAlpha) {
             painter->setRenderHint(QPainter::Antialiasing);
             QRectF local( r );
@@ -1064,13 +1056,13 @@ bool MStyle::drawPanelTipLabelPrimitive( const QStyleOption* option, QPainter* p
             painter->drawRoundedRect( local, 4, 4 );
             }
       else {
-            painter->setPen( Qt::NoPen );
-            painter->setBrush( gr );
-            painter->drawRect( r );
+            painter->setPen(Qt::NoPen);
+            painter->setBrush(gr);
+            painter->drawRect(r);
 
-            painter->setBrush( Qt::NoBrush );
-            painter->setPen(QPen( gr2, 1.1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-            painter->drawRect( r );
+            painter->setBrush(Qt::NoBrush);
+            painter->setPen(QPen(gr2, 1.1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+            painter->drawRect(r);
             }
       painter->restore();
       return true;
@@ -5215,14 +5207,18 @@ bool MStyle::drawProgressBarLabelControl( const QStyleOption* option, QPainter* 
               return true;
           }
 
-bool MStyle::drawPushButtonLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
-    {
+//---------------------------------------------------------
+//   drawPushButtonLabelControl
+//---------------------------------------------------------
 
-              // cast option and check
-              const QStyleOptionButton* bOpt = qstyleoption_cast<const QStyleOptionButton*>(option);
-              if (!bOpt) return true;
+bool MStyle::drawPushButtonLabelControl(const QStyleOption* option, QPainter* painter, const QWidget*) const
+      {
+      // cast option and check
+      const QStyleOptionButton* bOpt = qstyleoption_cast<const QStyleOptionButton*>(option);
+      if (!bOpt)
+            return true;
 
-              const QRect& r( option->rect );
+      const QRect& r( option->rect );
               const QPalette& palette( option->palette );
               const State& flags( option->state );
               const bool active = (flags & State_On) || (flags & State_Sunken);
@@ -8379,20 +8375,18 @@ QRect MStyle::tabBarTabButtonRect( SubElement element, const QStyleOption* optio
 
 void MStyle::configurationChanged()
       {
-      // reset helper configuration
-//      _helper.reloadConfig();
+      _helper.reloadConfig();
 
       // reset config
       // MStyleConfigData::self()->readConfig();
 
       // update caches size
       int cacheSize = MStyleConfigData::cacheEnabled ? MStyleConfigData::maxCacheSize : 0;
-
-//TODO      _helper.setMaxCacheSize( cacheSize );
+      _helper.setMaxCacheSize(cacheSize);
 
       // reinitialize engines
       animations().setupEngines();
-//TODO      transitions().setupEngines();
+      transitions().setupEngines();
 //TODO      windowManager().initialize();
 
       // widget explorer

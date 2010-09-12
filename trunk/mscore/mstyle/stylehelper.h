@@ -232,6 +232,9 @@ class StyleHelper {
       const StatefulBrush& viewNegativeTextBrush( void ) const {
             return _viewNegativeTextBrush;
             }
+      void invalidateCaches();
+      void setMaxCacheSize(int value);
+      void reloadConfig();
       };
 
 //---------------------------------------------------------

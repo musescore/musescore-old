@@ -32,7 +32,97 @@ const qreal StyleHelper::_glowBias = 0.6;
 
 StyleHelper::StyleHelper()
       {
-      _contrast = 1.0;
+      _contrast = .7;
+      _bgcontrast = qMin(1.0, 0.9 * _contrast/.7);
+
+      m_dockFrameCache.setMaxCost(1);
+      m_scrollHoleCache.setMaxCost(10);
+      m_backgroundCache.setMaxCost(64);
+      m_windecoButtonCache.setMaxCost(64);
+      m_windecoButtonGlowCache.setMaxCost(64);
+      }
+
+//---------------------------------------------------------
+//   reloadConfig
+//---------------------------------------------------------
+
+void StyleHelper::reloadConfig()
+      {
+//      _config->reparseConfiguration();
+//      _contrast = KGlobalSettings::contrastF(_config);
+      _bgcontrast = qMin(1.0, 0.9*_contrast/0.7);
+
+      _viewFocusBrush = StatefulBrush(ColorScheme::View, ColorScheme::FocusColor);
+      _viewHoverBrush = StatefulBrush(ColorScheme::View, ColorScheme::HoverColor);
+      _viewNegativeTextBrush = StatefulBrush(ColorScheme::View, ColorScheme::NegativeText);
+      }
+
+//---------------------------------------------------------
+//   invalidateCaches
+//---------------------------------------------------------
+
+void StyleHelper::invalidateCaches()
+      {
+      m_dialSlabCache.clear();
+      m_roundSlabCache.clear();
+      m_holeFocusedCache.clear();
+      m_midColorCache.clear();
+      m_progressBarCache.clear();
+      m_cornerCache.clear();
+      m_selectionCache.clear();
+      m_slabSunkenCache.clear();
+      m_slabInvertedCache.clear();
+      m_holeCache.clear();
+      m_holeFlatCache.clear();
+      m_slopeCache.clear();
+      m_grooveCache.clear();
+      m_slitCache.clear();
+      m_dockFrameCache.clear();
+      m_scrollHoleCache.clear();
+
+      m_slabCache.clear();
+      m_decoColorCache.clear();
+      m_lightColorCache.clear();
+      m_darkColorCache.clear();
+      m_shadowColorCache.clear();
+      m_backgroundTopColorCache.clear();
+      m_backgroundBottomColorCache.clear();
+      m_backgroundRadialColorCache.clear();
+      m_backgroundColorCache.clear();
+      m_backgroundCache.clear();
+      m_dotCache.clear();
+      m_windecoButtonCache.clear();
+      m_windecoButtonGlowCache.clear();
+      }
+
+//---------------------------------------------------------
+//   setMaxCacheSize
+//---------------------------------------------------------
+
+void StyleHelper::setMaxCacheSize( int value )
+      {
+      m_windecoButtonCache.setMaxCost( value );
+      m_windecoButtonGlowCache.setMaxCost( value );
+      m_slabCache.setMaxCacheSize( value );
+      m_backgroundCache.setMaxCost( value );
+      m_dotCache.setMaxCost( value );
+
+      m_dialSlabCache.setMaxCacheSize( value );
+      m_roundSlabCache.setMaxCacheSize( value );
+      m_holeFocusedCache.setMaxCacheSize( value );
+
+      m_progressBarCache.setMaxCost( value );
+      m_cornerCache.setMaxCost( value );
+      m_selectionCache.setMaxCost( value );
+      m_slabSunkenCache.setMaxCost( value );
+      m_slabInvertedCache.setMaxCost( value );
+      m_holeCache.setMaxCost( value );
+      m_holeFlatCache.setMaxCost( value );
+      m_slopeCache.setMaxCost( value );
+      m_grooveCache.setMaxCost( value );
+      m_slitCache.setMaxCost( value );
+      m_dockFrameCache.setMaxCost( value );
+      m_scrollHoleCache.setMaxCost( value );
       }
 
 //---------------------------------------------------------
@@ -84,8 +174,8 @@ const QColor& StyleHelper::backgroundColor(const QColor &color, qreal ratio) con
 
 const QColor& StyleHelper::backgroundTopColor(const QColor &color) const
       {
-      const quint64 key( color.rgba() );
-      QColor* out( m_backgroundTopColorCache.object( key ) );
+      const quint64 key(color.rgba());
+      QColor* out(m_backgroundTopColorCache.object(key));
       if (!out) {
             if (lowThreshold(color) )
                   out = new QColor(ColorScheme::shade(color, ColorScheme::MidlightShade, 0.0) );
