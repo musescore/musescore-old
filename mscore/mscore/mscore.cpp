@@ -1805,7 +1805,6 @@ static bool processNonGui()
 
 int main(int argc, char* av[])
       {
-printf("===========load style\n");
       QApplication::setStyle(new MStyle);
       QFile f(":/revision.h");
       f.open(QIODevice::ReadOnly);

@@ -53,3 +53,15 @@ bool MStyleConfigData::widgetExplorerEnabled = true;
 bool MStyleConfigData::drawWidgetRects = true;
 int  MStyleConfigData::scrollBarWidth  = 13;
 
+bool MStyleConfigData::comboBoxTransitionsEnabled = true;
+bool MStyleConfigData::labelTransitionsEnabled = true;
+bool MStyleConfigData::lineEditTransitionsEnabled = true;
+bool MStyleConfigData::stackedWidgetTransitionsEnabled = true;
+
+int  MStyleConfigData::comboBoxTransitionsDuration = 300;
+int  MStyleConfigData::labelTransitionsDuration = 300;
+int  MStyleConfigData::lineEditTransitionsDuration = 300;
+int  MStyleConfigData::stackedWidgetTransitionsDuration = 300;
+
+bool MStyleConfigData::toolTipDrawStyledFrames = true;
+

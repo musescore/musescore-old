@@ -78,6 +78,19 @@ struct MStyleConfigData {
       static int maxCacheSize;
       static bool widgetExplorerEnabled;
       static bool drawWidgetRects;
+
+      static bool comboBoxTransitionsEnabled;
+      static bool labelTransitionsEnabled;
+      static bool lineEditTransitionsEnabled;
+      static bool stackedWidgetTransitionsEnabled;
+
+      static int comboBoxTransitionsDuration;
+      static int labelTransitionsDuration;
+      static int lineEditTransitionsDuration;
+      static int stackedWidgetTransitionsDuration;
+
+      static bool toolTipDrawStyledFrames;
+
       };
 #endif
 
