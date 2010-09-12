@@ -21,6 +21,8 @@
 #ifndef __MSCORE_H__
 #define __MSCORE_H__
 
+#include "config.h"
+
 #include "globals.h"
 #include "ui_measuresdialog.h"
 #include "ui_insertmeasuresdialog.h"
@@ -341,11 +343,13 @@ class MuseScore : public QMainWindow {
       void endSearch();
       void closeSynthControl();
       void loadPluginDir(const QString& pluginPath);
+#ifdef OSC
       void oscIntMessage(int);
       void oscPlay();
       void oscStop();
       void oscVolume(int val);
       void oscTempo(int val);
+#endif
 
    public slots:
       void dirtyChanged(Score*);
