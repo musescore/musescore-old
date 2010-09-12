@@ -27,6 +27,7 @@
 #include "menubarengine.h"
 #include "widgetstateengine.h"
 #include "transitions.h"
+#include "windowmanager.h"
 #include "mconfig.h"
 
 #define MStyleConfigData_toolTipTransparent            true
@@ -54,9 +55,9 @@ MStyle::MStyle()
       _tabBarData         = new TabBarData(this);
       _frameFocusPrimitive = 0;
       _tabBarTabShapeControl = 0;
-//      _hintCounter( X_KdeBase+1 ),
-//      _controlCounter( X_KdeBase ),
-//      _subElementCounter( X_KdeBase ),
+      _hintCounter       = QStyle::SH_CustomBase;
+      _controlCounter    = QStyle::CE_CustomBase;
+      _subElementCounter = QStyle::SE_CustomBase;
       CE_CapacityBar = newControlElement("CE_CapacityBar");
 
       _animations    = new Animations(this);
@@ -495,25 +496,24 @@ QSize MStyle::menuItemSizeFromContents(const QStyleOption* option, const QSize& 
 QSize MStyle::pushButtonSizeFromContents(const QStyleOption* option, const QSize& contentsSize, const QWidget*) const
       {
       const QStyleOptionButton* bOpt = qstyleoption_cast<const QStyleOptionButton*>(option);
-      if( !bOpt)
+      if (!bOpt)
             return contentsSize;
 
       // adjust to handle button margins
-      QSize size = expandSize( contentsSize,
+      QSize size = expandSize(contentsSize,
          PushButton_ContentsMargin,
          PushButton_ContentsMargin_Left,
          PushButton_ContentsMargin_Top,
          PushButton_ContentsMargin_Right,
-         PushButton_ContentsMargin_Bottom );
+         PushButton_ContentsMargin_Bottom);
 
-      if( bOpt->features & QStyleOptionButton::HasMenu) {
+      if( bOpt->features & QStyleOptionButton::HasMenu)
             size.rwidth() += PushButton_TextToIconSpace;
-            }
 
       if( !bOpt->text.isEmpty() && !bOpt->icon.isNull()) {
             // Incorporate the spacing between the icon and text. Qt sticks 4 there,
             // but we use PushButton::TextToIconSpace.
-            size.rwidth() += PushButton_TextToIconSpace -4;
+            size.rwidth() += PushButton_TextToIconSpace - 4;
             }
       return size;
       }
@@ -637,13 +637,12 @@ void MStyle::polish(QWidget* widget)
       // register widget to animations
       animations().registerWidget( widget );
       transitions().registerWidget( widget );
-      windowManager().registerWidget( widget );
-      frameShadowFactory().registerWidget( widget, _helper );
+      windowManager().registerWidget(widget);
+      frameShadowFactory().registerWidget(widget, _helper);
 
       // scroll areas
-      if (QAbstractScrollArea* scrollArea = qobject_cast<QAbstractScrollArea*>(widget)) {
+      if (QAbstractScrollArea* scrollArea = qobject_cast<QAbstractScrollArea*>(widget))
             polishScrollArea(scrollArea );
-            }
 
       // several widgets set autofill background to false, which effectively breaks the background
       // gradient rendering. Instead of patching all concerned applications,
@@ -717,7 +716,6 @@ void MStyle::polish(QWidget* widget)
       if( qobject_cast<QToolBar*>(widget->parent()) ) {
             widget->setContentsMargins(0,0,0,1);
             }
-
       if (qobject_cast<QToolButton*>(widget)) {
             if ( qobject_cast<QToolBar*>( widget->parent() ) ) {
                   // this hack is needed to have correct text color
@@ -732,24 +730,17 @@ void MStyle::polish(QWidget* widget)
                   }
             widget->setBackgroundRole(QPalette::NoRole);
             }
-      else if( qobject_cast<QMenuBar*>(widget)) {
+      else if (qobject_cast<QMenuBar*>(widget)) {
             widget->setBackgroundRole(QPalette::NoRole);
             }
-      else if( widget->inherits( "KMultiTabBar" ) ) {
-            // kMultiTabBar margins are set to unity for alignment
-            // with (usually sunken) neighbor frames
-            widget->setContentsMargins( 1, 1, 1, 1 );
-            }
-      else if( widget->inherits("Q3ToolBar") || qobject_cast<QToolBar*>(widget) ) {
+      else if (qobject_cast<QToolBar*>(widget)) {
             widget->setBackgroundRole(QPalette::NoRole);
             widget->setAttribute(Qt::WA_TranslucentBackground);
             widget->installEventFilter(this);
-
 #ifdef Q_WS_WIN
             //FramelessWindowHint is needed on windows to make WA_TranslucentBackground work properly
             widget->setWindowFlags(widget->windowFlags() | Qt::FramelessWindowHint);
 #endif
-
             }
       else if( qobject_cast<QTabBar*>(widget) ) {
             widget->installEventFilter( this );
@@ -969,6 +960,7 @@ void MStyle::drawPrimitive(PrimitiveElement element, const QStyleOption* option,
       StylePrimitive fcn(0);
 
       switch(element) {
+            case PE_FrameStatusBar:       fcn = &MStyle::emptyPrimitive; break;
             case PE_Frame:                fcn = &MStyle::drawFramePrimitive; break;
             case PE_FrameFocusRect:       fcn = _frameFocusPrimitive; break;
             case PE_FrameGroupBox:        fcn = &MStyle::drawFrameGroupBoxPrimitive; break;
@@ -1717,37 +1709,37 @@ bool MStyle::drawPanelButtonToolPrimitive( const QStyleOption* option, QPainter*
 
                               }
 
-                        const QPalette local( widget->parentWidget() ? widget->parentWidget()->palette() : palette );
+            const QPalette local(widget->parentWidget() ? widget->parentWidget()->palette() : palette);
 
-                        // check whether parent has autofill background flag
-                        if( const QWidget* parent = _helper.checkAutoFillBackground( widget ) ) painter->fillRect( r, parent->palette().color( parent->backgroundRole() ) );
-                              else _helper.renderWindowBackground( painter, r, widget, local );
+            // check whether parent has autofill background flag
+            if (const QWidget* parent = _helper.checkAutoFillBackground(widget))
+                  painter->fillRect(r, parent->palette().color(parent->backgroundRole()));
+            else
+                  _helper.renderWindowBackground(painter, r, widget, local);
+            return true;
+            }
 
-                        return true;
+      const QRect& r( option->rect );
+      const State& flags( option->state );
+      const QPalette& palette( option->palette );
 
-                    }
+      const bool enabled( flags & State_Enabled );
+      const bool mouseOver(enabled && (flags & State_MouseOver));
+      const bool hasFocus(enabled && (flags & State_HasFocus));
+      const bool reverseLayout( option->direction == Qt::RightToLeft );
+      const bool autoRaised( flags & State_AutoRaise );
 
-              const QRect& r( option->rect );
-              const State& flags( option->state );
-              const QPalette& palette( option->palette );
+      // check whether toolbutton is in toolbar
+      const bool isInToolBar( widget && qobject_cast<const QToolBar*>( widget->parent() ) );
 
-              const bool enabled( flags & State_Enabled );
-              const bool mouseOver(enabled && (flags & State_MouseOver));
-              const bool hasFocus(enabled && (flags & State_HasFocus));
-              const bool reverseLayout( option->direction == Qt::RightToLeft );
-              const bool autoRaised( flags & State_AutoRaise );
-
-              // check whether toolbutton is in toolbar
-              const bool isInToolBar( widget && qobject_cast<const QToolBar*>( widget->parent() ) );
-
-              // toolbar engine
-              const bool toolBarAnimated( isInToolBar && widget && ( animations().toolBarEngine().isAnimated( widget->parentWidget() ) || animations().toolBarEngine().isFollowMouseAnimated( widget->parentWidget() ) ) );
-              const QRect animatedRect( (isInToolBar && widget) ? animations().toolBarEngine().animatedRect( widget->parentWidget() ):QRect() );
-              const QRect childRect( (widget && widget->parentWidget()) ? r.translated( widget->mapToParent( QPoint(0,0) ) ):QRect() );
-              const QRect currentRect(  widget ? animations().toolBarEngine().currentRect( widget->parentWidget() ):QRect() );
-              const bool current( isInToolBar && widget && widget->parentWidget() && currentRect.intersects( r.translated( widget->mapToParent( QPoint(0,0) ) ) ) );
-              const bool toolBarTimerActive( isInToolBar && widget && animations().toolBarEngine().isTimerActive( widget->parentWidget() ) );
-              const qreal toolBarOpacity( ( isInToolBar && widget ) ? animations().toolBarEngine().opacity( widget->parentWidget() ):0 );
+      // toolbar engine
+      const bool toolBarAnimated( isInToolBar && widget && ( animations().toolBarEngine().isAnimated( widget->parentWidget() ) || animations().toolBarEngine().isFollowMouseAnimated( widget->parentWidget() ) ) );
+      const QRect animatedRect( (isInToolBar && widget) ? animations().toolBarEngine().animatedRect( widget->parentWidget() ):QRect() );
+      const QRect childRect( (widget && widget->parentWidget()) ? r.translated( widget->mapToParent( QPoint(0,0) ) ):QRect() );
+      const QRect currentRect(  widget ? animations().toolBarEngine().currentRect( widget->parentWidget() ):QRect() );
+      const bool current( isInToolBar && widget && widget->parentWidget() && currentRect.intersects( r.translated( widget->mapToParent( QPoint(0,0) ) ) ) );
+      const bool toolBarTimerActive( isInToolBar && widget && animations().toolBarEngine().isTimerActive( widget->parentWidget() ) );
+      const qreal toolBarOpacity( ( isInToolBar && widget ) ? animations().toolBarEngine().opacity( widget->parentWidget() ):0 );
 
               // toolbutton engine
               if( isInToolBar && !toolBarAnimated )
@@ -2402,7 +2394,11 @@ bool MStyle::drawIndicatorCheckBoxPrimitive( const QStyleOption* option, QPainte
               return true;
           }
 
-bool MStyle::drawIndicatorRadioButtonPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+//---------------------------------------------------------
+//   drawIndicatorRadioButtonPrimitive
+//---------------------------------------------------------
+
+bool MStyle::drawIndicatorRadioButtonPrimitive(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       const QRect& r( option->rect );
       const State& flags( option->state );
@@ -2437,9 +2433,8 @@ bool MStyle::drawIndicatorRadioButtonPrimitive( const QStyleOption* option, QPai
 
                     } else renderRadioButton( painter, r, palette, opts, state );
 
-              return true;
-
-          }
+      return true;
+      }
 
 bool MStyle::drawIndicatorTabTearPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
       {
@@ -2566,18 +2561,24 @@ bool MStyle::drawIndicatorToolBarSeparatorPrimitive( const QStyleOption* option,
               return true;
           }
 
+//---------------------------------------------------------
+//   drawWidgetPrimitive
+//---------------------------------------------------------
+
 bool MStyle::drawWidgetPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // check widget and attributes
-      if( !widget || !widget->testAttribute(Qt::WA_StyledBackground) || widget->testAttribute(Qt::WA_NoSystemBackground)) return false;
-                    if( !( (widget->windowFlags() & Qt::WindowType_Mask) & (Qt::Window|Qt::Dialog) ) ) return false;
-                    if( !widget->isWindow() ) return false;
+      if (!widget || !widget->testAttribute(Qt::WA_StyledBackground) || widget->testAttribute(Qt::WA_NoSystemBackground))
+            return false;
+      if (!((widget->windowFlags() & Qt::WindowType_Mask) & (Qt::Window | Qt::Dialog)))
+            return false;
+      if (!widget->isWindow())
+            return false;
+      // normal "window" background
+      _helper.renderWindowBackground(painter, option->rect, widget, option->palette);
+      return true;
+      }
 
-              // normal "window" background
-              _helper.renderWindowBackground( painter, option->rect, widget, option->palette );
-              return true;
-
-          }
 void MStyle::renderSplitter( const QStyleOption* option, QPainter* painter, const QWidget* widget, bool horizontal ) const
     {
 
@@ -2676,13 +2677,9 @@ void MStyle::renderSplitter( const QStyleOption* option, QPainter* painter, cons
 //   renderRadioButton
 //---------------------------------------------------------
 
-void MStyle::renderRadioButton(
-   QPainter* painter, const QRect& rect,
-   const QPalette& palette,
-   StyleOptions options,
-   CheckBoxState state,
-   qreal opacity,
-   AnimationMode mode ) const
+void MStyle::renderRadioButton(QPainter* painter, const QRect& rect,
+   const QPalette& palette, StyleOptions options, CheckBoxState state,
+   qreal opacity, AnimationMode mode) const
       {
       const int s( CheckBox_Size );
       const QRect r( centerRect(rect, s, s) );
@@ -5218,7 +5215,7 @@ bool MStyle::drawPushButtonLabelControl(const QStyleOption* option, QPainter* pa
       if (!bOpt)
             return true;
 
-      const QRect& r( option->rect );
+      const QRect& r(option->rect);
               const QPalette& palette( option->palette );
               const State& flags( option->state );
               const bool active = (flags & State_On) || (flags & State_Sunken);
@@ -7145,7 +7142,6 @@ bool MStyle::drawToolBoxTabShapeControl( const QStyleOption* option, QPainter* p
 
 bool MStyle::drawToolButtonLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
-
               // need to customize palettes to deal with autoraised buttons
               const State& flags( option->state );
               const bool autoRaised( flags & State_AutoRaise );

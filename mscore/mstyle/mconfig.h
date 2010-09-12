@@ -46,6 +46,10 @@ struct MStyleConfigData {
             TS_SINGLE,
             TS_PLAIN
             };
+      enum {                  // drag mode
+            WD_FULL,
+            WD_MINIMAL
+            };
 
       static bool genericAnimationsEnabled;
       static int genericAnimationsDuration;

@@ -27,10 +27,10 @@ QT4_WRAP_CPP (mocs
       scrollbardata.h progressbarengine.h progressbardata.h
       menuengine.h menudata.h mdiwindowengine.h mdiwindowdata.h
       headerviewengine.h headerviewdata.h enabledata.h
-      dockseparatorengine.h dockseparatordata.h
-      animationdata.h
+      dockseparatorengine.h dockseparatordata.h animationdata.h
       comboboxdata.h comboboxengine.h labeldata.h labelengine.h lineeditdata.h lineeditengine.h
       stackedwidgetdata.h stackedwidgetengine.h transitiondata.h transitions.h transitionwidget.h
+      windowmanager.h
       )
 
 add_custom_command(
@@ -73,7 +73,7 @@ add_library (
       toolboxengine.cpp widgetstatedata.cpp widgetstateengine.cpp mconfig.cpp
       comboboxdata.cpp comboboxengine.cpp labeldata.cpp labelengine.cpp lineeditdata.cpp
       lineeditengine.cpp stackedwidgetdata.cpp stackedwidgetengine.cpp transitiondata.cpp
-      transitions.cpp transitionwidget.cpp
+      transitions.cpp transitionwidget.cpp windowmanager.cpp
       )
 
 set_target_properties( mstyle
