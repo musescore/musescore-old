@@ -20,7 +20,6 @@
 
 #include <fenv.h>
 
-#include "config.h"
 #include "mscore.h"
 #include "scoreview.h"
 #include "style.h"

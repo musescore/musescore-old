@@ -37,7 +37,7 @@ set(SOUNDFONT3 TRUE)                      # enable ogg vorbis compressed fonts, 
 set(AEOLUS TRUE)                          # pipe organ synthesizer
 set(OMR    FALSE)                         # optical music recognition
 set(EMBED_ICONS FALSE)                    # do not load icons from share/icons
-set(OSC TRUE)                             # osc remote control
+set(OSC FALSE)                            # osc remote control
 
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)           # warnings if not, with gcc4.4 from qt
