@@ -320,7 +320,6 @@ MuseScore::MuseScore()
    : QMainWindow()
       {
       _sstate = STATE_INIT;
-//      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
       setWindowTitle(QString("MuseScore"));
 
       ucheck                = new UpdateChecker();
@@ -532,7 +531,6 @@ MuseScore::MuseScore()
 
       entryTools = addToolBar(tr("Note Entry"));
       entryTools->setObjectName("entry-tools");
-//      entryTools->setIconSize(QSize(preferences.noteEntryIconWidth, preferences.noteEntryIconHeight));
 
       a = getAction("note-input");
       a->setCheckable(true);
@@ -1805,7 +1803,6 @@ static bool processNonGui()
 
 int main(int argc, char* av[])
       {
-      QApplication::setStyle(new MStyle);
       QFile f(":/revision.h");
       f.open(QIODevice::ReadOnly);
       revision = QString(f.readAll());
@@ -1821,6 +1818,7 @@ int main(int argc, char* av[])
 #else
       QtSingleApplication* app = new QtSingleApplication("mscore", argc, av);
 #endif
+      QApplication::setStyle(new MStyle);
 
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();

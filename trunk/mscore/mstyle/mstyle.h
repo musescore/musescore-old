@@ -29,17 +29,7 @@ class FrameShadowFactory;
 class WidgetExplorer;
 class Animations;
 class Transitions;
-
-//---------------------------------------------------------
-//   WindowManager
-//---------------------------------------------------------
-
-class WindowManager {
-   public:
-      WindowManager(QStyle*) {}
-      void registerWidget(QWidget*) {}
-      void unregisterWidget(QWidget*) {}
-      };
+class WindowManager;
 
 //---------------------------------------------------------
 //   MStyle
@@ -181,13 +171,13 @@ class MStyle : public QCommonStyle {
             MenuBarItem_Margin_Right = 5,
 
             // pushbuttons
-            PushButton_ContentsMargin = 5,
-            PushButton_ContentsMargin_Left = 8,
-            PushButton_ContentsMargin_Top = -1,
-            PushButton_ContentsMargin_Right = 8,
+            PushButton_ContentsMargin        = 5,
+            PushButton_ContentsMargin_Left   = 8,
+            PushButton_ContentsMargin_Top    = -1,
+            PushButton_ContentsMargin_Right  = 8,
             PushButton_ContentsMargin_Bottom = 0,
-            PushButton_MenuIndicatorSize = 8,
-            PushButton_TextToIconSpace = 6,
+            PushButton_MenuIndicatorSize     = 8,
+            PushButton_TextToIconSpace       = 6,
 
             // progress bar
             ProgressBar_BusyIndicatorSize = 10,
