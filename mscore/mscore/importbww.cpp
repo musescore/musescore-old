@@ -218,6 +218,9 @@ namespace Bww {
       if (mbf.repeatBegin)
             currentMeasure->setRepeatFlags(RepeatStart);
 
+      if (mbf.irregular)
+            currentMeasure->setIrregular(true);
+
       if (mbf.endingFirst || mbf.endingSecond) {
             Volta* volta = new Volta(score);
             volta->setTrack(0);
@@ -322,6 +325,7 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       Duration durationType(Duration::V_INVALID);
       durationType.setVal(ticks);
       qDebug() << "duration:" << durationType.name();
+      if (triplet != ST_NONE) ticks = 2 * ticks / 3;
 
       BeamMode bm  = BEAM_AUTO;
       Direction sd = AUTO;
