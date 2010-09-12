@@ -35,6 +35,9 @@
 #include "parser.h"
 #include "writer.h"
 
+// Duration of a whole measure in ticks
+static const int WHOLE_MEASURE_DURATION = 192;
+
 /**
  Determine if symbol is a grace sequence
  */
@@ -76,6 +79,110 @@ static bool isNonNote(Bww::Symbol sym)
           || sym == Bww::TSIG
           || sym == Bww::PART
           || sym == Bww::BAR);
+}
+
+/**
+ Dump measure contents
+ */
+
+static void dumpMeasures(QList<Bww::MeasureDescription> const& measures)
+{
+  qDebug() << "dumpMeasures #measures" << measures.size()
+      ;
+  for (int j = 0; j < measures.size(); ++j)
+  {
+    qDebug() << "measure #" << j + 1;
+    qDebug() << "Measure contents:";
+    qDebug() << "mbf:"
+        << "repeatBegin" << measures.at(j).mbf.repeatBegin
+        << "endingFirst" << measures.at(j).mbf.endingFirst
+        << "endingSecond" << measures.at(j).mbf.endingSecond
+        << "firstOfSystem" << measures.at(j).mbf.firstOfSystem
+        << "irregular" << measures.at(j).mbf.irregular
+        ;
+    for (int i = 0; i < measures.at(j).notes.size(); ++i)
+    {
+      qDebug()
+          << measures.at(j).notes.at(i).pitch
+          << measures.at(j).notes.at(i).beam
+          << measures.at(j).notes.at(i).type
+          << measures.at(j).notes.at(i).dots
+          << measures.at(j).notes.at(i).tieStart
+          << measures.at(j).notes.at(i).tieStop
+          << measures.at(j).notes.at(i).triplet
+          << measures.at(j).notes.at(i).grace
+          ;
+    }
+    qDebug() << "mef:"
+        << "repeatEnd" << measures.at(j).mef.repeatEnd
+        << "endingEnd" << measures.at(j).mef.endingEnd
+        << "lastOfSystem" << measures.at(j).mef.lastOfSystem
+        ;
+    qDebug() << "duration:" << measures.at(j).duration;
+  }
+}
+
+/**
+ Calculate measure durations
+ */
+
+static void calculateMeasureDurations(QList<Bww::MeasureDescription> & measures)
+{
+  for (int j = 0; j < measures.size(); ++j)
+  {
+    int measureDuration = 0;
+    for (int i = 0; i < measures.at(j).notes.size(); ++i)
+    {
+      int ticks = WHOLE_MEASURE_DURATION / measures.at(j).notes.at(i).type.toInt();
+      if (measures.at(j).notes.at(i).dots) ticks = 3 * ticks / 2;
+      if (measures.at(j).notes.at(i).triplet != Bww::ST_NONE) ticks = 2 * ticks / 3;
+      if (measures.at(j).notes.at(i).grace) ticks = 0; // grace notes don't count
+      measureDuration += ticks;
+      qDebug()
+          << measures.at(j).notes.at(i).pitch
+          << measures.at(j).notes.at(i).beam
+          << measures.at(j).notes.at(i).type
+          << measures.at(j).notes.at(i).dots
+          << measures.at(j).notes.at(i).tieStart
+          << measures.at(j).notes.at(i).tieStop
+          << measures.at(j).notes.at(i).triplet
+          << measures.at(j).notes.at(i).grace
+          << "->" << ticks
+          ;
+    }
+    qDebug() << "measureDuration:" << measureDuration;
+    measures[j].duration = measureDuration;
+  }
+}
+
+/**
+ Find irregular measures
+ */
+
+static void findIrregularMeasures(QList<Bww::MeasureDescription> & measures, int beats, int beat)
+{
+  qDebug() << "findIrregularMeasures" << measures.size()
+      << "beats" << beats
+      << "beat" << beat
+      ;
+
+  int normalDuration = WHOLE_MEASURE_DURATION * beats / beat;
+
+  // need at least one measure
+  if (measures.size() == 0) return;
+
+  // if the first measure is shorter that normal, it is irregular
+  if (measures.at(0).duration < normalDuration) measures[0].mbf.irregular = true;
+
+  for (int j = 1; j < measures.size(); ++j)
+  {
+    // the second measure of a pair where the sum of their duration adds up
+    // to the normal duration is also irregular
+    const int d1 = measures.at(j - 1).duration;
+    const int d2 = measures.at(j).duration;
+    if (d1 > 0 && d2 > 0 && (d1 + d2) == normalDuration)
+      measures[j].mbf.irregular = true;
+  }
 }
 
 namespace Bww {
@@ -285,42 +392,10 @@ namespace Bww {
 
     qDebug() << "Parser::parse() finished, #measures" << measures.size()
         ;
-    for (int j = 0; j < measures.size(); ++j)
-    {
-      qDebug() << "measure #" << j + 1;
-      qDebug() << "Measure contents:";
-      qDebug() << "mbf:"
-          << "repeatBegin" << measures.at(j).mbf.repeatBegin
-          << "endingFirst" << measures.at(j).mbf.endingFirst
-          << "endingSecond" << measures.at(j).mbf.endingSecond
-          << "firstOfSystem" << measures.at(j).mbf.firstOfSystem
-          ;
-      int measureDuration = 0;
-      for (int i = 0; i < measures.at(j).notes.size(); ++i)
-      {
-        int ticks = 64 / measures.at(j).notes.at(i).type.toInt();
-        if (measures.at(j).notes.at(i).dots) ticks = 3 * ticks / 2;
-        if (measures.at(j).notes.at(i).grace) ticks = 0; // grace notes don't count
-        measureDuration += ticks;
-        qDebug()
-            << measures.at(j).notes.at(i).pitch
-            << measures.at(j).notes.at(i).beam
-            << measures.at(j).notes.at(i).type
-            << measures.at(j).notes.at(i).dots
-            << measures.at(j).notes.at(i).tieStart
-            << measures.at(j).notes.at(i).tieStop
-            << measures.at(j).notes.at(i).triplet
-            << measures.at(j).notes.at(i).grace
-            << "->" << ticks
-            ;
-      }
-      qDebug() << "measureDuration:" << measureDuration;
-      qDebug() << "mef:"
-          << "repeatEnd" << measures.at(j).mef.repeatEnd
-          << "endingEnd" << measures.at(j).mef.endingEnd
-          << "lastOfSystem" << measures.at(j).mef.lastOfSystem
-          ;
-    }
+
+    calculateMeasureDurations(measures);
+    findIrregularMeasures(measures, beats, beat);
+    dumpMeasures(measures);
 
     for (int j = 0; j < measures.size(); ++j)
     {
@@ -439,6 +514,7 @@ namespace Bww {
       }
       lex.getSym();
     }
+
     StartStop triplet = ST_NONE;
     if (inTriplet)
     {
@@ -449,6 +525,7 @@ namespace Bww {
     qDebug() << " tie start" << tieStart << " tie stop" << tieStop;
     qDebug() << " triplet start" << tripletStart << " triplet stop" << tripletStop;
     NoteDescription noteDesc(caps[1], caps[2], caps[3], dots, tieStart, tieStop, triplet);
+
     if (measures.isEmpty())
     {
       errorHandler("cannot append note: no measure");

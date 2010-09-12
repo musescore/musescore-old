@@ -47,11 +47,13 @@ namespace Bww {
     bool endingFirst;
     bool endingSecond;
     bool firstOfSystem;
+    bool irregular;
     MeasureBeginFlags() :
         repeatBegin(false),
         endingFirst(false),
         endingSecond(false),
-        firstOfSystem(false)
+        firstOfSystem(false),
+        irregular(false)
     {}
   };
 

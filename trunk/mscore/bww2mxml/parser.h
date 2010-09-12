@@ -65,6 +65,10 @@ namespace Bww {
     MeasureBeginFlags mbf;
     QList<NoteDescription> notes;
     MeasureEndFlags mef;
+    int duration;
+    MeasureDescription()
+      : duration(0)
+    {}
   };
 
   /**
