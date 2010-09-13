@@ -192,7 +192,7 @@ add_executable ( ${ExecutableName}
       importove.cpp ove.cpp interval.cpp check.cpp tablature.cpp
       fret.cpp stafftype.cpp staffstate.cpp spanner.cpp fingering.cpp
       shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp tremolobar.cpp
-      noteevent.cpp chordline.cpp
+      noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp
       ${OMR_FILES}
       ${AUDIO}
       )
@@ -525,6 +525,7 @@ endif (NOT MINGW AND NOT APPLE)
       data/text_right.svg
       data/subscript.svg
       data/superscript.svg
+      data/fotomode.svg
 
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons
       )

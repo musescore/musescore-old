@@ -934,7 +934,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH | STATE_FOTO,
          "escape",
          QT_TRANSLATE_NOOP("action","ESCAPE"),
          Qt::Key_Escape,
@@ -2288,6 +2288,16 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","create new revision"),
          QT_TRANSLATE_NOOP("action","create new reivsion")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_FOTO,
+         "fotomode",
+         QT_TRANSLATE_NOOP("action","toggle foto mode"),
+	   0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","toggle foto mode"),
+         QT_TRANSLATE_NOOP("action","toggle foto mode"),
+         fotomode_ICON
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)

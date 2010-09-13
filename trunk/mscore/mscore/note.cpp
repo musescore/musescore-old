@@ -57,6 +57,7 @@
 #include "fingering.h"
 #include "bend.h"
 #include "bend.h"
+#include "scoreview.h"
 
 //---------------------------------------------------------
 //   noteHeads

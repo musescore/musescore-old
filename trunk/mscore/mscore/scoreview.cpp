@@ -64,6 +64,7 @@
 #include "tablature.h"
 #include "shadownote.h"
 #include "sym.h"
+#include "lasso.h"
 
 //---------------------------------------------------------
 //   stateNames
@@ -72,25 +73,7 @@
 static const char* stateNames[] = {
       "Normal", "Drag", "DragObject", "Edit", "DragEdit",
       "Lasso",  "NoteEntry", "Mag", "Play", "Search", "EntryPlay",
-      "DragPlay"
-      };
-
-//---------------------------------------------------------
-//   CommandTransition
-//---------------------------------------------------------
-
-class CommandTransition : public QAbstractTransition
-      {
-      QString val;
-
-   protected:
-      virtual bool eventTest(QEvent* e);
-      virtual void onTransition(QEvent*) {}
-
-   public:
-      CommandTransition(const QString& cmd, QState* target) : val(cmd) {
-            setTargetState(target);
-            }
+      "Fotomode"
       };
 
 //---------------------------------------------------------
@@ -237,31 +220,6 @@ class EditKeyTransition : public QEventTransition
       };
 
 //---------------------------------------------------------
-//   ScoreViewDragTransition
-//---------------------------------------------------------
-
-class ScoreViewDragTransition : public QMouseEventTransition
-      {
-      ScoreView* canvas;
-
-   protected:
-      virtual bool eventTest(QEvent* event) {
-            if (!QMouseEventTransition::eventTest(event))
-                  return false;
-            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
-            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
-            if (me->modifiers() & Qt::ShiftModifier)
-                  return false;
-            return !canvas->mousePress(me);
-            }
-   public:
-      ScoreViewDragTransition(ScoreView* c, QState* target)
-         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
-            setTargetState(target);
-            }
-      };
-
-//---------------------------------------------------------
 //   ScoreViewLassoTransition
 //---------------------------------------------------------
 
@@ -287,7 +245,7 @@ class ScoreViewLassoTransition : public QMouseEventTransition
       };
 
 //---------------------------------------------------------
-//   ElementDragTransition
+// ElementDragTransition
 //---------------------------------------------------------
 
 class ElementDragTransition : public QEventTransition
@@ -300,7 +258,7 @@ class ElementDragTransition : public QEventTransition
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
-//            canvas->mousePress(me);
+            // canvas->mousePress(me);
             return canvas->testElementDragTransition(me);
             }
    public:
@@ -449,25 +407,6 @@ class DeSelectTransition : public QMouseEventTransition
       };
 
 //---------------------------------------------------------
-//   DragTransition
-//---------------------------------------------------------
-
-class DragTransition : public QEventTransition
-      {
-      ScoreView* canvas;
-
-   protected:
-      virtual void onTransition(QEvent* e) {
-            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
-            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
-            canvas->dragScoreView(me);
-            }
-   public:
-      DragTransition(ScoreView* c)
-         : QEventTransition(c, QEvent::MouseMove), canvas(c) {}
-      };
-
-//---------------------------------------------------------
 //   NoteEntryDragTransition
 //---------------------------------------------------------
 
@@ -575,6 +514,38 @@ bool CommandTransition::eventTest(QEvent* e)
       }
 
 //---------------------------------------------------------
+//   ScoreViewDragTransition
+//---------------------------------------------------------
+
+bool ScoreViewDragTransition::eventTest(QEvent* event)
+      {
+      if (!QMouseEventTransition::eventTest(event))
+            return false;
+      QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+      QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+      if (me->modifiers() & Qt::ShiftModifier)
+            return false;
+      return !canvas->mousePress(me);
+      }
+
+ScoreViewDragTransition::ScoreViewDragTransition(ScoreView* c, QState* target)
+   : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c)
+      {
+      setTargetState(target);
+      }
+
+//---------------------------------------------------------
+//   onTransition
+//---------------------------------------------------------
+
+void DragTransition::onTransition(QEvent* e)
+      {
+      QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+      QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+      canvas->dragScoreView(me);
+      }
+
+//---------------------------------------------------------
 //   ScoreView
 //---------------------------------------------------------
 
@@ -609,6 +580,7 @@ ScoreView::ScoreView(QWidget* parent)
       fgPixmap    = 0;
       bgPixmap    = 0;
       lasso       = new Lasso(_score);
+      _foto       = new Lasso(_score);
 
       cursor      = 0;
       shadowNote  = 0;
@@ -659,6 +631,7 @@ ScoreView::ScoreView(QWidget* parent)
       s->addTransition(new CommandTransition("mag", states[MAG]));            // ->mag
       s->addTransition(new CommandTransition("play", states[PLAY]));          // ->play
       s->addTransition(new CommandTransition("find", states[SEARCH]));        // ->search
+      s->addTransition(new CommandTransition("fotomode", states[FOTOMODE]));  // ->fotomode
       ct = new CommandTransition("paste", 0);                                 // paste
       connect(ct, SIGNAL(triggered()), SLOT(normalPaste()));
       s->addTransition(ct);
@@ -759,7 +732,7 @@ ScoreView::ScoreView(QWidget* parent)
       s->addTransition(st);
       connect(s, SIGNAL(entered()), mscore, SLOT(setPlayState()));
       connect(s, SIGNAL(entered()), seq, SLOT(start()));
-      connect(s, SIGNAL(exited()), seq, SLOT(stop()));
+      connect(s, SIGNAL(exited()),  seq, SLOT(stop()));
 
       QState* s1 = new QState(s);
       s1->setObjectName("play-normal");
@@ -782,8 +755,8 @@ ScoreView::ScoreView(QWidget* parent)
       s2->addTransition(new DragTransition(this));
 
       s->setInitialState(s1);
-
       s->addTransition(new ScoreViewDragTransition(this, s2));
+
       //----------------------setup search state
       s = states[SEARCH];
       s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
@@ -802,6 +775,8 @@ ScoreView::ScoreView(QWidget* parent)
       connect(s, SIGNAL(entered()), mscore, SLOT(setPlayState()));
       connect(s, SIGNAL(entered()), seq, SLOT(start()));
       connect(s, SIGNAL(exited()),  seq, SLOT(stop()));
+
+      setupFotoMode();
 
       sm->addState(stateActive);
       stateActive->setInitialState(states[NORMAL]);
@@ -846,6 +821,8 @@ void ScoreView::setScore(Score* s)
             cursor->setScore(_score);
             shadowNote->setScore(_score);
             }
+      lasso->setScore(s);
+      _foto->setScore(s);
       connect(s, SIGNAL(updateAll()),     SLOT(update()));
       connect(s, SIGNAL(dataChanged(const QRectF&)), SLOT(dataChanged(const QRectF&)));
       }
@@ -857,6 +834,7 @@ void ScoreView::setScore(Score* s)
 ScoreView::~ScoreView()
       {
       delete lasso;
+      delete _foto;
       delete cursor;
       delete bgPixmap;
       delete fgPixmap;
@@ -879,7 +857,6 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
             }
 
       QMenu* popup = new QMenu(this);
-//      popup->setSeparatorsCollapsible(false);
       popup->setSeparatorsCollapsible(true);
 
       QAction* a = popup->addAction(obj->userName());
@@ -1067,7 +1044,7 @@ void ScoreView::updateGrips()
       qreal w   = 8.0 / _matrix.m11();
       qreal h   = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
-      for (int i = 0; i < 4; ++i)
+      for (int i = 0; i < MAX_GRIPS; ++i)
             grip[i] = r;
 
       e->updateGrips(&grips, grip);
@@ -1189,7 +1166,6 @@ void ScoreView::startEdit()
             }
       else {
             editObject = origEditObject->clone();
-printf("startEdit %p -> %p\n", origEditObject, editObject);
             editObject->setSelected(true);
             _score->undoChangeElement(origEditObject, editObject);
             editObject->startEdit(this, startMove);
@@ -1198,7 +1174,7 @@ printf("startEdit %p -> %p\n", origEditObject, editObject);
       qreal w = 8.0 / _matrix.m11();
       qreal h = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
-      for (int i = 0; i < 4; ++i)
+      for (int i = 0; i < MAX_GRIPS; ++i)
             grip[i] = r;
       editObject->updateGrips(&grips, grip);
       curGrip = grips-1;
@@ -1355,6 +1331,8 @@ void ScoreView::paintEvent(QPaintEvent* ev)
 
       cursor->draw(p, this);
       lasso->draw(p, this);
+      if (fotoMode())
+            _foto->draw(p, this);
       shadowNote->draw(p, this);
       if (!dropAnchor.isNull()) {
             QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / p.worldMatrix().m11(), Qt::DotLine);
@@ -2408,6 +2386,15 @@ void ScoreView::setMag(double nmag)
          nmag, _matrix.m23(), _matrix.dx()*deltamag, _matrix.dy()*deltamag, _matrix.m33());
       imatrix = _matrix.inverted();
       emit scaleChanged(nmag * score()->spatium());
+      if (grips) {
+            qreal w = 8.0 / nmag;
+            qreal h = 8.0 / nmag;
+            QRectF r(-w*.5, -h*.5, w, h);
+            for (int i = 0; i < grips; ++i) {
+                  QPointF p(grip[i].center());
+                  grip[i] = r.translated(p);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -2561,8 +2548,10 @@ void ScoreView::cmd(const QAction* a)
 
       if (cmd == "escape")
             sm->postEvent(new CommandEvent(cmd));
-      else if (cmd == "note-input" || cmd == "copy" || cmd == "paste" || cmd == "cut")
+      else if (cmd == "note-input" || cmd == "copy" || cmd == "paste"
+         || cmd == "cut" || cmd == "fotomode") {
             sm->postEvent(new CommandEvent(cmd));
+            }
       else if (cmd == "lyrics") {
             _score->startCmd();
             Lyrics* lyrics = _score->addLyrics();
@@ -3198,7 +3187,7 @@ void ScoreView::doDragLasso(QMouseEvent* ev)
       QRectF r;
       r.setCoords(startMove.x(), startMove.y(), p.x(), p.y());
       lasso->setbbox(r.normalized());
-      _lassoRect = lasso->abbox();
+      QRectF _lassoRect(lasso->abbox());
       r = _matrix.mapRect(_lassoRect);
       QSize sz(r.size().toSize());
       mscore->statusBar()->showMessage(QString("%1 x %2").arg(sz.width()).arg(sz.height()), 3000);
@@ -3245,6 +3234,15 @@ bool ScoreView::noteEntryMode() const
 bool ScoreView::editMode() const
       {
       return sm->configuration().contains(states[EDIT]);
+      }
+
+//---------------------------------------------------------
+//   fotoMode
+//---------------------------------------------------------
+
+bool ScoreView::fotoMode() const
+      {
+      return sm->configuration().contains(states[FOTOMODE]);
       }
 
 //---------------------------------------------------------
@@ -3834,7 +3832,6 @@ void ScoreView::cloneElement(Element* e)
       {
       if (!e->isMovable())
             return;
-printf("clone element %s\n", e->name());
       QDrag* drag = new QDrag(this);
       QMimeData* mimeData = new QMimeData;
       mimeData->setData(mimeSymbolFormat, e->mimeData(QPointF()));

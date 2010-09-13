@@ -88,4 +88,7 @@ VoiceSelector {
       border: 1px solid #787878;
       border-radius: 4px;
       }
-
+QMenu::item:selected {
+      background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+         stop: 0 #787878, stop: 1 #888888);
+      }
