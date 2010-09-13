@@ -364,6 +364,7 @@ class MuseScore : public QMainWindow {
       void setNoteEntryState() { changeState(STATE_NOTE_ENTRY); }
       void setPlayState()      { changeState(STATE_PLAY); }
       void setSearchState()    { changeState(STATE_SEARCH); }
+      void setFotomode()       { changeState(STATE_FOTO); }
       void checkForUpdate();
       void registerPlugin(QAction*);
       QMenu* fileMenu() const  { return _fileMenu; }

@@ -524,6 +524,12 @@ MuseScore::MuseScore()
       cpitchTools->setObjectName("pitch-tools");
       cpitchTools->addAction(getAction("concert-pitch"));
 
+      QToolBar* foto = addToolBar(tr("Foto Mode"));
+      foto->setObjectName("foto-tools");
+      a = getAction("fotomode");
+      a->setCheckable(true);
+      foto->addAction(a);
+
       //-------------------------------
       //    Note Entry Tool Bar
       //-------------------------------
@@ -2427,6 +2433,10 @@ void MuseScore::changeState(ScoreState val)
                   _modeText->setText(tr("play"));
                   _modeText->show();
                   break;
+            case STATE_FOTO:
+                  _modeText->setText(tr("fotomode"));
+                  _modeText->show();
+                  break;
             case STATE_SEARCH:
                   if (searchDialog == 0) {
                         searchDialog = new QWidget;
@@ -3226,6 +3236,7 @@ const char* stateName(ScoreState s)
             case STATE_EDIT:       return "STATE_EDIT";
             case STATE_PLAY:       return "STATE_PLAY";
             case STATE_SEARCH:     return "STATE_SEARCH";
+            case STATE_FOTO:       return "STATE_FOTO";
             default:               return "??";
             }
       }

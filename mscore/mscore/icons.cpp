@@ -127,5 +127,6 @@ void genIcons()
       icons[textRight_ICON]     = new QIcon(iconPath + "text_right.svg");
       icons[textSuper_ICON]     = new QIcon(iconPath + "superscript.svg");
       icons[textSub_ICON]       = new QIcon(iconPath + "subscript.svg");
+      icons[fotomode_ICON]      = new QIcon(iconPath + "fotomode.svg");
       }
 

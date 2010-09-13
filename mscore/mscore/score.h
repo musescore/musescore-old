@@ -35,7 +35,7 @@
 #include "element.h"
 #include "al/fraction.h"
 #include "al/al.h"
-#include "scoreview.h"
+// #include "scoreview.h"
 #include "key.h"
 #include "interval.h"
 #include "segment.h"
@@ -615,6 +615,7 @@ class Score : public QObject {
       bool saved() const             { return _saved;         }
       void setSaved(bool v)          { _saved = v;            }
       bool printing() const          { return _printing;      }
+      void setPrinting(bool val)     { _printing = val;      }
       void setAutosaveDirty(bool v)  { _autosaveDirty = v;    }
       bool autosaveDirty() const     { return _autosaveDirty; }
 

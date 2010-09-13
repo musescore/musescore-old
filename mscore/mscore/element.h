@@ -484,18 +484,6 @@ class Cursor : public Element {
       };
 
 //---------------------------------------------------------
-//   Lasso
-//---------------------------------------------------------
-
-class Lasso : public Element {
-   public:
-      Lasso(Score*);
-      virtual Lasso* clone() const       { return new Lasso(*this); }
-      virtual ElementType type() const   { return LASSO; }
-      virtual void draw(QPainter&, ScoreView*) const;
-      };
-
-//---------------------------------------------------------
 //   Line
 //---------------------------------------------------------
 

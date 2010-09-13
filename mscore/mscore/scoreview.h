@@ -37,6 +37,40 @@ class Measure;
 class System;
 class Score;
 class TextB;
+class ScoreView;
+
+//---------------------------------------------------------
+//   CommandTransition
+//---------------------------------------------------------
+
+class CommandTransition : public QAbstractTransition
+      {
+      QString val;
+
+   protected:
+      virtual bool eventTest(QEvent* e);
+      virtual void onTransition(QEvent*) {}
+
+   public:
+      CommandTransition(const QString& cmd, QState* target) : val(cmd) {
+            setTargetState(target);
+            }
+      };
+
+//---------------------------------------------------------
+//   ScoreViewDragTransition
+//---------------------------------------------------------
+
+class ScoreViewDragTransition : public QMouseEventTransition
+      {
+      ScoreView* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event);
+
+   public:
+      ScoreViewDragTransition(ScoreView* c, QState* target);
+      };
 
 //---------------------------------------------------------
 //   CommandEvent
@@ -57,8 +91,10 @@ class ScoreView : public QWidget {
       Q_OBJECT
 
       enum States { NORMAL, DRAG, DRAG_OBJECT, EDIT, DRAG_EDIT, LASSO,
-            NOTE_ENTRY, MAG, PLAY, SEARCH, ENTRY_PLAY, STATES
+            NOTE_ENTRY, MAG, PLAY, SEARCH, ENTRY_PLAY, FOTOMODE,
+            STATES
             };
+      static const int MAX_GRIPS = 8;
 
       Score* _score;
 
@@ -100,7 +136,7 @@ class ScoreView : public QWidget {
 
       // editing mode
       int curGrip;
-      QRectF grip[4];         // edit "grips"
+      QRectF grip[8];         // edit "grips"
       int grips;              // number of used grips
       Element* origEditObject;
       Element* editObject;         ///< Valid in edit mode
@@ -111,7 +147,7 @@ class ScoreView : public QWidget {
       ShadowNote* shadowNote;
 
       Lasso* lasso;           ///< temporarily drawn lasso selection
-      QRectF _lassoRect;
+      Lasso* _foto;
 
       QColor _bgColor;
       QColor _fgColor;
@@ -120,6 +156,7 @@ class ScoreView : public QWidget {
 
       virtual void paintEvent(QPaintEvent*);
       void paint(const QRect&, QPainter&);
+      void paint1(bool printMode, const QRectF&, QPainter&);
 
       void objectPopup(const QPoint&, Element*);
       void measurePopup(const QPoint&, Measure*);
@@ -169,11 +206,17 @@ class ScoreView : public QWidget {
       void cmdChangeEnharmonic(bool);
 
       Page* point2page(const QPointF&);
+      void setupFotoMode();
 
    private slots:
       void textUndoLevelAdded();
       void enterState();
       void exitState();
+      void startFotomode();
+      void stopFotomode();
+      void startFotoDrag();
+      void endFotoDrag();
+      void endFotoDragEdit();
 
    public slots:
       void moveCursor();
@@ -204,6 +247,7 @@ class ScoreView : public QWidget {
       void normalPaste();
 
       void cloneElement(Element* e);
+      void doFotoDragEdit(QMouseEvent* ev);
 
    signals:
       void viewRectChanged();
@@ -234,8 +278,6 @@ class ScoreView : public QWidget {
       void redraw(const QRectF& r);
       Element* elementAt(const QPointF& pp);
       Element* elementNear(const QPointF& pp);
-      QRectF lassoRect() const { return _lassoRect; }
-      void setLassoRect(const QRectF& r) { _lassoRect = r; }
       bool navigatorVisible() const;
       void cmd(const QAction* a);
 
@@ -251,16 +293,19 @@ class ScoreView : public QWidget {
       void noteEntryButton(QMouseEvent* ev);
       void doDragElement(QMouseEvent* ev);
       void doDragLasso(QMouseEvent* ev);
+      void doDragFoto(QMouseEvent* ev);
       void doDragEdit(QMouseEvent* ev);
       void select(QMouseEvent*);
       bool mousePress(QMouseEvent* ev);
       bool testElementDragTransition(QMouseEvent* ev) const;
       bool editElementDragTransition(QMouseEvent* ev);
+      bool fotoEditElementDragTransition(QMouseEvent* ev);
       bool editScoreViewDragTransition(QMouseEvent* e);
       void cmdAddSlur();
       void cmdAddSlur(Note* firstNote, Note* lastNote);
       bool noteEntryMode() const;
       bool editMode() const;
+      bool fotoMode() const;
 
       void editInputTransition(QInputMethodEvent* ie);
       void onEditPasteTransition(QMouseEvent* ev);
@@ -284,7 +329,9 @@ class ScoreView : public QWidget {
       void pageTop();
       void pageEnd();
       QPointF toLogical(const QPoint& p) const { return imatrix.map(QPointF(p)); }
-      QRectF toLogical(const QRectF& r) const { return imatrix.mapRect(r); }
+      QRectF  toLogical(const QRectF& r) const { return imatrix.mapRect(r);      }
+      QRect toPhysical(const QRectF& r) const { return _matrix.mapRect(r).toRect(); }
+
       void search(const QString& s);
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       void setFocusRect();
@@ -292,7 +339,29 @@ class ScoreView : public QWidget {
       void midiNoteReceived(int pitch, bool);
       void changeVoice(int voice);
       void drawBackground(QPainter& p, QRectF r);
-      void changeEditElement(Element* e) { editObject = e; }
+      bool fotoScoreViewDragTest(QMouseEvent*);
+      bool fotoScoreViewDragRectTest(QMouseEvent*);
+      void doDragFotoRect(QMouseEvent*);
+      void fotoContextPopup(QMouseEvent*);
+      bool fotoRectHit(const QPoint& p);
+      void paintRect(bool printMode, QPainter& p, const QRectF& r, double mag);
+      bool saveFotoAs(bool printMode, const QRectF&);
+      };
+
+//---------------------------------------------------------
+//   DragTransition
+//---------------------------------------------------------
+
+class DragTransition : public QEventTransition
+      {
+      ScoreView* canvas;
+
+   protected:
+      virtual void onTransition(QEvent* e);
+
+   public:
+      DragTransition(ScoreView* c)
+         : QEventTransition(c, QEvent::MouseMove), canvas(c) {}
       };
 
 extern int searchStaff(const Element* element);

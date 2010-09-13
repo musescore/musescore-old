@@ -166,7 +166,8 @@ void Preferences::init()
       proximity                = 6;
       autoSave                 = true;
       autoSaveTime             = 2;       // minutes
-      pngScreenShot            = false;
+      pngResolution            = 300;
+      pngTransparent           = true;
       language                 = "system";
       style                    = "";
 
@@ -269,7 +270,8 @@ void Preferences::write()
       s.setValue("proximity",          proximity);
       s.setValue("autoSave",           autoSave);
       s.setValue("autoSaveTime",       autoSaveTime);
-      s.setValue("pngScreenShot",      pngScreenShot);
+      s.setValue("pngResolution",      pngResolution);
+      s.setValue("pngTransparent",     pngTransparent);
       s.setValue("language",           language);
       s.setValue("style", style);
 
@@ -393,7 +395,8 @@ void Preferences::read()
       proximity                = s.value("proximity", 6).toInt();
       autoSave                 = s.value("autoSave", true).toBool();
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
-      pngScreenShot            = s.value("pngScreenShot", false).toBool();
+      pngResolution            = s.value("pngResolution", 300).toInt();
+      pngTransparent           = s.value("pngTransparent", true).toBool();
       language                 = s.value("language", "system").toString();
       style                    = s.value("style", "").toString();
 
@@ -713,7 +716,8 @@ void PreferenceDialog::updateValues(Preferences* p)
       proximity->setValue(p->proximity);
       autoSave->setChecked(p->autoSave);
       autoSaveTime->setValue(p->autoSaveTime);
-      pngScreenShot->setChecked(p->pngScreenShot);
+      pngResolution->setValue(p->pngResolution);
+      pngTransparent->setChecked(p->pngTransparent);
       for (int i = 0; i < language->count(); ++i) {
             if (language->itemText(i).startsWith(p->language)) {
                   language->setCurrentIndex(i);
@@ -1165,7 +1169,8 @@ void PreferenceDialog::apply()
       preferences.proximity          = proximity->value();
       preferences.autoSave           = autoSave->isChecked();
       preferences.autoSaveTime       = autoSaveTime->value();
-      preferences.pngScreenShot      = pngScreenShot->isChecked();
+      preferences.pngResolution      = pngResolution->value();
+      preferences.pngTransparent     = pngTransparent->isChecked();
 
       if (shortcutsChanged) {
             shortcutsChanged = false;

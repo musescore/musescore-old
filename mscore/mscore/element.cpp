@@ -1054,31 +1054,6 @@ void Cursor::draw(QPainter& p, ScoreView*) const
       }
 
 //---------------------------------------------------------
-//   Lasso
-//---------------------------------------------------------
-
-Lasso::Lasso(Score* s)
-   : Element(s)
-      {
-      setVisible(false);
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Lasso::draw(QPainter& p, ScoreView*) const
-      {
-      p.setBrush(Qt::NoBrush);
-      QPen pen(QColor(preferences.selectColor[0]));
-      // always 2 pixel width
-      qreal w = 2.0 / p.matrix().m11();
-      pen.setWidthF(w);
-      p.setPen(pen);
-      p.drawRect(bbox());
-      }
-
-//---------------------------------------------------------
 //   dump
 //---------------------------------------------------------
 
