@@ -23,7 +23,8 @@ install(FILES
       chords.xml
       stdchords.xml
       jazzchords.xml
-      appstyle.st
+      appstyle.css
+      appstyle-dark.css
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
       )
 
