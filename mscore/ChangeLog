@@ -1,3 +1,5 @@
+14.sep (la)
+      - Fix #7077: Applying double-note tremolo to dotted notes fails and alter measure duration
 30.aug (db)
       - Fix #6937: Measure Properties should be modal dialog
 29.aug (la)

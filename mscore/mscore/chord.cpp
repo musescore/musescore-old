@@ -399,7 +399,9 @@ void Chord::add(Element* e)
             Tremolo* tr = static_cast<Tremolo*>(e);
             if (tr->twoNotes()) {
                   Duration d = duration();
+                  int dots = d.dots();
                   d  = d.shift(-1);
+                  d.setDots(dots);
                   if (tr->chord1())
                         tr->chord1()->setDuration(d);
                   if (tr->chord2())
@@ -444,7 +446,9 @@ void Chord::remove(Element* e)
             Tremolo* tremolo = static_cast<Tremolo*>(e);
             if (tremolo->twoNotes()) {
                   Duration d = duration();
+                  int dots = d.dots();
                   d          = d.shift(1);
+                  d.setDots(dots);
                   if (tremolo->chord1())
                         tremolo->chord1()->setDuration(d);
                   if (tremolo->chord2())
