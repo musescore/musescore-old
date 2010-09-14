@@ -1,3 +1,6 @@
+14.sep (ws)
+      - renamed appstyle.st to appstyle-dark.css (its a "cascading style sheet")
+      - add "standard" app style "appstyle.st"
 13.sep (ws)
       - new feature: fotomode
 12.sep (lv)

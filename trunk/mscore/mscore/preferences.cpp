@@ -199,7 +199,7 @@ void Preferences::init()
 
       useOsc                  = false;
       oscPort                 = 5282;
-      appStyleFile            = ":/data/appstyle.st";
+      appStyleFile            = ":/data/appstyle-dark.css";
       };
 
 //---------------------------------------------------------
@@ -425,7 +425,7 @@ void Preferences::read()
 
       useOsc                 = s.value("useOsc", false).toBool();
       oscPort                = s.value("oscPort", 5282).toInt();
-      appStyleFile           = s.value("appStyle", ":/data/appstyle.st").toString();
+      appStyleFile           = s.value("appStyle", ":/data/appstyle-dark.css").toString();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {
