@@ -20,6 +20,7 @@
 
 #include "lasso.h"
 #include "preferences.h"
+#include "scoreview.h"
 
 //---------------------------------------------------------
 //   Lasso
@@ -29,6 +30,7 @@ Lasso::Lasso(Score* s)
    : Element(s)
       {
       setVisible(false);
+      view = 0;
       }
 
 //---------------------------------------------------------
@@ -43,7 +45,7 @@ void Lasso::draw(QPainter& p, ScoreView*) const
       qreal w = 2.0 / p.matrix().m11();
       pen.setWidthF(w);
       p.setPen(pen);
-      p.drawRect(bbox());
+      p.drawRect(_rect);
       }
 
 //---------------------------------------------------------
@@ -54,28 +56,28 @@ void Lasso::editDrag(int curGrip, const QPointF& delta)
       {
       switch(curGrip) {
             case 0:
-                  _bbox.setTopLeft(_bbox.topLeft() + delta);
+                  _rect.setTopLeft(_rect.topLeft() + delta);
                   break;
             case 1:
-                  _bbox.setTopRight(_bbox.topRight() + delta);
+                  _rect.setTopRight(_rect.topRight() + delta);
                   break;
             case 2:
-                  _bbox.setBottomRight(_bbox.bottomRight() + delta);
+                  _rect.setBottomRight(_rect.bottomRight() + delta);
                   break;
             case 3:
-                  _bbox.setBottomLeft(_bbox.bottomLeft() + delta);
+                  _rect.setBottomLeft(_rect.bottomLeft() + delta);
                   break;
             case 4:
-                  _bbox.setTop(_bbox.top() + delta.y());
+                  _rect.setTop(_rect.top() + delta.y());
                   break;
             case 5:
-                  _bbox.setRight(_bbox.right() + delta.x());
+                  _rect.setRight(_rect.right() + delta.x());
                   break;
             case 6:
-                  _bbox.setBottom(_bbox.bottom() + delta.y());
+                  _rect.setBottom(_rect.bottom() + delta.y());
                   break;
             case 7:
-                  _bbox.setLeft(_bbox.left() + delta.x());
+                  _rect.setLeft(_rect.left() + delta.x());
                   break;
             }
       }
@@ -87,13 +89,47 @@ void Lasso::editDrag(int curGrip, const QPointF& delta)
 void Lasso::updateGrips(int* n, QRectF* r) const
       {
       *n = 8;
-      QRectF b(abbox());
-      r[0].translate(b.topLeft());
-      r[1].translate(b.topRight());
-      r[2].translate(b.bottomRight());
-      r[3].translate(b.bottomLeft());
-      r[4].translate(b.x() + b.width() * .5, b.top());
-      r[5].translate(b.right(), b.y() + b.height() * .5);
-      r[6].translate(b.x() + b.width()*.5, b.bottom());
-      r[7].translate(b.left(), b.y() + b.height() * .5);
+      r[0].translate(_rect.topLeft());
+      r[1].translate(_rect.topRight());
+      r[2].translate(_rect.bottomRight());
+      r[3].translate(_rect.bottomLeft());
+      r[4].translate(_rect.x() + _rect.width() * .5, _rect.top());
+      r[5].translate(_rect.right(), _rect.y() + _rect.height() * .5);
+      r[6].translate(_rect.x() + _rect.width()*.5, _rect.bottom());
+      r[7].translate(_rect.left(), _rect.y() + _rect.height() * .5);
       }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Lasso::bbox() const
+      {
+      QRectF bb(_rect);
+      if (view) {
+            double dx = 1.5 / view->matrix().m11();
+            double dy = 1.5 / view->matrix().m22();
+            for (int i = 0; i < view->gripCount(); ++i)
+                  bb |= view->getGrip(i).adjusted(-dx, -dy, dx, dy);
+            }
+      return bb;
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+void Lasso::startEdit(ScoreView* sv, const QPointF&)
+      {
+      view = sv;
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void Lasso::endEdit()
+      {
+      view = 0;
+      }
+

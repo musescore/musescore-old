@@ -1124,7 +1124,7 @@ void ScoreView::startEdit(Element* element, int startGrip)
       {
       origEditObject = element;
       startEdit();
-      editObject->updateGrips(&grips, grip);
+//      editObject->updateGrips(&grips, grip);
       if (startGrip == -1)
             curGrip = grips-1;
       else if (startGrip >= 0)
@@ -1170,7 +1170,6 @@ void ScoreView::startEdit()
             _score->undoChangeElement(origEditObject, editObject);
             editObject->startEdit(this, startMove);
             }
-
       qreal w = 8.0 / _matrix.m11();
       qreal h = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
@@ -1712,11 +1711,16 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   }
             return;
             }
+      QStringList formats = data->formats();
+      printf("unknown drop format: formats:\n");
+      foreach(const QString& s, formats)
+            printf("  <%s>\n", qPrintable(s));
+#if 0 // message box freezes system
       QString s = tr("unknown drop format: formats %1:\n").arg(data->hasFormat(mimeSymbolFormat));
       foreach(QString ss, data->formats())
             s += (QString("   <%1>\n").arg(ss));
-      QMessageBox::warning(0,
-      "Drop:", s, QString::null, "Quit", QString::null, 0, 1);
+      QMessageBox::warning(0, "Drop:", s, QString::null, "Quit", QString::null, 0, 1);
+#endif
       }
 
 //---------------------------------------------------------

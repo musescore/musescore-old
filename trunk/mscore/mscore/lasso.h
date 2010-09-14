@@ -28,14 +28,22 @@
 //---------------------------------------------------------
 
 class Lasso : public Element {
+      QRectF _rect;
+      ScoreView* view;        // valid in edit mode
+
    public:
       Lasso(Score*);
       virtual Lasso* clone() const       { return new Lasso(*this); }
       virtual ElementType type() const   { return LASSO; }
       virtual void draw(QPainter&, ScoreView*) const;
-      virtual bool isEditable() const { return true; }
+      virtual bool isEditable() const     { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;
+      QRectF rect() const                 { return _rect; }
+      void setRect(const QRectF& r)       { _rect = r;    }
+      virtual QRectF bbox() const;
+      virtual void startEdit(ScoreView*, const QPointF&);
+      virtual void endEdit();
       };
 
 #endif
