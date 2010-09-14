@@ -47,7 +47,7 @@
         <string>Search for</string>
        </property>
        <property name="flat">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
@@ -94,7 +94,7 @@
         <string>Action</string>
        </property>
        <property name="flat">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
