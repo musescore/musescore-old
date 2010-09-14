@@ -1425,11 +1425,3 @@ void Element::setAlign(Align val)
       _align = val;
       }
 
-//---------------------------------------------------------
-//   startEdit
-//---------------------------------------------------------
-
-void Element::startEdit(ScoreView*, const QPointF&)
-      {
-      }
-

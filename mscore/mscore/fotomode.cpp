@@ -90,14 +90,13 @@ class FotoFrameTransition : public QMouseEventTransition
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
-            if (!(me->modifiers() & Qt::ShiftModifier))
-                  return false;
-            return !canvas->mousePress(me);
+            return !canvas->fotoRectHit(me->pos());
             }
    public:
       FotoFrameTransition(ScoreView* c, QState* target)
          : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {
             setTargetState(target);
+            setModifierMask(Qt::ShiftModifier);
             }
       };
 
@@ -220,9 +219,7 @@ class FotoDragDropTransition : public QMouseEventTransition
                   return false;
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
             QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
-            Qt::KeyboardModifiers keyState = me->modifiers();
-            return ((keyState == (Qt::ShiftModifier | Qt::ControlModifier))
-               && canvas->fotoRectHit(me->pos()));
+            return canvas->fotoRectHit(me->pos());
             }
       virtual void onTransition(QEvent* e) {
             QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
@@ -231,9 +228,11 @@ class FotoDragDropTransition : public QMouseEventTransition
             }
    public:
       FotoDragDropTransition(ScoreView* c)
-         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {}
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c)
+            {
+            setModifierMask(Qt::ShiftModifier | Qt::ControlModifier);
+            }
       };
-
 
 //---------------------------------------------------------
 //   setupFotoMode
@@ -336,6 +335,18 @@ void ScoreView::setupFotoMode()
 
 void ScoreView::startFotomode()
       {
+      editObject = _foto;
+      _foto->startEdit(this, QPointF());
+      qreal w = 8.0 / _matrix.m11();
+      qreal h = 8.0 / _matrix.m22();
+      QRectF r(-w*.5, -h*.5, w, h);
+      for (int i = 0; i < MAX_GRIPS; ++i)
+            grip[i] = r;
+//      _foto->updateGrips(&grips, grip);
+      curGrip = 0;
+      updateGrips();
+      _score->addRefresh(_foto->abbox());
+      _score->end();
       }
 
 //---------------------------------------------------------
@@ -347,15 +358,11 @@ void ScoreView::stopFotomode()
       QAction* a = getAction("fotomode");
       a->setChecked(false);
 
+      _score->addRefresh(_foto->abbox());
       editObject = 0;
       grips      = 0;
 
-      _score->addRefresh(_foto->abbox());
-      double dx = 1.5 / _matrix.m11();
-      double dy = 1.5 / _matrix.m22();
-      for (int i = 0; i < grips; ++i)
-            score()->addRefresh(grip[i].adjusted(-dx, -dy, dx, dy));
-
+      _foto->endEdit();
       _score->end();
       }
 
@@ -366,6 +373,8 @@ void ScoreView::stopFotomode()
 void ScoreView::startFotoDrag()
       {
       _score->addRefresh(_foto->abbox());
+      _score->end();
+      grips = 0;
       }
 
 //---------------------------------------------------------
@@ -378,14 +387,14 @@ void ScoreView::doDragFoto(QMouseEvent* ev)
       QPointF p = toLogical(ev->pos());
       QRectF r;
       r.setCoords(startMove.x(), startMove.y(), p.x(), p.y());
-      _foto->setbbox(r.normalized());
-      QRectF rr(_foto->abbox());
+      _foto->setRect(r.normalized());
+
+      QRectF rr(_foto->rect());
       r = _matrix.mapRect(rr);
       QSize sz(r.size().toSize());
       mscore->statusBar()->showMessage(QString("%1 x %2").arg(sz.width()).arg(sz.height()), 3000);
-      for (int i = 0; i < grips; ++i)
-            _score->addRefresh(grip[i]);
-      _score->addRefresh(rr);
+
+      _score->addRefresh(_foto->abbox());
       _score->end();
       }
 
@@ -457,7 +466,7 @@ bool ScoreView::fotoEditElementDragTransition(QMouseEvent* ev)
 bool ScoreView::fotoScoreViewDragTest(QMouseEvent* me)
       {
       QPointF p(imatrix.map(QPointF(me->pos())));
-      if (_foto->abbox().contains(p))
+      if (_foto->rect().contains(p))
             return false;
       for (int i = 0; i < grips; ++i) {
             if (grip[i].contains(p))
@@ -473,8 +482,8 @@ bool ScoreView::fotoScoreViewDragTest(QMouseEvent* me)
 
 bool ScoreView::fotoScoreViewDragRectTest(QMouseEvent* me)
       {
-      QPointF p(imatrix.map(QPointF(me->pos())));
-      if (!_foto->abbox().contains(p))
+      QPointF p(toLogical(me->pos()));
+      if (!_foto->rect().contains(p))
             return false;
       for (int i = 0; i < grips; ++i) {
             if (grip[i].contains(p))
@@ -490,11 +499,11 @@ bool ScoreView::fotoScoreViewDragRectTest(QMouseEvent* me)
 
 void ScoreView::doDragFotoRect(QMouseEvent* ev)
       {
-      QPointF p     = toLogical(ev->pos());
+      QPointF p(toLogical(ev->pos()));
       QPointF delta = p - startMove;
       _score->setLayoutAll(false);
       score()->addRefresh(_foto->abbox());
-      _foto->setbbox(_foto->bbox().translated(delta));
+      _foto->setRect(_foto->rect().translated(delta));
       score()->addRefresh(_foto->abbox());
       startMove = p;
       updateGrips();
@@ -526,9 +535,9 @@ void ScoreView::fotoContextPopup(QMouseEvent* ev)
             return;
       QString cmd(a->data().toString());
       if (cmd == "print")
-            saveFotoAs(true, _foto->abbox());
+            saveFotoAs(true, _foto->rect());
       else if (cmd == "screenshot")
-            saveFotoAs(false, _foto->abbox());
+            saveFotoAs(false, _foto->rect());
       }
 
 //---------------------------------------------------------
@@ -538,7 +547,12 @@ void ScoreView::fotoContextPopup(QMouseEvent* ev)
 bool ScoreView::fotoRectHit(const QPoint& pos)
       {
       QPointF p = toLogical(pos);
-      return _foto->abbox().contains(p);
+      for (int i = 0; i < grips; ++i) {
+            if (grip[i].contains(p))
+                  return false;
+            }
+      startMove = p;
+      return _foto->rect().contains(p);
       }
 
 //---------------------------------------------------------
@@ -600,8 +614,8 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
             ; // saveSvg(fn);
       else if (ext == "png") {
             bool transparent = preferences.pngTransparent;
-            double convDpi = DPI;
-            double mag     = convDpi / DPI;
+            double convDpi   = DPI; // preferences.pngResolution;
+            double mag       = convDpi / DPI;
 
             int w = lrint(r.width()  * mag);
             int h = lrint(r.height() * mag);
@@ -634,7 +648,9 @@ void ScoreView::paintRect(bool printMode, QPainter& p, const QRectF& r, double m
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
+      score()->setPrinting(printMode);
       paint1(printMode, r, p);
+      score()->setPrinting(false);
       p.end();
       }
 
@@ -662,5 +678,40 @@ void ScoreView::paint1(bool printMode, const QRectF& fr, QPainter& p)
 
 void ScoreView::fotoDragDrop(QMouseEvent*)
       {
-      printf("fotoDragDrop\n");
+      QDrag* drag = new QDrag(this);
+      QMimeData* mimeData = new QMimeData;
+
+      // oowriter wants transparent==false
+      bool transparent = false; // preferences.pngTransparent;
+      double convDpi   = DPI; // preferences.pngResolution;
+      double mag       = convDpi / DPI;
+
+      QRectF r(_foto->abbox());
+      int w = lrint(r.width()  * mag);
+      int h = lrint(r.height() * mag);
+      QImage::Format f;
+      f = QImage::Format_ARGB32_Premultiplied;
+      QImage printer(w, h, f);
+      printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
+      printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
+      printer.fill(transparent ? 0 : 0xffffffff);
+
+      QPainter p(&printer);
+      paintRect(true, p, r, mag);
+      p.end();
+
+#if 0
+      QByteArray ba;
+      QBuffer ob(&ba);
+      ob.open(QIODevice::WriteOnly);
+      printer.save(&ob, "PNG");
+      mimeData->setData("image/png", ba);
+#else
+      // this is understood by oowriter
+      mimeData->setImageData(printer);
+#endif
+
+      drag->setMimeData(mimeData);
+      drag->start(Qt::CopyAction);
       }
+

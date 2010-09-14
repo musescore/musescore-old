@@ -347,6 +347,8 @@ class ScoreView : public QWidget {
       void paintRect(bool printMode, QPainter& p, const QRectF& r, double mag);
       bool saveFotoAs(bool printMode, const QRectF&);
       void fotoDragDrop(QMouseEvent*);
+      const QRectF& getGrip(int n) const { return grip[n]; }
+      int gripCount() const { return grips; }              // number of used grips
       };
 
 //---------------------------------------------------------
