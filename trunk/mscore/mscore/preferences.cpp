@@ -1478,7 +1478,7 @@ void PreferenceDialog::appStyleFileButtonClicked()
       QString fn = QFileDialog::getOpenFileName(
          0, QWidget::tr("MuseScore: Load Application Style"),
          mscoreGlobalShare + "/styles/",
-            QWidget::tr("MuseScore Application Styles (*.st);;"
+            QWidget::tr("MuseScore Application Styles (*.css);;"
             "All Files (*)"
             )
          );
