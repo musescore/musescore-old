@@ -1,4 +1,6 @@
 14.sep (ws)
+      - foto mode: implemented: drag&drop selected frame in MuseScore to oowriter
+        using eps format
       - renamed appstyle.st to appstyle-dark.css (its a "cascading style sheet")
       - add "standard" app style "appstyle.st"
        (la)

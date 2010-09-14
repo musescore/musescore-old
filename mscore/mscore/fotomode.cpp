@@ -565,7 +565,7 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
       QStringList fl;
       fl.append(tr("PNG Bitmap Graphic (*.png)"));
       fl.append(tr("PDF File (*.pdf)"));
-      fl.append(tr("PostScript File (*.ps)"));
+      fl.append(tr("Encapsulated PostScript File (*.eps)"));
       fl.append(tr("Scalable Vector Graphic (*.svg)"));
 
       QString saveDialogTitle = tr("MuseScore: Save As");
@@ -595,7 +595,7 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
       else {
             int idx = fl.indexOf(selectedFilter);
             if (idx != -1) {
-                  static const char* extensions[] = { "png", "pdf", "ps", "svg" };
+                  static const char* extensions[] = { "png", "pdf", "eps", "svg" };
                   ext = extensions[idx];
                   }
             }
@@ -625,10 +625,28 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
             QPainter p(&printer);
             paintRect(printMode, p, r, mag);
             }
-      else if (ext == "ps")
-            ; // savePsPdf(fn, QPrinter::PostScriptFormat);
-      else if (ext == "svg")
-            ; // saveSvg(fn);
+      else if (ext == "eps") {
+            QPrinter printer(QPrinter::HighResolution);
+            printer.setPaperSize(QSizeF(w/DPI, h/DPI) , QPrinter::Inch);
+            printer.setCreator("MuseScore Version: " VERSION);
+            printer.setFullPage(true);
+            printer.setColorMode(QPrinter::Color);
+            printer.setDocName(fn);
+            printer.setOutputFileName(fn);
+            printer.setOutputFormat(QPrinter::PostScriptFormat);
+            QPainter p(&printer);
+            paintRect(printMode, p, r, mag);
+            }
+      else if (ext == "svg") {
+            QSvgGenerator printer;
+            printer.setResolution(int(DPI));
+            printer.setFileName(fn);
+            printer.setSize(QSize(w, h));
+            printer.setViewBox(QRect(0, 0, w, h));
+            printer.setDescription("created with MuseScore " VERSION);
+            QPainter p(&printer);
+            paintRect(printMode, p, r, mag);
+            }
       else if (ext == "png") {
             QImage::Format f = QImage::Format_ARGB32_Premultiplied;
             QImage printer(w, h, f);
@@ -640,6 +658,8 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
             paintRect(printMode, p, r, mag);
             printer.save(fn, "png");
             }
+      else
+            printf("unknown extension <%s>\n", qPrintable(ext));
       return true;
       }
 
@@ -686,6 +706,7 @@ void ScoreView::paint1(bool printMode, const QRectF& fr, QPainter& p)
 //   fotoDragDrop
 //---------------------------------------------------------
 
+#if 0
 void ScoreView::fotoDragDrop(QMouseEvent*)
       {
       QDrag* drag = new QDrag(this);
@@ -705,11 +726,9 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
       printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
       printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
       printer.fill(transparent ? 0 : 0xffffffff);
-
       QPainter p(&printer);
       paintRect(true, p, r, mag);
       p.end();
-
 #if 0
       QByteArray ba;
       QBuffer ob(&ba);
@@ -720,6 +739,46 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
       // this is understood by oowriter
       mimeData->setImageData(printer);
 #endif
+      drag->setMimeData(mimeData);
+      drag->start(Qt::CopyAction);
+      }
+#endif
+
+void ScoreView::fotoDragDrop(QMouseEvent*)
+      {
+      bool printMode   = true;
+      double convDpi   = DPI; // preferences.pngResolution;
+      double mag       = convDpi / DPI;
+      QRectF r(_foto->abbox());
+      int w            = lrint(r.width()  * mag);
+      int h            = lrint(r.height() * mag);
+
+      QTemporaryFile tf(QDir::tempPath() + QString("/imgXXXXXX.eps"));
+      tf.setAutoRemove(false);
+      tf.open();
+      tf.close();
+      printf("Temp File <%s>\n", qPrintable(tf.fileName()));
+
+//      QString fn = "/home/ws/mops.eps";
+      QString fn = tf.fileName();
+
+      QPrinter printer(QPrinter::HighResolution);
+      printer.setPaperSize(QSizeF(w/DPI, h/DPI) , QPrinter::Inch);
+      printer.setCreator("MuseScore Version: " VERSION);
+      printer.setFullPage(true);
+      printer.setColorMode(QPrinter::Color);
+      printer.setDocName(fn);
+      printer.setOutputFileName(fn);
+      printer.setOutputFormat(QPrinter::PostScriptFormat);
+      QPainter p(&printer);
+      paintRect(printMode, p, r, mag);
+
+      QDrag* drag = new QDrag(this);
+      QMimeData* mimeData = new QMimeData;
+      QUrl url(QString("file://") + fn);
+      QList<QUrl> ul;
+      ul.append(url);
+      mimeData->setUrls(ul);
 
       drag->setMimeData(mimeData);
       drag->start(Qt::CopyAction);
