@@ -1,24 +1,25 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>ImportMidiDialog</class>
- <widget class="QDialog" name="ImportMidiDialog" >
-  <property name="geometry" >
+ <widget class="QDialog" name="ImportMidiDialog">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>239</width>
+    <height>104</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MuseScore: Midi Import</string>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout">
    <item>
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>40</height>
@@ -27,43 +28,43 @@
     </spacer>
    </item>
    <item>
-    <layout class="QHBoxLayout" >
+    <layout class="QHBoxLayout">
      <item>
-      <widget class="QLabel" name="label" >
-       <property name="text" >
+      <widget class="QLabel" name="label">
+       <property name="text">
         <string>Shortest note on import:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="shortestNoteCombo" >
+      <widget class="QComboBox" name="shortestNoteCombo">
        <item>
-        <property name="text" >
+        <property name="text">
          <string>1/4</string>
         </property>
        </item>
        <item>
-        <property name="text" >
+        <property name="text">
          <string>1/8</string>
         </property>
        </item>
        <item>
-        <property name="text" >
+        <property name="text">
          <string>1/16</string>
         </property>
        </item>
        <item>
-        <property name="text" >
+        <property name="text">
          <string>1/32</string>
         </property>
        </item>
        <item>
-        <property name="text" >
+        <property name="text">
          <string>1/64</string>
         </property>
        </item>
        <item>
-        <property name="text" >
+        <property name="text">
          <string>1/128</string>
         </property>
        </item>
@@ -73,10 +74,10 @@
    </item>
    <item>
     <spacer>
-     <property name="orientation" >
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>40</height>
@@ -85,11 +86,11 @@
     </spacer>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="standardButtons" >
+     <property name="standardButtons">
       <set>QDialogButtonBox::Ok</set>
      </property>
     </widget>
@@ -104,11 +105,11 @@
    <receiver>ImportMidiDialog</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -120,11 +121,11 @@
    <receiver>ImportMidiDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>

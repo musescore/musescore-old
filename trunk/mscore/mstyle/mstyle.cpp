@@ -698,9 +698,8 @@ void MStyle::polish(QWidget* widget)
 
       // checkable group boxes
       if( QGroupBox* groupBox = qobject_cast<QGroupBox*>(widget)) {
-            if (groupBox->isCheckable()) {
-                  groupBox->setAttribute( Qt::WA_Hover );
-                  }
+            if (groupBox->isCheckable())
+                  groupBox->setAttribute(Qt::WA_Hover);
             }
       else if( qobject_cast<QAbstractButton*>(widget) && qobject_cast<QDockWidget*>( widget->parent() ) ) {
             widget->setAttribute(Qt::WA_Hover);
@@ -845,10 +844,9 @@ void MStyle::unpolish(QWidget* widget)
             }
 
       // checkable group boxes
-      if( QGroupBox* groupBox = qobject_cast<QGroupBox*>(widget) ) {
-            if( groupBox->isCheckable() ) {
-                  groupBox->setAttribute( Qt::WA_Hover, false );
-                  }
+      if (QGroupBox* groupBox = qobject_cast<QGroupBox*>(widget)) {
+            if (groupBox->isCheckable())
+                  groupBox->setAttribute(Qt::WA_Hover, false);
             }
 
       // hover flags
@@ -872,10 +870,9 @@ void MStyle::unpolish(QWidget* widget)
             }
 
       // checkable group boxes
-      if( QGroupBox* groupBox = qobject_cast<QGroupBox*>(widget) ) {
-            if( groupBox->isCheckable() ) {
-                  groupBox->setAttribute( Qt::WA_Hover, false );
-                  }
+      if (QGroupBox* groupBox = qobject_cast<QGroupBox*>(widget)) {
+            if (groupBox->isCheckable())
+                  groupBox->setAttribute(Qt::WA_Hover, false);
             }
 
       if( qobject_cast<QMenuBar*>(widget)
@@ -1156,42 +1153,46 @@ bool MStyle::drawFrameFocusRectPrimitive( const QStyleOption* option, QPainter* 
 
           }
 
-bool MStyle::drawFrameGroupBoxPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+//---------------------------------------------------------
+//   drawFrameGroupBoxPrimitive
+//---------------------------------------------------------
+
+bool MStyle::drawFrameGroupBoxPrimitive(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // cast option and check
       const QStyleOptionFrame *fOpt = qstyleoption_cast<const QStyleOptionFrame *>(option);
-      if( !fOpt )
+      if (!fOpt)
             return true;
 
-              // no frame for flat groupboxes
-              QStyleOptionFrameV2 fOpt2(*fOpt);
-              if( fOpt2.features & QStyleOptionFrameV2::Flat ) return true;
+      // no frame for flat groupboxes
+      QStyleOptionFrameV2 fOpt2(*fOpt);
+      if (fOpt2.features & QStyleOptionFrameV2::Flat)
+            return true;
 
-              // normal frame
-              const QPalette& palette( option->palette );
-              const QRect& r( option->rect );
-              const QColor base( _helper.backgroundColor( palette.color( QPalette::Window ), widget, r.center() ) );
+      // normal frame
+      const QPalette& palette( option->palette );
+      const QRect& r( option->rect );
+      const QColor base( _helper.backgroundColor( palette.color( QPalette::Window ), widget, r.center() ) );
 
-              painter->save();
-              painter->setRenderHint(QPainter::Antialiasing);
-              painter->setPen(Qt::NoPen);
+      painter->save();
+      painter->setRenderHint(QPainter::Antialiasing);
+      painter->setPen(Qt::NoPen);
 
-              QLinearGradient innerGradient(0, r.top()-r.height()+12, 0, r.bottom()+r.height()-19);
-              QColor light( _helper.calcLightColor(base) );
-              light.setAlphaF(0.4); innerGradient.setColorAt(0.0, light);
-              light.setAlphaF(0.0); innerGradient.setColorAt(1.0, light);
-              painter->setBrush(innerGradient);
-              painter->setClipRect(r.adjusted(0, 0, 0, -19));
-              _helper.fillSlab(*painter, r);
+      QLinearGradient innerGradient(0, r.top()-r.height()+12, 0, r.bottom()+r.height()-19);
+      QColor light( _helper.calcLightColor(base) );
+      light.setAlphaF(0.4); innerGradient.setColorAt(0.0, light);
+      light.setAlphaF(0.0); innerGradient.setColorAt(1.0, light);
+      painter->setBrush(innerGradient);
+      painter->setClipRect(r.adjusted(0, 0, 0, -19));
+      _helper.fillSlab(*painter, r);
 
-              TileSet *slopeTileSet = _helper.slope( base, 0.0);
-              painter->setClipping(false);
-              slopeTileSet->render( r, painter );
+      TileSet *slopeTileSet = _helper.slope( base, 0.0);
+      painter->setClipping(false);
+      slopeTileSet->render( r, painter );
 
-              painter->restore();
-              return true;
-
-          }
+      painter->restore();
+      return true;
+      }
 
 bool MStyle::drawFrameMenuPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
@@ -3866,30 +3867,35 @@ bool MStyle::drawDialComplexControl( const QStyleOptionComplex* option, QPainter
 
           }
 
-bool MStyle::drawGroupBoxComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
+//---------------------------------------------------------
+//   drawGroupBoxComplexControl
+//---------------------------------------------------------
+
+bool MStyle::drawGroupBoxComplexControl(const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget) const
       {
+#if 0
       const QStyleOptionGroupBox *groupBox = qstyleoption_cast<const QStyleOptionGroupBox *>(option);
-      if( groupBox && groupBox->features & QStyleOptionFrameV2::Flat )
-                    {
-
-                        // for flat groupboxes, the groupBox title is rendered bold
-                        /*
-                        TODO: talk to pinheiro. This is not an optimal design
-                        I would rather
-                        1/ keep the font unchanged
-                        2/ add an horizontal separator next to the title
-                        (Hugo)
-                        */
-                        const QFont oldFont = painter->font();
-                        QFont font = oldFont;
-                        font.setBold(true);
-                        painter->setFont(font);
-                        QCommonStyle::drawComplexControl( CC_GroupBox, option, painter, widget );
-                        painter->setFont(oldFont);
-                        return true;
-
-                    } else return false;
-          }
+      if (groupBox && groupBox->features & QStyleOptionFrameV2::Flat) {
+            // for flat groupboxes, the groupBox title is rendered bold
+            /*
+            TODO: talk to pinheiro. This is not an optimal design
+            I would rather
+                  1/ keep the font unchanged
+                  2/ add an horizontal separator next to the title
+            (Hugo)
+            */
+            const QFont oldFont = painter->font();
+            QFont font = oldFont;
+            font.setBold(true);
+            painter->setFont(font);
+            QCommonStyle::drawComplexControl(CC_GroupBox, option, painter, widget);
+            painter->setFont(oldFont);
+            return true;
+            }
+      else
+#endif
+            return false;
+      }
 
 bool MStyle::drawSliderComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
       {

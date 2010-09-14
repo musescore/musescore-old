@@ -20,7 +20,7 @@
       <string>Select Part:</string>
      </property>
      <property name="flat">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <layout class="QVBoxLayout">
       <item>
@@ -70,7 +70,7 @@
       <string>Edit Part:</string>
      </property>
      <property name="flat">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <layout class="QGridLayout">
       <item row="0" column="0">
