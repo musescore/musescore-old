@@ -206,6 +206,34 @@ class FotoContextTransition : public QEventTransition
          : QEventTransition(c, QEvent::ContextMenu), canvas(c) {}
       };
 
+//---------------------------------------------------------
+//   FotoDragDropTransition
+//---------------------------------------------------------
+
+class FotoDragDropTransition : public QMouseEventTransition
+      {
+      ScoreView* canvas;
+
+   protected:
+      virtual bool eventTest(QEvent* event) {
+            if (!QMouseEventTransition::eventTest(event))
+                  return false;
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(event);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            Qt::KeyboardModifiers keyState = me->modifiers();
+            return ((keyState == (Qt::ShiftModifier | Qt::ControlModifier))
+               && canvas->fotoRectHit(me->pos()));
+            }
+      virtual void onTransition(QEvent* e) {
+            QStateMachine::WrappedEvent* we = static_cast<QStateMachine::WrappedEvent*>(e);
+            QMouseEvent* me = static_cast<QMouseEvent*>(we->event());
+            canvas->fotoDragDrop(me);
+            }
+   public:
+      FotoDragDropTransition(ScoreView* c)
+         : QMouseEventTransition(c, QEvent::MouseButtonPress, Qt::LeftButton), canvas(c) {}
+      };
+
 
 //---------------------------------------------------------
 //   setupFotoMode
@@ -262,6 +290,7 @@ void ScoreView::setupFotoMode()
       f1->addTransition(new FotoEditElementDragTransition(this, f4));   // ->editDrag
       f1->addTransition(new FotoScoreViewDragRectTransition(this, f5)); // ->foto-drag-rect
       f1->addTransition(new FotoContextTransition(this));               // context menu
+      f1->addTransition(new FotoDragDropTransition(this));
 
       // drag canvas in foto state
       f2->assignProperty(this, "cursor", QCursor(Qt::SizeAllCursor));
@@ -627,4 +656,11 @@ void ScoreView::paint1(bool printMode, const QRectF& fr, QPainter& p)
             }
       }
 
+//---------------------------------------------------------
+//   fotoDragDrop
+//---------------------------------------------------------
 
+void ScoreView::fotoDragDrop(QMouseEvent*)
+      {
+      printf("fotoDragDrop\n");
+      }
