@@ -247,6 +247,7 @@ class Note : public Element {
       Bend* bend() const               { return _bend; }
       void setBend(Bend* b)            { _bend = b;    }
       int customizeVelocity(int velo) const;
+      NoteDot* dot(int n)              { return _dots[n];           }
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);

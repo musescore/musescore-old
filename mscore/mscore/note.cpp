@@ -566,11 +566,12 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   }
             }
 
-      if (chord() && !tablature) {
+/*      if (chord() && !tablature) {
             int dots = chord()->dots();
             for (int i = 0; i < dots; ++i)
                   _dots[i]->draw(p, v);
             }
+      */
       }
 
 //--------------------------------------------------
