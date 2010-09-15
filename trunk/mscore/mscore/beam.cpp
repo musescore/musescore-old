@@ -773,7 +773,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   Chord* chord = static_cast<Chord*>(cr);
                   bool b32 = (beamNo >= 1) && (chord->beamMode() == BEAM_BEGIN32);
                   bool b64 = (beamNo >= 2) && (chord->beamMode() == BEAM_BEGIN64);
-                  if ((chord->durationType() > d) || b32 || b64) {
+                  if ((chord->durationType().type() < d.type()) || b32 || b64) {
                         if (cr2) {
                               // create short segment
                               double x2 = cr1->stemPos(cr1->up(), false).x();
@@ -796,7 +796,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               beamSegments.push_back(new QLineF(x2 - cp.x(), (x2 - x1) * slope + y1,
                                  x3 - cp.x(), (x3 - x1) * slope + y1));
                               }
-                        if (chord->durationType() <= d) {
+                        if (chord->durationType().type() >= d.type()) {
                               cr1 = chord;
                               cr2 = 0;
                               }

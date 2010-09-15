@@ -362,6 +362,11 @@ void Inspector::updateList(Score* s)
                                                       else
                                                             new ElementItem(ni, f);
                                                       }
+                                                for (int i = 0; i < 3; ++i) {
+                                                      if (note->dot(i))
+                                                            new ElementItem(ni, note->dot(i));
+                                                      }
+
                                                 if (note->tieFor()) {
                                                       Tie* tie = note->tieFor();
                                                       ElementItem* ti = new ElementItem(ni, tie);
@@ -835,6 +840,8 @@ void ShowChordWidget::setElement(Element* e)
       crb.durationType->setValue(int(chord->durationType().type()));
       crb.duration->setText(chord->duration().print());
       crb.move->setValue(chord->staffMove());
+      crb.spaceL->setValue(chord->space().lw());
+      crb.spaceR->setValue(chord->space().rw());
 
       cb.hookButton->setEnabled(chord->hook());
       cb.stemButton->setEnabled(chord->stem());
@@ -986,6 +993,9 @@ ShowNoteWidget::ShowNoteWidget()
       connect(nb.bend,       SIGNAL(clicked()), SLOT(bendClicked()));
       connect(nb.fingering,  SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(nb.tpc,        SIGNAL(valueChanged(int)), SLOT(tpcChanged(int)));
+      connect(nb.dot1,       SIGNAL(clicked()), SLOT(dot1Clicked()));
+      connect(nb.dot2,       SIGNAL(clicked()), SLOT(dot2Clicked()));
+      connect(nb.dot3,       SIGNAL(clicked()), SLOT(dot3Clicked()));
       }
 
 //---------------------------------------------------------
@@ -999,7 +1009,6 @@ void ShowNoteWidget::setElement(Element* e)
 
       nb.pitch->setValue(note->pitch());
       nb.ppitch->setValue(note->ppitch());
-//      nb.velo->setValue(note->velocity());
       nb.tuning->setValue(note->tuning());
       nb.line->setValue(note->line());
       nb.string->setValue(note->string());
@@ -1015,11 +1024,12 @@ void ShowNoteWidget::setElement(Element* e)
       nb.accidental->setEnabled(note->accidental());
       nb.bend->setEnabled(note->bend());
       nb.userAccidental->setValue(note->userAccidental());
+      nb.dot1->setEnabled(note->dot(0));
+      nb.dot2->setEnabled(note->dot(1));
+      nb.dot3->setEnabled(note->dot(2));
 
-//      nb.onTimeType->setCurrentIndex(note->onTimeType());
       nb.onTimeOffset->setValue(note->onTimeOffset());
       nb.offTimeOffset->setValue(note->offTimeOffset());
-//      nb.offTimeType->setCurrentIndex(note->offTimeType());
       nb.onTimeUserOffset->setValue(note->onTimeUserOffset());
       nb.offTimeUserOffset->setValue(note->offTimeUserOffset());
 
@@ -1029,6 +1039,33 @@ void ShowNoteWidget::setElement(Element* e)
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(text));
             nb.fingering->addItem(item);
             }
+      }
+
+//---------------------------------------------------------
+//   dot1Clicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::dot1Clicked()
+      {
+      emit elementChanged(((Note*)element())->dot(0));
+      }
+
+//---------------------------------------------------------
+//   dot2Clicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::dot2Clicked()
+      {
+      emit elementChanged(((Note*)element())->dot(1));
+      }
+
+//---------------------------------------------------------
+//   dot3Clicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::dot3Clicked()
+      {
+      emit elementChanged(((Note*)element())->dot(2));
       }
 
 //---------------------------------------------------------

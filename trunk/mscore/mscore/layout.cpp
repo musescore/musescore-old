@@ -125,7 +125,7 @@ struct AcEl {
       };
 
 //---------------------------------------------------------
-//   layoutChords
+//   layoutChords1
 //    only called from layout0
 //    - calculate displaced note heads
 //---------------------------------------------------------
@@ -265,7 +265,6 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                   acel.x    = 0.0;
                   aclist.append(acel);
                   }
-            // double xx = note->canvasPos().x() + headWidth;
             double xx = note->pos().x() + headWidth;
             if (xx > dotPosX)
                   dotPosX = xx;
@@ -273,7 +272,6 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
       for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
             if (e && e->type() == CHORD)
-                  // static_cast<Chord*>(e)->setDotPosX(dotPosX - e->canvasPos().x());
                   static_cast<Chord*>(e)->setDotPosX(dotPosX - e->pos().x());
             }
 

@@ -141,7 +141,6 @@ void Stem::updateGrips(int* grips, QRectF* grip) const
 void Stem::editDrag(int, const QPointF& delta)
       {
       _userLen += Spatium(delta.y() / spatium());
-printf("Stem::editDrag %f  %f %f\n", _userLen.val(), delta.y(), delta.y() / spatium());
       Chord* c = static_cast<Chord*>(parent());
       if (c->hook())
             c->hook()->move(0.0, delta.y());
@@ -250,7 +249,6 @@ int Chord::downLine() const
 Chord::Chord(Score* s)
    : ChordRest(s)
       {
-      _up            = true;
       _stem          = 0;
       _hook          = 0;
       _stemDirection = AUTO;
@@ -1398,6 +1396,7 @@ void Chord::layout()
                   x += stemUp ? headWidth : - headWidth;
 
             note->setPos(x, note->line() * stepDistance);
+            note->adjustReadPos();
 
             Accidental* accidental = note->accidental();
             if (accidental)
@@ -1443,15 +1442,18 @@ void Chord::layout()
       if (_glissando)
             extraSpace += _spatium * .5;
 
+      _dotPosX = 0.0;
       foreach(const Note* note, _notes) {
             double lhw = note->headWidth();
             if (note->mirror() && up() && (mirror < lhw))  // note head on the right side of stem
                   mirror = lhw;
             else if (lhw > hw)
                   hw = lhw;
+            double xx = note->pos().x() + headWidth;
+            if (xx > _dotPosX)
+                  _dotPosX = xx;
             }
       double rs = _dotPosX;
-
       if (dots())
             rs += point(score()->styleS(ST_dotNoteDistance)) + dots() * point(score()->styleS(ST_dotDotDistance));
 

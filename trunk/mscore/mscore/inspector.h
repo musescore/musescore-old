@@ -261,6 +261,9 @@ class ShowNoteWidget : public ShowElementBase {
       void accidentalClicked();
       void bendClicked();
       void tpcChanged(int);
+      void dot1Clicked();
+      void dot2Clicked();
+      void dot3Clicked();
 
    signals:
       void scoreChanged();
