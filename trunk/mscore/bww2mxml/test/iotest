@@ -30,6 +30,7 @@ rwtest() {
 rwtestAll() {
       rwtest testGraces.bww
       rwtest testHello.bww
+      rwtest testMidMeasureRepeat.bww
       rwtest testNotes.bww
       rwtest testTempo120.bww
       rwtest testTempo60.bww
