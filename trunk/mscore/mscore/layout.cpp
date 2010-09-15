@@ -392,12 +392,13 @@ void Score::layoutStage2()
       {
       int tracks = nstaves() * VOICES;
 
+      QList<Beam*> usedBeams;
       foreach(Beam* beam, _beams)
             beam->clear();
+
       for (int track = 0; track < tracks; ++track) {
-            ChordRest* a1 = 0;      // start of (potential) beam
-            Beam* beam = 0;
-            Beam* oldBeam = 0;
+            ChordRest* a1    = 0;      // start of (potential) beam
+            Beam* beam       = 0;
             Measure* measure = 0;
 
             BeamMode bm = BEAM_AUTO;
@@ -407,20 +408,23 @@ void Score::layoutStage2()
                      || e == 0 || !e->isChordRest())
                         continue;
                   ChordRest* cr = static_cast<ChordRest*>(e);
+                  bm            = cr->beamMode();
                   if (cr->measure() != measure) {
                         if (measure && (bm != BEAM_MID)) {
-                              if (beam)
+                              if (beam) {
                                     beam->layout1();
+                                    beam = 0;
+                                    }
                               else if (a1) {
                                     a1->setBeam(0);
                                     a1->layoutStem1();
+                                    a1 = 0;
                                     }
                               }
                         measure = cr->measure();
                         if (bm != BEAM_MID) {
                               a1      = 0;
                               beam    = 0;
-                              oldBeam = 0;
                               }
                         }
                   if (segment->subtype() == SegGrace) {
@@ -452,8 +456,7 @@ void Score::layoutStage2()
                               }
                         continue;
                         }
-                  bm          = cr->beamMode();
-                  int len     = cr->durationType().ticks();
+                  int len = cr->durationType().ticks();
 
                   if ((len >= AL::division) || (bm == BEAM_NO)) {
                         if (beam) {
@@ -476,21 +479,18 @@ void Score::layoutStage2()
                               beamEnd = true;
                               }
                         else if (bm != BEAM_MID) {
-//                              Fraction f(sigmap()->timesig(cr->tick()).fraction());
-                              Fraction f(measure->len());
-                              if (endBeam(f, cr, cr->tick() - measure->tick()))
+                              if (endBeam(measure->timesig(), cr, cr->tick() - measure->tick()))
                                     beamEnd = true;
                               }
                         if (beamEnd) {
                               beam->layout1();
                               beam = 0;
-                              a1   = 0;
                               }
                         else {
                               beam->add(cr);
                               cr = 0;
 
-                              // is this the last beam element?
+                              // is cr the last beam element?
                               if (bm == BEAM_END) {
                                     beam->layout1();
                                     beam = 0;
@@ -507,13 +507,13 @@ void Score::layoutStage2()
                               }
                         else if (a1) {
                               beam = a1->beam();
-                              if (beam == 0 || (beam == oldBeam)) {
+                              if (beam == 0 || usedBeams.contains(beam)) {
                                     beam = new Beam(this);
                                     beam->setTrack(track);
                                     beam->setGenerated(true);
                                     add(beam);
                                     }
-                              oldBeam = beam;
+                              usedBeams.prepend(beam);
                               beam->add(a1);
                               beam->add(cr);
                               a1 = 0;
@@ -529,11 +529,9 @@ void Score::layoutStage2()
                         if (a1 == 0)
                               a1 = cr;
                         else {
-                              // Fraction f(sigmap()->timesig(cr->tick()).fraction());
-                              Fraction f(measure->len());
                               if (bm != BEAM_MID
-                                 &&
-                                   (endBeam(f, cr, cr->tick() - measure->tick())
+                                   &&
+                                   (endBeam(measure->timesig(), cr, cr->tick() - measure->tick())
                                    || bm == BEAM_BEGIN
                                    || (a1->segment()->subtype() != cr->segment()->subtype())
                                    )
@@ -544,13 +542,13 @@ void Score::layoutStage2()
                                     }
                               else {
                                     beam = a1->beam();
-                                    if (beam == 0 || (beam == oldBeam)) {
+                                    if (beam == 0 || usedBeams.contains(beam)) {
                                           beam = new Beam(this);
                                           beam->setGenerated(true);
                                           beam->setTrack(track);
                                           add(beam);
                                           }
-                                    oldBeam = beam;
+                                    usedBeams.append(beam);
                                     beam->add(a1);
                                     beam->add(cr);
                                     a1 = 0;

@@ -3190,13 +3190,13 @@ void ScoreView::doDragLasso(QMouseEvent* ev)
       _score->addRefresh(lasso->abbox());
       QRectF r;
       r.setCoords(startMove.x(), startMove.y(), p.x(), p.y());
-      lasso->setbbox(r.normalized());
-      QRectF _lassoRect(lasso->abbox());
+      lasso->setRect(r.normalized());
+      QRectF _lassoRect(lasso->rect());
       r = _matrix.mapRect(_lassoRect);
       QSize sz(r.size().toSize());
       mscore->statusBar()->showMessage(QString("%1 x %2").arg(sz.width()).arg(sz.height()), 3000);
-      _score->addRefresh(_lassoRect);
-      _score->lassoSelect(_lassoRect);
+      _score->addRefresh(lasso->abbox());
+      _score->lassoSelect(lasso->rect());
       _score->end();
       }
 
@@ -3207,7 +3207,7 @@ void ScoreView::doDragLasso(QMouseEvent* ev)
 void ScoreView::endLasso()
       {
       _score->addRefresh(lasso->abbox());
-      lasso->setbbox(QRectF());
+      lasso->setRect(QRectF());
       _score->lassoSelectEnd();
       _score->end();
       }

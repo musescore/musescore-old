@@ -307,7 +307,7 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
 
       foreach(const TextSegment* ts, textList) {
             p.setFont(ts->font);
-            QPen pen(ts->select ? Qt::blue : Qt::black);
+            QPen pen(ts->select ? Qt::blue : palette().color(QPalette::Text));
             p.setPen(pen);
             p.drawText(ts->x, ts->y, ts->text);
             }
