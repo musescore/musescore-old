@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>454</width>
-    <height>323</height>
+    <width>383</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,6 +51,12 @@
      </item>
      <item>
       <widget class="QSpinBox" name="fontSize">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="toolTip">
         <string>font point size</string>
        </property>
@@ -70,7 +76,7 @@
    <item>
     <layout class="QHBoxLayout" name="_3">
      <property name="spacing">
-      <number>6</number>
+      <number>0</number>
      </property>
      <property name="margin">
       <number>0</number>
@@ -445,7 +451,7 @@
       <string>Offset</string>
      </property>
      <property name="flat">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
       <property name="topMargin">
@@ -468,6 +474,12 @@
         </item>
         <item row="0" column="1">
          <widget class="QDoubleSpinBox" name="xOffset">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="toolTip">
            <string>horizontal offset to reference point</string>
           </property>
@@ -527,6 +539,12 @@
         </item>
         <item row="0" column="1">
          <widget class="QDoubleSpinBox" name="yOffset">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="toolTip">
            <string>vertical offset to reference point</string>
           </property>
@@ -620,7 +638,7 @@
       <string>Frame</string>
      </property>
      <property name="flat">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -657,6 +675,12 @@
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
          <widget class="QLabel" name="label_14">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>Width:</string>
           </property>
@@ -677,6 +701,12 @@
         </item>
         <item row="0" column="2">
          <widget class="QLabel" name="label_15">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>Margin:</string>
           </property>
@@ -700,6 +730,12 @@
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_16">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>Round:</string>
           </property>
@@ -714,6 +750,12 @@
         </item>
         <item row="1" column="2">
          <widget class="QLabel" name="label_17">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>Color:</string>
           </property>

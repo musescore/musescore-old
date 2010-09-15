@@ -144,14 +144,14 @@ static BeamHint endBeamList[] = {
 
 //---------------------------------------------------------
 //   endBeam
+//    return true if beam should be ended
 //---------------------------------------------------------
 
 bool endBeam(const Fraction& ts, ChordRest* cr, int p)
       {
       if (cr->tuplet()) {
-            if (cr->tuplet()->elements().front() == cr) {
+            if (cr->tuplet()->elements().front() == cr)     // end beam at tuplet
                   return true;
-                  }
             return false;
             }
       int l = cr->ticks();
@@ -161,18 +161,21 @@ bool endBeam(const Fraction& ts, ChordRest* cr, int p)
                   continue;
             if (h.noteLen.numerator()) {
                   int len = h.noteLen.ticks();
-                  if (len != l)
+                  if (len != l) {
                         continue;
+                        }
                   }
             if (!h.pos.isZero()) {
                   int pos = h.pos.ticks();
-                  if (pos != p)
+                  if (pos != p) {
                         continue;
+                        }
                   }
             else {            // if (h.pos.numerator() == 0) {   // stop on every beat
                   int len = (4 * AL::division) / h.timeSig.denominator();
-                  if (p % len)
+                  if (p % len) {
                         continue;
+                        }
                   }
             return true;
             }

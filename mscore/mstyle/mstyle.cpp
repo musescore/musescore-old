@@ -7146,26 +7146,30 @@ bool MStyle::drawToolBoxTabShapeControl( const QStyleOption* option, QPainter* p
 
           }
 
-bool MStyle::drawToolButtonLabelControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
-    {
-              // need to customize palettes to deal with autoraised buttons
-              const State& flags( option->state );
-              const bool autoRaised( flags & State_AutoRaise );
+//---------------------------------------------------------
+//   drawToolButtonLabelControl
+//---------------------------------------------------------
 
-              // normal processing if not autoRaised
-              if( !autoRaised ) return false;
+bool MStyle::drawToolButtonLabelControl(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+      {
+      // need to customize palettes to deal with autoraised buttons
+      const State& flags( option->state );
+      const bool autoRaised(flags & State_AutoRaise);
 
+      // normal processing if not autoRaised
+      if( !autoRaised )
+            return false;
 
-              const QStyleOptionToolButton* toolButtonOpt( qstyleoption_cast<const QStyleOptionToolButton*>(option) );
-              if( !toolButtonOpt ) return true;
+      const QStyleOptionToolButton* toolButtonOpt(qstyleoption_cast<const QStyleOptionToolButton*>(option));
+      if (!toolButtonOpt)
+            return true;
 
-              QStyleOptionToolButton localOption( *toolButtonOpt );
-              localOption.palette.setColor( QPalette::ButtonText, option->palette.color( QPalette::WindowText ) );
+      QStyleOptionToolButton localOption(*toolButtonOpt);
+      localOption.palette.setColor(QPalette::ButtonText, option->palette.color(QPalette::WindowText));
 
-              QCommonStyle::drawControl( CE_ToolButtonLabel, &localOption, painter, widget );
-              return true;
-
-          }
+      QCommonStyle::drawControl(CE_ToolButtonLabel, &localOption, painter, widget);
+      return true;
+      }
 
 QRect MStyle::groupBoxSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
       {
