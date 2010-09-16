@@ -714,9 +714,19 @@ void Score::doLayout()
                         if (cr->beam())
                               continue;
                         cr->layoutStem();
-                        if (cr->type() == CHORD && static_cast<Chord*>(cr)->arpeggio())
-                              static_cast<Chord*>(cr)->layoutArpeggio2();
+                        if (cr->type() == CHORD) {
+                              Chord* c = static_cast<Chord*>(cr);
+                              c->layoutArpeggio2();
+                              foreach(Note* n, c->notes()) {
+                                    Tie* tie = n->tieFor();
+                                    if (tie)
+                                          tie->layout();
+                                    }
+                              c->layoutArticulations();
+                              }
                         }
+                  else if (e && e->type() == BAR_LINE)
+                        e->layout();
                   foreach(Spanner* s, segment->spannerFor())
                         s->layout();
                   foreach(Element* e, segment->annotations())
@@ -725,10 +735,8 @@ void Score::doLayout()
             }
 
 
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            //if (m->multiMeasure() >= 0)
-                  m->layout2();
-            }
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
+            m->layout2();
 
       //---------------------------------------------------
       //    remove remaining pages and systems
