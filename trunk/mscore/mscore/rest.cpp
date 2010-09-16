@@ -545,3 +545,14 @@ void Rest::propertyAction(ScoreView* viewer, const QString& s)
             Element::propertyAction(viewer, s);
       }
 
+//---------------------------------------------------------
+//   scanElements
+//---------------------------------------------------------
+
+void Rest::scanElements(void* data, void (*func)(void*, Element*))
+      {
+      func(data, this);
+      ChordRest::scanElements(data, func);
+      }
+
+

@@ -131,6 +131,7 @@ class Note : public Element {
 
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag();
+      virtual void endEdit();
 
    public:
       Note(Score* s = 0);
