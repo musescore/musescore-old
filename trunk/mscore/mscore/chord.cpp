@@ -255,6 +255,7 @@ Chord::Chord(Score* s)
       _noteType      = NOTE_NORMAL;
       _stemSlash     = 0;
       _noStem        = false;
+      setFlags(ELEMENT_MOVABLE);
       }
 
 Chord::Chord(const Chord& c)
@@ -1406,6 +1407,7 @@ void Chord::layout()
             if (x < lx)
                   lx = x;
             }
+      adjustReadPos();
 
       //---------------------------------------------------
       //    create ledger lines for notes moved to

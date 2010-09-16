@@ -73,6 +73,7 @@ class Hairpin;
 class Bend;
 class TremoloBar;
 class NoteEvent;
+class SlurSegment;
 
 // #define DEBUG_UNDO
 
@@ -696,6 +697,28 @@ class ChangeUserOffset : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeUserOffset");
+      };
+
+//---------------------------------------------------------
+//   ChangeSlurOffsets
+//---------------------------------------------------------
+
+class ChangeSlurOffsets : public UndoCommand {
+      SlurSegment* slur;
+      QPointF off[4];
+      void flip();
+
+   public:
+      ChangeSlurOffsets(SlurSegment* s, const QPointF& o1, const QPointF& o2,
+         const QPointF& o3, const QPointF& o4) : slur(s) {
+            off[0] = o1;
+            off[1] = o2;
+            off[2] = o3;
+            off[3] = o4;
+            }
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeSlurOffsets");
       };
 
 //---------------------------------------------------------

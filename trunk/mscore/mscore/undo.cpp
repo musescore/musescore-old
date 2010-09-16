@@ -66,6 +66,7 @@
 #include "tremolobar.h"
 #include "articulation.h"
 #include "noteevent.h"
+#include "slur.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -1654,6 +1655,19 @@ void ChangeUserOffset::flip()
       QPointF p = element->userOff();
       element->setUserOff(offset);
       offset = p;
+      }
+
+//---------------------------------------------------------
+//   ChangeSlurOffsets
+//---------------------------------------------------------
+
+void ChangeSlurOffsets::flip()
+      {
+      for (int i = 0; i < 4; ++i) {
+            QPointF f = slur->slurOffset(i);
+            slur->setSlurOffset(i, off[i]);
+            off[i] = f;
+            }
       }
 
 //---------------------------------------------------------

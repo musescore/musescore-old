@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -507,8 +507,9 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
             else
                   sc = (Chord*)startElement();
 
-            bool startIsGrace        = sc->type() == CHORD && sc->noteType() != NOTE_NORMAL;
-            bool mainNoteOfGraceSlur = startIsGrace && (c == endElement()) && (c->noteType() == NOTE_NORMAL);
+            bool startIsGrace         = sc->type() == CHORD && sc->noteType() != NOTE_NORMAL;
+            bool mainNoteOfGraceSlur  = startIsGrace && (c == endElement()) && (c->noteType() == NOTE_NORMAL);
+            bool firstNoteOfGraceSlur = startIsGrace && (c == startElement()) && (c->noteType() != NOTE_NORMAL);
 
             if (up) {
                   yo = c->upNote()->pos().y() - c->upNote()->headHeight();
@@ -556,7 +557,10 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                         }
                   }
             if (up == c->up() && stem) {
-                  if (beam && !mainNoteOfGraceSlur) {
+                  if (firstNoteOfGraceSlur) {
+                        xo -= c->upNote()->headWidth() * .5;
+                        }
+                  else if (beam && !mainNoteOfGraceSlur) {
                         // for beamed notes and slurs on stem side, slurs are aligned
                         // to the stem rather than the middle of the notehead
                         xo = stem->pos().x();
@@ -576,6 +580,10 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                               }
                         }
                   }
+            if (firstNoteOfGraceSlur)
+                  xo = c->downNote()->headWidth() * .5;
+            if (!up && mainNoteOfGraceSlur)
+                  xo = _spatium * .3;
             }
       return cr->canvasPos() + QPointF(xo, yo);
       }
@@ -629,12 +637,13 @@ bool SlurTie::readProperties(QDomElement e)
 
 void SlurTie::toDefault()
       {
-      setUserOff(QPointF());
+      score()->undoChangeUserOffset(this, QPointF());
       }
 
 void SlurSegment::toDefault()
       {
-      setUserOff(QPointF());
+      score()->undoChangeUserOffset(this, QPointF());
+      score()->undo()->push(new ChangeSlurOffsets(this, QPointF(), QPointF(), QPointF(), QPointF()));
       for (int i = 0; i < 4; ++i)
             ups[i].off = QPointF();
       parent()->toDefault();
@@ -935,6 +944,8 @@ double SlurTie::firstNoteRestSegmentX(System* system)
 
 QRectF Slur::bbox() const
       {
+      printf("Slur bbox()\n");
+
       if (spannerSegments().isEmpty())
             return QRectF();
       else
