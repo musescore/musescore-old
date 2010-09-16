@@ -1,3 +1,7 @@
+16.sep (ws)
+      - fix bounding box of stem slash (acciacatura etc), fixes screen update
+      - fix stem lenght of grace notes
+      - fix crash when removing score with two note tremolo
 15.sep (ws)
       - fix broken autobeamer
 14.sep (ws)
