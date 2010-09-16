@@ -1180,7 +1180,10 @@ void Chord::layoutStem()
             if (_noteType != NOTE_NORMAL) {
                   // grace notes stems are not subject to normal
                   // stem rules
-                  stemLen = Spatium(normalStemLen * score()->style(ST_graceNoteMag).toDouble() * (up() ? -1 : 1));
+                  stemLen = Spatium(qAbs(ul - dl));
+                  stemLen += Spatium(normalStemLen * score()->style(ST_graceNoteMag).toDouble());
+                  stemLen *= -1;
+//                  stemLen += Spatium(normalStemLen * score()->style(ST_graceNoteMag).toDouble() * (up() ? -1 : 1));
                   }
             else {
                   if (up()) {

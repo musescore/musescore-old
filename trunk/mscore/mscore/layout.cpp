@@ -427,7 +427,11 @@ void Score::layoutStage2()
                         }
                   if (segment->subtype() == SegGrace) {
                         Segment* nseg = segment->next();
-                        if (nseg && nseg->subtype() == SegGrace && nseg->element(track)) {
+                        if (nseg
+                           && nseg->subtype() == SegGrace
+                           && nseg->element(track)
+                           && static_cast<ChordRest*>(nseg->element(track))->durationType().hooks())
+                              {
                               Beam* b = cr->beam();
                               if (b == 0) {
                                     b = new Beam(this);
