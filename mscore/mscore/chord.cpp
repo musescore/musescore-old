@@ -505,6 +505,7 @@ void Chord::remove(Element* e)
 
 //---------------------------------------------------------
 //   bbox
+//    only used for debugging
 //---------------------------------------------------------
 
 QRectF Chord::bbox() const
@@ -992,10 +993,8 @@ void Chord::scanElements(void* data, void (*func)(void*, Element*))
             func(data, _tremolo);
       if (_glissando)
             func(data, _glissando);
-
       foreach(LedgerLine* h, _ledgerLines)
             func(data, h);
-
       foreach(Note* n, _notes)
             n->scanElements(data, func);
       foreach(Element* e, _el)
@@ -1254,6 +1253,8 @@ void Chord::layoutStem()
 
 void Chord::layout2()
       {
+      if (glissando())
+            glissando()->layout();
       double _spatium = spatium();
       foreach(LedgerLine* h, _ledgerLines) {
             //
@@ -1338,7 +1339,6 @@ void Chord::layout()
             return;
 
       double extraSpace, minSpace;
-
       double _spatium  = spatium();
 
       foreach(const LedgerLine* l, _ledgerLines)

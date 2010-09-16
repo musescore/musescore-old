@@ -507,12 +507,8 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
             else
                   sc = (Chord*)startElement();
 
-            bool startIsGrace = false;
-            if (sc->type() == CHORD && sc->noteType() != NOTE_NORMAL)
-                  startIsGrace = true;
-            bool mainNoteOfGraceSlur = false;
-            if (startIsGrace && c == endElement() && c->noteType() == NOTE_NORMAL)
-                  mainNoteOfGraceSlur = true;
+            bool startIsGrace        = sc->type() == CHORD && sc->noteType() != NOTE_NORMAL;
+            bool mainNoteOfGraceSlur = startIsGrace && (c == endElement()) && (c->noteType() == NOTE_NORMAL);
 
             if (up) {
                   yo = c->upNote()->pos().y() - c->upNote()->headHeight();
@@ -581,13 +577,7 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                         }
                   }
             }
-      QPointF off(xo, yo);
-
-      //-----------------------------------------
-      //    p
-      //-----------------------------------------
-
-      return cr->canvasPos() + off;
+      return cr->canvasPos() + QPointF(xo, yo);
       }
 
 //---------------------------------------------------------

@@ -2951,7 +2951,7 @@ void Measure::layoutX(double stretch)
                   Space space;
                   int track  = staffIdx * VOICES;
                   bool found = false;
-                  if ((s->subtype() == SegChordRest) || (s->subtype() == SegGrace)) {
+                  if (s->subtype() & (SegChordRest | SegGrace)) {
                         for (int voice = 0; voice < VOICES; ++voice) {
                               ChordRest* cr = static_cast<ChordRest*>(s->element(track+voice));
                               if (!cr)
@@ -2964,7 +2964,6 @@ void Measure::layoutX(double stretch)
                                     }
                               else {
                                     int pt = s->prev()->subtype();
-//                                    if (pt == SegKeySig || pt == SegTimeSig || pt == SegClef) {
                                     if (pt == SegKeySig || pt == SegTimeSig) {
                                           minDistance = clefKeyRightMargin;
                                           }
@@ -3197,8 +3196,6 @@ void Measure::layoutX(double stretch)
                         }
                   else if (t == CHORD) {
                         Chord* chord = static_cast<Chord*>(e);
-                        if (chord->glissando())
-                              chord->glissando()->layout();
                         chord->layout2();
                         }
                   else if ((t == CLEF) && (s != first())) {

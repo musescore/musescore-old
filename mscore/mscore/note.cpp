@@ -1224,6 +1224,7 @@ void Note::layout()
                   }
             else {
                   delete _dots[i];
+                  _dots[i] = 0;
                   }
             }
       if (dots) {
@@ -1505,3 +1506,18 @@ int Note::customizeVelocity(int velo) const
             velo = 127;
       return velo;
       }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void Note::endEdit()
+      {
+      printf("note end edit\n");
+      Chord* ch = chord();
+      if (ch->notes().size() == 1) {
+            ch->setUserOff(userOff());
+            setUserOff(QPointF());
+            }
+      }
+

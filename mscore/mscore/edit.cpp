@@ -934,6 +934,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       pin->setTrack(cr1->track());
       pin->setStartElement(cr1->segment());
       pin->setEndElement(cr2->segment());
+      pin->setParent(cr1->segment());
 //      pin->layout();
       undoAddElement(pin);
       if (!noteEntryMode())

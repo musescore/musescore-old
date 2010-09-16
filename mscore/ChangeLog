@@ -1,4 +1,5 @@
 16.sep (ws)
+      - fix crash when typing "H" for "hairpin"
       - fix bounding box of stem slash (acciacatura etc), fixes screen update
       - fix stem lenght of grace notes
       - fix crash when removing score with two note tremolo

@@ -134,7 +134,6 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
             Articulation* a = *i;
             func(data, a);
             }
-      func(data, this);
       }
 
 //---------------------------------------------------------
