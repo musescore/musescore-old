@@ -657,24 +657,6 @@ void Measure::layout2()
       if (_noText)
             _noText->layout();
       int tracks = _score->nstaves() * VOICES;
-      for (Segment* s = first(); s; s = s->next()) {
-            for (int track = 0; track < tracks; ++track) {
-                  Element* el = s->element(track);
-                  if (el) {
-                        if (el->type() == CHORD) {
-                              Chord* a = static_cast<Chord*>(el);
-                              foreach(Note* n, a->notes()) {
-                                    Tie* tie = n->tieFor();
-                                    if (tie)
-                                          tie->layout();
-                                    }
-                              a->layoutArticulations();     // DEBUG
-                              }
-                        else if (el->type() == BAR_LINE)
-                              el->layout();
-                        }
-                  }
-            }
 
       //
       // slur layout needs articulation layout first
@@ -2377,7 +2359,7 @@ printf("  single note\n");
             }
       if (staffIdx == 0) {
             Segment* s = last();
-            if (s->subtype() == SegBarLine) {
+            if (s && s->subtype() == SegBarLine) {
                   BarLine* b = static_cast<BarLine*>(s->element(0));
                   setEndBarLineType(b->subtype(), false, b->visible(), b->color());
                   s->remove(b);

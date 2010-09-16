@@ -306,7 +306,8 @@ Chord::Chord(const Chord& c)
 Chord::~Chord()
       {
       delete _arpeggio;
-      delete _tremolo;
+      if (_tremolo && _tremolo->chord1() == this)
+            delete _tremolo;
       delete _glissando;
       delete _stemSlash;
       delete _stem;

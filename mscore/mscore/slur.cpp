@@ -546,9 +546,8 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                   QList<Articulation*>* al = c->getArticulations();
                   if (al->size() == 1) {
                         Articulation* a = al->at(0);
-                        if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym) {
+                        if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym)
                               yo = a->y() + a->height() + _spatium * .5;
-                              }
                         }
                   if (!c->up() && stem) {
                         if (beam && !mainNoteOfGraceSlur)

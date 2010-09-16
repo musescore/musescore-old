@@ -340,7 +340,7 @@ void Inspector::updateList(Score* s)
                                                 new ElementItem(sei, chord->stem());
                                           if (chord->arpeggio())
                                                 new ElementItem(sei, chord->arpeggio());
-                                          if (chord->tremolo())
+                                          if (chord->tremolo() && (chord->tremolo()->chord1() == chord))
                                                 new ElementItem(sei, chord->tremolo());
                                           if (chord->glissando())
                                                 new ElementItem(sei, chord->glissando());
