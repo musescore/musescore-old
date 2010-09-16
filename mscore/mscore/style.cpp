@@ -504,7 +504,7 @@ Style::Style()
 
             StyleVal(ST_SectionPause, 3.0),
 
-            StyleVal(ST_MusicalSymbolFont, "Emmentaler"),
+            StyleVal(ST_MusicalSymbolFont, QString("Emmentaler")),
 
             StyleVal(ST_showHeader, false),
             StyleVal(ST_headerFirstPage, false),

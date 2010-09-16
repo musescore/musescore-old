@@ -596,6 +596,8 @@ void Score::doLayout()
       _symIdx = 0;
       if (_style[ST_MusicalSymbolFont].toString() == "Gonville")
             _symIdx = 1;
+printf("==== symIDx %d\n", _symIdx);
+
       initSymbols(_symIdx);
 
       _needLayout = false;
