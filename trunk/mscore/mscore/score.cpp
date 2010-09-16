@@ -1874,10 +1874,14 @@ void Score::addElement(Element* element)
       else if (element->type() == OTTAVA) {
             Ottava* o = static_cast<Ottava*>(element);
             Staff* s  = o->staff();
-            int tick1 = static_cast<Segment*>(o->startElement())->tick();
-            int tick2 = static_cast<Segment*>(o->endElement())->tick();
-            s->pitchOffsets().setPitchOffset(tick1, o->pitchShift());
-            s->pitchOffsets().setPitchOffset(tick2, 0);
+            if (o->startElement()) {
+                  int tick = static_cast<Segment*>(o->startElement())->tick();
+                  s->pitchOffsets().setPitchOffset(tick, o->pitchShift());
+                  }
+            if (o->endElement()) {
+                  int tick = static_cast<Segment*>(o->endElement())->tick();
+                  s->pitchOffsets().setPitchOffset(tick, 0);
+                  }
             layoutFlags |= LAYOUT_FIX_PITCH_VELO;
             _playlistDirty = true;
             }

@@ -211,17 +211,14 @@ void StemSlash::draw(QPainter& p, ScoreView*) const
       }
 
 //---------------------------------------------------------
-//   bbox
+//   setLine
 //---------------------------------------------------------
 
-QRectF StemSlash::bbox() const
+void StemSlash::setLine(const QLineF& l)
       {
+      line = l;
       double w = point(score()->styleS(ST_stemWidth)) * .5;
-      QRectF r(line.p1().x(), line.p2().y(),
-         line.p2().x()-line.p1().x(),
-         line.p1().y()-line.p2().y()
-         );
-      return r.adjusted(-w, -w, 2.0 * w, 2.0 * w);
+      _bbox = QRectF(line.p1(), line.p2()).normalized().adjusted(-w, w, 2.0*w, 2.0*w);
       }
 
 //---------------------------------------------------------
@@ -1180,32 +1177,36 @@ void Chord::layoutStem()
             Spatium shortest(score()->styleS(ST_shortestStem));
 
             double normalStemLen = small() ? 2.5 : 3.5;
-            if (_noteType != NOTE_NORMAL)
-                  normalStemLen *= score()->style(ST_graceNoteMag).toDouble();
-
-            if (up()) {
-                  double dy  = dl + downnote->stemYoff(true);
-                  double sel = ul - normalStemLen;
-
-                  if (shortenStem && (sel < 0.0) && (hookIdx == 0 || !downnote->mirror()))
-                        sel -= sel  * progression.val();
-                  if (sel > 2.0)
-                        sel = 2.0;
-                  stemLen = Spatium(sel - dy);
-                  if (-stemLen < shortest)
-                        stemLen = -shortest;
+            if (_noteType != NOTE_NORMAL) {
+                  // grace notes stems are not subject to normal
+                  // stem rules
+                  stemLen = Spatium(normalStemLen * score()->style(ST_graceNoteMag).toDouble() * (up() ? -1 : 1));
                   }
             else {
-                  double uy  = ul + upnote->stemYoff(false);
-                  double sel = dl + normalStemLen;
+                  if (up()) {
+                        double dy  = dl + downnote->stemYoff(true);
+                        double sel = ul - normalStemLen;
 
-                  if (shortenStem && (sel > 4.0) && (hookIdx == 0 || downnote->mirror()))
-                        sel -= (sel - 4.0)  * progression.val();
-                  if (sel < 2.0)
-                        sel = 2.0;
-                  stemLen    = Spatium(sel - uy);
-                  if (stemLen < shortest)
-                        stemLen = shortest;
+                        if (shortenStem && (sel < 0.0) && (hookIdx == 0 || !downnote->mirror()))
+                              sel -= sel  * progression.val();
+                        if (sel > 2.0)
+                              sel = 2.0;
+                        stemLen = Spatium(sel - dy);
+                        if (-stemLen < shortest)
+                              stemLen = -shortest;
+                        }
+                  else {
+                        double uy  = ul + upnote->stemYoff(false);
+                        double sel = dl + normalStemLen;
+
+                        if (shortenStem && (sel > 4.0) && (hookIdx == 0 || downnote->mirror()))
+                              sel -= (sel - 4.0)  * progression.val();
+                        if (sel < 2.0)
+                              sel = 2.0;
+                        stemLen    = Spatium(sel - uy);
+                        if (stemLen < shortest)
+                              stemLen = shortest;
+                        }
                   }
 
             QPointF npos(stemPos(_up, false));
