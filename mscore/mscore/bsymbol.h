@@ -45,7 +45,8 @@ class BSymbol : public Element {
       virtual void layout();
       virtual QRectF drag(const QPointF& pos);
 
-      const QList<Element*>& getLeafs() const { return _leafs; }
+      const QList<Element*>& leafs() const { return _leafs; }
+      QList<Element*>& leafs()             { return _leafs; }
       };
 
 #endif

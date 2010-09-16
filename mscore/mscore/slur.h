@@ -73,13 +73,15 @@ class SlurSegment : public SpannerSegment {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
 
-      SlurTie* slurTie() const     { return (SlurTie*)parent(); }
+      SlurTie* slurTie() const              { return (SlurTie*)parent(); }
 
       void write(Xml& xml, int no) const;
       void read(QDomElement);
       void dump() const;
-      void setSystem(System* s)                   { _system = s;       }
+      void setSystem(System* s)             { _system = s;       }
       virtual void toDefault();
+      void setSlurOffset(int i, const QPointF& val) { ups[i].off = val;  }
+      QPointF slurOffset(int i) const               { return ups[i].off; }
       };
 
 //---------------------------------------------------------

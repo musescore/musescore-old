@@ -271,6 +271,7 @@ Element::Element(const Element& e)
       _offsetType = e._offsetType;
       _userOff    = e._userOff;
       _mxmlOff    = e._mxmlOff;
+      _readPos    = e._readPos;
       _bbox       = e._bbox;
       itemDiscovered = 0;
       }

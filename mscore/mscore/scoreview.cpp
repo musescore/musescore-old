@@ -1422,8 +1422,8 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                   p.drawRect(grip[i]);
                   }
             }
-      const Selection& sel = _score->selection();
 
+      const Selection& sel = _score->selection();
       if (sel.state() == SEL_RANGE) {
             Segment* ss = sel.startSegment();
             Segment* es = sel.endSegment();

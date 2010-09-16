@@ -248,7 +248,7 @@ void Inspector::layoutScore()
 
 void Inspector::addSymbol(ElementItem* parent, BSymbol* bs)
       {
-      const QList<Element*>el = bs->getLeafs();
+      const QList<Element*>el = bs->leafs();
       ElementItem* i = new ElementItem(parent, bs);
       if (!el.isEmpty()) {
             foreach(Element* g, el)

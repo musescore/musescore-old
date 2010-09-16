@@ -52,9 +52,6 @@ void BSymbol::add(Element* e)
       if (e->type() == SYMBOL || e->type() == IMAGE) {
             e->setParent(this);
             _leafs.append(e);
-            BSymbol* b = static_cast<BSymbol*>(e);
-            foreach(Element* ee, b->getLeafs())
-                  ee->setParent(b);
             }
       else
             printf("BSymbol::add: unsupported type %s\n", e->name());
@@ -142,6 +139,30 @@ QRectF BSymbol::drag(const QPointF& pos)
       return r;
       }
 
+//---------------------------------------------------------
+//   Symbol
+//---------------------------------------------------------
+
+Symbol::Symbol(Score* s)
+   : BSymbol(s)
+      {
+      _sym = 0;
+      _small = false;
+      }
+
+Symbol::Symbol(Score* s, int sy)
+   : BSymbol(s)
+      {
+      _sym = sy;
+      _small = false;
+      }
+
+Symbol::Symbol(const Symbol& s)
+   : BSymbol(s)
+      {
+      _sym   = s._sym;
+      _small = s._small;
+      }
 
 //---------------------------------------------------------
 //   setAbove
@@ -160,6 +181,12 @@ void Symbol::setAbove(bool val)
 
 void Symbol::layout()
       {
+      double m = parent() ? parent()->mag() : 1.0;
+      if (_small)
+            m *= score()->styleD(ST_smallNoteMag);
+      setMag(m);
+      foreach(Element* e, leafs())
+            e->layout();
       Element::layout();
       BSymbol::layout();
       }
@@ -191,7 +218,8 @@ void Symbol::write(Xml& xml) const
       xml.stag(name());
       xml.tag("name", symbols[score()->symIdx()][_sym].name());
       Element::writeProperties(xml);
-      foreach(const Element* e, getLeafs())
+      xml.tag("small", _small);
+      foreach(const Element* e, leafs())
             e->write(xml);
       xml.etag();
       }
@@ -224,6 +252,7 @@ void Symbol::read(QDomElement e)
             else if (tag == "Symbol") {
                   Symbol* s = new Symbol(score());
                   s->read(e);
+                  s->adjustReadPos();
                   add(s);
                   }
             else if (tag == "Image") {
@@ -249,6 +278,9 @@ void Symbol::read(QDomElement e)
                         image->read(e);
                         add(image);
                         }
+                  }
+            else if (tag == "small") {
+                  _small = val.toInt();
                   }
             else if (!Element::readProperties(e))
                   domError(e);
@@ -279,4 +311,32 @@ QLineF Symbol::dragAnchor() const
             return QLineF(canvasPos(), parent()->canvasPos());
             }
       }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Symbol::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addAction(tr("small"));
+      a->setCheckable(true);
+      a->setChecked(small());
+      a->setData("small");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Symbol::propertyAction(ScoreView* viewer, const QString& s)
+      {
+      if (s == "small") {
+            setSmall(!small());
+            setMag(small() ? score()->styleD(ST_smallNoteMag) : 1.0);
+            }
+      else
+            Element::propertyAction(viewer, s);
+      }
+
 

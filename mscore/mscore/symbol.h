@@ -34,10 +34,12 @@ class Symbol : public BSymbol {
 
    protected:
       int _sym;
+      bool _small;
 
    public:
-      Symbol(Score* s)         : BSymbol(s) { _sym = 0;  }
-      Symbol(Score* s, int sy) : BSymbol(s) { _sym = sy; }
+      Symbol(Score* s);
+      Symbol(Score* s, int sy);
+      Symbol(const Symbol&);
 
       Symbol &operator=(const Symbol&);
 
@@ -55,9 +57,12 @@ class Symbol : public BSymbol {
       virtual void layout();
       void setAbove(bool);
 
-      Segment* segment() const { return (Segment*)parent(); }
-
       virtual qreal baseLine() const { return 0.0; }
+      Segment* segment() const { return (Segment*)parent(); }
+      bool small() const       { return _small; }
+      void setSmall(bool val)  { _small = val; }
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(ScoreView*, const QString&);
       };
 
 #endif

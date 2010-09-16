@@ -379,13 +379,6 @@ void Note::add(Element* e)
                   break;
             case SYMBOL:
             case IMAGE:
-                  {
-                  BSymbol* b = static_cast<BSymbol*>(e);
-                  foreach(Element* ee, b->getLeafs())
-                        ee->setParent(b);
-                  _el.append(e);
-                  }
-                  break;
             case FINGERING:
             case TEXT:
                   _el.append(e);
