@@ -184,24 +184,31 @@ Note::~Note()
 Note::Note(const Note& n)
    : Element(n)
       {
-      dragMode        = n.dragMode;
-      _subchannel     = n._subchannel;
-      _pitch          = n._pitch;
-      _ppitch         = n._ppitch;
-      _tuning         = n._tuning;
-      _tpc            = n._tpc;
-      _line           = n._line;
-      _fret           = n._fret;
-      _string         = n._string;
-      _ghost          = n._ghost;
-      _userAccidental = n._userAccidental;
-      _accidental     = 0;
+      _subchannel        = n._subchannel;
+      _line              = n._line;
+      _fret              = n._fret;
+      _string            = n._string;
+      _ghost             = n._ghost;
+      dragMode           = n.dragMode;
+      _pitch             = n._pitch;
+      _tpc               = n._tpc;
+      _ppitch            = n._ppitch;
+      _hidden            = n._hidden;
+      _tuning            = n._tuning;
+      _veloType          = n._veloType;
+      _veloOffset        = n._veloOffset;
+      _onTimeOffset      = n._onTimeOffset;
+      _onTimeUserOffset  = n._onTimeUserOffset;
+      _offTimeOffset     = n._offTimeOffset;
+      _offTimeUserOffset = n._offTimeUserOffset;
+      _headGroup         = n._headGroup;
+      _headType          = n._headType;
+      _mirror            = n._mirror;
+      _userMirror        = n._userMirror;
+      _userAccidental    = n._userAccidental;
+      _accidental        = 0;
       if (n._accidental)
             add(new Accidental(*(n._accidental)));
-      _headGroup      = n._headGroup;
-      _headType       = n._headType;
-      _mirror         = n._mirror;
-      _userMirror     = n._userMirror;
 
       foreach(Element* e, n._el)
             add(e->clone());
@@ -209,6 +216,8 @@ Note::Note(const Note& n)
       _tieFor            = 0;
       _tieBack           = 0;
       _bend              = 0;
+      if (n._bend)
+            add(new Bend(*n._bend));
       for (int i = 0; i < 3; ++i) {
             _dots[i] = 0;
             if (n._dots[i]) {
@@ -216,21 +225,8 @@ Note::Note(const Note& n)
                   _dots[i]->setIdx(i);
                   }
             }
-      if (n._bend)
-            add(new Bend(*n._bend));
 
-      _lineOffset        = n._lineOffset;
-      _hidden            = n._hidden;
-
-      _veloType          = n._veloType;
-      _veloOffset        = n._veloOffset;
-
-      _onTimeOffset      = n._onTimeOffset;
-      _onTimeUserOffset  = n._onTimeUserOffset;
-
-      _offTimeOffset     = n._offTimeOffset;
-      _offTimeUserOffset = n._offTimeUserOffset;
-
+      _lineOffset = n._lineOffset;
       }
 
 //---------------------------------------------------------
@@ -929,8 +925,8 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
 
             case ACCIDENTAL:
                   score()->changeAccidental(this, e->subtype());
-                  delete e;
-                  ch->segment()->measure()->layoutStage1(); // create actual accidental
+
+//                  ch->segment()->measure()->layoutStage1(); // create actual accidental
                   if (_accidental)
                         score()->select(_accidental);
                   break;
@@ -1297,6 +1293,9 @@ void Note::layout1(char* tversatz)
                   }
             else {
                   if (_accidental) {
+                        if (_accidental->selected()) {
+                              score()->deselect(_accidental);
+                              }
                         delete _accidental;
                         _accidental = 0;
                         }

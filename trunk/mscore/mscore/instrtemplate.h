@@ -138,9 +138,11 @@ class StaffListItem : public QTreeWidgetItem {
       int staffIdx;
 
       void setClef(int val);
-      int clef() const         { return _clef;   }
+      int clef() const         { return _clef;    }
       void setLinked(bool val);
-      bool linked() const      { return _linked; }
+      bool linked() const      { return _linked;  }
+      bool visible() const;
+      void setVisible(bool val);
       };
 
 extern QList<InstrumentGroup*> instrumentGroups;

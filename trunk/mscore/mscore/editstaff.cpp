@@ -177,7 +177,7 @@ void EditStaff::apply()
          || inv != staff->invisible()
          || st  != staff->staffType()
            )
-            score->undo()->push(new ChangeStaff(staff, s, inv, st));
+            score->undo()->push(new ChangeStaff(staff, s, inv, staff->show(), st));
       score->setLayoutAll(true);
       score->end();
       }

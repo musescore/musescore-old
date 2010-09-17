@@ -447,7 +447,6 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc, int userAccidental, 
             Segment* segment = chord->segment();
             Measure* measure = segment->measure();
             foreach(Staff* staff, linkedStaves->staves()) {
-                  printf("     staff %p - %p\n", ostaff, staff);
                   if (staff == ostaff)
                         continue;
                   Score* score = staff->score();
@@ -711,7 +710,7 @@ void Score::undoToggleInvisible(Element* e)
 
 void Score::undoAddElement(Element* element)
       {
-printf("undoAddElement <%s>\n", element->name());
+// printf("undoAddElement <%s>\n", element->name());
       Staff* ostaff = element->staff();
       if (element->type() == SLUR)
             ostaff = static_cast<Slur*>(element)->startElement()->staff();
@@ -757,6 +756,22 @@ printf("undoAddElement <%s>\n", element->name());
                         nslur->setParent(0);
                         undo()->push(new AddElement(nslur));
                         }
+                  else if (element->type() == NOTE) {
+                        Note* note       = static_cast<Note*>(element);
+                        Chord* cr        = note->chord();
+                        Segment* segment = cr->segment();
+                        int tick         = segment->tick();
+                        Measure* m       = score->tick2measure(tick);
+                        Segment* seg     = m->findSegment(SegChordRest, tick);
+                        Note* nnote      = note->clone();
+                        int ntrack       = score->staffIdx(staff) * VOICES + nnote->voice();
+                        nnote->setScore(score);
+                        nnote->setTrack(ntrack);
+                        Chord* ncr       = static_cast<Chord*>(seg->element(ntrack));
+                        nnote->setParent(ncr);
+                        undo()->push(new AddElement(nnote));
+                        score->setLayout(ncr->measure());
+                        }
                   }
             }
       undo()->push(new AddElement(element));
@@ -782,20 +797,26 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
             segmentType = SegChordRest;
       foreach(Staff* staff, staffList) {
             Score* score = staff->score();
-            Measure* m   = score->tick2measure(tick);
+            Measure* m   = (score == this) ? measure : score->tick2measure(tick);
             // always create new segment for grace note:
             Segment* seg = 0;
             if (segmentType != SegGrace)
                   seg = m->findSegment(segmentType, tick);
             if (seg == 0) {
                   seg = new Segment(m, segmentType, tick);
-                  undoAddElement(seg);
+                  score->undoAddElement(seg);
                   }
             ChordRest* newcr = (staff == ostaff) ? cr : static_cast<ChordRest*>(cr->clone());
             newcr->setScore(score);
             int staffIdx = score->staffIdx(staff);
             newcr->setTrack(staffIdx * VOICES + cr->voice());
             newcr->setParent(seg);
+            if (newcr->type() == CHORD) {
+                  Chord* chord = static_cast<Chord*>(newcr);
+                  // setTpcFromPitch needs to know the note tick position
+                  foreach(Note* note, chord->notes())
+                        note->setTpcFromPitch();
+                  }
             undo()->push(new AddElement(newcr));
             score->setLayout(m);
             score->setUpdateAll(true);
@@ -1954,11 +1975,12 @@ void ChangePageFormat::flip()
 //   ChangeStaff
 //---------------------------------------------------------
 
-ChangeStaff::ChangeStaff(Staff* _staff, bool _small, bool _invisible, StaffType* st)
+ChangeStaff::ChangeStaff(Staff* _staff, bool _small, bool _invisible, bool _show, StaffType* st)
       {
       staff     = _staff;
       small     = _small;
       invisible = _invisible;
+      show      = _show;
       staffType = st;
       }
 
@@ -1973,14 +1995,17 @@ void ChangeStaff::flip()
 
       int oldSmall      = staff->small();
       bool oldInvisible = staff->invisible();
+      bool oldShow      = staff->show();
       StaffType* st     = staff->staffType();
 
       staff->setSmall(small);
       staff->setInvisible(invisible);
+      staff->setShow(show);
       staff->setStaffType(staffType);
 
       small     = oldSmall;
       invisible = oldInvisible;
+      show      = oldShow;
       staffType = st;
 
       if (invisibleChanged || typeChanged) {

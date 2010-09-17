@@ -1,3 +1,6 @@
+17.sep (ws)
+      - new track attribute "visible" in instrument dialog
+      - add copy&paste of breath elements
 16.sep (ws)
       - fix crash when typing "H" for "hairpin"
       - fix bounding box of stem slash (acciacatura etc), fixes screen update

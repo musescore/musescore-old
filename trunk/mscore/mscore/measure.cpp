@@ -1322,7 +1322,7 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
 //   cmdAddStaves
 //---------------------------------------------------------
 
-void Measure::cmdAddStaves(int sStaff, int eStaff)
+void Measure::cmdAddStaves(int sStaff, int eStaff, bool createRest)
       {
       _score->undo()->push(new InsertStaves(this, sStaff, eStaff));
 
@@ -1339,16 +1339,18 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
 
             _score->undo()->push(new InsertMStaff(this, ms, i));
 
-            Rest* rest = new Rest(score(), Duration(Duration::V_MEASURE));
-            rest->setTrack(i * VOICES);
-            rest->setDuration(len());
-            Segment* s = findSegment(SegChordRest, tick());
-            if (s == 0) {
-                  s = new Segment(this, SegChordRest, tick());
-                  score()->undoAddElement(s);
+            if (createRest) {
+                  Rest* rest = new Rest(score(), Duration(Duration::V_MEASURE));
+                  rest->setTrack(i * VOICES);
+                  rest->setDuration(len());
+                  Segment* s = findSegment(SegChordRest, tick());
+                  if (s == 0) {
+                        s = new Segment(this, SegChordRest, tick());
+                        score()->undoAddElement(s);
+                        }
+                  rest->setParent(s);
+                  score()->undoAddElement(rest);
                   }
-            rest->setParent(s);
-            score()->undoAddElement(rest);
 
             // replicate time signature
             if (ts) {
