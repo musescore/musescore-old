@@ -38,6 +38,7 @@
 #include "measure.h"
 #include "line.h"
 #include "beam.h"
+#include "excerpt.h"
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -52,6 +53,7 @@ StaffListItem::StaffListItem(PartListItem* li)
       staffIdx = 0;
       setLinked(false);
       setClef(0);
+      setFlags(flags() | Qt::ItemIsUserCheckable);
       }
 
 StaffListItem::StaffListItem()
@@ -82,7 +84,7 @@ void StaffListItem::setPartIdx(int val)
 void StaffListItem::setClef(int val)
       {
       _clef = val;
-      setText(1, qApp->translate("clefTable", clefTable[_clef].name));
+      setText(2, qApp->translate("clefTable", clefTable[_clef].name));
       }
 
 //---------------------------------------------------------
@@ -92,7 +94,25 @@ void StaffListItem::setClef(int val)
 void StaffListItem::setLinked(bool val)
       {
       _linked = val;
-      setText(2, _linked ? InstrumentsDialog::tr("linked") : "");
+      setText(3, _linked ? InstrumentsDialog::tr("linked") : "");
+      }
+
+//---------------------------------------------------------
+//   setVisible
+//---------------------------------------------------------
+
+void StaffListItem::setVisible(bool val)
+      {
+      setCheckState(1, val ? Qt::Checked : Qt::Unchecked);
+      }
+
+//---------------------------------------------------------
+//   visible
+//---------------------------------------------------------
+
+bool StaffListItem::visible() const
+      {
+      return checkState(1) == Qt::Checked;
       }
 
 //---------------------------------------------------------
@@ -215,6 +235,7 @@ void InstrumentsDialog::genPartList()
                         sli->setClef(s->clefList()->clef(0));
                   const LinkedStaves* ls = s->linkedStaves();
                   sli->setLinked(ls && !ls->isEmpty());
+                  sli->setVisible(s->show());
                   }
             partiturList->setItemExpanded(pli, true);
             }
@@ -471,6 +492,7 @@ void InstrumentsDialog::on_linkedButton_clicked()
       nsli->staff         = staff;
       nsli->setClef(sli->clef());
       nsli->setLinked(true);
+      nsli->setVisible(true);
       if (staff)
             nsli->op = ITEM_ADD;
       pli->insertChild(pli->indexOfChild(sli)+1, nsli);
@@ -493,6 +515,8 @@ void InstrumentsDialog::accept()
 
 void MuseScore::editInstrList()
       {
+      if (cs == 0)
+            return;
       if (!instrList)
             instrList = new InstrumentsDialog(this);
       instrList->setScore(cs);
@@ -500,7 +524,6 @@ void MuseScore::editInstrList()
       int rv = instrList->exec();
       if (rv == 0)
             return;
-
   	cs->inputState().setTrack(-1);
       //
       // process modified partitur list
@@ -605,8 +628,10 @@ void MuseScore::editInstrList()
 
                               cs->undoInsertStaff(staff, staffIdx);
 
-                              for (Measure* m = cs->firstMeasure(); m; m = m->nextMeasure())
-                                    m->cmdAddStaves(staffIdx, staffIdx+1);
+                              for (Measure* m = cs->firstMeasure(); m; m = m->nextMeasure()) {
+                                    // do not create whole measure rests for linked staves
+                                    m->cmdAddStaves(staffIdx, staffIdx+1, !sli->linked());
+                                    }
 
                               cs->adjustBracketsIns(staffIdx, staffIdx+1);
 
@@ -617,11 +642,20 @@ void MuseScore::editInstrList()
                               if (sli->linked()) {
                                     // TODO: link staff
                                     printf("TODO: link staff\n");
+                                    int idx = cs->staffIdx(staff);
+                                    if (idx > 0) {
+                                          Staff* ostaff = cs->staff(idx - 1);
+                                          cloneStaff(ostaff, staff);
+                                          }
                                     }
-
                               ++staffIdx;
                               }
                         else {
+                              Staff* staff = sli->staff;
+                              if (sli->visible() != staff->show()) {
+                                    cs->undo()->push(new ChangeStaff(staff, staff->small(), staff->invisible(),
+                                       sli->visible(), staff->staffType()));
+                                    }
                               ++staffIdx;
                               ++rstaff;
                               }
@@ -707,7 +741,7 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
       int sidx = this->staffIdx(part);
       int eidx = sidx + part->nstaves();
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
-            m->cmdAddStaves(sidx, eidx);
+            m->cmdAddStaves(sidx, eidx, true);
       adjustBracketsIns(sidx, eidx);
       }
 

@@ -1062,12 +1062,13 @@ class ChangeStaff : public UndoCommand {
       Staff* staff;
       bool small;
       bool invisible;
+      bool show;
       StaffType* staffType;
 
       void flip();
 
    public:
-      ChangeStaff(Staff*, bool small, bool invisible, StaffType*);
+      ChangeStaff(Staff*, bool small, bool invisible, bool show, StaffType*);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeStaff");

@@ -24,6 +24,7 @@
 class Score;
 class Part;
 class Xml;
+class Staff;
 
 //---------------------------------------------------------
 //   Excerpt
@@ -49,6 +50,7 @@ class Excerpt {
 
 extern Score* createExcerpt(const QList<Part*>&);
 extern void cloneStaves(Score* oscore, Score* score, const QList<int>& map);
+extern void cloneStaff(Staff* ostaff, Staff* nstaff);
 
 #endif
 

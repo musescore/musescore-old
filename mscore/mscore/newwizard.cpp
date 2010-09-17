@@ -372,7 +372,7 @@ void InstrumentWizard::createInstruments(Score* cs)
             int sidx = cs->staffIdx(part);
             int eidx = sidx + part->nstaves();
             for (Measure* m = cs->firstMeasure(); m; m = m->nextMeasure())
-                  m->cmdAddStaves(sidx, eidx);
+                  m->cmdAddStaves(sidx, eidx, true);
             staffIdx += rstaff;
             }
       //

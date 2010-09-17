@@ -440,3 +440,110 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
             slurMap[track].check();
       }
 
+//---------------------------------------------------------
+//   cloneStaff
+//---------------------------------------------------------
+
+void cloneStaff(Staff* srcStaff, Staff* dstStaff)
+      {
+      Score* score  = srcStaff->score();
+      dstStaff->linkTo(srcStaff);
+
+      int tracks = score->nstaves() * VOICES;
+      SlurMap slurMap[tracks];
+      TieMap tieMap[tracks];
+      int srcStaffIdx = score->staffIdx(srcStaff);
+      int dstStaffIdx = score->staffIdx(dstStaff);
+
+      for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
+            int sTrack = srcStaffIdx * VOICES;
+            int eTrack = sTrack + VOICES;
+            for (int srcTrack = sTrack; srcTrack < eTrack; ++srcTrack) {
+                  TupletMap tupletMap;    // tuplets cannot cross measure boundaries
+                  int dstTrack = dstStaffIdx * VOICES + (srcTrack - sTrack);
+                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                        Element* oe = seg->element(srcTrack);
+                        if (oe == 0)
+                              continue;
+                        Element* ne = oe->clone();
+                        ne->setTrack(dstTrack);
+                        seg->add(ne);
+                        if (oe->isChordRest()) {
+                              ChordRest* ocr = static_cast<ChordRest*>(oe);
+                              ChordRest* ncr = static_cast<ChordRest*>(ne);
+                              Tuplet* ot     = ocr->tuplet();
+                              if (ot) {
+                                    Tuplet* nt = tupletMap.findNew(ot);
+                                    if (nt == 0) {
+                                          nt = new Tuplet(*ot);
+                                          nt->clear();
+                                          nt->setTrack(dstTrack);
+                                          m->add(nt);
+                                          tupletMap.add(ot, nt);
+                                          }
+                                    ncr->setTuplet(nt);
+                                    }
+                              foreach(Slur* s, ocr->slurFor()) {
+                                    Slur* slur = new Slur(score);
+                                    slur->setStartElement(ncr);
+                                    ncr->addSlurFor(slur);
+                                    slurMap[dstTrack].add(s, slur);
+                                    }
+                              foreach(Slur* s, ocr->slurBack()) {
+                                    Slur* slur = slurMap[dstTrack].findNew(s);
+                                    if (slur) {
+                                          slur->setEndElement(ncr);
+                                          ncr->addSlurBack(slur);
+                                          }
+                                    else {
+                                          printf("cloneStave: cannot find slur\n");
+                                          }
+                                    }
+                              foreach(Element* e, seg->annotations()) {
+                                    if (e->generated() || e->systemFlag())
+                                          continue;
+                                    if (e->track() != srcTrack)
+                                          continue;
+                                    Element* ne = e->clone();
+                                    ne->setTrack(dstTrack);
+                                    seg->add(ne);
+                                    }
+                              if (oe->type() == CHORD) {
+                                    Chord* och = static_cast<Chord*>(ocr);
+                                    Chord* nch = static_cast<Chord*>(ncr);
+                                    int n = och->notes().size();
+                                    for (int i = 0; i < n; ++i) {
+                                          Note* on = och->notes().at(i);
+                                          Note* nn = nch->notes().at(i);
+                                          if (on->tieFor()) {
+                                                Tie* tie = new Tie(score);
+                                                nn->setTieFor(tie);
+                                                tie->setStartNote(nn);
+                                                tieMap[dstTrack].add(on->tieFor(), tie);
+                                                }
+                                          if (on->tieBack()) {
+                                                Tie* tie = tieMap[dstTrack].findNew(on->tieBack());
+                                                if (tie) {
+                                                      nn->setTieBack(tie);
+                                                      tie->setEndNote(nn);
+                                                      }
+                                                else {
+                                                      printf("cloneStave: cannot find tie\n");
+                                                      }
+                                                }
+                                          }
+                                    }
+                              }
+                        }
+                  }
+//            foreach(Element* e, *m->el()) {
+//                  Element* ne = e->clone();
+//                  ne->setScore(score);
+//                  nmb->add(ne);
+//                  }
+            }
+      //DEBUG:
+//      for (int track = 0; track < tracks; ++track)
+//            slurMap[track].check();
+      }
+

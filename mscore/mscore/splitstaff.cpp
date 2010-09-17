@@ -70,7 +70,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       undoInsertStaff(ns, staffIdx+1);
 
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
-            m->cmdAddStaves(staffIdx+1, staffIdx+2);
+            m->cmdAddStaves(staffIdx+1, staffIdx+2, true);
 
 //      undoChangeBarLineSpan(s, p->nstaves());
       adjustBracketsIns(staffIdx+1, staffIdx+2);

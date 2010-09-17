@@ -331,7 +331,6 @@ Note* Score::addNote(Chord* chord, int pitch)
       note->setTpcFromPitch();
       undoAddElement(note);
       mscore->play(chord);
-      setLayout(chord->measure());
       select(note, SELECT_SINGLE, 0);
       return note;
       }

@@ -80,6 +80,7 @@
 #include "excerpt.h"
 #include "clef.h"
 #include "noteevent.h"
+#include "breath.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -599,7 +600,6 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         chord->add(note);
                         note->setPitch(pitch);
                         ncr = chord;
-//                        note->setTpcFromPitch();      // chord->tick() must be known
                         if (i+1 < n) {
                               tie = new Tie(this);
                               tie->setStartNote((Note*)nr);
@@ -611,8 +611,8 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                   undoAddCR(ncr, measure, tick);
                   if (ncr->type() == CHORD) {
                         mscore->play(ncr);
-                        if (note)
-                              note->setTpcFromPitch();      // chord->tick() must be known
+//                        if (note)
+//                              note->setTpcFromPitch();      // chord->tick() must be known
                         }
                   // undoAddElement(ncr);
                   seg = ncr->segment();
@@ -1543,11 +1543,13 @@ void Score::changeAccidental(Note* note, int accidental)
       int tpc    = step2tpc(step, acc);
       int pitch  = line2pitch(note->line(), clef, 0) + acc;
 
-      int acc2   = chord->measure()->findAccidental2(note);
+      int acc2    = chord->measure()->findAccidental2(note);
       int accType = Accidental::value2subtype(acc);
       if (accType == ACC_NONE)
             accType = ACC_NATURAL;
       int user   = ((acc2 == acc) || (accType != accidental)) ? accidental : ACC_NONE;
+
+// printf("Accidental %d(%d) - %d(%d) user %d\n", accidental, acc, accType, acc2, user);
 
       undoChangePitch(note, pitch, tpc, user, note->line(), note->fret());
       //
@@ -1563,6 +1565,27 @@ void Score::changeAccidental(Note* note, int accidental)
             while(n->tieFor()) {
                   n = n->tieFor()->endNote();
                   undoChangePitch(n, pitch, tpc, user, n->line(), n->fret());
+                  }
+            }
+      if (!note->staff()->useTablature()) {
+            int acci = user ? user : accType;
+            if (acci != ACC_NONE && !note->tieBack() && !note->hidden()) {
+                  if (note->accidental() == 0) {
+                        Accidental* a = new Accidental(this);
+                        a->setParent(note);
+                        a->setSubtype(acci);
+                        undoAddElement(a);
+                        }
+                  else if (note->accidental()->subtype() != acci) {
+                        Accidental* a = new Accidental(this);
+                        a->setParent(note);
+                        a->setSubtype(acci);
+                        undoChangeElement(note->accidental(), a);
+                        }
+                  }
+            else {
+                  if (note->accidental())
+                        undoRemoveElement(note->accidental());
                   }
             }
       }
@@ -2522,6 +2545,22 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     }
                               segment->add(clef);
                               clef->staff()->setClef(segment->tick(), clef->subtype());
+                              }
+                        else if (tag == "Breath") {
+                              Breath* breath = new Breath(this);
+                              breath->read(eee);
+                              breath->setTrack(dstStaffIdx * VOICES);
+                              int tick = curTick - tickStart + dstTick;
+                              Measure* m = tick2measure(tick);
+                              Segment* segment = m->findSegment(SegBreath, tick);
+                              if (!segment) {
+                                    segment = new Segment(m, SegBreath, tick);
+                                    undoAddElement(segment);
+                                    }
+                              segment->add(breath);
+                              }
+                        else if (tag == "BarLine") {
+                              // ignore bar line
                               }
                         else {
                               domError(eee);

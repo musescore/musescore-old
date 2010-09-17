@@ -264,14 +264,6 @@ Chord::Chord(const Chord& c)
       foreach(Note* n, c.notes())
             add(new Note(*n));
 
-#if 0
-      foreach(const LedgerLine* ll, c._ledgerLines) {
-            LedgerLine* l = new LedgerLine(*ll);
-            l->setParent(this);
-            l->setTrack(track());
-            _ledgerLines.append(new LedgerLine(*ll));
-            }
-#endif
       _stem          = 0;
       _hook          = 0;
       _glissando     = 0;
@@ -1647,9 +1639,8 @@ void Chord::pitchChanged()
 //   drop
 //---------------------------------------------------------
 
-Element* Chord::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
       {
-//      Measure* m  = measure();
       switch (e->type()) {
             case ARTICULATION:
                   {
@@ -1699,8 +1690,7 @@ Element* Chord::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
                   score()->undoAddElement(e);
                   break;
             default:
-                  delete e;
-                  return 0;
+                  return ChordRest::drop(view, p1, p2, e);
             }
       return 0;
       }

@@ -195,7 +195,7 @@ class Measure : public MeasureBase {
       void insert(Segment* ns, Segment* s);
 
       void cmdRemoveStaves(int s, int e);
-      void cmdAddStaves(int s, int e);
+      void cmdAddStaves(int s, int e, bool createRest);
       void removeStaves(int s, int e);
       void insertStaves(int s, int e);
 
