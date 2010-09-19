@@ -72,7 +72,8 @@ namespace Bww {
     int beat;                                           ///< Beat type
     QMap<QString, StepAlterOct> stepAlterOctMap;        ///< Map bww pitch to step/alter/oct
     QMap<QString, QString> typeMap;                     ///< Map bww note types to MusicXML
-    unsigned int measureNumber;                         ///< Current measure number
+    unsigned int regularMeasureNumber;                  ///< Current regular measure number
+    unsigned int irregularMeasureNumber;                ///< Current irregular measure number
     unsigned int tempo;                                 ///< Tempo (0 = not specified)
   };
 

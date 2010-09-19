@@ -37,7 +37,8 @@ namespace Bww {
   MxmlWriter::MxmlWriter()
     : beats(4),
     beat(4),
-    measureNumber(0),
+    regularMeasureNumber(0),
+    irregularMeasureNumber(0),
     tempo(0)
   {
     qDebug() << "MxmlWriter::MxmlWriter()";
@@ -67,9 +68,24 @@ namespace Bww {
   void MxmlWriter::beginMeasure(const Bww::MeasureBeginFlags mbf)
   {
     qDebug() << "MxmlWriter::beginMeasure()";
-    ++measureNumber;
-    out << "    <measure number=\"" << measureNumber << "\">" << endl;
-    if (measureNumber != 1 && mbf.firstOfSystem)
+    QString implicit;
+    QString strMeasureNumber;
+    if (mbf.irregular)
+    {
+      implicit = " implicit=\"yes\"";
+      if (irregularMeasureNumber == 0)
+        strMeasureNumber = "0";
+      else
+        strMeasureNumber = QString("X%1").arg(irregularMeasureNumber);
+      ++irregularMeasureNumber;
+    }
+    else
+    {
+      ++regularMeasureNumber;
+      strMeasureNumber.setNum(regularMeasureNumber);
+    }
+    out << "    <measure number=\"" << strMeasureNumber << "\"" << implicit << ">" << endl;
+    if ((regularMeasureNumber + irregularMeasureNumber) != 1 && mbf.firstOfSystem)
     {
       out << "      <print new-system=\"yes\"/>" << endl;
     }
@@ -91,7 +107,7 @@ namespace Bww {
       }
       out << "      </barline>" << endl;
     }
-    if (measureNumber == 1)
+    if ((regularMeasureNumber + irregularMeasureNumber) == 1)
     {
       out << "      <attributes>" << endl;
       out << "        <divisions>" << WHOLE_DUR / 4 << "</divisions>" << endl;
