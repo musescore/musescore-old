@@ -602,7 +602,6 @@ void Score::doLayout()
             _symIdx = 1;
 
       initSymbols(_symIdx);
-
       _needLayout = false;
 
       if (layoutFlags & LAYOUT_FIX_TICKS)

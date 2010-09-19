@@ -324,7 +324,7 @@ struct AcEl {
 //    computes note lines and accidentals
 //---------------------------------------------------------
 
-void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
+void Measure::layoutChords0(Segment* segment, int startTrack)
       {
       int staffIdx     = startTrack/VOICES;
       Staff* staff     = score()->staff(staffIdx);
@@ -349,21 +349,6 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                   if (chord->noteType() != NOTE_NORMAL)
                         m *= score()->styleD(ST_graceNoteMag);
                   foreach(Note* note, chord->notes()) {
-                        if (note->tieBack()) {
-                              int line = note->tieBack()->startNote()->line();
-                              note->setLine(line);
-
-                              int tpc = note->tpc();
-                              line = tpc2step(tpc) + (note->pitch()/12) * 7;
-                              int tpcPitch   = tpc2pitch(tpc);
-                              if (tpcPitch < 0)
-                                    line += 7;
-                              else
-                                    line -= (tpcPitch/12)*7;
-                              tversatz[line] = tpc2alter(tpc);
-                              continue;
-                              }
-
                         if (drumset) {
                               int pitch = note->pitch();
                               if (!drumset->isValid(pitch)) {
@@ -375,11 +360,62 @@ void Measure::layoutChords0(Segment* segment, int startTrack, char* tversatz)
                                     continue;
                                     }
                               }
-                        note->layout1(tversatz);
                         }
                   chord->computeUp();
                   }
             cr->setMag(m);
+            }
+      }
+
+//---------------------------------------------------------
+//   layoutChords10
+//    computes note lines and accidentals
+//---------------------------------------------------------
+
+void Measure::layoutChords10(Segment* segment, int startTrack, char* tversatz)
+      {
+      int staffIdx     = startTrack/VOICES;
+      Staff* staff     = score()->staff(staffIdx);
+      Drumset* drumset = 0;
+
+      if (staff->part()->instr()->useDrumset())
+            drumset = staff->part()->instr()->drumset();
+
+      int endTrack = startTrack + VOICES;
+      for (int track = startTrack; track < endTrack; ++track) {
+            Element* e = segment->element(track);
+            if (!e || e->type() != CHORD)
+                 continue;
+            Chord* chord = static_cast<Chord*>(e);
+            foreach(Note* note, chord->notes()) {
+                  if (note->tieBack()) {
+                        int line = note->tieBack()->startNote()->line();
+                        note->setLine(line);
+
+                        int tpc = note->tpc();
+                        line = tpc2step(tpc) + (note->pitch()/12) * 7;
+                        int tpcPitch   = tpc2pitch(tpc);
+                        if (tpcPitch < 0)
+                              line += 7;
+                        else
+                              line -= (tpcPitch/12)*7;
+                        tversatz[line] = tpc2alter(tpc);
+                        continue;
+                        }
+
+                  if (drumset) {
+                        int pitch = note->pitch();
+                        if (!drumset->isValid(pitch)) {
+                              printf("unmapped drum note %d\n", pitch);
+                              }
+                        else {
+                              note->setHeadGroup(drumset->noteHead(pitch));
+                              note->setLine(drumset->line(pitch));
+                              continue;
+                              }
+                        }
+                  note->layout10(tversatz);
+                  }
             }
       }
 
@@ -3224,9 +3260,6 @@ void Measure::layoutStage1()
       for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
             KeySigEvent key = score()->staff(staffIdx)->keymap()->key(tick());
 
-            char tversatz[75];      // list of already set accidentals for this measure
-            initLineList(tversatz, key.accidentalType());
-
             setBreakMMRest(false);
             if (score()->styleB(ST_createMultiMeasureRests)) {
                   if ((repeatFlags() & RepeatStart) || (prevMeasure() && (prevMeasure()->repeatFlags() & RepeatEnd)))
@@ -3273,8 +3306,62 @@ void Measure::layoutStage1()
                         }
 
                   if (segment->subtype() & (SegChordRest | SegGrace))
-                        layoutChords0(segment, staffIdx * VOICES, tversatz);
+                        layoutChords0(segment, staffIdx * VOICES);
                   }
             }
       }
+
+//---------------------------------------------------------
+//   updateAccidentals
+//    recompute accidentals,
+///   undoable add/remove
+//---------------------------------------------------------
+
+void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
+      {
+      Staff* staff     = score()->staff(staffIdx);
+      Drumset* drumset = 0;
+
+      if (staff->part()->instr()->useDrumset())
+            drumset = staff->part()->instr()->drumset();
+
+      int startTrack = staffIdx * VOICES;
+      int endTrack   = startTrack + VOICES;
+      for (int track = startTrack; track < endTrack; ++track) {
+            Element* e = segment->element(track);
+            if (!e || e->type() != CHORD)
+                 continue;
+            Chord* chord = static_cast<Chord*>(e);
+            foreach(Note* note, chord->notes()) {
+                  if (note->tieBack()) {
+                        int line = note->tieBack()->startNote()->line();
+                        note->setLine(line);
+
+                        int tpc = note->tpc();
+                        line = tpc2step(tpc) + (note->pitch()/12) * 7;
+                        int tpcPitch   = tpc2pitch(tpc);
+                        if (tpcPitch < 0)
+                              line += 7;
+                        else
+                              line -= (tpcPitch/12)*7;
+                        tversatz[line] = tpc2alter(tpc);
+                        continue;
+                        }
+
+                  if (drumset) {
+                        int pitch = note->pitch();
+                        if (!drumset->isValid(pitch)) {
+                              printf("unmapped drum note %d\n", pitch);
+                              }
+                        else {
+                              note->setHeadGroup(drumset->noteHead(pitch));
+                              note->setLine(drumset->line(pitch));
+                              continue;
+                              }
+                        }
+                  note->updateAccidental(tversatz);
+                  }
+            }
+      }
+
 

@@ -467,6 +467,16 @@ void Score::renumberMeasures()
       }
 
 //---------------------------------------------------------
+//   elementAdjustReadPos
+//---------------------------------------------------------
+
+static void elementAdjustReadPos(void*, Element* e)
+      {
+      if (e->isMovable())
+            e->adjustReadPos();
+      }
+
+//---------------------------------------------------------
 //   read
 //    return false on error
 //---------------------------------------------------------
@@ -484,67 +494,72 @@ bool Score::read(QString name)
       QString cs = info.suffix();
       QString csl = cs.toLower();
 
-      if (cs == "mscz")
-            return loadCompressedMsc(name);
-      if (cs.toLower() == "msc" || cs.toLower() == "mscx")
-            return loadMsc(name);
-
-      // import
-      if (!preferences.importStyleFile.isEmpty()) {
-            QFile f(preferences.importStyleFile);
-            // silently ignore style file on error
-            if (f.open(QIODevice::ReadOnly))
-                  loadStyle(&f);
-            }
-
-      if (cs == "xml") {
-            importMusicXml(name);
-            connectSlurs();
-            }
-      else if (cs == "mxl")
-            importCompressedMusicXml(name);
-      else if (csl == "mid" || csl == "midi" || csl == "kar") {
-            if (!importMidi(name))
+      if (cs == "mscz") {
+            if (!loadCompressedMsc(name))
                   return false;
             }
-      else if (cs == "md") {
-            if (!importMuseData(name))
-                  return false;
-            }
-      else if (cs == "ly") {
-            if (!importLilypond(name))
-                  return false;
-            }
-      else if (csl == "mgu" || csl == "sgu") {
-            if (!importBB(name))
-                  return false;
-            }
-      else if (csl == "cap") {
-            if (!importCapella(name))
-                  return false;
-            connectSlurs();
-            }
-      else if (csl == "ove") {
-      	    if(!importOve(name))
-      		        return false;
-		            }
-#ifdef OMR
-      else if (csl == "pdf") {
-            if (!importPdf(name))
-                  return false;
-            }
-#endif
-      else if (csl == "bww") {
-            if (!importBww(name))
-                  return false;
-            }
-      else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
-            if (!importGTP(name))
+      else if (cs.toLower() == "msc" || cs.toLower() == "mscx") {
+            if (!loadMsc(name))
                   return false;
             }
       else {
-            printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
-            return false;
+            // import
+            if (!preferences.importStyleFile.isEmpty()) {
+                  QFile f(preferences.importStyleFile);
+                  // silently ignore style file on error
+                  if (f.open(QIODevice::ReadOnly))
+                        loadStyle(&f);
+                  }
+
+            if (cs == "xml") {
+                  importMusicXml(name);
+                  connectSlurs();
+                  }
+            else if (cs == "mxl")
+                  importCompressedMusicXml(name);
+            else if (csl == "mid" || csl == "midi" || csl == "kar") {
+                  if (!importMidi(name))
+                        return false;
+                  }
+            else if (cs == "md") {
+                  if (!importMuseData(name))
+                        return false;
+                  }
+            else if (cs == "ly") {
+                  if (!importLilypond(name))
+                        return false;
+                  }
+            else if (csl == "mgu" || csl == "sgu") {
+                  if (!importBB(name))
+                        return false;
+                  }
+            else if (csl == "cap") {
+                  if (!importCapella(name))
+                        return false;
+                  connectSlurs();
+                  }
+            else if (csl == "ove") {
+                  if(!importOve(name))
+            	      return false;
+      	      }
+#ifdef OMR
+            else if (csl == "pdf") {
+                  if (!importPdf(name))
+                        return false;
+                  }
+#endif
+            else if (csl == "bww") {
+                  if (!importBww(name))
+                        return false;
+                  }
+            else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
+                  if (!importGTP(name))
+                        return false;
+                  }
+            else {
+                  printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
+                  return false;
+                  }
             }
 
       renumberMeasures();
@@ -553,9 +568,49 @@ bool Score::read(QString name)
       updateChannel();
       mscore->updateRecentScores(this);
 
+      int staffIdx = 0;
+      foreach(Staff* st, _staves) {
+            if (st->updateClefList())
+                  st->clefList()->clear();
+            if (st->updateKeymap())
+                  st->keymap()->clear();
+            int track = staffIdx * VOICES;
+            KeySig* key1 = 0;
+            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        if (!s->element(track))
+                              continue;
+                        Element* e = s->element(track);
+                        if (e->generated())
+                              continue;
+                        if ((s->subtype() == SegClef) && st->updateClefList()) {
+                              Clef* clef = static_cast<Clef*>(e);
+                              st->setClef(s->tick(), clef->subtype());
+                              }
+                        else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
+                              KeySig* ks = static_cast<KeySig*>(e);
+                              int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
+                              ks->setOldSig(naturals);
+                              st->setKey(s->tick(), ks->keySigEvent());
+                              key1 = ks;
+                              }
+                        }
+                  if (m->sectionBreak())
+                        key1 = 0;
+                  }
+            st->setUpdateClefList(false);
+            st->setUpdateKeymap(false);
+            ++staffIdx;
+            }
+      updateNotes();
+
       _needLayout = true;
       layoutFlags |= LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO;
       doLayout();
+
+      // adjust readPos
+      scanElements(0, elementAdjustReadPos);
+
       return true;
       }
 
@@ -2314,4 +2369,47 @@ Spanner* Score::findSpanner(int id) const
       return 0;
       }
 
+//---------------------------------------------------------
+//   updateNotes
+///   calculate note lines and accidental
+//---------------------------------------------------------
+
+void Score::updateNotes()
+      {
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                  KeySigEvent key = staff(staffIdx)->keymap()->key(m->tick());
+
+                  char tversatz[75];      // list of already set accidentals for this measure
+                  initLineList(tversatz, key.accidentalType());
+
+                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                        if (!(segment->subtype() & (SegChordRest | SegGrace)))
+                              continue;
+                        m->layoutChords10(segment, staffIdx * VOICES, tversatz);
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   updateAccidentals
+//---------------------------------------------------------
+
+void Score::updateAccidentals(Measure* m, int staffIdx)
+      {
+      Staff* st = staff(staffIdx);
+      if (st->useTablature())
+            return;
+      KeySigEvent key = st->keymap()->key(m->tick());
+
+      char tversatz[75];      // list of already set accidentals for this measure
+      initLineList(tversatz, key.accidentalType());
+
+      for (Segment* segment = m->first(); segment; segment = segment->next()) {
+            if (!(segment->subtype() & (SegChordRest | SegGrace)))
+                  continue;
+            m->updateAccidentals(segment, staffIdx, tversatz);
+            }
+      }
 

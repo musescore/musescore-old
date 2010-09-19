@@ -247,16 +247,23 @@ struct OttavaShiftSegment {
 //   collectMeasureEvents
 //---------------------------------------------------------
 
-static void collectMeasureEvents(EventMap* events, Measure* m, int firstStaffIdx,
-   int nextStaffIdx, int tickOffset)
+static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int tickOffset)
       {
-      Instrument* instr = m->score()->part(firstStaffIdx)->instr();
+      Instrument* instr = part->instr();
+      int firstStaffIdx = m->score()->staffIdx(part);
+      int nextStaffIdx  = firstStaffIdx + part->nstaves();
 
       SegmentTypes st = SegGrace | SegChordRest;
-      int strack = firstStaffIdx * VOICES;
-      int etrack = nextStaffIdx * VOICES;
+      int strack      = firstStaffIdx * VOICES;
+      int etrack      = nextStaffIdx * VOICES;
+
       for (Segment* seg = m->first(st); seg; seg = seg->next(st)) {
             for (int track = strack; track < etrack; ++track) {
+                  // skip linked staves, except primary
+                  if (!m->score()->staff(track / VOICES)->primaryStaff()) {
+                        track += VOICES-1;
+                        continue;
+                        }
                   Element* cr = seg->element(track);
                   if (cr && cr->type() == CHORD) {
                         Chord* chord = static_cast<Chord*>(cr);
@@ -413,24 +420,20 @@ Measure* Score::searchLabel(const QString& s, Measure* start)
       }
 
 //---------------------------------------------------------
-//   toEList
+//   renderPart
 //---------------------------------------------------------
 
-void Score::toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx)
+void Score::renderPart(EventMap* events, Part* part)
       {
-      Instrument* instr = part(firstStaffIdx)->instr();
-
-      foreach(const RepeatSegment* rs, *repeatList()) {
+      foreach (const RepeatSegment* rs, *repeatList()) {
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
             int tickOffset = rs->utick - rs->tick;
             for (Measure* m = tick2measure(startTick); m; m = m->nextMeasure()) {
-                  collectMeasureEvents(events, m, firstStaffIdx, nextStaffIdx, tickOffset);
+                  collectMeasureEvents(events, m, part, tickOffset);
                   if (m->tick() + m->ticks() >= endTick)
                         break;
                   }
-
-            //int channel = instr->channel(0).channel;
             }
       }
 
@@ -471,12 +474,8 @@ void Score::toEList(EventMap* events)
       updateRepeatList(getAction("repeat")->isChecked());
       _foundPlayPosAfterRepeats = false;
       updateChannel();
-      int staffIdx = 0;
-      foreach(Part* part, _parts) {
-            int nextStaffIdx = staffIdx + part->staves()->size();
-            toEList(events, staffIdx, nextStaffIdx);
-            staffIdx = nextStaffIdx;
-            }
+      foreach (Part* part, _parts)
+            renderPart(events, part);
       }
 
 //---------------------------------------------------------

@@ -1,3 +1,7 @@
+19.sep (ws)
+      - implement "add linked staff" in instrument dialog
+      - move creation/deletion of accidentals out of doLayout();
+        selectable elements cannot be created/deleted in doLayout()
 17.sep (ws)
       - new track attribute "visible" in instrument dialog
       - add copy&paste of breath elements

@@ -299,11 +299,12 @@ bool MidiFile::readTrack()
  *    return false on error
  *---------------------------------------------------------*/
 
-bool MidiFile::read(void* p, qint64 len)
+void MidiFile::read(void* p, qint64 len)
       {
       curPos += len;
       qint64 rv = fp->read((char*)p, len);
-      return rv != len;
+      if (rv != len)
+            throw(QString("bad midifile: unexpected EOF"));
       }
 
 //---------------------------------------------------------
@@ -397,12 +398,12 @@ void MidiFile::writeLong(int i)
  *    file or fifo.
  *---------------------------------------------------------*/
 
-bool MidiFile::skip(qint64 len)
+void MidiFile::skip(qint64 len)
       {
       if (len <= 0)
-            return false;
+            return;
       char tmp[len];
-      return read(tmp, len);
+      read(tmp, len);
       }
 
 /*---------------------------------------------------------
@@ -413,10 +414,9 @@ bool MidiFile::skip(qint64 len)
 int MidiFile::getvl()
       {
       int l = 0;
-      for (int i = 0;i < 16; i++) {
+      for (int i = 0; i < 16; i++) {
             uchar c;
-            if (read(&c, 1))
-                  return -1;
+            read(&c, 1);
             l += (c & 0x7f);
             if (!(c & 0x80)) {
                   return l;
@@ -477,15 +477,12 @@ Event* MidiFile::readEvent()
 
       int nclick = getvl();
       if (nclick == -1) {
-            printf("readEvent: error 1\n");
+            printf("readEvent: error 1(getvl)\n");
             return 0;
             }
       click += nclick;
       for (;;) {
-            if (read(&me, 1)) {
-                  printf("readEvent: error 2\n");
-                  return 0;
-                  }
+            read(&me, 1);
             if (me >= 0xf1 && me <= 0xfe && me != 0xf7) {
                   printf("Midi: Unknown Message 0x%02x\n", me & 0xff);
                   }
@@ -506,11 +503,7 @@ Event* MidiFile::readEvent()
                   }
             data    = new unsigned char[len+1];
             dataLen = len;
-            if (read(data, len)) {
-                  printf("readEvent: error 4\n");
-                  delete data;
-                  return 0;
-                  }
+            read(data, len);
             data[dataLen] = 0;    // always terminate with zero
             if (data[len-1] != 0xf7) {
                   printf("SYSEX does not end with 0xf7!\n");
@@ -528,23 +521,15 @@ Event* MidiFile::readEvent()
       if (me == ME_META) {
             status = -1;                  // no running status
             uchar type;
-            if (read(&type, 1)) {
-                  printf("readEvent: error 5\n");
-                  return 0;
-                  }
+            read(&type, 1);
             dataLen = getvl();                // read len
             if (dataLen == -1) {
                   printf("readEvent: error 6\n");
                   return 0;
                   }
             data = new unsigned char[dataLen + 1];
-            if (dataLen) {
-                  if (read(data, dataLen)) {
-                        printf("readEvent: error 7\n");
-                        delete data;
-                        return 0;
-                        }
-                  }
+            if (dataLen)
+                  read(data, dataLen);
             data[dataLen] = 0;      // always terminate with zero so we get valid C++ strings
             Event* e = new Event(ME_META);
             e->setOntime(ontime);
@@ -557,10 +542,7 @@ Event* MidiFile::readEvent()
       if (me & 0x80) {                     // status byte
             status   = me;
             sstatus  = status;
-            if (read(&a, 1)) {
-                  printf("readEvent: error 9\n");
-                  return 0;
-                  }
+            read(&a, 1);
             }
       else {
             if (status == -1) {
@@ -582,10 +564,7 @@ Event* MidiFile::readEvent()
             case ME_POLYAFTER:
             case ME_CONTROLLER:        // controller
             case ME_PITCHBEND:        // pitch bend
-                  if (read(&b, 1)) {
-                        printf("readEvent: error 15\n");
-                        return 0;
-                        }
+                  read(&b, 1);
                   break;
             }
       switch (status & 0xf0) {

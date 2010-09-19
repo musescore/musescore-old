@@ -438,27 +438,30 @@ void Score::undoChangeSubtype(Element* element, int st)
 //   undoChangePitch
 //---------------------------------------------------------
 
-void Score::undoChangePitch(Note* note, int pitch, int tpc, int userAccidental, int line, int fret)
+void Score::undoChangePitch(Note* note, int pitch, int tpc, AccidentalType userAccidental, int line, int fret)
       {
+      QList<Staff*> staffList;
       Staff* ostaff = note->staff();
       LinkedStaves* linkedStaves = ostaff->linkedStaves();
-      if (linkedStaves) {
-            Chord* chord = note->chord();
-            Segment* segment = chord->segment();
-            Measure* measure = segment->measure();
-            foreach(Staff* staff, linkedStaves->staves()) {
-                  if (staff == ostaff)
-                        continue;
-                  Score* score = staff->score();
-                  Measure* m   = score->tick2measure(measure->tick());
-                  Segment* s   = m->findSegment(segment->segmentType(), segment->tick());
-                  int staffIdx = score->staffIdx(staff);
-                  Chord* c     = static_cast<Chord*>(s->element(staffIdx * VOICES + chord->voice()));
-                  Note* n      = c->findNote(note->pitch());
-                  undo()->push(new ChangePitch(n, pitch, tpc, userAccidental, line, fret));
-                  }
+      if (linkedStaves)
+            staffList = linkedStaves->staves();
+      else
+            staffList.append(ostaff);
+
+      Chord* chord = note->chord();
+      int noteIndex = chord->notes().indexOf(note);
+      Segment* segment = chord->segment();
+      Measure* measure = segment->measure();
+      foreach(Staff* staff, linkedStaves->staves()) {
+            Score* score = staff->score();
+            Measure* m   = score->tick2measure(measure->tick());
+            Segment* s   = m->findSegment(segment->segmentType(), segment->tick());
+            int staffIdx = score->staffIdx(staff);
+            Chord* c     = static_cast<Chord*>(s->element(staffIdx * VOICES + chord->voice()));
+            Note* n      = c->notes().at(noteIndex);
+            undo()->push(new ChangePitch(n, pitch, tpc, userAccidental, line, fret));
+            score->updateAccidentals(m, staffIdx);
             }
-      undo()->push(new ChangePitch(note, pitch, tpc, userAccidental, line, fret));
       }
 
 //---------------------------------------------------------
@@ -548,17 +551,6 @@ void Score::undoChangeDynamic(Dynamic* e, int velocity, DynamicType type)
       {
       undo()->push(new ChangeDynamic(e, velocity, type));
       }
-
-#if 0
-//---------------------------------------------------------
-//   undoChangeCopyright
-//---------------------------------------------------------
-
-void Score::undoChangeCopyright(const QString& s)
-      {
-      undo()->push(new ChangeCopyright(this, s));
-      }
-#endif
 
 //---------------------------------------------------------
 //   undoTransposeHarmony
@@ -1221,9 +1213,11 @@ void ChangeColor::flip()
 //---------------------------------------------------------
 
 ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc,
-   int _userAccidental, int l, int f)
+   AccidentalType _userAccidental, int l, int f)
       {
       note  = _note;
+      if (_note == 0)
+            abort();
       pitch = _pitch;
       tpc   = _tpc;
       line  = l;
@@ -1233,11 +1227,11 @@ ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc,
 
 void ChangePitch::flip()
       {
-      int f_pitch   = note->pitch();
-      int f_tpc     = note->tpc();
-      int f_userAcc = note->userAccidental();
-      int f_line    = note->line();
-      int f_fret    = note->fret();
+      int f_pitch                 = note->pitch();
+      int f_tpc                   = note->tpc();
+      AccidentalType f_userAcc = note->userAccidental();
+      int f_line                  = note->line();
+      int f_fret                  = note->fret();
 
       note->setPitch(pitch, tpc);
       note->setUserAccidental(userAccidental);

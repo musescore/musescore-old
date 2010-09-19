@@ -3818,7 +3818,7 @@ void ScoreView::cmdChangeEnharmonic(bool up)
                   int fret = staff->part()->instr()->tablature()->fret(n->pitch(), string);
                   if (fret != -1) {
                         _score->startCmd();
-                        _score->undoChangePitch(n, n->pitch(), n->tpc(), 0, string, fret);
+                        _score->undoChangePitch(n, n->pitch(), n->tpc(), ACC_NONE, string, fret);
                         _score->endCmd();
                         }
                   }

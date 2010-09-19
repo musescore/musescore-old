@@ -117,7 +117,7 @@ class Note : public Element {
       bool _mirror;           ///< True if note is mirrored at stem.
       DirectionH _userMirror; ///< user override of mirror
 
-      int _userAccidental;
+      AccidentalType _userAccidental;
       Accidental* _accidental;
 
       ElementList _el;        ///< fingering, other text, symbols or images
@@ -142,7 +142,7 @@ class Note : public Element {
       virtual ElementType type() const { return NOTE; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
-      void layout1(char* tversatz);
+      void layout10(char* tversatz);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void setTrack(int val);
 
@@ -171,9 +171,9 @@ class Note : public Element {
       void setAccidentalType(int);
       int accidentalType() const;
 
-      int userAccidental() const      { return _userAccidental; }
-      void setUserAccidental(int v)   { _userAccidental = v;    }
-      Accidental* accidental() const  { return _accidental;     }
+      AccidentalType userAccidental() const    { return _userAccidental; }
+      void setUserAccidental(AccidentalType v) { _userAccidental = v;    }
+      Accidental* accidental() const              { return _accidental;     }
 
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n);
@@ -249,6 +249,7 @@ class Note : public Element {
       void setBend(Bend* b)            { _bend = b;    }
       int customizeVelocity(int velo) const;
       NoteDot* dot(int n)              { return _dots[n];           }
+      void updateAccidental(char* tversatz);
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);

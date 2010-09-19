@@ -279,7 +279,7 @@ void Note::setTpc(int v)
             abort();
             }
       _tpc = v;
-      _userAccidental = 0;
+      _userAccidental = ACC_NONE;
       }
 
 //---------------------------------------------------------
@@ -731,7 +731,7 @@ void Note::read(QDomElement e)
             else if (tag == "headType")
                   _headType = NoteHeadType(i);
             else if (tag == "userAccidental")
-                  setUserAccidental(i);
+                  setUserAccidental(AccidentalType(i));
             else if (tag == "Accidental") {
                   Accidental* a = new Accidental(score());
                   a->read(e);
@@ -841,7 +841,7 @@ void Note::endDrag()
             npitch   = line2pitch(_line, clef, key);
             tpc      = pitch2tpc(npitch, key);
             }
-      score()->undoChangePitch(this, npitch, tpc, 0, nLine, _fret);
+      score()->undoChangePitch(this, npitch, tpc, ACC_NONE, nLine, _fret);
       score()->select(this, SELECT_SINGLE, 0);
       }
 
@@ -924,9 +924,7 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   return e;
 
             case ACCIDENTAL:
-                  score()->changeAccidental(this, e->subtype());
-
-//                  ch->segment()->measure()->layoutStage1(); // create actual accidental
+                  score()->changeAccidental(this, AccidentalType(e->subtype()));
                   if (_accidental)
                         score()->select(_accidental);
                   break;
@@ -1241,11 +1239,11 @@ void Note::layout()
       }
 
 //---------------------------------------------------------
-//   layout1
+//   layout10
 //    compute actual accidental and line
 //---------------------------------------------------------
 
-void Note::layout1(char* tversatz)
+void Note::layout10(char* tversatz)
       {
       if (staff()->useTablature()) {
             if (_accidental) {
@@ -1268,6 +1266,8 @@ void Note::layout1(char* tversatz)
                   _line += 7;
             else
                   _line -= (tpcPitch/12)*7;
+
+            // calculate accidental
 
             int acci = ACC_NONE;
             if (_userAccidental) {
@@ -1512,4 +1512,60 @@ void Note::endEdit()
             setUserOff(QPointF());
             }
       }
+
+//---------------------------------------------------------
+//   updateAccidental
+//---------------------------------------------------------
+
+void Note::updateAccidental(char* tversatz)
+      {
+      _line          = tpc2step(_tpc) + (_pitch/12) * 7;
+      int tpcPitch   = tpc2pitch(_tpc);
+      if (tpcPitch < 0)
+            _line += 7;
+      else
+            _line -= (tpcPitch/12)*7;
+
+      // calculate accidental
+
+      AccidentalType acci = ACC_NONE;
+      if (_userAccidental)
+            acci = _userAccidental;
+      else  {
+            int accVal = tpc2alter(_tpc);
+            if ((accVal != tversatz[int(_line)]) || hidden()) {
+                  if (_tieBack == 0)
+                        tversatz[int(_line)] = accVal;
+                  acci = Accidental::value2subtype(accVal);
+                  if (acci == ACC_NONE)
+                        acci = ACC_NATURAL;
+                  }
+            }
+      if (acci != ACC_NONE && !_tieBack && !_hidden) {
+            if (_accidental == 0) {
+                  Accidental* a = new Accidental(score());
+                  a->setParent(this);
+                  a->setSubtype(acci);
+                  score()->undoAddElement(a);
+                  }
+            else if (_accidental->subtype() != acci) {
+                  Accidental* a = new Accidental(score());
+                  a->setParent(this);
+                  a->setSubtype(acci);
+                  score()->undoChangeElement(_accidental, a);
+                  }
+            }
+      else {
+            if (_accidental)
+                  score()->undoRemoveElement(_accidental);
+            }
+      //
+      // calculate the real note line depending on clef
+      //
+      Staff* s = score()->staff(staffIdx() + chord()->staffMove());
+      int tick = chord()->tick();
+      int clef = s->clefList()->clef(tick);
+      _line    = 127 - _line - 82 + clefTable[clef].yOffset;
+      }
+
 

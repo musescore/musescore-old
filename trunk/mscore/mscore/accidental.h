@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2004-2009 Werner Schweer and others
+//  Copyright (C) 2004-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -27,14 +27,9 @@
 */
 
 #include "element.h"
+#include "globals.h"
 
 class Note;
-
-// Accidental Subtype Values
-
-enum {
-      ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL
-      };
 
 struct SymElement {
       int sym;
@@ -48,6 +43,7 @@ struct SymElement {
 
 class Accidental : public Element {
       QList<SymElement> el;
+      bool _hasBracket;
 
    public:
       Accidental(Score* s);
@@ -64,11 +60,13 @@ class Accidental : public Element {
       virtual void startEdit(ScoreView*, const QPointF&) { setGenerated(false); }
 
       int symbol();
-      Note* note() const { return (Note*)parent(); }
+      Note* note() const           { return (Note*)parent(); }
+      bool hasBracket() const      { return _hasBracket;     }
+      void setHasBracket(bool val) { _hasBracket = val;      }
 
       const char* subTypeName() const;
-      static int subtype2value(int);      // return effective pitch offset
-      static int value2subtype(int);
+      static int subtype2value(AccidentalType);      // return effective pitch offset
+      static AccidentalType value2subtype(int);
       };
 
 //---------------------------------------------------------

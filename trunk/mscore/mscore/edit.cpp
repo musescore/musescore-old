@@ -1128,10 +1128,8 @@ void Score::deleteItem(Element* el)
                   else  {
                         // remove segment if empty
                         Segment* seg = chord->segment();
-                        if (seg->isEmpty()) {
-printf("remove Segment %p %s\n", seg, seg->subTypeName());
+                        if (seg->isEmpty())
                               undoRemoveElement(seg);
-                              }
                         }
                   }
                   break;

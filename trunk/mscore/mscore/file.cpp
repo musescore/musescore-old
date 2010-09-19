@@ -1273,16 +1273,6 @@ bool Score::loadMsc(QString name)
       }
 
 //---------------------------------------------------------
-//   elementAdjustReadPos
-//---------------------------------------------------------
-
-static void elementAdjustReadPos(void*, Element* e)
-      {
-      if (e->isMovable())
-            e->adjustReadPos();
-      }
-
-//---------------------------------------------------------
 //   read
 //    return false on error
 //---------------------------------------------------------
@@ -1628,17 +1618,6 @@ printf("incomplete Slur\n");
                   excerpt->setScore(nscore);
                   }
             }
-
-      rebuildMidiMapping();
-      updateChannel();
-
-      _needLayout = true;
-      layoutFlags |= LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO;
-      doLayout();
-
-      // adjust readPos
-      scanElements(0, elementAdjustReadPos);
-
       return true;
       }
 

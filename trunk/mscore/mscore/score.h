@@ -446,7 +446,7 @@ class Score : public QObject {
       void undoChangeChordNoStem(Chord* cr, bool noStem);
       void undoChangeChordRestSpace(ChordRest* cr, Spatium l, Spatium t);
       void undoChangeSubtype(Element* element, int st);
-      void undoChangePitch(Note* note, int pitch, int tpc, int userAccidental, int line, int fret);
+      void undoChangePitch(Note* note, int pitch, int tpc, AccidentalType userAccidental, int line, int fret);
       void spellNotelist(QList<Note*>& notes);
       void undoChangeTpc(Note* note, int tpc);
       void undoChangeBeamMode(ChordRest* cr, BeamMode mode);
@@ -455,7 +455,6 @@ class Score : public QObject {
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeUserOffset(Element* e, const QPointF& offset);
       void undoChangeDynamic(Dynamic* e, int velocity, DynamicType type);
-//      void undoChangeCopyright(const QString&);
       void undoTransposeHarmony(Harmony*, int, int);
       void undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2);
       void undoRemovePart(Part* part, int idx);
@@ -500,8 +499,8 @@ class Score : public QObject {
       // undo/redo ops
       void endUndoRedo(Undo*);
       void addArticulation(int);
-      void changeAccidental(int);
-      void changeAccidental(Note* oNote, int prefix);
+      void changeAccidental(AccidentalType);
+      void changeAccidental(Note* oNote, AccidentalType);
 
       void addElement(Element*);
       void removeElement(Element*);
@@ -659,7 +658,7 @@ class Score : public QObject {
 
       void pasteStaff(QDomElement, ChordRest* dst);
       void toEList(EventMap* events);
-      void toEList(EventMap* events, int firstStaffIdx, int nextStaffIdx);
+      void renderPart(EventMap* events, Part*);
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
 
@@ -808,6 +807,8 @@ class Score : public QObject {
       QMap<QString, QString> metaTags()                       { return _metaTags; }
       QString metaTag(const QString& s) const                 { return _metaTags.value(s);}
       void setMetaTag(const QString& tag, const QString& val) { _metaTags.insert(tag, val); }
+      void updateNotes();
+      void updateAccidentals(Measure* m, int staffIdx);
       };
 
 extern Score* gscore;

@@ -1167,15 +1167,11 @@ void Score::upDown(bool up, bool octave)
       {
       layoutAll   = false;
       startLayout = 0;        // DEBUG
-      ElementList el;
+      QList<Note*> el;
 
       int tick = -1;
       bool playNotes = true;
       foreach(Note* note, selection().noteList()) {
-            if (startLayout == 0)
-                  startLayout = note->chord()->segment()->measure();
-            else if (startLayout != note->chord()->segment()->measure())
-                  layoutAll = true;
             while (note->tieBack())
                   note = note->tieBack()->startNote();
             for (; note; note = note->tieFor() ? note->tieFor()->endNote() : 0) {
@@ -1193,8 +1189,7 @@ void Score::upDown(bool up, bool octave)
       if (el.empty())
             return;
 
-      for (iElement i = el.begin(); i != el.end(); ++i) {
-            Note* oNote = (Note*)(*i);
+      foreach(Note* oNote, el) {
             Part* part  = oNote->staff()->part();
             int pitch   = oNote->pitch();
             int newTpc;
@@ -1227,7 +1222,7 @@ void Score::upDown(bool up, bool octave)
             if ((oNote->pitch() != newPitch) || (oNote->tpc() != newTpc) || oNote->userAccidental()) {
                   if (oNote->accidental())            // to avoid undo() crash
                         undoRemoveElement(oNote->accidental());
-                  undoChangePitch(oNote, newPitch, newTpc, 0, oNote->line(), oNote->fret());
+                  undoChangePitch(oNote, newPitch, newTpc, ACC_NONE, oNote->line(), oNote->fret());
                   oNote->setFret(-1);
                   }
 
@@ -1500,92 +1495,116 @@ void Score::addArticulation(int attr)
 ///   notes.
 //---------------------------------------------------------
 
-void Score::changeAccidental(int idx)
+void Score::changeAccidental(AccidentalType idx)
       {
       foreach(Note* note, selection().noteList())
             changeAccidental(note, idx);
       }
 
-/**
- Change accidental to subtype \a idx for note \a oNote.
-*/
+//---------------------------------------------------------
+//   changeAccidental
+///   Change accidental to subtype \accidental for
+///   note \a note.
+//---------------------------------------------------------
 
-void Score::changeAccidental(Note* note, int accidental)
+void Score::changeAccidental(Note* note, AccidentalType accidental)
       {
-      setLayoutAll(true);
+      QList<Staff*> staffList;
+      Staff* ostaff = note->chord()->staff();
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves)
+            staffList = linkedStaves->staves();
+      else
+            staffList.append(ostaff);
 
-      Chord* chord  = note->chord();
-      Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
-      int tick      = chord->tick();
-      int clef      = estaff->clef(tick);
-      int step      = clefTable[clef].pitchOffset - note->line();
-      while (step < 0)
-            step += 7;
-      step %= 7;
-      int acc = Accidental::subtype2value(accidental);
+      Segment* segment = note->chord()->segment();
+      int voice        = note->chord()->voice();
+      Measure* measure = segment->measure();
+      int tick         = segment->tick();
+      int noteIndex    = note->chord()->notes().indexOf(note);
 
-      if (accidental == ACC_NONE) {
-            if (note->userAccidental() != ACC_NONE) {
-                  note->setUserAccidental(ACC_NONE);
-                  if (note->accidental())
-                        undoRemoveElement(note->accidental());
-                  undoChangePitch(note, note->pitch(), note->tpc(), ACC_NONE, note->line(), note->fret());
-                  return;
-                  }
-            if (note->accidentalType() == ACC_NATURAL)
-                  acc = chord->measure()->findAccidental2(note);
-            if (note->accidental())
-                  undoRemoveElement(note->accidental());
-            }
-      //
-      // accidental change may result in pitch change
-      //
-      int tpc    = step2tpc(step, acc);
-      int pitch  = line2pitch(note->line(), clef, 0) + acc;
-
-      int acc2    = chord->measure()->findAccidental2(note);
-      int accType = Accidental::value2subtype(acc);
-      if (accType == ACC_NONE)
-            accType = ACC_NATURAL;
-      int user   = ((acc2 == acc) || (accType != accidental)) ? accidental : ACC_NONE;
-
-// printf("Accidental %d(%d) - %d(%d) user %d\n", accidental, acc, accType, acc2, user);
-
-      undoChangePitch(note, pitch, tpc, user, note->line(), note->fret());
-      //
-      // handle ties
-      //
-      if (note->tieBack()) {
-            undoRemoveElement(note->tieBack());
-            if (note->tieFor())
-                  undoRemoveElement(note->tieFor());
-            }
-      else {
-            Note* n = note;
-            while(n->tieFor()) {
-                  n = n->tieFor()->endNote();
-                  undoChangePitch(n, pitch, tpc, user, n->line(), n->fret());
-                  }
-            }
-      if (!note->staff()->useTablature()) {
-            int acci = user ? user : accType;
-            if (acci != ACC_NONE && !note->tieBack() && !note->hidden()) {
-                  if (note->accidental() == 0) {
-                        Accidental* a = new Accidental(this);
-                        a->setParent(note);
-                        a->setSubtype(acci);
-                        undoAddElement(a);
-                        }
-                  else if (note->accidental()->subtype() != acci) {
-                        Accidental* a = new Accidental(this);
-                        a->setParent(note);
-                        a->setSubtype(acci);
-                        undoChangeElement(note->accidental(), a);
-                        }
+      foreach(Staff* st, staffList) {
+            Score* score = st->score();
+            Measure* m;
+            Segment* s;
+            if (score == this) {
+                  m = measure;
+                  s = segment;
                   }
             else {
-                  if (note->accidental())
-                        undoRemoveElement(note->accidental());
+                  m   = score->tick2measure(measure->tick());
+                  s   = m->findSegment(segment->segmentType(), segment->tick());
+                  }
+            int staffIdx  = score->staffIdx(st);
+            Chord* chord  = static_cast<Chord*>(s->element(staffIdx * VOICES + voice));
+            Note* n       = chord->notes().at(noteIndex);
+            Staff* estaff = staff(staffIdx + chord->staffMove());
+            int clef      = estaff->clef(tick);
+            int step      = clefTable[clef].pitchOffset - note->line();
+
+            while (step < 0)
+                  step += 7;
+            step %= 7;
+            int acc = Accidental::subtype2value(accidental);
+
+            if (accidental == ACC_NONE) {
+                  if (n->userAccidental() != ACC_NONE) {
+                        n->setUserAccidental(ACC_NONE);
+                        if (n->accidental())
+                              undoRemoveElement(n->accidental());
+                        undo()->push(new ChangePitch(n, n->pitch(), n->tpc(), ACC_NONE, n->line(), n->fret()));
+                        continue;
+                        }
+                  if (n->accidentalType() == ACC_NATURAL)
+                        acc = m->findAccidental2(n);
+                  if (n->accidental())
+                        undoRemoveElement(n->accidental());
+                  }
+            //
+            // accidental change may result in pitch change
+            //
+            int tpc    = step2tpc(step, acc);
+            int pitch  = line2pitch(n->line(), clef, 0) + acc;
+            int acc2   = m->findAccidental2(n);
+            AccidentalType accType = (accidental == ACC_NONE && acc2) ? ACC_NATURAL : accidental;
+            AccidentalType user    = ((acc2 == acc) || (accType != accidental)) ? accidental : ACC_NONE;
+
+            undoChangePitch(n, pitch, tpc, user, n->line(), n->fret());
+            //
+            // handle ties
+            //
+            if (n->tieBack()) {
+                  undoRemoveElement(n->tieBack());
+                  if (n->tieFor())
+                        undoRemoveElement(n->tieFor());
+                  }
+            else {
+                  Note* nn = n;
+                  while (nn->tieFor()) {
+                        nn = nn->tieFor()->endNote();
+                        undoChangePitch(nn, pitch, tpc, user, nn->line(), nn->fret());
+                        }
+                  }
+            if (!st->useTablature()) {
+                  int acci = user ? user : accType;
+                  if (acci != ACC_NONE && !n->tieBack() && !n->hidden()) {
+                        if (n->accidental() == 0) {
+                              Accidental* a = new Accidental(score);
+                              a->setParent(n);
+                              a->setSubtype(acci);
+                              undoAddElement(a);
+                              }
+                        else if (n->accidental()->subtype() != acci) {
+                              Accidental* a = new Accidental(score);
+                              a->setParent(n);
+                              a->setSubtype(acci);
+                              undoChangeElement(n->accidental(), a);
+                              }
+                        }
+                  else {
+                        if (n->accidental())
+                              undoRemoveElement(n->accidental());
+                        }
                   }
             }
       }
@@ -1977,15 +1996,15 @@ void Score::cmd(const QAction* a)
             else if (cmd == "beam-32")
                   padToggle(PAD_BEAM32);
             else if (cmd == "sharp2")
-                  changeAccidental(3);
+                  changeAccidental(ACC_SHARP2);
             else if (cmd == "sharp")
-                  changeAccidental(1);
+                  changeAccidental(ACC_SHARP);
             else if (cmd == "nat")
-                  changeAccidental(5);
+                  changeAccidental(ACC_NATURAL);
             else if (cmd == "flat")
-                  changeAccidental(2);
+                  changeAccidental(ACC_FLAT);
             else if (cmd == "flat2")
-                  changeAccidental(4);
+                  changeAccidental(ACC_FLAT2);
             else if (cmd == "flip")
                   cmdFlip();
             else if (cmd == "stretch+")
