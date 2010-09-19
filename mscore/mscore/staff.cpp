@@ -532,3 +532,14 @@ void LinkedStaves::remove(Staff* staff)
       _staves.removeOne(staff);
       }
 
+//---------------------------------------------------------
+//   primaryStaff
+///   if there are linked staves, the primary staff is
+///   the one who is played back
+//---------------------------------------------------------
+
+bool Staff::primaryStaff() const
+      {
+      return !_linkedStaves || (_linkedStaves->staves().front() == this);
+      }
+

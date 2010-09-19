@@ -168,6 +168,15 @@ struct MidiRemote {
       int data;         // pitch or controller number
       };
 
+//---------------------------------------------------------
+//    Accidental Values
+//---------------------------------------------------------
+
+enum AccidentalType {
+      ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL
+      };
+
+
 extern const char* stateName(ScoreState);
 
 static const int VOICES = 4;

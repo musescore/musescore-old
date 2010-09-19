@@ -237,17 +237,23 @@ bool ExportMidi::write(const QString& name)
       QList<MidiTrack*>* tracks = mf.tracks();
       int nstaves = cs->nstaves();
 
-      for (int i = 0; i < nstaves; ++i)
-            tracks->append(new MidiTrack(&mf));
+      foreach(Staff* staff, cs->staves()) {
+            if (staff->primaryStaff())
+                  continue;
+            MidiTrack* t= new MidiTrack(&mf);
+            t->setStaff(staff);
+            tracks->append(t);
+            }
 
       cs->updateRepeatList(preferences.midiExpandRepeats);
       writeHeader();
 
-      foreach (Staff* staff, cs->staves()) {
+      foreach (MidiTrack* track, *tracks) {
+            Staff* staff     = track->staff();
+//            if (staff == 0)
+//                  continue;
             Part* part       = staff->part();
             int channel      = part->midiChannel();
-            int staffIdx     = staff->idx();
-            MidiTrack* track = tracks->at(staffIdx);
             track->setOutPort(0);
             track->setOutChannel(channel);
 
@@ -273,24 +279,28 @@ bool ExportMidi::write(const QString& name)
                   track->addCtrl(0, channel, CTRL_REVERB_SEND, part->reverb());
                   track->addCtrl(0, channel, CTRL_CHORUS_SEND, part->chorus());
                   }
+
+
             EventMap events;
-            cs->toEList(&events, staffIdx, staffIdx+1);
-            for (EventMap::const_iterator i = events.constBegin(); i != events.constEnd(); ++i) {
-                  if (i.value()->type() == ME_NOTEON) {
-                        Event* n = i.value();
+            cs->renderPart(&events, part);
+
+            for (EventMap::const_iterator i = events.begin(); i != events.end(); ++i) {
+                  Event* event = i.value();
+                  if (event->channel() != channel)
+                        continue;
+                  if (event->type() == ME_NOTEON) {
                         Event* ne = new Event(ME_NOTEON);
                         ne->setOntime(i.key());
-                        ne->setChannel(n->channel());
-                        ne->setPitch(n->pitch());
-                        ne->setVelo(n->velo());
+                        ne->setChannel(event->channel());
+                        ne->setPitch(event->pitch());
+                        ne->setVelo(event->velo());
                         track->insert(ne);
                         }
-                  else if (i.value()->type() == ME_CONTROLLER) {
-                        Event* n = i.value();
-                        track->addCtrl(i.key(), n->channel(), n->controller(), n->value());
+                  else if (event->type() == ME_CONTROLLER) {
+                        track->addCtrl(i.key(), event->channel(), event->controller(), event->value());
                         }
                   else {
-                        printf("writeMidi: unknown midi event 0x%02x\n", i.value()->type());
+                        printf("writeMidi: unknown midi event 0x%02x\n", event->type());
                         }
                   }
             }

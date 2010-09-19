@@ -49,7 +49,8 @@ class LinkedStaves {
 
    public:
       LinkedStaves() {}
-      QList<Staff*>& staves() { return _staves; }
+      QList<Staff*>& staves()             { return _staves; }
+      const QList<Staff*>& staves() const { return _staves; }
       void add(Staff*);
       void remove(Staff*);
       bool isEmpty() const { return _staves.isEmpty(); }
@@ -170,6 +171,7 @@ class Staff {
       LinkedStaves* linkedStaves() const    { return _linkedStaves; }
       void setLinkedStaves(LinkedStaves* l) { _linkedStaves = l;    }
       void linkTo(Staff* staff);
+      bool primaryStaff() const;
       };
 #endif
 

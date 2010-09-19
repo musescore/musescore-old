@@ -129,7 +129,6 @@ class MidiFile {
    protected:
       // write
       bool write(const void*, qint64);
-      bool skip(qint64);
       void writeShort(int);
       void writeLong(int);
       bool writeTrack(const MidiTrack*);
@@ -138,12 +137,13 @@ class MidiFile {
       void writeStatus(int type, int channel);
 
       // read
-      bool read(void*, qint64);
+      void read(void*, qint64);
       int getvl();
       int readShort();
       int readLong();
       Event* readEvent();
       bool readTrack();
+      void skip(qint64);
 
       void resetRunningStatus() { status = -1; }
 

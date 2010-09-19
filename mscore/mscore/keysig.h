@@ -29,11 +29,8 @@ class Segment;
 
 //---------------------------------------------------------
 //   KeySig
+///   The KeySig class represents a Key Signature on a staff
 //---------------------------------------------------------
-
-/**
- The KeySig class represents a Key Signature on a staff
-*/
 
 struct KeySym {
       int sym;

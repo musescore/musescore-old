@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -85,6 +85,7 @@ Accidental::Accidental(Score* s)
    : Element(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      _hasBracket = false;
       }
 
 //---------------------------------------------------------
@@ -129,11 +130,11 @@ void Accidental::setSubtype(int i)
       {
       // change old coding
       switch(i) {
-            case 6:  i = 1 + 0x8000; break;
-            case 7:  i = 2 + 0x8000; break;
-            case 8:  i = 3 + 0x8000; break;
-            case 9:  i = 4 + 0x8000; break;
-            case 10: i = 5 + 0x8000; break;
+            case 6:  i = 1; _hasBracket = true; break;
+            case 7:  i = 2; _hasBracket = true; break;
+            case 8:  i = 3; _hasBracket = true; break;
+            case 9:  i = 4; _hasBracket = true; break;
+            case 10: i = 5; _hasBracket = true; break;
             }
       Element::setSubtype(i);
       }
@@ -145,7 +146,7 @@ void Accidental::setSubtype(int i)
 int Accidental::symbol()
       {
       int s;
-      switch (subtype() & 0x7fff) {
+      switch (subtype()) {
             default: printf("illegal accidental %d\n", subtype() & 0x7fff); abort();
             case  ACC_NONE:    return -1;
             case  ACC_SHARP:   s = sharpSym;             break;
@@ -188,14 +189,13 @@ int Accidental::symbol()
 
 void Accidental::layout()
       {
-      int i = subtype();
       el.clear();
 
       double m = magS();
       QRectF r;
 
       QPointF pos;
-      if (i & 0x8000) {
+      if (_hasBracket) {
             SymElement e(leftparenSym, 0.0);
             el.append(e);
             r |= symbols[score()->symIdx()][leftparenSym].bbox(m);
@@ -208,7 +208,7 @@ void Accidental::layout()
       r |= symbols[score()->symIdx()][s].bbox(m);
       pos += symbols[score()->symIdx()][s].attach(m);
 
-      if (i & 0x8000) {
+      if (_hasBracket) {
             double x = pos.x();     // symbols[s].width(m) + symbols[s].bbox(m).x();
             SymElement e(rightparenSym, x);
             el.append(e);
@@ -222,9 +222,10 @@ void Accidental::layout()
 //    returns the resulting pitch offset
 //---------------------------------------------------------
 
-int Accidental::subtype2value(int st)
+int Accidental::subtype2value(AccidentalType st)
       {
-      switch(st & 0xfff) {
+      switch(st) {
+            default:
             case ACC_NONE:    return 0;
             case ACC_SHARP:   return 1;
             case ACC_SHARP2:  return 2;
@@ -238,7 +239,7 @@ int Accidental::subtype2value(int st)
 //   value2subtype
 //---------------------------------------------------------
 
-int Accidental::value2subtype(int v)
+AccidentalType Accidental::value2subtype(int v)
       {
       switch(v) {
             case 0:  return ACC_NONE;
@@ -250,7 +251,7 @@ int Accidental::value2subtype(int v)
                   printf("value2subtype: illegal accidental val %d\n", v);
                   abort();
             }
-      return 0;
+      return ACC_NONE;
       }
 
 //---------------------------------------------------------
@@ -281,7 +282,8 @@ Element* Accidental::drop(ScoreView*, const QPointF&, const QPointF&, Element* e
       {
       switch(e->type()) {
             case ACCIDENTAL_BRACKET:
-                  score()->changeAccidental(note(), subtype() | 0x8000);
+                  _hasBracket = true;     // TODO: make undoable
+                  // score()->changeAccidental(note(), subtype() | 0x8000);
                   break;
 
             default:
