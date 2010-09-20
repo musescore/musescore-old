@@ -4130,7 +4130,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Rewind</source>
-        <translation type="unfinished">巻き戻し</translation>
+        <translation>巻き戻し</translation>
     </message>
     <message>
         <source>Play</source>
@@ -8138,7 +8138,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Enter rest</source>
-        <translation type="unfinished"/>
+        <translation>休符を入力</translation>
     </message>
     <message>
         <source>Rest</source>
@@ -8699,7 +8699,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Tambourine</source>
-        <translation type="unfinished"/>
+        <translation>タンバリン</translation>
     </message>
     <message>
         <source>open high conga</source>
@@ -9471,27 +9471,27 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished"/>
+        <translation>上向き三角フェルマータ（短い）</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished"/>
+        <translation>下向き三角フェルマータ（短い）</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished"/>
+        <translation>上向き方形フェルマータ（長い）</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished"/>
+        <translation>下向き方形フェルマータ（長い）</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation>上向き方形フェルマータ（とても長い）</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation>下向き方形フェルマータ（とても長い）</translation>
     </message>
     <message>
         <source>thumb</source>
@@ -9507,7 +9507,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>staccato</source>
-        <translation type="unfinished">スタッカート</translation>
+        <translation>スタッカート</translation>
     </message>
     <message>
         <source>ustaccatissimo</source>
@@ -9519,7 +9519,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>tenuto</source>
-        <translation type="unfinished">テヌート</translation>
+        <translation>テヌート</translation>
     </message>
     <message>
         <source>uportato</source>
@@ -9607,7 +9607,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>arpeggio</source>
-        <translation type="unfinished"/>
+        <translation>アルペジオ</translation>
     </message>
     <message>
         <source>trillelement</source>

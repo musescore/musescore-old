@@ -754,7 +754,7 @@ line break&#13;
     </message>
     <message>
         <source>Add</source>
-        <translation>Hozzáad</translation>
+        <translation>Hozzáadás</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -3216,7 +3216,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>Megnyitás és &amp;legutóbbi</translation>
+        <translation>&amp;Legutóbbi megnyitása</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -5390,7 +5390,7 @@ Próbáld más helyre menteni.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Párbeszédablak</translation>
+        <translation>Dialógus</translation>
     </message>
     <message>
         <source>0</source>
@@ -6504,17 +6504,17 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Ablak</translation>
+        <translation>Űrlap</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>elsőAkkord</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>másodikAkkord</translation>
     </message>
 </context>
 <context>
@@ -8641,27 +8641,27 @@ p, li { white-space: pre-wrap; }
     <name>drumset</name>
     <message>
         <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Akusztikus basszusdob</translation>
     </message>
     <message>
         <source>Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Basszusdob</translation>
     </message>
     <message>
         <source>Side Stick</source>
-        <translation type="unfinished"/>
+        <translation>Dobverő</translation>
     </message>
     <message>
         <source>Snare (Acoustic)</source>
-        <translation type="unfinished"/>
+        <translation>Pergődob (akusztikus)</translation>
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation type="unfinished"/>
+        <translation>Pergődob (elektromos)</translation>
     </message>
     <message>
         <source>Tom 5</source>
-        <translation type="unfinished"/>
+        <translation>Tom-tom 5</translation>
     </message>
     <message>
         <source>Hi-Hat Closed</source>
@@ -8669,7 +8669,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 4</source>
-        <translation type="unfinished"/>
+        <translation>Tom-tom 4</translation>
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
@@ -8677,7 +8677,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 3</source>
-        <translation type="unfinished"/>
+        <translation>Tom-tom 3</translation>
     </message>
     <message>
         <source>Hi-Hat Open</source>
@@ -8685,11 +8685,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 2</source>
-        <translation type="unfinished"/>
+        <translation>Tom-tom 2</translation>
     </message>
     <message>
         <source>Tom 1</source>
-        <translation type="unfinished"/>
+        <translation>Tom-tom 1</translation>
     </message>
     <message>
         <source>Crash 1</source>
@@ -8697,7 +8697,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom</source>
-        <translation type="unfinished"/>
+        <translation>Tom-tom</translation>
     </message>
     <message>
         <source>Ride</source>
@@ -8705,7 +8705,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished"/>
+        <translation>Porcelán</translation>
     </message>
     <message>
         <source>Ride (Bell)</source>
@@ -8713,7 +8713,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tambourine</source>
-        <translation type="unfinished"/>
+        <translation>Csörgődob</translation>
     </message>
     <message>
         <source>open high conga</source>

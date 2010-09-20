@@ -3172,7 +3172,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Noteinnsetting</translation>
+        <translation>Noteskriving</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -3244,7 +3244,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation>Noteinnsettingsmodus</translation>
+        <translation>Noteskrivingsmodus</translation>
     </message>
     <message>
         <source>edit mode</source>
@@ -4364,7 +4364,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation>Noteinnsetting:</translation>
+        <translation>Noteskriving:</translation>
     </message>
     <message>
         <source>Application Font</source>
@@ -4452,7 +4452,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Noteinnsetting</translation>
+        <translation>Noteskriving</translation>
     </message>
     <message>
         <source>Enable midi input</source>
@@ -6893,7 +6893,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Noteinnsetting</translation>
+        <translation>Noteskriving</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
@@ -7541,7 +7541,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Input Toolbar</source>
-        <translation>Verktøylinje for noteinnsetting</translation>
+        <translation>Verktøylinje for noteskriving</translation>
     </message>
     <message>
         <source>Status Bar</source>
@@ -8117,7 +8117,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note input mode</source>
-        <translation>Noteinnsettingsmodus</translation>
+        <translation>Noteskrivingsmodus</translation>
     </message>
     <message>
         <source>Pitch spell</source>

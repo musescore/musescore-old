@@ -55,14 +55,14 @@ p, li { white-space: pre-wrap; }
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>Propriedades de Articulção...</translation>
+        <translation>Propriedades de Articulação...</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>Propriedades de Articulção</translation>
+        <translation>MuseScore: Propriedades de Articulação</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -131,7 +131,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bottom:</source>
-        <translation>Topo:</translation>
+        <translation>Fundo:</translation>
     </message>
 </context>
 <context>
@@ -142,7 +142,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation>Arpeggio</translation>
+        <translation>Arpejo</translation>
     </message>
     <message>
         <source>Tremolo</source>
@@ -8634,11 +8634,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Snare (Acoustic)</source>
-        <translation type="unfinished"/>
+        <translation>Caixa (Acústica)</translation>
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation type="unfinished"/>
+        <translation>Caixa (Eléctronica)</translation>
     </message>
     <message>
         <source>Tom 5</source>

@@ -42,7 +42,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>Unstabile Vorabversion für: </translation>
+        <translation>Instabile Vorabversion für: </translation>
     </message>
     <message>
         <source>Version: </source>
@@ -790,7 +790,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation>bb (Doppel b)</translation>
+        <translation>bb (Doppel-b)</translation>
     </message>
     <message>
         <source>b (flat)</source>
@@ -1037,7 +1037,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation>Bindebogen Vorwärts:</translation>
+        <translation>Bindebogen vorwärts:</translation>
     </message>
     <message>
         <source>SlurBack:</source>
@@ -1072,7 +1072,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Save As</source>
-        <translation>Sichern Als</translation>
+        <translation>Sichern als</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
@@ -1137,7 +1137,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MIDI Values</source>
-        <translation>MIDI Werte</translation>
+        <translation>MIDI-Werte</translation>
     </message>
     <message>
         <source>Apply to:</source>
@@ -1176,7 +1176,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MuseScore: Load Drumset</source>
-        <translation>MuseScore: Drumset Laden</translation>
+        <translation>MuseScore: Drumset laden</translation>
     </message>
     <message>
         <source>MuseScore drumset (*.drm)</source>
@@ -1247,7 +1247,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Default Voice:</source>
-        <translation>Default Stimme:</translation>
+        <translation>Vorgabe-Stimme:</translation>
     </message>
     <message>
         <source>Pitch</source>
@@ -1314,7 +1314,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>MuseScore: Eigenschaften Instrumente ändern</translation>
+        <translation>MuseScore: Instrument-Eigenschaften ändern</translation>
     </message>
     <message>
         <source>Transpose</source>
@@ -1611,7 +1611,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>beam width units</source>
-        <translation>Balkenbreite Einheit</translation>
+        <translation>Balkenbreiten-Einheit</translation>
     </message>
     <message>
         <source>Sizes</source>
@@ -1668,7 +1668,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation>Erzeuge Taktart Hinweis</translation>
+        <translation>Erzeuge Taktart-Hinweis</translation>
     </message>
     <message>
         <source>Score</source>
@@ -1757,7 +1757,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation>Erzeuge Tonartwechsel Hinweis</translation>
+        <translation>Erzeuge Tonartwechsel-Hinweis</translation>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
@@ -2307,7 +2307,7 @@ space unit</extracomment>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
-        <translation>MuseScore: Instrumenten Liste</translation>
+        <translation>MuseScore: Instrumentenliste</translation>
     </message>
 </context>
 <context>
@@ -2381,7 +2381,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;</source>
-        <translation>MuseScore Instrumente (*.xml);;</translation>
+        <translation>MuseScore-Instrumente (*.xml);;</translation>
     </message>
     <message>
         <source>Open Instruments File
@@ -2409,7 +2409,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
-        <translation>MuseScore Instrumente (*.xml);;Alle Dateien (*)</translation>
+        <translation>MuseScore-Instrumente (*.xml);;Alle Dateien (*)</translation>
     </message>
     <message>
         <source>Staff %1</source>
@@ -2779,7 +2779,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation>Layout Dehnung</translation>
+        <translation>Layout-Dehnung</translation>
     </message>
     <message>
         <source>repeat count:</source>
@@ -3087,7 +3087,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>To Coda</source>
-        <translation>zu Coda</translation>
+        <translation>zur Coda</translation>
     </message>
     <message>
         <source>4/4 common time</source>
@@ -3095,63 +3095,63 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>G major, E minor</source>
-        <translation>G dur, E moll</translation>
+        <translation>G-Dur, E-Moll</translation>
     </message>
     <message>
         <source>Cb major, Ab minor</source>
-        <translation>Ces dur, As moll</translation>
+        <translation>Ces-Dur, As-Moll</translation>
     </message>
     <message>
         <source>D major, B minor</source>
-        <translation>D dur, H moll</translation>
+        <translation>D-Dur, H-Moll</translation>
     </message>
     <message>
         <source>Gb major, Eb minor</source>
-        <translation>Ges dur, Es moll</translation>
+        <translation>Ges-Dur, Es-Moll</translation>
     </message>
     <message>
         <source>A major, F# minor</source>
-        <translation>A dur, Fis moll</translation>
+        <translation>A-Dur, Fis-Moll</translation>
     </message>
     <message>
         <source>Db major, Bb minor</source>
-        <translation>Des dur, Bes moll</translation>
+        <translation>Des-Dur, Bes-Moll</translation>
     </message>
     <message>
         <source>E major, C# minor</source>
-        <translation>E dur, Cis moll</translation>
+        <translation>E-Dur, Cis-Moll</translation>
     </message>
     <message>
         <source>Ab major, F minor</source>
-        <translation>As dur, F moll</translation>
+        <translation>As-Dur, F-Moll</translation>
     </message>
     <message>
         <source>B major, G# minor</source>
-        <translation>H dur, Gis moll</translation>
+        <translation>H-Dur, Gis-Moll</translation>
     </message>
     <message>
         <source>Eb major, C minor</source>
-        <translation>Es dur, C moll</translation>
+        <translation>Es-Dur, C-Moll</translation>
     </message>
     <message>
         <source>F# major, D# minor</source>
-        <translation>Fis dur, Dis moll</translation>
+        <translation>Fis-Dur, Dis-Moll</translation>
     </message>
     <message>
         <source>Bb major, G minor</source>
-        <translation>B dur, G moll</translation>
+        <translation>B-Dur, G-Moll</translation>
     </message>
     <message>
         <source>C# major, A# minor</source>
-        <translation>Cis dur, Ais moll</translation>
+        <translation>Cis-Dur, Ais-Moll</translation>
     </message>
     <message>
         <source>F major,  D minor</source>
-        <translation>F dur, D moll</translation>
+        <translation>F-Dur, D-Moll</translation>
     </message>
     <message>
         <source>C major, A minor</source>
-        <translation>C dur, A moll</translation>
+        <translation>C-Dur, A-Moll</translation>
     </message>
     <message>
         <source>15ma</source>
@@ -3401,7 +3401,7 @@ Versuche im "Hilfe"-Menü das "Online-Handbuch" aufzurufen.</translation>
     <message>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation>Das MuseScore Handbuch wurde hier nicht gefunden: 
+        <translation>Das MuseScore-Handbuch wurde hier nicht gefunden: 
 </translation>
     </message>
     <message>
@@ -4206,7 +4206,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation>MuseScore Dateien (*.mscz *mscx *msc);;All (*)</translation>
+        <translation>MuseScore-Dateien (*.mscz *mscx *msc);;All (*)</translation>
     </message>
 </context>
 <context>
@@ -4602,7 +4602,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>Bei der Standardeingabemethode hängt die Tonhöhe der eingegebenen Note von der Tonart ab. Wenn z.B. F in G Dur eingegeben wurde, wird ein F# erzeugt. Bei der alternativen Eigabemethode ist die Tonart irrelevant. Wird F eingegeben, dann wird auch ein F nat erzeugt.</translation>
+        <translation>Bei der Standardeingabemethode hängt die Tonhöhe der eingegebenen Note von der Tonart ab. Wenn z.B. F in G-Dur eingegeben wurde, wird ein F# erzeugt. Bei der alternativen Eigabemethode ist die Tonart irrelevant. Wird F eingegeben, dann wird auch ein F-nat erzeugt.</translation>
     </message>
     <message>
         <source>cz Czech</source>
@@ -4727,7 +4727,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation>Ersetze (C) durch Copyright Symbol © (Nur für Copyright Text)</translation>
+        <translation>Ersetze (C) durch Copyright-Symbol © (Nur für Copyright-Text)</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
@@ -4848,7 +4848,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
     </message>
     <message>
         <source>MuseScore: load Style failed:</source>
-        <translation>MuseScore: Formatvorlage laden fehlgeschlagen:</translation>
+        <translation>MuseScore: Fehler beim Laden der Formatvorlage:</translation>
     </message>
     <message>
         <source>MuseScore: Load Style</source>
@@ -4864,7 +4864,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
     </message>
     <message>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation>MuseScore Formatvorlagen (*.mss);;Alle Dateien(*)</translation>
+        <translation>MuseScore-Formatvorlagen (*.mss);;Alle Dateien(*)</translation>
     </message>
     <message>
         <source>MuseScore: Load Style failed:</source>
@@ -4896,23 +4896,23 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation>MuseScore Akkordbeschreibungen (*.xml);;Alle Dateien (*)</translation>
+        <translation>MuseScore-Akkordbeschreibungen (*.xml);;Alle Dateien (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
-        <translation>MuseScore: Fehler beim Laden der Akkorbeschreibungsdatei</translation>
+        <translation>MuseScore: Fehler beim Laden der Akkorbeschreibungsdatei:</translation>
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
-        <translation>Fehler beim öffnen der Akkordbeschreibungsdatei</translation>
+        <translation>Fehler beim Öffnen der Akkordbeschreibungsdatei:</translation>
     </message>
     <message>
         <source>MuseScore: Load font symbols failed:</source>
-        <translation>MuseScore: Fehler beim Font laden:</translation>
+        <translation>MuseScore: Fehler beim Laden der Font-Symbole:</translation>
     </message>
     <message>
         <source>MuseScore: Load Palette failed:</source>
-        <translation>MuseScore: Fehler beim Palette laden:</translation>
+        <translation>MuseScore: Fehler beim Laden der Palette:</translation>
     </message>
     <message>
         <source>MuseScore: Load Chord Description File</source>
@@ -5005,7 +5005,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
     </message>
     <message>
         <source>LineSegments</source>
-        <translation>Linen Segmente</translation>
+        <translation>LineSegments</translation>
     </message>
     <message>
         <source>1</source>
@@ -5038,8 +5038,8 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen die Operation.
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Keine Notenzeilen gefunden!
-Zum Einrichten einer Notenzeile, zuerst ein Instrument (Instrumentendialog) wählen, dann mindestens einen Takt anlegen.</translation>
+        <translation>Keine Notenzeilen gefunden!&#13;
+Zum Einrichten einer Notenzeile zuerst ein Instrument (Instrumentendialog) wählen, dann mindestens einen Takt anlegen.</translation>
     </message>
     <message>
         <source>MuseScore: Save Score</source>
@@ -5070,7 +5070,7 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     <message>
         <source>Open Style File
 </source>
-        <translation>Stilfile öffnen
+        <translation>Stildatei öffnen
 </translation>
     </message>
     <message>
@@ -5101,15 +5101,15 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>MuseScore Style File (*.mss)</source>
-        <translation>MuseScore Formatvorlagen (*.mss)</translation>
+        <translation>MuseScore-Formatvorlagen (*.mss)</translation>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
-        <translation>Komprimierte MuseScore Datei (*.mscz)</translation>
+        <translation>Komprimierte MuseScore-Datei (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore File (*.mscx)</source>
-        <translation>MuseScore Datei (*.mscx)</translation>
+        <translation>MuseScore-Datei (*.mscx)</translation>
     </message>
     <message>
         <source>MuseScore: Save File</source>
@@ -5137,15 +5137,15 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
-        <translation>MuseScore: Fehler beim Datei sichern </translation>
+        <translation>MuseScore: Fehler beim Sichern der Datei: </translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
-        <translation>Umbenennen allte Datei &lt;</translation>
+        <translation>Umbenennen alte Datei &lt;</translation>
     </message>
     <message>
         <source>renaming temp. file &lt;</source>
-        <translation>Umbenennen Temp. Datei &lt;</translation>
+        <translation>Umbenennen Temp.-Datei &lt;</translation>
     </message>
     <message>
         <source>&gt; failed:
@@ -5155,15 +5155,15 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation>Komprimiertes MuseScore Format (*.mscz)</translation>
+        <translation>Komprimiertes MuseScore-Format (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation>MuseScore Format (*.mscx)</translation>
+        <translation>MuseScore-Format (*.mscx)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation>MusicXML Format (*.xml)</translation>
+        <translation>MusicXML-Format (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
@@ -5179,11 +5179,11 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
-        <translation>PostScript Datei (*.ps)</translation>
+        <translation>PostScript-Datei (*.ps)</translation>
     </message>
     <message>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation>PNG Bitmap Grafik (*.png)</translation>
+        <translation>PNG-Bitmap-Grafik (*.png)</translation>
     </message>
     <message>
         <source>Scalable Vector Graphic (*.svg)</source>
@@ -5191,7 +5191,7 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation>LilyPond Format (*.ly)</translation>
+        <translation>LilyPond-Format (*.ly)</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
@@ -5214,9 +5214,9 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation>Die folgende Datei ist blockiert:
-%1
-
+        <translation>Die folgende Datei ist gesperrt:&#13;
+%1&#13;
+&#13;
 Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
@@ -5252,7 +5252,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Object Inspector</source>
-        <translation>Objektinspector</translation>
+        <translation>Objekt-Inspektor</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -5301,7 +5301,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Clef Segment</source>
-        <translation>Schlüssesegment</translation>
+        <translation>Schlüsselsegment</translation>
     </message>
     <message>
         <source>Key Signature</source>
@@ -5325,7 +5325,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Segment Type:</source>
-        <translation>Segmenttype:</translation>
+        <translation>Segmenttyp:</translation>
     </message>
     <message>
         <source>Breath Segment</source>
@@ -5337,7 +5337,7 @@ Versuche sie woanders zu sichern.</translation>
     </message>
     <message>
         <source>Time Signature Announce</source>
-        <translation>Taktart Ankündigung</translation>
+        <translation>Taktart-Ankündigung</translation>
     </message>
 </context>
 <context>
@@ -5519,7 +5519,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     <name>ShowClefWidget</name>
     <message>
         <source>Clef Type:</source>
-        <translation>Schlüsseltype:</translation>
+        <translation>Schlüsseltyp:</translation>
     </message>
 </context>
 <context>
@@ -5714,7 +5714,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>master volume</source>
-        <translation>Master Lautstärke</translation>
+        <translation>Master-Lautstärke</translation>
     </message>
     <message>
         <source>Vol</source>
@@ -5726,7 +5726,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation>Master Stimmung</translation>
+        <translation>Master-Stimmung</translation>
     </message>
     <message>
         <source>Hz</source>
@@ -6307,63 +6307,63 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Cb major / Ab minor</source>
-        <translation>Cb dur / Ab moll</translation>
+        <translation>Cb-Dur / Ab-Moll</translation>
     </message>
     <message>
         <source>Gb major / Eb minor</source>
-        <translation>Gb dur / Eb moll</translation>
+        <translation>Gb-Dur / Eb-Moll</translation>
     </message>
     <message>
         <source>Db major / Bb minor</source>
-        <translation>Db dur / Bb moll</translation>
+        <translation>Db-Dur / Bb-Moll</translation>
     </message>
     <message>
         <source>Ab major / F minor</source>
-        <translation>Ab dur / F moll</translation>
+        <translation>Ab-Dur / F-Moll</translation>
     </message>
     <message>
         <source>Eb major / C minor</source>
-        <translation>Eb dur / C moll</translation>
+        <translation>Eb-Dur / C-Moll</translation>
     </message>
     <message>
         <source>Bb major / G minor</source>
-        <translation>Bb dur / G moll</translation>
+        <translation>Bb-Dur / G-Moll</translation>
     </message>
     <message>
         <source>F major / D minor</source>
-        <translation>F dur / D moll</translation>
+        <translation>F-Dur / D-Moll</translation>
     </message>
     <message>
         <source>C major / A minor</source>
-        <translation>C dur / A moll</translation>
+        <translation>C-Dur / A-Moll</translation>
     </message>
     <message>
         <source>G major / E minor</source>
-        <translation>G dur / E moll</translation>
+        <translation>G-Dur / E-Moll</translation>
     </message>
     <message>
         <source>D major / B minor</source>
-        <translation>D dur / B moll</translation>
+        <translation>D-Dur / H-Moll</translation>
     </message>
     <message>
         <source>A major / F# minor</source>
-        <translation>A dur / F# moll</translation>
+        <translation>A-Dur / F#-Moll</translation>
     </message>
     <message>
         <source>E major / C# minor</source>
-        <translation>E dur / C# moll</translation>
+        <translation>E-Dur / C#-Moll</translation>
     </message>
     <message>
         <source>B major / G# minor</source>
-        <translation>B dur / G# moll</translation>
+        <translation>H-Dur / G#-Moll</translation>
     </message>
     <message>
         <source>F# major / D# minor</source>
-        <translation>F# dur / D# moll</translation>
+        <translation>F#-Dur / D#-Moll</translation>
     </message>
     <message>
         <source>C# major / A# minor</source>
-        <translation>C# dur / A# moll</translation>
+        <translation>C#-Dur / A#-Moll</translation>
     </message>
     <message>
         <source>Up</source>
@@ -6491,11 +6491,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Single sharps and flats only</source>
-        <translation>einfache Kreuze und B's</translation>
+        <translation>einfache Kreuze und Bs</translation>
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation>auch Doppelkreuz und Doppel-B's verwenden</translation>
+        <translation>auch Doppelkreuz und Doppel-Bs verwenden</translation>
     </message>
 </context>
 <context>
@@ -6683,11 +6683,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation>doppelkreuz</translation>
+        <translation>Doppelkreuz</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>doppel-b</translation>
+        <translation>Doppel-b</translation>
     </message>
     <message>
         <source>natural</source>
@@ -6727,7 +6727,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>[double flat]</source>
-        <translation>[doppel-b]</translation>
+        <translation>[Doppel-b]</translation>
     </message>
     <message>
         <source>[natural]</source>
