@@ -2743,7 +2743,6 @@ void ScoreView::startEdit(Element* e)
 
 void ScoreView::endEdit()
       {
-printf("endEdit %p\n", editObject);
       setDropTarget(0);
       setEditText(0);
       if (!editObject)
@@ -3818,7 +3817,7 @@ void ScoreView::cmdChangeEnharmonic(bool up)
                   int fret = staff->part()->instr()->tablature()->fret(n->pitch(), string);
                   if (fret != -1) {
                         _score->startCmd();
-                        _score->undoChangePitch(n, n->pitch(), n->tpc(), ACC_NONE, string, fret);
+                        _score->undoChangePitch(n, n->pitch(), n->tpc(), ACC_NONE, n->line(), fret, string);
                         _score->endCmd();
                         }
                   }

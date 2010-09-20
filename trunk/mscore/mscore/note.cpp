@@ -344,22 +344,6 @@ int Note::playTicks() const
       }
 
 //---------------------------------------------------------
-//   changePitch
-//---------------------------------------------------------
-
-/**
- Computes _line and _accidental,
-*/
-
-void Note::changePitch(int n)
-      {
-      setPitch(n);
-      if (chord())
-            chord()->pitchChanged();
-      score()->spell(this);
-      }
-
-//---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
@@ -829,8 +813,10 @@ void Note::endDrag()
       Staff* staff = score()->staff(staffIdx);
       int npitch;
       int tpc;
+      int nstring = _string;
       if (staff->useTablature()) {
-            npitch = staff->part()->instr()->tablature()->getPitch(nLine, _fret);
+            nstring = nLine;
+            npitch = staff->part()->instr()->tablature()->getPitch(_string, _fret);
             tpc    = pitch2tpc(npitch, 0);
             }
       else {
@@ -840,8 +826,10 @@ void Note::endDrag()
             int key  = staff->key(tick).accidentalType();
             npitch   = line2pitch(_line, clef, key);
             tpc      = pitch2tpc(npitch, key);
+            _fret = -1;
+            _string = -1;
             }
-      score()->undoChangePitch(this, npitch, tpc, ACC_NONE, nLine, _fret);
+      score()->undoChangePitch(this, npitch, tpc, ACC_NONE, nLine, _fret, _string);
       score()->select(this, SELECT_SINGLE, 0);
       }
 
@@ -1251,11 +1239,11 @@ void Note::layout10(char* tversatz)
                   _accidental = 0;
                   }
             if (_fret < 0) {
-                  int line, fret;
+                  int string, fret;
                   Tablature* tab = staff()->part()->instr()->tablature();
-                  if (tab->convertPitch(_pitch, &line, &fret)) {
-                        _fret = fret;
-                        _string = line;
+                  if (tab->convertPitch(_pitch, &string, &fret)) {
+                        _fret   = fret;
+                        _string = string;
                         }
                   }
             }
@@ -1415,14 +1403,13 @@ void Note::setMag(double val)
 void Note::setLine(int n)
       {
       _line = n;
-      if (staff() && staff()->useTablature()) {
-            _string  = n;
-            rypos() = _string * spatium() * 1.5;
-            }
-      else {
-            _line = n;
-            rypos() = _line * spatium() * .5;
-            }
+      rypos() = _line * spatium() * .5;
+      }
+
+void Note::setString(int val)
+      {
+      _string = val;
+      rypos() = _string * spatium() * 1.5;
       }
 
 //---------------------------------------------------------

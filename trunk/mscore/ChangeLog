@@ -1,3 +1,10 @@
+20.sep (ws)
+      - tablature editing:
+            - "up/down"       chromatic pitch change (same as for pitched staff)
+            - "shift+up/down" change fret number
+            - "ctrl+up/down"  change string number
+      - shift+up/shift+down changes note pitch diatonic
+      - shortcut for "select staff above/below" was changed to alt+shift+up/down
 19.sep (ws)
       - implement "add linked staff" in instrument dialog
       - move creation/deletion of accidentals out of doLayout();

@@ -96,6 +96,45 @@ Instrument::Instrument()
       _tablature          = 0;
       }
 
+Instrument::Instrument(const Instrument& i)
+      {
+      _trackName    = i._trackName;
+      _minPitchA    = i._minPitchA;
+      _maxPitchA    = i._maxPitchA;
+      _minPitchP    = i._minPitchP;
+      _maxPitchP    = i._maxPitchP;
+      _transpose    = i._transpose;
+      _useDrumset   = i._useDrumset;
+      _drumset      = 0;
+      _tablature    = 0;
+      setDrumset(i._drumset);
+      setTablature(i._tablature);
+      _midiActions  = i._midiActions;
+      _articulation = i._articulation;
+      _channel      = i._channel;
+      }
+
+//---------------------------------------------------------
+//   Instrument
+//---------------------------------------------------------
+
+Instrument::~Instrument()
+      {
+      delete _tablature;
+      delete _drumset;
+      }
+
+//---------------------------------------------------------
+//   tablature
+//    If instrument has no tablature, return default
+//    (guitar) tablature
+//---------------------------------------------------------
+
+Tablature* Instrument::tablature() const
+      {
+      return _tablature ? _tablature : &guitarTablature;
+      }
+
 //---------------------------------------------------------
 //   write
 //---------------------------------------------------------
@@ -119,7 +158,7 @@ void Instrument::write(Xml& xml) const
             xml.tag("useDrumset", _useDrumset);
             _drumset->save(xml);
             }
-      if (tablature())
+      if (_tablature)
             _tablature->write(xml);
       if (!_trackName.isEmpty())
             xml.tag("trackName", _trackName);
@@ -553,9 +592,17 @@ void Instrument::setUseDrumset(bool val)
 
 void Instrument::setDrumset(Drumset* ds)
       {
-      if (ds != _drumset) {
-            delete _drumset;
-            _drumset = ds;
-            }
+      delete _drumset;
+      _drumset = ds;
+      }
+
+//---------------------------------------------------------
+//   setTablature
+//---------------------------------------------------------
+
+void Instrument::setTablature(Tablature* t)
+      {
+      delete _tablature;
+      _tablature = t;
       }
 

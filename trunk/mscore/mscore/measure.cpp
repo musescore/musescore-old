@@ -77,6 +77,8 @@
 #include "spacer.h"
 #include "duration.h"
 #include "fret.h"
+#include "stafftype.h"
+#include "tablature.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -1607,6 +1609,7 @@ printf("drop staffList\n");
                   break;
 
             case BRACKET:
+printf("measure: drop bracket\n");
                   e->setTrack(staffIdx * VOICES);
                   e->setParent(system());
                   static_cast<Bracket*>(e)->setLevel(-1);  // add bracket
@@ -3319,49 +3322,63 @@ void Measure::layoutStage1()
 
 void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
       {
-      Staff* staff     = score()->staff(staffIdx);
-      Drumset* drumset = 0;
-
-      if (staff->part()->instr()->useDrumset())
-            drumset = staff->part()->instr()->drumset();
-
+      Staff* staff   = score()->staff(staffIdx);
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
+
+      Instrument* instrument = staff->part()->instr();
       for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
             if (!e || e->type() != CHORD)
                  continue;
             Chord* chord = static_cast<Chord*>(e);
             foreach(Note* note, chord->notes()) {
-                  if (note->tieBack()) {
-                        int line = note->tieBack()->startNote()->line();
-                        note->setLine(line);
+                  switch(staff->staffType()->group()) {
+                        case PITCHED_STAFF:
+                              if (note->tieBack()) {
+                                    int line = note->tieBack()->startNote()->line();
+                                    note->setLine(line);
 
-                        int tpc = note->tpc();
-                        line = tpc2step(tpc) + (note->pitch()/12) * 7;
-                        int tpcPitch   = tpc2pitch(tpc);
-                        if (tpcPitch < 0)
-                              line += 7;
-                        else
-                              line -= (tpcPitch/12)*7;
-                        tversatz[line] = tpc2alter(tpc);
-                        continue;
-                        }
-
-                  if (drumset) {
-                        int pitch = note->pitch();
-                        if (!drumset->isValid(pitch)) {
-                              printf("unmapped drum note %d\n", pitch);
+                                    int tpc = note->tpc();
+                                    line = tpc2step(tpc) + (note->pitch()/12) * 7;
+                                    int tpcPitch   = tpc2pitch(tpc);
+                                    if (tpcPitch < 0)
+                                          line += 7;
+                                    else
+                                          line -= (tpcPitch/12)*7;
+                                    tversatz[line] = tpc2alter(tpc);
+                                    continue;
+                                    }
+                              note->updateAccidental(tversatz);
+                              break;
+                        case PERCUSSION_STAFF:
+                              {
+                              Drumset* drumset = instrument->drumset();
+                              int pitch = note->pitch();
+                              if (!drumset->isValid(pitch)) {
+                                    printf("unmapped drum note %d\n", pitch);
+                                    }
+                              else {
+                                    note->setHeadGroup(drumset->noteHead(pitch));
+                                    note->setLine(drumset->line(pitch));
+                                    continue;
+                                    }
                               }
-                        else {
-                              note->setHeadGroup(drumset->noteHead(pitch));
-                              note->setLine(drumset->line(pitch));
-                              continue;
+                              break;
+                        case TAB_STAFF:
+                              {
+                              Tablature* tab = instrument->tablature();
+                              int string = note->string();
+                              int fret = note->fret();
+                              if (string == -1 || fret == -1 || tab->getPitch(string, fret) != note->pitch()) {
+                                    int nstring, nfret;
+                                    tab->convertPitch(note->pitch(), &nstring, &nfret);
+                                    score()->undoChangePitch(note, note->pitch(), note->tpc(), note->userAccidental(),
+                                       note->line(), nfret, nstring);
+                                    }
                               }
+                              break;
                         }
-                  note->updateAccidental(tversatz);
                   }
             }
       }
-
-

@@ -176,6 +176,13 @@ enum AccidentalType {
       ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL
       };
 
+//---------------------------------------------------------
+//   UpDownMode
+//---------------------------------------------------------
+
+enum UpDownMode {
+      UP_DOWN_CHROMATIC, UP_DOWN_OCTAVE, UP_DOWN_DIATONIC
+      };
 
 extern const char* stateName(ScoreState);
 

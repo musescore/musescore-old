@@ -438,7 +438,8 @@ void Score::undoChangeSubtype(Element* element, int st)
 //   undoChangePitch
 //---------------------------------------------------------
 
-void Score::undoChangePitch(Note* note, int pitch, int tpc, AccidentalType userAccidental, int line, int fret)
+void Score::undoChangePitch(Note* note, int pitch, int tpc,
+   AccidentalType userAccidental, int line, int fret, int string)
       {
       QList<Staff*> staffList;
       Staff* ostaff = note->staff();
@@ -452,14 +453,22 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc, AccidentalType userA
       int noteIndex = chord->notes().indexOf(note);
       Segment* segment = chord->segment();
       Measure* measure = segment->measure();
-      foreach(Staff* staff, linkedStaves->staves()) {
+      foreach(Staff* staff, staffList) {
             Score* score = staff->score();
-            Measure* m   = score->tick2measure(measure->tick());
-            Segment* s   = m->findSegment(segment->segmentType(), segment->tick());
+            Measure* m;
+            Segment* s;
+            if (score == this) {
+                  m = measure;
+                  s = segment;
+                  }
+            else {
+                  m = score->tick2measure(measure->tick());
+                  s = m->findSegment(segment->segmentType(), segment->tick());
+                  }
             int staffIdx = score->staffIdx(staff);
             Chord* c     = static_cast<Chord*>(s->element(staffIdx * VOICES + chord->voice()));
             Note* n      = c->notes().at(noteIndex);
-            undo()->push(new ChangePitch(n, pitch, tpc, userAccidental, line, fret));
+            undo()->push(new ChangePitch(n, pitch, tpc, userAccidental, line, fret, string));
             score->updateAccidentals(m, staffIdx);
             }
       }
@@ -702,71 +711,81 @@ void Score::undoToggleInvisible(Element* e)
 
 void Score::undoAddElement(Element* element)
       {
-// printf("undoAddElement <%s>\n", element->name());
-      Staff* ostaff = element->staff();
+      QList<Staff*> staffList;
+      Staff* ostaff;
       if (element->type() == SLUR)
             ostaff = static_cast<Slur*>(element)->startElement()->staff();
-      if (ostaff && ostaff->linkedStaves()) {
-            LinkedStaves* linkedStaves = ostaff->linkedStaves();
-            foreach(Staff* staff, linkedStaves->staves()) {
-                  if (staff == element->staff())
-                        continue;
-                  Score* score = staff->score();
-                  if (element->type() == ARTICULATION) {
-                        Articulation* a  = static_cast<Articulation*>(element);
-                        ChordRest* cr    = static_cast<ChordRest*>(a->parent());
-                        Segment* segment = cr->segment();
-                        int tick         = segment->tick();
-                        Measure* m       = score->tick2measure(tick);
-                        Segment* seg     = m->findSegment(SegChordRest, tick);
-                        Articulation* na = a->clone();
-                        int ntrack       = score->staffIdx(staff) * VOICES + a->voice();
-                        na->setScore(score);
-                        na->setTrack(ntrack);
-                        ChordRest* ncr   = static_cast<ChordRest*>(seg->element(ntrack));
-                        na->setParent(ncr);
-                        undo()->push(new AddElement(na));
-                        }
-                  else if (element->type() == SLUR) {
-                        Slur* slur     = static_cast<Slur*>(element);
-                        ChordRest* cr1 = static_cast<ChordRest*>(slur->startElement());
-                        ChordRest* cr2 = static_cast<ChordRest*>(slur->endElement());
-                        Segment* s1    = cr1->segment();
-                        Segment* s2    = cr2->segment();
-                        Measure* m1    = s1->measure();
-                        Measure* m2    = s2->measure();
-                        Measure* nm1   = score->tick2measure(m1->tick());
-                        Measure* nm2   = score->tick2measure(m2->tick());
-                        Segment* ns1   = nm1->findSegment(s1->segmentType(), s1->tick());
-                        Segment* ns2   = nm2->findSegment(s2->segmentType(), s2->tick());
-                        int staffIdx   = score->staffIdx(staff);
-                        Chord* c1      = static_cast<Chord*>(ns1->element(staffIdx * VOICES + cr1->voice()));
-                        Chord* c2      = static_cast<Chord*>(ns2->element(staffIdx * VOICES + cr2->voice()));
-                        Slur* nslur    = new Slur(score);
-                        nslur->setStartElement(c1);
-                        nslur->setEndElement(c2);
-                        nslur->setParent(0);
-                        undo()->push(new AddElement(nslur));
-                        }
-                  else if (element->type() == NOTE) {
-                        Note* note       = static_cast<Note*>(element);
-                        Chord* cr        = note->chord();
-                        Segment* segment = cr->segment();
-                        int tick         = segment->tick();
-                        Measure* m       = score->tick2measure(tick);
-                        Segment* seg     = m->findSegment(SegChordRest, tick);
-                        Note* nnote      = note->clone();
-                        int ntrack       = score->staffIdx(staff) * VOICES + nnote->voice();
-                        nnote->setScore(score);
-                        nnote->setTrack(ntrack);
-                        Chord* ncr       = static_cast<Chord*>(seg->element(ntrack));
-                        nnote->setParent(ncr);
-                        undo()->push(new AddElement(nnote));
-                        score->setLayout(ncr->measure());
-                        }
-                  }
+      else
+            ostaff = element->staff();
+      if (ostaff == 0 || (element->type() != ARTICULATION
+         && element->type() != SLUR && element->type() != NOTE)) {
+            undo()->push(new AddElement(element));
+            return;
             }
-      undo()->push(new AddElement(element));
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves)
+            staffList = linkedStaves->staves();
+      else
+            staffList.append(ostaff);
+
+      foreach(Staff* staff, staffList) {
+            Score* score = staff->score();
+            int staffIdx = score->staffIdx(staff);
+            if (element->type() == ARTICULATION) {
+                  Articulation* a  = static_cast<Articulation*>(element);
+                  ChordRest* cr    = static_cast<ChordRest*>(a->parent());
+                  Segment* segment = cr->segment();
+                  int tick         = segment->tick();
+                  Measure* m       = score->tick2measure(tick);
+                  Segment* seg     = m->findSegment(SegChordRest, tick);
+                  Articulation* na = a->clone();
+                  int ntrack       = staffIdx * VOICES + a->voice();
+                  na->setScore(score);
+                  na->setTrack(ntrack);
+                  ChordRest* ncr   = static_cast<ChordRest*>(seg->element(ntrack));
+                  na->setParent(ncr);
+                  undo()->push(new AddElement(na));
+                  }
+            else if (element->type() == SLUR) {
+                  Slur* slur     = static_cast<Slur*>(element);
+                  ChordRest* cr1 = static_cast<ChordRest*>(slur->startElement());
+                  ChordRest* cr2 = static_cast<ChordRest*>(slur->endElement());
+                  Segment* s1    = cr1->segment();
+                  Segment* s2    = cr2->segment();
+                  Measure* m1    = s1->measure();
+                  Measure* m2    = s2->measure();
+                  Measure* nm1   = score->tick2measure(m1->tick());
+                  Measure* nm2   = score->tick2measure(m2->tick());
+                  Segment* ns1   = nm1->findSegment(s1->segmentType(), s1->tick());
+                  Segment* ns2   = nm2->findSegment(s2->segmentType(), s2->tick());
+                  Chord* c1      = static_cast<Chord*>(ns1->element(staffIdx * VOICES + cr1->voice()));
+                  Chord* c2      = static_cast<Chord*>(ns2->element(staffIdx * VOICES + cr2->voice()));
+                  Slur* nslur    = new Slur(score);
+                  nslur->setStartElement(c1);
+                  nslur->setEndElement(c2);
+                  nslur->setParent(0);
+                  undo()->push(new AddElement(nslur));
+                  }
+            else if (element->type() == NOTE) {
+                  Note* note       = static_cast<Note*>(element);
+                  Chord* cr        = note->chord();
+                  Segment* segment = cr->segment();
+                  int tick         = segment->tick();
+                  Measure* m       = score->tick2measure(tick);
+                  Segment* seg     = m->findSegment(SegChordRest, tick);
+                  Note* nnote      = note->clone();
+                  int ntrack       = staffIdx * VOICES + nnote->voice();
+                  nnote->setScore(score);
+                  nnote->setTrack(ntrack);
+                  Chord* ncr       = static_cast<Chord*>(seg->element(ntrack));
+                  nnote->setParent(ncr);
+                  undo()->push(new AddElement(nnote));
+                  score->updateAccidentals(m, staffIdx);
+                  score->setLayout(m);
+                  }
+            else
+                  printf("undoAddElement: unhandled: <%s>\n", element->name());
+            }
       }
 
 //---------------------------------------------------------
@@ -810,8 +829,7 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
                         note->setTpcFromPitch();
                   }
             undo()->push(new AddElement(newcr));
-            score->setLayout(m);
-            score->setUpdateAll(true);
+            score->updateAccidentals(m, staffIdx);
             }
       }
 
@@ -1213,15 +1231,16 @@ void ChangeColor::flip()
 //---------------------------------------------------------
 
 ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc,
-   AccidentalType _userAccidental, int l, int f)
+   AccidentalType _userAccidental, int l, int f, int s)
       {
       note  = _note;
       if (_note == 0)
             abort();
-      pitch = _pitch;
-      tpc   = _tpc;
-      line  = l;
-      fret  = f;
+      pitch  = _pitch;
+      tpc    = _tpc;
+      line   = l;
+      fret   = f;
+      string = s;
       userAccidental = _userAccidental;
       }
 
@@ -1232,17 +1251,20 @@ void ChangePitch::flip()
       AccidentalType f_userAcc = note->userAccidental();
       int f_line                  = note->line();
       int f_fret                  = note->fret();
+      int f_string                = note->string();
 
       note->setPitch(pitch, tpc);
       note->setUserAccidental(userAccidental);
       note->setLine(line);
       note->setFret(fret);
+      note->setString(string);
 
       pitch          = f_pitch;
       tpc            = f_tpc;
       userAccidental = f_userAcc;
       line           = f_line;
       fret           = f_fret;
+      string         = f_string;
 
       note->score()->setLayout(note->chord()->segment()->measure());
       }

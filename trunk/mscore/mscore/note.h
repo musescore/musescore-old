@@ -165,7 +165,6 @@ class Note : public Element {
 
       int tpc() const                 { return _tpc;      }
       void setTpc(int v);
-      void changePitch(int val);
       void setTpcFromPitch();
 
       void setAccidentalType(int);
@@ -181,7 +180,7 @@ class Note : public Element {
       int fret() const                { return _fret;   }
       void setFret(int val)           { _fret = val;    }
       int string() const              { return _string; }
-      void setString(int val)         { _string = val;  }
+      void setString(int val);
       bool ghost() const              { return _ghost;  }
       void setGhost(bool val)         { _ghost = val;   }
 
