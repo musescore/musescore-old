@@ -603,7 +603,6 @@ bool Score::read(QString name)
             ++staffIdx;
             }
       updateNotes();
-
       _needLayout = true;
       layoutFlags |= LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO;
       doLayout();
@@ -2140,11 +2139,6 @@ int Score::inputPos() const
 
 void Score::scanElements(void* data, void (*func)(void*, Element*))
       {
-//      foreach (Element* element, _gel) {
-//            if (element->type() == SLUR)
-//                  continue;
-//            element->scanElements(data, func);
-//            }
       foreach(Beam* b, _beams)
             func(data, b);
       for(MeasureBase* m = first(); m; m = m->next())
@@ -2174,7 +2168,6 @@ Beam* Score::beam(int id) const
 
 int Score::customKeySigIdx(KeySig* ks) const
       {
-printf("Score::customKeySigIdx\n");
       int idx = 0;
       foreach(KeySig* k, customKeysigs) {
             if (*k == *ks)
@@ -2310,8 +2303,6 @@ AL::TimeSigMap* Score::sigmap() const
 
 void Score::addExcerpt(Score* score)
       {
-printf("Score::addExcerpt %p\n", score);
-
       score->setParentScore(this);
       Excerpt* ex = new Excerpt(score);
       excerpts()->append(ex);
@@ -2336,8 +2327,6 @@ printf("Score::addExcerpt %p\n", score);
 
 void Score::removeExcerpt(Score* score)
       {
-printf("Score::removeExcerpt %p\n", score);
-
       foreach (Excerpt* ex, *excerpts()) {
             if (ex->score() == score) {
                   if (excerpts()->removeOne(ex)) {
@@ -2393,23 +2382,33 @@ void Score::updateNotes()
       }
 
 //---------------------------------------------------------
+//   cmdUpdateNotes
+///   calculate note lines and accidental
+//---------------------------------------------------------
+
+void Score::cmdUpdateNotes()
+      {
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
+                  updateAccidentals(m, staffIdx);
+            }
+      }
+
+//---------------------------------------------------------
 //   updateAccidentals
 //---------------------------------------------------------
 
 void Score::updateAccidentals(Measure* m, int staffIdx)
       {
       Staff* st = staff(staffIdx);
-      if (st->useTablature())
-            return;
       KeySigEvent key = st->keymap()->key(m->tick());
 
       char tversatz[75];      // list of already set accidentals for this measure
       initLineList(tversatz, key.accidentalType());
 
       for (Segment* segment = m->first(); segment; segment = segment->next()) {
-            if (!(segment->subtype() & (SegChordRest | SegGrace)))
-                  continue;
-            m->updateAccidentals(segment, staffIdx, tversatz);
+            if (segment->subtype() & (SegChordRest | SegGrace))
+                  m->updateAccidentals(segment, staffIdx, tversatz);
             }
       }
 

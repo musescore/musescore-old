@@ -81,6 +81,8 @@
 #include "clef.h"
 #include "noteevent.h"
 #include "breath.h"
+#include "tablature.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -1163,15 +1165,12 @@ void ScoreView::cmdAddText(int subtype)
 ///   Increment/decrement pitch of note by one or by an octave.
 //---------------------------------------------------------
 
-void Score::upDown(bool up, bool octave)
+void Score::upDown(bool up, UpDownMode mode)
       {
-      layoutAll   = false;
-      startLayout = 0;        // DEBUG
       QList<Note*> el;
-
       int tick = -1;
       bool playNotes = true;
-      foreach(Note* note, selection().noteList()) {
+      foreach (Note* note, selection().noteList()) {
             while (note->tieBack())
                   note = note->tieBack()->startNote();
             for (; note; note = note->tieFor() ? note->tieFor()->endNote() : 0) {
@@ -1194,36 +1193,105 @@ void Score::upDown(bool up, bool octave)
             int pitch   = oNote->pitch();
             int newTpc;
             int newPitch;
-            if (part->instr()->useDrumset()) {
-                  Drumset* ds = part->instr()->drumset();
-                  newPitch    = up ? ds->prevPitch(pitch) : ds->nextPitch(pitch);
-                  newTpc      = oNote->tpc();
-                  }
-            else {
-                  if (octave)  {
-                        newPitch = pitch + (up ? 12 : -12);
-                        if (newPitch < 0)
-                              newPitch = 0;
-                        else if (newPitch > 127)
-                              newPitch = 127;
-                        newTpc = oNote->tpc();
+            int string = oNote->string();
+            int fret   = oNote->fret();
+
+            switch(oNote->staff()->staffType()->group()) {
+                  case PERCUSSION_STAFF:
+                        {
+                        Drumset* ds = part->instr()->drumset();
+                        newPitch    = up ? ds->prevPitch(pitch) : ds->nextPitch(pitch);
+                        newTpc      = oNote->tpc();
                         }
-                  else {
-                        newPitch = up ? pitch+1 : pitch-1;
-                        if (newPitch < 0)
-                              newPitch = 0;
-                        else if (newPitch > 127)
-                              newPitch = 127;
-                        newTpc = pitch2tpc2(newPitch, up);
+                        break;
+                  case TAB_STAFF:
+                        {
+                        Tablature* tab = part->instr()->tablature();
+                        switch(mode) {
+                              case UP_DOWN_OCTAVE:
+                                    {
+                                    string += (up ? -1 : 1);
+                                    if (string < 0)
+                                          string = 0;
+                                    else if (string >= tab->strings())
+                                          string = tab->strings() - 1;
+                                    fret = 0;
+                                    newPitch      = tab->getPitch(string, fret);
+                                    Chord* chord  = oNote->chord();
+                                    Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
+                                    KeySigEvent ks = estaff->key(chord->tick());
+                                    newTpc         = pitch2tpc(newPitch, ks.accidentalType());
+                                    }
+                                    break;
+
+                              case UP_DOWN_CHROMATIC:
+                                    newPitch = up ? pitch+1 : pitch-1;
+                                    if (newPitch < 0)
+                                          newPitch = 0;
+                                    else if (newPitch > 127)
+                                          newPitch = 127;
+                                    newTpc = pitch2tpc2(newPitch, up);
+                                    break;
+
+                              case UP_DOWN_DIATONIC:
+                                    {
+                                    fret += (up ? 1 : -1);
+                                    if (fret < 0)
+                                          fret = 0;
+                                    else if (fret >= tab->frets())
+                                          fret = tab->frets() - 1;
+                                    newPitch      = tab->getPitch(string, fret);
+                                    Chord* chord  = oNote->chord();
+                                    Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
+                                    KeySigEvent ks = estaff->key(chord->tick());
+                                    newTpc         = pitch2tpc(newPitch, ks.accidentalType());
+                                    }
+                                    break;
+                              }
                         }
+                        break;
+                  case PITCHED_STAFF:
+                        switch(mode) {
+                              case UP_DOWN_OCTAVE:
+                                    newPitch = pitch + (up ? 12 : -12);
+                                    if (newPitch < 0)
+                                          newPitch = 0;
+                                    else if (newPitch > 127)
+                                          newPitch = 127;
+                                    newTpc = oNote->tpc();
+                                    break;
+
+                              case UP_DOWN_CHROMATIC:
+                                    newPitch = up ? pitch+1 : pitch-1;
+                                    if (newPitch < 0)
+                                          newPitch = 0;
+                                    else if (newPitch > 127)
+                                          newPitch = 127;
+                                    newTpc = pitch2tpc2(newPitch, up);
+                                    break;
+
+                              case UP_DOWN_DIATONIC:
+                                    {
+                                    Chord* chord  = oNote->chord();
+                                    Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
+                                    int clef      = estaff->clef(chord->tick());
+                                    int line      = oNote->line() + (up ? -1 : 1);
+                                    newPitch      = line2pitch(line, clef, 0);
+                                    int step      = clefTable[clef].pitchOffset - line;
+                                    while (step < 0)
+                                          step += 7;
+                                    step %= 7;
+                                    newTpc = step2tpc(step, 0);
+                                    }
+                                    break;
+                              }
+                        break;
                   }
             _is.pitch = newPitch;
 
-            if ((oNote->pitch() != newPitch) || (oNote->tpc() != newTpc) || oNote->userAccidental()) {
-                  if (oNote->accidental())            // to avoid undo() crash
-                        undoRemoveElement(oNote->accidental());
-                  undoChangePitch(oNote, newPitch, newTpc, ACC_NONE, oNote->line(), oNote->fret());
-                  oNote->setFret(-1);
+            if ((oNote->pitch() != newPitch) || (oNote->tpc() != newTpc) || oNote->userAccidental()
+               || oNote->string() != string || oNote->fret() != fret) {
+                  undoChangePitch(oNote, newPitch, newTpc, ACC_NONE, oNote->line(), fret, string);
                   }
 
             // play new note with velocity 80 for 0.3 sec:
@@ -1517,11 +1585,50 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
       else
             staffList.append(ostaff);
 
-      Segment* segment = note->chord()->segment();
-      int voice        = note->chord()->voice();
+      Chord* chord     = note->chord();
+      Segment* segment = chord->segment();
+      int voice        = chord->voice();
       Measure* measure = segment->measure();
       int tick         = segment->tick();
-      int noteIndex    = note->chord()->notes().indexOf(note);
+      int noteIndex    = chord->notes().indexOf(note);
+      Staff* estaff    = staff(chord->staffIdx() + chord->staffMove());
+      int clef         = estaff->clef(tick);
+      int step         = clefTable[clef].pitchOffset - note->line();
+      while (step < 0)
+            step += 7;
+      step %= 7;
+      //
+      // accidental change may result in pitch change
+      //
+      int acc    = Accidental::subtype2value(accidental);
+      int acc2   = measure->findAccidental2(note);
+      AccidentalType accType, user;
+
+      int pitch, tpc;
+      if (accidental == ACC_NONE) {
+            //
+            //  delete accidental
+            //
+            accType = ACC_NONE;
+            user    = ACC_NONE;
+            pitch   = line2pitch(note->line(), clef, 0) + acc2;
+            tpc     = step2tpc(step, acc2);
+            }
+      else {
+            if (acc2 == acc) {
+                  //
+                  // this is a precautionary accidental
+                  //
+                  accType = ACC_NONE;
+                  user = accidental;
+                  }
+            else {
+                  accType = accidental;
+                  user    = ACC_NONE;
+                  }
+            pitch = line2pitch(note->line(), clef, 0) + Accidental::subtype2value(accType);
+            tpc   = step2tpc(step, acc);
+            }
 
       foreach(Staff* st, staffList) {
             Score* score = st->score();
@@ -1538,74 +1645,43 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
             int staffIdx  = score->staffIdx(st);
             Chord* chord  = static_cast<Chord*>(s->element(staffIdx * VOICES + voice));
             Note* n       = chord->notes().at(noteIndex);
-            Staff* estaff = staff(staffIdx + chord->staffMove());
-            int clef      = estaff->clef(tick);
-            int step      = clefTable[clef].pitchOffset - note->line();
 
-            while (step < 0)
-                  step += 7;
-            step %= 7;
-            int acc = Accidental::subtype2value(accidental);
-
-            if (accidental == ACC_NONE) {
-                  if (n->userAccidental() != ACC_NONE) {
-                        n->setUserAccidental(ACC_NONE);
-                        if (n->accidental())
-                              undoRemoveElement(n->accidental());
-                        undo()->push(new ChangePitch(n, n->pitch(), n->tpc(), ACC_NONE, n->line(), n->fret()));
-                        continue;
-                        }
-                  if (n->accidentalType() == ACC_NATURAL)
-                        acc = m->findAccidental2(n);
-                  if (n->accidental())
-                        undoRemoveElement(n->accidental());
-                  }
-            //
-            // accidental change may result in pitch change
-            //
-            int tpc    = step2tpc(step, acc);
-            int pitch  = line2pitch(n->line(), clef, 0) + acc;
-            int acc2   = m->findAccidental2(n);
-            AccidentalType accType = (accidental == ACC_NONE && acc2) ? ACC_NATURAL : accidental;
-            AccidentalType user    = ((acc2 == acc) || (accType != accidental)) ? accidental : ACC_NONE;
-
-            undoChangePitch(n, pitch, tpc, user, n->line(), n->fret());
-            //
-            // handle ties
-            //
-            if (n->tieBack()) {
-                  undoRemoveElement(n->tieBack());
-                  if (n->tieFor())
-                        undoRemoveElement(n->tieFor());
-                  }
-            else {
-                  Note* nn = n;
-                  while (nn->tieFor()) {
-                        nn = nn->tieFor()->endNote();
-                        undoChangePitch(nn, pitch, tpc, user, nn->line(), nn->fret());
+            int fret   = n->fret();
+            int string = n->string();
+            if (st->useTablature()) {
+                  if (pitch != n->pitch()) {
+                        //
+                        // as pitch has changed, calculate new
+                        // string & fret
+                        //
+                        Tablature* tab = n->staff()->part()->instr()->tablature();
+                        if (tab)
+                              tab->convertPitch(pitch, &string, &fret);
                         }
                   }
+            undo()->push(new ChangePitch(n, pitch, tpc, user, n->line(), fret, string));
             if (!st->useTablature()) {
-                  int acci = user ? user : accType;
-                  if (acci != ACC_NONE && !n->tieBack() && !n->hidden()) {
-                        if (n->accidental() == 0) {
-                              Accidental* a = new Accidental(score);
-                              a->setParent(n);
-                              a->setSubtype(acci);
-                              undoAddElement(a);
-                              }
-                        else if (n->accidental()->subtype() != acci) {
-                              Accidental* a = new Accidental(score);
-                              a->setParent(n);
-                              a->setSubtype(acci);
-                              undoChangeElement(n->accidental(), a);
-                              }
+                  //
+                  // handle ties
+                  //
+                  if (n->tieBack()) {
+                        undoRemoveElement(n->tieBack());
+                        if (n->tieFor())
+                              undoRemoveElement(n->tieFor());
                         }
                   else {
-                        if (n->accidental())
-                              undoRemoveElement(n->accidental());
+                        Note* nn = n;
+                        while (nn->tieFor()) {
+                              nn = nn->tieFor()->endNote();
+                              undo()->push(new ChangePitch(nn, pitch, tpc, user, nn->line(), fret, string));
+                              }
                         }
                   }
+            //
+            // recalculate needed accidentals for
+            // whole measure
+            //
+            score->updateAccidentals(m, staffIdx);
             }
       }
 
@@ -1842,7 +1918,7 @@ void Score::cmd(const QAction* a)
                   else if (el && el->type() == REST)
                         cmdMoveRest(static_cast<Rest*>(el), UP);
                   else
-                        upDown(true, false);
+                        upDown(true, UP_DOWN_CHROMATIC);
                   }
             else if (cmd == "pitch-down") {
                   if (el && el->type() == ARTICULATION)
@@ -1850,7 +1926,7 @@ void Score::cmd(const QAction* a)
                   else if (el && el->type() == REST)
                         cmdMoveRest(static_cast<Rest*>(el), DOWN);
                   else
-                        upDown(false, false);
+                        upDown(false, UP_DOWN_CHROMATIC);
                   }
             else if (cmd == "append-measure")
                   appendMeasures(1, MEASURE);
@@ -1888,9 +1964,13 @@ void Score::cmd(const QAction* a)
                   cmdDeleteSelectedMeasures();
                   }
             else if (cmd == "pitch-up-octave")
-                  upDown(true, true);
+                  upDown(true, UP_DOWN_OCTAVE);
             else if (cmd == "pitch-down-octave")
-                  upDown(false, true);
+                  upDown(false, UP_DOWN_OCTAVE);
+            else if (cmd == "pitch-up-diatonic")
+                  upDown(true, UP_DOWN_DIATONIC);
+            else if (cmd == "pitch-down-diatonic")
+                  upDown(false, UP_DOWN_DIATONIC);
             else if (cmd == "move-up") {
                   setLayoutAll(false);
                   Element* el = selection().element(); // single selection
@@ -2597,6 +2677,8 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   _selection.setState(SEL_RANGE);
             }
       connectTies();
+      updateNotes();    // TODO: undoable version needed
+
       layoutFlags |= LAYOUT_FIX_PITCH_VELO;
       }
 

@@ -121,6 +121,9 @@ struct Instrument {
 
    public:
       Instrument();
+      Instrument(const Instrument&);
+      ~Instrument();
+
       void read(QDomElement);
       void write(Xml& xml) const;
       NamedEventList* midiAction(const QString& s, int channel) const;
@@ -143,7 +146,7 @@ struct Instrument {
       QString trackName() const                              { return _trackName;  }
       void setTrackName(const QString& s)                    { _trackName = s; }
 
-      void setDrumset(Drumset* ds);
+      void setDrumset(Drumset* ds);       // drumset is now owned by Instrument
       Drumset* drumset() const                               { return _drumset;    }
       bool useDrumset() const                                { return _useDrumset; }
       void setUseDrumset(bool val);
@@ -160,8 +163,8 @@ struct Instrument {
       void setArticulation(const QList<MidiArticulation>& l) { _articulation = l; }
       void setChannel(const QList<Channel>& l)               { _channel = l;      }
       void setChannel(int i, const Channel& c)               { _channel[i] = c;   }
-      Tablature* tablature() const                           { return _tablature; }
-      void setTablature(Tablature* t)                        { _tablature = t;    }
+      Tablature* tablature() const;
+      void setTablature(Tablature* t);    // tablature is now owned by Instrument
       };
 
 #endif

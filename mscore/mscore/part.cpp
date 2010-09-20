@@ -28,6 +28,7 @@
 #include "instrtemplate.h"
 #include "text.h"
 #include "measure.h"
+#include "tablature.h"
 
 //---------------------------------------------------------
 //   Part
@@ -74,6 +75,7 @@ void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       _instr->setMidiActions(t->midiActions);
       _instr->setArticulation(t->articulation);
       _instr->setChannel(t->channel);
+      _instr->setTablature(t->tablature ? new Tablature(*t->tablature) : 0);
       }
 
 //---------------------------------------------------------

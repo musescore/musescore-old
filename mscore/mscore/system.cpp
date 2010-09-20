@@ -467,13 +467,9 @@ void System::setInstrumentName(int staffIdx)
 
       //
       // instrument name can change after inserting/deleting parts
-      //    do not delete if in edit mode
       //
       TextC* iname = staff->instrumentName;
       Part* part = s->part();
-
-      delete iname;           // DEBUG
-      iname = 0;
 
       if (!iname) {
             Part* part = s->part();
@@ -532,6 +528,7 @@ void System::add(Element* el)
       else if (el->type() == BEAM)
             score()->add(el);
       else if (el->type() == BRACKET) {
+printf("add bracket\n");
             SysStaff* ss = _staves[el->staffIdx()];
             Bracket* b   = static_cast<Bracket*>(el);
             int level    = b->level();

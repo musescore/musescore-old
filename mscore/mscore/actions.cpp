@@ -665,6 +665,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "pitch-up-diatonic",
+         QT_TRANSLATE_NOOP("action","diatonic pitch up"),
+         Qt::SHIFT+Qt::Key_Up,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","diatonic up"),
+         QT_TRANSLATE_NOOP("action","diatonic pitch up")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "pitch-up-octave",
          QT_TRANSLATE_NOOP("action","Pitch up octave"),
          Qt::CTRL + Qt::Key_Up,
@@ -707,6 +716,15 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Down"),
          QT_TRANSLATE_NOOP("action","Pitch down")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "pitch-down-diatonic",
+         QT_TRANSLATE_NOOP("action","diatonic pitch down"),
+         Qt::SHIFT+Qt::Key_Down,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","diatonic down"),
+         QT_TRANSLATE_NOOP("action","diatonic pitch down")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -856,7 +874,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "select-staff-above",
          QT_TRANSLATE_NOOP("action","add staff above to selection"),
-         Qt::SHIFT+Qt::Key_Up,
+         Qt::ALT+Qt::SHIFT+Qt::Key_Up,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","add staff above to selection"),
          QT_TRANSLATE_NOOP("action","add staff above to selection")
@@ -865,7 +883,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "select-staff-below",
          QT_TRANSLATE_NOOP("action","add staff below to selection"),
-         Qt::SHIFT+Qt::Key_Down,
+         Qt::ALT+Qt::SHIFT+Qt::Key_Down,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","add staff below to selection"),
          QT_TRANSLATE_NOOP("action","add staff below to selection")
