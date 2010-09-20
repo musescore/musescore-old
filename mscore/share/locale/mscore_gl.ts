@@ -3430,7 +3430,7 @@ No canto disto, escoller "Manual en liña" no menú "Axuda".</translation>
     </message>
     <message>
         <source>Key Signatures</source>
-        <translation>Claves</translation>
+        <translation>Armaduras</translation>
     </message>
     <message>
         <source>Time Signatures</source>

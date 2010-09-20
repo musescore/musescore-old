@@ -7510,7 +7510,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play Panel</source>
-        <translation>Panel de Ejecución</translation>
+        <translation>Panel de Reproducción</translation>
     </message>
     <message>
         <source>Navigator</source>
@@ -8643,23 +8643,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Snare (Acoustic)</source>
-        <translation type="unfinished"/>
+        <translation>Caja (Acustica)</translation>
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation type="unfinished"/>
+        <translation>Caja (Electrica)</translation>
     </message>
     <message>
         <source>Tom 5</source>
-        <translation type="unfinished"/>
+        <translation>Tom 5</translation>
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation type="unfinished"/>
+        <translation>Hi-Hat Cerrado</translation>
     </message>
     <message>
         <source>Tom 4</source>
-        <translation type="unfinished"/>
+        <translation>Tom 4</translation>
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
@@ -8667,19 +8667,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom 3</source>
-        <translation type="unfinished"/>
+        <translation>Tom 3</translation>
     </message>
     <message>
         <source>Hi-Hat Open</source>
-        <translation type="unfinished"/>
+        <translation>Hi-Hat Abierto</translation>
     </message>
     <message>
         <source>Tom 2</source>
-        <translation type="unfinished"/>
+        <translation>Tom 2</translation>
     </message>
     <message>
         <source>Tom 1</source>
-        <translation type="unfinished"/>
+        <translation>Tom 1</translation>
     </message>
     <message>
         <source>Crash 1</source>
@@ -8687,7 +8687,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tom</source>
-        <translation type="unfinished"/>
+        <translation>Tom</translation>
     </message>
     <message>
         <source>Ride</source>
@@ -8703,7 +8703,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tambourine</source>
-        <translation type="unfinished"/>
+        <translation>Pandereta</translation>
     </message>
     <message>
         <source>open high conga</source>

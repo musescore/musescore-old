@@ -1094,11 +1094,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Властивості тексту...</translation>
+        <translation>Властивості тексту…</translation>
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation>Властивості MIDI...</translation>
+        <translation>Властивості MIDI…</translation>
     </message>
 </context>
 <context>
@@ -1124,7 +1124,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>part</source>
-        <translation type="unfinished"/>
+        <translation>партія</translation>
     </message>
     <message>
         <source>system</source>
@@ -1132,11 +1132,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>align left</source>
-        <translation type="unfinished">Виключка вліво</translation>
+        <translation>вирівнювання по лівому краю</translation>
     </message>
     <message>
         <source>MIDI Values</source>
-        <translation type="unfinished"/>
+        <translation>Значення MIDI</translation>
     </message>
     <message>
         <source>Apply to:</source>
@@ -1218,7 +1218,7 @@ failed: </source>
     </message>
     <message>
         <source>Name:</source>
-        <translation>І’мя:</translation>
+        <translation>Назва:</translation>
     </message>
     <message>
         <source>Note Head:</source>
@@ -1254,7 +1254,7 @@ failed: </source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Ім’я</translation>
+        <translation>Назва</translation>
     </message>
     <message>
         <source>Note</source>
@@ -1298,7 +1298,7 @@ failed: </source>
     </message>
     <message>
         <source>--</source>
-        <translation/>
+        <translation>--</translation>
     </message>
 </context>
 <context>
@@ -1325,7 +1325,7 @@ failed: </source>
     </message>
     <message>
         <source>Name</source>
-        <translation>Ім’я</translation>
+        <translation>Назва</translation>
     </message>
     <message>
         <source>Short Name</source>
@@ -1372,7 +1372,7 @@ failed: </source>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Змінити набір ударних...</translation>
+        <translation>Змінити набір ударних…</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
@@ -1412,107 +1412,107 @@ failed: </source>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation>Чиста прима</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена прима</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена секунда</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation>Мала секунда</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation>Велика  секунда</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена  секунда</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена терція</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation>Мала терція</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation>Велика терція</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена терція</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена кварта</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Чиста кварта</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена кварта</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена квінта</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Чиста квінта</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена квінта</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена секста</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Мала секста</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Велика секста</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена секста</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена септима</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Мала септима</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Велика септима</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена септима</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена октава</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished"/>
+        <translation>Чиста октава</translation>
     </message>
     <message>
         <source>up</source>
@@ -1995,7 +1995,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Color...</source>
-        <translation>Колір...</translation>
+        <translation>Колір…</translation>
     </message>
 </context>
 <context>
@@ -2061,14 +2061,14 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation type="unfinished"/>
+        <translation>Партія-%1</translation>
     </message>
 </context>
 <context>
     <name>Glissando</name>
     <message>
         <source>Glissando Properties...</source>
-        <translation>Властивості ґлісандо...</translation>
+        <translation>Властивості ґлісандо…</translation>
     </message>
 </context>
 <context>
@@ -2101,7 +2101,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation>Властивості горизонтального блоку...</translation>
+        <translation>Властивості горизонтального блоку…</translation>
     </message>
 </context>
 <context>
@@ -2127,7 +2127,7 @@ space unit</extracomment>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>Властивості гармонії...</translation>
+        <translation>Властивості гармонії…</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -2780,11 +2780,11 @@ failed: </source>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation type="unfinished"/>
+        <translation>розтягнення макету</translation>
     </message>
     <message>
         <source>repeat count:</source>
-        <translation type="unfinished"/>
+        <translation>кількість повторень:</translation>
     </message>
     <message>
         <source>Stemless</source>
@@ -3072,7 +3072,7 @@ failed: </source>
     </message>
     <message>
         <source>play</source>
-        <translation type="unfinished"/>
+        <translation>відтворення</translation>
     </message>
     <message>
         <source>Copyright</source>
@@ -3631,7 +3631,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
-        <translation type="unfinished"/>
+        <translation>Такт %1, доля %2.%3</translation>
     </message>
     <message>
         <source>Error loading plugin
@@ -3972,7 +3972,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation>І’мя:</translation>
+        <translation>Назва:</translation>
     </message>
     <message>
         <source>Cell Size:</source>
@@ -4066,7 +4066,7 @@ is incompatible with current interface</source>
     <name>PianorollEditor</name>
     <message>
         <source>Cursor:</source>
-        <translation type="unfinished"/>
+        <translation>Курсор:</translation>
     </message>
     <message>
         <source>Velocity:</source>
@@ -4090,7 +4090,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: &lt;%1&gt; Нотоносець: %2</translation>
     </message>
     <message>
         <source>toolbar1</source>
@@ -5266,7 +5266,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
-        <translation type="unfinished"/>
+        <translation>Редактор фортепіанної стрічки…</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
@@ -5274,7 +5274,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Split Staff...</source>
-        <translation type="unfinished"/>
+        <translation>Розділити нотоносець…</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -5632,11 +5632,11 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Split Staff</source>
-        <translation type="unfinished"/>
+        <translation>Розділення  нотного стану</translation>
     </message>
     <message>
         <source>Split Point</source>
-        <translation type="unfinished"/>
+        <translation>Точка розділу</translation>
     </message>
 </context>
 <context>
@@ -5829,7 +5829,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Властивості тексту...</translation>
+        <translation>Властивості тексту…</translation>
     </message>
 </context>
 <context>
@@ -5896,7 +5896,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Властивості тексту...</translation>
+        <translation>Властивості тексту…</translation>
     </message>
 </context>
 <context>
@@ -5969,7 +5969,7 @@ and check that the file location is correct</source>
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>MuseScore: властивості тексту</translation>
+        <translation>MuseScore: Властивості тексту</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
@@ -6306,187 +6306,187 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation type="unfinished"/>
+        <translation>Транспонувати на тональність</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
-        <translation type="unfinished"/>
+        <translation>До-бемоль мажор / Ля-бемоль мінор</translation>
     </message>
     <message>
         <source>Gb major / Eb minor</source>
-        <translation type="unfinished"/>
+        <translation>Соль-бемоль мажор / Мі-бемоль мінор</translation>
     </message>
     <message>
         <source>Db major / Bb minor</source>
-        <translation type="unfinished"/>
+        <translation>Ре-бемоль мажор / Сі-бемоль мінор</translation>
     </message>
     <message>
         <source>Ab major / F minor</source>
-        <translation type="unfinished"/>
+        <translation>Ля-бемоль мажор / Фа мінор</translation>
     </message>
     <message>
         <source>Eb major / C minor</source>
-        <translation type="unfinished"/>
+        <translation>Мі-бемоль мажор / До мінор</translation>
     </message>
     <message>
         <source>Bb major / G minor</source>
-        <translation type="unfinished"/>
+        <translation>Сі-бемоль мажор / Соль мінор</translation>
     </message>
     <message>
         <source>F major / D minor</source>
-        <translation type="unfinished"/>
+        <translation>Фа мажор / Ре мінор</translation>
     </message>
     <message>
         <source>C major / A minor</source>
-        <translation type="unfinished"/>
+        <translation>До мажор / Ля мінор</translation>
     </message>
     <message>
         <source>G major / E minor</source>
-        <translation type="unfinished"/>
+        <translation>Соль мажор / Мі мінор</translation>
     </message>
     <message>
         <source>D major / B minor</source>
-        <translation type="unfinished"/>
+        <translation>Ре мажор / Сі мінор</translation>
     </message>
     <message>
         <source>A major / F# minor</source>
-        <translation type="unfinished"/>
+        <translation>Ля мажор / Фа-дієз мінор</translation>
     </message>
     <message>
         <source>E major / C# minor</source>
-        <translation type="unfinished"/>
+        <translation>Мі мажор / До-дієз мінор</translation>
     </message>
     <message>
         <source>B major / G# minor</source>
-        <translation type="unfinished"/>
+        <translation>Сі мажор / Соль-дієз мінор</translation>
     </message>
     <message>
         <source>F# major / D# minor</source>
-        <translation type="unfinished"/>
+        <translation>Фа-дієз мажор / Ре-дієз мінор</translation>
     </message>
     <message>
         <source>C# major / A# minor</source>
-        <translation type="unfinished"/>
+        <translation>До-дієз мажор / Ля-дієз мінор</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Догори</translation>
+        <translation>догори</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Вниз</translation>
+        <translation>вниз</translation>
     </message>
     <message>
         <source>Closest</source>
-        <translation type="unfinished"/>
+        <translation>найближче</translation>
     </message>
     <message>
         <source>Transpose by Interval</source>
-        <translation type="unfinished"/>
+        <translation>Транспонувати на інтервал</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation>Чиста прима</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена прима</translation>
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена секунда</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation>Мала секунда</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation>Велика  секунда</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена  секунда</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена терція</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation>Мала терція</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation>Велика терція</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена терція</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена кварта</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Чиста кварта</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена кварта</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена квінта</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Чиста квінта</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена квінта</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена секста</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Мала секста</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Велика секста</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена секста</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена септипа</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Мала септима</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Велика септима</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"/>
+        <translation>Збільшена септима</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished"/>
+        <translation>Зменшена октава</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished"/>
+        <translation>Чиста октава</translation>
     </message>
     <message>
         <source>Options</source>
@@ -7741,11 +7741,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose...</source>
-        <translation type="unfinished">Транспозиція...</translation>
+        <translation>Транспозиція…</translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation type="unfinished">Транспозиція</translation>
+        <translation>Транспозиція</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -8886,7 +8886,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>LayoutBreak</source>
-        <translation type="unfinished"/>
+        <translation>РозривМакету</translation>
     </message>
     <message>
         <source>Spacer</source>
@@ -8990,7 +8990,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"/>
+        <translation>Макет</translation>
     </message>
     <message>
         <source>HBox</source>

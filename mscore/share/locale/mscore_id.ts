@@ -5,7 +5,7 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation type="unfinished"/>
+        <translation>AboutBox</translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
@@ -26,14 +26,23 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"/>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Kunjungi &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; untuk versi terbaru dan informasi lainnya.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Dukung MuseScore dengan &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;donasi dari anda&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer dan lainnya. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Di sebarluaskan dibawah lisensi GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished"/>
+        <translation>Unstable Prerelease untuk Versi: </translation>
     </message>
     <message>
         <source>Version: </source>
@@ -48,21 +57,21 @@ p, li { white-space: pre-wrap; }
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation type="unfinished"/>
+        <translation>tanda kurung</translation>
     </message>
 </context>
 <context>
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Artikulasi Properti</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Artikulasi Properti</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -70,18 +79,18 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Midi Action</source>
-        <translation type="unfinished"/>
+        <translation>Aksi Midi</translation>
     </message>
 </context>
 <context>
     <name>BarLineBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Format</translation>
     </message>
     <message>
         <source>BarLine</source>
-        <translation type="unfinished"/>
+        <translation>Garis Birama</translation>
     </message>
     <message>
         <source>SubType:</source>
@@ -92,11 +101,11 @@ p, li { white-space: pre-wrap; }
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Format</translation>
     </message>
     <message>
         <source>up:</source>
-        <translation type="unfinished"/>
+        <translation>ke atas:</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
@@ -107,7 +116,7 @@ p, li { white-space: pre-wrap; }
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Bingkai Properti</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -138,7 +147,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Format</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -157,15 +166,15 @@ p, li { white-space: pre-wrap; }
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Harmoni Properti</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation type="unfinished"/>
+        <translation>LabelTeks</translation>
     </message>
     <message>
         <source>Root</source>
-        <translation type="unfinished"/>
+        <translation>Root</translation>
     </message>
     <message>
         <source>C</source>
@@ -177,7 +186,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation type="unfinished"/>
+        <translation>bb (double flat)</translation>
     </message>
     <message>
         <source>F</source>
@@ -193,7 +202,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation type="unfinished"/>
+        <translation>(tak disengaja)</translation>
     </message>
     <message>
         <source>A</source>
@@ -209,43 +218,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation type="unfinished"/>
+        <translation>## (double sharp)</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished">D</translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>Extension</source>
-        <translation type="unfinished"/>
+        <translation>Tambahan</translation>
     </message>
     <message>
         <source>Maj</source>
-        <translation type="unfinished"/>
+        <translation>Mayor</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"/>
+        <translation>2</translation>
     </message>
     <message>
         <source>Maj7</source>
-        <translation type="unfinished"/>
+        <translation>Maj7</translation>
     </message>
     <message>
         <source>Maj9</source>
-        <translation type="unfinished"/>
+        <translation>Maj9</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"/>
+        <translation>6</translation>
     </message>
     <message>
         <source>69</source>
-        <translation type="unfinished"/>
+        <translation>69</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"/>
+        <translation>m</translation>
     </message>
     <message>
         <source>m7</source>
@@ -265,147 +274,147 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>7Sus</source>
-        <translation type="unfinished"/>
+        <translation>7Sus</translation>
     </message>
     <message>
         <source>m6</source>
-        <translation type="unfinished"/>
+        <translation>m6</translation>
     </message>
     <message>
         <source>m9</source>
-        <translation type="unfinished"/>
+        <translation>m9</translation>
     </message>
     <message>
         <source>mMaj7</source>
-        <translation type="unfinished"/>
+        <translation>mMaj7</translation>
     </message>
     <message>
         <source>dim</source>
-        <translation type="unfinished"/>
+        <translation>dim</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"/>
+        <translation>9</translation>
     </message>
     <message>
         <source>13</source>
-        <translation type="unfinished"/>
+        <translation>13</translation>
     </message>
     <message>
         <source>7b9</source>
-        <translation type="unfinished"/>
+        <translation>7b9</translation>
     </message>
     <message>
         <source>Other:</source>
-        <translation type="unfinished"/>
+        <translation>Lainnya:</translation>
     </message>
     <message>
         <source>5b</source>
-        <translation type="unfinished"/>
+        <translation>5b</translation>
     </message>
     <message>
         <source>aug</source>
-        <translation type="unfinished"/>
+        <translation>aug</translation>
     </message>
     <message>
         <source>Maj9#11</source>
-        <translation type="unfinished"/>
+        <translation>Maj9#11</translation>
     </message>
     <message>
         <source>Maj13#11</source>
-        <translation type="unfinished"/>
+        <translation>Maj13#11</translation>
     </message>
     <message>
         <source>Maj13</source>
-        <translation type="unfinished"/>
+        <translation>Maj13</translation>
     </message>
     <message>
         <source>+</source>
-        <translation type="unfinished"/>
+        <translation>+</translation>
     </message>
     <message>
         <source>Maj7#5</source>
-        <translation type="unfinished"/>
+        <translation>Maj7#5</translation>
     </message>
     <message>
         <source>maug</source>
-        <translation type="unfinished"/>
+        <translation>maug</translation>
     </message>
     <message>
         <source>m11</source>
-        <translation type="unfinished"/>
+        <translation>m11</translation>
     </message>
     <message>
         <source>m13</source>
-        <translation type="unfinished"/>
+        <translation>m13</translation>
     </message>
     <message>
         <source>m#5</source>
-        <translation type="unfinished"/>
+        <translation>m#5</translation>
     </message>
     <message>
         <source>m7#5</source>
-        <translation type="unfinished"/>
+        <translation>m7#5</translation>
     </message>
     <message>
         <source>m69</source>
-        <translation type="unfinished"/>
+        <translation>m69</translation>
     </message>
     <message>
         <source>Maj7Lyd</source>
-        <translation type="unfinished"/>
+        <translation>Maj7Lyd</translation>
     </message>
     <message>
         <source>Maj7b5</source>
-        <translation type="unfinished"/>
+        <translation>Maj7b5</translation>
     </message>
     <message>
         <source>m9b5</source>
-        <translation type="unfinished"/>
+        <translation>m9b5</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"/>
+        <translation>5</translation>
     </message>
     <message>
         <source>7+</source>
-        <translation type="unfinished"/>
+        <translation>7+</translation>
     </message>
     <message>
         <source>9+</source>
-        <translation type="unfinished"/>
+        <translation>9+</translation>
     </message>
     <message>
         <source>13+</source>
-        <translation type="unfinished"/>
+        <translation>13+</translation>
     </message>
     <message>
         <source>(blues)</source>
-        <translation type="unfinished"/>
+        <translation>(blues)</translation>
     </message>
     <message>
         <source>7(Blues)</source>
-        <translation type="unfinished"/>
+        <translation>7(blues)</translation>
     </message>
     <message>
         <source>7b13</source>
-        <translation type="unfinished"/>
+        <translation>7b13</translation>
     </message>
     <message>
         <source>7#11</source>
-        <translation type="unfinished"/>
+        <translation>7#11</translation>
     </message>
     <message>
         <source>13#11</source>
-        <translation type="unfinished"/>
+        <translation>13#11</translation>
     </message>
     <message>
         <source>7#11b13</source>
-        <translation type="unfinished"/>
+        <translation>7#11b13</translation>
     </message>
     <message>
         <source>9b13</source>
-        <translation type="unfinished"/>
+        <translation>9b13</translation>
     </message>
     <message>
         <source>9#11</source>
@@ -741,23 +750,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Degrees</source>
-        <translation type="unfinished"/>
+        <translation>Derajat</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"/>
+        <translation>Tambah</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Hapus</translation>
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation type="unfinished"/>
+        <translation>Nada Bass/Inversi</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="unfinished"/>
+        <translation>kosong/tidak ada</translation>
     </message>
     <message>
         <source>/C</source>
@@ -839,11 +848,11 @@ p, li { white-space: pre-wrap; }
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation type="unfinished"/>
+        <translation>Kord Properti</translation>
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished"/>
+        <translation>kecil</translation>
     </message>
     <message>
         <source>stemless</source>
@@ -851,7 +860,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional leading space </source>
-        <translation type="unfinished"/>
+        <translation>penambahan spasi depan </translation>
     </message>
     <message>
         <source>sp</source>
@@ -860,11 +869,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation type="unfinished"/>
+        <translation>penambahan spasi belakang</translation>
     </message>
     <message>
         <source>stem direction</source>
-        <translation type="unfinished"/>
+        <translation>arah stem</translation>
     </message>
     <message>
         <source>auto</source>
@@ -873,82 +882,82 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished"/>
+        <translation>ke atas</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished"/>
+        <translation>ke bawah</translation>
     </message>
     <message>
         <source>Note Properties</source>
-        <translation type="unfinished"/>
+        <translation>Nada Properti</translation>
     </message>
     <message>
         <source>tuning offset</source>
-        <translation type="unfinished"/>
+        <translation>penyeteman</translation>
     </message>
     <message>
         <source>velocity type</source>
-        <translation type="unfinished"/>
+        <translation>tipe kecepatan</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation type="unfinished"/>
+        <translation>kecepatan (0-127)</translation>
     </message>
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>pengguna</translation>
     </message>
     <message>
         <source>offset</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>posisi</translation>
     </message>
     <message>
         <source>note head positon </source>
-        <translation type="unfinished"/>
+        <translation>posisi nada utama </translation>
     </message>
     <message>
         <source>left of stem</source>
-        <translation type="unfinished"/>
+        <translation>kiri dari stem</translation>
     </message>
     <message>
         <source>right of stem</source>
-        <translation type="unfinished"/>
+        <translation>kanan dari stem</translation>
     </message>
     <message>
         <source>ontime offset type</source>
-        <translation type="unfinished"/>
+        <translation>tipe posisi waktu mulai</translation>
     </message>
     <message>
         <source>ontime offset</source>
-        <translation type="unfinished"/>
+        <translation>posisi waktu mulai</translation>
     </message>
     <message>
         <source>offtime offset type</source>
-        <translation type="unfinished"/>
+        <translation>tipe posisi waktu selesai</translation>
     </message>
     <message>
         <source>offtime</source>
-        <translation type="unfinished"/>
+        <translation>waktu selesai</translation>
     </message>
     <message>
         <source> cent</source>
         <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"/>
+        <translation> sen</translation>
     </message>
     <message>
         <source> ticks</source>
-        <translation type="unfinished"/>
+        <translation> ketukan</translation>
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished"/>
+        <translation>Grup Nada Utama</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished"/>
+        <translation>Tipe Nada Utama</translation>
     </message>
     <message>
         <source>normal</source>
@@ -1004,15 +1013,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole</source>
-        <translation type="unfinished"/>
+        <translation>penuh</translation>
     </message>
     <message>
         <source>half</source>
-        <translation type="unfinished"/>
+        <translation>setengah</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation type="unfinished"/>
+        <translation>perempat</translation>
     </message>
     <message>
         <source>breve</source>
@@ -1023,7 +1032,7 @@ p, li { white-space: pre-wrap; }
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Format</translation>
     </message>
     <message>
         <source>SlurFor:</source>
@@ -1042,11 +1051,11 @@ p, li { white-space: pre-wrap; }
     <name>ChordStyleEditor</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Format</translation>
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation type="unfinished"/>
+        <translation>File Deskripsi Kord:</translation>
     </message>
     <message>
         <source>...</source>
@@ -1058,11 +1067,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>Nama</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"/>
+        <translation>Simpan sebagai</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
@@ -1077,45 +1086,45 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Jadikan Transparan</translation>
+        <translation>Sembunyikan</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Jadikan Terlihat</translation>
+        <translation>Tampilkan</translation>
     </message>
     <message>
         <source>MIDI Properties...</source>
-        <translation type="unfinished"/>
+        <translation>MIDI Properti</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Teks Properti</translation>
     </message>
 </context>
 <context>
     <name>DynamicBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Format</translation>
     </message>
 </context>
 <context>
     <name>DynamicProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Teks Properti</translation>
     </message>
     <message>
         <source>MIDI Values</source>
-        <translation type="unfinished"/>
+        <translation>Nilai MIDI</translation>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished"/>
+        <translation>Kecepatan:</translation>
     </message>
     <message>
         <source>Apply to:</source>
-        <translation type="unfinished"/>
+        <translation>Terapkan ke:</translation>
     </message>
     <message>
         <source>staff</source>
@@ -1123,22 +1132,22 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>part</source>
-        <translation type="unfinished"/>
+        <translation>bagian</translation>
     </message>
     <message>
         <source>system</source>
-        <translation type="unfinished"/>
+        <translation>sistem</translation>
     </message>
     <message>
         <source>align left</source>
-        <translation type="unfinished"/>
+        <translation>rapikan ke kiri</translation>
     </message>
 </context>
 <context>
     <name>EditDrumset</name>
     <message>
         <source>invalid</source>
-        <translation type="unfinished"/>
+        <translation>tidak sah</translation>
     </message>
     <message>
         <source>Normal Head</source>
@@ -1162,7 +1171,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Simpan</translation>
+        <translation>Simpan</translation>
     </message>
     <message>
         <source>MuseScore: Load Drumset</source>
@@ -1174,25 +1183,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Save Drumset</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Simpan Drumset</translation>
     </message>
     <message>
         <source>Open File
 </source>
-        <translation type="unfinished"/>
+        <translation>Buka File
+</translation>
     </message>
     <message>
         <source>
 failed: </source>
-        <translation type="unfinished"/>
+        <translation>
+gagal: </translation>
     </message>
     <message>
         <source>MuseScore: Open File</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Buka File</translation>
     </message>
     <message>
         <source>MuseScore: Write Drumset</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Tulis Drumset</translation>
     </message>
     <message>
         <source>Write File failed: </source>
@@ -1219,15 +1230,15 @@ failed: </source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>Nama</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"/>
+        <translation>Nama:</translation>
     </message>
     <message>
         <source>Note Head:</source>
-        <translation type="unfinished"/>
+        <translation>Nada Utama:</translation>
     </message>
     <message>
         <source>Staff Line:</source>
@@ -1243,11 +1254,11 @@ failed: </source>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"/>
+        <translation>ke Atas</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"/>
+        <translation>ke Bawah</translation>
     </message>
     <message>
         <source>Default Voice:</source>
@@ -1302,7 +1313,7 @@ failed: </source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"/>
+        <translation>Nama</translation>
     </message>
     <message>
         <source>Short Name</source>
@@ -1555,7 +1566,7 @@ failed: </source>
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"/>
+        <translation>Halaman</translation>
     </message>
     <message>
         <source>System</source>
@@ -1563,7 +1574,7 @@ failed: </source>
     </message>
     <message>
         <source>Measure</source>
-        <translation type="unfinished"/>
+        <translation>Satuan</translation>
     </message>
     <message>
         <source>Barlines</source>
@@ -1579,7 +1590,7 @@ failed: </source>
     </message>
     <message>
         <source>Numbers</source>
-        <translation type="unfinished"/>
+        <translation>Nomor</translation>
     </message>
     <message>
         <source>Beams</source>
@@ -1587,7 +1598,7 @@ failed: </source>
     </message>
     <message>
         <source>Sizes</source>
-        <translation type="unfinished"/>
+        <translation>Ukuran</translation>
     </message>
     <message>
         <source>Hairpins</source>
@@ -1692,11 +1703,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Page Numbers</source>
-        <translation type="unfinished"/>
+        <translation>Nomor Halaman</translation>
     </message>
     <message>
         <source>show first</source>
-        <translation type="unfinished"/>
+        <translation>tampilkan pertama</translation>
     </message>
     <message>
         <source>odd/even</source>
@@ -1728,11 +1739,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Line width</source>
-        <translation type="unfinished"/>
+        <translation>Tebal garis</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished"/>
+        <translation>Tinggi</translation>
     </message>
     <message>
         <source>...</source>
@@ -2865,15 +2876,15 @@ failed: </source>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"/>
+        <translation>Judul</translation>
     </message>
     <message>
         <source>Subtitle</source>
-        <translation type="unfinished"/>
+        <translation>Subtitle</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation type="unfinished"/>
+        <translation>Komposer</translation>
     </message>
     <message>
         <source>Poet</source>
@@ -2893,7 +2904,7 @@ failed: </source>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"/>
+        <translation>Pencarian</translation>
     </message>
     <message>
         <source>MuseScore</source>
@@ -2902,7 +2913,8 @@ failed: </source>
     <message>
         <source>Save changes to the score "%1"
 before closing?</source>
-        <translation type="unfinished"/>
+        <translation>Simpan perubahan ke file  "%1"&#13;
+sebelum keluar?</translation>
     </message>
     <message>
         <source>MuseScore: Load Score</source>
@@ -2910,7 +2922,7 @@ before closing?</source>
     </message>
     <message>
         <source>Untitled</source>
-        <translation type="unfinished"/>
+        <translation>Tidak Berjudul</translation>
     </message>
     <message>
         <source>MuseScore: failure</source>
@@ -2922,7 +2934,7 @@ before closing?</source>
     </message>
     <message>
         <source> failed</source>
-        <translation type="unfinished"/>
+        <translation> gagal</translation>
     </message>
     <message>
         <source>G major, E minor</source>
@@ -3162,7 +3174,7 @@ before closing?</source>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"/>
+        <translation>Teks</translation>
     </message>
     <message>
         <source>MuseScore: Clefs</source>
@@ -3206,7 +3218,7 @@ before closing?</source>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished"/>
+        <translation>Bu&amp;ka file sebelumnya</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -3218,7 +3230,7 @@ before closing?</source>
     </message>
     <message>
         <source>Preferences...</source>
-        <translation type="unfinished"/>
+        <translation>Pengaturan</translation>
     </message>
     <message>
         <source>Add Note</source>
@@ -3250,11 +3262,11 @@ before closing?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"/>
+        <translation>&amp;Bantuan</translation>
     </message>
     <message>
         <source>Online Handbook</source>
-        <translation type="unfinished"/>
+        <translation>Buku Panduan Online</translation>
     </message>
     <message>
         <source>&amp;About</source>
@@ -3267,17 +3279,20 @@ before closing?</source>
     <message>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation type="unfinished"/>
+        <translation>MuseScore buku panduan tidak ditemukan di: 
+</translation>
     </message>
     <message>
         <source>
 
 From the "Help" menu try choosing "Online Handbook" instead.</source>
-        <translation type="unfinished"/>
+        <translation>
+
+Dari menu "Help" coba plih "Buku Panduan Online".</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Buka Bantuan</translation>
     </message>
     <message>
         <source>no score</source>
@@ -3297,7 +3312,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Go To: </source>
-        <translation type="unfinished"/>
+        <translation>Lompat ke: </translation>
     </message>
     <message>
         <source>Symbols1</source>
@@ -3497,7 +3512,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>String number %1</source>
-        <translation type="unfinished"/>
+        <translation>Senar nomor %1</translation>
     </message>
     <message>
         <source>Repeat measure sign</source>
@@ -3575,7 +3590,9 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation type="unfinished"/>
+        <translation>Sesi sebelumnya keluar tanpa terduga.&#13;
+&#13;
+Pulihkan sesi sebelumnya?</translation>
     </message>
     <message>
         <source>Note Heads</source>
@@ -3595,7 +3612,7 @@ Restore session?</source>
     </message>
     <message>
         <source>Check for Update</source>
-        <translation type="unfinished"/>
+        <translation>Cek Update</translation>
     </message>
     <message>
         <source>Script
@@ -3606,7 +3623,8 @@ is incompatible with current interface</source>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore terlalu tua untuk menjalankan script&#13;
+%1</translation>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
@@ -3620,7 +3638,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>File yang didukung (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore File (*.mscz *.mscx *.msc);;MusicXML File (*.xml *.mxl);;MIDI File (*.mid *.midi *.kar);;Muse Data File (*.md);;Capella Files (*.cap);;BB File &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture File &lt;experimental&gt; (*.ove);;Semua File (*)</translation>
     </message>
 </context>
 <context>

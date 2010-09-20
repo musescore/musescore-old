@@ -1348,7 +1348,7 @@ fejl: </translation>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Redigér linie/stemme egenskaber</translation>
+        <translation>MuseScore: Rediger linie/stemme egenskaber</translation>
     </message>
     <message>
         <source>Staff Properties</source>
@@ -1380,7 +1380,7 @@ fejl: </translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Redigér trommesæt...</translation>
+        <translation>Rediger trommesæt...</translation>
     </message>
     <message>
         <source>Stemless</source>
@@ -1558,7 +1558,7 @@ fejl: </translation>
     <name>EditStyleBase</name>
     <message>
         <source>MuseScore: Edit Style</source>
-        <translation>MuseScore: Rediger layout-stil</translation>
+        <translation>MuseScore: Rediger layoutstil</translation>
     </message>
     <message>
         <source>Score</source>
@@ -2036,7 +2036,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation>Redigér enkeltstemme:</translation>
+        <translation>Rediger enkeltstemme:</translation>
     </message>
     <message>
         <source>Instrument:</source>
@@ -2400,7 +2400,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Skriv layout-stil</translation>
+        <translation>MuseScore: Skriv layoutstil</translation>
     </message>
     <message>
         <source>MuseScore: Load Instrument List</source>
@@ -2420,7 +2420,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Skrivning af layout-stil fejlede </translation>
+        <translation>Skrivning af layoutstil fejlede </translation>
     </message>
 </context>
 <context>
@@ -2778,7 +2778,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation>layout stræk</translation>
+        <translation>layoutstræk</translation>
     </message>
     <message>
         <source>repeat count:</source>
@@ -3038,7 +3038,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>&amp;Style</source>
-        <translation>&amp;Layout-stil</translation>
+        <translation>&amp;Layoustil</translation>
     </message>
     <message>
         <source>&amp;Display</source>
@@ -3234,7 +3234,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>Beam Properties</source>
-        <translation>Bjælke egenskaber</translation>
+        <translation>Bjælkeplacering</translation>
     </message>
     <message>
         <source>Symbols</source>
@@ -3494,7 +3494,7 @@ Prøv at vælge "Online Håndbog" fra "Hjælp"-menuen i stedet.</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation>Arpeggio &amp;&amp; Glissando</translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -3510,7 +3510,7 @@ Prøv at vælge "Online Håndbog" fra "Hjælp"-menuen i stedet.</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Artikulationer &amp;&amp; triller</translation>
+        <translation>Accenter</translation>
     </message>
     <message>
         <source>Fingering %1</source>
@@ -3538,7 +3538,7 @@ Prøv at vælge "Online Håndbog" fra "Hjælp"-menuen i stedet.</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation>Linieskift &amp;&amp; afstande</translation>
+        <translation>Linjeskift</translation>
     </message>
     <message>
         <source>Line break</source>
@@ -3578,7 +3578,7 @@ Prøv at vælge "Online Håndbog" fra "Hjælp"-menuen i stedet.</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation>Artikulationer &amp;&amp; ornamenter...</translation>
+        <translation>Accenter...</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -4312,7 +4312,7 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation>Layout-stil</translation>
+        <translation>Layoutstil</translation>
     </message>
     <message>
         <source>Auto Save</source>
@@ -4733,15 +4733,15 @@ er ikke kompatibelt med det nuværende interface</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
-        <translation>Layout-stil benyttet til import</translation>
+        <translation>Layoutstil der skal benyttes til import</translation>
     </message>
     <message>
         <source>Built in style</source>
-        <translation>Indbygget layout-stil</translation>
+        <translation>Indbygget layoutstil</translation>
     </message>
     <message>
         <source>Use style file:</source>
-        <translation>Benyt layout-stil fra filen:</translation>
+        <translation>Benyt layoutstil fra filen:</translation>
     </message>
     <message>
         <source>System</source>
@@ -4858,7 +4858,7 @@ Vælg venligst en node eller pause of prøv igen
     </message>
     <message>
         <source>MuseScore: Load Style</source>
-        <translation>MuseScore: Indlæs layout-stil</translation>
+        <translation>MuseScore: Indlæs layoutstil</translation>
     </message>
     <message>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
@@ -5082,21 +5082,21 @@ fejlede: </translation>
     </message>
     <message>
         <source>MuseScore: Save Style</source>
-        <translation>MuseScore: Gem layout-stil</translation>
+        <translation>MuseScore: Gem layoutstil</translation>
     </message>
     <message>
         <source>MuseScore Style File (*.mss)</source>
-        <translation>MuseScore Layout-stil (*.mss)</translation>
+        <translation>MuseScore Layoutstil-fil (*.mss)</translation>
     </message>
     <message>
         <source>Open Style File
 </source>
-        <translation>Åben layout-stil
+        <translation>Åbn layoutstil
 </translation>
     </message>
     <message>
         <source>MuseScore: Open Style file</source>
-        <translation>MuseScore: Åben layout-stil</translation>
+        <translation>MuseScore: Åbn layoutstil</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
@@ -5236,7 +5236,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Skrivning af layout-stil fejlede: </translation>
+        <translation>Skrivning af layoutstil fejlede: </translation>
     </message>
     <message>
         <source>Load failed: </source>
@@ -5263,7 +5263,7 @@ Prøv af gemme den et andet sted.</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Redigér trommesæt...</translation>
+        <translation>Rediger trommesæt...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
@@ -5635,7 +5635,7 @@ og kontrollér at filplaceringen er korrekt.</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Redigér nodelinie/stemme egenskaber</translation>
+        <translation>MuseScore: Rediger nodelinie/stemme egenskaber</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -6004,7 +6004,7 @@ og kontrollér at filplaceringen er korrekt.</translation>
     </message>
     <message>
         <source>Style:</source>
-        <translation>Layout-stil:</translation>
+        <translation>Layoutstil:</translation>
     </message>
     <message>
         <source>bold</source>
@@ -6197,7 +6197,7 @@ og kontrollér at filplaceringen er korrekt.</translation>
     <name>TextStyleDialog</name>
     <message>
         <source>MuseScore: Edit Text Styles</source>
-        <translation>MuseScore: Redigér tekst stil</translation>
+        <translation>MuseScore: Rediger tekst stil</translation>
     </message>
 </context>
 <context>
@@ -6877,7 +6877,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopiér</translation>
+        <translation>Kopier</translation>
     </message>
     <message>
         <source>Paste</source>
@@ -7725,19 +7725,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load Style...</source>
-        <translation>Indlæs layout-stil...</translation>
+        <translation>Indlæs layoutstil...</translation>
     </message>
     <message>
         <source>Load Style</source>
-        <translation>Indlæs layout-stil</translation>
+        <translation>Indlæs layoutstil</translation>
     </message>
     <message>
         <source>Save Style...</source>
-        <translation>Gem layout-stil...</translation>
+        <translation>Gem layoutstil...</translation>
     </message>
     <message>
         <source>Save Style</source>
-        <translation>Gem layout-stil</translation>
+        <translation>Gem layoutstil</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -7805,7 +7805,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>edit score meta data</source>
-        <translation>redigér stykkets metadata</translation>
+        <translation>rediger stykkets metadata</translation>
     </message>
     <message>
         <source>Meta Data...</source>
@@ -7833,11 +7833,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>edit element</source>
-        <translation>redigér element</translation>
+        <translation>rediger element</translation>
     </message>
     <message>
         <source>Edit Element</source>
-        <translation>Redigér element</translation>
+        <translation>Rediger element</translation>
     </message>
     <message>
         <source>reset positions</source>
@@ -7953,11 +7953,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit General Style...</source>
-        <translation>Redigér generel layout-stil...</translation>
+        <translation>Rediger generel layoutstil...</translation>
     </message>
     <message>
         <source>Edit Text Style...</source>
-        <translation>Rediger tekst layout-stil...</translation>
+        <translation>Rediger tekst layoutstil...</translation>
     </message>
     <message>
         <source>Select all similar elements</source>
@@ -8385,11 +8385,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load style</source>
-        <translation>Indlæs layout-stil</translation>
+        <translation>Indlæs layoutstil</translation>
     </message>
     <message>
         <source>Save style</source>
-        <translation>Gem layout-stil</translation>
+        <translation>Gem layoutstil</translation>
     </message>
     <message>
         <source>Select all</source>
@@ -8397,7 +8397,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation>Redigér akkord stil...</translation>
+        <translation>Rediger akkordstil...</translation>
     </message>
     <message>
         <source>Delete</source>
