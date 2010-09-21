@@ -1558,10 +1558,11 @@ static void loadScores(const QStringList& argv)
                                     QString s = settings.value(QString("score-%1").arg(i),"").toString();
                                     Score* score = new Score(defaultStyle);
                                     scoreCreated = true;
-                                    score->read(s);
-                                    int view = mscore->appendScore(score);
-                                    if (i == c)
-                                          currentScoreView = view;
+                                    if (score->read(s)) {
+                                          int view = mscore->appendScore(score);
+                                          if (i == c)
+                                                currentScoreView = view;
+                                          }
                                     }
                               }
                               break;
@@ -1573,8 +1574,8 @@ static void loadScores(const QStringList& argv)
                         case SCORE_SESSION:
                               Score* score = new Score(defaultStyle);
                               scoreCreated = true;
-                              score->read(preferences.startScore);
-                              currentScoreView = mscore->appendScore(score);
+                              if(score->read(preferences.startScore))
+                                    currentScoreView = mscore->appendScore(score);
                               break;
                         }
                   }
@@ -2732,9 +2733,10 @@ void MuseScore::handleMessage(const QString& message)
             return;
       ((QtSingleApplication*)(qApp))->activateWindow();
       Score* score = new Score(defaultStyle);
-      score->read(message);
-      setCurrentScoreView(appendScore(score));
-      lastOpenPath = score->fileInfo()->path();
+      if(score->read(message)) {
+            setCurrentScoreView(appendScore(score));
+            lastOpenPath = score->fileInfo()->path();
+            }
       }
 
 //---------------------------------------------------------
