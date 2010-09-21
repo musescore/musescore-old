@@ -468,5 +468,16 @@ Fraction TimeSigMap::measureRest(unsigned tick) const
       return e.fraction() - Fraction::fromTicks(tick - stick);
       }
 
-}     // namespace AL
+//---------------------------------------------------------
+//   TimeSigMap::dump
+//---------------------------------------------------------
 
+void TimeSigMap::dump() const
+      {
+      printf("TimeSigMap:\n");
+      for (ciSigEvent i = begin(); i != end(); ++i)
+            printf("%6d timesig: %s measure: %d\n",
+               i->first, qPrintable(i->second.fraction().print()), i->second.bar);
+      }
+      
+}     // namespace AL

@@ -1098,7 +1098,7 @@ void Score::cmdRemoveTime(int tick, int len)
                   }
             else if (e->isSLine()) {
                   SLine* s = static_cast<SLine*>(e);
-                  if (s->tick() >= tick && s->tick2() < etick)
+                  if ((s->tick() >= tick && s->tick() < etick) || (s->tick2() >= tick && s->tick2() < etick))
                         undoRemoveElement(e);
                   }
             }
@@ -1472,7 +1472,6 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
       tuplet->setFraction(f);
       Duration baseLen(fr);
       tuplet->setBaseLen(baseLen);
-
       tuplet->setTrack(cr->track());
       tuplet->setTick(tick);
       Measure* measure = cr->measure();

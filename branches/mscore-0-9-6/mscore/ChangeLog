@@ -1,7 +1,10 @@
+21.sep (la)
+      - fix #7167: Time signature change causes triplets to corrupt score
+      - fix #7142: Crescendo & delete measures problems
 14.sep (la)
-      - Fix #7077: Applying double-note tremolo to dotted notes fails and alter measure duration
+      - fix #7077: Applying double-note tremolo to dotted notes fails and alter measure duration
 30.aug (db)
-      - Fix #6937: Measure Properties should be modal dialog
+      - fix #6937: Measure Properties should be modal dialog
 29.aug (la)
       - fix #6775: Seg. fault by double clicking any element twice
       - fix #6888: When exchanging voice, voice 1 is removed
@@ -9,6 +12,8 @@
       - fix get keysig from plugin when concert pitch mode is set
 22.aug (db)
       - fix #6735: C# for AltoSax in default soundfont is silent
+      
+ ======== MuseScore 0.9.6.2 released ==============     
 15.aug (la)
       - fix #6658: Natural in every keysig on mac PPC
       - fix #6508: Crash removing instrument with volta
@@ -28,7 +33,7 @@
       - fix instrument name containing flats for plugin framework
 14.jul (ws)
       - fix mouse wheel handling for mixer elements
-======== MuseScore 0.9.6.2 released ==============
+======== MuseScore 0.9.6.1 released ==============
 12.jul (ws)
       - fix #6453: File containing a horizontal frame directly before a bar with a line break cannot be opened
         (la)

@@ -314,7 +314,7 @@ class Score : public QObject {
       void addTempo();
       void addMetronome();
 
-      void undoSigInsertTime(int, int);
+     
 
       void cmdAddChordName2();
       int processPendingNotes(QList<MNote*>* notes, int, int);
@@ -427,6 +427,7 @@ class Score : public QObject {
       void undoChangeMeasureLen(Measure* m, int oldTicks, int newTicks);
       void undoChangeElement(Element* oldElement, Element* newElement);
       void undoInsertTime(int tick, int len);
+      void undoSigInsertTime(int, int);
       void undoChangeRepeatFlags(Measure*, int);
       void undoChangeVoltaEnding(Volta* volta, const QList<int>& l);
       void undoChangeVoltaText(Volta* volta, const QString& s);

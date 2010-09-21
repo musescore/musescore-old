@@ -1891,8 +1891,10 @@ void Measure::adjustToLen(int ol, int nl)
                   }
             score()->cmdRemoveTime(tick() + nl, -diff);
             }
-      else
+      else{
             score()->undoInsertTime(tick() + ol, diff);
+            score()->undoSigInsertTime(tick() + ol, diff);
+            }
       }
 
 //---------------------------------------------------------
