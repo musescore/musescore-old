@@ -792,7 +792,7 @@ static DirectionsAnchor* findMatchInMeasure(int tick, Staff* st, Measure* m, Par
       da = findSpecificMatchInMeasure(tick, st, false, m, strack, etrack);
       if (da)
             return da;
-      if (st->part() == p)
+      if (st && st->part() == p)
             return new DirectionsAnchor(tick);
       else return 0;
       }
@@ -835,7 +835,7 @@ static DirectionsAnchor* findMatchInPart(int tick, Staff* st, bool start, Score*
             da = findSpecificMatchInPart(tick, st, true, sc, strack, etrack);
       if (da)
             return da;
-      return (st->part() == p) ? new DirectionsAnchor(tick) : 0;
+      return (st && st->part() == p) ? new DirectionsAnchor(tick) : 0;
       }
 
 //---------------------------------------------------------

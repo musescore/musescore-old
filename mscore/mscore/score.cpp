@@ -494,11 +494,11 @@ bool Score::read(QString name)
       QString cs = info.suffix();
       QString csl = cs.toLower();
 
-      if (cs == "mscz") {
+      if (csl == "mscz") {
             if (!loadCompressedMsc(name))
                   return false;
             }
-      else if (cs.toLower() == "msc" || cs.toLower() == "mscx") {
+      else if (csl == "msc" || csl == "mscx") {
             if (!loadMsc(name))
                   return false;
             }
@@ -511,21 +511,21 @@ bool Score::read(QString name)
                         loadStyle(&f);
                   }
 
-            if (cs == "xml") {
+            if (csl == "xml") {
                   importMusicXml(name);
                   connectSlurs();
                   }
-            else if (cs == "mxl")
+            else if (csl == "mxl")
                   importCompressedMusicXml(name);
             else if (csl == "mid" || csl == "midi" || csl == "kar") {
                   if (!importMidi(name))
                         return false;
                   }
-            else if (cs == "md") {
+            else if (csl == "md") {
                   if (!importMuseData(name))
                         return false;
                   }
-            else if (cs == "ly") {
+            else if (csl == "ly") {
                   if (!importLilypond(name))
                         return false;
                   }
