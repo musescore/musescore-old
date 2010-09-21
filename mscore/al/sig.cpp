@@ -333,6 +333,18 @@ int TimeSigMap::rasterStep(unsigned t, int raster) const
             }
       return raster;
       }
+      
+//---------------------------------------------------------
+//   TimeSigMap::dump
+//---------------------------------------------------------
+
+void TimeSigMap::dump() const
+      {
+      printf("TimeSigMap:\n");
+      for (ciSigEvent i = begin(); i != end(); ++i)
+            printf("%6d timesig: %s measure: %d\n",
+               i->first, qPrintable(i->second.timesig().print()), i->second.bar());
+      }
 
 }     // namespace AL
 
