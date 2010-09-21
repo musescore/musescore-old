@@ -80,6 +80,7 @@ class TimeSigMap : public std::map<const int, SigEvent > {
 
       void read(QDomElement, int fileDiv);
       void write(Xml&) const;
+      void dump() const;
 
       const SigEvent& timesig(int tick) const;
 
