@@ -25,17 +25,19 @@
 #include "undo.h"
 #include "script.h"
 #include "pitchspelling.h"
+#include "page.h"
 
 Q_DECLARE_METATYPE(Note);
 Q_DECLARE_METATYPE(Note*);
 Q_DECLARE_METATYPE(Score*);
 
 static const char* const function_names_note[] = {
-      "name", "pitch", "tuning", "color", "visible", "tpc", "tied", "userAccidental"
+      "name", "pitch", "tuning", "color", "visible", "tpc", "tied", "userAccidental", "boundingRect", "pos", "noteHead"
       };
 static const int function_lengths_note[] = {
-      0, 1, 1, 1, 1, 1, 0, 1
+      0, 1, 1, 1, 1, 1, 0, 1, 0, 0,0
       };
+
 static const QScriptValue::PropertyFlags flags_note[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
@@ -45,10 +47,13 @@ static const QScriptValue::PropertyFlags flags_note[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+	  QScriptValue::SkipInEnumeration,
+	  QScriptValue::SkipInEnumeration,
+	  QScriptValue::SkipInEnumeration
       };
 
 ScriptInterface noteInterface = {
-      8,
+      11,
       function_names_note,
       function_lengths_note,
       flags_note
@@ -154,6 +159,21 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         return context->engine()->undefinedValue();
                         }
                   break;
+			case 8:     // "boundingRect"
+				  if (context->argumentCount() == 0)
+					  return qScriptValueFromValue(context->engine(), note->bbox());
+				  break;
+			case 9:     // "pos"
+				  if (context->argumentCount() == 0){
+				  Page* page = (Page*)note->parent()->parent()->parent()->parent()->parent();
+				  QPointF pos(note->canvasPos().x() - page->canvasPos().x(),  note->canvasPos().y());
+				  return qScriptValueFromValue(context->engine(), pos);
+			  }
+			  break;
+			case 10:     // "noteHead"
+				  if (context->argumentCount() == 0)
+					  return qScriptValueFromValue(context->engine(), note->noteHead());
+				  break;
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Note.%0(): bad argument count or value")

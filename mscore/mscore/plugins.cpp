@@ -345,7 +345,7 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("mscoreMajorVersion",  newVariant(majorVersion()));
       globalObject().setProperty("mscoreMinorVersion",  newVariant(minorVersion()));
       globalObject().setProperty("mscoreUpdateVersion", newVariant(updateVersion()));
-      
+      globalObject().setProperty("mscoreDPI",			newVariant(DPI));
       //globalObject().setProperty("localeName",          newVariant(lName));
       }
 

@@ -3,6 +3,8 @@
       - fix #7142: Crescendo & delete measures problems
       - fix #7197: MuseScore fails to open MSCZ files with capitals
       - fix #6932: Changing notehead of a breve crash
+      - add access to DPI, notehead, note bounding box and note position from plugin framework
+            (Patch by Mikhail Eliseev)
 14.sep (la)
       - fix #7077: Applying double-note tremolo to dotted notes fails and alter measure duration
 30.aug (db)
