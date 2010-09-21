@@ -821,10 +821,16 @@ void ChangeNoteHead::flip()
       QRectF r = note->abbox();
       note->setHeadGroup(group);
       note->setHeadType(type);
-      r |= note->abbox();
-      group = headGroup;
-      type  = t;
-      note->score()->addRefresh(r);
+      if(note->noteHead() != -1){
+        r |= note->abbox();
+        group = headGroup;
+        type  = t;
+        note->score()->addRefresh(r);
+        }
+      else{
+          note->setHeadGroup(headGroup);
+          note->setHeadType(t);
+          }
 //      note->score()->end();
       }
 
