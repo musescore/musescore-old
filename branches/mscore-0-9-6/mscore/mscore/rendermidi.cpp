@@ -66,8 +66,8 @@ void Score::updateChannel()
       int staffIdx   = 0;
       QList<ARec> alist;
       foreach(Part* part, _parts) {
-            alist.clear();
             for (int i = 0; i < part->staves()->size(); ++i) {
+                  alist.clear();
                   for (MeasureBase* mb = first(); mb; mb = mb->next()) {
                         if (mb->type() != MEASURE)
                               continue;
@@ -90,9 +90,7 @@ void Score::updateChannel()
                                     printf("channel <%s> not found\n", qPrintable(an));
                               }
                         }
-                  }
 
-            for (int i = 0; i < part->staves()->size(); ++i) {
                   Segment* s = tick2segment(0);
                   while (s) {
                         for (int track = staffIdx * VOICES; track < staffIdx*VOICES+VOICES; ++track) {
@@ -111,7 +109,6 @@ void Score::updateChannel()
                                           break;
                                     sc = ar.channel;
                                     }
-                              QList<ARec> alist;
                               foreach (Note* note, c->notes()) {
                                     if (note->hidden())
                                           continue;
@@ -122,8 +119,8 @@ void Score::updateChannel()
                               }
                         s = s->next1();
                         }
+                  ++staffIdx;
                   }
-            ++staffIdx;
             }
       }
 
