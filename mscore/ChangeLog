@@ -1,3 +1,5 @@
+22.sep (la)
+      - fix #7211: Copy/Paste notes over rest of diff. durations in staves
 21.sep (la)
       - fix #7167: Time signature change causes triplets to corrupt score
       - fix #7142: Crescendo & delete measures problems
