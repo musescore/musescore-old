@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_acc6fcafca0d4ea423bf0d1d5b8f503e.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_bb6b4648bfd4a1cc7263dfb01808f002.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx|bz2"}});
@@ -13,7 +13,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/en/handbook-0' />
     <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_69fe1cb3ea893908020d02a5edae773b.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_0acd95bf640f2dcd5d8e053af66fa2b4.css" />
   </head>
   <body>
         <div class="print-logo"><img class='print-logo' src='/sites/musescore.org/files/musescore-logo.png' alt='' />
@@ -21,7 +21,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <div class="print-slogan">Free music composition &amp; notation software</div>
     <p></p>
     <hr class="print-hr" />
-    <div class="print-site_name">Retrieved from <a href="http://musescore.org/en">http://musescore.org</a> on Mon, 07/12/2010</div>
+    <div class="print-site_name">Retrieved from <a href="http://musescore.org/en">http://musescore.org</a> on Wed, 09/22/2010</div>
     <h1 class="print-title"></h1>
     <div class="print-submitted"></div>
     <div class="print-created"></div>
@@ -47,6 +47,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
 <p>To start MuseScore choose <kbd><samp class="menu">Start</samp> → <samp class="submenu">All Programs</samp> → <samp class="submenu">MuseScore</samp> → <samp class="menuitem">MuseScore</samp></kbd>. </p>
 <p>After several seconds MuseScore will open up to the demo score. Feel free to experiment with the demo score and get the feel of the program. Next you may want to <a href="http://musescore.org/en/handbook/create-new-score" title="create new score">create your own score</a>.</p>
 <p><img src="/sites/musescore.org/files/screenshot-demo-score.png" alt="screenshot-demo-score.png" title="screenshot-demo-score.png" width="450" height="416" class="inline" /></p>
+<h4>Advanced users : Silent or unattended install</h4>
+<p>You can install MuseScore silently with the following command<br />
+<code>MuseScore-0.9.6.2.exe /S /D=C:\Program Files\MuseScore</code><br />
+You can uninstall with<code><br />
+cd C:\Program Files\MuseScore<br />
+Uninstall.exe /S</code></p>
 <h3 id="mac-installation">MacOSX</h3>
 <h4>Install</h4>
 <p>You will find the Mac dmg file on the <a href="http://musescore.org/en/download">Download</a> page of the MuseScore website. Click on the link to start the download. When download is finished, the dmg file is automatically mounted on your desktop as "MuseScore-0.9.5" and the installer appears.</p>
@@ -342,13 +348,14 @@ Choose to show numbers on "every system" which numbers the first measure of each
 <li><kbd><kbd>Ctrl</kbd>+<kbd>Up</kbd></kbd>:	Increase the pitch of a note by one octave.</li>
 <li><kbd><kbd>Ctrl</kbd>+<kbd>Down</kbd></kbd>:	Decrease the pitch of a note by one octave.</li>
 </ul>
-<p>MuseScore automatically tries to set an appropriate accidental for the changed pitch. If you need to manually correct an accidental or place an cautionary accidental (editorial accidental), then drag an accidental from the accidental palette to the note. If you later change the pitch with cursor keys, manual settings to the accidental are removed.</p>
+<p>In version 0.9.6 or later you can change an existing accidental into a cautionary accidental (enclosed in parentheses), Drag the parentheses from the accidental palette onto to the existing accidental (not the note head). To remove parentheses select the accidental and press <kbd><kbd>Delete</kbd></kbd>.</p>
+<p>If you later change the pitch with cursor keys, manual settings to the accidental are removed.</p>
 <p>The menu function <kbd><samp class="menu">Notes</samp> → <samp class="menuitem">Pitch spell</samp></kbd> tries to guess the right accidentals for the whole score.</p>
   </div>
 <div id="node-59" class="section-3">
   <h1 class="book-heading">Arpeggio</h1>
   <p><strong>Arpeggios</strong> are set by dragging an arpeggio symbol from the arpeggio palette to a note of a chord.</p>
-<p><img src="/sites/musescore.org/files/arpeggio-palette.png" alt="Arpeggio Palette" title="Arpeggio Palette" width="135" height="84" class="inline" /></p>
+<p><img src="/sites/musescore.org/files/arpeggio-palette_0.png" alt="Arpeggio Palette" title="Arpeggio Palette" width="167" height="82" class="inline" /></p>
 <p>In version 0.9.5 or later you can edit the length of the arpeggio by double clicking on it and dragging the handle up or down</p>
 <p><img src="/sites/musescore.org/files/arpeggio-multi-staff_0.png" alt="Arpeggio spanning two staves" title="Arpeggio spanning two staves" width="136" height="110" class="inline" /></p>
   </div>
@@ -701,11 +708,21 @@ By pressing the Play <img src="/sites/musescore.org/files/play.png" alt="play.pn
 <li>sfArk is a compression format designed especially for compressing SoundFont files. Use the special <a href="http://www.melodymachine.com/sfark.htm">sfArk software</a> to decompress it.</li>
 <li>.tar.gz is a popular compression format for Linux. Windows users can use <a href="http://www.7-zip.org/">7-zip</a> which supports a wide variety of compression formats. Note that you need apply decompression twice: once for GZip and once for TAR.</li>
 </ul>
-<h3>MuseScore settings</h3>
+<h3 id="musescore-soundfont-settings">MuseScore settings</h3>
 <p>After finding and decompressing a SoundFont do not double click to open it since this does not set up MuseScore. Instead move the file to a folder of your choosing, start MuseScore, and follow the instructions below.</p>
-<p>Go to <kbd><samp class="menu">Display</samp> → <samp class="menuitem">Synthesizer</samp></kbd>. If you are using version 0.9.5 or earlier then go to <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp> → <samp class="tab">I/O</samp> tab</kbd>.</p>
+<p>Go to <kbd><samp class="menu">Display</samp> → <samp class="menuitem">Synthesizer</samp></kbd>. The initial SoundFont setting depends on which operating system you are using.</p>
+<ul>
+<li>Windows: <samp>C:/Program Files/MuseScore//sound/TimGM6mb.sf2</samp></li>
+<li>Windows (64-bit): <samp>C:/Program Files (x86)/MuseScore//sound/TimGM6mb.sf2</samp></li>
+<li>MacOsX:  <samp>/Applications/MuseScore.app/Contents/Resources/sound/TimGM6mb.sf2</samp>
+</li>
+<li>Linux (Ubuntu): <samp>/usr/share/sounds/sf2/TimGM6mb.sf2</samp></li>
+</ul>
+<p>Click on the Open icon next to the SoundFont location and browse for your new SoundFont (.sf2) file. In the open dialog browse and select your file; then press Open. </p>
+<h4>Instructions for 0.9.5 or earlier</h4>
+<p>If you are using version 0.9.5 or earlier then go to <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp> → <samp class="tab">I/O</samp> tab</kbd>.</p>
 <p>The initial SoundFont setting is <samp>:/data/piano1.sf2</samp>. Replace this with the location of your new SoundFont (.sf2) file. Click on the Open icon to browse for the file and open it .</p>
-<p>If you are using version 0.9.5 or earlier, click OK to apply changes and exit the preferences panel. Quit and and reopen MuseScore for the changes to take affect.</p>
+<p>Click OK to apply changes and exit the preferences panel. Quit and and reopen MuseScore for the changes to take affect.</p>
 <h3>Troubleshooting</h3>
 <p>If the toolbar play panel is greyed out or not visible follow the instructions below to get your sound working again:</p>
 <ol>
@@ -745,6 +762,14 @@ By pressing the Play <img src="/sites/musescore.org/files/play.png" alt="play.pn
 <p>To turn a dials clockwise click and drag upwards. To turn a dial counter-clockwise (anti-clockwise) click and drag downwards. </p>
 <h4>Sound</h4>
 <p>The sound drop-down menu lists every instrument supported by your current <a href="http://musescore.org/en/handbook/soundfont" title="SoundFont">SoundFont</a>. This feature is not implemented in version 0.9.4 or earlier for Windows, but fixed in version 0.9.5.</p>
+<h3>Change instrument</h3>
+<p>Although you can change the instrument sound, staff name, and staff transposition separately, versions 0.9.6 or later allow you to change all of these properties at once.</p>
+<ol>
+<li>Right click on an empty part of the measure and choose <kbd><samp class="menuitem">Staff Properties...</samp></kbd></li>
+<li>Click on Change Instrument</li>
+<li>Choose your new instrument and click OK to return to the Staff Properties dialog</li>
+<li>Click OK again to return to the score</li>
+</ol>
 <h3>Mid-staff change</h3>
 <p>In MuseScore some instruments can change sounds midway through a piece. For example strings can switch to pizzicato or tremolo and trumpet can switch to muted trumpet. The following instructions use muted trumpet as an example but the same principles apply to pizzicato or tremolo strings.</p>
 <ol>
@@ -908,6 +933,14 @@ Vertical frames provide empty space between or before systems. The height is adj
 <li>Remember that the goal of a bug report is not only to show the bug but to allow others to reproduce the bug easily</li>
 </ul>
   </div>
+<div id="node-7021" class="section-3">
+  <h1 class="book-heading">Known incompatibilities</h1>
+  <p>The following software is known to crash MuseScore on startup : </p>
+<ul>
+<li>Samson USB Microphone, driver name "Samson ASIO Driver", samsonasiodriver.dll.  <a href="http://musescore.org/en/node/6849">More info</a></li>
+<li>Digidesign MME Refresh Service. <a href="http://musescore.org/en/node/6529">More info</a></li>
+</ul>
+  </div>
 <div id="node-2575" class="section-3">
   <h1 class="book-heading">Revert to factory settings</h1>
   <p>Recent versions of MuseScore have the option to revert back to the standard built-in presets or "factory-settings". Sometimes this is helpful if your settings are corrupted. This is not a normal occurrence so it is best to consult the forums first since there maybe a way to solve your problem without resetting everything.</p>
@@ -954,9 +987,70 @@ The other preferences (palette, session...) are in <code>~/Library/Application S
 <p>This resets all MuseScore preferences to factory settings and immediately launches the MuseScore application. You can now quit Terminal, and continue using MuseScore.</p>
 <p>For advanced users, the main MuseScore preference file is located at <code>~/.config/MusE/MuseScore.ini</code></p>
   </div>
-<div id="node-6168" class="section-3">
-  <h1 class="book-heading">Strange</h1>
-  <p>No relationship between title and body.</p>
+</div>
+<div id="node-6940" class="section-2">
+  <h1 class="book-heading">Appendix</h1>
+    <div id="node-6941" class="section-3">
+  <h1 class="book-heading">Keyboard shortcuts</h1>
+  <p>Keyboard shortcuts can be customized via <kbd><samp class="menu">Edit</samp> → <samp class="menuitem">Preferences...</samp> → <samp class="tab">Shortcuts</samp> tab</kbd>. Below is a list of of the initial shortcut settings.</p>
+<h3>Navigation</h3>
+<p>Beginning of score: <kbd><kbd>Home</kbd></kbd><br />
+End of score: <kbd><kbd>End</kbd></kbd></p>
+<p>Next page: <kbd><kbd>Pg Dn</kbd></kbd><br />
+Previous page: <kbd><kbd>Pg Up</kbd></kbd></p>
+<p>Next measure: <kbd><kbd>Ctrl</kbd>+<kbd>Right</kbd></kbd><br />
+Previous measure: <kbd><kbd>Ctrl</kbd>+<kbd>Left</kbd></kbd></p>
+<p>Next note: <kbd><kbd>Right</kbd></kbd><br />
+Previous note: <kbd><kbd>Left</kbd></kbd></p>
+<p>Note below (within a chord or on lower staff): <kbd><kbd>Alt</kbd>+<kbd>Down</kbd></kbd><br />
+Note above (within a chord or on higher staff): <kbd><kbd>Alt</kbd>+<kbd>Up</kbd></kbd></p>
+<p>Top note in chord: <kbd><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Up</kbd></kbd><br />
+Bottom note in chord: <kbd><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Down</kbd></kbd></p>
+<h3>Note entry</h3>
+<p>Begin note entry mode: <kbd><kbd>N</kbd></kbd><br />
+Leave note entry mode: <kbd><kbd>N</kbd></kbd> or <kbd><kbd>Esc</kbd></kbd></p>
+<h4>Duration</h4>
+<p><i>For a list of shortcuts for each duration (such as quarter note, eighth note, etc.) see <a href="http://musescore.org/en/handbook/note-entry" title="note entry">note entry</a>.</i></p>
+<p>Half duration of previous note: <kbd><kbd>Q</kbd></kbd><br />
+Double duration of previous note: <kbd><kbd>W</kbd></kbd></p>
+<h4>Voices</h4>
+<p><a href="http://musescore.org/en/handbook/voices" title="Voices">Voice</a> 1: <kbd><kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Ctrl</kbd>+<kbd>1</kbd></kbd><br />
+Voice 2: <kbd><kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Ctrl</kbd>+<kbd>2</kbd></kbd><br />
+Voice 3: <kbd><kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Ctrl</kbd>+<kbd>3</kbd></kbd><br />
+Voice 4: <kbd><kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Ctrl</kbd>+<kbd>4</kbd></kbd></p>
+<h4>Pitch</h4>
+<p><i>Pitches can be entered by letter name or MIDI keyboard. See <a href="http://musescore.org/en/handbook/note-entry" title="note entry">note entry</a> for full details.</i></p>
+<p>Repeat previous note: <kbd><kbd>R</kbd></kbd></p>
+<p>Raise pitch by octave: <kbd><kbd>Ctrl</kbd>+<kbd>Up</kbd></kbd><br />
+Lower pitch by octave: <kbd><kbd>Ctrl</kbd>+<kbd>Down</kbd></kbd></p>
+<p>Raise pitch by semi-tone: <kbd><kbd>Up</kbd></kbd><br />
+Lower pitch by semi-tone: <kbd><kbd>Down</kbd></kbd></p>
+<p>Add sharp to note: (undefined due to conflicts with zooming)<br />
+Add flat to note: <kbd><kbd>-</kbd></kbd></p>
+<p>Rest: <kbd><kbd>Space</kbd></kbd></p>
+<h4>Interval</h4>
+<p>Add interval above current note: <kbd><kbd>Alt</kbd>+[Number]</kbd><br />
+Add interval below current note: <kbd><kbd>Shift</kbd>+[Number]</kbd></p>
+<h3>Direction</h3>
+<p>Flip direction (stem, slur, tie, tuplet bracket, etc): <kbd><kbd>X</kbd></kbd><br />
+Mirror note head: <kbd><kbd>Shift</kbd>+<kbd>X</kbd></kbd></p>
+<h3>Articulations</h3>
+<p><a href="http://musescore.org/en/handbook/tie" title="Tie">Tie</a>: <kbd><kbd>+</kbd></kbd><br />
+<a href="http://musescore.org/en/handbook/slur" title="Slur">Slur</a>: <kbd><kbd>S</kbd></kbd><br />
+Staccato: <kbd><kbd>Shift</kbd>+<kbd>.</kbd></kbd><br />
+Crescendo (hairpin): <kbd><kbd>H</kbd></kbd><br />
+Decrescendo: <kbd><kbd>Shift</kbd>+<kbd>H</kbd></kbd></p>
+<h3>Lyric entry</h3>
+<p>Previous lyric syllable: <kbd><kbd>Ctrl</kbd>+<kbd>Left</kbd></kbd><br />
+Next lyric syllable: <kbd><kbd>Ctrl</kbd>+<kbd>Right</kbd></kbd></p>
+<p>Up to previous stanza: <kbd><kbd>Ctrl</kbd>+<kbd>Up</kbd></kbd><br />
+Down to next stanza: <kbd><kbd>Ctrl</kbd>+<kbd>Down</kbd></kbd></p>
+<p><i>For more lyric shortcuts see <a href="http://musescore.org/en/handbook/lyrics" title="lyrics">lyrics</a></i></p>
+<h3>Display</h3>
+<p>Navigator: <kbd><kbd>F12</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>N</kbd></kbd>)<br />
+Play Panel: <kbd><kbd>F11</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>P</kbd></kbd>)<br />
+Palette: <kbd><kbd>F9</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>K</kbd></kbd>)<br />
+Mixer: <kbd><kbd>F10</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>M</kbd></kbd>)</p>
   </div>
 </div>
 </div>

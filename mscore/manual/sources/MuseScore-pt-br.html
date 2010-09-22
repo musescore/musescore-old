@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_09efa3b73b7f04d3c7932cbce0537c4f.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_8a2b7cc3ef25daee2f634d8233414f9e.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx|bz2"}});
@@ -13,7 +13,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/pt-br/manual-pt-br/manual' />
     <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_69fe1cb3ea893908020d02a5edae773b.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_0acd95bf640f2dcd5d8e053af66fa2b4.css" />
   </head>
   <body>
         <div class="print-logo"><img class='print-logo' src='/sites/musescore.org/files/musescore-logo.png' alt='' />
@@ -21,7 +21,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <div class="print-slogan">Software livre de composição e partitura musical</div>
     <p></p>
     <hr class="print-hr" />
-    <div class="print-site_name">Retrieved from <a href="http://musescore.org/pt-br">http://musescore.org</a> on seg, 07/12/2010</div>
+    <div class="print-site_name">Retrieved from <a href="http://musescore.org/pt-br">http://musescore.org</a> on qua, 09/22/2010</div>
     <h1 class="print-title"></h1>
     <div class="print-submitted"></div>
     <div class="print-created"></div>
@@ -379,7 +379,7 @@ Escolha entre exibir números "a cada sistema", o que numera o primeiro compasso
   <p>Uma partitura pode ser exportada via <kbd><samp class="menu">Arquivo</samp> → <samp class="menuitem">Salvar como...</samp></kbd> para vários formatos:</p>
 <dl>
 <dt>Formato MuseScore compactado (<code>*.mscz</code>)</dt>
-<dd>MSCZ é o formato de arquivo <i>MuseScore</i> padrão e recomendado para a maior parte dos usuários. Uma partitura salva nesse formato não perderá nenhuma informação. O formato é uma versão comprimida dos arquivos <code>.msc</code>.</dd>
+<dd>MSCZ é o formato de arquivo <i>MuseScore</i> padrão e recomendado para a maior parte dos usos. Uma partitura salva nesse formato ocupa muito pouco espaço em disco, mas preserva todas as informações necessárias. O formato é uma versão dos arquivos <code>.mscx</code> comprimido em ZIP.</dd>
 <dt class="latest">Formato MuseScore (<code>*.mscx</code>)</dt>
 <dd class="latest">MSCX é a versão descompactada do formato de arquivo <i>MuseScore</i>, usado nas versões 0.9.5 e posteriores. Uma partitura salva nesse formato não perderá nenhuma informação; além disso, ele é recomendado se você precisa editar manualmente o formato, usando um editor de texto. Versões anteriores do MuseScore usavam a extensão MSC. No entanto, o arquivo MSC entra em conflito no Microsoft Windows, e é bloqueado por alguns provedores de e-mail. A nova extensão, MSCX, substitui a extensão MSC devido aos problemas supracitados.</dd>
 <dt>MusicXML (<code>*.xml</code>)</dt>
@@ -422,7 +422,8 @@ O MuseScore cria as imagens como elas apareceriam em páginas impressas. Se quis
 <li><kbd><kbd>Ctrl</kbd>+<kbd>Seta para cima</kbd></kbd>:	Eleva a altura de uma nota em uma oitava.</li>
 <li><kbd><kbd>Ctrl</kbd>+<kbd>Seta para baixo</kbd></kbd>:	 Abaixa a altura de uma nota em uma oitava.</li>
 </ul>
-<p>O MuseScore automaticamente tenta encontrar um acidente apropriado para a altura alterada. Se precisar corrigir manualmente um acidente ou inserir um acidente de precaução, arraste um acidente  da paleta de acidentes para a nota. Se posteriormente você alterar a altura com as setas, os ajustes manuais serão removidos.</p>
+<p>Nas versões 0.9.6 e posteriores você pode transformar um acidente existente em um acidente de precaução (entre parênteses). Arraste os parênteses da paleta Acidentes até o acidente existente (não até a cabeça da nota). Para remover os parênteses, selecione o acidente e pressione <kbd><kbd>Delete</kbd></kbd>.</p>
+<p>Se posteriormente você alterar a altura com as setas, os ajustes manuais serão removidos.</p>
 <p>A função de menu <kbd><samp class="menu">Notas</samp> → <samp class="menuitem">Corrigir acidentes</samp></kbd> tenta adivinhar os acidentes corretos para toda a partitura.</p>
 <div class="field field-type-filefield field-field-file">
     <div class="field-items">
@@ -774,7 +775,7 @@ Pressionando o botão Tocar <img src="/sites/musescore.org/files/play.png" alt="
   </div>
 <div id="node-2763" class="section-3">
   <h1 class="book-heading">SoundFont</h1>
-  <p>O MuseScore vem com um timbre de piano para reprodução de música. Para ter mais timbres, como violino ou percussão, você vai precisar de uma “General MIDI SoundFont”.</p>
+  <p>O MuseScore vem com um tipo especial de arquivo chamado SoundFont que diz ao MuseScore como tocar cada timbre de instrumento. Algumas SoundFonts são projetadas especialmente para música clássica, outras para jazz ou pop; outras são grandes e ocupam muita memória e outras ainda, são muito pequenas e leves. As últimas versões do MuseScore (versão 0.9.6 ou posterior) vem com uma SoundFont genérica e relativamente leve chamada "TimGM6mb.sf2". </p>
 <h3>Visão geral</h3>
 <p>Um arquivo SoundFont pode armazenar qualquer número de timbres de instrumentos. Muitas SoundFonts estão disponíveis na Internet. Procure por uma que cubra os 128 timbres da <a href="http://pt.wikipedia.org/wiki/General_MIDI">General MIDI</a> (GM). Se você usar uma SoundFont que não está de acordo com o padrão General MIDI, outras pessoas poderão não ouvir corretamente os instrumentos quando você compartilhar a partitura ou salvar como MIDI. </p>
 <p>São diversos os tamanhos de arquivo e a qualidade de som das SoundFonts disponíveis na Internet. SoundFonts maiores são geralmente melhores, mas podem ser grandes demais para rodar no seu computador. Se você achar que o MuseScore ficou lento depois de instalar uma SoundFont grande ou que seu computador não aguenta reproduzir uma partitura, procure uma SoundFont menor. Abaixo estão três SoundFonts populares de tamanhos diferentes.</p>
@@ -790,11 +791,21 @@ Pressionando o botão Tocar <img src="/sites/musescore.org/files/play.png" alt="
 <li>sfArk é um formato de compactação projetado especialmente para compactar arquivos SoundFont. Use o programa <a href="http://www.melodymachine.com/sfark.htm">sfArk</a> para descompactá-lo.</li>
 <li>.tar.gz é um formato de compactação muito usado no Linux. Usuários de Windows podem usar o <a href="http://www.7-zip.org/">7-zip</a>, que suporta uma grande variedade de formatos de compactação. Não esqueça que você tem que aplicar a descompactação duas vezes: primeiro para o GZip e depois para o TAR.</li>
 </ul>
-<h3>Configurações do MuseScore</h3>
+<h3 id="musescore-soundfont-settings">Configurações do MuseScore</h3>
 <p>Depois que encontrar e descompactar uma SoundFont, não dê duplo clique para abri-la pois isso não configura o MuseScore. Ao invés disso, mova o arquivo para uma pasta de sua escolha, inicie o MuseScore e siga as seguintes instruções.</p>
-<p>Vá até <kbd><samp class="menu">Exibir</samp> → <samp class="menuitem">Sintetizador</samp></kbd>. Se estiver usando a versão 0.9.5 ou mais antiga, vá até <kbd><samp class="menu">Editar</samp> → <samp class="menuitem">Configurações...</samp> → aba <samp class="tab">I/O</samp></kbd>. </p>
-<p>A configuração inicial de SoundFont é <samp>:/data/piano1.sf2</samp>. Substitua isso pelo endereço do seu novo arquivo SoundFont (.sf2). Clique no ícone Abrir para procurar e abrir o arquivo.</p>
-<p>Clique em OK para aplicar as mudanças e sair da janela de configurações. Feche e reabra o MuseScore para as mudanças terem efeito.</p>
+<p>Vá até <kbd><samp class="menu">Exibir</samp> → <samp class="menuitem">Sintetizador</samp></kbd>. As configurações iniciais de SoundFont dependem de qual sistema operacional você está usando. </p>
+<ul>
+<li>Windows: <samp>C:/Program Files/MuseScore//sound/TimGM6mb.sf2</samp></li>
+<li>Windows (64-bit): <samp>C:/Program Files (x86)/MuseScore//sound/TimGM6mb.sf2</samp></li>
+<li>MacOsX:  <samp>/Applications/MuseScore.app/Contents/Resources/sound/TimGM6mb.sf2</samp>
+</li>
+<li>Linux (Ubuntu): <samp>/usr/share/sounds/sf2/TimGM6mb.sf2</samp></li>
+</ul>
+<p>Clique no ícone Abrir próximo à localização da SoundFont e navegue até seu novo arquivo de SoundFont (.sf2) e pressione Abrir. </p>
+<h4>Instruções para o 0.9.5 ou anteriores</h4>
+<p>Se estiver usando a versão 0.9.5 ou anteriores, vá até <kbd><samp class="menu">Editar</samp> → <samp class="menuitem">Configurações...</samp> → aba <samp class="tab">I/O</samp></kbd>.</p>
+<p>A configuração inicial de SoundFont é <samp>:/data/piano1.sf2</samp>. Substitua isto pela localização do seu novo arquivo SoundFont (.sf2). Clique no ícone Abrir para navegar até o arquivo e abra-o.</p>
+<p>Clique OK para aplicar as mudanças e saia do painel de configurações. Feche e reabra MuseScore para que as mudanças tenham efeito.</p>
 <h3>Resolução de problemas</h3>
 <p>Se o painel de reprodução da barra de ferramentas ficar cinza ou invisível, siga as instruções a seguir para ter seu som funcionando novamente:</p>
 <ol>
@@ -834,6 +845,14 @@ Pressionando o botão Tocar <img src="/sites/musescore.org/files/play.png" alt="
 <p>Para girar um controle no sentido horário clique e arraste para cima. Para girar um controle no sentido anti-horário clique e arraste para baixo. </p>
 <h4>Timbre</h4>
 <p>O menu “drop-down” de timbres lista cada instrumento suportado pela sua <a href="http://musescore.org/pt-br/manual-pt-br/soundfont" title="SoundFont">SoundFont</a> atual. Esse recurso não está implementado na versão 0.9.4 ou anteriores para Windows, apenas na versão 0.9.5.</p>
+<h3>Mudar instrumento</h3>
+<p>Embora você possa mudar o timbre do instrumento, nome da pauta e transposição da pauta separadamente, as versões 0.9.6 e posteriores permitem alterar todas estas propriedades de uma só vez.</p>
+<ol>
+<li>Clique com o botão direito em uma parte vazia do compasso e selecione <kbd><samp class="menuitem">Propriedades da pauta...</samp></kbd></li>
+<li>Clique em Mudar Instrumento</li>
+<li>Escolha seu novo instrumento e clique OK para retornar ao diálogo de Propriedades de pauta</li>
+<li>Clique OK novamente para retornar para a partitura</li>
+</ol>
 <h3>Mudança no meio da partitura</h3>
 <p>No MuseScore pode-se trocar o timbre dos instrumentos no meio de uma peça. Por exemplo, as cordas podem mudar para pizzicato ou trêmulo e o trompete para surdina. As instruções a seguir usam trompete com surdina como exemplo, mas os mesmos princípios se aplicam para cordas com pizzicato ou trêmulo.</p>
 <ol>
@@ -846,6 +865,12 @@ Pressionando o botão Tocar <img src="/sites/musescore.org/files/play.png" alt="
 <li>Clique <kbd><samp>OK</samp></kbd> para retornar para a partitura</li>
 </ol>
 <p>Todas as notas depois do texto de pauta que você adicionou agora soam com surdina. Para retornar para o timbre sem surdina posteriormente nesta peça, siga as mesmas instruções acima substituindo Surdina por <kbd>Sem surdina</kbd> no item 3 e selecionando <kbd><samp>normal</samp></kbd> no item 6.</p>
+<div class="field field-type-filefield field-field-file">
+    <div class="field-items">
+            <div class="field-item odd">
+                    <div class="filefield-file clear-block"><div class="filefield-icon field-icon-image-png"><img class="field-icon-image-png"  alt="image/png icon" src="http://musescore.org/sites/all/modules/filefield/icons/protocons/16x16/mimetypes/image-x-generic.png" /></div><a href="http://musescore.org/sites/musescore.org/files/ptbr-mixer.png" type="image/png; length=41032">ptbr-mixer.png</a></div>        </div>
+        </div>
+</div>
   </div>
 </div>
 <div id="node-2791" class="section-2">
@@ -1046,6 +1071,79 @@ Molduras verticais fornecem espaços entre ou antes de sistemas de pentagramas. 
 </ol>
 <p>Isso reverte todas as configurações do MuseScore para os padrões de fábrica e abre imediatamente o MuseScore. Pode fechar agora o Terminal e continuar usando o MuseScore.</p>
 <p>Para usuários avançados, o arquivo principal de configuração do está localizado em <code>~/.config/MusE/MuseScore.ini</code></p>
+  </div>
+<div id="node-7037" class="section-3">
+  <h1 class="book-heading">Incompatibilidades conhecidas</h1>
+  <p>Os programas abaixo são conhecidos por quebrar o MuseScore na inicialização:</p>
+<ul>
+<li>Microfone Samson USB, nome do driver: "Samson ASIO Driver", samsonasiodriver.dll.  <a href="http://musescore.org/en/node/6849">Mais informação</a> (em inglês)</li>
+<li>Digidesign MME Refresh Service. <a href="http://musescore.org/en/node/6529">Mais informação</a> (em inglês)</li>
+</ul>
+  </div>
+</div>
+<div id="node-6945" class="section-2">
+  <h1 class="book-heading">Apêndice</h1>
+    <div id="node-6946" class="section-3">
+  <h1 class="book-heading">Teclas de atalho</h1>
+  <p>As teclas de atalho podem ser personalizadas via <kbd><samp class="menu">Editar</samp> → <samp class="menuitem">Configurações...</samp> → <samp class="tab">Atalhos</samp> tab</kbd>. Segue abaixo uma lista com as configurações iniciais de teclas de atalho.</p>
+<h3>Navegação</h3>
+<p>Início da partitura: <kbd><kbd>Home</kbd></kbd><br />
+Fim da partitura: <kbd><kbd>End</kbd></kbd></p>
+<p>Página seguinte: <kbd><kbd>Pg Dn</kbd></kbd><br />
+Página anterior: <kbd><kbd>Pg Up</kbd></kbd></p>
+<p>Compasso seguinte: <kbd><kbd>Ctrl</kbd>+<kbd>Direita</kbd></kbd><br />
+Compasso anterior: <kbd><kbd>Ctrl</kbd>+<kbd>Esquerda</kbd></kbd></p>
+<p>Nota seguinte: <kbd><kbd>Direita</kbd></kbd><br />
+Nota anterior: <kbd><kbd>Esquerda</kbd></kbd></p>
+<p>Nota abaixo (dentro do acorde ou na pauta inferior): <kbd><kbd>Alt</kbd>+<kbd>Abaixo</kbd></kbd><br />
+Nota acima (dentro do acorde ou na pauta superior): <kbd><kbd>Alt</kbd>+<kbd>Acima</kbd></kbd></p>
+<p>Nota mais alta do acorde: <kbd><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Acima</kbd></kbd><br />
+Nota mais baixa do acorde: <kbd><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Abaixo</kbd></kbd></p>
+<h3>Inserção de notas</h3>
+<p>Iniciar modo de inserção de notas: <kbd><kbd>N</kbd></kbd><br />
+Finalizar modo de inserção de notas: <kbd></kbd>N or <kbd><kbd>Esc</kbd></kbd></p>
+<h4>Duração</h4>
+<p><i>Para ver uma lista de atalhos para cada duração (como semínima, colcheia, etc.) veja <a href="http://musescore.org/pt-br/manual-pt-br/inserção-de-notas" title="Inserção de notas">Inserção de notas</a>.</i></p>
+<p>Dividir pela metade a duração da nota anterior: <kbd><kbd>Q</kbd></kbd><br />
+Dobrar  a duração da nota anterior: <kbd><kbd>W</kbd></kbd></p>
+<h4>Vozes</h4>
+<p><a href="http://musescore.org/pt-br/manual-pt-br/vozes" title="Vozes">Voz</a> 1: <kbd><kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Ctrl</kbd>+<kbd>1</kbd></kbd><br />
+Voz 2: <kbd><kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Ctrl</kbd>+<kbd>2</kbd></kbd><br />
+Voz 3: <kbd><kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Ctrl</kbd>+<kbd>3</kbd></kbd><br />
+Voz 4: <kbd><kbd>Ctrl</kbd>+<kbd>I</kbd>, <kbd>Ctrl</kbd>+<kbd>4</kbd></kbd></p>
+<h4>Altura</h4>
+<p><i>As alturas podem ser inseridas através do teclado alfabético ou de teclado MIDI. Veja <a href="http://musescore.org/pt-br/manual-pt-br/inserção-de-notas" title="Inserção de notas">Inserção de notas</a> para maiores detalhes.</i></p>
+<p>Repetir nota anterior: <kbd><kbd>R</kbd></kbd></p>
+<p>Elevar altura em uma oitava: <kbd><kbd>Ctrl</kbd>+<kbd>Acima</kbd></kbd><br />
+Abaixar altura em uma oitava: <kbd><kbd>Ctrl</kbd>+<kbd>Abaixo</kbd></kbd></p>
+<p>Elevar altura em um semitom: <kbd><kbd>Acima</kbd></kbd><br />
+Abaixar altura em um semitom: <kbd><kbd>Abaixo</kbd></kbd></p>
+<p>Inserir sustenido na nota: (indefinido devido a conflitos com o zoom)<br />
+Inserir bemol na nota: <kbd><kbd>-</kbd></kbd></p>
+<p>Pausa: <kbd><kbd>Espaço</kbd></kbd></p>
+<h4>Intervalo</h4>
+<p>Inserir intervalo acima da nota atual <kbd><kbd>Alt</kbd>+[Número]</kbd><br />
+Inserir intervalo abaixo da nota atual <kbd><kbd>Shift</kbd>+[Número]</kbd></p>
+<h3>Direção</h3>
+<p>Inverter diração (haste, legato, ligadura, colchete de quiáltera, etc): <kbd><kbd>X</kbd></kbd><br />
+Espelhar cabeça de nota: <kbd><kbd>Shift</kbd>+<kbd>X</kbd></kbd></p>
+<h3>Articulações</h3>
+<p><a href="http://musescore.org/pt-br/manual-pt-br/ligadura" title="Ligadura">Ligadura</a>: <kbd><kbd>+</kbd></kbd><br />
+<a href="http://musescore.org/pt-br/manual-pt-br/legato" title="Legato">Legato</a>: <kbd><kbd>S</kbd></kbd><br />
+Staccato: <kbd><kbd>Shift</kbd>+<kbd>.</kbd></kbd><br />
+Crescendo: <kbd><kbd>H</kbd></kbd><br />
+Decrescendo: <kbd><kbd>Shift</kbd>+<kbd>H</kbd></kbd></p>
+<h3>Inserção de letra</h3>
+<p>Sílaba anterior: <kbd><kbd>Ctrl</kbd>+<kbd>Esquerda</kbd></kbd><br />
+Sílaba posterior: <kbd><kbd>Ctrl</kbd>+<kbd>Direita</kbd></kbd></p>
+<p>Estrofe anterior: <kbd><kbd>Ctrl</kbd>+<kbd>Acima</kbd></kbd><br />
+Estrofe posterior: <kbd><kbd>Ctrl</kbd>+<kbd>Abaixo</kbd></kbd></p>
+<p><i>Para mais atalhos de letra de música veja <a href="http://musescore.org/pt-br/manual-pt-br/letra" title="letra">letra</a></i></p>
+<h3>Exibição</h3>
+<p>Navegador: <kbd><kbd>F12</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>N</kbd></kbd>)<br />
+Painel de reprodução: <kbd><kbd>F11</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>P</kbd></kbd>)<br />
+Paleta: <kbd><kbd>F9</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>K</kbd></kbd>)<br />
+Mixer: <kbd><kbd>F10</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>M</kbd></kbd>)</p>
   </div>
 </div>
 </div>
