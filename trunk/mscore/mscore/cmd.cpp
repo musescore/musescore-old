@@ -786,24 +786,24 @@ printf("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominat
 //    return size of actual gap
 //---------------------------------------------------------
 
-void Score::makeGap1(int tick, int staffIdx, Fraction len)
+bool Score::makeGap1(int tick, int staffIdx, Fraction len)
       {
       ChordRest* cr = 0;
       Segment* seg = tick2segment(tick, true);
       if (!seg) {
             printf("1:makeGap1: no segment at %d\n", tick);
-            return;
+            return false;
             }
       while (seg && !(seg->subtype() & (SegChordRest | SegGrace)))
             seg = seg->next1();
       if (!seg) {
             printf("2:makeGap1: no segment at %d\n", tick);
-            return;
+            return false;
             }
       cr = static_cast<ChordRest*>(seg->element(staffIdx * VOICES));
       if (!cr) {
             printf("makeGap1: no chord/rest at %d staff %d\n", tick, staffIdx);
-            return;
+            return false;
             }
 
       Fraction gap;
@@ -823,7 +823,7 @@ void Score::makeGap1(int tick, int staffIdx, Fraction len)
                   m = cr->measure()->nextMeasure();
                   if (m == 0) {
                         printf("===EOS reached\n");
-                        return;
+                        return true;
                         }
                   }
             Segment* s = m->firstCRSegment();
@@ -834,6 +834,7 @@ void Score::makeGap1(int tick, int staffIdx, Fraction len)
                   cr = static_cast<ChordRest*>(s->element(track));
                   }
             }
+      return true;
       }
 
 //---------------------------------------------------------
@@ -2366,12 +2367,14 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             int srcStaffStart = e.attribute("staff", "0").toInt();
             int staves        = e.attribute("staves", "0").toInt();
             curTick           = tickStart;
-
+            
+            QSet<int> blackList;
             for (int i = 0; i < staves; ++i) {
                   int staffIdx = i + dstStaffStart;
                   if (staffIdx >= nstaves())
                         break;
-                  makeGap1(dst->tick(), staffIdx, Fraction::fromTicks(tickLen));
+                  if(!makeGap1(dst->tick(), staffIdx, Fraction::fromTicks(tickLen)))
+                        blackList.insert(staffIdx);
                   }
 
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -2380,6 +2383,8 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                         continue;
                         }
                   int srcStaffIdx = ee.attribute("id", "0").toInt();
+                  if(blackList.contains(srcStaffIdx))
+                        continue;
                   int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
                   if (dstStaffIdx >= nstaves())
                         break;

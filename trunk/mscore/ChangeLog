@@ -1,3 +1,5 @@
+22.sep (la)
+      - fix #7211: Copy/Paste notes over rest of diff. durations in staves
 21.sep (la)
       - fix #7142: Crescendo & delete measures problems (MusicXML export)
       - fix #7197: MuseScore fails to open MSCZ files with capitals
