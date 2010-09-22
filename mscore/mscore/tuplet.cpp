@@ -259,11 +259,13 @@ void Tuplet::layout()
       p2 -= mp;
 
       if (_userModified) {
-            p1.rx() += _p1.x();
-            p2.rx() += _p2.x();
+//            p1.rx() += _p1.x();
+//            p2.rx() += _p2.x();
+            p1 += _p1;
+            p2 += _p2;
             }
-      _p1.ry() = p1.y();
-      _p2.ry() = p2.y();
+//      _p1.ry() = p1.y();
+//      _p2.ry() = p2.y();
 
       // center number
       qreal x3 = 0.0, y3 = 0.0;
