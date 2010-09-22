@@ -82,6 +82,10 @@ INSTRUCTIONS FOR ADDING NEW LANGUAGE
 
 CHANGE LOG
 
+Version 1.7 (September 2010)
+* Add danish
+* fix for russian capitalization using decode("utf-8").lower().encode("utf-8") 
+
 Version 1.6 (March 2010)
 * Update style sheet for 0.9.6
 * Fix for "/" link in English handbook

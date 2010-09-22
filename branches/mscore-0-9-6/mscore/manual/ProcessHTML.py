@@ -47,7 +47,7 @@ def insertH1Anchors(html_source, anchors, verbose):
     split = html_source.split('<h1')
 
     for i in range(1, len(split)):
-        name = split[i][split[i].index('>')+1:split[i].index('</h1>')].lower().replace(" ","-")
+        name = split[i][split[i].index('>')+1:split[i].index('</h1>')].decode("utf-8").lower().encode("utf-8").replace(" ","-")
         
         name = name.replace("&#039;","") #remove HTML encoding for French apostrophe
         name = name.replace(",","").replace("(","").replace(")","") #remove punctuation
@@ -61,7 +61,7 @@ def insertH1Anchors(html_source, anchors, verbose):
         name = name.replace('li%c3%b1as','li%c3%b1') #workaround incorrect url on website (Galacian handbook)
         split[i-1] = split[i-1] + '<a name="' + name + '"></a>'
         anchors.append(name)
-        print name
+        #print name
         
     html_source = '<h1'.join(split)
 
@@ -110,6 +110,8 @@ def chapterHeading(html_source, verbose, language_code):
         chapter = 'Hoofdstuk [number]'
     elif language_code == 'ca':
         chapter = 'Cap&iacute;tol [number]'
+    elif language_code == 'da':
+        chapter = 'Kapitel [number]'
     elif language_code == 'de':
         chapter = 'Kapitel [number]'
     elif language_code == 'el':
@@ -187,7 +189,7 @@ def fixLinks(html_source, anchors, verbose, handbook_url, language_code='en'):
             original_href = "http://musescore.org/"
 
         # Fix links to h1 and h2 anchors
-        internal_href = original_href.replace(handbook_url + '/','#').replace('%20','-').replace('%2520','-').lower()
+        internal_href = original_href.replace(handbook_url + '/','#').replace('%20','-').replace('%2520','-').decode("utf-8").lower().encode("utf-8")
         if internal_href[:1] == '#':
             internal_href = '#' + urllib2.quote(internal_href[1:]).lower() #percent encode URL to match anchor names
         
@@ -532,6 +534,9 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
     elif language_code == 'ca':
         url = 'http://musescore.org/ca/print/book/export/html/3414'
         internal = 'http://musescore.org/ca/manual'
+    elif language_code == 'da':
+        url = 'http://musescore.org/da/print/book/export/html/1947'
+        internal = 'http://musescore.org/da/håndbog'
     elif language_code == 'de':
         url = 'http://musescore.org/de/print/book/export/html/98'
         internal = 'http://musescore.org/de/handbuch'
@@ -624,7 +629,7 @@ def createHandbook(language_code, download_images='missing', pdf='openpdf', verb
 
 
 def main():
-    language_choices = ['all','en','ca','de','el','es','fi','fr','gl','hu','it','ja','nb','nl','pl','pt-BR','ro','ru', 'zh-hans']
+    language_choices = ['all','en','ca','da','de','el','es','fi','fr','gl','hu','it','ja','nb','nl','pl','pt-BR','ro','ru', 'zh-hans']
   
     parser = OptionParser()
     parser.add_option("-l","--lang", dest="language_code",
