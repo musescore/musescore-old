@@ -65,6 +65,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void appStyleFileButtonClicked();
       void recordButtonClicked(int);
       void midiRemoteControlClearClicked();
+      void selectSoundFont();
 
    signals:
       void preferencesChanged();

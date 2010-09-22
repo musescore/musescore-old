@@ -10,7 +10,7 @@
    viewBox="-1 -200 1000 1000"
    id="svg34224"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
+   inkscape:version="0.47 r22583"
    width="128"
    height="128"
    sodipodi:docname="tie.svg"
@@ -48,17 +48,18 @@
      id="base"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:zoom="0.12564967"
-     inkscape:cx="-2295.8138"
-     inkscape:cy="-397.23545"
-     inkscape:window-x="38"
-     inkscape:window-y="77"
+     inkscape:zoom="4.0207894"
+     inkscape:cx="84.002458"
+     inkscape:cy="61.209685"
+     inkscape:window-x="376"
+     inkscape:window-y="34"
      inkscape:current-layer="svg34224"
      width="128px"
      height="128px"
-     showgrid="false" />
+     showgrid="false"
+     inkscape:window-maximized="0" />
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:115.49848938;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:47.53125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:3;stroke-dasharray:none;stroke-opacity:1"
      d="M 101.36142,587.66031 C 206.75699,741.2113 361.52809,704.15638 484.29289,650.1041"
      id="path2391"
      sodipodi:nodetypes="cc" />
@@ -72,13 +73,13 @@
        sodipodi:nodetypes="cccccccccc" />
   </g>
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:99.5234375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="M 188.14029,192.29596 L 573.25844,192.54293"
+     style="fill:none;stroke:#000000;stroke-width:58.88863373;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="m 165.87986,187.52277 425.75295,0.0782"
      id="path2383"
      sodipodi:nodetypes="cc" />
   <path
-     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:98.8359375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="M 379.98586,-7.2254758 L 380.44134,378.79655"
+     style="fill:none;stroke:#000000;stroke-width:64.14093781;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="m 374.29651,-24.572976 0.17602,420.717036"
      id="path2385"
      sodipodi:nodetypes="cc" />
 </svg>

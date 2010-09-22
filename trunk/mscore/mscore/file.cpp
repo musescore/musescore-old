@@ -1363,8 +1363,10 @@ bool Score::read(QDomElement dScore)
 #endif
             else if (tag == "showOmr")
                   _showOmr = i;
-            else if (tag == "SyntiSettings")
+            else if (tag == "SyntiSettings") {
+                  _syntiSettings.clear();       // TODO: memory leak
                   _syntiSettings.read(ee);
+                  }
             else if (tag == "Spatium")
                   setSpatium (val.toDouble() * DPMM);
             else if (tag == "Division")
@@ -2200,5 +2202,20 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                         }
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   getSoundFont
+//---------------------------------------------------------
+
+QString getSoundFont(const QString& d)
+      {
+      QString s = QFileDialog::getOpenFileName(
+         mscore,
+         MuseScore::tr("Choose Synthesizer SoundFont"),
+         d,
+         MuseScore::tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
+         );
+      return s;
       }
 

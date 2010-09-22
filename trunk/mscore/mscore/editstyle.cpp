@@ -162,6 +162,7 @@ void EditStyle::getValues()
       lstyle.set(ST_clefKeyRightMargin,      Spatium(clefKeyRightMargin->value()));
       lstyle.set(ST_clefBarlineDistance,     Spatium(clefBarlineDistance->value()));
       lstyle.set(ST_beginRepeatLeftMargin,   Spatium(beginRepeatLeftMargin->value()));
+      lstyle.set(ST_staffLineWidth,          Spatium(staffLineWidth->value()));
       lstyle.set(ST_beamWidth,               Spatium(beamWidth->value()));
       lstyle.set(ST_beamDistance,            beamDistance->value());
       lstyle.set(ST_beamMinLen,              Spatium(beamMinLen->value()));
@@ -283,6 +284,7 @@ void EditStyle::setValues()
       clefKeyRightMargin->setValue(lstyle[ST_clefKeyRightMargin].toSpatium().val());
       clefBarlineDistance->setValue(lstyle[ST_clefBarlineDistance].toSpatium().val());
       beginRepeatLeftMargin->setValue(lstyle[ST_beginRepeatLeftMargin].toSpatium().val());
+      staffLineWidth->setValue(lstyle[ST_staffLineWidth].toSpatium().val());
 
       beamWidth->setValue(lstyle[ST_beamWidth].toSpatium().val());
       beamDistance->setValue(lstyle[ST_beamDistance].toDouble());

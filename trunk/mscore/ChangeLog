@@ -1,6 +1,13 @@
-22.sep (la)
+22.sep (ws)
+      - add default soundfont to preferences
+      - soundfonts are now associated with Score()
+      - implement multiple soundfonts
+      - added modified mscore-20.ttf from Miwarre
+      (la)
       - fix #7211: Copy/Paste notes over rest of diff. durations in staves
-21.sep (la)
+21.sep (ws)
+      - expose staff line width in style dialog
+      (la)
       - fix #7142: Crescendo & delete measures problems (MusicXML export)
       - fix #7197: MuseScore fails to open MSCZ files with capitals
       - fix #6932: Changing notehead of a breve crash

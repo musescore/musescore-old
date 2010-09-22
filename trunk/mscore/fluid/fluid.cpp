@@ -758,6 +758,33 @@ bool Fluid::loadSoundFonts(const QStringList& sl)
       }
 
 //---------------------------------------------------------
+//   addSoundFont
+//    return false on error
+//---------------------------------------------------------
+
+bool Fluid::addSoundFont(const QString& s)
+      {
+      mutex.lock();
+      bool rv = (sfload(s, true) == -1) ? false : true;
+      mutex.unlock();
+      return rv;
+      }
+
+//---------------------------------------------------------
+//   removeSoundFont
+//    return false on error
+//---------------------------------------------------------
+
+bool Fluid::removeSoundFont(const QString& s)
+      {
+      mutex.lock();
+      SFont* sf = get_sfont_by_name(s);
+      sfunload(sf->id(), true);
+      mutex.unlock();
+      return true;
+      }
+
+//---------------------------------------------------------
 //   sfload
 //---------------------------------------------------------
 

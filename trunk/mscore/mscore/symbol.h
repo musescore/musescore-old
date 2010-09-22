@@ -53,7 +53,6 @@ class Symbol : public BSymbol {
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      virtual QRectF bbox() const;
       virtual void layout();
       void setAbove(bool);
 

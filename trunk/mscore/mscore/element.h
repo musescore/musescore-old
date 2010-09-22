@@ -534,7 +534,7 @@ class Compound : public Element {
       void clear();
       virtual void setSelected(bool f);
       virtual void setVisible(bool);
-      virtual QRectF bbox() const;
+      virtual void layout();
       };
 
 //---------------------------------------------------------

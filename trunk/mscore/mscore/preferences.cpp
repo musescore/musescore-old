@@ -36,7 +36,7 @@
 #include "pa.h"
 #include "pm.h"
 #include "page.h"
-// #include "globals.h"
+#include "file.h"
 
 extern void writeShortcuts();
 extern void readShortcuts();
@@ -122,6 +122,7 @@ void Preferences::init()
 
       lPort              = "";
       rPort              = "";
+      soundFont          = "";
       showNavigator      = true;
       showPlayPanel      = false;
       showStatusBar      = true;
@@ -558,6 +559,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(recordButtons,          SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
       connect(midiRemoteControlClear, SIGNAL(clicked()), SLOT(midiRemoteControlClearClicked()));
       connect(appStyleFileButton,     SIGNAL(clicked()), SLOT(appStyleFileButtonClicked()));
+      connect(sfOpenButton,           SIGNAL(clicked()), SLOT(selectSoundFont()));
       updateRemote();
       }
 
@@ -680,6 +682,7 @@ void PreferenceDialog::updateValues(Preferences* p)
             jackLPort->setEnabled(false);
             }
 
+      soundFont->setText(p->soundFont);
       navigatorShow->setChecked(p->showNavigator);
       playPanelShow->setChecked(p->showPlayPanel);
       playPanelX->setValue(p->playPanelPos.x());
@@ -1106,6 +1109,7 @@ void PreferenceDialog::apply()
             preferences.lPort       = jackLPort->currentText();
             preferences.rPort       = jackRPort->currentText();
             }
+      preferences.soundFont          = soundFont->text();
       preferences.showNavigator      = navigatorShow->isChecked();
       preferences.showPlayPanel      = playPanelShow->isChecked();
       preferences.playPanelPos       = QPoint(playPanelX->value(), playPanelY->value());
@@ -1232,16 +1236,6 @@ void PreferenceDialog::apply()
 
       emit preferencesChanged();
       preferences.write();
-      if (sfChanged) {
-            if (!seq->isRunning()) {
-                  // try to start sequencer
-                  seq->init();
-                  }
-            if (seq->isRunning()) {
-                  sfChanged = false;
-//                  seq->loadSoundFont(preferences.soundFont);
-                  }
-            }
       mscore->startAutoSave();
       }
 
@@ -1498,4 +1492,13 @@ void PreferenceDialog::midiRemoteControlClearClicked()
       updateRemote();
       }
 
+//---------------------------------------------------------
+//   selectSoundFont
+//---------------------------------------------------------
+
+void PreferenceDialog::selectSoundFont()
+      {
+      QString s = ::getSoundFont(soundFont->text());
+            soundFont->setText(s);
+      }
 

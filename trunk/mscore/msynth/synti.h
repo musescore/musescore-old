@@ -58,6 +58,9 @@ class Synth {
       virtual double masterTuning() const { return 440.0; }
 
       virtual bool loadSoundFonts(const QStringList&) = 0;
+      virtual bool addSoundFont(const QString&) { return false; }
+      virtual bool removeSoundFont(const QString&) { return false; }
+
       virtual QStringList soundFonts() const = 0;
 
       virtual void process(unsigned, float*, float*, int, float) = 0;

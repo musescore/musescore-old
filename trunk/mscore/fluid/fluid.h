@@ -390,6 +390,8 @@ class Fluid : public Synth {
       Preset* get_channel_preset(int chan) const { return channel[chan]->preset(); }
 
       virtual bool loadSoundFonts(const QStringList& s);
+      virtual bool addSoundFont(const QString& s);
+      virtual bool removeSoundFont(const QString& s);
       virtual QStringList soundFonts() const;
 
       void start_voice(Voice* voice);
