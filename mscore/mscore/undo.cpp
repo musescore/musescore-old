@@ -731,6 +731,13 @@ void Score::undoAddElement(Element* element)
       foreach(Staff* staff, staffList) {
             Score* score = staff->score();
             int staffIdx = score->staffIdx(staff);
+            Element* ne;
+            if (staff == ostaff)
+                  ne = element;
+            else {
+                  ne = element->clone();
+                  ne->setSelected(false);
+                  }
             if (element->type() == ARTICULATION) {
                   Articulation* a  = static_cast<Articulation*>(element);
                   ChordRest* cr    = static_cast<ChordRest*>(a->parent());
@@ -738,7 +745,7 @@ void Score::undoAddElement(Element* element)
                   int tick         = segment->tick();
                   Measure* m       = score->tick2measure(tick);
                   Segment* seg     = m->findSegment(SegChordRest, tick);
-                  Articulation* na = a->clone();
+                  Articulation* na = static_cast<Articulation*>(ne);
                   int ntrack       = staffIdx * VOICES + a->voice();
                   na->setScore(score);
                   na->setTrack(ntrack);
@@ -760,7 +767,7 @@ void Score::undoAddElement(Element* element)
                   Segment* ns2   = nm2->findSegment(s2->segmentType(), s2->tick());
                   Chord* c1      = static_cast<Chord*>(ns1->element(staffIdx * VOICES + cr1->voice()));
                   Chord* c2      = static_cast<Chord*>(ns2->element(staffIdx * VOICES + cr2->voice()));
-                  Slur* nslur    = new Slur(score);
+                  Slur* nslur    = static_cast<Slur*>(ne);
                   nslur->setStartElement(c1);
                   nslur->setEndElement(c2);
                   nslur->setParent(0);
@@ -773,7 +780,7 @@ void Score::undoAddElement(Element* element)
                   int tick         = segment->tick();
                   Measure* m       = score->tick2measure(tick);
                   Segment* seg     = m->findSegment(SegChordRest, tick);
-                  Note* nnote      = note->clone();
+                  Note* nnote      = static_cast<Note*>(ne);
                   int ntrack       = staffIdx * VOICES + nnote->voice();
                   nnote->setScore(score);
                   nnote->setTrack(ntrack);

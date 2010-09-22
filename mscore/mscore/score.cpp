@@ -357,6 +357,20 @@ Score::Score(const Style& s)
       _showOmr        = false;
       _sigmap         = new AL::TimeSigMap();
       _tempomap       = new AL::TempoMap;
+
+      // set default soundfont
+      MasterSynth* ms = seq->getSynti();
+      if (ms) {
+            Synth* s = ms->synth("Fluid");
+            if (s) {
+                  SynthParams sp;
+                  sp.synth = s;
+                  Parameter* p = new Sparm(0, "soundfont", preferences.soundFont);
+printf("add default synti %s\n", qPrintable(preferences.soundFont));
+                  sp.params.append(p);
+                  _syntiSettings.append(sp);
+                  }
+            }
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 

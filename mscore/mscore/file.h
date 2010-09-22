@@ -42,5 +42,6 @@ class LoadFile {
       QString name() const { return _name; }
       };
 
+extern QString getSoundFont(const QString&);
 #endif
 

@@ -964,17 +964,17 @@ void Compound::addElement(Element* e, double x, double y)
       }
 
 //---------------------------------------------------------
-//   bbox
+//   layout
 //---------------------------------------------------------
 
-QRectF Compound::bbox() const
+void Compound::layout()
       {
       _bbox = QRectF();
-      for (ciElement i = elemente.begin(); i != elemente.end(); ++i) {
-            const Element* e = *i;
+      for (iElement i = elemente.begin(); i != elemente.end(); ++i) {
+            Element* e = *i;
+            e->layout();
             _bbox |= e->bbox().translated(e->pos());
             }
-      return _bbox;
       }
 
 //---------------------------------------------------------

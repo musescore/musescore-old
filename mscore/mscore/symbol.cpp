@@ -189,6 +189,7 @@ void Symbol::layout()
             e->layout();
       Element::layout();
       BSymbol::layout();
+      _bbox = symbols[score()->symIdx()][_sym].bbox(magS());
       }
 
 //---------------------------------------------------------
@@ -198,15 +199,6 @@ void Symbol::layout()
 void Symbol::draw(QPainter& p, ScoreView*) const
       {
       symbols[score()->symIdx()][_sym].draw(p, magS());
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Symbol::bbox() const
-      {
-      return symbols[score()->symIdx()][_sym].bbox(magS());
       }
 
 //---------------------------------------------------------

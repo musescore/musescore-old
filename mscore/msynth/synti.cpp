@@ -70,31 +70,6 @@ void MasterSynth::init(int sampleRate)
             return;
       foreach(Synth* s, syntis)
             s->init(sampleRate);
-      QString p;
-      if (!preferences.soundFont.isEmpty())
-            p = preferences.soundFont;
-      else
-            p = QString(getenv("DEFAULT_SOUNDFONT"));
-      if (p.isEmpty()) {
-            QMessageBox::critical(0, QWidget::tr("MuseScore: Load SoundFont"),
-               QWidget::tr("No SoundFont configured\n"
-               "Playback will be disabled."));
-            }
-      else {
-            if (debugMode)
-                  printf("load soundfont <%s>\n", qPrintable(p));
-            QStringList sfs;
-            sfs.append(p);
-            bool rv = syntis[0]->loadSoundFonts(sfs);
-            if (!rv) {
-                  QString s = QWidget::tr("Loading SoundFont\n"
-                     "\"%1\"\n"
-                     "failed. Playback will be disabled.\n\n"
-                     "Go to Display > Synthesizer \n"
-                     "and check that the file location is correct").arg(p);
-                  QMessageBox::critical(0, QWidget::tr("MuseScore: Load SoundFont"), s);
-                  }
-            }
       foreach(Synth* s, syntis) {
             s->setMasterTuning(preferences.tuning);
             s->setEffectParameter(0, 0, preferences.reverbRoomSize);

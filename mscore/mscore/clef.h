@@ -42,7 +42,8 @@ static const int NO_CLEF = -1000;
  Graphic representation of a clef.
 */
 
-class Clef : public Compound {
+class Clef : public Element {
+      QList<Element*> elements;
       bool _showCourtesyClef;
       bool _small;
 
@@ -59,9 +60,11 @@ class Clef : public Compound {
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
+      virtual void draw(QPainter&, ScoreView*) const;
       virtual Space space() const;
       virtual void read(QDomElement);
 
+      void add(Element* e, double x, double y);
       bool small() const                        { return _small; }
       void setSmall(bool val);
       int tick() const;

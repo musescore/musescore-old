@@ -26,6 +26,7 @@
 #include "mixer.h"
 #include "aeolus/aeolus/aeolus.h"
 #include "score.h"
+#include "file.h"
 
 //---------------------------------------------------------
 //   SynthControl
@@ -43,7 +44,6 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
       reverb->setId(3);
       chorus->setId(4);
 
-      soundFont->setText(preferences.soundFont);
       masterTuning->setValue(synti->masterTuning());
       setGain(synti->gain());
 
@@ -100,13 +100,6 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
                   }
             }
 
-      Synth* sy = synti->synth("Fluid");
-      if (sy) {
-            QStringList sfonts = sy->soundFonts();
-            foreach(const QString& s, sfonts)
-                  soundFonts->addItem(s);
-            }
-
       soundFontUp->setEnabled(false);
       soundFontDown->setEnabled(false);
       soundFontDelete->setEnabled(false);
@@ -130,6 +123,7 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
       connect(soundFontDelete, SIGNAL(clicked()),                SLOT(sfDeleteClicked()));
       connect(soundFontAdd,    SIGNAL(clicked()),                SLOT(sfAddClicked()));
       connect(soundFont,       SIGNAL(textChanged(const QString&)), SLOT(sfChanged(const QString&)));
+      connect(soundFonts,      SIGNAL(currentRowChanged(int)),   SLOT(currentSoundFontChanged(int)));
       }
 
 //---------------------------------------------------------
@@ -139,6 +133,10 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
 void SynthControl::setScore(Score* cs)
       {
       setWindowTitle("MuseScore:Synthesizer " + cs->name());
+      Synth* sy = synti->synth("Fluid");
+      soundFonts->clear();
+      if (sy)
+            soundFonts->addItems(sy->soundFonts());
       }
 
 //---------------------------------------------------------
@@ -224,12 +222,7 @@ void SynthControl::updatePreferences()
 
 void SynthControl::selectSoundFont()
       {
-      QString s = QFileDialog::getOpenFileName(
-         this,
-         tr("Choose Synthesizer SoundFont"),
-         soundFont->text(),
-         tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
-         );
+      QString s = ::getSoundFont(soundFont->text());
       if (!s.isEmpty()) {
             soundFont->setText(s);
             soundFontAdd->setEnabled(true);
@@ -247,27 +240,19 @@ void SynthControl::sfChanged(const QString& s)
       }
 
 //---------------------------------------------------------
-//   sfUpClicked
-//---------------------------------------------------------
-
-void SynthControl::sfUpClicked()
-      {
-      }
-
-//---------------------------------------------------------
-//   sfDownClicked
-//---------------------------------------------------------
-
-void SynthControl::sfDownClicked()
-      {
-      }
-
-//---------------------------------------------------------
 //   sfDeleteClicked
 //---------------------------------------------------------
 
 void SynthControl::sfDeleteClicked()
       {
+      int row = soundFonts->currentRow();
+      if (row >= 0) {
+            QString s(soundFonts->item(row)->text());
+            Synth* sy = synti->synth("Fluid");
+            if (sy)
+                  sy->removeSoundFont(s);
+            delete soundFonts->takeItem(row);
+            }
       }
 
 //---------------------------------------------------------
@@ -277,8 +262,12 @@ void SynthControl::sfDeleteClicked()
 void SynthControl::sfAddClicked()
       {
       QString s(soundFont->text());
-      if (!s.isEmpty())
+      if (!s.isEmpty()) {
             soundFonts->addItem(s);
+            Synth* sy = synti->synth("Fluid");
+            if (sy)
+                  sy->addSoundFont(s);
+            }
       }
 
 //---------------------------------------------------------
@@ -345,4 +334,57 @@ void SynthControl::setAeolusValue(double val, int idx)
       {
       synti->setEffectParameter(1, idx >> 8, idx & 0xff, val);
       }
+
+//---------------------------------------------------------
+//   currentSoundFontChanged
+//---------------------------------------------------------
+
+void SynthControl::currentSoundFontChanged(int row)
+      {
+      int rows = soundFonts->count();
+      soundFontUp->setEnabled(row > 0);
+      soundFontDown->setEnabled(row < rows);
+      soundFontDelete->setEnabled(row >= 0);
+      }
+
+//---------------------------------------------------------
+//   sfUpClicked
+//---------------------------------------------------------
+
+void SynthControl::sfUpClicked()
+      {
+      int row  = soundFonts->currentRow();
+      if (row <= 0)
+            return;
+      Synth* sy = synti->synth("Fluid");
+      if (sy) {
+            QStringList sfonts = sy->soundFonts();
+            sfonts.swap(row, row-1);
+            sy->loadSoundFonts(sfonts);
+            soundFonts->clear();
+            soundFonts->addItems(sfonts);
+            }
+      }
+
+//---------------------------------------------------------
+//   sfDownClicked
+//---------------------------------------------------------
+
+void SynthControl::sfDownClicked()
+      {
+      int rows = soundFonts->count();
+      int row  = soundFonts->currentRow();
+      if (row + 1 >= rows)
+            return;
+
+      Synth* sy = synti->synth("Fluid");
+      if (sy) {
+            QStringList sfonts = sy->soundFonts();
+            sfonts.swap(row, row+1);
+            sy->loadSoundFonts(sfonts);
+            soundFonts->clear();
+            soundFonts->addItems(sfonts);
+            }
+      }
+
 
