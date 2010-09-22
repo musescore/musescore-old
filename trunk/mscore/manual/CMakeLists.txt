@@ -19,6 +19,7 @@
 #=============================================================================
 
 install(FILES
+      MuseScore-da.pdf
       MuseScore-de.pdf
       MuseScore-en.pdf
       MuseScore-es.pdf
