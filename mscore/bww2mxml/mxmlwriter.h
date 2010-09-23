@@ -75,6 +75,7 @@ namespace Bww {
     unsigned int regularMeasureNumber;                  ///< Current regular measure number
     unsigned int irregularMeasureNumber;                ///< Current irregular measure number
     unsigned int tempo;                                 ///< Tempo (0 = not specified)
+    unsigned int ending;                                ///< Current ending
   };
 
 } // namespace Bww
