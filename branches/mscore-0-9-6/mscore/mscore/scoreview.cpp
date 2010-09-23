@@ -2256,7 +2256,7 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
 //   setMag
 //---------------------------------------------------------
 
-void ScoreView::setMag(double nmag)
+void ScoreView::setMag(qreal nmag)
       {
       qreal m = mag();
 

@@ -189,8 +189,8 @@ class Element {
       void setPos(const QPointF& p)           { _pos = p;                }
       void setPos(double x, double y)         { _pos.rx() = x; _pos.ry() = y;    }
       void movePos(const QPointF& p)          { _pos += p;               }
-      double& rxpos()                         { return _pos.rx();        }
-      double& rypos()                         { return _pos.ry();        }
+      qreal& rxpos()                          { return _pos.rx();        }
+      qreal& rypos()                          { return _pos.ry();        }
       virtual void move(double xd, double yd) { _pos += QPointF(xd, yd); }
       virtual void move(const QPointF& s)     { _pos += s;               }
 

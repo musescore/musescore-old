@@ -1,3 +1,5 @@
+23.sep (la)
+      - Apply patch for ARM qreal bug
 22.sep (ws)
       - tuplet bracket was only movable in x-direction in edit mode
       (la)
