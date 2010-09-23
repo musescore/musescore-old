@@ -85,7 +85,7 @@ bool enableExperimental = false;
 QString dataPath;
 QString iconPath;
 QPaintDevice* pdev;
-double PDPI, DPI, DPMM;
+qreal PDPI, DPI, DPMM;
 double SPATIUM;
 
 QString mscoreGlobalShare;

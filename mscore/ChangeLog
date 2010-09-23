@@ -1,3 +1,5 @@
+23.sep (la)
+      - Apply patch for ARM qreal bug
 22.sep (ws)
       - add default soundfont to preferences
       - soundfonts are now associated with Score()
