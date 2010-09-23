@@ -81,7 +81,7 @@ bool enableInspector    = true;
 
 QString dataPath;
 QPaintDevice* pdev;
-double PDPI, DPI, DPMM;
+qreal PDPI, DPI, DPMM;
 double SPATIUM;
 
 QString mscoreGlobalShare;
