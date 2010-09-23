@@ -39,7 +39,8 @@ namespace Bww {
     beat(4),
     regularMeasureNumber(0),
     irregularMeasureNumber(0),
-    tempo(0)
+    tempo(0),
+    ending(0)
   {
     qDebug() << "MxmlWriter::MxmlWriter()";
 
@@ -100,10 +101,12 @@ namespace Bww {
       if (mbf.endingFirst)
       {
         out << "        <ending number=\"1\" type=\"start\"/>" << endl;
+        ending = 1;
       }
       if (mbf.endingSecond)
       {
         out << "        <ending number=\"2\" type=\"start\"/>" << endl;
+        ending = 2;
       }
       out << "      </barline>" << endl;
     }
@@ -152,11 +155,20 @@ namespace Bww {
       if (mef.repeatEnd)
       {
         out << "        <bar-style>light-heavy</bar-style>" << endl;
-        out << "        <repeat direction=\"backward\"/>" << endl;
       }
       if (mef.endingEnd)
       {
-        out << "        <ending type=\"stop\"/>" << endl;
+        if (ending == 1)
+          out << "        <ending number=\"1\" type=\"stop\"/>" << endl;
+        else if (ending == 2)
+          out << "        <ending number=\"2\" type=\"discontinue\"/>" << endl;
+        else
+          // TODO: error message
+          ;
+      }
+      if (mef.repeatEnd)
+      {
+        out << "        <repeat direction=\"backward\"/>" << endl;
       }
       out << "      </barline>" << endl;
     }

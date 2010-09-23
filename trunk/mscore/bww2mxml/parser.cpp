@@ -493,9 +493,9 @@ namespace Bww {
         {
           tieStop = true;
           inTie = false;
+          lex.getSym();
         }
       }
-      lex.getSym();
     }
     else if (lex.symType() == TRIPLET)
     {
