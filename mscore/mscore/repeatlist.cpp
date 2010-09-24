@@ -184,10 +184,11 @@ void RepeatList::unwind()
       foreach(RepeatSegment* s, *this)
             delete s;
       clear();
-
+        
+      QSet<Jump*> usedJump;
       QStack<RepeatLoop> rstack;
       int tickOffset = 0;
-
+      
       //
       // check for necessary implicit repeat start
       //
@@ -253,10 +254,11 @@ void RepeatList::unwind()
                                     break;
                                     }
                               }
-                        if (s) {
+                        if (s && !usedJump.contains(s)) {
                               const QString& jumpTo = s->jumpTo();
                               Measure* nmb = _score->searchLabel(jumpTo);
                               if (nmb) {
+                                    usedJump.insert(s);
                                     rstack.push(RepeatLoop(s->playUntil(), s->continueAt()));
                                     tickOffset += m->tick() + m->tickLen() - nmb->tick();
 

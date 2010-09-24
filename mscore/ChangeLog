@@ -1,4 +1,7 @@
 23.sep (la)
+      - fix #7233: Transpose by diminished second doesn't work (0.9.6 branch regression)
+      - fix #7232: D.S. after coda sign freezes playback
+23.sep (la)
       - Apply patch for ARM qreal bug
 22.sep (ws)
       - tuplet bracket was only movable in x-direction in edit mode

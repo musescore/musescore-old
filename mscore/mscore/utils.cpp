@@ -595,7 +595,7 @@ int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
       int steps     = interval.diatonic;
       int semitones = interval.chromatic;
 
-      if (semitones == 0)
+      if (semitones == 0 && steps == 0)
             return tpc;
 
       int step, alter;
