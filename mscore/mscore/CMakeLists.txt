@@ -107,6 +107,7 @@ QT4_WRAP_CPP (mocs
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h stafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
+      drumtools.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -192,7 +193,7 @@ add_executable ( ${ExecutableName}
       importove.cpp ove.cpp interval.cpp check.cpp tablature.cpp
       fret.cpp stafftype.cpp staffstate.cpp spanner.cpp fingering.cpp
       shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp tremolobar.cpp
-      noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp
+      noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp drumtools.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

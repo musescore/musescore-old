@@ -259,12 +259,10 @@ void Tuplet::layout()
       p1 -= mp;
       p2 -= mp;
 
-      if (_userModified) {
-            p1.rx() += _p1.x();
-            p2.rx() += _p2.x();
-            }
-      _p1.ry() = p1.y();
-      _p2.ry() = p2.y();
+//      if (_userModified) {
+            p1 += _p1;
+            p2 += _p2;
+//            }
 
       // center number
       qreal x3 = 0.0, y3 = 0.0;
@@ -326,7 +324,6 @@ void Tuplet::layout()
                         bracketL[3] = QPointF(p2.x(), p2.y() + l2);
                         }
                   }
-
             }
       }
 
@@ -744,7 +741,8 @@ void Tuplet::editDrag(int grip, const QPointF& d)
             _p2 += d;
       _userModified = true;
       setGenerated(false);
-      score()->setLayoutAll(true);
+      layout();
+      score()->setUpdateAll(true);
       }
 
 //---------------------------------------------------------

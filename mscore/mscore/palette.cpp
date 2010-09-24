@@ -55,7 +55,6 @@ static bool needsStaff(Element* e)
             case KEYSIG:
             case TIMESIG:
             case REST:
-//            case ACCIDENTAL:
                   return true;
             default:
                   return false;
@@ -65,10 +64,6 @@ static bool needsStaff(Element* e)
 //---------------------------------------------------------
 //   Palette
 //---------------------------------------------------------
-
-/**
- Create Symbol palette with \a r rows and \a c columns
-*/
 
 Palette::Palette(QWidget* parent)
    : QWidget(parent)
@@ -81,9 +76,12 @@ Palette::Palette(QWidget* parent)
       vgrid         = 60;
       _drawGrid     = false;
       _selectable   = false;
-      _drumPalette  = false;
       setMouseTracking(true);
-      setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+      QSizePolicy policy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+      policy.setHeightForWidth(true);
+      setSizePolicy(policy);
+      setSizeIncrement(QSize(hgrid, vgrid));
+      setBaseSize(QSize(hgrid, vgrid));
       setReadOnly(true);
       }
 
@@ -148,14 +146,12 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
 //   setGrid
 //---------------------------------------------------------
 
-/**
- Set size of one element in palette
-*/
-
 void Palette::setGrid(int hh, int vv)
       {
       hgrid = hh;
       vgrid = vv;
+      setSizeIncrement(QSize(hgrid, vgrid));
+      setBaseSize(QSize(hgrid, vgrid));
       }
 
 //---------------------------------------------------------
@@ -173,19 +169,6 @@ void Palette::mousePressEvent(QMouseEvent* ev)
                   update(idxRect(i) | idxRect(selectedIdx));
                   selectedIdx = i;
                   emit boxClicked(i);
-                  }
-            if (_drumPalette && mscore->playEnabled()) {
-                  Score* cs    = mscore->currentScore();
-                  int staffIdx = cs->inputTrack() / VOICES;
-                  Part* part   = cs->part(staffIdx);
-
-                  PaletteCell* cell = cells[i];
-                  Chord* ch         = static_cast<Chord*>(cell->element);
-                  Note* note        = ch->downNote();
-
-                  int ticks   = preferences.defaultPlayDuration;
-                  int pitch   = note->pitch();
-                  seq->startNote(part->instr()->channel(0), pitch, 80, ticks, 0.0);
                   }
             }
       }
@@ -376,8 +359,6 @@ void Palette::append(Element* s, const QString& name)
             Icon* icon = static_cast<Icon*>(s);
             connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
             }
-      if (columns())
-            resizeWidth(width());
       }
 
 void Palette::append(int symIdx)
@@ -415,8 +396,6 @@ void Palette::add(int idx, Element* s, const QString& name)
             Icon* icon = static_cast<Icon*>(s);
             connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
             }
-      if (columns())
-            resizeWidth(width());
       }
 
 //---------------------------------------------------------
@@ -769,29 +748,25 @@ void Palette::write(Xml& xml, const QString& name) const
             xml.tag("grid", _drawGrid);
       if (_yOffset != 0.0)
             xml.tag("yoffset", _yOffset);
-      if (_drumPalette)
-            xml.tag("drumPalette", _drumPalette);
 
-      if (!_drumPalette) {
-            int n = cells.size();
-            for (int i = 0; i < n; ++i) {
-                  if (cells[i] == 0 || cells[i]->element == 0) {
-                        xml.tagE("Cell");
-                        continue;
-                        }
-                  if (!cells[i]->name.isEmpty())
-                        xml.stag(QString("Cell name=\"%1\"").arg(Xml::xmlString(cells[i]->name)));
-                  else
-                        xml.stag("Cell");
-                  if (cells[i]->drawStaff)
-                        xml.tag("staff", cells[i]->drawStaff);
-                  if (cells[i]->xoffset)
-                        xml.tag("xoffset", cells[i]->xoffset);
-                  if (cells[i]->yoffset)
-                        xml.tag("yoffset", cells[i]->yoffset);
-                  cells[i]->element->write(xml);
-                  xml.etag();
+      int n = cells.size();
+      for (int i = 0; i < n; ++i) {
+            if (cells[i] == 0 || cells[i]->element == 0) {
+                  xml.tagE("Cell");
+                  continue;
                   }
+            if (!cells[i]->name.isEmpty())
+                  xml.stag(QString("Cell name=\"%1\"").arg(Xml::xmlString(cells[i]->name)));
+            else
+                  xml.stag("Cell");
+            if (cells[i]->drawStaff)
+                  xml.tag("staff", cells[i]->drawStaff);
+            if (cells[i]->xoffset)
+                  xml.tag("xoffset", cells[i]->xoffset);
+            if (cells[i]->yoffset)
+                  xml.tag("yoffset", cells[i]->yoffset);
+            cells[i]->element->write(xml);
+            xml.etag();
             }
       xml.etag();
       }
@@ -878,10 +853,8 @@ void Palette::read(QDomElement e)
                   _drawGrid = text.toInt();
             else if (tag == "yoffset")
                   _yOffset = text.toDouble();
-            else if (tag == "drumPalette") {
-                  _drumPalette = text.toInt();
-                  _selectable = true;
-                  }
+            else if (tag == "drumPalette")      // obsolete
+                  ;
             else if (tag == "Cell") {
                   if (e.firstChildElement().isNull())
                         append(0, "");
@@ -971,10 +944,10 @@ int Palette::rows() const
       }
 
 //---------------------------------------------------------
-//   resizeWidth
+//   heightForWidth
 //---------------------------------------------------------
 
-int Palette::resizeWidth(int w)
+int Palette::heightForWidth(int w) const
       {
       int c = w / hgrid;
       if (c <= 0)
@@ -982,9 +955,18 @@ int Palette::resizeWidth(int w)
       int r = (cells.size() + c - 1) / c;
       if (r <= 0)
             r = 1;
-      int h = r * vgrid;
-      setFixedSize(w, h);
-      return h;
+      return r * vgrid;
+      }
+
+//---------------------------------------------------------
+//   sizeHint
+//---------------------------------------------------------
+
+QSize Palette::sizeHint() const
+      {
+      int w = width();
+      int h = heightForWidth(w);
+      return QSize(hgrid, h);
       }
 
 //---------------------------------------------------------
@@ -1018,7 +1000,6 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, Palette* p, QWidget* parent)
       setCheckable(true);
       setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
-//      setFixedHeight(QFontMetrics(font()).height() + 3);
       setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       QMenu* menu = new QMenu;
       connect(menu, SIGNAL(aboutToShow()), SLOT(beforePulldown()));
@@ -1085,6 +1066,7 @@ PaletteScrollArea::PaletteScrollArea(QWidget* w, QWidget* parent)
       setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
       setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
       setWidget(w);
+      setWidgetResizable(true);
       _restrictHeight = true;
       }
 
@@ -1095,9 +1077,10 @@ PaletteScrollArea::PaletteScrollArea(QWidget* w, QWidget* parent)
 void PaletteScrollArea::resizeEvent(QResizeEvent* re)
       {
       Palette* palette = static_cast<Palette*>(widget());
-      int h = palette->resizeWidth(width());
+      int h = palette->heightForWidth(width());
       if (_restrictHeight)
-            setMaximumHeight(h+8);
+            // setMaximumHeight(h+8);
+            setMaximumHeight(h+4);
       QScrollArea::resizeEvent(re);
       }
 
@@ -1114,7 +1097,7 @@ PaletteBox::PaletteBox(QWidget* parent)
       vbox = new QVBoxLayout;
       vbox->setMargin(0);
       vbox->setSpacing(2);
-      vbox->addStretch(1);
+      vbox->addStretch();
       mainWidget->setLayout(vbox);
       setWidget(mainWidget);
       connect(mainWidget, SIGNAL(customContextMenuRequested(const QPoint&)), SLOT(contextMenu(const QPoint&)));
@@ -1168,12 +1151,6 @@ void PaletteBox::addPalette(Palette* w)
       b->setId(slotIdx);
       connect(b, SIGNAL(paletteCmd(int,int)), SLOT(paletteCmd(int,int)));
       connect(w, SIGNAL(changed()), SLOT(setDirty()));
-
-      if (w->drumPalette()) {
-            mscore->setDrumPalette(w);
-            mscore->updateDrumset();
-            connect(w, SIGNAL(boxClicked(int)), mscore, SLOT(drumPaletteSelected(int)));
-            }
       }
 
 //---------------------------------------------------------
@@ -1401,4 +1378,3 @@ void PaletteCellProperties::accept()
       cell->yoffset = yoffset->value();
       QDialog::accept();
       }
-

@@ -611,7 +611,7 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
       sp->append(k, qApp->translate("MuseScore", keyNames[14]));
       sp->setSelected(14);
 
-      sp->resizeWidth(300);
+//      sp->resizeWidth(300);
       }
 
 //---------------------------------------------------------

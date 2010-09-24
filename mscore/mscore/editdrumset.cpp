@@ -55,15 +55,6 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
    : QDialog(parent)
       {
       oDrumset = ds;
-#if 0
-      for (int i = 0; i < 128; ++i) {
-            nDrumset.drum[i].name          = ds->drum[i].name;
-            nDrumset.drum[i].notehead      = ds->drum[i].notehead;
-            nDrumset.drum[i].line          = ds->drum[i].line;
-            nDrumset.drum[i].voice         = ds->drum[i].voice;
-            nDrumset.drum[i].stemDirection = ds->drum[i].stemDirection;
-            }
-#endif
       nDrumset = *ds;
       setupUi(this);
 
@@ -77,11 +68,6 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
       for (int i = 0; i < HEAD_GROUPS; ++i)
             noteHead->addItem(noteHeadNames[i]);
 
-      loadButton = new QPushButton(tr("Load"));
-      saveButton = new QPushButton(tr("Save"));
-      buttonBox->addButton(loadButton, QDialogButtonBox::ActionRole);
-      buttonBox->addButton(saveButton, QDialogButtonBox::ActionRole);
-
       connect(pitchList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
          SLOT(itemChanged(QTreeWidgetItem*, QTreeWidgetItem*)));
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
@@ -91,6 +77,8 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
       connect(voice, SIGNAL(valueChanged(int)), SLOT(valueChanged()));
       connect(stemDirection, SIGNAL(currentIndexChanged(int)), SLOT(valueChanged()));
       connect(shortcut, SIGNAL(currentIndexChanged(int)), SLOT(shortcutChanged()));
+      connect(loadButton, SIGNAL(clicked()), SLOT(load()));
+      connect(saveButton, SIGNAL(clicked()), SLOT(save()));
       }
 
 //---------------------------------------------------------
@@ -196,15 +184,6 @@ void EditDrumset::bboxClicked(QAbstractButton* button)
 
             case QDialogButtonBox::RejectRole:
                   close();
-                  break;
-
-            case QDialogButtonBox::ActionRole:
-                  if (button == loadButton)
-                        load();
-                  else if (button == saveButton)
-                        save();
-                  else
-                        printf("EditDrumSet: unknown action button\n");
                   break;
 
             default:

@@ -248,6 +248,16 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
       }
 
 //---------------------------------------------------------
+//   cmdInsertNote
+//---------------------------------------------------------
+
+void ScoreView::cmdInsertNote(int note)
+      {
+      printf("cmdInsertNote %d\n", note);
+
+      }
+
+//---------------------------------------------------------
 //   cmdAddPitch
 //    c d e f g a b entered:
 //       insert note or add note to chord
@@ -2367,7 +2377,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             int srcStaffStart = e.attribute("staff", "0").toInt();
             int staves        = e.attribute("staves", "0").toInt();
             curTick           = tickStart;
-            
+
             QSet<int> blackList;
             for (int i = 0; i < staves; ++i) {
                   int staffIdx = i + dstStaffStart;

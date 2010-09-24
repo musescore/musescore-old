@@ -36,6 +36,13 @@
 #include "text.h"
 #include "staff.h"
 #include "part.h"
+#include "drumtools.h"
+
+#ifdef Q_WS_MAC
+#define CONTROL_MODIFIER Qt::AltModifier
+#else
+#define CONTROL_MODIFIER Qt::ControlModifier
+#endif
 
 //---------------------------------------------------------
 //   Canvas::editKey
@@ -58,11 +65,7 @@ void ScoreView::editKey(QKeyEvent* ev)
 
       if (e->type() == LYRICS) {
             int found = false;
-#ifdef Q_WS_MAC
-            if (ev->key() == Qt::Key_Space && !(modifiers & Qt::AltModifier)) {
-#else
-		if (ev->key() == Qt::Key_Space && !(modifiers & Qt::ControlModifier)) {
-#endif
+		if (ev->key() == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   // TODO: shift+tab events are filtered by qt
                   lyricsTab(modifiers & Qt::ShiftModifier, true, false);
                   found = true;
@@ -93,19 +96,11 @@ void ScoreView::editKey(QKeyEvent* ev)
                   lyricsReturn();
                   found = true;
                   }
-#ifdef Q_WS_MAC
-            else if (ev->key() == Qt::Key_Minus && !(modifiers & Qt::AltModifier)) {
-#else
-		else if (ev->key() == Qt::Key_Minus && !(modifiers & Qt::ControlModifier)) {
-#endif
+		else if (ev->key() == Qt::Key_Minus && !(modifiers & CONTROL_MODIFIER)) {
                   lyricsMinus();
                   found = true;
                   }
-#ifdef Q_WS_MAC
-		else if (ev->key() == Qt::Key_Underscore && !(modifiers & Qt::AltModifier)) {
-#else
-		else if (ev->key() == Qt::Key_Underscore && !(modifiers & Qt::ControlModifier)) {
-#endif
+		else if (ev->key() == Qt::Key_Underscore && !(modifiers & CONTROL_MODIFIER)) {
                   lyricsUnderscore();
                   found = true;
                   }
@@ -115,11 +110,7 @@ void ScoreView::editKey(QKeyEvent* ev)
                   }
             }
       if (e->type() == HARMONY) {
-#ifdef Q_WS_MAC
-            if (ev->key() == Qt::Key_Space && !(modifiers & Qt::AltModifier)) {
-#else
-            if (ev->key() == Qt::Key_Space && !(modifiers & Qt::ControlModifier)) {
-#endif
+            if (ev->key() == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   chordTab(modifiers & Qt::ShiftModifier);
                   ev->accept();
                   return;
@@ -286,8 +277,8 @@ void Score::padToggle(int n)
 void Score::setPadState(Element* e)
       {
       _is.setDrumNote(-1);
-      _is.setDrumset(0);
 
+      Drumset* drumset = 0;
       if (e->type() == NOTE) {
             Note* note    = static_cast<Note*>(e);
             Chord* chord  = note->chord();
@@ -324,9 +315,19 @@ void Score::setPadState(Element* e)
                         _is.setDrumNote(static_cast<Note*>(e)->pitch());
                   else
                         _is.setDrumNote(-1);
-                  _is.setDrumset(instr->drumset());
-                   }
+                  drumset = instr->drumset();
+                  }
             }
+
+      if (drumset) {
+            DrumTools* dt = mscore->drumTools();
+            dt->show();
+            dt->setDrumset(this, drumset);
+            }
+      else {
+            mscore->hideDrumTools();
+            }
+      _is.setDrumset(drumset);
       setPadState();
       }
 
@@ -368,6 +369,6 @@ void Score::setPadState()
       getAction("beam32")->setChecked(_is.beamMode     == BEAM_BEGIN32);
       getAction("auto-beam")->setChecked(_is.beamMode  == BEAM_AUTO);
 
-      mscore->updateDrumset();
+//      mscore->updateDrumset();
       }
 

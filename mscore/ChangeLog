@@ -1,4 +1,7 @@
-24.sep (la)
+24.sep (ws)
+      - removed drum palette, replaced by a drum tools dock widget similar
+        to text edit tools
+      (la)
       - fix #7233: Transpose by diminished second doesn't work
 23.sep (la)
       - Apply patch for ARM qreal bug
