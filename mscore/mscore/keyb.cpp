@@ -322,7 +322,7 @@ void Score::setPadState(Element* e)
       if (drumset) {
             DrumTools* dt = mscore->drumTools();
             dt->show();
-            dt->setDrumset(this, drumset);
+            dt->setDrumset(this, e->staff(), drumset);
             }
       else {
             mscore->hideDrumTools();
@@ -368,7 +368,5 @@ void Score::setPadState()
       getAction("no-beam")->setChecked(_is.beamMode    == BEAM_NO);
       getAction("beam32")->setChecked(_is.beamMode     == BEAM_BEGIN32);
       getAction("auto-beam")->setChecked(_is.beamMode  == BEAM_AUTO);
-
-//      mscore->updateDrumset();
       }
 

@@ -168,8 +168,8 @@ void Palette::mousePressEvent(QMouseEvent* ev)
             if (i != selectedIdx) {
                   update(idxRect(i) | idxRect(selectedIdx));
                   selectedIdx = i;
-                  emit boxClicked(i);
                   }
+            emit boxClicked(i);
             }
       }
 
@@ -210,7 +210,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       Element* element    = cells[i]->element;
       if (element == 0)
             return;
-      ScoreView* viewer      = mscore->currentScoreView();
+      ScoreView* viewer = mscore->currentScoreView();
       mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
 
       score->startCmd();
@@ -1080,7 +1080,7 @@ void PaletteScrollArea::resizeEvent(QResizeEvent* re)
       int h = palette->heightForWidth(width());
       if (_restrictHeight)
             // setMaximumHeight(h+8);
-            setMaximumHeight(h+4);
+            setMaximumHeight(h+6);
       QScrollArea::resizeEvent(re);
       }
 

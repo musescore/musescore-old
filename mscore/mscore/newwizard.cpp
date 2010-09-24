@@ -30,6 +30,8 @@
 #include "keysig.h"
 #include "measure.h"
 
+extern Palette* newKeySigPalette();
+
 //---------------------------------------------------------
 //   InstrumentWizard
 //---------------------------------------------------------
@@ -347,7 +349,7 @@ void InstrumentWizard::createInstruments(Score* cs)
                   staff->setRstaff(rstaff);
                   ++rstaff;
 
-                  staff->clefList()->setClef(0, sli->clef());
+                  staff->setClef(0, sli->clef());
 
                   staff->setUseTablature(t->useTablature);
                   if (cidx > MAX_STAVES) {
@@ -587,31 +589,14 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
       setTitle(tr("Create New Score"));
       setSubTitle(tr("Select Key Signature:"));
 
-      sp = new Palette;
-      sp->setMag(.8);
-      sp->setGrid(56, 45);
+      sp = newKeySigPalette();
       sp->setSelectable(true);
+      sp->setSelected(14);
+      PaletteScrollArea* sa = new PaletteScrollArea(sp);
 
       QVBoxLayout* layout = new QVBoxLayout;
-      layout->addWidget(sp);
+      layout->addWidget(sa);
       setLayout(layout);
-
-      for (int i = 0; i < 7; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setSubtype(i+1);
-            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
-            }
-      for (int i = -7; i < 0; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setSubtype(i & 0xff);
-            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
-            }
-      KeySig* k = new KeySig(gscore);
-      k->setSubtype(0);
-      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
-      sp->setSelected(14);
-
-//      sp->resizeWidth(300);
       }
 
 //---------------------------------------------------------

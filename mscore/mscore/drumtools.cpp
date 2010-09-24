@@ -28,6 +28,8 @@
 #include "preferences.h"
 #include "seq.h"
 #include "editdrumset.h"
+#include "staff.h"
+#include "part.h"
 
 //---------------------------------------------------------
 //   DrumTools
@@ -58,7 +60,7 @@ DrumTools::DrumTools(QWidget* parent)
       drumPalette->setName(tr("Drums"));
       drumPalette->setMag(0.8);
       drumPalette->setSelectable(true);
-      drumPalette->setGrid(42, 60);
+      drumPalette->setGrid(28, 60);
       PaletteScrollArea* sa = new PaletteScrollArea(drumPalette);
       layout->addWidget(sa);
 
@@ -100,9 +102,10 @@ void MuseScore::hideDrumTools()
 //   setDrumset
 //---------------------------------------------------------
 
-void DrumTools::setDrumset(Score* s, Drumset* ds)
+void DrumTools::setDrumset(Score* s, Staff* st, Drumset* ds)
       {
       _score  = s;
+      staff   = st;
       drumset = ds;
       drumPalette->clear();
       if (drumset == 0)
@@ -157,8 +160,8 @@ void DrumTools::setDrumset(Score* s, Drumset* ds)
 
 void DrumTools::editDrumset()
       {
-      EditDrumset* eds = new EditDrumset(drumset, this);
-      eds->exec();
+      EditDrumset eds(drumset, this);
+      eds.exec();
       }
 
 //---------------------------------------------------------
@@ -172,7 +175,7 @@ void DrumTools::drumNoteSelected(int val)
       Note* note       = ch->downNote();
       int ticks        = preferences.defaultPlayDuration;
       int pitch        = note->pitch();
-//      seq->startNote(part->instr()->channel(0), pitch, 80, ticks, 0.0);
+      seq->startNote(staff->part()->instr()->channel(0), pitch, 80, ticks, 0.0);
       _score->inputState().setDrumNote(note->pitch());
       }
 

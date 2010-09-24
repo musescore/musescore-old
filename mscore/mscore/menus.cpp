@@ -68,6 +68,34 @@
 extern bool useFactorySettings;
 
 //---------------------------------------------------------
+//   newKeySigPalette
+//---------------------------------------------------------
+
+Palette* newKeySigPalette()
+      {
+      Palette* sp = new Palette;
+      sp->setName(qApp->translate("MuseScore", "Key Signatures"));
+      sp->setMag(0.8);
+      sp->setGrid(56, 45);
+      sp->setYOffset(6.0);
+
+      for (int i = 0; i < 7; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setKeySigEvent(KeySigEvent(i+1));
+            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
+            }
+      for (int i = -7; i < 0; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setKeySigEvent(KeySigEvent(i));
+            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
+            }
+      KeySig* k = new KeySig(gscore);
+      k->setSubtype(0);
+      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
+      return sp;
+      }
+
+//---------------------------------------------------------
 //   showPalette
 //---------------------------------------------------------
 
@@ -162,25 +190,7 @@ void MuseScore::populatePalette()
       //    key signatures
       //-----------------------------------
 
-      sp = new Palette;
-      sp->setName(tr("Key Signatures"));
-      sp->setMag(0.8);
-      sp->setGrid(56, 45);
-      sp->setYOffset(6.0);
-
-      for (int i = 0; i < 7; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setKeySigEvent(KeySigEvent(i+1));
-            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
-            }
-      for (int i = -7; i < 0; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setKeySigEvent(KeySigEvent(i));
-            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
-            }
-      KeySig* k = new KeySig(gscore);
-      k->setSubtype(0);
-      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
+      sp = newKeySigPalette();
       paletteBox->addPalette(sp);
 
       //-----------------------------------
@@ -1267,107 +1277,4 @@ void MuseScore::showLayoutBreakPalette()
       layoutBreakPalette->show();
       layoutBreakPalette->raise();
       }
-
-#if 0
-//---------------------------------------------------------
-//   updateDrumset
-//---------------------------------------------------------
-
-void MuseScore::updateDrumset()
-      {
-      if (cs == 0 || paletteBox == 0 || drumPalette == 0)
-            return;
-
-      double _spatium = gscore->spatium();
-      const InputState& padState = cs->inputState();
-      Drumset* ds        = padState.drumset();
-      if (ds != drumset) {
-            drumset = ds;
-            drumPalette->clear();
-            if (drumset) {
-                  int drumInstruments = 0;
-                  for (int pitch = 0; pitch < 128; ++pitch) {
-                        if (drumset->isValid(pitch))
-                              ++drumInstruments;
-                        }
-                  int i = 0;
-                  for (int pitch = 0; pitch < 128; ++pitch) {
-                        if (!ds->isValid(pitch))
-                              continue;
-                        bool up;
-                        int line      = ds->line(pitch);
-                        int noteHead  = ds->noteHead(pitch);
-                        int voice     = ds->voice(pitch);
-                        Direction dir = ds->stemDirection(pitch);
-                        if (dir == UP)
-                              up = true;
-                        else if (dir == DOWN)
-                              up = false;
-                        else
-                              up = line > 4;
-
-                        Chord* chord = new Chord(gscore);
-                        chord->setDurationType(Duration::V_QUARTER);
-                        chord->setStemDirection(dir);
-                        chord->setTrack(voice);
-                        Note* note = new Note(gscore);
-                        note->setParent(chord);
-                        note->setTrack(voice);
-                        note->setPitch(pitch);
-                        note->setTpcFromPitch();
-                        note->setLine(line);
-                        note->setPos(0.0, _spatium * .5 * line);
-                        note->setHeadGroup(noteHead);
-                        chord->add(note);
-                        Stem* stem = new Stem(gscore);
-                        stem->setLen((up ? -3.0 : 3.0) * _spatium);
-                        chord->setStem(stem);
-                        stem->setPos(note->stemPos(up));
-                        drumPalette->append(chord, qApp->translate("drumset", qPrintable(drumset->name(pitch))));
-                        ++i;
-                        }
-                  }
-            }
-      if (drumset) {
-            int i = 0;
-            drumPalette->setSelected(-1);
-            for (int pitch = 0; pitch < 128; ++pitch) {
-                  if (drumset->isValid(pitch)) {
-                        if (pitch == padState.drumNote()) {
-                              drumPalette->setSelected(i);
-                              break;
-                              }
-                        ++i;
-                        }
-                  }
-            }
-      drumPalette->update();
-      }
-
-//---------------------------------------------------------
-//   drumPaletteSelected
-//---------------------------------------------------------
-
-void MuseScore::drumPaletteSelected(int idx)
-      {
-      if (cs == 0)
-            return;
-      InputState& padState = cs->inputState();
-      Drumset* ds          = padState.drumset();
-      if (ds == 0)
-            return;
-      int i = 0;
-      for (int pitch = 0; pitch < 128; ++pitch) {
-            if (!drumset->isValid(pitch))
-                  continue;
-            if (i == idx) {
-                  padState.setDrumNote(pitch);
-                  padState.setTrack((padState.track() / VOICES) * VOICES + ds->voice(pitch));
-                  cs->setPadState();
-                  break;
-                  }
-            ++i;
-            }
-      }
-#endif
 

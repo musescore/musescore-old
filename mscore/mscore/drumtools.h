@@ -24,6 +24,7 @@
 class Score;
 class Drumset;
 class Palette;
+class Staff;
 
 //---------------------------------------------------------
 //   DrumTools
@@ -33,6 +34,7 @@ class DrumTools : public QDockWidget {
       Q_OBJECT
 
       Score* _score;
+      Staff* staff;
       Palette* drumPalette;
       Drumset* drumset;
 
@@ -42,7 +44,7 @@ class DrumTools : public QDockWidget {
 
    public:
       DrumTools(QWidget* parent = 0);
-      void setDrumset(Score*, Drumset*);
+      void setDrumset(Score*, Staff*, Drumset*);
       };
 
 
