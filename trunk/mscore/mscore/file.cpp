@@ -232,6 +232,8 @@ void MuseScore::loadFile()
 
 void MuseScore::saveFile()
       {
+      if (cs == 0)
+            return;
       cs->setSyntiSettings(seq->getSynti()->synthParams());
       if (cs->saveFile(false)) {
             setWindowTitle("MuseScore: " + cs->name());

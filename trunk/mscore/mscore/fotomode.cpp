@@ -342,7 +342,6 @@ void ScoreView::startFotomode()
       QRectF r(-w*.5, -h*.5, w, h);
       for (int i = 0; i < MAX_GRIPS; ++i)
             grip[i] = r;
-//      _foto->updateGrips(&grips, grip);
       curGrip = 0;
       updateGrips();
       _score->addRefresh(_foto->abbox());
@@ -437,7 +436,6 @@ void ScoreView::doFotoDragEdit(QMouseEvent* ev)
 
 void ScoreView::endFotoDragEdit()
       {
-printf("end foto drag edit\n");
       }
 
 //---------------------------------------------------------
@@ -451,6 +449,24 @@ bool ScoreView::fotoEditElementDragTransition(QMouseEvent* ev)
       for (i = 0; i < grips; ++i) {
             if (grip[i].contains(startMove)) {
                   curGrip = i;
+                  switch(curGrip) {
+                        case 0:
+                        case 2:
+                              setCursor(Qt::SizeFDiagCursor);
+                              break;
+                        case 1:
+                        case 3:
+                              setCursor(Qt::SizeBDiagCursor);
+                              break;
+                        case 4:
+                        case 6:
+                              setCursor(Qt::SizeVerCursor);
+                              break;
+                        case 5:
+                        case 7:
+                              setCursor(Qt::SizeHorCursor);
+                              break;
+                        }
                   updateGrips();
                   score()->end();
                   break;

@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id$
+//  $Id:$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,38 +18,31 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __EDITDRUMSET_H__
-#define __EDITDRUMSET_H__
+#ifndef __DRUMTOOLS_H__
+#define __DRUMTOOLS_H__
 
-#include "ui_editdrumset.h"
-#include "drumset.h"
+class Score;
+class Drumset;
+class Palette;
 
 //---------------------------------------------------------
-//   EditDrumset
+//   DrumTools
 //---------------------------------------------------------
 
-class EditDrumset : public QDialog, private Ui::EditDrumsetBase {
+class DrumTools : public QDockWidget {
       Q_OBJECT
 
-      Drumset* oDrumset;
-      Drumset  nDrumset;
-
-      void apply();
-      void updateList();
-      void updateList2();
-      void updateExample();
+      Score* _score;
+      Palette* drumPalette;
+      Drumset* drumset;
 
    private slots:
-      void bboxClicked(QAbstractButton* button);
-      void itemChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous);
-      void nameChanged(const QString&);
-      void shortcutChanged();
-      void valueChanged();
-      void load();
-      void save();
+      void drumNoteSelected(int val);
+      void editDrumset();
 
    public:
-      EditDrumset(Drumset* ds, QWidget* parent = 0);
+      DrumTools(QWidget* parent = 0);
+      void setDrumset(Score*, Drumset*);
       };
 
 

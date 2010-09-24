@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -137,19 +137,6 @@ void MuseScore::populatePalette()
       notePalette->append(ik, tr("32nd grace note"));
 
       paletteBox->addPalette(notePalette);
-
-      //-----------------------------------
-      //    drums
-      //-----------------------------------
-
-      drumPalette = new Palette;
-      drumPalette->setName(tr("Drums"));
-      drumPalette->setMag(0.8);
-      drumPalette->setSelectable(true);
-      drumPalette->setGrid(42, 60);
-      drumPalette->setDrumPalette(true);
-
-      paletteBox->addPalette(drumPalette);
 
       //-----------------------------------
       //    clefs
@@ -1281,6 +1268,7 @@ void MuseScore::showLayoutBreakPalette()
       layoutBreakPalette->raise();
       }
 
+#if 0
 //---------------------------------------------------------
 //   updateDrumset
 //---------------------------------------------------------
@@ -1381,4 +1369,5 @@ void MuseScore::drumPaletteSelected(int idx)
             ++i;
             }
       }
+#endif
 

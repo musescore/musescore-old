@@ -89,7 +89,6 @@ class PaletteBoxButton : public QToolButton {
 
       int id;
 
-//      virtual void paintEvent(QPaintEvent*);
       virtual void changeEvent(QEvent*);
 
    private slots:
@@ -174,7 +173,6 @@ class Palette : public QWidget {
       bool _selectable;
       bool _readOnly;
       qreal _yOffset;
-      bool _drumPalette;
 
       void redraw(const QRect&);
       virtual void paintEvent(QPaintEvent*);
@@ -188,6 +186,7 @@ class Palette : public QWidget {
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
       virtual void contextMenuEvent(QContextMenuEvent*);
+      virtual QSize sizeHint() const;
 
       int idx(const QPoint&) const;
       QRect idxRect(int);
@@ -230,9 +229,7 @@ class Palette : public QWidget {
       qreal yOffset() const          { return _yOffset;        }
       int columns() const            { return width() / hgrid; }
       int rows() const;
-      int resizeWidth(int);
-      bool drumPalette() const       { return _drumPalette; }
-      void setDrumPalette(bool val)  { _drumPalette = val;  }
+      int heightForWidth(int) const;
       QString name() const           { return _name;        }
       void setName(const QString& s) { _name = s;           }
       int gridWidth() const          { return hgrid;        }

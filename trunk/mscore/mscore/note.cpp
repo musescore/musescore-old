@@ -527,7 +527,7 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   // warn if pitch extends usable range of instrument
                   // by coloring the note head
                   //
-                  if (staff() && !selected() && !score()->printing() && preferences.warnPitchRange) {
+                  if (chord() && chord()->segment() && staff() && !selected() && !score()->printing() && preferences.warnPitchRange) {
                         Instrument* in = staff()->part()->instr();
                         int i = ppitch();
                         if (i < in->minPitchP() || i > in->maxPitchP())

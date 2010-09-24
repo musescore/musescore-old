@@ -35,7 +35,6 @@
 #include "element.h"
 #include "al/fraction.h"
 #include "al/al.h"
-// #include "scoreview.h"
 #include "key.h"
 #include "interval.h"
 #include "segment.h"
@@ -183,7 +182,9 @@ class ImagePath {
       bool isUsed() const              { return _references > 0;  }
       };
 
-// layoutFlags bits
+//---------------------------------------------------------
+//   LayoutFlag bits
+//---------------------------------------------------------
 
 enum LayoutFlag {
       LAYOUT_FIX_TICKS = 1,

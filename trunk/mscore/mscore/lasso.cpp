@@ -54,32 +54,42 @@ void Lasso::draw(QPainter& p, ScoreView*) const
 
 void Lasso::editDrag(int curGrip, const QPointF& delta)
       {
+      Qt::CursorShape cursorShape = view->cursor().shape();
       switch(curGrip) {
             case 0:
+                  cursorShape = Qt::SizeFDiagCursor;
                   _rect.setTopLeft(_rect.topLeft() + delta);
                   break;
             case 1:
+                  cursorShape = Qt::SizeBDiagCursor;
                   _rect.setTopRight(_rect.topRight() + delta);
                   break;
             case 2:
+                  cursorShape = Qt::SizeFDiagCursor;
                   _rect.setBottomRight(_rect.bottomRight() + delta);
                   break;
             case 3:
+                  cursorShape = Qt::SizeBDiagCursor;
                   _rect.setBottomLeft(_rect.bottomLeft() + delta);
                   break;
             case 4:
+                  cursorShape = Qt::SizeVerCursor;
                   _rect.setTop(_rect.top() + delta.y());
                   break;
             case 5:
+                  cursorShape = Qt::SizeHorCursor;
                   _rect.setRight(_rect.right() + delta.x());
                   break;
             case 6:
+                  cursorShape = Qt::SizeVerCursor;
                   _rect.setBottom(_rect.bottom() + delta.y());
                   break;
             case 7:
+                  cursorShape = Qt::SizeHorCursor;
                   _rect.setLeft(_rect.left() + delta.x());
                   break;
             }
+      view->setCursor(cursorShape);
       }
 
 //---------------------------------------------------------

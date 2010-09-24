@@ -357,10 +357,11 @@ MuseScore::MuseScore()
       _midiinEnabled        = true;
       _speakerEnabled       = true;
       newWizard             = 0;
-      drumPalette           = 0;
-      drumset               = 0;
+//      drumPalette           = 0;
+//      drumset               = 0;
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
+      _drumTools            = 0;
       pianorollEditor       = 0;
       drumrollEditor        = 0;
       _splitScreen          = false;
@@ -2435,7 +2436,7 @@ void MuseScore::changeState(ScoreState val)
                   _modeText->show();
                   break;
             case STATE_FOTO:
-                  _modeText->setText(tr("fotomode"));
+                  _modeText->setText(tr("foto mode"));
                   _modeText->show();
                   break;
             case STATE_SEARCH:

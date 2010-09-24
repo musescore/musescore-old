@@ -143,7 +143,7 @@ class ScoreView : public QWidget {
       int textUndoLevel;
 
       //--input state:
-      Cursor* cursor;
+      Cursor* _cursor;
       ShadowNote* shadowNote;
 
       Lasso* lasso;           ///< temporarily drawn lasso selection
@@ -194,6 +194,7 @@ class ScoreView : public QWidget {
       void lyricsUnderscore();
       void harmonyEndEdit();
       void chordTab(bool back);
+      void cmdInsertNote(int note);
       void cmdAddPitch(int note, bool addFlag);
       void cmdAddPitch1(int, bool);
       void cmdAddChordName();

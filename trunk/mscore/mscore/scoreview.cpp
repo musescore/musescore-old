@@ -582,7 +582,7 @@ ScoreView::ScoreView(QWidget* parent)
       lasso       = new Lasso(_score);
       _foto       = new Lasso(_score);
 
-      cursor      = 0;
+      _cursor     = 0;
       shadowNote  = 0;
       grips       = 0;
       origEditObject   = 0;
@@ -811,14 +811,14 @@ ScoreView::ScoreView(QWidget* parent)
 void ScoreView::setScore(Score* s)
       {
       _score = s;
-      if (cursor == 0) {
-            cursor = new Cursor(_score, this);
+      if (_cursor == 0) {
+            _cursor = new Cursor(_score, this);
             shadowNote = new ShadowNote(_score);
-            cursor->setVisible(false);
+            _cursor->setVisible(false);
             shadowNote->setVisible(false);
             }
       else {
-            cursor->setScore(_score);
+            _cursor->setScore(_score);
             shadowNote->setScore(_score);
             }
       lasso->setScore(s);
@@ -835,7 +835,7 @@ ScoreView::~ScoreView()
       {
       delete lasso;
       delete _foto;
-      delete cursor;
+      delete _cursor;
       delete bgPixmap;
       delete fgPixmap;
       delete shadowNote;
@@ -1191,10 +1191,10 @@ void ScoreView::moveCursor()
       if (track == -1)
             track = 0;
 
-      cursor->setTrack(track);
-      cursor->setTick(_score->inputPos());
+      _cursor->setTrack(track);
+      _cursor->setTick(_score->inputPos());
 
-      Segment* segment = _score->tick2segment(cursor->tick());
+      Segment* segment = _score->tick2segment(_cursor->tick());
       if (segment)
             moveCursor(segment, track / VOICES);
       }
@@ -1207,15 +1207,15 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
             printf("zero SYSTEM\n");
             return;
             }
-      cursor->setSegment(segment);
+      _cursor->setSegment(segment);
       int idx         = staffIdx == -1 ? 0 : staffIdx;
       double x        = segment->canvasPos().x();
       double y        = system->staffY(idx);
-      double _spatium = cursor->spatium();
+      double _spatium = _cursor->spatium();
       double d        = _spatium * .5;
 
-      _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
-      cursor->setPos(x - _spatium, y - _spatium);
+      _score->addRefresh(_cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
+      _cursor->setPos(x - _spatium, y - _spatium);
       double h = 6.0 * _spatium;
       if (staffIdx == -1) {
             //
@@ -1230,9 +1230,9 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
                   }
             h += y2;
             }
-      cursor->setHeight(h);
-      cursor->setTick(segment->tick());
-      _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
+      _cursor->setHeight(h);
+      _cursor->setTick(segment->tick());
+      _score->addRefresh(_cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
       }
 
 //---------------------------------------------------------
@@ -1241,8 +1241,8 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
 
 void ScoreView::setCursorOn(bool val)
       {
-      if (cursor)
-            cursor->setOn(val);
+      if (_cursor)
+            _cursor->setOn(val);
       }
 
 //---------------------------------------------------------
@@ -1328,7 +1328,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setTransform(_matrix);
       p.setClipping(false);
 
-      cursor->draw(p, this);
+      _cursor->draw(p, this);
       lasso->draw(p, this);
       if (fotoMode())
             _foto->draw(p, this);
@@ -2477,9 +2477,9 @@ void ScoreView::editCopy()
             // store selection as plain text
             //
             TextB* text = static_cast<TextB*>(editObject);
-            QTextCursor* cursor = text->getCursor();
-            if (cursor && cursor->hasSelection())
-                  QApplication::clipboard()->setText(cursor->selectedText(), QClipboard::Clipboard);
+            QTextCursor* tcursor = text->getCursor();
+            if (tcursor && tcursor->hasSelection())
+                  QApplication::clipboard()->setText(tcursor->selectedText(), QClipboard::Clipboard);
             }
       }
 
@@ -2598,6 +2598,20 @@ void ScoreView::cmd(const QAction* a)
             cmdAddPitch(5, true);
       else if (cmd == "chord-b")
             cmdAddPitch(6, true);
+      else if (cmd == "insert-c")
+            cmdInsertNote(0);
+      else if (cmd == "insert-d")
+            cmdInsertNote(1);
+      else if (cmd == "insert-e")
+            cmdInsertNote(2);
+      else if (cmd == "insert-f")
+            cmdInsertNote(3);
+      else if (cmd == "insert-g")
+            cmdInsertNote(4);
+      else if (cmd == "insert-a")
+            cmdInsertNote(5);
+      else if (cmd == "insert-b")
+            cmdInsertNote(6);
       else if (cmd == "chord-text")
             cmdAddChordName();
       else if (cmd == "title-text")
