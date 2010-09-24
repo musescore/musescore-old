@@ -719,7 +719,7 @@ void MuseScore::newFile()
                               }
                         if (pickupMeasure)
 	                        d.setVal(ticks);
-                        Clef* clef = new Clef(cs);
+                        Clef* clef = new Clef(score);
                         clef->setSubtype(staff->clef(0));
                         clef->setTrack(staffIdx * VOICES);
                         Segment* segment = measure->getSegment(SegClef, 0);

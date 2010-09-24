@@ -225,7 +225,7 @@ void Staff::write(Xml& xml) const
             if (s->parentScore())
                   s = s->parentScore();
             foreach(Staff* staff, linkedStaves()->staves()) {
-                  if (staff->score() == s)
+                  if ((staff->score() == s) && (staff != this))
                         xml.tag("linkedTo", s->staffIdx(staff) + 1);
                   }
             }
@@ -417,7 +417,7 @@ void Staff::setKey(int tick, const KeySigEvent& st)
 
 void Staff::setClef(int tick, int clef)
       {
-      (*_clefList)[tick] = clef;
+      _clefList->setClef(tick, clef);
       }
 
 //---------------------------------------------------------
