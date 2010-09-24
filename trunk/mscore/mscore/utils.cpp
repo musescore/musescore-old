@@ -566,7 +566,7 @@ int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
       int semitones = interval.chromatic;
 
 printf("transposeTpc tpc %d steps %d semitones %d\n", tpc, steps, semitones);
-      if (semitones == 0)
+      if (semitones == 0 && steps == 0)
             return tpc;
 
       int step, alter;

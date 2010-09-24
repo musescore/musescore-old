@@ -1,3 +1,5 @@
+24.sep (la)
+      - fix #7233: Transpose by diminished second doesn't work
 23.sep (la)
       - Apply patch for ARM qreal bug
 22.sep (ws)
