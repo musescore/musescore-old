@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.13">
-  <programVersion>0.9.6</programVersion>
-  <programRevision>2883 
+<museScore version="1.14">
+  <programVersion>0.9.6.3</programVersion>
+  <programRevision>3507 
 </programRevision>
   <Spatium>1.164</Spatium>
   <Division>480</Division>
   <Style>
+    <concertPitch>1</concertPitch>
     </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>
-  <page-layout>
-    <page-margins type="even">
-      <left-margin>56.6929</left-margin>
-      <right-margin>56.6929</right-margin>
-      <top-margin>56.6929</top-margin>
-      <bottom-margin>113.386</bottom-margin>
-      </page-margins>
-    <page-margins type="odd">
-      <left-margin>56.6929</left-margin>
-      <right-margin>56.6929</right-margin>
-      <top-margin>56.6929</top-margin>
-      <bottom-margin>113.386</bottom-margin>
-      </page-margins>
-    </page-layout>
   <siglist>
     <sig tick="0">
       <nom>4</nom>
@@ -44,25 +31,25 @@
       <barLineSpan>8</barLineSpan>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Flute 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Flute 1</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Fl. 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Fl. 1</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -93,25 +80,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Flute 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Flute 2</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Fl. 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Fl. 2</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -143,25 +130,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="1" span="2"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Oboe 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Oboe 1</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Ob. 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Ob. 1</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -192,25 +179,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Oboe 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Oboe 2</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Ob. 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Ob. 2</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -236,31 +223,31 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="0"/>
       <bracket type="1" span="2"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-family:'Times New Roman'; font-size:8pt;"> Clarinet 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-size:8pt;"> Clarinet 1</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-family:'Times New Roman'; font-size:8pt;"> Cl. 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-size:8pt;"> Cl. 1</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -288,30 +275,30 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-family:'Times New Roman'; font-size:8pt;"> Clarinet 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-size:8pt;"> Clarinet 2</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-family:'Times New Roman'; font-size:8pt;"> Cl. 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-size:8pt;"> Cl. 2</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -345,25 +332,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="1" span="2"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Bassoon 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Bassoon 1</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Bsn. 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Bsn. 1</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -394,25 +381,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Bassoon 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Bassoon 2</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Bsn. 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Bsn. 2</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -438,32 +425,32 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="1"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="0" span="4"/>
       <bracket type="1" span="2"/>
       <barLineSpan>4</barLineSpan>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Horn 1 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Horn 1 2</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Hn. 1 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Hn. 1 2</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -491,30 +478,30 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="1"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Horn 3 4</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Horn 3 4</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Hn. 3 4</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Hn. 3 4</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -542,31 +529,31 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="0"/>
       <bracket type="1" span="2"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-family:'Times New Roman'; font-size:8pt;"> Trumpet 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-size:8pt;"> Trumpet 1</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-family:'Times New Roman'; font-size:8pt;"> Tpt. 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-size:8pt;"> Tpt. 1</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -603,30 +590,30 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-family:'Times New Roman'; font-size:8pt;"> Trumpet 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-size:8pt;"> Trumpet 2</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-family:'Times New Roman'; font-size:8pt;"> Tpt. 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">B</span><span style=" font-family:'MScore1'; font-size:8pt;"></span><span style=" font-size:8pt;"> Tpt. 2</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -668,25 +655,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Timpani</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Timpani</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Timp.</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Timp.</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -719,25 +706,25 @@ p, li { white-space: pre-wrap; }
       <barLineSpan>5</barLineSpan>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Violin 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Violin 1</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Vln. 1</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Vln. 1</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -786,25 +773,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Violin 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Violin 2</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Vln. 2</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Vln. 2</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -853,25 +840,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Viola</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Viola</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Vla.</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Vla.</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -920,25 +907,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Violoncello</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Violoncello</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Vlc.</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Vlc.</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -987,25 +974,25 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Contrabass</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Contrabass</span></p></body></html>
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman';">Cbs.</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:7.91887pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:8pt;">Cbs.</span></p></body></html>
         </html-data>
       </shortName>
     <Instrument>
@@ -1097,15 +1084,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="5">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1120,15 +1098,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="6">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1167,11 +1136,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="9">
     <Measure number="1">
       <KeySig>
-        <subtype>1</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1188,11 +1152,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="10">
     <Measure number="1">
       <KeySig>
-        <subtype>1</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1207,15 +1166,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="11">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1230,15 +1180,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="12">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
