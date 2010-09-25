@@ -1,8 +1,10 @@
 25.sep (ws)
-      - implemented #6925
-      - fixed #7225
-      - fixed #7227
+      - implemented #6925: Make "reset stretch" work on the selected measure only
+      - fixed #7225: [trunk] SIGABORT when loading a score with parenthesized accidental(s)
+      - fixed #7227: [trunk] Wrong X coord in symbol placement
       - updated accidental handling
+     (db)
+      - fix #6649: Transposition when creating a score from a template
 24.sep (ws)
       - removed drum palette, replaced by a drum tools dock widget similar
         to text edit tools
