@@ -715,8 +715,53 @@ void Note::read(QDomElement e)
                         _accidental = new Accidental(score());
                         _accidental->setParent(this);
                         // TODO: for backward compatibility
-                        k &= 0xff;
-                        _accidental->setSubtype(AccidentalType(k));
+                        bool bracket = k & 0x8000;
+                        k &= 0xfff;
+                        AccidentalType at = ACC_NONE;
+                        switch(k) {
+                              case 0: at = ACC_NONE; break;
+                              case 1:
+                              case 11: at = ACC_SHARP; break;
+                              case 2:
+                              case 12: at = ACC_FLAT; break;
+                              case 3:
+                              case 13: at = ACC_SHARP2; break;
+                              case 4:
+                              case 14: at = ACC_FLAT2; break;
+                              case 5:
+                              case 15: at = ACC_NATURAL; break;
+
+                              case 6:  at = ACC_SHARP; bracket = true; break;
+                              case 7:  at = ACC_FLAT; bracket = true; break;
+                              case 8:  at = ACC_SHARP2; bracket = true; break;
+                              case 9:  at = ACC_FLAT2; bracket = true; break;
+                              case 10: at = ACC_NATURAL; bracket = true; break;
+
+                              case 16: at = ACC_FLAT_SLASH; break;
+                              case 17: at = ACC_FLAT_SLASH2; break;
+                              case 18: at = ACC_MIRRORED_FLAT2; break;
+                              case 19: at = ACC_MIRRORED_FLAT; break;
+                              case 20: at = ACC_MIRRIRED_FLAT_SLASH; break;
+                              case 21: at = ACC_FLAT_FLAT_SLASH; break;
+
+                              case 22: at = ACC_SHARP_SLASH; break;
+                              case 23: at = ACC_SHARP_SLASH2; break;
+                              case 24: at = ACC_SHARP_SLASH3; break;
+                              case 25: at = ACC_SHARP_SLASH4; break;
+
+                              case 26: at = ACC_SHARP_ARROW_UP; break;
+                              case 27: at = ACC_SHARP_ARROW_DOWN; break;
+                              case 28: at = ACC_SHARP_ARROW_BOTH; break;
+                              case 29: at = ACC_FLAT_ARROW_UP; break;
+                              case 30: at = ACC_FLAT_ARROW_DOWN; break;
+                              case 31: at = ACC_FLAT_ARROW_BOTH; break;
+                              case 32: at = ACC_NATURAL_ARROW_UP; break;
+                              case 33: at = ACC_NATURAL_ARROW_DOWN; break;
+                              case 34: at = ACC_NATURAL_ARROW_BOTH; break;
+                              }
+                        _accidental->setSubtype(at);
+                        _accidental->setHasBracket(bracket);
+                        _accidental->setRole(ACC_USER);
                         }
                   }
             else if (tag == "Accidental") {
