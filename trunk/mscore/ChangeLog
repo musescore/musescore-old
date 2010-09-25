@@ -1,4 +1,5 @@
 25.sep (ws)
+      - implemented #6925
       - fixed #7225
       - fixed #7227
       - updated accidental handling
