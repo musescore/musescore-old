@@ -2119,6 +2119,7 @@ void ChangeStretch::flip()
       {
       double oStretch = measure->userStretch();
       measure->setUserStretch(stretch);
+      measure->score()->setLayoutAll(true);
       stretch = oStretch;
       }
 

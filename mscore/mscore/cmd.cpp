@@ -1748,11 +1748,14 @@ void Score::toDefault()
 
 void Score::resetUserStretch()
       {
-      for (MeasureBase* m = _measures.first(); m; m = m->next()) {
-            if (m->type() == MEASURE)
-                  static_cast<Measure*>(m)->setUserStretch(1.0);
+      Measure* m1 = _selection.startSegment()->measure();
+      Measure* m2 = _selection.endSegment()->measure();
+
+      for (Measure* m = m1; m; m = m->nextMeasure()) {
+            _undo->push(new ChangeStretch(m, 1.0));
+            if (m == m2)
+                  break;
             }
-      setClean(false);
       layoutAll = true;
       }
 
