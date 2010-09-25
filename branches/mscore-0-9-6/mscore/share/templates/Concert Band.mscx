@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.13">
-  <programVersion>0.9.6</programVersion>
-  <programRevision>2883 
+<museScore version="1.14">
+  <programVersion>0.9.6.3</programVersion>
+  <programRevision>3507 
 </programRevision>
   <Spatium>0.97</Spatium>
   <Division>480</Division>
   <Style>
+    <concertPitch>1</concertPitch>
     </Style>
   <showInvisible>1</showInvisible>
   <showFrames>1</showFrames>
-  <page-layout>
-    <page-margins type="even">
-      <left-margin>56.6929</left-margin>
-      <right-margin>56.6929</right-margin>
-      <top-margin>56.6929</top-margin>
-      <bottom-margin>113.386</bottom-margin>
-      </page-margins>
-    <page-margins type="odd">
-      <left-margin>56.6929</left-margin>
-      <right-margin>56.6929</right-margin>
-      <top-margin>56.6929</top-margin>
-      <bottom-margin>113.386</bottom-margin>
-      </page-margins>
-    </page-layout>
   <siglist>
     <sig tick="0">
       <nom>4</nom>
@@ -43,8 +30,8 @@
       <barLineSpan>5</barLineSpan>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -54,8 +41,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -93,8 +80,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="1" span="2"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -104,8 +91,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -142,8 +129,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -153,8 +140,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -191,8 +178,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -202,8 +189,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -240,8 +227,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -251,8 +238,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -284,15 +271,15 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="0" span="4"/>
       <bracket type="1" span="3"/>
       <barLineSpan>4</barLineSpan>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -302,8 +289,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -337,13 +324,13 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -353,8 +340,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -388,13 +375,13 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -404,8 +391,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -439,13 +426,13 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -455,8 +442,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -490,15 +477,15 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="3"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="0" span="4"/>
       <bracket type="1" span="2"/>
       <barLineSpan>3</barLineSpan>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -508,8 +495,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -543,13 +530,13 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="0"/>
+        <key tick="0" idx="-3"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -559,8 +546,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -594,13 +581,13 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -610,8 +597,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -645,13 +632,13 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="3"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -661,8 +648,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -696,15 +683,15 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="0" span="10"/>
       <bracket type="1" span="3"/>
       <barLineSpan>10</barLineSpan>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -714,8 +701,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -758,13 +745,13 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -774,8 +761,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -818,13 +805,13 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="2"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -834,8 +821,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -878,14 +865,14 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="1"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="0"/>
       <bracket type="1" span="2"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -895,8 +882,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -930,13 +917,13 @@ p, li { white-space: pre-wrap; }
         <clef tick="0" idx="0"/>
         </cleflist>
       <keylist>
-        <key tick="0" idx="1"/>
+        <key tick="0" idx="0"/>
         </keylist>
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -946,8 +933,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -987,8 +974,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="1" span="3"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -998,8 +985,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1036,8 +1023,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1047,8 +1034,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1085,8 +1072,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1096,8 +1083,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1134,8 +1121,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1145,8 +1132,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1183,8 +1170,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="-1" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1194,8 +1181,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1232,8 +1219,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="0" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1243,8 +1230,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1455,8 +1442,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="0" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1466,8 +1453,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1504,8 +1491,8 @@ p, li { white-space: pre-wrap; }
       <bracket type="0" span="1"/>
       </Staff>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
+      <subtype>InstrumentLong</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1515,8 +1502,8 @@ p, li { white-space: pre-wrap; }
         </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
+      <subtype>InstrumentShort</subtype>
       <frame>0</frame>
       <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -1607,15 +1594,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="6">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1632,15 +1610,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="7">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1655,15 +1624,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="8">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1678,15 +1638,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="9">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1701,19 +1652,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="10">
     <Measure number="1">
       <KeySig>
-        <subtype>3</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="2" y="-0.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1742,15 +1680,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="12">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1765,19 +1694,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="13">
     <Measure number="1">
       <KeySig>
-        <subtype>3</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="2" y="-0.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1794,15 +1710,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="14">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1819,15 +1726,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="15">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1842,15 +1740,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="16">
     <Measure number="1">
       <KeySig>
-        <subtype>2</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="1" y="1.5"/>
-          </KeySym>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1865,11 +1754,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="17">
     <Measure number="1">
       <KeySig>
-        <subtype>1</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>
@@ -1884,11 +1768,6 @@ p, li { white-space: pre-wrap; }
   <Staff id="18">
     <Measure number="1">
       <KeySig>
-        <subtype>1</subtype>
-        <KeySym>
-          <sym>32</sym>
-          <pos x="0" y="0"/>
-          </KeySym>
         </KeySig>
       <TimeSig>
         <subtype>260</subtype>

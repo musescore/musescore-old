@@ -1,5 +1,8 @@
-24.sep
-      (la)
+25.sep (db)
+      - fix #6649: Transposition when creating a score from a template
+
+ ======== MuseScore 0.9.6.3 released ==============
+24.sep (la)
       - fix #7150: Changing soundfont does not work for audio export   
 23.sep (la)
       - fix #7233: Transpose by diminished second doesn't work (0.9.6 branch regression)
