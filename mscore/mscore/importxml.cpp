@@ -2213,7 +2213,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QString wavyLineType;
       int alter  = 0;
       int octave = 4;
-      int accidental = 0;
+      AccidentalType accidental = ACC_NONE;
       bool editorial = false;
       Duration durationType(Duration::V_INVALID);
       bool trillMark = false;
@@ -2346,27 +2346,27 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   if (e.attribute(QString("editorial")) == "yes")
                         editorial = true;
                   if (s == "natural")
-                        accidental = 5;
+                        accidental = ACC_NATURAL;
                   else if (s == "flat")
-                        accidental = 2;
+                        accidental = ACC_FLAT;
                   else if (s == "sharp")
-                        accidental = 1;
+                        accidental = ACC_SHARP;
                   else if (s == "double-sharp")
-                        accidental = 3;
+                        accidental = ACC_SHARP2;
                   else if (s == "sharp-sharp")
-                        accidental = 3;
+                        accidental = ACC_SHARP2;
                   else if (s == "natural-flat")
                         ;
                   else if (s == "quarter-flat")
-                        accidental = 19;
+                        accidental = ACC_MIRRORED_FLAT;
                   else if (s == "quarter-sharp")
-                        accidental = 22;
+                        accidental = ACC_SHARP_SLASH;
                   else if (s == "three-quarters-flat")
-                        accidental = 18;
+                        accidental = ACC_MIRRORED_FLAT2;
                   else if (s == "three-quarters-sharp")
-                        accidental = 25;
+                        accidental = ACC_SHARP_SLASH4;
                   else if (s == "flat-flat")
-                        accidental = 4;
+                        accidental = ACC_FLAT2;
                   else if (s == "natural-sharp")
                         ;
                   else
@@ -2765,14 +2765,15 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
             // LVIFIX: accidental handling is ugly, replace magic numbers by constants
-            if (1 <= accidental &&  accidental <= 5 && editorial)
-                  note->setAccidentalType(accidental + 5);
+//WS-TODO            if (editorial)
+// set bracket                  note->setAccidentalType(accidental + 5);
+
             // LVIFIX: quarter tone accidentals support is "drawing only"
-            if (accidental == 18
-                || accidental == 19
-                || accidental == 22
-                || accidental == 25)
-                  note->setAccidentalType(accidental);
+//WS-TODO            if (accidental == 18
+//                || accidental == 19
+//                || accidental == 22
+//                || accidental == 25)
+//                  note->setAccidentalType(accidental);
 
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);

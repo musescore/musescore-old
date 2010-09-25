@@ -337,7 +337,7 @@ bool JackAudio::init()
       client = 0;
       int i  = 0;
       for (i = 0; i < 5; ++i) {
-            sprintf(_jackName, "Mscore%d", i+1);
+            sprintf(_jackName, "mscore-%d", i+1);
             client = jack_client_new(_jackName);
             if (client)
                   break;

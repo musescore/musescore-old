@@ -151,26 +151,29 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         }
                   break;
             case 7:   //userAccidental
+                  // WS: argument should be string
+                  //     as defined in Acc accList[]->tag
+                  //
                   if (argc == 0)
                         return qScriptValueFromValue(context->engine(), int(note->userAccidental()));
                   else if (argc == 1) {
                         int v = context->argument(0).toInt32();
-                        note->setAccidentalType(v);
+                        // TODO: does not work:       note->setAccidentalType(AccidentalType(v));
                         return context->engine()->undefinedValue();
                         }
                   break;
-			case 8:     // "boundingRect"
+            case 8:     // "boundingRect"
 				  if (context->argumentCount() == 0)
 					  return qScriptValueFromValue(context->engine(), note->bbox());
 				  break;
-			case 9:     // "pos"
+		case 9:     // "pos"
 				  if (context->argumentCount() == 0){
 				  Page* page = (Page*)note->parent()->parent()->parent()->parent()->parent();
 				  QPointF pos(note->canvasPos().x() - page->canvasPos().x(),  note->canvasPos().y());
 				  return qScriptValueFromValue(context->engine(), pos);
 			  }
 			  break;
-			case 10:     // "noteHead"
+		case 10:     // "noteHead"
 				  if (context->argumentCount() == 0)
 					  return qScriptValueFromValue(context->engine(), note->noteHead());
 				  break;

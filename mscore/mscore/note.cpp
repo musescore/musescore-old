@@ -581,10 +581,9 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             xml.tag("tuning", _tuning);
 
       if (userAccidental())
-            xml.tag("userAccidental", userAccidental());
-      if (_accidental && (!_accidental->userOff().isNull() || !_accidental->visible())) {
+            xml.tag("userAccidental", Accidental::subtype2name(userAccidental()));
+      if (_accidental)
             _accidental->write(xml);
-            }
       _el.write(xml);
       int dots = chord()->dots();
       bool hasUserModifiedDots = false;
@@ -714,8 +713,18 @@ void Note::read(QDomElement e)
                   _headGroup = i;
             else if (tag == "headType")
                   _headType = NoteHeadType(i);
-            else if (tag == "userAccidental")
-                  setUserAccidental(AccidentalType(i));
+            else if (tag == "userAccidental") {
+                  bool ok;
+                  int k = val.toInt(&ok);
+                  if (ok) {
+                        // TODO: for backward compatibility
+                        k &= 0xff;
+                        setUserAccidental(AccidentalType(k));
+                        }
+                  else {
+                        setUserAccidental(Accidental::name2subtype(val));
+                        }
+                  }
             else if (tag == "Accidental") {
                   Accidental* a = new Accidental(score());
                   a->read(e);
@@ -1257,7 +1266,7 @@ void Note::layout10(char* tversatz)
 
             // calculate accidental
 
-            int acci = ACC_NONE;
+            AccidentalType acci = ACC_NONE;
             if (_userAccidental) {
                   acci = _userAccidental;
                   }
@@ -1410,36 +1419,6 @@ void Note::setString(int val)
       {
       _string = val;
       rypos() = _string * spatium() * 1.5;
-      }
-
-//---------------------------------------------------------
-//   setAccidentalType
-//---------------------------------------------------------
-
-void Note::setAccidentalType(int pre)
-      {
-      if (pre != ACC_NONE && !_tieBack && !_hidden) {
-            if (!_accidental)
-                  add(new Accidental(score()));
-            _accidental->setSubtype(pre);
-            }
-      else {
-//            if (_accidental)
-//                  score()->undoRemoveElement(_accidental);
-            delete _accidental;
-            _accidental = 0;  // TODOx
-            }
-      }
-
-//---------------------------------------------------------
-//   accidentalType
-//---------------------------------------------------------
-
-int Note::accidentalType() const
-      {
-      if (!_accidental)
-            return ACC_NONE;
-      return _accidental->subtype();
       }
 
 //---------------------------------------------------------

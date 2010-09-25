@@ -28,6 +28,7 @@
 #include "clef.h"
 
 extern bool useFactorySettings;
+extern Palette* newAccidentalsPalette();
 
 //---------------------------------------------------------
 //   KeyCanvas
@@ -295,24 +296,13 @@ KeyEditor::KeyEditor(QWidget* parent)
       l = new QVBoxLayout();
       l->setContentsMargins(0, 0, 0, 0);
       frame_3->setLayout(l);
-      sp1 = new Palette();
+      sp1 = newAccidentalsPalette();
       PaletteScrollArea* accPalette = new PaletteScrollArea(sp1);
       QSizePolicy policy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
       accPalette->setSizePolicy(policy1);
       accPalette->setRestrictHeight(false);
 
       l->addWidget(accPalette);
-      sp1->setGrid(33, 36);
-      for (int i = 1; i < 6; ++i) {
-            Accidental* s = new Accidental(gscore);
-            s->setSubtype(i);
-            sp1->append(s, qApp->translate("accidental", s->subTypeName()));
-            }
-      for (int i = 16; i < 26+9; ++i) {
-            Accidental* s = new Accidental(gscore);
-            s->setSubtype(i);
-            sp1->append(s, qApp->translate("accidental", s->subTypeName()));
-            }
 
       connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
       connect(clearButton, SIGNAL(clicked()), SLOT(clearClicked()));

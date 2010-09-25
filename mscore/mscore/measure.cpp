@@ -2183,6 +2183,8 @@ printf("  single note\n");
                   }
             else if (tag == "Rest") {
                   Rest* rest = new Rest(score());
+                  rest->setDurationType(Duration::V_MEASURE);
+                  rest->setDuration(timesig());
                   rest->setTrack(score()->curTrack);
                   rest->read(e, _tuplets, score()->slurs);
 // printf("   Rest %d %d\n", score()->curTick, rest->track());

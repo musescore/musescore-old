@@ -631,31 +631,28 @@ void MuseScore::newFile()
             //
             // remove all notes & rests
             //
+#if 0
             for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
                   Staff* staff = score->staff(staffIdx);
                   staff->keymap()->clear();
+                  staff->cleflist()->clear();
                   }
-
+#endif
             int tracks = score->nstaves() * VOICES;
-            for (Measure* measure = score->firstMeasure(); measure; measure = measure->nextMeasure()) {
-                  for (Segment* s = measure->first(); s;) {
-                        Segment* ns = s->next();
-                        if (
-                              (s->subtype() == SegChordRest)
-                           || (s->subtype() == SegClef)
-                           || (s->subtype() == SegKeySig)
-                           || (s->subtype() == SegGrace)
-                           || (s->subtype() == SegBreath)
-                           || (s->subtype() == SegTimeSig)
-                           ) {
-                              for (int track = 0; track < tracks; ++track) {
-                                    if (s->element(track))
-                                          delete s->element(track);
-                                    }
-                              measure->remove(s);
-                              }
-                        s = ns;
+            for (Segment* s = score->firstMeasure()->first(); s;) {
+                  Segment* ns = s->next1();
+                  if (
+                     (s->subtype() == SegChordRest)
+                     || (s->subtype() == SegClef)
+                     || (s->subtype() == SegKeySig)
+                     || (s->subtype() == SegGrace)
+                     || (s->subtype() == SegBreath)
+//                     || (s->subtype() == SegTimeSig)
+                        ) {
+                        s->measure()->remove(s);
+                        delete s;
                         }
+                  s = ns;
                   }
             }
       //

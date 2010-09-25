@@ -60,7 +60,7 @@
 
 Seq* seq;
 
-static const int guiRefresh   = 20;         // Hz
+static const int guiRefresh   = 10;       // Hz
 static const int peakHoldTime = 1400;     // msec
 static const int peakHold     = (peakHoldTime * guiRefresh) / 1000;
 
@@ -95,7 +95,8 @@ Seq::Seq()
 
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
-      heartBeatTimer->stop();
+      heartBeatTimer->start(1000/guiRefresh);
+//      heartBeatTimer->stop();
 
       noteTimer = new QTimer(this);
       noteTimer->setSingleShot(true);
@@ -377,7 +378,7 @@ void Seq::seqMessage(int msg)
       switch(msg) {
             case '0':         // STOP
                   guiStop();
-                  heartBeatTimer->stop();
+//                  heartBeatTimer->stop();
                   if (driver && mscore->getSynthControl()) {
                         meterValue[0]     = .0f;
                         meterValue[1]     = .0f;
@@ -391,7 +392,7 @@ void Seq::seqMessage(int msg)
 
             case '1':         // PLAY
                   emit started();
-                  heartBeatTimer->start(1000/guiRefresh);
+//                  heartBeatTimer->start(1000/guiRefresh);
                   break;
 
             default:
@@ -693,9 +694,6 @@ int Seq::getCurTick()
 
 void Seq::heartBeat()
       {
-      if (state != PLAY)
-            return;
-
       SynthControl* sc = mscore->getSynthControl();
       if (sc && driver) {
             if (++peakTimer[0] >= peakHold)
@@ -704,7 +702,8 @@ void Seq::heartBeat()
                   meterPeakValue[1] *= .7f;
             sc->setMeter(meterValue[0], meterValue[1], meterPeakValue[0], meterPeakValue[1]);
             }
-
+      if (state != PLAY)
+            return;
       PlayPanel* pp = mscore->getPlayPanel();
       double endTime = curTime() - startTime;
       if (pp)

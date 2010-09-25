@@ -31,6 +31,10 @@
 
 class Note;
 
+//---------------------------------------------------------
+//   SymElement
+//---------------------------------------------------------
+
 struct SymElement {
       int sym;
       double x;
@@ -47,11 +51,13 @@ class Accidental : public Element {
 
    public:
       Accidental(Score* s);
-      virtual Accidental* clone() const { return new Accidental(*this); }
-      virtual ElementType type() const  { return ACCIDENTAL; }
-      virtual void setSubtype(int v);
+      virtual Accidental* clone() const     { return new Accidental(*this); }
+      virtual ElementType type() const      { return ACCIDENTAL; }
       virtual const QString subtypeName() const;
+      const char* subtypeUserName() const;
       virtual void setSubtype(const QString& s);
+      void setSubtype(AccidentalType t)     { Element::setSubtype(int(t)); }
+      AccidentalType accidentalType() const { return AccidentalType(subtype()); }
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
@@ -60,13 +66,17 @@ class Accidental : public Element {
       virtual void startEdit(ScoreView*, const QPointF&) { setGenerated(false); }
 
       int symbol();
-      Note* note() const           { return (Note*)parent(); }
-      bool hasBracket() const      { return _hasBracket;     }
-      void setHasBracket(bool val) { _hasBracket = val;      }
+      Note* note() const                  { return (Note*)parent(); }
+      bool hasBracket() const             { return _hasBracket;     }
+      void setHasBracket(bool val)        { _hasBracket = val;      }
 
-      const char* subTypeName() const;
-      static int subtype2value(AccidentalType);      // return effective pitch offset
+      virtual void read(QDomElement);
+      virtual void write(Xml& xml) const;
+
+      static int subtype2value(AccidentalType);             // return effective pitch offset
+      static const char* subtype2name(AccidentalType);      // return effective pitch offset
       static AccidentalType value2subtype(int);
+      static AccidentalType name2subtype(const QString&);
       };
 
 //---------------------------------------------------------

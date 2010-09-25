@@ -96,6 +96,27 @@ Palette* newKeySigPalette()
       }
 
 //---------------------------------------------------------
+//   newAccidentalsPalette
+//---------------------------------------------------------
+
+Palette* newAccidentalsPalette()
+      {
+      Palette* sp = new Palette;
+      sp->setName(qApp->translate("accidental", "Accidentals"));
+      sp->setGrid(33, 36);
+
+      for (int i = ACC_SHARP; i < ACC_END; ++i) {
+            Accidental* s = new Accidental(gscore);
+            s->setSubtype(AccidentalType(i));
+            sp->append(s, qApp->translate("accidental", s->subtypeUserName()));
+            }
+      AccidentalBracket* ab = new AccidentalBracket(gscore);
+      ab->setSubtype(0);
+      sp->append(ab, qApp->translate("accidental", "round bracket"));
+      return sp;
+      }
+
+//---------------------------------------------------------
 //   showPalette
 //---------------------------------------------------------
 
@@ -443,23 +464,7 @@ void MuseScore::populatePalette()
       //    Accidentals
       //-----------------------------------
 
-      sp = new Palette;
-      sp->setName(tr("Accidentals"));
-      sp->setGrid(33, 36);
-
-      for (int i = 1; i < 6; ++i) {
-            Accidental* s = new Accidental(gscore);
-            s->setSubtype(i);
-            sp->append(s, qApp->translate("accidental", s->subTypeName()));
-            }
-      for (int i = 16; i < 26+9; ++i) {
-            Accidental* s = new Accidental(gscore);
-            s->setSubtype(i);
-            sp->append(s, qApp->translate("accidental", s->subTypeName()));
-            }
-      AccidentalBracket* ab = new AccidentalBracket(gscore);
-      ab->setSubtype(0);
-      sp->append(ab, qApp->translate("Accidental", "round bracket"));
+      sp = newAccidentalsPalette();
       paletteBox->addPalette(sp);
 
       //-----------------------------------
@@ -1071,33 +1076,10 @@ void MuseScore::noteAttributesMenu()
 void MuseScore::accidentalsMenu()
       {
       if (accidentalsPalette == 0) {
-            Palette* sp = new Palette();
-            sp->resize(400, 300);
+            Palette* sp = newAccidentalsPalette();
             accidentalsPalette = new PaletteScrollArea(sp);
             accidentalsPalette->setRestrictHeight(false);
             accidentalsPalette->setWindowTitle(tr("MuseScore: Accidentals"));
-            sp->setGrid(40, 50);
-
-#if 0
-            for (int i = 1; i < 16+6+4+9; ++i) {
-                  Accidental* s = new Accidental(gscore);
-                  s->setSubtype(i);
-                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
-                  }
-#endif
-            for (int i = 1; i < 6; ++i) {
-                  Accidental* s = new Accidental(gscore);
-                  s->setSubtype(i);
-                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
-                  }
-            for (int i = 16; i < 26+9; ++i) {
-                  Accidental* s = new Accidental(gscore);
-                  s->setSubtype(i);
-                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
-                  }
-            AccidentalBracket* ab = new AccidentalBracket(gscore);
-            ab->setSubtype(0);
-            sp->append(ab, qApp->translate("Accidental", "round bracket"));
             }
       accidentalsPalette->show();
       accidentalsPalette->raise();

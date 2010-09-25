@@ -204,11 +204,11 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                         if (note->userOff().isNull() && pnote->userOff().isNull()) {
                               if (ticks > pnote->chord()->ticks()) {
                                     pnote->setHidden(true);
-                                    pnote->setAccidentalType(ACC_NONE);
+                                    // TODO: pnote->setAccidentalType(ACC_NONE);
                                     note->setHidden(false);
                                     }
                               else {
-                                    note->setAccidentalType(ACC_NONE);
+                                    // TODO: note->setAccidentalType(ACC_NONE);
                                     note->setHidden(true);
                                     }
                               }

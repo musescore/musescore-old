@@ -2101,17 +2101,11 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             // Note: in Binchois.xml two accidentals have parentheses which are encoded
             // as editorial="yes". Wikipedia calls this a cautionary accidental.
             // Brackets/parenthese are controlled by the level-display entity (DTD 1.1)
+
             bool editorial = false;
-            int acc        = note->accidentalType();
-            if (acc != ACC_NONE) {
-                  if (6 <= acc && acc <= 10) {
-                        acc -= 5;
-                        editorial = true;
-                        }
-                  else if (11 <= acc && acc <= 15) {
-                        acc -= 10;
-                        editorial = true;
-                        }
+            Accidental* acc = note->accidental();
+            if (acc) {
+                  editorial = acc->hasBracket();
                   /*
                         MusicXML accidental names include:
                         sharp,natural, flat, double-sharp, sharp-sharp, flat-flat,
@@ -2119,24 +2113,58 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                         three-quarters-flat, and three-quarters-sharp
                     */
                   QString s;
-                  switch(acc) {
-                        case ACC_SHARP:   s = "sharp";        break;
-                        case ACC_FLAT:    s = "flat";         break;
-                        case ACC_SHARP2:  s = "double-sharp"; break;
-                        case ACC_FLAT2:   s = "flat-flat";    break;
-                        case ACC_NATURAL: s = "natural";      break;
-                        case 16: s = "quarter-flat";          break; //flat-slash (alternative)
-                        case 19: s = "quarter-flat";          break; //mirrored-flat (recommended by Michael)
-                        case 29: s = "quarter-flat";          break; //flat arrow up (alternative)
-                        case 33: s = "quarter-flat";          break; //natural arrow down (alternative)
-                        case 22: s = "quarter-sharp";         break; //sharp-slash (recommended by Michael)
-                        case 27: s = "quarter-sharp";         break; //sharp arrow down (alternative)
-                        case 32: s = "quarter-sharp";         break; //natural arrow up (alternative)
-                        case 18: s = "three-quarters-flat";   break; //mirrored-flat1 (recommended by Michael)
-                        case 21: s = "three-quarters-flat";   break; //flat-flat-slash (alternative)
-                        case 30: s = "three-quarters-flat";   break; //flat arrow down (alternative)
-                        case 25: s = "three-quarters-sharp";  break; //sharp-slash4 (recommended by Michael)
-                        case 26: s = "three-quarters-sharp";  break; //sharp arrow up (alternate)
+                  switch(acc->accidentalType()) {
+                        case ACC_SHARP:
+                              s = "sharp";
+                              break;
+                        case ACC_FLAT:
+                              s = "flat";
+                              break;
+                        case ACC_SHARP2:
+                              s = "double-sharp";
+                              break;
+                        case ACC_FLAT2:
+                              s = "flat-flat";
+                              break;
+                        case ACC_NATURAL:
+                              s = "natural";
+                              break;
+                        case ACC_FLAT_SLASH:          // (alternative)
+                              s = "quarter-flat";
+                              break;
+                        case ACC_MIRRORED_FLAT:       // (recommended by Michael)
+                              s = "quarter-flat";
+                              break;
+                        case ACC_FLAT_ARROW_UP:       // (alternative)
+                              s = "quarter-flat";
+                              break;
+                        case ACC_NATURAL_ARROW_DOWN:  // (alternative)
+                              s = "quarter-flat";
+                              break;
+                        case ACC_SHARP_SLASH:         // (recommended by Michael)
+                              s = "quarter-sharp";
+                              break;
+                        case ACC_SHARP_ARROW_DOWN:    // (alternative)
+                              s = "quarter-sharp";
+                              break;
+                        case ACC_NATURAL_ARROW_UP:    // (alternative)
+                              s = "quarter-sharp";
+                              break;
+                        case ACC_MIRRORED_FLAT2:      // (recommended by Michael)
+                              s = "three-quarters-flat";
+                              break;
+                        case ACC_FLAT_FLAT_SLASH:     // (alternative)
+                              s = "three-quarters-flat";
+                              break;
+                        case ACC_FLAT_ARROW_DOWN:     // (alternative)
+                              s = "three-quarters-flat";
+                              break;
+                        case ACC_SHARP_SLASH4:        // (recommended by Michael)
+                              s = "three-quarters-sharp";
+                              break;
+                        case ACC_SHARP_ARROW_UP:      // (alternate)
+                              s = "three-quarters-sharp";
+                              break;
                         default:
                               printf("unknown accidental %d\n", acc);
                         }
