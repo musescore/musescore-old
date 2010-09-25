@@ -1,3 +1,6 @@
+24.sep
+      (la)
+      - fix #7150: Changing soundfont does not work for audio export   
 23.sep (la)
       - fix #7233: Transpose by diminished second doesn't work (0.9.6 branch regression)
       - fix #7232: D.S. after coda sign freezes playback

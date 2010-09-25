@@ -160,6 +160,7 @@ void SynthControl::selectSoundFont()
             soundFont->setText(s);
             synth->loadSoundFont(s);
             emit soundFontChanged();
+            updatePreferences();
             }
       }
 
@@ -170,6 +171,7 @@ void SynthControl::selectSoundFont()
 void SynthControl::masterGainChanged(double val, int)
       {
       emit masterGainChanged(val);
+      updatePreferences();
       }
 
 //---------------------------------------------------------
@@ -208,6 +210,7 @@ void SynthControl::stop()
 void SynthControl::reverbValueChanged(double val, int idx)
       {
       synth->setEffectParameter(0, idx, val);
+      updatePreferences();
       }
 
 //---------------------------------------------------------
@@ -217,5 +220,6 @@ void SynthControl::reverbValueChanged(double val, int idx)
 void SynthControl::chorusValueChanged(double val, int idx)
       {
       synth->setEffectParameter(1, idx, val);
+      updatePreferences();
       }
 
