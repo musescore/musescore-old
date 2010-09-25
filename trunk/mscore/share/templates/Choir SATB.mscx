@@ -161,6 +161,8 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
+        <duration z="4" n="4"/>
         </Rest>
       <BarLine>
         </BarLine>
@@ -174,6 +176,8 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
+        <duration z="4" n="4"/>
         </Rest>
       <BarLine>
         </BarLine>
@@ -187,6 +191,8 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
+        <duration z="4" n="4"/>
         </Rest>
       <BarLine>
         </BarLine>
@@ -200,6 +206,8 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
+        <duration z="4" n="4"/>
         </Rest>
       <BarLine>
         </BarLine>

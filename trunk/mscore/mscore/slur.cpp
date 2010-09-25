@@ -939,13 +939,11 @@ double SlurTie::firstNoteRestSegmentX(System* system)
 
 //---------------------------------------------------------
 //   bbox
-//    DEBUG: needed?
+//    used in palette
 //---------------------------------------------------------
 
 QRectF Slur::bbox() const
       {
-      printf("Slur bbox()\n");
-
       if (spannerSegments().isEmpty())
             return QRectF();
       else

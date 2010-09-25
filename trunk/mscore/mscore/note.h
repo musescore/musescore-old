@@ -167,12 +167,9 @@ class Note : public Element {
       void setTpc(int v);
       void setTpcFromPitch();
 
-      void setAccidentalType(int);
-      int accidentalType() const;
-
       AccidentalType userAccidental() const    { return _userAccidental; }
       void setUserAccidental(AccidentalType v) { _userAccidental = v;    }
-      Accidental* accidental() const              { return _accidental;     }
+      Accidental* accidental() const           { return _accidental;     }
 
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n);

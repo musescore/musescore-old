@@ -1632,13 +1632,17 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
                   //
                   accType = ACC_NONE;
                   user = accidental;
+                  pitch = note->pitch();
+                  tpc   = note->tpc();
                   }
             else {
                   accType = accidental;
                   user    = ACC_NONE;
+                  pitch = line2pitch(note->line(), clef, 0) + Accidental::subtype2value(accType);
+                  tpc   = step2tpc(step, acc);
                   }
-            pitch = line2pitch(note->line(), clef, 0) + Accidental::subtype2value(accType);
-            tpc   = step2tpc(step, acc);
+printf("add accidental %d(%d) pitch %d->%d\n", accType,
+  Accidental::subtype2value(accType), note->pitch(), pitch);
             }
 
       foreach(Staff* st, staffList) {
