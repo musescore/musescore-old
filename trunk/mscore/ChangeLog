@@ -1,3 +1,6 @@
+25.sep (ws)
+      - fixed #7227
+      - updated accidental handling
 24.sep (ws)
       - removed drum palette, replaced by a drum tools dock widget similar
         to text edit tools

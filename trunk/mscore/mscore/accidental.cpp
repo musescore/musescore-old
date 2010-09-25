@@ -78,6 +78,7 @@ Accidental::Accidental(Score* s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _hasBracket = false;
+      _role       = ACC_AUTO;
       }
 
 //---------------------------------------------------------
@@ -87,8 +88,16 @@ Accidental::Accidental(Score* s)
 void Accidental::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "bracket")
-                  _hasBracket = e.text().toInt();
+            QString tag(e.tagName());
+            int i = e.text().toInt();
+            if (tag == "bracket") {
+                  if (i == 0 || i == 1)
+                        _hasBracket = i;
+                  }
+            else if (tag == "role") {
+                  if (i == ACC_AUTO || i == ACC_USER)
+                        _role = AccidentalRole(i);
+                  }
             else if (Element::readProperties(e))
                   ;
             else
@@ -105,6 +114,8 @@ void Accidental::write(Xml& xml) const
       xml.stag(name());
       if (_hasBracket)
             xml.tag("bracket", _hasBracket);
+      if (_role != AUTO)
+            xml.tag("role", _role);
       Element::writeProperties(xml);
       xml.etag();
       }

@@ -431,13 +431,12 @@ Score::Score(Score* parent)
 
 Score::~Score()
       {
+      deselectAll();
       for (MeasureBase* m = _measures.first(); m;) {
             MeasureBase* nm = m->next();
             delete m;
             m = nm;
             }
-//      foreach(Element* e, _gel)
-//            delete e;
       /*foreach(Beam* b, _beams)
             delete b;*/
       foreach(Part* p, _parts)

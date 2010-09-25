@@ -1300,9 +1300,9 @@ void Score::upDown(bool up, UpDownMode mode)
                   }
             _is.pitch = newPitch;
 
-            if ((oNote->pitch() != newPitch) || (oNote->tpc() != newTpc) || oNote->userAccidental()
+            if ((oNote->pitch() != newPitch) || (oNote->tpc() != newTpc)
                || oNote->string() != string || oNote->fret() != fret) {
-                  undoChangePitch(oNote, newPitch, newTpc, ACC_NONE, oNote->line(), fret, string);
+                  undoChangePitch(oNote, newPitch, newTpc, oNote->line(), fret, string);
                   }
 
             // play new note with velocity 80 for 0.3 sec:
@@ -1613,7 +1613,7 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
       //
       int acc    = Accidental::subtype2value(accidental);
       int acc2   = measure->findAccidental2(note);
-      AccidentalType accType, user;
+      AccidentalType accType;
 
       int pitch, tpc;
       if (accidental == ACC_NONE) {
@@ -1621,7 +1621,6 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
             //  delete accidental
             //
             accType = ACC_NONE;
-            user    = ACC_NONE;
             pitch   = line2pitch(note->line(), clef, 0) + acc2;
             tpc     = step2tpc(step, acc2);
             }
@@ -1630,19 +1629,19 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
                   //
                   // this is a precautionary accidental
                   //
-                  accType = ACC_NONE;
-                  user = accidental;
                   pitch = note->pitch();
                   tpc   = note->tpc();
+                  Accidental* a = new Accidental(this);
+                  a->setParent(note);
+                  a->setSubtype(accidental);
+                  a->setRole(ACC_USER);
+                  note->setAccidental(a);
                   }
             else {
                   accType = accidental;
-                  user    = ACC_NONE;
                   pitch = line2pitch(note->line(), clef, 0) + Accidental::subtype2value(accType);
                   tpc   = step2tpc(step, acc);
                   }
-printf("add accidental %d(%d) pitch %d->%d\n", accType,
-  Accidental::subtype2value(accType), note->pitch(), pitch);
             }
 
       foreach(Staff* st, staffList) {
@@ -1674,7 +1673,7 @@ printf("add accidental %d(%d) pitch %d->%d\n", accType,
                               tab->convertPitch(pitch, &string, &fret);
                         }
                   }
-            undo()->push(new ChangePitch(n, pitch, tpc, user, n->line(), fret, string));
+            undo()->push(new ChangePitch(n, pitch, tpc, n->line(), fret, string));
             if (!st->useTablature()) {
                   //
                   // handle ties
@@ -1688,7 +1687,7 @@ printf("add accidental %d(%d) pitch %d->%d\n", accType,
                         Note* nn = n;
                         while (nn->tieFor()) {
                               nn = nn->tieFor()->endNote();
-                              undo()->push(new ChangePitch(nn, pitch, tpc, user, nn->line(), fret, string));
+                              undo()->push(new ChangePitch(nn, pitch, tpc, nn->line(), fret, string));
                               }
                         }
                   }

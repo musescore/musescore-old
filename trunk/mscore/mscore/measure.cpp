@@ -3375,7 +3375,7 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
                               if (string == -1 || fret == -1 || tab->getPitch(string, fret) != note->pitch()) {
                                     int nstring, nfret;
                                     tab->convertPitch(note->pitch(), &nstring, &nfret);
-                                    score()->undoChangePitch(note, note->pitch(), note->tpc(), note->userAccidental(),
+                                    score()->undoChangePitch(note, note->pitch(), note->tpc(),
                                        note->line(), nfret, nstring);
                                     }
                               }

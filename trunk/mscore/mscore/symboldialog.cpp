@@ -49,10 +49,9 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       setWindowTitle(tr("MuseScore: Symbols"));
       QLayout* l = new QVBoxLayout();
       frame->setLayout(l);
-      QScrollArea* sa = new QScrollArea;
-      l->addWidget(sa);
-
       createSymbolPalette();
+      QScrollArea* sa = new PaletteScrollArea(sp);
+      l->addWidget(sa);
 
       sp->setAcceptDrops(true);
       sp->setDrawGrid(true);

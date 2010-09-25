@@ -1023,7 +1023,6 @@ void ShowNoteWidget::setElement(Element* e)
       nb.tieBack->setEnabled(note->tieBack());
       nb.accidental->setEnabled(note->accidental());
       nb.bend->setEnabled(note->bend());
-      nb.userAccidental->setValue(note->userAccidental());
       nb.dot1->setEnabled(note->dot(0));
       nb.dot2->setEnabled(note->dot(1));
       nb.dot3->setEnabled(note->dot(2));
