@@ -438,8 +438,7 @@ void Score::undoChangeSubtype(Element* element, int st)
 //   undoChangePitch
 //---------------------------------------------------------
 
-void Score::undoChangePitch(Note* note, int pitch, int tpc,
-   AccidentalType userAccidental, int line, int fret, int string)
+void Score::undoChangePitch(Note* note, int pitch, int tpc, int line, int fret, int string)
       {
       QList<Staff*> staffList;
       Staff* ostaff = note->staff();
@@ -468,7 +467,7 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc,
             int staffIdx = score->staffIdx(staff);
             Chord* c     = static_cast<Chord*>(s->element(staffIdx * VOICES + chord->voice()));
             Note* n      = c->notes().at(noteIndex);
-            undo()->push(new ChangePitch(n, pitch, tpc, userAccidental, line, fret, string));
+            undo()->push(new ChangePitch(n, pitch, tpc, line, fret, string));
             score->updateAccidentals(m, staffIdx);
             }
       }
@@ -1243,8 +1242,7 @@ void ChangeColor::flip()
 //   ChangePitch
 //---------------------------------------------------------
 
-ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc,
-   AccidentalType _userAccidental, int l, int f, int s)
+ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc, int l, int f, int s)
       {
       note  = _note;
       if (_note == 0)
@@ -1254,27 +1252,23 @@ ChangePitch::ChangePitch(Note* _note, int _pitch, int _tpc,
       line   = l;
       fret   = f;
       string = s;
-      userAccidental = _userAccidental;
       }
 
 void ChangePitch::flip()
       {
       int f_pitch                 = note->pitch();
       int f_tpc                   = note->tpc();
-      AccidentalType f_userAcc = note->userAccidental();
       int f_line                  = note->line();
       int f_fret                  = note->fret();
       int f_string                = note->string();
 
       note->setPitch(pitch, tpc);
-      note->setUserAccidental(userAccidental);
       note->setLine(line);
       note->setFret(fret);
       note->setString(string);
 
       pitch          = f_pitch;
       tpc            = f_tpc;
-      userAccidental = f_userAcc;
       line           = f_line;
       fret           = f_fret;
       string         = f_string;

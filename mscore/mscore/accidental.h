@@ -42,12 +42,22 @@ struct SymElement {
       };
 
 //---------------------------------------------------------
+//   AccidentalRole
+//---------------------------------------------------------
+
+enum AccidentalRole {
+      ACC_AUTO,               // layout created accidental
+      ACC_USER                // user created accidental
+      };
+
+//---------------------------------------------------------
 //   Accidental
 //---------------------------------------------------------
 
 class Accidental : public Element {
       QList<SymElement> el;
       bool _hasBracket;
+      AccidentalRole _role;
 
    public:
       Accidental(Score* s);
@@ -69,6 +79,8 @@ class Accidental : public Element {
       Note* note() const                  { return (Note*)parent(); }
       bool hasBracket() const             { return _hasBracket;     }
       void setHasBracket(bool val)        { _hasBracket = val;      }
+      AccidentalRole role() const         { return _role;           }
+      void setRole(AccidentalRole r)      { _role = r;              }
 
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;

@@ -631,6 +631,7 @@ void MuseScore::newFile()
             //
             // remove all notes & rests
             //
+            score->deselectAll();
 #if 0
             for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
                   Staff* staff = score->staff(staffIdx);

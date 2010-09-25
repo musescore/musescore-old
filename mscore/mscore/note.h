@@ -117,7 +117,6 @@ class Note : public Element {
       bool _mirror;           ///< True if note is mirrored at stem.
       DirectionH _userMirror; ///< user override of mirror
 
-      AccidentalType _userAccidental;
       Accidental* _accidental;
 
       ElementList _el;        ///< fingering, other text, symbols or images
@@ -167,9 +166,8 @@ class Note : public Element {
       void setTpc(int v);
       void setTpcFromPitch();
 
-      AccidentalType userAccidental() const    { return _userAccidental; }
-      void setUserAccidental(AccidentalType v) { _userAccidental = v;    }
-      Accidental* accidental() const           { return _accidental;     }
+      Accidental* accidental() const    { return _accidental; }
+      void setAccidental(Accidental* a) { _accidental = a;    }
 
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n);

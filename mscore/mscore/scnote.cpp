@@ -151,11 +151,10 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         }
                   break;
             case 7:   //userAccidental
-                  // WS: argument should be string
-                  //     as defined in Acc accList[]->tag
-                  //
+
                   if (argc == 0)
-                        return qScriptValueFromValue(context->engine(), int(note->userAccidental()));
+                        // return qScriptValueFromValue(context->engine(), int(note->userAccidental()));
+                        return qScriptValueFromValue(context->engine(), 0);
                   else if (argc == 1) {
                         int v = context->argument(0).toInt32();
                         // TODO: does not work:       note->setAccidentalType(AccidentalType(v));

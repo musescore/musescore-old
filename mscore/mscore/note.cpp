@@ -137,7 +137,6 @@ Note::Note(Score* s)
       _pitch             = 0;
       _ppitch            = 0;
       _tuning            = 0.0;
-      _userAccidental    = ACC_NONE;
       _accidental        = 0;
       _mirror            = false;
       _userMirror        = DH_AUTO;
@@ -205,7 +204,6 @@ Note::Note(const Note& n)
       _headType          = n._headType;
       _mirror            = n._mirror;
       _userMirror        = n._userMirror;
-      _userAccidental    = n._userAccidental;
       _accidental        = 0;
       if (n._accidental)
             add(new Accidental(*(n._accidental)));
@@ -279,7 +277,6 @@ void Note::setTpc(int v)
             abort();
             }
       _tpc = v;
-      _userAccidental = ACC_NONE;
       }
 
 //---------------------------------------------------------
@@ -580,8 +577,6 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
       if (_tuning != 0.0)
             xml.tag("tuning", _tuning);
 
-      if (userAccidental())
-            xml.tag("userAccidental", Accidental::subtype2name(userAccidental()));
       if (_accidental)
             _accidental->write(xml);
       _el.write(xml);
@@ -717,12 +712,11 @@ void Note::read(QDomElement e)
                   bool ok;
                   int k = val.toInt(&ok);
                   if (ok) {
+                        _accidental = new Accidental(score());
+                        _accidental->setParent(this);
                         // TODO: for backward compatibility
                         k &= 0xff;
-                        setUserAccidental(AccidentalType(k));
-                        }
-                  else {
-                        setUserAccidental(Accidental::name2subtype(val));
+                        _accidental->setSubtype(AccidentalType(k));
                         }
                   }
             else if (tag == "Accidental") {
@@ -838,7 +832,7 @@ void Note::endDrag()
             _fret = -1;
             _string = -1;
             }
-      score()->undoChangePitch(this, npitch, tpc, ACC_NONE, nLine, _fret, _string);
+      score()->undoChangePitch(this, npitch, tpc, nLine, _fret, _string);
       score()->select(this, SELECT_SINGLE, 0);
       }
 
@@ -1267,9 +1261,8 @@ void Note::layout10(char* tversatz)
             // calculate accidental
 
             AccidentalType acci = ACC_NONE;
-            if (_userAccidental) {
-                  acci = _userAccidental;
-                  }
+            if (_accidental && _accidental->role() == ACC_USER)
+                  acci = _accidental->accidentalType();
             else  {
                   int accVal = tpc2alter(_tpc);
                   if ((accVal != tversatz[int(_line)]) || hidden()) {
@@ -1495,8 +1488,8 @@ void Note::updateAccidental(char* tversatz)
       // calculate accidental
 
       AccidentalType acci = ACC_NONE;
-      if (_userAccidental)
-            acci = _userAccidental;
+      if (_accidental && _accidental->role() == ACC_USER)
+            acci = _accidental->accidentalType();
       else  {
             int accVal = tpc2alter(_tpc);
             if ((accVal != tversatz[int(_line)]) || hidden()) {
