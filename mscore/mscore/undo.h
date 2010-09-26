@@ -1505,6 +1505,7 @@ class ChangeBeamProperties : public UndoCommand {
       UNDO_NAME("ChangeBeamProperties");
       };
 
+extern void updateNoteLines(Segment* segment, int track);
 
 #endif
 

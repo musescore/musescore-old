@@ -131,7 +131,7 @@ class Staff {
       KeyList* keymap() const        { return _keymap;      }
       ClefList* clefList() const     { return _clefList;    }
       void changeKeySig(int tick, KeySigEvent st);
-      void changeClef(int tick, int st);
+      void changeClef(int tick, ClefType);
       int clef(int tick) const;
       void setClef(int tick, int clef);
       KeySigEvent key(int tick) const;

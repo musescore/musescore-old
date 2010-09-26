@@ -1818,7 +1818,7 @@ void Score::cmdAddStretch(double val)
 //   cmdInsertClef
 //---------------------------------------------------------
 
-void Score::cmdInsertClef(int type)
+void Score::cmdInsertClef(ClefType type)
       {
       if (!noteEntryMode())
             return;

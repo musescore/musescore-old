@@ -64,33 +64,70 @@ extern qreal PDPI;      // physical drawing resolution
 extern qreal DPI;       // logical drawing resolution
 extern qreal DPMM;      // logical dots/mm
 
-//
-//    note head groups
-//
+//---------------------------------------------------------
+//   NoteHeadGroup
+//---------------------------------------------------------
+
 enum NoteHeadGroup {
       HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE, HEAD_MI,
       HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_FA, HEAD_LA, HEAD_TI,
       HEAD_GROUPS
       };
 
+//---------------------------------------------------------
+//   NoteHeadType
+//---------------------------------------------------------
+
 enum NoteHeadType {
       HEAD_AUTO, HEAD_WHOLE, HEAD_HALF, HEAD_QUARTER, HEAD_BREVIS
       };
 
-enum Anchor { ANCHOR_SEGMENT, ANCHOR_MEASURE};
+//---------------------------------------------------------
+//   Anchor
+//---------------------------------------------------------
 
-// used for stem and slur:
-enum Direction  { AUTO, UP, DOWN };
+enum Anchor {
+      ANCHOR_SEGMENT, ANCHOR_MEASURE
+      };
 
-// used for note head mirror
-enum DirectionH { DH_AUTO, DH_LEFT, DH_RIGHT };
+//---------------------------------------------------------
+//   Direction
+//    used for stem and slur
+//---------------------------------------------------------
 
-// used for Note->velocity
-enum ValueType { AUTO_VAL, USER_VAL, OFFSET_VAL };
+enum Direction  {
+      AUTO, UP, DOWN
+      };
+
+//---------------------------------------------------------
+//   DirectionH
+//    used for note head mirror
+//---------------------------------------------------------
+
+enum DirectionH {
+      DH_AUTO, DH_LEFT, DH_RIGHT
+      };
+
+//---------------------------------------------------------
+//   ValueType
+//    used for Note->velocity
+//---------------------------------------------------------
+
+enum ValueType {
+      AUTO_VAL, USER_VAL, OFFSET_VAL
+      };
+
+//---------------------------------------------------------
+//   Placement
+//---------------------------------------------------------
 
 enum Placement {
       PLACE_AUTO, PLACE_ABOVE, PLACE_BELOW, PLACE_LEFT
       };
+
+//---------------------------------------------------------
+//   AlignmentFlags
+//---------------------------------------------------------
 
 enum AlignmentFlags {
       ALIGN_LEFT     = 0,
@@ -107,19 +144,47 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Align);
 
 static const Align ALIGN_CENTER = ALIGN_HCENTER | ALIGN_VCENTER;
 
+//---------------------------------------------------------
+//   OffsetType
+//---------------------------------------------------------
 
 enum OffsetType {
       OFFSET_ABS,       ///< offset in point units
       OFFSET_SPATIUM    ///< offset in space units
       };
 
-enum BeamMode { BEAM_AUTO, BEAM_BEGIN, BEAM_MID, BEAM_END,
+//---------------------------------------------------------
+//   BeamMode
+//---------------------------------------------------------
+
+enum BeamMode {
+      BEAM_AUTO, BEAM_BEGIN, BEAM_MID, BEAM_END,
       BEAM_NO, BEAM_BEGIN32, BEAM_BEGIN64, BEAM_INVALID
       };
 
-enum TransposeDirection { TRANSPOSE_UP, TRANSPOSE_DOWN, TRANSPOSE_CLOSEST };
-enum TransposeMode      { TRANSPOSE_BY_KEY, TRANSPOSE_BY_INTERVAL };
-enum DynamicType        { DYNAMIC_STAFF, DYNAMIC_PART, DYNAMIC_SYSTEM };
+//---------------------------------------------------------
+//   TransposeDirection
+//---------------------------------------------------------
+
+enum TransposeDirection {
+      TRANSPOSE_UP, TRANSPOSE_DOWN, TRANSPOSE_CLOSEST
+      };
+
+//---------------------------------------------------------
+//   TransposeMode
+//---------------------------------------------------------
+
+enum TransposeMode {
+      TRANSPOSE_BY_KEY, TRANSPOSE_BY_INTERVAL
+      };
+
+//---------------------------------------------------------
+//   DynamicType
+//---------------------------------------------------------
+
+enum DynamicType {
+      DYNAMIC_STAFF, DYNAMIC_PART, DYNAMIC_SYSTEM
+      };
 
 //---------------------------------------------------------
 //   NoteType
@@ -134,6 +199,10 @@ enum NoteType {
       NOTE_GRACE32,
       NOTE_INVALID
       };
+
+//---------------------------------------------------------
+//   SelectType
+//---------------------------------------------------------
 
 enum SelectType {
       SELECT_SINGLE, SELECT_RANGE, SELECT_ADD
@@ -210,6 +279,29 @@ enum AccidentalType {
 
 enum UpDownMode {
       UP_DOWN_CHROMATIC, UP_DOWN_OCTAVE, UP_DOWN_DIATONIC
+      };
+
+//---------------------------------------------------------
+//   StaffGroup
+//---------------------------------------------------------
+
+enum StaffGroup {
+      PITCHED_STAFF, PERCUSSION_STAFF, TAB_STAFF
+      };
+
+//---------------------------------------------------------
+//   ClefType
+//---------------------------------------------------------
+
+enum ClefType {
+      CLEF_G, CLEF_G1, CLEF_G2, CLEF_G3,
+      CLEF_F, CLEF_F8, CLEF_F15, CLEF_F_B, CLEF_F_C,
+      CLEF_C1, CLEF_C2, CLEF_C3, CLEF_C4,
+      CLEF_TAB, CLEF_PERC,
+      CLEF_C5, CLEF_G4,
+      CLEF_F_8VA, CLEF_F_15MA,
+      CLEF_PERC2,
+      CLEF_MAX
       };
 
 extern const char* stateName(ScoreState);

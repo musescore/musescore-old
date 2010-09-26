@@ -1453,6 +1453,10 @@ void Note::setLine(int n)
       rypos() = _line * spatium() * .5;
       }
 
+//---------------------------------------------------------
+//   setString
+//---------------------------------------------------------
+
 void Note::setString(int val)
       {
       _string = val;
@@ -1571,5 +1575,24 @@ void Note::updateAccidental(char* tversatz)
       int clef = s->clefList()->clef(tick);
       _line    = 127 - _line - 82 + clefTable[clef].yOffset;
       }
+
+//---------------------------------------------------------
+//   updateLine
+//---------------------------------------------------------
+
+void Note::updateLine()
+      {
+      _line          = tpc2step(_tpc) + (_pitch/12) * 7;
+      int tpcPitch   = tpc2pitch(_tpc);
+      if (tpcPitch < 0)
+            _line += 7;
+      else
+            _line -= (tpcPitch/12)*7;
+      Staff* s = score()->staff(staffIdx() + chord()->staffMove());
+      int tick = chord()->tick();
+      int clef = s->clefList()->clef(tick);
+      _line    = 127 - _line - 82 + clefTable[clef].yOffset;
+      }
+
 
 

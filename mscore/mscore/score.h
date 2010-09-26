@@ -336,7 +336,7 @@ class Score : public QObject {
       void connectSlurs();
       void tupletDialog();
 
-      void cmdInsertClef(int type);
+      void cmdInsertClef(ClefType);
       void cmdExchangeVoice(int, int);
 
       void removeChordRest(ChordRest* cr, bool clearSegment);

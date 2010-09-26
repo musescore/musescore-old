@@ -561,7 +561,7 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
                   break;
 
             case CLEF:
-                  staff()->changeClef(tick(), e->subtype());
+                  staff()->changeClef(tick(), ClefType(e->subtype()));
                   break;
 
             case TEMPO_TEXT:
