@@ -31,6 +31,7 @@
 #include "measure.h"
 #include "tablature.h"
 #include "stafftype.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   idx
@@ -334,37 +335,50 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
 //   changeClef
 //---------------------------------------------------------
 
-void Staff::changeClef(int tick, int st)
+void Staff::changeClef(int tick, ClefType st)
       {
-      if (tick == 0 && st == CLEF_PERC)
-            part()->instr()->setUseDrumset(true);
-
-      Measure* measure = _score->tick2measure(tick);
-      if (!measure) {
-            printf("measure for tick %d not found!\n", tick);
-            return;
-            }
-      if (measure->tick() == tick) {
-            if (measure->prevMeasure())
-                  measure = measure->prevMeasure();
-            }
-      Segment* s = measure->findSegment(SegClef, tick);
-      if (!s) {
-            s = new Segment(measure, SegClef, tick);
-            _score->undoAddElement(s);
-            }
-      int track = idx() * VOICES;
-      Clef* clef = static_cast<Clef*>(s->element(track));
-
-      Clef* nclef = new Clef(score());
-      nclef->setTrack(track);
-      nclef->setSubtype(st);
-      nclef->setParent(s);
-
-      if (clef)
-            _score->undoChangeElement(clef, nclef);
+      QList<Staff*> staffList;
+      Staff* ostaff = this;
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves)
+            staffList = linkedStaves->staves();
       else
-            _score->undoAddElement(nclef);
+            staffList.append(ostaff);
+      foreach(Staff* staff, staffList) {
+            Score* score = staff->score();
+            if (staff->staffType()->group() != clefTable[st].staffGroup) {
+                  printf("Staff::changeClef: invalid staff group\n");
+                  continue;
+                  }
+            Measure* measure = score->tick2measure(tick);
+            if (!measure) {
+                  printf("measure for tick %d not found!\n", tick);
+                  continue;
+                  }
+            if (measure->tick() == tick) {
+                  if (measure->prevMeasure())
+                        measure = measure->prevMeasure();
+                  }
+            Segment* segment = measure->findSegment(SegClef, tick);
+            if (!segment) {
+                  segment = new Segment(measure, SegClef, tick);
+                  score->undoAddElement(segment);
+                  }
+            int track  = staff->idx() * VOICES;
+            Clef* clef = static_cast<Clef*>(segment->element(track));
+
+            if (clef) {
+                  score->undoChangeSubtype(clef, st);
+                  }
+            else {
+                  Clef* nclef = new Clef(score);
+                  nclef->setTrack(track);
+                  nclef->setSubtype(st);
+                  nclef->setParent(segment);
+                  score->undo()->push(new AddElement(nclef));
+                  }
+            }
+      score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------

@@ -1609,7 +1609,6 @@ printf("drop staffList\n");
                   break;
 
             case BRACKET:
-printf("measure: drop bracket\n");
                   e->setTrack(staffIdx * VOICES);
                   e->setParent(system());
                   static_cast<Bracket*>(e)->setLevel(-1);  // add bracket
@@ -1617,7 +1616,7 @@ printf("measure: drop bracket\n");
                   break;
 
             case CLEF:
-                  staff->changeClef(seg->tick(), e->subtype());
+                  staff->changeClef(seg->tick(), ClefType(e->subtype()));
                   delete e;
                   break;
 

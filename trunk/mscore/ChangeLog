@@ -1,3 +1,5 @@
+26.sep(ws)
+      - fix clef changes
 25.sep (ws)
       - implemented #6925: Make "reset stretch" work on the selected measure only
       - fixed #7225: [trunk] SIGABORT when loading a score with parenthesized accidental(s)

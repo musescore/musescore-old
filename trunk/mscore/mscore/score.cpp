@@ -1956,8 +1956,13 @@ void Score::addElement(Element* element)
             layoutFlags |= LAYOUT_FIX_PITCH_VELO;
             _playlistDirty = true;
             }
-      else if (element->type() == CLEF)
-            element->staff()->setUpdateClefList(true);
+      else if (element->type() == CLEF) {
+            Clef* clef       = static_cast<Clef*>(element);
+            Segment* segment = clef->segment();
+            Staff* staff     = clef->staff();
+            staff->setClef(segment->tick(), clef->subtype());
+            updateNoteLines(segment, clef->track());
+            }
       else if (element->type() == KEYSIG)
             element->staff()->setUpdateKeymap(true);
       setLayoutAll(true);
@@ -2036,8 +2041,13 @@ void Score::removeElement(Element* element)
             default:
                   break;
             }
-      if (element->type() == CLEF)
-            element->staff()->setUpdateClefList(true);
+      if (element->type() == CLEF) {
+            Clef* clef       = static_cast<Clef*>(element);
+            Segment* segment = clef->segment();
+            Staff* staff     = clef->staff();
+            staff->clefList()->erase(segment->tick());
+            updateNoteLines(segment, clef->track());
+            }
       else if (element->type() == KEYSIG)
             element->staff()->setUpdateKeymap(true);
       setLayoutAll(true);

@@ -1560,7 +1560,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                         int nclef = o->clef();
                         if (nclef == -1)
                               break;
-                        staff(staffIdx)->changeClef(tick, nclef);
+                        staff(staffIdx)->changeClef(tick, ClefType(nclef));
                         }
                         break;
                   case T_KEY:

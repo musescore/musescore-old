@@ -23,13 +23,10 @@
 
 #include "ui_stafftype.h"
 #include "spatium.h"
+#include "globals.h"
 
 class Staff;
 class Xml;
-
-enum StaffGroup {
-      PITCHED_STAFF, PERCUSSION_STAFF, TAB_STAFF
-      };
 
 //---------------------------------------------------------
 //   StaffType

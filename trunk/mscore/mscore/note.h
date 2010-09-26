@@ -244,6 +244,7 @@ class Note : public Element {
       int customizeVelocity(int velo) const;
       NoteDot* dot(int n)              { return _dots[n];           }
       void updateAccidental(char* tversatz);
+      void updateLine();
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);

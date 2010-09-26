@@ -71,6 +71,30 @@
 extern Measure* tick2measure(int tick);
 
 //---------------------------------------------------------
+//   updateNoteLines
+//    compute line position of note heads after
+//    clef change
+//---------------------------------------------------------
+
+void updateNoteLines(Segment* segment, int track)
+      {
+      for (Segment* s = segment->next1(); s; s = s->next1()) {
+            if (s->subtype() == SegClef && s->element(track))
+                  break;
+            if (s->subtype() != SegChordRest)
+                  continue;
+            for (int t = track; t < track+VOICES; ++t) {
+                  Chord* chord = static_cast<Chord*>(s->element(t));
+                  if (chord && chord->type() == CHORD) {
+                        foreach(Note* note, chord->notes()) {
+                              note->updateLine();
+                              }
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   UndoCommand
 //---------------------------------------------------------
 
@@ -1366,6 +1390,14 @@ void ChangeSubtype::flip()
       {
       int st = element->subtype();
       element->setSubtype(subtype);
+      if (element->type() == CLEF) {
+            Clef* clef       = static_cast<Clef*>(element);
+            Segment* segment = clef->segment();
+            Staff* staff     = clef->staff();
+            staff->setClef(segment->tick(), subtype);
+            updateNoteLines(segment, clef->track());
+            clef->score()->setLayoutAll(true);
+            }
       subtype = st;
       }
 
