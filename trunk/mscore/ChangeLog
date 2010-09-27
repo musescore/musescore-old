@@ -1,4 +1,5 @@
 27.sep (ws)
+      - fixed #7292: handling of backward compatibility of mscz files
       - moved Lyrics from Segment to ChordRest. This allows for lyrics on
         grace notes (#6577)
 26.sep (ws)

@@ -1165,7 +1165,7 @@ bool Score::loadCompressedMsc(QString name)
             }
       dbuf.close();
       docName = info.completeBaseName();
-      return read(doc.documentElement());
+      return read1(doc.documentElement());
       }
 
 //---------------------------------------------------------
@@ -1199,8 +1199,16 @@ bool Score::loadMsc(QString name)
             }
       f.close();
       docName = f.fileName();
+      return read1(doc.documentElement());
+      }
 
-      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+//---------------------------------------------------------
+//   read1
+//---------------------------------------------------------
+
+bool Score::read1(QDomElement e)
+      {
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   QString version = e.attribute("version");
                   QStringList sl = version.split('.');
@@ -1268,7 +1276,6 @@ bool Score::loadMsc(QString name)
             else
                   domError(e);
             }
-      mscore->updateRecentScores(this);
       return false;
       }
 
@@ -1482,6 +1489,7 @@ bool Score::read(QDomElement dScore)
       if (_mscVersion < 108)
             connectSlurs();
 
+printf("version %d\n", _mscVersion);
       if (_mscVersion < 115) {
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   Staff* s = _staves[staffIdx];
@@ -1508,6 +1516,7 @@ bool Score::read(QDomElement dScore)
                         int clefId = i->second;
                         Measure* m = tick2measure(tick);
                         Segment* seg = m->getSegment(SegClef, tick);
+printf("clef %d track %d %p\n", clefId, track, seg->element(track));
                         if (seg->element(track))
                               static_cast<Clef*>(seg->element(track))->setGenerated(false);
                         else {
