@@ -420,6 +420,7 @@ class Score : public QObject {
 
       void write(Xml&, bool autosave);
       bool read(QDomElement);
+      bool read1(QDomElement);
 
       QList<Staff*>& staves()                { return _staves; }
       const QList<Staff*>& staves() const    { return _staves; }
