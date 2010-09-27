@@ -68,7 +68,7 @@ namespace Bww {
 
   void MxmlWriter::beginMeasure(const Bww::MeasureBeginFlags mbf)
   {
-    qDebug() << "MxmlWriter::beginMeasure()";
+    // qDebug() << "MxmlWriter::beginMeasure()";
     QString implicit;
     QString strMeasureNumber;
     if (mbf.irregular)
@@ -148,7 +148,7 @@ namespace Bww {
 
   void MxmlWriter::endMeasure(const Bww::MeasureEndFlags mef)
   {
-    qDebug() << "MxmlWriter::endMeasure()";
+    // qDebug() << "MxmlWriter::endMeasure()";
     if (mef.repeatEnd || mef.endingEnd)
     {
       out << "      <barline location=\"right\">" << endl;
@@ -163,8 +163,9 @@ namespace Bww {
         else if (ending == 2)
           out << "        <ending number=\"2\" type=\"discontinue\"/>" << endl;
         else
+        {
           // TODO: error message
-          ;
+        }
       }
       if (mef.repeatEnd)
       {
@@ -185,7 +186,7 @@ namespace Bww {
                         StartStop triplet,
                         bool grace)
   {
-    qDebug() << "MxmlWriter::note()";
+    // qDebug() << "MxmlWriter::note()";
 
     if (!stepAlterOctMap.contains(pitch)
       || !typeMap.contains(type))
@@ -247,13 +248,13 @@ namespace Bww {
                           const QString composer, const QString footer,
                           const unsigned int temp)
   {
-    qDebug() << "MxmlWriter::header()"
-        << "title:" << title
-        << "type:" << type
-        << "composer:" << composer
-        << "footer:" << footer
-        << "temp:" << temp
-        ;
+    // qDebug() << "MxmlWriter::header()"
+    //    << "title:" << title
+    //    << "type:" << type
+    //    << "composer:" << composer
+    //    << "footer:" << footer
+    //    << "temp:" << temp
+    //    ;
 
     // save tempo for later use
     tempo = temp;
@@ -299,10 +300,10 @@ namespace Bww {
 
   void MxmlWriter::tsig(const int bts, const int bt)
   {
-    qDebug() << "MxmlWriter::tsig()"
-        << "beats:" << bts
-        << "beat:" << bt
-        ;
+    // qDebug() << "MxmlWriter::tsig()"
+    //    << "beats:" << bts
+    //    << "beat:" << bt
+    //   ;
 
     beats = bts;
     beat  = bt;
@@ -314,8 +315,8 @@ namespace Bww {
 
   void MxmlWriter::trailer()
   {
-    qDebug() << "MxmlWriter::trailer()"
-        ;
+    // qDebug() << "MxmlWriter::trailer()"
+    //    ;
 
     out << "  </part>" << endl;
     out << "</score-partwise>" << endl;

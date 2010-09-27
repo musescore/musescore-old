@@ -47,6 +47,7 @@ namespace Bww {
     bool tieStop;
     StartStop triplet;
     bool grace;
+    StartStop beamState;
     NoteDescription(const QString _pitch, const QString _beam,
                     const QString _type, const int _dots,
                     bool _tieStart = false, bool _tieStop = false,
@@ -56,7 +57,8 @@ namespace Bww {
                       type(_type), dots(_dots),
                       tieStart(_tieStart), tieStop(_tieStop),
                       triplet(_triplet),
-                      grace(_grace)
+                      grace(_grace),
+                      beamState(ST_NONE)
     {}
   };
 
