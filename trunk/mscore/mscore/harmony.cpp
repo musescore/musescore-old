@@ -1312,24 +1312,6 @@ void Harmony::spatiumChanged(double oldValue, double newValue)
       }
 
 //---------------------------------------------------------
-//   canvasPos
-//---------------------------------------------------------
-
-QPointF Harmony::canvasPos() const
-      {
-      if (parent() == 0)
-            return pos();
-      double xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
-      System* system = measure()->system();
-      double yp = y();
-      if (system)
-            yp += system->staffY(staffIdx());
-      return QPointF(xp, yp);
-      }
-
-//---------------------------------------------------------
 //   dragAnchor
 //---------------------------------------------------------
 

@@ -1303,7 +1303,7 @@ void Chord::layout2()
       //---------------------------------------------------
       //    layout fingering
       //---------------------------------------------------
-
+#if 0
       foreach(Note* note, _notes) {
             foreach(Element* e, *note->el()) {
                   if ((e->type() == TEXT && e->subtype() == TEXT_FINGERING)
@@ -1323,7 +1323,7 @@ void Chord::layout2()
                         }
                   }
             }
-
+#endif
       }
 
 //---------------------------------------------------------

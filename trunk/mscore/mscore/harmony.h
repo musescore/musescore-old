@@ -271,7 +271,6 @@ class Harmony : public Text {
       const ChordDescription* fromXml(const QString& s,  const QList<HDegree>&);
       const ChordDescription* fromXml(const QString& s);
       virtual void spatiumChanged(double oldValue, double newValue);
-      virtual QPointF canvasPos() const;
       virtual QLineF dragAnchor() const;
       void setHarmony(const QString& s);
       };
